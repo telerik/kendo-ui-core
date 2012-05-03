@@ -505,21 +505,19 @@
             return  offset > this.max || offset < this.min;
         },
 
-        totalSize: function() {
-            return this.element[0][this.scrollSize];
-        },
-
         present: function() {
             return this.max - this.min;
         },
 
-        update: function() {
+        update: function(silent) {
             var that = this;
 
             that.size = that.container[that.measure]();
             that.total = that.element[0][that.scrollSize];
             that.min = Math.min(that.max, that.size - that.total);
-            that.trigger(CHANGE, that);
+            if (!silent) {
+                that.trigger(CHANGE, that);
+            }
         }
     });
 

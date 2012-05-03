@@ -22,32 +22,28 @@
                 new kendo.mobile.Application();
             });
         </script>
+        <style>
+            [data-role=page] {
+                display: inline-block;
+                height: 500px;
+            }
+        </style>
     </head>
     <body>
         <div data-role="view">
-            <ul data-role="listview">
-                <li>Stuff</li>
-                <li>Stuff</li>
-                <li>Stuff</li>
-                <li>Stuff</li>
-                <li>Stuff</li>
-                <li>Stuff</li>
-            </ul>
             <div data-role="scrollview">
-                <img src="../images/1.jpg">
-                <img src="../images/2.jpg">
-                <img src="../images/3.jpg">
-                <img src="../images/4.jpg">
-                <img src="../images/5.jpg">
+                <div data-role="page">Foo</div>
+                <div data-role="page">Bar</div>
+                <div data-role="page">Baz</div>
             </div>
-            <ul data-role="listview">
-                <li>Stuff</li>
-                <li>Stuff</li>
-                <li>Stuff</li>
-                <li>Stuff</li>
-                <li>Stuff</li>
-                <li>Stuff</li>
-            </ul>
+            <a data-role="button" href="#bar">Bar</a>
+        </div>
+        <div data-role="view" id="bar">
+            <div data-role="scrollview">
+                <div data-role="page">Foo</div>
+                <div data-role="page">Bar</div>
+                <div data-role="page">Baz</div>
+            </div>
         </div>
     </body>
 </html>
