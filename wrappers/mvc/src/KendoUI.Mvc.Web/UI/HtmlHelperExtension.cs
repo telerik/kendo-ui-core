@@ -17,7 +17,7 @@ namespace KendoUI.Mvc.UI
         /// </summary>
         /// <param name="helper">The helper.</param>
         /// <returns>The Factory</returns>
-        public static ViewComponentFactory Telerik(this HtmlHelper helper)
+        public static ViewComponentFactory Kendo(this HtmlHelper helper)
         {
             Guard.IsNotNull(helper, "helper");
 
@@ -44,7 +44,7 @@ namespace KendoUI.Mvc.UI
         /// </summary>
         /// <param name="helper">The helper.</param>
         /// <returns>The Factory</returns>
-        public static ViewComponentFactory<TModel> Telerik<TModel>(this HtmlHelper<TModel> helper)
+        public static ViewComponentFactory<TModel> Kendo<TModel>(this HtmlHelper<TModel> helper)
         {
             Guard.IsNotNull(helper, "helper");
 
