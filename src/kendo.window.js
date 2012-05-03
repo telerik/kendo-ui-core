@@ -255,6 +255,12 @@
          * @option {Integer} [minHeight] <50>
          * The minimum height (in pixels) that may be achieved by resizing the window.
          *
+         * @option {Integer} [maxWidth] <Infinity>
+         * The maximum width (in pixels) that may be achieved by resizing the window.
+         *
+         * @option {Integer} [maxHeight] <Infinity>
+         * The maximum height (in pixels) that may be achieved by resizing the window.
+         *
          * @option {Object|String} [content]
          * Specifies a URL or request options that the window should load its content from. For remote URLs, a
          * container iframe element is automatically created.
