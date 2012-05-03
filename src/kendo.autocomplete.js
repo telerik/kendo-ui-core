@@ -864,6 +864,10 @@
                     }
                 }
 
+                if (value === that._old && !show) {
+                    return;
+                }
+
                 element.toggleClass("k-readonly", show)
                        .val(placeholder);
             }
