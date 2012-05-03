@@ -217,6 +217,19 @@
                 dropdownlist.popup.toggle = oldOpen;
             });
 
+            test("Disabled dropdownlist does not unbind client's event handlers", 1, function() {
+                var dropdownlist = new DropDownList(input);
+
+                dropdownlist.wrapper.bind("click", function() {
+                    ok(true);
+                });
+
+                dropdownlist.enable(false);
+                dropdownlist.enable(true);
+
+                dropdownlist.wrapper.click();
+            });
+
             test("enable(true) removes k-state-disabled class", function() {
                 dropdownlist = new DropDownList(input);
                 dropdownlist.wrapper.addClass('k-state-disabled');
