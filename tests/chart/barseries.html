@@ -1820,13 +1820,8 @@
                     same(rect.style.strokeOpacity, bar.options.opacity);
                 });
 
-                test("generates id", function() {
-                    ok(bar.options.id.length > 0);
-                });
-
-                test("registers id with root", function() {
-                    createBar();
-                    ok(root.idMap[bar.options.id] === bar);
+                test("is discoverable", function() {
+                    ok(bar.options.modelId);
                 });
 
                 test("sets id on rect", function() {
@@ -1840,18 +1835,16 @@
                     equals(view.log.rect.length, 1);
                 });
 
-                test("getOutlineElement sets outline id", function() {
+                test("outline element has same model id", function() {
                     view = new ViewStub();
 
                     bar.getOutlineElement(view);
-                    equals(view.log.rect[0].style.id, bar.options.id + "_outline");
+                    equals(view.log.rect[0].style.data.modelId, bar.options.modelId);
                 });
 
-                test("getOutlineElement registers outline id with root", function() {
-                    view = new ViewStub();
-
-                    bar.getOutlineElement(view);
-                    ok(root.idMap[view.log.rect[0].style.id] === bar);
+                test("label has same model id", function() {
+                    createBar({ labels: { visible: true } });
+                    equals(label.options.modelId, bar.options.modelId);
                 });
 
                 test("tooltipAnchor is top right corner / vertical / above axis",

@@ -340,19 +340,11 @@
 
         _getPoint: function(e) {
             var chart = this,
-                model = chart._model,
-                coords = chart._eventCoordinates(e),
-                targetId = e.target.id,
-                chartElement = model.idMap[targetId],
-                metadata = model.idMapMetadata[targetId],
+                modelId = $(e.target).data("modelId"),
                 point;
 
-            if (chartElement) {
-                if (chartElement.getNearestPoint && metadata) {
-                    point = chartElement.getNearestPoint(coords.x, coords.y, metadata.seriesIx);
-                } else {
-                    point = chartElement;
-                }
+            if (modelId) {
+                point = ChartElement.modelMap[modelId];
             }
 
             return point;
@@ -375,14 +367,8 @@
             var chart = this,
                 point = chart._getPoint(e);
 
-            if (point) {
-                chart.trigger(SERIES_CLICK, {
-                    value: point.value,
-                    category: point.category,
-                    series: point.series,
-                    dataItem: point.dataItem,
-                    element: $(e.target)
-                });
+            if (point && point.click) {
+                point.click(this, e);
             }
         },
 
@@ -1153,7 +1139,7 @@
             var bar = this;
 
             bar.value = value;
-            bar.options.id = uniqueId();
+            bar.makeDiscoverable();
 
             ChartElement.fn.init.call(bar, options);
         },
@@ -1203,11 +1189,13 @@
                 }
 
                 bar.append(
-                    new BarLabel(labelText, deepExtend({
+                    new BarLabel(labelText,
+                        deepExtend({
                             vertical: options.vertical,
-                            id: uniqueId()},
-                        options.labels)
-                    )
+                            id: uniqueId()
+                        },
+                        options.labels
+                    ))
                 );
             }
         },
@@ -1239,14 +1227,15 @@
                 } : {},
                 box = bar.box,
                 rectStyle = deepExtend({
-                    id: options.id,
+                    id: uniqueId(),
                     fill: options.color,
                     fillOpacity: options.opacity,
                     strokeOpacity: options.opacity,
                     vertical: options.vertical,
                     aboveAxis: options.aboveAxis,
                     stackBase: options.stackBase,
-                    animation: options.animation
+                    animation: options.animation,
+                    data: { modelId: options.modelId }
                 }, border),
                 elements = [],
                 label = bar.children[0];
@@ -1260,21 +1249,14 @@
             append(elements,
                 ChartElement.fn.getViewElements.call(bar, view));
 
-            bar.registerId(options.id);
-            if (label) {
-                bar.registerId(label.options.id);
-            }
-
             return elements;
         },
 
         getOutlineElement: function(view, options){
             var bar = this,
-                box = bar.box,
-                outlineId = bar.options.id + OUTLINE_SUFFIX;
+                box = bar.box;
 
-            bar.registerId(outlineId);
-            options = deepExtend({}, options, { id: outlineId });
+            options = deepExtend({ data: { modelId: bar.options.modelId } }, options);
 
             return view.createRect(box, options);
         },
@@ -1322,8 +1304,22 @@
             var point = this;
 
             return point.owner.formatPointValue(point.value, format);
+        },
+
+        click: function(chart, e) {
+            seriesClick(chart, this, e);
         }
     });
+
+    function seriesClick(chart, point, e) {
+        chart.trigger(SERIES_CLICK, {
+            value: point.value,
+            category: point.category,
+            series: point.series,
+            dataItem: point.dataItem,
+            element: $(e.target)
+        });
+    }
 
     var CategoricalChart = ChartElement.extend({
         init: function(plotArea, options) {
@@ -1752,8 +1748,9 @@
             var point = this;
 
             point.value = value;
+            point.makeDiscoverable();
 
-            ViewElement.fn.init.call(point, options);
+            ChartElement.fn.init.call(point, options);
         },
 
         options: {
@@ -1892,27 +1889,11 @@
             }
         },
 
-        getViewElements: function(view) {
-            var element = this,
-                marker = element.marker,
-                label = element.label;
-
-            element.registerId(marker.options.id);
-
-            if (label) {
-                element.registerId(label.options.id);
-            }
-
-            return ChartElement.fn.getViewElements.call(element, view);
-        },
-
         getOutlineElement: function(view, options) {
             var element = this,
-                marker = element.marker,
-                outlineId = element.marker.options.id + OUTLINE_SUFFIX;
+                marker = element.marker;
 
-            element.registerId(outlineId);
-            options = deepExtend({}, options, { id: outlineId });
+            options = deepExtend({ data: { modelId: element.options.modelId } }, options);
 
             return marker.getViewElements(view, deepExtend(options, {
                 fill: marker.options.border.color,
@@ -1936,14 +1917,74 @@
             var point = this;
 
             return point.owner.formatPointValue(point.value, format);
+        },
+
+        click: function(chart, e) {
+            var point = this,
+                coords = chart._eventCoordinates(e),
+                seriesIx = point.seriesIx,
+                nearestPoint = point.getNearestPoint(coords.x, coords.y, seriesIx);
+
+            seriesClick(chart, nearestPoint, e);
+        }
+    });
+
+    var LineSegment = ChartElement.extend({
+        init: function(linePoints, series, seriesIx) {
+            var segment = this;
+
+            segment.linePoints = linePoints;
+            segment.series = series;
+            segment.seriesIx = seriesIx;
+
+            segment.makeDiscoverable();
+
+            ChartElement.fn.init.call(segment);
+        },
+
+        options: {},
+
+        points: function(visualPoints) {
+            var segment = this,
+                linePoints = segment.linePoints.concat(visualPoints || []),
+                points = [],
+                i,
+                length = linePoints.length,
+                pointCenter;
+
+            for (i = 0; i < length; i++) {
+                pointCenter = linePoints[i].markerBox().center();
+                points.push(new Point2D(pointCenter.x, pointCenter.y));
+            }
+
+            return points;
+        },
+
+        getViewElements: function(view) {
+            var segment = this,
+                series = segment.series;
+
+            return [
+                view.createPolyline(segment.points(), false, {
+                    id: uniqueId(),
+                    stroke: series.color,
+                    strokeWidth: series.width,
+                    strokeOpacity: series.opacity,
+                    fill: "",
+                    dashType: series.dashType,
+                    data: { modelId: segment.options.modelId },
+                    zIndex: -1
+                })
+            ];
         }
     });
 
     var LineChartMixin = {
-        splitSegments: function(view) {
+        splitSegments: function() {
             var chart = this,
                 options = chart.options,
                 series = options.series,
+                chartModelId = options.modelId,
                 seriesPoints = chart.seriesPoints,
                 currentSeries,
                 seriesIx,
@@ -1954,7 +1995,7 @@
                 pointIx,
                 pointCount,
                 pointCenter,
-                lines = [];
+                segments = [];
 
             for (seriesIx = 0; seriesIx < seriesCount; seriesIx++) {
                 currentSeriesPoints = seriesPoints[seriesIx];
@@ -1965,36 +2006,33 @@
                 for (pointIx = 0; pointIx < pointCount; pointIx++) {
                     point = currentSeriesPoints[pointIx];
                     if (point) {
-                        pointCenter = point.markerBox().center();
-                        linePoints.push(new Point2D(pointCenter.x, pointCenter.y));
+                        linePoints.push(point);
                     } else if (currentSeries.missingValues !== INTERPOLATE) {
                         if (linePoints.length > 1) {
-                            lines.push(
-                                chart.createSegment(uniqueId(), view, linePoints, currentSeries, seriesIx));
+                            segments.push(
+                                chart.createSegment(
+                                    linePoints, currentSeries, seriesIx, last(segments)
+                                )
+                            );
                         }
                         linePoints = [];
                     }
                 }
 
                 if (linePoints.length > 1) {
-                    lines.push(
-                        chart.createSegment(uniqueId(), view, linePoints, currentSeries, seriesIx));
+                    segments.push(
+                        chart.createSegment(
+                            linePoints, currentSeries, seriesIx, last(segments)
+                        )
+                    );
                 }
             }
 
-            return lines;
+            return segments;
         },
 
-        createSegment: function(lineId, view, points, series, seriesIx) {
-            this.registerId(lineId, { seriesIx: seriesIx });
-            return view.createPolyline(points, false, {
-                id: lineId,
-                stroke: series.color,
-                strokeWidth: series.width,
-                strokeOpacity: series.opacity,
-                fill: "",
-                dashType: series.dashType
-            });
+        createSegment: function(linePoints, currentSeries, seriesIx) {
+            return new LineSegment(linePoints, currentSeries, seriesIx);
         },
 
         getNearestPoint: function(x, y, seriesIx) {
@@ -2035,6 +2073,7 @@
 
             chart._stackAxisRange = { min: MAX_VALUE, max: MIN_VALUE };
             chart._categoryTotals = [];
+            chart.makeDiscoverable();
 
             CategoricalChart.fn.init.call(chart, plotArea, options);
         },
@@ -2044,6 +2083,9 @@
 
             CategoricalChart.fn.render.apply(chart);
             chart.computeAxisRanges();
+
+            chart._segments = chart.splitSegments();
+            chart.append.apply(chart, chart._segments);
         },
 
         createPoint: function(value, category, categoryIx, series, seriesIx) {
@@ -2123,84 +2165,89 @@
                     animation: {
                         type: CLIP
                     }
-                }),
-                lines = chart.splitSegments(view);
+                });
 
-
-            group.children = lines.concat(elements);
+            group.children = elements;
             return [group];
         }
     });
     deepExtend(LineChart.fn, LineChartMixin);
 
-    var AreaChart = LineChart.extend({
-        splitSegments: function(view) {
-            var chart = this,
-                plotArea = chart.plotArea,
-                invertAxes = chart.options.invertAxes,
-                originalLines = LineChart.fn.splitSegments.call(chart, view),
-                lines = [],
-                axisLineBox = plotArea.categoryAxis.lineBox(),
-                end = invertAxes ? axisLineBox.x1 : axisLineBox.y1,
-                originalLinePoints,
-                linesCount = originalLines.length,
-                seriesIx = 0,
-                linePoints,
-                firstPoint,
-                lastPoint,
-                lineOptions,
-                line,
-                i;
+    var AreaSegment = LineSegment.extend({
+        init: function(linePoints, stackPoints, currentSeries, seriesIx) {
+            var segment = this;
 
-            for (i = 0; i < linesCount; i++) {
-                line = originalLines[i].clone();
-                linePoints = line.points;
-                lineOptions = line.options;
-                seriesIx = lineOptions.seriesIx;
+            segment.stackPoints = stackPoints;
 
-                if (lineOptions.stack && seriesIx !== 0) {
-                    if (seriesIx > 0) {
-                        originalLinePoints = originalLines[i - 1].clone().points.reverse();
-                        line.points = linePoints.concat(originalLinePoints);
-                    }
-                } else {
-                    if (linePoints.length > 1) {
-                        firstPoint = linePoints[0];
-                        lastPoint = last(linePoints);
-
-                        if (invertAxes) {
-                            linePoints.unshift(new Point2D(end, firstPoint.y));
-                            linePoints.push(new Point2D(end, lastPoint.y));
-                        } else {
-                            linePoints.unshift(new Point2D(firstPoint.x, end));
-                            linePoints.push(new Point2D(lastPoint.x, end));
-                        }
-                    }
-                }
-                lines.push(line);
-            }
-
-            return lines;
+            LineSegment.fn.init.call(segment, linePoints, currentSeries, seriesIx);
         },
 
-        createSegment: function(lineId, view, points, series, seriesIx) {
-            var line = deepExtend({}, {
-                    color: series.color,
-                    opacity: series.opacity
-                }, series.line);
-            this.registerId(lineId, { seriesIx: seriesIx });
+        points: function() {
+            var segment = this,
+                chart = segment.parent,
+                stack = chart.options.isStacked && segment.seriesIx > 0,
+                plotArea = chart.plotArea,
+                invertAxes = chart.options.invertAxes,
+                axisLineBox = plotArea.categoryAxis.lineBox(),
+                end = invertAxes ? axisLineBox.x1 : axisLineBox.y1,
+                stackPoints = segment.stackPoints,
+                points = LineSegment.fn.points.call(segment, stackPoints),
+                firstPoint,
+                lastPoint;
 
-            return view.createPolyline(points, true, {
-                id: lineId,
-                stroke: line.color,
-                strokeWidth: line.width,
-                strokeOpacity: line.opacity,
-                dashType: line.dashType,
-                fillOpacity: series.opacity,
-                fill: series.color,
-                seriesIx: seriesIx,
-                stack: series.stack
-            });
+            if (!stack && points.length > 1) {
+                firstPoint = points[0];
+                lastPoint = last(points);
+
+                if (invertAxes) {
+                    points.unshift(new Point2D(end, firstPoint.y));
+                    points.push(new Point2D(end, lastPoint.y));
+                } else {
+                    points.unshift(new Point2D(firstPoint.x, end));
+                    points.push(new Point2D(lastPoint.x, end));
+                }
+            }
+
+            return points;
+        },
+
+        getViewElements: function(view) {
+            var segment = this,
+                series = segment.series,
+                lineOptions = deepExtend({
+                        color: series.color,
+                        opacity: series.opacity
+                    }, series.line
+                );
+
+            return [
+                view.createPolyline(segment.points(), true, {
+                    id: uniqueId(),
+                    stroke: lineOptions.color,
+                    strokeWidth: lineOptions.width,
+                    strokeOpacity: lineOptions.opacity,
+                    dashType: lineOptions.dashType,
+                    fillOpacity: series.opacity,
+                    fill: series.color,
+                    stack: series.stack,
+                    data: { modelId: segment.options.modelId },
+                    zIndex: -1
+                })
+            ];
+        }
+    });
+
+    var AreaChart = LineChart.extend({
+        createSegment: function(linePoints, currentSeries, seriesIx, prevSegment) {
+            var chart = this,
+                options = chart.options,
+                stackPoints;
+
+            if (options.isStacked && seriesIx > 0) {
+                stackPoints = prevSegment.linePoints.slice(0).reverse();
+            }
+
+            return new AreaSegment(linePoints, stackPoints, currentSeries, seriesIx);
         }
     });
 
@@ -2404,17 +2451,23 @@
     });
 
     var ScatterLineChart = ScatterChart.extend({
+        render: function() {
+            var chart = this;
+
+            ScatterChart.fn.render.call(chart);
+            chart.append.apply(chart, chart.splitSegments());
+        },
+
         getViewElements: function(view) {
-            var chart = this,
+            var chart = this;
                 elements = ScatterChart.fn.getViewElements.call(chart, view),
                 group = view.createGroup({
                     animation: {
                         type: CLIP
                     }
-                }),
-                lines = chart.splitSegments(view);
+                });
 
-            group.children = lines.concat(elements);
+            group.children = elements;
             return [group];
         }
     });

@@ -489,12 +489,8 @@
                     equals(view.log.path[0].style.strokeOpacity, 0.5);
                 });
 
-                test("registers line with root", function() {
-                    ok(root.idMap[view.log.path[0].style.id] === lineChart);
-                });
-
-                test("registers line metadata", function() {
-                    ok(root.idMapMetadata[view.log.path[0].style.id].seriesIx === 0);
+                test("line has same model id as its segment", function() {
+                    equals(view.log.path[0].style.data.modelId, lineChart._segments[0].options.modelId);
                 });
 
                 test("renders line chart group", function() {
@@ -733,6 +729,10 @@
                     }
                 });
 
+                test("is discoverable", function() {
+                    ok(point.options.modelId);
+                });
+
                 test("fills target box", function() {
                     sameBox(point.box, box);
                 });
@@ -809,11 +809,11 @@
                     ok(marker.options.id.length > 0);
                 });
 
-                test("registers id with root", function() {
-                    createPoint();
-                    var view = new ViewStub();
+                test("marker has same model id", function() {
+                    view = new ViewStub();
+
                     point.getViewElements(view);
-                    ok(root.idMap[marker.options.id] === point);
+                    equals(marker.options.modelId, point.options.modelId);
                 });
 
                 test("getOutlineElement returns marker outline", function() {
@@ -824,20 +824,12 @@
                     equals(view.log.circle.length, 1);
                 });
 
-                test("getOutlineElement sets marker outline id", function() {
+                test("outline element has same model id", function() {
                     createPoint({ markers: { type: "circle" }});
                     view = new ViewStub();
 
                     point.getOutlineElement(view);
-                    equals(view.log.circle[0].style.id, point.marker.options.id + "_outline");
-                });
-
-                test("getOutlineElement registers outline id with root", function() {
-                    createPoint({ markers: { type: "circle" }});
-                    view = new ViewStub();
-
-                    point.getOutlineElement(view);
-                    ok(root.idMap[view.log.circle[0].style.id] === point);
+                    equals(view.log.circle[0].style.data.modelId, point.options.modelId);
                 });
 
                 test("getOutlineElement applies render options for square markers", function() {
