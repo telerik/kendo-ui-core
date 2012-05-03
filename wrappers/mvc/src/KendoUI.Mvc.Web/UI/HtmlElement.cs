@@ -104,10 +104,7 @@ namespace KendoUI.Mvc.UI
 
             if (Attributes().TryGetValue("style", out style))
             {
-                if (!style.Contains("display:none"))
-                {
-                    Attributes()["style"] = style + ";" + key + ":" + value;
-                }
+                Attributes()["style"] = style + ";" + key + ":" + value;
             }
             else
             {
