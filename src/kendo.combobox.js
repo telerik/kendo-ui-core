@@ -1087,16 +1087,17 @@
                     show = !value;
                 }
 
+                input.toggleClass("k-readonly", show);
+
                 if (!show) {
-                    if (value) {
-                        placeholder = input.val();
-                    } else {
+                    if (!value) {
                         placeholder = "";
+                    } else {
+                        return;
                     }
                 }
 
-                input.toggleClass("k-readonly", show)
-                     .val(placeholder);
+                input.val(placeholder);
             }
         },
 
