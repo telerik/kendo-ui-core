@@ -6,6 +6,7 @@
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/cultures/kendo.culture.de-DE.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
     </head>
     <body>
@@ -227,6 +228,11 @@
             test('date formatting supports Y toString', function() {
                 var d = date(2000, 12, 30, 9, 1)
                 equal(toString(d, "Y"), 'December, 2000');
+            });
+
+            test('date formatting honors specific culture', function() {
+                var d = date(2000, 5, 30, 9, 1)
+                equal(toString(d, "Y", "de-DE"), 'Mai 2000');
             });
         </script>
     </body>
