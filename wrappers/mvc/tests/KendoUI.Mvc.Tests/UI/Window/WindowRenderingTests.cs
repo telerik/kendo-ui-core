@@ -4,7 +4,6 @@ namespace KendoUI.Mvc.UI.Tests
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using Xunit;
 
     public class WindowRenderingTests
     {

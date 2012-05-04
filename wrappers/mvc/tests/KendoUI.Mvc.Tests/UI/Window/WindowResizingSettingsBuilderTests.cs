@@ -8,7 +8,6 @@ namespace KendoUI.Mvc.UI.Tests
         private WindowResizingSettingsBuilder builder;
         private WindowResizingSettings settings;
 
-
         public WindowResizingSettingsBuilderTests()
         {
             settings = new WindowResizingSettings();
@@ -22,17 +21,13 @@ namespace KendoUI.Mvc.UI.Tests
 
             builder.Enabled(enabled);
 
-            Assert.True(settings.Enabled == enabled);
+            settings.Enabled.ShouldBeSameAs(enabled);
         }
 
         [Fact]
         public void Enabled_method_should_return_builder()
         {
-            const bool enabled = false;
-
-            var returned = builder.Enabled(enabled);
-
-            Assert.IsType(typeof(WindowResizingSettingsBuilder), returned);
+            builder.Enabled(false).ShouldBeSameAs(builder);
         }
 
         [Fact]
@@ -42,15 +37,13 @@ namespace KendoUI.Mvc.UI.Tests
 
             builder.MinWidth(minWidth);
 
-            Assert.True(settings.MinWidth == minWidth);
+            settings.MinWidth.ShouldEqual(minWidth);
         }
 
         [Fact]
         public void MinWidth_method_should_return_builder()
         {
-            var returned = builder.MinWidth(100);
-
-            Assert.IsType(typeof(WindowResizingSettingsBuilder), returned);
+            builder.MinWidth(100).ShouldBeSameAs(builder);
         }
 
         [Fact]
@@ -60,15 +53,13 @@ namespace KendoUI.Mvc.UI.Tests
 
             builder.MaxWidth(maxWidth);
 
-            Assert.True(settings.MaxWidth == maxWidth);
+            settings.MaxWidth.ShouldEqual(maxWidth);
         }
 
         [Fact]
         public void MaxWidth_method_should_return_builder()
         {
-            var returned = builder.MaxWidth(100);
-
-            Assert.IsType(typeof(WindowResizingSettingsBuilder), returned);
+            builder.MaxWidth(100).ShouldBeSameAs(builder);
         }
 
         [Fact]
@@ -78,15 +69,13 @@ namespace KendoUI.Mvc.UI.Tests
 
             builder.MinHeight(minHeight);
 
-            Assert.True(settings.MinHeight == minHeight);
+            settings.MinHeight.ShouldEqual(minHeight);
         }
 
         [Fact]
         public void MinHeight_method_should_return_builder()
         {
-            var returned = builder.MinHeight(100);
-
-            Assert.IsType(typeof(WindowResizingSettingsBuilder), returned);
+            builder.MinHeight(100).ShouldBeSameAs(builder);
         }
 
         [Fact]
@@ -96,15 +85,13 @@ namespace KendoUI.Mvc.UI.Tests
 
             builder.MaxHeight(maxHeight);
 
-            Assert.True(settings.MaxHeight == maxHeight);
+            settings.MaxHeight.ShouldEqual(maxHeight);
         }
 
         [Fact]
         public void MaxHeight_method_should_return_builder()
         {
-            var returned = builder.MaxHeight(100);
-
-            Assert.IsType(typeof(WindowResizingSettingsBuilder), returned);
+            builder.MaxHeight(100).ShouldBeSameAs(builder);
         }
     }
 }
