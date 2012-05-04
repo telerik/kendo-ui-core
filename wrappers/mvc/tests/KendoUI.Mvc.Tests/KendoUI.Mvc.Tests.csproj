@@ -399,18 +399,8 @@
     <Compile Include="UI\Grid\GridPagerTests.cs" />
     <Compile Include="UI\Grid\GridTestHelper.cs" />
     <Compile Include="UI\Grid\GridWorkingConditionsTests.cs" />
-    <Compile Include="UI\TextBox\IntegerTextBoxRenderingTests.cs" />
     <Compile Include="UI\TextBox\NumericTextBoxBuilderTests.cs" />
-    <Compile Include="UI\TextBox\PercentTextBoxRenderingTests.cs" />
-    <Compile Include="UI\TextBox\PercentTextBoxBuilderTests.cs" />
-    <Compile Include="UI\TextBox\CurrencyTextBoxBuilderTests.cs" />
-    <Compile Include="UI\TextBox\CurrencyTextBoxRenderingTests.cs" />
     <Compile Include="UI\TextBox\NumericTextBoxRenderingTests.cs" />
-    <Compile Include="UI\TextBox\InputClientEventsBuilderTests.cs" />
-    <Compile Include="UI\TextBox\InputHtmlBuilderFactoryTests.cs" />
-    <Compile Include="UI\TextBox\InputHtmlBuilderTests.cs" />
-    <Compile Include="UI\TextBox\TextBoxBaseTestHelper.cs" />
-    <Compile Include="UI\TextBox\InputBuilderTests.cs" />
     <Compile Include="UI\Menu\MenuBuilderTests.cs" />
     <Compile Include="UI\Menu\MenuClientEventsBuilderTests.cs" />
     <Compile Include="UI\Menu\MenuHtmlBuilderTests.cs" />
@@ -439,7 +429,6 @@
     <Compile Include="UI\TabStrip\TabStripHtmlBuilderTests.cs" />
     <Compile Include="UI\TabStrip\TabStripRenderingTests.cs" />
     <Compile Include="UI\TabStrip\TabStripTestHelper.cs" />
-    <Compile Include="UI\TextBox\TextBoxBaseTests.cs" />
     <Compile Include="UI\TreeView\TreeViewDataBindingConfigurationBuilderTests.cs" />
     <Compile Include="UI\TreeView\TreeViewBuilderTests.cs" />
     <Compile Include="UI\TreeView\TreeViewBindingSettingsBuilderBuilderTests.cs" />

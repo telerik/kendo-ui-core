@@ -9,23 +9,22 @@ namespace KendoUI.Mvc.UI.Tests
 
     public class NumericTextBoxRenderingTests
     {
-        private readonly NumericTextBox<double> input;
-        private readonly Mock<ITextBoxBaseHtmlBuilder> tagBuilder;
-        private readonly Mock<IHtmlNode> rootTag;
-        Mock<TextWriter> textWriter;
+        //private readonly NumericTextBox<double> input;
+        //private readonly Mock<IHtmlNode> rootTag;
+        //Mock<TextWriter> textWriter;
 
         public NumericTextBoxRenderingTests()
         {
-            textWriter = new Mock<TextWriter>();
+            //textWriter = new Mock<TextWriter>();
 
-            tagBuilder = new Mock<ITextBoxBaseHtmlBuilder>();
-            rootTag = new Mock<IHtmlNode>();
-            rootTag.SetupGet(t => t.Children).Returns(() => new List<IHtmlNode>());
+            //tagBuilder = new Mock<ITextBoxBaseHtmlBuilder>();
+            //rootTag = new Mock<IHtmlNode>();
+            //rootTag.SetupGet(t => t.Children).Returns(() => new List<IHtmlNode>());
 
-            tagBuilder.Setup(t => t.Build("t-numerictextbox")).Returns(rootTag.Object);
+            //tagBuilder.Setup(t => t.Build("t-numerictextbox")).Returns(rootTag.Object);
 
-            input = TextBoxBaseTestHelper.CreateNumericTextBox<double>(tagBuilder.Object);
-            input.Name = "NumericTextBox";
+            //input = TextBoxBaseTestHelper.CreateNumericTextBox<double>(tagBuilder.Object);
+            //input.Name = "NumericTextBox";
         }
 
         //[Fact]

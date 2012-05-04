@@ -65,12 +65,6 @@ namespace KendoUI.Mvc.UI.Tests
         }
 
         [Fact]
-        public void IntegerTextBox_should_return_new_instance()
-        {
-            Assert.NotNull(_factory.IntegerTextBox());
-        }
-
-        [Fact]
         public void NumericTextBox_should_return_new_instance()
         {
             Assert.NotNull(_factory.NumericTextBox<double>());
@@ -95,18 +89,6 @@ namespace KendoUI.Mvc.UI.Tests
         {
             var builder = _factory.NumericTextBox<short>();
             Assert.IsType<short>(builder.ToComponent().Min);
-        }
-
-        [Fact]
-        public void CurrencyTextBox_should_return_new_instance()
-        {
-            Assert.NotNull(_factory.CurrencyTextBox());
-        }
-
-        [Fact]
-        public void PercentTextBox_should_return_new_instance()
-        {
-            Assert.NotNull(_factory.PercentTextBox());
         }
 
         [Fact]

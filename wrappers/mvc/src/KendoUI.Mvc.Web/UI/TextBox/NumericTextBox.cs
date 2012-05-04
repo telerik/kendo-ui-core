@@ -2,6 +2,7 @@ namespace KendoUI.Mvc.UI
 {
     using KendoUI.Mvc.Extensions;
     using KendoUI.Mvc.Infrastructure;
+    using KendoUI.Mvc.Resources;
     using KendoUI.Mvc.UI.Html;
     using System;
     using System.Collections.Generic;
@@ -13,15 +14,13 @@ namespace KendoUI.Mvc.UI
         public NumericTextBox(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory)
             : base(viewContext, clientSideObjectWriterFactory)
         {
-           //Spinners = true;
+           Spinners = true;
 
             InputHtmlAttributes = new RouteValueDictionary();
 
-            //ClientEvents = new TextBoxBaseClientEvents();
+            ClientEvents = new NumericTextBoxClientEvents();
 
             Enabled = true;
-
-            //ScriptFileNames.AddRange(new[] { "telerik.common.js", "telerik.textbox.js" });
 
             Step = (T)Convert.ChangeType(1, typeof(T));
 
@@ -74,7 +73,19 @@ namespace KendoUI.Mvc.UI
             set;
         }
 
+        public int? Decimals
+        {
+            get;
+            set;
+        }
+
         public string Format
+        {
+            get;
+            set;
+        }
+
+        public string Culture
         {
             get;
             set;
@@ -106,11 +117,11 @@ namespace KendoUI.Mvc.UI
             set;
         }
 
-        //public TextBoxBaseClientEvents ClientEvents
-        //{
-        //    get;
-        //    private set;
-        //}
+        public NumericTextBoxClientEvents ClientEvents
+        {
+            get;
+            private set;
+        }
 
         public bool Enabled
         {
@@ -123,12 +134,18 @@ namespace KendoUI.Mvc.UI
             IClientSideObjectWriter objectWriter = ClientSideObjectWriterFactory.Create(Id, "kendoNumericTextBox", writer);
 
             objectWriter.Start();
-
-            objectWriter.AppendObject("value", this.Value);
-            objectWriter.AppendObject("step", this.Step);
+            
+            objectWriter.Append("format", this.Format);
+            objectWriter.Append("culture", this.Culture);
             objectWriter.Append("placeholder", this.Placeholder);
+            objectWriter.Append("spinners", this.Spinners);
+            
+            objectWriter.AppendObject("min", this.Min);
+            objectWriter.AppendObject("max", this.Max);
+            objectWriter.AppendObject("step", this.Step);
+            objectWriter.AppendObject("decimals", this.Decimals);
 
-            //ClientEvents.SerializeTo(objectWriter);
+            ClientEvents.SerializeTo(objectWriter);
 
             objectWriter.Complete();
 
@@ -139,10 +156,26 @@ namespace KendoUI.Mvc.UI
         {
             Guard.IsNotNull(writer, "writer");
 
+            VerifySettings();
+
             NumericTextBoxHtmlBuilder<T> renderer = new NumericTextBoxHtmlBuilder<T>(this);
 
             renderer.Build().WriteTo(writer);
             base.WriteHtml(writer);
+        }
+
+        public override void VerifySettings()
+        {
+#if MVC2 || MVC3
+            Name = Name ?? ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(string.Empty);
+#endif
+
+            if (Min.HasValue && Max.HasValue && Nullable.Compare<T>(Min, Max) == 1)
+            {
+                throw new ArgumentException(TextResource.MinPropertyMustBeLessThenMaxProperty.FormatWith("Min", "Max"));
+            }
+
+            base.VerifySettings();
         }
     }
 }
