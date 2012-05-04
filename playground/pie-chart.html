@@ -14,11 +14,6 @@
     <body>
     <?xml version="1.0" standalone="no" ?>
     <script type="text/javascript">
-        function click (e) {
-            console.log(e);
-        }
-
-
         $(document).ready(function() {
             $("#container").kendoChart({
                 title: {
@@ -39,13 +34,8 @@
                           value: 312,
                           category: "Value A"
                       }]
-                  }],
-                  seriesClick: click,
-              tooltip: {
-                visible: true,
-                    template: "#= console.log(dataItem) #"
-
-              }
+              }],
+              seriesClick: function (e) { console.log(e); }
             });
         });
 
