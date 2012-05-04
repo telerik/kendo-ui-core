@@ -426,19 +426,6 @@
             ChartElement.modelMap[modelId] = element;
         },
 
-        registerId: function(id, metadata) {
-            var element = this,
-                root;
-
-            root = element.getRoot();
-            if (root) {
-                root.idMap[id] = element;
-                if (metadata) {
-                    root.idMapMetadata[id] = metadata;
-                }
-            }
-        },
-
         translateChildren: function(dx, dy) {
             var element = this,
                 children = element.children,
@@ -460,13 +447,6 @@
             for (i = 0; i < length; i++) {
                 arguments[i].parent = element;
             }
-        },
-
-        getRoot: function() {
-            var element = this,
-                parent = element.parent;
-
-            return parent ? parent.getRoot() : null;
         }
     });
 
@@ -476,9 +456,6 @@
     var RootElement = ChartElement.extend({
         init: function(options) {
             var root = this;
-
-            root.idMap = {};
-            root.idMapMetadata = {};
 
             ChartElement.fn.init.call(root, options);
         },
@@ -526,10 +503,6 @@
             return elements.concat(
                 ChartElement.fn.getViewElements.call(root, view)
             );
-        },
-
-        getRoot: function() {
-            return this;
         }
     });
 
