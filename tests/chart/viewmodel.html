@@ -71,27 +71,6 @@
                     ok(child.parent === chartElement);
                 });
 
-                test("getRoot returns root for first level children", function() {
-                    var child = new dataviz.ChartElement();
-
-                    chartElement.getRoot = function() { return this; }
-
-                    chartElement.append(child);
-                    ok(child.getRoot() === chartElement);
-                });
-
-                test("getRoot returns root for second level children", function() {
-                    var child1 = new dataviz.ChartElement(),
-                        child2 = new dataviz.ChartElement();
-
-                    chartElement.getRoot = function() { return this; }
-
-                    child1.append(child2);
-                    chartElement.append(child1);
-
-                    ok(child2.getRoot() === chartElement);
-                });
-
                 test("makeDiscoverable assigns unique model id", function() {
                     chartElement.makeDiscoverable();
                     ok(chartElement.options.modelId.length > 0);
@@ -246,10 +225,6 @@
                     renderRoot();
 
                     equals(rootElement.box.x1, rootRect.x1 + MARGIN);
-                });
-
-                test("getRoot returns self", function() {
-                    ok(rootElement.getRoot() === rootElement);
                 });
 
             })();
