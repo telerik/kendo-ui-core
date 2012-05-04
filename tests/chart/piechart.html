@@ -245,6 +245,10 @@
                     }
                 });
 
+                test("is discoverable", function() {
+                    ok(segment.options.modelId);
+                });
+
                 test("fills target box", function() {
                     sameBox(segment.box, box);
                 });
@@ -279,6 +283,29 @@
                 test("does not set overlay options when no overlay is defined", function() {
                     createSegment({ overlay: null });
                     ok(!sector.style.overlay);
+                });
+
+                test("getOutlineElement returns segment outline", function() {
+                    view = new ViewStub();
+
+                    segment.getOutlineElement(view);
+                    equals(view.log.sector.length, 1);
+                });
+
+                test("outline element has same model id", function() {
+                    view = new ViewStub();
+
+                    segment.getOutlineElement(view);
+                    equals(view.log.sector[0].style.data.modelId, segment.options.modelId);
+                });
+
+                test("sector has same model id", function() {
+                    equals(sector.style.data.modelId, segment.options.modelId);
+                });
+
+                test("label has same model id", function() {
+                    createSegment({ labels: { visible: true } });
+                    equals(segment.label.options.modelId, segment.options.modelId);
                 });
 
             })();
@@ -517,7 +544,7 @@
                 });
 
                 // ------------------------------------------------------------
-                module("Pie Chart / Labels / Connectors / Normal test case 1", {
+                module("Pie Chart / Labels / Connectors (1)", {
                     setup: function() {
                         plotArea = new PlotAreaStub();
                         setupPieChart(plotArea, {
@@ -530,6 +557,10 @@
                             } ]
                         });
                     }
+                });
+
+                test("connector has same model id", function() {
+                    equals(view.log.path[0].style.data.modelId, firstSegment.options.modelId);
                 });
 
                 test("start point", function() {
@@ -579,7 +610,7 @@
                 });
 
                 // ------------------------------------------------------------
-                module("Pie Chart / Labels / Connectors / Normal test case 2", {
+                module("Pie Chart / Labels / Connectors (2)", {
                     setup: function() {
                         plotArea = new PlotAreaStub();
                         setupPieChart(plotArea, {
