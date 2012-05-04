@@ -1628,6 +1628,11 @@ span.k-dropdown
     padding: 2px 22px 2px 2px;
 }
 
+.k-numeric-wrap.k-expand-padding
+{
+    padding-right : 2px;
+}
+
 .k-autocomplete
 {
     padding: 2px;

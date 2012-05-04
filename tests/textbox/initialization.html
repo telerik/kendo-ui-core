@@ -163,6 +163,16 @@
                 equal(textbox._text.val(), "10,00");
             });
 
+            test("NumericTextBox hides arrows if spinners is set to false", function() {
+                var textbox = new NumericTextBox(input, {
+                    value: 10,
+                    spinners: false
+                });
+
+                ok(!textbox._upArrow.is(":visible"));
+                ok(textbox._inputWrapper.hasClass("k-expand-padding"));
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
