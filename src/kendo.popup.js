@@ -257,7 +257,6 @@
 
                 that._closing = true;
 
-                debugger;
                 that.element.kendoStop(true).kendoAnimate(animation);
             }
         },
