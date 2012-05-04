@@ -18,6 +18,8 @@
         <ul id="log"></ul>
 
         <script type="text/javascript">
+            QUnit.config.reorder = false
+
             var culture = kendo.culture;
 
             test("default culture should be en-US", function() {
@@ -49,6 +51,34 @@
                 equal(culture(), kendo.cultures.current);
             });
 
+            test("culture method fallbacks to more general culture indentifier", function() {
+                kendo.cultures["fr"] = { name: "fr", calendars: {standard: {}}};
+                culture("fr-FR");
+
+                equal(kendo.cultures.current.name, "fr");
+            });
+
+            test("findCulture method returns culture", function() {
+                kendo.cultures["de-DE"] = { name: "de-DE", calendars: {standard: {}}};
+
+                var result = kendo.findCulture("de-DE");
+
+                equal(result.name, "de-DE");
+            });
+
+            test("findCulture method returns closest culture", function() {
+                kendo.cultures["fr"] = { name: "fr", calendars: {standard: {}}};
+
+                var result = kendo.findCulture("fr-FR");
+
+                equal(result.name, "fr");
+            });
+
+            test("findCulture method returns null", function() {
+                var result = kendo.findCulture("no-such-culture");
+
+                equal(result, null);
+            });
         </script>
     </body>
 </html>

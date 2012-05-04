@@ -858,17 +858,29 @@ function pad(number) {
      * </p>
      */
 
-    kendo.culture = function(cultureName) {
+     function findCulture(cultureName) {
         if (cultureName !== undefined) {
-            var cultures = kendo.cultures,
-                culture = cultures[cultureName] || cultures[EN];
+            var cultures = kendo.cultures;
 
+            return cultures[cultureName] || cultures[cultureName.split("-")[0]] || null;
+        }
+
+        return null;
+    }
+
+    kendo.culture = function(cultureName) {
+        var cultures = kendo.cultures, culture;
+
+        if (cultureName !== undefined) {
+            culture = findCulture(cultureName) || cultures[EN];
             culture.calendar = culture.calendars.standard;
             cultures.current = culture;
         } else {
-            return kendo.cultures.current;
+            return cultures.current;
         }
     };
+
+    kendo.findCulture = findCulture;
 
     //set current culture to en-US.
     kendo.culture(EN);
