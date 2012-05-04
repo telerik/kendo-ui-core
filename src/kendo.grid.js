@@ -1310,7 +1310,7 @@
 
             if (that.editable) {
                 if ($.contains(editContainer[0], document.activeElement)) {
-                    document.activeElement.blur();
+                    $(document.activeElement).blur();
                 }
 
                 if (that.editable.end()) {
