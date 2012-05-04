@@ -1069,7 +1069,6 @@
     <Compile Include="UI\Window\IWindowButton.cs" />
     <Compile Include="UI\Window\IWindowButtonsContainer.cs" />
     <Compile Include="UI\Window\IWindowHtmlBuilder.cs" />
-    <Compile Include="UI\Window\IWindowHtmlBuilderFactory.cs" />
     <Compile Include="UI\Window\Settings\WindowResizingSettings.cs" />
     <Compile Include="UI\Window\HeaderButton.cs" />
     <Compile Include="UI\Window\WindowClientEvents.cs" />
@@ -1077,7 +1076,6 @@
     <Compile Include="UI\Window\Window.cs" />
     <Compile Include="UI\Window\Fluent\WindowBuilder.cs" />
     <Compile Include="UI\Window\WindowHtmlBuilder.cs" />
-    <Compile Include="UI\Window\WindowHtmlBuilderFactory.cs" />
     <Compile Include="Infrastructure\WebAsset\IWebAssetCollectionResolver.cs" />
     <Compile Include="WebAsset\SharedWebAssetGroupBuilder.cs" />
     <Compile Include="UrlGenerator.cs" />
