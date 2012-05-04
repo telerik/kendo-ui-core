@@ -1230,7 +1230,7 @@ p#copy
 
 pre.prettyprint
 {
-    overflow: hidden;
+    overflow: auto;
     font-family:courier,monospace;
 }
 
