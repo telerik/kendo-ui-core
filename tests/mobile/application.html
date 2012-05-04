@@ -12,8 +12,11 @@
         <script src="../../src/kendo.draganddrop.js"></script>
         <script src="../../src/kendo.history.js"></script>
         <script src="../../src/kendo.mobile.scroller.js"></script>
+        <script src="../../src/kendo.mobile.loader.js"></script>
         <script src="../../src/kendo.mobile.view.js"></script>
+        <script src="../../src/kendo.mobile.pane.js"></script>
         <script src="../../src/kendo.mobile.navbar.js"></script>
+        <script src="../../src/kendo.mobile.loader.js"></script>
         <script src="../../src/kendo.mobile.application.js"></script>
         <script src="../jquery.mockjax.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
@@ -67,185 +70,6 @@
                 equal(location.hash, "#../../test1");
             });
 
-            test("switches to local view", function() {
-                setup('<div data-role="view" id="page1">Page 1</div><div data-role="view" id="page2">Page 2</div>');
-                application.navigate("#page2");
-                ok(!$("#page1").is(":visible"), "First page is hidden");
-                ok($("#page2").is(":visible"), "Second page is visible");
-            });
-
-            function remoteViewShow() {
-                start();
-                ok($("#page2").is(":visible"), "Second page is shown");
-            }
-
-            function remoteViewInit() {
-                equal($("#qunit-fixture").has("#page2").length, 1, "Remote view is inserted in the application DOM element");
-            }
-
-            asyncTest("Loads remote view", 2, function() {
-                $.mockjax({
-                    url: "page2.html",
-                    responseText: '<body><div data-init="remoteViewInit" data-show="remoteViewShow" data-role="view" id="page2">Page 2</div></body>'
-                });
-
-                setup('<div data-role="view" id="page1">Page 1</div>');
-
-                application.navigate("page2.html");
-            });
-
-            function multipleRemoteViewInit() {
-                start();
-                equal($("#qunit-fixture").has("#page3").length, 1, "Secondary view is inserted in the application DOM element");
-            }
-
-            asyncTest("Loads multiple remote views in document", 1, function() {
-
-                $.mockjax({
-                    url: "page2.html",
-                    responseText: '<body><div data-init="multipleRemoteViewInit" data-role="view" id="page2">Page 2</div><div data-role="view" id="page3">Page 3</div></body>'
-                });
-
-                setup('<div data-role="view" id="page1">Page 1</div>');
-
-                application.navigate("page2.html");
-
-            });
-
-            asyncTest("Deals with various newline characters when loading remote view", 1, function() {
-                setup('<div data-role="view" id="page1">Page 1</div>');
-
-                $.mockjax({
-                    url: "page2.html",
-                    responseText: '<html><head></head><body><div id="page2" data-show="remoteViewShow" data-role="view">View\n\u000a\u000a\u000d\u2028\u2029</div></body>\r\n</html>'
-                });
-
-                application.navigate("page2.html");
-            });
-
-            test("Calls init when a view is changed", function() {
-                expect(1);
-
-                setup('<div data-role="view" id="page1">Page 1</div><div data-role="view" id="page2">Page 2</div>');
-
-                stub(kendo.mobile, "init");
-
-                application.navigate("#page2");
-
-                equal(kendo.mobile.calls("init"), 1, "Calls kendo.mobile.init");
-            });
-
-            test("Calls init when started", function() {
-                expect(1);
-
-                stub(kendo.mobile, "init");
-
-                setup('<div data-role="view" id="page1">Page 1</div>');
-
-                equal(kendo.mobile.calls("init"), 1, "Calls kendo.mobile.init");
-            });
-
-            test("Uses content container if present", function() {
-                setup('<div data-role="view" id="page1"><div data-role="content">Header</div></div>');
-                equal($("#page1").find("[data-role=content]").length, 1);
-            });
-
-            test("Uses layout header if specified", function() {
-            setup('<div data-layout="foo" data-role="view" id="page1">Page 1</div> \
-                    <div data-role="layout" data-id="foo"><div data-role="header">header</div></div> \
-                 ');
-
-                equal(application.element.find(".km-header").text(), "header", "Layout header is present");
-            });
-
-            test("Uses layout footer if specified", function() {
-            setup('<div data-layout="foo" data-role="view" id="page1">Page 1</div> \
-                    <div data-role="layout" data-id="foo"><div data-role="footer">footer</div></div> \
-                 ');
-
-                equal(application.element.find(".km-footer").text(), "footer", "Layout footer is present");
-            });
-
-            test("Allows layout header/footer overriding", function() {
-            setup('<div data-layout="foo" data-role="view" id="page1">Page 1<div data-role="header">custom header</div><div data-role="footer">custom footer</div></div> \
-                    <div data-role="layout" data-id="foo"><div data-role="header">header</div><div data-role="footer">footer</div></div> \
-                 ');
-
-                equal(application.element.find(".km-header").text(), "custom header", "Custom header is present");
-                equal(application.element.find(".km-footer").text(), "custom footer", "Custom footer is present");
-            });
-
-            test("Applies default layout if passed", function() {
-            setup('<div data-role="view" id="page1">Page 1</div> \
-                    <div data-role="layout" data-id="foo"><div data-role="footer">footer</div></div> \
-                    ', { layout: "foo" });
-
-                equal(application.element.find(".km-footer").text(), "footer", "Layout footer is present");
-            });
-
-            test("Overrides default layout if none specified", function() {
-                setup('<div data-role="view" id="page1" data-layout="">Page 1</div> \
-                       <div data-role="layout" data-id="foo"><div data-role="footer">footer</div></div> \
-                      ', { layout: "foo" });
-
-                equal(application.element.find(".km-footer").text(), "", "Layout footer is present");
-            });
-
-            test("Caches only platform specific layouts", function() {
-                setup('<div data-role="view" id="page1">Page 1</div> \
-                    <div data-role="layout" data-platform="ios" data-id="foo"><div data-role="footer">footer</div></div> \
-                    <div data-role="layout" data-platform="android" data-id="foo"><div data-role="footer">footer</div></div> \
-                    <div data-role="layout" data-id="default"><div data-role="footer">footer</div></div> \
-                    ', { layout: "foo" });
-
-                var foo = application.layouts.foo;
-                var defaultLayout = application.layouts.default;
-                var osName = kendo.support.mobileOS.name;
-
-                if (!osName) {
-                    osName = "ios";
-                }
-
-                equal(foo.element.attr("data-id"), "foo");
-                equal(foo.element.attr("data-platform"), osName);
-                equal(defaultLayout.element.attr("data-id"), "default");
-                equal(defaultLayout.element.attr("data-platform"), undefined);
-            });
-
-            test("Forces specific layout, if platform specified", function() {
-                setup('<div data-role="view" id="page1" data-id="foo">Page 1</div> \
-                       <div data-role="layout" data-id="foo" data-platform="ios"><div data-role="footer">footer</div></div> \
-                       <div data-role="layout" data-id="foo" data-platform="android"><div data-role="footer">footer</div></div> \
-                      ', { layout: "foo", platform: "android" });
-
-                var foo = application.layouts.foo;
-
-                equal(foo.element.attr("data-id"), "foo");
-                equal(foo.element.attr("data-platform"), "android");
-            });
-
-            test("Forces specific layout, if platform specified as object", function() {
-                setup('<div data-role="view" id="page1" data-id="foo">Page 1</div> \
-                       <div data-role="layout" data-id="foo" data-platform="ios"><div data-role="footer">footer</div></div> \
-                       <div data-role="layout" data-id="foo" data-platform="android"><div data-role="footer">footer</div></div> \
-                      ', { layout: "foo", platform: {
-                            name: "android",
-                            device: "android",
-                            android: true
-                        } });
-
-                var foo = application.layouts.foo;
-
-                equal(foo.element.attr("data-id"), "foo");
-                equal(foo.element.attr("data-platform"), "android");
-            });
-
-            test("Apply meta viewport", function() {
-                setup('<div data-role="view" id="page1" data-id="foo">Page 1</div>');
-
-                equal($(document.head).find("[name=viewport]").attr("content"), "initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width");
-            });
-
             test("Applies view title attribute contents to layout view title", function() {
                 setup('<div data-layout="foo" data-role="view" data-title="foo" id="page1">Page 1</div> \
                        <div data-role="layout" data-id="foo"><div data-role="header"><div data-role="navbar"><span id="view-title" data-role="view-title"></span></div></div></div> \
@@ -254,71 +78,12 @@
                 equal(application.element.find("#view-title").text(), "foo", "view title applies view title attribute");
             });
 
-            test("Runs attached view event handlers", 3, function() {
-                window.foo = function() {
-                    ok(true, "view init event handler is called");
-                };
-                window.bar = function() {
-                    ok(true, "view show event handler is called");
-                };
-                window.baz = function() {
-                    ok(true, "view hide event handler is called");
-                };
+            test("Applies view title attribute contents to document title", function() {
+                setup('<div data-layout="foo" data-role="view" data-title="foo" id="page1">Page 1</div> \
+                       <div data-role="layout" data-id="foo"><div data-role="header"><div data-role="navbar"><span id="view-title" data-role="view-title"></span></div></div></div> \
+                 ');
 
-                setup('<div data-init="foo" data-show="bar" data-hide="baz" data-role="view">View</div><div id="view2" data-role="view">View 2</div>');
-                application.navigate("view2");
-            });
-
-            test("Pass application instance to the view", function() {
-                setup('<div data-init="foo" data-role="view">View</div>');
-                equal(application.view.application, application);
-            });
-
-            function checkViewParams(e) {
-                    equal(e.view.element.attr("id"), "page2");
-                    equal(e.view.params.foo, "bar");
-            }
-
-            test("Passes url params to the view show event", function() {
-                setup('<div data-role="view" id="page1">Page 1</div><div data-show="checkViewParams" id="page2" data-role="view"></div>');
-                application.navigate("#page2?foo=bar");
-            });
-
-            test("Creates loader", function() {
-                setup('<div data-role="view">Page 1</div>');
-                var loader = application.loader;
-
-                ok(loader);
-                ok(loader.hasClass("km-loader"));
-            });
-
-            test("Loader uses default text", function() {
-                setup('<div data-role="view">Page 1</div>');
-
-                var loader = application.loader;
-                equal(loader.text(), "Loading...");
-            });
-
-            test("Loader uses options.loading", function() {
-                setup('<div data-role="view">Page 1</div>', {
-                    loading: "Custom text"
-                });
-
-                var loader = application.loader;
-                equal(loader.text(), "Custom text");
-            });
-
-            asyncTest("Does not show loader if options.loading is false", function() {
-                setup('<div data-role="view">Page 1</div>', {
-                    loading: false
-                });
-
-                application.showLoading();
-
-                setTimeout(function() {
-                    start();
-                    ok(!application.loader.is(":visible"));
-                }, 200);
+                equal(document.title, "foo", "view title applies view title attribute");
             });
 
             if (kendo.support.mobileOS.android) {
@@ -384,9 +149,9 @@
             asyncTest("Raises pull when pulled", 1, function() {
                 setup('<div data-role="view" data-pull="pull" id="page1"><div style="height:200px">View</div></div><div id="page2" data-role="view"></div>');
 
-                var drag = application.view.scroller.drag;
+                var drag = application.view().scroller.drag;
 
-                application.view.scroller.setOptions({
+                application.scroller().setOptions({
                     pullToRefresh: true,
                     pullOffset: 100,
                     pull: function() {
@@ -404,9 +169,9 @@
             asyncTest("Raises scroll when scrolled", 1, function() {
                 setup('<div data-role="view" data-pull="pull" id="page1"><div style="height:200px">View</div></div><div id="page2" data-role="view"></div>');
 
-                var drag = application.view.scroller.drag;
+                var drag = application.scroller().drag;
 
-                application.view.scroller.bind("scroll", function() {
+                application.scroller().bind("scroll", function() {
                     start();
                     ok(true);
                 });
@@ -417,52 +182,9 @@
                 drag.trigger("end", drag);
             });
 
-            test("View notifies widget on init", 1, function(){
-                var Foo = kendo.mobile.ui.Widget.extend({
-                    options: {
-                        name: "Foo"
-                    },
-                    viewInit: function() {
-                        ok(true);
-                    }
-                });
-
-                kendo.mobile.ui.plugin(Foo);
-
-                setup('<div data-role="view"><i data-role="foo" /></div>');
-            });
-
-            test("View notifies widget on show", 1, function(){
-                var Foo = kendo.mobile.ui.Widget.extend({
-                    options: {
-                        name: "Foo"
-                    },
-                    viewShow: function() {
-                        ok(true);
-                    }
-                });
-
-                kendo.mobile.ui.plugin(Foo);
-
-                setup('<div data-role="view"><i data-role="foo" /></div>');
-            });
-
             function success() {
                 ok(true);
             }
-
-            test("Layout triggers init", 1, function() {
-                setup('<div data-role="view"></div><div data-role="layout" data-init="success" />');
-            });
-
-            test("Layout triggers show", 1, function() {
-                setup('<div data-role="view" data-layout="foo"></div><div data-id="foo" data-role="layout" data-show="success" />');
-            });
-
-            test("Layout triggers hide", 1, function() {
-                setup('<div data-role="view" data-layout="foo"></div><div data-id="foo" data-role="layout" data-hide="success" /><div id="view2" data-role="view">View 2</div>');
-                application.navigate("view2");
-            });
 
             test("Loads initial view depending on options", function() {
                 setup('<div data-role="view" id="test1">Page 1</div><div data-role="view" id="page2">Page 2</div>', {
@@ -470,7 +192,7 @@
                 });
 
                 equal(location.hash, "#page2");
-                equal(application.view.id, "#page2");
+                equal(application.view().id, "#page2");
             });
 
             test("Omits options.initial if location.hash", function() {
@@ -481,33 +203,8 @@
                 });
 
                 equal(location.hash, "#../../test1");
-                equal(application.view.id, "../../test1");
-                equal(application.view.content.find(".km-scroll-container").html(), "Page 2");
-            });
-
-            test("View gets VM from data-model attr", function(){
-                window.foo = {
-                    id: 1,
-                    bar: {
-                        baz: "baz"
-                    }
-                };
-
-                setup('<div data-role="view" data-model="foo.bar"></div>');
-
-                equal(application.view.model, window.foo.bar);
-            });
-
-            test("View parses data-model value if JSON", function() {
-                setup('<div data-role="view" data-model=' + '\'{"bar":1}\'' + '"></div>');
-                equal(application.view.model.bar, 1);
-            });
-
-            test("View call kendo.bind if data-model", function() {
-                stub(kendo, { bind: kendo.bind });
-                setup('<div data-role="view" data-model=' + '\'{"bar":1}\'' + '"></div>');
-
-                equal(kendo.calls("bind"), 1);
+                equal(application.view().id, "../../test1");
+                equal(application.view().content.find(".km-scroll-container").html(), "Page 2");
             });
         </script>
     </body>

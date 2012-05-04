@@ -1,12 +1,12 @@
 (function($, undefined) {
     var kendo = window.kendo,
+        mobile = kendo.mobile,
         history = kendo.history,
         support = kendo.support,
-        roleSelector = kendo.roleSelector,
-        attr = kendo.attr,
+        Pane = mobile.ui.Pane,
 
+        DEFAULT_OS = "ios",
         OS = support.mobileOS,
-        OS_NAME, OS_NAME_CLASS, OS_CSS_CLASS,
         OS_NAME_TEMPLATE = kendo.template("#=data.name##if(data.version){# #=data.name##=data.version.major# km-m#=data.version.minor# #=data.version.appMode?'km-app':'km-web'##}#", {usedWithBlock: false}),
         BERRYPHONEGAP = OS.device == "blackberry" && OS.flatVersion >= 600 && OS.flatVersion < 1000 && OS.appMode,
         VERTICAL = OS.blackberry ? "km-horizontal" : "km-vertical",
@@ -26,32 +26,13 @@
 
         iconMeta = kendo.template('<link rel="apple-touch-icon' + (support.mobileOS.android ? '-precomposed' : '') + '" # if(data.size) { # sizes="#=data.size#" #}# href="#=data.icon#" />', {usedWithBlock: false}),
 
-        toRoleSelector = function (string) { return string.replace(/(\S+)/g, "[" + attr("role") + "=$1],"); },
-        buttonRolesSelector = toRoleSelector("button backbutton detailbutton listview-link"),
-        linkRolesSelector = toRoleSelector("tab"),
-
         ORIENTATIONEVENT = window.orientationchange ? "orientationchange" : "resize",
         HIDEBAR = OS.device == "iphone" || OS.device == "ipod",
         BARCOMPENSATION = 60,
 
-        HREF = "href",
-        EXTERNAL = "external",
-        DUMMY_HREF = "#!",
-        BODY_REGEX = /<body[^>]*>(([\u000a\u000d\u2028\u2029]|.)*)<\/body>/i,
-
         WINDOW = $(window),
         HEAD = $("head"),
-        CAPTURE_EVENTS = ["touchstart", "touchend", "touchmove", "mousedown", "mousemove", "mouseup"],
-        BACK = "#:back",
         proxy = $.proxy;
-
-    function appLinkClick(e) {
-        var rel = $(e.currentTarget).data(kendo.ns + "rel");
-
-        if(rel != EXTERNAL) {
-            e.preventDefault();
-        }
-    }
 
     function isOrientationHorizontal() {
         return Math.abs(window.orientation) / 90;
@@ -295,23 +276,20 @@
         init: function(element, options) {
             var that = this;
 
-            that.layouts = {};
-            kendo.mobile.application = that; // global reference to current application
+            mobile.application = that; // global reference to current application
 
             that.options = $.extend({ hideAddressBar: true, transition: "" }, options);
             kendo.Observable.fn.init.call(that, that.options);
-            that.element = element ? $(element) : $(document.body);
+            that.element = $(element ? element : document.body);
 
             $(function(){
                 that._setupPlatform();
                 that._attachHideBarHandlers();
-                that._attachMeta();
+                that.pane = new Pane(element, that.options);
                 that._setupElementClass();
-                that._loader();
-                that._setupAppLinks();
-                that._setupLayouts(that.element);
+                that._attachMeta();
                 that._startHistory();
-                that._attachCapture();
+                that._setupDocumentTitle();
             });
         },
 
@@ -336,23 +314,7 @@
          * </script>
          */
         navigate: function(url, transition) {
-            var that = this;
-            that.transitioning = true;
-            history.navigate(url, true);
-
-            if (url === BACK) {
-                return;
-            }
-
-            that._findView(url, function(view) {
-                if (that.view === view) { return; }
-
-                that.view.switchWith(view, transition, function() {
-                    that.transitioning = false;
-                });
-
-                that.view = view;
-            });
+            this.pane.navigate(url, transition);
         },
 
         /**
@@ -360,7 +322,7 @@
          * @returns {Scroller} the scroller widget instance.
          */
         scroller: function() {
-            return this.view.scroller;
+            return this.view().scroller;
         },
 
         /**
@@ -372,9 +334,7 @@
          * </script>
          */
         hideLoading: function() {
-            var that = this;
-            clearTimeout(that._loading);
-            that.loader.hide();
+            this.pane.hideLoading();
         },
 
         /**
@@ -386,190 +346,81 @@
          * </script>
          */
         showLoading: function() {
-            var that = this;
-
-            clearTimeout(that._loading);
-
-            if (that.options.loading === false) {
-                return;
-            }
-
-            that._loading = setTimeout(function() {
-                that.loader.show();
-            }, 100);
+            this.pane.showLoading();
         },
 
-        _setupAppLinks: function() {
-            var that = this,
-                mouseup = $.proxy(that._mouseup, that);
-
-            this.element
-                .delegate(linkRolesSelector, support.mousedown, mouseup)
-                .delegate(buttonRolesSelector, support.mouseup, mouseup)
-                .delegate(linkRolesSelector + buttonRolesSelector, "click", appLinkClick);
+        /**
+         * Get a reference to the current view.
+         * @returns {View} the view instance.
+         */
+        view: function() {
+            return this.pane.view();
         },
 
         _setupPlatform: function() {
             var that = this,
                 platform = that.options.platform,
-                isString = typeof platform == "string";
+                os = OS,
+                version;
 
             if (platform) {
-                OS = isString ? support.detectOS(MOBILE_UA[platform]) : platform;
-                support.mobileOS = OS; // reset mobileOS with custom platform
+                if (typeof platform === "string") {
+                    os = support.detectOS(MOBILE_UA[platform]);
+                } else {
+                    os = platform;
+                }
+
+                support.mobileOS = os;
             }
 
-            OS_NAME = !OS ? "ios" : OS.name;
-            OS_NAME_CLASS = "km-" + OS_NAME;
-            OS_CSS_CLASS = OS_NAME_TEMPLATE({
-                               name: OS_NAME_CLASS,
-                               version: OS ? {
-                                                 appMode: OS.appMode,
-                                                 major: OS.majorVersion,
-                                                 minor: OS.minorVersion ? OS.minorVersion[0] : 0
-                                             }
-                                           : false
-                           });
+            if (os) {
+                that.os = os.name;
+                version = {
+                    appMode: os.appMode,
+                    major: os.majorVersion,
+                    minor: os.minorVersion ? os.minorVersion[0] : 0
+                };
+            } else {
+                that.os = DEFAULT_OS;
+                version = false;
+            }
 
-            that.os = OS_NAME;
-        },
-
-        _setupLayouts: function(element) {
-            var that = this,
-                platformAttr = kendo.ns + "platform";
-
-            element.find(roleSelector("layout")).each(function() {
-                var layout = $(this),
-                    platform = layout.data(platformAttr);
-
-                if (platform === undefined || platform === OS_NAME) {
-                    that.layouts[layout.data("id")] = kendo.initWidget(layout, {}, kendo.mobile.ui);
-                }
-            });
+            that.osCssClass = OS_NAME_TEMPLATE({ name: "km-" + that.os, version: version });
         },
 
         _startHistory: function() {
             var that = this,
-                views, historyEvents,
+                historyEvents,
                 initial = that.options.initial;
-
-            views = that.element.find(roleSelector("view"));
-            that.rootView = views.first();
 
             historyEvents = {
                 change: function(e) {
-                    that.navigate(e.string);
+                    that.pane.navigate(e.url);
                 },
 
                 ready: function(e) {
-                    var url = e.string,
-                        navigateToInitial = !url && initial;
+                    var url = e.url;
 
-                    if (navigateToInitial) {
+                    if (!url && initial) {
                         url = initial;
+                        history.navigate(initial, true);
                     }
 
-                    that._findView(url, function(view) {
-                        views.not(view).hide();
-                        view.showStart();
-                        that.view = view;
-
-                        if (navigateToInitial) {
-                            history.navigate(initial, true);
-                        }
-                    });
+                    that.pane.navigate(url);
                 }
             };
+
+            that.pane.bind("navigate", function(e) {
+                history.navigate(e.url, true);
+            });
 
             history.start($.extend(that.options, historyEvents));
         },
 
-        _createView: function(element) {
-            var that = this,
-                layout = element.data(kendo.ns + "layout");
-
-            if (typeof layout === "undefined") {
-                layout = that.options.layout;
-            }
-
-            if (layout) {
-                layout = that.layouts[layout];
-            }
-
-            var view = kendo.initWidget(element, {application: this, layout: layout}, kendo.mobile.ui);
-
-            return view;
-        },
-
-        _createRemoteView: function(url, html) {
-            var that = this,
-                container = $('<div />'),
-                views,
-                view;
-
-            if (BODY_REGEX.test(html)) {
-                html = RegExp.$1;
-            }
-
-            container[0].innerHTML = html;
-
-            views = container.find(roleSelector("view")).hide();
-            view = views.first();
-
-            view.hide().attr(attr("url"), url);
-
-            that._setupLayouts(container);
-
-            that.element.append(container.find(roleSelector("layout")))
-                        .append(container.find("script, style"))
-                        .append(views);
-
-            return that._createView(view);
-        },
-
-        _findView: function(url, callback) {
-            var that = this,
-                view,
-                firstChar = url.charAt(0),
-                local = firstChar === "#",
-                remote = firstChar === "/",
-                element;
-
-            if (!url) {
-                element = that.rootView;
-            } else {
-                element = that.element.find("[" + attr("url") + "='" + url + "']");
-
-                if (!element[0] && !remote) {
-                    element = that.element.find(local ? url : "#" + url);
-                }
-            }
-
-            view = element.data("kendoView");
-
-            if (view) {
-                callback(view);
-            } else if (element[0]) {
-                callback(that._createView(element));
-            } else {
-                if (that._xhr) {
-                    that._xhr.abort();
-                }
-
-                that.showLoading();
-                that._xhr = $.get(url, function(html) {
-                                callback(that._createRemoteView(url, html));
-                                that.hideLoading();
-                            }, 'html')
-                            .fail(function() {
-                                that.hideLoading();
-                            });
-            }
-        },
-
         _setupElementClass: function() {
             var that = this,
-                osCssClass = that.options.platform ? "km-" + that.options.platform : OS_CSS_CLASS,
+                view = that.view(),
+                osCssClass = that.options.platform ? "km-" + that.options.platform : that.osCssClass,
                 element = that.element;
 
             element.parent().addClass("km-root");
@@ -587,8 +438,8 @@
                     applyViewportHeight();
                 }
 
-                if (that.view) {// On desktop resize is fired rather early
-                    that.view.scroller.reset();
+                if (view && view.scroller) { // On desktop resize is fired rather early
+                    view.scroller.reset();
                 }
             });
         },
@@ -624,6 +475,16 @@
             }
         },
 
+        _setupDocumentTitle: function() {
+            var that = this,
+                defaultTitle = document.title;
+
+            that.pane.bind("viewShow", function(e) {
+                var title = e.view.title;
+                document.title = title !== undefined ? title : defaultTitle;
+            });
+        },
+
         _hideBar: function() {
             var that = this,
                 element = that.element,
@@ -648,64 +509,6 @@
                 element.height(newHeight);
                 setTimeout(window.scrollTo, 0, 0, 1);
             }
-        },
-
-        _attachCapture: function() {
-            var that = this;
-            that.transitioning = false;
-
-            function capture(e) {
-                if (that.transitioning) {
-                    e.stopPropagation();
-                }
-            }
-
-            for (var i = 0; i < CAPTURE_EVENTS.length; i ++) {
-                that.element[0].addEventListener(CAPTURE_EVENTS[i], capture, true);
-            }
-        },
-
-        _mouseup: function(e) {
-            if (e.which > 1 || e.isDefaultPrevented()) {
-                return;
-            }
-
-            var link = $(e.currentTarget),
-                transition = link.data(kendo.ns + "transition"),
-                rel = link.data(kendo.ns + "rel"),
-                href = link.attr(HREF);
-
-
-            if (rel === EXTERNAL) {
-                return;
-            }
-
-            if (href && href != DUMMY_HREF) {
-                // Prevent iOS address bar progress display for in app navigation
-                link.attr(HREF, DUMMY_HREF);
-                setTimeout(function() { link.attr(HREF, href); });
-
-                if (rel === "actionsheet") {
-                    $(href).data("kendoMobileActionSheet").openFor(link);
-                } else {
-                    this.navigate(href, transition);
-                }
-            }
-
-        e.preventDefault();
-        },
-
-        _loader: function() {
-            var that = this,
-                text = that.options.loading;
-
-            if (text === undefined) {
-                text = "<h1>Loading...</h1>";
-            }
-
-            that.loader = $('<div class="km-loader"><span class="km-loading km-spin"></span>' + text + "</div>")
-                            .hide()
-                            .appendTo(that.element);
         }
     });
 

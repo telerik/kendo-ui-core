@@ -79,6 +79,10 @@ namespace Kendo.Models
             "kendo.history.js",
             "kendo.draganddrop.js",
             "kendo.mobile.view.js",
+            "kendo.mobile.scroller.js",
+            "kendo.mobile.loader.js",
+            "kendo.mobile.pane.js",
+            "kendo.mobile.splitview.js",
             "kendo.mobile.shim.js",
             "kendo.mobile.application.js",
             "kendo.mobile.actionsheet.js",
@@ -86,7 +90,6 @@ namespace Kendo.Models
             "kendo.mobile.listview.js",
             "kendo.mobile.scrollview.js",
             "kendo.mobile.navbar.js",
-            "kendo.mobile.scroller.js",
             "kendo.mobile.buttongroup.js",
             "kendo.mobile.switch.js",
             "kendo.mobile.tabstrip.js"

@@ -226,6 +226,19 @@
             ]
         },
         {
+            "text": "SplitView",
+            "name": "SplitView",
+            "documentation": "mobile/splitview",
+            "spriteCssClass": "mobileAppIcon",
+            "tablet": true,
+            "items": [
+                {
+                    "text": "Overview",
+                    "url": "splitview/index.html"
+                }
+            ]
+        },
+        {
             "text": "Layout",
             "name": "layout",
             "documentation": "mobile/layout",

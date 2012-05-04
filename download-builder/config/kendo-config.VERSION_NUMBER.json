@@ -540,6 +540,17 @@
             "hidden": true
         },
         {
+            "id": "mobile.loader",
+            "name": "Loader",
+            "category": "mobile",
+            "description": "Mobile Loader",
+            "source": "kendo.mobile.loader.min.js",
+            "depends": [
+                "core"
+            ],
+            "hidden": true
+        },
+        {
             "id": "mobile.view",
             "name": "View",
             "category": "mobile",
@@ -554,45 +565,25 @@
             "hidden": true
         },
         {
+            "id": "mobile.pane",
+            "name": "Pane",
+            "category": "mobile",
+            "description": "Mobile Pane",
+            "source": "kendo.mobile.pane.min.js",
+            "depends": [
+                "mobile.view",
+                "mobile.loader"
+            ],
+            "hidden": true
+        },
+        {
             "id": "mobile.application",
             "name": "Application",
             "category": "mobile",
             "description": "The Mobile application provides a framework to build native looking web applications on mobile devices.",
             "source": "kendo.mobile.application.min.js",
             "depends": [
-                "mobile.view"
-            ]
-        },
-        {
-            "id": "mobile.scroller",
-            "name": "Scroller",
-            "category": "mobile",
-            "description": "The Kendo Mobile Scroller widget enables touch friendly kinetic scrolling for the contents of a given DOM element.",
-            "source": "kendo.mobile.scroller.min.js",
-            "depends": [
-                "core",
-                "fx",
-                "draganddrop"
-            ]
-        },
-        {
-            "id": "mobile.scrollview",
-            "name": "Scrollview",
-            "category": "mobile",
-            "description": "The Kendo Mobile ScrollView widget is used to scroll content wider than the device screen.",
-            "source": "kendo.mobile.scrollview.min.js",
-            "depends": [
-                "mobile.application"
-            ]
-        },
-        {
-            "id": "mobile.switch",
-            "name": "Switch",
-            "category": "mobile",
-            "description": "The mobile Switch widget is used to display two exclusive choices.",
-            "source": "kendo.mobile.switch.min.js",
-            "depends": [
-                "mobile.application"
+                "mobile.pane"
             ]
         },
         {
@@ -631,6 +622,48 @@
             "category": "mobile",
             "description": "The Kendo mobile NavBar widget is used inside a mobile View or Layout Header element to display an application navigation bar.",
             "source": "kendo.mobile.navbar.min.js",
+            "depends": [
+                "mobile.application"
+            ]
+        },
+        {
+            "id": "mobile.scroller",
+            "name": "Scroller",
+            "category": "mobile",
+            "description": "The Kendo Mobile Scroller widget enables touch friendly kinetic scrolling for the contents of a given DOM element.",
+            "source": "kendo.mobile.scroller.min.js",
+            "depends": [
+                "core",
+                "fx",
+                "draganddrop"
+            ]
+        },
+        {
+            "id": "mobile.scrollview",
+            "name": "ScrollView",
+            "category": "mobile",
+            "description": "The Kendo Mobile ScrollView widget is used to scroll content wider than the device screen.",
+            "source": "kendo.mobile.scrollview.min.js",
+            "depends": [
+                "mobile.application"
+            ]
+        },
+        {
+            "id": "mobile.spitview",
+            "name": "SplitView",
+            "category": "mobile",
+            "description": "The mobile SplitView is a tablet-specific view that consists of two or more mobile Pane widgets.",
+            "source": "kendo.mobile.splitview.min.js",
+            "depends": [
+                "mobile.application"
+            ]
+        },
+        {
+            "id": "mobile.switch",
+            "name": "Switch",
+            "category": "mobile",
+            "description": "The mobile Switch widget is used to display two exclusive choices.",
+            "source": "kendo.mobile.switch.min.js",
             "depends": [
                 "mobile.application"
             ]

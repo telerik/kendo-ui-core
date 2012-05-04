@@ -40,8 +40,16 @@ tests.push(
         title: "mobile listview mvvm"
     },
     {
+        page: "mobile/loader.html",
+        title: "mobile loader"
+    },
+    {
         page: "mobile/navbar.html",
         title: "mobile navbar"
+    },
+    {
+        page: "mobile/splitview.html",
+        title: "mobile splitview"
     },
     {
         page: "mobile/switch/index.html",
@@ -54,5 +62,18 @@ tests.push(
     {
         page: "mobile/tabstrip.html",
         title: "mobile tabstrip"
+    },
+    {
+        page: "mobile/view/view.html",
+        title: "mobile view"
+    },
+    {
+        page: "mobile/view/layout.html",
+        title: "mobile view layout"
+    },
+    {
+        page: "mobile/view/engine.html",
+        title: "mobile view engine"
     }
+
 );
