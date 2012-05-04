@@ -447,7 +447,6 @@
     <Compile Include="UI\Window\WindowEffectBuilderTests.cs" />
     <Compile Include="UI\Window\WindowRenderingTests.cs" />
     <Compile Include="UI\Window\WindowHtmlBuilderTests.cs" />
-    <Compile Include="UI\Window\WindowHtmlBuilderFactoryTests.cs" />
     <Compile Include="UI\Window\WindowButtonsBuilderTests.cs" />
     <Compile Include="UI\Window\WindowResizingSettingsBuilderTests.cs" />
     <Compile Include="UI\Window\WindowClientEventsBuilderTests.cs" />

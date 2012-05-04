@@ -16,8 +16,6 @@ namespace KendoUI.Mvc.UI.Tests
 
             httpContext.Setup(c => c.Request.Browser.CreateHtmlTextWriter(It.IsAny<TextWriter>())).Returns(new HtmlTextWriter(TextWriter.Null));
 
-            Mock<IWindowHtmlBuilderFactory> windowHtmlBuilderFactory = new Mock<IWindowHtmlBuilderFactory>();
-
             Mock<IClientSideObjectWriterFactory> clientSideObjectWriterFactory = new Mock<IClientSideObjectWriterFactory>();
             clientSideObjectWriter = new Mock<IClientSideObjectWriter>();
 
@@ -29,10 +27,9 @@ namespace KendoUI.Mvc.UI.Tests
                 .Setup(c => c.Create(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<TextWriter>()))
                     .Returns(clientSideObjectWriter.Object);
 
-            Window window = new Window(viewContext, clientSideObjectWriterFactory.Object, windowHtmlBuilderFactory.Object);
+            Window window = new Window(viewContext, clientSideObjectWriterFactory.Object);
 
             renderer = renderer ?? new WindowHtmlBuilder(window);
-            windowHtmlBuilderFactory.Setup(f => f.Create(It.IsAny<Window>())).Returns(renderer);
 
             return window;
         }

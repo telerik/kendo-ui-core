@@ -17,16 +17,13 @@ namespace KendoUI.Mvc.UI
     {
         private readonly IList<IEffect> defaultEffects = new List<IEffect> { new ZoomAnimation(), new PropertyAnimation(PropertyAnimationType.Opacity) };
 
-        private readonly IWindowHtmlBuilderFactory builderFactory;
         private readonly IList<IWindowButton> defaultButtons = new List<IWindowButton> { new HeaderButton{Name = "Close", CssClass = "k-close"} };
         
         private string loadContentFromUrl;
 
-        public Window(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory, IWindowHtmlBuilderFactory builderFactory)
+        public Window(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory)
             : base(viewContext, clientSideObjectWriterFactory)
         {
-            this.builderFactory = builderFactory;
-
             Template = new HtmlTemplate();
 
             ClientEvents = new WindowClientEvents();
@@ -232,7 +229,7 @@ namespace KendoUI.Mvc.UI
         {
             Guard.IsNotNull(writer, "writer");
 
-            IWindowHtmlBuilder builder = builderFactory.Create(this);
+            IWindowHtmlBuilder builder = new WindowHtmlBuilder(this);
 
             builder.WindowTag().WriteTo(writer);
 
