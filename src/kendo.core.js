@@ -549,9 +549,10 @@ function pad(number) {
      * for the number formats, week and month names, date and time formats and etc.
      *
      * @section Kendo exposes <strong><em>culture(cultureName)</em></strong> method which allows to select the culture
-     * script coresponding to the "culture name". kendo.culture() method uses the passed culture name
-     * to select culture from the culture scripts that you have included and then sets the current culture.
-     * If there is no such culture, the default one is used.
+     * script corresponding to the "culture name". kendo.culture() method uses the passed culture name
+     * to select a culture from the culture scripts that you have included and then sets the current culture. If there is no
+     * corresponding culture then the method will try to find culture which is equal to the country part of the culture name.
+     * If no culture is found the default one is used.
      *
      * <h3>Define current culture settings</h3>
      *
@@ -566,9 +567,37 @@ function pad(number) {
      *    kendo.culture("en-GB");
      * </script>
      *
+     * @exampleTitle Select closest culture
+     * @example
+     *
+     * <script src="jquery.js" ></script>
+     * <script src="kendo.all.min.js"></script>
+     * <script src="kendo.culture.fr.js"></script>
+     * <script type="text/javascript">
+     *    //set current culture to the "fr" culture script.
+     *    kendo.culture("fr-FR");
+     * </script>
+     *
      * @exampleTitle Get current culture
      * @example
      * var cultureInfo = kendo.culture();
+     *
+     * <h3>Find culture object</h3>
+     *
+     * @section Kendo also exposes <strong><em>findCulture(cultureName)</em></strong> method which returns a culture object which corresponds to
+     * the passed culture name. If there is no such culture in the registered culture scripts, the method will try to find a culture object
+     * which corresponds to the country part of the culture name. If no culture is found, the result will be <strong>null</strong>.
+     *
+     * @exampleTitle Find a culture object
+     * @example
+     *
+     * <script src="jquery.js" ></script>
+     * <script src="kendo.all.min.js"></script>
+     * <script src="kendo.culture.fr.js"></script>
+     * <script type="text/javascript">
+     *    //finds the "fr-FR" culture object.
+     *    var culture = kendo.findCulture("fr-FR");
+     * </script>
      *
      * @section
      * <h3>Format number or date object</h3>
@@ -592,7 +621,7 @@ function pad(number) {
      * kendo.toString(new Date(2010, 10, 10, 22, 12), "hh:mm tt" ); // "10:12 PM"
      *
      * @section
-     * <h4><code>kendo.format</code> - replaces each format item in a specified string with the text equivalent of a corresponding object's value.</h4>
+     * <h4>kendo.format - replaces each format item in a specified string with the text equivalent of a corresponding object's value.</h4>
      *  @exampleTitle String format
      *  @example
      *  kendo.format("{0} - {1}", 12, 24); //12 - 24
