@@ -416,7 +416,7 @@
 
             if (chart._plotArea.box.containsPoint(coords.x, coords.y)) {
                 if (point && (point.series.type === LINE || point.series.type === AREA)) {
-                    owner = point.owner;
+                    owner = point.parent;
                     seriesPoint = owner.getNearestPoint(coords.x, coords.y, point.seriesIx);
                     if (seriesPoint && seriesPoint != point) {
                         chart._activePoint = seriesPoint;
@@ -1138,10 +1138,11 @@
         init: function(value, options) {
             var bar = this;
 
-            bar.value = value;
-            bar.makeDiscoverable();
-
             ChartElement.fn.init.call(bar, options);
+
+            bar.value = value;
+            bar.options.id = uniqueId();
+            bar.makeDiscoverable();
         },
 
         options: {
@@ -1227,7 +1228,7 @@
                 } : {},
                 box = bar.box,
                 rectStyle = deepExtend({
-                    id: uniqueId(),
+                    id: options.id,
                     fill: options.color,
                     fillOpacity: options.opacity,
                     strokeOpacity: options.opacity,
@@ -1747,10 +1748,11 @@
         init: function(value, options) {
             var point = this;
 
-            point.value = value;
-            point.makeDiscoverable();
-
             ChartElement.fn.init.call(point, options);
+
+            point.value = value;
+            point.options.id = uniqueId();
+            point.makeDiscoverable();
         },
 
         options: {
@@ -1799,7 +1801,7 @@
             }
 
             point.marker = new ShapeElement({
-                id: uniqueId(),
+                id: point.options.id,
                 visible: markers.visible,
                 type: markers.type,
                 width: markers.size,
@@ -1920,12 +1922,7 @@
         },
 
         click: function(chart, e) {
-            var point = this,
-                coords = chart._eventCoordinates(e),
-                seriesIx = point.seriesIx,
-                nearestPoint = point.getNearestPoint(coords.x, coords.y, seriesIx);
-
-            seriesClick(chart, nearestPoint, e);
+            seriesClick(chart, this, e);
         }
     });
 
@@ -1933,13 +1930,14 @@
         init: function(linePoints, series, seriesIx) {
             var segment = this;
 
+            ChartElement.fn.init.call(segment);
+
             segment.linePoints = linePoints;
             segment.series = series;
             segment.seriesIx = seriesIx;
+            segment.options.id = uniqueId();
 
             segment.makeDiscoverable();
-
-            ChartElement.fn.init.call(segment);
         },
 
         options: {},
@@ -1966,7 +1964,7 @@
 
             return [
                 view.createPolyline(segment.points(), false, {
-                    id: uniqueId(),
+                    id: segment.options.id,
                     stroke: series.color,
                     strokeWidth: series.width,
                     strokeOpacity: series.opacity,
@@ -1976,6 +1974,15 @@
                     zIndex: -1
                 })
             ];
+        },
+
+        click: function(chart, e) {
+            var segment = this,
+                coords = chart._eventCoordinates(e),
+                seriesIx = segment.seriesIx,
+                point = segment.parent.getNearestPoint(coords.x, coords.y, seriesIx);
+
+            seriesClick(chart, point, e);
         }
     });
 

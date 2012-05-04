@@ -18,37 +18,49 @@
         <script src="util.js"></script>
         <script type="text/javascript">
 
-            var dataviz = kendo.dataviz;
+            var dataviz = kendo.dataviz,
+                chart,
+                plotArea;
+
+            function createChart(options) {
+                $("#container").kendoChart(options);
+
+                chart = $("#container").data("kendoChart");
+                plotArea = chart._model.children[1];
+            }
+
+            function destroyChart() {
+                $("#container").unbind("click").empty();
+                chart = null;
+            }
+
+            function createLineChart(options) {
+                createChart($.extend({
+                    series: [{
+                        type: "line",
+                        data: [1, 2]
+                    }],
+                    categoryAxis: {
+                        categories: ["A"]
+                    }
+                }, options));
+            }
+
+            function createBarChart(options) {
+                createChart($.extend({
+                    series: [{
+                        type: "bar",
+                        data: [1]
+                    }],
+                    categoryAxis: {
+                        categories: ["A"]
+                    }
+                }, options));
+            }
 
             (function() {
-                var chart,
-                    plotArea,
-                    marker,
+                var marker,
                     bar;
-
-                function createChart(options) {
-                    $("#container").kendoChart(options);
-
-                    chart = $("#container").data("kendoChart");
-                    plotArea = chart._model.children[1];
-                }
-
-                function destroyChart() {
-                    $("#container").empty();
-                    chart = null;
-                }
-
-                function createLineChart(options) {
-                    createChart($.extend({
-                        series: [{
-                            type: "line",
-                            data: [1, 2]
-                        }],
-                        categoryAxis: {
-                            categories: ["A"]
-                        }
-                    }, options));
-                }
 
                 function linePointClick(seriesClickHandler) {
                     createLineChart({
@@ -59,22 +71,12 @@
                 }
 
                 function lineClick(seriesClickHandler, x, y) {
-                    var createSegment = dataviz.LineChart.fn.createSegment,
-                        id;
+                    createLineChart({
+                        seriesClick: seriesClickHandler
+                    });
 
-                    stubMethod(dataviz.LineChart.fn, "createSegment",
-                        function(lineId) {
-                            id = lineId;
-                            return createSegment.apply(this, arguments);
-                        },
-                        function() {
-                            createLineChart({
-                                seriesClick: seriesClickHandler
-                            });
-                        }
-                    );
-
-                    var line = $("#" + id),
+                    var segment = plotArea.charts[0]._segments[0],
+                        line = $("#" + segment.options.id),
                         offset = line.offset(),
                         e = new jQuery.Event("click");
 
@@ -83,19 +85,16 @@
                     line.trigger(e);
                 }
 
-                function createBarChart(options) {
-                    createChart($.extend({
-                        series: [{
-                            type: "bar",
-                            data: [1]
-                        }],
-                        categoryAxis: {
-                            categories: ["A"]
-                        }
-                    }, options));
+                function barClick(seriesClickHandler) {
+                    createBarChart({
+                        seriesClick: seriesClickHandler
+                    });
+
+                    bar = plotArea.charts[0].points[0];
+                    $("#" + bar.options.id).click();
                 }
 
-                function barClick(seriesClickHandler) {
+                function axisLabelClick(seriesClickHandler) {
                     createBarChart({
                         seriesClick: seriesClickHandler
                     });
@@ -122,7 +121,7 @@
                                 }
                             }
                         },
-                        seriesClick: function() { ok(true); }
+                        seriesClick: function(e) { ok(true); }
                     });
                     label = plotArea.charts[0].points[0].children[1];
                     $("#" + label.options.id).click();
@@ -213,6 +212,28 @@
                     barClick(function(e) {
                         equals(e.element.attr("id"), bar.options.id);
                     });
+                });
+
+            })();
+
+            (function() {
+
+                function linePointClick(clickHandler) {
+                    createLineChart({
+                        axisLabelClick: clickHandler
+                    });
+
+                    label = plotArea.categoryAxis.labels[0];
+                    $("#" + label.options.id).click();
+                }
+
+                // ------------------------------------------------------------
+                module("axisLabelClick / Category Axis", {
+                    teardown: destroyChart
+                });
+
+                test("fires when clicking axis labels", 1, function() {
+                    categoryAxisLabelClick(function() { ok(true); });
                 });
 
             })();
