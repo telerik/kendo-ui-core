@@ -276,6 +276,7 @@
             step: 1,
             culture: "",
             format: "n",
+            spinners: true,
             placeholder: "",
             upArrowText: "Increase value",
             downArrowText: "Decrease value"
@@ -425,6 +426,7 @@
             var that = this,
             arrows,
             options = that.options,
+            spinners = options.spinners,
             element = that.element;
 
             arrows = element.siblings(".k-icon");
@@ -442,6 +444,11 @@
                 }
                 arrows.removeClass(SELECTED);
             });
+
+            if (!spinners) {
+                arrows.toggle(spinners);
+                that._inputWrapper.addClass("k-expand-padding");
+            }
 
             that._upArrow = arrows.eq(0);
             that._downArrow = arrows.eq(1);
