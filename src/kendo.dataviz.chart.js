@@ -2480,6 +2480,7 @@
 
             segment.value = value;
             segment.sector = sector;
+            segment.makeDiscoverable();
 
             ChartElement.fn.init.call(segment, options);
         },
@@ -2548,7 +2549,6 @@
                     }));
 
                 segment.append(segment.label);
-                segment.registerId(segment.label.options.id);
             }
         },
 
@@ -2632,7 +2632,8 @@
                     strokeOpacity: options.opacity,
                     animation: deepExtend(options.animation, {
                         delay: segment.categoryIx * PIE_SECTOR_ANIM_DELAY
-                    })
+                    }),
+                    data: { modelId: options.modelId }
                 }, border)));
             }
 
@@ -2650,7 +2651,6 @@
                 outlineId = segment.options.id + OUTLINE_SUFFIX,
                 element;
 
-            segment.registerId(outlineId);
             options = deepExtend({}, options, { id: outlineId });
 
             if (segment.value !== 0) {
@@ -2659,7 +2659,8 @@
                     fillOpacity: highlight.opacity,
                     strokeOpacity: border.opacity,
                     strokeWidth: border.width,
-                    stroke: border.color
+                    stroke: border.color,
+                    data: { modelId: segment.options.modelId }
                 }));
             }
 
@@ -3099,15 +3100,13 @@
                             animation: {
                                 type: FADEIN,
                                 delay: segment.categoryIx * PIE_SECTOR_ANIM_DELAY
-                            }
+                            },
+                            data: { modelId: segment.options.modelId }
                         });
-                        lines.push(connectorLine);
-                        segment.registerId(connectorLine.options.id, seriesIx);
-                    }
-                    segment.registerId(label.options.id, seriesIx);
-                }
 
-                segment.registerId(segment.options.id, seriesIx);
+                        lines.push(connectorLine);
+                    }
+                }
             }
 
             append(lines,
