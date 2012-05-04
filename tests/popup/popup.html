@@ -445,7 +445,7 @@
             test("update position of the popup on window.onresize", function() {
                 var called = false,
                     MyPopup = Popup.extend({
-                        _update: function() {
+                        _position: function() {
                             called = true;
                         }
                     });
