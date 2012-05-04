@@ -385,50 +385,50 @@ namespace KendoUI.Mvc.UI
             return NumericTextBoxBuilder<T>.Create(Register(() => new NumericTextBox<T>(ViewContext, ClientSideObjectWriterFactory)));
         }
 
-        /// <summary>
-        /// Creates a new <see cref="CurrencyTextBox"/>.
-        /// </summary>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().CurrencyTextBox()
-        ///             .Name("CurrencyTextBox")
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public virtual CurrencyTextBoxBuilder CurrencyTextBox()
-        {
-            return CurrencyTextBoxBuilder.Create(Register(() => new CurrencyTextBox(ViewContext, ClientSideObjectWriterFactory, new TextBoxBaseHtmlBuilderFactory<decimal>())));
-        }
+        ///// <summary>
+        ///// Creates a new <see cref="CurrencyTextBox"/>.
+        ///// </summary>
+        ///// <example>
+        ///// <code lang="CS">
+        /////  &lt;%= Html.Telerik().CurrencyTextBox()
+        /////             .Name("CurrencyTextBox")
+        ///// %&gt;
+        ///// </code>
+        ///// </example>
+        //public virtual CurrencyTextBoxBuilder CurrencyTextBox()
+        //{
+        //    return CurrencyTextBoxBuilder.Create(Register(() => new CurrencyTextBox(ViewContext, ClientSideObjectWriterFactory, new TextBoxBaseHtmlBuilderFactory<decimal>())));
+        //}
 
-        /// <summary>
-        /// Creates a new <see cref="PercentTextBox"/>.
-        /// </summary>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().PercentTextBox()
-        ///             .Name("PercentTextBox")
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public virtual PercentTextBoxBuilder PercentTextBox()
-        {
-            return PercentTextBoxBuilder.Create(Register(() => new PercentTextBox(ViewContext, ClientSideObjectWriterFactory, new TextBoxBaseHtmlBuilderFactory<double>())));
-        }
+        ///// <summary>
+        ///// Creates a new <see cref="PercentTextBox"/>.
+        ///// </summary>
+        ///// <example>
+        ///// <code lang="CS">
+        /////  &lt;%= Html.Telerik().PercentTextBox()
+        /////             .Name("PercentTextBox")
+        ///// %&gt;
+        ///// </code>
+        ///// </example>
+        //public virtual PercentTextBoxBuilder PercentTextBox()
+        //{
+        //    return PercentTextBoxBuilder.Create(Register(() => new PercentTextBox(ViewContext, ClientSideObjectWriterFactory, new TextBoxBaseHtmlBuilderFactory<double>())));
+        //}
 
-        /// <summary>
-        /// Creates a new <see cref="IntegerTextBox"/>.
-        /// </summary>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().IntegerTextBox()
-        ///             .Name("IntegerTextBox")
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public virtual IntegerTextBoxBuilder IntegerTextBox()
-        {
-            return IntegerTextBoxBuilder.Create(Register(() => new IntegerTextBox(ViewContext, ClientSideObjectWriterFactory, new TextBoxBaseHtmlBuilderFactory<int>())));
-        }
+        ///// <summary>
+        ///// Creates a new <see cref="IntegerTextBox"/>.
+        ///// </summary>
+        ///// <example>
+        ///// <code lang="CS">
+        /////  &lt;%= Html.Telerik().IntegerTextBox()
+        /////             .Name("IntegerTextBox")
+        ///// %&gt;
+        ///// </code>
+        ///// </example>
+        //public virtual IntegerTextBoxBuilder IntegerTextBox()
+        //{
+        //    return IntegerTextBoxBuilder.Create(Register(() => new IntegerTextBox(ViewContext, ClientSideObjectWriterFactory, new TextBoxBaseHtmlBuilderFactory<int>())));
+        //}
 
         /// <summary>
         /// Creates a new <see cref="Window"/>.
@@ -747,137 +747,137 @@ namespace KendoUI.Mvc.UI
             return builder;
         }
 
-        /// <summary>
-        /// Creates a new <see cref="IntegerTextBox{Nullable{int}}"/>.
-        /// </summary>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().IntegerTextBoxFor(m=>m.Property) %&gt;
-        /// </code>
-        /// </example>
-        public virtual IntegerTextBoxBuilder IntegerTextBoxFor(Expression<Func<TModel, Nullable<int>>> expression)
-        {
-            Guard.IsNotNull(expression, "expression");
+        ///// <summary>
+        ///// Creates a new <see cref="IntegerTextBox{Nullable{int}}"/>.
+        ///// </summary>
+        ///// <example>
+        ///// <code lang="CS">
+        /////  &lt;%= Html.Telerik().IntegerTextBoxFor(m=>m.Property) %&gt;
+        ///// </code>
+        ///// </example>
+        //public virtual IntegerTextBoxBuilder IntegerTextBoxFor(Expression<Func<TModel, Nullable<int>>> expression)
+        //{
+        //    Guard.IsNotNull(expression, "expression");
 
-            IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
+        //    IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
-            return IntegerTextBox()
-                    .Name(GetName(expression))
-                    .Value((Nullable<int>)ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model)
-                    .MinValue(GetRangeValidationParameter<int>(validators, minimumValidator) ?? int.MinValue)
-                    .MaxValue(GetRangeValidationParameter<int>(validators, maximumValidator) ?? int.MaxValue);
-        }
+        //    return IntegerTextBox()
+        //            .Name(GetName(expression))
+        //            .Value((Nullable<int>)ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model)
+        //            .MinValue(GetRangeValidationParameter<int>(validators, minimumValidator) ?? int.MinValue)
+        //            .MaxValue(GetRangeValidationParameter<int>(validators, maximumValidator) ?? int.MaxValue);
+        //}
 
-        /// <summary>
-        /// Creates a new <see cref="IntegerTextBox{int}"/>.
-        /// </summary>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().IntegerTextBoxFor(m=>m.Property) %&gt;
-        /// </code>
-        /// </example>
-        public virtual IntegerTextBoxBuilder IntegerTextBoxFor(Expression<Func<TModel, int>> expression)
-        {
-            Guard.IsNotNull(expression, "expression");
+        ///// <summary>
+        ///// Creates a new <see cref="IntegerTextBox{int}"/>.
+        ///// </summary>
+        ///// <example>
+        ///// <code lang="CS">
+        /////  &lt;%= Html.Telerik().IntegerTextBoxFor(m=>m.Property) %&gt;
+        ///// </code>
+        ///// </example>
+        //public virtual IntegerTextBoxBuilder IntegerTextBoxFor(Expression<Func<TModel, int>> expression)
+        //{
+        //    Guard.IsNotNull(expression, "expression");
 
-            IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
+        //    IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
-            var value = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
+        //    var value = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
 
-            return IntegerTextBox()
-                    .Name(GetName(expression))
-                    .Value(value == null ? default(int) : (int)value)
-                    .MinValue(GetRangeValidationParameter<int>(validators, minimumValidator) ?? int.MinValue)
-                    .MaxValue(GetRangeValidationParameter<int>(validators, maximumValidator) ?? int.MaxValue);
-        }
+        //    return IntegerTextBox()
+        //            .Name(GetName(expression))
+        //            .Value(value == null ? default(int) : (int)value)
+        //            .MinValue(GetRangeValidationParameter<int>(validators, minimumValidator) ?? int.MinValue)
+        //            .MaxValue(GetRangeValidationParameter<int>(validators, maximumValidator) ?? int.MaxValue);
+        //}
 
-        /// <summary>
-        /// Creates a new <see cref="CurrencyTextBox{Nullable{decimal}}"/>.
-        /// </summary>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().CurrencyTextBoxFor(m=>m.Property) %&gt;
-        /// </code>
-        /// </example>
-        public virtual CurrencyTextBoxBuilder CurrencyTextBoxFor(Expression<Func<TModel, Nullable<decimal>>> expression)
-        {
-            Guard.IsNotNull(expression, "expression");
+        ///// <summary>
+        ///// Creates a new <see cref="CurrencyTextBox{Nullable{decimal}}"/>.
+        ///// </summary>
+        ///// <example>
+        ///// <code lang="CS">
+        /////  &lt;%= Html.Telerik().CurrencyTextBoxFor(m=>m.Property) %&gt;
+        ///// </code>
+        ///// </example>
+        //public virtual CurrencyTextBoxBuilder CurrencyTextBoxFor(Expression<Func<TModel, Nullable<decimal>>> expression)
+        //{
+        //    Guard.IsNotNull(expression, "expression");
 
-            IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
+        //    IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
-            return CurrencyTextBox()
-                    .Name(GetName(expression))
-                    .Value((Nullable<decimal>)ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model)
-                    .MinValue(GetRangeValidationParameter<decimal>(validators, minimumValidator) ?? decimal.MinValue)
-                    .MaxValue(GetRangeValidationParameter<decimal>(validators, maximumValidator) ?? decimal.MaxValue);
-        }
+        //    return CurrencyTextBox()
+        //            .Name(GetName(expression))
+        //            .Value((Nullable<decimal>)ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model)
+        //            .MinValue(GetRangeValidationParameter<decimal>(validators, minimumValidator) ?? decimal.MinValue)
+        //            .MaxValue(GetRangeValidationParameter<decimal>(validators, maximumValidator) ?? decimal.MaxValue);
+        //}
 
-        /// <summary>
-        /// Creates a new <see cref="CurrencyTextBox{decimal}"/>.
-        /// </summary>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().CurrencyTextBoxFor(m=>m.Property) %&gt;
-        /// </code>
-        /// </example>
-        public virtual CurrencyTextBoxBuilder CurrencyTextBoxFor(Expression<Func<TModel, decimal>> expression)
-        {
-            Guard.IsNotNull(expression, "expression");
+        ///// <summary>
+        ///// Creates a new <see cref="CurrencyTextBox{decimal}"/>.
+        ///// </summary>
+        ///// <example>
+        ///// <code lang="CS">
+        /////  &lt;%= Html.Telerik().CurrencyTextBoxFor(m=>m.Property) %&gt;
+        ///// </code>
+        ///// </example>
+        //public virtual CurrencyTextBoxBuilder CurrencyTextBoxFor(Expression<Func<TModel, decimal>> expression)
+        //{
+        //    Guard.IsNotNull(expression, "expression");
 
-            IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
+        //    IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
-            var value = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
+        //    var value = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
 
-            return CurrencyTextBox()
-                    .Name(GetName(expression))
-                    .Value(value == null ? default(decimal) : (decimal)value)
-                    .MinValue(GetRangeValidationParameter<decimal>(validators, minimumValidator) ?? decimal.MinValue)
-                    .MaxValue(GetRangeValidationParameter<decimal>(validators, maximumValidator) ?? decimal.MaxValue);
-        }
+        //    return CurrencyTextBox()
+        //            .Name(GetName(expression))
+        //            .Value(value == null ? default(decimal) : (decimal)value)
+        //            .MinValue(GetRangeValidationParameter<decimal>(validators, minimumValidator) ?? decimal.MinValue)
+        //            .MaxValue(GetRangeValidationParameter<decimal>(validators, maximumValidator) ?? decimal.MaxValue);
+        //}
 
-        /// <summary>
-        /// Creates a new <see cref="PercentTextBox{Nullable{double}}"/>.
-        /// </summary>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().PercentTextBoxFor(m=>m.Property) %&gt;
-        /// </code>
-        /// </example>
-        public virtual PercentTextBoxBuilder PercentTextBoxFor(Expression<Func<TModel, Nullable<double>>> expression)
-        {
-            Guard.IsNotNull(expression, "expression");
+        ///// <summary>
+        ///// Creates a new <see cref="PercentTextBox{Nullable{double}}"/>.
+        ///// </summary>
+        ///// <example>
+        ///// <code lang="CS">
+        /////  &lt;%= Html.Telerik().PercentTextBoxFor(m=>m.Property) %&gt;
+        ///// </code>
+        ///// </example>
+        //public virtual PercentTextBoxBuilder PercentTextBoxFor(Expression<Func<TModel, Nullable<double>>> expression)
+        //{
+        //    Guard.IsNotNull(expression, "expression");
 
-            IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
+        //    IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
-            return PercentTextBox()
-                    .Name(GetName(expression))
-                    .Value((Nullable<double>)ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model)
-                    .MinValue(GetRangeValidationParameter<double>(validators, minimumValidator) ?? double.MinValue)
-                    .MaxValue(GetRangeValidationParameter<double>(validators, maximumValidator) ?? double.MaxValue);
-        }
+        //    return PercentTextBox()
+        //            .Name(GetName(expression))
+        //            .Value((Nullable<double>)ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model)
+        //            .MinValue(GetRangeValidationParameter<double>(validators, minimumValidator) ?? double.MinValue)
+        //            .MaxValue(GetRangeValidationParameter<double>(validators, maximumValidator) ?? double.MaxValue);
+        //}
 
-        /// <summary>
-        /// Creates a new <see cref="PercentTextBox{double}"/>.
-        /// </summary>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().PercentTextBoxFor(m=>m.Property) %&gt;
-        /// </code>
-        /// </example>
-        public virtual PercentTextBoxBuilder PercentTextBoxFor(Expression<Func<TModel, double>> expression)
-        {
-            Guard.IsNotNull(expression, "expression");
+        ///// <summary>
+        ///// Creates a new <see cref="PercentTextBox{double}"/>.
+        ///// </summary>
+        ///// <example>
+        ///// <code lang="CS">
+        /////  &lt;%= Html.Telerik().PercentTextBoxFor(m=>m.Property) %&gt;
+        ///// </code>
+        ///// </example>
+        //public virtual PercentTextBoxBuilder PercentTextBoxFor(Expression<Func<TModel, double>> expression)
+        //{
+        //    Guard.IsNotNull(expression, "expression");
 
-            IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
+        //    IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
-            var value = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
+        //    var value = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
 
-            return PercentTextBox()
-                    .Name(GetName(expression))
-                    .Value(value == null ? default(double) : (double)value)
-                    .MinValue(GetRangeValidationParameter<double>(validators, minimumValidator) ?? double.MinValue)
-                    .MaxValue(GetRangeValidationParameter<double>(validators, maximumValidator) ?? double.MaxValue);
-        }
+        //    return PercentTextBox()
+        //            .Name(GetName(expression))
+        //            .Value(value == null ? default(double) : (double)value)
+        //            .MinValue(GetRangeValidationParameter<double>(validators, minimumValidator) ?? double.MinValue)
+        //            .MaxValue(GetRangeValidationParameter<double>(validators, maximumValidator) ?? double.MaxValue);
+        //}
 
         /// <summary>
         /// Creates a new <see cref="DateTimePicker{Nullable{DateTime}}"/>.

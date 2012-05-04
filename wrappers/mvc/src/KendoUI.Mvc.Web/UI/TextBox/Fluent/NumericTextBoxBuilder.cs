@@ -3,9 +3,9 @@ namespace KendoUI.Mvc.UI
 
     using KendoUI.Mvc.Extensions;
     using KendoUI.Mvc.Infrastructure;
+    using KendoUI.Mvc.UI;
+    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Web.UI.WebControls;
 
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="NumericTextBox"/> component.
@@ -71,17 +71,17 @@ namespace KendoUI.Mvc.UI
             return this;
         }
 
-        ///// <summary>
-        ///// Enables or disables the spin buttons.
-        ///// </summary>
-        ///// <param name="allowSpinner"></param>
-        ///// <returns></returns>
-        //public TBuilder Spinners(bool allowSpinner)
-        //{
-        //    Component.Spinners = allowSpinner;
+        /// <summary>
+        /// Enables or disables the spin buttons.
+        /// </summary>
+        /// <param name="allowSpinner"></param>
+        /// <returns></returns>
+        public NumericTextBoxBuilder<T> Spinners(bool value)
+        {
+            Component.Spinners = value;
 
-        //    return this as TBuilder;
-        //}
+            return this;
+        }
 
         ///// <summary>
         ///// Define the tooltip text of the up button.
@@ -107,28 +107,28 @@ namespace KendoUI.Mvc.UI
         //    return this as TBuilder;
         //}
 
-        ///// <summary>
-        ///// Configures the client-side events.
-        ///// </summary>
-        ///// <param name="clientEventsAction">The client events action.</param>
-        ///// <example>
-        ///// <code lang="CS">
-        /////  &lt;%= Html.Telerik().NumericTextBox()
-        /////             .Name("NumericTextBox")
-        /////             .ClientEvents(events =>
-        /////                 events.OnLoad("onLoad").OnChange("onChange")
-        /////             )
-        ///// %&gt;
-        ///// </code>
-        ///// </example>
-        //public TBuilder ClientEvents(Action<TextBoxBaseClientEventsBuilder> clientEventsAction)
-        //{
-        //    Guard.IsNotNull(clientEventsAction, "clientEventsAction");
+        /// <summary>
+        /// Configures the client-side events.
+        /// </summary>
+        /// <param name="clientEventsAction">The client events action.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Telerik().NumericTextBox()
+        ///             .Name("NumericTextBox")
+        ///             .ClientEvents(events =>
+        ///                 events.OnLoad("onLoad").OnChange("onChange")
+        ///             )
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public NumericTextBoxBuilder<T> ClientEvents(Action<NumericTextBoxClientEventsBuilder> clientEventsAction)
+        {
+            Guard.IsNotNull(clientEventsAction, "clientEventsAction");
 
-        //    clientEventsAction(new TextBoxBaseClientEventsBuilder(Component.ClientEvents, Component.ViewContext));
+            clientEventsAction(new NumericTextBoxClientEventsBuilder(Component.ClientEvents));
 
-        //    return this as TBuilder;
-        //}
+            return this;
+        }
 
         /// <summary>
         /// Sets the Input HTML attributes.
@@ -175,6 +175,24 @@ namespace KendoUI.Mvc.UI
             Guard.IsNotNullOrEmpty(format, "format");
 
             Component.Format = format;
+
+            return this;
+        }
+
+        public NumericTextBoxBuilder<T> Culture(string culture)
+        {
+            Guard.IsNotNullOrEmpty(culture, "culture");
+
+            Component.Culture = culture;
+
+            return this;
+        }
+
+        public NumericTextBoxBuilder<T> Decimals(int decimals)
+        {
+            Guard.IsNotNegative(decimals, "decimals");
+
+            Component.Decimals = decimals;
 
             return this;
         }

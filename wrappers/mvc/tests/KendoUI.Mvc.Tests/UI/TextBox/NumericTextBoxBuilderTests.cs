@@ -5,13 +5,13 @@ namespace KendoUI.Mvc.UI.Tests
 
     public class NumericTextBoxBuilderTests
     {
-        private readonly NumericTextBox<double> input;
-        private readonly NumericTextBoxBuilder<double> builder;
+        //private readonly NumericTextBox<double> input;
+        //private readonly NumericTextBoxBuilder<double> builder;
 
         public NumericTextBoxBuilderTests()
         {
-            input = TextBoxBaseTestHelper.CreateNumericTextBox<double>(null);
-            builder = new NumericTextBoxBuilder<double>(input);
+            //input = TextBoxBaseTestHelper.CreateNumericTextBox<double>(null);
+            //builder = new NumericTextBoxBuilder<double>(input);
         }
 
         //[Fact]
