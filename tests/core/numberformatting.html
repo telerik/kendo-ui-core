@@ -270,6 +270,21 @@
                 equal(toString(1000010.1, " 0000#0#,#.00 "), " 001 000 010,10 ");
             });
 
+            test("format number using specific culture", function() {
+                kendo.cultures["custom"] = {
+                    calendars: { standard: {}},
+                    numberFormat: {
+                        decimals: 4,
+                        pattern: ["-n"],
+                        ",": " ",
+                        ".": ",",
+                        groupSize: [3]
+                    }
+                };
+
+                equal(toString(1110.1, "n", "custom"), "1 110,1000");
+            });
+
         </script>
     </body>
 </html>

@@ -887,11 +887,15 @@ function pad(number) {
      * </p>
      */
 
-     function findCulture(cultureName) {
-        if (cultureName !== undefined) {
+     function findCulture(culture) {
+        if (culture) {
+            if (culture.name) {
+                return culture;
+            }
+
             var cultures = kendo.cultures;
 
-            return cultures[cultureName] || cultures[cultureName.split("-")[0]] || null;
+            return cultures[culture] || cultures[culture.split("-")[0]] || null;
         }
 
         return null;
@@ -914,8 +918,16 @@ function pad(number) {
     //set current culture to en-US.
     kendo.culture(EN);
 
-    function formatDate(date, format) {
-        var calendar = kendo.cultures.current.calendar,
+    function formatDate(date, format, culture) {
+        if (culture) {
+            culture = findCulture(culture);
+        }
+
+        if (!culture) {
+            culture = kendo.cultures.current;
+        }
+
+        var calendar = culture.calendars.standard,
             days = calendar.days,
             months = calendar.months;
 
@@ -975,9 +987,16 @@ function pad(number) {
     }
 
     //number formatting
-    function formatNumber(number, format) {
-        var culture = kendo.cultures.current,
-            numberFormat = culture.numberFormat,
+    function formatNumber(number, format, culture) {
+        if (culture) {
+            culture = findCulture(culture);
+        }
+
+        if (!culture) {
+            culture = kendo.cultures.current;
+        }
+
+        var numberFormat = culture.numberFormat,
             groupSize = numberFormat.groupSize[0],
             groupSeparator = numberFormat[COMMA],
             decimal = numberFormat[POINT],
@@ -1274,12 +1293,12 @@ function pad(number) {
         return number;
     }
 
-    var toString = function(value, fmt) {
+    var toString = function(value, fmt, culture) {
         if (fmt) {
             if (value instanceof Date) {
-                return formatDate(value, fmt);
+                return formatDate(value, fmt, culture);
             } else if (typeof value === NUMBER) {
-                return formatNumber(value, fmt);
+                return formatNumber(value, fmt, culture);
             }
         }
 
@@ -1497,11 +1516,12 @@ function pad(number) {
             date = null,
             length, patterns;
 
+        if (culture) {
+            culture = kendo.findCulture(culture);
+        }
+
         if (!culture) {
-            culture = kendo.culture();
-        } else if (typeof culture === STRING) {
-            kendo.culture(culture);
-            culture = kendo.culture();
+            culture = kendo.cultures.current;
         }
 
         if (!formats) {
@@ -1548,7 +1568,14 @@ function pad(number) {
         }
 
         value = value.toString();
-        culture = kendo.cultures[culture] || kendo.cultures.current;
+
+        if (culture) {
+            culture = kendo.findCulture(culture);
+        }
+
+        if (!culture) {
+            culture = kendo.cultures.current;
+        }
 
         var number = culture.numberFormat,
             percent = number.percent,
