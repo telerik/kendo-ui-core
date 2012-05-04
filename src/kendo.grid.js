@@ -301,7 +301,22 @@
             .add(document.body)
             .css('cursor', value);
     }
+    function buildEmptyAggregatesObject(aggregates) {
+            var idx,
+                length,
+                fieldsMap = {};
 
+            if (!isEmptyObject(aggregates)) {
+                if (isArray(aggregates)) {
+                    for (idx = 0, length = aggregates.length; idx < length; idx++) {
+                        fieldsMap[aggregates[idx].field] = {};
+                    }
+                } else {
+                    fieldsMap[aggregates.field] = {};
+                }
+            }
+            return fieldsMap;
+        }
     var Grid = Widget.extend({
         init: function(element, options) {
             var that = this;
@@ -1624,7 +1639,9 @@
                 options = that.options;
 
             if (footerTemplate) {
-                html = $(that._wrapFooter(footerTemplate(aggregates || {})));
+                aggregates = !isEmptyObject(aggregates) ? aggregates : buildEmptyAggregatesObject(that.dataSource.aggregate());
+
+                html = $(that._wrapFooter(footerTemplate(aggregates)));
 
                 if (that.footer) {
                     var tmp = html;
@@ -1889,18 +1906,8 @@
                 scope = {},
                 dataSource = that.dataSource,
                 groups = dataSource.group().length,
-                fieldsMap = {},
+                fieldsMap = buildEmptyAggregatesObject(aggregates),
                 column;
-
-            if (!isEmptyObject(aggregates)) {
-                if (isArray(aggregates)) {
-                    for (idx = 0, length = aggregates.length; idx < length; idx++) {
-                        fieldsMap[aggregates[idx].field] = true;
-                    }
-                } else {
-                    fieldsMap[aggregates.field] = true;
-                }
-            }
 
             html += '<tr class="' + rowClass + '">';
 

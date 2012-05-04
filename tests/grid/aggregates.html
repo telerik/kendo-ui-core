@@ -176,6 +176,21 @@
                 equal(footerCells.last().html(), "&nbsp;");
             });
 
+            test("column footer template with aggregate expression and empty data", function() {
+                var grid = new Grid(table(), {
+                    dataSource: {
+                        data: [ ],
+                        aggregate: { field: "foo", aggregate: "count" }
+                    },
+                    columns: [ { field: "foo", footerTemplate: "count:#= typeof sum != 'undefined' ? sum : 0 #" },"bar" ]
+                }),
+                footer = grid.wrapper.children("div.k-grid-footer"),
+                footerCells = footer.find("tr.k-footer-template").find("td");
+
+                equal(footerCells.first().text(), "count:0");
+                equal(footerCells.last().html(), "&nbsp;");
+            });
+
             test("column footer template with both aggregate expression and column template", function() {
                 var grid = new Grid(table(), {
                     dataSource: {
