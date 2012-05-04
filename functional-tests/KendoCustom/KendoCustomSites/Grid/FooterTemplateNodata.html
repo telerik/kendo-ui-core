@@ -1,0 +1,55 @@
+﻿<!doctype html>
+<html>
+<head>
+    <title>Grid virtualization using local data</title>
+    <link href="http://mvc-kendobuild/staging/content/cdn/styles/kendo.common.min.css"
+        rel="stylesheet" />
+    <link href="http://mvc-kendobuild/staging/content/cdn/styles/kendo.blueopal.min.css"
+        rel="stylesheet" />
+    <script src="http://mvc-kendobuild/staging/content/cdn/js/jquery.min.js"></script>
+    <script src="http://mvc-kendobuild/staging/content/cdn/js/kendo.all.min.js"></script>
+    <script src="http://mvc-kendobuild/staging/content/shared/js/people.js"></script>
+</head>
+<body>
+    <div id="grid"></div>
+    <div id="info">clear</div>
+
+    <script>
+   
+    $("#grid").kendoGrid({
+        columns: [
+            {
+                field: "FirstName",
+                title: "First Name",
+            },
+            {
+                field: "LastName",
+                title: "Last Name"
+            },
+            {
+                field: "Age",
+                title: "Age",
+                aggregates: ["sum"],
+                footerTemplate: "#= typeof sum != 'undefined' ? sum : 0 #"
+            }
+        ],
+        dataSource: {
+            data: [
+            ],
+            aggregate: [
+                {
+                field: "Age",
+                aggregate: "sum"
+                }
+             ]
+        }
+    });
+
+
+        window.onerror = function (message) {
+
+            document.getElementById("info").innerHTML = "error present";
+        }
+    </script>
+</body>
+</html>
