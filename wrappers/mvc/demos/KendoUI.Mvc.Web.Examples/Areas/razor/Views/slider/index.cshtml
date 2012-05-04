@@ -1,26 +1,99 @@
 <div id="example" class="k-content">
-    <div class="configuration k-widget k-header">
-        <span class="infoHead">Information</span>
-        <p>
-            The Upload can be used as a drop-in replacement
-            for file input elements.
-        </p>
-        <p>
-            This "synchronous" mode does not require
-            special handling on the server.
-        </p>
-    </div>
-    <form method="post" action='@Url.Action("Submit")' style="width:45%">
-        <div>
-            <input name="files" id="files" type="file" />
-            <p>
-                <input type="submit" value="Submit" class="k-button" />
-            </p>
+    <div id="wrapper">
+        @(Html.Kendo().Slider<int>()
+              .Name("slider")
+              .IncreaseButtonTitle("Right")
+              .DecreaseButtonTitle("Left")
+              .Min(-10)
+              .Max(10)
+              .SmallStep(2)
+              .LargeStep(5)
+              .HtmlAttributes(new { @class = "balSlider" }))
+        <div id="equalizer">
+            @(Html.Kendo().Slider<int>()
+                  .Name("eqSlider1")
+                  .Orientation(SliderOrientation.Vertical)
+                  .Min(-20)
+                  .Max(20)
+                  .SmallStep(1)
+                  .LargeStep(20)
+                  .ShowButtons(false)
+                  .Value(10)
+                  .HtmlAttributes(new { @class = "balSlider" }))
+
+            @(Html.Kendo().Slider<int>()
+                  .Name("eqSlider2")
+                  .Orientation(SliderOrientation.Vertical)
+                  .Min(-20)
+                  .Max(20)
+                  .SmallStep(1)
+                  .LargeStep(20)
+                  .ShowButtons(false)
+                  .Value(5)
+                  .HtmlAttributes(new { @class = "eqSlider" }))
+
+            @(Html.Kendo().Slider<int>()
+                  .Name("eqSlider3")
+                  .Orientation(SliderOrientation.Vertical)
+                  .Min(-20)
+                  .Max(20)
+                  .SmallStep(1)
+                  .LargeStep(20)
+                  .ShowButtons(false)
+                  .Value(0)
+                  .HtmlAttributes(new { @class = "eqSlider" }))
+
+            @(Html.Kendo().Slider<int>()
+                  .Name("eqSlider4")
+                  .Orientation(SliderOrientation.Vertical)
+                  .Min(-20)
+                  .Max(20)
+                  .SmallStep(1)
+                  .LargeStep(20)
+                  .ShowButtons(false)
+                  .Value(10)
+                  .HtmlAttributes(new { @class = "eqSlider" }))
+
+            @(Html.Kendo().Slider<int>()
+                  .Name("eqSlider5")
+                  .Orientation(SliderOrientation.Vertical)
+                  .Min(-20)
+                  .Max(20)
+                  .SmallStep(1)
+                  .LargeStep(20)
+                  .ShowButtons(false)
+                  .Value(15)
+                  .HtmlAttributes(new { @class = "eqSlider" }))
         </div>
-    </form>
-    <script>
-        $(document).ready(function() {
-            $("#files").kendoUpload();
-        });
-    </script>
+    </div>
+
+    <style>
+        #wrapper {
+            width: 300px;
+            height: 255px;
+            padding: 45px 0 0 0;
+            margin: 0 auto;
+            background: url('../../content/web/slider/eqBack.png') no-repeat 0 0;
+            text-align: center;
+        }
+        #equalizer {
+            margin-top: 75px;
+            padding-right: 15px;
+        }
+        .balSlider {
+            width: 240px;
+        }
+        #slider .k-slider-selection {
+            display: none;
+        }
+        .eqSlider {
+            display: inline-block;
+            zoom: 1;
+            margin: 0 12px;
+            height: 122px;
+        }
+                
+        *+html .eqSlider {display:inline;}
+                
+    </style>
 </div>

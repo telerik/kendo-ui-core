@@ -59,7 +59,7 @@ namespace KendoUI.Mvc.UI.Tests
         {
             const int value = 1;
             builder.Min(value);
-            component.MinValue.ShouldEqual(value);
+            component.Min.ShouldEqual(value);
         }
 
         [Fact]
@@ -75,7 +75,7 @@ namespace KendoUI.Mvc.UI.Tests
             const int value = 20;
             builder.Max(value);
 
-            component.MaxValue.ShouldEqual(value);
+            component.Max.ShouldEqual(value);
         }
 
         [Fact]
