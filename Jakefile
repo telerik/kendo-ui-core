@@ -253,6 +253,9 @@ namespace("mvc", function() {
                 src: path.join(DEMOS_SHARED, SCRIPTS_PATH),
                 dst: scriptsDest
             }, {
+                src: path.join(DEMOS_PATH, "content", suite),
+                dst: stylesDest
+            }, {
                 name: SUITE_CSS,
                 src: sharedStyles,
                 dst: stylesDest
@@ -264,10 +267,16 @@ namespace("mvc", function() {
         ];
 
         sharedFiles.forEach(function(file) {
-            kendoBuild.copyFileSync(
-                path.join(file.src, file.name),
-                path.join(file.dst, file.name)
-            );
+            kendoBuild.mkdir(file.dst);
+
+            if (file.name) {
+                kendoBuild.copyFileSync(
+                    path.join(file.src, file.name),
+                    path.join(file.dst, file.name)
+                );
+            } else {
+                kendoBuild.copyDirSyncRecursive(file.src, file.dst);
+            }
         });
 
         kendoScripts.buildSuiteScripts(suite, scriptsDest, "", true);
