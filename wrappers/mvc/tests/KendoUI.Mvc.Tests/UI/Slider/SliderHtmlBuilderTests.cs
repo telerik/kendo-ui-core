@@ -6,7 +6,6 @@ namespace KendoUI.Mvc.UI.Tests
 
     public class SliderHtmlBuilderTests
     {
-
         private SliderRenderingData renderingData;
         private SliderHtmlBuilder builder;
 
@@ -104,7 +103,7 @@ namespace KendoUI.Mvc.UI.Tests
 
             IHtmlNode div = builder.Build();
 
-            div.Attribute("class").ShouldContain("t-state-disabled");
+            div.Attribute("class").ShouldContain("k-state-disabled");
         }
     }
 }

@@ -64,7 +64,7 @@ namespace KendoUI.Mvc.UI.Fluent
         /// <summary>Sets the minimum value of the range slider.</summary>
         public RangeSliderBuilder<T> Min(T value)
         {
-            Component.MinValue = value;
+            Component.Min = value;
 
             return this;
         }
@@ -72,7 +72,7 @@ namespace KendoUI.Mvc.UI.Fluent
         /// <summary>Sets the maximum value of the range slider.</summary>
         public RangeSliderBuilder<T> Max(T value)
         {
-            Component.MaxValue = value;
+            Component.Max = value;
 
             return this;
         }

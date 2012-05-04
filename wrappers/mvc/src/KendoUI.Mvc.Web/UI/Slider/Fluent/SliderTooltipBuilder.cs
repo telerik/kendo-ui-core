@@ -48,5 +48,22 @@ namespace KendoUI.Mvc.UI.Fluent
 
             return this;
         }
+
+        /// <summary>Gets or sets the template for displaying the value in the tooltip.</summary>
+        /// <param name="template">The template.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Telerik().Slider()
+        ///             .Name("Slider")
+        ///             .Tooltip(tooltip => tooltip.template("<#= value #>"))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public SliderTooltipBuilder Tempalte(string template)
+        {
+            settings.Template = template;
+
+            return this;
+        }
     }
 }

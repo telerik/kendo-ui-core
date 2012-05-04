@@ -8,9 +8,9 @@ namespace KendoUI.Mvc.UI.Html
 
         public string Name { get; set; }
 
-        public object MinValue { get; set; }
+        public object Min { get; set; }
 
-        public object MaxValue { get; set; }
+        public object Max { get; set; }
 
         public object SmallStep { get; set; }
 
