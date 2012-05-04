@@ -24,7 +24,7 @@
 
         <script>
             $(function() {
-                    new kendo.mobile.Application();
+                new kendo.mobile.Application(document.body, {initial: "#bar" });
             });
 
             function bar() {
@@ -38,13 +38,13 @@
 
     </head>
     <body>
-        <div data-role="view">
-            <a href="#foo" data-role="button" data-rel="actionsheet">Reply</a>
+        <div data-role="view" id="foo">
+            <a data-role="button" data-rel="actionsheet">Reply</a>
 
-            <ul data-role="actionsheet" id="foo">
-                <li><a href="#" data-action="bar">Bar</a></li>
-                <li><a href="#" data-action="baz">Baz</a></li>
-            </ul>
+        </div>
+
+        <div data-role="view" id="bar">
+            <a href="#foo" data-role="button">Go to index</a>
         </div>
     </body>
 </html>

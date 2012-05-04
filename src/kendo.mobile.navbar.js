@@ -91,7 +91,6 @@
             Widget.fn.init.call(that, element, options);
 
             element = that.element;
-            that._title = document.title;
 
             element.addClass("km-navbar").wrapInner($('<div class="km-view-title" />'));
             createContainer("left", element);
@@ -116,7 +115,6 @@
         */
         title: function(value) {
             this.element.find(roleSelector("view-title")).text(value);
-            document.title = value !== undefined ? value : this._title;
         },
 
         viewShow: function(view) {

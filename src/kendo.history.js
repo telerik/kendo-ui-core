@@ -28,7 +28,7 @@
 
             that.current = that._currentLocation();
             that._listenToLocationChange();
-            that.trigger("ready", this.url());
+            that.trigger("ready", {url: that.current});
         },
 
         stop: function() {
@@ -143,22 +143,8 @@
             }
 
             if (!silent) {
-                that.trigger("change", that.url());
+                that.trigger("change", {url: that.current});
             }
-        },
-
-        url: function() {
-            var parts = this.current.split('?'),
-                url = {location: parts[0], params: {}, string: this.current},
-                paramParts = (parts[1] || "").split(/&|=/),
-                length = paramParts.length,
-                idx = 0;
-
-            for (; idx < length; idx += 2) {
-                url.params[paramParts[idx]] = paramParts[idx + 1];
-            }
-
-            return url;
         }
     });
 

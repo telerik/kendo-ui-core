@@ -1,0 +1,90 @@
+<!DOCTYPE dom>
+<html>
+    <head>
+        <title>kendo.mobile.ui.Pane Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.history.js"></script>
+        <script src="../../src/kendo.mobile.scroller.js"></script>
+        <script src="../../src/kendo.mobile.view.js"></script>
+        <script src="../../src/kendo.mobile.pane.js"></script>
+        <script src="../../src/kendo.mobile.splitview.js"></script>
+        <script src="../../src/kendo.mobile.loader.js"></script>
+        <script src="../../src/kendo.mobile.pane.js"></script>
+        <script src="../../src/kendo.mobile.application.js"></script>
+        <script src="../../src/kendo.mobile.button.js"></script>
+        <script src="../jquery.mockjax.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.mobile.ui.Pane Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var pane,
+                root = $("#qunit-fixture");
+
+            function hidden(selector) {
+                ok(!root.find(selector).is(":visible"));
+            }
+
+            function visible(selector) {
+                ok(root.find(selector).is(":visible"));
+            }
+
+            function view(selector) {
+                ok(root.find(selector).data("kendoView"));
+            }
+
+            function buildPane(html) {
+                root.html('<div>' + html + '</div>');
+                return new kendo.mobile.ui.Pane(root.children().first());
+            }
+
+            module("mobile pane", {
+                teardown: function() {
+                    root.empty();
+                }
+            });
+
+            test("navigates to given view", 1, function() {
+                pane = buildPane('<div data-role="view" id="foo">Foo</div><div data-role="view" id="bar">Bar</div>');
+                pane.navigate("#bar");
+                visible("#bar");
+            });
+
+            test("navigates when a button is pressed", 1, function() {
+                pane = buildPane('<div data-role="view" id="foo"><a data-role="button" id="barButton" href="#bar">Go to Bar</a></div><div data-role="view" id="bar">Bar</div>');
+                root.find("#barButton").trigger("mouseup");
+                visible("#bar");
+            });
+
+            test("goes back when a back button is pressed", 3, function() {
+                pane = buildPane('<div data-role="view" id="foo"><a data-role="button" id="barButton" href="#bar">Go to' +
+                        ' Bar</a></div><div data-role="view" id="bar"><a data-role="backbutton" id="fooButton" ' +
+                        '> Back</a></div>');
+
+                pane.navigate("#foo");
+                root.find("#barButton").trigger("mouseup");
+                visible("#bar");
+
+                root.find("#fooButton").trigger("mouseup");
+                visible("#foo");
+                hidden("#bar");
+            });
+
+
+        </script>
+    </body>
+</html>

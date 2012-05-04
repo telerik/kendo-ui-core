@@ -18,6 +18,8 @@
         <script src="../../../src/kendo.mobile.listview.js"></script>
         <script src="../../../src/kendo.mobile.scroller.js"></script>
         <script src="../../../src/kendo.mobile.view.js"></script>
+        <script src="../../../src/kendo.mobile.loader.js"></script>
+        <script src="../../../src/kendo.mobile.pane.js"></script>
         <script src="../../../src/kendo.mobile.application.js"></script>
         <link rel="stylesheet" href="../../qunit/qunit/qunit.css" />
         <style>
@@ -287,7 +289,7 @@
                 }
 
                 setup('<div data-role="view" data-init="initListView"><div id="listview" style="height:300px"></div></div>');
-                var drag = application.view.scroller.drag;
+                var drag = application.scroller().drag;
 
                 $.mockjaxClear();
                 $.mockjax({ url: "foo.json", responseText: ["foo", "bar", "baz"] });
@@ -446,7 +448,7 @@
                 }
 
                 setup('<div data-role="view" data-init="initListView"><div id="listview" style="height:300px"></div></div>');
-                var scroller = application.view.scroller;
+                var scroller = application.scroller();
 
                 $.mockjaxClear();
                 $.mockjax({ url: "foo.json", responseText: ["foo", "bar", "baz"] });

@@ -2566,7 +2566,6 @@ function pad(number) {
         events: [],
 
         viewShow: $.noop,
-        viewInit: $.noop,
 
         view: function() {
             return this.element.closest(kendo.roleSelector("view")).data("kendoMobileView");
@@ -2628,5 +2627,6 @@ function pad(number) {
         if (widget) {
             return element.data("kendo" + widget.fn.options.prefix + widget.fn.options.name);
         }
-    };
+    }
+
 })(jQuery);
