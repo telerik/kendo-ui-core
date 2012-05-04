@@ -199,7 +199,7 @@
                 }
 
                 animation = extend(true, {}, options.animation.open);
-                animation.effects = kendo.parseEffects(animation.effects, that._update(fixed));
+                animation.effects = kendo.parseEffects(animation.effects, that._position(window, fixed));
                 direction = animation.effects.slideIn ? animation.effects.slideIn.direction : direction;
 
                 if (options.anchor != BODY) {
@@ -294,10 +294,6 @@
             }
         },
 
-        _update: function(fixed) {
-            return this._position($(window), fixed);
-        },
-
         _fit: function(position, size, viewPortSize) {
             var output = 0;
 
@@ -329,6 +325,8 @@
         },
 
         _position: function(viewport, fixed) {
+            viewport = $(viewport);
+
             var that = this,
                 element = that.element,
                 wrapper = that.wrapper,
