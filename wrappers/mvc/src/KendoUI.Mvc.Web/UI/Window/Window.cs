@@ -202,17 +202,25 @@ namespace KendoUI.Mvc.UI
 
             if (ResizingSettings.Enabled)
             {
-                if(ResizingSettings.MinHeight != int.MinValue)
+                if (ResizingSettings.MinHeight != int.MinValue)
+                {
                     objectWriter.Append("minHeight", ResizingSettings.MinHeight);
+                }
 
                 if (ResizingSettings.MinWidth != int.MinValue)
+                {
                     objectWriter.Append("minWidth", ResizingSettings.MinWidth);
+                }
 
                 if (ResizingSettings.MaxHeight != int.MinValue)
+                {
                     objectWriter.Append("maxHeight", ResizingSettings.MaxHeight);
+                }
 
                 if (ResizingSettings.MaxWidth != int.MinValue)
+                {
                     objectWriter.Append("maxWidth", ResizingSettings.MaxWidth);
+                }
             }
 
             objectWriter.Complete();
