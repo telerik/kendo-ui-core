@@ -90,6 +90,7 @@
         Widget = ui.Widget,
         parse = kendo.parseFloat,
         touch = kendo.support.touch,
+        getCulture = kendo.getCulture,
         CHANGE = "change",
         DISABLED = "disabled",
         INPUT = "k-input",
@@ -273,6 +274,7 @@
             max: NULL,
             value: NULL,
             step: 1,
+            culture: "",
             format: "n",
             placeholder: "",
             upArrowText: "Increase value",
@@ -511,12 +513,18 @@
             that._blur();
         },
 
-        _format: function(format) {
-            var numberFormat = kendo.culture().numberFormat;
+        _format: function(format, culture) {
+            format = format.toLowerCase();
 
-            if (format.toLowerCase().indexOf("c") > -1) {
+            if (!culture) {
+                culture = getCulture(this.options.culture);
+            }
+
+            var numberFormat = culture.numberFormat;
+
+            if (format.indexOf("c") > -1) {
                 numberFormat = numberFormat.currency;
-            } else if (format.toLowerCase().indexOf("p") > -1) {
+            } else if (format.indexOf("p") > -1) {
                 numberFormat = numberFormat.percent;
             }
 
@@ -663,7 +671,8 @@
                 options = that.options,
                 format = options.format,
                 decimals = options.decimals,
-                numberFormat = that._format(format),
+                culture = getCulture(options.culture),
+                numberFormat = that._format(format, culture),
                 isNotNull;
 
             if (decimals === NULL) {
@@ -679,7 +688,7 @@
             }
 
             that._value = value = that._adjust(value);
-            that._text.val(isNotNull ? kendo.toString(value, format) : options.placeholder);
+            that._text.val(isNotNull ? kendo.toString(value, format, culture) : options.placeholder);
             that.element.val(isNotNull ? value.toString().replace(POINT, numberFormat[POINT]) : "");
         },
 
