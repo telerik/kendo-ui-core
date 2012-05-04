@@ -46,6 +46,18 @@
                 }, options));
             }
 
+            function createAreaChart(options) {
+                createChart($.extend({
+                    series: [{
+                        type: "area",
+                        data: [1, 2]
+                    }],
+                    categoryAxis: {
+                        categories: ["A"]
+                    }
+                }, options));
+            }
+
             function createBarChart(options) {
                 createChart($.extend({
                     series: [{
@@ -70,19 +82,31 @@
                     $("#" + marker.options.id).click();
                 }
 
+                function segmentClick(x, y) {
+                    var segment = plotArea.charts[0]._segments[0],
+                        element = $("#" + segment.options.id),
+                        offset = element.offset(),
+                        e = new jQuery.Event("click");
+
+                    e.clientX = offset.left + x || 0;
+                    e.clientY = offset.top + y || 0;
+                    element.trigger(e);
+                }
+
                 function lineClick(seriesClickHandler, x, y) {
                     createLineChart({
                         seriesClick: seriesClickHandler
                     });
 
-                    var segment = plotArea.charts[0]._segments[0],
-                        line = $("#" + segment.options.id),
-                        offset = line.offset(),
-                        e = new jQuery.Event("click");
+                    segmentClick(x, y);
+                }
 
-                    e.clientX = offset.left + x || 0;
-                    e.clientY = offset.top + y || 0;
-                    line.trigger(e);
+                function areaClick(seriesClickHandler, x, y) {
+                    createAreaChart({
+                        seriesClick: seriesClickHandler
+                    });
+
+                    segmentClick(x, y);
                 }
 
                 function barClick(seriesClickHandler) {
@@ -168,6 +192,23 @@
 
                 test("fires for closest point when clicking line (2)", 1, function() {
                     lineClick(function(e) { equals(e.value, 2); }, 1000, 0);
+                });
+
+                // ------------------------------------------------------------
+                module("seriesClick / Area", {
+                    teardown: destroyChart
+                });
+
+                test("fires when clicking segment", 1, function() {
+                    areaClick(function() { ok(true); });
+                });
+
+                test("fires for closest point when clicking segment (1)", 1, function() {
+                    areaClick(function(e) { equals(e.value, 1); }, 0, 0);
+                });
+
+                test("fires for closest point when clicking segment (2)", 1, function() {
+                    areaClick(function(e) { equals(e.value, 2); }, 1000, 0);
                 });
 
                 // ------------------------------------------------------------
