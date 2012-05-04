@@ -578,7 +578,7 @@
             * The element that the node is placed over.
             *
             * @param {String} e.dropPosition
-            * Shows where the new sourceLocation would be.
+            * Shows where the source will be dropped. One of the values <strong>over</strong>, <strong>before</strong>, or <strong>after</strong>.
             *
             */
             DROP,
@@ -599,7 +599,7 @@
             * The node that the sourceNode is being dropped upon.
             *
             * @param {String} e.dropPosition
-            * Shows where the new sourceLocation would be.
+            * Shows where the source has been dropped. One of the values <strong>over</strong>, <strong>before</strong>, or <strong>after</strong>.
             *
             */
             DRAGEND,
