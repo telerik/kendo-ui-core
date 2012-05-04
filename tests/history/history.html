@@ -155,7 +155,7 @@
                 startWithHash();
 
                 kendoHistory.change(function(e) {
-                    equal("/new-location", e.location);
+                    equal(e.url, "/new-location");
                 });
 
                 kendoHistory.navigate("/new-location");
@@ -170,7 +170,7 @@
             test("accepts event handlers passed as options", function() {
                 expect(1);
 
-                kendoHistory.start({root: root, change: function(e) { equal("/new-location", e.location); }});
+                kendoHistory.start({root: root, change: function(e) { equal(e.url, "/new-location"); }});
 
                 kendoHistory.navigate("/new-location");
             });
@@ -179,7 +179,7 @@
                 expect(1);
 
                 win.location.hash = "/initial-location";
-                kendoHistory.start({root: root, ready: function(e) { equal("/initial-location", e.location); }});
+                kendoHistory.start({root: root, ready: function(e) { equal(e.url, "/initial-location"); }});
             });
 
             asyncTest("listens for outside url changes (hashChange)", function() {
@@ -188,19 +188,18 @@
 
                 kendoHistory.change(function(e) {
                     start();
-                    equal("/outside-location", e.location);
+                    equal(e.url, "/outside-location");
                 });
 
                 win.location.hash = "/outside-location";
             });
 
             test("passes parameters if any present", function() {
-                expect(2);
+                expect(1);
                 startWithHash();
 
                 kendoHistory.change(function(e) {
-                    equal(e.location, "/new-location");
-                    equal(e.params.foo, "bar");
+                    equal(e.url, "/new-location?foo=bar");
                 });
 
                 kendoHistory.navigate("/new-location?foo=bar");

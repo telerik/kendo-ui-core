@@ -288,8 +288,8 @@
                 that.pane = new Pane(element, that.options);
                 that._setupElementClass();
                 that._attachMeta();
-                that._startHistory();
                 that._setupDocumentTitle();
+                that._startHistory();
             });
         },
 

@@ -123,7 +123,7 @@
 
             that.viewEngine.bind(VIEW_SHOW, function(e) {
                 that.trigger(VIEW_SHOW, e);
-            })
+            });
 
             that.history = [];
             that._setupAppLinks();
