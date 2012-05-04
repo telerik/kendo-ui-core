@@ -28,16 +28,17 @@
             that.pane = new kendo.mobile.ui.Pane(that.element).navigate("");
             that.popup = new kendo.ui.Popup(that.element, {
                 animation: {
-                    open: { effects: {} },
-                    close: { // if close animation effects are defined, they will be used instead of open.reverse
-                        effects: "fadeOut",
-                        duration: 400,
-                        hide: false
+                    open: {
+                        effects: "fade:in",
+                        duration: 0
+                    },
+                    close: {
+                        effects: "fade:out",
+                        duration: 400
                     }
                 }
             });
         },
-
 
         options: {
             name: "PopOver",
@@ -46,12 +47,18 @@
         },
 
         openFor: function(link) {
-            var that = this;
-            that.popup.options.anchor = $(link);
+            var that = this,
+                popup = that.popup,
+                timeout = 0;
+            if (popup.visible()) {
+                popup.close();
+                timeout = 401;
+            }
 
+            that.popup.options.anchor = $(link);
             setTimeout(function() {
                 that.popup.open();
-            }, 100);
+            }, timeout);
         }
     });
 
