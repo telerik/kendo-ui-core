@@ -901,6 +901,14 @@ function pad(number) {
         return null;
     }
 
+    function getCulture(culture) {
+        if (culture) {
+            culture = findCulture(culture);
+        }
+
+        return culture || kendo.cultures.current;
+    }
+
     kendo.culture = function(cultureName) {
         var cultures = kendo.cultures, culture;
 
@@ -914,18 +922,13 @@ function pad(number) {
     };
 
     kendo.findCulture = findCulture;
+    kendo.getCulture = getCulture;
 
     //set current culture to en-US.
     kendo.culture(EN);
 
     function formatDate(date, format, culture) {
-        if (culture) {
-            culture = findCulture(culture);
-        }
-
-        if (!culture) {
-            culture = kendo.cultures.current;
-        }
+        culture = getCulture(culture);
 
         var calendar = culture.calendars.standard,
             days = calendar.days,
@@ -988,13 +991,7 @@ function pad(number) {
 
     //number formatting
     function formatNumber(number, format, culture) {
-        if (culture) {
-            culture = findCulture(culture);
-        }
-
-        if (!culture) {
-            culture = kendo.cultures.current;
-        }
+        culture = getCulture(culture);
 
         var numberFormat = culture.numberFormat,
             groupSize = numberFormat.groupSize[0],
@@ -1516,13 +1513,7 @@ function pad(number) {
             date = null,
             length, patterns;
 
-        if (culture) {
-            culture = kendo.findCulture(culture);
-        }
-
-        if (!culture) {
-            culture = kendo.cultures.current;
-        }
+        culture = kendo.getCulture(culture);
 
         if (!formats) {
             formats = [];
@@ -1568,14 +1559,7 @@ function pad(number) {
         }
 
         value = value.toString();
-
-        if (culture) {
-            culture = kendo.findCulture(culture);
-        }
-
-        if (!culture) {
-            culture = kendo.cultures.current;
-        }
+        culture = kendo.getCulture(culture);
 
         var number = culture.numberFormat,
             percent = number.percent,
