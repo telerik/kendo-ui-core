@@ -2627,6 +2627,6 @@ function pad(number) {
         if (widget) {
             return element.data("kendo" + widget.fn.options.prefix + widget.fn.options.name);
         }
-    }
+    };
 
 })(jQuery);
