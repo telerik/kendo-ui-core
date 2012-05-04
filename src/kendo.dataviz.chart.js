@@ -2229,7 +2229,7 @@
 
             return [
                 view.createPolyline(segment.points(), true, {
-                    id: uniqueId(),
+                    id: segment.options.id,
                     stroke: lineOptions.color,
                     strokeWidth: lineOptions.width,
                     strokeOpacity: lineOptions.opacity,
