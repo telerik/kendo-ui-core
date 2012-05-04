@@ -2688,6 +2688,10 @@
             var point = this;
 
             return point.owner.formatPointValue(point.value, format);
+        },
+
+        click: function(chart, e) {
+            seriesClick(chart, this, e);
         }
     });
 

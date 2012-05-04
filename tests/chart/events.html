@@ -255,6 +255,37 @@
                     });
                 });
 
+                // ------------------------------------------------------------
+                var segment;
+
+                module("seriesClick / Pie", {
+                    setup: function() {
+                        createChart({
+                            series: [{
+                                type: "pie",
+                                data: [1],
+                                labels: {
+                                    visible: true,
+                                    distance: 20
+                                }
+                            }],
+                            seriesClick: function() { ok(true); }
+                        });
+
+                        segment = plotArea.charts[0].segments[0];
+                    },
+                    teardown: destroyChart
+                });
+
+                test("fires when clicking segments", 1, function() {
+                    $("#" + segment.options.id).click();
+                });
+
+                test("fires when clicking labels", 1, function() {
+                    label = segment.children[0];
+                    $("#" + label.options.id).click();
+                });
+
             })();
 
             (function() {
