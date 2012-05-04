@@ -415,6 +415,7 @@ div.k-window
     padding: .4em 0;
     font-size: 1.2em;
     white-space: nowrap;
+    min-height: 16px; /* icon size */
 }
 
 .k-window-title
