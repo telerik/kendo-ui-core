@@ -1,6 +1,6 @@
 namespace KendoUI.Mvc.UI.Tests
 {
-    using KendoUI.Mvc.UI.Tests.Extensions;
+    using Extensions;
     using Xunit;
 
     public class WindowHtmlBuilderTests
