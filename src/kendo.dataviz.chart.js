@@ -19,6 +19,7 @@
 
         dataviz = kendo.dataviz,
         Axis = dataviz.Axis,
+        AxisLabel = dataviz.AxisLabel,
         BarAnimation = dataviz.BarAnimation,
         Box2D = dataviz.Box2D,
         BoxElement = dataviz.BoxElement,
@@ -49,6 +50,7 @@
     // Constants ==============================================================
     var ABOVE = "above",
         AREA = "area",
+        AXIS_LABEL_CLICK = "axisLabelClick",
         BAR = "bar",
         BAR_BORDER_BRIGHTNESS = 0.8,
         BAR_GAP = 1.5,
@@ -172,7 +174,8 @@
         events:[
             DATABOUND,
             SERIES_CLICK,
-            SERIES_HOVER
+            SERIES_HOVER,
+            AXIS_LABEL_CLICK
         ],
 
         items: function() {
@@ -917,6 +920,16 @@
         }
     });
 
+    var CategoryAxisLabel = AxisLabel.extend({
+        click: function(chart, e) {
+            var label = this;
+
+            chart.trigger(AXIS_LABEL_CLICK, {
+                element: $(e.target)
+            });
+        }
+    });
+
     var CategoryAxis = Axis.extend({
         options: {
             categories: [],
@@ -1036,6 +1049,10 @@
         getLabelText: function(index) {
             var options = this.options;
             return defined(options.categories[index]) ? options.categories[index] : "";
+        },
+
+        createAxisLabel: function(content, options) {
+            return new CategoryAxisLabel(content, options);
         }
     });
 

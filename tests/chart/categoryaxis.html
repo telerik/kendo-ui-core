@@ -992,6 +992,33 @@
                 });
 
             })();
+
+            (function() {
+                function axisLabelClick(clickHandler) {
+                    createLineChart({
+                        axisLabelClick: clickHandler
+                    });
+
+                    label = plotArea.categoryAxis.labels[0];
+                    $("#" + label.options.id).click();
+                }
+
+                // ------------------------------------------------------------
+                module("Category Axis / Events / axisLabelClick", {
+                    teardown: destroyChart
+                });
+
+                test("fires when clicking axis labels", 1, function() {
+                    axisLabelClick(function() { ok(true); });
+                });
+
+                test("event arguments contain element", 1, function() {
+                    axisLabelClick(function(e) {
+                        equals(e.element.length, 1);
+                    });
+                });
+
+            })();
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>
