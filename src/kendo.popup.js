@@ -9,6 +9,7 @@
         OPEN = "open",
         CLOSE = "close",
         CLOSED = "closed",
+        OPENED = "opened",
         CENTER = "center",
         LEFT = "left",
         RIGHT = "right",
@@ -76,6 +77,7 @@
             extend(options.animation.open, {
                 complete: function() {
                     that.wrapper.css({ overflow: VISIBLE }); // Forcing refresh causes flickering in mobile.
+                    that.trigger(OPENED);
                 }
             });
 
@@ -126,6 +128,7 @@
 
         events: [
             OPEN,
+            OPENED,
             CLOSE,
             CLOSED
         ],
@@ -199,7 +202,9 @@
                 }
 
                 animation = extend(true, {}, options.animation.open);
-                animation.effects = kendo.parseEffects(animation.effects, that._position(window, fixed));
+                that.flipped = that._position(window, fixed);
+                animation.effects = kendo.parseEffects(animation.effects, that.flipped);
+
                 direction = animation.effects.slideIn ? animation.effects.slideIn.direction : direction;
 
                 if (options.anchor != BODY) {
