@@ -86,7 +86,7 @@ Changelog.prototype = {
             suites = this.filterLabels(labels, "s"),
             type = labels.indexOf("Bug") >= 0 ? "bugs" : "features";
 
-        if (labels.indexOf("deleted") >= 0 || labels.indexOf("documentation") >= 0) {
+        if (labels.indexOf("deleted") >= 0 || labels.indexOf("documentation") >= 0 || labels.indexOf("internal") >= 0) {
             return;
         }
 
