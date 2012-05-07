@@ -410,10 +410,19 @@
                  idx,
                  length,
                  element = this.container(),
-                 template = this.template();
+                 template = this.template(),
+                 parent;
 
             if (!(source instanceof ObservableArray) && toString.call(source) !== "[object Array]") {
+                if (source.parent) {
+                    parent = source.parent;
+                }
+
                 source = new ObservableArray([source]);
+
+                if (source.parent) {
+                    source.parent = parent;
+                }
             }
 
             if (this.bindings.template) {

@@ -917,6 +917,19 @@
 
                 dom.data("kendoTestWidget").trigger("foo");
             });
+
+            test("nested template without source with event binding",1, function() {
+                var dom = $('<div data-template="nested-master-template" data-bind="source:items"/>');
+
+                kendo.bind(dom, {
+                    clickHandler: function() {
+                        ok(true);
+                    },
+                    items: [ { items: [{foo: 1}] } ] });
+
+                dom.find("li").click();
+            });
+
         </script>
 
         <script id="select-template" type="text/x-kendo-template">
@@ -927,10 +940,17 @@
             <li data-bind="click: clickHandler"></li>
         </script>
 
+        <script id="nested-master-template" type="text/x-kendo-template">
+            <div data-template="nested-child-template" data-bind="source:items"/>
+        </script>
+
+        <script id="nested-child-template" type="text/x-kendo-template">
+            <div data-template="event-template" data-bind="source:this"/>
+        </script>
+
         <script id="get-template" type="text/x-kendo-template">
             #= get("foo") #
         </script>
-
         <script id="ol-template" type="text/x-kendo-template">
             <li data-bind="text:name"></li>
         </script>
