@@ -284,7 +284,7 @@
     function updateItemClasses (item) {
         item = $(item);
 
-        item
+        item.addClass("k-item")
             .children(IMG)
             .addClass(IMAGE);
         item
@@ -619,11 +619,11 @@
                     $(this).append(contents);
                 }
 
-                updateFirstLast(this);
+                updateArrow(this);
             });
 
             updateArrow(referenceItem);
-            updateFirstLast(inserted.group.find(".k-first, .k-last"));
+            updateFirstLast(inserted.group.find(".k-first, .k-last").add(inserted.items));
 
             return this;
         },
@@ -685,6 +685,7 @@
                     $(this).append(contents);
                 }
 
+                updateArrow(this);
                 updateFirstLast(this);
             });
 
@@ -751,6 +752,7 @@
                     $(this).append(contents);
                 }
 
+                updateArrow(this);
                 updateFirstLast(this);
             });
 
@@ -761,7 +763,7 @@
 
         _insert: function (item, referenceItem, parent) {
             var that = this,
-                items, contents = [];
+                items, groups, contents = [];
 
             if (!referenceItem || !referenceItem.length) {
                 parent = that.element;
@@ -801,8 +803,13 @@
                         });
             } else {
                 items = $(item);
+                groups = items.find("> ul")
+                                .addClass("k-group");
+                items = items.filter("li");
 
-                updateItemClasses(items);
+                items.add(groups.find("> li")).each(function () {
+                    updateItemClasses(this);
+                });
             }
 
             return { items: items, group: parent, contents: contents };
@@ -994,8 +1001,7 @@
                             .find("li > ul")
                             .addClass("k-group")
                             .end()
-                            .find("> li,.k-group > li")
-                            .addClass("k-item");
+                            .find("> li,.k-group > li");
 
             items.each(function () {
                 updateItemClasses(this);
