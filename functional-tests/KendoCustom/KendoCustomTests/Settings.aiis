@@ -409,7 +409,7 @@
   <SimulateRealSilverlightUserByDefault Type="System.Boolean">True</SimulateRealSilverlightUserByDefault>
   <DefaultDropDownSelection Type="ArtOfTest.WebAii.Design.SelectDropDownType">ByValue</DefaultDropDownSelection>
   <IsOnline Type="System.Boolean">False</IsOnline>
-  <ProjectLanguage Type="ArtOfTest.Common.Design.CodeGeneration.CodeGenerationLanguage">NotSet</ProjectLanguage>
+  <ProjectLanguage Type="ArtOfTest.Common.Design.CodeGeneration.CodeGenerationLanguage">CSharp</ProjectLanguage>
   <ProjectVersion Type="System.String">2012.1.410.0</ProjectVersion>
   <Namespace Type="System.String">KendoCustomTests</Namespace>
   <AssemblyName Type="System.String">KendoCustomTests</AssemblyName>
@@ -434,6 +434,7 @@
     <Item Type="System.String">Telerik.WebAii.Controls.Xaml, Version=2012.1.410.0, Culture=neutral, PublicKeyToken=528163f3e645de45</Item>
     <Item Type="System.String">Telerik.WebAii.Controls.Xaml.Wpf, Version=2012.1.410.0, Culture=neutral, PublicKeyToken=528163f3e645de45</Item>
     <Item Type="System.String">Telerik.TestingFramework.Controls.KendoUI, Version=2012.1.410.0, Culture=neutral, PublicKeyToken=528163f3e645de45</Item>
+    <Item Type="System.String">System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</Item>
   </ProjectReferences>
   <ExcludedFiles />
   <DisabledTranslators>
