@@ -81,7 +81,7 @@
 
             that.popup = new kendo.ui.Popup(that.wrapper, $.extend(true,
                 {
-                    opened: function() {
+                    activate: function() {
                         var direction = that.direction,
                             dimensions = that.dimensions,
                             offset = dimensions.offset,

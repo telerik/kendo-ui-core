@@ -8,8 +8,8 @@
         appendingToBodyTriggersResize = $.browser.msie && $.browser.version < 9,
         OPEN = "open",
         CLOSE = "close",
-        CLOSED = "closed",
-        OPENED = "opened",
+        DEACTIVATE = "deactivate",
+        ACTIVATE = "activate",
         CENTER = "center",
         LEFT = "left",
         RIGHT = "right",
@@ -77,7 +77,7 @@
             extend(options.animation.open, {
                 complete: function() {
                     that.wrapper.css({ overflow: VISIBLE }); // Forcing refresh causes flickering in mobile.
-                    that.trigger(OPENED);
+                    that.trigger(ACTIVATE);
                 }
             });
 
@@ -107,7 +107,7 @@
                     }
 
                     that._closing = false;
-                    that.trigger(CLOSED);
+                    that.trigger(DEACTIVATE);
                 }
             });
 
@@ -128,9 +128,9 @@
 
         events: [
             OPEN,
-            OPENED,
+            ACTIVATE,
             CLOSE,
-            CLOSED
+            DEACTIVATE
         ],
 
         options: {
