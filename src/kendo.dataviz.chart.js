@@ -418,7 +418,7 @@
                 seriesPoint;
 
             if (chart._plotArea.box.containsPoint(coords.x, coords.y)) {
-                if (point && (point.series.type === LINE || point.series.type === AREA)) {
+                if (point && point.series && (point.series.type === LINE || point.series.type === AREA)) {
                     owner = point.parent;
                     seriesPoint = owner.getNearestPoint(coords.x, coords.y, point.seriesIx);
                     if (seriesPoint && seriesPoint != point) {
