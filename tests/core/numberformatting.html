@@ -113,6 +113,18 @@
                 equal(toString(10.12, "#.# '# y.0'"), "10.12 '# y.0'");
             });
 
+            test("toString does not throw exception when format integer with 0.## format", function() {
+                equal(toString(4, "0.##"), "4");
+            });
+
+            test("toString formats correctly big integer using custom format", function() {
+                equal(toString(4000, "0,000.##########"), "4,000");
+            });
+
+            test("toString adds leading zero if number is shorter than format with group separator ", function() {
+                equal(toString(300, "0,000.##########"), "0,300");
+            });
+
             //negative custom toString
             test("toString decimal number -0.001 with negative format", function() {
                 equal(toString(-0.001, "####;-(#.#)"), "-(0.001)");
@@ -267,7 +279,7 @@
             test("globalized number", function() {
                 kendo.cultures.current.numberFormat[","] = " ";
                 kendo.cultures.current.numberFormat["."] = ",";
-                equal(toString(1000010.1, " 0000#0#,#.00 "), " 001 000 010,10 ");
+                equal(toString(1000010.1, " 0000#0#,#.00 "), " 01 000 010,10 ");
             });
 
             test("format number using specific culture", function() {
