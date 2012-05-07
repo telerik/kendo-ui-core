@@ -442,7 +442,7 @@ namespace KendoUI.Mvc.UI
         /// </example>
         public virtual WindowBuilder Window()
         {
-            return WindowBuilder.Create(Register(() => new Window(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IWindowHtmlBuilderFactory>())));
+            return WindowBuilder.Create(Register(() => new Window(ViewContext, ClientSideObjectWriterFactory)));
         }
 
         /// <summary>
