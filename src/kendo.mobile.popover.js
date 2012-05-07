@@ -1,8 +1,11 @@
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.mobile.ui,
-        WRAPPER = '<div class="km-popover-wrapper" />';
-        Widget = ui.Widget;
+        WRAPPER = '<div class="km-popover-wrapper" />',
+        ARROW = '<div class="km-popover-arrow" />',
+        OVERLAY = '<div class="km-popover-overlay" />',
+        DIRECTION_CLASSES = "km-top km-bottom km-left km-right",
+        Widget = ui.Widget,
         DIRECTIONS = {
             "down": {
                 origin: "bottom center",
@@ -23,6 +26,7 @@
                 collision: "fit flip"
             }
         },
+
         ANIMATION = {
             animation: {
                 open: {
@@ -75,23 +79,21 @@
                 height: that.options.height
             }).addClass("km-popover-wrapper km-" + that.direction).hide();
 
-            that.arrow = $('<div class="km-popover-arrow" />').appendTo(that.wrapper).hide();
+            that.arrow = $(ARROW).appendTo(that.wrapper).hide();
+            that.overlay = $(OVERLAY).appendTo(document.body).hide();
 
             that.pane = new kendo.mobile.ui.Pane(that.element).navigate("");
 
             that.popup = new kendo.ui.Popup(that.wrapper, $.extend(true,
                 {
-                    activate: function() {
-                        var direction = that.direction,
-                            dimensions = that.dimensions,
-                            offset = dimensions.offset,
-                            anchorOffset = $(that.popup.options.anchor).offset(),
-                            elementOffset = $(that.popup.element).offset(),
-                            cssClass = that.popup.flipped ? REVERSE[direction] : direction,
-                            offsetAmount = anchorOffset[offset] - elementOffset[offset] + ($(that.popup.options.anchor)[dimensions.size]() / 2);
+                    open: function() {
+                        that.overlay.show();
+                    },
 
-                            that.wrapper.removeClass("km-top km-bottom km-left km-right").addClass("km-" + cssClass);
-                            that.arrow.css(offset, offsetAmount).show();
+                    activate: $.proxy(that._activate, that),
+
+                    deactivate: function() {
+                        that.overlay.hide();
                     }
                 },
                 ANIMATION,
@@ -106,20 +108,27 @@
             direction: "down"
         },
 
+        _activate: function() {
+            var direction = that.direction,
+            dimensions = that.dimensions,
+            offset = dimensions.offset,
+            popup = that.popup,
+            anchor = popup.options.anchor,
+            anchorOffset = $(anchor).offset(),
+            elementOffset = $(popup.element).offset(),
+            cssClass = popup.flipped ? REVERSE[direction] : direction,
+            offsetAmount = anchorOffset[offset] - elementOffset[offset] + ($(anchor)[dimensions.size]() / 2);
+
+            that.wrapper.removeClass(DIRECTION_CLASSES).addClass("km-" + cssClass);
+            that.arrow.css(offset, offsetAmount).show();
+        },
+
         openFor: function(link) {
             var that = this,
-                popup = that.popup,
-                timeout = 0;
+                popup = that.popup;
 
-            if (popup.visible()) {
-                popup.close();
-                timeout = 401;
-            }
-
-            that.popup.options.anchor = $(link);
-            setTimeout(function() {
-                that.popup.open();
-            }, timeout);
+            popup.options.anchor = $(link);
+            popup.open();
         }
     });
 
