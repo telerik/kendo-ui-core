@@ -468,6 +468,7 @@ function pad(number) {
     var dateFormatRegExp = /dddd|ddd|dd|d|MMMM|MMM|MM|M|yyyy|yy|HH|H|hh|h|mm|m|fff|ff|f|tt|ss|s|"[^"]*"|'[^']*'/g,
         standardFormatRegExp =  /^(n|c|p|e)(\d*)$/i,
         literalRegExp = /["'].*?["']/g,
+        commaRegExp = /\,/g,
         EMPTY = "",
         POINT = ".",
         COMMA = ",",
@@ -1014,9 +1015,11 @@ function pad(number) {
             idx,
             length,
             ch,
+            hasGroup,
             decimalIndex,
             sharpIndex,
             zeroIndex,
+            startZeroIndex,
             start = -1,
             end;
 
@@ -1164,6 +1167,11 @@ function pad(number) {
             symbol = numberFormat.symbol;
         }
 
+        hasGroup = format.indexOf(COMMA) > -1;
+        if (hasGroup) {
+            format = format.replace(commaRegExp, EMPTY);
+        }
+
         decimalIndex = format.indexOf(POINT);
         length = format.length;
 
@@ -1171,7 +1179,7 @@ function pad(number) {
             sharpIndex = format.lastIndexOf(SHARP);
             zeroIndex = format.lastIndexOf(ZERO);
 
-            if (zeroIndex != -1) {
+            if (zeroIndex != -1 && zeroIndex >= decimalIndex) {
                 value = number.toFixed(zeroIndex - decimalIndex);
                 number = number.toString();
                 number = number.length > value.length && sharpIndex > zeroIndex ? number : value;
@@ -1181,7 +1189,7 @@ function pad(number) {
         }
 
         sharpIndex = format.indexOf(SHARP);
-        zeroIndex = format.indexOf(ZERO);
+        startZeroIndex = zeroIndex = format.indexOf(ZERO);
 
         //define the index of the first digit placeholder
         if (sharpIndex == -1 && zeroIndex != -1) {
@@ -1217,15 +1225,20 @@ function pad(number) {
             fractionLength = fraction.length;
 
             //add group separator to the number if it is longer enough
-            if (integerLength >= groupSize && format.indexOf(COMMA) != -1) {
-                value = EMPTY;
-                for (idx = 0; idx < integerLength; idx++) {
-                    if (idx > 0 && (integerLength - idx) % groupSize === 0) {
-                        value += groupSeparator;
+            if (hasGroup) {
+                if (integerLength === groupSize && integerLength < decimalIndex - startZeroIndex) {
+                    integer = groupSeparator + integer;
+                } else if (integerLength > groupSize) {
+                    value = EMPTY;
+                    for (idx = 0; idx < integerLength; idx++) {
+                        if (idx > 0 && (integerLength - idx) % groupSize === 0) {
+                            value += groupSeparator;
+                        }
+                        value += integer.charAt(idx);
                     }
-                    value += integer.charAt(idx);
+
+                    integer = value;
                 }
-                integer = value;
             }
 
             number = format.substring(0, start);
@@ -1260,8 +1273,6 @@ function pad(number) {
                     replacement = ch;
                 } else if (ch === SHARP) {
                     number += replacement;
-                } else if (ch === COMMA) {
-                    continue;
                 }
             }
 
