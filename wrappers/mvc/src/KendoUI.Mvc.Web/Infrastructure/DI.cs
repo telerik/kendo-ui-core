@@ -131,8 +131,6 @@ namespace KendoUI.Mvc.Infrastructure
             Current.Register<IClientSideObjectWriterFactory>(() => new ClientSideObjectWriterFactory());
             
             Current.Register<ICalendarHtmlBuilderFactory>(() => new CalendarHtmlBuilderFactory());
-
-            Current.Register<IWindowHtmlBuilderFactory>(() => new WindowHtmlBuilderFactory());
         }
         
         static void RegisterCacheDependencies()

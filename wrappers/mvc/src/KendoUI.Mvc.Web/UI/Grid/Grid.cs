@@ -69,7 +69,7 @@ namespace KendoUI.Mvc.UI
             Filtering = new GridFilteringSettings();
             Editing = new GridEditingSettings<T>(this)
             {
-                PopUp = new Window(viewContext, clientSideObjectWriterFactory, new WindowHtmlBuilderFactory())
+                PopUp = new Window(viewContext, clientSideObjectWriterFactory)
                 {
                     Modal = true,
                     Draggable = true

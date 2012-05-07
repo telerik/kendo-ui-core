@@ -22,241 +22,169 @@ namespace KendoUI.Mvc.UI.Tests
         [Fact]
         public void Loaded_Action_param_should_set_Loaded_property()
         {
-            Action param = () => { };
+            builder.OnLoad(() => { });
 
-            builder.OnLoad(param);
-
-            Assert.NotNull(clientEvents.OnLoad.CodeBlock);
+            clientEvents.OnLoad.CodeBlock.ShouldNotBeNull();
         }
 
         [Fact]
         public void Loaded_String_param_should_set_Loaded_property()
         {
-            const string param = "my_method()";
+            builder.OnLoad("my_method()");
 
-            builder.OnLoad(param);
-
-            Assert.NotNull(clientEvents.OnLoad.HandlerName);
+            clientEvents.OnLoad.HandlerName.ShouldNotBeNull();
         }
 
         [Fact]
         public void Loaded_Action_should_return_builder()
         {
-            Action param = () => { };
-
-            var returned = builder.OnLoad(param);
-
-            Assert.IsType(typeof(WindowClientEventsBuilder), returned);
+            builder.OnLoad(() => { }).ShouldBeSameAs(builder);
         }
 
         [Fact]
         public void Loaded_String_should_return_builder()
         {
-            const string param = "my_method()";
-
-            var returned = builder.OnLoad(param);
-
-            Assert.IsType(typeof(WindowClientEventsBuilder), returned);
+            builder.OnLoad("my_method()").ShouldBeSameAs(builder);
         }
 
         [Fact]
         public void Open_Action_param_should_set_Open_property()
         {
-            Action param = () => { };
+            builder.OnOpen(() => { });
 
-            builder.OnOpen(param);
-
-            Assert.NotNull(clientEvents.OnOpen.CodeBlock);
+            clientEvents.OnOpen.CodeBlock.ShouldNotBeNull();
         }
 
         [Fact]
         public void OnOpen_String_param_should_set_Open_property()
         {
-            const string param = "my_method()";
+            builder.OnOpen("my_method()");
 
-            builder.OnOpen(param);
-
-            Assert.NotNull(clientEvents.OnOpen.HandlerName);
+            clientEvents.OnOpen.HandlerName.ShouldNotBeNull();
         }
 
         [Fact]
         public void OnOpen_Action_should_return_builder()
         {
-            Action param = () => { };
-
-            var returned = builder.OnOpen(param);
-
-            Assert.IsType(typeof(WindowClientEventsBuilder), returned);
+            builder.OnOpen(() => { }).ShouldBeSameAs(builder);
         }
 
         [Fact]
         public void OnOpen_String_should_return_builder()
         {
-            const string param = "my_method()";
-
-            var returned = builder.OnOpen(param);
-
-            Assert.IsType(typeof(WindowClientEventsBuilder), returned);
+            builder.OnOpen("my_method()").ShouldBeSameAs(builder);
         }
 
         [Fact]
         public void OnClose_Action_param_should_set_Close_property()
         {
-            Action param = () => { };
+            builder.OnClose(() => { });
 
-            builder.OnClose(param);
-
-            Assert.NotNull(clientEvents.OnClose.CodeBlock);
+            clientEvents.OnClose.CodeBlock.ShouldNotBeNull();
         }
 
         [Fact]
         public void OnClose_String_param_should_set_Close_property()
         {
-            const string param = "my_method()";
+            builder.OnClose("my_method()");
 
-            builder.OnClose(param);
-
-            Assert.NotNull(clientEvents.OnClose.HandlerName);
+            clientEvents.OnClose.HandlerName.ShouldNotBeNull();
         }
 
         [Fact]
         public void OnClose_Action_should_return_builder()
         {
-            Action param = () => { };
-
-            var returned = builder.OnClose(param);
-
-            Assert.IsType(typeof(WindowClientEventsBuilder), returned);
+            builder.OnClose(() => { }).ShouldBeSameAs(builder);
         }
 
         [Fact]
         public void OnClose_String_should_return_builder()
         {
-            const string param = "my_method()";
-
-            var returned = builder.OnClose(param);
-
-            Assert.IsType(typeof(WindowClientEventsBuilder), returned);
+            builder.OnClose("my_method()").ShouldBeSameAs(builder);
         }
 
         [Fact]
         public void OnResize_Action_param_should_set_Resize_property()
         {
-            Action param = () => { };
+            builder.OnResize(() => { });
 
-            builder.OnResize(param);
-
-            Assert.NotNull(clientEvents.OnResize.CodeBlock);
+            clientEvents.OnResize.CodeBlock.ShouldNotBeNull();
         }
 
         [Fact]
         public void OnResize_String_param_should_set_Resize_property()
         {
-            const string param = "my_method()";
+            builder.OnResize("my_method()");
 
-            builder.OnResize(param);
-
-            Assert.NotNull(clientEvents.OnResize.HandlerName);
+            clientEvents.OnResize.HandlerName.ShouldNotBeNull();
         }
 
         [Fact]
         public void OnResize_Action_should_return_builder()
         {
-            Action param = () => { };
-
-            var returned = builder.OnResize(param);
-
-            Assert.IsType(typeof(WindowClientEventsBuilder), returned);
+            builder.OnResize(() => { }).ShouldBeSameAs(builder);
         }
 
         [Fact]
         public void OnResize_String_should_return_builder()
         {
-            const string param = "my_method()";
-
-            var returned = builder.OnResize(param);
-
-            Assert.IsType(typeof(WindowClientEventsBuilder), returned);
+            builder.OnResize("my_method()").ShouldBeSameAs(builder);
         }
 
         [Fact]
         public void OnRefresh_Action_param_should_set_Refresh_property()
         {
-            Action param = () => { };
+            builder.OnRefresh(() => { });
 
-            builder.OnRefresh(param);
-
-            Assert.NotNull(clientEvents.OnRefresh.CodeBlock);
+            clientEvents.OnRefresh.CodeBlock.ShouldNotBeNull();
         }
 
         [Fact]
         public void OnRefresh_String_param_should_set_Refresh_property()
         {
-            const string param = "my_method()";
+            builder.OnRefresh("my_method()");
 
-            builder.OnRefresh(param);
-
-            Assert.NotNull(clientEvents.OnRefresh.HandlerName);
+            clientEvents.OnRefresh.HandlerName.ShouldNotBeNull();
         }
 
         [Fact]
         public void OnRefresh_Action_should_return_builder()
         {
-            Action param = () => { };
-
-            var returned = builder.OnRefresh(param);
-
-            Assert.IsType(typeof(WindowClientEventsBuilder), returned);
+            builder.OnRefresh(() => { }).ShouldBeSameAs(builder);
         }
 
         [Fact]
         public void OnRefresh_String_should_return_builder()
         {
-            const string param = "my_method()";
-
-            var returned = builder.OnRefresh(param);
-
-            Assert.IsType(typeof(WindowClientEventsBuilder), returned);
+            builder.OnRefresh("my_method()").ShouldBeSameAs(builder);
         }
 
         [Fact]
         public void OnError_Action_param_should_set_Error_property()
         {
-            Action param = () => { };
+            builder.OnError(() => { });
 
-            builder.OnError(param);
-
-            Assert.NotNull(clientEvents.OnError.CodeBlock);
+            clientEvents.OnError.CodeBlock.ShouldNotBeNull();
         }
 
         [Fact]
         public void OnError_String_param_should_set_Loaded_property()
         {
-            const string param = "my_method()";
+            builder.OnError("my_method()");
 
-            builder.OnError(param);
-
-            Assert.NotNull(clientEvents.OnError.HandlerName);
+            clientEvents.OnError.HandlerName.ShouldNotBeNull();
         }
 
         [Fact]
         public void OnError_Action_should_return_builder()
         {
-            Action param = () => { };
-
-            var returned = builder.OnError(param);
-
-            Assert.IsType(typeof(WindowClientEventsBuilder), returned);
+            builder.OnError(() => { }).ShouldBeSameAs(builder);
         }
 
         [Fact]
         public void OnError_String_should_return_builder()
         {
-            const string param = "my_method()";
-
-            var returned = builder.OnError(param);
-
-            Assert.IsType(typeof(WindowClientEventsBuilder), returned);
+            builder.OnError("my_method()").ShouldBeSameAs(builder);
         }
     }
 }

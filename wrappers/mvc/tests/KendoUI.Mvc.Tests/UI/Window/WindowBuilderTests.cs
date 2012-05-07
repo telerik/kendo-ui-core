@@ -1,8 +1,8 @@
 namespace KendoUI.Mvc.UI.Tests
 {
-    using Xunit;
     using System;
-    using KendoUI.Mvc.UI.Fluent;
+    using Fluent;
+    using Xunit;
 
     public class WindowBuilderTests
     {
@@ -16,210 +16,177 @@ namespace KendoUI.Mvc.UI.Tests
         }
 
         [Fact]
-        public void Icon_should_set_IconUrl_property() 
+        public void Icon_sets_IconUrl_property() 
         {
             const string iconPath = "fakePath";
 
             builder.Icon(iconPath);
 
-            Assert.Equal(iconPath, component.IconUrl);
+            component.IconUrl.ShouldEqual(iconPath);
         }
 
         [Fact]
-        public void Icon_should_set_IconUrl_and_AltrnativeText_property()
+        public void Icon_sets_IconUrl_and_AltrnativeText_property()
         {
             const string iconPath = "fakePath";
             const string alternativeText = "icon";
 
             builder.Icon(iconPath, alternativeText);
 
-            Assert.Equal(iconPath, component.IconUrl);
-            Assert.Equal(alternativeText, component.IconAlternativeText);
+            component.IconUrl.ShouldEqual(iconPath);
+            component.IconAlternativeText.ShouldEqual(alternativeText);
         }
 
         [Fact]
-        public void Icon_method_with_one_parameter_should_return_builder()
+        public void Icon_method_with_one_parameter_returns_builder()
         {
-            var returnedBuilder = builder.Icon("fakePath");
-
-            Assert.IsType(typeof(WindowBuilder), returnedBuilder);
+            builder.Icon("fakePath").ShouldBeSameAs(builder);
         }
 
         [Fact]
-        public void Icon_method_with_two_parameter_should_return_builder()
+        public void Icon_method_with_two_parameters_returns_builder()
         {
-            var returnedBuilder = builder.Icon("fakePath", "icon");
-
-            Assert.IsType(typeof(WindowBuilder), returnedBuilder);
+            builder.Icon("fakePath", "icon").ShouldBeSameAs(builder);
         }
 
         [Fact]
-        public void Title_should_set_Title_property()
+        public void Title_sets_Title_property()
         {
             const string title = "title";
 
             builder.Title(title);
 
-            Assert.Equal(title, component.Title);
+            component.Title.ShouldEqual(title);
         }
 
         [Fact]
-        public void Title_should_return_builder()
+        public void Title_returns_builder()
         {
-            var returnedBuilder = builder.Title("title");
-
-            Assert.IsType(typeof(WindowBuilder), returnedBuilder);
+            builder.Title("title").ShouldBeSameAs(builder);
         }
 
         [Fact]
-        public void Content_should_set_Content_property()
+        public void Content_sets_Content_property()
         {
             Action content = () => { };
 
             builder.Content(content);
 
-            Assert.Equal(content, component.Content);
+            component.Content.ShouldEqual(content);
         }
 
         [Fact]
-        public void Content_should_return_builder_object()
+        public void Content_returns_builder_object()
         {
-            Action content = () => { };
-
-            var returnedBuilder = builder.Content(content);
-
-            Assert.IsType(typeof(WindowBuilder), returnedBuilder);
+            builder.Content(() => { }).ShouldBeSameAs(builder);
         }
 
-
         [Fact]
-        public void Content_with_string_param_should_set_Content_property()
+        public void Content_with_string_param_sets_Content_property()
         {
             builder.Content("<ul><li>something</li></ul>");
 
-            Assert.NotNull(component.Html);
+            component.Html.ShouldNotBeNull();
         }
 
         [Fact]
-        public void Content_with_string_param_should_return_builder_object()
+        public void Content_with_string_param_returns_builder_object()
         {
-            var returnedBuilder = builder.Content("<ul><li>something</li></ul>");
-
-            Assert.IsType(typeof(WindowBuilder), returnedBuilder);
+            builder.Content("<ul><li>something</li></ul>").ShouldBeSameAs(builder);
         }
 
         [Fact]
-        public void ContentHtmlAttributes_should_merge_passed_object_to_ContentHtmlAttributes_property()
+        public void ContentHtmlAttributes_merges_passed_object_to_ContentHtmlAttributes_property()
         {
             const string value = "test";
-            var attr = new { attr = value };
 
-            builder.ContentHtmlAttributes(attr);
+            builder.ContentHtmlAttributes(new { attr = value });
 
-            Assert.Equal(value, component.ContentHtmlAttributes["attr"]);
+            component.ContentHtmlAttributes["attr"].ShouldEqual(value);
         }
 
         [Fact]
-        public void ContentHtmlAttributes_should_return_builder_object()
+        public void ContentHtmlAttributes_returns_builder_object()
         {
-            const string value = "test";
-            var attr = new { attr = value };
+            var attr = new { attr = "test" };
 
-            var returnedBuilder = builder.ContentHtmlAttributes(attr);
-
-            Assert.IsType(typeof(WindowBuilder), returnedBuilder);
+            builder.ContentHtmlAttributes(attr).ShouldBeSameAs(builder);
         }
         
         [Fact]
-        public void LoadContentFrom_should_set_contentUrl()
+        public void LoadContentFrom_sets_contentUrl()
         {
             const string value = "test";
 
             builder.LoadContentFrom(value);
 
-            Assert.Equal(value, component.ContentUrl);
+            component.ContentUrl.ShouldEqual(value);
         }
 
         [Fact]
-        public void LoadContentFrom_should_return_builder_object()
+        public void LoadContentFrom_returns_builder_object()
         {
-            const string value = "test";
-
-            var returnedBuilder = builder.LoadContentFrom(value);
-
-            Assert.IsType(typeof(WindowBuilder), returnedBuilder);
+            builder.LoadContentFrom("test").ShouldBeSameAs(builder);
         }
 
         [Fact]
-        public void Width_should_set_Width_property()
+        public void Width_sets_Width_property()
         {
             const int width = 400;
 
             builder.Width(width);
 
-            Assert.Equal(width, component.Width);
+            component.Width.ShouldEqual(width);
         }
-
 
         [Fact]
         public void Width_should_throw_exception_when_param_is_negative()
         {
-            const int width = -100;
-
-            Assert.Throws(typeof(ArgumentOutOfRangeException), () => builder.Width(width));
+            Assert.Throws(typeof(ArgumentOutOfRangeException), () => builder.Width(-100));
         }
 
         [Fact]
-        public void Width_should_return_builder()
+        public void Width_returns_builder()
         {
-            var returnedBuilder = builder.Width(400);
-
-            Assert.IsType(typeof(WindowBuilder), returnedBuilder);
+            builder.Width(400).ShouldBeSameAs(builder);
         }
 
         [Fact]
-        public void Height_should_set_Height_property()
+        public void Height_sets_Height_property()
         {
             const int height = 200;
 
             builder.Height(height);
 
-            Assert.Equal(height, component.Height);
+            component.Height.ShouldEqual(height);
         }
-
 
         [Fact]
         public void Height_should_throw_exception_when_param_is_negative()
         {
-            const int height = -100;
-
-            Assert.Throws(typeof(ArgumentOutOfRangeException), () => builder.Height(height));
+            Assert.Throws(typeof(ArgumentOutOfRangeException), () => builder.Height(-100));
         }
 
         [Fact]
-        public void Height_should_return_builder()
+        public void Height_returns_builder()
         {
-            var returnedBuilder = builder.Height(200);
-
-            Assert.IsType(typeof(WindowBuilder), returnedBuilder);
+            builder.Height(200).ShouldBeSameAs(builder);
         }
 
         [Fact]
-        public void Visible_should_set_Visible_property()
+        public void Visible_sets_Visible_property()
         {
             const bool visible = true;
 
             builder.Visible(visible);
 
-            Assert.Equal(visible, component.Visible);
+            component.Visible.ShouldEqual(visible);
         }
 
         [Fact]
-        public void Visible_should_return_builder()
+        public void Visible_returns_builder()
         {
-            var returnedBuilder = builder.Visible(true);
-
-            Assert.IsType(typeof(WindowBuilder), returnedBuilder);
+            builder.Visible(true).ShouldBeSameAs(builder);
         }
 
         [Fact]
@@ -232,131 +199,105 @@ namespace KendoUI.Mvc.UI.Tests
                 fxFacCreated = fx != null;
             });
 
-            Assert.True(fxFacCreated);
+            fxFacCreated.ShouldBeTrue();
         }
 
         [Fact]
-        public void Modal_should_set_Modal_property()
+        public void Modal_sets_Modal_property()
         {
             const bool modal = true;
 
             builder.Modal(modal);
 
-            Assert.Equal(modal, component.Modal);
+            component.Modal.ShouldEqual(modal);
         }
 
         [Fact]
-        public void Modal_should_return_builder()
+        public void Modal_returns_builder()
         {
-            var returnedBuilder = builder.Modal(true);
-
-            Assert.IsType(typeof(WindowBuilder), returnedBuilder);
+            builder.Modal(true).ShouldBeSameAs(builder);
         }
 
         [Fact]
-        public void Draggable_should_set_Draggable_property()
+        public void Draggable_sets_Draggable_property()
         {
             const bool drag = true;
 
             builder.Draggable(drag);
 
-            Assert.Equal(drag, component.Draggable);
+            component.Draggable.ShouldEqual(drag);
         }
 
         [Fact]
-        public void Draggable_should_return_builder()
+        public void Draggable_returns_builder()
         {
-            var returnedBuilder = builder.Draggable(true);
-
-            Assert.IsType(typeof(WindowBuilder), returnedBuilder);
+            builder.Draggable(true).ShouldBeSameAs(builder);
         }
 
         [Fact]
-        public void ClientEvents_should_set_events()
+        public void ClientEvents_sets_events()
         {
-            Action<WindowClientEventsBuilder> clientEventsAction = eventBuilder => { eventBuilder.OnLoad("Load"); };
+            builder.ClientEvents(eventBuilder => { eventBuilder.OnLoad("Load"); });
 
-            builder.ClientEvents(clientEventsAction);
-
-            Assert.NotNull(component.ClientEvents.OnLoad.HandlerName);
+            component.ClientEvents.OnLoad.HandlerName.ShouldNotBeNull();
         }
 
         [Fact]
-        public void ClientEvents_should_return_builder()
+        public void ClientEvents_returns_builder()
         {
-            Action<WindowClientEventsBuilder> clientEventsAction = eventBuilder => { eventBuilder.OnLoad("Load"); };
-
-            var returnedBuilder = builder.ClientEvents(clientEventsAction);
-
-            Assert.IsType(typeof(WindowBuilder), returnedBuilder);
+            builder.ClientEvents(eventBuilder => { eventBuilder.OnLoad("Load"); }).ShouldBeSameAs(builder);
         }
 
         [Fact]
-        public void Resizable_with_ResizingSettingsBuilder_should_set_resizingSettings()
+        public void Resizable_with_ResizingSettingsBuilder_sets_resizingSettings()
         {
-            Action<WindowResizingSettingsBuilder> settings = settingsBuilder => { settingsBuilder.Enabled(true); };
+            builder.Resizable(settingsBuilder => { settingsBuilder.Enabled(true); });
 
-            builder.Resizable(settings);
-
-            Assert.True(component.ResizingSettings.Enabled);
+            component.ResizingSettings.Enabled.ShouldBeTrue();
         }
 
         [Fact]
-        public void Resizable_with_no_params_should_set_resizingSettings()
+        public void Resizable_with_no_params_sets_resizingSettings()
         {
             builder.Resizable();
 
-            Assert.True(component.ResizingSettings.Enabled);
+            component.ResizingSettings.Enabled.ShouldBeTrue();
         }
 
         [Fact]
-        public void Resizable_with_ResizingSettingsBuilder_should_return_builder()
+        public void Resizable_with_ResizingSettingsBuilder_returns_builder()
         {
-            Action<WindowResizingSettingsBuilder> settings = settingsBuilder => { settingsBuilder.Enabled(true); };
-
-            var returnedBuilder = builder.Resizable(settings);
-
-            Assert.IsType(typeof(WindowBuilder), returnedBuilder);
+            builder.Resizable(settingsBuilder => { settingsBuilder.Enabled(true); }).ShouldBeSameAs(builder);
         }
 
         [Fact]
-        public void Resizable_without_params_should_return_builder()
+        public void Resizable_without_params_returns_builder()
         {
-            var returnedBuilder = builder.Resizable();
-
-            Assert.IsType(typeof(WindowBuilder), returnedBuilder);
+            builder.Resizable().ShouldBeSameAs(builder);
         }
 
 
         [Fact]
         public void Buttons_should_define_buttons_collection()
         {
-            Action<WindowButtonsBuilder> buttonsBuilder = b => { b.Close(); };
+            builder.Buttons(b => { b.Close(); });
 
-            builder.Buttons(buttonsBuilder);
-
-            Assert.True(component.Buttons.Container.Count > 0);
+            (component.Buttons.Container.Count > 0).ShouldBeTrue();
         }
 
         [Fact]
         public void Buttons_should_initialy_clear_buttons_collection()
         {
-            Action<WindowButtonsBuilder> buttonsBuilder = b => { b.Maximize(); };
+            builder.Buttons(b => { b.Maximize(); });
 
-            builder.Buttons(buttonsBuilder);
-
-            Assert.True(component.Buttons.Container.Count == 1);
-            Assert.Equal("Maximize", component.Buttons.Container[0].Name);
+            (component.Buttons.Container.Count == 1).ShouldBeTrue();
+            component.Buttons.Container[0].Name.ShouldEqual("Maximize");
         }
 
         [Fact]
-        public void Buttons_should_return_builder()
+        public void Buttons_returns_builder()
         {
-            Action<WindowButtonsBuilder> buttonsBuilder = b => { b.Close(); };
-
-            var returnedBuilder = builder.Buttons(buttonsBuilder);
-
-            Assert.IsType(typeof(WindowBuilder), returnedBuilder);
+            builder.Buttons(b => { b.Close(); }).ShouldBeSameAs(builder);
         }
     }
 }
