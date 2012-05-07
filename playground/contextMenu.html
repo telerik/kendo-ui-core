@@ -12,6 +12,8 @@
     <script type="text/javascript" src="../src/kendo.fx.js"></script>
     <script type="text/javascript" src="../src/kendo.popup.js"></script>
     <script type="text/javascript" src="../src/kendo.menu.js"></script>
+    <script type="text/javascript" src="../src/kendo.data.js"></script>
+    <script type="text/javascript" src="../src/kendo.treeview.js"></script>
     <style type="text/css">
         body
         {
@@ -30,9 +32,32 @@
     </style>
 </head>
 <body>
-    <div id="target">
-        CONTEXT TARGET
-    </div>
+    <ul id="target">
+        <li>
+            Item 1
+            <ul>
+                <li>Sub Item 1</li>
+                <li>Sub Item 2</li>
+                <li>Sub Item 3</li>
+            </ul>
+        </li>
+        <li>
+            Item 2
+            <ul>
+                <li>Sub Item 1</li>
+                <li>Sub Item 2</li>
+                <li>Sub Item 3</li>
+            </ul>
+        </li>
+        <li>
+            Item 3
+            <ul>
+                <li>Sub Item 1</li>
+                <li>Sub Item 2</li>
+                <li>Sub Item 3</li>
+            </ul>
+        </li>
+    </ul>
     <div id="popup">
         <ul id="context">
             <li>
@@ -73,13 +98,18 @@
             popup = $("#popup").kendoPopup({
                 anchor: target,
                 collision: "fit flip"
-            }).data("kendoPopup");
+            }).data("kendoPopup"),
+            tree = target.kendoTreeView().data("kendoTreeView");
 
-        target.on("contextmenu", function (e) {
+        target.on("contextmenu", ".k-in", function (e) {
+            tree.select($(e.target).closest(".k-item"));
+            popup.options.anchor = e.target;
             popup.wrapper.hide();
             popup.open(e.pageX, e.pageY);
             e.preventDefault();
+            e.stopPropagation();
         });
+
     </script>
 </body>
 </html>
