@@ -1119,14 +1119,20 @@ function pad(number) {
         length = format.length;
 
         if (decimalIndex != -1) {
-            sharpIndex = format.lastIndexOf(SHARP);
             zeroIndex = format.lastIndexOf(ZERO);
+            sharpIndex = format.lastIndexOf(SHARP);
+            fraction = number.toString().split(POINT)[1] || EMPTY;
 
-            if (zeroIndex != -1 && zeroIndex >= decimalIndex) {
-                value = number.toFixed(zeroIndex - decimalIndex);
-                number = number.toString();
-                number = number.length > value.length && sharpIndex > zeroIndex ? number : value;
+            if (sharpIndex > zeroIndex && fraction.length > (sharpIndex - zeroIndex)) {
+                idx = sharpIndex;
+            } else if (zeroIndex != -1 && zeroIndex >= decimalIndex) {
+                idx = zeroIndex;
             }
+
+            if (idx) {
+                number = number.toFixed(idx - decimalIndex);
+            }
+
         } else {
             number = number.toFixed(0);
         }
