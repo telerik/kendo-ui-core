@@ -172,6 +172,14 @@
                 equal(autocomplete.dataItem(), null);
             });
 
+            test("Value of the autocomplete is empty string when placeholder is used", function() {
+                var autocomplete = new AutoComplete($("<input/>"),{
+                    placeholder: "Select..."
+                });
+
+                equal(autocomplete.value(), "");
+            });
+
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
