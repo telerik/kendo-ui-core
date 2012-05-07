@@ -991,8 +991,7 @@
         _insertNode: function(nodeData, index, parentNode, group, insertCallback) {
             var that = this,
                 updatedGroupLength = group.children().length + 1,
-                isArrayData = $.isArray(nodeData),
-                fromNodeData = isArrayData || $.isPlainObject(nodeData),
+                isArrayData, fromNodeData,
                 groupData = {
                     firstLevel: parentNode.hasClass(KTREEVIEW),
                     expanded: true,
@@ -1006,6 +1005,13 @@
                     item: extend(nodeData, { index: index })
                 });
             }
+
+            if (nodeData.toJSON) {
+                nodeData = nodeData.toJSON();
+            }
+
+            isArrayData = $.isArray(nodeData);
+            fromNodeData = isArrayData || $.isPlainObject(nodeData);
 
             if (fromNodeData) {
                 if (isArrayData) {
