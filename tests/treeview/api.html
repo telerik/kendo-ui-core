@@ -7,6 +7,8 @@
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.treeview.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
         <link rel="stylesheet" href="../../styles/web/kendo.common.css" />
     </head>
@@ -348,6 +350,45 @@
                 treeviewObject.append([{ text: "foo" }]);
 
                 equal(treeview.find(".k-in").text(), "item: foo");
+            });
+
+            test("append() of observable object", function() {
+                var treeview = createTreeView({
+                    }),
+                    treeviewObject = treeview.data("kendoTreeView");
+
+                treeviewObject.append(kendo.observable({ text: "foo" }));
+
+                equal(treeview.find(".k-in").text(), "foo");
+            });
+
+            test("append() of observable array", function() {
+                var treeview = createTreeView({
+                    }),
+                    treeviewObject = treeview.data("kendoTreeView"),
+                    array = new kendo.data.ObservableArray([{ text: "foo" }]);
+
+                treeviewObject.append(array);
+
+                equal(treeview.find(".k-in").text(), "foo");
+            });
+
+            test("append() of observable hierarchy", function() {
+                var treeview = createTreeView({}),
+                    treeviewObject = treeview.data("kendoTreeView"),
+                    viewModel = new kendo.observable({
+                        text: "foo",
+                        items: [
+                            { text: "bar" }
+                        ]
+                    });
+
+                treeviewObject.append(viewModel);
+
+                var items = treeview.find(".k-in");
+
+                equal(items.eq(0).text(), "foo");
+                equal(items.eq(1).text(), "bar");
             });
 
             test("detach() removes node and persists data", function() {
