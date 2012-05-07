@@ -22,6 +22,39 @@
             var AutoComplete = kendo.ui.AutoComplete,
                 input;
 
+            function caret(element, position) {
+                var range,
+                isPosition = position !== undefined;
+
+                if (document.selection) {
+                    if ($(element).is(":visible")) {
+                        element.focus();
+                    }
+                    range = document.selection.createRange();
+                    if (isPosition) {
+                        range.move("character", position);
+                        range.select();
+                        } else {
+                        var rangeElement = element.createTextRange(),
+                        rangeDuplicated = rangeElement.duplicate();
+                        rangeElement.moveToBookmark(range.getBookmark());
+                        rangeDuplicated.setEndPoint('EndToStart', rangeElement);
+
+                        position = rangeDuplicated.text.length;
+
+                    }
+                    } else if (element.selectionStart !== undefined) {
+                    if (isPosition) {
+                        element.focus();
+                        element.setSelectionRange(position, position);
+                        } else {
+                        position = element.selectionStart;
+                    }
+                }
+
+                return position;
+            }
+
             $.fn.press = function(key) {
                 return this.trigger({ type: "keydown", keyCode: key } );
             };
@@ -206,11 +239,14 @@
                 var autocomplete = new AutoComplete(input, {
                     dataSource: ["foo", "bar"],
                     filter: "contains",
-                    suggest: true
+                    suggest: true,
+                    delay: 0
                 });
 
                 input.focus();
-                input.val("o").keydown();
+                input.val("o");
+                caret(input[0], 1);
+                autocomplete.search();
 
                 setTimeout(function() {
                     start();
@@ -380,6 +416,7 @@
                 });
 
                 input.focus().val("f");
+                caret(input[0], 1);
                 autocomplete.search("f");
 
                 equal(autocomplete.value(), "foo");
