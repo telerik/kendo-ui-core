@@ -74,12 +74,18 @@
     * </ul>
     *
     * <p>Additional icons may be added by defining the respective CSS class.
-    * If the <code>icon</code> data attribute is set to <code>custom</code>, the Button will receive <code>km-custom</code> CSS class.</p>
-    * @exampleTitle Define custom button icon.
+    * If the <code>icon</code> data attribute is set to <code>custom</code>, the tab will receive <code>km-custom</code> CSS class.
+    * In order to create colorizable icons as the default ones in Kendo UI Mobile, you should specify the icon image as a <b>box mask</b>
+    * (either as dataURI or as a separate image). The image should be <b>PNG8</b> or <b>PNG24</b> with alpha channel (<b>PNG8+Alpha</b> is supported by
+    * only few graphic editors, so <b>better stick with PNG24</b>). The image color is not important - it will be used as a mask only
+    * (BlackBerry 7.0 has a bug that renders its masks as background-image, better use white if you plan to support it. The bug was
+    * fixed in 7.1).</p>
+    *
+    * @exampleTitle Define custom button icon
     * @example
     * <style>
     * .km-custom {
-    *   background-image: url("foo.png");
+    *   -webkit-mask-box-image: url("foo.png");
     * }
     * </style>
     *
