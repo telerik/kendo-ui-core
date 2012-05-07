@@ -22,6 +22,8 @@
                 chart,
                 plotArea;
 
+            // TODO: Move event tests to relevant element tests.
+
             function createChart(options) {
                 $("#container").kendoChart(options);
 
@@ -110,15 +112,6 @@
                 }
 
                 function barClick(seriesClickHandler) {
-                    createBarChart({
-                        seriesClick: seriesClickHandler
-                    });
-
-                    bar = plotArea.charts[0].points[0];
-                    $("#" + bar.options.id).click();
-                }
-
-                function axisLabelClick(seriesClickHandler) {
                     createBarChart({
                         seriesClick: seriesClickHandler
                     });
@@ -284,28 +277,6 @@
                 test("fires when clicking labels", 1, function() {
                     label = segment.children[0];
                     $("#" + label.options.id).click();
-                });
-
-            })();
-
-            (function() {
-
-                function linePointClick(clickHandler) {
-                    createLineChart({
-                        axisLabelClick: clickHandler
-                    });
-
-                    label = plotArea.categoryAxis.labels[0];
-                    $("#" + label.options.id).click();
-                }
-
-                // ------------------------------------------------------------
-                module("axisLabelClick / Category Axis", {
-                    teardown: destroyChart
-                });
-
-                test("fires when clicking axis labels", 1, function() {
-                    categoryAxisLabelClick(function() { ok(true); });
                 });
 
             })();

@@ -42,7 +42,13 @@
                         }, {
                             name: "Plums",
                             data: [5, 8, 6, 8]
-                    }]
+                    }],
+                    categoryAxis: {
+                        categories: ["A", "B", "C", "D"]
+                    },
+                    axisLabelClick: function(e) {
+                        console.log(e);
+                    }
                 });
             });
         </script>

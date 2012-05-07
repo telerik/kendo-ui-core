@@ -749,6 +749,19 @@
         }
     });
 
+    var AxisLabel = TextBox.extend({
+        init: function(content, options) {
+            var label = this;
+
+            // TODO: Assign unique ID to all TextBoxes?
+            label.options.id = uniqueId();
+
+            TextBox.fn.init.call(label, content, options);
+
+            label.makeDiscoverable();
+        }
+    });
+
     var Axis = ChartElement.extend({
         init: function(options) {
             var axis = this;
@@ -836,7 +849,8 @@
                 labelTemplate,
                 align = options.vertical ? RIGHT : CENTER,
                 labelOptions = deepExtend({ }, options.labels, {
-                    align: align, zIndex: options.zIndex
+                    align: align, zIndex: options.zIndex,
+                    modelId: options.modelId
                 }),
                 step = labelOptions.step;
 
@@ -856,11 +870,15 @@
                         labelText = labelTemplate({ value: labelText });
                     }
 
-                    label = new TextBox(labelText, labelOptions);
+                    label = axis.createAxisLabel(labelText, labelOptions);
                     axis.append(label);
                     axis.labels.push(label);
                 }
             }
+        },
+
+        createAxisLabel: function(content, options) {
+            return new AxisLabel(content, options);
         },
 
         getLabelsCount: noop,
@@ -2401,6 +2419,7 @@
         CLIP: CLIP,
 
         Axis: Axis,
+        AxisLabel: AxisLabel,
         Box2D: Box2D,
         BoxElement: BoxElement,
         ChartElement: ChartElement,
