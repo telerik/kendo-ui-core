@@ -783,7 +783,17 @@
             if (value !== undefined) {
                 element.value = value;
             } else {
-                return element.value;
+                value = element.value;
+
+                if (element.className.indexOf("k-readonly") > -1) {
+                    if (value === that.options.placeholder) {
+                        return "";
+                    } else {
+                        return value;
+                    }
+                }
+
+                return value;
             }
         },
 
