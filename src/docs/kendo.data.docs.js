@@ -505,6 +505,42 @@
         *    })
         * @option {Number | String} [schema.model.id] The field use to identify an unique Model instance
         * @option {Object} [schema.model.fields] Describes the model fields and their properties
+        * <p>Available field attrbiutes:</p>
+        * <div class="details-list">
+        *     <dl>
+        *         <dt><b>editable</b></dt>
+        *         <dd>Determines if this field will be editable (default value is true)</dd>
+        *         <dt><b>defaultValue</b></dt>
+        *         <dd>The value which will be used to populate the field when new non-existing model is created.
+        *             Default value is type attrbiute specific i.e. string fields will have empty string as defaultValue</dd>
+        *         <dt><b>nullable</b></dt>
+        *         <dd>Determines if the value set through defaultValue will be used (default value is false) </dd>
+        *         <dt><b>type</b></dt>
+        *         <dd>The type of the field {Number|String|Boolean|Date}. Default type is string.</dd>
+        *         <dt><b>validation</b></dt>
+        *         <dd>A set of validation rules. The built-in KendoUI Validator rules are available as well as custom rules.</dd>
+        *     </dl>
+        * </div>
+        * _example
+        *    var dataSource = new kendo.data.DataSource({
+        *        //..
+        *         schema: {
+        *             model: {
+        *                 fields: {
+        *                      UnitPrice: {
+        *                        validation: {
+        *                            required: true,
+        *                            min: 1,
+        *                            date: { message: "My custom message" }, // custom message
+        *                            aCustomRule: function(input) { // custom validation rule
+        *                               return input.val() === "foo"
+        *                            }
+        *                        }
+        *                    }
+        *                }
+        *            }
+        *        }
+        *    })
         **/
         init: function(options) {
         },
