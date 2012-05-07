@@ -125,6 +125,11 @@
                 equal(toString(300, "0,000.##########"), "0,300");
             });
 
+            test("toString method rounds the number if custom format", function() {
+                equal(toString(3.235555, "0.##"), "3.24");
+                equal(toString(3.235555, "0.#0"), "3.24");
+            });
+
             //negative custom toString
             test("toString decimal number -0.001 with negative format", function() {
                 equal(toString(-0.001, "####;-(#.#)"), "-(0.001)");
