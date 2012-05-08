@@ -112,6 +112,12 @@ function triggerEvent(eventName, element, offsetX, offsetY) {
     element.trigger(e);
 }
 
+function createChart(options) {
+    $("#container").kendoChart(options);
+
+    return $("#container").data("kendoChart");
+}
+
 function destroyChart(element) {
     (element || $("#container")).unbind().empty();
 }

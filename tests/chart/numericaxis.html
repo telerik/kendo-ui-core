@@ -1622,20 +1622,8 @@
                 var chart,
                     plotArea;
 
-                function createChart(options) {
-                    $("#container").kendoChart(options);
-
-                    chart = $("#container").data("kendoChart");
-                    plotArea = chart._model.children[1];
-                }
-
-                function destroyChart() {
-                    $("#container").unbind().empty();
-                    chart = null;
-                }
-
                 function axisLabelClick(clickHandler, options) {
-                    createChart($.extend(true, {
+                    chart = createChart($.extend(true, {
                         series: [{
                             type: "line",
                             data: [1, 2, 3]
@@ -1643,6 +1631,7 @@
                         axisLabelClick: clickHandler
                     }, options));
 
+                    plotArea = chart._model.children[1];
                     label = plotArea.namedValueAxes.primary.labels[1];
                     $("#" + label.options.id).click();
                 }
