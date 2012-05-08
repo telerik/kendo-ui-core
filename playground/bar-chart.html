@@ -13,12 +13,30 @@
     </head>
     <body>
         <script type="text/javascript">
+            var data = [{
+                day: "Mon",
+                apples: 10,
+                pears: 5
+            }, {
+                day: "Tue",
+                apples: 15,
+                pears: 8
+            }, {
+                day: "Wed",
+                apples: 12,
+                pears: 6
+            }, {
+                day: "Thu",
+                apples: 16,
+                pears: 8
+            }];
 
             $(document).ready(function() {
                 $("#container").kendoChart({
                     title: {
                         visible: false
                     },
+                    dataSource: data,
                     legend: {
                         visible: true,
                         position: "bottom"
@@ -33,18 +51,18 @@
                         console.log(e);
                     },
                     series: [{
-                            type: "line",
                             name: "Apples",
-                            data: [10, 15, 12, 16]
+                            type: "line",
+                            field: "apples"
                         }, {
                             name: "Pears",
-                            data: [5, 8, 6, 8]
-                        }, {
-                            name: "Plums",
-                            data: [5, 8, 6, 8]
-                    }],
+                            field: "pears"
+                        }],
                     categoryAxis: {
-                        categories: ["A", "B", "C", "D"]
+                        field: "day"
+                    },
+                    seriesClick: function(e) {
+                        console.log("seriesClick", e);
                     },
                     axisLabelClick: function(e) {
                         console.log(e);
