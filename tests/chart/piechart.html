@@ -923,6 +923,68 @@
 
             })();
 
+            (function() {
+                // ------------------------------------------------------------
+                var labelElement,
+                    segmentElement;
+
+                function createPieChart(options) {
+                    var chart = createChart($.extend({
+                        series: [{
+                            type: "pie",
+                            data: [1],
+                            labels: {
+                                visible: true,
+                                distance: 20
+                            }
+                        }]
+                    }, options));
+
+                    var plotArea = chart._model.children[1],
+                        segment = plotArea.charts[0].segments[0],
+                        label = segment.children[0];
+
+                    segmentElement = $("#" + segment.options.id);
+                    labelElement = $("#" + label.options.id);
+                }
+
+                module("Pie Chart / Events / seriesClick ", {
+                    setup: function() {
+                        createPieChart({
+                            seriesClick: function() { ok(true); }
+                        });
+                    },
+                    teardown: destroyChart
+                });
+
+                test("fires when clicking segments", 1, function() {
+                    segmentElement.click();
+                });
+
+                test("fires when clicking labels", 1, function() {
+                    labelElement.click();
+                });
+
+                // ------------------------------------------------------------
+                module("Pie Chart / Events / seriesHover", {
+                    setup: function() {
+                        createPieChart({
+                            seriesHover: function() { ok(true); }
+                        });
+                    },
+                    teardown: destroyChart
+                });
+
+                test("fires when clicking segments", 1, function() {
+                    segmentElement.mouseover();
+                });
+
+                test("fires when clicking labels", 1, function() {
+                    labelElement.mouseover();
+                });
+
+            })();
+
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>
