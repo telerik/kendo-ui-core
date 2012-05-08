@@ -248,10 +248,14 @@
 
             that.model = model;
 
+            element.find(roleSelector("popover")).each(function(){
+                kendo.initWidget(this, {}, ui);
+            });
+
             if (model) {
                 kendo.bind(element.children(), model, ui);
             } else {
-                kendo.mobile.init(element.children());
+                mobile.init(element.children());
             }
         },
 
@@ -699,7 +703,7 @@
         },
 
         _hideViews: function(container) {
-            return container.children(roleSelector("view splitview popover")).hide();
+            return container.children(roleSelector("view splitview")).hide();
         },
 
         _setupLayouts: function(element) {
