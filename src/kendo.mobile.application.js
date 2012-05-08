@@ -9,8 +9,8 @@
         OS = support.mobileOS,
         OS_NAME_TEMPLATE = kendo.template("#=data.name##if(data.version){# #=data.name##=data.version.major# km-m#=data.version.minor# #=data.version.appMode?'km-app':'km-web'##}#", {usedWithBlock: false}),
         BERRYPHONEGAP = OS.device == "blackberry" && OS.flatVersion >= 600 && OS.flatVersion < 1000 && OS.appMode,
-        VERTICAL = OS.blackberry ? "km-horizontal" : "km-vertical",
-        HORIZONTAL = OS.blackberry ? "km-vertical" : "km-horizontal",
+        VERTICAL = "km-vertical",
+        HORIZONTAL = "km-horizontal",
 
         MOBILE_UA = {
             ios: "iPhone OS 4_3",
@@ -26,7 +26,7 @@
 
         iconMeta = kendo.template('<link rel="apple-touch-icon' + (support.mobileOS.android ? '-precomposed' : '') + '" # if(data.size) { # sizes="#=data.size#" #}# href="#=data.icon#" />', {usedWithBlock: false}),
 
-        ORIENTATIONEVENT = window.orientationchange ? "orientationchange" : "resize",
+        ORIENTATIONEVENT = "onorientationchange" in window ? "orientationchange" : "resize",
         HIDEBAR = OS.device == "iphone" || OS.device == "ipod",
         BARCOMPENSATION = 60,
 
@@ -35,7 +35,7 @@
         proxy = $.proxy;
 
     function isOrientationHorizontal() {
-        return Math.abs(window.orientation) / 90;
+        return (Math.abs(window.orientation) / 90 == 1);
     }
 
     function getOrientationClass() {

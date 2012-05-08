@@ -24,7 +24,8 @@
     font-size: 1.2em;
     font-size: 1.4rem;
     line-height: 1.5em;
-    line-height: 1.9rem;
+    line-height: 1.86rem;
+    border: 1px solid transparent;
     font-weight: bold;
     text-shadow: 0 -1px rgba(0,0,0,.3);
     float: left;
@@ -39,13 +40,10 @@
 .km-ios .km-actionsheet > li > a
 {
     background-image: linear-gradient(top, rgba(255,255,255,0.5), rgba(255,255,255,0.45) 6%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.15) 50%, rgba(100,100,100,0));
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
     color: #FFF;
     overflow: visible;
     .border-radius(5pt);
-    border: 1px solid #394d68;
-    border-color: #2f3740 #394d68 #375073;
-    background-color: #7185a2;
     text-shadow: 0 -1px rgba(0,0,0,.3);
     text-decoration: none;
     border: 1px solid #394d68;
@@ -906,3 +904,51 @@
     background-color: #fff;
 }
 
+/* SplitView */
+
+.km-ios .km-splitview
+{
+    background: #000;
+}
+
+.km-ios .km-pane
+{
+    border-right: 1px solid #000;
+    background: #fff;
+    .border-radius(5px);
+}
+
+.km-ios .km-pane .km-view-title
+{
+    color: #777;
+    text-shadow: 0 1px rgba(255,255,255,.8);
+}
+
+.km-ios .km-pane .km-button
+{
+    background-color: #777
+}
+
+.km-ios .km-pane .km-navbar,
+.km-ios .km-pane .km-toolbar
+{
+    .box-shadow(inset 0 -1px 3px rgba(0,0,0,.2));
+    .border-radius(5px 5px 0 0);
+    background-color: #eee;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    border-bottom: 1px solid rgba(0,0,0,.3);
+}
+
+.km-ios .km-pane .km-content,
+.km-ios .km-pane .km-tabstrip
+{
+    .border-radius(0 0 5px 5px);
+    -webkit-border-bottom-left-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+}
+
+.km-ios .km-pane:last-child
+{
+    border-right: 0;
+}
