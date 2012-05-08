@@ -599,6 +599,46 @@
          * $("#timePicker").data("kendoTimePicker").unbind("change", onChange);
          *
          */
+         /**
+        * Fires when the time drop-down list is opened
+        * @name kendo.ui.TimePicker#open
+        * @event
+        * @param {Event} e
+        * @example
+        * $("#timePicker").kendoTimePicker({
+        *     open: function(e) {
+        *         // handle event
+        *     }
+        * });
+        * @exampleTitle To set after initialization
+        * @example
+        * // get a reference to the timePicker widget
+        * var timePicker = $("#timePicker").data("kendoTimePicker");
+        * // bind to the open event
+        * timePicker.bind("open", function(e) {
+        *     // handle event
+        * });
+        */
+        /**
+        * Fires when the time drop-down list is closed
+        * @name kendo.ui.TimePicker#close
+        * @event
+        * @param {Event} e
+        * @example
+        * $("#timePicker").kendoTimePicker({
+        *     close: function(e) {
+        *         // handle event
+        *     }
+        * });
+        * @exampleTitle To set after initialization
+        * @example
+        * // get a reference to the timePicker widget
+        * var timePicker = $("#timePicker").data("kendoTimePicker");
+        * // bind to the close event
+        * timePicker.bind("close", function(e) {
+        *     // handle event
+        * });
+        */
          OPEN,
          CLOSE,
          CHANGE
