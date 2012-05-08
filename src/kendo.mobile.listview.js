@@ -71,7 +71,7 @@
         item = $(item);
 
         var parent = item.parent(),
-            itemAndDetailButtons = item.add(parent.children(kendo.roleSelector("detailbutton")),
+            itemAndDetailButtons = item.add(parent.children(kendo.roleSelector("detailbutton"))),
             otherNodes = parent.contents().not(itemAndDetailButtons).not(whitespace);
 
         if (otherNodes.length) {
