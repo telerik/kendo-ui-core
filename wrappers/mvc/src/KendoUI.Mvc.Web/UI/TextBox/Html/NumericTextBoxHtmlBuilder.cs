@@ -2,7 +2,9 @@ namespace KendoUI.Mvc.UI.Html
 {
     using KendoUI.Mvc.Extensions;
     using KendoUI.Mvc.UI;
+    using KendoUI.Mvc.UI.Html;
     using System;
+    using System.Collections.Generic;
     using System.Web.Mvc;
 
     public class NumericTextBoxHtmlBuilder<T> where T : struct 
@@ -40,9 +42,31 @@ namespace KendoUI.Mvc.UI.Html
                    .ToggleAttribute("value", value, value.HasValue())
                    .ToggleAttribute("disabled", "disabled", !Component.Enabled)
                    .Attributes(Component.InputHtmlAttributes)
-                   //.Attributes(Component.GetUnobtrusiveValidationAttributes())
+                   .Attributes(GetUnobtrusiveValidationAttributes())
                    .ToggleClass("input-validation-error", !Component.IsValid());
                    //.PrependClass(UIPrimitives.Input);
+        }
+
+        public IDictionary<string, object> GetUnobtrusiveValidationAttributes()
+        {
+#if MVC3
+            var viewContext = Component.ViewContext;
+            if (viewContext.UnobtrusiveJavaScriptEnabled)
+            {
+                var name = Component.Name;
+                var htmlPrefix = Component.ViewData.TemplateInfo.HtmlFieldPrefix;
+
+                if (name.HasValue() && htmlPrefix.HasValue() && name != htmlPrefix && name.StartsWith(htmlPrefix, StringComparison.Ordinal))
+                {
+                    name = name.Substring(htmlPrefix.Length + 1);
+                }
+
+                var htmlHelper = new HtmlHelper(viewContext, new ViewComponentViewDataContainer { ViewData = Component.ViewData });
+
+                return htmlHelper.GetUnobtrusiveValidationAttributes(name);
+            }
+#endif
+            return null;
         }
 
         //public IHtmlNode UpButtonTag()

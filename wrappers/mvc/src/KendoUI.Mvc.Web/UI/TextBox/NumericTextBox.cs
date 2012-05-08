@@ -11,10 +11,10 @@ namespace KendoUI.Mvc.UI
 
     public class NumericTextBox<T> : ViewComponentBase, IInputComponent<T> where T : struct
     {
-        public NumericTextBox(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory)
+        public NumericTextBox(ViewContext viewContext, ViewDataDictionary ViewData, IClientSideObjectWriterFactory clientSideObjectWriterFactory)
             : base(viewContext, clientSideObjectWriterFactory)
         {
-           Spinners = true;
+            Spinners = true;
 
             InputHtmlAttributes = new RouteValueDictionary();
 
@@ -25,6 +25,8 @@ namespace KendoUI.Mvc.UI
             Step = (T)Convert.ChangeType(1, typeof(T));
 
             Format = "n";
+
+            this.ViewData = ViewData;
         }
 
         /// <summary>
@@ -41,6 +43,12 @@ namespace KendoUI.Mvc.UI
                        InputHtmlAttributes["id"].ToString() :
                        (!string.IsNullOrEmpty(Name) ? Name.Replace(".", HtmlHelper.IdAttributeDotReplacement) : null);
             }
+        }
+
+        internal ViewDataDictionary ViewData
+        {
+            get;
+            set;
         }
 
         public IDictionary<string, object> InputHtmlAttributes
