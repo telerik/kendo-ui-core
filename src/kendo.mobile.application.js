@@ -13,8 +13,8 @@
         OS_NAME, OS_NAME_CLASS, OS_CSS_CLASS,
         OS_NAME_TEMPLATE = kendo.template("#=data.name##if(data.version){# #=data.name##=data.version.major# km-m#=data.version.minor# #=data.version.appMode?'km-app':'km-web'##}#", {usedWithBlock: false}),
         BERRYPHONEGAP = OS.device == "blackberry" && OS.flatVersion >= 600 && OS.flatVersion < 1000 && OS.appMode,
-        VERTICAL = OS.blackberry ? "km-horizontal" : "km-vertical",
-        HORIZONTAL = OS.blackberry ? "km-vertical" : "km-horizontal",
+        VERTICAL = "km-vertical",
+        HORIZONTAL = "km-horizontal",
 
         MOBILE_UA = {
             ios: "iPhone OS 4_3",
@@ -85,7 +85,7 @@
     }
 
     function isOrientationHorizontal() {
-        return Math.abs(window.orientation) / 90;
+        return (Math.abs(window.orientation) / 90 == 1);
     }
 
     function getOrientationClass() {

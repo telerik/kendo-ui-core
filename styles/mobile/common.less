@@ -1178,3 +1178,24 @@
     height: 2.6em;
     text-align: center;
 }
+
+/* SplitView */
+.km-root div.km-splitview
+{
+    .box-orient(horizontal);
+    .box-direction(normal);
+}
+
+.km-splitview > .km-pane
+{
+    .box-flex(2);
+}
+
+.km-splitview > .km-pane:first-child
+{
+    .box-flex(1);
+}
+
+.km-pane {
+    position: relative;
+}
