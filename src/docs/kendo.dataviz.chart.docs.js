@@ -3942,6 +3942,8 @@
              * @param {Object} e.value The label value or category name.
              * @param {Object} e.text The label text.
              * @param {Object} e.index The label sequential index or category index.
+             * @param {Object} e.dataItem The original data item used to generate the label.
+             * Applicable only for data bound category axis.
              * @param {Object} e.element The DOM element of the label.
              * @example
              * function onAxisLabelClick(e) {

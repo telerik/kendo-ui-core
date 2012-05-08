@@ -1012,13 +1012,23 @@
 
                 function axisLabelClick(clickHandler, options) {
                     createChart($.extend(true, {
+                        dataSource: [{
+                            value: 1,
+                            category: "A"
+                        }, {
+                            value: 2,
+                            category: "B"
+                        }, {
+                            value: 3,
+                            category: "C"
+                        }],
                         series: [{
                             type: "line",
-                            data: [1, 2, 3]
+                            field: "value"
                         }],
                         categoryAxis: {
                             name: "Axis A",
-                            categories: ["A", "B", "C"]
+                            field: "category"
                         },
                         axisLabelClick: clickHandler
                     }, options));
@@ -1075,6 +1085,12 @@
                 test("event arguments contain category name as value", 1, function() {
                     axisLabelClick(function(e) {
                         equals(e.value, "B");
+                    });
+                });
+
+                test("event arguments contain category data item", 1, function() {
+                    axisLabelClick(function(e) {
+                        equals(e.dataItem.value, 2);
                     });
                 });
 

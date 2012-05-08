@@ -108,6 +108,25 @@
                     });
                 });
 
+                asyncTest("categories data items are populated", function() {
+                    createChart({
+                        dataSource: [{
+                            period: "Jan",
+                            sales: 100
+                        }, {
+                            period: "Feb",
+                            sales: 110
+                        }],
+                        categoryAxis: {
+                            field: "period"
+                        },
+                        dataBound: function() {
+                            equals(this.options.categoryAxis.dataItems[1].sales, 110);
+                            start();
+                        }
+                    });
+                });
+
                 test("initial binding is done using fetch", 1, function() {
                     stubMethod(kendo.data.DataSource.fn, "fetch", function() {
                         ok(true);
