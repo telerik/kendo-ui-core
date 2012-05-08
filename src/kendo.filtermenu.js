@@ -96,7 +96,7 @@
                 field = that.model.fields[that.field];
 
                 if (field) {
-                    type = field.type;
+                    type = field.type || "string";
                     that._parse = proxy(field.parse, field);
                 }
             }
