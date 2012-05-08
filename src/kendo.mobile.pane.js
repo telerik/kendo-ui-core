@@ -17,14 +17,14 @@
         VIEW_SHOW = "viewShow",
 
         BACK = "#:back",
+
+        data = kendo.data,
         // navigation element roles
         buttonRoles = "button backbutton detailbutton listview-link",
         linkRoles = "tab";
 
     function appLinkClick(e) {
-        var rel = $(e.currentTarget).data(kendo.ns + "rel");
-
-        if(rel != EXTERNAL) {
+        if(data($(e.currentTarget), "rel") != EXTERNAL) {
             e.preventDefault();
         }
     }

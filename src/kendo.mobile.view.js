@@ -10,6 +10,7 @@
         BEFORE_SHOW = "beforeShow",
         HIDE = "hide",
         Z_INDEX = "z-index",
+        data = kendo.data,
         roleSelector = kendo.roleSelector;
 
     /**
@@ -260,7 +261,7 @@
                 element = that.element;
 
             element.data("kendoView", that).addClass("km-view");
-            that.transition = element.data(kendo.ns + "transition");
+            that.transition = data(element, "transition");
 
             that.header = element.find(roleSelector("header")).addClass("km-header");
             that.footer = element.find(roleSelector("footer")).addClass("km-footer");
@@ -274,7 +275,7 @@
 
             that.element.prepend(that.header).append(that.footer);
 
-            that.id = element.data(kendo.ns + "url") || "#" + element.attr("id");
+            that.id = data(element, "url") || "#" + element.attr("id");
 
             if (that.layout) {
                 that.layout.setup(that);
@@ -623,7 +624,7 @@
         _createView: function(element) {
             var that = this,
                 viewOptions,
-                layout = element.data(kendo.ns + "layout");
+                layout = data(element, "layout");
 
             if (typeof layout === "undefined") {
                 layout = that.layout;
@@ -702,12 +703,11 @@
         },
 
         _setupLayouts: function(element) {
-            var that = this,
-                platformAttr = kendo.ns + "platform";
+            var that = this;
 
             element.children(roleSelector("layout")).each(function() {
                 var layout = $(this),
-                    platform = layout.data(platformAttr);
+                    platform = data(layout,  "platform");
 
                 if (platform === undefined || platform === mobile.application.os) {
                     that.layouts[layout.data("id")] = kendo.initWidget(layout, {}, kendo.mobile.ui);
