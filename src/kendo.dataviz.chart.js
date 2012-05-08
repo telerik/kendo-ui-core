@@ -50,7 +50,7 @@
     // Constants ==============================================================
     var ABOVE = "above",
         AREA = "area",
-        AXIS_LABEL_CLICK = "axisLabelClick",
+        AXIS_LABEL_CLICK = dataviz.AXIS_LABEL_CLICK,
         BAR = "bar",
         BAR_BORDER_BRIGHTNESS = 0.8,
         BAR_GAP = 1.5,
@@ -920,16 +920,6 @@
         }
     });
 
-    var CategoryAxisLabel = AxisLabel.extend({
-        click: function(chart, e) {
-            var label = this;
-
-            chart.trigger(AXIS_LABEL_CLICK, {
-                element: $(e.target)
-            });
-        }
-    });
-
     var CategoryAxis = Axis.extend({
         options: {
             categories: [],
@@ -1046,13 +1036,12 @@
             return this.options.categories.length;
         },
 
-        getLabelText: function(index) {
-            var options = this.options;
-            return defined(options.categories[index]) ? options.categories[index] : "";
-        },
+        createAxisLabel: function(index, labelOptions) {
+            var axis = this,
+                options = this.options,
+                category = defined(options.categories[index]) ? options.categories[index] : "";
 
-        createAxisLabel: function(content, options) {
-            return new CategoryAxisLabel(content, options);
+            return new AxisLabel(category, index, labelOptions);
         }
     });
 
