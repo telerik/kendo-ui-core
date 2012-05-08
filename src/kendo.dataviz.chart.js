@@ -548,19 +548,24 @@
             }
         },
 
-        _bindCategories: function(categoriesData) {
+        _bindCategories: function(data) {
             var categoryAxis = this.options.categoryAxis,
                 i,
                 category,
-                length = categoriesData.length;
+                row,
+                length = data.length;
 
             if (categoryAxis.field) {
                 for (i = 0; i < length; i++) {
-                    category = getField(categoryAxis.field, categoriesData[i]);
+                    row = data[i];
+
+                    category = getField(categoryAxis.field, row);
                     if (i === 0) {
                         categoryAxis.categories = [category];
+                        categoryAxis.dataItems = [row];
                     } else {
                         categoryAxis.categories.push(category);
+                        categoryAxis.dataItems.push(row);
                     }
                 }
             }
@@ -1038,9 +1043,10 @@
         createAxisLabel: function(index, labelOptions) {
             var axis = this,
                 options = axis.options,
+                dataItem = options.dataItems ? options.dataItems[index] : null,
                 category = defined(options.categories[index]) ? options.categories[index] : "";
 
-            return new AxisLabel(category, index, labelOptions);
+            return new AxisLabel(category, index, dataItem, labelOptions);
         }
     });
 

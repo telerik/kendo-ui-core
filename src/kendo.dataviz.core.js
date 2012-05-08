@@ -751,7 +751,7 @@
     });
 
     var AxisLabel = TextBox.extend({
-        init: function(value, index, options) {
+        init: function(value, index, dataItem, options) {
             var label = this,
                 text = value;
 
@@ -763,6 +763,7 @@
             label.text = text;
             label.value = value;
             label.index = index;
+            label.dataItem = dataItem;
 
             // TODO: Assign unique ID to all TextBoxes?
             label.options.id = uniqueId();
@@ -780,6 +781,7 @@
                 value: label.value,
                 text: label.text,
                 index: label.index,
+                dataItem: label.dataItem,
                 axis: label.parent.options
             });
         }
@@ -1432,7 +1434,7 @@
                 options = axis.options,
                 value = round(options.min + (index * options.majorUnit), DEFAULT_PRECISION);
 
-            return new AxisLabel(value, index, labelOptions);
+            return new AxisLabel(value, index, null, labelOptions);
         }
     });
 
