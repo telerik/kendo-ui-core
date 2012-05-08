@@ -101,6 +101,7 @@
         ACTIVE = "km-state-active",
         SELECT = "select",
         SELECTOR = "li:not(." + ACTIVE +")",
+        data = kendo.data,
         MOUSEDOWN = kendo.support.touch ? "touchstart" : "mousedown";
 
     var ButtonGroup = Widget.extend(/** @lends kendo.mobile.ui.ButtonGroup.prototype */{
@@ -195,7 +196,7 @@
 
         _button: function() {
             var button = $(this).addClass("km-button"),
-                icon = button.data(kendo.ns + "icon"),
+                icon = data(button, "icon"),
                 span = button.children("span"),
                 image = button.find("img").addClass("km-image");
 
