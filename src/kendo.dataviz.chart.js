@@ -196,6 +196,7 @@
                 type: "Numeric"
             },
             categoryAxis: {
+                type: "Category",
                 categories: []
             },
             autoBind: true,
