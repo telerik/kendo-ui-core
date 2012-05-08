@@ -58,6 +58,14 @@ namespace KendoUI.Mvc.UI
             }
         }
 
+        private ViewDataDictionary ViewData
+        {
+            get
+            {
+                return HtmlHelper.ViewData;
+            }
+        }
+
         /// <summary>
         /// Creates a <see cref="StyleSheetRegistrar"/>
         /// </summary>
@@ -367,7 +375,7 @@ namespace KendoUI.Mvc.UI
         /// <returns>Returns <see cref="NumericTextBoxBuilder{double}"/>.</returns>
         public virtual NumericTextBoxBuilder<double> NumericTextBox()
         {
-            return NumericTextBoxBuilder<double>.Create(Register(() => new NumericTextBox<double>(ViewContext, ClientSideObjectWriterFactory)));
+            return NumericTextBoxBuilder<double>.Create(Register(() => new NumericTextBox<double>(ViewContext, ViewData, ClientSideObjectWriterFactory)));
         }
 
         /// <summary>
@@ -382,7 +390,7 @@ namespace KendoUI.Mvc.UI
         /// </example>
         public virtual NumericTextBoxBuilder<T> NumericTextBox<T>() where T: struct
         {
-            return NumericTextBoxBuilder<T>.Create(Register(() => new NumericTextBox<T>(ViewContext, ClientSideObjectWriterFactory)));
+            return NumericTextBoxBuilder<T>.Create(Register(() => new NumericTextBox<T>(ViewContext, ViewData, ClientSideObjectWriterFactory)));
         }
 
         ///// <summary>
