@@ -1979,6 +1979,134 @@
 
             })();
 
+            (function() {
+                var chart,
+                    bar,
+                    barElement,
+                    plotArea;
+
+                function createBarChart(options) {
+                    chart = createChart($.extend({
+                        series: [{
+                            type: "bar",
+                            data: [1]
+                        }],
+                        categoryAxis: {
+                            categories: ["A"]
+                        }
+                    }, options));
+
+                    plotArea = chart._model.children[1];
+                    bar = plotArea.charts[0].points[0];
+                    barElement = $("#" + bar.options.id);
+                }
+
+                function barClick(callback) {
+                    createBarChart({
+                        seriesClick: callback
+                    });
+
+                    barElement.click();
+                }
+
+                function barHover(callback) {
+                    createBarChart({
+                        seriesHover: callback
+                    });
+
+                    barElement.mouseover();
+                }
+
+                // ------------------------------------------------------------
+                module("seriesClick / Bar", {
+                    teardown: destroyChart
+                });
+
+                test("fires when clicking bars", 1, function() {
+                    barClick(function() { ok(true); });
+                });
+
+                test("fires when clicking bar labels", 1, function() {
+                    createBarChart({
+                        seriesDefaults: {
+                            bar: {
+                                labels: {
+                                    visible: true
+                                }
+                            }
+                        },
+                        seriesClick: function() { ok(true); }
+                    });
+                    var label = plotArea.charts[0].points[0].children[0];
+                    $("#" + label.options.id).click();
+                });
+
+                test("event arguments contain value", 1, function() {
+                    barClick(function(e) { equals(e.value, 1); });
+                });
+
+                test("event arguments contain category", 1, function() {
+                    barClick(function(e) { equals(e.category, "A"); });
+                });
+
+                test("event arguments contain series", 1, function() {
+                    barClick(function(e) {
+                        same(e.series, chart.options.series[0]);
+                    });
+                });
+
+                test("event arguments contain jQuery element", 1, function() {
+                    barClick(function(e) {
+                        equals(e.element.attr("id"), bar.options.id);
+                    });
+                });
+
+                // ------------------------------------------------------------
+                module("seriesHover / Bar", {
+                    teardown: destroyChart
+                });
+
+                test("fires when hovering bars", 1, function() {
+                    barHover(function() { ok(true); });
+                });
+
+                test("fires when hovering bar labels", 1, function() {
+                    createBarChart({
+                        seriesDefaults: {
+                            bar: {
+                                labels: {
+                                    visible: true
+                                }
+                            }
+                        },
+                        seriesHover: function() { ok(true); }
+                    });
+                    var label = plotArea.charts[0].points[0].children[0];
+                    $("#" + label.options.id).mouseover();
+                });
+
+                test("event arguments contain value", 1, function() {
+                    barHover(function(e) { equals(e.value, 1); });
+                });
+
+                test("event arguments contain category", 1, function() {
+                    barHover(function(e) { equals(e.category, "A"); });
+                });
+
+                test("event arguments contain series", 1, function() {
+                    barHover(function(e) {
+                        same(e.series, chart.options.series[0]);
+                    });
+                });
+
+                test("event arguments contain jQuery element", 1, function() {
+                    barHover(function(e) {
+                        equals(e.element.attr("id"), bar.options.id);
+                    });
+                });
+
+            })();
+
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>
