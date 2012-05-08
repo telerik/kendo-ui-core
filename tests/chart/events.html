@@ -36,18 +36,6 @@
                 chart = null;
             }
 
-            function createLineChart(options) {
-                createChart($.extend({
-                    series: [{
-                        type: "line",
-                        data: [1, 2]
-                    }],
-                    categoryAxis: {
-                        categories: ["A"]
-                    }
-                }, options));
-            }
-
             function createAreaChart(options) {
                 createChart($.extend({
                     series: [{
@@ -76,22 +64,6 @@
                 var marker,
                     bar;
 
-                function linePointClick(seriesClickHandler) {
-                    createLineChart({
-                        seriesClick: seriesClickHandler
-                    });
-                    marker = plotArea.charts[0].points[0].children[0];
-                    $("#" + marker.options.id).click();
-                }
-
-                function linePointHover(seriesHoverHandler) {
-                    createLineChart({
-                        seriesHover: seriesHoverHandler
-                    });
-                    marker = plotArea.charts[0].points[0].children[0];
-                    $("#" + marker.options.id).mouseover();
-                }
-
                 function segmentClick(x, y) {
                     var segment = plotArea.charts[0]._segments[0],
                         element = $("#" + segment.options.id),
@@ -112,22 +84,6 @@
                     e.clientX = offset.left + x || 0;
                     e.clientY = offset.top + y || 0;
                     element.trigger(e);
-                }
-
-                function lineClick(seriesClickHandler, x, y) {
-                    createLineChart({
-                        seriesClick: seriesClickHandler
-                    });
-
-                    segmentClick(x, y);
-                }
-
-                function lineHover(seriesHoverHandler, x, y) {
-                    createLineChart({
-                        seriesHover: seriesHoverHandler
-                    });
-
-                    segmentHover(x, y);
                 }
 
                 function areaClick(seriesClickHandler, x, y) {
@@ -163,153 +119,6 @@
                     bar = plotArea.charts[0].points[0];
                     $("#" + bar.options.id).mouseover();
                 }
-
-                // ------------------------------------------------------------
-                module("seriesClick / LinePoint", {
-                    teardown: destroyChart
-                });
-
-                test("fires when clicking line points", 1, function() {
-                    linePointClick(function() { ok(true); });
-                });
-
-                test("fires when clicking line point labels", 1, function() {
-                    createLineChart({
-                        seriesDefaults: {
-                            line: {
-                                labels: {
-                                    visible: true
-                                }
-                            }
-                        },
-                        seriesClick: function(e) { ok(true); }
-                    });
-                    label = plotArea.charts[0].points[0].children[1];
-                    $("#" + label.options.id).click();
-                });
-
-                test("event arguments contain value", 1, function() {
-                    linePointClick(function(e) { equals(e.value, 1); });
-                });
-
-                test("event arguments contain category", 1, function() {
-                    linePointClick(function(e) { equals(e.category, "A"); });
-                });
-
-                test("event arguments contain series", 1, function() {
-                    linePointClick(function(e) {
-                        same(e.series, chart.options.series[0]);
-                    });
-                });
-
-                test("event arguments contain dataItem", 1, function() {
-                    linePointClick(function(e) {
-                        same(e.dataItem.value, e.value);
-                    });
-                });
-
-                test("event arguments contain jQuery element", 1, function() {
-                    linePointClick(function(e) {
-                        equals(e.element.attr("id"), marker.options.id);
-                    });
-                });
-
-                // ------------------------------------------------------------
-                module("seriesHover / LinePoint", {
-                    teardown: destroyChart
-                });
-
-                test("fires when hovering line points", 1, function() {
-                    linePointHover(function() { ok(true); });
-                });
-
-                test("fires when hovering line point labels", 1, function() {
-                    createLineChart({
-                        seriesDefaults: {
-                            line: {
-                                labels: {
-                                    visible: true
-                                }
-                            }
-                        },
-                        seriesHover: function(e) { ok(true); }
-                    });
-                    label = plotArea.charts[0].points[0].children[1];
-                    $("#" + label.options.id).mouseover();
-                });
-
-                test("event arguments contain value", 1, function() {
-                    linePointHover(function(e) { equals(e.value, 1); });
-                });
-
-                test("event arguments contain category", 1, function() {
-                    linePointHover(function(e) { equals(e.category, "A"); });
-                });
-
-                test("event arguments contain series", 1, function() {
-                    linePointHover(function(e) {
-                        same(e.series, chart.options.series[0]);
-                    });
-                });
-
-                test("event arguments contain dataItem", 1, function() {
-                    linePointHover(function(e) {
-                        same(e.dataItem.value, e.value);
-                    });
-                });
-
-                test("event arguments contain jQuery element", 1, function() {
-                    linePointHover(function(e) {
-                        equals(e.element.attr("id"), marker.options.id);
-                    });
-                });
-
-                // ------------------------------------------------------------
-                module("seriesClick / Line", {
-                    teardown: destroyChart
-                });
-
-                test("fires when clicking line", 1, function() {
-                    lineClick(function() { ok(true); });
-                });
-
-                test("fires for closest point when clicking line (1)", 1, function() {
-                    lineClick(function(e) { equals(e.value, 1); }, 0, 0);
-                });
-
-                test("fires for closest point when clicking line (2)", 1, function() {
-                    lineClick(function(e) { equals(e.value, 2); }, 1000, 0);
-                });
-
-                // ------------------------------------------------------------
-                module("seriesHover / Line", {
-                    teardown: destroyChart
-                });
-
-                test("fires when hovering line", 1, function() {
-                    lineHover(function() { ok(true); });
-                });
-
-                test("fires for closest point when hovering line (1)", 1, function() {
-                    lineHover(function(e) { equals(e.value, 1); }, 0, 0);
-                });
-
-                test("fires for closest point when hovering line (2)", 1, function() {
-                    lineHover(function(e) { equals(e.value, 2); }, 1000, 0);
-                });
-
-                test("fires when moving over neighbor", 2, function() {
-                    lineHover(function() { ok(true); });
-
-                        var e = new jQuery.Event("mousemove"),
-                            element = $("#container"),
-                            offset = element.offset();
-
-                    e.clientX = offset.left + 100;
-                    e.clientY = offset.top + 100;
-
-                    $(document.body).trigger(e);
-                });
 
                 // ------------------------------------------------------------
                 module("seriesClick / Area", {
