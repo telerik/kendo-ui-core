@@ -70,7 +70,7 @@
 
     function preventTrigger(e) {
         e.preventDefault();
-        $(e.target.parentNode).trigger(e.type);
+        $(document.body).trigger(e.type);
     }
 
     /**
