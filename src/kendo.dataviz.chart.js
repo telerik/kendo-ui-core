@@ -386,15 +386,10 @@
             }
 
             point = chart._getChartElement(e);
-            if (point) {
-                chart.trigger(SERIES_HOVER, {
-                    value: point.value,
-                    category: point.category,
-                    series: point.series,
-                    dataItem: point.dataItem,
-                    element: $(e.target)
-                });
+            if (point && point.hover) {
+                point.hover(chart, e);
                 chart._activePoint = point;
+
                 tooltipOptions = deepExtend({}, chart.options.tooltip, point.options.tooltip);
                 if (tooltipOptions.visible) {
                     tooltip.show(point);
@@ -421,6 +416,7 @@
                     owner = point.parent;
                     seriesPoint = owner.getNearestPoint(coords.x, coords.y, point.seriesIx);
                     if (seriesPoint && seriesPoint != point) {
+                        seriesPoint.hover(chart, e);
                         chart._activePoint = seriesPoint;
 
                         tooltipOptions = deepExtend({}, chart.options.tooltip, point.options.tooltip);
@@ -1319,8 +1315,22 @@
 
         click: function(chart, e) {
             seriesClick(chart, this, e);
+        },
+
+        hover: function(chart, e) {
+            seriesHover(chart, this, e);
         }
     });
+
+    function seriesHover(chart, point, e) {
+        chart.trigger(SERIES_HOVER, {
+            value: point.value,
+            category: point.category,
+            series: point.series,
+            dataItem: point.dataItem,
+            element: $(e.target)
+        });
+    }
 
     function seriesClick(chart, point, e) {
         chart.trigger(SERIES_CLICK, {
@@ -1933,6 +1943,10 @@
 
         click: function(chart, e) {
             seriesClick(chart, this, e);
+        },
+
+        hover: function(chart, e) {
+            seriesHover(chart, this, e);
         }
     });
 
@@ -1993,6 +2007,15 @@
                 point = segment.parent.getNearestPoint(coords.x, coords.y, seriesIx);
 
             seriesClick(chart, point, e);
+        },
+
+        hover: function(chart, e) {
+            var segment = this,
+                coords = chart._eventCoordinates(e),
+                seriesIx = segment.seriesIx,
+                point = segment.parent.getNearestPoint(coords.x, coords.y, seriesIx);
+
+            seriesHover(chart, point, e);
         }
     });
 
@@ -2700,6 +2723,10 @@
 
         click: function(chart, e) {
             seriesClick(chart, this, e);
+        },
+
+        hover: function(chart, e) {
+            seriesHover(chart, this, e);
         }
     });
 

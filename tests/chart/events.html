@@ -32,7 +32,7 @@
             }
 
             function destroyChart() {
-                $("#container").unbind("click").empty();
+                $("#container").unbind().empty();
                 chart = null;
             }
 
@@ -84,11 +84,30 @@
                     $("#" + marker.options.id).click();
                 }
 
+                function linePointHover(seriesHoverHandler) {
+                    createLineChart({
+                        seriesHover: seriesHoverHandler
+                    });
+                    marker = plotArea.charts[0].points[0].children[0];
+                    $("#" + marker.options.id).mouseover();
+                }
+
                 function segmentClick(x, y) {
                     var segment = plotArea.charts[0]._segments[0],
                         element = $("#" + segment.options.id),
                         offset = element.offset(),
                         e = new jQuery.Event("click");
+
+                    e.clientX = offset.left + x || 0;
+                    e.clientY = offset.top + y || 0;
+                    element.trigger(e);
+                }
+
+                function segmentHover(x, y) {
+                    var segment = plotArea.charts[0]._segments[0],
+                        element = $("#" + segment.options.id),
+                        offset = element.offset(),
+                        e = new jQuery.Event("mouseover");
 
                     e.clientX = offset.left + x || 0;
                     e.clientY = offset.top + y || 0;
@@ -103,12 +122,28 @@
                     segmentClick(x, y);
                 }
 
+                function lineHover(seriesHoverHandler, x, y) {
+                    createLineChart({
+                        seriesHover: seriesHoverHandler
+                    });
+
+                    segmentHover(x, y);
+                }
+
                 function areaClick(seriesClickHandler, x, y) {
                     createAreaChart({
                         seriesClick: seriesClickHandler
                     });
 
                     segmentClick(x, y);
+                }
+
+                function areaHover(callback, x, y) {
+                    createAreaChart({
+                        seriesHover: callback
+                    });
+
+                    segmentHover(x, y);
                 }
 
                 function barClick(seriesClickHandler) {
@@ -118,6 +153,15 @@
 
                     bar = plotArea.charts[0].points[0];
                     $("#" + bar.options.id).click();
+                }
+
+                function barHover(callback) {
+                    createBarChart({
+                        seriesHover: callback
+                    });
+
+                    bar = plotArea.charts[0].points[0];
+                    $("#" + bar.options.id).mouseover();
                 }
 
                 // ------------------------------------------------------------
@@ -171,6 +215,56 @@
                 });
 
                 // ------------------------------------------------------------
+                module("seriesHover / LinePoint", {
+                    teardown: destroyChart
+                });
+
+                test("fires when hovering line points", 1, function() {
+                    linePointHover(function() { ok(true); });
+                });
+
+                test("fires when hovering line point labels", 1, function() {
+                    createLineChart({
+                        seriesDefaults: {
+                            line: {
+                                labels: {
+                                    visible: true
+                                }
+                            }
+                        },
+                        seriesHover: function(e) { ok(true); }
+                    });
+                    label = plotArea.charts[0].points[0].children[1];
+                    $("#" + label.options.id).mouseover();
+                });
+
+                test("event arguments contain value", 1, function() {
+                    linePointHover(function(e) { equals(e.value, 1); });
+                });
+
+                test("event arguments contain category", 1, function() {
+                    linePointHover(function(e) { equals(e.category, "A"); });
+                });
+
+                test("event arguments contain series", 1, function() {
+                    linePointHover(function(e) {
+                        same(e.series, chart.options.series[0]);
+                    });
+                });
+
+                test("event arguments contain dataItem", 1, function() {
+                    linePointHover(function(e) {
+                        same(e.dataItem.value, e.value);
+                    });
+                });
+
+                test("event arguments contain jQuery element", 1, function() {
+                    linePointHover(function(e) {
+                        equals(e.element.attr("id"), marker.options.id);
+                    });
+                });
+
+                // ------------------------------------------------------------
                 module("seriesClick / Line", {
                     teardown: destroyChart
                 });
@@ -188,6 +282,36 @@
                 });
 
                 // ------------------------------------------------------------
+                module("seriesHover / Line", {
+                    teardown: destroyChart
+                });
+
+                test("fires when hovering line", 1, function() {
+                    lineHover(function() { ok(true); });
+                });
+
+                test("fires for closest point when hovering line (1)", 1, function() {
+                    lineHover(function(e) { equals(e.value, 1); }, 0, 0);
+                });
+
+                test("fires for closest point when hovering line (2)", 1, function() {
+                    lineHover(function(e) { equals(e.value, 2); }, 1000, 0);
+                });
+
+                test("fires when moving over neighbor", 2, function() {
+                    lineHover(function() { ok(true); });
+
+                        var e = new jQuery.Event("mousemove"),
+                            element = $("#container"),
+                            offset = element.offset();
+
+                    e.clientX = offset.left + 100;
+                    e.clientY = offset.top + 100;
+
+                    $(document.body).trigger(e);
+                });
+
+                // ------------------------------------------------------------
                 module("seriesClick / Area", {
                     teardown: destroyChart
                 });
@@ -202,6 +326,23 @@
 
                 test("fires for closest point when clicking segment (2)", 1, function() {
                     areaClick(function(e) { equals(e.value, 2); }, 1000, 0);
+                });
+
+                // ------------------------------------------------------------
+                module("seriesHover / Area", {
+                    teardown: destroyChart
+                });
+
+                test("fires when hovering segment", 1, function() {
+                    areaHover(function() { ok(true); });
+                });
+
+                test("fires for closest point when hovering segment (1)", 1, function() {
+                    areaHover(function(e) { equals(e.value, 1); }, 0, 0);
+                });
+
+                test("fires for closest point when hovering segment (2)", 1, function() {
+                    areaHover(function(e) { equals(e.value, 2); }, 1000, 0);
                 });
 
                 // ------------------------------------------------------------
@@ -249,6 +390,50 @@
                 });
 
                 // ------------------------------------------------------------
+                module("seriesHover / Bar", {
+                    teardown: destroyChart
+                });
+
+                test("fires when hovering bars", 1, function() {
+                    barHover(function() { ok(true); });
+                });
+
+                test("fires when hovering bar labels", 1, function() {
+                    createBarChart({
+                        seriesDefaults: {
+                            bar: {
+                                labels: {
+                                    visible: true
+                                }
+                            }
+                        },
+                        seriesHover: function() { ok(true); }
+                    });
+                    label = plotArea.charts[0].points[0].children[0];
+                    $("#" + label.options.id).mouseover();
+                });
+
+                test("event arguments contain value", 1, function() {
+                    barHover(function(e) { equals(e.value, 1); });
+                });
+
+                test("event arguments contain category", 1, function() {
+                    barHover(function(e) { equals(e.category, "A"); });
+                });
+
+                test("event arguments contain series", 1, function() {
+                    barHover(function(e) {
+                        same(e.series, chart.options.series[0]);
+                    });
+                });
+
+                test("event arguments contain jQuery element", 1, function() {
+                    barHover(function(e) {
+                        equals(e.element.attr("id"), bar.options.id);
+                    });
+                });
+
+                // ------------------------------------------------------------
                 var segment;
 
                 module("seriesClick / Pie", {
@@ -277,6 +462,35 @@
                 test("fires when clicking labels", 1, function() {
                     label = segment.children[0];
                     $("#" + label.options.id).click();
+                });
+
+                // ------------------------------------------------------------
+                module("seriesHover / Pie", {
+                    setup: function() {
+                        createChart({
+                            series: [{
+                                type: "pie",
+                                data: [1],
+                                labels: {
+                                    visible: true,
+                                    distance: 20
+                                }
+                            }],
+                            seriesHover: function() { ok(true); }
+                        });
+
+                        segment = plotArea.charts[0].segments[0];
+                    },
+                    teardown: destroyChart
+                });
+
+                test("fires when clicking segments", 1, function() {
+                    $("#" + segment.options.id).mouseover();
+                });
+
+                test("fires when clicking labels", 1, function() {
+                    label = segment.children[0];
+                    $("#" + label.options.id).mouseover();
                 });
 
             })();
