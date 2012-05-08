@@ -300,11 +300,11 @@
             }
 
             if (!template) {
-                that.template = kendo.template("<li class='k-item'>${data" + (options.dataTextField ? "." : "") + options.dataTextField + "}</li>", { useWithBlock: false });
+                that.template = kendo.template('<li unselectable="on" class="k-item">${data' + (options.dataTextField ? "." : "") + options.dataTextField + "}</li>", { useWithBlock: false });
             } else {
                 template = kendo.template(template);
                 that.template = function(data) {
-                    return "<li class='k-item'>" + template(data) + "</li>";
+                    return '<li unselectable="on" class="k-item">' + template(data) + "</li>";
                 };
             }
         }
