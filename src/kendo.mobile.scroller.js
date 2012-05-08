@@ -170,47 +170,47 @@
     });
 
     /**
-    * @name kendo.mobile.ui.Scroller.Description
-    * @section The Kendo Mobile Scroller widget enables touch friendly kinetic scrolling for the contents of a given DOM element.
-    *
-    * <h3>Getting Started</h3>
-    * <p>Each mobile View initializes a scroller for its content element. In addition to that, a scroller will be initialized for every element with a
-    * <code>role</code> data attribute set to <code>scroller</code>. Alternatively, it can be initialized using jQuery selector.</p>
-    * @exampleTitle Initialize mobile Scroller using a role data attribute.
-    * @example
-    * <div data-role="scroller">
-    *   Foo
-    * </div>
-    *
-    * @exampleTitle Initialize mobile Scroller using a jQuery selector.
-    * @example
-    * <div id="scroller"></div>
-    * <script>
-    * var listView = $("#scroller").kendoMobileScroller();
-    * </script>
-    *
-    * @section
-    * <p>The scroller exposes the following fields:</p>
-    * <ul>
-    * <li><strong>scrollTop</strong> - the number of pixels that are hidden from view above the scrollable area.</li>
-    * <li><strong>scrollLeft</strong> - the number of pixels that are hidden from view to the left of the scrollable area.</li>
-    * </ul>
-    *
-    */
+     * @name kendo.mobile.ui.Scroller.Description
+     * @section The Kendo Mobile Scroller widget enables touch friendly kinetic scrolling for the contents of a given DOM element.
+     *
+     * <h3>Getting Started</h3>
+     * <p>Each mobile View initializes a scroller for its content element. In addition to that, a scroller will be initialized for every element with a
+     * <code>role</code> data attribute set to <code>scroller</code>. Alternatively, it can be initialized using jQuery selector.</p>
+     * @exampleTitle Initialize mobile Scroller using a role data attribute.
+     * @example
+     * <div data-role="scroller">
+     *   Foo
+     * </div>
+     *
+     * @exampleTitle Initialize mobile Scroller using a jQuery selector.
+     * @example
+     * <div id="scroller"></div>
+     * <script>
+     * var listView = $("#scroller").kendoMobileScroller();
+     * </script>
+     *
+     * @section
+     * <p>The scroller exposes the following fields:</p>
+     * <ul>
+     * <li><strong>scrollTop</strong> - the number of pixels that are hidden from view above the scrollable area.</li>
+     * <li><strong>scrollLeft</strong> - the number of pixels that are hidden from view to the left of the scrollable area.</li>
+     * </ul>
+     *
+     */
     var Scroller = Widget.extend(/** @lends kendo.mobile.ui.Scroller.prototype */{
         /**
-        * @constructs
-        * @extends kendo.mobile.ui.Widget
-        * @param {DomElement} element DOM element
-        * @param {Object} options
-        * @option {Boolean} [elastic] <true> Weather or not to allow out of bounds dragging and easing.
-        * @option {Number} [pullOffset] <140> The threshold after which a scroll pull will trigger the pull to refresh event. Has effect only when the pull option is set to true.
-        * @option {String} [pullTemplate] <Pull to refresh> The message template displayed when the user pulls the scroller. Has effect only when the pull option is set to true.
-        * @option {Boolean} [pullToRefresh] <false> If set to true, the scroller will display a hint when the user pulls the container beyond its top limit.
-        * If a pull beyond the specified pullOffset occurs, a pull event will be triggered.
-        * @option {String} [releaseTemplate] <Release to refresh> The message template indicating that pullToRefresh will occur. Has effect only when the pull option is set to true.
-        * @option {String} [refreshTemplate] <Refreshing> The message template displayed during the refresh. Has effect only when the pull option is set to true.
-        */
+         * @constructs
+         * @extends kendo.mobile.ui.Widget
+         * @param {DomElement} element DOM element
+         * @param {Object} options
+         * @option {Boolean} [elastic] <true> Weather or not to allow out of bounds dragging and easing.
+         * @option {Number} [pullOffset] <140> The threshold after which a scroll pull will trigger the pull to refresh event. Has effect only when the pull option is set to true.
+         * @option {String} [pullTemplate] <Pull to refresh> The message template displayed when the user pulls the scroller. Has effect only when the pull option is set to true.
+         * @option {Boolean} [pullToRefresh] <false> If set to true, the scroller will display a hint when the user pulls the container beyond its top limit.
+         * If a pull beyond the specified pullOffset occurs, a pull event will be triggered.
+         * @option {String} [releaseTemplate] <Release to refresh> The message template indicating that pullToRefresh will occur. Has effect only when the pull option is set to true.
+         * @option {String} [refreshTemplate] <Refreshing> The message template displayed during the refresh. Has effect only when the pull option is set to true.
+         */
         init: function(element, options) {
             var that = this;
             Widget.fn.init.call(that, element, options);
@@ -319,6 +319,18 @@
              * @param {Event} e
              * @param {Number} e.scrollTop The number of pixels that are hidden from view above the scrollable area.
              * @param {Number} e.scrollLeft The number of pixels that are hidden from view to the left of the scrollable area.
+             * @exampleTitle Bind to scroller scroll event in view init
+             * @example
+             * <div data-role="view" data-init="attachToScroller"> ... </div>
+             *  <script>
+             *     function attachToScroller(e) {
+             *       var scroller = e.view.scroller;
+             *       scroller.bind("scroll", function(e) {
+             *          console.log(e.scrollTop);
+             *          console.log(e.scrollLeft);
+             *       });
+             *     }
+             *  </script>
              */
             SCROLL,
             /**
