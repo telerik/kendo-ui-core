@@ -1065,6 +1065,85 @@
 
             })();
 
+            (function() {
+                var chart,
+                    segment;
+
+                function getElement(modelElement) {
+                    return $(document.getElementById(modelElement.options.id));
+                }
+
+                function createAreaChart(options) {
+                    $("#container").kendoChart($.extend({
+                        series: [{
+                            type: "area",
+                            data: [1, 2]
+                        }],
+                        categoryAxis: {
+                            categories: ["A", "B"]
+                        }
+                    }, options));
+
+                    chart = $("#container").data("kendoChart");
+
+                    var plotArea = chart._model.children[1],
+                        lineChart = plotArea.charts[0];
+
+                    segment = lineChart._segments[0];
+                }
+
+                function areaClick(callback, x, y) {
+                    createAreaChart({
+                        seriesClick: callback
+                    });
+
+                    triggerEvent("click", getElement(segment), x, y);
+                }
+
+                function areaHover(callback, x, y) {
+                    createAreaChart({
+                        seriesHover: callback
+                    });
+
+                    triggerEvent("mouseover", getElement(segment), x, y);
+                }
+
+                // ------------------------------------------------------------
+                module("Area Chart / Events / seriesClick", {
+                    teardown: destroyChart
+                });
+
+                test("fires when clicking segment", 1, function() {
+                    areaClick(function() { ok(true); });
+                });
+
+                test("fires for closest point when clicking segment (1)", 1, function() {
+                    areaClick(function(e) { equals(e.value, 1); }, 0, 0);
+                });
+
+                test("fires for closest point when clicking segment (2)", 1, function() {
+                    areaClick(function(e) { equals(e.value, 2); }, 1000, 0);
+                });
+
+                // ------------------------------------------------------------
+                module("Line Chart / Events / seriesHover", {
+                    teardown: destroyChart
+                });
+
+                test("fires when hovering segment", 1, function() {
+                    areaHover(function() { ok(true); });
+                });
+
+                test("fires for closest point when hovering segment (1)", 1, function() {
+                    areaHover(function(e) { equals(e.value, 1); }, 0, 0);
+                });
+
+                test("fires for closest point when hovering segment (2)", 1, function() {
+                    areaHover(function(e) { equals(e.value, 2); }, 1000, 0);
+                });
+
+            })();
+
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>

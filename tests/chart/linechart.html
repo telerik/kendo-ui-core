@@ -1111,15 +1111,6 @@
                     return $(document.getElementById(modelElement.options.id));
                 }
 
-                function triggerEvent(eventName, element, offsetX, offsetY) {
-                    var offset = element.position(),
-                        e = new jQuery.Event(eventName);
-
-                    e.clientX = offset.left + offsetX || 0;
-                    e.clientY = offset.top + offsetY || 0;
-                    element.trigger(e);
-                }
-
                 function createLineChart(options) {
                     $("#container").kendoChart($.extend({
                         series: [{
@@ -1140,11 +1131,6 @@
                     marker = point.children[0];
                     label = point.children[1];
                     segment = lineChart._segments[0];
-                }
-
-                function destroyChart() {
-                    $("#container").unbind().empty();
-                    chart = null;
                 }
 
                 function linePointClick(callback) {
@@ -1242,7 +1228,10 @@
 
                 // ------------------------------------------------------------
                 module("Line Chart / Events / seriesHover", {
-                    teardown: destroyChart
+                    teardown: function() {
+                        destroyChart();
+                        $(document.body).unbind(".tracking");
+                    }
                 });
 
                 test("fires when hovering line points", 1, function() {
@@ -1304,15 +1293,14 @@
                 test("fires when moving over neighbor", 2, function() {
                     lineHover(function() { ok(true); });
 
-                        var e = new jQuery.Event("mousemove"),
-                            element = $("#container"),
-                            offset = element.offset();
+                    var e = new jQuery.Event("mousemove"),
+                        element = $("#container"),
+                        offset = element.offset();
 
                     e.clientX = offset.left + 100;
                     e.clientY = offset.top + 100;
-
                     $(document.body).trigger(e);
-                });
+               });
 
             })();
         </script>
