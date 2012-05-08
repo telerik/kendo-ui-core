@@ -1358,7 +1358,7 @@
                         }
                     }
 
-                    return data;
+                    return data || [];
                 };
             }
         },
