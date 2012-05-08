@@ -64,44 +64,6 @@
                 var marker,
                     bar;
 
-                function segmentClick(x, y) {
-                    var segment = plotArea.charts[0]._segments[0],
-                        element = $("#" + segment.options.id),
-                        offset = element.offset(),
-                        e = new jQuery.Event("click");
-
-                    e.clientX = offset.left + x || 0;
-                    e.clientY = offset.top + y || 0;
-                    element.trigger(e);
-                }
-
-                function segmentHover(x, y) {
-                    var segment = plotArea.charts[0]._segments[0],
-                        element = $("#" + segment.options.id),
-                        offset = element.offset(),
-                        e = new jQuery.Event("mouseover");
-
-                    e.clientX = offset.left + x || 0;
-                    e.clientY = offset.top + y || 0;
-                    element.trigger(e);
-                }
-
-                function areaClick(seriesClickHandler, x, y) {
-                    createAreaChart({
-                        seriesClick: seriesClickHandler
-                    });
-
-                    segmentClick(x, y);
-                }
-
-                function areaHover(callback, x, y) {
-                    createAreaChart({
-                        seriesHover: callback
-                    });
-
-                    segmentHover(x, y);
-                }
-
                 function barClick(seriesClickHandler) {
                     createBarChart({
                         seriesClick: seriesClickHandler
@@ -119,40 +81,6 @@
                     bar = plotArea.charts[0].points[0];
                     $("#" + bar.options.id).mouseover();
                 }
-
-                // ------------------------------------------------------------
-                module("seriesClick / Area", {
-                    teardown: destroyChart
-                });
-
-                test("fires when clicking segment", 1, function() {
-                    areaClick(function() { ok(true); });
-                });
-
-                test("fires for closest point when clicking segment (1)", 1, function() {
-                    areaClick(function(e) { equals(e.value, 1); }, 0, 0);
-                });
-
-                test("fires for closest point when clicking segment (2)", 1, function() {
-                    areaClick(function(e) { equals(e.value, 2); }, 1000, 0);
-                });
-
-                // ------------------------------------------------------------
-                module("seriesHover / Area", {
-                    teardown: destroyChart
-                });
-
-                test("fires when hovering segment", 1, function() {
-                    areaHover(function() { ok(true); });
-                });
-
-                test("fires for closest point when hovering segment (1)", 1, function() {
-                    areaHover(function(e) { equals(e.value, 1); }, 0, 0);
-                });
-
-                test("fires for closest point when hovering segment (2)", 1, function() {
-                    areaHover(function(e) { equals(e.value, 2); }, 1000, 0);
-                });
 
                 // ------------------------------------------------------------
                 module("seriesClick / Bar", {
