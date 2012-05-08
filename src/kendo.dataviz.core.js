@@ -21,6 +21,7 @@
 
     // Constants ==============================================================
     var ANIMATION_STEP = 10,
+        AXIS_LABEL_CLICK = "axisLabelClick",
         BASELINE_MARKER_SIZE = 1,
         BLACK = "#000",
         BOTTOM = "bottom",
@@ -750,15 +751,37 @@
     });
 
     var AxisLabel = TextBox.extend({
-        init: function(content, options) {
-            var label = this;
+        init: function(value, index, options) {
+            var label = this,
+                text = value;
+
+            if (options.template) {
+                label.template = template(options.template);
+                text = label.template({ value: value });
+            }
+
+            label.text = text;
+            label.value = value;
+            label.index = index;
 
             // TODO: Assign unique ID to all TextBoxes?
             label.options.id = uniqueId();
 
-            TextBox.fn.init.call(label, content, options);
+            TextBox.fn.init.call(label, text, options);
 
             label.makeDiscoverable();
+        },
+
+        click: function(widget, e) {
+            var label = this;
+
+            widget.trigger(AXIS_LABEL_CLICK, {
+                element: $(e.target),
+                value: label.value,
+                text: label.text,
+                index: label.index,
+                axis: label.parent.options
+            });
         }
     });
 
@@ -843,6 +866,9 @@
             _align: true
         },
 
+        // abstract getLabelsCount(): Number
+        // abstract createAxisLabel(index, options): AxisLabel
+
         createLabels: function() {
             var axis = this,
                 options = axis.options,
@@ -863,27 +889,12 @@
                     i;
 
                 for (i = labelOptions.skip; i < labelsCount; i += step) {
-                    labelText = axis.getLabelText(i);
-
-                    if (labelOptions.template) {
-                        labelTemplate = template(labelOptions.template);
-                        labelText = labelTemplate({ value: labelText });
-                    }
-
-                    label = axis.createAxisLabel(labelText, labelOptions);
+                    label = axis.createAxisLabel(i, labelOptions);
                     axis.append(label);
                     axis.labels.push(label);
                 }
             }
         },
-
-        createAxisLabel: function(content, options) {
-            return new AxisLabel(content, options);
-        },
-
-        getLabelsCount: noop,
-
-        getLabelText: noop,
 
         lineBox: function() {
             var axis = this,
@@ -1418,9 +1429,12 @@
             return this.getDivisions(this.options.majorUnit);
         },
 
-        getLabelText: function(index) {
-            var options = this.options;
-            return round(options.min + (index * options.majorUnit), DEFAULT_PRECISION);
+        createAxisLabel: function(index, labelOptions) {
+            var axis = this,
+                options = axis.options,
+                value = round(options.min + (index * options.majorUnit), DEFAULT_PRECISION);
+
+            return new AxisLabel(value, index, labelOptions);
         }
     });
 
@@ -2410,6 +2424,7 @@
             }
         },
 
+        AXIS_LABEL_CLICK: AXIS_LABEL_CLICK,
         COORD_PRECISION: COORD_PRECISION,
         DEFAULT_PRECISION: DEFAULT_PRECISION,
         DEFAULT_WIDTH: DEFAULT_WIDTH,

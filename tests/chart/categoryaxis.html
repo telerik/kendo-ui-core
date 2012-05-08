@@ -9,6 +9,7 @@
     </head>
     <body>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.dataviz.core.js"></script>
         <script src="../../src/kendo.dataviz.chart.js"></script>
         <script src="../../src/kendo.dataviz.themes.js"></script>
@@ -994,12 +995,35 @@
             })();
 
             (function() {
-                function axisLabelClick(clickHandler) {
-                    createLineChart({
-                        axisLabelClick: clickHandler
-                    });
+                var chart,
+                    plotArea;
 
-                    label = plotArea.categoryAxis.labels[0];
+                function createChart(options) {
+                    $("#container").kendoChart(options);
+
+                    chart = $("#container").data("kendoChart");
+                    plotArea = chart._model.children[1];
+                }
+
+                function destroyChart() {
+                    $("#container").unbind().empty();
+                    chart = null;
+                }
+
+                function axisLabelClick(clickHandler, options) {
+                    createChart($.extend(true, {
+                        series: [{
+                            type: "line",
+                            data: [1, 2, 3]
+                        }],
+                        categoryAxis: {
+                            name: "Axis A",
+                            categories: ["A", "B", "C"]
+                        },
+                        axisLabelClick: clickHandler
+                    }, options));
+
+                    label = plotArea.categoryAxis.labels[1];
                     $("#" + label.options.id).click();
                 }
 
@@ -1012,9 +1036,45 @@
                     axisLabelClick(function() { ok(true); });
                 });
 
-                test("event arguments contain element", 1, function() {
+                test("event arguments contain axis options", 1, function() {
+                    axisLabelClick(function(e) {
+                        equals(e.axis.name, "Axis A");
+                    });
+                });
+
+                test("event arguments contain DOM element", 1, function() {
                     axisLabelClick(function(e) {
                         equals(e.element.length, 1);
+                    });
+                });
+
+                test("event arguments contain category index", 1, function() {
+                    axisLabelClick(function(e) {
+                        equals(e.index, 1);
+                    });
+                });
+
+                test("category index is correct when step is defined", 1, function() {
+                    axisLabelClick(function(e) {
+                        equals(e.index, 2);
+                    }, {
+                        categoryAxis: {
+                            labels: {
+                                step: 2
+                            }
+                        }
+                    });
+                });
+
+                test("event arguments contain category name as text", 1, function() {
+                    axisLabelClick(function(e) {
+                        equals(e.text, "B");
+                    });
+                });
+
+                test("event arguments contain category name as value", 1, function() {
+                    axisLabelClick(function(e) {
+                        equals(e.value, "B");
                     });
                 });
 
@@ -1029,5 +1089,7 @@
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
 
+        <div id="container">
+        </div>
     </body>
 </html>
