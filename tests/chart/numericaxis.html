@@ -9,6 +9,7 @@
     </head>
     <body>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.dataviz.core.js"></script>
         <script src="../../src/kendo.dataviz.chart.js"></script>
         <script src="../../src/kendo.dataviz.themes.js"></script>
@@ -1616,6 +1617,88 @@
                 });
 
             })();
+
+            (function() {
+                var chart,
+                    plotArea;
+
+                function createChart(options) {
+                    $("#container").kendoChart(options);
+
+                    chart = $("#container").data("kendoChart");
+                    plotArea = chart._model.children[1];
+                }
+
+                function destroyChart() {
+                    $("#container").unbind().empty();
+                    chart = null;
+                }
+
+                function axisLabelClick(clickHandler, options) {
+                    createChart($.extend(true, {
+                        series: [{
+                            type: "line",
+                            data: [1, 2, 3]
+                        }],
+                        axisLabelClick: clickHandler
+                    }, options));
+
+                    label = plotArea.namedValueAxes.primary.labels[1];
+                    $("#" + label.options.id).click();
+                }
+
+                // ------------------------------------------------------------
+                module("Category Axis / Events / axisLabelClick", {
+                    teardown: destroyChart
+                });
+
+                test("fires when clicking axis labels", 1, function() {
+                    axisLabelClick(function() { ok(true); });
+                });
+
+                test("event arguments contain axis options", 1, function() {
+                    axisLabelClick(function(e) {
+                        equals(e.axis.type, "Numeric");
+                    });
+                });
+
+                test("event arguments contain DOM element", 1, function() {
+                    axisLabelClick(function(e) {
+                        equals(e.element.length, 1);
+                    });
+                });
+
+                test("event arguments contain category index", 1, function() {
+                    axisLabelClick(function(e) {
+                        equals(e.index, 1);
+                    });
+                });
+
+                test("category index is correct when step is defined", 1, function() {
+                    axisLabelClick(function(e) {
+                        equals(e.index, 2);
+                    }, {
+                        valueAxis: {
+                            labels: {
+                                step: 2
+                            }
+                        }
+                    });
+                });
+
+                test("event arguments contain category name as text", 1, function() {
+                    axisLabelClick(function(e) {
+                        equals(e.text, "0.5");
+                    });
+                });
+
+                test("event arguments contain category name as value", 1, function() {
+                    axisLabelClick(function(e) {
+                        equals(e.value, 0.5);
+                    });
+                });
+
+            })();
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>
@@ -1626,5 +1709,7 @@
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
 
+        <div id="container">
+        </div>
     </body>
 </html>
