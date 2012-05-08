@@ -60,6 +60,7 @@ var suiteScripts = {
         "kendo.panelbar.js",
         "kendo.tabstrip.js",
         "kendo.timepicker.js",
+        "kendo.datetimepicker.js",
         "kendo.treeview.js",
         "kendo.slider.js",
         "kendo.splitter.js",
