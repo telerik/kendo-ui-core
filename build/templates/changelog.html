@@ -1,9 +1,15 @@
+# var ampRegExp = /&/g, ltRegExp = /</g, gtRegExp = />/g; #
+
+# function encode(value) { #
+#   return ("" + value).replace(ampRegExp, "&amp;").replace(ltRegExp, "&lt;").replace(gtRegExp, "&gt;"); #
+# } #
+
 # function outputIssues(title, issues) { #
     # if (issues && issues.length) { #
-    <h4>#= title #</h4>
+    <h4>#= encode(title) #</h4>
     <ul>
         # for (var issue in issues) { #
-        <li>#= issues[issue] #</li>
+        <li>#= encode(issues[issue]) #</li>
         # } #
     </ul>
     # } #
@@ -48,14 +54,14 @@
         # var suite = suiteOrder[suiteIndex]; #
         # var suiteIssues = issues[suite]; #
         # if (!suiteIssues) continue; #
-        <h2>#= suite #</h2>
+        <h2>#= encode(suite) #</h2>
 
         # outputIssues("What's new", suiteIssues.features); #
         # outputIssues("What's fixed", suiteIssues.bugs); #
 
         # for (var widget in suiteIssues) { #
         # if (widget == "bugs" || widget == "features") continue; #
-        <h3>#= widget #</h3>
+        <h3>#= encode(widget) #</h3>
 
             # var component = issues[suite][widget]; #
 
