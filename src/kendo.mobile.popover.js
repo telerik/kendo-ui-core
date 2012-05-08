@@ -109,15 +109,16 @@
         },
 
         _activate: function() {
-            var direction = that.direction,
-            dimensions = that.dimensions,
-            offset = dimensions.offset,
-            popup = that.popup,
-            anchor = popup.options.anchor,
-            anchorOffset = $(anchor).offset(),
-            elementOffset = $(popup.element).offset(),
-            cssClass = popup.flipped ? REVERSE[direction] : direction,
-            offsetAmount = anchorOffset[offset] - elementOffset[offset] + ($(anchor)[dimensions.size]() / 2);
+            var that = this,
+                direction = that.direction,
+                dimensions = that.dimensions,
+                offset = dimensions.offset,
+                popup = that.popup,
+                anchor = popup.options.anchor,
+                anchorOffset = $(anchor).offset(),
+                elementOffset = $(popup.element).offset(),
+                cssClass = popup.flipped ? REVERSE[direction] : direction,
+                offsetAmount = anchorOffset[offset] - elementOffset[offset] + ($(anchor)[dimensions.size]() / 2);
 
             that.wrapper.removeClass(DIRECTION_CLASSES).addClass("km-" + cssClass);
             that.arrow.css(offset, offsetAmount).show();
@@ -140,6 +141,7 @@
         }
 
         return instance;
-    }
+    };
+
     ui.plugin(PopOver);
 })(jQuery);
