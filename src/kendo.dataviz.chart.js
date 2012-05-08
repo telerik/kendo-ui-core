@@ -33,7 +33,6 @@
         Text = dataviz.Text,
         TextBox = dataviz.TextBox,
         Title = dataviz.Title,
-        ViewElement = dataviz.ViewElement,
         animationDecorator = dataviz.animationDecorator,
         append = dataviz.append,
         defined = dataviz.defined,
@@ -342,9 +341,8 @@
             element.bind(MOUSEOVER, proxy(chart._mouseOver, chart));
         },
 
-        _getPoint: function(e) {
-            var chart = this,
-                modelId = $(e.target).data("modelId"),
+        _getChartElement: function(e) {
+            var modelId = $(e.target).data("modelId"),
                 point;
 
             if (modelId) {
@@ -369,7 +367,7 @@
 
         _click: function(e) {
             var chart = this,
-                point = chart._getPoint(e);
+                point = chart._getChartElement(e);
 
             if (point && point.click) {
                 point.click(this, e);
@@ -387,7 +385,7 @@
                 return;
             }
 
-            point = chart._getPoint(e);
+            point = chart._getChartElement(e);
             if (point) {
                 chart.trigger(SERIES_HOVER, {
                     value: point.value,
@@ -1039,7 +1037,7 @@
 
         createAxisLabel: function(index, labelOptions) {
             var axis = this,
-                options = this.options,
+                options = axis.options,
                 category = defined(options.categories[index]) ? options.categories[index] : "";
 
             return new AxisLabel(category, index, labelOptions);
@@ -1245,8 +1243,7 @@
                     animation: options.animation,
                     data: { modelId: options.modelId }
                 }, border),
-                elements = [],
-                label = bar.children[0];
+                elements = [];
 
             if (options.overlay) {
                 rectStyle.overlay = deepExtend({rotation: vertical ? 0 : 90}, options.overlay);
@@ -1998,7 +1995,6 @@
             var chart = this,
                 options = chart.options,
                 series = options.series,
-                chartModelId = options.modelId,
                 seriesPoints = chart.seriesPoints,
                 currentSeries,
                 seriesIx,
@@ -2008,7 +2004,6 @@
                 point,
                 pointIx,
                 pointCount,
-                pointCenter,
                 segments = [];
 
             for (seriesIx = 0; seriesIx < seriesCount; seriesIx++) {
@@ -2474,7 +2469,7 @@
         },
 
         getViewElements: function(view) {
-            var chart = this;
+            var chart = this,
                 elements = ScatterChart.fn.getViewElements.call(chart, view),
                 group = view.createGroup({
                     animation: {

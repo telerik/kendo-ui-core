@@ -872,7 +872,6 @@
         createLabels: function() {
             var axis = this,
                 options = axis.options,
-                labelTemplate,
                 align = options.vertical ? RIGHT : CENTER,
                 labelOptions = deepExtend({ }, options.labels, {
                     align: align, zIndex: options.zIndex,
@@ -884,7 +883,6 @@
 
             if (labelOptions.visible) {
                 var labelsCount = axis.labelsCount(),
-                    labelText,
                     label,
                     i;
 
