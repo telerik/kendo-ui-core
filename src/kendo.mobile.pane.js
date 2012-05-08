@@ -238,7 +238,7 @@
 
             var link = $(e.currentTarget),
                 transition = data(link, "transition"),
-                rel = data(link, "rel"),
+                rel = data(link, "rel") || "",
                 target = data(link, "target"),
                 pane = this,
                 href = link.attr(HREF);

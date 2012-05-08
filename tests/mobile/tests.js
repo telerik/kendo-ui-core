@@ -48,6 +48,10 @@ tests.push(
         title: "mobile navbar"
     },
     {
+        page: "mobile/popover.html",
+        title: "mobile popover"
+    },
+    {
         page: "mobile/splitview.html",
         title: "mobile splitview"
     },
