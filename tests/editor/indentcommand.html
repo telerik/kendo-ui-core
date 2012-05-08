@@ -43,7 +43,7 @@
                 var range = createRangeFromText(editor, '|foo|');
                 var command = new IndentCommand({range:range});
                 command.exec();
-                equal(editor.value(), '<div style="margin-left:30px;">foo</div>');
+                equal(editor.value(), '<p style="margin-left:30px;">foo</p>');
             });
 
             test('undo removes margin', function() {
@@ -62,7 +62,7 @@
                 command.undo();
                 command.exec();
 
-                equal(editor.value(), '<div style="margin-left:30px;">foo</div>');
+                equal(editor.value(), '<p style="margin-left:30px;">foo</p>');
             });
 
             test('indent list', function() {
