@@ -98,7 +98,7 @@ var IndentFormatter = Class.extend({
                 }
             }
         } else {
-            var formatter = new BlockFormatter([{tags:blockElements}], {style:{marginLeft:30}});
+            var formatter = new BlockFormatter([{tags:"p"}], {style:{marginLeft:30}});
 
             formatter.apply(nodes);
         }
@@ -106,10 +106,11 @@ var IndentFormatter = Class.extend({
 
     remove: function(nodes) {
         var formatNodes = this.finder.findSuitable(nodes),
-            targetNode, i, len, list, listParent, siblings;
+            targetNode, i, len, list, listParent, siblings,
+            formatNode, marginLeft;
 
         for (i = 0, len = formatNodes.length; i < len; i++) {
-            var formatNode = $(formatNodes[i]);
+            formatNode = $(formatNodes[i]);
 
             if (formatNode.is("li")) {
                 list = formatNode.parent();
@@ -148,7 +149,7 @@ var IndentFormatter = Class.extend({
                 targetNode = formatNodes[i];
             }
 
-            var marginLeft = parseInt(indent(targetNode), 10) - 30;
+            marginLeft = parseInt(indent(targetNode), 10) - 30;
             indent(targetNode, marginLeft);
         }
     }
