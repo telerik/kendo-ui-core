@@ -3932,6 +3932,22 @@
              *     alert("Hovered value: " + e.value);
              * }
              */
+
+            /**
+             * Fires when an axis label is clicked.
+             * @name kendo.dataviz.ui.Chart#axisLabelClick
+             * @event
+             * @param {Event} e
+             * @param {Object} e.axis The axis that the label belongs to.
+             * @param {Object} e.value The label value or category name.
+             * @param {Object} e.text The label text.
+             * @param {Object} e.index The label sequential index or category index.
+             * @param {Object} e.element The DOM element of the label.
+             * @example
+             * function onAxisLabelClick(e) {
+             *     alert("Clicked " + e.axis.type + " axis label with value: " + e.value);
+             * }
+             */
         },
 
         /**
