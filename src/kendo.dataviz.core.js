@@ -866,7 +866,7 @@
             _align: true
         },
 
-        // abstract getLabelsCount(): Number
+        // abstract labelsCount(): Number
         // abstract createAxisLabel(index, options): AxisLabel
 
         createLabels: function() {
@@ -883,7 +883,7 @@
             axis.labels = [];
 
             if (labelOptions.visible) {
-                var labelsCount = axis.getLabelsCount(),
+                var labelsCount = axis.labelsCount(),
                     labelText,
                     label,
                     i;
@@ -1425,7 +1425,7 @@
             return slotBox;
         },
 
-        getLabelsCount: function() {
+        labelsCount: function() {
             return this.getDivisions(this.options.majorUnit);
         },
 

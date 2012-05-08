@@ -1033,7 +1033,7 @@
             return slotBox;
         },
 
-        getLabelsCount: function() {
+        labelsCount: function() {
             return this.options.categories.length;
         },
 
