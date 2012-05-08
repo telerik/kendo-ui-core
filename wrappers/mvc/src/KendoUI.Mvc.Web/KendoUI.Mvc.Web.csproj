@@ -467,6 +467,13 @@
     <Compile Include="UI\Effects\IEffectsBuilderFactory.cs" />
     <Compile Include="UI\ExpressionBuilder.cs" />
     <Compile Include="Infrastructure\Implementation\BindingHelper.cs" />
+    <Compile Include="UI\Gauge\RadialGauge.cs" />
+    <Compile Include="UI\Gauge\LinearGauge.cs" />
+    <Compile Include="UI\Gauge\GaugeArea.cs" />
+    <Compile Include="UI\Gauge\Html\GaugeHtmlBuilder.cs" />
+    <Compile Include="UI\Gauge\Gauge.cs" />
+    <Compile Include="UI\Gauge\IGauge.cs" />
+    <Compile Include="UI\Gauge\Serialization\GaugeAreaSerializer.cs" />
     <Compile Include="UI\Grid\Columns\GridForeignKeyColumn.cs" />
     <Compile Include="UI\Grid\Columns\IGridForeignKeyColumn.cs" />
     <Compile Include="UI\Grid\Commands\GridCustomActionCommand.cs" />
