@@ -7,7 +7,6 @@
         Widget = ui.Widget,
         ViewEngine = mobile.ViewEngine,
         Loader = mobile.ui.Loader,
-        PopOver = mobile.ui.PopOver,
 
         EXTERNAL = "external",
         HREF = "href",
@@ -16,6 +15,7 @@
         NAVIGATE = "navigate",
         VIEW_SHOW = "viewShow",
 
+        WIDGET_RELS = /popover|actionsheet/,
         BACK = "#:back",
 
         data = kendo.data,
@@ -237,35 +237,31 @@
             }
 
             var link = $(e.currentTarget),
-            transition = link.data(kendo.ns + "transition"),
-            rel = link.data(kendo.ns + "rel"),
-            target = link.data(kendo.ns + "target"),
-            pane = this,
-            href = link.attr(HREF);
+                transition = data(link, "transition"),
+                rel = data(link, "rel"),
+                target = data(link, "target"),
+                pane = this,
+                href = link.attr(HREF);
 
-            if (rel === EXTERNAL) {
+            if (rel === EXTERNAL || !href || href === DUMMY_HREF) {
                 return;
             }
 
-            if (href && href != DUMMY_HREF) {
-                // Prevent iOS address bar progress display for in app navigation
-                link.attr(HREF, DUMMY_HREF);
-                setTimeout(function() { link.attr(HREF, href); });
+            // Prevent iOS address bar progress display for in app navigation
+            link.attr(HREF, DUMMY_HREF);
+            setTimeout(function() { link.attr(HREF, href); });
 
-                if (rel === "popover") {
-                    PopOver.init($(href)).openFor(link);
-                } else if (rel === "actionsheet") {
-                    kendo.initWidget($(href), {}, kendo.mobile.ui).openFor(link);
-                } else {
-                    if (target === "_top") {
-                        pane = mobile.application.pane;
-                    }
-                    else if (target) {
-                        pane = $("#" + target).data("kendoMobilePane");
-                    }
-
-                    pane.navigate(href, transition);
+            if (rel.match(WIDGET_RELS)) {
+                kendo.widgetInstance($(href), ui).openFor(link);
+            } else {
+                if (target === "_top") {
+                    pane = mobile.application.pane;
                 }
+                else if (target) {
+                    pane = $("#" + target).data("kendoMobilePane");
+                }
+
+                pane.navigate(href, transition);
             }
 
             e.preventDefault();
