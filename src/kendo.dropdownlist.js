@@ -625,7 +625,8 @@
             }
 
             if (that._open) {
-                that.toggle(length);
+                that._open = false;
+                that.toggle(!!length);
             }
 
             that._hideBusy();
