@@ -374,20 +374,7 @@
 
                 equal(grid.tbody.find("tr:first > td:first")[0].offsetWidth, initialWidth + 10);
             });
-/*
-            test("column footer cell width is incremented when handler is moved to the right", function() {
-                 var grid = new Grid(table, {
-                    dataSource: [ { foo: "foo", bar: "bar" } ],
-                    resizable: true,
-                    columns: [{ field: "foo", footerTemplate: "foo" }, "bar"]
-                }),
-                firstColumn = grid.thead.find("th:first"),
-                initialWidth = grid.footer.find("tr:first > td:first")[0].offsetWidth;
 
-                resizeColumn(grid.wrapper.find(".k-grid-header-wrap").find(".k-resize-handle:first"), firstColumn[0].offsetWidth, initialWidth + 10);
-                equal(grid.footer.find("tr:first > td:first")[0].offsetWidth, initialWidth + 10);
-            });
-*/
             test("column header cell width is incremented when handler is moved to the right if scrolling is disabled", function() {
                  var grid = new Grid(table, {
                     dataSource: [ { foo: "foo", bar: "bar" } ],
@@ -480,6 +467,55 @@
                 grid.dataSource.page(2);
 
                 equal(grid.footer.find("tr:first > td:first")[0].offsetWidth, resizedWidth);
+            });
+
+            test("resize handles are repositioned for detail grids", function() {
+                var positionHandle,
+                    grid = new Grid(table, {
+                        dataSource: { data: [ { foo: "foo", bar: "bar" } ], pageSize: 1 },
+                        resizable: true,
+                        detailInit: function(e) {
+                            var childGrid = $("<table/>").appendTo(e.detailCell).kendoGrid().data("kendoGrid");
+                            positionHandle = stub(childGrid, "positionColumnResizeHandles");
+                        },
+                        columns: [{ field: "foo", footerTemplate: "foo" }, "bar"]
+                    }),
+                    firstColumn = grid.thead.find("th:first"),
+                    initialWidth = firstColumn[0].offsetWidth;
+
+                grid.expandRow(grid.tbody.find("tr:first"));
+
+                resizeColumn(grid.wrapper.find(".k-grid-header-wrap").find(".k-resize-handle:first"), initialWidth, initialWidth + 10);
+                ok(positionHandle.calls("positionColumnResizeHandles"));
+            });
+
+            test("resize handles are repositioned for detail grid child grids if detail grid is not resizable", function() {
+                var positionHandle,
+                    grid = new Grid(table, {
+                        dataSource: { data: [ { foo: "foo", bar: "bar" } ], pageSize: 1 },
+                        resizable: true,
+                        detailInit: function(e) {
+                            var detailGrid = $("<table/>").appendTo(e.detailCell).kendoGrid({
+                                dataSource: { data: [ { foo: "child_foo", bar: "child_bar" } ], pageSize: 1 },
+                                resizable: false,
+                                detailInit: function(e) {
+                                    var childGrid = $("<table/>").appendTo(e.detailCell).kendoGrid().data("kendoGrid");
+                                    positionHandle = stub(childGrid, "positionColumnResizeHandles");
+                                },
+                                columns: [{ field: "foo", footerTemplate: "foo" }, "bar"]
+                            }).data("kendoGrid");
+
+                            detailGrid.expandRow(detailGrid.tbody.find("tr:first"));
+                        },
+                        columns: [{ field: "foo", footerTemplate: "foo" }, "bar"]
+                    }),
+                    firstColumn = grid.thead.find("th:first"),
+                    initialWidth = firstColumn[0].offsetWidth;
+
+                grid.expandRow(grid.tbody.find("tr:first"));
+
+                resizeColumn(grid.wrapper.find(".k-grid-header-wrap").find(".k-resize-handle:first"), initialWidth, initialWidth + 10);
+                ok(positionHandle.calls("positionColumnResizeHandles"));
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

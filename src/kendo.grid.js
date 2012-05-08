@@ -442,28 +442,32 @@
             that._wrapper();
         },
 
-        _positionColumnResizeHandlers: function() {
+        positionColumnResizeHandles: function() {
             var that = this,
                 left = 0,
                 th,
                 scrollable = that.options.scrollable,
                 container = scrollable ? that.wrapper.find(".k-grid-header-wrap") : that.wrapper;
 
-            container.find(".k-resize-handle").remove();
+            if (that.options.resizable) {
+                container.find("> .k-resize-handle").remove();
 
-            that.thead.find("th").each(function() {
-                left += this.offsetWidth;
+                that.thead.find("th").each(function() {
+                    left += this.offsetWidth;
 
-                th = $(this);
-                $('<div class="k-resize-handle" />')
-                .css({
-                    left: left - indicatorWidth,
-                    top: scrollable ? 0 : heightAboveHeader(that.wrapper),
-                    width: indicatorWidth * 2
-                })
-                .appendTo(container)
-                .data("th", th);
-            });
+                    th = $(this);
+                    if (th.is(":not(.k-group-cell,.k-hierarchy-cell)")) {
+                        $('<div class="k-resize-handle" />')
+                        .css({
+                            left: left - indicatorWidth,
+                            top: scrollable ? 0 : heightAboveHeader(that.wrapper),
+                            width: indicatorWidth * 2
+                        })
+                        .appendTo(container)
+                        .data("th", th);
+                    }
+                });
+            }
         },
 
         _resizable: function() {
@@ -478,7 +482,7 @@
             if (options.resizable) {
                 container = options.scrollable ? that.wrapper.find(".k-grid-header-wrap") : that.wrapper;
 
-                that._positionColumnResizeHandlers();
+                that.positionColumnResizeHandles();
 
                 container.kendoResizable({
                     handle: ".k-resize-handle",
@@ -495,9 +499,13 @@
 
                         cursor(that.wrapper, th.css('cursor'));
 
-                        col = that.thead.parent().find("col:eq(" + index + ")")
-                            .add(contentTable.children("colgroup").find("col:eq(" + index + ")"))
-                            .add(footer.find("colgroup").find("col:eq(" + index + ")"));
+                        if (options.scrollable) {
+                            col = that.thead.parent().find("col:eq(" + index + ")")
+                                .add(contentTable.children("colgroup").find("col:eq(" + index + ")"))
+                                .add(footer.find("colgroup").find("col:eq(" + index + ")"));
+                        } else {
+                            col = contentTable.children("colgroup").find("col:eq(" + index + ")");
+                        }
 
                         columnStart = e.pageX;
                         columnWidth = th.outerWidth();
@@ -511,12 +519,13 @@
                         if (width > 10) {
                             col.css('width', width);
 
-                            that._footerWidth = gridWidth + e.pageX - columnStart;
-
-                            that.tbody.parent()
-                                .add(that.thead.parent())
-                                .add(footer.find("table"))
-                                .css('width', that._footerWidth);
+                            if (options.scrollable) {
+                                that._footerWidth = gridWidth + e.pageX - columnStart;
+                                that.tbody.parent()
+                                    .add(that.thead.parent())
+                                    .add(footer.find("table"))
+                                    .css('width', that._footerWidth);
+                            }
 
                             $('.k-resize-handle', that.wrapper).each(function () {
                                 left += $(this).data('th').outerWidth();
@@ -541,6 +550,12 @@
                                 oldWidth: columnWidth,
                                 newWidth: newWidth
                             });
+                        }
+
+                        that.positionColumnResizeHandles();
+
+                        if (that._hasDetails()) {
+                            that.tbody.find(">tr.k-detail-row [" + kendo.attr("role") + "=grid]").kendoGrid("positionColumnResizeHandles");
                         }
                     }
                 });
@@ -2348,7 +2363,6 @@
                 that._templates();
                 that._updateCols();
                 that._updateHeader(groups);
-                that._positionColumnResizeHandlers();
                 that._group = groups > 0;
             }
 
@@ -2378,6 +2392,10 @@
 
             if (currentIndex >= 0) {
                 that.current(that.items().eq(currentIndex).children().filter(DATA_CELL).first());
+            }
+
+            if (that.options.resizable) {
+                that.positionColumnResizeHandles();
             }
 
             that.trigger(DATABOUND);
