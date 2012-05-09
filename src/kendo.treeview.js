@@ -251,7 +251,7 @@
     templates = {
         dragClue: template("<div class='k-header k-drag-clue'><span class='k-icon k-drag-status'></span>#= text #</div>"),
         group: template(
-            "<ul class='#= _.groupCssClass(group) #'#= _.groupAttributes(group) #>" +
+            "<ul class='#= r.groupCssClass(group) #'#= r.groupAttributes(group) #>" +
                 "#= renderItems(data) #" +
             "</ul>"
         ),
@@ -263,10 +263,10 @@
             "# } #"
         ),
         item: template(
-            "<li class='#= _.wrapperCssClass(group, item) #'>" +
-                "<div class='#= _.cssClass(group, item) #'>" +
+            "<li class='#= r.wrapperCssClass(group, item) #'>" +
+                "<div class='#= r.cssClass(group, item) #'>" +
                     "# if (item.items) { #" +
-                        "<span class='#= _.toggleButtonClass(item) #'></span>" +
+                        "<span class='#= r.toggleButtonClass(item) #'></span>" +
                     "# } #" +
 
                     "# if (treeview.checkboxTemplate) { #" +
@@ -276,7 +276,7 @@
                     "# } #" +
 
                     "# var tag = item.url ? 'a' : 'span'; #" +
-                    "<#=tag# class='#= _.textClass(item) #'#= _.textAttributes(item) #>" +
+                    "<#=tag# class='#= r.textClass(item) #'#= r.textAttributes(item) #>" +
 
                         "# if (item.imageUrl) { #" +
                             "<img class='k-image' alt='' src='#= item.imageUrl #'>" +
@@ -1275,7 +1275,7 @@
                     });
                 };
 
-            options._ = rendering;
+            options.r = rendering;
 
             return templates.item(options);
         },
@@ -1302,7 +1302,7 @@
                     return html;
                 };
 
-            options._ = rendering;
+            options.r = rendering;
 
             return templates.group(options);
         }
