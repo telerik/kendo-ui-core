@@ -323,7 +323,16 @@
                     "depends": [
                         "sortable"
                     ]
+                },
+                {
+                    "id": "grid-column-resize",
+                    "name": "Column resizing",
+                    "description": "Support for column resizing",
+                    "depends": [
+                        "resizable"
+                    ]
                 }
+
             ]
         },
         {
