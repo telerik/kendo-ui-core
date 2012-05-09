@@ -162,6 +162,31 @@
                 equal(datetimepicker.value(), null);
             });
 
+            test("value method uses options.parseFormats to parse passed value", function() {
+                var secondFormat = "MM/dd/yy",
+                    date = new Date(2000, 10, 10),
+                    datetimepicker = input.kendoDateTimePicker({
+                        parseFormats: secondFormat
+                    }).data("kendoDateTimePicker"),
+                    dateString = kendo.toString(date, secondFormat);
+
+                datetimepicker.value(dateString);
+
+                equal(+datetimepicker._value, +date);
+            });
+
+            test("value method parse passed value using options.parseFormats", function() {
+                    var datetimepicker = input.kendoDateTimePicker({
+                        parseFormats: ["MMMM yyyy"],
+                    }).data("kendoDateTimePicker"),
+                    date = new Date(2000, 10, 1),
+                    dateString = kendo.toString(date, "MMMM yyyy");
+
+                datetimepicker.value(dateString);
+
+                equal(+datetimepicker._value, +date);
+            });
+
             test("enable method with false value disables the widget", function() {
                 var datetimepicker = new DateTimePicker(input);
 
