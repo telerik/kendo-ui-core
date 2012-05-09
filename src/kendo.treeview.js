@@ -254,46 +254,6 @@
             "<ul class='#= r.groupCssClass(group) #'#= r.groupAttributes(group) #>" +
                 "#= renderItems(data) #" +
             "</ul>"
-        ),
-        text: template(
-            "# if (typeof item.encoded != 'undefined' && item.encoded === false) {#" +
-                "#= item.text #" +
-            "# } else { #" +
-                "#: item.text #" +
-            "# } #"
-        ),
-        item: template(
-            "<li class='#= r.wrapperCssClass(group, item) #'>" +
-                "<div class='#= r.cssClass(group, item) #'>" +
-                    "# if (item.items) { #" +
-                        "<span class='#= r.toggleButtonClass(item) #'></span>" +
-                    "# } #" +
-
-                    "# if (treeview.checkboxTemplate) { #" +
-                        "<span class='k-checkbox'>" +
-                            "#= treeview.checkboxTemplate(data) #" +
-                        "</span>" +
-                    "# } #" +
-
-                    "# var tag = item.url ? 'a' : 'span'; #" +
-                    "<#=tag# class='#= r.textClass(item) #'#= r.textAttributes(item) #>" +
-
-                        "# if (item.imageUrl) { #" +
-                            "<img class='k-image' alt='' src='#= item.imageUrl #'>" +
-                        "# } #" +
-
-                        "# if (item.spriteCssClass) { #" +
-                            "<span class='k-sprite #= item.spriteCssClass #'></span>" +
-                        "# } #" +
-
-                        "#= treeview.template(data) #" +
-                    "</#=tag#>" +
-                "</div>" +
-
-                "# if (item.items) { #" +
-                    "#= subGroup(group, item) #" +
-                "# } #" +
-            "</li>"
         )
     };
 
@@ -435,8 +395,12 @@
             if (options.template && typeof options.template == "string") {
                 options.template = template(options.template);
             } else if (!options.template) {
-                options.template = templates.text;
+                options.template = that._textTemplate();
             }
+
+            that.templates = {
+                item: that._itemTemplate()
+            };
 
             // render treeview if it's not already rendered
             if (!element.hasClass(KTREEVIEW)) {
@@ -669,22 +633,70 @@
                     effects: "expand:vertical",
                     duration: 200,
                     show: true
-                },
-                collapse: {
+                }, collapse: {
                     duration: 100
                 }
             },
             dragAndDrop: false
         },
 
-        _template: function() {
-            var that = this,
-                bindings = that.options.bindings || {},
-                bind = function(field) {
-                    return "#=" + (bindings[field] || field) + "#";
-                };
+        _textTemplate: function() {
+            var bindings = this.options.bindings || {},
+                field = function(fieldName) {
+                    return "item['" + (bindings[fieldName] || fieldName) + "']";
+                },
+                templateText =
+                    "# if (typeof item.encoded != 'undefined' && item.encoded === false) {#" +
+                        "#=" + field("text") + "#" +
+                    "# } else { #" +
+                        "#:" + field("text") + "#" +
+                    "# } #";
 
-            return "<span class='t-in'>" + bind("text") + "</span>";
+            return template(templateText);
+        },
+
+        _itemTemplate: function() {
+            var bindings = this.options.bindings || {},
+                field = function(fieldName) {
+                    return "item['" + (bindings[fieldName] || fieldName) + "']";
+                },
+                templateText =
+                    "<li class='#= r.wrapperCssClass(group, item) #'>" +
+                        "<div class='#= r.cssClass(group, item) #'>" +
+                            "# if (" + field("items") + ") { #" +
+                                "<span class='#= r.toggleButtonClass(item) #'></span>" +
+                            "# } #" +
+
+                            "# if (treeview.checkboxTemplate) { #" +
+                                "<span class='k-checkbox'>" +
+                                    "#= treeview.checkboxTemplate(data) #" +
+                                "</span>" +
+                            "# } #" +
+
+                            "# var tag = " + field("url") + " ? 'a' : 'span'; #" +
+                            "# var textAttr = " + field("url") +
+                                    " ? ' href=\\''+" + field("url") + "+'\\'' : ''; #" +
+
+                            "<#=tag# class='#= r.textClass(item) #'#= textAttr #>" +
+
+                                "# if (" + field("imageUrl") + ") { #" +
+                                    "<img class='k-image' alt='' src='#=" + field("imageUrl") + "#'>" +
+                                "# } #" +
+
+                                "# if (" + field("spriteCssClass") + ") { #" +
+                                    "<span class='k-sprite #=" + field("spriteCssClass") + "#'></span>" +
+                                "# } #" +
+
+                                "#= treeview.template(data) #" +
+                            "</#=tag#>" +
+                        "</div>" +
+
+                        "# if (item.items) { #" +
+                            "#= subGroup(group, item) #" +
+                        "# } #" +
+                    "</li>";
+
+            return template(templateText);
         },
 
         setOptions: function(options) {
@@ -1277,7 +1289,7 @@
 
             options.r = rendering;
 
-            return templates.item(options);
+            return that.templates.item(options);
         },
 
         _renderGroup: function (options) {
@@ -1538,9 +1550,6 @@
             }
 
             return result;
-        },
-        textAttributes: function(item) {
-            return item.url ? " href='" + item.url + "'" : "";
         },
         toggleButtonClass: function(item) {
             var result = "k-icon";

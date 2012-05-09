@@ -237,7 +237,7 @@
                 var image = treeview.find(".k-image");
 
                 equal(image.length, 1);
-                equal(image.attr("src").lastIndexOf("foo"), image.attr("src").length - 3);
+                ok(image.attr("src").indexOf("foo") >= 0);
             });
 
             test("renders text", function() {
@@ -318,7 +318,7 @@
                 equal(treeview.find(".k-item .k-group").length, 0);
             });
 
-            /*module("template generation", moduleOptions);
+            module("template generation", moduleOptions);
 
             test("uses text field binding", function() {
                 treeview.kendoTreeView({
@@ -326,12 +326,54 @@
                         text: "foo"
                     },
                     dataSource: [
-                        { foo: "text" }
+                        { foo: "bar" }
                     ]
                 });
 
-                equal(treeview.find(".t-in:first").text(), "text");
-            });*/
+                equal(treeview.find(".k-in:first").text(), "bar");
+            });
+
+            test("uses imageUrl field binding", function() {
+                treeview.kendoTreeView({
+                    bindings: {
+                        imageUrl: "foo"
+                    },
+                    dataSource: [
+                        { foo: "bar" }
+                    ]
+                });
+
+                var image = treeview.find(".k-image:first");
+
+                ok(image.attr("src").indexOf("bar") >= 0);
+            });
+
+            test("uses spriteCssClass field binding", function() {
+                treeview.kendoTreeView({
+                    bindings: {
+                        spriteCssClass: "foo"
+                    },
+                    dataSource: [
+                        { foo: "bar" }
+                    ]
+                });
+
+                ok(treeview.find(".k-sprite").hasClass("bar"));
+            });
+
+            test("uses url field binding", function() {
+                treeview.kendoTreeView({
+                    bindings: {
+                        url: "foo"
+                    },
+                    dataSource: [
+                        { foo: "bar" }
+                    ]
+                });
+
+                equal(treeview.find("a").length, 1);
+                equal(treeview.find("a").attr("href"), "bar");
+            });
         </script>
 
         <div id="qunit-fixture">test markup, will be hidden</div>
