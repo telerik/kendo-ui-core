@@ -272,12 +272,8 @@
                     equals(view.log.path[0].style.dashType, "dot");
                 });
 
-                test("registers line with root", function() {
-                    ok(root.idMap[view.log.path[0].style.id] === scatterLineChart);
-                });
-
-                test("registers line metadata", function() {
-                    ok(root.idMapMetadata[view.log.path[0].style.id].seriesIx === 0);
+                test("line has same model id as its segment", function() {
+                    equals(view.log.path[0].style.data.modelId, scatterLineChart._segments[0].options.modelId);
                 });
 
                 test("renders line chart group", function() {

@@ -37,16 +37,24 @@
                             categories: [2005, 2006, 2007, 2008, 2009]
                         },
                         seriesClick: onSeriesClick,
-                        seriesHover: onSeriesHover
+                        seriesHover: onSeriesHover,
+                        axisLabelClick: onAxisLabelClick
                     });
                 }
 
                 function onSeriesClick(e) {
-                    kendoConsole.log(kendo.format("Series click :: {0} ({1}): {2}%", e.series.name, e.category, e.value));
+                    kendoConsole.log(kendo.format("Series click :: {0} ({1}): {2}%",
+                        e.series.name, e.category, e.value));
                 }
 
                 function onSeriesHover(e) {
-                    kendoConsole.log(kendo.format("Series hover :: {0} ({1}): {2}%", e.series.name, e.category, e.value));
+                    kendoConsole.log(kendo.format("Series hover :: {0} ({1}): {2}%",
+                        e.series.name, e.category, e.value));
+                }
+
+                function onAxisLabelClick(e) {
+                    kendoConsole.log(kendo.format("Axis label click :: {0} axis : {1}",
+                        e.axis.type, e.text));
                 }
 
                 $(document).ready(function() {

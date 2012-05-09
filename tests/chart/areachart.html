@@ -489,6 +489,8 @@
                 });
 
                 // ------------------------------------------------------------
+                var polyline;
+
                 module("Area Chart / Rendering", {
                     setup: function() {
                         setupAreaChart(plotArea, {
@@ -507,39 +509,37 @@
                                 )
                             ]
                         });
+
+                        polyline = view.log.path[0];
                     }
                 });
 
                 test("sets area line width", function() {
-                    equals(view.log.path[0].style.strokeWidth, 4);
+                    equals(polyline.style.strokeWidth, 4);
                 });
 
                 test("sets area line color", function() {
-                    equals(view.log.path[0].style.stroke, "lineColor");
+                    equals(polyline.style.stroke, "lineColor");
                 });
 
                 test("sets area line opacity", function() {
-                    equals(view.log.path[0].style.strokeOpacity, 0.5);
+                    equals(polyline.style.strokeOpacity, 0.5);
                 });
 
                 test("sets area line opacity", function() {
-                    equals(view.log.path[0].style.dashType, "dot");
+                    equals(polyline.style.dashType, "dot");
                 });
 
                 test("sets area fill color", function() {
-                    equals(view.log.path[0].style.fill, "areaColor");
+                    equals(polyline.style.fill, "areaColor");
                 });
 
                 test("sets area opacity", function() {
-                    equals(view.log.path[0].style.fillOpacity, 0.1);
+                    equals(polyline.style.fillOpacity, 0.1);
                 });
 
-                test("registers area with root", function() {
-                    ok(root.idMap[view.log.path[0].style.id] === areaChart);
-                });
-
-                test("registers area metadata", function() {
-                    ok(root.idMapMetadata[view.log.path[0].style.id].seriesIx === 0);
+                test("area has same model id as its segment", function() {
+                    equals(polyline.style.data.modelId, areaChart._segments[0].options.modelId);
                 });
 
                 test("renders area chart group", function() {
@@ -855,11 +855,11 @@
                     ok(marker.options.id.length > 0);
                 });
 
-                test("registers id with root", function() {
-                    createPoint();
-                    var view = new ViewStub();
+                test("marker has same model id", function() {
+                    view = new ViewStub();
+
                     point.getViewElements(view);
-                    ok(root.idMap[marker.options.id] === point);
+                    equals(marker.options.modelId, point.options.modelId);
                 });
 
                 test("getOutlineElement returns marker outline", function() {
@@ -870,20 +870,12 @@
                     equals(view.log.circle.length, 1);
                 });
 
-                test("getOutlineElement sets marker outline id", function() {
+                test("outline element has same model id", function() {
                     createPoint({ markers: { type: "circle" }});
                     view = new ViewStub();
 
                     point.getOutlineElement(view);
-                    equals(view.log.circle[0].style.id, point.marker.options.id + "_outline");
-                });
-
-                test("getOutlineElement registers outline id with root", function() {
-                    createPoint({ markers: { type: "circle" }});
-                    view = new ViewStub();
-
-                    point.getOutlineElement(view);
-                    ok(root.idMap[view.log.circle[0].style.id] === point);
+                    equals(view.log.circle[0].style.data.modelId, point.options.modelId);
                 });
 
                 test("getOutlineElement applies render options for square markers", function() {
@@ -1078,79 +1070,80 @@
             })();
 
             (function() {
-                var ShapeElement = dataviz.ShapeElement,
-                    SIZE = 5,
-                    BORDER = 2,
-                    BORDER_COLOR = "#cf0",
-                    BACKGROUND = "#f00",
-                    shape,
-                    box,
-                    view;
+                var chart,
+                    segment;
 
-                function createShape(options) {
-                    shape = new ShapeElement(
-                        $.extend({
-                            width: SIZE,
-                            height: SIZE,
-                            border: { width: BORDER },
-                            background: "#f00"
-                        }, options)
-                    );
+                function getElement(modelElement) {
+                    return $(document.getElementById(modelElement.options.id));
+                }
 
-                    box = new Box2D(0, 0, SIZE, SIZE);
-                    shape.reflow(box);
+                function createAreaChart(options) {
+                    $("#container").kendoChart($.extend({
+                        series: [{
+                            type: "area",
+                            data: [1, 2]
+                        }],
+                        categoryAxis: {
+                            categories: ["A", "B"]
+                        }
+                    }, options));
 
-                    view = new ViewStub();
-                    shape.getViewElements(view);
+                    chart = $("#container").data("kendoChart");
+
+                    var plotArea = chart._model.children[1],
+                        lineChart = plotArea.charts[0];
+
+                    segment = lineChart._segments[0];
+                }
+
+                function areaClick(callback, x, y) {
+                    createAreaChart({
+                        seriesClick: callback
+                    });
+
+                    triggerEvent("click", getElement(segment), x, y);
+                }
+
+                function areaHover(callback, x, y) {
+                    createAreaChart({
+                        seriesHover: callback
+                    });
+
+                    triggerEvent("mouseover", getElement(segment), x, y);
                 }
 
                 // ------------------------------------------------------------
-                module("ShapeElement", {
-                    setup: function() {
-                        createShape();
-                    }
+                module("Area Chart / Events / seriesClick", {
+                    teardown: destroyChart
                 });
 
-                test("renders square", function() {
-                    var square = view.log.rect[0];
-                    same([square.x1, square.y1, square.x2, square.y2],
-                         [0, 0, SIZE, SIZE]);
+                test("fires when clicking segment", 1, function() {
+                    areaClick(function() { ok(true); });
                 });
 
-                test("renders triangle", function() {
-                    createShape({ type: "triangle" });
-                    var path = view.log.path[0];
-                    same(mapPoints(path.points), [
-                        [SIZE / 2, 0], [0, SIZE], [SIZE, SIZE]
-                    ]);
-                    ok(path.closed);
+                test("fires for closest point when clicking segment (1)", 1, function() {
+                    areaClick(function(e) { equals(e.value, 1); }, 0, 0);
                 });
 
-                test("renders circle", function() {
-                    createShape({ type: "circle" });
-                    var circle = view.log.circle[0];
-                    same(circle.center, [SIZE / 2, SIZE / 2]);
-                    same(circle.radius, SIZE / 2);
+                test("fires for closest point when clicking segment (2)", 1, function() {
+                    areaClick(function(e) { equals(e.value, 2); }, 1000, 0);
                 });
 
-                test("renders id", function() {
-                    createShape({ id: "id" });
-                    equals(view.log.rect[0].style.id, "id");
+                // ------------------------------------------------------------
+                module("Area Chart / Events / seriesHover", {
+                    teardown: destroyChart
                 });
 
-                test("does not render element when hidden", function() {
-                    createShape({ visible: false });
-                    equals(view.log.rect.length, 0);
+                test("fires when hovering segment", 1, function() {
+                    areaHover(function() { ok(true); });
                 });
 
-                test("does not render element when hidden (triangle)", function() {
-                    createShape({ visible: false,  type: "triangle"});
-                    equals(view.log.path.length, 0);
+                test("fires for closest point when hovering segment (1)", 1, function() {
+                    areaHover(function(e) { equals(e.value, 1); }, 0, 0);
                 });
 
-                test("does not render element when hidden (circle)", function() {
-                    createShape({ visible: false,  type: "circle"});
-                    equals(view.log.circle.length, 0);
+                test("fires for closest point when hovering segment (2)", 1, function() {
+                    areaHover(function(e) { equals(e.value, 2); }, 1000, 0);
                 });
 
             })();

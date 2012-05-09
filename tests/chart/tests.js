@@ -60,10 +60,6 @@ tests.push(
         title: "chart pie"
     },
     {
-        page: "chart/events.html",
-        title: "chart events"
-    },
-    {
         page: "chart/tooltip.html",
         title: "chart tooltip"
     },
