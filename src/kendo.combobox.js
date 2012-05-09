@@ -730,6 +730,7 @@
             var that = this,
                 length = word.length,
                 options = that.options,
+                ignoreCase = options.ignoreCase,
                 filter = options.filter,
                 field = options.dataTextField,
                 filters, expression;
@@ -748,10 +749,10 @@
 
                     filters = expression.filters || [];
                     filters.push({
-                        value: word,
+                        value: ignoreCase ? word.toLowerCase() : word,
                         field: field,
                         operator: filter,
-                        ignoreCase: options.ignoreCase
+                        ignoreCase: ignoreCase
                     });
 
                     that.dataSource.filter(filters);
