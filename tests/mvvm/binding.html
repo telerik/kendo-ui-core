@@ -834,6 +834,125 @@
                 equal(viewModel.args("clickHandler", 0)[0].data, viewModel.items[0]);
             });
 
+            test("binding template to field of the parent object", function(){
+                var viewModel = kendo.observable({
+                    foo: "foo",
+                    items: [{}]
+                });
+
+                var dom = $('<ul data-bind="source: items" data-template="parent-field-template" />');
+
+                kendo.bind(dom, viewModel);
+
+                equal(dom.find("li").text(), viewModel.foo);
+            });
+
+            /*
+
+            Unsuported!!!
+
+            test("binding template to field of the parent object when the source is array of primitive types", function(){
+                var viewModel = kendo.observable({
+                    foo: "foo",
+                    items: [1]
+                });
+
+                var dom = $('<ul data-bind="source: items" data-template="parent-field-template" />');
+
+                kendo.bind(dom, viewModel);
+
+                equal(dom.find("li").text(), viewModel.foo);
+            });
+            */
+
+            test("binding template to function of the parent object", function(){
+                var viewModel = kendo.observable({
+                    foo: function() {
+                        return "foo";
+                    },
+                    items: [{}]
+                });
+
+                var dom = $('<ul data-bind="source: items" data-template="parent-field-template" />');
+
+                kendo.bind(dom, viewModel);
+
+                equal(dom.find("li").text(), viewModel.foo());
+            });
+
+            test("the function of the parent object receives the current item as an argument", 1, function(){
+                var viewModel = kendo.observable({
+                    foo: function(item) {
+                        strictEqual(item, this.items[0]);
+                    },
+                    items: [{}]
+                });
+
+                var dom = $('<ul data-bind="source: items" data-template="parent-field-template" />');
+
+                kendo.bind(dom, viewModel);
+            });
+
+            test("the function of the parent object has the right context", 1, function(){
+                var viewModel = kendo.observable({
+                    foo: function(item) {
+                        strictEqual(this, viewModel);
+                    },
+                    items: [{}]
+                });
+
+                var dom = $('<ul data-bind="source: items" data-template="parent-field-template" />');
+
+                kendo.bind(dom, viewModel);
+            });
+
+            test("binding template to a grand parent field", 1, function(){
+                var viewModel = kendo.observable({
+                    foo: "foo",
+                    bar: {
+                        items: [{}]
+                    }
+                });
+
+                var dom = $('<ul data-bind="source: bar.items" data-template="parent-field-template" />');
+
+                kendo.bind(dom, viewModel);
+
+                equal(dom.find("li").text(), viewModel.foo);
+            });
+
+            test("binding template to a grand parent function", function(){
+                var viewModel = kendo.observable({
+                    foo: {
+                        foo: function() {
+                            return "foo";
+                        }
+                    },
+                    items: [{}]
+                });
+
+                var dom = $('<ul data-bind="source: items" data-template="parent-nested-function-template" />');
+
+                kendo.bind(dom, viewModel);
+
+                equal(dom.find("li").text(), viewModel.foo.foo());
+            });
+
+            test("grand parent function has the right context", 1, function(){
+                var viewModel = kendo.observable({
+                    foo: {
+                        foo: function() {
+                            strictEqual(this, viewModel.foo);
+                        }
+                    },
+                    items: [{}]
+                });
+
+                var dom = $('<ul data-bind="source: items" data-template="parent-nested-function-template" />');
+
+                kendo.bind(dom, viewModel);
+            });
+
             test("widget event binding", 1, function() {
                 var TestWidget = kendo.ui.Widget.extend({
                     options: {
@@ -959,6 +1078,12 @@
         </script>
         <script id="div-template" type="text/x-kendo-template">
             Hello, ${foo}<span data-bind="text:foo"></span>
+        </script>
+        <script id="parent-field-template" type="text/x-kendo-template">
+            <li data-bind="text: foo"></li>
+        </script>
+        <script id="parent-nested-function-template" type="text/x-kendo-template">
+            <li data-bind="text: foo.foo"></li>
         </script>
     </body>
 </html>
