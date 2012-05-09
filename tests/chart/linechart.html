@@ -489,12 +489,8 @@
                     equals(view.log.path[0].style.strokeOpacity, 0.5);
                 });
 
-                test("registers line with root", function() {
-                    ok(root.idMap[view.log.path[0].style.id] === lineChart);
-                });
-
-                test("registers line metadata", function() {
-                    ok(root.idMapMetadata[view.log.path[0].style.id].seriesIx === 0);
+                test("line has same model id as its segment", function() {
+                    equals(view.log.path[0].style.data.modelId, lineChart._segments[0].options.modelId);
                 });
 
                 test("renders line chart group", function() {
@@ -733,6 +729,10 @@
                     }
                 });
 
+                test("is discoverable", function() {
+                    ok(point.options.modelId);
+                });
+
                 test("fills target box", function() {
                     sameBox(point.box, box);
                 });
@@ -809,11 +809,11 @@
                     ok(marker.options.id.length > 0);
                 });
 
-                test("registers id with root", function() {
-                    createPoint();
-                    var view = new ViewStub();
+                test("marker has same model id", function() {
+                    view = new ViewStub();
+
                     point.getViewElements(view);
-                    ok(root.idMap[marker.options.id] === point);
+                    equals(marker.options.modelId, point.options.modelId);
                 });
 
                 test("getOutlineElement returns marker outline", function() {
@@ -824,20 +824,12 @@
                     equals(view.log.circle.length, 1);
                 });
 
-                test("getOutlineElement sets marker outline id", function() {
+                test("outline element has same model id", function() {
                     createPoint({ markers: { type: "circle" }});
                     view = new ViewStub();
 
                     point.getOutlineElement(view);
-                    equals(view.log.circle[0].style.id, point.marker.options.id + "_outline");
-                });
-
-                test("getOutlineElement registers outline id with root", function() {
-                    createPoint({ markers: { type: "circle" }});
-                    view = new ViewStub();
-
-                    point.getOutlineElement(view);
-                    ok(root.idMap[view.log.circle[0].style.id] === point);
+                    equals(view.log.circle[0].style.data.modelId, point.options.modelId);
                 });
 
                 test("getOutlineElement applies render options for square markers", function() {
@@ -1109,6 +1101,208 @@
 
             })();
 
+            (function() {
+                var chart,
+                    marker,
+                    label,
+                    segment;
+
+                function getElement(modelElement) {
+                    return $(document.getElementById(modelElement.options.id));
+                }
+
+                function createLineChart(options) {
+                    $("#container").kendoChart($.extend({
+                        series: [{
+                            type: "line",
+                            data: [1, 2]
+                        }],
+                        categoryAxis: {
+                            categories: ["A"]
+                        }
+                    }, options));
+
+                    chart = $("#container").data("kendoChart");
+
+                    var plotArea = chart._model.children[1],
+                        lineChart = plotArea.charts[0],
+                        point = lineChart.points[0];
+
+                    marker = point.children[0];
+                    label = point.children[1];
+                    segment = lineChart._segments[0];
+                }
+
+                function linePointClick(callback) {
+                    createLineChart({
+                        seriesClick: callback
+                    });
+
+                    getElement(marker).click();
+                }
+
+                function linePointHover(callback) {
+                    createLineChart({
+                        seriesHover: callback
+                    });
+
+                    getElement(marker).mouseover();
+                }
+
+                function lineClick(callback, x, y) {
+                    createLineChart({
+                        seriesClick: callback
+                    });
+
+                    triggerEvent("click", getElement(segment), x, y);
+                }
+
+                function lineHover(callback, x, y) {
+                    createLineChart({
+                        seriesHover: callback
+                    });
+
+                    triggerEvent("mouseover", getElement(segment), x, y);
+                }
+
+                // ------------------------------------------------------------
+                module("Line Chart / Events / seriesClick", {
+                    teardown: destroyChart
+                });
+
+                test("fires when clicking line points", 1, function() {
+                    linePointClick(function() { ok(true); });
+                });
+
+                test("fires when clicking line point labels", 1, function() {
+                    createLineChart({
+                        seriesDefaults: {
+                            line: {
+                                labels: {
+                                    visible: true
+                                }
+                            }
+                        },
+                        seriesClick: function(e) { ok(true); }
+                    });
+                    getElement(label).click();
+                });
+
+                test("event arguments contain value", 1, function() {
+                    linePointClick(function(e) { equals(e.value, 1); });
+                });
+
+                test("event arguments contain category", 1, function() {
+                    linePointClick(function(e) { equals(e.category, "A"); });
+                });
+
+                test("event arguments contain series", 1, function() {
+                    linePointClick(function(e) {
+                        same(e.series, chart.options.series[0]);
+                    });
+                });
+
+                test("event arguments contain dataItem", 1, function() {
+                    linePointClick(function(e) {
+                        same(e.dataItem.value, e.value);
+                    });
+                });
+
+                test("event arguments contain jQuery element", 1, function() {
+                    linePointClick(function(e) {
+                        equals(e.element.attr("id"), marker.options.id);
+                    });
+                });
+
+                test("fires when clicking line", 1, function() {
+                    lineClick(function() { ok(true); });
+                });
+
+                test("fires for closest point when clicking line (1)", 1, function() {
+                    lineClick(function(e) { equals(e.value, 1); }, 0, 0);
+                });
+
+                test("fires for closest point when clicking line (2)", 1, function() {
+                    lineClick(function(e) { equals(e.value, 2); }, 1000, 0);
+                });
+
+                // ------------------------------------------------------------
+                module("Line Chart / Events / seriesHover", {
+                    teardown: function() {
+                        destroyChart();
+                        $(document.body).unbind(".tracking");
+                    }
+                });
+
+                test("fires when hovering line points", 1, function() {
+                    linePointHover(function() { ok(true); });
+                });
+
+                test("fires when hovering line point labels", 1, function() {
+                    createLineChart({
+                        seriesDefaults: {
+                            line: {
+                                labels: {
+                                    visible: true
+                                }
+                            }
+                        },
+                        seriesHover: function(e) { ok(true); }
+                    });
+                    getElement(label).mouseover();
+                });
+
+                test("event arguments contain value", 1, function() {
+                    linePointHover(function(e) { equals(e.value, 1); });
+                });
+
+                test("event arguments contain category", 1, function() {
+                    linePointHover(function(e) { equals(e.category, "A"); });
+                });
+
+                test("event arguments contain series", 1, function() {
+                    linePointHover(function(e) {
+                        same(e.series, chart.options.series[0]);
+                    });
+                });
+
+                test("event arguments contain dataItem", 1, function() {
+                    linePointHover(function(e) {
+                        same(e.dataItem.value, e.value);
+                    });
+                });
+
+                test("event arguments contain jQuery element", 1, function() {
+                    linePointHover(function(e) {
+                        equals(e.element.attr("id"), marker.options.id);
+                    });
+                });
+
+                test("fires when hovering line", 1, function() {
+                    lineHover(function() { ok(true); });
+                });
+
+                test("fires for closest point when hovering line (1)", 1, function() {
+                    lineHover(function(e) { equals(e.value, 1); }, 0, 0);
+                });
+
+                test("fires for closest point when hovering line (2)", 1, function() {
+                    lineHover(function(e) { equals(e.value, 2); }, 1000, 0);
+                });
+
+                test("fires when moving over neighbor", 2, function() {
+                    lineHover(function() { ok(true); });
+
+                    var e = new jQuery.Event("mousemove"),
+                        element = $("#container"),
+                        offset = element.offset();
+
+                    e.clientX = offset.left + 100;
+                    e.clientY = offset.top + 100;
+                    $(document.body).trigger(e);
+               });
+
+            })();
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>
