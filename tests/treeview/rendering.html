@@ -17,13 +17,18 @@
         <ol id="qunit-tests"></ol>
         <script>
             kendo.ns = "kendo-";
-            var TreeView = kendo.ui.TreeView;
+            var treeview,
+                moduleOptions = {
+                    setup: function() {
+                        treeview = $("<div />").appendTo(document.body);
+                    },
+                    teardown: function() {
+                        $(".k-treeview").add(treeview).remove();
+                    }
+                };
 
-            module("rendering", {
-                teardown: function() {
-                    $(".k-treeview").remove();
-                }
-            });
+
+            module("enhancing DOM", moduleOptions);
 
             function treeviewFromHtml(html) {
                 return $(html).appendTo(document.body).kendoTreeView().parent();
@@ -90,330 +95,227 @@
                 equals(element.find(".k-group:not(.k-treeview-lines)").length, 1);
             });
 
-            module("group");
-
-            test("renders empty group when there are no items", function() {
-                var html = TreeView.renderGroup({
-                    items: [],
-                    group: {
-                        expanded: true
-                    }
-                });
-
-                equal(html, "<ul class='k-group'></ul>");
-            });
+            module("groups", moduleOptions);
 
             test("renders lines class for first level", function() {
-                var html = TreeView.renderGroup({
-                    items: [],
-                    group: {
-                        firstLevel: true,
-                        expanded: true
-                    }
-                });
+                treeview.kendoTreeView([]);
 
-                equal(html, "<ul class='k-group k-treeview-lines'></ul>");
+                var ul = treeview.find("ul");
+                equal(ul.length, 1);
+                equal(ul.children().length, 0);
+                ok(ul.hasClass("k-group"));
+                ok(ul.hasClass("k-treeview-lines"));
+            });
+
+            test("renders items", function() {
+                treeview.kendoTreeView([
+                    { text: "foo" }
+                ]);
+
+                equal(treeview.find(".k-item").length, 1);
             });
 
             test("renders hidden group if it is not expanded", function() {
-                var html = TreeView.renderGroup({
-                    items: [],
-                    group: {
-                        expanded: false
-                    }
-                });
+                treeview.kendoTreeView([
+                    { text: "foo", expanded: false, items: [
+                        { text: "bar" }
+                    ] }
+                ]);
 
-                equal(html, "<ul class='k-group' style='display:none'></ul>");
+                equal(treeview.find("ul:last").css("display"), "none");
             });
 
-            test("renders items, if any", function() {
-                var html = TreeView.renderGroup({
-                    items: [
-                        { text: "foo" }
-                    ],
-                    group: {
-                        firstLevel: true,
-                        expanded: true
-                    }
-                });
-
-                equal($(html).find(".k-item").length, 1);
-            });
-
-            module("item");
+            module("item", moduleOptions);
 
             test("renders list items with k-item class", function() {
-                var $item = $(TreeView.renderItem({
-                    item: {}
-                }));
+                treeview.kendoTreeView([
+                    { text: "foo" }
+                ]);
 
-                ok($item.is("li.k-item"));
+                var li = treeview.find("li");
+
+                ok(li.hasClass("k-item"));
             });
 
-            test("renders list items with k-first class for first item in first-level groups", function() {
-                var $item = $(TreeView.renderItem({
-                    item: {
-                        index: 0
-                    },
-                    group: {
-                        firstLevel: true
-                    }
-                }));
+            test("renders k-first class for first item in first-level groups", function() {
+                treeview.kendoTreeView([
+                    { text: "foo" }
+                ]);
 
-                ok($item.is(".k-first"));
+                var li = treeview.find("li");
+
+                ok(li.hasClass("k-first"));
             });
 
-            test("renders list items with k-last class for last item", function() {
-                var $item = $(TreeView.renderItem({
-                    item: {
-                        index: 0
-                    },
-                    group: {
-                        length: 1,
-                        firstLevel: true
-                    }
-                }));
+            test("renders k-last class for last item", function() {
+                treeview.kendoTreeView([
+                    { text: "foo" }
+                ]);
 
-                ok($item.is(".k-last"));
+                var li = treeview.find("li");
+
+                ok(li.hasClass("k-last"));
             });
 
-            test("renders div elements with k-top class for first item in group", function() {
-                var $item = $(TreeView.renderItem({
-                    item: {
-                        index: 0
-                    },
-                    group: {
-                        length: 2
-                    }
-                }));
+            test("renders div wrapper for each item", function() {
+                treeview.kendoTreeView([
+                    { text: "foo" },
+                    { text: "bar" }
+                ]);
 
-                equals($item.find("div.k-top").length, 1);
+                var divs = treeview.find("div");
+
+                equal(divs.length, 2);
             });
 
-            test("renders div elements with k-bot class for last item in group", function() {
-                var $item = $(TreeView.renderItem({
-                    item: {
-                        index: 1
-                    },
-                    group: {
-                        length: 3
-                    }
-                }));
+            test("renders k-top class for first item in group", function() {
+                treeview.kendoTreeView([
+                    { text: "foo" },
+                    { text: "bar" },
+                    { text: "baz" }
+                ]);
 
-                equals($item.find("div.k-mid").length, 1);
+                var divs = treeview.find("div");
+
+                ok(divs.eq(0).hasClass("k-top"));
+                ok(divs.eq(1).hasClass("k-mid"));
+                ok(divs.eq(2).hasClass("k-bot"));
+                ok(!divs.eq(2).hasClass("k-top"));
             });
 
-            test("renders div elements with k-mid class for items in middle of group", function() {
-                var $item = $(TreeView.renderItem({
-                    item: {
-                        index: 1
-                    },
-                    group: {
-                        length: 2
-                    }
-                }));
+            test("does renders k-top class for single items in root group", function() {
+                treeview.kendoTreeView([
+                    { text: "foo" }
+                ]);
 
-                equals($item.find("div.k-bot").length, 1);
+                var divs = treeview.find("div");
+
+                ok(divs.eq(0).hasClass("k-top"));
+                ok(divs.eq(0).hasClass("k-bot"));
             });
 
-            test("does not render k-top class for last items in group", function() {
-                var $item = $(TreeView.renderItem({
-                    item: {
-                        index: 0
-                    },
-                    group: {
-                        length: 1
-                    }
-                }));
+            test("renders links for items with url", function() {
+                treeview.kendoTreeView([
+                    { text: "foo", url: "http://kendoui.com/" }
+                ]);
 
-                equals($item.find("div.k-top").length, 0);
-            });
-
-            test("does not render k-top class for single items in root group", function() {
-                var $item = $(TreeView.renderItem({
-                    item: {
-                        index: 0
-                    },
-                    group: {
-                        firstLevel: true,
-                        length: 1
-                    }
-                }));
-
-                equals($item.find("div.k-top").length, 1);
-            });
-
-            test("renders of links for items with NavigateUrl", function() {
-                var $item = $(TreeView.renderItem({
-                    item: {
-                        text: "text",
-                        url: "http://kendoui.com/"
-                    }
-                }));
-
-                equal($item.find("a[href='http://kendoui.com/']").length, 1);
+                equal(treeview.find("a.k-in[href='http://kendoui.com/']").length, 1);
             });
 
             test("renders disabled state on disabled items", function() {
-                var $item = $(TreeView.renderItem({
-                    item: {
-                        text: "text",
-                        enabled: false
-                    }
-                }));
+                treeview.kendoTreeView([
+                    { text: "foo", enabled: false }
+                ]);
 
-                equal($item.find(".k-in.k-state-disabled").length, 1);
+                equal(treeview.find(".k-in.k-state-disabled").length, 1);
             });
 
             test("renders selected state on selected items", function() {
-                var $item = $(TreeView.renderItem({
-                    item: {
-                        text: "text",
-                        selected: true
-                    }
-                }));
+                treeview.kendoTreeView([
+                    { text: "foo", selected: true }
+                ]);
 
-                equal($item.find(".k-in.k-state-selected").length, 1);
+                equal(treeview.find(".k-in.k-state-selected").length, 1);
             });
-
-            test("renders collapsed subgroups by default", function() {
-                var $item = $(TreeView.renderItem({
-                    item: {
-                        text: "Collapsed",
-                        items: [
-                            { text: "Should not be visible" }
-                        ]
-                    }
-                }));
-
-                equal($item.find(".k-group").css("display"), "none");
-            });
-
 
             test("renders spriteCssClass", function() {
-                var $item = $(TreeView.renderItem({
-                    item: {
-                        text: "text",
-                        spriteCssClass: "cssClass1"
-                    }
-                }));
+                treeview.kendoTreeView([
+                    { text: "foo", spriteCssClass: "cssClass1" }
+                ]);
 
-                equal($item.find('.k-sprite').length, 1);
-                ok($item.find('.k-sprite').hasClass('cssClass1'));
+                var sprite = treeview.find('.k-sprite');
+
+                equal(sprite.length, 1);
+                ok(sprite.hasClass('cssClass1'));
             });
 
             test("renders images", function() {
-                var $item = $(TreeView.renderItem({
-                    item: {
-                        text: "text",
-                        imageUrl: "foo"
-                    }
-                }));
+                treeview.kendoTreeView([
+                    { text: "foo", imageUrl: "foo" }
+                ]);
 
-                var image = $item.find(".k-image");
+                var image = treeview.find(".k-image");
 
                 equal(image.length, 1);
                 equal(image.attr("src").lastIndexOf("foo"), image.attr("src").length - 3);
             });
 
             test("renders text", function() {
-                var $item = $(TreeView.renderItem({
-                    item: {
-                        text: "foo"
-                    }
-                }));
+                treeview.kendoTreeView([
+                    { text: "foo" }
+                ]);
 
-                equal($item.text(), "foo");
+                equal(treeview.text(), "foo");
             });
 
             test("renders text encoded", function() {
-                var $item = $(TreeView.renderItem({
-                    item: {
-                        text: "foo>>"
-                    }
-                }));
+                treeview.kendoTreeView([
+                    { text: "foo>>" }
+                ]);
 
-                equal($item.text(), "foo>>");
+                equal(treeview.text(), "foo>>");
             });
 
             test("renders encoded text as html", function() {
-                var $item = $(TreeView.renderItem({
-                    item: {
-                        text: "<span class='foo'></span>",
-                        encoded: false
-                    }
-                }));
+                treeview.kendoTreeView([
+                    { text: "<span class='foo'></span>", encoded: false }
+                ]);
 
-                equal($item.find(".foo").length, 1);
+                equal(treeview.find(".foo").length, 1);
             });
 
             test("renders plus icon if item contains items", function() {
-                var $item = $(TreeView.renderItem({
-                    item: {
-                        text: "foo",
-                        items: [
-                            { text: "bar" }
-                        ]
-                    }
-                }));
+                treeview.kendoTreeView([
+                    { text: "foo", items: [
+                        { text: "bar" }
+                    ] }
+                ]);
 
-                equal($item.find(".k-icon.k-plus").length, 1);
+                equal(treeview.find(".k-icon.k-plus").length, 1);
             });
 
             test("renders minus icon if item is expanded", function() {
-                var $item = $(TreeView.renderItem({
-                    item: {
-                        text: "foo",
-                        expanded: true,
-                        items: [
-                            { text: "bar" }
-                        ]
-                    }
-                }));
+                treeview.kendoTreeView([
+                    { text: "foo", expanded: true, items: [
+                        { text: "bar" }
+                    ] }
+                ]);
 
-                equal($item.find(".k-icon.k-minus").length, 1);
+                equal(treeview.find(".k-icon.k-minus").length, 1);
             });
 
             test("renders disabled plus icon if item is disabled", function() {
-                var $item = $(TreeView.renderItem({
-                    item: {
-                        text: "foo",
-                        enabled: false,
-                        items: [
-                            { text: "bar" }
-                        ]
-                    }
-                }));
+                treeview.kendoTreeView([
+                    { text: "foo", enabled: false, items: [
+                        { text: "bar" }
+                    ] }
+                ]);
 
-                equal($item.find(".k-icon.k-plus-disabled").length, 1);
-                equal($item.find(".k-icon.k-plus").length, 0);
+                var icon = treeview.find(".k-icon");
+
+                ok(icon.hasClass("k-plus-disabled"));
+                ok(!icon.hasClass("k-plus"));
             });
 
             test("renders disabled minus icon if item is disabled and expanded", function() {
-                var $item = $(TreeView.renderItem({
-                    item: {
-                        text: "foo",
-                        enabled: false,
-                        expanded: true,
-                        items: [
-                            { text: "bar" }
-                        ]
-                    }
-                }));
+                treeview.kendoTreeView([
+                    { text: "foo", enabled: false, expanded: true, items: [
+                        { text: "bar" }
+                    ] }
+                ]);
 
-                equal($item.find(".k-icon.k-minus-disabled").length, 1);
-                equal($item.find(".k-icon.k-minus").length, 0);
+                var icon = treeview.find(".k-icon");
+
+                ok(icon.hasClass("k-minus-disabled"));
+                ok(!icon.hasClass("k-minus"));
             });
 
             test("does not render group, if there are no sub-items", function() {
-                var $item = $(TreeView.renderItem({
-                    item: {
-                        text: "foo"
-                    },
-                    treeview: {}
-                }));
+                treeview.kendoTreeView([
+                    { text: "foo" }
+                ]);
 
-                equal($item.find(".k-group").length, 0);
+                equal(treeview.find(".k-item .k-group").length, 0);
             });
         </script>
 
