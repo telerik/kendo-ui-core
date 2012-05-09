@@ -107,7 +107,7 @@
                     ok(root.modelMap[chartElement.options.modelId]);
                 });
 
-                test("getViewElements propagates model id to children", function() {
+                test("getViewElements associates children with discoverable elements", function() {
                     var child1 = new dataviz.ChartElement(),
                         child2 = new dataviz.ChartElement();
 
@@ -121,7 +121,21 @@
                     equals(chartElement.options.modelId, child2.options.modelId);
                 });
 
-                test("getViewElements does not overwrite children model id", function() {
+                test("getViewElements does not register associated elements", function() {
+                    var root = new dataviz.RootElement(),
+                        child = new dataviz.ChartElement();
+
+                    chartElement.append(child);
+                    root.append(chartElement);
+
+                    chartElement.makeDiscoverable();
+                    chartElement.getViewElements(view);
+                    child.getViewElements(view);
+
+                    ok(root.modelMap[child.options.modelId] == chartElement);
+                });
+
+                test("getViewElements does not associate already discoverable children", function() {
                     var child1 = new dataviz.ChartElement();
 
                     child1.makeDiscoverable();

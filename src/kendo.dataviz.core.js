@@ -417,7 +417,7 @@
                     child.getViewElements(view));
             }
 
-            if (modelId) {
+            if (modelId && element.discoverable) {
                 root = element.getRoot();
 
                 if (root) {
@@ -429,7 +429,11 @@
         },
 
         makeDiscoverable: function() {
-            this.options.modelId = uniqueId();
+            var element = this,
+                options = element.options;
+
+            options.modelId = uniqueId();
+            element.discoverable = true;
         },
 
         getRoot: function() {
