@@ -1,0 +1,167 @@
+namespace Kendo.Mvc.UI.Fluent
+{
+    using System;
+    using Kendo.Mvc.Infrastructure;
+
+    /// <summary>
+    /// Defines the fluent interface for configuring series.
+    /// </summary>
+    /// <typeparam name="TSeries"></typeparam>
+    /// <typeparam name="TSeriesBuilder">The type of the series builder.</typeparam>
+    public abstract class ChartSeriesBuilderBase<TSeries, TSeriesBuilder> : IHideObjectMembers
+        where TSeriesBuilder : ChartSeriesBuilderBase<TSeries, TSeriesBuilder>
+        where TSeries : IChartSeries
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ChartSeriesBuilderBase{TSeries, TSeriesBuilder}"/> class.
+        /// </summary>
+        /// <param name="series">The series.</param>
+        protected ChartSeriesBuilderBase(TSeries series)
+        {
+            Guard.IsNotNull(series, "series");
+
+            Series = series;
+        }
+
+        /// <summary>
+        /// Gets or sets the series.
+        /// </summary>
+        /// <value>The series.</value>
+        public TSeries Series
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Sets the series title displayed in the legend.
+        /// </summary>
+        /// <param name="text">The title.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Telerik().Chart(Model)
+        ///             .Name("Chart")
+        ///             .Series(series => series.Bar(s => s.Sales).Name("Sales"))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TSeriesBuilder Name(string text)
+        {
+            Series.Name = text;
+
+            return this as TSeriesBuilder;
+        }
+
+        /// <summary>
+        /// Sets the series opacity.
+        /// </summary>
+        /// <param name="opacity">
+        /// The series opacity in the range from 0 (transparent) to 1 (opaque).
+        /// The default value is 1.
+        /// </param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Telerik().Chart(Model)
+        ///             .Name("Chart")
+        ///             .Series(series => series.Bar(s => s.Sales).Opacity(0.5))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TSeriesBuilder Opacity(double opacity)
+        {
+            Series.Opacity = opacity;
+
+            return this as TSeriesBuilder;
+        }
+
+        /// <summary>
+        /// Sets the bar fill color
+        /// </summary>
+        /// <param name="color">The bar fill color (CSS syntax).</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Telerik().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series.Bar(s => s.Sales).Color("Red"))
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public TSeriesBuilder Color(string color)
+        {
+            Series.Color = color;
+
+            return this as TSeriesBuilder;
+        }
+
+        /// <summary>
+        /// Configure the data point tooltip for the series.
+        /// </summary>
+        /// <param name="configurator">Use the configurator to set data tooltip options.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Telerik().Chart()
+        ///             .Name("Chart")
+        ///             .Series(series => series.Bar(s => s.Sales)
+        ///                 .Tooltip(tooltip =>
+        ///                 {
+        ///                     tooltip.Visible(true).Format("{0:C}");
+        ///                 })
+        ///             )
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TSeriesBuilder Tooltip(Action<ChartTooltipBuilder> configurator)
+        {
+            Guard.IsNotNull(configurator, "configurator");
+
+            configurator(new ChartTooltipBuilder(Series.Tooltip));
+
+            return this as TSeriesBuilder;
+        }
+
+        /// <summary>
+        /// Sets the data point tooltip visibility.
+        /// </summary>
+        /// <param name="visible">
+        /// A value indicating if the data point tooltip should be displayed.
+        /// The tooltip is not visible by default.
+        /// </param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Telerik().Chart()
+        ///             .Name("Chart")
+        ///             .Series(series => series.Bar(s => s.Sales).Tooltip(true))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TSeriesBuilder Tooltip(bool visible)
+        {
+            Series.Tooltip.Visible = visible;
+
+            return this as TSeriesBuilder;
+        }
+
+        /// <summary>
+        /// Sets the axis name to use for this series.
+        /// </summary>
+        /// <param name="axis">The axis name for this series.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Telerik().Chart(Model)
+        ///             .Name("Chart")
+        ///             .Series(series => series.Bar(s => s.Sales).Name("Sales").Axis("secondary"))
+        ///             .ValueAxis(axis => axis.Numeric())
+        ///             .ValueAxis(axis => axis.Numeric("secondary"))
+        ///             .CategoryAxis(axis => axis.AxisCrossingValue(0, 10))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual TSeriesBuilder Axis(string axis)
+        {
+            Series.Axis = axis;
+
+            return this as TSeriesBuilder;
+        }
+    }
+}

@@ -1,0 +1,18 @@
+<div id="example" class="k-content">
+    @(Html.Kendo().NumericTextBox<decimal>()
+        .Name("numerictextbox")
+        .Format("c0")
+        .Decimals(0)
+        .Value(12)
+        .ClientEvents(e => e.OnChange(@<text>
+            function() {
+                alert(this.value());
+            }
+        </text>))
+    )
+</div>
+<script>
+    function onChange() {
+        alert(this.value());
+    }
+</script>
