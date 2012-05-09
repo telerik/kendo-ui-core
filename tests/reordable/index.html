@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="../../src/jquery.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" media="screen" />
+        <link rel="stylesheet" href="../qunit-runner.css" media="screen" />
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script>
+            var tests = [];
+        </script>
+        <script src="tests.js"></script>
+        <script>
+            tests = $.map(tests, function(test) {
+                return { 
+                    page: test.page.replace(/\w+\//, ""), 
+                    title: test.title 
+                };
+            });
+
+            var sequential = true,
+            runnerDone = function (failures, total) {
+                $('<p id="qunit-testresult" class="result" />')
+                .html([
+                    "Tests completed in ", (+new Date()) - start, " milliseconds.<br />",
+                    "<span class='passed'>", total - failures, "</span> tests of <span class='total'>", total,
+                        "</span> passed, <span class='failed'>", failures, "</span> failed."
+                ].join(''))
+                .appendTo("body > div");
+            };
+
+            var start = +new Date();
+
+            QUnit.run(tests, sequential, runnerDone);
+        </script>
+    </head>
+    <body>
+        <div>
+            <h1 id="qunit-header">TEST RUNNER</h1>
+            <h2 id="qunit-banner"></h2>
+            <h2 id="qunit-runner-userAgent"></h2>
+            <div id="runner-test-page-container">
+            </div>
+        </div>
+    </body>
+</html>

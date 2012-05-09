@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <link rel="stylesheet" href="../styles/web/kendo.common.css"/>
+        <link rel="stylesheet/less" type="text/css" href="../styles/web/kendo.default.less"/>
+        <link rel="stylesheet" type="text/css" href="../demos/mvc/content/shared/styles/examples.css"></link>
+        <script src="../demos/mvc/content/shared/js/less.js"></script>
+
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.draganddrop.js"></script>
+        <script src="../src/kendo.reordable.js"></script>
+        <style>
+            .k-reorder-cue {
+                position: absolute;
+            }
+            #block div {
+                float: left;
+            }
+        </style>
+    </head>
+    <body>
+        <ul>
+            <li>A</li>
+            <li>B</li>
+            <li>C</li>
+            <li>D</li>
+        </ul>
+        <table>
+            <thead>
+                <tr>
+                    <th>A</th>
+                    <th>B</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>2</td>
+                </td>
+            </tbody>
+        </table>
+
+        <div id="block">
+            <div>A</div>
+            <div>B</div>
+            <div>C</div>
+        </div>
+
+        <script>
+            function hint(target) {
+                return $('<div class="k-header k-drag-clue" />')
+                    .css({
+                        width: target.width(),
+                        paddingLeft: target.css("paddingLeft"),
+                        paddingRight: target.css("paddingRight"),
+                        height: target.height(),
+                        paddingTop: target.css("paddingTop"),
+                        paddingBottom: target.css("paddingBottom")
+                    })
+                    .html(target.html())
+                    .prepend('<span class="k-icon k-drag-status k-denied" />');
+            }
+
+            $(document).ready(function() {
+                $("ul").kendoReordable({
+                    filter: "li",
+                    hint: hint
+                });
+
+                $("#block").kendoReordable({
+                    hint: hint
+                });
+
+                $("table thead").kendoReordable({
+                    filter: "th",
+                    hint: hint
+                });
+            });
+        </script>
+    </body>
+</html>
