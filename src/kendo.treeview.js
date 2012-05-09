@@ -251,25 +251,25 @@
     templates = {
         dragClue: template("<div class='k-header k-drag-clue'><span class='k-icon k-drag-status'></span>#= text #</div>"),
         group: template(
-            "<ul class='#= groupCssClass(group) #'#= groupAttributes(group) #>" +
+            "<ul class='#= _.groupCssClass(group) #'#= _.groupAttributes(group) #>" +
                 "#= renderItems(data) #" +
             "</ul>"
         ),
         item: template(
-            "<li class='#= wrapperCssClass(group, item) #'>" +
-                "<div class='#= cssClass(group, item) #'>" +
+            "<li class='#= _.wrapperCssClass(group, item) #'>" +
+                "<div class='#= _.cssClass(group, item) #'>" +
                     "# if (item.items) { #" +
-                        "<span class='#= toggleButtonClass(item) #'></span>" +
+                        "<span class='#= _.toggleButtonClass(item) #'></span>" +
                     "# } #" +
 
                     "# if (treeview.checkboxTemplate) { #" +
                         "<span class='k-checkbox'>" +
-                            "#= checkboxTemplate(treeview, group, item) #" +
+                            "#= _.checkboxTemplate(treeview, group, item) #" +
                         "</span>" +
                     "# } #" +
 
                     "# var tag = item.url ? 'a' : 'span'; #" +
-                    "<#=tag# class='#= textClass(item) #'#= textAttributes(item) #>" +
+                    "<#=tag# class='#= _.textClass(item) #'#= _.textAttributes(item) #>" +
 
                         "# if (item.imageUrl) { #" +
                             "<img class='k-image' alt='' src='#= item.imageUrl #'>" +
@@ -279,7 +279,7 @@
                             "<span class='k-sprite #= item.spriteCssClass #'></span>" +
                         "# } #" +
 
-                        "#= treeview.template ? template(treeview, item) : text(item) #" +
+                        "#= treeview.template ? _.template(treeview, item) : _.text(item) #" +
                     "</#=tag#>" +
                 "</div>" +
 
@@ -1266,14 +1266,15 @@
                     });
                 };
 
-            return templates.item(extend(options, rendering));
+            options._ = rendering;
+
+            return templates.item(options);
         },
 
         _renderGroup: function (options) {
             var that = this;
 
-            return templates.group(extend({
-                renderItems: function(options) {
+            options.renderItems = function(options) {
                     var html = "",
                         i = 0,
                         items = options.items,
@@ -1290,8 +1291,11 @@
                     }
 
                     return html;
-                }
-            }, options, rendering));
+                };
+
+            options._ = rendering;
+
+            return templates.group(options);
         }
     });
 
@@ -1548,14 +1552,14 @@
             return item.encoded === false ? item.text : kendo.htmlEncode(item.text);
         },
         template: function(treeview, item) {
-            return treeview.template(extend({ item: item }, rendering));
+            return treeview.template({ item: item });
         },
         checkboxTemplate: function(treeview, group, item) {
-            return treeview.checkboxTemplate(extend({
+            return treeview.checkboxTemplate({
                 treeview: treeview,
                 group: group,
                 item: item
-            }, rendering));
+            });
         },
         groupAttributes: function(group) {
             return group.expanded !== true ? " style='display:none'" : "";

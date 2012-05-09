@@ -34,7 +34,7 @@
                         { text: "bar" },
                         { text: "baz" }
                     ],
-                    template: kendo.template("foo #= text(item) #")
+                    template: kendo.template("foo #= item.text #")
                 });
 
                 var items = treeview.find(".k-item");
@@ -49,7 +49,7 @@
                         { text: "bar" },
                         { text: "baz" }
                     ],
-                    template: "foo #= text(item) #"
+                    template: "foo #= item.text #"
                 });
 
                 var items = treeview.find(".k-item");
@@ -67,7 +67,7 @@
                           ]
                         }
                     ],
-                    template: kendo.template("foo #= text(item) #")
+                    template: kendo.template("foo #= item.text #")
                 });
 
                 var items = treeview.find(".k-in");
