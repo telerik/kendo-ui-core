@@ -489,6 +489,8 @@
                 });
 
                 // ------------------------------------------------------------
+                var polyline;
+
                 module("Area Chart / Rendering", {
                     setup: function() {
                         setupAreaChart(plotArea, {
@@ -507,35 +509,37 @@
                                 )
                             ]
                         });
+
+                        polyline = view.log.path[0];
                     }
                 });
 
                 test("sets area line width", function() {
-                    equals(view.log.path[0].style.strokeWidth, 4);
+                    equals(polyline.style.strokeWidth, 4);
                 });
 
                 test("sets area line color", function() {
-                    equals(view.log.path[0].style.stroke, "lineColor");
+                    equals(polyline.style.stroke, "lineColor");
                 });
 
                 test("sets area line opacity", function() {
-                    equals(view.log.path[0].style.strokeOpacity, 0.5);
+                    equals(polyline.style.strokeOpacity, 0.5);
                 });
 
                 test("sets area line opacity", function() {
-                    equals(view.log.path[0].style.dashType, "dot");
+                    equals(polyline.style.dashType, "dot");
                 });
 
                 test("sets area fill color", function() {
-                    equals(view.log.path[0].style.fill, "areaColor");
+                    equals(polyline.style.fill, "areaColor");
                 });
 
                 test("sets area opacity", function() {
-                    equals(view.log.path[0].style.fillOpacity, 0.1);
+                    equals(polyline.style.fillOpacity, 0.1);
                 });
 
                 test("area has same model id as its segment", function() {
-                    equals(view.log.path[0].style.data.modelId, areaChart._segments[0].options.modelId);
+                    equals(polyline.style.data.modelId, areaChart._segments[0].options.modelId);
                 });
 
                 test("renders area chart group", function() {

@@ -107,8 +107,8 @@ function triggerEvent(eventName, element, offsetX, offsetY) {
     var offset = element.position(),
         e = new jQuery.Event(eventName);
 
-    e.clientX = offset.left + offsetX || 0;
-    e.clientY = offset.top + offsetY || 0;
+    e.clientX = offset.left + (offsetX || 0);
+    e.clientY = offset.top + (offsetY || 0);
     element.trigger(e);
 }
 

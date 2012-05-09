@@ -71,14 +71,40 @@
                     ok(child.parent === chartElement);
                 });
 
+                test("getRoot returns root for first level children", function() {
+                    var child = new dataviz.ChartElement();
+
+                    chartElement.getRoot = function() { return this; }
+
+                    chartElement.append(child);
+                    ok(child.getRoot() === chartElement);
+                });
+
+                test("getRoot returns root for second level children", function() {
+                    var child1 = new dataviz.ChartElement(),
+                        child2 = new dataviz.ChartElement();
+
+                    chartElement.getRoot = function() { return this; }
+
+                    child1.append(child2);
+                    chartElement.append(child1);
+
+                    ok(child2.getRoot() === chartElement);
+                });
+
                 test("makeDiscoverable assigns unique model id", function() {
                     chartElement.makeDiscoverable();
                     ok(chartElement.options.modelId.length > 0);
                 });
 
-                test("makeDiscoverable registers model id in map", function() {
+                test("getViewElements registers model id in root", function() {
+                    var root = new dataviz.RootElement();
+
+                    root.append(chartElement);
                     chartElement.makeDiscoverable();
-                    ok(dataviz.ChartElement.modelMap[chartElement.options.modelId]);
+                    chartElement.getViewElements(view);
+
+                    ok(root.modelMap[chartElement.options.modelId]);
                 });
 
                 test("getViewElements propagates model id to children", function() {
@@ -225,6 +251,10 @@
                     renderRoot();
 
                     equals(rootElement.box.x1, rootRect.x1 + MARGIN);
+                });
+
+                test("getRoot returns self", function() {
+                    ok(rootElement.getRoot() === rootElement);
                 });
 
             })();
