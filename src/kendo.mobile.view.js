@@ -340,9 +340,13 @@
                 next = that.next,
                 back = that.back(),
                 complete = function() {
-                    current.hideComplete();
-                    that.complete();
+                    if (!that.done) {
+                        current.hideComplete();
+                        that.complete();
+                        that.done = true;
+                    }
                 },
+
                 viewTransition = back ? next.backTransition : next.transition,
                 transition = that.transition || viewTransition || that.defaultTransition,
                 animationData = transition.split(' '),
@@ -532,6 +536,7 @@
         BODY_REGEX = /<body[^>]*>(([\u000a\u000d\u2028\u2029]|.)*)<\/body>/i,
         LOAD_START = "loadStart",
         LOAD_COMPLETE = "loadComplete",
+        SHOW_START = "showStart",
         VIEW_SHOW = "viewShow";
 
     function urlParams(url) {
@@ -567,6 +572,7 @@
             that._setupLayouts(that.container);
 
             if (that.loader) {
+                that.bind(SHOW_START, function() { that.loader.transition(); });
                 that.bind(LOAD_START, function() { that.loader.show(); });
                 that.bind(LOAD_COMPLETE, function() { that.loader.hide(); });
                 that.bind(VIEW_SHOW, function() { that.loader.transitionDone(); });
@@ -586,6 +592,13 @@
                 remote = firstChar === "/",
                 view,
                 element;
+
+            if (url === that.url) {
+                return;
+            }
+
+            that.url = url;
+            that.trigger(SHOW_START);
 
             if (!url) {
                 element = that.rootView;

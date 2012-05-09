@@ -630,12 +630,12 @@
                 direction = direction || definition.direction;
             });
 
-            function complete() {
+            function complete(animatedElement) {
                 destination[0].style.cssText = "";
                 element[0].style.cssText = ""; // Removing the whole style attribute breaks Android.
                 commonParent.css(OVERFLOW, originalOverflow);
                 if (options.completeCallback) {
-                    options.completeCallback();
+                    options.completeCallback.call(element, animatedElement);
                 }
             }
 

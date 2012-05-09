@@ -195,7 +195,6 @@
                 that.history.push(url);
             }
 
-            that.loader.transition();
             that.viewEngine.showView(url, transition);
         },
 
