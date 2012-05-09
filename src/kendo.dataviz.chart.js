@@ -343,10 +343,11 @@
 
         _getChartElement: function(e) {
             var modelId = $(e.target).data("modelId"),
+                model = this._model,
                 point;
 
             if (modelId) {
-                point = ChartElement.modelMap[modelId];
+                point = model.modelMap[modelId];
             }
 
             return point;
@@ -1986,6 +1987,8 @@
             var segment = this,
                 series = segment.series;
 
+            ChartElement.fn.getViewElements.call(segment, view);
+
             return [
                 view.createPolyline(segment.points(), false, {
                     id: segment.options.id,
@@ -2257,6 +2260,8 @@
                         opacity: series.opacity
                     }, series.line
                 );
+
+            ChartElement.fn.getViewElements.call(segment, view);
 
             return [
                 view.createPolyline(segment.points(), true, {

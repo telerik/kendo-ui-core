@@ -398,8 +398,10 @@
 
         getViewElements: function(view) {
             var element = this,
-                modelId = element.options.modelId,
+                options = element.options,
+                modelId = options.modelId,
                 viewElements = [],
+                root,
                 children = element.children,
                 i,
                 child,
@@ -415,16 +417,25 @@
                     child.getViewElements(view));
             }
 
+            if (modelId) {
+                root = element.getRoot();
+
+                if (root) {
+                    root.modelMap[modelId] = element;
+                }
+            }
+
             return viewElements;
         },
 
         makeDiscoverable: function() {
-            var element = this,
-                options = element.options,
-                modelId = uniqueId();
+            this.options.modelId = uniqueId();
+        },
 
-            options.modelId = modelId;
-            ChartElement.modelMap[modelId] = element;
+        getRoot: function() {
+            var parent = this.parent;
+
+            return parent ? parent.getRoot() : null;
         },
 
         translateChildren: function(dx, dy) {
@@ -451,12 +462,12 @@
         }
     });
 
-    // Logical tree ID to element map
-    ChartElement.modelMap = {};
-
     var RootElement = ChartElement.extend({
         init: function(options) {
             var root = this;
+
+            // Logical tree ID to element map
+            root.modelMap = {};
 
             ChartElement.fn.init.call(root, options);
         },
@@ -504,6 +515,10 @@
             return elements.concat(
                 ChartElement.fn.getViewElements.call(root, view)
             );
+        },
+
+        getRoot: function() {
+            return this;
         }
     });
 
