@@ -288,6 +288,15 @@
 
                 equal(datepicker.dateView.popup.options.appendTo, appendTo);
             });
+
+            test("DatePicker adds format to parseFormats array", function() {
+                var datepicker = input.kendoDatePicker({
+                    parseFormats: ["MM/dd/yy"]
+                }).data("kendoDatePicker");
+
+                equal(datepicker.options.parseFormats[0], datepicker.options.format);
+                equal(datepicker.options.parseFormats[1], "MM/dd/yy");
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
