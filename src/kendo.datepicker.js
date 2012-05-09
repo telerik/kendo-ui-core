@@ -125,6 +125,17 @@
     proxy = $.proxy,
     DATE = Date;
 
+    function validate(options) {
+        var parseFormats = options.parseFormats;
+
+        calendar.validate(options);
+
+        parseFormats = $.isArray(parseFormats) ? parseFormats : [parseFormats];
+        parseFormats.splice(0, 0, options.format);
+
+        options.parseFormats = parseFormats;
+    }
+
     var DateView = function(options) {
         var that = this,
             body = document.body,
@@ -373,6 +384,8 @@
         }
     };
 
+    DateView.validate = validate;
+
     kendo.DateView = DateView;
 
     var DatePicker = Widget.extend(/** @lends kendo.ui.DatePicker.prototype */{
@@ -419,6 +432,12 @@
          * _example
          * $("#datePicker").kendoDatePicker({
          *     format: "yyyy/MM/dd"
+         * });
+         * @option {Array} [parseFormats] <MM/dd/yyyy> Specifies the formats, which are used to parse the value set with value() method or by direct input. If not set the value of the format will be used.
+         * _example
+         * $("#datePicker").kendoDatePicker({
+         *     format: "yyyy/MM/dd",
+         *     parseFormats: ["MMMM yyyy"]
          * });
          * @option {String} [start] <month> Specifies the start view.
          * The following settings are available for the <b>start</b> value:
@@ -563,7 +582,7 @@
             element = that.element;
             options = that.options;
 
-            calendar.validate(options);
+            validate(options);
 
             that._wrapper();
 
@@ -675,6 +694,7 @@
             name: "DatePicker",
             value: null,
             format: "",
+            parseFormats: [],
             min: new Date(1900, 0, 1),
             max: new Date(2099, 11, 31),
             footer: '#= kendo.toString(data,"D") #',
@@ -890,7 +910,7 @@
                 return options[option];
             }
 
-            value = parse(value, options.format);
+            value = parse(value, options.parseFormats);
 
             if (!value) {
                 return;
@@ -904,7 +924,7 @@
             var that = this,
                 options = that.options,
                 format = options.format,
-                date = parse(value, format);
+                date = parse(value, options.parseFormats);
 
             if (!isInRange(date, options.min, options.max)) {
                 date = null;

@@ -54,6 +54,30 @@
                 equal(datepicker.dateView.options.start, "year");
             });
 
+            test("initializes a parseFormats option from data attributes", function() {
+                var dom = $('<input data-role="datepicker" data-format="MM yyyy" data-parse-formats="MM/dd/yyyy" />');
+
+                kendo.bind(dom);
+
+                var datepicker = dom.data("kendoDatePicker");
+
+                equal(datepicker.options.parseFormats[0], "MM yyyy");
+                equal(datepicker.options.parseFormats[1], "MM/dd/yyyy");
+            });
+
+            test("initializes a parseFormats option from data attribute with array value", function() {
+                var dom = $('<input data-role="datepicker" data-format="MM yyyy" data-parse-formats=\'["MM/dd/yyyy", "dd/MM/yyyy"]\' />');
+
+
+                kendo.bind(dom);
+
+                var datepicker = dom.data("kendoDatePicker");
+
+                equal(datepicker.options.parseFormats[0], "MM yyyy");
+                equal(datepicker.options.parseFormats[1], "MM/dd/yyyy");
+                equal(datepicker.options.parseFormats[2], "dd/MM/yyyy");
+            });
+
             test("initializes value from view model", function() {
                 var dom = $('<input data-role="datepicker" data-bind="value:value" />');
                 var value = new Date();

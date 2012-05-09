@@ -54,7 +54,7 @@
                 equal(+dv1.calendar.value(), +date);
             });
 
-            test("value method call calendar.value() only if it is assigned to the dateView", function() {
+            test("value method calls calendar.value() only if it is assigned to the dateView", function() {
                 var date = new Date(2000, 10, 10),
                     dv1 = new DateView({
                         value: date,
@@ -146,7 +146,32 @@
                 ok(datepicker.value() === null);
             });
 
-            test("value method should updated the input value", function() {
+            test("value method updates the input value", function() {
+                var datepicker = input.kendoDatePicker().data("kendoDatePicker"),
+                    date = new Date(),
+                    dateString = kendo.toString(date, datepicker.options.format);
+
+                datepicker.value(date);
+
+                equal(+datepicker._value, +date);
+                equal(input.val(), dateString);
+            });
+
+            test("value method uses options.parseFormats to parse passed value", function() {
+                var secondFormat = "MM/dd/yy",
+                    date = new Date(2000, 10, 10),
+                    datepicker = input.kendoDatePicker({
+                        format: "MMMM yyyy",
+                        parseFormats: secondFormat
+                    }).data("kendoDatePicker"),
+                    dateString = kendo.toString(date, secondFormat);
+
+                datepicker.value(dateString);
+
+                equal(+datepicker._value, +date);
+            });
+
+            test("value method parse passed value using options.parseFormats", function() {
                 var datepicker = input.kendoDatePicker().data("kendoDatePicker"),
                     date = new Date(),
                     dateString = kendo.toString(date, datepicker.options.format);
@@ -240,6 +265,18 @@
                     value = new Date("10/22/2000");
 
                 datepicker.min(value);
+
+                equal(+datepicker.options.min, +value);
+            });
+
+            test("min method uses options.parseFormats", function() {
+                var datepicker = input.kendoDatePicker({
+                    format: "MMMM yyyy",
+                    parseFormats: "MM/dd/yyyy"
+                }).data("kendoDatePicker"),
+                value = new Date("10/22/2000");
+
+                datepicker.min("10/22/2000");
 
                 equal(+datepicker.options.min, +value);
             });
