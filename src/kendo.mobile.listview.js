@@ -215,6 +215,39 @@
     * </ul>
     *
     * @section
+    * <h3>Detail Buttons</h3>
+    * <Mobile ListView supports the creation of detail buttons. These buttons are used for specific links to a detail view for when you don't need the whole list view
+    * row to navigate. Detail buttons support 4 default data-styles: <b>contactadd</b>, <b>detaildisclose</b>, <b>rowinsert</b> and <b>rowdelete</b> and also custom icons
+    * through the data-icon attribute. You can also combine Link Items and Detail Buttons on one row. Check the example below.
+    *
+    * @exampleTitle ListView with Detail Buttons
+    * @example
+    * <ul data-role="listview" data-style="inset" data-type="group">
+    *     <li>
+    *         Default button styles
+    *         <ul>
+    *             <li>Contact Add<a data-role="detailbutton" data-style="contactadd"></a></li>
+    *             <li>Detail Disclose<a data-role="detailbutton" data-style="detaildisclose"></a></li>
+    *             <li>Row Insert<a data-role="detailbutton" data-style="rowinsert"></a></li>
+    *             <li>Row Delete<a data-role="detailbutton" data-style="rowdelete"></a></li>
+    *         </ul>
+    *     </li>
+    *     <li>
+    *         Custom icons
+    *         <ul>
+    *             <li>Battery level<a data-role="detailbutton" data-icon="battery"></a></li>
+    *         </ul>
+    *     </li>
+    *     <li>
+    *         Link Items & Detail Buttons
+    *         <ul>
+    *             <li><a>Row Insert</a><a data-role="detailbutton" data-style="rowinsert"></a></li>
+    *             <li><a>Battery Level</a><a data-role="detailbutton" data-icon="battery"></a></li>
+    *         </ul>
+    *     </li>
+    * </ul>
+    *
+    * @section
     * <h3>Item Icons</h3>
     * An icon can be set in two ways - either by adding an <code>img</code> element inside the <code>li</code> element, or by setting an <code>icon</code> data attribute to the <code>li</code> element.
     * if data attribute is used then an <code>a</code> element should be put in the <code>li</code> element. The icon class will be applied to the <code>a</code> element.
