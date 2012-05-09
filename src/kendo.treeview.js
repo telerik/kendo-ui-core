@@ -255,35 +255,39 @@
                 "#= renderItems(data) #" +
             "</ul>"
         ),
-        itemWrapper: template(
-            "<div class='#= cssClass(group, item) #'>" +
-                "#= toggleButton(data) #" +
-                "#= checkbox(data) #" +
-                "<#= tag(item) # class='#= textClass(item) #'#= textAttributes(item) #>" +
-                    "#= image(item) ##= sprite(item) #" +
-                    "#= treeview.template ? template(treeview, item) : text(item) #" +
-                "</#= tag(item) #>" +
-            "</div>"
-        ),
         item: template(
             "<li class='#= wrapperCssClass(group, item) #'>" +
-                "#= itemWrapper(data) #" +
+                "<div class='#= cssClass(group, item) #'>" +
+                    "# if (item.items) { #" +
+                        "<span class='#= toggleButtonClass(item) #'></span>" +
+                    "# } #" +
+
+                    "# if (treeview.checkboxTemplate) { #" +
+                        "<span class='k-checkbox'>" +
+                            "#= checkboxTemplate(treeview, group, item) #" +
+                        "</span>" +
+                    "# } #" +
+
+                    "# var tag = item.url ? 'a' : 'span'; #" +
+                    "<#=tag# class='#= textClass(item) #'#= textAttributes(item) #>" +
+
+                        "# if (item.imageUrl) { #" +
+                            "<img class='k-image' alt='' src='#= item.imageUrl #'>" +
+                        "# } #" +
+
+                        "# if (item.spriteCssClass) { #" +
+                            "<span class='k-sprite #= item.spriteCssClass #'></span>" +
+                        "# } #" +
+
+                        "#= treeview.template ? template(treeview, item) : text(item) #" +
+                    "</#=tag#>" +
+                "</div>" +
+
                 "# if (item.items) { #" +
-                "#= subGroup(treeview, group, item) #" +
+                    "#= subGroup(group, item) #" +
                 "# } #" +
             "</li>"
-        ),
-        checkbox: template(
-            "# if (treeview.checkboxTemplate) { #" +
-                "<span class='k-checkbox'>" +
-                    "#= checkboxTemplate(treeview, group, item) #" +
-                "</span>" +
-            "# } #"
-        ),
-        image: template("<img class='k-image' alt='' src='#= imageUrl #' />"),
-        toggleButton: template("<span class='#= toggleButtonClass(item) #'></span>"),
-        sprite: template("<span class='k-sprite #= spriteCssClass #'></span>"),
-        empty: template("")
+        )
     };
 
     TreeView = Widget.extend(/** @lends kendo.ui.TreeView.prototype */ {
@@ -430,13 +434,12 @@
                 that._wrapper();
 
                 if (!that.root.length) { // treeview initialized from empty element
-                    that.root = that.wrapper.html(TreeView.renderGroup({
+                    that.root = that.wrapper.html(that._renderGroup({
                         items: options.dataSource,
                         group: {
                             firstLevel: true,
                             expanded: true
-                        },
-                        treeview: options
+                        }
                     })).children("ul");
                 } else {
                     that._group(that.wrapper);
@@ -663,6 +666,16 @@
                 }
             },
             dragAndDrop: false
+        },
+
+        _template: function() {
+            var that = this,
+                bindings = that.options.bindings || {},
+                bind = function(field) {
+                    return "#=" + (bindings[field] || field) + "#";
+                };
+
+            return "<span class='t-in'>" + bind("text") + "</span>";
         },
 
         setOptions: function(options) {
@@ -999,8 +1012,7 @@
                 }, node, i, nodeHtml = "";
 
             function toNodeHtml(nodeData, index) {
-                return TreeView.renderItem({
-                    treeview: that.options,
+                return that._renderItem({
                     group: groupData,
                     item: extend(nodeData, { index: index })
                 });
@@ -1037,7 +1049,7 @@
             }
 
             if (!group.length) {
-                group = $(TreeView.renderGroup({
+                group = $(that._renderGroup({
                     group: groupData
                 })).appendTo(parentNode);
             }
@@ -1235,6 +1247,51 @@
             return $(this.element).find(".k-in").filter(function(i, element) {
                 return $(element).text() == text;
             }).closest(NODE);
+        },
+
+        _renderItem: function (options) {
+            var that = this;
+
+            if (!options.group) {
+                options.group = {};
+            }
+
+            options.treeview = that.options;
+            options.subGroup = function(group, item) {
+                    return that._renderGroup({
+                        items: item.items,
+                        group: {
+                           expanded: item.expanded
+                        }
+                    });
+                };
+
+            return templates.item(extend(options, rendering));
+        },
+
+        _renderGroup: function (options) {
+            var that = this;
+
+            return templates.group(extend({
+                renderItems: function(options) {
+                    var html = "",
+                        i = 0,
+                        items = options.items,
+                        len = items ? items.length : 0,
+                        group = options.group;
+
+                    group.length = len;
+
+                    for (; i < len; i++) {
+                        options.group = group;
+                        options.item = items[i];
+                        options.item.index = i;
+                        html += that._renderItem(options);
+                    }
+
+                    return html;
+                }
+            }, options, rendering));
         }
     });
 
@@ -1422,54 +1479,6 @@
 
     // client-side rendering
 
-    extend(TreeView, {
-        renderItem: function (options) {
-            options = extend({ treeview: {}, group: {} }, options);
-
-            var empty = templates.empty,
-                item = options.item,
-                treeview = options.treeview;
-
-            return templates.item(extend(options, {
-                image: item.imageUrl ? templates.image : empty,
-                sprite: item.spriteCssClass ? templates.sprite : empty,
-                itemWrapper: templates.itemWrapper,
-                toggleButton: item.items ? templates.toggleButton : empty,
-                checkbox: treeview.checkboxTemplate ? templates.checkbox : empty,
-                subGroup: function(treeview, group, item) {
-                    return TreeView.renderGroup({
-                        items: item.items,
-                        treeview: treeview,
-                        group: {
-                           expanded: item.expanded
-                        }
-                    });
-                }
-            }, rendering));
-        },
-
-        renderGroup: function (options) {
-            return templates.group(extend({
-                renderItems: function(options) {
-                    var html = "",
-                        i = 0,
-                        items = options.items,
-                        len = items ? items.length : 0,
-                        group = extend({ length: len }, options.group);
-
-                    for (; i < len; i++) {
-                        html += TreeView.renderItem(extend(options, {
-                            group: group,
-                            item: extend({ index: i }, items[i])
-                        }));
-                    }
-
-                    return html;
-                }
-            }, options, rendering));
-        }
-    });
-
     rendering = /** @ignore */{
         wrapperCssClass: function (group, item) {
             var result = "k-item",
@@ -1547,9 +1556,6 @@
                 group: group,
                 item: item
             }, rendering));
-        },
-        tag: function(item) {
-            return item.url ? "a" : "span";
         },
         groupAttributes: function(group) {
             return group.expanded !== true ? " style='display:none'" : "";
