@@ -289,6 +289,12 @@
                 strictEqual(kendo.observable({}).parent(), undefined);
             });
 
+            test("setting object sets its parent", function() {
+                var observable = kendo.observable({ });
+                observable.set("foo", { bar: "baz" });
+
+                strictEqual(observable.foo.parent(), observable);
+            });
         </script>
     </head>
 </html>
