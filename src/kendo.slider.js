@@ -716,7 +716,7 @@
             showButtons: true,
             increaseButtonTitle: "Increase",
             decreaseButtonTitle: "Decrease",
-            tooltip: { template: "#= value #" }
+            tooltip: { format: "{0}" }
         },
 
         /**
@@ -1342,7 +1342,7 @@
             name: "RangeSlider",
             selectionStart: 0,
             selectionEnd: 10,
-            tooltip: { template: "#= selectionStart # - #= selectionEnd #" }
+            tooltip: { format: "{0}" }
         },
 
         /**
