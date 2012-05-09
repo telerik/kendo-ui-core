@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>reordable tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.reordable.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <h1 id="qunit-header">reordable tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="log"></div>
+
+        <script>
+            var Reordable = kendo.ui.Reordable,
+                div;
+
+            module("kendo.ui.Reordable", {
+                setup: function() {
+                    div= $("<div><div>1</div><div>2</div><div>3</div></div>")
+                        .find("div")
+                        .css({float: "left"})
+                        .end().prependTo(document.body);
+                },
+                teardown: function() {
+                    //$(".k-reorder-cue", document.body).remove();
+                    div.remove();
+                }
+            });
+
+            function ev(options) {
+                return $.extend(new $.Event, options);
+            }
+
+            function moveOverDropTarget(draggable, dropTarget) {
+                var position = dropTarget.position();
+
+                draggable.trigger({ type: "mousedown", pageX: 1, pageY: 1 });
+
+                $(document.documentElement).trigger({
+                    type: "mousemove",
+                    pageX: position.left,
+                    pageY: position.top,
+                    clientX: position.left,
+                    clientY: position.top
+                });
+
+                $(document.documentElement).trigger({
+                    type: "mouseup",
+                    pageX: position.left,
+                    pageY: position.top,
+                    clientX: position.left,
+                    clientY: position.top
+                });
+            }
+
+            function equalPositions(source, target, before) {
+                var position = target.position().left + (before ? 0 : target.outerWidth());
+
+                equal(parseInt(source.css("left"), 10), position);
+            }
+
+            test("widget name option is Reordable", function() {
+                equal(Reordable.fn.options.name, "Reordable");
+            });
+
+            test("Reordable instance from element created from constructor", function() {
+                var reordable = new Reordable(div, {});
+
+                ok(div.data("kendoReordable") instanceof Reordable);
+            });
+
+            test("Reordable instance from element created from jQuery extension", function() {
+                div.kendoReordable();
+
+                ok(div.data("kendoReordable") instanceof Reordable);
+            });
+
+            test("adds class k-reordable to element", function() {
+                div.kendoReordable();
+
+                ok(div.hasClass("k-reordable"));
+            });
+
+            test("element initialized as Draggable", function() {
+                div.kendoReordable();
+
+                ok(div.data("kendoDraggable") instanceof kendo.ui.Draggable);
+            });
+
+            test("filter is delegated to Draggable", function() {
+                var reordable = new Reordable(div, {
+                    filter: "> div"
+                });
+
+                equal(div.data("kendoDraggable").options.filter, ".k-reordable > div");
+            });
+
+            test("element initializes DropTargets", function() {
+                div.kendoReordable();
+
+                var elements = div.children();
+
+                ok(elements.eq(0).data("kendoDropTarget") instanceof kendo.ui.DropTarget);
+                ok(elements.eq(1).data("kendoDropTarget") instanceof kendo.ui.DropTarget);
+                ok(elements.eq(2).data("kendoDropTarget") instanceof kendo.ui.DropTarget);
+            });
+
+            test("reorder cue after drop target", function() {
+                var reordable = new Reordable(div, {}),
+                    target = div.children().eq(1);
+
+                moveOverDropTarget(div.children().eq(0), target);
+
+                equalPositions(reordable.reorderDropCue, target);
+            });
+
+            test("reorder cue doesn't show on same target", function() {
+                var reordable = new Reordable(div, {}),
+                    target = div.children().eq(1);
+
+                moveOverDropTarget(target, target);
+
+                ok(!reordable.reorderDropCue.is(":visible"));
+            });
+
+            test("reorder cue before first drop target", function() {
+                var reordable = new Reordable(div, {}),
+                    target = div.children().eq(0);
+
+                moveOverDropTarget(div.children().eq(1), target);
+
+                equalPositions(reordable.reorderDropCue, target, true);
+            });
+
+            test("reorder cue height is same as target height", function() {
+                var reordable = new Reordable(div, {}),
+                    target = div.children().eq(1);
+
+                moveOverDropTarget(div.children().eq(0), target);
+
+                equal(reordable.reorderDropCue.outerHeight(), target.outerHeight());
+            });
+
+            test("reorder cue is removed on drop", function() {
+                var reordable = new Reordable(div, {}),
+                    source = div.children().eq(0),
+                    target = div.children().eq(1);
+
+                moveOverDropTarget(source, target);
+
+                ok(!reordable.reorderDropCue.is(":visible"));
+                equal($(".k-reorder-cue", document.body).length, 0);
+            });
+
+            test("change event is triggered", function() {
+                var called = false,
+                    reordable = new Reordable(div, {
+                        change: function() {
+                            called = true;
+                        }
+                    }),
+                    source = div.children().eq(0),
+                    target = div.children().eq(1);
+
+                moveOverDropTarget(source, target);
+
+                ok(called);
+            });
+
+            test("change event is not triggered when drop on same target", function() {
+                var called = false,
+                    reordable = new Reordable(div, {
+                        change: function() {
+                            called = true;
+                        }
+                    }),
+                    target = div.children().eq(1);
+
+                moveOverDropTarget(target, target);
+
+                ok(!called);
+            });
+
+            test("change event arguments", function() {
+                var args,
+                    reordable = new Reordable(div, {
+                        change: function() {
+                            args = arguments[0];
+                        }
+                    }),
+                    source = div.children().eq(0),
+                    target = div.children().eq(1);
+
+                moveOverDropTarget(source, target);
+
+                equal(args.element[0], source[0]);
+                equal(args.oldIndex, 0);
+                equal(args.newIndex, 1);
+            });
+
+        </script>
+    </body>
+</html>
