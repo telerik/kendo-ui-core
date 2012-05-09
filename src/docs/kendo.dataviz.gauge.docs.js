@@ -367,7 +367,14 @@
          * @option {String} [scale.labels.font] <"12px Arial,Helvetica,sans-serif">
          * The font style of the labels.
          * @option {Boolean} [scale.labels.visible] <true> The visibility of the labels.
-         * @option {Number|Object} [scale.labels.margin] <0> The margin of the labels.
+         * @option {Number|Object} [scale.labels.margin] <5> The margin of the labels.
+         * _example
+         * // sets the top, right, bottom and left margin to 3px.
+         * margin: 3
+         *
+         * // sets the top and left margin to 1px
+         * // margin right and bottom are with 5px (by default)
+         * margin: { top: 1, left: 1 }
          * @option {Number | Object} [scale.labels.padding] <0> The padding of the labels.
          * @option {Object} [scale.labels.border] The border of the labels.
          * @option {Number} [scale.labels.border.width] <0> The width of the border.
@@ -573,7 +580,16 @@
          * </div>
          * @option {Object} [pointer] The pointer configuration options.
          * @option {String} [pointer.color] The color of the pointer.
+         * @option {Number} [pointer.opacity] <1> The opacity of the pointer.
          * Any valid CSS color string will work here, including hex and rgb.
+         * @option {Number|Object} [pointer.margin] <3> The margin of the pointer.
+         * _example
+         * // sets the top, right, bottom and left margin to 3px.
+         * margin: 3
+         *
+         * // sets the top and left margin to 1px
+         * // margin right and bottom are with 5px (by default)
+         * margin: { top: 1, left: 1 }
          * @option {String} [pointer.shape] The shape of the pointer.
          * <div class="details-list">
          *     <dl>
@@ -648,9 +664,11 @@
          * @option {Boolean} [pointer.vertical] The position of the gauge.
          * @option {Object} [pointer.track] The element arround/under the pointer.
          * (available only for 'barIndicator' shape)
-         * @option {Number} [pointer.track.size] The size of the track of the pointer.
-         * @option {Boolean} [scale.track.visible] <false> The visibility of the track.
-         * @option {Object} [pointer.track.border] The border of the track of the pointer.
+         * @option {Number} [pointer.track.size] The size of the track.
+         * @option {Number} [pointer.track.opacity] The opacity of the track.
+         * @option {Boolean} [pointer.track.visible] <false> The visibility of the track.
+         * @option {String} [pointer.track.color] The color of the track.
+         * @option {Object} [pointer.track.border] The border of the track.
          * @option {Number} [pointer.track.border.width] <1> The width of the border.
          * @option {String} [pointer.track.border.color]
          * The color of the border. Any valid CSS color string will work here, including hex and rgb.
