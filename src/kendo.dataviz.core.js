@@ -405,21 +405,21 @@
                 children = element.children,
                 i,
                 child,
-                childOptions,
                 childrenCount = children.length;
 
             for (i = 0; i < childrenCount; i++) {
                 child = children[i];
-                childOptions = child.options = child.options || {};
-                childOptions.modelId = childOptions.modelId || modelId;
 
-                viewElements.push.apply(viewElements,
-                    child.getViewElements(view));
+                if (!child.discoverable) {
+                    child.options = deepExtend(child.options, { modelId: modelId });
+                }
+
+                viewElements.push.apply(
+                    viewElements, child.getViewElements(view));
             }
 
-            if (modelId && element.discoverable) {
+            if (element.discoverable) {
                 root = element.getRoot();
-
                 if (root) {
                     root.modelMap[modelId] = element;
                 }
