@@ -255,6 +255,13 @@
                 "#= renderItems(data) #" +
             "</ul>"
         ),
+        text: template(
+            "# if (typeof item.encoded != 'undefined' && item.encoded === false) {#" +
+                "#= item.text #" +
+            "# } else { #" +
+                "#: item.text #" +
+            "# } #"
+        ),
         item: template(
             "<li class='#= _.wrapperCssClass(group, item) #'>" +
                 "<div class='#= _.cssClass(group, item) #'>" +
@@ -264,7 +271,7 @@
 
                     "# if (treeview.checkboxTemplate) { #" +
                         "<span class='k-checkbox'>" +
-                            "#= _.checkboxTemplate(treeview, group, item) #" +
+                            "#= treeview.checkboxTemplate(data) #" +
                         "</span>" +
                     "# } #" +
 
@@ -279,7 +286,7 @@
                             "<span class='k-sprite #= item.spriteCssClass #'></span>" +
                         "# } #" +
 
-                        "#= treeview.template ? _.template(treeview, item) : _.text(item) #" +
+                        "#= treeview.template(data) #" +
                     "</#=tag#>" +
                 "</div>" +
 
@@ -427,6 +434,8 @@
 
             if (options.template && typeof options.template == "string") {
                 options.template = template(options.template);
+            } else if (!options.template) {
+                options.template = templates.text;
             }
 
             // render treeview if it's not already rendered
@@ -1547,19 +1556,6 @@
             }
 
             return result;
-        },
-        text: function(item) {
-            return item.encoded === false ? item.text : kendo.htmlEncode(item.text);
-        },
-        template: function(treeview, item) {
-            return treeview.template({ item: item });
-        },
-        checkboxTemplate: function(treeview, group, item) {
-            return treeview.checkboxTemplate({
-                treeview: treeview,
-                group: group,
-                item: item
-            });
         },
         groupAttributes: function(group) {
             return group.expanded !== true ? " style='display:none'" : "";
