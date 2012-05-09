@@ -1142,6 +1142,32 @@
         }
     });
 
+    var PointEventsMixin = {
+        click: function(chart, e) {
+            var point = this;
+
+            chart.trigger(SERIES_CLICK, {
+                value: point.value,
+                category: point.category,
+                series: point.series,
+                dataItem: point.dataItem,
+                element: $(e.target)
+            });
+        },
+
+        hover: function(chart, e) {
+            var point = this;
+
+            chart.trigger(SERIES_HOVER, {
+                value: point.value,
+                category: point.category,
+                series: point.series,
+                dataItem: point.dataItem,
+                element: $(e.target)
+            });
+        }
+    };
+
     var Bar = ChartElement.extend({
         init: function(value, options) {
             var bar = this;
@@ -1312,36 +1338,9 @@
             var point = this;
 
             return point.owner.formatPointValue(point.value, format);
-        },
-
-        click: function(chart, e) {
-            seriesClick(chart, this, e);
-        },
-
-        hover: function(chart, e) {
-            seriesHover(chart, this, e);
         }
     });
-
-    function seriesHover(chart, point, e) {
-        chart.trigger(SERIES_HOVER, {
-            value: point.value,
-            category: point.category,
-            series: point.series,
-            dataItem: point.dataItem,
-            element: $(e.target)
-        });
-    }
-
-    function seriesClick(chart, point, e) {
-        chart.trigger(SERIES_CLICK, {
-            value: point.value,
-            category: point.category,
-            series: point.series,
-            dataItem: point.dataItem,
-            element: $(e.target)
-        });
-    }
+    deepExtend(Bar.fn, PointEventsMixin);
 
     var CategoricalChart = ChartElement.extend({
         init: function(plotArea, options) {
@@ -1940,16 +1939,9 @@
             var point = this;
 
             return point.owner.formatPointValue(point.value, format);
-        },
-
-        click: function(chart, e) {
-            seriesClick(chart, this, e);
-        },
-
-        hover: function(chart, e) {
-            seriesHover(chart, this, e);
         }
     });
+    deepExtend(LinePoint.fn, PointEventsMixin);
 
     var LineSegment = ChartElement.extend({
         init: function(linePoints, series, seriesIx) {
@@ -2009,7 +2001,7 @@
                 seriesIx = segment.seriesIx,
                 point = segment.parent.getNearestPoint(coords.x, coords.y, seriesIx);
 
-            seriesClick(chart, point, e);
+            point.click(chart, e);
         },
 
         hover: function(chart, e) {
@@ -2018,7 +2010,7 @@
                 seriesIx = segment.seriesIx,
                 point = segment.parent.getNearestPoint(coords.x, coords.y, seriesIx);
 
-            seriesHover(chart, point, e);
+            point.hover(chart, e);
         }
     });
 
@@ -2724,16 +2716,9 @@
             var point = this;
 
             return point.owner.formatPointValue(point.value, format);
-        },
-
-        click: function(chart, e) {
-            seriesClick(chart, this, e);
-        },
-
-        hover: function(chart, e) {
-            seriesHover(chart, this, e);
         }
     });
+    deepExtend(PieSegment.fn, PointEventsMixin);
 
     var PieChart = ChartElement.extend({
         init: function(plotArea, options) {
