@@ -216,7 +216,7 @@
     *
     * @section
     * <h3>Detail Buttons</h3>
-    * <Mobile ListView supports the creation of detail buttons. These buttons are used for specific links to a detail view for when you don't need the whole list view
+    * Mobile ListView supports the creation of detail buttons. These buttons are used for specific links to a detail view for when you don't need the whole list view
     * row to navigate. Detail buttons support 4 default data-styles: <b>contactadd</b>, <b>detaildisclose</b>, <b>rowinsert</b> and <b>rowdelete</b> and also custom icons
     * through the data-icon attribute. You can also combine Link Items and Detail Buttons on one row. Check the example below.
     *
