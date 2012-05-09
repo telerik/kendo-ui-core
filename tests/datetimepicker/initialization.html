@@ -167,6 +167,15 @@
                 equal(datetimepicker.options.format, "MM/dd/yyyy hh:mm");
                 equal(datetimepicker.options.timeFormat, "hh:mm");
             });
+
+            test("DateTimePicker adds format to the parseFormats array", function() {
+                var datetimepicker = input.kendoDateTimePicker({
+                    parseFormats: ["MM/dd/yy"]
+                }).data("kendoDateTimePicker");
+
+                equal(datetimepicker.options.parseFormats[0], datetimepicker.options.format);
+                equal(datetimepicker.options.parseFormats[1], "MM/dd/yy");
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

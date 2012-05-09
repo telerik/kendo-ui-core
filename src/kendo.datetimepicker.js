@@ -366,6 +366,7 @@
             value: null,
             format: "",
             timeFormat: "",
+            parseFormats: [],
             min: new DATE(1900, 0, 1),
             max: new DATE(2099, 11, 31),
             interval: 30,
@@ -730,7 +731,7 @@
                 return options[option];
             }
 
-            value = parse(value, options.format);
+            value = parse(value, options.parseFormats);
 
             if (!value) {
                 return;
@@ -752,8 +753,7 @@
         _update: function(value) {
             var that = this,
                 options = that.options,
-                format = options.format,
-                date = parse(value, format);
+                date = parse(value, options.parseFormats);
 
             if (!isInRange(date, options.min, options.max)) {
                 date = null;
@@ -762,7 +762,7 @@
             that._value = date;
             that.dateView.value(date);
             that.timeView.value(date);
-            that.element.val(date ? kendo.toString(date, format) : value);
+            that.element.val(date ? kendo.toString(date, options.format) : value);
 
             return date;
         },
@@ -872,7 +872,7 @@
 
         options.format = extractFormat(options.format || patterns.g);
         options.timeFormat = extractFormat(options.timeFormat || patterns.t);
-        kendo.calendar.validate(options);
+        kendo.DateView.validate(options);
     }
 
     ui.plugin(DateTimePicker);

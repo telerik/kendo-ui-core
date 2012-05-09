@@ -172,14 +172,15 @@
             });
 
             test("value method parse passed value using options.parseFormats", function() {
-                var datepicker = input.kendoDatePicker().data("kendoDatePicker"),
-                    date = new Date(),
-                    dateString = kendo.toString(date, datepicker.options.format);
+                    var datepicker = input.kendoDatePicker({
+                        parseFormats: ["MMMM yyyy"],
+                    }).data("kendoDatePicker"),
+                    date = new Date(2000, 10, 1),
+                    dateString = kendo.toString(date, "MMMM yyyy");
 
-                datepicker.value(date);
+                datepicker.value(dateString);
 
                 equal(+datepicker._value, +date);
-                equal(input.val(), dateString);
             });
 
             test("value should not accept value bigger than max", function() {
