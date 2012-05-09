@@ -359,6 +359,7 @@
          * @option {Boolean} [transitions] <true>
          * A value indicating if transition animations should be played.
          * @option {Object} [scale] Configures the scale.
+         * @option {Boolean} [scale.vertical] The position of the gauge.
          * @option {Object} [scale.labels] Configures the scale labels.
          * @option {String} [scale.labels.color] The text color of the labels.
          * Any valid CSS color string will work here, including hex and rgb.
@@ -661,7 +662,6 @@
          *         </dd>
          *    </dl>
          * </div>
-         * @option {Boolean} [pointer.vertical] The position of the gauge.
          * @option {Object} [pointer.track] The element arround/under the pointer.
          * (available only for 'barIndicator' shape)
          * @option {Number} [pointer.track.size] The size of the track.
