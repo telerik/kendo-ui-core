@@ -75,6 +75,10 @@
                     "url": "listview/index.html"
                 },
                 {
+                    "text": "Detail Buttons",
+                    "url": "listview/detailbuttons.html"
+                },
+                {
                     "text": "Data binding",
                     "url": "listview/databinding.html"
                 },
