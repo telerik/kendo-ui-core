@@ -94,16 +94,29 @@
             if (that.observable) {
                 result = source.get(path);
 
+                // Traverse the observable hierarchy if the binding is not resolved at the current level.
+                while (result === undefined && source) {
+                    source = source.parent();
+
+                    if (source instanceof ObservableObject) {
+                        result = source.get(path);
+                    }
+                }
+
+                // If the result is a function - invoke it
                 if (typeof result === "function") {
                     index = path.lastIndexOf(".");
 
+                    // If the function is a member of a nested observable object make that nested observable the context (this) of the function
                     if (index > 0) {
                         source = source.get(path.substring(0, index));
                     }
 
+                    // Set the context (this) of the function
                     result = proxy(result, source);
 
-                    result = result();
+                    // Invoke the function
+                    result = result(that.source);
                 }
             }
 
@@ -387,11 +400,7 @@
                 for (idx = 0, length = items.length; idx < length; idx++) {
                     child = clone.children[0];
                     element.insertBefore(child, reference || null);
-                    if (this.bindings.template) {
-                        bindElement(child, items[idx]);
-                    } else {
-                        bindElement(child, items[idx]);
-                    }
+                    bindElement(child, items[idx]);
                 }
             }
         },
