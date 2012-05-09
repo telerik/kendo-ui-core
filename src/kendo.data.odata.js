@@ -62,6 +62,7 @@
             format,
             operator,
             value,
+            ignoreCase,
             filters = filter.filters;
 
         for (idx = 0, length = filters.length; idx < length; idx++) {
@@ -73,8 +74,8 @@
             if (filter.filters) {
                 filter = toOdataFilter(filter);
             } else {
-                field = field.replace(/\./g, "/"),
-
+                ignoreCase = filter.ignoreCase;
+                field = field.replace(/\./g, "/");
                 filter = odataFilters[operator];
 
                 if (filter && value !== undefined) {
@@ -82,6 +83,11 @@
                     if (type === "string") {
                         format = "'{1}'";
                         value = value.replace(/'/g, "''");
+
+                        if (ignoreCase === true) {
+                            field = "tolower(" + field + ")";
+                        }
+
                     } else if (type === "date") {
                         format = "datetime'{1:yyyy-MM-ddTHH:mm:ss}'";
                     } else {

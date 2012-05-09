@@ -194,6 +194,11 @@
                 equal(result.$filter, "startswith(Name,'bar')");
             });
 
+            test("parameterMap adds tolower(field) if ignoreCase is true", function() {
+                var result = parameterMap({ filter: { filters:[ {field: "Name", operator: "startswith", value: "bar", ignoreCase: true} ]} });
+                equal(result.$filter, "startswith(tolower(Name),'bar')");
+            });
+
             test("parameterMap does not add $filter if filter is not specified", function() {
                 var result = parameterMap();
                 ok(!result.hasOwnProperty("$filter"), "Filter is not present");
@@ -228,6 +233,12 @@
 
             test("$filter does not quote apostrophe when numberic value is specifed", function() {
                 var result = parameterMap({ filter: { filters: [ {field: "ID", operator: "neq", value: 10} ]} });
+
+                equal(result.$filter, "ID ne 10");
+            });
+
+            test("$filter does not honour ignoreCase if value is number", function() {
+                var result = parameterMap({ filter: { filters: [ {ignoreCase: true, field: "ID", operator: "neq", value: 10} ]} });
 
                 equal(result.$filter, "ID ne 10");
             });
