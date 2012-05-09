@@ -23,20 +23,10 @@
             (function() {
                 var chart;
 
-                function createChart(options) {
-                    $("#container").kendoChart(options);
-
-                    chart = $("#container").data("kendoChart");
-                }
-
-                function destroyChart() {
-                    $("#container").empty();
-                }
-
                 // ------------------------------------------------------------
                 module("Unbound mode", {
                     setup: function() {
-                        createChart();
+                        chart = createChart();
                     }
                 });
 
@@ -45,7 +35,7 @@
                 });
 
                 asyncTest("binds series when data becomes available", function() {
-                    createChart({
+                    chart = createChart({
                         series: [{
                             field: "sales"
                         }],
@@ -67,11 +57,14 @@
 
                 // ------------------------------------------------------------
                 module("Binding to DataSource", {
+                    setup: function() {
+                        chart = createChart();
+                    },
                     teardown: destroyChart
                 });
 
                 asyncTest("series points are populated", 1, function() {
-                    createChart({
+                    chart = createChart({
                         dataSource: [{
                             period: "Jan",
                             sales: 100
@@ -90,7 +83,7 @@
                 });
 
                 asyncTest("categories are populated", function() {
-                    createChart({
+                    chart = createChart({
                         dataSource: [{
                             period: "Jan",
                             sales: 100
@@ -108,11 +101,30 @@
                     });
                 });
 
+                asyncTest("categories data items are populated", function() {
+                    chart = createChart({
+                        dataSource: [{
+                            period: "Jan",
+                            sales: 100
+                        }, {
+                            period: "Feb",
+                            sales: 110
+                        }],
+                        categoryAxis: {
+                            field: "period"
+                        },
+                        dataBound: function() {
+                            equals(this.options.categoryAxis.dataItems[1].sales, 110);
+                            start();
+                        }
+                    });
+                });
+
                 test("initial binding is done using fetch", 1, function() {
                     stubMethod(kendo.data.DataSource.fn, "fetch", function() {
                         ok(true);
                     }, function() {
-                        createChart({
+                        chart = createChart({
                             dataSource: [{
                                 period: "Jan",
                                 sales: 100
@@ -125,7 +137,7 @@
                 });
 
                 test("refresh is done using read", 1, function() {
-                    createChart({
+                    chart = createChart({
                         dataSource: [{
                             period: "Jan",
                             sales: 100
@@ -144,7 +156,7 @@
                 });
 
                 test("redraw does not invoke read", function() {
-                    createChart({
+                    chart = createChart({
                         dataSource: [{
                             period: "Jan",
                             sales: 100
@@ -163,7 +175,7 @@
                 });
 
                 asyncTest("data binding is not performed when autoBind is false", function() {
-                    createChart({
+                    chart = createChart({
                         dataSource: [{
                             period: "Jan",
                             sales: 100
@@ -197,7 +209,7 @@
                         }]
                     });
 
-                    createChart({
+                    chart = createChart({
                         dataSource: dataSource,
                         series: [{
                             field: "sales"
@@ -226,7 +238,7 @@
                         }]
                     });
 
-                    createChart({
+                    chart = createChart({
                         dataSource: dataSource,
                         series: [{
                             field: "sales"
@@ -251,7 +263,7 @@
                 });
 
                 asyncTest("series points are populated if point is null", 1, function() {
-                    createChart({
+                    chart = createChart({
                         dataSource: [{
                             period: "Jan",
                             sales: 100
@@ -267,7 +279,7 @@
                 });
 
                 asyncTest("categories are populated", function() {
-                    createChart({
+                    chart = createChart({
                         dataSource: [{
                             period: "Jan",
                             sales: 100
@@ -283,7 +295,7 @@
                 });
 
                 asyncTest("series points are populated if field is null", 1, function() {
-                    createChart({
+                    chart = createChart({
                         dataSource: [{
                             period: "Jan"
                         }, {
@@ -301,7 +313,7 @@
                 });
 
                 asyncTest("series points order is preserved if field is null", 1, function() {
-                    createChart({
+                    chart = createChart({
                         dataSource: [{
                             period: "Jan"
                         }, {
@@ -320,7 +332,7 @@
 
                 // ------------------------------------------------------------
                 function createGroupedChart(dataBound, series) {
-                    createChart({
+                    chart = createChart({
                         dataSource: {
                             data: [{
                                 period: "Jan",

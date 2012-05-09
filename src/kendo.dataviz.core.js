@@ -21,6 +21,7 @@
 
     // Constants ==============================================================
     var ANIMATION_STEP = 10,
+        AXIS_LABEL_CLICK = "axisLabelClick",
         BASELINE_MARKER_SIZE = 1,
         BLACK = "#000",
         BOTTOM = "bottom",
@@ -48,6 +49,7 @@
         SWING = "swing",
         TOP = "top",
         UNDEFINED = "undefined",
+        UPPERCASE_REGEX = /([A-Z])/g,
         WIDTH = "width",
         WHITE = "#fff",
         X = "x",
@@ -396,29 +398,48 @@
 
         getViewElements: function(view) {
             var element = this,
+                options = element.options,
+                modelId = options.modelId,
                 viewElements = [],
+                root,
                 children = element.children,
+                i,
+                child,
                 childrenCount = children.length;
 
-            for (var i = 0; i < childrenCount; i++) {
-                viewElements.push.apply(viewElements,
-                    children[i].getViewElements(view));
+            for (i = 0; i < childrenCount; i++) {
+                child = children[i];
+
+                if (!child.discoverable) {
+                    child.options = deepExtend(child.options, { modelId: modelId });
+                }
+
+                viewElements.push.apply(
+                    viewElements, child.getViewElements(view));
+            }
+
+            if (element.discoverable) {
+                root = element.getRoot();
+                if (root) {
+                    root.modelMap[modelId] = element;
+                }
             }
 
             return viewElements;
         },
 
-        registerId: function(id, metadata) {
+        makeDiscoverable: function() {
             var element = this,
-                root;
+                options = element.options;
 
-            root = element.getRoot();
-            if (root) {
-                root.idMap[id] = element;
-                if (metadata) {
-                    root.idMapMetadata[id] = metadata;
-                }
-            }
+            options.modelId = uniqueId();
+            element.discoverable = true;
+        },
+
+        getRoot: function() {
+            var parent = this.parent;
+
+            return parent ? parent.getRoot() : null;
         },
 
         translateChildren: function(dx, dy) {
@@ -442,13 +463,6 @@
             for (i = 0; i < length; i++) {
                 arguments[i].parent = element;
             }
-        },
-
-        getRoot: function() {
-            var element = this,
-                parent = element.parent;
-
-            return parent ? parent.getRoot() : null;
         }
     });
 
@@ -456,8 +470,8 @@
         init: function(options) {
             var root = this;
 
-            root.idMap = {};
-            root.idMapMetadata = {};
+            // Logical tree ID to element map
+            root.modelMap = {};
 
             ChartElement.fn.init.call(root, options);
         },
@@ -612,7 +626,8 @@
                         fill: options.background,
                         fillOpacity: options.opacity,
                         animation: options.animation,
-                        zIndex: options.zIndex
+                        zIndex: options.zIndex,
+                        data: { modelId: options.modelId }
                     }, renderOptions))
                 );
             }
@@ -693,7 +708,8 @@
                 view.createText(text.content,
                     deepExtend({}, options, {
                         x: text.box.x1, y: text.box.y1,
-                        baseline: text.baseline
+                        baseline: text.baseline,
+                        data: { modelId: options.modelId }
                     })
                 )
             ];
@@ -750,6 +766,43 @@
 
             ChartElement.fn.reflow.call(title, targetBox);
             title.box.snapTo(targetBox, X);
+        }
+    });
+
+    var AxisLabel = TextBox.extend({
+        init: function(value, index, dataItem, options) {
+            var label = this,
+                text = value;
+
+            if (options.template) {
+                label.template = template(options.template);
+                text = label.template({ value: value });
+            }
+
+            label.text = text;
+            label.value = value;
+            label.index = index;
+            label.dataItem = dataItem;
+
+            // TODO: Assign unique ID to all TextBoxes?
+            label.options.id = uniqueId();
+
+            TextBox.fn.init.call(label, text, options);
+
+            label.makeDiscoverable();
+        },
+
+        click: function(widget, e) {
+            var label = this;
+
+            widget.trigger(AXIS_LABEL_CLICK, {
+                element: $(e.target),
+                value: label.value,
+                text: label.text,
+                index: label.index,
+                dataItem: label.dataItem,
+                axis: label.parent.options
+            });
         }
     });
 
@@ -834,42 +887,33 @@
             _align: true
         },
 
+        // abstract labelsCount(): Number
+        // abstract createAxisLabel(index, options): AxisLabel
+
         createLabels: function() {
             var axis = this,
                 options = axis.options,
-                labelTemplate,
                 align = options.vertical ? RIGHT : CENTER,
                 labelOptions = deepExtend({ }, options.labels, {
-                    align: align, zIndex: options.zIndex
+                    align: align, zIndex: options.zIndex,
+                    modelId: options.modelId
                 }),
                 step = labelOptions.step;
 
             axis.labels = [];
 
             if (labelOptions.visible) {
-                var labelsCount = axis.getLabelsCount(),
-                    labelText,
+                var labelsCount = axis.labelsCount(),
                     label,
                     i;
 
                 for (i = labelOptions.skip; i < labelsCount; i += step) {
-                    labelText = axis.getLabelText(i);
-
-                    if (labelOptions.template) {
-                        labelTemplate = template(labelOptions.template);
-                        labelText = labelTemplate({ value: labelText });
-                    }
-
-                    label = new TextBox(labelText, labelOptions);
+                    label = axis.createAxisLabel(i, labelOptions);
                     axis.append(label);
                     axis.labels.push(label);
                 }
             }
         },
-
-        getLabelsCount: noop,
-
-        getLabelText: noop,
 
         lineBox: function() {
             var axis = this,
@@ -1400,13 +1444,16 @@
             return slotBox;
         },
 
-        getLabelsCount: function() {
+        labelsCount: function() {
             return this.getDivisions(this.options.majorUnit);
         },
 
-        getLabelText: function(index) {
-            var options = this.options;
-            return round(options.min + (index * options.majorUnit), DEFAULT_PRECISION);
+        createAxisLabel: function(index, labelOptions) {
+            var axis = this,
+                options = axis.options,
+                value = round(options.min + (index * options.majorUnit), DEFAULT_PRECISION);
+
+            return new AxisLabel(value, index, null, labelOptions);
         }
     });
 
@@ -1464,6 +1511,21 @@
 
         renderAttr: function (name, value) {
             return defined(value) ? " " + name + "='" + value + "' " : "";
+        },
+
+        renderDataAttributes: function() {
+            var element = this,
+                data = element.options.data,
+                key,
+                attr,
+                output = "";
+
+            for (key in data) {
+                attr = "data-" + key.replace(UPPERCASE_REGEX, "-$1").toLowerCase();
+                output += element.renderAttr(attr, data[key]);
+            }
+
+            return output;
         }
     });
 
@@ -2381,6 +2443,7 @@
             }
         },
 
+        AXIS_LABEL_CLICK: AXIS_LABEL_CLICK,
         COORD_PRECISION: COORD_PRECISION,
         DEFAULT_PRECISION: DEFAULT_PRECISION,
         DEFAULT_WIDTH: DEFAULT_WIDTH,
@@ -2390,6 +2453,7 @@
         CLIP: CLIP,
 
         Axis: Axis,
+        AxisLabel: AxisLabel,
         Box2D: Box2D,
         BoxElement: BoxElement,
         ChartElement: ChartElement,

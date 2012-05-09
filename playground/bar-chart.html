@@ -13,60 +13,60 @@
     </head>
     <body>
         <script type="text/javascript">
-
-            var data = [
-            {
-                value: 1,
-                p: "1"
-            },
-            {
-                value: 1,
-               p: ""
-            }
-            ]
+            var data = [{
+                day: "Mon",
+                apples: 10,
+                pears: 5
+            }, {
+                day: "Tue",
+                apples: 15,
+                pears: 8
+            }, {
+                day: "Wed",
+                apples: 12,
+                pears: 6
+            }, {
+                day: "Thu",
+                apples: 16,
+                pears: 8
+            }];
 
             $(document).ready(function() {
                 $("#container").kendoChart({
                     title: {
                         visible: false
                     },
+                    dataSource: data,
                     legend: {
                         visible: true,
                         position: "bottom"
                     },
                     seriesDefaults: {
-                        type: "column"
+                        type: "column",
+                        labels: {
+                            visible: true
+                        }
+                    },
+                    seriesClick: function(e) {
+                        console.log(e);
                     },
                     series: [{
                             name: "Apples",
-                            data: [10, 15, 12, 16]
-                        }, {
-                            name: "Cabbages",
-                            data: [25, 30, 15, 20]
-                        }, {
-                            name: "Cucumbers",
-                            data: [25, 30, 15, 20]
+                            type: "line",
+                            field: "apples"
                         }, {
                             name: "Pears",
-                            data: [5, 8, 6, 8]
-                        }, {
-                            name: "Plums",
-                            data: [5, 8, 6, 8]
-                    }],
+                            field: "pears"
+                        }],
                     categoryAxis: {
-                        majorTicks: {
-                            type: "inside"
-                        },
-                        mirror: false,
-                        labels: {
-                            mirror: true
-                        }
+                        field: "day"
                     },
-                tooltip: {
-                    visible: true,
-                    template: "#= console.log(dataItem) #"
-
-                }
+                    seriesClick: function(e) {
+                        console.log("seriesClick", e);
+                    },
+                    axisLabelClick: function(e) {
+                        console.log(e);
+                    }
                 });
             });
         </script>
