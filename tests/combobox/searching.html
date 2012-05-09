@@ -412,6 +412,24 @@
                 equal(combobox.ul.children().eq(0).text(), "TEXT");
             });
 
+            test("search method lowers case of the filter value when ignoreCase true", 1, function() {
+                var combobox = new ComboBox(input, {
+                    autoBind: false,
+                    dataSource: {
+                        transport: {
+                            read: "fake url",
+                            parameterMap: function(options) {
+                                equal(options.filter.filters[0].value, "f");
+                            }
+                        }
+                    },
+                    filter: "startswith",
+                    ignoreCase: true
+                });
+
+                combobox.search("F");
+            });
+
             test("do not remove default filter expression", function() {
                 var combobox = new ComboBox(input, {
                     dataTextField: "text",

@@ -88,6 +88,22 @@
                 equal(autocomplete.dataSource.view()[0], "foo");
             });
 
+            test("search method lowers case of the filter value when ignoreCase true", 1, function() {
+                var autocomplete = new AutoComplete(input, {
+                    dataSource: {
+                        transport: {
+                            read: "fake url",
+                            parameterMap: function(options) {
+                                equal(options.filter.filters[0].value, "f");
+                            }
+                        }
+                    },
+                    ignoreCase: true
+                });
+
+                autocomplete.search("F");
+            });
+
             test("refresh suggests on every dataSource change", 2, function() {
                 var autocomplete = new AutoComplete(input, {
                     dataSource: ["text", "Text", "3text"],

@@ -664,6 +664,7 @@
         search: function (word) {
             var that = this,
             options = that.options,
+            ignoreCase = options.ignoreCase,
             separator = options.separator,
             length;
 
@@ -683,11 +684,12 @@
                 that.popup.close();
             } else if (length >= that.options.minLength) {
                 that._open = true;
+
                 that.dataSource.filter({
-                    value: word,
+                    value: ignoreCase ? word.toLowerCase() : word,
                     operator: options.filter,
                     field: options.dataTextField,
-                    ignoreCase: options.ignoreCase
+                    ignoreCase: ignoreCase
                 });
             }
         },
