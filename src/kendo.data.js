@@ -280,12 +280,13 @@
 
         set: function(field, value) {
             var that = this,
-                current = that[field];
+                current = that[field],
+                parent = function() { return that; };
 
             if (current !== value) {
                 if (!that.trigger("set", { field: field, value: value })) {
 
-                    that._set(field, that.wrap(value, field));
+                    that._set(field, that.wrap(value, field, parent));
 
                     that.trigger(CHANGE, { field: field });
                 }
