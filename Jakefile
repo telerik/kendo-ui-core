@@ -285,7 +285,7 @@ namespace("mvc", function() {
 
     function examplesRoot(suite) {
         suite = suite[0].toUpperCase() + suite.toLowerCase().substring(1);
-        return path.join("wrappers", "mvc", "demos", "KendoUI.Mvc." + suite + ".Examples");
+        return path.join("wrappers", "mvc", "demos", "Kendo.Mvc.Examples");
     }
 });
 
