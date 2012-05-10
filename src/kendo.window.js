@@ -1546,7 +1546,8 @@
         dragstart: function (e) {
             var wnd = this.owner,
                 element = wnd.element,
-                actions = element.find(".k-window-actions");
+                actions = element.find(".k-window-actions"),
+                containerOffset = wnd.container.offset();
 
             wnd.trigger(DRAGSTART);
 
@@ -1563,6 +1564,9 @@
                 wnd.minLeftPosition =  20 - element.outerWidth(); // at least 20px remain visible
             }
 
+            wnd.minLeftPosition -= containerOffset.left;
+            wnd.minTopPosition = -containerOffset.top;
+
             wnd.wrapper
                 .append(templates.overlay)
                 .find(KWINDOWRESIZEHANDLES).hide();
@@ -1574,7 +1578,7 @@
             var wnd = this.owner,
                 coordinates = {
                     left: Math.max(e.x.client - wnd.startPosition.left, wnd.minLeftPosition),
-                    top: Math.max(e.y.client - wnd.startPosition.top, 0)
+                    top: Math.max(e.y.client - wnd.startPosition.top, wnd.minTopPosition)
                 };
 
             $(wnd.wrapper).css(coordinates);
