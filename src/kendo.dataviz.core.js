@@ -776,15 +776,13 @@
 
             if (options.template) {
                 label.template = template(options.template);
-                text = label.template({ value: value });
+                text = label.template({ value: value, dataItem: dataItem });
             }
 
             label.text = text;
             label.value = value;
             label.index = index;
             label.dataItem = dataItem;
-
-            // TODO: Assign unique ID to all TextBoxes?
             label.options.id = uniqueId();
 
             TextBox.fn.init.call(label, text, options);
