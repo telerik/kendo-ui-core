@@ -1751,21 +1751,31 @@ function pad(number) {
         support.transitions = transitions;
 
         support.detectOS = function (ua) {
-            var os = false, match = [],
+            var os = false, minorVersion, match = [],
                 agentRxs = {
                     fire: /(Silk)\/(\d+)\.(\d+(\.\d+)?)/,
-                    android: /(Android)\s+(\d+)\.(\d+(\.\d+)?)/,
+                    android: /(Android|Android.*(?:Opera|Firefox).*?\/)\s*(\d+)\.(\d+(\.\d+)?)/,
                     iphone: /(iPhone|iPod).*OS\s+(\d+)[\._]([\d\._]+)/,
                     ipad: /(iPad).*OS\s+(\d+)[\._]([\d_]+)/,
                     meego: /(MeeGo).+NokiaBrowser\/(\d+)\.([\d\._]+)/,
                     webos: /(webOS)\/(\d+)\.(\d+(\.\d+)?)/,
                     blackberry: /(BlackBerry).*?Version\/(\d+)\.(\d+(\.\d+)?)/,
-                    playbook: /(PlayBook).*?Tablet\s*OS\s*(\d+)\.(\d+(\.\d+)?)/
+                    playbook: /(PlayBook).*?Tablet\s*OS\s*(\d+)\.(\d+(\.\d+)?)/,
+                    winphone: /(IEMobile)\/(\d+)\.(\d+(\.\d+)?)/,
+                    windows: /(MSIE)\s+(\d+)\.(\d+(\.\d+)?)/
                 },
                 osRxs = {
                     ios: /^i(phone|pad|pod)$/i,
                     android: /^android|fire$/i,
-                    blackberry: /^blackberry|playbook/i
+                    blackberry: /^blackberry|playbook/i,
+                    windows: /windows|winphone/
+                },
+                browserRxs = {
+                    omini: /Opera\sMini/i,
+                    omobile: /Opera\sMobi/i,
+                    firefox: /Firefox|Fennec/i,
+                    webkit: /webkit/i,
+                    ie: /MSIE|Windows\sPhone/i
                 },
                 testOs = function (agent) {
                     for (var os in osRxs) {
@@ -1774,20 +1784,31 @@ function pad(number) {
                         }
                     }
                     return agent;
+                },
+                testBrowser = function (ua) {
+                    for (var browser in browserRxs) {
+                        if (browserRxs.hasOwnProperty(browser) && browserRxs[browser].test(ua)) {
+                            return browser;
+                        }
+                    }
+                    return "default";
                 };
 
             for (var agent in agentRxs) {
                 if (agentRxs.hasOwnProperty(agent)) {
                     match = ua.match(agentRxs[agent]);
                     if (match) {
+                        if (agent == "windows" && "plugins" in navigator) { return undefined; } // Break if not Metro/Mobile Windows
+
                         os = {};
                         os.device = agent;
+                        os.browser = testBrowser(ua);
                         os.name = testOs(agent);
                         os[os.name] = true;
                         os.majorVersion = match[2];
                         os.minorVersion = match[3].replace("_", ".");
-                        os.flatVersion = os.majorVersion + os.minorVersion.replace(".", "");
-                        os.flatVersion = os.flatVersion + (new Array(4 - os.flatVersion.length).join("0")); // Pad with zeroes
+                        minorVersion = os.minorVersion.replace(".", "").substr(0, 2);
+                        os.flatVersion = os.majorVersion + minorVersion + (new Array(3 - (minorVersion.length < 3 ? minorVersion.length : 2)).join("0"));
                         os.appMode = window.navigator.standalone || (/file|local/).test(window.location.protocol) || typeof window.PhoneGap !== UNDEFINED; // Use file protocol to detect appModes.
 
                         break;

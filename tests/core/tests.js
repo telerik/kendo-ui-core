@@ -64,6 +64,10 @@ tests.push(
         title: "core template"
     },
     {
+        page: "core/mobileos.html",
+        title: "core mobile os detection"
+    },
+    {
         page: "core/lint.html",
         title: "core lint"
     }
