@@ -276,7 +276,7 @@
 
             var form;
 
-            module("container option", {
+            module("appendTo option", {
                 setup: function() {
                     form = $("<form id='myForm'></form>").appendTo("body");
                 },
@@ -287,7 +287,7 @@
 
             test("appends window to given container", function() {
                 var dialog = createWindow({
-                    container: "form#myForm"
+                    appendTo: "form#myForm"
                 });
 
                 equal(dialog.wrapper.parent()[0], form[0]);
@@ -295,15 +295,15 @@
 
             test("passing element appends window to given container", function() {
                 var dialog = createWindow({
-                    container: form[0]
+                    appendTo: form[0]
                 });
 
                 equal(dialog.wrapper.parent()[0], form[0]);
             });
 
             test("modal windows append single overlay to container", function() {
-                createWindow({ container: form, modal: true });
-                createWindow({ container: form, modal: true });
+                createWindow({ appendTo: form, modal: true });
+                createWindow({ appendTo: form, modal: true });
 
                 equal(form.children(".k-overlay").length, 1);
             });
