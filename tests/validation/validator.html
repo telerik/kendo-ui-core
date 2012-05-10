@@ -35,6 +35,7 @@
                     container = $("<div/>").appendTo("<form/>").appendTo($(document.body));
                 },
                 teardown: function() {
+                    kendo.ui.validator = { rules: {}, messages: {} };
                     container.remove();
                 }
             });
@@ -866,7 +867,7 @@
                 ok(validator.validate());
             });
 
-            test("validate input elements with array index names on multiple validation calls", function() {
+            test("validate input elements with array index names on multiple validation calls", 1, function() {
                 container.append("<input type='text' name='test[]' />");
                 var called = false,
                     validator = setup(container, { rules: { custom: function(input) { called = true } } });
@@ -874,6 +875,100 @@
                 validator.validate();
                 validator.validate();
                 ok(called);
+            });
+
+            test("register external rules", 1, function() {
+                kendo.ui.validator.rules = { foo: function() { ok(true); } };
+
+                container.append("<input type='text' name='test[]' />");
+
+                var validator = setup(container, {});
+                validator.validate();
+            });
+
+            test("external overrides default rules", 1, function() {
+                kendo.ui.validator.rules = { required: function() { ok(true); } };
+
+                container.append("<input type='text' name='test[]' />");
+
+                var validator = setup(container);
+
+                validator.validate();
+            });
+
+            test("custom rules overrides external rules", 1, function() {
+                kendo.ui.validator.rules = { foo: function() { ok(false); } };
+
+                container.append("<input type='text' name='test[]' />");
+
+                var validator = setup(container, { rules: { foo: function() { ok(true) } } });
+                validator.validate();
+            });
+
+            test("register external messages", 1, function() {
+                kendo.ui.validator.rules = { foo: function() { return false; } };
+                kendo.ui.validator.messages = { foo: function() { ok(true) } };
+
+                container.append("<input type='text' name='test[]' />");
+
+                var validator = setup(container, {});
+                validator.validate();
+            });
+
+            test("external overrides default messages", 1, function() {
+                kendo.ui.validator.rules = { required: function() { return false; } };
+                kendo.ui.validator.messages = { required: function() { ok(true) } };
+
+                container.append("<input type='text' name='test[]' />");
+
+                var validator = setup(container);
+
+                validator.validate();
+            });
+
+            test("custom overrides external messages", 1, function() {
+                kendo.ui.validator.rules = { foo: function() { return false; } };
+                kendo.ui.validator.messages = { foo: function() { ok(false) } };
+
+                container.append("<input type='text' name='test[]' />");
+
+                var validator = setup(container, { messages: { foo: function() { ok(true) } } });
+                validator.validate();
+            });
+
+            test("locate custom message locator", 2, function() {
+                kendo.ui.validator.messageLocators = {
+                    mylocator: {
+                        locate: function(element, fieldName) {
+                            equal(element[0], container[0]);
+                            equal(fieldName, "test");
+                        }
+                    }
+                };
+
+                container.append("<input type='text' name='test' />");
+
+                var validator = setup(container);
+                validator.validate();
+            });
+
+            test("decorate custom message locator", 2, function() {
+                kendo.ui.validator.messageLocators = {
+                    mylocator: {
+                        locate: function(element, fieldName) {
+                            return $();
+                        },
+                        decorate: function(message, fieldName) {
+                            ok(message.length);
+                            equal(fieldName, "test");
+                        }
+                    }
+                };
+
+                container.append("<input type='text' name='test' />");
+
+                var validator = setup(container, { rules: { foo: function() { return false } } });
+                validator.validate();
             });
         </script>
     </body>
