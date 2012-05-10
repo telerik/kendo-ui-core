@@ -133,7 +133,8 @@
         MONTH = "month",
         SPAN = "<span/>",
         DATE = Date,
-        isInRange = kendo.calendar.isInRange;
+        isInRange = kendo.calendar.isInRange,
+        extend = $.extend;
 
     var DateTimePicker = Widget.extend(/** @lends kendo.ui.DateTimePicker.prototype */{
         /**
@@ -474,11 +475,14 @@
     ],
 
         setOptions: function(options) {
-            normalize(options);
+            var that = this;
 
-            Widget.fn.setOptions.call(this, options);
-            $.extend(this.dateView.options, options);
-            $.extend(this.timeView.options, options);
+            Widget.fn.setOptions.call(that, options);
+
+            normalize(that.options);
+
+            extend(that.dateView.options, that.options);
+            extend(that.timeView.options, that.options);
         },
 
         /**
@@ -797,6 +801,7 @@
 
         _views: function() {
             var that = this,
+                options = that.options,
                 close = function(e) {
                     if (that.trigger(CLOSE)) {
                         e.preventDefault();
@@ -808,7 +813,7 @@
                     }
                 };
 
-            that.dateView = new kendo.DateView($.extend({}, that.options, {
+            that.dateView = new kendo.DateView(extend({}, options, {
                 anchor: that.wrapper,
                 change: function() {
                     // calendar is the current scope
@@ -819,15 +824,15 @@
                 open: open
             }));
 
-            that.timeView = new kendo.TimeView($.extend({}, that.options, {
+            that.timeView = new kendo.TimeView(extend({}, options, {
                 anchor: that.wrapper,
-                format: that.options.timeFormat,
+                format: options.timeFormat,
                 change: function(value, trigger) {
                     value = that.timeView._parse(value);
                     if (trigger) {
                         that._change(value);
                     } else {
-                        that.element.val(kendo.toString(value, that.options.format));
+                        that.element.val(kendo.toString(value, options.format));
                     }
                 },
                 close: close,

@@ -705,10 +705,13 @@
         },
 
         setOptions: function(options) {
-            calendar.normalize(options);
+            var that = this;
 
-            Widget.fn.setOptions.call(this, options);
-            extend(this.dateView.options, options);
+            Widget.fn.setOptions.call(that, options);
+
+            normalize(that.options);
+
+            extend(that.dateView.options, that.options);
         },
 
         /**
