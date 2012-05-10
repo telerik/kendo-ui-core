@@ -65,7 +65,7 @@ tests.push(
     },
     {
         page: "core/mobileos.html",
-        title: "mobile os detection"
+        title: "core mobile os detection"
     },
     {
         page: "core/lint.html",
