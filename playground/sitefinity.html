@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Prototype Chart</title>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.dataviz.core.js"></script>
+        <script src="../src/kendo.dataviz.chart.js"></script>
+        <script src="../src/kendo.dataviz.themes.js"></script>
+        <script src="../src/kendo.dataviz.vml.js"></script>
+        <script src="../src/kendo.dataviz.svg.js"></script>
+        <style>
+            .label {
+                cursor: pointer;
+            }
+
+            .categoryHighlight,
+            .pointDetail {
+                position: absolute;
+                text-align: center;
+                -webkit-border-radius: 5px;
+                -moz-border-radius: 5px;
+                border-radius: 5px;
+            }
+
+            .categoryHighlight {
+                border: 1px solid #bbb;
+                background: #eee;
+                font: 11px sans-serif;
+                margin-top: 7px;
+                padding: 20px 0px 2px 0px;
+            }
+
+            .pointDetail {
+                font: 11px sans-serif;
+                padding: 5px;
+                white-space: nowrap;
+            }
+
+            .pointDetail .value {
+                font: bold 16px sans-serif;
+            }
+        </style>
+    </head>
+    <body>
+        <script type="text/x-kendo-template" id="point-detail">
+            <div class="pointDetail" style='background: #= series.color #'>
+                <div class="value">
+                    #= value #%
+                </div>
+                <div>
+                    #= dataItem[series.field + "Count"] + " " + series.name #
+                </div>
+            </div>
+        </script>
+        <script type="text/javascript">
+            var data = [{
+                issue: "August newsletter",
+                delivered: 60,
+                deliveredCount: 3134,
+                opened: 55,
+                openedCount: 549,
+                clicked: 25,
+                clickedCount: 187
+            }, {
+                issue: "September newsletter",
+                delivered: 65,
+                deliveredCount: 1134,
+                opened: 55,
+                openedCount: 249,
+                clicked: 10,
+                clickedCount: 97
+            }, {
+                issue: "October newsletter",
+                delivered: 85,
+                deliveredCount: 2134,
+                opened: 40,
+                openedCount: 349,
+                clicked: 20,
+                clickedCount: 87
+            }, {
+                issue: "November newsletter",
+                delivered: 80,
+                deliveredCount: 3134,
+                opened: 45,
+                openedCount: 249,
+                clicked: 5,
+                clickedCount: 47
+            }, {
+                issue: "December newsletter",
+                delivered: 75,
+                deliveredCount: 2534,
+                opened: 55,
+                openedCount: 399,
+                clicked: 10,
+                clickedCount: 47
+            }];
+
+            $(document).ready(function() {
+                var pointDetailTemplate = kendo.template($("#point-detail").html());
+
+                $("#container").kendoChart({
+                    title: {
+                        text: "Campaign overview report",
+                        align: "left"
+                    },
+                    dataSource: data,
+                    legend: {
+                        visible: true,
+                        position: "top",
+                        offsetX: 300
+                    },
+                    chartArea: {
+                        background: "transparent"
+                    },
+                    seriesDefaults: {
+                        type: "area",
+                        markers: {
+                            visible: true
+                        }
+                    },
+                    seriesClick: function(e) {
+                        console.log(e);
+                    },
+                    series: [{
+                            name: "Delivered",
+                            field: "delivered"
+                        }, {
+                            name: "Opened",
+                            field: "opened"
+                        }, {
+                            name: "Clicked",
+                            field: "clicked"
+                    }],
+                    categoryAxis: {
+                        field: "issue",
+                        labels: {
+                            font: "11px sans-serif",
+                            // Adds a hand pointer
+                            template: "<tspan class='label'>#= value #</tspan>"
+                        }
+                    },
+                    axisLabelClick: function(e) {
+                        var chart = e.sender,
+                            chartContainer = $("#container"),
+                            categoryIndex = e.index;
+
+                        // Not an official API, obviously. SUBJECT TO CHANGE!
+                        var plotArea = chart._plotArea,
+                            areaChart = plotArea.charts[0],
+                            categoryPoints = areaChart.categoryPoints[categoryIndex],
+                            categoryAxis = plotArea.categoryAxis,
+                            slot = categoryAxis.getSlot(e.index);
+
+                        $(".categoryHighlight, .pointDetail").remove();
+
+                        for (var i = 0; i < categoryPoints.length; i++) {
+                            var point = categoryPoints[i];
+                            var offset  = $("#" + point.options.id).offset();
+
+                            var detail = $(pointDetailTemplate(point))
+                                .appendTo(chartContainer);
+
+                            detail
+                                .css({
+                                    top: offset.top - detail.height(),
+                                    left: offset.left + 10
+                                });
+                        }
+
+                        $("<div class='categoryHighlight'></div>")
+                            .prependTo(chartContainer)
+                            .text(e.dataItem.deliveredCount + " delivered")
+                            .css({
+                                top: slot.y1, left: slot.x1,
+                                width: slot.width() - 1 // 1px border
+                            });
+                    }
+                });
+
+                $(".label").on("click", function(e) {
+                    // Necessary to simulate a click that originates
+                    // from the original label and not from the fake tspan we add
+                    $(e.target.parentNode).click();
+                });
+            });
+        </script>
+
+        <div id="container" style="width: 800px; height: 400px;">
+        </div>
+    </body>
+</html>
+
