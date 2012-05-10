@@ -96,18 +96,6 @@ namespace Kendo.Mvc.UI
         /// <value>
         /// The pointer position
         /// </value>
-        public bool? Vertical
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Gets or sets the pointer position
-        /// </summary>
-        /// <value>
-        /// The pointer position
-        /// </value>
         public LinearGaugeTrack Track
         {
             get;

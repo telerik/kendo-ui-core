@@ -1,4 +1,4 @@
-namespace Kendo.Mvc.UI.Tests.Chart
+namespace Kendo.Mvc.UI.Tests.Gauge
 {
     using Kendo.Mvc.UI;
     using Kendo.Mvc.UI.Fluent;
@@ -59,13 +59,6 @@ namespace Kendo.Mvc.UI.Tests.Chart
         {
             builder.Size(0.5);
             pointer.Size.ShouldEqual(0.5);
-        }
-
-        [Fact]
-        public void Vertical_sets_Vertical()
-        {
-            builder.Vertical(false);
-            pointer.Vertical.ShouldEqual(false);
         }
 
         [Fact]

@@ -198,27 +198,6 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Sets the pointer position.
-        /// </summary>
-        /// <param name="vertical">The pointer position.</param>
-        /// <example>
-        /// <code lang="CS">
-        /// &lt;% Html.Kendo().LinearGauge()
-        ///           .Name("linearGauge")
-        ///           .Pointer(pointer => pointer
-        ///               .Vertical(false)
-        ///           )        
-        ///           .Render();
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public LinearGaugePointerBuilder Vertical(bool vertical)
-        {
-            pointer.Vertical = vertical;
-            return this;
-        }
-
-        /// <summary>
         /// Configures the pointer track.
         /// </summary>
         /// <param name="configurator">The configuration action.</param>

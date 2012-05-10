@@ -1,4 +1,4 @@
-namespace Kendo.Mvc.UI.Tests.Chart
+namespace Kendo.Mvc.UI.Tests.Gauge
 {
     using Kendo.Mvc.UI;
     using Kendo.Mvc.UI.Fluent;

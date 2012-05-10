@@ -189,6 +189,11 @@
     <Compile Include="UI\Chart\Serialization\ChartBoundSeriesSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartSeriesSerializerBaseTests.cs" />
     <Compile Include="UI\Chart\Serialization\PlotAreaSerializerTests.cs" />
+    <Compile Include="UI\Gauge\RadialGaugePointerBuilderTests.cs" />
+    <Compile Include="UI\Gauge\GaugeAreaBuilderTests.cs" />
+    <Compile Include="UI\Gauge\Serialization\GaugeAreaSerializerTests.cs" />
+    <Compile Include="UI\Gauge\Serialization\RadialGaugeCapSerializerTests.cs" />
+    <Compile Include="UI\Gauge\Serialization\RadialGaugePointerSerializerTests.cs" />
     <Compile Include="UI\Gauge\Serialization\LinearGaugeTrackSerializerTests.cs" />
     <Compile Include="UI\Gauge\Serialization\LinearGaugePointerSerializerTests.cs" />
     <Compile Include="UI\Gauge\LinearGaugeTrackTests.cs" />

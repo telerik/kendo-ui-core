@@ -24,7 +24,6 @@ namespace Kendo.Mvc.UI
                 .Add("size", pointer.Size, () => pointer.Size.HasValue)
                 .Add("opacity", pointer.Opacity, () => pointer.Opacity.HasValue)
                 .Add("value", pointer.Value, () => pointer.Value.HasValue)
-                .Add("vertical", pointer.Vertical, () => pointer.Vertical.HasValue)
                 .Add("shape", pointer.Shape.ToString().ToLowerInvariant(), () => pointer.Shape.HasValue);
 
             var track = pointer.Track.CreateSerializer().Serialize();

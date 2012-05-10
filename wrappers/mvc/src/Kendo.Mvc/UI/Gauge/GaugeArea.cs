@@ -15,10 +15,10 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
-        /// Gets or sets the Gauge area background.
+        /// Gets or sets the gauge area background.
         /// </summary>
         /// <value>
-        /// The Gauge area background.
+        /// The gauge area background.
         /// </value>
         public string Background
         {
@@ -27,10 +27,10 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
-        /// Gets or sets the Gauge area border.
+        /// Gets or sets the gauge area border.
         /// </summary>
         /// <value>
-        /// The Gauge area border.
+        /// The gauge area border.
         /// </value>
         public ChartElementBorder Border
         {
@@ -39,36 +39,12 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
-        /// Gets or sets the Gauge area margin.
+        /// Gets or sets the gauge area margin.
         /// </summary>
         /// <value>
-        /// The Chart area margin.
+        /// The gauge area margin.
         /// </value>
         public ChartSpacing Margin
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Gets or sets the Gauge area width.
-        /// </summary>
-        /// <value>
-        /// The Chart area width.
-        /// </value>
-        public double? Width
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Gets or sets the Gauge area height.
-        /// </summary>
-        /// <value>
-        /// The Chart area height.
-        /// </value>
-        public double? Height
         {
             get;
             set;

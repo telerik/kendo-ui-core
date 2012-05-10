@@ -105,19 +105,6 @@ namespace Kendo.Mvc.UI.Tests
             GetJson().ContainsKey("value").ShouldBeFalse();
         }
 
-        [Fact]
-        public void Serializes_vertical()
-        {
-            pointer.Vertical = false;
-            GetJson()["vertical"].ShouldEqual(false);
-        }
-
-        [Fact]
-        public void Does_not_serialize_default_vertical()
-        {
-            GetJson().ContainsKey("vertical").ShouldBeFalse();
-        }
-
         private IDictionary<string, object> GetJson()
         {
             return pointer.CreateSerializer().Serialize();
