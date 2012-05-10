@@ -273,6 +273,40 @@
 
                 ok(dialog.wrapper.hasClass("k-rtl"));
             });
+
+            var form;
+
+            module("container option", {
+                setup: function() {
+                    form = $("<form id='myForm'></form>").appendTo("body");
+                },
+                teardown: function() {
+                    form.remove();
+                }
+            });
+
+            test("appends window to given container", function() {
+                var dialog = createWindow({
+                    container: "form#myForm"
+                });
+
+                equal(dialog.wrapper.parent()[0], form[0]);
+            });
+
+            test("passing element appends window to given container", function() {
+                var dialog = createWindow({
+                    container: form[0]
+                });
+
+                equal(dialog.wrapper.parent()[0], form[0]);
+            });
+
+            test("modal windows append single overlay to container", function() {
+                createWindow({ container: form, modal: true });
+                createWindow({ container: form, modal: true });
+
+                equal(form.children(".k-overlay").length, 1);
+            });
         </script>
 
         <h1 id="qunit-header">kendo.ui.Window Tests</h1>

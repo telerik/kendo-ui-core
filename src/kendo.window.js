@@ -154,7 +154,7 @@
         extend = $.extend,
         each = $.each,
         template = kendo.template,
-        body,
+        BODY = "body",
         templates,
         // classNames
         KWINDOW = ".k-window",
@@ -296,12 +296,12 @@
                 isVisible = false,
                 content;
 
-            body = document.body;
-
             Widget.fn.init.call(that, element, options);
             options = that.options;
             element = that.element;
             content = options.content;
+
+            that.container = $(options.container || document.body);
 
             that._animations();
 
@@ -309,7 +309,7 @@
                 content = options.content = { url: content };
             }
 
-            if (!element.parent().is("body")) {
+            if (!element.parent().is(that.container)) {
                 if (element.is(VISIBLE)) {
                     offset = element.offset();
                     isVisible = true;
@@ -327,7 +327,7 @@
 
             if (!element.is(".k-content") || !wrapper[0]) {
                 element.addClass("k-window-content k-content");
-                createWindow(element, options);
+                that._createWindow(element, options);
                 wrapper = that.wrapper = element.closest(KWINDOW);
 
                 that._dimensions();
@@ -790,7 +790,7 @@
         },
 
         _overlay: function (visible) {
-            var overlay = $("body > .k-overlay"),
+            var overlay = this.container.children(".k-overlay"),
                 wrapper = this.wrapper;
 
             if (!overlay.length) {
@@ -1356,6 +1356,47 @@
             } else if (modalWindows.length > 0) {
                 windowObject(modalWindows.eq(modalWindows.length - 2))._overlay(true);
             }
+        },
+
+        _createWindow: function() {
+            var that = this,
+                contentHtml = that.element,
+                options = that.options,
+                iframeSrcAttributes,
+                wrapper;
+
+            if (options.scrollable === false) {
+                contentHtml.attr("style", "overflow:hidden;");
+            }
+
+            if (options.iframe) {
+                contentHtml.html(templates.contentFrame(options));
+            }
+
+            wrapper = $(templates.wrapper(options));
+
+            if (options.title !== false) {
+                wrapper.append(templates.titlebar(extend(templates, options)));
+            }
+
+            wrapper.toggleClass("k-rtl", !!that.element.closest(".k-rtl").length);
+
+            // Collect the src attributes of all iframes and then set them to empty string.
+            // This seems to fix this IE9 "feature": http://msdn.microsoft.com/en-us/library/gg622929%28v=VS.85%29.aspx?ppud=4
+            iframeSrcAttributes = contentHtml.find("iframe").map(function(iframe) {
+                var src = this.getAttribute("src");
+                this.src = "";
+                return src;
+            });
+
+            // Make sure the wrapper is appended to the body only once. IE9+ will throw exceptions if you move iframes in DOM
+            wrapper
+                .appendTo(that.container)
+                .append(contentHtml)
+                .find("iframe").each(function(index) {
+                   // Restore the src attribute of the iframes when they are part of the live DOM tree
+                   this.src = iframeSrcAttributes[index];
+                });
         }
     });
 
@@ -1386,44 +1427,6 @@
         resizeHandle: template("<div class='k-resize-handle k-resize-#= data #'></div>")
     };
 
-    function createWindow(element, options) {
-        var contentHtml = element,
-            iframeSrcAttributes,
-            wrapper;
-
-        if (options.scrollable === false) {
-            contentHtml.attr("style", "overflow:hidden;");
-        }
-
-        if (options.iframe) {
-            contentHtml.html(templates.contentFrame(options));
-        }
-
-        wrapper = $(templates.wrapper(options));
-
-        if (options.title !== false) {
-            wrapper.append(templates.titlebar(extend(templates, options)));
-        }
-
-        wrapper.toggleClass("k-rtl", !!element.closest(".k-rtl").length);
-
-        // Collect the src attributes of all iframes and then set them to empty string.
-        // This seems to fix this IE9 "feature": http://msdn.microsoft.com/en-us/library/gg622929%28v=VS.85%29.aspx?ppud=4
-        iframeSrcAttributes = contentHtml.find("iframe").map(function(iframe) {
-            var src = this.getAttribute("src");
-            this.src = "";
-            return src;
-        });
-
-        // Make sure the wrapper is appended to the body only once. IE9+ will throw exceptions if you move iframes in DOM
-        wrapper
-            .appendTo(body)
-            .append(contentHtml)
-            .find("iframe").each(function(index) {
-               // Restore the src attribute of the iframes when they are part of the live DOM tree
-               this.src = iframeSrcAttributes[index];
-            });
-    }
 
     function WindowResizing(wnd) {
         var that = this;
@@ -1457,7 +1460,7 @@
                 .append(templates.overlay)
                 .find(KWINDOWRESIZEHANDLES).not(e.currentTarget).hide();
 
-            $(body).css(CURSOR, e.currentTarget.css(CURSOR));
+            $(BODY).css(CURSOR, e.currentTarget.css(CURSOR));
         },
         drag: function (e) {
             var wnd = this.owner,
@@ -1511,7 +1514,7 @@
                 .find(KOVERLAY).remove().end()
                 .find(KWINDOWRESIZEHANDLES).not(e.currentTarget).show();
 
-            $(body).css(CURSOR, "");
+            $(BODY).css(CURSOR, "");
 
             if (wnd.touchScroller) {
                wnd.touchScroller.reset();
@@ -1564,7 +1567,7 @@
                 .append(templates.overlay)
                 .find(KWINDOWRESIZEHANDLES).hide();
 
-            $(body).css(CURSOR, e.currentTarget.css(CURSOR));
+            $(BODY).css(CURSOR, e.currentTarget.css(CURSOR));
         },
 
         drag: function (e) {
@@ -1584,7 +1587,7 @@
                 .find(KWINDOWRESIZEHANDLES).show().end()
                 .find(KOVERLAY).remove();
 
-            $(body).css(CURSOR, "");
+            $(BODY).css(CURSOR, "");
 
             e.currentTarget.closest(KWINDOW).css(wnd.initialWindowPosition);
         },
@@ -1596,7 +1599,7 @@
                 .find(KWINDOWRESIZEHANDLES).show().end()
                 .find(KOVERLAY).remove();
 
-            $(body).css(CURSOR, "");
+            $(BODY).css(CURSOR, "");
 
             wnd.trigger(DRAGEND);
 
