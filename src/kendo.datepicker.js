@@ -428,16 +428,16 @@
          * var datePicker = $("#datePicker").data("kendoDatePicker");
          * // set the max date to Jan 1st, 2013
          * datePicker.max(new Date(2013,0, 1));
-         * @option {String} [format] <MM/dd/yyyy> Specifies the format, which is used to parse value set with value() method.
+         * @option {String} [format] <MM/dd/yyyy> Specifies the format, which is used to format the value of the DatePicker displayed in the input.
          * _example
          * $("#datePicker").kendoDatePicker({
          *     format: "yyyy/MM/dd"
          * });
-         * @option {Array} [parseFormats] <MM/dd/yyyy> Specifies the formats, which are used to parse the value set with value() method or by direct input. If not set the value of the format will be used.
+         * @option {Array} [parseFormats] <> Specifies the formats, which are used to parse the value set with value() method or by direct input. If not set the value of the format will be used.
          * _example
          * $("#datePicker").kendoDatePicker({
          *     format: "yyyy/MM/dd",
-         *     parseFormats: ["MMMM yyyy"]
+         *     parseFormats: ["MMMM yyyy"] //format also will be added to parseFormats
          * });
          * @option {String} [start] <month> Specifies the start view.
          * The following settings are available for the <b>start</b> value:
