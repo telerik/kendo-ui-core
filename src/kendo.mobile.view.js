@@ -340,11 +340,8 @@
                 next = that.next,
                 back = that.back(),
                 complete = function() {
-                    if (!that.done) {
-                        current.hideComplete();
-                        that.complete();
-                        that.done = true;
-                    }
+                    current.hideComplete();
+                    that.complete();
                 },
 
                 viewTransition = back ? next.backTransition : next.transition,
