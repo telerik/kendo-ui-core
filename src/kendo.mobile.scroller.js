@@ -171,7 +171,8 @@
 
     /**
      * @name kendo.mobile.ui.Scroller.Description
-     * @section The Kendo Mobile Scroller widget enables touch friendly kinetic scrolling for the contents of a given DOM element.
+     * @section
+     * <p>The Kendo Mobile Scroller widget enables touch friendly kinetic scrolling for the contents of a given DOM element.  </p>
      *
      * <h3>Getting Started</h3>
      * <p>Each mobile View initializes a scroller for its content element. In addition to that, a scroller will be initialized for every element with a
@@ -186,7 +187,18 @@
      * @example
      * <div id="scroller"></div>
      * <script>
-     * var listView = $("#scroller").kendoMobileScroller();
+     * var scroller = $("#scroller").kendoMobileScroller();
+     * </script>
+     *
+     * @exampleTitle Obtain the current mobile view scroller
+     * @example
+     * <div data-role="view" data-init="getScroller">
+     *   Foo
+     * </div>
+     * <script>
+     *  function getScroller(e) {
+     *     var scroller = e.view.scroller;
+     *  }
      * </script>
      *
      * @section
@@ -204,12 +216,17 @@
          * @param {DomElement} element DOM element
          * @param {Object} options
          * @option {Boolean} [elastic] <true> Weather or not to allow out of bounds dragging and easing.
-         * @option {Number} [pullOffset] <140> The threshold after which a scroll pull will trigger the pull to refresh event. Has effect only when the pull option is set to true.
-         * @option {String} [pullTemplate] <Pull to refresh> The message template displayed when the user pulls the scroller. Has effect only when the pull option is set to true.
+         * @option {Number} [pullOffset] <140> The threshold bellow which a releasing the scroller will trigger the pull event.
+         * Has effect only when the pullToRefresh option is set to true.
+         * @option {String} [pullTemplate] <Pull to refresh> The message template displayed when the user pulls the scroller.
+         * Has effect only when the pullToRefresh option is set to true.
          * @option {Boolean} [pullToRefresh] <false> If set to true, the scroller will display a hint when the user pulls the container beyond its top limit.
          * If a pull beyond the specified pullOffset occurs, a pull event will be triggered.
-         * @option {String} [releaseTemplate] <Release to refresh> The message template indicating that pullToRefresh will occur. Has effect only when the pull option is set to true.
-         * @option {String} [refreshTemplate] <Refreshing> The message template displayed during the refresh. Has effect only when the pull option is set to true.
+         * @option {String} [releaseTemplate] <Release to refresh> The message template displayed when the user pulls the scroller below the
+         * pullOffset, indicating that pullToRefresh will occur.
+         * Has effect only when the pullToRefresh option is set to true.
+         * @option {String} [refreshTemplate] <Refreshing> The message template displayed during the refresh.
+         * Has effect only when the pullToRefresh option is set to true.
          */
         init: function(element, options) {
             var that = this;
@@ -355,6 +372,15 @@
          */
         reset: function() {
             this.movable.moveTo({x: 0, y: 0});
+        },
+
+        /**
+         * Scrolls the container to the specified location
+         * @param {Number} x The horizontal offset in pixels to scroll to.
+         * @param {Number} y The vertical offset in pixels to scroll to.
+         */
+        scrollTo: function(x, y) {
+            this.movable.moveTo({x: x, y: y});
         },
 
         /**
