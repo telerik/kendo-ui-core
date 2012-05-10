@@ -576,7 +576,7 @@
             var that = this;
             if (that.options.reordable) {
                 that.thead.kendoReordable({
-                    filter: ".k-header:not(.k-group-cell,.k-hierarchy-cell)",
+                    filter: ".k-header:not(.k-group-cell,.k-hierarchy-cell)[" + kendo.attr("field") + "]",
                     hint: function(target) {
                         return $('<div class="k-header k-drag-clue" />')
                             .css({
