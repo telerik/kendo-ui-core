@@ -46,8 +46,8 @@ namespace Kendo.Mvc.UI.Html
             {
                 var sortIcon = new HtmlElement("span")
                                 .AddClass(UIPrimitives.Icon)
-                                .ToggleClass("t-arrow-up", sortDirection == ListSortDirection.Ascending)
-                                .ToggleClass("t-arrow-down", sortDirection == ListSortDirection.Descending)
+                                .ToggleClass("k-arrow-up", sortDirection == ListSortDirection.Ascending)
+                                .ToggleClass("k-arrow-down", sortDirection == ListSortDirection.Descending)
                                 .Text(String.Format("({0})", sortDirection == ListSortDirection.Ascending ? sortedAscText : sortedDescText));
 
                 sortIcon.AppendTo(container);

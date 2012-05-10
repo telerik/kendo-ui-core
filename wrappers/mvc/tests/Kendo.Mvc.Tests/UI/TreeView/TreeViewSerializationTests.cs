@@ -31,7 +31,7 @@ namespace Kendo.Mvc.UI.Tests
         {
             treeview.WriteInitializationScript(textWriter.Object);
 
-            Assert.Equal("jQuery('#myTreeView').tTreeView();", output);
+            output.ShouldContain("jQuery('#myTreeView').tTreeView()");
         }
     }
 }

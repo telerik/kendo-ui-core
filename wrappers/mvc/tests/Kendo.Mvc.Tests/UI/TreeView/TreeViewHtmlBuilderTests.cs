@@ -51,7 +51,7 @@ namespace Kendo.Mvc.UI.Tests
         {
             IHtmlNode tag = renderer.TreeViewTag();
 
-            Assert.Equal("t-widget t-treeview t-reset", tag.Attribute("class"));
+            Assert.Equal("k-widget k-treeview k-reset", tag.Attribute("class"));
         }
 
         [Fact]
@@ -59,7 +59,7 @@ namespace Kendo.Mvc.UI.Tests
         {
             IHtmlNode tag = renderer.TreeViewTag().Children[0];
             Assert.Equal("ul", tag.TagName);
-            Assert.Equal("t-group t-treeview-lines", tag.Attribute("class"));
+            Assert.Equal("k-group k-treeview-lines", tag.Attribute("class"));
         }
 
         [Fact]
@@ -69,7 +69,7 @@ namespace Kendo.Mvc.UI.Tests
 
             IHtmlNode tag = renderer.TreeViewTag().Children[0];
             Assert.Equal("ul", tag.TagName);
-            Assert.Equal("t-group", tag.Attribute("class"));
+            Assert.Equal("k-group", tag.Attribute("class"));
         }
 
         [Fact]
@@ -78,7 +78,7 @@ namespace Kendo.Mvc.UI.Tests
             item.HtmlAttributes["class"] = "custom";
             IHtmlNode node = renderer.ItemTag(item, false);
 
-            Assert.Equal("t-item t-first t-last custom", node.Attribute("class"));
+            Assert.Equal("k-item k-first k-last custom", node.Attribute("class"));
         }
 
         [Fact]
@@ -86,7 +86,7 @@ namespace Kendo.Mvc.UI.Tests
         {
             IHtmlNode node = renderer.ItemTag(treeView.Items[0], false);
 
-            Assert.Equal("t-item t-first", node.Attribute("class"));
+            Assert.Equal("k-item k-first", node.Attribute("class"));
         }
 
         [Fact]
@@ -95,7 +95,7 @@ namespace Kendo.Mvc.UI.Tests
             item.Parent = new TreeViewItem();
             IHtmlNode node = renderer.ItemTag(item, false);
 
-            Assert.Equal("t-item t-last", node.Attribute("class"));
+            Assert.Equal("k-item k-last", node.Attribute("class"));
         }
 
         [Fact]
@@ -104,7 +104,7 @@ namespace Kendo.Mvc.UI.Tests
             IHtmlNode tag = renderer.ChildrenTag(item);
 
             Assert.Equal("ul", tag.TagName);
-            Assert.Equal("t-group", tag.Attribute("class"));
+            Assert.Equal("k-group", tag.Attribute("class"));
         }
 
         [Fact]
@@ -137,7 +137,7 @@ namespace Kendo.Mvc.UI.Tests
 
             IHtmlNode tag = renderer.ItemInnerContent(item);
 
-            Assert.Equal("t-in t-state-selected", tag.Attribute("class"));
+            Assert.Equal("k-in k-state-selected", tag.Attribute("class"));
 		}
 
         [Fact]
@@ -148,7 +148,7 @@ namespace Kendo.Mvc.UI.Tests
 
             IHtmlNode tag = renderer.ItemInnerContent(item);
 
-            Assert.Equal("t-in t-state-disabled", tag.Attribute("class"));
+            Assert.Equal("k-in k-state-disabled", tag.Attribute("class"));
         }
 
         [Fact]
@@ -159,7 +159,7 @@ namespace Kendo.Mvc.UI.Tests
 
             IHtmlNode tag = renderer.ItemInnerContent(item);
 
-            Assert.Equal("t-in", tag.Attribute("class"));
+            Assert.Equal("k-in", tag.Attribute("class"));
             Assert.Equal("span", tag.TagName);
             Assert.Equal("text", tag.Children[0].InnerHtml);
         }
@@ -173,7 +173,7 @@ namespace Kendo.Mvc.UI.Tests
 
             IHtmlNode tag = renderer.ItemInnerContent(item);
 
-            Assert.Equal("t-link t-in", tag.Attribute("class"));
+            Assert.Equal("k-link k-in", tag.Attribute("class"));
             Assert.Equal("#", tag.Attribute("href"));
             Assert.Equal("a", tag.TagName);
             Assert.Equal("text", tag.Children[0].InnerHtml);
@@ -190,7 +190,7 @@ namespace Kendo.Mvc.UI.Tests
             IHtmlNode tag = renderer.ItemTag(item, true /*there are items*/).Children[0].Children[0];
 
             Assert.Equal("span", tag.TagName);
-            Assert.Equal("t-icon t-plus", tag.Attribute("class"));
+            Assert.Equal("k-icon k-plus", tag.Attribute("class"));
         }
 
         [Fact]
@@ -202,7 +202,7 @@ namespace Kendo.Mvc.UI.Tests
 
             IHtmlNode tag = renderer.ItemTag(item, true /*there are items*/).Children[0].Children[0];
 
-            Assert.Equal("t-icon t-plus-disabled", tag.Attribute("class"));
+            Assert.Equal("k-icon k-plus-disabled", tag.Attribute("class"));
         }
 
         [Fact]
@@ -216,7 +216,7 @@ namespace Kendo.Mvc.UI.Tests
             IHtmlNode tag = renderer.ItemTag(item, true /*there are items*/).Children[0].Children[0];
 
             Assert.Equal("span", tag.TagName);
-            Assert.Equal("t-icon t-minus", tag.Attribute("class"));
+            Assert.Equal("k-icon k-minus", tag.Attribute("class"));
         }
 
         [Fact]
@@ -249,7 +249,7 @@ namespace Kendo.Mvc.UI.Tests
 
             IHtmlNode tag = renderer.ItemInnerContent(item);
 
-            Assert.Equal("t-link t-in custom", tag.Attribute("class"));
+            Assert.Equal("k-link k-in custom", tag.Attribute("class"));
             Assert.Equal("overriden", tag.Attribute("href"));
         }
         
@@ -274,7 +274,7 @@ namespace Kendo.Mvc.UI.Tests
             Assert.Equal("span", tag.Children[0].TagName);
             Assert.Equal("text", tag.Children[1].InnerHtml);
 
-            Assert.Equal("t-sprite sprite", tag.Children[0].Attribute("class"));
+            Assert.Equal("k-sprite sprite", tag.Children[0].Attribute("class"));
         }
 
         [Fact]

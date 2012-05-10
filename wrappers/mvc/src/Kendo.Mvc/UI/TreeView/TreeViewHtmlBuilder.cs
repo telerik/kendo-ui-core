@@ -15,7 +15,7 @@ namespace Kendo.Mvc.UI
         public IHtmlNode TreeViewTag()
         {
             IHtmlNode div = ComponentTag("div")
-                .PrependClass(UIPrimitives.Widget, "t-treeview", UIPrimitives.ResetStyle);
+                .PrependClass(UIPrimitives.Widget, "k-treeview", UIPrimitives.ResetStyle);
 
             if (Component.Items.Count > 0)
             {
@@ -59,10 +59,10 @@ namespace Kendo.Mvc.UI
             {
                 new HtmlElement("span")
                         .AddClass(UIPrimitives.Icon)
-                        .ToggleClass("t-plus", item.Enabled && !item.Expanded)
-                        .ToggleClass("t-minus", item.Enabled && item.Expanded)
-                        .ToggleClass("t-plus-disabled", !item.Enabled && !item.Expanded)
-                        .ToggleClass("t-minus-disabled", !item.Enabled && item.Expanded)
+                        .ToggleClass("k-plus", item.Enabled && !item.Expanded)
+                        .ToggleClass("k-minus", item.Enabled && item.Expanded)
+                        .ToggleClass("k-plus-disabled", !item.Enabled && !item.Expanded)
+                        .ToggleClass("k-minus-disabled", !item.Enabled && item.Expanded)
                         .AppendTo(div);
             }
 
@@ -133,7 +133,7 @@ namespace Kendo.Mvc.UI
             }
 
             tag.Attributes(item.LinkHtmlAttributes)
-               .PrependClass("t-in")
+               .PrependClass("k-in")
                .ToggleClass(UIPrimitives.DisabledState, !item.Enabled)
                .ToggleClass(UIPrimitives.SelectedState, item.Enabled && item.Selected);
 

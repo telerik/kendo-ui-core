@@ -48,7 +48,7 @@ namespace Kendo.Mvc.UI.Tests
             item.HtmlAttributes["class"] = "custom";
             IHtmlNode node = renderer.ItemTag(item);
 
-            Assert.Equal("t-item t-state-default custom", node.Attribute("class"));
+            Assert.Equal("k-item k-state-default custom", node.Attribute("class"));
         }
 
         [Fact]
@@ -56,7 +56,7 @@ namespace Kendo.Mvc.UI.Tests
         {
             IHtmlNode tag = renderer.Build();
 
-            Assert.Equal("t-widget t-panelbar t-reset", tag.Attribute("class"));
+            Assert.Equal("k-widget k-panelbar k-reset", tag.Attribute("class"));
         }
 
         [Fact]
@@ -65,7 +65,7 @@ namespace Kendo.Mvc.UI.Tests
             IHtmlNode tag = renderer.ChildrenTag(item);
 
             Assert.Equal("ul", tag.TagName);
-            Assert.Equal("t-group", tag.Attribute("class"));
+            Assert.Equal("k-group", tag.Attribute("class"));
         }
 
         [Fact]
@@ -98,7 +98,7 @@ namespace Kendo.Mvc.UI.Tests
 
             IHtmlNode tag = renderer.ItemTag(item);
             
-            Assert.Equal("t-item t-state-default", tag.Attribute("class"));
+            Assert.Equal("k-item k-state-default", tag.Attribute("class"));
 		}
 
 		[Fact]
@@ -112,7 +112,7 @@ namespace Kendo.Mvc.UI.Tests
 
             IHtmlNode tag = renderer.ItemInnerContentTag(item.Items[0], false);
 
-            Assert.Equal("t-link t-state-selected", tag.Attribute("class"));
+            Assert.Equal("k-link k-state-selected", tag.Attribute("class"));
 		}
 
         [Fact]
@@ -120,7 +120,7 @@ namespace Kendo.Mvc.UI.Tests
         {
             IHtmlNode tag = renderer.ItemInnerContentTag(item, false);
 
-            Assert.Equal("t-link t-header", tag.Attribute("class"));
+            Assert.Equal("k-link k-header", tag.Attribute("class"));
         }
 
         [Fact]
@@ -131,7 +131,7 @@ namespace Kendo.Mvc.UI.Tests
 
             IHtmlNode tag = renderer.ItemTag(item);
 
-            Assert.Equal("t-item t-state-active", tag.Attribute("class"));
+            Assert.Equal("k-item k-state-active", tag.Attribute("class"));
         }
 
         [Fact]
@@ -142,7 +142,7 @@ namespace Kendo.Mvc.UI.Tests
 
             IHtmlNode tag = renderer.ItemTag(item);
 
-            Assert.Equal("t-item t-state-disabled", tag.Attribute("class"));
+            Assert.Equal("k-item k-state-disabled", tag.Attribute("class"));
         }
 
         [Fact]
@@ -154,7 +154,7 @@ namespace Kendo.Mvc.UI.Tests
 
             IHtmlNode tag = renderer.ItemInnerContentTag(item, false);
 
-            Assert.Equal("t-link t-header", tag.Attribute("class"));
+            Assert.Equal("k-link k-header", tag.Attribute("class"));
             Assert.Equal("http://www.google.com/", tag.Attribute("href"));
             Assert.Equal("a", tag.TagName);
             Assert.Equal("text", tag.Children[0].InnerHtml);
@@ -171,7 +171,7 @@ namespace Kendo.Mvc.UI.Tests
             IHtmlNode tag = renderer.ItemInnerContentTag(item, true /*there are children*/).Children[1];
 
             Assert.Equal("span", tag.TagName);
-            Assert.Equal("t-icon t-arrow-up t-panelbar-collapse", tag.Attribute("class"));
+            Assert.Equal("k-icon k-arrow-up k-panelbar-collapse", tag.Attribute("class"));
         }
 
         [Fact]
@@ -195,7 +195,7 @@ namespace Kendo.Mvc.UI.Tests
 
             IHtmlNode tag = renderer.ItemInnerContentTag(item, true).Children[1];
 
-            Assert.Equal("t-icon t-arrow-down t-panelbar-expand", tag.Attribute("class"));
+            Assert.Equal("k-icon k-arrow-down k-panelbar-expand", tag.Attribute("class"));
         }
 
         [Fact]
@@ -264,7 +264,7 @@ namespace Kendo.Mvc.UI.Tests
 
             IHtmlNode tag = renderer.ItemInnerContentTag(item, false);
 
-            Assert.Equal("t-link t-header custom", tag.Attribute("class"));
+            Assert.Equal("k-link k-header custom", tag.Attribute("class"));
             Assert.Equal("overriden", tag.Attribute("href"));
         }
         [Fact]
@@ -321,7 +321,7 @@ namespace Kendo.Mvc.UI.Tests
 
             Assert.Equal("text", tag.Children[1].InnerHtml);
             Assert.Equal("span", tag.Children[0].TagName);
-            Assert.Equal("t-sprite sprite", tag.Children[0].Attribute("class"));
+            Assert.Equal("k-sprite sprite", tag.Children[0].Attribute("class"));
         }
 
         [Fact]
@@ -331,7 +331,7 @@ namespace Kendo.Mvc.UI.Tests
             item.ContentUrl = "#";
 
             IHtmlNode tag = renderer.ItemInnerContentTag(item, true).Children[1];
-            Assert.Equal("t-icon t-arrow-down t-panelbar-expand", tag.Attribute("class"));
+            Assert.Equal("k-icon k-arrow-down k-panelbar-expand", tag.Attribute("class"));
         }
     }
 }
