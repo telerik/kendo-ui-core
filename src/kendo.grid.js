@@ -34,6 +34,7 @@
         FOCUSABLE = "k-focusable",
         SELECTED = "k-state-selected",
         COLUMNRESIZE = "columnResize",
+        COLUMNREORDER = "columnReorder",
         CLICK = "click",
         HEIGHT = "height",
         TABINDEX = "tabIndex",
@@ -379,7 +380,8 @@
            SAVE,
            REMOVE,
            SAVECHANGES,
-           COLUMNRESIZE
+           COLUMNRESIZE,
+           COLUMNREORDER
         ],
 
         setDataSource: function(dataSource) {
@@ -590,7 +592,13 @@
                             .prepend('<span class="k-icon k-drag-status k-denied" />');
                     },
                     change: function(e) {
-                        that.reorderColumn(e.newIndex, that.columns[e.oldIndex]);
+                        var column = that.columns[e.oldIndex];
+                        that.trigger(COLUMNREORDER, {
+                            newIndex: e.newIndex,
+                            oldIndex: e.oldIndex,
+                            column: column
+                        });
+                        that.reorderColumn(e.newIndex, columns);
                     }
                 });
             }
@@ -609,6 +617,7 @@
 
             that.columns.splice(sourceIndex, 1);
             that.columns.splice(destIndex, 0, column);
+            that._templates();
 
             reorder(that.thead.prev().find("col:not(.k-group-col,.k-hierarchy-col)"), sourceIndex, destIndex);
             if (that.options.scrollable) {
