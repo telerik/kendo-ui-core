@@ -360,8 +360,6 @@
 
             that._editable();
 
-            that._resizable();
-
             if (that.options.autoBind) {
                 that.dataSource.fetch();
             }
@@ -425,6 +423,7 @@
             altRowTemplate: "",
             dataSource: {},
             height: null,
+            resizable: false,
             reordable: false
         },
 
@@ -2205,6 +2204,8 @@
             that._updateCols();
 
             that._setContentHeight();
+
+            that._resizable();
 
             that._reordable();
         },
