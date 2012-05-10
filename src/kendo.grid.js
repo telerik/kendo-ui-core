@@ -597,7 +597,7 @@
                             oldIndex: e.oldIndex,
                             column: column
                         });
-                        that.reorderColumn(e.newIndex, columns);
+                        that.reorderColumn(e.newIndex, column);
                     }
                 });
             }
