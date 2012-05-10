@@ -174,7 +174,8 @@
                 }).data("kendoDateTimePicker");
 
                 equal(datetimepicker.options.parseFormats[0], datetimepicker.options.format);
-                equal(datetimepicker.options.parseFormats[1], "MM/dd/yy");
+                equal(datetimepicker.options.parseFormats[1], datetimepicker.options.timeFormat);
+                equal(datetimepicker.options.parseFormats[2], "MM/dd/yy");
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

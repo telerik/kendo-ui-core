@@ -502,7 +502,7 @@
             element = that.element;
             options = that.options;
 
-            validate(options);
+            normalize(options);
 
             that._wrapper();
 
@@ -646,7 +646,7 @@
         ],
 
         setOptions: function(options) {
-            validate(options);
+            normalize(options);
 
             Widget.fn.setOptions.call(this, options);
 
@@ -933,7 +933,7 @@
         }
     });
 
-    function validate(options) {
+    function normalize(options) {
         var parseFormats = options.parseFormats;
 
         options.format = extractFormat(options.format || kendo.culture().calendar.patterns.t);

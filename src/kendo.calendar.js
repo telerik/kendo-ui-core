@@ -285,7 +285,7 @@
                 .delegate(CELLSELECTOR, CLICK, proxy(that._click, that));
 
             value = options.value;
-            validate(options);
+            normalize(options);
 
             that._index = views[options.start];
             that._current = new DATE(restrictValue(value, options.min, options.max));
@@ -364,7 +364,7 @@
         ],
 
         setOptions: function(options) {
-            validate(options);
+            normalize(options);
 
             Widget.fn.setOptions.call(this, options);
         },
@@ -1275,7 +1275,7 @@
         e.preventDefault();
     }
 
-    function validate(options) {
+    function normalize(options) {
         var start = views[options.start],
             depth = views[options.depth];
 
@@ -1300,7 +1300,7 @@
     calendar.makeUnselectable =  makeUnselectable;
     calendar.restrictValue = restrictValue;
     calendar.isInRange = isInRange;
-    calendar.validate = validate;
+    calendar.normalize = normalize;
     calendar.viewsEnum = views;
 
     kendo.calendar = calendar;
