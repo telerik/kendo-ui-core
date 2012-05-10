@@ -453,8 +453,14 @@
          * @option {Date} [max] <00:00>
          * Specifies the end value in the popup list.
          *
-         * @option {String} [format] <h:mm tt>
-         * Specifies the format, which is used to parse value set with value() method.
+         * @option {String} [format] <h:mm tt> Specifies the format, which is used to format the value of the TimePicker displayed in the input.
+         *
+         * @option {Array} [parseFormats] <> Specifies the formats, which are used to parse the value set with the value method or by direct input. If not set the value of the options.format will be used.
+         * _example
+         * $("#timePicker").kendoTimePicker({
+         *     format: "h:mm tt",
+         *     parseFormats: ["HH:mm"] //format also will be added to parseFormats
+         * });
          *
          * @option {Number} [interval] <30>
          * Specifies the interval, between values in the popup list, in minutes.

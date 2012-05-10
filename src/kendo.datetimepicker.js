@@ -175,10 +175,21 @@
          * var dateTimePicker = $("#dateTimePicker").data("kendoDateTimePicker");
          * // set the max date to Jan 1st, 2013 12:00 AM
          * dateTimePicker.max(new Date(2013,0, 1));
-         * @option {String} [format] <MM/dd/yyyy hh:mm tt> Specifies the format, which is used to parse value set with value() method.
+         * @option {String} [format] <MM/dd/yyyy h:mm tt> Specifies the format, which is used to format the value of the DateTimePicker displayed in the input.
          * _example
          * $("#dateTimePicker").kendoDateTimePicker({
          *     format: "yyyy/MM/dd hh:mm tt"
+         * });
+         * @option {String} [timeFormat] <h:mm tt> Specifies the format, which is used to format the values in the time drop-down list.
+         * _example
+         * $("#dateTimePicker").kendoDateTimePicker({
+         *     timeFormat: "HH:mm" //24 hours format
+         * });
+         * @option {Array} [parseFormats] <> Specifies the formats, which are used to parse the value set with value() method or by direct input. If not set the value of the options.format and options.timeFormat will be used.
+         * _example
+         * $("#datePicker").kendoDatePicker({
+         *     format: "yyyy/MM/dd hh:mm tt",
+         *     parseFormats: ["MMMM yyyy", "HH:mm"] //format also will be added to parseFormats
          * });
          * @option {Number} [interval] <30> Specifies the interval, between values in the popup list, in minutes.
          * _example
