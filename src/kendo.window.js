@@ -282,6 +282,9 @@
          * @option {String} [title]
          * The text in the window title bar.
          *
+         * @option {Object} [appendTo] <document.body>
+         * The element that the Window will be appended to.
+         *
          * @option {Object} [animation]
          * A collection of {Animation} objects, used to change default animations. A value of <strong>false</strong>
          * will disable all animations in the widget.
@@ -305,7 +308,7 @@
             element = that.element;
             content = options.content;
 
-            that.container = $(options.container || document.body);
+            that.appendTo = $(options.appendTo || document.body);
 
             that._animations();
 
@@ -313,7 +316,7 @@
                 content = options.content = { url: content };
             }
 
-            if (!element.parent().is(that.container)) {
+            if (!element.parent().is(that.appendTo)) {
                 if (element.is(VISIBLE)) {
                     offset = element.offset();
                     isVisible = true;
@@ -794,7 +797,7 @@
         },
 
         _overlay: function (visible) {
-            var overlay = this.container.children(".k-overlay"),
+            var overlay = this.appendTo.children(".k-overlay"),
                 wrapper = this.wrapper;
 
             if (!overlay.length) {
@@ -1395,7 +1398,7 @@
 
             // Make sure the wrapper is appended to the body only once. IE9+ will throw exceptions if you move iframes in DOM
             wrapper
-                .appendTo(that.container)
+                .appendTo(that.appendTo)
                 .append(contentHtml)
                 .find("iframe").each(function(index) {
                    // Restore the src attribute of the iframes when they are part of the live DOM tree
@@ -1461,7 +1464,7 @@
                 height: wrapper.height()
             };
 
-            that.containerOffset = wnd.container.offset(),
+            that.containerOffset = wnd.appendTo.offset(),
 
             wrapper
                 .append(templates.overlay)
@@ -1555,7 +1558,7 @@
             var wnd = this.owner,
                 element = wnd.element,
                 actions = element.find(".k-window-actions"),
-                containerOffset = wnd.container.offset();
+                containerOffset = wnd.appendTo.offset();
 
             wnd.trigger(DRAGSTART);
 
