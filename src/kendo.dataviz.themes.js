@@ -359,6 +359,12 @@
         })
     };
 
+    // Copy the line/area settings for their vertical counterparts
+    for (var themeName in chartThemes) {
+        var defaults = chartThemes[themeName].seriesDefaults;
+        defaults.verticalLine = deepExtend({}, defaults.line);
+        defaults.verticalArea = deepExtend({}, defaults.area);
+    }
 
     // Gauge themes ===========================================================
 
