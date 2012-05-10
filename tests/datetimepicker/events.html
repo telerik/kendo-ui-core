@@ -123,27 +123,54 @@
                 });
             });
 
-            test("DateTimePicker triggers open event", 1, function() {
+            test("DateTimePicker triggers open event when timeView is opened", 2, function() {
                 var datetimepicker = new DateTimePicker(input, {
                     value: new Date(2000, 10, 10),
-                    open: function() {
+                    open: function(e) {
                         ok(true);
+                        equal(e.view, "time");
                     }
                 });
 
                 datetimepicker.timeView.popup.open();
             });
 
-            test("DateTimePicker triggers close event", 1, function() {
+            test("DateTimePicker triggers open event when dateView is opened", 2, function() {
                 var datetimepicker = new DateTimePicker(input, {
                     value: new Date(2000, 10, 10),
-                    close: function() {
+                    open: function(e) {
                         ok(true);
+                        equal(e.view, "date");
+                    }
+                });
+
+                datetimepicker.dateView.popup.open();
+            });
+
+            test("DateTimePicker triggers close event when timeView is opened", 2, function() {
+                var datetimepicker = new DateTimePicker(input, {
+                    value: new Date(2000, 10, 10),
+                    close: function(e) {
+                        ok(true);
+                        equal(e.view, "time");
                     }
                 });
 
                 datetimepicker.timeView.popup.open();
                 datetimepicker.timeView.popup.close();
+            });
+
+            test("DateTimePicker triggers close event when dateView is opened", 2, function() {
+                var datetimepicker = new DateTimePicker(input, {
+                    value: new Date(2000, 10, 10),
+                    close: function(e) {
+                        ok(true);
+                        equal(e.view, "date");
+                    }
+                });
+
+                datetimepicker.open("date");
+                datetimepicker.dateView.popup.close();
             });
 
         </script>

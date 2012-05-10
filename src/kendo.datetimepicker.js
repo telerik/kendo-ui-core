@@ -802,16 +802,8 @@
         _views: function() {
             var that = this,
                 options = that.options,
-                close = function(e) {
-                    if (that.trigger(CLOSE)) {
-                        e.preventDefault();
-                    }
-                },
-                open = function(e) {
-                    if (that.trigger(OPEN)) {
-                        e.preventDefault();
-                    }
-                };
+                dateViewParams = { view: "date" },
+                timeViewParams = { view: "time" };
 
             that.dateView = new kendo.DateView(extend({}, options, {
                 anchor: that.wrapper,
@@ -820,8 +812,16 @@
                     that._change(this.value());
                     that.close("date");
                 },
-                close: close,
-                open: open
+                close: function(e) {
+                    if (that.trigger(CLOSE, dateViewParams)) {
+                        e.preventDefault();
+                    }
+                },
+                open:  function(e) {
+                    if (that.trigger(OPEN, dateViewParams)) {
+                        e.preventDefault();
+                    }
+                }
             }));
 
             that.timeView = new kendo.TimeView(extend({}, options, {
@@ -835,8 +835,16 @@
                         that.element.val(kendo.toString(value, options.format));
                     }
                 },
-                close: close,
-                open: open
+                close: function(e) {
+                    if (that.trigger(CLOSE, timeViewParams)) {
+                        e.preventDefault();
+                    }
+                },
+                open:  function(e) {
+                    if (that.trigger(OPEN, timeViewParams)) {
+                        e.preventDefault();
+                    }
+                }
             }));
         },
 
