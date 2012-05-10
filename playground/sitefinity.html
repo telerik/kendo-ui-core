@@ -142,6 +142,10 @@
                         }
                     },
                     axisLabelClick: function(e) {
+                        if (e.axis.type != "Category") {
+                            return;
+                        }
+
                         var chart = e.sender,
                             chartContainer = $("#container"),
                             categoryIndex = e.index;
