@@ -34,6 +34,8 @@
         },
         nameSpecialCharRegExp = /(\[|\]|\$|\.|\:|\+)/g;
 
+    kendo.ui.validator = { rules: {}, messages: {} };
+
     /**
      *  @name kendo.ui.Validator.Description
      *
@@ -190,6 +192,10 @@
          */
         init: function(element, options) {
             var that = this;
+            options = options || {};
+
+            options.rules = $.extend({}, kendo.ui.validator.rules, options.rules);
+            options.messages = $.extend({}, kendo.ui.validator.messages, options.messages);
 
             Widget.fn.init.call(that, element, options);
 
@@ -354,14 +360,15 @@
                 valid = result.valid,
                 className = "." + INVALIDMSG,
                 fieldName = (input.attr(NAME) || ""),
-                DATAFOR = kendo.attr("for"),
-                lbl = that.element.find(className + "[" + DATAFOR +"=" + fieldName.replace(nameSpecialCharRegExp, "\\$1") + "]").add(input.next(className)).hide(),
+                lbl = that._findMessageContainer(fieldName).add(input.next(className)).hide(),
                 messageText;
 
             if (!valid) {
                 messageText = that._extractMessage(input, result.key);
                 that._errors[fieldName] = messageText;
-                var messageLabel = $(template({ message: messageText })).addClass(INVALIDMSG).attr(DATAFOR, fieldName || "");
+                var messageLabel = $(template({ message: messageText }));
+
+                that._decorateMessageContainer(messageLabel, fieldName);
 
                 if (!lbl.replaceWith(messageLabel).length) {
                     messageLabel.insertAfter(input);
@@ -372,6 +379,29 @@
             input.toggleClass(INVALIDINPUT, !valid);
 
             return valid;
+        },
+
+        _findMessageContainer: function(fieldName) {
+            var locators = kendo.ui.validator.messageLocators,
+                name,
+                containers = this.element.find("." + INVALIDMSG + "[" + kendo.attr("for") +"=" + fieldName.replace(nameSpecialCharRegExp, "\\$1") + "]");
+
+            for (name in locators) {
+                containers = containers.add(locators[name].locate(this.element, fieldName));
+            }
+
+            return containers;
+        },
+
+        _decorateMessageContainer: function(container, fieldName) {
+            var locators = kendo.ui.validator.messageLocators,
+                name;
+
+            container.addClass(INVALIDMSG).attr(kendo.attr("for"), fieldName || "");
+
+            for (name in locators) {
+                locators[name].decorate(container, fieldName);
+            }
         },
 
         _extractMessage: function(input, ruleKey) {
