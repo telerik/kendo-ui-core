@@ -154,7 +154,7 @@
         extend = $.extend,
         each = $.each,
         template = kendo.template,
-        body,
+        BODY = "body",
         templates,
         // classNames
         KWINDOW = ".k-window",
@@ -182,6 +182,10 @@
         ZINDEX = "zIndex",
         MINIMIZE_MAXIMIZE = ".k-window-actions .k-minimize,.k-window-actions .k-maximize",
         isLocalUrl = kendo.isLocalUrl;
+
+    function constrain(value, low, high) {
+        return Math.max(Math.min(value, high), low);
+    }
 
     function windowObject(element) {
         return element.children(KWINDOWCONTENT).data("kendoWindow");
@@ -278,6 +282,9 @@
          * @option {String} [title]
          * The text in the window title bar.
          *
+         * @option {Object} [appendTo] <document.body>
+         * The element that the Window will be appended to.
+         *
          * @option {Object} [animation]
          * A collection of {Animation} objects, used to change default animations. A value of <strong>false</strong>
          * will disable all animations in the widget.
@@ -296,12 +303,12 @@
                 isVisible = false,
                 content;
 
-            body = document.body;
-
             Widget.fn.init.call(that, element, options);
             options = that.options;
             element = that.element;
             content = options.content;
+
+            that.appendTo = $(options.appendTo || document.body);
 
             that._animations();
 
@@ -309,7 +316,7 @@
                 content = options.content = { url: content };
             }
 
-            if (!element.parent().is("body")) {
+            if (!element.parent().is(that.appendTo)) {
                 if (element.is(VISIBLE)) {
                     offset = element.offset();
                     isVisible = true;
@@ -327,7 +334,7 @@
 
             if (!element.is(".k-content") || !wrapper[0]) {
                 element.addClass("k-window-content k-content");
-                createWindow(element, options);
+                that._createWindow(element, options);
                 wrapper = that.wrapper = element.closest(KWINDOW);
 
                 that._dimensions();
@@ -790,7 +797,7 @@
         },
 
         _overlay: function (visible) {
-            var overlay = $("body > .k-overlay"),
+            var overlay = this.appendTo.children(".k-overlay"),
                 wrapper = this.wrapper;
 
             if (!overlay.length) {
@@ -1356,6 +1363,47 @@
             } else if (modalWindows.length > 0) {
                 windowObject(modalWindows.eq(modalWindows.length - 2))._overlay(true);
             }
+        },
+
+        _createWindow: function() {
+            var that = this,
+                contentHtml = that.element,
+                options = that.options,
+                iframeSrcAttributes,
+                wrapper;
+
+            if (options.scrollable === false) {
+                contentHtml.attr("style", "overflow:hidden;");
+            }
+
+            if (options.iframe) {
+                contentHtml.html(templates.contentFrame(options));
+            }
+
+            wrapper = $(templates.wrapper(options));
+
+            if (options.title !== false) {
+                wrapper.append(templates.titlebar(extend(templates, options)));
+            }
+
+            wrapper.toggleClass("k-rtl", !!that.element.closest(".k-rtl").length);
+
+            // Collect the src attributes of all iframes and then set them to empty string.
+            // This seems to fix this IE9 "feature": http://msdn.microsoft.com/en-us/library/gg622929%28v=VS.85%29.aspx?ppud=4
+            iframeSrcAttributes = contentHtml.find("iframe").map(function(iframe) {
+                var src = this.getAttribute("src");
+                this.src = "";
+                return src;
+            });
+
+            // Make sure the wrapper is appended to the body only once. IE9+ will throw exceptions if you move iframes in DOM
+            wrapper
+                .appendTo(that.appendTo)
+                .append(contentHtml)
+                .find("iframe").each(function(index) {
+                   // Restore the src attribute of the iframes when they are part of the live DOM tree
+                   this.src = iframeSrcAttributes[index];
+                });
         }
     });
 
@@ -1386,44 +1434,6 @@
         resizeHandle: template("<div class='k-resize-handle k-resize-#= data #'></div>")
     };
 
-    function createWindow(element, options) {
-        var contentHtml = element,
-            iframeSrcAttributes,
-            wrapper;
-
-        if (options.scrollable === false) {
-            contentHtml.attr("style", "overflow:hidden;");
-        }
-
-        if (options.iframe) {
-            contentHtml.html(templates.contentFrame(options));
-        }
-
-        wrapper = $(templates.wrapper(options));
-
-        if (options.title !== false) {
-            wrapper.append(templates.titlebar(extend(templates, options)));
-        }
-
-        wrapper.toggleClass("k-rtl", !!element.closest(".k-rtl").length);
-
-        // Collect the src attributes of all iframes and then set them to empty string.
-        // This seems to fix this IE9 "feature": http://msdn.microsoft.com/en-us/library/gg622929%28v=VS.85%29.aspx?ppud=4
-        iframeSrcAttributes = contentHtml.find("iframe").map(function(iframe) {
-            var src = this.getAttribute("src");
-            this.src = "";
-            return src;
-        });
-
-        // Make sure the wrapper is appended to the body only once. IE9+ will throw exceptions if you move iframes in DOM
-        wrapper
-            .appendTo(body)
-            .append(contentHtml)
-            .find("iframe").each(function(index) {
-               // Restore the src attribute of the iframes when they are part of the live DOM tree
-               this.src = iframeSrcAttributes[index];
-            });
-    }
 
     function WindowResizing(wnd) {
         var that = this;
@@ -1440,85 +1450,89 @@
 
     WindowResizing.prototype = /** @ignore */ {
         dragstart: function (e) {
-            var wnd = this.owner,
+            var that = this,
+                wnd = that.owner,
                 wrapper = wnd.wrapper;
 
-            wnd.elementPadding = parseInt(wnd.wrapper.css("padding-top"), 10);
-            wnd.initialCursorPosition = wrapper.offset();
+            that.elementPadding = parseInt(wnd.wrapper.css("padding-top"), 10);
+            that.initialCursorPosition = wrapper.offset();
 
-            wnd.resizeDirection = e.currentTarget.prop("className").replace("k-resize-handle k-resize-", "").split("");
+            that.resizeDirection = e.currentTarget.prop("className").replace("k-resize-handle k-resize-", "").split("");
 
-            wnd.initialSize = {
-                width: wnd.wrapper.width(),
-                height: wnd.wrapper.height()
+            that.initialSize = {
+                width: wrapper.width(),
+                height: wrapper.height()
             };
+
+            that.containerOffset = wnd.appendTo.offset(),
 
             wrapper
                 .append(templates.overlay)
                 .find(KWINDOWRESIZEHANDLES).not(e.currentTarget).hide();
 
-            $(body).css(CURSOR, e.currentTarget.css(CURSOR));
+            $(BODY).css(CURSOR, e.currentTarget.css(CURSOR));
         },
         drag: function (e) {
-            var wnd = this.owner,
+            var that = this,
+                wnd = that.owner,
                 wrapper = wnd.wrapper,
                 options = wnd.options,
-                constrain = function(value, low, high) {
-                    return Math.max(Math.min(value, high), low);
-                },
-                resizeHandlers = {
-                    "e": function () {
-                        var newWidth = e.x.location - wnd.initialCursorPosition.left;
+                direction = that.resizeDirection,
+                containerOffset = that.containerOffset,
+                initialPosition = that.initialCursorPosition,
+                initialSize = that.initialSize,
+                newWidth, newHeight,
+                windowBottom, windowRight,
+                x = e.x.location,
+                y = e.y.location;
 
-                        wrapper.width(constrain(newWidth, options.minWidth, options.maxWidth));
-                    },
-                    "s": function () {
-                        var newHeight = e.y.location - wnd.initialCursorPosition.top - wnd.elementPadding;
+            if (direction.indexOf("e") >= 0) {
+                newWidth = x - initialPosition.left;
 
-                        wrapper.height(constrain(newHeight, options.minHeight, options.maxHeight));
-                    },
-                    "w": function () {
-                        var windowRight = wnd.initialCursorPosition.left + wnd.initialSize.width,
-                            newWidth = constrain(windowRight - e.x.location, options.minWidth, options.maxWidth);
+                wrapper.width(constrain(newWidth, options.minWidth, options.maxWidth));
+            } else if (direction.indexOf("w") >= 0) {
+                windowRight = initialPosition.left + initialSize.width;
+                newWidth = constrain(windowRight - x, options.minWidth, options.maxWidth);
 
-                        wrapper.css({
-                            left: windowRight - newWidth,
-                            width: newWidth
-                        });
-                    },
-                    "n": function () {
-                        var windowBottom = wnd.initialCursorPosition.top + wnd.initialSize.height,
-                            newHeight = constrain(windowBottom - e.y.location, options.minHeight, options.maxHeight);
+                wrapper.css({
+                    left: windowRight - newWidth - containerOffset.left,
+                    width: newWidth
+                });
+            }
 
-                        wrapper.css({
-                            top: windowBottom - newHeight,
-                            height: newHeight
-                        });
-                    }
-                };
+            if (direction.indexOf("s") >= 0) {
+                newHeight = y - initialPosition.top - that.elementPadding;
 
-            each(wnd.resizeDirection, function () {
-                resizeHandlers[this]();
-            });
+                wrapper.height(constrain(newHeight, options.minHeight, options.maxHeight));
+            } else if (direction.indexOf("n") >= 0) {
+                windowBottom = initialPosition.top + initialSize.height;
+                newHeight = constrain(windowBottom - y, options.minHeight, options.maxHeight);
+
+                wrapper.css({
+                    top: windowBottom - newHeight - containerOffset.top,
+                    height: newHeight
+                });
+            }
 
             wnd.trigger(RESIZE);
         },
         dragend: function (e) {
-            var wnd = this.owner,
+            var that = this,
+                wnd = that.owner,
                 wrapper = wnd.wrapper;
 
             wrapper
                 .find(KOVERLAY).remove().end()
                 .find(KWINDOWRESIZEHANDLES).not(e.currentTarget).show();
 
-            $(body).css(CURSOR, "");
+            $(BODY).css(CURSOR, "");
 
             if (wnd.touchScroller) {
                wnd.touchScroller.reset();
             }
             if (e.keyCode == 27) {
-                wrapper.css(wnd.initialCursorPosition)
-                    .css(wnd.initialSize);
+                wrapper.css(that.initialCursorPosition)
+                    .css(that.initialSize);
             }
 
             return false;
@@ -1543,7 +1557,8 @@
         dragstart: function (e) {
             var wnd = this.owner,
                 element = wnd.element,
-                actions = element.find(".k-window-actions");
+                actions = element.find(".k-window-actions"),
+                containerOffset = wnd.appendTo.offset();
 
             wnd.trigger(DRAGSTART);
 
@@ -1560,18 +1575,21 @@
                 wnd.minLeftPosition =  20 - element.outerWidth(); // at least 20px remain visible
             }
 
+            wnd.minLeftPosition -= containerOffset.left;
+            wnd.minTopPosition = -containerOffset.top;
+
             wnd.wrapper
                 .append(templates.overlay)
                 .find(KWINDOWRESIZEHANDLES).hide();
 
-            $(body).css(CURSOR, e.currentTarget.css(CURSOR));
+            $(BODY).css(CURSOR, e.currentTarget.css(CURSOR));
         },
 
         drag: function (e) {
             var wnd = this.owner,
                 coordinates = {
                     left: Math.max(e.x.client - wnd.startPosition.left, wnd.minLeftPosition),
-                    top: Math.max(e.y.client - wnd.startPosition.top, 0)
+                    top: Math.max(e.y.client - wnd.startPosition.top, wnd.minTopPosition)
                 };
 
             $(wnd.wrapper).css(coordinates);
@@ -1584,7 +1602,7 @@
                 .find(KWINDOWRESIZEHANDLES).show().end()
                 .find(KOVERLAY).remove();
 
-            $(body).css(CURSOR, "");
+            $(BODY).css(CURSOR, "");
 
             e.currentTarget.closest(KWINDOW).css(wnd.initialWindowPosition);
         },
@@ -1596,7 +1614,7 @@
                 .find(KWINDOWRESIZEHANDLES).show().end()
                 .find(KOVERLAY).remove();
 
-            $(body).css(CURSOR, "");
+            $(BODY).css(CURSOR, "");
 
             wnd.trigger(DRAGEND);
 
