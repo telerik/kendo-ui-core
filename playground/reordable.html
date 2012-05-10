@@ -11,6 +11,9 @@
         <script src="../src/kendo.core.js"></script>
         <script src="../src/kendo.draganddrop.js"></script>
         <script src="../src/kendo.reordable.js"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.groupable.js"></script>
+        <script src="../src/kendo.grid.js"></script>
         <style>
             .k-reorder-cue {
                 position: absolute;
@@ -27,6 +30,11 @@
             <li>C</li>
             <li>D</li>
         </ul>
+        <div id="block">
+            <div>A</div>
+            <div>B</div>
+            <div>C</div>
+        </div>
         <table>
             <thead>
                 <tr>
@@ -42,12 +50,8 @@
             </tbody>
         </table>
 
-        <div id="block">
-            <div>A</div>
-            <div>B</div>
-            <div>C</div>
-        </div>
 
+        <div id="grid"></div>
         <script>
             function hint(target) {
                 return $('<div class="k-header k-drag-clue" />')
@@ -77,6 +81,29 @@
                     filter: "th",
                     hint: hint
                 });
+
+                $("#grid").kendoGrid({
+                    reordable: true,
+                    detailTemplate: "test test",
+                    scrollable: true,
+                    //groupable: true,
+                    columns: [{
+                        field: "foo",
+                        width: 100,
+                        footerTemplate: "footer",
+                        groupFooterTemplate: "group footer"
+                    },
+                    {
+                        field: "bar",
+                        width: 200
+                    },
+                    {
+                        field: "baz",
+                        width: 300
+                    }],
+                    dataSource: [{ foo: "foo", bar: "bar", baz: "baz" }]
+                });
+
             });
         </script>
     </body>
