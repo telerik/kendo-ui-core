@@ -47,13 +47,16 @@
                     that.reorderDropCue.remove();
                 },
                 drop: function() {
-                    var draggable = that._draggable;
+                    var draggable = that._draggable[0],
+                        dropTarget = this.element[0],
+                        container;
 
-                    if (draggable[0] !== this.element[0]) {
+                    if (draggable !== dropTarget) {
+                        container = element.find(options.filter);
                         that.trigger(CHANGE, {
-                            element: draggable,
-                            oldIndex: draggable.index(),
-                            newIndex: this.element.index()
+                            element: that._draggable,
+                            oldIndex: container.index(draggable),
+                            newIndex: container.index(dropTarget)
                         });
                     }
                 }

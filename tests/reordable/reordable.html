@@ -191,14 +191,16 @@
             });
 
             test("change event arguments", function() {
+                div.children().eq(0).addClass("disabled");
                 var args,
                     reordable = new Reordable(div, {
                         change: function() {
                             args = arguments[0];
-                        }
+                        },
+                        filter: ">div:not(.disabled)"
                     }),
-                    source = div.children().eq(0),
-                    target = div.children().eq(1);
+                    source = div.children().eq(1),
+                    target = div.children().eq(2);
 
                 moveOverDropTarget(source, target);
 
