@@ -316,7 +316,15 @@
                 }
             }
             return fieldsMap;
-        }
+    }
+
+    function reorder(selector, sourceIndex, destIndex) {
+        var source = selector.eq(sourceIndex),
+            dest = selector.eq(destIndex);
+
+        source[sourceIndex > destIndex ? "insertBefore" : "insertAfter"](dest);
+    }
+
     var Grid = Widget.extend({
         init: function(element, options) {
             var that = this;
@@ -414,7 +422,8 @@
             rowTemplate: "",
             altRowTemplate: "",
             dataSource: {},
-            height: null
+            height: null,
+            reordable: false
         },
 
         setOptions: function(options) {
@@ -559,6 +568,63 @@
                         }
                     }
                 });
+            }
+        },
+
+        _reordable: function() {
+            var that = this;
+            if (that.options.reordable) {
+                that.thead.kendoReordable({
+                    filter: ".k-header:not(.k-group-cell,.k-hierarchy-cell)",
+                    hint: function(target) {
+                        return $('<div class="k-header k-drag-clue" />')
+                            .css({
+                                width: target.width(),
+                                paddingLeft: target.css("paddingLeft"),
+                                paddingRight: target.css("paddingRight"),
+                                height: target.height(),
+                                paddingTop: target.css("paddingTop"),
+                                paddingBottom: target.css("paddingBottom")
+                            })
+                            .html(target.attr(kendo.attr("title")) || target.attr(kendo.attr("field")))
+                            .prepend('<span class="k-icon k-drag-status k-denied" />');
+                    },
+                    change: function(e) {
+                        that.reorderColumn(e.newIndex, that.columns[e.oldIndex]);
+                    }
+                });
+            }
+        },
+
+        reorderColumn: function(destIndex, column) {
+            var that = this,
+                sourceIndex = $.inArray(column, that.columns),
+                rows,
+                idx,
+                length;
+
+            if (sourceIndex === destIndex) {
+                return;
+            }
+
+            that.columns.splice(sourceIndex, 1);
+            that.columns.splice(destIndex, 0, column);
+
+            reorder(that.thead.prev().find("col:not(.k-group-col,.k-hierarchy-col)"), sourceIndex, destIndex);
+            if (that.options.scrollable) {
+                reorder(that.tbody.prev().find("col:not(.k-group-col,.k-hierarchy-col)"), sourceIndex, destIndex);
+            }
+
+            reorder(that.thead.find(".k-header:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex);
+
+            if (that.footer) {
+                reorder(that.footer.find(".k-grid-footer-wrap>table>colgroup>col:not(.k-group-col,.k-hierarchy-col)"), sourceIndex, destIndex);
+                reorder(that.footer.find(".k-footer-template>td:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex);
+            }
+
+            rows = that.tbody.children(":not(.k-grouping-row,.k-detail-row)");
+            for (idx = 0, length = rows.length; idx < length; idx += 1) {
+                reorder(rows.eq(idx).find(">td:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex);
             }
         },
 
@@ -2130,6 +2196,8 @@
             that._updateCols();
 
             that._setContentHeight();
+
+            that._reordable();
         },
 
         _updateCols: function() {

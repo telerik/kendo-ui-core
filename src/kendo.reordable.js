@@ -17,7 +17,7 @@
     var Reordable = Widget.extend({
         init: function(element, options) {
             var that = this,
-                group = kendo.guid();
+                group = kendo.guid() + "-reordable";
 
             Widget.fn.init.call(that, element, options);
 
