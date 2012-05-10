@@ -59,6 +59,21 @@
                 equal(timepicker.timeView.options.format, "hh:mm");
             });
 
+            test("Preserve options after widget init", function() {
+                var dom = $('<input data-role="timepicker" />');
+                dom.kendoTimePicker({
+                    format: "HH:mm"
+                });
+
+                kendo.bind(dom);
+
+                var timepicker = dom.data("kendoTimePicker");
+
+                equal(timepicker.options.format, "HH:mm");
+                equal(timepicker.timeView.options.format, "HH:mm");
+            });
+
+
             test("initializes a parseFormats option from data attributes", function() {
                 var dom = $('<input data-role="timepicker" data-format="MM yyyy" data-parse-formats="MM/dd/yyyy" />');
 

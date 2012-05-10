@@ -652,13 +652,15 @@
         ],
 
         setOptions: function(options) {
-            normalize(options);
+            var that = this;
 
-            Widget.fn.setOptions.call(this, options);
+            Widget.fn.setOptions.call(that, options);
 
-            extend(this.timeView.options, options);
+            normalize(that.options);
 
-            this.timeView.refresh();
+            extend(that.timeView.options, that.options);
+
+            that.timeView.refresh();
         },
 
         /**
