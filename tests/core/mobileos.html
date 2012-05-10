@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>detect os tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">detect os tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var detect = kendo.support.detectOS,
+                span;
+
+            module("detect", {
+            });
+
+            test("detects Kindle Fire", function() {
+                var result = detect("Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_3; en-us; Silk/1.1.0-84) AppleWebKit/533.16 (KHTML, like Gecko) Version/5.0 Safari/533.16 Silk-Accelerated=true");
+
+                ok(result.device == "fire");
+                console.log(result.flatVersion);
+                ok(result.flatVersion == 110);
+                ok(result.android);
+            });
+
+            test("detects Android 2.x", function() {
+                var result = detect("Mozilla/5.0 (Linux; U; Android 2.3.4; fr-fr; Nexus S Build/GRJ22) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1");
+
+                ok(result.device == "android");
+                ok(result.majorVersion == 2);
+                ok(result.flatVersion == 234);
+                ok(result.android);
+            });
+
+            test("detects Android 3.x", function() {
+                var result = detect("Mozilla/5.0 (Linux; U; Android 3.0.1; en-us; Xoom Build/HWI69) AppleWebKit/534.13 (KHTML, like Gecko) Version/4.0 Safari/534.13");
+
+                ok(result.device == "android");
+                ok(result.majorVersion == 3);
+                ok(result.flatVersion == 301);
+                ok(result.android);
+            });
+
+            test("detects Android 4.x", function() {
+                var result = detect("Mozilla/5.0 (Linux; U; Android 4.0.2; en-us; Galaxy Nexus Build/ICL53F) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30");
+
+                ok(result.device == "android");
+                ok(result.majorVersion == 4);
+                ok(result.flatVersion == 402);
+                ok(result.android);
+            });
+
+            test("detects iOS 3.x", function() {
+                var result = detect("Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_1_2 like Mac OS X; en-us) AppleWebKit/528.18 (KHTML, like Gecko) Version/4.0 Mobile/7D11 Safari/528.16");
+
+                ok(result.device == "iphone");
+                ok(result.majorVersion == 3);
+                ok(result.flatVersion == 312);
+                ok(result.ios);
+            });
+
+            test("detects iOS 4.x", function() {
+                var result = detect("Mozilla/5.0 (iPad; U; CPU OS 4_3_1 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8G4 Safari/6533.18.5");
+
+                ok(result.device == "ipad");
+                ok(result.majorVersion == 4);
+                ok(result.flatVersion == 431);
+                ok(result.ios);
+            });
+
+            test("detects iOS 5.x", function() {
+                var result = detect("Mozilla/5.0 (iPhone; CPU iPhone OS 5_1 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9B176 Safari/7534.48.3");
+
+                ok(result.device == "iphone");
+                ok(result.majorVersion == 5);
+                ok(result.flatVersion == 510);
+                ok(result.ios);
+            });
+
+            test("detects BlackBerry PlayBook 2.x", function() {
+                var result = detect("Mozilla/5.0 (PlayBook; U; RIM Tablet OS 2.0.1; en-US) AppleWebKit/535.8+ (KHTML, like Gecko) Version/7.2.0.1 Safari/535.8+");
+
+                ok(result.device == "playbook");
+                ok(result.majorVersion == 2);
+                ok(result.flatVersion == 201);
+                ok(result.blackberry);
+            });
+
+            test("detects BlackBerry Torch 9860", function() {
+                var result = detect("Mozilla/5.0 (BlackBerry; U; BlackBerry 9860; en-GB) AppleWebKit/534.11+ (KHTML, like Gecko) Version/7.0.0.296 Mobile Safari/534.11+");
+
+                ok(result.device == "blackberry");
+                ok(result.majorVersion == 7);
+                ok(result.flatVersion == 700);
+                ok(result.blackberry);
+            });
+
+            test("detects Nokia N9", function() {
+                var result = detect("Mozilla/5.0 (MeeGo; NokiaN9) AppleWebKit/534.13 (KHTML, like Gecko) NokiaBrowser/8.5.0 Mobile Safari/534.13");
+
+                ok(result.device == "meego");
+                ok(result.majorVersion == 8);
+                ok(result.flatVersion == 850);
+                ok(result.meego);
+            });
+
+            test("detects Windows Phone 7.5", function() {
+                var result = detect("Mozilla/5.0 (compatible; MSIE 9.0; Windows Phone OS 7.5; Trident/5.0; IEMobile/9.0; NOKIA; Lumia 800)");
+
+                ok(result.device == "winphone");
+                ok(result.majorVersion == 9);
+                ok(result.flatVersion == 900);
+                ok(result.windows);
+            });
+
+            test("detects Windows Phone 8", function() {
+                var result = detect("Mozilla/5.0 (compatible; MSIE 10.0; Windows Phone OS 8.0; Trident/6.0; IEMobile/10.0; NOKIA; Lumia 800)");
+
+                ok(result.device == "winphone");
+                ok(result.majorVersion == 10);
+                ok(result.flatVersion == 1000);
+                ok(result.windows);
+            });
+
+            test("detects Opera Mobile", function() {
+                var result = detect("Opera/9.80 (Android 2.3.3; Linux; Opera Mobi/ADR-1111101157; U; es-ES) Presto/2.9.201 Version/11.50");
+
+                ok(result.browser == "omobile");
+                ok(result.majorVersion == 2);
+                ok(result.flatVersion == 233);
+                ok(result.android);
+            });
+
+            test("detects Opera Mini", function() {
+                var result = detect("Opera/9.80 (Android; Opera Mini/7.29530/27.1407; U; en) Presto/2.8.119 Version/11.10");
+
+                ok(result.browser == "omini");
+                ok(result.majorVersion == 7);
+                ok(result.flatVersion == 729);
+                ok(result.android);
+            });
+
+            test("detects Firefox Mobile 9", function() {
+                var result = detect("Mozilla/5.0 (Android; Linux armv7l; rv:9.0) Gecko/20111216 Firefox/9.0 Fennec/9.0");
+
+                ok(result.browser == "firefox");
+                ok(result.majorVersion == 9);
+                ok(result.flatVersion == 900);
+                ok(result.android);
+            });
+
+            test("detects Firefox Mobile 12", function() {
+                var result = detect("Mozilla/5.0 (Android; Mobile; rv:12.0) Gecko/12.0 Firefox/12.0");
+
+                ok(result.browser == "firefox");
+                ok(result.majorVersion == 12);
+                ok(result.flatVersion == 1200);
+                ok(result.android);
+            });
+
+       </script>
+    </body>
+</html>
