@@ -212,6 +212,7 @@
     function slideToSlideIn(options) {
       options.effects.slideIn = options.effects.slide;
       delete options.effects.slide;
+      delete options.complete;
       return options;
     }
 
