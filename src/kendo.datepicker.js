@@ -125,10 +125,10 @@
     proxy = $.proxy,
     DATE = Date;
 
-    function validate(options) {
+    function normalize(options) {
         var parseFormats = options.parseFormats;
 
-        calendar.validate(options);
+        calendar.normalize(options);
 
         parseFormats = $.isArray(parseFormats) ? parseFormats : [parseFormats];
         parseFormats.splice(0, 0, options.format);
@@ -384,7 +384,7 @@
         }
     };
 
-    DateView.validate = validate;
+    DateView.normalize = normalize;
 
     kendo.DateView = DateView;
 
@@ -582,7 +582,7 @@
             element = that.element;
             options = that.options;
 
-            validate(options);
+            normalize(options);
 
             that._wrapper();
 
@@ -705,7 +705,7 @@
         },
 
         setOptions: function(options) {
-            calendar.validate(options);
+            calendar.normalize(options);
 
             Widget.fn.setOptions.call(this, options);
             extend(this.dateView.options, options);
