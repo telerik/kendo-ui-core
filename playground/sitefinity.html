@@ -49,7 +49,7 @@
                 <div class="value">
                     #= value #%
                 </div>
-                <div class="detail">
+                <div>
                     #= dataItem[series.field + "Count"] + " " + series.name #
                 </div>
             </div>
@@ -137,6 +137,7 @@
                         field: "issue",
                         labels: {
                             font: "11px sans-serif",
+                            // Adds a hand pointer
                             template: "<tspan class='label'>#= value #</tspan>"
                         }
                     },
