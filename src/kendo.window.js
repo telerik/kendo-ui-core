@@ -183,6 +183,10 @@
         MINIMIZE_MAXIMIZE = ".k-window-actions .k-minimize,.k-window-actions .k-maximize",
         isLocalUrl = kendo.isLocalUrl;
 
+    function constrain(value, low, high) {
+        return Math.max(Math.min(value, high), low);
+    }
+
     function windowObject(element) {
         return element.children(KWINDOWCONTENT).data("kendoWindow");
     }
@@ -1443,18 +1447,21 @@
 
     WindowResizing.prototype = /** @ignore */ {
         dragstart: function (e) {
-            var wnd = this.owner,
+            var that = this,
+                wnd = that.owner,
                 wrapper = wnd.wrapper;
 
-            wnd.elementPadding = parseInt(wnd.wrapper.css("padding-top"), 10);
-            wnd.initialCursorPosition = wrapper.offset();
+            that.elementPadding = parseInt(wnd.wrapper.css("padding-top"), 10);
+            that.initialCursorPosition = wrapper.offset();
 
-            wnd.resizeDirection = e.currentTarget.prop("className").replace("k-resize-handle k-resize-", "").split("");
+            that.resizeDirection = e.currentTarget.prop("className").replace("k-resize-handle k-resize-", "").split("");
 
-            wnd.initialSize = {
-                width: wnd.wrapper.width(),
-                height: wnd.wrapper.height()
+            that.initialSize = {
+                width: wrapper.width(),
+                height: wrapper.height()
             };
+
+            that.containerOffset = wnd.container.offset(),
 
             wrapper
                 .append(templates.overlay)
@@ -1463,51 +1470,52 @@
             $(BODY).css(CURSOR, e.currentTarget.css(CURSOR));
         },
         drag: function (e) {
-            var wnd = this.owner,
+            var that = this,
+                wnd = that.owner,
                 wrapper = wnd.wrapper,
                 options = wnd.options,
-                constrain = function(value, low, high) {
-                    return Math.max(Math.min(value, high), low);
-                },
-                resizeHandlers = {
-                    "e": function () {
-                        var newWidth = e.x.location - wnd.initialCursorPosition.left;
+                direction = that.resizeDirection,
+                containerOffset = that.containerOffset,
+                initialPosition = that.initialCursorPosition,
+                initialSize = that.initialSize,
+                newWidth, newHeight,
+                windowBottom, windowRight,
+                x = e.x.location,
+                y = e.y.location;
 
-                        wrapper.width(constrain(newWidth, options.minWidth, options.maxWidth));
-                    },
-                    "s": function () {
-                        var newHeight = e.y.location - wnd.initialCursorPosition.top - wnd.elementPadding;
+            if (direction.indexOf("e") >= 0) {
+                newWidth = x - initialPosition.left;
 
-                        wrapper.height(constrain(newHeight, options.minHeight, options.maxHeight));
-                    },
-                    "w": function () {
-                        var windowRight = wnd.initialCursorPosition.left + wnd.initialSize.width,
-                            newWidth = constrain(windowRight - e.x.location, options.minWidth, options.maxWidth);
+                wrapper.width(constrain(newWidth, options.minWidth, options.maxWidth));
+            } else if (direction.indexOf("w") >= 0) {
+                windowRight = initialPosition.left + initialSize.width;
+                newWidth = constrain(windowRight - x, options.minWidth, options.maxWidth);
 
-                        wrapper.css({
-                            left: windowRight - newWidth,
-                            width: newWidth
-                        });
-                    },
-                    "n": function () {
-                        var windowBottom = wnd.initialCursorPosition.top + wnd.initialSize.height,
-                            newHeight = constrain(windowBottom - e.y.location, options.minHeight, options.maxHeight);
+                wrapper.css({
+                    left: windowRight - newWidth - containerOffset.left,
+                    width: newWidth
+                });
+            }
 
-                        wrapper.css({
-                            top: windowBottom - newHeight,
-                            height: newHeight
-                        });
-                    }
-                };
+            if (direction.indexOf("s") >= 0) {
+                newHeight = y - initialPosition.top - that.elementPadding;
 
-            each(wnd.resizeDirection, function () {
-                resizeHandlers[this]();
-            });
+                wrapper.height(constrain(newHeight, options.minHeight, options.maxHeight));
+            } else if (direction.indexOf("n") >= 0) {
+                windowBottom = initialPosition.top + initialSize.height;
+                newHeight = constrain(windowBottom - y, options.minHeight, options.maxHeight);
+
+                wrapper.css({
+                    top: windowBottom - newHeight - containerOffset.top,
+                    height: newHeight
+                });
+            }
 
             wnd.trigger(RESIZE);
         },
         dragend: function (e) {
-            var wnd = this.owner,
+            var that = this,
+                wnd = that.owner,
                 wrapper = wnd.wrapper;
 
             wrapper
@@ -1520,8 +1528,8 @@
                wnd.touchScroller.reset();
             }
             if (e.keyCode == 27) {
-                wrapper.css(wnd.initialCursorPosition)
-                    .css(wnd.initialSize);
+                wrapper.css(that.initialCursorPosition)
+                    .css(that.initialSize);
             }
 
             return false;
