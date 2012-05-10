@@ -996,6 +996,7 @@
 
             (function() {
                 var chart,
+                    label,
                     plotArea;
 
                 function axisLabelClick(clickHandler, options) {
@@ -1083,6 +1084,59 @@
                     });
                 });
 
+            })();
+
+            (function() {
+                var chart,
+                    label,
+                    plotArea;
+
+                function createBoundChart(options) {
+                    chart = createChart($.extend(true, {
+                        dataSource: [{
+                            value: 1,
+                            category: "A"
+                        }, {
+                            value: 2,
+                            category: "B"
+                        }, {
+                            value: 3,
+                            category: "C"
+                        }],
+                        series: [{
+                            type: "line",
+                            field: "value"
+                        }],
+                        categoryAxis: {
+                            name: "Axis A",
+                            field: "category"
+                        }
+                    }, options));
+
+                    plotArea = chart._model.children[1];
+                    label = plotArea.categoryAxis.labels[1];
+                    $("#" + label.options.id).click();
+                }
+
+                // ------------------------------------------------------------
+                module("Category Axis / Data Binding", {
+                    teardown: destroyChart
+                });
+
+                test("categories are data bound", function() {
+                    createBoundChart();
+                    equals(plotArea.categoryAxis.labels.length, 3);
+                });
+
+                test("template has access to data item", function() {
+                    createBoundChart({
+                        categoryAxis: {
+                            labels: {
+                                template: "#= ok(typeof dataItem.value == 'number') #"
+                            }
+                        }
+                    });
+                });
             })();
         </script>
 
