@@ -20,8 +20,6 @@ namespace Kendo.Mvc.UI
             FluentDictionary.For(result)
                 .Add("background", gaugeArea.Background, () => gaugeArea.Background.HasValue())
                 .Add("margin", gaugeArea.Margin.CreateSerializer().Serialize(), ShouldSerializeMargin)
-                .Add("width", gaugeArea.Width, () => gaugeArea.Width.HasValue)
-                .Add("height", gaugeArea.Height, () => gaugeArea.Height.HasValue)
                 .Add("border", gaugeArea.Border.CreateSerializer().Serialize(), ShouldSerializeBorder);
 
             return result;

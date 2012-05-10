@@ -468,8 +468,13 @@
     <Compile Include="UI\ExpressionBuilder.cs" />
     <Compile Include="Infrastructure\Implementation\BindingHelper.cs" />
     <Compile Include="UI\Gauge\Enums\LinearGaugePointerShape.cs" />
+    <Compile Include="UI\Gauge\Fluent\GaugeAreaBuilder.cs" />
     <Compile Include="UI\Gauge\Fluent\LinearGaugeTrackBuilder.cs" />
     <Compile Include="UI\Gauge\Fluent\LinearGaugePointerBuilder.cs" />
+    <Compile Include="UI\Gauge\Fluent\RadialGaugeCapBuilder.cs" />
+    <Compile Include="UI\Gauge\Fluent\RadialGaugePointerBuilder.cs" />
+    <Compile Include="UI\Gauge\Pointers\RadialGaugeCap.cs" />
+    <Compile Include="UI\Gauge\Pointers\RadialGaugePointer.cs" />
     <Compile Include="UI\Gauge\Pointers\LinearGaugeTrack.cs" />
     <Compile Include="UI\Gauge\Pointers\LinearGaugePointer.cs" />
     <Compile Include="UI\Gauge\RadialGauge.cs" />
@@ -481,6 +486,8 @@
     <Compile Include="UI\Gauge\Serialization\LinearGaugeTrackSerializer.cs" />
     <Compile Include="UI\Gauge\Serialization\LinearGaugePointerSerializer.cs" />
     <Compile Include="UI\Gauge\Serialization\GaugeAreaSerializer.cs" />
+    <Compile Include="UI\Gauge\Serialization\RadialGaugeCapSerializer.cs" />
+    <Compile Include="UI\Gauge\Serialization\RadialGaugePointerSerializer.cs" />
     <Compile Include="UI\Grid\Columns\GridForeignKeyColumn.cs" />
     <Compile Include="UI\Grid\Columns\IGridForeignKeyColumn.cs" />
     <Compile Include="UI\Grid\Commands\GridCustomActionCommand.cs" />
