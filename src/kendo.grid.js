@@ -634,6 +634,14 @@
             for (idx = 0, length = rows.length; idx < length; idx += 1) {
                 reorder(rows.eq(idx).find(">td:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex);
             }
+
+            if (that.options.resizable) {
+                that.positionColumnResizeHandles();
+
+                if (that._hasDetails()) {
+                    that.tbody.find(">tr.k-detail-row [" + kendo.attr("role") + "=grid]").kendoGrid("positionColumnResizeHandles");
+                }
+            }
         },
 
         cellIndex: function(td) {
