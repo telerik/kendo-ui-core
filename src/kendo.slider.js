@@ -107,6 +107,7 @@
         format = kendo.format,
         parse = kendo.parseFloat,
         proxy = $.proxy,
+        isArray = $.isArray,
         math = Math,
         support = kendo.support,
         touch = support.touch,
@@ -1512,11 +1513,7 @@
          *
          */
         value: function(value) {
-            if (value && value.length) {
-                this._value(value[0], value[1]);
-            } else {
-                return this._value();
-            }
+            return this._value(value);
         },
 
         _value: function(start, end) {
@@ -1525,21 +1522,25 @@
                 selectionStart = options.selectionStart,
                 selectionEnd = options.selectionEnd;
 
-
-            if (isNaN(start) && isNaN(end)) {
+            if (isNaN(start) && isNaN(end) && !isArray(start)) {
                 return [selectionStart, selectionEnd];
             } else {
-                start = round(start);
-                end = round(end);
+                if (isArray(start)) {
+                    end = start[1];
+                    start = start[0];
+                } else {
+                    start = round(start);
+                    end = round(end);
+                }
             }
 
             if (start >= options.min && start <= options.max &&
                 end >= options.min && end <= options.max && start <= end) {
                 if (selectionStart != start || selectionEnd != end) {
                     that.element.find("input")
-                                .eq(0).attr("value", formatValue(start))
-                                .end()
-                                .eq(1).attr("value", formatValue(end));
+                        .eq(0).attr("value", formatValue(start))
+                        .end()
+                        .eq(1).attr("value", formatValue(end));
 
                     options.selectionStart = start;
                     options.selectionEnd = end;
