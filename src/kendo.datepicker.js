@@ -729,7 +729,7 @@
         */
         enable: function(enable) {
             var that = this,
-                icon = that._icon.unbind(CLICK + " " + MOUSEDOWN),
+                icon = that._dateIcon.unbind(CLICK + " " + MOUSEDOWN),
                 wrapper = that._inputWrapper.unbind(HOVEREVENTS),
                 element = that.element;
 
@@ -902,7 +902,7 @@
                 icon = $('<span unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-icon-calendar">select</span></span>').insertAfter(element);
             }
 
-            that._icon = icon;
+            that._dateIcon = icon;
         },
 
         _option: function(option, value) {
