@@ -363,6 +363,26 @@
                 equal(timepicker.value(), null);
             });
 
+            test("value method parses passed value using options.parseFormats", function() {
+                var timepicker = input.kendoTimePicker({
+                        parseFormats: ["HH:mm"],
+                    }).data("kendoTimePicker"),
+                    date = new Date(),
+                    dateString;
+
+                date.setHours(18);
+                date.setMinutes(18);
+
+                date.setSeconds(0);
+                date.setMilliseconds(0);
+
+                dateString = kendo.toString(date, "HH:mm");
+
+                timepicker.value(dateString);
+
+                equal(+timepicker._value, +date);
+            });
+
             test("min() should return min value of the timepicker", function() {
                 var date = new Date(2000, 10, 10, 18, 0, 0),
                     timepicker = input.kendoTimePicker({
@@ -382,6 +402,26 @@
                 equal(+timepicker.min(), +date);
                 equal(+timepicker.timeView.options.min, +date);
                 equal(timepicker.timeView.ul.find("li:first").text(), "6:00 PM");
+            });
+
+            test("min method parses passed value using options.parseFormats", function() {
+                var timepicker = input.kendoTimePicker({
+                        parseFormats: ["HH:mm"],
+                    }).data("kendoTimePicker"),
+                    date = new Date(),
+                    dateString;
+
+                date.setHours(18);
+                date.setMinutes(18);
+
+                date.setSeconds(0);
+                date.setMilliseconds(0);
+
+                dateString = kendo.toString(date, "HH:mm");
+
+                timepicker.min(dateString);
+
+                equal(+timepicker.options.min, +date);
             });
 
             test("max() should return max value of the timepicker", function() {

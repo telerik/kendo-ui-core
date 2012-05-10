@@ -312,7 +312,7 @@
                 return value;
             }
 
-            value = kendo.parseDate(value, that.options.format);
+            value = kendo.parseDate(value, that.options.parseFormats);
 
             if (value) {
                 value = new DATE(current.getFullYear(),
@@ -502,7 +502,7 @@
             element = that.element;
             options = that.options;
 
-            options.format = extractFormat(options.format || kendo.culture().calendar.patterns.t);
+            validate(options);
 
             that._wrapper();
 
@@ -554,6 +554,7 @@
             min: TODAY,
             max: TODAY,
             format: "",
+            parseFormats: [],
             value: null,
             interval: 30,
             height: 200,
@@ -645,7 +646,7 @@
         ],
 
         setOptions: function(options) {
-            options.format = extractFormat(options.format || kendo.culture().calendar.patterns.t);
+            validate(options);
 
             Widget.fn.setOptions.call(this, options);
 
@@ -931,6 +932,16 @@
             that._inputWrapper = $(wrapper[0].firstChild);
         }
     });
+
+    function validate(options) {
+        var parseFormats = options.parseFormats;
+
+        options.format = extractFormat(options.format || kendo.culture().calendar.patterns.t);
+
+        parseFormats = $.isArray(parseFormats) ? parseFormats : [parseFormats];
+        parseFormats.splice(0, 0, options.format);
+        options.parseFormats = parseFormats;
+    }
 
     ui.plugin(TimePicker);
 
