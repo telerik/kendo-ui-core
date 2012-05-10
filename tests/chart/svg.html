@@ -1098,7 +1098,10 @@
                     equals(rect.options.fill, "url(#fillId)");
                 });
 
-                test("sets absolute url if the page has a base tag", function() {
+                test("sets absolute url if the page has a base tag (non-IE)", function() {
+                    var msie = $.browser.msie;
+                    $.browser.msie = false;
+
                     $("head").append($("<base href='http://foo' />"));
 
                     decorator.decorate(rect);
@@ -1106,6 +1109,7 @@
                     equals(rect.options.fill, "url(" + hrefNoHash() + "#fillId)");
 
                     $("base").remove();
+                    $.browser.msie = msie;
                 });
 
                 test("does not set absolute url if the page has a base tag in IE", function() {
@@ -1122,7 +1126,10 @@
                     $.browser.msie = msie;
                 });
 
-                test("sets absolute url if the page has a base tag and hash", function() {
+                test("sets absolute url if the page has a base tag and hash (non-IE)", function() {
+                    var msie = $.browser.msie;
+                    $.browser.msie = false;
+
                     window.location.hash = "test";
                     $("head").append($("<base href='http://foo' />"));
 
@@ -1130,6 +1137,7 @@
                     equals(rect.options.fill, "url(" + hrefNoHash() + "#fillId)");
 
                     $("base").remove();
+                    $.browser.msie = msie;
                 });
 
                 test("registers gradient definition", function() {
