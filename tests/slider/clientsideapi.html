@@ -220,6 +220,15 @@
                 var rangeSlider = newRangeSlider(),
                     values = [ 0, 9 ];
 
+                rangeSlider.values(values);
+
+                deepEqual(rangeSlider.value(), values);
+            });
+
+            test("value should set rangeSlider selectionStart and selectionEnd", function () {
+                var rangeSlider = newRangeSlider(),
+                    values = [ 0, 9 ];
+
                 rangeSlider.value(values);
 
                 deepEqual(rangeSlider.value(), values);
