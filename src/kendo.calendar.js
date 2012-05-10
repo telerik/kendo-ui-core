@@ -502,11 +502,6 @@
                 vertical = view !== undefined && view !== that._index,
                 to, currentView, compare;
 
-            //do not navigate if the view is still animating
-            if (from && from.parent().data("animating")) {
-                return;
-            }
-
             if (!value) {
                 value = currentValue;
             } else {
@@ -601,6 +596,9 @@
                 to = options.to;
 
             if (!from) {
+                to.insertAfter(that.element[0].firstChild);
+            } else if (from.parent().data("animating")) {
+                from.parent().kendoStop(true, true).remove();
                 to.insertAfter(that.element[0].firstChild);
             } else if (!from.is(":visible") || that.options.animation === false) {
                 to.insertAfter(from);
