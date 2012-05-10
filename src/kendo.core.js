@@ -1798,7 +1798,7 @@ function pad(number) {
                 if (agentRxs.hasOwnProperty(agent)) {
                     match = ua.match(agentRxs[agent]);
                     if (match) {
-                        if (agent == "windows" && "plugins" in navigator) { return undefined; } // Break if not Metro/Mobile Windows
+                        if (agent == "windows" && "plugins" in navigator) { return false; } // Break if not Metro/Mobile Windows
 
                         os = {};
                         os.device = agent;
