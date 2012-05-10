@@ -691,7 +691,7 @@
                             "</#=tag#>" +
                         "</div>" +
 
-                        "# if (item.items) { #" +
+                        "# if (" + field("items") + ") { #" +
                             "#= subGroup(group, item) #" +
                         "# } #" +
                     "</li>";
@@ -1271,7 +1271,8 @@
         },
 
         _renderItem: function (options) {
-            var that = this;
+            var that = this,
+                bindings = that.options.bindings || {};
 
             if (!options.group) {
                 options.group = {};
@@ -1280,7 +1281,7 @@
             options.treeview = that.options;
             options.subGroup = function(group, item) {
                     return that._renderGroup({
-                        items: item.items,
+                        items: item[bindings["items"] || "items"],
                         group: {
                            expanded: item.expanded
                         }
