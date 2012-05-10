@@ -15,7 +15,7 @@
         <script src="../../src/kendo.grid.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
         <style>
-            table {
+            .k-widget table {
                 border-collapse: collapse;
                 table-layout: fixed;
                 width: 30px;
@@ -23,6 +23,8 @@
         </style>
     </head>
     <body>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
         <h1 id="qunit-header">Grid Column Reorder</h1>
         <h2 id="qunit-banner"></h2>
         <div id="qunit-testrunner-toolbar"></div>
@@ -331,8 +333,43 @@
                 equal(grid.columns[0].field, "bar");
                 equal(grid.columns[1].field, "foo");
             });
+
+            test("column order is peristed on refresh", function() {
+                var grid = new Grid(table, {
+                    columns: ["foo", "bar"],
+                    dataSource: data
+                });
+
+                grid.reorderColumn(0, grid.columns[1]);
+                grid.refresh();
+
+                var td = grid.tbody.find("tr>td");
+                equal(td.eq(0).text(), "bar");
+                equal(td.eq(1).text(), "foo");
+            });
+
+            function moveOverDropTarget(draggable, dropTarget) {
+                var position = dropTarget.position();
+
+                draggable.trigger({ type: "mousedown", pageX: 1, pageY: 1 });
+
+                $(document.documentElement).trigger({
+                    type: "mousemove",
+                    pageX: position.left,
+                    pageY: position.top,
+                    clientX: position.left,
+                    clientY: position.top
+                });
+
+                $(document.documentElement).trigger({
+                    type: "mouseup",
+                    pageX: position.left,
+                    pageY: position.top,
+                    clientX: position.left,
+                    clientY: position.top
+                });
+            }
+
         </script>
-        <div id="qunit-fixture">test markup, will be hidden</div>
-        <ul id="log"></ul>
     </body>
 </html>
