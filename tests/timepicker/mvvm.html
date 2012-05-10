@@ -61,6 +61,20 @@
                 equal(observable.value.getTime(), value.getTime());
             });
 
+            test("Preserve options after widget init", function() {
+                var dom = $('<input data-role="timepicker" />');
+                dom.kendoTimePicker({
+                    format: "HH:mm"
+                });
+
+                kendo.bind(dom);
+
+                var timepicker = dom.data("kendoTimePicker");
+
+                equal(timepicker.options.format, "HH:mm");
+                equal(timepicker.timeView.options.format, "HH:mm");
+            });
+
             test("binding timepicker initialized before binding", function() {
                 var dom = $('<input data-bind="value:value" />');
 
