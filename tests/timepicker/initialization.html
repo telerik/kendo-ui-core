@@ -176,6 +176,15 @@
                 equal(timepicker.options.format, "hh:mm");
             });
 
+            test("TimePicker adds format to the parseFormats array", function() {
+                var timepicker = input.kendoTimePicker({
+                    parseFormats: ["hh:mm"]
+                }).data("kendoTimePicker");
+
+                equal(timepicker.options.parseFormats[0], timepicker.options.format);
+                equal(timepicker.options.parseFormats[1], "hh:mm");
+            });
+
        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

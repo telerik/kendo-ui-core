@@ -59,6 +59,33 @@
                 equal(timepicker.timeView.options.format, "hh:mm");
             });
 
+            test("initializes a parseFormats option from data attributes", function() {
+                var dom = $('<input data-role="timepicker" data-format="MM yyyy" data-parse-formats="MM/dd/yyyy" />');
+
+                dom.kendoTimePicker();
+
+                kendo.bind(dom);
+
+                var timepicker = dom.data("kendoTimePicker");
+
+                equal(timepicker.options.parseFormats[0], "MM yyyy");
+                equal(timepicker.options.parseFormats[1], "MM/dd/yyyy");
+            });
+
+            test("initializes a parseFormats option from data attribute with array value", function() {
+                var dom = $('<input data-role="timepicker" data-format="MM yyyy" data-parse-formats=\'["MM/dd/yyyy", "dd/MM/yyyy"]\' />');
+
+                dom.kendoTimePicker();
+
+                kendo.bind(dom);
+
+                var timepicker = dom.data("kendoTimePicker");
+
+                equal(timepicker.options.parseFormats[0], "MM yyyy");
+                equal(timepicker.options.parseFormats[1], "MM/dd/yyyy");
+                equal(timepicker.options.parseFormats[2], "dd/MM/yyyy");
+            });
+
             test("changing a value updates the view model", function() {
                 var dom = $('<input data-role="timepicker" data-bind="value:value" />');
 
