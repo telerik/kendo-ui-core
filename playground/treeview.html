@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TreeView binding</title>
+        <link rel="stylesheet" href="../styles/web/kendo.common.css"/>
+        <link rel="stylesheet/less" type="text/css" href="../styles/web/kendo.default.less"/>
+        <link rel="stylesheet" type="text/css" href="../demos/mvc/content/shared/styles/examples.css"></link>
+
+        <script src="../demos/mvc/content/shared/js/less.js"></script>
+
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.draganddrop.js"></script>
+        <script src="../src/kendo.fx.js"></script>
+        <script src="../src/kendo.treeview.js"></script>
+        <style>
+        </style>
+    </head>
+    <body>
+        <ul id="treeview"></ul>
+        <script>
+
+            var heterogeneus = {
+                transport: {
+                    read: "/categories"
+                },
+                schema: {
+                    model: {
+                        idField: "CategoryID"
+                        children: {
+                            transport: {
+                                read: "/products"
+                            },
+                            schema: {
+                                idField: "ProductID"
+                            }
+                        }
+                    }
+                }
+            };
+
+            var homogeneous = {
+                transport: {
+                    read: "/employees"
+                },
+                schema: {
+                    model: {
+                        idField: "EmployeeID"
+                        children: true
+                    }
+                }
+            };
+
+            var inline = {
+                data: [
+                    {
+                        text: "root",
+                        items: [
+                            { text: "leaf" },
+                            {
+                                text: "node with children"
+                                items: [ { text: "leaf" }]
+                            }
+                        ]
+                    }
+                ]
+            }
+        </script>
+    </body>
+</html>
