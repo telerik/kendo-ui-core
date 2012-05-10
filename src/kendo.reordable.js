@@ -37,7 +37,7 @@
                         that.reorderDropCue.css({
                              height: dropTarget.outerHeight(),
                              top: element.offset().top,
-                             left: dropTarget.position().left + (dropTarget.index() > that._draggable.index() ? dropTarget.outerWidth() : 0)
+                             left: dropTarget.offset().left + (dropTarget.index() > that._draggable.index() ? dropTarget.outerWidth() : 0)
                         })
                         .appendTo(document.body);
                     }
