@@ -1513,7 +1513,11 @@
          *
          */
         value: function(value) {
-            return this._value(value);
+            if (value && value.length) {
+                return this._value(value[0], value[1]);
+            } else {
+                return this._value();
+            }
         },
 
         _value: function(start, end) {
@@ -1522,16 +1526,11 @@
                 selectionStart = options.selectionStart,
                 selectionEnd = options.selectionEnd;
 
-            if (isNaN(start) && isNaN(end) && !isArray(start)) {
+            if (isNaN(start) && isNaN(end)) {
                 return [selectionStart, selectionEnd];
             } else {
-                if (isArray(start)) {
-                    end = start[1];
-                    start = start[0];
-                } else {
-                    start = round(start);
-                    end = round(end);
-                }
+                start = round(start);
+                end = round(end);
             }
 
             if (start >= options.min && start <= options.max &&
@@ -1550,7 +1549,11 @@
         },
 
         values: function (start, end) {
-            return this._value(start, end);
+            if (isArray(start)) {
+                return this._value(start[0], start[1]);
+            } else {
+                return this._value(start, end);
+            }
         },
 
         _refresh: function() {
