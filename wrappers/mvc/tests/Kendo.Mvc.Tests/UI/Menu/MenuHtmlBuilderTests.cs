@@ -31,7 +31,6 @@ namespace Kendo.Mvc.Tests.Menu
             IHtmlNode tag = builder.Build();
 
             Assert.Equal(menu.Name, tag.Attribute("id"));
-            Assert.Equal("t-widget t-reset t-header t-menu", tag.Attribute("class"));
             Assert.Equal("ul", tag.TagName);
         }
 
@@ -42,7 +41,7 @@ namespace Kendo.Mvc.Tests.Menu
             
             IHtmlNode tag = builder.Build();
 
-            Assert.Equal("t-widget t-reset t-header t-menu custom", tag.Attribute("class"));
+            tag.Attribute("class").ShouldContain("custom");
         }
 
         [Fact]
@@ -59,7 +58,7 @@ namespace Kendo.Mvc.Tests.Menu
             item.Enabled = false;
             IHtmlNode tag = builder.ItemTag(item);
 
-            Assert.Equal("t-item t-state-disabled", tag.Attribute("class"));
+            Assert.Equal("k-item k-state-disabled", tag.Attribute("class"));
         }
 
         [Fact]
@@ -69,7 +68,7 @@ namespace Kendo.Mvc.Tests.Menu
             item.Selected = true;
             IHtmlNode tag = builder.ItemTag(item);
 
-            Assert.Equal("t-item t-state-selected", tag.Attribute("class"));
+            Assert.Equal("k-item k-state-selected", tag.Attribute("class"));
         }
 
         [Fact]
@@ -78,7 +77,7 @@ namespace Kendo.Mvc.Tests.Menu
             item.Enabled = true;
             IHtmlNode tag = builder.ItemTag(item);
 
-            Assert.Equal("t-item t-state-default", tag.Attribute("class"));
+            Assert.Equal("k-item k-state-default", tag.Attribute("class"));
         }
 
         [Fact]
@@ -116,7 +115,7 @@ namespace Kendo.Mvc.Tests.Menu
 
             IHtmlNode tag = builder.Build();
 
-            Assert.Equal("t-widget t-reset t-header t-menu t-menu-vertical", tag.Attribute("class"));
+            Assert.Equal("k-widget k-reset k-header k-menu k-menu-vertical", tag.Attribute("class"));
         }
 
         [Fact]
@@ -142,7 +141,7 @@ namespace Kendo.Mvc.Tests.Menu
             IHtmlNode tag = builder.ItemInnerContentTag(item, false);
 
             Assert.Equal("span", tag.Children[0].TagName);
-            Assert.Equal("t-sprite sprite", tag.Children[0].Attribute("class"));
+            Assert.Equal("k-sprite sprite", tag.Children[0].Attribute("class"));
 		}
 
 		[Fact]
@@ -153,7 +152,7 @@ namespace Kendo.Mvc.Tests.Menu
             IHtmlNode tag = builder.ItemInnerContentTag(item, true);
 
             Assert.Equal("span", tag.Children[1].TagName);
-            Assert.Equal("t-icon t-arrow-down", tag.Children[1].Attribute("class"));
+            Assert.Equal("k-icon k-arrow-down", tag.Children[1].Attribute("class"));
 		}
 
         [Fact]
@@ -165,7 +164,7 @@ namespace Kendo.Mvc.Tests.Menu
             IHtmlNode tag = builder.ItemInnerContentTag(item, true);
 
             Assert.Equal("span", tag.Children[1].TagName);
-            Assert.Equal("t-icon t-arrow-down", tag.Children[1].Attribute("class"));
+            Assert.Equal("k-icon k-arrow-down", tag.Children[1].Attribute("class"));
         }
 
 		[Fact]
@@ -178,7 +177,7 @@ namespace Kendo.Mvc.Tests.Menu
             IHtmlNode tag = builder.ItemInnerContentTag(item, true);
 
             Assert.Equal("span", tag.Children[1].TagName);
-            Assert.Equal("t-icon t-arrow-next", tag.Children[1].Attribute("class"));
+            Assert.Equal("k-icon k-arrow-next", tag.Children[1].Attribute("class"));
 		}
 
         [Fact]

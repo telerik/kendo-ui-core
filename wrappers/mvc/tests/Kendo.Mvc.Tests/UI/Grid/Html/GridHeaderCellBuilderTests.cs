@@ -33,8 +33,8 @@ namespace Kendo.Mvc.UI.Html.Tests
         [Fact]
         public void Should_apply_css_classes()
         {
-            builder.CreateCell().Attribute("class").ShouldEqual("t-header");
-            builderWithCustomCssClass.CreateCell().Attribute("class").ShouldEqual("t-header " + customCssClass);
+            builder.CreateCell().Attribute("class").ShouldEqual("k-header");
+            builderWithCustomCssClass.CreateCell().Attribute("class").ShouldEqual("k-header " + customCssClass);
         }
 
         [Fact]

@@ -32,7 +32,7 @@ using System.Collections.Generic;
         [Fact]
         public void Build_should_output_render_css_classes()
         {
-            const string css = "t-widget t-dropdown t-header";
+            const string css = "k-widget k-dropdown k-header";
             
             IHtmlNode tag = renderer.Build();
 
@@ -55,7 +55,7 @@ using System.Collections.Generic;
             IHtmlNode tag = renderer.Build().Children[0];
             
             Assert.Equal("div", tag.TagName);
-            Assert.True(tag.Attribute("class").Contains("t-dropdown-wrap"));
+            Assert.True(tag.Attribute("class").Contains("k-dropdown-wrap"));
         }
 
         [Fact]
@@ -95,7 +95,7 @@ using System.Collections.Generic;
         {
             IHtmlNode tag = renderer.InnerContentTag();
 
-            Assert.Equal("t-dropdown-wrap t-state-default", tag.Attribute("class"));
+            Assert.Equal("k-dropdown-wrap k-state-default", tag.Attribute("class"));
         }
 
         [Fact]
@@ -105,7 +105,7 @@ using System.Collections.Generic;
 
             IHtmlNode textSpan = tag.Children[0];
 
-            Assert.Equal("t-input", textSpan.Attribute("class"));
+            Assert.Equal("k-input", textSpan.Attribute("class"));
         }
 
         [Fact]
@@ -194,8 +194,8 @@ using System.Collections.Generic;
             var firstChild = tag.Children[0];
             var secondChild = tag.Children[1];
 
-            Assert.Equal("t-input", firstChild.Attribute("class"));
-            Assert.Equal("t-select", secondChild.Attribute("class"));
+            Assert.Equal("k-input", firstChild.Attribute("class"));
+            Assert.Equal("k-select", secondChild.Attribute("class"));
         }
 
         [Fact]

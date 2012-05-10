@@ -19,8 +19,8 @@ namespace Kendo.Mvc.UI
         public IHtmlNode Build()
         {
             IHtmlNode rootTag = ComponentTag("ul")
-                .PrependClass(UIPrimitives.Widget, UIPrimitives.ResetStyle, UIPrimitives.Header, "t-menu")
-                .ToggleClass("t-menu-vertical", Component.Orientation == MenuOrientation.Vertical);
+                .PrependClass(UIPrimitives.Widget, UIPrimitives.ResetStyle, UIPrimitives.Header, "k-menu")
+                .ToggleClass("k-menu-vertical", Component.Orientation == MenuOrientation.Vertical);
 
             return rootTag;
         }
@@ -60,11 +60,11 @@ namespace Kendo.Mvc.UI
 
             if (hasAccessibleChildren || item.Template.HasValue())
             {
-                string iconClass = "t-arrow-next";
+                string iconClass = "k-arrow-next";
 
                 if (Component.Orientation == MenuOrientation.Horizontal && item.Parent == null)
                 {
-                    iconClass = "t-arrow-down";
+                    iconClass = "k-arrow-down";
                 }
 
                 new HtmlElement("span")

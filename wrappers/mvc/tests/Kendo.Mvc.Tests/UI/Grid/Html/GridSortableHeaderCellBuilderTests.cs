@@ -23,7 +23,7 @@ namespace Kendo.Mvc.UI.Html.Tests
 
             link.Children.Count.ShouldEqual(1);
             link.TagName.ShouldEqual("a");
-            link.Attribute("class").ShouldEqual("t-link");
+            link.Attribute("class").ShouldEqual("k-link");
             link.Attribute("href").ShouldEqual(expectedUrl);
         }
 
@@ -50,7 +50,7 @@ namespace Kendo.Mvc.UI.Html.Tests
 
             var arrow = GetArrow(cell);
 
-            arrow.Attribute("class").ShouldEqual("t-icon t-arrow-up");
+            arrow.Attribute("class").ShouldEqual("k-icon k-arrow-up");
             arrow.InnerHtml.ShouldEqual("(" + expectedSortedAscText + ")");
         }
 
@@ -61,7 +61,7 @@ namespace Kendo.Mvc.UI.Html.Tests
 
             var cell = builder.CreateCell();
             var arrow = GetArrow(cell);
-            arrow.Attribute("class").ShouldEqual("t-icon t-arrow-down");
+            arrow.Attribute("class").ShouldEqual("k-icon k-arrow-down");
             arrow.InnerHtml.ShouldEqual("(" + expectedSortedDescText + ")");
         }
 

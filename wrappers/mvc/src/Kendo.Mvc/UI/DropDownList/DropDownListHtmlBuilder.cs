@@ -23,8 +23,8 @@ namespace Kendo.Mvc.UI
         {
             IHtmlNode root = new HtmlElement("div")
                                 .Attributes(Component.HtmlAttributes)
-                                .PrependClass(UIPrimitives.Widget, "t-dropdown", UIPrimitives.Header)
-                                .ToggleClass("t-state-disabled", !Component.Enabled)
+                                .PrependClass(UIPrimitives.Widget, "k-dropdown", UIPrimitives.Header)
+                                .ToggleClass("k-state-disabled", !Component.Enabled)
                                 .ToggleClass("input-validation-error", !Component.IsValid());
 
             this.InnerContentTag().AppendTo(root);
@@ -36,7 +36,7 @@ namespace Kendo.Mvc.UI
 
         public IHtmlNode InnerContentTag()
         {
-            IHtmlNode root = new HtmlElement("div").AddClass("t-dropdown-wrap", UIPrimitives.DefaultState);
+            IHtmlNode root = new HtmlElement("div").AddClass("k-dropdown-wrap", UIPrimitives.DefaultState);
 
             string text = "&nbsp;";
             var items = Component.Items;
@@ -52,14 +52,14 @@ namespace Kendo.Mvc.UI
             }          
 
             new HtmlElement("span")
-                .AddClass("t-input")
+                .AddClass("k-input")
                 .Html(text)
                 .AppendTo(root);
 
-            IHtmlNode link = new HtmlElement("span").AddClass("t-select");
+            IHtmlNode link = new HtmlElement("span").AddClass("k-select");
 
             new HtmlElement("span")
-                .AddClass(UIPrimitives.Icon, "t-arrow-down")
+                .AddClass(UIPrimitives.Icon, "k-arrow-down")
                 .Html("select")
                 .AppendTo(link);
 
