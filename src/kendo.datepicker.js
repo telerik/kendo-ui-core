@@ -136,6 +136,10 @@
         options.parseFormats = parseFormats;
     }
 
+    function preventDefault(e) {
+        e.preventDefault();
+    }
+
     var DateView = function(options) {
         var that = this,
             body = document.body,
@@ -170,7 +174,7 @@
                        .undelegate(CLICK_DATEPICKER)
                        .delegate("td:has(.k-link)", CLICK_DATEPICKER, proxy(that._click, that))
                        .unbind(MOUSEDOWN)
-                       .bind(MOUSEDOWN, function(e) { e.preventDefault(); })
+                       .bind(MOUSEDOWN, preventDefault)
                        .show();
 
                 calendar.unbind(CHANGE)
@@ -749,7 +753,7 @@
                     .removeAttr(DISABLED);
 
                 icon.bind(CLICK, proxy(that._click, that))
-                    .bind(MOUSEDOWN, function(e) { e.preventDefault(); });
+                    .bind(MOUSEDOWN, preventDefault);
             }
         },
 

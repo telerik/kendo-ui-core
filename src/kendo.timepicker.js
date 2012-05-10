@@ -123,9 +123,7 @@
 
         that.list = $("<div class='k-list-container'/>")
                     .append(that.ul)
-                    .mousedown(function(e) {
-                        e.preventDefault();
-                    });
+                    .mousedown(preventDefault);
 
         that._popup();
 
@@ -705,7 +703,7 @@
                     .removeAttr(DISABLED);
 
                 arrow.bind(CLICK, proxy(that._click, that))
-                     .bind(MOUSEDOWN, function(e) { e.preventDefault(); });
+                     .bind(MOUSEDOWN, preventDefault);
             }
         },
 
@@ -949,6 +947,10 @@
         parseFormats = $.isArray(parseFormats) ? parseFormats : [parseFormats];
         parseFormats.splice(0, 0, options.format);
         options.parseFormats = parseFormats;
+    }
+
+    function preventDefault(e) {
+        e.preventDefault();
     }
 
     ui.plugin(TimePicker);
