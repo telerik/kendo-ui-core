@@ -103,6 +103,7 @@
         MS_PER_DAY = 86400000,
         SELECTED = "k-state-selected",
         STATEDISABLED = "k-state-disabled",
+        isArray = $.isArray,
         extend = $.extend,
         proxy = $.proxy,
         DATE = Date,
@@ -156,16 +157,47 @@
         },
 
         open: function() {
-            var that = this;
+            var that = this,
+                data = that.options.data;
 
             if (!that.ul[0].firstChild) {
-                that.refresh();
+                if (data && data[0]) {
+                    that.dataBind(data);
+                } else {
+                    that.refresh();
+                }
             }
 
             that.popup.open();
             if (that._current) {
                 that.scroll(that._current[0]);
             }
+        },
+
+        dataBind: function(dates) {
+            var that = this,
+                options = that.options,
+                format = options.format,
+                toString = kendo.toString,
+                template = that.template,
+                length = dates.length,
+                idx = 0,
+                date,
+                html = "";
+
+            for (; idx < length; idx++) {
+                date = dates[idx];
+
+                if (isInRange(date, options.min, options.max)) {
+                    html += template(toString(date, format));
+                }
+            }
+
+            that.ul[0].innerHTML = html;
+
+            that._height(length);
+
+            that.select(that._value);
         },
 
         refresh: function() {
@@ -558,6 +590,7 @@
             min: TODAY,
             max: TODAY,
             format: "",
+            data: [],
             parseFormats: [],
             value: null,
             interval: 30,
@@ -659,6 +692,12 @@
             extend(that.timeView.options, that.options);
 
             that.timeView.refresh();
+        },
+
+        dataBind: function(dates) {
+            if (isArray(dates)) {
+                this.timeView.dataBind(dates);
+            }
         },
 
         /**
@@ -944,7 +983,7 @@
 
         options.format = extractFormat(options.format || kendo.culture().calendar.patterns.t);
 
-        parseFormats = $.isArray(parseFormats) ? parseFormats : [parseFormats];
+        parseFormats = isArray(parseFormats) ? parseFormats : [parseFormats];
         parseFormats.splice(0, 0, options.format);
         options.parseFormats = parseFormats;
     }

@@ -185,6 +185,17 @@
                 equal(timepicker.options.parseFormats[1], "hh:mm");
             });
 
+            test("TimePicker uses options.data instead of auto-generated hours", function() {
+                var timepicker = input.kendoTimePicker({
+                    data: [new Date(2000, 10, 10, 18, 0, 0)]
+                }).data("kendoTimePicker");
+
+                timepicker.open();
+
+                equal(timepicker.timeView.ul.children().length, 1);
+                equal(timepicker.timeView.ul.children(":first").text(), "6:00 PM");
+            });
+
        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
