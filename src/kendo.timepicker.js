@@ -691,7 +691,7 @@
 
             extend(that.timeView.options, that.options);
 
-            that.timeView.refresh();
+            that.timeView.ul[0].innerHTML = "";
         },
 
         dataBind: function(dates) {
