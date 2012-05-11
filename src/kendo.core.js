@@ -890,13 +890,16 @@ function pad(number) {
 
      function findCulture(culture) {
         if (culture) {
-            if (culture.name) {
+            if (culture.numberFormat) {
                 return culture;
             }
 
-            var cultures = kendo.cultures;
+            if (typeof culture === STRING) {
+                var cultures = kendo.cultures;
+                return cultures[culture] || cultures[culture.split("-")[0]] || null;
+            }
 
-            return cultures[culture] || cultures[culture.split("-")[0]] || null;
+            return null;
         }
 
         return null;
