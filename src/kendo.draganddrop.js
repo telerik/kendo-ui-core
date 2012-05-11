@@ -1013,11 +1013,15 @@
         _withDropTarget: function(e, callback) {
             var that = this,
                 target,
+                theTarget,
                 result,
                 options = that.options,
-                targets = dropTargets[options.group];
+                targets = dropTargets[options.group],
+                i = 0,
+                length = targets && targets.length;
 
-            if (targets && targets.length) {
+            if (length) {
+
                 target = elementUnderCursor(e);
 
                 if (that.hint && contains(that.hint, target)) {
@@ -1026,15 +1030,18 @@
                     that.hint.show();
                 }
 
-                $.each(targets, function() {
-                    var that = this,
-                        element = that.element[0];
-
-                    if (contains(element, target)) {
-                        result = that;
-                        return false;
+                outer:
+                while (target) {
+                    for (; i < length; i ++) {
+                        theTarget = targets[i];
+                        if (theTarget.element[0] === target) {
+                            result = theTarget;
+                            break outer;
+                        }
                     }
-                });
+
+                    target = target.parentNode;
+                }
 
                 callback(result);
             }
