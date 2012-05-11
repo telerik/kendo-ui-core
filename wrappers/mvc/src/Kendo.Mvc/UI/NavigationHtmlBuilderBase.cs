@@ -46,7 +46,7 @@ namespace Kendo.Mvc.UI
                     .Attribute("alt", "image", false)
                     .Attributes(item.ImageHtmlAttributes)
                     .PrependClass(UIPrimitives.Image)
-                    .Attribute("src", item.GetImageUrl(Component.ViewContext));
+                    .Attribute("src", item.GetImageUrl(((ViewComponentBase)Component).ViewContext));
         }
 
         public IHtmlNode Text(TItem item)

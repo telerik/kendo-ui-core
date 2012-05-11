@@ -21,7 +21,7 @@ namespace Kendo.Mvc.UI
             var accessible = true;
             if (component.SecurityTrimming)
             {
-                accessible = item.IsAccessible(component.Authorization, component.ViewContext);
+                accessible = item.IsAccessible(component.Authorization, ((ViewComponentBase)component).ViewContext);
             }
 
             if (component.ItemAction != null)
@@ -34,7 +34,7 @@ namespace Kendo.Mvc.UI
                 var hasAccessibleChildren = item.Items.Any() && item.Items.Any(i => i.Visible);
                 if (component.SecurityTrimming && hasAccessibleChildren)
                 {
-                    hasAccessibleChildren = item.Items.IsAccessible(component.Authorization, component.ViewContext);
+                    hasAccessibleChildren = item.Items.IsAccessible(component.Authorization, ((ViewComponentBase)component).ViewContext);
                 }
 
                 IHtmlNode itemTag = builder.ItemTag(item).AppendTo(parentTag);
@@ -66,7 +66,7 @@ namespace Kendo.Mvc.UI
             where TComponent : ViewComponentBase, INavigationItemComponent<TItem>
             where TItem : NavigationItem<TItem>, IContentContainer
         {
-            string url = item.GenerateUrl(component.ViewContext, component.UrlGenerator);
+            string url = item.GenerateUrl(((ViewComponentBase)component).ViewContext, component.UrlGenerator);
 
             if (url != null)
             {

@@ -54,7 +54,7 @@ namespace Kendo.Mvc.UI
                 .Add("name", Name)
                 .Add("attr", HtmlAttributes.ToAttributeString(), HtmlAttributes.Any)
                 .Add("buttonType", ButtonType.ToString())
-                .Add("text", Text, Text.HasValue)
+                .Add("text", Text, (System.Func<bool>)Text.HasValue)
                 .Add("imageAttr", ImageHtmlAttributes.ToAttributeString(), ImageHtmlAttributes.Any);
 
             return command;
