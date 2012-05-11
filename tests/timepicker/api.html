@@ -444,6 +444,32 @@
                 equal(+timepicker.timeView.options.max, +date);
                 equal(timepicker.timeView.ul.find("li:last").text(), "6:00 PM");
             });
+
+            test("dataBind method binds the TimeView to list of Dates", function() {
+                var date = new Date(2000, 10, 10, 18, 0, 0),
+                    timepicker = input.kendoTimePicker().data("kendoTimePicker");
+
+                timepicker.dataBind([date]);
+
+                equal(timepicker.timeView.ul.children().length, 1);
+                equal(timepicker.timeView.ul.children().text(), "6:00 PM");
+            });
+
+            test("dataBind method strips dates out of the min/max range", function() {
+                var timepicker = input.kendoTimePicker({
+                    min: new Date(1900, 10, 10, 20, 0, 0),
+                    max: new Date(2000, 10, 10, 8, 0, 0)
+                }).data("kendoTimePicker");
+
+                timepicker.dataBind([
+                    new Date(2000, 10, 10, 8, 30, 0),
+                    new Date(2000, 10, 10, 7, 59, 0),
+                    new Date(2000, 10, 10, 20, 1, 0)
+                ]);
+
+                equal(timepicker.timeView.ul.children().length, 2);
+                equal(timepicker.timeView.ul.children(":first").text(), "7:59 AM");
+            });
        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
