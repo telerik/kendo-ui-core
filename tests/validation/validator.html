@@ -970,6 +970,87 @@
                 var validator = setup(container, { rules: { foo: function() { return false } } });
                 validator.validate();
             });
+
+            test("rules resolver is called", 1, function() {
+                kendo.ui.validator.rulesResolvers = {
+                    foo: {
+                        resolve: function(element) {
+                           same(element[0], container[0]);
+                        }
+                    }
+                }
+                container.append("<input type='text' name='test' />");
+
+                var validator = setup(container);
+            });
+
+            test("resolves empty rules", 1, function() {
+                kendo.ui.validator.rulesResolvers = {
+                    foo: {
+                        resolve: function(element) {
+                            ok(true);
+                            return;
+                        }
+                    }
+                }
+                container.append("<input type='text' name='test' />");
+
+                var validator = setup(container);
+            });
+
+            test("resolved rules and messages are added to the validator", 2, function() {
+                kendo.ui.validator.rulesResolvers = {
+                    foo: {
+                        resolve: function(element) {
+                            return { rules: { foo: function() {} }, messages: { foo: "foo" } };
+                        }
+                    }
+                }
+                container.append("<input type='text' name='test' />");
+
+                var validator = setup(container);
+                ok("foo" in validator.options.rules);
+                ok("foo" in validator.options.messages);
+            });
+
+            test("all rules resolver are called", 2, function() {
+                kendo.ui.validator.rulesResolvers = {
+                    foo: {
+                        resolve: function(element) {
+                           same(element[0], container[0]);
+                        }
+                    },
+                    bar: {
+                        resolve: function(element) {
+                           same(element[0], container[0]);
+                        }
+                    }
+                }
+                container.append("<input type='text' name='test' />");
+
+                var validator = setup(container);
+            });
+
+            test("resolved rules from multiple resolvers are merged", 2, function() {
+                kendo.ui.validator.rulesResolvers = {
+                    foo: {
+                        resolve: function(element) {
+                            return { rules: { foo: $.noop }};
+                        }
+                    },
+                    bar: {
+                        resolve: function(element) {
+                            return { rules: { bar: $.noop }};
+                        }
+                    }
+                }
+                container.append("<input type='text' name='test' />");
+
+                var validator = setup(container);
+
+                ok("foo" in validator.options.rules);
+                ok("bar" in validator.options.rules);
+            });
         </script>
     </body>
 </html>
