@@ -17,18 +17,28 @@
     var Reordable = Widget.extend({
         init: function(element, options) {
             var that = this,
+                draggable,
                 group = kendo.guid() + "-reordable";
 
             Widget.fn.init.call(that, element, options);
 
             element = that.element.addClass(KREORDABLE);
             options = that.options;
+            draggable = options.draggable || new kendo.ui.Draggable(element, {
+                group: group,
+                filter: options.filter,
+                hint: options.hint
+            });
 
             that.reorderDropCue = $('<div class="k-reorder-cue"><div class="k-icon k-arrow-down"></div><div class="k-icon k-arrow-up"></div></div>');
 
-            element.find(options.filter).kendoDropTarget({
-                group: group,
+            element.find(draggable.options.filter).kendoDropTarget({
+                group: draggable.options.group,
                 dragenter: function(e) {
+                    if (!that._draggable) {
+                        return;
+                    }
+
                     var dropTarget = this.element,
                         same = dropTarget[0] === that._draggable[0];
 
@@ -36,8 +46,8 @@
                     if (!same) {
                         that.reorderDropCue.css({
                              height: dropTarget.outerHeight(),
-                             top: element.offset().top,
-                             left: dropTarget.offset().left + (dropTarget.index() > that._draggable.index() ? dropTarget.outerWidth() : 0)
+                             top: element.position().top,
+                             left: dropTarget.position().left + (dropTarget.index() > that._draggable.index() ? dropTarget.outerWidth() : 0)
                         })
                         .appendTo(document.body);
                     }
@@ -47,42 +57,41 @@
                     that.reorderDropCue.remove();
                 },
                 drop: function() {
-                    var draggable = that._draggable[0],
+                    var draggableElement = that._draggable[0],
                         dropTarget = this.element[0],
                         container;
 
-                    if (draggable !== dropTarget) {
-                        container = element.find(options.filter);
+                    if (draggableElement !== dropTarget) {
+                        container = element.find(draggable.options.filter);
                         that.trigger(CHANGE, {
                             element: that._draggable,
-                            oldIndex: container.index(draggable),
+                            oldIndex: container.index(draggableElement),
                             newIndex: container.index(dropTarget)
                         });
                     }
                 }
             });
 
-            element.kendoDraggable({
-                group: group,
-                filter: "." + KREORDABLE + " " + options.filter,
-                hint: options.hint,
-                dragcancel: function() {
-                    that.reorderDropCue.remove();
-                    that._draggable = null;
-                },
-                dragend: function() {
-                    that.reorderDropCue.remove();
-                    that._draggable = null;
-                },
-                dragstart: function(e) {
-                    that._draggable = e.currentTarget;
+            draggable.bind([ "dragcancel", "dragend", "dragstart" ],
+                {
+                    dragcancel: function() {
+                        that.reorderDropCue.remove();
+                        that._draggable = null;
+                    },
+                    dragend: function() {
+                        that.reorderDropCue.remove();
+                        that._draggable = null;
+                    },
+                    dragstart: function(e) {
+                        that._draggable = e.currentTarget;
+                    }
                 }
-            });
+            );
         },
 
         options: {
             name: "Reordable",
-            filter: ">*"
+            filter: "*"
         },
 
         events: [
