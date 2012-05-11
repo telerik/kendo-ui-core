@@ -602,7 +602,7 @@
       <returns>The email address of the sender.</returns>
     </member>
     <member name="P:System.Web.Helpers.WebMail.Password">
-      <summary>Gets or sets the sender’s password based on the email account used.</summary>
+      <summary>Gets or sets the sender's password based on the email account used.</summary>
       <returns>The password of the sender.</returns>
     </member>
     <member name="M:System.Web.Helpers.WebMail.Send(System.String,System.String,System.String,System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Boolean,System.Collections.Generic.IEnumerable{System.String})">

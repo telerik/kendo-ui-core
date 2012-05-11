@@ -27,7 +27,7 @@ namespace Kendo.Mvc.Extensions.Tests
 
             Assert.IsAssignableFrom(typeof(IEnumerable<int>), data.AsGenericEnumerable());
         }
-
+/*
         [Fact]
         public void ElementAt_returns_the_element_at_the_specified_index()
         {
@@ -65,6 +65,7 @@ namespace Kendo.Mvc.Extensions.Tests
             Assert.Throws<ArgumentOutOfRangeException>(() => new SimpleEnumerable().ElementAt(-1));
         }
 
+    */
         [Fact]
         public void IndexOf_should_return_the_index_of_element()
         {

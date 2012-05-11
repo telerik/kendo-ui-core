@@ -34,7 +34,7 @@ namespace Kendo.Mvc.UI.Html
                 }
                 else
                 {
-                    value = value = Data.First(i => i.Selected).Text;
+                    value = Data.First(i => i.Selected).Text;
                 }
             }
 
