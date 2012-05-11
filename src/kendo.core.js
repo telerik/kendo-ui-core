@@ -198,7 +198,7 @@
      * </script>
      *
      * <script>
-     * var encodingTemplate = kendo.template($("#template").text());
+     * var encodingTemplate = kendo.template($("#template").html());
      * </script>
      */
 
