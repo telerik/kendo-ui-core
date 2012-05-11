@@ -37,9 +37,9 @@ namespace Kendo.Mvc.UI
             var result = base.Serialize(urlBuilder);
 
             FluentDictionary.For(result)
-                .Add("cancelText", CancelText, CancelText.HasValue)
-                .Add("updateText", UpdateText, UpdateText.HasValue)
-                .Add("insertText", InsertText, InsertText.HasValue);
+                .Add("cancelText", CancelText, (System.Func<bool>)CancelText.HasValue)
+                .Add("updateText", UpdateText, (System.Func<bool>)UpdateText.HasValue)
+                .Add("insertText", InsertText, (System.Func<bool>)InsertText.HasValue);
 
             return result;
         }
