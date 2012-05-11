@@ -35,7 +35,7 @@ namespace Kendo.Mvc.UI.Fluent
         {
             Guard.IsNotNull(clientEventsAction, "clientEventsAction");
 
-            clientEventsAction(new DropDownClientEventsBuilder(Component.ClientEvents, Component.ViewContext));
+            clientEventsAction(new DropDownClientEventsBuilder(Component.ClientEvents, ((ViewComponentBase)Component).ViewContext));
 
             return this as TDropDownBuilder;
         }
