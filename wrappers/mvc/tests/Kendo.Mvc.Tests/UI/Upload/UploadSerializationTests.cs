@@ -37,6 +37,14 @@ namespace Kendo.Mvc.UI.Tests.Upload
         }
 
         [Fact]
+        public void Default_configuration_outputs_empty_kendoUpload_init()
+        {
+            upload.WriteInitializationScript(textWriter.Object);
+
+            output.ShouldContain("jQuery('#Upload').kendoUpload();");
+        }
+
+        [Fact]
         public void Enabled_state_serialized_when_false()
         {
             upload.Enabled = false;
@@ -123,7 +131,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
             upload.Async.AutoUpload = false;
             upload.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("");
+            output.ShouldContain("jQuery('#Upload').kendoUpload();");
         }
 
         [Fact]
