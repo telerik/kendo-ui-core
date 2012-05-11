@@ -158,11 +158,11 @@
 
         open: function() {
             var that = this,
-                data = that.options.data;
+                dates = that.options.dates;
 
             if (!that.ul[0].firstChild) {
-                if (data && data[0]) {
-                    that.dataBind(data);
+                if (dates && dates[0]) {
+                    that.dataBind(dates);
                 } else {
                     that.refresh();
                 }
@@ -590,7 +590,7 @@
             min: TODAY,
             max: TODAY,
             format: "",
-            data: [],
+            dates: [],
             parseFormats: [],
             value: null,
             interval: 30,
