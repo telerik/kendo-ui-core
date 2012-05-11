@@ -14,31 +14,90 @@
         <script src="../src/kendo.draganddrop.js"></script>
         <script src="../src/kendo.fx.js"></script>
         <script src="../src/kendo.treeview.js"></script>
-        <style>
-        </style>
+        <script>
+            var Node = kendo.data.Model.define({
+                init: function(value) {
+                    var data = {},
+                        children = {};
+
+
+                    kendo.data.Model.fn.init.call(this, value);
+
+                    data[this.idField] = this.id;
+
+                    children = $.extend(true, {}, this.children, {
+                        transport: {
+                            read: {
+                                data: data
+                            }
+                        }
+                    });
+
+                    this.children = new TreeDataSource(children);
+                },
+                shouldSerialize: function(field) {
+                    return kendo.data.Model.fn.shouldSerialize.call(this, field) && field !== "children";
+                }
+            });
+
+            var TreeDataSource = kendo.data.DataSource.extend({
+            });
+
+        </script>
     </head>
     <body>
         <ul id="treeview"></ul>
         <script>
-
-            var heterogeneus = {
-                transport: {
-                    read: "/categories"
-                },
-                schema: {
-                    model: {
-                        idField: "CategoryID"
-                        children: {
-                            transport: {
-                                read: "/products"
-                            },
-                            schema: {
-                                idField: "ProductID"
-                            }
+            var Category = Node.define({
+                id: "categoryId",
+                children: {
+                    transport: {
+                        read: {
+                            url: "http://korchev:8080/Northwind/Home/Products",
+                            dataType: "json"
                         }
+                    },
+                    schema: {
+                        data: "products"
                     }
                 }
-            };
+            });
+
+            var heterogeneous = new TreeDataSource({
+                transport: {
+                    read: {
+                        url: "http://korchev:8080/Northwind/Home/Categories",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    data: "categories",
+                    model: Category
+                }
+            });
+
+            heterogeneous.fetch(function() {
+                var categories = heterogeneous.data();
+
+                $.each(categories, function() {
+                    var li = $("<li><a href='#'></a></li>").appendTo($("#treeview"));
+                    var category = this;
+
+                    li.find("a").text(category.categoryName).click(function(e) {
+                        e.preventDefault();
+
+                        category.children.fetch(function() {
+                            li.find("ul").remove();
+                            var products = category.children.data();
+                            var ul = $("<ul></ul>").appendTo(li);
+                            $.each(products, function() {
+                                var product = this;
+                                $("<li></li>").text(product.productName).appendTo(ul);
+                            });
+                        });
+                    });
+                });
+            });
 
             var homogeneous = {
                 transport: {
@@ -46,7 +105,7 @@
                 },
                 schema: {
                     model: {
-                        idField: "EmployeeID"
+                        idField: "EmployeeID",
                         children: true
                     }
                 }
@@ -59,7 +118,7 @@
                         items: [
                             { text: "leaf" },
                             {
-                                text: "node with children"
+                                text: "node with children",
                                 items: [ { text: "leaf" }]
                             }
                         ]

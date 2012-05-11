@@ -497,9 +497,18 @@
         }
     });
 
-    Model.define = function(options) {
+    Model.define = function(base, options) {
+        if (options === undefined) {
+            options = base;
+            base = Model;
+        }
+
         var model,
             proto = extend({}, { defaults: {} }, options),
+            name,
+            field,
+            type,
+            value,
             id = proto.id;
 
         if (id) {
@@ -514,10 +523,10 @@
             proto.defaults[id] = proto._defaultId = "";
         }
 
-        for (var name in proto.fields) {
-            var field = proto.fields[name],
-                type = field.type || "default",
-                value = null;
+        for (name in proto.fields) {
+            field = proto.fields[name];
+            type = field.type || "default";
+            value = null;
 
             name = typeof (field.field) === STRING ? field.field : name;
 
@@ -534,7 +543,10 @@
             field.parse = field.parse || parsers[type];
         }
 
-        model = Model.extend(proto);
+        model = base.extend(proto);
+        model.define = function(options) {
+            return Model.define(model, options);
+        };
 
         if (proto.fields) {
             model.fields = proto.fields;
