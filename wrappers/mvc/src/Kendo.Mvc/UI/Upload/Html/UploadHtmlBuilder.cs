@@ -19,51 +19,21 @@ namespace Kendo.Mvc.UI.Html
             upload = component;
         }
 
-        /// <summary>
-        /// Creates the upload top-level div.
-        /// </summary>
-        /// <returns></returns>
         public IHtmlNode CreateUpload()
         {
-            var attributes = new Dictionary<string, object>();
+            var element = new HtmlElement("input", TagRenderMode.SelfClosing);
+            var attributes = new Dictionary<string, object>
+            {   { "type", "file" },
+                { "name", upload.Name },
+                { "id", upload.Id }
+            };
+
             foreach (var attr in upload.HtmlAttributes)
-	        {
-                if (attr.Key.IndexOf("accept", System.StringComparison.InvariantCultureIgnoreCase) < 0)
-		            attributes.Add(attr.Key, attr.Value);
-	        }
-            return new HtmlElement("div")
-                .Attributes(attributes)
-                .PrependClass(UIPrimitives.Widget, "t-upload");
-        }
-
-        public IHtmlNode CreateUploadButton()
-        {
-            return new HtmlElement("div")
-                .AddClass(UIPrimitives.Upload.Button);
-        }
-
-        /// <summary>
-        /// Creates the button text element.
-        /// </summary>
-        /// <returns></returns>
-        public IHtmlNode CreateButtonText()
-        {
-            return new HtmlElement("span").Text(upload.Localization.Select);
-        }
-
-        /// <summary>
-        /// Creates the file input element.
-        /// </summary>
-        /// <returns></returns>
-        public IHtmlNode CreateFileInput()
-        {
-            var element = new HtmlElement("input", TagRenderMode.SelfClosing)
-                .Attributes(new { type = "file", name = upload.Name, id = upload.Id });
-
-            if (upload.HtmlAttributes.ContainsKey("accept"))
             {
-                element.Attributes(new { accept = upload.HtmlAttributes["accept"].ToString().ToLowerInvariant() });
+                attributes[attr.Key] = attr.Value;
             }
+
+            element.Attributes(attributes);
 
             return element;
         }
@@ -74,12 +44,7 @@ namespace Kendo.Mvc.UI.Html
         /// <returns></returns>
         protected override IHtmlNode BuildCore()
         {
-            var root = CreateUpload();
-            var uploadButton = CreateUploadButton().AppendTo(root);
-            CreateButtonText().AppendTo(uploadButton);
-            CreateFileInput().AppendTo(uploadButton);
-
-            return root;
+            return CreateUpload();
         }
     }
 }
