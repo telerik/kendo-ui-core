@@ -344,11 +344,11 @@
 
             that._pageable();
 
-            that._groupable();
-
             that._toolbar();
 
             that._thead();
+
+            that._groupable();
 
             that._templates();
 
@@ -572,10 +572,11 @@
             }
         },
 
-        _reordable: function() {
+        _draggable: function() {
             var that = this;
-            if (that.options.reordable) {
-                that.thead.kendoReordable({
+            if (that.options.groupable || that.options.reordable) {
+                that._draggableInstance = that.thead.kendoDraggable({
+                    group: kendo.guid(),
                     filter: ".k-header:not(.k-group-cell,.k-hierarchy-cell)[" + kendo.attr("field") + "]",
                     hint: function(target) {
                         return $('<div class="k-header k-drag-clue" />')
@@ -589,7 +590,16 @@
                             })
                             .html(target.attr(kendo.attr("title")) || target.attr(kendo.attr("field")))
                             .prepend('<span class="k-icon k-drag-status k-denied" />');
-                    },
+                    }
+                }).data("kendoDraggable");
+            }
+        },
+
+        _reordable: function() {
+            var that = this;
+            if (that.options.reordable) {
+                that.thead.kendoReordable({
+                    draggable: that._draggableInstance,
                     change: function(e) {
                         var column = that.columns[e.oldIndex];
                         that.trigger(COLUMNREORDER, {
@@ -1158,9 +1168,10 @@
                 }
 
                 that.groupable = new Groupable(wrapper, {
-                    filter: "th:not(.k-group-cell)[" + kendo.attr("field") + "][" + kendo.attr("groupable") + "!=false]",
+                    draggable: that._draggableInstance,
                     groupContainer: "div.k-grouping-header",
-                    dataSource: that.dataSource
+                    dataSource: that.dataSource,
+                    allowDrag: that.options.reordable
                 });
             }
         },
@@ -2214,6 +2225,8 @@
             that._setContentHeight();
 
             that._resizable();
+
+            that._draggable();
 
             that._reordable();
         },

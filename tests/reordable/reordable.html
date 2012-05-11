@@ -41,7 +41,7 @@
             }
 
             function moveOverDropTarget(draggable, dropTarget) {
-                var position = dropTarget.position();
+                var position = dropTarget.offset();
 
                 draggable.trigger({ type: "mousedown", pageX: 1, pageY: 1 });
 
@@ -94,14 +94,6 @@
                 div.kendoReordable();
 
                 ok(div.data("kendoDraggable") instanceof kendo.ui.Draggable);
-            });
-
-            test("filter is delegated to Draggable", function() {
-                var reordable = new Reordable(div, {
-                    filter: "> div"
-                });
-
-                equal(div.data("kendoDraggable").options.filter, ".k-reordable > div");
             });
 
             test("element initializes DropTargets", function() {
@@ -197,7 +189,7 @@
                         change: function() {
                             args = arguments[0];
                         },
-                        filter: ">div:not(.disabled)"
+                        filter: "div:not(.disabled)"
                     }),
                     source = div.children().eq(1),
                     target = div.children().eq(2);

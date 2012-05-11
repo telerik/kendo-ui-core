@@ -38,30 +38,63 @@
                 groupContainer,
                 group = kendo.guid(),
                 intializePositions = proxy(that._intializePositions, that),
+                draggable,
                 dropCuePositions = that._dropCuePositions = [];
 
             Widget.fn.init.call(that, element, options);
 
+            draggable = that.options.draggable || new kendo.ui.Draggable(that.element, {
+                filter: that.options.filter,
+                hint: hint,
+                group: group
+            });
+
             groupContainer = that.groupContainer = $(that.options.groupContainer, that.element)
                 .kendoDropTarget({
-                    group: group,
+                    group: draggable.options.group,
                     dragenter: function(e) {
-                        e.draggable.hint.find(".k-drag-status").removeClass("k-denied").addClass("k-add");
-                        dropCue.css({top: dropCueOffsetTop(that.element), left: 0}).appendTo(groupContainer);
+                        if (that._canDrag(e.draggable.currentTarget)) {
+                            e.draggable.hint.find(".k-drag-status").removeClass("k-denied").addClass("k-add");
+                            dropCue.css({top: dropCueOffsetTop(that.element), left: 0}).appendTo(groupContainer);
+                        }
                     },
-
                     dragleave: function(e) {
                         e.draggable.hint.find(".k-drag-status").removeClass("k-add").addClass("k-denied");
                         dropCue.remove();
+                    },
+                    drop: function(e) {
+                        var targetElement = e.draggable.currentTarget,
+                            field = targetElement.attr(kendo.attr("field")),
+                            title = targetElement.attr(kendo.attr("title")),
+                            sourceIndicator = that.indicator(field),
+                            dropCuePositions = that._dropCuePositions,
+                            lastCuePosition = dropCuePositions[dropCuePositions.length - 1],
+                            position;
+
+                        if (!that._canDrag(targetElement)) {
+                            return;
+                        }
+                        if(lastCuePosition) {
+                            position = that._dropCuePosition(dropCue.offset().left + parseInt(lastCuePosition.element.css("marginLeft"), 10) + parseInt(lastCuePosition.element.css("marginRight"), 10));
+                            if(position && that._canDrop($(sourceIndicator), position.element, position.left)) {
+                                if(position.before) {
+                                    position.element.before(sourceIndicator || that.buildIndicator(field, title));
+                                } else {
+                                    position.element.after(sourceIndicator || that.buildIndicator(field, title));
+                                }
+
+                                that._change();
+                            }
+                        } else {
+                            that.groupContainer.append(that.buildIndicator(field, title));
+                            that._change();
+                        }
                     }
                 })
                 .kendoDraggable({
                     filter: "div.k-group-indicator",
                     hint: hint,
-                    group: group,
-                    dragend: function(e) {
-                        that._dragEnd(this, e);
-                    },
+                    group: draggable.options.group,
                     dragcancel: proxy(that._dragCancel, that),
                     dragstart: function(e) {
                         var element = e.currentTarget,
@@ -71,6 +104,9 @@
                         intializePositions();
                         dropCue.css({top: dropCueOffsetTop(that.element), left: left}).appendTo(groupContainer);
                         this.hint.find(".k-drag-status").removeClass("k-denied").addClass("k-add");
+                    },
+                    dragend: function() {
+                        that._dragEnd(this);
                     },
                     drag: proxy(that._drag, that)
                 })
@@ -87,19 +123,16 @@
                     e.preventDefault();
                 });
 
-            that.element.kendoDraggable({
-                filter: that.options.filter,
-                hint: hint,
-                group: group,
-                dragend: function(e) {
-                    that._dragEnd(this, e);
+            draggable.bind([ "dragend", "dragcancel", "dragstart", "drag" ],
+            {
+                dragend: function() {
+                    that._dragEnd(this);
                 },
                 dragcancel: proxy(that._dragCancel, that),
                 dragstart: function(e) {
-                    var element, marginRight, left,
-                        field = e.currentTarget.attr(kendo.attr("field"));
+                    var element, marginRight, left;
 
-                    if(that.indicator(field)) {
+                    if (!that.options.allowDrag && !that._canDrag(e.currentTarget)) {
                         e.preventDefault();
                         return;
                     }
@@ -112,9 +145,6 @@
                     } else {
                         left = 0;
                     }
-
-                    dropCue.css({top: dropCueOffsetTop(that.element), left: left}).appendTo(groupContainer);
-                    this.hint.find(".k-drag-status").removeClass("k-denied").addClass("k-add");
                 },
                 drag: proxy(that._drag, that)
             });
@@ -252,39 +282,20 @@
                 dropCue.css({ left: position.left });
             }
         },
+        _canDrag: function(element) {
+            return element.attr(kendo.attr("groupable")) != "false" && !this.indicator(element.attr(kendo.attr("field")));
+        },
         _canDrop: function(source, target, position) {
             var next = source.next();
             return source[0] !== target[0] && (!next[0] || target[0] !== next[0] || position > next.position().left);
         },
-        _dragEnd: function(draggable, event) {
+        _dragEnd: function(draggable) {
             var that = this,
-                field = event.currentTarget.attr(kendo.attr("field")),
-                title = event.currentTarget.attr(kendo.attr("title")),
-                sourceIndicator = that.indicator(field),
-                dropCuePositions = that._dropCuePositions,
-                lastCuePosition = dropCuePositions[dropCuePositions.length - 1],
-                position;
+                field = draggable.currentTarget.attr(kendo.attr("field")),
+                sourceIndicator = that.indicator(field);
 
-            if(draggable.dropped) {
-                if(lastCuePosition) {
-                    position = that._dropCuePosition(dropCue.offset().left + parseInt(lastCuePosition.element.css("marginLeft"), 10) + parseInt(lastCuePosition.element.css("marginRight"), 10));
-                    if(that._canDrop($(sourceIndicator), position.element, position.left)) {
-                        if(position.before) {
-                            position.element.before(sourceIndicator || that.buildIndicator(field, title));
-                        } else {
-                            position.element.after(sourceIndicator || that.buildIndicator(field, title));
-                        }
-
-                        that._change();
-                    }
-                } else {
-                    that.groupContainer.append(that.buildIndicator(field, title));
-                    that._change();
-                }
-            } else {
-                if(sourceIndicator) {
-                    that._removeIndicator($(sourceIndicator));
-                }
+            if (!draggable.dropped && sourceIndicator) {
+                that._removeIndicator($(sourceIndicator));
             }
 
             that._dragCancel();
