@@ -1032,7 +1032,7 @@
 
                 outer:
                 while (target) {
-                    for (; i < length; i ++) {
+                    for (i = 0; i < length; i ++) {
                         theTarget = targets[i];
                         if (theTarget.element[0] === target) {
                             result = theTarget;
