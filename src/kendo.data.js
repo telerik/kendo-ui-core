@@ -1399,7 +1399,7 @@
             }
 
             if (isPlainObject(that.model)) {
-                that.model = model = kendo.data.Model.define(that.model);
+                that.model = model = schema.modelBase.define(that.model);
 
                 var dataFunction = proxy(that.data, that),
                     groupsFunction = proxy(that.groups, that),
@@ -1512,6 +1512,9 @@
         options: {
             schema: {},
             data: [],
+            schema: {
+               modelBase: Model
+            },
             serverSorting: false,
             serverPaging: false,
             serverFiltering: false,

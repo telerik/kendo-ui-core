@@ -41,6 +41,9 @@
             });
 
             var TreeDataSource = kendo.data.DataSource.extend({
+                init: function(options) {
+                    kendo.data.DataSource.fn.init.call(this, $.extend(true, {}, { schema: { modelBase: Node } }, options));
+                }
             });
 
         </script>
@@ -48,21 +51,6 @@
     <body>
         <ul id="treeview"></ul>
         <script>
-            var Category = Node.define({
-                id: "categoryId",
-                children: {
-                    transport: {
-                        read: {
-                            url: "http://korchev:8080/Northwind/Home/Products",
-                            dataType: "json"
-                        }
-                    },
-                    schema: {
-                        data: "products"
-                    }
-                }
-            });
-
             var heterogeneous = new TreeDataSource({
                 transport: {
                     read: {
@@ -72,7 +60,20 @@
                 },
                 schema: {
                     data: "categories",
-                    model: Category
+                    model: {
+                        id: "categoryId",
+                        children: {
+                            transport: {
+                                read: {
+                                    url: "http://korchev:8080/Northwind/Home/Products",
+                                    dataType: "json"
+                                }
+                            },
+                            schema: {
+                                data: "products"
+                            }
+                        }
+                    }
                 }
             });
 
