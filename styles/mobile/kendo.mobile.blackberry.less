@@ -32,10 +32,9 @@
     font-weight: normal;
     color: #000;
     text-shadow: none;
-    border: 1px solid rgba(0,0,0,.2);
     background-color: #cfd3d6;
     background-image: linear-gradient(top, rgba(255,255,255,.95), rgba(255,255,255,.85) 50%, rgba(255,255,255,.5));
-    .box-shadow(~"0 1px 0 0 rgba(0,0,0,.1)");
+    .box-shadow(~"0 1px 0 1px rgba(0,0,0,.1)");
 }
 
 .km-blackberry .km-view-title,
@@ -368,7 +367,6 @@
 .km-blackberry .km-toolbar,
 .km-blackberry .km-navbar
 {
-    border-bottom: 2px solid rgba(0,0,0,.3);
     background-color: #2a3235;
     background-image: linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.2) 73%, rgba(255,255,255,.05));
 }
@@ -377,18 +375,17 @@
 .km-blackberry .km-toolbar .km-button,
 .km-blackberry .km-navbar .km-button
 {
-    margin-top: .5rem;
-    margin-bottom: .5rem;
+    margin-top: .44rem;
+    margin-bottom: .44rem;
 }
 
 .km-blackberry.km-vertical .km-navbar .km-view-title,
 .km-blackberry.km-vertical .km-toolbar .km-button,
 .km-blackberry.km-vertical .km-navbar .km-button
 {
-    margin-top: .2rem;
-    margin-bottom: .2rem;
+    margin-top: .3rem;
+    margin-bottom: .3rem;
 }
-
 
 .km-blackberry .km-tabstrip
 {
@@ -955,4 +952,17 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+
+/* SplitView */
+
+.km-blackberry .km-pane
+{
+    .box-shadow(-3px 0 10px 1px rgba(0,0,0,.5));
+    z-index: 1;
+}
+
+.km-blackberry .km-pane:first-child
+{
+    z-index: 0;
 }
