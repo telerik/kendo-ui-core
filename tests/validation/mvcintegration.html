@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.validation mvc tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.validator.js"></script>
+        <script src="../../src/kendo.validator.js"></script>
+        <script src="../../wrappers/mvc/src/Kendo.Mvc/Scripts/kendo.validator.aspnetmvc.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.validation mvc Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            kendo.ns = "kendo-";
+            var container,
+                Validator = kendo.ui.Validator;
+
+            function setup(element, options) {
+                if (!element.parent().length) {
+                    element.appendTo(container);
+                }
+                return new Validator(element, $.extend({}, options));
+            }
+
+            module("kendo.ui.validation.mvc", {
+                setup: function() {
+                    container = $("<div/>").appendTo("<form/>").appendTo($(document.body));
+                },
+                teardown: function() {
+                    container.remove();
+                }
+            });
+
+            test("validate returns false for empty input with attribute required", function() {
+                var input = $('<input type="text" data-val="true" data-val-required="foo" />'),
+                    validator = setup(input);
+
+                ok(!validator.validate());
+            });
+
+            test("validate returns true for non empty input with attribute required", function() {
+                var input = $('<input type="text" data-val="true" data-val-required="foo" />'),
+                    validator = setup(input);
+
+                input.val("someValue");
+
+                ok(validator.validate());
+            });
+
+            test("validate returns true for non empty input with attribute required which is initially invalid", function() {
+                var input = $('<input type="text" data-val="true" data-val-required="foo" />'),
+                    validator = setup(input);
+
+                ok(!validator.validate());
+
+                input.val("someValue");
+
+                ok(validator.validate());
+            });
+
+            test("validate returns false if checkbox marked as required is not checked", function() {
+                container.append($('<input type="checkbox" data-val="true" data-val-required="foo" />'));
+                var validator = setup(container);
+                ok(!validator.validate());
+            });
+
+            test("validate returns true if checkbox marked as required is checked", function() {
+                container.append($('<input type="checkbox" data-val="true" data-val-required="foo" checked="checked"/>'));
+                var validator = setup(container);
+                ok(validator.validate());
+            });
+
+            test("validate returns false if checkbox marked as required is not checked but have value set", function() {
+                container.append($('<input type="checkbox" data-val="true" data-val-required="foo" value="foo"/>'));
+                var validator = setup(container);
+                ok(!validator.validate());
+            });
+
+            test("validate returns true if checkbox marked as required is checked and have value set", function() {
+                container.append($('<input type="checkbox" data-val="true" data-val-required="foo" value="foo" checked="checked" />'));
+                var validator = setup(container);
+                ok(validator.validate());
+            });
+
+        </script>
+    </body>
+</html>
