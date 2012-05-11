@@ -36,6 +36,17 @@
 
     kendo.ui.validator = { rules: {}, messages: {} };
 
+    function resolveRules(element) {
+        var resolvers = kendo.ui.validator.rulesResolvers || {},
+            rules = {},
+            name;
+
+        for (name in resolvers) {
+            $.extend(true, rules, resolvers[name].resolve(element));
+        }
+        return rules;
+    }
+
     /**
      *  @name kendo.ui.Validator.Description
      *
@@ -191,11 +202,13 @@
          * @option {Boolean} [validateOnBlur] Determines if validation will be triggered when element loses focus. Default value is true.
          */
         init: function(element, options) {
-            var that = this;
+            var that = this,
+                resolved = resolveRules(element);
+
             options = options || {};
 
-            options.rules = $.extend({}, kendo.ui.validator.rules, options.rules);
-            options.messages = $.extend({}, kendo.ui.validator.messages, options.messages);
+            options.rules = $.extend({}, kendo.ui.validator.rules, resolved.rules, options.rules);
+            options.messages = $.extend({}, kendo.ui.validator.messages, resolved.messages, options.messages);
 
             Widget.fn.init.call(that, element, options);
 
