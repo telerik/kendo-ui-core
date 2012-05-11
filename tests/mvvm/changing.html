@@ -698,6 +698,16 @@
                 equal(calls, 1);
             });
 
+            test("value binding sets a field which is initially undefined", function() {
+                var viewModel = kendo.observable({});
+
+                var dom = $('<input data-bind="value: foo">');
+
+                kendo.bind(dom, viewModel);
+
+                dom.val("foo").trigger("change");
+                equal(viewModel.foo, "foo");
+            });
         </script>
 
         <script id="array-template" type="text/x-kendo-template">

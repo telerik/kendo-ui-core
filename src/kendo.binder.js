@@ -1,4 +1,4 @@
-(function ($, undefined) {
+(function ($, unefined) {
     var kendo = window.kendo,
         Observable = kendo.Observable,
         ObservableObject = kendo.data.ObservableObject,
@@ -257,7 +257,13 @@
 
     binders.text = Binder.extend({
         refresh: function() {
-            this.element[innerText] = this.bindings.text.get();
+            var text = this.bindings.text.get();
+
+            if (text == null) {
+                text = "";
+            }
+
+            this.element[innerText] = text;
         }
     });
 
@@ -306,8 +312,15 @@
 
         refresh: function() {
             if (!this._initChange) {
-                this.element.value = this.bindings[VALUE].get();
+                var value = this.bindings[VALUE].get();
+
+                if (value == null) {
+                    value = "";
+                }
+
+                this.element.value = value;
             }
+
             this._initChange = false;
         },
 
