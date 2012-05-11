@@ -1049,6 +1049,89 @@
                 dom.find("li").click();
             });
 
+            test("text binding displays undefined fields as empty string", function() {
+                var dom = $('<span data-bind="text:foo"></span>');
+                kendo.bind(dom, {});
+
+                equal(dom.text(), "");
+            });
+
+            test("text binding displays null fields as empty string", function() {
+                var dom = $('<span data-bind="text:foo"></span>');
+                kendo.bind(dom, { foo: null});
+
+                equal(dom.text(), "");
+            });
+
+            test("value binding displays undefined fields as empty string", function() {
+                var dom = $('<input data-bind="value:foo"/>');
+                kendo.bind(dom, {});
+
+                equal(dom.val(), "");
+            });
+
+            test("value binding displays null fields as empty string", function() {
+                var dom = $('<input data-bind="value:foo"/>');
+                kendo.bind(dom, { foo:null });
+
+                equal(dom.val(), "");
+            });
+
+            test("visible binding to undefined hides the element", function() {
+                var dom = $('<span data-bind="visible:show"/>');
+                kendo.bind(dom, {});
+
+                equal(dom.css("display"), "none");
+            });
+
+            test("visible binding to null hides the element", function() {
+                var dom = $('<span data-bind="visible:show"/>');
+                kendo.bind(dom, {show:null});
+
+                equal(dom.css("display"), "none");
+            });
+
+            test("visible binding to zero hides the element", function() {
+                var dom = $('<span data-bind="visible:show"/>');
+                kendo.bind(dom, {show:0});
+
+                equal(dom.css("display"), "none");
+            });
+
+            test("visible binding to empty string hides the element", function() {
+                var dom = $('<span data-bind="visible:show"/>');
+                kendo.bind(dom, {show:""});
+
+                equal(dom.css("display"), "none");
+            });
+
+            test("invisible binding to undefined shows the element", function() {
+                var dom = $('<span data-bind="invisible:show" style="display:none"/>');
+                kendo.bind(dom, {});
+
+                ok(dom.css("display") != "none");
+            });
+
+            test("invisible binding to null shows the element", function() {
+                var dom = $('<span data-bind="invisible:show" style="display:none"/>');
+                kendo.bind(dom, {show:null});
+
+                ok(dom.css("display") != "none");
+            });
+
+            test("invisible binding to zero shows the element", function() {
+                var dom = $('<span data-bind="invisible:show" style="display:none"/>');
+                kendo.bind(dom, {show:0});
+
+                ok(dom.css("display") != "none");
+            });
+
+            test("invisible binding to empty string shows the element", function() {
+                var dom = $('<span data-bind="invisible:show" style="display:none"/>');
+                kendo.bind(dom, {show:""});
+
+                ok(dom.css("display") != "none");
+            });
         </script>
 
         <script id="select-template" type="text/x-kendo-template">
