@@ -13,18 +13,13 @@
     </div>
 
     <div style="width:45%">
-        <input name="files" id="files" type="file" />
+        @(Html.Kendo().Upload()
+            .Name("files")
+            .Async(a => a
+                .Save("Save", "Upload")
+                .Remove("Remove", "Upload")
+                .AutoUpload(true)
+            )
+        )
     </div>
-
-    <script>
-        $(document).ready(function() {
-            $("#files").kendoUpload({
-                async: {
-                    saveUrl: '@Url.Action("Save")',
-                    removeUrl: '@Url.Action("Remove")',
-                    autoUpload: true
-                }
-            });
-        });
-    </script>
 </div>
