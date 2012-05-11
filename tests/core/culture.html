@@ -80,8 +80,8 @@
                 equal(result, null);
             });
 
-            test("findCulture method argument if it is culture object", function() {
-                var culture = { name: "fr"};
+            test("findCulture method returns argument if it is a culture object", function() {
+                var culture = { numberFormat: {}};
                 var result = kendo.findCulture(culture);
 
                 equal(result, culture);
