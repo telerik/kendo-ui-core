@@ -285,7 +285,7 @@
             $(function(){
                 that._setupPlatform();
                 that._attachHideBarHandlers();
-                that.pane = new Pane(element, that.options);
+                that.pane = new Pane(that.element, that.options);
                 that._setupElementClass();
                 that._attachMeta();
                 that._setupDocumentTitle();
