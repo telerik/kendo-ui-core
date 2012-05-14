@@ -89,7 +89,6 @@ namespace Kendo.Mvc.UI
 
             ClientEvents = new GridClientEvents();
             Selection = new GridSelectionSettings();
-            ScriptFileNames.AddRange(new[] { "telerik.common.js", "telerik.grid.js" });
 
             ToolBar = new GridToolBarSettings<T>(this);
             Localization = new GridLocalization(localizationService, CultureInfo.CurrentUICulture);
@@ -359,7 +358,6 @@ namespace Kendo.Mvc.UI
         {
             Editing.Enabled = true;
 
-            RegisterEditingScriptFiles();
             return Button<GridEditActionCommand>(dataItem, buttonType, htmlAttributes, imageHtmlAttributes);
         }
 
@@ -381,7 +379,6 @@ namespace Kendo.Mvc.UI
         public object DeleteButton(T dataItem, GridButtonType buttonType, object htmlAttributes, object imageHtmlAttributes)
         {
             Editing.Enabled = true;
-            RegisterEditingScriptFiles();
             return Button<GridDeleteActionCommand>(dataItem, buttonType, htmlAttributes, imageHtmlAttributes);
         }
 
@@ -403,7 +400,6 @@ namespace Kendo.Mvc.UI
         public object InsertButton(GridButtonType buttonType, object htmlAttributes, object imageHtmlAttributes)
         {
             Editing.Enabled = true;
-            RegisterEditingScriptFiles();
             InitializeEditors();
             return Button<GridToolBarInsertCommand<T>>(null, buttonType, htmlAttributes, imageHtmlAttributes);
         }
@@ -426,7 +422,6 @@ namespace Kendo.Mvc.UI
         public object SubmitChangesButton(GridButtonType buttonType, object htmlAttributes, object imageHtmlAttributes)
         {
             Editing.Enabled = true;
-            RegisterEditingScriptFiles();
             InitializeEditors();
             return Button<GridToolBarSubmitChangesCommand<T>>(null, buttonType, htmlAttributes, imageHtmlAttributes);
         }
@@ -861,8 +856,6 @@ namespace Kendo.Mvc.UI
 #if MVC3
                 AdjustColumnsTypesFromDynamic();
 #endif
-                RegisterScriptFiles();
-
                 if (!HtmlAttributes.ContainsKey("id"))
                 {
                     HtmlAttributes["id"] = Id;
@@ -1187,83 +1180,6 @@ namespace Kendo.Mvc.UI
         }
 
 #endif
-
-        private void RegisterEditingScriptFiles()
-        {
-            if (Editing.Mode == GridEditMode.PopUp)
-            {
-                ScriptFileNames.Add("telerik.draganddrop.js");
-                ScriptFileNames.Add("telerik.window.js");
-            }
-            ScriptFileNames.Add("telerik.grid.editing.js");
-
-            if (Editing.Mode != GridEditMode.InLine)
-            {
-                var properties = typeof(T).GetProperties();
-
-                if (properties.Where(p => p.PropertyType.IsDateTime()).Any())
-                {
-                    ScriptFileNames.Insert(1, "telerik.calendar.js");
-                    ScriptFileNames.Insert(2, "telerik.datepicker.js");
-                }
-
-                if (properties.Where(p => p.PropertyType.IsDateTime()).Any())
-                {
-                    ScriptFileNames.Insert(1, "telerik.calendar.js");
-                    ScriptFileNames.Insert(2, "telerik.datepicker.js");
-                }
-
-                if (properties.Where(p => p.PropertyType.IsNumericType()).Any())
-                {
-                    ScriptFileNames.Insert(1, "telerik.textbox.js");
-                }
-            }
-        }
-        public void RegisterScriptFiles()
-        {
-            if (Filtering.Enabled)
-            {
-                ScriptFileNames.Add("telerik.grid.filtering.js");
-            }
-
-            if (Editing.Enabled)
-            {
-                RegisterEditingScriptFiles();
-            }
-
-            if (Grouping.Enabled)
-            {
-                ScriptFileNames.Add("telerik.draganddrop.js");
-                ScriptFileNames.Add("telerik.grid.grouping.js");
-            }
-
-            if (Resizing.Enabled)
-            {
-                ScriptFileNames.Add("telerik.draganddrop.js");
-                ScriptFileNames.Add("telerik.grid.resizing.js");
-            }
-            
-            if (Reordering.Enabled)
-            {
-                ScriptFileNames.Add("telerik.draganddrop.js");
-                ScriptFileNames.Add("telerik.grid.reordering.js");
-            }
-
-            var dateColumns = Columns.OfType<IGridBoundColumn>().Where(c => c.MemberType.IsDateTime());
-
-            if (dateColumns.Any())
-            {
-                ScriptFileNames.Insert(1, "telerik.calendar.js");
-                ScriptFileNames.Insert(2, "telerik.datepicker.js");
-            }
-
-            var numericColumns = Columns.OfType<IGridBoundColumn>().Where(c => c.MemberType.IsNumericType());
-
-            if (numericColumns.Any())
-            {
-                ScriptFileNames.Insert(1, "telerik.textbox.js");
-            }
-        }
 
         public bool AutoGenerateColumns { get; set; }
 

@@ -7,7 +7,6 @@ namespace Kendo.Mvc.UI
     using System.Web.Mvc;
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.Resources;
-    using Kendo.Mvc.UI;
 
     public class DateTimePicker : DatePickerBase
     {
@@ -18,8 +17,6 @@ namespace Kendo.Mvc.UI
         public DateTimePicker(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory)
             : base(viewContext, clientSideObjectWriterFactory)
         {
-            ScriptFileNames.AddRange(new[] { "telerik.common.js", "telerik.datetimepicker.js", "telerik.datepicker.js", "telerik.calendar.js", "telerik.timepicker.js" });
-
             defaultEffects.Each(el => Effects.Container.Add(el));
 
             DateTimeFormatInfo dateTimeFormats = CultureInfo.CurrentCulture.DateTimeFormat;

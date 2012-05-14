@@ -28,8 +28,6 @@ namespace Kendo.Mvc.UI
             UrlGenerator = urlGenerator;
             Authorization = authorization;
 
-            ScriptFileNames.AddRange(new[] { "telerik.common.js", "telerik.tabstrip.js" });
-
             this.Effects = new Effects();
             defaultEffects.Each(el => Effects.Container.Add(el));
 

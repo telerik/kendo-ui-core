@@ -42,8 +42,6 @@ namespace Kendo.Mvc.UI
 
             ClientEvents = new TreeViewClientEvents();
 
-            ScriptFileNames.AddRange(new[] { "telerik.common.js", "telerik.treeview.js" });
-
             DragAndDrop = new TreeViewDragAndDropSettings();
 
             DataBinding = new TreeViewDataBindingConfiguration();
@@ -266,11 +264,6 @@ namespace Kendo.Mvc.UI
         protected override void WriteHtml(HtmlTextWriter writer)
         {
             Guard.IsNotNull(writer, "writer");
-
-            if (DragAndDrop.Enabled)
-            {
-                ScriptFileNames.Insert(1, "telerik.draganddrop.js");
-            }
 
             ITreeViewHtmlBuilder builder = builderFactory.Create(this);
 

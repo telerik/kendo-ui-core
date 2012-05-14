@@ -73,45 +73,6 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
-        /// Sets the web asset key for the component.
-        /// </summary>
-        /// <param name="key">The key.</param>
-        /// <returns></returns>
-        public virtual TBuilder AssetKey(string key)
-        {
-            Component.AssetKey = key;
-
-            return this as TBuilder;
-        }
-
-        /// <summary>
-        /// Sets the Scripts files path.. Path must be a virtual path.
-        /// </summary>
-        /// <param name="path">The path.</param>
-        /// <returns></returns>
-        public virtual TBuilder ScriptFilesPath(string path)
-        {
-            Component.ScriptFilesPath = path;
-
-            return this as TBuilder;
-        }
-
-        /// <summary>
-        /// Sets the Script file names.
-        /// </summary>
-        /// <param name="names">The names.</param>
-        /// <returns></returns>
-        public virtual TBuilder ScriptFileNames(params string[] names)
-        {
-            Guard.IsNotNullOrEmpty(names, "names");
-
-            Component.ScriptFileNames.Clear();
-            Component.ScriptFileNames.AddRange(names);
-
-            return this as TBuilder;
-        }
-
-        /// <summary>
         /// Sets the HTML attributes.
         /// </summary>
         /// <param name="attributes">The HTML attributes.</param>

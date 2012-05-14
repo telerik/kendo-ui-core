@@ -15,8 +15,6 @@ namespace Kendo.Mvc.UI
         public AutoComplete(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory, IUrlGenerator urlGenerator)
             : base(viewContext, clientSideObjectWriterFactory)
         {
-            ScriptFileNames.AddRange(new[] { "telerik.common.js", "telerik.list.js", "telerik.autocomplete.js" });
-
             UrlGenerator = urlGenerator;
 
             ClientEvents = new DropDownClientEvents();

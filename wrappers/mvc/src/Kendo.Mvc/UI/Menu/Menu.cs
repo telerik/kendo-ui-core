@@ -31,8 +31,6 @@ namespace Kendo.Mvc.UI
 
             ClientEvents = new MenuClientEvents();
 
-            ScriptFileNames.AddRange(new[] { "telerik.common.js", "telerik.menu.js" });
-
             this.Effects = new Effects();
             defaultEffects.Each(el => Effects.Container.Add(el));
 

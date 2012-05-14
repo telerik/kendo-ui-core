@@ -4,10 +4,8 @@ namespace Kendo.Mvc.UI
     using System.IO;
     using System.Linq;
     using System.Web.Mvc;
-    using System.Web.Query.Dynamic;
     using System.Web.UI;
     using Kendo.Mvc.Extensions;
-    using Kendo.Mvc.UI;
     using Kendo.Mvc.UI.Html;
 
     public class Splitter : ViewComponentBase
@@ -15,11 +13,6 @@ namespace Kendo.Mvc.UI
         public Splitter(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory)
             : base(viewContext, clientSideObjectWriterFactory)
         {
-            ScriptFileNames.AddRange(new[] {
-                "telerik.common.js", 
-                "telerik.draganddrop.js", 
-                "telerik.splitter.js" 
-            });
 
             Orientation = SplitterOrientation.Horizontal;
 

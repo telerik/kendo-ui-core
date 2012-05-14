@@ -23,15 +23,6 @@ namespace Kendo.Mvc.UI
         {
             this.urlGenerator = urlGenerator;
 
-            ScriptFileNames.AddRange(new[] {
-                "telerik.common.js", 
-                "telerik.list.js", 
-                "telerik.combobox.js", 
-                "telerik.draganddrop.js", 
-                "telerik.window.js", 
-                "telerik.editor.js" 
-            });
-
             DefaultToolGroup = new EditorToolGroup(this);
 
             ClientEvents = new EditorClientEvents();
@@ -160,16 +151,6 @@ namespace Kendo.Mvc.UI
 
         protected override void WriteHtml(HtmlTextWriter writer)
         {
-            if (FileBrowserSettings.Upload.HasValue())
-            {
-                ScriptFileNames.Add("telerik.upload.js");
-            }
-            
-            if (FileBrowserSettings.Select.HasValue())
-            {
-                ScriptFileNames.Add("telerik.imagebrowser.js");
-            }
-
             new EditorHtmlBuilder(this)
                 .Build()
                 .WriteTo(writer);

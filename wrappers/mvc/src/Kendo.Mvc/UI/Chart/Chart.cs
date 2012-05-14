@@ -27,8 +27,6 @@ namespace Kendo.Mvc.UI
         public Chart(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory, IUrlGenerator urlGenerator)
             : base(viewContext, clientSideObjectWriterFactory)
         {
-            ScriptFileNames.AddRange(new[] { "telerik.common.js", "telerik.chart.js" });
-
             ClientEvents = new ChartClientEvents();
             UrlGenerator = urlGenerator;
             Title = new ChartTitle();
