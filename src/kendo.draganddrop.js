@@ -449,11 +449,15 @@
 
     var Tap = Observable.extend({
         init: function(element, options) {
-            var that = this;
+            var that = this,
+                domElement = element[0];
 
             that.capture = false;
-            element[0].addEventListener(START_EVENTS, proxy(that._press, that), true);
-            element.on(END_EVENTS, proxy(that._release, that));
+            domElement.addEventListener(START_EVENTS, proxy(that._press, that), true);
+            $.each(END_EVENTS.split(" "), function() {
+                domElement.addEventListener(this, proxy(that._release, that), true);
+            });
+
             Observable.fn.init.call(that);
 
             that.bind(["press", "release"], options || {});
@@ -464,9 +468,6 @@
             that.trigger("press");
             if (that.capture) {
                 e.preventDefault();
-                if (e.originalEvent) {
-                    e.originalEvent.preventDefault();
-                }
             }
         },
 
@@ -476,9 +477,6 @@
 
             if (that.capture) {
                 e.preventDefault();
-                if (e.originalEvent) {
-                    e.originalEvent.preventDefault();
-                }
                 that.cancelCapture();
             }
         },
