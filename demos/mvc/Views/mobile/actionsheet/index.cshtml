@@ -41,13 +41,27 @@
             ID: 3,
             From: "Jane Parker",
             Subject: "Your Costume is ready",
-            Text: "Hi mr.Sawyer, I'm sorry for the delay, your Halloween costume is ready. The bears...",
+            Text: "Hi mr. Sawyer, I'm sorry for the delay, your Halloween costume is ready. The bears...",
+            Time: "10:14"
+        },
+        {
+            ID: 4,
+            From: "Joe Harper",
+            Subject: "I'm sorry, Tom",
+            Text: "Hi Tom, my aunt comes for a visit this Saturday, so I can't come back to St. Pete...",
+            Time: "10:14"
+        },
+        {
+            ID: 5,
+            From: "Becky Thatcher",
+            Subject: "Out tonight?",
+            Text: "Honey, wanna go out tonight to grab some chicken? My weekly vouchers for cooking...",
             Time: "10:14"
         }
     ];
 
     function onOpen(e) {
-        this.element.find(".km-actionsheet-title").text(e.target.prev().text());
+        this.element.find(".km-actionsheet-title").text(e.target.next().text());
     }
 
     function reply(e) {
