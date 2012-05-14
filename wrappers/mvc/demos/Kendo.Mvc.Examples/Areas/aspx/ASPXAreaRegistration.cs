@@ -8,7 +8,7 @@ namespace Kendo.Mvc.Web.Examples.Areas.ASPX
         {
             get
             {
-                return "ASPX";
+                return "aspx";
             }
         }
 

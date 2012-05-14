@@ -37,6 +37,14 @@ namespace Kendo.Mvc.UI.Tests.Upload
         }
 
         [Fact]
+        public void Default_configuration_outputs_empty_kendoUpload_init()
+        {
+            upload.WriteInitializationScript(textWriter.Object);
+
+            output.ShouldContain("jQuery('#Upload').kendoUpload();");
+        }
+
+        [Fact]
         public void Enabled_state_serialized_when_false()
         {
             upload.Enabled = false;
@@ -123,7 +131,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
             upload.Async.AutoUpload = false;
             upload.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("");
+            output.ShouldContain("jQuery('#Upload').kendoUpload();");
         }
 
         [Fact]
@@ -132,7 +140,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
             upload.ClientEvents.OnLoad.HandlerName = "loadHandler";
             upload.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{onLoad:loadHandler}");
+            output.ShouldContain("{load:loadHandler}");
         }
 
         [Fact]
@@ -141,7 +149,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
             upload.ClientEvents.OnSelect.HandlerName = "selectHandler";
             upload.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{onSelect:selectHandler}");
+            output.ShouldContain("{select:selectHandler}");
         }
 
         [Fact]
@@ -150,7 +158,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
             upload.ClientEvents.OnUpload.HandlerName = "uploadHandler";
             upload.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{onUpload:uploadHandler}");
+            output.ShouldContain("{upload:uploadHandler}");
         }
 
         [Fact]
@@ -159,7 +167,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
             upload.ClientEvents.OnSuccess.HandlerName = "successHandler";
             upload.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{onSuccess:successHandler}");
+            output.ShouldContain("{success:successHandler}");
         }
 
         [Fact]
@@ -168,7 +176,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
             upload.ClientEvents.OnError.HandlerName = "errorHandler";
             upload.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{onError:errorHandler}");
+            output.ShouldContain("{error:errorHandler}");
         }
 
         [Fact]
@@ -177,7 +185,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
             upload.ClientEvents.OnComplete.HandlerName = "completeHandler";
             upload.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{onComplete:completeHandler}");
+            output.ShouldContain("{complete:completeHandler}");
         }
 
         [Fact]
@@ -186,7 +194,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
             upload.ClientEvents.OnCancel.HandlerName = "cancelHandler";
             upload.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{onCancel:cancelHandler}");
+            output.ShouldContain("{cancel:cancelHandler}");
         }
 
         [Fact]
@@ -195,7 +203,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
             upload.ClientEvents.OnRemove.HandlerName = "removeHandler";
             upload.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{onRemove:removeHandler}");
+            output.ShouldContain("{remove:removeHandler}");
         }
 
         [Fact]

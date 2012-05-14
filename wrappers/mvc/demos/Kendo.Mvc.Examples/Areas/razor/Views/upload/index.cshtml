@@ -12,15 +12,12 @@
     </div>
     <form method="post" action='@Url.Action("Submit")' style="width:45%">
         <div>
-            <input name="files" id="files" type="file" />
+            @(Html.Kendo().Upload()
+                .Name("files")
+            )
             <p>
                 <input type="submit" value="Submit" class="k-button" />
             </p>
         </div>
     </form>
-    <script>
-        $(document).ready(function() {
-            $("#files").kendoUpload();
-        });
-    </script>
 </div>

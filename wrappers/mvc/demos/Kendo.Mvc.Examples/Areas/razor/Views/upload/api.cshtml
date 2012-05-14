@@ -14,17 +14,16 @@
         </ul>
     </div>
     <form method="post" style="width:45%">
-        <div>
-            <input name="files" id="files" type="file" />
-        </div>
+        @(Html.Kendo().Upload()
+            .Name("files")
+        )
     </form>
     <script>
         function getUpload() {
             return $("#files").data("kendoUpload");
         }
-        $(document).ready(function() {
-            $("#files").kendoUpload();
 
+        $(document).ready(function() {
             $(".toggleEnabled").click(function() {
                 getUpload().toggle();
             });
