@@ -9,9 +9,10 @@ namespace Kendo.Mvc.Examples.Controllers
 {
     public class SuiteController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index(string suite)
         {
-            ViewBag.Navigation = NavigationProvider.SuiteWidgets();
+            ViewBag.Navigation = NavigationProvider.SuiteWidgets(suite);
+            
             return View();
         }
     }

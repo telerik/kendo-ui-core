@@ -18,7 +18,7 @@ namespace Kendo.Mvc.Examples.Areas.Razor
         {
             var exampleRoute = context.MapRoute(
                 "RazorExample",
-                "razor/{controller}/{action}.html"
+                "razor/{suite}/{controller}/{action}.html"
             );
 
             // The 'UseNamespaceFallback' token will allow the runtime to use the controllers defined outside the area
@@ -27,7 +27,7 @@ namespace Kendo.Mvc.Examples.Areas.Razor
 
             var razorRoute = context.MapRoute(
                 "RazorDefault",
-                "razor/{controller}/{action}",
+                "razor/{suite}/{controller}/{action}",
                 new { controller = "Suite", action = "Index" }
             );
 

@@ -16,7 +16,7 @@ namespace Kendo.Mvc.Examples.Areas.ASPX
         {
             var aspxRoute = context.MapRoute(
                 "ASPXDefault",
-                "aspx/{controller}/{action}",
+                "aspx/{suite}/{controller}/{action}",
                 new { controller = "Suite", action = "Index" }
             );
 

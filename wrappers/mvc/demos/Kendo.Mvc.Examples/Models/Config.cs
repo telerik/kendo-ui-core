@@ -8,11 +8,16 @@ namespace Kendo.Mvc.Examples.Models
 {
     public static class Config
     {
-        public static readonly string NavigationData;
+        private static readonly string NavigationData;
 
         static Config()
         {
             NavigationData = ConfigurationManager.AppSettings["NavigationData"];
+        }
+
+        public static string SuiteNavigationData(string suite)
+        {
+            return NavigationData.Replace("{suite}", suite);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Kendo.Mvc.Examples.Controllers
     {
         public ActionResult Index()
         {
-            return RedirectToRoute("RazorDefault", new { controller = "Suite" });
+            return View();
         }
     }
 }
