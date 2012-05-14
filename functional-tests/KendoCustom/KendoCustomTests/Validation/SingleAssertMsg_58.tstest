@@ -67,7 +67,7 @@
       <d2p1:Order>1</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>cc0b4165-e652-4ec8-91fb-e7649e9847be</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>7f03d0ca-2e82-459e-a113-fd7da432123b</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints xmlns:d5p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
           <d5p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -101,12 +101,12 @@
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
       <d2p1:Description>Navigate to : 'C:\work\GitHub\kendo\functional-tests\KendoCustom\KendoCustomSites\Validation\DotsInInputName.html'</d2p1:Description>
-      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Enabled>false</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>d750c19a-cf61-4431-8090-34a946b7adad</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>6d84ede2-4a8c-4a81-8e38-1aac8866671b</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints xmlns:d5p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
           <d5p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -145,7 +145,7 @@
       <d2p1:Order>3</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>90e2bc13-5228-4bb9-bd06-a65fb8b87f37</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>352c7e6d-1117-4032-a71a-61d82135670f</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints xmlns:d5p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
           <d5p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -232,7 +232,7 @@
       <d2p1:Order>4</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>4ff21515-2e59-42b9-a42e-b79add65f6ee</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>3a13d86f-3394-4441-8558-d1f4dc0fc756</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints xmlns:d5p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
           <d5p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -325,7 +325,7 @@
       <d2p1:Order>5</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>89041cc3-9489-4cce-8f39-540c6b089ce9</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>3a1c5e3b-bd92-4ac0-97f9-264885dc84db</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ExistsVerificationDescriptor">
         <d2p1:Constraints xmlns:d5p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
           <d5p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -415,7 +415,7 @@
       <d2p1:Order>6</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>71c2add2-4f0e-497e-9c38-47a68332dc88</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>6c3a628a-b777-4ccb-9417-065b31448d5f</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ExistsVerificationDescriptor">
         <d2p1:Constraints xmlns:d5p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
           <d5p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
