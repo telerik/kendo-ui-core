@@ -196,6 +196,11 @@
          *     format: "yyyy/MM/dd hh:mm tt",
          *     parseFormats: ["MMMM yyyy", "HH:mm"] //format also will be added to parseFormats
          * });
+         * @option {Array} [dates] <> Specifies a list of dates, which are shown in the time drop-down list. If not set, the DateTimePicker will auto-generate the available times.
+         *  _example
+         * $("#dateTimePicker").kendoDateTimePicker({
+         *     dates: [new Date(2000, 10, 10, 10, 0, 0), new Date(2000, 10, 10, 30, 0)] //the drop-down list will consist only two entries - "10:00 AM" and "10:30 AM"
+         * });
          * @option {Number} [interval] <30> Specifies the interval, between values in the popup list, in minutes.
          * _example
          * $("#dateTimePicker").kendoDateTimePicker({
