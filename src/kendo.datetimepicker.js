@@ -493,6 +493,8 @@
 
             extend(that.dateView.options, that.options);
             extend(that.timeView.options, that.options);
+
+            that.timeView.ul[0].innerHTML = "";
         },
 
         /**

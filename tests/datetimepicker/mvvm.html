@@ -351,6 +351,15 @@
 
                 ok(dom.data("kendoDateTimePicker").wrapper.css("display") != "none", "display is not 'none'");
             });
+
+            test("setOptions clears the li elements of the TimeView", function() {
+                var datetimepicker = new kendo.ui.DateTimePicker($('<input data-role="datetimepicker"/>'));
+
+                datetimepicker.open("time");
+                datetimepicker.setOptions({});
+
+                equal(datetimepicker.timeView.ul[0].firstChild, null);
+            });
         </script>
 
         <div id="qunit-fixture">test markup, will be hidden</div>
