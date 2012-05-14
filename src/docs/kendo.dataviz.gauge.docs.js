@@ -158,7 +158,6 @@
          * The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coordinat system)
          * @option {number} [scale.endAngle] <210> The end angle of the gauge.
          * The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coordinat system)
-         * @option {number} [scale.endAngle] <210> The end angle of the gauge.
          * @option {Number} [scale.min] <0> The minimum value of the scale.
          * @option {Number} [scale.max] <100> The maximum value of the scale.
          * @option {Boolean} [scale.reverse] <false>
