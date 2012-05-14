@@ -418,7 +418,6 @@
 
         _setupElementClass: function() {
             var that = this,
-                view = that.view(),
                 osCssClass = that.options.platform ? "km-" + that.options.platform : that.osCssClass,
                 element = that.element;
 
@@ -464,7 +463,6 @@
             }
 
             that._initialHeight = {};
-            that._lastOrientation = -1;
 
             if (HIDEBAR) {
                 WINDOW.on("load", hideBar);
@@ -488,10 +486,7 @@
                 element = that.element,
                 orientation = window.orientation + "",
                 initialHeight = that._initialHeight,
-                lastOrientation = that._lastOrientation,
                 newHeight;
-
-            that._lastOrientation = orientation;
 
             if (!initialHeight[orientation]) {
                 initialHeight[orientation] = WINDOW.height();
