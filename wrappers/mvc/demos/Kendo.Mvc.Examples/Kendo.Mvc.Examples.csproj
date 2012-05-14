@@ -95,6 +95,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\aspx\Views\upload\api.aspx" />
+    <Content Include="Areas\aspx\Views\upload\async.aspx" />
+    <Content Include="Areas\aspx\Views\upload\events.aspx" />
+    <Content Include="Areas\aspx\Views\upload\index.aspx" />
+    <Content Include="Areas\aspx\Views\upload\result.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\jquery-1.7.2.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />

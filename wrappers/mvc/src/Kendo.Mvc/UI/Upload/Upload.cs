@@ -123,7 +123,7 @@ namespace Kendo.Mvc.UI
         /// <param name="writer">The writer object.</param>
         public override void WriteInitializationScript(TextWriter writer)
         {
-            var objectWriter = ClientSideObjectWriterFactory.Create(Id, "tUpload", writer);
+            var objectWriter = ClientSideObjectWriterFactory.Create(Id, "kendoUpload", writer);
 
             objectWriter.Start();
 

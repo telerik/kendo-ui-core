@@ -326,17 +326,6 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
-        /// UI primitives for Upload
-        /// </summary>
-        public static class Upload
-        {
-            /// <summary>
-            /// Upload button
-            /// </summary>
-            public const string Button = "k-button t-upload-button";
-        }
-
-        /// <summary>
         /// Contains CSS classes, used in the window
         /// </summary>
         public static class Window

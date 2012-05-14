@@ -98,14 +98,14 @@ namespace Kendo.Mvc.UI
         /// <param name="writer">The writer object to serialize to.</param>
         public void SerializeTo(IClientSideObjectWriter writer)
         {
-            writer.AppendClientEvent("onLoad", OnLoad);
-            writer.AppendClientEvent("onSelect", OnSelect);
-            writer.AppendClientEvent("onUpload", OnUpload);
-            writer.AppendClientEvent("onSuccess", OnSuccess);
-            writer.AppendClientEvent("onError", OnError);
-            writer.AppendClientEvent("onComplete", OnComplete);
-            writer.AppendClientEvent("onCancel", OnCancel);
-            writer.AppendClientEvent("onRemove", OnRemove);
+            writer.AppendClientEvent("load", OnLoad);
+            writer.AppendClientEvent("select", OnSelect);
+            writer.AppendClientEvent("upload", OnUpload);
+            writer.AppendClientEvent("success", OnSuccess);
+            writer.AppendClientEvent("error", OnError);
+            writer.AppendClientEvent("complete", OnComplete);
+            writer.AppendClientEvent("cancel", OnCancel);
+            writer.AppendClientEvent("remove", OnRemove);
         }
     }
 }

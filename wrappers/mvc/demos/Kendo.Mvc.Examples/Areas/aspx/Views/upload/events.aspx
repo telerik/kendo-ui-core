@@ -1,3 +1,9 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+
+<asp:Content ContentPlaceHolderID="HeadContent" runat="server">
+</asp:Content>
+
+<asp:Content ContentPlaceHolderID="MainContent" runat="server">
 <div id="example" class="k-content">
     <div class="configuration k-widget k-header" style="width: 300px">
         <span class="infoHead">Information</span>
@@ -6,7 +12,7 @@
         </p>
     </div>
     <div style="width:45%">
-        @(Html.Kendo().Upload()
+        <%= Html.Kendo().Upload()
             .Name("files")
             .Async(a => a
                 .Save("Save", "Upload")
@@ -22,7 +28,7 @@
                 .OnCancel("onCancel")
                 .OnRemove("onRemove")
             )
-        )
+        %>
     </div>
     <script>
         function onSelect(e) {
@@ -68,3 +74,4 @@
     </script>
 </div>
 <div class="console"></div>
+</asp:Content>
