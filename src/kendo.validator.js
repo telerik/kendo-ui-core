@@ -34,6 +34,21 @@
         },
         nameSpecialCharRegExp = /(\[|\]|\$|\.|\:|\+)/g;
 
+    if (!kendo.ui.validator) {
+        kendo.ui.validator = { rules: {}, messages: {} };
+    }
+
+    function resolveRules(element) {
+        var resolvers = kendo.ui.validator.rulesResolvers || {},
+            rules = {},
+            name;
+
+        for (name in resolvers) {
+            $.extend(true, rules, resolvers[name].resolve(element));
+        }
+        return rules;
+    }
+
     /**
      *  @name kendo.ui.Validator.Description
      *
@@ -189,7 +204,13 @@
          * @option {Boolean} [validateOnBlur] Determines if validation will be triggered when element loses focus. Default value is true.
          */
         init: function(element, options) {
-            var that = this;
+            var that = this,
+                resolved = resolveRules(element);
+
+            options = options || {};
+
+            options.rules = $.extend({}, kendo.ui.validator.rules, resolved.rules, options.rules);
+            options.messages = $.extend({}, kendo.ui.validator.messages, resolved.messages, options.messages);
 
             Widget.fn.init.call(that, element, options);
 
@@ -223,7 +244,6 @@
                         value = input.val();
 
                     return !(hasAttribute(input, "required") && (value === "" || !value  || checkbox));
-
                 },
                 pattern: function(input) {
                     if (input.filter("[type=text],[type=email],[type=url],[type=tel],[type=search]").filter("[pattern]").length && input.val() !== "") {
@@ -354,14 +374,15 @@
                 valid = result.valid,
                 className = "." + INVALIDMSG,
                 fieldName = (input.attr(NAME) || ""),
-                DATAFOR = kendo.attr("for"),
-                lbl = that.element.find(className + "[" + DATAFOR +"=" + fieldName.replace(nameSpecialCharRegExp, "\\$1") + "]").add(input.next(className)).hide(),
+                lbl = that._findMessageContainer(fieldName).add(input.next(className)).hide(),
                 messageText;
 
             if (!valid) {
                 messageText = that._extractMessage(input, result.key);
                 that._errors[fieldName] = messageText;
-                var messageLabel = $(template({ message: messageText })).addClass(INVALIDMSG).attr(DATAFOR, fieldName || "");
+                var messageLabel = $(template({ message: messageText }));
+
+                that._decorateMessageContainer(messageLabel, fieldName);
 
                 if (!lbl.replaceWith(messageLabel).length) {
                     messageLabel.insertAfter(input);
@@ -372,6 +393,29 @@
             input.toggleClass(INVALIDINPUT, !valid);
 
             return valid;
+        },
+
+        _findMessageContainer: function(fieldName) {
+            var locators = kendo.ui.validator.messageLocators,
+                name,
+                containers = this.element.find("." + INVALIDMSG + "[" + kendo.attr("for") +"=" + fieldName.replace(nameSpecialCharRegExp, "\\$1") + "]");
+
+            for (name in locators) {
+                containers = containers.add(locators[name].locate(this.element, fieldName));
+            }
+
+            return containers;
+        },
+
+        _decorateMessageContainer: function(container, fieldName) {
+            var locators = kendo.ui.validator.messageLocators,
+                name;
+
+            container.addClass(INVALIDMSG).attr(kendo.attr("for"), fieldName || "");
+
+            for (name in locators) {
+                locators[name].decorate(container, fieldName);
+            }
         },
 
         _extractMessage: function(input, ruleKey) {
