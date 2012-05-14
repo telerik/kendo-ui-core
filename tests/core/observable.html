@@ -237,6 +237,24 @@
 
                 observable.trigger("foo");
             });
+
+            test("first adds handle first", function() {
+                var observable = new Observable(),
+                    order = [];
+
+                observable.bind("foo", function(e) {
+                    order.push("bind");
+                });
+
+                observable.first("foo", function(e) {
+                    order.push("first");
+                });
+
+                observable.trigger("foo");
+
+                equal(order[0], "first");
+                equal(order[1], "bind");
+            });
         </script>
     </body>
 </html>
