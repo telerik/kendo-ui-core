@@ -1,20 +1,21 @@
 ﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
-<html lang="en-US" xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title>Telerik Extensions for ASP.NET MVC Demos</title>
+<!DOCTYPE html>
+<html>
+<head id="Head1" runat="server">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+    <meta charset="utf-8" />
+    <link href="<%= Url.Content("~/Content/kendo.common.min.css") %>" rel="stylesheet" type="text/css" />
+    <link href="<%= Url.Content("~/Content/kendo.default.min.css") %>" rel="stylesheet" type="text/css" />
+    <link href="<%= Url.Content("~/Content/examples-offline.css") %>" rel="stylesheet" type="text/css" />
+    <script src="<%= Url.Content("~/Scripts/jquery-1.7.2.min.js") %>"></script>
+    <script src="<%= Url.Content("~/Scripts/kendo.web.min.js") %>"></script>
+    <script src="<%= Url.Content("~/Scripts/console.js") %>"></script>
     <asp:ContentPlaceHolder runat="server" ID="HeadContent" />
 </head>
 <body>
-    <div id="page">
-        <h1 id="title"><%= Html.ActionLink("Telerik Extensions for ASP.NET MVC", "FirstLook", "Home") %></h1>
-        <div id="main">
-            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
-		
-		    <div class="corner rc-bottomleft"></div>
-		    <div class="corner rc-bottomright"></div>
-        </div>
+    <div class="page">
+        <a href="../">Back</a>
+        <asp:ContentPlaceHolder ID="MainContent" runat="server" />
     </div>
 </body>
 </html>
