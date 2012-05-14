@@ -177,7 +177,7 @@
 
             test("value method parse passed value using options.parseFormats", function() {
                     var datetimepicker = input.kendoDateTimePicker({
-                        parseFormats: ["MMMM yyyy"],
+                        parseFormats: ["MMMM yyyy"]
                     }).data("kendoDateTimePicker"),
                     date = new Date(2000, 10, 1),
                     dateString = kendo.toString(date, "MMMM yyyy");
@@ -185,6 +185,18 @@
                 datetimepicker.value(dateString);
 
                 equal(+datetimepicker._value, +date);
+            });
+
+            test("value method sets timeView's min date", function() {
+                    var date = new Date(2000, 10, 1, 16, 0, 0),
+                        datetimepicker = input.kendoDateTimePicker({
+                            value: new Date(),
+                            min: date
+                        }).data("kendoDateTimePicker");
+
+                datetimepicker.value(new Date(2000, 10, 1, 16, 0, 1));
+
+                equal(+datetimepicker.timeView.options.min, +date);
             });
 
             test("enable method with false value disables the widget", function() {
@@ -267,7 +279,7 @@
                 equal(+datetimepicker.options.min, +value);
             });
 
-            test("min() calls min method of the DateView and refreshes TimeView", function() {
+            test("min() calls min method of the DateView", function() {
                 var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker"),
                     value = new Date(2000, 10, 10, 10, 10, 0);
 
@@ -277,7 +289,18 @@
                 datetimepicker.min(value);
 
                 equal(datetimepicker.dateView.calls("min"), 1);
-                equal(datetimepicker.timeView.calls("refresh"), 1);
+            });
+
+            test("min method does not set TimeView.options.min", function() {
+                var datetimepicker = input.kendoDateTimePicker({
+                        value: new Date(2010, 10, 10)
+                    }).data("kendoDateTimePicker"),
+                    min = new Date(2000, 10, 10, 10, 10, 0),
+                    oldMin = +datetimepicker.options.min;
+
+                datetimepicker.min(min);
+
+                equal(+datetimepicker.timeView.options.min, oldMin);
             });
 
             test("max() returns max value", function() {
@@ -298,17 +321,27 @@
                 equal(+datetimepicker.options.max, +value);
             });
 
-            test("max() should calls max methods of DateView and refreshes TimeView", function() {
+            test("max() calls max methods of DateView", function() {
                 var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker"),
                     value = new Date(2000, 10, 10, 10, 10, 0);
 
                 stub(datetimepicker.dateView, { max: datetimepicker.dateView.max });
-                stub(datetimepicker.timeView, { refresh: datetimepicker.timeView.refresh });
 
                 datetimepicker.max(value);
 
                 equal(datetimepicker.dateView.calls("max"), 1);
-                equal(datetimepicker.timeView.calls("refresh"), 1);
+            });
+
+            test("max method does not set TimeView.options.max", function() {
+                var datetimepicker = input.kendoDateTimePicker({
+                        value: new Date(2010, 10, 10)
+                    }).data("kendoDateTimePicker"),
+                    max = new Date(2020, 10, 10, 10, 10, 0),
+                    oldMax = +datetimepicker.options.max;
+
+                datetimepicker.max(max);
+
+                equal(+datetimepicker.timeView.options.max, oldMax);
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
