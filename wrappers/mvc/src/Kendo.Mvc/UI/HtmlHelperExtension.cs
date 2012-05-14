@@ -21,21 +21,9 @@ namespace Kendo.Mvc.UI
         {
             Guard.IsNotNull(helper, "helper");
 
-            ViewContext viewContext = helper.ViewContext;
-            HttpContextBase httpContext = viewContext.HttpContext;
-            
-            ScriptWrapperBase scriptWrapper = DI.Current.Resolve<ScriptWrapperBase>();
-            IClientSideObjectWriterFactory clientSideObjectWriterFactory = DI.Current.Resolve<IClientSideObjectWriterFactory>();
+            var clientSideObjectWriterFactory = DI.Current.Resolve<IClientSideObjectWriterFactory>();
 
-            StyleSheetRegistrar styleSheetRegistrar = httpContext.Items[StyleSheetRegistrar.Key] as StyleSheetRegistrar ??
-                                                        new StyleSheetRegistrar(new WebAssetCollection(WebAssetDefaultSettings.StyleSheetFilesPath), viewContext, DI.Current.Resolve<IWebAssetCollectionResolver>());
-            ScriptRegistrar scriptRegistrar = httpContext.Items[ScriptRegistrar.Key] as ScriptRegistrar ??
-                                                        new ScriptRegistrar(new WebAssetCollection(WebAssetDefaultSettings.ScriptFilesPath), new List<IScriptableComponent>(), viewContext, DI.Current.Resolve<IWebAssetCollectionResolver>(), scriptWrapper);
-
-            StyleSheetRegistrarBuilder styleSheetRegistrarBuilder = StyleSheetRegistrarBuilder.Create(styleSheetRegistrar);
-            ScriptRegistrarBuilder scriptRegistrarBuilder = ScriptRegistrarBuilder.Create(scriptRegistrar);
-
-            return new ViewComponentFactory(helper, clientSideObjectWriterFactory, styleSheetRegistrarBuilder, scriptRegistrarBuilder);
+            return new ViewComponentFactory(helper, clientSideObjectWriterFactory);
         }
 
 #if MVC2 || MVC3
@@ -48,21 +36,9 @@ namespace Kendo.Mvc.UI
         {
             Guard.IsNotNull(helper, "helper");
 
-            ViewContext viewContext = helper.ViewContext;
-            HttpContextBase httpContext = viewContext.HttpContext;
+            var clientSideObjectWriterFactory = DI.Current.Resolve<IClientSideObjectWriterFactory>();
 
-            ScriptWrapperBase scriptWrapper = DI.Current.Resolve<ScriptWrapperBase>();
-            IClientSideObjectWriterFactory clientSideObjectWriterFactory = DI.Current.Resolve<IClientSideObjectWriterFactory>();
-
-            StyleSheetRegistrar styleSheetRegistrar = httpContext.Items[StyleSheetRegistrar.Key] as StyleSheetRegistrar ??
-                                                        new StyleSheetRegistrar(new WebAssetCollection(WebAssetDefaultSettings.StyleSheetFilesPath), viewContext, DI.Current.Resolve<IWebAssetCollectionResolver>());
-            ScriptRegistrar scriptRegistrar = httpContext.Items[ScriptRegistrar.Key] as ScriptRegistrar ??
-                                                        new ScriptRegistrar(new WebAssetCollection(WebAssetDefaultSettings.ScriptFilesPath), new List<IScriptableComponent>(), viewContext, DI.Current.Resolve<IWebAssetCollectionResolver>(), scriptWrapper);
-
-            StyleSheetRegistrarBuilder styleSheetRegistrarBuilder = StyleSheetRegistrarBuilder.Create(styleSheetRegistrar);
-            ScriptRegistrarBuilder scriptRegistrarBuilder = ScriptRegistrarBuilder.Create(scriptRegistrar);
-
-            return new ViewComponentFactory<TModel>(helper, clientSideObjectWriterFactory, styleSheetRegistrarBuilder, scriptRegistrarBuilder);
+            return new ViewComponentFactory<TModel>(helper, clientSideObjectWriterFactory);
         }
 #endif
     }

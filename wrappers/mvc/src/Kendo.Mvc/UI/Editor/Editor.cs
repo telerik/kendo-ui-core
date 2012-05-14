@@ -13,17 +13,14 @@ namespace Kendo.Mvc.UI
 
     public class Editor : ViewComponentBase
     {
-        private readonly IWebAssetCollectionResolver resolver;
         private readonly IUrlGenerator urlGenerator;
 
         public Editor(ViewContext viewContext, 
             IClientSideObjectWriterFactory clientSideObjectWriterFactory, 
-            IWebAssetCollectionResolver resolver, 
             ILocalizationService localizationService,
             IUrlGenerator urlGenerator)
             : base(viewContext, clientSideObjectWriterFactory)
         {
-            this.resolver = resolver;
             this.urlGenerator = urlGenerator;
 
             ScriptFileNames.AddRange(new[] {
@@ -38,8 +35,6 @@ namespace Kendo.Mvc.UI
             DefaultToolGroup = new EditorToolGroup(this);
 
             ClientEvents = new EditorClientEvents();
-
-            StyleSheets = new WebAssetGroup("default", false) { DefaultPath = WebAssetDefaultSettings.StyleSheetFilesPath };
 
             Localization = new EditorLocalization(localizationService, CultureInfo.CurrentUICulture);
 
@@ -83,12 +78,6 @@ namespace Kendo.Mvc.UI
         }
 
         public EditorToolGroup DefaultToolGroup
-        {
-            get;
-            private set;
-        }
-
-        public WebAssetGroup StyleSheets
         {
             get;
             private set;
@@ -160,22 +149,6 @@ namespace Kendo.Mvc.UI
             if (Encode.HasValue && !Encode.Value)
             {
                 objectWriter.Append("encoded", Encode.Value);
-            }
-
-            if (StyleSheets.Items.Any())
-            {
-                var isSecured = ViewContext.HttpContext.Request.IsSecureConnection;
-                var canCompress = ViewContext.HttpContext.Request.CanCompress();
-
-                var mergedGroup = resolver.Resolve(new ResolverContext
-                {
-                    ContentType = "text/css",
-                    HttpHandlerPath = WebAssetHttpHandler.DefaultPath,
-                    IsSecureConnection = isSecured,
-                    SupportsCompression = canCompress
-                }, new WebAssetCollection("~/Content") { StyleSheets });
-
-                objectWriter.AppendCollection("stylesheets", mergedGroup);
             }
 
             Localization.SerializeTo("localization", objectWriter);

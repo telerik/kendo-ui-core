@@ -26,12 +26,6 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
-        public void Script_files_path_should_be_same_as_default_script_files_path_when_new_instance_is_created()
-        {
-            Assert.Equal(WebAssetDefaultSettings.ScriptFilesPath, _baseComponent.Object.ScriptFilesPath);
-        }
-
-        [Fact]
         public void ScriptFileNames_should_be_empty_when_new_instance_is_created()
         {
             Assert.Empty(_baseComponent.Object.ScriptFileNames);

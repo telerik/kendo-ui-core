@@ -22,17 +22,11 @@ namespace Kendo.Mvc.UI.Tests
                                               ViewData = new ViewDataDictionary()
                                           };
 
-            StyleSheetRegistrar styleSheetRegistrar = new StyleSheetRegistrar(new WebAssetCollection(WebAssetDefaultSettings.StyleSheetFilesPath), viewContext, new Mock<IWebAssetCollectionResolver>().Object);
-            StyleSheetRegistrarBuilder styleSheetRegistrarBuilder = new StyleSheetRegistrarBuilder(styleSheetRegistrar);
-
-            ScriptRegistrar scriptRegistrar = new ScriptRegistrar(new WebAssetCollection(WebAssetDefaultSettings.ScriptFilesPath), new List<IScriptableComponent>(), viewContext, new Mock<IWebAssetCollectionResolver>().Object, new Mock<ScriptWrapperBase>().Object);
-            ScriptRegistrarBuilder scriptRegistrarBuilder = new ScriptRegistrarBuilder(scriptRegistrar);
-
             htmlHelper = TestHelper.CreateHtmlHelper<TestModel>();
 
             htmlHelper.ViewData.Model = new TestModel { ID = 1, DoubleProperty = 1.0, DecimalProperty = 1.0m, DateTimeProperty = DateTime.Today, TimeProperty = DateTime.Now.TimeOfDay, ComplexModel = new TestModel() };
 
-            factory = new ViewComponentFactory<TestModel>(htmlHelper, new Mock<IClientSideObjectWriterFactory>().Object, styleSheetRegistrarBuilder, scriptRegistrarBuilder);
+            factory = new ViewComponentFactory<TestModel>(htmlHelper, new Mock<IClientSideObjectWriterFactory>().Object);
         }
 
         [Fact]

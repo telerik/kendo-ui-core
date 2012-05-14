@@ -987,8 +987,6 @@ namespace Kendo.Mvc.UI
                 popup.Title = CurrentItemMode == GridItemMode.Edit ? Localization.Edit : Localization.AddNew;
             }
 
-            ScriptRegistrar.Current.Register(popup);
-
             new LiteralNode(popup.ToHtmlString()).AppendTo(container);
         }
 
@@ -1192,7 +1190,6 @@ namespace Kendo.Mvc.UI
 
         private void RegisterEditingScriptFiles()
         {
-            ScriptFileNames.Add(ScriptRegistrar.jQueryValidation);
             if (Editing.Mode == GridEditMode.PopUp)
             {
                 ScriptFileNames.Add("telerik.draganddrop.js");

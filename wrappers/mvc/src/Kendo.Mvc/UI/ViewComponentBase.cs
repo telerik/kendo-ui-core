@@ -34,7 +34,6 @@ namespace Kendo.Mvc.UI
             ViewContext = viewContext;
             ClientSideObjectWriterFactory = clientSideObjectWriterFactory;
 
-            ScriptFilesPath = WebAssetDefaultSettings.ScriptFilesPath;
             ScriptFileNames = new List<string>();
 
             HtmlAttributes = new RouteValueDictionary();

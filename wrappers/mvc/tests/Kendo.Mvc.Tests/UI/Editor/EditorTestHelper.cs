@@ -41,7 +41,7 @@ namespace Kendo.Mvc.UI.Tests
 
             var urlGenerator = new Mock<IUrlGenerator>();
             urlGenerator.Setup(url => url.Generate(It.IsAny<RequestContext>(), It.IsAny<INavigatable>())).Returns(string.Empty);
-            return new Editor(viewContext, clientSideObjectWriterFactory.Object, new Mock<IWebAssetCollectionResolver>().Object, CreateLocalizationService(), urlGenerator.Object)
+            return new Editor(viewContext, clientSideObjectWriterFactory.Object, CreateLocalizationService(), urlGenerator.Object)
             {
                 Name = "Editor"
             };
