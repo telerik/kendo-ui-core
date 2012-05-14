@@ -800,7 +800,6 @@
     <Compile Include="SiteMap\SiteMapBuilder.cs" />
     <Compile Include="SiteMap\SiteMapChangeFrequency.cs" />
     <Compile Include="SiteMap\SiteMapDictionary.cs" />
-    <Compile Include="SiteMap\SiteMapHandler.cs" />
     <Compile Include="SiteMap\SiteMapManager.cs" />
     <Compile Include="SiteMap\SiteMapNode.cs" />
     <Compile Include="SiteMap\SiteMapNodeBuilder.cs" />
@@ -1025,8 +1024,6 @@
     <Compile Include="UI\Window\WindowHtmlBuilder.cs" />
     <Compile Include="UrlGenerator.cs" />
     <Compile Include="Infrastructure\IPathResolver.cs" />
-    <Compile Include="Infrastructure\IHttpResponseCompressor.cs" />
-    <Compile Include="Infrastructure\IHttpResponseCacher.cs" />
     <Compile Include="Infrastructure\IConfigurationManager.cs" />
     <Compile Include="Infrastructure\PathHelper.cs" />
     <Compile Include="UI\ClientSideObjectWriterFactory.cs" />
@@ -1035,9 +1032,6 @@
     <Compile Include="Infrastructure\Implementation\ConfigurationManagerWrapper.cs" />
     <Compile Include="Extensions\DictionaryExtensions.cs" />
     <Compile Include="Extensions\HttpContextBaseExtensions.cs" />
-    <Compile Include="Infrastructure\HttpHandlerBase.cs" />
-    <Compile Include="Infrastructure\Implementation\HttpResponseCacher.cs" />
-    <Compile Include="Infrastructure\Implementation\HttpResponseCompressor.cs" />
     <Compile Include="IHideObjectMembers.cs" />
     <Compile Include="Infrastructure\Implementation\PathResolver.cs" />
     <Compile Include="Infrastructure\Guard.cs" />
@@ -1092,8 +1086,8 @@
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <ItemGroup>
     <Mvc3References Include="..\..\references\mvc3\*.dll">
-		<Visible>false</Visible>
-	</Mvc3References>
+      <Visible>false</Visible>
+    </Mvc3References>
   </ItemGroup>
   <Target Name="BeforeBuild">
     <Copy SkipUnchangedFiles="true" SourceFiles="@(Mvc3References)" DestinationFolder="$(OutputPath)" />

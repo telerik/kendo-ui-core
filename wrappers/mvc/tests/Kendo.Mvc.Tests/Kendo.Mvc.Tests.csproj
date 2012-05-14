@@ -413,7 +413,6 @@
     <Compile Include="Extensions\CollectionExtensionsTests.cs" />
     <Compile Include="Extensions\DictionaryExtensionsTests.cs" />
     <Compile Include="Extensions\HttpContextBaseExtensionsTests.cs" />
-    <Compile Include="Infrastructure\HttpHandlerBaseTests.cs" />
     <Compile Include="Infrastructure\GuardTests.cs" />
     <Compile Include="Extensions\EnumerableExtensionsTests.cs" />
     <Compile Include="Extensions\ReaderWriterLockSlimExtensionsTests.cs" />
@@ -429,8 +428,6 @@
     <Compile Include="Infrastructure\Implementation\UrlResolverTests.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Infrastructure\Implementation\HttpResponseCacherTests.cs" />
-    <Compile Include="Infrastructure\Implementation\HttpResponseCompressorTests.cs" />
     <Compile Include="Infrastructure\Implementation\ConfigurationManagerWrapperTests.cs" />
     <Compile Include="Infrastructure\Implementation\PathResolverTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

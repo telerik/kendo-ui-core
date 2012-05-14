@@ -61,10 +61,6 @@ namespace Kendo.Mvc.Infrastructure
 
             Current.Register<ILocalizationServiceFactory>(() => new LocalizationServiceFactory());
 
-            Current.Register<IHttpResponseCacher>(() => new HttpResponseCacher());
-
-            Current.Register<IHttpResponseCompressor>(() => new HttpResponseCompressor());
-
             Current.Register<IUrlAuthorization>(() => new UrlAuthorization());
 
             Current.Register<ISliderHtmlBuilderFactory>(() => new SliderHtmlBuilderFactory());
