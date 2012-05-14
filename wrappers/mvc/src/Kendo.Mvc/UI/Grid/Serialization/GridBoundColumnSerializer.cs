@@ -32,7 +32,6 @@ namespace Kendo.Mvc.UI
                 .Add("groupable", column.Groupable, true)
                 .Add("encoded", column.Encoded, true);
 
-#if MVC2 || MVC3
             string editorHtml = column.EditorHtml;
 
             if (column.Grid.IsSelfInitialized && editorHtml != null)
@@ -43,7 +42,6 @@ namespace Kendo.Mvc.UI
             FluentDictionary.For(result)
                 .Add("readonly", column.ReadOnly, false)
                 .Add("editor", editorHtml, () => column.Grid.Editing.Enabled && column.Grid.IsClientBinding && !column.ReadOnly);
-#endif
 
             if (column.ClientGroupHeaderTemplate.HasValue())
             {
@@ -98,7 +96,6 @@ namespace Kendo.Mvc.UI
                 foreach (var value in Enum.GetValues(type))
                 {
                     var name = Enum.GetName(type, value);
-#if MVC3
                     var member = type.GetMember(name).FirstOrDefault();
 
                     if (member != null)
@@ -112,7 +109,6 @@ namespace Kendo.Mvc.UI
                             name = displayAttribute.GetName();
                         }
                     }
-#endif 
                     values[name] = value;
                 }
 

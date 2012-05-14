@@ -58,9 +58,7 @@ namespace Kendo.Mvc.Infrastructure.Implementation
 
             AuthorizationContext authorizationContext = authorizationContextCache.GetAuthorizationContext(requestContext, controllerName, actionName, routeValues);
             List<AuthorizeAttribute> authorizeAttributes = authorizeAttributeCache.GetAuthorizeAttributes(requestContext, controllerName, actionName, routeValues).ToList();      
-#if MVC3
             authorizeAttributes.AddRange(GlobalFilters.Filters.Select(f => f.Instance).OfType<AuthorizeAttribute>());
-#endif
             bool allowed = true;
 
             if (authorizationContext != null)

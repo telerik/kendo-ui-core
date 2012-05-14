@@ -55,13 +55,11 @@ namespace Kendo.Mvc.UI.Fluent
             {
                 dataKey = (IGridDataKey<TModel>)new GridRowViewDataKey(fieldName);
             }
-#if MVC3
             else if (typeof(TModel).IsDynamicObject())
             {
                 var lambdaExpression = ExpressionBuilder.Expression<dynamic,object>(fieldName);
                 dataKey = (IGridDataKey<TModel>)new GridDynamicDataKey(fieldName, lambdaExpression);
             }
-#endif
             else
             {
                 dataKey = GetDataKeyForField(fieldName);
@@ -77,7 +75,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         }
 
-#if MVC3
         private IGridDataKey<TModel> GetDynamicDataKeyForField(string fieldName)
         {
             var lambdaExpression = ExpressionBuilder.Lambda<TModel>(fieldName);
@@ -86,7 +83,6 @@ namespace Kendo.Mvc.UI.Fluent
 
             return (IGridDataKey<TModel>)constructor.Invoke(new object[] { lambdaExpression });
         }
-#endif
 
         private IGridDataKey<TModel> GetDataKeyForField(string fieldName)
         {

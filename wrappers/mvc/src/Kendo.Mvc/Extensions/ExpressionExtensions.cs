@@ -7,32 +7,7 @@ namespace Kendo.Mvc.Extensions
     {
         public static string MemberWithoutInstance(this LambdaExpression expression)
         {
-#if MVC2 || MVC3
             return ExpressionHelper.GetExpressionText(expression);
-#else
-            MemberExpression memberExpression = expression.ToMemberExpression();
-
-            if (memberExpression == null)
-            {
-                return null;
-            }
-
-            if (memberExpression.Expression.NodeType == ExpressionType.MemberAccess)
-            {
-                MemberExpression innerMemberExpression = (MemberExpression)memberExpression.Expression;
-                
-                while (innerMemberExpression.Expression.NodeType == ExpressionType.MemberAccess)
-                {
-                    innerMemberExpression = (MemberExpression)innerMemberExpression.Expression;
-                }
-
-                ParameterExpression parameterExpression = (ParameterExpression)innerMemberExpression.Expression;
-
-                return memberExpression.ToString().Substring(parameterExpression.Name.ToString().Length + 1);
-            }
-
-            return memberExpression.Member.Name;
-#endif
         }
 
         public static bool IsBindable(this LambdaExpression expression)

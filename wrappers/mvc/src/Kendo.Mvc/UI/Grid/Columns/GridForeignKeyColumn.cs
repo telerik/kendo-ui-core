@@ -14,9 +14,7 @@ namespace Kendo.Mvc.UI
         public GridForeignKeyColumn(Grid<TModel> grid, Expression<Func<TModel, TValue>> expression, SelectList data)
             : base(grid, expression)         
         {
-#if MVC2 || MVC3
             EditorTemplateName = "GridForeignKey";
-#endif
             Data = data;
         }
 
@@ -33,7 +31,6 @@ namespace Kendo.Mvc.UI
 
         protected override IGridDataCellBuilder CreateEditBuilderCore(IGridHtmlHelper htmlHelper)
         {
-#if MVC2 || MVC3
             if (!ReadOnly)
             {
                 var builder = new GridForeignKeyEditorForCellBuilder<TModel, TValue>()
@@ -50,7 +47,6 @@ namespace Kendo.Mvc.UI
 
                 return builder;
             }
-#endif
             return CreateDisplayBuilder(htmlHelper);
         }
 

@@ -7,9 +7,7 @@ namespace Kendo.Mvc.Extensions
     using Kendo.Mvc.UI;
     using System.Collections.Generic;
     using System.Web;    
-#if MVC3
     using System.Web.Helpers;    
-#endif
 
     public static class GridControllerExtensions
     {
@@ -34,7 +32,6 @@ namespace Kendo.Mvc.Extensions
             return routeValues;
         }        
 
-#if MVC3
         private static IDictionary<string, object> GetParams(HttpRequestBase request)
         {
             var result = new Dictionary<string, object>();
@@ -43,26 +40,13 @@ namespace Kendo.Mvc.Extensions
             unvalidated.QueryString.CopyTo(result);
             return result;
         }
-#else
-        private static IDictionary<string, object> GetParams(HttpRequestBase request)
-        {
-            var result = new Dictionary<string, object>();
-            request.Params.CopyTo(result);
-            return result;
-        }
-#endif
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
+
         public static T ValueOf<T>(this ControllerBase controller, string key)
         {
             ValueProviderResult result;
             bool found = true;
-#if MVC1
-            found = controller.ValueProvider.TryGetValue(key, out result);
-#endif
-#if MVC2 || MVC3
             result = controller.ValueProvider.GetValue(key);
             found = result != null;
-#endif
             if (found)
             {
                 return (T)result.ConvertTo(typeof(T), CultureInfo.CurrentCulture);

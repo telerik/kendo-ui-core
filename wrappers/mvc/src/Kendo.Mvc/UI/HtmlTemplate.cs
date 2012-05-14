@@ -1,9 +1,7 @@
 namespace Kendo.Mvc.UI
 {
     using System;
-#if MVC3
     using System.Web.WebPages;
-#endif    
     using Kendo.Mvc.Extensions;
 
     public class HtmlTemplate : HtmlTemplate<object>
@@ -91,7 +89,6 @@ namespace Kendo.Mvc.UI
                 binder = (dataItem, node) => node.Template((writer) => 
                     {
                         var result = InlineTemplate(dataItem);
-#if MVC3
                         var helperResult = result as HelperResult;
                         
                         if (helperResult != null)
@@ -99,7 +96,7 @@ namespace Kendo.Mvc.UI
                             helperResult.WriteTo(writer);
                             return;
                         }
-#endif
+
                         if (result != null)
                         {
                             writer.Write(result.ToString());

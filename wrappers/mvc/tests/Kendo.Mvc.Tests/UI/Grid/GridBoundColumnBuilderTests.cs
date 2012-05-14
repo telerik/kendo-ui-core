@@ -224,7 +224,6 @@ namespace Kendo.Mvc.UI.Tests.Grid
             column.Aggregates.First().ShouldBeType<MinFunction>();
         }
 
-#if MVC2 || MVC3
         [Fact]
         public void Should_set_editor_template_name()
         {
@@ -239,7 +238,5 @@ namespace Kendo.Mvc.UI.Tests.Grid
         {
             Assert.Throws<ArgumentException>(() => builder.EditorTemplateName(string.Empty));
         }
-#endif
-
     }
 }

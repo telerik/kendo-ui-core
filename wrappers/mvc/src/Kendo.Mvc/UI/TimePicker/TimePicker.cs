@@ -78,9 +78,7 @@ namespace Kendo.Mvc.UI
 
         protected override void WriteHtml(System.Web.UI.HtmlTextWriter writer)
         {
-#if MVC2 || MVC3
             Name = Name ?? ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(string.Empty);
-#endif
             TimePickerHtmlBuilder renderer = new TimePickerHtmlBuilder(this);
 
             renderer.Build().WriteTo(writer);

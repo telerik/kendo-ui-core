@@ -1,4 +1,3 @@
-#if MVC3
 namespace Kendo.Mvc.Infrastructure.Implementation.Expressions
 {
     using System;
@@ -63,4 +62,3 @@ namespace Kendo.Mvc.Infrastructure.Implementation.Expressions
         }
     }
 }
-#endif

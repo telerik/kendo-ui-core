@@ -109,12 +109,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         public void Render()
         {
-#if MVC1
-            var baseWriter = ViewContext.HttpContext.Response.Output;
-#else
-            var baseWriter = ViewContext.Writer;
-#endif
-            using (HtmlTextWriter textWriter = new HtmlTextWriter(baseWriter))
+            using (HtmlTextWriter textWriter = new HtmlTextWriter(ViewContext.Writer))
             {
                 WriteHtml(textWriter);
             }

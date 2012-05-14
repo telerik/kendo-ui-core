@@ -42,9 +42,7 @@ namespace Kendo.Mvc.UI.Tests
                 HeaderHtmlAttributes = { },
                 Hidden = true,
                 HtmlAttributes = { },
-#if MVC2 || MVC3
                 ReadOnly = true,
-#endif
                 Title = "foo",
                 Visible = false,
                 Width = "100"
@@ -60,9 +58,7 @@ namespace Kendo.Mvc.UI.Tests
             Assert.Equal(column.HeaderHtmlAttributes, settings.HeaderHtmlAttributes);
             Assert.Equal(column.Hidden, settings.Hidden);
             Assert.Equal(column.HtmlAttributes, settings.HtmlAttributes);
-#if MVC2 || MVC3
             Assert.Equal(column.ReadOnly, settings.ReadOnly);
-#endif
             Assert.Equal(column.Title, settings.Title);
             Assert.Equal(column.Visible, settings.Visible);
             Assert.Equal(column.Width, settings.Width);
@@ -160,7 +156,6 @@ namespace Kendo.Mvc.UI.Tests
             generatedColumns.Count().ShouldEqual(1);
             generatedColumns.First().Member.ShouldEqual("Bar");
         }
-#if MVC3
         [Fact]
         public void Should_generate_columns_in_the_specified_order()
         {
@@ -181,7 +176,6 @@ namespace Kendo.Mvc.UI.Tests
             [Display(Order=0)]
             public string Bar { get; set; }
         }
-#endif
         private class NullableFoo
         {
             public int? Bar { get; set; }

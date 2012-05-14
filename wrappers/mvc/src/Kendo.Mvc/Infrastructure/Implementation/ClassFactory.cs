@@ -21,18 +21,12 @@ namespace Kendo.Mvc.Infrastructure.Implementation
         {
             AssemblyName name = new AssemblyName("DynamicClasses");
             AssemblyBuilder assembly = AppDomain.CurrentDomain.DefineDynamicAssembly(name, AssemblyBuilderAccess.Run);
-#if ENABLE_LINQ_PARTIAL_TRUST
-            new ReflectionPermission(PermissionState.Unrestricted).Assert();
-#endif
             try
             {
                 module = assembly.DefineDynamicModule("Module");
             }
             finally
             {
-#if ENABLE_LINQ_PARTIAL_TRUST
-                PermissionSet.RevertAssert();
-#endif
             }
             classes = new Dictionary<Signature, Type>();
             rwLock = new ReaderWriterLock();
@@ -64,9 +58,6 @@ namespace Kendo.Mvc.Infrastructure.Implementation
             try
             {
                 string typeName = "DynamicClass" + (classCount + 1);
-#if ENABLE_LINQ_PARTIAL_TRUST
-                new ReflectionPermission(PermissionState.Unrestricted).Assert();
-#endif
                 try
                 {
                     TypeBuilder tb = this.module.DefineType(typeName, TypeAttributes.Class |
@@ -80,9 +71,6 @@ namespace Kendo.Mvc.Infrastructure.Implementation
                 }
                 finally
                 {
-#if ENABLE_LINQ_PARTIAL_TRUST
-                    PermissionSet.RevertAssert();
-#endif
                 }
             }
             finally

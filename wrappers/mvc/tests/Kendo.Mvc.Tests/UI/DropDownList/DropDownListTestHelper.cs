@@ -16,12 +16,8 @@ namespace Kendo.Mvc.UI.Tests
 
         public static ViewContext viewContext;
         public static ViewDataDictionary viewDataDinctionary;
-#if MVC1
-        public static Mock<IDictionary<string, ValueProviderResult>> valueProvider;
-#endif
-#if MVC2 || MVC3
         public static Mock<IValueProvider> valueProvider;
-#endif
+
         public static DropDownList CreateDropDownList()
         {
             Mock<HttpContextBase> httpContext = TestHelper.CreateMockedHttpContext();
@@ -38,22 +34,13 @@ namespace Kendo.Mvc.UI.Tests
             // needed for testing serialization
             Mock<IClientSideObjectWriterFactory> clientSideObjectWriterFactory = new Mock<IClientSideObjectWriterFactory>();
             clientSideObjectWriter = new Mock<IClientSideObjectWriter>();
-            #if MVC1
-                valueProvider = new Mock<IDictionary<string, ValueProviderResult>>();
-            #endif
-            #if MVC2 || MVC3
-                valueProvider = new Mock<IValueProvider>();
-            #endif
+            valueProvider = new Mock<IValueProvider>();
 
             Controller controller = new ControllerTestDouble(new Dictionary<string, ValueProviderResult>(), viewDataContainer.Object.ViewData);
             controller.ValueProvider = valueProvider.Object;
             ControllerContext controllerContext = new ControllerContext(TestHelper.CreateRequestContext(), controller);
 
-            viewContext = new ViewContext(controllerContext, new Mock<IView>().Object, new ViewDataDictionary(), new TempDataDictionary()
-            #if MVC2 || MVC3
-            , TextWriter.Null
-            #endif
-            );
+            viewContext = new ViewContext(controllerContext, new Mock<IView>().Object, new ViewDataDictionary(), new TempDataDictionary(), TextWriter.Null);
 
             viewContext.ViewData = viewDataDinctionary;
 

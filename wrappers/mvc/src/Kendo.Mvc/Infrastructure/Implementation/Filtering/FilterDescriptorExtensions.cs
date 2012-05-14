@@ -33,7 +33,6 @@ namespace Kendo.Mvc.Infrastructure.Implementation
             return null;
         }
 
-#if MVC3
         internal static void SetMemberTypeFrom(this FilterDescriptor descriptor, object item)
         {
             if (!descriptor.Member.HasValue())
@@ -52,7 +51,5 @@ namespace Kendo.Mvc.Infrastructure.Implementation
 
             return descriptors;
         }
-#endif
-        
     }
 }

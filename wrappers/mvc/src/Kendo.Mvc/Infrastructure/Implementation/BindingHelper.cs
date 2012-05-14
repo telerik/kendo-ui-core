@@ -1,4 +1,3 @@
-#if MVC3
 namespace Kendo.Mvc.Infrastructure.Implementation
 {
     using System;
@@ -24,4 +23,3 @@ namespace Kendo.Mvc.Infrastructure.Implementation
         }
     }
 }
-#endif

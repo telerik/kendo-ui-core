@@ -30,13 +30,9 @@ namespace Kendo.Mvc.UI
             return ((DataRowView)dataItem)[Name];
         }
 
-
-#if MVC2 || MVC3
         public string HiddenFieldHtml(HtmlHelper<DataRowView> htmlHelper)
         {
             return htmlHelper.Hidden(Name, null, new { id = "" }).ToString();
         }
-#endif
-
     }
 }

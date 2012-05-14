@@ -57,7 +57,6 @@ namespace Kendo.Mvc.UI
             set;
         }
        
-#if MVC2 || MVC3
         public bool InEditMode
         {
             get;
@@ -69,15 +68,12 @@ namespace Kendo.Mvc.UI
             get;
             set;
         }
-#endif
         public GridCell<T> CreateCellFor(GridColumnBase<T> column)
         {
             var cell = new GridCell<T>(column, DataItem)
             {
-#if MVC2 || MVC3
                 InEditMode = InEditMode,
                 InInsertMode = InInsertMode,
-#endif
                 Selected = Selected
             };
 

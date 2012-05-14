@@ -390,7 +390,6 @@ namespace Kendo.Mvc.UI.Tests
             Assert.Equal("Item2", tag.Attribute("value"));
         }
 
-#if MVC2 || MVC3
         [Fact]
         public void HiddenInputTag_should_add_attr_value_if_value_is_posted()
         {
@@ -407,7 +406,6 @@ namespace Kendo.Mvc.UI.Tests
 
             Assert.Equal("2", tag.Attribute("value"));
         }
-#endif
 
         [Fact]
         public void HiddenInputTag_does_not_output_name_attribute_for_unnamed_components()

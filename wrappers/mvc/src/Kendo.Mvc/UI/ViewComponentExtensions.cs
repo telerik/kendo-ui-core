@@ -64,7 +64,6 @@ namespace Kendo.Mvc.UI
 
         public static IDictionary<string, object> GetUnobtrusiveValidationAttributes(this IViewComponent instance)
         {    
-#if MVC3
             var viewContext = instance.ViewContext;
 
             if (viewContext.UnobtrusiveJavaScriptEnabled)
@@ -88,7 +87,6 @@ namespace Kendo.Mvc.UI
 
                 return htmlHelper.GetUnobtrusiveValidationAttributes(name, metadata);
             }
-#endif
             return null;
         }
     }

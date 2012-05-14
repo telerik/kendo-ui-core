@@ -45,15 +45,9 @@ namespace Kendo.Mvc.Infrastructure.Implementation
         private AuthorizationContext AuthorizationContextFactory(RequestContext requestContext, string controllerName, string actionName, string areaName)
         {
             ControllerContext controllerContext = controllerContextCache.GetControllerContext(requestContext, controllerName, areaName);            
-#if MVC1
-            if (controllerContext == null) 
-            {
-                return null;
-            }
-
-            return new AuthorizationContext(controllerContext);
-#else
+            
             ControllerDescriptor controllerDescriptor = controllerDescriptorCache.GetControllerDescriptor(controllerName, areaName);
+
             if (controllerContext == null || controllerDescriptor == null)
             {
                 return null;
@@ -66,7 +60,6 @@ namespace Kendo.Mvc.Infrastructure.Implementation
             }
 
             return new AuthorizationContext(controllerContext, actionDescriptor);
-#endif
         }
     }
 }

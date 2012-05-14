@@ -1,4 +1,3 @@
-#if MVC3
 namespace Kendo.Mvc.UI.Tests 
 {
     using Kendo.Mvc.Extensions;
@@ -39,4 +38,3 @@ namespace Kendo.Mvc.UI.Tests
         }
     }
 }
-#endif

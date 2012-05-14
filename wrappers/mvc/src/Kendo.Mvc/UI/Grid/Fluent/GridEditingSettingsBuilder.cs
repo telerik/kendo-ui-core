@@ -74,7 +74,6 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
-#if MVC2 || MVC3
 
         public GridEditingSettingsBuilder<T> DefaultDataItem(T value)
         {
@@ -120,7 +119,6 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
-#endif
         /// <summary>
         /// Enables or disables delete confirmation.
         /// </summary>

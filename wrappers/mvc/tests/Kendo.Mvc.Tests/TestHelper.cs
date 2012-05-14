@@ -15,7 +15,6 @@ namespace Kendo.Mvc
     using Moq;
 
 
-#if MVC2 || MVC3
     class ValueProvider : IValueProvider
     {
         private readonly IDictionary<string, ValueProviderResult> data;
@@ -43,18 +42,12 @@ namespace Kendo.Mvc
         }
 
     }
-#endif
 
     public class ControllerTestDouble : Controller
     {
         public ControllerTestDouble(IDictionary<string, ValueProviderResult> valueProviderData, ViewDataDictionary viewData)
         {
-#if MVC1
-            ValueProvider = valueProviderData;
-#endif
-#if MVC2 || MVC3
             ValueProvider = new ValueProvider(valueProviderData);
-#endif
             ViewData = viewData;
             ControllerContext = new ControllerContext(TestHelper.CreateRequestContext(), this);
         }
@@ -79,7 +72,6 @@ namespace Kendo.Mvc
             return helper;
         }
 
-#if MVC2 || MVC3
         public static HtmlHelper<TModel> CreateHtmlHelper<TModel>() where TModel : class, new()
         {
             return CreateHtmlHelper(new TModel());
@@ -97,7 +89,6 @@ namespace Kendo.Mvc
 
             return helper;
         }
-#endif
         private static Mock<HttpContextBase> httpContext;
         private static object sync = new object();
 
@@ -179,9 +170,7 @@ namespace Kendo.Mvc
         public static ViewContext CreateViewContext()
         {
             return new ViewContext(CreateControllerContext(), new Mock<IView>().Object, new ViewDataDictionary(), new TempDataDictionary()
-#if MVC2 || MVC3
                 , TextWriter.Null
-#endif            
             );
         }
 
