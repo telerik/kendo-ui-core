@@ -1,0 +1,12 @@
+﻿<a href="../">Back</a>
+
+@{
+    var area = ViewContext.RouteData.DataTokens["area"];
+    var alternateArea = area == "aspx" ? "Razor" : "ASPX";
+    var alternateRoute = alternateArea + "Default";
+}
+<a href="@(Url.RouteUrl(alternateRoute, new {
+        suite = Url.RequestContext.RouteData.Values["suite"],
+        controller = Url.RequestContext.RouteData.Values["controller"],
+        action = Url.RequestContext.RouteData.Values["action"]
+    }))">@alternateArea version</a>

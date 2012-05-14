@@ -15,9 +15,9 @@
 </head>
 <body>
     <div class="page">
-        <a href="../">Back</a>
+        <%= Html.Partial("~/Views/Shared/_Navigation.cshtml")%>
         <asp:ContentPlaceHolder ID="MainContent" runat="server" />
-        <%= Html.Partial("~/Areas/razor/Views/Shared/_Source.cshtml") %>
+        <%= Html.Partial("~/Views/Shared/_Source.cshtml") %>
     </div>
 </body>
 </html>
