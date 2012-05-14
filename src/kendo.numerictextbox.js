@@ -186,7 +186,7 @@
          *     min: 0,
          *     max: 100,
          *     value: 50,
-         *     placeHolder: "Select A Value"
+         *     placeholder: "Select A Value"
          * });
          * @option {String} [upArrowText] <Increase value> Specifies the text of the tooltip on the up arrow.
          * _example
