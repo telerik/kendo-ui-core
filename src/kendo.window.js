@@ -1223,7 +1223,7 @@
 
             wrapper.css({
                     width: wnd.width(),
-                    height: wnd.height()
+                    height: wnd.height() - parseInt(wrapper.css("padding-top"), 10)
                 });
 
             that.trigger(RESIZE);
