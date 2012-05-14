@@ -28,11 +28,13 @@
                     }
 
                     var start = $("#start").kendoDateTimePicker({
-                        change: startChange
+                        change: startChange,
+                        parseFormats: ["MM/dd/yyyy"]
                     }).data("kendoDateTimePicker");
 
                     var end = $("#end").kendoDateTimePicker({
-                        change: endChange
+                        change: endChange,
+                        parseFormats: ["MM/dd/yyyy"]
                     }).data("kendoDateTimePicker");
 
                     start.max(end.value());
