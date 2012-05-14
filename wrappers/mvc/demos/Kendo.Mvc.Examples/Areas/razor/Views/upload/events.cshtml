@@ -6,7 +6,23 @@
         </p>
     </div>
     <div style="width:45%">
-        <input name="files" id="files" type="file" />
+        @(Html.Kendo().Upload()
+            .Name("files")
+            .Async(a => a
+                .Save("Save", "Upload")
+                .Remove("Remove", "Upload")
+                .AutoUpload(true)
+            )
+            .ClientEvents(events => events
+                .OnSelect("onSelect")
+                .OnUpload("onUpload")
+                .OnSuccess("onSuccess")
+                .OnError("onError")
+                .OnComplete("onComplete")
+                .OnCancel("onCancel")
+                .OnRemove("onRemove")
+            )
+        )
     </div>
     <script>
         function onSelect(e) {
@@ -49,23 +65,6 @@
                 return info;
             }).join(", ");
         }
-
-        $(document).ready(function() {
-            $("#files").kendoUpload({
-                async: {
-                    saveUrl: "save",
-                    removeUrl: "remove",
-                    autoUpload: true
-                },
-                select: onSelect,
-                upload: onUpload,
-                success: onSuccess,
-                error: onError,
-                complete: onComplete,
-                cancel: onCancel,
-                remove: onRemove
-            });
-        });
     </script>
 </div>
 <div class="console"></div>
