@@ -296,6 +296,8 @@
             if (that.options.pullToRefresh) {
                 that._initPullToRefresh();
             }
+
+            kendo.onResize($.proxy(that.reset, that));
         },
 
         /**
