@@ -1054,9 +1054,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <CodeAnalysisDictionary Include="..\shared\CodeAnalysisDictionary.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="..\shared\Telerik.Web.snk">
       <Link>Telerik.Web.snk</Link>
     </None>
