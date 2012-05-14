@@ -244,6 +244,10 @@ namespace("mvc", function() {
                 src: path.join(DEMOS_SHARED, SCRIPTS_PATH),
                 dst: scriptsDest
             }, {
+                name: "prettify.js",
+                src: path.join(DEMOS_SHARED, SCRIPTS_PATH),
+                dst: scriptsDest
+            }, {
                 name: SUITE_CSS,
                 src: sharedStyles,
                 dst: stylesDest
