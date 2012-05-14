@@ -473,6 +473,8 @@
             if (HIDEBAR) {
                 WINDOW.bind("load " + ORIENTATIONEVENT, proxy(that._hideBar, that));
             }
+
+            that.element[0].addEventListener(support.mousedown, proxy(that._hideBar, that), true);
         },
 
         _setupDocumentTitle: function() {
@@ -493,10 +495,6 @@
                 lastOrientation = that._lastOrientation,
                 newHeight;
 
-            if (lastOrientation === orientation) {
-                return;
-            }
-
             that._lastOrientation = orientation;
 
             if (!initialHeight[orientation]) {
@@ -507,8 +505,9 @@
 
             if (newHeight != element.height()) {
                 element.height(newHeight);
-                setTimeout(window.scrollTo, 0, 0, 1);
             }
+
+            setTimeout(window.scrollTo, 0, 0, 1);
         }
     });
 
