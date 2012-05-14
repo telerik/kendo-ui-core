@@ -22,8 +22,6 @@ namespace Kendo.Mvc.UI
         public DatePicker(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory)
             : base(viewContext, clientSideObjectWriterFactory)
         {
-            ScriptFileNames.AddRange(new[] { "telerik.common.js", "telerik.calendar.js", "telerik.datepicker.js" });
-
             defaultEffects.Each(el => Effects.Container.Add(el));
 
             Format = CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern;

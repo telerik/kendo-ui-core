@@ -49,31 +49,6 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
-        public void Should_be_able_to_set_asset_key()
-        {
-            _builder.AssetKey("xxx");
-
-            Assert.Equal("xxx", _component.Object.AssetKey);
-        }
-
-        [Fact]
-        public void Should_be_able_to_set_script_files_path()
-        {
-            _builder.ScriptFilesPath("~/assets/scripts");
-
-            Assert.Equal("~/assets/scripts", _component.Object.ScriptFilesPath);
-        }
-
-        [Fact]
-        public void Should_be_able_to_set_script_file_names()
-        {
-            _builder.ScriptFileNames("dummy1.js", "dummy2.js");
-
-            Assert.Contains("dummy1.js", _component.Object.ScriptFileNames);
-            Assert.Contains("dummy2.js", _component.Object.ScriptFileNames);
-        }
-
-        [Fact]
         public void Should_be_able_to_set_html_attributes()
         {
             _builder.HtmlAttributes(new { @class = "foo" });

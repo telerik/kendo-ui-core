@@ -26,12 +26,6 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
-        public void ScriptFileNames_should_be_empty_when_new_instance_is_created()
-        {
-            Assert.Empty(_baseComponent.Object.ScriptFileNames);
-        }
-
-        [Fact]
         public void HtmlAttributes_should_be_empty_when_new_instance_is_created()
         {
             Assert.Empty(_baseComponent.Object.HtmlAttributes);
@@ -43,14 +37,6 @@ namespace Kendo.Mvc.UI.Tests
             _baseComponent.Object.Name = "component";
 
             Assert.Equal("component", _baseComponent.Object.Name);
-        }
-
-        [Fact]
-        public void Should_be_able_to_set_script_files_path()
-        {
-            _baseComponent.Object.ScriptFilesPath = "~/assets/scripts";
-
-            Assert.Equal("~/assets/scripts", _baseComponent.Object.ScriptFilesPath);
         }
 
         [Fact]

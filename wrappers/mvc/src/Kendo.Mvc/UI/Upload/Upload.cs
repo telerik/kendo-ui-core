@@ -4,7 +4,6 @@ namespace Kendo.Mvc.UI
     using System.IO;
     using System.Web.Mvc;
     using System.Web.UI;
-    using Kendo.Mvc.Extensions;
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.UI.Html;
 
@@ -31,8 +30,6 @@ namespace Kendo.Mvc.UI
                         IUrlGenerator urlGenerator, ILocalizationService localizationService)
         : base(viewContext, clientSideObjectWriterFactory)
         {
-            ScriptFileNames.AddRange(new [] { "telerik.common.js", "telerik.upload.js" });
-
             ClientEvents = new UploadClientEvents();
             Enabled = true;
             Multiple = true;

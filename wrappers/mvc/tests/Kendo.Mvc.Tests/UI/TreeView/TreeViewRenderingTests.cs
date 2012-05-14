@@ -346,15 +346,5 @@ namespace Kendo.Mvc.UI.Tests
 
             Assert.Throws(typeof(ArgumentException), () => { treeView.Render(); });
         }
-
-        [Fact]
-        public void Render_should_add_dragAndDrop_js_file_if_dragAndDrop_is_enabled()
-        {
-            treeView.DragAndDrop.Enabled = true;
-
-            treeView.Render();
-
-            Assert.True(treeView.ScriptFileNames.IndexOf("telerik.draganddrop.js") != -1);
-        }
     }
 }

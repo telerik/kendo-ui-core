@@ -264,7 +264,6 @@
     <Compile Include="SiteMap\SiteMapBaseTests.cs" />
     <Compile Include="SiteMap\SiteMapBuilderTests.cs" />
     <Compile Include="SiteMap\SiteMapDictionaryTests.cs" />
-    <Compile Include="SiteMap\SiteMapHandlerTests.cs" />
     <Compile Include="SiteMap\SiteMapManagerTests.cs" />
     <Compile Include="SiteMap\SiteMapNodeBuilderTests.cs" />
     <Compile Include="SiteMap\SiteMapNodeFactoryTests.cs" />

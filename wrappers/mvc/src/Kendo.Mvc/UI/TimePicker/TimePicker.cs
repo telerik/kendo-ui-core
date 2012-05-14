@@ -17,8 +17,6 @@ namespace Kendo.Mvc.UI
         public TimePicker(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory)
             : base(viewContext, clientSideObjectWriterFactory)
         {
-            ScriptFileNames.AddRange(new[] { "telerik.common.js", "telerik.timepicker.js" });
-
             defaultEffects.Each(el => Effects.Container.Add(el));
 
             Format = CultureInfo.CurrentCulture.DateTimeFormat.ShortTimePattern;

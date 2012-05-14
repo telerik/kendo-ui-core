@@ -15,8 +15,6 @@ namespace Kendo.Mvc.UI
         public ComboBox(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory, IUrlGenerator urlGenerator)
             : base(viewContext, clientSideObjectWriterFactory)
         {
-            ScriptFileNames.AddRange(new[] { "telerik.common.js", "telerik.list.js", "telerik.combobox.js" });
-
             UrlGenerator = urlGenerator;
 
             ClientEvents = new DropDownClientEvents();

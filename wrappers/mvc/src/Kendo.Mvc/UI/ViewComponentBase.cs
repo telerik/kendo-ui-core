@@ -6,7 +6,6 @@ namespace Kendo.Mvc.UI
     using System.Linq;
     using System.Web.Mvc;
     using System.Web.Routing;
-    using System.Web.Script.Serialization;
     using System.Web.UI;
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.Infrastructure;
@@ -18,8 +17,6 @@ namespace Kendo.Mvc.UI
     public abstract class ViewComponentBase : IViewComponent, IScriptableComponent, IHtmlAttributesContainer
     {
         private string name;
-
-        private string scriptFilesLocation;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewComponentBase"/> class.
@@ -33,8 +30,6 @@ namespace Kendo.Mvc.UI
 
             ViewContext = viewContext;
             ClientSideObjectWriterFactory = clientSideObjectWriterFactory;
-
-            ScriptFileNames = new List<string>();
 
             HtmlAttributes = new RouteValueDictionary();
 
@@ -84,45 +79,6 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <value>The HTML attributes.</value>
         public IDictionary<string, object> HtmlAttributes
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// Gets or sets the asset key.
-        /// </summary>
-        /// <value>The asset key.</value>
-        public string AssetKey
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Gets or sets the script files path. Path must be a virtual path.
-        /// </summary>
-        /// <value>The script files path.</value>
-        public string ScriptFilesPath
-        {
-            get
-            {
-                return scriptFilesLocation;
-            }
-
-            set
-            {
-                Guard.IsNotVirtualPath(value, "value");
-
-                scriptFilesLocation = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the script file names.
-        /// </summary>
-        /// <value>The script file names.</value>
-        public IList<string> ScriptFileNames
         {
             get;
             private set;

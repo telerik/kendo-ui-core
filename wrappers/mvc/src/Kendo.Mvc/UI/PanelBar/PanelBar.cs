@@ -31,8 +31,6 @@ namespace Kendo.Mvc.UI
 
             this.builderFactory = rendererFactory;
 
-            ScriptFileNames.AddRange(new[] { "telerik.common.js", "telerik.panelbar.js" });
-
             ClientEvents = new PanelBarClientEvents();
 
             this.Effects = new Effects();

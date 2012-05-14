@@ -20,8 +20,6 @@ namespace Kendo.Mvc.UI
         {
             UrlGenerator = urlGenerator;
 
-            ScriptFileNames.AddRange(new[] { "telerik.common.js", "telerik.calendar.js" });
-
             ClientEvents = new CalendarClientEvents();
 
             SelectionSettings = new CalendarSelectionSettings { Dates = new List<DateTime>() };
