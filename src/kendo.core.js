@@ -102,6 +102,29 @@
             return this.bind(eventNames, handlers, true);
         },
 
+        first: function(eventName, handlers) {
+            var that = this,
+                idx,
+                eventNames = typeof eventName === STRING ? [eventName] : eventName,
+                length,
+                handler,
+                handlersIsFunction = typeof handlers === FUNCTION,
+                events;
+
+            for (idx = 0, length = eventNames.length; idx < length; idx++) {
+                eventName = eventNames[idx];
+
+                handler = handlersIsFunction ? handlers : handlers[eventName];
+
+                if (handler) {
+                    events = that._events[eventName] = that._events[eventName] || [];
+                    events.unshift(handler);
+                }
+            }
+
+            return that;
+        },
+
         trigger: function(eventName, e) {
             var that = this,
                 events = that._events[eventName],

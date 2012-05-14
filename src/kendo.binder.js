@@ -831,7 +831,7 @@
 
                 this.widget = widget;
                 this._change = $.proxy(this.change, this);
-                this.widget.bind(CHANGE, this._change);
+                this.widget.first(CHANGE, this._change);
 
                 var value = this.bindings.value.get();
                 this._valueIsObservableObject = value == null || value instanceof ObservableObject;

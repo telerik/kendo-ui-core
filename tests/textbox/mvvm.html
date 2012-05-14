@@ -297,6 +297,22 @@
 
                 ok(dom.data("kendoNumericTextBox").wrapper.css("display") != "none", "display is not 'none'");
             });
+
+            test("change event reflects value modifications", 1, function() {
+                var dom = $('<input data-bind="value:value, events:{change: changeEvent}" data-role="numerictextbox"/>');
+
+                var observable = kendo.observable({
+                    value: 0,
+                    changeEvent: function() {
+                        equal(this.get("value"), 42);
+                    }
+                });
+
+                kendo.bind(dom, observable);
+
+                dom.data("kendoNumericTextBox").value(42);
+                dom.data("kendoNumericTextBox").trigger("change");
+            });
         </script>
 
         <div id="qunit-fixture">test markup, will be hidden</div>
