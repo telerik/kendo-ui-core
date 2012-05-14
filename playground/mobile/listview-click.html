@@ -1,0 +1,118 @@
+﻿<!doctype html>
+<html>
+    <head>
+        <title>KIDzOUT</title>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+
+        <link rel="stylesheet/less" href="../../styles/mobile/kendo.mobile.ios.less">
+        <script src="../../demos/mvc/content/shared/js/less.js"></script>
+        <script src="../../src/jquery.min.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.history.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.mobile.scroller.js"></script>
+        <script src="../../src/kendo.mobile.loader.js"></script>
+        <script src="../../src/kendo.mobile.view.js"></script>
+        <script src="../../src/kendo.mobile.pane.js"></script>
+        <script src="../../src/kendo.mobile.navbar.js"></script>
+        <script src="../../src/kendo.mobile.button.js"></script>
+        <script src="../../src/kendo.mobile.application.js"></script>
+        <script src="../../src/kendo.mobile.listview.js"></script>
+
+        <script>
+            $.fn.ShowMain = function (e) {
+
+            }
+
+            $.fn.ContainerClick = function (item) {
+                console.log("container clicked");
+            }
+
+
+
+            $(document).ready(function () {
+                window.kendoMobileApplication = new kendo.mobile.Application(document.body, { transition: "slide", platform: "ios", initial: "Main" });
+            });
+
+
+        </script>
+    </head>
+    <body>
+        <div id="Main" data-role="view" data-layout="Main-layout" data-title="Main Menu" data-show="$.fn.ShowMain"  data-transition="slide:rightaa">
+            <ul id="optionsContainer" class="settingslists" data-role="listview" data-click="$.fn.ContainerClick">
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+                <li>Row data</li>
+            </ul>
+        </div>
+        <div data-role="layout" data-id="Main-layout">
+            <header data-role="header">
+                <div data-role="navbar">
+                    <!--a class="nav-button" data-align="left" data-role="backbutton">Back</a-->
+                    <span data-role="view-title"></span>
+                </div>
+            </header>
+        </div>
+
+
+    </body>
+</html>
