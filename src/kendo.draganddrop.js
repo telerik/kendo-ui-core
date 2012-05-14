@@ -14,6 +14,7 @@
         dropTargets = {},
         lastDropTarget,
         RESIZE_EVENT = "resize",
+        invalidZeroEvents = support.mobileOS && support.mobileOS.android,
         START_EVENTS = "mousedown",
         MOVE_EVENTS = "mousemove",
         END_EVENTS = "mouseup mouseleave",
@@ -120,7 +121,7 @@
             var that = this,
                 offset = location["page" + that.axis];
 
-            if (!offset) {
+            if (!offset && invalidZeroEvents) {
                 return;
             }
 

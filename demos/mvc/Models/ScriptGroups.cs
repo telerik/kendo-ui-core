@@ -45,6 +45,7 @@ namespace Kendo.Models
             "kendo.menu.js",
             "kendo.panelbar.js",
             "kendo.slider.js",
+            "kendo.reorderable.js",
             "kendo.resizable.js",
             "kendo.splitter.js",
             "kendo.tabstrip.js",

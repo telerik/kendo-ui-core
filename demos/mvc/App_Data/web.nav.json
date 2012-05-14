@@ -259,6 +259,10 @@
                     "url": "grid/selection.html"
                 },
                 {
+                    "text": "Column reordering",
+                    "url": "grid/column-reordering.html"
+                },
+                {
                     "text": "Column resizing",
                     "url": "grid/column-resizing.html"
                 },

@@ -76,6 +76,10 @@ tests.push(
         title: "grid column resize"
     },
     {
+        page: "grid/columnreorder.html",
+        title: "grid column reorder"
+    },
+    {
         page: "grid/lint.html",
         title: "grid lint"
     }
