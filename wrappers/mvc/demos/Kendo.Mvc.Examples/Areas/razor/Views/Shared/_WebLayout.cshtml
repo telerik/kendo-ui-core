@@ -16,13 +16,7 @@
     <div class="page">
         <a href="../">Back</a>
         @RenderBody()
-        @{ var viewPath = ((BuildManagerCompiledView) ViewContext.View).ViewPath; }
-        <pre class="prettyprint">@(File.ReadAllText(Server.MapPath(viewPath)))</pre>
-        <script>
-            $(function() {
-                prettyPrint();
-            });
-        </script>
+        @Html.Partial("~/Areas/razor/Views/Shared/_Source.cshtml")
     </div>
 </body>
 </html>

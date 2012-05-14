@@ -10,12 +10,14 @@
     <script src="<%= Url.Content("~/Scripts/jquery-1.7.2.min.js") %>"></script>
     <script src="<%= Url.Content("~/Scripts/kendo.web.min.js") %>"></script>
     <script src="<%= Url.Content("~/Scripts/console.js") %>"></script>
+    <script src="<%= Url.Content("~/Scripts/prettify.js") %>"></script>
     <asp:ContentPlaceHolder runat="server" ID="HeadContent" />
 </head>
 <body>
     <div class="page">
         <a href="../">Back</a>
         <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+        <%= Html.Partial("~/Areas/razor/Views/Shared/_Source.cshtml") %>
     </div>
 </body>
 </html>

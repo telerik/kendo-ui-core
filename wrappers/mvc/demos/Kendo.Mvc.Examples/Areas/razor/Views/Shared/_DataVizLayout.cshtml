@@ -9,11 +9,13 @@
     <script src="@Url.Content("~/Scripts/jquery-1.7.2.min.js")"></script>
     <script src="@Url.Content("~/Scripts/kendo.dataviz.min.js")"></script>
     <script src="@Url.Content("~/Scripts/console.js")"></script>
+    <script src="@Url.Content("~/Scripts/prettify.js")"></script>
 </head>
 <body>
     <div class="page">
         <a href="../">Back</a>
         @RenderBody()
+        @Html.Partial("~/Areas/razor/Views/Shared/_Source.cshtml")
     </div>
 </body>
 </html>
