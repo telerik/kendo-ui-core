@@ -136,7 +136,7 @@
                     });
                 });
 
-                test("refresh is done using read", 1, function() {
+                test("refresh does not invoke read", function() {
                     chart = createChart({
                         dataSource: [{
                             period: "Jan",
@@ -148,7 +148,7 @@
                     });
 
                     stubMethod(kendo.data.DataSource.fn, "read",
-                        function() { ok(true); },
+                        function() { ok(false); },
                         function() {
                             chart.refresh();
                         }
