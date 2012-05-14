@@ -34,6 +34,8 @@ var CDN_ROOT = "http://cdn.kendostatic.com/",
     BUILDER_SERVICE_PATH = "service",
     BUILDER_PROJECT = path.join(BUILDER_SERVICE_PATH, "Download.csproj"),
     BUILDER_CONFIG_NAME = path.join("config", "kendo-config.VERSION_NUMBER.json"),
+    MVC_WRAPPERS_PATH = path.join("wrappers", "mvc"),
+    MVC_WRAPPERS_PROJECT = path.join(MVC_WRAPPERS_PATH, "src", "Kendo.Mvc", "Kendo.Mvc.csproj"),
     THEMEBUILDER_LIVE_PATH = path.join(DEPLOY_PATH, "themebuilder.telerik.com"),
     THEMEBUILDER_LIVE_PACKAGE = path.join(DEPLOY_PATH, "themebuilder.zip"),
     RELEASE_PATH = "release",
@@ -262,6 +264,15 @@ namespace("mvc", function() {
         deploySuiteFiles("dataviz");
         deployFiles(sharedFiles);
     });
+
+    desc("Build release version");
+    task("bundle", [], function() {
+        kendoBuild.msBuild(
+            MVC_WRAPPERS_PROJECT,
+            [ "/t:Clean;Build", "/p:Configuration=Release MVC3" ]
+        );
+    });
+
 
     function deploySuiteFiles(suite) {
         var suiteStyles = path.join("styles", suite),
