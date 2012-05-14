@@ -232,29 +232,17 @@ namespace("download-builder", function() {
 });
 
 namespace("mvc", function() {
-    desc("Copy debug scripts and styles to the Web suite demo site");
-    task("debug-web", [], function() {
-        deploySharedFiles("web");
-    });
+    var projectRoot = path.join("wrappers", "mvc", "demos", "Kendo.Mvc.Examples"),
+        sharedStyles = path.join(DEMOS_SHARED, STYLES_PATH),
+        stylesDest = path.join(projectRoot, "Content"),
+        scriptsDest = path.join(projectRoot, "Scripts");
 
-    function deploySharedFiles(suite) {
-        var projectRoot = examplesRoot(suite),
-            suiteStyles = path.join("styles", suite),
-            sharedStyles = path.join(DEMOS_SHARED, STYLES_PATH),
-            stylesDest = path.join(projectRoot, "Content"),
-            scriptsDest = path.join(projectRoot, "Scripts");
-
+    desc("Copy debug scripts and styles to the MVC demo site");
+    task("debug-examples", [], function() {
         var sharedFiles = [{
-                name: suite + ".nav.json",
-                src: path.join(DEMOS_PATH, "App_Data"),
-                dst: path.join(projectRoot, "App_Data")
-            }, {
                 name: "console.js",
                 src: path.join(DEMOS_SHARED, SCRIPTS_PATH),
                 dst: scriptsDest
-            }, {
-                src: path.join(DEMOS_PATH, "content", suite),
-                dst: stylesDest
             }, {
                 name: SUITE_CSS,
                 src: sharedStyles,
@@ -266,7 +254,32 @@ namespace("mvc", function() {
             }
         ];
 
-        sharedFiles.forEach(function(file) {
+        deploySuiteFiles("web");
+        deploySuiteFiles("dataviz");
+        deployFiles(sharedFiles);
+    });
+
+    function deploySuiteFiles(suite) {
+        var suiteStyles = path.join("styles", suite),
+            suiteStylesDest = path.join(stylesDest, suite),
+            suiteFiles = [{
+                name: suite + ".nav.json",
+                src: path.join(DEMOS_PATH, "App_Data"),
+                dst: path.join(projectRoot, "App_Data")
+            }, {
+                src: path.join(DEMOS_PATH, "content", suite),
+                dst: suiteStylesDest
+            }
+        ];
+
+        deployFiles(suiteFiles);
+
+        kendoScripts.buildSuiteScripts(suite, scriptsDest, "", true);
+        kendoBuild.deployStyles(suiteStyles, suiteStylesDest, "", true);
+    }
+
+    function deployFiles(filesToDeploy) {
+        filesToDeploy.forEach(function(file) {
             kendoBuild.mkdir(file.dst);
 
             if (file.name) {
@@ -275,17 +288,9 @@ namespace("mvc", function() {
                     path.join(file.dst, file.name)
                 );
             } else {
-                kendoBuild.copyDirSyncRecursive(file.src, file.dst);
+                kendoBuild.copyDirSyncRecursive(file.src, file.dst, true);
             }
         });
-
-        kendoScripts.buildSuiteScripts(suite, scriptsDest, "", true);
-        kendoBuild.deployStyles(suiteStyles, stylesDest, "", true);
-    }
-
-    function examplesRoot(suite) {
-        suite = suite[0].toUpperCase() + suite.toLowerCase().substring(1);
-        return path.join("wrappers", "mvc", "demos", "Kendo.Mvc.Examples");
     }
 });
 
