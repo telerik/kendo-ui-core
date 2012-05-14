@@ -11,19 +11,39 @@
 </div>
 
 <script type="script/x-kendo-template" id="inboxItem">
-    <h3>#: Subject#</h3>
+    <h3 class="time">#: Time#</h3><h3>#: From #</h3>
     <a class="reply"
         data-role="button"
         data-rel="actionsheet"
         href="\\#inboxActions"
         data-actionsheet-context="#:ID#">Reply</a>
-    <p>#: From #</p>
+    <h2>#: Subject#</h2>
+    <p>#: Text#</p>
 </script>
 
 <script>
     var inbox = [
-        {ID: 4, From: "John Doe", Subject: "Monday Meeting"},
-        {ID: 5, From: "Sarah Jeanette Connor", Subject: "Regarding Last Q org Chart changes"}
+        {
+            ID: 1,
+            From: "John Doe",
+            Subject: "Monday meeting",
+            Text: "Hi Tom, Since Monday I'll be out of office, I'm rescheduling the meeting for Tuesday.",
+            Time: "07:56"
+        },
+        {
+            ID: 2,
+            From: "Sarah Connor",
+            Subject: "Regarding org chart changes",
+            Text: "Tom, I checked the new org chart last night and I have some reservations about it...",
+            Time: "08:22"
+        },
+        {
+            ID: 3,
+            From: "Jane Parker",
+            Subject: "Your Costume is ready",
+            Text: "Hi mr.Sawyer, I'm sorry for the delay, your Halloween costume is ready. The bears...",
+            Time: "10:14"
+        }
     ];
 
     function onOpen(e) {
@@ -49,11 +69,37 @@
         float: right;
     }
 
-    .inboxList h3 {
-        width: 200px;
+    .inboxList
+    {
+        font-size: .8em;
     }
 
-    .inboxList p {
-        color: #999;
+    .inboxList p,
+    .inboxList h2,
+    .inboxList h3
+    {
+        margin: 5px 2px;
+    }
+
+    .inboxList p,
+    .inboxList h3
+    {
+        color: #777;
+    }
+
+    .inboxList h3.time
+    {
+        color: #369;
+        float: left;
+        margin-right: 10px;
+    }
+
+    #actionResult
+    {
+        padding: 10px;
+        background: rgba(127,127,127,.5);
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        margin: 0;
     }
 </style>
