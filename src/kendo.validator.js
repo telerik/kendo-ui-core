@@ -34,7 +34,9 @@
         },
         nameSpecialCharRegExp = /(\[|\]|\$|\.|\:|\+)/g;
 
-    kendo.ui.validator = { rules: {}, messages: {} };
+    if (!kendo.ui.validator) {
+        kendo.ui.validator = { rules: {}, messages: {} };
+    }
 
     function resolveRules(element) {
         var resolvers = kendo.ui.validator.rulesResolvers || {},
@@ -242,7 +244,6 @@
                         value = input.val();
 
                     return !(hasAttribute(input, "required") && (value === "" || !value  || checkbox));
-
                 },
                 pattern: function(input) {
                     if (input.filter("[type=text],[type=email],[type=url],[type=tel],[type=search]").filter("[pattern]").length && input.val() !== "") {
