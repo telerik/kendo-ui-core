@@ -2,7 +2,7 @@
     var kendo = window.kendo,
         Widget = kendo.ui.Widget,
         CHANGE =  "change",
-        KREORDABLE = "k-reordable";
+        KREORDERABLE = "k-reorderable";
 
     function toggleHintClass(hint, denied) {
         hint = $(hint);
@@ -14,15 +14,15 @@
         }
     }
 
-    var Reordable = Widget.extend({
+    var Reorderable = Widget.extend({
         init: function(element, options) {
             var that = this,
                 draggable,
-                group = kendo.guid() + "-reordable";
+                group = kendo.guid() + "-reorderable";
 
             Widget.fn.init.call(that, element, options);
 
-            element = that.element.addClass(KREORDABLE);
+            element = that.element.addClass(KREORDERABLE);
             options = that.options;
             draggable = options.draggable || new kendo.ui.Draggable(element, {
                 group: group,
@@ -90,7 +90,7 @@
         },
 
         options: {
-            name: "Reordable",
+            name: "Reorderable",
             filter: "*"
         },
 
@@ -100,6 +100,6 @@
 
     });
 
-    kendo.ui.plugin(Reordable);
+    kendo.ui.plugin(Reorderable);
 
 })(jQuery);

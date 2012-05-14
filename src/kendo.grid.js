@@ -424,7 +424,7 @@
             dataSource: {},
             height: null,
             resizable: false,
-            reordable: false
+            reorderable: false
         },
 
         setOptions: function(options) {
@@ -574,7 +574,7 @@
 
         _draggable: function() {
             var that = this;
-            if (that.options.reordable) {
+            if (that.options.reorderable) {
                 that._draggableInstance = that.thead.kendoDraggable({
                     group: kendo.guid(),
                     filter: ".k-header:not(.k-group-cell,.k-hierarchy-cell)[" + kendo.attr("field") + "]",
@@ -595,10 +595,10 @@
             }
         },
 
-        _reordable: function() {
+        _reorderable: function() {
             var that = this;
-            if (that.options.reordable) {
-                that.thead.kendoReordable({
+            if (that.options.reorderable) {
+                that.thead.kendoReorderable({
                     draggable: that._draggableInstance,
                     change: function(e) {
                         var column = that.columns[e.oldIndex];
@@ -1171,7 +1171,7 @@
                     draggable: that._draggableInstance,
                     groupContainer: "div.k-grouping-header",
                     dataSource: that.dataSource,
-                    allowDrag: that.options.reordable
+                    allowDrag: that.options.reorderable
                 });
             }
         },
@@ -2228,7 +2228,7 @@
 
             that._draggable();
 
-            that._reordable();
+            that._reorderable();
         },
 
         _updateCols: function() {

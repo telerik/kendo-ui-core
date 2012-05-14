@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>reordable tests</title>
+        <title>reorderable tests</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.draganddrop.js"></script>
-        <script src="../../src/kendo.reordable.js"></script>
+        <script src="../../src/kendo.reorderable.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
     </head>
     <body>
         <div id="qunit-fixture">test markup, will be hidden</div>
-        <h1 id="qunit-header">reordable tests</h1>
+        <h1 id="qunit-header">reorderable tests</h1>
         <h2 id="qunit-banner"></h2>
         <div id="qunit-testrunner-toolbar"></div>
         <h2 id="qunit-userAgent"></h2>
@@ -20,10 +20,10 @@
         <div id="log"></div>
 
         <script>
-            var Reordable = kendo.ui.Reordable,
+            var Reorderable = kendo.ui.Reorderable,
                 div;
 
-            module("kendo.ui.Reordable", {
+            module("kendo.ui.Reorderable", {
                 setup: function() {
                     div= $("<div><div>1</div><div>2</div><div>3</div></div>")
                         .find("div")
@@ -68,36 +68,36 @@
                 equal(parseInt(source.css("left"), 10), position);
             }
 
-            test("widget name option is Reordable", function() {
-                equal(Reordable.fn.options.name, "Reordable");
+            test("widget name option is Reorderable", function() {
+                equal(Reorderable.fn.options.name, "Reorderable");
             });
 
-            test("Reordable instance from element created from constructor", function() {
-                var reordable = new Reordable(div, {});
+            test("Reorderable instance from element created from constructor", function() {
+                var reorderable = new Reorderable(div, {});
 
-                ok(div.data("kendoReordable") instanceof Reordable);
+                ok(div.data("kendoReorderable") instanceof Reorderable);
             });
 
-            test("Reordable instance from element created from jQuery extension", function() {
-                div.kendoReordable();
+            test("Reorderable instance from element created from jQuery extension", function() {
+                div.kendoReorderable();
 
-                ok(div.data("kendoReordable") instanceof Reordable);
+                ok(div.data("kendoReorderable") instanceof Reorderable);
             });
 
-            test("adds class k-reordable to element", function() {
-                div.kendoReordable();
+            test("adds class k-reorderable to element", function() {
+                div.kendoReorderable();
 
-                ok(div.hasClass("k-reordable"));
+                ok(div.hasClass("k-reorderable"));
             });
 
             test("element initialized as Draggable", function() {
-                div.kendoReordable();
+                div.kendoReorderable();
 
                 ok(div.data("kendoDraggable") instanceof kendo.ui.Draggable);
             });
 
             test("element initializes DropTargets", function() {
-                div.kendoReordable();
+                div.kendoReorderable();
 
                 var elements = div.children();
 
@@ -107,55 +107,55 @@
             });
 
             test("reorder cue after drop target", function() {
-                var reordable = new Reordable(div, {}),
+                var reorderable = new Reorderable(div, {}),
                     target = div.children().eq(1);
 
                 moveOverDropTarget(div.children().eq(0), target);
 
-                equalPositions(reordable.reorderDropCue, target);
+                equalPositions(reorderable.reorderDropCue, target);
             });
 
             test("reorder cue doesn't show on same target", function() {
-                var reordable = new Reordable(div, {}),
+                var reorderable = new Reorderable(div, {}),
                     target = div.children().eq(1);
 
                 moveOverDropTarget(target, target);
 
-                ok(!reordable.reorderDropCue.is(":visible"));
+                ok(!reorderable.reorderDropCue.is(":visible"));
             });
 
             test("reorder cue before first drop target", function() {
-                var reordable = new Reordable(div, {}),
+                var reorderable = new Reorderable(div, {}),
                     target = div.children().eq(0);
 
                 moveOverDropTarget(div.children().eq(1), target);
 
-                equalPositions(reordable.reorderDropCue, target, true);
+                equalPositions(reorderable.reorderDropCue, target, true);
             });
 
             test("reorder cue height is same as target height", function() {
-                var reordable = new Reordable(div, {}),
+                var reorderable = new Reorderable(div, {}),
                     target = div.children().eq(1);
 
                 moveOverDropTarget(div.children().eq(0), target);
 
-                equal(reordable.reorderDropCue.outerHeight(), target.outerHeight());
+                equal(reorderable.reorderDropCue.outerHeight(), target.outerHeight());
             });
 
             test("reorder cue is removed on drop", function() {
-                var reordable = new Reordable(div, {}),
+                var reorderable = new Reorderable(div, {}),
                     source = div.children().eq(0),
                     target = div.children().eq(1);
 
                 moveOverDropTarget(source, target);
 
-                ok(!reordable.reorderDropCue.is(":visible"));
+                ok(!reorderable.reorderDropCue.is(":visible"));
                 equal($(".k-reorder-cue", document.body).length, 0);
             });
 
             test("change event is triggered", function() {
                 var called = false,
-                    reordable = new Reordable(div, {
+                    reorderable = new Reorderable(div, {
                         change: function() {
                             called = true;
                         }
@@ -170,7 +170,7 @@
 
             test("change event is not triggered when drop on same target", function() {
                 var called = false,
-                    reordable = new Reordable(div, {
+                    reorderable = new Reorderable(div, {
                         change: function() {
                             called = true;
                         }
@@ -185,7 +185,7 @@
             test("change event arguments", function() {
                 div.children().eq(0).addClass("disabled");
                 var args,
-                    reordable = new Reordable(div, {
+                    reorderable = new Reorderable(div, {
                         change: function() {
                             args = arguments[0];
                         },
