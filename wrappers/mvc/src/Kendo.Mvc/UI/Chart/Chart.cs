@@ -244,7 +244,7 @@ namespace Kendo.Mvc.UI
         /// <param name="writer">The writer object.</param>
         public override void WriteInitializationScript(TextWriter writer)
         {
-            var objectWriter = ClientSideObjectWriterFactory.Create(Id, "tChart", writer);
+            var objectWriter = ClientSideObjectWriterFactory.Create(Id, "kendoChart", writer);
 
             objectWriter.Start();
 

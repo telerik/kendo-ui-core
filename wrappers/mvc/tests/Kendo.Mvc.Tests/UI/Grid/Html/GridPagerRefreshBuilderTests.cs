@@ -12,7 +12,7 @@ namespace Kendo.Mvc.UI.Html.Tests
             var div = builder.Create(string.Empty, string.Empty);
 
             Assert.Equal("div", div.TagName);
-            Assert.Equal("t-status", div.Attribute("class"));
+            Assert.Equal("k-status", div.Attribute("class"));
         }
 
         [Fact]
@@ -28,7 +28,7 @@ namespace Kendo.Mvc.UI.Html.Tests
             var link = div.Children[0];
 
             Assert.Equal("a", link.TagName);
-            Assert.Equal("t-icon t-refresh", link.Attribute("class"));
+            Assert.Equal("k-icon k-refresh", link.Attribute("class"));
             Assert.Equal(url, link.Attribute("href"));
             Assert.Equal(refreshText, link.InnerHtml);
         }

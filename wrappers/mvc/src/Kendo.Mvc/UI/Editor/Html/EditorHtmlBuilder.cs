@@ -18,7 +18,7 @@ namespace Kendo.Mvc.UI.Html
             return new HtmlElement("table")
                     .Attributes(new { id = editor.Id, cellspacing = "4", cellpadding = "0" })
                     .Attributes(editor.HtmlAttributes)
-                    .PrependClass(UIPrimitives.Widget, "t-editor", UIPrimitives.Header);
+                    .PrependClass(UIPrimitives.Widget, "k-editor", UIPrimitives.Header);
         }
 
         public IHtmlNode CreateTextArea()
@@ -66,11 +66,11 @@ namespace Kendo.Mvc.UI.Html
 
             if (editor.DefaultToolGroup.Tools.Any())
             {
-                CreateToolBar().AppendTo(new HtmlElement("td").AddClass("t-editor-toolbar-wrap").AppendTo(toolbarRow));
+                CreateToolBar().AppendTo(new HtmlElement("td").AddClass("k-editor-toolbar-wrap").AppendTo(toolbarRow));
             }
 
             var editableCell = new HtmlElement("td")
-                .AddClass("t-editable-area")
+                .AddClass("k-editable-area")
                 .ToggleClass("input-validation-error", !editor.IsValid())
                 .AppendTo(new HtmlElement("tr").AppendTo(root));
 
@@ -78,7 +78,6 @@ namespace Kendo.Mvc.UI.Html
             textarea.AppendTo(editableCell);
             
             var script = new HtmlElement("script")
-                            .Attribute("type", "text/javascript")
                             .Html("document.getElementById('" + textarea.Attribute("id") + "').style.display='none'");
 
             script.AppendTo(editableCell);

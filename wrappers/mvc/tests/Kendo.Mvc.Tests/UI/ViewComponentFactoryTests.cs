@@ -71,27 +71,6 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
-        public void NumericTextBox_should_return_new_instance_with_type_double()
-        {
-            var builder = _factory.NumericTextBox<double>();
-            Assert.IsType<double>(builder.ToComponent().Min);
-        }
-
-        [Fact]
-        public void NumericTextBox_should_return_new_instance_with_type_float()
-        {
-            var builder = _factory.NumericTextBox<float>();
-            Assert.IsType<float>(builder.ToComponent().Min);
-        }
-
-        [Fact]
-        public void NumericTextBox_should_return_new_instance_with_type_short()
-        {
-            var builder = _factory.NumericTextBox<short>();
-            Assert.IsType<short>(builder.ToComponent().Min);
-        }
-
-        [Fact]
         public void Window_should_return_new_instance()
         {
             Assert.NotNull(_factory.Window());

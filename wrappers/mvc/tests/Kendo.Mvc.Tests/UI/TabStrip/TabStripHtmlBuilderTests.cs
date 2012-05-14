@@ -33,7 +33,7 @@ namespace Kendo.Mvc.UI.Tests
 
             Assert.Equal("div", tag.TagName);
             Assert.Equal(tabStrip.Id, tag.Attribute("id"));
-            Assert.Equal("t-widget t-tabstrip t-header", tag.Attribute("class"));
+            Assert.Equal("k-widget k-tabstrip k-header", tag.Attribute("class"));
         }
 
         [Fact]

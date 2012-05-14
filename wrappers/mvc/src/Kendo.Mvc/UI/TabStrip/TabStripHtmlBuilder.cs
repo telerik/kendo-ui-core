@@ -13,9 +13,9 @@ namespace Kendo.Mvc.UI
         public IHtmlNode TabStripTag()
         {
             IHtmlNode div = ComponentTag("div")
-                .PrependClass(UIPrimitives.Widget, "t-tabstrip", UIPrimitives.Header);
+                .PrependClass(UIPrimitives.Widget, "k-tabstrip", UIPrimitives.Header);
 
-            new HtmlElement("ul").AddClass(UIPrimitives.ResetStyle, "t-tabstrip-items").AppendTo(div);
+            new HtmlElement("ul").AddClass(UIPrimitives.ResetStyle, "k-tabstrip-items").AppendTo(div);
 
             return div;
         }

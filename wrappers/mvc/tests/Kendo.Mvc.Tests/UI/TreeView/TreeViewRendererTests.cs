@@ -34,7 +34,7 @@ namespace Kendo.Mvc.UI.Tests
 
             Assert.Equal("div", tag.TagName);
             Assert.Equal(treeView.Id, tag.Attribute("id"));
-            Assert.Equal("t-widget t-treeview t-reset", tag.Attribute("class"));
+            Assert.Equal("k-widget k-treeview k-reset", tag.Attribute("class"));
         }
 
         [Fact]
@@ -65,7 +65,7 @@ namespace Kendo.Mvc.UI.Tests
 
             IHtmlNode tag = builder.ItemInnerContent(item);
 
-            Assert.Equal("t-link t-in", tag.Attribute("class"));
+            Assert.Equal("k-link k-in", tag.Attribute("class"));
         }
     }
 }

@@ -161,7 +161,7 @@ namespace Kendo.Mvc.UI
 #endif
             using (HtmlTextWriter textWriter = new HtmlTextWriter(baseWriter))
             {
-                WriteHtml(textWriter);    
+                WriteHtml(textWriter);
             }
         }
 
@@ -200,7 +200,7 @@ namespace Kendo.Mvc.UI
                 throw new InvalidOperationException(Resources.TextResource.NameCannotContainSpaces);
             }
 
-            this.ThrowIfClassIsPresent("t-" + GetType().GetTypeName().ToLowerInvariant() + "-rtl", TextResource.Rtl);
+            this.ThrowIfClassIsPresent("k-" + GetType().GetTypeName().ToLowerInvariant() + "-rtl", TextResource.Rtl);
         }
 
         public string ToHtmlString()

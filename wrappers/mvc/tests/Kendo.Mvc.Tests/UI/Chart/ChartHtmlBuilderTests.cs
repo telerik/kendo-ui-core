@@ -25,11 +25,9 @@ namespace Kendo.Mvc.UI.Html.Tests
         [Fact]
         public void CreateChart_should_set_CSS_classes()
         {
-            const string css = "t-widget t-chart";
-
             IHtmlNode tag = builder.CreateChart();
 
-            tag.Attribute("class").ShouldEqual(css);
+            tag.Attribute("class").ShouldEqual("k-widget k-chart");
         }
 
         [Fact]

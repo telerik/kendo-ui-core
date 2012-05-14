@@ -21,7 +21,7 @@ namespace Kendo.Mvc.UI.Tests
 
             builder.Enabled(enabled);
 
-            settings.Enabled.ShouldBeSameAs(enabled);
+            settings.Enabled.ShouldEqual(enabled);
         }
 
         [Fact]

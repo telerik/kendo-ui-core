@@ -19,7 +19,7 @@ namespace Kendo.Mvc.UI.Html.Tests
             var div = builder.CreateSections(pagerSection);
 
             div.TagName.ShouldEqual("div");
-            div.Attribute("class").ShouldEqual("t-pager t-reset");
+            div.Attribute("class").ShouldEqual("k-pager k-reset");
         }
     }
 }

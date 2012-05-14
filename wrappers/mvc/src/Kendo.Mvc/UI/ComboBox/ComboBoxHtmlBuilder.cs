@@ -22,8 +22,8 @@ using System.Collections.Generic;
         {
             IHtmlNode root = new HtmlElement("div")
                             .Attributes(Component.HtmlAttributes)
-                            .PrependClass(UIPrimitives.Widget, "t-combobox", UIPrimitives.Header)
-                            .ToggleClass("t-state-disabled", !Component.Enabled);
+                            .PrependClass(UIPrimitives.Widget, "k-combobox", UIPrimitives.Header)
+                            .ToggleClass("k-state-disabled", !Component.Enabled);
 
             this.InnerContentTag().AppendTo(root);
             this.HiddenInputTag().AppendTo(root);
@@ -33,12 +33,12 @@ using System.Collections.Generic;
 
         public IHtmlNode InnerContentTag()
         {
-            IHtmlNode root = new HtmlElement("div").AddClass("t-dropdown-wrap t-state-default");
+            IHtmlNode root = new HtmlElement("div").AddClass("k-dropdown-wrap k-state-default");
 
             IHtmlNode input = new HtmlElement("input", TagRenderMode.SelfClosing)
                               .Attributes(new { type = "text"})
                               .ToggleAttribute("disabled", "disabled", !Component.Enabled)
-                              .ToggleClass("input-validation-error", !Component.IsValid())
+                              .ToggleClass("inpuk-validation-error", !Component.IsValid())
                               .PrependClass(UIPrimitives.Input)
                               .AppendTo(root);
 
@@ -78,9 +78,9 @@ using System.Collections.Generic;
                  .ToggleAttribute("value", text, text.HasValue())
                  .Attributes(Component.InputHtmlAttributes);
 
-            IHtmlNode link = new HtmlElement("span").AddClass("t-select", UIPrimitives.Header);
+            IHtmlNode link = new HtmlElement("span").AddClass("k-select", UIPrimitives.Header);
 
-            new HtmlElement("span").AddClass(UIPrimitives.Icon, "t-arrow-down").Html("select").AppendTo(link);
+            new HtmlElement("span").AddClass(UIPrimitives.Icon, "k-arrow-down").Html("select").AppendTo(link);
 
             link.AppendTo(root);
 
