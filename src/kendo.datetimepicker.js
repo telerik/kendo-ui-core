@@ -383,6 +383,7 @@
             format: "",
             timeFormat: "",
             parseFormats: [],
+            dates: [],
             min: new DATE(MIN),
             max: new DATE(MAX),
             interval: 30,
@@ -768,6 +769,7 @@
                 options = that.options,
                 min = options.min,
                 max = options.max,
+                dates = options.dates,
                 previous = that._old,
                 current = that._value,
                 isTimeEqualToZero,
@@ -795,7 +797,11 @@
 
             if (rebind) {
                 if (!isTimeEqualToZero) {
-                    timeView.refresh();
+                    if (dates && dates[0]) {
+                        timeView.dataBind(dates);
+                    } else {
+                        timeView.refresh();
+                    }
                 } else {
                     timeView.dataBind([MIN]);
                 }
@@ -890,6 +896,7 @@
             that.timeView = new TimeView({
                 anchor: that.wrapper,
                 animation: options.animation,
+                dates: options.dates,
                 format: options.timeFormat,
                 height: options.height,
                 interval: options.interval,
