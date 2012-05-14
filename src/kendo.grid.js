@@ -574,7 +574,7 @@
 
         _draggable: function() {
             var that = this;
-            if (that.options.groupable || that.options.reordable) {
+            if (that.options.reordable) {
                 that._draggableInstance = that.thead.kendoDraggable({
                     group: kendo.guid(),
                     filter: ".k-header:not(.k-group-cell,.k-hierarchy-cell)[" + kendo.attr("field") + "]",
@@ -584,7 +584,7 @@
                                 width: target.width(),
                                 paddingLeft: target.css("paddingLeft"),
                                 paddingRight: target.css("paddingRight"),
-                                height: target.height(),
+                                lineHeight: target.height() + "px",
                                 paddingTop: target.css("paddingTop"),
                                 paddingBottom: target.css("paddingBottom")
                             })

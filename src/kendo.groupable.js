@@ -18,7 +18,7 @@
                     width: target.width(),
                     paddingLeft: target.css("paddingLeft"),
                     paddingRight: target.css("paddingRight"),
-                    height: target.height(),
+                    lineHeight: target.height() + "px",
                     paddingTop: target.css("paddingTop"),
                     paddingBottom: target.css("paddingBottom")
                 })
