@@ -19,21 +19,14 @@ namespace Kendo.Mvc.UI
     /// </summary>
     public class ViewComponentFactory : IHideObjectMembers
     {
-        private readonly StyleSheetRegistrarBuilder styleSheetRegistrarBuilder;
-        private readonly ScriptRegistrarBuilder scriptRegistrarBuilder;
 
-        public ViewComponentFactory(HtmlHelper htmlHelper, IClientSideObjectWriterFactory clientSideObjectWriterFactory, StyleSheetRegistrarBuilder styleSheetRegistrar, ScriptRegistrarBuilder scriptRegistrar)
+        public ViewComponentFactory(HtmlHelper htmlHelper, IClientSideObjectWriterFactory clientSideObjectWriterFactory)
         {
             Guard.IsNotNull(htmlHelper, "htmlHelper");
             Guard.IsNotNull(clientSideObjectWriterFactory, "clientSideObjectWriterFactory");
-            Guard.IsNotNull(styleSheetRegistrar, "styleSheetRegistrar");
-            Guard.IsNotNull(scriptRegistrar, "scriptRegistrar");
 
             HtmlHelper = htmlHelper;
             ClientSideObjectWriterFactory = clientSideObjectWriterFactory;
-
-            styleSheetRegistrarBuilder = styleSheetRegistrar;
-            scriptRegistrarBuilder = scriptRegistrar;
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -67,40 +60,6 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
-        /// Creates a <see cref="StyleSheetRegistrar"/>
-        /// </summary>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().StyleSheetRegistrar()
-        ///             .DefaultGroup(group => group
-        ///                   group.Add("Site.css")
-        ///                        .Add("telerik.common.css")
-        ///                        .Add("telerik.vista.css")
-        ///                        .Compressed(true)
-        ///             )
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public StyleSheetRegistrarBuilder StyleSheetRegistrar()
-        {
-            return styleSheetRegistrarBuilder;
-        }
-
-        /// <summary>
-        /// Creates a <see cref="ScriptRegistrar"/>
-        /// </summary>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().ScriptRegistrar()
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public ScriptRegistrarBuilder ScriptRegistrar()
-        {
-            return scriptRegistrarBuilder;
-        }
-
-        /// <summary>
         /// Creates a <see cref="Menu"/>
         /// </summary>
         /// <example>
@@ -113,7 +72,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual MenuBuilder Menu()
         {
-            return MenuBuilder.Create(Register(() => new Menu(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>(), DI.Current.Resolve<INavigationItemAuthorization>(), DI.Current.Resolve<INavigationComponentHtmlBuilderFactory<Menu, MenuItem>>())));
+            return MenuBuilder.Create(new Menu(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>(), DI.Current.Resolve<INavigationItemAuthorization>(), DI.Current.Resolve<INavigationComponentHtmlBuilderFactory<Menu, MenuItem>>()));
         }
 
         /// <summary>
@@ -128,9 +87,9 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual EditorBuilder Editor()
         {
-            return EditorBuilder.Create(Register(() => new Editor(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IWebAssetCollectionResolver>(),
+            return EditorBuilder.Create(new Editor(ViewContext, ClientSideObjectWriterFactory, 
                 DI.Current.Resolve<ILocalizationServiceFactory>().Create("EditorLocalization", CultureInfo.CurrentUICulture),
-                DI.Current.Resolve<IUrlGenerator>())));
+                DI.Current.Resolve<IUrlGenerator>()));
         }
 
         /// <summary>
@@ -150,13 +109,12 @@ namespace Kendo.Mvc.UI
         /// </remarks>
         public virtual GridBuilder<T> Grid<T>() where T : class
         {
-            return GridBuilder<T>.Create(Register(() => new Grid<T>(ViewContext, 
+            return GridBuilder<T>.Create(new Grid<T>(ViewContext, 
                         ClientSideObjectWriterFactory, 
                         DI.Current.Resolve<IUrlGenerator>(),
                         DI.Current.Resolve<ILocalizationServiceFactory>().Create("GridLocalization", CultureInfo.CurrentUICulture), 
                         DI.Current.Resolve<IGridHtmlBuilderFactory>()
                     )
-                )
             );
         }
 
@@ -242,7 +200,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual SplitterBuilder Splitter()
         {
-            return SplitterBuilder.Create(Register(() => new Splitter(ViewContext, ClientSideObjectWriterFactory)));
+            return SplitterBuilder.Create(new Splitter(ViewContext, ClientSideObjectWriterFactory));
         }
 
         /// <summary>
@@ -262,7 +220,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual TabStripBuilder TabStrip()
         {
-            return TabStripBuilder.Create(Register(() => new TabStrip(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>(), DI.Current.Resolve<INavigationItemAuthorization>(), DI.Current.Resolve<ITabStripHtmlBuilderFactory>())));
+            return TabStripBuilder.Create(new TabStrip(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>(), DI.Current.Resolve<INavigationItemAuthorization>(), DI.Current.Resolve<ITabStripHtmlBuilderFactory>()));
         }
 
         /// <summary>
@@ -277,7 +235,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual DateTimePickerBuilder DateTimePicker()
         {
-            return DateTimePickerBuilder.Create(Register(() => new DateTimePicker(ViewContext, ClientSideObjectWriterFactory)));
+            return DateTimePickerBuilder.Create(new DateTimePicker(ViewContext, ClientSideObjectWriterFactory));
         }
 
 
@@ -293,7 +251,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual DatePickerBuilder DatePicker()
         {
-            return DatePickerBuilder.Create(Register(() => new DatePicker(ViewContext, ClientSideObjectWriterFactory)));
+            return DatePickerBuilder.Create(new DatePicker(ViewContext, ClientSideObjectWriterFactory));
         }
 
         /// <summary>
@@ -308,7 +266,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual TimePickerBuilder TimePicker()
         {
-            return TimePickerBuilder.Create(Register(() => new TimePicker(ViewContext, ClientSideObjectWriterFactory)));
+            return TimePickerBuilder.Create(new TimePicker(ViewContext, ClientSideObjectWriterFactory));
         }
 
         /// <summary>
@@ -323,7 +281,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual CalendarBuilder Calendar()
         {
-            return CalendarBuilder.Create(Register(() => new Calendar(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>(), DI.Current.Resolve<ICalendarHtmlBuilderFactory>())));
+            return CalendarBuilder.Create(new Calendar(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>(), DI.Current.Resolve<ICalendarHtmlBuilderFactory>()));
         }
 
         /// <summary>
@@ -343,7 +301,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual PanelBarBuilder PanelBar()
         {
-            return PanelBarBuilder.Create(Register(() => new PanelBar(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>(), DI.Current.Resolve<INavigationItemAuthorization>(), DI.Current.Resolve<INavigationComponentHtmlBuilderFactory<PanelBar, PanelBarItem>>())));
+            return PanelBarBuilder.Create(new PanelBar(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>(), DI.Current.Resolve<INavigationItemAuthorization>(), DI.Current.Resolve<INavigationComponentHtmlBuilderFactory<PanelBar, PanelBarItem>>()));
         }
 
         /// <summary>
@@ -359,7 +317,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual TreeViewBuilder TreeView()
         {
-            return TreeViewBuilder.Create(Register(() => new TreeView(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>(), DI.Current.Resolve<INavigationItemAuthorization>(), DI.Current.Resolve<ITreeViewHtmlBuilderFactory>())));
+            return TreeViewBuilder.Create(new TreeView(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>(), DI.Current.Resolve<INavigationItemAuthorization>(), DI.Current.Resolve<ITreeViewHtmlBuilderFactory>()));
         }
 
         /// <summary>
@@ -375,7 +333,7 @@ namespace Kendo.Mvc.UI
         /// <returns>Returns <see cref="NumericTextBoxBuilder{double}"/>.</returns>
         public virtual NumericTextBoxBuilder<double> NumericTextBox()
         {
-            return NumericTextBoxBuilder<double>.Create(Register(() => new NumericTextBox<double>(ViewContext, ViewData, ClientSideObjectWriterFactory)));
+            return NumericTextBoxBuilder<double>.Create(new NumericTextBox<double>(ViewContext, ViewData, ClientSideObjectWriterFactory));
         }
 
         /// <summary>
@@ -390,7 +348,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual NumericTextBoxBuilder<T> NumericTextBox<T>() where T: struct
         {
-            return NumericTextBoxBuilder<T>.Create(Register(() => new NumericTextBox<T>(ViewContext, ViewData, ClientSideObjectWriterFactory)));
+            return NumericTextBoxBuilder<T>.Create(new NumericTextBox<T>(ViewContext, ViewData, ClientSideObjectWriterFactory));
         }
 
         ///// <summary>
@@ -450,7 +408,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual WindowBuilder Window()
         {
-            return WindowBuilder.Create(Register(() => new Window(ViewContext, ClientSideObjectWriterFactory)));
+            return WindowBuilder.Create(new Window(ViewContext, ClientSideObjectWriterFactory));
         }
 
         /// <summary>
@@ -470,7 +428,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual DropDownListBuilder DropDownList()
         {
-            return DropDownListBuilder.Create(Register(() => new DropDownList(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>())));
+            return DropDownListBuilder.Create(new DropDownList(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>()));
         }
 
         /// <summary>
@@ -490,7 +448,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual ComboBoxBuilder ComboBox()
         {
-            return ComboBoxBuilder.Create(Register(() => new ComboBox(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>())));
+            return ComboBoxBuilder.Create(new ComboBox(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>()));
         }
 
         /// <summary>
@@ -510,7 +468,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual AutoCompleteBuilder AutoComplete()
         {
-            return AutoCompleteBuilder.Create(Register(() => new AutoComplete(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>())));
+            return AutoCompleteBuilder.Create(new AutoComplete(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>()));
         }
 
         /// <summary>
@@ -525,7 +483,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual SliderBuilder<T> Slider<T>() where T: struct, IComparable
         {
-            return SliderBuilder<T>.Create(Register(() => new Slider<T>(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<ISliderHtmlBuilderFactory>())));
+            return SliderBuilder<T>.Create(new Slider<T>(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<ISliderHtmlBuilderFactory>()));
         }
 
         /// <summary>
@@ -540,7 +498,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual RangeSliderBuilder<T> RangeSlider<T>() where T : struct, IComparable
         {
-            return RangeSliderBuilder<T>.Create(Register(() => new RangeSlider<T>(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IRangeSliderHtmlBuilderFactory>())));
+            return RangeSliderBuilder<T>.Create(new RangeSlider<T>(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IRangeSliderHtmlBuilderFactory>()));
         }
 
         /// <summary>
@@ -559,9 +517,9 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual UploadBuilder Upload()
         {
-            return UploadBuilder.Create(Register(() => 
+            return UploadBuilder.Create(
                 new Upload(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>(),
-                            DI.Current.Resolve<ILocalizationServiceFactory>().Create("UploadLocalization", CultureInfo.CurrentUICulture))));
+                            DI.Current.Resolve<ILocalizationServiceFactory>().Create("UploadLocalization", CultureInfo.CurrentUICulture)));
         }
 
         /// <summary>
@@ -576,8 +534,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual ChartBuilder<T> Chart<T>() where T : class
         {
-            return ChartBuilder<T>.Create(Register(() =>
-                new Chart<T>(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>())));
+            return ChartBuilder<T>.Create(new Chart<T>(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>()));
         }
 
         /// <summary>
@@ -642,15 +599,6 @@ namespace Kendo.Mvc.UI
             return builder;
         }
 
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public TViewComponent Register<TViewComponent>(Func<TViewComponent> factory) where TViewComponent : ViewComponentBase
-        {
-            var component = factory();
-
-            scriptRegistrarBuilder.ToRegistrar().Register(component);
-
-            return component;
-        }
     }
 #if MVC2 || MVC3
     public class ViewComponentFactory<TModel> : ViewComponentFactory
@@ -658,8 +606,8 @@ namespace Kendo.Mvc.UI
         private string minimumValidator;
         private string maximumValidator;
 
-        public ViewComponentFactory(HtmlHelper<TModel> htmlHelper, IClientSideObjectWriterFactory clientSideObjectWriterFactory, StyleSheetRegistrarBuilder styleSheetRegistrar, ScriptRegistrarBuilder scriptRegistrar)
-            : base(htmlHelper, clientSideObjectWriterFactory, styleSheetRegistrar, scriptRegistrar)
+        public ViewComponentFactory(HtmlHelper<TModel> htmlHelper, IClientSideObjectWriterFactory clientSideObjectWriterFactory)
+            : base(htmlHelper, clientSideObjectWriterFactory)
         {
             this.HtmlHelper = htmlHelper;
 

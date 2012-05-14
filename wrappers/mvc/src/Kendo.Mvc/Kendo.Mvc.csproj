@@ -144,12 +144,8 @@
     <Compile Include="Infrastructure\Implementation\NoCache.cs" />
     <Compile Include="Infrastructure\Implementation\ResourceBase.cs" />
     <Compile Include="Infrastructure\Implementation\ResXResource.cs" />
-    <Compile Include="Infrastructure\Implementation\WebAsset\ReleaseWebAssetExtensions.cs" />
-    <Compile Include="Infrastructure\Implementation\WebAsset\DebugWebAssetExtensions.cs" />
-    <Compile Include="Infrastructure\WebAsset\IWebAssetExtensions.cs" />
     <Compile Include="Infrastructure\ViewComponentLocalization.cs" />
     <Compile Include="Infrastructure\Implementation\Signature.cs" />
-    <Compile Include="Infrastructure\WebAsset\IWebAssetLocator.cs" />
     <Compile Include="Resources\EditorLocalization.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1012,23 +1008,7 @@
     <Compile Include="UI\Upload\UploadLocalization.cs" />
     <Compile Include="UI\ViewComponentExtensions.cs" />
     <Compile Include="UI\ViewComponentFactory.cs" />
-    <Compile Include="Infrastructure\Implementation\WebAsset\AbsoluteWebAssetResolver.cs" />
-    <Compile Include="Infrastructure\Implementation\WebAsset\CdnWebAssetResolver.cs" />
-    <Compile Include="Infrastructure\Implementation\WebAsset\CombinedWebAssetGroupResolver.cs" />
-    <Compile Include="Infrastructure\WebAsset\IWebAssetContentFilter.cs" />
-    <Compile Include="Infrastructure\WebAsset\IWebAssetChecker.cs" />
-    <Compile Include="Infrastructure\WebAsset\IWebAssetGroupReader.cs" />
-    <Compile Include="Infrastructure\WebAsset\IWebAssetGroupSerializer.cs" />
     <Compile Include="UI\Effects\ZoomAnimation.cs" />
-    <Compile Include="Infrastructure\WebAsset\IWebAssetResolver.cs" />
-    <Compile Include="Infrastructure\WebAsset\IWebAssetResolverFactory.cs" />
-    <Compile Include="Infrastructure\Implementation\WebAsset\RebaseImagePathContentFilter.cs" />
-    <Compile Include="Infrastructure\WebAsset\ResolverContext.cs" />
-    <Compile Include="Infrastructure\Implementation\WebAsset\WebAssetChecker.cs" />
-    <Compile Include="Infrastructure\Implementation\WebAsset\WebAssetGroupConverter.cs" />
-    <Compile Include="Infrastructure\Implementation\WebAsset\WebAssetGroupReader.cs" />
-    <Compile Include="Infrastructure\Implementation\WebAsset\WebAssetGroupResolver.cs" />
-    <Compile Include="Infrastructure\Implementation\WebAsset\LocalWebAssetResolver.cs" />
     <Compile Include="UI\Window\Fluent\WindowEffectsBuilder.cs" />
     <Compile Include="UI\Window\WindowButtons.cs" />
     <Compile Include="UI\Window\Fluent\WindowButtonsBuilder.cs" />
@@ -1043,21 +1023,7 @@
     <Compile Include="UI\Window\Window.cs" />
     <Compile Include="UI\Window\Fluent\WindowBuilder.cs" />
     <Compile Include="UI\Window\WindowHtmlBuilder.cs" />
-    <Compile Include="Infrastructure\WebAsset\IWebAssetCollectionResolver.cs" />
-    <Compile Include="WebAsset\SharedWebAssetGroupBuilder.cs" />
     <Compile Include="UrlGenerator.cs" />
-    <Compile Include="WebAsset\SharedWebAssets.cs" />
-    <Compile Include="WebAsset\Configuration\WebAssetConfigurationSection.cs" />
-    <Compile Include="WebAsset\Configuration\WebAssetConfigurationElement.cs" />
-    <Compile Include="WebAsset\Configuration\WebAssetConfigurationElementCollection.cs" />
-    <Compile Include="WebAsset\Configuration\WebAssetGroupConfigurationElement.cs" />
-    <Compile Include="WebAsset\Configuration\WebAssetGroupConfigurationElementCollection.cs" />
-    <Compile Include="WebAsset\WebAssetHttpHandler.cs" />
-    <Compile Include="Infrastructure\Implementation\WebAsset\WebAssetCollectionResolver.cs" />
-    <Compile Include="Infrastructure\Implementation\WebAsset\WebAssetGroupSerializer.cs" />
-    <Compile Include="Infrastructure\Implementation\WebAsset\WebAssetResolverFactory.cs" />
-    <Compile Include="Infrastructure\Implementation\WebAsset\WebAssetLocator.cs" />
-    <Compile Include="WebAsset\WebAssetDefaultSettings.cs" />
     <Compile Include="Infrastructure\IPathResolver.cs" />
     <Compile Include="Infrastructure\IHttpResponseCompressor.cs" />
     <Compile Include="Infrastructure\IHttpResponseCacher.cs" />
@@ -1082,12 +1048,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TextResource.resx</DependentUpon>
     </Compile>
-    <Compile Include="WebAsset\WebAsset.cs" />
-    <Compile Include="WebAsset\WebAssetCollection.cs" />
-    <Compile Include="WebAsset\WebAssetCollectionBuilder.cs" />
-    <Compile Include="WebAsset\WebAssetGroup.cs" />
     <Compile Include="UI\ClientSideObjectWriter.cs" />
-    <Compile Include="WebAsset\IWebAsset.cs" />
     <Compile Include="Infrastructure\IUrlResolver.cs" />
     <Compile Include="UI\HtmlHelperExtension.cs" />
     <Compile Include="UI\IScriptableComponent.cs" />
@@ -1095,16 +1056,8 @@
     <Compile Include="UI\ViewComponentBuilderBase.cs" />
     <Compile Include="UI\ViewComponentBase.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="UI\ScriptRegistrar\ScriptWrapperBase.cs" />
-    <Compile Include="UI\StyleSheetRegistrar\StyleSheetRegistrarBuilder.cs" />
-    <Compile Include="UI\StyleSheetRegistrar\StyleSheetRegistrar.cs" />
     <Compile Include="Infrastructure\Implementation\UrlResolver.cs" />
-    <Compile Include="UI\ScriptRegistrar\ScriptWrapper.cs" />
-    <Compile Include="WebAsset\WebAssetGroupBuilder.cs" />
-    <Compile Include="UI\ScriptRegistrar\ScriptRegistrar.cs" />
-    <Compile Include="UI\ScriptRegistrar\ScriptRegistrarBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WebAsset\WebAssetType.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\shared\CodeAnalysisDictionary.xml" />

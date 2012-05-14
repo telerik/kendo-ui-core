@@ -19,31 +19,8 @@ namespace Kendo.Mvc.UI.Tests
                                               ViewData = new ViewDataDictionary()
                                           };
 
-            StyleSheetRegistrar styleSheetRegistrar = new StyleSheetRegistrar(new WebAssetCollection(WebAssetDefaultSettings.StyleSheetFilesPath), viewContext, new Mock<IWebAssetCollectionResolver>().Object);
-            StyleSheetRegistrarBuilder styleSheetRegistrarBuilder = new StyleSheetRegistrarBuilder(styleSheetRegistrar);
-
-            ScriptRegistrar scriptRegistrar = new ScriptRegistrar(new WebAssetCollection(WebAssetDefaultSettings.ScriptFilesPath), new List<IScriptableComponent>(), viewContext, new Mock<IWebAssetCollectionResolver>().Object, new Mock<ScriptWrapperBase>().Object);
-            ScriptRegistrarBuilder scriptRegistrarBuilder = new ScriptRegistrarBuilder(scriptRegistrar);
             htmlHelper = TestHelper.CreateHtmlHelper();
-            _factory = new ViewComponentFactory(htmlHelper, new Mock<IClientSideObjectWriterFactory>().Object, styleSheetRegistrarBuilder, scriptRegistrarBuilder);
-        }
-
-        [Fact]
-        public void StyleSheetManager_should_return_the_same_instace()
-        {
-            StyleSheetRegistrarBuilder sm1 = _factory.StyleSheetRegistrar();
-            StyleSheetRegistrarBuilder sm2 = _factory.StyleSheetRegistrar();
-
-            Assert.Same(sm1, sm2);
-        }
-
-        [Fact]
-        public void ScriptManager_should_return_the_same_instace()
-        {
-            ScriptRegistrarBuilder sm1 = _factory.ScriptRegistrar();
-            ScriptRegistrarBuilder sm2 = _factory.ScriptRegistrar();
-
-            Assert.Same(sm1, sm2);
+            _factory = new ViewComponentFactory(htmlHelper, new Mock<IClientSideObjectWriterFactory>().Object);
         }
 
         [Fact]

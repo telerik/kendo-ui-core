@@ -239,7 +239,6 @@
     <Compile Include="UI\TimePicker\TimePickerTestHelper.cs" />
     <Compile Include="UI\TimePicker\TimePickerBuilderTests.cs" />
     <Compile Include="UI\Grid\GridDataTableWrapperExtensionsTests.cs" />
-    <Compile Include="Infrastructure\Implementation\WebAsset\AbsoluteWebAssetResolverTests.cs" />
     <Compile Include="Data\QueryableExtensionsTests.cs" />
     <Compile Include="Extensions\HtmlAttributesContainerExtensionsTests.cs" />
     <Compile Include="Infrastructure\FilterDescriptorFactoryTests.cs" />
@@ -401,12 +400,6 @@
     <Compile Include="UI\TreeView\TreeViewSerializationTests.cs" />
     <Compile Include="UI\TreeView\TreeViewTestHelper.cs" />
     <Compile Include="UI\TreeView\TreeViewRendererTests.cs" />
-    <Compile Include="Infrastructure\Implementation\WebAsset\CdnWebAssetResolverTests.cs" />
-    <Compile Include="Infrastructure\Implementation\WebAsset\CombinedWebAssetGroupResolverTests.cs" />
-    <Compile Include="Infrastructure\Implementation\WebAsset\RebaseImagePathContentFilterTests.cs" />
-    <Compile Include="Infrastructure\Implementation\WebAsset\WebAssetCheckerTests.cs" />
-    <Compile Include="WebAsset\Configuration\SharedWebAssetTests.cs" />
-    <Compile Include="WebAsset\WebAssetDefaultSettingsTests.cs" />
     <Compile Include="UI\Window\WindowEffectBuilderTests.cs" />
     <Compile Include="UI\Window\WindowRenderingTests.cs" />
     <Compile Include="UI\Window\WindowHtmlBuilderTests.cs" />
@@ -416,14 +409,6 @@
     <Compile Include="UI\Window\WindowBuilderTests.cs" />
     <Compile Include="UI\Window\WindowTestHelper.cs" />
     <Compile Include="UrlGeneratorTests.cs" />
-    <Compile Include="Infrastructure\Implementation\WebAsset\WebAssetGroupConverterTests.cs" />
-    <Compile Include="Infrastructure\Implementation\WebAsset\WebAssetGroupReaderTests.cs" />
-    <Compile Include="Infrastructure\Implementation\WebAsset\WebAssetGroupResolverTests.cs" />
-    <Compile Include="Infrastructure\Implementation\WebAsset\WebAssetGroupSerializerTests.cs" />
-    <Compile Include="Infrastructure\Implementation\WebAsset\WebAssetResolverFactoryTests.cs" />
-    <Compile Include="Infrastructure\Implementation\WebAsset\LocalWebAssetResolverTests.cs" />
-    <Compile Include="Infrastructure\Implementation\WebAsset\WebAssetLocatorTests.cs" />
-    <Compile Include="Infrastructure\Implementation\WebAsset\WebAssetCollectionResolverTests.cs" />
     <Compile Include="UI\ClientSideEnumValueAttributeTests.cs" />
     <Compile Include="Extensions\CollectionExtensionsTests.cs" />
     <Compile Include="Extensions\DictionaryExtensionsTests.cs" />
@@ -433,11 +418,6 @@
     <Compile Include="Extensions\EnumerableExtensionsTests.cs" />
     <Compile Include="Extensions\ReaderWriterLockSlimExtensionsTests.cs" />
     <Compile Include="Extensions\StringExtensionsTests.cs" />
-    <Compile Include="WebAsset\WebAssetGroupBuilderTests.cs" />
-    <Compile Include="WebAsset\WebAssetGroupTests.cs" />
-    <Compile Include="WebAsset\WebAssetCollectionBuilderTests.cs" />
-    <Compile Include="WebAsset\WebAssetCollectionTests.cs" />
-    <Compile Include="WebAsset\WebAssetTests.cs" />
     <Compile Include="UI\ClientSideObjectWriterFactoryTests.cs" />
     <Compile Include="UI\HtmlHelperExtensionTests.cs" />
     <Compile Include="UI\ViewComponentFactoryTests.cs" />
@@ -449,14 +429,6 @@
     <Compile Include="Infrastructure\Implementation\UrlResolverTests.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="UI\ScriptRegistrar\ScriptWrapperTests.cs" />
-    <Compile Include="UI\StyleSheetRegistrar\StyleSheetRegistrarBuilderTests.cs" />
-    <Compile Include="UI\StyleSheetRegistrar\StyleSheetRegistrarTests.cs" />
-    <Compile Include="UI\ScriptRegistrar\ScriptRegistrarTests.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="UI\ScriptRegistrar\ScriptRegistrarBuilderTests.cs" />
-    <Compile Include="WebAsset\WebAssetHttpHandlerTests.cs" />
     <Compile Include="Infrastructure\Implementation\HttpResponseCacherTests.cs" />
     <Compile Include="Infrastructure\Implementation\HttpResponseCompressorTests.cs" />
     <Compile Include="Infrastructure\Implementation\ConfigurationManagerWrapperTests.cs" />

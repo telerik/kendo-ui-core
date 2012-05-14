@@ -57,8 +57,6 @@ namespace Kendo.Mvc.Infrastructure
 
             Current.Register<IConfigurationManager>(() => new ConfigurationManagerWrapper());
 
-            Current.Register<IWebAssetChecker>(() => new WebAssetChecker());
-
             Current.Register<IVirtualPathProvider>(() => new VirtualPathProviderWrapper());
 
             Current.Register<ILocalizationServiceFactory>(() => new LocalizationServiceFactory());
@@ -72,46 +70,15 @@ namespace Kendo.Mvc.Infrastructure
             Current.Register<ISliderHtmlBuilderFactory>(() => new SliderHtmlBuilderFactory());
 
             Current.Register<IRangeSliderHtmlBuilderFactory>(() => new RangeSliderHtmlBuilderFactory());
-
-            Current.Register<ScriptWrapperBase>(() => new ScriptWrapper());
         }
+
         private static void RegisterAuthorizationDependencies()
         {
             Current.Register<IControllerAuthorization, IAuthorizeAttributeCache, IAuthorizationContextCache>((authorizeAttributeCache, authorizationContextFactory) => 
                 new ControllerAuthorization(authorizeAttributeCache, authorizationContextFactory, RouteTable.Routes));
 
             Current.Register<INavigationItemAuthorization, IControllerAuthorization, IUrlAuthorization>((controllerAuthorization, urlAuthorization) =>
-                new NavigationItemAuthorization(controllerAuthorization, urlAuthorization)); RegisterWebAssetDependencies();
-        }
-        
-        private static void RegisterWebAssetDependencies()
-        {
-            Current.Register<IWebAssetExtensions>(() =>
-            {
-                if (IsDebug)
-                {
-                    return new DebugWebAssetExtensions();
-                }
-
-                return new ReleaseWebAssetExtensions();
-            });
-            
-            Current.Register<IWebAssetLocator, ICacheFactory, IVirtualPathProvider, IWebAssetExtensions>((cacheFactory, provider, extensions) =>
-                            new WebAssetLocator(cacheFactory.Create("locator"), provider, extensions));
-
-            Current.Register<IWebAssetContentFilter, IVirtualPathProvider, IUrlResolver>((provider, resolver) =>
-                new RebaseImagePathContentFilter(provider, resolver));
-
-            Current.Register<IWebAssetGroupSerializer>(() => new WebAssetGroupSerializer());
-
-            Current.Register<IWebAssetGroupReader, IWebAssetLocator, IVirtualPathProvider, IWebAssetContentFilter>((locator, provider, filter) =>
-                new WebAssetGroupReader(locator, provider, filter));
-
-            Current.Register<IWebAssetResolverFactory, IWebAssetChecker, IWebAssetLocator, IWebAssetGroupSerializer>((checker, locator, serializer) =>
-                new WebAssetResolverFactory(checker, locator, serializer));
-
-            Current.Register<IWebAssetCollectionResolver, IUrlResolver, IWebAssetResolverFactory>((urlResolver, resolverFactory) =>
-                new WebAssetCollectionResolver(urlResolver, resolverFactory));
+                new NavigationItemAuthorization(controllerAuthorization, urlAuthorization));
         }
         
         private static void RegisterComponentDependencies()

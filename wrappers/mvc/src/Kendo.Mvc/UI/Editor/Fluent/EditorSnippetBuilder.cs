@@ -34,11 +34,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         private string ReadFile(string fileName)
         {
-            if (fileName.IndexOf("://") < 0)
-            {
-                fileName = fileName.StartsWith("~/", StringComparison.OrdinalIgnoreCase) ? fileName : PathHelper.CombinePath(WebAssetDefaultSettings.StyleSheetFilesPath, fileName);
-            }
-
             if (!fileName.StartsWith("~"))
             {
                 fileName = string.Format("~/Content/{0}", fileName);

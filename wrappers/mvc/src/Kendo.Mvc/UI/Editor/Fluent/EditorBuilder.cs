@@ -99,16 +99,6 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
-        public virtual EditorBuilder StyleSheets(Action<WebAssetGroupBuilder> configurator)
-        {
-            Guard.IsNotNull(configurator, "configurator");
-
-            var builder = new WebAssetGroupBuilder(Component.StyleSheets);
-            configurator(builder);
-
-            return this;
-        }
-
         /// <summary>
         /// Sets the localization culture of the editor.
         /// </summary>
