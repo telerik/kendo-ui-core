@@ -436,10 +436,6 @@
                 if (BERRYPHONEGAP) {
                     applyViewportHeight();
                 }
-
-                if (view && view.scroller) { // On desktop resize is fired rather early
-                    view.scroller.reset();
-                }
             });
         },
 
