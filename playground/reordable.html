@@ -18,43 +18,44 @@
 
     </head>
     <body>
-
-        <div id="grid" style="width: 800px"></div>
-        <script>
-
-
-            $(document).ready(function() {
+        <div id="example">
+            <div id="grid" style="width: 800px"></div>
+            <script>
 
 
-                $("#grid").kendoGrid({
-                    reordable: true,
-                    //detailTemplate: "test test",
-                    scrollable: false,
-                    //resizable: true,
-                    groupable: true,
-                    columns: [{
-                        field: "foo",
-                        width: 100
-                        //footerTemplate: "footer",
-                        //groupFooterTemplate: "group footer"
-                    },
-                    {
-                        field: "bar",
-                        width: 200
-                    },
-                    {
-                        template: "non-groupable column",
-                        title: "non-groupable",
-                        groupable: false
-                    },
-                    {
-                        field: "baz",
-                        width: 300
-                    }],
-                    dataSource: [{ foo: "foo", bar: "bar", baz: "baz" }]
+                $(document).ready(function() {
+
+
+                    $("#grid").kendoGrid({
+                        reordable: true,
+                        //detailTemplate: "test test",
+                        scrollable: false,
+                        //resizable: true,
+                        groupable: true,
+                        columns: [{
+                            field: "foo",
+                            width: 100
+                            //footerTemplate: "footer",
+                            //groupFooterTemplate: "group footer"
+                        },
+                        {
+                            field: "bar",
+                            width: 200
+                        },
+                        {
+                            template: "non-groupable column",
+                            title: "non-groupable",
+                            groupable: false
+                        },
+                        {
+                            field: "baz",
+                            width: 300
+                        }],
+                        dataSource: [{ foo: "foo", bar: "bar", baz: "baz" }]
+                    });
+
                 });
-
-            });
-        </script>
+            </script>
+        </div>
     </body>
 </html>
