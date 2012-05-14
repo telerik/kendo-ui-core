@@ -1190,5 +1190,15 @@
   <ItemGroup>
     <Folder Include="UI\Gauge\Scales\" />
   </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <ItemGroup>
+    <Mvc3References Include="..\..\references\mvc3\*.dll">
+		<Visible>false</Visible>
+	</Mvc3References>
+  </ItemGroup>
+  <Target Name="BeforeBuild">
+    <Copy SkipUnchangedFiles="true" SourceFiles="@(Mvc3References)" DestinationFolder="$(OutputPath)" />
+  </Target>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
