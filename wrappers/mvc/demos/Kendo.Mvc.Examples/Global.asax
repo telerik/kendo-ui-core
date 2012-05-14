@@ -1,1 +1,1 @@
-﻿<%@ Application Codebehind="Global.asax.cs" Inherits="Kendo.Mvc.Web.Examples.MvcApplication" Language="C#" %>
+﻿<%@ Application Codebehind="Global.asax.cs" Inherits="Kendo.Mvc.Examples.MvcApplication" Language="C#" %>

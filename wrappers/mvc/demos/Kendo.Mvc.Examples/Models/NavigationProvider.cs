@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Script.Serialization;
 using IOFile = System.IO.File;
 
-namespace Kendo.Mvc.Web.Examples.Models
+namespace Kendo.Mvc.Examples.Models
 {
     public static class NavigationProvider
     {
