@@ -48,7 +48,7 @@
     <boolean xmlns="http://schemas.microsoft.com/2003/10/Serialization/">false</boolean>
   </__DataMember_DebugMode>
   <__DataMember_RecorderBaseUrl IsDataContractSerialized="True" PropertyName="RecorderBaseUrl" PropertyType="System.String">
-    <string xmlns="http://schemas.microsoft.com/2003/10/Serialization/">http://mvc-kendobuild/staging</string>
+    <string xmlns="http://schemas.microsoft.com/2003/10/Serialization/">http://mvc-kendobuild/production</string>
   </__DataMember_RecorderBaseUrl>
   <__DataMember_IsStoryBoardCapturingEnabled IsDataContractSerialized="True" PropertyName="IsStoryBoardCapturingEnabled" PropertyType="System.Boolean">
     <boolean xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</boolean>
@@ -402,7 +402,7 @@
   <ProvidersSettings />
   <ActiveBugTrackers />
   <UnitTestType Type="ArtOfTest.Common.Design.ProjectModel.UnitTestType">VS</UnitTestType>
-  <RecorderBaseUrl Type="System.String">http://mvc-kendobuild/staging</RecorderBaseUrl>
+  <RecorderBaseUrl Type="System.String">http://mvc-kendobuild/production</RecorderBaseUrl>
   <IsStoryboardCapturingEnabled Type="System.Boolean">True</IsStoryboardCapturingEnabled>
   <SimulateRealClickByDefault Type="System.Boolean">False</SimulateRealClickByDefault>
   <SimulateRealTypingByDefault Type="System.Boolean">False</SimulateRealTypingByDefault>
@@ -433,7 +433,6 @@
     <Item Type="System.String">Telerik.TestingFramework.Controls.KendoUI, Version=2012.1.322.0, Culture=neutral, PublicKeyToken=528163f3e645de45</Item>
     <Item Type="System.String">c:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\PublicAssemblies\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll</Item>
     <Item Type="System.String">System.Windows.Forms</Item>
-    <Item Type="System.String">C:\work\WebUI_Test_Studio\TelerikAdapters\Wrappers\Telerik.TestingFramework.Controls.KendoUI\bin\Debug\Telerik.TestingFramework.Controls.KendoUI.dll</Item>
   </ProjectReferences>
   <ExcludedFiles />
   <DisabledTranslators>

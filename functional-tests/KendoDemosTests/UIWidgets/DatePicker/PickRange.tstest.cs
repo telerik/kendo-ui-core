@@ -1,15 +1,13 @@
-using Telerik.WebAii.Controls.Html;
-using Telerik.WebAii.Controls.Xaml;
-using Telerik.WebAii.Controls.Xaml.Wpf;
+
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 
 using ArtOfTest.Common.UnitTesting;
+
 using ArtOfTest.WebAii.Core;
-using ArtOfTest.WebAii.Controls.HtmlControls;
-using ArtOfTest.WebAii.Controls.HtmlControls.HtmlAsserts;
+
 using ArtOfTest.WebAii.Design;
 using ArtOfTest.WebAii.Design.Execution;
 using ArtOfTest.WebAii.ObjectModel;

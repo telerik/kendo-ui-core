@@ -3,7 +3,7 @@
   <IsManual>false</IsManual>
   <Name>Linear</Name>
   <Owner i:nil="true" />
-  <Path>uiwidgets\gauges\Linear.tstest</Path>
+  <Path>UIWidgets\Gauges\Linear.tstest</Path>
   <Priority>0</Priority>
   <TestType>Web</TestType>
   <UniqueId>f2f63b72-eff8-4c99-a8ce-b4ea0ed0da0c</UniqueId>
@@ -12,15 +12,11 @@
   <CurrentReferences xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
     <d2p1:string>System</d2p1:string>
     <d2p1:string>System.Core</d2p1:string>
-    <d2p1:string>ArtOfTest.WebAii, Version=2012.1.410.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c</d2p1:string>
-    <d2p1:string>ArtOfTest.WebAii.Design, Version=2012.1.410.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d</d2p1:string>
-    <d2p1:string>Telerik.WebAii.Controls.Html, Version=2012.1.410.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
-    <d2p1:string>Telerik.WebAii.Controls.Xaml, Version=2012.1.410.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
-    <d2p1:string>Telerik.WebAii.Controls.Xaml.Wpf, Version=2012.1.410.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
-    <d2p1:string>Telerik.TestingFramework.Controls.KendoUI, Version=2012.1.410.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
+    <d2p1:string>ArtOfTest.WebAii, Version=2012.1.509.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c</d2p1:string>
+    <d2p1:string>ArtOfTest.WebAii.Design, Version=2012.1.509.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d</d2p1:string>
+    <d2p1:string>Telerik.TestingFramework.Controls.KendoUI, Version=2012.1.322.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
     <d2p1:string>c:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\PublicAssemblies\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll</d2p1:string>
     <d2p1:string>System.Windows.Forms</d2p1:string>
-    <d2p1:string>C:\work\WebUI_Test_Studio\TelerikAdapters\Wrappers\Telerik.TestingFramework.Controls.KendoUI\bin\Debug\Telerik.TestingFramework.Controls.KendoUI.dll</d2p1:string>
   </CurrentReferences>
   <DataInfo xmlns:d2p1="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
     <d2p1:BuiltInData i:nil="true" />
@@ -72,7 +68,7 @@
       <d2p1:Order>1</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>610c4099-1150-4fe4-8ea0-88118d3be6e4</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>4665f365-1ae0-4016-b9d0-824c63c02253</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints xmlns:d5p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
           <d5p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -105,13 +101,13 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Wait for attribute 'd' has 'Contains' value of 'M 49 101.04 L 54 101.04 L 54 286 L 49 286 Z' on 'Kd0000001PathTag'</d2p1:Description>
+      <d2p1:Description>Wait for attribute 'd' has 'Contains' value of 'M 49 101.04 L 54 101.04 L 54 286 L 49 286 Z' on 'K9ffb0001PathTag'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>38fe4891-eff8-4c01-9553-98ddf94d9a77</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>3ea3fca2-ee4a-48dd-8525-e6e03b1d638b</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:AttributeVerificationDescriptor">
         <d2p1:Constraints xmlns:d5p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
           <d5p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -137,7 +133,7 @@
                       <d7p1:ChainStops />
                       <d7p1:Clauses>
                         <d7p1:HtmlFindClause>
-                          <d7p1:Clause>id=kd0000001</d7p1:Clause>
+                          <d7p1:Clause>id=k9ffb0001</d7p1:Clause>
                         </d7p1:HtmlFindClause>
                         <d7p1:HtmlFindClause>
                           <d7p1:Clause>tagname=path</d7p1:Clause>
@@ -147,7 +143,7 @@
                     </d9p1:value>
                   </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
                 </d7p1:FindExpressions>
-                <d7p1:Name>Kd0000001PathTag</d7p1:Name>
+                <d7p1:Name>K9ffb0001PathTag</d7p1:Name>
                 <d7p1:NodeKind>4</d7p1:NodeKind>
                 <d7p1:TechnologyType>Html</d7p1:TechnologyType>
               </d7p1:FindExpression>
@@ -158,7 +154,7 @@
               <d7p1:Name>verifyTarget</d7p1:Name>
               <d7p1:Page i:type="d2p1:PageUri">
                 <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
-                <d2p1:BaseUrl>http://mvc-kendobuild/staging</d2p1:BaseUrl>
+                <d2p1:BaseUrl>http://mvc-kendobuild/production</d2p1:BaseUrl>
                 <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
                 <d2p1:EquivalentUrls />
                 <d2p1:Fragment />
@@ -189,14 +185,14 @@
         <d2p1:AttributeValue>M 49 101.04 L 54 101.04 L 54 286 L 49 286 Z</d2p1:AttributeValue>
         <d2p1:CompareType>Contains</d2p1:CompareType>
       </d2p1:Step>
-      <d2p1:StepImageKey>Linear2dsz55mq.uvc</d2p1:StepImageKey>
+      <d2p1:StepImageKey>Lineary0okmsyt.rmi</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
   </Steps>
   <StopTestListOnFailure>false</StopTestListOnFailure>
   <TestAssembly>KendoDemosTests.dll</TestAssembly>
-  <TestAssemblyPath>bin\Debug\</TestAssemblyPath>
+  <TestAssemblyPath>bin</TestAssemblyPath>
   <TestClass i:nil="true" />
   <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
   <UseDefaultWpfAppPath>false</UseDefaultWpfAppPath>

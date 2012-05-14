@@ -12,8 +12,7 @@ using ArtOfTest.WebAii.Design.Execution;
 using ArtOfTest.WebAii.ObjectModel;
 using ArtOfTest.WebAii.Silverlight;
 using ArtOfTest.WebAii.Silverlight.UI;
-using Telerik.WebAii.Controls.Html;
-using Telerik.WebAii.Controls.Xaml;
+
 
 namespace KendoDemosTests
 {

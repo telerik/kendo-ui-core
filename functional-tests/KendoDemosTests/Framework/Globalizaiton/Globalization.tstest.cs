@@ -16,9 +16,8 @@ using ArtOfTest.WebAii.Design.Execution;
 using ArtOfTest.WebAii.ObjectModel;
 using ArtOfTest.WebAii.Silverlight;
 using ArtOfTest.WebAii.Silverlight.UI;
-using Telerik.WebAii.Controls.Html;
-using Telerik.WebAii.Controls.Xaml;
-using Telerik.WebAii.Controls.Xaml.Wpf;
+
+using Telerik.TestingFramework.Controls.KendoUI;
 
 namespace KendoDemosTests
 {
@@ -97,15 +96,15 @@ namespace KendoDemosTests
             
         //}
 
-        [CodedStep(@"Verify textbox 'StartDateText' content 'Same' 'Fri Dec 2 11:49:59 UTC+0200 2011'.")]
-        public void Globalization_CodedStep1()
-        {
+        //[CodedStep(@"Verify textbox 'StartDateText' content 'Same' 'Fri Dec 2 11:49:59 UTC+0200 2011'.")]
+        //public void Globalization_CodedStep1()
+        //{
 
-            // Verify textbox 'StartDateText' content 'Same' 'Fri Dec 2 11:49:59 UTC+0200 2011'.
-            System.Threading.Thread.Sleep(250);
+            //// Verify textbox 'StartDateText' content 'Same' 'Fri Dec 2 11:49:59 UTC+0200 2011'.
+            //System.Threading.Thread.Sleep(250);
             
 
-        }
+        //}
         
         // Add your test methods here...
     }
