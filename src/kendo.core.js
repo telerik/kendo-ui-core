@@ -2700,5 +2700,5 @@ function pad(number) {
         }
 
         $(window).on(support.resize, handler);
-    }
+    };
 })(jQuery);
