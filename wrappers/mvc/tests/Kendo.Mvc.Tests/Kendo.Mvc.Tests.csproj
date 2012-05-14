@@ -265,7 +265,6 @@
     <Compile Include="UI\Grid\SortDescriptorTests.cs" />
     <Compile Include="UI\HtmlFragmentTests.cs" />
     <Compile Include="UI\Menu\MenuSettingsVerificationTests.cs" />
-    <Compile Include="UI\PanelBar\PanelBarSettingsVerificationTests.cs" />
     <Compile Include="UI\Slider\RangeSliderClientEventsBuilderTests.cs" />
     <Compile Include="UI\Slider\RangeSliderRenderingTests.cs" />
     <Compile Include="UI\Slider\SliderHtmlBuilderTests.cs" />
