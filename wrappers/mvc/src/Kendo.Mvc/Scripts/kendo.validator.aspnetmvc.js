@@ -14,7 +14,7 @@
                     return element.find("#" + fieldName + "_validationMessage.field-validation-valid");
                 },
                 decorate: function (message, fieldName) {
-                    message.addClass("field-validation-valid").attr("id", fieldName + "_validationMessage");
+                    message.addClass("field-validation-error").attr("id", fieldName + "_validationMessage");
                 }
             }
         },
@@ -163,6 +163,10 @@
         },
         date: function(input) {
             return kendo.parseDate(input.val()) !== null;
+        },
+        length: function(input, params) {
+            var len = $.trim(input.val()).length;
+            return len >= (params.min || 0) && len <= (params.max || 0)
         }
     }
 })(jQuery);
