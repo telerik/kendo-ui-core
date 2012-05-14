@@ -461,6 +461,8 @@
         return msValue >= msMin && msValue <= msMax;
     }
 
+    TimeView.getMilliseconds = getMilliseconds;
+
     kendo.TimeView = TimeView;
 
     var TimePicker = Widget.extend(/** @lends kendo.ui.TimePicker.prototype */{
