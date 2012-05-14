@@ -134,13 +134,13 @@
     <Content Include="Areas\aspx\Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\aspx\Views\Shared\Site.Master" />
+    <Content Include="Areas\aspx\Views\Shared\Web.Master" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\razor\Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\razor\Views\Shared\_WebLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Suite\Index.cshtml" />
@@ -177,6 +177,21 @@
       <Name>Kendo.Mvc</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\Shared\_DataVizLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\aspx\Views\Shared\DataViz.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Source.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Navigation.cshtml" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -185,7 +200,7 @@
   </Target> -->
   <Target Name="AfterBuild">
     <!-- Deploy Web suite scripts and styles to Content and Scripts -->
-    <Exec Command="jake mvc:debug-web" />
+    <Exec Command="jake mvc:debug-examples" />
   </Target>
   <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
     <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />

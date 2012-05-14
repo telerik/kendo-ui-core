@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/web/kendo.common.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/web/kendo.default.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/examples-offline.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/jquery-1.7.2.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo.web.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/console.js")"></script>
+    <script src="@Url.Content("~/Scripts/prettify.js")"></script>
+</head>
+<body>
+    <div class="page">
+        @Html.Partial("~/Views/Shared/_Navigation.cshtml")
+        @RenderBody()
+        @Html.Partial("~/Views/Shared/_Source.cshtml")
+    </div>
+</body>
+</html>

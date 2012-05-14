@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Kendo UI for ASP.NET MVC - Offline Examples</title>
+    <link href="@Url.Content("~/Content/suite.css")" rel="stylesheet">
+</head>
+<body>
+    <div id="page">
+        <h2>KendoUI for ASP.NET MVC</h2>
+        <ul>
+            <li>
+                <h2>Web Suite</h2>
+                <a href="@(Url.RouteUrl("RazorDefault", new { controller = "Suite", suite="web" }))">Examples</a>
+            </li>
+            <li>
+                <h2>DataViz Suite</h2>
+                <a href="@(Url.RouteUrl("RazorDefault", new { controller = "Suite", suite="dataviz" }))">Examples</a>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
