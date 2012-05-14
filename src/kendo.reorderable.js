@@ -57,6 +57,10 @@
                     that.reorderDropCue.remove();
                 },
                 drop: function() {
+                    if (!that._draggable) {
+                        return;
+                    }
+
                     var draggableElement = that._draggable[0],
                         dropTarget = this.element[0],
                         container;
