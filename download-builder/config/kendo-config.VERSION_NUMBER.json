@@ -141,6 +141,17 @@
             "advanced": true
         },
         {
+            "id": "reorderable",
+            "name": "Reorderable",
+            "category": "framework",
+            "source": "kendo.reorderable.min.js",
+            "depends": [
+                "core",
+                "draganddrop"
+            ],
+            "advanced": true
+        },
+        {
             "id": "resizable",
             "name": "Resizable",
             "category": "framework",
@@ -322,6 +333,14 @@
                     "description": "Support for grid sorting",
                     "depends": [
                         "sortable"
+                    ]
+                },
+                {
+                    "id": "grid-column-reorder",
+                    "name": "Column reordering",
+                    "description": "Support for column reordering",
+                    "depends": [
+                        "reorderable"
                     ]
                 },
                 {
