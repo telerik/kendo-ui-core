@@ -136,6 +136,8 @@
         MONTH = "month",
         SPAN = "<span/>",
         DATE = Date,
+        MIN = new DATE(1900, 0, 1),
+        MAX = new DATE(2099, 11, 31),
         extend = $.extend;
 
     var DateTimePicker = Widget.extend(/** @lends kendo.ui.DateTimePicker.prototype */{
@@ -381,8 +383,8 @@
             format: "",
             timeFormat: "",
             parseFormats: [],
-            min: new DATE(1900, 0, 1),
-            max: new DATE(2099, 11, 31),
+            min: new DATE(MIN),
+            max: new DATE(MAX),
             interval: 30,
             height: 200,
             footer: '#= kendo.toString(data,"D") #',
@@ -756,39 +758,47 @@
 
             options[option] = new DATE(value);
             that.dateView[option](value);
-            that._setTime(option);
-
-            //cache the milliseconds of the timepart of the option
+            that._setTime();
         },
 
-        _setTime: function(option) {
+        _setTime: function() {
             var that = this,
                 timeView = that.timeView,
+                timeViewOptions = timeView.options,
                 options = that.options,
+                min = options.min,
+                max = options.max,
                 previous = that._old,
                 current = that._value,
-                value = options[option];
+                isTimeEqualToZero,
+                rebind;
 
-            if (!previous && !current) {
+            if (!previous && !current || that._timeSelected) {
+                that._timeSelected = false;
                 return;
             }
 
-            if (previous && current && equalDatePart(previous, current)) {
-                //return;
+            if (isSameDate(current, min)) {
+                timeViewOptions.min = min;
+                rebind = true;
+            } else if (isSameDate(current, max)) {
+                isTimeEqualToZero = (getMilliseconds(min) + getMilliseconds(max)) === 0;
+                timeViewOptions.max = max;
+                rebind = true;
+            } else if (previous && isSameDate(previous, min)) {
+                timeView.options.min = new DATE(MIN);
+                rebind = true;
+            } else if (previous && isSameDate(previous, max)) {
+                timeView.options.max = new DATE(MAX);
+                rebind = true;
             }
 
-            if (equalDatePart(current, value)) {
-                //should set 00:00 time if diff between min/max is bigger then one day
-
-                timeView.options[option] = value;
-                if (option === "max" && getMilliseconds(options.min) === getMilliseconds(options.max) /*cache it on init and recalculate on min/max method*/) {
-                    timeView.dataBind([value]);
-                } else {
+            if (rebind) {
+                if (!isTimeEqualToZero) {
                     timeView.refresh();
+                } else {
+                    timeView.dataBind([MIN]);
                 }
-            } else if (previous && equalDatePart(previous, value)) {
-                timeView.options[option] = ui.TimePicker.fn.options[option];
-                timeView.refresh();
             }
         },
 
@@ -811,8 +821,7 @@
             that.dateView.value(date);
             that.timeView.value(date);
 
-            that._setTime("min");
-            that._setTime("max");
+            that._setTime();
 
             that.element.val(date ? kendo.toString(date, options.format) : value);
 
@@ -846,7 +855,24 @@
                 anchor: that.wrapper,
                 change: function() {
                     // calendar is the current scope
-                    that._change(this.value());
+                    var value = this.value(),
+                        msValue = +value,
+                        msMin = +options.min,
+                        msMax = +options.max,
+                        current;
+
+                    if (msValue === msMin || msValue === msMax) {
+                        current = new DATE(that._value);
+                        current.setFullYear(value.getFullYear());
+                        current.setMonth(value.getMonth());
+                        current.setDate(value.getDate());
+
+                        if (isInRange(current, msMin, msMax)) {
+                            value = current;
+                        }
+                    }
+
+                    that._change(value);
                     that.close("date");
                 },
                 close: function(e) {
@@ -861,19 +887,20 @@
                 }
             }));
 
-            that.timeView = new kendo.TimeView({
+            that.timeView = new TimeView({
                 anchor: that.wrapper,
                 animation: options.animation,
                 format: options.timeFormat,
                 height: options.height,
                 interval: options.interval,
-                min: new DATE(1900, 0, 1),
-                max: new DATE(2099, 11, 31),
+                min: new DATE(MIN),
+                max: new DATE(MAX),
                 parseFormats: options.parseFormats,
                 value: options.value,
                 change: function(value, trigger) {
                     value = that.timeView._parse(value);
                     if (trigger) {
+                        that._timeSelected = true;
                         that._change(value);
                     } else {
                         that.element.val(kendo.toString(value, options.format));
@@ -944,7 +971,7 @@
         options.parseFormats.splice(1, 0, options.timeFormat);
     }
 
-    function equalDatePart(value1, value2) {
+    function isSameDate(value1, value2) {
         if (value1) {
             return value1.getFullYear() === value2.getFullYear() &&
                    value1.getMonth() === value2.getMonth() &&

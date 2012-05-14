@@ -348,6 +348,38 @@
                 equal(datetimepicker.timeView.calls("refresh"), 0);
             });
 
+            test("DateTimePicker does not update TimeView if select time from drop-down list", function() {
+                var datetimepicker = new DateTimePicker(input, {
+                    min: new Date(2000, 1, 1),
+                    value: new Date(2000, 1, 1)
+                });
+
+                datetimepicker.open("time");
+
+                stub(datetimepicker.timeView, {
+                    refresh: datetimepicker.timeView.refresh
+                });
+
+                datetimepicker.timeView.options.change("12:30 AM", true);
+
+                equal(datetimepicker.timeView.calls("refresh"), 0);
+            });
+
+            test("DateTimePicker persist time when select min date from calendar", function() {
+                var datetimepicker = new DateTimePicker(input, {
+                        min: new Date(2000, 11, 8, 8, 30, 0),
+                        value: new Date(2000, 11, 9, 12, 0, 0)
+                    });
+
+                //select other date
+                datetimepicker.open("date");
+                datetimepicker.dateView.calendar.value(new Date(2000, 11, 8, 8, 30, 0));
+                datetimepicker.dateView.calendar.trigger("change");
+
+                equal(datetimepicker.value().getHours(), 12);
+                equal(datetimepicker.value().getMinutes(), 0);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

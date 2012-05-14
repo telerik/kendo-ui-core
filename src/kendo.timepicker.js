@@ -193,11 +193,7 @@
                 }
             }
 
-            that.ul[0].innerHTML = html;
-
-            that._height(length);
-
-            that.select(that._value);
+            that._bind(html, length);
         },
 
         refresh: function() {
@@ -243,10 +239,16 @@
                 html += template(toString(start, format));
             }
 
-            that.ul[0].innerHTML = html;
+            that._bind(html, length);
+        },
 
+        _bind: function(html, length) {
+            var that = this;
+
+            that.ul[0].innerHTML = html;
             that._height(length);
 
+            that.current(null);
             that.select(that._value);
         },
 
