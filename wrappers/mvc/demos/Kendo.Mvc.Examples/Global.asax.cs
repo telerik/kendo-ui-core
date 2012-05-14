@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace Kendo.Mvc.Web.Examples
+namespace Kendo.Mvc.Examples
 {
     public class MvcApplication : System.Web.HttpApplication
     {

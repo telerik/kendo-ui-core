@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace Kendo.Mvc.Web.Examples.Areas.Razor
+namespace Kendo.Mvc.Examples.Areas.Razor
 {
     public class RazorAreaRegistration : AreaRegistration
     {

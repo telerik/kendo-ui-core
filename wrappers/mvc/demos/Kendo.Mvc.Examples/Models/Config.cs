@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Configuration;
 
-namespace Kendo.Mvc.Web.Examples.Models
+namespace Kendo.Mvc.Examples.Models
 {
     public static class Config
     {

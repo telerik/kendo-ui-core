@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace Kendo.Mvc.Web.Examples.Models
+namespace Kendo.Mvc.Examples.Models
 {
     public class NavigationWidget
     {
