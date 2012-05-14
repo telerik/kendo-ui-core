@@ -1,4 +1,3 @@
-#if MVC3
 namespace Kendo.Mvc.UI.Tests.Data
 {
     using Xunit;
@@ -112,4 +111,3 @@ namespace Kendo.Mvc.UI.Tests.Data
         }
     }    
 }
-#endif

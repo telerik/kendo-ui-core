@@ -600,7 +600,6 @@ namespace Kendo.Mvc.UI
         }
 
     }
-#if MVC2 || MVC3
     public class ViewComponentFactory<TModel> : ViewComponentFactory
     {
         private string minimumValidator;
@@ -612,13 +611,8 @@ namespace Kendo.Mvc.UI
             this.HtmlHelper = htmlHelper;
 
 
-#if MVC3
             minimumValidator = "min";
             maximumValidator = "max";
-#else
-            minimumValidator = "minimum";
-            maximumValidator = "maximum";
-#endif
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -1184,5 +1178,4 @@ namespace Kendo.Mvc.UI
             return null;
         }
     }
-#endif
 }

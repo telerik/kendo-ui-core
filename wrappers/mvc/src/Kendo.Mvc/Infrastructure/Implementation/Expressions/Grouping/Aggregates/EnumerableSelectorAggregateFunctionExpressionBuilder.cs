@@ -67,11 +67,7 @@ namespace Kendo.Mvc.Infrastructure.Implementation.Expressions
 
         private Expression ConvertMemberAccessExpression(Expression memberExpression)
         {
-            if ((ItemType.IsDataRow()
-#if MVC3
-                || ItemType.IsDynamicObject()
-#endif
-                ) && Function.MemberType != null)
+            if ((ItemType.IsDataRow() || ItemType.IsDynamicObject()) && Function.MemberType != null)
             {
                 memberExpression = Expression.Convert(memberExpression, Function.MemberType);
             }

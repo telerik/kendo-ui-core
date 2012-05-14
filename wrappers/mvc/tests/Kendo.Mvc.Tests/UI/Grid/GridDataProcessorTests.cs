@@ -3,19 +3,15 @@ namespace Kendo.Mvc.UI.Tests.Grid
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Data;    
+    using System.Data;
+    using System.Dynamic;
     using System.Linq;
     using System.Web.Mvc;
-    using Infrastructure.Implementation;
-    using Moq;
     using Kendo.Mvc.Infrastructure;
+    using Infrastructure.Implementation;
     using Kendo.Mvc.UI;
+    using Moq;
     using Xunit;
-    using Mvc.Tests;
-
-#if MVC3
-    using System.Dynamic;
-#endif
 
     public class GridDataProcessorTests
     {
@@ -313,7 +309,6 @@ namespace Kendo.Mvc.UI.Tests.Grid
             aggregatesResults.First().Value.ShouldEqual(expectedCount);
         }
 
-#if MVC3
         [Fact]
         public void Should_filter_a_list_of_anonymous_dynamic_types_on_string_caseinsensitive()
         {
@@ -343,7 +338,6 @@ namespace Kendo.Mvc.UI.Tests.Grid
             processedData.Count().ShouldEqual(2);
         }
         
-#endif
         private static DataTable GetDataTable()
         {
             var dataSource = new DataTable();

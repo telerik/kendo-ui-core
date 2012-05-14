@@ -19,8 +19,6 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
-#if MVC2 || MVC3
-        
         public GridToolBarCommandBuilder<T> Insert()
         {
             var command = new GridToolBarInsertCommand<T>();
@@ -43,7 +41,6 @@ namespace Kendo.Mvc.UI.Fluent
             return new GridToolBarSubmitChangesCommandBuilder<T>(command);
         }
 
-#endif
         public GridToolBarCustomCommandBuilder<T> Custom()
         {
             var command = new GridToolBarCustomCommand<T>();

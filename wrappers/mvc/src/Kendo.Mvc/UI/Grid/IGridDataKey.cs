@@ -22,8 +22,6 @@ namespace Kendo.Mvc.UI
             where T : class
     {
 
-#if MVC2 || MVC3
         string HiddenFieldHtml(HtmlHelper<T> htmlHelper);
-#endif
     }
 }

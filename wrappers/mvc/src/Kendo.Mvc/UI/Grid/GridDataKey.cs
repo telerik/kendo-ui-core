@@ -47,11 +47,9 @@ namespace Kendo.Mvc.UI
         {
             return Value((TModel)dataItem);
         }
-#if MVC2 || MVC3
         public string HiddenFieldHtml(HtmlHelper<TModel> htmlHelper)
         {
             return htmlHelper.HiddenFor(Expression, new { id = "" }).ToString();
         }
-#endif
     }
 }

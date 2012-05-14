@@ -7,7 +7,6 @@ namespace Kendo.Mvc.UI.Fluent.Tests
     using Kendo.Mvc.UI;
     using Kendo.Mvc.UI.Tests;
     using Xunit;
-#if MVC2 || MVC3
     public class GridActionCommandBuilderTests
     {
         internal static GridActionCommandBaseDouble command;
@@ -98,6 +97,4 @@ namespace Kendo.Mvc.UI.Fluent.Tests
     {
         public GridActionCommandBuilderBaseDouble(GridActionCommandBase command) : base(command) { }
     }
-
-#endif
 }

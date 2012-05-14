@@ -1,4 +1,3 @@
-#if MVC2 || MVC3
 namespace Kendo.Mvc.UI.Tests 
 {
     using System.Data;
@@ -47,4 +46,3 @@ namespace Kendo.Mvc.UI.Tests
         }
     }
 }
-#endif

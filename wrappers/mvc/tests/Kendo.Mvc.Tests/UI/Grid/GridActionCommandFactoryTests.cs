@@ -2,7 +2,6 @@ namespace Kendo.Mvc.UI.Fluent.Tests
 {
     using Kendo.Mvc.UI.Tests;
     using Xunit;
-#if MVC2 || MVC3
     public class GridActionCommandFactoryTests
     {
         internal static GridActionColumn<Customer> column;
@@ -61,5 +60,4 @@ namespace Kendo.Mvc.UI.Fluent.Tests
             Assert.True(column.Grid.Editing.Enabled);
         }
     }
-#endif
 }

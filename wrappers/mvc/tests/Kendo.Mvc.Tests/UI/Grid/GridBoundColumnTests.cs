@@ -134,7 +134,6 @@ namespace Kendo.Mvc.UI.Tests.Grid
 
             Assert.Equal("Category.Owner.Name", column.Member);
         }
-#if MVC2 || MVC3
         [Fact]
         public void Name_should_be_extracted_correctly_from_indexer_expression()
         {
@@ -160,8 +159,6 @@ namespace Kendo.Mvc.UI.Tests.Grid
 
             Assert.Equal("CategoriesArray[0].Owner.Name", column.Member);
         }
-
-#endif
 
         [Fact]
         public void Type_should_be_set()
@@ -242,7 +239,6 @@ namespace Kendo.Mvc.UI.Tests.Grid
             column.HtmlAttributes.ContainsKey("style").ShouldBeFalse();
         }
 
-#if MVC2 || MVC3
         [Fact]
         public void Readonly_is_populated_from_metadata()
         {
@@ -321,7 +317,5 @@ namespace Kendo.Mvc.UI.Tests.Grid
             var builder = column.CreateEditBuilder(null);
             builder.ShouldBeType<GridEditorForCellBuilder<User, bool>>();
         }
-#endif
     }
-
 }

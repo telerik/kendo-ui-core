@@ -26,7 +26,6 @@ namespace Kendo.Mvc.UI
             return new ViewComponentFactory(helper, clientSideObjectWriterFactory);
         }
 
-#if MVC2 || MVC3
         /// <summary>
         /// Gets the Telerik View Component Factory
         /// </summary>
@@ -40,6 +39,5 @@ namespace Kendo.Mvc.UI
 
             return new ViewComponentFactory<TModel>(helper, clientSideObjectWriterFactory);
         }
-#endif
     }
 }

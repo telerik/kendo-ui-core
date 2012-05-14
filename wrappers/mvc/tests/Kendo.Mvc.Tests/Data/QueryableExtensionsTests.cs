@@ -272,8 +272,6 @@ namespace Kendo.Mvc.Tests.Data
             return items.Cast<AggregateFunctionsGroup>().ElementAt(index);
         }
 
-#if MVC3
-
         [Fact]
         public void Should_filter_a_list_of_dynamic_types()
         {            
@@ -312,7 +310,6 @@ namespace Kendo.Mvc.Tests.Data
             Assert.NotNull(data.ElementAt(0));
         }
 
-#endif
         private IQueryable CreateTestData()
         {
             IList<Person> people = new List<Person>();

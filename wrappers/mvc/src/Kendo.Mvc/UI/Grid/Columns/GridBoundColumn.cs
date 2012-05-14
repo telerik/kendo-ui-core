@@ -58,7 +58,6 @@ namespace Kendo.Mvc.UI
             GroupFooterTemplate = new HtmlTemplate<GridAggregateResult>();
             GroupHeaderTemplate = new HtmlTemplate<GridGroupAggregateResult>();
 
-#if MVC2 || MVC3
             if (typeof(TModel).IsPlainType())
             {
                 Metadata = ModelMetadata.FromLambdaExpression(expression, new ViewDataDictionary<TModel>());
@@ -68,7 +67,7 @@ namespace Kendo.Mvc.UI
                 Visible = Metadata.ShowForDisplay;
                 ReadOnly = Metadata.IsReadOnly;
             }
-#endif
+
             if (string.IsNullOrEmpty(Title))
             {
                 Title = Member.AsTitle();
@@ -116,7 +115,6 @@ namespace Kendo.Mvc.UI
             }
         }
 
-#if MVC2 || MVC3
         public object AdditionalViewData
         {
             get;
@@ -146,8 +144,6 @@ namespace Kendo.Mvc.UI
             get;
             set;
         }
-
-#endif
 
         public string ClientGroupHeaderTemplate
         {
@@ -297,13 +293,7 @@ namespace Kendo.Mvc.UI
 
             IGridDataCellBuilder builder;
 
-#if MVC2 || MVC3
-            if (!Format.HasValue() && Encoded && !typeof(TModel).IsDataRow()
-#if MVC3
-
- && !typeof(TModel).IsDynamicObject()
-#endif
-)
+            if (!Format.HasValue() && Encoded && !typeof(TModel).IsDataRow() && !typeof(TModel).IsDynamicObject())
             {
                 builder = new GridDisplayForCellBuilder<TModel, TValue>
                 {
@@ -315,7 +305,6 @@ namespace Kendo.Mvc.UI
                 
                 return builder;
             }
-#endif
 
             builder = new GridDataCellBuilder<TModel, TValue>
             {
@@ -332,7 +321,6 @@ namespace Kendo.Mvc.UI
 
         protected override IGridDataCellBuilder CreateEditBuilderCore(IGridHtmlHelper htmlHelper)
         {
-#if MVC2 || MVC3
             if (!ReadOnly)
             {
                 var builder = new GridEditorForCellBuilder<TModel, TValue>()
@@ -348,7 +336,6 @@ namespace Kendo.Mvc.UI
 
                 return builder;
             }
-#endif
             return CreateDisplayBuilder(htmlHelper);
         }
 

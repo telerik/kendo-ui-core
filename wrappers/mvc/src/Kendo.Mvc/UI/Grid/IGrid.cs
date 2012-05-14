@@ -40,12 +40,11 @@ namespace Kendo.Mvc.UI
             get;
         }
 
-#if MVC2 || MVC3
         string EditorHtml 
         { 
             get; 
         }
-#endif
+
         GridResizingSettings Resizing
         {
             get;

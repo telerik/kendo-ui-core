@@ -55,7 +55,6 @@ namespace Kendo.Mvc.Extensions
         {
             IQueryable data = queryable;
 
-#if MVC3
             if (queryable.ElementType.IsDynamicObject())
             {
                 var firstItem = queryable.Cast<object>().FirstOrDefault();
@@ -72,7 +71,6 @@ namespace Kendo.Mvc.Extensions
                     }
                 }
             }
-#endif
 
             if (filterDescriptors.Any())
             {

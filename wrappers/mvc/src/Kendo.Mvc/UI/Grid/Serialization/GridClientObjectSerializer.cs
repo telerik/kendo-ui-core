@@ -35,14 +35,12 @@ namespace Kendo.Mvc.UI
             grid.Editing.SerializeTo("editing", writer);
             var shouldSerializeDataSource = false;
 
-#if MVC2 || MVC3          
             if (grid.OutputValidation)
             {
                 writer.AppendObject("validationMetadata", grid.ValidationMetadata);
             }
 
             shouldSerializeDataSource = grid.Editing.Enabled && grid.IsClientBinding && !grid.IsEmpty;
-#endif
             grid.Grouping.SerializeTo("grouping", writer);
             grid.Paging.SerializeTo("paging", writer);
             grid.Sorting.SerializeTo("sorting", writer);

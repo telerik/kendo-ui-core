@@ -122,7 +122,6 @@ namespace Kendo.Mvc.UI.Tests
             Assert.False(result.ContainsKey("format"));
         }
 
-#if MVC2 || MVC3
         [Fact]
         public void Should_serialize_readonly_if_set()
         {
@@ -138,7 +137,7 @@ namespace Kendo.Mvc.UI.Tests
 
             Assert.False(result.ContainsKey("readonly"));
         }
-#endif
+    
         [Fact]
         public void Should_serialize_groupable_if_grouping_disabled()
         {
@@ -254,7 +253,6 @@ namespace Kendo.Mvc.UI.Tests
             Assert.Equal(1, innerFilters[1]["value"]);
         }
 
-#if MVC2 || MVC3
         [Fact]
         public void Should_serialize_editor_html()
         {
@@ -332,7 +330,7 @@ namespace Kendo.Mvc.UI.Tests
             Assert.Equal("delete", commands[0]["name"]);
             Assert.False(commands[0].ContainsKey("attr"));
         }
-#endif
+
         [Fact]
         public void Should_serialize_client_template()
         {

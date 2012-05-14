@@ -215,7 +215,6 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
-#if MVC2 || MVC3
         /// <summary>
         /// Configures the grid editing settings.
         /// </summary>
@@ -236,7 +235,6 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
-#endif
 
         /// <summary>
         /// Configures the toolbar of the grid.

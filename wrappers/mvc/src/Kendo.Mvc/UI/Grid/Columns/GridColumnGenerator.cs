@@ -29,14 +29,12 @@ namespace Kendo.Mvc.UI
                                 .Where(property => property.CanRead && property.GetGetMethod().GetParameters().Length == 0)
                                 .Where(property => property.PropertyType.IsEnum || (property.PropertyType != typeof(object) && property.PropertyType.IsPredefinedType())
                                     || (property.PropertyType.IsNullableType() && property.PropertyType.GetNonNullableType().IsPredefinedType()));
-#if  MVC3
             properties = properties.Select(property => new {
                                        Order =  ModelMetadata.FromStringExpression(property.Name, new ViewDataDictionary<T>()).Order,
                                        Property = property
                                     })
                                     .OrderBy(property => property.Order)
                                     .Select(property => property.Property);
-#endif
             return properties.Select(property => CreateBoundColumn(property));
         }
 

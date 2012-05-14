@@ -1,4 +1,3 @@
-#if MVC3
 namespace Kendo.Mvc.UI
 {
     using System.Collections.Generic;
@@ -26,4 +25,3 @@ namespace Kendo.Mvc.UI
         }
     }
 }
-#endif

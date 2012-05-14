@@ -1,14 +1,10 @@
 namespace Kendo.Mvc.UI.Tests
 {
     using System.Collections.Generic;
+    using System.Dynamic;
     using System.Linq;
     using Infrastructure.Implementation;
     using Xunit;
-    using Mvc.Tests;
-
-#if MVC3
-    using System.Dynamic;
-#endif
 
     public class FilterDescriptorExtensionsTests
     {
@@ -58,7 +54,6 @@ namespace Kendo.Mvc.UI.Tests
             Assert.False(result.Any());
         }
 
-#if MVC3
         [Fact]
         public void Should_set_FilterDescriptor_MemberType_from_anonymous_dynamic()
         {
@@ -172,7 +167,5 @@ namespace Kendo.Mvc.UI.Tests
             public string Bar { get; set; }            
             public SimpleFoo Complex { get; set; }
         }
-#endif
-
     }
 }

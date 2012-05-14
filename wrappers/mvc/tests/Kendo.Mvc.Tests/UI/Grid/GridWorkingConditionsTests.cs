@@ -326,8 +326,6 @@ namespace Kendo.Mvc.UI.Tests.Grid
             Assert.DoesNotThrow(() => grid.VerifySettings());
         }
 
-#if MVC2 || MVC3
-
         [Fact]
         public void Should_throw_if_bound_to_data_row_view_column_editor_template_is_set_and_in_inLine_mode()
         {
@@ -400,6 +398,5 @@ namespace Kendo.Mvc.UI.Tests.Grid
 
             Assert.DoesNotThrow(() => grid.VerifySettings());
         }
-#endif
     }
 }

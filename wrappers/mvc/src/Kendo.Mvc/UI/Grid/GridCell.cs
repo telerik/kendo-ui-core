@@ -76,7 +76,6 @@ namespace Kendo.Mvc.UI
             }
         }
 
-#if MVC2 || MVC3
         public bool InEditMode
         {
             get;
@@ -88,6 +87,5 @@ namespace Kendo.Mvc.UI
             get;
             set;
         }
-#endif
     }
 }

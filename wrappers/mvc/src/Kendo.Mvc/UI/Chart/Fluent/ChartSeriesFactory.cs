@@ -738,12 +738,10 @@ namespace Kendo.Mvc.UI.Fluent
             const bool liftMemberAccess = false;
             var expression = ExpressionBuilder.Lambda<TModel>(memberType, memberName, liftMemberAccess);
 
-#if MVC3
             if (typeof(TModel).IsDynamicObject() && memberType != null && expression.Body.Type.GetNonNullableType() != memberType.GetNonNullableType())
             {
                 expression = Expression.Lambda(Expression.Convert(expression.Body, memberType), expression.Parameters);
             }
-#endif
 
             return expression;
         }

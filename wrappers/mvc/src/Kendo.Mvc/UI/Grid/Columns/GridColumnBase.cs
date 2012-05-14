@@ -294,10 +294,8 @@ namespace Kendo.Mvc.UI
                 if (Grid.CellAction != null)
                 {
                     var cell = new GridCell<T>(this, (T)dataItem);
-#if MVC2 || MVC3                    
                     cell.InEditMode = edit;
                     cell.InInsertMode = insert;
-#endif
                     if (Template != null)
                     {
                         cell.Template.CodeBlockTemplate = Template;

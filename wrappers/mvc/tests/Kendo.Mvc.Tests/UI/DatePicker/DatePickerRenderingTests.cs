@@ -31,7 +31,6 @@ namespace Kendo.Mvc.UI.Tests
             datePicker = DatePickerTestHelper.CreateDatePicker(tagBuilder.Object, viewContext);
             datePicker.Name = "DatePicker";
         }
-#if MVC2 || MVC3
         [Fact]
         public void If_Name_is_not_set_it_should_be_get_from_TemplateInfo()
         {
@@ -43,7 +42,6 @@ namespace Kendo.Mvc.UI.Tests
             Assert.DoesNotThrow(() => datePicker2.Render());
             Assert.Equal(htmlFieldPrefix, datePicker2.Name);
         }
-#endif
 
         [Fact]
         public void Render_should_call_objectWriter_start_method()

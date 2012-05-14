@@ -39,12 +39,6 @@ namespace Kendo.Mvc.UI
             private set;
         }
 
-#if MVC2 || MVC1
-        public object GetValue(object dataItem)
-        {
-            return Value(dataItem);
-        }
-#elif MVC3
         public object GetValue(object dataItem)
         {
             try
@@ -56,13 +50,10 @@ namespace Kendo.Mvc.UI
                 return null;
             }
         }
-#endif
 
-#if MVC2 || MVC3
         public string HiddenFieldHtml(HtmlHelper<object> htmlHelper)
         {
             return htmlHelper.Hidden(Name, null, new { id = "" }).ToString();
         }
-#endif
     }
 }

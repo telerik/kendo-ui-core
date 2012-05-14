@@ -40,7 +40,6 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
-#if MVC2 || MVC3
         /// <summary>
         /// Provides additional view data in the editor template for that column (if any).
         /// </summary>
@@ -117,7 +116,6 @@ namespace Kendo.Mvc.UI.Fluent
             Column.EditorTemplateName = templateName;
             return this;
         }
-#endif
         /// <summary>
         /// Enables or disables sorting the column. All bound columns are sortable by default.
         /// </summary>

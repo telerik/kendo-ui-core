@@ -35,10 +35,7 @@ namespace Kendo.Mvc.UI.Html
             {
                 foreach (var entry in dataKeyValues)
                 {
-                    var html = string.Empty;
-#if MVC2 || MVC3
-                    html = htmlHelper.Hidden(entry.Key, entry.Value, new {id = ""}).ToHtmlString();
-#endif
+                    var html = htmlHelper.Hidden(entry.Key, entry.Value, new {id = ""}).ToHtmlString();
                     var hidden = new LiteralNode(html);
                     hidden.AppendTo(fragment);
                 }
@@ -49,8 +46,6 @@ namespace Kendo.Mvc.UI.Html
         public IHtmlNode EditorForModel(object dataItem, string templateName, IEnumerable<Action<IDictionary<string, object>, object>> foreignKeyData, object additionalViewData)
         {
             var html = string.Empty;
-
-#if MVC2 || MVC3
 
             if (foreignKeyData != null)
             {
@@ -66,11 +61,9 @@ namespace Kendo.Mvc.UI.Html
             {
                 html = htmlHelper.EditorForModel(additionalViewData).ToHtmlString();
             }
-#endif
             return new LiteralNode(html);
         }
 
-#if MVC2 || MVC3
         class ClientValidationManager : IDisposable
         {
             private readonly ViewContext viewContext;
@@ -92,17 +85,5 @@ namespace Kendo.Mvc.UI.Html
                 viewContext.ClientValidationEnabled = clientValidation;
             }
         }
-#else
-        class ClientValidationManager : IDisposable
-        {
-            public ClientValidationManager(ViewContext viewContext)
-            {
-            }
-
-            public void Dispose()
-            {
-            }
-        }
-#endif
     }
 }

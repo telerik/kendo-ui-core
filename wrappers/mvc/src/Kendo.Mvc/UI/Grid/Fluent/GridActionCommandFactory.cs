@@ -23,7 +23,6 @@ namespace Kendo.Mvc.UI.Fluent
             set;
         }
 
-#if MVC2 || MVC3
         /// <summary>
         /// Defines a edit command.
         /// </summary>
@@ -53,7 +52,6 @@ namespace Kendo.Mvc.UI.Fluent
 
             return new GridDeleteActionCommandBuilder(command);
         }
-#endif
         /// <summary>
         /// Defines a select command.
         /// </summary>

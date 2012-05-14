@@ -174,9 +174,7 @@ namespace Kendo.Mvc.UI
 
         public override void VerifySettings()
         {
-#if MVC2 || MVC3
             Name = Name ?? ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(string.Empty);
-#endif
 
             if (Min.HasValue && Max.HasValue && Nullable.Compare<T>(Min, Max) == 1)
             {

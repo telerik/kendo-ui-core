@@ -91,9 +91,7 @@ namespace Kendo.Mvc.UI
         {
             Guard.IsNotNull(writer, "writer");
 
-#if MVC2 || MVC3
             Name = Name ?? ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(string.Empty);
-#endif
 
             DatePickerHtmlBuilder renderer = new DatePickerHtmlBuilder(this);
 

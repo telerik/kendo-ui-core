@@ -417,7 +417,6 @@
     <Compile Include="Extensions\ReaderWriterLockSlimExtensionsTests.cs" />
     <Compile Include="Extensions\StringExtensionsTests.cs" />
     <Compile Include="UI\ClientSideObjectWriterFactoryTests.cs" />
-    <Compile Include="UI\HtmlHelperExtensionTests.cs" />
     <Compile Include="UI\ViewComponentFactoryTests.cs" />
     <Compile Include="UI\ViewComponentBaseTestDouble.cs" />
     <Compile Include="UI\ViewComponentBaseTests.cs">

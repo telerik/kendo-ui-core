@@ -10,7 +10,6 @@ namespace Kendo.Mvc.UI.Tests
 
     public class ViewComponentModelFactoryTests
     {
-#if MVC2 || MVC3
         private readonly ViewComponentFactory<TestModel> factory;
         private readonly HtmlHelper<TestModel> htmlHelper;
 
@@ -359,6 +358,5 @@ namespace Kendo.Mvc.UI.Tests
 
             public TestModel ComplexModel { get; set; }
         }
-#endif
     }
 }

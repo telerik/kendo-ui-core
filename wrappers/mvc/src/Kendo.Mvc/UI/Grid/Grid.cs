@@ -16,9 +16,7 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.UI.Fluent;
     using Kendo.Mvc.UI.Html;
     using System.Web;
-#if MVC3
     using Infrastructure.Implementation;
-#endif
 
     /// isummary>
     /// Telerik Grid for ASP.NET MVC is a view component for presenting tabular data.
@@ -204,13 +202,7 @@ namespace Kendo.Mvc.UI
 
             buttons.Each(button => button.Create(dataItem).AppendTo(fragment));
 
-#if MVC3
-
             return MvcHtmlString.Create(fragment.ToString());
-#else
-
-            return fragment.ToString();
-#endif
         }
 
         private object CustomButton<TButton>(
@@ -263,13 +255,7 @@ namespace Kendo.Mvc.UI
             var fragment = new HtmlFragment();
             buttons.Each(button => button.Create(null).AppendTo(fragment));
 
-#if MVC3
-
             return MvcHtmlString.Create(fragment.ToString());
-#else
-
-            return fragment.ToString();
-#endif
         }
 
         private object CustomCommandToolBarButton(
@@ -353,7 +339,6 @@ namespace Kendo.Mvc.UI
             return CustomCommandToolBarButton(name, text, null, GridButtonType.Text);
         }
 
-#if MVC2 || MVC3
         public object EditButton(T dataItem, GridButtonType buttonType, object htmlAttributes, object imageHtmlAttributes)
         {
             Editing.Enabled = true;
@@ -440,7 +425,6 @@ namespace Kendo.Mvc.UI
         {
             return SubmitChangesButton(GridButtonType.Text);
         }
-#endif
         public string ClientRowTemplate
         {
             get
@@ -835,7 +819,6 @@ namespace Kendo.Mvc.UI
                 }
             }
 
-#if MVC2 || MVC3
             var orignalClientValidationEnabled = ViewContext.ClientValidationEnabled;
             var originalFormContext = ViewContext.FormContext;
 
@@ -851,11 +834,9 @@ namespace Kendo.Mvc.UI
                 {
                     InitializeEditors();
                 }
-#endif
                 
-#if MVC3
                 AdjustColumnsTypesFromDynamic();
-#endif
+
                 if (!HtmlAttributes.ContainsKey("id"))
                 {
                     HtmlAttributes["id"] = Id;
@@ -876,7 +857,6 @@ namespace Kendo.Mvc.UI
 
                 container.WriteTo(writer);
 
-#if MVC2 || MVC3
                 if (ViewContext.FormContext != null)
                 {
                     ValidationMetadata.Add("Fields", ProcessValidationMetadata());
@@ -890,7 +870,6 @@ namespace Kendo.Mvc.UI
                 ViewContext.ClientValidationEnabled = orignalClientValidationEnabled;
             }
 
-#endif
             base.WriteHtml(writer);
         }
 
@@ -1009,13 +988,11 @@ namespace Kendo.Mvc.UI
                 GroupsCount = DataProcessor.GroupDescriptors.Count,
                 ShowGroupFooter = Aggregates.Any() && VisibleColumns.OfType<IGridBoundColumn>().Any(c => c.GroupFooterTemplate.HasValue()),
                 PopUpContainer = new HtmlFragment(),
-#if MVC2 || MVC3    
                 CreateNewDataItem = () => Editing.DefaultDataItem(),
                 InsertRowPosition = Editing.InsertRowPosition,
                 EditTemplateName = Editing.TemplateName,
                 AdditionalViewData = Editing.AdditionalViewData,
                 FormId = ViewContext.FormContext.FormId,
-#endif
                 Callback = RowActionCallback
             };
 
@@ -1041,11 +1018,9 @@ namespace Kendo.Mvc.UI
                         Html = item.DetailRowHtml
                     };
                 }
-#if MVC2 || MVC3
                 row.InEditMode = item.Type == GridItemType.EditRow;
                 row.InInsertMode = item.Type == GridItemType.InsertRow;
                 row.Selected = (item.State & GridItemStates.Selected) == GridItemStates.Selected;
-#endif
                 RowAction(row);
 
                 if (HasDetailView)
@@ -1059,7 +1034,6 @@ namespace Kendo.Mvc.UI
                 {
                     item.State |= GridItemStates.Selected;
                 }
-#if MVC2 || MVC3
                 if (row.InEditMode)
                 {
                     item.Type = GridItemType.EditRow;
@@ -1069,7 +1043,6 @@ namespace Kendo.Mvc.UI
                     item.Type = GridItemType.InsertRow;
                 }
                 else
-#endif
                 {
                     item.Type = GridItemType.DataRow;
                 }
@@ -1095,7 +1068,6 @@ namespace Kendo.Mvc.UI
             return NoRecordsTemplate;
         }
 
-#if MVC2 || MVC3
         private IEnumerable<FieldValidationMetadata> ProcessValidationMetadata()
         {
             var validators = ViewContext.FormContext
@@ -1134,9 +1106,7 @@ namespace Kendo.Mvc.UI
 
             return modelMetadata.ModelType != typeof(bool);
         }
-#endif
 
-#if MVC3
         private void AdjustColumnsTypesFromDynamic()
         {
             if (!typeof (T).IsDynamicObject() || DataProcessor.ProcessedDataSource == null ||
@@ -1163,23 +1133,16 @@ namespace Kendo.Mvc.UI
             }
             return dataSource.OfType<object>().FirstOrDefault();
         }
-#endif
-
-#if MVC2 || MVC3
 
         internal bool OutputValidation
         {
             get
             {
                 return (CurrentItemMode == GridItemMode.Insert || CurrentItemMode == GridItemMode.Edit || (Editing.Enabled && IsClientBinding))
-#if MVC3
                        && !ViewContext.UnobtrusiveJavaScriptEnabled
-#endif
                     ;
             }
         }
-
-#endif
 
         public bool AutoGenerateColumns { get; set; }
 
@@ -1288,7 +1251,6 @@ namespace Kendo.Mvc.UI
                     }
                 }                
 
-#if MVC2 || MVC3
                 if (Editing.Mode == GridEditMode.InCell) 
                 {
                     if (!Ajax.Enabled && !WebService.Enabled)
@@ -1307,7 +1269,6 @@ namespace Kendo.Mvc.UI
                 {
                     throw new NotSupportedException(TextResource.DataTableInLineEditingWithCustomEditorTemplates);
                 }
-#endif
             }
         }
 
@@ -1335,7 +1296,6 @@ namespace Kendo.Mvc.UI
             }
         }
 
-#if MVC2 || MVC3
         private void InitializeEditors()
         {            
             var skip = ViewContext.HttpContext.Items["$SelfInitialize$"] != null && (bool)ViewContext.HttpContext.Items["$SelfInitialize$"] == true;
@@ -1374,7 +1334,6 @@ namespace Kendo.Mvc.UI
                 ViewContext.HttpContext.Items.Remove("$SelfInitialize$");
             }
         }
-#endif
         public string EditorHtml { get; set; }
 
         public bool HasDetailView

@@ -25,7 +25,6 @@ namespace Kendo.Mvc.UI.Tests
             Assert.False(result.ContainsKey("confirmDelete"));
         }
 
-#if MVC2 || MVC3
         [Fact]
         public void Should_not_serialize_default_item_if_server_binding()
         {
@@ -47,6 +46,5 @@ namespace Kendo.Mvc.UI.Tests
             var result = grid.Editing.Serialize();
             result.ContainsKey("defaultDataItem").ShouldBeTrue();
         }
-#endif
     }
 }

@@ -75,8 +75,6 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-#if MVC2 || MVC3
-
         public string TemplateName
         {
             get; 
@@ -88,7 +86,6 @@ namespace Kendo.Mvc.UI
             get;
             set; 
         }
-#endif
         /// <summary>
         /// Gets the HTML attributes of the form rendered during editing
         /// </summary>
@@ -102,23 +99,19 @@ namespace Kendo.Mvc.UI
         public IDictionary<string, object> Serialize()
         {
             var result = new Dictionary<string, object>();
-#if MVC2 || MVC3
             var editorHtml = grid.EditorHtml;
 
             if (editorHtml != null)
             {
                 editorHtml = editorHtml.Replace("%", "%25").Replace("<", "%3c").Replace(">", "%3e");
             }
-#endif            
             FluentDictionary.For(result)
                 .Add("confirmDelete", DisplayDeleteConfirmation, true)
                 .Add("mode", Mode.ToString())
-#if MVC2 || MVC3
                 .Add("editor", editorHtml, () => Mode != GridEditMode.InLine)
                 .Add("beginEdit", BeginEdit == GridBeginEditEvent.Click ? "click" : "dblclick", () => BeginEdit != GridBeginEditEvent.Auto)
                 .Add("defaultDataItem", SerializeDefaultDataItem(), () => grid.IsClientBinding && DefaultDataItem() != null)
                 .Add("insertRowPosition", InsertRowPosition.ToString().ToLower(), () => InsertRowPosition != GridInsertRowPosition.Top)
-#endif
                 .Add("popup", SerializePopUp(), () => Mode == GridEditMode.PopUp && grid.IsClientBinding);
 
             return result;

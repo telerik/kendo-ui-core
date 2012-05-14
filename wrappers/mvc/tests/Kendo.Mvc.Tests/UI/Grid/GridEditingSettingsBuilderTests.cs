@@ -1,4 +1,3 @@
-#if MVC2 || MVC3
 namespace Kendo.Mvc.UI.Fluent.Tests
 {
     using System;
@@ -49,4 +48,3 @@ namespace Kendo.Mvc.UI.Fluent.Tests
 
     }
 }
-#endif

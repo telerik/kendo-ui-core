@@ -47,7 +47,6 @@ namespace Kendo.Mvc.UI
             get;
         }
 
-#if MVC2 || MVC3
         object AdditionalViewData 
         { 
             get;
@@ -70,7 +69,7 @@ namespace Kendo.Mvc.UI
             get; 
             set;
         }
-#endif
+
         ICollection<AggregateFunction> Aggregates
         {
             get;

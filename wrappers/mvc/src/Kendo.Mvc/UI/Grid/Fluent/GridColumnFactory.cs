@@ -95,12 +95,10 @@ namespace Kendo.Mvc.UI.Fluent
 
             var lambdaExpression = ExpressionBuilder.Lambda<TModel>(memberType, memberName, liftMemberAccess);
 
-#if MVC3
             if (typeof(TModel).IsDynamicObject() && memberType != null && lambdaExpression.Body.Type.GetNonNullableType() != memberType.GetNonNullableType())
             {
                 lambdaExpression = Expression.Lambda(Expression.Convert(lambdaExpression.Body, memberType), lambdaExpression.Parameters);
             }
-#endif
             var columnType = typeof(GridBoundColumn<,>).MakeGenericType(new[] { typeof(TModel), lambdaExpression.Body.Type });
 
             var constructor = columnType.GetConstructor(new[] { Container.GetType(), lambdaExpression.GetType() });

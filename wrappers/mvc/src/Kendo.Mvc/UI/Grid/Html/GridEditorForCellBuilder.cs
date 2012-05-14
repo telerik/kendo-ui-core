@@ -1,4 +1,3 @@
-#if MVC2 || MVC3
 namespace Kendo.Mvc.UI.Html
 {
     using System;
@@ -83,11 +82,7 @@ namespace Kendo.Mvc.UI.Html
 
         private void AppendValidator(IHtmlNode container, HtmlHelper<TModel> htmlHelper)
         {
-            if (TemplateName.HasValue() && (typeof(TModel).IsDataRow() 
-#if MVC3
-                || typeof(TModel).IsDynamicObject()
-#endif
-                ))
+            if (TemplateName.HasValue() && (typeof(TModel).IsDataRow() || typeof(TModel).IsDynamicObject()))
             {
                 AppendValidatorForTemplate(htmlHelper, container);
             }
@@ -118,4 +113,3 @@ namespace Kendo.Mvc.UI.Html
         }
     }
 }
-#endif
