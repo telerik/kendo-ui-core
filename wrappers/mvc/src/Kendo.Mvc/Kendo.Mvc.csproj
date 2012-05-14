@@ -1049,7 +1049,6 @@
     <Compile Include="UI\IScriptableComponentContainer.cs" />
     <Compile Include="UI\ViewComponentBuilderBase.cs" />
     <Compile Include="UI\ViewComponentBase.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Infrastructure\Implementation\UrlResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
