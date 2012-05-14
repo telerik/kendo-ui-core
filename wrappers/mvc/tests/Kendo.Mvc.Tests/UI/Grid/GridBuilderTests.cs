@@ -43,7 +43,7 @@ namespace Kendo.Mvc.UI.Fluent.Tests
             IEnumerable<Customer> customers = new [] { new Customer()};
             builder.BindTo(customers);
 
-            Assert.Same(customers, grid.DataSource);
+            Assert.Same(customers, grid.Data);
         }
 
         [Fact]
@@ -51,7 +51,7 @@ namespace Kendo.Mvc.UI.Fluent.Tests
         {
             builder.BindTo(new object[0]);
 
-            Assert.IsType<GridCustomGroupingWrapper<Customer>>(grid.DataSource);
+            Assert.IsType<GridCustomGroupingWrapper<Customer>>(grid.Data);
         }
 
         [Fact]

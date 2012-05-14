@@ -98,6 +98,14 @@ namespace Kendo.Mvc.UI
             ValidationMetadata = new Dictionary<string, object>();
 
             AutoGenerateColumns = true;
+
+            DataSource = new DataSource();
+        }
+
+        public DataSource DataSource
+        {
+            get;
+            private set;
         }
 
         public IDictionary<string, object> ValidationMetadata
@@ -606,7 +614,7 @@ namespace Kendo.Mvc.UI
         /// Gets or sets the data source.
         /// </summary>
         /// <value>The data source.</value>
-        public IEnumerable<T> DataSource
+        public IEnumerable<T> Data
         {
             get;
             set;
@@ -624,7 +632,7 @@ namespace Kendo.Mvc.UI
         {
             get
             {
-                return DataSource;
+                return Data;
             }
         }
 
@@ -796,8 +804,8 @@ namespace Kendo.Mvc.UI
 
         public void SerializeDataSource(IClientSideObjectWriter writer)
         {
-            IEnumerable dataSource = DataSource;
-            var dataTableEnumerable = DataSource as GridDataTableWrapper;
+            IEnumerable dataSource = Data;
+            var dataTableEnumerable = Data as GridDataTableWrapper;
 
             var serverOperationMode = !DataBinding.IsClientOperationMode;
 

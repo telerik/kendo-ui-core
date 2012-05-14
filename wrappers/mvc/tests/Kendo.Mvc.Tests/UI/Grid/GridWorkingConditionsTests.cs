@@ -14,7 +14,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
             grid = GridTestHelper.CreateGrid<Customer>();
 
             customer = new Customer { Id = 1, Name = "John Doe" };
-            grid.DataSource = new[] { customer };
+            grid.Data = new[] { customer };
 
             grid.Columns.Add(new GridBoundColumn<Customer, int>(grid, c => c.Id));
             grid.Columns.Add(new GridBoundColumn<Customer, string>(grid, c => c.Name));
