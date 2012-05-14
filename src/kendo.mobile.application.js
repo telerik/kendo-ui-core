@@ -460,7 +460,8 @@
         },
 
         _attachHideBarHandlers: function() {
-            var that = this;
+            var that = this,
+                hideBar = proxy(that._hideBar, that);
 
             if (OS.appMode || !that.options.hideAddressBar) {
                 return;
@@ -470,10 +471,10 @@
             that._lastOrientation = -1;
 
             if (HIDEBAR) {
-                WINDOW.bind("load " + ORIENTATIONEVENT, proxy(that._hideBar, that));
+                WINDOW.on("load", hideBar);
+                kendo.onResize(hideBar);
+                that.element[0].addEventListener(support.mousedown, hideBar, true);
             }
-
-            that.element[0].addEventListener(support.mousedown, proxy(that._hideBar, that), true);
         },
 
         _setupDocumentTitle: function() {
