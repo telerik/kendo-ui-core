@@ -130,6 +130,18 @@
                 equal(grid._events["dataBinding"].length, 0);
             });
 
+            test("dataBound event is raised if bound", 1, function() {
+                var dom = $('<div data-role="grid" data-bind="events: {dataBound: dataBound}, source:items" />');
+
+                var observable = kendo.observable({
+                    items: [{text:"foo"}, {text:"bar"}],
+                    dataBound: function() {
+                        ok(true);
+                    }
+                });
+
+                kendo.bind(dom, observable);
+            });
 
             test("dataBound event is raised if attached as option", 2, function() {
                 var dom = $('<div data-role="grid" data-bound="dataBound" data-bind="source:items" />');
