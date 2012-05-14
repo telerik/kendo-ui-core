@@ -294,7 +294,7 @@
                 field = draggable.currentTarget.attr(kendo.attr("field")),
                 sourceIndicator = that.indicator(field);
 
-            if (!draggable.dropped && sourceIndicator) {
+            if (draggable !== that.options.draggable && !draggable.dropped && sourceIndicator) {
                 that._removeIndicator($(sourceIndicator));
             }
 
