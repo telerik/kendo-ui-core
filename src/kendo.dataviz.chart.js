@@ -232,7 +232,7 @@
             applyDefaults(chart.options);
 
             if (chart.dataSource) {
-                chart.dataSource.read();
+                chart._onDataChanged();
             } else {
                 chart._redraw();
             }
