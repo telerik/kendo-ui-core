@@ -113,9 +113,12 @@
      */
 
     var kendo = window.kendo,
+        TimeView = kendo.TimeView,
         touch = kendo.support.touch,
         parse = kendo.parseDate,
         extractFormat = kendo._extractFormat,
+        isInRange = kendo.calendar.isInRange,
+        getMilliseconds = TimeView.getMilliseconds,
         ui = kendo.ui,
         Widget = ui.Widget,
         OPEN = "open",
@@ -133,7 +136,8 @@
         MONTH = "month",
         SPAN = "<span/>",
         DATE = Date,
-        isInRange = kendo.calendar.isInRange,
+        MIN = new DATE(1900, 0, 1),
+        MAX = new DATE(2099, 11, 31),
         extend = $.extend;
 
     var DateTimePicker = Widget.extend(/** @lends kendo.ui.DateTimePicker.prototype */{
@@ -191,6 +195,11 @@
          * $("#datePicker").kendoDatePicker({
          *     format: "yyyy/MM/dd hh:mm tt",
          *     parseFormats: ["MMMM yyyy", "HH:mm"] //format also will be added to parseFormats
+         * });
+         * @option {Array} [dates] <> Specifies a list of dates, which are shown in the time drop-down list. If not set, the DateTimePicker will auto-generate the available times.
+         *  _example
+         * $("#dateTimePicker").kendoDateTimePicker({
+         *     dates: [new Date(2000, 10, 10, 10, 0, 0), new Date(2000, 10, 10, 30, 0)] //the drop-down list will consist only two entries - "10:00 AM" and "10:30 AM"
          * });
          * @option {Number} [interval] <30> Specifies the interval, between values in the popup list, in minutes.
          * _example
@@ -379,8 +388,9 @@
             format: "",
             timeFormat: "",
             parseFormats: [],
-            min: new DATE(1900, 0, 1),
-            max: new DATE(2099, 11, 31),
+            dates: [],
+            min: new DATE(MIN),
+            max: new DATE(MAX),
             interval: 30,
             height: 200,
             footer: '#= kendo.toString(data,"D") #',
@@ -753,10 +763,54 @@
             }
 
             options[option] = new DATE(value);
-
             that.dateView[option](value);
-            that.timeView.options[option] = value;
-            that.timeView.refresh();
+            that._setTime();
+        },
+
+        _setTime: function() {
+            var that = this,
+                timeView = that.timeView,
+                timeViewOptions = timeView.options,
+                options = that.options,
+                min = options.min,
+                max = options.max,
+                dates = options.dates,
+                previous = that._old,
+                current = that._value,
+                isTimeEqualToZero,
+                rebind;
+
+            if (!previous && !current || that._timeSelected) {
+                that._timeSelected = false;
+                return;
+            }
+
+            if (isSameDate(current, min)) {
+                timeViewOptions.min = min;
+                rebind = true;
+            } else if (isSameDate(current, max)) {
+                isTimeEqualToZero = (getMilliseconds(min) + getMilliseconds(max)) === 0;
+                timeViewOptions.max = max;
+                rebind = true;
+            } else if (previous && isSameDate(previous, min)) {
+                timeView.options.min = new DATE(MIN);
+                rebind = true;
+            } else if (previous && isSameDate(previous, max)) {
+                timeView.options.max = new DATE(MAX);
+                rebind = true;
+            }
+
+            if (rebind) {
+                if (!isTimeEqualToZero) {
+                    if (dates && dates[0]) {
+                        timeView.dataBind(dates);
+                    } else {
+                        timeView.refresh();
+                    }
+                } else {
+                    timeView.dataBind([MIN]);
+                }
+            }
         },
 
         _toggleHover: function(e) {
@@ -777,6 +831,9 @@
             that._value = date;
             that.dateView.value(date);
             that.timeView.value(date);
+
+            that._setTime();
+
             that.element.val(date ? kendo.toString(date, options.format) : value);
 
             return date;
@@ -809,7 +866,24 @@
                 anchor: that.wrapper,
                 change: function() {
                     // calendar is the current scope
-                    that._change(this.value());
+                    var value = this.value(),
+                        msValue = +value,
+                        msMin = +options.min,
+                        msMax = +options.max,
+                        current;
+
+                    if (msValue === msMin || msValue === msMax) {
+                        current = new DATE(that._value);
+                        current.setFullYear(value.getFullYear());
+                        current.setMonth(value.getMonth());
+                        current.setDate(value.getDate());
+
+                        if (isInRange(current, msMin, msMax)) {
+                            value = current;
+                        }
+                    }
+
+                    that._change(value);
                     that.close("date");
                 },
                 close: function(e) {
@@ -824,12 +898,21 @@
                 }
             }));
 
-            that.timeView = new kendo.TimeView(extend({}, options, {
+            that.timeView = new TimeView({
                 anchor: that.wrapper,
+                animation: options.animation,
+                dates: options.dates,
                 format: options.timeFormat,
+                height: options.height,
+                interval: options.interval,
+                min: new DATE(MIN),
+                max: new DATE(MAX),
+                parseFormats: options.parseFormats,
+                value: options.value,
                 change: function(value, trigger) {
                     value = that.timeView._parse(value);
                     if (trigger) {
+                        that._timeSelected = true;
                         that._change(value);
                     } else {
                         that.element.val(kendo.toString(value, options.format));
@@ -845,7 +928,7 @@
                         e.preventDefault();
                     }
                 }
-            }));
+            });
         },
 
         _icons: function() {
@@ -898,6 +981,16 @@
         options.timeFormat = extractFormat(options.timeFormat || patterns.t);
         kendo.DateView.normalize(options);
         options.parseFormats.splice(1, 0, options.timeFormat);
+    }
+
+    function isSameDate(value1, value2) {
+        if (value1) {
+            return value1.getFullYear() === value2.getFullYear() &&
+                   value1.getMonth() === value2.getMonth() &&
+                   value1.getDate() === value2.getDate();
+        }
+
+        return false;
     }
 
     ui.plugin(DateTimePicker);

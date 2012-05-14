@@ -193,11 +193,7 @@
                 }
             }
 
-            that.ul[0].innerHTML = html;
-
-            that._height(length);
-
-            that.select(that._value);
+            that._bind(html, length);
         },
 
         refresh: function() {
@@ -243,10 +239,16 @@
                 html += template(toString(start, format));
             }
 
-            that.ul[0].innerHTML = html;
+            that._bind(html, length);
+        },
 
+        _bind: function(html, length) {
+            var that = this;
+
+            that.ul[0].innerHTML = html;
             that._height(length);
 
+            that.current(null);
             that.select(that._value);
         },
 
@@ -461,6 +463,8 @@
         return msValue >= msMin && msValue <= msMax;
     }
 
+    TimeView.getMilliseconds = getMilliseconds;
+
     kendo.TimeView = TimeView;
 
     var TimePicker = Widget.extend(/** @lends kendo.ui.TimePicker.prototype */{
@@ -490,6 +494,12 @@
          * $("#timePicker").kendoTimePicker({
          *     format: "h:mm tt",
          *     parseFormats: ["HH:mm"] //format also will be added to parseFormats
+         * });
+         *
+         * @option {Array} [dates] <> Specifies a list of dates, which are shown in the time drop-down list. If not set, the DateTimePicker will auto-generate the available times.
+         *  _example
+         * $("#timePicker").kendoTimePicker({
+         *     dates: [new Date(2000, 10, 10, 10, 0, 0), new Date(2000, 10, 10, 30, 0)] //the drop-down list will consist only two entries - "10:00 AM" and "10:30 AM"
          * });
          *
          * @option {Number} [interval] <30>
