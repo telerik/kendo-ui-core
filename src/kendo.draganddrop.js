@@ -13,7 +13,6 @@
         draggables = {},
         dropTargets = {},
         lastDropTarget,
-        RESIZE_EVENT = "resize",
         START_EVENTS = "mousedown",
         MOVE_EVENTS = "mousemove",
         END_EVENTS = "mouseup mouseleave",
@@ -39,14 +38,12 @@
         TAP = "tap";
 
     if (support.touch) {
-        RESIZE_EVENT = "orientationchange";
         START_EVENTS = "touchstart";
         MOVE_EVENTS = "touchmove";
         END_EVENTS = "touchend touchcancel";
     }
 
     if(pointers) {
-        RESIZE_EVENT = "orientationchange resize";
         START_EVENTS = "MSPointerDown";
         MOVE_EVENTS = "MSPointerMove";
         END_EVENTS = "MSPointerUp MSPointerCancel";
@@ -533,21 +530,16 @@
     var PaneDimensions = Observable.extend({
         init: function(options) {
             var that = this,
-                refresh = proxy(that.refresh, that),
-                resizeHandler = refresh;
+                refresh = proxy(that.refresh, that);
 
             Observable.fn.init.call(that);
-
-            if (support.mobileOS.android) {
-                resizeHandler = function() { setTimeout(refresh, 200); };
-            }
 
             that.x = new PaneDimension(extend({horizontal: true}, options));
             that.y = new PaneDimension(extend({horizontal: false}, options));
 
             that.bind(CHANGE, options);
 
-            $(window).bind(RESIZE_EVENT, resizeHandler);
+            kendo.onResize(refresh);
         },
 
         refresh: function() {

@@ -26,7 +26,6 @@
 
         iconMeta = kendo.template('<link rel="apple-touch-icon' + (support.mobileOS.android ? '-precomposed' : '') + '" # if(data.size) { # sizes="#=data.size#" #}# href="#=data.icon#" />', {usedWithBlock: false}),
 
-        ORIENTATIONEVENT = "onorientationchange" in window ? "orientationchange" : "resize",
         HIDEBAR = OS.device == "iphone" || OS.device == "ipod",
         BARCOMPENSATION = 60,
 
@@ -430,7 +429,7 @@
                 applyViewportHeight();
             }
 
-            WINDOW.bind(ORIENTATIONEVENT, function(e) {
+            kendo.onResize(function() {
                 element.removeClass("km-horizontal km-vertical")
                     .addClass(getOrientationClass());
 

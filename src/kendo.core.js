@@ -2186,11 +2186,17 @@ function pad(number) {
         support.mouseup = "touchend";
         support.mousemove = "touchmove";
         support.mousecancel = "touchcancel";
+        support.resize = "orientationchange";
     } else {
         support.mousemove = "mousemove";
         support.mousedown = "mousedown";
         support.mouseup = "mouseup";
         support.mousecancel = "mouseleave";
+        support.resize = "resize";
+    }
+
+    if (support.pointers) {
+        support.resize = "orientationchange resize";
     }
 
     var wrapExpression = function(members) {
@@ -2681,4 +2687,18 @@ function pad(number) {
         }
     };
 
+    /**
+     * Binds to orientation change or resize (depending on the platform)
+     * Abstracts problem with android triggering event before the dimensions have changed.
+     * @function
+     * @param {Function} The callback to be executed
+     */
+    kendo.onResize = function(callback) {
+        var handler = callback;
+        if (support.mobileOS.android) {
+            handler = function() { setTimeout(callback, 200); };
+        }
+
+        $(window).on(support.resize, handler);
+    }
 })(jQuery);
