@@ -332,9 +332,9 @@ html body .k-button-bare
 
 .k-drag-status
 {
-    margin-top: -1px;
+    margin-top: -3px;
     margin-right: 4px;
-    vertical-align: top;
+    vertical-align: middle;
 }
 
 .k-reorder-cue

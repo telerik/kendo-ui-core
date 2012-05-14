@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Grid Column Reorder</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.pager.js"></script>
+        <script src="../../src/kendo.sortable.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.reorderable.js"></script>
+        <script src="../../src/kendo.grid.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+        <style>
+            .k-widget table {
+                border-collapse: collapse;
+                table-layout: fixed;
+                width: 30px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+        <h1 id="qunit-header">Grid Column Reorder</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var Grid = kendo.ui.Grid,
+                table,
+                data = [{ foo: "foo", bar: "bar" }],
+                DataSource = kendo.data.DataSource;
+
+            module("grid column reorder", {
+                setup: function() {
+                    table = $("<table></table>").appendTo(document.body);
+                },
+                teardown: function() {
+                    table.closest(".k-grid").remove();
+                }
+            });
+
+            test("reorderable in config options", function() {
+                strictEqual(Grid.fn.options.reorderable, false);
+            });
+
+            test("Reorderable widget is initialized in Grid header", function() {
+                var grid = new Grid(table, {
+                    reorderable: true,
+                    columns: ["foo", "bar"],
+                    dataSource: data
+                });
+
+                ok(grid.thead.data("kendoReorderable") instanceof kendo.ui.Reorderable);
+            });
+
+            test("Reorderable widget is initialized in Grid header when no columns are defined", function() {
+                var grid = new Grid(table, {
+                    reorderable: true,
+                    dataSource: data
+                });
+
+                ok(grid.thead.data("kendoReorderable") instanceof kendo.ui.Reorderable);
+            });
+
+            test("columnReorder reorder col elements", function() {
+                var grid = new Grid(table, {
+                    columns: [{
+                        field: "foo",
+                        width: 10
+                    },
+                    {
+                        field: "bar",
+                        width: 20
+                    }],
+                    dataSource: data,
+                    scrollable: false
+                });
+
+                grid.reorderColumn(1, grid.columns[0]);
+
+                var cols = grid.thead.prev().find("col");
+                equal(cols.eq(0).css("width"), "20px");
+                equal(cols.eq(1).css("width"), "10px");
+            });
+
+            test("columnReorder reorders col elements in scrollable grid", function() {
+                var grid = new Grid(table, {
+                    columns: [{
+                        field: "foo",
+                        width: 10
+                    },
+                    {
+                        field: "bar",
+                        width: 20
+                    }],
+                    dataSource: data
+                });
+
+                grid.reorderColumn(1, grid.columns[0]);
+
+                var cols = grid.thead.prev().find("col").add(grid.tbody.prev().find("col"));
+                equal(cols.eq(0).css("width"), "20px");
+                equal(cols.eq(1).css("width"), "10px");
+                equal(cols.eq(2).css("width"), "20px");
+                equal(cols.eq(3).css("width"), "10px");
+            });
+
+            test("columnReorder reorders col elements in groupable grid", function() {
+                var grid = new Grid(table, {
+                    columns: [{
+                        field: "foo",
+                        width: 10
+                    },
+                    {
+                        field: "bar",
+                        width: 20
+                    }],
+                    dataSource: {
+                        data: data,
+                        group: { field: "foo" }
+                    },
+                    scrollable: false
+                });
+
+                grid.reorderColumn(1, grid.columns[0]);
+
+                var cols = grid.thead.prev().find("col:not(.k-group-col)");
+                equal(cols.eq(0).css("width"), "20px");
+                equal(cols.eq(1).css("width"), "10px");
+            });
+
+            test("columnReorder reorders col elements in hierarchical grid", function() {
+                var grid = new Grid(table, {
+                    columns: [{
+                        field: "foo",
+                        width: 10
+                    },
+                    {
+                        field: "bar",
+                        width: 20
+                    }],
+                    dataSource: data,
+                    scrollable: false,
+                    detailTemplate: "foo"
+                });
+
+                grid.reorderColumn(1, grid.columns[0]);
+
+                var cols = grid.thead.prev().find("col:not(.k-hierarchy-col)");
+                equal(cols.eq(0).css("width"), "20px");
+                equal(cols.eq(1).css("width"), "10px");
+            });
+
+            test("columnReorder moves col at first position", function() {
+                var grid = new Grid(table, {
+                    columns: [{
+                        field: "foo",
+                        width: 10
+                    },
+                    {
+                        field: "bar",
+                        width: 20
+                    }],
+                    dataSource: data,
+                    scrollable: false
+                });
+
+                grid.reorderColumn(0, grid.columns[1]);
+
+                var cols = grid.thead.prev().find("col");
+                equal(cols.eq(0).css("width"), "20px");
+                equal(cols.eq(1).css("width"), "10px");
+            });
+
+            test("columnReorder does not move if destIndex same as column index", function() {
+                var grid = new Grid(table, {
+                    columns: [{
+                        field: "foo",
+                        width: 10
+                    },
+                    {
+                        field: "bar",
+                        width: 20
+                    }],
+                    dataSource: data,
+                    scrollable: false
+                });
+
+                grid.reorderColumn(0, grid.columns[0]);
+
+                var cols = grid.thead.prev().find("col");
+                equal(cols.eq(0).css("width"), "10px");
+                equal(cols.eq(1).css("width"), "20px");
+            });
+
+            test("columnReorder reorder column headers", function() {
+                var grid = new Grid(table, {
+                    reorderable: true,
+                    columns: ["foo", "bar"],
+                    dataSource: data
+                });
+
+                grid.reorderColumn(0, grid.columns[1]);
+
+                var th = grid.thead.find("th");
+                equal(th.eq(0).data("field"), "bar");
+                equal(th.eq(1).data("field"), "foo");
+            });
+
+            test("columnReorder skips group and detail column headers", function() {
+                var grid = new Grid(table, {
+                    reorderable: true,
+                    columns: ["foo", "bar"],
+                    dataSource: {
+                        data: data,
+                        group: { field: "foo" }
+                    },
+                    detailTemplate: "foo"
+                });
+
+                grid.reorderColumn(0, grid.columns[1]);
+
+                var th = grid.thead.find("th:not(.k-group-cell,.k-hierarchy-cell)");
+                equal(th.eq(0).data("field"), "bar");
+                equal(th.eq(1).data("field"), "foo");
+            });
+
+            test("columnReorder reorder colum cells", function() {
+                var grid = new Grid(table, {
+                    reorderable: true,
+                    columns: ["foo", "bar"],
+                    dataSource: data
+                });
+
+                grid.reorderColumn(0, grid.columns[1]);
+
+                var td = grid.tbody.find("tr>td");
+                equal(td.eq(0).text(), "bar");
+                equal(td.eq(1).text(), "foo");
+            });
+
+            test("columnReorder skips group cells", function() {
+                var grid = new Grid(table, {
+                    reorderable: true,
+                    columns: ["foo", "bar"],
+                    dataSource: {
+                        data: data,
+                        group: { field: "foo" }
+                    }
+                });
+
+                grid.reorderColumn(0, grid.columns[1]);
+
+                var td = grid.tbody.find("tr:eq(1)>td");
+                equal(td.eq(1).text(), "bar");
+                equal(td.eq(2).text(), "foo");
+            });
+
+            test("columnReorder skips detail cells", function() {
+                var grid = new Grid(table, {
+                    reorderable: true,
+                    columns: ["foo", "bar"],
+                    dataSource: data,
+                    detailTemplate: "foo"
+                });
+
+                grid.reorderColumn(0, grid.columns[1]);
+
+                var td = grid.tbody.children(":not(.k-detail-row)").find(">td");
+                equal(td.eq(1).text(), "bar");
+                equal(td.eq(2).text(), "foo");
+            });
+
+            test("columnReorder reorder colum footer cells", function() {
+                var grid = new Grid(table, {
+                    reorderable: true,
+                    columns: [{
+                        field: "foo",
+                        footerTemplate: "foo footer"
+                    },
+                    {
+                        field: "bar",
+                        footerTemplate: "bar footer"
+                    }],
+                    dataSource: data
+                });
+
+                grid.reorderColumn(0, grid.columns[1]);
+
+                var footer = grid.footer.find(".k-footer-template>td");
+                equal(footer.eq(0).text(), "bar footer");
+                equal(footer.eq(1).text(), "foo footer");
+            });
+
+            test("columnReorder reorder colum footer cols", function() {
+                var grid = new Grid(table, {
+                    reorderable: true,
+                    columns: [{
+                        field: "foo",
+                        footerTemplate: "foo footer",
+                        width: 20
+                    },
+                    {
+                        field: "bar",
+                        footerTemplate: "bar footer",
+                        width: 10
+                    }],
+                    dataSource: data
+                });
+
+                grid.reorderColumn(0, grid.columns[1]);
+
+                var cols = grid.footer.find(".k-grid-footer-wrap>table>colgroup>col");
+                equal(cols.eq(0).css("width"), "10px");
+                equal(cols.eq(1).css("width"), "20px");
+            });
+
+            test("columnReorder reorder grid columns collection", function() {
+                var grid = new Grid(table, {
+                    reorderable: true,
+                    columns: ["foo", "bar"],
+                    dataSource: data
+                });
+
+                grid.reorderColumn(0, grid.columns[1]);
+
+                equal(grid.columns[0].field, "bar");
+                equal(grid.columns[1].field, "foo");
+            });
+
+            test("column order is peristed on refresh", function() {
+                var grid = new Grid(table, {
+                    columns: ["foo", "bar"],
+                    dataSource: data
+                });
+
+                grid.reorderColumn(0, grid.columns[1]);
+                grid.refresh();
+
+                var td = grid.tbody.find("tr>td");
+                equal(td.eq(0).text(), "bar");
+                equal(td.eq(1).text(), "foo");
+            });
+
+            function moveOverDropTarget(draggable, dropTarget) {
+                var position = dropTarget.position();
+
+                draggable.trigger({ type: "mousedown", pageX: 1, pageY: 1 });
+
+                $(document.documentElement).trigger({
+                    type: "mousemove",
+                    pageX: position.left,
+                    pageY: position.top,
+                    clientX: position.left,
+                    clientY: position.top
+                });
+
+                $(document.documentElement).trigger({
+                    type: "mouseup",
+                    pageX: position.left,
+                    pageY: position.top,
+                    clientX: position.left,
+                    clientY: position.top
+                });
+            }
+
+        </script>
+    </body>
+</html>
