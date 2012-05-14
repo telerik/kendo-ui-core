@@ -618,7 +618,8 @@
         },
 
         _attachHideBarHandlers: function() {
-            var that = this;
+            var that = this,
+                hideBar = proxy(that._hideBar, that);
 
             if (OS.appMode || !that.options.hideAddressBar) {
                 return;
@@ -628,8 +629,10 @@
             that._lastOrientation = -1;
 
             if (HIDEBAR) {
-                WINDOW.bind("load " + ORIENTATIONEVENT, proxy(that._hideBar, that));
+                WINDOW.bind("load " + ORIENTATIONEVENT, hideBar);
             }
+
+            that.element[0].addEventListener(support.mousedown, hideBar, true);
         },
 
         _hideBar: function() {
@@ -639,10 +642,6 @@
                 initialHeight = that._initialHeight,
                 lastOrientation = that._lastOrientation,
                 newHeight;
-
-            if (lastOrientation === orientation) {
-                return;
-            }
 
             that._lastOrientation = orientation;
 
@@ -654,8 +653,9 @@
 
             if (newHeight != element.height()) {
                 element.height(newHeight);
-                setTimeout(window.scrollTo, 0, 0, 1);
             }
+
+            setTimeout(window.scrollTo, 0, 0, 1);
         },
 
         _attachCapture: function() {
