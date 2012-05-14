@@ -11,7 +11,7 @@
         <script src="../../src/kendo.pager.js"></script>
         <script src="../../src/kendo.sortable.js"></script>
         <script src="../../src/kendo.draganddrop.js"></script>
-        <script src="../../src/kendo.reordable.js"></script>
+        <script src="../../src/kendo.reorderable.js"></script>
         <script src="../../src/kendo.grid.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
         <style>
@@ -45,27 +45,27 @@
                 }
             });
 
-            test("reordable in config options", function() {
-                strictEqual(Grid.fn.options.reordable, false);
+            test("reorderable in config options", function() {
+                strictEqual(Grid.fn.options.reorderable, false);
             });
 
-            test("Reordable widget is initialized in Grid header", function() {
+            test("Reorderable widget is initialized in Grid header", function() {
                 var grid = new Grid(table, {
-                    reordable: true,
+                    reorderable: true,
                     columns: ["foo", "bar"],
                     dataSource: data
                 });
 
-                ok(grid.thead.data("kendoReordable") instanceof kendo.ui.Reordable);
+                ok(grid.thead.data("kendoReorderable") instanceof kendo.ui.Reorderable);
             });
 
-            test("Reordable widget is initialized in Grid header when no columns are defined", function() {
+            test("Reorderable widget is initialized in Grid header when no columns are defined", function() {
                 var grid = new Grid(table, {
-                    reordable: true,
+                    reorderable: true,
                     dataSource: data
                 });
 
-                ok(grid.thead.data("kendoReordable") instanceof kendo.ui.Reordable);
+                ok(grid.thead.data("kendoReorderable") instanceof kendo.ui.Reorderable);
             });
 
             test("columnReorder reorder col elements", function() {
@@ -201,7 +201,7 @@
 
             test("columnReorder reorder column headers", function() {
                 var grid = new Grid(table, {
-                    reordable: true,
+                    reorderable: true,
                     columns: ["foo", "bar"],
                     dataSource: data
                 });
@@ -215,7 +215,7 @@
 
             test("columnReorder skips group and detail column headers", function() {
                 var grid = new Grid(table, {
-                    reordable: true,
+                    reorderable: true,
                     columns: ["foo", "bar"],
                     dataSource: {
                         data: data,
@@ -233,7 +233,7 @@
 
             test("columnReorder reorder colum cells", function() {
                 var grid = new Grid(table, {
-                    reordable: true,
+                    reorderable: true,
                     columns: ["foo", "bar"],
                     dataSource: data
                 });
@@ -247,7 +247,7 @@
 
             test("columnReorder skips group cells", function() {
                 var grid = new Grid(table, {
-                    reordable: true,
+                    reorderable: true,
                     columns: ["foo", "bar"],
                     dataSource: {
                         data: data,
@@ -264,7 +264,7 @@
 
             test("columnReorder skips detail cells", function() {
                 var grid = new Grid(table, {
-                    reordable: true,
+                    reorderable: true,
                     columns: ["foo", "bar"],
                     dataSource: data,
                     detailTemplate: "foo"
@@ -279,7 +279,7 @@
 
             test("columnReorder reorder colum footer cells", function() {
                 var grid = new Grid(table, {
-                    reordable: true,
+                    reorderable: true,
                     columns: [{
                         field: "foo",
                         footerTemplate: "foo footer"
@@ -300,7 +300,7 @@
 
             test("columnReorder reorder colum footer cols", function() {
                 var grid = new Grid(table, {
-                    reordable: true,
+                    reorderable: true,
                     columns: [{
                         field: "foo",
                         footerTemplate: "foo footer",
@@ -323,7 +323,7 @@
 
             test("columnReorder reorder grid columns collection", function() {
                 var grid = new Grid(table, {
-                    reordable: true,
+                    reorderable: true,
                     columns: ["foo", "bar"],
                     dataSource: data
                 });
