@@ -3,10 +3,10 @@
         messageLocators: {
             mvcLocator: {
                 locate: function (element, fieldName) {
-                    return element.find(".field-validation-valid[data-valmsg-for=" + fieldName + "]");
+                    return element.find(".field-validation-valid[data-valmsg-for=" + fieldName + "], .field-validation-error[data-valmsg-for=" + fieldName + "]");
                 },
                 decorate: function (message, fieldName) {
-                    message.addClass("field-validation-valid").attr("data-val-msg-for", fieldName || "");
+                    message.addClass("field-validation-error").attr("data-val-msg-for", fieldName || "");
                 }
             },
             mvcMetadataLocator: {
@@ -44,8 +44,7 @@
                         rules["mvc" + name] = (function (rule) {
                             return function (input) {
                                 if (input.filter("[data-val-" + rule + "]").length) {
-
-                                    return validationRules[rule](input);
+                                    return validationRules[rule](input, extractParams(input, rule));
                                 }
                                 return true;
                             }
@@ -63,6 +62,27 @@
             }
         }
     });
+
+    function extractParams(input, ruleName) {
+        var params = {},
+            index,
+            data = input.data(),
+            length = ruleName.length,
+            rule,
+            key;
+
+        for (key in data) {
+            rule = key.toLowerCase();
+            index = rule.indexOf(ruleName);
+            if (index > -1) {
+                rule = rule.substring(index + length, key.length);
+                if (rule) {
+                    params[rule] = data[key];
+                }
+            }
+        }
+        return params;
+    }
 
     function rulesFromData(metadata) {
         var idx,
@@ -106,6 +126,13 @@
         return { rules: rules, messages: messages };
     }
 
+    function patternMatcher(value, pattern) {
+        if (typeof pattern === "string") {
+            pattern = new RegExp('^(?:' + pattern + ')$');
+        }
+        return pattern.test(value);
+    }
+
     var validationRules = {
         required: function (input) {
             var checkbox = input.filter("[type=checkbox]").length && input.attr("checked") !== "checked",
@@ -116,17 +143,26 @@
         number: function (input) {
             return kendo.parseFloat(input.val()) !== null
         },
-        regex: function (input) {
-            return true;
+        regex: function (input, params) {
+            return patternMatcher(input.val(), params.pattern);
         },
         range: function(input, params) {
             return this.min(input, params) && this.max(input, params);
         },
         min: function(input, params) {
-            return true;
+            var min = parseFloat(params.min) || 0,
+                val = parseFloat(input.val());
+
+            return min <= val;
         },
         max: function(input, params) {
-            return true;
+            var max = parseFloat(params.max) || 0,
+                val = parseFloat(input.val());
+
+            return val <= max;
+        },
+        date: function(input) {
+            return kendo.parseDate(input.val()) !== null;
         }
     }
 })(jQuery);
