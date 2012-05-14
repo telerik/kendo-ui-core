@@ -78,8 +78,9 @@ switch(os.type()) {
         break;
     case "Linux":
         browsers.push("google-chrome");
-        browsers.push("firefox")
-
+        browsers.push("firefox-esr");
+        browsers.push("firefox");
+        break;
 }
 
 var testRunnerURL = 'http://localhost:' + PORT + '/tests/testrunner.html';
