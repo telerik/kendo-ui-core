@@ -128,7 +128,7 @@ namespace Kendo.Mvc.UI.Tests
             dataTable.Columns.Add(secondColumnName, typeof(DateTime));
 
             var grid = GridTestHelper.CreateGrid<DataRowView>();
-            grid.DataSource = dataTable.WrapAsEnumerable();
+            grid.Data = dataTable.WrapAsEnumerable();
             var dataTableColumnGenerator = new GridColumnGenerator<DataRowView>(grid);
 
             var columns = dataTableColumnGenerator.GetColumns();
@@ -144,7 +144,7 @@ namespace Kendo.Mvc.UI.Tests
             DataTable dataTable = null;
 
             var grid = GridTestHelper.CreateGrid<DataRowView>();
-            grid.DataSource = dataTable.WrapAsEnumerable();
+            grid.Data = dataTable.WrapAsEnumerable();
             var dataTableColumnGenerator = new GridColumnGenerator<DataRowView>(grid);
             Assert.Empty(dataTableColumnGenerator.GetColumns());
         }
@@ -153,7 +153,7 @@ namespace Kendo.Mvc.UI.Tests
         public void Should_generate_columns_for_properties_of_nullable_bindable_type()
         {
             var grid = GridTestHelper.CreateGrid<NullableFoo>();
-            grid.DataSource = Enumerable.Empty<NullableFoo>();
+            grid.Data = Enumerable.Empty<NullableFoo>();
             var columnGenerator = new GridColumnGenerator<NullableFoo>(grid);
             var generatedColumns = columnGenerator.GetColumns();
 
@@ -165,7 +165,7 @@ namespace Kendo.Mvc.UI.Tests
         public void Should_generate_columns_in_the_specified_order()
         {
             var grid = GridTestHelper.CreateGrid<ColumnOrder>();
-            grid.DataSource = Enumerable.Empty<ColumnOrder>();
+            grid.Data = Enumerable.Empty<ColumnOrder>();
 
             var columnGenerator = new GridColumnGenerator<ColumnOrder>(grid);
             var columns = columnGenerator.GetColumns();

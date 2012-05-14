@@ -38,6 +38,13 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        public GridBuilder<T> DataSource(Action<DataSourceBuilder> configurator)
+        {
+            configurator(new DataSourceBuilder(Component.DataSource));
+
+            return this;
+        }
+
         public GridBuilder<T> DetailView(Action<GridDetailViewBuilder<T>> configurator)
         {
             Guard.IsNotNull(configurator, "configurator");
@@ -309,14 +316,14 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public GridBuilder<T> BindTo(IEnumerable<T> dataSource)
         {
-            Component.DataSource = dataSource;
+            Component.Data = dataSource;
 
             return this;
         }
 
         public GridBuilder<T> BindTo(IEnumerable dataSource)
         {           
-            Component.DataSource = new GridCustomGroupingWrapper<T>(dataSource);
+            Component.Data = new GridCustomGroupingWrapper<T>(dataSource);
             return this;
         }        
 

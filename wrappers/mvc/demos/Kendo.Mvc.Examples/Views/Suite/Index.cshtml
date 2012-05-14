@@ -6,6 +6,13 @@
 </head>
 <body>
     <div id="page">
+    @{
+        var dataSource = new DataSource();
+        dataSource.Transport.Read.Url = "foo.php";
+
+    }
+    @(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(dataSource.ToJson()))
+
         @foreach (string category in ViewBag.Navigation.Keys)
         {
             <h1>@category</h1>
@@ -30,5 +37,6 @@
             </ul>
         }
     </div>
+
 </body>
 </html>
