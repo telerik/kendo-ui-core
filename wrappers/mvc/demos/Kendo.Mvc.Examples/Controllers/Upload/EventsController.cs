@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Kendo.Mvc.Web.Examples.Controllers
+namespace Kendo.Mvc.Examples.Controllers
 {
     public partial class UploadController : Controller
     {

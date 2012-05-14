@@ -4,15 +4,20 @@ using System.Linq;
 using System.Web;
 using System.Configuration;
 
-namespace Kendo.Mvc.Web.Examples.Models
+namespace Kendo.Mvc.Examples.Models
 {
     public static class Config
     {
-        public static readonly string NavigationData;
+        private static readonly string NavigationData;
 
         static Config()
         {
             NavigationData = ConfigurationManager.AppSettings["NavigationData"];
+        }
+
+        public static string SuiteNavigationData(string suite)
+        {
+            return NavigationData.Replace("{suite}", suite);
         }
     }
 }

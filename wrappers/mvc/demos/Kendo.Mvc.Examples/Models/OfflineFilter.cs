@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Script.Serialization;
 
-namespace Kendo.Mvc.Web.Examples.Models
+namespace Kendo.Mvc.Examples.Models
 {
     public class OfflineFilter
     {

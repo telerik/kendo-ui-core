@@ -1,3 +1,8 @@
 ﻿@{
-    Layout = "~/Areas/razor/Views/Shared/_Layout.cshtml";
+    if (ViewContext.RequestContext.RouteData.Values["suite"].ToString() == "web")
+    {
+        Layout = "~/Areas/razor/Views/Shared/_WebLayout.cshtml";
+    } else {
+        Layout = "~/Areas/razor/Views/Shared/_DataVizLayout.cshtml";
+    }
 }

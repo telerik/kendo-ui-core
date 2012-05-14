@@ -18,7 +18,11 @@
                         <ul>
                             @foreach (NavigationExample example in widget.Items)
                             {
-                                <li><a href='@Url.Content("~/" + ViewContext.RouteData.DataTokens["area"] + "/" + example.Url)'>@example.Text</a></li>
+                                <li><a href='@(Url.Content("~/" +
+                                        ViewContext.RouteData.DataTokens["area"] + "/" +
+                                        ViewContext.RouteData.Values["suite"] + "/" +
+                                        example.Url.Replace(".html", "")
+                                    ))'>@example.Text</a></li>
                             }
                         </ul>
                     </li>
