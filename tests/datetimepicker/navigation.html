@@ -380,6 +380,23 @@
                 equal(datetimepicker.value().getMinutes(), 0);
             });
 
+            test("DateTimePicker uses options.dates when rebind TimeView", function() {
+                var date = new Date(2000, 11, 1, 8, 30, 0);
+                var datetimepicker = new DateTimePicker(input, {
+                    min: date,
+                    value: date,
+                    dates: [new Date(2000, 10, 10, 12, 10, 0)]
+                });
+
+                //select other date
+                datetimepicker.open("date");
+                datetimepicker.dateView.calendar.value(new Date(2000, 11, 20));
+                datetimepicker.dateView.calendar.trigger("change");
+
+                equal(datetimepicker.timeView.ul.children().length, 1);
+                equal(datetimepicker.timeView.ul.children().text(), "12:10 PM");
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

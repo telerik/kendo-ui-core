@@ -175,6 +175,17 @@
                 equal(datetimepicker.options.parseFormats[1], datetimepicker.options.timeFormat);
                 equal(datetimepicker.options.parseFormats[2], "MM/dd/yy");
             });
+
+            test("DateTimePicker uses options.dates instead of auto-generated hours", function() {
+                var datetimepicker = input.kendoDateTimePicker({
+                    dates: [new Date(2000, 10, 10, 18, 0, 0)]
+                }).data("kendoDateTimePicker");
+
+                datetimepicker.open("time");
+
+                equal(datetimepicker.timeView.ul.children().length, 1);
+                equal(datetimepicker.timeView.ul.children(":first").text(), "6:00 PM");
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
