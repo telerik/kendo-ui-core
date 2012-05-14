@@ -29,7 +29,7 @@
         nameSpecialCharRegExp = /(\[|\]|\$|\.|\:|\+)/g;
 
     function dropCueOffsetTop(element) {
-        return $(element).children(".k-grid-toolbar").outerHeight() + 3;
+        return element.position().top + 3;
     }
 
     var Groupable = Widget.extend({
@@ -55,7 +55,7 @@
                     dragenter: function(e) {
                         if (that._canDrag(e.draggable.currentTarget)) {
                             e.draggable.hint.find(".k-drag-status").removeClass("k-denied").addClass("k-add");
-                            dropCue.css({top: dropCueOffsetTop(that.element), left: 0}).appendTo(groupContainer);
+                            dropCue.css({top: dropCueOffsetTop(groupContainer), left: 0}).appendTo(groupContainer);
                         }
                     },
                     dragleave: function(e) {
@@ -71,7 +71,7 @@
                             lastCuePosition = dropCuePositions[dropCuePositions.length - 1],
                             position;
 
-                        if (!that._canDrag(targetElement)) {
+                        if (!targetElement.hasClass("k-group-indicator") && !that._canDrag(targetElement)) {
                             return;
                         }
                         if(lastCuePosition) {
@@ -102,7 +102,7 @@
                             left = element.position().left - marginLeft;
 
                         intializePositions();
-                        dropCue.css({top: dropCueOffsetTop(that.element), left: left}).appendTo(groupContainer);
+                        dropCue.css({top: dropCueOffsetTop(groupContainer), left: left}).appendTo(groupContainer);
                         this.hint.find(".k-drag-status").removeClass("k-denied").addClass("k-add");
                     },
                     dragend: function() {
