@@ -19,7 +19,7 @@ namespace Kendo.Mvc.UI.Tests
         public ViewComponentBaseTests()
         {
             _httpContext = TestHelper.CreateMockedHttpContext();
-            _viewContext = new ViewContext { HttpContext = _httpContext.Object };
+            _viewContext = new ViewContext { HttpContext = _httpContext.Object, Writer = TextWriter.Null };
             _clientSideObjectWriterFactory = new Mock<IClientSideObjectWriterFactory>();
 
             _baseComponent = new Mock<ViewComponentBase>(_viewContext, _clientSideObjectWriterFactory.Object);
