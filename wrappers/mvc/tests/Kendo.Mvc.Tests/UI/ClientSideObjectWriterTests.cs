@@ -24,7 +24,7 @@ namespace Kendo.Mvc.UI.Tests
         [Fact]
         public void Start_should_write_id_type_and_opening_bracket()
         {
-            _writer.Setup(w => w.Write("jQuery('#{0}').{1}(".FormatWith(Id, Type))).Verifiable();
+            _writer.Setup(w => w.Write("jQuery(document).ready(function(){{jQuery('#{0}').{1}(".FormatWith(Id, Type))).Verifiable();
 
             _objectWriter.Start();
 
@@ -310,7 +310,7 @@ namespace Kendo.Mvc.UI.Tests
             _objectWriter.Start()
                          .Complete();
 
-            _writer.Verify(w => w.Write(");"));
+            _writer.Verify(w => w.Write(");});"));
         }
 
         [Fact]

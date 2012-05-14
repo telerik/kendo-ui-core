@@ -34,7 +34,7 @@ namespace Kendo.Mvc.UI.Html.Tests
         [Fact]
         public void EditorTag_should_output_render_css_classes()
         {
-            renderer.CreateEditor().Attribute("class").ShouldEqual("t-widget t-editor t-header");
+            renderer.CreateEditor().Attribute("class").ShouldEqual("k-widget k-editor k-header");
         }
 
         [Fact]

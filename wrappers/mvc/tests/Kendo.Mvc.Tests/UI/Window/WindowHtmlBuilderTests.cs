@@ -22,12 +22,6 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
-        public void WindowTag_should_render_classes()
-        {
-            renderer.WindowTag().ShouldHaveClasses(UIPrimitives.Widget, "t-window");
-        }
-
-        [Fact]
         public void WindowTag_should_render_html_attributes()
         {
             window.HtmlAttributes.Add("title", "genericInput");

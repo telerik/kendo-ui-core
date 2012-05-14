@@ -31,7 +31,7 @@ namespace Kendo.Mvc.UI.Html
         {
             decorator.Apply(html);
 
-            html.Children[0].Attribute("class").Split(' ').ShouldContain("t-icon");
+            html.Children[0].Attribute("class").ShouldContain(UIPrimitives.Icon);
         }
         
         [Fact]

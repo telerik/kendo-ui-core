@@ -111,7 +111,7 @@ namespace Kendo.Mvc.UI
 
         public override void WriteInitializationScript(TextWriter writer)
         {
-            IClientSideObjectWriter objectWriter = ClientSideObjectWriterFactory.Create(Id, "tMenu", writer);
+            IClientSideObjectWriter objectWriter = ClientSideObjectWriterFactory.Create(Id, "kendoMenu", writer);
 
             objectWriter.Start()
                         .Append("orientation", Orientation, MenuOrientation.Horizontal);

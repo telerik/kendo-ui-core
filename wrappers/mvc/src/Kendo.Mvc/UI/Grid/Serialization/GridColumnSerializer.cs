@@ -39,7 +39,7 @@ namespace Kendo.Mvc.UI
 
         protected string Encode(IGridColumn column, string template)
         {
-            return column.Grid.IsSelfInitialized ? template.Replace("<", "%3c").Replace(">", "%3e") : template;
+            return template;
         }
     }
 }

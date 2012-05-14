@@ -12,10 +12,10 @@ namespace Kendo.Mvc.UI.Html
         public IHtmlNode Create(string url, string refreshText)
         {
             var div = new HtmlElement("div")
-                .AddClass("t-status");
+                .AddClass("k-status");
 
             var a = new HtmlElement("a")
-                .AddClass(UIPrimitives.Icon, "t-refresh")
+                .AddClass(UIPrimitives.Icon, "k-refresh")
                 .Attribute("href", url)
                 .Text(refreshText);
 

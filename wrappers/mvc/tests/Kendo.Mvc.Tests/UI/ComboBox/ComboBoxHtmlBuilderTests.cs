@@ -29,7 +29,7 @@ namespace Kendo.Mvc.UI.Tests
         {
             IHtmlNode tag = renderer.Build();
 
-            Assert.Equal("t-widget t-combobox t-header", tag.Attribute("class"));
+            Assert.Equal("k-widget k-combobox k-header", tag.Attribute("class"));
         }
 
         [Fact]
@@ -39,7 +39,7 @@ namespace Kendo.Mvc.UI.Tests
 
             IHtmlNode tag = renderer.Build();
 
-            Assert.Equal("t-widget t-combobox t-header myClass", tag.Attribute("class"));
+            Assert.Equal("k-widget k-combobox k-header myClass", tag.Attribute("class"));
         }
 
         [Fact]
@@ -58,7 +58,7 @@ namespace Kendo.Mvc.UI.Tests
             IHtmlNode tag = renderer.Build().Children[0];
 
             Assert.Equal("div", tag.TagName);
-            Assert.True(tag.Attribute("class").Contains("t-dropdown-wrap"));
+            Assert.True(tag.Attribute("class").Contains("k-dropdown-wrap"));
         }
 
         [Fact]
@@ -192,7 +192,7 @@ namespace Kendo.Mvc.UI.Tests
         {
             IHtmlNode tag = renderer.InnerContentTag();
 
-            Assert.Equal("t-select t-header", tag.Children[1].Attribute("class"));
+            Assert.Equal("k-select k-header", tag.Children[1].Attribute("class"));
         }
 
         [Fact]
@@ -208,7 +208,7 @@ namespace Kendo.Mvc.UI.Tests
         {
             IHtmlNode tag = renderer.InnerContentTag();
 
-            Assert.Equal("t-icon t-arrow-down", tag.Children[1].Children[0].Attribute("class"));
+            Assert.Equal("k-icon k-arrow-down", tag.Children[1].Children[0].Attribute("class"));
         }
 
         [Fact]
@@ -275,7 +275,7 @@ namespace Kendo.Mvc.UI.Tests
 
             IHtmlNode tag = renderer.InnerContentTag();
 
-            tag.Children[0].Attribute("class").ShouldContain("input-validation-error");
+            tag.Children[0].Attribute("class").ShouldContain("inpuk-validation-error");
         }
 
         [Fact]
@@ -458,7 +458,7 @@ namespace Kendo.Mvc.UI.Tests
             IHtmlNode tag = renderer.InnerContentTag();
 
             Assert.Equal("disabled", tag.Children[0].Attribute("disabled"));
-            Assert.Contains("t-state-disabled", div.Attribute("class"));
+            Assert.Contains("k-state-disabled", div.Attribute("class"));
         }
     }
 }
