@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <link rel="stylesheet" href="../styles/web/kendo.common.css"/>
+        <link rel="stylesheet/less" type="text/css" href="../styles/web/kendo.default.less"/>
+        <link rel="stylesheet" type="text/css" href="../demos/mvc/content/shared/styles/examples.css"></link>
+        <script src="../demos/mvc/content/shared/js/less.js"></script>
+
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.draganddrop.js"></script>
+        <script src="../src/kendo.reorderable.js"></script>
+        <script src="../src/kendo.resizable.js"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.groupable.js"></script>
+        <script src="../src/kendo.grid.js"></script>
+
+    </head>
+    <body>
+        <div id="example">
+            <div id="grid" style="width: 800px"></div>
+            <script>
+
+
+                $(document).ready(function() {
+
+
+                    $("#grid").kendoGrid({
+                        reorderable: true,
+                        //detailTemplate: "test test",
+                        scrollable: false,
+                        //resizable: true,
+                        groupable: true,
+                        columns: [{
+                            field: "foo",
+                            width: 100
+                            //footerTemplate: "footer",
+                            //groupFooterTemplate: "group footer"
+                        },
+                        {
+                            field: "bar",
+                            width: 200
+                        },
+                        {
+                            template: "non-groupable column",
+                            title: "non-groupable",
+                            groupable: false
+                        },
+                        {
+                            field: "baz",
+                            width: 300
+                        }],
+                        dataSource: [{ foo: "foo", bar: "bar", baz: "baz" }]
+                    });
+
+                });
+            </script>
+        </div>
+    </body>
+</html>

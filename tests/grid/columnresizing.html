@@ -266,6 +266,10 @@
                 $(document.documentElement).trigger({ type: "mouseup" });
             }
 
+            test("resizable in config options", function() {
+                strictEqual(Grid.fn.options.resizable, false);
+            });
+
             test("handlers for each column are added to the header if resizable is enabled", function() {
                 var grid = new Grid(table, {
                     dataSource: [ { foo: "foo", bar: "bar" } ],
@@ -273,6 +277,15 @@
                     columns: ["foo", "bar"]
                 });
                 equal(grid.wrapper.find(".k-grid-header-wrap").children(".k-resize-handle").length, 2);
+            });
+
+            test("resizable widget is initialized if auto generated columns", function() {
+                var grid = new Grid(table, {
+                    dataSource: [ { foo: "foo", bar: "bar" } ],
+                    resizable: true
+                });
+
+                ok(grid.wrapper.find(".k-grid-header-wrap").data("kendoResizable") instanceof kendo.ui.Resizable);
             });
 
             test("handlers not are added to the header if resizable is not enabled", function() {

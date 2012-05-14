@@ -34,6 +34,7 @@
         FOCUSABLE = "k-focusable",
         SELECTED = "k-state-selected",
         COLUMNRESIZE = "columnResize",
+        COLUMNREORDER = "columnReorder",
         CLICK = "click",
         HEIGHT = "height",
         TABINDEX = "tabIndex",
@@ -316,7 +317,15 @@
                 }
             }
             return fieldsMap;
-        }
+    }
+
+    function reorder(selector, sourceIndex, destIndex) {
+        var source = selector.eq(sourceIndex),
+            dest = selector.eq(destIndex);
+
+        source[sourceIndex > destIndex ? "insertBefore" : "insertAfter"](dest);
+    }
+
     var Grid = Widget.extend({
         init: function(element, options) {
             var that = this;
@@ -335,11 +344,11 @@
 
             that._pageable();
 
-            that._groupable();
-
             that._toolbar();
 
             that._thead();
+
+            that._groupable();
 
             that._templates();
 
@@ -350,8 +359,6 @@
             that._details();
 
             that._editable();
-
-            that._resizable();
 
             if (that.options.autoBind) {
                 that.dataSource.fetch();
@@ -371,7 +378,8 @@
            SAVE,
            REMOVE,
            SAVECHANGES,
-           COLUMNRESIZE
+           COLUMNRESIZE,
+           COLUMNREORDER
         ],
 
         setDataSource: function(dataSource) {
@@ -414,7 +422,9 @@
             rowTemplate: "",
             altRowTemplate: "",
             dataSource: {},
-            height: null
+            height: null,
+            resizable: false,
+            reorderable: false
         },
 
         setOptions: function(options) {
@@ -559,6 +569,88 @@
                         }
                     }
                 });
+            }
+        },
+
+        _draggable: function() {
+            var that = this;
+            if (that.options.reorderable) {
+                that._draggableInstance = that.thead.kendoDraggable({
+                    group: kendo.guid(),
+                    filter: ".k-header:not(.k-group-cell,.k-hierarchy-cell)[" + kendo.attr("field") + "]",
+                    hint: function(target) {
+                        return $('<div class="k-header k-drag-clue" />')
+                            .css({
+                                width: target.width(),
+                                paddingLeft: target.css("paddingLeft"),
+                                paddingRight: target.css("paddingRight"),
+                                lineHeight: target.height() + "px",
+                                paddingTop: target.css("paddingTop"),
+                                paddingBottom: target.css("paddingBottom")
+                            })
+                            .html(target.attr(kendo.attr("title")) || target.attr(kendo.attr("field")))
+                            .prepend('<span class="k-icon k-drag-status k-denied" />');
+                    }
+                }).data("kendoDraggable");
+            }
+        },
+
+        _reorderable: function() {
+            var that = this;
+            if (that.options.reorderable) {
+                that.thead.kendoReorderable({
+                    draggable: that._draggableInstance,
+                    change: function(e) {
+                        var column = that.columns[e.oldIndex];
+                        that.trigger(COLUMNREORDER, {
+                            newIndex: e.newIndex,
+                            oldIndex: e.oldIndex,
+                            column: column
+                        });
+                        that.reorderColumn(e.newIndex, column);
+                    }
+                });
+            }
+        },
+
+        reorderColumn: function(destIndex, column) {
+            var that = this,
+                sourceIndex = $.inArray(column, that.columns),
+                rows,
+                idx,
+                length;
+
+            if (sourceIndex === destIndex) {
+                return;
+            }
+
+            that.columns.splice(sourceIndex, 1);
+            that.columns.splice(destIndex, 0, column);
+            that._templates();
+
+            reorder(that.thead.prev().find("col:not(.k-group-col,.k-hierarchy-col)"), sourceIndex, destIndex);
+            if (that.options.scrollable) {
+                reorder(that.tbody.prev().find("col:not(.k-group-col,.k-hierarchy-col)"), sourceIndex, destIndex);
+            }
+
+            reorder(that.thead.find(".k-header:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex);
+
+            if (that.footer) {
+                reorder(that.footer.find(".k-grid-footer-wrap>table>colgroup>col:not(.k-group-col,.k-hierarchy-col)"), sourceIndex, destIndex);
+                reorder(that.footer.find(".k-footer-template>td:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex);
+            }
+
+            rows = that.tbody.children(":not(.k-grouping-row,.k-detail-row)");
+            for (idx = 0, length = rows.length; idx < length; idx += 1) {
+                reorder(rows.eq(idx).find(">td:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex);
+            }
+
+            if (that.options.resizable) {
+                that.positionColumnResizeHandles();
+
+                if (that._hasDetails()) {
+                    that.tbody.find(">tr.k-detail-row [" + kendo.attr("role") + "=grid]").kendoGrid("positionColumnResizeHandles");
+                }
             }
         },
 
@@ -1076,9 +1168,10 @@
                 }
 
                 that.groupable = new Groupable(wrapper, {
-                    filter: "th:not(.k-group-cell)[" + kendo.attr("field") + "][" + kendo.attr("groupable") + "!=false]",
+                    draggable: that._draggableInstance,
                     groupContainer: "div.k-grouping-header",
-                    dataSource: that.dataSource
+                    dataSource: that.dataSource,
+                    allowDrag: that.options.reorderable
                 });
             }
         },
@@ -2130,6 +2223,12 @@
             that._updateCols();
 
             that._setContentHeight();
+
+            that._resizable();
+
+            that._draggable();
+
+            that._reorderable();
         },
 
         _updateCols: function() {
