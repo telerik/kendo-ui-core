@@ -1,67 +1,24 @@
 (function ($, undefined) {
-     $.extend(true, kendo.ui.validator, {
-        messageLocators: {
-            mvcLocator: {
-                locate: function (element, fieldName) {
-                    return element.find(".field-validation-valid[data-valmsg-for=" + fieldName + "], .field-validation-error[data-valmsg-for=" + fieldName + "]");
-                },
-                decorate: function (message, fieldName) {
-                    message.addClass("field-validation-error").attr("data-val-msg-for", fieldName || "");
-                }
-            },
-            mvcMetadataLocator: {
-                locate: function (element, fieldName) {
-                    return element.find("#" + fieldName + "_validationMessage.field-validation-valid");
-                },
-                decorate: function (message, fieldName) {
-                    message.addClass("field-validation-error").attr("id", fieldName + "_validationMessage");
-                }
-            }
-        },
-        rulesResolvers: {
-            mvcMetaDataResolver: {
-                resolve: function (element) {
-                    var metadata = window.mvcClientValidationMetadata || [];
 
-                    if (metadata.length) {
-                        element = $(element);
-                        for (var idx = 0; idx < metadata.length; idx++) {
-                            if (metadata[idx].FormId == element.attr("id")) {
-                                return rulesFromData(metadata[idx]);
-                            }
-                        }
-                    }
-                    return {};
-                }
-            },
-            mvcUnobtrusiveResolver: {
-                resolve: function (element) {
-                    var name,
-                        rules = {},
-                        messages = {};
+    function generateMessages() {
+        var name,
+            messages = {};
 
-                    for (name in validationRules) {
-                        rules["mvc" + name] = (function (rule) {
-                            return function (input) {
-                                if (input.filter("[data-val-" + rule + "]").length) {
-                                    return validationRules[rule](input, extractParams(input, rule));
-                                }
-                                return true;
-                            }
-                        })(name);
-
-                        messages["mvc" + name] = (function(rule) {
-                            return function (input) {
-                                return input.attr("data-val-" + rule);
-                            }
-                        })(name);
-                    }
-
-                    return { rules: rules, messages: messages };
-                }
-            }
+        for (name in validationRules) {
+            messages["mvc" + name] = createMessage(name);
         }
-    });
+        return messages;
+    }
+
+    function generateRules() {
+         var name,
+             rules = {};
+
+         for (name in validationRules) {
+             rules["mvc" + name] = createRule(name);
+        }
+        return rules;
+    }
 
     function extractParams(input, ruleName) {
         var params = {},
@@ -110,20 +67,39 @@
             validationType = fieldRules[idx].ValidationType;
             validationParams = fieldRules[idx].ValidationParameters;
 
-            rules[fieldName + validationType] = (function (type, params) {
-                return function (input) {
-                    if (input.filter("[name=" + fieldName + "]").length) {
-                        return validationRules[type](input, params);
-                    }
-                    return true;
-                }
-            })(validationType, validationParams);
+            rules[fieldName + validationType] = createMetaRule(fieldName, validationType, validationParams);
 
-            messages[fieldName + validationType] = (function (message) {
-                return function() { return message; };
-            })(fieldRules[idx].ErrorMessage);
+            messages[fieldName + validationType] = createMetaMessage(fieldRules[idx].ErrorMessage);
         }
         return { rules: rules, messages: messages };
+    }
+
+    function createMessage(rule) {
+        return function (input) {
+            return input.attr("data-val-" + rule);
+        };
+    }
+
+    function createRule(ruleName) {
+        return function (input) {
+            if (input.filter("[data-val-" + ruleName + "]").length) {
+                return validationRules[ruleName](input, extractParams(input, ruleName));
+            }
+            return true;
+        };
+    }
+
+    function createMetaMessage(message) {
+        return function() { return message; };
+    }
+
+    function createMetaRule(fieldName, type, params) {
+        return function (input) {
+            if (input.filter("[name=" + fieldName + "]").length) {
+                return validationRules[type](input, params);
+            }
+            return true;
+        };
     }
 
     function patternMatcher(value, pattern) {
@@ -141,7 +117,7 @@
             return !(value === "" || !value  || checkbox);
         },
         number: function (input) {
-            return kendo.parseFloat(input.val()) !== null
+            return kendo.parseFloat(input.val()) !== null;
         },
         regex: function (input, params) {
             return patternMatcher(input.val(), params.pattern);
@@ -166,7 +142,47 @@
         },
         length: function(input, params) {
             var len = $.trim(input.val()).length;
-            return len >= (params.min || 0) && len <= (params.max || 0)
+            return len >= (params.min || 0) && len <= (params.max || 0);
         }
-    }
+    };
+
+    $.extend(true, kendo.ui.validator, {
+        rules: generateRules(),
+        messages: generateMessages(),
+        messageLocators: {
+            mvcLocator: {
+                locate: function (element, fieldName) {
+                    return element.find(".field-validation-valid[data-valmsg-for=" + fieldName + "], .field-validation-error[data-valmsg-for=" + fieldName + "]");
+                },
+                decorate: function (message, fieldName) {
+                    message.addClass("field-validation-error").attr("data-val-msg-for", fieldName || "");
+                }
+            },
+            mvcMetadataLocator: {
+                locate: function (element, fieldName) {
+                    return element.find("#" + fieldName + "_validationMessage.field-validation-valid");
+                },
+                decorate: function (message, fieldName) {
+                    message.addClass("field-validation-error").attr("id", fieldName + "_validationMessage");
+                }
+            }
+        },
+        rulesResolvers: {
+            mvcMetaDataResolver: {
+                resolve: function (element) {
+                    var metadata = window.mvcClientValidationMetadata || [];
+
+                    if (metadata.length) {
+                        element = $(element);
+                        for (var idx = 0; idx < metadata.length; idx++) {
+                            if (metadata[idx].FormId == element.attr("id")) {
+                                return rulesFromData(metadata[idx]);
+                            }
+                        }
+                    }
+                    return {};
+                }
+            }
+        }
+    });
 })(jQuery);
