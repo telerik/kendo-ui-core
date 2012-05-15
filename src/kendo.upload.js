@@ -115,7 +115,7 @@
          * @option {String} [async.removeField] <"fileNames">
          * The name of the form field submitted to the Remove URL.
          *
-         * @option {Boolean} [async.autoUpload] <"fileNames">
+         * @option {Boolean} [async.autoUpload] <true>
          * The selected files will be uploaded immediately by default. You can change this behavior by setting
          * autoUpload to false.
          *
