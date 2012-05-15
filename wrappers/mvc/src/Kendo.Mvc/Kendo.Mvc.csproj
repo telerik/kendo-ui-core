@@ -311,7 +311,6 @@
     <Compile Include="UI\ClientEvent.cs" />
     <Compile Include="UI\ComboBox\IComboBoxRenderable.cs" />
     <Compile Include="UI\ComboBox\Settings\ComboBoxFilterSettings.cs" />
-    <Compile Include="UI\ComponentBuilderBase.cs" />
     <Compile Include="UI\DataSource\CrudOperation.cs" />
     <Compile Include="UI\DataSource\DataSource.cs" />
     <Compile Include="UI\DataSource\Fluent\CrudOperationBuilder.cs" />
