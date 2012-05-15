@@ -611,6 +611,10 @@
 
             that._icon();
 
+            if (!touch) {
+                element[0].type = "text";
+            }
+
             element
                 .addClass("k-input")
                 .bind({

@@ -186,6 +186,15 @@
                 equal(datetimepicker.timeView.ul.children().length, 1);
                 equal(datetimepicker.timeView.ul.children(":first").text(), "6:00 PM");
             });
+
+            if (!kendo.support.touch) {
+                test("DateTimePicker changes the type of the input", function() {
+                    var input = $("<input type='date'/>"),
+                        datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
+
+                    equal(datetimepicker.element[0].type, "text");
+                });
+            }
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
