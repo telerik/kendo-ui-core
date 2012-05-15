@@ -6,13 +6,15 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.UI.Html;
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Web.Mvc;
     using System.Web.Routing;
+    using System.Web.Script.Serialization;
 
     public class NumericTextBox<T> : ViewComponentBase, IInputComponent<T> where T : struct
     {
-        public NumericTextBox(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory, ViewDataDictionary viewData)
-            : base(viewContext, clientSideObjectWriterFactory, viewData)
+        public NumericTextBox(ViewContext viewContext, ViewDataDictionary viewData)
+            : base(viewContext, null, viewData)
         {
             Spinners = true;
 
@@ -125,25 +127,34 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        protected void Serialize(IDictionary<string, object> json)
+        {
+            json["format"] = this.Format;
+            json["culture"] = this.Culture;
+            json["placeholder"] = this.Placeholder;
+            json["spinners"] = this.Spinners;
+
+            json["min"] = this.Min;
+            json["max"] = this.Max;
+            json["step"] = this.Step;
+            json["decimals"] = this.Decimals;
+
+            ClientEvents.SerializeTo(json);
+        }
+
         public override void WriteInitializationScript(System.IO.TextWriter writer)
         {
-            IClientSideObjectWriter objectWriter = ClientSideObjectWriterFactory.Create(Id, "kendoNumericTextBox", writer);
+            var json = new Dictionary<string, object>();
+            Serialize(json);
 
-            objectWriter.Start();
-            
-            objectWriter.Append("format", this.Format);
-            objectWriter.Append("culture", this.Culture);
-            objectWriter.Append("placeholder", this.Placeholder);
-            objectWriter.Append("spinners", this.Spinners);
-            
-            objectWriter.AppendObject("min", this.Min);
-            objectWriter.AppendObject("max", this.Max);
-            objectWriter.AppendObject("step", this.Step);
-            objectWriter.AppendObject("decimals", this.Decimals);
+            //Escape meta characters: http://api.jquery.com/category/selectors/
+            var selector = @";&,.+*~':""!^$[]()|/".ToCharArray().Aggregate(Id, (current, chr) => current.Replace(chr.ToString(), @"\\" + chr));
 
-            ClientEvents.SerializeTo(objectWriter);
+            json["test"] = new Dictionary<string, object>();
 
-            objectWriter.Complete();
+            writer.Write("jQuery(document).ready(function(){{jQuery('#{0}').kendoNumericTextBox(".FormatWith(selector));
+            writer.Write(json.ToJson());
+            writer.Write(");});");
 
             base.WriteInitializationScript(writer);
         }
