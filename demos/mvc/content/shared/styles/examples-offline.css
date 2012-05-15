@@ -18,6 +18,23 @@ html
     padding:0;
 }
 
+.offline-button {
+    display: inline-block;
+    margin: 30px 0;
+    padding: 0 16px;
+    height: 32px;
+    line-height: 30px;
+    background: #313131;
+    border-radius: 16px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.offline-button:hover {
+    background: #e36028;
+}
+
+
 /*console*/
 
 .console
