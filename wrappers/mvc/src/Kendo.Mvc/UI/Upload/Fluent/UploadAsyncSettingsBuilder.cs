@@ -242,6 +242,48 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Sets an absolute or relative Save action URL.
+        /// Note that the URL must be in the same domain for the upload to succeed.
+        /// </summary>
+        /// <param name="url">The Save action URL.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Telerik().Upload()
+        ///             .Name("Upload")
+        ///             .Async(async => async
+        ///                 .SaveUrl("/save");
+        ///             )
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public UploadAsyncSettingsBuilder SaveUrl(string url)
+        {
+            settings.Save.Url(url);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets an absolute or relative Remove action URL.
+        /// Note that the URL must be in the same domain for the operation to succeed.
+        /// </summary>
+        /// <param name="url">The Remove action URL.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Telerik().Upload()
+        ///             .Name("Upload")
+        ///             .Async(async => async
+        ///                 .RemoveUrl("/remove");
+        ///             )
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public UploadAsyncSettingsBuilder RemoveUrl(string url)
+        {
+            settings.Remove.Url(url);
+            return this;
+        }
+
+        /// <summary>
         /// Sets the action, controller and route values for the remove operation
         /// </summary>
         /// <param name="actionName">Name of the action.</param>
