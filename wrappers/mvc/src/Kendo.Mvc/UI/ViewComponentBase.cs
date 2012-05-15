@@ -124,14 +124,6 @@ namespace Kendo.Mvc.UI
             
         }
 
-        /// <summary>
-        /// Writes the cleanup script.
-        /// </summary>
-        /// <param name="writer">The writer.</param>
-        public virtual void WriteCleanupScript(TextWriter writer)
-        {
-        }
-
         public bool IsSelfInitialized
         {
             get;
