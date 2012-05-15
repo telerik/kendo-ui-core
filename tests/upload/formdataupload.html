@@ -134,9 +134,7 @@
             test("formData module is not selected when FormData is not supported", function() {
                 Upload.prototype._supportsFormData = function() { return false; };
 
-                $.browser.safari = true;
                 uploadInstance = createUpload();
-                $.browser.safari = false;
 
                 ok(uploadInstance._module.name != "formDataUploadModule");
             });
@@ -144,7 +142,9 @@
             test("formData module is not selected in Safari (issue #220)", function() {
                 Upload.prototype._supportsFormData = _supportsFormData;
 
+                $.browser.safari = true;
                 uploadInstance = createUpload();
+                $.browser.safari = false;
 
                 ok(uploadInstance._module.name != "formDataUploadModule");
             });
