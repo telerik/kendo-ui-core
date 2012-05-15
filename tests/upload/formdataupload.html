@@ -139,16 +139,6 @@
                 ok(uploadInstance._module.name != "formDataUploadModule");
             });
 
-            test("formData module is not selected in Safari (issue #220)", function() {
-                Upload.prototype._supportsFormData = _supportsFormData;
-
-                $.browser.safari = true;
-                uploadInstance = createUpload();
-                $.browser.safari = false;
-
-                ok(uploadInstance._module.name != "formDataUploadModule");
-            });
-
             test("current input is hidden after choosing a file", function() {
                 simulateFileSelect();
                 equal($("input:not(:visible)", uploadInstance.wrapper).length, 1);
