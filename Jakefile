@@ -239,6 +239,7 @@ namespace("mvc", function() {
         stylesDest = path.join(projectRoot, "Content"),
         scriptsDest = path.join(projectRoot, "Scripts");
 
+    mkdir(stylesDest);
     desc("Copy debug scripts and styles to the MVC demo site");
     task("debug-examples", [], function() {
         var sharedFiles = [{
@@ -269,7 +270,7 @@ namespace("mvc", function() {
     task("bundle", [], function() {
         kendoBuild.msBuild(
             MVC_WRAPPERS_PROJECT,
-            [ "/t:Clean;Build", "/p:Configuration=Release MVC3" ]
+            [ "/t:Clean;Build", "/p:Configuration=Release" ]
         );
     });
 
