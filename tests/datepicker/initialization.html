@@ -297,6 +297,15 @@
                 equal(datepicker.options.parseFormats[0], datepicker.options.format);
                 equal(datepicker.options.parseFormats[1], "MM/dd/yy");
             });
+
+            if (!kendo.support.touch) {
+                test("DatePickers changes the type of the input", function() {
+                    var input = $("<input type='date'/>"),
+                        datepicker = input.kendoDatePicker().data("kendoDatePicker");
+
+                    equal(datepicker.element[0].type, "text");
+                });
+            }
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

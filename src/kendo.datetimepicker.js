@@ -358,6 +358,10 @@
 
             that._views();
 
+            if (!touch) {
+                element[0].type = "text";
+            }
+
             element.addClass("k-input")
                     .bind({
                         keydown: $.proxy(that._keydown, that),
