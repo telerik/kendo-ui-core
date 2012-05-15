@@ -135,15 +135,6 @@ namespace Kendo.Mvc.UI.Tests.Upload
         }
 
         [Fact]
-        public void OnLoad_client_side_event_serialized()
-        {
-            upload.ClientEvents.OnLoad.HandlerName = "loadHandler";
-            upload.WriteInitializationScript(textWriter.Object);
-
-            output.ShouldContain("{load:loadHandler}");
-        }
-
-        [Fact]
         public void OnSelect_client_side_event_serialized()
         {
             upload.ClientEvents.OnSelect.HandlerName = "selectHandler";

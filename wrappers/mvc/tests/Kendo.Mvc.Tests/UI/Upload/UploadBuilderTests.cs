@@ -23,9 +23,9 @@ namespace Kendo.Mvc.UI.Tests.Upload
         [Fact]
         public void ClientEvents_should_set_events()
         {
-            Action<UploadClientEventsBuilder> clientEventsAction = eventBuilder => eventBuilder.OnLoad("load");
+            Action<UploadClientEventsBuilder> clientEventsAction = eventBuilder => eventBuilder.OnUpload("upload");
             builder.ClientEvents(clientEventsAction);
-            upload.ClientEvents.OnLoad.HandlerName.ShouldEqual("load");
+            upload.ClientEvents.OnUpload.HandlerName.ShouldEqual("upload");
         }
 
         [Fact]
