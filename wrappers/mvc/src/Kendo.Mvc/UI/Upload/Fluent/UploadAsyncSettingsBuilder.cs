@@ -263,27 +263,6 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Sets an absolute or relative Remove action URL.
-        /// Note that the URL must be in the same domain for the operation to succeed.
-        /// </summary>
-        /// <param name="url">The Remove action URL.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Upload()
-        ///             .Name("Upload")
-        ///             .Async(async => async
-        ///                 .RemoveUrl("/remove");
-        ///             )
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public UploadAsyncSettingsBuilder RemoveUrl(string url)
-        {
-            settings.Remove.Url(url);
-            return this;
-        }
-
-        /// <summary>
         /// Sets the action, controller and route values for the remove operation
         /// </summary>
         /// <param name="actionName">Name of the action.</param>
@@ -453,6 +432,50 @@ namespace Kendo.Mvc.UI.Fluent
         {
             settings.Remove.Action(controllerAction);
 
+            return this;
+        }
+
+        /// <summary>
+        /// Sets an absolute or relative Remove action URL.
+        /// Note that the URL must be in the same domain for the operation to succeed.
+        /// </summary>
+        /// <param name="url">The Remove action URL.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Telerik().Upload()
+        ///             .Name("Upload")
+        ///             .Async(async => async
+        ///                 .RemoveUrl("/remove");
+        ///             )
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public UploadAsyncSettingsBuilder RemoveUrl(string url)
+        {
+            settings.Remove.Url(url);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the field name for the remove operation
+        /// </summary>
+        /// <param name="fieldName">
+        ///     The form field name to use for submiting the files.
+        ///     "fileNames" is used if not set.
+        /// </param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Telerik().Upload()
+        ///             .Name("Upload")
+        ///             .Async(async => async
+        ///                 .RemoveField("attachments");
+        ///             )
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public UploadAsyncSettingsBuilder RemoveField(string fieldName)
+        {
+            settings.RemoveField = fieldName;
             return this;
         }
     }

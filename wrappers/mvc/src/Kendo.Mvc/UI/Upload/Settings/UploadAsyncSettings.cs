@@ -38,6 +38,12 @@ namespace Kendo.Mvc.UI
         /// Defines the Remove action
         /// </summary>
         public INavigatable Remove { get; set; }
+
+        /// <summary>
+        /// Defines the name of the form field submitted to the Remove action.
+        /// The default value is "removeField".
+        /// </summary>
+        public string RemoveField { get; set; }
         
         /// <summary>
         /// Gets or sets a value indicating whether to start the upload immediately after selecting a file
@@ -68,6 +74,11 @@ namespace Kendo.Mvc.UI
                 if (Remove.HasValue())
                 {
                     config["removeUrl"] = encoder(Remove.GenerateUrl(upload.ViewContext, upload.UrlGenerator));
+                }
+
+                if (RemoveField.HasValue())
+                {
+                    config["removeField"] = RemoveField;
                 }
 
                 config["autoUpload"] = AutoUpload;

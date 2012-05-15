@@ -184,6 +184,19 @@ namespace Kendo.Mvc.UI.Tests.Upload
         }
 
         [Fact]
+        public void RemoveField_should_set_field()
+        {
+            builder.RemoveField("field");
+            settingsMock.VerifySet(s => s.RemoveField = "field");
+        }
+
+        [Fact]
+        public void RemoveField_should_return_builder()
+        {
+            builder.RemoveField("field").ShouldBeSameAs(builder);
+        }
+
+        [Fact]
         public void RemoveUrl_should_set_Url()
         {
             builder.RemoveUrl("/remove");
