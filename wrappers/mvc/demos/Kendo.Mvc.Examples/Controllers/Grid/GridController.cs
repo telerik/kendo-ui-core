@@ -9,7 +9,7 @@ namespace Kendo.Mvc.Examples.Controllers.Grid
     {
         public ActionResult Index()
         {
-            return View(new NorthwindContext().Products);
+            return View(new NorthwindDataContext().Products);
         }
     }
 }
