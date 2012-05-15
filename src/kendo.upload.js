@@ -817,10 +817,6 @@
         },
 
         _supportsFormData: function() {
-            if ($.browser.safari) {
-                return false;
-            }
-
             return typeof(FormData) != "undefined";
         },
 
@@ -1316,6 +1312,7 @@
             }, false);
 
             xhr.open("POST", url);
+            xhr.withCredentials = "true";
             xhr.send(data);
         },
 
