@@ -611,7 +611,7 @@
         },
 
         _click: function(e) {
-            if (e.which > 1 || (e.originalEvent && e.originalEvent.defaultPrevented)) {
+            if (e.which > 1 || e.isDefaultPrevented()) {
                 return;
             }
 
