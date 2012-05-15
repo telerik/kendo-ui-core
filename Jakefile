@@ -272,12 +272,15 @@ namespace("mvc", function() {
             MVC_WRAPPERS_PROJECT,
             [ "/t:Clean;Build", "/p:Configuration=Release" ],
             function() {
-                var binariesPath = path.join(MVC_WRAPPERS_PATH, "src", "Kendo.Mvc", "bin", "Release");
+                var projectPath = path.join(MVC_WRAPPERS_PATH, "src", "Kendo.Mvc"),
+                    examplesPath = path.join(MVC_WRAPPERS_PATH, "demos", "Kendo.Mvc.Examples"),
+                    binariesPath = path.join(projectPath, "bin", "Release");
 
-                bundles.buildBundle(bundles.mvcWrappersBundle, version(), null, function(root, bundle) {
+                bundles.buildBundle(bundles.mvcWrappersBundle, version(), null, function(root, bundle, license) {
                     var binariesDeployRoot = path.join(root, "Bin"),
                         stylesDeployRoot = path.join(root, "Content"),
-                        scriptsDeployRoot = path.join(root, "Scripts");
+                        scriptsDeployRoot = path.join(root, "Scripts"),
+                        sourceDeployRoot = path.join(root, "source");
 
                     // move resources
                     kendoBuild.rmdirSyncRecursive(scriptsDeployRoot);
@@ -292,6 +295,18 @@ namespace("mvc", function() {
                         path.join(binariesPath, "Kendo.Mvc.dll"),
                         path.join(binariesDeployRoot, "Kendo.Mvc.dll")
                     );
+
+                    if (license.source) {
+                        kendoBuild.copyDirSyncRecursive(
+                            projectPath,
+                            path.join(sourceDeployRoot, "Kendo.Mvc")
+                        );
+
+                        kendoBuild.copyDirSyncRecursive(
+                            examplesPath,
+                            path.join(sourceDeployRoot, "Kendo.Mvc.Examples")
+                        );
+                    }
                 });
             }
         );
