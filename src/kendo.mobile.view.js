@@ -267,14 +267,14 @@
             element.data("kendoView", that).addClass("km-view");
             that.transition = data(element, "transition");
 
-            that.header = element.find(roleSelector("header")).addClass("km-header");
-            that.footer = element.find(roleSelector("footer")).addClass("km-footer");
+            that.header = element.children(roleSelector("header")).addClass("km-header");
+            that.footer = element.children(roleSelector("footer")).addClass("km-footer");
 
             if (!element.children(contentSelector)[0]) {
               element.wrapInner("<div " + attr("role") + '="content"></div>');
             }
 
-            that.content = element.find(roleSelector("content"))
+            that.content = element.children(roleSelector("content"))
                                 .addClass("km-content");
 
             that.element.prepend(that.header).append(that.footer);
@@ -460,8 +460,8 @@
             element = that.element;
 
             that.element = element.detach();
-            that.header = element.find(roleSelector("header")).addClass("km-header");
-            that.footer = element.find(roleSelector("footer")).addClass("km-footer");
+            that.header = element.children(roleSelector("header")).addClass("km-header");
+            that.footer = element.children(roleSelector("footer")).addClass("km-footer");
             that.elements = that.header.add(that.footer);
             kendo.mobile.init(that.element.children());
             that.trigger(INIT, {layout: that});
@@ -520,13 +520,13 @@
             var that = this;
             if (view.header === that.header) {
                 that.header.detach();
-                view.element.find(roleSelector("header")).remove();
+                view.element.children(roleSelector("header")).remove();
                 view.element.prepend(that.header);
             }
 
             if (view.footer === that.footer) {
                 that.footer.detach();
-                view.element.find(roleSelector("footer")).remove();
+                view.element.children(roleSelector("footer")).remove();
                 view.element.append(that.footer);
             }
 
