@@ -5,31 +5,35 @@ namespace Kendo.Mvc.UI
     /// </summary>
     public sealed class ChartBarSeriesOverlay
     {
-        private readonly object value;
-
-        public object Value
+        public ChartBarGradient Gradient
         {
-            get
-            {
-                return value;
-            }
+            get;
+            private set;
         }
 
         /// <summary>
         /// The bars have no effect overlay
         /// </summary>
         public static readonly ChartBarSeriesOverlay None =
-            new ChartBarSeriesOverlay(null);
+            new ChartBarSeriesOverlay(ChartBarGradient.None);
 
         /// <summary>
         /// The bars have glass effect overlay
         /// </summary>
         public static readonly ChartBarSeriesOverlay Glass =
-            new ChartBarSeriesOverlay(new { gradient = "glass" });
+            new ChartBarSeriesOverlay(ChartBarGradient.Glass);
 
-        private ChartBarSeriesOverlay(object value)
+        private ChartBarSeriesOverlay(ChartBarGradient gradient)
         {
-            this.value = value;
+            Gradient = gradient;
+        }
+
+        /// <summary>
+        /// Creates a serializer
+        /// </summary>
+        public IChartSerializer CreateSerializer()
+        {
+            return new ChartBarSeriesOverlaySerializer(this);
         }
     }
 }

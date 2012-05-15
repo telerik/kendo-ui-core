@@ -179,6 +179,7 @@
     <Compile Include="UI\Chart\ChartLine.cs" />
     <Compile Include="UI\Chart\ChartTooltip.cs" />
     <Compile Include="UI\Chart\Enums\ChartAxisTickType.cs" />
+    <Compile Include="UI\Chart\Enums\ChartBarGradient.cs" />
     <Compile Include="UI\Chart\Enums\ChartBarLabelsPosition.cs" />
     <Compile Include="UI\Chart\Enums\ChartLegendPosition.cs" />
     <Compile Include="UI\Chart\Enums\ChartPointLabelsPosition.cs" />
@@ -212,6 +213,7 @@
     <Compile Include="UI\Chart\Fluent\ChartAreaLineBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartLineBuilderBase.cs" />
     <Compile Include="UI\Chart\Serialization\ChartAxisSerializerBase.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartBarSeriesOverlaySerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartLabelsBase.cs" />
     <Compile Include="UI\Chart\Serialization\ChartLineSeriesSerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartAxisLabelsSerializer.cs" />
