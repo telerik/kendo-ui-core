@@ -2,9 +2,9 @@
     var kendo = window.kendo,
         mobile = kendo.mobile,
         ui = mobile.ui,
-        WRAPPER = '<div class="km-popover-wrapper" />',
-        ARROW = '<div class="km-popover-arrow" />',
-        OVERLAY = '<div class="km-popover-overlay" />',
+        WRAPPER = '<div class="km-popup-wrapper" />',
+        ARROW = '<div class="km-popup-arrow" />',
+        OVERLAY = '<div class="km-popup-overlay" />',
         DIRECTION_CLASSES = "km-top km-bottom km-left km-right",
         Widget = ui.Widget,
         DIRECTIONS = {
@@ -52,16 +52,7 @@
             "right": "left"
         };
 
-    /**
-     * @name kendo.mobile.ui.SplitView.Description
-     * @section
-     */
-    var PopOver = Widget.extend(/** @lends kendo.mobile.ui.SplitView.prototype */{
-        /**
-         * @constructs
-         * @extends kendo.mobile.ui.Widget
-         * @param {DomElement} element DOM element
-         */
+    var Popup = Widget.extend({
         init: function(element, options) {
             var that = this,
                 container = mobile.application.element,
@@ -84,7 +75,7 @@
 
             element = that.element;
 
-            element.wrap(WRAPPER).addClass("km-popover").show();
+            element.wrap(WRAPPER).addClass("km-popup").show();
 
             axis = that.direction.match(/left|right/) ? "horizontal" : "vertical";
 
@@ -93,22 +84,32 @@
             that.wrapper = element.parent().css({
                 width: that.options.width,
                 height: that.options.height
-            }).addClass("km-popover-wrapper km-" + that.direction).hide();
+            }).addClass("km-popup-wrapper km-" + that.direction).hide();
 
             that.arrow = $(ARROW).appendTo(that.wrapper).hide();
 
             that.overlay = $(OVERLAY).appendTo(container).hide();
 
-            that.pane = new ui.Pane(that.element).navigate("");
-
             that.popup = new kendo.ui.Popup(that.wrapper, $.extend(true, popupOptions, ANIMATION, DIRECTIONS[that.options.direction]));
         },
 
         options: {
-            name: "PopOver",
+            name: "Popup",
             width: 240,
             height: 320,
             direction: "down"
+        },
+
+        openFor: function(link) {
+            var that = this,
+                popup = that.popup;
+
+            popup.options.anchor = $(link);
+            popup.open();
+        },
+
+        close: function() {
+            this.popup.close();
         },
 
         _activate: function() {
@@ -125,20 +126,36 @@
 
             that.wrapper.removeClass(DIRECTION_CLASSES).addClass("km-" + cssClass);
             that.arrow.css(offset, offsetAmount).show();
-        },
-
-        openFor: function(link) {
-            var that = this,
-                popup = that.popup;
-
-            popup.options.anchor = $(link);
-            popup.open();
-        },
-
-        close: function() {
-            this.popup.close();
         }
     });
 
+    /**
+     * @name kendo.mobile.ui.PopOver.Description
+     * @section
+     */
+    var PopOver = Widget.extend(/** @lends kendo.mobile.ui.PopOver.prototype */{
+        /**
+         * @constructs
+         * @extends kendo.mobile.ui.Widget
+         * @param {DomElement} element DOM element
+         */
+        init: function(element, options) {
+            var that = this;
+            Widget.fn.init.call(that, element, options);
+
+            that.popup = new Popup(that.element, that.options);
+            that.pane = new ui.Pane(that.element).navigate("");
+        },
+
+        options: {
+            name: "PopOver",
+            width: 240,
+            height: 320,
+            direction: "down"
+        }
+    });
+
+
+    ui.plugin(Popup);
     ui.plugin(PopOver);
 })(jQuery);
