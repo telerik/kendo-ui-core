@@ -1,13 +1,14 @@
 namespace Kendo.Mvc.UI
 {
     using System.Collections.Generic;
+    using System.Web;
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.Infrastructure;
 
     /// <summary>
     /// View component Builder base class.
     /// </summary>
-    public abstract class ViewComponentBuilderBase<TViewComponent, TBuilder> : ComponentBuilderBase<TViewComponent, TBuilder>, IHideObjectMembers
+    public abstract class ViewComponentBuilderBase<TViewComponent, TBuilder> : IHtmlString, IHideObjectMembers
         where TViewComponent : ViewComponentBase
         where TBuilder : ViewComponentBuilderBase<TViewComponent, TBuilder>
     {
@@ -17,7 +18,7 @@ namespace Kendo.Mvc.UI
         /// Initializes a new instance of the <see cref="ViewComponentBuilderBase&lt;TViewComponent, TBuilder&gt;"/> class.
         /// </summary>
         /// <param name="component">The component.</param>
-        protected ViewComponentBuilderBase(TViewComponent component)
+        public ViewComponentBuilderBase(TViewComponent component)
         {
             Guard.IsNotNull(component, "component");
             this.component = component;

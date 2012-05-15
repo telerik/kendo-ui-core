@@ -72,7 +72,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual MenuBuilder Menu()
         {
-            return MenuBuilder.Create(new Menu(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>(), DI.Current.Resolve<INavigationItemAuthorization>(), DI.Current.Resolve<INavigationComponentHtmlBuilderFactory<Menu, MenuItem>>()));
+            return new MenuBuilder(new Menu(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>(), DI.Current.Resolve<INavigationItemAuthorization>(), DI.Current.Resolve<INavigationComponentHtmlBuilderFactory<Menu, MenuItem>>()));
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual EditorBuilder Editor()
         {
-            return EditorBuilder.Create(new Editor(ViewContext, ClientSideObjectWriterFactory, 
+            return new EditorBuilder(new Editor(ViewContext, ClientSideObjectWriterFactory, 
                 DI.Current.Resolve<ILocalizationServiceFactory>().Create("EditorLocalization", CultureInfo.CurrentUICulture),
                 DI.Current.Resolve<IUrlGenerator>()));
         }
@@ -109,7 +109,7 @@ namespace Kendo.Mvc.UI
         /// </remarks>
         public virtual GridBuilder<T> Grid<T>() where T : class
         {
-            return GridBuilder<T>.Create(new Grid<T>(ViewContext, 
+            return new GridBuilder<T>(new Grid<T>(ViewContext, 
                         ClientSideObjectWriterFactory, 
                         DI.Current.Resolve<IUrlGenerator>(),
                         DI.Current.Resolve<ILocalizationServiceFactory>().Create("GridLocalization", CultureInfo.CurrentUICulture), 
@@ -200,7 +200,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual SplitterBuilder Splitter()
         {
-            return SplitterBuilder.Create(new Splitter(ViewContext, ClientSideObjectWriterFactory));
+            return new SplitterBuilder(new Splitter(ViewContext, ClientSideObjectWriterFactory));
         }
 
         /// <summary>
@@ -220,7 +220,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual TabStripBuilder TabStrip()
         {
-            return TabStripBuilder.Create(new TabStrip(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>(), DI.Current.Resolve<INavigationItemAuthorization>(), DI.Current.Resolve<ITabStripHtmlBuilderFactory>()));
+            return new TabStripBuilder(new TabStrip(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>(), DI.Current.Resolve<INavigationItemAuthorization>(), DI.Current.Resolve<ITabStripHtmlBuilderFactory>()));
         }
 
         /// <summary>
@@ -235,7 +235,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual DateTimePickerBuilder DateTimePicker()
         {
-            return DateTimePickerBuilder.Create(new DateTimePicker(ViewContext, ClientSideObjectWriterFactory));
+            return new DateTimePickerBuilder(new DateTimePicker(ViewContext, ClientSideObjectWriterFactory));
         }
 
 
@@ -251,7 +251,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual DatePickerBuilder DatePicker()
         {
-            return DatePickerBuilder.Create(new DatePicker(ViewContext, ClientSideObjectWriterFactory));
+            return new DatePickerBuilder(new DatePicker(ViewContext, ClientSideObjectWriterFactory));
         }
 
         /// <summary>
@@ -266,7 +266,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual TimePickerBuilder TimePicker()
         {
-            return TimePickerBuilder.Create(new TimePicker(ViewContext, ClientSideObjectWriterFactory));
+            return new TimePickerBuilder(new TimePicker(ViewContext, ClientSideObjectWriterFactory));
         }
 
         /// <summary>
@@ -281,7 +281,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual CalendarBuilder Calendar()
         {
-            return CalendarBuilder.Create(new Calendar(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>(), DI.Current.Resolve<ICalendarHtmlBuilderFactory>()));
+            return new CalendarBuilder(new Calendar(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>(), DI.Current.Resolve<ICalendarHtmlBuilderFactory>()));
         }
 
         /// <summary>
@@ -301,7 +301,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual PanelBarBuilder PanelBar()
         {
-            return PanelBarBuilder.Create(new PanelBar(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>(), DI.Current.Resolve<INavigationItemAuthorization>(), DI.Current.Resolve<INavigationComponentHtmlBuilderFactory<PanelBar, PanelBarItem>>()));
+            return new PanelBarBuilder(new PanelBar(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>(), DI.Current.Resolve<INavigationItemAuthorization>(), DI.Current.Resolve<INavigationComponentHtmlBuilderFactory<PanelBar, PanelBarItem>>()));
         }
 
         /// <summary>
@@ -317,7 +317,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual TreeViewBuilder TreeView()
         {
-            return TreeViewBuilder.Create(new TreeView(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>(), DI.Current.Resolve<INavigationItemAuthorization>(), DI.Current.Resolve<ITreeViewHtmlBuilderFactory>()));
+            return new TreeViewBuilder(new TreeView(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>(), DI.Current.Resolve<INavigationItemAuthorization>(), DI.Current.Resolve<ITreeViewHtmlBuilderFactory>()));
         }
 
         /// <summary>
@@ -333,7 +333,7 @@ namespace Kendo.Mvc.UI
         /// <returns>Returns <see cref="NumericTextBoxBuilder{double}"/>.</returns>
         public virtual NumericTextBoxBuilder<double> NumericTextBox()
         {
-            return NumericTextBoxBuilder<double>.Create(new NumericTextBox<double>(ViewContext, ViewData, ClientSideObjectWriterFactory));
+            return new NumericTextBoxBuilder<double>(new NumericTextBox<double>(ViewContext, ViewData, ClientSideObjectWriterFactory));
         }
 
         /// <summary>
@@ -348,7 +348,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual NumericTextBoxBuilder<T> NumericTextBox<T>() where T: struct
         {
-            return NumericTextBoxBuilder<T>.Create(new NumericTextBox<T>(ViewContext, ViewData, ClientSideObjectWriterFactory));
+            return new NumericTextBoxBuilder<T>(new NumericTextBox<T>(ViewContext, ViewData, ClientSideObjectWriterFactory));
         }
 
         ///// <summary>
@@ -408,7 +408,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual WindowBuilder Window()
         {
-            return WindowBuilder.Create(new Window(ViewContext, ClientSideObjectWriterFactory));
+            return new WindowBuilder(new Window(ViewContext, ClientSideObjectWriterFactory));
         }
 
         /// <summary>
@@ -428,7 +428,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual DropDownListBuilder DropDownList()
         {
-            return DropDownListBuilder.Create(new DropDownList(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>()));
+            return new DropDownListBuilder(new DropDownList(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>()));
         }
 
         /// <summary>
@@ -448,7 +448,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual ComboBoxBuilder ComboBox()
         {
-            return ComboBoxBuilder.Create(new ComboBox(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>()));
+            return new ComboBoxBuilder(new ComboBox(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>()));
         }
 
         /// <summary>
@@ -468,7 +468,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual AutoCompleteBuilder AutoComplete()
         {
-            return AutoCompleteBuilder.Create(new AutoComplete(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>()));
+            return new AutoCompleteBuilder(new AutoComplete(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>()));
         }
 
         /// <summary>
@@ -483,7 +483,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual SliderBuilder<T> Slider<T>() where T: struct, IComparable
         {
-            return SliderBuilder<T>.Create(new Slider<T>(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<ISliderHtmlBuilderFactory>()));
+            return new SliderBuilder<T>(new Slider<T>(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<ISliderHtmlBuilderFactory>()));
         }
 
         /// <summary>
@@ -498,7 +498,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual RangeSliderBuilder<T> RangeSlider<T>() where T : struct, IComparable
         {
-            return RangeSliderBuilder<T>.Create(new RangeSlider<T>(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IRangeSliderHtmlBuilderFactory>()));
+            return new RangeSliderBuilder<T>(new RangeSlider<T>(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IRangeSliderHtmlBuilderFactory>()));
         }
 
         /// <summary>
@@ -517,7 +517,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual UploadBuilder Upload()
         {
-            return UploadBuilder.Create(
+            return new UploadBuilder(
                 new Upload(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>(),
                             DI.Current.Resolve<ILocalizationServiceFactory>().Create("UploadLocalization", CultureInfo.CurrentUICulture)));
         }
@@ -534,7 +534,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual ChartBuilder<T> Chart<T>() where T : class
         {
-            return ChartBuilder<T>.Create(new Chart<T>(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>()));
+            return new ChartBuilder<T>(new Chart<T>(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>()));
         }
 
         /// <summary>
