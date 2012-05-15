@@ -333,7 +333,7 @@ namespace Kendo.Mvc.UI
         /// <returns>Returns <see cref="NumericTextBoxBuilder{double}"/>.</returns>
         public virtual NumericTextBoxBuilder<double> NumericTextBox()
         {
-            return new NumericTextBoxBuilder<double>(new NumericTextBox<double>(ViewContext, ViewData, ClientSideObjectWriterFactory));
+            return new NumericTextBoxBuilder<double>(new NumericTextBox<double>(ViewContext, ClientSideObjectWriterFactory, ViewData));
         }
 
         /// <summary>
@@ -348,7 +348,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual NumericTextBoxBuilder<T> NumericTextBox<T>() where T: struct
         {
-            return new NumericTextBoxBuilder<T>(new NumericTextBox<T>(ViewContext, ViewData, ClientSideObjectWriterFactory));
+            return new NumericTextBoxBuilder<T>(new NumericTextBox<T>(ViewContext, ClientSideObjectWriterFactory, ViewData));
         }
 
         /// <summary>

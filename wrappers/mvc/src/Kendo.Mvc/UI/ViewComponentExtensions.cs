@@ -17,7 +17,7 @@ namespace Kendo.Mvc.UI
         {
             ModelState state;
             string formattedValue = string.Empty;
-            ViewDataDictionary viewData = instance.ViewContext.ViewData;
+            ViewDataDictionary viewData = instance.ViewData;
 
             object valueFromViewData = name.HasValue() ? viewData.Eval(name) : null;
 
@@ -63,30 +63,22 @@ namespace Kendo.Mvc.UI
         }
 
         public static IDictionary<string, object> GetUnobtrusiveValidationAttributes(this IViewComponent instance)
-        {    
-            var viewContext = instance.ViewContext;
-
-            if (viewContext.UnobtrusiveJavaScriptEnabled)
+        {
+            if (instance.ViewContext.UnobtrusiveJavaScriptEnabled)
             {
                 var name = instance.Name;
-                var viewData = viewContext.ViewData;
-                var htmlPrefix = viewData.TemplateInfo.HtmlFieldPrefix;
+                var htmlPrefix = instance.ViewData.TemplateInfo.HtmlFieldPrefix;
 
                 if (name.HasValue() && htmlPrefix.HasValue() && name != htmlPrefix && name.StartsWith(htmlPrefix, StringComparison.Ordinal))
                 {
                     name = name.Substring(htmlPrefix.Length + 1);
                 }
 
-                var metadata = ModelMetadata.FromStringExpression(name, viewData);
-                var htmlHelper = new HtmlHelper(viewContext, new ViewComponentViewDataContainer { ViewData = viewData });
+                var htmlHelper = new HtmlHelper(instance.ViewContext, new ViewComponentViewDataContainer { ViewData = instance.ViewData });
 
-                if (metadata.ContainerType == null)
-                {
-                    metadata = viewContext.ViewData.ModelMetadata;
-                }
-
-                return htmlHelper.GetUnobtrusiveValidationAttributes(name, metadata);
+                return htmlHelper.GetUnobtrusiveValidationAttributes(name);
             }
+
             return null;
         }
     }
