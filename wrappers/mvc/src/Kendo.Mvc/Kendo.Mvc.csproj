@@ -1085,6 +1085,9 @@
       <Visible>false</Visible>
     </Mvc3References>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\kendo.validator.aspnetmvc.js" />
+  </ItemGroup>
   <Target Name="BeforeBuild">
     <Copy SkipUnchangedFiles="true" SourceFiles="@(Mvc3References)" DestinationFolder="$(OutputPath)" />
   </Target>
