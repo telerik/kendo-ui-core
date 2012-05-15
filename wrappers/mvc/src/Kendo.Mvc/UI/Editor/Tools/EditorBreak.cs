@@ -6,7 +6,7 @@ namespace Kendo.Mvc.UI
     {
         public IHtmlBuilder CreateHtmlBuilder()
         {
-            return new EditorBreakHtmlBuilder(this);
+            return new EditorBreakHtmlBuilder();
         }
     }
 }

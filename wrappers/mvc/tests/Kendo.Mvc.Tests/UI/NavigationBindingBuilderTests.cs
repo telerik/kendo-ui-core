@@ -4,13 +4,11 @@ namespace Kendo.Mvc.UI.Tests
 
     public class NavigationBindingBuilderTests
     {
-        private readonly NavigationItemTestDouble item;
         private readonly NavigationBindingTestDouble bindingItem;
         private readonly NavigationBindingBuilderTestsDouble builder;
 
         public NavigationBindingBuilderTests()
         {
-            item = new NavigationItemTestDouble();
             bindingItem = new NavigationBindingTestDouble();
             builder = new NavigationBindingBuilderTestsDouble(bindingItem);
         }

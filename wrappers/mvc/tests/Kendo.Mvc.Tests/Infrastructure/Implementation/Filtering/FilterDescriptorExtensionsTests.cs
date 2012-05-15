@@ -3,7 +3,7 @@ namespace Kendo.Mvc.UI.Tests
     using System.Collections.Generic;
     using System.Dynamic;
     using System.Linq;
-    using Infrastructure.Implementation;
+    using Kendo.Mvc.Infrastructure.Implementation;
     using Xunit;
 
     public class FilterDescriptorExtensionsTests

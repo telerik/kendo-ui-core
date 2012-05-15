@@ -8,6 +8,7 @@ bin/
 obj/
 !**/References/*.dll
 .DS_Store
+.JustCode
 .livereload
 app.js
 deploy/

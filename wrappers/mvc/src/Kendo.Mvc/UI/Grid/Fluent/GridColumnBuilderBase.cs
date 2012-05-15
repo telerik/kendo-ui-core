@@ -368,13 +368,6 @@ namespace Kendo.Mvc.UI.Fluent
             return this as TColumnBuilder;
         }
 
-        private static void MergeAttributes(IDictionary<string, object> target, object attributes)
-        {
-            Guard.IsNotNull(attributes, "attributes");
-
-            target.Merge(attributes);
-        }        
-        
         private static void MergeAttributes(IDictionary<string, object> target, IDictionary<string, object> attributes)
         {
             Guard.IsNotNull(attributes, "attributes");
