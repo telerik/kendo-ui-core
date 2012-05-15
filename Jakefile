@@ -393,7 +393,8 @@ function buildDocs(sitefinity_path) {
             "ui.slider": ["ui.slider", "ui.rangeslider"],
             "mobile.ui.button": ["mobile.ui.button", "mobile.ui.backbutton", "mobile.ui.detailbutton"],
             "ui.dragdrop": ["ui.draggable", "ui.droptarget", "drag", "dragaxis"],
-            "mobile.ui.splitview": ["mobile.ui.splitview", "mobile.ui.pane"]
+            "mobile.ui.splitview": ["mobile.ui.splitview", "mobile.ui.pane"],
+            "mobile.ui.popover": ["mobile.ui.popover", "mobile.ui.pane"]
         },
         sections = ["description", "configuration", "methods", "events"];
 
