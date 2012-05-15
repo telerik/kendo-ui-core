@@ -25,11 +25,11 @@ namespace Kendo.Mvc.UI.Html
             var container = new HtmlFragment();
             var style = section.Style;
 
-            AppendFirstPrevButtons(container, style, section.UrlBuilder, currentPage);
+            //TODO: AppendFirstPrevButtons(container, style, section.UrlBuilder, currentPage);
             AppendNumericSection(container, style, section.UrlBuilder, section.CurrentPage, section.PageCount);
-            AppendPageSizeDropDown(container, style, section);
-            AppendPageInput(container, style, section);
-            AppendNextLast(container, style, section.UrlBuilder, currentPage, pageCount);
+            //TODO: AppendPageSizeDropDown(container, style, section);
+            //TODO: AppendPageInput(container, style, section);
+            //TODO: AppendNextLast(container, style, section.UrlBuilder, currentPage, pageCount);
             return container;
         }
 

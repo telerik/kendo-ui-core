@@ -37,16 +37,5 @@ namespace Kendo.Mvc.UI.Html.Tests
             pagerSectionBuilder.Verify(ps => ps.CreateSections(pagerSection), Times.Once());
         }
 
-        [Fact]
-        public void Should_add_status()
-        {
-            var pagerSection = new GridPagerData
-                                   {
-                                       UrlBuilder = new Mock<IGridUrlBuilder>().Object
-                                   };
-            builder.Create(pagerSection);
-
-            statusBuilder.Verify(ps => ps.Create(pagerSection), Times.Once());
-        }
     }
 }

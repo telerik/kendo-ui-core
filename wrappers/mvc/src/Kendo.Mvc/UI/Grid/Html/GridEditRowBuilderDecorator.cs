@@ -9,7 +9,7 @@ namespace Kendo.Mvc.UI.Html
 
         protected override void ApplyDecoration(IHtmlNode htmlNode)
         {
-            htmlNode.AddClass("t-grid-edit-row");
+            htmlNode.AddClass("k-grid-edit-row");
         }
     }
 }

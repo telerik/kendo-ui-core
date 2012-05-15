@@ -80,7 +80,7 @@ namespace Kendo.Mvc.UI.Html
             {
                 var toolBar = CreateToolBar(functionalData.ToolBarData);
                 
-                toolBar.AddClass("t-grid-top").AppendTo(div);
+                toolBar.AddClass("k-grid-top").AppendTo(div);
             }
         }
         
@@ -89,7 +89,7 @@ namespace Kendo.Mvc.UI.Html
             if (functionalData.ShowBottomToolBar)
             {
                 var toolBar = CreateToolBar(functionalData.ToolBarData);
-                toolBar.AddClass("t-grid-bottom").AppendTo(div);
+                toolBar.AppendTo(div);
             }
         }
         
@@ -112,11 +112,11 @@ namespace Kendo.Mvc.UI.Html
         {
             if (functionalData.ShowFooter)
             {
-                var pager = new HtmlElement("div").AddClass("t-grid-pager", "t-grid-bottom");
+                var pager = new HtmlElement("div").AddClass("k-pager-wrap", "k-grid-pager");
                 
                 pager.AppendTo(div);
 
-                AppendRefreshButton(pager, functionalData.PagerData);
+                //AppendRefreshButton(pager, functionalData.PagerData);
                 
                 if (functionalData.ShowBottomPager)
                 {
@@ -135,7 +135,7 @@ namespace Kendo.Mvc.UI.Html
         {
             if (functionalData.ShowTopPager)
             {
-                var pager = new HtmlElement("div").AddClass("t-grid-pager", "t-grid-top");
+                var pager = new HtmlElement("div").AddClass("k-grid-pager", "k-grid-top");
                 
                 pager.AppendTo(div);
 
@@ -147,7 +147,7 @@ namespace Kendo.Mvc.UI.Html
         
         protected virtual IHtmlNode CreateHeader(GridRenderingData renderingData)
         {
-            var thead = new HtmlElement("thead").AddClass("t-grid-header");
+            var thead = new HtmlElement("thead").AddClass("k-grid-header");
 
             var tr = DataSectionBuilder.CreateHeader(renderingData);
             tr.AppendTo(thead);
@@ -180,7 +180,7 @@ namespace Kendo.Mvc.UI.Html
         protected virtual IHtmlNode CreateWrapper(IDictionary<string, object> htmlAttributes)
         {
             var div = new HtmlElement("div").Attributes(htmlAttributes)
-                                        .PrependClass(UIPrimitives.Widget, "t-grid");
+                                        .PrependClass(UIPrimitives.Widget, "k-grid");
             return div;
         }
 

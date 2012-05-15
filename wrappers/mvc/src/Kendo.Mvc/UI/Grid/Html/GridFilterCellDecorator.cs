@@ -16,7 +16,7 @@ namespace Kendo.Mvc.UI.Html
         public void Decorate(IHtmlNode td)
         {
             var wrapper = new HtmlElement("div")
-                .AddClass("t-grid-filter", "t-state-default")
+                .AddClass("k-grid-filter", "t-state-default")
                 .ToggleClass("t-active-filter", filtered);
 
             wrapper.AppendTo(td);
