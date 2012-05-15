@@ -100,15 +100,15 @@
             direction: "down"
         },
 
-        openFor: function(link) {
+        show: function(target) {
             var that = this,
                 popup = that.popup;
 
-            popup.options.anchor = $(link);
+            popup.options.anchor = $(target);
             popup.open();
         },
 
-        close: function() {
+        hide: function() {
             this.popup.close();
         },
 
@@ -140,10 +140,20 @@
          * @param {DomElement} element DOM element
          */
         init: function(element, options) {
-            var that = this;
+            var that = this,
+                popupOptions;
+
             Widget.fn.init.call(that, element, options);
 
-            that.popup = new Popup(that.element, that.options);
+            options = that.options;
+
+            popupOptions = {
+                width: options.width,
+                height: options.height,
+                direction: options.direction
+            };
+
+            that.popup = new Popup(that.element, popupOptions);
             that.pane = new ui.Pane(that.element).navigate("");
         },
 
@@ -152,9 +162,16 @@
             width: 240,
             height: 320,
             direction: "down"
+        },
+
+        openFor: function(target) {
+            this.popup.show(target);
+        },
+
+        close: function() {
+            this.popup.hide();
         }
     });
-
 
     ui.plugin(Popup);
     ui.plugin(PopOver);
