@@ -259,12 +259,12 @@
                 <Item Type="System.String">__DataMember_AttributeName</Item>
               </__DataMembers>
             </Item>
-            <Item Type="ArtOfTest.WebAii.Design.Translation.HtmlIdentificationDescriptor" Version="2012.1.509.0" IsLocked="True" SearchType="TextContent">
+            <Item Type="ArtOfTest.WebAii.Design.Translation.HtmlIdentificationDescriptor" Version="2012.1.509.0" IsLocked="True" SearchType="TagIndex">
               <__DataMember_IsLocked IsDataContractSerialized="True" PropertyName="IsLocked" PropertyType="System.Boolean">
                 <boolean xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</boolean>
               </__DataMember_IsLocked>
               <__DataMember_SearchType IsDataContractSerialized="True" PropertyName="SearchType" PropertyType="ArtOfTest.WebAii.Core.HtmlSearchType">
-                <HtmlSearchType xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Core">TextContent</HtmlSearchType>
+                <HtmlSearchType xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Core">TagIndex</HtmlSearchType>
               </__DataMember_SearchType>
               <__DataMember_AttributeName IsDataContractSerialized="True" PropertyName="AttributeName" PropertyType="System.String">
                 <string i:nil="true" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:i="http://www.w3.org/2001/XMLSchema-instance" />
@@ -275,12 +275,12 @@
                 <Item Type="System.String">__DataMember_AttributeName</Item>
               </__DataMembers>
             </Item>
-            <Item Type="ArtOfTest.WebAii.Design.Translation.HtmlIdentificationDescriptor" Version="2012.1.509.0" IsLocked="True" SearchType="TagIndex">
+            <Item Type="ArtOfTest.WebAii.Design.Translation.HtmlIdentificationDescriptor" Version="2012.1.509.0" IsLocked="True" SearchType="TextContent">
               <__DataMember_IsLocked IsDataContractSerialized="True" PropertyName="IsLocked" PropertyType="System.Boolean">
                 <boolean xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</boolean>
               </__DataMember_IsLocked>
               <__DataMember_SearchType IsDataContractSerialized="True" PropertyName="SearchType" PropertyType="ArtOfTest.WebAii.Core.HtmlSearchType">
-                <HtmlSearchType xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Core">TagIndex</HtmlSearchType>
+                <HtmlSearchType xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Core">TextContent</HtmlSearchType>
               </__DataMember_SearchType>
               <__DataMember_AttributeName IsDataContractSerialized="True" PropertyName="AttributeName" PropertyType="System.String">
                 <string i:nil="true" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:i="http://www.w3.org/2001/XMLSchema-instance" />
