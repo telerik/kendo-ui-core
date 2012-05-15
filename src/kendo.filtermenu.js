@@ -35,7 +35,7 @@
                         '<option value="#=op#">#=operators[op]#</option>'+
                     '#}#'+
                 '</select>'+
-                '<input name="filters[0].value" class="k-widget k-input k-autocomplete" type="text" data-#=ns#type="#=type#"/>'+
+                '<input name="filters[0].value" class="k-textbox" type="text" data-#=ns#type="#=type#"/>'+
                 '#if(extra){#'+
                     '<select name="logic" class="k-filter-and">'+
                         '<option value="and">And</option>'+
@@ -46,7 +46,7 @@
                             '<option value="#=op#">#=operators[op]#</option>'+
                         '#}#'+
                     '</select>'+
-                    '<input name="filters[1].value" class="k-widget k-input k-autocomplete" type="text" data-#=ns#type="#=type#"/>'+
+                    '<input name="filters[1].value" class="k-textbox" type="text" data-#=ns#type="#=type#"/>'+
                 '#}#'+
                 '<button type="submit" class="k-button">#=messages.filter#</button>'+
                 '<button type="reset" class="k-button">#=messages.clear#</button>'+
@@ -195,10 +195,10 @@
                 [DROPDOWNLIST]()
                 .end()
                 .find("[" + kendo.attr("type") + "=number]")
-                [NUMERICTEXTBOX]()
-                .end()
+                [NUMERICTEXTBOX]().parent().children().removeClass("k-textbox")
+                .end().end().end()
                 .find("[" + kendo.attr("type") + "=date]")
-                [DATEPICKER]();
+                [DATEPICKER]().removeClass("k-textbox");
 
             that.refresh();
         },
