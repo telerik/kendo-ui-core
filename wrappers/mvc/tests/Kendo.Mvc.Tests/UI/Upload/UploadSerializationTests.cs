@@ -115,6 +115,19 @@ namespace Kendo.Mvc.UI.Tests.Upload
         }
 
         [Fact]
+        public void Async_RemoveField_should_be_serialized_when_set()
+        {
+            upload.Async.Save.ActionName = "Save";
+            upload.Async.Save.ControllerName = "Async";
+            upload.Async.Remove.ActionName = "Remove";
+            upload.Async.Remove.ControllerName = "Async";
+            upload.Async.RemoveField = "attachments";
+            upload.WriteInitializationScript(textWriter.Object);
+
+            output.ShouldContain("removeField\":\"attachments\"");
+        }
+
+        [Fact]
         public void AutoUpload_should_be_serialized_when_false()
         {
             upload.Async.Save.ActionName = "Index";
