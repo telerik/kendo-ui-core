@@ -7,18 +7,18 @@ namespace Kendo.Mvc.UI
 
         public NumericTextBoxClientEvents()
         {
-            OnChange = new ClientEvent();
-            OnSpin = new ClientEvent();
+            OnChange = new ClientEvent("change");
+            OnSpin = new ClientEvent("spin");
         }
 
         public ClientEvent OnChange { get; private set; }
 
         public ClientEvent OnSpin { get; private set; }
 
-        public void SerializeTo(IClientSideObjectWriter writer)
+        public void SerializeTo(System.Collections.Generic.IDictionary<string, object> json)
         {
-            writer.AppendClientEvent("change", OnChange);
-            writer.AppendClientEvent("spin", OnSpin);
+            OnChange.Serialize(json);
+            OnSpin.Serialize(json);
         }
     }
 }

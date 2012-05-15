@@ -1,11 +1,14 @@
 namespace Kendo.Mvc.Extensions
 {
+    using Kendo.Mvc.Extensions;
+    using Kendo.Mvc.Infrastructure;
     using System.Collections.Generic;
     using System.Text;
     using System.Web;
     using System.Web.Routing;
-
-    using Infrastructure;
+    using System.Web.UI;
+    using System;
+    using System.Linq;
 
     /// <summary>
     /// Contains extension methods of IDictionary&lt;string, objectT&gt;.
@@ -156,6 +159,52 @@ namespace Kendo.Mvc.Extensions
         public static void Merge(this IDictionary<string, object> instance, object values)
         {
             Merge(instance, values, true);
+        }
+
+        public static string ToJson(this IDictionary<string, object> instance)
+        {
+            Func<IDictionary<string, object>, string> serialize = null;
+            
+            serialize = dict =>
+            {
+                return "{" + string.Join(",", dict.Select(d =>
+                {
+                    if (d.Value is IDictionary<string, object>)
+                    {
+                        return d.Key + ":" + serialize(d.Value as IDictionary<string, object>);
+                    }
+
+                    if (d.Value != null)
+                    {
+                        if (d.Value is string)
+                        {
+                            return "{0}:\"{1}\"".FormatWith(d.Key.ToString(), d.Value);
+                        }
+                        else if (d.Value is bool)
+                        {
+                            var res = "";
+                            var value = Convert.ToBoolean(d.Value);
+                            if (value == true)
+                            {
+                                res = "true";
+                            }
+                            else
+                            {
+                                res = "false";
+                            }
+                            return "{0}:{1}".FormatWith(d.Key.ToString(), res);
+                        }
+                        else
+                        {
+                            return "{0}:{1}".FormatWith(d.Key.ToString(), d.Value);
+                        }
+                    }
+
+                    return null;
+                }).Where(item => !string.IsNullOrEmpty(item))) + "}";
+            };
+
+            return serialize(instance);
         }
     }
 }
