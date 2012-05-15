@@ -1,5 +1,7 @@
+@model IEnumerable<Product>
+
 <div id="example" class="k-content">
-    @(Html.Kendo().Grid(new [] { "foo", "bar"})
+    @(Html.Kendo().Grid(Model)
         .Name("Grid")
     )
 </div>
