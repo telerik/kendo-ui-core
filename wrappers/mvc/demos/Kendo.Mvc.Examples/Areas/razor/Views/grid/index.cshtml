@@ -3,6 +3,9 @@
 <div id="example" class="k-content">
     @(Html.Kendo().Grid(Model)
         .Name("Grid")
+        .Pageable()
+        .Sortable()
+        .Scrollable()
     )
 </div>
 <script>

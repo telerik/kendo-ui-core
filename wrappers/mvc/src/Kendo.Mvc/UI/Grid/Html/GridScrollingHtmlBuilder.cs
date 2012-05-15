@@ -22,9 +22,9 @@ namespace Kendo.Mvc.UI.Html
 
         protected override IHtmlNode CreateFooter(GridRenderingData renderingData)
         {
-            var div = new HtmlElement("div").AddClass("t-grid-footer");
+            var div = new HtmlElement("div").AddClass("k-grid-footer");
             
-            var wrapper = new HtmlElement("div").AddClass("t-grid-footer-wrap");
+            var wrapper = new HtmlElement("div").AddClass("k-grid-footer-wrap");
             wrapper.AppendTo(div);
 
             var table = CreateTable(renderingData);
@@ -38,9 +38,9 @@ namespace Kendo.Mvc.UI.Html
 
         protected override IHtmlNode CreateHeader(GridRenderingData renderingData)
         {
-            var header = new HtmlElement("div").AddClass("t-grid-header");
+            var header = new HtmlElement("div").AddClass("k-grid-header");
 
-            var headerWrapper = new HtmlElement("div").AddClass("t-grid-header-wrap");
+            var headerWrapper = new HtmlElement("div").AddClass("k-grid-header-wrap");
 
             headerWrapper.AppendTo(header);
 

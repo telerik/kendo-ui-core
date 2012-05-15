@@ -19,16 +19,6 @@ namespace Kendo.Mvc.UI.Html.Tests
         }
 
         [Fact]
-        public void Should_render_div()
-        {
-            var urlBuilder = new Mock<IGridUrlBuilder>();
-            var container = builder.Create(urlBuilder.Object, 0, 10);
-
-            container.TagName.ShouldEqual("div");
-            container.Attribute("class").ShouldContain("t-numeric");
-        }
-
-        [Fact]
         public void Should_render_button_for_page_index()
         {
             const int currentPage = 0;

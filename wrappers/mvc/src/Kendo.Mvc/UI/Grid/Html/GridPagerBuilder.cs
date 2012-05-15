@@ -21,7 +21,7 @@ namespace Kendo.Mvc.UI.Html
             
             pagerSections.CreateSections(section).AppendTo(fragment);
 
-            statusBuilder.Create(section).AppendTo(fragment);
+            //statusBuilder.Create(section).AppendTo(fragment);
 
             return fragment;
         }

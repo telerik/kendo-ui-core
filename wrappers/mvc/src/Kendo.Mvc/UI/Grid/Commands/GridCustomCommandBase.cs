@@ -58,7 +58,7 @@ namespace Kendo.Mvc.UI
 
             if (Name.HasValue())
             {
-                classes.Add("t-grid-" + Name);
+                classes.Add("k-grid-" + Name);
             }
 
             return string.Join(" ", classes.ToArray());

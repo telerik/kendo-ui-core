@@ -1164,7 +1164,7 @@ namespace Kendo.Mvc.UI
         {
             base.VerifySettings();
             
-            this.ThrowIfClassIsPresent("t-grid-rtl", TextResource.Rtl);
+            this.ThrowIfClassIsPresent("k-grid-rtl", TextResource.Rtl);
 
             if (Ajax.Enabled && WebService.Enabled)
             {

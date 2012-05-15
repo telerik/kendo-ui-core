@@ -1,7 +1,5 @@
 namespace Kendo.Mvc.UI.Html
 {
-    using Infrastructure;
-
     class GridPagerNumericSectionBuilder : IGridPagerNumericSectionBuilder
     {
         private const int NumericLinkSize = 10;
@@ -14,11 +12,11 @@ namespace Kendo.Mvc.UI.Html
 
         public IHtmlNode Create(IGridUrlBuilder urlBuilder, int currentPage, int pageCount)
         {
-            var numericDiv = new HtmlElement("div").AddClass("t-numeric");
+            var fragment = new HtmlFragment();
 
-            AppendContent(urlBuilder, numericDiv, pageCount, currentPage);
+            AppendContent(urlBuilder, fragment, pageCount, currentPage);
 
-            return numericDiv;
+            return fragment;
         }
 
         private void AppendContent(IGridUrlBuilder urlBuilder, IHtmlNode numericDiv, int pageCount, int currentPage)
@@ -26,11 +24,11 @@ namespace Kendo.Mvc.UI.Html
             var numericStart = CalculateStartIndex(currentPage);
             var numericEnd = CalculateEndIndex(numericStart, pageCount);
 
-            AppendPrevButtonsLink(numericStart, numericDiv, urlBuilder);
+//            AppendPrevButtonsLink(numericStart, numericDiv, urlBuilder);
 
             AppendNumericButtons(urlBuilder, currentPage, numericStart, numericDiv, numericEnd);
 
-            AppendNextButtonsLink(pageCount, numericDiv, numericEnd, urlBuilder);
+ //           AppendNextButtonsLink(pageCount, numericDiv, numericEnd, urlBuilder);
         }
 
         private void AppendNumericButtons(IGridUrlBuilder urlBuilder, int currentPage, int numericStart, IHtmlNode numericDiv, int numericEnd)

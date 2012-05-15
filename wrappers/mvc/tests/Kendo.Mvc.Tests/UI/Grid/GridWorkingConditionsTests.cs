@@ -240,7 +240,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
         [Fact]
         public void Should_throw_if_grid_rtl_class_is_set()
         {
-            grid.HtmlAttributes["class"] = "t-grid-rtl";
+            grid.HtmlAttributes["class"] = "k-grid-rtl";
             Assert.Throws<NotSupportedException>(() => grid.VerifySettings());
         }
 
