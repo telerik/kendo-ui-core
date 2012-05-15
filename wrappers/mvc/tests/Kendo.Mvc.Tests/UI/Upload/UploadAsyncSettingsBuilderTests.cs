@@ -89,6 +89,19 @@ namespace Kendo.Mvc.UI.Tests.Upload
         }
 
         [Fact]
+        public void SaveUrl_should_set_Url()
+        {
+            builder.SaveUrl("/save");
+            saveSettingsMock.VerifySet(s => s.Url = "/save");
+        }
+
+        [Fact]
+        public void SaveUrl_should_return_builder()
+        {
+            builder.SaveUrl("/save").ShouldBeSameAs(builder);
+        }
+        
+        [Fact]
         public void Save_with_action_controller_and_object_should_set_saveRequestSettings()
         {
             builder.Save("action", "controller", new { id = 1 });
@@ -168,6 +181,32 @@ namespace Kendo.Mvc.UI.Tests.Upload
         public void Save_with_action_should_return_builder()
         {
             builder.Save<UploadStubController>(c => c.Index()).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void RemoveField_should_set_field()
+        {
+            builder.RemoveField("field");
+            settingsMock.VerifySet(s => s.RemoveField = "field");
+        }
+
+        [Fact]
+        public void RemoveField_should_return_builder()
+        {
+            builder.RemoveField("field").ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void RemoveUrl_should_set_Url()
+        {
+            builder.RemoveUrl("/remove");
+            removeSettingsMock.VerifySet(s => s.Url = "/remove");
+        }
+
+        [Fact]
+        public void RemoveUrl_should_return_builder()
+        {
+            builder.RemoveUrl("/remove").ShouldBeSameAs(builder);
         }
 
         [Fact]
