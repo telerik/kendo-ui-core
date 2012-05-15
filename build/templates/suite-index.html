@@ -12,7 +12,7 @@
         <h1>#= categoryName[0].toUpperCase() + categoryName.substring(1) #</h1>
 
         <ul>
-        # for (var i = 0, children = data[categoryName]; i < children.length; i++) { #
+        # for (var i = 0, actualRow = 0, children = data[categoryName]; i < children.length; i++) { #
             # var offline = children[i].offline || {}; #
             # if (offline.skipAlways || offline.skipHtml) continue; #
             <li>
