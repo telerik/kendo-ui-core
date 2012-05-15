@@ -69,33 +69,6 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Sets the action, controller, route values and field name for the save operation
-        /// </summary>
-        /// <param name="actionName">Name of the action.</param>
-        /// <param name="controllerName">Name of the controller.</param>
-        /// <param name="fieldName">
-        ///     The form field name to use for submiting the files.
-        ///     The Upload name is used if not set.
-        /// </param>
-        /// <param name="routeValues">The route values.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Upload()
-        ///             .Name("Upload")
-        ///             .Async(async => async
-        ///                 .Save("Save", "Home", "attachment", new RouteValueDictionary{ {"id", 1} });
-        ///             )
-        /// %&gt;
-        /// </code>
-        /// </example>
-        [Obsolete("Obsolete. Use SaveField instead.")]
-        public UploadAsyncSettingsBuilder Save(string actionName, string controllerName, string fieldName, RouteValueDictionary routeValues)
-        {
-            settings.SaveField = fieldName;
-            return Save(actionName, controllerName, routeValues);
-        }
-
-        /// <summary>
         /// Sets the action, controller and route values for the save operation
         /// </summary>
         /// <param name="actionName">Name of the action.</param>
@@ -119,33 +92,6 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Sets the action, controller and route values for the save operation
-        /// </summary>
-        /// <param name="actionName">Name of the action.</param>
-        /// <param name="controllerName">Name of the controller.</param>
-        /// <param name="fieldName">
-        ///     The form field name to use for submiting the files.
-        ///     The Upload name is used if not set.
-        /// </param>
-        /// <param name="routeValues">The route values.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Upload()
-        ///             .Name("Upload")
-        ///             .Async(async => async
-        ///                 .Save("Save", "Home", "attachments", new { id = 1 });
-        ///             )
-        /// %&gt;
-        /// </code>
-        /// </example>
-        [Obsolete("Obsolete. Use SaveField instead.")]
-        public UploadAsyncSettingsBuilder Save(string actionName, string controllerName, string fieldName, object routeValues)
-        {
-            settings.SaveField = fieldName;
-            return Save(actionName, controllerName, routeValues);
-        }
-
-        /// <summary>
         /// Sets the action and controller for the save operation
         /// </summary>
         /// <param name="actionName">Name of the action.</param>
@@ -163,32 +109,6 @@ namespace Kendo.Mvc.UI.Fluent
         public UploadAsyncSettingsBuilder Save(string actionName, string controllerName)
         {
             return Save(actionName, controllerName, (object) null);
-        }
-
-        /// <summary>
-        /// Sets the action and controller for the save operation
-        /// </summary>
-        /// <param name="actionName">Name of the action.</param>
-        /// <param name="controllerName">Name of the controller.</param>
-        /// <param name="fieldName">
-        ///     The form field name to use for submiting the files.
-        ///     The Upload name is used if not set.
-        /// </param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Upload()
-        ///             .Name("Upload")
-        ///             .Async(async => async
-        ///                 .Save("Save", "Home", "attachments");
-        ///             )
-        /// %&gt;
-        /// </code>
-        /// </example>
-        [Obsolete("Obsolete. Use SaveField instead.")]
-        public UploadAsyncSettingsBuilder Save(string actionName, string controllerName, string fieldName)
-        {
-            settings.SaveField = fieldName;
-            return Save(actionName, controllerName, (object)null);
         }
 
         /// <summary>
@@ -318,6 +238,27 @@ namespace Kendo.Mvc.UI.Fluent
         public UploadAsyncSettingsBuilder SaveField(string fieldName)
         {
             settings.SaveField = fieldName;
+            return this;
+        }
+
+        /// <summary>
+        /// Sets an absolute or relative Save action URL.
+        /// Note that the URL must be in the same domain for the upload to succeed.
+        /// </summary>
+        /// <param name="url">The Save action URL.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Telerik().Upload()
+        ///             .Name("Upload")
+        ///             .Async(async => async
+        ///                 .SaveUrl("/save");
+        ///             )
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public UploadAsyncSettingsBuilder SaveUrl(string url)
+        {
+            settings.Save.Url(url);
             return this;
         }
 
@@ -491,6 +432,50 @@ namespace Kendo.Mvc.UI.Fluent
         {
             settings.Remove.Action(controllerAction);
 
+            return this;
+        }
+
+        /// <summary>
+        /// Sets an absolute or relative Remove action URL.
+        /// Note that the URL must be in the same domain for the operation to succeed.
+        /// </summary>
+        /// <param name="url">The Remove action URL.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Telerik().Upload()
+        ///             .Name("Upload")
+        ///             .Async(async => async
+        ///                 .RemoveUrl("/remove");
+        ///             )
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public UploadAsyncSettingsBuilder RemoveUrl(string url)
+        {
+            settings.Remove.Url(url);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the field name for the remove operation
+        /// </summary>
+        /// <param name="fieldName">
+        ///     The form field name to use for submiting the files.
+        ///     "fileNames" is used if not set.
+        /// </param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Telerik().Upload()
+        ///             .Name("Upload")
+        ///             .Async(async => async
+        ///                 .RemoveField("attachments");
+        ///             )
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public UploadAsyncSettingsBuilder RemoveField(string fieldName)
+        {
+            settings.RemoveField = fieldName;
             return this;
         }
     }

@@ -22,6 +22,12 @@ namespace Kendo.Mvc.UI
         INavigatable Remove { get; set; }
 
         /// <summary>
+        /// Defines the name of the form field submitted to the Remove action.
+        /// The default value is "fileNames".
+        /// </summary>
+        string RemoveField { get; set; }
+
+        /// <summary>
         /// Gets or sets a value indicating whether to start the upload immediately after selecting a file
         /// </summary>
         bool AutoUpload { get; set; }
