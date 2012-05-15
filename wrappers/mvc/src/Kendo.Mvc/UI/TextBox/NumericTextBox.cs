@@ -11,8 +11,8 @@ namespace Kendo.Mvc.UI
 
     public class NumericTextBox<T> : ViewComponentBase, IInputComponent<T> where T : struct
     {
-        public NumericTextBox(ViewContext viewContext, ViewDataDictionary ViewData, IClientSideObjectWriterFactory clientSideObjectWriterFactory)
-            : base(viewContext, clientSideObjectWriterFactory)
+        public NumericTextBox(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory, ViewDataDictionary viewData)
+            : base(viewContext, clientSideObjectWriterFactory, viewData)
         {
             Spinners = true;
 
@@ -25,8 +25,6 @@ namespace Kendo.Mvc.UI
             Step = (T)Convert.ChangeType(1, typeof(T));
 
             Format = "n";
-
-            this.ViewData = ViewData;
         }
 
         /// <summary>
@@ -39,16 +37,8 @@ namespace Kendo.Mvc.UI
             {
                 // Return from htmlattributes if user has specified
                 // otherwise build it from name
-                return InputHtmlAttributes.ContainsKey("id") ?
-                       InputHtmlAttributes["id"].ToString() :
-                       (!string.IsNullOrEmpty(Name) ? Name.Replace(".", HtmlHelper.IdAttributeDotReplacement) : null);
+                return TagBuilder.CreateSanitizedId(InputHtmlAttributes.ContainsKey("id") ? InputHtmlAttributes["id"].ToString() : Name);
             }
-        }
-
-        internal ViewDataDictionary ViewData
-        {
-            get;
-            set;
         }
 
         public IDictionary<string, object> InputHtmlAttributes
@@ -111,14 +101,12 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        //get it from resource files
         public string ButtonTitleUp
         {
             get;
             set;
         }
 
-        //get it from resource files
         public string ButtonTitleDown
         {
             get;

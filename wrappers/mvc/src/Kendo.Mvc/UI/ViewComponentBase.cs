@@ -23,11 +23,12 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <param name="viewContext">The view context.</param>
         /// <param name="clientSideObjectWriterFactory">The client side object writer factory.</param>
-        protected ViewComponentBase(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory)
+        protected ViewComponentBase(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory, ViewDataDictionary viewData = null)
         {
             Guard.IsNotNull(viewContext, "viewContext");
             Guard.IsNotNull(clientSideObjectWriterFactory, "clientSideObjectWriterFactory");
 
+            ViewData = viewData ?? viewContext.ViewData;
             ViewContext = viewContext;
             ClientSideObjectWriterFactory = clientSideObjectWriterFactory;
 
@@ -99,6 +100,12 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <value>The view context.</value>
         public ViewContext ViewContext
+        {
+            get;
+            private set;
+        }
+
+        public ViewDataDictionary ViewData
         {
             get;
             private set;

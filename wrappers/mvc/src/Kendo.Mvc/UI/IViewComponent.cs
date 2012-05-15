@@ -9,5 +9,7 @@ namespace Kendo.Mvc.UI
         string Name { get; }
 
         ViewContext ViewContext { get; }
+
+        ViewDataDictionary ViewData { get; }
     }
 }

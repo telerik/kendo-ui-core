@@ -19,6 +19,7 @@ namespace Kendo.Mvc.UI
         public string Identifier { get; set; }
 
         public ViewContext ViewContext { get; private set; }
+        public ViewDataDictionary ViewData { get; private set; }
 
         string IViewComponent.Id { get { return ""; } }
         string IViewComponent.Name { get { return ""; } }

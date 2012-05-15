@@ -23,6 +23,7 @@ namespace Kendo.Mvc.UI
         public string Identifier { get; private set; }
 
         public ViewContext ViewContext { get; private set; }
+        public ViewDataDictionary ViewData { get; private set; }
 
         public IDictionary<string, object> HtmlAttributes { get; private set; }
 
