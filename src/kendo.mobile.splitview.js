@@ -8,10 +8,28 @@
      * @name kendo.mobile.ui.SplitView.Description
      * @section
      * <p>The mobile SplitView is a tablet-specific view that consists of two or more <strong>mobile Pane widgets</strong>. The
-     * Application automatically instantiates a mobile SplitView for each element with a <code>role</code> data attribute set
+     * Mobile Application automatically instantiates a mobile SplitView for each element with a <code>role</code> data attribute set
      * to <b>splitview</b>. </p>
      * <p> <strong>Important:</strong> unlike most widgets, the splitview element <strong>should not be nested</strong>
      * in a view, but should be put as an immediate child of the mobile application element.</p>
+     *
+     * @exampleTitle Mobile SplitView with two panes
+     * @example
+     * <div data-role="splitview">
+     *   <div data-role="pane" data-layout="main-default" id="main-pane">
+     *     <div data-role="view" data-title="Messages">
+     *         No message selected
+     *     </div>
+     *
+     *     <div data-role="layout" data-id="main-default">
+     *         <div data-role="header">
+     *             <div data-role="navbar">
+     *                 <span data-role="view-title"></span>
+     *             </div>
+     *         </div>
+     *     </div>
+     *   </div>
+     * </div>
      *
      * @section
      * <h3>Customizing appearance</h3>
