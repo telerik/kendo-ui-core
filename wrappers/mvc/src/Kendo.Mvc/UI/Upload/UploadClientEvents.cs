@@ -10,7 +10,6 @@ namespace Kendo.Mvc.UI
         /// </summary>
         public UploadClientEvents()
         {
-            OnLoad = new ClientEvent();
             OnSelect = new ClientEvent();
             OnUpload = new ClientEvent();
             OnSuccess = new ClientEvent();
@@ -18,15 +17,6 @@ namespace Kendo.Mvc.UI
             OnComplete = new ClientEvent();
             OnCancel = new ClientEvent();
             OnRemove = new ClientEvent();
-        }
-
-        /// <summary>
-        /// Defines the Load client-side event handler
-        /// </summary>
-        public ClientEvent OnLoad
-        { 
-            get; 
-            private set; 
         }
 
         /// <summary>
@@ -98,7 +88,6 @@ namespace Kendo.Mvc.UI
         /// <param name="writer">The writer object to serialize to.</param>
         public void SerializeTo(IClientSideObjectWriter writer)
         {
-            writer.AppendClientEvent("load", OnLoad);
             writer.AppendClientEvent("select", OnSelect);
             writer.AppendClientEvent("upload", OnUpload);
             writer.AppendClientEvent("success", OnSuccess);

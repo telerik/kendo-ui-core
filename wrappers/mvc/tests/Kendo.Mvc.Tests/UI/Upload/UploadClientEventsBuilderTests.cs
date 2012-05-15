@@ -24,45 +24,6 @@ namespace Kendo.Mvc.UI.Tests.Upload
         }
 
         [Fact]
-        public void OnLoad_with_Action_should_set_CodeBlock()
-        {
-            builder.OnLoad(emptyAction);
-            clientEvents.OnLoad.CodeBlock.ShouldNotBeNull();
-        }
-
-        [Fact]
-        public void OnLoad_with_Action_should_return_builder()
-        {
-            builder.OnLoad(emptyAction).ShouldBeType<UploadClientEventsBuilder>();
-        }
-
-        [Fact]
-        public void OnLoad_with_Func_should_set_InlineCodeBlock()
-        {
-            builder.OnLoad(nullFunc);
-            clientEvents.OnLoad.InlineCodeBlock.ShouldNotBeNull();
-        }
-
-        [Fact]
-        public void OnLoad_with_Func_should_return_builder()
-        {
-            builder.OnLoad(nullFunc).ShouldBeType<UploadClientEventsBuilder>();
-        }
-
-        [Fact]
-        public void OnLoad_with_string_should_set_HandlerName()
-        {
-            builder.OnLoad(handlerName);
-            clientEvents.OnLoad.HandlerName.ShouldEqual(handlerName);
-        }
-
-        [Fact]
-        public void OnLoad_with_string_should_return_builder()
-        {
-            builder.OnLoad(handlerName).ShouldBeType<UploadClientEventsBuilder>();
-        }
-
-        [Fact]
         public void OnSelect_with_Action_should_set_CodeBlock()
         {
             builder.OnSelect(emptyAction);
