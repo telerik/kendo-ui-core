@@ -393,7 +393,7 @@ function buildBundle(bundle, version, success, licenseBuilt) {
 
             // allow customization before packaging
             if (licenseBuilt) {
-                licenseBuilt(root, bundle);
+                licenseBuilt(root, bundle, license);
             }
 
             zip(packageName, root, function() {
