@@ -598,6 +598,16 @@
                 equal(dropdown.popup.element.parent().width(), dropdown.wrapper.width());
             });
 
+            test("DropDownList does not set width if list has style.width", function() {
+                var dropdown = input.kendoDropDownList().data("kendoDropDownList");
+
+                dropdown.list.width(400);
+
+                dropdown.open();
+
+                equal(dropdown.list.width(), 400);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
