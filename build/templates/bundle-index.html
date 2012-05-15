@@ -6,15 +6,15 @@
 </head>
 <body>
     <div id="page">
-        <h2>KendoUI</h2>
+        <h1>Kendo UI Examples</h1>
         <ul>
         # for (var i = 0; i < data.suites.length; i++) { #
-        # var suiteName = data.suites[i]; #
-        # var suiteTitle = suiteName[0].toUpperCase() + suiteName.substring(1); #
-                <li>
-                    <h2>#= suiteTitle #</h2>
-                    <a href='#= suiteName #/index.html'>Examples</a>
-                </li>
+            # var suiteName = data.suites[i]; #
+            # var suiteTitle = suiteName[0].toUpperCase() + suiteName.substring(1); #
+            <li class="box">
+                <a href="#= suiteName #/index.html" class="imgPlate"><img src="content/shared/styles/demos-#= suiteName #.png" /></a>
+                <h2><a href="#= suiteName #/index.html">#= suiteTitle # examples</a></h2>
+            </li>
         # } #
         </ul>
     </div>
