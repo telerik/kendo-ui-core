@@ -741,6 +741,8 @@ p#copy
 .panelBarIcon{background-position:-100px -60px;}
 .mobileScrollerIcon{background-position:-120px -60px;}
 .mobileScrollViewIcon{background-position:-140px -60px;}
+.mobileSwitchIcon{background-position:-120px -80px;}
+.mobileActionSheetIcon{background-position:-60px -100px;}
 .sliderIcon{background-position:0 -80px;}
 .splitterIcon{background-position:-20px -80px;}
 .mobileTabStripIcon{background-position:-40px -80px;}
