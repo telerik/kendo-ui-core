@@ -69,33 +69,6 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Sets the action, controller, route values and field name for the save operation
-        /// </summary>
-        /// <param name="actionName">Name of the action.</param>
-        /// <param name="controllerName">Name of the controller.</param>
-        /// <param name="fieldName">
-        ///     The form field name to use for submiting the files.
-        ///     The Upload name is used if not set.
-        /// </param>
-        /// <param name="routeValues">The route values.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Upload()
-        ///             .Name("Upload")
-        ///             .Async(async => async
-        ///                 .Save("Save", "Home", "attachment", new RouteValueDictionary{ {"id", 1} });
-        ///             )
-        /// %&gt;
-        /// </code>
-        /// </example>
-        [Obsolete("Obsolete. Use SaveField instead.")]
-        public UploadAsyncSettingsBuilder Save(string actionName, string controllerName, string fieldName, RouteValueDictionary routeValues)
-        {
-            settings.SaveField = fieldName;
-            return Save(actionName, controllerName, routeValues);
-        }
-
-        /// <summary>
         /// Sets the action, controller and route values for the save operation
         /// </summary>
         /// <param name="actionName">Name of the action.</param>
@@ -119,33 +92,6 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Sets the action, controller and route values for the save operation
-        /// </summary>
-        /// <param name="actionName">Name of the action.</param>
-        /// <param name="controllerName">Name of the controller.</param>
-        /// <param name="fieldName">
-        ///     The form field name to use for submiting the files.
-        ///     The Upload name is used if not set.
-        /// </param>
-        /// <param name="routeValues">The route values.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Upload()
-        ///             .Name("Upload")
-        ///             .Async(async => async
-        ///                 .Save("Save", "Home", "attachments", new { id = 1 });
-        ///             )
-        /// %&gt;
-        /// </code>
-        /// </example>
-        [Obsolete("Obsolete. Use SaveField instead.")]
-        public UploadAsyncSettingsBuilder Save(string actionName, string controllerName, string fieldName, object routeValues)
-        {
-            settings.SaveField = fieldName;
-            return Save(actionName, controllerName, routeValues);
-        }
-
-        /// <summary>
         /// Sets the action and controller for the save operation
         /// </summary>
         /// <param name="actionName">Name of the action.</param>
@@ -163,32 +109,6 @@ namespace Kendo.Mvc.UI.Fluent
         public UploadAsyncSettingsBuilder Save(string actionName, string controllerName)
         {
             return Save(actionName, controllerName, (object) null);
-        }
-
-        /// <summary>
-        /// Sets the action and controller for the save operation
-        /// </summary>
-        /// <param name="actionName">Name of the action.</param>
-        /// <param name="controllerName">Name of the controller.</param>
-        /// <param name="fieldName">
-        ///     The form field name to use for submiting the files.
-        ///     The Upload name is used if not set.
-        /// </param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Upload()
-        ///             .Name("Upload")
-        ///             .Async(async => async
-        ///                 .Save("Save", "Home", "attachments");
-        ///             )
-        /// %&gt;
-        /// </code>
-        /// </example>
-        [Obsolete("Obsolete. Use SaveField instead.")]
-        public UploadAsyncSettingsBuilder Save(string actionName, string controllerName, string fieldName)
-        {
-            settings.SaveField = fieldName;
-            return Save(actionName, controllerName, (object)null);
         }
 
         /// <summary>
