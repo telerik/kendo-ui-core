@@ -270,7 +270,30 @@ namespace("mvc", function() {
     task("bundle", [], function() {
         kendoBuild.msBuild(
             MVC_WRAPPERS_PROJECT,
-            [ "/t:Clean;Build", "/p:Configuration=Release" ]
+            [ "/t:Clean;Build", "/p:Configuration=Release" ],
+            function() {
+                var binariesPath = path.join(MVC_WRAPPERS_PATH, "src", "Kendo.Mvc", "bin", "Release");
+
+                bundles.buildBundle(bundles.mvcWrappersBundle, version(), null, function(root, bundle) {
+                    var binariesDeployRoot = path.join(root, "Bin"),
+                        stylesDeployRoot = path.join(root, "Content"),
+                        scriptsDeployRoot = path.join(root, "Scripts");
+
+                    // move resources
+                    kendoBuild.rmdirSyncRecursive(scriptsDeployRoot);
+                    fs.renameSync(path.join(root, "js"), scriptsDeployRoot);
+                    kendoBuild.rmdirSyncRecursive(stylesDeployRoot);
+                    fs.renameSync(path.join(root, "styles"), stylesDeployRoot);
+
+                    // copy binaries
+                    kendoBuild.mkdir(binariesDeployRoot);
+
+                    kendoBuild.copyFileSync(
+                        path.join(binariesPath, "Kendo.Mvc.dll"),
+                        path.join(binariesDeployRoot, "Kendo.Mvc.dll")
+                    );
+                });
+            }
         );
     });
 

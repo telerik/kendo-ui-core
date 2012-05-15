@@ -1,6 +1,6 @@
 // Imports ====================================================================
 var fs = require("fs"),
-    sys = require("sys"),
+    util = require("util"),
     path = require("path"),
     themes = require("./themes"),
     kendoBuild = require("./kendo-build"),
@@ -49,6 +49,17 @@ var winjsBundle = {
     sourceLicense: "src-license-none.txt",
     licenses: [commercialLicense],
     skipExamples: true,
+    eula: "eula"
+};
+
+var mvcWrappersBundle = {
+    name: "kendoui.aspnetmvc",
+    suites: ["web", "dataviz"],
+    combinedScript: "all",
+    sourceLicense: "src-license-none.txt",
+    licenses: productionLicenses,
+    skipExamples: true,
+    skipPackage: true,
     eula: "eula"
 };
 
@@ -344,7 +355,7 @@ function deployChangelog(root, bundle, version) {
     }));
 }
 
-function buildBundle(bundle, version, success) {
+function buildBundle(bundle, version, success, licenseBuilt) {
     fetchChangelog(function() {
         var name = bundle.name,
             zips = 0,
@@ -380,6 +391,11 @@ function buildBundle(bundle, version, success) {
             console.log("Deploying changelog");
             deployChangelog(root, bundle, version);
 
+            // allow customization before packaging
+            if (licenseBuilt) {
+                licenseBuilt(root, bundle);
+            }
+
             zip(packageName, root, function() {
                 kendoBuild.copyFileSync(packageName, packageNameLatest);
 
@@ -410,4 +426,5 @@ exports.buildBundle = buildBundle;
 exports.buildAllBundles = buildAllBundles;
 exports.cdnBundle = cdnBundle;
 exports.winjsBundle = winjsBundle;
+exports.mvcWrappersBundle = mvcWrappersBundle;
 exports.clean = clean;

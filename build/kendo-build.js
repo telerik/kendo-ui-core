@@ -1,5 +1,5 @@
 var fs = require("fs"),
-    sys = require("sys"),
+    util = require("util"),
     os = require("os"),
     path = require("path"),
     parser = require("./lib/parse-js"),
@@ -247,8 +247,8 @@ function spawnSilent(name, params, options, onSuccess, onError) {
                 onSuccess();
             }
         } else {
-            sys.print(name + " ", params.join(" "));
-            sys.print(output);
+            util.print(name + " ", params.join(" "));
+            util.print(output);
             if (onError) {
                 onError();
             }
