@@ -19,15 +19,19 @@ namespace Kendo.Mvc.UI
             var result = base.Serialize();
 
             FluentDictionary.For(result)
-                .Add("type", series.Orientation == ChartSeriesOrientation.Horizontal ? "bar" : "column") 
+                .Add("type", series.Orientation == ChartSeriesOrientation.Horizontal ? "bar" : "column")
                 .Add("stack", series.Stacked, false)
                 .Add("gap", series.Gap, () => series.Gap.HasValue)
                 .Add("spacing", series.Spacing, () => series.Spacing.HasValue)
                 .Add("field", series.Member, () => { return series.Data == null && series.Member != null; })
                 .Add("data", series.Data, () => { return series.Data != null; })
                 .Add("border", series.Border.CreateSerializer().Serialize(), ShouldSerializeBorder)
-                .Add("color", series.Color, () => series.Color.HasValue())
-                .Add("overlay", series.Overlay, () => series.Overlay != null );
+                .Add("color", series.Color, () => series.Color.HasValue());
+
+            if (series.Overlay != null)
+            {
+                result.Add("overlay", series.Overlay.CreateSerializer().Serialize());
+            }
 
             var labelsData = series.Labels.CreateSerializer().Serialize();
             if (labelsData.Count > 0)

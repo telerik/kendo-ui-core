@@ -113,13 +113,12 @@ namespace Kendo.Mvc.UI.Tests
         public void Bar_serializes_overlay()
         {
             series.Overlay = ChartBarSeriesOverlay.None;
-            GetJson(series).ContainsKey("overlay").ShouldBeTrue();
+            ((Dictionary<string, object>)GetJson(series)["overlay"])["gradient"].ShouldEqual("none");
         }
 
         [Fact]
         public void Bar_should_not_serialize_default_overlay()
         {
-            series.Overlay = null;
             GetJson(series).ContainsKey("overlay").ShouldBeFalse();
         }
     }
