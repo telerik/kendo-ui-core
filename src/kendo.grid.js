@@ -1008,6 +1008,8 @@
 
                 if (that._editMode() !== "popup") {
                     that._displayRow(container);
+                } else {
+                    that._displayRow(that.items().filter("[" + kendo.attr("uid") + "=" + model.uid + "]"));
                 }
 
                 that._destroyEditable();
