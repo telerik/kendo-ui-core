@@ -8,8 +8,6 @@ namespace Kendo.Mvc.UI
     /// </summary>
     public class TabStripItemBuilder : ContentNavigationItemBuilder<TabStripItem, TabStripItemBuilder>, IHideObjectMembers
     {
-        private readonly TabStripItem item;
-        private readonly ViewContext viewContext;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TabStripItemBuilder"/> class.
@@ -19,11 +17,6 @@ namespace Kendo.Mvc.UI
         public TabStripItemBuilder(TabStripItem item, ViewContext viewContext)
             : base(item, viewContext)
         {
-            Guard.IsNotNull(item, "item");
-            Guard.IsNotNull(viewContext, "viewContext");
-
-            this.item = item;
-            this.viewContext = viewContext;
         }
     }
 }

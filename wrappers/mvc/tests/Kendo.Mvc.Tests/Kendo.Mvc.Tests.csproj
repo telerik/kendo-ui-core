@@ -153,6 +153,7 @@
     <Compile Include="UI\Gauge\Serialization\LinearGaugePointerSerializerTests.cs" />
     <Compile Include="UI\Gauge\LinearGaugeTrackTests.cs" />
     <Compile Include="UI\Gauge\LinearGaugePointerBuilderTests.cs" />
+    <Compile Include="UI\NavigationBindingTestDouble.cs" />
     <Compile Include="UI\XYData.cs" />
     <Compile Include="UI\Grid\GridForeignKeyColumnTests.cs" />
     <Compile Include="UI\Grid\Html\GridForeignKeyDataCellBuilderTests.cs" />
@@ -371,7 +372,6 @@
     <Compile Include="UI\Menu\MenuSerializationTests.cs" />
     <Compile Include="UI\NavigationBindingBuilderTests.cs" />
     <Compile Include="UI\NavigationBindingFactoryTests.cs" />
-    <Compile Include="UI\NavigationBindingTests.cs" />
     <Compile Include="UI\NavigationItemBuilderTests.cs" />
     <Compile Include="UI\NavigationItemImageRendererTests.cs" />
     <Compile Include="UI\NavigationItemTests.cs" />

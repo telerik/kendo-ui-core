@@ -1,11 +1,9 @@
 namespace Kendo.Mvc.UI.Tests
 {
-    using Moq;
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
-    using Kendo.Mvc.Infrastructure;
+    using Moq;
     using Xunit;
 
     public class ViewComponentModelFactoryTests
@@ -15,12 +13,6 @@ namespace Kendo.Mvc.UI.Tests
 
         public ViewComponentModelFactoryTests()
         {
-            ViewContext viewContext = new ViewContext
-                                          {
-                                              HttpContext = TestHelper.CreateMockedHttpContext().Object,
-                                              ViewData = new ViewDataDictionary()
-                                          };
-
             htmlHelper = TestHelper.CreateHtmlHelper<TestModel>();
 
             htmlHelper.ViewData.Model = new TestModel { ID = 1, DoubleProperty = 1.0, DecimalProperty = 1.0m, DateTimeProperty = DateTime.Today, TimeProperty = DateTime.Now.TimeOfDay, ComplexModel = new TestModel() };
@@ -172,7 +164,7 @@ namespace Kendo.Mvc.UI.Tests
         {
             var builder = factory.TimePickerFor(m => m.TimeProperty);
 
-            Assert.Equal(new DateTime((htmlHelper.ViewData.Model as TestModel).TimeProperty.Ticks), builder.ToComponent().Value.Value);
+            Assert.Equal(new DateTime((htmlHelper.ViewData.Model).TimeProperty.Ticks), builder.ToComponent().Value.Value);
         }
 
         [Fact]
@@ -210,7 +202,7 @@ namespace Kendo.Mvc.UI.Tests
         {
             var builder = factory.TimePickerFor(m => m.DateTimeProperty);
 
-            Assert.Equal((htmlHelper.ViewData.Model as TestModel).DateTimeProperty, builder.ToComponent().Value.Value);
+            Assert.Equal((htmlHelper.ViewData.Model).DateTimeProperty, builder.ToComponent().Value.Value);
         }
 
         [Fact]

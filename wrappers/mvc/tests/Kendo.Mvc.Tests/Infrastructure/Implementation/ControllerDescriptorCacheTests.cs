@@ -1,14 +1,10 @@
 namespace Kendo.Mvc.Infrastructure.Implementation.Tests
 {
+    using System;
     using System.Collections.Generic;
     using System.Reflection;
-    using System.Web.Routing;
-
-    using Moq;
-    using Xunit;
-
-    using System;
     using System.Web.Mvc;
+    using Xunit;
 
     public class ControllerDescriptorCacheTests
     {

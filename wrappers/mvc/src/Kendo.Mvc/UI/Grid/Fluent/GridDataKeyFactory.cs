@@ -75,15 +75,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         }
 
-        private IGridDataKey<TModel> GetDynamicDataKeyForField(string fieldName)
-        {
-            var lambdaExpression = ExpressionBuilder.Lambda<TModel>(fieldName);
-            var columnType = typeof(GridDataKey<,>).MakeGenericType(new[] { typeof(TModel), lambdaExpression.Body.Type });
-            var constructor = columnType.GetConstructor(new[] { lambdaExpression.GetType() });
-
-            return (IGridDataKey<TModel>)constructor.Invoke(new object[] { lambdaExpression });
-        }
-
         private IGridDataKey<TModel> GetDataKeyForField(string fieldName)
         {
             var lambdaExpression = ExpressionBuilder.Lambda<TModel>(fieldName);

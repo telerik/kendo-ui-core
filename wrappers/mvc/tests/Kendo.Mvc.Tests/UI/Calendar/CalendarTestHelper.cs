@@ -7,7 +7,6 @@ namespace Kendo.Mvc.UI.Tests
 
 
     using Moq;
-    using UI;
 
     public static class CalendarTestHelper
     {
