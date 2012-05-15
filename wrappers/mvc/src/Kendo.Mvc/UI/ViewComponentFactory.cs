@@ -351,51 +351,6 @@ namespace Kendo.Mvc.UI
             return new NumericTextBoxBuilder<T>(new NumericTextBox<T>(ViewContext, ViewData, ClientSideObjectWriterFactory));
         }
 
-        ///// <summary>
-        ///// Creates a new <see cref="CurrencyTextBox"/>.
-        ///// </summary>
-        ///// <example>
-        ///// <code lang="CS">
-        /////  &lt;%= Html.Telerik().CurrencyTextBox()
-        /////             .Name("CurrencyTextBox")
-        ///// %&gt;
-        ///// </code>
-        ///// </example>
-        //public virtual CurrencyTextBoxBuilder CurrencyTextBox()
-        //{
-        //    return CurrencyTextBoxBuilder.Create(Register(() => new CurrencyTextBox(ViewContext, ClientSideObjectWriterFactory, new TextBoxBaseHtmlBuilderFactory<decimal>())));
-        //}
-
-        ///// <summary>
-        ///// Creates a new <see cref="PercentTextBox"/>.
-        ///// </summary>
-        ///// <example>
-        ///// <code lang="CS">
-        /////  &lt;%= Html.Telerik().PercentTextBox()
-        /////             .Name("PercentTextBox")
-        ///// %&gt;
-        ///// </code>
-        ///// </example>
-        //public virtual PercentTextBoxBuilder PercentTextBox()
-        //{
-        //    return PercentTextBoxBuilder.Create(Register(() => new PercentTextBox(ViewContext, ClientSideObjectWriterFactory, new TextBoxBaseHtmlBuilderFactory<double>())));
-        //}
-
-        ///// <summary>
-        ///// Creates a new <see cref="IntegerTextBox"/>.
-        ///// </summary>
-        ///// <example>
-        ///// <code lang="CS">
-        /////  &lt;%= Html.Telerik().IntegerTextBox()
-        /////             .Name("IntegerTextBox")
-        ///// %&gt;
-        ///// </code>
-        ///// </example>
-        //public virtual IntegerTextBoxBuilder IntegerTextBox()
-        //{
-        //    return IntegerTextBoxBuilder.Create(Register(() => new IntegerTextBox(ViewContext, ClientSideObjectWriterFactory, new TextBoxBaseHtmlBuilderFactory<int>())));
-        //}
-
         /// <summary>
         /// Creates a new <see cref="Window"/>.
         /// </summary>
