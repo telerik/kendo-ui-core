@@ -626,7 +626,6 @@
             }
 
             that._initialHeight = {};
-            that._lastOrientation = -1;
 
             if (HIDEBAR) {
                 WINDOW.bind("load " + ORIENTATIONEVENT, hideBar);
@@ -640,10 +639,7 @@
                 element = that.element,
                 orientation = window.orientation + "",
                 initialHeight = that._initialHeight,
-                lastOrientation = that._lastOrientation,
                 newHeight;
-
-            that._lastOrientation = orientation;
 
             if (!initialHeight[orientation]) {
                 initialHeight[orientation] = WINDOW.height();
