@@ -817,6 +817,10 @@
         },
 
         _supportsFormData: function() {
+            if ($.browser.safari) {
+                return false;
+            }
+
             return typeof(FormData) != "undefined";
         },
 
