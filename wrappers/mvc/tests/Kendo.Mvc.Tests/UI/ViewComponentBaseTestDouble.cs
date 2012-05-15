@@ -18,11 +18,6 @@ namespace Kendo.Mvc.UI.Tests
             base.WriteInitializationScript(writer);
         }
 
-        public void CleanupScript(TextWriter writer)
-        {
-            base.WriteCleanupScript(writer);
-        }
-
         public void CheckRequired()
         {
             base.VerifySettings();

@@ -26,11 +26,5 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <param name="writer">The writer.</param>
         void WriteInitializationScript(TextWriter writer);
-
-        /// <summary>
-        /// Writes the cleanup script.
-        /// </summary>
-        /// <param name="writer">The writer.</param>
-        void WriteCleanupScript(TextWriter writer);
     }
 }

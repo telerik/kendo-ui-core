@@ -64,22 +64,6 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
-        public void WriteInitializationScript_should_do_nothing()
-        {
-            ViewComponentBaseTestDouble component = new ViewComponentBaseTestDouble(_viewContext, _clientSideObjectWriterFactory.Object);
-
-            component.InitializationScript(new Mock<TextWriter>().Object);
-        }
-
-        [Fact]
-        public void WriteCleanupScript_should_do_nothing()
-        {
-            ViewComponentBaseTestDouble component = new ViewComponentBaseTestDouble(_viewContext, _clientSideObjectWriterFactory.Object);
-
-            component.CleanupScript(new Mock<TextWriter>().Object);
-        }
-
-        [Fact]
         public void Render_should_ensure_required()
         {
             ViewComponentBaseTestDouble component = new ViewComponentBaseTestDouble(_viewContext, _clientSideObjectWriterFactory.Object) { Name = "dummyComponent" };
