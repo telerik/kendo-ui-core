@@ -148,7 +148,7 @@
 
         events: [
             /**
-             * Fires when tab is selected.
+             * Fires when a page is scrolled to.
              * @name kendo.mobile.ui.ScrollView#select
              * @event
              * @param {Event} e
