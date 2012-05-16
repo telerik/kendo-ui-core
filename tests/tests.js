@@ -66,43 +66,47 @@ client.subscribe('/done', function(message) {
     failures += message.failures;
     total += message.total;
 
-    launchNextBrowser();
+    browserProcess.kill();
 });
 
-var browsers = [], browserProcess;
+var browsers, browserProcess;
 
 switch(os.type()) {
     case "Darwin":
-        browsers.push("/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome");
-        browsers.push("/Applications/Firefox\ ESR.app/Contents/MacOS/firefox");
+        browsers = [
+            "/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome",
+            "/Applications/Firefox\ ESR.app/Contents/MacOS/firefox",
+            "/Applications/Firefox.app/Contents/MacOS/firefox"];
         break;
     case "Linux":
-        browsers.push("google-chrome");
-        browsers.push("firefox-esr");
-        browsers.push("firefox");
+        browsers = [
+            "google-chrome",
+            "firefox-esr",
+            "firefox"];
+
         break;
 }
 
 var testRunnerURL = 'http://localhost:' + PORT + '/tests/testrunner.html';
 
-function launchNextBrowser() {
+function launchBrowser() {
     var currentBrowser;
-    if (browserProcess) {
-        browserProcess.kill();
-    }
 
     if (browsers.length) {
         currentBrowser = browsers.pop();
         console.log("starting ", currentBrowser);
-        browserProcess = spawn(currentBrowser, ['-private', '-no-remote', testRunnerURL]);
+        setTimeout(function() {
+            browserProcess = spawn(currentBrowser, ['-private', '-no-remote', testRunnerURL]);
+            browserProcess.on('exit', launchBrowser);
+        }, 20);
     } else {
         root.att('tests', total)
-            .att('errors', 0)
-            .att('failures', failures);
+        .att('errors', 0)
+        .att('failures', failures);
 
         process.stdout.write(doc.toString({pretty: true}));
         process.exit(failures === 0 ? 0 : 1);
     }
 }
 
-launchNextBrowser();
+launchBrowser();
