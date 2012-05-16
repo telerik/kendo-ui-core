@@ -454,32 +454,46 @@
             that._wrapper();
         },
 
-        positionColumnResizeHandles: function() {
+        _positionColumnResizeHandle: function(container) {
             var that = this,
-                left = 0,
-                th,
                 scrollable = that.options.scrollable,
-                container = scrollable ? that.wrapper.find(".k-grid-header-wrap") : that.wrapper;
+                resizeHandle = that.resizeHandle,
+                left;
 
-            if (that.options.resizable) {
-                container.find("> .k-resize-handle").remove();
+            that.thead.on("mousemove", "th:not(.k-group-cell,.k-hierarchy-cell)", function(e) {
+                 var th = $(this),
+                    position = th.offset().left + this.offsetWidth;
 
-                that.thead.find("th").each(function() {
-                    left += this.offsetWidth;
+                if(e.clientX > position - indicatorWidth &&  e.clientX < position + indicatorWidth) {
+                    cursor(that.wrapper, th.css('cursor'));
 
-                    th = $(this);
-                    if (th.is(":not(.k-group-cell,.k-hierarchy-cell)")) {
-                        $('<div class="k-resize-handle" />')
-                        .css({
-                            left: left - indicatorWidth,
-                            top: scrollable ? 0 : heightAboveHeader(that.wrapper),
-                            width: indicatorWidth * 2
-                        })
-                        .appendTo(container)
-                        .data("th", th);
+                    if (!resizeHandle) {
+                        resizeHandle = that.resizeHandle = $('<div class="k-resize-handle"/>');
+                        container.append(resizeHandle);
                     }
-                });
-            }
+
+                    left = this.offsetWidth;
+
+                    th.prevAll().each(function() {
+                        left += this.offsetWidth;
+                    });
+
+                    resizeHandle.css({
+                        top: scrollable ? 0 : heightAboveHeader(that.wrapper),
+                        left: left - indicatorWidth,
+                        width: indicatorWidth * 2
+                    })
+                    .data("th", th)
+                    .show();
+
+                } else {
+                    cursor(that.wrapper, "");
+
+                    if (resizeHandle) {
+                       resizeHandle.hide();
+                    }
+                }
+            });
         },
 
         _resizable: function() {
@@ -494,7 +508,7 @@
             if (options.resizable) {
                 container = options.scrollable ? that.wrapper.find(".k-grid-header-wrap") : that.wrapper;
 
-                that.positionColumnResizeHandles();
+                that._positionColumnResizeHandle(container);
 
                 container.kendoResizable({
                     handle: ".k-resize-handle",
@@ -525,8 +539,7 @@
                     },
                     resize: function(e) {
                         var width = columnWidth + e.pageX - columnStart,
-                            footer = that.footer || $(),
-                            left = 0;
+                            footer = that.footer || $();
 
                         if (width > 10) {
                             col.css('width', width);
@@ -538,11 +551,6 @@
                                     .add(footer.find("table"))
                                     .css('width', that._footerWidth);
                             }
-
-                            $('.k-resize-handle', that.wrapper).each(function () {
-                                left += $(this).data('th').outerWidth();
-                                $(this).css('left', left - indicatorWidth);
-                            });
                         }
                     },
                     resizeend: function(e) {
@@ -563,12 +571,7 @@
                                 newWidth: newWidth
                             });
                         }
-
-                        that.positionColumnResizeHandles();
-
-                        if (that._hasDetails()) {
-                            that.tbody.find(">tr.k-detail-row [" + kendo.attr("role") + "=grid]").kendoGrid("positionColumnResizeHandles");
-                        }
+                        that.resizeHandle.hide();
                     }
                 });
             }
@@ -645,14 +648,6 @@
             rows = that.tbody.children(":not(.k-grouping-row,.k-detail-row)");
             for (idx = 0, length = rows.length; idx < length; idx += 1) {
                 reorder(rows.eq(idx).find(">td:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex);
-            }
-
-            if (that.options.resizable) {
-                that.positionColumnResizeHandles();
-
-                if (that._hasDetails()) {
-                    that.tbody.find(">tr.k-detail-row [" + kendo.attr("role") + "=grid]").kendoGrid("positionColumnResizeHandles");
-                }
             }
         },
 
@@ -2497,10 +2492,6 @@
 
             if (currentIndex >= 0) {
                 that.current(that.items().eq(currentIndex).children().filter(DATA_CELL).first());
-            }
-
-            if (that.options.resizable) {
-                that.positionColumnResizeHandles();
             }
 
             that.trigger(DATABOUND);
