@@ -280,7 +280,9 @@ namespace("mvc", function() {
                     var binariesDeployRoot = path.join(root, "Bin"),
                         stylesDeployRoot = path.join(root, "Content"),
                         scriptsDeployRoot = path.join(root, "Scripts"),
-                        sourceDeployRoot = path.join(root, "source");
+                        sourceDeployRoot = path.join(root, "source"),
+                        projectDeployRoot = path.join(sourceDeployRoot, "Kendo.Mvc"),
+                        examplesDeployRoot = path.join(sourceDeployRoot, "Kendo.Mvc.Examples");
 
                     // move resources
                     kendoBuild.rmdirSyncRecursive(scriptsDeployRoot);
@@ -299,13 +301,19 @@ namespace("mvc", function() {
                     if (license.source) {
                         kendoBuild.copyDirSyncRecursive(
                             projectPath,
-                            path.join(sourceDeployRoot, "Kendo.Mvc")
+                            projectDeployRoot
                         );
+
+                        kendoBuild.rmdirSyncRecursive(path.join(projectDeployRoot, "bin"));
+                        kendoBuild.rmdirSyncRecursive(path.join(projectDeployRoot, "obj"));
 
                         kendoBuild.copyDirSyncRecursive(
                             examplesPath,
-                            path.join(sourceDeployRoot, "Kendo.Mvc.Examples")
+                            examplesDeployRoot
                         );
+
+                        kendoBuild.rmdirSyncRecursive(path.join(examplesDeployRoot, "bin"));
+                        kendoBuild.rmdirSyncRecursive(path.join(examplesDeployRoot, "obj"));
                     }
                 });
             }
