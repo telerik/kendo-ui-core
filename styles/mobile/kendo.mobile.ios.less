@@ -911,11 +911,24 @@
     background: #000;
 }
 
-.km-ios .km-pane
+//.km-ios .km-splitview .km-content,
+//.km-ios .km-splitview .km-scroll-container
+//{
+//    display: -webkit-box;
+//    width: 100%;
+//}
+
+.km-ios .km-splitview > .km-pane
 {
     border-right: 1px solid #000;
     background: #fff;
     .border-radius(5px);
+}
+
+.km-ios .km-split-vertical > .km-pane
+{
+    border-right: 0;
+    border-bottom: 1px solid #000;
 }
 
 .km-ios .km-pane .km-view-title
@@ -948,7 +961,7 @@
     -webkit-border-bottom-right-radius: 5px;
 }
 
-.km-ios .km-pane:last-child
+.km-ios .km-splitview .km-pane:last-child
 {
-    border-right: 0;
+    border: 0;
 }
