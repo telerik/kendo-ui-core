@@ -15,7 +15,7 @@
     height: 100%;
     -ms-content-zooming: none;
     -webkit-user-select: none;
-    -webkit-text-size-adjust: none; // Disables zoom on Desktop too.
+    .text-size-adjust(none); // Disables zoom on Desktop too.
 }
 
 .km-vertical,
@@ -51,10 +51,10 @@
     vertical-align: top;
 }
 
-:-moz-any(.km-view,.km-vertical,.km-horizontal)
+:-moz-any(.km-pane,.km-view,.km-vertical,.km-horizontal)
 {
     overflow: hidden;
-    position: static;
+    position: relative;
 }
 
 .km-content
