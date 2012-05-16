@@ -209,13 +209,5 @@ namespace Kendo.Mvc.UI.Tests.Upload
 
             output.ShouldContain("{remove:removeHandler}");
         }
-
-        [Fact]
-        public void Localization_is_serialized()
-        {
-            localizationServiceMock.SetupGet(ls => ls.IsDefault).Returns(false);
-            upload.WriteInitializationScript(textWriter.Object);
-            output.ShouldContain("{localization:{\"remove\":\"Entfernen\"}}");
-        }
     }
 }

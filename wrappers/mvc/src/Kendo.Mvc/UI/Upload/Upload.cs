@@ -37,8 +37,6 @@ namespace Kendo.Mvc.UI
             Async = new UploadAsyncSettings(this);
 
             UrlGenerator = urlGenerator;
-
-            Localization = new UploadLocalization(localizationService, CultureInfo.CurrentCulture);
         }
 
         /// <summary>
@@ -106,15 +104,6 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
-        /// The localization strings for the component
-        /// </summary>
-        public virtual UploadLocalization Localization
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
         /// Writes the initialization script.
         /// </summary>
         /// <param name="writer">The writer object.</param>
@@ -130,7 +119,6 @@ namespace Kendo.Mvc.UI
 
             Async.SerializeTo("async", objectWriter);
             ClientEvents.SerializeTo(objectWriter);
-            Localization.SerializeTo("localization", objectWriter);
 
             objectWriter.Complete();
 
