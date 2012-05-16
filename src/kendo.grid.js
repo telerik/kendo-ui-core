@@ -350,6 +350,8 @@
 
             that._groupable();
 
+            that._setContentHeight();
+
             that._templates();
 
             that._navigatable();
@@ -1771,7 +1773,7 @@
                     that.footer.find("table").css('width', that._footerWidth);
                 }
 
-                that._setContentHeight();
+                //that._setContentHeight(); ***
             }
         },
 
@@ -2224,7 +2226,7 @@
 
             that._updateCols();
 
-            that._setContentHeight();
+            //that._setContentHeight(); ***
 
             that._resizable();
 
@@ -2490,6 +2492,8 @@
             }
 
             that._footer();
+
+            that._setContentHeight();
 
             if (currentIndex >= 0) {
                 that.current(that.items().eq(currentIndex).children().filter(DATA_CELL).first());
