@@ -162,6 +162,7 @@
         DEFAULT = "k-state-default",
         DISABLED = "k-state-disabled",
         SELECTED = "k-state-selected",
+        TABINDEX = "tabIndex",
         HOVEREVENTS = "mouseenter mouseleave",
         trimRegExp = /^\s/,
         proxy = $.proxy;
@@ -912,7 +913,7 @@
             var that = this,
                 element = that.element,
                 DOMelement = element[0],
-                TABINDEX = "tabIndex",
+                tabIndex = element.attr(TABINDEX),
                 wrapper;
 
             wrapper = element.parent();
@@ -921,10 +922,7 @@
                 wrapper = element.wrap("<span />").parent();
             }
 
-            if (!wrapper.attr(TABINDEX)) {
-                wrapper.attr(TABINDEX, 0);
-            }
-
+            wrapper.attr(TABINDEX, tabIndex || 0);
             wrapper[0].style.cssText = DOMelement.style.cssText;
             element.hide();
 

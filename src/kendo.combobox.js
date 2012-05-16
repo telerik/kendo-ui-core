@@ -1020,6 +1020,7 @@
         _input: function() {
             var that = this,
                 element = that.element[0],
+                tabIndex = element.tabIndex,
                 wrapper = that.wrapper,
                 SELECTOR = ".k-input",
                 input;
@@ -1033,6 +1034,7 @@
                 input = wrapper.find(SELECTOR);
             }
 
+            input[0].tabIndex = tabIndex;
             input[0].style.cssText = element.style.cssText;
             input.addClass(element.className)
                  .val(element.value)
