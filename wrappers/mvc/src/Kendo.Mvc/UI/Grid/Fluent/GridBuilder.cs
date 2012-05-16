@@ -39,8 +39,8 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         public GridBuilder<T> DataSource(Action<DataSourceBuilder> configurator)
-        {
-            configurator(new DataSourceBuilder(Component.DataSource));
+        {            
+            configurator(new DataSourceBuilder(Component.DataSource, this.Component.ViewContext, this.Component.UrlGenerator));
 
             return this;
         }
