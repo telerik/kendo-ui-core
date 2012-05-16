@@ -490,6 +490,14 @@
 
                 equal(combobox.ul.children().length, 2);
             });
+
+            test("persist tabIndex of the original element", function() {
+                var combobox = new ComboBox($("<input tabindex='5'/>"));
+
+                var input = combobox.input;
+
+                equal(input.attr("tabIndex"), 5);
+            });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

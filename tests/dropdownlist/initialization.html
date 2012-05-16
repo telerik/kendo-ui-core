@@ -84,6 +84,15 @@
                 equal(wrapper.attr("tabIndex"), 0);
             });
 
+            test("persist tabIndex of the original element", function() {
+                input.attr("tabIndex", 5);
+                input.kendoDropDownList();
+
+                var wrapper = input.data("kendoDropDownList").wrapper;
+
+                equal(wrapper.attr("tabIndex"), 5);
+            });
+
             test("create text span", function() {
                 input.kendoDropDownList();
 
