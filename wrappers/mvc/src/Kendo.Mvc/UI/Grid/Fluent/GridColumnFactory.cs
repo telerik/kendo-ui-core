@@ -54,19 +54,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <typeparam name="TValue"></typeparam>
         /// <param name="expression"></param>
         /// <returns></returns>
-        [Obsolete("Use Bound(Expression<Func<TModel, TValue>>) instead")]
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public virtual GridBoundColumnBuilder<TModel> Add<TValue>(Expression<Func<TModel, TValue>> expression)
-        {
-            return Bound(expression);
-        }
-
-        /// <summary>
-        /// Defines a bound column.
-        /// </summary>
-        /// <typeparam name="TValue"></typeparam>
-        /// <param name="expression"></param>
-        /// <returns></returns>
         public virtual GridBoundColumnBuilder<TModel> Bound<TValue>(Expression<Func<TModel, TValue>> expression)
         {
             Guard.IsNotNull(expression, "expression");
@@ -193,18 +180,6 @@ namespace Kendo.Mvc.UI.Fluent
             AutoGenerate(true, columnAction);
         }
 
-        /// <summary>
-        /// Defines a template column.
-        /// </summary>
-        /// <param name="templateAction"></param>
-        /// <returns></returns>
-        [Obsolete("Use Template(Action<TModel>) instead")]
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public virtual GridTemplateColumnBuilder<TModel> Add(Action<TModel> templateAction)
-        {
-            return Template(templateAction);
-        }
-        
         /// <summary>
         /// Defines a template column.
         /// </summary>

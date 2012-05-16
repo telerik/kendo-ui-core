@@ -877,18 +877,6 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
         
-        [Obsolete("Use OnRowSelect instead")]
-        public GridClientEventsBuilder OnRowSelected(string onRowSelectedHandlerName)
-        {
-            return OnRowSelect(onRowSelectedHandlerName);
-        }
-
-        [Obsolete("Use OnRowSelect instead")]
-        public GridClientEventsBuilder OnRowSelected(Action onRowSelectedInlineCode)
-        {
-            return OnRowSelect(onRowSelectedInlineCode);
-        }
-
         /// <summary>
         /// Defines the inline handler of the OnError client-side event.
         /// </summary>

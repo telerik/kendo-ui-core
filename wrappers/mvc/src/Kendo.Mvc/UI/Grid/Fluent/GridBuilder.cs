@@ -601,33 +601,6 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Use it to configure Server binding.
-        /// </summary>
-        /// <param name="operationSettingsAction">Use builder to set different server binding settings.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid()
-        ///             .Name("Grid")
-        ///             .ServerBinding(serverBinding => serverBinding
-        ///                 .Action("Index", "Home", new {id = (string)ViewData["id"]})
-        ///             )
-        ///             .Pagealbe()
-        ///             .Sortable();
-        /// %&gt;
-        /// </code>
-        /// </example>
-        [Obsolete("Use DataBinding(dataBinding => dataBinding.Server().Select()) instead")]
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public GridBuilder<T> ServerBinding(Action<GridRequestSettingsBuilder> operationSettingsAction)
-        {
-            Guard.IsNotNull(operationSettingsAction, "operationSettingsAction");
-
-            operationSettingsAction(new GridRequestSettingsBuilder(Component.Server.Select));
-
-            return this;
-        }
-
-        /// <summary>
         /// Use it to configure binding option when performing data operations - paging, sorting and filtering.
         /// </summary>
         /// <param name="configurator">Use builder to set different data binding options.</param>
@@ -650,33 +623,6 @@ namespace Kendo.Mvc.UI.Fluent
             Guard.IsNotNull(configurator, "configurator");
 
             configurator(new GridDataBindingConfigurationBuilder(Component.DataBinding));
-
-            return this;
-        }
-
-        /// <summary>
-        /// Use it to configure Ajax binding.
-        /// </summary>
-        /// <param name="configurator">Use builder to set different ajax binding settings.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid()
-        ///             .Name("Grid")
-        ///             .Ajax(ajax => ajax.Action("_AjaxBinding", "Home"))
-        ///             .Pagealbe()
-        ///             .Sortable();
-        /// %&gt;
-        /// </code>
-        /// </example>
-        [Obsolete("Use DataBinding(dataBinding => dataBinding.Ajax().Select()) instead")]
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public GridBuilder<T> Ajax(Action<GridAjaxSettingsBuilder> configurator)
-        {
-            Guard.IsNotNull(configurator, "configurator");
-
-            Component.Ajax.Enabled = true;
-
-            configurator(new GridAjaxSettingsBuilder(Component.Ajax));
 
             return this;
         }
@@ -993,38 +939,6 @@ namespace Kendo.Mvc.UI.Fluent
         public GridBuilder<T> Groupable()
         {
             return Groupable(delegate { });
-        }
-
-        /// <summary>
-        /// Use it to configure web service binding.
-        /// </summary>
-        /// <param name="configurator">Use builder to set different web service binding settings.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid()
-        ///             .Name("Grid")
-        ///             .WebService(webService => webService.Url("~/Models/Orders.asmx/GetOrders"))
-        ///             .Columns(columns=>
-        ///             {
-        ///                 columns.Add(c => c.OrderID).Width(100);
-        ///                 columns.Add(c => c.OrderDate).Width(200).Format("{0:dd/MM/yyyy}");
-        ///                 columns.Add(c => c.ShipAddress);
-        ///                 columns.Add(c => c.ShipCity).Width(200);
-        ///             })
-        /// %&gt;
-        /// </code>
-        /// </example>
-        [Obsolete("Use DataBinding(dataBinding => dataBinding.WebService().Select()) instead")]
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public GridBuilder<T> WebService(Action<GridWebServiceSettingsBuilder> configurator)
-        {
-            Guard.IsNotNull(configurator, "webServiceAction");
-
-            Component.WebService.Enabled = true;
-
-            configurator(new GridWebServiceSettingsBuilder(Component.WebService));
-
-            return this;
         }
 
         /// <summary>
