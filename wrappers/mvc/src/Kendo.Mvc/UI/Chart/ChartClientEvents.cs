@@ -10,20 +10,10 @@ namespace Kendo.Mvc.UI
         /// </summary>
         public ChartClientEvents()
         {
-            OnLoad = new ClientEvent();
             OnDataBound = new ClientEvent();
             OnDataBinding = new ClientEvent();
             OnSeriesClick = new ClientEvent();
             OnError = new ClientEvent();
-        }
-
-        /// <summary>
-        /// Defines the Load client-side event handler
-        /// </summary>
-        public ClientEvent OnLoad
-        {
-            get;
-            private set;
         }
 
         /// <summary>
@@ -68,7 +58,6 @@ namespace Kendo.Mvc.UI
         /// <param name="writer">The writer object to serialize to.</param>
         public void SerializeTo(IClientSideObjectWriter writer)
         {
-            writer.AppendClientEvent("onLoad", OnLoad);
             writer.AppendClientEvent("onDataBound", OnDataBound);
             writer.AppendClientEvent("onDataBinding", OnDataBinding);
             writer.AppendClientEvent("onSeriesClick", OnSeriesClick);
