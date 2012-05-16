@@ -49,6 +49,7 @@ namespace Kendo.Mvc.UI
 
             if (grid.Paging.Enabled)
             {
+                //TODO: autoBind = false when server bound only
                 writer.AppendObject("pageable", new { autoBind = false });
             }
 
