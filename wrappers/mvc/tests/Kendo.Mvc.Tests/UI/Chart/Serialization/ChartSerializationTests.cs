@@ -56,15 +56,6 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
-        public void OnLoad_client_side_event_serialized()
-        {
-            chart.ClientEvents.OnLoad.HandlerName = "loadHandler";
-            chart.WriteInitializationScript(textWriter.Object);
-
-            output.ShouldContain("{onLoad:loadHandler}");
-        }
-
-        [Fact]
         public void OnDataBound_client_side_event_serialized()
         {
             chart.ClientEvents.OnDataBound.HandlerName = "dataBoundHandler";

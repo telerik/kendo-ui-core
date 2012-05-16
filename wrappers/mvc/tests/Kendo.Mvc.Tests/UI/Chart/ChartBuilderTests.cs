@@ -20,9 +20,9 @@ namespace Kendo.Mvc.UI.Tests.Chart
         [Fact]
         public void ClientEvents_should_set_events()
         {
-            Action<ChartClientEventsBuilder> clientEventsAction = eventBuilder => eventBuilder.OnLoad("load");
+            Action<ChartClientEventsBuilder> clientEventsAction = eventBuilder => eventBuilder.OnDataBinding("dataBinding");
             builder.ClientEvents(clientEventsAction);
-            chart.ClientEvents.OnLoad.HandlerName.ShouldEqual("load");
+            chart.ClientEvents.OnDataBinding.HandlerName.ShouldEqual("dataBinding");
         }
 
         [Fact]
@@ -160,36 +160,6 @@ namespace Kendo.Mvc.UI.Tests.Chart
         {
             builder.Tooltip(legend => { }).ShouldBeSameAs(builder);
         }
-
-#pragma warning disable 618
-
-        [Fact]
-        public void XAxis_legacy_methods_should_set_XAxis_properties()
-        {
-            builder.XAxis(x => x.Max(4));
-            ((IChartNumericAxis) chart.XAxes[0]).Max.ShouldEqual(4);
-        }
-
-        [Fact]
-        public void XAxis_legacy_methods_should_return_builder()
-        {
-            builder.XAxis(x => x.Max(4)).ShouldBeSameAs(builder);
-        }
-
-        [Fact]
-        public void YAxis_legacy_methods_should_set_YAxis_properties()
-        {
-            builder.YAxis(y => y.Max(4));
-            ((IChartNumericAxis) chart.YAxes[0]).Max.ShouldEqual(4);
-        }
-
-        [Fact]
-        public void YAxis_legacy_methods_should_return_builder()
-        {
-            builder.YAxis(y => y.Max(4)).ShouldBeSameAs(builder);
-        }
-
-#pragma warning restore 618
 
         [Fact]
         public void XAxis_should_set_XAxis_properties()

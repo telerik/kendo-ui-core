@@ -303,11 +303,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public ChartBuilder<T> XAxis(Action<ChartXYAxisFactory<T>> configurator)
+        public ChartBuilder<T> XAxis(Action<ChartValueAxisFactory<T>> configurator)
         {
             Guard.IsNotNull(configurator, "configurator");
 
-            var factory = new ChartXYAxisFactory<T>(Component, Component.XAxes);
+            var factory = new ChartValueAxisFactory<T>(Component, Component.XAxes);
             configurator(factory);
 
             return this;
@@ -325,11 +325,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public ChartBuilder<T> YAxis(Action<ChartXYAxisFactory<T>> configurator)
+        public ChartBuilder<T> YAxis(Action<ChartValueAxisFactory<T>> configurator)
         {
             Guard.IsNotNull(configurator, "configurator");
 
-            var factory = new ChartXYAxisFactory<T>(Component, Component.YAxes);
+            var factory = new ChartValueAxisFactory<T>(Component, Component.YAxes);
             configurator(factory);
 
             return this;
