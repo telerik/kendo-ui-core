@@ -1720,7 +1720,7 @@
                 pageable = that.options.pageable;
 
             if (pageable) {
-                wrapper = that.wrapper.children("div.k-grid-pager").empty();
+                wrapper = that.wrapper.children("div.k-grid-pager");
 
                 if (!wrapper.length) {
                     wrapper = $('<div class="k-pager-wrap k-grid-pager"/>').appendTo(that.wrapper);

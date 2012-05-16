@@ -28,12 +28,19 @@
 
             that.dataSource.bind("change", that._refreshHandler);
 
-            that.list = $('<ul class="k-pager k-reset k-numeric" />').appendTo(that.element);//.html(that.selectTemplate({ text: 1 }));
+            that.list = that.element.children(".k-pager");
+
+            if (!that.list.length) {
+               that.list = $('<ul class="k-pager k-reset k-numeric" />').appendTo(that.element);//.html(that.selectTemplate({ text: 1 }));
+            }
+
             that._clickHandler = proxy(that._click, that);
 
             that.element.delegate("a", "click", that._clickHandler);
 
-            that.refresh();
+            if (options.autoBind) {
+                that.refresh();
+            }
         },
 
         destroy: function() {
@@ -51,7 +58,8 @@
             name: "Pager",
             selectTemplate: '<li><span class="k-state-active">#=text#</span></li>',
             linkTemplate: '<li><a href="\\#" class="k-link" data-#=ns#page="#=idx#">#=text#</a></li>',
-            buttonCount: 10
+            buttonCount: 10,
+            autoBind: true
         },
 
         refresh: function() {
