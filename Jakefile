@@ -325,6 +325,13 @@ namespace("mvc", function() {
 
                     kendoBuild.writeText(projectFileName, csproj);
 
+                    // copy legacy themes
+                    kendoBuild.copyDirSyncRecursive(
+                        path.join(MVC_WRAPPERS_PATH, "legacy-themes"),
+                        path.join(root, "LegacyThemes")
+                    );
+
+                    // copy source code
                     if (license.source) {
                         fs.renameSync(path.join(root, "source"), sourceDeployRoot);
 
