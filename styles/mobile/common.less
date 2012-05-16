@@ -1208,3 +1208,58 @@
 .km-pane {
     position: relative;
 }
+
+/* PopOver */
+
+.km-popup-wrapper {
+    position: relative;
+}
+
+.km-popup-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.km-popup-arrow {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: black;
+    top: 0;
+    left: 0;
+}
+
+.km-down .km-popup {
+    -webkit-transform: translateY(10px);
+}
+
+.km-up .km-popup {
+    -webkit-transform: translateY(-10px);
+}
+
+.km-left .km-popup {
+    -webkit-transform: translateX(-10px);
+}
+
+.km-right .km-popup {
+    -webkit-transform: translateX(10px);
+}
+
+.km-up .km-popup-arrow {
+    top: auto;
+    bottom: 0;
+}
+
+.km-left .km-popup-arrow {
+    left: auto;
+    right: 0;
+}
+
+.km-popup {
+    width: 100%;
+    height: 100%;
+    border: 5px solid black;
+    box-sizing: border-box;
+}
+
