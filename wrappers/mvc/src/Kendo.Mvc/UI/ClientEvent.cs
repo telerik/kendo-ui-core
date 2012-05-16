@@ -31,23 +31,45 @@ namespace Kendo.Mvc.UI
 
         public void Serialize(System.Collections.Generic.IDictionary<string, object> json)
         {
-            if (this.CodeBlock != null) //does not work
-            {
-                //some how we should deffer the execution of the Action
-                json[Name] = "";
-                this.CodeBlock();
-            }
-            else if (this.InlineCodeBlock != null)
+            //if (this.CodeBlock != null) //does not work
+            //{
+            //    //some how we should deffer the execution of the Action
+            //    json[Name] = "";
+            //    this.CodeBlock();
+            //}
+            //else 
+            
+            object eventsValue;
+            json.TryGetValue("events", out eventsValue);
+
+            var events = eventsValue as string;
+            var clientEvent = string.Empty;
+
+            if (this.InlineCodeBlock != null)
             {
                 var result = this.InlineCodeBlock(this);
                 if (result != null)
                 {
-                    json[Name] = result;
+                    clientEvent = string.Format("{0}:{1}", Name, result);
                 }
             }
             else if (!string.IsNullOrEmpty(this.HandlerName)) //does not work
             {
-                json[Name] = this.HandlerName;
+                clientEvent = string.Format("{0}:{1}", Name, this.HandlerName);
+            }
+
+            if (!string.IsNullOrEmpty(clientEvent))
+            {
+                if (!string.IsNullOrEmpty(events))
+                {
+                    events = events + "," + clientEvent;
+                }
+                else
+                {
+                    events = clientEvent;
+                }
+
+                json["events"] = events;
             }
         }
     }

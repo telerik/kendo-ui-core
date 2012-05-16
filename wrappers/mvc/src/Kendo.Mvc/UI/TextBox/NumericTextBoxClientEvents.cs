@@ -1,7 +1,5 @@
 namespace Kendo.Mvc.UI
 {
-    using System;
-
     public class NumericTextBoxClientEvents
     {
 

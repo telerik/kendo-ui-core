@@ -180,7 +180,11 @@ namespace Kendo.Mvc.Extensions
                     
                     if (d.Value != null)
                     {
-                        if (d.Value is string)
+                        if (d.Key == "events")
+                        {
+                            return d.Value as string;
+                        } 
+                        else if (d.Value is string)
                         {
                             return "{0}:\"{1}\"".FormatWith(d.Key.ToString(), d.Value);
                         }
