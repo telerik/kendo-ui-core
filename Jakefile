@@ -290,8 +290,8 @@ namespace("mvc", function() {
 
         deployFiles(suiteFiles);
 
-        kendoScripts.buildSuiteScripts(suite, scriptsDest, "", true);
-        kendoBuild.deployStyles(suiteStyles, suiteStylesDest, "", true);
+        kendoScripts.buildSuiteScripts(suite, scriptsDest, "", false);
+        kendoBuild.deployStyles(suiteStyles, suiteStylesDest, "", false);
     }
 
     function deployFiles(filesToDeploy) {
