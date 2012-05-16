@@ -9,7 +9,6 @@ namespace Kendo.Mvc.UI
             OnDataBinding = new ClientEvent();
             OnDataBound = new ClientEvent();
             OnRowDataBound = new ClientEvent();
-            OnLoad = new ClientEvent();
             OnRowSelect = new ClientEvent();
             OnEdit = new ClientEvent();
             OnSave = new ClientEvent();
@@ -102,12 +101,6 @@ namespace Kendo.Mvc.UI
             private set; 
         }
 
-        public ClientEvent OnLoad 
-        { 
-            get; 
-            private set; 
-        }
-
         public ClientEvent OnRowSelect 
         { 
             get; 
@@ -147,7 +140,6 @@ namespace Kendo.Mvc.UI
             writer.AppendClientEvent("onDataBound", OnDataBound);
             writer.AppendClientEvent("onEdit", OnEdit);
             writer.AppendClientEvent("onError", OnError);
-            writer.AppendClientEvent("onLoad", OnLoad);
             writer.AppendClientEvent("onRowDataBound", OnRowDataBound);
             writer.AppendClientEvent("onRowSelect", OnRowSelect);
             writer.AppendClientEvent("onSave", OnSave);
