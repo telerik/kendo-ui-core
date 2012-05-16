@@ -131,6 +131,17 @@
                 equal(input.val(), "12.35");
             });
 
+            test("value method clears value when argument is null", function() {
+                var textbox = new NumericTextBox(input, {
+                    min: 10,
+                    value: 20
+                })
+
+                textbox.value(null);
+
+                equal(textbox.value(), null);
+            });
+
             test("formatted value should be set to _text", function() {
                 var textbox = new NumericTextBox(input), value = "12.347";
 
