@@ -1420,11 +1420,18 @@
                 transport.read = typeof transport.read === STRING ? { url: transport.read } : transport.read;
 
                 if (options.type) {
-                    transport = extend(true, {}, kendo.data.transports[options.type], transport);
+                    if (kendo.data.transports[options.type] instanceof RemoteTransport) {
+                       that.transport = new kendo.data.transports[options.type](transport);
+                    } else {
+                        transport = extend(true, {}, kendo.data.transports[options.type], transport);
+                    }
+
                     options.schema = extend(true, {}, kendo.data.schemas[options.type], options.schema);
                 }
 
-                that.transport = isFunction(transport.read) ? transport: new RemoteTransport(transport);
+                if (!that.transport) {
+                    that.transport = isFunction(transport.read) ? transport: new RemoteTransport(transport);
+                }
             } else {
                 that.transport = new LocalTransport({ data: options.data });
             }
