@@ -73,23 +73,5 @@ namespace Kendo.Mvc.UI.Tests.Upload
         {
             builder.Async(async => { }).ShouldBeSameAs(builder);
         }
-
-        [Fact]
-        public void Localizable_should_set_localization()
-        {
-            var setCulture = CultureInfo.InvariantCulture;
-
-            var localizationServiceFactoryMock = new Mock<ILocalizationServiceFactory>();
-            localizationServiceFactoryMock
-                .Setup(f => f.Create(It.IsAny<string>(), It.IsAny<CultureInfo>()))
-                .Callback<string, CultureInfo>((string resourceName, CultureInfo culture) => setCulture = culture);
-
-            DI.Current.Register<ILocalizationServiceFactory>(() => localizationServiceFactoryMock.Object);
-
-            builder.Localizable("de-DE");
-            setCulture.Name.ShouldEqual("de-DE");
-
-            DI.Current.Register<ILocalizationServiceFactory>(() => new LocalizationServiceFactory());
-        }
     }
 }

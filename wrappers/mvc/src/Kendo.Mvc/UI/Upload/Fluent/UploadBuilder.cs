@@ -114,27 +114,5 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
-
-        /// <summary>
-        /// Sets the localization culture of the upload.
-        /// </summary>
-        /// <param name="culture">The culture.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Upload()
-        ///             .Name("Upload")
-        ///             .Localizable("de-DE")
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public UploadBuilder Localizable(string culture)
-        {
-            var localizationServiceFactory = DI.Current.Resolve<ILocalizationServiceFactory>();
-            var cultureInfo = new CultureInfo(culture);
-
-            Component.Localization = new UploadLocalization(localizationServiceFactory.Create("UploadLocalization", cultureInfo), cultureInfo);
-
-            return this;
-        }
     }
 }
