@@ -43,18 +43,5 @@ namespace Kendo.Mvc.UI.Fluent
             lineLabels.Position = position;
             return this;
         }
-
-        /// <summary>
-        /// This method will be removed in future versions. Use Position(ChartPointLabelsPosition) instead.
-        /// </summary>
-        /// <param name="position">The labels position.</param>
-        [Obsolete("This method will be removed in future versions. Use Position(ChartPointLabelsPosition) instead.")]
-        public ChartPointLabelsBuilder Position(ChartLineLabelsPosition position)
-        {
-            lineLabels.Position = (ChartPointLabelsPosition)
-                Enum.Parse(typeof(ChartPointLabelsPosition), position.ToString());
-
-            return this;
-        }
     }
 }
