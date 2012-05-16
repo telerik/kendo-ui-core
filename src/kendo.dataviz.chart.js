@@ -1312,16 +1312,17 @@
             return slotBox;
         },
 
-        getLabelsCount: function() {
+        labelsCount: function() {
             return this.getDivisions(this.options.majorUnit);
         },
 
-        getLabelText: function(index) {
+        createAxisLabel: function(index, labelOptions) {
             var options = this.options,
                 offset =  index * options.majorUnit,
-                date = addDuration(options.min, offset, options.baseUnit);
+                date = addDuration(options.min, offset, options.baseUnit),
+                value = (date.getMonth() + 1) + "/" + date.getDate();
 
-            return (date.getMonth() + 1) + "/" + date.getDate();
+            return new AxisLabel(value, index, null, labelOptions);
         }
     });
 

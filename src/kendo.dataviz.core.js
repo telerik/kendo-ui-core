@@ -771,6 +771,8 @@
             if (options.template) {
                 label.template = template(options.template);
                 text = label.template({ value: value, dataItem: dataItem });
+            } else if (options.format) {
+                text = autoFormat(options.format, value);
             }
 
             label.text = text;
