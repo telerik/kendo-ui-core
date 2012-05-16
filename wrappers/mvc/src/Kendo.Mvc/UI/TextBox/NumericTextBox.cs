@@ -150,8 +150,6 @@ namespace Kendo.Mvc.UI
             //Escape meta characters: http://api.jquery.com/category/selectors/
             var selector = @";&,.+*~':""!^$[]()|/".ToCharArray().Aggregate(Id, (current, chr) => current.Replace(chr.ToString(), @"\\" + chr));
 
-            json["test"] = new Dictionary<string, object>();
-
             writer.Write("jQuery(document).ready(function(){{jQuery('#{0}').kendoNumericTextBox(".FormatWith(selector));
             writer.Write(json.ToJson());
             writer.Write(");});");

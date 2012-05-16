@@ -164,16 +164,20 @@ namespace Kendo.Mvc.Extensions
         public static string ToJson(this IDictionary<string, object> instance)
         {
             Func<IDictionary<string, object>, string> serialize = null;
-            
             serialize = dict =>
             {
                 return "{" + string.Join(",", dict.Select(d =>
                 {
                     if (d.Value is IDictionary<string, object>)
                     {
-                        return d.Key + ":" + serialize(d.Value as IDictionary<string, object>);
+                        var value = d.Value as IDictionary<string, object>;
+                        if (value.Count == 0)
+                        {
+                            return null;
+                        }
+                        return d.Key + ":" + serialize(value);
                     }
-
+                    
                     if (d.Value != null)
                     {
                         if (d.Value is string)
@@ -182,17 +186,7 @@ namespace Kendo.Mvc.Extensions
                         }
                         else if (d.Value is bool)
                         {
-                            var res = "";
-                            var value = Convert.ToBoolean(d.Value);
-                            if (value == true)
-                            {
-                                res = "true";
-                            }
-                            else
-                            {
-                                res = "false";
-                            }
-                            return "{0}:{1}".FormatWith(d.Key.ToString(), res);
+                            return "{0}:{1}".FormatWith(d.Key.ToString(), Convert.ToBoolean(d.Value) == true ? "true" : "false");
                         }
                         else
                         {

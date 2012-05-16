@@ -31,9 +31,10 @@ namespace Kendo.Mvc.UI
 
         public void Serialize(System.Collections.Generic.IDictionary<string, object> json)
         {
-            if (this.CodeBlock != null)
+            if (this.CodeBlock != null) //does not work
             {
-                json[Name] = ""; //??
+                //some how we should deffer the execution of the Action
+                json[Name] = "";
                 this.CodeBlock();
             }
             else if (this.InlineCodeBlock != null)
@@ -44,10 +45,10 @@ namespace Kendo.Mvc.UI
                     json[Name] = result;
                 }
             }
-            //else if (this.HandlerName.HasValue())
-            //{
-            //    json[Name] = this.HandlerName;
-            //}
+            else if (!string.IsNullOrEmpty(this.HandlerName)) //does not work
+            {
+                json[Name] = this.HandlerName;
+            }
         }
     }
 }
