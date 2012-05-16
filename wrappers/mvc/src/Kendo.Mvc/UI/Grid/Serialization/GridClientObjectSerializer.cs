@@ -76,7 +76,10 @@ namespace Kendo.Mvc.UI
                 writer.Append("rowTemplate", grid.IsSelfInitialized ? grid.ClientRowTemplate.Replace("<", "%3c").Replace(">", "%3e") : grid.ClientRowTemplate);
             }
 
-            writer.Append("noRecordsTemplate", grid.NoRecordsTemplate);                
+            writer.Append("noRecordsTemplate", grid.NoRecordsTemplate);
+
+
+            writer.AppendObject("dataSource", grid.DataSource.ToJson());
         }
     }
 }
