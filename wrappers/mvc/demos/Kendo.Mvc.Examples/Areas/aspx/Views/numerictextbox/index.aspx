@@ -4,7 +4,50 @@
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
-<div id="example" class="k-content">
-    <%= Html.Kendo().NumericTextBox().Name("numerictextbox") %>
-</div>
+    <div id="example" class="k-content">
+        <div id="add-product">
+            <div>
+                <%= Html.Kendo().NumericTextBox<decimal>()
+                        .Name("currency")
+                        .Format("c")
+                        .Min(0)
+                        .Max(100)
+                        .Value(30)
+                 %>
+            </div>
+            <div style="margin-top: 7px;">
+                <%= Html.Kendo().NumericTextBox<double>()
+                        .Name("percentage")
+                        .Format("p0")
+                        .Min(0)
+                        .Max(0.9)
+                        .Step(0.01)
+                        .Value(0.05)
+                %>
+            </div>
+            <div style="margin-top: 7px;">
+                <%= Html.Kendo().NumericTextBox<double>()
+                        .Name("custom")
+                        .Format("#.00 kg")
+                        .Value(10)
+                %>
+            </div>
+            <div style="margin-top: 7px;">
+                <%= Html.Kendo().NumericTextBox<double>()
+                        .Name("numeric")
+                        .Placeholder("Enter numeric value")
+                %>
+            </div>
+        </div>
+
+        <style scoped="">
+            #add-product {
+                height: 181px;
+                width: 252px;
+                margin: 30px auto;
+                padding: 64px 0 0 143px;
+                background: url('../../content/web/numerictextbox/addProduct.png') transparent no-repeat 0 0;
+            }
+        </style>
+    </div>
 </asp:Content>

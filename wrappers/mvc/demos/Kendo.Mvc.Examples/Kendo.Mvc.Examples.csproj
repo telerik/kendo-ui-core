@@ -77,6 +77,8 @@
     <Compile Include="Areas\aspx\ASPXAreaRegistration.cs" />
     <Compile Include="Areas\razor\RazorAreaRegistration.cs" />
     <Compile Include="Controllers\Grid\GridController.cs" />
+    <Compile Include="Controllers\NumericTextBox\ApiController.cs" />
+    <Compile Include="Controllers\NumericTextBox\EventsController.cs" />
     <Compile Include="Controllers\NumericTextBox\IndexController.cs" />
     <Compile Include="Controllers\slider\ApiController.cs" />
     <Compile Include="Controllers\slider\EventsController.cs" />
@@ -108,6 +110,8 @@
     <Content Include="App_Data\Northwind_log.ldf">
       <DependentUpon>Northwind.mdf</DependentUpon>
     </Content>
+    <Content Include="Areas\aspx\Views\numerictextbox\api.aspx" />
+    <Content Include="Areas\aspx\Views\numerictextbox\events.aspx" />
     <Content Include="Areas\aspx\Views\upload\api.aspx" />
     <Content Include="Areas\aspx\Views\upload\async.aspx" />
     <Content Include="Areas\aspx\Views\upload\events.aspx" />
@@ -208,6 +212,8 @@
     <Content Include="Areas\razor\Views\grid\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\razor\Views\numerictextbox\events.cshtml" />
+    <Content Include="Areas\razor\Views\numerictextbox\api.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
