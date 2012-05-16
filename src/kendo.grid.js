@@ -446,7 +446,10 @@
                 table = that.element;
 
             if (!table.is("table")) {
-                table = $("<table />").appendTo(that.element);
+                table = that.element.find("> .k-grid-content > table");
+                if (!table.length) {
+                    table = $("<table />").appendTo(that.element);
+                }
             }
 
             that.table = table.attr("cellspacing", 0);
@@ -1813,7 +1816,7 @@
                     .each(function(index) {
                         column = columns[index];
                         if (column.sortable !== false && !column.command) {
-                            $(this).kendoSortable(extend({}, sortable, { dataSource: that.dataSource }));
+                            $(this).attr("data-" + kendo.ns +"field", column.field).kendoSortable(extend({}, sortable, { dataSource: that.dataSource }));
                         }
                     });
             }
@@ -2161,11 +2164,11 @@
                 thead = $("<thead/>").insertBefore(that.tbody);
             }
 
-            tr = that.table.find("tr").filter(":has(th)");
+            tr = that.element.find("tr:has(th)");
 
             if (!tr.length) {
                 tr = thead.children().first();
-                if(!tr.length) {
+                if (!tr.length) {
                     tr = $("<tr/>");
                 }
             }
