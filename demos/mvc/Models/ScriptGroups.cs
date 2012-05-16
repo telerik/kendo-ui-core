@@ -87,6 +87,7 @@ namespace Kendo.Models
             "kendo.mobile.shim.js",
             "kendo.mobile.application.js",
             "kendo.mobile.actionsheet.js",
+            "kendo.mobile.popover.js",
             "kendo.mobile.button.js",
             "kendo.mobile.listview.js",
             "kendo.mobile.scrollview.js",

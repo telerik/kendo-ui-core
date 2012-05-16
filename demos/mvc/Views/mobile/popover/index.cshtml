@@ -1,1 +1,40 @@
-foo
+<div data-role="view" data-title="Tag people">
+    <div data-role="header">
+        <div data-role="navbar" style="background-color: #333">
+            <span data-role="view-title"></span>
+            <a data-align="right" data-rel="popover" href="#popover-people" style="background-color: #000" data-role="button">Select people</a>
+        </div>
+    </div>
+
+    <div data-role="content" style="background-color: black">
+        <img src="../../content/mobile/shared/faces.jpeg" />
+    </div>
+
+    <div data-role="popover" id="popover-people">
+        <div data-role="view">
+            <ul data-role="listview">
+                <li><label>John Appleseed <input type="checkbox"></label></li>
+                <li><label>John Appleseed <input type="checkbox"></label></li>
+                <li><label>John Appleseed <input type="checkbox"></label></li>
+                <li><label>John Appleseed <input type="checkbox"></label></li>
+                <li><label>John Appleseed <input type="checkbox"></label></li>
+            </ul>
+        </div>
+    </div>
+
+    <div data-role="popover" id="popover-location">
+        <div data-role="view">
+            <ul data-role="listview">
+                <li><label>Sidney, Australia <input name="location" type="radio"></label></li>
+                <li><label>New York, USA <input name="location" type="radio"></label></li>
+                <li><label>London, England <input name="location" type="radio"></label></li>
+            </ul>
+        </div>
+    </div>
+
+    <div data-role="footer">
+        <div data-role="navbar" style="background-color: #000">
+            <a data-align="right" style="background-color: #000" href="#popover-location" data-rel="popover" data-role="button">Select location</a>
+        </div>
+    </div>
+</div>
