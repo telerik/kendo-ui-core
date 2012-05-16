@@ -22,7 +22,7 @@ namespace Kendo.Mvc.UI.Tests
             _viewContext = new ViewContext { HttpContext = _httpContext.Object, Writer = TextWriter.Null };
             _clientSideObjectWriterFactory = new Mock<IClientSideObjectWriterFactory>();
 
-            _baseComponent = new Mock<ViewComponentBase>(_viewContext, _clientSideObjectWriterFactory.Object);
+            _baseComponent = new Mock<ViewComponentBase>(_viewContext, _clientSideObjectWriterFactory.Object, null);
         }
 
         [Fact]
