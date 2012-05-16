@@ -456,7 +456,7 @@
                         optionLabel: "Select..."
                     });
 
-                    equal(select[0].children[0].outerHTML, '<option value="">Select...</option>');
+                    equal(select[0].children[0].innerHTML, "Select...");
             });
 
             test("_options method escape value of the option", function() {
