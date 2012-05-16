@@ -413,6 +413,10 @@
             min = options.min,
             max = options.max;
 
+            if (value === NULL) {
+                return value;
+            }
+
             if (min !== NULL && value < min) {
                 value = min;
             } else if (max !== NULL && value > max) {
