@@ -304,6 +304,13 @@ namespace("mvc", function() {
 
                     kendoBuild.rmdirSyncRecursive(path.join(examplesDeployRoot, "obj"));
 
+                    kendoBuild.processFilesRecursive(
+                        path.join(examplesDeployRoot, "bin"),
+                        /(system\..*)|(\.mdb$)/i,
+                        function(fileName) {
+                            fs.unlinkSync(fileName);
+                        });
+
                     if (license.source) {
                         fs.renameSync(path.join(root, "source"), sourceDeployRoot);
 
