@@ -63,6 +63,7 @@
             Widget.fn.init.call(that, element, options);
             $.extend(that, options);
             that._layout();
+            that._style();
 
             that.element.children(kendo.roleSelector("pane")).each(function() {
                 kendo.initWidget(this, {}, kendo.mobile.ui).navigate("");
@@ -70,7 +71,8 @@
         },
 
         options: {
-            name: "SplitView"
+            name: "SplitView",
+            style: "horizontal"
         },
 
         // Implement view interface
@@ -82,6 +84,19 @@
 
             that.transition = element.data(kendo.ns + "transition");
             $.extend(that, { header: [], footer: [], content: element });
+        },
+
+        _style: function () {
+            var style = this.options.style,
+                element = this.element,
+                styles;
+
+            if (style) {
+                styles = style.split(" ");
+                $.each(styles, function () {
+                    element.addClass("km-split-" + this);
+                });
+            }
         },
 
         showStart: function() {

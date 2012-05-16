@@ -239,6 +239,10 @@
                 {
                     "text": "Overview",
                     "url": "splitview/index.html"
+                },
+                {
+                    "text": "Customizing Appearance",
+                    "url": "splitview/appearance.html"
                 }
             ]
         },
