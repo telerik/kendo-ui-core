@@ -229,10 +229,6 @@
                     keyup: function (e) {
                         var selectionCodes = [8, 9, 33, 34, 35, 36, 37, 38, 39, 40, 40, 45, 46];
 
-                        if ($.browser.mozilla && e.keyCode == keys.BACKSPACE) {
-                            fixBackspace(editor, e);
-                        }
-
                         if ($.inArray(e.keyCode, selectionCodes) > -1 || (e.keyCode == 65 && e.ctrlKey && !e.altKey && !e.shiftKey)) {
                             editor.pendingFormats.clear();
                             select(editor);
@@ -282,52 +278,6 @@
                   });
         },
 
-        fixBackspace: function(editor, e) {
-
-            var range = editor.getRange(),
-                startContainer = range.startContainer,
-                dom = kendo.ui.editor.Dom,
-                startContainerChildCount = startContainer.childNodes.length;
-
-            if (startContainer == editor.body.firstChild ||
-                !dom.isBlock(startContainer) ||
-                (startContainerChildCount > 0 && !(startContainerChildCount == 1 && dom.is(startContainer.firstChild, "br")))) {
-                return;
-            }
-
-            var previousBlock = startContainer.previousSibling;
-
-            while (previousBlock && !dom.isBlock(previousBlock)) {
-                previousBlock = previousBlock.previousSibling;
-            }
-
-            if (!previousBlock) {
-                return;
-            }
-
-            var walker = editor.document.createTreeWalker(previousBlock, window.NodeFilter.SHOW_TEXT, null, false);
-
-            var textNode;
-
-            while (true) {
-                textNode = walker.nextNode();
-
-                if (textNode) {
-                    previousBlock = textNode;
-                } else {
-                    break;
-                }
-            }
-
-            range.setStart(previousBlock, dom.isDataNode(previousBlock) ? previousBlock.nodeValue.length : 0);
-            range.collapse(true);
-            kendo.ui.editor.RangeUtils.selectRange(range);
-
-            dom.remove(startContainer);
-
-            e.preventDefault();
-        },
-
         formatByName: function(name, format) {
             for (var i = 0; i < format.length; i++) {
                 if ($.inArray(name, format[i].tags) >= 0) {
@@ -353,8 +303,7 @@
         focusable = EditorUtils.focusable,
         wrapTextarea = EditorUtils.wrapTextarea,
         renderTools = EditorUtils.renderTools,
-        initializeContentElement = EditorUtils.initializeContentElement,
-        fixBackspace = EditorUtils.fixBackspace;
+        initializeContentElement = EditorUtils.initializeContentElement;
 
     var localization = {
         bold: "Bold",

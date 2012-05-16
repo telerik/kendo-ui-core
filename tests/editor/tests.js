@@ -16,10 +16,6 @@ tests.push(
         title: "editor apply inline formats"
     },
     {
-        page: "editor/backspace.html",
-        title: "editor backspace"
-    },
-    {
         page: "editor/blockformatfinder.html",
         title: "editor block format finder"
     },
