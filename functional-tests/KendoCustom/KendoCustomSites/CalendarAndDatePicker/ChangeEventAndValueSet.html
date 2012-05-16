@@ -15,7 +15,7 @@
         </div>
 
         <div id="container2">
-            <div id="calendar" data-role="calendar" value="15/05/2012" data-bind="value: from, events: {change: updated}" />
+            <div id="calendar" data-role="calendar" data-bind="value: from, events: {change: updated}" />
         </div>
 
         <div id="info">clear</div>
@@ -46,7 +46,7 @@
 
 
             },
-            from: new Date()
+            from: new Date(2012, 4, 16)
         });
 
         kendo.bind(container2, mainModel);
