@@ -1,9 +1,8 @@
 namespace Kendo.Mvc.UI
 {
-    using System.Collections.Generic;
     using System.Text.RegularExpressions;
 
-    public class GridBindingSettings : IClientSerializable
+    public class GridBindingSettings
     {
         private readonly IGrid grid;
 
@@ -62,38 +61,6 @@ namespace Kendo.Mvc.UI
             get
             {
                 return true;
-            }
-        }
-
-        public void SerializeTo(string key, IClientSideObjectWriter writer)
-        {
-            if (Enabled)
-            {
-                var urlBuilder = grid.UrlBuilder;
-
-                var urls = new Dictionary<string, string>();
-
-                if (Select.HasValue() || (SerializeEmptySelectUrl && !Select.HasValue()))
-                {
-                    urls["selectUrl"] = Encode(urlBuilder.Url(Select));
-                }
-
-                if (Insert.HasValue())
-                {
-                    urls["insertUrl"] = Encode(urlBuilder.Url(Insert));
-                }
-
-                if (Update.HasValue())
-                {
-                    urls["updateUrl"] = Encode(urlBuilder.Url(Update));
-                }
-
-                if (Delete.HasValue())
-                {
-                    urls["deleteUrl"] = Encode(urlBuilder.Url(Delete));
-                }
-
-                writer.AppendObject(key, urls);
             }
         }
     }

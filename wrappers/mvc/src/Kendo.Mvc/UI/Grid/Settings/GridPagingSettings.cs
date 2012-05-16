@@ -1,11 +1,9 @@
 namespace Kendo.Mvc.UI
 {
-    using System.Globalization;
     using System.Linq;
     using Kendo.Mvc.Infrastructure;
-    using System.Collections.Generic;
 
-    public class GridPagingSettings : IClientSerializable
+    public class GridPagingSettings
     {
         private readonly IGrid grid;
 
@@ -91,46 +89,6 @@ namespace Kendo.Mvc.UI
                 {
                     grid.Scrolling.Enabled = true;
                 }
-            }
-        }
-
-        public void SerializeTo(string key, IClientSideObjectWriter writer)
-        {
-            if (Enabled)
-            {
-                writer.Append("pageSize", PageSize, 10);
-                writer.Append("total", grid.DataProcessor.Total);
-                writer.Append("currentPage", grid.DataProcessor.CurrentPage);
-                writer.AppendCollection("pageSizesInDropDown", PageSizesInDropDown.Select(v => v.ToString(CultureInfo.InvariantCulture)));
-
-                writer.Append("pageOnScroll", PageOnScroll);
-                if (grid.IsClientBinding && PageOnScroll)
-                {
-                    if (!grid.IsEmpty)
-                    {
-                        var dataTableEnumerable = grid.DataSource as GridDataTableWrapper;
-                        if (dataTableEnumerable != null && dataTableEnumerable.Table != null)
-                        {
-                            writer.AppendCollection("data",
-                                                    grid.DataProcessor.ProcessedDataSource.SerializeToDictionary(
-                                                        dataTableEnumerable.Table));
-
-                        }
-                        else if (grid.DataProcessor.ProcessedDataSource is IQueryable<AggregateFunctionsGroup>)
-                        {
-                            IEnumerable<IGroup> grouppedDataSource = grid.DataProcessor.ProcessedDataSource.Cast<IGroup>();
-                            writer.AppendCollection("data", grouppedDataSource.Leaves());
-                        }
-                        else
-                        {
-                            writer.AppendCollection("data", grid.DataProcessor.ProcessedDataSource);
-                        }
-                    }
-                }                
-            }
-            else
-            {
-                writer.Append("pageSize", 0);
             }
         }
     }

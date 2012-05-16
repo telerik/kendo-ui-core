@@ -11,11 +11,11 @@ namespace Kendo.Mvc.UI.Html
 
         public IHtmlNode CreateSections(GridPagerData section)
         {
-            var div = new HtmlElement("div")
+            var ul = new HtmlElement("ul")
                 .AddClass("k-pager", UIPrimitives.ResetStyle, "k-numeric");
 
-            pagingSectionsBuilder.CreateSections(section).AppendTo(div);
-            return div;
+            pagingSectionsBuilder.CreateSections(section).AppendTo(ul);
+            return ul;
         }
     }
 }

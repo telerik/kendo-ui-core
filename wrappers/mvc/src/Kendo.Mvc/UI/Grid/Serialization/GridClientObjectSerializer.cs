@@ -41,12 +41,31 @@ namespace Kendo.Mvc.UI
             }
 
             shouldSerializeDataSource = grid.Editing.Enabled && grid.IsClientBinding && !grid.IsEmpty;
-            grid.Grouping.SerializeTo("grouping", writer);
-            grid.Paging.SerializeTo("paging", writer);
-            grid.Sorting.SerializeTo("sorting", writer);
-            grid.Selection.SerializeTo("selection", writer);
 
-            grid.Filtering.SerializeTo("filtering", writer);
+            if (grid.Grouping.Enabled)
+            {
+                writer.Append("groupable", true);
+            }
+
+            if (grid.Paging.Enabled)
+            {
+                writer.AppendObject("pageable", new { autoBind = false });
+            }
+
+            if (grid.Sorting.Enabled)
+            {
+                writer.Append("sortable", true);
+            }
+
+            if (grid.Selection.Enabled)
+            {
+                writer.Append("selectable", true);
+            }
+
+            if (grid.Filtering.Enabled)
+            {
+                writer.Append("selectable", true);
+            }
 
             if (grid.DataBinding.IsClientOperationMode)
             {
@@ -62,10 +81,10 @@ namespace Kendo.Mvc.UI
                 grid.SerializeDataSource(writer);
             }
 
-            grid.Ajax.SerializeTo("ajax", writer);
-            grid.WebService.SerializeTo("ws", writer);
             grid.ClientEvents.SerializeTo("clientEvents", writer);
-            grid.Localization.SerializeTo("localization", writer);            
+            //TODO: Localization
+            //grid.Localization.SerializeTo("localization", writer);            
+
             if (grid.DetailView != null)
             {
                 grid.DetailView.SerializeTo("detail", writer);
@@ -76,10 +95,12 @@ namespace Kendo.Mvc.UI
                 writer.Append("rowTemplate", grid.IsSelfInitialized ? grid.ClientRowTemplate.Replace("<", "%3c").Replace(">", "%3e") : grid.ClientRowTemplate);
             }
 
-            writer.Append("noRecordsTemplate", grid.NoRecordsTemplate);
-
-
+            //TODO: No records template
+            //writer.Append("noRecordsTemplate", grid.NoRecordsTemplate);                
             writer.AppendObject("dataSource", grid.DataSource.ToJson());
+
+            //TODO: This depends on whether the grid is initially bound
+            writer.Append("autoBind", false);
         }
     }
 }

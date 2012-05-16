@@ -6,7 +6,7 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.Infrastructure;
 
-    public class GridGroupingSettings : IClientSerializable
+    public class GridGroupingSettings
     {
         private readonly IGrid grid;
 
@@ -36,18 +36,6 @@ namespace Kendo.Mvc.UI
             private set;
         }
         
-        public void SerializeTo(string key, IClientSideObjectWriter writer)
-        {
-            if (Enabled)
-            {
-                if (grid.DataProcessor.GroupDescriptors.Any())
-                {
-                    writer.AppendCollection("groups", SerializeDescriptors());
-                    writer.Append("groupBy", SerializeExpression());
-                }
-            }
-        }
-
         public IEnumerable<IDictionary<string, object>> SerializeDescriptors()
         {
             var result = new List<IDictionary<string, object>>();
