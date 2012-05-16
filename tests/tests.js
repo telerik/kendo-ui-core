@@ -94,7 +94,6 @@ function launchBrowser() {
 
     if (browsers.length) {
         currentBrowser = browsers.pop();
-        console.log("starting ", currentBrowser);
         setTimeout(function() {
             browserProcess = spawn(currentBrowser, ['-private', '-no-remote', testRunnerURL]);
             browserProcess.on('exit', launchBrowser);
