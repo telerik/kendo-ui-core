@@ -50,8 +50,8 @@
         },
 
         REVERSE = {
-            "top": "bottom",
-            "bottom": "top",
+            "up": "down",
+            "down": "up",
             "left": "right",
             "right": "left"
         };
@@ -88,7 +88,7 @@
             that.wrapper = element.parent().css({
                 width: that.options.width,
                 height: that.options.height
-            }).addClass("km-popup-wrapper km-" + that.direction).hide();
+            }).addClass("km-popup-wrapper km-" + that.options.direction).hide();
 
             that.arrow = $(ARROW).appendTo(that.wrapper).hide();
 
