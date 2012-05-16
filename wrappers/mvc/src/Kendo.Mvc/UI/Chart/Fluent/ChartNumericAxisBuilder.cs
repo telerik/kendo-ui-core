@@ -73,27 +73,5 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
-
-        /// <summary>
-        /// Setting axis orientation no longer has effect. Use dedicated VerticalLine and VerticalArea series types.
-        /// </summary>
-        /// <param name="orientation">
-        /// Setting axis orientation no longer has effect. Use dedicated VerticalLine and VerticalArea series types.
-        /// </param>
-        [Obsolete("Setting axis orientation no longer has effect. Use dedicated VerticalLine and VerticalArea series types.")]
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public ChartNumericAxisBuilder Orientation(ChartAxisOrientation orientation)
-        {
-            return this;
-        }
-
-        [Obsolete("Use Labels(labels => labels.Format(...)) instead of Numeric(axis => axis.Format(...)).", true)]
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public ChartNumericAxisBuilder Format(string format)
-        {
-            Axis.Format = format;
-
-            return this;
-        }
     }
 }

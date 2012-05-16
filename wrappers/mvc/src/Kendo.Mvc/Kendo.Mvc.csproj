@@ -208,7 +208,6 @@
     <Compile Include="UI\Chart\Fluent\ChartAxisPlotBandsFactory.cs" />
     <Compile Include="UI\Chart\Fluent\ChartAxisTitleBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartAreaSeriesBuilder.cs" />
-    <Compile Include="UI\Chart\Fluent\ChartXYAxisFactory.cs" />
     <Compile Include="UI\Chart\Fluent\ChartBorderBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartAreaLineBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartLineBuilderBase.cs" />
