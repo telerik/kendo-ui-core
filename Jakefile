@@ -267,7 +267,7 @@ namespace("mvc", function() {
     });
 
     desc("Build release version");
-    task("bundle", [], function() {
+    task("bundle", ["clean"], function() {
         kendoBuild.msBuild(
             MVC_WRAPPERS_PROJECT,
             [ "/t:Clean;Build", "/p:Configuration=Release" ],
@@ -280,14 +280,12 @@ namespace("mvc", function() {
                     var binariesDeployRoot = path.join(root, "Bin"),
                         stylesDeployRoot = path.join(root, "Content"),
                         scriptsDeployRoot = path.join(root, "Scripts"),
-                        sourceDeployRoot = path.join(root, "source"),
+                        sourceDeployRoot = path.join(root, "Source"),
                         projectDeployRoot = path.join(sourceDeployRoot, "Kendo.Mvc"),
-                        examplesDeployRoot = path.join(sourceDeployRoot, "Kendo.Mvc.Examples");
+                        examplesDeployRoot = path.join(root, "Examples");
 
                     // move resources
-                    kendoBuild.rmdirSyncRecursive(scriptsDeployRoot);
                     fs.renameSync(path.join(root, "js"), scriptsDeployRoot);
-                    kendoBuild.rmdirSyncRecursive(stylesDeployRoot);
                     fs.renameSync(path.join(root, "styles"), stylesDeployRoot);
 
                     // copy binaries
@@ -298,7 +296,17 @@ namespace("mvc", function() {
                         path.join(binariesDeployRoot, "Kendo.Mvc.dll")
                     );
 
+                    // deploy demos
+                    kendoBuild.copyDirSyncRecursive(
+                        examplesPath,
+                        examplesDeployRoot
+                    );
+
+                    kendoBuild.rmdirSyncRecursive(path.join(examplesDeployRoot, "obj"));
+
                     if (license.source) {
+                        fs.renameSync(path.join(root, "source"), sourceDeployRoot);
+
                         kendoBuild.copyDirSyncRecursive(
                             projectPath,
                             projectDeployRoot
@@ -306,14 +314,6 @@ namespace("mvc", function() {
 
                         kendoBuild.rmdirSyncRecursive(path.join(projectDeployRoot, "bin"));
                         kendoBuild.rmdirSyncRecursive(path.join(projectDeployRoot, "obj"));
-
-                        kendoBuild.copyDirSyncRecursive(
-                            examplesPath,
-                            examplesDeployRoot
-                        );
-
-                        kendoBuild.rmdirSyncRecursive(path.join(examplesDeployRoot, "bin"));
-                        kendoBuild.rmdirSyncRecursive(path.join(examplesDeployRoot, "obj"));
                     }
                 });
             }
