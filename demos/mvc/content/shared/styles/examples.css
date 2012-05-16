@@ -1906,6 +1906,11 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
     background-image: url("ipad.png");
 }
 
+#example.tablet
+{
+    padding-left: 22px;
+}
+
 .tablet .android #mobile-application-container,
 .tablet .blackberry #mobile-application-container
 {
