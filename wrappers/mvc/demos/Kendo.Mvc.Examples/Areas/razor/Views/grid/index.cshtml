@@ -1,13 +1,12 @@
 @model IEnumerable<Product>
 
+<script src="@Url.Content("~/Scripts/kendo.pager.js")"></script>
 <div id="example" class="k-content">
     @(Html.Kendo().Grid(Model)
         .Name("Grid")
-
         .Pageable()
         .Sortable()
         .Scrollable()
-        .DataSource(dataSource => dataSource.Read(read => read.Url("foo", "bar", new { baz= "baz" })))
     )
 </div>
 <script>

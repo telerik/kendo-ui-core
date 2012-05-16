@@ -26,8 +26,7 @@ namespace Kendo.Mvc.UI
             var result = base.Serialize();
 
             FluentDictionary.For(result)
-                .Add("member", column.Member)
-                .Add("type", column.MemberType.ToJavaScriptType())
+                .Add("field", column.Member)
                 .Add("format", column.Format, () => column.Format.HasValue())
                 .Add("groupable", column.Groupable, true)
                 .Add("encoded", column.Encoded, true);

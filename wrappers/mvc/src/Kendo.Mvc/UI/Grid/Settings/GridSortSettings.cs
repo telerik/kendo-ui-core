@@ -3,7 +3,7 @@ namespace Kendo.Mvc.UI
     using System.Collections.Generic;
     using System.Linq;
 
-    public class GridSortSettings : IClientSerializable
+    public class GridSortSettings
     {
         private readonly IGrid grid;
 
@@ -38,19 +38,6 @@ namespace Kendo.Mvc.UI
         {
             get;
             private set;
-        }
-
-        public void SerializeTo(string key, IClientSideObjectWriter writer)
-        {
-            if (Enabled)
-            {
-                writer.Append("sortMode", SortMode == GridSortMode.MultipleColumn ? "multi" : "single");
-                writer.Append("allowUnsort", AllowUnsort);
-                if (grid.DataProcessor.SortDescriptors.Any())
-                {
-                    writer.Append("orderBy", GridDescriptorSerializer.Serialize(grid.DataProcessor.SortDescriptors));
-                }
-            }
         }
     }
 }

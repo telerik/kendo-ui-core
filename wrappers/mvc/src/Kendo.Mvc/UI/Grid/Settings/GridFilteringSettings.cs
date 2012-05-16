@@ -2,7 +2,7 @@ namespace Kendo.Mvc.UI
 {
     using System.Collections.Generic;
 
-    public class GridFilteringSettings : IClientSerializable
+    public class GridFilteringSettings
     {
         public GridFilteringSettings()
         {
@@ -26,16 +26,5 @@ namespace Kendo.Mvc.UI
             get;
             private set;
         }
-
-        #region IClientSerializable Members
-
-        public void SerializeTo(string key, IClientSideObjectWriter writer)
-        {
-            if (Enabled) {
-                writer.Append("showOrOption", ShowOrOption, false);
-            }
-        }
-
-        #endregion
     }
 }

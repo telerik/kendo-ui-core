@@ -15,13 +15,17 @@ namespace Kendo.Mvc.UI.Html
 
         protected virtual IHtmlNode GetNumericButton(bool enabled, string url, string text)
         {
-            var result = new HtmlElement(enabled ? "a" : "span")
+            var button = new HtmlElement(enabled ? "a" : "span")
                 .Text(text)
                 .ToggleClass(UIPrimitives.Link, enabled)
                 .ToggleAttribute("href", url, enabled)
                 .ToggleClass(UIPrimitives.ActiveState, !enabled);
 
-            return result;
+            var li = new HtmlElement("li");
+
+            button.AppendTo(li);
+
+            return li;
         }
 
         protected virtual IHtmlNode GetIconButton(bool enabled, string url, string text)
