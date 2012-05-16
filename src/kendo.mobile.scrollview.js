@@ -148,7 +148,7 @@
 
         events: [
             /**
-             * Fires when a page is scrolled to.
+             * Fires when the widget page is changed.
              * @name kendo.mobile.ui.ScrollView#select
              * @event
              * @param {Event} e
