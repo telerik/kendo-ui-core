@@ -688,6 +688,7 @@
 
                     if (config.collapsed) {
                         size = 0;
+                        $(this).css("overflow", "hidden");
                     } else if (isFluid(config.size)) {
                         freeSizedPanes = freeSizedPanes.add(this);
                         return;
@@ -776,6 +777,12 @@
             }
 
             paneConfig.collapsed = !expand;
+
+            if (paneConfig.collapsed) {
+                pane.css("overflow", "hidden");
+            } else {
+                pane.css("overflow", "");
+            }
 
             this.trigger(RESIZE);
         },
