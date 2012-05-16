@@ -187,7 +187,7 @@ task("default", ["clean", "demos:debug"], function() {
 });
 
 desc("Build bundles");
-task("bundles", ["clean", "merge-scripts"], function() {
+task("bundles", ["clean", "merge-scripts", "mvc:bundle"], function() {
     bundles.buildAllBundles(version(), complete);
 }, true);
 
@@ -267,7 +267,7 @@ namespace("mvc", function() {
     });
 
     desc("Build release version");
-    task("bundle", ["clean"], function() {
+    task("bundle", [], function() {
         kendoBuild.msBuild(
             MVC_WRAPPERS_PROJECT,
             [ "/t:Clean;Build", "/p:Configuration=Release" ],
