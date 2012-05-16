@@ -101,17 +101,5 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
-
-        /// <summary>
-        /// Setting axis orientation no longer has effect. Use dedicated VerticalLine and VerticalArea series types.
-        /// </summary>
-        /// <param name="orientation">
-        /// Setting axis orientation no longer has effect. Use dedicated VerticalLine and VerticalArea series types.
-        /// </param>
-        [Obsolete("Setting axis orientation no longer has effect. Use dedicated VerticalLine and VerticalArea series types.")]
-        public ChartCategoryAxisBuilder<TModel> Orientation(ChartAxisOrientation orientation)
-        {
-            return this;
-        }
     }
 }
