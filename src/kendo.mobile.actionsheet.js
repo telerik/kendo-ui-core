@@ -103,6 +103,8 @@
 
             that.wrapper = wrapper;
             that.shim = new Shim(that.wrapper, {modal: !(os.android || os.meego)});
+
+            kendo.notify(that, ui);
         },
 
         events: [
