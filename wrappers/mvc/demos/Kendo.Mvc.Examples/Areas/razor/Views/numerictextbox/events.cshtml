@@ -1,0 +1,19 @@
+<div id="example" class="k-content">
+    @(Html.Kendo().NumericTextBox()
+          .Name("numerictextbox")
+          .ClientEvents(e => {
+              e.OnChange("onChange")
+               .OnSpin("onSpin");
+          })
+    )
+    <script>
+        function onChange() {
+            kendoConsole.log("Change :: " + this.value());
+        }
+
+        function onSpin() {
+            kendoConsole.log("Spin :: " + this.value());
+        }
+    </script>
+</div>
+<div class="console"></div>

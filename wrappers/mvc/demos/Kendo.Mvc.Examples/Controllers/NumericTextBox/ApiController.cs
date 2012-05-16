@@ -4,7 +4,7 @@ namespace Kendo.Mvc.Examples.Controllers
 {
     public partial class NumericTextBoxController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Api()
         {
             return View();
         }
