@@ -311,6 +311,20 @@ namespace("mvc", function() {
                             fs.unlinkSync(fileName);
                         });
 
+                    // process demos .csproj file
+                    var projectFileName = path.join(examplesDeployRoot, "Kendo.Mvc.Examples.csproj"),
+                        csproj = kendoBuild.readText(projectFileName);
+
+                    csproj = csproj
+                        // remove AfterBuild target
+                        .replace(/\s*<Target Name="AfterBuild"((.|\r|\n)*?)\/Target>/i, "")
+                        // remove project reference
+                        .replace(/\s*<ProjectReference((.|\r|\n)*?)\/ProjectReference>/i, "")
+                        // add reference to Kendo dll
+                        .replace(/(\s*)(<Reference.*?\/>)/i, '$1$2$1<Reference Include="Kendo.Mvc" />');
+
+                    kendoBuild.writeText(projectFileName, csproj);
+
                     if (license.source) {
                         fs.renameSync(path.join(root, "source"), sourceDeployRoot);
 
