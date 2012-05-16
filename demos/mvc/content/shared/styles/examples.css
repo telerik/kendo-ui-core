@@ -1894,14 +1894,14 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
 .tablet #device-wrapper,
 .tablet #mobile-application-container
 {
-    height: 452px;
+    height: 453px;
     width: 605px;
 }
 
 .tablet #device-wrapper
 {
     background-size: 100% auto;
-    height: 452px;
+    height: 453px;
     padding: 57px 66px 57px 66px;
     background-image: url("ipad.png");
 }
@@ -1914,7 +1914,7 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
 .tablet .android #mobile-application-container,
 .tablet .blackberry #mobile-application-container
 {
-    height: 356px;
+    height: 358px;
 }
 
 .tablet #device-wrapper.android {
