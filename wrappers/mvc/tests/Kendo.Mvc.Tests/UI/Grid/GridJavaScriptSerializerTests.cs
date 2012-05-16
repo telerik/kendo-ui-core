@@ -389,10 +389,8 @@ namespace Kendo.Mvc.UI.Tests
         {
             var grid = GridTestHelper.CreateGrid<Customer>();
             grid.ClientEvents.OnDataBinding.CodeBlock = grid.ClientEvents.OnDataBound.CodeBlock =
-                grid.ClientEvents.OnError.CodeBlock = grid.ClientEvents.OnLoad.CodeBlock =
                 grid.ClientEvents.OnRowDataBound.CodeBlock = grid.ClientEvents.OnRowSelect.CodeBlock = () => { };
 
-            writer.Setup(w => w.AppendClientEvent("onLoad", It.IsAny<ClientEvent>()));
             writer.Setup(w => w.AppendClientEvent("onDataBinding", It.IsAny<ClientEvent>()));
             writer.Setup(w => w.AppendClientEvent("onRowDataBound", It.IsAny<ClientEvent>()));
             writer.Setup(w => w.AppendClientEvent("onRowSelect", It.IsAny<ClientEvent>()));
