@@ -31,21 +31,20 @@ bayeux.attach(server);
 server.listen(PORT);
 
 var client = bayeux.getClient(), browsers;
-var agents = 0, failures = 0, total = 0;
+var failures = 0, total = 0;
 
 client.subscribe("/ready", function(agent) {
-    agents ++;
     client.publish('/load', "/" + url);
 });
 
 var doc = builder.create();
 var root = doc.begin('testsuite');
-var agents = 0;
 
 url = process.argv[2] || 'tests/';
 
 client.subscribe('/testDone', function(message) {
-  var agent = message.agent.match(/Firefox/) ? "Firefox" : "Chrome";
+  var agent = message.agent.match(/(Firefox|Chrome)\/(\d+)/);
+  agent = agent[1] + agent[2];
   var testCase = root.ele('testcase')
     .att('name', message.name)
     .att('time', message.duration)
@@ -64,41 +63,50 @@ client.subscribe('/testDone', function(message) {
 });
 
 client.subscribe('/done', function(message) {
-    agents --;
     failures += message.failures;
     total += message.total;
 
-    if (!agents) {
+    browserProcess.kill();
+});
+
+var browsers, browserProcess;
+
+switch(os.type()) {
+    case "Darwin":
+        browsers = [
+            "/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome",
+            "/Applications/Firefox\ ESR.app/Contents/MacOS/firefox",
+            "/Applications/Firefox.app/Contents/MacOS/firefox"];
+        break;
+    case "Linux":
+        browsers = [
+            "google-chrome",
+            "firefox-esr",
+            "firefox"];
+
+        break;
+}
+
+var testRunnerURL = 'http://localhost:' + PORT + '/tests/testrunner.html';
+
+function launchBrowser() {
+    var currentBrowser;
+
+    if (browsers.length) {
+        currentBrowser = browsers.pop();
+        console.log("starting ", currentBrowser);
+        setTimeout(function() {
+            browserProcess = spawn(currentBrowser, ['-private', '-no-remote', testRunnerURL]);
+            browserProcess.on('exit', launchBrowser);
+        }, 20);
+    } else {
         root.att('tests', total)
         .att('errors', 0)
         .att('failures', failures);
 
         process.stdout.write(doc.toString({pretty: true}));
-
-        browsers.forEach(function(browser) {
-            browser.process.kill();
-        });
-
         process.exit(failures === 0 ? 0 : 1);
     }
-});
+}
 
-browsers = [
-    {
-        Darwin: "/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome",
-        Linux: "google-chrome"
-    },
-    {
-        Darwin: "/Applications/Firefox.app/Contents/MacOS/firefox",
-        Linux: "firefox",
-        params: ['-private', '-no-remote']
-    }
-]
-
-var testRunnerURL = 'http://localhost:' + PORT + '/tests/testrunner.html';
-
-browsers.forEach(function(browser) {
-    var params = (browser.params || []).concat([testRunnerURL]);
-    browser.process = spawn(browser[os.type()], params);
-});
-
+launchBrowser();
