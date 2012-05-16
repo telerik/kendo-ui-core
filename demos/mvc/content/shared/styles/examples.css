@@ -1891,6 +1891,39 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
     background-image: url("blackberrySkin.png");
 }
 
+.tablet #device-wrapper,
+.tablet #mobile-application-container
+{
+    height: 452px;
+    width: 605px;
+}
+
+.tablet #device-wrapper
+{
+    background-size: 100% auto;
+    height: 452px;
+    padding: 57px 66px 57px 66px;
+    background-image: url("ipad.png");
+}
+
+.tablet .android #mobile-application-container,
+.tablet .blackberry #mobile-application-container
+{
+    height: 356px;
+}
+
+.tablet #device-wrapper.android {
+    height: 362px;
+    padding: 45px 73px 45px 73px;
+    background-image: url("a100.png");
+}
+
+.tablet #device-wrapper.blackberry {
+    height: 362px;
+    padding: 73px 77px 73px 77px;
+    background-image: url("playbook.png");
+}
+
 #device-wrapper,
 #mobile-application-container {
     height: 460px;
