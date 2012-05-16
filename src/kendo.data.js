@@ -1420,7 +1420,7 @@
                 transport.read = typeof transport.read === STRING ? { url: transport.read } : transport.read;
 
                 if (options.type) {
-                    if (kendo.data.transports[options.type] instanceof RemoteTransport) {
+                    if (!isPlainObject(kendo.data.transports[options.type])) {
                        that.transport = new kendo.data.transports[options.type](transport);
                     } else {
                         transport = extend(true, {}, kendo.data.transports[options.type], transport);

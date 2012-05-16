@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web.Mvc;
 
 namespace Kendo.Mvc.UI
 {
@@ -50,6 +49,9 @@ namespace Kendo.Mvc.UI
             {
                 json["serverAggregates"] = ServerAggregates;
             }
+
+            //TODO: serialize proper type
+            json["type"] = "aspnetmvc-server";
         }
 
         public int? PageSize 
