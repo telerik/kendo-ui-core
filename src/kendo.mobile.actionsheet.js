@@ -16,7 +16,7 @@
      * <h3>Getting Started</h3>
      * <p>The Kendo mobile Application will automatically initialize a mobile ActionSheet widget for every <code>ul</code> element with <code>role</code>
      * data attribute set to <code>actionsheet</code> present in the views/layouts markup.
-     * Alternatively, it can be initialized using a jQuery selector. The actionsheet element should contain one or more <code>li</code> elements, which should contian an <code>a</code> element.</p>
+     * Alternatively, it can be initialized using a jQuery selector. The actionsheet element should contain one or more <code>li</code> elements, which should contain an <code>a</code> element.</p>
      *
      * @exampleTitle Define an ActionSheet
      * @example
@@ -26,12 +26,12 @@
      * </ul>
      *
      * @section
-     * <p>On iOS, the ActionSheet is modal, and clicking on the background does not close it. A 'Cancel' action is
+     * <p>In iOS, the ActionSheet is modal, and clicking on the background does not close it. A 'Cancel' action is
      * automatically added to the bottom of the actions.</p>
-     * <span style="color:red">TODO: Android</span>
+     * <p>In Android and Blackberry, the available actions are centered in the middle of the screen, and tapping the background closes it.</p>
      *
-     * <h3>Opening ActionSheet</h3>
-     * <p>The widget can be open when any mobile navigational widget (listview, button, tabstrip, etc.) is clicked or touched.
+     * <h3>Opening an ActionSheet</h3>
+     * <p>The widget can be open when any mobile navigational widget (listview, button, tabstrip, etc.) is tapped.
      * To do so, the navigational widget should have <code>data-rel="actionsheet"</code> and <code>href</code> attribute pointing to the ActionSheet's element <code>id</code> set.</p>
      *
      * @exampleTitle mobile Button with associated ActionSheet
@@ -81,7 +81,7 @@
          * @extends kendo.mobile.ui.Widget
          * @param {DomElement} element DOM element.
          * @param {Object} options Configuration options.
-         * @option {String} [cancel] <Cancel> The text of the cancel button. Applicable in iOS only.
+         * @option {String} [cancel] <Cancel> The text of the cancel button.
          */
         init: function(element, options) {
             var that = this,
