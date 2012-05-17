@@ -7,11 +7,7 @@
         .Pageable()
         .Sortable()
         .Scrollable()              
-        .DataSource(dataSource => dataSource
-            .PageSize(10)
-            .Sort(sort => sort.OrderBy(s => s.Add(p => p.ProductName).Ascending()))
-            .Group(group => group.GroupBy(g => g.Add(p => p.ProductName)))
-            )              
+        .DataSource(dataSource => dataSource.Read(read => read.Url("Index", "Grid")))
     )
 </div>
 <script>

@@ -26,6 +26,13 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        public DataSourceBuilder<TModel> Type(DataSourceType type)
+        {
+            dataSource.Type = type;
+
+            return this;
+        }
+
         public DataSourceBuilder<TModel> PageSize(int pageSize)
         {
             dataSource.PageSize = pageSize;

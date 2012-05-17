@@ -1,17 +1,25 @@
 (function ($, undefined) {
    var kendo = window.kendo;
-   
+
    function parameterMap(options) {
        var result = {};
 
        if (options.sort) {
             result[this.options.prefix + "orderBy"] = $.map(options.sort, function(sort) {
-               return sort.field + "-" + sort.dir; 
+               return sort.field + "-" + sort.dir;
             }).join("~");
        }
 
-       return result; 
+       return result;
    }
+
+   kendo.data.transports["aspnetmvc-ajax"] = {
+        read: {
+            type: "POST"
+        },
+        parameterMap: parameterMap,
+        prefix: ""
+   };
 
    kendo.data.transports["aspnetmvc-server"] = kendo.data.RemoteTransport.extend({
         init: function(options) {
