@@ -318,92 +318,92 @@
             test("changing the value updates the view model", function() {
                 var dom = $('<input data-bind="value:foo" />');
 
-                var viewmodel = kendo.observable( { foo: "foo" });
+                var viewModel = kendo.observable( { foo: "foo" });
 
-                kendo.bind(dom, viewmodel);
+                kendo.bind(dom, viewModel);
 
                 dom.val("bar");
                 dom.trigger("change");
 
-                equal(viewmodel.foo, "bar");
+                equal(viewModel.foo, "bar");
             });
 
             test("changing the value of pre populated select updates the view model", function() {
                 var dom = $('<select data-bind="value:foo"><option value="foo">foo</option><option value="bar">bar</option>');
 
-                var viewmodel = kendo.observable( { foo: "foo" });
+                var viewModel = kendo.observable( { foo: "foo" });
 
-                kendo.bind(dom, viewmodel);
+                kendo.bind(dom, viewModel);
 
                 dom.find("option:last").attr("selected", "selected");
                 dom.trigger("change");
 
-                equal(viewmodel.foo, "bar");
+                equal(viewModel.foo, "bar");
             });
 
             test("changing the value of pre populated multi select updates the view model", function() {
                 var dom = $('<select data-bind="value:foo"><option value="foo">foo</option><option value="bar">bar</option>');
 
-                var viewmodel = kendo.observable( { foo: [] });
+                var viewModel = kendo.observable( { foo: [] });
 
-                kendo.bind(dom, viewmodel);
+                kendo.bind(dom, viewModel);
 
                 dom.find("option:last").attr("selected", "selected");
                 dom.trigger("change");
 
-                equal(viewmodel.foo[0], "bar");
+                equal(viewModel.foo[0], "bar");
             });
 
             test("changing radiobutton value updates the view model", function() {
                 var dom = $('<input type="radio" value="bar"  data-bind="checked:foo"/>');
 
-                var viewmodel = kendo.observable( { foo: "" });
+                var viewModel = kendo.observable( { foo: "" });
 
-                kendo.bind(dom, viewmodel);
+                kendo.bind(dom, viewModel);
 
                 dom.attr("checked", true);
                 dom.trigger("change");
 
-                equal(viewmodel.foo, "bar");
+                equal(viewModel.foo, "bar");
             });
 
             test("changing checkbox value updates the view model", function() {
                 var dom = $('<input type="checkbox" data-bind="checked:foo"/>');
 
-                var viewmodel = kendo.observable( { foo: false });
+                var viewModel = kendo.observable( { foo: false });
 
-                kendo.bind(dom, viewmodel);
+                kendo.bind(dom, viewModel);
 
                 dom.attr("checked", true);
                 dom.trigger("change");
 
-                equal(viewmodel.foo, true);
+                equal(viewModel.foo, true);
             });
 
             test("checking checkbox adds the value to the view model", function() {
                 var dom = $('<input type="checkbox" value="bar" data-bind="checked:foo"/>');
 
-                var viewmodel = kendo.observable( { foo: [] });
+                var viewModel = kendo.observable( { foo: [] });
 
-                kendo.bind(dom, viewmodel);
+                kendo.bind(dom, viewModel);
 
                 dom.attr("checked", true);
                 dom.trigger("change");
 
-                equal(viewmodel.foo[0], "bar");
+                equal(viewModel.foo[0], "bar");
             });
 
             test("unchecking checkbox removes the value from the view model", function() {
                 var dom = $('<input type="checkbox" value="bar" data-bind="checked:foo"/>');
 
-                var viewmodel = kendo.observable( { foo: ["bar"] });
+                var viewModel = kendo.observable( { foo: ["bar"] });
 
-                kendo.bind(dom, viewmodel);
+                kendo.bind(dom, viewModel);
 
                 dom.attr("checked", false);
                 dom.trigger("change");
 
-                ok(!viewmodel.foo.length);
+                ok(!viewModel.foo.length);
             });
 
             test("value binding calls set once during select change", function() {
@@ -650,28 +650,28 @@
             test("model is not updated after target is destoryed", function() {
                 var dom = $('<input data-bind="value:foo" />');
 
-                var viewmodel = kendo.observable( { foo: "foo" });
+                var viewModel = kendo.observable( { foo: "foo" });
 
-                kendo.bind(dom, viewmodel);
+                kendo.bind(dom, viewModel);
 
                 kendo.unbind(dom);
 
                 dom.val("bar");
                 dom.trigger("change");
 
-                equal(viewmodel.foo, "foo");
+                equal(viewModel.foo, "foo");
             });
 
             test("UI element is not updated after unbind", function() {
                 var dom = $('<input data-bind="value:foo" />');
 
-                var viewmodel = kendo.observable( { foo: "foo" });
+                var viewModel = kendo.observable( { foo: "foo" });
 
-                kendo.bind(dom, viewmodel);
+                kendo.bind(dom, viewModel);
 
                 kendo.unbind(dom);
 
-                viewmodel.set("foo", "bar");
+                viewModel.set("foo", "bar");
 
                 equal(dom.val(), "foo");
             });
@@ -708,10 +708,27 @@
                 dom.val("foo").trigger("change");
                 equal(viewModel.foo, "foo");
             });
+
+            test("tracks changes of template bound to parent field", function() {
+                var dom = $('<ul data-bind="source: items" data-template="ul-template"></ul>');
+
+                var viewModel = kendo.observable({
+                    root: "foo",
+                    items: [ {} ]
+                });
+
+                kendo.bind(dom, viewModel);
+                viewModel.set("root", "bar");
+                equal(dom.find("li").text(), viewModel.root);
+            });
         </script>
 
         <script id="array-template" type="text/x-kendo-template">
             <li data-bind="text:name"></li>
+        </script>
+
+        <script id="ul-template" type="text/x-kendo-template">
+            <li data-bind="text:root"></li>
         </script>
 
         <script id="simple-field-template" type="text/x-kendo-template">

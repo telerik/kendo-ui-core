@@ -144,6 +144,8 @@
                     return isDefaultPrevented;
                 };
 
+                events = events.slice();
+
                 //Do not cache the length of the events array as removing events attached through one will fail
                 for (idx = 0; idx < events.length; idx++) {
                     events[idx].call(that, e);
