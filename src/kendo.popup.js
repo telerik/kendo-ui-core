@@ -371,12 +371,11 @@
                 offset = getOffset(wrapper);
             }
 
-            offset = {
-                top: offset.top - (window.pageYOffset || document.documentElement.scrollTop || 0),
-                left: offset.left - (window.pageXOffset || document.documentElement.scrollLeft || 0)
-            };
-
-            if (viewport[0] !== window) {
+            if (viewport[0] === window) {
+                offset.top -= (window.pageYOffset || document.documentElement.scrollTop || 0);
+                offset.left -= (window.pageXOffset || document.documentElement.scrollLeft || 0);
+            }
+            else {
                 offset.top -= viewportOffset.top
                 offset.left -= viewportOffset.left
             }
