@@ -17,15 +17,11 @@
         */
         init: function(element, options) {
             var that = this,
-                align = "center center",
-                effect = "fade:in",
-                view,
+                ios = kendo.mobile.application.os === "ios",
+                align = options.align || (ios ?  "bottom center" : "center center"),
+                position = options.position || (ios ? "bottom center" : "center center"),
+                effect = options.effect || (ios ? "slideIn:up" : "fade:in"),
                 shim = $(SHIM).hide();
-
-            if (kendo.support.mobileOS.ios) {
-                align = "bottom left";
-                effect = "slideIn:up";
-            }
 
             Widget.fn.init.call(that, element, options);
             view = that.view(),
@@ -43,7 +39,7 @@
                 anchor: shim,
                 appendTo: shim,
                 origin: align,
-                position: align,
+                position: position,
                 animation: {
                     open: {
                         effects: effect,
@@ -67,6 +63,9 @@
         options: {
             name: "Shim",
             modal: true,
+            align: undefined,
+            position: undefined,
+            effect: undefined,
             duration: 200
         },
 
@@ -74,7 +73,6 @@
             this.popup.open();
             this.popup.wrapper.css({
                 width: "",
-                left: "",
                 top: ""
             });
         },
