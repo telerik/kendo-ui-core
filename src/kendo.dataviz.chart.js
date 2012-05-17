@@ -1198,6 +1198,7 @@
             labels: {
                 // TODO: Consider other names
                 dateFormats: {
+                    hours: "HH:mm",
                     days: "M/d",
                     months: "MMM 'yy",
                     years: "yyyy"

@@ -505,6 +505,43 @@
                          ["1/1/11", "1/1/12", "1/1/13", "1/1/14"]);
                 });
 
+                // ------------------------------------------------------------
+                module("Date Value Axis / Base unit / Hours");
+
+                test("Major unit is calculated for user set min/max (in hours)", function() {
+                    createDateValueAxis(
+                        new Date("2012/01/01"), new Date("2012/01/02"), {
+                            min: new Date("2012/02/01 15:00"),
+                            max: new Date("2012/02/01 16:00"),
+                            baseUnit: "hours"
+                    });
+
+                    equals(dateAxis.options.majorUnit, 1);
+                });
+
+                test("creates labels with default format", function() {
+                    createDateValueAxis(
+                        new Date("2012/01/01 15:00"), new Date("2012/01/01 16:00")
+                    );
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["14:00", "15:00", "16:00", "17:00"]);
+                });
+
+                test("creates labels with custom date format", function() {
+                    createDateValueAxis(
+                        new Date("2012/01/01 15:00"), new Date("2012/01/01 16:00"), {
+                        labels: {
+                            dateFormats: {
+                                hours: "M/d HH:mm"
+                            }
+                        }
+                    });
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["1/1 14:00", "1/1 15:00", "1/1 16:00", "1/1 17:00"]);
+                });
+
             })();
 
         </script>
