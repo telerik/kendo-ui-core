@@ -99,7 +99,7 @@
      * @exampleTitle Initialize Window, center, and configure button click action
      * @example
      * $(document).ready(function(){
-     *     var window = $("#window").kendoWindow({
+     *     var win = $("#window").kendoWindow({
      *         height: "200px",
      *         title: "Centered Window",
      *         visible: false,
@@ -108,9 +108,9 @@
      * });
      *
      * $("#openButton").click(function(){
-     *     var window = $("#window").data("kendoWindow");
-     *     window.center();
-     *     window.open();
+     *     var win = $("#window").data("kendoWindow");
+     *     win.center();
+     *     win.open();
      * });
      *
      * @section
@@ -143,7 +143,7 @@
      *
      * @exampleTitle Accessing an existing Window instance
      * @example
-     * var window = $("#window").data("kendoWindow");
+     * var win = $("#window").data("kendoWindow");
      *
      */
     var kendo = window.kendo,
