@@ -12,18 +12,15 @@
         <script src="../src/kendo.dataviz.svg.js"></script>
     </head>
     <body>
-        <div id="chart" style="width: 400px; height; 300px;"></div>
+        <div id="chart" style="width: 500px; height; 300px;"></div>
         <script>
             $(function() {
                 var data = [{
                     price: 10,
-                    date: new Date("2012/02/01")
+                    date: new Date("2012/01/01")
                     }, {
                     price: 20,
-                    date: new Date("2012/02/09")
-                    }, {
-                    price: 15,
-                    date: new Date("2012/02/10")
+                    date: new Date("2012/02/01")
                 }];
 
                 $("#chart").kendoChart({
