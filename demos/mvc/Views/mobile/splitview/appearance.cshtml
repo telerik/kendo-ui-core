@@ -1,43 +1,21 @@
 <div data-role="splitview" id="appearance" data-style="vertical">
-    <div data-role="pane" data-layout="side-default" data-transition="slide">
-        <div data-role="view" data-title="Settings" id="side-root">
-            <ul data-role="listview" data-style="inset" data-type="group">
-                <li> Inboxes
-                    <ul>
-                        <li><a href="#side-inbox">All Inboxes</a></li>
-                        <li><a href="#side-inbox">GMail</a></li>
-                        <li><a href="#side-inbox">Hotmail</a></li>
-                        <li><a href="#side-inbox">Yahoo</a></li>
-                    </ul>
-                </li>
-                <li> Accounts
-                    <ul>
-                        <li><a href="#side-inbox">GMail</a></li>
-                        <li><a href="#side-inbox">Hotmail</a></li>
-                        <li><a href="#side-inbox">Yahoo</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-
-        <div data-role="view" id="side-inbox">
-            <ul data-role="listview">
-                <li><a href="#message" data-target="main-pane">
-                        <span class="date">Yesterday</span>
-                        <h3>FiveSquare</h3>
-                        <span class="excerpt">Dear John, Jane wants to be your friend in FiveSquare...</span>
-                </a></li>
-                <li><a href="#message" data-target="main-pane">
-                        <span class="date">Yesterday</span>
-                        <h3>FiveSquare</h3>
-                        <span class="excerpt">Dear John, Jane wants to be your friend in FiveSquare...</span>
-                </a></li>
-                <li><a href="#message" data-target="main-pane">
-                        <span class="date">Yesterday</span>
-                        <h3>FiveSquare</h3>
-                        <span class="excerpt">Dear John, Jane wants to be your friend in FiveSquare...</span>
-                </a></li>
-            </ul>
+    <div id="top-pane" data-role="pane" data-layout="side-default">
+        <div data-role="view" data-title="Photo Gallery" id="side-root">
+            <div id="scrollview-container">
+                <div data-role="scrollview" data-page="0">
+                    <div class="photo photo1">
+                    </div><div class="photo photo2">
+                    </div><div class="photo photo3">
+                    </div><div class="photo photo4">
+                    </div><div class="photo photo5">
+                    </div><div class="photo photo6">
+                    </div><div class="photo photo7">
+                    </div><div class="photo photo8">
+                    </div><div class="photo photo9">
+                    </div><div class="photo photo10">
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div data-role="layout" data-id="side-default" data-show="toggleBackButton">
@@ -50,36 +28,54 @@
         </div>
     </div>
 
-    <div data-role="pane" data-layout="main-default" id="main-pane">
+    <div data-role="pane" id="main-pane">
         <div data-role="view">
-        </div>
-
-        <div data-role="layout" data-id="main-default">
         </div>
     </div>
 </div>
 
-<script>
-    function toggleBackButton(e) {
-        if (e.view.id === "#side-root") {
-            e.view.element.find("[data-role=backbutton]").css("visibility", "hidden");
-        } else {
-            e.view.element.find("[data-role=backbutton]").css("visibility", "visible");
-        }
-    }
+<script type="text/javascript">
+    $(".photo").click(function () {
+        $("#main-pane").find(".km-content").css("background-image", $(this).css("background-image"));
+    });
 </script>
 
 <style scoped>
-    #side-inbox .date {
-       float: right;
-       color: rgba(200,200,200,.8);
-       font-size: .7em;
-       font-weight: normal;
+    #top-pane {
+        height: 13px;
     }
 
-    #side-inbox .excerpt {
-       clear: both;
-       font-size: .7em;
-       font-weight: normal;
+    #scrollview-container .photo {
+        margin: 1px;
+        width: 99px;
+        height: 99px;
+        display: inline-block;
+        -webkit-background-size: auto 100%;
+        background-size: auto 100%;
+        background-repeat: no-repeat;
+        background-position: center center;
     }
+
+    .photo1 {background-image: url("../../content/mobile/cities/220/sydney.jpg");}
+    .photo2 {background-image: url("../../content/mobile/cities/220/bonn.jpg");}
+    .photo3 {background-image: url("../../content/mobile/cities/220/boston.jpg");}
+    .photo4 {background-image: url("../../content/mobile/cities/220/cairo.jpg");}
+    .photo5 {background-image: url("../../content/mobile/cities/220/cancun.jpg");}
+    .photo6 {background-image: url("../../content/mobile/cities/220/cape-town.jpg");}
+    .photo7 {background-image: url("../../content/mobile/cities/220/liverpool.jpg");}
+    .photo8 {background-image: url("../../content/mobile/cities/220/london.jpg");}
+    .photo9 {background-image: url("../../content/mobile/cities/220/melbourne.jpg");}
+    .photo10 {background-image: url("../../content/mobile/cities/220/san-francisco.jpg");}
+
+    #main-pane .km-content
+    {
+        -webkit-background-size: 100% 100%;
+        background-size: 100% 100%;
+    }
+
+    #scrollview-container {
+        width: 100%;
+        margin: 0;
+    }
+
 </style>
