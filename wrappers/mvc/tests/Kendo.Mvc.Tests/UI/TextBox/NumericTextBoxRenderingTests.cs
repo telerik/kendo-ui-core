@@ -1,323 +1,197 @@
 namespace Kendo.Mvc.UI.Tests
 {
 
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
+    using Kendo.Mvc.UI.Html;
     using Moq;
+    using System;
+    using System.IO;
     using Xunit;
 
     public class NumericTextBoxRenderingTests
     {
-        //private readonly NumericTextBox<double> input;
-        //private readonly Mock<IHtmlNode> rootTag;
-        //Mock<TextWriter> textWriter;
+        private readonly NumericTextBoxHtmlBuilder<double> renderer;
+        private readonly NumericTextBox<double> input;
+        private readonly Mock<TextWriter> writer;
 
         public NumericTextBoxRenderingTests()
         {
-            //textWriter = new Mock<TextWriter>();
+            input = NumericTextBoxTestHelper.CreateInput<double>();
+            input.Name = "NumericTextBox";
 
-            //tagBuilder = new Mock<ITextBoxBaseHtmlBuilder>();
-            //rootTag = new Mock<IHtmlNode>();
-            //rootTag.SetupGet(t => t.Children).Returns(() => new List<IHtmlNode>());
-
-            //tagBuilder.Setup(t => t.Build("t-numerictextbox")).Returns(rootTag.Object);
-
-            //input = TextBoxBaseTestHelper.CreateNumericTextBox<double>(tagBuilder.Object);
-            //input.Name = "NumericTextBox";
+            renderer = new NumericTextBoxHtmlBuilder<double>(input);
+            writer = new Mock<TextWriter>();
         }
 
-        //[Fact]
-        //public void Render_should_output_DatePicker_start()
-        //{
-        //    tagBuilder.Setup(t => t.Build("t-numerictextbox")).Returns(rootTag.Object).Verifiable();
+        [Fact]
+        public void Renderer_outputs_input_element()
+        {
+            var tag = renderer.Build();
 
-        //    input.Render();
+            tag.TagName.ShouldEqual("input");
+        }
 
-        //    tagBuilder.Verify();
-        //}
+        [Fact]
+        public void Renderer_outputs_html_attributes()
+        {
+            input.HtmlAttributes.Add("readonly", "readonly");
+            var tag = renderer.Build();
 
-        //[Fact]
-        //public void Render_should_output_Input()
-        //{
-        //    tagBuilder.Setup(t => t.Build("t-numerictextbox")).Returns(rootTag.Object);
+            tag.Attribute("readonly").ShouldEqual("readonly");
+        }
 
-        //    tagBuilder.Setup(r => r.InputTag()).Verifiable();
+        [Fact]
+        public void Renderer_outputs_name_attaribute()
+        {
+            input.Name = "NumericTextBox";
 
-        //    input.Render();
+            var tag = renderer.Build();
 
-        //    tagBuilder.Verify();
-        //}
+            tag.Attribute("name").ShouldEqual("NumericTextBox");
+        }
 
-        //[Fact]
-        //public void Render_should_output_Buttons()
-        //{
-        //    input.Spinners = true;
+        [Fact]
+        public void Renderer_outputs_sanitized_id()
+        {
+            input.Name = "NumericTextBox?";
 
-        //    tagBuilder.Setup(t => t.Build("t-numerictextbox")).Returns(rootTag.Object);
+            var tag = renderer.Build();
 
-        //    tagBuilder.Setup(r => r.UpButtonTag()).Verifiable();
-        //    tagBuilder.Setup(r => r.DownButtonTag()).Verifiable();
+            tag.Attribute("id").ShouldEqual("NumericTextBox_");
+        }
 
-        //    input.Render();
+        [Fact]
+        public void Renderer_outputs_input_type_number()
+        {
+            var tag = renderer.Build();
 
-        //    tagBuilder.VerifyAll();
-        //}
+            tag.Attribute("type").ShouldEqual("number");
+        }
 
-        //[Fact]
-        //public void Render_should_not_output_Buttons_if_spinner_is_false()
-        //{
-        //    input.Spinners = false;
+        [Fact]
+        public void Renderer_outputs_input_with_k_input_class()
+        {
+            var tag = renderer.Build();
 
-        //    tagBuilder.Setup(t => t.Build("t-numerictextbox")).Returns(rootTag.Object);
+            tag.Attribute("class").ShouldEqual(UIPrimitives.Input);
+        }
 
-        //    tagBuilder.Setup(r => r.UpButtonTag()).Verifiable();
-        //    tagBuilder.Setup(r => r.DownButtonTag()).Verifiable();
+        [Fact]
+        public void Renderer_outputs_input_with_min_attribute()
+        {
+            input.Min = 10;
 
-        //    input.Render();
+            var tag = renderer.Build();
 
-        //    tagBuilder.Verify(r => r.UpButtonTag(), Times.Never());
-        //    tagBuilder.Verify(r => r.DownButtonTag(), Times.Never());
-        //}
+            tag.Attribute("min").ShouldEqual("10");
+        }
 
-        //[Fact]
-        //public void Render_should_throw_exception_if_NegativePattern_index_is_incorrect() 
-        //{
-        //    input.NegativePatternIndex = 6;
+        [Fact]
+        public void Renderer_outputs_input_with_max_attribute()
+        {
+            input.Max = 10;
 
-        //    Assert.Throws<IndexOutOfRangeException>(() => input.Render());
-        //}
+            var tag = renderer.Build();
 
-        //[Fact]
-        //public void ObjectWriter_should_call_objectWriter_complete_method()
-        //{
-        //    TextBoxBaseTestHelper.clientSideObjectWriter.Setup(w => w.Complete());
+            tag.Attribute("max").ShouldEqual("10");
+        }
 
-        //    input.WriteInitializationScript(textWriter.Object);
+        [Fact]
+        public void Renderer_outputs_input_with_step_attribute()
+        {
+            input.Step = 0.1;
 
-        //    TextBoxBaseTestHelper.clientSideObjectWriter.Verify(w => w.Complete());
-        //}
+            var tag = renderer.Build();
 
-        //[Fact]
-        //public void ObjectWriter_should_append_SelectedValue_property()
-        //{
-        //    double? value = 10.0;
+            Convert.ToDouble(tag.Attribute("step")).ShouldEqual(0.1);
+        }
 
-        //    input.Value = value;
+        [Fact]
+        public void ObjectWriter_appends_format_property()
+        {
+            var format = "c";
+            input.Format = format;
 
-        //    TextBoxBaseTestHelper.clientSideObjectWriter.Setup(w => w.AppendObject("val", value)).Verifiable();
+            NumericTextBoxTestHelper.clientSideObjectWriter.Setup(w => w.Append("format", format)).Verifiable();
 
-        //    input.WriteInitializationScript(textWriter.Object);
+            input.WriteInitializationScript(writer.Object);
 
-        //    TextBoxBaseTestHelper.clientSideObjectWriter.Verify(w => w.AppendObject("val", value));
-        //}
+            NumericTextBoxTestHelper.clientSideObjectWriter.Verify(w => w.Append("format", format));
+        }
 
-        //[Fact]
-        //public void ObjectWriter_should_append_IncrementStep_property()
-        //{
-        //    double value = 1;
+        [Fact]
+        public void ObjectWriter_appends_culture_property()
+        {
+            var culture = "en-US";
+            input.Culture = culture;
 
-        //    input.IncrementStep = value;
+            NumericTextBoxTestHelper.clientSideObjectWriter.Setup(w => w.Append("culture", culture)).Verifiable();
 
-        //    TextBoxBaseTestHelper.clientSideObjectWriter.Setup(w => w.AppendObject("step", value)).Verifiable();
+            input.WriteInitializationScript(writer.Object);
 
-        //    input.WriteInitializationScript(textWriter.Object);
+            NumericTextBoxTestHelper.clientSideObjectWriter.Verify(w => w.Append("culture", culture));
+        }
 
-        //    TextBoxBaseTestHelper.clientSideObjectWriter.Verify(w => w.AppendObject("step", value));
-        //}
+        [Fact]
+        public void ObjectWriter_appends_placeholder_property()
+        {
+            var placeholder = "en-US";
+            input.Placeholder = placeholder;
 
-        //[Fact]
-        //public void ObjectWriter_should_append_MinValue_property()
-        //{
-        //    double value = 10;
+            NumericTextBoxTestHelper.clientSideObjectWriter.Setup(w => w.Append("placeholder", placeholder)).Verifiable();
 
-        //    input.MinValue = value;
+            input.WriteInitializationScript(writer.Object);
 
-        //    TextBoxBaseTestHelper.clientSideObjectWriter.Setup(w => w.AppendObject("minValue", value)).Verifiable();
+            NumericTextBoxTestHelper.clientSideObjectWriter.Verify(w => w.Append("placeholder", placeholder));
+        }
 
-        //    input.WriteInitializationScript(textWriter.Object);
+        [Fact]
+        public void ObjectWriter_appends_spinners_property()
+        {
+            var spinners = false;
+            input.Spinners = spinners;
 
-        //    TextBoxBaseTestHelper.clientSideObjectWriter.Verify(w => w.AppendObject("minValue", value));
-        //}
+            NumericTextBoxTestHelper.clientSideObjectWriter.Setup(w => w.Append("spinners", spinners, true)).Verifiable();
 
-        //[Fact]
-        //public void ObjectWriter_should_append_MaxValue_property()
-        //{
-        //    double value = 10;
+            input.WriteInitializationScript(writer.Object);
 
-        //    input.MaxValue = value;
+            NumericTextBoxTestHelper.clientSideObjectWriter.Verify(w => w.Append("spinners", spinners, true));
+        }
 
-        //    TextBoxBaseTestHelper.clientSideObjectWriter.Setup(w => w.AppendObject("maxValue", value)).Verifiable();
+        [Fact]
+        public void ObjectWriter_appends_decimals_property()
+        {
+            int? decimals = 2;
+            input.Decimals = decimals;
 
-        //    input.WriteInitializationScript(textWriter.Object);
+            NumericTextBoxTestHelper.clientSideObjectWriter.Setup(w => w.Append("decimals", decimals)).Verifiable();
 
-        //    TextBoxBaseTestHelper.clientSideObjectWriter.Verify(w => w.AppendObject("maxValue", value));
-        //}
+            input.WriteInitializationScript(writer.Object);
 
-        //[Fact]
-        //public void ObjectWriter_should_append_DecimalDigits_property()
-        //{
-        //    int value = 1;
+            NumericTextBoxTestHelper.clientSideObjectWriter.Verify(w => w.Append("decimals", decimals));
+        }
 
-        //    input.DecimalDigits = value;
+        [Fact]
+        public void ObjectWriter_appends_spin_event_handler()
+        {
+            input.ClientEvents.OnSpin.HandlerName = "spin";
 
-        //    TextBoxBaseTestHelper.clientSideObjectWriter.Setup(w => w.Append("digits", value)).Verifiable();
+            NumericTextBoxTestHelper.clientSideObjectWriter.Setup(w => w.AppendClientEvent("spin", input.ClientEvents.OnSpin)).Verifiable();
 
-        //    input.WriteInitializationScript(textWriter.Object);
+            input.WriteInitializationScript(writer.Object);
 
-        //    TextBoxBaseTestHelper.clientSideObjectWriter.Verify(w => w.Append("digits", value));
-        //}
+            NumericTextBoxTestHelper.clientSideObjectWriter.Verify(w => w.AppendClientEvent("spin", input.ClientEvents.OnSpin));
+        }
 
-        //[Fact]
-        //public void ObjectWriter_should_append_DecimalSeparator_property()
-        //{
-        //    const string value = ".";
+        [Fact]
+        public void ObjectWriter_appends_change_event_handler()
+        {
+            input.ClientEvents.OnChange.HandlerName = "change";
 
-        //    input.DecimalSeparator = value;
+            NumericTextBoxTestHelper.clientSideObjectWriter.Setup(w => w.AppendClientEvent("change", input.ClientEvents.OnChange)).Verifiable();
 
-        //    TextBoxBaseTestHelper.clientSideObjectWriter.Setup(w => w.Append("separator", value)).Verifiable();
+            input.WriteInitializationScript(writer.Object);
 
-        //    input.WriteInitializationScript(textWriter.Object);
-
-        //    TextBoxBaseTestHelper.clientSideObjectWriter.Verify(w => w.Append("separator", value));
-        //}
-
-        //[Fact]
-        //public void ObjectWriter_should_append_DecimalGroupSeparator_property()
-        //{
-        //    const string value = ",";
-
-        //    input.NumberGroupSeparator = value;
-
-        //    TextBoxBaseTestHelper.clientSideObjectWriter.Setup(w => w.AppendNullableString("groupSeparator", value)).Verifiable();
-
-        //    input.WriteInitializationScript(textWriter.Object);
-
-        //    TextBoxBaseTestHelper.clientSideObjectWriter.Verify(w => w.AppendNullableString("groupSeparator", value));
-        //}
-
-        //[Fact]
-        //public void ObjectWriter_should_append_DecimalGroupSize_property()
-        //{
-        //    const int value = 3;
-
-        //    input.NumberGroupSize = value;
-
-        //    TextBoxBaseTestHelper.clientSideObjectWriter.Setup(w => w.Append("groupSize", value)).Verifiable();
-
-        //    input.WriteInitializationScript(textWriter.Object);
-
-        //    TextBoxBaseTestHelper.clientSideObjectWriter.Verify(w => w.Append("groupSize", value));
-        //}
-
-        //[Fact]
-        //public void ObjectWriter_should_append_NegativePatternIndex_property()
-        //{
-        //    const int value = 1;
-
-        //    input.NegativePatternIndex = value;
-
-        //    TextBoxBaseTestHelper.clientSideObjectWriter.Setup(w => w.Append("negative", value)).Verifiable();
-
-        //    input.WriteInitializationScript(textWriter.Object);
-
-        //    TextBoxBaseTestHelper.clientSideObjectWriter.Verify(w => w.Append("negative", value));
-        //}
-
-        //public void ObjectWriter_should_append_WaterMarkText_property()
-        //{
-        //    const string value = "Enter value";
-
-        //    input.EmptyMessage = value;
-
-        //    TextBoxBaseTestHelper.clientSideObjectWriter.Setup(w => w.Append("text", value)).Verifiable();
-
-        //    input.WriteInitializationScript(textWriter.Object);
-
-        //    TextBoxBaseTestHelper.clientSideObjectWriter.Verify(w => w.Append("text", value));
-        //}
-
-        //[Fact]
-        //public void ObjectWriter_should_append_TextBox_type()
-        //{
-        //    TextBoxBaseTestHelper.clientSideObjectWriter.Setup(w => w.Append("type", "numeric")).Verifiable();
-
-        //    input.WriteInitializationScript(textWriter.Object);
-
-        //    TextBoxBaseTestHelper.clientSideObjectWriter.Verify(w => w.Append("type", "numeric"));
-        //}
-
-        //[Fact]
-        //public void ObjectWriter_should_append_Load_property_of_clientEvents()
-        //{
-        //    input.ClientEvents.OnLoad.CodeBlock = () => { };
-
-        //    TextBoxBaseTestHelper.clientSideObjectWriter.Setup(w => w.AppendClientEvent("onLoad", input.ClientEvents.OnLoad)).Verifiable();
-
-        //    input.WriteInitializationScript(textWriter.Object);
-
-        //    TextBoxBaseTestHelper.clientSideObjectWriter.Verify(w => w.AppendClientEvent("onLoad", input.ClientEvents.OnLoad));
-        //}
-
-        //[Fact]
-        //public void ObjectWriter_should_append_Select_property_of_clientEvents()
-        //{
-        //    input.ClientEvents.OnChange.CodeBlock = () => { };
-
-        //    TextBoxBaseTestHelper.clientSideObjectWriter.Setup(w => w.AppendClientEvent("onChange", input.ClientEvents.OnChange)).Verifiable();
-
-        //    input.WriteInitializationScript(textWriter.Object);
-
-        //    TextBoxBaseTestHelper.clientSideObjectWriter.Verify(w => w.AppendClientEvent("onChange", input.ClientEvents.OnChange));
-        //}
-
-        //[Fact]
-        //public void Render_should_not_throw_exception_if_value_is_equal_to_maxValue()
-        //{
-        //    double value = 10;
-
-        //    input.Value = value;
-        //    input.MaxValue = value;
-
-        //    Assert.DoesNotThrow(() => input.Render());
-        //}
-
-        //[Fact]
-        //public void Render_should_not_throw_exception_if_value_is_equal_to_minValue()
-        //{
-        //    double value = 10;
-
-        //    input.Value = value;
-        //    input.MinValue = value;
-        //    input.MaxValue = 100;
-
-        //    Assert.DoesNotThrow(() => input.Render());
-        //}
-
-        //[Fact]
-        //public void Render_not_should_throw_exception_if_value_is_bigger_then_minValue_and_less_then_maxValue()
-        //{
-        //    input.Value = 10;
-        //    input.MinValue = 11;
-        //    input.MaxValue = 100;
-
-        //    Assert.DoesNotThrow(() => input.Render());
-
-        //    input.Value = 101;
-        //    input.MinValue = 11;
-        //    input.MaxValue = 100;
-
-        //    Assert.DoesNotThrow(() => input.Render());
-        //}
-
-        //[Fact]
-        //public void Render_should_not_throw_exception_if_value_is_null_and_we_have_minValue_and_maxValue()
-        //{
-        //    input.Value = null;
-        //    input.MinValue = 11;
-        //    input.MaxValue = 100;
-
-        //    Assert.DoesNotThrow(() => input.Render());
-        //}
+            NumericTextBoxTestHelper.clientSideObjectWriter.Verify(w => w.AppendClientEvent("change", input.ClientEvents.OnChange));
+        }
     }
 }
