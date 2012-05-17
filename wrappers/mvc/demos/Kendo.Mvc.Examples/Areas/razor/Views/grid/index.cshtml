@@ -6,8 +6,12 @@
         .Name("Grid")
         .Pageable()
         .Sortable()
-        .Scrollable()      
-        .DataSource(dataSource => dataSource.OrderBy(sort => sort.Add(p => p.ProductName).Ascending()))  
+        .Scrollable()              
+        .DataSource(dataSource => dataSource
+            .PageSize(10)
+            .Sort(sort => sort.OrderBy(s => s.Add(p => p.ProductName).Ascending()))
+            .Group(group => group.GroupBy(g => g.Add(p => p.ProductName)))
+            )              
     )
 </div>
 <script>

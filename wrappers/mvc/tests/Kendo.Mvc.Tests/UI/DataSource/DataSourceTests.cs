@@ -157,5 +157,55 @@
 
             result.ContainsKey("sort").ShouldBeFalse();
         }
+
+        [Fact]
+        public void ToJson_group_expressions_are_serialized()
+        {
+            dataSource.Groups.Add(new GroupDescriptor
+            {
+                Member = "Foo",
+                SortDirection = System.ComponentModel.ListSortDirection.Descending
+            });
+
+            var result = dataSource.ToJson();
+            var group = (IEnumerable<IDictionary<string, object>>)result["group"];
+
+            group.Count().ShouldEqual(1);
+            group.ElementAt(0)["field"].ShouldEqual("Foo");
+            group.ElementAt(0)["dir"].ShouldEqual("desc");
+        }
+
+        [Fact]
+        public void ToJson_group_expressions_are_not_serialized_if_not_set()
+        {
+            var result = dataSource.ToJson();
+
+            result.ContainsKey("groups").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void ToJson_multiple_group_expressions_are_serialized()
+        {
+            dataSource.Groups.Add(new GroupDescriptor
+            {
+                Member = "Foo",
+                SortDirection = System.ComponentModel.ListSortDirection.Descending
+            });
+
+            dataSource.Groups.Add(new GroupDescriptor
+            {
+                Member = "Bar"
+            });
+
+            var result = dataSource.ToJson();
+            var groups = (IEnumerable<IDictionary<string, object>>)result["group"];
+
+            groups.Count().ShouldEqual(2);
+            groups.ElementAt(0)["field"].ShouldEqual("Foo");
+            groups.ElementAt(0)["dir"].ShouldEqual("desc");
+
+            groups.ElementAt(1)["field"].ShouldEqual("Bar");
+            groups.ElementAt(1)["dir"].ShouldEqual("asc");
+        }
     }
 }

@@ -68,16 +68,21 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
-        /// <summary>
-        /// Configures the initial sort order.
-        /// </summary>
-        /// <param name="configurator">The configurator.</param>
-        /// <returns></returns>
-        public virtual DataSourceBuilder<TModel> OrderBy(Action<DataSourceSortDescriptorFactory<TModel>> configurator)
+        public virtual DataSourceBuilder<TModel> Sort(Action<DataSourceOrderByBuilder<TModel>> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");           
+            Guard.IsNotNull(configurator, "configurator");
 
-            configurator(new DataSourceSortDescriptorFactory<TModel>(dataSource.OrderBy));
+            configurator(new DataSourceOrderByBuilder<TModel>(dataSource));
+
+            return this;
+        }
+
+
+        public DataSourceBuilder<TModel> Group(Action<DataSourceGroupsBuilder<TModel>> configurator)
+        {
+            Guard.IsNotNull(configurator, "configurator");
+
+            configurator(new DataSourceGroupsBuilder<TModel>(dataSource));
 
             return this;
         }

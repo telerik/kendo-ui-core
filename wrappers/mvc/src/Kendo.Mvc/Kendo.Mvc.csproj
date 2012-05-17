@@ -313,6 +313,8 @@
     <Compile Include="UI\DataSource\CrudOperation.cs" />
     <Compile Include="UI\DataSource\DataSource.cs" />
     <Compile Include="UI\DataSource\Fluent\CrudOperationBuilder.cs" />
+    <Compile Include="UI\DataSource\Fluent\DataSourceGroupsBuilder.cs" />
+    <Compile Include="UI\DataSource\Fluent\DataSourceSortExpressionsBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\ReadOnlyDataSourceBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\DataSourceBuilder.cs" />
     <Compile Include="UI\DataSource\Transport.cs" />
@@ -734,6 +736,7 @@
     <Compile Include="UI\INavigationComponentHtmlBuilder.cs" />
     <Compile Include="UI\InputComponentExtensions.cs" />
     <Compile Include="UI\IViewComponent.cs" />
+    <Compile Include="UI\JsonObjectExtensions.cs" />
     <Compile Include="UI\LiteralNode.cs" />
     <Compile Include="Infrastructure\Implementation\PredicateFilterDescription.cs" />
     <Compile Include="Infrastructure\Implementation\Grouping\AggregateFunctionsGroup.cs" />
@@ -1088,9 +1091,7 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UI\Gauge\Scales\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <ItemGroup>
