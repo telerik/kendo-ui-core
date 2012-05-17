@@ -241,7 +241,7 @@ namespace("mvc", function() {
 
     mkdir(stylesDest);
     desc("Copy debug scripts and styles to the MVC demo site");
-    task("debug-examples", [], function() {
+    task("debug-examples", ["merge-scripts"], function() {
         var sharedFiles = [{
                 name: "console.js",
                 src: path.join(DEMOS_SHARED, SCRIPTS_PATH),
@@ -263,11 +263,12 @@ namespace("mvc", function() {
 
         deploySuiteFiles("web");
         deploySuiteFiles("dataviz");
+        kendoScripts.buildSuiteScripts("aspnetmvc", scriptsDest, "", false);
         deployFiles(sharedFiles);
     });
 
     desc("Build release version");
-    task("bundle", [], function() {
+    task("bundle", ["merge-scripts"], function() {
         kendoBuild.msBuild(
             MVC_WRAPPERS_PROJECT,
             [ "/t:Clean;Build", "/p:Configuration=Release" ],

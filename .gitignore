@@ -15,6 +15,7 @@ deploy/
 demos/examples/shared/js/kendo.examples.js
 demos/mvc/content/docs/
 !src/docs
+src/kendo.aspnetmvc.js
 live/
 node_modules
 release/

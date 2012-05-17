@@ -8,6 +8,7 @@
     <link href="<%= Url.Content("~/Content/examples-offline.css") %>" rel="stylesheet" type="text/css" />
     <script src="<%= Url.Content("~/Scripts/jquery-1.7.2.min.js") %>"></script>
     <script src="<%= Url.Content("~/Scripts/kendo.dataviz.js") %>"></script>
+    <script src="<%= Url.Content("~/Scripts/kendo.aspnetmvc.js") %>"></script>
     <script src="<%= Url.Content("~/Scripts/console.js") %>"></script>
     <script src="<%= Url.Content("~/Scripts/prettify.js") %>"></script>
     <asp:ContentPlaceHolder runat="server" ID="HeadContent" />

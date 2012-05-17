@@ -311,7 +311,7 @@ function msBuild(project, params, onSuccess, onError) {
         build = spawnSilent("xbuild", buildParams, {}, success, onError);
     } else {
         build = spawnSilent(
-            "/cygdrive/c/Windows/Microsoft.NET/Framework64/v4.0.30319/msbuild.exe",
+            "c:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\msbuild.exe",
             buildParams,
             {},
             success,
