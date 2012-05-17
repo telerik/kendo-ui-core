@@ -61,6 +61,7 @@
             var that = this,
                 container = mobile.application.element,
                 popupOptions = {
+                    viewport: kendo.mobile.application.element,
                     appendTo: container,
                     open: function() {
                         that.overlay.show();
