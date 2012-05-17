@@ -251,7 +251,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual DatePickerBuilder DatePicker()
         {
-            return new DatePickerBuilder(new DatePicker(ViewContext, ClientSideObjectWriterFactory));
+            return new DatePickerBuilder(new DatePicker(ViewContext, ClientSideObjectWriterFactory, ViewData));
         }
 
         /// <summary>
@@ -669,7 +669,7 @@ namespace Kendo.Mvc.UI
         //    return IntegerTextBox()
         //            .Name(GetName(expression))
         //            .Value((Nullable<int>)ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model)
-        //            .MinValue(GetRangeValidationParameter<int>(validators, minimumValidator) ?? int.MinValue)
+        //            .Max(GetRangeValidationParameter<int>(validators, minimumValidator) ?? int.Max)
         //            .MaxValue(GetRangeValidationParameter<int>(validators, maximumValidator) ?? int.MaxValue);
         //}
 
@@ -692,7 +692,7 @@ namespace Kendo.Mvc.UI
         //    return IntegerTextBox()
         //            .Name(GetName(expression))
         //            .Value(value == null ? default(int) : (int)value)
-        //            .MinValue(GetRangeValidationParameter<int>(validators, minimumValidator) ?? int.MinValue)
+        //            .Max(GetRangeValidationParameter<int>(validators, minimumValidator) ?? int.Max)
         //            .MaxValue(GetRangeValidationParameter<int>(validators, maximumValidator) ?? int.MaxValue);
         //}
 
@@ -713,7 +713,7 @@ namespace Kendo.Mvc.UI
         //    return CurrencyTextBox()
         //            .Name(GetName(expression))
         //            .Value((Nullable<decimal>)ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model)
-        //            .MinValue(GetRangeValidationParameter<decimal>(validators, minimumValidator) ?? decimal.MinValue)
+        //            .Max(GetRangeValidationParameter<decimal>(validators, minimumValidator) ?? decimal.Max)
         //            .MaxValue(GetRangeValidationParameter<decimal>(validators, maximumValidator) ?? decimal.MaxValue);
         //}
 
@@ -736,7 +736,7 @@ namespace Kendo.Mvc.UI
         //    return CurrencyTextBox()
         //            .Name(GetName(expression))
         //            .Value(value == null ? default(decimal) : (decimal)value)
-        //            .MinValue(GetRangeValidationParameter<decimal>(validators, minimumValidator) ?? decimal.MinValue)
+        //            .Max(GetRangeValidationParameter<decimal>(validators, minimumValidator) ?? decimal.Max)
         //            .MaxValue(GetRangeValidationParameter<decimal>(validators, maximumValidator) ?? decimal.MaxValue);
         //}
 
@@ -757,7 +757,7 @@ namespace Kendo.Mvc.UI
         //    return PercentTextBox()
         //            .Name(GetName(expression))
         //            .Value((Nullable<double>)ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model)
-        //            .MinValue(GetRangeValidationParameter<double>(validators, minimumValidator) ?? double.MinValue)
+        //            .Max(GetRangeValidationParameter<double>(validators, minimumValidator) ?? double.Max)
         //            .MaxValue(GetRangeValidationParameter<double>(validators, maximumValidator) ?? double.MaxValue);
         //}
 
@@ -780,7 +780,7 @@ namespace Kendo.Mvc.UI
         //    return PercentTextBox()
         //            .Name(GetName(expression))
         //            .Value(value == null ? default(double) : (double)value)
-        //            .MinValue(GetRangeValidationParameter<double>(validators, minimumValidator) ?? double.MinValue)
+        //            .Max(GetRangeValidationParameter<double>(validators, minimumValidator) ?? double.Max)
         //            .MaxValue(GetRangeValidationParameter<double>(validators, maximumValidator) ?? double.MaxValue);
         //}
 
