@@ -5,12 +5,12 @@ namespace Kendo.Mvc.UI.Fluent
     using Extensions;
     using Infrastructure;
     using Kendo.Mvc.Resources;
-    using System.ComponentModel;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="DatePicker"/> component.
     /// </summary>
-    public class DatePickerBuilder : DatePickerBaseBuilder<DatePicker, DatePickerBuilder>
+    public class DatePickerBuilder :ViewComponentBuilderBase<DatePicker, DatePickerBuilder>, IHideObjectMembers
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DatePickerBuilder"/> class.
@@ -20,36 +20,104 @@ namespace Kendo.Mvc.UI.Fluent
             : base(component)
         {
         }
-
+        
         /// <summary>
-        /// Sets whether datepicker to be rendered with button, which shows calendar on click.
+        /// Sets the date format, which will be used to parse and format the machine date.
         /// </summary>
-        public DatePickerBuilder ShowButton(bool showButton) 
+        public DatePickerBuilder Format(string format)
         {
-            Component.ShowButton = showButton;
+            Component.Format = format;
+
+            return this;
+        }
+
+        public DatePickerBuilder ParseFormats(IEnumerable<string> formats)
+        {
+            Component.ParseFormats.Clear();
+            Component.ParseFormats.AddRange(formats);
+
+            return this;
+        }
+
+        public DatePickerBuilder Footer(string footer)
+        {
+            Component.Footer = footer;
+
+            return this;
+        }
+
+        public DatePickerBuilder Depth(string depth)
+        {
+            Component.Depth = depth;
+
+            return this;
+        }
+
+        public DatePickerBuilder Start(string start)
+        {
+            Component.Start = start;
 
             return this;
         }
 
         /// <summary>
-        /// Sets the title of the datepicker button.
+        /// Configures the client-side events.
         /// </summary>
-        public DatePickerBuilder ButtonTitle(string title) 
+        /// <param name="clientEventsAction">The client events action.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Telerik().DatePicker()
+        ///             .Name("DatePicker")
+        ///             .ClientEvents(events =>
+        ///                 events.OnLoad("onLoad").OnSelect("onSelect")
+        ///             )
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public DatePickerBuilder ClientEvents(Action<DatePickerClientEventsBuilder> clientEventsAction)
         {
-            Guard.IsNotNullOrEmpty(title, "title");
+            Guard.IsNotNull(clientEventsAction, "clientEventsAction");
 
-            Component.ButtonTitle = title;
+            clientEventsAction(new DatePickerClientEventsBuilder(Component.ClientEvents));
 
             return this;
         }
 
+        public DatePickerBuilder MonthTemplate(string content)
+        {
+            Component.MonthTemplate.content = content;
+
+            return this;
+        }
+
+        public DatePickerBuilder MonthTemplate(Action<MonthTemplateBuilder> monthTemplateAction)
+        {
+            Guard.IsNotNull(monthTemplateAction, "clientEventsAction");
+
+            monthTemplateAction(new MonthTemplateBuilder(Component.MonthTemplate));
+
+            return this;
+        }
+
+        /// <summary>
+        /// Enables or disables the datepicker.
+        /// </summary>
+        public DatePickerBuilder Enable(bool value)
+        {
+            Component.Enabled = value;
+
+            return this;
+        }
+        
         /// <summary>
         /// Sets the value of the datepicker input
         /// </summary>
         public DatePickerBuilder Value(DateTime? date)
         {
             if (date.HasValue)
+            {
                 date = date.Value == DateTime.MinValue ? null : date;
+            }
 
             Component.Value = date;
 
@@ -78,6 +146,30 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Sets the minimal date, which can be selected in DatePicker.
         /// </summary>
+        public DatePickerBuilder Min(DateTime date)
+        {
+            Guard.IsNotNull(date, "date");
+
+            Component.Min = date;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the maximal date, which can be selected in DatePicker.
+        /// </summary>
+        public DatePickerBuilder Max(DateTime date)
+        {
+            Guard.IsNotNull(date, "date");
+
+            Component.Max = date;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the minimal date, which can be selected in DatePicker.
+        /// </summary>
         public DatePickerBuilder Min(string date)
         {
             Guard.IsNotNullOrEmpty(date, "date");
@@ -86,7 +178,7 @@ namespace Kendo.Mvc.UI.Fluent
 
             if (DateTime.TryParse(date, out parsedDate))
             {
-                Component.MinValue = parsedDate;
+                Component.Min = parsedDate;
             }
             else
             {
@@ -106,7 +198,7 @@ namespace Kendo.Mvc.UI.Fluent
 
             if (DateTime.TryParse(date, out parsedDate))
             {
-                Component.MaxValue = parsedDate;
+                Component.Max = parsedDate;
             }
             else
             {
