@@ -195,6 +195,9 @@ namespace Kendo.Mvc.UI
             objectWriter.Append("modal", Modal);
             objectWriter.Append("content", ContentUrl);
             objectWriter.Append("draggable", Draggable);
+            objectWriter.Append("width", Width);
+            objectWriter.Append("height", Height);
+            objectWriter.Append("title", Title);
             objectWriter.Append("resizable", ResizingSettings.Enabled);
 
             if (ResizingSettings.Enabled)
