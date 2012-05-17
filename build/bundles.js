@@ -54,7 +54,8 @@ var winjsBundle = {
 
 var mvcWrappersBundle = {
     name: "kendoui.aspnetmvc",
-    suites: ["web", "dataviz"],
+    suites: ["web", "dataviz", "mobile", "aspnetmvc"],
+    combinedSuites: ["web", "dataviz", "mobile"],
     combinedScript: "all",
     sourceLicense: "src-license-none.txt",
     licenses: productionLicenses,
@@ -149,8 +150,9 @@ function deployScripts(root, bundle, license, hasSource) {
             kendoScripts.buildSuiteScripts(suite, dest, license, compress);
 
             if (bundle.combinedScript) {
+                var combinedSuites = bundle.combinedSuites || bundle.suites;
                 kendoScripts.buildCombinedScript(
-                    bundle.combinedScript, bundle.suites,
+                    bundle.combinedScript, combinedSuites,
                     dest, license, compress);
             }
         };
@@ -180,7 +182,7 @@ function deployStyles(root, bundle, license, copySource) {
     }
 
     bundle.suites.forEach(function(suite) {
-        var suiteStyles = path.join(STYLES_ROOT, SUITE_STYLES[suite]);
+        var suiteStyles = path.join(STYLES_ROOT, SUITE_STYLES[suite] || suite);
         if (path.existsSync(suiteStyles)) {
             kendoBuild.deployStyles(suiteStyles, stylesDest, license, true);
 
