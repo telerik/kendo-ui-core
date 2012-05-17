@@ -22,8 +22,8 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="color">The cap color.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Kendo().LinearGauge()
-        ///           .Name("linearGauge")
+        /// &lt;% Html.Kendo().RadialGauge()
+        ///           .Name("radialGauge")
         ///           .Pointer(pointer => pointer
         ///               .Cap(cap => cap.Color("red"))
         ///           )

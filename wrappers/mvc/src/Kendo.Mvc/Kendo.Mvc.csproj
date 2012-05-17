@@ -410,6 +410,10 @@
     <Compile Include="UI\ExpressionBuilder.cs" />
     <Compile Include="Infrastructure\Implementation\BindingHelper.cs" />
     <Compile Include="UI\Gauge\Enums\LinearGaugePointerShape.cs" />
+    <Compile Include="UI\Gauge\Fluent\GaugeScaleRangesFactory.cs" />
+    <Compile Include="UI\Gauge\Fluent\GaugeScaleRangesBuilder.cs" />
+    <Compile Include="UI\Gauge\Fluent\GaugeScaleLabelsBuilder.cs" />
+    <Compile Include="UI\Gauge\Fluent\GaugeScaleBuilderBase.cs" />
     <Compile Include="UI\Gauge\Fluent\GaugeAreaBuilder.cs" />
     <Compile Include="UI\Gauge\Fluent\LinearGaugeTrackBuilder.cs" />
     <Compile Include="UI\Gauge\Fluent\LinearGaugePointerBuilder.cs" />
@@ -425,6 +429,15 @@
     <Compile Include="UI\Gauge\Html\GaugeHtmlBuilder.cs" />
     <Compile Include="UI\Gauge\Gauge.cs" />
     <Compile Include="UI\Gauge\IGauge.cs" />
+    <Compile Include="UI\Gauge\Fluent\GaugeScaleTicksBuilder.cs" />
+    <Compile Include="UI\Gauge\Scales\GaugeScaleLabels.cs" />
+    <Compile Include="UI\Gauge\Scales\GaugeScaleTicks.cs" />
+    <Compile Include="UI\Gauge\Scales\GaugeScaleBase.cs" />
+    <Compile Include="UI\Gauge\Scales\GaugeScaleRanges.cs" />
+    <Compile Include="UI\Gauge\Scales\IGaugeScale.cs" />
+    <Compile Include="UI\Gauge\Serialization\GaugeScaleLabelsSerializer.cs" />
+    <Compile Include="UI\Gauge\Serialization\GaugeScaleSerializerBase.cs" />
+    <Compile Include="UI\Gauge\Serialization\GaugeScaleTicksSerializer.cs" />
     <Compile Include="UI\Gauge\Serialization\LinearGaugeTrackSerializer.cs" />
     <Compile Include="UI\Gauge\Serialization\LinearGaugePointerSerializer.cs" />
     <Compile Include="UI\Gauge\Serialization\GaugeAreaSerializer.cs" />

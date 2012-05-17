@@ -147,9 +147,16 @@
     <Compile Include="UI\DataSource\CrudOperationTests.cs" />
     <Compile Include="UI\DataSource\DataSourceBuilderTests.cs" />
     <Compile Include="UI\DataSource\DataSourceTests.cs" />
+    <Compile Include="UI\Gauge\GaugeScaleBuilderBaseTests.cs" />
+    <Compile Include="UI\Gauge\GaugeScaleRangesBuilderTests.cs" />
+    <Compile Include="UI\Gauge\GaugeScaleTicksBuilderTests.cs" />
+    <Compile Include="UI\Gauge\RadialGaugeCapBuilderTests.cs" />
     <Compile Include="UI\Gauge\RadialGaugePointerBuilderTests.cs" />
     <Compile Include="UI\Gauge\GaugeAreaBuilderTests.cs" />
     <Compile Include="UI\Gauge\Serialization\GaugeAreaSerializerTests.cs" />
+    <Compile Include="UI\Gauge\Serialization\GaugeScaleLabelsSeriealizerTests.cs" />
+    <Compile Include="UI\Gauge\Serialization\GaugeScaleSerializerBaseTests.cs" />
+    <Compile Include="UI\Gauge\Serialization\GaugeScaleTicksSerializerTests.cs" />
     <Compile Include="UI\Gauge\Serialization\RadialGaugeCapSerializerTests.cs" />
     <Compile Include="UI\Gauge\Serialization\RadialGaugePointerSerializerTests.cs" />
     <Compile Include="UI\Gauge\Serialization\LinearGaugeTrackSerializerTests.cs" />
