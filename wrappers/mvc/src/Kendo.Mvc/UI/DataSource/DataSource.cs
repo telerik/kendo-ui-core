@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web.Mvc;
-using Kendo.Mvc.Extensions;
 
 namespace Kendo.Mvc.UI
 {
@@ -56,8 +54,7 @@ namespace Kendo.Mvc.UI
                 json["serverAggregates"] = ServerAggregates;
             }
 
-            //TODO: serialize proper type
-            json["type"] = "aspnetmvc-server";
+            json["type"] = "aspnetmvc-" + Type.ToString().ToLower();
 
             if (OrderBy.Any())
             {
@@ -68,6 +65,12 @@ namespace Kendo.Mvc.UI
             {
                 json["group"] = Groups.ToJson();
             }
+        }
+
+        public DataSourceType Type
+        {
+            get;
+            set;
         }
 
         public IList<CompositeFilterDescriptor> Filters

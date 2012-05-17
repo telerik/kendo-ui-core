@@ -312,6 +312,7 @@
     <Compile Include="UI\ComboBox\Settings\ComboBoxFilterSettings.cs" />
     <Compile Include="UI\DataSource\CrudOperation.cs" />
     <Compile Include="UI\DataSource\DataSource.cs" />
+    <Compile Include="UI\DataSource\DataSourceType.cs" />
     <Compile Include="UI\DataSource\Fluent\CrudOperationBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\DataSourceGroupsBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\DataSourceSortExpressionsBuilder.cs" />
