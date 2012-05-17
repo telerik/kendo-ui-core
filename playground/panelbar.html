@@ -31,7 +31,7 @@
             $("#PanelBar2").kendoPanelBar({ animation: { expand: { effects: "fadeIn expand:vertical" } } });
             $("#PanelBar3").kendoPanelBar({ animation: { expand: { effects: "fadeIn expand:vertical" } }, expandMode: 0 });
             $("#PanelBar4").kendoPanelBar({ contentUrls: [ 'AjaxView1.html', 'AjaxView2.html', 'AjaxView1.html', 'AjaxView2.html', 'AjaxView1.html' ] });
-            $("#Panel").kendoPanelBar().css({ width: '300px', 'float': 'left' }).data("kendoPanelBar").expand(">li:first");
+            $("#Panel").kendoPanelBar().css({ width: '300px', 'float': 'left' });//.data("kendoPanelBar").expand(">li:first");
 
             var item = $("#PanelBar1 li:first").eq(0);
             panel1.expand(item).select(item);
@@ -372,7 +372,7 @@
     </ul>
 <br />
     <ul id="Panel">
-        <li>
+        <li class="k-state-active">
             <img src="Icons/Suites/mvc.png" alt="image">ASP.NET MVC
             <div>
                 <ul>
@@ -465,5 +465,13 @@
         <!--<li id="redundantItem">Test Item</li>-->
     <!--</ul>-->
 
+    <button onclick="addItem()">Add Item</button>
+
+    <script type="text/javascript">
+        function addItem() {
+            var ul = $("#Panel .k-content > ul");
+            ul.append("<li>Item</li>");
+        }
+    </script>
 </body>
 </html>
