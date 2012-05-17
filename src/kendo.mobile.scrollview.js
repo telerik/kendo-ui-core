@@ -92,10 +92,7 @@
             transition = new Transition({
                 axis: "x",
                 movable: movable,
-                onEnd: function() {
-                    that.page = Math.round(- movable.x / dimension.size);
-                    that._updatePage();
-                }
+                onEnd: proxy(that._transitionEnd, that)
             });
 
             drag = new kendo.Drag(element, {
@@ -108,7 +105,7 @@
 
                     transition.cancel();
                 },
-                end: $.proxy(that._dragEnd, that)
+                end: proxy(that._dragEnd, that)
             });
 
             dimensions = new PaneDimensions({
@@ -193,7 +190,7 @@
             }
 
             that.pager.html(pageHTML);
-            that._updatePage();
+            that._updatePager();
         },
 
         /**
@@ -257,14 +254,19 @@
             this._moveTo(snap, ease);
         },
 
-        _updatePage: function() {
+        _transitionEnd:  function() {
             var that = this,
-                pager = that.pager,
-                page = that.page;
+                page = Math.round(- that.movable.x / that.dimension.size);
 
-            that.trigger(CHANGE, {page: page});
-            pager.children().removeClass(CURRENT_PAGE_CLASS)
-                .eq(page).addClass(CURRENT_PAGE_CLASS);
+            if (page != that.page) {
+                that.page = page;
+                that.trigger(CHANGE, {page: page});
+                that._updatePager();
+            }
+        },
+
+        _updatePager: function() {
+            this.pager.children().removeClass(CURRENT_PAGE_CLASS).eq(this.page).addClass(CURRENT_PAGE_CLASS);
         }
     });
 
