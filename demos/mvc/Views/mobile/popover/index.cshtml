@@ -10,21 +10,31 @@
         <img src="../../content/mobile/shared/faces.jpeg" />
     </div>
 
-    <div data-role="popover" id="popover-people">
-        <div data-role="view">
+    <div data-role="popover" id="popover-people" data-popup='{"height": 200}'>
+        <div data-role="view" data-title="People">
+            <div data-role="header">
+                <div data-role="navbar">
+                    <span data-role="view-title"></span>
+                    <a data-role="button" data-align="right" data-click="closeParentPopover">Close</a>
+                </div>
+            </div>
             <ul data-role="listview">
-                <li><label>John Appleseed <input type="checkbox"></label></li>
-                <li><label>John Appleseed <input type="checkbox"></label></li>
-                <li><label>John Appleseed <input type="checkbox"></label></li>
-                <li><label>John Appleseed <input type="checkbox"></label></li>
-                <li><label>John Appleseed <input type="checkbox"></label></li>
+                <li><label>Janet	Suyama<input type="checkbox"></label></li>
+                <li><label>Laura	King<input type="checkbox"></label></li>
+                <li><label>Nige	Suyama<input type="checkbox"></label></li>
+                <li><label>Janet	Leverling<input type="checkbox"></label></li>
+                <li><label>Nige	Dodsworth<input type="checkbox"></label></li>
+                <li><label>Margaret Buchanan<input type="checkbox"></label></li>
+                <li><label>Nancy	Peacock<input type="checkbox"></label></li>
+                <li><label>Nige	Fuller<input type="checkbox"></label></li>
+                <li><label>Robert	Dodsworth <input type="checkbox"></label></li>
             </ul>
         </div>
     </div>
 
-    <div data-role="popover" id="popover-location">
+    <div data-role="popover" id="popover-location" data-popup='{"height": 120}'>
         <div data-role="view">
-            <ul data-role="listview">
+            <ul data-role="listview" data-click="closeParentPopover">
                 <li><label>Sidney, Australia <input name="location" type="radio"></label></li>
                 <li><label>New York, USA <input name="location" type="radio"></label></li>
                 <li><label>London, England <input name="location" type="radio"></label></li>
@@ -38,3 +48,14 @@
         </div>
     </div>
 </div>
+
+<script>
+    function closeParentPopover(e) {
+
+        var popover = e.sender.element.closest('[data-role=popover]').data('kendoMobilePopOver');
+
+        setTimeout(function() {
+            popover.close();
+        }, 200);
+    }
+</script>
