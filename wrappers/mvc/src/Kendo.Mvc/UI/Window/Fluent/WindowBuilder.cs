@@ -317,26 +317,26 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Configures the client-side events.
+        /// Configures the window buttons.
         /// </summary>
-        /// <param name="clientEventsAction">The client events action.</param>
+        /// <param name="clientEventsAction">The buttons configuration action.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Telerik().Window()
         ///             .Name("Window")
-        ///             .ClientEvents(events =>
-        ///                 events.OnOpen("onOpen").OnClose("onClose")
+        ///             .Actions(actions =>
+        ///                 actions.
         ///             )
         /// %&gt;
         /// </code>
         /// </example>
-        public WindowBuilder Buttons(Action<WindowButtonsBuilder> buttonsBuilderAction)
+        public WindowBuilder Actions(Action<WindowActionsBuilder> actionsBuilderAction)
         {
-            Guard.IsNotNull(buttonsBuilderAction, "buttonsBuilderAction");
+            Guard.IsNotNull(actionsBuilderAction, "buttonsBuilderAction");
 
             Component.Buttons.Container.Clear();
 
-            buttonsBuilderAction(new WindowButtonsBuilder(Component.Buttons));
+            actionsBuilderAction(new WindowActionsBuilder(Component.Buttons));
 
             return this;
         }

@@ -940,7 +940,7 @@ namespace Kendo.Mvc.UI
             new WindowBuilder(popup)
                 .Content(renderingData.PopUpContainer.InnerHtml)
                 .HtmlAttributes(new { style = "top:10%;left:50%;margin-left: -" + (popup.Width == 0 ? 360 : popup.Width) / 4 + "px" })                
-                .Buttons(buttons => buttons
+                .Actions(buttons => buttons
                     .Close(cancelUrl)
                 );
 

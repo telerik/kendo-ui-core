@@ -1027,7 +1027,7 @@
     <Compile Include="UI\Effects\ZoomAnimation.cs" />
     <Compile Include="UI\Window\Fluent\WindowEffectsBuilder.cs" />
     <Compile Include="UI\Window\WindowButtons.cs" />
-    <Compile Include="UI\Window\Fluent\WindowButtonsBuilder.cs" />
+    <Compile Include="UI\Window\Fluent\WindowActionsBuilder.cs" />
     <Compile Include="UI\Window\Fluent\WindowResizingSettingsBuilder.cs" />
     <Compile Include="UI\Window\IWindowButton.cs" />
     <Compile Include="UI\Window\IWindowButtonsContainer.cs" />
