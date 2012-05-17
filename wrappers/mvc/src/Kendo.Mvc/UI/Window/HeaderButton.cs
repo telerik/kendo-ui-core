@@ -5,7 +5,5 @@ namespace Kendo.Mvc.UI
         public string Name { get; set; }
 
         public string CssClass { get; set; }
-
-        public string Url { get; set; }
     }
 }

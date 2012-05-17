@@ -29,30 +29,6 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
-        public void Close_with_url_method_should_return_builder()
-        {
-            builder.Close("foo").ShouldBeSameAs(builder);
-        }
-
-        [Fact]
-        public void Close_with_url_should_set_button_url()
-        {
-            const string url = "foo";
-
-            builder.Close(url);
-
-            buttons.Container[0].Url.ShouldEqual(url);
-        }
-
-        [Fact]
-        public void Close_without_url_should_set_button_url_to_hash()
-        {
-            builder.Close();
-
-            buttons.Container[0].Url.ShouldEqual("#");
-        }
-
-        [Fact]
         public void Maximize_method_should_add_maximize_button()
         {
             builder.Maximize();
@@ -67,30 +43,6 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
-        public void Maximize_with_url_method_should_return_builder()
-        {
-            builder.Maximize("foo").ShouldBeSameAs(builder);
-        }
-
-        [Fact]
-        public void Maximize_with_url_should_set_button_url()
-        {
-            const string url = "foo";
-
-            builder.Maximize(url);
-
-            buttons.Container[0].Url.ShouldEqual(url);
-        }
-
-        [Fact]
-        public void Maximize_without_url_should_set_button_url_to_hash()
-        {
-            builder.Maximize();
-
-            buttons.Container[0].Url.ShouldEqual("#");
-        }
-
-        [Fact]
         public void Refresh_method_should_add_refresh_button()
         {
             builder.Refresh();
@@ -102,30 +54,6 @@ namespace Kendo.Mvc.UI.Tests
         public void Refresh_method_should_return_builder()
         {
             builder.Refresh().ShouldBeSameAs(builder);
-        }
-
-        [Fact]
-        public void Refresh_with_url_method_should_return_builder()
-        {
-            builder.Refresh("foo").ShouldBeSameAs(builder);
-        }
-
-        [Fact]
-        public void Refresh_with_url_should_set_button_url()
-        {
-            const string url = "foo";
-
-            builder.Refresh(url);
-
-            buttons.Container[0].Url.ShouldEqual(url);
-        }
-
-        [Fact]
-        public void Refresh_without_url_should_set_button_url_to_hash()
-        {
-            builder.Refresh();
-
-            buttons.Container[0].Url.ShouldEqual("#");
         }
 
         [Fact]

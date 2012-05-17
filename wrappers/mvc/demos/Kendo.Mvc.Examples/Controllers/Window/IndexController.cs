@@ -8,5 +8,10 @@ namespace Kendo.Mvc.Examples.Controllers
         {
             return View();
         }
+
+        public ActionResult Actions()
+        {
+            return View();
+        }
     }
 }

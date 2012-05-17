@@ -334,9 +334,9 @@ namespace Kendo.Mvc.UI.Fluent
         {
             Guard.IsNotNull(actionsBuilderAction, "buttonsBuilderAction");
 
-            Component.Buttons.Container.Clear();
+            Component.Actions.Container.Clear();
 
-            actionsBuilderAction(new WindowActionsBuilder(Component.Buttons));
+            actionsBuilderAction(new WindowActionsBuilder(Component.Actions));
 
             return this;
         }
