@@ -456,6 +456,55 @@
                          ["Dec '11", "Jan '12", "Feb '12", "Mar '12"]);
                 });
 
+                test("creates labels with custom date format", function() {
+                    createDateValueAxis(new Date("2012/01/01"), new Date("2012/02/01"), {
+                        labels: {
+                            dateFormats: {
+                                months: "M/d/yy"
+                            }
+                        }
+                    });
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["12/1/11", "1/1/12", "2/1/12", "3/1/12"]);
+                });
+
+                // ------------------------------------------------------------
+                module("Date Value Axis / Base unit / Years");
+
+                test("Major unit is calculated for user set min/max (in years)", function() {
+                    createDateValueAxis(
+                        new Date("2012/01/01"), new Date("2100/01/01"), {
+                            min: new Date("2012/02/01"),
+                            max: new Date("2013/02/01"),
+                            baseUnit: "years"
+                    });
+
+                    equals(dateAxis.options.majorUnit, 1);
+                });
+
+                test("creates labels with default format", function() {
+                    createDateValueAxis(
+                        new Date("2012/01/01"), new Date("2013/02/01")
+                    );
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["2011", "2012", "2013", "2014"]);
+                });
+
+                test("creates labels with custom date format", function() {
+                    createDateValueAxis(new Date("2012/01/01"), new Date("2013/02/01"), {
+                        labels: {
+                            dateFormats: {
+                                years: "M/d/yy"
+                            }
+                        }
+                    });
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["1/1/11", "1/1/12", "1/1/13", "1/1/14"]);
+                });
+
             })();
 
         </script>

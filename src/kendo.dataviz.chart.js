@@ -1199,7 +1199,8 @@
                 // TODO: Consider other names
                 dateFormats: {
                     days: "M/d",
-                    months: "MMM 'yy"
+                    months: "MMM 'yy",
+                    years: "yyyy"
                 }
             }
         },
