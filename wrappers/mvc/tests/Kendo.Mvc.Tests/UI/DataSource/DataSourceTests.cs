@@ -2,6 +2,8 @@
 {
     using Xunit;
     using Kendo.Mvc.UI;
+    using System.Linq;
+    using System.Collections.Generic;
 
     public class DataSourceTests
     {
@@ -27,7 +29,6 @@
             var result = dataSource.ToJson();
             result.ContainsKey("serverPaging").ShouldBeFalse();
         }
-
 
         [Fact]
         public void ToJson_serverSorting_is_serialized_if_set()
@@ -106,6 +107,55 @@
         {            
             var result = dataSource.ToJson();
             result.ContainsKey("serverAggregates").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void ToJson_sort_expressions_are_serialized()
+        {
+            dataSource.OrderBy.Add(new SortDescriptor {
+                Member = "Foo",
+                SortDirection = System.ComponentModel.ListSortDirection.Descending
+            });
+
+            var result = dataSource.ToJson();
+            var sort = (IEnumerable<IDictionary<string, object>>)result["sort"];
+
+            sort.Count().ShouldEqual(1);
+            sort.ElementAt(0)["field"].ShouldEqual("Foo");
+            sort.ElementAt(0)["dir"].ShouldEqual("desc");
+        }
+
+        [Fact]
+        public void ToJson_multiple_sort_expressions_are_serialized()
+        {
+            dataSource.OrderBy.Add(new SortDescriptor
+            {
+                Member = "Foo",
+                SortDirection = System.ComponentModel.ListSortDirection.Descending
+            });
+
+            dataSource.OrderBy.Add(new SortDescriptor
+            {
+                Member = "Bar"                
+            });
+
+            var result = dataSource.ToJson();
+            var sort = (IEnumerable<IDictionary<string, object>>)result["sort"];
+
+            sort.Count().ShouldEqual(2);
+            sort.ElementAt(0)["field"].ShouldEqual("Foo");
+            sort.ElementAt(0)["dir"].ShouldEqual("desc");
+
+            sort.ElementAt(1)["field"].ShouldEqual("Bar");
+            sort.ElementAt(1)["dir"].ShouldEqual("asc");
+        }
+
+        [Fact]
+        public void ToJson_sort_expressions_are_not_serialized_if_not_set()
+        {
+            var result = dataSource.ToJson();
+
+            result.ContainsKey("sort").ShouldBeFalse();
         }
     }
 }
