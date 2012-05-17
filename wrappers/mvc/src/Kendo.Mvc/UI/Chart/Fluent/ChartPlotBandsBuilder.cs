@@ -4,7 +4,7 @@ namespace Kendo.Mvc.UI.Fluent
     using Kendo.Mvc.UI;
 
     /// <summary>
-    /// Defines the fluent interface for configuring plot bands.
+    /// Defines the fluent interface for configuring plot band.
     /// </summary>
     public class ChartPlotBandsBuilder
     {
@@ -13,7 +13,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartPlotBandsBuilder"/> class.
         /// </summary>
-        /// <param name="item">The plot bands.</param>
+        /// <param name="item">The plot band.</param>
         public ChartPlotBandsBuilder(ChartPlotBand item)
         {
             Guard.IsNotNull(item, "item");
@@ -24,14 +24,15 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Sets the plot band start position.
         /// </summary>
-        /// <param name="from">The plot band band start position.</param>
+        /// <param name="from">The plot band start position.</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;% Html.Telerik().Chart()
         ///           .Name("Chart")
         ///           .CategoryAxis(axis => axis
-        ///                .PlotBands(plotBand => plotBand
+        ///                .PlotBands(plotBands => plotBands
         ///                      .Add().From(1).Color("Red");
+        ///                )
         ///           )
         ///           .Render();
         /// %&gt;
@@ -52,8 +53,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// &lt;% Html.Telerik().Chart()
         ///           .Name("Chart")
         ///           .CategoryAxis(axis => axis
-        ///                .PlotBands(plotBand => plotBand
+        ///                .PlotBands(plotBands => plotBands
         ///                      .Add().To(2).Color("Red");
+        ///                )
         ///           )
         ///           .Render();
         /// %&gt;
@@ -68,14 +70,15 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Sets the plot band background color
         /// </summary>
-        /// <param name="color">The plot band background color.</param>
+        /// <param name="background">The plot band background color.</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;% Html.Telerik().Chart()
         ///           .Name("Chart")
         ///           .CategoryAxis(axis => axis
-        ///                .PlotBands(plotBand => plotBand
+        ///                .PlotBands(plotBands => plotBands
         ///                      .Add().Color("Red");
+        ///                )
         ///           )
         ///           .Render();
         /// %&gt;
@@ -88,16 +91,17 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Sets the plot band background color
+        /// Sets the plot band opacity
         /// </summary>
-        /// <param name="color">The plot band background color.</param>
+        /// <param name="opacity">The plot band opacity.</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;% Html.Telerik().Chart()
         ///           .Name("Chart")
         ///           .CategoryAxis(axis => axis
-        ///                .PlotBands(plotBand => plotBand
+        ///                .PlotBands(plotBands => plotBands
         ///                      .Add().Opacity(0.5);
+        ///                )
         ///           )
         ///           .Render();
         /// %&gt;

@@ -66,7 +66,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///           .Render();
         /// %&gt;
         /// </code>
-        /// </example>        
+        /// </example>
         public virtual ChartLineBuilderBase DashType(ChartDashType dashType)
         {
             line.DashType = dashType;
