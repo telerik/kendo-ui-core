@@ -8,12 +8,12 @@
     public class DataSourceBuilderTests
     {
         private DataSource dataSource;
-        private DataSourceBuilder builder;
+        private DataSourceBuilder<TestObject> builder;
 
         public DataSourceBuilderTests()
         {
             dataSource = new DataSource();
-            builder = new DataSourceBuilder(dataSource, TestHelper.CreateViewContext(), new Mock<IUrlGenerator>().Object);
+            builder = new DataSourceBuilder<TestObject>(dataSource, TestHelper.CreateViewContext(), new Mock<IUrlGenerator>().Object);
         }
 
         [Fact]
@@ -63,6 +63,16 @@
         {
             builder.ServerFiltering(true);
             dataSource.ServerFiltering.ShouldBeTrue();
+        }
+
+        [Fact]
+        public void OrderBy_adds_sort_expressions() 
+        {
+            builder.OrderBy(s => s.Add(f => f.ID).Descending());
+
+            dataSource.OrderBy.Count.ShouldEqual(1);
+            dataSource.OrderBy[0].Member.ShouldEqual("ID");
+            dataSource.OrderBy[0].SortDirection.ShouldEqual(System.ComponentModel.ListSortDirection.Descending);
         }
     }
 }

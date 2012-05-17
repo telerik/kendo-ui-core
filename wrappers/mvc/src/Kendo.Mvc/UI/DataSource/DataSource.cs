@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.Mvc;
+using Kendo.Mvc.Extensions;
 
 namespace Kendo.Mvc.UI
 {
@@ -9,6 +11,9 @@ namespace Kendo.Mvc.UI
         public DataSource()
         {
             Transport = new Transport();
+
+            Filters = new List<CompositeFilterDescriptor>();
+            OrderBy = new List<SortDescriptor>();
         }
 
         protected override void Serialize(IDictionary<string, object> json)
@@ -20,7 +25,7 @@ namespace Kendo.Mvc.UI
                 json["transport"] = transport;
             }
 
-            if (PageSize.HasValue)
+            if (PageSize > 0)
             {
                 json["pageSize"] = PageSize;
             }
@@ -52,9 +57,33 @@ namespace Kendo.Mvc.UI
 
             //TODO: serialize proper type
             json["type"] = "aspnetmvc-server";
+
+            if (OrderBy.Any())
+            {
+                var sortExpressions = new List<IDictionary<string, object>>();
+
+                OrderBy.Each(item => {
+                    sortExpressions.Add(item.ToJson());
+                });
+
+                json["sort"] = sortExpressions;
+            }
+
         }
 
-        public int? PageSize 
+        public IList<CompositeFilterDescriptor> Filters
+        {
+            get;
+            private set;
+        }
+
+        public IList<SortDescriptor> OrderBy
+        {
+            get;
+            private set;
+        }
+
+        public int PageSize 
         { 
             get; 
             set; 

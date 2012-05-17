@@ -4,9 +4,9 @@ namespace Kendo.Mvc.UI.Fluent
 
     using Infrastructure;
 
-    public class GridSortDescriptorBuilder
+    public class DataSourceSortDescriptorBuilder
     {
-        public GridSortDescriptorBuilder(SortDescriptor descriptor)
+        public DataSourceSortDescriptorBuilder(SortDescriptor descriptor)
         {
             Guard.IsNotNull(descriptor, "descriptor");
 

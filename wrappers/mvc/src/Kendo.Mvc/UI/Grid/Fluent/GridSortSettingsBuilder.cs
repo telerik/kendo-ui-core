@@ -79,20 +79,6 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
-        /// <summary>
-        /// Configures the initial sort order.
-        /// </summary>
-        /// <param name="configurator">The configurator.</param>
-        /// <returns></returns>
-        public virtual GridSortSettingsBuilder<TModel> OrderBy(Action<GridSortDescriptorFactory<TModel>> configurator)
-        {
-            Guard.IsNotNull(configurator, "configurator");
-
-            GridSortDescriptorFactory<TModel> factory = new GridSortDescriptorFactory<TModel>(settings);
-
-            configurator(factory);
-
-            return this;
-        }
+        
     }
 }
