@@ -68,11 +68,39 @@
         [Fact]
         public void OrderBy_adds_sort_expressions() 
         {
-            builder.OrderBy(s => s.Add(f => f.ID).Descending());
+            builder.Sort(sort => sort.OrderBy(s => s.Add(f => f.ID).Descending()));
 
             dataSource.OrderBy.Count.ShouldEqual(1);
             dataSource.OrderBy[0].Member.ShouldEqual("ID");
             dataSource.OrderBy[0].SortDirection.ShouldEqual(System.ComponentModel.ListSortDirection.Descending);
+        }
+
+        [Fact]
+        public void OrderBy_adds_multiple_sort_expressions()
+        {
+            builder.Sort(sort => sort.OrderBy(s => s.Add(f => f.ID).Descending())
+                .OrderBy(s => s.Add(f => f.Text)));
+
+            dataSource.OrderBy.Count.ShouldEqual(2);
+            dataSource.OrderBy[0].Member.ShouldEqual("ID");
+            dataSource.OrderBy[0].SortDirection.ShouldEqual(System.ComponentModel.ListSortDirection.Descending);
+
+            dataSource.OrderBy[1].Member.ShouldEqual("Text");
+            dataSource.OrderBy[1].SortDirection.ShouldEqual(System.ComponentModel.ListSortDirection.Ascending);
+        }
+
+        [Fact]
+        public void Group_adds_group_expressions()
+        {
+            builder.Group(groups => groups.GroupBy(g => g.Add(f => f.ID))
+                .GroupBy(g => g.AddDescending(f => f.Text)));                
+
+            dataSource.Groups.Count.ShouldEqual(2);
+            dataSource.Groups[0].Member.ShouldEqual("ID");            
+            dataSource.Groups[0].SortDirection.ShouldEqual(System.ComponentModel.ListSortDirection.Ascending);
+
+            dataSource.Groups[1].Member.ShouldEqual("Text");            
+            dataSource.Groups[1].SortDirection.ShouldEqual(System.ComponentModel.ListSortDirection.Descending);
         }
     }
 }

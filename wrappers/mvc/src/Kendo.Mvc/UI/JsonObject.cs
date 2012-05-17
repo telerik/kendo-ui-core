@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-
 namespace Kendo.Mvc.UI
 {
     public abstract class JsonObject
@@ -14,5 +13,5 @@ namespace Kendo.Mvc.UI
         }
 
         protected abstract void Serialize(IDictionary<string, object> json);
-    }
+    }    
 }

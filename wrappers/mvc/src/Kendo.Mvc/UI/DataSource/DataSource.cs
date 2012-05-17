@@ -14,6 +14,7 @@ namespace Kendo.Mvc.UI
 
             Filters = new List<CompositeFilterDescriptor>();
             OrderBy = new List<SortDescriptor>();
+            Groups = new List<GroupDescriptor>();
         }
 
         protected override void Serialize(IDictionary<string, object> json)
@@ -60,15 +61,13 @@ namespace Kendo.Mvc.UI
 
             if (OrderBy.Any())
             {
-                var sortExpressions = new List<IDictionary<string, object>>();
-
-                OrderBy.Each(item => {
-                    sortExpressions.Add(item.ToJson());
-                });
-
-                json["sort"] = sortExpressions;
+                json["sort"] = OrderBy.ToJson();
             }
 
+            if (Groups.Any())
+            {
+                json["group"] = Groups.ToJson();
+            }
         }
 
         public IList<CompositeFilterDescriptor> Filters
@@ -78,6 +77,12 @@ namespace Kendo.Mvc.UI
         }
 
         public IList<SortDescriptor> OrderBy
+        {
+            get;
+            private set;
+        }
+
+        public IList<GroupDescriptor> Groups
         {
             get;
             private set;

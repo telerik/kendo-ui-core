@@ -29,14 +29,5 @@ namespace Kendo.Mvc.UI.Fluent
             settings.Visible = value;
             return this;
         }
-
-        public GridGroupingSettingsBuilder<T> Groups(Action<GridGroupDescriptorFactory<T>> configurator)
-        {
-            Guard.IsNotNull(configurator, "configurator");
-
-            configurator(new GridGroupDescriptorFactory<T>(settings));
-
-            return this;
-        }
     }
 }

@@ -1,67 +1,68 @@
 namespace Kendo.Mvc.UI.Fluent
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq.Expressions;
     using Extensions;
     using Kendo.Mvc.Infrastructure;
 
-    public class GridGroupDescriptorFactory<TModel> : IHideObjectMembers
+    public class DataSourceGroupDescriptorFactory<TModel> : IHideObjectMembers
         where TModel : class
     {
-        private readonly GridGroupingSettings settings;
+        private readonly IList<GroupDescriptor> descriptors;
 
-        public GridGroupDescriptorFactory(GridGroupingSettings settings)
+        public DataSourceGroupDescriptorFactory(IList<GroupDescriptor> descriptors)
         {
-            this.settings = settings;
+            this.descriptors = descriptors;
         }
 
-        public GridGroupDescriptorBuilder<TModel> Add<TValue>(Expression<Func<TModel, TValue>> expression)
+        public DataSourceGroupDescriptorBuilder<TModel> Add<TValue>(Expression<Func<TModel, TValue>> expression)
         {
             return AddDescriptor<TValue>(expression.MemberWithoutInstance(), ListSortDirection.Ascending);
         }
 
-        public GridGroupDescriptorBuilder<TModel> Add<TValue>(string memberName)
+        public DataSourceGroupDescriptorBuilder<TModel> Add<TValue>(string memberName)
         {
             return AddDescriptor<TValue>(memberName, ListSortDirection.Ascending);
         }
 
-        public GridGroupDescriptorBuilder<TModel> Add(string memberName, Type memberType)
+        public DataSourceGroupDescriptorBuilder<TModel> Add(string memberName, Type memberType)
         {
             return AddDescriptor(memberName, memberType, ListSortDirection.Ascending);
         }
 
-        public GridGroupDescriptorBuilder<TModel> Add(string memberName, Type memberType, ListSortDirection sortDirection)
+        public DataSourceGroupDescriptorBuilder<TModel> Add(string memberName, Type memberType, ListSortDirection sortDirection)
         {
             return AddDescriptor(memberName, memberType, sortDirection);
         }
 
-        public GridGroupDescriptorBuilder<TModel> Add<TValue>(string memberName, ListSortDirection sortDirection)
+        public DataSourceGroupDescriptorBuilder<TModel> Add<TValue>(string memberName, ListSortDirection sortDirection)
         {
             return AddDescriptor<TValue>(memberName, sortDirection);
         }
 
-        public GridGroupDescriptorBuilder<TModel> AddDescending<TValue>(Expression<Func<TModel, TValue>> expression)
+        public DataSourceGroupDescriptorBuilder<TModel> AddDescending<TValue>(Expression<Func<TModel, TValue>> expression)
         {
             return AddDescriptor<TValue>(expression.MemberWithoutInstance(), ListSortDirection.Descending);
         }
 
-        public GridGroupDescriptorBuilder<TModel> AddDescending<TValue>(string memberName)
+        public DataSourceGroupDescriptorBuilder<TModel> AddDescending<TValue>(string memberName)
         {
             return AddDescriptor<TValue>(memberName, ListSortDirection.Descending);
         }
 
-        public GridGroupDescriptorBuilder<TModel> AddDescending(string memberName, Type memberType)
+        public DataSourceGroupDescriptorBuilder<TModel> AddDescending(string memberName, Type memberType)
         {
             return AddDescriptor(memberName, memberType, ListSortDirection.Descending);
         }
 
-        private GridGroupDescriptorBuilder<TModel> AddDescriptor<TValue>(string memberName, ListSortDirection sortDirection)
+        private DataSourceGroupDescriptorBuilder<TModel> AddDescriptor<TValue>(string memberName, ListSortDirection sortDirection)
         {
             return AddDescriptor(memberName, typeof(TValue), sortDirection);
         }
 
-        private GridGroupDescriptorBuilder<TModel> AddDescriptor(string memberName, Type memberType, ListSortDirection sortDirection)
+        private DataSourceGroupDescriptorBuilder<TModel> AddDescriptor(string memberName, Type memberType, ListSortDirection sortDirection)
         {
             Guard.IsNotNullOrEmpty(memberName, "memberName");
             Guard.IsNotNull(memberType, "memberType");
@@ -71,9 +72,9 @@ namespace Kendo.Mvc.UI.Fluent
             descriptor.SortDirection = sortDirection;
             descriptor.MemberType = memberType;
 
-            settings.Groups.Add(descriptor);
+            descriptors.Add(descriptor);
 
-            return new GridGroupDescriptorBuilder<TModel>(descriptor);
+            return new DataSourceGroupDescriptorBuilder<TModel>(descriptor);
         }
     }
 }

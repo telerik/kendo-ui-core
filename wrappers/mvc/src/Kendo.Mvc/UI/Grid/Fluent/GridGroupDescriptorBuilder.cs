@@ -1,11 +1,11 @@
 namespace Kendo.Mvc.UI.Fluent
 {
-    public class GridGroupDescriptorBuilder<T>
+    public class DataSourceGroupDescriptorBuilder<T>
         where T : class
     {
         private readonly GroupDescriptor descriptor;
         
-        public GridGroupDescriptorBuilder(GroupDescriptor descriptor)
+        public DataSourceGroupDescriptorBuilder(GroupDescriptor descriptor)
         {
             this.descriptor = descriptor;
         }
