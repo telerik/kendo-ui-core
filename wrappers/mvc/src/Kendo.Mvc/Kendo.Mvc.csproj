@@ -319,6 +319,8 @@
     <Compile Include="UI\DataSource\Fluent\ReadOnlyDataSourceBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\DataSourceBuilder.cs" />
     <Compile Include="UI\DataSource\Transport.cs" />
+    <Compile Include="UI\DatePickerBase\Fluent\MonthTemplateBuilder.cs" />
+    <Compile Include="UI\DatePicker\MonthTemplate.cs" />
     <Compile Include="UI\JsonObject.cs" />
     <Compile Include="UI\DatePickerBase\DatePickerBase.cs" />
     <Compile Include="UI\DatePickerBase\Fluent\DatePickerBaseBuilder.cs" />

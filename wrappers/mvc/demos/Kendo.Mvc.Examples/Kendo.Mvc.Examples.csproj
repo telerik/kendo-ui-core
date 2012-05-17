@@ -76,6 +76,7 @@
   <ItemGroup>
     <Compile Include="Areas\aspx\ASPXAreaRegistration.cs" />
     <Compile Include="Areas\razor\RazorAreaRegistration.cs" />
+    <Compile Include="Controllers\DatePicker\IndexController.cs" />
     <Compile Include="Controllers\Grid\GridController.cs" />
     <Compile Include="Controllers\NumericTextBox\ApiController.cs" />
     <Compile Include="Controllers\NumericTextBox\EventsController.cs" />
@@ -180,7 +181,7 @@
     <Content Include="Areas\razor\Views\window\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\numerictextbox\index.cshtml" />
+    <Content Include="Areas\razor\Views\datepicker\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\razor\Views\slider\api.cshtml" />
