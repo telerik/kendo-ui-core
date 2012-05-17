@@ -24,8 +24,11 @@ var multipartScripts = [{
               path.join("editor", "components.js"),
               path.join("editor", "indent.js"),
               path.join("editor", "pendingformats.js")]
-    }
-];
+      }, {
+      output:   "kendo.aspnetmvc.js",
+      inputs: [ path.join("aspnetmvc", "kendo.data.aspnetmvc.js"),
+                path.join("aspnetmvc", "kendo.validator.aspnetmvc.js") ]
+}];
 
 var suiteScripts = {
     "web": [
@@ -144,8 +147,7 @@ var suiteScripts = {
         "kendo.dataviz.svg.js"
     ],
     aspnetmvc: [
-        "kendo.data.aspnetmvc.js",
-        "kendo.validator.aspnetmvc.js"
+        "kendo.aspnetmvc.js"
     ]
 };
 
