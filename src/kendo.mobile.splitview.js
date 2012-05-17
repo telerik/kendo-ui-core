@@ -64,9 +64,10 @@
             $.extend(that, options);
             that._layout();
             that._style();
+            that.panes = [];
 
             that.element.children(kendo.roleSelector("pane")).each(function() {
-                kendo.initWidget(this, {}, kendo.mobile.ui).navigate("");
+                that.panes.push(kendo.initWidget(this, {}, kendo.mobile.ui));
             });
         },
 
@@ -102,6 +103,15 @@
         showStart: function() {
             var that = this;
             that.element.css("display", "");
+
+            if (!that.inited) {
+                that.inited = true;
+                $.each(that.panes, function() {
+                    this.navigate("");
+                });
+                that.trigger("init", {view: that});
+            }
+
             that.trigger("show", {view: that});
         }
     });
