@@ -22,7 +22,7 @@
         OBJECT = "object",
         NULL = "null",
         BOOLEAN = "boolean",
-        UNDEFINED = undefined,
+        UNDEFINED = "undefined",
         getterCache = {},
         setterCache = {},
         slice = [].slice,
@@ -1878,7 +1878,7 @@ function pad(number) {
                             return rx;
                         }
                     }
-                    return dflt !== UNDEFINED ? dflt : agent;
+                    return dflt !== undefined ? dflt : agent;
                 };
 
             for (var agent in agentRxs) {
@@ -1897,7 +1897,7 @@ function pad(number) {
                         os.minorVersion = match[3].replace("_", ".");
                         minorVersion = os.minorVersion.replace(".", "").substr(0, 2);
                         os.flatVersion = os.majorVersion + minorVersion + (new Array(3 - (minorVersion.length < 3 ? minorVersion.length : 2)).join("0"));
-                        os.appMode = window.navigator.standalone || (/file|local/).test(window.location.protocol) || typeof window.PhoneGap !== UNDEFINED; // Use file protocol to detect appModes.
+                        os.appMode = window.navigator.standalone || (/file|local/).test(window.location.protocol) || typeof window.PhoneGap !== undefined; // Use file protocol to detect appModes.
 
                         if (os.android && support.devicePixelRatio < 1.5 && (window.outerWidth > 800 || window.outerHeight > 800)) {
                             os.tablet = agent;
