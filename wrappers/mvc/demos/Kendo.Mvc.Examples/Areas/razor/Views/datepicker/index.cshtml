@@ -1,0 +1,10 @@
+<div id="example" class="k-content">
+    @(Html.Kendo().DatePicker()
+            .Name("datepicker")
+            .Value(DateTime.Now)
+            .Format("MM/yyyy")
+            .ParseFormats(new string[] { "MM/dd/yyyy", "MMM, ddd YYYY" })
+            .Enable(true)
+            .Footer("Today - #= kendo.toString(data, 'd') #")
+    )
+</div>

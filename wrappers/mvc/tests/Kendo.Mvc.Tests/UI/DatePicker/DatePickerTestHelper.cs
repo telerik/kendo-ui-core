@@ -25,9 +25,7 @@ namespace Kendo.Mvc.UI.Tests
 
             clientSideObjectWriterFactory.Setup(c => c.Create(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<TextWriter>())).Returns(clientSideObjectWriter.Object);
 
-            DatePicker datepicker = new DatePicker(viewContext, clientSideObjectWriterFactory.Object);
-
-            renderer = renderer ?? new DatePickerHtmlBuilder(datepicker);
+            DatePicker datepicker = new DatePicker(viewContext, clientSideObjectWriterFactory.Object, new ViewDataDictionary());
 
             return datepicker;
         }

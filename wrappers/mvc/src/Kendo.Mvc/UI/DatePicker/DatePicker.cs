@@ -1,86 +1,126 @@
 namespace Kendo.Mvc.UI
 {
-    using System;
-    using System.Globalization;
-    using System.IO;
-    using System.Linq;
-    using System.Web.Mvc;
-    using System.Web.UI;
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.Resources;
     using Kendo.Mvc.UI.Html;
-    using System.Collections.Generic;
+    using System;
+    using System.IO;
+    using System.Web.Mvc;
+    using System.Web.UI;
+    using System.Globalization;
+using System.Collections.Generic;
 
-    public class DatePicker : DatePickerBase
+    public class DatePicker : ViewComponentBase, IInputComponent<DateTime>
     {
-        private readonly IList<IEffect> defaultEffects = new List<IEffect> { new SlideAnimation() };
+        static internal DateTime defaultMinDate = new DateTime(1900, 1, 1);
+        static internal DateTime defaultMaxDate = new DateTime(2099, 12, 31);
 
-        static internal DateTime defaultMinDate = new DateTime(1899, 12, 31);
-        static internal DateTime defaultMaxDate = new DateTime(2100, 1, 1);
-
-        public DatePicker(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory)
-            : base(viewContext, clientSideObjectWriterFactory)
+        public DatePicker(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory, ViewDataDictionary viewData)
+            : base(viewContext, clientSideObjectWriterFactory, viewData)
         {
-            defaultEffects.Each(el => Effects.Container.Add(el));
-
             Format = CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern;
+            ParseFormats = new List<string>();
 
-            MinValue = defaultMinDate;
-            MaxValue = defaultMaxDate;
 
-            ButtonTitle = "Open the calendar";
-            ShowButton = true;
+            Min = defaultMinDate;
+            Max = defaultMaxDate;
+
+            ClientEvents = new DatePickerClientEvents();
+            MonthTemplate = new MonthTemplate();
+
+            Value = null;
+            Enabled = true;
         }
 
-        /// <summary>
-        /// Gets the id.
-        /// </summary>
-        /// <value>The id.</value>
-        public new string Id
+        public DatePickerClientEvents ClientEvents
         {
-            get
-            {
-                // Return from htmlattributes if user has specified
-                // otherwise build it from name
-                return InputHtmlAttributes.ContainsKey("id") ?
-                       InputHtmlAttributes["id"].ToString() :
-                       (!string.IsNullOrEmpty(Name) ? Name.Replace(".", HtmlHelper.IdAttributeDotReplacement) : null);
-            }
+            get;
+            private set;
         }
 
-        public bool ShowButton
+        public MonthTemplate MonthTemplate
+        {
+            get;
+            private set;
+        }
+
+        public string Format
         {
             get;
             set;
         }
 
-        public string ButtonTitle
+        public string Footer
         {
             get;
             set;
         }
 
+        public string Start
+        {
+            get;
+            set;
+        }
+
+        public string Depth
+        {
+            get;
+            set;
+        }
+
+        public DateTime? Value
+        {
+            get;
+            set;
+        }
+
+        public DateTime Min
+        {
+            get;
+            set;
+        }
+
+        public DateTime Max
+        {
+            get;
+            set;
+        }
+
+        public bool Enabled
+        {
+            get;
+            set;
+        }
+
+        public List<string> ParseFormats
+        {
+            get;
+            set;
+        }
+        
         public override void WriteInitializationScript(TextWriter writer)
         {
-            IClientSideObjectWriter objectWriter = ClientSideObjectWriterFactory.Create(Id, "tDatePicker", writer);
+            IClientSideObjectWriter objectWriter = ClientSideObjectWriterFactory.Create(Id, "kendoDatePicker", writer);
 
             objectWriter.Start();
-
-            if (!defaultEffects.SequenceEqual(Effects.Container))
-            {
-                objectWriter.Serialize("effects", Effects);
-            }
-
+            
             ClientEvents.SerializeTo(objectWriter);
 
             objectWriter.Append("format", this.Format);
-            objectWriter.Append("todayFormat", TodayFormat);
-            objectWriter.AppendDateOnly("minValue", this.MinValue);
-            objectWriter.AppendDateOnly("maxValue", this.MaxValue);
-            objectWriter.AppendDateOnly("selectedValue", this.Value);
-            objectWriter.Append("enabled", this.Enabled, true);
-            objectWriter.Append("openOnFocus", this.OpenOnFocus, false);
+            objectWriter.AppendCollection("parseFormats", this.ParseFormats);
+            
+            objectWriter.Append("min", this.Min);
+            objectWriter.Append("max", this.Max);
+            objectWriter.Append("footer", Footer);
+
+            objectWriter.Append("depth", Depth); //use Enum
+            objectWriter.Append("start", Start); //use Enum
+
+            if (MonthTemplate.content.HasValue() || MonthTemplate.empty.HasValue())
+            {
+                objectWriter.AppendObject("month", MonthTemplate);
+            }
 
             objectWriter.Complete();
 
@@ -91,13 +131,9 @@ namespace Kendo.Mvc.UI
         {
             Guard.IsNotNull(writer, "writer");
 
-            Name = Name ?? ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(string.Empty);
-
             DatePickerHtmlBuilder renderer = new DatePickerHtmlBuilder(this);
 
-            IHtmlNode rootTag = renderer.Build();
-
-            rootTag.WriteTo(writer);
+            renderer.Build().WriteTo(writer);
             base.WriteHtml(writer);
         }
 
@@ -105,7 +141,7 @@ namespace Kendo.Mvc.UI
         {
             base.VerifySettings();
 
-            if (MinValue > MaxValue)
+            if (Min > Max)
             {
                 throw new ArgumentException(TextResource.MinPropertyMustBeLessThenMaxProperty.FormatWith("MinValue", "MaxValue"));
             }

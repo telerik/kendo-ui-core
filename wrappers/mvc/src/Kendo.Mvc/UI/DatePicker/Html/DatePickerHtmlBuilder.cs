@@ -6,7 +6,7 @@ namespace Kendo.Mvc.UI.Html
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
 
-    public class DatePickerHtmlBuilder : IDatePickerHtmlBuilder
+    public class DatePickerHtmlBuilder
     {
         public DatePickerHtmlBuilder(DatePicker datePicker)
         {
@@ -18,27 +18,8 @@ namespace Kendo.Mvc.UI.Html
             get;
             private set;
         }
-
+        
         public IHtmlNode Build()
-        {
-            IHtmlNode wrapper = new HtmlElement("div")
-                                .Attributes(Component.HtmlAttributes)
-                                .PrependClass(UIPrimitives.Widget, "t-datepicker")
-                                .ToggleClass("t-state-disabled", !Component.Enabled);
-
-            IHtmlNode innerWrapper = new HtmlElement("div")
-                                    .AddClass("t-picker-wrap")
-                                    .AppendTo(wrapper);
-
-            InputTag().AppendTo(innerWrapper);
-
-            if (Component.ShowButton)
-                ButtonTag().AppendTo(innerWrapper);
-
-            return wrapper;
-        }
-
-        public IHtmlNode InputTag()
         {
             Func<object, DateTime?> converter = val => 
             {
@@ -59,7 +40,7 @@ namespace Kendo.Mvc.UI.Html
 
                 if (date != null)
                 {
-                    if (string.IsNullOrEmpty(Component.Format))
+                    if (string.IsNullOrWhiteSpace(Component.Format))
                     {
                         value = date.Value.ToShortDateString();
                     }
@@ -71,27 +52,12 @@ namespace Kendo.Mvc.UI.Html
             }
 
             return new HtmlElement("input", TagRenderMode.SelfClosing)
-                   .Attributes(new { name = Component.Name, id = Component.Id, type = "text" })
+                   .Attributes(new { name = Component.Name, id = Component.Id, type = "date" })
                    .ToggleAttribute("value", value, value.HasValue())
                    .ToggleAttribute("disabled", "disabled", !Component.Enabled)
-                   .Attributes(Component.InputHtmlAttributes)
                    .Attributes(Component.GetUnobtrusiveValidationAttributes())
                    .ToggleClass("input-validation-error", !Component.IsValid())
                    .PrependClass(UIPrimitives.Input);
-        }
-
-        public IHtmlNode ButtonTag()
-        {
-            IHtmlNode wrapper = new HtmlElement("span")
-                                .AddClass("t-select");
-
-            new HtmlElement("span")
-                .AddClass(UIPrimitives.Icon, "t-icon-calendar")
-                .Attribute("title", Component.ButtonTitle)
-                .Html(Component.ButtonTitle)
-                .AppendTo(wrapper);
-
-            return wrapper;
         }
     }
 }
