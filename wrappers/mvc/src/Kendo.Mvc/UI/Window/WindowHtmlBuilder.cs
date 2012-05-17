@@ -1,9 +1,7 @@
 namespace Kendo.Mvc.UI
 {
     using System.Text.RegularExpressions;
-    using System.Web.Mvc;
-    using Kendo.Mvc.Extensions;
-    
+
     public class WindowHtmlBuilder : IWindowHtmlBuilder
     {
         public WindowHtmlBuilder(Window window)
@@ -24,9 +22,7 @@ namespace Kendo.Mvc.UI
             var element = new HtmlElement("div")
                    .Attribute("id", Window.Id)
                    .Attributes(Window.HtmlAttributes)
-                   .ToggleCss("display", "none", !Window.Visible)
-                   .ToggleCss("width", Window.Width + "px", Window.Width != 0)
-                   .ToggleCss("height", Window.Height + "px", Window.Height != 0);
+                   .ToggleCss("display", "none", !Window.Visible);
 
             if (Window.Template.HasValue())
             {

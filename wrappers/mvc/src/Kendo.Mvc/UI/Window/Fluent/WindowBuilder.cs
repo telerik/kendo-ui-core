@@ -401,14 +401,14 @@ namespace Kendo.Mvc.UI.Fluent
         /// <example>
         /// <code lang="CS">
         /// &lt;%= Html.Telerik().Window()
-        ///	           .Name("Window")
-        ///	           .Effects(fx =>
-        ///	           {
-        ///		            fx.Zoom()
-        ///			          .Opacity()
-        ///					  .OpenDuration(AnimationDuration.Fast)
-        ///					  .CloseDuration(AnimationDuration.Fast);
-        ///	           })
+        ///               .Name("Window")
+        ///               .Effects(fx =>
+        ///               {
+        ///                    fx.Zoom()
+        ///                      .Opacity()
+        ///                      .OpenDuration(AnimationDuration.Fast)
+        ///                      .CloseDuration(AnimationDuration.Fast);
+        ///               })
         /// </code>
         /// </example>
         public WindowBuilder Effects(Action<WindowEffectsBuilder> addEffects)
@@ -430,6 +430,14 @@ namespace Kendo.Mvc.UI.Fluent
             Component.Modal = modal;
 
             return this;
+        }
+
+        /// <summary>
+        /// Sets whether the window can be moved.
+        /// </summary>
+        public WindowBuilder Draggable()
+        {
+            return Draggable(true);
         }
 
         /// <summary>
