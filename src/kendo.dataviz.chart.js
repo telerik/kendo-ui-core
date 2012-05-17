@@ -15,7 +15,6 @@
         Widget = kendo.ui.Widget,
         template = kendo.template,
         deepExtend = kendo.deepExtend,
-        format = kendo.format,
         getter = kendo.getter,
 
         dataviz = kendo.dataviz,
@@ -1126,7 +1125,7 @@
         }
 
         return unit;
-    };
+    }
 
     function dateAdd(date, time) {
         var offset = date.getTimezoneOffset(),
@@ -1190,14 +1189,13 @@
                 axisCrossingValue: toDate(options.axisCrossingValue)
             });
 
-            options = axis.setDefaults(toDate(seriesMin), toDate(seriesMax), options);
+            options = axis.applyDefaults(toDate(seriesMin), toDate(seriesMax), options);
 
             Axis.fn.init.call(axis, options);
         },
 
-        setDefaults: function(seriesMin, seriesMax, options) {
-            var axis = this,
-                min = options.min || seriesMin,
+        applyDefaults: function(seriesMin, seriesMax, options) {
+            var min = options.min || seriesMin,
                 max = options.max || seriesMax,
                 baseUnit = options.baseUnit || timeUnit(max - min),
                 baseUnitTime = TIME_PER_UNIT[baseUnit],
@@ -1223,9 +1221,9 @@
             defaults.min = addDuration(autoMin, -head, baseUnit);
             defaults.max = addDuration(autoMax, tail, baseUnit);
 
-            return results = deepExtend(defaults, options, {
+            return deepExtend(defaults, options, {
                 majorUnit: majorUnit
-            });;
+            });
         },
 
         range: function() {
