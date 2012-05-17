@@ -308,6 +308,7 @@
         change: function() {
             this._initChange = this.eventName != CHANGE;
             this.bindings[VALUE].set(this.element.value);
+            this._initChange = false;
         },
 
         refresh: function() {
