@@ -23,13 +23,13 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <param name="viewContext">The view context.</param>
         /// <param name="clientSideObjectWriterFactory">The client side object writer factory.</param>
-        protected ViewComponentBase(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory = null, ViewDataDictionary viewData = null)
+        protected ViewComponentBase(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory, ViewDataDictionary viewData = null)
         {
-            //Guard.IsNotNull(viewContext, "viewContext");
-            //Guard.IsNotNull(clientSideObjectWriterFactory, "clientSideObjectWriterFactory");
+            Guard.IsNotNull(viewContext, "viewContext");
+            Guard.IsNotNull(clientSideObjectWriterFactory, "clientSideObjectWriterFactory");
 
-            ViewData = viewData ?? viewContext.ViewData;
             ViewContext = viewContext;
+            ViewData = viewData ?? viewContext.ViewData;
             ClientSideObjectWriterFactory = clientSideObjectWriterFactory;
 
             HtmlAttributes = new RouteValueDictionary();
@@ -69,9 +69,7 @@ namespace Kendo.Mvc.UI
             {
                 // Return from htmlattributes if user has specified
                 // otherwise build it from name
-                return HtmlAttributes.ContainsKey("id") ?
-                       (string)HtmlAttributes["id"] :
-                       (!string.IsNullOrEmpty(Name) ? Name.Replace(".", HtmlHelper.IdAttributeDotReplacement) : null);
+                return TagBuilder.CreateSanitizedId(HtmlAttributes.ContainsKey("id") ? (string)HtmlAttributes["id"] : Name);
             }
         }
 

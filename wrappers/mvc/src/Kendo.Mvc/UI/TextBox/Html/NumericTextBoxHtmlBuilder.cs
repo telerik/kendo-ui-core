@@ -24,7 +24,7 @@ namespace Kendo.Mvc.UI.Html
             {
                 return ((T)Convert.ChangeType(val, typeof(T))).AsNullable();
             };
-
+            
             string value = Component.GetAttemptedValue();
             if (value == null)
             {
@@ -37,10 +37,13 @@ namespace Kendo.Mvc.UI.Html
             
             return new HtmlElement("input", TagRenderMode.SelfClosing)
                    .Attributes(new { name = Component.Name, id = Component.Id, type = "number" })
-                   .ToggleAttribute("value", value, value.HasValue())
-                   .ToggleAttribute("disabled", "disabled", !Component.Enabled)
-                   .Attributes(Component.InputHtmlAttributes)
+                   .Attributes(Component.HtmlAttributes)
                    .Attributes(Component.GetUnobtrusiveValidationAttributes())
+                   .ToggleAttribute("value", value, value.HasValue())
+                   .ToggleAttribute("min", "{0}".FormatWith(Component.Min), Component.Min.HasValue)
+                   .ToggleAttribute("max", "{0}".FormatWith(Component.Max), Component.Max.HasValue)
+                   .ToggleAttribute("step", "{0}".FormatWith(Component.Step), Component.Step.HasValue)
+                   .ToggleAttribute("disabled", "disabled", !Component.Enabled)
                    .ToggleClass("input-validation-error", !Component.IsValid())
                    .PrependClass(UIPrimitives.Input);
         }

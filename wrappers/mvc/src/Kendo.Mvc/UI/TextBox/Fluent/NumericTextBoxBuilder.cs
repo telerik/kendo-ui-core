@@ -131,29 +131,6 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
-        /// Sets the Input HTML attributes.
-        /// </summary>
-        /// <param name="attributes">The HTML attributes.</param>
-        public NumericTextBoxBuilder<T> InputHtmlAttributes(object attributes)
-        {
-            return InputHtmlAttributes(attributes.ToDictionary());
-        }        
-        
-        /// <summary>
-        /// Sets the Input HTML attributes.
-        /// </summary>
-        /// <param name="attributes">The HTML attributes.</param>
-        public NumericTextBoxBuilder<T> InputHtmlAttributes(IDictionary<string, object> attributes)
-        {
-            Guard.IsNotNull(attributes, "attributes");
-
-            Component.InputHtmlAttributes.Clear();
-            Component.InputHtmlAttributes.Merge(attributes);
-
-            return this;
-        }
-
-        /// <summary>
         /// Enables or disables the textbox.
         /// </summary>
         /// <param name="allowSpinner"></param>
@@ -181,8 +158,6 @@ namespace Kendo.Mvc.UI
 
         public NumericTextBoxBuilder<T> Culture(string culture)
         {
-            Guard.IsNotNullOrEmpty(culture, "culture");
-
             Component.Culture = culture;
 
             return this;

@@ -164,6 +164,7 @@
     <Compile Include="UI\Gauge\LinearGaugeTrackTests.cs" />
     <Compile Include="UI\Gauge\LinearGaugePointerBuilderTests.cs" />
     <Compile Include="UI\NavigationBindingTestDouble.cs" />
+    <Compile Include="UI\TextBox\NumericTextBoxTestHelper.cs" />
     <Compile Include="UI\XYData.cs" />
     <Compile Include="UI\Grid\GridForeignKeyColumnTests.cs" />
     <Compile Include="UI\Grid\Html\GridForeignKeyDataCellBuilderTests.cs" />
