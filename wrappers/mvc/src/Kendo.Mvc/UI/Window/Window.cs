@@ -12,6 +12,7 @@ namespace Kendo.Mvc.UI
     using Extensions;
     using Infrastructure;
     using Kendo.Mvc.Resources;
+    using System.Collections;
     
     public class Window : ViewComponentBase, IContentContainer, IAsyncContentContainer, IEffectEnabled
     {
@@ -29,8 +30,8 @@ namespace Kendo.Mvc.UI
             ClientEvents = new WindowClientEvents();
             ResizingSettings = new WindowResizingSettings();
 
-            Buttons = new WindowButtons();
-            defaultButtons.Each(button => Buttons.Container.Add(button));
+            Actions = new WindowButtons();
+            defaultButtons.Each(button => Actions.Container.Add(button));
 
             Effects = new Effects();
             defaultEffects.Each(el => Effects.Container.Add(el));
@@ -120,7 +121,7 @@ namespace Kendo.Mvc.UI
             private set;
         }
 
-        public WindowButtons Buttons
+        public WindowButtons Actions
         {
             get;
             private set;
@@ -199,6 +200,7 @@ namespace Kendo.Mvc.UI
             objectWriter.Append("height", Height);
             objectWriter.Append("title", Title);
             objectWriter.Append("resizable", ResizingSettings.Enabled);
+            objectWriter.AppendCollection("actions", Actions.Container.Select(item => item.Name));
 
             if (ResizingSettings.Enabled)
             {

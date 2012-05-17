@@ -21,102 +21,83 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Configures the window to show a close button
+        /// Configures the window to show a close button.
         /// </summary>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Telerik().Window()
         ///             .Name("Window")
-        ///             .Actions(buttons => buttons.Close())
+        ///             .Actions(actions => actions.Close())
         /// %&gt;
         /// </code>
         /// </example>
-        public WindowActionsBuilder Close() 
+        public WindowActionsBuilder Close()
         {
-            return this.Close("#");
+            return AddButton("Close", UIPrimitives.Icons.Close);
         }
 
         /// <summary>
-        /// Configures the window to show a close button and sets a fallback URL for environments where JavaScript is turned off.
-        /// </summary>
-        /// <param name="url">The fallback URL</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Window()
-        ///             .Name("Window")
-        ///             .Actions(buttons => buttons.Close(Url.Action("Home", "Index")))
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public WindowActionsBuilder Close(string url)
-        {
-            return AddButton("Close", UIPrimitives.Icons.Close, url);
-        }
-
-        /// <summary>
-        /// Configures the window to show a minimize button
+        /// Configures the window to show a maximize button.
         /// </summary>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Telerik().Window()
         ///             .Name("Window")
-        ///             .Actions(buttons => buttons.Maximize())
+        ///             .Actions(actions => actions.Maximize())
         /// %&gt;
         /// </code>
         /// </example>
         public WindowActionsBuilder Maximize()
         {
-            return this.Maximize("#");
+            return AddButton("Maximize", UIPrimitives.Icons.Maximize);
         }
 
         /// <summary>
-        /// Configures the window to show a minimize button and sets a fallback URL for environments where JavaScript is turned off.
+        /// Configures the window to show a minimize button.
         /// </summary>
-        /// <param name="url">The fallback URL</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Telerik().Window()
         ///             .Name("Window")
-        ///             .Actions(buttons => buttons.Maximize(Url.Action("Home", "Index")))
+        ///             .Actions(actions => actions.Maximize())
         /// %&gt;
         /// </code>
         /// </example>
-        public WindowActionsBuilder Maximize(string url)
+        public WindowActionsBuilder Minimize()
         {
-            return AddButton("Maximize", UIPrimitives.Icons.Maximize, url);
+            return AddButton("Minimize", UIPrimitives.Icons.Minimize);
         }
 
         /// <summary>
-        /// Configures the window to show a refresh button
+        /// Configures the window to show a refresh button.
         /// </summary>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Telerik().Window()
         ///             .Name("Window")
-        ///             .Actions(buttons => buttons.Refresh())
+        ///             .Actions(actions => actions.Refresh())
         /// %&gt;
         /// </code>
         /// </example>
         public WindowActionsBuilder Refresh()
         {
-            return this.Refresh("#");
+            return AddButton("Refresh", UIPrimitives.Icons.Refresh);
         }
 
         /// <summary>
-        /// Configures the window to show a refresh button and sets a fallback URL for environments where JavaScript is turned off.
+        /// Configures the window to show a refresh button.
         /// </summary>
-        /// <param name="url">The fallback URL</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Telerik().Window()
         ///             .Name("Window")
-        ///             .Actions(buttons => buttons.Refresh(Url.Action("Home", "Index")))
+        ///             .Actions(actions => actions.Custom("menu"))
         /// %&gt;
         /// </code>
         /// </example>
-        public WindowActionsBuilder Refresh(string url)
+        public WindowActionsBuilder Custom(string actionName)
         {
-            return AddButton("Refresh", UIPrimitives.Icons.Refresh, url);
+            return AddButton(actionName, UIPrimitives.Icons.Custom);
         }
 
         /// <summary>
@@ -126,7 +107,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;%= Html.Telerik().Window()
         ///             .Name("Window")
-        ///             .Actions(buttons => buttons.Clear())
+        ///             .Actions(actions => actions.Clear())
         /// %&gt;
         /// </code>
         /// </example>
@@ -135,9 +116,9 @@ namespace Kendo.Mvc.UI.Fluent
             return ClearButtons();
         }
 
-        private WindowActionsBuilder AddButton(string name, string cssClass, string url)
+        private WindowActionsBuilder AddButton(string name, string cssClass)
         {
-            container.Container.Add(new HeaderButton { Name = name, CssClass = cssClass, Url = url });
+            container.Container.Add(new HeaderButton { Name = name, CssClass = cssClass });
 
             return this;
         }

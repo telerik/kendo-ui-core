@@ -171,7 +171,7 @@ namespace Kendo.Mvc.UI
             public const string GroupDelete = "k-group-delete";
 
             /// <summary>
-            /// "Minimize" icon
+            /// "Refresh" icon
             /// </summary>
             public const string Refresh = "k-refresh";
 
@@ -181,9 +181,19 @@ namespace Kendo.Mvc.UI
             public const string Maximize = "k-maximize";
 
             /// <summary>
+            /// "Minimize" icon
+            /// </summary>
+            public const string Minimize = "k-minimize";
+
+            /// <summary>
             /// "Close" icon
             /// </summary>
             public const string Close = "k-close";
+
+            /// <summary>
+            /// "Custom" icon
+            /// </summary>
+            public const string Custom = "k-custom";
         }
 
         /// <summary>
