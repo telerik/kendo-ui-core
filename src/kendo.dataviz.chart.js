@@ -1194,6 +1194,16 @@
             Axis.fn.init.call(axis, options);
         },
 
+        options: {
+            labels: {
+                // TODO: Consider other names
+                dateFormats: {
+                    days: "M/d",
+                    months: "MMM 'yy"
+                }
+            }
+        },
+
         applyDefaults: function(seriesMin, seriesMax, options) {
             var min = options.min || seriesMin,
                 max = options.max || seriesMax,
@@ -1318,7 +1328,9 @@
             var options = this.options,
                 offset =  index * options.majorUnit,
                 date = addDuration(options.min, offset, options.baseUnit),
-                value = (date.getMonth() + 1) + "/" + date.getDate();
+                unitFormat = labelOptions.dateFormats[options.baseUnit],
+                format = labelOptions.format || unitFormat,
+                value = kendo.toString(date, format);
 
             return new AxisLabel(value, index, null, labelOptions);
         }

@@ -403,10 +403,34 @@
                 });
 
                 test("creates labels with default format", function() {
-                    createDateValueAxis(new Date("2012/02/01"), new Date("2012/02/10"));
+                    createDateValueAxis(new Date("2012/02/01"), new Date("2012/02/02"));
 
                     same($.map(view.log.text, function(text) { return text.content }),
-                         ["1/31", "2/2", "2/4", "2/6", "2/8", "2/10", "2/12"]);
+                         ["1/31", "2/1", "2/2", "2/3"]);
+                });
+
+                test("creates labels with custom date format", function() {
+                    createDateValueAxis(new Date("2012/02/01"), new Date("2012/02/02"), {
+                        labels: {
+                            dateFormats: {
+                                days: "M/d/yy"
+                            }
+                        }
+                    });
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["1/31/12", "2/1/12", "2/2/12", "2/3/12"]);
+                });
+
+                test("creates labels with custom format", function() {
+                    createDateValueAxis(new Date("2012/02/01"), new Date("2012/02/02"), {
+                        labels: {
+                            format: "M/d/yy"
+                        }
+                    });
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["1/31/12", "2/1/12", "2/2/12", "2/3/12"]);
                 });
 
                 // ------------------------------------------------------------
