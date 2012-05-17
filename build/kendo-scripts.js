@@ -143,6 +143,10 @@ var suiteScripts = {
         "kendo.dataviz.gauge.js",
         "kendo.dataviz.svg.js"
     ],
+    aspnetmvc: [
+        "kendo.data.aspnetmvc.js",
+        "kendo.validator.aspnetmvc.js"
+    ]
 };
 
 var deployCache = { },
