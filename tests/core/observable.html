@@ -255,6 +255,34 @@
                 equal(order[0], "first");
                 equal(order[1], "bind");
             });
+
+            test("can reatach a handler during event invocation", function() {
+                var observable = new Observable();
+
+                var handler1Called = false;
+
+                var handler1 = function() {
+                    handler1Called = true;
+                    observable.unbind("event", handler1)
+                              .bind("event", handler1);
+                };
+
+                var handler2Called = false;
+
+                var handler2 = function() {
+                    handler2Called = true;
+
+                    observable.unbind("event", handler2)
+                              .bind("event", handler2);
+                };
+
+                observable.bind("event", handler1)
+                          .bind("event", handler2)
+                          .trigger("event");
+
+                ok(handler1Called, "First handler should be called");
+                ok(handler2Called, "Second handler should be called");
+            });
         </script>
     </body>
 </html>
