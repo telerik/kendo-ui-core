@@ -149,7 +149,7 @@
         events: [
             /**
              * Fires when the widget page is changed.
-             * @name kendo.mobile.ui.ScrollView#select
+             * @name kendo.mobile.ui.ScrollView#change
              * @event
              * @param {Event} e
              * @param {jQueryObject} e.page The current page (zero based index)
