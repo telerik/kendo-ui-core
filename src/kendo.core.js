@@ -1835,6 +1835,13 @@ function pad(number) {
         support.transforms = transforms;
         support.transitions = transitions;
 
+        /**
+         * Indicates the browser device pixel ratio.
+         * @name kendo.support.devicePixelRatio
+         * @property {Float}
+         */
+        support.devicePixelRatio = window.devicePixelRatio === undefined ? 1 : window.devicePixelRatio;
+
         support.detectOS = function (ua) {
             var os = false, minorVersion, match = [],
                 agentRxs = {
@@ -1855,6 +1862,9 @@ function pad(number) {
                     blackberry: /^blackberry|playbook/i,
                     windows: /windows|winphone/
                 },
+                formFactorRxs = {
+                    tablet: /playbook|ipad|fire/i
+                },
                 browserRxs = {
                     omini: /Opera\sMini/i,
                     omobile: /Opera\sMobi/i,
@@ -1862,21 +1872,13 @@ function pad(number) {
                     webkit: /webkit/i,
                     ie: /MSIE|Windows\sPhone/i
                 },
-                testOs = function (agent) {
-                    for (var os in osRxs) {
-                        if (osRxs.hasOwnProperty(os) && osRxs[os].test(agent)) {
-                            return os;
+                testRx = function (agent, rxs, dflt) {
+                    for (var rx in rxs) {
+                        if (rxs.hasOwnProperty(rx) && rxs[rx].test(agent)) {
+                            return rx;
                         }
                     }
-                    return agent;
-                },
-                testBrowser = function (ua) {
-                    for (var browser in browserRxs) {
-                        if (browserRxs.hasOwnProperty(browser) && browserRxs[browser].test(ua)) {
-                            return browser;
-                        }
-                    }
-                    return "default";
+                    return dflt != UNDEFINED ? dflt : agent;
                 };
 
             for (var agent in agentRxs) {
@@ -1887,14 +1889,18 @@ function pad(number) {
 
                         os = {};
                         os.device = agent;
-                        os.browser = testBrowser(ua);
-                        os.name = testOs(agent);
+                        os.tablet = testRx(agent, formFactorRxs, false);
+                        os.browser = testRx(ua, browserRxs, "default");
+                        os.name = testRx(agent, osRxs);
                         os[os.name] = true;
                         os.majorVersion = match[2];
                         os.minorVersion = match[3].replace("_", ".");
                         minorVersion = os.minorVersion.replace(".", "").substr(0, 2);
                         os.flatVersion = os.majorVersion + minorVersion + (new Array(3 - (minorVersion.length < 3 ? minorVersion.length : 2)).join("0"));
                         os.appMode = window.navigator.standalone || (/file|local/).test(window.location.protocol) || typeof window.PhoneGap !== UNDEFINED; // Use file protocol to detect appModes.
+
+                        if (os.android && support.devicePixelRatio < 1.5 && (window.outerWidth > 800 || window.outerHeight > 800))
+                            os.tablet = agent;
 
                         break;
                     }
@@ -1912,13 +1918,6 @@ function pad(number) {
         support.zoomLevel = function() {
             return support.touch ? (document.documentElement.clientWidth / window.innerWidth) : 1;
         };
-
-        /**
-         * Indicates the browser device pixel ratio.
-         * @name kendo.support.devicePixelRatio
-         * @property {Float}
-         */
-        support.devicePixelRatio = window.devicePixelRatio === undefined ? 1 : window.devicePixelRatio;
 
         /**
          * Indicates the browser support for event capturing
