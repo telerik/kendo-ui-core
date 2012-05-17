@@ -1440,11 +1440,6 @@
                 return;
             }
 
-            if (visibility) { // Set initial height on visible items (due to a Chrome bug/feature).
-                element.css("height", element.height());
-            }
-            element.css("height");
-
             element
                 .parent()
                 .toggleClass(defaultState, visibility)
