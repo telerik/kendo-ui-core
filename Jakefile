@@ -263,6 +263,7 @@ namespace("mvc", function() {
 
         deploySuiteFiles("web");
         deploySuiteFiles("dataviz");
+        kendoScripts.buildSuiteScripts("aspnetmvc", scriptsDest, "", false);
         deployFiles(sharedFiles);
     });
 
