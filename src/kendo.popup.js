@@ -141,6 +141,7 @@
             anchor: BODY,
             appendTo: BODY,
             collision: "flip fit",
+            viewport: window,
             animation: {
                 open: {
                     effects: "slideIn:down",
@@ -202,7 +203,7 @@
                 }
 
                 animation = extend(true, {}, options.animation.open);
-                that.flipped = that._position(window, fixed);
+                that.flipped = that._position(fixed);
                 animation.effects = kendo.parseEffects(animation.effects, that.flipped);
 
                 direction = animation.effects.slideIn ? animation.effects.slideIn.direction : direction;
@@ -330,13 +331,13 @@
             return output;
         },
 
-        _position: function(viewport, fixed) {
-            viewport = $(viewport);
-
+        _position: function(fixed) {
             var that = this,
                 element = that.element,
                 wrapper = that.wrapper,
                 options = that.options,
+                viewport = $(options.viewport),
+                viewportOffset = $(viewport).offset(),
                 anchor = $(options.anchor),
                 origins = options.origin.toLowerCase().split(" "),
                 positions = options.position.toLowerCase().split(" "),
@@ -374,6 +375,11 @@
                 top: offset.top - (window.pageYOffset || document.documentElement.scrollTop || 0),
                 left: offset.left - (window.pageXOffset || document.documentElement.scrollLeft || 0)
             };
+
+            if (viewport[0] !== window) {
+                offset.top -= viewportOffset.top
+                offset.left -= viewportOffset.left
+            }
 
             if (!that.wrapper.data(LOCATION)) { // Needed to reset the popup location after every closure - fixes the resize bugs.
                 wrapper.data(LOCATION, extend({}, pos));
