@@ -911,13 +911,6 @@
     background: #000;
 }
 
-//.km-ios .km-splitview .km-content,
-//.km-ios .km-splitview .km-scroll-container
-//{
-//    display: -webkit-box;
-//    width: 100%;
-//}
-
 .km-ios .km-splitview > .km-pane
 {
     border-right: 1px solid #000;
@@ -937,7 +930,7 @@
     text-shadow: 0 1px rgba(255,255,255,.8);
 }
 
-.km-ios .km-pane .km-button
+.km-ios .km-pane .km-navbar .km-button
 {
     background-color: #777
 }
@@ -946,19 +939,35 @@
 .km-ios .km-pane .km-toolbar
 {
     .box-shadow(inset 0 -1px 3px rgba(0,0,0,.2));
-    .border-radius(5px 5px 0 0);
     background-color: #eee;
+}
+
+.km-ios .km-pane .km-navbar,
+.km-ios .km-pane .km-toolbar,
+.km-ios .km-pane .km-view > :first-child
+{
+    .border-radius(5px 5px 0 0);
     -webkit-border-top-left-radius: 5px;
     -webkit-border-top-right-radius: 5px;
     border-bottom: 1px solid rgba(0,0,0,.3);
 }
 
-.km-ios .km-pane .km-content,
-.km-ios .km-pane .km-tabstrip
+.km-ios .km-pane .km-view > :first-child
+{
+    border-bottom: 1px solid rgba(0,0,0,.3);
+}
+
+.km-ios .km-pane .km-tabstrip,
+.km-ios .km-pane .km-view > :last-child
 {
     .border-radius(0 0 5px 5px);
     -webkit-border-bottom-left-radius: 5px;
     -webkit-border-bottom-right-radius: 5px;
+}
+
+.km-ios .km-pane > .km-view > :first-child:last-child
+{
+    .border-radius(5px);
 }
 
 .km-ios .km-splitview .km-pane:last-child
