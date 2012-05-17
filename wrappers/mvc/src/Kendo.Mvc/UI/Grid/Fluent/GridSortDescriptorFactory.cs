@@ -8,20 +8,21 @@ namespace Kendo.Mvc.UI.Fluent
     using Extensions;
     using Infrastructure;
     using Resources;
+using System.Collections.Generic;
 
-    public class GridSortDescriptorFactory<TModel> : IHideObjectMembers
+    public class DataSourceSortDescriptorFactory<TModel> : IHideObjectMembers
         where TModel : class
     {
-        public GridSortDescriptorFactory(GridSortSettings settings)
-        {
-            Guard.IsNotNull(settings, "settings");
+        private readonly IList<SortDescriptor> descriptors;
 
-            Settings = settings;
+        public DataSourceSortDescriptorFactory(IList<SortDescriptor> descriptors)
+        {
+            Guard.IsNotNull(descriptors, "descriptors");
+
+            this.descriptors = descriptors;
         }
 
-        protected GridSortSettings Settings { get; private set; }
-
-        public virtual GridSortDescriptorBuilder Add<TValue>(Expression<Func<TModel, TValue>> expression)
+        public virtual DataSourceSortDescriptorBuilder Add<TValue>(Expression<Func<TModel, TValue>> expression)
         {
             return Add(new SortDescriptor
             {
@@ -30,7 +31,7 @@ namespace Kendo.Mvc.UI.Fluent
             });
         }
 
-        public virtual GridSortDescriptorBuilder Add(string memberName)
+        public virtual DataSourceSortDescriptorBuilder Add(string memberName)
         {
             return Add(new SortDescriptor
             {
@@ -39,16 +40,11 @@ namespace Kendo.Mvc.UI.Fluent
             });
         }
 
-        private GridSortDescriptorBuilder Add(SortDescriptor descriptor)
-        {
-            if (Settings.SortMode == GridSortMode.SingleColumn && Settings.OrderBy.Any())
-            {
-                throw new InvalidOperationException(TextResource.YouCannotAddMoreThanOnceColumnWhenSortModeIsSetToSingle);
-            }
-            
-            Settings.OrderBy.Add(descriptor);
+        private DataSourceSortDescriptorBuilder Add(SortDescriptor descriptor)
+        {   
+            descriptors.Add(descriptor);
 
-            return new GridSortDescriptorBuilder(descriptor);
+            return new DataSourceSortDescriptorBuilder(descriptor);
         }
     }
 }

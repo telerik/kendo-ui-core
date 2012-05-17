@@ -3,10 +3,12 @@ namespace Kendo.Mvc
     using System.ComponentModel;
     using System.Linq;
     using Kendo.Mvc.Extensions;
+    using Kendo.Mvc.UI;
+
     /// <summary>
     /// Represents declarative sorting.
     /// </summary>
-    public class SortDescriptor : IDescriptor
+    public class SortDescriptor : JsonObject, IDescriptor
     {
         /// <summary>
         /// Gets or sets the member name which will be used for sorting.
@@ -46,6 +48,12 @@ namespace Kendo.Mvc
         public string Serialize()
         {
             return "{0}-{1}".FormatWith(Member, SortDirection == ListSortDirection.Ascending ? "asc" : "desc");
+        }
+
+        protected override void Serialize(System.Collections.Generic.IDictionary<string, object> json)
+        {
+            json["field"] = Member;
+            json["dir"] = SortDirection == ListSortDirection.Ascending ? "asc" : "desc";
         }
     }
 }

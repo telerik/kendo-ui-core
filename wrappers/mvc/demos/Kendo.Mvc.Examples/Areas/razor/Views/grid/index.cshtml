@@ -6,7 +6,8 @@
         .Name("Grid")
         .Pageable()
         .Sortable()
-        .Scrollable()
+        .Scrollable()      
+        .DataSource(dataSource => dataSource.OrderBy(sort => sort.Add(p => p.ProductName).Ascending()))  
     )
 </div>
 <script>
