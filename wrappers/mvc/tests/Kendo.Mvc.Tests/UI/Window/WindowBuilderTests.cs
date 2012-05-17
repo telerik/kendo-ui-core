@@ -280,7 +280,7 @@ namespace Kendo.Mvc.UI.Tests
         [Fact]
         public void Buttons_should_define_buttons_collection()
         {
-            builder.Buttons(b => { b.Close(); });
+            builder.Actions(b => { b.Close(); });
 
             (component.Buttons.Container.Count > 0).ShouldBeTrue();
         }
@@ -288,7 +288,7 @@ namespace Kendo.Mvc.UI.Tests
         [Fact]
         public void Buttons_should_initialy_clear_buttons_collection()
         {
-            builder.Buttons(b => { b.Maximize(); });
+            builder.Actions(b => { b.Maximize(); });
 
             (component.Buttons.Container.Count == 1).ShouldBeTrue();
             component.Buttons.Container[0].Name.ShouldEqual("Maximize");
@@ -297,7 +297,7 @@ namespace Kendo.Mvc.UI.Tests
         [Fact]
         public void Buttons_returns_builder()
         {
-            builder.Buttons(b => { b.Close(); }).ShouldBeSameAs(builder);
+            builder.Actions(b => { b.Close(); }).ShouldBeSameAs(builder);
         }
     }
 }
