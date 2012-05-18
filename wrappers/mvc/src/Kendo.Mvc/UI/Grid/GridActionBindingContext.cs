@@ -10,7 +10,7 @@ namespace Kendo.Mvc.UI
         {
             EnableCustomBinding = enableCustomBinding;
             Controller = controller;
-            DataSource = dataSource;
+            Data = dataSource;
             Total = total;
             SortDescriptors = new List<SortDescriptor>();
             GroupDescriptors = new List<GroupDescriptor>();
@@ -25,7 +25,7 @@ namespace Kendo.Mvc.UI
             private set;
         }
 
-        public IEnumerable DataSource
+        public IEnumerable Data
         {
             get;
             set;

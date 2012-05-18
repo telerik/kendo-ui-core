@@ -51,7 +51,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
         [Fact]
         public void Total_returns_zero_if_data_source_is_empty()
         {
-            context.Setup(c => c.DataSource).Returns(new object[] { });
+            context.Setup(c => c.Data).Returns(new object[] { });
 
             Assert.Equal(0, dataProcessor.Total);
         }
@@ -73,7 +73,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
         [Fact]
         public void Should_return_page_count_when_data_source_items_are_less_than_page_size()
         {
-            context.SetupGet(c => c.DataSource).Returns(DataSource(8));
+            context.SetupGet(c => c.Data).Returns(DataSource(8));
 
             Assert.Equal(1, dataProcessor.PageCount);
         }
@@ -81,7 +81,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
         [Fact]
         public void Should_return_page_count_when_data_source_items_are_more_than_page_size()
         {
-            context.SetupGet(c => c.DataSource).Returns(DataSource(11));
+            context.SetupGet(c => c.Data).Returns(DataSource(11));
 
             Assert.Equal(2, dataProcessor.PageCount);
         }
@@ -89,7 +89,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
         [Fact]
         public void Should_return_page_count_when_data_source_items_are_same_as_page_size()
         {
-            context.SetupGet(c => c.DataSource).Returns(DataSource(10));
+            context.SetupGet(c => c.Data).Returns(DataSource(10));
 
             Assert.Equal(1, dataProcessor.PageCount);
         }
@@ -103,7 +103,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
             };
 
             valueProvider.Add(GridUrlParameters.OrderBy, "Name-asc");
-            context.SetupGet(c => c.DataSource).Returns(dataSource);
+            context.SetupGet(c => c.Data).Returns(dataSource);
             IEnumerable<Customer> processedDataSource = dataProcessor.ProcessedDataSource.Cast<Customer>();
 
             Assert.Equal("A", processedDataSource.First().Name);
@@ -118,7 +118,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
             };
 
             valueProvider.Add(GridUrlParameters.Filter, "startswith(Name,'A')");
-            context.SetupGet(c => c.DataSource).Returns(dataSource);
+            context.SetupGet(c => c.Data).Returns(dataSource);
 
             IEnumerable<Customer> processedDataSource = dataProcessor.ProcessedDataSource.Cast<Customer>();
             Assert.Equal(1, processedDataSource.Count());
@@ -133,7 +133,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
             dataSource.Rows.Add("A");
             dataSource.Rows.Add("B");
 
-            context.SetupGet(c => c.DataSource).Returns(new GridDataTableWrapper(dataSource));
+            context.SetupGet(c => c.Data).Returns(new GridDataTableWrapper(dataSource));
 
             IEnumerable<DataRowView> processedDataSource = dataProcessor.ProcessedDataSource.Cast<DataRowView>();
             Assert.Equal(2, processedDataSource.Count());            
@@ -145,7 +145,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
             var dataSource = new DataTable();
             dataSource.Columns.Add("Name", typeof(string));            
 
-            context.SetupGet(c => c.DataSource).Returns(new GridDataTableWrapper(dataSource));
+            context.SetupGet(c => c.Data).Returns(new GridDataTableWrapper(dataSource));
             Assert.DoesNotThrow(() => dataProcessor.ProcessedDataSource.Cast<DataRowView>());            
         }
 
@@ -158,7 +158,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
             dataSource.Rows.Add("B");
 
             valueProvider.Add(GridUrlParameters.Filter, "startswith(Name,'A')");
-            context.SetupGet(c => c.DataSource).Returns(new GridDataTableWrapper(dataSource));
+            context.SetupGet(c => c.Data).Returns(new GridDataTableWrapper(dataSource));
 
             IEnumerable<DataRowView> processedDataSource = dataProcessor.ProcessedDataSource.Cast<DataRowView>();
             Assert.Equal(1, processedDataSource.Count());
@@ -171,7 +171,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
             dataProcessor.GroupDescriptors.Add(new GroupDescriptor { 
                 Member = field1Name
             });
-            context.SetupGet(c => c.DataSource).Returns(GetDataTable().WrapAsEnumerable());
+            context.SetupGet(c => c.Data).Returns(GetDataTable().WrapAsEnumerable());
 
             var processedDataSource = dataProcessor.ProcessedDataSource.Cast<IGroup>();
             Assert.Equal(2, processedDataSource.Count());
@@ -194,7 +194,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
             {
                 Member = field2Name
             });
-            context.SetupGet(c => c.DataSource).Returns(GetDataTable().WrapAsEnumerable());
+            context.SetupGet(c => c.Data).Returns(GetDataTable().WrapAsEnumerable());
 
             var processedDataSource = dataProcessor.ProcessedDataSource.Cast<IGroup>();
             var firstGroupItem = processedDataSource.First();            
@@ -211,7 +211,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
         public void Should_page_if_current_page_is_specified_and_paging_is_enabled()
         {
             valueProvider.Add(GridUrlParameters.CurrentPage, 2);
-            context.SetupGet(c => c.DataSource).Returns(DataSource(20));
+            context.SetupGet(c => c.Data).Returns(DataSource(20));
 
             IEnumerable<int> processedDataSource = dataProcessor.ProcessedDataSource.Cast<int>();
 
@@ -257,7 +257,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
         {
             valueProvider.Add(GridUrlParameters.PageSize, 3);
             
-            context.SetupGet(c => c.DataSource).Returns(DataSource(10));
+            context.SetupGet(c => c.Data).Returns(DataSource(10));
 
             dataProcessor.PageCount.ShouldEqual(4);
         }
@@ -267,7 +267,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
         {
             IEnumerable dataSource = DataSource(20);
             context.SetupGet(c => c.EnableCustomBinding).Returns(true);
-            context.SetupGet(c => c.DataSource).Returns(dataSource);
+            context.SetupGet(c => c.Data).Returns(dataSource);
 
             Assert.Same(dataSource, dataProcessor.ProcessedDataSource);
         }       
@@ -278,7 +278,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
             var expectedValue = DataSource(2);
             var customWrapper = new GridCustomGroupingWrapper<int>(expectedValue);
             context.SetupGet(c => c.EnableCustomBinding).Returns(true);
-            context.SetupGet(c => c.DataSource).Returns(customWrapper);
+            context.SetupGet(c => c.Data).Returns(customWrapper);
 
             Assert.True(expectedValue.Cast<int>().SequenceEqual(dataProcessor.ProcessedDataSource.Cast<int>()));
         }
@@ -288,7 +288,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
         {
             var customWrapper = new GridCustomGroupingWrapper<int>(DataSource(2));
             context.SetupGet(c => c.EnableCustomBinding).Returns(false);
-            context.SetupGet(c => c.DataSource).Returns(customWrapper);
+            context.SetupGet(c => c.Data).Returns(customWrapper);
 
             IEnumerable result;
             Assert.Throws<InvalidOperationException>(() => result = dataProcessor.ProcessedDataSource);
@@ -298,7 +298,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
         public void Should_calculate_aggregates()
         {
             const int expectedCount = 8;
-            context.SetupGet(c => c.DataSource).Returns(DataSource(expectedCount));
+            context.SetupGet(c => c.Data).Returns(DataSource(expectedCount));
 
             var descriptor = new AggregateDescriptor();
             descriptor.Aggregates.Add(new CountFunction { ResultFormatString = field2Name });
@@ -320,7 +320,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
             expando2.Foo = "bar";
             IEnumerable<dynamic> enumerable = new[] { expando1, expando2 };
 
-            context.Setup(c => c.DataSource).Returns(enumerable);
+            context.Setup(c => c.Data).Returns(enumerable);
             context.SetupGet(c => c.FilterDescriptors).Returns(new List<CompositeFilterDescriptor>
                                                                    {
                                                                        new CompositeFilterDescriptor{

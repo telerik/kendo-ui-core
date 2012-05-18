@@ -6,7 +6,7 @@ namespace Kendo.Mvc.UI
 
     public interface IGridBindingContext
     {
-        IEnumerable DataSource
+        IEnumerable Data
         {
             get;
         }

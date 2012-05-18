@@ -189,7 +189,7 @@ namespace Kendo.Mvc.UI
                 return;
             }
 
-            if (bindingContext.DataSource == null)
+            if (bindingContext.Data == null)
             {
                 aggregatesAreCalculated = true;
                 return;
@@ -197,7 +197,7 @@ namespace Kendo.Mvc.UI
 
             if (Aggregates.Any())
             {
-                var dataSource = GetCustomDataSource(bindingContext.DataSource).AsQueryable();
+                var dataSource = GetCustomDataSource(bindingContext.Data).AsQueryable();
 
                 var source = dataSource;
                 if (FilterDescriptors.Any())
@@ -216,7 +216,7 @@ namespace Kendo.Mvc.UI
                 return;
             }
 
-            if (bindingContext.DataSource == null)
+            if (bindingContext.Data == null)
             {
                 dataSourceIsProcessed = true;
                 return;
@@ -231,14 +231,14 @@ namespace Kendo.Mvc.UI
                     GroupDescriptors.Each(g => g.AggregateFunctions.AddRange(Aggregates));
                 }
 
-                var dataTableEnumerable = bindingContext.DataSource as GridDataTableWrapper;
+                var dataTableEnumerable = bindingContext.Data as GridDataTableWrapper;
                 if (dataTableEnumerable != null)
                 {
                     model = dataTableEnumerable.ToGridModel(CurrentPage, PageSize, SortDescriptors, FilterDescriptors, GroupDescriptors);                    
                 }
                 else
                 {
-                    var dataSource = bindingContext.DataSource.AsQueryable();
+                    var dataSource = bindingContext.Data.AsQueryable();
                     model = dataSource.ToGridModel(CurrentPage, PageSize, SortDescriptors, FilterDescriptors, GroupDescriptors);
                 }
 
@@ -247,7 +247,7 @@ namespace Kendo.Mvc.UI
             }
             else
             {
-                processedDataSource = GetCustomDataSource(bindingContext.DataSource);
+                processedDataSource = GetCustomDataSource(bindingContext.Data);
                 totalCount = bindingContext.Total;
             }
 

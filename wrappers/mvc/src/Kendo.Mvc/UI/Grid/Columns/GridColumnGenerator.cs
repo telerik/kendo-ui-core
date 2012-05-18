@@ -20,9 +20,9 @@ namespace Kendo.Mvc.UI
 
         public IEnumerable<GridColumnBase<T>> GetColumns()
         {
-            if (typeof(T) == typeof(DataRowView) && grid.Data is GridDataTableWrapper)
+            if (typeof(T) == typeof(DataRowView) && grid.DataSource.Data is GridDataTableWrapper)
             {
-                return GetColumnsForDataTable(grid.Data as GridDataTableWrapper);
+                return GetColumnsForDataTable(grid.DataSource.Data as GridDataTableWrapper);
             }
 
             var properties = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance)
@@ -53,9 +53,9 @@ namespace Kendo.Mvc.UI
         {
             bool liftMemberAccess = false;
 
-            if (grid.Data != null)
+            if (grid.DataSource.Data != null)
             {
-                liftMemberAccess = grid.Data.AsQueryable().Provider.IsLinqToObjectsProvider();
+                liftMemberAccess = grid.DataSource.Data.AsQueryable().Provider.IsLinqToObjectsProvider();
             }
 
             LambdaExpression lambdaExpression = ExpressionBuilder.Lambda<T>(memberType, memberName, liftMemberAccess);

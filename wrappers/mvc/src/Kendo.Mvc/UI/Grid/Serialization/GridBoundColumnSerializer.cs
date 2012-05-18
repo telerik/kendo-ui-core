@@ -87,6 +87,71 @@ namespace Kendo.Mvc.UI
 
                 result["values"] = values;
             }
-        }           
+        }
+
+        private void SerializeFilters(IDictionary<string, object> result)
+        {
+            var filters = SerializeFilter(column.Grid.DataSource.Filters);
+
+            if (filters.Any())
+            {
+                result["filters"] = filters;
+            }
+            
+            /*
+            var filtersForTheColumn = column.Grid.DataProcessor.FilterDescriptors
+                .SelectMemberDescriptors()
+                .Where(descriptor => descriptor.Member == column.Member);
+
+            if (filtersForTheColumn.Any())
+            {
+                var filters = new List<IDictionary<string, object>>();
+
+                filtersForTheColumn.Each(filter =>
+                {
+                    filters.Add(new Dictionary<string, object>
+                    {
+                        {"operator", filter.Operator.ToToken()},
+                        {"value", filter.Value}
+                    });
+                });
+
+                result["filters"] = filters;
+            }*/
+        }
+
+        private IList<IDictionary<string, object>> SerializeFilter(IEnumerable<IFilterDescriptor> filters)
+        {
+            var result = new List<IDictionary<string, object>>();
+
+            filters.Each(f =>
+            {
+                if (f is CompositeFilterDescriptor)
+                {
+                    var descriptor = f as CompositeFilterDescriptor;
+                    if (descriptor.FilterDescriptors.SelectMemberDescriptors().Where(d => d.Member == column.Member).Any())
+                    {
+                        result.Add(new Dictionary<string, object> {
+                            {"logic", descriptor.LogicalOperator.ToString().ToLowerInvariant()},
+                            {"filters", SerializeFilter(descriptor.FilterDescriptors) }
+                        });
+                    }
+                }
+                else if (f is FilterDescriptor)
+                {
+                    var descriptor = f as FilterDescriptor;
+                    if (descriptor.Member == column.Member)
+                    {
+                        result.Add(new Dictionary<string, object>
+                        {
+                            {"operator", descriptor.Operator.ToToken()},
+                            {"value", descriptor.Value}
+                        });
+                    }
+                }
+            });
+
+            return result;
+        }
     }
 }

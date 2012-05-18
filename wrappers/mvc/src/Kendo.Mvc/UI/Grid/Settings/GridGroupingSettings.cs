@@ -40,7 +40,7 @@ namespace Kendo.Mvc.UI
         {
             var result = new List<IDictionary<string, object>>();
 
-            grid.DataProcessor.GroupDescriptors.Each(groupDescriptor =>
+            grid.DataSource.Groups.Each(groupDescriptor =>
             {
                 var group = new Dictionary<string, object>();
 
@@ -57,7 +57,7 @@ namespace Kendo.Mvc.UI
 
         public string SerializeExpression()
         {
-            return GridDescriptorSerializer.Serialize(grid.DataProcessor.GroupDescriptors);
+            return GridDescriptorSerializer.Serialize(grid.DataSource.Groups);
         }
     }
 }

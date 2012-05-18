@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using Kendo.Mvc.Extensions;
 
@@ -15,6 +17,10 @@ namespace Kendo.Mvc.UI
             Groups = new List<GroupDescriptor>();
             Aggregates = new List<AggregateDescriptor>();
         }
+
+        public int TotalPages { get; set; }
+        public int Page { get; set; }
+        public int Total { get; set; }
 
         protected override void Serialize(IDictionary<string, object> json)
         {
@@ -154,6 +160,44 @@ namespace Kendo.Mvc.UI
         {
             get;
             private set;
+        }
+
+        public IEnumerable Data
+        {
+            get;
+            set;
+        }
+
+        public void Process(DataSourceRequest request)
+        {
+            if (request.Sorts == null)
+            {
+                request.Sorts = OrderBy;
+            }
+            else if (request.Sorts.Any())
+            {
+                OrderBy.Clear();
+                OrderBy.AddRange(request.Sorts);
+            }
+            else
+            {
+                OrderBy.Clear();
+            }
+
+            var result = Data.AsQueryable().ToDataSource(request);
+
+            Page = request.Page;
+            Data = result.Data;
+            Total = result.Total;
+
+            if (Total == 0 || PageSize == 0)
+            {
+                TotalPages = 1;
+            }
+            else
+            {
+                TotalPages = (Total + PageSize - 1) / PageSize;
+            }
         }
     }
 }

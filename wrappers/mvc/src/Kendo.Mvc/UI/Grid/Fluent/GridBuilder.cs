@@ -314,14 +314,14 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public GridBuilder<T> BindTo(IEnumerable<T> dataSource)
         {
-            Component.Data = dataSource;
+            Component.DataSource.Data = dataSource;
 
             return this;
         }
 
         public GridBuilder<T> BindTo(IEnumerable dataSource)
         {           
-            Component.Data = new GridCustomGroupingWrapper<T>(dataSource);
+            Component.DataSource.Data = new GridCustomGroupingWrapper<T>(dataSource);
             return this;
         }        
 
@@ -595,6 +595,9 @@ namespace Kendo.Mvc.UI.Fluent
             Guard.IsNotNull(pagerAction, "pagerAction");
 
             Component.Paging.Enabled = true;
+
+            Component.DataSource.PageSize = 10;
+
             pagerAction(new GridPagerSettingsBuilder(Component.Paging));
 
             return this;

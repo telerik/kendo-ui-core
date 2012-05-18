@@ -56,12 +56,16 @@ namespace Kendo.Mvc.Extensions
 
             var data = queryable;
 
+            result.Total = data.Count();
+
             var sort = new List<SortDescriptor>(request.Sorts);
 
             if (sort.Any())
             {
                 data = data.Sort(sort);
             }
+
+            data = data.Page(request.Page - 1, request.PageSize);
 
             result.Data = data;
 

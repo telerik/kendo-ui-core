@@ -55,7 +55,7 @@ namespace Kendo.Mvc.UI
             get;
         }
 
-        GridDataProcessor DataProcessor 
+        DataSource DataSource 
         { 
             get;
         }

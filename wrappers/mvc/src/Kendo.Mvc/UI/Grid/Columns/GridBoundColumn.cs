@@ -359,7 +359,7 @@ namespace Kendo.Mvc.UI
 
             if (Filterable && Grid.Filtering.Enabled)
             {
-                var filtered = Grid.DataProcessor.FilterDescriptors
+                var filtered = Grid.DataSource.Filters
                                    .SelectMemberDescriptors()
                                    .Any(filter => filter.Member.IsCaseInsensitiveEqual(Member));
 
