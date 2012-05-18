@@ -1,8 +1,7 @@
 using System.Collections.Generic;
-using Kendo.Mvc.Extensions;
 using System.Web.Routing;
+using Kendo.Mvc.Extensions;
 using Kendo.Mvc.Infrastructure;
-using System.Web.Mvc;
 
 namespace Kendo.Mvc.UI
 {

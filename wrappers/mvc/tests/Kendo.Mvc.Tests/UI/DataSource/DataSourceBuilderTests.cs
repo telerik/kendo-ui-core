@@ -68,7 +68,7 @@
         [Fact]
         public void OrderBy_adds_sort_expressions() 
         {
-            builder.OrderBy(sort => sort.Add(f => f.ID).Descending());
+            builder.Sort(sort => sort.Add(f => f.ID).Descending());
 
             dataSource.OrderBy.Count.ShouldEqual(1);
             dataSource.OrderBy[0].Member.ShouldEqual("ID");
@@ -78,7 +78,7 @@
         [Fact]
         public void OrderBy_adds_multiple_sort_expressions()
         {
-            builder.OrderBy(sort => {
+            builder.Sort(sort => {
                 sort.Add(f => f.ID).Descending();
                 sort.Add(f => f.Text);
             });
@@ -94,7 +94,7 @@
         [Fact]
         public void Group_adds_group_expressions()
         {
-            builder.Groups(groups =>
+            builder.Group(groups =>
             {
                 groups.Add(f => f.ID);
                 groups.AddDescending(f => f.Text);

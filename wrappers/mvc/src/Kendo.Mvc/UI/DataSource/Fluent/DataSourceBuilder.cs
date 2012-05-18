@@ -80,7 +80,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <param name="configurator">The configurator.</param>
         /// <returns></returns>
-        public virtual DataSourceBuilder<TModel> OrderBy(Action<DataSourceSortDescriptorFactory<TModel>> configurator)
+        public virtual DataSourceBuilder<TModel> Sort(Action<DataSourceSortDescriptorFactory<TModel>> configurator)
         {
             Guard.IsNotNull(configurator, "configurator");
 
@@ -89,7 +89,7 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
-        public DataSourceBuilder<TModel> Groups(Action<DataSourceGroupDescriptorFactory<TModel>> configurator)
+        public DataSourceBuilder<TModel> Group(Action<DataSourceGroupDescriptorFactory<TModel>> configurator)
         {
             Guard.IsNotNull(configurator, "configurator");
 
@@ -100,9 +100,18 @@ namespace Kendo.Mvc.UI.Fluent
 
         public DataSourceBuilder<TModel> Aggregates(Action<DataSourceAggregateDescriptorFactory<TModel>> aggregates)
         {
-            var factory = new DataSourceAggregateDescriptorFactory<TModel>(dataSource.Aggregates);
+            Guard.IsNotNull(aggregates, "aggregates");   
 
-            aggregates(factory);
+            aggregates(new DataSourceAggregateDescriptorFactory<TModel>(dataSource.Aggregates));
+
+            return this;
+        }
+
+        public virtual DataSourceBuilder<TModel> Filter(Action<DataSourceFilterDescriptorFactory<TModel>> configurator)
+        {
+            Guard.IsNotNull(configurator, "configurator");                        
+
+            configurator(new DataSourceFilterDescriptorFactory<TModel>(dataSource.Filters));
 
             return this;
         }

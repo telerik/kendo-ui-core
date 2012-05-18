@@ -4,6 +4,7 @@ namespace Kendo.Mvc
     using System.Linq.Expressions;
 
     using Infrastructure.Implementation.Expressions;
+    using Extensions;
 
     /// <summary>
     /// Represents declarative filtering.
@@ -148,6 +149,14 @@ namespace Kendo.Mvc
                 result = (result * 397) ^ (this.Value != null ? this.Value.GetHashCode() : 0);
                 return result;
             }
+        }
+
+        protected override void Serialize(System.Collections.Generic.IDictionary<string, object> json)
+        {
+            base.Serialize(json);
+
+            json["field"] = Member;
+            json["operator"] = Operator.ToToken();
         }
     }
 }

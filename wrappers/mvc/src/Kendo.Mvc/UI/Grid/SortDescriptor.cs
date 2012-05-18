@@ -3,7 +3,6 @@ namespace Kendo.Mvc
     using System.ComponentModel;
     using System.Linq;
     using Kendo.Mvc.Extensions;
-    using Kendo.Mvc.UI;
 
     /// <summary>
     /// Represents declarative sorting.

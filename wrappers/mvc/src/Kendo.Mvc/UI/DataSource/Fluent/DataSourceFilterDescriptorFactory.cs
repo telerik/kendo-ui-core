@@ -7,9 +7,9 @@ namespace Kendo.Mvc.UI.Fluent
     using Extensions;
     using Infrastructure;
 
-    public class GridFilterDescriptorFactory<TModel> : IHideObjectMembers where TModel : class
+    public class DataSourceFilterDescriptorFactory<TModel> : IHideObjectMembers where TModel : class
     {
-        public GridFilterDescriptorFactory(IList<CompositeFilterDescriptor> filters)
+        public DataSourceFilterDescriptorFactory(IList<CompositeFilterDescriptor> filters)
         {
             Guard.IsNotNull(filters, "filters");
 
@@ -18,32 +18,32 @@ namespace Kendo.Mvc.UI.Fluent
 
         protected IList<CompositeFilterDescriptor> Filters { get; private set; }
 
-        public virtual GridFilterEqualityDescriptorBuilder<bool> Add(Expression<Func<TModel, bool>> expression)
+        public virtual DataSourceFilterEqualityDescriptorBuilder<bool> Add(Expression<Func<TModel, bool>> expression)
         {
             var filter = CreateFilter(expression);
 
-            return new GridFilterEqualityDescriptorBuilder<bool>(filter);
+            return new DataSourceFilterEqualityDescriptorBuilder<bool>(filter);
         }
 
-        public virtual GridFilterEqualityDescriptorBuilder<bool?> Add(Expression<Func<TModel, bool?>> expression)
+        public virtual DataSourceFilterEqualityDescriptorBuilder<bool?> Add(Expression<Func<TModel, bool?>> expression)
         {
             var filter = CreateFilter(expression);
 
-            return new GridFilterEqualityDescriptorBuilder<bool?>(filter);
+            return new DataSourceFilterEqualityDescriptorBuilder<bool?>(filter);
         }
 
-        public virtual GridFilterComparisonDescriptorBuilder<TValue> Add<TValue>(Expression<Func<TModel, TValue>> expression)
+        public virtual DataSourceFilterComparisonDescriptorBuilder<TValue> Add<TValue>(Expression<Func<TModel, TValue>> expression)
         {
             var filter = CreateFilter(expression);
 
-            return new GridFilterComparisonDescriptorBuilder<TValue>(filter);
+            return new DataSourceFilterComparisonDescriptorBuilder<TValue>(filter);
         }
 
-        public virtual GridFilterStringDescriptorBuilder Add(Expression<Func<TModel, string>> expression)
+        public virtual DataSourceFilterStringDescriptorBuilder Add(Expression<Func<TModel, string>> expression)
         {
             var filter = CreateFilter(expression);
 
-            return new GridFilterStringDescriptorBuilder(filter);
+            return new DataSourceFilterStringDescriptorBuilder(filter);
         }
 
         public virtual void AddRange(IEnumerable<IFilterDescriptor> filters)

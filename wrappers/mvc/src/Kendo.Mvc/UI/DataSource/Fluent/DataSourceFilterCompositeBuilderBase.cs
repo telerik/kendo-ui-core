@@ -2,9 +2,9 @@ namespace Kendo.Mvc.UI.Fluent
 {
     using Infrastructure;
 
-    public abstract class GridFilterCompositeBuilderBase : IHideObjectMembers
+    public abstract class DataSourceFilterCompositeBuilderBase : IHideObjectMembers
     {
-        protected GridFilterCompositeBuilderBase(CompositeFilterDescriptor descriptor)
+        protected DataSourceFilterCompositeBuilderBase(CompositeFilterDescriptor descriptor)
         {
             Guard.IsNotNull(descriptor, "descriptor");
 

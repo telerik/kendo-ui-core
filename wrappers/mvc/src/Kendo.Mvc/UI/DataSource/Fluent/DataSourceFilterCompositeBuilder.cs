@@ -2,9 +2,9 @@ namespace Kendo.Mvc.UI.Fluent
 {
     using System;
 
-    public class GridFilterCompositeBuilder<TBuilder> : GridFilterCompositeBuilderBase where TBuilder : GridFilterDescriptorBuilderBase
+    public class DataSourceFilterCompositeBuilder<TBuilder> : DataSourceFilterCompositeBuilderBase where TBuilder : DataSourceFilterDescriptorBuilderBase
     {
-        public GridFilterCompositeBuilder(CompositeFilterDescriptor descriptor) : base(descriptor)
+        public DataSourceFilterCompositeBuilder(CompositeFilterDescriptor descriptor) : base(descriptor)
         {
         }
 
