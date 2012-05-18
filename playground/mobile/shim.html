@@ -20,39 +20,44 @@
         <script src="../../src/kendo.mobile.application.js"></script>
         <script src="../../src/kendo.mobile.listview.js"></script>
         <script src="../../src/kendo.mobile.shim.js"></script>
+        <script src="../../src/kendo.mobile.modalview.js"></script>
+
         <script>
+            function hideModal() {
+                $("#myModal").data("kendoMobileModalView").close();
+            }
 
             $(function() {
                     new kendo.mobile.Application();
             });
         </script>
         <style>
-            #myShim {
+            #myModal {
                 width: 500px;
                 height: 500px;
-                background-color: white;
+                background: white;
             }
         </style>
     </head>
     <body>
         <div data-role="view">
             <div data-role="header">Header</div>
-            <a data-role="button" data-click="showShim">Show Shim</a>
 
-            <div data-role="shim" id="myShim">Foo!
-                <a data-role="button" data-click="hideShim">ok, hide it</a>
+            <a data-role="button" href="#myModal" data-rel="modalview">Show Modal</a>
+
+            <div data-role="modalview" id="myModal">
+                <div data-role="header">
+                    <div data-role="navbar">
+                        <a data-align="right" data-role="button" data-click="hideModal">Close</a>
+                    </div>
+                </div>
+
+                Le fu
             </div>
 
             <div data-role="footer">Footer</div>
         </div>
         <script>
-            function showShim() {
-                $("#myShim").data("kendoMobileShim").show();
-            }
-
-            function hideShim() {
-                $("#myShim").data("kendoMobileShim").hide();
-            }
         </script>
     </body>
 </html>

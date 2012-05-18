@@ -72,8 +72,7 @@
         show: function() {
             this.popup.open();
             this.popup.wrapper.css({
-                width: "",
-                top: ""
+                width: ""
             });
         },
 

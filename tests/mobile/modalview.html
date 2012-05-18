@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.mobile.ui.ModalView Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.history.js"></script>
+        <script src="../../src/kendo.mobile.loader.js"></script>
+        <script src="../../src/kendo.mobile.view.js"></script>
+        <script src="../../src/kendo.mobile.pane.js"></script>
+        <script src="../../src/kendo.mobile.scroller.js"></script>
+        <script src="../../src/kendo.mobile.application.js"></script>
+        <script src="../../src/kendo.mobile.shim.js"></script>
+        <script src="../../src/kendo.mobile.modalview.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.mobile.ui.ModalView Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <script type="text/x-kendo-template" id="fixture-contents">
+            <div data-role="view">
+                <a id="source" data-role="button" href="#modalView" data-rel="modalview">Foo</a>
+                <div data-role="modalview" id="modalView">
+                    Hello world!
+                </div>
+            </div>
+        </script>
+        <ul id="log"></ul>
+
+        <script>
+
+            var markup = $("#fixture-contents").html(),
+                modalView,
+                element,
+                source,
+                root = $('#qunit-fixture');
+
+            module("ModalView", {
+                setup: function() {
+                    kendo.mobile.ui.Shim.fn.options.duration = 0;
+                    root.html(markup);
+                    new kendo.mobile.Application(root);
+                    element = root.find("[data-role=modalview]");
+                    source = root.find("#source");
+                    modalView = element.data("kendoMobileModalView");
+                }
+            });
+
+            function isOpen() {
+                equal(root.find(".km-shim").css("display"), "block");
+            }
+
+            function isClosed() {
+                setTimeout(function() {
+                    start();
+                    equal(root.find(".km-shim").css("display"), "none");
+                });
+            }
+
+            test("Is visible when open", function() {
+                modalView.open();
+                isOpen();
+            });
+
+
+            asyncTest("Is hidden when closed", 1, function() {
+                modalView.open();
+                modalView.close();
+                isClosed();
+            });
+
+            test("data-rel=modalview widget opens the action sheet", 1, function() {
+                root.find('[data-role=button]').trigger($.Event(kendo.support.mouseup));
+                isOpen();
+            });
+        </script>
+    </body>
+</html>
