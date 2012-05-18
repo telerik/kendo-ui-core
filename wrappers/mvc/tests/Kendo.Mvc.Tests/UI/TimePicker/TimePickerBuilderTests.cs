@@ -14,20 +14,7 @@ namespace Kendo.Mvc.UI.Tests
             timepicker = TimePickerTestHelper.CreateTimePicker();
             builder = new TimePickerBuilder(timepicker);
         }
-
-        [Fact]
-        public void Effects_creates_fx_factory()
-        {
-            var fxFacCreated = false;
-
-            builder.Effects(fx =>
-                            {
-                                fxFacCreated = fx != null;
-                            });
-
-            Assert.True(fxFacCreated);
-        }
-
+        
         [Fact]
         public void Format_should_set_Format_property_of_the_picker()
         {
@@ -104,7 +91,7 @@ namespace Kendo.Mvc.UI.Tests
             TimeSpan time = TimeSpan.Parse("07:00");
 
             builder.Min("07:00");
-            Assert.Equal(new DateTime(time.Ticks), timepicker.MinValue);
+            Assert.Equal(new DateTime(time.Ticks), timepicker.Min);
         }
 
         [Fact]
@@ -129,7 +116,7 @@ namespace Kendo.Mvc.UI.Tests
             TimeSpan time = new TimeSpan(10, 10, 10);
 
             builder.Min(time);
-            Assert.Equal(new DateTime(time.Ticks), timepicker.MinValue);
+            Assert.Equal(new DateTime(time.Ticks), timepicker.Min);
         }
         
         [Fact]
@@ -138,7 +125,7 @@ namespace Kendo.Mvc.UI.Tests
             DateTime dateTime = DateTime.Now;
 
             builder.Min(dateTime);
-            Assert.Equal(dateTime, timepicker.MinValue);
+            Assert.Equal(dateTime, timepicker.Min);
         }
 
         [Fact]
@@ -147,7 +134,7 @@ namespace Kendo.Mvc.UI.Tests
             TimeSpan time = TimeSpan.Parse("23:00");
 
             builder.Max("23:00");
-            Assert.Equal(new DateTime(time.Ticks), timepicker.MaxValue);
+            Assert.Equal(new DateTime(time.Ticks), timepicker.Max);
         }
 
         [Fact]
@@ -172,7 +159,7 @@ namespace Kendo.Mvc.UI.Tests
             TimeSpan time = new TimeSpan(10, 10, 10);
 
             builder.Max(time);
-            Assert.Equal(new DateTime(time.Ticks), timepicker.MaxValue);
+            Assert.Equal(new DateTime(time.Ticks), timepicker.Max);
         }
 
         [Fact]
@@ -181,7 +168,7 @@ namespace Kendo.Mvc.UI.Tests
             DateTime dateTime = DateTime.Now;
 
             builder.Max(dateTime);
-            Assert.Equal(dateTime, timepicker.MaxValue);
+            Assert.Equal(dateTime, timepicker.Max);
         }
 
         [Fact]
@@ -198,57 +185,6 @@ namespace Kendo.Mvc.UI.Tests
         public void Interval_method_should_return_builder()
         {
             var returnedBuilder = builder.Interval(10);
-
-            Assert.IsType(typeof(TimePickerBuilder), returnedBuilder);
-        }
-
-        [Fact]
-        public void ShowButton_method_should_set_ShowButton_property()
-        {
-            builder.ShowButton(false);
-
-            Assert.Equal(false, timepicker.ShowButton);
-        }
-
-        [Fact]
-        public void ShowButton_method_should_return_builder()
-        {
-            var returnedBuilder = builder.ShowButton(true);
-
-            Assert.IsType(typeof(TimePickerBuilder), returnedBuilder);
-        }
-
-        [Fact]
-        public void ButtonTitle_method_should_set_ButtonTitle_property()
-        {
-            builder.ButtonTitle("open");
-
-            Assert.Equal("open", timepicker.ButtonTitle);
-        }
-
-        [Fact]
-        public void ButtonTitle_method_should_return_builder()
-        {
-            var returnedBuilder = builder.ButtonTitle("1");
-
-            Assert.IsType(typeof(TimePickerBuilder), returnedBuilder);
-        }
-
-        [Fact]
-        public void InputHtmlAttributes_should_set_InputHtmlAttributes_property_of_datePicker()
-        {
-            var attributes = new { @class = ".t-test" };
-
-            builder.InputHtmlAttributes(attributes);
-
-            Assert.Equal(".t-test", timepicker.InputHtmlAttributes["class"]);
-        }
-
-        [Fact]
-        public void InputHtmlAttributes_should_return_builder()
-        {
-            var attributes = new { @class = ".t-test" };
-            var returnedBuilder = builder.InputHtmlAttributes(attributes);
 
             Assert.IsType(typeof(TimePickerBuilder), returnedBuilder);
         }

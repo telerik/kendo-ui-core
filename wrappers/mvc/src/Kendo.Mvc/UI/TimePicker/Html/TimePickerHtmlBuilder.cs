@@ -16,27 +16,9 @@ namespace Kendo.Mvc.UI.Html
         {
             get;
             private set;
-        }
+        }      
 
         public IHtmlNode Build()
-        {
-            IHtmlNode wrapper = new HtmlElement("div")
-                                .Attributes(Component.HtmlAttributes)
-                                .PrependClass(UIPrimitives.Widget, "t-timepicker");
-
-            IHtmlNode innerWrapper = new HtmlElement("div")
-                                    .AddClass("t-picker-wrap")
-                                    .AppendTo(wrapper);
-
-            InputTag().AppendTo(innerWrapper);
-            
-            if(Component.ShowButton)
-                ButtonTag().AppendTo(innerWrapper);
-
-            return wrapper;
-        }
-
-        public IHtmlNode InputTag()
         {
             Func<object, DateTime?> converter = val =>
             {
@@ -66,27 +48,13 @@ namespace Kendo.Mvc.UI.Html
             }
 
             return new HtmlElement("input", TagRenderMode.SelfClosing)
-                .Attributes(new { id = Component.Id, name = Component.Name, type = "text" })
-                .Attributes(Component.InputHtmlAttributes)
+                .Attributes(new { id = Component.Id, name = Component.Name, type = "time" })
+                .Attributes(Component.HtmlAttributes)
                 .Attributes(Component.GetUnobtrusiveValidationAttributes())
                 .ToggleClass("input-validation-error", !Component.IsValid())
                 .ToggleAttribute("disabled", "disabled", !Component.Enabled)
                 .ToggleAttribute("value", value, value.HasValue())
                 .PrependClass(UIPrimitives.Input);
-        }
-
-        public IHtmlNode ButtonTag()
-        {
-            IHtmlNode wrapper = new HtmlElement("span")
-                                .AddClass("t-select");
-
-            new HtmlElement("span")
-                .AddClass(UIPrimitives.Icon, "t-icon-clock")
-                .Attribute("title", Component.ButtonTitle)
-                .Html(Component.ButtonTitle)
-                .AppendTo(wrapper);
-
-            return wrapper;
         }
     }
 }

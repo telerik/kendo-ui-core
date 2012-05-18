@@ -9,7 +9,7 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="TimePicker"/> component.
     /// </summary>
-    public class TimePickerBuilder : DatePickerBaseBuilder<TimePicker, TimePickerBuilder>
+    public class TimePickerBuilder : ViewComponentBuilderBase<TimePicker, TimePickerBuilder>, IHideObjectMembers
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TimePickerBuilder"/> class.
@@ -18,6 +18,24 @@ namespace Kendo.Mvc.UI.Fluent
         public TimePickerBuilder(TimePicker component)
             : base(component)
         {
+        }
+
+        /// <summary>
+        /// Sets the date format, which will be used to parse and format the machine date.
+        /// </summary>
+        public TimePickerBuilder Format(string format)
+        {
+            Component.Format = format;
+
+            return this;
+        }
+
+        public TimePickerBuilder ParseFormats(IEnumerable<string> formats)
+        {
+            Component.ParseFormats.Clear();
+            Component.ParseFormats.AddRange(formats);
+
+            return this;
         }
         
         /// <summary>
@@ -71,7 +89,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         public TimePickerBuilder Min(TimeSpan value)
         {
-            Component.MinValue = new DateTime(value.Ticks);
+            Component.Min = new DateTime(value.Ticks);
 
             return this;
         }
@@ -85,7 +103,7 @@ namespace Kendo.Mvc.UI.Fluent
 
             var time = TimeSpan.Parse(value);
             
-            Component.MinValue = new DateTime(time.Ticks);
+            Component.Min = new DateTime(time.Ticks);
             
             return this;
         }
@@ -95,7 +113,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         public TimePickerBuilder Max(TimeSpan value)
         {
-            Component.MaxValue = new DateTime(value.Ticks);
+            Component.Max = new DateTime(value.Ticks);
 
             return this;
         }
@@ -109,39 +127,71 @@ namespace Kendo.Mvc.UI.Fluent
 
             TimeSpan time = TimeSpan.Parse(value);
             
-            Component.MaxValue = new DateTime(time.Ticks);
+            Component.Max = new DateTime(time.Ticks);
             
+            return this;
+        }
+        
+        /// <summary>
+        /// Sets the minimal date, which can be selected in DatePicker.
+        /// </summary>
+        public TimePickerBuilder Min(DateTime date)
+        {
+            Guard.IsNotNull(date, "date");
+
+            Component.Min = date;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the maximal date, which can be selected in DatePicker.
+        /// </summary>
+        public TimePickerBuilder Max(DateTime date)
+        {
+            Guard.IsNotNull(date, "date");
+
+            Component.Max = date;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Configures the client-side events.
+        /// </summary>
+        /// <param name="clientEventsAction">The client events action.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Telerik().DatePicker()
+        ///             .Name("DatePicker")
+        ///             .ClientEvents(events =>
+        ///                 events.OnLoad("onLoad").OnSelect("onSelect")
+        ///             )
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TimePickerBuilder ClientEvents(Action<DatePickerClientEventsBuilder> clientEventsAction)
+        {
+            Guard.IsNotNull(clientEventsAction, "clientEventsAction");
+
+            clientEventsAction(new DatePickerClientEventsBuilder(Component.ClientEvents));
+
             return this;
         }
         
         /// <summary>
         /// Sets the interval between hours.
         /// </summary>
-        public TimePickerBuilder Interval(int interval) 
+        public TimePickerBuilder Interval(int interval)
         {
             Component.Interval = interval;
 
             return this;
         }
 
-        /// <summary>
-        /// Sets whether timepicker to be rendered with button, which shows timeview on click.
-        /// </summary>
-        public TimePickerBuilder ShowButton(bool showButton)
+        public TimePickerBuilder Enable(bool value)
         {
-            Component.ShowButton = showButton;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the title of the timepicker button.
-        /// </summary>
-        public TimePickerBuilder ButtonTitle(string title)
-        {
-            Guard.IsNotNullOrEmpty(title, "title");
-
-            Component.ButtonTitle = title;
+            Component.Enabled = value;
 
             return this;
         }

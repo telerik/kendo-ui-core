@@ -53,6 +53,7 @@ namespace Kendo.Mvc.UI.Html
 
             return new HtmlElement("input", TagRenderMode.SelfClosing)
                    .Attributes(new { name = Component.Name, id = Component.Id, type = "date" })
+                   .Attributes(Component.HtmlAttributes)
                    .ToggleAttribute("value", value, value.HasValue())
                    .ToggleAttribute("disabled", "disabled", !Component.Enabled)
                    .Attributes(Component.GetUnobtrusiveValidationAttributes())

@@ -266,7 +266,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual TimePickerBuilder TimePicker()
         {
-            return new TimePickerBuilder(new TimePicker(ViewContext, ClientSideObjectWriterFactory));
+            return new TimePickerBuilder(new TimePicker(ViewContext, ClientSideObjectWriterFactory, ViewData));
         }
 
         /// <summary>

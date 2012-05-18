@@ -26,7 +26,7 @@ namespace Kendo.Mvc.UI.Tests
 
             clientSideObjectWriterFactory.Setup(c => c.Create(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<TextWriter>())).Returns(clientSideObjectWriter.Object);
 
-            TimePicker timepicker = new TimePicker(viewContext, clientSideObjectWriterFactory.Object);
+            TimePicker timepicker = new TimePicker(viewContext, clientSideObjectWriterFactory.Object, new ViewDataDictionary());
 
             return timepicker;
         }

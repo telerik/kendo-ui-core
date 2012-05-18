@@ -22,7 +22,6 @@ using System.Collections.Generic;
             Format = CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern;
             ParseFormats = new List<string>();
 
-
             Min = defaultMinDate;
             Max = defaultMaxDate;
 
@@ -46,6 +45,12 @@ using System.Collections.Generic;
         }
 
         public string Format
+        {
+            get;
+            set;
+        }
+
+        public List<string> ParseFormats
         {
             get;
             set;
@@ -88,12 +93,6 @@ using System.Collections.Generic;
         }
 
         public bool Enabled
-        {
-            get;
-            set;
-        }
-
-        public List<string> ParseFormats
         {
             get;
             set;
