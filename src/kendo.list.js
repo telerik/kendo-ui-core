@@ -144,6 +144,10 @@
         _click: function(e) {
             if (!e.isDefaultPrevented()) {
                 this._accept($(e.currentTarget));
+
+                if (e.type === "touchend") {
+                    e.preventDefault();
+                }
             }
         },
 
