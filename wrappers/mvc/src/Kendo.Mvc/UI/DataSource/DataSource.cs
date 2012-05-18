@@ -1,9 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-<<<<<<< HEAD
-=======
 using Kendo.Mvc.Extensions;
->>>>>>> Add configuration builder for setting aggregates
 
 namespace Kendo.Mvc.UI
 {
