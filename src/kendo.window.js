@@ -362,7 +362,7 @@
 
             that.toFront();
 
-            if (options.modal) {
+            if (options.visible && options.modal) {
                 that._overlay(wrapper.is(VISIBLE)).css({ opacity: 0.5 });
             }
 
