@@ -2842,8 +2842,8 @@
          *    </dl>
          * </div>
          * @option {Object} [series.type="pie".overlay] The effects overlay.
-         * @option {String} [series.type="pie".overlay.gradient] <"roundBevel"> The gradient name.
-         * Available options are "none", "sharpBevel" and "roundBevel".
+         * @option {String} [series.type="pie".overlay.gradient] <"roundedBevel"> The gradient name.
+         * Available options are "none", "sharpBevel" and "roundedBevel".
          * @option {Object} [series.type="pie".connectors] The label connectors options.
          * @option {Number} [series.type="pie".connectors.width] <1> The width of the connector line.
          * @option {String} [series.type="pie".connectors.color] The color of the connector line.
