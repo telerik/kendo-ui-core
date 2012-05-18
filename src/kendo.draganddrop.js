@@ -543,6 +543,10 @@
             kendo.onResize(refresh);
         },
 
+        present: function() {
+            return this.x.present() || this.y.present();
+        },
+
         refresh: function() {
             this.x.update();
             this.y.update();
