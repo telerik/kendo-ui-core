@@ -89,7 +89,7 @@ namespace("themebuilder", function() {
         );
 
         zip(THEMEBUILDER_LIVE_PACKAGE, THEMEBUILDER_LIVE_PATH, complete);
-    });
+    }, true);
 });
 
 namespace("demos", function() {
@@ -277,7 +277,7 @@ namespace("mvc", function() {
                     examplesPath = path.join(MVC_WRAPPERS_PATH, "demos", "Kendo.Mvc.Examples"),
                     binariesPath = path.join(projectPath, "bin", "Release");
 
-                bundles.buildBundle(bundles.mvcWrappersBundle, version(), null, function(root, bundle, license) {
+                bundles.buildBundle(bundles.mvcWrappersBundle, version(), complete, function(root, bundle, license) {
                     var binariesDeployRoot = path.join(root, "Bin"),
                         stylesDeployRoot = path.join(root, "Content"),
                         scriptsDeployRoot = path.join(root, "Scripts"),
@@ -347,7 +347,7 @@ namespace("mvc", function() {
                 });
             }
         );
-    });
+    }, true);
 
 
     function deploySuiteFiles(suite) {

@@ -302,13 +302,23 @@ function fetchChangelog(callback) {
         token: "5dd646a3d9d8d5fb69fe59c163fc84b76fc67fcb"
     });
 
+    var ver = JSON.parse(kendoBuild.readText("VERSION"));
+
     github.issues.getAllMilestones({
         user: "telerik",
         repo: "kendo"
-    }, function(err, res) {
-        var ver = JSON.parse(kendoBuild.readText("VERSION"));
+    }, function(err, openMilestones) {
+        github.issues.getAllMilestones({
+            user: "telerik",
+            repo: "kendo",
+            state: "closed"
+        }, function(err, closedMilestones) {
+            processMilestones(openMilestones.concat(closedMilestones));
+        });
+    });
 
-        var milestones = changelog.filterMilestones(res, ver);
+    function processMilestones(results) {
+        var milestones = changelog.filterMilestones(results, ver);
 
         function processMilestone(callback) {
             if (milestones.length == 0) {
@@ -341,7 +351,7 @@ function fetchChangelog(callback) {
         }
 
         processMilestone(callback);
-    });
+    }
 }
 
 function deployChangelog(root, bundle, version) {
