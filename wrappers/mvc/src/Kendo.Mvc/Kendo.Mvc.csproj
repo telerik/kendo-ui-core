@@ -312,6 +312,10 @@
     <Compile Include="UI\ComboBox\Settings\ComboBoxFilterSettings.cs" />
     <Compile Include="UI\DataSource\CrudOperation.cs" />
     <Compile Include="UI\DataSource\DataSource.cs" />
+    <Compile Include="UI\DataSource\DataSourceRequest.cs" />
+    <Compile Include="UI\DataSource\DataSourceRequestAttribute.cs" />
+    <Compile Include="UI\DataSource\DataSourceRequestModelBinder.cs" />
+    <Compile Include="UI\DataSource\DataSourceResult.cs" />
     <Compile Include="UI\DataSource\DataSourceType.cs" />
     <Compile Include="UI\DataSource\Fluent\DataSourceAggregateDescriptorFactory.cs" />
     <Compile Include="UI\DataSource\Fluent\CrudOperationBuilder.cs" />

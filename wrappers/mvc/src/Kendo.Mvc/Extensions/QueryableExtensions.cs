@@ -6,10 +6,10 @@ namespace Kendo.Mvc.Extensions
     using System.ComponentModel;
     using System.Linq;
     using System.Linq.Expressions;
-    using Infrastructure.Implementation.Expressions;
     using Kendo.Mvc;
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.Infrastructure.Implementation;
+    using Infrastructure.Implementation.Expressions;
     using Kendo.Mvc.UI;
 
     public static class QueryableExtensions
@@ -48,6 +48,24 @@ namespace Kendo.Mvc.Extensions
         private static Type GetFieldByTypeFromDataColumn(System.Data.DataTable dataTable, string memberName)
         {
             return dataTable.Columns.Contains(memberName) ? dataTable.Columns[memberName].DataType : null;
+        }
+
+        public static DataSourceResult ToDataSource(this IQueryable queryable, DataSourceRequest request)
+        {
+            var result = new DataSourceResult();
+
+            var data = queryable;
+
+            var sort = new List<SortDescriptor>(request.Sorts);
+
+            if (sort.Any())
+            {
+                data = data.Sort(sort);
+            }
+
+            result.Data = data;
+
+            return result;
         }
 
         public static GridModel ToGridModel(this IQueryable queryable, int page, int pageSize, IList<SortDescriptor> sortDescriptors, IEnumerable<IFilterDescriptor> filterDescriptors,
