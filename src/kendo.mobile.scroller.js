@@ -257,7 +257,12 @@
                     allowSelection: true,
                     start: function(e) {
                         dimensions.refresh();
-                        drag.capture();
+
+                        if (dimensions.present()) {
+                            drag.capture();
+                        } else {
+                            drag.cancel();
+                        }
                     }
                 }),
 
