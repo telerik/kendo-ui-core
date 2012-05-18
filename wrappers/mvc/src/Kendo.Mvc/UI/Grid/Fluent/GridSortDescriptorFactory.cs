@@ -1,14 +1,11 @@
 namespace Kendo.Mvc.UI.Fluent
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Linq;
     using System.Linq.Expressions;
-
     using Extensions;
     using Infrastructure;
-    using Resources;
-using System.Collections.Generic;
 
     public class DataSourceSortDescriptorFactory<TModel> : IHideObjectMembers
         where TModel : class

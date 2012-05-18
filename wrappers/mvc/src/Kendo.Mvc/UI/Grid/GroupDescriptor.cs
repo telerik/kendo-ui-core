@@ -4,6 +4,10 @@ namespace Kendo.Mvc
     using System.ComponentModel;
 	
     using Infrastructure.Implementation;
+    using System.Linq;
+    using Extensions;
+    using System.Collections.Generic;
+    using Kendo.Mvc.UI;    
     
     /// <summary>
     /// Represents grouping criteria.
@@ -72,6 +76,16 @@ namespace Kendo.Mvc
                     return ListSortDirection.Descending;
                 default:
                     return ListSortDirection.Ascending;
+            }
+        }
+
+        protected override void Serialize(IDictionary<string, object> json)
+        {
+            base.Serialize(json);
+
+            if (AggregateFunctions.Any())
+            {
+                json["aggregates"] = AggregateFunctions.ToJson();
             }
         }
     }

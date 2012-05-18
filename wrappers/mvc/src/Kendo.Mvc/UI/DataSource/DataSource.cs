@@ -1,6 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+<<<<<<< HEAD
+=======
+using Kendo.Mvc.Extensions;
+>>>>>>> Add configuration builder for setting aggregates
 
 namespace Kendo.Mvc.UI
 {
@@ -13,6 +16,7 @@ namespace Kendo.Mvc.UI
             Filters = new List<CompositeFilterDescriptor>();
             OrderBy = new List<SortDescriptor>();
             Groups = new List<GroupDescriptor>();
+            Aggregates = new List<AggregateDescriptor>();
         }
 
         protected override void Serialize(IDictionary<string, object> json)
@@ -63,8 +67,30 @@ namespace Kendo.Mvc.UI
 
             if (Groups.Any())
             {
+                if (Aggregates.Any())
+                {
+                    Groups.Each(g => g.AggregateFunctions.AddRange(Aggregates.SelectMany(a => a.Aggregates)));                 
+                }
+
                 json["group"] = Groups.ToJson();
             }
+
+            if (Aggregates.Any())
+            {
+                SerializeAggregates(json);
+            }
+        }
+
+        private void SerializeAggregates(IDictionary<string, object> json)
+        {
+            var result = new List<IDictionary<string, object>>();
+
+            foreach (var aggregate in Aggregates)
+            {
+                result.AddRange(aggregate.Aggregates.ToJson());
+            }
+
+            json["aggregates"] = result;
         }
 
         public DataSourceType Type
@@ -86,6 +112,12 @@ namespace Kendo.Mvc.UI
         }
 
         public IList<GroupDescriptor> Groups
+        {
+            get;
+            private set;
+        }
+
+        public IList<AggregateDescriptor> Aggregates
         {
             get;
             private set;

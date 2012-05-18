@@ -313,9 +313,8 @@
     <Compile Include="UI\DataSource\CrudOperation.cs" />
     <Compile Include="UI\DataSource\DataSource.cs" />
     <Compile Include="UI\DataSource\DataSourceType.cs" />
+    <Compile Include="UI\DataSource\Fluent\DataSourceAggregateDescriptorFactory.cs" />
     <Compile Include="UI\DataSource\Fluent\CrudOperationBuilder.cs" />
-    <Compile Include="UI\DataSource\Fluent\DataSourceGroupsBuilder.cs" />
-    <Compile Include="UI\DataSource\Fluent\DataSourceSortExpressionsBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\ReadOnlyDataSourceBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\DataSourceBuilder.cs" />
     <Compile Include="UI\DataSource\Transport.cs" />
@@ -463,7 +462,7 @@
     <Compile Include="UI\Grid\GridBeginEditEvent.cs" />
     <Compile Include="UI\Grid\Fluent\GridToolBarCommandBuilder.cs" />
     <Compile Include="UI\Grid\GridAggregateResult.cs" />
-    <Compile Include="UI\Grid\Fluent\GridAggregatesFactory.cs" />
+    <Compile Include="UI\DataSource\Fluent\DataSourceAggregatesFactory.cs" />
     <Compile Include="UI\Grid\GridColumnExtensions.cs" />
     <Compile Include="UI\Grid\GridGroupAggregateResult.cs" />
     <Compile Include="UI\Grid\GridActionResultFactory.cs" />
@@ -653,8 +652,8 @@
     <Compile Include="UI\Grid\Commands\GridToolBarCustomCommand.cs" />
     <Compile Include="UI\Grid\Fluent\GridToolBarCustomCommandBuilder.cs" />
     <Compile Include="UI\Grid\Commands\GridToolBarInsertCommand.cs" />
-    <Compile Include="UI\Grid\Fluent\GridGroupDescriptorBuilder.cs" />
-    <Compile Include="UI\Grid\Fluent\GridGroupDescriptorFactory.cs" />
+    <Compile Include="UI\DataSource\Fluent\DataSourceGroupDescriptorBuilder.cs" />
+    <Compile Include="UI\DataSource\Fluent\DataSourceGroupDescriptorFactory.cs" />
     <Compile Include="UI\Grid\Fluent\GridGroupingSettingsBuilder.cs" />
     <Compile Include="UI\Grid\Commands\GridToolBarCommandBase.cs" />
     <Compile Include="UI\Grid\Fluent\GridToolBarCommandBuilderBase.cs">
