@@ -277,6 +277,16 @@
                     );
                 });
 
+                test("Major ticks count is correct", function() {
+                    createDateValueAxis(new Date("2012/02/01"), new Date("2012/02/10"));
+                    equals(dateAxis.getMajorTickPositions().length, 7);
+                });
+
+                test("Minor ticks count is correct", function() {
+                    createDateValueAxis(new Date("2012/02/01"), new Date("2012/02/10"));
+                    equals(dateAxis.getMinorTickPositions().length, 31);
+                });
+
                 // ------------------------------------------------------------
                 module("Date Value Axis / Base unit / Days");
 
@@ -356,16 +366,6 @@
                 test("Minor unit is derived from major unit", function() {
                     createDateValueAxis(new Date("2012/02/01"), new Date("2012/02/10"));
                     equal(dateAxis.options.minorUnit, 0.4);
-                });
-
-                test("Major ticks count is correct", function() {
-                    createDateValueAxis(new Date("2012/02/01"), new Date("2012/02/10"));
-                    equals(dateAxis.getMajorTickPositions().length, 7);
-                });
-
-                test("Minor ticks count is correct", function() {
-                    createDateValueAxis(new Date("2012/02/01"), new Date("2012/02/10"));
-                    equals(dateAxis.getMinorTickPositions().length, 31);
                 });
 
                 test("Automatic maximum is rounded to set major unit", function() {

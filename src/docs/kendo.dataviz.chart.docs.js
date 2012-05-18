@@ -497,49 +497,16 @@
          * @option {Object} [valueAxis] The value axis configuration options.
          * @option {Object} [valueAxis.name] <primary> The unique axis name.
          * @option {Boolean} [valueAxis.visible] <true> The visibility of the axis.
-         * @option {Number} [valueAxis.axisCrossingValue] <0> Value at which the category axis crosses this axis.
          * @option {Boolean} [valueAxis.reverse] <false> Reverses the axis direction -
          * values increase from right to left and from top to bottom.
+         * @option {Number} [valueAxis.axisCrossingValue] <0> Value at which the category axis crosses this axis.
          * @option {Number} [valueAxis.min] <0> The minimum value of the axis.
-         * This is often used in combination with the <b>max</b> configuration method
-         * to adjust the size of the chart relative to the charting area.
-         * _example
-         * $("#chart").kendoChart({
-         *     // assuming the data set lowest value is 20 and the highest is 100,
-         *     // we can make the chart bigger in the chart area by adjusting the min/max values
-         *     valueAxis: {
-         *         min: 10,
-         *         max: 100
-         *     },
-         *     ...
-         * });
+         * This is often used in combination with the <b>max</b> configuration option.
          * @option {Number} [valueAxis.max] <1> The maximum value of the axis.
-         * This is often used in combination with the <b>min</b> configuration method
-         * to adjust the size of the chart relative to the charting area.
-         * _example
-         * $("#chart").kendoChart({
-         *     // assuming the data set lowest value is 20 and the highest is 100,
-         *     // we can make the chart bigger in the chart area by adjusting the min/max values
-         *     valueAxis: {
-         *         min: 10,
-         *         max: 100
-         *     },
-         *     ...
-         * });
-         * @option {Number} [valueAxis.majorUnit] The interval between major divisions. For instance, on a column chart, its the step size while going up the
-         * vertical axis.You can additionally have minor steps and ticks in between the major ones by adjusting the <b>minorUnit</b>, <b>minorTicks.size</b>.
-         * _example
-         * $("#chart").kendoChart({
-         *     valueAxis: {
-         *         // show ticks in steps of 100.
-         *         majorUnit: 100,
-         *         // by default, the size is 4. increase it to 5 pixels.
-         *         majorTicks.size: 5,
-         *         // only the number will appear.
-         *         majorTicks.visible: false
-         *     },
-         *     ...
-         * });
+         * This is often used in combination with the <b>min</b> configuration option.
+         * @option {Number} [valueAxis.majorUnit] The interval between major divisions.
+         * @option {Number} [valueAxis.minorUnit] The interval between minor divisions.
+         * It defaults to 1/5th of the majorUnit.
          * @option {Object} [valueAxis.minorTicks] The minor ticks of the axis.
          * @option {Boolean} [valueAxis.minorTicks.visible] <false> The visibility of the minor ticks.
          * @option {Number} [valueAxis.minorTicks.size] <3> The axis minor tick size. This is the length of the line in pixels that is drawn to indicate the tick
@@ -1073,10 +1040,80 @@
          *    </dl>
          * </div>
          * @option {Object} [xAxis] Scatter charts X-axis configuration options.
-         * Includes all valueAxis options in addition to:
-         * @option {Number} [xAxis.axisCrossingValue] <0>
+         * Includes <strong>all valueAxis options</strong> in addition to:
+         * @option {String} [xAxis.type] <"Numeric"> The axis type.
+         * <div class="details-list">
+         *     <dl>
+         *         <dt>
+         *              <code>"Numeric"</code>
+         *         </dt>
+         *         <dd>
+         *              Generic axis with automatic range.
+         *         </dd>
+         *         <dt>
+         *              <code>"Date"</code>
+         *         </dt>
+         *         <dd>
+         *              Suitable for displaying chronological data.
+         *         </dd>
+         *    </dl>
+         * </div>
+         * @option [xAxis.type: "Date"] Properties specific to the date-time value axis
+         * @option {String} [xAxis.type: "Date".baseUnit] The base time interval for the axis labels.
+         * The default baseUnit is determined automatically from the value range. Available options:
+         * <ul>
+         *     <li>hours</li>
+         *     <li>days</li>
+         *     <li>months</li>
+         *     <li>years</li>
+         * </ul>
+         * @option {Date} [xAxis.type: "Date".axisCrossingValue] Date at which the Y axis crosses this axis.
+         * @option {Number} [xAxis.type: "Date".min] The start date of the axis.
+         * This is often used in combination with the <b>max</b> configuration option.
+         * @option {Number} [xAxis.type: "Date".max] The end date of the axis.
+         * This is often used in combination with the <b>min</b> configuration option.
+         * @option {Number} [xAxis.type: "Date".majorUnit] The interval between major divisions in base units.
+         * @option {Number} [xAxis.type: "Date".minorUnit] The interval between minor divisions in base units.
+         * It defaults to 1/5th of the majorUnit.
+         * This is often used in combination with the <b>min</b> configuration option.
+         * @option {Object} [xAxis.type: "Date".labels] Label settings specific to the date axis.
+         * @option {String} [xAxis.type: "Date".labels.dateFormats] Date format strings
+         * <div class="details-list">
+         *    <dl>
+         *         <dt>
+         *              <code>"hours"</code>
+         *         </dt>
+         *         <dd>
+         *              "HH:mm"
+         *         </dd>
+         *         <dt>
+         *              <code>"days"</code>
+         *         </dt>
+         *         <dd>
+         *              "M/d"
+         *         </dd>
+         *         <dt>
+         *              <code>"months"</code>
+         *         </dt>
+         *         <dd>
+         *              "MMM 'yy"
+         *         </dd>
+         *         <dt>
+         *              <code>"years"</code>
+         *         </dt>
+         *         <dd>
+         *              "yyyy"
+         *         </dd>
+         *    </dl>
+         * </div>
+         * The Chart will choose the appropriate format for the current <code>baseUnit</code>.
+         * Setting the labels <strong>format</strong> option will override these defaults.
+         * @option {String} [xAxis.type: "Date".labels.culture] <global culture>
+         * Culture to use for formatting the dates. See <a href="http://www.kendoui.com/documentation/framework/globalization/overview.aspx">Globalization</a> for more information.
+         * @option {Number} [xAxis.type: "Numeric"] Options specific to the numeric axis.
+         * @option [xAxis.type: "Numeric".axisCrossingValue] <0>
          * Value at which the first Y axis crosses this axis.
-         * @option {Array} [xAxis.axisCrossingValue] <[0]>
+         * @option {Array} [xAxis.type: "Numeric".axisCrossingValue] <[0]>
          * Values at which the Y axes cross this X axis.
          * <p>
          * <strong>Note:&nbsp;</strong> Specify a value greater than or equal to the
@@ -1093,25 +1130,7 @@
          * </p>
          *
          * @option {Object} [yAxis] The scatter charts Y-axis configuration options.
-         * Includes all valueAxis options in addition to:
-         * @option {Number} [yAxis.axisCrossingValue] <0>
-         * Value at which the first X axis crosses this axis.
-         * @option {Array} [yAxis.axisCrossingValue] <[0]>
-         * Values at which the X axes cross this Y axis.
-         * <p>
-         * <strong>Note:&nbsp;</strong> Specify a value greater than or equal to the
-         * axis maximum value to denote the far end of the axis.
-         * _example
-         * $("#chart").kendoChart({
-         *      ...,
-         *      yAxis: {
-         *          axisCrossingValue: [0, 1000]
-         *      },
-         *      xAxis: [{ }, { name: "secondary" }],
-         *      ...
-         * });
-         * </p>
-         *
+         * See <strong>xAxis</strong> for list of available options.
          * @option {Object} [categoryAxis] The category axis configuration options.
          * @option {Object} [categoryAxis.name] <primary> The unique axis name.
          * @option {Boolean} [categoryAxis.visible] <true> The visibility of the axis.
