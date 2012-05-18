@@ -256,6 +256,29 @@
                 equal(order[1], "bind");
             });
 
+            test("triggering multiple handlers attached with the one method", function() {
+                var observable = new Observable();
+
+                var handler1Called = false;
+
+                var handler1 = function() {
+                    handler1Called = true;
+                };
+
+                var handler2Called = false;
+
+                var handler2 = function() {
+                    handler2Called = true;
+                };
+
+                observable.one("event", handler1)
+                          .one("event", handler2)
+                          .trigger("event");
+
+                ok(handler1Called, "First handler should be called");
+                ok(handler2Called, "Second handler should be called");
+            });
+
             test("can reatach a handler during event invocation", function() {
                 var observable = new Observable();
 

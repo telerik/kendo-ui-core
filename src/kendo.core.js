@@ -129,6 +129,7 @@
             var that = this,
                 events = that._events[eventName],
                 idx,
+                length,
                 isDefaultPrevented = false;
 
             if (events) {
@@ -147,7 +148,7 @@
                 events = events.slice();
 
                 //Do not cache the length of the events array as removing events attached through one will fail
-                for (idx = 0; idx < events.length; idx++) {
+                for (idx = 0, length = events.length; idx < length; idx++) {
                     events[idx].call(that, e);
                 }
             }
