@@ -36,7 +36,6 @@ Changelog.prototype = {
 
             targets.splice(0, 0, this.milestone(year, release, "next"));
         }
-
         return milestones.filter(function(milestone) {
             return (targets.indexOf(milestone.title) >= 0);
         });
