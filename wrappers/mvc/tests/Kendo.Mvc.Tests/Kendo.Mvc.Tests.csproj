@@ -325,7 +325,6 @@
     <Compile Include="UI\Grid\GridColumnBaseTests.cs" />
     <Compile Include="UI\Grid\GridEditingSettingsTests.cs" />
     <Compile Include="UI\Grid\GridInlineEditRowHtmlBuilderTests.cs" />
-    <Compile Include="UI\Grid\GridGroupingSettingsTests.cs" />
     <Compile Include="UI\Grid\GridDataRowBuilderTests.cs" />
     <Compile Include="UI\Grid\GridPluginSerializerTests.cs" />
     <Compile Include="UI\Grid\GridTemplateCellBuilderTests.cs" />

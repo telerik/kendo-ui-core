@@ -134,7 +134,7 @@ namespace Kendo.Mvc.UI
         {
             GridBuilder<T> builder = Grid<T>();
 
-            builder.Component.Data = dataSource;
+            builder.Component.DataSource.Data = dataSource;
 
             return builder;
         }
@@ -147,7 +147,7 @@ namespace Kendo.Mvc.UI
         {
             GridBuilder<DataRowView> builder = Grid<DataRowView>();
             
-            builder.Component.Data = dataSource.WrapAsEnumerable();
+            builder.Component.DataSource.Data = dataSource.WrapAsEnumerable();
 
             return builder;
         }
@@ -162,7 +162,7 @@ namespace Kendo.Mvc.UI
 
             GridBuilder<DataRowView> builder = Grid<DataRowView>();
 
-            builder.Component.Data = dataSource.Table.WrapAsEnumerable();
+            builder.Component.DataSource.Data = dataSource.Table.WrapAsEnumerable();
 
             return builder;
         }   
@@ -183,7 +183,7 @@ namespace Kendo.Mvc.UI
         {
             GridBuilder<T> builder = Grid<T>();
 
-            builder.Component.Data = ViewContext.ViewData.Eval(dataSourceViewDataKey) as IEnumerable<T>;
+            builder.Component.DataSource.Data = ViewContext.ViewData.Eval(dataSourceViewDataKey) as IEnumerable<T>;
 
             return builder;
         }

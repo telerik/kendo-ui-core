@@ -40,7 +40,7 @@ namespace Kendo.Mvc.UI.Fluent.Tests
         public void Should_create_column_by_name_from_linq_to_object_source()
         {
             var grid = GridTestHelper.CreateGrid<Customer>();
-            grid.Data = new[] {new Customer {Id = 1}}.AsQueryable();
+            grid.DataSource.Data = new[] {new Customer {Id = 1}}.AsQueryable();
             var factory = new GridColumnFactory<Customer>(grid);
             var builder = factory.Bound("Id");
 

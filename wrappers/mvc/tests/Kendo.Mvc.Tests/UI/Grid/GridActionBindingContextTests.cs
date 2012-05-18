@@ -36,7 +36,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
         [Fact]
         public void DataSource_returns_data_pointed_by_the_result()
         {
-            Assert.Same(dataSource, bindingContext.DataSource);
+            Assert.Same(dataSource, bindingContext.Data);
         }
 
         [Fact]

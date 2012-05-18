@@ -1,24 +1,15 @@
 @model IEnumerable<Product>
 
-<script src="@Url.Content("~/Scripts/kendo.grid.js")"></script>
 <div id="example" class="k-content">
     @(Html.Kendo().Grid(Model)
         .Name("Grid")
         .Pageable()
         .Sortable()
-        .Scrollable()
-        .DataSource(dataSource => dataSource.Read(read => read.Url("Index", "Grid"))
-            .PageSize(10)
-            .Sort(sort => sort.Add(p => p.ProductName).Ascending())
-            .Group(groups => {
-                groups.Add(p => p.ProductName);
-            })
-            .Filter(filters => filters.Add(p => p.CategoryID).IsEqualTo(2))
-            .Aggregates(agg => {
-                agg.Add(p => p.ProductID).Average();
-                agg.Add(p => p.ProductName).Count();
-            })
-         )
+        .Scrollable()              
+        .DataSource(dataSource => dataSource.Type(DataSourceType.Server)
+            .Read(read => read.Url("Index", "Grid"))
+            .Sort(s => s.Add(p => p.ProductID).Descending()))
+        )
     )
 </div>
 <script>

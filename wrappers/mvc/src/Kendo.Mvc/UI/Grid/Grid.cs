@@ -54,7 +54,6 @@ namespace Kendo.Mvc.UI
 
             PrefixUrlParameters = true;
             RowTemplate = new HtmlTemplate<T>();
-            DataProcessor = new GridDataProcessor(this);
             Columns = new List<GridColumnBase<T>>();
             DataKeys = new List<IGridDataKey<T>>();
 
@@ -538,12 +537,6 @@ namespace Kendo.Mvc.UI
             private set;
         }
 
-        public GridDataProcessor DataProcessor
-        {
-            get;
-            private set;
-        }
-
         /// <summary>
         /// Gets or sets a value indicating whether custom binding is enabled.
         /// </summary>
@@ -588,16 +581,6 @@ namespace Kendo.Mvc.UI
             }
         }
 
-        /// <summary>
-        /// Gets or sets the data source.
-        /// </summary>
-        /// <value>The data source.</value>
-        public IEnumerable<T> Data
-        {
-            get;
-            set;
-        }
-
         int IGridBindingContext.Total
         {
             get
@@ -606,11 +589,11 @@ namespace Kendo.Mvc.UI
             }
         }
 
-        IEnumerable IGridBindingContext.DataSource
+        IEnumerable IGridBindingContext.Data
         {
             get
             {
-                return Data;
+                return DataSource.Data;
             }
         }
 
@@ -754,7 +737,7 @@ namespace Kendo.Mvc.UI
         {
             get
             {
-                int colspan = DataProcessor.GroupDescriptors.Count + VisibleColumns.Count;
+                int colspan = DataSource.Groups.Count + VisibleColumns.Count;
 
                 if (DetailView != null)
                 {
@@ -782,23 +765,23 @@ namespace Kendo.Mvc.UI
 
         public void SerializeDataSource(IClientSideObjectWriter writer)
         {
-            IEnumerable dataSource = Data;
-            var dataTableEnumerable = Data as GridDataTableWrapper;
+            IEnumerable dataSource = DataSource.Data;
+            var dataTableEnumerable = dataSource as GridDataTableWrapper;
 
             var serverOperationMode = !DataBinding.IsClientOperationMode;
 
             if (serverOperationMode)
             {
-                dataSource = DataProcessor.ProcessedDataSource;
+                dataSource = DataSource.Data;
             }
 
             if (dataTableEnumerable != null && dataTableEnumerable.Table != null)
             {
                 dataSource = dataSource.SerializeToDictionary(dataTableEnumerable.Table);
             }
-            else if (DataProcessor.ProcessedDataSource is IQueryable<AggregateFunctionsGroup>)
+            else if (DataSource.Data is IQueryable<AggregateFunctionsGroup>)
             {
-                var grouppedDataSource = DataProcessor.ProcessedDataSource.Cast<IGroup>();
+                var grouppedDataSource = DataSource.Data.Cast<IGroup>();
 
                 if (serverOperationMode) {
                     dataSource = grouppedDataSource.Leaves();
@@ -843,9 +826,9 @@ namespace Kendo.Mvc.UI
 
                 var builder = htmlBuilderFactory.CreateBuilder(Scrolling.Enabled);
 
-                var result = CreateDataSourceResult();
+                ProcessDataSource();
 
-                var renderingData = CreateRenderingData(result);
+                var renderingData = CreateRenderingData();
 
                 var functionalData = CreateFunctionalData();
 
@@ -906,7 +889,7 @@ namespace Kendo.Mvc.UI
             return new GridGroupingData
             {
                 GetTitle = VisibleColumns.Cast<IGridColumn>().GroupTitleForMember,
-                GroupDescriptors = DataProcessor.GroupDescriptors,
+                GroupDescriptors = DataSource.Groups,
                 Hint = Localization.GroupHint,
                 UrlBuilder = UrlBuilder,
                 SortedAscText = Localization.SortedAsc,
@@ -919,16 +902,16 @@ namespace Kendo.Mvc.UI
         {
             return new GridPagerData
             {
-                CurrentPage = DataProcessor.CurrentPage,
-                PageCount = DataProcessor.PageCount,
+                CurrentPage = DataSource.Page,
+                PageCount = DataSource.TotalPages,
                 Style = Paging.Style,
                 UrlBuilder = UrlBuilder,
-                Total = DataProcessor.Total,
+                Total = DataSource.Total,
                 PageOfText = Localization.PageOf,
                 PageText = Localization.Page,
                 Colspan = Colspan,
                 DisplayingItemsText = Localization.DisplayingItems,
-                PageSize = DataProcessor.PageSize,
+                PageSize = DataSource.PageSize,
                 RefreshText = Localization.Refresh
             };
         }
@@ -963,7 +946,7 @@ namespace Kendo.Mvc.UI
             new LiteralNode(popup.ToHtmlString()).AppendTo(container);
         }
 
-        private DataSourceResult CreateDataSourceResult()
+        private void ProcessDataSource()
         {
             var binder = new DataSourceRequestModelBinder();
 
@@ -977,24 +960,10 @@ namespace Kendo.Mvc.UI
 
             var request = (DataSourceRequest)binder.BindModel(controller.ControllerContext, bindingContext);
 
-            if (request.Sorts == null)
-            {
-                request.Sorts = DataSource.OrderBy;
-            }
-            else if (request.Sorts.Any())
-            {
-                DataSource.OrderBy.Clear();
-                DataSource.OrderBy.AddRange(request.Sorts);
-            }
-            else
-            {
-                DataSource.OrderBy.Clear();
-            }
-
-            return Data.AsQueryable().ToDataSource(request);
+            DataSource.Process(request);
         }
 
-        private GridRenderingData CreateRenderingData(DataSourceResult result)
+        private GridRenderingData CreateRenderingData()
         {
             var renderingData = new GridRenderingData
             {
@@ -1002,9 +971,9 @@ namespace Kendo.Mvc.UI
                 DataKeyStore = DataKeyStore,
                 HtmlHelper = new GridHtmlHelper<T>(ViewContext, DataKeyStore),
                 UrlBuilder = UrlBuilder,
-                DataSource = result.Data,
+                DataSource = DataSource.Data,
                 Columns = VisibleColumns.Cast<IGridColumn>(),
-                GroupMembers = DataProcessor.GroupDescriptors.Select(g => g.Member),
+                GroupMembers = DataSource.Groups.Select(g => g.Member),
                 Mode = CurrentItemMode,
                 EditMode = Editing.Mode,
                 HasDetailView = HasDetailView,
@@ -1015,9 +984,9 @@ namespace Kendo.Mvc.UI
                 ScrollingHeight = Scrolling.Height,
                 EditFormHtmlAttributes = Editing.FormHtmlAttributes,
                 ShowFooter = Footer && VisibleColumns.Any(c => c.FooterTemplate.HasValue() || c.ClientFooterTemplate.HasValue()),
-                AggregateResults = DataProcessor.AggregatesResults,
+                //TODO: AggregateResults = DataSource.AggregatesResults,
                 Aggregates = Aggregates.SelectMany(aggregate => aggregate.Aggregates),
-                GroupsCount = DataProcessor.GroupDescriptors.Count,
+                GroupsCount = DataSource.Groups.Count,
                 ShowGroupFooter = Aggregates.Any() && VisibleColumns.OfType<IGridBoundColumn>().Any(c => c.GroupFooterTemplate.HasValue()),
                 PopUpContainer = new HtmlFragment(),
                 CreateNewDataItem = () => Editing.DefaultDataItem(),
@@ -1141,12 +1110,12 @@ namespace Kendo.Mvc.UI
 
         private void AdjustColumnsTypesFromDynamic()
         {
-            if (!typeof (T).IsDynamicObject() || DataProcessor.ProcessedDataSource == null ||
+            if (!typeof (T).IsDynamicObject() || DataSource.Data == null ||
                 !Columns.OfType<IGridBoundColumn>().Any(c => c.MemberType == null && c.Member.HasValue())
                 ) 
                 return;
 
-            var processedDataSource = DataProcessor.ProcessedDataSource;
+            var processedDataSource = DataSource.Data;
             var firstItem = GetFirstItemFromGroups(processedDataSource);
             if (firstItem != null)
             {
