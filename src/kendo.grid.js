@@ -484,7 +484,8 @@
                     resizeHandle.css({
                         top: scrollable ? 0 : heightAboveHeader(that.wrapper),
                         left: left - indicatorWidth,
-                        width: indicatorWidth * 2
+                        height: th.outerHeight(),
+                        width: indicatorWidth * 3
                     })
                     .data("th", th)
                     .show();
