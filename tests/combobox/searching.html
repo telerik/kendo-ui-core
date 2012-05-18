@@ -586,6 +586,24 @@
                 equal(combobox.current().index(), 1);
             });
 
+            test("ComboBox sets value of the select element on rebind", 1, function() {
+                var select = $("<select><option value=1>Item1</option><option value=2>2Item</option></select>"),
+                    combobox = select.kendoComboBox({
+                        filter: "contains",
+                        delay: 0
+                    }).data("kendoComboBox");
+
+                combobox.input.val("2");
+                combobox.search("2");
+
+                //select first item after search
+                combobox._accept(combobox.ul[0].children[0]);
+
+                combobox.open();
+
+                equal(combobox.current().index(), 1);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

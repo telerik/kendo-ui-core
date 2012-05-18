@@ -165,6 +165,7 @@
         STATE_SELECTED = "k-state-selected",
         STATE_FILTER = "filter",
         STATE_ACCEPT = "accept",
+        STATE_REBIND = "rebind",
         HOVEREVENTS = "mouseenter mouseleave",
         NULL = null,
         proxy = $.proxy;
@@ -627,7 +628,7 @@
 
             if (!that.ul[0].firstChild || (that._state === STATE_ACCEPT && !serverFiltering)) {
                 that._open = true;
-                that._state = "";
+                that._state = STATE_REBIND;
                 that._selectItem();
             } else {
                 that.popup.open();
@@ -649,6 +650,7 @@
             var that = this,
                 ul = that.ul[0],
                 options = that.options,
+                value = that.value(),
                 data = that._data(),
                 length = data.length;
 
@@ -659,6 +661,11 @@
 
             if (that.element.is(SELECT)) {
                 that._options(data);
+
+                if (value && that._state === STATE_REBIND) {
+                    that._state = "";
+                    that.value(value);
+                }
             }
 
             if (length) {
