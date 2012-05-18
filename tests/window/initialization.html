@@ -274,6 +274,19 @@
                 ok(dialog.wrapper.hasClass("k-rtl"));
             });
 
+            test("invisible windows do not interfere with overlay", function() {
+                var dialog1 = $("<div />").hide().appendTo("body"),
+                    dialog2 = dialog1.clone().appendTo("body");
+
+                dialog1.kendoWindow({ visible: false, animation: false, modal: true });
+
+                dialog1.show().data("kendoWindow").open();
+
+                dialog2.kendoWindow({ visible: false, animation: false, modal: true });
+
+                ok($(".k-overlay").is(":visible"));
+            });
+
             var form;
 
             module("appendTo option", {
