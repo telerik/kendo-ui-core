@@ -26,6 +26,11 @@ namespace Kendo.Mvc.UI.Html
         {
             var th = CreateContainer();
 
+            if (sortDirection.HasValue)
+            {
+                th.Attribute("data-dir", sortDirection == ListSortDirection.Ascending ? "asc" : "desc");
+            }
+
             var sortLink = new HtmlElement("a").AddClass(UIPrimitives.Link)
                                            .Attribute("href", url);
 

@@ -218,7 +218,7 @@ namespace Kendo.Mvc.UI
 
         public string GetSortUrl()
         {
-            IList<SortDescriptor> orderBy = new List<SortDescriptor>(Grid.DataProcessor.SortDescriptors);
+            IList<SortDescriptor> orderBy = new List<SortDescriptor>(Grid.DataSource.OrderBy);
             SortDescriptor descriptor = orderBy.SingleOrDefault(c => c.Member.IsCaseInsensitiveEqual(Member));
 
             ListSortDirection? oldDirection = null;
@@ -271,8 +271,8 @@ namespace Kendo.Mvc.UI
         {
             get
             {
-                var descriptor = Grid.DataProcessor
-                                     .SortDescriptors
+                var descriptor = Grid.DataSource
+                                     .OrderBy
                                      .FirstOrDefault(column => column.Member.IsCaseInsensitiveEqual(Member));
 
                 if (descriptor == null)

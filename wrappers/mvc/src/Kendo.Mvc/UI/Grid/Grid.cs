@@ -6,18 +6,17 @@ namespace Kendo.Mvc.UI
     using System.Globalization;
     using System.IO;
     using System.Linq;
+    using System.Web;
     using System.Web.Mvc;
     using System.Web.Routing;
     using System.Web.Script.Serialization;
     using System.Web.UI;
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.Infrastructure;
+    using Infrastructure.Implementation;
     using Kendo.Mvc.Resources;
     using Kendo.Mvc.UI.Fluent;
     using Kendo.Mvc.UI.Html;
-    using System.Web;
-    using Infrastructure.Implementation;
-
     /// isummary>
     /// Telerik Grid for ASP.NET MVC is a view component for presenting tabular data.
     /// It supports the following features:
@@ -844,7 +843,9 @@ namespace Kendo.Mvc.UI
 
                 var builder = htmlBuilderFactory.CreateBuilder(Scrolling.Enabled);
 
-                var renderingData = CreateRenderingData();
+                var result = CreateDataSourceResult();
+
+                var renderingData = CreateRenderingData(result);
 
                 var functionalData = CreateFunctionalData();
 
@@ -962,7 +963,38 @@ namespace Kendo.Mvc.UI
             new LiteralNode(popup.ToHtmlString()).AppendTo(container);
         }
 
-        private GridRenderingData CreateRenderingData()
+        private DataSourceResult CreateDataSourceResult()
+        {
+            var binder = new DataSourceRequestModelBinder();
+
+            if (this.PrefixUrlParameters)
+            {
+                binder.Prefix = Name;
+            }
+
+            var controller = ViewContext.Controller;
+            var bindingContext = new ModelBindingContext() { ValueProvider = controller.ValueProvider };
+
+            var request = (DataSourceRequest)binder.BindModel(controller.ControllerContext, bindingContext);
+
+            if (request.Sorts == null)
+            {
+                request.Sorts = DataSource.OrderBy;
+            }
+            else if (request.Sorts.Any())
+            {
+                DataSource.OrderBy.Clear();
+                DataSource.OrderBy.AddRange(request.Sorts);
+            }
+            else
+            {
+                DataSource.OrderBy.Clear();
+            }
+
+            return Data.AsQueryable().ToDataSource(request);
+        }
+
+        private GridRenderingData CreateRenderingData(DataSourceResult result)
         {
             var renderingData = new GridRenderingData
             {
@@ -970,7 +1002,7 @@ namespace Kendo.Mvc.UI
                 DataKeyStore = DataKeyStore,
                 HtmlHelper = new GridHtmlHelper<T>(ViewContext, DataKeyStore),
                 UrlBuilder = UrlBuilder,
-                DataSource = DataProcessor.ProcessedDataSource,
+                DataSource = result.Data,
                 Columns = VisibleColumns.Cast<IGridColumn>(),
                 GroupMembers = DataProcessor.GroupDescriptors.Select(g => g.Member),
                 Mode = CurrentItemMode,
