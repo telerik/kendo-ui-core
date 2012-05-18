@@ -4,9 +4,9 @@ namespace Kendo.Mvc.UI.Fluent
 
     using Infrastructure;
 
-    public abstract class GridFilterDescriptorBuilderBase : IHideObjectMembers
+    public abstract class DataSourceFilterDescriptorBuilderBase : IHideObjectMembers
     {
-        protected GridFilterDescriptorBuilderBase(CompositeFilterDescriptor descriptor)
+        protected DataSourceFilterDescriptorBuilderBase(CompositeFilterDescriptor descriptor)
         {
             Guard.IsNotNull(descriptor, "descriptor");
 

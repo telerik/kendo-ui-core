@@ -122,28 +122,7 @@ namespace Kendo.Mvc.UI
             if (filters.Any())
             {
                 result["filters"] = filters;
-            }
-            
-            /*
-            var filtersForTheColumn = column.Grid.DataProcessor.FilterDescriptors
-                .SelectMemberDescriptors()
-                .Where(descriptor => descriptor.Member == column.Member);
-
-            if (filtersForTheColumn.Any())
-            {
-                var filters = new List<IDictionary<string, object>>();
-
-                filtersForTheColumn.Each(filter =>
-                {
-                    filters.Add(new Dictionary<string, object>
-                    {
-                        {"operator", filter.Operator.ToToken()},
-                        {"value", filter.Value}
-                    });
-                });
-
-                result["filters"] = filters;
-            }*/
+            }         
         }
 
         private IList<IDictionary<string, object>> SerializeFilter(IEnumerable<IFilterDescriptor> filters)

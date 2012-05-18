@@ -74,21 +74,15 @@ namespace Kendo.Mvc.UI
 
             if (Aggregates.Any())
             {
-                SerializeAggregates(json);
+                json["aggregates"] = Aggregates.SelectMany(agg => agg.Aggregates.ToJson()); ;    
             }
-        }
 
-        private void SerializeAggregates(IDictionary<string, object> json)
-        {
-            var result = new List<IDictionary<string, object>>();
-
-            foreach (var aggregate in Aggregates)
+            if (Filters.Any())
             {
-                result.AddRange(aggregate.Aggregates.ToJson());
+                json["filters"] = Filters.ToJson();
+                
             }
-
-            json["aggregates"] = result;
-        }
+        }        
 
         public DataSourceType Type
         {

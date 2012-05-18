@@ -2,9 +2,9 @@ namespace Kendo.Mvc.UI.Fluent
 {
     using System;
 
-    public abstract class GridFilterEqualityDescriptorBuilderBase<TValue, TCompositeBuilder> : GridFilterDescriptorBuilderBase where TCompositeBuilder : GridFilterCompositeBuilderBase
+    public abstract class DataSourceFilterEqualityDescriptorBuilderBase<TValue, TCompositeBuilder> : DataSourceFilterDescriptorBuilderBase where TCompositeBuilder : DataSourceFilterCompositeBuilderBase
     {
-        protected GridFilterEqualityDescriptorBuilderBase(CompositeFilterDescriptor descriptor) : base(descriptor)
+        protected DataSourceFilterEqualityDescriptorBuilderBase(CompositeFilterDescriptor descriptor) : base(descriptor)
         {
         }
 

@@ -2,12 +2,13 @@ namespace Kendo.Mvc
 {
     using System;
     using System.Linq.Expressions;
-    using Kendo.Mvc.Infrastructure.Implementation.Expressions;
+    using Kendo.Mvc.Infrastructure.Implementation.Expressions;    
+
     /// <summary>
     /// Base class for all <see cref="IFilterDescriptor"/> used for 
     /// handling the logic for property changed notifications.
     /// </summary>
-    public class FilterDescriptorBase : IFilterDescriptor
+    public class FilterDescriptorBase : JsonObject, IFilterDescriptor
     {
         /// <summary>
         /// Creates a filter expression by delegating its creation to 
@@ -53,5 +54,10 @@ namespace Kendo.Mvc
             }
         }
 
+
+        protected override void Serialize(System.Collections.Generic.IDictionary<string, object> json)
+        {
+            
+        }
     }
 }

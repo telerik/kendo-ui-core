@@ -39,20 +39,7 @@ namespace Kendo.Mvc.UI.Fluent
             settings.Enabled = value;
 
             return this;
-        }
-
-        public virtual GridFilteringSettingsBuilder<TModel> Filters(Action<GridFilterDescriptorFactory<TModel>> configurator)
-        {
-            Guard.IsNotNull(configurator, "configurator");
-
-            settings.Enabled = true;
-
-            GridFilterDescriptorFactory<TModel> factory = new GridFilterDescriptorFactory<TModel>(settings.Filters);
-
-            configurator(factory);
-
-            return this;
-        }
+        }        
 
         public virtual GridFilteringSettingsBuilder<TModel> ShowOrOption(bool value)
         {
