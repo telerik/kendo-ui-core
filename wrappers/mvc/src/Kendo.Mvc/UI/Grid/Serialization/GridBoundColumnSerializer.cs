@@ -50,40 +50,14 @@ namespace Kendo.Mvc.UI
             if (column.ClientGroupFooterTemplate.HasValue())
             {
                 result.Add("groupFooterTemplate", Encode(column, column.ClientGroupFooterTemplate));
-            }
-
-            SerializeAggregates(result);
-
-            SerializeFilters(result);
-
-            SerializeOrder(result);
+            }            
+            
 
             SerializeValues(result);
             
             return result;
         }
-        
-        private void SerializeAggregates(IDictionary<string, object> result)
-        {
-            if (column.Aggregates.Any())
-            {
-                result["aggregates"] = column.Aggregates.Select(aggregate => aggregate.AggregateMethodName.ToLowerInvariant());
-            }
-        }
-        
-        private void SerializeOrder(IDictionary<string, object> result)
-        {
-            var sortDescriptor = column.Grid
-                 .DataProcessor
-                 .SortDescriptors
-                 .FirstOrDefault(s => s.Member == column.Member);
-            
-            if (sortDescriptor != null)
-            {
-                result["order"] = sortDescriptor.SortDirection == ListSortDirection.Ascending ? "asc" : "desc";
-            }
-        }
-        
+
         private void SerializeValues(IDictionary<string, object> result)
         {
             if (column.MemberType != null && column.MemberType.GetNonNullableType().IsEnum)
@@ -113,50 +87,6 @@ namespace Kendo.Mvc.UI
 
                 result["values"] = values;
             }
-        }
-
-        private void SerializeFilters(IDictionary<string, object> result)
-        {
-            var filters = SerializeFilter(column.Grid.DataProcessor.FilterDescriptors);
-
-            if (filters.Any())
-            {
-                result["filters"] = filters;
-            }         
-        }
-
-        private IList<IDictionary<string, object>> SerializeFilter(IEnumerable<IFilterDescriptor> filters)
-        {
-            var result = new List<IDictionary<string, object>>();
-
-            filters.Each(f =>
-            {
-                if (f is CompositeFilterDescriptor)
-                {
-                    var descriptor = f as CompositeFilterDescriptor;
-                    if (descriptor.FilterDescriptors.SelectMemberDescriptors().Where(d => d.Member == column.Member).Any())
-                    {
-                        result.Add(new Dictionary<string, object> {
-                            {"logic", descriptor.LogicalOperator.ToString().ToLowerInvariant()},
-                            {"filters", SerializeFilter(descriptor.FilterDescriptors) }
-                        });
-                    }
-                }
-                else if (f is FilterDescriptor)
-                {
-                    var descriptor = f as FilterDescriptor;
-                    if (descriptor.Member == column.Member)
-                    {
-                        result.Add(new Dictionary<string, object>
-                        {
-                            {"operator", descriptor.Operator.ToToken()},
-                            {"value", descriptor.Value}
-                        });
-                    }
-                }
-            });
-
-            return result;
-        }
+        }           
     }
 }
