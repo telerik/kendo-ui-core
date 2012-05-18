@@ -216,6 +216,7 @@
     <Content Include="Areas\razor\Views\numerictextbox\events.cshtml" />
     <Content Include="Areas\razor\Views\numerictextbox\api.cshtml" />
     <Content Include="Areas\razor\Views\window\actions.cshtml" />
+    <Content Include="Areas\razor\Views\numerictextbox\index.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
