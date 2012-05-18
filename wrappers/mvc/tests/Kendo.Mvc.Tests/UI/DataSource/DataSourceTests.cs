@@ -207,5 +207,26 @@
             groups.ElementAt(1)["field"].ShouldEqual("Bar");
             groups.ElementAt(1)["dir"].ShouldEqual("asc");
         }
+        /*
+                [Fact]
+                public void ToJson_group_aggregates_are_serialized()
+                {
+                    var descriptor = new GroupDescriptor
+                    {
+                        Member = "Foo",
+                        SortDirection = System.ComponentModel.ListSortDirection.Descending
+                    };
+
+                    dataSource.Groups.Add(descriptor);            
+
+                    var result = dataSource.ToJson();
+                    var group = (IEnumerable<IDictionary<string, object>>)result["group"];
+
+                    group.Count().ShouldEqual(1);
+                    group.ElementAt(0)["field"].ShouldEqual("Foo");
+                    group.ElementAt(0)["dir"].ShouldEqual("desc");
+                }
+                */
     }
+ 
 }

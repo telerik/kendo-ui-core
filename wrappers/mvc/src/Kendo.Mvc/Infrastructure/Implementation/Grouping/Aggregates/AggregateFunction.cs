@@ -3,8 +3,9 @@ namespace Kendo.Mvc
     using System.Globalization;
     using System.Linq.Expressions;
     using System;
+    using Kendo.Mvc.UI;
 
-    public abstract class AggregateFunction
+    public abstract class AggregateFunction : JsonObject
     {
         public abstract string AggregateMethodName { get; }
 
@@ -86,6 +87,12 @@ namespace Kendo.Mvc
         protected virtual string GenerateFunctionName()
         {
             return string.Format(CultureInfo.InvariantCulture, "{0}_{1}", this.GetType().Name, this.GetHashCode());
+        }
+
+        protected override void Serialize(System.Collections.Generic.IDictionary<string, object> json)
+        {
+            json["field"] = SourceField;
+            json["aggregate"] = FunctionName.Split('_')[0].ToLowerInvariant();
         }
     }
 }

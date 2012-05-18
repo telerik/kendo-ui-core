@@ -6,6 +6,7 @@ namespace Kendo.Mvc
     using System.Text;
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.Infrastructure.Implementation;
+    using Kendo.Mvc.UI;
     
     public class AggregateDescriptor : IDescriptor
     {
@@ -76,5 +77,23 @@ namespace Kendo.Mvc
 
             return result.ToString();
         }
+        /*
+        protected override void Serialize(IDictionary<string, object> json)
+        {
+            var result = new List<IDictionary<string, object>>();
+
+            var aggregates = Aggregates.Select(aggregate => aggregate.FunctionName.Split('_')[0].ToLowerInvariant());
+
+            foreach (var aggregate in aggregates)
+            {
+                var temp = new Dictionary<string, object>();
+                temp.Add("field", Member);
+                temp.Add("aggregate", aggregate);
+                result.Add(temp);
+            }
+
+            json
+        }
+         */
     }
 }

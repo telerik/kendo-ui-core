@@ -215,14 +215,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
             builder.FooterTemplate(template);
 
             column.FooterTemplate.HasValue().ShouldBeTrue();
-        }
-
-        [Fact]
-        public void Should_set_aggregate()
-        {
-            builder.Aggregate(agg => agg.Min());
-            column.Aggregates.First().ShouldBeType<MinFunction>();
-        }
+        }       
 
         [Fact]
         public void Should_set_editor_template_name()

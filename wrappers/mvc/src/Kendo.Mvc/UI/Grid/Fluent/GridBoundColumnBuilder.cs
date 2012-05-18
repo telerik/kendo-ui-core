@@ -250,14 +250,7 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
-        public GridBoundColumnBuilder<T> Aggregate(Action<GridAggregatesFactory> aggregates)
-        {
-            var factory = new GridAggregatesFactory(Column.Aggregates, Column.Member, Column.MemberType);
-
-            aggregates(factory);
-
-            return this;
-        }
+        
         /// <summary>
         /// Sets the footer template for the column.
         /// </summary>

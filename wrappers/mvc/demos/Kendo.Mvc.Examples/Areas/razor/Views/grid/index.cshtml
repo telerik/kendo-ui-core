@@ -6,8 +6,18 @@
         .Name("Grid")
         .Pageable()
         .Sortable()
-        .Scrollable()              
-        .DataSource(dataSource => dataSource.Read(read => read.Url("Index", "Grid")))
+        .Scrollable()
+        .DataSource(dataSource => dataSource.Read(read => read.Url("Index", "Grid"))
+            .PageSize(10)
+            .OrderBy(sort => sort.Add(p => p.ProductName).Ascending())
+            .Groups(groups => {
+                groups.Add(p => p.ProductName);
+            })
+            .Aggregates(agg => {
+                agg.Add(p => p.ProductID).Average();
+                agg.Add(p => p.ProductName).Count();
+            })
+         )
     )
 </div>
 <script>
