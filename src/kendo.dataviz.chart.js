@@ -1332,7 +1332,7 @@
                 date = addDuration(options.min, offset, options.baseUnit),
                 unitFormat = labelOptions.dateFormats[options.baseUnit],
                 format = labelOptions.format || unitFormat,
-                value = kendo.toString(date, format);
+                value = kendo.toString(date, format, labelOptions.culture);
 
             return new AxisLabel(value, index, null, labelOptions);
         }

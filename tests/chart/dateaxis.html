@@ -14,6 +14,7 @@
         <script src="../../src/kendo.dataviz.themes.js"></script>
         <script src="../../src/kendo.dataviz.svg.js"></script>
         <script src="../../src/kendo.dataviz.vml.js"></script>
+        <script src="../../src/cultures/kendo.culture.es-ES.js"></script>
         <script src="util.js"></script>
         <script type="text/javascript">
             var dataviz = kendo.dataviz,
@@ -431,6 +432,18 @@
 
                     same($.map(view.log.text, function(text) { return text.content }),
                          ["1/31/12", "2/1/12", "2/2/12", "2/3/12"]);
+                });
+
+                test("creates labels with custom culture", function() {
+                    createDateValueAxis(new Date("2012/02/01"), new Date("2012/02/02"), {
+                        labels: {
+                            format: "d.MMM",
+                            culture: "es-ES"
+                        }
+                    });
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["31.ene", "1.feb", "2.feb", "3.feb"]);
                 });
 
                 // ------------------------------------------------------------
