@@ -26,6 +26,27 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        public DataSourceBuilder<TModel> Update(Action<CrudOperationBuilder> configurator)
+        {
+            configurator(new CrudOperationBuilder(dataSource.Transport.Update, viewContext, urlGenerator));
+
+            return this;
+        }
+
+        public DataSourceBuilder<TModel> Create(Action<CrudOperationBuilder> configurator)
+        {
+            configurator(new CrudOperationBuilder(dataSource.Transport.Create, viewContext, urlGenerator));
+
+            return this;
+        }
+
+        public DataSourceBuilder<TModel> Destroy(Action<CrudOperationBuilder> configurator)
+        {
+            configurator(new CrudOperationBuilder(dataSource.Transport.Destroy, viewContext, urlGenerator));
+
+            return this;
+        }
+
         public DataSourceBuilder<TModel> Type(DataSourceType type)
         {
             dataSource.Type = type;
