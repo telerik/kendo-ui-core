@@ -157,6 +157,7 @@ namespace Kendo.Mvc
 
             json["field"] = Member;
             json["operator"] = Operator.ToToken();
+            json["value"] = Value;
         }
     }
 }
