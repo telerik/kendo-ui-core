@@ -76,6 +76,7 @@
   <ItemGroup>
     <Compile Include="Areas\aspx\ASPXAreaRegistration.cs" />
     <Compile Include="Areas\razor\RazorAreaRegistration.cs" />
+    <Compile Include="Controllers\TimePicker\IndexController.cs" />
     <Compile Include="Controllers\DatePicker\IndexController.cs" />
     <Compile Include="Controllers\Grid\GridController.cs" />
     <Compile Include="Controllers\NumericTextBox\ApiController.cs" />
@@ -217,6 +218,7 @@
     <Content Include="Areas\razor\Views\numerictextbox\api.cshtml" />
     <Content Include="Areas\razor\Views\window\actions.cshtml" />
     <Content Include="Areas\razor\Views\numerictextbox\index.cshtml" />
+    <Content Include="Areas\razor\Views\timepicker\index.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
