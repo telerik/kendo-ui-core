@@ -226,8 +226,8 @@ namespace Kendo.Mvc.UI.Tests
         {
             var builder = factory.TimePickerFor(m => m.DateTimeProperty);
 
-            Assert.Equal(new DateTime(2000, 10, 10), builder.ToComponent().MinValue);
-            Assert.Equal(new DateTime(2020, 10, 10), builder.ToComponent().MaxValue);
+            Assert.Equal(new DateTime(2000, 10, 10), builder.ToComponent().Min);
+            Assert.Equal(new DateTime(2020, 10, 10), builder.ToComponent().Max);
         }
 
         [Fact]

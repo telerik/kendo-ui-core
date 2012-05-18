@@ -1,76 +1,105 @@
 namespace Kendo.Mvc.UI
 {
+    using Kendo.Mvc.Extensions;
+    using Kendo.Mvc.UI.Html;
     using System;
+    using System.Collections.Generic;
+    using System.Globalization;
     using System.Linq;
     using System.Web.Mvc;
-    using System.Globalization;
-    using System.Collections.Generic;
-    
-    using Extensions;
-    using Kendo.Mvc.UI.Html;
-    using Kendo.Mvc.Resources;
+    using System.Web.Query.Dynamic;
 
-    public class TimePicker : DatePickerBase
+    public class TimePicker : ViewComponentBase, IInputComponent<DateTime>
     {
-        private readonly IList<IEffect> defaultEffects = new List<IEffect> { new SlideAnimation() };
-
-        public TimePicker(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory)
-            : base(viewContext, clientSideObjectWriterFactory)
+        public TimePicker(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory, ViewDataDictionary viewData)
+            : base(viewContext, clientSideObjectWriterFactory, viewData)
         {
-            defaultEffects.Each(el => Effects.Container.Add(el));
+            ClientEvents = new DatePickerClientEvents();
 
             Format = CultureInfo.CurrentCulture.DateTimeFormat.ShortTimePattern;
-            
-            DropDownHtmlAttributes = new Dictionary<string, object>();
 
-            MinValue = DateTime.Today;
-            MaxValue = DateTime.Today;
+            Min = DateTime.Today;
+            Max = DateTime.Today;
             
+            Value = null;
+            Enabled = true;
             Interval = 30;
 
             Dates = new List<DateTime>();
-
-            ButtonTitle = "Open the time view";
-            ShowButton = true;
+            ParseFormats = new List<string>();
         }
 
-        public IDictionary<string, object> DropDownHtmlAttributes { get; private set; }
+        public DatePickerClientEvents ClientEvents
+        {
+            get;
+            private set;
+        }
 
-        public int Interval { get; set; }
+        public string Format
+        {
+            get;
+            set;
+        }
 
-        public bool ShowButton { get; set; }
+        public List<string> ParseFormats
+        {
+            get;
+            set;
+        }
 
-        public string ButtonTitle { get; set; }
+        public DateTime? Value
+        {
+            get;
+            set;
+        }
 
-        public List<DateTime> Dates { get; set; }
+        public DateTime Min
+        {
+            get;
+            set;
+        }
+
+        public DateTime Max
+        {
+            get;
+            set;
+        }
+
+        public List<DateTime> Dates 
+        { 
+            get; 
+            set; 
+        }
+
+        public int Interval
+        {
+            get;
+            set;
+        }
+
+        public bool Enabled
+        {
+            get;
+            set;
+        }
 
         public override void WriteInitializationScript(System.IO.TextWriter writer)
         {
-            IClientSideObjectWriter objectWriter = ClientSideObjectWriterFactory.Create(Id, "tTimePicker", writer);
+            IClientSideObjectWriter objectWriter = ClientSideObjectWriterFactory.Create(Id, "kendoTimePicker", writer);
 
             objectWriter.Start();
-            
-            if (!defaultEffects.SequenceEqual(Effects.Container))
-            {
-                objectWriter.Serialize("effects", Effects);
-            }
 
             ClientEvents.SerializeTo(objectWriter);
 
             objectWriter.Append("format", this.Format);
-            objectWriter.Append("minValue", this.MinValue);
-            objectWriter.Append("maxValue", this.MaxValue);
+            objectWriter.AppendCollection("parseFormats", this.ParseFormats);
+
+            objectWriter.Append("min", this.Min);
+            objectWriter.Append("max", this.Max);
+
             objectWriter.Append("interval", this.Interval);
-            objectWriter.Append("selectedValue", this.Value);
-            objectWriter.Append("enabled", this.Enabled, true);
-            objectWriter.Append("openOnFocus", this.OpenOnFocus, false);
             objectWriter.Append("dates", this.Dates);
-
-            if (DropDownHtmlAttributes.Any())
-            {
-                objectWriter.Append("dropDownAttr", DropDownHtmlAttributes.ToAttributeString());
-            }
-
+            
             objectWriter.Complete();
 
             base.WriteInitializationScript(writer);
@@ -78,7 +107,6 @@ namespace Kendo.Mvc.UI
 
         protected override void WriteHtml(System.Web.UI.HtmlTextWriter writer)
         {
-            Name = Name ?? ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(string.Empty);
             TimePickerHtmlBuilder renderer = new TimePickerHtmlBuilder(this);
 
             renderer.Build().WriteTo(writer);
