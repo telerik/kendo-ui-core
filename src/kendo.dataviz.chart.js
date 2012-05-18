@@ -1220,7 +1220,7 @@
                             ) / baseUnitTime,
                 defaults = {
                     baseUnit: baseUnit,
-                    minorUnit: 1
+                    minorUnit: majorUnit / 5
                 };
 
             var actualUnits = duration(autoMin, autoMax, baseUnit);
@@ -1247,7 +1247,7 @@
             var options = this.options;
 
             return math.floor(
-                duration(options.min, options.max, options.baseUnit) / options.majorUnit + 1
+                duration(options.min, options.max, options.baseUnit) / stepValue + 1
             );
         },
 
