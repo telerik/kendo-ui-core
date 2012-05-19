@@ -66,7 +66,8 @@ namespace Kendo.Mvc.UI
 
             json["type"] = "aspnetmvc-" + Type.ToString().ToLower();
 
-            if (OrderBy.Any())
+            // serialize empty array in order to override initial sort on postback
+            if (OrderBy.Any() || ServerSorting) 
             {
                 json["sort"] = OrderBy.ToJson();
             }
@@ -83,7 +84,7 @@ namespace Kendo.Mvc.UI
 
             if (Aggregates.Any())
             {
-                json["aggregates"] = Aggregates.SelectMany(agg => agg.Aggregates.ToJson()); ;    
+                json["aggregates"] = Aggregates.SelectMany(agg => agg.Aggregates.ToJson());
             }
 
             if (Filters.Any())
