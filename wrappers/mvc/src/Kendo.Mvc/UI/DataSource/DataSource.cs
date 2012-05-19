@@ -12,7 +12,7 @@ namespace Kendo.Mvc.UI
         {
             Transport = new Transport();
 
-            Filters = new List<CompositeFilterDescriptor>();
+            Filters = new List<IFilterDescriptor>();
             OrderBy = new List<SortDescriptor>();
             Groups = new List<GroupDescriptor>();
             Aggregates = new List<AggregateDescriptor>();
@@ -87,9 +87,9 @@ namespace Kendo.Mvc.UI
                 json["aggregates"] = Aggregates.SelectMany(agg => agg.Aggregates.ToJson());
             }
 
-            if (Filters.Any())
+            if (Filters.Any() || ServerFiltering)
             {
-                json["filters"] = Filters.ToJson();
+                json["filter"] = Filters.OfType<FilterDescriptorBase>().ToJson();
                 
             }            
         }        
@@ -100,7 +100,7 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        public IList<CompositeFilterDescriptor> Filters
+        public IList<IFilterDescriptor> Filters
         {
             get;
             private set;
@@ -205,6 +205,20 @@ namespace Kendo.Mvc.UI
             else
             {
                 Groups.Clear();
+            }
+
+            if (request.Filters == null)
+            {
+                request.Filters = Filters;
+            }
+            else if (request.Filters.Any())
+            {
+                Filters.Clear();
+                Filters.AddRange(request.Filters);
+            }
+            else
+            {
+                Filters.Clear();
             }
 
             var result = Data.AsQueryable().ToDataSource(request);

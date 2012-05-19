@@ -5,15 +5,19 @@
     @(Html.Kendo().Grid(Model)    
         .Name("Grid")
         .Pageable()
-        //.Sortable()
-        .Scrollable()         
-        .Groupable()     
-        .DataSource(dataSource => dataSource.Read(read => read.Url("Index", "Grid"))
-            .Type(DataSourceType.Server)
-            .Group(group => {
+        .Sortable()
+        .Scrollable() 
+        .Filterable()             
+        .DataSource(dataSource => dataSource.Type(DataSourceType.Server)
+            .PageSize(23)
+        /*    .Group(group => {
                 group.Add(exp => exp.CategoryID);
                 group.Add(exp => exp.ProductID);
-            })
+            })*/
+            .Read(read => read.Url("Index", "Grid"))
+            .Sort(s => s.Add(p => p.ProductID).Descending())
+            .Filter(filters => filters.Add(p => p.ProductID).IsEqualTo(2))
+            )
         )
     )
 </div>

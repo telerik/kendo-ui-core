@@ -65,7 +65,7 @@ namespace Kendo.Mvc.UI
 
             if (grid.Filtering.Enabled)
             {
-                writer.Append("selectable", true);
+                writer.Append("filterable", true);
             }
 
             if (grid.DataBinding.IsClientOperationMode)

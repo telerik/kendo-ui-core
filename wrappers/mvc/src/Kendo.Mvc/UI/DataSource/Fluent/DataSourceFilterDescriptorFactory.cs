@@ -9,14 +9,14 @@ namespace Kendo.Mvc.UI.Fluent
 
     public class DataSourceFilterDescriptorFactory<TModel> : IHideObjectMembers where TModel : class
     {
-        public DataSourceFilterDescriptorFactory(IList<CompositeFilterDescriptor> filters)
+        public DataSourceFilterDescriptorFactory(IList<IFilterDescriptor> filters)
         {
             Guard.IsNotNull(filters, "filters");
 
             Filters = filters;
         }
 
-        protected IList<CompositeFilterDescriptor> Filters { get; private set; }
+        protected IList<IFilterDescriptor> Filters { get; private set; }
 
         public virtual DataSourceFilterEqualityDescriptorBuilder<bool> Add(Expression<Func<TModel, bool>> expression)
         {

@@ -26,6 +26,8 @@
         [Fact]
         public void ToJson_serverPaging_is_not_serialized_if_not_set()
         {
+            dataSource.ServerPaging = false;
+
             var result = dataSource.ToJson();
             result.ContainsKey("serverPaging").ShouldBeFalse();
         }
@@ -42,6 +44,8 @@
         [Fact]
         public void ToJson_serverSorting_is_not_serialized_if_not_set()
         {
+            dataSource.ServerSorting = false;
+
             var result = dataSource.ToJson();
             result.ContainsKey("serverSorting").ShouldBeFalse();
         }
@@ -58,6 +62,8 @@
         [Fact]
         public void ToJson_serverFiltering_is_not_serialized_if_not_set()
         {
+            dataSource.ServerFiltering = false;
+
             var result = dataSource.ToJson();
             result.ContainsKey("serverFiltering").ShouldBeFalse();
         }
@@ -74,6 +80,7 @@
         [Fact]
         public void ToJson_serverGrouping_is_not_serialized_if_not_set()
         {
+            dataSource.ServerGrouping = false;
             var result = dataSource.ToJson();
             result.ContainsKey("serverGrouping").ShouldBeFalse();
         }
@@ -90,6 +97,7 @@
         [Fact]
         public void ToJson_serverAggregates_is_not_serialized_if_not_set()
         {
+            dataSource.ServerAggregates = false;
             var result = dataSource.ToJson();
             result.ContainsKey("serverAggregates").ShouldBeFalse();
         }
@@ -106,7 +114,7 @@
         public void ToJson_pageSize_is_not_serialized_if_not_set()
         {            
             var result = dataSource.ToJson();
-            result.ContainsKey("serverAggregates").ShouldBeFalse();
+            result.ContainsKey("pageSize").ShouldBeFalse();
         }
 
         [Fact]
@@ -153,6 +161,8 @@
         [Fact]
         public void ToJson_sort_expressions_are_not_serialized_if_not_set()
         {
+            dataSource.ServerSorting = false;
+
             var result = dataSource.ToJson();
 
             result.ContainsKey("sort").ShouldBeFalse();

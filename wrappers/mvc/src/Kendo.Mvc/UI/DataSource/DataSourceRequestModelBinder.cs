@@ -1,7 +1,8 @@
-﻿using System;
+﻿﻿using System;
 using System.Linq;
 using System.Web.Mvc;
 using Kendo.Mvc.Extensions;
+using Kendo.Mvc.Infrastructure;
 
 namespace Kendo.Mvc.UI
 {
@@ -11,10 +12,9 @@ namespace Kendo.Mvc.UI
         {
             DataSourceRequest request = new DataSourceRequest();
 
-            string sort, group;
+            string sort, group, filter;
             int currentPage;
-            int pageSize;
-            
+            int pageSize;            
 
             if (TryGetValue(bindingContext, GridUrlParameters.OrderBy, out sort))
             {
@@ -29,6 +29,11 @@ namespace Kendo.Mvc.UI
             if (TryGetValue(bindingContext, GridUrlParameters.PageSize, out pageSize))
             {
                 request.PageSize = pageSize;
+            }
+
+            if (TryGetValue(bindingContext, GridUrlParameters.Filter, out filter))
+            {
+                request.Filters = FilterDescriptorFactory.Create(filter);
             }
 
             if (TryGetValue(bindingContext, GridUrlParameters.GroupBy, out group))
@@ -62,4 +67,4 @@ namespace Kendo.Mvc.UI
             return true;
         }
     }
-}
+}         

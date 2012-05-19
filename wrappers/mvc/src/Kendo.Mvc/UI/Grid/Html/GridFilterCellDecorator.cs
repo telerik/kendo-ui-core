@@ -14,16 +14,19 @@ namespace Kendo.Mvc.UI.Html
         }
 
         public void Decorate(IHtmlNode td)
-        {
-            var wrapper = new HtmlElement("div")
-                .AddClass("k-grid-filter", "t-state-default")
-                .ToggleClass("t-active-filter", filtered);
+        {            
+            td.AddClass("k-filterable");
 
-            wrapper.AppendTo(td);
+            var link = new HtmlElement("a")
+                .AddClass("k-grid-filter")
+                .ToggleClass("k-active-filter", filtered);
 
-            var icon = new HtmlElement("span").AddClass("t-icon", "t-filter").Text(filterText);
+
+            td.Children.Insert(0, link);
+
+            var icon = new HtmlElement("span").AddClass("k-icon", "k-filter").Text(filterText);
             
-            icon.AppendTo(wrapper);
+            icon.AppendTo(link);
         }
     }
 }

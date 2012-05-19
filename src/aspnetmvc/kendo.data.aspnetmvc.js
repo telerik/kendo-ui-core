@@ -1,5 +1,6 @@
 (function ($, undefined) {
-   var kendo = window.kendo;
+   var kendo = window.kendo,
+       escapeQuoteRegExp = /'/ig;
 
    function parameterMap(options) {
        var result = {};
@@ -17,10 +18,34 @@
        if (options.group) {
             result[this.options.prefix + "groupBy"] = $.map(options.group, function(group) {
                return group.field + "-" + group.dir;
-            }).join("~");
+           }).join("~");
+       }
+
+       if (options.filter) {
+           result[this.options.prefix + "filter"] = serializeFilter(options.filter);
        }
 
        return result;
+   }
+
+
+   function serializeFilter(filter) {
+       if (filter.filters) {
+           return  $.map(filter.filters, function(f) {
+               return serializeFilter(f);
+           }).join("~" + filter.logic + "~");
+       }
+       return filter.field + "~" + filter.operator + "~" + encodeFilterValue(filter.value);
+   }
+
+   function encodeFilterValue(value) {
+       if (typeof value === "string") {
+           return "'" + value.replace(escapeQuoteRegExp, "''") + "'";
+       }
+       if (value && value.getTime) {
+           return "datetime'" + kendo.format('{0:yyyy-MM-ddTHH-mm-ss}', value) + "'";
+       }
+       return value;
    }
 
    kendo.data.transports["aspnetmvc-ajax"] = {

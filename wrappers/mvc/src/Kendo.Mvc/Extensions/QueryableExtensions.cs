@@ -54,7 +54,13 @@ namespace Kendo.Mvc.Extensions
         {
             var result = new DataSourceResult();
 
-            var data = queryable;
+            var data = queryable;    
+
+            var filters = new List<IFilterDescriptor>(request.Filters);
+            if (filters.Any())
+            {
+                data = data.Where(filters);
+            }
 
             var sort = new List<SortDescriptor>(request.Sorts);
 
@@ -95,7 +101,7 @@ namespace Kendo.Mvc.Extensions
 
             result.Data = data;
 
-            temporarySortDescriptors.Each(sortDescriptor => sort.Remove(sortDescriptor));
+            temporarySortDescriptors.Each(sortDescriptor => sort.Remove(sortDescriptor));            
 
             return result;
         }
