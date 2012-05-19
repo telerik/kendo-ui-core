@@ -176,7 +176,11 @@
      *
      * <h3>Getting Started</h3>
      * <p>Each mobile View initializes a scroller for its content element. In addition to that, a scroller will be initialized for every element with a
-     * <code>role</code> data attribute set to <code>scroller</code>. Alternatively, it can be initialized using jQuery selector.</p>
+     * <code>role</code> data attribute set to <code>scroller</code>.
+     * Alternatively, it can be initialized using jQuery plugin syntax in the containing mobile View <strong>init event handler</strong>.
+     * </p>
+     * <p>For the scroller to work, its element should have fixed dimensions (width and/or height) set.</p>
+     *
      * @exampleTitle Initialize mobile Scroller using a role data attribute.
      * @example
      * <div data-role="scroller">
