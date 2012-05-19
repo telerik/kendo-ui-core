@@ -342,15 +342,20 @@
         },
 
         _getChartElement: function(e) {
-            var modelId = $(e.target).data("modelId"),
-                model = this._model,
-                point;
+            var chart = this,
+                modelId = $(e.target).data("modelId"),
+                model = chart._model,
+                element;
 
             if (modelId) {
-                point = model.modelMap[modelId];
+                element = model.modelMap[modelId];
             }
 
-            return point;
+            if (element && element.aliasFor) {
+                element = element.aliasFor(e, chart._eventCoordinates(e));
+            }
+
+            return element;
         },
 
         _eventCoordinates: function(e) {
@@ -368,10 +373,10 @@
 
         _click: function(e) {
             var chart = this,
-                point = chart._getChartElement(e);
+                element = chart._getChartElement(e);
 
-            if (point && point.click) {
-                point.click(this, e);
+            if (element && element.click) {
+                element.click(this, e);
             }
         },
 
@@ -1995,22 +2000,11 @@
             ];
         },
 
-        click: function(chart, e) {
+        aliasFor: function(e, coords) {
             var segment = this,
-                coords = chart._eventCoordinates(e),
-                seriesIx = segment.seriesIx,
-                point = segment.parent.getNearestPoint(coords.x, coords.y, seriesIx);
+                seriesIx = segment.seriesIx;
 
-            point.click(chart, e);
-        },
-
-        hover: function(chart, e) {
-            var segment = this,
-                coords = chart._eventCoordinates(e),
-                seriesIx = segment.seriesIx,
-                point = segment.parent.getNearestPoint(coords.x, coords.y, seriesIx);
-
-            point.hover(chart, e);
+            return segment.parent.getNearestPoint(coords.x, coords.y, seriesIx);
         }
     });
 
