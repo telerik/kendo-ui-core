@@ -31,6 +31,10 @@
      * automatically added to the bottom of the actions.</p>
      * <p>In Android and Blackberry, the available actions are centered in the middle of the screen, and tapping the background closes it.</p>
      *
+     *
+     * <h3>ActionSheet in Tablets</h3>
+     * <p>If a tablet is detected, the ActionSheet widget will be displayed in a PopOver. The sizing and the direction of the popover may be customized through the <code>popup</code> configuration option.</p>
+     *
      * <h3>Opening an ActionSheet</h3>
      * <p>The widget can be open when any mobile navigational widget (listview, button, tabstrip, etc.) is tapped.
      * To do so, the navigational widget should have <code>data-rel="actionsheet"</code> and <code>href</code> attribute pointing to the ActionSheet's element <code>id</code> set.</p>
