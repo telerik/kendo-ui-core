@@ -7,8 +7,10 @@
         .Sortable()
         .Scrollable()              
         .DataSource(dataSource => dataSource.Type(DataSourceType.Server)
+            .PageSize(23)
             .Read(read => read.Url("Index", "Grid"))
-            .Sort(s => s.Add(p => p.ProductID).Descending()))
+            .Sort(s => s.Add(p => p.ProductID).Descending())
+            )
         )
     )
 </div>

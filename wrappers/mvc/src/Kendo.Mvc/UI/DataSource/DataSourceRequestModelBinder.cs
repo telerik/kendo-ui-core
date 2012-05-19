@@ -12,10 +12,22 @@ namespace Kendo.Mvc.UI
             DataSourceRequest request = new DataSourceRequest();
 
             string sort;
+            int currentPage;
+            int pageSize;
 
             if (TryGetValue(bindingContext, GridUrlParameters.OrderBy, out sort))
             {
                 request.Sorts = GridDescriptorSerializer.Deserialize<SortDescriptor>(sort);
+            }
+
+            if (TryGetValue(bindingContext, GridUrlParameters.CurrentPage, out currentPage))
+            {
+                request.Page = currentPage;
+            }
+
+            if (TryGetValue(bindingContext, GridUrlParameters.PageSize, out pageSize))
+            {
+                request.PageSize = pageSize;
             }
 
             return request;

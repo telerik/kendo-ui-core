@@ -16,6 +16,8 @@ namespace Kendo.Mvc.UI
             OrderBy = new List<SortDescriptor>();
             Groups = new List<GroupDescriptor>();
             Aggregates = new List<AggregateDescriptor>();
+
+            ServerPaging = ServerSorting = ServerGrouping = ServerFiltering = ServerAggregates = true;
         }
 
         public int TotalPages { get; set; }
@@ -34,6 +36,7 @@ namespace Kendo.Mvc.UI
             if (PageSize > 0)
             {
                 json["pageSize"] = PageSize;
+                json["total"] = Total;
             }
 
             if (ServerPaging)
@@ -87,7 +90,7 @@ namespace Kendo.Mvc.UI
             {
                 json["filters"] = Filters.ToJson();
                 
-            }
+            }            
         }        
 
         public DataSourceType Type
@@ -181,7 +184,12 @@ namespace Kendo.Mvc.UI
             }
             else
             {
-                OrderBy.Clear();
+                OrderBy.Clear();                
+            }
+
+            if (request.PageSize == 0)
+            {
+                request.PageSize = PageSize;
             }
 
             var result = Data.AsQueryable().ToDataSource(request);
