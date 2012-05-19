@@ -59,7 +59,7 @@
      *
      * <p>After the callback has been executed, the ActionSheet closes automatically.</p>
      *
-     * @exampleTitle Mobile ActionSheet Actions and Context
+     * @exampleTitle Mobile ActionSheet actions and context
      * @example
      * <a id="myButton"
      *  data-role="button"
