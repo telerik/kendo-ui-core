@@ -5,9 +5,13 @@
        var result = {};
 
        if (options.sort) {
-            result[this.options.prefix + "orderBy"] = $.map(options.sort, function(sort) {
+           result[this.options.prefix + "orderBy"] = $.map(options.sort, function(sort) {
                return sort.field + "-" + sort.dir;
-            }).join("~");
+           }).join("~");
+       }
+
+       if (options.page) {
+           result[this.options.prefix + "page"] = options.page;
        }
 
        return result;

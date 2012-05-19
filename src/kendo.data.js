@@ -1409,7 +1409,8 @@
                 _sort: normalizeSort(options.sort),
                 _filter: normalizeFilter(options.filter),
                 _group: normalizeGroup(options.group),
-                _aggregate: options.aggregate
+                _aggregate: options.aggregate,
+                _total: options.total
             });
 
             Observable.fn.init.call(that);

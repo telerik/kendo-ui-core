@@ -19,6 +19,7 @@ namespace Kendo.Mvc.UI.Html
                 .Text(text)
                 .ToggleClass(UIPrimitives.Link, enabled)
                 .ToggleAttribute("href", url, enabled)
+                .Attribute("data-page", text)
                 .ToggleClass(UIPrimitives.ActiveState, !enabled);
 
             var li = new HtmlElement("li");
