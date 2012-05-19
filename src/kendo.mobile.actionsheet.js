@@ -2,6 +2,7 @@
     var kendo = window.kendo,
         ui = kendo.mobile.ui,
         Shim = ui.Shim,
+        Popup = ui.Popup,
         Widget = ui.Widget,
         OPEN = "open",
         BUTTONS = "li>a",
@@ -82,10 +83,15 @@
          * @param {DomElement} element DOM element.
          * @param {Object} options Configuration options.
          * @option {String} [cancel] <Cancel> The text of the cancel button.
+         * @option {Object} [popup] The popup configuration options (tablet only).
+         * @option {Number | String} [popup.width] <240> The width of the popup in pixels.
+         * @option {Number | String} [popup.height] <auto> The height of the popup in pixels.
+         * @option {Number | String} [popup.direction] <down> The direction to which the popup will expand, relative to the target that opened it.
          */
         init: function(element, options) {
             var that = this,
                 os = kendo.support.mobileOS,
+                ShimClass = os.tablet ? Popup : Shim,
                 wrapper;
 
             Widget.fn.init.call(that, element, options);
@@ -102,7 +108,7 @@
             wrapper = element.parent();
 
             that.wrapper = wrapper;
-            that.shim = new Shim(that.wrapper, {modal: !(os.android || os.meego)});
+            that.shim = new ShimClass(that.wrapper, $.extend({modal: !(os.android || os.meego)}, that.options.popup) );
 
             kendo.notify(that, ui);
         },
@@ -121,7 +127,8 @@
 
         options: {
             name: "ActionSheet",
-            cancel: 'Cancel'
+            cancel: "Cancel",
+            popup: { height: "auto" }
         },
 
         /**
@@ -152,7 +159,7 @@
             that.target = target;
             that.context = target.data(CONTEXT_DATA);
             that.trigger(OPEN, { target: that.target, context: that.context });
-            that.shim.show();
+            that.shim.show(target);
         },
 
         _click: function(e) {
