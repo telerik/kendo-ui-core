@@ -32,15 +32,12 @@
                     },
                     dataSource: data,
                     series: [{
-                        type: "scatterLine",
-                        xField: "date",
-                        yField: "price"
+                        type: "line",
+                        field: "price"
                     }],
-                    xAxis: {
+                    categoryAxis: {
                         type: "Date",
-                        majorGridLines: {
-                            visible: true
-                        },
+                        field: "date",
                         minorTicks: {
                             visible: true
                         }
@@ -48,14 +45,6 @@
                         //majorUnit: 9,
                         //min: new Date("2012/02/01"),
                         //max: "2012/02/10"
-                    },
-                    yAxis: {
-                        labels: {
-                            format: "${0:N}"
-                        },
-                        majorGridLines: {
-                            visible: false // bug?
-                        }
                     }
                 });
             });
