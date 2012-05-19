@@ -56,18 +56,46 @@ namespace Kendo.Mvc.Extensions
 
             var data = queryable;
 
-            result.Total = data.Count();
-
             var sort = new List<SortDescriptor>(request.Sorts);
+
+            var temporarySortDescriptors = new List<SortDescriptor>();
+
+            var group = request.Groups;
+
+            result.Total = data.Count();            
+
+            if (group.Any())
+            {                
+                group.Reverse().Each(groupDescriptor =>
+                {
+                    var sortDescriptor = new SortDescriptor
+                    {
+                        Member = groupDescriptor.Member,
+                        SortDirection = groupDescriptor.SortDirection
+                    };
+
+                    sort.Insert(0, sortDescriptor);
+                    temporarySortDescriptors.Add(sortDescriptor);
+                });
+            }
 
             if (sort.Any())
             {
                 data = data.Sort(sort);
             }
 
+            var notPagedData = data;
+
             data = data.Page(request.Page - 1, request.PageSize);
 
+            if (group.Any())
+            {
+                data = data.GroupBy(notPagedData, group);
+            }
+
             result.Data = data;
+
+            temporarySortDescriptors.Each(sortDescriptor => sort.Remove(sortDescriptor));
 
             return result;
         }

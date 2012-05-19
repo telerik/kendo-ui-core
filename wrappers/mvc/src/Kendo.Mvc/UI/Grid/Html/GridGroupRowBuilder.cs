@@ -16,7 +16,7 @@ namespace Kendo.Mvc.UI.Html
 
         public IHtmlNode CreateRow()
         {
-            var tr = new HtmlElement("tr").AddClass("t-grouping-row");
+            var tr = new HtmlElement("tr").AddClass("k-grouping-row");
 
             var td = new HtmlElement("td")
                 .Attribute("colspan", colspan.ToString())
@@ -31,7 +31,7 @@ namespace Kendo.Mvc.UI.Html
             var p = new HtmlElement("p").AddClass(UIPrimitives.ResetStyle)
                 .AppendTo(td);
 
-            new HtmlElement("a").AddClass(UIPrimitives.Icon, "t-collapse")
+            new HtmlElement("a").AddClass(UIPrimitives.Icon, "k-collapse")
                 .Attribute("href", "#")
                 .AppendTo(p);
             

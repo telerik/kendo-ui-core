@@ -11,9 +11,10 @@ namespace Kendo.Mvc.UI
         {
             DataSourceRequest request = new DataSourceRequest();
 
-            string sort;
+            string sort, group;
             int currentPage;
             int pageSize;
+            
 
             if (TryGetValue(bindingContext, GridUrlParameters.OrderBy, out sort))
             {
@@ -28,6 +29,11 @@ namespace Kendo.Mvc.UI
             if (TryGetValue(bindingContext, GridUrlParameters.PageSize, out pageSize))
             {
                 request.PageSize = pageSize;
+            }
+
+            if (TryGetValue(bindingContext, GridUrlParameters.GroupBy, out group))
+            {
+                request.Groups = GridDescriptorSerializer.Deserialize<GroupDescriptor>(group);
             }
 
             return request;
