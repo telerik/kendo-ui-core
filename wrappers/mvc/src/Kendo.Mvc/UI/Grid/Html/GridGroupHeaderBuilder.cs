@@ -10,7 +10,7 @@ namespace Kendo.Mvc.UI.Html
     {
         public IHtmlNode CreateGroupHeader(GridGroupingData groupingData)
         {
-            var div = new HtmlElement("div").AddClass("t-grouping-header");
+            var div = new HtmlElement("div").AddClass("k-grouping-header");
 
             if (groupingData.GroupDescriptors.Any())
             {
@@ -44,6 +44,10 @@ namespace Kendo.Mvc.UI.Html
             var groups = new List<GroupDescriptor>(groupingData.GroupDescriptors);
 
             var indicator = new HtmlElement("div").AddClass(UIPrimitives.Grid.GroupIndicator);
+
+            indicator.Attribute("data-field", group.Member)
+                .Attribute("data-dir", group.SortDirection == ListSortDirection.Ascending ? "asc" : "desc")
+                .Attribute("data-title", groupingData.GetTitle(group.Member));
 
             indicator.AppendTo(div);
 
@@ -79,8 +83,8 @@ namespace Kendo.Mvc.UI.Html
 
             new HtmlElement("span")
                 .AddClass(UIPrimitives.Icon)
-                .ToggleClass("t-arrow-up-small", group.SortDirection == ListSortDirection.Ascending)
-                .ToggleClass("t-arrow-down-small", group.SortDirection == ListSortDirection.Descending)
+                .ToggleClass("k-arrow-up-small", group.SortDirection == ListSortDirection.Ascending)
+                .ToggleClass("k-arrow-down-small", group.SortDirection == ListSortDirection.Descending)
                 .Text(String.Format("({0})", group.SortDirection == ListSortDirection.Ascending ? sortedAscText : sortedDescText))
                 .AppendTo(a);
 

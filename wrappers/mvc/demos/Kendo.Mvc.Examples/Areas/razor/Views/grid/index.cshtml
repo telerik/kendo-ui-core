@@ -1,18 +1,19 @@
 @model IEnumerable<Product>
 
+<script src="@Url.Content("~/Scripts/kendo.grid.js")"></script>
 <div id="example" class="k-content">
-    @(Html.Kendo().Grid(Model)
+    @(Html.Kendo().Grid(Model)    
         .Name("Grid")
         .Pageable()
-        .Sortable()
-        .Scrollable()              
-        .DataSource(dataSource => dataSource.Type(DataSourceType.Server)
-            .PageSize(23)
-            .Read(read => read.Url("Index", "Grid"))
-            .Sort(s => s.Add(p => p.ProductID).Descending())
-            )
+        //.Sortable()
+        .Scrollable()         
+        .Groupable()     
+        .DataSource(dataSource => dataSource.Read(read => read.Url("Index", "Grid"))
+            .Type(DataSourceType.Server)
+            .Group(group => {
+                group.Add(exp => exp.CategoryID);
+                group.Add(exp => exp.ProductID);
+            })
         )
     )
 </div>
-<script>
-</script>

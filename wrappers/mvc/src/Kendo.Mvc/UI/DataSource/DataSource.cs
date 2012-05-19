@@ -193,6 +193,20 @@ namespace Kendo.Mvc.UI
                 request.PageSize = PageSize;
             }
 
+            if (request.Groups == null)
+            {
+                request.Groups = Groups;
+            }
+            else if (request.Groups.Any())
+            {
+                Groups.Clear();
+                Groups.AddRange(request.Groups);
+            }
+            else
+            {
+                Groups.Clear();
+            }
+
             var result = Data.AsQueryable().ToDataSource(request);
 
             Page = request.Page;
