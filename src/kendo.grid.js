@@ -1796,7 +1796,7 @@
 
             if (filterable) {
                 that.thead
-                    .find("th:not(.k-hierarchy-cell)")
+                    .find("th:not(.k-hierarchy-cell,.k-group-cell)")
                     .each(function(index) {
                         if (columns[index].filterable !== false) {
                             $(this).kendoFilterMenu(extend(true, {}, filterable, columns[index].filterable, { dataSource: that.dataSource }));
@@ -1813,7 +1813,7 @@
 
             if (sortable) {
                 that.thead
-                    .find("th:not(.k-hierarchy-cell)")
+                    .find("th:not(.k-hierarchy-cell,.k-group-cell)")
                     .each(function(index) {
                         column = columns[index];
                         if (column.sortable !== false && !column.command) {
