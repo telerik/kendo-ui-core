@@ -326,6 +326,10 @@
     <Compile Include="UI\DatePickerBase\Fluent\MonthTemplateBuilder.cs" />
     <Compile Include="UI\DatePicker\MonthTemplate.cs" />
     <Compile Include="Infrastructure\JsonObject.cs" />
+    <Compile Include="UI\Gauge\Fluent\GaugeRadialScaleBuilder.cs" />
+    <Compile Include="UI\Gauge\Scales\IRadialScale.cs" />
+    <Compile Include="UI\Gauge\Scales\GaugeRadialScale.cs" />
+    <Compile Include="UI\Gauge\Serialization\GaugeRadialScaleSerializer.cs" />
     <Compile Include="UI\DatePickerBase\DatePickerBase.cs" />
     <Compile Include="UI\DatePickerBase\Fluent\DatePickerBaseBuilder.cs" />
     <Compile Include="UI\DatePickerBase\Fluent\DatePickerClientEventsBuilder.cs" />
@@ -1106,6 +1110,7 @@
       <Link>Scripts\kendo.validator.aspnetmvc.js</Link>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <ItemGroup>
