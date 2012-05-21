@@ -89,6 +89,7 @@
     <Compile Include="Controllers\Slider\IndexController.cs" />
     <Compile Include="Controllers\SuiteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TreeView\ImagesController.cs" />
     <Compile Include="Controllers\TreeView\DragDropController.cs" />
     <Compile Include="Controllers\TreeView\IndexController.cs" />
     <Compile Include="Controllers\Upload\AsyncController.cs" />
@@ -235,6 +236,7 @@
     <Content Include="Areas\razor\Views\grid\customajaxbinding.cshtml" />
     <Content Include="Areas\razor\Views\treeview\index.cshtml" />
     <Content Include="Areas\razor\Views\treeview\dragdrop.cshtml" />
+    <Content Include="Areas\razor\Views\treeview\images.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
