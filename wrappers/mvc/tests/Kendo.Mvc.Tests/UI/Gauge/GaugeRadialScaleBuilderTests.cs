@@ -12,7 +12,7 @@ namespace Kendo.Mvc.UI.Tests.Gauge
         {
             var gauge = GaugeTestHelper.CreateRadialGauge();
             scale = new GaugeRadialScale(gauge);
-            gauge.RadialScale = scale;
+            gauge.Scale = scale;
             builder = new GaugeRadialScaleBuilder(gauge);
         }
 

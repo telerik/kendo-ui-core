@@ -1,20 +1,13 @@
 namespace Kendo.Mvc.UI
 {
-    using System.Collections.Generic;
-
     /// <summary>
-    /// Defines a generic IRadialScale.
+    /// Defines a generic ILinearScale.
     /// </summary>
     public interface ILinearScale : IGaugeScale
     {
         /// <summary>
-        /// The scale end angle.s
+        /// The scale mirror.
         /// </summary>
-        double? EndAngle { get; set; }
-
-        /// <summary>
-        /// The scale start angle.
-        /// </summary>
-        double? StartAngle { get; set; }
+        bool? Mirror { get; set; }
     }
 }

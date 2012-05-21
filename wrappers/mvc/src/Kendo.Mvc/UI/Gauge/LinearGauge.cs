@@ -16,6 +16,16 @@ namespace Kendo.Mvc.UI
         public LinearGauge(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory, IUrlGenerator urlGenerator)
             : base(viewContext, clientSideObjectWriterFactory, urlGenerator)
         {
+            Scale = new GaugeLinearScale(this);
+        }
+
+        /// <summary>
+        /// Configuration for the default scale (if any)
+        /// </summary>
+        public ILinearScale Scale
+        {
+            get;
+            set;
         }
 
         /// <summary>

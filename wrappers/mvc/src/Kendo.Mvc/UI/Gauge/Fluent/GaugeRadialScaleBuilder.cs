@@ -10,7 +10,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <param name="gauge">The gauge component.</param>
         public GaugeRadialScaleBuilder(RadialGauge gauge)
-            : base(gauge.RadialScale)
+            : base(gauge.Scale)
         {
             radialGauge = gauge;
         }
@@ -40,7 +40,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>        
         public GaugeRadialScaleBuilder EndAngle(double endAngle)
         {
-            radialGauge.RadialScale.EndAngle = endAngle;
+            radialGauge.Scale.EndAngle = endAngle;
             return this;
         }
 
@@ -60,7 +60,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>        
         public GaugeRadialScaleBuilder StartAngle(double startAngle)
         {
-            radialGauge.RadialScale.StartAngle = startAngle;
+            radialGauge.Scale.StartAngle = startAngle;
             return this;
         }
     }

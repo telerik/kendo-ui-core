@@ -326,6 +326,7 @@
     <Compile Include="UI\DatePickerBase\Fluent\MonthTemplateBuilder.cs" />
     <Compile Include="UI\DatePicker\MonthTemplate.cs" />
     <Compile Include="Infrastructure\JsonObject.cs" />
+    <Compile Include="UI\Gauge\Fluent\GaugeLinearScaleBuilder.cs" />
     <Compile Include="UI\Gauge\Fluent\GaugeRadialScaleBuilder.cs" />
     <Compile Include="UI\Gauge\Scales\IRadialScale.cs" />
     <Compile Include="UI\Gauge\Scales\GaugeLinearScale.cs" />
