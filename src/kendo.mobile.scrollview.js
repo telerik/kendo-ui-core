@@ -172,7 +172,7 @@
             var that = this,
                 pageHTML = "",
                 dimension = that.dimension,
-                width = dimension.size,
+                width = dimension.getSize(),
                 pages;
 
             that.element.find("[data-role=page]").width(width);
@@ -180,7 +180,7 @@
 
             that.scrollTo(that.page);
 
-            pages = that.pages = ceil(dimension.total / width);
+            pages = that.pages = ceil(dimension.getTotal() / width);
 
             that.minSnap = - (pages - 1) * width;
             that.maxSnap = 0;
@@ -222,7 +222,7 @@
          */
         scrollTo: function(page) {
             this.page = page;
-            this._moveTo(- page * this.dimension.size, Transition.easeOutExpo);
+            this._moveTo(- page * this.dimension.getSize(), Transition.easeOutExpo);
         },
 
         _moveTo: function(location, ease) {

@@ -154,7 +154,7 @@
         },
 
         _click: function(e) {
-            if (e.originalEvent && e.originalEvent.defaultPrevented) {
+            if (e.isDefaultPrevented()) {
                 return;
             }
 
