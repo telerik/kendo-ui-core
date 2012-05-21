@@ -21,7 +21,8 @@ namespace Kendo.Mvc.UI
                   //.Add("attr", column.HtmlAttributes.ToAttributeString(), () => column.HtmlAttributes.Any())
                   .Add("title", column.Title)
                   .Add("hidden", column.Hidden, false)
-                  .Add("includeInContextMenu", column.IncludeInContextMenu, () => !column.IncludeInContextMenu)
+                 //TODO: Implement HeaderContextMenu
+                 // .Add("includeInContextMenu", column.IncludeInContextMenu, () => !column.IncludeInContextMenu)
                   .Add("width", column.Width, () => column.Hidden && !string.IsNullOrEmpty(column.Width));
 
             if (column.ClientTemplate.HasValue())                  

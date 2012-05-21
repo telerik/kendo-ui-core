@@ -268,6 +268,8 @@ namespace Kendo.Mvc.UI.Fluent
             return this as TColumnBuilder;
         }
 
+        //TODO: Implement HeaderContextMenu
+        /*
         /// <summary>
         /// Specifys whether the columns should be included in column context menu. By default all columns are included. 
         /// The column also need a Title to be set in order to be include in the context menu.
@@ -286,6 +288,7 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this as TColumnBuilder;
         }
+        */
 
         //TODO: Implement Header template configuration
         /*
