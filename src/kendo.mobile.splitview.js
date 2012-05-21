@@ -16,10 +16,22 @@
      * @exampleTitle Mobile SplitView with two panes
      * @example
      * <div data-role="splitview">
+     *
+     *   <div data-role="pane" id="side-pane">
+     *     <div data-role="view" data-title="Messages">
+     *        <ul data-role="listview">
+     *          <li><a href="#foo" data-target="main-pane">Foo</a></li><!-- link to main pane -->
+     *          <li><a href="#bar">Bar</a></li><!-- link to same pane -->
+     *        </ul>
+     *     </div>
+     *   </div>
+     *
      *   <div data-role="pane" data-layout="main-default" id="main-pane">
      *     <div data-role="view" data-title="Messages">
      *         No message selected
      *     </div>
+     *
+     *     ...
      *
      *     <div data-role="layout" data-id="main-default">
      *         <div data-role="header">
@@ -29,13 +41,13 @@
      *         </div>
      *     </div>
      *   </div>
+     *
      * </div>
      *
      * @section
      * <h3>Customizing appearance</h3>
      * By default Kendo UI Mobile is configured to show a horizontal SplitView with smaller left and bigger right pane in 1:2 proportion.
-     * In order to resize one of the panes, you can use CSS to set its width or adjust the flexibility of the flex boxes (if you set the width,
-     * you will need to set the flexibility of the other pane to a high number (like 1000).
+     * In order to resize one of the panes, use CSS to set its width or adjust the flexibility of the flex boxes (if the width is set, the other pane flexibility should be set to a high numer, like 1000).
      *
      * @exampleTitle Set pane width to 300px or change the proportions to 1:3
      * @example
