@@ -924,27 +924,27 @@
     border-bottom: 1px solid #000;
 }
 
-.km-ios .km-pane .km-view-title
+.km-ios .km-splitview .km-view-title
 {
     color: #777;
     text-shadow: 0 1px rgba(255,255,255,.8);
 }
 
-.km-ios .km-pane .km-navbar .km-button
+.km-ios .km-splitview .km-navbar .km-button
 {
     background-color: #777
 }
 
-.km-ios .km-pane .km-navbar,
-.km-ios .km-pane .km-toolbar
+.km-ios .km-splitview .km-navbar,
+.km-ios .km-splitview .km-toolbar
 {
     .box-shadow(inset 0 -1px 3px rgba(0,0,0,.2));
     background-color: #eee;
 }
 
-.km-ios .km-pane .km-navbar,
-.km-ios .km-pane .km-toolbar,
-.km-ios .km-pane .km-view > :first-child
+.km-ios .km-splitview .km-navbar,
+.km-ios .km-splitview .km-toolbar,
+.km-ios .km-splitview .km-view > :first-child
 {
     .border-radius(5px 5px 0 0);
     -webkit-border-top-left-radius: 5px;
@@ -952,13 +952,13 @@
     border-bottom: 1px solid rgba(0,0,0,.3);
 }
 
-.km-ios .km-pane .km-view > :first-child
+.km-ios .km-splitview .km-view > :first-child
 {
     border-bottom: 1px solid rgba(0,0,0,.3);
 }
 
-.km-ios .km-pane .km-tabstrip,
-.km-ios .km-pane .km-view > :last-child
+.km-ios .km-splitview .km-tabstrip,
+.km-ios .km-splitview .km-view > :last-child
 {
     .border-radius(0 0 5px 5px);
     -webkit-border-bottom-left-radius: 5px;
@@ -974,3 +974,68 @@
 {
     border: 0;
 }
+
+/* PopOver */
+
+.km-ios .km-popup.km-pane .km-navbar .km-button
+{
+    background-color: rgba(10,18,38,.9);
+}
+
+.km-ios .km-popup.km-pane
+{
+    background: rgba(10,18,38,.9);
+    border: 5px solid transparent;
+    .border-radius(5px);
+    .box-shadow(~"0 5px 5px rgba(0,0,0,.3), 0 0 2px rgba(0,0,0,.5)");
+}
+
+.km-ios .km-popup.km-pane .km-view
+{
+    overflow: visible;
+    .border-radius(0);
+}
+
+.km-ios .km-popup.km-pane .km-navbar,
+.km-ios .km-popup.km-pane .km-toolbar,
+.km-ios .km-popup.km-pane .km-tabstrip
+{
+    background: none;
+    .box-shadow(none);
+}
+
+.km-ios .km-popup.km-pane .km-header
+{
+    padding: 0 5px;
+    margin: -5px 0 2px -5px;
+    .border-radius(5px);
+    -webkit-margin-collapse: separate;
+    background: linear-gradient(top, rgba(255,255,255,0.35), rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 50%, rgba(255,255,255,0));
+}
+
+.km-ios .km-popup-arrow:after,
+.km-ios .km-popup-arrow:before
+{
+    border-color: rgba(0,0,0,.5) transparent;
+    border-style: solid;
+    border-width: 0 15px 15px;
+}
+
+.km-ios .km-popup-arrow:after
+{
+    border-color: rgba(24,31,49,.9) transparent;
+    margin-top: 0;
+}
+
+.km-ios .km-down .km-popup-arrow:after
+{
+    border-color: rgba(106,111,124,.9) transparent;
+    margin-top: 1px;
+}
+
+.km-ios .km-up .km-popup-arrow:after,
+.km-ios .km-up .km-popup-arrow:before
+{
+    border-width: 15px 15px 0 15px;
+}
+

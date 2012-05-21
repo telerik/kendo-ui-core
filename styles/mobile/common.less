@@ -1205,61 +1205,75 @@
     .box-flex(1);
 }
 
-.km-pane {
+.km-pane
+{
     position: relative;
 }
 
 /* PopOver */
 
-.km-popup-wrapper {
+.km-popup-wrapper
+{
     position: relative;
+    overflow: hidden;
+    .box-shadow(none);
+    background: none;
+    border: 0;
 }
 
-.km-popup-overlay {
+.km-popup-overlay
+{
     position: absolute;
     width: 100%;
     height: 100%;
 }
 
-.km-popup-arrow {
+.km-popup-arrow,
+.km-popup-arrow:after,
+.km-popup-arrow:before
+{
     position: absolute;
-    width: 10px;
-    height: 10px;
-    background: black;
+    width: 15px;
+    height: 15px;
     top: 0;
     left: 0;
+    z-index: 1;
 }
 
-.km-down .km-popup {
-    -webkit-transform: translateY(10px);
+.km-popup-arrow:after,
+.km-popup-arrow:before
+{
+    display: block;
+    content: "\a0";
+    width: 0;
+    height: 0;
 }
 
-.km-up .km-popup {
-    -webkit-transform: translateY(-10px);
+.km-popup-wrapper
+{
+    padding: 5px 5px 10px;
 }
 
-.km-left .km-popup {
-    -webkit-transform: translateX(-10px);
-}
+.km-down { padding-top: 15px; }
+.km-up { padding-bottom: 15px; }
+.km-left { padding-left: 15px; }
+.km-right { padding-right: 15px; }
 
-.km-right .km-popup {
-    -webkit-transform: translateX(10px);
-}
-
-.km-up .km-popup-arrow {
+.km-up .km-popup-arrow
+{
     top: auto;
     bottom: 0;
 }
 
-.km-left .km-popup-arrow {
+.km-left .km-popup-arrow
+{
     left: auto;
     right: 0;
 }
 
-.km-popup {
+.km-popup
+{
     width: 100%;
     height: 100%;
-    border: 5px solid black;
-    box-sizing: border-box;
 }
 
