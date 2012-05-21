@@ -25,7 +25,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="addAction">The add action.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().TreeView()
+        ///  &lt;%= Html.Kendo().TreeView()
         ///             .Name("TreeView")
         ///             .Items(items =>
         ///             {
@@ -52,7 +52,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="clientEventsAction">The client events action.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().TreeView()
+        ///  &lt;%= Html.Kendo().TreeView()
         ///             .Name("TreeView")
         ///             .ClientEvents(events =>
         ///                 .OnDataBinding("onDataBinding")
@@ -78,7 +78,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="siteMapAction">The action to configure the item.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().TreeView()
+        ///  &lt;%= Html.Kendo().TreeView()
         ///             .Name("TreeView")
         ///             .BindTo("examples", (item, siteMapNode) =>
         ///             {
@@ -102,7 +102,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="viewDataKey">The view data key.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().TreeView()
+        ///  &lt;%= Html.Kendo().TreeView()
         ///             .Name("TreeView")
         ///             .BindTo("examples")
         /// %&gt;
@@ -124,7 +124,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="items">The list of items</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().TreeView()
+        ///  &lt;%= Html.Kendo().TreeView()
         ///             .Name("TreeView")
         ///             .BindTo(model)
         /// %&gt;
@@ -169,7 +169,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="itemDataBound">The action executed for every data bound item.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().TreeView()
+        ///  &lt;%= Html.Kendo().TreeView()
         ///             .Name("TreeView")
         ///             .BindTo(new []{"First", "Second"}, (item, value)
         ///             {
@@ -195,7 +195,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="factoryAction">The action which will configure the mappings</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().TreeView()
+        ///  &lt;%= Html.Kendo().TreeView()
         ///             .Name("TreeView")
         ///             .BindTo(Model, mapping => mapping
         ///                     .For&lt;Customer&gt;(binding => binding
@@ -220,35 +220,12 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Use it to configure Data binding.
-        /// </summary>
-        /// <param name="configurator">Action that configures the data binding options.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().TreeView()
-        ///             .Name("TreeView")
-        ///             .DataBinding(dataBinding => dataBinding
-        ///                .Ajax().Select("_AjaxLoading", "TreeView")
-        ///             );
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public virtual TreeViewBuilder DataBinding(Action<TreeViewDataBindingConfigurationBuilder> configurator)
-        {
-            Guard.IsNotNull(configurator, "configurator");
-
-            configurator(new TreeViewDataBindingConfigurationBuilder(Component.DataBinding));
-
-            return this;
-        }
-
-        /// <summary>
         /// Callback for each item.
         /// </summary>
         /// <param name="action">Action, which will be executed for each item.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().TreeView()
+        ///  &lt;%= Html.Kendo().TreeView()
         ///             .Name("TreeView")
         ///             .ItemAction(item =>
         ///             {
@@ -274,7 +251,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="value">If true the item will be highlighted.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().TreeView()
+        ///  &lt;%= Html.Kendo().TreeView()
         ///             .Name("TreeView")
         ///             .HighlightPath(true)
         /// %&gt;
@@ -293,7 +270,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///// <param name="effectsAction">The action which configures the effects.</param>
         ///// <example>
         ///// <code lang="CS">
-        ///// &lt;%= Html.Telerik().TreeView()
+        ///// &lt;%= Html.Kendo().TreeView()
         /////	           .Name("TreeView")
         /////	           .Effects(fx =>
         /////	           {
@@ -321,7 +298,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="value">If true all the items will be expanded.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().TreeView()
+        ///  &lt;%= Html.Kendo().TreeView()
         ///             .Name("TreeView")
         ///             .ExpandAll(true)
         /// %&gt;
@@ -340,7 +317,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="value">If true checkbox will be displayed for every node.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().TreeView()
+        ///  &lt;%= Html.Kendo().TreeView()
         ///             .Name("TreeView")
         ///             .ShowCheckBox(true)
         /// %&gt;
@@ -359,7 +336,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="value">If true, drag &amp; drop is enabled.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().TreeView()
+        ///  &lt;%= Html.Kendo().TreeView()
         ///             .Name("TreeView")
         ///             .Items(items =>
         ///             {
@@ -372,36 +349,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TreeViewBuilder DragAndDrop(bool value)
         {
-            Component.DragAndDrop.Enabled = value;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Enables drag &amp; drop between treeview nodes.
-        /// </summary>
-        /// <param name="configureDragAndDrop">Action that configures the drag and drop options.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().TreeView()
-        ///             .Name("TreeView")
-        ///             .Items(items =>
-        ///             {
-        ///                 items.Add().Text("First Item");
-        ///                 items.Add().Text("Second Item");
-        ///             })
-        ///             .DragAndDrop(settings =>
-        ///             {
-        ///                 
-        ///             })
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public TreeViewBuilder DragAndDrop(Action<TreeViewDragAndDropSettingsBuilder> configureDragAndDrop)
-        {
-            Component.DragAndDrop.Enabled = true;
-
-            configureDragAndDrop(new TreeViewDragAndDropSettingsBuilder(Component.DragAndDrop));
+            Component.DragAndDrop = value;
 
             return this;
         }
@@ -412,7 +360,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="value">If true security trimming is enabled.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().TreeView()
+        ///  &lt;%= Html.Kendo().TreeView()
         ///             .Name("TreeView")
         ///             .SecurityTrimming(false)
         /// %&gt;

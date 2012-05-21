@@ -104,26 +104,11 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
-        public void ObjectWriter_should_append_DropTargets_if_they_exists_and_the_dragAndDrop_is_enabled()
-        {
-            Mock<TextWriter> writer = new Mock<TextWriter>();
-
-            treeView.DragAndDrop.Enabled = true;
-            treeView.DragAndDrop.DropTargets = "fake drop targets";
-
-            objectWriter.Setup(w => w.AppendObject("dragAndDrop", It.IsAny<IDictionary<string,string>>())).Verifiable();
-
-            treeView.WriteInitializationScript(writer.Object);
-
-            objectWriter.VerifyAll();
-        }
-
-        [Fact]
         public void ObjectWriter_should_append_dragAndDrop_with_true_value()
         {
             Mock<TextWriter> writer = new Mock<TextWriter>();
 
-            treeView.DragAndDrop.Enabled = true;
+            treeView.DragAndDrop = true;
 
             objectWriter.Setup(w => w.Append("dragAndDrop", true)).Verifiable();
 
