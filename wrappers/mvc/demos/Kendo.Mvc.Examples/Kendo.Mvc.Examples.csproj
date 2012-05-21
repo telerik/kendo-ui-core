@@ -91,6 +91,8 @@
     <Compile Include="Controllers\Upload\ApiController.cs" />
     <Compile Include="Controllers\Upload\EventsController.cs" />
     <Compile Include="Controllers\Upload\IndexController.cs" />
+    <Compile Include="Controllers\Window\ActionsController.cs" />
+    <Compile Include="Controllers\Window\AjaxController.cs" />
     <Compile Include="Controllers\Window\IndexController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -219,6 +221,8 @@
     <Content Include="Areas\razor\Views\window\actions.cshtml" />
     <Content Include="Areas\razor\Views\numerictextbox\index.cshtml" />
     <Content Include="Areas\razor\Views\timepicker\index.cshtml" />
+    <Content Include="Areas\razor\Views\window\ajax.cshtml" />
+    <Content Include="Areas\razor\Views\window\ajaxcontent.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>

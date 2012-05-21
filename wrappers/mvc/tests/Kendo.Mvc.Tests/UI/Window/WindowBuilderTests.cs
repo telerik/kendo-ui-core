@@ -16,40 +16,6 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
-        public void Icon_sets_IconUrl_property() 
-        {
-            const string iconPath = "fakePath";
-
-            builder.Icon(iconPath);
-
-            component.IconUrl.ShouldEqual(iconPath);
-        }
-
-        [Fact]
-        public void Icon_sets_IconUrl_and_AltrnativeText_property()
-        {
-            const string iconPath = "fakePath";
-            const string alternativeText = "icon";
-
-            builder.Icon(iconPath, alternativeText);
-
-            component.IconUrl.ShouldEqual(iconPath);
-            component.IconAlternativeText.ShouldEqual(alternativeText);
-        }
-
-        [Fact]
-        public void Icon_method_with_one_parameter_returns_builder()
-        {
-            builder.Icon("fakePath").ShouldBeSameAs(builder);
-        }
-
-        [Fact]
-        public void Icon_method_with_two_parameters_returns_builder()
-        {
-            builder.Icon("fakePath", "icon").ShouldBeSameAs(builder);
-        }
-
-        [Fact]
         public void Title_sets_Title_property()
         {
             const string title = "title";
@@ -95,24 +61,6 @@ namespace Kendo.Mvc.UI.Tests
             builder.Content("<ul><li>something</li></ul>").ShouldBeSameAs(builder);
         }
 
-        [Fact]
-        public void ContentHtmlAttributes_merges_passed_object_to_ContentHtmlAttributes_property()
-        {
-            const string value = "test";
-
-            builder.ContentHtmlAttributes(new { attr = value });
-
-            component.ContentHtmlAttributes["attr"].ShouldEqual(value);
-        }
-
-        [Fact]
-        public void ContentHtmlAttributes_returns_builder_object()
-        {
-            var attr = new { attr = "test" };
-
-            builder.ContentHtmlAttributes(attr).ShouldBeSameAs(builder);
-        }
-        
         [Fact]
         public void LoadContentFrom_sets_contentUrl()
         {

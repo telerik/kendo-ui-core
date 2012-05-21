@@ -4,7 +4,12 @@ namespace Kendo.Mvc.Examples.Controllers
 {
     public partial class WindowController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Ajax()
+        {
+            return View();
+        }
+
+        public ActionResult AjaxContent()
         {
             return View();
         }
