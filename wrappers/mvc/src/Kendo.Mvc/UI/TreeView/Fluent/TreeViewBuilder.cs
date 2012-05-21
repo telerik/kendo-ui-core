@@ -426,26 +426,5 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
-
-        /// <summary>
-        /// Set a template for all treeview items.
-        /// </summary>
-        /// <param name="template">The kendo template that is used for rendering of the items.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().TreeView()
-        ///             .Name("TreeView")
-        ///             .Template("#= item.text #")
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public TreeViewBuilder Template(string template)
-        {
-            Guard.IsNotNull(template, "template");
-
-            Component.Template = template;
-
-            return this;
-        }
     }
 }

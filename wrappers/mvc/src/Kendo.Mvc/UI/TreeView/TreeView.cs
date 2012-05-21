@@ -143,16 +143,6 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        /// <summary>
-        /// Gets or sets the item template.
-        /// </summary>
-        /// <value>A <c>string</c> that represents the kendo template used for all nodes.</value>
-        public string Template
-        {
-            get;
-            set;
-        }
-
         public TreeViewDataBindingConfiguration DataBinding
         {
             get;
