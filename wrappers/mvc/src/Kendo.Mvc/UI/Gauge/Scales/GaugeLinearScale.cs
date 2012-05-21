@@ -26,18 +26,9 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
-        /// The scale end angle.
+        /// The scale mirror.
         /// </summary>
-        public double? EndAngle
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// The scale start angle.
-        /// </summary>
-        public double? StartAngle
+        public bool? Mirror
         {
             get;
             set;

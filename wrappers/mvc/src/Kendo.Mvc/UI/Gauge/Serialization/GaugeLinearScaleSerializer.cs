@@ -17,8 +17,7 @@ namespace Kendo.Mvc.UI
         {
             var result = base.Serialize();
             FluentDictionary.For(result)
-                .Add("endAngle", scale.EndAngle, () => scale.EndAngle.HasValue)
-                .Add("startAngle", scale.StartAngle, () => scale.StartAngle.HasValue);
+                .Add("mirror", scale.Mirror, () => scale.Mirror.HasValue);
 
             return result;
         }
