@@ -48,6 +48,11 @@ namespace Kendo.Mvc.UI
         double? Max { get; set; }
 
         /// <summary>
+        /// The scale reverse.
+        /// </summary>
+        bool? Reverse { get; set; }
+
+        /// <summary>
         /// Gets the scale serializer.
         /// </summary>
         IChartSerializer CreateSerializer();

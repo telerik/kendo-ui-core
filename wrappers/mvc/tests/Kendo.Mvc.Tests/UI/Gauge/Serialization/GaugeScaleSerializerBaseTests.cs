@@ -129,5 +129,19 @@ namespace Kendo.Mvc.UI.Tests
         {
             serializer.Serialize().ContainsKey("labels").ShouldBeFalse();
         }
+
+        [Fact]
+        public void Should_serialize_Reverse()
+        {
+            scaleMock.SetupGet(a => a.Reverse).Returns(true);
+            serializer.Serialize()["reverse"].ShouldEqual(true);
+        }
+
+        [Fact]
+        public void Should_not_serialize_default_Reverse()
+        {
+            scaleMock.SetupGet(a => a.Reverse).Returns((bool?)null);
+            serializer.Serialize().ContainsKey("reverse").ShouldBeFalse();
+        }
     }
 }

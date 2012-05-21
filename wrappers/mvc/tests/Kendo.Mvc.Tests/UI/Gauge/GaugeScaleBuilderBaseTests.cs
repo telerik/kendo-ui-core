@@ -64,6 +64,13 @@ namespace Kendo.Mvc.UI.Tests.Gauge
         }
 
         [Fact]
+        public void Reverse_should_set_Reverse()
+        {
+            builder.Reverse(true);
+            scale.Reverse.ShouldEqual(true);
+        }
+
+        [Fact]
         public void Ranges_should_set_Ranges()
         {
             builder.Ranges(r => r.Add().Color("Color").From(1.1M).To(2.0M).Opacity(0.5));
