@@ -16,7 +16,9 @@
     /**
      * @name kendo.mobile.ui.View.Description
      *
-     * @section <p>The Kendo mobile View widget represents a screen in the kendo mobile Application. The
+     * @section
+     *
+     * <p>The Kendo mobile View widget represents a screen in the kendo mobile Application. The
      * Application automatically instantiates a mobile View for each element with a <code>role</code> data attribute set
      * to <b>view</b>.</p>
      *
@@ -26,9 +28,9 @@
      *
      * @section
      * <h3>Headers and Footers</h3>
-     * <p>By default, the mobile <strong>View</strong> contents stretch to fit the application element.
-     * The mobile <strong>View</strong> can also have a header and a footer.
-     * In order to mark header and footer elements, add elements with attribute <code>data-role="header"</code> and
+     * <p>By default, the mobile View contents stretch to fit the application element.
+     * In addition to that, The mobile View may also have a header and a footer.
+     * In order to mark header and footer elements, add block elements (<code>div</code>, <code>header</code>, <code>footer</code>, etc.) with attribute <code>data-role="header"</code> and
      * <code>data-role="footer"</code>. </p>
      *
      * @exampleTitle Mobile View with Header and Footer
@@ -42,14 +44,14 @@
      * @section
      * <strong>Important:</strong>
      * <p>Because of the OS UI design conventions, the header and the footer switch positions when an Android device is detected.
-     * Usually the footer hosts a MobileTabstrip widget, which is located at the bottom of the screen on iOS,
+     * Usually the footer hosts a mobile Tabstrip widget, which is located at the bottom of the screen on iOS,
      * and at the top of the screen in Android applications.  </p>
      *
      * @section
      *
      * <h3>View Parameters</h3>
      *
-     * <p>Navigational widgets can pass additional URL parameters when navigating to <strong>Views</strong>. The parameters will be available in the <code>show</code> <strong>View</strong> event.</p>
+     * <p>Navigational widgets can pass additional URL parameters when navigating to Views. The parameters will be accessible in the  view <code>show</code> event handlers.</p>
      *
      * @exampleTitle Button with additional URL parameters
      * @example
@@ -112,7 +114,7 @@
 
         events: [
             /**
-             * Fires after a mobile View and its child widgets is initialized.
+             * Fires after the mobile View and its child widgets are initialized.
              * @name kendo.mobile.ui.View#init
              * @event
              * @param {Event} e
@@ -120,7 +122,7 @@
              */
             INIT,
             /**
-             * Fires before a mobile View becomes visible. The event can be prevented using <code>preventDefault</code>, in case a redirection or navigation should happen.
+             * Fires before the mobile View becomes visible. The event can be prevented by calling the <code>preventDefault</code> method of the event parameter, in case a redirection should happen.
              * @name kendo.mobile.ui.View#beforeShow
              * @event
              * @param {Event} e
@@ -128,7 +130,7 @@
              */
             BEFORE_SHOW,
             /**
-             * Fires when a mobile View becomes visible.
+             * Fires when the mobile View becomes visible.
              * @name kendo.mobile.ui.View#show
              * @event
              * @param {Event} e
@@ -136,7 +138,7 @@
              */
             SHOW,
             /**
-             * Fires when a mobile View becomes hidden.
+             * Fires when the mobile View becomes hidden.
              * @name kendo.mobile.ui.View#hide
              * @event
              * @param {Event} e
