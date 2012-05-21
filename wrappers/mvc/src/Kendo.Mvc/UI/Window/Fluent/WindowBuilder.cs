@@ -16,51 +16,6 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Sets path to the icon.
-        /// </summary>
-        /// <param name="icon">Path to the icon.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Window()
-        ///             .Name("Window")
-        ///             .Icon(Url.Content("~/Content/Icons/WindowIcon.png"))
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public WindowBuilder Icon(string iconUrl)
-        {
-            Guard.IsNotNullOrEmpty(iconUrl, "iconUrl");
-
-            Component.IconUrl = iconUrl;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Sets path and alternative text to the icon.
-        /// </summary>
-        /// <param name="icon">Path to the icon.</param>
-        /// <param name="iconAlternativeText">Alternative text to the icon.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Window()
-        ///             .Name("Window")
-        ///             .Icon(Url.Content("~/Content/Icons/WindowIcon.png"), "icon")
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public WindowBuilder Icon(string iconUrl, string iconAlternativeText)
-        {
-            Guard.IsNotNullOrEmpty(iconUrl, "iconUrl");
-            Guard.IsNotNullOrEmpty(iconAlternativeText, "iconAlternativeText");
-
-            Component.IconUrl = iconUrl;
-            Component.IconAlternativeText = iconAlternativeText;
-
-            return this;
-        }
-
-        /// <summary>
         /// Sets title, which appears in the header of the window.
         /// </summary>
         public WindowBuilder Title(string title)
@@ -78,12 +33,12 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="value">The action which renders the content.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;% Html.Telerik().Window()
+        ///  &lt;% Html.Kendo().Window()
         ///            .Name("Window")
         ///            .Content(() => 
         ///            { 
         ///               %&gt;
-        ///                     &lt;strong&gt; First Item Content&lt;/strong&gt;
+        ///                     &lt;strong&gt;Window content&lt;/strong&gt;
         ///               &lt;% 
         ///            })
         /// %&gt;
@@ -104,9 +59,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="value">The Razor inline template</param>
         /// <example>
         /// <code lang="CS">
-        ///  @(Html.Telerik().Window()
+        ///  @(Html.Kendo().Window()
         ///            .Name("Window")
-        ///            .Content(@&lt;strong&gt; Hello World!!!&lt;/strong&gt;))
+        ///            .Content(@&lt;strong&gt; Hello World!&lt;/strong&gt;))
         /// </code>        
         /// </example>
         /// <returns></returns>
@@ -124,7 +79,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <param name="value">The action which renders the content.</param>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Window()
+        ///  &lt;%= Html.Kendo().Window()
         ///             .Name("Window")
         ///             .Content("&lt;strong&gt; First Item Content&lt;/strong&gt;")
         /// %&gt;
@@ -139,44 +94,12 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Sets the HTML attributes of the content element of the item.
-        /// </summary>
-        /// <param name="attributes">The attributes.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Window()
-        ///             .Name("Window")
-        ///             .Content(() => { %&gt; &lt;strong&gt;First Item Content&lt;/strong&gt; &lt;% })
-        ///             .ContentHtmlAttributes(new {@class="first-item-content"})
-        /// %&gt;
-        /// </code>
-        /// </example>        
-        public WindowBuilder ContentHtmlAttributes(object attributes)
-        {
-            return ContentHtmlAttributes(attributes.ToDictionary());
-        }        
-        
-        /// <summary>
-        /// Sets the HTML attributes of the content element of the item.
-        /// </summary>
-        /// <param name="attributes">The attributes.</param>    
-        public WindowBuilder ContentHtmlAttributes(IDictionary<string, object> attributes)
-        {
-            Guard.IsNotNull(attributes, "attributes");
-
-            Component.ContentHtmlAttributes.Clear();
-            Component.ContentHtmlAttributes.Merge(attributes);
-
-            return this;
-        }
-
-        /// <summary>
         /// Sets the Url, which will be requested to return the content. 
         /// </summary>
         /// <param name="routeValues">The route values of the Action method.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Window()
+        ///  &lt;%= Html.Kendo().Window()
         ///         .Name("Window")
         ///         .LoadContentFrom(MVC.Home.Index().GetRouteValueDictionary());
         /// %&gt;
@@ -194,7 +117,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="controllerName">The controller name.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Window()
+        ///  &lt;%= Html.Kendo().Window()
         ///             .Name("Window")
         ///             .LoadContentFrom("AjaxView_OpenSource", "Window")
         /// %&gt;
@@ -213,7 +136,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="routeValues">Route values.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Window()
+        ///  &lt;%= Html.Kendo().Window()
         ///             .Name("Window")
         ///             .LoadContentFrom("AjaxView_OpenSource", "Window", new { id = 10})
         /// %&gt;
@@ -237,7 +160,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="value">The url.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Window()
+        ///  &lt;%= Html.Kendo().Window()
         ///             .Name("Window")
         ///             .LoadContentFrom(Url.Action("AjaxView_OpenSource", "Window"))
         /// %&gt;
@@ -256,7 +179,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="clientEventsAction">The client events action.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Window()
+        ///  &lt;%= Html.Kendo().Window()
         ///             .Name("Window")
         ///             .ClientEvents(events =>
         ///                 events.OnOpen("onOpen").OnClose("onClose")
@@ -278,7 +201,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Window()
+        ///  &lt;%= Html.Kendo().Window()
         ///             .Name("Window")
         ///             .Resizable()
         /// %&gt;
@@ -297,7 +220,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="resizingSettingsAction">Resizing settings action.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Window()
+        ///  &lt;%= Html.Kendo().Window()
         ///             .Name("Window")
         ///             .Resizable(settings =>
         ///                 settings.Enabled(true).MaxHeight(500).MaxWidth(500)
@@ -322,7 +245,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="clientEventsAction">The buttons configuration action.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Window()
+        ///  &lt;%= Html.Kendo().Window()
         ///             .Name("Window")
         ///             .Actions(actions =>
         ///                 actions.
@@ -400,7 +323,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="effectsAction">The action which configures the effects.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;%= Html.Telerik().Window()
+        /// &lt;%= Html.Kendo().Window()
         ///               .Name("Window")
         ///               .Effects(fx =>
         ///               {

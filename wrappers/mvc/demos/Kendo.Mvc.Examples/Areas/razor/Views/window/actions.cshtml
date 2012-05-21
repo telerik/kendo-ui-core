@@ -4,6 +4,12 @@
     @(Html.Kendo().Window()
         .Name("window")
         .Title("About Josef Hoffmann")
+        .Actions(actions => actions
+            .Custom("custom")
+            .Minimize()
+            .Maximize()
+            .Close()
+        )
         .Content(@<text>
             <div class="armchair">
                 <img src="@Url.Content("~/Content/web/window/kubus-armchair.png")"
@@ -41,35 +47,22 @@
                 <a href="http://www.senses-artnouveau.com/biography.php?artist=hof" title="About Josef Hoffmann">http://www.senses-artnouveau.com/</a>
             </p>
         </text>)
-        .Actions(actions => actions
-            .Custom("custom")
-            .Minimize()
-            .Maximize()
-            .Close()
-        )
-        .ClientEvents(events => events.OnClose("onClose"))
         .Draggable()
         .Resizable()
         .Width(500)
     )
 
-    <span id="undo" style="display:none" class="k-button">Click here to open the window.</span>
+    <span id="undo" class="k-button">Click here to open the window</span>
 
     <script>
-        function onClose() {
-            $("#undo").show();
-        }
-
         $(document).ready(function() {
-            var window = $("#window"),
-                undo = $("#undo");
+            var dialog = $("#window");
 
-            undo.bind("click", function() {
-                window.data("kendoWindow").open();
-                undo.hide();
+            $("#undo").bind("click", function() {
+                dialog.data("kendoWindow").open();
             });
 
-            window.data("kendoWindow").wrapper.find(".k-custom").click(function(e){
+            dialog.data("kendoWindow").wrapper.find(".k-custom").click(function(e){
                 alert("Custom action button clicked");
                 e.preventDefault();
             });
@@ -77,22 +70,20 @@
     </script>
 
     <style scoped="scoped">
-        #example 
-        {
+        #example {
             min-height:500px;
         }
+        
         #undo {
-            text-align: center;
             position: absolute;
-            white-space: nowrap;
-            padding: 1em;
-            cursor: pointer;
         }
+        
         .armchair {
             float: left;
             margin: 20px 30px;
             text-align: center;
         }
+        
         .armchair img {
             display: block;
             margin-bottom: 10px;
