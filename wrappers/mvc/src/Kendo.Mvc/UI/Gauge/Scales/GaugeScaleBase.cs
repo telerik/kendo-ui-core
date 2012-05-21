@@ -91,6 +91,15 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// The scale reverse.
+        /// </summary>
+        public bool? Reverse
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Gets the scale serializer.
         /// </summary>
         public abstract IChartSerializer CreateSerializer();

@@ -328,7 +328,10 @@
     <Compile Include="Infrastructure\JsonObject.cs" />
     <Compile Include="UI\Gauge\Fluent\GaugeRadialScaleBuilder.cs" />
     <Compile Include="UI\Gauge\Scales\IRadialScale.cs" />
+    <Compile Include="UI\Gauge\Scales\GaugeLinearScale.cs" />
+    <Compile Include="UI\Gauge\Scales\ILinearScale.cs" />
     <Compile Include="UI\Gauge\Scales\GaugeRadialScale.cs" />
+    <Compile Include="UI\Gauge\Serialization\GaugeLinearScaleSerializer.cs" />
     <Compile Include="UI\Gauge\Serialization\GaugeRadialScaleSerializer.cs" />
     <Compile Include="UI\DatePickerBase\DatePickerBase.cs" />
     <Compile Include="UI\DatePickerBase\Fluent\DatePickerBaseBuilder.cs" />

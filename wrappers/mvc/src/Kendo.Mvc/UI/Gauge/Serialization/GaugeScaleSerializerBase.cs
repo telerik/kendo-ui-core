@@ -20,7 +20,8 @@ namespace Kendo.Mvc.UI
                 .Add("majorUnit", scale.MajorUnit, () => scale.MajorUnit.HasValue)
                 .Add("minorUnit", scale.MinorUnit, () => scale.MinorUnit.HasValue)
                 .Add("min", scale.Min, () => scale.Min.HasValue)
-                .Add("max", scale.Max, () => scale.Max.HasValue);
+                .Add("max", scale.Max, () => scale.Max.HasValue)
+                .Add("reverse", scale.Reverse, () => scale.Reverse.HasValue);
 
             var labelsData = scale.Labels.CreateSerializer().Serialize();
             if (labelsData.Count > 0)

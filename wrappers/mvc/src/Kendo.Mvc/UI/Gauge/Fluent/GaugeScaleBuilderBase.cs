@@ -210,5 +210,24 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this as TScaleBuilder;
         }
+
+        /// <summary>
+        /// Sets the scale reverse.
+        /// </summary>
+        /// <param name="reverse">The scale reverse.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().LinearGauge()
+        ///            .Name("linearGauge")
+        ///            .Scale(scale => sclae.reverse(true))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TScaleBuilder Reverse(bool reverse)
+        {
+            Scale.Reverse = reverse;
+
+            return this as TScaleBuilder;
+        }
     }
 }
