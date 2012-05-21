@@ -17,12 +17,22 @@ namespace Kendo.Mvc.UI
             : base(viewContext, clientSideObjectWriterFactory, urlGenerator)
         {
             Scale = new GaugeRadialScale(this);
+            Pointer = new GaugeRadialPointer();
         }
 
         /// <summary>
         /// Configuration for the default scale (if any)
         /// </summary>
         public IRadialScale Scale
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Configuration for the default pointer (if any)
+        /// </summary>
+        public GaugeRadialPointer Pointer
         {
             get;
             set;
@@ -39,6 +49,8 @@ namespace Kendo.Mvc.UI
             objectWriter.Start();
 
             SerializeData("gaugeArea", this.GaugeArea.CreateSerializer().Serialize(), objectWriter);
+            SerializeData("pointer", this.Pointer.CreateSerializer().Serialize(), objectWriter);
+            SerializeData("scale", this.Scale.CreateSerializer().Serialize(), objectWriter);
 
             SerializeTheme(objectWriter);
             SerializeTransitions(objectWriter);

@@ -329,6 +329,8 @@
     <Compile Include="UI\Effects\Fluent\PopupAnimationBuilder.cs" />
     <Compile Include="UI\DatePicker\MonthTemplate.cs" />
     <Compile Include="Infrastructure\JsonObject.cs" />
+    <Compile Include="UI\Gauge\Fluent\GaugeLinearBuilder.cs" />
+    <Compile Include="UI\Gauge\Fluent\GaugeRadialBuilder.cs" />
     <Compile Include="UI\Gauge\Fluent\GaugeLinearScaleBuilder.cs" />
     <Compile Include="UI\Gauge\Fluent\GaugeRadialScaleBuilder.cs" />
     <Compile Include="UI\Gauge\Scales\IRadialScale.cs" />
