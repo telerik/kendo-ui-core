@@ -1,5 +1,3 @@
-<script src="@Url.Content("~/Scripts/kendo.sortable.js")"></script>
-
 @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.Product>()    
     .Name("Grid")
     .Pageable()
@@ -9,8 +7,6 @@
     .DataSource(dataSource => dataSource.Type(DataSourceType.Ajax)
         .PageSize(23)
         .Read(read => read.Action("AjaxBinding_Read", "Grid"))
-        .Sort(s => s.Add(p => p.ProductID).Descending())
-        .Filter(filters => filters.Add(p => p.ProductID).IsEqualTo(2))
         )
     )
 )

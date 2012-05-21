@@ -13,11 +13,16 @@
            result[this.options.prefix + "page"] = options.page;
        }
 
+       if (options.pageSize) {
+           result[this.options.prefix + "pageSize"] = options.pageSize;
+       }
+
        if (options.group) {
             result[this.options.prefix + "groupBy"] = $.map(options.group, function(group) {
                return group.field + "-" + group.dir;
            }).join("~");
        }
+
        if (options.filter) {
            result[this.options.prefix + "filter"] = serializeFilter(options.filter);
        } else {

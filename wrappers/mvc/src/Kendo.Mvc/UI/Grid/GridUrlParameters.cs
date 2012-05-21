@@ -22,7 +22,7 @@ namespace Kendo.Mvc.UI
             OrderBy = "orderBy";
             GroupBy = "groupBy";
             CurrentPage = "page";
-            PageSize = "size";
+            PageSize = "pageSize";
             Filter = "filter";
             Mode = "mode";
             Aggregates = "aggregates";
