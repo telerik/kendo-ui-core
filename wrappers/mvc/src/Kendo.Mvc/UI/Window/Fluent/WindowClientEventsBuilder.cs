@@ -28,84 +28,6 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Defines the inline handler of the OnLoad client-side event
-        /// </summary>
-        /// <param name="onLoadAction">The action defining the inline handler.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;% Html.Telerik().Window()
-        ///            .Name("Window")
-        ///            .ClientEvents(events => events.OnLoad(() =>
-        ///            {
-        ///                 %&gt;
-        ///                 function(e) {
-        ///                     //event handling code
-        ///                 }
-        ///                 &lt;%
-        ///            }))
-        ///            .Render();
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public WindowClientEventsBuilder OnLoad(Action onLoadCodeBlock)
-        {
-            Guard.IsNotNull(onLoadCodeBlock, "onLoadInlineCode");
-
-            clientEvents.OnLoad.CodeBlock = onLoadCodeBlock;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Defines the inline handler of the OnLoad client-side event
-        /// </summary>
-        /// <param name="onLoadAction">The handler code wrapped in a text tag (Razor syntax).</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;% Html.Telerik().Window()
-        ///            .Name("Window")
-        ///            .ClientEvents(events => events.OnLoad(
-        ///                 @&lt;text&gt;
-        ///                 function(e) {
-        ///                     //event handling code
-        ///                 }
-        ///                 &lt;/text&gt;
-        ///            ))
-        ///            .Render();
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public WindowClientEventsBuilder OnLoad(Func<object, object> onLoadInlineCodeBlock)
-        {
-            Guard.IsNotNull(onLoadInlineCodeBlock, "onLoadInlineCodeBlock");
-
-            clientEvents.OnLoad.InlineCodeBlock = onLoadInlineCodeBlock;
-
-            return this;
-        }
-
-        /// <summary>
-        ///  Defines the name of the JavaScript function that will handle the the OnLoad client-side event.
-        /// </summary>
-        /// <param name="onLoadHandlerName">The name of the JavaScript function that will handle the event.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Window()
-        ///             .Name("Window")
-        ///             .ClientEvents(events => events.OnLoad("onLoad"))
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public WindowClientEventsBuilder OnLoad(string onLoadHandlerName)
-        {
-            Guard.IsNotNullOrEmpty(onLoadHandlerName, "onLoadHandlerName");
-
-            clientEvents.OnLoad.HandlerName = onLoadHandlerName;
-
-            return this;
-        }
-
-        /// <summary>
         /// Defines the inline handler of the OnOpen client-side event
         /// </summary>
         /// <param name="javaScript">The action defining the inline handler.</param>
@@ -257,6 +179,85 @@ namespace Kendo.Mvc.UI.Fluent
             Guard.IsNotNullOrEmpty(onActivateHandlerName, "onActivateHandlerName");
 
             clientEvents.OnActivate.HandlerName = onActivateHandlerName;
+
+            return this;
+        }
+
+
+        /// <summary>
+        /// Defines the inline handler of the OnDeactivate client-side event
+        /// </summary>
+        /// <param name="javaScript">The action defining the inline handler.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;% Html.Telerik().Window()
+        ///            .Name("Window")
+        ///            .ClientEvents(events => events.OnDeactivate(() =>
+        ///            {
+        ///                 %&gt;
+        ///                 function(e) {
+        ///                     // event handling code
+        ///                 }
+        ///                 &lt;%
+        ///            }))
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public WindowClientEventsBuilder OnDeactivate(Action onDeactivateCodeBlock)
+        {
+            Guard.IsNotNull(onDeactivateCodeBlock, "onDeactivateCodeBlock");
+
+            clientEvents.OnDeactivate.CodeBlock = onDeactivateCodeBlock;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the inline handler of the OnDeactivate client-side event
+        /// </summary>
+        /// <param name="javaScript">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;% Html.Telerik().Window()
+        ///            .Name("Window")
+        ///            .ClientEvents(events => events.OnDeactivate(
+        ///                 @&lt;text&gt;
+        ///                 function(e) {
+        ///                     // event handling code
+        ///                 }
+        ///                 &lt;/text&gt;
+        ///            ))
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public WindowClientEventsBuilder OnDeactivate(Func<object, object> onDeactivateInlineCodeBlock)
+        {
+            Guard.IsNotNull(onDeactivateInlineCodeBlock, "onDeactivateInlineCodeBlock");
+
+            clientEvents.OnDeactivate.InlineCodeBlock = onDeactivateInlineCodeBlock;
+
+            return this;
+        }
+
+        /// <summary>
+        ///  Defines the name of the JavaScript function that will handle the the OnDeactivate client-side event.
+        /// </summary>
+        /// <param name="handlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Telerik().Window()
+        ///             .Name("Window")
+        ///             .ClientEvents(events => events.OnDeactivate("onDeactivate"))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public WindowClientEventsBuilder OnDeactivate(string onDeactivateHandlerName)
+        {
+            Guard.IsNotNullOrEmpty(onDeactivateHandlerName, "onDeactivateHandlerName");
+
+            clientEvents.OnDeactivate.HandlerName = onDeactivateHandlerName;
 
             return this;
         }

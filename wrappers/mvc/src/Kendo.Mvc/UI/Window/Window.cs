@@ -189,6 +189,7 @@ namespace Kendo.Mvc.UI
             objectWriter.AppendClientEvent("close", ClientEvents.OnClose);
             objectWriter.AppendClientEvent("open", ClientEvents.OnOpen);
             objectWriter.AppendClientEvent("activate", ClientEvents.OnActivate);
+            objectWriter.AppendClientEvent("deactivate", ClientEvents.OnDeactivate);
             objectWriter.AppendClientEvent("resize", ClientEvents.OnResize);
             objectWriter.AppendClientEvent("refresh", ClientEvents.OnRefresh);
 

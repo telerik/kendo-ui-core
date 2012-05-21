@@ -7,6 +7,7 @@ namespace Kendo.Mvc.UI
             OnLoad = new ClientEvent();
             OnOpen = new ClientEvent();
             OnActivate = new ClientEvent();
+            OnDeactivate = new ClientEvent();
             OnClose = new ClientEvent();
             OnMove = new ClientEvent();
             OnDragStart = new ClientEvent();
@@ -21,6 +22,8 @@ namespace Kendo.Mvc.UI
         public ClientEvent OnOpen { get; private set; }
 
         public ClientEvent OnActivate { get; private set; }
+
+        public ClientEvent OnDeactivate { get; private set; }
 
         public ClientEvent OnClose { get; private set; }
 
