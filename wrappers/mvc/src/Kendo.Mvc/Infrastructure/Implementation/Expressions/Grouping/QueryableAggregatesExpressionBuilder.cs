@@ -29,11 +29,12 @@ namespace Kendo.Mvc.Infrastructure.Implementation.Expressions
         {
             yield return this.CreateKeyMemberBinding();
             yield return this.CreateCountMemberBinding();
-            yield return this.CreateHasSubgroupsMemberBinding();
+            yield return this.CreateHasSubgroupsMemberBinding();            
             if (GroupDescriptor.AggregateFunctions.Count > 0)
             {
                 yield return this.CreateAggregateFunctionsProjectionMemberBinding();
-            }            
+            }
+            yield return this.CreateFieldNameMemberBinding();
         }
     }
 }

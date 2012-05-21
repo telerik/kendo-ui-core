@@ -63,6 +63,7 @@
 function translateGroup(group) {
     return {
         value: group.Key,
+        field: group.Member,
         hasSubgroups: group.HasSubgroups,
         aggregates: group.Aggregates,
         items: group.HasSubgroups ? $.map(group.Items, translateGroup) : group.Items
