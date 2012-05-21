@@ -52,8 +52,6 @@ namespace Kendo.Mvc.UI
 
             Items = new LinkedObjectCollection<TreeViewItem>(null);
 
-            ShowLines = true;
-
             SelectedIndex = -1;
             SecurityTrimming = true;
         }
@@ -120,17 +118,7 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Gets or sets a value indicating whether all the item is expanded.
         /// </summary>
-        /// <value><c>true</c> if expand all is enabled; otherwise, <c>false</c>. The default value is <c>false</c></value>
-        public bool ShowLines
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether all the item is expanded.
-        /// </summary>
-        /// <value><c>true</c> if expand all is enabled; otherwise, <c>false</c>. The default value is <c>false</c></value>
+        /// <value><c>true</c> if checkboxes are visible; otherwise, <c>false</c>. The default value is <c>false</c></value>
         public bool ShowCheckBox
         {
             get;
@@ -150,6 +138,16 @@ namespace Kendo.Mvc.UI
         }
 
         public bool SecurityTrimming
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets or sets the item template.
+        /// </summary>
+        /// <value>A <c>string</c> that represents the kendo template used for all nodes.</value>
+        public string Template
         {
             get;
             set;
@@ -197,11 +195,6 @@ namespace Kendo.Mvc.UI
             //{
             //    objectWriter.Serialize("effects", Effects);
             //}
-
-            if (!ShowLines)
-            {
-                objectWriter.Append("showLines", ShowLines);
-            }
 
             if (ShowCheckBox)
             {
