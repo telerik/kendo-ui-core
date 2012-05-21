@@ -16,7 +16,8 @@
      * @section
      * <h3>Customizing appearance</h3>
      * By default Kendo UI Mobile is configured to show a horizontal SplitView with smaller left and bigger right pane in 1:2 proportion.
-     * In order to resize one of the panes, you can use CSS to set its width or adjust the flexibility of the flex boxes.
+     * In order to resize one of the panes, you can use CSS to set its width or adjust the flexibility of the flex boxes (if you set the width,
+     * you will need to set the flexibility of the other pane to a high number (like 1000).
      *
      * @exampleTitle Set pane width to 300px or change the proportions to 1:3
      * @example
@@ -39,17 +40,35 @@
      *
      * <style>
      *     #side-pane { width: 300px; }
+     *     #main-pane { -webkit-box-flex: 1000; }
      * </style>
      * or
      * <style>
-     *     #main-pane { -webkit-box-flex: 3 }
+     *     #main-pane { -webkit-box-flex: 3; }
      * </style>
      *
      * @section
      * Additionally you can split your view to more panes by adding them directly. You can also make them stack vertically
-     * by adding a simple CSS rule:
+     * by setting data-style="vertical" on your SplitView.
      *
-     *
+     * @exampleTitle Make SplitView to stack vertically.
+     * @example
+     * <div data-role="splitview" id="main" data-style="vertical">
+     *   <div data-role="pane" id="side-pane">
+     *     <div data-role="view">
+     *        <a data-role="button" href="#bar" data-target="main-pane">Bar (main pane)</a>
+     *        <a data-role="button" href="#baz" data-target="_top">Baz (application)</a>
+     *     </div>
+     *   </div>
+     *   <div data-role="pane" id="main-pane">
+     *     <div data-role="view" id="foo">
+     *        Foo
+     *     </div>
+     *     <div data-role="view" id="bar">
+     *        Bar
+     *     </div>
+     *   </div>
+     * </div>
      */
     var SplitView = View.extend(/** @lends kendo.mobile.ui.SplitView.prototype */{
         /**
