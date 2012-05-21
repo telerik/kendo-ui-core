@@ -980,7 +980,7 @@ namespace Kendo.Mvc.UI
                 EditMode = Editing.Mode,
                 HasDetailView = HasDetailView,
                 //TODO: Implement hidden columns
-                Colspan = Colspan - Columns.Count(/*column => column.Hidden*/),
+                Colspan = Colspan /*- Columns.Count(column => column.Hidden)*/,
                 DetailViewTemplate = MapDetailViewTemplate(HasDetailView ? DetailView.Template : null),
                 NoRecordsTemplate = FormatNoRecordsTemplate(),
                 Localization = Localization,
