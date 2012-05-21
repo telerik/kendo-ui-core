@@ -283,7 +283,8 @@ namespace Kendo.Mvc.UI.Html
 
         private IGridRowBuilder CreateInLineRowBuilder(GridRenderingData renderingData, GridItem item, Func<object, string> action, Func<IGridColumn, IGridHtmlHelper, IGridDataCellBuilder> cellBuilder)
         {
-            var tableBuilder = tableBuilderFactory.CreateTableBuilder(renderingData.Columns.Select(c => new GridColData { Width = c.Width, Hidden = c.Hidden }));
+            //TODO: Implement hidden columns
+            var tableBuilder = tableBuilderFactory.CreateTableBuilder(renderingData.Columns.Select(c => new GridColData { Width = c.Width/*, Hidden = c.Hidden*/ }));
 
             var cellBuilders = renderingData.Columns.Select(column => cellBuilder(column, renderingData.HtmlHelper));
 

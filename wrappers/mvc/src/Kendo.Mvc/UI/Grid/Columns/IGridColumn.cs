@@ -57,12 +57,13 @@ namespace Kendo.Mvc.UI
         {
             get;
         }
-
+        //TODO: Implement hidden columns
+        /*
         bool Hidden 
         { 
             get; 
             set; 
-        }
+        }*/
         //TODO: Implement HeaderContextMenu
         /*
         bool IncludeInContextMenu
@@ -81,13 +82,13 @@ namespace Kendo.Mvc.UI
             get; 
             set; 
         }
-        
+        /*
         bool Visible 
         { 
             get; 
             set; 
         }
-        
+        */
         string Width 
         { 
             get; 

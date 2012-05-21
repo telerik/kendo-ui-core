@@ -36,7 +36,8 @@ namespace Kendo.Mvc.UI
         {
             Grid = grid;
             Settings = new GridColumnSettings();
-            Visible = true;
+            //TODO: Implement Column visibility
+            //Visible = true;
             //TODO: Implement HeaderContextMenu
             //IncludeInContextMenu = true;
             //TODO: Implement HeaderTemplate
@@ -157,7 +158,8 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-
+        //TODO: Implement hidden columns
+        /*
         /// <summary>
         /// Gets or sets a value indicating whether this column is hidden.
         /// </summary>
@@ -176,6 +178,7 @@ namespace Kendo.Mvc.UI
                 Settings.Hidden = value;
             }
         }
+        */
         //TODO: Implement HeaderContextMenu
 /*
         public virtual bool IncludeInContextMenu
@@ -229,6 +232,8 @@ namespace Kendo.Mvc.UI
             }
         }
 
+        //TODO: Implement Column visibility
+        /*
         /// <summary>
         /// Gets or sets a value indicating whether this column is visible.
         /// </summary>
@@ -247,6 +252,7 @@ namespace Kendo.Mvc.UI
                 Settings.Visible = value;
             }
         }
+        */
 
         /// <summary>
         /// Gets the HTML attributes of the cell rendered for the column
@@ -277,7 +283,8 @@ namespace Kendo.Mvc.UI
         {
             get
             {
-                return Grid.VisibleColumns.Where(c => !c.Hidden).LastOrDefault() == this;
+                //TODO: Implement hidden columns
+                return Grid.VisibleColumns/*.Where(c => !c.Hidden)*/.LastOrDefault() == this;
             }
         }
 
@@ -289,10 +296,11 @@ namespace Kendo.Mvc.UI
 
         protected void Decorate(IGridDecoratableCellBuilder cellBuilder)
         {
-            if (Hidden)
-            {
+            //TODO: Implement hidden columns
+            //if (Hidden)
+            //{
                 cellBuilder.Decorators.Add(new GridHiddenCellBuilderDecorator());
-            }
+            //}
         }
 
         private Action<object> CreateCallback(IGridDataCellBuilder builder, bool insert, bool edit)
