@@ -232,19 +232,9 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
-        public void ClientEvents_should_set_events_of_the_treeview()
-        {
-            Action<TreeViewClientEventsBuilder> clientEventsAction = eventBuilder => { eventBuilder.OnLoad("Load"); };
-
-            builder.ClientEvents(clientEventsAction);
-
-            Assert.NotNull(treeView.ClientEvents.OnLoad.HandlerName);
-        }
-
-        [Fact]
         public void ClientEvents_should_return_builder()
         {
-            Action<TreeViewClientEventsBuilder> clientEventsAction = eventBuilder => { eventBuilder.OnLoad("Load"); };
+            Action<TreeViewClientEventsBuilder> clientEventsAction = eventBuilder => { eventBuilder.OnExpand("onExpand"); };
 
             var returnedBuilder = builder.ClientEvents(clientEventsAction);
 

@@ -7,16 +7,11 @@ namespace Kendo.Mvc.UI
             OnExpand = new ClientEvent();
             OnCollapse = new ClientEvent();
             OnSelect = new ClientEvent();
-            OnChecked = new ClientEvent();
-            OnLoad = new ClientEvent();
-            OnError = new ClientEvent();
-            OnNodeDragStart = new ClientEvent();
-            OnNodeDragging = new ClientEvent();
-            OnNodeDragCancelled = new ClientEvent();
-            OnNodeDrop = new ClientEvent();
-            OnNodeDropped = new ClientEvent();
-            OnDataBinding = new ClientEvent();
-            OnDataBound = new ClientEvent();
+            OnDragStart = new ClientEvent();
+            OnDrag = new ClientEvent();
+            OnDragCancelled = new ClientEvent();
+            OnDrop = new ClientEvent();
+            OnDragEnd = new ClientEvent();
         }
 
         public ClientEvent OnExpand { get; set; }
@@ -25,24 +20,14 @@ namespace Kendo.Mvc.UI
 
         public ClientEvent OnSelect { get; set; }
 
-        public ClientEvent OnChecked { get; set; }
+        public ClientEvent OnDragStart { get; set; }
 
-        public ClientEvent OnLoad { get; set; }
+        public ClientEvent OnDrag { get; set; }
 
-        public ClientEvent OnError { get; set; }
+        public ClientEvent OnDragCancelled { get; set; }
 
-        public ClientEvent OnNodeDragStart { get; set; }
+        public ClientEvent OnDrop { get; set; }
 
-        public ClientEvent OnNodeDragging { get; set; }
-
-        public ClientEvent OnNodeDragCancelled { get; set; }
-
-        public ClientEvent OnNodeDrop { get; set; }
-
-        public ClientEvent OnNodeDropped { get; set; }
-
-        public ClientEvent OnDataBinding { get; set; }
-
-        public ClientEvent OnDataBound { get; set; }
+        public ClientEvent OnDragEnd { get; set; }
     }
 }
