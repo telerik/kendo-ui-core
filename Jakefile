@@ -278,7 +278,8 @@ namespace("mvc", function() {
                     binariesPath = path.join(projectPath, "bin", "Release");
 
                 bundles.buildBundle(bundles.mvcWrappersBundle, version(), complete, function(root, bundle, license) {
-                    var binariesDeployRoot = path.join(root, "Binaries", "Mvc3"),
+                    var binariesDeployRoot = path.join(root, "Binaries"),
+                        mvc3binariesDeployRoot = path.join(binariesDeployRoot, "Mvc3"),
                         stylesDeployRoot = path.join(root, "Content"),
                         scriptsDeployRoot = path.join(root, "Scripts"),
                         sourceDeployRoot = path.join(root, "Source"),
@@ -291,10 +292,11 @@ namespace("mvc", function() {
 
                     // copy binaries
                     kendoBuild.mkdir(binariesDeployRoot);
+                    kendoBuild.mkdir(mvc3binariesDeployRoot);
 
                     kendoBuild.copyFileSync(
                         path.join(binariesPath, "Kendo.Mvc.dll"),
-                        path.join(binariesDeployRoot, "Kendo.Mvc.dll")
+                        path.join(mvc3binariesDeployRoot, "Kendo.Mvc.dll")
                     );
 
                     // deploy demos
