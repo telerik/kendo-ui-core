@@ -32,7 +32,8 @@ namespace Kendo.Mvc.UI
             var buttons = Commands.SelectMany(command => command.CreateDisplayButtons(Grid.Localization, urlBuilder, htmlHelper));
 
             GridActionCellBuilder builder = new GridActionCellBuilder(buttons.Select(button => (Func<object, IHtmlNode>)button.Create));
-            builder.HtmlAttributes.Merge(HtmlAttributes);
+            //TODO: Implement HtmlAttributes
+            //builder.HtmlAttributes.Merge(HtmlAttributes);
 
             return builder;
         }

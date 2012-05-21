@@ -206,8 +206,6 @@ namespace Kendo.Mvc.UI
             }
         }
 
-        
-
         /// <summary>
         /// Gets the header HTML attributes.
         /// </summary>
@@ -219,7 +217,9 @@ namespace Kendo.Mvc.UI
                 return Settings.HeaderHtmlAttributes;
             }
         }
-        
+
+        //TODO: Expose footer html attributes
+        /*
         /// <summary>
         /// Gets the footer HTML attributes.
         /// </summary>
@@ -231,7 +231,7 @@ namespace Kendo.Mvc.UI
                 return Settings.FooterHtmlAttributes;
             }
         }
-
+        */
         //TODO: Implement Column visibility
         /*
         /// <summary>
@@ -254,6 +254,8 @@ namespace Kendo.Mvc.UI
         }
         */
 
+        //TODO: Implement HtmlAttributes
+        /*
         /// <summary>
         /// Gets the HTML attributes of the cell rendered for the column
         /// </summary>
@@ -265,7 +267,7 @@ namespace Kendo.Mvc.UI
                 return Settings.HtmlAttributes;
             }
         }
-
+        */
         public virtual IGridColumnSerializer CreateSerializer()
         {
             return new GridColumnSerializer(this);
@@ -299,7 +301,7 @@ namespace Kendo.Mvc.UI
             //TODO: Implement hidden columns
             //if (Hidden)
             //{
-                cellBuilder.Decorators.Add(new GridHiddenCellBuilderDecorator());
+            //    cellBuilder.Decorators.Add(new GridHiddenCellBuilderDecorator());
             //}
         }
 
@@ -364,7 +366,8 @@ namespace Kendo.Mvc.UI
             }
 
             var builder = new GridTemplateCellBuilder<T>(template);
-            builder.HtmlAttributes.Merge(HtmlAttributes);
+            //TODO: Implement HtmlAttributes
+            //builder.HtmlAttributes.Merge(HtmlAttributes);
             return builder;
         }
 
@@ -429,12 +432,14 @@ namespace Kendo.Mvc.UI
 
         protected virtual IGridCellBuilder CreateFooterBuilderCore(IEnumerable<AggregateResult> aggregateResults)
         {
-            return new GridFooterCellBuilder(FooterHtmlAttributes, FooterTemplate);
+            //TODO: Expose footer html attributes
+            return new GridFooterCellBuilder(/*FooterHtmlAttributes,*/ FooterTemplate);
         }
         
         protected virtual IGridCellBuilder CreateGroupFooterBuilderCore(IEnumerable<AggregateResult> aggregateResults)
         {
-            return new GridFooterCellBuilder(FooterHtmlAttributes, FooterTemplate);
+            //TODO: Expose footer html attributes
+            return new GridFooterCellBuilder(/*FooterHtmlAttributes,*/ FooterTemplate);
         }
 
         protected void AppendHeaderContent(IHtmlNode container)

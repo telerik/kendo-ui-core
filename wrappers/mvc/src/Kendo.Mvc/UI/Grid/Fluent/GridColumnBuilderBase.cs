@@ -93,6 +93,8 @@ namespace Kendo.Mvc.UI.Fluent
             return this as TColumnBuilder;
         }
         */
+        //TODO: Expose footer html attributes
+        /*
         /// <summary>
         /// Sets the HTML attributes applied to the footer cell of the column.
         /// </summary>
@@ -128,7 +130,7 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this as TColumnBuilder;
         }
-
+        */
         /// <summary>
         /// Sets the HTML attributes applied to the content cell of the column.
         /// </summary>
@@ -144,8 +146,10 @@ namespace Kendo.Mvc.UI.Fluent
         public TColumnBuilder HtmlAttributes(object attributes)
         {
             return HtmlAttributes(attributes.ToDictionary());
-        }        
-        
+        }
+
+        //TODO: Implement HtmlAttributes
+        /*
         /// <summary>
         /// Sets the HTML attributes applied to the content cell of the column.
         /// </summary>
@@ -164,6 +168,7 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this as TColumnBuilder;
         }
+        */
 
         /// <summary>
         /// Sets the width of the column in pixels.

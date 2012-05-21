@@ -46,6 +46,7 @@ namespace Kendo.Mvc.UI
             get;
             set;
         }
+
         //TODO: Expose header html attributes
         /*
         IDictionary<string, object> HeaderHtmlAttributes 
@@ -53,10 +54,15 @@ namespace Kendo.Mvc.UI
             get; 
         }
         */
+
+        //TODO: Expose footer html attributes
+        /*
         IDictionary<string, object> FooterHtmlAttributes
         {
             get;
         }
+         */
+
         //TODO: Implement hidden columns
         /*
         bool Hidden 
@@ -64,6 +70,7 @@ namespace Kendo.Mvc.UI
             get; 
             set; 
         }*/
+
         //TODO: Implement HeaderContextMenu
         /*
         bool IncludeInContextMenu
@@ -72,11 +79,13 @@ namespace Kendo.Mvc.UI
             set;
         }
         */
+        //TODO: Implement HtmlAttributes
+        /*
         IDictionary<string, object> HtmlAttributes 
         { 
             get; 
         }
-
+        */
         string Title 
         { 
             get; 
