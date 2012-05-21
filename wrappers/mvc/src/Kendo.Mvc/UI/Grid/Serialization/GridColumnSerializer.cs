@@ -18,7 +18,7 @@ namespace Kendo.Mvc.UI
         {
             IDictionary<string, object> result = new Dictionary<string, object>();
             FluentDictionary.For(result)
-                  .Add("attr", column.HtmlAttributes.ToAttributeString(), () => column.HtmlAttributes.Any())
+                  //.Add("attr", column.HtmlAttributes.ToAttributeString(), () => column.HtmlAttributes.Any())
                   .Add("title", column.Title)
                   .Add("hidden", column.Hidden, false)
                   .Add("includeInContextMenu", column.IncludeInContextMenu, () => !column.IncludeInContextMenu)

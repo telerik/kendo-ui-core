@@ -55,6 +55,8 @@ namespace Kendo.Mvc.UI.Fluent
             return this as TColumnBuilder;
         }
 
+        //TODO: Header template builder
+/*
         /// <summary>
         /// Sets the HTML attributes applied to the header cell of the column.
         /// </summary>
@@ -90,7 +92,7 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this as TColumnBuilder;
         }
-
+        */
         /// <summary>
         /// Sets the HTML attributes applied to the footer cell of the column.
         /// </summary>
@@ -285,6 +287,8 @@ namespace Kendo.Mvc.UI.Fluent
             return this as TColumnBuilder;
         }
 
+        //TODO: Implement Header template configuration
+        /*
         /// <summary>
         /// Sets the header template for the column.
         /// </summary>
@@ -296,7 +300,7 @@ namespace Kendo.Mvc.UI.Fluent
             Column.HeaderTemplate.Content = template;
             return this as TColumnBuilder;
         }
-
+        
         /// <summary>
         /// Sets the header template for the column.
         /// </summary>
@@ -320,7 +324,7 @@ namespace Kendo.Mvc.UI.Fluent
             Column.HeaderTemplate.InlineTemplate = template;
             return this as TColumnBuilder;
         }
-
+        */
 
         /// <summary>
         /// Sets the footer template for the column.

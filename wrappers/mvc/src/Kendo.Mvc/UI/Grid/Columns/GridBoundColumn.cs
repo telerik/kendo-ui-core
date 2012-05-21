@@ -351,7 +351,7 @@ namespace Kendo.Mvc.UI
             HeaderHtmlAttributes.Add("data-field", Member);
             HeaderHtmlAttributes.Add("data-title", Title);
 
-            if (Sortable && Grid.Sorting.Enabled && !HeaderTemplate.HasValue())
+            if (Sortable && Grid.Sorting.Enabled /*&& !HeaderTemplate.HasValue()*/) //TODO: Implement header template
             {
                 builder = new GridSortableHeaderCellBuilder(HeaderHtmlAttributes, GetSortUrl(), SortDirection, Grid.Localization.SortedAsc, Grid.Localization.SortedDesc, AppendHeaderContent);
             }
