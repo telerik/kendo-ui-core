@@ -11,7 +11,7 @@ namespace Kendo.Mvc.Examples.Controllers
     {
         public ActionResult AjaxBinding()
         {
-            return View();
+            return View(new NorthwindDataContext().Products);
         }
 
         /// <summary>

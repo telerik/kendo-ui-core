@@ -1,4 +1,6 @@
-@(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.Product>()    
+@model IEnumerable<Product>
+
+@(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.Product>(Model)    
     .Name("Grid")
     .Pageable()
     .Sortable()

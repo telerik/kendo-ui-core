@@ -17,7 +17,7 @@ namespace Kendo.Mvc.UI
         public void Serialize(IClientSideObjectWriter writer)
         {
             var columns = new List<IDictionary<string, object>>();
-            var autoBind = grid.DataSource.Type == DataSourceType.Ajax;
+            var autoBind = grid.DataSource.Type == DataSourceType.Ajax && grid.DataSource.Data == null;
 
             grid.VisibleColumns.Each(column =>
             {
