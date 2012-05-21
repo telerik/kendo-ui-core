@@ -12,7 +12,7 @@ namespace Kendo.Mvc.UI.Tests
     {
         public static Mock<IClientSideObjectWriter> clientSideObjectWriter;
 
-        public static DatePicker CreateDatePicker(IDatePickerHtmlBuilder renderer, ViewContext viewContext)
+        public static DatePicker CreateDatePicker(DatePickerHtmlBuilder renderer, ViewContext viewContext)
         {
             Mock<HttpContextBase> httpContext = TestHelper.CreateMockedHttpContext();
 

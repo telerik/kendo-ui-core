@@ -33,7 +33,6 @@ namespace Kendo.Mvc.UI
 
             ClientEvents = new PanelBarClientEvents();
 
-            this.Effects = new Effects();
             //defaultEffects.Each(el => Effects.Container.Add(el));
 
             ExpandMode = PanelBarExpandMode.Multiple;

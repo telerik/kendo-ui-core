@@ -325,6 +325,8 @@
     <Compile Include="UI\DataSource\ModelDescriptor.cs" />
     <Compile Include="UI\DataSource\Transport.cs" />
     <Compile Include="UI\DatePickerBase\Fluent\MonthTemplateBuilder.cs" />
+    <Compile Include="UI\Effects\PopupAnimation.cs" />
+    <Compile Include="UI\Effects\Fluent\PopupAnimationBuilder.cs" />
     <Compile Include="UI\DatePicker\MonthTemplate.cs" />
     <Compile Include="Infrastructure\JsonObject.cs" />
     <Compile Include="UI\Gauge\Fluent\GaugeLinearScaleBuilder.cs" />
@@ -424,7 +426,7 @@
     <Compile Include="UI\Effects\SlideDirection.cs" />
     <Compile Include="UI\Effects\ZoomDirection.cs" />
     <Compile Include="UI\Effects\FadeDirection.cs" />
-    <Compile Include="UI\Effects\EffectsBuilder.cs" />
+    <Compile Include="UI\Effects\Fluent\EffectsBuilder.cs" />
     <Compile Include="UI\Effects\Effects.cs" />
     <Compile Include="UI\ExpressionBuilder.cs" />
     <Compile Include="Infrastructure\Implementation\BindingHelper.cs" />
@@ -904,7 +906,6 @@
     <Compile Include="UI\DatePicker\Fluent\DatePickerBuilder.cs" />
     <Compile Include="UI\DatePickerBase\DatePickerClientEvents.cs" />
     <Compile Include="UI\DatePicker\Html\DatePickerHtmlBuilder.cs" />
-    <Compile Include="UI\DatePicker\IDatePickerHtmlBuilder.cs" />
     <Compile Include="UI\ContentNavigationItemBuilder.cs" />
     <Compile Include="UI\Grid\GridActionBindingContext.cs" />
     <Compile Include="UI\Grid\Settings\GridAjaxSettings.cs" />

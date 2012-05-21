@@ -12,7 +12,6 @@ namespace Kendo.Mvc.UI
             InputHtmlAttributes = new Dictionary<string, object>();
 
             ClientEvents = new DatePickerClientEvents();
-            Effects = new Effects();
 
             Value = null;
             Enabled = true;

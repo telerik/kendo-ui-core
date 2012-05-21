@@ -33,7 +33,6 @@ namespace Kendo.Mvc.UI
             Actions = new WindowButtons();
             defaultButtons.Each(button => Actions.Container.Add(button));
 
-            Effects = new Effects();
             //defaultEffects.Each(el => Effects.Container.Add(el));
 
             ContentHtmlAttributes = new RouteValueDictionary();

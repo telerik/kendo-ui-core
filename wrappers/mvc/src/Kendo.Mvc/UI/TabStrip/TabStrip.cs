@@ -28,7 +28,6 @@ namespace Kendo.Mvc.UI
             UrlGenerator = urlGenerator;
             Authorization = authorization;
 
-            this.Effects = new Effects();
             //defaultEffects.Each(el => Effects.Container.Add(el));
 
             ClientEvents = new TabStripClientEvents();

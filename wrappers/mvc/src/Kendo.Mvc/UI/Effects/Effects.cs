@@ -4,13 +4,24 @@ namespace Kendo.Mvc.UI
     using System.Collections.Generic;
 
     using Kendo.Mvc.Extensions;
+    using Kendo.Mvc.Infrastructure;
 
     public class Effects
     {
-        public Effects()
+        public Effects(string name)
         {
+            Guard.IsNotNullOrEmpty(name, "name");
+
+            Name = name;
+
             Container = new List<string>();
             Duration = (int)AnimationDuration.Normal;
+        }
+
+        protected string Name 
+        { 
+            get;
+            set; 
         }
 
         public IList<string> Container
@@ -31,7 +42,7 @@ namespace Kendo.Mvc.UI
 
             if (Container.Any())
             {
-                result = "effects: \"{0}\", duration: {1}".FormatWith(string.Join(",", Container), Duration);
+                result = "{0}: {{effects: \"{1}\", duration: {2}}}".FormatWith(Name, string.Join(" ", Container), Duration);
             }
 
             return result;

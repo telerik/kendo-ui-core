@@ -26,7 +26,6 @@ namespace Kendo.Mvc.UI
 
             Multiple = new AutoCompleteMultipleValuesSettings();
 
-            Effects = new Effects();
             //defaultEffects.Each(el => Effects.Container.Add(el));
             Enabled = true;
             Encoded = true;

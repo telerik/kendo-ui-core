@@ -10,7 +10,7 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="DatePicker"/> component.
     /// </summary>
-    public class DatePickerBuilder :ViewComponentBuilderBase<DatePicker, DatePickerBuilder>, IHideObjectMembers
+    public class DatePickerBuilder: ViewComponentBuilderBase<DatePicker, DatePickerBuilder>, IHideObjectMembers
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DatePickerBuilder"/> class.
@@ -56,6 +56,22 @@ namespace Kendo.Mvc.UI.Fluent
         public DatePickerBuilder Start(string start)
         {
             Component.Start = start;
+
+            return this;
+        }
+
+        public DatePickerBuilder Animation(bool enable)
+        {
+            Component.Animation.Enabled = enable;
+
+            return this;
+        }
+
+        public DatePickerBuilder Animation(Action<PopupAnimationBuilder> animationAction)
+        {
+            Guard.IsNotNull(animationAction, "animationAction");
+
+            animationAction(new PopupAnimationBuilder(Component.Animation));
 
             return this;
         }
