@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Kendo.Mvc.Extensions;
+using System.Web.Mvc;
 
 namespace Kendo.Mvc.UI
 {
@@ -65,9 +66,8 @@ namespace Kendo.Mvc.UI
             }
 
             json["type"] = "aspnetmvc-" + Type.ToString().ToLower();
-
-            // serialize empty array in order to override initial sort on postback
-            if (OrderBy.Any() || ServerSorting) 
+            
+            if (OrderBy.Any()) 
             {
                 json["sort"] = OrderBy.ToJson();
             }
@@ -89,10 +89,23 @@ namespace Kendo.Mvc.UI
 
             if (Filters.Any() || ServerFiltering)
             {
-                json["filter"] = Filters.OfType<FilterDescriptorBase>().ToJson();
-                
-            }            
-        }        
+                json["filter"] = Filters.OfType<FilterDescriptorBase>().ToJson();                
+            }
+
+            if (ModelType != null)
+            {
+                var model = new Dictionary<string, object>();
+                model["model"] = new ModelTypeDescriptor(ModelType).ToJson();
+                json["schema"] = model;
+
+            }
+        }       
+
+        public Type ModelType 
+        { 
+            get; 
+            set; 
+        }
 
         public DataSourceType Type
         {

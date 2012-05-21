@@ -5,11 +5,9 @@
    function parameterMap(options) {
        var result = {};
 
-       if (options.sort) {
-           result[this.options.prefix + "orderBy"] = $.map(options.sort, function(sort) {
-               return sort.field + "-" + sort.dir;
-           }).join("~");
-       }
+       result[this.options.prefix + "orderBy"] = $.map(options.sort || [], function(sort) {
+           return sort.field + "-" + sort.dir;
+       }).join("~");
 
        if (options.page) {
            result[this.options.prefix + "page"] = options.page;
@@ -20,9 +18,10 @@
                return group.field + "-" + group.dir;
            }).join("~");
        }
-
        if (options.filter) {
            result[this.options.prefix + "filter"] = serializeFilter(options.filter);
+       } else {
+           result[this.options.prefix + "filter"] = "";
        }
 
        return result;

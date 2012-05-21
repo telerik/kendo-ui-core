@@ -95,6 +95,7 @@ namespace Kendo.Mvc.UI
             AutoGenerateColumns = true;
 
             DataSource = new DataSource();
+            DataSource.ModelType = typeof(T);
         }
 
         public DataSource DataSource
