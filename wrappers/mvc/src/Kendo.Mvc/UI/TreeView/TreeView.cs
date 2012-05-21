@@ -165,19 +165,14 @@ namespace Kendo.Mvc.UI
                 objectWriter.Append("dragAndDrop", true);
             }
 
-            objectWriter.AppendClientEvent("onExpand", ClientEvents.OnExpand);
-            objectWriter.AppendClientEvent("onCollapse", ClientEvents.OnCollapse);
-            objectWriter.AppendClientEvent("onSelect", ClientEvents.OnSelect);
-            objectWriter.AppendClientEvent("onLoad", ClientEvents.OnLoad);
-            objectWriter.AppendClientEvent("onError", ClientEvents.OnError);
-            objectWriter.AppendClientEvent("onChecked", ClientEvents.OnChecked);
-            objectWriter.AppendClientEvent("onNodeDragStart", ClientEvents.OnNodeDragStart);
-            objectWriter.AppendClientEvent("onNodeDragging", ClientEvents.OnNodeDragging);
-            objectWriter.AppendClientEvent("onNodeDragCancelled", ClientEvents.OnNodeDragCancelled);
-            objectWriter.AppendClientEvent("onNodeDrop", ClientEvents.OnNodeDrop);
-            objectWriter.AppendClientEvent("onNodeDropped", ClientEvents.OnNodeDropped);
-            objectWriter.AppendClientEvent("onDataBinding", ClientEvents.OnDataBinding);
-            objectWriter.AppendClientEvent("onDataBound", ClientEvents.OnDataBound);
+            objectWriter.AppendClientEvent("expand", ClientEvents.OnExpand);
+            objectWriter.AppendClientEvent("collapse", ClientEvents.OnCollapse);
+            objectWriter.AppendClientEvent("select", ClientEvents.OnSelect);
+            objectWriter.AppendClientEvent("dragstart", ClientEvents.OnDragStart);
+            objectWriter.AppendClientEvent("drag", ClientEvents.OnDrag);
+            objectWriter.AppendClientEvent("dragcancelled", ClientEvents.OnDragCancelled);
+            objectWriter.AppendClientEvent("drop", ClientEvents.OnDrop);
+            objectWriter.AppendClientEvent("dragend", ClientEvents.OnDragEnd);
 
             objectWriter.Complete();
             base.WriteInitializationScript(writer);
