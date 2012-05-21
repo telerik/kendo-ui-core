@@ -10,9 +10,11 @@
         <script src="../../src/kendo.fx.js"></script>
         <script src="../../src/kendo.history.js"></script>
         <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.mobile.loader.js"></script>
         <script src="../../src/kendo.mobile.scroller.js"></script>
-        <script src="../../src/kendo.mobile.navbar.js"></script>
         <script src="../../src/kendo.mobile.view.js"></script>
+        <script src="../../src/kendo.mobile.pane.js"></script>
+        <script src="../../src/kendo.mobile.navbar.js"></script>
         <script src="../../src/kendo.mobile.button.js"></script>
         <script src="../../src/kendo.mobile.listview.js"></script>
         <script src="../../src/kendo.mobile.application.js"></script>
@@ -21,21 +23,24 @@
             $(window).load(function() {
                 new kendo.mobile.Application();
             });
-        </script>
-        <style>
-            [data-role=page] {
-                display: inline-block;
-                height: 500px;
+
+            function initScrollView(e) {
+                setTimeout(function() {
+                    var s = e.view.element.find("#scrollview");
+                    s.kendoMobileScrollView();
+                    s.kendoMobileScrollView('refresh');
+                }, 100);
             }
-        </style>
+        </script>
     </head>
     <body>
-        <div data-role="view">
-            <div data-role="scrollview">
+        <div data-role="view" data-init="initScrollView">
+            <div id="scrollview">
                 <div data-role="page">Foo</div>
                 <div data-role="page">Bar</div>
                 <div data-role="page">Baz</div>
             </div>
+
             <a data-role="button" href="#bar">Bar</a>
         </div>
         <div data-role="view" id="bar">
