@@ -3,15 +3,15 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="RadialGaugeCap"/>.
     /// </summary>
-    public class RadialGaugeCapBuilder : IHideObjectMembers
+    public class GaugeRadialCapBuilder : IHideObjectMembers
     {
-        private readonly RadialGaugeCap cap;
+        private readonly GaugeRadialCap cap;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="RadialGaugeCapBuilder" /> class.
+        /// Initializes a new instance of the <see cref="GaugeRadialCapBuilder" /> class.
         /// </summary>
         /// <param name="cap">The gauge cap.</param>
-        public RadialGaugeCapBuilder(RadialGaugeCap cap)
+        public GaugeRadialCapBuilder(GaugeRadialCap cap)
         {
             this.cap = cap;
         }
@@ -31,7 +31,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>        
-        public RadialGaugeCapBuilder Color(string color)
+        public GaugeRadialCapBuilder Color(string color)
         {
             cap.Color = color;
             return this;
@@ -55,7 +55,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public RadialGaugeCapBuilder Opacity(double opacity)
+        public GaugeRadialCapBuilder Opacity(double opacity)
         {
             cap.Opacity = opacity;
             return this;
@@ -76,7 +76,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public RadialGaugeCapBuilder Size(double size)
+        public GaugeRadialCapBuilder Size(double size)
         {
             cap.Size = size;
             return this;

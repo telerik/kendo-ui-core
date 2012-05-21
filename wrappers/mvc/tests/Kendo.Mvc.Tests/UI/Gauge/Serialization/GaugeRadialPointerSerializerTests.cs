@@ -3,13 +3,13 @@ namespace Kendo.Mvc.UI.Tests
     using System.Collections.Generic;
     using Xunit;
 
-    public class RadialGaugePointerSerializerTests
+    public class GaugeRadialPointerSerializerTests
     {
-        private readonly RadialGaugePointer pointer;
+        private readonly GaugeRadialPointer pointer;
 
-        public RadialGaugePointerSerializerTests()
+        public GaugeRadialPointerSerializerTests()
         {
-            pointer = new RadialGaugePointer();
+            pointer = new GaugeRadialPointer();
         }
 
         [Fact]

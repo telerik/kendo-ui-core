@@ -3,13 +3,13 @@ namespace Kendo.Mvc.UI.Tests
     using System.Collections.Generic;
     using Xunit;
 
-    public class RadialGaugeCapSerializerTests
+    public class GaugeRadialCapSerializerTests
     {
-        private readonly RadialGaugeCap cap;
+        private readonly GaugeRadialCap cap;
 
-        public RadialGaugeCapSerializerTests()
+        public GaugeRadialCapSerializerTests()
         {
-            cap = new RadialGaugeCap();
+            cap = new GaugeRadialCap();
         }
 
         [Fact]

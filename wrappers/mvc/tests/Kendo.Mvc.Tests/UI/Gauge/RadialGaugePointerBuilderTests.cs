@@ -4,15 +4,15 @@ namespace Kendo.Mvc.UI.Tests.Gauge
     using Kendo.Mvc.UI.Fluent;
     using Xunit;
 
-    public class RadialGaugePointerTests
+    public class RadialGaugePointerBuilderTests
     {
-        private readonly RadialGaugePointer pointer;
-        private readonly RadialGaugePointerBuilder builder;
+        private readonly GaugeRadialPointer pointer;
+        private readonly GaugeRadialPointerBuilder builder;
 
-        public RadialGaugePointerTests()
+        public RadialGaugePointerBuilderTests()
         {
-            pointer = new RadialGaugePointer();
-            builder = new RadialGaugePointerBuilder(pointer);
+            pointer = new GaugeRadialPointer();
+            builder = new GaugeRadialPointerBuilder(pointer);
         }
 
         [Fact]

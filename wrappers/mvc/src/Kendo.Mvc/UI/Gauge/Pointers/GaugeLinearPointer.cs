@@ -3,16 +3,16 @@ namespace Kendo.Mvc.UI
     /// <summary>
     /// Represents the gauge pointer
     /// </summary>
-    public class LinearGaugePointer
+    public class GaugeLinearPointer
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="LinearGaugePointer" /> class.
+        /// Initializes a new instance of the <see cref="GaugeLinearPointer" /> class.
         /// </summary>
-        public LinearGaugePointer()
+        public GaugeLinearPointer()
         {
             Margin = new ChartSpacing();
             Border = new ChartElementBorder();
-            Track = new LinearGaugeTrack();
+            Track = new GaugeLinearTrack();
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Kendo.Mvc.UI
         /// <value>
         /// The pointer shape
         /// </value>
-        public LinearGaugePointerShape? Shape
+        public GaugeLinearPointerShape? Shape
         {
             get;
             set;
@@ -96,7 +96,7 @@ namespace Kendo.Mvc.UI
         /// <value>
         /// The pointer position
         /// </value>
-        public LinearGaugeTrack Track
+        public GaugeLinearTrack Track
         {
             get;
             set;
@@ -107,7 +107,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         public IChartSerializer CreateSerializer()
         {
-            return new LinearGaugePointerSerializer(this);
+            return new GaugeLinearPointerSerializer(this);
         }
     }
 }

@@ -4,15 +4,15 @@ namespace Kendo.Mvc.UI.Tests.Gauge
     using Kendo.Mvc.UI.Fluent;
     using Xunit;
 
-    public class LinearGaugePointerTests
+    public class GaugeLinearPointerBuilderTests
     {
-        private readonly LinearGaugePointer pointer;
-        private readonly LinearGaugePointerBuilder builder;
+        private readonly GaugeLinearPointer pointer;
+        private readonly GaugeLinearPointerBuilder builder;
 
-        public LinearGaugePointerTests()
+        public GaugeLinearPointerBuilderTests()
         {
-            pointer = new LinearGaugePointer();
-            builder = new LinearGaugePointerBuilder(pointer);
+            pointer = new GaugeLinearPointer();
+            builder = new GaugeLinearPointerBuilder(pointer);
         }
 
         [Fact]
@@ -50,8 +50,8 @@ namespace Kendo.Mvc.UI.Tests.Gauge
         [Fact]
         public void Shape_sets_Shape()
         {
-            builder.Shape(LinearGaugePointerShape.Arrow);
-            pointer.Shape.ShouldEqual(LinearGaugePointerShape.Arrow);
+            builder.Shape(GaugeLinearPointerShape.Arrow);
+            pointer.Shape.ShouldEqual(GaugeLinearPointerShape.Arrow);
         }
 
         [Fact]

@@ -3,17 +3,17 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent interface for configuring the linear gauge track.
     /// </summary>
-    public class LinearGaugeTrackBuilder : IHideObjectMembers
+    public class GaugeLinearTrackBuilder : IHideObjectMembers
     {
-        private readonly LinearGaugeTrack track;
+        private readonly GaugeLinearTrack track;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="LinearGaugeTrackBuilder" /> class.
+        /// Initializes a new instance of the <see cref="GaugeLinearTrackBuilder" /> class.
         /// </summary>
         /// <param name="linearGaugeTrack">The linear gauge track.</param>
-        public LinearGaugeTrackBuilder(LinearGaugeTrack linearGaugeTrack)
+        public GaugeLinearTrackBuilder(GaugeLinearTrack linearTrack)
         {
-            track = linearGaugeTrack;
+            track = linearTrack;
         }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>        
-        public LinearGaugeTrackBuilder Color(string color)
+        public GaugeLinearTrackBuilder Color(string color)
         {
             track.Color = color;
             return this;
@@ -52,7 +52,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public LinearGaugeTrackBuilder Size(double size)
+        public GaugeLinearTrackBuilder Size(double size)
         {
             track.Size = size;
             return this;
@@ -73,7 +73,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public LinearGaugeTrackBuilder Visible(bool visible)
+        public GaugeLinearTrackBuilder Visible(bool visible)
         {
             track.Visible = visible;
             return this;
@@ -96,7 +96,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public LinearGaugeTrackBuilder Border(int width, string color, ChartDashType dashType)
+        public GaugeLinearTrackBuilder Border(int width, string color, ChartDashType dashType)
         {
             track.Border = new ChartElementBorder(width, color, dashType);
             return this;

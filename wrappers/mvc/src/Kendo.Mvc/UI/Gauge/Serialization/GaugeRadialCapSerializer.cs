@@ -4,11 +4,11 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.Extensions;
 
-    internal class RadialGaugeCapSerializer : IChartSerializer
+    internal class GaugeRadialCapSerializer : IChartSerializer
     {
-        private readonly RadialGaugeCap cap;
+        private readonly GaugeRadialCap cap;
 
-        public RadialGaugeCapSerializer(RadialGaugeCap cap)
+        public GaugeRadialCapSerializer(GaugeRadialCap cap)
         {
             this.cap = cap;
         }

@@ -3,19 +3,19 @@ namespace Kendo.Mvc.UI.Tests
     using System.Collections.Generic;
     using Xunit;
 
-    public class LinearGaugePointerSerializerTests
+    public class GaugeLinearTrackSerializerTests
     {
-        private readonly LinearGaugePointer pointer;
+        private readonly GaugeLinearTrack track;
 
-        public LinearGaugePointerSerializerTests()
+        public GaugeLinearTrackSerializerTests()
         {
-            pointer = new LinearGaugePointer();
+            track = new GaugeLinearTrack();
         }
 
         [Fact]
         public void Serializes_color()
         {
-            pointer.Color = "Color";
+            track.Color = "Color";
             GetJson()["color"].ShouldEqual("Color");
         }
 
@@ -28,7 +28,7 @@ namespace Kendo.Mvc.UI.Tests
         [Fact]
         public void Serializes_opacity()
         {
-            pointer.Opacity = 0.33;
+            track.Opacity = 0.33;
             GetJson()["opacity"].ShouldEqual(0.33);
         }
 
@@ -39,23 +39,10 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
-        public void Serializes_margin()
-        {
-            pointer.Margin = new ChartSpacing(20);
-            GetJson().ContainsKey("margin").ShouldBeTrue();
-        }
-
-        [Fact]
-        public void Does_not_serialize_default_margin()
-        {
-            GetJson().ContainsKey("margin").ShouldBeFalse();
-        }
-
-        [Fact]
         public void Serializes_border()
         {
-            pointer.Border.Color = "red";
-            pointer.Border.Width = 1;
+            track.Border.Color = "red";
+            track.Border.Width = 1;
             ((Dictionary<string, object>)GetJson()["border"])["width"].ShouldEqual(1);
             ((Dictionary<string, object>)GetJson()["border"])["color"].ShouldEqual("red");
         }
@@ -67,22 +54,9 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
-        public void Serializes_shape()
-        {
-            pointer.Shape = LinearGaugePointerShape.Arrow;
-            GetJson()["shape"].ShouldEqual("arrow");
-        }
-
-        [Fact]
-        public void Does_not_serialize_default_Shape()
-        {
-            GetJson().ContainsKey("shape").ShouldBeFalse();
-        }
-
-        [Fact]
         public void Serializes_size()
         {
-            pointer.Size = 3.3;
+            track.Size = 3.3;
             GetJson()["size"].ShouldEqual(3.3);
         }
 
@@ -93,21 +67,21 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
-        public void Serializes_value()
+        public void Serializes_visible()
         {
-            pointer.Value = 3.3;
-            GetJson()["value"].ShouldEqual(3.3);
+            track.Visible = false;
+            GetJson()["visible"].ShouldEqual(false);
         }
 
         [Fact]
-        public void Does_not_serialize_default_value()
+        public void Does_not_serialize_default_visible()
         {
-            GetJson().ContainsKey("value").ShouldBeFalse();
+            GetJson().ContainsKey("visible").ShouldBeFalse();
         }
 
         private IDictionary<string, object> GetJson()
         {
-            return pointer.CreateSerializer().Serialize();
+            return track.CreateSerializer().Serialize();
         }
     }
 }

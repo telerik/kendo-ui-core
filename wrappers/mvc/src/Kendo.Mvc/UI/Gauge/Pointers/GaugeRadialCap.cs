@@ -3,12 +3,12 @@ namespace Kendo.Mvc.UI
     /// <summary>
     /// Represents the gauge cap
     /// </summary>
-    public class RadialGaugeCap
+    public class GaugeRadialCap
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="RadialGaugeCap" /> class.
+        /// Initializes a new instance of the <see cref="GaugeRadialCap" /> class.
         /// </summary>
-        public RadialGaugeCap()
+        public GaugeRadialCap()
         {
         }
 
@@ -50,7 +50,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         public IChartSerializer CreateSerializer()
         {
-            return new RadialGaugeCapSerializer(this);
+            return new GaugeRadialCapSerializer(this);
         }
     }
 }
