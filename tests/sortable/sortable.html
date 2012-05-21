@@ -26,7 +26,7 @@
                 dataSource;
 
             function setup(element, options) {
-                return new Sortable(element || button.data("field", "foo"), options || { dataSource: dataSource });
+                return new Sortable(element || button.attr("data-field", "foo"), options || { dataSource: dataSource });
             }
 
             module("kendo.ui.Sortable", {
@@ -48,14 +48,14 @@
             test("sorting the data source assigns the dir data", function() {
                 var sorter = setup();
                 dataSource.sort( { field: "foo", dir: "desc" });
-                equal(button.data("dir"), "desc");
+                equal(button.attr("data-dir"), "desc");
             });
 
             test("sorting twice clears the dir data", function() {
                 var sorter = setup();
                 dataSource.sort( { field: "foo", dir: "desc" });
                 dataSource.sort( { field: "bar", dir: "desc" });
-                equal(button.data("dir"), undefined);
+                equal(button.attr("data-dir"), undefined);
             });
 
             test("clicking changes the sort direction", function() {
@@ -63,27 +63,27 @@
                 button.click();
                 button.click();
 
-                equal(button.data("dir"), "desc");
+                equal(button.attr("data-dir"), "desc");
             });
 
             test("desc changes to empty", function() {
-                var sorter = setup(button.data("field", "foo").data("dir", "desc"));
+                var sorter = setup(button.attr("data-field", "foo").attr("data-dir", "desc"));
 
                 button.click();
 
-                equal(button.data("dir"), undefined);
+                equal(button.attr("data-dir"), undefined);
             });
 
             test("clicking unsorted element sets its direrction to ascending", function() {
                 var sorter = setup();
                 button.click();
 
-                equal(button.data("dir"), "asc");
+                equal(button.attr("data-dir"), "asc");
             });
 
 
             test("multiple sort mode", function() {
-                var sorter = setup(button.data("field", "foo"), { dataSource: dataSource, mode: "multiple" } );
+                var sorter = setup(button.attr("data-field", "foo"), { dataSource: dataSource, mode: "multiple" } );
 
                 dataSource.sort( { field: "bar", dir: "asc" } );
 
@@ -97,7 +97,7 @@
             });
 
             test("multiple sort mode and unsorting", function() {
-                var sorter = setup(button.data("field", "foo"), { dataSource: dataSource, mode: "multiple" } );
+                var sorter = setup(button.attr("data-field", "foo"), { dataSource: dataSource, mode: "multiple" } );
 
                 dataSource.sort( [{ field: "bar", dir: "asc" }, { field: "foo", dir: "desc" } ] );
 
@@ -110,11 +110,11 @@
             });
 
             test("dir changes to asc when allowUnsort is false", function() {
-                var sorter = setup(button.data("field", "foo").data("dir", "desc"), { dataSource: dataSource, allowUnsort: false } );
+                var sorter = setup(button.attr("data-field", "foo").data("dir", "desc"), { dataSource: dataSource, allowUnsort: false } );
 
                 button.click();
 
-                equal(button.data("dir"), "asc");
+                equal(button.attr("data-dir"), "asc");
             });
 
             test("asc arrow is rendered", function() {
@@ -143,7 +143,7 @@
             });
 
             test("multiple sorting on same field", function() {
-                var sorter = setup(button.data("field", "foo"), { dataSource: dataSource, mode: "multiple", allowUnsort: true } );
+                var sorter = setup(button.attr("data-field", "foo"), { dataSource: dataSource, mode: "multiple", allowUnsort: true } );
 
                 button.click().click();
 
@@ -155,7 +155,7 @@
             });
 
             test("mode:multiple unsorting field", function() {
-                var sorter = setup(button.data("field", "foo"), { dataSource: dataSource, mode: "multiple", allowUnsort: true } );
+                var sorter = setup(button.attr("data-field", "foo"), { dataSource: dataSource, mode: "multiple", allowUnsort: true } );
 
                 button.click().click().click();
 
@@ -165,7 +165,7 @@
             });
 
             test("multiple sorting on same field allowUnsort: false", function() {
-                var sorter = setup(button.data("field", "foo"), { dataSource: dataSource, mode: "multiple", allowUnsort: false } );
+                var sorter = setup(button.attr("data-field", "foo"), { dataSource: dataSource, mode: "multiple", allowUnsort: false } );
 
                 button.click().click();
 
@@ -177,7 +177,7 @@
             });
 
             test("mode:multiple unsorting field allowUnsort: false", function() {
-                var sorter = setup(button.data("field", "foo"), { dataSource: dataSource, mode: "multiple", allowUnsort: false } );
+                var sorter = setup(button.attr("data-field", "foo"), { dataSource: dataSource, mode: "multiple", allowUnsort: false } );
 
                 button.click().click().click();
 
