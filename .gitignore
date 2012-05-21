@@ -45,3 +45,4 @@ download-builder/service/App_Data
 wrappers/mvc/demos/**/Scripts
 wrappers/mvc/demos/**/Content
 wrappers/mvc/demos/**/App_Data
+Guardfile
