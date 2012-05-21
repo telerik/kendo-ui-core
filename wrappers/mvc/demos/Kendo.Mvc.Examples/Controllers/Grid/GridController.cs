@@ -2,13 +2,12 @@
 using System.Linq;
 using System.Web.Mvc;
 using Kendo.Mvc.Examples.Models;
-using Kendo.Mvc.UI;
 
 namespace Kendo.Mvc.Examples.Controllers.Grid
 {
-    public class GridController : Controller
+    public partial class GridController : Controller
     {
-        public ActionResult Index([DataSourceRequest] DataSourceRequest request)
+        public ActionResult Index()
         {
             return View(new NorthwindDataContext().Products);
         }

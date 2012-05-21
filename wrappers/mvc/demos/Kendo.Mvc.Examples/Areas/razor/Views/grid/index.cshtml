@@ -1,7 +1,4 @@
-@model IEnumerable<Product>
-
-<script src="@Url.Content("~/Scripts/kendo.grid.js")"></script>
-
+@model IEnumerable<Kendo.Mvc.Examples.Models.Product>
 @(Html.Kendo().Grid(Model)    
     .Name("Grid")
     .Pageable()
@@ -9,14 +6,8 @@
     .Scrollable() 
     .Filterable()             
     .DataSource(dataSource => dataSource.Type(DataSourceType.Server)
-        .PageSize(23)
-    /*    .Group(group => {
-            group.Add(exp => exp.CategoryID);
-            group.Add(exp => exp.ProductID);
-        })*/
-        .Read(read => read.Url("Index", "Grid"))
+        .Read(read => read.Action("Index", "Grid"))
         .Sort(s => s.Add(p => p.ProductID).Descending())
         .Filter(filters => filters.Add(p => p.ProductID).IsEqualTo(2))
         )
-    )
 )
