@@ -138,33 +138,33 @@ namespace Kendo.Mvc.UI
             return this;
         }
 
-        /// <summary>
-        /// Configures the effects of the tabstrip.
-        /// </summary>
-        /// <param name="addEffects">The action which configures the effects.</param>
-        /// <example>
-        /// <code lang="CS">
-        /// &lt;%= Html.Telerik().TabStrip()
-        ///	           .Name("TabStrip")
-        ///	           .Effects(fx =>
-        ///	           {
-        ///		            fx.Slide()
-        ///			          .Opacity()
-        ///					  .OpenDuration(AnimationDuration.Normal)
-        ///					  .CloseDuration(AnimationDuration.Normal);
-        ///	           })
-        /// </code>
-        /// </example>
-        public TabStripBuilder Effects(Action<EffectsBuilder> addEffects)
-        {
-            Guard.IsNotNull(addEffects, "addAction");
+        ///// <summary>
+        ///// Configures the effects of the tabstrip.
+        ///// </summary>
+        ///// <param name="addEffects">The action which configures the effects.</param>
+        ///// <example>
+        ///// <code lang="CS">
+        ///// &lt;%= Html.Telerik().TabStrip()
+        /////	           .Name("TabStrip")
+        /////	           .Effects(fx =>
+        /////	           {
+        /////		            fx.Slide()
+        /////			          .Opacity()
+        /////					  .OpenDuration(AnimationDuration.Normal)
+        /////					  .CloseDuration(AnimationDuration.Normal);
+        /////	           })
+        ///// </code>
+        ///// </example>
+        //public TabStripBuilder Effects(Action<EffectsBuilder> addEffects)
+        //{
+        //    Guard.IsNotNull(addEffects, "addAction");
 
-            EffectsBuilderFactory factory = new EffectsBuilderFactory();
+        //    EffectsBuilderFactory factory = new EffectsBuilderFactory();
 
-            addEffects(factory.Create(Component.Effects));
+        //    addEffects(factory.Create(Component.Effects));
 
-            return this;
-        }
+        //    return this;
+        //}
 
         /// <summary>
         /// Selects the item at the specified index.

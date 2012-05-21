@@ -317,31 +317,31 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
-        /// <summary>
-        /// Configures the effects of the window.
-        /// </summary>
-        /// <param name="effectsAction">The action which configures the effects.</param>
-        /// <example>
-        /// <code lang="CS">
-        /// &lt;%= Html.Kendo().Window()
-        ///               .Name("Window")
-        ///               .Effects(fx =>
-        ///               {
-        ///                    fx.Zoom()
-        ///                      .Opacity()
-        ///                      .OpenDuration(AnimationDuration.Fast)
-        ///                      .CloseDuration(AnimationDuration.Fast);
-        ///               })
-        /// </code>
-        /// </example>
-        public WindowBuilder Effects(Action<WindowEffectsBuilder> addEffects)
-        {
-            Guard.IsNotNull(addEffects, "addAction");
+        ///// <summary>
+        ///// Configures the effects of the window.
+        ///// </summary>
+        ///// <param name="effectsAction">The action which configures the effects.</param>
+        ///// <example>
+        ///// <code lang="CS">
+        ///// &lt;%= Html.Telerik().Window()
+        /////               .Name("Window")
+        /////               .Effects(fx =>
+        /////               {
+        /////                    fx.Zoom()
+        /////                      .Opacity()
+        /////                      .OpenDuration(AnimationDuration.Fast)
+        /////                      .CloseDuration(AnimationDuration.Fast);
+        /////               })
+        ///// </code>
+        ///// </example>
+        //public WindowBuilder Effects(Action<WindowEffectsBuilder> addEffects)
+        //{
+        //    Guard.IsNotNull(addEffects, "addAction");
 
-            addEffects(new WindowEffectsBuilder(Component.Effects));
+        //    addEffects(new WindowEffectsBuilder(Component.Effects));
 
-            return this;
-        }
+        //    return this;
+        //}
 
         /// <summary>
         /// Sets whether the window should be modal or not.

@@ -10,7 +10,7 @@ namespace Kendo.Mvc.UI
 
     public class AutoComplete : ViewComponentBase, IDataBoundDropDown
     {
-        private readonly IList<IEffect> defaultEffects = new List<IEffect> { new SlideAnimation() };
+        //private readonly IList<IEffect> defaultEffects = new List<IEffect> { new SlideAnimation() };
 
         public AutoComplete(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory, IUrlGenerator urlGenerator)
             : base(viewContext, clientSideObjectWriterFactory)
@@ -27,7 +27,7 @@ namespace Kendo.Mvc.UI
             Multiple = new AutoCompleteMultipleValuesSettings();
 
             Effects = new Effects();
-            defaultEffects.Each(el => Effects.Container.Add(el));
+            //defaultEffects.Each(el => Effects.Container.Add(el));
             Enabled = true;
             Encoded = true;
         }
@@ -119,10 +119,10 @@ namespace Kendo.Mvc.UI
             objectWriter.Append("autoFill", AutoFill, false);
             objectWriter.Append("highlightFirst", HighlightFirstMatch, false);
 
-            if (!defaultEffects.SequenceEqual(Effects.Container))
-            {
-                objectWriter.Serialize("effects", Effects);
-            }
+            //if (!defaultEffects.SequenceEqual(Effects.Container))
+            //{
+            //    objectWriter.Serialize("effects", Effects);
+            //}
 
             ClientEvents.SerializeTo(objectWriter);
             Multiple.SerializeTo(objectWriter);

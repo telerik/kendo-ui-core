@@ -14,9 +14,9 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Resources;
     using System.Collections;
     
-    public class Window : ViewComponentBase, IContentContainer, IAsyncContentContainer, IEffectEnabled
+    public class Window : ViewComponentBase, IContentContainer, IAsyncContentContainer
     {
-        private readonly IList<IEffect> defaultEffects = new List<IEffect> { new ZoomAnimation(), new PropertyAnimation(PropertyAnimationType.Opacity) };
+        //private readonly IList<IEffect> defaultEffects = new List<IEffect> { new ZoomAnimation(), new PropertyAnimation(PropertyAnimationType.Opacity) };
 
         private readonly IList<IWindowButton> defaultButtons = new List<IWindowButton> { new HeaderButton{Name = "Close", CssClass = "k-close"} };
         
@@ -34,7 +34,7 @@ namespace Kendo.Mvc.UI
             defaultButtons.Each(button => Actions.Container.Add(button));
 
             Effects = new Effects();
-            defaultEffects.Each(el => Effects.Container.Add(el));
+            //defaultEffects.Each(el => Effects.Container.Add(el));
 
             ContentHtmlAttributes = new RouteValueDictionary();
 
@@ -180,10 +180,10 @@ namespace Kendo.Mvc.UI
 
             objectWriter.Start();
 
-            if (!defaultEffects.SequenceEqual(Effects.Container))
-            {
-                objectWriter.Serialize("effects", Effects);
-            }
+            //if (!defaultEffects.SequenceEqual(Effects.Container))
+            //{
+            //    objectWriter.Serialize("effects", Effects);
+            //}
 
             //client events
             objectWriter.AppendClientEvent("close", ClientEvents.OnClose);

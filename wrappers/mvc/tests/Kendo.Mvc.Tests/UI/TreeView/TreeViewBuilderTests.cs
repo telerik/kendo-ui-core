@@ -250,18 +250,5 @@ namespace Kendo.Mvc.UI.Tests
 
             Assert.IsType(typeof(TreeViewBuilder), returnedBuilder);
         }
-
-        [Fact]
-        public void Effects_creates_fx_factory()
-        {
-            var fxFacCreated = false;
-
-            builder.Effects(fx =>
-            {
-                fxFacCreated = fx != null;
-            });
-
-            Assert.True(fxFacCreated);
-        }
     }
 }

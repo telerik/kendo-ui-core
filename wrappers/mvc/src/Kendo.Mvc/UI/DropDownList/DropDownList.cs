@@ -10,7 +10,7 @@ namespace Kendo.Mvc.UI
     public class DropDownList : ViewComponentBase, IDropDown, IDropDownRenderable
     {
         private bool hasItems = false;
-        private readonly IList<IEffect> defaultEffects = new List<IEffect> { new SlideAnimation() };
+        //private readonly IList<IEffect> defaultEffects = new List<IEffect> { new SlideAnimation() };
 
         public DropDownList(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory, IUrlGenerator urlGenerator)
             : base(viewContext, clientSideObjectWriterFactory)
@@ -23,7 +23,7 @@ namespace Kendo.Mvc.UI
             HiddenInputHtmlAttributes = new RouteValueDictionary();
             
             Effects = new Effects();
-            defaultEffects.Each(el => Effects.Container.Add(el));
+            //defaultEffects.Each(el => Effects.Container.Add(el));
 
             Items = new List<DropDownItem>();
             SelectedIndex = 0;
@@ -141,10 +141,10 @@ namespace Kendo.Mvc.UI
 
             objectWriter.Start();
 
-            if (!defaultEffects.SequenceEqual(Effects.Container))
-            {
-                objectWriter.Serialize("effects", Effects);
-            }
+            //if (!defaultEffects.SequenceEqual(Effects.Container))
+            //{
+            //    objectWriter.Serialize("effects", Effects);
+            //}
 
             ClientEvents.SerializeTo(objectWriter);
 

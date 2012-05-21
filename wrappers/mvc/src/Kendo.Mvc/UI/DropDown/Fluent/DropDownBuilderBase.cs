@@ -40,32 +40,32 @@ namespace Kendo.Mvc.UI.Fluent
             return this as TDropDownBuilder;
         }
 
-        /// <summary>
-        /// Configures the effects of the dropdownlist.
-        /// </summary>
-        /// <param name="effectsAction">The action which configures the effects.</param>
-        /// <example>
-        /// <code lang="CS">
-        /// &lt;%= Html.Telerik().DropDownList()
-        ///	           .Name("DropDownList")
-        ///	           .Effects(fx =>
-        ///	           {
-        ///		            fx.Slide()
-        ///					  .OpenDuration(AnimationDuration.Normal)
-        ///					  .CloseDuration(AnimationDuration.Normal);
-        ///	           })
-        /// </code>
-        /// </example>
-        public TDropDownBuilder Effects(Action<EffectsBuilder> addEffects)
-        {
-            Guard.IsNotNull(addEffects, "addAction");
+        ///// <summary>
+        ///// Configures the effects of the dropdownlist.
+        ///// </summary>
+        ///// <param name="effectsAction">The action which configures the effects.</param>
+        ///// <example>
+        ///// <code lang="CS">
+        ///// &lt;%= Html.Telerik().DropDownList()
+        /////	           .Name("DropDownList")
+        /////	           .Effects(fx =>
+        /////	           {
+        /////		            fx.Slide()
+        /////					  .OpenDuration(AnimationDuration.Normal)
+        /////					  .CloseDuration(AnimationDuration.Normal);
+        /////	           })
+        ///// </code>
+        ///// </example>
+        //public TDropDownBuilder Effects(Action<EffectsBuilder> addEffects)
+        //{
+        //    Guard.IsNotNull(addEffects, "addAction");
 
-            EffectsBuilderFactory factory = new EffectsBuilderFactory();
+        //    EffectsBuilderFactory factory = new EffectsBuilderFactory();
 
-            addEffects(factory.Create(Component.Effects));
+        //    addEffects(factory.Create(Component.Effects));
 
-            return this as TDropDownBuilder;
-        }
+        //    return this as TDropDownBuilder;
+        //}
 
         /// <summary>
         /// Defines the items in the DropDownList

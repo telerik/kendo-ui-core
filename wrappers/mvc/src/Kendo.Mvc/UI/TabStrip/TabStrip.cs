@@ -10,9 +10,9 @@ namespace Kendo.Mvc.UI
     using Extensions;
     using Infrastructure;
 
-    public class TabStrip : ViewComponentBase, INavigationItemComponent<TabStripItem>, IEffectEnabled
+    public class TabStrip : ViewComponentBase, INavigationItemComponent<TabStripItem>
     {
-        private readonly IList<IEffect> defaultEffects = new List<IEffect>{ new SlideAnimation() };
+        //private readonly IList<IEffect> defaultEffects = new List<IEffect>{ new SlideAnimation() };
 
         private readonly ITabStripHtmlBuilderFactory builderFactory;
         internal bool isPathHighlighted;
@@ -29,7 +29,7 @@ namespace Kendo.Mvc.UI
             Authorization = authorization;
 
             this.Effects = new Effects();
-            defaultEffects.Each(el => Effects.Container.Add(el));
+            //defaultEffects.Each(el => Effects.Container.Add(el));
 
             ClientEvents = new TabStripClientEvents();
 
@@ -101,10 +101,10 @@ namespace Kendo.Mvc.UI
 
             objectWriter.Start();
 
-            if (!defaultEffects.SequenceEqual(Effects.Container))
-            {
-                objectWriter.Serialize("effects", Effects);
-            }
+            //if (!defaultEffects.SequenceEqual(Effects.Container))
+            //{
+            //    objectWriter.Serialize("effects", Effects);
+            //}
 
             objectWriter.AppendClientEvent("onSelect", ClientEvents.OnSelect);
             objectWriter.AppendClientEvent("onContentLoad", ClientEvents.OnContentLoad);

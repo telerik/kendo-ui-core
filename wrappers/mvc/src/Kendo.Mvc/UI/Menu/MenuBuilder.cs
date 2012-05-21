@@ -236,38 +236,38 @@ namespace Kendo.Mvc.UI
             return this;
         }
 
-        /// <summary>
-        /// Configures the effects of the menu.
-        /// </summary>
-        /// <param name="effectsAction">The action which configures the effects.</param>
-        /// <example>
-        /// <code lang="CS">
-        /// &lt;%= Html.Telerik().Menu()
-        ///	           .Name("Menu")
-        ///	           .Effects(fx =>
-        ///	           {
-        ///		            fx.Slide()
-        ///			          .Opacity()
-        ///					  .OpenDuration(AnimationDuration.Normal)
-        ///					  .CloseDuration(AnimationDuration.Normal);
-        ///	           })
-        /// </code>
-        /// </example>
-        public MenuBuilder Effects(Action<EffectsBuilder> addEffects)
-        {
-            Guard.IsNotNull(addEffects, "addAction");
+        ///// <summary>
+        ///// Configures the effects of the menu.
+        ///// </summary>
+        ///// <param name="effectsAction">The action which configures the effects.</param>
+        ///// <example>
+        ///// <code lang="CS">
+        ///// &lt;%= Html.Telerik().Menu()
+        /////	           .Name("Menu")
+        /////	           .Effects(fx =>
+        /////	           {
+        /////		            fx.Slide()
+        /////			          .Opacity()
+        /////					  .OpenDuration(AnimationDuration.Normal)
+        /////					  .CloseDuration(AnimationDuration.Normal);
+        /////	           })
+        ///// </code>
+        ///// </example>
+        //public MenuBuilder Effects(Action<EffectsBuilder> addEffects)
+        //{
+        //    Guard.IsNotNull(addEffects, "addAction");
 
-            EffectsBuilderFactory factory = new EffectsBuilderFactory();
+        //    EffectsBuilderFactory factory = new EffectsBuilderFactory();
 
-            addEffects(factory.Create(Component.Effects));
+        //    addEffects(factory.Create(Component.Effects));
 
-            if (Component.Effects.Container.Count == 0)
-            {
-                factory.Create(Component.Effects).Slide();
-            }
+        //    if (Component.Effects.Container.Count == 0)
+        //    {
+        //        factory.Create(Component.Effects).Slide();
+        //    }
 
-            return this;
-        }
+        //    return this;
+        //}
 
         /// <summary>
         /// Selects the item at the specified index.

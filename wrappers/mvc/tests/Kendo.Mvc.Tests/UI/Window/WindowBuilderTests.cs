@@ -138,19 +138,6 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
-        public void Effects_creates_fx_factory()
-        {
-            var fxFacCreated = false;
-
-            builder.Effects(fx =>
-            {
-                fxFacCreated = fx != null;
-            });
-
-            fxFacCreated.ShouldBeTrue();
-        }
-
-        [Fact]
         public void Modal_sets_Modal_property()
         {
             const bool modal = true;

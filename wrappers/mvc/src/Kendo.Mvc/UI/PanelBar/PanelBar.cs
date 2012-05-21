@@ -11,9 +11,9 @@ namespace Kendo.Mvc.UI
     using Infrastructure;
     using Resources;
 
-    public class PanelBar : ViewComponentBase, INavigationItemComponent<PanelBarItem>, IEffectEnabled
+    public class PanelBar : ViewComponentBase, INavigationItemComponent<PanelBarItem>
     {
-        private readonly IList<IEffect> defaultEffects = new List<IEffect> { new PropertyAnimation(PropertyAnimationType.Height) };
+        //private readonly IList<IEffect> defaultEffects = new List<IEffect> { new PropertyAnimation(PropertyAnimationType.Height) };
 
         private readonly INavigationComponentHtmlBuilderFactory<PanelBar, PanelBarItem> builderFactory;
 
@@ -34,7 +34,7 @@ namespace Kendo.Mvc.UI
             ClientEvents = new PanelBarClientEvents();
 
             this.Effects = new Effects();
-            defaultEffects.Each(el => Effects.Container.Add(el));
+            //defaultEffects.Each(el => Effects.Container.Add(el));
 
             ExpandMode = PanelBarExpandMode.Multiple;
             HighlightPath = true;
@@ -118,10 +118,10 @@ namespace Kendo.Mvc.UI
 
             objectWriter.Start();
 
-            if (!defaultEffects.SequenceEqual(Effects.Container))
-            {
-                objectWriter.Serialize("effects", Effects);
-            }
+            //if (!defaultEffects.SequenceEqual(Effects.Container))
+            //{
+            //    objectWriter.Serialize("effects", Effects);
+            //}
 
             objectWriter.AppendClientEvent("onExpand", ClientEvents.OnExpand);
             objectWriter.AppendClientEvent("onCollapse", ClientEvents.OnCollapse);

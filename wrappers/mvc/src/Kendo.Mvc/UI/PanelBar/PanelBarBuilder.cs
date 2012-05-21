@@ -169,33 +169,33 @@ namespace Kendo.Mvc.UI
             return this;
         }
 
-        /// <summary>
-        /// Configures the effects of the panelbar.
-        /// </summary>
-        /// <param name="effectsAction">The action which configures the effects.</param>
-        /// <example>
-        /// <code lang="CS">
-        /// &lt;%= Html.Telerik().PanelBar()
-        ///	           .Name("PanelBar")
-        ///	           .Effects(fx =>
-        ///	           {
-        ///		            fx.Height()
-        ///			          .Opacity()
-        ///					  .OpenDuration(AnimationDuration.Normal)
-        ///					  .CloseDuration(AnimationDuration.Normal);
-        ///	           })
-        /// </code>
-        /// </example>
-        public PanelBarBuilder Effects(Action<EffectsBuilder> addEffects)
-        {
-            Guard.IsNotNull(addEffects, "addAction");
+        ///// <summary>
+        ///// Configures the effects of the panelbar.
+        ///// </summary>
+        ///// <param name="effectsAction">The action which configures the effects.</param>
+        ///// <example>
+        ///// <code lang="CS">
+        ///// &lt;%= Html.Telerik().PanelBar()
+        /////	           .Name("PanelBar")
+        /////	           .Effects(fx =>
+        /////	           {
+        /////		            fx.Height()
+        /////			          .Opacity()
+        /////					  .OpenDuration(AnimationDuration.Normal)
+        /////					  .CloseDuration(AnimationDuration.Normal);
+        /////	           })
+        ///// </code>
+        ///// </example>
+        //public PanelBarBuilder Effects(Action<EffectsBuilder> addEffects)
+        //{
+        //    Guard.IsNotNull(addEffects, "addAction");
 
-            EffectsBuilderFactory factory = new EffectsBuilderFactory();
+        //    EffectsBuilderFactory factory = new EffectsBuilderFactory();
 
-            addEffects(factory.Create(Component.Effects));
+        //    addEffects(factory.Create(Component.Effects));
 
-            return this;
-        }
+        //    return this;
+        //}
 
         /// <summary>
         /// Callback for each item.
