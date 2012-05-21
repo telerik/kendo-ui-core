@@ -1,20 +1,20 @@
 namespace Kendo.Mvc.UI
 {
     /// <summary>
-    /// Represents the gauge track
+    /// Represents the gauge pointer
     /// </summary>
-    public class LinearGaugeTrack
+    public class GaugeRadialPointer
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="LinearGaugeTrack" /> class.
+        /// Initializes a new instance of the <see cref="GaugeRadialPointer" /> class.
         /// </summary>
-        public LinearGaugeTrack()
+        public GaugeRadialPointer()
         {
-            Border = new ChartElementBorder();
+            Cap = new GaugeRadialCap();
         }
 
         /// <summary>
-        /// Gets or sets track color
+        /// Gets or sets pointer color
         /// </summary>
         public string Color
         {
@@ -23,45 +23,36 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
-        /// Gets or sets the track border
-        /// </summary>
-        public ChartElementBorder Border
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Gets or sets the track size
+        /// Gets or sets the pointer opacity
         /// </summary>
         /// <value>
-        /// The track size
-        /// </value>
-        public double? Size
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Gets or sets the visibility of the track
-        /// </summary>
-        /// <value>
-        /// The track visibility
-        /// </value>
-        public bool? Visible
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Gets or sets the track opacity
-        /// </summary>
-        /// <value>
-        /// The track opacity
+        /// The pointer opacity
         /// </value>
         public double? Opacity
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets or sets the pointer value
+        /// </summary>
+        /// <value>
+        /// The pointer value
+        /// </value>
+        public double? Value
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets or sets the pointer value
+        /// </summary>
+        /// <value>
+        /// The pointer value
+        /// </value>
+        public GaugeRadialCap Cap
         {
             get;
             set;
@@ -72,7 +63,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         public IChartSerializer CreateSerializer()
         {
-            return new LinearGaugeTrackSerializer(this);
+            return new GaugeRadialPointerSerializer(this);
         }
     }
 }

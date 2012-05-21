@@ -4,15 +4,15 @@ namespace Kendo.Mvc.UI.Tests.Gauge
     using Kendo.Mvc.UI.Fluent;
     using Xunit;
 
-    public class RadialGaugeCapTests
+    public class GaugeRadialCapTests
     {
-        private readonly RadialGaugeCap cap;
-        private readonly RadialGaugeCapBuilder builder;
+        private readonly GaugeRadialCap cap;
+        private readonly GaugeRadialCapBuilder builder;
 
-        public RadialGaugeCapTests()
+        public GaugeRadialCapTests()
         {
-            cap = new RadialGaugeCap();
-            builder = new RadialGaugeCapBuilder(cap);
+            cap = new GaugeRadialCap();
+            builder = new GaugeRadialCapBuilder(cap);
         }
 
         [Fact]

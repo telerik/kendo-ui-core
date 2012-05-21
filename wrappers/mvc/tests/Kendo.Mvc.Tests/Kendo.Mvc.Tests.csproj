@@ -152,7 +152,7 @@
     <Compile Include="UI\Gauge\GaugeScaleBuilderBaseTests.cs" />
     <Compile Include="UI\Gauge\GaugeScaleRangesBuilderTests.cs" />
     <Compile Include="UI\Gauge\GaugeScaleTicksBuilderTests.cs" />
-    <Compile Include="UI\Gauge\RadialGaugeCapBuilderTests.cs" />
+    <Compile Include="UI\Gauge\GaugeRadialCapTests.cs" />
     <Compile Include="UI\Gauge\RadialGaugePointerBuilderTests.cs" />
     <Compile Include="UI\Gauge\GaugeAreaBuilderTests.cs" />
     <Compile Include="UI\Gauge\Serialization\GaugeRadialScaleSerializerTests.cs" />
@@ -160,12 +160,12 @@
     <Compile Include="UI\Gauge\Serialization\GaugeScaleLabelsSeriealizerTests.cs" />
     <Compile Include="UI\Gauge\Serialization\GaugeScaleSerializerBaseTests.cs" />
     <Compile Include="UI\Gauge\Serialization\GaugeScaleTicksSerializerTests.cs" />
-    <Compile Include="UI\Gauge\Serialization\RadialGaugeCapSerializerTests.cs" />
-    <Compile Include="UI\Gauge\Serialization\RadialGaugePointerSerializerTests.cs" />
-    <Compile Include="UI\Gauge\Serialization\LinearGaugeTrackSerializerTests.cs" />
-    <Compile Include="UI\Gauge\Serialization\LinearGaugePointerSerializerTests.cs" />
-    <Compile Include="UI\Gauge\LinearGaugeTrackTests.cs" />
-    <Compile Include="UI\Gauge\LinearGaugePointerBuilderTests.cs" />
+    <Compile Include="UI\Gauge\Serialization\GaugeRadialCapSerializerTests.cs" />
+    <Compile Include="UI\Gauge\Serialization\GaugeRadialPointerSerializerTests.cs" />
+    <Compile Include="UI\Gauge\Serialization\GaugeLinearTrackSerializerTests.cs" />
+    <Compile Include="UI\Gauge\Serialization\GaugeLinearPointerSerializerTests.cs" />
+    <Compile Include="UI\Gauge\GaugeLinearTrackBuilderTests.cs" />
+    <Compile Include="UI\Gauge\GaugeLinearPointerBuilderTests.cs" />
     <Compile Include="UI\NavigationBindingTestDouble.cs" />
     <Compile Include="UI\TextBox\NumericTextBoxTestHelper.cs" />
     <Compile Include="UI\XYData.cs" />

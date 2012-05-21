@@ -4,15 +4,15 @@ namespace Kendo.Mvc.UI.Tests.Gauge
     using Kendo.Mvc.UI.Fluent;
     using Xunit;
 
-    public class LinearGaugeTrackTests
+    public class GaugeLinearTrackBuilderTests
     {
-        private readonly LinearGaugeTrack shape;
-        private readonly LinearGaugeTrackBuilder builder;
+        private readonly GaugeLinearTrack shape;
+        private readonly GaugeLinearTrackBuilder builder;
 
-        public LinearGaugeTrackTests()
+        public GaugeLinearTrackBuilderTests()
         {
-            shape = new LinearGaugeTrack();
-            builder = new LinearGaugeTrackBuilder(shape);
+            shape = new GaugeLinearTrack();
+            builder = new GaugeLinearTrackBuilder(shape);
         }
 
         [Fact]

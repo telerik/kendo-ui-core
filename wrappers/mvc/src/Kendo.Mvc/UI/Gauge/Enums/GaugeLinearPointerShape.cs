@@ -3,7 +3,7 @@ namespace Kendo.Mvc.UI
     /// <summary>
     /// Defines the shape of the liner gauge pointer.
     /// </summary>
-    public enum LinearGaugePointerShape
+    public enum GaugeLinearPointerShape
     {
         /// <summary>
         /// Specifies a filling bar indicator.

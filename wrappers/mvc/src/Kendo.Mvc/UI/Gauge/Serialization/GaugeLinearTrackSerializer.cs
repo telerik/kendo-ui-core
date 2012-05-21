@@ -4,11 +4,11 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.Extensions;
 
-    internal class LinearGaugeTrackSerializer : IChartSerializer
+    internal class GaugeLinearTrackSerializer : IChartSerializer
     {
-        private readonly LinearGaugeTrack track;
+        private readonly GaugeLinearTrack track;
 
-        public LinearGaugeTrackSerializer(LinearGaugeTrack track)
+        public GaugeLinearTrackSerializer(GaugeLinearTrack track)
         {
             this.track = track;
         }
