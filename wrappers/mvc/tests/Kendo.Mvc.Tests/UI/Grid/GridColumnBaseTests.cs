@@ -67,6 +67,7 @@ namespace Kendo.Mvc.UI.Tests
             span.InnerHtml.ShouldEqual("&nbsp;");
         }
 
+        /*
         [Fact]
         public void Should_create_hidden_column_decorator_when_hidden()
         {
@@ -85,7 +86,7 @@ namespace Kendo.Mvc.UI.Tests
 
             builder.Decorators.OfType<GridHiddenCellBuilderDecorator>().Count().ShouldEqual(1);
         }
-
+        */
         private IHtmlNode GetSpan(IHtmlNode cell)
         {
             return cell.Children[0];

@@ -25,12 +25,15 @@ namespace Kendo.Mvc.UI
             get;
             set;
         }
-        
+
+        //TODO: Implement HeaderTemplate
+        /*
         HtmlTemplate HeaderTemplate
         {
             get;
             set;
         }
+        */
 
         HtmlTemplate<GridAggregateResult> FooterTemplate
         {
@@ -44,45 +47,57 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        //TODO: Expose header html attributes
+        /*
         IDictionary<string, object> HeaderHtmlAttributes 
         { 
             get; 
         }
+        */
 
+        //TODO: Expose footer html attributes
+        /*
         IDictionary<string, object> FooterHtmlAttributes
         {
             get;
         }
+         */
 
+        //TODO: Implement hidden columns
+        /*
         bool Hidden 
         { 
             get; 
             set; 
-        }
+        }*/
 
+        //TODO: Implement HeaderContextMenu
+        /*
         bool IncludeInContextMenu
         {
             get;
             set;
         }
-
+        */
+        //TODO: Implement HtmlAttributes
+        /*
         IDictionary<string, object> HtmlAttributes 
         { 
             get; 
         }
-
+        */
         string Title 
         { 
             get; 
             set; 
         }
-        
+        /*
         bool Visible 
         { 
             get; 
             set; 
         }
-        
+        */
         string Width 
         { 
             get; 

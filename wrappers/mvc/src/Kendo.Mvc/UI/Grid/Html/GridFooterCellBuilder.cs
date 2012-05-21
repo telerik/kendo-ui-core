@@ -6,11 +6,13 @@ namespace Kendo.Mvc.UI.Html
     {
         private readonly HtmlTemplate<GridAggregateResult> template;
 
-        private readonly IDictionary<string, object> htmlAttributes;
+        //TODO: Expose footer html attributes
+        //private readonly IDictionary<string, object> htmlAttributes;
 
-        public GridFooterCellBuilder(IDictionary<string, object> htmlAttributes, HtmlTemplate<GridAggregateResult> template)
+        //TODO: Expose footer html attributes
+        public GridFooterCellBuilder(/*IDictionary<string, object> htmlAttributes,*/ HtmlTemplate<GridAggregateResult> template)
         {
-            this.htmlAttributes = htmlAttributes;
+            //this.htmlAttributes = htmlAttributes;
             this.template = template;
 
             Decorators = new List<IGridCellBuilderDecorator>();
@@ -24,7 +26,8 @@ namespace Kendo.Mvc.UI.Html
 
         public virtual IHtmlNode CreateCell()
         {
-            var td = new HtmlElement("td").Attributes(htmlAttributes);
+            //TODO: Expose footer html attributes
+            var td = new HtmlElement("td")/*.Attributes(htmlAttributes)*/;
 
             if (template.HasValue())
             {

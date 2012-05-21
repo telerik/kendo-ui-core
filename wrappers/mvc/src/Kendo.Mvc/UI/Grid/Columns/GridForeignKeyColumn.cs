@@ -42,8 +42,8 @@ namespace Kendo.Mvc.UI
                     Member = Member,
                     AppendViewData = SerializeSelectList
                 };
-
-                builder.HtmlAttributes.Merge(HtmlAttributes);
+                //TODO: Implement HtmlAttributes
+                //builder.HtmlAttributes.Merge(HtmlAttributes);
 
                 return builder;
             }
@@ -66,8 +66,8 @@ namespace Kendo.Mvc.UI
                 Value = Value,
                 Data = Data
             };
-
-            builder.HtmlAttributes.Merge(HtmlAttributes);
+            //TODO: Implement HtmlAttributes
+            //builder.HtmlAttributes.Merge(HtmlAttributes);
 
             return builder;
         }

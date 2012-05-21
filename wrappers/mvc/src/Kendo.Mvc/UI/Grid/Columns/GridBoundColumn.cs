@@ -64,7 +64,8 @@ namespace Kendo.Mvc.UI
                 MemberType = Metadata.ModelType;
                 Title = Metadata.DisplayName;
                 Format = Metadata.DisplayFormatString;
-                Visible = Metadata.ShowForDisplay;
+                //TODO: Implement Column visibility
+                //Visible = Metadata.ShowForDisplay;
                 ReadOnly = Metadata.IsReadOnly;
             }
 
@@ -300,8 +301,9 @@ namespace Kendo.Mvc.UI
                     Expression = Expression,
                     ViewContext = Grid.ViewContext
                 };
-                
-                builder.HtmlAttributes.Merge(HtmlAttributes);
+
+                //TODO: Implement HtmlAttributes
+                //builder.HtmlAttributes.Merge(HtmlAttributes);
                 
                 return builder;
             }
@@ -313,8 +315,8 @@ namespace Kendo.Mvc.UI
                 Value = Value,
 
             };
-
-            builder.HtmlAttributes.Merge(HtmlAttributes);
+            //TODO: Implement HtmlAttributes
+            //builder.HtmlAttributes.Merge(HtmlAttributes);
             
             return builder;
         }
@@ -331,8 +333,8 @@ namespace Kendo.Mvc.UI
                     TemplateName = EditorTemplateName,
                     Member = Member
                 };
-
-                builder.HtmlAttributes.Merge(HtmlAttributes);
+                //TODO: Implement HtmlAttributes
+                //builder.HtmlAttributes.Merge(HtmlAttributes);
 
                 return builder;
             }
@@ -351,7 +353,7 @@ namespace Kendo.Mvc.UI
             HeaderHtmlAttributes.Add("data-field", Member);
             HeaderHtmlAttributes.Add("data-title", Title);
 
-            if (Sortable && Grid.Sorting.Enabled && !HeaderTemplate.HasValue())
+            if (Sortable && Grid.Sorting.Enabled /*&& !HeaderTemplate.HasValue()*/) //TODO: Implement header template
             {
                 builder = new GridSortableHeaderCellBuilder(HeaderHtmlAttributes, GetSortUrl(), SortDirection, Grid.Localization.SortedAsc, Grid.Localization.SortedDesc, AppendHeaderContent);
             }
@@ -374,7 +376,8 @@ namespace Kendo.Mvc.UI
 
         protected override IGridCellBuilder CreateFooterBuilderCore(IEnumerable<AggregateResult> aggregateResults)
         {
-            return new GridFooterCellBuilder(FooterHtmlAttributes, FooterTemplate)
+            //TODO: Expose footer html attributes
+            return new GridFooterCellBuilder(/*FooterHtmlAttributes,*/ FooterTemplate)
             {
                 AggregateResults = CalculateAggregates(aggregateResults)
             };
@@ -382,7 +385,8 @@ namespace Kendo.Mvc.UI
 
         protected override IGridCellBuilder CreateGroupFooterBuilderCore(IEnumerable<AggregateResult> aggregateResults)
         {
-            return new GridFooterCellBuilder(FooterHtmlAttributes, GroupFooterTemplate)
+            //TODO: Expose footer html attributes
+            return new GridFooterCellBuilder(/*FooterHtmlAttributes,*/ GroupFooterTemplate)
             {
                 AggregateResults = CalculateAggregates(aggregateResults)
             };

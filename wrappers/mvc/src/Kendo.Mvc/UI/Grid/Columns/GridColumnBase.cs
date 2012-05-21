@@ -36,9 +36,12 @@ namespace Kendo.Mvc.UI
         {
             Grid = grid;
             Settings = new GridColumnSettings();
-            Visible = true;
-            IncludeInContextMenu = true;
-            HeaderTemplate = new HtmlTemplate();
+            //TODO: Implement Column visibility
+            //Visible = true;
+            //TODO: Implement HeaderContextMenu
+            //IncludeInContextMenu = true;
+            //TODO: Implement HeaderTemplate
+            //HeaderTemplate = new HtmlTemplate();
             FooterTemplate = new HtmlTemplate<GridAggregateResult>();
         }
 
@@ -78,6 +81,8 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        //TODO: Implement Header Template
+        /*
         /// <summary>
         /// Gets the header template of the column.
         /// </summary>
@@ -86,6 +91,7 @@ namespace Kendo.Mvc.UI
             get;
             set;
         }
+        */
 
         /// <summary>
         /// Gets the footer template of the column.
@@ -152,7 +158,8 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-
+        //TODO: Implement hidden columns
+        /*
         /// <summary>
         /// Gets or sets a value indicating whether this column is hidden.
         /// </summary>
@@ -171,7 +178,9 @@ namespace Kendo.Mvc.UI
                 Settings.Hidden = value;
             }
         }
-
+        */
+        //TODO: Implement HeaderContextMenu
+/*
         public virtual bool IncludeInContextMenu
         {
             get
@@ -183,7 +192,7 @@ namespace Kendo.Mvc.UI
                 Settings.IncludeInContextMenu = value;
             }
         }
-
+        */
         public virtual bool Encoded
         {
             get
@@ -201,7 +210,7 @@ namespace Kendo.Mvc.UI
         /// Gets the header HTML attributes.
         /// </summary>
         /// <value>The header HTML attributes.</value>
-        public IDictionary<string, object> HeaderHtmlAttributes
+        protected IDictionary<string, object> HeaderHtmlAttributes //TODO: Implement Header html attrbiutes
         {
             get
             {
@@ -209,6 +218,8 @@ namespace Kendo.Mvc.UI
             }
         }
 
+        //TODO: Expose footer html attributes
+        /*
         /// <summary>
         /// Gets the footer HTML attributes.
         /// </summary>
@@ -220,7 +231,9 @@ namespace Kendo.Mvc.UI
                 return Settings.FooterHtmlAttributes;
             }
         }
-
+        */
+        //TODO: Implement Column visibility
+        /*
         /// <summary>
         /// Gets or sets a value indicating whether this column is visible.
         /// </summary>
@@ -239,7 +252,10 @@ namespace Kendo.Mvc.UI
                 Settings.Visible = value;
             }
         }
+        */
 
+        //TODO: Implement HtmlAttributes
+        /*
         /// <summary>
         /// Gets the HTML attributes of the cell rendered for the column
         /// </summary>
@@ -251,7 +267,7 @@ namespace Kendo.Mvc.UI
                 return Settings.HtmlAttributes;
             }
         }
-
+        */
         public virtual IGridColumnSerializer CreateSerializer()
         {
             return new GridColumnSerializer(this);
@@ -269,7 +285,8 @@ namespace Kendo.Mvc.UI
         {
             get
             {
-                return Grid.VisibleColumns.Where(c => !c.Hidden).LastOrDefault() == this;
+                //TODO: Implement hidden columns
+                return Grid.VisibleColumns/*.Where(c => !c.Hidden)*/.LastOrDefault() == this;
             }
         }
 
@@ -281,10 +298,11 @@ namespace Kendo.Mvc.UI
 
         protected void Decorate(IGridDecoratableCellBuilder cellBuilder)
         {
-            if (Hidden)
-            {
-                cellBuilder.Decorators.Add(new GridHiddenCellBuilderDecorator());
-            }
+            //TODO: Implement hidden columns
+            //if (Hidden)
+            //{
+            //    cellBuilder.Decorators.Add(new GridHiddenCellBuilderDecorator());
+            //}
         }
 
         private Action<object> CreateCallback(IGridDataCellBuilder builder, bool insert, bool edit)
@@ -348,7 +366,8 @@ namespace Kendo.Mvc.UI
             }
 
             var builder = new GridTemplateCellBuilder<T>(template);
-            builder.HtmlAttributes.Merge(HtmlAttributes);
+            //TODO: Implement HtmlAttributes
+            //builder.HtmlAttributes.Merge(HtmlAttributes);
             return builder;
         }
 
@@ -389,7 +408,8 @@ namespace Kendo.Mvc.UI
 
         protected virtual IGridCellBuilder CreateHeaderBuilderCore()
         {
-            return new GridHeaderCellBuilder(HeaderHtmlAttributes, AppendHeaderContent, HeaderTemplate.HasValue());
+            //TODO: Implement HeaderTemplate
+            return new GridHeaderCellBuilder(HeaderHtmlAttributes, AppendHeaderContent/*, HeaderTemplate.HasValue()*/);
         }
 
         public IGridCellBuilder CreateFooterBuilder(IEnumerable<AggregateResult> aggregateResults)
@@ -412,24 +432,28 @@ namespace Kendo.Mvc.UI
 
         protected virtual IGridCellBuilder CreateFooterBuilderCore(IEnumerable<AggregateResult> aggregateResults)
         {
-            return new GridFooterCellBuilder(FooterHtmlAttributes, FooterTemplate);
+            //TODO: Expose footer html attributes
+            return new GridFooterCellBuilder(/*FooterHtmlAttributes,*/ FooterTemplate);
         }
         
         protected virtual IGridCellBuilder CreateGroupFooterBuilderCore(IEnumerable<AggregateResult> aggregateResults)
         {
-            return new GridFooterCellBuilder(FooterHtmlAttributes, FooterTemplate);
+            //TODO: Expose footer html attributes
+            return new GridFooterCellBuilder(/*FooterHtmlAttributes,*/ FooterTemplate);
         }
 
         protected void AppendHeaderContent(IHtmlNode container)
         {
+            //TODO Implement HeaderTemplate
+            /*
             if (HeaderTemplate != null && HeaderTemplate.HasValue())
             {
                 HeaderTemplate.Apply(container);
             }
             else
-            {
+            {*/
                 container.Html(Title.HasValue() ? Title : "&nbsp;");
-            }
+            //}
         }
     }
 }

@@ -171,7 +171,8 @@ namespace Kendo.Mvc.UI.Html
 
         protected virtual IHtmlNode CreateTable(GridRenderingData renderingData)
         {
-            var tableBuilder = tableBuilderFactory.CreateDecoratedTableBuilder(renderingData.Columns.Select(c => new GridColData{ Width = c.Width, Hidden = c.Hidden}), renderingData);
+            //TODO: Implement hidden columns
+            var tableBuilder = tableBuilderFactory.CreateDecoratedTableBuilder(renderingData.Columns.Select(c => new GridColData{ Width = c.Width/*, Hidden = c.Hidden*/}), renderingData);
             
             return tableBuilder.CreateTable()
                                .Attributes(renderingData.TableHtmlAttributes);
