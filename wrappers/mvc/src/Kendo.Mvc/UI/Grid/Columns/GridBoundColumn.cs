@@ -64,7 +64,8 @@ namespace Kendo.Mvc.UI
                 MemberType = Metadata.ModelType;
                 Title = Metadata.DisplayName;
                 Format = Metadata.DisplayFormatString;
-                Visible = Metadata.ShowForDisplay;
+                //TODO: Implement Column visibility
+                //Visible = Metadata.ShowForDisplay;
                 ReadOnly = Metadata.IsReadOnly;
             }
 
