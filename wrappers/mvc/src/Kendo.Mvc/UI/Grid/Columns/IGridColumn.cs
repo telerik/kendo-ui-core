@@ -25,12 +25,15 @@ namespace Kendo.Mvc.UI
             get;
             set;
         }
-        
+
+        //TODO: Implement HeaderTemplate
+        /*
         HtmlTemplate HeaderTemplate
         {
             get;
             set;
         }
+        */
 
         HtmlTemplate<GridAggregateResult> FooterTemplate
         {
@@ -43,12 +46,13 @@ namespace Kendo.Mvc.UI
             get;
             set;
         }
-
+        //TODO: Expose header html attributes
+        /*
         IDictionary<string, object> HeaderHtmlAttributes 
         { 
             get; 
         }
-
+        */
         IDictionary<string, object> FooterHtmlAttributes
         {
             get;
