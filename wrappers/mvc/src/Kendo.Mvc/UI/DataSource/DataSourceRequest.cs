@@ -9,7 +9,7 @@ namespace Kendo.Mvc.UI
         public DataSourceRequest()
         {
             Page = 1;
-           // PageSize = 10;
+            PageSize = 10;
         }
 
         public int Page
@@ -47,6 +47,5 @@ namespace Kendo.Mvc.UI
             get;
             set;
         }
-
     }
 }
