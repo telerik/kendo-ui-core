@@ -16,6 +16,16 @@ namespace Kendo.Mvc.UI
         public RadialGauge(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory, IUrlGenerator urlGenerator)
             : base(viewContext, clientSideObjectWriterFactory, urlGenerator)
         {
+            RadialScale = new GaugeRadialScale(this);
+        }
+
+        /// <summary>
+        /// Configuration for the default category axis (if any)
+        /// </summary>
+        public IRadialScale RadialScale
+        {
+            get;
+            set;
         }
 
         /// <summary>
