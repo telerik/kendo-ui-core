@@ -47,7 +47,7 @@
            return "'" + value.replace(escapeQuoteRegExp, "''") + "'";
        }
        if (value && value.getTime) {
-           return "datetime'" + kendo.format('{0:yyyy-MM-ddTHH-mm-ss}', value) + "'";
+           return "datetime'" + kendo.format("{0:yyyy-MM-ddTHH-mm-ss}", value) + "'";
        }
        return value;
    }
@@ -58,6 +58,20 @@
         },
         parameterMap: parameterMap,
         prefix: ""
+   };
+
+function translateGroup(group) {
+    return {
+        value: group.Key,
+        hasSubgroups: group.HasSubgroups,
+        aggregates: group.Aggregates,
+        items: group.HasSubgroups ? $.map(group.Items, translateGroup) : group.Items
+    };
+}
+   kendo.data.schemas["aspnetmvc-ajax"] = {
+        groups: function(data) {
+            return $.map(this.data(data), translateGroup);
+        }
    };
 
    kendo.data.transports["aspnetmvc-server"] = kendo.data.RemoteTransport.extend({
