@@ -26,8 +26,8 @@
     *
     * <h3>Getting Started</h3>
     * <p>The Kendo Mobile Application automatically initializes the Mobile ScrollView for every element with <code>role</code> data attribute set to <code>scrollview</code> present in the views' markup.
-     * Alternatively, it can be initialized using jQuery plugin syntax in the containing mobile View <strong>init event handler</strong>.
-     *
+    * Alternatively, it can be initialized using jQuery plugin syntax in the containing mobile View <strong>init event handler</strong>.
+    *
     * @exampleTitle Initialize mobile ScrollView using a role data attribute.
     * @example
     * <div data-role="scrollview">
