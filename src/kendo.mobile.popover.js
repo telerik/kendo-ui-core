@@ -9,7 +9,7 @@
         WRAPPER = '<div class="km-popup-wrapper" />',
         ARROW = '<div class="km-popup-arrow" />',
         OVERLAY = '<div class="km-popup-overlay" />',
-        DIRECTION_CLASSES = "km-top km-bottom km-left km-right",
+        DIRECTION_CLASSES = "km-up km-down km-left km-right",
         Widget = ui.Widget,
         DIRECTIONS = {
             "down": {
@@ -91,7 +91,7 @@
                 height: that.options.height
             }).addClass("km-popup-wrapper km-" + that.options.direction).hide();
 
-            that.arrow = $(ARROW).appendTo(that.wrapper).hide();
+            that.arrow = $(ARROW).prependTo(that.wrapper).hide();
 
             that.overlay = $(OVERLAY).appendTo(container).hide();
 
