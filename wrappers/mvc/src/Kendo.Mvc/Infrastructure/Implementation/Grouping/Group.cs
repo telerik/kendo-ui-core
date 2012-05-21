@@ -19,6 +19,7 @@ namespace Kendo.Mvc.Infrastructure
         /// </value>
         public bool HasSubgroups { get; set; }
 
+        public string Member { get; set; }
         /// <summary>
         /// Gets the number of items in this group.
         /// </summary>

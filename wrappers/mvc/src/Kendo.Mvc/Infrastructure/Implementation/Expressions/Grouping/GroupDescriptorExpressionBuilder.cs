@@ -151,6 +151,8 @@ namespace Kendo.Mvc.Infrastructure.Implementation.Expressions
             yield return this.CreateKeyMemberBinding();
             yield return this.CreateCountMemberBinding();
             yield return this.CreateHasSubgroupsMemberBinding();
+            yield return this.CreateFieldNameMemberBinding();
+
             if (groupDescriptor.AggregateFunctions.Count > 0)
             {
                 yield return this.CreateAggregateFunctionsProjectionMemberBinding();
@@ -234,6 +236,14 @@ namespace Kendo.Mvc.Infrastructure.Implementation.Expressions
                 Expression.Call(typeof(Enumerable), "Count", new[] { this.ItemType }, GroupingParameterExpression);
 
             return Expression.Bind(itemCountPropertyInfo, countMethodCallExpression);
+        }
+
+        protected MemberBinding CreateFieldNameMemberBinding()
+        {
+            PropertyInfo memberPropertyInfo = typeof(AggregateFunctionsGroup).GetProperty("Member");
+            Expression memberExpression = Expression.Constant(GroupDescriptor.Member ?? "");
+
+            return Expression.Bind(memberPropertyInfo, memberExpression);
         }
 
         protected MemberBinding CreateHasSubgroupsMemberBinding()
