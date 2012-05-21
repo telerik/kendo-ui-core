@@ -167,20 +167,6 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
-        public void Effects_creates_fx_factory()
-        {
-            var fxFacCreated = false;
-
-            _builder.Effects(fx =>
-            {
-                fxFacCreated = fx != null;
-            });
-
-            Assert.True(fxFacCreated);
-        }
-
-
-        [Fact]
         public void ClientEvents_should_set_events_of_the_tabstrip()
         {
             Action<TabStripClientEventsBuilder> clientEventsAction = eventBuilder => { eventBuilder.OnLoad("Load"); };

@@ -1,5 +1,9 @@
 namespace Kendo.Mvc.UI
 {
+    using Kendo.Mvc.Extensions;
+    using Kendo.Mvc.Infrastructure;
+    using Kendo.Mvc.Resources;
+    using Kendo.Mvc.UI;
     using System;
     using System.Collections.Generic;
     using System.IO;
@@ -7,13 +11,9 @@ namespace Kendo.Mvc.UI
     using System.Web.Mvc;
     using System.Web.UI;
 
-    using Extensions;
-    using Infrastructure;
-    using Kendo.Mvc.Resources;
-
-    public class Menu : ViewComponentBase, INavigationItemComponent<MenuItem>, IEffectEnabled
+    public class Menu : ViewComponentBase, INavigationItemComponent<MenuItem>
     {
-        private readonly IList<IEffect> defaultEffects = new List<IEffect> { new SlideAnimation() };
+        //private readonly IList<IEffect> defaultEffects = new List<IEffect> { new SlideAnimation() };
 
         private readonly INavigationComponentHtmlBuilderFactory<Menu, MenuItem> rendererFactory;
         internal bool isPathHighlighted;
@@ -32,7 +32,7 @@ namespace Kendo.Mvc.UI
             ClientEvents = new MenuClientEvents();
 
             this.Effects = new Effects();
-            defaultEffects.Each(el => Effects.Container.Add(el));
+            //defaultEffects.Each(el => Effects.Container.Add(el));
 
             Items = new LinkedObjectCollection<MenuItem>(null);
 
@@ -114,10 +114,10 @@ namespace Kendo.Mvc.UI
             objectWriter.Start()
                         .Append("orientation", Orientation, MenuOrientation.Horizontal);
 
-            if (!defaultEffects.SequenceEqual(Effects.Container))
-            {
-                objectWriter.Serialize("effects", Effects);
-            }
+            //if (!defaultEffects.SequenceEqual(Effects.Container))
+            //{
+            //    objectWriter.Serialize("effects", Effects);
+            //}
 
             if (OpenOnClick)
             {

@@ -133,32 +133,32 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
-        /// <summary>
-        /// Configures the effects of the AutoComplete.
-        /// </summary>
-        /// <param name="effectsAction">The action which configures the effects.</param>
-        /// <example>
-        /// <code lang="CS">
-        /// &lt;%= Html.Telerik().AutoComplete()
-        ///	           .Name("AutoComplete")
-        ///	           .Effects(fx =>
-        ///	           {
-        ///		            fx.Slide()
-        ///					  .OpenDuration(AnimationDuration.Normal)
-        ///					  .CloseDuration(AnimationDuration.Normal);
-        ///	           })
-        /// </code>
-        /// </example>
-        public AutoCompleteBuilder Effects(Action<EffectsBuilder> addEffects)
-        {
-            Guard.IsNotNull(addEffects, "addAction");
+        ///// <summary>
+        ///// Configures the effects of the AutoComplete.
+        ///// </summary>
+        ///// <param name="effectsAction">The action which configures the effects.</param>
+        ///// <example>
+        ///// <code lang="CS">
+        ///// &lt;%= Html.Telerik().AutoComplete()
+        /////	           .Name("AutoComplete")
+        /////	           .Effects(fx =>
+        /////	           {
+        /////		            fx.Slide()
+        /////					  .OpenDuration(AnimationDuration.Normal)
+        /////					  .CloseDuration(AnimationDuration.Normal);
+        /////	           })
+        ///// </code>
+        ///// </example>
+        //public AutoCompleteBuilder Effects(Action<EffectsBuilder> addEffects)
+        //{
+        //    Guard.IsNotNull(addEffects, "addAction");
 
-            EffectsBuilderFactory factory = new EffectsBuilderFactory();
+        //    EffectsBuilderFactory factory = new EffectsBuilderFactory();
 
-            addEffects(factory.Create(Component.Effects));
+        //    addEffects(factory.Create(Component.Effects));
 
-            return this;
-        }
+        //    return this;
+        //}
 
         /// <summary>
         /// Use it to configure filtering settings.

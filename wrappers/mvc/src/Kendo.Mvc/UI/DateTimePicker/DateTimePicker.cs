@@ -10,14 +10,14 @@ namespace Kendo.Mvc.UI
 
     public class DateTimePicker : DatePickerBase
     {
-        private readonly IList<IEffect> defaultEffects = new List<IEffect> { new SlideAnimation() };
+        //private readonly IList<IEffect> defaultEffects = new List<IEffect> { new SlideAnimation() };
         static internal DateTime defaultMinDate = new DateTime(1899, 12, 31);
         static internal DateTime defaultMaxDate = new DateTime(2100, 1, 1);
 
         public DateTimePicker(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory)
             : base(viewContext, clientSideObjectWriterFactory)
         {
-            defaultEffects.Each(el => Effects.Container.Add(el));
+            //defaultEffects.Each(el => Effects.Container.Add(el));
 
             DateTimeFormatInfo dateTimeFormats = CultureInfo.CurrentCulture.DateTimeFormat;
             Format = dateTimeFormats.ShortDatePattern + " " + dateTimeFormats.ShortTimePattern;
@@ -58,10 +58,10 @@ namespace Kendo.Mvc.UI
 
             objectWriter.Start();
             
-            if (!defaultEffects.SequenceEqual(Effects.Container))
-            {
-                objectWriter.Serialize("effects", Effects);
-            }
+            //if (!defaultEffects.SequenceEqual(Effects.Container))
+            //{
+            //    objectWriter.Serialize("effects", Effects);
+            //}
 
             ClientEvents.SerializeTo(objectWriter);
 

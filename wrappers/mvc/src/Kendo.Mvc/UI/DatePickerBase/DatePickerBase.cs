@@ -4,7 +4,7 @@ namespace Kendo.Mvc.UI
     using System.Collections.Generic;
     using System.Web.Mvc;
 
-    public class DatePickerBase : ViewComponentBase, IEffectEnabled, IDatePicker
+    public class DatePickerBase : ViewComponentBase, IDatePicker
     {
         public DatePickerBase(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory)
             : base(viewContext, clientSideObjectWriterFactory)

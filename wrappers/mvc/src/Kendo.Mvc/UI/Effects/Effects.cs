@@ -1,35 +1,40 @@
 namespace Kendo.Mvc.UI
 {
+    using System.Linq;
     using System.Collections.Generic;
 
-    public class Effects : IEffectContainer
+    using Kendo.Mvc.Extensions;
+
+    public class Effects
     {
-        private IList<IEffect> container;
         public Effects()
         {
-            container = new List<IEffect>();
-            OpenDuration = (int)AnimationDuration.Fast;
-            CloseDuration = (int)AnimationDuration.Fast;
+            Container = new List<string>();
+            Duration = (int)AnimationDuration.Normal;
         }
 
-        public IList<IEffect> Container 
+        public IList<string> Container
         {
-            get 
+            get;
+            private set;
+        }
+
+        public int Duration
+        {
+            get;
+            set;
+        }
+
+        public string Serialize()
+        {
+            var result = string.Empty;
+
+            if (Container.Any())
             {
-                return this.container;
+                result = "effects: \"{0}\", duration: {1}".FormatWith(string.Join(",", Container), Duration);
             }
-        }
 
-        public int OpenDuration
-        {
-            get;
-            set;
-        }
-
-        public int CloseDuration
-        {
-            get;
-            set;
+            return result;
         }
     }
 }

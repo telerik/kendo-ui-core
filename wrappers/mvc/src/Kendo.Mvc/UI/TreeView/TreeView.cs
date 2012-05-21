@@ -13,9 +13,9 @@ namespace Kendo.Mvc.UI
     /// <summary>
     /// Telerik Treeview for ASP.NET MVC is a view component for presenting hierarchical data.
     /// </summary>
-    public class TreeView : ViewComponentBase, INavigationItemComponent<TreeViewItem>, IEffectEnabled
+    public class TreeView : ViewComponentBase, INavigationItemComponent<TreeViewItem>
     {
-        private readonly IList<IEffect> defaultEffects = new List<IEffect> { new PropertyAnimation(PropertyAnimationType.Height) };
+        //private readonly IList<IEffect> defaultEffects = new List<IEffect> { new PropertyAnimation(PropertyAnimationType.Height) };
 
         private readonly ITreeViewHtmlBuilderFactory builderFactory;
 
@@ -49,7 +49,7 @@ namespace Kendo.Mvc.UI
             WebService = DataBinding.WebService;
 
             this.Effects = new Effects();
-            defaultEffects.Each(el => Effects.Container.Add(el));
+            //defaultEffects.Each(el => Effects.Container.Add(el));
 
             Items = new LinkedObjectCollection<TreeViewItem>(null);
 
@@ -194,10 +194,10 @@ namespace Kendo.Mvc.UI
             IClientSideObjectWriter objectWriter = ClientSideObjectWriterFactory.Create(Id, "tTreeView", writer);
             objectWriter.Start();
 
-            if (!defaultEffects.SequenceEqual(Effects.Container))
-            {
-                objectWriter.Serialize("effects", Effects);
-            }
+            //if (!defaultEffects.SequenceEqual(Effects.Container))
+            //{
+            //    objectWriter.Serialize("effects", Effects);
+            //}
 
             if (!ShowLines)
             {

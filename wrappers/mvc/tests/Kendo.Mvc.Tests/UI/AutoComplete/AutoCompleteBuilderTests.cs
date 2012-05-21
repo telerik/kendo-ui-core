@@ -166,19 +166,6 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
-        public void Effects_creates_fx_factory()
-        {
-            var fxFacCreated = false;
-
-            builder.Effects(fx =>
-            {
-                fxFacCreated = fx != null;
-            });
-
-            Assert.True(fxFacCreated);
-        }
-
-        [Fact]
         public void Encoded_method_be_able_to_set_Encoded_property()
         {
             builder.Encode(false);

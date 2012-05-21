@@ -283,7 +283,6 @@
     <Compile Include="SiteMap\SiteMapNodeFactoryTests.cs" />
     <Compile Include="SiteMap\SiteMapNodeTests.cs" />
     <Compile Include="SiteMap\XmlSiteMapTests.cs" />
-    <Compile Include="UI\AnimationDurationConverterTests.cs" />
     <Compile Include="UI\AutoComplete\AutoCompleteHtmlBuilderTests.cs" />
     <Compile Include="UI\AutoComplete\AutoCompleteTestHelper.cs" />
     <Compile Include="UI\AutoComplete\AutoCompleteRenderingTests.cs" />
@@ -350,12 +349,6 @@
     <Compile Include="UI\DatePicker\DatePickerRenderingTests.cs" />
     <Compile Include="UI\DatePicker\DatePickerTestHelper.cs" />
     <Compile Include="UI\DatePicker\DatePickerClientEventsBuilderTests.cs" />
-    <Compile Include="UI\Effects\EffectsSerializationTests.cs" />
-    <Compile Include="UI\Effects\ToggleAnimationSerializationTests.cs" />
-    <Compile Include="UI\Effects\PropertyAnimationSerializationTests.cs" />
-    <Compile Include="UI\Effects\SlideAnimationSerializationTests.cs" />
-    <Compile Include="UI\Effects\EffectBuilderTests.cs" />
-    <Compile Include="UI\Effects\EffectPropertyBuildersTests.cs" />
     <Compile Include="UI\Grid\GridActionAttributeTests.cs" />
     <Compile Include="UI\Grid\GridActionBindingContextTests.cs" />
     <Compile Include="UI\Grid\GridActionCommandFactoryTests.cs" />
@@ -408,7 +401,6 @@
     <Compile Include="UI\TreeView\TreeViewSerializationTests.cs" />
     <Compile Include="UI\TreeView\TreeViewTestHelper.cs" />
     <Compile Include="UI\TreeView\TreeViewRendererTests.cs" />
-    <Compile Include="UI\Window\WindowEffectBuilderTests.cs" />
     <Compile Include="UI\Window\WindowRenderingTests.cs" />
     <Compile Include="UI\Window\WindowHtmlBuilderTests.cs" />
     <Compile Include="UI\Window\WindowActionsBuilderTests.cs" />

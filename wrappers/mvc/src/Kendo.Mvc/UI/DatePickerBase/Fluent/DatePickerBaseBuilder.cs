@@ -21,33 +21,33 @@ namespace Kendo.Mvc.UI.Fluent
         {
         }
 
-        /// <summary>
-        /// Configures the effects of the datepicker.
-        /// </summary>
-        /// <param name="effectsAction">The action which configures the effects.</param>
-        /// <example>
-        /// <code lang="CS">
-        /// &lt;%= Html.Telerik().DatePicker()
-        ///	           .Name("DatePicker")
-        ///	           .Effects(fx =>
-        ///	           {
-        ///		            fx.Height()
-        ///			          .Opacity()
-        ///					  .OpenDuration(AnimationDuration.Normal)
-        ///					  .CloseDuration(AnimationDuration.Normal);
-        ///	           })
-        /// </code>
-        /// </example>
-        public TPickerBuilder Effects(Action<EffectsBuilder> addEffects)
-        {
-            Guard.IsNotNull(addEffects, "addAction");
+        ///// <summary>
+        ///// Configures the effects of the datepicker.
+        ///// </summary>
+        ///// <param name="effectsAction">The action which configures the effects.</param>
+        ///// <example>
+        ///// <code lang="CS">
+        ///// &lt;%= Html.Telerik().DatePicker()
+        /////	           .Name("DatePicker")
+        /////	           .Effects(fx =>
+        /////	           {
+        /////		            fx.Height()
+        /////			          .Opacity()
+        /////					  .OpenDuration(AnimationDuration.Normal)
+        /////					  .CloseDuration(AnimationDuration.Normal);
+        /////	           })
+        ///// </code>
+        ///// </example>
+        //public TPickerBuilder Effects(Action<EffectsBuilder> addEffects)
+        //{
+        //    Guard.IsNotNull(addEffects, "addAction");
 
-            EffectsBuilderFactory factory = new EffectsBuilderFactory();
+        //    EffectsBuilderFactory factory = new EffectsBuilderFactory();
 
-            addEffects(factory.Create(Component.Effects));
+        //    addEffects(factory.Create(Component.Effects));
 
-            return this as TPickerBuilder;
-        }
+        //    return this as TPickerBuilder;
+        //}
         
         /// <summary>
         /// Sets whether calendar should open on focus.

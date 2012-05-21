@@ -45,19 +45,6 @@ namespace Kendo.Mvc.Tests.Menu
 			Assert.Equal(MenuOrientation.Vertical, menu.Orientation);
 		}
 
-		[Fact]
-		public void Effects_creates_fx_factory()
-		{
-			var fxFacCreated = false;
-
-			builder.Effects(fx =>
-			{
-				fxFacCreated = fx != null;
-			});
-
-			Assert.True(fxFacCreated);
-		}
-
         [Fact]
         public void BintTo_for_SiteMap_should_get_SiteMap_and_create_items()
         {
@@ -154,14 +141,6 @@ namespace Kendo.Mvc.Tests.Menu
 
             Assert.Equal(20, menu.Items.Count);
             Assert.Equal(10, menu.Items[0].Items.Count);
-        }
-
-        [Fact]
-        public void Effects_should_return_builder()
-        {
-            var returnedBuilder = builder.Effects((effects) => { });
-
-            Assert.IsType(typeof(MenuBuilder), returnedBuilder);
         }
 
         [Fact]
