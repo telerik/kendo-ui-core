@@ -1,0 +1,90 @@
+@using (Html.BeginForm()) {
+    @(Html.Kendo().TreeView()
+        .Name("treeview")
+        .HtmlAttributes(new { @class = "demo-section" })
+        .Template(
+            "#= item.text #" +
+            "# if (!item.items) { #" +
+                "<a class='delete-link' href='\\#'></a>" +
+            "# } #"
+        )
+        .Items(treeview =>
+        {
+            treeview.Add().Text("My Documents")
+                .SpriteCssClasses("rootfolder")
+                .Expanded(true)
+                .Items(root =>
+                {
+                    root.Add().Text("Kendo UI Project")
+                        .Expanded(true)
+                        .SpriteCssClasses("folder")
+                        .Items(project =>
+                        {
+                            project.Add().Text("about.html").SpriteCssClasses("html");
+                            project.Add().Text("index.html").SpriteCssClasses("html");
+                            project.Add().Text("logo.png").SpriteCssClasses("image");
+                        });
+
+                    root.Add().Text("New Web Site")
+                        .Expanded(true)
+                        .SpriteCssClasses("folder")
+                        .Items(item =>
+                        {
+                            item.Add().Text("mockup.jpg").SpriteCssClasses("image");
+                            item.Add().Text("Research.pdf").SpriteCssClasses("pdf");
+                        });
+
+                    root.Add().Text("Reports")
+                        .Expanded(true)
+                        .SpriteCssClasses("folder")
+                        .Items(reports =>
+                        {
+                            reports.Add().Text("February.pdf").SpriteCssClasses("pdf");
+                            reports.Add().Text("March.pdf").SpriteCssClasses("pdf");
+                            reports.Add().Text("April.pdf").SpriteCssClasses("pdf");
+                        });
+                });
+        })
+    )
+
+    <button type="submit" class="k-button">Submit selection</button>
+}
+
+<script>
+    // Delete button behavior
+    $(document).on("click", ".delete-link", function() {
+        var treeview = $("#treeview").data("kendoTreeView");
+        treeview.remove($(this).closest(".k-item"));
+    });
+</script>
+
+<style scoped>
+    #treeview {
+        margin-bottom: 2em;
+    }
+
+    #treeview .k-sprite {
+        background-image: url("@Url.Content("~/Content/web/treeview/coloricons-sprite.png")");
+    }
+
+    .rootfolder { background-position: 0 0; }
+    .folder     { background-position: 0 -16px; }
+    .pdf        { background-position: 0 -32px; }
+    .html       { background-position: 0 -48px; }
+    .image      { background-position: 0 -64px; }
+
+    .delete-link {
+        width: 12px;
+        height: 12px;
+        background: transparent url("@Url.Content("~/Content/web/treeview/close.png")") no-repeat 50% 50%;
+        overflow: hidden;
+        display: inline-block;
+        font-size: 0;
+        line-height: 0;
+        vertical-align: top;
+        margin: 2px 0 0 3px;
+        -webkit-border-radius: 5px;
+        -mox-border-radius: 5px;
+        border-radius: 5px;
+    }
+</style>

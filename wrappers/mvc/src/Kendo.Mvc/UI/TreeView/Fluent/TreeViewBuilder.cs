@@ -335,25 +335,6 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// ShowLines indicates if lines connecting child nodes to parent nodes are displayed.
-        /// </summary>
-        /// <param name="value">If true lines connecting child nodes to parent nodes are displayed.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().TreeView()
-        ///             .Name("TreeView")
-        ///             .ShowLines(true)
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public TreeViewBuilder ShowLines(bool value)
-        {
-            Component.ShowLines = value;
-
-            return this;
-        }
-
-        /// <summary>
         /// ShowCheckBox indicates if checkbox displayed before node.
         /// </summary>
         /// <param name="value">If true checkbox will be displayed for every node.</param>
@@ -442,6 +423,27 @@ namespace Kendo.Mvc.UI.Fluent
             Guard.IsNotNull(value, "value");
 
             Component.SecurityTrimming = value;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Set a template for all treeview items.
+        /// </summary>
+        /// <param name="template">The kendo template that is used for rendering of the items.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Telerik().TreeView()
+        ///             .Name("TreeView")
+        ///             .Template("#= item.text #")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TreeViewBuilder Template(string template)
+        {
+            Guard.IsNotNull(template, "template");
+
+            Component.Template = template;
 
             return this;
         }

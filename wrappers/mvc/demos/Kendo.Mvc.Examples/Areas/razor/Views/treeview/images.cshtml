@@ -38,9 +38,7 @@
 </div>
 
 <div class="treeview-back">
-<h3>TreeView with sprites</h3>
-
-
+    <h3>TreeView with sprites</h3>
     @(Html.Kendo().TreeView()
         .Name("treeview-sprites")
         .Items(treeview =>
@@ -55,14 +53,9 @@
                         .SpriteCssClasses("folder")
                         .Items(project =>
                         {
-                            project.Add().Text("about.html")
-                                .SpriteCssClasses("html");
-
-                            project.Add().Text("index.html")
-                                .SpriteCssClasses("html");
-
-                            project.Add().Text("logo.png")
-                                .SpriteCssClasses("image");
+                            project.Add().Text("about.html").SpriteCssClasses("html");
+                            project.Add().Text("index.html").SpriteCssClasses("html");
+                            project.Add().Text("logo.png").SpriteCssClasses("image");
                         });
 
                     root.Add().Text("New Web Site")
@@ -70,11 +63,8 @@
                         .SpriteCssClasses("folder")
                         .Items(item =>
                         {
-                            item.Add().Text("mockup.jpg")
-                                .SpriteCssClasses("image");
-
-                            item.Add().Text("Research.pdf")
-                                .SpriteCssClasses("pdf");
+                            item.Add().Text("mockup.jpg").SpriteCssClasses("image");
+                            item.Add().Text("Research.pdf").SpriteCssClasses("pdf");
                         });
 
                     root.Add().Text("Reports")
@@ -82,14 +72,9 @@
                         .SpriteCssClasses("folder")
                         .Items(reports =>
                         {
-                            reports.Add().Text("February.pdf")
-                                .SpriteCssClasses("pdf");
-
-                            reports.Add().Text("March.pdf")
-                                .SpriteCssClasses("pdf");
-
-                            reports.Add().Text("April.pdf")
-                                .SpriteCssClasses("pdf");
+                            reports.Add().Text("February.pdf").SpriteCssClasses("pdf");
+                            reports.Add().Text("March.pdf").SpriteCssClasses("pdf");
+                            reports.Add().Text("April.pdf").SpriteCssClasses("pdf");
                         });
                 });
         })
