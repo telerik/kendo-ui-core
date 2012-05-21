@@ -1181,7 +1181,7 @@
 
         options: {
             plotArea: {},
-            name: "Gauge"
+            theme: "default"
         },
 
         value: function(value) {
