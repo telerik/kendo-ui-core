@@ -578,7 +578,8 @@ namespace Kendo.Mvc.UI
         {
             get
             {
-                return Columns.Where(c => c.Visible).ToList();
+                //TODO: Implement Column visibility
+                return Columns/*.Where(c => c.Visible)*/.ToList();
             }
         }
 
@@ -978,7 +979,8 @@ namespace Kendo.Mvc.UI
                 Mode = CurrentItemMode,
                 EditMode = Editing.Mode,
                 HasDetailView = HasDetailView,
-                Colspan = Colspan - Columns.Count(column => column.Hidden),
+                //TODO: Implement hidden columns
+                Colspan = Colspan /*- Columns.Count(column => column.Hidden)*/,
                 DetailViewTemplate = MapDetailViewTemplate(HasDetailView ? DetailView.Template : null),
                 NoRecordsTemplate = FormatNoRecordsTemplate(),
                 Localization = Localization,

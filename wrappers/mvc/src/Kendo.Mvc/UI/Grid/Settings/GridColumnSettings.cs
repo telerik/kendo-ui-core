@@ -29,18 +29,23 @@ namespace Kendo.Mvc.UI
             Filterable = true;
             Groupable = true;
             Visible = true;
-            IncludeInContextMenu = true;
+            //TODO: Implement HeaderContextMenu
+            //IncludeInContextMenu = true;
             HeaderHtmlAttributes = new RouteValueDictionary();
-            HtmlAttributes = new RouteValueDictionary();
-            FooterHtmlAttributes = new RouteValueDictionary();
+            //TODO: Implement HtmlAttributes
+            //HtmlAttributes = new RouteValueDictionary();
+            //TODO: Implement FooterHtmlAttributes
+          //  FooterHtmlAttributes = new RouteValueDictionary();
         }
 
+        //TODO: Implement HeaderTemplate
+        /*
         public Action HeaderTemplate
         {
             get;
             set;
         }
-
+        */
         public Action<GridAggregateResult> FooterTemplate
         {
             get;
@@ -83,18 +88,20 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        public IDictionary<string, object> HeaderHtmlAttributes
+        //TODO: Implement HeaderHtmlAttributes
+        internal IDictionary<string, object> HeaderHtmlAttributes
         {
             get;
             private set;
         }
-
+        //TODO: Implement FooterHtmlAttributes
+        /*
         public IDictionary<string, object> FooterHtmlAttributes
         {
             get;
             private set;
         }
-
+        */
         private string PrepareStyle(string style)
         {
             if (string.IsNullOrEmpty(style))
@@ -112,7 +119,8 @@ namespace Kendo.Mvc.UI
                 return newStyle;
             }
         }
-
+        //TODO: Implement hidden columns
+        /*
         private bool hidden;
         public bool Hidden
         {
@@ -133,19 +141,23 @@ namespace Kendo.Mvc.UI
                 hidden = value;
             }
         }
-
+        */
+        //TODO: Implement HeaderContextMenu
+        /*
         public bool IncludeInContextMenu
         {
             get;
             set;
         }
-
+        */
+        //TODO: Implement HtmlAttributes
+        /*
         public IDictionary<string, object> HtmlAttributes
         {
             get;
             private set;
         }
-
+        */
         public string Member
         {
             get
