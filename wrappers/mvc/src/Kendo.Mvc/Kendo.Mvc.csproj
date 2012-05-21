@@ -882,13 +882,11 @@
     <Compile Include="UI\TimePicker\Html\TimePickerHtmlBuilder.cs" />
     <Compile Include="UI\TimePicker\Fluent\TimePickerBuilder.cs" />
     <Compile Include="UI\TimePicker\TimePicker.cs" />
-    <Compile Include="UI\TreeView\Fluent\TreeViewDragAndDropSettingsBuilder.cs" />
     <Compile Include="UI\TreeView\Fluent\TreeViewBindingSettingsBuilder.cs" />
     <Compile Include="UI\TreeView\Fluent\TreeViewBuilder.cs" />
     <Compile Include="UI\TreeView\Fluent\TreeViewClientEventsBuilder.cs" />
     <Compile Include="UI\TreeView\Fluent\TreeViewDataBindingConfigurationBuilder.cs" />
     <Compile Include="UI\TreeView\ITreeViewItem.cs" />
-    <Compile Include="UI\TreeView\Settings\TreeViewDragAndDropSettings.cs" />
     <Compile Include="UI\TreeView\TreeViewHtmlBuilder.cs" />
     <Compile Include="UI\TreeView\Fluent\TreeViewItemBuilder.cs" />
     <Compile Include="UI\TreeView\Fluent\TreeViewItemFactory.cs" />
