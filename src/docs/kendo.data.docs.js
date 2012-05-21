@@ -449,7 +449,7 @@
         *           FUNCTON1NAME: FUNCTION1VALUE
         *       }
         *   },
-        *   fieldName: FIELDNAME, // the field name on which is grouped
+        *   field: FIELDNAME, // the field name on which is grouped
         *   hasSubgroups: true, // false if there are not sub group items and this is the top most group
         *   items: [
         *   // either the inner group items (if hasSubgroups is true) or the data records
@@ -457,7 +457,7 @@
         *          aggregates: {
         *              //nested group aggregates
         *          },
-        *          fieldName: NESTEDGROUPFIELDNAME,
+        *          field: NESTEDGROUPFIELDNAME,
         *          hasSubgroups: false,
         *          items: [
         *          // data records
