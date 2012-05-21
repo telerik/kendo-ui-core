@@ -3887,8 +3887,14 @@
 
         render: function() {
             var plotArea = this,
+                options = plotArea.options,
                 series = plotArea.series;
 
+            if (options.categoryAxis.type == "Date") {
+                plotArea.aggregateDateSeries();
+            }
+
+            series = plotArea.series;
             plotArea.createAreaChart(grep(series, function(s) {
                 return inArray(s.type, [AREA, VERTICAL_AREA]);
             }));
@@ -3902,6 +3908,89 @@
             }));
 
             plotArea.createAxes();
+        },
+
+        aggregateDateSeries: function() {
+            var plotArea = this,
+                options = plotArea.options,
+                series = plotArea.series,
+                categories = options.categoryAxis.categories || [],
+                baseUnit = options.categoryAxis.baseUnit,
+                categoryIx,
+                count = categoriesCount(series),
+                currentCategory,
+                lastCategory,
+                minInterval = MAX_VALUE;
+
+            if (!baseUnit) {
+                for (categoryIx = 0; categoryIx < count; categoryIx++) {
+                    currentCategory = toTime(categories[categoryIx]);
+
+                    if (currentCategory && lastCategory) {
+                        minInterval = math.min(
+                            currentCategory - lastCategory, minInterval
+                        );
+                    }
+
+                    lastCategory = currentCategory;
+                }
+
+                baseUnit = timeUnit(minInterval);
+            }
+
+            var startDate = floorDate(toTime(categories[0]));
+            var endDate = floorDate(toTime(categories[categories.length - 1]));
+            var bins = [];
+            var newCategories = [];
+
+            for (var date = startDate; date <= endDate; date = addDuration(date, 1, baseUnit)) {
+                bins.push({
+                    from: date,
+                    to: addDuration(date, 1, baseUnit)
+                });
+
+                newCategories.push(date);
+            }
+
+            partition(categories, bins, function(categoryIx, binIx) {
+                for (var seriesIx = 0; seriesIx < series.length; seriesIx++) {
+                    var data = series[seriesIx].data,
+                        binValue = data[binIx],
+                        oldValue = data[categoryIx];
+
+                    if (defined(binValue) && defined(oldValue)) {
+                        data[binIx] = math.max(binValue, oldValue);
+                    } else if (defined(oldValue)){
+                        data[binIx] = oldValue;
+                    }
+
+                    if (categoryIx !== binIx) {
+                        delete data[categoryIx];
+                    }
+                }
+            });
+
+            for (var seriesIx = 0; seriesIx < series.length; seriesIx++) {
+                var data = series[seriesIx].data;
+                var lastPointIx = data.length - 1;
+                while (lastPointIx > 0 && !defined(data[lastPointIx])) {
+                    lastPointIx--;
+                }
+                data.splice(lastPointIx + 1, data.length - lastPointIx);
+            }
+
+            options.categoryAxis.categories = newCategories;
+
+            function partition(values, bins, callback) {
+                for (var i = 0; i < values.length; i++) {
+                    for (var binIx = 0; binIx < bins.length; binIx++) {
+                        var bin = bins[binIx];
+                        if (values[i] >= bin.from && values[i] < bin.to) {
+                            callback(i, binIx);
+                        }
+                    }
+                }
+            }
         },
 
         appendChart: function(chart) {
