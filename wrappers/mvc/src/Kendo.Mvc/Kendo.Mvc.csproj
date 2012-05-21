@@ -316,12 +316,13 @@
     <Compile Include="UI\DataSource\DataSourceRequestAttribute.cs" />
     <Compile Include="UI\DataSource\DataSourceRequestModelBinder.cs" />
     <Compile Include="UI\DataSource\DataSourceResult.cs" />
+    <Compile Include="UI\DataSource\DataSourceSchema.cs" />
     <Compile Include="UI\DataSource\DataSourceType.cs" />
     <Compile Include="UI\DataSource\Fluent\DataSourceAggregateDescriptorFactory.cs" />
     <Compile Include="UI\DataSource\Fluent\CrudOperationBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\ReadOnlyDataSourceBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\DataSourceBuilder.cs" />
-    <Compile Include="UI\DataSource\ModelTypeDescriptor.cs" />
+    <Compile Include="UI\DataSource\ModelDescriptor.cs" />
     <Compile Include="UI\DataSource\Transport.cs" />
     <Compile Include="UI\DatePickerBase\Fluent\MonthTemplateBuilder.cs" />
     <Compile Include="UI\DatePicker\MonthTemplate.cs" />
@@ -658,8 +659,6 @@
     <Compile Include="UI\Grid\IGridDataKey.cs" />
     <Compile Include="UI\Grid\Serialization\GridActionColumnSerializer.cs" />
     <Compile Include="UI\Grid\Serialization\GridClientObjectSerializer.cs" />
-    <Compile Include="UI\Grid\Serialization\GridPluginSerializer.cs" />
-    <Compile Include="UI\Grid\Serialization\GridUrlFormatSerializer.cs" />
     <Compile Include="UI\Grid\Serialization\IGridColumnSerializer.cs" />
     <Compile Include="UI\Grid\Settings\GridResizingSettings.cs" />
     <Compile Include="UI\Grid\Commands\GridToolBarCustomCommand.cs" />

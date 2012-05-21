@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Kendo.Mvc.Extensions;
-using System.Web.Mvc;
 
 namespace Kendo.Mvc.UI
 {
@@ -18,12 +17,15 @@ namespace Kendo.Mvc.UI
             Groups = new List<GroupDescriptor>();
             Aggregates = new List<AggregateDescriptor>();
 
+            Schema = new DataSourceSchema(); 
+
             ServerPaging = ServerSorting = ServerGrouping = ServerFiltering = ServerAggregates = true;
         }
 
         public int TotalPages { get; set; }
         public int Page { get; set; }
         public int Total { get; set; }
+        public DataSourceSchema Schema { get; private set; }
 
         protected override void Serialize(IDictionary<string, object> json)
         {
@@ -94,11 +96,10 @@ namespace Kendo.Mvc.UI
 
             if (ModelType != null)
             {
-                var model = new Dictionary<string, object>();
-                model["model"] = new ModelTypeDescriptor(ModelType).ToJson();
-                json["schema"] = model;
-
+                Schema.Model = new ModelDescriptor(ModelType);
             }
+
+            json["schema"] = Schema.ToJson();
         }       
 
         public Type ModelType 
@@ -234,19 +235,23 @@ namespace Kendo.Mvc.UI
                 Filters.Clear();
             }
 
-            var result = Data.AsQueryable().ToDataSource(request);
-
-            Page = request.Page;
-            Data = result.Data;
-            Total = result.Total;
-
-            if (Total == 0 || PageSize == 0)
+            // Check if the data has been initially set
+            if (Data != null)
             {
-                TotalPages = 1;
-            }
-            else
-            {
-                TotalPages = (Total + PageSize - 1) / PageSize;
+                var result = Data.AsQueryable().ToDataSource(request);
+
+                Page = request.Page;
+                Data = result.Data;
+                Total = result.Total;
+
+                if (Total == 0 || PageSize == 0)
+                {
+                    TotalPages = 1;
+                }
+                else
+                {
+                    TotalPages = (Total + PageSize - 1) / PageSize;
+                }
             }
         }
     }
