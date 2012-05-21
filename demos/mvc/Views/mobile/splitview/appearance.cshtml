@@ -35,14 +35,14 @@
 </div>
 
 <script type="text/javascript">
-    $(".photo").click(function () {
+    $(document).on("click", ".photo", function () {
         $("#main-pane").find(".km-content").css("background-image", $(this).css("background-image"));
     });
 </script>
 
 <style scoped>
     #top-pane {
-        height: 13px;
+        height: 160px;
     }
 
     #scrollview-container .photo {
@@ -69,12 +69,21 @@
 
     #main-pane .km-content
     {
-        -webkit-background-size: 100% 100%;
-        background-size: 100% 100%;
+        background-image: url("../../content/mobile/cities/220/sydney.jpg");
+        background-position: 50% 50%;
+        -webkit-background-size: 100% auto;
+        background-size: 100% auto;
+    }
+
+    #main-pane {
+        -webkit-box-flex: 1000;
+        -moz-box-flex: 1000;
     }
 
     #scrollview-container {
+        -webkit-transform: translatez(0);
         width: 100%;
+        height: 100%;
         margin: 0;
     }
 
