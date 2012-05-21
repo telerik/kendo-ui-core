@@ -1086,7 +1086,7 @@
          * $("#chart").kendoChart({
          *      ...,
          *      xAxis: {
-         *          axisCrossingValues: [0, 1000]
+         *          axisCrossingValue: [0, 1000]
          *      },
          *      yAxis: [{ }, { name: "secondary" }],
          *      ...
@@ -1106,7 +1106,7 @@
          * $("#chart").kendoChart({
          *      ...,
          *      yAxis: {
-         *          axisCrossingValues: [0, 1000]
+         *          axisCrossingValue: [0, 1000]
          *      },
          *      xAxis: [{ }, { name: "secondary" }],
          *      ...
@@ -1149,7 +1149,7 @@
          * $("#chart").kendoChart({
          *      categoryAxis: {
          *          categories: ["A", "B"]
-         *              axisCrossingValues: [0, 100]
+         *              axisCrossingValue: [0, 100]
          *          },
          *      valueAxis: [{ }, { name: "secondary" }],
          *      ...
