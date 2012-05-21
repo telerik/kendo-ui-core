@@ -19,7 +19,7 @@ namespace Kendo.Mvc.UI.Fluent
             this.operation = operation;
         }
 
-        public CrudOperationBuilder Url(RouteValueDictionary routeValues)
+        public CrudOperationBuilder Route(RouteValueDictionary routeValues)
         {
             operation.Action(routeValues);
 
@@ -28,26 +28,30 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
-        public CrudOperationBuilder Url(string actionName, string controllerName, object routeValues)
+        public CrudOperationBuilder Action(string actionName, string controllerName, object routeValues)
         {
             operation.Action(actionName, controllerName, routeValues);
+
             SetUrl();
+
             return this;
         }
 
-        public CrudOperationBuilder Url(string actionName, string controllerName, RouteValueDictionary routeValues)
+        public CrudOperationBuilder Action(string actionName, string controllerName, RouteValueDictionary routeValues)
         {
             operation.Action(actionName, controllerName, routeValues);
+
             SetUrl();
+
             return this;
         }
 
-        public CrudOperationBuilder Url(string actionName, string controllerName)
+        public CrudOperationBuilder Action(string actionName, string controllerName)
         {
-            return Url(actionName, controllerName, (object)null);
+            return Action(actionName, controllerName, (object)null);
         }
 
-        public CrudOperationBuilder Url(string routeName, RouteValueDictionary routeValues)
+        public CrudOperationBuilder Route(string routeName, RouteValueDictionary routeValues)
         {
             operation.Route(routeName, routeValues);
 
@@ -56,7 +60,7 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
-        public CrudOperationBuilder Url(string routeName, object routeValues)
+        public CrudOperationBuilder Route(string routeName, object routeValues)
         {
             operation.Route(routeName, routeValues);
 
@@ -65,15 +69,21 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
-        public CrudOperationBuilder Url(string routeName)
+        public CrudOperationBuilder Route(string routeName)
         {
-            return Url(routeName, (object)null);
+            operation.Route(routeName, (object)null);
+
+            SetUrl();
+
+            return this;
         }
 
-        public CrudOperationBuilder Url<TController>(Expression<Action<TController>> controllerAction) where TController : Controller
+        public CrudOperationBuilder Action<TController>(Expression<Action<TController>> controllerAction) where TController : Controller
         {
             operation.Action(controllerAction);
+
             SetUrl();
+
             return this;
         }
 
