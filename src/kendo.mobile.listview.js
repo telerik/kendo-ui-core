@@ -31,7 +31,7 @@
             item = clicked.parent(),
             role = clicked.data(kendo.ns + "role") || "",
             plainItem = (!role.match(/button/)),
-            prevented = e.originalEvent && e.originalEvent.defaultPrevented;
+            prevented = e.isDefaultPrevented();
 
         if (plainItem) {
             item.toggleClass("km-state-active", e.type === MOUSEDOWN && !prevented);

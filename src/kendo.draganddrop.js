@@ -516,11 +516,19 @@
             return this.max - this.min;
         },
 
+        getSize: function() {
+            return this.container[this.measure]();
+        },
+
+        getTotal: function() {
+            return this.element[0][this.scrollSize];
+        },
+
         update: function(silent) {
             var that = this;
 
-            that.size = that.container[that.measure]();
-            that.total = that.element[0][that.scrollSize];
+            that.size = that.getSize();
+            that.total = that.getTotal();
             that.min = Math.min(that.max, that.size - that.total);
             if (!silent) {
                 that.trigger(CHANGE, that);
