@@ -1,6 +1,4 @@
-@model IEnumerable<Product>
-
-@(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.Product>(Model)    
+@(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.Product>()    
     .Name("Grid")
     .Pageable()
     .Sortable()
@@ -10,5 +8,5 @@
     .DataSource(dataSource => dataSource
         .Type(DataSourceType.Ajax)
         .Read(read => read.Action("AjaxBinding_Read", "Grid"))
-        )
+     )
 )

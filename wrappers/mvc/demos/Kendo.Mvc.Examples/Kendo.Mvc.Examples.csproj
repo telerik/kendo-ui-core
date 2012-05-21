@@ -77,6 +77,7 @@
     <Compile Include="Areas\aspx\ASPXAreaRegistration.cs" />
     <Compile Include="Areas\razor\RazorAreaRegistration.cs" />
     <Compile Include="Controllers\Grid\AjaxBindingController.cs" />
+    <Compile Include="Controllers\Grid\CustomAjaxBindingController.cs" />
     <Compile Include="Controllers\TimePicker\IndexController.cs" />
     <Compile Include="Controllers\DatePicker\IndexController.cs" />
     <Compile Include="Controllers\Grid\GridController.cs" />
@@ -229,6 +230,7 @@
     <Content Include="Areas\razor\Views\window\api.cshtml" />
     <Content Include="Areas\razor\Views\window\events.cshtml" />
     <Content Include="Areas\razor\Views\grid\ajaxbinding.cshtml" />
+    <Content Include="Areas\razor\Views\grid\customajaxbinding.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
