@@ -386,9 +386,10 @@
      * The header and/or footer element of the <strong>Layout</strong> are applied to any <strong>View</strong> that uses it.</p>
      *
      * <p>To define a <strong>Layout</strong> set <code>data-role="layout"</code> to an element.
-     * To associate a <strong>View</strong> to a <strong>Layout</strong> set <code>data-layout</code> attribute. Once
-     * instantiated, the layout detaches its element from the DOM. When a view with the given layout is displayed,
-     * the layout attaches its header and footer to it.</p>
+     *
+     * <p>When a view with the given layout is displayed, the layout attaches its header and footer to it.</p>
+     *
+     * <p><strong>Note:</strong> When instantiated, the layout detaches its element from the document tree.</p>
      *
      * <p>A <strong>View</strong> is associated with a <strong>Layout</strong> by setting its <code>data-layout</code> attribute value
      * to the value of the layout's <code>data-id</code> attribute:</p>
@@ -486,6 +487,7 @@
              * @event
              * @param {Event} e
              * @param {jQueryObject} e.layout The mobile layout instance
+             * @param {jQueryObject} e.view The mobile view instance
              */
             SHOW,
             /**
@@ -494,6 +496,7 @@
              * @event
              * @param {Event} e
              * @param {jQueryObject} e.layout The mobile layout instance
+             * @param {jQueryObject} e.view The mobile view instance
              */
             HIDE
         ],
