@@ -278,7 +278,7 @@ namespace("mvc", function() {
                     binariesPath = path.join(projectPath, "bin", "Release");
 
                 bundles.buildBundle(bundles.mvcWrappersBundle, version(), complete, function(root, bundle, license) {
-                    var binariesDeployRoot = path.join(root, "Bin"),
+                    var binariesDeployRoot = path.join(root, "Binaries", "Mvc3"),
                         stylesDeployRoot = path.join(root, "Content"),
                         scriptsDeployRoot = path.join(root, "Scripts"),
                         sourceDeployRoot = path.join(root, "Source"),
