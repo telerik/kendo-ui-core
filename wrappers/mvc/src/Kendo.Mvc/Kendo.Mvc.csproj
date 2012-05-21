@@ -321,6 +321,7 @@
     <Compile Include="UI\DataSource\Fluent\CrudOperationBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\ReadOnlyDataSourceBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\DataSourceBuilder.cs" />
+    <Compile Include="UI\DataSource\ModelTypeDescriptor.cs" />
     <Compile Include="UI\DataSource\Transport.cs" />
     <Compile Include="UI\DatePickerBase\Fluent\MonthTemplateBuilder.cs" />
     <Compile Include="UI\DatePicker\MonthTemplate.cs" />
