@@ -183,20 +183,6 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
-        public void ClientEvents_sets_events()
-        {
-            builder.ClientEvents(eventBuilder => { eventBuilder.OnLoad("Load"); });
-
-            component.ClientEvents.OnLoad.HandlerName.ShouldNotBeNull();
-        }
-
-        [Fact]
-        public void ClientEvents_returns_builder()
-        {
-            builder.ClientEvents(eventBuilder => { eventBuilder.OnLoad("Load"); }).ShouldBeSameAs(builder);
-        }
-
-        [Fact]
         public void Resizable_with_ResizingSettingsBuilder_sets_resizingSettings()
         {
             builder.Resizable(settingsBuilder => { settingsBuilder.Enabled(true); });

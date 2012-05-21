@@ -20,34 +20,6 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
-        public void Loaded_Action_param_should_set_Loaded_property()
-        {
-            builder.OnLoad(() => { });
-
-            clientEvents.OnLoad.CodeBlock.ShouldNotBeNull();
-        }
-
-        [Fact]
-        public void Loaded_String_param_should_set_Loaded_property()
-        {
-            builder.OnLoad("my_method()");
-
-            clientEvents.OnLoad.HandlerName.ShouldNotBeNull();
-        }
-
-        [Fact]
-        public void Loaded_Action_should_return_builder()
-        {
-            builder.OnLoad(() => { }).ShouldBeSameAs(builder);
-        }
-
-        [Fact]
-        public void Loaded_String_should_return_builder()
-        {
-            builder.OnLoad("my_method()").ShouldBeSameAs(builder);
-        }
-
-        [Fact]
         public void Open_Action_param_should_set_Open_property()
         {
             builder.OnOpen(() => { });
