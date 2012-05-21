@@ -37,8 +37,10 @@ namespace Kendo.Mvc.UI
             Grid = grid;
             Settings = new GridColumnSettings();
             Visible = true;
-            IncludeInContextMenu = true;
-     //TODO: HeaderTemplate = new HtmlTemplate();
+            //TODO: Implement HeaderContextMenu
+            //IncludeInContextMenu = true;
+            //TODO: Implement HeaderTemplate
+            //HeaderTemplate = new HtmlTemplate();
             FooterTemplate = new HtmlTemplate<GridAggregateResult>();
         }
 
@@ -174,7 +176,8 @@ namespace Kendo.Mvc.UI
                 Settings.Hidden = value;
             }
         }
-
+        //TODO: Implement HeaderContextMenu
+/*
         public virtual bool IncludeInContextMenu
         {
             get
@@ -186,7 +189,7 @@ namespace Kendo.Mvc.UI
                 Settings.IncludeInContextMenu = value;
             }
         }
-
+        */
         public virtual bool Encoded
         {
             get

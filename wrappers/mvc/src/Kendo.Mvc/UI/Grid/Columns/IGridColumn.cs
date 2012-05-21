@@ -63,13 +63,14 @@ namespace Kendo.Mvc.UI
             get; 
             set; 
         }
-
+        //TODO: Implement HeaderContextMenu
+        /*
         bool IncludeInContextMenu
         {
             get;
             set;
         }
-
+        */
         IDictionary<string, object> HtmlAttributes 
         { 
             get; 
