@@ -138,6 +138,24 @@
          *        }
          *     }
          * });
+         * @option {String} [scale.labels.position] <"inside">
+         * The labels positions.
+         * <div class="details-list">
+         *     <dl>
+         *         <dt>
+         *              <code>"inside"</code>
+         *         </dt>
+         *         <dd>
+         *              The labels are positioned inside.
+         *         </dd>
+         *         <dt>
+         *              <code>"outside"</code>
+         *         </dt>
+         *         <dd>
+         *              The labels are positioned outside.
+         *         </dd>
+         *    </dl>
+         * </div>
          * @option {Object} [scale.majorTicks] Configures the scale major ticks.
          * @option {Number} [scale.majorTicks.size] The major tick size.
          * This is the length of the line in pixels that is drawn to indicate the tick on the scale.
