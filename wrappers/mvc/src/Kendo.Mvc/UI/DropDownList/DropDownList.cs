@@ -22,7 +22,6 @@ namespace Kendo.Mvc.UI
             DropDownHtmlAttributes = new RouteValueDictionary();
             HiddenInputHtmlAttributes = new RouteValueDictionary();
             
-            Effects = new Effects();
             //defaultEffects.Each(el => Effects.Container.Add(el));
 
             Items = new List<DropDownItem>();

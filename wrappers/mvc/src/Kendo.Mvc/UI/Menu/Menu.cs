@@ -31,7 +31,6 @@ namespace Kendo.Mvc.UI
 
             ClientEvents = new MenuClientEvents();
 
-            this.Effects = new Effects();
             //defaultEffects.Each(el => Effects.Container.Add(el));
 
             Items = new LinkedObjectCollection<MenuItem>(null);

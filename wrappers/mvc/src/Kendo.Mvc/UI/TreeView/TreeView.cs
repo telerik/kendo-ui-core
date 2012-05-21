@@ -48,7 +48,6 @@ namespace Kendo.Mvc.UI
             Ajax = DataBinding.Ajax;
             WebService = DataBinding.WebService;
 
-            this.Effects = new Effects();
             //defaultEffects.Each(el => Effects.Container.Add(el));
 
             Items = new LinkedObjectCollection<TreeViewItem>(null);

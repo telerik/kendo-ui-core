@@ -23,7 +23,6 @@ namespace Kendo.Mvc.UI
             HiddenInputHtmlAttributes = new RouteValueDictionary();
             InputHtmlAttributes = new RouteValueDictionary();
 
-            Effects = new Effects();
             //defaultEffects.Each(el => Effects.Container.Add(el));
 
             Filtering = new ComboBoxFilterSettings();

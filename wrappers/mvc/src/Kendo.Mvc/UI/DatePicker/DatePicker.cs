@@ -4,12 +4,13 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.Resources;
     using Kendo.Mvc.UI.Html;
+    
     using System;
     using System.IO;
     using System.Web.Mvc;
     using System.Web.UI;
     using System.Globalization;
-using System.Collections.Generic;
+    using System.Collections.Generic;
 
     public class DatePicker : ViewComponentBase, IInputComponent<DateTime>
     {
@@ -25,11 +26,18 @@ using System.Collections.Generic;
             Min = defaultMinDate;
             Max = defaultMaxDate;
 
+            Animation = new PopupAnimation();
             ClientEvents = new DatePickerClientEvents();
             MonthTemplate = new MonthTemplate();
 
             Value = null;
             Enabled = true;
+        }
+
+        public PopupAnimation Animation
+        {
+            get;
+            private set;
         }
 
         public DatePickerClientEvents ClientEvents
@@ -103,7 +111,8 @@ using System.Collections.Generic;
             IClientSideObjectWriter objectWriter = ClientSideObjectWriterFactory.Create(Id, "kendoDatePicker", writer);
 
             objectWriter.Start();
-            
+
+            Animation.SerializeTo(objectWriter);
             ClientEvents.SerializeTo(objectWriter);
 
             objectWriter.Append("format", this.Format);
