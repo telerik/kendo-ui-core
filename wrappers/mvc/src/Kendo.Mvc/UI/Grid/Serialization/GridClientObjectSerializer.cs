@@ -17,6 +17,7 @@ namespace Kendo.Mvc.UI
         public void Serialize(IClientSideObjectWriter writer)
         {
             var columns = new List<IDictionary<string, object>>();
+            var autoBind = grid.DataSource.Type == DataSourceType.Ajax;
 
             grid.VisibleColumns.Each(column =>
             {
@@ -28,10 +29,6 @@ namespace Kendo.Mvc.UI
                 writer.AppendCollection("columns", columns);
             }
             
-            new GridPluginSerializer(grid).SerializeTo(writer);
-            
-            new GridUrlFormatSerializer<T>(grid).SerializeTo(writer);
-
             grid.Editing.SerializeTo("editing", writer);
             var shouldSerializeDataSource = false;
 
@@ -49,8 +46,7 @@ namespace Kendo.Mvc.UI
 
             if (grid.Paging.Enabled)
             {
-                //TODO: autoBind = false when server bound only
-                writer.AppendObject("pageable", new { autoBind = false });
+                writer.AppendObject("pageable", new { autoBind = autoBind });
             }
 
             if (grid.Sorting.Enabled)
@@ -100,8 +96,7 @@ namespace Kendo.Mvc.UI
             //writer.Append("noRecordsTemplate", grid.NoRecordsTemplate);                
             writer.AppendObject("dataSource", grid.DataSource.ToJson());
 
-            //TODO: This depends on whether the grid is initially bound
-            writer.Append("autoBind", false);
+            writer.Append("autoBind", autoBind);
         }
     }
 }

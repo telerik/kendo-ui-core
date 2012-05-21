@@ -57,6 +57,7 @@ namespace Kendo.Mvc.Extensions
             var data = queryable;    
 
             var filters = new List<IFilterDescriptor>(request.Filters);
+
             if (filters.Any())
             {
                 data = data.Where(filters);
