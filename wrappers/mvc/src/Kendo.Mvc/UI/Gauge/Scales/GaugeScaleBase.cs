@@ -8,7 +8,7 @@ namespace Kendo.Mvc.UI
     public abstract class GaugeScaleBase<T> : IGaugeScale<T> where T : struct
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="GaugeScaleBase<T>" /> class.
+        /// Initializes a new instance of the <see cref="GaugeScaleBase{T}" /> class.
         /// </summary>
         public GaugeScaleBase()
         {

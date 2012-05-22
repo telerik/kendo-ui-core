@@ -4,14 +4,14 @@ namespace Kendo.Mvc.UI.Fluent
     using Kendo.Mvc.UI;
 
     /// <summary>
-    /// Creates scale ranges for the <see cref="GaugeScaleRangesFactory{TScale}" />.
+    /// Creates scale ranges for the <see cref="GaugeScaleRangesFactory{TScale, T}" />.
     /// </summary>
     public class GaugeScaleRangesFactory<TScale, T> : IHideObjectMembers
         where TScale : IGaugeScale<T>
         where T : struct
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="GaugeScaleRangesFactory{TScale}"/> class.
+        /// Initializes a new instance of the <see cref="GaugeScaleRangesFactory{TScale, T}"/> class.
         /// </summary>
         /// <param name="scale">The scale.</param>
         public GaugeScaleRangesFactory(TScale scale)
