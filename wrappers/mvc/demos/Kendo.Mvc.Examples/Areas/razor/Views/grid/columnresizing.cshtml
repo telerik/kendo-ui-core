@@ -1,0 +1,10 @@
+@(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.Product>()    
+    .Name("Grid")
+    .Pageable()    
+    .Scrollable()     
+    .DataSource(dataSource => dataSource
+        .Type(DataSourceType.Ajax)
+        .Read(read => read.Action("ColumnResizing_Read", "Grid"))
+     )
+     .Resizable(resize => resize.Columns(true))
+)
