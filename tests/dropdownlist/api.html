@@ -56,8 +56,9 @@
                equal(dropdownlist._old, 1);
            });
 
-           test("value method should select item with 0 value", function() {
+           test("value method selects item with 0 value", function() {
                dropdownlist = new DropDownList(input, {
+                   optionLabel: "select",
                    dataTextField: "text",
                    dataValueField: "value",
                    dataSource: [{text: "foo", value: 1}, {text:2, value:0}]
@@ -65,11 +66,11 @@
 
                dropdownlist.value(0);
 
-               ok(dropdownlist.ul.children().eq(1).hasClass(SELECTED));
+               ok(dropdownlist.ul.children().eq(2).hasClass(SELECTED));
 
                equal(dropdownlist.value(), "0");
-               equal(dropdownlist.text(), 2);
-               equal(dropdownlist._old, 0);
+               equal(dropdownlist.text(), "2");
+               equal(dropdownlist._old, "0");
            });
 
            test("value(value) should call _accessor", function() {
