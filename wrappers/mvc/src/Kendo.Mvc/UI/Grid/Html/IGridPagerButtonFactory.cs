@@ -2,7 +2,7 @@ namespace Kendo.Mvc.UI.Html
 {
     public interface IGridPagerButtonFactory
     {
-        IHtmlNode CreateButton(GridPagerButtonType buttonType, string text, bool enabled, string url);
+        IHtmlNode CreateButton(GridPagerButtonType buttonType, bool enabled, string url, string text, int page);
     }
 
     public enum GridPagerButtonType

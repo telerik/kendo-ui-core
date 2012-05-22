@@ -223,7 +223,6 @@
     <Compile Include="UI\Grid\Html\GridMasterRowBuilderDecoratorTests.cs" />
     <Compile Include="UI\Grid\Html\GridPagerBuilderTests.cs" />
     <Compile Include="UI\Grid\Html\GridPagerRefreshBuilderTests.cs" />
-    <Compile Include="UI\Grid\Html\GridPagerNumericSectionBuilderTests.cs" />
     <Compile Include="UI\Grid\Html\GridPagerStatusBuilderTests.cs" />
     <Compile Include="UI\Grid\Html\GridRowBuilderDecoratorsProviderTests.cs">
       <SubType>Code</SubType>
