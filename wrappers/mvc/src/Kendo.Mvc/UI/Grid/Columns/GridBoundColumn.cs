@@ -53,8 +53,7 @@ namespace Kendo.Mvc.UI
                 }
             }
 
-            Value = value;
-            Aggregates = new List<AggregateFunction>();
+            Value = value;            
             GroupFooterTemplate = new HtmlTemplate<GridAggregateResult>();
             GroupHeaderTemplate = new HtmlTemplate<GridGroupAggregateResult>();
 
@@ -206,12 +205,6 @@ namespace Kendo.Mvc.UI
             }
         }
 
-        public ICollection<AggregateFunction> Aggregates
-        {
-            get;
-            set;
-        }
-
         public override IGridColumnSerializer CreateSerializer()
         {
             return new GridBoundColumnSerializer(this);
@@ -345,13 +338,15 @@ namespace Kendo.Mvc.UI
         {
             return CreateEditBuilderCore(htmlHelper);
         }
-
+        
         protected override IGridCellBuilder CreateHeaderBuilderCore()
         {
             IGridCellBuilder builder = null;
-
+            
             HeaderHtmlAttributes.Add("data-field", Member);
             HeaderHtmlAttributes.Add("data-title", Title);
+
+            AppendAggregateAttributes();
 
             if (Sortable && Grid.Sorting.Enabled /*&& !HeaderTemplate.HasValue()*/) //TODO: Implement header template
             {
@@ -394,7 +389,21 @@ namespace Kendo.Mvc.UI
 
         private GridAggregateResult CalculateAggregates(IEnumerable<AggregateResult> aggregateResults)
         {
-            return new GridAggregateResult(aggregateResults.Where(r => Aggregates.Any(f => f.FunctionName == r.FunctionName)));
+            var aggregates = Grid.DataSource.Aggregates.Where(agg => agg.Member == Member).SelectMany(agg => agg.Aggregates);
+
+            return new GridAggregateResult(aggregateResults.Where(r => aggregates.Any(f => f.FunctionName == r.FunctionName)));            
+        }
+
+        private void AppendAggregateAttributes()
+        {
+            var aggregates = Grid.DataSource.Aggregates
+                    .Where(agg => agg.Member == Member)
+                    .SelectMany(agg => agg.Aggregates)
+                    .Select(agg => agg.AggregateMethodName.ToLowerInvariant());
+
+            if (aggregates.Any()) {
+                HeaderHtmlAttributes.Add("data-aggregates", "[" + String.Join(",", aggregates.ToArray()) + "]");
+            }
         }
 
         public HtmlTemplate<GridAggregateResult> GroupFooterTemplate

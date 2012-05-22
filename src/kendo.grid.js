@@ -1747,17 +1747,19 @@
                 aggregates = that.dataSource.aggregates(),
                 html = "",
                 footerTemplate = that.footerTemplate,
-                options = that.options;
+                options = that.options,
+                footer;
 
             if (footerTemplate) {
                 aggregates = !isEmptyObject(aggregates) ? aggregates : buildEmptyAggregatesObject(that.dataSource.aggregate());
 
                 html = $(that._wrapFooter(footerTemplate(aggregates)));
+                footer = that.footer || that.wrapper.find(".k-grid-footer");
 
-                if (that.footer) {
+                if (footer.length) {
                     var tmp = html;
 
-                    that.footer.replaceWith(tmp);
+                    footer.replaceWith(tmp);
                     that.footer = tmp;
                 } else {
                     if (options.scrollable) {
@@ -1771,8 +1773,6 @@
                 if (options.resizable && that._footerWidth) {
                     that.footer.find("table").css('width', that._footerWidth);
                 }
-
-                //that._setContentHeight(); ***
             }
         },
 

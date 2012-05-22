@@ -708,17 +708,7 @@ namespace Kendo.Mvc.UI
         {
             get 
             {
-                return VisibleColumns.OfType<IGridBoundColumn>().Select(c => 
-                {
-                    var descriptor = new AggregateDescriptor
-                    {
-                        Member = c.Member
-                    };
-                    
-                    descriptor.Aggregates.AddRange(c.Aggregates);
-                    
-                    return descriptor;
-                });
+                return DataSource.Aggregates;
             }
         }
 
@@ -987,7 +977,7 @@ namespace Kendo.Mvc.UI
                 ScrollingHeight = Scrolling.Height,
                 EditFormHtmlAttributes = Editing.FormHtmlAttributes,
                 ShowFooter = Footer && VisibleColumns.Any(c => c.FooterTemplate.HasValue() || c.ClientFooterTemplate.HasValue()),
-                //TODO: AggregateResults = DataSource.AggregatesResults,
+                AggregateResults = DataSource.AggregateResults ?? new List<AggregateResult>(),
                 Aggregates = Aggregates.SelectMany(aggregate => aggregate.Aggregates),
                 GroupsCount = DataSource.Groups.Count,
                 ShowGroupFooter = Aggregates.Any() && VisibleColumns.OfType<IGridBoundColumn>().Any(c => c.GroupFooterTemplate.HasValue()),

@@ -1,0 +1,33 @@
+@model IEnumerable<Kendo.Mvc.Examples.Models.Product>
+           
+@{Html.Kendo().Grid(Model)
+    .Name("Grid")
+    .Columns(columns =>
+    {
+        columns.Bound(p => p.ProductName)
+            .FooterTemplate(@<text>Total Count: @item.Count</text>)
+            .GroupFooterTemplate(@<text>Count: @item.Count</text>);            
+        columns.Bound(p => p.UnitPrice).Format("{0:C}");
+        columns.Bound(p => p.UnitsOnOrder)
+            .FooterTemplate(@<text>Average: @item.Average</text>)
+            .GroupFooterTemplate(@<text>Average: @item.Average</text>);
+        columns.Bound(p => p.UnitsInStock)
+            .FooterTemplate(@<text><div>Min: @item.Min </div><div>Max: @item.Max </div></text>)
+            .GroupHeaderTemplate(@<text>@item.Title: @item.Key (Count: @item.Count)</text>);            
+    })
+    .Pageable()
+    .Scrollable()
+    .Sortable()    
+    .DataSource(dataSource => dataSource
+        .Type(DataSourceType.Server)
+        .Aggregates(aggregates =>
+        {
+            aggregates.Add(p => p.UnitsInStock).Min().Max().Count();
+            aggregates.Add(p => p.UnitsOnOrder).Average();
+            aggregates.Add(p => p.ProductName).Count();
+            aggregates.Add(p => p.UnitPrice).Sum();
+        })
+        .Group(groups => groups.Add(p => p.UnitsInStock))
+        .Read(read => read.Action("ServerAggregates", "Grid"))
+    ).Render();
+}

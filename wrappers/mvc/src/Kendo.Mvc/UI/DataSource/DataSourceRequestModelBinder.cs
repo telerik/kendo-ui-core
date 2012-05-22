@@ -12,7 +12,7 @@ namespace Kendo.Mvc.UI
         {
             DataSourceRequest request = new DataSourceRequest();
 
-            string sort, group, filter;
+            string sort, group, filter, aggregates;
             int currentPage;
             int pageSize;            
 
@@ -39,6 +39,11 @@ namespace Kendo.Mvc.UI
             if (TryGetValue(bindingContext, GridUrlParameters.GroupBy, out group))
             {
                 request.Groups = GridDescriptorSerializer.Deserialize<GroupDescriptor>(group);
+            }
+
+            if (TryGetValue(bindingContext, GridUrlParameters.Aggregates, out aggregates))
+            {
+                request.Aggregates = GridDescriptorSerializer.Deserialize<AggregateDescriptor>(aggregates);
             }
 
             return request;

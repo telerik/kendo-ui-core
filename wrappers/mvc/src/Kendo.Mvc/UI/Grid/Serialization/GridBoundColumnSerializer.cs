@@ -25,10 +25,16 @@ namespace Kendo.Mvc.UI
         {
             var result = base.Serialize();
 
+            var aggregates = column.Grid.DataSource.Aggregates
+                    .Where(agg => agg.Member == column.Member)
+                    .SelectMany(agg => agg.Aggregates)
+                    .Select(agg => agg.AggregateMethodName.ToLowerInvariant());
+
             FluentDictionary.For(result)
                 .Add("field", column.Member)
                 .Add("format", column.Format, () => column.Format.HasValue())
                 .Add("groupable", column.Groupable, true)
+                .Add("aggregate", aggregates)
                 .Add("encoded", column.Encoded, true);
 
             string editorHtml = column.EditorHtml;
@@ -50,8 +56,7 @@ namespace Kendo.Mvc.UI
             if (column.ClientGroupFooterTemplate.HasValue())
             {
                 result.Add("groupFooterTemplate", Encode(column, column.ClientGroupFooterTemplate));
-            }            
-            
+            }
 
             SerializeValues(result);
             

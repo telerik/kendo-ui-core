@@ -10,6 +10,7 @@ namespace Kendo.Mvc.UI
         {
             Page = 1;
             PageSize = 10;
+            Aggregates = new List<AggregateDescriptor>();
         }
 
         public int Page

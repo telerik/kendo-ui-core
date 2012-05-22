@@ -70,12 +70,6 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        ICollection<AggregateFunction> Aggregates
-        {
-            get;
-            set;
-        }
-
         string ClientGroupHeaderTemplate
         {
             get;
