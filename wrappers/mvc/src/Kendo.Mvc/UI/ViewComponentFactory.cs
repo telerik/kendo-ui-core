@@ -235,7 +235,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual DateTimePickerBuilder DateTimePicker()
         {
-            return new DateTimePickerBuilder(new DateTimePicker(ViewContext, ClientSideObjectWriterFactory));
+            return new DateTimePickerBuilder(new DateTimePicker(ViewContext, ClientSideObjectWriterFactory, ViewData));
         }
 
 

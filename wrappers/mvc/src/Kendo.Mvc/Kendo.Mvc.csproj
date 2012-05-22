@@ -350,7 +350,6 @@
     <Compile Include="UI\DateTimePicker\DateTimePickerHtmlBuilder.cs" />
     <Compile Include="UI\DateTimePicker\Fluent\DateTimePickerBuilder.cs" />
     <Compile Include="UI\DateTimePicker\Fluent\DateTimePickerClientEventsBuilder.cs" />
-    <Compile Include="UI\DateTimePicker\IDatePickerHtmlBuilder.cs" />
     <Compile Include="UI\DropDownList\Fluent\DropDownListBindingSettingsBuilder.cs" />
     <Compile Include="UI\DropDownList\Fluent\DropDownListWebServiceBindingSettingsBuilder.cs" />
     <Compile Include="UI\DropDown\DropDownExtentions.cs" />

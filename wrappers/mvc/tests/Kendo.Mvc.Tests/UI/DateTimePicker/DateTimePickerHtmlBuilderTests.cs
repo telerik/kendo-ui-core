@@ -7,7 +7,7 @@ namespace Kendo.Mvc.UI.Tests
 
     public class DateTimePickerHtmlBuilderTests
     {
-        private IDateTimePickerHtmlBuilder renderer;
+        private DateTimePickerHtmlBuilder renderer;
         private DateTimePicker dateTimePicker;
         private DateTime date;
 
@@ -23,7 +23,7 @@ namespace Kendo.Mvc.UI.Tests
         [Fact]
         public void Input_should_render_input_control()
         {
-            IHtmlNode tag = renderer.InputTag();
+            IHtmlNode tag = renderer.Build();
 
             Assert.Contains(UIPrimitives.Input, tag.Attribute("class"));
             Assert.Equal("input", tag.TagName);
@@ -32,7 +32,7 @@ namespace Kendo.Mvc.UI.Tests
         [Fact]
         public void Input_should_render_id_and_name()
         {
-            IHtmlNode tag = renderer.InputTag();
+            IHtmlNode tag = renderer.Build();
 
             Assert.Equal(dateTimePicker.Id, tag.Attribute("id"));
             Assert.Equal(dateTimePicker.Name, tag.Attribute("name"));
@@ -41,23 +41,23 @@ namespace Kendo.Mvc.UI.Tests
         [Fact]
         public void Input_should_render_type_text_attribute()
         {
-            IHtmlNode tag = renderer.InputTag();
+            IHtmlNode tag = renderer.Build();
 
-            Assert.Equal("text", tag.Attribute("type"));
+            Assert.Equal("datetime", tag.Attribute("type"));
         }
 
         [Fact]
         public void Input_should_render_html_attributes()
         {
-            dateTimePicker.InputHtmlAttributes.Add("class", "t-test");
+            dateTimePicker.HtmlAttributes.Add("class", "t-test");
 
-            IHtmlNode tag = renderer.InputTag();
+            IHtmlNode tag = renderer.Build();
             
             Assert.Equal(UIPrimitives.Input + " t-test", tag.Attribute("class"));
         }
 
         [Fact]
-        public void InputTag_should_render_input_validation_class_if_ModelState_Error()
+        public void Build_should_render_input_validation_class_if_ModelState_Error()
         {
             System.Web.Mvc.ValueProviderResult result = new System.Web.Mvc.ValueProviderResult("s", "s", System.Threading.Thread.CurrentThread.CurrentCulture);
             System.Web.Mvc.ModelState state = new System.Web.Mvc.ModelState();
@@ -67,7 +67,7 @@ namespace Kendo.Mvc.UI.Tests
             dateTimePicker.ViewContext.ViewData.ModelState.Add("dateTimePicker1", state);
             dateTimePicker.ViewContext.ViewData.ModelState.AddModelError("dateTimePicker1", new Exception());
 
-            IHtmlNode tag = renderer.InputTag();
+            IHtmlNode tag = renderer.Build();
 
             tag.Attribute("class").ShouldContain("input-validation-error");
         }

@@ -4,13 +4,10 @@ namespace Kendo.Mvc.UI
     {
         public DatePickerClientEvents()
         {
-            OnLoad = new ClientEvent();
             OnChange = new ClientEvent();
             OnOpen = new ClientEvent();
             OnClose = new ClientEvent();
         }
-
-        public ClientEvent OnLoad { get; private set; }
 
         public ClientEvent OnChange { get; private set; }
 
@@ -20,7 +17,6 @@ namespace Kendo.Mvc.UI
 
         public void SerializeTo(IClientSideObjectWriter writer)
         {
-            writer.AppendClientEvent("onLoad", OnLoad);
             writer.AppendClientEvent("onChange", OnChange);
             writer.AppendClientEvent("onOpen", OnOpen);
             writer.AppendClientEvent("onClose", OnClose);
