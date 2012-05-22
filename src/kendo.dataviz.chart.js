@@ -3923,6 +3923,7 @@
                 minInterval = MAX_VALUE;
 
             if (!baseUnit) {
+                // TODO: autoBaseUnit(dates)
                 for (categoryIx = 0; categoryIx < count; categoryIx++) {
                     currentCategory = toTime(categories[categoryIx]);
 
@@ -3952,24 +3953,57 @@
                 newCategories.push(date);
             }
 
-            partition(categories, bins, function(categoryIx, binIx) {
-                for (var seriesIx = 0; seriesIx < series.length; seriesIx++) {
-                    var data = series[seriesIx].data,
-                        binValue = data[binIx],
-                        oldValue = data[categoryIx];
+            // TODO: Accept predefined and user-defined functions
+            var aggregates = {
+                max: function(values) {
+                    return math.max.apply(math, values);
+                },
 
-                    if (defined(binValue) && defined(oldValue)) {
-                        data[binIx] = math.max(binValue, oldValue);
-                    } else if (defined(oldValue)){
-                        data[binIx] = oldValue;
+                min: function(values) {
+                    return math.min.apply(math, values);
+                },
+
+                avg: function(values) {
+                    var i,
+                        length = values.length,
+                        sum = 0;
+
+                    for (i = 0; i < length; i++) {
+                        sum++;
                     }
 
-                    if (categoryIx !== binIx) {
+                    return sum / length;
+                }
+            };
+
+            // TODO: partitionSeries
+            partition(categories, bins, function(binIx, categoryIndexes) {
+                for (var seriesIx = 0; seriesIx < series.length; seriesIx++) {
+                    var data = series[seriesIx].data;
+
+                    if (categoryIndexes.length == 0) {
+                        return;
+                    }
+
+                    var rawValues = [];
+                    for (var i = 0; i < categoryIndexes.length; i++) {
+                        var categoryIx = categoryIndexes[i],
+                            value = data[categoryIx];
+
+                        if (defined(value)) {
+                            rawValues.push(value);
+                        }
+
                         delete data[categoryIx];
+                    }
+
+                    if (rawValues.length > 0) {
+                        data[binIx] = aggregates.avg(rawValues);
                     }
                 }
             });
 
+            // TODO: trimSeries
             for (var seriesIx = 0; seriesIx < series.length; seriesIx++) {
                 var data = series[seriesIx].data;
                 var lastPointIx = data.length - 1;
@@ -3982,13 +4016,21 @@
             options.categoryAxis.categories = newCategories;
 
             function partition(values, bins, callback) {
-                for (var i = 0; i < values.length; i++) {
-                    for (var binIx = 0; binIx < bins.length; binIx++) {
-                        var bin = bins[binIx];
-                        if (values[i] >= bin.from && values[i] < bin.to) {
-                            callback(i, binIx);
+                var bin,
+                    valueIndexes;
+
+                for (var binIx = 0; binIx < bins.length; binIx++) {
+                    bin = bins[binIx];
+                    valueIndexes = [];
+
+                    for (var i = 0; i < values.length; i++) {
+                        val = values[i];
+                        if (val >= bin.from && val < bin.to) {
+                            valueIndexes.push(i);
                         }
                     }
+
+                    callback(binIx, valueIndexes);
                 }
             }
         },
