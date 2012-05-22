@@ -4,7 +4,7 @@ namespace Kendo.Mvc.UI
     {
         public GridClientEvents()
         {
-            OnColumnResize = new ClientEvent();
+            ColumnResize = new ClientEvent();
             OnError = new ClientEvent();
             OnDataBinding = new ClientEvent();
             OnDataBound = new ClientEvent();
@@ -47,7 +47,7 @@ namespace Kendo.Mvc.UI
             private set;
         }
 
-        public ClientEvent OnColumnResize 
+        public ClientEvent ColumnResize 
         { 
             get; 
             private set; 
@@ -127,7 +127,7 @@ namespace Kendo.Mvc.UI
 
         public void SerializeTo(string key, IClientSideObjectWriter writer)
         {
-            writer.AppendClientEvent("onColumnResize", OnColumnResize);
+            writer.AppendClientEvent("columnResize", ColumnResize);
             writer.AppendClientEvent("onColumnReorder", OnColumnReorder);
             writer.AppendClientEvent("onColumnHide", OnColumnHide);
             writer.AppendClientEvent("onColumnShow", OnColumnShow);

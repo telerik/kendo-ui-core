@@ -488,14 +488,14 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Defines the inline handler of the OnColumnResize client-side event.
+        /// Defines the inline handler of the ColumnResize client-side event.
         /// </summary>
-        /// <param name="onColumnResizeInlineCode">The action defining the inline handler.</param>
+        /// <param name="columnResizeInlineCode">The action defining the inline handler.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;% Html.Telerik().Grid(Model)
         ///            .Name("Grid")
-        ///            .ClientEvents(events => events.OnColumnResize(() =>
+        ///            .ClientEvents(events => events.ColumnResize(() =>
         ///            {
         ///                 %&gt;
         ///                 function(e) {
@@ -507,24 +507,24 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public GridClientEventsBuilder OnColumnResize(Action onColumnResizeCodeBlock)
+        public GridClientEventsBuilder ColumnResize(Action columnResizeCodeBlock)
         {
-            Guard.IsNotNull(onColumnResizeCodeBlock, "onColumnResizeCodeBlock");
+            Guard.IsNotNull(columnResizeCodeBlock, "columnResizeCodeBlock");
 
-            events.OnColumnResize.CodeBlock = onColumnResizeCodeBlock;
+            events.ColumnResize.CodeBlock = columnResizeCodeBlock;
 
             return this;
         }
 
         /// <summary>
-        /// Defines the inline handler of the OnColumnResize client-side event.
+        /// Defines the inline handler of the ColumnResize client-side event.
         /// </summary>
-        /// <param name="onColumnResizeInlineCode">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <param name="columnResizeInlineCode">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;% Html.Telerik().Grid(Model)
         ///            .Name("Grid")
-        ///            .ClientEvents(events => events.OnColumnResize(
+        ///            .ClientEvents(events => events.ColumnResize(
         ///                 @&lt;text&gt;
         ///                 function(e) {
         ///                     //event handling code
@@ -535,32 +535,32 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public GridClientEventsBuilder OnColumnResize(Func<object, object> onColumnResizeInlineCodeBlock)
+        public GridClientEventsBuilder ColumnResize(Func<object, object> columnResizeInlineCodeBlock)
         {
-            Guard.IsNotNull(onColumnResizeInlineCodeBlock, "onColumnResizeInlineCodeBlock");
+            Guard.IsNotNull(columnResizeInlineCodeBlock, "columnResizeInlineCodeBlock");
 
-            events.OnColumnResize.InlineCodeBlock = onColumnResizeInlineCodeBlock;
+            events.ColumnResize.InlineCodeBlock = columnResizeInlineCodeBlock;
 
             return this;
         }
 
         /// <summary>
-        ///  Defines the name of the JavaScript function that will handle the the OnColumnResize client-side event.
+        ///  Defines the name of the JavaScript function that will handle the the ColumnResize client-side event.
         /// </summary>
-        /// <param name="onColumnResizeHandlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <param name="columnResizeHandlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Telerik().Grid(Model)
         ///             .Name("Grid")
-        ///             .ClientEvents(events => events.OnColumnResize("onColumnResize"))
+        ///             .ClientEvents(events => events.ColumnResize("columnResize"))
         /// %&gt;
         /// </code>
         /// </example>
-        public GridClientEventsBuilder OnColumnResize(string onColumnResizeHandlerName)
+        public GridClientEventsBuilder ColumnResize(string columnResizeHandlerName)
         {
-            Guard.IsNotNullOrEmpty(onColumnResizeHandlerName, "onColumnResizeHandlerName");
+            Guard.IsNotNullOrEmpty(columnResizeHandlerName, "columnResizeHandlerName");
 
-            events.OnColumnResize.HandlerName = onColumnResizeHandlerName;
+            events.ColumnResize.HandlerName = columnResizeHandlerName;
 
             return this;
         }

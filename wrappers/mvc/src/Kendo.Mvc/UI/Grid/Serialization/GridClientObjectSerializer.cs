@@ -64,6 +64,11 @@ namespace Kendo.Mvc.UI
                 writer.Append("filterable", true);
             }
 
+            if (grid.Resizing.Enabled)
+            {
+                writer.Append("resizable", true);
+            }
+
             if (grid.DataBinding.IsClientOperationMode)
             {
                 writer.Append("operationMode", "client");
