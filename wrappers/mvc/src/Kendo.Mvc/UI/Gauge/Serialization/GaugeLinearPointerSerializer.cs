@@ -4,11 +4,12 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.Extensions;
 
-    internal class GaugeLinearPointerSerializer : IChartSerializer
+    internal class GaugeLinearPointerSerializer<T> : IChartSerializer
+         where T : struct
     {
-        private readonly GaugeLinearPointer pointer;
+        private readonly GaugeLinearPointer<T> pointer;
 
-        public GaugeLinearPointerSerializer(GaugeLinearPointer pointer)
+        public GaugeLinearPointerSerializer(GaugeLinearPointer<T> pointer)
         {
             this.pointer = pointer;
         }

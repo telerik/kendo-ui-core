@@ -3,17 +3,18 @@ using Kendo.Mvc.Infrastructure;
 namespace Kendo.Mvc.UI.Fluent
 {
     /// <summary>
-    /// Defines the fluent interface for configuring the <see cref="GaugeRadialPointer"/>.
+    /// Defines the fluent interface for configuring the <see cref="GaugeRadialPointer<T>"/>.
     /// </summary>
-    public class GaugeRadialPointerBuilder : IHideObjectMembers
+    public class GaugeRadialPointerBuilder<T> : IHideObjectMembers
+         where T : struct
     {
-        private readonly GaugeRadialPointer pointer;
+        private readonly GaugeRadialPointer<T> pointer;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GaugeRadialPointerBuilder" /> class.
+        /// Initializes a new instance of the <see cref="GaugeRadialPointerBuilder<T>" /> class.
         /// </summary>
         /// <param name="pointer">The gauge pointer.</param>
-        public GaugeRadialPointerBuilder(GaugeRadialPointer pointer)
+        public GaugeRadialPointerBuilder(GaugeRadialPointer<T> pointer)
         {
             this.pointer = pointer;
         }
@@ -33,7 +34,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>        
-        public GaugeRadialPointerBuilder Color(string color)
+        public GaugeRadialPointerBuilder<T> Color(string color)
         {
             pointer.Color = color;
             return this;
@@ -57,7 +58,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public GaugeRadialPointerBuilder Opacity(double opacity)
+        public GaugeRadialPointerBuilder<T> Opacity(double opacity)
         {
             pointer.Opacity = opacity;
             return this;
@@ -78,7 +79,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public GaugeRadialPointerBuilder Value(double value)
+        public GaugeRadialPointerBuilder<T> Value(T value)
         {
             pointer.Value = value;
             return this;
@@ -99,7 +100,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public GaugeRadialPointerBuilder Cap(Action<GaugeRadialCapBuilder> configurator)
+        public GaugeRadialPointerBuilder<T> Cap(Action<GaugeRadialCapBuilder> configurator)
         {
             Guard.IsNotNull(configurator, "configurator");
 

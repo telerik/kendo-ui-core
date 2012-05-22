@@ -87,6 +87,7 @@
     <Compile Include="Controllers\TabStrip\EventsController.cs" />
     <Compile Include="Controllers\TabStrip\ImagesController.cs" />
     <Compile Include="Controllers\TabStrip\IndexController.cs" />
+    <Compile Include="Controllers\RadialGauge\IndexController.cs" />
     <Compile Include="Controllers\TimePicker\IndexController.cs" />
     <Compile Include="Controllers\DatePicker\IndexController.cs" />
     <Compile Include="Controllers\Grid\GridController.cs" />
@@ -257,6 +258,7 @@
     <Content Include="Areas\razor\Views\tabstrip\ajax.cshtml" />
     <Content Include="Areas\razor\Views\tabstrip\events.cshtml" />
     <Content Include="Areas\razor\Views\tabstrip\api.cshtml" />
+    <Content Include="Areas\razor\Views\radialgauge\index.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>

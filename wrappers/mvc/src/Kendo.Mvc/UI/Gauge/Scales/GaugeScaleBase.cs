@@ -5,10 +5,10 @@ namespace Kendo.Mvc.UI
     /// <summary>
     /// Represents a gauge scale base.
     /// </summary>
-    public abstract class GaugeScaleBase : IGaugeScale
+    public abstract class GaugeScaleBase<T> : IGaugeScale<T> where T : struct
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="GaugeScaleBase" /> class.
+        /// Initializes a new instance of the <see cref="GaugeScaleBase<T>" /> class.
         /// </summary>
         public GaugeScaleBase()
         {
@@ -75,7 +75,7 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// The scale min value.
         /// </summary>
-        public double? Min
+        public T? Min
         {
             get;
             set;
@@ -84,7 +84,7 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// The scale max value.
         /// </summary>
-        public double? Max
+        public T? Max
         {
             get;
             set;

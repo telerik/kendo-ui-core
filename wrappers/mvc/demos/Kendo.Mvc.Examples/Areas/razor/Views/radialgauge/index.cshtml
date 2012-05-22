@@ -1,0 +1,23 @@
+@(Html.Kendo().RadialGauge<int>()
+      .Name("radialGauge")
+      .Pointer(pointer => pointer.Value(0))
+      .Scale(scale => scale
+          .MinorUnit(5)
+          .StartAngle(-30)
+          .EndAngle(210)
+          .Max(180)
+      )
+)
+
+@(Html.Kendo().Slider<int>()
+      .Name("slider")
+      .Max(180)
+      .ShowButtons(false)
+      .ClientEvents(events => events.OnChange("onChange"))
+)
+
+<script type="text/javascript">
+    function onChange(e) {
+        $("#radialGauge").data("kendoRadialGauge").value(e.value);
+    }
+</script>

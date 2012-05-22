@@ -6,13 +6,13 @@ namespace Kendo.Mvc.UI.Tests.Gauge
 
     public class RadialGaugePointerBuilderTests
     {
-        private readonly GaugeRadialPointer pointer;
-        private readonly GaugeRadialPointerBuilder builder;
+        private readonly GaugeRadialPointer<double> pointer;
+        private readonly GaugeRadialPointerBuilder<double> builder;
 
         public RadialGaugePointerBuilderTests()
         {
-            pointer = new GaugeRadialPointer();
-            builder = new GaugeRadialPointerBuilder(pointer);
+            pointer = new GaugeRadialPointer<double>();
+            builder = new GaugeRadialPointerBuilder<double>(pointer);
         }
 
         [Fact]

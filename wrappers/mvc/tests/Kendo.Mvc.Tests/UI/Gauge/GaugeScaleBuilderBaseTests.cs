@@ -5,8 +5,8 @@ namespace Kendo.Mvc.UI.Tests.Gauge
     using Xunit;
 
     public abstract class GaugeScaleBuilderBaseTests<TScale, TScaleBuilder>
-        where TScale : IGaugeScale
-        where TScaleBuilder : GaugeScaleBuilderBase<TScale, TScaleBuilder>
+        where TScale : IGaugeScale<double>
+        where TScaleBuilder : GaugeScaleBuilderBase<TScale, TScaleBuilder, double>
     {
         protected TScale scale;
         protected TScaleBuilder builder;

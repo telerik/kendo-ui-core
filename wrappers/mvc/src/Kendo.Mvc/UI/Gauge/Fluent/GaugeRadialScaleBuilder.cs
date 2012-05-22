@@ -3,13 +3,14 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent interface for configuring the gauge scale.
     /// </summary>
-    public class GaugeRadialScaleBuilder : GaugeScaleBuilderBase<IRadialScale, GaugeRadialScaleBuilder>
+    public class GaugeRadialScaleBuilder<T> : GaugeScaleBuilderBase<IRadialScale<T>, GaugeRadialScaleBuilder<T>, T>
+        where T : struct
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GaugeRadialScaleBuilder" /> class.
         /// </summary>
         /// <param name="gauge">The gauge component.</param>
-        public GaugeRadialScaleBuilder(RadialGauge gauge)
+        public GaugeRadialScaleBuilder(RadialGauge<T> gauge)
             : base(gauge.Scale)
         {
             radialGauge = gauge;
@@ -18,7 +19,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// The parent Guage
         /// </summary>
-        public RadialGauge radialGauge
+        public RadialGauge<T> radialGauge
         {
             get;
             private set;
@@ -38,7 +39,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>        
-        public GaugeRadialScaleBuilder EndAngle(double endAngle)
+        public GaugeRadialScaleBuilder<T> EndAngle(double endAngle)
         {
             radialGauge.Scale.EndAngle = endAngle;
             return this;
@@ -58,7 +59,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>        
-        public GaugeRadialScaleBuilder StartAngle(double startAngle)
+        public GaugeRadialScaleBuilder<T> StartAngle(double startAngle)
         {
             radialGauge.Scale.StartAngle = startAngle;
             return this;

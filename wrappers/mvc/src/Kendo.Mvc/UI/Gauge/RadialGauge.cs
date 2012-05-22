@@ -2,10 +2,11 @@ namespace Kendo.Mvc.UI
 {
     using System.IO;
     using System.Web.Mvc;
+    using System;
 
     /// <summary>
     /// Telerik RadialGauge for ASP.NET MVC is a view component for rendering RadialGauge.
-    public class RadialGauge : Gauge
+    public class RadialGauge<T> : Gauge where T : struct
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="LinearGauge" /> class.
@@ -16,14 +17,14 @@ namespace Kendo.Mvc.UI
         public RadialGauge(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory, IUrlGenerator urlGenerator)
             : base(viewContext, clientSideObjectWriterFactory, urlGenerator)
         {
-            Scale = new GaugeRadialScale(this);
-            Pointer = new GaugeRadialPointer();
+            Scale = new GaugeRadialScale<T>(this);
+            Pointer = new GaugeRadialPointer<T>();
         }
 
         /// <summary>
         /// Configuration for the default scale (if any)
         /// </summary>
-        public IRadialScale Scale
+        public IRadialScale<T> Scale
         {
             get;
             set;
@@ -32,7 +33,7 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Configuration for the default pointer (if any)
         /// </summary>
-        public GaugeRadialPointer Pointer
+        public GaugeRadialPointer<T> Pointer
         {
             get;
             set;
@@ -54,8 +55,6 @@ namespace Kendo.Mvc.UI
 
             SerializeTheme(objectWriter);
             SerializeTransitions(objectWriter);
-
-            ClientEvents.SerializeTo(objectWriter);
 
             objectWriter.Complete();
 

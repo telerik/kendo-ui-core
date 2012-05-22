@@ -3,11 +3,12 @@ namespace Kendo.Mvc.UI
     using System.Collections.Generic;
     using Kendo.Mvc.Infrastructure;
 
-    internal class GaugeLinearScaleSerializer : GaugeScaleSerializerBase
+    internal class GaugeLinearScaleSerializer<T> : GaugeScaleSerializerBase<T>
+        where T : struct 
     {
-        private readonly ILinearScale scale;
+        private readonly ILinearScale<T> scale;
 
-        public GaugeLinearScaleSerializer(ILinearScale scale)
+        public GaugeLinearScaleSerializer(ILinearScale<T> scale)
             : base(scale)
         {
             this.scale = scale;
