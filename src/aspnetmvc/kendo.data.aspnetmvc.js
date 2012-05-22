@@ -85,7 +85,13 @@ function translateGroup(group) {
             options = this.setup(options, "read");
             url = options.url;
 
-            url = url + "?" + $.map(options.data, function(value, key) {
+            if (url.indexOf("?") >= 0) {
+                url += "&";
+            } else {
+                url += "?";
+            }
+
+            url += $.map(options.data, function(value, key) {
                 return key + "=" + value;
             }).join("&");
 
