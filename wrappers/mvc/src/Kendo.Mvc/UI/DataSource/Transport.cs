@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Kendo.Mvc.Extensions;
 
 namespace Kendo.Mvc.UI
 {
@@ -13,9 +14,16 @@ namespace Kendo.Mvc.UI
             Create = new CrudOperation();
         }
 
+        public string Prefix { get; set; }
+        
         protected override void Serialize(IDictionary<string, object> json)
         {
             var read = Read.ToJson();
+
+            if (Prefix.HasValue())
+            {
+                json["prefix"] = Prefix;
+            }
 
             if (read.Keys.Any())
             {

@@ -127,7 +127,6 @@
     kendo.data.transports["aspnetmvc-server"] = kendo.data.RemoteTransport.extend({
         init: function(options) {
             kendo.data.RemoteTransport.fn.init.call(this, $.extend(options, { parameterMap: $.proxy(parameterMap, this) } ));
-            this.options.prefix = "Grid-";
         },
         read: function(options) {
             var url;

@@ -15,9 +15,5 @@
     .Filterable()
     .Scrollable()
     .Groupable()
-    .DataSource(dataSource => dataSource
-        .Type(DataSourceType.Server)
-        .Total((int)ViewData["total"])
-        .Read(read => read.Action("CustomServerBinding", "Grid"))
-    )
+    .DataSource(dataSource => dataSource.Total((int)ViewData["total"]))
 )
