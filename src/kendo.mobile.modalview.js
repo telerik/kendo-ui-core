@@ -39,7 +39,7 @@
      * </div>
      *
      */
-    var ModalView = Widget.extend(/** @lends kendo.mobile.ui.ModalView.prototype */{
+    var ModalView = ui.View.extend(/** @lends kendo.mobile.ui.ModalView.prototype */{
         /**
          * @constructs
          * @extends kendo.mobile.ui.Widget
@@ -47,8 +47,7 @@
          * @param {Object} options Configuration options.
          */
         init: function(element, options) {
-            var that = this,
-                os = kendo.support.mobileOS;
+            var that = this;
 
             Widget.fn.init.call(that, element, options);
 
@@ -56,9 +55,19 @@
 
             element.addClass("km-modalview").wrap(WRAP);
 
-            that.wrapper = element.parent();
 
-            that.shim = new Shim(that.wrapper, {modal: that.options.modal, position: "center center", align: "center center", effect: "fade:in"});
+            that.wrapper = element.parent().css({width: that.options.width, height: that.options.height});
+
+            that.shim = new Shim(that.wrapper, {
+                modal: that.options.modal,
+                position: "center center",
+                align: "center center",
+                effect: "fade:in"
+            });
+
+            that._layout();
+            element.removeClass("km-view");
+            that._scroller();
         },
 
         events: [
@@ -74,7 +83,9 @@
 
         options: {
             name: "ModalView",
-            modal: true
+            modal: true,
+            width: 300,
+            height: 300
         },
 
         /**
@@ -100,8 +111,7 @@
          */
         close: function() {
             this.shim.hide();
-        },
-
+        }
     });
 
     ui.plugin(ModalView);
