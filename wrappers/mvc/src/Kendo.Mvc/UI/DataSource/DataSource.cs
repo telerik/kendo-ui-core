@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Kendo.Mvc.Extensions;
+using Kendo.Mvc.Infrastructure;
 
 namespace Kendo.Mvc.UI
 {
@@ -78,17 +79,12 @@ namespace Kendo.Mvc.UI
 
             if (Groups.Any())
             {
-                if (Aggregates.Any())
-                {
-                    Groups.Each(g => g.AggregateFunctions.AddRange(Aggregates.SelectMany(a => a.Aggregates)));                 
-                }
-
                 json["group"] = Groups.ToJson();
             }
 
             if (Aggregates.Any())
             {
-                json["aggregates"] = Aggregates.SelectMany(agg => agg.Aggregates.ToJson());
+                json["aggregate"] = Aggregates.SelectMany(agg => agg.Aggregates.ToJson());
             }
 
             if (Filters.Any() || ServerFiltering)
@@ -188,7 +184,13 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        public void Process(DataSourceRequest request, bool processData)
+        public IEnumerable<AggregateResult> AggregateResults
+        {
+            get;
+            set;
+        }
+
+        public void Process(DataSourceRequest request, bool processData)        
         {
             if (request.Sorts == null)
             {
@@ -237,6 +239,25 @@ namespace Kendo.Mvc.UI
                 Filters.Clear();
             }
 
+            if (!request.Aggregates.Any())
+            {
+                request.Aggregates = Aggregates;
+            }
+            else if (request.Aggregates.Any())
+            {
+                Aggregates.Clear();
+                Aggregates.AddRange(request.Aggregates);
+            }
+            else
+            {
+                Aggregates.Clear();
+            }
+
+            if (Groups.Any() && Aggregates.Any())
+            {
+                Groups.Each(g => g.AggregateFunctions.AddRange(Aggregates.SelectMany(a => a.Aggregates)));
+            }
+
             if (Data != null)
             {
                 if (processData)
@@ -245,6 +266,8 @@ namespace Kendo.Mvc.UI
 
                     Data = result.Data;
                     Total = result.Total;
+                
+                    AggregateResults = result.AggregateResults;                
                 }
                 else
                 {

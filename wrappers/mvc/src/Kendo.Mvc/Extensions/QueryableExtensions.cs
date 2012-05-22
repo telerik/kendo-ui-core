@@ -64,10 +64,27 @@ namespace Kendo.Mvc.Extensions
             }
 
             var sort = new List<SortDescriptor>(request.Sorts);
-
             var temporarySortDescriptors = new List<SortDescriptor>();
-
             var group = request.Groups;
+
+            var aggregates = new List<AggregateDescriptor>(request.Aggregates);
+            if (aggregates.Any())
+            {
+                var dataSource = data.AsQueryable();
+
+                var source = dataSource;
+                if (filters.Any())
+                {
+                    source = dataSource.Where(filters);
+                }
+
+                result.AggregateResults = source.Aggregate(aggregates.SelectMany(a => a.Aggregates));
+
+                if (group.Any() && aggregates.Any())
+                {
+                    group.Each(g => g.AggregateFunctions.AddRange(aggregates.SelectMany(a => a.Aggregates)));
+                }
+            }
 
             result.Total = data.Count();            
 
