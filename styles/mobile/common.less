@@ -51,8 +51,13 @@
     vertical-align: top;
 }
 
-:-moz-any(.km-pane,.km-view,.km-vertical,.km-horizontal)
+:-moz-any(.km-view,.km-vertical,.km-horizontal)
 {
+    overflow: hidden;
+    position: relative;
+}
+
+.km-splitview :-moz-any(.km-pane) {
     overflow: hidden;
     position: relative;
 }
@@ -1230,7 +1235,7 @@
 
 .km-popup-arrow,
 .km-popup-arrow:after,
-.km-popup-arrow:before
+.km-down .km-popup-arrow:before
 {
     position: absolute;
     width: 15px;
@@ -1241,7 +1246,7 @@
 }
 
 .km-popup-arrow:after,
-.km-popup-arrow:before
+.km-down .km-popup-arrow:before
 {
     display: block;
     content: "\a0";
@@ -1251,13 +1256,8 @@
 
 .km-popup-wrapper
 {
-    padding: 5px 5px 10px;
+    padding: 15px;
 }
-
-.km-down { padding-top: 15px; }
-.km-up { padding-bottom: 15px; }
-.km-left { padding-left: 15px; }
-.km-right { padding-right: 15px; }
 
 .km-up .km-popup-arrow
 {

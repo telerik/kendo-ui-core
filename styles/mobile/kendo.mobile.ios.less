@@ -987,7 +987,7 @@
     background: rgba(10,18,38,.9);
     border: 5px solid transparent;
     .border-radius(5px);
-    .box-shadow(~"0 5px 5px rgba(0,0,0,.3), 0 0 2px rgba(0,0,0,.5)");
+    .box-shadow(~"0 0 15px rgba(0,0,0,.5), 0 0 2px rgba(0,0,0,.5)");
 }
 
 .km-ios .km-popup.km-pane .km-view
@@ -1024,18 +1024,36 @@
 .km-ios .km-popup-arrow:after
 {
     border-color: rgba(24,31,49,.9) transparent;
-    margin-top: 0;
+}
+
+.km-ios .km-left .km-popup-arrow:after,
+.km-ios .km-right .km-popup-arrow:after
+{
+    border-color: transparent rgba(24,31,49,.9);
+}
+
+.km-ios .km-down .km-popup-arrow:before
+{
+    margin-top: -1px;
 }
 
 .km-ios .km-down .km-popup-arrow:after
 {
     border-color: rgba(106,111,124,.9) transparent;
-    margin-top: 1px;
 }
 
-.km-ios .km-up .km-popup-arrow:after,
-.km-ios .km-up .km-popup-arrow:before
+.km-ios .km-up .km-popup-arrow:after
 {
     border-width: 15px 15px 0 15px;
+}
+
+.km-ios .km-left .km-popup-arrow:after
+{
+    border-width: 15px 0 15px 15px;
+}
+
+.km-ios .km-right .km-popup-arrow:after
+{
+    border-width: 15px 15px 15px 0;
 }
 
