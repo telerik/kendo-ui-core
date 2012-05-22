@@ -1,7 +1,7 @@
 (function($, window) {
       window.flickr = {
-        service: "http://api.flickr.com/services/rest/",
-        authURL: "http://flickr.com/services/auth/",
+        service: "http://api.flickr.com/services/rest",
+        authURL: "http://flickr.com/services/auth",
         auth: {},
         app: {
             key: '9575b30d2333267e281264ee51341bf1',
