@@ -13,8 +13,4 @@
     .Scrollable() 
     .Filterable()
     .Groupable()
-    .DataSource(dataSource => dataSource
-        .Type(DataSourceType.Server)
-        .Read(read => read.Action("ServerBinding", "Grid"))
-     )
 )

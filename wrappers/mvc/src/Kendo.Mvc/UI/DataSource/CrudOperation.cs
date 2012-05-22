@@ -14,18 +14,16 @@ namespace Kendo.Mvc.UI
         public CrudOperation()
         {            
             RouteValues = new RouteValueDictionary();
+            Url = string.Empty;
         }
 
         protected override void Serialize(IDictionary<string, object> json)
         {
-            if (Url.HasValue())
-            {
-                json["url"] = Url;
+            json["url"] = Url;
 
-                if (DataType.HasValue())
-                {
-                    json["dataType"] = DataType;
-                }
+            if (DataType.HasValue())
+            {
+                json["dataType"] = DataType;
             }
         }        
 
