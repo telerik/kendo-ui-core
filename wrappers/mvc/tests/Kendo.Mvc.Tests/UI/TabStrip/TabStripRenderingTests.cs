@@ -205,13 +205,12 @@ namespace Kendo.Mvc.UI.Tests
 
             tabStrip.ClientEvents.OnSelect.CodeBlock = () => { };
 
-            TabStripTestHelper.clientSideObjectWriter.Setup(w => w.AppendClientEvent("onSelect", tabStrip.ClientEvents.OnSelect)).Verifiable();
+            TabStripTestHelper.clientSideObjectWriter.Setup(w => w.AppendClientEvent("select", tabStrip.ClientEvents.OnSelect)).Verifiable();
 
             tabStrip.WriteInitializationScript(writer.Object);
 
-            TabStripTestHelper.clientSideObjectWriter.Verify(w => w.AppendClientEvent("onSelect", tabStrip.ClientEvents.OnSelect));
+            TabStripTestHelper.clientSideObjectWriter.Verify(w => w.AppendClientEvent("select", tabStrip.ClientEvents.OnSelect));
         }
-
 
         [Fact]
         public void ObjectWriter_should_append_Error_property_of_clientEvents()
@@ -220,25 +219,11 @@ namespace Kendo.Mvc.UI.Tests
 
             tabStrip.ClientEvents.OnError.CodeBlock = () => { };
 
-            TabStripTestHelper.clientSideObjectWriter.Setup(w => w.AppendClientEvent("onError", tabStrip.ClientEvents.OnError)).Verifiable();
+            TabStripTestHelper.clientSideObjectWriter.Setup(w => w.AppendClientEvent("error", tabStrip.ClientEvents.OnError)).Verifiable();
 
             tabStrip.WriteInitializationScript(writer.Object);
 
-            TabStripTestHelper.clientSideObjectWriter.Verify(w => w.AppendClientEvent("onError", tabStrip.ClientEvents.OnError));
-        }
-
-        [Fact]
-        public void ObjectWriter_should_append_Load_property_of_clientEvents()
-        {
-            Mock<TextWriter> writer = new Mock<TextWriter>();
-
-            tabStrip.ClientEvents.OnLoad.CodeBlock = () => { };
-
-            TabStripTestHelper.clientSideObjectWriter.Setup(w => w.AppendClientEvent("onLoad", tabStrip.ClientEvents.OnLoad)).Verifiable();
-
-            tabStrip.WriteInitializationScript(writer.Object);
-
-            TabStripTestHelper.clientSideObjectWriter.Verify(w => w.AppendClientEvent("onLoad", tabStrip.ClientEvents.OnLoad));
+            TabStripTestHelper.clientSideObjectWriter.Verify(w => w.AppendClientEvent("error", tabStrip.ClientEvents.OnError));
         }
     }
 }

@@ -28,12 +28,90 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// Defines the inline handler of the OnActivate client-side event
+        /// </summary>
+        /// <param name="onSelectAction">The action defining the inline handler.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;% Html.Kendo().TabStrip()
+        ///            .Name("TabStrip")
+        ///            .ClientEvents(events => events.OnActivate(() =>
+        ///            {
+        ///                 %&gt;
+        ///                 function(e) {
+        ///                     //event handling code
+        ///                 }
+        ///                 &lt;%
+        ///            }))
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TabStripClientEventsBuilder OnActivate(Action onActivateCodeBlock)
+        {
+            Guard.IsNotNull(onActivateCodeBlock, "onActivateCodeBlock");
+
+            clientEvents.OnActivate.CodeBlock = onActivateCodeBlock;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the inline handler of the OnActivate client-side event
+        /// </summary>
+        /// <param name="onSelectAction">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;% Html.Kendo().TabStrip()
+        ///            .Name("TabStrip")
+        ///            .ClientEvents(events => events.OnActivate(
+        ///                 @&lt;text&gt;
+        ///                 function(e) {
+        ///                     //event handling code
+        ///                 }
+        ///                 &lt;/text&gt;
+        ///            ))
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TabStripClientEventsBuilder OnActivate(Func<object, object> onActivateInlineCodeBlock)
+        {
+            Guard.IsNotNull(onActivateInlineCodeBlock, "onActivateInlineCodeBlock");
+
+            clientEvents.OnActivate.InlineCodeBlock = onActivateInlineCodeBlock;
+
+            return this;
+        }
+
+        /// <summary>
+        ///  Defines the name of the JavaScript function that will handle the the OnActivate client-side event.
+        /// </summary>
+        /// <param name="onSelectHandlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().TabStrip()
+        ///             .Name("TabStrip")
+        ///             .ClientEvents(events => events.OnActivate("onActivate"))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TabStripClientEventsBuilder OnActivate(string onActivateHandlerName)
+        {
+            Guard.IsNotNullOrEmpty(onActivateHandlerName, "onActivateHandlerName");
+
+            clientEvents.OnActivate.HandlerName = onActivateHandlerName;
+
+            return this;
+        }
+
+        /// <summary>
         /// Defines the inline handler of the OnSelect client-side event
         /// </summary>
         /// <param name="onSelectAction">The action defining the inline handler.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;% Html.Telerik().TabStrip()
+        ///  &lt;% Html.Kendo().TabStrip()
         ///            .Name("TabStrip")
         ///            .ClientEvents(events => events.OnSelect(() =>
         ///            {
@@ -62,7 +140,7 @@ namespace Kendo.Mvc.UI
         /// <param name="onSelectAction">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;% Html.Telerik().TabStrip()
+        ///  &lt;% Html.Kendo().TabStrip()
         ///            .Name("TabStrip")
         ///            .ClientEvents(events => events.OnSelect(
         ///                 @&lt;text&gt;
@@ -90,7 +168,7 @@ namespace Kendo.Mvc.UI
         /// <param name="onSelectHandlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().TabStrip()
+        ///  &lt;%= Html.Kendo().TabStrip()
         ///             .Name("TabStrip")
         ///             .ClientEvents(events => events.OnSelect("onSelect"))
         /// %&gt;
@@ -111,7 +189,7 @@ namespace Kendo.Mvc.UI
         /// <param name="onSelectAction">The action defining the inline handler.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;% Html.Telerik().TabStrip()
+        ///  &lt;% Html.Kendo().TabStrip()
         ///            .Name("TabStrip")
         ///            .ClientEvents(events => events.OnContentLoad(() =>
         ///            {
@@ -140,7 +218,7 @@ namespace Kendo.Mvc.UI
         /// <param name="onSelectAction">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;% Html.Telerik().TabStrip()
+        ///  &lt;% Html.Kendo().TabStrip()
         ///            .Name("TabStrip")
         ///            .ClientEvents(events => events.OnContentLoad(
         ///                 @&lt;text&gt;
@@ -168,7 +246,7 @@ namespace Kendo.Mvc.UI
         /// <param name="onSelectHandlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().TabStrip()
+        ///  &lt;%= Html.Kendo().TabStrip()
         ///             .Name("TabStrip")
         ///             .ClientEvents(events => events.OnContentLoad("onContentLoad"))
         /// %&gt;
@@ -184,90 +262,12 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
-        /// Defines the inline handler of the OnLoad client-side event
-        /// </summary>
-        /// <param name="onLoadAction">The action defining the inline handler.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;% Html.Telerik().TabStrip()
-        ///            .Name("TabStrip")
-        ///            .ClientEvents(events => events.OnLoad(() =>
-        ///            {
-        ///                 %&gt;
-        ///                 function(e) {
-        ///                     //event handling code
-        ///                 }
-        ///                 &lt;%
-        ///            }))
-        ///            .Render();
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public TabStripClientEventsBuilder OnLoad(Action onLoadCodeBlock)
-        {
-            Guard.IsNotNull(onLoadCodeBlock, "onLoadCodeBlock");
-
-            clientEvents.OnLoad.CodeBlock = onLoadCodeBlock;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Defines the inline handler of the OnLoad client-side event
-        /// </summary>
-        /// <param name="onLoadAction">The handler code wrapped in a text tag (Razor syntax).</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;% Html.Telerik().TabStrip()
-        ///            .Name("TabStrip")
-        ///            .ClientEvents(events => events.OnLoad(
-        ///                 @&lt;text&gt;
-        ///                 function(e) {
-        ///                     //event handling code
-        ///                 }
-        ///                 &lt;/text&gt;
-        ///            ))
-        ///            .Render();
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public TabStripClientEventsBuilder OnLoad(Func<object, object> onLoadInlineCodeBlock)
-        {
-            Guard.IsNotNull(onLoadInlineCodeBlock, "onLoadInlineCodeBlock");
-
-            clientEvents.OnLoad.InlineCodeBlock = onLoadInlineCodeBlock;
-
-            return this;
-        }
-
-        /// <summary>
-        ///  Defines the name of the JavaScript function that will handle the the OnLoad client-side event.
-        /// </summary>
-        /// <param name="onLoadHandlerName">The name of the JavaScript function that will handle the event.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().TabStrip()
-        ///             .Name("TabStrip")
-        ///             .ClientEvents(events => events.OnLoad("onLoad"))
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public TabStripClientEventsBuilder OnLoad(string onLoadHandlerName)
-        {
-            Guard.IsNotNullOrEmpty(onLoadHandlerName, "onLoadHandlerName");
-
-            clientEvents.OnLoad.HandlerName = onLoadHandlerName;
-
-            return this;
-        }
-
-        /// <summary>
         /// Defines the inline handler of the OnError client-side event
         /// </summary>
         /// <param name="onErrorAction">The action defining the inline handler.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;% Html.Telerik().TabStrip()
+        ///  &lt;% Html.Kendo().TabStrip()
         ///            .Name("TabStrip")
         ///            .ClientEvents(events => events.OnError(() =>
         ///            {
@@ -296,7 +296,7 @@ namespace Kendo.Mvc.UI
         /// <param name="onErrorAction">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;% Html.Telerik().TabStrip()
+        ///  &lt;% Html.Kendo().TabStrip()
         ///            .Name("TabStrip")
         ///            .ClientEvents(events => events.OnError(
         ///                 @&lt;text&gt;
@@ -324,7 +324,7 @@ namespace Kendo.Mvc.UI
         /// <param name="onErrorHandlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().TabStrip()
+        ///  &lt;%= Html.Kendo().TabStrip()
         ///             .Name("TabStrip")
         ///             .ClientEvents(events => events.OnError("onError"))
         /// %&gt;

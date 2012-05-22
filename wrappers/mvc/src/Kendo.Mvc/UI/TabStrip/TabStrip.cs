@@ -96,7 +96,7 @@ namespace Kendo.Mvc.UI
         {
             string id = Id;
 
-            IClientSideObjectWriter objectWriter = ClientSideObjectWriterFactory.Create(id, "tTabStrip", writer);
+            IClientSideObjectWriter objectWriter = ClientSideObjectWriterFactory.Create(id, "kendoTabStrip", writer);
 
             objectWriter.Start();
 
@@ -105,10 +105,10 @@ namespace Kendo.Mvc.UI
             //    objectWriter.Serialize("effects", Effects);
             //}
 
-            objectWriter.AppendClientEvent("onSelect", ClientEvents.OnSelect);
-            objectWriter.AppendClientEvent("onContentLoad", ClientEvents.OnContentLoad);
-            objectWriter.AppendClientEvent("onLoad", ClientEvents.OnLoad);
-            objectWriter.AppendClientEvent("onError", ClientEvents.OnError);
+            objectWriter.AppendClientEvent("select", ClientEvents.OnSelect);
+            objectWriter.AppendClientEvent("activate", ClientEvents.OnActivate);
+            objectWriter.AppendClientEvent("contentLoad", ClientEvents.OnContentLoad);
+            objectWriter.AppendClientEvent("error", ClientEvents.OnError);
 
             objectWriter.AppendContentUrls("contentUrls", Items, IsSelfInitialized);
 

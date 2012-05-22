@@ -59,46 +59,6 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
-        public void Loaded_Action_param_should_set_Loaded_property()
-        {
-            Action param = () => { };
-
-            builder.OnLoad(param);
-
-            Assert.NotNull(clientEvents.OnLoad.CodeBlock);
-        }
-
-        [Fact]
-        public void Loaded_String_param_should_set_Loaded_property()
-        {
-            const string param = "my_method()";
-
-            builder.OnLoad(param);
-
-            Assert.NotNull(clientEvents.OnLoad.HandlerName);
-        }
-
-        [Fact]
-        public void Loaded_Action_should_return_builder()
-        {
-            Action param = () => { };
-
-            var returned = builder.OnLoad(param);
-
-            Assert.IsType(typeof(TabStripClientEventsBuilder), returned);
-        }
-
-        [Fact]
-        public void Loaded_String_should_return_builder()
-        {
-            const string param = "my_method()";
-
-            var returned = builder.OnLoad(param);
-
-            Assert.IsType(typeof(TabStripClientEventsBuilder), returned);
-        }
-
-        [Fact]
         public void OnError_Action_param_should_set_Error_property()
         {
             Action param = () => { };
