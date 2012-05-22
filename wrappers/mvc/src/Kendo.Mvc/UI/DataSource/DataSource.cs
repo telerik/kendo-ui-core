@@ -31,6 +31,12 @@ namespace Kendo.Mvc.UI
 
         protected override void Serialize(IDictionary<string, object> json)
         {
+            if (Transport.Read.Url == null)
+            {
+                // If Url is not set assume the current url (used in server binding)
+                Transport.Read.Url = "";
+            }
+
             var transport = Transport.ToJson();
 
             if (transport.Keys.Any())
