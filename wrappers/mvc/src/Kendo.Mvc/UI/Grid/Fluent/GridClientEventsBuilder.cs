@@ -566,14 +566,14 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Defines the inline handler of the OnColumnReorder client-side event.
+        /// Defines the inline handler of the ColumnReorder client-side event.
         /// </summary>
-        /// <param name="onColumnReorderInlineCode">The action defining the inline handler.</param>
+        /// <param name="columnReorderInlineCode">The action defining the inline handler.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;% Html.Telerik().Grid(Model)
         ///            .Name("Grid")
-        ///            .ClientEvents(events => events.OnColumnReorder(() =>
+        ///            .ClientEvents(events => events.ColumnReorder(() =>
         ///            {
         ///                 %&gt;
         ///                 function(e) {
@@ -585,24 +585,24 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public GridClientEventsBuilder OnColumnReorder(Action onColumnReorderCodeBlock)
+        public GridClientEventsBuilder ColumnReorder(Action columnReorderCodeBlock)
         {
-            Guard.IsNotNull(onColumnReorderCodeBlock, "onColumnReorderCodeBlock");
+            Guard.IsNotNull(columnReorderCodeBlock, "columnReorderCodeBlock");
 
-            events.OnColumnReorder.CodeBlock = onColumnReorderCodeBlock;
+            events.ColumnReorder.CodeBlock = columnReorderCodeBlock;
 
             return this;
         }
 
         /// <summary>
-        /// Defines the inline handler of the OnColumnReorder client-side event.
+        /// Defines the inline handler of the ColumnReorder client-side event.
         /// </summary>
-        /// <param name="onColumnReorderInlineCode">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <param name="columnReorderInlineCode">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;% Html.Telerik().Grid(Model)
         ///            .Name("Grid")
-        ///            .ClientEvents(events => events.OnColumnReorder(
+        ///            .ClientEvents(events => events.ColumnReorder(
         ///                 @&lt;text&gt;
         ///                 function(e) {
         ///                     //event handling code
@@ -613,32 +613,32 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public GridClientEventsBuilder OnColumnReorder(Func<object, object> onColumnReorderInlineCodeBlock)
+        public GridClientEventsBuilder ColumnReorder(Func<object, object> columnReorderInlineCodeBlock)
         {
-            Guard.IsNotNull(onColumnReorderInlineCodeBlock, "onColumnReorderInlineCodeBlock");
+            Guard.IsNotNull(columnReorderInlineCodeBlock, "columnReorderInlineCodeBlock");
 
-            events.OnColumnReorder.InlineCodeBlock = onColumnReorderInlineCodeBlock;
+            events.ColumnReorder.InlineCodeBlock = columnReorderInlineCodeBlock;
 
             return this;
         }
 
         /// <summary>
-        ///  Defines the name of the JavaScript function that will handle the the OnColumnResize client-side event.
+        ///  Defines the name of the JavaScript function that will handle the the ColumnResize client-side event.
         /// </summary>
-        /// <param name="onColumnReorderHandlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <param name="columnReorderHandlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Telerik().Grid(Model)
         ///             .Name("Grid")
-        ///             .ClientEvents(events => events.OnColumnReorder("onColumnReorder"))
+        ///             .ClientEvents(events => events.ColumnReorder("columnReorder"))
         /// %&gt;
         /// </code>
         /// </example>
-        public GridClientEventsBuilder OnColumnReorder(string onColumnReorderHandlerName)
+        public GridClientEventsBuilder ColumnReorder(string columnReorderHandlerName)
         {
-            Guard.IsNotNullOrEmpty(onColumnReorderHandlerName, "onColumnReorderHandlerName");
+            Guard.IsNotNullOrEmpty(columnReorderHandlerName, "columnReorderHandlerName");
 
-            events.OnColumnReorder.HandlerName = onColumnReorderHandlerName;
+            events.ColumnReorder.HandlerName = columnReorderHandlerName;
 
             return this;
         }
