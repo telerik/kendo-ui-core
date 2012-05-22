@@ -26,19 +26,9 @@ namespace Kendo.Mvc.UI
         public Gauge(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory, IUrlGenerator urlGenerator)
             : base(viewContext, clientSideObjectWriterFactory)
         {
-            ClientEvents = new ChartClientEvents();
             UrlGenerator = urlGenerator;
             GaugeArea = new GaugeArea();
             Transitions = true;
-        }
-
-        /// <summary>
-        /// Represents the client-side event handlers for the component
-        /// </summary>
-        public ChartClientEvents ClientEvents
-        {
-            get;
-            private set;
         }
 
         /// <summary>

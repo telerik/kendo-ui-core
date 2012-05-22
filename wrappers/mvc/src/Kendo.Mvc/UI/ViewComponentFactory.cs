@@ -367,6 +367,36 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// Creates a new <see cref="LinearGauge"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().LinearGauge()
+        ///            .Name("linearGauge")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual GaugeLinearBuilder<T> LinearGauge<T>() where T: struct
+        {
+            return new GaugeLinearBuilder<T>(new LinearGauge<T>(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>()));
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="RadialGauge"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().RadialGauge()
+        ///            .Name("radialGauge")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual GaugeRadialBuilder<T> RadialGauge<T>() where T : struct
+        {
+            return new GaugeRadialBuilder<T>(new RadialGauge<T>(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>()));
+        }
+
+        /// <summary>
         /// Creates a new <see cref="DropDownList"/>.
         /// </summary>
         /// <example>

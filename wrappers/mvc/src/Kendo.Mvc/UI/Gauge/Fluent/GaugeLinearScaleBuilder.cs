@@ -3,13 +3,14 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent interface for configuring the gauge scale.
     /// </summary>
-    public class GaugeLinearScaleBuilder : GaugeScaleBuilderBase<ILinearScale, GaugeLinearScaleBuilder>
+    public class GaugeLinearScaleBuilder<T> : GaugeScaleBuilderBase<ILinearScale<T>, GaugeLinearScaleBuilder<T>, T>
+        where T : struct
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GaugeLinearScaleBuilder" /> class.
         /// </summary>
         /// <param name="gauge">The gauge component.</param>
-        public GaugeLinearScaleBuilder(LinearGauge gauge)
+        public GaugeLinearScaleBuilder(LinearGauge<T> gauge)
             : base(gauge.Scale)
         {
             linearGauge = gauge;
@@ -18,7 +19,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// The parent Guage
         /// </summary>
-        public LinearGauge linearGauge
+        public LinearGauge<T> linearGauge
         {
             get;
             private set;
@@ -38,7 +39,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>        
-        public GaugeLinearScaleBuilder Mirror(bool mirror)
+        public GaugeLinearScaleBuilder<T> Mirror(bool mirror)
         {
             linearGauge.Scale.Mirror = mirror;
             return this;

@@ -1,27 +1,27 @@
 namespace Kendo.Mvc.UI.Fluent
 {
     using System;
-    using System.Collections.Generic;
     using Kendo.Mvc.Infrastructure;
 
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="LinearGauge"/> component.
     /// </summary>
-    public class GaugeLinearBuilder : ViewComponentBuilderBase<LinearGauge, GaugeLinearBuilder>, IHideObjectMembers
+    public class GaugeLinearBuilder<T> : ViewComponentBuilderBase<LinearGauge<T>, GaugeLinearBuilder<T>>, IHideObjectMembers
+        where T : struct
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GaugeLinearBuilder"/> class.
         /// </summary>
         /// <param name="component">The component.</param>
-        public GaugeLinearBuilder(LinearGauge component)
+        public GaugeLinearBuilder(LinearGauge<T> component)
             : base(component)
         {
         }
 
         /// <summary>
-        /// Sets the theme of the radial gauge.
+        /// Sets the theme of the linear gauge.
         /// </summary>
-        /// <param name="theme">The radial gauge theme.</param>
+        /// <param name="theme">The linear gauge theme.</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;%= Html.Kendo().RadialGauge()
@@ -30,16 +30,16 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public GaugeLinearBuilder Theme(string theme)
+        public GaugeLinearBuilder<T> Theme(string theme)
         {
             Component.Theme = theme;
             return this;
         }
 
         /// <summary>
-        /// Sets the radial gauge area.
+        /// Sets the linear gauge area.
         /// </summary>
-        /// <param name="configurator">The radial gauge area.</param>
+        /// <param name="configurator">The linear gauge area.</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;%= Html.Kendo().RadialGauge()
@@ -48,7 +48,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public GaugeLinearBuilder GaugeArea(Action<GaugeAreaBuilder> configurator)
+        public GaugeLinearBuilder<T> GaugeArea(Action<GaugeAreaBuilder> configurator)
         {
             Guard.IsNotNull(configurator, "configurator");
 
@@ -70,11 +70,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public GaugeLinearBuilder Scale(Action<GaugeLinearScaleBuilder> configurator)
+        public GaugeLinearBuilder<T> Scale(Action<GaugeLinearScaleBuilder<T>> configurator)
         {
             Guard.IsNotNull(configurator, "configurator");
 
-            configurator(new GaugeLinearScaleBuilder(Component));
+            configurator(new GaugeLinearScaleBuilder<T>(Component));
 
             return this;
         }
@@ -93,11 +93,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public GaugeLinearBuilder Pointer(Action<GaugeLinearPointerBuilder> configurator)
+        public GaugeLinearBuilder<T> Pointer(Action<GaugeLinearPointerBuilder<T>> configurator)
         {
             Guard.IsNotNull(configurator, "configurator");
 
-            configurator(new GaugeLinearPointerBuilder(Component.Pointer));
+            configurator(new GaugeLinearPointerBuilder<T>(Component.Pointer));
 
             return this;
         }
@@ -116,7 +116,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public GaugeLinearBuilder Transitions(bool transitions)
+        public GaugeLinearBuilder<T> Transitions(bool transitions)
         {
             Component.Transitions = transitions;
             return this;

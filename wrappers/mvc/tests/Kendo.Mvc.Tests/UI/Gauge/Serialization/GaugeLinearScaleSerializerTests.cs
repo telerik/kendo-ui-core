@@ -6,13 +6,13 @@ namespace Kendo.Mvc.UI.Tests
 
     public class GaugeLinearScaleSerializerTests
     {
-        private readonly Mock<ILinearScale> scaleMock;
-        private readonly GaugeLinearScaleSerializer serializer;
+        private readonly Mock<ILinearScale<double>> scaleMock;
+        private readonly GaugeLinearScaleSerializer<double> serializer;
 
         public GaugeLinearScaleSerializerTests()
         {
-            scaleMock = new Mock<ILinearScale>();
-            serializer = new GaugeLinearScaleSerializer(scaleMock.Object);
+            scaleMock = new Mock<ILinearScale<double>>();
+            serializer = new GaugeLinearScaleSerializer<double>(scaleMock.Object);
 
             scaleMock.SetupGet(a => a.Labels).Returns(new GaugeScaleLabels());
             scaleMock.SetupGet(a => a.Ranges).Returns(new List<GaugeScaleRanges>());

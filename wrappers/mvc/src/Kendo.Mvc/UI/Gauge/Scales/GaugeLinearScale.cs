@@ -3,13 +3,13 @@ namespace Kendo.Mvc.UI
     /// <summary>
     /// Represents the options of the linear scale.
     /// </summary>
-    public class GaugeLinearScale : GaugeScaleBase, ILinearScale
+    public class GaugeLinearScale<T> : GaugeScaleBase<T>, ILinearScale<T> where T : struct
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GaugeLinearScale" /> class.
         /// </summary>
         /// <value>The linear gauge.</value>
-        public GaugeLinearScale(LinearGauge gauge)
+        public GaugeLinearScale(LinearGauge<T> gauge)
             : base()
         {
             lienarGauge = gauge;
@@ -19,7 +19,7 @@ namespace Kendo.Mvc.UI
         /// Gets or sets the linear gauge.
         /// </summary>
         /// <value>The linear gauge.</value>
-        public LinearGauge lienarGauge
+        public LinearGauge<T> lienarGauge
         {
             get;
             private set;
@@ -39,7 +39,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         public override IChartSerializer CreateSerializer()
         {
-            return new GaugeLinearScaleSerializer(this);
+            return new GaugeLinearScaleSerializer<T>(this);
         }
     }
 }

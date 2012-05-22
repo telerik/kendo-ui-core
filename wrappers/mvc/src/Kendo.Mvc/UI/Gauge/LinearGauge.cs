@@ -2,10 +2,11 @@ namespace Kendo.Mvc.UI
 {
     using System.IO;
     using System.Web.Mvc;
+    using System;
 
     /// <summary>
     /// Telerik LinearGauge for ASP.NET MVC is a view component for rendering LinearGauge.
-    public class LinearGauge : Gauge
+    public class LinearGauge<T> : Gauge where T : struct
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="LinearGauge" /> class.
@@ -16,14 +17,14 @@ namespace Kendo.Mvc.UI
         public LinearGauge(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory, IUrlGenerator urlGenerator)
             : base(viewContext, clientSideObjectWriterFactory, urlGenerator)
         {
-            Scale = new GaugeLinearScale(this);
-            Pointer = new GaugeLinearPointer();
+            Scale = new GaugeLinearScale<T>(this);
+            Pointer = new GaugeLinearPointer<T>();
         }
 
         /// <summary>
         /// Configuration for the default scale (if any)
         /// </summary>
-        public ILinearScale Scale
+        public ILinearScale<T> Scale
         {
             get;
             set;
@@ -32,7 +33,7 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Configuration for the default pointer (if any)
         /// </summary>
-        public GaugeLinearPointer Pointer
+        public GaugeLinearPointer<T> Pointer
         {
             get;
             set;
@@ -54,8 +55,6 @@ namespace Kendo.Mvc.UI
 
             SerializeTheme(objectWriter);
             SerializeTransitions(objectWriter);
-
-            ClientEvents.SerializeTo(objectWriter);
 
             objectWriter.Complete();
 

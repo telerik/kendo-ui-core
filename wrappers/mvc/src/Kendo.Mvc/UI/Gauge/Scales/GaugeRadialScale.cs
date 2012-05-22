@@ -3,13 +3,13 @@ namespace Kendo.Mvc.UI
     /// <summary>
     /// Represents the options of the radial scale.
     /// </summary>
-    public class GaugeRadialScale : GaugeScaleBase, IRadialScale
+    public class GaugeRadialScale<T> : GaugeScaleBase<T>, IRadialScale<T> where T : struct
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GaugeRadialScale" /> class.
         /// </summary>
         /// <value>The radial gauge.</value>
-        public GaugeRadialScale(RadialGauge gauge)
+        public GaugeRadialScale(RadialGauge<T> gauge)
             : base()
         {
             radialGauge = gauge;
@@ -19,7 +19,7 @@ namespace Kendo.Mvc.UI
         /// Gets or sets the radial gauge.
         /// </summary>
         /// <value>The radial gauge.</value>
-        public RadialGauge radialGauge
+        public RadialGauge<T> radialGauge
         {
             get;
             private set;
@@ -44,11 +44,11 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
-        /// Creates a serializer
+        /// Creates a serializer.
         /// </summary>
         public override IChartSerializer CreateSerializer()
         {
-            return new GaugeRadialScaleSerializer(this);
+            return new GaugeRadialScaleSerializer<T>(this);
         }
     }
 }
