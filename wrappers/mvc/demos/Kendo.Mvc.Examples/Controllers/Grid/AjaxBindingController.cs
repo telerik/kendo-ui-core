@@ -11,14 +11,9 @@ namespace Kendo.Mvc.Examples.Controllers
     {
         public ActionResult AjaxBinding()
         {
-            return View(new NorthwindDataContext().Products);
+            return View();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
         public ActionResult AjaxBinding_Read([DataSourceRequest] DataSourceRequest request)
         {
             var products = new NorthwindDataContext().Products;
