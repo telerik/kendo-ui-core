@@ -325,6 +325,8 @@
     <Compile Include="UI\DataSource\ModelDescriptor.cs" />
     <Compile Include="UI\DataSource\Transport.cs" />
     <Compile Include="UI\DatePickerBase\Fluent\MonthTemplateBuilder.cs" />
+    <Compile Include="UI\Effects\ExpandableAnimation.cs" />
+    <Compile Include="UI\Effects\Fluent\ExpandableAnimationBuilder.cs" />
     <Compile Include="UI\Effects\PopupAnimation.cs" />
     <Compile Include="UI\Effects\Fluent\PopupAnimationBuilder.cs" />
     <Compile Include="UI\DatePicker\MonthTemplate.cs" />
