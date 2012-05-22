@@ -7,6 +7,8 @@
     <script type="text/javascript" src="../src/kendo.core.js"></script>
     <script type="text/javascript" src="../src/kendo.fx.js"></script>
     <script type="text/javascript" src="../src/kendo.panelbar.js"></script>
+    <script type="text/javascript" src="../src/kendo.data.js"></script>
+    <script type="text/javascript" src="../src/kendo.treeview.js"></script>
     <style type="text/css">
         html
         {
@@ -40,6 +42,8 @@
             	{ text: "kendo", content: "howdy!" },
                 panel1.select()
             );
+
+            $("#tree").kendoTreeView();
 
         });
 
@@ -375,7 +379,7 @@
         <li class="k-state-active">
             <img src="Icons/Suites/mvc.png" alt="image">ASP.NET MVC
             <div>
-                <ul>
+                <ul id="tree">
                     <li>
                         <img src="Icons/Mvc/Grid.png" alt="image">Grid
                     </li>

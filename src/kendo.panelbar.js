@@ -225,6 +225,8 @@
         HIGHLIGHTEDCLASS = ".k-state-highlighted",
         clickableItems = ITEM + ":not(.k-state-disabled) .k-link",
         disabledItems = ITEM + ".k-state-disabled .k-link",
+        selectableItems = "> li > .k-state-selected, .k-panel > li > .k-state-selected",
+        highlightableItems = "> .k-state-highlighted, .k-panel > .k-state-highlighted",
         defaultState = "k-state-default",
         VISIBLE = ":visible",
         EMPTY = ":empty",
@@ -391,6 +393,14 @@
         items.filter(".k-last:not(:last-child)").removeClass(LAST);
         items.filter(":first-child").addClass(FIRST);
         items.filter(":last-child").addClass(LAST);
+    }
+
+    function updateSelected (element, link) {
+        element.find(selectableItems).removeClass(SELECTEDCLASS.substr(1));
+        element.find(highlightableItems).removeClass(HIGHLIGHTEDCLASS.substr(1));
+
+        link.addClass(SELECTEDCLASS.substr(1));
+        link.parentsUntil(element, ITEM).filter(":has(.k-header)").addClass(HIGHLIGHTEDCLASS.substr(1));
     }
 
     var PanelBar = Widget.extend({/** @lends kendo.ui.PanelBar.prototype */
@@ -943,7 +953,7 @@
             element = that.element.find(element);
 
             if (arguments.length === 0) {
-                return that.element.find(".k-item > " + SELECTEDCLASS).parent();
+                return that.element.find(selectableItems).parent();
             }
 
             element.each(function (index, item) {
@@ -954,11 +964,7 @@
                     return that;
                 }
 
-                $(SELECTEDCLASS, that.element).removeClass(SELECTEDCLASS.substr(1));
-                $(HIGHLIGHTEDCLASS, that.element).removeClass(HIGHLIGHTEDCLASS.substr(1));
-
-                link.addClass(SELECTEDCLASS.substr(1));
-                link.parentsUntil(that.element, ITEM).filter(":has(.k-header)").addClass(HIGHLIGHTEDCLASS.substr(1));
+                updateSelected(that.element, link);
             });
 
             return that;
@@ -1361,11 +1367,7 @@
             var link = target.closest("." + LINK),
                 item = link.closest(ITEM);
 
-            $(SELECTEDCLASS, element).removeClass(SELECTEDCLASS.substr(1));
-            $(HIGHLIGHTEDCLASS, element).removeClass(HIGHLIGHTEDCLASS.substr(1));
-
-            link.addClass(SELECTEDCLASS.substr(1));
-            link.parentsUntil(that.element, ITEM).filter(":has(.k-header)").addClass(HIGHLIGHTEDCLASS.substr(1));
+            updateSelected(element, link);
 
             var contents = item.find(GROUPS).add(item.find(CONTENTS)),
                 href = link.attr(HREF),
