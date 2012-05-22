@@ -486,6 +486,10 @@
                 data = that._data(),
                 valueFromData;
 
+            if (value !== null) {
+                value = value.toString();
+            }
+
             for (idx = 0, length = data.length; idx < length; idx++) {
                 valueFromData = that._value(data[idx]);
 
