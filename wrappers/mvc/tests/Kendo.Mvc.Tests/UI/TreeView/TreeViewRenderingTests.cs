@@ -104,57 +104,13 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
-        public void ObjectWriter_should_append_DropTargets_if_they_exists_and_the_dragAndDrop_is_enabled()
-        {
-            Mock<TextWriter> writer = new Mock<TextWriter>();
-
-            treeView.DragAndDrop.Enabled = true;
-            treeView.DragAndDrop.DropTargets = "fake drop targets";
-
-            objectWriter.Setup(w => w.AppendObject("dragAndDrop", It.IsAny<IDictionary<string,string>>())).Verifiable();
-
-            treeView.WriteInitializationScript(writer.Object);
-
-            objectWriter.VerifyAll();
-        }
-
-        [Fact]
         public void ObjectWriter_should_append_dragAndDrop_with_true_value()
         {
             Mock<TextWriter> writer = new Mock<TextWriter>();
 
-            treeView.DragAndDrop.Enabled = true;
+            treeView.DragAndDrop = true;
 
             objectWriter.Setup(w => w.Append("dragAndDrop", true)).Verifiable();
-
-            treeView.WriteInitializationScript(writer.Object);
-
-            objectWriter.VerifyAll();
-        }
-
-        [Fact]
-        public void ObjectWriter_should_append_ajax_if_ajax_enabled()
-        {
-            Mock<TextWriter> writer = new Mock<TextWriter>();
-
-            treeView.Ajax.Enabled = true;
-
-            objectWriter.Setup(w => w.AppendObject("ajax", It.IsAny<IDictionary<string, string>>())).Verifiable();
-
-            treeView.WriteInitializationScript(writer.Object);
-
-            objectWriter.VerifyAll();
-        }
-
-        [Fact]
-        public void ObjectWriter_should_append_contentUrl_if_ws_enabled()
-        {
-            Mock<TextWriter> writer = new Mock<TextWriter>();
-
-            treeView.WebService.Enabled = true;
-            treeView.WebService.Select.Url = "fake url";
-
-            objectWriter.Setup(w => w.AppendObject("ws", It.IsAny<IDictionary<string, string>>())).Verifiable();
 
             treeView.WriteInitializationScript(writer.Object);
 
@@ -168,7 +124,7 @@ namespace Kendo.Mvc.UI.Tests
 
             treeView.ClientEvents.OnExpand.CodeBlock = () => { };
 
-            objectWriter.Setup(w => w.AppendClientEvent("onExpand", treeView.ClientEvents.OnExpand)).Verifiable();
+            objectWriter.Setup(w => w.AppendClientEvent("expand", treeView.ClientEvents.OnExpand)).Verifiable();
 
             treeView.WriteInitializationScript(writer.Object);
 
@@ -182,7 +138,7 @@ namespace Kendo.Mvc.UI.Tests
 
             treeView.ClientEvents.OnCollapse.CodeBlock = () => { };
 
-            objectWriter.Setup(w => w.AppendClientEvent("onCollapse", treeView.ClientEvents.OnCollapse)).Verifiable();
+            objectWriter.Setup(w => w.AppendClientEvent("collapse", treeView.ClientEvents.OnCollapse)).Verifiable();
 
             treeView.WriteInitializationScript(writer.Object);
 
@@ -196,35 +152,7 @@ namespace Kendo.Mvc.UI.Tests
 
             treeView.ClientEvents.OnSelect.CodeBlock = () => { };
 
-            objectWriter.Setup(w => w.AppendClientEvent("onSelect", treeView.ClientEvents.OnSelect)).Verifiable();
-
-            treeView.WriteInitializationScript(writer.Object);
-
-            objectWriter.VerifyAll();
-        }
-
-        [Fact]
-        public void ObjectWriter_should_append_Error_property_of_clientEvents()
-        {
-            Mock<TextWriter> writer = new Mock<TextWriter>();
-
-            treeView.ClientEvents.OnError.CodeBlock = () => { };
-
-            objectWriter.Setup(w => w.AppendClientEvent("onError", treeView.ClientEvents.OnError)).Verifiable();
-
-            treeView.WriteInitializationScript(writer.Object);
-
-            objectWriter.VerifyAll();
-        }
-
-        [Fact]
-        public void ObjectWriter_should_append_Load_property_of_clientEvents()
-        {
-            Mock<TextWriter> writer = new Mock<TextWriter>();
-
-            treeView.ClientEvents.OnLoad.CodeBlock = () => { };
-
-            objectWriter.Setup(w => w.AppendClientEvent("onLoad", treeView.ClientEvents.OnLoad)).Verifiable();
+            objectWriter.Setup(w => w.AppendClientEvent("select", treeView.ClientEvents.OnSelect)).Verifiable();
 
             treeView.WriteInitializationScript(writer.Object);
 
@@ -236,9 +164,9 @@ namespace Kendo.Mvc.UI.Tests
         {
             Mock<TextWriter> writer = new Mock<TextWriter>();
 
-            treeView.ClientEvents.OnNodeDragStart.CodeBlock = () => { };
+            treeView.ClientEvents.OnDragStart.CodeBlock = () => { };
 
-            objectWriter.Setup(w => w.AppendClientEvent("onNodeDragStart", treeView.ClientEvents.OnNodeDragStart)).Verifiable();
+            objectWriter.Setup(w => w.AppendClientEvent("dragstart", treeView.ClientEvents.OnDragStart)).Verifiable();
 
             treeView.WriteInitializationScript(writer.Object);
 
@@ -250,9 +178,9 @@ namespace Kendo.Mvc.UI.Tests
         {
             Mock<TextWriter> writer = new Mock<TextWriter>();
 
-            treeView.ClientEvents.OnNodeDragging.CodeBlock = () => { };
+            treeView.ClientEvents.OnDrag.CodeBlock = () => { };
 
-            objectWriter.Setup(w => w.AppendClientEvent("onNodeDragging", treeView.ClientEvents.OnNodeDragging)).Verifiable();
+            objectWriter.Setup(w => w.AppendClientEvent("drag", treeView.ClientEvents.OnDrag)).Verifiable();
 
             treeView.WriteInitializationScript(writer.Object);
 
@@ -264,9 +192,9 @@ namespace Kendo.Mvc.UI.Tests
         {
             Mock<TextWriter> writer = new Mock<TextWriter>();
 
-            treeView.ClientEvents.OnNodeDragCancelled.CodeBlock = () => { };
+            treeView.ClientEvents.OnDragCancelled.CodeBlock = () => { };
 
-            objectWriter.Setup(w => w.AppendClientEvent("onNodeDragCancelled", treeView.ClientEvents.OnNodeDragCancelled)).Verifiable();
+            objectWriter.Setup(w => w.AppendClientEvent("dragcancelled", treeView.ClientEvents.OnDragCancelled)).Verifiable();
 
             treeView.WriteInitializationScript(writer.Object);
 
@@ -278,9 +206,9 @@ namespace Kendo.Mvc.UI.Tests
         {
             Mock<TextWriter> writer = new Mock<TextWriter>();
 
-            treeView.ClientEvents.OnNodeDrop.CodeBlock = () => { };
+            treeView.ClientEvents.OnDrop.CodeBlock = () => { };
 
-            objectWriter.Setup(w => w.AppendClientEvent("onNodeDrop", treeView.ClientEvents.OnNodeDrop)).Verifiable();
+            objectWriter.Setup(w => w.AppendClientEvent("drop", treeView.ClientEvents.OnDrop)).Verifiable();
 
             treeView.WriteInitializationScript(writer.Object);
 
@@ -292,59 +220,13 @@ namespace Kendo.Mvc.UI.Tests
         {
             Mock<TextWriter> writer = new Mock<TextWriter>();
 
-            treeView.ClientEvents.OnNodeDropped.CodeBlock = () => { };
+            treeView.ClientEvents.OnDragEnd.CodeBlock = () => { };
 
-            objectWriter.Setup(w => w.AppendClientEvent("onNodeDropped", treeView.ClientEvents.OnNodeDropped)).Verifiable();
-
-            treeView.WriteInitializationScript(writer.Object);
-
-            objectWriter.VerifyAll();
-        }
-
-        [Fact]
-        public void ObjectWriter_should_append_DataBinding_property_of_clientEvents()
-        {
-            Mock<TextWriter> writer = new Mock<TextWriter>();
-
-            treeView.ClientEvents.OnDataBinding.CodeBlock = () => { };
-
-            objectWriter.Setup(w => w.AppendClientEvent("onDataBinding", treeView.ClientEvents.OnDataBinding)).Verifiable();
+            objectWriter.Setup(w => w.AppendClientEvent("dragend", treeView.ClientEvents.OnDragEnd)).Verifiable();
 
             treeView.WriteInitializationScript(writer.Object);
 
             objectWriter.VerifyAll();
-        }
-
-        [Fact]
-        public void ObjectWriter_should_append_DataBound_property_of_clientEvents()
-        {
-            Mock<TextWriter> writer = new Mock<TextWriter>();
-
-            treeView.ClientEvents.OnDataBound.CodeBlock = () => { };
-
-            objectWriter.Setup(w => w.AppendClientEvent("onDataBound", treeView.ClientEvents.OnDataBound)).Verifiable();
-
-            treeView.WriteInitializationScript(writer.Object);
-
-            objectWriter.VerifyAll();
-        }
-
-        [Fact]
-        public void Render_should_throw_exception_if_ajax_and_ws_are_enabled()
-        {
-            treeView.WebService.Enabled = true;
-            treeView.Ajax.Enabled = true;
-
-            Assert.Throws(typeof(NotSupportedException), () => { treeView.Render(); });
-        }
-
-        [Fact]
-        public void Render_should_throw_exception_if_ws_is_enabled_and_url_is_not_set()
-        {
-            treeView.WebService.Enabled = true;
-            treeView.WebService.Select.Url = string.Empty;
-
-            Assert.Throws(typeof(ArgumentException), () => { treeView.Render(); });
         }
     }
 }

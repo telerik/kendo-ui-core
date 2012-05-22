@@ -59,16 +59,6 @@ namespace Kendo.Mvc.UI.Tests
         {
             IHtmlNode tag = renderer.TreeViewTag().Children[0];
             Assert.Equal("ul", tag.TagName);
-            Assert.Equal("k-group k-treeview-lines", tag.Attribute("class"));
-        }
-
-        [Fact]
-        public void TreeViewStart_should_not_render_treeview_lines_class_if_they_are_disabled()
-        {
-            treeView.ShowLines = false;
-
-            IHtmlNode tag = renderer.TreeViewTag().Children[0];
-            Assert.Equal("ul", tag.TagName);
             Assert.Equal("k-group", tag.Attribute("class"));
         }
 
