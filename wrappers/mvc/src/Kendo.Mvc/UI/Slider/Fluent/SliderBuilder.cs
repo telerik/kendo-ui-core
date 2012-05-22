@@ -3,10 +3,10 @@ namespace Kendo.Mvc.UI.Fluent
     using System;
     using Kendo.Mvc.Infrastructure;
 
-    /// <summary>Defines the fluent interface for configuring the <see cref="Slider"/>component.</summary>
+    /// <summary>Defines the fluent interface for configuring the <see cref="Slider{T}"/>component.</summary>
     public class SliderBuilder<T> : ViewComponentBuilderBase<Slider<T>, SliderBuilder<T>>, IHideObjectMembers where T : struct, IComparable
     {
-        /// <summary>Initializes a new instance of the <see cref="SliderBuilder"/>class.</summary>
+        /// <summary>Initializes a new instance of the <see cref="SliderBuilder{T}"/>class.</summary>
         /// <param name="component">The component.</param>
         public SliderBuilder(Slider<T> component)
             : base(component)
@@ -113,12 +113,12 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">Use builder to set different tooltip options.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Slider()
-        ///             .Name("Slider")
-        ///             .Tooltip(tooltip => tooltip
-        ///                 .Enable(true)
-        ///                 .Format("{0:P}")
-        ///             );
+        /// &lt;%= Html.Kendo().Slider()
+        ///            .Name("Slider")
+        ///            .Tooltip(tooltip => tooltip
+        ///                .Enable(true)
+        ///                .Format("{0:P}")
+        ///            );
         /// %&gt;
         /// </code>
         /// </example>
@@ -133,10 +133,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="events">The client events action.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Slider()
-        ///             .Name("Slider")
-        ///             .ClientEvents(events =>
-        ///                 events.OnLoad("onLoad").OnChange("onChange"))
+        /// &lt;%= Html.Kendo().Slider()
+        ///            .Name("Slider")
+        ///            .ClientEvents(events =>
+        ///                events.OnChange("onChange"))
         /// %&gt;
         /// </code>
         /// </example>

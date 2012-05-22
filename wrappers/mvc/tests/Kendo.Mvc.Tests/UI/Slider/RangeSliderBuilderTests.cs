@@ -166,16 +166,6 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
-        public void Should_set_events_of_the_slider()
-        {
-            Action<RangeSliderClientEventsBuilder> clientEventsAction = eventBuilder => { eventBuilder.OnLoad("Load"); };
-
-            builder.ClientEvents(clientEventsAction);
-
-            Assert.NotNull(component.ClientEvents.OnLoad.HandlerName);
-        }
-
-        [Fact]
         public void ClientEvents_should_return_builder()
         {
             Action<RangeSliderClientEventsBuilder> clientEventsAction = delegate { };

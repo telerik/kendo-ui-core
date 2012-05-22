@@ -56,46 +56,6 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
-        public void OnLoad_with_Action_param_should_set_OnLoad_property()
-        {
-            Action param = () => { };
-
-            builder.OnLoad(param);
-
-            Assert.NotNull(clientEvents.OnLoad.CodeBlock);
-        }
-
-        [Fact]
-        public void OnLoad_with_String_param_should_set_OnLoad_property()
-        {
-            const string param = "my_method()";
-
-            builder.OnLoad(param);
-
-            Assert.NotNull(clientEvents.OnLoad.HandlerName);
-        }
-
-        [Fact]
-        public void OnLoad_with_Action_should_return_builder()
-        {
-            Action param = () => { };
-
-            var returned = builder.OnLoad(param);
-
-            Assert.IsType(typeof(SliderClientEventsBuilder), returned);
-        }
-
-        [Fact]
-        public void OnLoad_with_String_should_return_builder()
-        {
-            const string param = "my_method()";
-
-            var returned = builder.OnLoad(param);
-
-            Assert.IsType(typeof(SliderClientEventsBuilder), returned);
-        }
-
-        [Fact]
         public void OnSlide_with_Action_param_should_set_OnSlide_property()
         {
             Action param = () => { };
