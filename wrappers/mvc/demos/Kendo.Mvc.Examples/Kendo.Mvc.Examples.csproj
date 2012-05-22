@@ -241,6 +241,7 @@
     <Content Include="Areas\razor\Views\treeview\images.cshtml" />
     <Content Include="Areas\razor\Views\treeview\templates.cshtml" />
     <Content Include="Areas\razor\Views\treeview\events.cshtml" />
+    <Content Include="Areas\razor\Views\grid\customserverbinding.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
