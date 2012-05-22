@@ -46,19 +46,9 @@ namespace Kendo.Mvc.UI
             return this;
         }
 
-        public EffectsBuilder Fade()
-        {
-            return Add(EffectsList.Fade);
-        }
-
         public EffectsBuilder Fade(string direction)
         {
             return Add(EffectsList.Fade, direction);
-        }
-
-        public EffectsBuilder Zoom()
-        {
-            return Add(EffectsList.Zoom);
         }
 
         public EffectsBuilder Zoom(string direction)
@@ -66,19 +56,9 @@ namespace Kendo.Mvc.UI
             return Add(EffectsList.Zoom, direction);
         }
 
-        public EffectsBuilder Slide()
-        {
-            return Add(EffectsList.Slide);
-        }
-
         public EffectsBuilder Slide(string direction)
         {
             return Add(EffectsList.Slide, direction);
-        }
-
-        public EffectsBuilder SlideIn()
-        {
-            return Add(EffectsList.SlideIn);
         }
 
         public EffectsBuilder SlideIn(string direction)
