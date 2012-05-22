@@ -345,6 +345,10 @@ namespace Kendo.Mvc.UI
             
             HeaderHtmlAttributes.Add("data-field", Member);
             HeaderHtmlAttributes.Add("data-title", Title);
+            if (!Groupable)
+            {
+                HeaderHtmlAttributes.Add("data-groupable", "false");
+            }
 
             AppendAggregateAttributes();
 
