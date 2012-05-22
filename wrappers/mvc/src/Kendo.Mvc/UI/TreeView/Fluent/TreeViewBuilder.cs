@@ -264,33 +264,21 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
-        ///// <summary>
-        ///// Configures the effects of the TreeView.
-        ///// </summary>
-        ///// <param name="effectsAction">The action which configures the effects.</param>
-        ///// <example>
-        ///// <code lang="CS">
-        ///// &lt;%= Html.Kendo().TreeView()
-        /////	           .Name("TreeView")
-        /////	           .Effects(fx =>
-        /////	           {
-        /////		            fx.Slide()
-        /////			          .Opacity()
-        /////					  .OpenDuration(AnimationDuration.Normal)
-        /////					  .CloseDuration(AnimationDuration.Normal);
-        /////	           })
-        ///// </code>
-        ///// </example>
-        //public TreeViewBuilder Effects(Action<EffectsBuilder> addEffects)
-        //{
-        //    Guard.IsNotNull(addEffects, "addAction");
+        public TreeViewBuilder Animation(bool enable)
+        {
+            Component.Animation.Enabled = enable;
 
-        //    EffectsBuilderFactory factory = new EffectsBuilderFactory();
+            return this;
+        }
 
-        //    addEffects(factory.Create(Component.Effects));
+        public TreeViewBuilder Animation(Action<ExpandableAnimationBuilder> animationAction)
+        {
+            Guard.IsNotNull(animationAction, "animationAction");
 
-        //    return this;
-        //}
+            animationAction(new ExpandableAnimationBuilder(Component.Animation));
+
+            return this;
+        }
 
         /// <summary>
         /// Expand all the items.
