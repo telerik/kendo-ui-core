@@ -4,10 +4,10 @@ namespace Kendo.Mvc.UI.Fluent
     using System.Linq;
     using Kendo.Mvc.Infrastructure;
 
-    /// <summary>Defines the fluent interface for configuring the <see cref="RangeSlider"/>component.</summary>
+    /// <summary>Defines the fluent interface for configuring the <see cref="RangeSlider{T}"/>component.</summary>
     public class RangeSliderBuilder<T> : ViewComponentBuilderBase<RangeSlider<T>, RangeSliderBuilder<T>>, IHideObjectMembers where T : struct, IComparable
     {
-        /// <summary>Initializes a new instance of the <see cref="RangeSliderBuilder"/>class.</summary>
+        /// <summary>Initializes a new instance of the <see cref="RangeSliderBuilder{T}"/>class.</summary>
         /// <param name="component">The component.</param>
         public RangeSliderBuilder(RangeSlider<T> component)
             : base(component)
@@ -107,12 +107,12 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">Use builder to set different tooltip options.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Slider()
-        ///             .Name("Slider")
-        ///             .Tooltip(tooltip => tooltip
-        ///                 .Enable(true)
-        ///                 .Format("{0:P}")
-        ///             );
+        /// &lt;%= Html.Kendo().Slider()
+        ///            .Name("Slider")
+        ///            .Tooltip(tooltip => tooltip
+        ///                .Enable(true)
+        ///                .Format("{0:P}")
+        ///            );
         /// %&gt;
         /// </code>
         /// </example>
@@ -127,10 +127,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="events">The client events action.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().RangeSlider()
-        ///             .Name("RangeSlider")
-        ///             .ClientEvents(events =>
-        ///                 events.OnLoad("onLoad").OnChange("onChange"))
+        /// &lt;%= Html.Kendo().RangeSlider()
+        ///            .Name("RangeSlider")
+        ///            .ClientEvents(events =>
+        ///                events.OnChange("onChange"))
         /// %&gt;
         /// </code>
         /// </example>

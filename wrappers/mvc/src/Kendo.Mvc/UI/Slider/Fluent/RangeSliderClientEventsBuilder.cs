@@ -66,56 +66,6 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Defines the inline handler of the OnLoad client-side event
-        /// </summary>
-        /// <param name="action">The action defining the inline handler.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;% Html.Telerik().RangeSlider()
-        ///            .Name("RangeSlider")
-        ///            .ClientEvents(events => events.OnLoad(() =>
-        ///            {
-        ///                 %&gt;
-        ///                 function(e) {
-        ///                     //event handling code
-        ///                 }
-        ///                 &lt;%
-        ///            }))
-        ///            .Render();
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public RangeSliderClientEventsBuilder OnLoad(Action action)
-        {
-            Guard.IsNotNull(action, "action");
-
-            clientEvents.OnLoad.CodeBlock = action;
-
-            return this;
-        }
-
-        /// <summary>
-        ///  Defines the name of the JavaScript function that will handle the the OnLoad client-side event.
-        /// </summary>
-        /// <param name="handlerName">The name of the JavaScript function that will handle the event.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().RangeSlider()
-        ///             .Name("RangeSlider")
-        ///             .ClientEvents(events => events.OnLoad("onLoad"))
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public RangeSliderClientEventsBuilder OnLoad(string handlerName)
-        {
-            Guard.IsNotNullOrEmpty(handlerName, "handlerName");
-
-            clientEvents.OnLoad.HandlerName = handlerName;
-
-            return this;
-        }
-
-        /// <summary>
         /// Defines the inline handler of the OnSlide client-side event.
         /// </summary>
         /// <param name="action">The action defining the inline handler.</param>
