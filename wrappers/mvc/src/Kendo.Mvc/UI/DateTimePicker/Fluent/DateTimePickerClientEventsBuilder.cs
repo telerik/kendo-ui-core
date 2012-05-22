@@ -11,20 +11,17 @@ namespace Kendo.Mvc.UI
     public class DateTimePickerClientEventsBuilder : IHideObjectMembers
     {
         private readonly DateTimePickerClientEvents clientEvents;
-        private readonly ViewContext viewContext;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TimePickerClientEventsBuilder"/> class.
         /// </summary>
         /// <param name="clientEvents">Timepicker client-side events.</param>
         /// <param name="viewContext">The context of the View.</param>
-        public DateTimePickerClientEventsBuilder(DateTimePickerClientEvents clientEvents, ViewContext viewContext)
+        public DateTimePickerClientEventsBuilder(DateTimePickerClientEvents clientEvents)
         {
             Guard.IsNotNull(clientEvents, "clientEvents");
-            Guard.IsNotNull(viewContext, "viewContext");
 
             this.clientEvents = clientEvents;
-            this.viewContext = viewContext;
         }
 
         /// <summary>
@@ -101,84 +98,6 @@ namespace Kendo.Mvc.UI
             Guard.IsNotNullOrEmpty(onChangeHandlerName, "onChangeHandlerName");
 
             clientEvents.OnChange.HandlerName = onChangeHandlerName;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Defines the inline handler of the OnLoad client-side event
-        /// </summary>
-        /// <param name="onLoadAction">The action defining the inline handler.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;% Html.Telerik().DateTimePicker()
-        ///            .Name("DateTimePicker")
-        ///            .ClientEvents(events => events.OnLoad(() =>
-        ///            {
-        ///                 %&gt;
-        ///                 function(e) {
-        ///                     //event handling code
-        ///                 }
-        ///                 &lt;%
-        ///            }))
-        ///            .Render();
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public DateTimePickerClientEventsBuilder OnLoad(Action onLoadCodeBlock)
-        {
-            Guard.IsNotNull(onLoadCodeBlock, "onLoadCodeBlock");
-
-            clientEvents.OnLoad.CodeBlock = onLoadCodeBlock;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Defines the inline handler of the OnLoad client-side event
-        /// </summary>
-        /// <param name="onLoadAction">The handler code wrapped in a text tag (Razor syntax).</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;% Html.Telerik().DateTimePicker()
-        ///            .Name("DateTimePicker")
-        ///            .ClientEvents(events => events.OnLoad(
-        ///                 @&lt;text&gt;
-        ///                 function(e) {
-        ///                     //event handling code
-        ///                 }
-        ///                 &lt;/text&gt;
-        ///            ))
-        ///            .Render();
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public DateTimePickerClientEventsBuilder OnLoad(Func<object, object> onLoadInlineCodeBlock)
-        {
-            Guard.IsNotNull(onLoadInlineCodeBlock, "onLoadInlineCodeBlock");
-
-            clientEvents.OnLoad.InlineCodeBlock = onLoadInlineCodeBlock;
-
-            return this;
-        }
-
-        /// <summary>
-        ///  Defines the name of the JavaScript function that will handle the the OnLoad client-side event.
-        /// </summary>
-        /// <param name="onLoadHandlerName">The name of the JavaScript function that will handle the event.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().DateTimePicker()
-        ///             .Name("DateTimePicker")
-        ///             .ClientEvents(events => events.OnLoad("onLoad"))
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public DateTimePickerClientEventsBuilder OnLoad(string onLoadHandlerName)
-        {
-            Guard.IsNotNullOrEmpty(onLoadHandlerName, "onLoadHandlerName");
-
-            clientEvents.OnLoad.HandlerName = onLoadHandlerName;
 
             return this;
         }

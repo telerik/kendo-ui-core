@@ -1,85 +1,150 @@
 namespace Kendo.Mvc.UI
 {
+    using Kendo.Mvc.Extensions;
+    using Kendo.Mvc.Infrastructure;
+    using Kendo.Mvc.Resources;
     using System;
     using System.Collections.Generic;
     using System.Globalization;
-    using System.Linq;
     using System.Web.Mvc;
-    using Kendo.Mvc.Extensions;
-    using Kendo.Mvc.Resources;
 
-    public class DateTimePicker : DatePickerBase
+    public class DateTimePicker : ViewComponentBase, IInputComponent<DateTime>
     {
-        //private readonly IList<IEffect> defaultEffects = new List<IEffect> { new SlideAnimation() };
         static internal DateTime defaultMinDate = new DateTime(1899, 12, 31);
         static internal DateTime defaultMaxDate = new DateTime(2100, 1, 1);
 
-        public DateTimePicker(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory)
-            : base(viewContext, clientSideObjectWriterFactory)
+        public DateTimePicker(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory, ViewDataDictionary viewData)
+            : base(viewContext, clientSideObjectWriterFactory, viewData)
         {
-            //defaultEffects.Each(el => Effects.Container.Add(el));
-
             DateTimeFormatInfo dateTimeFormats = CultureInfo.CurrentCulture.DateTimeFormat;
             Format = dateTimeFormats.ShortDatePattern + " " + dateTimeFormats.ShortTimePattern;
-            
-            DropDownHtmlAttributes = new Dictionary<string, object>();
+            ParseFormats = new List<string>();
 
-            MinValue = defaultMinDate;
-            MaxValue = defaultMaxDate;
+            Min = defaultMinDate;
+            Max = defaultMaxDate;
 
-            StartTime = DateTime.Today;
-            EndTime = DateTime.Today;
+            Animation = new PopupAnimation();
+            ClientEvents = new DateTimePickerClientEvents();
+            MonthTemplate = new MonthTemplate();
 
             Dates = new List<DateTime>();
 
             Interval = 30;
 
-            CalendarButtonTitle = "Open the calendar";
-            TimeButtonTitle = "Open the time view";
+            Value = null;
+            Enabled = true;
         }
-        
-        public IDictionary<string, object> DropDownHtmlAttributes { get; private set; }
 
-        public DateTime StartTime { get; set; }
+        public PopupAnimation Animation
+        {
+            get;
+            private set;
+        }
 
-        public DateTime EndTime { get; set; }
+        public DateTimePickerClientEvents ClientEvents
+        {
+            get;
+            private set;
+        }
 
-        public int Interval { get; set; }
+        public MonthTemplate MonthTemplate
+        {
+            get;
+            private set;
+        }
 
-        public string CalendarButtonTitle { get; set; }
-        
-        public string TimeButtonTitle { get; set; }
+        public string Format
+        {
+            get;
+            set;
+        }
 
-        public List<DateTime> Dates { get; set; }
+        public List<string> ParseFormats
+        {
+            get;
+            set;
+        }
+
+        public string Footer
+        {
+            get;
+            set;
+        }
+
+        public string Start
+        {
+            get;
+            set;
+        }
+
+        public string Depth
+        {
+            get;
+            set;
+        }
+
+        public DateTime? Value
+        {
+            get;
+            set;
+        }
+
+        public DateTime Min
+        {
+            get;
+            set;
+        }
+
+        public DateTime Max
+        {
+            get;
+            set;
+        }
+
+        public bool Enabled
+        {
+            get;
+            set;
+        }
+
+        public List<DateTime> Dates
+        {
+            get;
+            set;
+        }
+
+        public int Interval
+        {
+            get;
+            set;
+        }
 
         public override void WriteInitializationScript(System.IO.TextWriter writer)
         {
-            IClientSideObjectWriter objectWriter = ClientSideObjectWriterFactory.Create(Id, "tDateTimePicker", writer);
+            IClientSideObjectWriter objectWriter = ClientSideObjectWriterFactory.Create(Id, "kendoDateTimePicker", writer);
 
             objectWriter.Start();
-            
-            //if (!defaultEffects.SequenceEqual(Effects.Container))
-            //{
-            //    objectWriter.Serialize("effects", Effects);
-            //}
 
+            Animation.SerializeTo(objectWriter);
             ClientEvents.SerializeTo(objectWriter);
 
             objectWriter.Append("format", this.Format);
-            objectWriter.Append("todayFormat", TodayFormat);
-            objectWriter.Append("minValue", this.MinValue);
-            objectWriter.Append("maxValue", this.MaxValue);
-            objectWriter.Append("startTimeValue", this.StartTime);
-            objectWriter.Append("endTimeValue", this.EndTime);
-            objectWriter.Append("interval", this.Interval);
-            objectWriter.Append("selectedValue", this.Value);
-            objectWriter.Append("enabled", this.Enabled, true);
-            objectWriter.Append("dates", this.Dates);
+            objectWriter.AppendCollection("parseFormats", this.ParseFormats);
 
-            if (DropDownHtmlAttributes.Any())
+            objectWriter.Append("min", this.Min);
+            objectWriter.Append("max", this.Max);
+            objectWriter.Append("footer", Footer);
+
+            objectWriter.Append("depth", Depth); //use Enum
+            objectWriter.Append("start", Start); //use Enum
+
+            if (MonthTemplate.content.HasValue() || MonthTemplate.empty.HasValue())
             {
-                objectWriter.Append("dropDownAttr", DropDownHtmlAttributes.ToAttributeString());
+                objectWriter.AppendObject("month", MonthTemplate);
             }
+
+            objectWriter.Append("interval", this.Interval);
+            objectWriter.Append("dates", this.Dates);
 
             objectWriter.Complete();
 
@@ -88,12 +153,11 @@ namespace Kendo.Mvc.UI
 
         protected override void WriteHtml(System.Web.UI.HtmlTextWriter writer)
         {
-            Name = Name ?? ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(string.Empty);
+            Guard.IsNotNull(writer, "writer");
 
             DateTimePickerHtmlBuilder renderer = new DateTimePickerHtmlBuilder(this);
 
             renderer.Build().WriteTo(writer);
-
             base.WriteHtml(writer);
         }
 
@@ -101,9 +165,9 @@ namespace Kendo.Mvc.UI
         {
             base.VerifySettings();
 
-            if (MinValue > MaxValue)
+            if (Min > Max)
             {
-                throw new ArgumentException(TextResource.MinPropertyMustBeLessThenMaxProperty.FormatWith("MinValue", "MaxValue"));
+                throw new ArgumentException(TextResource.MinPropertyMustBeLessThenMaxProperty.FormatWith("Min", "Max"));
             }
         }
     }
