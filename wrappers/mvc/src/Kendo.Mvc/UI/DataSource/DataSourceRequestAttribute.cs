@@ -6,9 +6,11 @@ namespace Kendo.Mvc.UI
 {
     public class DataSourceRequestAttribute : CustomModelBinderAttribute
     {
+        public string Prefix { get; set; }
+
         public override IModelBinder GetBinder()
         {
-            return new DataSourceRequestModelBinder();
+            return new DataSourceRequestModelBinder() { Prefix = Prefix };
         }
     }
 }

@@ -1,7 +1,7 @@
 @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.Product>()
     .Name("Grid")
     .Columns(columns => {
-        columns.Bound(p => p.ProductID);
+        columns.Bound(p => p.ProductID).Groupable(false);
         columns.Bound(p => p.ProductName);
         columns.Bound(p => p.UnitPrice);
         columns.Bound(p => p.UnitsInStock);

@@ -1,10 +1,14 @@
-@(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.Product>()
+@model System.Collections.IEnumerable
+
+@(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.Order>()
     .Name("Grid")
+    .EnableCustomBinding(true)
+    .BindTo(Model)
     .Columns(columns => {
-        columns.Bound(p => p.ProductID);
-        columns.Bound(p => p.ProductName);
-        columns.Bound(p => p.UnitPrice);
-        columns.Bound(p => p.UnitsInStock);
+        columns.Bound(o => o.OrderID);
+        columns.Bound(o => o.ShipCity);
+        columns.Bound(o => o.ShipCountry);
+        columns.Bound(o => o.ShipName);
     })
     .Pageable()
     .Sortable()
@@ -12,7 +16,8 @@
     .Scrollable()
     .Groupable()
     .DataSource(dataSource => dataSource
-        .Type(DataSourceType.Ajax)
-        .Read(read => read.Action("CustomAjaxBinding_Read", "Grid"))
+        .Type(DataSourceType.Server)
+        .Total((int)ViewData["total"])
+        .Read(read => read.Action("CustomServerBinding", "Grid"))
     )
 )

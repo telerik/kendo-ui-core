@@ -962,7 +962,7 @@ namespace Kendo.Mvc.UI
 
             var request = (DataSourceRequest)binder.BindModel(controller.ControllerContext, bindingContext);
 
-            DataSource.Process(request);
+            DataSource.Process(request, !EnableCustomBinding);
         }
 
         private GridRenderingData CreateRenderingData()
