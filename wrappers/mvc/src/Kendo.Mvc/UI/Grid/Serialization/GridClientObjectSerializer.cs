@@ -69,6 +69,11 @@ namespace Kendo.Mvc.UI
                 writer.Append("resizable", true);
             }
 
+            if (grid.Reordering.Enabled)
+            {
+                writer.Append("reorderable", true);
+            }
+
             if (grid.DataBinding.IsClientOperationMode)
             {
                 writer.Append("operationMode", "client");

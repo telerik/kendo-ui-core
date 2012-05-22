@@ -5,6 +5,8 @@ namespace Kendo.Mvc.UI
         public GridClientEvents()
         {
             ColumnResize = new ClientEvent();
+            ColumnReorder = new ClientEvent();
+
             OnError = new ClientEvent();
             OnDataBinding = new ClientEvent();
             OnDataBound = new ClientEvent();
@@ -14,8 +16,7 @@ namespace Kendo.Mvc.UI
             OnSave = new ClientEvent();
             OnDelete = new ClientEvent();
             OnDetailViewExpand = new ClientEvent();
-            OnDetailViewCollapse = new ClientEvent();
-            OnColumnReorder = new ClientEvent();
+            OnDetailViewCollapse = new ClientEvent();            
             OnSubmitChanges = new ClientEvent();
             OnCommand = new ClientEvent();
             OnComplete = new ClientEvent();
@@ -53,7 +54,7 @@ namespace Kendo.Mvc.UI
             private set; 
         }        
         
-        public ClientEvent OnColumnReorder
+        public ClientEvent ColumnReorder
         { 
             get; 
             private set; 
@@ -128,7 +129,7 @@ namespace Kendo.Mvc.UI
         public void SerializeTo(string key, IClientSideObjectWriter writer)
         {
             writer.AppendClientEvent("columnResize", ColumnResize);
-            writer.AppendClientEvent("onColumnReorder", OnColumnReorder);
+            writer.AppendClientEvent("columnReorder", ColumnReorder);
             writer.AppendClientEvent("onColumnHide", OnColumnHide);
             writer.AppendClientEvent("onColumnShow", OnColumnShow);
             writer.AppendClientEvent("onCommand", OnCommand);
