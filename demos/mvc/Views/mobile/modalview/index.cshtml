@@ -1,0 +1,29 @@
+<div data-role="view">
+    <h3>OctaGram</h3>
+    <p>Your life, captured.</p>
+    <a data-role="button" data-rel="modalview" href="#modalview-login">Login</a>
+
+    <div data-role="modalview" id="modalview-login">
+        <div data-role="header">
+            <div data-role="navbar">
+                <span>Login</span>
+                <a data-click="closeModalViewLogin" data-role="button" data-align="right">Cancel</a>
+            </div>
+        </div>
+
+        <ul data-role="listview" data-style="inset">
+            <li><label for="username">Username:</label> <input type="text" id="username" /></li>
+            <li><label for="password">Password:</label> <input type="password" id="password" /></li>
+            <li>
+                <button type="button" href="#welcome" data-transition="overlay:down reverse" data-role="button">Login</button><br >
+                <button type="button" href="#transitions" data-transition="overlay:up reverse" data-role="backbutton" style="background-color: black;">Cancel</button>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    function closeModalViewLogin() {
+        $("#modalview-login").kendoMobileModalView("close");
+    }
+</script>

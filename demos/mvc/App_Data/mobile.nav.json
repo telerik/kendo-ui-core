@@ -102,6 +102,18 @@
             ]
         },
         {
+            "text": "ModalView",
+            "name": "modalview",
+            "documentation": "mobile/modalview",
+            "spriteCssClass": "mobileNavBarIcon",
+            "items": [
+                {
+                    "text": "Basic usage",
+                    "url": "modalview/index.html"
+                }
+            ]
+        },
+        {
             "text": "NavBar",
             "name": "navbar",
             "documentation": "mobile/navbar",

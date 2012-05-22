@@ -95,7 +95,8 @@ namespace Kendo.Models
             "kendo.mobile.navbar.js",
             "kendo.mobile.buttongroup.js",
             "kendo.mobile.switch.js",
-            "kendo.mobile.tabstrip.js"
+            "kendo.mobile.tabstrip.js",
+            "kendo.mobile.modalview.js"
 #else
             "http://code.jquery.com/jquery-1.7.1.min.js",
             "kendo.all.min.js"
