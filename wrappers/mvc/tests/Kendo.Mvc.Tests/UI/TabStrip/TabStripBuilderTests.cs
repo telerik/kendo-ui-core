@@ -169,17 +169,17 @@ namespace Kendo.Mvc.UI.Tests
         [Fact]
         public void ClientEvents_should_set_events_of_the_tabstrip()
         {
-            Action<TabStripClientEventsBuilder> clientEventsAction = eventBuilder => { eventBuilder.OnLoad("Load"); };
+            Action<TabStripClientEventsBuilder> clientEventsAction = eventBuilder => { eventBuilder.OnSelect("select"); };
 
             _builder.ClientEvents(clientEventsAction);
 
-            Assert.NotNull(_tabStrip.ClientEvents.OnLoad.HandlerName);
+            Assert.NotNull(_tabStrip.ClientEvents.OnSelect.HandlerName);
         }
 
         [Fact]
         public void ClientEvents_should_return_builder()
         {
-            Action<TabStripClientEventsBuilder> clientEventsAction = eventBuilder => { eventBuilder.OnLoad("Load"); };
+            Action<TabStripClientEventsBuilder> clientEventsAction = eventBuilder => { eventBuilder.OnSelect("select"); };
 
             var returnedBuilder = _builder.ClientEvents(clientEventsAction);
 

@@ -4,18 +4,18 @@ namespace Kendo.Mvc.UI
     {
         public TabStripClientEvents()
         {
-            OnLoad = new ClientEvent();
-            OnError = new ClientEvent();
             OnSelect = new ClientEvent();
+            OnActivate = new ClientEvent();
             OnContentLoad = new ClientEvent();
+            OnError = new ClientEvent();
         }
 
-        public ClientEvent OnLoad { get; private set; }
+        public ClientEvent OnSelect { get; private set; }
 
-        public ClientEvent OnError { get; private set; }
-
-        public ClientEvent OnSelect {  get; private set; }
+        public ClientEvent OnActivate { get; private set; }
 
         public ClientEvent OnContentLoad { get; private set; }
+
+        public ClientEvent OnError { get; private set; }
     }
 }
