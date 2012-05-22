@@ -12,11 +12,11 @@
         VERTICAL = "km-vertical",
         HORIZONTAL = "km-horizontal",
 
-        MOBILE_UA = {
-            ios: "iPhone OS 4_3",
-            android: "Android 2.3.3",
-            blackberry: "PlayBook Version/7.2.0.0",
-            meego: "MeeGo NokiaBrowser/8.5.0"
+        MOBILE_PLATFORMS = {
+            ios: { ios: true, appMode: false, browser: "default", device: "iphone", flatVersion: "430", majorVersion: "4", minorVersion: "3.0", name: "ios", tablet: false },
+            android: { android: true, appMode: false, browser: "default", device: "android", flatVersion: "233", majorVersion: "2", minorVersion: "3.3", name: "android", tablet: false },
+            blackberry: { blackberry: true, appMode: false, browser: "default", device: "blackberry", flatVersion: "710", majorVersion: "7", minorVersion: "1.0", name: "blackberry", tablet: false },
+            meego: { meego: true, appMode: false, browser: "default", device: "meego", flatVersion: "850", majorVersion: "8", minorVersion: "5.0", name: "meego", tablet: false }
         },
 
         viewportTemplate = kendo.template('<meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width#=data.height#" name="viewport" />', {usedWithBlock: false}),
@@ -364,10 +364,12 @@
 
             if (platform) {
                 if (typeof platform === "string") {
-                    os = support.detectOS(MOBILE_UA[platform]);
+                    os = MOBILE_PLATFORMS[platform];
                 } else {
                     os = platform;
                 }
+
+                console.log(os);
 
                 support.mobileOS = os;
             }
