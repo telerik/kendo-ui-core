@@ -39,17 +39,22 @@ namespace Kendo.Mvc.UI
             UrlGenerator = urlGenerator;
             Authorization = authorization;
             builderFactory = factory;
-
+            
+            Animation = new ExpandableAnimation();
             ClientEvents = new TreeViewClientEvents();
 
             this.DragAndDrop = false;
-
-            //defaultEffects.Each(el => Effects.Container.Add(el));
 
             Items = new LinkedObjectCollection<TreeViewItem>(null);
 
             SelectedIndex = -1;
             SecurityTrimming = true;
+        }
+
+        public ExpandableAnimation Animation
+        {
+            get;
+            private set;
         }
 
         public IUrlGenerator UrlGenerator
@@ -150,11 +155,6 @@ namespace Kendo.Mvc.UI
             IClientSideObjectWriter objectWriter = ClientSideObjectWriterFactory.Create(Id, "kendoTreeView", writer);
             objectWriter.Start();
 
-            //if (!defaultEffects.SequenceEqual(Effects.Container))
-            //{
-            //    objectWriter.Serialize("effects", Effects);
-            //}
-
             if (ShowCheckBox)
             {
                 objectWriter.Append("showCheckBox", ShowCheckBox);
@@ -173,6 +173,8 @@ namespace Kendo.Mvc.UI
             objectWriter.AppendClientEvent("dragcancelled", ClientEvents.OnDragCancelled);
             objectWriter.AppendClientEvent("drop", ClientEvents.OnDrop);
             objectWriter.AppendClientEvent("dragend", ClientEvents.OnDragEnd);
+
+            Animation.SerializeTo(objectWriter);
 
             objectWriter.Complete();
             base.WriteInitializationScript(writer);
