@@ -7,7 +7,7 @@ namespace Kendo.Mvc.UI.Fluent
         where T : struct
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="GaugeRadialScaleBuilder" /> class.
+        /// Initializes a new instance of the <see cref="GaugeRadialScaleBuilder{T}" /> class.
         /// </summary>
         /// <param name="gauge">The gauge component.</param>
         public GaugeRadialScaleBuilder(RadialGauge<T> gauge)

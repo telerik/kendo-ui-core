@@ -4,13 +4,13 @@ namespace Kendo.Mvc.UI.Fluent
     using Kendo.Mvc.Infrastructure;
 
     /// <summary>
-    /// Defines the fluent interface for configuring the <see cref="LinearGauge"/> component.
+    /// Defines the fluent interface for configuring the <see cref="LinearGauge{T}"/> component.
     /// </summary>
     public class GaugeLinearBuilder<T> : ViewComponentBuilderBase<LinearGauge<T>, GaugeLinearBuilder<T>>, IHideObjectMembers
         where T : struct
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="GaugeLinearBuilder"/> class.
+        /// Initializes a new instance of the <see cref="GaugeLinearBuilder{T}"/> class.
         /// </summary>
         /// <param name="component">The component.</param>
         public GaugeLinearBuilder(LinearGauge<T> component)

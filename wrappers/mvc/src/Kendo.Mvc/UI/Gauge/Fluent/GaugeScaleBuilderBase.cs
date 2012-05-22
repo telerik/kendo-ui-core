@@ -8,13 +8,14 @@ namespace Kendo.Mvc.UI.Fluent
     /// </summary>
     /// <typeparam name="TScale"></typeparam>
     /// <typeparam name="TScaleBuilder">The type of the series builder.</typeparam>
+    /// <typeparam name="T"></typeparam>
     public abstract class GaugeScaleBuilderBase<TScale, TScaleBuilder, T> : IHideObjectMembers
         where TScaleBuilder : GaugeScaleBuilderBase<TScale, TScaleBuilder, T>
         where TScale : IGaugeScale<T>
         where T : struct
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="GaugeScaleBuilderBase{TScale, TScaleBuilder}"/> class.
+        /// Initializes a new instance of the <see cref="GaugeScaleBuilderBase{TScale, TScaleBuilder, T}"/> class.
         /// </summary>
         /// <param name="scale">The scale.</param>
         protected GaugeScaleBuilderBase(TScale scale)

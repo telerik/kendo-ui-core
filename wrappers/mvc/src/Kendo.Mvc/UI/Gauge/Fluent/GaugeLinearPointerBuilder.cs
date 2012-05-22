@@ -3,14 +3,14 @@ namespace Kendo.Mvc.UI.Fluent
     using System;
     using Kendo.Mvc.Infrastructure;
     /// <summary>
-    /// Defines the fluent interface for configuring the <see cref="GaugeLinearPointer"/>.
+    /// Defines the fluent interface for configuring the <see cref="GaugeLinearPointer{T}"/>.
     /// </summary>
     public class GaugeLinearPointerBuilder<T> : IHideObjectMembers where T : struct
     {
         private readonly GaugeLinearPointer<T> pointer;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GaugeLinearPointerBuilder" /> class.
+        /// Initializes a new instance of the <see cref="GaugeLinearPointerBuilder{T}" /> class.
         /// </summary>
         /// <param name="pointer">The gauge pointer.</param>
         public GaugeLinearPointerBuilder(GaugeLinearPointer<T> pointer)

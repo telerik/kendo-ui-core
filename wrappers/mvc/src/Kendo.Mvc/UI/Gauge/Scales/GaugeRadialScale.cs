@@ -6,7 +6,7 @@ namespace Kendo.Mvc.UI
     public class GaugeRadialScale<T> : GaugeScaleBase<T>, IRadialScale<T> where T : struct
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="GaugeRadialScale" /> class.
+        /// Initializes a new instance of the <see cref="GaugeRadialScale{T}" /> class.
         /// </summary>
         /// <value>The radial gauge.</value>
         public GaugeRadialScale(RadialGauge<T> gauge)
