@@ -1177,6 +1177,81 @@
         return date;
     }
 
+    var DateCategoryAxis = CategoryAxis.extend({
+        init: function(options) {
+            var axis = this;
+
+            options = options || {};
+
+            deepExtend(options, {
+                min: toDate(options.min),
+                max: toDate(options.max),
+                axisCrossingValue: toDate(options.axisCrossingValue)
+            });
+
+            options = axis.applyDefaults(options);
+
+            CategoryAxis.fn.init.call(axis, options);
+
+            axis.groupCategories();
+        },
+
+        options: {
+            labels: {
+                dateFormats: {
+                    hours: "HH:mm",
+                    days: "M/d",
+                    months: "MMM 'yy",
+                    years: "yyyy"
+                }
+            }
+        },
+
+        applyDefaults: function(options) {
+            var chart = this,
+                categories = options.categories,
+                count = categories.length,
+                baseUnit,
+                categoryIx,
+                currentCategory,
+                lastCategory,
+                minInterval = MAX_VALUE;
+
+            for (categoryIx = 0; categoryIx < count; categoryIx++) {
+                currentCategory = toTime(categories[categoryIx]);
+
+                if (currentCategory && lastCategory) {
+                    minInterval = math.min(
+                        currentCategory - lastCategory, minInterval
+                    );
+                }
+
+                lastCategory = currentCategory;
+            }
+
+            return {
+                baseUnit: timeUnit(minInterval)
+            };
+        },
+
+        groupCategories: function() {
+            var chart = this,
+                options = chart.options,
+                categories = options.categories,
+                baseUnit = options.baseUnit,
+                start = floorDate(toTime(categories[0]), baseUnit),
+                end = ceilDate(toTime(last(categories)), baseUnit),
+                date,
+                groups = [];
+
+            for (date = start; date <= end; date = addDuration(date, 1, baseUnit)) {
+                groups.push(date);
+            }
+
+            options.categories = groups;
+        }
+    });
+
     var DateValueAxis = Axis.extend({
         init: function(seriesMin, seriesMax, options) {
             var axis = this;
@@ -1196,7 +1271,6 @@
 
         options: {
             labels: {
-                // TODO: Consider other names
                 dateFormats: {
                     hours: "HH:mm",
                     days: "M/d",
