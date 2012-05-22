@@ -229,6 +229,7 @@
     *                         minorVersion: "0.0",  // Minor OS versions
     *                         flatVersion: "500",   // Flat OS version for easier comparison
     *                         appMode: false        // Whether running in browser or in AppMode/PhoneGap/Titanium.
+    *                         tablet: "ipad"        // If a tablet - tablet name or false for a phone.
     *                    }
     *      });
     * </script>
