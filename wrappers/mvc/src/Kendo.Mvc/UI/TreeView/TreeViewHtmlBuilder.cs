@@ -19,8 +19,7 @@ namespace Kendo.Mvc.UI
 
             if (Component.Items.Count > 0)
             {
-                ListTag().ToggleClass(UIPrimitives.TreeView.Lines, Component.ShowLines)
-                    .AppendTo(div);
+                ListTag().AppendTo(div);
             }
 
             return div;

@@ -42,17 +42,11 @@ namespace Kendo.Mvc.UI
 
             ClientEvents = new TreeViewClientEvents();
 
-            DragAndDrop = new TreeViewDragAndDropSettings();
-
-            DataBinding = new TreeViewDataBindingConfiguration();
-            Ajax = DataBinding.Ajax;
-            WebService = DataBinding.WebService;
+            this.DragAndDrop = false;
 
             //defaultEffects.Each(el => Effects.Container.Add(el));
 
             Items = new LinkedObjectCollection<TreeViewItem>(null);
-
-            ShowLines = true;
 
             SelectedIndex = -1;
             SecurityTrimming = true;
@@ -120,17 +114,7 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Gets or sets a value indicating whether all the item is expanded.
         /// </summary>
-        /// <value><c>true</c> if expand all is enabled; otherwise, <c>false</c>. The default value is <c>false</c></value>
-        public bool ShowLines
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether all the item is expanded.
-        /// </summary>
-        /// <value><c>true</c> if expand all is enabled; otherwise, <c>false</c>. The default value is <c>false</c></value>
+        /// <value><c>true</c> if checkboxes are visible; otherwise, <c>false</c>. The default value is <c>false</c></value>
         public bool ShowCheckBox
         {
             get;
@@ -155,34 +139,7 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        public TreeViewDataBindingConfiguration DataBinding
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// Gets the ajax configuration.
-        /// </summary>
-        public TreeViewBindingSettings Ajax
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// Gets the web service configuration
-        /// </summary>
-        public TreeViewBindingSettings WebService
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// Gets the drag & drop configuration
-        /// </summary>
-        public TreeViewDragAndDropSettings DragAndDrop
+        public bool DragAndDrop
         {
             get;
             set;
@@ -190,7 +147,7 @@ namespace Kendo.Mvc.UI
 
         public override void WriteInitializationScript(TextWriter writer)
         {
-            IClientSideObjectWriter objectWriter = ClientSideObjectWriterFactory.Create(Id, "tTreeView", writer);
+            IClientSideObjectWriter objectWriter = ClientSideObjectWriterFactory.Create(Id, "kendoTreeView", writer);
             objectWriter.Start();
 
             //if (!defaultEffects.SequenceEqual(Effects.Container))
@@ -198,63 +155,24 @@ namespace Kendo.Mvc.UI
             //    objectWriter.Serialize("effects", Effects);
             //}
 
-            if (!ShowLines)
-            {
-                objectWriter.Append("showLines", ShowLines);
-            }
-
             if (ShowCheckBox)
             {
                 objectWriter.Append("showCheckBox", ShowCheckBox);
             }
 
-            if (DragAndDrop.Enabled)
+            if (DragAndDrop)
             {
-                if (DragAndDrop.DropTargets.HasValue())
-                {
-                    var dragAndDropOptions = new Dictionary<string, string>();
-
-                    dragAndDropOptions["dropTargets"] = DragAndDrop.DropTargets;
-
-                    objectWriter.AppendObject("dragAndDrop", dragAndDropOptions);
-                }
-                else
-                {
-                    objectWriter.Append("dragAndDrop", true);
-                }
+                objectWriter.Append("dragAndDrop", true);
             }
 
-            if (Ajax.Enabled)
-            {
-                Dictionary<string, string> ajax = new Dictionary<string, string>();
-
-                ajax["selectUrl"] = UrlGenerator.Generate(ViewContext.RequestContext, Ajax.Select);
-
-                objectWriter.AppendObject("ajax", ajax);
-            }
-
-            if (WebService.Enabled)
-            {
-                Dictionary<string, string> webService = new Dictionary<string, string>();
-
-                webService["selectUrl"] = UrlGenerator.Generate(ViewContext.RequestContext, WebService.Select.Url);
-
-                objectWriter.AppendObject("ws", webService);
-            }
-
-            objectWriter.AppendClientEvent("onExpand", ClientEvents.OnExpand);
-            objectWriter.AppendClientEvent("onCollapse", ClientEvents.OnCollapse);
-            objectWriter.AppendClientEvent("onSelect", ClientEvents.OnSelect);
-            objectWriter.AppendClientEvent("onLoad", ClientEvents.OnLoad);
-            objectWriter.AppendClientEvent("onError", ClientEvents.OnError);
-            objectWriter.AppendClientEvent("onChecked", ClientEvents.OnChecked);
-            objectWriter.AppendClientEvent("onNodeDragStart", ClientEvents.OnNodeDragStart);
-            objectWriter.AppendClientEvent("onNodeDragging", ClientEvents.OnNodeDragging);
-            objectWriter.AppendClientEvent("onNodeDragCancelled", ClientEvents.OnNodeDragCancelled);
-            objectWriter.AppendClientEvent("onNodeDrop", ClientEvents.OnNodeDrop);
-            objectWriter.AppendClientEvent("onNodeDropped", ClientEvents.OnNodeDropped);
-            objectWriter.AppendClientEvent("onDataBinding", ClientEvents.OnDataBinding);
-            objectWriter.AppendClientEvent("onDataBound", ClientEvents.OnDataBound);
+            objectWriter.AppendClientEvent("expand", ClientEvents.OnExpand);
+            objectWriter.AppendClientEvent("collapse", ClientEvents.OnCollapse);
+            objectWriter.AppendClientEvent("select", ClientEvents.OnSelect);
+            objectWriter.AppendClientEvent("dragstart", ClientEvents.OnDragStart);
+            objectWriter.AppendClientEvent("drag", ClientEvents.OnDrag);
+            objectWriter.AppendClientEvent("dragcancelled", ClientEvents.OnDragCancelled);
+            objectWriter.AppendClientEvent("drop", ClientEvents.OnDrop);
+            objectWriter.AppendClientEvent("dragend", ClientEvents.OnDragEnd);
 
             objectWriter.Complete();
             base.WriteInitializationScript(writer);
@@ -394,21 +312,6 @@ namespace Kendo.Mvc.UI
             }
 
             item.Items.Each(HighlightSelectedItem);
-        }
-
-        public override void VerifySettings()
-        {
-            base.VerifySettings();
-
-            if (Ajax.Enabled && WebService.Enabled)
-            {
-                throw new NotSupportedException(TextResource.CannotUseAjaxAndWebServiceAtTheSameTime);
-            }
-
-            if (WebService.Enabled && string.IsNullOrEmpty(WebService.Select.Url))
-            {
-                throw new ArgumentException(TextResource.WebServiceUrlRequired);
-            }
         }
     }
 }
