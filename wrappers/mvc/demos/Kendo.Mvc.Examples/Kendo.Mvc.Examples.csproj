@@ -91,7 +91,6 @@
     <Compile Include="Controllers\SuiteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TreeView\EventsController.cs" />
-    <Compile Include="Controllers\TreeView\TemplatesController.cs" />
     <Compile Include="Controllers\TreeView\ImagesController.cs" />
     <Compile Include="Controllers\TreeView\DragDropController.cs" />
     <Compile Include="Controllers\TreeView\IndexController.cs" />
@@ -240,7 +239,6 @@
     <Content Include="Areas\razor\Views\treeview\index.cshtml" />
     <Content Include="Areas\razor\Views\treeview\dragdrop.cshtml" />
     <Content Include="Areas\razor\Views\treeview\images.cshtml" />
-    <Content Include="Areas\razor\Views\treeview\templates.cshtml" />
     <Content Include="Areas\razor\Views\treeview\events.cshtml" />
     <Content Include="Areas\razor\Views\grid\customserverbinding.cshtml" />
     <None Include="Models\Northwind.dbml">
