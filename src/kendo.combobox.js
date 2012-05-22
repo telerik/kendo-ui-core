@@ -907,6 +907,10 @@
                 idx;
 
             if (value !== undefined) {
+                if (value !== null) {
+                    value = value.toString();
+                }
+
                 if (value && that._valueOnFetch(value)) {
                     return;
                 }

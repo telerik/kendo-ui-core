@@ -282,6 +282,18 @@
                 equal(dropdownlist.dataSource.calls("fetch"), 1);
             });
 
+            test("value method with 0 argument calls dataSource.fetch if no data", function() {
+                var dropdownlist = new DropDownList(input);
+
+                stub(dropdownlist.dataSource, {
+                    fetch: dropdownlist.dataSource.fetch
+                });
+
+                dropdownlist.value(0);
+
+                equal(dropdownlist.dataSource.calls("fetch"), 1);
+            });
+
             test("value('') clears selection and do not fetch", function() {
                 var dropdownlist = new DropDownList(input);
 
