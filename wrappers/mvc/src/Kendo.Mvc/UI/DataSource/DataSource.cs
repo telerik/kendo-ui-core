@@ -17,7 +17,8 @@ namespace Kendo.Mvc.UI
             Groups = new List<GroupDescriptor>();
             Aggregates = new List<AggregateDescriptor>();
 
-            Schema = new DataSourceSchema(); 
+            Schema = new DataSourceSchema();
+            Type = DataSourceType.Server;
 
             ServerPaging = ServerSorting = ServerGrouping = ServerFiltering = ServerAggregates = true;
         }
@@ -39,6 +40,7 @@ namespace Kendo.Mvc.UI
             if (PageSize > 0)
             {
                 json["pageSize"] = PageSize;
+                json["page"] = Page;
                 json["total"] = Total;
             }
 
@@ -186,7 +188,7 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        public void Process(DataSourceRequest request)
+        public void Process(DataSourceRequest request, bool processData)
         {
             if (request.Sorts == null)
             {
@@ -235,23 +237,34 @@ namespace Kendo.Mvc.UI
                 Filters.Clear();
             }
 
-            // Check if the data has been initially set
             if (Data != null)
             {
-                var result = Data.AsQueryable().ToDataSource(request);
-
-                Page = request.Page;
-                Data = result.Data;
-                Total = result.Total;
-
-                if (Total == 0 || PageSize == 0)
+                if (processData)
                 {
-                    TotalPages = 1;
+                    var result = Data.AsQueryable().ToDataSource(request);
+
+                    Data = result.Data;
+                    Total = result.Total;
                 }
                 else
                 {
-                    TotalPages = (Total + PageSize - 1) / PageSize;
+                    var wrapper = Data as IGridCustomGroupingWrapper;
+                    if (wrapper != null)
+                    {
+                        Data = wrapper.GroupedEnumerable.AsGenericEnumerable();
+                    }
                 }
+            }
+
+            Page = request.Page;
+
+            if (Total == 0 || PageSize == 0)
+            {
+                TotalPages = 1;
+            }
+            else
+            {
+                TotalPages = (Total + PageSize - 1) / PageSize;
             }
         }
     }

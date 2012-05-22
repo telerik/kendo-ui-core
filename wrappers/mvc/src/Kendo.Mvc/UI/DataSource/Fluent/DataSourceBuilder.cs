@@ -26,6 +26,13 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        public DataSourceBuilder<TModel> Total(int total)
+        {
+            dataSource.Total = total;
+
+            return this;
+        }
+
         public DataSourceBuilder<TModel> Update(Action<CrudOperationBuilder> configurator)
         {
             configurator(new CrudOperationBuilder(dataSource.Transport.Update, viewContext, urlGenerator));
