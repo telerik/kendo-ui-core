@@ -79,6 +79,7 @@
             Widget.fn.init.call(that, element, options);
 
             element = that.element;
+            options = that.options;
 
             element.wrap(WRAPPER).addClass("km-popup").show();
 
@@ -87,15 +88,15 @@
             that.dimensions = DIMENSIONS[axis];
 
             that.wrapper = element.parent().css({
-                width: that.options.width,
-                height: that.options.height
-            }).addClass("km-popup-wrapper km-" + that.options.direction).hide();
+                width: options.width,
+                height: options.height
+            }).addClass("km-popup-wrapper km-" + options.direction).hide();
 
             that.arrow = $(ARROW).prependTo(that.wrapper).hide();
 
             that.overlay = $(OVERLAY).appendTo(container).hide();
 
-            that.popup = new kendo.ui.Popup(that.wrapper, $.extend(true, popupOptions, ANIMATION, DIRECTIONS[that.options.direction]));
+            that.popup = new kendo.ui.Popup(that.wrapper, $.extend(true, popupOptions, ANIMATION, DIRECTIONS[options.direction]));
         },
 
         options: {
