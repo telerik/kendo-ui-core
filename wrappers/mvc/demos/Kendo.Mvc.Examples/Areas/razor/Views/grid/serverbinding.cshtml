@@ -1,4 +1,6 @@
-@(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.Product>()    
+@model IEnumerable<Kendo.Mvc.Examples.Models.Product>
+
+@(Html.Kendo().Grid(Model)    
     .Name("Grid")
     .Columns(columns => {
         columns.Bound(p => p.ProductID).Groupable(false);
@@ -12,7 +14,7 @@
     .Filterable()
     .Groupable()
     .DataSource(dataSource => dataSource
-        .Type(DataSourceType.Ajax)
-        .Read(read => read.Action("AjaxBinding_Read", "Grid"))
+        .Type(DataSourceType.Server)
+        .Read(read => read.Action("ServerBinding", "Grid"))
      )
 )
