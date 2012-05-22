@@ -55,11 +55,11 @@ namespace Kendo.Mvc.UI.Html
             if ((style & GridPagerStyles.NextPrevious) != GridPagerStyles.NextPrevious) 
                 return;
 
-            buttonFactory.CreateButton(GridPagerButtonType.Icon, "next", currentPage < pageCount,
-                                       GetUrl(urlBuilder, currentPage + 1)).AppendTo(container);
+            buttonFactory.CreateButton(GridPagerButtonType.Icon, currentPage < pageCount,
+                                       GetUrl(urlBuilder, currentPage + 1), "next", currentPage + 1).AppendTo(container);
 
-            buttonFactory.CreateButton(GridPagerButtonType.Icon, "last", currentPage < pageCount,
-                                       GetUrl(urlBuilder, pageCount)).AppendTo(container);
+            buttonFactory.CreateButton(GridPagerButtonType.Icon, currentPage < pageCount,
+                                       GetUrl(urlBuilder, pageCount),"last", pageCount).AppendTo(container);
         }
 
         private void AppendNumericSection(IHtmlNode container, GridPagerStyles style, IGridUrlBuilder urlBuilder, int currentPage, int pageCount)
@@ -75,11 +75,11 @@ namespace Kendo.Mvc.UI.Html
             if ((style & GridPagerStyles.NextPrevious) != GridPagerStyles.NextPrevious) 
                 return;
 
-            buttonFactory.CreateButton(GridPagerButtonType.Icon, "first", currentPage > 1,
-                                       GetUrl(urlBuilder, 1)).AppendTo(container);
+            buttonFactory.CreateButton(GridPagerButtonType.Icon, currentPage > 1,
+                                       GetUrl(urlBuilder, 1), "first", 1).AppendTo(container);
 
-            buttonFactory.CreateButton(GridPagerButtonType.Icon, "prev", currentPage > 1,
-                                       GetUrl(urlBuilder, currentPage - 1)).AppendTo(container);
+            buttonFactory.CreateButton(GridPagerButtonType.Icon, currentPage > 1,
+                                       GetUrl(urlBuilder, currentPage - 1), "previous", currentPage -1).AppendTo(container);
         }
 
         private string GetUrl(IGridUrlBuilder urlBuilder, int page)

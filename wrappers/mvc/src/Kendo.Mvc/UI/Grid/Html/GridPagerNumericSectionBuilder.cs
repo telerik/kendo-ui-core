@@ -24,19 +24,19 @@ namespace Kendo.Mvc.UI.Html
             var numericStart = CalculateStartIndex(currentPage);
             var numericEnd = CalculateEndIndex(numericStart, pageCount);
 
-//            AppendPrevButtonsLink(numericStart, numericDiv, urlBuilder);
+            AppendPrevButtonsLink(numericStart, numericDiv, urlBuilder);
 
             AppendNumericButtons(urlBuilder, currentPage, numericStart, numericDiv, numericEnd);
 
- //           AppendNextButtonsLink(pageCount, numericDiv, numericEnd, urlBuilder);
+            AppendNextButtonsLink(pageCount, numericDiv, numericEnd, urlBuilder);
         }
 
         private void AppendNumericButtons(IGridUrlBuilder urlBuilder, int currentPage, int numericStart, IHtmlNode numericDiv, int numericEnd)
         {
             for (var page = numericStart; page <= numericEnd; page++)
             {
-                buttonFactory.CreateButton(GridPagerButtonType.NumericLink, page.ToString(), page != currentPage,
-                                           GetUrl(urlBuilder, page)).AppendTo(numericDiv);
+                buttonFactory.CreateButton(GridPagerButtonType.NumericLink,  page != currentPage,
+                                           GetUrl(urlBuilder, page), page.ToString(), page).AppendTo(numericDiv);
             }
         }
 
@@ -44,8 +44,8 @@ namespace Kendo.Mvc.UI.Html
         {
             if (numericEnd < pageCount)
             {
-                buttonFactory.CreateButton(GridPagerButtonType.NumericLink, "...", true,
-                                           GetUrl(urlBuilder, numericEnd + 1)).AppendTo(numericDiv);
+                buttonFactory.CreateButton(GridPagerButtonType.NumericLink, true,
+                                           GetUrl(urlBuilder, numericEnd + 1), "...", numericEnd + 1).AppendTo(numericDiv);
             }
         }
 
@@ -53,8 +53,8 @@ namespace Kendo.Mvc.UI.Html
         {
             if (numericStart > 1)
             {
-                buttonFactory.CreateButton(GridPagerButtonType.NumericLink, "...", true,
-                                           GetUrl(urlBuilder, numericStart - 1)).AppendTo(numericDiv);
+                buttonFactory.CreateButton(GridPagerButtonType.NumericLink, true,
+                                           GetUrl(urlBuilder, numericStart - 1), "...", numericStart - 1).AppendTo(numericDiv);
             }
         }
 
