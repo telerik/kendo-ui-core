@@ -945,6 +945,7 @@ namespace Kendo.Mvc.UI
             if (this.PrefixUrlParameters)
             {
                 binder.Prefix = Name;
+                DataSource.Transport.Prefix = Name + "-";
             }
 
             var controller = ViewContext.Controller;

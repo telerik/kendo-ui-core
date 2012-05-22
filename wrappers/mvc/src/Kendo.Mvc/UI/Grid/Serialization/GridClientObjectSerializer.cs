@@ -104,6 +104,7 @@ namespace Kendo.Mvc.UI
 
             //TODO: No records template
             //writer.Append("noRecordsTemplate", grid.NoRecordsTemplate);                
+
             writer.AppendObject("dataSource", grid.DataSource.ToJson());
 
             writer.Append("autoBind", autoBind);
