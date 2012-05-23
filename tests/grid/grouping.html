@@ -209,7 +209,7 @@
                 equal(headerCells.length, 2);
             });
 
-            test("collapseGroup hides all grop data rows", function() {
+            test("collapseGroup hides all group data rows", function() {
                 var grid = new Grid(table(), {
                     dataSource:[{foo: "foo", bar: "bar"}, {foo: "fooz", bar: "baz"}],
                     groupable: true
@@ -459,6 +459,20 @@
                 grid.collapseGroup(grid.table.find("tr.k-grouping-row").eq(1));
 
                 equal(grid.table.find("tr.k-group-footer:visible").length, 1);
+            });
+
+            test("collapse master group hides parent footer", function() {
+                var grid = new Grid(table(), {
+                    dataSource: {
+                        data: [{foo: "1", bar: "bar"}],
+                        group: [{ field: "foo", aggregates: [ { field: "foo", aggregate: "count" },{ field: "bar", aggregate: "count" } ]}, { field: "bar", aggregates: [ { field: "foo", aggregate: "count" },{ field: "bar", aggregate: "count" } ]}]
+                    },
+                    columns: [{ field: "foo", groupFooterTemplate: "foo" }, "bar"]
+                });
+
+                grid.collapseGroup(grid.table.find("tr.k-grouping-row").eq(0));
+
+                equal(grid.table.find("tr.k-group-footer:visible").length, 0);
             });
 
             test("items skips the group footer rows", function() {
