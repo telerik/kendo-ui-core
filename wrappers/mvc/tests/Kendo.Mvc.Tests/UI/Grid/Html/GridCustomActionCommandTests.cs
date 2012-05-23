@@ -22,7 +22,7 @@ namespace Kendo.Mvc.UI
 
             localization = new Mock<IGridLocalization>();
             urlBuilder = new Mock<IGridUrlBuilder>();
-            urlBuilder.Setup(u => u.GetDataKeys()).Returns(new IGridDataKey[0]).Verifiable();
+            urlBuilder.Setup(u => u.GetDataKeys()).Returns(new IDataKey[0]).Verifiable();
             htmlHelper = new Mock<IGridHtmlHelper>();
         }
 

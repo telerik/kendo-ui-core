@@ -101,6 +101,14 @@ namespace Kendo.Mvc.UI
             json["schema"] = Schema.ToJson();
         }
 
+        public bool IsClientOperationMode
+        {
+            get {
+                return Type == DataSourceType.Ajax &&
+                    !(ServerPaging && ServerSorting && ServerGrouping && ServerFiltering && ServerAggregates);
+            }
+        }
+
         public void ModelType(Type modelType)
         {
             Schema.Model = new ModelDescriptor(modelType);

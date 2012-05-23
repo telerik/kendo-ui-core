@@ -4,6 +4,10 @@
     using Kendo.Mvc.UI;
     using Kendo.Mvc.UI.Fluent;
     using Moq;
+    using System.Linq.Expressions;
+    using System;
+    using Kendo.Mvc.UI.Tests;
+    using System.Data;
 
     public class DataSourceBuilderTests
     {
@@ -106,6 +110,48 @@
 
             dataSource.Groups[1].Member.ShouldEqual("Text");            
             dataSource.Groups[1].SortDirection.ShouldEqual(System.ComponentModel.ListSortDirection.Descending);
+        }
+
+        [Fact]
+        public void Should_add_data_keys()
+        {
+            Expression<Func<TestObject, int>> expression = c => c.ID;
+
+            dataSource.ModelType(typeof(TestObject));
+            builder.Model(model => model.Id(expression));
+
+            ((GridDataKey<TestObject, int>)dataSource.Schema.Model.Id).Expression.ShouldBeSameAs(expression);            
+            dataSource.Schema.Model.Id.RouteKey.ShouldEqual("ID");            
+        }
+
+
+        [Fact]
+        public void Should_add_data_key_by_name()
+        {            
+            const string expectedFieldName = "ID";
+
+            dataSource.ModelType(typeof(TestObject));
+
+            builder.Model(model => model.Id(expectedFieldName));
+
+            var firstDataKey = (GridDataKey<TestObject, int>)dataSource.Schema.Model.Id;
+            
+            firstDataKey.Expression.ShouldNotBeNull();
+            firstDataKey.Name.ShouldEqual(expectedFieldName);
+        }
+
+        [Fact]
+        public void Should_add_data_key_by_name_if_bound_to_DataRowViews()
+        {
+            dataSource.ModelType(typeof(DataRowView));
+
+            var builder = new DataSourceBuilder<DataRowView>(dataSource, TestHelper.CreateViewContext(), new Mock<IUrlGenerator>().Object);
+            
+            const string expectedFieldName = "Id";
+
+            builder.Model(model => model.Id(expectedFieldName));            
+
+            dataSource.Schema.Model.Id.Name.ShouldEqual(expectedFieldName);
         }
     }
 }

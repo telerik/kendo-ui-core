@@ -326,6 +326,7 @@
     <Compile Include="UI\DataSource\Fluent\DataSourceModelDescriptorFactory.cs" />
     <Compile Include="UI\DataSource\Fluent\DataSourceAggregateDescriptorFactory.cs" />
     <Compile Include="UI\DataSource\Fluent\CrudOperationBuilder.cs" />
+    <Compile Include="UI\DataSource\IDataKey.cs" />
     <Compile Include="UI\DataSource\ModelFieldDescriptor.cs" />
     <Compile Include="UI\DataSource\Fluent\ReadOnlyDataSourceBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\DataSourceBuilder.cs" />
@@ -487,10 +488,8 @@
     <Compile Include="UI\Grid\Commands\GridCustomCommandBase.cs" />
     <Compile Include="UI\Grid\Fluent\GridToolBarSubmitChangesCommandBuilder.cs" />
     <Compile Include="UI\Grid\Fluent\GridColumnContextMenuSettingsBuilder.cs" />
-    <Compile Include="UI\Grid\Fluent\GridAjaxBindingSettingsBuilder.cs" />
     <Compile Include="UI\Grid\Fluent\GridCustomActionCommandBuilder.cs" />
     <Compile Include="UI\Grid\Fluent\GridKeyboardNavigationSettingsBuilder.cs" />
-    <Compile Include="UI\Grid\Fluent\GridServerBindingSettingsBuilder.cs" />
     <Compile Include="UI\Grid\GridActionResultAdapterFactory.cs" />
     <Compile Include="UI\Grid\AggregateDescriptor.cs" />
     <Compile Include="UI\Grid\GridBeginEditEvent.cs" />
@@ -877,17 +876,12 @@
     <Compile Include="UI\Grid\Commands\GridEditActionCommand.cs" />
     <Compile Include="UI\Grid\Fluent\GridEditActionCommandBuilder.cs" />
     <Compile Include="UI\Grid\Fluent\GridSelectActionCommandBuilder.cs" />
-    <Compile Include="UI\Grid\Settings\GridDataBindingSettings.cs" />
-    <Compile Include="UI\Grid\Settings\GridBindingSettings.cs" />
-    <Compile Include="UI\Grid\Fluent\GridBindingSettingsBuilder.cs" />
-    <Compile Include="UI\Grid\Fluent\GridDataBindingConfigurationBuilder.cs" />
     <Compile Include="UI\Grid\GridDataKey.cs" />
     <Compile Include="UI\Grid\Fluent\GridDataKeyBuilder.cs" />
     <Compile Include="UI\Grid\GridState.cs" />
     <Compile Include="UI\Grid\Settings\GridEditingSettings.cs" />
     <Compile Include="UI\Grid\Fluent\GridDataKeyFactory.cs" />
     <Compile Include="UI\Grid\GridViewDataContainer.cs" />
-    <Compile Include="UI\Grid\Fluent\GridWebServiceBindingSettingsBuilder.cs" />
     <Compile Include="UI\INavigationHtmlBuilder.cs" />
     <Compile Include="UI\INavigationItemComponent.cs" />
     <Compile Include="UI\TextBox\Fluent\NumericTextBoxBuilder.cs" />
@@ -922,8 +916,6 @@
     <Compile Include="UI\DatePicker\Html\DatePickerHtmlBuilder.cs" />
     <Compile Include="UI\ContentNavigationItemBuilder.cs" />
     <Compile Include="UI\Grid\GridActionBindingContext.cs" />
-    <Compile Include="UI\Grid\Settings\GridAjaxSettings.cs" />
-    <Compile Include="UI\Grid\Fluent\GridAjaxSettingsBuilder.cs" />
     <Compile Include="UI\Grid\GridBindingContextExtensions.cs" />
     <Compile Include="UI\Grid\Columns\GridBoundColumn.cs" />
     <Compile Include="UI\Grid\Fluent\GridBoundColumnBuilder.cs" />
@@ -950,7 +942,6 @@
     <Compile Include="UI\Grid\GridUrlParameters.cs" />
     <Compile Include="UI\Grid\GridModel.cs" />
     <Compile Include="UI\Grid\Settings\GridWebServiceSettings.cs" />
-    <Compile Include="UI\Grid\Fluent\GridWebServiceSettingsBuilder.cs" />
     <Compile Include="UI\Grid\IGridBindingContext.cs" />
     <Compile Include="UI\Effects\AnimationDuration.cs" />
     <Compile Include="UI\IAsyncContentContainer.cs" />

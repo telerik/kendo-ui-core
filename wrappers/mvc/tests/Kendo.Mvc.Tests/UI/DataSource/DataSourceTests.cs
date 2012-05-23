@@ -216,7 +216,8 @@
 
             groups.ElementAt(1)["field"].ShouldEqual("Bar");
             groups.ElementAt(1)["dir"].ShouldEqual("asc");
-        }
+        }                
+
         /*
                 [Fact]
                 public void ToJson_group_aggregates_are_serialized()

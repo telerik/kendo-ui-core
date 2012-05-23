@@ -41,7 +41,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
         {
             ConfigureEditing(g =>
             {
-                g.Ajax.Enabled = true;
+                g.DataSource.Type = DataSourceType.Ajax;
                 grid.Columns.Add(new GridActionColumn<Customer>(grid)
                 {
                     Commands =
@@ -57,7 +57,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
         {
             ConfigureEditing(g =>
             {
-                g.Ajax.Enabled = true;
+                g.DataSource.Type = DataSourceType.Ajax;
                 grid.Columns.Add(new GridActionColumn<Customer>(grid)
                 {
                     Commands =
@@ -73,55 +73,10 @@ namespace Kendo.Mvc.UI.Tests.Grid
         {
             ConfigureEditing(g =>
             {
-                g.Ajax.Enabled = true;
+                g.DataSource.Type = DataSourceType.Ajax;
                 g.ToolBar.Commands.Add(new GridToolBarInsertCommand<Customer>());
             });
-        }
-
-        [Fact]
-        public void Should_throw_if_data_binding_is_not_configured_for_edit_command_web_service()
-        {
-            ConfigureEditing(g =>
-            {
-                g.WebService.Enabled = true;
-                g.WebService.Select.Url = "#";
-                grid.Columns.Add(new GridActionColumn<Customer>(grid)
-                {
-                    Commands =
-                    {
-                        new GridEditActionCommand()
-                    }
-                });
-            });
-        }
-
-        [Fact]
-        public void Should_throw_if_data_binding_is_not_configured_for_insert_command_web_service()
-        {
-            ConfigureEditing(g =>
-            {
-                g.WebService.Enabled = true;
-                g.WebService.Select.Url = "#";
-                g.ToolBar.Commands.Add(new GridToolBarInsertCommand<Customer>());
-            });
-        }
-
-        [Fact]
-        public void Should_throw_if_data_binding_is_not_configured_for_delete_command_web_service()
-        {
-            ConfigureEditing(g =>
-            {
-                g.WebService.Enabled = true;
-                g.WebService.Select.Url = "#";
-                grid.Columns.Add(new GridActionColumn<Customer>(grid)
-                {
-                    Commands =
-                    {
-                        new GridDeleteActionCommand()
-                    }
-                });
-            });
-        }
+        }        
 
         [Fact]
         public void Should_throw_if_data_binding_is_not_configured_for_edit_command_server()
@@ -170,20 +125,12 @@ namespace Kendo.Mvc.UI.Tests.Grid
             configurator(grid);
 
             Assert.Throws<NotSupportedException>(() => grid.VerifySettings());
-        }
-
-        [Fact]
-        public void Should_throw_when_both_ajax_and_web_service_are_enabled()
-        {
-            grid.Ajax.Enabled = grid.WebService.Enabled = true;
-
-            Assert.Throws<NotSupportedException>(() => grid.VerifySettings());
-        }
+        }        
 
         [Fact]
         public void Should_throw_when_using_templates_and_ajax()
         {
-            grid.Ajax.Enabled = true;
+            grid.DataSource.Type = DataSourceType.Ajax;
             grid.Columns[0].Template = delegate { };
 
             Assert.Throws<NotSupportedException>(() => grid.VerifySettings());
@@ -192,7 +139,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
         [Fact]
         public void Shound_not_throw_when_both_server_and_client_templates_are_set()
         {
-            grid.Ajax.Enabled = true;
+            grid.DataSource.Type = DataSourceType.Ajax;
             grid.Columns[0].Template = delegate { };
             ((IGridBoundColumn)grid.Columns[0]).ClientTemplate = "<#= #>";
 
@@ -202,7 +149,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
         [Fact]
         public void Should_throw_when_using_template_columns_and_ajax()
         {
-            grid.Ajax.Enabled = true;
+            grid.DataSource.Type = DataSourceType.Ajax;
             grid.Columns.Add(new GridTemplateColumn<Customer>(grid, delegate { }));
 
             Assert.Throws<NotSupportedException>(() => grid.VerifySettings());
@@ -211,7 +158,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
         [Fact]
         public void Shound_not_throw_for_template_column_with_client_template_set()
         {
-            grid.Ajax.Enabled = true;
+            grid.DataSource.Type = DataSourceType.Ajax;
 
             grid.Columns.Add(new GridTemplateColumn<Customer>(grid, delegate { })
             {
@@ -219,23 +166,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
             });
 
             Assert.DoesNotThrow(() => grid.VerifySettings());
-        }
-
-        [Fact]
-        public void Should_throw_when_using_templates_and_web_service()
-        {
-            grid.WebService.Enabled = true;
-            grid.Columns[0].Template = delegate { };
-
-            Assert.Throws<NotSupportedException>(() => grid.VerifySettings());
-        }
-
-        [Fact]
-        public void Should_throw_if_web_service_url_is_not_set()
-        {
-            grid.WebService.Enabled = true;
-            Assert.Throws<ArgumentException>(() => grid.VerifySettings());
-        }
+        }        
 
         [Fact]
         public void Should_throw_if_grid_rtl_class_is_set()
@@ -247,7 +178,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
         [Fact]
         public void Should_not_throw_if_binding_mode_is_server_and_server_detailView_template_is_used()
         {
-            grid.Server.Enabled = true;
+            grid.DataSource.Type = DataSourceType.Server;
 
             grid.DetailView = new GridDetailView<Customer>();
             grid.DetailView.Template.Html = "foo";
@@ -257,7 +188,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
         [Fact]
         public void Should_throw_if_binding_mode_is_ajax_and_server_detailView_template_is_used()
         {
-            grid.Ajax.Enabled = true;
+            grid.DataSource.Type = DataSourceType.Ajax;
 
             grid.DetailView = new GridDetailView<Customer>(); 
             grid.DetailView.Template.Html = "foo";            
@@ -267,7 +198,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
         [Fact]
         public void Should_not_throw_if_binding_mode_is_ajax_and_server_detailView_template_is_used_and_client_template_is_set()
         {
-            grid.Ajax.Enabled = true;
+            grid.DataSource.Type = DataSourceType.Ajax;
 
             grid.DetailView = new GridDetailView<Customer>();
             grid.DetailView.Template.Html = "foo";
@@ -296,7 +227,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
         [Fact]
         public void Should_throw_when_using_page_on_scroll_and_server()
         {
-            grid.Server.Enabled = true;
+            grid.DataSource.Type = DataSourceType.Server;
             grid.Paging.Enabled = true;
             grid.Paging.PageOnScroll = true;
 
@@ -306,19 +237,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
         [Fact]
         public void Should_not_throw_when_using_page_on_scroll_and_ajax()
         {
-            grid.Ajax.Enabled = true;
-            grid.Paging.Enabled = true;
-            grid.Paging.PageOnScroll = true;
-            grid.Scrolling.Enabled = true;
-
-            Assert.DoesNotThrow(() => grid.VerifySettings());
-        }
-
-        [Fact]
-        public void Should_not_throw_when_using_page_on_scroll_and_webservice()
-        {
-            grid.WebService.Enabled = true;
-            grid.WebService.Select.Url = "some url";
+            grid.DataSource.Type = DataSourceType.Ajax;
             grid.Paging.Enabled = true;
             grid.Paging.PageOnScroll = true;
             grid.Scrolling.Enabled = true;
@@ -353,7 +272,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
         {
             var grid = GridTestHelper.CreateGrid<Customer>();
             grid.DataKeys.Add(new GridDataKey<Customer, int>(c => c.Id));
-            grid.DataBinding.Ajax.Enabled = true;
+            grid.DataSource.Type = DataSourceType.Ajax;
             grid.Editing.Enabled = true;
             grid.Editing.Mode = GridEditMode.InCell;
             grid.ClientRowTemplate = "foo";
@@ -374,7 +293,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
         {
             grid.Editing.Enabled = true;
             grid.Editing.Mode = GridEditMode.InCell;
-            grid.Ajax.Enabled = true;
+            grid.DataSource.Type = DataSourceType.Ajax;
             grid.DataKeys.Add(new GridDataKey<Customer, int>(c => c.Id));
             grid.ToolBar.Commands.Add(new GridToolBarInsertCommand<Customer>());
 
@@ -386,7 +305,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
         {
             grid.Editing.Enabled = true;
             grid.Editing.Mode = GridEditMode.InCell;
-            grid.Ajax.Enabled = true;
+            grid.DataSource.Type = DataSourceType.Ajax;
             grid.DataKeys.Add(new GridDataKey<Customer, int>(c => c.Id));
             grid.Columns.Add(new GridActionColumn<Customer>(grid)
             {

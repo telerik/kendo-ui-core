@@ -55,7 +55,7 @@ namespace Kendo.Mvc.UI
             PrefixUrlParameters = true;
             RowTemplate = new HtmlTemplate<T>();
             Columns = new List<GridColumnBase<T>>();
-            DataKeys = new List<IGridDataKey<T>>();
+            DataKeys = new List<IDataKey>();
 
             Paging = new GridPagingSettings(this);
             Sorting = new GridSortSettings(this);
@@ -76,9 +76,7 @@ namespace Kendo.Mvc.UI
             Resizing = new GridResizingSettings();
             Reordering = new GridReorderingSettings();
 
-            TableHtmlAttributes = new RouteValueDictionary();
-
-            DataBinding = new GridDataBindingSettings(this);
+            TableHtmlAttributes = new RouteValueDictionary();            
 
             Footer = true;
             IsEmpty = true;
@@ -164,12 +162,6 @@ namespace Kendo.Mvc.UI
             private set;
         }
 
-        public GridDataBindingSettings DataBinding
-        {
-            get;
-            internal set;
-        }
-
         /// <summary>
         /// Gets the selection configuration
         /// </summary>
@@ -179,7 +171,7 @@ namespace Kendo.Mvc.UI
             private set;
         }
 
-        public IList<IGridDataKey<T>> DataKeys
+        internal IList<IDataKey> DataKeys
         {
             get;
             private set;
@@ -436,11 +428,11 @@ namespace Kendo.Mvc.UI
             }
         }
 
-        IEnumerable<IGridDataKey> IGrid.DataKeys
+        IEnumerable<IDataKey> IGrid.DataKeys
         {
             get
             {
-                return DataKeys.Cast<IGridDataKey>();
+                return DataKeys.Cast<IDataKey>();
             }
         }
 
@@ -470,29 +462,7 @@ namespace Kendo.Mvc.UI
         {
             get;
             private set;
-        }
-
-        /// <summary>
-        /// Gets the web service configuration
-        /// </summary>
-        public GridBindingSettings WebService
-        {
-            get
-            {
-                return DataBinding.WebService;
-            }
-        }
-
-        /// <summary>
-        /// Gets the server binding configuration.
-        /// </summary>
-        public GridBindingSettings Server
-        {
-            get
-            {
-                return DataBinding.Server;
-            }
-        }
+        }        
 
         /// <summary>
         /// Gets the scrolling configuration.
@@ -519,18 +489,7 @@ namespace Kendo.Mvc.UI
         {
             get;
             private set;
-        }
-
-        /// <summary>
-        /// Gets the ajax configuration.
-        /// </summary>
-        public GridBindingSettings Ajax
-        {
-            get
-            {
-                return DataBinding.Ajax;
-            }
-        }
+        }    
 
         public IUrlGenerator UrlGenerator
         {
@@ -760,7 +719,7 @@ namespace Kendo.Mvc.UI
             IEnumerable dataSource = DataSource.Data;
             var dataTableEnumerable = dataSource as GridDataTableWrapper;
 
-            var serverOperationMode = !DataBinding.IsClientOperationMode;
+            var serverOperationMode = !DataSource.IsClientOperationMode;
 
             if (serverOperationMode)
             {
@@ -954,6 +913,11 @@ namespace Kendo.Mvc.UI
             var request = (DataSourceRequest)binder.BindModel(controller.ControllerContext, bindingContext);
 
             DataSource.Process(request, !EnableCustomBinding);
+
+            if (DataSource.Schema.Model.Id != null)
+            {
+                DataKeys.Add(DataSource.Schema.Model.Id);
+            }
         }
 
         private GridRenderingData CreateRenderingData()
@@ -1151,7 +1115,7 @@ namespace Kendo.Mvc.UI
         {
             get
             {
-                return Ajax.Enabled || WebService.Enabled;
+                return DataSource.Type == DataSourceType.Ajax;                
             }
         }
         
@@ -1160,11 +1124,6 @@ namespace Kendo.Mvc.UI
             base.VerifySettings();
             
             this.ThrowIfClassIsPresent("k-grid-rtl", TextResource.Rtl);
-
-            if (Ajax.Enabled && WebService.Enabled)
-            {
-                throw new NotSupportedException(TextResource.CannotUseAjaxAndWebServiceAtTheSameTime);
-            }
 
             if (IsClientBinding)
             {
@@ -1197,11 +1156,6 @@ namespace Kendo.Mvc.UI
                 }
             }           
 
-            if (WebService.Enabled && string.IsNullOrEmpty(WebService.Select.Url))
-            {
-                throw new ArgumentException(TextResource.WebServiceUrlRequired);
-            }
-
             if (!DataKeys.Any() && (Editing.Enabled || (Selection.Enabled && !IsClientBinding)))
             {
                 throw new NotSupportedException(TextResource.DataKeysEmpty);
@@ -1211,7 +1165,7 @@ namespace Kendo.Mvc.UI
             {
                 if (HasCommandOfType<GridEditActionCommand>())
                 {
-                    if (!CurrrentBinding.Update.HasValue())
+                    if (!DataSource.Transport.Update.HasValue())
                     {
                         throw new NotSupportedException(TextResource.EditCommandRequiresUpdate);
                     }
@@ -1219,7 +1173,7 @@ namespace Kendo.Mvc.UI
 
                 if (HasCommandOfType<GridDeleteActionCommand>())
                 {
-                    if (!CurrrentBinding.Delete.HasValue() && Editing.Mode != GridEditMode.InCell)
+                    if (!DataSource.Transport.Destroy.HasValue() && Editing.Mode != GridEditMode.InCell)
                     {
                         throw new NotSupportedException(TextResource.DeleteCommandRequiresDelete);
                     }
@@ -1227,7 +1181,7 @@ namespace Kendo.Mvc.UI
 
                 if (HasCommandOfType<GridToolBarInsertCommand<T>>())
                 {
-                    if (!CurrrentBinding.Insert.HasValue() && Editing.Mode != GridEditMode.InCell)
+                    if (!DataSource.Transport.Create.HasValue() && Editing.Mode != GridEditMode.InCell)
                     {
                         throw new NotSupportedException(TextResource.InsertCommandRequiresInsert);
                     }
@@ -1240,7 +1194,7 @@ namespace Kendo.Mvc.UI
                         throw new NotSupportedException(TextResource.BatchUpdatesRequireInCellMode);
                     }
 
-                    if (!CurrrentBinding.Update.HasValue())
+                    if (!DataSource.Transport.Update.HasValue())
                     {
                         throw new NotSupportedException(TextResource.BatchUpdatesRequireUpdate);
                     }
@@ -1248,7 +1202,7 @@ namespace Kendo.Mvc.UI
 
                 if (Editing.Mode == GridEditMode.InCell) 
                 {
-                    if (!Ajax.Enabled && !WebService.Enabled)
+                    if (!IsClientBinding)
                     {
                         throw new NotSupportedException(TextResource.InCellModeNotSupportedInServerBinding);
                     }
@@ -1271,25 +1225,7 @@ namespace Kendo.Mvc.UI
         {
             return Columns.OfType<GridActionColumn<T>>().SelectMany(c => c.Commands).OfType<TCommand>().Any() ||
                 ToolBar.Commands.OfType<TCommand>().Any();
-        }
-
-        private GridBindingSettings CurrrentBinding
-        {
-            get
-            {
-                if (Ajax.Enabled)
-                {
-                    return Ajax;
-                }
-
-                if (WebService.Enabled)
-                {
-                    return WebService;
-                }
-
-                return Server;
-            }
-        }
+        }        
 
         private void InitializeEditors()
         {            
@@ -1345,7 +1281,7 @@ namespace Kendo.Mvc.UI
             {
                 if (dataKeyStore == null)
                 {
-                    var dataKeys = DataKeys.Cast<IGridDataKey>();
+                    var dataKeys = DataKeys.Cast<IDataKey>();
                     var currentKeyValues = DataKeys.Select(key => key.GetCurrentValue(ViewContext.Controller.ValueProvider)).ToArray();
 
                     dataKeyStore = new GridDataKeyStore(dataKeys, currentKeyValues);

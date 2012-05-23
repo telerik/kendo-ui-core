@@ -257,29 +257,29 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
-        /// <summary>
-        /// Defines a list of the private keys.
-        /// </summary>
-        /// <param name="configurator">DataKeys configurator.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid&lt;Order&gt;()
-        ///             .Name("Orders")
-        ///             .DataKeys(keys =>
-        ///             {
-        ///                 keys.Add(c => c.CustomerID);
-        ///             })
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public GridBuilder<T> DataKeys(Action<GridDataKeyFactory<T>> configurator)
-        {
-            Guard.IsNotNull(configurator, "configurator");
+        ///// <summary>
+        ///// Defines a list of the private keys.
+        ///// </summary>
+        ///// <param name="configurator">DataKeys configurator.</param>
+        ///// <example>
+        ///// <code lang="CS">
+        /////  &lt;%= Html.Telerik().Grid&lt;Order&gt;()
+        /////             .Name("Orders")
+        /////             .DataKeys(keys =>
+        /////             {
+        /////                 keys.Add(c => c.CustomerID);
+        /////             })
+        ///// %&gt;
+        ///// </code>
+        ///// </example>
+        //public GridBuilder<T> DataKeys(Action<GridDataKeyFactory<T>> configurator)
+        //{
+        //    Guard.IsNotNull(configurator, "configurator");
 
-            configurator(new GridDataKeyFactory<T>(Component.DataKeys, false));
+        //    configurator(new GridDataKeyFactory<T>(Component.DataKeys, false));
 
-            return this;
-        }
+        //    return this;
+        //}
 
         /// <summary>
         /// Configure when to show footer of the grid.
@@ -601,34 +601,7 @@ namespace Kendo.Mvc.UI.Fluent
             pagerAction(new GridPagerSettingsBuilder(Component.Paging));
 
             return this;
-        }
-
-        /// <summary>
-        /// Use it to configure binding option when performing data operations - paging, sorting and filtering.
-        /// </summary>
-        /// <param name="configurator">Use builder to set different data binding options.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid()
-        ///             .Name("Grid")
-        ///             .DataBinding(dataBinding =>
-        ///             {
-        ///                 dataBinding.Server().Select("FirstLook", "Grid"});
-        ///                 dataBinding.Ajax().Select("_FirstLook", "Grid").Enabled((bool)ViewData["ajax"]);
-        ///             })
-        ///             .Pagealbe()
-        ///             .Sortable();
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public GridBuilder<T> DataBinding(Action<GridDataBindingConfigurationBuilder> configurator)
-        {
-            Guard.IsNotNull(configurator, "configurator");
-
-            configurator(new GridDataBindingConfigurationBuilder(Component.DataBinding));
-
-            return this;
-        }
+        }        
 
         /// <summary>
         /// Allows filtering of the columns.

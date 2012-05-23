@@ -4,7 +4,7 @@ namespace Kendo.Mvc.UI.Html
 
     public static class GridDataKeyExtensions
     {
-        public static string GetCurrentValue(this IGridDataKey dataKey, IValueProvider valueProvider)
+        public static string GetCurrentValue(this IDataKey dataKey, IValueProvider valueProvider)
         {
             var value = valueProvider.GetValue(dataKey.RouteKey);
 
