@@ -53,7 +53,7 @@ namespace Kendo.Mvc.UI.Html.Tests
         [Fact]
         public void Should_render_column_footer_template_if_declared()
         {
-            const string expectedContent = "template content";
+            const string expectedContent = "template Content";
 
             var template = new HtmlTemplate<GridAggregateResult>
                                {

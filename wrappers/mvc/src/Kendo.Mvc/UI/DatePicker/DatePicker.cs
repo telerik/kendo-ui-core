@@ -1,24 +1,24 @@
 namespace Kendo.Mvc.UI
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.IO;
+    using System.Linq;
+    using System.Web.Mvc;
+    using System.Web.UI;
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.Resources;
     using Kendo.Mvc.UI.Html;
-    
-    using System;
-    using System.IO;
-    using System.Web.Mvc;
-    using System.Web.UI;
-    using System.Globalization;
-    using System.Collections.Generic;
 
     public class DatePicker : ViewComponentBase, IInputComponent<DateTime>
     {
         static internal DateTime defaultMinDate = new DateTime(1900, 1, 1);
         static internal DateTime defaultMaxDate = new DateTime(2099, 12, 31);
 
-        public DatePicker(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory, ViewDataDictionary viewData)
-            : base(viewContext, clientSideObjectWriterFactory, viewData)
+        public DatePicker(ViewContext viewContext, IJavaScriptInitializer initializer, ViewDataDictionary viewData)
+            : base(viewContext, initializer, viewData)
         {
             Format = CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern;
             ParseFormats = new List<string>();
@@ -27,7 +27,7 @@ namespace Kendo.Mvc.UI
             Max = defaultMaxDate;
 
             Animation = new PopupAnimation();
-            ClientEvents = new DatePickerClientEvents();
+            ClientEvents = new Dictionary<string, ClientEvent>();
             MonthTemplate = new MonthTemplate();
 
             Value = null;
@@ -40,7 +40,7 @@ namespace Kendo.Mvc.UI
             private set;
         }
 
-        public DatePickerClientEvents ClientEvents
+        public IDictionary<string, ClientEvent> ClientEvents
         {
             get;
             private set;
@@ -108,29 +108,36 @@ namespace Kendo.Mvc.UI
         
         public override void WriteInitializationScript(TextWriter writer)
         {
-            IClientSideObjectWriter objectWriter = ClientSideObjectWriterFactory.Create(Id, "kendoDatePicker", writer);
+            var options = new Dictionary<string, object>();
 
-            objectWriter.Start();
+            var animation = Animation.ToJson();
 
-            Animation.SerializeTo(objectWriter);
-            ClientEvents.SerializeTo(objectWriter);
-
-            objectWriter.Append("format", this.Format);
-            objectWriter.AppendCollection("parseFormats", this.ParseFormats);
-            
-            objectWriter.Append("min", this.Min);
-            objectWriter.Append("max", this.Max);
-            objectWriter.Append("footer", Footer);
-
-            objectWriter.Append("depth", Depth); //use Enum
-            objectWriter.Append("start", Start); //use Enum
-
-            if (MonthTemplate.content.HasValue() || MonthTemplate.empty.HasValue())
+            if (animation.Keys.Any())
             {
-                objectWriter.AppendObject("month", MonthTemplate);
+                options["animation"] = animation["animation"];
             }
 
-            objectWriter.Complete();
+            if (ClientEvents.Keys.Any())
+            {
+                options["events"] = ClientEvents;
+            }
+
+            options["format"] = Format;
+            options["parseFormats"] = ParseFormats;
+            options["min"] = Min;
+            options["max"] = Max;
+            options["footer"] = Footer;
+            options["depth"] = Depth;
+            options["start"] = Start;
+
+            var month = MonthTemplate.ToJson();
+
+            if (month.Keys.Any())
+            {
+                options["month"] = month;
+            }
+
+            writer.Write(Initializer.Initialize(Id, "DatePicker", options));
 
             base.WriteInitializationScript(writer);
         }

@@ -12,35 +12,19 @@ namespace Kendo.Mvc.Infrastructure
 {
     public class JavaScriptInitializer : IJavaScriptInitializer
     {
+        //Escape meta characters: http://api.jquery.com/category/selectors/
         private static readonly Regex EscapeRegex = new Regex(@"([;&,\.\+\*~'\:\""\!\^\$\[\]\(\)\|\/])", RegexOptions.Compiled);
 
         public virtual string Initialize(string id, string name, IDictionary<string, object> options)
         {
-            var output = new StringBuilder();
-
-            //Escape meta characters: http://api.jquery.com/category/selectors/
-            id = EscapeRegex.Replace(id, @"\\$1");
-
-            output.Append("jQuery(function(){jQuery(\"#")
-                .Append(id)
+            return new StringBuilder().Append("jQuery(function(){jQuery(\"#")
+                .Append(EscapeRegex.Replace(id, @"\\$1"))
                 .Append("\").kendo")
                 .Append(name)
-                .Append("(");
-                  
-            Serialize(output, options);
-
-            output.Append(");});");
-
-            return output.ToString();
-        }
-
-        public virtual string Serialize(IDictionary<string, object> value)
-        {
-            var output = new StringBuilder();
-
-            Serialize(output, value);
-
-            return output.ToString();
+                .Append("(")
+                .Append(Serialize(options))
+                .Append(");});")
+                .ToString();
         }
 
         public virtual IJavaScriptSerializer CreateSerializer()
@@ -48,13 +32,16 @@ namespace Kendo.Mvc.Infrastructure
             return new DefaultJavaScriptSerializer();
         }
 
-        public virtual void Serialize(StringBuilder output, IDictionary<string, object> @object)
+        public virtual string Serialize( IDictionary<string, object> @object)
         {
+            var output = new StringBuilder();
+
             output.Append("{");
 
             foreach (var keyValuePair in @object)
             {
-                output.Append(keyValuePair.Key)
+                output.Append(",")
+                      .Append(keyValuePair.Key)
                       .Append(":");
 
                 var value = keyValuePair.Value;
@@ -128,7 +115,14 @@ namespace Kendo.Mvc.Infrastructure
                 throw new NotSupportedException("Cannot serialize objects of type " + value.GetType());
             }
 
+            if (output.Length >= 2)
+            {
+                output.Remove(1, 1); // Remove the first comma
+            }
+
             output.Append("}");
+
+            return output.ToString();
         }
 
         private void AppendBoolean(StringBuilder output, bool value)

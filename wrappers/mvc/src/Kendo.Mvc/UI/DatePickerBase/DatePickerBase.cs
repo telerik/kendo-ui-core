@@ -11,13 +11,18 @@ namespace Kendo.Mvc.UI
         {
             InputHtmlAttributes = new Dictionary<string, object>();
 
-            ClientEvents = new DatePickerClientEvents();
-
             Value = null;
             Enabled = true;
             OpenOnFocus = false;
+
+            ClientEvents = new Dictionary<string, ClientEvent>();
         }
 
+        public IDictionary<string, ClientEvent> ClientEvents
+        {
+            get;
+            private set;
+        }
         /// <summary>
         /// Gets the id.
         /// </summary>
@@ -46,12 +51,6 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        public DatePickerClientEvents ClientEvents
-        {
-            get;
-            private set;
-        }
-        
         public bool OpenOnFocus
         {
             get;

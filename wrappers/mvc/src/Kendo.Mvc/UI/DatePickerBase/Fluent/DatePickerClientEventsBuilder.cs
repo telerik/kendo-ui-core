@@ -1,6 +1,7 @@
 namespace Kendo.Mvc.UI.Fluent
 {
     using System;
+    using System.Collections.Generic;
     using Infrastructure;
 
     /// <summary>
@@ -8,47 +9,11 @@ namespace Kendo.Mvc.UI.Fluent
     /// </summary>
     public class DatePickerClientEventsBuilder : IHideObjectMembers
     {
-        private readonly DatePickerClientEvents clientEvents;
+        private readonly IDictionary<string, ClientEvent> clientEvents;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DatePickerClientEventsBuilder"/> class.
-        /// </summary>
-        /// <param name="clientEvents">Datepicker client-side events.</param>
-        /// <param name="viewContext">The context of the View.</param>
-        public DatePickerClientEventsBuilder(DatePickerClientEvents clientEvents)
+        public DatePickerClientEventsBuilder(IDictionary<string, ClientEvent> clientEvents)
         {
-            Guard.IsNotNull(clientEvents, "clientEvents");
-
             this.clientEvents = clientEvents;
-        }
-
-        /// <summary>
-        /// Defines the inline handler of the OnChange client-side event
-        /// </summary>
-        /// <param name="onChangeAction">The action defining the inline handler.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;% Html.Telerik().DatePicker()
-        ///            .Name("DatePicker")
-        ///            .ClientEvents(events => events.OnChange(() =>
-        ///            {
-        ///                 %&gt;
-        ///                 function(e) {
-        ///                     //event handling code
-        ///                 }
-        ///                 &lt;%
-        ///            }))
-        ///            .Render();
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public DatePickerClientEventsBuilder OnChange(Action onChangeCodeBlock)
-        {
-            Guard.IsNotNull(onChangeCodeBlock, "onChangeCodeBlock");
-
-            clientEvents.OnChange.CodeBlock = onChangeCodeBlock;
-
-            return this;
         }
 
         /// <summary>
@@ -72,9 +37,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public DatePickerClientEventsBuilder OnChange(Func<object, object> onChangeInlineCodeBlock)
         {
-            Guard.IsNotNull(onChangeInlineCodeBlock, "onChangeInlineCodeBlock");
-
-            clientEvents.OnChange.InlineCodeBlock = onChangeInlineCodeBlock;
+            clientEvents["change"] = new ClientEvent { InlineCodeBlock = onChangeInlineCodeBlock };
 
             return this;
         }
@@ -93,38 +56,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public DatePickerClientEventsBuilder OnChange(string onChangeHandlerName)
         {
-            Guard.IsNotNullOrEmpty(onChangeHandlerName, "onChangeHandlerName");
-
-            clientEvents.OnChange.HandlerName = onChangeHandlerName;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Defines the inline handler of the OnOpen client-side event
-        /// </summary>
-        /// <param name="onOpenInlineCode">The action defining the inline handler.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;% Html.Telerik().DatePicker()
-        ///            .Name("DatePicker")
-        ///            .ClientEvents(events => events.OnOpen(() =>
-        ///            {
-        ///                 %&gt;
-        ///                 function(e) {
-        ///                     //event handling code
-        ///                 }
-        ///                 &lt;%
-        ///            }))
-        ///            .Render();
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public DatePickerClientEventsBuilder OnOpen(Action onOpenCodeBlock)
-        {
-            Guard.IsNotNull(onOpenCodeBlock, "onOpenCodeBlock");
-
-            clientEvents.OnOpen.CodeBlock = onOpenCodeBlock;
+            clientEvents["change"] = new ClientEvent { HandlerName = onChangeHandlerName };
 
             return this;
         }
@@ -151,9 +83,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public DatePickerClientEventsBuilder OnOpen(Func<object, object> onOpenInlineCodeBlock)
         {
-            Guard.IsNotNull(onOpenInlineCodeBlock, "onOpenInlineCodeBlock");
-
-            clientEvents.OnOpen.InlineCodeBlock = onOpenInlineCodeBlock;
+            clientEvents["open"] = new ClientEvent { InlineCodeBlock = onOpenInlineCodeBlock };
 
             return this;
         }
@@ -172,38 +102,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public DatePickerClientEventsBuilder OnOpen(string onOpenHandlerName)
         {
-            Guard.IsNotNullOrEmpty(onOpenHandlerName, "onOpenHandlerName");
-
-            clientEvents.OnOpen.HandlerName = onOpenHandlerName;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Defines the inline handler of the OnClose client-side event
-        /// </summary>
-        /// <param name="onCloseInlineCode">The action defining the inline handler.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;% Html.Telerik().DatePicker()
-        ///            .Name("DatePicker")
-        ///            .ClientEvents(events => events.OnClose(() =>
-        ///            {
-        ///                 %&gt;
-        ///                 function(e) {
-        ///                     //event handling code
-        ///                 }
-        ///                 &lt;%
-        ///            }))
-        ///            .Render();
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public DatePickerClientEventsBuilder OnClose(Action onCloseCodeBlock)
-        {
-            Guard.IsNotNull(onCloseCodeBlock, "onCloseCodeBlock");
-
-            clientEvents.OnClose.CodeBlock = onCloseCodeBlock;
+            clientEvents["open"] = new ClientEvent { HandlerName = onOpenHandlerName };
 
             return this;
         }
@@ -229,9 +128,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public DatePickerClientEventsBuilder OnClose(Func<object, object> onCloseInlineCodeBlock)
         {
-            Guard.IsNotNull(onCloseInlineCodeBlock, "onCloseInlineCodeBlock");
-
-            clientEvents.OnClose.InlineCodeBlock = onCloseInlineCodeBlock;
+            clientEvents["close"] = new ClientEvent { InlineCodeBlock = onCloseInlineCodeBlock };
 
             return this;
         }
@@ -250,9 +147,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public DatePickerClientEventsBuilder OnClose(string onCloseHandlerName)
         {
-            Guard.IsNotNullOrEmpty(onCloseHandlerName, "onCloseHandlerName");
-
-            clientEvents.OnClose.HandlerName = onCloseHandlerName;
+            clientEvents["close"] = new ClientEvent { HandlerName = onCloseHandlerName };
 
             return this;
         }
