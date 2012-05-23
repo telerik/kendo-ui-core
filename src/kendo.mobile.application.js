@@ -370,8 +370,6 @@
                     os = platform;
                 }
 
-                console.log(os);
-
                 support.mobileOS = os;
             }
 
