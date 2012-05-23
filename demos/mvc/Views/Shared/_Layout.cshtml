@@ -35,6 +35,8 @@
                     <ul>
                         @foreach (NavigationWidget widget in ViewBag.Navigation[category])
                         {
+                            if (!widget.ShouldInclude) { continue; }
+                            
                             if (widget.Name != "overview")
                             {
                                 var isActive = false;

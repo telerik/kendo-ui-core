@@ -3,10 +3,8 @@ using System.Linq;
 
 namespace Kendo.Models
 {
-    public class NavigationWidget
+    public class NavigationWidget : NavigationItem
     {
-        public string Name { get; set; }
-        public string Text { get; set; }
         public string Documentation { get; set; }
         public string ThumbnailUrl { get; set; }
         public string SpriteCssClass { get; set; }
