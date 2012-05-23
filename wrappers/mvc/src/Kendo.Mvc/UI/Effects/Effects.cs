@@ -6,7 +6,7 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.Infrastructure;
 
-    public class Effects
+    public class Effects: JsonObject
     {
         public Effects(string name)
         {
@@ -34,6 +34,19 @@ namespace Kendo.Mvc.UI
         {
             get;
             set;
+        }
+
+        protected override void Serialize(IDictionary<string, object> json)
+        {
+            if (Container.Any())
+            {
+                var options = new Dictionary<string, object>();
+
+                options["effects"] = string.Join(" ", Container);
+                options["duration"] = Duration;
+
+                json[Name] = options;
+            }
         }
 
         public string Serialize()
