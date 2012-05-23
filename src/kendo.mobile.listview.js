@@ -20,6 +20,7 @@
         MOUSECANCEL = support.mousecancel,
         MOUSEUP = support.mouseup,
         CLICK = "click",
+        data = kendo.data,
         REQUEST_START = "requestStart";
 
     function toggleItemActiveClass(e) {
@@ -29,7 +30,7 @@
 
         var clicked = $(e.currentTarget),
             item = clicked.parent(),
-            role = clicked.data(kendo.ns + "role") || "",
+            role = data(clicked, "role") || "",
             plainItem = (!role.match(/button/)),
             prevented = e.isDefaultPrevented();
 
@@ -57,7 +58,7 @@
     function enhanceItem(i, item) {
         item = $(item);
 
-        var icon = item.data(kendo.ns + "icon"),
+        var icon = data(item, "icon"),
             iconSpan = $('<span class="km-icon"/>');
 
         if (icon) {
@@ -70,14 +71,14 @@
         item = $(item);
 
         var parent = item.parent(),
-            itemAndDetailButtons = item.add(parent.children("[data-" + kendo.ns + "role=detailbutton]")),
+            itemAndDetailButtons = item.add(parent.children(kendo.roleSelector("detailbutton"))),
             otherNodes = parent.contents().not(itemAndDetailButtons).not(whitespace);
 
         if (otherNodes.length) {
             return;
         }
 
-        var icon = parent.data(kendo.ns + "icon"),
+        var icon = data(parent, "icon"),
             iconSpan = $('<span class="km-icon"/>');
 
         item.addClass("km-listview-link")

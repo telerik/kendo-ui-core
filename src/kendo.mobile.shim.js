@@ -53,7 +53,7 @@
                         duration: that.options.duration
                     }
                 },
-                closed: function() {
+                deactivate: function() {
                     shim.hide();
                 },
                 open: function() {

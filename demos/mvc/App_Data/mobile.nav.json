@@ -101,7 +101,7 @@
 
             ]
         },
-                {
+        {
             "text": "NavBar",
             "name": "navbar",
             "documentation": "mobile/navbar",
@@ -114,6 +114,19 @@
                 {
                     "text": "Customizing appearance",
                     "url": "navbar/appearance.html"
+                }
+            ]
+        },
+        {
+            "text": "PopOver",
+            "name": "popover",
+            "tablet": true,
+            "documentation": "mobile/popover",
+            "spriteCssClass": "mobileNavBarIcon",
+            "items": [
+                {
+                    "text": "Basic usage",
+                    "url": "popover/index.html"
                 }
             ]
         },

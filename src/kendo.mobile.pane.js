@@ -15,15 +15,16 @@
         NAVIGATE = "navigate",
         VIEW_SHOW = "viewShow",
 
+        WIDGET_RELS = /popover|actionsheet/,
         BACK = "#:back",
+
+        data = kendo.data,
         // navigation element roles
         buttonRoles = "button backbutton detailbutton listview-link",
         linkRoles = "tab";
 
     function appLinkClick(e) {
-        var rel = $(e.currentTarget).data(kendo.ns + "rel");
-
-        if(rel != EXTERNAL) {
+        if(data($(e.currentTarget), "rel") != EXTERNAL) {
             e.preventDefault();
         }
     }
@@ -31,27 +32,10 @@
     /**
      * @name kendo.mobile.ui.Pane.Description
      * @section
-     * <p>The <strong>mobile Pane widget</strong> groups one or more <strong>mobile views</strong> within the main view application. The mobile
-     * SplitView allows a side by-side display of several panes. The popover widgets displays a pane on top of the main
-     * view.</p>
-     *
-     * @exampleTitle Pane within a splitview
-     * @example
-     * <div data-role="splitview">
-     *   <div data-role="pane" data-layout="main-default" id="main-pane">
-     *     <div data-role="view" data-title="Messages">
-     *         No message selected
-     *     </div>
-     *
-     *     <div data-role="layout" data-id="main-default">
-     *         <div data-role="header">
-     *             <div data-role="navbar">
-     *                 <span data-role="view-title"></span>
-     *             </div>
-     *         </div>
-     *     </div>
-     *   </div>
-     * </div>
+     * <h3>Mobile Pane</h3>
+     * <p>The mobile Pane widget groups one or more <strong>mobile views</strong> within the main view application. The mobile
+     * SplitView widget allows a side by-side display of several panes. The mobile PopOver automatically instantiates a mobile Pane widget for its
+     * contents.</p>
      *
      * @section
      * <p>The mobile Pane widget acts like an embedded mobile application, with most of the application
@@ -236,33 +220,31 @@
             }
 
             var link = $(e.currentTarget),
-            transition = link.data(kendo.ns + "transition"),
-            rel = link.data(kendo.ns + "rel"),
-            target = link.data(kendo.ns + "target"),
-            pane = this,
-            href = link.attr(HREF);
+                transition = data(link, "transition"),
+                rel = data(link, "rel") || "",
+                target = data(link, "target"),
+                pane = this,
+                href = link.attr(HREF);
 
-            if (rel === EXTERNAL) {
+            if (rel === EXTERNAL || !href || href === DUMMY_HREF) {
                 return;
             }
 
-            if (href && href != DUMMY_HREF) {
-                // Prevent iOS address bar progress display for in app navigation
-                link.attr(HREF, DUMMY_HREF);
-                setTimeout(function() { link.attr(HREF, href); });
+            // Prevent iOS address bar progress display for in app navigation
+            link.attr(HREF, DUMMY_HREF);
+            setTimeout(function() { link.attr(HREF, href); });
 
-                if (rel === "actionsheet") {
-                    $(href).data("kendoMobileActionSheet").openFor(link);
-                } else {
-                    if (target === "_top") {
-                        pane = mobile.application.pane;
-                    }
-                    else if (target) {
-                        pane = $("#" + target).data("kendoMobilePane");
-                    }
-
-                    pane.navigate(href, transition);
+            if (rel.match(WIDGET_RELS)) {
+                kendo.widgetInstance($(href), ui).openFor(link);
+            } else {
+                if (target === "_top") {
+                    pane = mobile.application.pane;
                 }
+                else if (target) {
+                    pane = $("#" + target).data("kendoMobilePane");
+                }
+
+                pane.navigate(href, transition);
             }
 
             e.preventDefault();

@@ -180,7 +180,7 @@
 
         _buildButton: function() {
             var button = $(this),
-                icon = button.data(kendo.ns + "icon"),
+                icon = kendo.data(button, "icon"),
                 image = button.find("img"),
                 iconSpan = $('<span class="km-icon"/>');
 

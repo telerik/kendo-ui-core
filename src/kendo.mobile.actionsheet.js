@@ -2,6 +2,7 @@
     var kendo = window.kendo,
         ui = kendo.mobile.ui,
         Shim = ui.Shim,
+        Popup = ui.Popup,
         Widget = ui.Widget,
         OPEN = "open",
         BUTTONS = "li>a",
@@ -29,6 +30,10 @@
      * <p>In iOS, the ActionSheet is modal, and clicking on the background does not close it. A 'Cancel' action is
      * automatically added to the bottom of the actions.</p>
      * <p>In Android and Blackberry, the available actions are centered in the middle of the screen, and tapping the background closes it.</p>
+     *
+     *
+     * <h3>ActionSheet in Tablets</h3>
+     * <p>If a tablet is detected, the ActionSheet widget will be displayed in a PopOver. The sizing and the direction of the popover may be customized through the <code>popup</code> configuration option.</p>
      *
      * <h3>Opening an ActionSheet</h3>
      * <p>The widget can be open when any mobile navigational widget (listview, button, tabstrip, etc.) is tapped.
@@ -82,10 +87,15 @@
          * @param {DomElement} element DOM element.
          * @param {Object} options Configuration options.
          * @option {String} [cancel] <Cancel> The text of the cancel button.
+         * @option {Object} [popup] The popup configuration options (tablet only).
+         * @option {Number | String} [popup.width] <240> The width of the popup in pixels.
+         * @option {Number | String} [popup.height] <auto> The height of the popup in pixels.
+         * @option {Number | String} [popup.direction] <down> The direction to which the popup will expand, relative to the target that opened it.
          */
         init: function(element, options) {
             var that = this,
                 os = kendo.support.mobileOS,
+                ShimClass = os.tablet ? Popup : Shim,
                 wrapper;
 
             Widget.fn.init.call(that, element, options);
@@ -102,7 +112,9 @@
             wrapper = element.parent();
 
             that.wrapper = wrapper;
-            that.shim = new Shim(that.wrapper, {modal: !(os.android || os.meego)});
+            that.shim = new ShimClass(that.wrapper, $.extend({modal: !(os.android || os.meego)}, that.options.popup) );
+
+            kendo.notify(that, ui);
         },
 
         events: [
@@ -119,7 +131,8 @@
 
         options: {
             name: "ActionSheet",
-            cancel: 'Cancel'
+            cancel: "Cancel",
+            popup: { height: "auto" }
         },
 
         /**
@@ -150,7 +163,7 @@
             that.target = target;
             that.context = target.data(CONTEXT_DATA);
             that.trigger(OPEN, { target: that.target, context: that.context });
-            that.shim.show();
+            that.shim.show(target);
         },
 
         _click: function(e) {
