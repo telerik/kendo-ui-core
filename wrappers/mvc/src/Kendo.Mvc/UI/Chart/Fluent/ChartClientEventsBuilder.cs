@@ -349,6 +349,72 @@ namespace Kendo.Mvc.UI.Fluent
             return HandlerName(events.OnError, onErrorHandlerName);
         }
 
+        /// <summary>
+        /// Defines the inline handler of the OnAxisLabelClick client-side event
+        /// </summary>
+        /// <param name="codeBlock">The action defining the inline handler.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .ClientEvents(events => events.OnAxisLabelClick(() =>
+        ///           {
+        ///                %&gt;
+        ///                function(e) {
+        ///                    //event handling code
+        ///                }
+        ///                &lt;%
+        ///           }))
+        ///           .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public ChartClientEventsBuilder OnAxisLabelClick(Action codeBlock)
+        {
+            return CodeBlock(events.OnAxisLabelClick, codeBlock);
+        }
+
+        /// <summary>
+        /// Defines the inline handler of the OnAxisLabelClick client-side event
+        /// </summary>
+        /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .ClientEvents(events => events.OnAxisLabelClick(
+        ///                @&lt;text&gt;
+        ///                function(e) {
+        ///                    //event handling code
+        ///                }
+        ///                &lt;/text&gt;
+        ///           ))
+        ///           .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartClientEventsBuilder OnAxisLabelClick(Func<object, object> inlineCodeBlock)
+        {
+            return InlineCodeBlock(events.OnAxisLabelClick, inlineCodeBlock);
+        }
+
+        /// <summary>
+        ///  Defines the name of the JavaScript function that will handle the the OnAxisLabelClick client-side event.
+        /// </summary>
+        /// <param name="onSeriesClickHandlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .ClientEvents(events => events.OnAxisLabelClick("onAxisLabelClick"))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartClientEventsBuilder OnAxisLabelClick(string onAxisLabelClickHandlerName)
+        {
+            return HandlerName(events.OnAxisLabelClick, onAxisLabelClickHandlerName);
+        }
+
         private ChartClientEventsBuilder CodeBlock(ClientEvent e, Action codeBlock)
         {
             Guard.IsNotNull(codeBlock, "codeBlock");

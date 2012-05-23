@@ -14,6 +14,7 @@ namespace Kendo.Mvc.UI
             OnDataBinding = new ClientEvent();
             OnSeriesHover = new ClientEvent();
             OnSeriesClick = new ClientEvent();
+            OnAxisLabelClick = new ClientEvent();
             OnError = new ClientEvent();
         }
 
@@ -57,6 +58,15 @@ namespace Kendo.Mvc.UI
         /// Defines the Error client-side event handler
         /// </summary>
         public ClientEvent OnError
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Defines the AxisLabelClick client-side event handler
+        /// </summary>
+        public ClientEvent OnAxisLabelClick
         {
             get;
             private set;
