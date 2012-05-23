@@ -9,11 +9,11 @@
     /**
      * @name kendo.mobile.ui.ModalView.Description
      * @section
-     * <p>The Kendo modalView is used to present self-contained functionality in the context of the current task.  </p>
+     * <p>The Kendo ModalView is used to present self-contained functionality in the context of the current task.  </p>
      *
      * <h3>Getting Started</h3>
      * <p>The Kendo mobile Application will automatically initialize a mobile ModalView widget for every <code>div</code> element with <code>role</code> data attribute set to <code>modalview</code> present in the views/layouts markup.
-     * Alternatively, it can be initialized using jQuery plugin syntax. The modalview element may contain optional header and/or footer. A mobile scroller is automatically initialized around the contents of the element.</p>
+     * Alternatively, it can be initialized using jQuery plugin syntax. The ModalView element may contain optional header and/or footer. A mobile scroller is automatically initialized around the contents of the element.</p>
      *
      * @exampleTitle ModalView with header and footer
      * @example
@@ -38,6 +38,43 @@
      *  </div>
      * </div>
      *
+     *
+     * @section
+     * <h3>Opening a ModalView</h3>
+     * <p>The widget can be open when any mobile navigational widget (listview, button, tabstrip, etc.) is tapped.
+     * To do so, the navigational widget should have <code>data-rel="modalview"</code> and <code>href</code> attribute pointing to the ModalView's element <code>id</code> set (prefixed with <code>#</code>, like an anchor).</p>
+     *
+     * @exampleTitle Button, which opens a ModalView
+     * @example
+     * <div data-role="view">
+     *  <a href="#foo" data-rel="modalview">Foo</a>
+     *  <div data-role="modalview" id="foo">
+     *   ...
+     *  </div>
+     * </div>
+     *
+     * @exampleTitle Button, which closes a ModalView
+     * @example
+     * <div data-role="view">
+     *  <a href="#foo" data-rel="modalview">Foo</a>
+     *  <div data-role="modalview" id="foo">
+     *    <div data-role="header">
+     *        <div data-role="navbar">
+     *            <a data-align="right" data-click="closeModalView" data-role="button">Close</a>
+     *        </div>
+     *    </div>
+     *
+     *   Foo
+     *  </div>
+     * </div>
+     *
+     * <script>
+     * function closeModalView(e) {
+     *  // find the closest modal view, relative to the button element.
+     *  var modalView = e.sender.element.closest("[data-role=modalview]").data("kendoMobileModalView");
+     *  modalView.close();
+     * }
+     * </script>
      */
     var ModalView = ui.View.extend(/** @lends kendo.mobile.ui.ModalView.prototype */{
         /**
@@ -45,6 +82,9 @@
          * @extends kendo.mobile.ui.Widget
          * @param {DomElement} element DOM element.
          * @param {Object} options Configuration options.
+         * @option {Number} [width] <300> The width of the ModalView container in pixels.
+         * @option {Number} [height] <300> The height of the ModalView container in pixels.
+         * @option {Boolean} [modal] <true> When set to false, the ModalView will close when the user taps outside of its element.
          */
         init: function(element, options) {
             var that = this;
@@ -77,6 +117,20 @@
              * @event
              * @param {Event} e
              * @param {jQueryObject} e.target The invocation target of the ModalView.
+             * @example
+             * <div data-role="view">
+             *  <a href="#foo" data-rel="modalview">Foo</a>
+             *  <div data-role="modalview" id="foo" data-open="logTarget">
+             *   Foo
+             *  </div>
+             * </div>
+             *
+             * <script>
+             * function logTarget(e) {
+             *   console.log(e.target); // <a href="#foo" ...
+             * }
+             * </script>
+             *
              */
             OPEN
         ],
