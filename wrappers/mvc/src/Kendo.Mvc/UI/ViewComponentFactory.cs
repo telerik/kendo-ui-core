@@ -440,7 +440,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual ComboBoxBuilder ComboBox()
         {
-            return new ComboBoxBuilder(new ComboBox(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>()));
+            return new ComboBoxBuilder(new ComboBox(ViewContext, ClientSideObjectWriterFactory, ViewData, DI.Current.Resolve<IUrlGenerator>()));
         }
 
         /// <summary>

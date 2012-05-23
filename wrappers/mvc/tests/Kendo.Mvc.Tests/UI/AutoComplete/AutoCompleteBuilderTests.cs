@@ -129,26 +129,6 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
-        public void ClientEvents_should_set_events()
-        {
-            Action<DropDownClientEventsBuilder> clientEventsAction = eventBuilder => { eventBuilder.OnLoad("Load"); };
-
-            builder.ClientEvents(clientEventsAction);
-
-            Assert.NotNull(AutoComplete.ClientEvents.OnLoad.HandlerName);
-        }
-
-        [Fact]
-        public void ClientEvents_should_return_builder()
-        {
-            Action<DropDownClientEventsBuilder> clientEventsAction = eventBuilder => { eventBuilder.OnLoad("Load"); };
-
-            var returnedBuilder = builder.ClientEvents(clientEventsAction);
-
-            Assert.IsType(typeof(AutoCompleteBuilder), returnedBuilder);
-        }
-
-        [Fact]
         public void DropDownHtmlAttributes_be_able_to_set_dropdown_html_attributes()
         {
             builder.DropDownHtmlAttributes(new { @class = "foo" });

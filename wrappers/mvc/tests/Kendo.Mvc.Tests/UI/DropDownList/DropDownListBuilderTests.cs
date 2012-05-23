@@ -85,25 +85,6 @@ namespace Kendo.Mvc.UI.Tests
             Assert.True(dropDownList.DataBinding.Ajax.Enabled);
         }
 
-        [Fact]
-        public void ClientEvents_should_set_events()
-        {
-            Action<DropDownClientEventsBuilder> clientEventsAction = eventBuilder => { eventBuilder.OnLoad("Load"); };
-
-            builder.ClientEvents(clientEventsAction);
-
-            Assert.NotNull(dropDownList.ClientEvents.OnLoad.HandlerName);
-        }
-
-        [Fact]
-        public void ClientEvents_should_return_builder()
-        {
-            Action<DropDownClientEventsBuilder> clientEventsAction = eventBuilder => { eventBuilder.OnLoad("Load"); };
-
-            var returnedBuilder = builder.ClientEvents(clientEventsAction);
-
-            Assert.IsType(typeof(DropDownListBuilder), returnedBuilder);
-        }
 
         [Fact]
         public void SelectedIndex_should_set_selected_item_index()

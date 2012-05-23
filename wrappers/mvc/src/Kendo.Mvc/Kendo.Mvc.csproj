@@ -303,7 +303,6 @@
     <Compile Include="UI\ComboBox\ComboBoxHtmlBuilder.cs" />
     <Compile Include="UI\AutoComplete\AutoCompleteFilterMode.cs" />
     <Compile Include="UI\AutoComplete\AutoCompleteDataBindingConfiguration.cs" />
-    <Compile Include="UI\ComboBox\Fluent\ComboBoxFilterSettingsBuilder.cs" />
     <Compile Include="UI\ComboBox\Fluent\ComboBoxBuilder.cs" />
     <Compile Include="UI\AutoComplete\Fluent\AutoCompleteBindingSettingsBuilder.cs" />
     <Compile Include="UI\AutoComplete\Fluent\AutoCompleteFilterSettingsBuilder.cs" />
@@ -313,7 +312,6 @@
     <Compile Include="UI\AutoComplete\Settings\AutoCompleteFilterSettings.cs" />
     <Compile Include="UI\ClientEvent.cs" />
     <Compile Include="UI\ComboBox\IComboBoxRenderable.cs" />
-    <Compile Include="UI\ComboBox\Settings\ComboBoxFilterSettings.cs" />
     <Compile Include="UI\DataSource\CrudOperation.cs" />
     <Compile Include="UI\DataSource\DataSource.cs" />
     <Compile Include="UI\DataSource\DataSourceRequest.cs" />

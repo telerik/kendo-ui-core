@@ -45,30 +45,6 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
-        public void Should_serialize_client_events()
-        {
-            var Autocomplete = AutoCompleteTestHelper.CreateAutocomplete();
-            Autocomplete.ClientEvents.OnDataBinding.CodeBlock = Autocomplete.ClientEvents.OnDataBound.CodeBlock =
-                Autocomplete.ClientEvents.OnError.CodeBlock = Autocomplete.ClientEvents.OnLoad.CodeBlock =
-                Autocomplete.ClientEvents.OnChange.CodeBlock = Autocomplete.ClientEvents.OnOpen.CodeBlock =
-                Autocomplete.ClientEvents.OnClose.CodeBlock = () => { };
-
-            var writer = AutoCompleteTestHelper.clientSideObjectWriter;
-
-            writer.Setup(w => w.AppendClientEvent("onLoad", It.IsAny<ClientEvent>()));
-            writer.Setup(w => w.AppendClientEvent("onChange", It.IsAny<ClientEvent>()));
-            writer.Setup(w => w.AppendClientEvent("onOpen", It.IsAny<ClientEvent>()));
-            writer.Setup(w => w.AppendClientEvent("onClose", It.IsAny<ClientEvent>()));
-            writer.Setup(w => w.AppendClientEvent("onDataBinding", It.IsAny<ClientEvent>()));
-            writer.Setup(w => w.AppendClientEvent("onDataBound", It.IsAny<ClientEvent>()));
-            writer.Setup(w => w.AppendClientEvent("onError", It.IsAny<ClientEvent>()));
-
-            Autocomplete.WriteInitializationScript(textWriter.Object);
-
-            writer.VerifyAll();
-        }
-
-        [Fact]
         public void Should_serialize_multiple_values_settings()
         {
             AutoComplete.Multiple.Enabled = true;
