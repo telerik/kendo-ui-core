@@ -1350,7 +1350,7 @@
                 uploadComplete = true;
 
             if (relatedInput) {
-                $.each(relatedInput.data("relatedFileEntries"), function() {
+                $.each(relatedInput.data("relatedFileEntries") || [], function() {
                     // Exclude removed file entries and self
                     if (this.parent().length > 0 && this[0] != fileEntry[0]) {
                         uploadComplete = uploadComplete && this.children(".k-icon").is(".k-success");
@@ -1462,11 +1462,18 @@
     }
 
     function tryParseJSON(input, onSuccess, onError) {
+        var success = false,
+            json = "";
+
         try {
-            var json = $.parseJSON(input);
-            onSuccess(json);
+            json = $.parseJSON(input);
+            success = true;
         } catch (e) {
             onError();
+        }
+
+        if (success) {
+            onSuccess(json);
         }
     }
 
