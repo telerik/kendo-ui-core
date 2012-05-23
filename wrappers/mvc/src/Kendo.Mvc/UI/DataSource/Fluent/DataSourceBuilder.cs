@@ -143,5 +143,14 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        public DataSourceBuilder<TModel> Model(Action<DataSourceModelDescriptorFactory<TModel>> configurator)
+        {
+            Guard.IsNotNull(configurator, "configurator");            
+
+            configurator(new DataSourceModelDescriptorFactory<TModel>(dataSource.Schema.Model));
+
+            return this;
+        }
     }
 }
