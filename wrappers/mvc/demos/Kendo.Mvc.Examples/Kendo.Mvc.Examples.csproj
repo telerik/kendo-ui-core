@@ -86,6 +86,9 @@
     <Compile Include="Controllers\Grid\ColumnResizingController.cs" />
     <Compile Include="Controllers\Grid\CustomAjaxBindingController.cs" />
     <Compile Include="Controllers\RadialGauge\ScaleOptoinsController.cs" />
+    <Compile Include="Controllers\Splitter\AjaxController.cs" />
+    <Compile Include="Controllers\Splitter\EventsController.cs" />
+    <Compile Include="Controllers\Splitter\IndexController.cs" />
     <Compile Include="Controllers\TabStrip\AjaxController.cs" />
     <Compile Include="Controllers\TabStrip\ApiController.cs" />
     <Compile Include="Controllers\TabStrip\EventsController.cs" />
@@ -276,6 +279,9 @@
     <Content Include="Areas\aspx\Views\radialgauge\scaleoptions.aspx" />
     <Content Include="Areas\aspx\Views\lineargauge\index.aspx" />
     <Content Include="Areas\aspx\Views\lineargauge\scaleoptions.aspx" />
+    <Content Include="Areas\razor\Views\splitter\index.cshtml" />
+    <Content Include="Areas\razor\Views\splitter\ajax.cshtml" />
+    <Content Include="Areas\razor\Views\splitter\events.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>

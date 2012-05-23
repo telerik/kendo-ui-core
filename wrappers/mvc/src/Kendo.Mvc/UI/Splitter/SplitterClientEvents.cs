@@ -4,17 +4,10 @@ namespace Kendo.Mvc.UI
     {
         public SplitterClientEvents()
         {
-            OnLoad = new ClientEvent();
             OnResize = new ClientEvent();
             OnExpand = new ClientEvent();
             OnCollapse = new ClientEvent();
             OnContentLoad = new ClientEvent();
-        }
-
-        public ClientEvent OnLoad
-        {
-            get;
-            private set;
         }
 
         public ClientEvent OnResize
@@ -43,11 +36,10 @@ namespace Kendo.Mvc.UI
 
         public void SerializeTo(IClientSideObjectWriter writer)
         {
-            writer.AppendClientEvent("onLoad", OnLoad);
-            writer.AppendClientEvent("onResize", OnResize);
-            writer.AppendClientEvent("onExpand", OnExpand);
-            writer.AppendClientEvent("onCollapse", OnCollapse);
-            writer.AppendClientEvent("onContentLoad", OnContentLoad);
+            writer.AppendClientEvent("resize", OnResize);
+            writer.AppendClientEvent("expand", OnExpand);
+            writer.AppendClientEvent("collapse", OnCollapse);
+            writer.AppendClientEvent("contentLoad", OnContentLoad);
         }
     }
 }

@@ -1,0 +1,8 @@
+@(Html.Kendo().Splitter()
+      .Name("splitter")
+      .Panes(panes =>
+      {
+          panes.Add().LoadContentFrom(Url.Content("~/Content/web/splitter/ajax/ajaxContent1.html"));
+
+          panes.Add().LoadContentFrom(Url.Content("~/Content/web/splitter/ajax/ajaxContent2.html"));
+      }))

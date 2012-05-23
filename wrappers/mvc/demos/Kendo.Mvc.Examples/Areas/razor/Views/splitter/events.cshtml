@@ -1,0 +1,52 @@
+@(Html.Kendo().Splitter()
+      .Name("splitter")
+      .HtmlAttributes(new { style = "height: 400px;" })
+      .ClientEvents(events => events
+          .OnCollapse("collapse")
+          .OnResize("resize")
+          .OnExpand("expand")
+          .OnContentLoad("contentLoad")
+      )
+      .Panes(panes =>
+      {
+          panes.Add()
+              .HtmlAttributes(new { id = "top_pane" })
+              .Size("100px")
+              .Collapsible(true)
+              .Content(@<p>
+                            Top pane
+                        </p>);
+    
+          panes.Add()
+              .HtmlAttributes(new { id = "ajax_pane" })
+              .LoadContentFrom(Url.Content("~/Content/web/splitter/ajax/ajaxContent1.html"));
+    
+          panes.Add()
+              .HtmlAttributes(new { id = "bottom_pane" })
+              .Collapsible(true)
+              .Size("20%")
+              .Content(@<p>
+                           Outer splitter : bottom pane
+                        </p>);
+      }))
+
+<script>
+        function resize(e) {
+            kendoConsole.log("Resized :: Splitter #" + this.element[0].id);
+        }
+
+        function expand(e) {
+            kendoConsole.log("Expanded :: Pane #" + e.pane.id + " from splitter #" + this.id + "expanded");
+        }
+
+        function collapse(e) {
+            kendoConsole.log("Collapsed :: Pane #" + e.pane.id + " from splitter #" + this.id + "collapsed");
+        }
+
+        function contentLoad(e) {
+            kendoConsole.log("Content loaded in <b>"+ e.pane.id +
+                "</b> and starts with <b>" + $(e.pane).text().substr(0, 20) + "...</b>");
+        }
+</script>
+<br/>
+<div class="console"></div>
