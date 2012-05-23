@@ -8,19 +8,16 @@
     <div id="page">
         <a class="offline-button" href="../index.html">Back to all suites</a>
 
-    # for (var categoryName in data) { #
+    # for (var categoryName in navigation) { #
         <h1>#= categoryName[0].toUpperCase() + categoryName.substring(1) #</h1>
-
         <ul>
-        # for (var i = 0, actualRow = 0, children = data[categoryName]; i < children.length; i++) { #
-            # var offline = children[i].offline || {}; #
-            # if (offline.skipAlways || offline.skipHtml) continue; #
+        # for (var i = 0, actualRow = 0, children = navigation[categoryName]; i < children.length; i++) { #
+            # if (!shouldInclude(children[i])) { continue; } #
             <li>
                 <h2>#= children[i].text #</h2>
                 <ul>
                 # for (var k = 0, items = children[i].items; k < items.length; k++) { #
-                    # offline = items[k].offline || {}; #
-                    # if (offline.skipAlways || offline.skipHtml) continue; #
+                    # if (!shouldInclude(items[k])) { continue; } #
                     <li><a href='#= items[k].url #'>#= items[k].text #</a></li>
                 # } #
                 </ul>
