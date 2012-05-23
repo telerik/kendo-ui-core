@@ -10,7 +10,7 @@
      * @section
      * <p>
      *  The <strong>PanelBar</strong> displays hierarchical data as a multi-level, expandable widget that is useful for
-     *  constained areas of a page. Its structure may be defined in HTML or configured dynamically through its API. The
+     *  constrained areas of a page. Its structure may be defined in HTML or configured dynamically through its API. The
      *  content for items can also be loaded via AJAX by specifying a content URL.
      * </p>
      * <h3>Getting Started</h3>
