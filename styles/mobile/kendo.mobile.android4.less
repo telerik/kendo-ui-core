@@ -1095,12 +1095,13 @@
 
 /* SplitView */
 
-.km-android .km-pane:last-child
+.km-android .km-scrollview .km-pane:last-child
 {
     .box-shadow(-1px 0 1px 1px rgba(0,0,0,.3));
 }
 
-.km-android .km-pane:last-child .km-content
+.km-android .km-popup.km-pane .km-view,
+.km-android .km-scrollview .km-pane:last-child .km-content
 {
     border: 1px solid rgba(127,127,127,.4);
     .box-shadow(~"inset 0 0 1px 1px #000");
@@ -1118,4 +1119,22 @@
 .km-android .km-pane:first-child
 {
     z-index: 0;
+}
+
+/* PopOver */
+
+.km-android .km-popover-arrow
+{
+    display: none;
+}
+
+.km-android .km-popup.km-pane .km-view
+{
+    border-color: #333;
+    padding: 1px;
+}
+
+.km-android .km-popup.km-pane .km-content
+{
+    background: #202125;
 }
