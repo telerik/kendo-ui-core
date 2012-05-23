@@ -88,6 +88,53 @@ namespace Kendo.Mvc.Infrastructure.Implementation.Tests
 
             initializer.Serialize(data).ShouldEqual("{foo:[\"foo\"]}");
         }
+
+        [Fact]
+        public void Should_serialize_boolean()
+        {
+            data["foo"] = true;
+
+            initializer.Serialize(data).ShouldEqual("{foo:true}");
+        }
+
+        [Fact]
+        public void Should_serialize_date()
+        {
+            data["foo"] = new DateTime(2000, 1, 1, 1, 1, 1, 1);
+
+            initializer.Serialize(data).ShouldEqual("{foo:new Date(2000,0,1,1,1,1,1)}");
+        }
+
+        [Fact]
+        public void Should_serialize_null()
+        {
+            data["foo"] = null;
+
+            initializer.Serialize(data).ShouldEqual("{foo:null}");
+        }
+
+        [Fact]
+        public void Should_serialize_client_event_handler_name()
+        {
+            data["foo"] = new ClientEvent
+                {
+                    HandlerName = "bar"
+                };
+
+            initializer.Serialize(data).ShouldEqual("{foo:bar}");
+        }
+        [Fact]
+        public void Should_serialize_client_event_inline_handler()
+        {
+            data["foo"] = new ClientEvent
+                {
+                    InlineCodeBlock = delegate (object x) {
+                        return "function(){}";
+                    }
+                };
+
+            initializer.Serialize(data).ShouldEqual("{foo:function(){}}");
+        }
     }
 }
 
