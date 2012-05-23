@@ -178,5 +178,44 @@ namespace Kendo.Mvc.UI.Tests.Chart
         {
             builder.OnError(handlerName).ShouldBeType<ChartClientEventsBuilder>();
         }
+
+        [Fact]
+        public void OnAxisLabelClick_with_Action_should_set_CodeBlock()
+        {
+            builder.OnAxisLabelClick(emptyAction);
+            clientEvents.OnAxisLabelClick.CodeBlock.ShouldNotBeNull();
+        }
+
+        [Fact]
+        public void OnAxisLabelClick_with_Action_should_return_builder()
+        {
+            builder.OnAxisLabelClick(emptyAction).ShouldBeType<ChartClientEventsBuilder>();
+        }
+
+        [Fact]
+        public void OnAxisLabelClick_with_Func_should_set_InlineCodeBlock()
+        {
+            builder.OnAxisLabelClick(nullFunc);
+            clientEvents.OnAxisLabelClick.InlineCodeBlock.ShouldNotBeNull();
+        }
+
+        [Fact]
+        public void OnAxisLabelClick_with_Func_should_return_builder()
+        {
+            builder.OnAxisLabelClick(nullFunc).ShouldBeType<ChartClientEventsBuilder>();
+        }
+
+        [Fact]
+        public void OnAxisLabelClick_with_string_should_set_HandlerName()
+        {
+            builder.OnAxisLabelClick(handlerName);
+            clientEvents.OnAxisLabelClick.HandlerName.ShouldEqual(handlerName);
+        }
+
+        [Fact]
+        public void OnAxisLabelClick_with_string_should_return_builder()
+        {
+            builder.OnAxisLabelClick(handlerName).ShouldBeType<ChartClientEventsBuilder>();
+        }
     }
 }
