@@ -15,34 +15,6 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
-        public void OnLoad_with_Action_param_should_set_OnLoad_property()
-        {
-            builder.OnLoad(() => { });
-
-            Assert.NotNull(clientEvents.OnLoad.CodeBlock);
-        }
-
-        [Fact]
-        public void OnLoad_with_String_param_should_set_OnLoad_property()
-        {
-            builder.OnLoad("my_method()");
-
-            Assert.NotNull(clientEvents.OnLoad.HandlerName);
-        }
-
-        [Fact]
-        public void OnLoad_with_Action_should_return_builder()
-        {
-            Assert.IsType<SplitterClientEventsBuilder>(builder.OnLoad(() => { }));
-        }
-
-        [Fact]
-        public void OnLoad_with_String_should_return_builder()
-        {
-            Assert.IsType<SplitterClientEventsBuilder>(builder.OnLoad("my_method()"));
-        }
-
-        [Fact]
         public void OnResize_with_Action_param_should_set_OnResize_property()
         {
             builder.OnResize(() => { });

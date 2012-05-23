@@ -16,7 +16,7 @@ namespace Kendo.Mvc.UI.Html
             return new HtmlElement("div")
                   .Attributes(new { id = component.Id })
                   .Attributes(component.HtmlAttributes)
-                  .PrependClass(UIPrimitives.Widget,
+                  .PrependClass(UIPrimitives.Widget, "k-splitter",
                       component.Orientation == SplitterOrientation.Horizontal ? UIPrimitives.Splitter.Horizontal : UIPrimitives.Splitter.Vertical);
         }
 
