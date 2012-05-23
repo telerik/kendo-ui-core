@@ -675,7 +675,6 @@
     <Compile Include="UI\Grid\GridLocalization.cs" />
     <Compile Include="UI\Grid\IGridDataKey.cs" />
     <Compile Include="UI\Grid\Serialization\GridActionColumnSerializer.cs" />
-    <Compile Include="UI\Grid\Serialization\GridClientObjectSerializer.cs" />
     <Compile Include="UI\Grid\Serialization\IGridColumnSerializer.cs" />
     <Compile Include="UI\Grid\Settings\GridResizingSettings.cs" />
     <Compile Include="UI\Grid\Commands\GridToolBarCustomCommand.cs" />
