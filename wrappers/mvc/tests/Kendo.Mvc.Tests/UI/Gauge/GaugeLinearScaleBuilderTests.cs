@@ -1,6 +1,5 @@
 namespace Kendo.Mvc.UI.Tests.Gauge
 {
-    using System.Collections.Generic;
     using Kendo.Mvc.UI;
     using Kendo.Mvc.UI.Fluent;
     using Xunit;
@@ -24,6 +23,16 @@ namespace Kendo.Mvc.UI.Tests.Gauge
             builder.Mirror(mirror);
 
             scale.Mirror.ShouldEqual(mirror);
+        }
+
+        [Fact]
+        public void Vertical_should_set_Vertical()
+        {
+            var vertical = true;
+
+            builder.Vertical(vertical);
+
+            scale.Vertical.ShouldEqual(vertical);
         }
     }
 }

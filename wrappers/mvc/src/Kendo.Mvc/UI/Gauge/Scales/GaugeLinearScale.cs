@@ -35,6 +35,15 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// The scale orientation.
+        /// </summary>
+        public bool? Vertical
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Creates a serializer
         /// </summary>
         public override IChartSerializer CreateSerializer()
