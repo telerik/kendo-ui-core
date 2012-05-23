@@ -1,4 +1,17 @@
 ﻿<WebAiiTest xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/3.0.0">
+  <DataInfo xmlns:d2p1="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+    <d2p1:BuiltInData i:nil="true" />
+    <d2p1:BuiltInDocumentKey i:nil="true" />
+    <d2p1:ConnectionString />
+    <d2p1:DataEnabled>true</d2p1:DataEnabled>
+    <d2p1:DataProvider />
+    <d2p1:DataRange />
+    <d2p1:DataTableName />
+    <d2p1:DataType>None</d2p1:DataType>
+    <d2p1:DefaultToGrid>true</d2p1:DefaultToGrid>
+    <d2p1:HasBuiltinGrid>false</d2p1:HasBuiltinGrid>
+    <d2p1:TSQL />
+  </DataInfo>
   <Description />
   <IsManual>false</IsManual>
   <Name>PickRange</Name>
@@ -12,8 +25,9 @@
   <CurrentReferences xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
     <d2p1:string>System</d2p1:string>
     <d2p1:string>System.Core</d2p1:string>
-    <d2p1:string>ArtOfTest.WebAii, Version=2012.1.509.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c</d2p1:string>
-    <d2p1:string>ArtOfTest.WebAii.Design, Version=2012.1.509.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d</d2p1:string>
+    <d2p1:string>ArtOfTest.WebAii, Version=2012.1.518.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c</d2p1:string>
+    <d2p1:string>ArtOfTest.WebAii.Design, Version=2012.1.518.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d</d2p1:string>
+    <d2p1:string>Telerik.WebAii.Controls.Html, Version=2012.1.411.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
     <d2p1:string>Telerik.TestingFramework.Controls.KendoUI, Version=2012.1.322.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
     <d2p1:string>c:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\PublicAssemblies\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll</d2p1:string>
     <d2p1:string>System.Windows.Forms</d2p1:string>
@@ -73,7 +87,7 @@
       <d2p1:Order>1</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>f8bbfee7-d977-4b86-a0f0-df1d3118f093</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>05617b29-cfd0-4d84-9467-7a720da275a5</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints xmlns:d5p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
           <d5p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -112,7 +126,7 @@
       <d2p1:Order>2</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>cb85721d-923e-49f3-9333-56157d8ab66b</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>2d9b586c-86c1-4b4a-9915-92cdfca35ce5</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:VisibleVerificationDescriptor">
         <d2p1:Constraints xmlns:d5p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
           <d5p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -203,7 +217,7 @@
       <d2p1:Order>3</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>7a9e0187-2f06-4a27-a27d-ea2bf9e55f20</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>ea80c6b2-70ca-47e3-bd25-d7e90e1a0009</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints xmlns:d5p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
           <d5p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -292,7 +306,7 @@
       <d2p1:Order>4</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>b42925da-068c-4b28-b90c-609a73adbdd6</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>c02befa9-2f83-4a16-8d0d-c185635414ad</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints xmlns:d5p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
           <d5p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -381,7 +395,7 @@
       <d2p1:Order>5</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>7f9c04c8-027b-4698-a71e-71b6dbcd6654</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>7434dcd1-3f11-4415-b0a2-f0892c78d816</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints xmlns:d5p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
           <d5p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -465,7 +479,7 @@
       <d2p1:Order>6</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>cff310dd-3000-4b05-a49e-133c61bec7e0</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>21e4cc51-adfe-42a0-9cce-d801de722bf3</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints xmlns:d5p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
           <d5p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -554,7 +568,7 @@
       <d2p1:Order>7</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>018450f8-81cf-4a2a-bcff-4d41f69f0302</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>1ddb38c5-13b9-4a7e-928d-ddaf022c84c2</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints xmlns:d5p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
           <d5p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -638,7 +652,7 @@
       <d2p1:Order>8</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>b2d06a58-3b85-4b86-845d-abc293122fdd</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>7ec7224c-62d3-44e2-990e-351909051d60</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints xmlns:d5p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
           <d5p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -722,7 +736,7 @@
       <d2p1:Order>9</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>570b5cbb-a491-46ec-985f-80c520a0fb17</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>7f1e6de2-21ef-45b4-b2da-8f4c465ea319</d2p1:Runtime_x0020_ID>
       <d2p1:Step xmlns:d4p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0" i:type="d4p1:SleepActionDescriptor">
         <d2p1:Constraints>
           <d4p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -757,7 +771,7 @@
       <d2p1:Order>10</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>c87049ab-7be4-48ae-964a-ef9faecab851</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>60b70712-7623-42f5-89e9-6c47f82b716e</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints xmlns:d5p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
           <d5p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -846,7 +860,7 @@
       <d2p1:Order>11</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>9cd004e6-83f3-444d-801c-7763880c86d2</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>c1c1ab39-3e3b-46ad-bdaf-75f2e9ef7838</d2p1:Runtime_x0020_ID>
       <d2p1:Step xmlns:d4p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0" i:type="d4p1:SleepActionDescriptor">
         <d2p1:Constraints>
           <d4p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -881,7 +895,7 @@
       <d2p1:Order>12</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>585df754-d165-48ed-a547-0527681a8ef0</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>af949cf4-ff65-4536-93a9-2ccfaadc28bc</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints xmlns:d5p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
           <d5p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -959,13 +973,13 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Wait for textbox 'StartText' content 'Contains' '9/30/2011'.</d2p1:Description>
+      <d2p1:Description>Wait for textbox 'StartText' content 'Contains' '9/29/2011'.</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>13</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>1ce93039-65cc-4a18-89ab-11975ce149e9</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>c681f29a-ae3a-4641-88d2-53cd591a551c</d2p1:Runtime_x0020_ID>
       <d2p1:Step xmlns:d4p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0" i:type="d4p1:InputTextBoxVerificationDescriptor">
         <d2p1:Constraints>
           <d4p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -1040,7 +1054,7 @@
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:UseBackupSearch>false</d2p1:UseBackupSearch>
         <d4p1:CompareType>Contains</d4p1:CompareType>
-        <d4p1:ExpectedValue>9/30/2011</d4p1:ExpectedValue>
+        <d4p1:ExpectedValue>9/29/2011</d4p1:ExpectedValue>
       </d2p1:Step>
       <d2p1:StepImageKey>PickRangetryymck3.d4e</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
@@ -1049,13 +1063,13 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Wait for textbox 'EndText' content 'Contains' '10/30/2012'.</d2p1:Description>
+      <d2p1:Description>Wait for textbox 'EndText' content 'Contains' '10/29/2012'.</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>14</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>487e2726-7c5f-46c1-8c0c-8cf5b091a9a5</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>b30e721c-6517-4331-87e6-1aceae1c8b42</d2p1:Runtime_x0020_ID>
       <d2p1:Step xmlns:d4p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0" i:type="d4p1:InputTextBoxVerificationDescriptor">
         <d2p1:Constraints>
           <d4p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -1130,7 +1144,7 @@
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:UseBackupSearch>false</d2p1:UseBackupSearch>
         <d4p1:CompareType>Contains</d4p1:CompareType>
-        <d4p1:ExpectedValue>10/30/2012</d4p1:ExpectedValue>
+        <d4p1:ExpectedValue>10/29/2012</d4p1:ExpectedValue>
       </d2p1:Step>
       <d2p1:StepImageKey>PickRange1ruyrmfe.zxy</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>

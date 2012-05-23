@@ -1,4 +1,17 @@
 ﻿<WebAiiTest xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/3.0.0">
+  <DataInfo xmlns:d2p1="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+    <d2p1:BuiltInData i:nil="true" />
+    <d2p1:BuiltInDocumentKey i:nil="true" />
+    <d2p1:ConnectionString />
+    <d2p1:DataEnabled>true</d2p1:DataEnabled>
+    <d2p1:DataProvider />
+    <d2p1:DataRange />
+    <d2p1:DataTableName />
+    <d2p1:DataType>None</d2p1:DataType>
+    <d2p1:DefaultToGrid>true</d2p1:DefaultToGrid>
+    <d2p1:HasBuiltinGrid>false</d2p1:HasBuiltinGrid>
+    <d2p1:TSQL />
+  </DataInfo>
   <Description />
   <IsManual>false</IsManual>
   <Name>WidgetBindingSetBlue</Name>
@@ -12,11 +25,12 @@
   <CurrentReferences xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
     <d2p1:string>System</d2p1:string>
     <d2p1:string>System.Core</d2p1:string>
-    <d2p1:string>ArtOfTest.WebAii, Version=2012.1.509.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c</d2p1:string>
-    <d2p1:string>ArtOfTest.WebAii.Design, Version=2012.1.509.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d</d2p1:string>
+    <d2p1:string>ArtOfTest.WebAii, Version=2012.1.518.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c</d2p1:string>
+    <d2p1:string>ArtOfTest.WebAii.Design, Version=2012.1.518.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d</d2p1:string>
+    <d2p1:string>Telerik.WebAii.Controls.Html, Version=2012.1.411.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
+    <d2p1:string>Telerik.TestingFramework.Controls.KendoUI, Version=2012.1.322.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
     <d2p1:string>c:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\PublicAssemblies\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll</d2p1:string>
     <d2p1:string>System.Windows.Forms</d2p1:string>
-    <d2p1:string>C:\work\WebUI_Test_Studio\TelerikAdapters\Wrappers\Telerik.TestingFramework.Controls.KendoUI\bin\Debug\Telerik.TestingFramework.Controls.KendoUI.dll</d2p1:string>
   </CurrentReferences>
   <DataInfo xmlns:d2p1="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
     <d2p1:BuiltInData i:nil="true" />
@@ -68,7 +82,7 @@
       <d2p1:Order>1</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>b35af349-6a57-4dbd-b125-f91623f8b37e</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>a9223e30-3b38-43f3-a7e9-e73b73938c58</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints xmlns:d5p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
           <d5p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -107,7 +121,7 @@
       <d2p1:Order>2</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>042c26bf-0b95-4229-a56d-6da057a8c60b</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>a1dd7a37-4a27-48f9-8813-32dc2512c87c</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:SetTextActionDescriptor">
         <d2p1:Constraints xmlns:d5p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
           <d5p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -209,7 +223,7 @@
       <d2p1:Order>3</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>5b5d20b6-34ff-4275-9131-2ccb9b4a0322</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>96d7fac7-d461-4d5a-9b25-4d4030dfa87a</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints xmlns:d5p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
           <d5p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -298,7 +312,7 @@
       <d2p1:Order>4</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>fb7a57d3-acb5-4462-87cb-728e7738e798</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>90fff7f4-d632-4ea4-a4ee-61234e11d144</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:SetTextActionDescriptor">
         <d2p1:Constraints xmlns:d5p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
           <d5p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -394,13 +408,13 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Wait for '250' msec.</d2p1:Description>
+      <d2p1:Description>Wait for '1250' msec.</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>5</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>889ae3d0-192b-48e9-b938-99d9e09cc043</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>28fe2f54-0b67-4089-bf3e-2356f681e909</d2p1:Runtime_x0020_ID>
       <d2p1:Step xmlns:d4p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0" i:type="d4p1:SleepActionDescriptor">
         <d2p1:Constraints>
           <d4p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -420,7 +434,7 @@
         <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
         <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
-        <d4p1:WaitTime>250</d4p1:WaitTime>
+        <d4p1:WaitTime>1250</d4p1:WaitTime>
       </d2p1:Step>
       <d2p1:StepImageKey>WidgetBindingSetBluem25r2tib.m2x</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
@@ -429,13 +443,97 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Desktop command: LeftClick on BlueListItem</d2p1:Description>
+      <d2p1:Description>Click 'BlueListItem'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>6</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>934c0623-6ea5-4510-a26b-0b55642b9f38</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>0459a4af-632f-49b9-867e-20a3a7a466ba</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="d2p1:ClickActionDescriptor">
+        <d2p1:Constraints xmlns:d5p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
+          <d5p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </d5p1:ConstraintValues>
+        </d2p1:Constraints>
+        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:EditorType />
+        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+          <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+            <d5p1:Key>target</d5p1:Key>
+            <d5p1:Value xmlns:d7p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
+              <d7p1:DomStateKey />
+              <d7p1:FindExpression i:type="d7p1:HtmlFindExpressionElement">
+                <d7p1:BackupSearchClause>/html[1]/body[1]/div[7]/div[1]/ul[1]/li[1]</d7p1:BackupSearchClause>
+                <d7p1:FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+                  <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                    <d9p1:key>Html</d9p1:key>
+                    <d9p1:value i:type="d7p1:HtmlFindExpression">
+                      <d7p1:ChainStops />
+                      <d7p1:Clauses>
+                        <d7p1:HtmlFindClause>
+                          <d7p1:Clause>TagIndex=li:82</d7p1:Clause>
+                        </d7p1:HtmlFindClause>
+                      </d7p1:Clauses>
+                      <d7p1:Constraints />
+                    </d9p1:value>
+                  </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                </d7p1:FindExpressions>
+                <d7p1:Name>BlueListItem</d7p1:Name>
+                <d7p1:NodeKind>4</d7p1:NodeKind>
+                <d7p1:TechnologyType>Html</d7p1:TechnologyType>
+              </d7p1:FindExpression>
+              <d7p1:FindInfo i:nil="true" />
+              <d7p1:Frame i:nil="true" />
+              <d7p1:HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlControl</d7p1:HtmlControlType>
+              <d7p1:IsIndependent>false</d7p1:IsIndependent>
+              <d7p1:Name>target</d7p1:Name>
+              <d7p1:Page i:type="d2p1:PageUri">
+                <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
+                <d2p1:BaseUrl>http://mvc-kendobuild/staging</d2p1:BaseUrl>
+                <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
+                <d2p1:EquivalentUrls />
+                <d2p1:Fragment />
+                <d2p1:FriendlyName>WidgetBinding</d2p1:FriendlyName>
+                <d2p1:Path>/web/mvvm/widgets.html</d2p1:Path>
+                <d2p1:Query />
+                <d2p1:Title>Widget binding</d2p1:Title>
+              </d7p1:Page>
+              <d7p1:Region i:nil="true" />
+              <d7p1:TechnologyType>Html</d7p1:TechnologyType>
+              <d7p1:Version>200</d7p1:Version>
+            </d5p1:Value>
+          </d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+        </d2p1:Elements>
+        <d2p1:LogMessageOnFailure />
+        <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
+        <d2p1:StepType>Action</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
+        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
+        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
+        <AjaxTimeout xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">0</AjaxTimeout>
+        <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
+        <UseBackupSearch xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">true</UseBackupSearch>
+        <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
+      </d2p1:Step>
+      <d2p1:StepImageKey>WidgetBindingSetBluel0a3ta0l.n0n</d2p1:StepImageKey>
+      <d2p1:StepState>NoCode</d2p1:StepState>
+      <d2p1:Version>200</d2p1:Version>
+    </d2p1:AutomationStep>
+    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
+      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
+      <d2p1:CustomDescription i:nil="true" />
+      <d2p1:Description>Desktop command: LeftClick on BlueListItem</d2p1:Description>
+      <d2p1:Enabled>false</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>7</d2p1:Order>
+      <d2p1:QcId>0</d2p1:QcId>
+      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
+      <d2p1:Runtime_x0020_ID>92b0c9e3-bf94-43ae-b18b-a78c3e1f1b94</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:DesktopActionDescriptor">
         <d2p1:Constraints xmlns:d5p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
           <d5p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -505,7 +603,7 @@
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
         <UseBackupSearch xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">true</UseBackupSearch>
         <d2p1:DesktopActionType>LeftClick</d2p1:DesktopActionType>
-        <d2p1:Focus>false</d2p1:Focus>
+        <d2p1:Focus>true</d2p1:Focus>
         <d2p1:OffSet>
           <d2p1:ClickUnitType>Percentage</d2p1:ClickUnitType>
           <d2p1:OffSetReference>AbsoluteCenter</d2p1:OffSetReference>
@@ -523,10 +621,10 @@
       <d2p1:Description>Click 'BlueListItem'</d2p1:Description>
       <d2p1:Enabled>false</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>7</d2p1:Order>
+      <d2p1:Order>8</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>8a18b242-baeb-480a-84e8-53fb92d88497</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>0ea84dc4-8571-47a2-9eb4-ac42b67b831b</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints xmlns:d5p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
           <d5p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -607,10 +705,10 @@
       <d2p1:Description>Wait for 'TextContent' 'Contains' '{"name":"Blue","value":"#00f"}' on 'NameBlueSpan'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>8</d2p1:Order>
+      <d2p1:Order>9</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>da46dbf7-2745-43a3-b4a0-11fd31a9b1b2</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>7bb2de54-d023-441e-aeca-563de1f4f675</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints xmlns:d5p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
           <d5p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">

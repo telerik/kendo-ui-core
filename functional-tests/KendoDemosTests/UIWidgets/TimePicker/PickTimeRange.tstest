@@ -1,4 +1,17 @@
 ﻿<WebAiiTest xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/3.0.0">
+  <DataInfo xmlns:d2p1="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+    <d2p1:BuiltInData i:nil="true" />
+    <d2p1:BuiltInDocumentKey i:nil="true" />
+    <d2p1:ConnectionString />
+    <d2p1:DataEnabled>true</d2p1:DataEnabled>
+    <d2p1:DataProvider />
+    <d2p1:DataRange />
+    <d2p1:DataTableName />
+    <d2p1:DataType>None</d2p1:DataType>
+    <d2p1:DefaultToGrid>true</d2p1:DefaultToGrid>
+    <d2p1:HasBuiltinGrid>false</d2p1:HasBuiltinGrid>
+    <d2p1:TSQL />
+  </DataInfo>
   <Description />
   <IsManual>false</IsManual>
   <Name>PickTimeRange</Name>
@@ -12,8 +25,9 @@
   <CurrentReferences xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
     <d2p1:string>System</d2p1:string>
     <d2p1:string>System.Core</d2p1:string>
-    <d2p1:string>ArtOfTest.WebAii, Version=2012.1.509.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c</d2p1:string>
-    <d2p1:string>ArtOfTest.WebAii.Design, Version=2012.1.509.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d</d2p1:string>
+    <d2p1:string>ArtOfTest.WebAii, Version=2012.1.518.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c</d2p1:string>
+    <d2p1:string>ArtOfTest.WebAii.Design, Version=2012.1.518.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d</d2p1:string>
+    <d2p1:string>Telerik.WebAii.Controls.Html, Version=2012.1.411.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
     <d2p1:string>Telerik.TestingFramework.Controls.KendoUI, Version=2012.1.322.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
     <d2p1:string>c:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\PublicAssemblies\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll</d2p1:string>
     <d2p1:string>System.Windows.Forms</d2p1:string>
@@ -73,7 +87,7 @@
       <d2p1:Order>1</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>9e23fa9e-6373-4afb-9769-a09146743626</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>9e73705f-0af9-42d4-b064-e730fb5ac7a1</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints xmlns:d5p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
           <d5p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -112,7 +126,7 @@
       <d2p1:Order>2</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>0817bd9d-5f02-4c37-b55f-03fbeaeacb88</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>8c1aaaf1-c6be-4f5b-bfd0-4f6cbb186265</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints xmlns:d5p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
           <d5p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -195,13 +209,394 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Click 'x1000AMListItem'</d2p1:Description>
-      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Description>Click 'SelectSpan'</d2p1:Description>
+      <d2p1:Enabled>false</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>3</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>5b353011-e08f-4980-bc92-a6863a7b72a9</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>7499a99c-2744-4711-a77b-1ea9836ccd07</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="d2p1:ClickActionDescriptor">
+        <d2p1:Constraints xmlns:d5p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
+          <d5p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </d5p1:ConstraintValues>
+        </d2p1:Constraints>
+        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:EditorType />
+        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+          <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+            <d5p1:Key>target</d5p1:Key>
+            <d5p1:Value xmlns:d7p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
+              <d7p1:DomStateKey />
+              <d7p1:FindExpression i:type="d7p1:HtmlFindExpressionElement">
+                <d7p1:BackupSearchClause>/html[1]/body[1]/div[5]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/span[1]/span[1]/span[1]/span[1]</d7p1:BackupSearchClause>
+                <d7p1:FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+                  <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                    <d9p1:key>Html</d9p1:key>
+                    <d9p1:value i:type="d7p1:HtmlFindExpression">
+                      <d7p1:ChainStops>
+                        <d5p1:int>1</d5p1:int>
+                      </d7p1:ChainStops>
+                      <d7p1:Clauses>
+                        <d7p1:HtmlFindClause>
+                          <d7p1:Clause>id=example</d7p1:Clause>
+                        </d7p1:HtmlFindClause>
+                        <d7p1:HtmlFindClause>
+                          <d7p1:Clause>tagIndex=span:3</d7p1:Clause>
+                        </d7p1:HtmlFindClause>
+                      </d7p1:Clauses>
+                      <d7p1:Constraints />
+                    </d9p1:value>
+                  </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                </d7p1:FindExpressions>
+                <d7p1:Name>SelectSpan</d7p1:Name>
+                <d7p1:NodeKind>4</d7p1:NodeKind>
+                <d7p1:TechnologyType>Html</d7p1:TechnologyType>
+              </d7p1:FindExpression>
+              <d7p1:FindInfo i:nil="true" />
+              <d7p1:Frame i:nil="true" />
+              <d7p1:HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlSpan</d7p1:HtmlControlType>
+              <d7p1:IsIndependent>false</d7p1:IsIndependent>
+              <d7p1:Name>target</d7p1:Name>
+              <d7p1:Page i:type="d2p1:PageUri">
+                <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
+                <d2p1:BaseUrl>http://mvc-kendobuild/staging</d2p1:BaseUrl>
+                <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
+                <d2p1:EquivalentUrls />
+                <d2p1:Fragment />
+                <d2p1:FriendlyName>RangeSelection5</d2p1:FriendlyName>
+                <d2p1:Path>/web/timepicker/rangeselection.html</d2p1:Path>
+                <d2p1:Query />
+                <d2p1:Title>Range selection</d2p1:Title>
+              </d7p1:Page>
+              <d7p1:Region i:nil="true" />
+              <d7p1:TechnologyType>Html</d7p1:TechnologyType>
+              <d7p1:Version>200</d7p1:Version>
+            </d5p1:Value>
+          </d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+        </d2p1:Elements>
+        <d2p1:LogMessageOnFailure />
+        <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
+        <d2p1:StepType>Action</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
+        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
+        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
+        <AjaxTimeout xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">0</AjaxTimeout>
+        <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
+        <UseBackupSearch xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">true</UseBackupSearch>
+        <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
+      </d2p1:Step>
+      <d2p1:StepImageKey>PickTimeRangerjzfghvl.rsp</d2p1:StepImageKey>
+      <d2p1:StepState>NoCode</d2p1:StepState>
+      <d2p1:Version>200</d2p1:Version>
+    </d2p1:AutomationStep>
+    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
+      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
+      <d2p1:CustomDescription i:nil="true" />
+      <d2p1:Description>Click 'x1000AMListItem0'</d2p1:Description>
+      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>4</d2p1:Order>
+      <d2p1:QcId>0</d2p1:QcId>
+      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
+      <d2p1:Runtime_x0020_ID>6df03a7d-8e64-4992-830d-abc33b21359e</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="d2p1:ClickActionDescriptor">
+        <d2p1:Constraints xmlns:d5p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
+          <d5p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </d5p1:ConstraintValues>
+        </d2p1:Constraints>
+        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:EditorType />
+        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+          <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+            <d5p1:Key>target</d5p1:Key>
+            <d5p1:Value xmlns:d7p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
+              <d7p1:DomStateKey />
+              <d7p1:FindExpression i:type="d7p1:HtmlFindExpressionElement">
+                <d7p1:BackupSearchClause>/html[1]/body[1]/div[7]/div[1]/ul[1]/li[5]</d7p1:BackupSearchClause>
+                <d7p1:FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+                  <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                    <d9p1:key>Html</d9p1:key>
+                    <d9p1:value i:type="d7p1:HtmlFindExpression">
+                      <d7p1:ChainStops />
+                      <d7p1:Clauses>
+                        <d7p1:HtmlFindClause>
+                          <d7p1:Clause>TagIndex=li:74</d7p1:Clause>
+                        </d7p1:HtmlFindClause>
+                      </d7p1:Clauses>
+                      <d7p1:Constraints />
+                    </d9p1:value>
+                  </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                </d7p1:FindExpressions>
+                <d7p1:Name>x1000AMListItem0</d7p1:Name>
+                <d7p1:NodeKind>4</d7p1:NodeKind>
+                <d7p1:TechnologyType>Html</d7p1:TechnologyType>
+              </d7p1:FindExpression>
+              <d7p1:FindInfo i:nil="true" />
+              <d7p1:Frame i:nil="true" />
+              <d7p1:HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlControl</d7p1:HtmlControlType>
+              <d7p1:IsIndependent>false</d7p1:IsIndependent>
+              <d7p1:Name>target</d7p1:Name>
+              <d7p1:Page i:type="d2p1:PageUri">
+                <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
+                <d2p1:BaseUrl>http://mvc-kendobuild/staging</d2p1:BaseUrl>
+                <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
+                <d2p1:EquivalentUrls />
+                <d2p1:Fragment />
+                <d2p1:FriendlyName>RangeSelection5</d2p1:FriendlyName>
+                <d2p1:Path>/web/timepicker/rangeselection.html</d2p1:Path>
+                <d2p1:Query />
+                <d2p1:Title>Range selection</d2p1:Title>
+              </d7p1:Page>
+              <d7p1:Region i:nil="true" />
+              <d7p1:TechnologyType>Html</d7p1:TechnologyType>
+              <d7p1:Version>200</d7p1:Version>
+            </d5p1:Value>
+          </d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+        </d2p1:Elements>
+        <d2p1:LogMessageOnFailure />
+        <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
+        <d2p1:StepType>Action</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
+        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
+        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
+        <AjaxTimeout xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">0</AjaxTimeout>
+        <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
+        <UseBackupSearch xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">true</UseBackupSearch>
+        <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
+      </d2p1:Step>
+      <d2p1:StepImageKey>PickTimeRangejptrntre.lx0</d2p1:StepImageKey>
+      <d2p1:StepState>NoCode</d2p1:StepState>
+      <d2p1:Version>200</d2p1:Version>
+    </d2p1:AutomationStep>
+    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
+      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
+      <d2p1:CustomDescription i:nil="true" />
+      <d2p1:Description>Wait for '500' msec.</d2p1:Description>
+      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>5</d2p1:Order>
+      <d2p1:QcId>0</d2p1:QcId>
+      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
+      <d2p1:Runtime_x0020_ID>16818a4c-94a6-45f8-bb25-61e773f6cb54</d2p1:Runtime_x0020_ID>
+      <d2p1:Step xmlns:d4p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0" i:type="d4p1:SleepActionDescriptor">
+        <d2p1:Constraints>
+          <d4p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </d4p1:ConstraintValues>
+        </d2p1:Constraints>
+        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:EditorType />
+        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:LogMessageOnFailure />
+        <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
+        <d2p1:StepType>Action</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
+        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
+        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
+        <d4p1:WaitTime>500</d4p1:WaitTime>
+      </d2p1:Step>
+      <d2p1:StepImageKey>PickTimeRangeentsnllp.itm</d2p1:StepImageKey>
+      <d2p1:StepState>NoCode</d2p1:StepState>
+      <d2p1:Version>200</d2p1:Version>
+    </d2p1:AutomationStep>
+    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
+      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
+      <d2p1:CustomDescription i:nil="true" />
+      <d2p1:Description>Click 'SelectSpan0'</d2p1:Description>
+      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>6</d2p1:Order>
+      <d2p1:QcId>0</d2p1:QcId>
+      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
+      <d2p1:Runtime_x0020_ID>3566701f-c677-42fc-8b54-7a673887f87d</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="d2p1:ClickActionDescriptor">
+        <d2p1:Constraints xmlns:d5p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
+          <d5p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </d5p1:ConstraintValues>
+        </d2p1:Constraints>
+        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:EditorType />
+        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+          <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+            <d5p1:Key>target</d5p1:Key>
+            <d5p1:Value xmlns:d7p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
+              <d7p1:DomStateKey />
+              <d7p1:FindExpression i:type="d7p1:HtmlFindExpressionElement">
+                <d7p1:BackupSearchClause>/html[1]/body[1]/div[5]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/span[2]/span[1]/span[1]/span[1]</d7p1:BackupSearchClause>
+                <d7p1:FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+                  <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                    <d9p1:key>Html</d9p1:key>
+                    <d9p1:value i:type="d7p1:HtmlFindExpression">
+                      <d7p1:ChainStops>
+                        <d5p1:int>1</d5p1:int>
+                      </d7p1:ChainStops>
+                      <d7p1:Clauses>
+                        <d7p1:HtmlFindClause>
+                          <d7p1:Clause>id=example</d7p1:Clause>
+                        </d7p1:HtmlFindClause>
+                        <d7p1:HtmlFindClause>
+                          <d7p1:Clause>tagIndex=span:7</d7p1:Clause>
+                        </d7p1:HtmlFindClause>
+                      </d7p1:Clauses>
+                      <d7p1:Constraints />
+                    </d9p1:value>
+                  </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                </d7p1:FindExpressions>
+                <d7p1:Name>SelectSpan0</d7p1:Name>
+                <d7p1:NodeKind>4</d7p1:NodeKind>
+                <d7p1:TechnologyType>Html</d7p1:TechnologyType>
+              </d7p1:FindExpression>
+              <d7p1:FindInfo i:nil="true" />
+              <d7p1:Frame i:nil="true" />
+              <d7p1:HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlSpan</d7p1:HtmlControlType>
+              <d7p1:IsIndependent>false</d7p1:IsIndependent>
+              <d7p1:Name>target</d7p1:Name>
+              <d7p1:Page i:type="d2p1:PageUri">
+                <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
+                <d2p1:BaseUrl>http://mvc-kendobuild/staging</d2p1:BaseUrl>
+                <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
+                <d2p1:EquivalentUrls />
+                <d2p1:Fragment />
+                <d2p1:FriendlyName>RangeSelection5</d2p1:FriendlyName>
+                <d2p1:Path>/web/timepicker/rangeselection.html</d2p1:Path>
+                <d2p1:Query />
+                <d2p1:Title>Range selection</d2p1:Title>
+              </d7p1:Page>
+              <d7p1:Region i:nil="true" />
+              <d7p1:TechnologyType>Html</d7p1:TechnologyType>
+              <d7p1:Version>200</d7p1:Version>
+            </d5p1:Value>
+          </d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+        </d2p1:Elements>
+        <d2p1:LogMessageOnFailure />
+        <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
+        <d2p1:StepType>Action</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
+        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
+        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
+        <AjaxTimeout xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">0</AjaxTimeout>
+        <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
+        <UseBackupSearch xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">true</UseBackupSearch>
+        <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
+      </d2p1:Step>
+      <d2p1:StepImageKey>PickTimeRangegy2mraie.ogy</d2p1:StepImageKey>
+      <d2p1:StepState>NoCode</d2p1:StepState>
+      <d2p1:Version>200</d2p1:Version>
+    </d2p1:AutomationStep>
+    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
+      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
+      <d2p1:CustomDescription i:nil="true" />
+      <d2p1:Description>Click 'x930AMListItem'</d2p1:Description>
+      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>7</d2p1:Order>
+      <d2p1:QcId>0</d2p1:QcId>
+      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
+      <d2p1:Runtime_x0020_ID>a0e68447-28e0-4c1a-8c1d-1242b04c5c0d</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="d2p1:ClickActionDescriptor">
+        <d2p1:Constraints xmlns:d5p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
+          <d5p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </d5p1:ConstraintValues>
+        </d2p1:Constraints>
+        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:EditorType />
+        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+          <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+            <d5p1:Key>target</d5p1:Key>
+            <d5p1:Value xmlns:d7p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
+              <d7p1:DomStateKey />
+              <d7p1:FindExpression i:type="d7p1:HtmlFindExpressionElement">
+                <d7p1:BackupSearchClause>/html[1]/body[1]/div[8]/div[1]/ul[1]/li[47]</d7p1:BackupSearchClause>
+                <d7p1:FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+                  <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                    <d9p1:key>Html</d9p1:key>
+                    <d9p1:value i:type="d7p1:HtmlFindExpression">
+                      <d7p1:ChainStops />
+                      <d7p1:Clauses>
+                        <d7p1:HtmlFindClause>
+                          <d7p1:Clause>TagIndex=li:137</d7p1:Clause>
+                        </d7p1:HtmlFindClause>
+                      </d7p1:Clauses>
+                      <d7p1:Constraints />
+                    </d9p1:value>
+                  </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                </d7p1:FindExpressions>
+                <d7p1:Name>x930AMListItem</d7p1:Name>
+                <d7p1:NodeKind>4</d7p1:NodeKind>
+                <d7p1:TechnologyType>Html</d7p1:TechnologyType>
+              </d7p1:FindExpression>
+              <d7p1:FindInfo i:nil="true" />
+              <d7p1:Frame i:nil="true" />
+              <d7p1:HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlControl</d7p1:HtmlControlType>
+              <d7p1:IsIndependent>false</d7p1:IsIndependent>
+              <d7p1:Name>target</d7p1:Name>
+              <d7p1:Page i:type="d2p1:PageUri">
+                <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
+                <d2p1:BaseUrl>http://mvc-kendobuild/staging</d2p1:BaseUrl>
+                <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
+                <d2p1:EquivalentUrls />
+                <d2p1:Fragment />
+                <d2p1:FriendlyName>RangeSelection5</d2p1:FriendlyName>
+                <d2p1:Path>/web/timepicker/rangeselection.html</d2p1:Path>
+                <d2p1:Query />
+                <d2p1:Title>Range selection</d2p1:Title>
+              </d7p1:Page>
+              <d7p1:Region i:nil="true" />
+              <d7p1:TechnologyType>Html</d7p1:TechnologyType>
+              <d7p1:Version>200</d7p1:Version>
+            </d5p1:Value>
+          </d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+        </d2p1:Elements>
+        <d2p1:LogMessageOnFailure />
+        <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
+        <d2p1:StepType>Action</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
+        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
+        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
+        <AjaxTimeout xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">0</AjaxTimeout>
+        <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
+        <UseBackupSearch xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">true</UseBackupSearch>
+        <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
+      </d2p1:Step>
+      <d2p1:StepImageKey>PickTimeRangeiazvqxe2.rnx</d2p1:StepImageKey>
+      <d2p1:StepState>NoCode</d2p1:StepState>
+      <d2p1:Version>200</d2p1:Version>
+    </d2p1:AutomationStep>
+    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
+      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
+      <d2p1:CustomDescription i:nil="true" />
+      <d2p1:Description>Click 'x1000AMListItem'</d2p1:Description>
+      <d2p1:Enabled>false</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>8</d2p1:Order>
+      <d2p1:QcId>0</d2p1:QcId>
+      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
+      <d2p1:Runtime_x0020_ID>72de026e-6833-49aa-b16c-d2c70c66f7b2</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints xmlns:d5p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
           <d5p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -279,43 +674,13 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Wait for '500' msec.</d2p1:Description>
-      <d2p1:Enabled>true</d2p1:Enabled>
-      <d2p1:Id />
-      <d2p1:Order>4</d2p1:Order>
-      <d2p1:QcId>0</d2p1:QcId>
-      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>77e04e78-5c59-4379-a675-da47fc681b0e</d2p1:Runtime_x0020_ID>
-      <d2p1:Step xmlns:d4p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0" i:type="d4p1:SleepActionDescriptor">
-        <d2p1:Constraints>
-          <d4p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        </d2p1:Constraints>
-        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d2p1:EditorType />
-        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d2p1:LogMessageOnFailure />
-        <d2p1:Pause>None</d2p1:Pause>
-        <d2p1:RunsAgainstVersion />
-        <d2p1:StepType>Action</d2p1:StepType>
-        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
-        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
-        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
-        <d4p1:WaitTime>500</d4p1:WaitTime>
-      </d2p1:Step>
-      <d2p1:StepImageKey>PickTimeRangeentsnllp.itm</d2p1:StepImageKey>
-      <d2p1:StepState>NoCode</d2p1:StepState>
-      <d2p1:Version>200</d2p1:Version>
-    </d2p1:AutomationStep>
-    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
-      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
-      <d2p1:CustomDescription i:nil="true" />
       <d2p1:Description>Click 'SelectSpan'</d2p1:Description>
-      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Enabled>false</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>5</d2p1:Order>
+      <d2p1:Order>9</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>8556cb46-ae07-4c9e-9956-5ed78f68a021</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>0d86389e-3a59-4c91-8125-e03283a10446</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints xmlns:d5p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
           <d5p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -399,12 +764,12 @@
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
       <d2p1:Description>Click 'x930AMListItem'</d2p1:Description>
-      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Enabled>false</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>6</d2p1:Order>
+      <d2p1:Order>10</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>f71cdd1e-cb13-4500-bbed-3be7b302650c</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>9458d4d2-17dd-4178-acf6-92feba693d54</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints xmlns:d5p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
           <d5p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -483,12 +848,12 @@
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
       <d2p1:Description>Wait for textbox 'StartText' content 'Contains' '10:00 AM'.</d2p1:Description>
-      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Enabled>false</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>7</d2p1:Order>
+      <d2p1:Order>11</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>380d7f82-a669-4585-95e9-7c5f2c7185b5</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>e8f5b1f5-62bf-4085-b792-5492873ab39b</d2p1:Runtime_x0020_ID>
       <d2p1:Step xmlns:d4p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0" i:type="d4p1:InputTextBoxVerificationDescriptor">
         <d2p1:Constraints>
           <d4p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -575,10 +940,10 @@
       <d2p1:Description>Wait for textbox 'EndText' content 'Contains' '9:30 AM'.</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>8</d2p1:Order>
+      <d2p1:Order>12</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>d6657148-7390-41f0-91fa-59d7940820e0</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>3886a7b2-b301-4c57-86a9-67c0658a1c88</d2p1:Runtime_x0020_ID>
       <d2p1:Step xmlns:d4p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0" i:type="d4p1:InputTextBoxVerificationDescriptor">
         <d2p1:Constraints>
           <d4p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
