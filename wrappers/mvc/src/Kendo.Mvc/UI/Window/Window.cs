@@ -194,7 +194,7 @@ namespace Kendo.Mvc.UI
 
             //properties
             objectWriter.Append("modal", Modal);
-            objectWriter.Append("content", ContentUrl);
+            objectWriter.Append("Content", ContentUrl);
             objectWriter.Append("draggable", Draggable);
             objectWriter.Append("width", Width);
             objectWriter.Append("height", Height);

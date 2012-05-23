@@ -138,7 +138,7 @@ namespace Kendo.Mvc.UI
             objectWriter.Append("depth", Depth); //use Enum
             objectWriter.Append("start", Start); //use Enum
 
-            if (MonthTemplate.content.HasValue() || MonthTemplate.empty.HasValue())
+            if (MonthTemplate.Content.HasValue() || MonthTemplate.Empty.HasValue())
             {
                 objectWriter.AppendObject("month", MonthTemplate);
             }

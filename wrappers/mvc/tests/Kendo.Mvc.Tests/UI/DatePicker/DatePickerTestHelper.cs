@@ -4,9 +4,9 @@ namespace Kendo.Mvc.UI.Tests
     using System.Web;
     using System.Web.Mvc;
     using System.Web.UI;
-
-    using Moq;
+    using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.UI.Html;
+    using Moq;
 
     public static class DatePickerTestHelper
     {
@@ -18,14 +18,11 @@ namespace Kendo.Mvc.UI.Tests
 
             httpContext.Setup(c => c.Request.Browser.CreateHtmlTextWriter(It.IsAny<TextWriter>())).Returns(new HtmlTextWriter(TextWriter.Null));
             
-            Mock<IClientSideObjectWriterFactory> clientSideObjectWriterFactory = new Mock<IClientSideObjectWriterFactory>();
-            clientSideObjectWriter = new Mock<IClientSideObjectWriter>();
-
             viewContext = viewContext ?? TestHelper.CreateViewContext();
 
-            clientSideObjectWriterFactory.Setup(c => c.Create(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<TextWriter>())).Returns(clientSideObjectWriter.Object);
+            var initializer = new Mock<IJavaScriptInitializer>();
 
-            DatePicker datepicker = new DatePicker(viewContext, clientSideObjectWriterFactory.Object, new ViewDataDictionary());
+            DatePicker datepicker = new DatePicker(viewContext, initializer.Object, new ViewDataDictionary());
 
             return datepicker;
         }

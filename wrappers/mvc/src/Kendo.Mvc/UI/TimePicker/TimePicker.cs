@@ -1,20 +1,18 @@
 namespace Kendo.Mvc.UI
 {
-    using Kendo.Mvc.Extensions;
-    using Kendo.Mvc.UI.Html;
     using System;
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
     using System.Web.Mvc;
-    using System.Web.Query.Dynamic;
+    using Kendo.Mvc.UI.Html;
 
     public class TimePicker : ViewComponentBase, IInputComponent<DateTime>
     {
         public TimePicker(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory, ViewDataDictionary viewData)
             : base(viewContext, clientSideObjectWriterFactory, viewData)
         {
-            ClientEvents = new DatePickerClientEvents();
+            ClientEvents = new Dictionary<string, ClientEvent>();
 
             Format = CultureInfo.CurrentCulture.DateTimeFormat.ShortTimePattern;
 
@@ -29,7 +27,7 @@ namespace Kendo.Mvc.UI
             ParseFormats = new List<string>();
         }
 
-        public DatePickerClientEvents ClientEvents
+        public IDictionary<string, ClientEvent> ClientEvents
         {
             get;
             private set;
@@ -89,7 +87,7 @@ namespace Kendo.Mvc.UI
 
             objectWriter.Start();
 
-            ClientEvents.SerializeTo(objectWriter);
+//TODO: Serialize            ClientEvents.SerializeTo(objectWriter);
 
             objectWriter.Append("format", this.Format);
             objectWriter.AppendCollection("parseFormats", this.ParseFormats);
