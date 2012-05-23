@@ -283,7 +283,7 @@
             }
         },
         _canDrag: function(element) {
-            return element.attr(kendo.attr("groupable")) != "false" && !this.indicator(element.attr(kendo.attr("field")));
+            return element.attr(kendo.attr("groupable")) != "false" && (element.hasClass("k-group-indicator") || !this.indicator(element.attr(kendo.attr("field"))));
         },
         _canDrop: function(source, target, position) {
             var next = source.next();
