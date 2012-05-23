@@ -1,3 +1,9 @@
+<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/DataViz.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+
+<asp:Content ContentPlaceHolderID="HeadContent" runat="server">
+</asp:Content>
+
+<asp:Content ContentPlaceHolderID="MainContent" runat="server">
 <div class="configuration k-widget k-header" style="width:190px;">
     <span class="configHead">Gauge</span>
     <ul class="options">
@@ -23,24 +29,24 @@
     </ul>
 </div>
 <div id="gauge-container">
-    @(Html.Kendo().RadialGauge<int>()
-          .Name("radialgauge")
-          .Pointer(pointer => pointer.Value(65))
-          .Scale(scale => scale
-              .MinorUnit(5)
-              .StartAngle(-30)
-              .EndAngle(210)
-              .Max(180)
-              .Labels(labels => labels
-                  .Position(GaugeRadialScaleLabelsPosition.Inside)
-              )
-              .Ranges(ranges => {
-                  ranges.Add().From(80).To(120).Color("#ffc700");
-                  ranges.Add().From(120).To(150).Color("#ff7a00");
-                  ranges.Add().From(150).To(180).Color("#c20000");
-              })
-         )
-    )
+    <%= Html.Kendo().RadialGauge<int>()
+            .Name("radialgauge")
+            .Pointer(pointer => pointer.Value(65))
+            .Scale(scale => scale
+                .MinorUnit(5)
+                .StartAngle(-30)
+                .EndAngle(210)
+                .Max(180)
+                .Labels(labels => labels
+                    .Position(GaugeRadialScaleLabelsPosition.Inside)
+                )
+                .Ranges(ranges => {
+                    ranges.Add().From(80).To(120).Color("#ffc700");
+                    ranges.Add().From(120).To(150).Color("#ff7a00");
+                    ranges.Add().From(150).To(180).Color("#c20000");
+                })
+            )
+    %>
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
@@ -67,9 +73,9 @@
     }
 </script>
 
-<style>
+<style scoped>
     #gauge-container {
-        background: transparent url(@Url.Content("~/Content/dataviz/gauge/gauge-container.png")) no-repeat 50% 50%;
+        background: transparent url(<%= Url.Content("~/Content/dataviz/gauge/gauge-container.png") %>) no-repeat 50% 50%;
         width: 404px;
         height: 404px;
         text-align: center;
@@ -82,3 +88,4 @@
         margin: 0 auto 0;
     }
 </style>
+</asp:Content>
