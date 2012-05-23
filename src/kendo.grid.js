@@ -2354,7 +2354,7 @@
                 tr = $(this),
                 offset = tr.find(".k-group-cell").length;
 
-                if (tr.hasClass("k-group-row")) {
+                if (tr.hasClass("k-grouping-row")) {
                     footerCount++;
                 } else if (tr.hasClass("k-group-footer")) {
                     footerCount--;
