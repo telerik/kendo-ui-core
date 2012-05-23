@@ -40,15 +40,18 @@
             }
             else
             {
-                var animation = string.Join(",", new string[] { Open.Serialize(), Close.Serialize() }.Where(item => item.HasValue()));
+                var options = Open.ToJson();
+                
+                options.Merge(Close.ToJson());
 
-                if (animation.HasValue())
+                if (options.Keys.Any())
                 {
-                    json["animation"] = animation;
+                    json["animation"] = options;
                 }
             }
         }
 
+        //obsolete
         public void SerializeTo(IClientSideObjectWriter writer)
         {
             if (Enabled == false)
