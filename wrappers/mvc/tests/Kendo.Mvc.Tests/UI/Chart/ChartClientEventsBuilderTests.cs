@@ -102,6 +102,45 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
+        public void OnSeriesHover_with_Action_should_set_CodeBlock()
+        {
+            builder.OnSeriesHover(emptyAction);
+            clientEvents.OnSeriesHover.CodeBlock.ShouldNotBeNull();
+        }
+
+        [Fact]
+        public void OnSeriesHover_with_Action_should_return_builder()
+        {
+            builder.OnSeriesHover(emptyAction).ShouldBeType<ChartClientEventsBuilder>();
+        }
+
+        [Fact]
+        public void OnSeriesHover_with_Func_should_set_InlineCodeBlock()
+        {
+            builder.OnSeriesHover(nullFunc);
+            clientEvents.OnSeriesHover.InlineCodeBlock.ShouldNotBeNull();
+        }
+
+        [Fact]
+        public void OnSeriesHover_with_Func_should_return_builder()
+        {
+            builder.OnSeriesHover(nullFunc).ShouldBeType<ChartClientEventsBuilder>();
+        }
+
+        [Fact]
+        public void OnSeriesHover_with_string_should_set_HandlerName()
+        {
+            builder.OnSeriesHover(handlerName);
+            clientEvents.OnSeriesHover.HandlerName.ShouldEqual(handlerName);
+        }
+
+        [Fact]
+        public void OnSeriesHover_with_string_should_return_builder()
+        {
+            builder.OnSeriesHover(handlerName).ShouldBeType<ChartClientEventsBuilder>();
+        }
+
+        [Fact]
         public void OnError_with_Action_should_set_CodeBlock()
         {
             builder.OnError(emptyAction);

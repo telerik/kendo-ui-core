@@ -12,6 +12,7 @@ namespace Kendo.Mvc.UI
         {
             OnDataBound = new ClientEvent();
             OnDataBinding = new ClientEvent();
+            OnSeriesHover = new ClientEvent();
             OnSeriesClick = new ClientEvent();
             OnError = new ClientEvent();
         }
@@ -29,6 +30,15 @@ namespace Kendo.Mvc.UI
         /// Defines the DataBinding client-side event handler
         /// </summary>
         public ClientEvent OnDataBinding
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Defines the SeriesHover client-side event handler
+        /// </summary>
+        public ClientEvent OnSeriesHover
         {
             get;
             private set;
