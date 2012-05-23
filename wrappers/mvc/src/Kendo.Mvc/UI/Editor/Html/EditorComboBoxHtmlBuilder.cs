@@ -16,9 +16,9 @@ namespace Kendo.Mvc.UI.Html
             var li = new HtmlElement("li")
                     .AddClass("t-editor-combobox");
 
-            var builder = new ComboBoxHtmlBuilder(comboBox);
+            //var builder = new ComboBoxHtmlBuilder(comboBox);
 
-            IHtmlNode rootTag = builder.Build();
+            IHtmlNode rootTag = null; // builder.Build();
 
             rootTag.AppendTo(li);
             

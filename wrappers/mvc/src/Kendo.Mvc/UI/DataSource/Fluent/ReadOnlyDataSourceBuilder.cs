@@ -23,5 +23,17 @@
 
             return this;
         }
+
+        public ReadOnlyDataSourceBuilder ServerFiltering()
+        {
+            dataSource.ServerFiltering = true;
+            return this;
+        }
+
+        public ReadOnlyDataSourceBuilder ServerFiltering(bool enabled)
+        {
+            dataSource.ServerFiltering = enabled;
+            return this;
+        }
     }
 }

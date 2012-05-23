@@ -7,58 +7,80 @@ namespace Kendo.Mvc.UI
 
     using Extensions;
 
-    public class ComboBox : ViewComponentBase, IDropDown, IComboBoxRenderable
+    public class ComboBox : ViewComponentBase
     {
-        private bool hasItems = false;
-        //private readonly IList<IEffect> defaultEffects = new List<IEffect> { new SlideAnimation() };
+        //private bool hasItems = false;
 
-        public ComboBox(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory, IUrlGenerator urlGenerator)
-            : base(viewContext, clientSideObjectWriterFactory)
+        public ComboBox(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory, ViewDataDictionary viewData, IUrlGenerator urlGenerator)
+            : base(viewContext, clientSideObjectWriterFactory, viewData)
         {
-            UrlGenerator = urlGenerator;
+            UrlGenerator = urlGenerator; //check if needed
 
             ClientEvents = new DropDownClientEvents();
-            DataBinding = new AutoCompleteDataBindingConfiguration();
-            DropDownHtmlAttributes = new RouteValueDictionary();
-            HiddenInputHtmlAttributes = new RouteValueDictionary();
-            InputHtmlAttributes = new RouteValueDictionary();
 
-            //defaultEffects.Each(el => Effects.Container.Add(el));
+            //Items = new List<DropDownItem>();
 
-            Filtering = new ComboBoxFilterSettings();
+            //animation //
+            
+            DataSource = new DataSource();
 
-            Items = new List<DropDownItem>();
-            SelectedIndex = -1;
+            AutoBind = true;
             Enabled = true;
-            Encoded = true;
-            OpenOnFocus = false;
+            HighlightFirst = true;
             IgnoreCase = true;
-
+            SelectedIndex = -1;
+            Suggest = false;
         }
 
-        /// <summary>
-        /// Gets the id.
-        /// </summary>
-        /// <value>The id.</value>
-        public new string Id
-        {
-            get
-            {
-                // Return from htmlattributes if user has specified
-                // otherwise build it from name
-                return HiddenInputHtmlAttributes.ContainsKey("id") ?
-                       HiddenInputHtmlAttributes["id"].ToString() :
-                       (!string.IsNullOrEmpty(Name) ? Name.Replace(".", HtmlHelper.IdAttributeDotReplacement) : null);
-            }
-        }
-
-        public string CascadeTo
+        public bool AutoBind
         {
             get;
             set;
         }
 
-        public bool AutoFill
+        public DropDownClientEvents ClientEvents
+        {
+            get;
+            private set;
+        }
+        
+        public string DataTextField 
+        { 
+            get; 
+            set; 
+        }
+
+        public string DataValueField 
+        { 
+            get; 
+            set; 
+        }
+
+        public int? Delay
+        {
+            get;
+            set;
+        }
+
+        public bool Enabled
+        {
+            get;
+            set;
+        }
+
+        public string Filter
+        {
+            get;
+            set;
+        }   
+
+        public int? Height
+        {
+            get;
+            set;
+        }
+
+        public bool HighlightFirst
         {
             get;
             set;
@@ -70,94 +92,13 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        public bool Encoded
-        {
-            get;
-            set;
-        }
+        //public IList<DropDownItem> Items
+        //{
+        //    get;
+        //    private set;
+        //}
 
-        public IUrlGenerator UrlGenerator
-        {
-            get;
-            set;
-        }
-
-        public DropDownClientEvents ClientEvents
-        {
-            get;
-            private set;
-        }
-
-        public IDropDownDataBindingConfiguration DataBinding
-        {
-            get;
-            private set;
-        }
-
-        public IDictionary<string, object> DropDownHtmlAttributes
-        {
-            get;
-            private set;
-        }
-
-        public IDictionary<string, object> HiddenInputHtmlAttributes
-        {
-            get;
-            private set;
-        }
-
-        public IDictionary<string, object> InputHtmlAttributes
-        {
-            get;
-            private set;
-        }
-
-        public Effects Effects
-        {
-            get;
-            set;
-        }
-
-        public ComboBoxFilterSettings Filtering
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// Gets the items of the ComboBox.
-        /// </summary>
-        public IList<DropDownItem> Items
-        {
-            get;
-            private set;
-        }
-
-        public bool HighlightFirstMatch
-        {
-            get;
-            set;
-        }
-
-        public int SelectedIndex 
-        { 
-            get; 
-            set; 
-        }
-        
-        public string Value
-        { 
-            get; 
-            set; 
-        }
-
-        public bool Enabled 
-        { 
-            get; 
-            set; 
-        }
-
-        public bool OpenOnFocus
+        public int? MinLength
         {
             get;
             set;
@@ -169,53 +110,63 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        public DataSource DataSource
+        {
+            get;
+            private set;
+        }
+
+        public int SelectedIndex
+        {
+            get;
+            set;
+        }
+
+        public bool Suggest
+        {
+            get;
+            set;
+        }     
+
+        public string Template
+        {
+            get;
+            set;
+        }
+       
+        public IUrlGenerator UrlGenerator
+        {
+            get;
+            set;
+        }
+       
+        public string Value
+        { 
+            get; 
+            set; 
+        }
+
         public override void WriteInitializationScript(System.IO.TextWriter writer)
         {
-            IClientSideObjectWriter objectWriter = ClientSideObjectWriterFactory.Create(Id, "tComboBox", writer);
+            IClientSideObjectWriter objectWriter = ClientSideObjectWriterFactory.Create(Id, "kendoComboBox", writer);
 
             objectWriter.Start();
 
-            objectWriter.Append("autoFill", AutoFill, true);
+            objectWriter.Append("autoBind", AutoBind, true);
+            objectWriter.Append("dataTextField", DataTextField);
+            objectWriter.Append("dataValueField", DataValueField);
+            objectWriter.Append("delay", Delay);
+            objectWriter.Append("filter", Filter);
+            objectWriter.Append("height", Height);
+            objectWriter.Append("highlightFirst", HighlightFirst, true);
             objectWriter.Append("ignoreCase", IgnoreCase, true);
-            objectWriter.Append("highlightFirst", HighlightFirstMatch, true);
+            objectWriter.Append("index", SelectedIndex, -1);
+            objectWriter.Append("minLength", MinLength);
             objectWriter.Append("placeholder", this.Placeholder);
-            objectWriter.Append("cascadeTo", this.CascadeTo);
-
-            //if (!defaultEffects.SequenceEqual(Effects.Container))
-            //{
-            //    objectWriter.Serialize("effects", Effects);
-            //}
+            objectWriter.Append("suggest", Suggest, false);
+            objectWriter.Append("template", this.Template);
 
             ClientEvents.SerializeTo(objectWriter);
-
-            DataBinding.Ajax.SerializeTo<AutoCompleteBindingSettings>("ajax", objectWriter, this);
-            DataBinding.WebService.SerializeTo<AutoCompleteBindingSettings>("ws", objectWriter, this);
-
-            if (Filtering.Enabled)
-            {
-                objectWriter.Append("filter", (int)Filtering.FilterMode);
-                objectWriter.Append("minChars", Filtering.MinimumChars, 0);
-            }
-
-            if (hasItems)
-            {
-                objectWriter.AppendCollection("data", Items);
-            }
-            else
-            {
-                objectWriter.Append("selectedValue", this.GetValue<string>(Value));
-            }
-
-            objectWriter.Append("index", SelectedIndex, -1);
-
-            if (DropDownHtmlAttributes.Any())
-            {
-                objectWriter.Append("dropDownAttr", DropDownHtmlAttributes.ToAttributeString());
-            }
-
-            objectWriter.Append("encoded", this.Encoded, true);
-            objectWriter.Append("enabled", this.Enabled, true);
-            objectWriter.Append("openOnFocus", this.OpenOnFocus, false);
 
             objectWriter.Complete();
 
@@ -224,14 +175,14 @@ namespace Kendo.Mvc.UI
 
         protected override void WriteHtml(System.Web.UI.HtmlTextWriter writer)
         {
-            hasItems = Items.Any();
-            this.AddPlaceholderItem();
-            if (hasItems)
-            {
-                this.SyncSelectedIndex();
-            }
+            //hasItems = Items.Any();
+            //this.AddPlaceholderItem();
+            //if (hasItems)
+            //{
+            //    this.SyncSelectedIndex();
+            //}
 
-            IDropDownHtmlBuilder builder = new ComboBoxHtmlBuilder(this);
+            ComboBoxHtmlBuilder builder = new ComboBoxHtmlBuilder(this);
 
             builder.Build().WriteTo(writer);
 

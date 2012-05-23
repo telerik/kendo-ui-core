@@ -297,14 +297,7 @@
     <Compile Include="UI\Calendar\CalendarHtmlBuilderFactoryTests.cs" />
     <Compile Include="UI\Calendar\CalendarHtmlBuilderTests.cs" />
     <Compile Include="UI\ClientSideObjectWriterTests.cs" />
-    <Compile Include="UI\ComboBox\ComboBoxHtmlBuilderTests.cs" />
     <Compile Include="UI\ComboBox\ComboBoxTestHelper.cs" />
-    <Compile Include="UI\ComboBox\ComboBoxRenderingTests.cs" />
-    <Compile Include="UI\ComboBox\ComboBoxBindingSettingsBuilderTests.cs" />
-    <Compile Include="UI\ComboBox\ComboBoxBuilderTests.cs" />
-    <Compile Include="UI\ComboBox\ComboBoxFilterSettingsBuilderTests.cs" />
-    <Compile Include="UI\ComboBox\ComboBoxDataBindingConfigurationBuilderTests.cs" />
-    <Compile Include="UI\ComboBox\ComboBoxWebServiceBindingSettingsBuilderTests.cs" />
     <Compile Include="UI\ContentNavigationItemBuilderTests.cs" />
     <Compile Include="UI\DropDownList\DropDownExtensionsTests.cs" />
     <Compile Include="UI\DropDownList\DropDownListRenderingTests.cs" />
