@@ -21,6 +21,12 @@ namespace Kendo.Mvc.UI
                 .Add("endAngle", scale.EndAngle, () => scale.EndAngle.HasValue)
                 .Add("startAngle", scale.StartAngle, () => scale.StartAngle.HasValue);
 
+            var labelsData = scale.Labels.CreateSerializer().Serialize();
+            if (labelsData.Count > 0)
+            {
+                result.Add("labels", labelsData);
+            }
+
             return result;
         }
     }

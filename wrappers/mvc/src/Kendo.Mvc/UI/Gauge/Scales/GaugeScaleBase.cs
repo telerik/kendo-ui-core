@@ -12,7 +12,6 @@ namespace Kendo.Mvc.UI
         /// </summary>
         public GaugeScaleBase()
         {
-            Labels = new GaugeScaleLabels();
             Ranges = new List<GaugeScaleRanges>();
             MajorTicks = new GaugeScaleTicks();
             MinorTicks = new GaugeScaleTicks();
@@ -31,15 +30,6 @@ namespace Kendo.Mvc.UI
         /// The scale minor ticks configuration.
         /// </summary>
         public GaugeScaleTicks MinorTicks
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// The scale labels.
-        /// </summary>
-        public GaugeScaleLabels Labels
         {
             get;
             set;

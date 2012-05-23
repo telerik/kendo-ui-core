@@ -14,7 +14,6 @@ namespace Kendo.Mvc.UI.Tests
             scaleMock = new Mock<IGaugeScale<double>>();
             scaleMock.SetupGet(scale => scale.MinorTicks).Returns(new GaugeScaleTicks());
             scaleMock.SetupGet(scale => scale.MajorTicks).Returns(new GaugeScaleTicks());
-            scaleMock.SetupGet(a => a.Labels).Returns(new GaugeScaleLabels());
             scaleMock.SetupGet(a => a.Ranges).Returns(new List<GaugeScaleRanges>());
             serializer = new GaugeScaleSerializerBase<double>(scaleMock.Object);
         }
@@ -115,13 +114,6 @@ namespace Kendo.Mvc.UI.Tests
         public void Should_not_serialize_default_ranges()
         {
             serializer.Serialize().ContainsKey("ranges").ShouldBeFalse();
-        }
-
-        [Fact]
-        public void Should_serialize_labels()
-        {
-            scaleMock.SetupGet(a => a.Labels).Returns(new GaugeScaleLabels { Color = "red" });
-            serializer.Serialize().ContainsKey("labels").ShouldBeTrue();
         }
 
         [Fact]

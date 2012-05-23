@@ -1,3 +1,5 @@
+using System;
+using Kendo.Mvc.Infrastructure;
 namespace Kendo.Mvc.UI.Fluent
 {
     /// <summary>
@@ -62,6 +64,31 @@ namespace Kendo.Mvc.UI.Fluent
         public GaugeLinearScaleBuilder<T> Vertical(bool vertical)
         {
             linearGauge.Scale.Vertical = vertical;
+            return this;
+        }
+
+        /// <summary>
+        /// Configures the labels.
+        /// </summary>
+        /// <param name="configurator">The configuration action.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().LinearGauge()
+        ///            .Name("linearGauge")
+        ///            .Scale(scale => scale
+        ///                .Labels(labels => labels
+        ///                    .Visible(false)
+        ///                )
+        ///            )
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public GaugeLinearScaleBuilder<T> Labels(Action<GaugeLinearScaleLabelsBuilder> configurator)
+        {
+            Guard.IsNotNull(configurator, "configurator");
+
+            configurator(new GaugeLinearScaleLabelsBuilder(Scale.Labels));
+
             return this;
         }
     }

@@ -12,6 +12,7 @@ namespace Kendo.Mvc.UI
         public GaugeLinearScale(LinearGauge<T> gauge)
             : base()
         {
+            Labels = new GaugeLinearScaleLabels();
             lienarGauge = gauge;
         }
 
@@ -38,6 +39,15 @@ namespace Kendo.Mvc.UI
         /// The scale orientation.
         /// </summary>
         public bool? Vertical
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// The scale labels.
+        /// </summary>
+        public GaugeLinearScaleLabels Labels
         {
             get;
             set;

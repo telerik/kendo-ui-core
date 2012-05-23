@@ -86,31 +86,6 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Configures the labels.
-        /// </summary>
-        /// <param name="configurator">The configuration action.</param>
-        /// <example>
-        /// <code lang="CS">
-        /// &lt;%= Html.Kendo().LinearGauge()
-        ///            .Name("linearGauge")
-        ///            .Scale(scale => scale
-        ///                .Labels(labels => labels
-        ///                    .Visible(false)
-        ///                )
-        ///            )
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public TScaleBuilder Labels(Action<GaugeLabelsBuilder> configurator)
-        {
-            Guard.IsNotNull(configurator, "configurator");
-
-            configurator(new GaugeLabelsBuilder(Scale.Labels));
-
-            return this as TScaleBuilder;
-        }
-
-        /// <summary>
         /// Defines the ranges items.
         /// </summary>
         /// <param name="addAction">The add action.</param>

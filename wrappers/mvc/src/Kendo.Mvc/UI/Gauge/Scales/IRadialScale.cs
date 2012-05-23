@@ -15,5 +15,10 @@ namespace Kendo.Mvc.UI
         /// The scale start angle.
         /// </summary>
         double? StartAngle { get; set; }
+
+        /// <summary>
+        /// The scale labels.
+        /// </summary>
+        GaugeRadialScaleLabels Labels { get; set; }
     }
 }

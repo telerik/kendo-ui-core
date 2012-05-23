@@ -3,12 +3,12 @@ namespace Kendo.Mvc.UI
     /// <summary>
     /// Represents the options of the scale labels
     /// </summary>
-    public class GaugeScaleLabels : ChartLabels
+    public class GaugeScaleLabelsBase : ChartLabels
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="GaugeScaleLabels" /> class.
+        /// Initializes a new instance of the <see cref="GaugeScaleLabelsBase" /> class.
         /// </summary>
-        public GaugeScaleLabels()
+        public GaugeScaleLabelsBase()
         {
         }
 
@@ -17,7 +17,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         public override IChartSerializer CreateSerializer()
         {
-            return new GaugeScaleLabelsSerializer(this);
+            return new GaugeScaleLabelsSerializerBase(this);
         }
     }
 }

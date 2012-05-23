@@ -15,5 +15,10 @@ namespace Kendo.Mvc.UI
         /// The scale vertical.
         /// </summary>
         bool? Vertical { get; set; }
+        
+        /// <summary>
+        /// The scale labels.
+        /// </summary>
+        GaugeLinearScaleLabels Labels { get; set; }
     }
 }

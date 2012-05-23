@@ -9,11 +9,6 @@ namespace Kendo.Mvc.UI
         where T : struct
     {
         /// <summary>
-        /// The scale labels.
-        /// </summary>
-        GaugeScaleLabels Labels { get; set; }
-
-        /// <summary>
         /// The scale ranges.
         /// </summary>
         IList<GaugeScaleRanges> Ranges { get; set; }
