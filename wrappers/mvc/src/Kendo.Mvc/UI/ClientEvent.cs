@@ -1,7 +1,7 @@
-namespace Kendo.Mvc.UI
+namespace Kendo.Mvc
 {
     using System;
-
+    using Kendo.Mvc.Extensions;
     /// <summary>
     /// Represents a client-side event of a view component
     /// </summary>
@@ -28,6 +28,11 @@ namespace Kendo.Mvc.UI
         /// The name of the client-side handler function.
         /// </summary>
         public string HandlerName { get; set; }
+
+        public bool HasValue()
+        {
+            return HandlerName.HasValue() || InlineCodeBlock != null;
+        }
 
         public void Serialize(System.Collections.Generic.IDictionary<string, object> json)
         {

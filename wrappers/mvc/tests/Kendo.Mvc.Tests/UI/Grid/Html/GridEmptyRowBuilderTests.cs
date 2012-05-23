@@ -43,7 +43,7 @@ namespace Kendo.Mvc.UI.Html.Tests
         [Fact]
         public void Should_render_message_in_the_cell()
         {
-            const string emptyMessage = "this a empty message";
+            const string emptyMessage = "this a Empty message";
             emptyTemplate.Html = emptyMessage;
             GetCell(builder.CreateRow()).InnerHtml.ShouldEqual(emptyMessage);
         }

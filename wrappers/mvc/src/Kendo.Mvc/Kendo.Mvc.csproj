@@ -121,6 +121,8 @@
     <Compile Include="Infrastructure\FluentDictionary.cs" />
     <Compile Include="Infrastructure\ICacheFactory.cs" />
     <Compile Include="Infrastructure\ICacheProvider.cs" />
+    <Compile Include="Infrastructure\IJavaScriptInitializer.cs" />
+    <Compile Include="Infrastructure\IJavaScriptSerializer.cs" />
     <Compile Include="Infrastructure\ILocalizationServiceFactory.cs" />
     <Compile Include="Infrastructure\Implementation\AuthorizationContextCache.cs" />
     <Compile Include="Infrastructure\Implementation\Cache.cs" />
@@ -129,6 +131,7 @@
     <Compile Include="Infrastructure\Implementation\ClassFactory.cs" />
     <Compile Include="Infrastructure\Implementation\ControllerContextCache.cs" />
     <Compile Include="Infrastructure\Implementation\ControllerDescriptorCache.cs" />
+    <Compile Include="Infrastructure\Implementation\DefaultJavaScriptSerializer.cs" />
     <Compile Include="Infrastructure\Implementation\DependencyInjectionContainer.cs" />
     <Compile Include="Infrastructure\DI.cs" />
     <Compile Include="Infrastructure\Implementation\DynamicClass.cs" />
@@ -139,6 +142,7 @@
     <Compile Include="Infrastructure\IDependencyInjectionContainer.cs" />
     <Compile Include="Infrastructure\ICache.cs" />
     <Compile Include="Infrastructure\Implementation\Expressions\MemberAccess\DynamicPropertyAccessExpressionBuilder.cs" />
+    <Compile Include="Infrastructure\Implementation\JavaScriptInitializer.cs" />
     <Compile Include="Infrastructure\Implementation\LocalizationService.cs" />
     <Compile Include="Infrastructure\Implementation\LocalizationServiceFactory.cs" />
     <Compile Include="Infrastructure\Implementation\NoCache.cs" />
@@ -912,7 +916,6 @@
     <Compile Include="UI\TreeView\TreeViewItem.cs" />
     <Compile Include="UI\DatePicker\DatePicker.cs" />
     <Compile Include="UI\DatePicker\Fluent\DatePickerBuilder.cs" />
-    <Compile Include="UI\DatePickerBase\DatePickerClientEvents.cs" />
     <Compile Include="UI\DatePicker\Html\DatePickerHtmlBuilder.cs" />
     <Compile Include="UI\ContentNavigationItemBuilder.cs" />
     <Compile Include="UI\Grid\GridActionBindingContext.cs" />

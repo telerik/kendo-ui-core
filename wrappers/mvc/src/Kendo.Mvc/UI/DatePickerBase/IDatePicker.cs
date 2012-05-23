@@ -8,7 +8,7 @@ namespace Kendo.Mvc.UI
 
         Effects Effects { get; set; }
 
-        DatePickerClientEvents ClientEvents { get; }
+        IDictionary<string, ClientEvent> ClientEvents { get; }
 
         bool OpenOnFocus { get; set; }
 
