@@ -4,9 +4,7 @@
             "name": "overview",
             "spriteCssClass": "overviewIcon",
             "expanded": "true",
-            "offline": {
-                "skipAlways": "true"
-            },
+            "packages": [ "online" ],
             "items": [
                 {
                     "text": "Overview",
@@ -560,9 +558,7 @@
             "name": "upload",
             "documentation": "ui-widgets/upload",
             "spriteCssClass": "uploadIcon",
-            "offline": {
-                "skipHtml": "true"
-            },
+            "packages": [ "!offline" ],
             "items": [
                 {
                     "text": "Basic usage",

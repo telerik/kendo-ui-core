@@ -12,12 +12,13 @@
             <ul>
                 @foreach (NavigationWidget widget in ViewBag.Navigation[category])
                 {
-                    if (widget.Offline.SkipAlways || widget.Offline.SkipMvc) { continue; }
+                    if (!widget.ShouldInclude) { continue; }
                     <li>
                         <h2>@widget.Text</h2>
                         <ul>
                             @foreach (NavigationExample example in widget.Items)
                             {
+                                if (!example.ShouldInclude) { continue; }
                                 <li><a href='@(Url.Content("~/" +
                                         ViewContext.RouteData.DataTokens["area"] + "/" +
                                         ViewContext.RouteData.Values["suite"] + "/" +
