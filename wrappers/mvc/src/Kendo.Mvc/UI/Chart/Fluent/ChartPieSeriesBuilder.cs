@@ -37,7 +37,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        /// &lt;%= Html.Telerik().Chart(Model)
+        /// &lt;%= Html.Kendo().Chart(Model)
         ///            .Name("Chart")
         ///            .Series(series => series.Pie(s => s.Sales, s => s.DateString).Name("Sales"))
         /// %&gt;
@@ -59,7 +59,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;%= Html.Telerik().Chart(Model)
+        /// &lt;%= Html.Kendo().Chart(Model)
         ///            .Name("Chart")
         ///            .Series(series => series.Pie(s => s.Sales, s => s.DateString).Opacity(0.5))
         /// %&gt;
@@ -77,7 +77,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///            .Name("Chart")
         ///            .Series(series => series.Pie(s => s.Sales, s => s.DateString).Padding(100))
         ///            .Render();
@@ -97,10 +97,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="startAngle">The pie start angle(in degrees).</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
-        ///            .Name("Chart")
-        ///            .Series(series => series.Pie(s => s.Sales, s => s.DateString).StartAngle(100))
-        ///            .Render();
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .Series(series => series.Pie(s => s.Sales, s => s.DateString).StartAngle(100))
+        ///           .Render();
         /// %&gt;
         /// </code>
         /// </example>        
@@ -117,7 +117,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">The configuration action.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;%= Html.Telerik().Chart()
+        /// &lt;%= Html.Kendo().Chart()
         ///            .Name("Chart")
         ///            .Series(series => series
         ///                .Pie(s => s.Sales, s => s.DateString)
@@ -144,7 +144,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="visible">The visibility. The default value is false.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;%= Html.Telerik().Chart()
+        /// &lt;%= Html.Kendo().Chart()
         ///            .Name("Chart")
         ///            .Series(series => series
         ///                .Pie(s => s.Sales, s => s.DateString)
@@ -168,7 +168,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="dashType">The pie segments border dash type.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .Series(series => series.Pie(s => s.Sales, s => s.DateString).Border(1, "#000", ChartDashType.Dot))
         ///           .Render();
@@ -191,7 +191,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .Series(series => series.Pie(s => s.Sales, s => s.DateString).Overlay(ChartPieSeriesOverlay.None))
         ///           .Render();
@@ -211,7 +211,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">The configuration action.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;%= Html.Telerik().Chart()
+        /// &lt;%= Html.Kendo().Chart()
         ///            .Name("Chart")
         ///            .Series(series => series
         ///                .Pie(s => s.Sales, s => s.DateString)

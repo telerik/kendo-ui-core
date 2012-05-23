@@ -1,4 +1,3 @@
-using System.ComponentModel;
 namespace Kendo.Mvc.UI.Fluent
 {
     /// <summary>
@@ -24,7 +23,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="color">The line color (CSS format).</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .Series(series => series
         ///               .Area(s => s.Sales)
@@ -46,7 +45,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="width">The line width.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .Series(series => series
         ///               .Area(s => s.Sales)
@@ -68,7 +67,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="dashType">The line dashType.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .Series(series => series
         ///               .Area(s => s.Sales)
@@ -90,7 +89,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="opacity">The line opacity.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .Series(series => series
         ///               .Area(s => s.Sales)

@@ -25,17 +25,17 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="codeBlock">The action defining the inline handler.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
-        ///            .Name("Chart")
-        ///            .ClientEvents(events => events.OnDataBound(() =>
-        ///            {
-        ///                 %&gt;
-        ///                 function(e) {
-        ///                     //event handling code
-        ///                 }
-        ///                 &lt;%
-        ///            }))
-        ///            .Render();
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .ClientEvents(events => events.OnDataBound(() =>
+        ///           {
+        ///                %&gt;
+        ///                function(e) {
+        ///                    //event handling code
+        ///                }
+        ///                &lt;%
+        ///           }))
+        ///           .Render();
         /// %&gt;
         /// </code>
         /// </example>        
@@ -50,16 +50,16 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
-        ///            .Name("Chart")
-        ///            .ClientEvents(events => events.OnDataBound(
-        ///                 @&lt;text&gt;
-        ///                 function(e) {
-        ///                     //event handling code
-        ///                 }
-        ///                 &lt;/text&gt;
-        ///            ))
-        ///            .Render();
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .ClientEvents(events => events.OnDataBound(
+        ///                @&lt;text&gt;
+        ///                function(e) {
+        ///                    //event handling code
+        ///                }
+        ///                &lt;/text&gt;
+        ///           ))
+        ///           .Render();
         /// %&gt;
         /// </code>
         /// </example>
@@ -74,9 +74,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="onDataBoundHandlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;%= Html.Telerik().Chart()
-        ///             .Name("Chart")
-        ///             .ClientEvents(events => events.OnDataBound("onDataBound"))
+        /// &lt;%= Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .ClientEvents(events => events.OnDataBound("onDataBound"))
         /// %&gt;
         /// </code>
         /// </example>
@@ -91,17 +91,17 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="codeBlock">The action defining the inline handler.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
-        ///            .Name("Chart")
-        ///            .ClientEvents(events => events.OnDataBinding(() =>
-        ///            {
-        ///                 %&gt;
-        ///                 function(e) {
-        ///                     //event handling code
-        ///                 }
-        ///                 &lt;%
-        ///            }))
-        ///            .Render();
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .ClientEvents(events => events.OnDataBinding(() =>
+        ///           {
+        ///                %&gt;
+        ///                function(e) {
+        ///                    //event handling code
+        ///                }
+        ///                &lt;%
+        ///           }))
+        ///           .Render();
         /// %&gt;
         /// </code>
         /// </example>        
@@ -116,16 +116,16 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
-        ///            .Name("Chart")
-        ///            .ClientEvents(events => events.OnDataBinding(
-        ///                 @&lt;text&gt;
-        ///                 function(e) {
-        ///                     //event handling code
-        ///                 }
-        ///                 &lt;/text&gt;
-        ///            ))
-        ///            .Render();
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .ClientEvents(events => events.OnDataBinding(
+        ///                @&lt;text&gt;
+        ///                function(e) {
+        ///                    //event handling code
+        ///                }
+        ///                &lt;/text&gt;
+        ///           ))
+        ///           .Render();
         /// %&gt;
         /// </code>
         /// </example>
@@ -140,9 +140,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="onDataBindingHandlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;%= Html.Telerik().Chart()
-        ///             .Name("Chart")
-        ///             .ClientEvents(events => events.OnDataBinding("onDataBinding"))
+        /// &lt;%= Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .ClientEvents(events => events.OnDataBinding("onDataBinding"))
         /// %&gt;
         /// </code>
         /// </example>
@@ -157,17 +157,17 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="codeBlock">The action defining the inline handler.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
-        ///            .Name("Chart")
-        ///            .ClientEvents(events => events.OnSeriesClick(() =>
-        ///            {
-        ///                 %&gt;
-        ///                 function(e) {
-        ///                     //event handling code
-        ///                 }
-        ///                 &lt;%
-        ///            }))
-        ///            .Render();
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .ClientEvents(events => events.OnSeriesClick(() =>
+        ///           {
+        ///                %&gt;
+        ///                function(e) {
+        ///                    //event handling code
+        ///                }
+        ///                &lt;%
+        ///           }))
+        ///           .Render();
         /// %&gt;
         /// </code>
         /// </example>        
@@ -182,16 +182,16 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
-        ///            .Name("Chart")
-        ///            .ClientEvents(events => events.OnSeriesClick(
-        ///                 @&lt;text&gt;
-        ///                 function(e) {
-        ///                     //event handling code
-        ///                 }
-        ///                 &lt;/text&gt;
-        ///            ))
-        ///            .Render();
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .ClientEvents(events => events.OnSeriesClick(
+        ///                @&lt;text&gt;
+        ///                function(e) {
+        ///                    //event handling code
+        ///                }
+        ///                &lt;/text&gt;
+        ///           ))
+        ///           .Render();
         /// %&gt;
         /// </code>
         /// </example>
@@ -206,9 +206,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="onSeriesClickHandlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;%= Html.Telerik().Chart()
-        ///             .Name("Chart")
-        ///             .ClientEvents(events => events.OnSeriesClick("onSeriesClick"))
+        /// &lt;%= Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .ClientEvents(events => events.OnSeriesClick("onSeriesClick"))
         /// %&gt;
         /// </code>
         /// </example>
@@ -223,17 +223,17 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="codeBlock">The action defining the inline handler.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
-        ///            .Name("Chart")
-        ///            .ClientEvents(events => events.OnError(() =>
-        ///            {
-        ///                 %&gt;
-        ///                 function(e) {
-        ///                     //event handling code
-        ///                 }
-        ///                 &lt;%
-        ///            }))
-        ///            .Render();
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .ClientEvents(events => events.OnError(() =>
+        ///           {
+        ///                %&gt;
+        ///                function(e) {
+        ///                    //event handling code
+        ///                }
+        ///                &lt;%
+        ///           }))
+        ///           .Render();
         /// %&gt;
         /// </code>
         /// </example>        
@@ -248,16 +248,16 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
-        ///            .Name("Chart")
-        ///            .ClientEvents(events => events.OnError(
-        ///                 @&lt;text&gt;
-        ///                 function(e) {
-        ///                     //event handling code
-        ///                 }
-        ///                 &lt;/text&gt;
-        ///            ))
-        ///            .Render();
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .ClientEvents(events => events.OnError(
+        ///                @&lt;text&gt;
+        ///                function(e) {
+        ///                    //event handling code
+        ///                }
+        ///                &lt;/text&gt;
+        ///           ))
+        ///           .Render();
         /// %&gt;
         /// </code>
         /// </example>
@@ -272,9 +272,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="onSeriesClickHandlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;%= Html.Telerik().Chart()
-        ///             .Name("Chart")
-        ///             .ClientEvents(events => events.OnError("onSeriesClick"))
+        /// &lt;%= Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .ClientEvents(events => events.OnError("onSeriesClick"))
         /// %&gt;
         /// </code>
         /// </example>

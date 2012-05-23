@@ -22,10 +22,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="background">The background color.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
-        ///            .Name("Chart")
-        ///            .PlotArea(plotArea => plotArea.Background("Red"))
-        ///            .Render();
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .PlotArea(plotArea => plotArea.Background("Red"))
+        ///           .Render();
         /// %&gt;
         /// </code>
         /// </example>        
@@ -44,10 +44,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="left">The plot area left margin.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
-        ///            .Name("Chart")
-        ///            .PlotArea(plotArea => plotArea.Margin(0, 5, 5, 0))
-        ///            .Render();
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .PlotArea(plotArea => plotArea.Margin(0, 5, 5, 0))
+        ///           .Render();
         /// %&gt;
         /// </code>
         /// </example>        
@@ -67,10 +67,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="margin">The plot area margin.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
-        ///            .Name("Chart")
-        ///            .PlotArea(plotArea => plotArea.Margin(5))
-        ///            .Render();
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .PlotArea(plotArea => plotArea.Margin(5))
+        ///           .Render();
         /// %&gt;
         /// </code>
         /// </example>          
@@ -88,10 +88,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="dashType">The border dash type.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
-        ///            .Name("Chart")
-        ///            .PlotArea(plotArea => plotArea.Border(1, "#000", ChartDashType.Dot))
-        ///            .Render();
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .PlotArea(plotArea => plotArea.Border(1, "#000", ChartDashType.Dot))
+        ///           .Render();
         /// %&gt;
         /// </code>
         /// </example>        

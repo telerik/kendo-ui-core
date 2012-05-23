@@ -22,7 +22,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="color">The border color (CSS format).</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .ChartArea(chartArea => chartArea.Border(border => border.Color("#f00")))
         ///           .Render();
@@ -41,7 +41,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="opacity">The border opacity (CSS format).</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .ChartArea(chartArea => chartArea.Border(border => border.Opacity(0.2)))
         ///           .Render();
@@ -60,7 +60,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="width">The border width.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .ChartArea(chartArea => chartArea.Border(border => border.Width(2)))
         ///           .Render();
@@ -79,7 +79,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="dashType">The border dashType.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .ChartArea(chartArea => chartArea.Border(border => border.DashType(ChartDashType.Dot)))
         ///           .Render();

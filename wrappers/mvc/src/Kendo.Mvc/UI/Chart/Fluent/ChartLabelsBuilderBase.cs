@@ -23,16 +23,16 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="font">The labels font (CSS format).</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
-        ///             .Name("Chart")
-        ///             .Series(series => series
-        ///                 .Bar(s => s.Sales)
-        ///                 .Labels(labels => labels
-        ///                     .Font("14px Arial,Helvetica,sans-serif")
-        ///                     .Visible(true)
-        ///                 );
-        ///             )
-        ///             .Render();
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .Series(series => series
+        ///               .Bar(s => s.Sales)
+        ///               .Labels(labels => labels
+        ///                   .Font("14px Arial,Helvetica,sans-serif")
+        ///                   .Visible(true)
+        ///               );
+        ///           )
+        ///           .Render();
         /// %&gt;
         /// </code>
         /// </example>        
@@ -48,7 +48,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="visible">The labels visibility.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .Series(series => series
         ///               .Bar(s => s.Sales)
@@ -72,7 +72,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="background">The labels background color.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .Series(series => series
         ///                 .Bar(s => s.Sales)
@@ -97,7 +97,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="color">The labels text color.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .Series(series => series
         ///                 .Bar(s => s.Sales)
@@ -125,7 +125,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="left">The labels left margin.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .Series(series => series
         ///                 .Bar(s => s.Sales)
@@ -153,7 +153,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="margin">The labels margin.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .Series(series => series
         ///                 .Bar(s => s.Sales)
@@ -181,7 +181,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="left">The labels left padding.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .Series(series => series
         ///                .Bar(s => s.Sales)
@@ -209,7 +209,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="padding">The labels padding.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .Series(series => series
         ///                .Bar(s => s.Sales)
@@ -236,7 +236,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="dashType">The labels border dash type.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .Series(series => series
         ///                .Bar(s => s.Sales)
@@ -261,7 +261,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="format">The labels format.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .Series(series => series
         ///                 .Bar(s => s.Sales)
@@ -286,7 +286,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="template">The labels template.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .Series(series => series
         ///                 .Bar(s => s.Sales)
@@ -314,7 +314,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .Series(series => series
         ///                 .Bar(s => s.Sales)
@@ -340,7 +340,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="rotation">The labels text rotation.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .Series(series => series
         ///                 .Bar(s => s.Sales)

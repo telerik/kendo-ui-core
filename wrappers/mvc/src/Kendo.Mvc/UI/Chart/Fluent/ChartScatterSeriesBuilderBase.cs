@@ -28,15 +28,15 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">The configuration action.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart()
-        ///             .Name("Chart")
-        ///             .Series(series => series
-        ///                 .Scatter(s => s.x, s => s.y)
-        ///                 .Labels(labels => labels
-        ///                     .Position(ChartBarLabelsPosition.Above)
-        ///                     .Visible(true)
-        ///                 );
-        ///              )
+        /// &lt;%= Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series
+        ///                .Scatter(s => s.x, s => s.y)
+        ///                .Labels(labels => labels
+        ///                    .Position(ChartBarLabelsPosition.Above)
+        ///                    .Visible(true)
+        ///                );
+        ///             )
         /// %&gt;
         /// </code>
         /// </example>
@@ -55,12 +55,12 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="visible">The visibility. The default value is false.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart()
-        ///             .Name("Chart")
-        ///             .Series(series => series
-        ///                 .Scatter(s => s.x, s => s.y)
-        ///                 .Labels(true);
-        ///              )
+        /// &lt;%= Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series
+        ///                .Scatter(s => s.x, s => s.y)
+        ///                .Labels(true);
+        ///             )
         /// %&gt;
         /// </code>
         /// </example>
@@ -77,14 +77,14 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">The configuration action.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart()
-        ///             .Name("Chart")
-        ///             .Series(series => series
-        ///                 .Scatter(s => s.x, s => s.y)
-        ///                 .Markers(markers => markers
-        ///                     .Type(ChartMarkerShape.Triangle)
-        ///                 );
-        ///              )
+        /// &lt;%= Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series
+        ///                .Scatter(s => s.x, s => s.y)
+        ///                .Markers(markers => markers
+        ///                    .Type(ChartMarkerShape.Triangle)
+        ///                );
+        ///             )
         /// %&gt;
         /// </code>
         /// </example>
@@ -103,12 +103,12 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="visible">The visibility. The default value is true.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart()
-        ///             .Name("Chart")
-        ///             .Series(series => series
-        ///                 .Scatter(s => s.x, s => s.y)
-        ///                 .Markers(true);
-        ///              )
+        /// &lt;%= Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series
+        ///                .Scatter(s => s.x, s => s.y)
+        ///                .Markers(true);
+        ///             )
         /// %&gt;
         /// </code>
         /// </example>
@@ -125,11 +125,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="axis">The axis name for this series.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart(Model)
-        ///             .Name("Chart")
-        ///             .Series(series => series.Scatter(s => s.X, s => s.Y).Name("Scatter").XAxis("secondary"))
-        ///             .XAxis(axis => axis.Numeric())
-        ///             .XAxis(axis => axis.Numeric("secondary"))
+        /// &lt;%= Html.Kendo().Chart(Model)
+        ///            .Name("Chart")
+        ///            .Series(series => series.Scatter(s => s.X, s => s.Y).Name("Scatter").XAxis("secondary"))
+        ///            .XAxis(axis => axis.Numeric())
+        ///            .XAxis(axis => axis.Numeric("secondary"))
         /// %&gt;
         /// </code>
         /// </example>
@@ -146,11 +146,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="axis">The axis name for this series.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart(Model)
-        ///             .Name("Chart")
-        ///             .Series(series => series.Scatter(s => s.Sales).Name("Sales").YAxis("secondary"))
-        ///             .YAxis(axis => axis.Numeric())
-        ///             .YAxis(axis => axis.Numeric("secondary"))
+        /// &lt;%= Html.Kendo().Chart(Model)
+        ///            .Name("Chart")
+        ///            .Series(series => series.Scatter(s => s.Sales).Name("Sales").YAxis("secondary"))
+        ///            .YAxis(axis => axis.Numeric())
+        ///            .YAxis(axis => axis.Numeric("secondary"))
         /// %&gt;
         /// </code>
         /// </example>

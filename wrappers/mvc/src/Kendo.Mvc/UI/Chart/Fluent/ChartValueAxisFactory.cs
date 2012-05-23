@@ -1,8 +1,6 @@
 namespace Kendo.Mvc.UI.Fluent
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.UI;
 

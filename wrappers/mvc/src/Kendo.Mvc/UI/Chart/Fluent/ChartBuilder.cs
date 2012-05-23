@@ -24,7 +24,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">The client events configuration action.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart()
+        ///  &lt;%= Html.Kendo().Chart()
         ///             .Name("Chart")
         ///             .ClientEvents(events => events
         ///                 .OnLoad("onLoad")
@@ -47,7 +47,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="theme">The Chart theme.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart()
+        ///  &lt;%= Html.Kendo().Chart()
         ///             .Name("Chart")
         ///             .Theme("Telerik")
         /// %&gt;
@@ -65,7 +65,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">The Chart area.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart()
+        ///  &lt;%= Html.Kendo().Chart()
         ///             .Name("Chart")
         ///             .ChartArea(chartArea => chartArea.margin(20))
         /// %&gt;
@@ -85,7 +85,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">The Plot area.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart()
+        ///  &lt;%= Html.Kendo().Chart()
         ///             .Name("Chart")
         ///             .PlotArea(plotArea => plotArea.margin(20))
         /// %&gt;
@@ -105,7 +105,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="title">The Chart title.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart()
+        ///  &lt;%= Html.Kendo().Chart()
         ///             .Name("Chart")
         ///             .Title("Yearly sales")
         /// %&gt;
@@ -123,7 +123,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">The configuration action.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart()
+        ///  &lt;%= Html.Kendo().Chart()
         ///             .Name("Chart")
         ///             .Title(title => title.Text("Yearly sales"))
         /// %&gt;
@@ -144,7 +144,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="visible">A value indicating whether to show the legend.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart()
+        ///  &lt;%= Html.Kendo().Chart()
         ///             .Name("Chart")
         ///             .Legend(false)
         /// %&gt;
@@ -163,7 +163,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">The configuration action.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart()
+        ///  &lt;%= Html.Kendo().Chart()
         ///             .Name("Chart")
         ///             .Legend(legend => legend.Visible(true).Position(ChartLegendPosition.Bottom))
         /// %&gt;
@@ -184,7 +184,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">The add action.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart(Model)
+        ///  &lt;%= Html.Kendo().Chart(Model)
         ///             .Name("Chart")
         ///             .Series(series =>
         ///             {
@@ -210,7 +210,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">The configurator.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart(Model)
+        ///  &lt;%= Html.Kendo().Chart(Model)
         ///             .Name("Chart")
         ///             .SeriesDefaults(series => series.Bar().Stack(true))
         /// %&gt;
@@ -231,7 +231,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">The configurator.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart(Model)
+        ///  &lt;%= Html.Kendo().Chart(Model)
         ///             .Name("Chart")
         ///             .AxisDefaults(axisDefaults => axisDefaults.MinorTickSize(5))
         /// %&gt;
@@ -252,7 +252,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">The configurator</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart(Model)
+        ///  &lt;%= Html.Kendo().Chart(Model)
         ///             .Name("Chart")
         ///             .CategoryAxis(axis => axis
         ///                 .Categories(s => s.DateString)
@@ -275,7 +275,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">The configurator</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart(Model)
+        ///  &lt;%= Html.Kendo().Chart(Model)
         ///             .Name("Chart")
         ///             .ValueAxis(a => a.Numeric().TickSize(4))
         /// %&gt;
@@ -297,7 +297,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">The configurator</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart(Model)
+        ///  &lt;%= Html.Kendo().Chart(Model)
         ///             .Name("Chart")
         ///             .XAxis(a => a.Numeric().Max(4))
         /// %&gt;
@@ -319,7 +319,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">The configurator</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart(Model)
+        ///  &lt;%= Html.Kendo().Chart(Model)
         ///             .Name("Chart")
         ///             .YAxis(a => a.Numeric().Max(4))
         /// %&gt;
@@ -341,7 +341,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">Use the configurator to set different data binding options.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart()
+        ///  &lt;%= Html.Kendo().Chart()
         ///             .Name("Chart")
         ///             .DataBinding(dataBinding =>
         ///             {
@@ -365,7 +365,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="colors">A list of the series colors.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart()
+        ///  &lt;%= Html.Kendo().Chart()
         ///             .Name("Chart")
         ///             .SeriesColors(new string[] { "#f00", "#0f0", "#00f" })
         /// %&gt;
@@ -384,7 +384,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="colors">The series colors.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart()
+        ///  &lt;%= Html.Kendo().Chart()
         ///             .Name("Chart")
         ///             .SeriesColors("#f00", "#0f0", "#00f")
         /// %&gt;
@@ -403,7 +403,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">Use the configurator to set data tooltip options.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart()
+        ///  &lt;%= Html.Kendo().Chart()
         ///             .Name("Chart")
         ///             .Tooltip(tooltip =>
         ///             {
@@ -430,7 +430,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart()
+        ///  &lt;%= Html.Kendo().Chart()
         ///             .Name("Chart")
         ///             .Tooltip(true)
         /// %&gt;
@@ -451,7 +451,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart()
+        ///  &lt;%= Html.Kendo().Chart()
         ///             .Name("Chart")
         ///             .Transitions(false)
         /// %&gt;

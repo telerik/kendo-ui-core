@@ -22,10 +22,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="font">The legend labels font (CSS format).</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
-        ///            .Name("Chart")
-        ///            .Legend(legend => legend.Font("16px Arial,Helvetica,sans-serif"))
-        ///            .Render();
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .Legend(legend => legend.Font("16px Arial,Helvetica,sans-serif"))
+        ///           .Render();
         /// %&gt;
         /// </code>
         /// </example>        
@@ -41,10 +41,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="color">The labels color (CSS format).</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
-        ///            .Name("Chart")
-        ///            .Legend(legend => legend.Color("red"))
-        ///            .Render();
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .Legend(legend => legend.Color("red"))
+        ///           .Render();
         /// %&gt;
         /// </code>
         /// </example>
@@ -60,10 +60,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="background">The background color.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
-        ///            .Name("Chart")
-        ///            .Legend(legend => legend.Background("red"))
-        ///            .Render();
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .Legend(legend => legend.Background("red"))
+        ///           .Render();
         /// %&gt;
         /// </code>
         /// </example>        
@@ -79,10 +79,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="position">The legend position.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
-        ///            .Name("Chart")
-        ///            .Legend(legend => legend.Position(ChartLegendPosition.Bottom))
-        ///            .Render();
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .Legend(legend => legend.Position(ChartLegendPosition.Bottom))
+        ///           .Render();
         /// %&gt;
         /// </code>
         /// </example>        
@@ -98,10 +98,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="visible">The legend visibility.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
-        ///            .Name("Chart")
-        ///            .Legend(legend => legend.Visible(false))
-        ///            .Render();
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .Legend(legend => legend.Visible(false))
+        ///           .Render();
         /// %&gt;
         /// </code>
         /// </example>        
@@ -118,10 +118,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="offsetY">The legend Y offset from its position.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
-        ///            .Name("Chart")
-        ///            .Legend(legend => legend.Offset(10, 50))
-        ///            .Render();
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .Legend(legend => legend.Offset(10, 50))
+        ///           .Render();
         /// %&gt;
         /// </code>
         /// </example>        
@@ -141,10 +141,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="left">The legend top margin.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
-        ///            .Name("Chart")
-        ///            .Legend(legend => legend.Margin(0, 5, 5, 0))
-        ///            .Render();
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .Legend(legend => legend.Margin(0, 5, 5, 0))
+        ///           .Render();
         /// %&gt;
         /// </code>
         /// </example>        
@@ -163,10 +163,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="margin">The legend margin.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
-        ///            .Name("Chart")
-        ///            .Legend(legend => legend.Margin(20))
-        ///            .Render();
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .Legend(legend => legend.Margin(20))
+        ///           .Render();
         /// %&gt;
         /// </code>
         /// </example>        
@@ -185,10 +185,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="left">The legend left padding.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
-        ///            .Name("Chart")
-        ///            .Legend(legend => legend.Padding(0, 5, 5, 0))
-        ///            .Render();
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .Legend(legend => legend.Padding(0, 5, 5, 0))
+        ///           .Render();
         /// %&gt;
         /// </code>
         /// </example>        
@@ -207,10 +207,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="padding">The legend padding.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
-        ///            .Name("Chart")
-        ///            .Legend(legend => legend.Padding(20))
-        ///            .Render();
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .Legend(legend => legend.Padding(20))
+        ///           .Render();
         /// %&gt;
         /// </code>
         /// </example>        
@@ -228,10 +228,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="dashType">The legend border dash type.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
-        ///            .Name("Chart")
-        ///            .Legend(legend => legend.Border(1, "#000", ChartDashType.Dot))
-        ///            .Render();
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .Legend(legend => legend.Border(1, "#000", ChartDashType.Dot))
+        ///           .Render();
         /// %&gt;
         /// </code>
         /// </example>        

@@ -22,7 +22,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="type">The markers shape type.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .Series(series => series
         ///               .Line(s => s.Sales)
@@ -46,7 +46,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="size">The markers size.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .Series(series => series
         ///               .Line(s => s.Sales)
@@ -70,7 +70,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="visible">The markers visibility.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .Series(series => series
         ///               .Line(s => s.Sales)
@@ -96,7 +96,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="dashType">The markers border dash type.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .Series(series => series
         ///                .Line(s => s.Sales)
@@ -120,15 +120,15 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="backgorund">The background color of the current series markers. The background color is series color.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart()
-        ///             .Name("Chart")
-        ///             .Series(series => series
-        ///                 .Line(s => s.Sales)
-        ///                 .Markers(markers => markers
-        ///                     .Background("Red");
-        ///                 );
-        ///              )
-        ///              .Render();
+        /// &lt;%= Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series
+        ///                .Line(s => s.Sales)
+        ///                .Markers(markers => markers
+        ///                    .Background("Red");
+        ///                );
+        ///             )
+        ///             .Render();
         /// %&gt;
         /// </code>
         /// </example>

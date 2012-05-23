@@ -22,7 +22,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="width">The connectors width.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .Series(series => series
         ///               .Pie(p => p.Sales)
@@ -46,7 +46,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="color">The connectors color.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .Series(series => series
         ///               .Pie(p => p.Sales)
@@ -70,7 +70,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="padding">The connectors padding.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .Series(series => series
         ///               .Pie(p => p.Sales)

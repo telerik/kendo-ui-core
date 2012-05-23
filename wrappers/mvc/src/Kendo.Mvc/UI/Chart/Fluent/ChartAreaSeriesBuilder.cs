@@ -26,7 +26,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="stacked">A value indicating if the areas should be stacked.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart(Model)
+        ///  &lt;%= Html.Kendo().Chart(Model)
         ///             .Name("Chart")
         ///             .Series(series => series.Area(s => s.Sales).Stack(true))
         /// %&gt;
@@ -45,7 +45,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">The configuration action.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart()
+        ///  &lt;%= Html.Kendo().Chart()
         ///             .Name("Chart")
         ///             .Series(series => series
         ///                 .Area(s => s.Sales)
@@ -72,7 +72,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="visible">The visibility. The default value is false.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart()
+        ///  &lt;%= Html.Kendo().Chart()
         ///             .Name("Chart")
         ///             .Series(series => series
         ///                 .Area(s => s.Sales)
@@ -94,7 +94,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">The configuration action.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .Series(series => series
         ///               .Area(s => s.Sales)        
@@ -119,7 +119,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">The configuration action.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .Series(series => series
         ///               .Area(s => s.Sales)        
@@ -144,7 +144,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">The configuration action.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart()
+        ///  &lt;%= Html.Kendo().Chart()
         ///             .Name("Chart")
         ///             .Series(series => series
         ///                 .Area(s => s.Sales)
@@ -170,7 +170,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="visible">The visibility. The default value is true.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart()
+        ///  &lt;%= Html.Kendo().Chart()
         ///             .Name("Chart")
         ///             .Series(series => series
         ///                 .Area(s => s.Sales)
@@ -192,7 +192,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="missingValues">The missing values behavior. The default is to leave gaps.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart()
+        ///  &lt;%= Html.Kendo().Chart()
         ///             .Name("Chart")
         ///             .Series(series => series
         ///                 .Area(s => s.Sales)

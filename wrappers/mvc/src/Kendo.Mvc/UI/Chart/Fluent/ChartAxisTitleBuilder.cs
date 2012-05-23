@@ -22,7 +22,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="text">The text of the axis title.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .CategoryAxis(axis => axis
         ///               .Title(title => title
@@ -45,7 +45,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="font">The axis title font (CSS format).</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .CategoryAxis(axis => axis
         ///               .Title(title => title
@@ -68,7 +68,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="background">The axis background color.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .CategoryAxis(axis => axis
         ///               .Title(title => title
@@ -91,7 +91,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="color">The axis text color.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .CategoryAxis(axis => axis
         ///               .Title(title => title
@@ -114,7 +114,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="position">The axis title position.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .CategoryAxis(axis => axis
         ///               .Title(title => title
@@ -140,7 +140,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="left">The axis title left margin.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .CategoryAxis(axis => axis
         ///               .Title(title => title
@@ -166,7 +166,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="margin">The axis title margin.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .CategoryAxis(axis => axis
         ///               .Title(title => title
@@ -192,7 +192,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="left">The axis title left padding.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .CategoryAxis(axis => axis
         ///               .Title(title => title
@@ -218,7 +218,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="padding">The axis title padding.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .CategoryAxis(axis => axis
         ///               .Title(title => title
@@ -243,7 +243,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="dashType">The axis title dash type.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .CategoryAxis(axis => axis
         ///               .Title(title => title
@@ -269,7 +269,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .CategoryAxis(axis => axis
         ///               .Title(title => title

@@ -22,7 +22,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="color">The line color (CSS format).</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .CategoryAxis(axis => axis.MajorGridLines(lines => lines.Color("#f00")))
         ///           .Render();
@@ -41,7 +41,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="width">The line width.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .CategoryAxis(axis => axis.MajorGridLines(lines => lines.Width(2)))
         ///           .Render();
@@ -60,7 +60,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="dashType">The line dashType.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .CategoryAxis(axis => axis.MajorGridLines(lines => lines.DashType(ChartDashType.Dot)))
         ///           .Render();

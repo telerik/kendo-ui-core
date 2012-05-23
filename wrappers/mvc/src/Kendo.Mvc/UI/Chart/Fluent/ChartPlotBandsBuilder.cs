@@ -27,7 +27,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="from">The plot band start position.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .CategoryAxis(axis => axis
         ///                .PlotBands(plotBands => plotBands
@@ -50,7 +50,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="to">The plot band end position.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .CategoryAxis(axis => axis
         ///                .PlotBands(plotBands => plotBands
@@ -73,7 +73,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="background">The plot band background color.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .CategoryAxis(axis => axis
         ///                .PlotBands(plotBands => plotBands
@@ -96,7 +96,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="opacity">The plot band opacity.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .CategoryAxis(axis => axis
         ///                .PlotBands(plotBands => plotBands

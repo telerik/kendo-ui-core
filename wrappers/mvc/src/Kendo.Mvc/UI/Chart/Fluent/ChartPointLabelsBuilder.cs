@@ -1,7 +1,5 @@
 namespace Kendo.Mvc.UI.Fluent
 {
-    using System;
-
     /// <summary>
     /// Defines the fluent interface for configuring the chart data labels.
     /// </summary>
@@ -25,7 +23,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="position">The labels position.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .Series(series => series
         ///               .Line(s => s.Sales)

@@ -22,7 +22,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="font">The tooltip font (CSS format).</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .Tooltip(tooltip => tooltip
         ///               .Font("14px Arial,Helvetica,sans-serif")
@@ -44,7 +44,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="visible">The tooltip visibility. The tooltip is not visible by default.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .Tooltip(tooltip => tooltip
         ///               .Visible(true)
@@ -67,7 +67,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// The default is determined from the series color.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .Tooltip(tooltip => tooltip
         ///               .Background("Red")
@@ -92,7 +92,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .Tooltip(tooltip => tooltip
         ///               .Color("Red")
@@ -117,7 +117,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="left">The tooltip left padding.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .Tooltip(tooltip => tooltip
         ///               .Padding(0, 5, 5, 0)
@@ -142,7 +142,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="padding">The tooltip padding.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .Tooltip(tooltip => tooltip
         ///               .Padding(20)
@@ -165,7 +165,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="color">The tooltip border color (CSS syntax).</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .Tooltip(tooltip => tooltip
         ///               .Border(1, "Red")
@@ -190,7 +190,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </remarks>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .Tooltip(tooltip => tooltip
         ///               .Format("{0:C}")
@@ -227,7 +227,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </remarks>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .Tooltip(tooltip => tooltip
         ///               .Template("&lt;#= category #&gt; - &lt;#= value #&gt;")
@@ -252,7 +252,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .Tooltip(tooltip => tooltip
         ///               .Opacity(0.5)

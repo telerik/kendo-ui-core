@@ -2,7 +2,7 @@ namespace Kendo.Mvc.UI.Fluent
 {
     using System;
     using Kendo.Mvc.Infrastructure;
-using System.Collections.Generic;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Defines the fluent interface for configuring axes.
@@ -40,7 +40,7 @@ using System.Collections.Generic;
         /// <param name="minorTickSize">The minor tick size.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;%= Html.Telerik().Chart(Model)
+        /// &lt;%= Html.Kendo().Chart(Model)
         ///            .Name("Chart")
         ///            .ValueAxis(a => a.Numeric().MinorTickSize(10))
         /// %&gt;
@@ -59,7 +59,7 @@ using System.Collections.Generic;
         /// <param name="majorTickSize">The major tick size.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;%= Html.Telerik().Chart(Model)
+        /// &lt;%= Html.Kendo().Chart(Model)
         ///            .Name("Chart")
         ///            .ValueAxis(a => a.Numeric().MajorTickSize(10))
         /// %&gt;
@@ -78,7 +78,7 @@ using System.Collections.Generic;
         /// <param name="majorTickType">The major tick type.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;%= Html.Telerik().Chart(Model)
+        /// &lt;%= Html.Kendo().Chart(Model)
         ///             .Name("Chart")
         ///             .ValueAxis(a => a.Numeric().MajorTickType(ChartAxisTickType.Inside))
         /// %&gt;
@@ -97,7 +97,7 @@ using System.Collections.Generic;
         /// <param name="minorTickType">The minor tick type.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;%= Html.Telerik().Chart(Model)
+        /// &lt;%= Html.Kendo().Chart(Model)
         ///             .Name("Chart")
         ///             .ValueAxis(a => a.Numeric().MinorTickType(ChartAxisTickType.Inside))
         /// %&gt;
@@ -116,7 +116,7 @@ using System.Collections.Generic;
         /// <param name="configurator">The configuration action.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;%= Html.Telerik().Chart()
+        /// &lt;%= Html.Kendo().Chart()
         ///            .Name("Chart")
         ///            .CategoryAxis(axis => axis
         ///                .Categories(s => s.DateString)
@@ -141,7 +141,7 @@ using System.Collections.Generic;
         /// <param name="width">The major gridlines color (CSS syntax)</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;%= Html.Telerik().Chart()
+        /// &lt;%= Html.Kendo().Chart()
         ///            .Name("Chart")
         ///            .CategoryAxis(axis => axis
         ///                .Categories(s => s.DateString)
@@ -166,7 +166,7 @@ using System.Collections.Generic;
         /// <param name="configurator">The configuration action.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;%= Html.Telerik().Chart()
+        /// &lt;%= Html.Kendo().Chart()
         ///            .Name("Chart")
         ///            .CategoryAxis(axis => axis
         ///                .Categories(s => s.DateString)
@@ -191,7 +191,7 @@ using System.Collections.Generic;
         /// <param name="width">The minor gridlines color (CSS syntax)</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;%= Html.Telerik().Chart()
+        /// &lt;%= Html.Kendo().Chart()
         ///            .Name("Chart")
         ///            .CategoryAxis(axis => axis
         ///                .Categories(s => s.DateString)
@@ -216,7 +216,7 @@ using System.Collections.Generic;
         /// <param name="configurator">The configuration action.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;%= Html.Telerik().Chart()
+        /// &lt;%= Html.Kendo().Chart()
         ///            .Name("Chart")
         ///            .CategoryAxis(axis => axis
         ///                .Categories(s => s.DateString)
@@ -241,7 +241,7 @@ using System.Collections.Generic;
         /// <param name="width">The axis line color (CSS syntax)</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;%= Html.Telerik().Chart()
+        /// &lt;%= Html.Kendo().Chart()
         ///            .Name("Chart")
         ///            .CategoryAxis(axis => axis
         ///                .Categories(s => s.DateString)
@@ -266,7 +266,7 @@ using System.Collections.Generic;
         /// <param name="axisCrossingValue">The value at which the first perpendicular axis crosses this axis.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;%= Html.Telerik().Chart(Model)
+        /// &lt;%= Html.Kendo().Chart(Model)
         ///            .Name("Chart")
         ///            .CategoryAxis(axis => axis.AxisCrossingValue(4))
         /// %&gt;
@@ -285,7 +285,7 @@ using System.Collections.Generic;
         /// <param name="axisCrossingValues">The values at which perpendicular axes cross this axis.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;%= Html.Telerik().Chart(Model)
+        /// &lt;%= Html.Kendo().Chart(Model)
         ///            .Name("Chart")
         ///            .CategoryAxis(axis => axis.AxisCrossingValue(0, 10))
         ///            .ValueAxis(axis => axis.Numeric().Title("Axis 1"))
@@ -306,7 +306,7 @@ using System.Collections.Generic;
         /// <param name="axisCrossingValues">The values at which perpendicular axes cross this axis.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;%= Html.Telerik().Chart(Model)
+        /// &lt;%= Html.Kendo().Chart(Model)
         ///            .Name("Chart")
         ///            .CategoryAxis(axis => axis.AxisCrossingValue(new double[] { 0, 10 }))
         ///            .ValueAxis(axis => axis.Numeric().Title("Axis 1"))
@@ -327,7 +327,7 @@ using System.Collections.Generic;
         /// <param name="configurator">The configuration action.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;%= Html.Telerik().Chart()
+        /// &lt;%= Html.Kendo().Chart()
         ///            .Name("Chart")
         ///            .CategoryAxis(axis => axis
         ///                .Labels(labels => labels
@@ -353,7 +353,7 @@ using System.Collections.Generic;
         /// <param name="visible">The visibility. The default value is false.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;%= Html.Telerik().Chart()
+        /// &lt;%= Html.Kendo().Chart()
         ///            .Name("Chart")
         ///            .CategoryAxis(axis => axis.Labels(true))
         /// %&gt;
@@ -372,7 +372,7 @@ using System.Collections.Generic;
         /// <param name="addAction">The add action.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;%= Html.Telerik().Chart()
+        /// &lt;%= Html.Kendo().Chart()
         ///            .Name("Chart")
         ///            .CategoryAxis(axis => axis
         ///                 .PlotBands.Add()
@@ -399,7 +399,7 @@ using System.Collections.Generic;
         /// <param name="configurator">The configuration action.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;%= Html.Telerik().Chart()
+        /// &lt;%= Html.Kendo().Chart()
         ///            .Name("Chart")
         ///            .CategoryAxis(axis => axis
         ///                .Categories(s => s.DateString)
@@ -423,7 +423,7 @@ using System.Collections.Generic;
         /// <param name="title">The axis title.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;%= Html.Telerik().Chart()
+        /// &lt;%= Html.Kendo().Chart()
         ///            .Name("Chart")
         ///            .CategoryAxis(axis => axis
         ///                .Categories(s => s.DateString)
@@ -445,7 +445,7 @@ using System.Collections.Generic;
         /// <param name="color">The axis color.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;%= Html.Telerik().Chart()
+        /// &lt;%= Html.Kendo().Chart()
         ///            .Name("Chart")
         ///            .CategoryAxis(axis => axis
         ///                .Categories(s => s.DateString)
@@ -467,7 +467,7 @@ using System.Collections.Generic;
         /// <param name="reverse">A value indicating if the axis labels should be rendered in reverse.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;%= Html.Telerik().Chart()
+        /// &lt;%= Html.Kendo().Chart()
         ///            .Name("Chart")
         ///            .CategoryAxis(axis => axis
         ///                .Categories(s => s.DateString)
