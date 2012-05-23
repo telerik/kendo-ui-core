@@ -249,7 +249,7 @@ function deployExamples(root, bundle) {
             }
         });
 
-        return !invert && match;
+        return (!invert && match) || (invert && !match);
     }
 
     bundle.suites.forEach(function(suite) {
