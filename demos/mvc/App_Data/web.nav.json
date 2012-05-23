@@ -4,7 +4,7 @@
             "name": "overview",
             "spriteCssClass": "overviewIcon",
             "expanded": "true",
-            "package": "online",
+            "packages": [ "online" ],
             "items": [
                 {
                     "text": "Overview",
@@ -558,7 +558,7 @@
             "name": "upload",
             "documentation": "ui-widgets/upload",
             "spriteCssClass": "uploadIcon",
-            "package": "!offline",
+            "packages": [ "!offline" ],
             "items": [
                 {
                     "text": "Basic usage",

@@ -117,7 +117,8 @@ var LATEST = "latest",
     DEPLOY_LEGAL_ROOT = "LicenseAgreements",
     DEPLOY_THIRD_PARTY_ROOT = "ThirdParty",
     DEPLOY_ONLINEEXAMPLES = "online-examples",
-    ONLINE_EXAMPLES_PACKAGE = "kendoui-online-examples.zip";
+    ONLINE_EXAMPLES_PACKAGE = "kendoui-online-examples.zip",
+    PACKAGE_NAME = "offline";
 
     var startDate = new Date();
 
@@ -227,9 +228,28 @@ function deployExamples(root, bundle) {
         path.join(examplesRoot, CONTENT_ROOT)
     );
 
-    function shouldSkip(widget) {
-        var offline = widget.offline || {};
-        return offline.skipAlways || offline.skipHtml;
+    function shouldInclude(widget) {
+        var packages = widget.packages;
+
+        if (!packages) {
+            return true;
+        }
+
+        var invert = false,
+            match = false;
+
+        packages.forEach(function(name) {
+            if (name[0] === "!") {
+                invert = true;
+                name = name.substring(1);
+            }
+
+            if (name === PACKAGE_NAME) {
+                match = true;
+            }
+        });
+
+        return !invert && match;
     }
 
     bundle.suites.forEach(function(suite) {
@@ -238,14 +258,17 @@ function deployExamples(root, bundle) {
             navigationData = readText(navigationFile),
             navigation = JSON.parse(navigationData),
             suiteDest = path.join(examplesRoot, suite),
-            suiteIndex = suiteIndexTemplate(navigation);
+            suiteIndex = suiteIndexTemplate({
+                navigation: navigation,
+                shouldInclude: shouldInclude
+            });
 
         kendoBuild.mkdir(suiteDest);
         writeText(path.join(suiteDest, INDEX), suiteIndex)
 
         for (var category in navigation) {
             for (var widgetIx = 0, widgets = navigation[category]; widgetIx < widgets.length; widgetIx++) {
-                if (shouldSkip(widgets[widgetIx])) {
+                if (!shouldInclude(widgets[widgetIx])) {
                     continue;
                 }
 
@@ -256,7 +279,7 @@ function deployExamples(root, bundle) {
                     outputName = path.join(suiteDest, example.url),
                     exampleBody = readText(fileName);
 
-                    if (shouldSkip(example)) {
+                    if (!shouldInclude(example)) {
                         continue;
                     }
 

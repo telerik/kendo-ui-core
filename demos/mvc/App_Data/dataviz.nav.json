@@ -20,7 +20,7 @@
                 }, {
                     "text": "Binding to remote data",
                     "url": "area-chart/remote-data.html",
-                    "package": "!offline"
+                    "packages": [ "!offline" ]
                 }, {
                     "text": "Binding to local data",
                     "url": "area-chart/local-data.html"
@@ -48,7 +48,7 @@
                 }, {
                     "text": "Binding to remote data",
                     "url": "bar-charts/remote-data.html",
-                    "package": "!offline"
+                    "packages": [ "!offline" ]
                 }, {
                     "text": "Binding to local data",
                     "url": "bar-charts/local-data.html"
@@ -66,7 +66,7 @@
                 {
                     "text": "Binding to remote data",
                     "url": "line-chart/remote-data.html",
-                    "package": "!offline"
+                    "packages": [ "!offline" ]
                 },
                 {
                     "text": "Binding to local data",
@@ -87,7 +87,7 @@
                 }, {
                     "text": "Binding to remote data",
                     "url": "pie-chart/remote-data.html",
-                    "package": "!offline"
+                    "packages": [ "!offline" ]
                 }, {
                     "text": "Binding to local data",
                     "url": "pie-chart/local-data.html"
@@ -109,7 +109,7 @@
                 }, {
                     "text": "Binding to remote data",
                     "url": "scatter-charts/remote-data.html",
-                    "package": "!offline"
+                    "packages": [ "!offline" ]
                 }, {
                     "text": "Binding to local data",
                     "url": "scatter-charts/local-data.html"
@@ -191,7 +191,7 @@
             "spriteCssClass": "chartAreaIcon",
             "thumbnailUrl": "content/dataviz/dashboards/stock.gif",
             "expanded": "true",
-            "package": "!offline",
+            "packages": [ "!offline" ],
             "items": [{
                 "url": "dashboards/stock-history.html"
             }],
