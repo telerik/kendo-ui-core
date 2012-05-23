@@ -101,11 +101,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public TScaleBuilder Labels(Action<GaugeScaleTicksBuilder> configurator)
+        public TScaleBuilder Labels(Action<GaugeLabelsBuilder> configurator)
         {
             Guard.IsNotNull(configurator, "configurator");
 
-            configurator(new GaugeScaleTicksBuilder(Scale.MajorTicks));
+            configurator(new GaugeLabelsBuilder(Scale.Labels));
 
             return this as TScaleBuilder;
         }
