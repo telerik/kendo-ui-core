@@ -15,23 +15,17 @@
             <li><label for="username">Username:</label> <input type="text" id="username" /></li>
             <li><label for="password">Password:</label> <input type="password" id="password" /></li>
         </ul>
-        <div id="modalview-login-button">
-            <button type="button" data-role="button">Login</button>
-        </div>
+        <a data-click="closeModalViewLogin" id="modalview-login-button" type="button" data-role="button">Login</a>
     </div>
 </div>
 
 <style scoped>
-    #modalview-login-button {
-        width: 100%;
-        -webkit-box-sizing: border-box;
-        padding: 1em;
-    }
-
-    #modalview-login-button button {
-        font-size: 1.5em;
+    #modalview-login-button
+    {
         display: block;
-        width: 100%;
+        text-align: center;
+        margin: 0 .8em;
+        font-size: 1.2em;
     }
 </style>
 <script>

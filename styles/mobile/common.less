@@ -1225,13 +1225,18 @@
 
 /* PopOver */
 
-.km-popup-wrapper
+.km-popup-wrapper,
+.km-modalview-wrapper
 {
     position: relative;
     overflow: hidden;
-    .box-shadow(none);
     background: none;
     border: 0;
+}
+
+.km-popup-wrapper
+{
+    .box-shadow(none);
 }
 
 .km-popup-overlay
@@ -1285,9 +1290,6 @@
 
 .km-modalview {
     overflow: hidden;
-    background: white;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
     position: relative;
     width: 100%;
     height: 100%;

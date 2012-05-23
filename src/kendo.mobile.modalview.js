@@ -106,7 +106,6 @@
             });
 
             that._layout();
-            element.removeClass("km-view");
             that._scroller();
         },
 
