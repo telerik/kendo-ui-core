@@ -4,32 +4,56 @@
     using System;
     using System.Collections.Generic;
     using Extensions;
+    using System.Linq;
 
     public class ModelDescriptor : JsonObject
     {
-        private readonly ModelMetadata metadata;
-
         public ModelDescriptor(Type modelType)
         {
-            metadata = ModelMetadata.FromStringExpression("", new ViewDataDictionary(Activator.CreateInstance(modelType)));
+            var metadata = ModelMetadata.FromStringExpression("", new ViewDataDictionary(Activator.CreateInstance(modelType)));
+            Fields = Translate(metadata);
         }
+
+        public IList<ModelFieldDescriptor> Fields { get; private set; }
+        public string Id { get; set; }
 
         protected override void Serialize(IDictionary<string, object> json)
         {
-            var fields = new Dictionary<string, object>();
-            json["fields"] = fields;
+            if (Id.HasValue())
+            {
+                json["id"] = Id;
+            }
 
-            metadata.Properties.Each(prop =>
+            var fields = new Dictionary<string, object>();
+            json["fields"] = fields;            
+
+            Fields.Each(prop =>             
             {
                 var field = new Dictionary<string, object>();
-                fields[prop.PropertyName] = field;
+                fields[prop.Member] = field;
 
-                if (!prop.IsReadOnly)
+                if (!prop.IsEditable)
                 {
                     field["editable"] = false;
                 }
-                field["type"] = prop.ModelType.ToJavaScriptType().ToLowerInvariant();
+
+                field["type"] = prop.MemberType.ToJavaScriptType().ToLowerInvariant();
+
+                if (prop.MemberType.IsNullableType() || prop.DefaultValue != null) {
+                    field["defaultValue"] = prop.DefaultValue;
+                }
             });
+        }
+
+        private IList<ModelFieldDescriptor> Translate(ModelMetadata metadata)
+        {
+            return metadata.Properties
+                .Select(p => new ModelFieldDescriptor
+                {
+                    Member = p.PropertyName,
+                    MemberType = p.ModelType,
+                    IsEditable = !p.IsReadOnly
+                }).ToList();            
         }
     }
 }

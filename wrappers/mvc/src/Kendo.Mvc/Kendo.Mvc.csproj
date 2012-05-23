@@ -322,8 +322,11 @@
     <Compile Include="UI\DataSource\DataSourceResult.cs" />
     <Compile Include="UI\DataSource\DataSourceSchema.cs" />
     <Compile Include="UI\DataSource\DataSourceType.cs" />
+    <Compile Include="UI\DataSource\Fluent\DataSourceModelFieldDescriptorBuilder.cs" />
+    <Compile Include="UI\DataSource\Fluent\DataSourceModelDescriptorFactory.cs" />
     <Compile Include="UI\DataSource\Fluent\DataSourceAggregateDescriptorFactory.cs" />
     <Compile Include="UI\DataSource\Fluent\CrudOperationBuilder.cs" />
+    <Compile Include="UI\DataSource\ModelFieldDescriptor.cs" />
     <Compile Include="UI\DataSource\Fluent\ReadOnlyDataSourceBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\DataSourceBuilder.cs" />
     <Compile Include="UI\DataSource\ModelDescriptor.cs" />

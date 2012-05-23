@@ -1,6 +1,7 @@
-using System;
 namespace Kendo.Mvc.UI.Fluent
 {
+    using System;
+
     public class DataSourceGroupDescriptorBuilder<T>
         where T : class
     {
@@ -10,5 +11,6 @@ namespace Kendo.Mvc.UI.Fluent
         {
             this.descriptor = descriptor;
         }       
+
     }
 }

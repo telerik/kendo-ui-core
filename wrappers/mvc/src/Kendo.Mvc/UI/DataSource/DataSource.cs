@@ -77,8 +77,8 @@ namespace Kendo.Mvc.UI
             }
 
             json["type"] = "aspnetmvc-" + Type.ToString().ToLower();
-            
-            if (OrderBy.Any()) 
+
+            if (OrderBy.Any())
             {
                 json["sort"] = OrderBy.ToJson();
             }
@@ -95,23 +95,17 @@ namespace Kendo.Mvc.UI
 
             if (Filters.Any() || ServerFiltering)
             {
-                json["filter"] = Filters.OfType<FilterDescriptorBase>().ToJson();                
-            }
-
-            if (ModelType != null)
-            {
-                Schema.Model = new ModelDescriptor(ModelType);
-            }
+                json["filter"] = Filters.OfType<FilterDescriptorBase>().ToJson();
+            }            
 
             json["schema"] = Schema.ToJson();
-        }       
-
-        public Type ModelType 
-        { 
-            get; 
-            set; 
         }
 
+        public void ModelType(Type modelType)
+        {
+            Schema.Model = new ModelDescriptor(modelType);
+        }
+        
         public DataSourceType Type
         {
             get;
@@ -142,10 +136,10 @@ namespace Kendo.Mvc.UI
             private set;
         }
 
-        public int PageSize 
-        { 
-            get; 
-            set; 
+        public int PageSize
+        {
+            get;
+            set;
         }
 
         public bool ServerPaging
@@ -196,7 +190,7 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        public void Process(DataSourceRequest request, bool processData)        
+        public void Process(DataSourceRequest request, bool processData)
         {
             if (request.Sorts == null)
             {
@@ -209,7 +203,7 @@ namespace Kendo.Mvc.UI
             }
             else
             {
-                OrderBy.Clear();                
+                OrderBy.Clear();
             }
 
             if (request.PageSize == 0)
@@ -272,8 +266,8 @@ namespace Kendo.Mvc.UI
 
                     Data = result.Data;
                     Total = result.Total;
-                
-                    AggregateResults = result.AggregateResults;                
+
+                    AggregateResults = result.AggregateResults;
                 }
                 else
                 {
