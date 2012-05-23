@@ -1242,7 +1242,7 @@
     height: 15px;
     top: 0;
     left: 0;
-    z-index: 1;
+    z-index: 2;
 }
 
 .km-popup-arrow:after,
@@ -1252,11 +1252,6 @@
     content: "\a0";
     width: 0;
     height: 0;
-}
-
-.km-popup-wrapper
-{
-    padding: 15px;
 }
 
 .km-up .km-popup-arrow
@@ -1271,8 +1266,9 @@
     right: 0;
 }
 
-.km-popup
+.km-popup.km-pane
 {
+    .box-sizing(border-box);
     width: 100%;
     height: 100%;
 }
