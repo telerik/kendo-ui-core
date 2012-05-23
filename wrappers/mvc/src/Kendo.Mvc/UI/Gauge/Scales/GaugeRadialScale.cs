@@ -12,6 +12,7 @@ namespace Kendo.Mvc.UI
         public GaugeRadialScale(RadialGauge<T> gauge)
             : base()
         {
+            Labels = new GaugeRadialScaleLabels();
             radialGauge = gauge;
         }
 
@@ -38,6 +39,15 @@ namespace Kendo.Mvc.UI
         /// The scale start angle.
         /// </summary>
         public double? StartAngle
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// The scale labels.
+        /// </summary>
+        public GaugeRadialScaleLabels Labels
         {
             get;
             set;

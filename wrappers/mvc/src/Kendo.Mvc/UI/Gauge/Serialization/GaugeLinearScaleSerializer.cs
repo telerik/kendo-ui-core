@@ -21,6 +21,12 @@ namespace Kendo.Mvc.UI
                 .Add("mirror", scale.Mirror, () => scale.Mirror.HasValue)
                 .Add("vertical", scale.Vertical, () => scale.Vertical.HasValue);
 
+            var labelsData = scale.Labels.CreateSerializer().Serialize();
+            if (labelsData.Count > 0)
+            {
+                result.Add("labels", labelsData);
+            }
+
             return result;
         }
     }

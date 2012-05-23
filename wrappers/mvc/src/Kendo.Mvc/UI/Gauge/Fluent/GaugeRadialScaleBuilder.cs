@@ -1,3 +1,5 @@
+using Kendo.Mvc.Infrastructure;
+using System;
 namespace Kendo.Mvc.UI.Fluent
 {
     /// <summary>
@@ -62,6 +64,31 @@ namespace Kendo.Mvc.UI.Fluent
         public GaugeRadialScaleBuilder<T> StartAngle(double startAngle)
         {
             radialGauge.Scale.StartAngle = startAngle;
+            return this;
+        }
+
+        /// <summary>
+        /// Configures the labels.
+        /// </summary>
+        /// <param name="configurator">The configuration action.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().RadialGauge()
+        ///            .Name("radialGauge")
+        ///            .Scale(scale => scale
+        ///                .Labels(labels => labels
+        ///                    .Visible(false)
+        ///                )
+        ///            )
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public GaugeRadialScaleBuilder<T> Labels(Action<GaugeRadialScaleLabelsBuilder> configurator)
+        {
+            Guard.IsNotNull(configurator, "configurator");
+
+            configurator(new GaugeRadialScaleLabelsBuilder(Scale.Labels));
+
             return this;
         }
     }

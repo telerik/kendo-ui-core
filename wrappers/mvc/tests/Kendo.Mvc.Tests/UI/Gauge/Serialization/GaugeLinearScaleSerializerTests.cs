@@ -14,10 +14,17 @@ namespace Kendo.Mvc.UI.Tests
             scaleMock = new Mock<ILinearScale<double>>();
             serializer = new GaugeLinearScaleSerializer<double>(scaleMock.Object);
 
-            scaleMock.SetupGet(a => a.Labels).Returns(new GaugeScaleLabels());
+            scaleMock.SetupGet(a => a.Labels).Returns(new GaugeLinearScaleLabels());
             scaleMock.SetupGet(a => a.Ranges).Returns(new List<GaugeScaleRanges>());
             scaleMock.SetupGet(a => a.MajorTicks).Returns(new GaugeScaleTicks());
             scaleMock.SetupGet(a => a.MinorTicks).Returns(new GaugeScaleTicks());
+        }
+
+        [Fact]
+        public void Should_serialize_labels()
+        {
+            scaleMock.SetupGet(a => a.Labels).Returns(new GaugeLinearScaleLabels { Color = "red" });
+            serializer.Serialize().ContainsKey("labels").ShouldBeTrue();
         }
 
         [Fact]

@@ -3,15 +3,16 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent interface for configuring the gauge labels.
     /// </summary>
-    public class GaugeLabelsBuilder
+    public abstract class GaugeLabelsBuilder<TBuilder> : IHideObjectMembers
+        where TBuilder : GaugeLabelsBuilder<TBuilder>
     {
-        private readonly GaugeScaleLabels labels;
+        private readonly GaugeScaleLabelsBase labels;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GaugeLabelsBuilder" /> class.
+        /// Initializes a new instance of the <see cref="GaugeLabelsBuilderBase" /> class.
         /// </summary>
         /// <param name="chartBarLabels">The labels configuration.</param>
-        public GaugeLabelsBuilder(GaugeScaleLabels ScaleLabels)
+        public GaugeLabelsBuilder(GaugeScaleLabelsBase ScaleLabels)
         {
             labels = ScaleLabels;
         }
@@ -32,10 +33,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>        
-        public GaugeLabelsBuilder Font(string font)
+        public TBuilder Font(string font)
         {
             labels.Font = font;
-            return this;
+            return this as TBuilder;
         }
 
         /// <summary>
@@ -54,10 +55,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>        
-        public GaugeLabelsBuilder Visible(bool visible)
+        public TBuilder Visible(bool visible)
         {
             labels.Visible = visible;
-            return this;
+            return this as TBuilder;
         }
 
         /// <summary>
@@ -76,10 +77,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>        
-        public GaugeLabelsBuilder Background(string background)
+        public TBuilder Background(string background)
         {
             labels.Background = background;
-            return this;
+            return this as TBuilder;
         }
 
         /// <summary>
@@ -98,10 +99,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>        
-        public GaugeLabelsBuilder Color(string color)
+        public TBuilder Color(string color)
         {
             labels.Color = color;
-            return this;
+            return this as TBuilder;
         }
 
         /// <summary>
@@ -123,13 +124,13 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;els
         /// </code>
         /// </example>        
-        public GaugeLabelsBuilder Margin(int top, int right, int bottom, int left)
+        public TBuilder Margin(int top, int right, int bottom, int left)
         {
             labels.Margin.Top = top;
             labels.Margin.Right = right;
             labels.Margin.Bottom = bottom;
             labels.Margin.Left = left;
-            return this;
+            return this as TBuilder;
         }
 
         /// <summary>
@@ -148,10 +149,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>        
-        public GaugeLabelsBuilder Margin(int margin)
+        public TBuilder Margin(int margin)
         {
             labels.Margin = new ChartSpacing(margin);
-            return this;
+            return this as TBuilder;
         }
 
         /// <summary>
@@ -173,13 +174,13 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>        
-        public GaugeLabelsBuilder Padding(int top, int right, int bottom, int left)
+        public TBuilder Padding(int top, int right, int bottom, int left)
         {
             labels.Padding.Top = top;
             labels.Padding.Right = right;
             labels.Padding.Bottom = bottom;
             labels.Padding.Left = left;
-            return this;
+            return this as TBuilder;
         }
 
         /// <summary>
@@ -198,10 +199,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>        
-        public GaugeLabelsBuilder Padding(int padding)
+        public TBuilder Padding(int padding)
         {
             labels.Padding = new ChartSpacing(padding);
-            return this;
+            return this as TBuilder;
         }
 
         /// <summary>
@@ -222,10 +223,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>        
-        public GaugeLabelsBuilder Border(int width, string color, ChartDashType dashType)
+        public TBuilder Border(int width, string color, ChartDashType dashType)
         {
             labels.Border = new ChartElementBorder(width, color, dashType);
-            return this;
+            return this as TBuilder;
         }
 
         /// <summary>
@@ -244,10 +245,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>        
-        public GaugeLabelsBuilder Format(string format)
+        public TBuilder Format(string format)
         {
             labels.Format = format;
-            return this;
+            return this as TBuilder;
         }
 
         /// <summary>
@@ -266,10 +267,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>        
-        public GaugeLabelsBuilder Template(string template)
+        public TBuilder Template(string template)
         {
             labels.Template = template;
-            return this;
+            return this as TBuilder;
         }
 
         /// <summary>
@@ -291,11 +292,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public GaugeLabelsBuilder Opacity(double opacity)
+        public TBuilder Opacity(double opacity)
         {
             labels.Opacity = opacity;
 
-            return this;
+            return this as TBuilder;
         }
     }
 }

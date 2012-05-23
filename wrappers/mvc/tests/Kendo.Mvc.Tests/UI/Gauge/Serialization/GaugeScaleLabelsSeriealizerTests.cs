@@ -5,11 +5,11 @@ namespace Kendo.Mvc.UI.Tests
 
     public class GaugeScaleLabelsSeriealizerTests
     {
-        private readonly GaugeScaleLabels labels;
+        private readonly GaugeScaleLabelsBase labels;
 
         public GaugeScaleLabelsSeriealizerTests()
         {
-            labels = new GaugeScaleLabels();
+            labels = new GaugeScaleLabelsBase();
         }
 
         [Fact]

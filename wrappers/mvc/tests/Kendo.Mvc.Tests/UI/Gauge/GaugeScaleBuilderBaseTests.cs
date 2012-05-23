@@ -12,12 +12,6 @@ namespace Kendo.Mvc.UI.Tests.Gauge
         protected TScaleBuilder builder;
 
         [Fact]
-        public void Labels_should_return_builder()
-        {
-            builder.Labels(scale => { }).ShouldBeSameAs(builder);
-        }
-
-        [Fact]
         public void MinorTicks_should_return_builder()
         {
             builder.MinorTicks(scale => { }).ShouldBeSameAs(builder);
