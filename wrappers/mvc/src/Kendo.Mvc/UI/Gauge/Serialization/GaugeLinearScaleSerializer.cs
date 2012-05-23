@@ -18,7 +18,8 @@ namespace Kendo.Mvc.UI
         {
             var result = base.Serialize();
             FluentDictionary.For(result)
-                .Add("mirror", scale.Mirror, () => scale.Mirror.HasValue);
+                .Add("mirror", scale.Mirror, () => scale.Mirror.HasValue)
+                .Add("vertical", scale.Vertical, () => scale.Vertical.HasValue);
 
             return result;
         }

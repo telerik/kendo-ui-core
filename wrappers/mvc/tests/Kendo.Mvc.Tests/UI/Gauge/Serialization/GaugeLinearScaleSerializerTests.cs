@@ -33,5 +33,19 @@ namespace Kendo.Mvc.UI.Tests
             scaleMock.SetupGet(a => a.Mirror).Returns((bool?)null);
             serializer.Serialize().ContainsKey("mirror").ShouldBeFalse();
         }
+
+        [Fact]
+        public void Should_serialize_Vertical()
+        {
+            scaleMock.SetupGet(a => a.Vertical).Returns(true);
+            serializer.Serialize()["vertical"].ShouldEqual(true);
+        }
+
+        [Fact]
+        public void Should_not_serialize_default_Vertical()
+        {
+            scaleMock.SetupGet(a => a.Vertical).Returns((bool?)null);
+            serializer.Serialize().ContainsKey("vertical").ShouldBeFalse();
+        }
     }
 }

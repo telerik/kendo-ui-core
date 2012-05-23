@@ -44,5 +44,25 @@ namespace Kendo.Mvc.UI.Fluent
             linearGauge.Scale.Mirror = mirror;
             return this;
         }
+
+        /// <summary>
+        /// Sets the orientation of the gauge
+        /// </summary>
+        /// <param name="vertical">The vertical.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().LinearGauge()
+        ///            .Name("LinearGauge")
+        ///            .Scale(scale => scale
+        ///                .Vertical(false)
+        ///            )
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public GaugeLinearScaleBuilder<T> Vertical(bool vertical)
+        {
+            linearGauge.Scale.Vertical = vertical;
+            return this;
+        }
     }
 }

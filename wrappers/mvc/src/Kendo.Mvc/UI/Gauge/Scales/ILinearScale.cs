@@ -10,5 +10,10 @@ namespace Kendo.Mvc.UI
         /// The scale mirror.
         /// </summary>
         bool? Mirror { get; set; }
+
+        /// <summary>
+        /// The scale vertical.
+        /// </summary>
+        bool? Vertical { get; set; }
     }
 }
