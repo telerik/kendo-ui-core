@@ -3,8 +3,8 @@ namespace Kendo.Mvc.Tests.Menu
     using System.IO;
     using System.Web.UI;
     using Infrastructure;
-    using Moq;
     using UI;
+    using Moq;
     using Xunit;
 
     public class MenuHtmlBuilderTests
