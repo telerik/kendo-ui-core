@@ -376,8 +376,8 @@
                 offset.left -= (window.pageXOffset || document.documentElement.scrollLeft || 0);
             }
             else {
-                offset.top -= viewportOffset.top
-                offset.left -= viewportOffset.left
+                offset.top -= viewportOffset.top;
+                offset.left -= viewportOffset.left;
             }
 
             if (!that.wrapper.data(LOCATION)) { // Needed to reset the popup location after every closure - fixes the resize bugs.
