@@ -1,12 +1,12 @@
 <div data-role="view" data-title="Tag people">
     <div data-role="header">
-        <div data-role="navbar" style="background-color: #333">
+        <div data-role="navbar">
             <span data-role="view-title"></span>
-            <a data-align="right" data-rel="popover" href="#popover-people" style="background-color: #000" data-role="button">Select people</a>
+            <a data-align="right" data-rel="popover" href="#popover-people" data-role="button">Select people</a>
         </div>
     </div>
 
-    <div data-role="content" style="background-color: #000">
+    <div data-role="content">
         <img src="../../content/mobile/shared/faces.jpg" />
     </div>
 
@@ -43,11 +43,20 @@
     </div>
 
     <div data-role="footer">
-        <div data-role="navbar" style="background-color: #000">
-            <a data-align="right" style="background-color: #000" href="#popover-location" data-rel="popover" data-role="button">Select location</a>
+        <div data-role="navbar">
+            <a data-align="right" href="#popover-location" data-rel="popover" data-role="button">Select location</a>
         </div>
     </div>
 </div>
+
+<style scoped>
+    .km-ios .km-navbar,
+    .km-ios .km-navbar .km-button,
+    .km-root > * > .km-view > .km-content
+    {
+        background-color: #000;
+    }
+</style>
 
 <script>
     function closeParentPopover(e) {

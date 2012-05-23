@@ -381,7 +381,8 @@
 }
 
 .km-blackberry .km-toolbar,
-.km-blackberry .km-navbar
+.km-blackberry .km-navbar,
+.km-blackberry .km-popup.km-pane .km-header
 {
     background-color: #2a3235;
     background-image: linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.2) 73%, rgba(255,255,255,.05));
@@ -791,6 +792,12 @@
 
 /* Checkboxes and Radios */
 
+/* :not() shouldn't have specificity... */
+.km-blackberry .km-listview-label input[type=checkbox]:not(.k-input):not(.k-input):not(.k-input):not(.k-input):not(.k-input)
+{
+    margin-top: -.7em;
+}
+
 .km-blackberry .km-listview-label input[type=radio],
 .km-blackberry .km-listview-label input[type=checkbox]
 {
@@ -819,7 +826,7 @@
 {
     content: "\a0";
     display: block;
-    margin: 20% 0 0 20%;
+    margin: 15% auto;
     width: 70%;
     height: 70%;
 }
@@ -987,4 +994,98 @@
 .km-blackberry .km-pane:first-child
 {
     z-index: 0;
+}
+
+/* PopOver */
+
+.km-blackberry .km-popup-wrapper
+{
+    padding: 10px;
+}
+
+.km-blackberry .km-popup-arrow
+{
+    width: 10px;
+    height: 10px;
+}
+
+.km-blackberry .km-popup.km-pane
+{
+    background: #3E8EC3;
+    border: 3px solid transparent;
+    .border-radius(4px);
+    .box-shadow(~"0 0 15px rgba(0,0,0,.5), 0 0 2px rgba(0,0,0,.5)");
+}
+
+.km-blackberry .km-popup.km-pane .km-view
+{
+    overflow: visible;
+    .border-radius(0);
+}
+
+.km-blackberry .km-popup.km-pane .km-navbar,
+.km-blackberry .km-popup.km-pane .km-toolbar,
+.km-blackberry .km-popup.km-pane .km-tabstrip
+{
+    background: none;
+    .box-shadow(none);
+}
+
+.km-blackberry .km-popup.km-pane .km-header
+{
+    padding: 2px 3px 0;
+    margin: -3px -3px 2px;
+    .border-radius(5px);
+    -webkit-margin-collapse: separate;
+    background-color: transparent;
+}
+
+.km-blackberry .km-popup-arrow:after,
+.km-blackberry .km-popup-arrow:before
+{
+    border-color: rgba(0,0,0,.5) transparent;
+    border-style: solid;
+    border-width: 0 10px 10px;
+}
+
+.km-blackberry .km-popup-arrow:after
+{
+    border-color: #3E8EC3 transparent;
+}
+
+.km-blackberry .km-left .km-popup-arrow:after,
+.km-blackberry .km-right .km-popup-arrow:after
+{
+    border-color: transparent #3E8EC3;
+}
+
+.km-blackberry .km-down .km-popup-arrow:before
+{
+    margin-top: -1px;
+}
+
+.km-blackberry .km-down .km-popup-arrow:after
+{
+    border-color: #3E8DC2 transparent;
+}
+
+.km-blackberry .km-up .km-popup-arrow:after
+{
+    border-width: 10px 10px 0 10px;
+}
+
+.km-blackberry .km-left .km-popup-arrow:after
+{
+    border-width: 10px 0 10px 10px;
+}
+
+.km-blackberry .km-right .km-popup-arrow:after
+{
+    border-width: 10px 10px 10px 0;
+}
+
+.km-blackberry .km-popup.km-pane .km-content
+{
+    border: 1px solid rgba(255,255,255,.7);
+    background-image: linear-gradient(top, rgba(0,0,0,.2), rgba(0,0,0,0) 10%);
 }
