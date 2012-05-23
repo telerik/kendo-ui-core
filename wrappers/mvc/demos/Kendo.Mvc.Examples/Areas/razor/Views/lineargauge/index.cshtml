@@ -1,0 +1,16 @@
+@(Html.Kendo().LinearGauge<int>()
+      .Name("lineargauge")
+      .Pointer(pointer => pointer.Value(28))
+      .Scale(scale => scale
+          .MajorUnit(20)
+          .MinorUnit(2)
+          .Min(-40)
+          .Max(60)
+          .Ranges(ranges => {
+                  ranges.Add().From(-40).To(-20).Color("#2798df");
+                  ranges.Add().From(30).To(45).Color("#ffc700");
+                  ranges.Add().From(45).To(60).Color("#c20000");
+              }
+          )
+      )
+)

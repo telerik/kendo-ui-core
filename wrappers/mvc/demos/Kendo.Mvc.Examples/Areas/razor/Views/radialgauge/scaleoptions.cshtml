@@ -1,0 +1,48 @@
+<div class="configuration k-widget k-header" style="width:190px;">
+    <span class="configHead">Gauge</span>
+    <ul class="options">
+        <li>
+            <input id="labels" checked="checked" type="checkbox" autocomplete="off">
+            <label for="labels">Show labels</label>
+        </li>
+
+        <li>
+            <input id="labels-inside" type="radio" value="inside" name="labels-position" checked="checked>
+            <label for="labels-inside">- inside the gauge</label>
+        </li>
+
+        <li>
+            <input id="labels-outside" type="radio" value="outside" name="labels-position">
+            <label for="labels-outside">- outside of the gauge</label>
+        </li>
+
+        <li>
+            <input id="ranges" checked="checked" type="checkbox" autocomplete="off">
+            <label for="ranges">Show ranges</label>
+        </li>
+    </ul>
+</div>
+
+@(Html.Kendo().RadialGauge<int>()
+      .Name("radialGauge")
+      .Pointer(pointer => pointer.Value(65))
+      .Scale(scale => scale
+          .MinorUnit(5)
+          .StartAngle(-30)
+          .EndAngle(210)
+          .Max(180)
+      )
+)
+
+@(Html.Kendo().Slider<int>()
+      .Name("slider")
+      .Max(180)
+      .ShowButtons(false)
+      .ClientEvents(events => events.OnChange("onChange"))
+)
+
+<script type="text/javascript">
+    function onChange(e) {
+        $("#radialGauge").data("kendoRadialGauge").value(e.value);
+    }
+</script>

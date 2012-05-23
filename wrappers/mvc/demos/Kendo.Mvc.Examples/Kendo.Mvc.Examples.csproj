@@ -76,6 +76,8 @@
   <ItemGroup>
     <Compile Include="Areas\aspx\ASPXAreaRegistration.cs" />
     <Compile Include="Areas\razor\RazorAreaRegistration.cs" />
+    <Compile Include="Controllers\LinearGauge\IndexController.cs" />
+    <Compile Include="Controllers\LinearGauge\ScaleOptoinsController.cs" />
     <Compile Include="Controllers\DateTimePicker\IndexController.cs" />
     <Compile Include="Controllers\Grid\AjaxBindingController.cs" />
     <Compile Include="Controllers\Grid\ColumnReorderingController.cs" />
@@ -83,6 +85,7 @@
     <Compile Include="Controllers\Grid\CustomServerBindingController.cs" />
     <Compile Include="Controllers\Grid\ColumnResizingController.cs" />
     <Compile Include="Controllers\Grid\CustomAjaxBindingController.cs" />
+    <Compile Include="Controllers\RadialGauge\ScaleOptoinsController.cs" />
     <Compile Include="Controllers\TabStrip\AjaxController.cs" />
     <Compile Include="Controllers\TabStrip\ApiController.cs" />
     <Compile Include="Controllers\TabStrip\EventsController.cs" />
@@ -265,6 +268,9 @@
     <Content Include="Areas\razor\Views\grid\ajaxaggregates.cshtml" />
     <Content Include="Areas\razor\Views\grid\serveraggregates.cshtml" />
     <Content Include="Areas\razor\Views\datetimepicker\index.cshtml" />
+    <Content Include="Areas\razor\Views\radialgauge\scaleoptions.cshtml" />
+    <Content Include="Areas\razor\Views\lineargauge\index.cshtml" />
+    <Content Include="Areas\razor\Views\lineargauge\scaleoptions.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
