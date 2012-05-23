@@ -2727,4 +2727,8 @@ function pad(number) {
 
         $(window).on(support.resize, handler);
     };
+
+    kendo.data = function(element, key) {
+        return element.data(kendo.ns + key);
+    };
 })(jQuery);

@@ -10,6 +10,7 @@
         BEFORE_SHOW = "beforeShow",
         HIDE = "hide",
         Z_INDEX = "z-index",
+        data = kendo.data,
         roleSelector = kendo.roleSelector;
 
     /**
@@ -247,10 +248,14 @@
 
             that.model = model;
 
+            element.find(roleSelector("popover")).each(function(){
+                kendo.initWidget(this, {}, ui);
+            });
+
             if (model) {
                 kendo.bind(element.children(), model, ui);
             } else {
-                kendo.mobile.init(element.children());
+                mobile.init(element.children());
             }
         },
 
@@ -260,21 +265,21 @@
                 element = that.element;
 
             element.data("kendoView", that).addClass("km-view");
-            that.transition = element.data(kendo.ns + "transition");
+            that.transition = data(element, "transition");
 
-            that.header = element.find(roleSelector("header")).addClass("km-header");
-            that.footer = element.find(roleSelector("footer")).addClass("km-footer");
+            that.header = element.children(roleSelector("header")).addClass("km-header");
+            that.footer = element.children(roleSelector("footer")).addClass("km-footer");
 
             if (!element.children(contentSelector)[0]) {
               element.wrapInner("<div " + attr("role") + '="content"></div>');
             }
 
-            that.content = element.find(roleSelector("content"))
+            that.content = element.children(roleSelector("content"))
                                 .addClass("km-content");
 
             that.element.prepend(that.header).append(that.footer);
 
-            that.id = element.data(kendo.ns + "url") || "#" + element.attr("id");
+            that.id = data(element, "url") || "#" + element.attr("id");
 
             if (that.layout) {
                 that.layout.setup(that);
@@ -455,8 +460,8 @@
             element = that.element;
 
             that.element = element.detach();
-            that.header = element.find(roleSelector("header")).addClass("km-header");
-            that.footer = element.find(roleSelector("footer")).addClass("km-footer");
+            that.header = element.children(roleSelector("header")).addClass("km-header");
+            that.footer = element.children(roleSelector("footer")).addClass("km-footer");
             that.elements = that.header.add(that.footer);
             kendo.mobile.init(that.element.children());
             that.trigger(INIT, {layout: that});
@@ -515,13 +520,13 @@
             var that = this;
             if (view.header === that.header) {
                 that.header.detach();
-                view.element.find(roleSelector("header")).remove();
+                view.element.children(roleSelector("header")).remove();
                 view.element.prepend(that.header);
             }
 
             if (view.footer === that.footer) {
                 that.footer.detach();
-                view.element.find(roleSelector("footer")).remove();
+                view.element.children(roleSelector("footer")).remove();
                 view.element.append(that.footer);
             }
 
@@ -623,7 +628,7 @@
         _createView: function(element) {
             var that = this,
                 viewOptions,
-                layout = element.data(kendo.ns + "layout");
+                layout = data(element, "layout");
 
             if (typeof layout === "undefined") {
                 layout = that.layout;
@@ -702,12 +707,11 @@
         },
 
         _setupLayouts: function(element) {
-            var that = this,
-                platformAttr = kendo.ns + "platform";
+            var that = this;
 
             element.children(roleSelector("layout")).each(function() {
                 var layout = $(this),
-                    platform = layout.data(platformAttr);
+                    platform = data(layout,  "platform");
 
                 if (platform === undefined || platform === mobile.application.os) {
                     that.layouts[layout.data("id")] = kendo.initWidget(layout, {}, kendo.mobile.ui);
