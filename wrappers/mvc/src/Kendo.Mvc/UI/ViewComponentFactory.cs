@@ -19,7 +19,6 @@ namespace Kendo.Mvc.UI
     /// </summary>
     public class ViewComponentFactory : IHideObjectMembers
     {
-
         public ViewComponentFactory(HtmlHelper htmlHelper, IClientSideObjectWriterFactory clientSideObjectWriterFactory)
         {
             Guard.IsNotNull(htmlHelper, "htmlHelper");
@@ -27,6 +26,14 @@ namespace Kendo.Mvc.UI
 
             HtmlHelper = htmlHelper;
             ClientSideObjectWriterFactory = clientSideObjectWriterFactory;
+            Initializer = DI.Current.Resolve<IJavaScriptInitializer>();
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public IJavaScriptInitializer Initializer
+        {
+            get;
+            private set;
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -251,7 +258,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual DatePickerBuilder DatePicker()
         {
-            return new DatePickerBuilder(new DatePicker(ViewContext, ClientSideObjectWriterFactory, ViewData));
+            return new DatePickerBuilder(new DatePicker(ViewContext, Initializer, ViewData));
         }
 
         /// <summary>

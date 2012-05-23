@@ -25,9 +25,6 @@ namespace Kendo.Mvc.UI
         /// <param name="clientSideObjectWriterFactory">The client side object writer factory.</param>
         protected ViewComponentBase(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory, ViewDataDictionary viewData = null)
         {
-            Guard.IsNotNull(viewContext, "viewContext");
-            Guard.IsNotNull(clientSideObjectWriterFactory, "clientSideObjectWriterFactory");
-
             ViewContext = viewContext;
             ViewData = viewData ?? viewContext.ViewData;
             ClientSideObjectWriterFactory = clientSideObjectWriterFactory;
@@ -35,6 +32,18 @@ namespace Kendo.Mvc.UI
             HtmlAttributes = new RouteValueDictionary();
 
             IsSelfInitialized = true;
+        }
+
+        public IJavaScriptInitializer Initializer
+        {
+            get;
+            set;
+        }
+
+        protected ViewComponentBase(ViewContext viewContext, IJavaScriptInitializer initializer, ViewDataDictionary viewData = null)
+            : this(viewContext, (IClientSideObjectWriterFactory)null, viewData)
+        {
+            Initializer = initializer;
         }
 
         /// <summary>

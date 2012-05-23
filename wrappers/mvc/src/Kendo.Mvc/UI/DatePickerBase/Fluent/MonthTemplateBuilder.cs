@@ -15,14 +15,14 @@ namespace Kendo.Mvc.UI.Fluent
 
         public MonthTemplateBuilder Content(string content)
         {
-            MonthTemplate.content = content;
+            MonthTemplate.Content = content;
 
             return this;
         }
 
         public MonthTemplateBuilder Empty(string empty)
         {
-            MonthTemplate.empty = empty;
+            MonthTemplate.Empty = empty;
 
             return this;
         }

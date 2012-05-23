@@ -167,7 +167,7 @@ namespace Kendo.Mvc.UI.Fluent
 
         public DateTimePickerBuilder MonthTemplate(string content)
         {
-            Component.MonthTemplate.content = content;
+            Component.MonthTemplate.Content = content;
 
             return this;
         }

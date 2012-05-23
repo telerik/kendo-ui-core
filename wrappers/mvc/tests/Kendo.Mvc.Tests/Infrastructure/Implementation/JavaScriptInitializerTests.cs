@@ -123,6 +123,16 @@ namespace Kendo.Mvc.Infrastructure.Implementation.Tests
 
             initializer.Serialize(data).ShouldEqual("{foo:bar}");
         }
+
+        [Fact]
+        public void Should_serialize_comma_separated_key_value_pairs()
+        {
+            data["foo"] = null;
+            data["bar"] = null;
+
+            initializer.Serialize(data).ShouldEqual("{foo:null,bar:null}");
+        }
+
         [Fact]
         public void Should_serialize_client_event_inline_handler()
         {

@@ -33,7 +33,7 @@ namespace Kendo.Mvc.UI
 		/// <summary>
         /// Content - rendered around custom content
         /// </summary>
-        public const string Content = "k-content";
+        public const string Content = "k-Content";
 
         /// <summary>
         /// Default state of items
@@ -237,7 +237,7 @@ namespace Kendo.Mvc.UI
 
             public const string FooterTemplateRowWrap = "k-footer-template-wrap";
             
-            public const string ScrollableContent = "k-grid-content";
+            public const string ScrollableContent = "k-grid-Content";
 
             /// <summary>
             /// Grid action
@@ -301,7 +301,7 @@ namespace Kendo.Mvc.UI
             /// <summary>
             /// Editor textarea element
             /// </summary>
-            public const string RawContent = "k-raw-content";
+            public const string RawContent = "k-raw-Content";
         }
 
         public static class Slider
@@ -343,7 +343,7 @@ namespace Kendo.Mvc.UI
             /// <summary>
             /// Window content area
             /// </summary>
-            public const string Content = "k-window-content";
+            public const string Content = "k-window-Content";
 
             /// <summary>
             /// Window title bar
