@@ -26,9 +26,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="stacked">A value indicating if the lines should be stacked.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart(Model)
-        ///             .Name("Chart")
-        ///             .Series(series => series.Line(s => s.Sales).Stack(true))
+        /// &lt;%= Html.Kendo().Chart(Model)
+        ///            .Name("Chart")
+        ///            .Series(series => series.Line(s => s.Sales).Stack(true))
         /// %&gt;
         /// </code>
         /// </example>
@@ -45,15 +45,15 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">The configuration action.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart()
-        ///             .Name("Chart")
-        ///             .Series(series => series
-        ///                 .Line(s => s.Sales)
-        ///                 .Labels(labels => labels
-        ///                     .Position(ChartBarLabelsPosition.Above)
-        ///                     .Visible(true)
-        ///                 );
-        ///              )
+        /// &lt;%= Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series
+        ///                .Line(s => s.Sales)
+        ///                .Labels(labels => labels
+        ///                    .Position(ChartBarLabelsPosition.Above)
+        ///                    .Visible(true)
+        ///                );
+        ///             )
         /// %&gt;
         /// </code>
         /// </example>
@@ -72,12 +72,12 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="visible">The visibility. The default value is false.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart()
-        ///             .Name("Chart")
-        ///             .Series(series => series
-        ///                 .Line(s => s.Sales)
-        ///                 .Labels(true);
-        ///              )
+        /// &lt;%= Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series
+        ///                .Line(s => s.Sales)
+        ///                .Labels(true);
+        ///             )
         /// %&gt;
         /// </code>
         /// </example>
@@ -94,10 +94,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="width">The line width.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
-        ///            .Name("Chart")
-        ///            .Series(series => series.Line(s => s.Sales).Width(2))
-        ///            .Render();
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .Series(series => series.Line(s => s.Sales).Width(2))
+        ///           .Render();
         /// %&gt;
         /// </code>
         /// </example>        
@@ -114,10 +114,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="dashType">The line dash type.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
-        ///            .Name("Chart")
-        ///            .Series(series => series.Line(s => s.Sales).DashType(ChartDashType.Dot))
-        ///            .Render();
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .Series(series => series.Line(s => s.Sales).DashType(ChartDashType.Dot))
+        ///           .Render();
         /// %&gt;
         /// </code>
         /// </example>        
@@ -134,14 +134,14 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">The configuration action.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart()
-        ///             .Name("Chart")
-        ///             .Series(series => series
-        ///                 .Line(s => s.Sales)
-        ///                 .Markers(markers => markers
-        ///                     .Type(ChartMarkerShape.Triangle)
-        ///                 );
-        ///              )
+        /// &lt;%= Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series
+        ///                .Line(s => s.Sales)
+        ///                .Markers(markers => markers
+        ///                    .Type(ChartMarkerShape.Triangle)
+        ///                );
+        ///             )
         /// %&gt;
         /// </code>
         /// </example>
@@ -160,12 +160,12 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="visible">The visibility. The default value is true.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart()
-        ///             .Name("Chart")
-        ///             .Series(series => series
-        ///                 .Line(s => s.Sales)
-        ///                 .Markers(true);
-        ///              )
+        /// &lt;%= Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series
+        ///                .Line(s => s.Sales)
+        ///                .Markers(true);
+        ///             )
         /// %&gt;
         /// </code>
         /// </example>
@@ -182,12 +182,12 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="missingValues">The missing values behavior. The default is to leave gaps.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart()
-        ///             .Name("Chart")
-        ///             .Series(series => series
-        ///                 .Line(s => s.Sales)
-        ///                 .MissingValues(ChartLineMissingValues.Interpolate);
-        ///              )
+        /// &lt;%= Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series
+        ///                .Line(s => s.Sales)
+        ///                .MissingValues(ChartLineMissingValues.Interpolate);
+        ///             )
         /// %&gt;
         /// </code>
         /// </example>

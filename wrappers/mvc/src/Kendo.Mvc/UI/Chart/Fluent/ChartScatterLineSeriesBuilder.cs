@@ -25,7 +25,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="width">The line width.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///            .Name("Chart")
         ///            .Series(series => series.ScatterLine(s => s.x, s => s.y).Width(2))
         ///            .Render();
@@ -45,7 +45,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="dashType">The line dash type.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///            .Name("Chart")
         ///            .Series(series => series.ScatterLine(s => s.x, s => s.y).DashType(ChartDashType.Dot))
         ///            .Render();
@@ -65,12 +65,12 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="missingValues">The missing values behavior. The default is to leave gaps.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart()
-        ///             .Name("Chart")
-        ///             .Series(series => series
-        ///                 .ScatterLine(s => s.x, s => s.y)
-        ///                 .MissingValues(ChartScatterLineMissingValues.Interpolate);
-        ///              )
+        /// &lt;%= Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series
+        ///                .ScatterLine(s => s.x, s => s.y)
+        ///                .MissingValues(ChartScatterLineMissingValues.Interpolate);
+        ///            )
         /// %&gt;
         /// </code>
         /// </example>

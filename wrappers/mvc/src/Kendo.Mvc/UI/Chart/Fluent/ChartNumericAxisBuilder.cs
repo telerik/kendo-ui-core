@@ -1,8 +1,5 @@
 namespace Kendo.Mvc.UI.Fluent
 {
-    using System;
-    using System.ComponentModel;
-
     /// <summary>
     /// Defines the fluent interface for configuring numeric axis.
     /// </summary>
@@ -23,9 +20,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="min">The axis minimum value.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart(Model)
-        ///             .Name("Chart")
-        ///             .ValueAxis(a => a.Numeric().Min(4))
+        /// &lt;%= Html.Kendo().Chart(Model)
+        ///            .Name("Chart")
+        ///            .ValueAxis(a => a.Numeric().Min(4))
         /// %&gt;
         /// </code>
         /// </example>
@@ -42,9 +39,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="max">The axis maximum value.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart(Model)
-        ///             .Name("Chart")
-        ///             .ValueAxis(a => a.Numeric().Max(4))
+        /// &lt;%= Html.Kendo().Chart(Model)
+        ///            .Name("Chart")
+        ///            .ValueAxis(a => a.Numeric().Max(4))
         /// %&gt;
         /// </code>
         /// </example>
@@ -61,9 +58,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="majorUnit">The interval between major divisions.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart(Model)
-        ///             .Name("Chart")
-        ///             .ValueAxis(a => a.Numeric().MajorUnit(4))
+        /// &lt;%= Html.Kendo().Chart(Model)
+        ///            .Name("Chart")
+        ///            .ValueAxis(a => a.Numeric().MajorUnit(4))
         /// %&gt;
         /// </code>
         /// </example>

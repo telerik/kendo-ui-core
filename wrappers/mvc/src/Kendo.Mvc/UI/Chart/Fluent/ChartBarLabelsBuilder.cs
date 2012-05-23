@@ -23,7 +23,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="position">The labels position.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .Series(series => series
         ///               .Bar(s => s.Sales)

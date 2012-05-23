@@ -23,7 +23,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="mirror">A value indicating whether to render the axis labels on the other side.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;%= Html.Telerik().Chart()
+        /// &lt;%= Html.Kendo().Chart()
         ///            .Name("Chart")
         ///            .ValueAxis(axis => axis
         ///                .Numeric().Labels(labels => labels.Mirror(true))
@@ -50,7 +50,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Every n-th label is rendered where n is the step.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;%= Html.Telerik().Chart()
+        /// &lt;%= Html.Kendo().Chart()
         ///            .Name("Chart")
         ///            .CategoryAxis(axis => axis
         ///                .Categories(product => product.Name)

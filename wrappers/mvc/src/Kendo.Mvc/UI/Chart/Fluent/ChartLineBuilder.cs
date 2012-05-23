@@ -23,7 +23,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="visible">The line visibility.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .CategoryAxis(axis => axis.MajorGridLines(lines => lines.Visible(true)))
         ///           .Render();

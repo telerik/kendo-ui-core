@@ -39,9 +39,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="text">The title.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart(Model)
-        ///             .Name("Chart")
-        ///             .Series(series => series.Bar(s => s.Sales).Name("Sales"))
+        /// &lt;%= Html.Kendo().Chart(Model)
+        ///            .Name("Chart")
+        ///            .Series(series => series.Bar(s => s.Sales).Name("Sales"))
         /// %&gt;
         /// </code>
         /// </example>
@@ -61,9 +61,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart(Model)
-        ///             .Name("Chart")
-        ///             .Series(series => series.Bar(s => s.Sales).Opacity(0.5))
+        /// &lt;%= Html.Kendo().Chart(Model)
+        ///            .Name("Chart")
+        ///            .Series(series => series.Bar(s => s.Sales).Opacity(0.5))
         /// %&gt;
         /// </code>
         /// </example>
@@ -80,7 +80,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="color">The bar fill color (CSS syntax).</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///            .Name("Chart")
         ///            .Series(series => series.Bar(s => s.Sales).Color("Red"))
         ///            .Render();
@@ -100,14 +100,14 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">Use the configurator to set data tooltip options.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart()
-        ///             .Name("Chart")
-        ///             .Series(series => series.Bar(s => s.Sales)
-        ///                 .Tooltip(tooltip =>
-        ///                 {
-        ///                     tooltip.Visible(true).Format("{0:C}");
-        ///                 })
-        ///             )
+        /// &lt;%= Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series.Bar(s => s.Sales)
+        ///                .Tooltip(tooltip =>
+        ///                {
+        ///                    tooltip.Visible(true).Format("{0:C}");
+        ///                })
+        ///            )
         /// %&gt;
         /// </code>
         /// </example>
@@ -129,9 +129,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart()
-        ///             .Name("Chart")
-        ///             .Series(series => series.Bar(s => s.Sales).Tooltip(true))
+        /// &lt;%= Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series.Bar(s => s.Sales).Tooltip(true))
         /// %&gt;
         /// </code>
         /// </example>
@@ -148,12 +148,12 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="axis">The axis name for this series.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart(Model)
-        ///             .Name("Chart")
-        ///             .Series(series => series.Bar(s => s.Sales).Name("Sales").Axis("secondary"))
-        ///             .ValueAxis(axis => axis.Numeric())
-        ///             .ValueAxis(axis => axis.Numeric("secondary"))
-        ///             .CategoryAxis(axis => axis.AxisCrossingValue(0, 10))
+        /// &lt;%= Html.Kendo().Chart(Model)
+        ///            .Name("Chart")
+        ///            .Series(series => series.Bar(s => s.Sales).Name("Sales").Axis("secondary"))
+        ///            .ValueAxis(axis => axis.Numeric())
+        ///            .ValueAxis(axis => axis.Numeric("secondary"))
+        ///            .CategoryAxis(axis => axis.AxisCrossingValue(0, 10))
         /// %&gt;
         /// </code>
         /// </example>

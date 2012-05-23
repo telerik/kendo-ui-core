@@ -22,10 +22,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="text">The text title.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
-        ///            .Name("Chart")
-        ///            .Title(title => title.Text("Chart"))
-        ///            .Render();
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .Title(title => title.Text("Chart"))
+        ///           .Render();
         /// %&gt;
         /// </code>
         /// </example>        
@@ -41,10 +41,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="font">The title font (CSS format).</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
-        ///            .Name("Chart")
-        ///            .Title(title => title.Font("16px Arial,Helvetica,sans-serif"))
-        ///            .Render();
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .Title(title => title.Font("16px Arial,Helvetica,sans-serif"))
+        ///           .Render();
         /// %&gt;
         /// </code>
         /// </example>        
@@ -60,10 +60,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="background">The background color.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
-        ///            .Name("Chart")
-        ///            .Title(title => title.Background("red"))
-        ///            .Render();
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .Title(title => title.Background("red"))
+        ///           .Render();
         /// %&gt;
         /// </code>
         /// </example>        
@@ -79,10 +79,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="position">The title position.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
-        ///            .Name("Chart")
-        ///            .Title(title => title.Position(ChartTitlePosition.Bottom))
-        ///            .Render();
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .Title(title => title.Position(ChartTitlePosition.Bottom))
+        ///           .Render();
         /// %&gt;
         /// </code>
         /// </example>        
@@ -98,10 +98,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="align">The title alignment.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
-        ///            .Name("Chart")
-        ///            .Title(title => title.Align(ChartTextAlignment.Left))
-        ///            .Render();
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .Title(title => title.Align(ChartTextAlignment.Left))
+        ///           .Render();
         /// %&gt;
         /// </code>
         /// </example>        
@@ -117,10 +117,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="visible">The title visibility.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
-        ///            .Name("Chart")
-        ///            .Title(title => title.Visible(false))
-        ///            .Render();
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .Title(title => title.Visible(false))
+        ///           .Render();
         /// %&gt;
         /// </code>
         /// </example>        
@@ -139,10 +139,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="left">The title left margin.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
-        ///            .Name("Chart")
-        ///            .Title(title => title.Margin(20))
-        ///            .Render();
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .Title(title => title.Margin(20))
+        ///           .Render();
         /// %&gt;
         /// </code>
         /// </example>        
@@ -161,10 +161,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="margin">The title margin.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
-        ///            .Name("Chart")
-        ///            .Title(title => title.Margin(20))
-        ///            .Render();
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .Title(title => title.Margin(20))
+        ///           .Render();
         /// %&gt;
         /// </code>
         /// </example>        
@@ -183,10 +183,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="left">The title left padding.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
-        ///            .Name("Chart")
-        ///            .Title(title => title.Padding(20))
-        ///            .Render();
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .Title(title => title.Padding(20))
+        ///           .Render();
         /// %&gt;
         /// </code>
         /// </example>        
@@ -205,10 +205,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="padding">The title padding.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
-        ///            .Name("Chart")
-        ///            .Title(title => title.Padding(20))
-        ///            .Render();
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .Title(title => title.Padding(20))
+        ///           .Render();
         /// %&gt;
         /// </code>
         /// </example>        
@@ -226,10 +226,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="dashType">The title dash type.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
-        ///            .Name("Chart")
-        ///            .Title(title => title.Border(1, "#000", ChartDashType.Dot))
-        ///            .Render();
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .Title(title => title.Border(1, "#000", ChartDashType.Dot))
+        ///           .Render();
         /// %&gt;
         /// </code>
         /// </example>        

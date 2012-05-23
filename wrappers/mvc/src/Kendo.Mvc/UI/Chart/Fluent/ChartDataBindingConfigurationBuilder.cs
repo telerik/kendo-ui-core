@@ -23,7 +23,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart()
+        ///  &lt;%= Html.Kendo().Chart()
         ///             .Name("Chart")
         ///             .DataBinding(dataBinding => 
         ///             {

@@ -26,7 +26,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart(Model)
+        ///  &lt;%= Html.Kendo().Chart(Model)
         ///             .Name("Chart")
         ///             .DataBinding(dataBinding => 
         ///             {
@@ -51,7 +51,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="routeValues">The route values of the Action method.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart(Model)
+        ///  &lt;%= Html.Kendo().Chart(Model)
         ///             .Name("Chart")
         ///             .DataBinding(dataBinding => 
         ///             {
@@ -75,7 +75,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="routeValues">The route values.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart(Model)
+        ///  &lt;%= Html.Kendo().Chart(Model)
         ///             .Name("Chart")
         ///             .DataBinding(dataBinding => 
         ///             {
@@ -99,7 +99,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="routeValues">The route values.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart(Model)
+        ///  &lt;%= Html.Kendo().Chart(Model)
         ///             .Name("Chart")
         ///             .DataBinding(dataBinding => 
         ///             {
@@ -122,7 +122,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="controllerName">Name of the controller.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart(Model)
+        ///  &lt;%= Html.Kendo().Chart(Model)
         ///             .Name("Chart")
         ///             .DataBinding(dataBinding => 
         ///             {
@@ -143,7 +143,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="routeValues">The route values.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart(Model)
+        ///  &lt;%= Html.Kendo().Chart(Model)
         ///             .Name("Chart")
         ///             .DataBinding(dataBinding => 
         ///             {
@@ -166,7 +166,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="routeValues">The route values.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart(Model)
+        ///  &lt;%= Html.Kendo().Chart(Model)
         ///             .Name("Chart")
         ///             .DataBinding(dataBinding => 
         ///             {
@@ -188,7 +188,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="routeName">Name of the route.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart(Model)
+        ///  &lt;%= Html.Kendo().Chart(Model)
         ///             .Name("Chart")
         ///             .DataBinding(dataBinding => 
         ///             {
@@ -209,7 +209,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="controllerAction">The action.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart(Model)
+        ///  &lt;%= Html.Kendo().Chart(Model)
         ///             .Name("Chart")
         ///             .DataBinding(dataBinding => 
         ///             {

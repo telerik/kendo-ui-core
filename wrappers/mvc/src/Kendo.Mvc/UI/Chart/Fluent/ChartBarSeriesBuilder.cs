@@ -26,7 +26,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="stacked">A value indicating if the bars should be stacked.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart(Model)
+        ///  &lt;%= Html.Kendo().Chart(Model)
         ///             .Name("Chart")
         ///             .Series(series => series.Bar(s => s.Sales).Stack(true))
         /// %&gt;
@@ -49,7 +49,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        /// &lt;%= Html.Telerik().Chart(Model)
+        /// &lt;%= Html.Kendo().Chart(Model)
         ///     .Name("Chart")
         ///     .Series(series => series.Bar(s => s.Sales).Gap(1))
         /// %&gt;
@@ -71,7 +71,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;%= Html.Telerik().Chart(Model)
+        /// &lt;%= Html.Kendo().Chart(Model)
         ///     .Name("Chart")
         ///     .Series(series => series.Spacing(s => s.Sales).Spacing(1))
         /// %&gt;
@@ -90,7 +90,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">The configuration action.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart()
+        ///  &lt;%= Html.Kendo().Chart()
         ///             .Name("Chart")
         ///             .Series(series => series
         ///                 .Bar(s => s.Sales)
@@ -117,7 +117,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="visible">The visibility. The default value is false.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart()
+        ///  &lt;%= Html.Kendo().Chart()
         ///             .Name("Chart")
         ///             .Series(series => series
         ///                 .Bar(s => s.Sales)
@@ -141,7 +141,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="dashType">The bars border dash type.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///            .Name("Chart")
         ///            .Series(series => series.Bar(s => s.Sales).Border("1", "#000", ChartDashType.Dot))
         ///            .Render();
@@ -161,7 +161,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="overlay">The bar effects overlay. The default is ChartBarSeriesOverlay.Glass</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Chart()
+        /// &lt;% Html.Kendo().Chart()
         ///            .Name("Chart")
         ///            .Series(series => series.Bar(s => s.Sales).Overlay(ChartBarSeriesOverlay.None))
         ///            .Render();
