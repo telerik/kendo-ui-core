@@ -271,6 +271,10 @@
     <Content Include="Areas\razor\Views\radialgauge\scaleoptions.cshtml" />
     <Content Include="Areas\razor\Views\lineargauge\index.cshtml" />
     <Content Include="Areas\razor\Views\lineargauge\scaleoptions.cshtml" />
+    <Content Include="Areas\aspx\Views\radialgauge\index.aspx" />
+    <Content Include="Areas\aspx\Views\radialgauge\scaleoptions.aspx" />
+    <Content Include="Areas\aspx\Views\lineargauge\index.aspx" />
+    <Content Include="Areas\aspx\Views\lineargauge\scaleoptions.aspx" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>

@@ -1,3 +1,9 @@
+<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/DataViz.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+
+<asp:Content ContentPlaceHolderID="HeadContent" runat="server">
+</asp:Content>
+
+<asp:Content ContentPlaceHolderID="MainContent" runat="server">
 <div class="configuration k-widget k-header" style="width:170px;">
     <span class="configHead">Configuration</span>
     <span class="configTitle">Gauge scale should...</span>
@@ -17,25 +23,25 @@
     </ul>
 </div>
 <div id="gauge-container">
-    @(Html.Kendo().LinearGauge<int>()
-          .Name("lineargauge")
-          .Pointer(pointer => pointer
-              .Value(65)
-              .Shape(GaugeLinearPointerShape.Arrow)
-          )
-          .Scale(scale => scale
-              .MajorUnit(20)
-              .MinorUnit(5)
-              .Max(180)
-              .Ranges(ranges => {
-                      ranges.Add().From(80).To(120).Color("#ffc700");
-                      ranges.Add().From(120).To(150).Color("#ff7a00");
-                      ranges.Add().From(150).To(180).Color("#c20000");
-                  }
-              )
-          )
-          .HtmlAttributes(new { style = "width:200px;" })
-    )
+    <%= Html.Kendo().LinearGauge<int>()
+            .Name("lineargauge")
+            .Pointer(pointer => pointer
+                .Value(65)
+                .Shape(GaugeLinearPointerShape.Arrow)
+            )
+            .Scale(scale => scale
+                .MajorUnit(20)
+                .MinorUnit(5)
+                .Max(180)
+                .Ranges(ranges => {
+                        ranges.Add().From(80).To(120).Color("#ffc700");
+                        ranges.Add().From(120).To(150).Color("#ff7a00");
+                        ranges.Add().From(150).To(180).Color("#c20000");
+                    }
+                )
+            )
+            .HtmlAttributes(new { style = "width:200px;" })
+    %>
 </div>
 
 <script type="text/javascript">
@@ -68,14 +74,14 @@
     #gauge-container {
         text-align: center;
         margin-left: 30px;
-        background: transparent url(@Url.Content("~/Content/dataviz/gauge/linear-gauge-container.png")) no-repeat 50% 50%;
+        background: transparent url(<%= Url.Content("~/Content/dataviz/gauge/linear-gauge-container.png") %>) no-repeat 50% 50%;
         padding: 18px;
         width: 300px;
         height: 300px;
     }
 
     #gauge-container.horizontal {
-        background-image: url(@Url.Content("~/Content/dataviz/gauge/linear-gauge-container-h.png"));
+        background-image: url(<%= Url.Content("~/Content/dataviz/gauge/linear-gauge-container-h.png") %>);
     }
 
     #lineargauge {
@@ -84,3 +90,4 @@
         margin: 0 auto 0;
     }
 </style>
+</asp:Content>
