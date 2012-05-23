@@ -117,7 +117,7 @@ namespace Kendo.Mvc.UI
         public virtual GridBuilder<T> Grid<T>() where T : class
         {
             return new GridBuilder<T>(new Grid<T>(ViewContext, 
-                        ClientSideObjectWriterFactory, 
+                        Initializer,
                         DI.Current.Resolve<IUrlGenerator>(),
                         DI.Current.Resolve<ILocalizationServiceFactory>().Create("GridLocalization", CultureInfo.CurrentUICulture), 
                         DI.Current.Resolve<IGridHtmlBuilderFactory>()

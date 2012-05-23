@@ -50,14 +50,12 @@ namespace Kendo.Mvc.UI.Tests
             viewDataContainer.SetupGet(container => container.ViewData).Returns(new ViewDataDictionary());
 
             ViewContext viewContext = TestHelper.CreateViewContext();
-            
-            Mock<IClientSideObjectWriterFactory> clientSideObjectFactory = new Mock<IClientSideObjectWriterFactory>();
-            
-            clientSideObjectFactory.Setup(f=>f.Create(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<TextWriter>())).Returns(objectWriter);
 
+            var initializer = new Mock<IJavaScriptInitializer>();
+            
             var htmlBuilderFactory = new Mock<IGridHtmlBuilderFactory>();
 
-            Grid<T> grid = new Grid<T>(viewContext, clientSideObjectFactory.Object, urlGenerator.Object, CreateLocalizationService(), htmlBuilderFactory.Object) { Name = "Grid" };
+            Grid<T> grid = new Grid<T>(viewContext, initializer.Object, urlGenerator.Object, CreateLocalizationService(), htmlBuilderFactory.Object) { Name = "Grid" };
 
             return grid;
         }

@@ -56,18 +56,41 @@ namespace Kendo.Mvc.Extensions
 
             var data = queryable;    
 
-            var filters = new List<IFilterDescriptor>(request.Filters);
+            var filters = new List<IFilterDescriptor>();
+
+            if (request.Filters != null)
+            {
+                filters.AddRange(request.Filters);
+            }
 
             if (filters.Any())
             {
                 data = data.Where(filters);
             }
 
-            var sort = new List<SortDescriptor>(request.Sorts);
-            var temporarySortDescriptors = new List<SortDescriptor>();
-            var group = request.Groups;
+            var sort = new List<SortDescriptor>();
 
-            var aggregates = new List<AggregateDescriptor>(request.Aggregates);
+            if (request.Sorts != null)
+            {
+                sort.AddRange(request.Sorts);
+            }
+
+            var temporarySortDescriptors = new List<SortDescriptor>();
+
+            IList<GroupDescriptor> group = new List<GroupDescriptor>();
+
+            if (request.Groups != null)
+            {
+                group.AddRange(request.Groups);
+            }
+
+            var aggregates = new List<AggregateDescriptor>();
+
+            if (aggregates != null)
+            {
+                aggregates.AddRange(request.Aggregates);
+            }
+
             if (aggregates.Any())
             {
                 var dataSource = data.AsQueryable();

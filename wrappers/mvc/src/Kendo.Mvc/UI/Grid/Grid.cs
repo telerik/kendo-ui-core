@@ -37,16 +37,9 @@ namespace Kendo.Mvc.UI
 
         private string clientRowTemplate;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Grid{T}"/> class.
-        /// </summary>
-        /// <param name="viewContext">The view context.</param>
-        /// <param name="clientSideObjectWriterFactory">The client side object writer factory.</param>
-        /// <param name="urlGenerator">The URL generator.</param>
-        /// <param name="builderFactory">The builder factory.</param>
-        public Grid(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory, IUrlGenerator urlGenerator,
+        public Grid(ViewContext viewContext, IJavaScriptInitializer initializer, IUrlGenerator urlGenerator,
             ILocalizationService localizationService, IGridHtmlBuilderFactory htmlBuilderFactory)
-            : base(viewContext, clientSideObjectWriterFactory)
+            : base(viewContext, initializer)
         {
             this.htmlBuilderFactory = htmlBuilderFactory;
 
@@ -63,13 +56,16 @@ namespace Kendo.Mvc.UI
             KeyboardNavigation = new GridKeyboardNavigationSettings(this);
             ColumnContextMenu = new GridColumnContextMenuSettings(this);
             Filtering = new GridFilteringSettings();
+
             Editing = new GridEditingSettings<T>(this)
             {
+                /* TODO: implement popup window
                 PopUp = new Window(viewContext, clientSideObjectWriterFactory)
                 {
                     Modal = true,
                     Draggable = true
                 }
+                */
             };
 
             Grouping = new GridGroupingSettings(this);
@@ -673,13 +669,70 @@ namespace Kendo.Mvc.UI
 
         public override void WriteInitializationScript(TextWriter writer)
         {
-            IClientSideObjectWriter objectWriter = ClientSideObjectWriterFactory.Create(Id, "kendoGrid", writer);
+            var options = new Dictionary<string, object>();
 
-            objectWriter.Start();
+            var autoBind = DataSource.Type == DataSourceType.Ajax && DataSource.Data == null;
 
-            new GridClientObjectSerializer<T>(this).Serialize(objectWriter);
+            var columns = VisibleColumns.Select(c => c.CreateSerializer().Serialize());
 
-            objectWriter.Complete();
+            if (columns.Any())
+            {
+                options["columns"] = columns;
+            }
+            
+            if (Grouping.Enabled)
+            {
+                options["groupable"] = true;
+            }
+
+            if (Paging.Enabled)
+            {
+                options["pageable"] = new Dictionary<string, object> { { "autoBind", autoBind } };
+            }
+
+            if (Sorting.Enabled)
+            {
+                options["sortable"] = true;
+            }
+
+            if (Selection.Enabled)
+            {
+                options["selectable"] = true;
+            }
+
+            if (Filtering.Enabled)
+            {
+                options["filterable"] = true;
+            }
+
+            if (Resizing.Enabled)
+            {
+                options["resizable"] = true;
+            }
+
+            if (Reordering.Enabled)
+            {
+                options["reorderable"] = true;
+            }
+
+            if (!Scrolling.Enabled)
+            {
+                options["scrollable"] = false;
+            }
+
+            if (autoBind == false)
+            {
+                options["autoBind"] = autoBind;
+            }
+
+            options["dataSource"] = DataSource.ToJson();
+
+            //TODO: Serialize editing
+            //TODO: Client Operation Mode
+            //TODO: Localization
+            //TODO: No records template
+
+            writer.Write(Initializer.Initialize(Id, "Grid", options));
 
             base.WriteInitializationScript(writer);
         }
@@ -904,7 +957,11 @@ namespace Kendo.Mvc.UI
             if (this.PrefixUrlParameters)
             {
                 binder.Prefix = Name;
-                DataSource.Transport.Prefix = Name + "-";
+
+                if (DataSource.Type == DataSourceType.Server)
+                {
+                    DataSource.Transport.Prefix = Name + "-";
+                }
             }
 
             var controller = ViewContext.Controller;

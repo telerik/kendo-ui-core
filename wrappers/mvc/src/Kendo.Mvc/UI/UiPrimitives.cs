@@ -237,7 +237,7 @@ namespace Kendo.Mvc.UI
 
             public const string FooterTemplateRowWrap = "k-footer-template-wrap";
             
-            public const string ScrollableContent = "k-grid-Content";
+            public const string ScrollableContent = "k-grid-content";
 
             /// <summary>
             /// Grid action
