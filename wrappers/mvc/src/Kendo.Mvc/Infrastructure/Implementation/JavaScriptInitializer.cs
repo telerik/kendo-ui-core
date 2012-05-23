@@ -1,10 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
+using Kendo.Mvc.Extensions;
 
 namespace Kendo.Mvc.Infrastructure
 {
@@ -53,7 +55,7 @@ namespace Kendo.Mvc.Infrastructure
             foreach (var keyValuePair in @object)
             {
                 output.Append(keyValuePair.Key)
-                    .Append(":");
+                      .Append(":");
 
                 var value = keyValuePair.Value;
 
@@ -62,6 +64,7 @@ namespace Kendo.Mvc.Infrastructure
                 if (@string != null)
                 {
                     output.Append(HttpUtility.JavaScriptStringEncode(@string, true));
+
                     continue;
                 }
 
@@ -70,6 +73,7 @@ namespace Kendo.Mvc.Infrastructure
                 if (@dictionary != null)
                 {
                     output.Append(Serialize(@dictionary));
+
                     continue;
                 }
 
@@ -78,13 +82,46 @@ namespace Kendo.Mvc.Infrastructure
                 if (enumerable != null)
                 {
                     var serializer = CreateSerializer();
+
                     output.Append(serializer.Serialize(enumerable));
+
+                    continue;
+                }
+
+                if (value is bool)
+                {
+                    AppendBoolean(output, (bool)value);
+
+                    continue;
+                }
+
+                if (value is DateTime)
+                {
+                    AppendDate(output, (DateTime)value);
+
                     continue;
                 }
 
                 if (value is int)
                 {
                     output.Append((int)value);
+
+                    continue;
+                }
+
+                if (value == null)
+                {
+                    output.Append("null");
+
+                    continue;
+                }
+
+                var @event = value as ClientEvent;
+
+                if (@event != null)
+                {
+                    AppendEvent(output, @event);
+
                     continue;
                 }
 
@@ -92,6 +129,49 @@ namespace Kendo.Mvc.Infrastructure
             }
 
             output.Append("}");
+        }
+
+        private void AppendBoolean(StringBuilder output, bool value)
+        {
+            if (value)
+            {
+                output.Append("true");
+            }
+            else
+            {
+                output.Append("false");
+            }
+        }
+
+        private void AppendEvent(StringBuilder output, ClientEvent value)
+        {
+            if (value.HandlerName.HasValue())
+            {
+                output.Append(value.HandlerName);
+            }
+            else if (value.InlineCodeBlock != null)
+            {
+                output.Append(value.InlineCodeBlock(value));
+            }
+        }
+
+        private void AppendDate(StringBuilder output, DateTime value)
+        {
+            output.Append("new Date(")
+                  .Append(value.Year)
+                  .Append(",")
+                  .Append(value.Month - 1)
+                  .Append(",")
+                  .Append(value.Day)
+                  .Append(",")
+                  .Append(value.Hour)
+                  .Append(",")
+                  .Append(value.Minute)
+                  .Append(",")
+                  .Append(value.Second)
+                  .Append(",")
+                  .Append(value.Millisecond)
+                  .Append(")");
         }
     }
 }

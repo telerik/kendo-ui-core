@@ -1,4 +1,4 @@
-namespace Kendo.Mvc.UI
+namespace Kendo.Mvc
 {
     using System;
 
