@@ -74,11 +74,12 @@ namespace Kendo.Mvc.UI
                 writer.Append("reorderable", true);
             }
 
-            if (grid.DataBinding.IsClientOperationMode)
-            {
-                writer.Append("operationMode", "client");
-                shouldSerializeDataSource = true;
-            }
+            //TODO: Client Operation Mode
+            //if (grid.DataBinding.IsClientOperationMode)
+            //{
+            //    writer.Append("operationMode", "client");
+            //    shouldSerializeDataSource = true;
+            //}
 
             grid.KeyboardNavigation.SerializeTo("keyboardNavigation", writer);
             grid.ColumnContextMenu.SerializeTo("columnContextMenu", writer);

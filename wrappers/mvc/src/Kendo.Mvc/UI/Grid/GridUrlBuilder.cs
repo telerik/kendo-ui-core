@@ -23,7 +23,7 @@ namespace Kendo.Mvc.UI
             return dataKeyStore.GetRouteValues(dataItem);
         }
 
-        public IEnumerable<IGridDataKey> GetDataKeys()
+        public IEnumerable<IDataKey> GetDataKeys()
         {
             return dataKeyStore.GetDataKeys();
         }
@@ -57,19 +57,19 @@ namespace Kendo.Mvc.UI
 
         public string SelectUrl()
         {
-            return Url(grid.Server.Select);
+            return Url(grid.DataSource.Transport.Read);
         }
 
         public string SelectUrl(string key, object value)
         {
-            return Url(grid.Server.Select, key, value);
+            return Url(grid.DataSource.Transport.Read, key, value);
         }
 
         public string SelectUrl(object dataItem)
         {
             var routeValues = GetDataKeyRouteValues(dataItem);
 
-            var navigatable = grid.Server.Select;
+            var navigatable = grid.DataSource.Transport.Read;
 
             var selectRouteValues = PrepareRouteValues(navigatable.RouteValues);
 
@@ -83,8 +83,8 @@ namespace Kendo.Mvc.UI
         public string DeleteUrl(object dataItem)
         {
             var routeValues = GetDataKeyRouteValues(dataItem);
-            
-            var navigatable = grid.Server.Delete;
+
+            var navigatable = grid.DataSource.Transport.Destroy;
 
             var selectRouteValues = PrepareRouteValues(navigatable.RouteValues);
 
@@ -96,8 +96,8 @@ namespace Kendo.Mvc.UI
         public string CancelUrl(object dataItem)
         {
             var keysToExclude = grid.DataKeys.Select(key => key.RouteKey);
-                
-            var navigatable = grid.Server.Select;
+
+            var navigatable = grid.DataSource.Transport.Read;
             
             var selectRouteValues = PrepareRouteValues(navigatable.RouteValues);
 
@@ -115,7 +115,7 @@ namespace Kendo.Mvc.UI
         {
             var routeValues = GetDataKeyRouteValues(dataItem);
 
-            var navigatable = grid.Server.Select;
+            var navigatable = grid.DataSource.Transport.Read;
             
             var selectRouteValues = PrepareRouteValues(navigatable.RouteValues);
 
@@ -128,7 +128,7 @@ namespace Kendo.Mvc.UI
 
         public string AddUrl(object dataItem)
         {
-            var navigatable = grid.Server.Select;
+            var navigatable = grid.DataSource.Transport.Read;
             
             var selectRouteValues = PrepareRouteValues(navigatable.RouteValues);
 
@@ -139,7 +139,7 @@ namespace Kendo.Mvc.UI
         
         public string InsertUrl(object dataItem)
         {
-            var navigatable = grid.Server.Insert;
+            var navigatable = grid.DataSource.Transport.Create;
 
             var selectRouteValues = PrepareRouteValues(navigatable.RouteValues);
 
@@ -150,7 +150,7 @@ namespace Kendo.Mvc.UI
         {
             var routeValues = GetDataKeyRouteValues(dataItem);
 
-            var navigatable = grid.Server.Update;
+            var navigatable = grid.DataSource.Transport.Update;
 
             var selectRouteValues = PrepareRouteValues(navigatable.RouteValues);
 

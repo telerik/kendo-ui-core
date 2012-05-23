@@ -20,23 +20,23 @@ namespace Kendo.Mvc.UI
             get;
         }
 
-        IEnumerable<IGridDataKey> GetDataKeys();
+        IEnumerable<IDataKey> GetDataKeys();
     }
 
     public class GridDataKeyStore : IGridDataKeyStore
     {
-        private readonly IEnumerable<IGridDataKey> dataKeys;
+        private readonly IEnumerable<IDataKey> dataKeys;
 
         private IEnumerable<Func<object, object>> dataKeyGetters;
 
-        public GridDataKeyStore(IEnumerable<IGridDataKey> dataKeys, IEnumerable<string> currentDataKeyValues)
+        public GridDataKeyStore(IEnumerable<IDataKey> dataKeys, IEnumerable<string> currentDataKeyValues)
         {
             this.dataKeys = dataKeys;
 
             CurrentDataKeyValues = currentDataKeyValues;
         }
         
-        public IEnumerable<IGridDataKey> GetDataKeys()
+        public IEnumerable<IDataKey> GetDataKeys()
         {
             return dataKeys;
         }

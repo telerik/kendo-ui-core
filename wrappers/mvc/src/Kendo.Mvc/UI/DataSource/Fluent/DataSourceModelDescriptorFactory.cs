@@ -18,7 +18,41 @@ namespace Kendo.Mvc.UI.Fluent
 
         public virtual void Id<TValue>(Expression<Func<TModel, TValue>> expression)
         {
-            model.Id = expression.MemberWithoutInstance();
+            var dataKey = new GridDataKey<TModel, TValue>(expression);            
+            dataKey.RouteKey = dataKey.Name;
+         
+            model.Id = dataKey;
+        }
+
+        public virtual void Id(string fieldName)
+        {
+            IGridDataKey<TModel> dataKey;
+            if (typeof(TModel) == typeof(System.Data.DataRowView))
+            {
+                dataKey = (IGridDataKey<TModel>)new GridRowViewDataKey(fieldName);
+            }
+            else if (typeof(TModel).IsDynamicObject())
+            {
+                var lambdaExpression = ExpressionBuilder.Expression<dynamic, object>(fieldName);
+                dataKey = (IGridDataKey<TModel>)new GridDynamicDataKey(fieldName, lambdaExpression);
+            }
+            else
+            {
+                dataKey = GetDataKeyForField(fieldName);
+            }            
+
+            dataKey.RouteKey = dataKey.Name;
+
+            model.Id = dataKey;
+        }
+
+        private IGridDataKey<TModel> GetDataKeyForField(string fieldName)
+        {
+            var lambdaExpression = ExpressionBuilder.Lambda<TModel>(fieldName);
+            var columnType = typeof(GridDataKey<,>).MakeGenericType(new[] { typeof(TModel), lambdaExpression.Body.Type });
+            var constructor = columnType.GetConstructor(new[] { lambdaExpression.GetType() });
+
+            return (IGridDataKey<TModel>)constructor.Invoke(new object[] { lambdaExpression });
         }
 
         public virtual DataSourceModelFieldDescriptorBuilder<TValue> Field<TValue>(Expression<Func<TModel, TValue>> expression)

@@ -47,7 +47,7 @@ namespace Kendo.Mvc.UI
                 RouteValues.AddRange(urlBuilder.GetState());
             }
 
-            var dataRouteValues = DataRouteValues.Cast<IGridDataKey>();
+            var dataRouteValues = DataRouteValues.Cast<IDataKey>();
 
             if (Ajax)
             {
@@ -83,7 +83,7 @@ namespace Kendo.Mvc.UI
 
                     navigatable.RouteValues.AddRange(RouteValues);
 
-                    var dataRouteValues = DataRouteValues.Cast<IGridDataKey>();
+                    var dataRouteValues = DataRouteValues.Cast<IDataKey>();
 
                     if (SendDataKeys)
                     {

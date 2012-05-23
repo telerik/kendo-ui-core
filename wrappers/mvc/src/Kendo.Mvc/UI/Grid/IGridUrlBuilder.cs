@@ -30,7 +30,7 @@ namespace Kendo.Mvc.UI
 
         string Url(INavigatable navigatable, Action<RouteValueDictionary> configurator);
 
-        IEnumerable<IGridDataKey> GetDataKeys();
+        IEnumerable<IDataKey> GetDataKeys();
 
         IDictionary<string, object> GetState();
     }

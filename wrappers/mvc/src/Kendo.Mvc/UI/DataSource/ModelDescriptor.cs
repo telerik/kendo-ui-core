@@ -1,27 +1,28 @@
 ﻿namespace Kendo.Mvc.UI
 {
-    using System.Web.Mvc;
     using System;
     using System.Collections.Generic;
-    using Extensions;
+    using System.Data;
     using System.Linq;
+    using System.Web.Mvc;
+    using Extensions;
 
     public class ModelDescriptor : JsonObject
     {
         public ModelDescriptor(Type modelType)
         {
-            var metadata = ModelMetadata.FromStringExpression("", new ViewDataDictionary(Activator.CreateInstance(modelType)));
+            var metadata = ModelMetadata.FromStringExpression("", new ViewDataDictionary(CreateDataItem(modelType)));
             Fields = Translate(metadata);
         }
 
         public IList<ModelFieldDescriptor> Fields { get; private set; }
-        public string Id { get; set; }
+        public IDataKey Id { get; set; }
 
         protected override void Serialize(IDictionary<string, object> json)
         {
-            if (Id.HasValue())
+            if (Id != null)
             {
-                json["id"] = Id;
+                json["id"] = Id.Name;
             }
 
             var fields = new Dictionary<string, object>();
@@ -54,6 +55,21 @@
                     MemberType = p.ModelType,
                     IsEditable = !p.IsReadOnly
                 }).ToList();            
+        }
+
+        private object CreateDataItem(Type modelType)
+        {
+            if (modelType == typeof(DataRowView))
+            {
+                return new DataTable().DefaultView.AddNew();
+            }
+
+            if (modelType == typeof(DataRow))
+            {
+                return new DataTable().NewRow();
+            }
+
+            return Activator.CreateInstance(modelType);
         }
     }
 }

@@ -352,7 +352,6 @@
     <Compile Include="UI\Grid\GridActionAttributeTests.cs" />
     <Compile Include="UI\Grid\GridActionBindingContextTests.cs" />
     <Compile Include="UI\Grid\GridActionCommandFactoryTests.cs" />
-    <Compile Include="UI\Grid\GridAjaxSettingsBuilderTests.cs" />
     <Compile Include="UI\Grid\GridBoundColumnTests.cs" />
     <Compile Include="UI\Grid\GridBuilderTests.cs" />
     <Compile Include="UI\Grid\GridBoundColumnBuilderTests.cs" />

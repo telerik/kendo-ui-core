@@ -102,48 +102,6 @@ namespace Kendo.Mvc.UI.Fluent.Tests
         {
             builder.Sortable(sortable => sortable.AllowUnsort(false));
             Assert.Equal(false, grid.Sorting.AllowUnsort);
-        }
-
-        [Fact]
-        public void Should_add_data_keys()
-        {
-            Expression<Func<Customer, int>> expression = c => c.Id;
-
-            builder.DataKeys(keys => keys.Add(expression).RouteKey("customerId"));
-
-            Assert.Same(expression, ((GridDataKey<Customer, int>)grid.DataKeys[0]).Expression);
-            Assert.Same("customerId", grid.DataKeys[0].RouteKey);
-        }
-
-
-        [Fact]
-        public void Should_add_data_key_by_name()
-        {
-            const string expectedRouteValue = "CustomerId";
-            const string expectedFieldName = "Id";
-
-            builder.DataKeys(keys => keys.Add(expectedFieldName).RouteKey(expectedRouteValue));
-                
-            var firstDataKey = (GridDataKey<Customer, int>)grid.DataKeys[0];
-            firstDataKey.RouteKey.ShouldEqual(expectedRouteValue);
-            firstDataKey.Expression.ShouldNotBeNull();
-            firstDataKey.Name.ShouldEqual(expectedFieldName);
-        }
-
-        [Fact]
-        public void Should_add_data_key_by_name_if_bound_to_DataRowViews()
-        {
-            var dataRowViewGrid = GridTestHelper.CreateGrid<DataRowView>();
-            var dataRowViewBuilder = new GridBuilder<DataRowView>(dataRowViewGrid);
-
-            const string expectedRouteValue = "CustomerId";
-            const string expectedFieldName = "Id";
-
-            dataRowViewBuilder.DataKeys(keys => keys.Add(expectedFieldName).RouteKey(expectedRouteValue));
-            var firstDataKey = dataRowViewGrid.DataKeys[0];
-
-            firstDataKey.RouteKey.ShouldEqual(expectedRouteValue);
-            firstDataKey.Name.ShouldEqual(expectedFieldName);
-        }
+        }       
     }
 }

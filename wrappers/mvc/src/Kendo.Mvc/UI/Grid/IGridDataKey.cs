@@ -2,23 +2,23 @@ namespace Kendo.Mvc.UI
 {
     using System.Web.Mvc;
 
-    public interface IGridDataKey
-    {
-        string Name
-        {
-            get;
-        }
+    //public interface IGridDataKey
+    //{
+    //    string Name
+    //    {
+    //        get;
+    //    }
 
-        string RouteKey
-        {
-            get; 
-            set;
-        }
+    //    string RouteKey
+    //    {
+    //        get; 
+    //        set;
+    //    }
 
-        object GetValue(object dataItem);
-    }
+    //    object GetValue(object dataItem);
+    //}
     
-    public interface IGridDataKey<T> : IGridDataKey
+    public interface IGridDataKey<T> : IDataKey
             where T : class
     {
 

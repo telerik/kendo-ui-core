@@ -16,6 +16,17 @@ namespace Kendo.Mvc.UI
             RouteValues = new RouteValueDictionary();
         }
 
+        //private string Encode(string value)
+        //{
+        //    if (grid.IsSelfInitialized)
+        //    {
+        //        value = Regex.Replace(value, "(%20)*%3C%23%3D(%20)*", "<#=", RegexOptions.IgnoreCase);
+        //        value = Regex.Replace(value, "(%20)*%23%3E(%20)*", "#>", RegexOptions.IgnoreCase);
+        //    }
+
+        //    return value;
+        //}
+
         protected override void Serialize(IDictionary<string, object> json)
         {
             if (Url != null)

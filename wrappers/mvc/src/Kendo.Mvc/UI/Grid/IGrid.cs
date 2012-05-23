@@ -70,11 +70,6 @@ namespace Kendo.Mvc.UI
             get;
         }
 
-        GridBindingSettings Server
-        {
-            get;
-        }
-
         IGridEditingSettings Editing 
         { 
             get; 
@@ -105,7 +100,7 @@ namespace Kendo.Mvc.UI
             get;
         }
 
-        IEnumerable<IGridDataKey> DataKeys
+        IEnumerable<IDataKey> DataKeys
         {
             get;
         }
