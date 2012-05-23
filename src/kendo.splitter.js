@@ -263,6 +263,8 @@
             $(window).resize(triggerResize);
 
             that.resizing = new PaneResizing(that);
+
+            that.element.triggerHandler("init.kendoSplitter");
         },
         events: [
             /**
@@ -482,7 +484,17 @@
                 .delegate(".k-splitbar .k-expand-next, .k-splitbar .k-expand-prev", CLICK, that._arrowClick(EXPAND))
                 .delegate(".k-splitbar", "dblclick", proxy(that._dbclick, that))
                 .parent().closest(".k-splitter").each(function() {
-                    $(this).data("kendoSplitter").bind(RESIZE,  triggerResize);
+                    var parentSplitter = $(this),
+                        splitter = parentSplitter.data("kendoSplitter");
+
+                    if (splitter) {
+                        splitter.bind(RESIZE, triggerResize);
+                    } else {
+                        parentSplitter.one("init.kendoSplitter", function() {
+                            $(this).data("kendoSplitter").bind(RESIZE, triggerResize);
+                            triggerResize();
+                        });
+                    }
                 });
         },
 
