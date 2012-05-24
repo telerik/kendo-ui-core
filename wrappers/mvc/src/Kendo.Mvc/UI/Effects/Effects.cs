@@ -1,10 +1,8 @@
 namespace Kendo.Mvc.UI
 {
-    using System.Linq;
-    using System.Collections.Generic;
-
-    using Kendo.Mvc.Extensions;
     using Kendo.Mvc.Infrastructure;
+    using System.Collections.Generic;
+    using System.Linq;
 
     public class Effects: JsonObject
     {
@@ -47,18 +45,6 @@ namespace Kendo.Mvc.UI
 
                 json[Name] = options;
             }
-        }
-
-        public string Serialize()
-        {
-            var result = string.Empty;
-
-            if (Container.Any())
-            {
-                result = "{0}: {{effects: \"{1}\", duration: {2}}}".FormatWith(Name, string.Join(" ", Container), Duration);
-            }
-
-            return result;
         }
     }
 }

@@ -7,24 +7,24 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent interface for configuring datepicker client events.
     /// </summary>
-    public class DatePickerClientEventsBuilder : IHideObjectMembers
+    public class DatePickerBaseClientEventsBuilder : IHideObjectMembers
     {
         private readonly IDictionary<string, ClientEvent> clientEvents;
 
-        public DatePickerClientEventsBuilder(IDictionary<string, ClientEvent> clientEvents)
+        public DatePickerBaseClientEventsBuilder(IDictionary<string, ClientEvent> clientEvents)
         {
             this.clientEvents = clientEvents;
         }
 
         /// <summary>
-        /// Defines the inline handler of the OnChange client-side event
+        /// Defines the inline handler of the Change client-side event
         /// </summary>
-        /// <param name="onChangeAction">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <param name="changeInlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;% Html.Telerik().DatePicker()
         ///            .Name("DatePicker")
-        ///            .ClientEvents(events => events.OnChange(
+        ///            .ClientEvents(events => events.Change(
         ///                 @&lt;text&gt;
         ///                 function(e) {
         ///                     //event handling code
@@ -35,41 +35,41 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public DatePickerClientEventsBuilder OnChange(Func<object, object> onChangeInlineCodeBlock)
+        public DatePickerBaseClientEventsBuilder Change(Func<object, object> changeInlineCodeBlock)
         {
-            clientEvents["change"] = new ClientEvent { InlineCodeBlock = onChangeInlineCodeBlock };
+            clientEvents["change"] = new ClientEvent { InlineCodeBlock = changeInlineCodeBlock };
 
             return this;
         }
 
         /// <summary>
-        ///  Defines the name of the JavaScript function that will handle the the OnChange client-side event.
+        ///  Defines the name of the JavaScript function that will handle the the Change client-side event.
         /// </summary>
-        /// <param name="onChangeHandlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <param name="changeHandlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Telerik().DatePicker()
         ///             .Name("DatePicker")
-        ///             .ClientEvents(events => events.OnChange("onChange"))
+        ///             .ClientEvents(events => events.Change("change"))
         /// %&gt;
         /// </code>
         /// </example>
-        public DatePickerClientEventsBuilder OnChange(string onChangeHandlerName)
+        public DatePickerBaseClientEventsBuilder OnChange(string changeHandlerName)
         {
-            clientEvents["change"] = new ClientEvent { HandlerName = onChangeHandlerName };
+            clientEvents["change"] = new ClientEvent { HandlerName = changeHandlerName };
 
             return this;
         }
 
         /// <summary>
-        /// Defines the inline handler of the OnOpen client-side event
+        /// Defines the inline handler of the Open client-side event
         /// </summary>
-        /// <param name="onOpenInlineCode">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <param name="openInlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;% Html.Telerik().DatePicker()
         ///            .Name("DatePicker")
-        ///            .ClientEvents(events => events.OnOpen(
+        ///            .ClientEvents(events => events.Open(
         ///                 @&lt;text&gt;
         ///                 %&gt;
         ///                 function(e) {
@@ -81,41 +81,41 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public DatePickerClientEventsBuilder OnOpen(Func<object, object> onOpenInlineCodeBlock)
+        public DatePickerBaseClientEventsBuilder OnOpen(Func<object, object> openInlineCodeBlock)
         {
-            clientEvents["open"] = new ClientEvent { InlineCodeBlock = onOpenInlineCodeBlock };
+            clientEvents["open"] = new ClientEvent { InlineCodeBlock = openInlineCodeBlock };
 
             return this;
         }
 
         /// <summary>
-        ///  Defines the name of the JavaScript function that will handle the OnOpen client-side event.
+        ///  Defines the name of the JavaScript function that will handle the Open client-side event.
         /// </summary>
-        /// <param name="onOpenHandlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <param name="openHandlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Telerik().DatePicker()
         ///             .Name("DatePicker")
-        ///             .ClientEvents(events => events.OnOpen("onOpen"))
+        ///             .ClientEvents(events => events.Open("open"))
         /// %&gt;
         /// </code>
         /// </example>
-        public DatePickerClientEventsBuilder OnOpen(string onOpenHandlerName)
+        public DatePickerBaseClientEventsBuilder OnOpen(string openHandlerName)
         {
-            clientEvents["open"] = new ClientEvent { HandlerName = onOpenHandlerName };
+            clientEvents["open"] = new ClientEvent { HandlerName = openHandlerName };
 
             return this;
         }
 
         /// <summary>
-        /// Defines the inline handler of the OnClose client-side event
+        /// Defines the inline handler of the Close client-side event
         /// </summary>
-        /// <param name="onCloseInlineCode">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <param name="closeInlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;% Html.Telerik().DatePicker()
         ///            .Name("DatePicker")
-        ///            .ClientEvents(events => events.OnClose(
+        ///            .ClientEvents(events => events.Close(
         ///                 @&lt;text&gt;
         ///                 function(e) {
         ///                     //event handling code
@@ -126,28 +126,28 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public DatePickerClientEventsBuilder OnClose(Func<object, object> onCloseInlineCodeBlock)
+        public DatePickerBaseClientEventsBuilder Close(Func<object, object> closeInlineCodeBlock)
         {
-            clientEvents["close"] = new ClientEvent { InlineCodeBlock = onCloseInlineCodeBlock };
+            clientEvents["close"] = new ClientEvent { InlineCodeBlock = closeInlineCodeBlock };
 
             return this;
         }
 
         /// <summary>
-        ///  Defines the name of the JavaScript function that will handle the OnClose client-side event.
+        ///  Defines the name of the JavaScript function that will handle the Close client-side event.
         /// </summary>
-        /// <param name="onCloseHandlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <param name="closeHandlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Telerik().DatePicker()
         ///             .Name("DatePicker")
-        ///             .ClientEvents(events => events.OnClose("onClose"))
+        ///             .ClientEvents(events => events.Close("close"))
         /// %&gt;
         /// </code>
         /// </example>
-        public DatePickerClientEventsBuilder OnClose(string onCloseHandlerName)
+        public DatePickerBaseClientEventsBuilder Close(string closeHandlerName)
         {
-            clientEvents["close"] = new ClientEvent { HandlerName = onCloseHandlerName };
+            clientEvents["close"] = new ClientEvent { HandlerName = closeHandlerName };
 
             return this;
         }

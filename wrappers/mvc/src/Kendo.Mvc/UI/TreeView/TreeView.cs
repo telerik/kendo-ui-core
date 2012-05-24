@@ -174,7 +174,8 @@ namespace Kendo.Mvc.UI
             objectWriter.AppendClientEvent("drop", ClientEvents.OnDrop);
             objectWriter.AppendClientEvent("dragend", ClientEvents.OnDragEnd);
 
-            Animation.SerializeTo(objectWriter);
+            //TODO: Use new Init writer to output animation dictionary
+            // Animation.SerializeTo(objectWriter);
 
             objectWriter.Complete();
             base.WriteInitializationScript(writer);

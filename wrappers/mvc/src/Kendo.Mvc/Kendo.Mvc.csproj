@@ -356,13 +356,11 @@
     <Compile Include="UI\Gauge\Serialization\GaugeRadialScaleSerializer.cs" />
     <Compile Include="UI\DatePickerBase\DatePickerBase.cs" />
     <Compile Include="UI\DatePickerBase\Fluent\DatePickerBaseBuilder.cs" />
-    <Compile Include="UI\DatePickerBase\Fluent\DatePickerClientEventsBuilder.cs" />
+    <Compile Include="UI\DatePickerBase\Fluent\DatePickerBaseClientEventsBuilder.cs" />
     <Compile Include="UI\DatePickerBase\IDatePicker.cs" />
     <Compile Include="UI\DateTimePicker\DateTimePicker.cs" />
-    <Compile Include="UI\DateTimePicker\DateTimePickerClientEvents.cs" />
-    <Compile Include="UI\DateTimePicker\DateTimePickerHtmlBuilder.cs" />
+    <Compile Include="UI\DateTimePicker\Html\DateTimePickerHtmlBuilder.cs" />
     <Compile Include="UI\DateTimePicker\Fluent\DateTimePickerBuilder.cs" />
-    <Compile Include="UI\DateTimePicker\Fluent\DateTimePickerClientEventsBuilder.cs" />
     <Compile Include="UI\DropDownList\Fluent\DropDownListBindingSettingsBuilder.cs" />
     <Compile Include="UI\DropDownList\Fluent\DropDownListWebServiceBindingSettingsBuilder.cs" />
     <Compile Include="UI\DropDown\DropDownExtentions.cs" />
