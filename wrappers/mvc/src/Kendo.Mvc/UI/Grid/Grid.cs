@@ -752,6 +752,11 @@ namespace Kendo.Mvc.UI
                 options["editable"] = Editing.ToJson();
             }
 
+            if (ToolBar.Enabled)
+            {
+                options["toolbar"] = ToolBar.ToJson();
+            }
+
             if (autoBind == false)
             {
                 options["autoBind"] = autoBind;
