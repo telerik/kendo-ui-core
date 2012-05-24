@@ -1,27 +1,25 @@
 namespace Kendo.Mvc.UI
 {
-    using System;
-    using System.Web.Mvc;
-
+    using Kendo.Mvc;
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.Resources;
-    using Kendo.Mvc.UI.Html; 
+    using Kendo.Mvc.UI.Html;
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Web.Mvc;
+    using System.Web.Query.Dynamic; 
 
     public class NumericTextBox<T> : ViewComponentBase, IInputComponent<T> where T : struct
     {
         public NumericTextBox(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory, ViewDataDictionary viewData)
             : base(viewContext, clientSideObjectWriterFactory, viewData)
         {
-            Spinners = true;
-
-            ClientEvents = new NumericTextBoxClientEvents();
+            ClientEvents = new Dictionary<string, ClientEvent>();
 
             Enabled = true;
-
-            Step = (T)Convert.ChangeType(1, typeof(T));
-
-            Format = "n";
         }
 
         public T? Value
@@ -72,7 +70,7 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        public bool Spinners
+        public bool? Spinners
         {
             get;
             set;
@@ -84,27 +82,28 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        public NumericTextBoxClientEvents ClientEvents
+        public IDictionary<string, ClientEvent> ClientEvents
         {
             get;
             private set;
         }
 
-        public override void WriteInitializationScript(System.IO.TextWriter writer)
+        public override void WriteInitializationScript(TextWriter writer)
         {
-            var objectWriter = ClientSideObjectWriterFactory.Create(Id, "kendoNumericTextBox", writer);
+            var options = new Dictionary<string, object>();
 
-            objectWriter.Start();
+            if (ClientEvents.Keys.Any())
+            {
+                options["events"] = ClientEvents;
+            }
 
-            objectWriter.Append("format", this.Format);
-            objectWriter.Append("culture", this.Culture);
-            objectWriter.Append("placeholder", this.Placeholder);
-            objectWriter.Append("spinners", this.Spinners, true);
-            objectWriter.Append("decimals", this.Decimals);
+            options["format"] = this.Format;
+            options["culture"] = this.Culture;
+            options["placeholder"] = this.Placeholder;
+            options["spinners"] = this.Spinners;
+            options["decimals"] = this.Decimals;
 
-            ClientEvents.SerializeTo(objectWriter);
-
-            objectWriter.Complete();
+            writer.Write(Initializer.Initialize(Id, "NumericTextBox", options));
 
             base.WriteInitializationScript(writer);
         }
@@ -118,6 +117,7 @@ namespace Kendo.Mvc.UI
             NumericTextBoxHtmlBuilder<T> renderer = new NumericTextBoxHtmlBuilder<T>(this);
 
             renderer.Build().WriteTo(writer);
+
             base.WriteHtml(writer);
         }
 
