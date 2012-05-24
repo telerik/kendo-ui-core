@@ -1,67 +1,39 @@
 namespace Kendo.Mvc.UI
 {
-    using Extensions;
-
-    using System.Web.Mvc;
-    using System.Linq;
+    using Kendo.Mvc.Infrastructure;
     using System.Collections.Generic;
-    using System.Web.Routing;
+    using System.IO;
+    using System.Linq;
+    using System.Web.Mvc;
 
     public class DropDownList : ViewComponentBase
     {
-        private bool hasItems = false;
-        //private readonly IList<IEffect> defaultEffects = new List<IEffect> { new SlideAnimation() };
-
-        public DropDownList(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory, IUrlGenerator urlGenerator)
-            : base(viewContext, clientSideObjectWriterFactory)
+        public DropDownList(ViewContext viewContext, IJavaScriptInitializer initializer, ViewDataDictionary viewData, IUrlGenerator urlGenerator)
+            : base(viewContext, initializer, viewData)
         {
-            UrlGenerator = urlGenerator;
+            Animation = new PopupAnimation();
 
             ClientEvents = new Dictionary<string, object>();
-            DropDownHtmlAttributes = new RouteValueDictionary();
-            HiddenInputHtmlAttributes = new RouteValueDictionary();
-            
-            //defaultEffects.Each(el => Effects.Container.Add(el));
 
-            Items = new List<DropDownItem>();
-            SelectedIndex = 0;
+            DataSource = new DataSource();
+
+            UrlGenerator = urlGenerator;
+
+            AutoBind = true;
             Enabled = true;
-            Encoded = true;
-            Delay = 500;
+            IgnoreCase = true;
         }
 
-        /// <summary>
-        /// Gets the id.
-        /// </summary>
-        /// <value>The id.</value>
-        public new string Id
-        {
-            get
-            {
-                // Return from htmlattributes if user has specified
-                // otherwise build it from name
-                return HiddenInputHtmlAttributes.ContainsKey("id") ?
-                       HiddenInputHtmlAttributes["id"].ToString() :
-                       (!string.IsNullOrEmpty(Name) ? Name.Replace(".", HtmlHelper.IdAttributeDotReplacement) : null);
-            }
-        }
-
-        public string CascadeTo
+        public bool AutoBind
         {
             get;
             set;
         }
 
-        public bool Encoded
+        public PopupAnimation Animation
         {
             get;
-            set;
-        }
-
-        public IUrlGenerator UrlGenerator 
-        {
-            get; 
-            set; 
+            private set;
         }
 
         public IDictionary<string, object> ClientEvents
@@ -70,34 +42,67 @@ namespace Kendo.Mvc.UI
             private set;
         }
 
-        public IDictionary<string, object> DropDownHtmlAttributes
-        {
-            get;
-            private set;
-        }
-
-        public IDictionary<string, object> HiddenInputHtmlAttributes
-        {
-            get;
-            private set;
-        }
-
-        public Effects Effects
+        public string DataTextField
         {
             get;
             set;
         }
 
-        /// <summary>
-        /// Gets the items of the treeview.
-        /// </summary>
-        public IList<DropDownItem> Items
+        public string DataValueField
+        {
+            get;
+            set;
+        }
+
+        public int? Delay
+        {
+            get;
+            set;
+        }
+
+        public bool Enabled
+        {
+            get;
+            set;
+        }
+        
+        public int? Height
+        {
+            get;
+            set;
+        }
+
+        public bool IgnoreCase
+        {
+            get;
+            set;
+        }
+
+        public string OptionLabel
+        {
+            get;
+            set;
+        }
+
+        public DataSource DataSource
         {
             get;
             private set;
         }
-        
-        public int SelectedIndex
+
+        public int? SelectedIndex
+        {
+            get;
+            set;
+        }
+
+        public string Template
+        {
+            get;
+            set;
+        }
+
+        public IUrlGenerator UrlGenerator
         {
             get;
             set;
@@ -109,61 +114,79 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        public bool Enabled 
-        { 
-            get; 
-            set; 
-        }
-
-        public int Delay
+        public override void WriteInitializationScript(TextWriter writer)
         {
-            get;
-            set;
-        }
+            var options = new Dictionary<string, object>(ClientEvents);
 
-        public string Placeholder
-        {
-            get;
-            set;
-        }
-
-        public override void WriteInitializationScript(System.IO.TextWriter writer)
-        {
-            IClientSideObjectWriter objectWriter = ClientSideObjectWriterFactory.Create(Id, "tDropDownList", writer);
-
-            objectWriter.Start();
-
-            objectWriter.Append("delay", Delay, 500);
-            objectWriter.Append("placeholder", this.Placeholder);
-            objectWriter.Append("cascadeTo", this.CascadeTo);
-
-            if (hasItems)
+            if (!string.IsNullOrEmpty(DataSource.Transport.Read.Url))
             {
-                objectWriter.AppendCollection("data", Items);
+                options["dataSource"] = DataSource.ToJson();
             }
-            else
+            else if (DataSource.Data != null)
             {
-                objectWriter.Append("selectedValue", this.GetValue<string>(Value));
+                options["dataSource"] = DataSource.Data;
             }
 
-            objectWriter.Append("index", SelectedIndex, 0);
+            var animation = Animation.ToJson();
 
-            if (DropDownHtmlAttributes.Any()) 
+            if (animation.Keys.Any())
             {
-                objectWriter.Append("dropDownAttr", DropDownHtmlAttributes.ToAttributeString());
+                options["animation"] = animation["animation"];
             }
 
-            objectWriter.Append("enabled", this.Enabled, true);
-            objectWriter.Append("encoded", this.Encoded, true);
+            if (!AutoBind)
+            {
+                options["autoBind"] = AutoBind;
+            }
 
-            objectWriter.Complete();
+            if (!string.IsNullOrEmpty(DataTextField))
+            {
+                options["dataTextField"] = DataTextField;
+            }
+
+            if (!string.IsNullOrEmpty(DataValueField))
+            {
+                options["dataValueField"] = DataValueField;
+            }
+
+            if (Delay != null)
+            {
+                options["delay"] = Delay;
+            }
+
+            if (Height != null)
+            {
+                options["height"] = Height;
+            }
+
+            if (!IgnoreCase)
+            {
+                options["ignoreCase"] = IgnoreCase;
+            }
+
+            if (SelectedIndex != null)
+            {
+                options["index"] = SelectedIndex;
+            }
+
+            if (!string.IsNullOrEmpty(OptionLabel))
+            {
+                options["optionLabel"] = OptionLabel;
+            }
+            
+            if (!string.IsNullOrEmpty(Template))
+            {
+                options["template"] = Template;
+            }
+
+            writer.Write(Initializer.Initialize(Id, "DropDownList", options));
 
             base.WriteInitializationScript(writer);
         }
 
         protected override void WriteHtml(System.Web.UI.HtmlTextWriter writer)
         {
-            hasItems = Items.Any();
+            //hasItems = Items.Any();
             //this.AddPlaceholderItem();
             //if (hasItems)
             //{

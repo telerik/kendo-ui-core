@@ -21,67 +21,17 @@ namespace Kendo.Mvc.UI
 
         public IHtmlNode Build()
         {
-            IHtmlNode root = new HtmlElement("div")
-                                .Attributes(Component.HtmlAttributes)
-                                .PrependClass(UIPrimitives.Widget, "k-dropdown", UIPrimitives.Header)
-                                .ToggleClass("k-state-disabled", !Component.Enabled)
-                                .ToggleClass("input-validation-error", !Component.IsValid());
-
-            this.InnerContentTag().AppendTo(root);
-            
-            this.HiddenInputTag().AppendTo(root);
-
-            return root;
-        }
-
-        public IHtmlNode InnerContentTag()
-        {
-            IHtmlNode root = new HtmlElement("div").AddClass("k-dropdown-wrap", UIPrimitives.DefaultState);
-
-            string text = "&nbsp;";
-            var items = Component.Items;
-            int selectedIndex = Component.SelectedIndex;
-
-            if (items.Count > 0 && !(string.IsNullOrEmpty(items[selectedIndex].Text) || items[selectedIndex].Text.Trim().Length == 0)) 
-            {
-                text = items[selectedIndex].Text;
-                
-                if (Component.Encoded) {
-                    text = HttpUtility.HtmlEncode(text);
-                }
-            }          
-
-            new HtmlElement("span")
-                .AddClass("k-input")
-                .Html(text)
-                .AppendTo(root);
-
-            IHtmlNode link = new HtmlElement("span").AddClass("k-select");
-
-            new HtmlElement("span")
-                .AddClass(UIPrimitives.Icon, "k-arrow-down")
-                .Html("select")
-                .AppendTo(link);
-
-            link.AppendTo(root);
-            
-            return root;
-        }
-
-        public IHtmlNode HiddenInputTag()
-        {
             IHtmlNode input = new HtmlElement("input", TagRenderMode.SelfClosing)
                     .Attributes(new
                     {
-                        type = "text",
-                        style = "display:none"
+                        type = "text"
                     });
 
-            if (Component.Items.Any())
-            {
-                DropDownItem selectedItem = Component.Items[Component.SelectedIndex];
-                input.Attribute("value", selectedItem.Value != null ? selectedItem.Value : selectedItem.Text);
-            }
+            //if (Component.Items.Any())
+            //{
+            //    DropDownItem selectedItem = Component.Items[Component.SelectedIndex];
+            //    input.Attribute("value", selectedItem.Value != null ? selectedItem.Value : selectedItem.Text);
+            //}
 
             if (Component.Name.HasValue())
             {
@@ -91,7 +41,7 @@ namespace Kendo.Mvc.UI
                          name = Component.Name, //Component.GetName(string.Empty),
                          id = Component.Id
                      })
-                     .Attributes(Component.HiddenInputHtmlAttributes);
+                     .Attributes(Component.HtmlAttributes);
             }
 
             return input;

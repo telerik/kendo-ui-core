@@ -8,8 +8,6 @@ namespace Kendo.Mvc.UI
 
     public class ComboBox : ViewComponentBase
     {
-        //private bool hasItems = false;
-
         public ComboBox(ViewContext viewContext,  IJavaScriptInitializer initializer, ViewDataDictionary viewData, IUrlGenerator urlGenerator)
             : base(viewContext, initializer, viewData)
         {

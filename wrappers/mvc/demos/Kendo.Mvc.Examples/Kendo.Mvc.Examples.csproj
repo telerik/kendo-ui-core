@@ -78,6 +78,7 @@
     <Compile Include="Areas\razor\RazorAreaRegistration.cs" />
     <Compile Include="Controllers\Area_Chart\IndexController.cs" />
     <Compile Include="Controllers\ComboBox\IndexController.cs" />
+    <Compile Include="Controllers\DropDownList\IndexController.cs" />
     <Compile Include="Controllers\Linear_Gauge\IndexController.cs" />
     <Compile Include="Controllers\Linear_Gauge\ScaleOptoinsController.cs" />
     <Compile Include="Controllers\Grid\AjaxEditingController.cs" />
@@ -301,7 +302,7 @@
     <Content Include="Areas\razor\Views\web\splitter\api.cshtml" />
     <Content Include="Areas\razor\Views\dataviz\area_chart\index.cshtml" />
     <Content Include="Areas\razor\Views\web\grid\ajaxediting.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\ajaxediting.cshtml" />
+    <Content Include="Areas\razor\Views\web\dropdownlist\index.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
