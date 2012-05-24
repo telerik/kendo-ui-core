@@ -2,7 +2,7 @@
 
 namespace Kendo.Mvc.Examples.Controllers
 {
-    public partial class LinearGaugeController : Controller
+    public partial class Radial_GaugeController : Controller
     {
         public ActionResult Index()
         {

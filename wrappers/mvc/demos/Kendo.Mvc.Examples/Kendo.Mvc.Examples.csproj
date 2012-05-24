@@ -78,8 +78,8 @@
     <Compile Include="Areas\razor\RazorAreaRegistration.cs" />
     <Compile Include="Controllers\Area_Chart\IndexController.cs" />
     <Compile Include="Controllers\ComboBox\IndexController.cs" />
-    <Compile Include="Controllers\LinearGauge\IndexController.cs" />
-    <Compile Include="Controllers\LinearGauge\ScaleOptoinsController.cs" />
+    <Compile Include="Controllers\Linear_Gauge\IndexController.cs" />
+    <Compile Include="Controllers\Linear_Gauge\ScaleOptoinsController.cs" />
     <Compile Include="Controllers\DateTimePicker\IndexController.cs" />
     <Compile Include="Controllers\Grid\AjaxBindingController.cs" />
     <Compile Include="Controllers\Grid\ColumnReorderingController.cs" />
@@ -88,7 +88,7 @@
     <Compile Include="Controllers\Grid\CustomServerBindingController.cs" />
     <Compile Include="Controllers\Grid\ColumnResizingController.cs" />
     <Compile Include="Controllers\Grid\CustomAjaxBindingController.cs" />
-    <Compile Include="Controllers\RadialGauge\ScaleOptoinsController.cs" />
+    <Compile Include="Controllers\Radial_Gauge\ScaleOptoinsController.cs" />
     <Compile Include="Controllers\Splitter\AjaxController.cs" />
     <Compile Include="Controllers\Splitter\ApiController.cs" />
     <Compile Include="Controllers\Splitter\EventsController.cs" />
@@ -98,7 +98,7 @@
     <Compile Include="Controllers\TabStrip\EventsController.cs" />
     <Compile Include="Controllers\TabStrip\ImagesController.cs" />
     <Compile Include="Controllers\TabStrip\IndexController.cs" />
-    <Compile Include="Controllers\RadialGauge\IndexController.cs" />
+    <Compile Include="Controllers\Radial_Gauge\IndexController.cs" />
     <Compile Include="Controllers\Grid\AjaxAggregatesController.cs" />
     <Compile Include="Controllers\Grid\ServerAggregatesController.cs" />
     <Compile Include="Controllers\TimePicker\IndexController.cs" />
@@ -149,13 +149,13 @@
     <Content Include="App_Data\Northwind_log.ldf">
       <DependentUpon>Northwind.mdf</DependentUpon>
     </Content>
-    <Content Include="Areas\aspx\Views\lineargauge\index.aspx" />
-    <Content Include="Areas\aspx\Views\lineargauge\scaleoptions.aspx" />
+    <Content Include="Areas\aspx\Views\linear_gauge\index.aspx" />
+    <Content Include="Areas\aspx\Views\linear_gauge\scaleoptions.aspx" />
     <Content Include="Areas\aspx\Views\area_chart\index.aspx" />
     <Content Include="Areas\aspx\Views\numerictextbox\api.aspx" />
     <Content Include="Areas\aspx\Views\numerictextbox\events.aspx" />
-    <Content Include="Areas\aspx\Views\radialgauge\index.aspx" />
-    <Content Include="Areas\aspx\Views\radialgauge\scaleoptions.aspx" />
+    <Content Include="Areas\aspx\Views\radial_gauge\index.aspx" />
+    <Content Include="Areas\aspx\Views\radial_gauge\scaleoptions.aspx" />
     <Content Include="Areas\aspx\Views\slider\api.aspx" />
     <Content Include="Areas\aspx\Views\slider\events.aspx" />
     <Content Include="Areas\aspx\Views\upload\api.aspx" />
@@ -285,10 +285,10 @@
     <Content Include="Areas\razor\Views\grid\ajaxaggregates.cshtml" />
     <Content Include="Areas\razor\Views\grid\serveraggregates.cshtml" />
     <Content Include="Areas\razor\Views\datetimepicker\index.cshtml" />
-    <Content Include="Areas\razor\Views\radialgauge\index.cshtml" />
-    <Content Include="Areas\razor\Views\radialgauge\scaleoptions.cshtml" />
-    <Content Include="Areas\razor\Views\lineargauge\index.cshtml" />
-    <Content Include="Areas\razor\Views\lineargauge\scaleoptions.cshtml" />
+    <Content Include="Areas\razor\Views\radial_gauge\index.cshtml" />
+    <Content Include="Areas\razor\Views\radial_gauge\scaleoptions.cshtml" />
+    <Content Include="Areas\razor\Views\linear_gauge\index.cshtml" />
+    <Content Include="Areas\razor\Views\linear_gauge\scaleoptions.cshtml" />
     <Content Include="Areas\razor\Views\splitter\index.cshtml" />
     <Content Include="Areas\razor\Views\splitter\ajax.cshtml" />
     <Content Include="Areas\razor\Views\splitter\events.cshtml" />
