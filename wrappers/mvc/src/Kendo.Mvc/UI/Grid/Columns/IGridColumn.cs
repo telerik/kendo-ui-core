@@ -12,8 +12,6 @@ namespace Kendo.Mvc.UI
             get;
         }
 
-        IGridColumnSerializer CreateSerializer();
-
         string ClientTemplate
         {
             get;

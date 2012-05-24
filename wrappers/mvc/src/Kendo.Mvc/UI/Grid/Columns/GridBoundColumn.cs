@@ -3,6 +3,7 @@ namespace Kendo.Mvc.UI
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Linq.Expressions;
     using System.Threading;
@@ -205,9 +206,97 @@ namespace Kendo.Mvc.UI
             }
         }
 
-        public override IGridColumnSerializer CreateSerializer()
+        protected override void Serialize(IDictionary<string, object> json)
         {
-            return new GridBoundColumnSerializer(this);
+            base.Serialize(json);
+
+            var aggregates = Grid.DataSource.Aggregates
+                    .Where(agg => agg.Member == Member)
+                    .SelectMany(agg => agg.Aggregates)
+                    .Select(agg => agg.AggregateMethodName.ToLowerInvariant());
+
+            json["field"] = Member;
+
+            if (Format.HasValue())
+            {
+                json["format"] = Format;
+            }
+
+            if (!Groupable)
+            {
+                json["groupable"] = false;
+            }
+
+            if (Encoded)
+            {
+                json["encoded"] = true;
+            }
+
+            if (aggregates.Any())
+            {
+                json["aggregate"] = aggregates;
+            }
+
+            string editorHtml = EditorHtml;
+
+            if (Grid.IsSelfInitialized && editorHtml != null)
+            {
+                editorHtml = editorHtml.Replace("<", "%3c").Replace(">", "%3e");
+            }
+
+            if (ReadOnly)
+            {
+                json["readonly"] = true;
+            }
+
+            if (!ReadOnly && Grid.Editing.Enabled && Grid.IsClientBinding)
+            {
+                json["editor"] = editorHtml;
+            }
+
+            if (ClientGroupHeaderTemplate.HasValue())
+            {
+                json["groupHeaderTemplate"] = ClientGroupHeaderTemplate;
+            }
+
+            if (ClientGroupFooterTemplate.HasValue())
+            {
+                json["groupFooterTemplate"] = ClientGroupFooterTemplate;
+            }
+
+            //TODO: Serialize values
+            // SerializeValues(json);
+        }
+
+        private void SerializeValues(IDictionary<string, object> result)
+        {
+            if (MemberType != null && MemberType.GetNonNullableType().IsEnum)
+            {
+                var type = MemberType.GetNonNullableType();
+
+                var values = new Dictionary<string, object>();
+                
+                foreach (var value in Enum.GetValues(type))
+                {
+                    var name = Enum.GetName(type, value);
+                    var member = type.GetMember(name).FirstOrDefault();
+
+                    if (member != null)
+                    {
+                        var displayAttribute = member.GetCustomAttributes(typeof(DisplayAttribute), true)
+                            .OfType<DisplayAttribute>()
+                            .FirstOrDefault();
+
+                        if (displayAttribute != null)
+                        {
+                            name = displayAttribute.GetName();
+                        }
+                    }
+                    values[name] = value;
+                }
+
+                result["values"] = values;
+            }
         }
 
         public string GetSortUrl()
