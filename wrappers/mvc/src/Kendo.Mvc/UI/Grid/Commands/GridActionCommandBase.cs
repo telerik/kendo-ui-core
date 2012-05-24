@@ -41,7 +41,7 @@ namespace Kendo.Mvc.UI
 
         public GridActionCommandBase()
         {
-            ButtonType = GridButtonType.Text;
+            ButtonType = GridButtonType.ImageAndText;
             HtmlAttributes = new RouteValueDictionary();
             ImageHtmlAttributes = new RouteValueDictionary();
         }

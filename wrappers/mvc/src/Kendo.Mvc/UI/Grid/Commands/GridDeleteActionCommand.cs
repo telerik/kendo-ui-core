@@ -18,7 +18,7 @@ namespace Kendo.Mvc.UI
 
             deleteButton.HtmlHelper = htmlHelper;
 
-            deleteButton.SpriteCssClass = "t-delete";
+            deleteButton.SpriteCssClass = "k-delete";
 
             return new[] { deleteButton };
         }

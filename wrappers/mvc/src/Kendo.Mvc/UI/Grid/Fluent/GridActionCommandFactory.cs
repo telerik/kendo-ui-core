@@ -52,6 +52,7 @@ namespace Kendo.Mvc.UI.Fluent
 
             return new GridDeleteActionCommandBuilder(command);
         }
+
         /// <summary>
         /// Defines a select command.
         /// </summary>

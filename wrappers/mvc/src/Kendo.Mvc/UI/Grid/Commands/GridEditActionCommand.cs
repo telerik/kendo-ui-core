@@ -24,7 +24,7 @@ namespace Kendo.Mvc.UI
 
             editButton.Url = urlBuilder.EditUrl;
 
-            editButton.SpriteCssClass = "t-edit";
+            editButton.SpriteCssClass = "k-edit";
 
             return new[]
             {
@@ -50,11 +50,11 @@ namespace Kendo.Mvc.UI
 
             cancelButton.Url = urlBuilder.CancelUrl;
             
-            cancelButton.SpriteCssClass = "t-cancel";
+            cancelButton.SpriteCssClass = "k-cancel";
 
             var updateButton = CreateButton<GridButtonBuilder>(UpdateText ?? localization.Update, UIPrimitives.Grid.Update);
             updateButton.ShouldAppendDataKeys = true;
-            updateButton.SpriteCssClass = "t-update";
+            updateButton.SpriteCssClass = "k-update";
             updateButton.HtmlHelper = htmlHelper;
 
             return new IGridButtonBuilder[]
@@ -70,10 +70,10 @@ namespace Kendo.Mvc.UI
 
             cancelButton.Url = urlBuilder.CancelUrl;
 
-            cancelButton.SpriteCssClass = "t-cancel";
+            cancelButton.SpriteCssClass = "k-cancel";
 
             var insertButton = CreateButton<GridButtonBuilder>(InsertText ?? localization.Insert, UIPrimitives.Grid.Insert);
-            insertButton.SpriteCssClass = "t-insert";
+            insertButton.SpriteCssClass = "k-insert";
             insertButton.HtmlHelper = htmlHelper;
 
             return new IGridButtonBuilder[]

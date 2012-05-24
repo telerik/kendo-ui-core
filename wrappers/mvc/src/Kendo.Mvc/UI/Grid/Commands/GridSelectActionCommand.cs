@@ -14,7 +14,7 @@ namespace Kendo.Mvc.UI
         {
             var button = CreateButton<GridLinkButtonBuilder>(Text ?? localization.Select, UIPrimitives.Grid.Select);
             
-            button.SpriteCssClass = "t-select";
+            button.SpriteCssClass = "k-select";
             button.Url = urlBuilder.SelectUrl;
 
             return new[] { button };
