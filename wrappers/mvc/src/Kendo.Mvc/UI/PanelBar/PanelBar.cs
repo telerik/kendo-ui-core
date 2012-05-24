@@ -20,8 +20,8 @@ namespace Kendo.Mvc.UI
         internal bool isPathHighlighted;
         internal bool isExpanded;
 
-        public PanelBar(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory, IUrlGenerator urlGenerator, INavigationItemAuthorization authorization, INavigationComponentHtmlBuilderFactory<PanelBar, PanelBarItem> rendererFactory)
-            : base(viewContext, clientSideObjectWriterFactory)
+        public PanelBar(ViewContext viewContext, IJavaScriptInitializer initializer, IUrlGenerator urlGenerator, INavigationItemAuthorization authorization, INavigationComponentHtmlBuilderFactory<PanelBar, PanelBarItem> rendererFactory)
+            : base(viewContext, initializer)
         {
             Guard.IsNotNull(urlGenerator, "urlGenerator");
             Guard.IsNotNull(authorization, "authorization");
@@ -113,26 +113,27 @@ namespace Kendo.Mvc.UI
 
         public override void WriteInitializationScript(TextWriter writer)
         {
-            IClientSideObjectWriter objectWriter = ClientSideObjectWriterFactory.Create(Id, "tPanelBar", writer);
-
-            objectWriter.Start();
+            var options = new Dictionary<string, object>();
 
             //if (!defaultEffects.SequenceEqual(Effects.Container))
             //{
             //    objectWriter.Serialize("effects", Effects);
             //}
 
-            objectWriter.AppendClientEvent("onExpand", ClientEvents.OnExpand);
-            objectWriter.AppendClientEvent("onCollapse", ClientEvents.OnCollapse);
-            objectWriter.AppendClientEvent("onSelect", ClientEvents.OnSelect);
-            objectWriter.AppendClientEvent("onLoad", ClientEvents.OnLoad);
-            objectWriter.AppendClientEvent("onError", ClientEvents.OnError);
+            //if (ClientEvents.Keys.Any())
+            //{
+            //    options["events"] = ClientEvents;
+            //}
 
-            objectWriter.Append("expandMode", (int) ExpandMode);
+            //objectWriter.AppendClientEvent("expand", ClientEvents.OnExpand);
+            //objectWriter.AppendClientEvent("collapse", ClientEvents.OnCollapse);
+            //objectWriter.AppendClientEvent("select", ClientEvents.OnSelect);
+            //objectWriter.AppendClientEvent("error", ClientEvents.OnError);
 
-            objectWriter.AppendContentUrls("contentUrls", Items, IsSelfInitialized);
+            options["expandMode"] = ExpandMode;
+            //options["contentUrls"] = Items;
 
-            objectWriter.Complete();
+            writer.Write(Initializer.Initialize(Id, "PanelBar", options));
 
             base.WriteInitializationScript(writer);
         }
