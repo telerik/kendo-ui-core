@@ -21,7 +21,7 @@ namespace Kendo.Mvc.Examples.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult AjaxEditing_Create([DataSourceRequest] DataSourceRequest request, IEnumerable<EditableProduct> products)
+        public ActionResult AjaxEditing_Create([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<EditableProduct> products)
         {
             if (products != null)
             {
@@ -35,7 +35,7 @@ namespace Kendo.Mvc.Examples.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult AjaxEditing_Update([DataSourceRequest] DataSourceRequest request, IEnumerable<EditableProduct> products)
+        public ActionResult AjaxEditing_Update([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<EditableProduct> products)
         {
             if (products != null)
             {
@@ -58,7 +58,7 @@ namespace Kendo.Mvc.Examples.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult AjaxEditing_Destroy([DataSourceRequest] DataSourceRequest request, IEnumerable<EditableProduct> products)
+        public ActionResult AjaxEditing_Destroy([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<EditableProduct> products)
         {            
             if (products.Any())
             {

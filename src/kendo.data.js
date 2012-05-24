@@ -1485,7 +1485,7 @@
         },
 
         _flatData: function(data) {
-            if (this.options.serverGrouping) {
+            if (this.options.serverGrouping && this.group().length) {
                 return flattenGroups(data);
             }
             return data;

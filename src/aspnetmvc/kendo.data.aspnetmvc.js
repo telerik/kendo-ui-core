@@ -2,7 +2,7 @@
     var kendo = window.kendo,
        escapeQuoteRegExp = /'/ig;
 
-    function parameterMap(options) {
+    function parameterMap(options, operation) {
        var result = {};
 
        result[this.options.prefix + "orderBy"] = $.map(options.sort || [], function(sort) {
@@ -24,7 +24,6 @@
        }
 
        if (options.aggregate) {
-           //FieldName-func-func1-func2~
            result[this.options.prefix + "aggregates"] =  $.map(options.aggregate, function(aggregate) {
                return aggregate.field + "-" + aggregate.aggregate;
            }).join("~");
@@ -36,9 +35,63 @@
            result[this.options.prefix + "filter"] = "";
        }
 
+       if (operation != "read" && options.models) {
+           var prefix = "models",
+               models = options.models;
+
+           for (var i = 0; i < models.length; i++) {
+               var item = convert(models[i]),
+                   value,
+                   key;
+
+               for (var member in item) {
+                   key = prefix + "[" + i + "]." + member;
+                   value = item[member];
+
+                   if ($.isPlainObject(value)) {
+                       flatten(result, value, key);
+                   }
+                   else {
+                       result[key] = value;
+                   }
+               }
+           }
+       }
+
        return result;
     }
 
+    function convert(values) {
+        for (var key in values) {
+            var value = values[key], column, format;
+
+            if (value instanceof Date) {
+                values[key] = kendo.format("{0:G}", value);
+            }
+
+            if (typeof value === "number") {
+                value = value.toString();
+            }
+
+            if (value == undefined) {
+                delete values[key];
+            }
+            if ($.isPlainObject(value)) {
+                convert(value);
+            }
+        }
+        return values;
+    }
+
+    function flatten(result, value, prefix) {
+        for (var key in value) {
+            if ($.isPlainObject(value[key])) {
+                flatten(result, value[key], prefix ? prefix + "." + key : key);
+            } else {
+                result[prefix ? prefix + "." + key : key] = value[key];
+            }
+        }
+    }
 
     function serializeFilter(filter) {
        if (filter.filters) {
@@ -61,6 +114,15 @@
 
     kendo.data.transports["aspnetmvc-ajax"] = {
         read: {
+            type: "POST"
+        },
+        update: {
+            type: "POST"
+        },
+        create: {
+            type: "POST"
+        },
+        destroy: {
             type: "POST"
         },
         parameterMap: parameterMap,
