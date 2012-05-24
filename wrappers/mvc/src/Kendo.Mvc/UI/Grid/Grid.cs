@@ -173,15 +173,18 @@ namespace Kendo.Mvc.UI
             private set;
         }
 
-
-        private object Button<TButton>(T dataItem, GridButtonType buttonType, object htmlAttributes, object imageHtmlAttributes)
+        //TODO: Implement command button types
+        private object Button<TButton>(T dataItem/*, GridButtonType buttonType*/, object htmlAttributes, object imageHtmlAttributes)
             where TButton : GridActionCommandBase, new()
         {
             var command = new TButton();
+            
+            //command.ButtonType = buttonType;
+            command.ButtonType = GridButtonType.ImageAndText;
 
-            command.ButtonType = buttonType;
-            command.HtmlAttributes = htmlAttributes.ToDictionary();
-            command.ImageHtmlAttributes = imageHtmlAttributes.ToDictionary();
+            //TODO: Implement command button html attributes
+            //command.HtmlAttributes = htmlAttributes.ToDictionary();
+            //command.ImageHtmlAttributes = imageHtmlAttributes.ToDictionary();
 
             var buttons = command.CreateDisplayButtons(Localization, UrlBuilder, new GridHtmlHelper<T>(ViewContext, DataKeyStore));
 
@@ -195,13 +198,15 @@ namespace Kendo.Mvc.UI
         private object CustomButton<TButton>(
                    string name,
                    string text,
-                   string url,
-                   string actionName,
-                   string controllerName,
-                   string routeName,
-                   object routeValues,
-                   bool ajax,
-                   GridButtonType buttonType,
+                    //TODO: Implement custom command routing
+                   //string url,
+                   //string actionName,
+                   //string controllerName,
+                   //string routeName,
+                   //object routeValues,
+                   //bool ajax,
+                 //TODO: Implement command button types
+                 //  GridButtonType buttonType,
                    object htmlAttributes,
                    object imageHtmlAttributes)
 
@@ -209,29 +214,34 @@ namespace Kendo.Mvc.UI
         {
             var command = new TButton();
 
-            command.ButtonType = buttonType;
-            command.HtmlAttributes = htmlAttributes.ToDictionary();
-            command.ImageHtmlAttributes = imageHtmlAttributes.ToDictionary();
+            //TODO: Implement command button types
+            //command.ButtonType = buttonType;
+            command.ButtonType = GridButtonType.ImageAndText;
+            //TODO: Implement command button html attributes
+            //command.HtmlAttributes = htmlAttributes.ToDictionary();
+            //command.ImageHtmlAttributes = imageHtmlAttributes.ToDictionary();
             command.Text = text;
-            command.Ajax = ajax;
+            //TODO: Implement custom command routing
+            //command.Ajax = ajax;
             command.Name = name;
-            
-            if (url.HasValue())
-            {
-                command.Url(url);
-            }
 
-            if (actionName.HasValue())
-            {
-                command.Action(actionName, controllerName, routeValues);
-                text = actionName;
-            }
+            //TODO: Implement custom command routing
+            //if (url.HasValue())
+            //{
+            //    command.Url(url);
+            //}
 
-            if (routeName.HasValue())
-            {
-                command.Route(routeName, routeValues);
-                text = routeName;
-            }
+            //if (actionName.HasValue())
+            //{
+            //    command.Action(actionName, controllerName, routeValues);
+            //    text = actionName;
+            //}
+
+            //if (routeName.HasValue())
+            //{
+            //    command.Route(routeName, routeValues);
+            //    text = routeName;
+            //}
 
             if (string.IsNullOrEmpty(command.Text))
             {
@@ -248,170 +258,187 @@ namespace Kendo.Mvc.UI
         private object CustomCommandToolBarButton(
             string name,
             string text,
-            string url,
-            string actionName,
-            string controllerName,
-            string routeName,
-            object routeValues,
-            bool ajax,
-            GridButtonType buttonType,
+            //TODO: Implement custom command routing
+            //string url,
+            //string actionName,
+            //string controllerName,
+            //string routeName,
+            //object routeValues,
+            //bool ajax,
+          //TODO: Implement command button types
+          //  GridButtonType buttonType,
             object htmlAttributes,
             object imageHtmlAttributes)
         {
-            return CustomButton<GridToolBarCustomCommand<T>>(name, text, url, actionName, controllerName, routeName, routeValues, ajax, buttonType, htmlAttributes, imageHtmlAttributes);
+            return CustomButton<GridToolBarCustomCommand<T>>(name, text/*, url, actionName, controllerName, routeName, routeValues, ajax, buttonType*/, htmlAttributes, imageHtmlAttributes);
         }
 
-        public object CustomCommandToolBarButton(
-            string name,
-            string text,
-            string actionName,
-            string controllerName,
-            object routeValues,
-            bool ajax,
-            GridButtonType buttonType,
-            object htmlAttributes,
-            object imageHtmlAttributes)
-        {
-            return CustomCommandToolBarButton(name, text, null, actionName, controllerName, null, routeValues, ajax, buttonType, htmlAttributes, imageHtmlAttributes);
-        }
+        //public object CustomCommandToolBarButton(
+        //    string name,
+        //    string text,
+        //    //TODO: Implement custom command routing
+        //    //string actionName,
+        //    //string controllerName,
+        //    //object routeValues,
+        //    //bool ajax,
+        //    //TODO: Implement command button types
+        //    //GridButtonType buttonType,
+        //    object htmlAttributes,
+        //    object imageHtmlAttributes)
+        //{
+        //    return CustomCommandToolBarButton(name, text/*, null, actionName, controllerName, null, routeValues, ajax, buttonType*/, htmlAttributes, imageHtmlAttributes);
+        //}
 
-        public object CustomCommandToolBarButton(string name, string text, string actionName, string controllerName, bool ajax, GridButtonType buttonType, object htmlAttributes, object imageHtmlAttributes)
-        {
-            return CustomCommandToolBarButton(name, text, actionName, controllerName, null, ajax, buttonType, htmlAttributes, imageHtmlAttributes);
-        }
+        //TODO: Implement custom command routing
+        ////TODO: Implement command button types
+        //public object CustomCommandToolBarButton(string name, string text, string actionName, string controllerName, bool ajax/*, GridButtonType buttonType*/, object htmlAttributes, object imageHtmlAttributes)
+        //{
+        //    return CustomCommandToolBarButton(name, text, actionName, controllerName, null, ajax/*, buttonType*/, htmlAttributes, imageHtmlAttributes);
+        //}
 
-        public object CustomCommandToolBarButton(string name, string text, string actionName, string controllerName, object routeValues, bool ajax, GridButtonType buttonType)
-        {
-            return CustomCommandToolBarButton(name, text, null, actionName, controllerName, null, routeValues, ajax, buttonType, null, null);
-        }
+        ////TODO: Implement command button types
+        //public object CustomCommandToolBarButton(string name, string text, string actionName, string controllerName, object routeValues, bool ajax/*, GridButtonType buttonType*/)
+        //{
+        //    return CustomCommandToolBarButton(name, text, null, actionName, controllerName, null, routeValues, ajax/*, buttonType*/, null, null);
+        //}
 
-        public object CustomCommandToolBarButton(string name, string text, string actionName, string controllerName, object routeValues)
-        {
-            return CustomCommandToolBarButton(name, text, actionName, controllerName, routeValues, false, GridButtonType.Text);
-        }
+        //public object CustomCommandToolBarButton(string name, string text, string actionName, string controllerName, object routeValues)
+        //{
+        //    return CustomCommandToolBarButton(name, text, actionName, controllerName, routeValues, false);
+        //}
 
+        ////TODO: Implement command button types
+        //public object CustomCommandToolBarButton(string name, string text, string routeName, RouteValueDictionary routeValues, bool ajax/*, GridButtonType buttonType*/, object htmlAttributes, object imageHtmlAttributes)
+        //{
+        //    return CustomCommandToolBarButton(name, text, null, null, null, routeName, routeValues, ajax/*, buttonType*/, htmlAttributes, imageHtmlAttributes);
+        //}
 
-        public object CustomCommandToolBarButton(string name, string text, string routeName, RouteValueDictionary routeValues, bool ajax, GridButtonType buttonType, object htmlAttributes, object imageHtmlAttributes)
-        {
-            return CustomCommandToolBarButton(name, text, null, null, null, routeName, routeValues, ajax, buttonType, htmlAttributes, imageHtmlAttributes);
-        }
+        ////TODO: Implement command button types
+        //public object CustomCommandToolBarButton(string name, string text, string routeName, RouteValueDictionary routeValues, bool ajax/*, GridButtonType buttonType*/)
+        //{
+        //    return CustomCommandToolBarButton(name, text, routeName, routeValues, ajax/*, buttonType*/, null, null);
+        //}
 
-        public object CustomCommandToolBarButton(string name, string text, string routeName, RouteValueDictionary routeValues, bool ajax, GridButtonType buttonType)
-        {
-            return CustomCommandToolBarButton(name, text, routeName, routeValues, ajax, buttonType, null, null);
-        }
+        //public object CustomCommandToolBarButton(string name, string text, string routeName, RouteValueDictionary routeValues)
+        //{
+        //    return CustomCommandToolBarButton(name, text, routeName, routeValues, false/*, GridButtonType.ImageAndText*/, null, null);
+        //}
 
-        public object CustomCommandToolBarButton(string name, string text, string routeName, RouteValueDictionary routeValues)
-        {
-            return CustomCommandToolBarButton(name, text, routeName, routeValues, false, GridButtonType.Text, null, null);
-        }
+        //TODO: Implement custom command routing
+        //public object CustomCommandToolBarButton(string name, string text/*, string url, GridButtonType buttonType*/, object htmlAttributes, object imageHtmlAttributes)
+        //{
+        //    return CustomCommandToolBarButton(name, text, url/*, null, null, null, null, false, buttonType*/, htmlAttributes, imageHtmlAttributes);
+        //}
 
-        public object CustomCommandToolBarButton(string name, string text, string url, GridButtonType buttonType, object htmlAttributes, object imageHtmlAttributes)
-        {
-            return CustomCommandToolBarButton(name, text, url, null, null, null, null, false, buttonType, htmlAttributes, imageHtmlAttributes);
-        }
+        //TODO: Implement command button types
+        //public object CustomCommandToolBarButton(string name, string text, string url, GridButtonType buttonType)
+        //{
+        //    return CustomCommandToolBarButton(name, text, url, buttonType, null, null);
+        //}
 
-        public object CustomCommandToolBarButton(string name, string text, string url, GridButtonType buttonType)
-        {
-            return CustomCommandToolBarButton(name, text, url, buttonType, null, null);
-        }
-
-        public object CustomCommandToolBarButton(string name, string text, string url)
-        {
-            return CustomCommandToolBarButton(name, text, url, GridButtonType.Text);
-        }
+        //public object CustomCommandToolBarButton(string name, string text, string url)
+        //{
+        //    return CustomCommandToolBarButton(name, text, url);
+        //}
 
         public object CustomCommandToolBarButton(string name, string text)
         {
-            return CustomCommandToolBarButton(name, text, null, GridButtonType.Text);
+            return CustomCommandToolBarButton(name, text, null, null);
         }
 
-        public object EditButton(T dataItem, GridButtonType buttonType, object htmlAttributes, object imageHtmlAttributes)
+        //TODO: Implement command button types
+        public object EditButton(T dataItem/*, GridButtonType buttonType*/, object htmlAttributes, object imageHtmlAttributes)
         {
             Editing.Enabled = true;
 
-            return Button<GridEditActionCommand>(dataItem, buttonType, htmlAttributes, imageHtmlAttributes);
+            return Button<GridEditActionCommand>(dataItem/*, buttonType*/, htmlAttributes, imageHtmlAttributes);
         }
 
-        public object EditButton(T dataItem, GridButtonType buttonType, object htmlAttributes)
+        //TODO: Implement command button types
+        public object EditButton(T dataItem/*, GridButtonType buttonType*/, object htmlAttributes)
         {
-            return EditButton(dataItem, buttonType, htmlAttributes, null);
+            return EditButton(dataItem/*, buttonType*/, htmlAttributes, null);
         }
 
-        public object EditButton(T dataItem, GridButtonType buttonType)
+        //TODO: Implement command button types
+        public object EditButton(T dataItem/*, GridButtonType buttonType*/)
         {
-            return EditButton(dataItem, buttonType, null);
+            return EditButton(dataItem/*, buttonType*/, null);
         }
 
-        public object EditButton(T dataItem)
-        {
-            return EditButton(dataItem, GridButtonType.Text);
-        }
+        //TODO: Implement command button types
+        //public object EditButton(T dataItem)
+        //{
+        //    return EditButton(dataItem, GridButtonType.ImageAndText);
+        //}
 
-        public object DeleteButton(T dataItem, GridButtonType buttonType, object htmlAttributes, object imageHtmlAttributes)
-        {
-            Editing.Enabled = true;
-            return Button<GridDeleteActionCommand>(dataItem, buttonType, htmlAttributes, imageHtmlAttributes);
-        }
-
-        public object DeleteButton(T dataItem, GridButtonType buttonType, object htmlAttributes)
-        {
-            return DeleteButton(dataItem, buttonType, htmlAttributes, null);
-        }
-
-        public object DeleteButton(T dataItem, GridButtonType buttonType)
-        {
-            return DeleteButton(dataItem, buttonType, null);
-        }
-
-        public object DeleteButton(T dataItem)
-        {
-            return DeleteButton(dataItem, GridButtonType.Text);
-        }
-
-        public object InsertButton(GridButtonType buttonType, object htmlAttributes, object imageHtmlAttributes)
+        //TODO: Implement command button types
+        public object DeleteButton(T dataItem/*, GridButtonType buttonType*/, object htmlAttributes, object imageHtmlAttributes)
         {
             Editing.Enabled = true;
-            InitializeEditors();
-            return Button<GridToolBarInsertCommand<T>>(null, buttonType, htmlAttributes, imageHtmlAttributes);
+            return Button<GridDeleteActionCommand>(dataItem/*, buttonType*/, htmlAttributes, imageHtmlAttributes);
         }
 
-        public object InsertButton(GridButtonType buttonType, object htmlAttributes)
+        public object DeleteButton(T dataItem/*, GridButtonType buttonType*/, object htmlAttributes)
         {
-            return InsertButton(buttonType, htmlAttributes, null);
+            return DeleteButton(dataItem/*, buttonType*/, htmlAttributes, null);
         }
 
-        public object InsertButton(GridButtonType buttonType)
+        public object DeleteButton(T dataItem/*, GridButtonType buttonType*/)
         {
-            return InsertButton(buttonType, null);
+            return DeleteButton(dataItem/*, buttonType*/, null);
         }
 
-        public object InsertButton()
-        {
-            return InsertButton(GridButtonType.Text);
-        }
+        //TODO: Implement command button types
+        //public object DeleteButton(T dataItem)
+        //{
+        //    return DeleteButton(dataItem, GridButtonType.ImageAndText);
+        //}
 
-        public object SubmitChangesButton(GridButtonType buttonType, object htmlAttributes, object imageHtmlAttributes)
+        public object InsertButton(/*GridButtonType buttonType,*/ object htmlAttributes, object imageHtmlAttributes)
         {
             Editing.Enabled = true;
             InitializeEditors();
-            return Button<GridToolBarSubmitChangesCommand<T>>(null, buttonType, htmlAttributes, imageHtmlAttributes);
+            return Button<GridToolBarInsertCommand<T>>(null/*, buttonType*/, htmlAttributes, imageHtmlAttributes);
         }
 
-        public object SubmitChangesButton(GridButtonType buttonType, object htmlAttributes)
+        public object InsertButton(/*GridButtonType buttonType,*/ object htmlAttributes)
         {
-            return SubmitChangesButton(buttonType, htmlAttributes, null);
+            return InsertButton(/*buttonType,*/ htmlAttributes, null);
         }
 
-        public object SubmitChangesButton(GridButtonType buttonType)
+        public object InsertButton(/*GridButtonType buttonType*/)
         {
-            return SubmitChangesButton(buttonType, null);
+            return InsertButton(/*buttonType,*/ null);
         }
 
-        public object SubmitChangesButton()
+        //public object InsertButton()
+        //{
+        //    return InsertButton(GridButtonType.ImageAndText);
+        //}
+
+        public object SubmitChangesButton(/*GridButtonType buttonType,*/ object htmlAttributes, object imageHtmlAttributes)
         {
-            return SubmitChangesButton(GridButtonType.Text);
+            Editing.Enabled = true;
+            InitializeEditors();
+            return Button<GridToolBarSubmitChangesCommand<T>>(null/*, buttonType*/, htmlAttributes, imageHtmlAttributes);
         }
+
+        public object SubmitChangesButton(/*GridButtonType buttonType,*/ object htmlAttributes)
+        {
+            return SubmitChangesButton(/*buttonType,*/ htmlAttributes, null);
+        }
+
+        public object SubmitChangesButton(/*GridButtonType buttonType*/)
+        {
+            return SubmitChangesButton(/*buttonType,*/ null);
+        }
+
+        //public object SubmitChangesButton()
+        //{
+        //    return SubmitChangesButton(GridButtonType.ImageAndText);
+        //}
+
         public string ClientRowTemplate
         {
             get
@@ -720,6 +747,16 @@ namespace Kendo.Mvc.UI
                 options["scrollable"] = false;
             }
 
+            if (Editing.Enabled)
+            {
+                options["editable"] = Editing.ToJson();
+            }
+
+            if (ToolBar.Enabled)
+            {
+                options["toolbar"] = ToolBar.ToJson();
+            }
+
             if (autoBind == false)
             {
                 options["autoBind"] = autoBind;
@@ -997,7 +1034,7 @@ namespace Kendo.Mvc.UI
                 NoRecordsTemplate = FormatNoRecordsTemplate(),
                 Localization = Localization,
                 ScrollingHeight = Scrolling.Height,
-                EditFormHtmlAttributes = Editing.FormHtmlAttributes,
+                //EditFormHtmlAttributes = Editing.FormHtmlAttributes,
                 ShowFooter = Footer && VisibleColumns.Any(c => c.FooterTemplate.HasValue() || c.ClientFooterTemplate.HasValue()),
                 AggregateResults = DataSource.AggregateResults ?? new List<AggregateResult>(),
                 Aggregates = Aggregates.SelectMany(aggregate => aggregate.Aggregates),
@@ -1005,7 +1042,8 @@ namespace Kendo.Mvc.UI
                 ShowGroupFooter = Aggregates.Any() && VisibleColumns.OfType<IGridBoundColumn>().Any(c => c.GroupFooterTemplate.HasValue()),
                 PopUpContainer = new HtmlFragment(),
                 CreateNewDataItem = () => Editing.DefaultDataItem(),
-                InsertRowPosition = Editing.InsertRowPosition,
+                //TODO: Implement insert row position
+                //InsertRowPosition = Editing.InsertRowPosition,
                 EditTemplateName = Editing.TemplateName,
                 AdditionalViewData = Editing.AdditionalViewData,
                 FormId = ViewContext.FormContext.FormId,

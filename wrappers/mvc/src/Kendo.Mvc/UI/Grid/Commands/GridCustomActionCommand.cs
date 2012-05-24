@@ -5,33 +5,34 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI.Html;
 
-    public class GridCustomActionCommand<T> : GridCustomCommandBase, INavigatable
+    public class GridCustomActionCommand<T> : GridCustomCommandBase/*, INavigatable*/
         where T: class
     {
         public GridCustomActionCommand()
         {
-            DataRouteValues = new List<IGridDataKey<T>>();
-            SendDataKeys = true;
-            SendState = true;
+            //DataRouteValues = new List<IGridDataKey<T>>();
+            //SendDataKeys = true;
+            //SendState = true;
         }
+        
+        //TODO: Implement custom command routing
+        //public IList<IGridDataKey<T>> DataRouteValues 
+        //{ 
+        //    get; 
+        //    private set; 
+        //}
 
-        public IList<IGridDataKey<T>> DataRouteValues 
-        { 
-            get; 
-            private set; 
-        }
+        //public bool SendDataKeys
+        //{ 
+        //    get;
+        //    set;
+        //}
 
-        public bool SendDataKeys
-        { 
-            get;
-            set;
-        }
-
-        public bool SendState 
-        { 
-            get;
-            set;
-        }
+        //public bool SendState 
+        //{ 
+        //    get;
+        //    set;
+        //}
         
         public override IDictionary<string, object> Serialize(IGridUrlBuilder urlBuilder)
         {
@@ -42,29 +43,30 @@ namespace Kendo.Mvc.UI
                 state["text"] = Text;
             }
 
-            if (SendState && !Ajax)
-            {
-                RouteValues.AddRange(urlBuilder.GetState());
-            }
+            //TODO: Implement custom command routing
+            //if (SendState && !Ajax)
+            //{
+            //    RouteValues.AddRange(urlBuilder.GetState());
+            //}
 
-            var dataRouteValues = DataRouteValues.Cast<IDataKey>();
+            //var dataRouteValues = DataRouteValues.Cast<IDataKey>();
 
-            if (Ajax)
-            {
-                state["ajax"] = true;
-            }
+            //if (Ajax)
+            //{
+            //    state["ajax"] = true;
+            //}
 
-            if (SendDataKeys)
-            {
-                dataRouteValues = dataRouteValues.Concat(urlBuilder.GetDataKeys());
-            }
+            //if (SendDataKeys)
+            //{
+            //    dataRouteValues = dataRouteValues.Concat(urlBuilder.GetDataKeys());
+            //}
 
-            foreach (var route in dataRouteValues)
-            {
-                RouteValues[route.RouteKey] = "<#=" + route.Name + "#>";
-            }
+            //foreach (var route in dataRouteValues)
+            //{
+            //    RouteValues[route.RouteKey] = "<#=" + route.Name + "#>";
+            //}
 
-            state["url"] = urlBuilder.Url(this);
+           // state["url"] = urlBuilder.Url(this);
 
             return state;
         }
@@ -72,31 +74,33 @@ namespace Kendo.Mvc.UI
         public override IEnumerable<IGridButtonBuilder> CreateDisplayButtons(IGridLocalization localization, IGridUrlBuilder urlBuilder, IGridHtmlHelper htmlHelper)
         {
             var button = CreateButton<GridLinkButtonBuilder>(Text, CssClass());
-           
-            button.Url = (dataItem) =>
-                {
-                    var navigatable = new RequestSettings
-                    {
-                        ActionName = ActionName,
-                        ControllerName = ControllerName,
-                    };
 
-                    navigatable.RouteValues.AddRange(RouteValues);
+            button.Url = dataItem => "";
+            //TODO: Implement custom command routing
+            //button.Url = (dataItem) =>
+            //    {
+            //        var navigatable = new RequestSettings
+            //        {
+            //            ActionName = ActionName,
+            //            ControllerName = ControllerName,
+            //        };
 
-                    var dataRouteValues = DataRouteValues.Cast<IDataKey>();
+            //        navigatable.RouteValues.AddRange(RouteValues);
 
-                    if (SendDataKeys)
-                    {
-                        dataRouteValues = dataRouteValues.Concat(urlBuilder.GetDataKeys());
-                    }
+            //        var dataRouteValues = DataRouteValues.Cast<IDataKey>();
 
-                    foreach (var key in dataRouteValues)
-                    {
-                        navigatable.RouteValues.Add(key.RouteKey, key.GetValue(dataItem));
-                    }
+            //        if (SendDataKeys)
+            //        {
+            //            dataRouteValues = dataRouteValues.Concat(urlBuilder.GetDataKeys());
+            //        }
 
-                    return urlBuilder.Url(navigatable, SendState);
-                };
+            //        foreach (var key in dataRouteValues)
+            //        {
+            //            navigatable.RouteValues.Add(key.RouteKey, key.GetValue(dataItem));
+            //        }
+
+            //        return urlBuilder.Url(navigatable, SendState);
+            //    };
 
             return new [] { button };
         }

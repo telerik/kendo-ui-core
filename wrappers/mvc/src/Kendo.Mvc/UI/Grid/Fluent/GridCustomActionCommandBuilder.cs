@@ -11,54 +11,54 @@ namespace Kendo.Mvc.UI.Fluent
         {
 
         }
-
-        public GridCustomActionCommandBuilder<T> Action(string actionName, string controllerName, RouteValueDictionary routeValues)
-        {
-            Command.Action(actionName, controllerName, routeValues);
+        //TODO: Implement custom command routing
+        //public GridCustomActionCommandBuilder<T> Action(string actionName, string controllerName, RouteValueDictionary routeValues)
+        //{
+        //    Command.Action(actionName, controllerName, routeValues);
             
-            return this;
-        }
+        //    return this;
+        //}
 
-        public GridCustomActionCommandBuilder<T> Action(string actionName, string controllerName, object routeValues)
-        {
-            Command.Action(actionName, controllerName, routeValues);
+        //public GridCustomActionCommandBuilder<T> Action(string actionName, string controllerName, object routeValues)
+        //{
+        //    Command.Action(actionName, controllerName, routeValues);
             
-            return this;
-        }
+        //    return this;
+        //}
 
-        public GridCustomActionCommandBuilder<T> Action(string actionName, string controllerName)
-        {
-            Command.Action(actionName, controllerName, (object)null);
+        //public GridCustomActionCommandBuilder<T> Action(string actionName, string controllerName)
+        //{
+        //    Command.Action(actionName, controllerName, (object)null);
 
-            return this;
-        }
+        //    return this;
+        //}
 
-        public GridCustomActionCommandBuilder<T> SendDataKeys(bool value)
-        {
-            Command.SendDataKeys = value;
+        //public GridCustomActionCommandBuilder<T> SendDataKeys(bool value)
+        //{
+        //    Command.SendDataKeys = value;
 
-            return this;
-        }
+        //    return this;
+        //}
 
-        public GridCustomActionCommandBuilder<T> SendState(bool value)
-        {
-            Command.SendState = value;
+        //public GridCustomActionCommandBuilder<T> SendState(bool value)
+        //{
+        //    Command.SendState = value;
 
-            return this;
-        }
+        //    return this;
+        //}
 
-        public GridCustomActionCommandBuilder<T> Ajax(bool enabled)
-        {
-            Command.Ajax = enabled;
+        //public GridCustomActionCommandBuilder<T> Ajax(bool enabled)
+        //{
+        //    Command.Ajax = enabled;
 
-            return this;
-        }
+        //    return this;
+        //}
 
-        public GridCustomActionCommandBuilder<T> DataRouteValues(Action<GridDataKeyFactory<T>> factory)
-        {
-            factory(new GridDataKeyFactory<T>(Command.DataRouteValues, true));
+        //public GridCustomActionCommandBuilder<T> DataRouteValues(Action<GridDataKeyFactory<T>> factory)
+        //{
+        //    factory(new GridDataKeyFactory<T>(Command.DataRouteValues, true));
 
-            return this;
-        }
+        //    return this;
+        //}
     }
 }

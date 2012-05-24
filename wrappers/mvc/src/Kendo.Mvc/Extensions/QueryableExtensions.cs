@@ -50,6 +50,11 @@ namespace Kendo.Mvc.Extensions
             return dataTable.Columns.Contains(memberName) ? dataTable.Columns[memberName].DataType : null;
         }
 
+        public static DataSourceResult ToDataSource(this IEnumerable enumerable, DataSourceRequest request)
+        {
+            return enumerable.AsQueryable().ToDataSource(request);
+        }
+
         public static DataSourceResult ToDataSource(this IQueryable queryable, DataSourceRequest request)
         {
             var result = new DataSourceResult();

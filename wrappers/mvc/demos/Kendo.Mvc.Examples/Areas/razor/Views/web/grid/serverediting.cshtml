@@ -2,8 +2,7 @@
 
 @(Html.Kendo().Grid(Model)    
     .Name("Grid")
-    .Columns(columns => {
-        //columns.Bound(p => p.ProductID);
+    .Columns(columns => {        
         columns.Bound(p => p.ProductName);
         columns.Bound(p => p.UnitPrice);
         columns.Bound(p => p.UnitsInStock);
@@ -14,11 +13,11 @@
     .Pageable()
     .Sortable()
     .Scrollable()
-        .DataSource(dataSource => { 
+        .DataSource(dataSource => {            
             dataSource.Model(model => model.Id(p => p.ProductID));
-            dataSource.Read(read => read.Action("ServerEditing", "Grid"));
-            dataSource.Update(update => update.Action("Update", "Grid"));
-            dataSource.Create(update => update.Action("Create", "Grid"));
-            dataSource.Destroy(update => update.Action("Destroy", "Grid"));
+            dataSource.Read(read => read.Action("ServerEditing", "Grid"))
+                .Update(update => update.Action("Update", "Grid"))
+                .Create(update => update.Action("Create", "Grid"))
+                .Destroy(update => update.Action("Destroy", "Grid"));
         })
 )

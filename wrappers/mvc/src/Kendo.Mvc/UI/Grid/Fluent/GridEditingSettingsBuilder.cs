@@ -43,13 +43,13 @@ namespace Kendo.Mvc.UI.Fluent
             
             return this;
         }
+        //TODO: Implement insert row position
+        //public GridEditingSettingsBuilder<T> InsertRowPosition(GridInsertRowPosition position)
+        //{
+        //    settings.InsertRowPosition = position;
 
-        public GridEditingSettingsBuilder<T> InsertRowPosition(GridInsertRowPosition position)
-        {
-            settings.InsertRowPosition = position;
-
-            return this;
-        }
+        //    return this;
+        //}
 
         public GridEditingSettingsBuilder<T> Mode(GridEditMode mode)
         {
@@ -57,13 +57,13 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+        //TODO: Implement GridBeginEditEvent option
+        //public GridEditingSettingsBuilder<T> BeginEdit(GridBeginEditEvent value)
+        //{
+        //    settings.BeginEdit = value;
 
-        public GridEditingSettingsBuilder<T> BeginEdit(GridBeginEditEvent value)
-        {
-            settings.BeginEdit = value;
-
-            return this;
-        }
+        //    return this;
+        //}
 
         public GridEditingSettingsBuilder<T> Window(Action<WindowBuilder> configurator)
         {
@@ -72,17 +72,7 @@ namespace Kendo.Mvc.UI.Fluent
             configurator(new WindowBuilder(settings.PopUp));
 
             return this;
-        }
-
-
-        public GridEditingSettingsBuilder<T> DefaultDataItem(T value)
-        {
-            Guard.IsNotNull(value, "value");
-
-            settings.DefaultDataItem = () => value;
-
-            return this;
-        }
+        }        
 
         /// <summary>
         /// Specify an editor template which to be used for InForm or PopUp modes
@@ -144,18 +134,19 @@ namespace Kendo.Mvc.UI.Fluent
         public GridEditingSettingsBuilder<T> FormHtmlAttributes(object attributes)
         {
             return FormHtmlAttributes(attributes.ToDictionary());
-        }        
-        
-        /// <summary>
-        /// Gets the HTML attributes of the form rendered during editing
-        /// </summary>
-        /// <param name="attributes">The attributes.</param>
-        public GridEditingSettingsBuilder<T> FormHtmlAttributes(IDictionary<string, object> attributes)
-        {
-            MergeAttributes(settings.FormHtmlAttributes, attributes);
-
-            return this;
         }
+
+        //TODO: Implement edit form attributes
+        ///// <summary>
+        ///// Gets the HTML attributes of the form rendered during editing
+        ///// </summary>
+        ///// <param name="attributes">The attributes.</param>
+        //public GridEditingSettingsBuilder<T> FormHtmlAttributes(IDictionary<string, object> attributes)
+        //{
+        //    MergeAttributes(settings.FormHtmlAttributes, attributes);
+
+        //    return this;
+        //}
         
         private static void MergeAttributes(IDictionary<string, object> target, IDictionary<string, object> attributes)
         {
