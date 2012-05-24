@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace Kendo.Mvc.Examples.Areas.Razor
 {
@@ -16,15 +17,16 @@ namespace Kendo.Mvc.Examples.Areas.Razor
 
         public override void RegisterArea(AreaRegistrationContext context)
         {
-            var razorRoute = context.MapRoute(
-                "RazorDefault",
+            var razorRoute = new Route(
                 "razor/{suite}/{controller}/{action}",
-                new { controller = "Suite", action = "Index" }
+                new RouteValueDictionary { { "controller", "Suite" }, { "action", "Index" } },
+                new RouteValueDictionary(),
+                // The 'UseNamespaceFallback' token will allow the runtime to use the controllers defined outside the area
+                new RouteValueDictionary { { "UseNamespaceFallback", true }, { RazorViewToken, true }, { "area", AreaName } },
+                new HyphenatedRouteHandler()
             );
 
-            // The 'UseNamespaceFallback' token will allow the runtime to use the controllers defined outside the area
-            razorRoute.DataTokens["UseNamespaceFallback"] = true;
-            razorRoute.DataTokens[RazorViewToken] = true;
+            context.Routes.Add("RazorDefault", razorRoute);
         }
     }
 }

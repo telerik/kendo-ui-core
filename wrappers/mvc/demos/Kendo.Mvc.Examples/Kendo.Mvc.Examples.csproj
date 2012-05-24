@@ -76,6 +76,7 @@
   <ItemGroup>
     <Compile Include="Areas\aspx\ASPXAreaRegistration.cs" />
     <Compile Include="Areas\razor\RazorAreaRegistration.cs" />
+    <Compile Include="Controllers\Area_Chart\IndexController.cs" />
     <Compile Include="Controllers\ComboBox\IndexController.cs" />
     <Compile Include="Controllers\LinearGauge\IndexController.cs" />
     <Compile Include="Controllers\LinearGauge\ScaleOptoinsController.cs" />
@@ -127,6 +128,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Config.cs" />
+    <Compile Include="Helpers\HyphenatedRouteHandler.cs" />
     <Compile Include="Models\NavigationItem.cs" />
     <Compile Include="Models\EditableProduct.cs" />
     <Compile Include="Models\Northwind.Designer.cs">
@@ -148,6 +150,7 @@
     </Content>
     <Content Include="Areas\aspx\Views\lineargauge\index.aspx" />
     <Content Include="Areas\aspx\Views\lineargauge\scaleoptions.aspx" />
+    <Content Include="Areas\aspx\Views\area_chart\index.aspx" />
     <Content Include="Areas\aspx\Views\numerictextbox\api.aspx" />
     <Content Include="Areas\aspx\Views\numerictextbox\events.aspx" />
     <Content Include="Areas\aspx\Views\radialgauge\index.aspx" />
@@ -291,6 +294,7 @@
     <Content Include="Areas\razor\Views\grid\serverediting.cshtml" />
     <Content Include="Areas\razor\Views\combobox\index.cshtml" />
     <Content Include="Areas\aspx\Views\slider\index.aspx" />
+    <Content Include="Areas\razor\Views\area_chart\index.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
