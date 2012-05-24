@@ -308,7 +308,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual PanelBarBuilder PanelBar()
         {
-            return new PanelBarBuilder(new PanelBar(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>(), DI.Current.Resolve<INavigationItemAuthorization>(), DI.Current.Resolve<INavigationComponentHtmlBuilderFactory<PanelBar, PanelBarItem>>()));
+            return new PanelBarBuilder(new PanelBar(ViewContext, Initializer, DI.Current.Resolve<IUrlGenerator>(), DI.Current.Resolve<INavigationItemAuthorization>(), DI.Current.Resolve<INavigationComponentHtmlBuilderFactory<PanelBar, PanelBarItem>>()));
         }
 
         /// <summary>

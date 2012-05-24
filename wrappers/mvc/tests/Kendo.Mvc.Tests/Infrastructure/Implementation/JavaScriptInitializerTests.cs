@@ -145,6 +145,19 @@ namespace Kendo.Mvc.Infrastructure.Implementation.Tests
 
             initializer.Serialize(data).ShouldEqual("{foo:function(){}}");
         }
+
+        private enum FooEnum
+        {
+            Bar
+        }
+
+        [Fact]
+        public void Should_serialize_enum_value()
+        {
+            data["foo"] = FooEnum.Bar;
+
+            initializer.Serialize(data).ShouldEqual("{foo:\"bar\"}");
+        }
     }
 }
 
