@@ -91,6 +91,7 @@
     <Compile Include="Controllers\Grid\CustomServerBindingController.cs" />
     <Compile Include="Controllers\Grid\ColumnResizingController.cs" />
     <Compile Include="Controllers\Grid\CustomAjaxBindingController.cs" />
+    <Compile Include="Controllers\PanelBar\ImagesController.cs" />
     <Compile Include="Controllers\Radial_Gauge\ScaleOptoinsController.cs" />
     <Compile Include="Controllers\PanelBar\IndexController.cs" />
     <Compile Include="Controllers\Splitter\AjaxController.cs" />
@@ -307,6 +308,7 @@
     <Content Include="Areas\razor\Views\web\dropdownlist\index.cshtml" />
     <Content Include="Areas\razor\Views\web\autocomplete\index.cshtml" />
     <Content Include="Areas\razor\Views\panelbar\index.cshtml" />
+    <Content Include="Areas\razor\Views\panelbar\images.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
