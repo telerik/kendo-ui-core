@@ -2110,7 +2110,7 @@
 
             html += "</td></tr>";
 
-            html = kendo.template(unescape(html), settings);
+            html = kendo.template(window.unescape(html), settings);
 
             if (templateFunctionCount > 0) {
                 return proxy(html, templateFunctionStorage);
