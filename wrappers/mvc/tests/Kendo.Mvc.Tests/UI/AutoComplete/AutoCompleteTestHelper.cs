@@ -52,7 +52,7 @@ namespace Kendo.Mvc.UI.Tests
 
             authorization.Setup(a => a.IsAccessibleToUser(viewContext.RequestContext, It.IsAny<INavigatable>())).Returns(true);
 
-            AutoComplete Autocomplete = new AutoComplete(viewContext, clientSideObjectWriterFactory.Object, urlGenerator);
+            AutoComplete Autocomplete = new AutoComplete(viewContext, null, new ViewDataDictionary(), urlGenerator);
 
             return Autocomplete;
         }

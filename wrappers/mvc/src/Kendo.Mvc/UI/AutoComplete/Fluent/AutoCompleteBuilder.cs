@@ -1,11 +1,8 @@
 namespace Kendo.Mvc.UI.Fluent
 {
+    using Kendo.Mvc.Infrastructure;
     using System;
-
-    using Extensions;
-    using Infrastructure;
-    
-    using System.Collections.Generic;
+    using System.Collections;
 
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="AutoComplete"/> component.
@@ -21,147 +18,62 @@ namespace Kendo.Mvc.UI.Fluent
         {
         }
 
-        /// <summary>
-        /// Use it to enable filling the first matched item text.
-        /// </summary>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().AutoComplete()
-        ///             .Name("AutoComplete")
-        ///             .AutoFill(true)
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public AutoCompleteBuilder AutoFill(bool autoFill)
+        public AutoCompleteBuilder Animation(bool enable)
         {
-            Guard.IsNotNull(autoFill, "autoFill");
-
-            Component.AutoFill = autoFill;
+            Component.Animation.Enabled = enable;
 
             return this;
         }
 
-        /// <summary>
-        /// Binds the AutoComplete to a List{string}.
-        /// </summary>
-        /// <param name="dataSource">The data source.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().AutoComplete()
-        ///             .Name("AutoComplete")
-        ///             .BindTo(new List<string>
-        ///             {
-        ///                 "ComboBox",
-        ///                 "DropDownList",
-        ///                 "AutoComplete"
-        ///             })
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public AutoCompleteBuilder BindTo(IEnumerable<string> dataSource)
+        public AutoCompleteBuilder Animation(Action<PopupAnimationBuilder> animationAction)
         {
-            Guard.IsNotNull(dataSource, "dataSource");
+            Guard.IsNotNull(animationAction, "animationAction");
 
-            Component.Items.Clear();
-
-            foreach (string item in dataSource)
-            {
-                Component.Items.Add(item);
-            }
+            animationAction(new PopupAnimationBuilder(Component.Animation));
 
             return this;
         }
         
-        public AutoCompleteBuilder DropDownHtmlAttributes(object attributes)
+        public AutoCompleteBuilder BindTo(IEnumerable data)
         {
-            return DropDownHtmlAttributes(attributes.ToDictionary());
-        }
-
-        public AutoCompleteBuilder DropDownHtmlAttributes(IDictionary<string, object> attributes)
-        {
-            Guard.IsNotNull(attributes, "attributes");
-
-            Component.DropDownHtmlAttributes.Clear();
-            Component.DropDownHtmlAttributes.Merge(attributes);
+            Component.DataSource.Data = data;
 
             return this;
         }
 
-        ///// <summary>
-        ///// Configures the client-side events.
-        ///// </summary>
-        ///// <param name="clientEventsAction">The client events action.</param>
-        ///// <example>
-        ///// <code lang="CS">
-        /////  &lt;%= Html.Telerik().DropDownList()
-        /////             .Name("DropDownList")
-        /////             .ClientEvents(events =>
-        /////                 events.OnLoad("onLoad")
-        /////             )
-        ///// %&gt;
-        ///// </code>
-        ///// </example>
-        //public AutoCompleteBuilder ClientEvents(Action<DropDownClientEventsBuilder> clientEventsAction)
-        //{
-        //    Guard.IsNotNull(clientEventsAction, "clientEventsAction");
-
-        //    clientEventsAction(new DropDownClientEventsBuilder(Component.ClientEvents));
-
-        //    return this;
-        //}
-
-        ///// <summary>
-        ///// Configures the effects of the AutoComplete.
-        ///// </summary>
-        ///// <param name="effectsAction">The action which configures the effects.</param>
-        ///// <example>
-        ///// <code lang="CS">
-        ///// &lt;%= Html.Telerik().AutoComplete()
-        /////	           .Name("AutoComplete")
-        /////	           .Effects(fx =>
-        /////	           {
-        /////		            fx.Slide()
-        /////					  .OpenDuration(AnimationDuration.Normal)
-        /////					  .CloseDuration(AnimationDuration.Normal);
-        /////	           })
-        ///// </code>
-        ///// </example>
-        //public AutoCompleteBuilder Effects(Action<EffectsBuilder> addEffects)
-        //{
-        //    Guard.IsNotNull(addEffects, "addAction");
-
-        //    EffectsBuilderFactory factory = new EffectsBuilderFactory();
-
-        //    addEffects(factory.Create(Component.Effects));
-
-        //    return this;
-        //}
-
-        /// <summary>
-        /// Use it to enable highlighting of first matched item.
-        /// </summary>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().AutoComplete()
-        ///             .Name("AutoComplete")
-        ///             .HighlightFirstMatch(true)
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public AutoCompleteBuilder HighlightFirstMatch(bool highlightFirstMatch)
+        public AutoCompleteBuilder ClientEvents(Action<DropDownBaseClientEventsBuilder> clientEventsAction)
         {
-            Guard.IsNotNull(highlightFirstMatch, "highlightFirstMatch");
+            clientEventsAction(new DropDownBaseClientEventsBuilder(Component.ClientEvents));
 
-            Component.HighlightFirstMatch = highlightFirstMatch;
+            return this;
+        }
+
+        public AutoCompleteBuilder DataTextField(string field)
+        {
+            Component.DataTextField = field;
+
+            return this;
+        }
+
+        public AutoCompleteBuilder DataSource(Action<ReadOnlyDataSourceBuilder> configurator)
+        {
+            configurator(new ReadOnlyDataSourceBuilder(Component.DataSource, this.Component.ViewContext, this.Component.UrlGenerator));
+
+            return this;
+        }
+
+        public AutoCompleteBuilder Delay(int delay)
+        {
+            Guard.IsNotNegative(delay, "delay");
+
+            Component.Delay = delay;
 
             return this;
         }
 
         /// <summary>
-        /// Enables or disables the autocomplete.
+        /// Enables or disables the AutoComplete.
         /// </summary>
-        /// <param name="allowSpinner"></param>
-        /// <returns></returns>
         public AutoCompleteBuilder Enable(bool value)
         {
             Component.Enabled = value;
@@ -170,48 +82,111 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Sets whether provided List{string} should be encoded before rendering.
+        /// Use it to enable filtering of items.
         /// </summary>
-        /// <param name="isEncoded">Whether the property should be encoded. Default: true.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().AutoComplete()
+        ///  &lt;%= Html.Kendo().AutoComplete()
         ///             .Name("AutoComplete")
-        ///             .BindTo(new List<string>
-        ///             {
-        ///                 "ComboBox",
-        ///                 "DropDownList",
-        ///                 "AutoComplete"
-        ///             })
-        ///             .Encode(false)
+        ///             .Filter("startswith");
         /// %&gt;
         /// </code>
         /// </example>
-        public AutoCompleteBuilder Encode(bool isEncoded)
+        public AutoCompleteBuilder Filter(string filter)
         {
-            Component.Encoded = isEncoded;
+            Component.Filter = filter;
 
             return this;
         }
 
         /// <summary>
-        /// Sets value of the input.
+        /// Use it to enable case insensitive bahavior of the AutoComplete. If true the AutoComplete will select the first matching item ignoring its casing.
         /// </summary>
-        /// <param name="value">Value which will be rendered as a input text.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().AutoComplete()
+        ///  &lt;%= Html.Kendo().AutoComplete()
         ///             .Name("AutoComplete")
-        ///             .BindTo(new List<string>
-        ///             {
-        ///                 "ComboBox",
-        ///                 "DropDownList",
-        ///                 "AutoComplete"
-        ///             })
-        ///             .Value("ComboBox")
+        ///             .IgnoreCase(true)
         /// %&gt;
         /// </code>
         /// </example>
+        public AutoCompleteBuilder IgnoreCase(bool ignoreCase)
+        {
+            Guard.IsNotNull(ignoreCase, "ignoreCase");
+
+            Component.IgnoreCase = ignoreCase;
+
+            return this;
+        }
+
+        public AutoCompleteBuilder Height(int height)
+        {
+            Guard.IsNotNegative(height, "height");
+
+            Component.Height = height;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Use it to enable highlighting of first matched item.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().AutoComplete()
+        ///             .Name("AutoComplete")
+        ///             .HighlightFirst(true)
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public AutoCompleteBuilder HighlightFirst(bool highlightFirst)
+        {
+            Component.HighlightFirst = highlightFirst;
+
+            return this;
+        }
+
+        public AutoCompleteBuilder MinLength(int length)
+        {
+            Guard.IsNotNegative(length, "length");
+
+            Component.MinLength = length;
+
+            return this;
+        }
+
+        public AutoCompleteBuilder Separator(string separator)
+        {
+            Guard.IsNotNullOrEmpty(separator, "separator");
+
+            Component.Separator = separator;
+
+            return this;
+        }
+
+        public AutoCompleteBuilder Suggest(bool suggest)
+        {
+            Component.Suggest = suggest;
+
+            return this;
+        }
+
+        public AutoCompleteBuilder Placeholder(string placeholder)
+        {
+            Component.Placeholder = placeholder;
+
+            return this;
+        }
+
+        public AutoCompleteBuilder Template(string template)
+        {
+            Guard.IsNotNullOrEmpty(template, "template");
+
+            Component.Template = template;
+
+            return this;
+        }
+
         public AutoCompleteBuilder Value(string value)
         {
             Component.Value = value;

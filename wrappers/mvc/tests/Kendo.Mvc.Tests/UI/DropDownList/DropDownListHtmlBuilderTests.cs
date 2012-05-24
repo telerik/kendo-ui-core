@@ -80,15 +80,7 @@ using System.Collections.Generic;
 
             Assert.Equal("text", tag.Attribute("type"));
         }
-
-        [Fact]
-        public void Build_should_output_input_which_is_hidden_with_style()
-        {
-            IHtmlNode tag = renderer.Build();
-
-            Assert.Equal("display:none", tag.Attribute("style"));
-        }
-
+        
         [Fact]
         public void Build_should_output_input_with_name()
         {

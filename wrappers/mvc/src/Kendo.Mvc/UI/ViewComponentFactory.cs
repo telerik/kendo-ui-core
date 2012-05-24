@@ -460,7 +460,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual AutoCompleteBuilder AutoComplete()
         {
-            return new AutoCompleteBuilder(new AutoComplete(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>()));
+            return new AutoCompleteBuilder(new AutoComplete(ViewContext, Initializer, ViewData, DI.Current.Resolve<IUrlGenerator>()));
         }
 
         /// <summary>

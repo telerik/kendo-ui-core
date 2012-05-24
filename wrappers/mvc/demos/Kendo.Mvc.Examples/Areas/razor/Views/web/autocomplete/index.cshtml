@@ -1,0 +1,18 @@
+@(Html.Kendo().AutoComplete()
+      .Name("autocomplete")
+      .BindTo(new string[] { "Item1", "Item2", "Item3" })
+)
+
+@(Html.Kendo().AutoComplete()
+      .Name("autocomplete2")
+      .Separator(", ")
+      .DataTextField("ProductName")
+      .DataSource(source =>
+      {
+          source.Read(read =>
+          {
+              read.Action("GetListItems", "AutoComplete");
+          })
+          .ServerFiltering();
+      })
+)
