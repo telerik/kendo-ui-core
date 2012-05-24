@@ -301,6 +301,7 @@
     <Content Include="Areas\razor\Views\web\splitter\api.cshtml" />
     <Content Include="Areas\razor\Views\dataviz\area_chart\index.cshtml" />
     <Content Include="Areas\razor\Views\web\grid\ajaxediting.cshtml" />
+    <Content Include="Areas\razor\Views\web\grid\ajaxediting.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
