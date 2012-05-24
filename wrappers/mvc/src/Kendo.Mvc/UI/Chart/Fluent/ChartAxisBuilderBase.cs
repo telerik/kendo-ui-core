@@ -35,77 +35,51 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Sets the axis minor tick size.
+        /// Configures the major ticks.
         /// </summary>
-        /// <param name="minorTickSize">The minor tick size.</param>
+        /// <param name="configurator">The configuration action.</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;%= Html.Kendo().Chart(Model)
         ///            .Name("Chart")
-        ///            .ValueAxis(a => a.Numeric().MinorTickSize(10))
+        ///            .ValueAxis(axis => axis
+        ///                .MajorTicks(ticks => ticks
+        ///                    .Visible(false)
+        ///                )
+        ///            )
         /// %&gt;
         /// </code>
         /// </example>
-        public TAxisBuilder MinorTickSize(int minorTickSize)
+        public TAxisBuilder MajorTicks(Action<ChartAxisTicksBuilder> configurator)
         {
-            Axis.MinorTickSize = minorTickSize;
+            Guard.IsNotNull(configurator, "configurator");
+
+            configurator(new ChartAxisTicksBuilder(Axis.MajorTicks));
 
             return this as TAxisBuilder;
         }
 
         /// <summary>
-        /// Sets the axis major tick size.
+        /// Configures the minor ticks.
         /// </summary>
-        /// <param name="majorTickSize">The major tick size.</param>
+        /// <param name="configurator">The configuration action.</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;%= Html.Kendo().Chart(Model)
         ///            .Name("Chart")
-        ///            .ValueAxis(a => a.Numeric().MajorTickSize(10))
+        ///            .ValueAxis(axis => axis
+        ///                .MinorTicks(ticks => ticks
+        ///                    .Visible(false)
+        ///                )
+        ///            )
         /// %&gt;
         /// </code>
         /// </example>
-        public TAxisBuilder MajorTickSize(int majorTickSize)
+        public TAxisBuilder MinorTicks(Action<ChartAxisTicksBuilder> configurator)
         {
-            Axis.MajorTickSize = majorTickSize;
+            Guard.IsNotNull(configurator, "configurator");
 
-            return this as TAxisBuilder;
-        }
-
-        /// <summary>
-        /// Sets the major tick type.
-        /// </summary>
-        /// <param name="majorTickType">The major tick type.</param>
-        /// <example>
-        /// <code lang="CS">
-        /// &lt;%= Html.Kendo().Chart(Model)
-        ///             .Name("Chart")
-        ///             .ValueAxis(a => a.Numeric().MajorTickType(ChartAxisTickType.Inside))
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public TAxisBuilder MajorTickType(ChartAxisTickType majorTickType)
-        {
-            Axis.MajorTickType = majorTickType;
-
-            return this as TAxisBuilder;
-        }
-
-        /// <summary>
-        /// Sets the minor tick type.
-        /// </summary>
-        /// <param name="minorTickType">The minor tick type.</param>
-        /// <example>
-        /// <code lang="CS">
-        /// &lt;%= Html.Kendo().Chart(Model)
-        ///             .Name("Chart")
-        ///             .ValueAxis(a => a.Numeric().MinorTickType(ChartAxisTickType.Inside))
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public TAxisBuilder MinorTickType(ChartAxisTickType minorTickType)
-        {
-            Axis.MinorTickType = minorTickType;
+            configurator(new ChartAxisTicksBuilder(Axis.MinorTicks));
 
             return this as TAxisBuilder;
         }

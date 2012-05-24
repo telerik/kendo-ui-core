@@ -18,10 +18,6 @@ namespace Kendo.Mvc.UI
             var result = new Dictionary<string, object>();
             
             FluentDictionary.For(result)
-                .Add("minorTickSize", axis.MinorTickSize, () => axis.MinorTickSize.HasValue)
-                .Add("majorTickSize", axis.MajorTickSize, () => axis.MajorTickSize.HasValue)
-                .Add("majorTickType", axis.MajorTickType.ToString(), () => axis.MajorTickType.HasValue)
-                .Add("minorTickType", axis.MinorTickType.ToString(), () => axis.MinorTickType.HasValue)
                 .Add("axisCrossingValue", axis.AxisCrossingValues, () => axis.AxisCrossingValues.Count() > 0)
                 .Add("name", axis.Name, string.Empty)
                 .Add("color", axis.Color, string.Empty)
@@ -67,6 +63,18 @@ namespace Kendo.Mvc.UI
             if (title.Count > 0)
             {
                 result.Add("title", title);
+            }
+
+            var majorTicks = axis.MajorTicks.CreateSerializer().Serialize();
+            if (majorTicks.Count > 0)
+            {
+                result.Add("majorTicks", majorTicks);
+            }
+
+            var minorTicks = axis.MinorTicks.CreateSerializer().Serialize();
+            if (minorTicks.Count > 0)
+            {
+                result.Add("minorTicks", minorTicks);
             }
 
             return result;

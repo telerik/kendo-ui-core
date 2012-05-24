@@ -13,7 +13,7 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
-        /// Gets or sets the tick size.
+        /// Gets or sets the ticks size.
         /// </summary>
         public int? Size
         {
@@ -22,7 +22,7 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
-        /// Gets or sets the tick width.
+        /// Gets or sets the ticks width.
         /// </summary>
         public int? Width
         {
@@ -31,7 +31,7 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
-        /// Gets or sets the tick color.
+        /// Gets or sets the ticks color.
         /// </summary>
         public string Color
         {
@@ -40,7 +40,7 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
-        /// Gets or sets the tick dash type.
+        /// Gets or sets the ticks dash type.
         /// </summary>
         public ChartDashType? DashType
         {
@@ -49,7 +49,7 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
-        /// Gets or sets the tick dash visibility.
+        /// Gets or sets the ticks visibility.
         /// </summary>
         public bool? Visible
         {
