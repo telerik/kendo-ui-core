@@ -15,6 +15,12 @@
             this.viewContext = viewContext;
             this.urlGenerator = urlGenerator;
             this.dataSource = dataSource;
+
+            dataSource.Type = DataSourceType.Ajax;
+            dataSource.Schema.Data = "";
+            dataSource.Schema.Total = "";
+
+            dataSource.ServerPaging = dataSource.ServerSorting = dataSource.ServerGrouping = dataSource.ServerFiltering = dataSource.ServerAggregates = false;
         }
 
         public ReadOnlyDataSourceBuilder Read(Action<CrudOperationBuilder> configurator)

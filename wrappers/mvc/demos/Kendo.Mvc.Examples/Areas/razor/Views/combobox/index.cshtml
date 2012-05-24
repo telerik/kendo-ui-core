@@ -1,3 +1,14 @@
 @(Html.Kendo().ComboBox()
       .Name("combobox")
+      .AutoBind(false)
+      .DataTextField("ProductName")
+      .DataValueField("ProductID")
+      .DataSource(builder =>
+      {
+          builder.Read(read =>
+          {
+              read.Action("GetListItems", "ComboBox");
+          });
+      })
+      .Filter("startswith")
 )
