@@ -26,7 +26,8 @@ namespace Kendo.Mvc.UI
             get;
             set;
         }
-
+        //TODO: Implement command button html attributes
+        /*
         public IDictionary<string, object> HtmlAttributes
         {
             get;
@@ -38,12 +39,12 @@ namespace Kendo.Mvc.UI
             get;
             set;
         }
-
+        */
         public GridActionCommandBase()
         {
             ButtonType = GridButtonType.ImageAndText;
-            HtmlAttributes = new RouteValueDictionary();
-            ImageHtmlAttributes = new RouteValueDictionary();
+          //  HtmlAttributes = new RouteValueDictionary();
+          //  ImageHtmlAttributes = new RouteValueDictionary();
         }
 
         public virtual IDictionary<string, object> Serialize(IGridUrlBuilder urlBuilder)
@@ -52,10 +53,12 @@ namespace Kendo.Mvc.UI
 
             FluentDictionary.For(command)
                 .Add("name", Name)
-                .Add("attr", HtmlAttributes.ToAttributeString(), HtmlAttributes.Any)
+                //TODO: Implement command button html attributes
+                //.Add("attr", HtmlAttributes.ToAttributeString(), HtmlAttributes.Any)
                 .Add("buttonType", ButtonType.ToString())
-                .Add("text", Text, (System.Func<bool>)Text.HasValue)
-                .Add("imageAttr", ImageHtmlAttributes.ToAttributeString(), ImageHtmlAttributes.Any);
+                .Add("text", Text, (System.Func<bool>)Text.HasValue);
+                //TODO: Implement command button html attributes
+                //.Add("imageAttr", ImageHtmlAttributes.ToAttributeString(), ImageHtmlAttributes.Any);
 
             return command;
         }
@@ -66,8 +69,9 @@ namespace Kendo.Mvc.UI
             var button = factory.CreateButton<T>(ButtonType);
 
             button.Text = text;
-            button.HtmlAttributes = HtmlAttributes;
-            button.ImageHtmlAttributes = ImageHtmlAttributes;
+            //TODO: Implement command button html attributes
+            //button.HtmlAttributes = HtmlAttributes;
+            //button.ImageHtmlAttributes = ImageHtmlAttributes;
             button.CssClass += " " + @class;
 
             return button;
