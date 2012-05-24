@@ -764,6 +764,11 @@ namespace Kendo.Mvc.UI
 
             options["dataSource"] = DataSource.ToJson();
 
+            if (HasDetailView)
+            { 
+                options["detailTemplate"] = DetailView.Serialize();
+            }
+
             //TODO: Serialize editing
             //TODO: Client Operation Mode
             //TODO: Localization

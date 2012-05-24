@@ -2110,7 +2110,7 @@
 
             html += "</td></tr>";
 
-            html = kendo.template(html, settings);
+            html = kendo.template(unescape(html), settings);
 
             if (templateFunctionCount > 0) {
                 return proxy(html, templateFunctionStorage);
@@ -2222,7 +2222,7 @@
                 }
 
                 tr.html(html);
-            } else if (hasDetails) {
+            } else if (hasDetails && !tr.find(".k-hierarchy-cell")[0]) {
                 tr.prepend('<th class="k-hierarchy-cell">&nbsp;</th>');
             }
 

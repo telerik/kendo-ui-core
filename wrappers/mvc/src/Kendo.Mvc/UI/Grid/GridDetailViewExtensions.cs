@@ -6,17 +6,18 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Extensions;
 
     public static class GridDetailViewExtensions
-    {
-        public static void SerializeTo<T>(this IGridDetailView<T> detailView, string key, IClientSideObjectWriter objectWriter)
+    {        
+        public static string Serialize<T>(this IGridDetailView<T> detailView)
             where T : class
         {
+            var json = string.Empty;
+
             if (detailView.ClientTemplate.HasValue())
             {
-                var json = new Dictionary<string, object>();
-                json["template"] = Regex.Replace(detailView.ClientTemplate, @"data-val-regex-pattern=\\""(.*?)\\""", (Match match) =>
-                                        {
-                                            return @"data-val-regex-pattern=\\""" + new JavaScriptSerializer().Serialize(match.Groups[1].Value).Trim('"') + @"\\""";
-                                        })
+                json = Regex.Replace(detailView.ClientTemplate, @"data-val-regex-pattern=\\""(.*?)\\""", (Match match) =>
+                {
+                    return @"data-val-regex-pattern=\\""" + new JavaScriptSerializer().Serialize(match.Groups[1].Value).Trim('"') + @"\\""";
+                })
                                         .Replace("%", "%25")
                                         .Replace("\\\\\\\"", "%5c%5c%22")
                                         .Replace("\\\"", "%5c%5c%22")
@@ -32,10 +33,10 @@ namespace Kendo.Mvc.UI
                                         .Replace("\n", "%0A")
                                         .Replace("\\n", "%0A")
                                         .Replace("\t", "%09")
-                                        .Replace("\\t", "%09");
-                                             
-                objectWriter.AppendObject(key, json);
+                                        .Replace("\\t", "%09");                                
             }
+
+            return json;
         }
     }
 }
