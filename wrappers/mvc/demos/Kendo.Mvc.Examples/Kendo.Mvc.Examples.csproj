@@ -128,6 +128,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\KendoRazorViewEngine.cs" />
+    <Compile Include="Helpers\KendoWebFormViewEngine.cs" />
     <Compile Include="Models\Config.cs" />
     <Compile Include="Helpers\HyphenatedRouteHandler.cs" />
     <Compile Include="Models\NavigationItem.cs" />
@@ -151,7 +153,7 @@
     </Content>
     <Content Include="Areas\aspx\Views\linear_gauge\index.aspx" />
     <Content Include="Areas\aspx\Views\linear_gauge\scaleoptions.aspx" />
-    <Content Include="Areas\aspx\Views\area_chart\index.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\area_chart\index.aspx" />
     <Content Include="Areas\aspx\Views\numerictextbox\api.aspx" />
     <Content Include="Areas\aspx\Views\numerictextbox\events.aspx" />
     <Content Include="Areas\aspx\Views\radial_gauge\index.aspx" />
@@ -295,8 +297,8 @@
     <Content Include="Areas\razor\Views\grid\serverediting.cshtml" />
     <Content Include="Areas\razor\Views\combobox\index.cshtml" />
     <Content Include="Areas\aspx\Views\slider\index.aspx" />
-    <Content Include="Areas\razor\Views\area_chart\index.cshtml" />
     <Content Include="Areas\razor\Views\splitter\api.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\area_chart\index.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
