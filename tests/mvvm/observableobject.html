@@ -163,6 +163,46 @@
                 equal(json.foo, "bar");
             });
 
+            test("toJSON is recursive", function() {
+                var observable = kendo.observable({ foo: { bar: "bar", baz: function(){} } });
+                var json = observable.toJSON();
+                var fields = [];
+
+                for (var field in json.foo) {
+                    fields.push(field);
+                }
+
+                equal(fields.length, 1);
+                equal(fields[0], "bar");
+            });
+
+            test("toJSON is recursive with arrays", function() {
+                var observable = kendo.observable({ foo: [{ bar: "bar" }] });
+                var json = observable.toJSON();
+                var fields = [];
+
+                for (var field in json.foo[0]) {
+                    fields.push(field);
+                }
+
+                equal(fields.length, 1);
+                equal(fields[0], "bar");
+            });
+
+            test("toJSON copies dates", function() {
+                var date = new Date();
+                var observable = kendo.observable({ foo: date } );
+                var json = observable.toJSON();
+                var fields = [];
+
+                for (var field in json) {
+                    fields.push(field);
+                }
+
+                equal(fields.length, 1);
+                equal(json.foo, date);
+            });
+
             test("set uses the nested observable object set method", function() {
                 var observable = kendo.observable({ foo: "bar", baz: { moo: "moo" } }),
                     set  = stub(observable.baz, "set");

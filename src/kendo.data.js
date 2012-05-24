@@ -54,7 +54,19 @@
         },
 
         toJSON: function() {
-            return slice.call(this);
+            var idx, length = this.length, value, json = new Array(length);
+
+            for (idx = 0; idx < length; idx++){
+                value = this[idx];
+
+                if (value instanceof ObservableObject) {
+                    value = value.toJSON();
+                }
+
+                json[idx] = value;
+            }
+
+            return json;
         },
 
         parent: noop,
@@ -233,11 +245,17 @@
         },
 
         toJSON: function() {
-            var result = {}, field;
+            var result = {}, value, field;
 
             for (field in this) {
                 if (this.shouldSerialize(field)) {
-                    result[field] = this[field];
+                    value = this[field];
+
+                    if (value instanceof ObservableObject || value instanceof ObservableArray) {
+                        value = value.toJSON();
+                    }
+
+                    result[field] = value;
                 }
             }
 
@@ -1384,7 +1402,7 @@
             if (data[idx].hasSubgroups) {
                 result = result.concat(flattenGroups(data[idx].items));
             } else {
-                result = result.concat(data[idx].items.toJSON());
+                result = result.concat(data[idx].items.slice());
             }
         }
         return result;

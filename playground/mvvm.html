@@ -55,16 +55,48 @@
         </style>
     </head>
     <body>
-        <span data-bind="text: nested.foo"></span>
-        <script>
-            kendo.bind(document.body, {
-                nested: {
-                    bar: "bar",
-                    foo: function() {
-                        return this.get("bar");
-                    }
-                }
+<div id="view">
+<label>First Name: </label>
+<input type="text" data-bind="value: Data.Primary.FirstName" />
+<br />
+<label>Last Name: </label>
+<input type="text" data-bind="value: Data.Primary.LastName" />
+<br />
+<button data-bind="click: Actions.postToServer">Save</button>
+</div>
+
+<script>
+var viewModel = kendo.observable({
+    Data: {
+        Primary: {
+            FirstName: "Ken",
+            LastName: "Griffey"
+        },
+        SomethingElse: {
+            Color: "Blue",
+            Age: 74
+        }
+    },
+    Actions: {
+        postToServer: function() {
+            $.ajax({
+                type: "POST",
+                url: "http://this/doesnt/matter",
+                success: function(msg) {
+                    alert(msg);
+                },
+                data: viewModel.Data.toJSON()
             });
-        </script>
+        }
+    }
+});
+
+
+
+$(document).ready(function() {
+    kendo.bind($("#view"), viewModel);
+    console.log(viewModel.Data.toJSON());
+});
+</script>
     </body>
 </html>
