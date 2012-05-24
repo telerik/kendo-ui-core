@@ -866,6 +866,7 @@
         editRow: function(row) {
             var that = this,
                 model = that._modelForContainer(row),
+                mode = that._editMode(),
                 container;
 
             that.cancelRow();
@@ -874,10 +875,22 @@
 
                 that._attachModelChange(model);
 
-                if (that._editMode() === "popup") {
+                if (mode === "popup") {
                     that._createPopupEditor(model);
-                } else {
+                } else if (mode === "inline") {
                     that._createInlineEditor(row, model);
+                } else if (mode === "incell") {
+                    $(row).children(DATA_CELL).each(function() {
+                        var cell = $(this);
+                        var column = that.columns[cell.index()];
+
+                        model = that._modelForContainer(cell);
+
+                        if (model && (!model.editable || model.editable(column.field)) && column.field) {
+                            that.editCell(cell);
+                            return false;
+                        }
+                    });
                 }
 
                 container = that._editContainer;
