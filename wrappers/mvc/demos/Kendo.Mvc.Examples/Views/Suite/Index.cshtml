@@ -5,6 +5,7 @@
     <link href="@Url.Content("~/Content/suite.css")" rel="stylesheet">
 </head>
 <body>
+    <a href="@(Url.RouteUrl("Default", new { controller = "" }))">Back to suite list</a>
     <div id="page">
         @foreach (string category in ViewBag.Navigation.Keys)
         {
