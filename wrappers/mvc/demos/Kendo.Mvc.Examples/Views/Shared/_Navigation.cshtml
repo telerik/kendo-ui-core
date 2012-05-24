@@ -1,12 +1,14 @@
-﻿<a href="../">Back</a>
-
-@{
-    var area = ViewContext.RouteData.DataTokens["area"];
+﻿@{
+    var routeData = ViewContext.RouteData;
+    var area = routeData.DataTokens["area"];
+    var suite = routeData.Values["suite"];
+    var controller = routeData.Values["controller"].ToString().Replace("_", "-");
+    var action = routeData.Values["action"].ToString().Replace("_", "-");
+    var currentArea = area == "aspx" ? "ASPX" : "Razor";
+    var currentRoute = currentArea + "Default";
     var alternateArea = area == "aspx" ? "Razor" : "ASPX";
     var alternateRoute = alternateArea + "Default";
 }
-<a href="@(Url.RouteUrl(alternateRoute, new {
-        suite = Url.RequestContext.RouteData.Values["suite"],
-        controller = Url.RequestContext.RouteData.Values["controller"].ToString().Replace("_", "-"),
-        action = Url.RequestContext.RouteData.Values["action"].ToString().Replace("_", "-")
-    }))">@alternateArea version</a>
+
+<a href="@(Url.RouteUrl(currentRoute, new { controller = "", action = "" }))">Back to @suite examples</a>
+<a href="@(Url.RouteUrl(alternateRoute, new { suite = suite, controller = controller, action = action }))">@alternateArea version</a>
