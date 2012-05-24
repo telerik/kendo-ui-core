@@ -83,30 +83,6 @@ namespace Kendo.Mvc.UI
             return this;
         }
 
-        ///// <summary>
-        ///// Define the tooltip text of the up button.
-        ///// </summary>
-        //public TBuilder ButtonTitleUp(string buttonTileUp)
-        //{
-        //    Guard.IsNotNullOrEmpty(buttonTileUp, "buttonTileUp");
-
-        //    Component.ButtonTitleUp = buttonTileUp;
-
-        //    return this as TBuilder;
-        //}
-
-        ///// <summary>
-        ///// Define the tooltip text of the down button.
-        ///// </summary>
-        //public TBuilder ButtonTitleDown(string buttonTileDown)
-        //{
-        //    Guard.IsNotNullOrEmpty(buttonTileDown, "buttonTileDown");
-
-        //    Component.ButtonTitleDown = buttonTileDown;
-
-        //    return this as TBuilder;
-        //}
-
         /// <summary>
         /// Configures the client-side events.
         /// </summary>

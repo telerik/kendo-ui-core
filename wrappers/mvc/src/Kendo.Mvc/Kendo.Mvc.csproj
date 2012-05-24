@@ -881,7 +881,6 @@
     <Compile Include="UI\INavigationItemComponent.cs" />
     <Compile Include="UI\TextBox\Fluent\NumericTextBoxBuilder.cs" />
     <Compile Include="UI\TextBox\NumericTextBox.cs" />
-    <Compile Include="UI\TextBox\NumericTextBoxClientEvents.cs" />
     <Compile Include="UI\TextBox\Fluent\NumericTextBoxClientEventsBuilder.cs" />
     <Compile Include="UI\NavigationHtmlBuilderBase.cs" />
     <Compile Include="UI\NavigationItemContainerExtensions.cs" />

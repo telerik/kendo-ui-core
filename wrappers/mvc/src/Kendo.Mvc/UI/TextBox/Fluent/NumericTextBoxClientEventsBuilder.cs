@@ -1,16 +1,18 @@
 namespace Kendo.Mvc.UI
 {
+    using Kendo.Mvc;
     using Kendo.Mvc.Infrastructure;
     using System;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="TextBoxBase.ClientEvents"/>.
     /// </summary>
     public class NumericTextBoxClientEventsBuilder : IHideObjectMembers
     {
-        private readonly NumericTextBoxClientEvents clientEvents;
+        private readonly IDictionary<string, ClientEvent> clientEvents;
 
-        public NumericTextBoxClientEventsBuilder(NumericTextBoxClientEvents clientEvents)
+        public NumericTextBoxClientEventsBuilder(IDictionary<string, ClientEvent> clientEvents)
         {
             Guard.IsNotNull(clientEvents, "clientEvents");
 
@@ -18,43 +20,14 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
-        /// Defines the inline handler of the OnChange client-side event
-        /// </summary>
-        /// <param name="onChangeCodeBlock">The action defining the inline handler.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;% Html.Kendo().NumericTextBox()
-        ///            .Name("NumericTextBox")
-        ///            .ClientEvents(events => events.OnChange(() =>
-        ///            {
-        ///                 %&gt;
-        ///                 function(e) {
-        ///                     //event handling code
-        ///                 }
-        ///                 &lt;%
-        ///            }))
-        ///            .Render();
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public NumericTextBoxClientEventsBuilder OnChange(Action onChangeCodeBlock)
-        {
-            Guard.IsNotNull(onChangeCodeBlock, "onChangeCodeBlock");
-
-            clientEvents.OnChange.CodeBlock = onChangeCodeBlock;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Defines the inline handler of the OnChange client-side event
+        /// Defines the inline handler of the Change client-side event
         /// </summary>
         /// <param name="onChangeInlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;% Html.Kendo().NumericTextBox()
         ///            .Name("NumericTextBox")
-        ///            .ClientEvents(events => events.OnChange(
+        ///            .ClientEvents(events => events.Change(
         ///                 @&lt;text&gt;
         ///                 function(e) {
         ///                     //event handling code
@@ -65,74 +38,45 @@ namespace Kendo.Mvc.UI
         /// %&gt;
         /// </code>
         /// </example>
-        public NumericTextBoxClientEventsBuilder OnChange(Func<object, object> onChangeInlineCodeBlock)
+        public NumericTextBoxClientEventsBuilder Change(Func<object, object> changeInlineCodeBlock)
         {
-            Guard.IsNotNull(onChangeInlineCodeBlock, "onChangeInlineCodeBlock");
+            Guard.IsNotNull(changeInlineCodeBlock, "changeInlineCodeBlock");
 
-            clientEvents.OnChange.InlineCodeBlock = onChangeInlineCodeBlock;
+            clientEvents["change"] = new ClientEvent { InlineCodeBlock = changeInlineCodeBlock };
 
             return this;
         }
 
         /// <summary>
-        ///  Defines the name of the JavaScript function that will handle the the OnChange client-side event.
+        ///  Defines the name of the JavaScript function that will handle the the Change client-side event.
         /// </summary>
-        /// <param name="onSelectHandlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <param name="changeHandlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().NumericTextBox()
         ///             .Name("NumericTextBox")
-        ///             .ClientEvents(events => events.OnChange("onChange"))
+        ///             .ClientEvents(events => events.Change("change"))
         /// %&gt;
         /// </code>
         /// </example>
-        public NumericTextBoxClientEventsBuilder OnChange(string onChangeHandlerName)
+        public NumericTextBoxClientEventsBuilder Change(string changeHandlerName)
         {
-            Guard.IsNotNullOrEmpty(onChangeHandlerName, "onChangeHandlerName");
+            Guard.IsNotNullOrEmpty(changeHandlerName, "changeHandlerName");
 
-            clientEvents.OnChange.HandlerName = onChangeHandlerName;
+            clientEvents["change"] = new ClientEvent { HandlerName = changeHandlerName };
 
             return this;
         }
 
         /// <summary>
-        /// Defines the inline handler of the OnSpin client-side event
+        /// Defines the inline handler of the Spin client-side event
         /// </summary>
-        /// <param name="onSpinCodeBlock">The action defining the inline handler.</param>
+        /// <param name="spinInlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;% Html.Kendo().NumericTextBox()
         ///            .Name("NumericTextBox")
-        ///            .ClientEvents(events => events.OnSpin(() =>
-        ///            {
-        ///                 %&gt;
-        ///                 function(e) {
-        ///                     //event handling code
-        ///                 }
-        ///                 &lt;%
-        ///            }))
-        ///            .Render();
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public NumericTextBoxClientEventsBuilder OnSpin(Action onSpinCodeBlock)
-        {
-            Guard.IsNotNull(onSpinCodeBlock, "onSpinCodeBlock");
-
-            clientEvents.OnSpin.CodeBlock = onSpinCodeBlock;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Defines the inline handler of the OnSpin client-side event
-        /// </summary>
-        /// <param name="onSpinInlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;% Html.Kendo().NumericTextBox()
-        ///            .Name("NumericTextBox")
-        ///            .ClientEvents(events => events.OnSpin(
+        ///            .ClientEvents(events => events.Spin(
         ///                 @&lt;text&gt;
         ///                 function(e) {
         ///                     //event handling code
@@ -143,32 +87,32 @@ namespace Kendo.Mvc.UI
         /// %&gt;
         /// </code>
         /// </example>
-        public NumericTextBoxClientEventsBuilder OnSpin(Func<object, object> onSpinInlineCodeBlock)
+        public NumericTextBoxClientEventsBuilder Spin(Func<object, object> spinInlineCodeBlock)
         {
-            Guard.IsNotNull(onSpinInlineCodeBlock, "onSpinInlineCodeBlock");
+            Guard.IsNotNull(spinInlineCodeBlock, "spinInlineCodeBlock");
 
-            clientEvents.OnSpin.InlineCodeBlock = onSpinInlineCodeBlock;
+            clientEvents["spin"] = new ClientEvent { InlineCodeBlock = spinInlineCodeBlock };
 
             return this;
         }
 
         /// <summary>
-        ///  Defines the name of the JavaScript function that will handle the the OnSpin client-side event.
+        ///  Defines the name of the JavaScript function that will handle the the Spin client-side event.
         /// </summary>
-        /// <param name="onSpinHandlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <param name="spinHandlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().NumericTextBox()
         ///             .Name("NumericTextBox")
-        ///             .ClientEvents(events => events.OnSpin("OnSpin"))
+        ///             .ClientEvents(events => events.Spin("spin"))
         /// %&gt;
         /// </code>
         /// </example>
-        public NumericTextBoxClientEventsBuilder OnSpin(string onSpinHandlerName)
+        public NumericTextBoxClientEventsBuilder Spin(string spinHandlerName)
         {
-            Guard.IsNotNullOrEmpty(onSpinHandlerName, "onSpinHandlerName");
+            Guard.IsNotNullOrEmpty(spinHandlerName, "spinHandlerName");
 
-            clientEvents.OnSpin.HandlerName = onSpinHandlerName;
+            clientEvents["spin"] = new ClientEvent { HandlerName = spinHandlerName };
 
             return this;
         }
