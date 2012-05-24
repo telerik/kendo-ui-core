@@ -266,17 +266,7 @@ using System.Collections.Generic;
 
             Assert.Equal("Item2", tag.Attribute("value"));
         }
-
-        [Fact]
-        public void HiddenInputTag_does_not_output_name_attribute_for_unnamed_components()
-        {
-            var renderer = new DropDownListHtmlBuilder(new EditorDropDown("FontFace", new List<DropDownItem>() { new DropDownItem { Text = "Arial", Value = "Arial,Verdana,sans-serif" } } ));
-
-            IHtmlNode tag = renderer.HiddenInputTag();
-
-            Assert.False(tag.Attributes().ContainsKey("name"));
-        }
-
+        
         [Fact]
         public void HiddenInputTag_should_output_html_attributes()
         {

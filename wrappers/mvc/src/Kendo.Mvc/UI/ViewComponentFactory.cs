@@ -1015,8 +1015,8 @@ namespace Kendo.Mvc.UI
         {
             Guard.IsNotNull(expression, "expression");
 
-            return DropDownList().Name(GetName(expression))
-                                 .Value(GetValue(expression));
+            return DropDownList().Name(GetName(expression));
+                                 //.Value(GetValue(expression));
         }
 
         /// <summary>

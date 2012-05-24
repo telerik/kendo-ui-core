@@ -7,7 +7,7 @@ namespace Kendo.Mvc.UI
     using System.Collections.Generic;
     using System.Web.Routing;
 
-    public class DropDownList : ViewComponentBase, IDropDown, IDropDownRenderable
+    public class DropDownList : ViewComponentBase
     {
         private bool hasItems = false;
         //private readonly IList<IEffect> defaultEffects = new List<IEffect> { new SlideAnimation() };
@@ -18,7 +18,6 @@ namespace Kendo.Mvc.UI
             UrlGenerator = urlGenerator;
 
             ClientEvents = new Dictionary<string, object>();
-            DataBinding = new DropDownListDataBindingConfiguration();
             DropDownHtmlAttributes = new RouteValueDictionary();
             HiddenInputHtmlAttributes = new RouteValueDictionary();
             
@@ -69,12 +68,6 @@ namespace Kendo.Mvc.UI
         {
             get;
             private set;
-        }
-
-        public IDropDownDataBindingConfiguration DataBinding 
-        { 
-            get; 
-            private set; 
         }
 
         public IDictionary<string, object> DropDownHtmlAttributes
@@ -140,16 +133,6 @@ namespace Kendo.Mvc.UI
 
             objectWriter.Start();
 
-            //if (!defaultEffects.SequenceEqual(Effects.Container))
-            //{
-            //    objectWriter.Serialize("effects", Effects);
-            //}
-
-            //ClientEvents.SerializeTo(objectWriter);
-
-            DataBinding.Ajax.SerializeTo("ajax", objectWriter, this);
-            DataBinding.WebService.SerializeTo("ws", objectWriter, this);
-
             objectWriter.Append("delay", Delay, 500);
             objectWriter.Append("placeholder", this.Placeholder);
             objectWriter.Append("cascadeTo", this.CascadeTo);
@@ -181,11 +164,11 @@ namespace Kendo.Mvc.UI
         protected override void WriteHtml(System.Web.UI.HtmlTextWriter writer)
         {
             hasItems = Items.Any();
-            this.AddPlaceholderItem();
-            if (hasItems)
-            {
-                this.SyncSelectedIndex();
-            }
+            //this.AddPlaceholderItem();
+            //if (hasItems)
+            //{
+            //    this.SyncSelectedIndex();
+            //}
 
             (new DropDownListHtmlBuilder(this)).Build().WriteTo(writer);
 

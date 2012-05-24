@@ -71,30 +71,7 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
-
-        /// <summary>
-        /// Use it to configure Data binding.
-        /// </summary>
-        /// <param name="configurator">Action that configures the data binding options.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().AutoComplete()
-        ///             .Name("AutoComplete")
-        ///             .DataBinding(dataBinding => dataBinding
-        ///                .Ajax().Select("_AjaxLoading", "ComboBox")
-        ///             );
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public AutoCompleteBuilder DataBinding(Action<AutoCompleteDataBindingConfigurationBuilder> configurator)
-        {
-            Guard.IsNotNull(configurator, "configurator");
-
-            configurator(new AutoCompleteDataBindingConfigurationBuilder(Component.DataBinding));
-
-            return this;
-        }
-
+        
         public AutoCompleteBuilder DropDownHtmlAttributes(object attributes)
         {
             return DropDownHtmlAttributes(attributes.ToDictionary());
@@ -159,66 +136,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         //    return this;
         //}
-
-        /// <summary>
-        /// Use it to configure filtering settings.
-        /// </summary>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().ComboBox()
-        ///             .Name("ComboBox")
-        ///             .Filterable(filtering => filtering.Enabled(true)
-        ///                                               .FilterMode(AutoCompleteFilterMode.Contains));
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public AutoCompleteBuilder Filterable(Action<AutoCompleteFilterSettingsBuilder> filtering)
-        {
-            Guard.IsNotNull(filtering, "filtering");
-
-            filtering(new AutoCompleteFilterSettingsBuilder(Component.Filtering));
-
-            return this;
-        }
-
-        /// <summary>
-        /// Use it to enable multiple values.
-        /// </summary>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().AutoComplete()
-        ///             .Name("AutoComplete")
-        ///             .Multiple();
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public AutoCompleteBuilder Multiple()
-        {
-            Component.Multiple.Enabled = true;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Use it to configure autocompleting multiple values.
-        /// </summary>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().AutoComplete()
-        ///             .Name("AutoComplete")
-        ///             .Multiple(multi => multi.Enabled(true)
-        ///                                     .Separator(" "));
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public AutoCompleteBuilder Multiple(Action<AutoCompleteMultipleValuesSettingsBuilder> multi)
-        {
-            Guard.IsNotNull(multi, "multi");
-
-            multi(new AutoCompleteMultipleValuesSettingsBuilder(Component.Multiple));
-
-            return this;
-        }
 
         /// <summary>
         /// Use it to enable highlighting of first matched item.

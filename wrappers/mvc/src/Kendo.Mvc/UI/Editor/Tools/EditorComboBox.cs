@@ -6,7 +6,7 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.UI.Html;
     
 
-    public class EditorComboBox : IEditorListTool, IComboBoxRenderable
+    public class EditorComboBox : IEditorListTool, IViewComponent
     {
         public EditorComboBox(string identifier, IList<DropDownItem> items, ViewContext viewContext)
         {

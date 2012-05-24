@@ -8,7 +8,7 @@ namespace Kendo.Mvc.UI
     using System.Collections.Generic;
 
 
-    public class AutoComplete : ViewComponentBase, IDataBoundDropDown
+    public class AutoComplete : ViewComponentBase
     {
         //private readonly IList<IEffect> defaultEffects = new List<IEffect> { new SlideAnimation() };
 
@@ -18,15 +18,10 @@ namespace Kendo.Mvc.UI
             UrlGenerator = urlGenerator;
 
             ClientEvents = new Dictionary<string, object>();
-            DataBinding = new AutoCompleteDataBindingConfiguration();
             DropDownHtmlAttributes = new RouteValueDictionary();
-            Filtering = new AutoCompleteFilterSettings();
 
             Items = new List<string>();
 
-            Multiple = new AutoCompleteMultipleValuesSettings();
-
-            //defaultEffects.Each(el => Effects.Container.Add(el));
             Enabled = true;
             Encoded = true;
         }
@@ -56,24 +51,6 @@ namespace Kendo.Mvc.UI
         }
         
         public IDictionary<string, object> DropDownHtmlAttributes
-        {
-            get;
-            private set;
-        }
-
-        public IDropDownDataBindingConfiguration DataBinding
-        {
-            get;
-            set;
-        }
-
-        public AutoCompleteFilterSettings Filtering //should be common for AutoComplete and for the ComboBox!!!
-        {
-            get;
-            private set;
-        }
-
-        public AutoCompleteMultipleValuesSettings Multiple
         {
             get;
             private set;
@@ -117,21 +94,7 @@ namespace Kendo.Mvc.UI
 
             objectWriter.Append("autoFill", AutoFill, false);
             objectWriter.Append("highlightFirst", HighlightFirstMatch, false);
-
-            //if (!defaultEffects.SequenceEqual(Effects.Container))
-            //{
-            //    objectWriter.Serialize("effects", Effects);
-            //}
-
-            //ClientEvents.SerializeTo(objectWriter);
-            Multiple.SerializeTo(objectWriter);
-
-            DataBinding.Ajax.SerializeTo<AutoCompleteBindingSettings>("ajax", objectWriter, this);
-            DataBinding.WebService.SerializeTo<AutoCompleteBindingSettings>("ws", objectWriter, this);
-
-            objectWriter.Append("filter", Filtering.FilterMode == AutoCompleteFilterMode.Contains ? 2 : 1); //"contains" : "startsWith");
-            objectWriter.Append("minChars", Filtering.MinimumChars, 1);
-
+            
             if (Items.Any())
             {
                 objectWriter.AppendCollection("data", Items);

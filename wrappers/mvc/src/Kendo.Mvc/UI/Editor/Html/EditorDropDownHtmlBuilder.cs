@@ -16,9 +16,9 @@ namespace Kendo.Mvc.UI.Html
             var li = new HtmlElement("li")
                     .AddClass("t-editor-dropdown");
 
-            var builder = new DropDownListHtmlBuilder(dropDown);
+            //var builder = new DropDownListHtmlBuilder(dropDown);
 
-            IHtmlNode rootTag = builder.Build();
+            IHtmlNode rootTag = null; // builder.Build();
 
             rootTag.AppendTo(li);
             

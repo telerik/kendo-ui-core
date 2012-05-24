@@ -5,7 +5,7 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI.Html;
 
-    public class EditorDropDown : IEditorListTool, IDropDownRenderable
+    public class EditorDropDown : IEditorListTool, IViewComponent
     {
         public EditorDropDown(string identifier, IList<DropDownItem> items)
         {
