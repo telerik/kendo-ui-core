@@ -248,7 +248,6 @@
     <Compile Include="UI\Splitter\SplitterTestHelper.cs" />
     <Compile Include="UI\Splitter\SplitterBuilderTests.cs" />
     <Compile Include="UI\Splitter\SplitterHtmlBuilderTests.cs" />
-    <Compile Include="UI\TimePicker\TimePickerRenderingTests.cs" />
     <Compile Include="UI\TimePicker\TimePickerHtmlBuilderTests.cs" />
     <Compile Include="UI\TimePicker\TimePickerTestHelper.cs" />
     <Compile Include="UI\TimePicker\TimePickerBuilderTests.cs" />
@@ -339,7 +338,6 @@
     <Compile Include="UI\Customer.cs" />
     <Compile Include="UI\DatePicker\DatePickerBuilderTests.cs" />
     <Compile Include="UI\DatePicker\DatePickerHtmlBuilderTests.cs" />
-    <Compile Include="UI\DatePicker\DatePickerRenderingTests.cs" />
     <Compile Include="UI\DatePicker\DatePickerTestHelper.cs" />
     <Compile Include="UI\DatePicker\DatePickerClientEventsBuilderTests.cs" />
     <Compile Include="UI\Grid\GridActionAttributeTests.cs" />

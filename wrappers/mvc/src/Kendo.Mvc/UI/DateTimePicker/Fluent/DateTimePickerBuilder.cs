@@ -156,11 +156,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public DateTimePickerBuilder ClientEvents(Action<DateTimePickerClientEventsBuilder> clientEventsAction)
+        public DateTimePickerBuilder ClientEvents(Action<DatePickerBaseClientEventsBuilder> clientEventsAction)
         {
             Guard.IsNotNull(clientEventsAction, "clientEventsAction");
 
-            clientEventsAction(new DateTimePickerClientEventsBuilder(Component.ClientEvents));
+            clientEventsAction(new DatePickerBaseClientEventsBuilder(Component.ClientEvents));
 
             return this;
         }

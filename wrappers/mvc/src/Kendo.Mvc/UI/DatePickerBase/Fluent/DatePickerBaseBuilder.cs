@@ -129,11 +129,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public TPickerBuilder ClientEvents(Action<DatePickerClientEventsBuilder> clientEventsAction)
+        public TPickerBuilder ClientEvents(Action<DatePickerBaseClientEventsBuilder> clientEventsAction)
         {
             Guard.IsNotNull(clientEventsAction, "clientEventsAction");
 
-            clientEventsAction(new DatePickerClientEventsBuilder(Component.ClientEvents));
+            clientEventsAction(new DatePickerBaseClientEventsBuilder(Component.ClientEvents));
 
             return this as TPickerBuilder;
         }

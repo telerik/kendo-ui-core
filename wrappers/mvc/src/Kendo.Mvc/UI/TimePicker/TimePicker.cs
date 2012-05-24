@@ -1,11 +1,13 @@
 namespace Kendo.Mvc.UI
 {
+    using Kendo.Mvc.Extensions;
+    using Kendo.Mvc.UI.Html;
     using System;
     using System.Collections.Generic;
     using System.Globalization;
+    using System.IO;
     using System.Linq;
     using System.Web.Mvc;
-    using Kendo.Mvc.UI.Html;
 
     public class TimePicker : ViewComponentBase, IInputComponent<DateTime>
     {
@@ -25,6 +27,12 @@ namespace Kendo.Mvc.UI
 
             Dates = new List<DateTime>();
             ParseFormats = new List<string>();
+        }
+
+        public PopupAnimation Animation
+        {
+            get;
+            private set;
         }
 
         public IDictionary<string, ClientEvent> ClientEvents
@@ -81,24 +89,39 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        public override void WriteInitializationScript(System.IO.TextWriter writer)
+        public override void WriteInitializationScript(TextWriter writer)
         {
-            IClientSideObjectWriter objectWriter = ClientSideObjectWriterFactory.Create(Id, "kendoTimePicker", writer);
+            var options = new Dictionary<string, object>();
 
-            objectWriter.Start();
+            var animation = Animation.ToJson();
 
-//TODO: Serialize            ClientEvents.SerializeTo(objectWriter);
+            if (animation.Keys.Any())
+            {
+                options["animation"] = animation["animation"];
+            }
 
-            objectWriter.Append("format", this.Format);
-            objectWriter.AppendCollection("parseFormats", this.ParseFormats);
+            if (ClientEvents.Keys.Any())
+            {
+                options["events"] = ClientEvents;
+            }
 
-            objectWriter.Append("min", this.Min);
-            objectWriter.Append("max", this.Max);
+            options["format"] = Format;
 
-            objectWriter.Append("interval", this.Interval);
-            objectWriter.Append("dates", this.Dates);
-            
-            objectWriter.Complete();
+            if (ParseFormats.Any())
+            {
+                options["parseFormats"] = ParseFormats;
+            }
+
+            options["min"] = Min;
+            options["max"] = Max;
+            options["interval"] = Interval;
+
+            if (Dates.Any())
+            {
+                options["dates"] = Dates;
+            }
+
+            writer.Write(Initializer.Initialize(Id, "TimePicker", options));
 
             base.WriteInitializationScript(writer);
         }

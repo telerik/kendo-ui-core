@@ -3,9 +3,12 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.Resources;
+    using Kendo.Mvc.UI.Html;
     using System;
     using System.Collections.Generic;
     using System.Globalization;
+    using System.IO;
+    using System.Linq;
     using System.Web.Mvc;
 
     public class DateTimePicker : ViewComponentBase, IInputComponent<DateTime>
@@ -24,7 +27,7 @@ namespace Kendo.Mvc.UI
             Max = defaultMaxDate;
 
             Animation = new PopupAnimation();
-            ClientEvents = new DateTimePickerClientEvents();
+            ClientEvents = new Dictionary<string, ClientEvent>();
             MonthTemplate = new MonthTemplate();
 
             Dates = new List<DateTime>();
@@ -41,7 +44,7 @@ namespace Kendo.Mvc.UI
             private set;
         }
 
-        public DateTimePickerClientEvents ClientEvents
+        public Dictionary<string, ClientEvent> ClientEvents
         {
             get;
             private set;
@@ -119,34 +122,51 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        public override void WriteInitializationScript(System.IO.TextWriter writer)
+        public override void WriteInitializationScript(TextWriter writer)
         {
-            IClientSideObjectWriter objectWriter = ClientSideObjectWriterFactory.Create(Id, "kendoDateTimePicker", writer);
+            var options = new Dictionary<string, object>();
 
-            objectWriter.Start();
+            var animation = Animation.ToJson();
 
-            Animation.SerializeTo(objectWriter);
-            ClientEvents.SerializeTo(objectWriter);
-
-            objectWriter.Append("format", this.Format);
-            objectWriter.AppendCollection("parseFormats", this.ParseFormats);
-
-            objectWriter.Append("min", this.Min);
-            objectWriter.Append("max", this.Max);
-            objectWriter.Append("footer", Footer);
-
-            objectWriter.Append("depth", Depth); //use Enum
-            objectWriter.Append("start", Start); //use Enum
-
-            if (MonthTemplate.Content.HasValue() || MonthTemplate.Empty.HasValue())
+            if (animation.Keys.Any())
             {
-                objectWriter.AppendObject("month", MonthTemplate);
+                options["animation"] = animation["animation"];
             }
 
-            objectWriter.Append("interval", this.Interval);
-            objectWriter.Append("dates", this.Dates);
+            if (ClientEvents.Keys.Any())
+            {
+                options["events"] = ClientEvents;
+            }
 
-            objectWriter.Complete();
+            options["format"] = Format;
+            
+            if (ParseFormats.Any())
+            {
+                options["parseFormats"] = ParseFormats;
+            }
+
+            options["min"] = Min;
+            options["max"] = Max;
+            options["footer"] = Footer;
+
+            options["depth"] = Depth;
+            options["start"] = Start;
+
+            var month = MonthTemplate.ToJson();
+
+            if (month.Keys.Any())
+            {
+                options["month"] = month;
+            }
+
+            options["interval"] = Interval;
+            
+            if (Dates.Any())
+            {
+                options["dates"] = Dates;
+            }
+            
+            writer.Write(Initializer.Initialize(Id, "DateTimePicker", options));
 
             base.WriteInitializationScript(writer);
         }

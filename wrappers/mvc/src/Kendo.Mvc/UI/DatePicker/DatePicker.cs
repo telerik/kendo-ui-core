@@ -123,7 +123,12 @@ namespace Kendo.Mvc.UI
             }
 
             options["format"] = Format;
-            options["parseFormats"] = ParseFormats;
+
+            if (ParseFormats.Any())
+            {
+                options["parseFormats"] = ParseFormats;
+            }
+
             options["min"] = Min;
             options["max"] = Max;
             options["footer"] = Footer;

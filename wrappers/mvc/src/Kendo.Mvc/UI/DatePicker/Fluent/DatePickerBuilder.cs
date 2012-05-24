@@ -90,11 +90,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public DatePickerBuilder ClientEvents(Action<DatePickerClientEventsBuilder> clientEventsAction)
+        public DatePickerBuilder ClientEvents(Action<DatePickerBaseClientEventsBuilder> clientEventsAction)
         {
             Guard.IsNotNull(clientEventsAction, "clientEventsAction");
 
-            clientEventsAction(new DatePickerClientEventsBuilder(Component.ClientEvents));
+            clientEventsAction(new DatePickerBaseClientEventsBuilder(Component.ClientEvents));
 
             return this;
         }

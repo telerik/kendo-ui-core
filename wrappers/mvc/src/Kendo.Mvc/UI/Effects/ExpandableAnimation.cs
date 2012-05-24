@@ -1,9 +1,12 @@
 ﻿namespace Kendo.Mvc.UI
 {
-    using Extensions;
+    using Kendo.Mvc;
+    using Kendo.Mvc.Extensions;
+    using System.Collections.Generic;
     using System.Linq;
+    using System.Web.Query.Dynamic;
 
-    public class ExpandableAnimation
+    public class ExpandableAnimation : JsonObject
     {
         public ExpandableAnimation()
         {
@@ -30,19 +33,21 @@
             set;
         }
 
-        public void SerializeTo(IClientSideObjectWriter writer)
+        protected override void Serialize(IDictionary<string, object> json)
         {
-            if (Enabled == false)
+            if (!Enabled)
             {
-                writer.Append("animation", Enabled);
+                json["animation"] = false;
             }
             else
             {
-                var result = string.Join(",", new string[] { Expand.Serialize(), Collapse.Serialize() }.Where(item => item.HasValue()));
+                var options = Expand.ToJson();
 
-                if (result.HasValue())
+                options.Merge(Collapse.ToJson());
+
+                if (options.Keys.Any())
                 {
-                    writer.Append("animation: {{{0}}}".FormatWith(result));
+                    json["animation"] = options;
                 }
             }
         }

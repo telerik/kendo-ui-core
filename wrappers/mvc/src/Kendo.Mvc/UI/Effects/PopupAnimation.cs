@@ -1,9 +1,8 @@
 ﻿namespace Kendo.Mvc.UI
 {
-    using System;
+    using Kendo.Mvc.Extensions;
     using System.Collections.Generic;
     using System.Linq;
-    using Extensions;
 
     public class PopupAnimation : JsonObject
     {
@@ -47,24 +46,6 @@
                 if (options.Keys.Any())
                 {
                     json["animation"] = options;
-                }
-            }
-        }
-
-        //obsolete
-        public void SerializeTo(IClientSideObjectWriter writer)
-        {
-            if (Enabled == false)
-            {
-                writer.Append("animation", Enabled);
-            }
-            else
-            {
-                var result = string.Join(",", new string[] { Open.Serialize(), Close.Serialize() }.Where(item => item.HasValue()));
-
-                if (result.HasValue())
-                {
-                    writer.Append("animation: {{{0}}}".FormatWith(result));
                 }
             }
         }

@@ -20,6 +20,22 @@ namespace Kendo.Mvc.UI.Fluent
         {
         }
 
+        public TimePickerBuilder Animation(bool enable)
+        {
+            Component.Animation.Enabled = enable;
+
+            return this;
+        }
+
+        public TimePickerBuilder Animation(Action<PopupAnimationBuilder> animationAction)
+        {
+            Guard.IsNotNull(animationAction, "animationAction");
+
+            animationAction(new PopupAnimationBuilder(Component.Animation));
+
+            return this;
+        }
+
         /// <summary>
         /// Sets the date format, which will be used to parse and format the machine date.
         /// </summary>
@@ -170,11 +186,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public TimePickerBuilder ClientEvents(Action<DatePickerClientEventsBuilder> clientEventsAction)
+        public TimePickerBuilder ClientEvents(Action<DatePickerBaseClientEventsBuilder> clientEventsAction)
         {
             Guard.IsNotNull(clientEventsAction, "clientEventsAction");
 
-            clientEventsAction(new DatePickerClientEventsBuilder(Component.ClientEvents));
+            clientEventsAction(new DatePickerBaseClientEventsBuilder(Component.ClientEvents));
 
             return this;
         }
