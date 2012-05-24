@@ -2,11 +2,10 @@
 {
     using Kendo.Mvc.Examples.Models;
     using Kendo.Mvc.Extensions;
-    using Kendo.Mvc.UI;
-    using System.Data;
+    using Kendo.Mvc.Infrastructure;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
-    using System.Web.Query.Dynamic;
 
     public partial class ComboBoxController : Controller
     {
@@ -15,24 +14,21 @@
             return View();
         }
 
-        public JsonResult GetListItems([DataSourceRequest] DataSourceRequest request)
+        public JsonResult GetListItems()
         {
             var products = new NorthwindDataContext().Products.AsQueryable();
+            var value = this.ValueProvider.GetValue("filter");
 
-            if (request.Filters.Any())
+            if (value != null)
             {
-                var filter = request.Filters[0] as FilterDescriptor;
-
-                var result = products.Where(p => p.ProductName.StartsWith(filter.Value.ToString()))
-                                     .Select(p => new { 
-                                         ProductID = p.ProductID,
-                                         ProductName = p.ProductName 
-                                     });
-
-                return Json(result, JsonRequestBehavior.AllowGet);
+                IList<IFilterDescriptor> filters = FilterDescriptorFactory.Create((string)value.ConvertTo(typeof(string)));
+                if (filters.Any())
+                {
+                    products = products.Where(filters).Cast<Product>();
+                }
             }
 
-            return Json(products, JsonRequestBehavior.AllowGet);
+            return Json(products);
         }
     }
 }

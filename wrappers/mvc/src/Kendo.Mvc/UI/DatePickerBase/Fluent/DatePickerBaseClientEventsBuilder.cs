@@ -9,9 +9,9 @@ namespace Kendo.Mvc.UI.Fluent
     /// </summary>
     public class DatePickerBaseClientEventsBuilder : IHideObjectMembers
     {
-        private readonly IDictionary<string, ClientEvent> clientEvents;
+        private readonly IDictionary<string, object> clientEvents;
 
-        public DatePickerBaseClientEventsBuilder(IDictionary<string, ClientEvent> clientEvents)
+        public DatePickerBaseClientEventsBuilder(IDictionary<string, object> clientEvents)
         {
             this.clientEvents = clientEvents;
         }
@@ -54,7 +54,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public DatePickerBaseClientEventsBuilder OnChange(string changeHandlerName)
+        public DatePickerBaseClientEventsBuilder Change(string changeHandlerName)
         {
             clientEvents["change"] = new ClientEvent { HandlerName = changeHandlerName };
 
@@ -81,7 +81,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public DatePickerBaseClientEventsBuilder OnOpen(Func<object, object> openInlineCodeBlock)
+        public DatePickerBaseClientEventsBuilder Open(Func<object, object> openInlineCodeBlock)
         {
             clientEvents["open"] = new ClientEvent { InlineCodeBlock = openInlineCodeBlock };
 
@@ -100,7 +100,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public DatePickerBaseClientEventsBuilder OnOpen(string openHandlerName)
+        public DatePickerBaseClientEventsBuilder Open(string openHandlerName)
         {
             clientEvents["open"] = new ClientEvent { HandlerName = openHandlerName };
 

@@ -8,7 +8,7 @@ namespace Kendo.Mvc.UI
 
         Effects Effects { get; set; }
 
-        IDictionary<string, ClientEvent> ClientEvents { get; }
+        IDictionary<string, object> ClientEvents { get; }
 
         bool OpenOnFocus { get; set; }
 

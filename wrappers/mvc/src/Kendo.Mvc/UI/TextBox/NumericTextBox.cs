@@ -17,7 +17,7 @@ namespace Kendo.Mvc.UI
         public NumericTextBox(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory, ViewDataDictionary viewData)
             : base(viewContext, clientSideObjectWriterFactory, viewData)
         {
-            ClientEvents = new Dictionary<string, ClientEvent>();
+            ClientEvents = new Dictionary<string, object>();
 
             Enabled = true;
         }
@@ -82,7 +82,7 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        public IDictionary<string, ClientEvent> ClientEvents
+        public IDictionary<string, object> ClientEvents
         {
             get;
             private set;
@@ -90,13 +90,8 @@ namespace Kendo.Mvc.UI
 
         public override void WriteInitializationScript(TextWriter writer)
         {
-            var options = new Dictionary<string, object>();
-
-            if (ClientEvents.Keys.Any())
-            {
-                options["events"] = ClientEvents;
-            }
-
+            var options = new Dictionary<string, object>(ClientEvents);
+            
             options["format"] = this.Format;
             options["culture"] = this.Culture;
             options["placeholder"] = this.Placeholder;

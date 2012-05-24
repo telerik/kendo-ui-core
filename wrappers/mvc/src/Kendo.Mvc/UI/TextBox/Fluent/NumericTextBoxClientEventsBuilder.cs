@@ -10,9 +10,9 @@ namespace Kendo.Mvc.UI
     /// </summary>
     public class NumericTextBoxClientEventsBuilder : IHideObjectMembers
     {
-        private readonly IDictionary<string, ClientEvent> clientEvents;
+        private readonly IDictionary<string, object> clientEvents;
 
-        public NumericTextBoxClientEventsBuilder(IDictionary<string, ClientEvent> clientEvents)
+        public NumericTextBoxClientEventsBuilder(IDictionary<string, object> clientEvents)
         {
             Guard.IsNotNull(clientEvents, "clientEvents");
 

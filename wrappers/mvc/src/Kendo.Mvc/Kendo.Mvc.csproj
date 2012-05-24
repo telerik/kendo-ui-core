@@ -371,12 +371,11 @@
     <Compile Include="UI\DropDown\DropDownItem.cs" />
     <Compile Include="UI\DropDownList\DropDownList.cs" />
     <Compile Include="UI\DropDown\DropDownBindingSettingsExtensions.cs" />
-    <Compile Include="UI\DropDown\DropDownClientEvents.cs" />
     <Compile Include="UI\DropDownList\DropDownListDataBindingConfiguration.cs" />
     <Compile Include="UI\DropDownList\DropDownListHtmlBuilder.cs" />
     <Compile Include="UI\DropDownList\Fluent\DropDownListBuilder.cs" />
     <Compile Include="UI\DropDown\Fluent\DropDownBindingSettingsBuilder.cs" />
-    <Compile Include="UI\DropDown\Fluent\DropDownClientEventsBuilder.cs" />
+    <Compile Include="UI\DropDown\Fluent\DropDownBaseClientEventsBuilder.cs" />
     <Compile Include="UI\DropDownList\Fluent\DropDownListDataBindingConfigurationBuilder.cs" />
     <Compile Include="UI\DropDown\Fluent\DropDownItemBuilder.cs" />
     <Compile Include="UI\DropDown\Fluent\DropDownBuilderBase.cs" />

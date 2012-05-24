@@ -17,7 +17,7 @@ namespace Kendo.Mvc.UI
         {
             UrlGenerator = urlGenerator;
 
-            ClientEvents = new DropDownClientEvents();
+            ClientEvents = new Dictionary<string, object>();
             DataBinding = new AutoCompleteDataBindingConfiguration();
             DropDownHtmlAttributes = new RouteValueDictionary();
             Filtering = new AutoCompleteFilterSettings();
@@ -49,7 +49,7 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        public DropDownClientEvents ClientEvents
+        public IDictionary<string, object> ClientEvents
         {
             get;
             private set;
@@ -123,7 +123,7 @@ namespace Kendo.Mvc.UI
             //    objectWriter.Serialize("effects", Effects);
             //}
 
-            ClientEvents.SerializeTo(objectWriter);
+            //ClientEvents.SerializeTo(objectWriter);
             Multiple.SerializeTo(objectWriter);
 
             DataBinding.Ajax.SerializeTo<AutoCompleteBindingSettings>("ajax", objectWriter, this);

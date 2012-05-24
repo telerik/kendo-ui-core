@@ -27,7 +27,7 @@ namespace Kendo.Mvc.UI
             Max = defaultMaxDate;
 
             Animation = new PopupAnimation();
-            ClientEvents = new Dictionary<string, ClientEvent>();
+            ClientEvents = new Dictionary<string, object>();
             MonthTemplate = new MonthTemplate();
 
             Value = null;
@@ -40,7 +40,7 @@ namespace Kendo.Mvc.UI
             private set;
         }
 
-        public IDictionary<string, ClientEvent> ClientEvents
+        public IDictionary<string, object> ClientEvents
         {
             get;
             private set;
@@ -108,18 +108,13 @@ namespace Kendo.Mvc.UI
         
         public override void WriteInitializationScript(TextWriter writer)
         {
-            var options = new Dictionary<string, object>();
+            var options = new Dictionary<string, object>(ClientEvents);
 
             var animation = Animation.ToJson();
 
             if (animation.Keys.Any())
             {
                 options["animation"] = animation["animation"];
-            }
-
-            if (ClientEvents.Keys.Any())
-            {
-                options["events"] = ClientEvents;
             }
 
             options["format"] = Format;

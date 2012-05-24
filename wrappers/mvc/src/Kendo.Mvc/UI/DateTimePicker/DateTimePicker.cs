@@ -27,7 +27,7 @@ namespace Kendo.Mvc.UI
             Max = defaultMaxDate;
 
             Animation = new PopupAnimation();
-            ClientEvents = new Dictionary<string, ClientEvent>();
+            ClientEvents = new Dictionary<string, object>();
             MonthTemplate = new MonthTemplate();
 
             Dates = new List<DateTime>();
@@ -44,7 +44,7 @@ namespace Kendo.Mvc.UI
             private set;
         }
 
-        public Dictionary<string, ClientEvent> ClientEvents
+        public Dictionary<string, object> ClientEvents
         {
             get;
             private set;

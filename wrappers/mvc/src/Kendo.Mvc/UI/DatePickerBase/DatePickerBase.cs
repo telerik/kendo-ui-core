@@ -15,10 +15,10 @@ namespace Kendo.Mvc.UI
             Enabled = true;
             OpenOnFocus = false;
 
-            ClientEvents = new Dictionary<string, ClientEvent>();
+            ClientEvents = new Dictionary<string, object>();
         }
 
-        public IDictionary<string, ClientEvent> ClientEvents
+        public IDictionary<string, object> ClientEvents
         {
             get;
             private set;
