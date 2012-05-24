@@ -1110,7 +1110,7 @@
 
                     container = $('<div class="k-toolbar k-grid-toolbar" />')
                         .html(template({}))
-                        .prependTo(wrapper)
+                        .prependTo(wrapper);
                 }
 
                 container.delegate(".k-grid-add", CLICK, function(e) { e.preventDefault(); that.addRow(); })
