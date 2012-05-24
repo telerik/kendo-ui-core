@@ -1,3 +1,9 @@
+<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/Web.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 <div class="configuration k-widget k-header" style="width: 200px;">
     <span class="configHead">Slider API Functions</span>
     <ul class="options">
@@ -32,12 +38,14 @@
 </div>
 
 <div id="wrapper" class="climateCtrl">
-    @(Html.Kendo().Slider<int>()
-          .Name("slider")
-          .HtmlAttributes(new { @class = "temperature" }))
-    @(Html.Kendo().RangeSlider<int>()
-          .Name("rangeslider")
-          .HtmlAttributes(new { @class = "humidity" }))
+    <%= Html.Kendo().Slider<int>()
+            .Name("slider")
+            .HtmlAttributes(new { @class = "temperature" })
+    %>
+    <%= Html.Kendo().RangeSlider<int>()
+            .Name("rangeslider")
+            .HtmlAttributes(new { @class = "humidity" })
+    %>
 </div>
 <script>
     $(document).ready(function () {
@@ -128,10 +136,11 @@
         height: 167px;
         margin: 20px 20px 20px 40px;
         padding: 102px 0 0 156px;
-        background: url(@Url.Content("~/Content/web/slider/climateController.png")) transparent no-repeat 0 0;
+        background: url(<%= Url.Content("~/Content/web/slider/climateController.png") %>) transparent no-repeat 0 0;
     }
     .humidity {
         margin: 67px 0 0 15px;
         width: 170px;
     }
 </style>
+</asp:Content>
