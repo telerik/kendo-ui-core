@@ -48,7 +48,7 @@ namespace Kendo.Mvc.UI.Tests
 
             authorization.Setup(a => a.IsAccessibleToUser(viewContext.RequestContext, It.IsAny<INavigatable>())).Returns(true);
 
-            DropDownList dropDownList = new DropDownList(viewContext, clientSideObjectWriterFactory.Object, urlGenerator); // authorization.Object
+            DropDownList dropDownList = new DropDownList(viewContext, null, new ViewDataDictionary(), urlGenerator); // authorization.Object
 
             return dropDownList;
         }

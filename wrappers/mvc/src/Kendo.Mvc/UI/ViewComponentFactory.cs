@@ -420,7 +420,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual DropDownListBuilder DropDownList()
         {
-            return new DropDownListBuilder(new DropDownList(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>()));
+            return new DropDownListBuilder(new DropDownList(ViewContext, Initializer, ViewData, DI.Current.Resolve<IUrlGenerator>()));
         }
 
         /// <summary>
