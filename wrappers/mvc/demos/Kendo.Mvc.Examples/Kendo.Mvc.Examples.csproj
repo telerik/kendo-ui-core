@@ -80,6 +80,7 @@
     <Compile Include="Controllers\ComboBox\IndexController.cs" />
     <Compile Include="Controllers\Linear_Gauge\IndexController.cs" />
     <Compile Include="Controllers\Linear_Gauge\ScaleOptoinsController.cs" />
+    <Compile Include="Controllers\Grid\AjaxEditingController.cs" />
     <Compile Include="Controllers\DateTimePicker\IndexController.cs" />
     <Compile Include="Controllers\Grid\AjaxBindingController.cs" />
     <Compile Include="Controllers\Grid\ColumnReorderingController.cs" />
@@ -299,6 +300,8 @@
     <Content Include="Areas\aspx\Views\web\slider\index.aspx" />
     <Content Include="Areas\razor\Views\web\splitter\api.cshtml" />
     <Content Include="Areas\razor\Views\dataviz\area_chart\index.cshtml" />
+    <Content Include="Areas\razor\Views\web\grid\ajaxediting.cshtml" />
+    <Content Include="Areas\razor\Views\web\grid\ajaxediting.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>

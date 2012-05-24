@@ -464,7 +464,6 @@
     <Compile Include="UI\Grid\Fluent\GridKeyboardNavigationSettingsBuilder.cs" />
     <Compile Include="UI\Grid\GridActionResultAdapterFactory.cs" />
     <Compile Include="UI\Grid\AggregateDescriptor.cs" />
-    <Compile Include="UI\Grid\GridBeginEditEvent.cs" />
     <Compile Include="UI\Grid\Fluent\GridToolBarCommandBuilder.cs" />
     <Compile Include="UI\Grid\GridAggregateResult.cs" />
     <Compile Include="UI\DataSource\Fluent\DataSourceAggregatesFactory.cs" />

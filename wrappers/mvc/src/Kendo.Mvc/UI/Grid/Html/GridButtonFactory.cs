@@ -15,43 +15,45 @@ namespace Kendo.Mvc.UI.Html
 
 		private string DetermineCssClass(GridButtonType buttonType)
 		{
-			string buttonTypeCssClass = "";
+			string buttonTypeCssClass = UIPrimitives.ButtonIconText;
 			
-            switch (buttonType)
-			{
-				case GridButtonType.Image:
-					{
-						buttonTypeCssClass = UIPrimitives.ButtonIcon;
-					}
-					break;
-				case GridButtonType.ImageAndText:
-					{
-						buttonTypeCssClass = UIPrimitives.ButtonIconText;
-					}
-					break;
-				case GridButtonType.BareImage:
-					{
-						buttonTypeCssClass = string.Format("{0} {1}", UIPrimitives.ButtonIcon, UIPrimitives.ButtonBare);
-					}
-					break;
-				default:
-					return UIPrimitives.Button;
-			}
+            //TODO: Implement command button types
+            //switch (buttonType)
+            //{
+            //    case GridButtonType.Image:
+            //        {
+            //            buttonTypeCssClass = UIPrimitives.ButtonIcon;
+            //        }
+            //        break;
+            //    case GridButtonType.ImageAndText:
+            //        {
+            //            buttonTypeCssClass = UIPrimitives.ButtonIconText;
+            //        }
+            //        break;
+            //    case GridButtonType.BareImage:
+            //        {
+            //            buttonTypeCssClass = string.Format("{0} {1}", UIPrimitives.ButtonIcon, UIPrimitives.ButtonBare);
+            //        }
+            //        break;
+            //    default:
+            //        return UIPrimitives.Button;
+            //}
 			
             return string.Format("{0} {1}", UIPrimitives.Button, buttonTypeCssClass);
 		}
 
         private void Decorate(IGridButtonBuilder button, GridButtonType type)
         {
-			if (type == GridButtonType.Image || type == GridButtonType.BareImage || type == GridButtonType.ImageAndText)
-            {
+            //TODO: Implement command button types
+            //if (type == GridButtonType.Image || type == GridButtonType.BareImage || type == GridButtonType.ImageAndText)
+            //{
                 button.Decorators.Add(new GridButtonImageDecorator(button));
-            }
+            //}
 
-			if (type != GridButtonType.Image && type != GridButtonType.BareImage)
-            {
+			//if (type != GridButtonType.Image && type != GridButtonType.BareImage)
+            //{
                 button.Decorators.Add(new GridButtonTextDecorator(button));
-            }
+            //}
         }
     }
 }

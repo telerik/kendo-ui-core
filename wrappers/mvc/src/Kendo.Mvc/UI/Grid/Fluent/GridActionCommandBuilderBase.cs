@@ -24,6 +24,8 @@ namespace Kendo.Mvc.UI.Fluent
             Command = command;
         }
 
+        //TODO: Implement command button types
+        /*
         /// <summary>
         /// Sets the button type.
         /// </summary>
@@ -37,7 +39,7 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this as TBuilder;
         }
-
+        */
         /// <summary>
         /// Sets the text displayed by the command. If not set a default value is used.
         /// </summary>
@@ -49,50 +51,50 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this as TBuilder;
         }
-
-        /// <summary>
-        /// Sets the HTML attributes.
-        /// </summary>
-        /// <param name="attributes">The HTML attributes.</param>
-        /// <returns></returns>
-        public TBuilder HtmlAttributes(object attributes)
-        {
-            return HtmlAttributes(attributes.ToDictionary());
-        }        
+        //TODO: Implement command button html attributes
+        ///// <summary>
+        ///// Sets the HTML attributes.
+        ///// </summary>
+        ///// <param name="attributes">The HTML attributes.</param>
+        ///// <returns></returns>
+        //public TBuilder HtmlAttributes(object attributes)
+        //{
+        //    return HtmlAttributes(attributes.ToDictionary());
+        //}        
         
-        /// <summary>
-        /// Sets the HTML attributes.
-        /// </summary>
-        /// <param name="attributes">The HTML attributes.</param>
-        /// <returns></returns>
-        public TBuilder HtmlAttributes(IDictionary<string, object> attributes)
-        {
-            Command.HtmlAttributes.Merge(attributes);
+        ///// <summary>
+        ///// Sets the HTML attributes.
+        ///// </summary>
+        ///// <param name="attributes">The HTML attributes.</param>
+        ///// <returns></returns>
+        //public TBuilder HtmlAttributes(IDictionary<string, object> attributes)
+        //{
+        //    Command.HtmlAttributes.Merge(attributes);
             
-            return this as TBuilder;
-        }
+        //    return this as TBuilder;
+        //}
 
-        /// <summary>
-        /// Sets the image HTML attributes.
-        /// </summary>
-        /// <param name="attributes">The Image HTML attributes.</param>
-        /// <returns></returns>
-        public TBuilder ImageHtmlAttributes(object attributes)
-        {
-            return ImageHtmlAttributes(attributes.ToDictionary());
-        }        
+        ///// <summary>
+        ///// Sets the image HTML attributes.
+        ///// </summary>
+        ///// <param name="attributes">The Image HTML attributes.</param>
+        ///// <returns></returns>
+        //public TBuilder ImageHtmlAttributes(object attributes)
+        //{
+        //    return ImageHtmlAttributes(attributes.ToDictionary());
+        //}        
         
-        /// <summary>
-        /// Sets the image HTML attributes.
-        /// </summary>
-        /// <param name="attributes">The Image HTML attributes.</param>
-        /// <returns></returns>
-        public TBuilder ImageHtmlAttributes(IDictionary<string, object> attributes)
-        {
-            Command.ImageHtmlAttributes.Merge(attributes);
+        ///// <summary>
+        ///// Sets the image HTML attributes.
+        ///// </summary>
+        ///// <param name="attributes">The Image HTML attributes.</param>
+        ///// <returns></returns>
+        //public TBuilder ImageHtmlAttributes(IDictionary<string, object> attributes)
+        //{
+        //    Command.ImageHtmlAttributes.Merge(attributes);
             
-            return this as TBuilder;
-        }
+        //    return this as TBuilder;
+        //}
 
         protected TCommand Command
         {

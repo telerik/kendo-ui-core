@@ -9,8 +9,9 @@ namespace Kendo.Mvc.UI
         {
             var button = CreateButton<GridLinkButtonBuilder>(Text, CssClass());
 
-            button.Url = delegate { return urlBuilder.Url(this); };
-
+            //TODO: Implement custom command routing
+            //button.Url = delegate { return urlBuilder.Url(this); };
+            button.Url = delegate { return ""; };
             return new[] { button };
         }
     }
