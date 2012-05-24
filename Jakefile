@@ -365,7 +365,7 @@ namespace("mvc", function() {
                 dst: suiteStylesDest
             }, {
                 src: path.join(DEMOS_PATH, "content", "shared", "styles"),
-                dst: path.join(stylesDest, "shared")
+                dst: stylesDest
             }
         ];
 
