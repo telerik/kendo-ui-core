@@ -516,10 +516,10 @@
 
         for (var name in proto.fields) {
             var field = proto.fields[name],
-            type = field.type || "default",
-            value = null;
+                type = field.type || "default",
+                value = null;
 
-            name = field.field || name;
+            name = typeof (field.field) === STRING ? field.field : name;
 
             if (!field.nullable) {
                 value = proto.defaults[name] = field.defaultValue !== undefined ? field.defaultValue : defaultValues[type.toLowerCase()];
