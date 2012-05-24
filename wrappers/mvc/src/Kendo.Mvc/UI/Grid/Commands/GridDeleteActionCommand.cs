@@ -7,7 +7,7 @@ namespace Kendo.Mvc.UI
     {
         public override string Name
         {
-            get { return "delete"; }
+            get { return "destroy"; }
         }
 
         public override IEnumerable<IGridButtonBuilder> CreateDisplayButtons(IGridLocalization localization, IGridUrlBuilder urlBuilder, IGridHtmlHelper htmlHelper)

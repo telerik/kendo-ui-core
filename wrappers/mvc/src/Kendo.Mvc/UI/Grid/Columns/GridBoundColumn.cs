@@ -251,7 +251,8 @@ namespace Kendo.Mvc.UI
 
             if (!ReadOnly && Grid.Editing.Enabled && Grid.IsClientBinding)
             {
-                json["editor"] = editorHtml;
+                //TODO: Implement custom server editing
+               // json["editor"] = editorHtml;
             }
 
             if (ClientGroupHeaderTemplate.HasValue())

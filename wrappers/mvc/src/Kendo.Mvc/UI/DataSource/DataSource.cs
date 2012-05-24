@@ -99,6 +99,9 @@ namespace Kendo.Mvc.UI
             }            
 
             json["schema"] = Schema.ToJson();
+
+            //TODO: add option for batch
+            json["batch"] = true;
         }
 
         public bool IsClientOperationMode
