@@ -11,9 +11,8 @@ namespace Kendo.Mvc.UI
     /// Represents a column in the <see cref="Grid{T}"/> component
     /// </summary>
     /// <typeparam name="T">The type of the data item</typeparam>
-    public abstract class GridColumnBase<T> : IGridColumn where T : class
+    public abstract class GridColumnBase<T> : JsonObject, IGridColumn where T : class
     {
-
         public string Format
         {
             get
@@ -79,6 +78,39 @@ namespace Kendo.Mvc.UI
         {
             get;
             set;
+        }
+
+        protected override void Serialize(IDictionary<string, object> json)
+        {
+            if (Title.HasValue())
+            {
+                json["title"] = Title;
+            }
+
+            //TODO: implement attributes
+            //.Add("attr", column.HtmlAttributes.ToAttributeString(), () => column.HtmlAttributes.Any())
+
+            //TODO: Implement hidden columns
+            //.Add("hidden", column.Hidden, false)
+            //.Add("width", column.Width, () => /*column.Hidden &&*/ !string.IsNullOrEmpty(column.Width));
+
+            //TODO: Implement HeaderContextMenu
+            // .Add("includeInContextMenu", column.IncludeInContextMenu, () => !column.IncludeInContextMenu)
+
+            if (Width.HasValue())
+            {
+                json["width"] = Width;
+            }
+
+            if (ClientTemplate.HasValue())                  
+            {
+                json["template"] = ClientTemplate;
+            }
+            
+            if (ClientFooterTemplate.HasValue())
+            {
+                json["footerTemplate"] = ClientFooterTemplate;
+            }
         }
 
         //TODO: Implement Header Template
@@ -268,11 +300,6 @@ namespace Kendo.Mvc.UI
             }
         }
         */
-        public virtual IGridColumnSerializer CreateSerializer()
-        {
-            return new GridColumnSerializer(this);
-        }
-
         IGrid IGridColumn.Grid
         {
             get

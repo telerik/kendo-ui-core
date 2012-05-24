@@ -673,7 +673,7 @@ namespace Kendo.Mvc.UI
 
             var autoBind = DataSource.Type == DataSourceType.Ajax && DataSource.Data == null;
 
-            var columns = VisibleColumns.Select(c => c.CreateSerializer().Serialize());
+            var columns = VisibleColumns.Select(c => c.ToJson());
 
             if (columns.Any())
             {

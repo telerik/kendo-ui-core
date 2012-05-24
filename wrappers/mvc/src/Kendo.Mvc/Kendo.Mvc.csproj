@@ -505,7 +505,6 @@
     <Compile Include="UI\Grid\Html\IGridPagerPageSizeSection.cs" />
     <Compile Include="UI\Grid\Html\IGridPagerPagingSectionsBuilder.cs" />
     <Compile Include="UI\Grid\IGridActionResultFactory.cs" />
-    <Compile Include="UI\Grid\Serialization\GridForeignKeyColumnSerializer.cs" />
     <Compile Include="UI\Grid\Settings\GridColumnContextMenuSettings.cs" />
     <Compile Include="UI\Grid\Settings\GridKeyboardNavigationSettings.cs" />
     <Compile Include="UI\Grid\ToolBar\GridToolBarPosition.cs" />
@@ -668,12 +667,8 @@
     <Compile Include="UI\IHtmlBuilder.cs" />
     <Compile Include="UI\Grid\IGrid.cs" />
     <Compile Include="UI\Grid\IGridDetailView.cs" />
-    <Compile Include="UI\Grid\Serialization\GridBoundColumnSerializer.cs" />
-    <Compile Include="UI\Grid\Serialization\GridColumnSerializer.cs" />
     <Compile Include="UI\Grid\GridLocalization.cs" />
     <Compile Include="UI\Grid\IGridDataKey.cs" />
-    <Compile Include="UI\Grid\Serialization\GridActionColumnSerializer.cs" />
-    <Compile Include="UI\Grid\Serialization\IGridColumnSerializer.cs" />
     <Compile Include="UI\Grid\Settings\GridResizingSettings.cs" />
     <Compile Include="UI\Grid\Commands\GridToolBarCustomCommand.cs" />
     <Compile Include="UI\Grid\Fluent\GridToolBarCustomCommandBuilder.cs" />

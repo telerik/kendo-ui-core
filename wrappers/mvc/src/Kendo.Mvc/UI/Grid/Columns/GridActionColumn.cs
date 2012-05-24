@@ -20,11 +20,23 @@ namespace Kendo.Mvc.UI
             private set;
         }
 
-        public override IGridColumnSerializer CreateSerializer()
+        protected override void Serialize(IDictionary<string, object> json)
         {
-            return new GridActionColumnSerializer(this);
-        }
+            base.Serialize(json);
+
+            var commands = new List<IDictionary<string,object>>();
+            
+            Commands.Each(command =>
+            {
+                commands.Add(command.Serialize(Grid.UrlBuilder));
+            });
         
+            if (commands.Any())
+            {
+                json["commands"] = commands;
+            }
+        }
+
         protected override IGridDataCellBuilder CreateDisplayBuilderCore(IGridHtmlHelper htmlHelper)
         {
             var urlBuilder = Grid.UrlBuilder;

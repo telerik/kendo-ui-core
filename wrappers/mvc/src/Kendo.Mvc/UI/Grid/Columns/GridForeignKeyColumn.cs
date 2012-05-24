@@ -24,9 +24,17 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        public override IGridColumnSerializer CreateSerializer()
+        protected override void Serialize(IDictionary<string, object> json)
         {
-            return new GridForeignKeyColumnSerializer(this);
+            base.Serialize(json);
+
+            //TODO: foreign key column implementation
+            /*
+            if (Grid.IsClientBinding || (!Grid.IsClientBinding && Grid.Filtering.Enabled))
+            {
+                json["data"] = Data.Select(i => new { Text = i.Text, Value = i.Value });
+            }            
+            */
         }
 
         protected override IGridDataCellBuilder CreateEditBuilderCore(IGridHtmlHelper htmlHelper)
