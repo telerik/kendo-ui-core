@@ -82,8 +82,8 @@
          * @extends kendo.mobile.ui.Widget
          * @param {DomElement} element DOM element.
          * @param {Object} options Configuration options.
-         * @option {Number} [width] <300> The width of the ModalView container in pixels.
-         * @option {Number} [height] <300> The height of the ModalView container in pixels.
+         * @option {Number} [width] The width of the ModalView container in pixels. If not set, the element style is used.
+         * @option {Number} [height] The height of the ModalView container in pixels. If not set, the element style is used.
          * @option {Boolean} [modal] <true> When set to false, the ModalView will close when the user taps outside of its element.
          */
         init: function(element, options) {
@@ -92,14 +92,18 @@
             Widget.fn.init.call(that, element, options);
 
             element = that.element;
+            options = that.options;
 
             element.addClass("km-modalview").wrap(WRAP);
 
-
-            that.wrapper = element.parent().css({width: that.options.width, height: that.options.height});
+            that.wrapper = element.parent().css({
+                width: options.width || element[0].style.width || 300,
+                height: options.height || element[0].style.height || 300
+            });
+            element.css({ width: "", height: "" });
 
             that.shim = new Shim(that.wrapper, {
-                modal: that.options.modal,
+                modal: options.modal,
                 position: "center center",
                 align: "center center",
                 effect: "fade:in"
@@ -136,9 +140,7 @@
 
         options: {
             name: "ModalView",
-            modal: true,
-            width: 300,
-            height: 300
+            modal: true
         },
 
         /**

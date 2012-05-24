@@ -3,9 +3,6 @@
     var kendo = window.kendo,
         ui = kendo.mobile.ui,
         Popup = kendo.ui.Popup,
-        VISIBILITY = "visibility",
-        HIDDEN = "hidden",
-        VISIBLE = "visible",
         SHIM = '<div class="km-shim"/>',
         Widget = ui.Widget;
 
@@ -21,10 +18,10 @@
                 align = options.align || (ios ?  "bottom center" : "center center"),
                 position = options.position || (ios ? "bottom center" : "center center"),
                 effect = options.effect || (ios ? "slideIn:up" : "fade:in"),
-                shim = $(SHIM).hide();
+                shim = $(SHIM).hide(), view;
 
             Widget.fn.init.call(that, element, options);
-            view = that.view(),
+            view = that.view();
 
             that.shim = shim;
             that.element = element;
@@ -71,9 +68,6 @@
 
         show: function() {
             this.popup.open();
-            this.popup.wrapper.css({
-                width: ""
-            });
         },
 
         hide: function() {

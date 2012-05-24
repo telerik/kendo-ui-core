@@ -14,6 +14,7 @@
         Template,
         JSON = window.JSON || {},
         support = {},
+        percentRegExp = /%/,
         formatRegExp = /\{(\d+)(:[^\}]+)?\}/g,
         boxShadowRegExp = /(\d+?)px\s*(\d+?)px\s*(\d+?)px\s*(\d+?)?/i,
         FUNCTION = "function",
@@ -1665,7 +1666,7 @@ function pad(number) {
 })();
 
     function wrap(element) {
-        var browser = $.browser;
+        var browser = $.browser, percentage;
 
         if (!element.parent().hasClass("k-animation-container")) {
             var shadow = element.css(kendo.support.transitions.css + "box-shadow") || element.css("box-shadow"),
@@ -1673,34 +1674,58 @@ function pad(number) {
                 blur = math.max((+radius[3]), +(radius[4] || 0)),
                 left = (-radius[1]) + blur,
                 right = (+radius[1]) + blur,
-                bottom = (+radius[2]) + blur;
+                bottom = (+radius[2]) + blur,
+                width = element[0].style.width,
+                height = element[0].style.height,
+                percentWidth = percentRegExp.test(width),
+                percentHeight = percentRegExp.test(height);
 
             if (browser.opera) { // Box shadow can't be retrieved in Opera
                 left = right = bottom = 5;
             }
 
+            percentage = percentWidth || percentHeight;
+
+            if (!percentWidth) { width = element.outerWidth(); }
+            if (!percentHeight) { height = element.outerHeight(); }
+
             element.wrap(
                          $("<div/>")
                          .addClass("k-animation-container")
                          .css({
-                             width: element.outerWidth(),
-                             height: element.outerHeight(),
+                             width: width,
+                             height: height,
                              marginLeft: -left,
                              paddingLeft: left,
                              paddingRight: right,
                              paddingBottom: bottom
                          }));
+
+            if (percentage) {
+                element.css({
+                    width: "100%",
+                    height: "100%",
+                    boxSizing: "border-box",
+                    mozBoxSizing: "border-box",
+                    webkitBoxSizing: "border-box"
+                });
+            }
         } else {
-            var wrapper = element.parent(".k-animation-container");
+            var wrapper = element.parent(".k-animation-container"),
+                wrapperStyle = wrapper[0].style;
 
             if (wrapper.is(":hidden")) {
                 wrapper.show();
             }
 
-            wrapper.css({
+            percentage = percentRegExp.test(wrapperStyle.width) || percentRegExp.test(wrapperStyle.height);
+
+            if (!percentage) {
+                wrapper.css({
                     width: element.outerWidth(),
                     height: element.outerHeight()
                 });
+            }
         }
 
         if (browser.msie && math.floor(browser.version) <= 7) {
