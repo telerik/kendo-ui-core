@@ -11,7 +11,7 @@ namespace Kendo.Mvc.UI.Tests
             grid.Editing.Enabled = true;
             grid.Editing.DisplayDeleteConfirmation = false;
 
-            var result = grid.Editing.Serialize();
+            var result = grid.Editing.ToJson();
             Assert.Equal(false, result["confirmDelete"]);
         }
 
@@ -21,7 +21,7 @@ namespace Kendo.Mvc.UI.Tests
             var grid = GridTestHelper.CreateGrid<Customer>();
             grid.Editing.Enabled = true;
 
-            var result = grid.Editing.Serialize();
+            var result = grid.Editing.ToJson();
             Assert.False(result.ContainsKey("confirmDelete"));
         }       
     }

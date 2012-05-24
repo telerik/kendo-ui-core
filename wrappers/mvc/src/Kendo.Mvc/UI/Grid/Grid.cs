@@ -747,6 +747,11 @@ namespace Kendo.Mvc.UI
                 options["scrollable"] = false;
             }
 
+            if (Editing.Enabled)
+            {
+                options["editable"] = Editing.ToJson();
+            }
+
             if (autoBind == false)
             {
                 options["autoBind"] = autoBind;
@@ -1024,7 +1029,7 @@ namespace Kendo.Mvc.UI
                 NoRecordsTemplate = FormatNoRecordsTemplate(),
                 Localization = Localization,
                 ScrollingHeight = Scrolling.Height,
-                EditFormHtmlAttributes = Editing.FormHtmlAttributes,
+                //EditFormHtmlAttributes = Editing.FormHtmlAttributes,
                 ShowFooter = Footer && VisibleColumns.Any(c => c.FooterTemplate.HasValue() || c.ClientFooterTemplate.HasValue()),
                 AggregateResults = DataSource.AggregateResults ?? new List<AggregateResult>(),
                 Aggregates = Aggregates.SelectMany(aggregate => aggregate.Aggregates),
@@ -1032,7 +1037,8 @@ namespace Kendo.Mvc.UI
                 ShowGroupFooter = Aggregates.Any() && VisibleColumns.OfType<IGridBoundColumn>().Any(c => c.GroupFooterTemplate.HasValue()),
                 PopUpContainer = new HtmlFragment(),
                 CreateNewDataItem = () => Editing.DefaultDataItem(),
-                InsertRowPosition = Editing.InsertRowPosition,
+                //TODO: Implement insert row position
+                //InsertRowPosition = Editing.InsertRowPosition,
                 EditTemplateName = Editing.TemplateName,
                 AdditionalViewData = Editing.AdditionalViewData,
                 FormId = ViewContext.FormContext.FormId,
