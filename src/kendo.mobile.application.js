@@ -7,7 +7,7 @@
 
         DEFAULT_OS = "ios",
         OS = support.mobileOS,
-        OS_NAME_TEMPLATE = kendo.template("#=data.name##if(data.version){# #=data.name##=data.version.major# km-m#=data.version.minor# #=data.version.appMode?'km-app':'km-web'##}#", {usedWithBlock: false}),
+        OS_NAME_TEMPLATE = kendo.template("#=data.name# km-#=data.device##if(data.version){# #=data.name##=data.version.major# km-m#=data.version.minor# #=data.version.appMode?'km-app':'km-web'##}#", {usedWithBlock: false}),
         BERRYPHONEGAP = OS.device == "blackberry" && OS.flatVersion >= 600 && OS.flatVersion < 1000 && OS.appMode,
         VERTICAL = "km-vertical",
         HORIZONTAL = "km-horizontal",
@@ -412,7 +412,7 @@
                 version = false;
             }
 
-            that.osCssClass = OS_NAME_TEMPLATE({ name: "km-" + that.os, version: version });
+            that.osCssClass = OS_NAME_TEMPLATE({ name: "km-" + that.os, version: version, device: os.tablet ? "tablet" : "phone" });
         },
 
         _startHistory: function() {
