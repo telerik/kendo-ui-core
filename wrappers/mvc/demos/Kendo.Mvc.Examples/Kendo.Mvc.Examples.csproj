@@ -128,6 +128,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\KendoRazorViewEngine.cs" />
+    <Compile Include="Helpers\KendoWebFormViewEngine.cs" />
     <Compile Include="Models\Config.cs" />
     <Compile Include="Helpers\HyphenatedRouteHandler.cs" />
     <Compile Include="Models\NavigationItem.cs" />
@@ -149,20 +151,20 @@
     <Content Include="App_Data\Northwind_log.ldf">
       <DependentUpon>Northwind.mdf</DependentUpon>
     </Content>
-    <Content Include="Areas\aspx\Views\linear_gauge\index.aspx" />
-    <Content Include="Areas\aspx\Views\linear_gauge\scaleoptions.aspx" />
-    <Content Include="Areas\aspx\Views\area_chart\index.aspx" />
-    <Content Include="Areas\aspx\Views\numerictextbox\api.aspx" />
-    <Content Include="Areas\aspx\Views\numerictextbox\events.aspx" />
-    <Content Include="Areas\aspx\Views\radial_gauge\index.aspx" />
-    <Content Include="Areas\aspx\Views\radial_gauge\scaleoptions.aspx" />
-    <Content Include="Areas\aspx\Views\slider\api.aspx" />
-    <Content Include="Areas\aspx\Views\slider\events.aspx" />
-    <Content Include="Areas\aspx\Views\upload\api.aspx" />
-    <Content Include="Areas\aspx\Views\upload\async.aspx" />
-    <Content Include="Areas\aspx\Views\upload\events.aspx" />
-    <Content Include="Areas\aspx\Views\numerictextbox\index.aspx" />
-    <Content Include="Areas\aspx\Views\upload\result.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\linear_gauge\index.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\linear_gauge\scaleoptions.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\area_chart\index.aspx" />
+    <Content Include="Areas\aspx\Views\web\numerictextbox\api.aspx" />
+    <Content Include="Areas\aspx\Views\web\numerictextbox\events.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\radial_gauge\index.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\radial_gauge\scaleoptions.aspx" />
+    <Content Include="Areas\aspx\Views\web\slider\api.aspx" />
+    <Content Include="Areas\aspx\Views\web\slider\events.aspx" />
+    <Content Include="Areas\aspx\Views\web\upload\api.aspx" />
+    <Content Include="Areas\aspx\Views\web\upload\async.aspx" />
+    <Content Include="Areas\aspx\Views\web\upload\events.aspx" />
+    <Content Include="Areas\aspx\Views\web\numerictextbox\index.aspx" />
+    <Content Include="Areas\aspx\Views\web\upload\result.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\jquery-1.7.2.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
@@ -216,22 +218,22 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\upload\api.cshtml" />
-    <Content Include="Areas\razor\Views\upload\async.cshtml" />
-    <Content Include="Areas\razor\Views\upload\events.cshtml" />
-    <Content Include="Areas\razor\Views\upload\index.cshtml" />
-    <Content Include="Areas\razor\Views\upload\result.cshtml" />
+    <Content Include="Areas\razor\Views\web\upload\api.cshtml" />
+    <Content Include="Areas\razor\Views\web\upload\async.cshtml" />
+    <Content Include="Areas\razor\Views\web\upload\events.cshtml" />
+    <Content Include="Areas\razor\Views\web\upload\index.cshtml" />
+    <Content Include="Areas\razor\Views\web\upload\result.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\window\index.cshtml" />
+    <Content Include="Areas\razor\Views\web\window\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\datepicker\index.cshtml" />
+    <Content Include="Areas\razor\Views\web\datepicker\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\slider\api.cshtml" />
-    <Content Include="Areas\razor\Views\slider\events.cshtml" />
-    <Content Include="Areas\razor\Views\slider\index.cshtml" />
+    <Content Include="Areas\razor\Views\web\slider\api.cshtml" />
+    <Content Include="Areas\razor\Views\web\slider\events.cshtml" />
+    <Content Include="Areas\razor\Views\web\slider\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Kendo.Mvc\Kendo.Mvc.csproj">
@@ -255,48 +257,48 @@
     <Content Include="Views\Shared\_Navigation.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\grid\index.cshtml" />
+    <Content Include="Areas\razor\Views\web\grid\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\numerictextbox\events.cshtml" />
-    <Content Include="Areas\razor\Views\numerictextbox\api.cshtml" />
-    <Content Include="Areas\razor\Views\window\actions.cshtml" />
-    <Content Include="Areas\razor\Views\numerictextbox\index.cshtml" />
-    <Content Include="Areas\razor\Views\timepicker\index.cshtml" />
-    <Content Include="Areas\razor\Views\window\ajax.cshtml" />
-    <Content Include="Areas\razor\Views\window\ajaxcontent.cshtml" />
-    <Content Include="Areas\razor\Views\window\api.cshtml" />
-    <Content Include="Areas\razor\Views\window\events.cshtml" />
-    <Content Include="Areas\razor\Views\grid\ajaxbinding.cshtml" />
-    <Content Include="Areas\razor\Views\grid\customajaxbinding.cshtml" />
-    <Content Include="Areas\razor\Views\treeview\index.cshtml" />
-    <Content Include="Areas\razor\Views\treeview\dragdrop.cshtml" />
-    <Content Include="Areas\razor\Views\treeview\images.cshtml" />
-    <Content Include="Areas\razor\Views\treeview\events.cshtml" />
-    <Content Include="Areas\razor\Views\grid\customserverbinding.cshtml" />
-    <Content Include="Areas\razor\Views\grid\columnresizing.cshtml" />
-    <Content Include="Areas\razor\Views\grid\columnreordering.cshtml" />
-    <Content Include="Areas\razor\Views\grid\serverbinding.cshtml" />
-    <Content Include="Areas\razor\Views\tabstrip\index.cshtml" />
-    <Content Include="Areas\razor\Views\tabstrip\images.cshtml" />
-    <Content Include="Areas\razor\Views\tabstrip\ajax.cshtml" />
-    <Content Include="Areas\razor\Views\tabstrip\events.cshtml" />
-    <Content Include="Areas\razor\Views\tabstrip\api.cshtml" />
-    <Content Include="Areas\razor\Views\grid\ajaxaggregates.cshtml" />
-    <Content Include="Areas\razor\Views\grid\serveraggregates.cshtml" />
-    <Content Include="Areas\razor\Views\datetimepicker\index.cshtml" />
-    <Content Include="Areas\razor\Views\radial_gauge\index.cshtml" />
-    <Content Include="Areas\razor\Views\radial_gauge\scaleoptions.cshtml" />
-    <Content Include="Areas\razor\Views\linear_gauge\index.cshtml" />
-    <Content Include="Areas\razor\Views\linear_gauge\scaleoptions.cshtml" />
-    <Content Include="Areas\razor\Views\splitter\index.cshtml" />
-    <Content Include="Areas\razor\Views\splitter\ajax.cshtml" />
-    <Content Include="Areas\razor\Views\splitter\events.cshtml" />
-    <Content Include="Areas\razor\Views\grid\serverediting.cshtml" />
-    <Content Include="Areas\razor\Views\combobox\index.cshtml" />
-    <Content Include="Areas\aspx\Views\slider\index.aspx" />
-    <Content Include="Areas\razor\Views\area_chart\index.cshtml" />
-    <Content Include="Areas\razor\Views\splitter\api.cshtml" />
+    <Content Include="Areas\razor\Views\web\numerictextbox\events.cshtml" />
+    <Content Include="Areas\razor\Views\web\numerictextbox\api.cshtml" />
+    <Content Include="Areas\razor\Views\web\window\actions.cshtml" />
+    <Content Include="Areas\razor\Views\web\numerictextbox\index.cshtml" />
+    <Content Include="Areas\razor\Views\web\timepicker\index.cshtml" />
+    <Content Include="Areas\razor\Views\web\window\ajax.cshtml" />
+    <Content Include="Areas\razor\Views\web\window\ajaxcontent.cshtml" />
+    <Content Include="Areas\razor\Views\web\window\api.cshtml" />
+    <Content Include="Areas\razor\Views\web\window\events.cshtml" />
+    <Content Include="Areas\razor\Views\web\grid\ajaxbinding.cshtml" />
+    <Content Include="Areas\razor\Views\web\grid\customajaxbinding.cshtml" />
+    <Content Include="Areas\razor\Views\web\treeview\index.cshtml" />
+    <Content Include="Areas\razor\Views\web\treeview\dragdrop.cshtml" />
+    <Content Include="Areas\razor\Views\web\treeview\images.cshtml" />
+    <Content Include="Areas\razor\Views\web\treeview\events.cshtml" />
+    <Content Include="Areas\razor\Views\web\grid\customserverbinding.cshtml" />
+    <Content Include="Areas\razor\Views\web\grid\columnresizing.cshtml" />
+    <Content Include="Areas\razor\Views\web\grid\columnreordering.cshtml" />
+    <Content Include="Areas\razor\Views\web\grid\serverbinding.cshtml" />
+    <Content Include="Areas\razor\Views\web\tabstrip\index.cshtml" />
+    <Content Include="Areas\razor\Views\web\tabstrip\images.cshtml" />
+    <Content Include="Areas\razor\Views\web\tabstrip\ajax.cshtml" />
+    <Content Include="Areas\razor\Views\web\tabstrip\events.cshtml" />
+    <Content Include="Areas\razor\Views\web\tabstrip\api.cshtml" />
+    <Content Include="Areas\razor\Views\web\grid\ajaxaggregates.cshtml" />
+    <Content Include="Areas\razor\Views\web\grid\serveraggregates.cshtml" />
+    <Content Include="Areas\razor\Views\web\datetimepicker\index.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\radial_gauge\index.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\radial_gauge\scaleoptions.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\linear_gauge\index.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\linear_gauge\scaleoptions.cshtml" />
+    <Content Include="Areas\razor\Views\web\splitter\index.cshtml" />
+    <Content Include="Areas\razor\Views\web\splitter\ajax.cshtml" />
+    <Content Include="Areas\razor\Views\web\splitter\events.cshtml" />
+    <Content Include="Areas\razor\Views\web\grid\serverediting.cshtml" />
+    <Content Include="Areas\razor\Views\web\combobox\index.cshtml" />
+    <Content Include="Areas\aspx\Views\web\slider\index.aspx" />
+    <Content Include="Areas\razor\Views\web\splitter\api.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\area_chart\index.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
