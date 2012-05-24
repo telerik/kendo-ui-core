@@ -31,7 +31,7 @@ namespace Kendo.Mvc.UI
 
             this.builderFactory = rendererFactory;
 
-            ClientEvents = new PanelBarClientEvents();
+            ClientEvents = new Dictionary<string, object>();
 
             //defaultEffects.Each(el => Effects.Container.Add(el));
 
@@ -56,7 +56,7 @@ namespace Kendo.Mvc.UI
             private set;
         }
 
-        public PanelBarClientEvents ClientEvents
+        public IDictionary<string, object> ClientEvents
         {
             get;
             private set;
@@ -120,10 +120,10 @@ namespace Kendo.Mvc.UI
             //    objectWriter.Serialize("effects", Effects);
             //}
 
-            //if (ClientEvents.Keys.Any())
-            //{
-            //    options["events"] = ClientEvents;
-            //}
+            if (ClientEvents.Keys.Any())
+            {
+                options.Merge(ClientEvents);
+            }
 
             //objectWriter.AppendClientEvent("expand", ClientEvents.OnExpand);
             //objectWriter.AppendClientEvent("collapse", ClientEvents.OnCollapse);

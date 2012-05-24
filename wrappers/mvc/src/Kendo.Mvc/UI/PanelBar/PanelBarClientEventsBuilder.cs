@@ -4,65 +4,31 @@ namespace Kendo.Mvc.UI
     using System.Web.Mvc;
 
     using Infrastructure;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="PanelBar.ClientEvents"/>.
     /// </summary>
     public class PanelBarClientEventsBuilder
     {
-        private readonly PanelBarClientEvents clientEvents;
-        private readonly ViewContext viewContext;
-
+        private readonly IDictionary<string, object> clientEvents;
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="PanelBarClientEventsBuilder"/> class.
         /// </summary>
         /// <param name="clientEvents">The client events.</param>
-        /// <param name="viewContext">The view context.</param>
-        public PanelBarClientEventsBuilder(PanelBarClientEvents clientEvents, ViewContext viewContext)
+        public PanelBarClientEventsBuilder(IDictionary<string, object> clientEvents)
         {
-            Guard.IsNotNull(clientEvents, "clientEvents");
-            Guard.IsNotNull(viewContext, "viewContext");
-
             this.clientEvents = clientEvents;
-            this.viewContext = viewContext;
         }
 
         /// <summary>
-        /// Defines the inline handler of the OnExpand client-side event
+        /// Defines the inline handler of the Expand client-side event
         /// </summary>
-        /// <param name="onExpandAction">The action defining the inline handler.</param>
+        /// <param name="expandInlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;% Html.Telerik().PanelBar()
-        ///            .Name("PanelBar")
-        ///            .ClientEvents(events => events.OnExpand(() =>
-        ///            {
-        ///                 %&gt;
-        ///                 function(e) {
-        ///                     //event handling code
-        ///                 }
-        ///                 &lt;%
-        ///            }))
-        ///            .Render();
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public PanelBarClientEventsBuilder OnExpand(Action onExpandCodeBlock)
-        {
-            Guard.IsNotNull(onExpandCodeBlock, "onExpandCodeBlock");
-
-            clientEvents.OnExpand.CodeBlock = onExpandCodeBlock;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Defines the inline handler of the OnExpand client-side event
-        /// </summary>
-        /// <param name="onExpandAction">The handler code wrapped in a text tag (Razor syntax).</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;% Html.Telerik().PanelBar()
+        ///  &lt;% Html.Kendo().PanelBar()
         ///            .Name("PanelBar")
         ///            .ClientEvents(events => events.OnExpand(
         ///                 @&lt;text&gt;
@@ -75,72 +41,129 @@ namespace Kendo.Mvc.UI
         /// %&gt;
         /// </code>
         /// </example>
-        public PanelBarClientEventsBuilder OnExpand(Func<object, object> onExpandInlineCodeBlock)
+        public PanelBarClientEventsBuilder OnExpand(Func<object, object> expandInlineCodeBlock)
         {
-            Guard.IsNotNull(onExpandInlineCodeBlock, "onExpandInlineCodeBlock");
-
-            clientEvents.OnExpand.InlineCodeBlock = onExpandInlineCodeBlock;
+            clientEvents["expand"] = new ClientEvent { InlineCodeBlock = expandInlineCodeBlock };
 
             return this;
         }
 
         /// <summary>
-        ///  Defines the name of the JavaScript function that will handle the the OnExpand client-side event.
+        ///  Defines the name of the JavaScript function that will handle the the Expand client-side event.
         /// </summary>
-        /// <param name="onExpandHandlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <param name="expandHandlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().PanelBar()
+        ///  &lt;%= Html.Kendo().PanelBar()
         ///             .Name("PanelBar")
-        ///             .ClientEvents(events => events.OnExpand("onExpand"))
+        ///             .ClientEvents(events => events.OnExpand("expand"))
         /// %&gt;
         /// </code>
         /// </example>
-        public PanelBarClientEventsBuilder OnExpand(string onExpandHandlerName)
+        public PanelBarClientEventsBuilder OnExpand(string expandHandlerName)
         {
-            Guard.IsNotNullOrEmpty(onExpandHandlerName, "onExpandHandlerName");
-
-            clientEvents.OnExpand.HandlerName = onExpandHandlerName;
+            clientEvents["expand"] = new ClientEvent { HandlerName = expandHandlerName };
 
             return this;
         }
 
         /// <summary>
-        /// Defines the inline handler of the OnCollapse client-side event
+        /// Defines the inline handler of the ContentLoad client-side event
         /// </summary>
-        /// <param name="onCollapseAction">The action defining the inline handler.</param>
+        /// <param name="contentLoadInlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;% Html.Telerik().PanelBar()
+        ///  &lt;% Html.Kendo().PanelBar()
         ///            .Name("PanelBar")
-        ///            .ClientEvents(events => events.OnCollapse(() =>
-        ///            {
-        ///                 %&gt;
+        ///            .ClientEvents(events => events.OnContentLoad(
+        ///                 @&lt;text&gt;
         ///                 function(e) {
         ///                     //event handling code
         ///                 }
-        ///                 &lt;%
-        ///            }))
+        ///                 &lt;/text&gt;
+        ///            ))
         ///            .Render();
         /// %&gt;
         /// </code>
         /// </example>
-        public PanelBarClientEventsBuilder OnCollapse(Action onCollapseCodeBlock)
+        public PanelBarClientEventsBuilder OnContentLoad(Func<object, object> contentLoadInlineCodeBlock)
         {
-            Guard.IsNotNull(onCollapseCodeBlock, "onCollapseCodeBlock");
-
-            clientEvents.OnCollapse.CodeBlock = onCollapseCodeBlock;
+            clientEvents["contentLoad"] = new ClientEvent { InlineCodeBlock = contentLoadInlineCodeBlock };
 
             return this;
         }
 
         /// <summary>
-        /// Defines the inline handler of the OnCollapse client-side event
+        ///  Defines the name of the JavaScript function that will handle the the ContentLoad client-side event.
         /// </summary>
-        /// <param name="onCollapseAction">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <param name="contentLoadHandlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;% Html.Telerik().PanelBar()
+        ///  &lt;%= Html.Kendo().PanelBar()
+        ///             .Name("PanelBar")
+        ///             .ClientEvents(events => events.OnContentLoad("contentLoad"))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public PanelBarClientEventsBuilder OnContentLoad(string contentLoadHandlerName)
+        {
+            clientEvents["contentLoad"] = new ClientEvent { HandlerName = contentLoadHandlerName };
+
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the inline handler of the Activate client-side event
+        /// </summary>
+        /// <param name="activateInlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;% Html.Kendo().PanelBar()
+        ///            .Name("PanelBar")
+        ///            .ClientEvents(events => events.OnContentLoad(
+        ///                 @&lt;text&gt;
+        ///                 function(e) {
+        ///                     //event handling code
+        ///                 }
+        ///                 &lt;/text&gt;
+        ///            ))
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public PanelBarClientEventsBuilder OnActivate(Func<object, object> activateInlineCodeBlock)
+        {
+            clientEvents["activate"] = new ClientEvent { InlineCodeBlock = activateInlineCodeBlock };
+
+            return this;
+        }
+
+        /// <summary>
+        ///  Defines the name of the JavaScript function that will handle the the Activate client-side event.
+        /// </summary>
+        /// <param name="activateLoadHandlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().PanelBar()
+        ///             .Name("PanelBar")
+        ///             .ClientEvents(events => events.OnContentLoad("contentLoad"))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public PanelBarClientEventsBuilder OnActivate(string activateLoadHandlerName)
+        {
+            clientEvents["activate"] = new ClientEvent { HandlerName = activateLoadHandlerName };
+
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the inline handler of the Collapse client-side event
+        /// </summary>
+        /// <param name="collapseInlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;% Html.Kendo().PanelBar()
         ///            .Name("PanelBar")
         ///            .ClientEvents(events => events.OnCollapse(
         ///                 @&lt;text&gt;
@@ -153,72 +176,39 @@ namespace Kendo.Mvc.UI
         /// %&gt;
         /// </code>
         /// </example>
-        public PanelBarClientEventsBuilder OnCollapse(Func<object, object> onCollapseInlineCodeBlock)
+        public PanelBarClientEventsBuilder OnCollapse(Func<object, object> collapseInlineCodeBlock)
         {
-            Guard.IsNotNull(onCollapseInlineCodeBlock, "onCollapseInlineCodeBlock");
-
-            clientEvents.OnCollapse.InlineCodeBlock = onCollapseInlineCodeBlock;
+            clientEvents["collapse"] = new ClientEvent { InlineCodeBlock = collapseInlineCodeBlock };
 
             return this;
         }
 
         /// <summary>
-        ///  Defines the name of the JavaScript function that will handle the the OnCollapse client-side event.
+        ///  Defines the name of the JavaScript function that will handle the the Collapse client-side event.
         /// </summary>
-        /// <param name="onCollapseHandlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <param name="collapseHandlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().PanelBar()
+        ///  &lt;%= Html.Kendo().PanelBar()
         ///             .Name("PanelBar")
-        ///             .ClientEvents(events => events.OnCollapse("onCollapse"))
+        ///             .ClientEvents(events => events.OnCollapse("collapse"))
         /// %&gt;
         /// </code>
         /// </example>
-        public PanelBarClientEventsBuilder OnCollapse(string onCollapseHandlerName)
+        public PanelBarClientEventsBuilder OnCollapse(string collapseHandlerName)
         {
-            Guard.IsNotNullOrEmpty(onCollapseHandlerName, "onCollapseHandlerName");
-
-            clientEvents.OnCollapse.HandlerName = onCollapseHandlerName;
+            clientEvents["collapse"] = new ClientEvent { HandlerName = collapseHandlerName };
 
             return this;
         }
 
         /// <summary>
-        /// Defines the inline handler of the OnSelect client-side event
+        /// Defines the inline handler of the Select client-side event
         /// </summary>
-        /// <param name="onSelectAction">The action defining the inline handler.</param>
+        /// <param name="selectInlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;% Html.Telerik().PanelBar()
-        ///            .Name("PanelBar")
-        ///            .ClientEvents(events => events.OnSelect(() =>
-        ///            {
-        ///                 %&gt;
-        ///                 function(e) {
-        ///                     //event handling code
-        ///                 }
-        ///                 &lt;%
-        ///            }))
-        ///            .Render();
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public PanelBarClientEventsBuilder OnSelect(Action onSelectCodeBlock)
-        {
-            Guard.IsNotNull(onSelectCodeBlock, "onSelectCodeBlock");
-
-            clientEvents.OnSelect.CodeBlock = onSelectCodeBlock;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Defines the inline handler of the OnSelect client-side event
-        /// </summary>
-        /// <param name="onSelectAction">The handler code wrapped in a text tag (Razor syntax).</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;% Html.Telerik().PanelBar()
+        ///  &lt;% Html.Kendo().PanelBar()
         ///            .Name("PanelBar")
         ///            .ClientEvents(events => events.OnSelect(
         ///                 @&lt;text&gt;
@@ -231,150 +221,39 @@ namespace Kendo.Mvc.UI
         /// %&gt;
         /// </code>
         /// </example>
-        public PanelBarClientEventsBuilder OnSelect(Func<object, object> onSelectInlineCodeBlock)
+        public PanelBarClientEventsBuilder OnSelect(Func<object, object> selectInlineCodeBlock)
         {
-            Guard.IsNotNull(onSelectInlineCodeBlock, "onSelectInlineCodeBlock");
-
-            clientEvents.OnSelect.InlineCodeBlock = onSelectInlineCodeBlock;
+            clientEvents["select"] = new ClientEvent { InlineCodeBlock = selectInlineCodeBlock };
 
             return this;
         }
 
         /// <summary>
-        ///  Defines the name of the JavaScript function that will handle the the OnSelect client-side event.
+        ///  Defines the name of the JavaScript function that will handle the the Select client-side event.
         /// </summary>
-        /// <param name="onSelectHandlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <param name="selectHandlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().PanelBar()
+        ///  &lt;%= Html.Kendo().PanelBar()
         ///             .Name("PanelBar")
-        ///             .ClientEvents(events => events.OnSelect("onSelect"))
+        ///             .ClientEvents(events => events.OnSelect("select"))
         /// %&gt;
         /// </code>
         /// </example>
-        public PanelBarClientEventsBuilder OnSelect(string onSelectHandlerName)
+        public PanelBarClientEventsBuilder OnSelect(string selectHandlerName)
         {
-            Guard.IsNotNullOrEmpty(onSelectHandlerName, "onSelectHandlerName");
-
-            clientEvents.OnSelect.HandlerName = onSelectHandlerName;
+            clientEvents["select"] = new ClientEvent { HandlerName = selectHandlerName };
 
             return this;
         }
 
         /// <summary>
-        /// Defines the inline handler of the OnLoad client-side event
+        /// Defines the inline handler of the Error client-side event
         /// </summary>
-        /// <param name="onLoadAction">The action defining the inline handler.</param>
+        /// <param name="errorInlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;% Html.Telerik().PanelBar()
-        ///            .Name("PanelBar")
-        ///            .ClientEvents(events => events.OnLoad(() =>
-        ///            {
-        ///                 %&gt;
-        ///                 function(e) {
-        ///                     //event handling code
-        ///                 }
-        ///                 &lt;%
-        ///            }))
-        ///            .Render();
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public PanelBarClientEventsBuilder OnLoad(Action onLoadCodeBlock)
-        {
-            Guard.IsNotNull(onLoadCodeBlock, "onLoadCodeBlock");
-
-            clientEvents.OnLoad.CodeBlock = onLoadCodeBlock;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Defines the inline handler of the OnLoad client-side event
-        /// </summary>
-        /// <param name="onLoadAction">The handler code wrapped in a text tag (Razor syntax).</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;% Html.Telerik().PanelBar()
-        ///            .Name("PanelBar")
-        ///            .ClientEvents(events => events.OnLoad(
-        ///                 @&lt;text&gt;
-        ///                 function(e) {
-        ///                     //event handling code
-        ///                 }
-        ///                 &lt;/text&gt;
-        ///            ))
-        ///            .Render();
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public PanelBarClientEventsBuilder OnLoad(Func<object, object> onLoadInlineCodeBlock)
-        {
-            Guard.IsNotNull(onLoadInlineCodeBlock, "onLoadInlineCodeBlock");
-
-            clientEvents.OnLoad.InlineCodeBlock = onLoadInlineCodeBlock;
-
-            return this;
-        }
-
-        /// <summary>
-        ///  Defines the name of the JavaScript function that will handle the the OnLoad client-side event.
-        /// </summary>
-        /// <param name="onLoadHandlerName">The name of the JavaScript function that will handle the event.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().PanelBar()
-        ///             .Name("PanelBar")
-        ///             .ClientEvents(events => events.OnLoad("onLoad"))
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public PanelBarClientEventsBuilder OnLoad(string onLoadHandlerName)
-        {
-            Guard.IsNotNullOrEmpty(onLoadHandlerName, "onLoadHandlerName");
-
-            clientEvents.OnLoad.HandlerName = onLoadHandlerName;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Defines the inline handler of the OnError client-side event
-        /// </summary>
-        /// <param name="onErrorAction">The action defining the inline handler.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;% Html.Telerik().PanelBar()
-        ///            .Name("PanelBar")
-        ///            .ClientEvents(events => events.OnError(() =>
-        ///            {
-        ///                 %&gt;
-        ///                 function(e) {
-        ///                     //event handling code
-        ///                 }
-        ///                 &lt;%
-        ///            }))
-        ///            .Render();
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public PanelBarClientEventsBuilder OnError(Action onErrorCodeBlock)
-        {
-            Guard.IsNotNull(onErrorCodeBlock, "onErrorCodeBlock");
-
-            clientEvents.OnError.CodeBlock = onErrorCodeBlock;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Defines the inline handler of the OnError client-side event
-        /// </summary>
-        /// <param name="onErrorAction">The handler code wrapped in a text tag (Razor syntax).</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;% Html.Telerik().PanelBar()
+        ///  &lt;% Html.Kendo().PanelBar()
         ///            .Name("PanelBar")
         ///            .ClientEvents(events => events.OnError(
         ///                 @&lt;text&gt;
@@ -387,11 +266,9 @@ namespace Kendo.Mvc.UI
         /// %&gt;
         /// </code>
         /// </example>
-        public PanelBarClientEventsBuilder OnError(Func<object, object> onErrorInlineCodeBlock)
+        public PanelBarClientEventsBuilder OnError(Func<object, object> errorInlineCodeBlock)
         {
-            Guard.IsNotNull(onErrorInlineCodeBlock, "onErrorInlineCodeBlock");
-
-            clientEvents.OnError.InlineCodeBlock = onErrorInlineCodeBlock;
+            clientEvents["error"] = new ClientEvent { InlineCodeBlock = errorInlineCodeBlock };
 
             return this;
         }
@@ -399,20 +276,18 @@ namespace Kendo.Mvc.UI
         /// <summary>
         ///  Defines the name of the JavaScript function that will handle the the OnError client-side event.
         /// </summary>
-        /// <param name="onErrorHandlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <param name="errorHandlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().PanelBar()
+        ///  &lt;%= Html.Kendo().PanelBar()
         ///             .Name("PanelBar")
         ///             .ClientEvents(events => events.OnError("onError"))
         /// %&gt;
         /// </code>
         /// </example>
-        public PanelBarClientEventsBuilder OnError(string onErrorHandlerName)
+        public PanelBarClientEventsBuilder OnError(string errorHandlerName)
         {
-            Guard.IsNotNullOrEmpty(onErrorHandlerName, "onErrorHandlerName");
-
-            clientEvents.OnError.HandlerName = onErrorHandlerName;
+            clientEvents["error"] = new ClientEvent { HandlerName = errorHandlerName };
 
             return this;
         }
