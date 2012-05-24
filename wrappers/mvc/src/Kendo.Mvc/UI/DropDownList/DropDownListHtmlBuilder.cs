@@ -6,14 +6,14 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Infrastructure;
     using System.Web;
 
-    public class DropDownListHtmlBuilder : IDropDownHtmlBuilder
+    public class DropDownListHtmlBuilder
     {
-        public DropDownListHtmlBuilder(IDropDownRenderable component)
+        public DropDownListHtmlBuilder(DropDownList component)
         {
             this.Component = component;
         }
 
-        public IDropDownRenderable Component
+        public DropDownList Component
         {
             get;
             private set;
@@ -88,7 +88,7 @@ namespace Kendo.Mvc.UI
                 input.Attributes(Component.GetUnobtrusiveValidationAttributes())
                      .Attributes(new
                      {
-                         name = Component.GetName(string.Empty),
+                         name = Component.Name, //Component.GetName(string.Empty),
                          id = Component.Id
                      })
                      .Attributes(Component.HiddenInputHtmlAttributes);

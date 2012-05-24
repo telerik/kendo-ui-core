@@ -4,7 +4,7 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.Infrastructure;
 
-    public class AutoCompleteHtmlBuilder : IAutoCompleteHtmlBuilder
+    public class AutoCompleteHtmlBuilder
     {
 
         public AutoCompleteHtmlBuilder(AutoComplete component)

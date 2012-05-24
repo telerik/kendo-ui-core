@@ -244,21 +244,21 @@ namespace Kendo.Mvc.UI.Tests
             Assert.Equal("ID", builder.ToComponent().Name);
         }
 
-        [Fact]
-        public void DropDownListFor_should_return_new_instance_with_set_value()
-        {
-            var builder = factory.DropDownListFor(m => m.ID);
+        //[Fact]
+        //public void DropDownListFor_should_return_new_instance_with_set_value()
+        //{
+        //    var builder = factory.DropDownListFor(m => m.ID);
 
-            Assert.Equal(htmlHelper.ViewData.Model.ID.ToString(), builder.ToComponent().Value);
-        }
+        //    Assert.Equal(htmlHelper.ViewData.Model.ID.ToString(), builder.ToComponent().Value);
+        //}
 
-        [Fact]
-        public void DropDownListFor_should_not_set_value_if_Model_is_not_predifined_type()
-        {
-            var builder = factory.DropDownListFor(m => m.ComplexModel);
+        //[Fact]
+        //public void DropDownListFor_should_not_set_value_if_Model_is_not_predifined_type()
+        //{
+        //    var builder = factory.DropDownListFor(m => m.ComplexModel);
 
-            builder.ToComponent().Value.ShouldBeEmpty();
-        }
+        //    builder.ToComponent().Value.ShouldBeEmpty();
+        //}
 
         [Fact]
         public void ComboBoxFor_should_return_new_instance()

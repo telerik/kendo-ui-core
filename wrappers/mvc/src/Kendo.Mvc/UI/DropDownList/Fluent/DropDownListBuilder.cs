@@ -37,29 +37,6 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Use it to configure Data binding.
-        /// </summary>
-        /// <param name="configurator">Action that configures the data binding options.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().DropDownList()
-        ///             .Name("DropDownList")
-        ///             .DataBinding(dataBinding => dataBinding
-        ///                .Ajax().Select("_AjaxLoading", "DropDownList")
-        ///             );
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public DropDownListBuilder DataBinding(Action<DropDownListDataBindingConfigurationBuilder> configurator)
-        {
-            Guard.IsNotNull(configurator, "configurator");
-
-            configurator(new DropDownListDataBindingConfigurationBuilder(Component.DataBinding));
-
-            return this;
-        }
-
-        /// <summary>
         /// Enables or disables the dropdownlist.
         /// </summary>
         /// <param name="value"></param>
