@@ -257,6 +257,13 @@
                 equal(grid.thead.find("th").length, 1);
             });
 
+            test("thead initialization when there is existing nested theads", function() {
+                var grid = new Grid($("<table><thead/><tbody><tr><td><table><thead/></table></td></tr></tbody></table>"), { columns: [ { field: "foo" } ] });
+
+                equal(grid.wrapper.find("thead").length, 2);
+                equal(grid.thead.find("th").length, 1);
+            });
+
             test("thead initialization when there is existing thead > tr", function() {
                 var grid = new Grid($("<table><thead><tr/></thead></table>"), { columns: [ { field: "foo" } ] });
 
@@ -273,6 +280,17 @@
                 equal(grid.thead.find("th").length, 1);
                 equal(grid.thead.find("th").text(), "bar");
             });
+
+            test("thead initialization when there are nested g thead > tr > th", function() {
+                var element = $("<table><thead><tr><th>bar</th></tr></thead><tbody><tr><td><table><thead><tr><th/></tr></thead></table></td></tr></tbody></table>");
+                var grid = new Grid(element, { columns: [ { field: "foo" } ] });
+
+                equal(grid.wrapper.find("thead").length, 2);
+                equal(grid.thead.find("tr").length, 1);
+                equal(grid.thead.find("th").length, 1);
+                equal(grid.thead.find("th").text(), "bar");
+            });
+
             test("thead initialization when there is no thead but th exists", function() {
                 var grid = new Grid($("<table><tr><th>bar</th></tr></table>"), { });
 
@@ -382,6 +400,34 @@
                 equal(colgroups.eq(1).find("col").length, 2);
             });
 
+            test("hierarhcy col element is created in non-scrollable grid when table element has hierarchy col defined", function() {
+                var grid = new Grid('<table><colgroup><col class="k-hierarchy-col"/></colgroup></table>', {
+                    dataSource: [],
+                    columns: [{field: "foo" }, {field: "bar"}],
+                    scrollable: false
+                });
+                var headerTable = grid.thead.parent();
+
+                equal(headerTable.find("colgroup").length, 1);
+                equal(headerTable.find("col").length, 3);
+                ok(headerTable.find("col").eq(0).hasClass("k-hierarchy-col"));
+            });
+
+            test("hierarhcy col element is created in scrollable grid when table element has hierarchy col defined", function() {
+                var grid = new Grid('<table><colgroup><col class="k-hierarchy-col"/></colgroup></table>', {
+                    dataSource: [],
+                    columns: [{field: "foo" }, {field: "bar"}]
+                });
+
+                var colgroups = grid.wrapper.find("colgroup");
+
+                equal(colgroups.length, 2);
+                equal(colgroups.eq(0).find("col").length, 3);
+                equal(colgroups.eq(1).find("col").length, 3);
+                ok(colgroups.eq(0).find("col:first").hasClass("k-hierarchy-col"));
+                ok(colgroups.eq(0).find("col:first").hasClass("k-hierarchy-col"));
+            });
+
             test("column width is applied on col element", function() {
                 var width = "200px",
                     grid = new Grid(table, {
@@ -397,7 +443,7 @@
             });
 
             test("column width is parsed from DOM col element when grid created from table element", function() {
-                var element = $('<table><colgroup><col style="width:200px"/><col /><th data-kendo-field="foo"></th><th data-kendo-field="bar"></th><th data-kendo-field="baz"></th></colgroup></table>'),
+                var element = $('<table><colgroup><col style="width:200px"/><col /></colgroup><thead><th data-kendo-field="foo"></th><th data-kendo-field="bar"></th><th data-kendo-field="baz"></th></thead></table>'),
                     grid = new Grid(element, {
                         dataSource: [],
                         scrollable: false

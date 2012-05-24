@@ -38,7 +38,7 @@ namespace Kendo.Mvc.UI.Html.Tests
             rowBuilder.Setup(b => b.CreateRow()).Returns(tr);
             decorator.Decorate(rowBuilder.Object, new GridItem { State = GridItemStates.Master }, false);
 
-            decorator.CreateRow().Attribute("class").ShouldContain("t-master-row");
+            decorator.CreateRow().Attribute("class").ShouldContain("k-master-row");
         }
     }
 }

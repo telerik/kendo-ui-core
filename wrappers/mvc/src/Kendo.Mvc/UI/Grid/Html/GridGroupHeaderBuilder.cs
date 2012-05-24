@@ -61,7 +61,7 @@ namespace Kendo.Mvc.UI.Html
             var button = new HtmlElement("a")
                             .Attribute("href", urlBuilder.SelectUrl(GridUrlParameters.GroupBy,
                                     GridDescriptorSerializer.Serialize(groups)))
-                            .AddClass(UIPrimitives.Button)
+                            .AddClass(new[] { UIPrimitives.Button, UIPrimitives.ButtonIcon, UIPrimitives.ButtonBare })
                             .AppendTo(indicator);
 
             new HtmlElement("span")

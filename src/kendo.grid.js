@@ -1172,7 +1172,7 @@
 
                 that.groupable = new Groupable(wrapper, {
                     draggable: that._draggableInstance,
-                    groupContainer: "div.k-grouping-header",
+                    groupContainer: ">div.k-grouping-header",
                     dataSource: that.dataSource,
                     allowDrag: that.options.reorderable
                 });
@@ -2157,7 +2157,7 @@
                 idx,
                 length,
                 html = "",
-                thead = that.table.find("thead"),
+                thead = that.table.find(">thead"),
                 tr,
                 th;
 
@@ -2165,7 +2165,7 @@
                 thead = $("<thead/>").insertBefore(that.tbody);
             }
 
-            tr = that.element.find("tr:has(th)");
+            tr = that.element.find("tr:has(th):first");
 
             if (!tr.length) {
                 tr = thead.children().first();
@@ -2242,7 +2242,7 @@
 
         _appendCols: function(table) {
             var that = this,
-                colgroup = table.find("colgroup"),
+                colgroup = table.find(">colgroup"),
                 width,
                 cols = map(that.columns, function(column) {
                     width = column.width;
@@ -2254,7 +2254,7 @@
                 }),
                 groups = that.dataSource.group().length;
 
-            if (that._hasDetails()) {
+            if (that._hasDetails() || colgroup.find(".k-hierarchy-col").length) {
                 cols.splice(0, 0, '<col class="k-hierarchy-col" />');
             }
 
