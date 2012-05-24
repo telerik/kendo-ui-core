@@ -206,7 +206,7 @@ function minifyJs(source) {
     var ast = parser.parse(source);
     ast = uglify.ast_mangle(ast);
     ast = uglify.ast_squeeze(ast);
-    return uglify.gen_code(ast);
+    return ";" + uglify.gen_code(ast);
 }
 
 function zip(name, filesPath, onSuccess) {
