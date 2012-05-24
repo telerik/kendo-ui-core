@@ -165,6 +165,7 @@
     <Compile Include="UI\Chart\Axes\ChartAxisDefaults.cs" />
     <Compile Include="UI\Chart\Axes\ChartPlotBand.cs" />
     <Compile Include="UI\Chart\Axes\ChartAxisTitle.cs" />
+    <Compile Include="UI\Chart\Axes\ChartAxisTicks.cs" />
     <Compile Include="UI\Chart\Axes\IChartAxisDefaults.cs" />
     <Compile Include="UI\Chart\Axes\IChartNumericAxis.cs" />
     <Compile Include="UI\Chart\Axes\IChartAxis.cs" />
@@ -212,6 +213,7 @@
     <Compile Include="UI\Chart\Fluent\ChartBorderBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartAreaLineBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartLineBuilderBase.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartAxisTicksBuilder.cs" />
     <Compile Include="UI\Chart\Serialization\ChartAxisSerializerBase.cs" />
     <Compile Include="UI\Chart\Serialization\ChartBarSeriesOverlaySerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartLabelsBase.cs" />
@@ -226,6 +228,7 @@
     <Compile Include="UI\Chart\Serialization\ChartPlotBandsSerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartAxisTitleSerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartAreaSeriesSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartAxisTicksSerializer.cs" />
     <Compile Include="UI\Chart\Series\ChartMarkers.cs" />
     <Compile Include="UI\Chart\Fluent\ChartLineSeriesBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartPointLabelsBuilder.cs" />

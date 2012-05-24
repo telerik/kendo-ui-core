@@ -8,24 +8,14 @@ namespace Kendo.Mvc.UI
     public interface IChartAxis
     {
         /// <summary>
-        /// Gets or sets the minor tick size.
+        /// The axis major ticks configuration.
         /// </summary>
-        int? MinorTickSize { get; set; }
+        ChartAxisTicks MajorTicks { get; set; }
 
         /// <summary>
-        /// Gets or sets the major tick size.
+        /// The axis minor ticks configuration.
         /// </summary>
-        int? MajorTickSize { get; set; }
-
-        /// <summary>
-        /// The major tick type.
-        /// </summary>
-        ChartAxisTickType? MajorTickType { get; set; }
-
-        /// <summary>
-        /// The minor tick type.
-        /// </summary>
-        ChartAxisTickType? MinorTickType { get; set; }
+        ChartAxisTicks MinorTicks { get; set; }
 
         /// <summary>
         /// The major grid lines configuration.

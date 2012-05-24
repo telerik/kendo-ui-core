@@ -17,6 +17,8 @@ namespace Kendo.Mvc.UI.Tests
             axisMock.SetupGet(a => a.Line).Returns(new ChartLine());
             axisMock.SetupGet(a => a.Title).Returns(new ChartAxisTitle());
             axisMock.SetupGet(a => a.Labels).Returns(new ChartAxisLabels());
+            axisMock.SetupGet(a => a.MinorTicks).Returns(new ChartAxisTicks());
+            axisMock.SetupGet(a => a.MajorTicks).Returns(new ChartAxisTicks());
             axisMock.SetupGet(a => a.PlotBands).Returns(new List<ChartPlotBand>());
             serializer = new ChartAxisSerializerBase(axisMock.Object);
         }
@@ -36,45 +38,29 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
-        public void Should_serialize_MinorTickSize()
+        public void Should_serialize_minorTicks()
         {
-            axisMock.SetupGet(a => a.MinorTickSize).Returns(1);
-            serializer.Serialize()["minorTickSize"].ShouldEqual(1);
+            axisMock.SetupGet(a => a.MinorTicks).Returns(new ChartAxisTicks { Size = 1 });
+            serializer.Serialize().ContainsKey("minorTicks").ShouldBeTrue();
         }
 
         [Fact]
-        public void Should_not_serialize_default_MinorTickSize()
+        public void Should_not_serialize_default_minorTicks()
         {
-            axisMock.SetupGet(a => a.MinorTickSize).Returns((int?)null);
-            serializer.Serialize().ContainsKey("minorTickSize").ShouldBeFalse();
+            serializer.Serialize().ContainsKey("minorTicks").ShouldBeFalse();
         }
 
         [Fact]
-        public void Should_serialize_MajorTickSize()
+        public void Should_serialize_majorTicks()
         {
-            axisMock.SetupGet(a => a.MajorTickSize).Returns(1);
-            serializer.Serialize()["majorTickSize"].ShouldEqual(1);
+            axisMock.SetupGet(a => a.MajorTicks).Returns(new ChartAxisTicks { Size = 1 });
+            serializer.Serialize().ContainsKey("majorTicks").ShouldBeTrue();
         }
 
         [Fact]
-        public void Should_not_serialize_default_MajorTickSize()
+        public void Should_not_serialize_default_majorTicks()
         {
-            axisMock.SetupGet(a => a.MajorTickSize).Returns((int?)null);
-            serializer.Serialize().ContainsKey("majorTickSize").ShouldBeFalse();
-        }
-
-        [Fact]
-        public void Should_not_serialize_default_MajorTickType()
-        {
-            axisMock.SetupGet(a => a.MajorTickType).Returns((ChartAxisTickType?)null);
-            serializer.Serialize().ContainsKey("majorTickType").ShouldBeFalse();
-        }
-
-        [Fact]
-        public void Should_not_serialize_default_MinorTickType()
-        {
-            axisMock.SetupGet(a => a.MinorTickType).Returns((ChartAxisTickType?)null);
-            serializer.Serialize().ContainsKey("minorTickType").ShouldBeFalse();
+            serializer.Serialize().ContainsKey("majorTicks").ShouldBeFalse();
         }
 
         [Fact]

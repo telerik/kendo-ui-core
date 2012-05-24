@@ -21,6 +21,8 @@ namespace Kendo.Mvc.UI
             PlotBands = new List<ChartPlotBand>();
             Title = new ChartAxisTitle();
             AxisCrossingValues = new List<double>();
+            MajorTicks = new ChartAxisTicks();
+            MinorTicks = new ChartAxisTicks();
         }
 
         /// <summary>
@@ -34,36 +36,18 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
-        /// Gets or sets the minor tick size. The default is 3.
+        /// The axis major ticks configuration.
         /// </summary>
-        public int? MinorTickSize
+        public ChartAxisTicks MajorTicks
         {
             get;
             set;
         }
 
         /// <summary>
-        /// Gets or sets the major tick size. The default is 4.
+        /// The axis minor ticks configuration.
         /// </summary>
-        public int? MajorTickSize
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// The major tick type. The default is <see cref="ChartAxisTickType.Outside"/>.
-        /// </summary>
-        public ChartAxisTickType? MajorTickType
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// The minor tick type. The default is <see cref="ChartAxisTickType.None"/>.
-        /// </summary>
-        public ChartAxisTickType? MinorTickType
+        public ChartAxisTicks MinorTicks
         {
             get;
             set;
