@@ -181,8 +181,10 @@ namespace Kendo.Mvc.UI
             
             //command.ButtonType = buttonType;
             command.ButtonType = GridButtonType.ImageAndText;
-            command.HtmlAttributes = htmlAttributes.ToDictionary();
-            command.ImageHtmlAttributes = imageHtmlAttributes.ToDictionary();
+
+            //TODO: Implement command button html attributes
+            //command.HtmlAttributes = htmlAttributes.ToDictionary();
+            //command.ImageHtmlAttributes = imageHtmlAttributes.ToDictionary();
 
             var buttons = command.CreateDisplayButtons(Localization, UrlBuilder, new GridHtmlHelper<T>(ViewContext, DataKeyStore));
 
@@ -214,8 +216,9 @@ namespace Kendo.Mvc.UI
             //TODO: Implement command button types
             //command.ButtonType = buttonType;
             command.ButtonType = GridButtonType.ImageAndText;
-            command.HtmlAttributes = htmlAttributes.ToDictionary();
-            command.ImageHtmlAttributes = imageHtmlAttributes.ToDictionary();
+            //TODO: Implement command button html attributes
+            //command.HtmlAttributes = htmlAttributes.ToDictionary();
+            //command.ImageHtmlAttributes = imageHtmlAttributes.ToDictionary();
             command.Text = text;
             command.Ajax = ajax;
             command.Name = name;

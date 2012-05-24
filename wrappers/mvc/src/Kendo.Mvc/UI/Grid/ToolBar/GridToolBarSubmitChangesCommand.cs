@@ -26,8 +26,9 @@ namespace Kendo.Mvc.UI
             save.CssClass += " " + UIPrimitives.Grid.SaveChanges;
             save.SpriteCssClass = "k-update";
             save.Text = SaveText ?? localization.SaveChanges;
-            save.HtmlAttributes = HtmlAttributes;
-            save.ImageHtmlAttributes = ImageHtmlAttributes;
+            //TODO: Implement command button html attributes
+            //save.HtmlAttributes = HtmlAttributes;
+            //save.ImageHtmlAttributes = ImageHtmlAttributes;
             save.Url = delegate { return "#"; };
 
             var cancel = factory.CreateButton<GridLinkButtonBuilder>(ButtonType);
@@ -35,8 +36,9 @@ namespace Kendo.Mvc.UI
             cancel.CssClass += " " + UIPrimitives.Grid.CancelChanges;
             cancel.SpriteCssClass = "k-cancel";
             cancel.Text = CancelText ?? localization.CancelChanges;
-            cancel.HtmlAttributes = HtmlAttributes;
-            cancel.ImageHtmlAttributes = ImageHtmlAttributes;
+            //TODO: Implement command button html attributes
+            //cancel.HtmlAttributes = HtmlAttributes;
+            //cancel.ImageHtmlAttributes = ImageHtmlAttributes;
             cancel.Url = delegate { return "#"; };
 
             return new[] { save, cancel };

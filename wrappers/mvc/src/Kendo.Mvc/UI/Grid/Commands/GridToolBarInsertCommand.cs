@@ -13,8 +13,9 @@ namespace Kendo.Mvc.UI
             button.CssClass += " " + UIPrimitives.Grid.Add;
             button.SpriteCssClass = "k-add";
             button.Text = Text ?? localization.AddNew;
-            button.HtmlAttributes = HtmlAttributes;
-            button.ImageHtmlAttributes = ImageHtmlAttributes;
+            //TODO: Implement command button html attributes
+            //button.HtmlAttributes = HtmlAttributes;
+            //button.ImageHtmlAttributes = ImageHtmlAttributes;
             button.Url = urlBuilder.AddUrl;
 
             return new[] { button };
