@@ -51,7 +51,7 @@ namespace Kendo.Mvc.UI.Tests
 
             authorization.Setup(a => a.IsAccessibleToUser(viewContext.RequestContext, It.IsAny<INavigatable>())).Returns(true);
 
-            ComboBox comboBox = new ComboBox(viewContext, clientSideObjectWriterFactory.Object, new ViewDataDictionary(), urlGenerator);
+            ComboBox comboBox = new ComboBox(viewContext, null, new ViewDataDictionary(), urlGenerator);
 
             return comboBox;
         }

@@ -1,34 +1,30 @@
 namespace Kendo.Mvc.UI
 {
+    using Kendo.Mvc.Infrastructure;
+    using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Web.Mvc;
-    using System.Web.Routing;
-    using System.Collections.Generic;
-
-    using Extensions;
 
     public class ComboBox : ViewComponentBase
     {
         //private bool hasItems = false;
 
-        public ComboBox(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory, ViewDataDictionary viewData, IUrlGenerator urlGenerator)
-            : base(viewContext, clientSideObjectWriterFactory, viewData)
+        public ComboBox(ViewContext viewContext,  IJavaScriptInitializer initializer, ViewDataDictionary viewData, IUrlGenerator urlGenerator)
+            : base(viewContext, initializer, viewData)
         {
-            UrlGenerator = urlGenerator; //check if needed
-
-            ClientEvents = new DropDownClientEvents();
-
-            //Items = new List<DropDownItem>();
-
             //animation //
             
+            ClientEvents = new DropDownClientEvents();
+
             DataSource = new DataSource();
+
+            UrlGenerator = urlGenerator;
 
             AutoBind = true;
             Enabled = true;
             HighlightFirst = true;
             IgnoreCase = true;
-            SelectedIndex = -1;
             Suggest = false;
         }
 
@@ -92,12 +88,6 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        //public IList<DropDownItem> Items
-        //{
-        //    get;
-        //    private set;
-        //}
-
         public int? MinLength
         {
             get;
@@ -116,7 +106,7 @@ namespace Kendo.Mvc.UI
             private set;
         }
 
-        public int SelectedIndex
+        public int? SelectedIndex
         {
             get;
             set;
@@ -146,29 +136,85 @@ namespace Kendo.Mvc.UI
             set; 
         }
 
-        public override void WriteInitializationScript(System.IO.TextWriter writer)
+        public override void WriteInitializationScript(TextWriter writer)
         {
-            IClientSideObjectWriter objectWriter = ClientSideObjectWriterFactory.Create(Id, "kendoComboBox", writer);
+            var options = new Dictionary<string, object>();
 
-            objectWriter.Start();
+            if (!string.IsNullOrEmpty(DataSource.Transport.Read.Url))
+            {
+                options["dataSource"] = DataSource.ToJson();
+            }
+            else if (DataSource.Data != null)
+            {
+                options["dataSource"] = DataSource.Data;
+            }
 
-            objectWriter.Append("autoBind", AutoBind, true);
-            objectWriter.Append("dataTextField", DataTextField);
-            objectWriter.Append("dataValueField", DataValueField);
-            objectWriter.Append("delay", Delay);
-            objectWriter.Append("filter", Filter);
-            objectWriter.Append("height", Height);
-            objectWriter.Append("highlightFirst", HighlightFirst, true);
-            objectWriter.Append("ignoreCase", IgnoreCase, true);
-            objectWriter.Append("index", SelectedIndex, -1);
-            objectWriter.Append("minLength", MinLength);
-            objectWriter.Append("placeholder", this.Placeholder);
-            objectWriter.Append("suggest", Suggest, false);
-            objectWriter.Append("template", this.Template);
+            if (!AutoBind)
+            {
+                options["autoBind"] = AutoBind;
+            }
 
-            ClientEvents.SerializeTo(objectWriter);
+            if (!string.IsNullOrEmpty(DataTextField))
+            {
+                options["dataTextField"] = DataTextField;
+            }
 
-            objectWriter.Complete();
+            if (!string.IsNullOrEmpty(DataValueField))
+            {
+                options["dataValueField"] = DataValueField;
+            }
+
+            if (Delay != null)
+            {
+                options["delay"] = Delay;
+            }
+
+            if (!string.IsNullOrEmpty(Filter))
+            {
+                options["filter"] = Filter;
+            }
+
+            if (Height != null)
+            {
+                options["height"] = Height;
+            }
+
+            if (!HighlightFirst)
+            {
+                options["highlightFirst"] = HighlightFirst;
+            }
+
+            if (!IgnoreCase)
+            {
+                options["ignoreCase"] = IgnoreCase;
+            }
+
+            if (SelectedIndex != null)
+            {
+                options["index"] = SelectedIndex;
+            }
+
+            if (MinLength != null)
+            {
+                options["minLength"] = MinLength;
+            }
+
+            if (!string.IsNullOrEmpty(Placeholder))
+            {
+                options["placeholder"] = Placeholder;
+            }
+
+            if (Suggest)
+            {
+                options["suggest"] = Suggest;
+            }
+
+            if (!string.IsNullOrEmpty(Template))
+            {
+                options["template"] = Template;
+            }
+
+            writer.Write(Initializer.Initialize(Id, "ComboBox", options));
 
             base.WriteInitializationScript(writer);
         }

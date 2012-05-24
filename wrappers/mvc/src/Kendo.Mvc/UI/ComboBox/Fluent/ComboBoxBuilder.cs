@@ -48,7 +48,7 @@ namespace Kendo.Mvc.UI.Fluent
 
         public ComboBoxBuilder DataValueField(string field)
         {
-            Component.DataTextField = field;
+            Component.DataValueField = field;
 
             return this;
         }
