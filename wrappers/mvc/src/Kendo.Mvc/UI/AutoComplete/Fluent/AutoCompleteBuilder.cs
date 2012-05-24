@@ -110,28 +110,28 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
-        /// <summary>
-        /// Configures the client-side events.
-        /// </summary>
-        /// <param name="clientEventsAction">The client events action.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().DropDownList()
-        ///             .Name("DropDownList")
-        ///             .ClientEvents(events =>
-        ///                 events.OnLoad("onLoad")
-        ///             )
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public AutoCompleteBuilder ClientEvents(Action<DropDownClientEventsBuilder> clientEventsAction)
-        {
-            Guard.IsNotNull(clientEventsAction, "clientEventsAction");
+        ///// <summary>
+        ///// Configures the client-side events.
+        ///// </summary>
+        ///// <param name="clientEventsAction">The client events action.</param>
+        ///// <example>
+        ///// <code lang="CS">
+        /////  &lt;%= Html.Telerik().DropDownList()
+        /////             .Name("DropDownList")
+        /////             .ClientEvents(events =>
+        /////                 events.OnLoad("onLoad")
+        /////             )
+        ///// %&gt;
+        ///// </code>
+        ///// </example>
+        //public AutoCompleteBuilder ClientEvents(Action<DropDownClientEventsBuilder> clientEventsAction)
+        //{
+        //    Guard.IsNotNull(clientEventsAction, "clientEventsAction");
 
-            clientEventsAction(new DropDownClientEventsBuilder(Component.ClientEvents));
+        //    clientEventsAction(new DropDownClientEventsBuilder(Component.ClientEvents));
 
-            return this;
-        }
+        //    return this;
+        //}
 
         ///// <summary>
         ///// Configures the effects of the AutoComplete.

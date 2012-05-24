@@ -13,9 +13,9 @@ namespace Kendo.Mvc.UI
         public ComboBox(ViewContext viewContext,  IJavaScriptInitializer initializer, ViewDataDictionary viewData, IUrlGenerator urlGenerator)
             : base(viewContext, initializer, viewData)
         {
-            //animation //
-            
-            ClientEvents = new DropDownClientEvents();
+            Animation = new PopupAnimation();
+
+            ClientEvents = new Dictionary<string, object>();
 
             DataSource = new DataSource();
 
@@ -34,7 +34,13 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        public DropDownClientEvents ClientEvents
+        public PopupAnimation Animation
+        {
+            get;
+            private set;
+        }
+
+        public IDictionary<string, object> ClientEvents
         {
             get;
             private set;
@@ -138,7 +144,7 @@ namespace Kendo.Mvc.UI
 
         public override void WriteInitializationScript(TextWriter writer)
         {
-            var options = new Dictionary<string, object>();
+            var options = new Dictionary<string, object>(ClientEvents);
 
             if (!string.IsNullOrEmpty(DataSource.Transport.Read.Url))
             {
@@ -147,6 +153,13 @@ namespace Kendo.Mvc.UI
             else if (DataSource.Data != null)
             {
                 options["dataSource"] = DataSource.Data;
+            }
+
+            var animation = Animation.ToJson();
+
+            if (animation.Keys.Any())
+            {
+                options["animation"] = animation["animation"];
             }
 
             if (!AutoBind)

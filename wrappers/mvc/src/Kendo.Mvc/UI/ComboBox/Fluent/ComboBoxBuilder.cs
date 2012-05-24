@@ -32,9 +32,9 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         } 
 
-        public ComboBoxBuilder ClientEvents(Action<DropDownClientEventsBuilder> clientEventsAction)
+        public ComboBoxBuilder ClientEvents(Action<DropDownBaseClientEventsBuilder> clientEventsAction)
         {
-            clientEventsAction(new DropDownClientEventsBuilder(Component.ClientEvents));
+            clientEventsAction(new DropDownBaseClientEventsBuilder(Component.ClientEvents));
 
             return this;
         }

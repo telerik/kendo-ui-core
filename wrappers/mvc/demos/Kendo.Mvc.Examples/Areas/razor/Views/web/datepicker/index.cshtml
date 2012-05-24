@@ -1,4 +1,5 @@
 @(Html.Kendo().DatePicker()
         .Name("datepicker")
-        .Value(DateTime.Now)        
+        .Value(DateTime.Now)
+        .ClientEvents(e => e.Change(@<text>function() { alert(1); }</text>))
 )

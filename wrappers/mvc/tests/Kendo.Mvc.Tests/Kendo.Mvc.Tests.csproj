@@ -307,7 +307,7 @@
     <Compile Include="UI\DropDownList\DropDownListTestHelper.cs" />
     <Compile Include="UI\DropDownList\DropDownItemBuilderTests.cs" />
     <Compile Include="UI\DropDownList\DropDownListDataBindingConfigurationBuilderTests.cs" />
-    <Compile Include="UI\DropDown\DropDownClientEventsBuilderTests.cs" />
+    <Compile Include="UI\DropDown\DropDownBaseClientEventsBuilderTests.cs" />
     <Compile Include="UI\Editor\EditorDropDownItemsBuilderTests.cs" />
     <Compile Include="UI\Editor\EditorRenderingTests.cs" />
     <Compile Include="UI\Editor\EditorBuilderTests.cs" />

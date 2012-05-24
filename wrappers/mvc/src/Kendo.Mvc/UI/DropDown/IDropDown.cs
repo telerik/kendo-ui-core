@@ -8,8 +8,6 @@ namespace Kendo.Mvc.UI
 
         Effects Effects { get; }
 
-        DropDownClientEvents ClientEvents { get; }
-
         string Placeholder { get; set; }
 
         string CascadeTo { get; set; }

@@ -8,7 +8,13 @@
           builder.Read(read =>
           {
               read.Action("GetListItems", "ComboBox");
-          });
+          })
+          .ServerFiltering();
       })
+      .ClientEvents(e => e.Change(@<text> function() { console.log("change", this.value()); }</text>)
+                          .Select(@<text> function() { console.log("select", this.value()); }</text>)
+                          .Open(@<text> function() { console.log("open"); }</text>)
+                          .Close(@<text> function() { console.log("close"); }</text>)
+      )
       .Filter("startswith")
 )

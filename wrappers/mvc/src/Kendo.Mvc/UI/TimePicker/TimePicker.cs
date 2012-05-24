@@ -14,7 +14,7 @@ namespace Kendo.Mvc.UI
         public TimePicker(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory, ViewDataDictionary viewData)
             : base(viewContext, clientSideObjectWriterFactory, viewData)
         {
-            ClientEvents = new Dictionary<string, ClientEvent>();
+            ClientEvents = new Dictionary<string, object>();
 
             Format = CultureInfo.CurrentCulture.DateTimeFormat.ShortTimePattern;
 
@@ -35,7 +35,7 @@ namespace Kendo.Mvc.UI
             private set;
         }
 
-        public IDictionary<string, ClientEvent> ClientEvents
+        public IDictionary<string, object> ClientEvents
         {
             get;
             private set;
