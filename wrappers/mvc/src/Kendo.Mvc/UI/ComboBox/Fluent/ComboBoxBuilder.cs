@@ -18,6 +18,22 @@ namespace Kendo.Mvc.UI.Fluent
         {
         }
 
+        public ComboBoxBuilder Animation(bool enable)
+        {
+            Component.Animation.Enabled = enable;
+
+            return this;
+        }
+
+        public ComboBoxBuilder Animation(Action<PopupAnimationBuilder> animationAction)
+        {
+            Guard.IsNotNull(animationAction, "animationAction");
+
+            animationAction(new PopupAnimationBuilder(Component.Animation));
+
+            return this;
+        }
+
         public ComboBoxBuilder AutoBind(bool autoBind)
         {
             Component.AutoBind = autoBind;
