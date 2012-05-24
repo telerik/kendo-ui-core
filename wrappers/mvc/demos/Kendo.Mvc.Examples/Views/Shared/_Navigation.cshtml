@@ -7,6 +7,6 @@
 }
 <a href="@(Url.RouteUrl(alternateRoute, new {
         suite = Url.RequestContext.RouteData.Values["suite"],
-        controller = Url.RequestContext.RouteData.Values["controller"],
-        action = Url.RequestContext.RouteData.Values["action"]
+        controller = Url.RequestContext.RouteData.Values["controller"].ToString().Replace("_", "-"),
+        action = Url.RequestContext.RouteData.Values["action"].ToString().Replace("_", "-")
     }))">@alternateArea version</a>

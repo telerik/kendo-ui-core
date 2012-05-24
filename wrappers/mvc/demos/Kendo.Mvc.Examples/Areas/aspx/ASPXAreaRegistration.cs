@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace Kendo.Mvc.Examples.Areas.ASPX
 {
@@ -14,14 +15,16 @@ namespace Kendo.Mvc.Examples.Areas.ASPX
 
         public override void RegisterArea(AreaRegistrationContext context)
         {
-            var aspxRoute = context.MapRoute(
-                "ASPXDefault",
+            var aspxRoute = new Route(
                 "aspx/{suite}/{controller}/{action}",
-                new { controller = "Suite", action = "Index" }
+                new RouteValueDictionary { { "controller", "Suite" }, { "action", "Index" } },
+                new RouteValueDictionary(),
+                // The 'UseNamespaceFallback' token will allow the runtime to use the controllers defined outside the area
+                new RouteValueDictionary { { "UseNamespaceFallback", true }, { "area", AreaName } },
+                new HyphenatedRouteHandler()
             );
 
-            // The 'UseNamespaceFallback' token will allow the runtime to use the controllers defined outside the area
-            aspxRoute.DataTokens["UseNamespaceFallback"] = true;
+            context.Routes.Add("ASPXDefault", aspxRoute);
         }
     }
 }
