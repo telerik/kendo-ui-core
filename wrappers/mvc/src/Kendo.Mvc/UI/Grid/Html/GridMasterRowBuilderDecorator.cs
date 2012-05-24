@@ -12,7 +12,7 @@ namespace Kendo.Mvc.UI.Html
 
         protected override void ApplyDecoration(IHtmlNode htmlNode)
         {
-            htmlNode.AddClass("t-master-row");
+            htmlNode.AddClass("k-master-row");
         }
     }
 }

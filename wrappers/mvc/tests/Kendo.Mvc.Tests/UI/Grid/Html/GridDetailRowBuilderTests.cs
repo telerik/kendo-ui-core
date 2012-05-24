@@ -22,7 +22,7 @@ namespace Kendo.Mvc.UI.Html.Tests
         [Fact]
         public void Should_set_details_class()
         {
-            builder.CreateRow().Attribute("class").ShouldContain("t-detail-row");
+            builder.CreateRow().Attribute("class").ShouldContain("k-detail-row");
         }
 
         [Fact]
@@ -38,7 +38,7 @@ namespace Kendo.Mvc.UI.Html.Tests
             var tr = builder.CreateRow();
             var cell = tr.Children[0];
             cell.TagName.ShouldEqual("td");
-            cell.Attribute("class").ShouldContain("t-detail-cell");
+            cell.Attribute("class").ShouldContain("k-detail-cell");
         }
 
         [Fact]

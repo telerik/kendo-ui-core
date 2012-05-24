@@ -58,7 +58,7 @@ namespace Kendo.Mvc.UI.Html
             var tr = new HtmlElement("tr")
                 .Attributes(HtmlAttributes)
                 .PrependClass(IsMasterAlternate ? UIPrimitives.Alt : "")
-                .PrependClass("t-detail-row");
+                .PrependClass("k-detail-row");
 
             if (!Expanded)
             {
@@ -66,7 +66,7 @@ namespace Kendo.Mvc.UI.Html
             }
 
             var td = new HtmlElement("td")
-                .AddClass("t-detail-cell")
+                .AddClass("k-detail-cell")
                 .Attribute("colspan", Colspan.ToString())
                 .AppendTo(tr);
 
