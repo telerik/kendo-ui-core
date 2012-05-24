@@ -8,6 +8,14 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Infrastructure;
     using Extensions;
 
+    //TODO: Implement GridBeginEditEvent option
+    //public enum GridBeginEditEvent
+    //{
+    //    Auto,
+    //    Click,
+    //    DoubleClick
+    //}
+
     public interface IGridEditingSettings
     {
         bool Enabled
@@ -16,7 +24,7 @@ namespace Kendo.Mvc.UI
         }
     }
 
-    public class GridEditingSettings<T> : IGridEditingSettings, IClientSerializable
+    public class GridEditingSettings<T> : JsonObject, IGridEditingSettings
         where T : class
     {
         private readonly IGrid grid;
@@ -26,24 +34,28 @@ namespace Kendo.Mvc.UI
             this.grid = grid;
 
             DisplayDeleteConfirmation = true;
-            FormHtmlAttributes = new RouteValueDictionary();
-            BeginEdit = GridBeginEditEvent.Auto;
-            InsertRowPosition = GridInsertRowPosition.Top;
+            //TODO: Implement edit form attributes
+          //  FormHtmlAttributes = new RouteValueDictionary();
+            //TODO: Implement GridBeginEditEvent option
+            //BeginEdit = GridBeginEditEvent.Auto;
+            //InsertRowPosition = GridInsertRowPosition.Top;
 
             DefaultDataItem = CreateDefaultItem;
         }
 
-        public GridBeginEditEvent BeginEdit 
-        { 
-            get; 
-            set; 
-        }
+        //TODO: Implement GridBeginEditEvent option
+        //public GridBeginEditEvent BeginEdit 
+        //{ 
+        //    get; 
+        //    set; 
+        //}
 
-        public GridInsertRowPosition InsertRowPosition
-        {
-            get;
-            set;
-        }
+        //TODO: Implement insert row position
+        //public GridInsertRowPosition InsertRowPosition
+        //{
+        //    get;
+        //    set;
+        //}
 
         public Window PopUp
         {
@@ -86,36 +98,17 @@ namespace Kendo.Mvc.UI
             get;
             set; 
         }
-        /// <summary>
-        /// Gets the HTML attributes of the form rendered during editing
-        /// </summary>
-        /// <value>The HTML attributes.</value>
-        public IDictionary<string, object> FormHtmlAttributes
-        {
-            get; 
-            private set; 
-        }
 
-        public IDictionary<string, object> Serialize()
-        {
-            var result = new Dictionary<string, object>();
-            var editorHtml = grid.EditorHtml;
-
-            if (editorHtml != null)
-            {
-                editorHtml = editorHtml.Replace("%", "%25").Replace("<", "%3c").Replace(">", "%3e");
-            }
-            FluentDictionary.For(result)
-                .Add("confirmDelete", DisplayDeleteConfirmation, true)
-                .Add("mode", Mode.ToString())
-                .Add("editor", editorHtml, () => Mode != GridEditMode.InLine)
-                .Add("beginEdit", BeginEdit == GridBeginEditEvent.Click ? "click" : "dblclick", () => BeginEdit != GridBeginEditEvent.Auto)
-                .Add("defaultDataItem", SerializeDefaultDataItem(), () => grid.IsClientBinding && DefaultDataItem() != null)
-                .Add("insertRowPosition", InsertRowPosition.ToString().ToLower(), () => InsertRowPosition != GridInsertRowPosition.Top)
-                .Add("popup", SerializePopUp(), () => Mode == GridEditMode.PopUp && grid.IsClientBinding);
-
-            return result;
-        }
+        //TODO: Implement edit form attributes
+        ///// <summary>
+        ///// Gets the HTML attributes of the form rendered during editing
+        ///// </summary>
+        ///// <value>The HTML attributes.</value>
+        //public IDictionary<string, object> FormHtmlAttributes
+        //{
+        //    get; 
+        //    private set; 
+        //}        
 
         private object SerializeDefaultDataItem()
         {
@@ -156,29 +149,31 @@ namespace Kendo.Mvc.UI
                 .Add("resizable", PopUp.ResizingSettings.Enabled);
 
             return result;
-        }
+        }        
 
-        public void SerializeTo(string key, IClientSideObjectWriter writer)
-        {
-            if (!Enabled)
+        protected override void Serialize(IDictionary<string, object> json)
+        {            
+            var editorHtml = grid.EditorHtml;
+
+            if (editorHtml != null)
             {
-                return;
+                editorHtml = editorHtml.Replace("%", "%25").Replace("<", "%3c").Replace(">", "%3e");
             }
 
-            var editing = Serialize();
-
-            if (editing.Any())
-            {
-                writer.AppendObject("editing", editing);
-            }
-
-            if (grid.IsClientBinding)
-            {
-                writer.AppendObject("dataKeys", grid.DataKeys.ToDictionary(dataKey => dataKey.Name, dataKey => (object)dataKey.RouteKey));
-            }
+            FluentDictionary.For(json)
+                .Add("confirmDelete", DisplayDeleteConfirmation, true)
+                .Add("mode", Mode.ToString().ToLowerInvariant());
+                //TODO: Implement editor templates
+                //.Add("editor", editorHtml, () => Mode != GridEditMode.InLine)
+                //TODO: Implement GridBeginEditEvent option                
+                //.Add("beginEdit", BeginEdit == GridBeginEditEvent.Click ? "click" : "dblclick", () => BeginEdit != GridBeginEditEvent.Auto)               
+                //TODO: Implement insert row position
+                //.Add("insertRowPosition", InsertRowPosition.ToString().ToLower(), () => InsertRowPosition != GridInsertRowPosition.Top)
+                //TODO: Implement popup settings
+                //.Add("popup", SerializePopUp(), () => Mode == GridEditMode.PopUp && grid.IsClientBinding);            
         }
     }
-  
+    
     public enum GridInsertRowPosition
     {
         Top,
