@@ -1,32 +1,117 @@
 namespace Kendo.Mvc.UI
 {
-    using Extensions;
-
+    using Kendo.Mvc.Extensions;
+    using Kendo.Mvc.Infrastructure;
+    using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Web.Mvc;
-    using System.Web.Routing;
-    using System.Collections.Generic;
 
 
     public class AutoComplete : ViewComponentBase
     {
-        //private readonly IList<IEffect> defaultEffects = new List<IEffect> { new SlideAnimation() };
-
-        public AutoComplete(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory, IUrlGenerator urlGenerator)
-            : base(viewContext, clientSideObjectWriterFactory)
+        public AutoComplete(ViewContext viewContext, IJavaScriptInitializer initializer, ViewDataDictionary viewData, IUrlGenerator urlGenerator)
+            : base(viewContext, initializer, viewData)
         {
-            UrlGenerator = urlGenerator;
+            Animation = new PopupAnimation();
 
             ClientEvents = new Dictionary<string, object>();
-            DropDownHtmlAttributes = new RouteValueDictionary();
 
-            Items = new List<string>();
+            DataSource = new DataSource();
+
+            UrlGenerator = urlGenerator;
 
             Enabled = true;
-            Encoded = true;
+            HighlightFirst = false;
+            IgnoreCase = true;
+            Suggest = false;
         }
 
-        public bool Encoded
+        public PopupAnimation Animation
+        {
+            get;
+            private set;
+        }
+
+        public IDictionary<string, object> ClientEvents
+        {
+            get;
+            private set;
+        }
+
+        public string DataTextField
+        {
+            get;
+            set;
+        }
+        
+        public int? Delay
+        {
+            get;
+            set;
+        }
+
+        public bool Enabled
+        {
+            get;
+            set;
+        }
+
+        public string Filter
+        {
+            get;
+            set;
+        }
+
+        public int? Height
+        {
+            get;
+            set;
+        }
+
+        public bool HighlightFirst
+        {
+            get;
+            set;
+        }
+
+        public bool IgnoreCase
+        {
+            get;
+            set;
+        }
+
+        public int? MinLength
+        {
+            get;
+            set;
+        }
+
+        public string Placeholder
+        {
+            get;
+            set;
+        }
+
+        public DataSource DataSource
+        {
+            get;
+            private set;
+        }
+
+        public string Separator
+        {
+            get;
+            set;
+        }
+
+        public bool Suggest
+        {
+            get;
+            set;
+        }
+
+        public string Template
         {
             get;
             set;
@@ -38,76 +123,88 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        public bool AutoFill
-        {
-            get;
-            set;
-        }
-
-        public IDictionary<string, object> ClientEvents
-        {
-            get;
-            private set;
-        }
-        
-        public IDictionary<string, object> DropDownHtmlAttributes
-        {
-            get;
-            private set;
-        }
-
-        public Effects Effects
-        {
-            get;
-            private set;
-        }
-
-        public IList<string> Items
-        { 
-            get;
-            private set;
-        }
-
-        public bool HighlightFirstMatch
-        {
-            get;
-            set;
-        }
-
-        public bool Enabled 
-        { 
-            get; 
-            set; 
-        }
-
         public string Value
         {
             get;
             set;
         }
 
-        public override void WriteInitializationScript(System.IO.TextWriter writer)
+        public override void WriteInitializationScript(TextWriter writer)
         {
-            IClientSideObjectWriter objectWriter = ClientSideObjectWriterFactory.Create(Id, "tAutoComplete", writer);
+            var options = new Dictionary<string, object>(ClientEvents);
 
-            objectWriter.Start();
+            if (!string.IsNullOrEmpty(DataSource.Transport.Read.Url))
+            {
+                options["dataSource"] = DataSource.ToJson();
+            }
+            else if (DataSource.Data != null)
+            {
+                options["dataSource"] = DataSource.Data;
+            }
 
-            objectWriter.Append("autoFill", AutoFill, false);
-            objectWriter.Append("highlightFirst", HighlightFirstMatch, false);
+            var animation = Animation.ToJson();
+
+            if (animation.Keys.Any())
+            {
+                options["animation"] = animation["animation"];
+            }
             
-            if (Items.Any())
+            if (!string.IsNullOrEmpty(DataTextField))
             {
-                objectWriter.AppendCollection("data", Items);
+                options["dataTextField"] = DataTextField;
             }
 
-            if (DropDownHtmlAttributes.Any())
+            if (Delay != null)
             {
-                objectWriter.Append("dropDownAttr", DropDownHtmlAttributes.ToAttributeString());
+                options["delay"] = Delay;
             }
 
-            objectWriter.Append("encoded", this.Encoded, true);
+            if (!string.IsNullOrEmpty(Filter))
+            {
+                options["filter"] = Filter;
+            }
 
-            objectWriter.Complete();
+            if (Height != null)
+            {
+                options["height"] = Height;
+            }
+
+            if (!HighlightFirst)
+            {
+                options["highlightFirst"] = HighlightFirst;
+            }
+
+            if (!IgnoreCase)
+            {
+                options["ignoreCase"] = IgnoreCase;
+            }
+
+            if (MinLength != null)
+            {
+                options["minLength"] = MinLength;
+            }
+
+            if (!string.IsNullOrEmpty(Placeholder))
+            {
+                options["placeholder"] = Placeholder;
+            }
+
+            if (!string.IsNullOrEmpty(Separator))
+            {
+                options["separator"] = Separator;
+            }
+
+            if (Suggest)
+            {
+                options["suggest"] = Suggest;
+            }
+
+            if (!string.IsNullOrEmpty(Template))
+            {
+                options["template"] = Template;
+            }
+
+            writer.Write(Initializer.Initialize(Id, "AutoComplete", options));
 
             base.WriteInitializationScript(writer);
         }

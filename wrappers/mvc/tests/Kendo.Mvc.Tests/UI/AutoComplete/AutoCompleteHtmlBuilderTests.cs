@@ -92,36 +92,36 @@ namespace Kendo.Mvc.UI.Tests
             Assert.Equal("disabled", tag.Attribute("disabled"));
         }
 
-        [Fact]
-        public void Render_method_should_set_selectedIndex_depending_on_returned_value_from_ValueProvider()
-        {
-            AutoComplete.Name = "AutoComplete1";
-            AutoComplete.Items.Add("Item1");
-            AutoComplete.Items.Add("Item2");
-            AutoComplete.Items.Add("Item3");
+        //[Fact]
+        //public void Render_method_should_set_selectedIndex_depending_on_returned_value_from_ValueProvider()
+        //{
+        //    AutoComplete.Name = "AutoComplete1";
+        //    AutoComplete.Items.Add("Item1");
+        //    AutoComplete.Items.Add("Item2");
+        //    AutoComplete.Items.Add("Item3");
 
-            AutoComplete.ViewContext.ViewData.Add("AutoComplete1", "Item3");
+        //    AutoComplete.ViewContext.ViewData.Add("AutoComplete1", "Item3");
             
-            var tag = renderer.Build();
+        //    var tag = renderer.Build();
 
-            Assert.Equal("Item3", tag.Attribute("value"));
-        }
+        //    Assert.Equal("Item3", tag.Attribute("value"));
+        //}
 
-        [Fact]
-        public void Input_if_GetValue_returns_null_set_DatePicker_Value_to_null()
-        {
-            System.Web.Mvc.ValueProviderResult result = new System.Web.Mvc.ValueProviderResult("s", "s", System.Threading.Thread.CurrentThread.CurrentCulture);
-            System.Web.Mvc.ModelState state = new System.Web.Mvc.ModelState();
-            state.Value = result;
+        //[Fact]
+        //public void Input_if_GetValue_returns_null_set_DatePicker_Value_to_null()
+        //{
+        //    System.Web.Mvc.ValueProviderResult result = new System.Web.Mvc.ValueProviderResult("s", "s", System.Threading.Thread.CurrentThread.CurrentCulture);
+        //    System.Web.Mvc.ModelState state = new System.Web.Mvc.ModelState();
+        //    state.Value = result;
 
-            AutoComplete.Name = "AutoComplete1";
-            AutoComplete.Value = "test";
-            AutoComplete.ViewContext.ViewData.ModelState.Add("AutoComplete1", state);
-            AutoComplete.ViewContext.ViewData.ModelState.AddModelError("AutoComplete1", "error");
+        //    AutoComplete.Name = "AutoComplete1";
+        //    AutoComplete.Value = "test";
+        //    AutoComplete.ViewContext.ViewData.ModelState.Add("AutoComplete1", state);
+        //    AutoComplete.ViewContext.ViewData.ModelState.AddModelError("AutoComplete1", "error");
 
-            IHtmlNode tag = renderer.Build();
-            tag.Attribute("value").ShouldEqual("s");
-        }
+        //    IHtmlNode tag = renderer.Build();
+        //    tag.Attribute("value").ShouldEqual("s");
+        //}
 
         [Fact]
         public void InputTag_should_render_input_validation_class_if_ModelState_Error()
