@@ -24,6 +24,8 @@ namespace Kendo.Mvc.UI.Fluent
             Command = command;
         }
 
+        //TODO: Implement command button types
+        /*
         /// <summary>
         /// Sets the button type.
         /// </summary>
@@ -37,7 +39,7 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this as TBuilder;
         }
-
+        */
         /// <summary>
         /// Sets the text displayed by the command. If not set a default value is used.
         /// </summary>

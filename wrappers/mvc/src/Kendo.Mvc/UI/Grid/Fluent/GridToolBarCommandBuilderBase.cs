@@ -13,7 +13,8 @@ namespace Kendo.Mvc.UI.Fluent
         {
             Command = command;
         }
-
+        //TODO: Implement command button types
+        /*
         /// <summary>
         /// Sets the button type.
         /// </summary>
@@ -27,7 +28,7 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this as TBuilder;
         }
-
+        */
         public TBuilder Text(string text)
         {
             Command.Text = text;

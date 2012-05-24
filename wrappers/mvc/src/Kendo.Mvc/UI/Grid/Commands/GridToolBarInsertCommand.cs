@@ -11,7 +11,7 @@ namespace Kendo.Mvc.UI
             var button = factory.CreateButton<GridLinkButtonBuilder>(ButtonType);
 
             button.CssClass += " " + UIPrimitives.Grid.Add;
-            button.SpriteCssClass = "t-add";
+            button.SpriteCssClass = "k-add";
             button.Text = Text ?? localization.AddNew;
             button.HtmlAttributes = HtmlAttributes;
             button.ImageHtmlAttributes = ImageHtmlAttributes;
