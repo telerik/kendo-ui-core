@@ -20,7 +20,7 @@
                          ProductID = product.ProductID,
                          ProductName = product.ProductName,
                          UnitPrice = product.UnitPrice.HasValue ? product.UnitPrice.Value : default(decimal),
-                         UnitsInStock = product.UnitsInStock.HasValue ? product.UnitsInStock.Value : default(int),
+                         UnitsInStock = product.UnitsInStock.HasValue ? product.UnitsInStock.Value : default(short),
                          Discontinued = product.Discontinued,
                          LastSupply = DateTime.Today
                      }).ToList();
