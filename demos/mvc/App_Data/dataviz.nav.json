@@ -5,6 +5,7 @@
             "spriteCssClass": "overviewIcon",
             "documentation": "dataviz/chart",
             "expanded": "true",
+            "packages": [ "online" ],
             "items": [{
                     "text": "Overview",
                     "url": "overview/index.html"
@@ -172,6 +173,7 @@
             "thumbnailUrl": "content/dataviz/dashboards/performance.gif",
             "expanded": "true",
             "items": [{
+                "text": "Launch",
                 "url": "dashboards/high-performance.html"
             }],
             "name": "high-performance"
@@ -182,6 +184,7 @@
             "thumbnailUrl": "content/dataviz/dashboards/car.gif",
             "expanded": "true",
             "items": [{
+                "text": "Launch",
                 "url": "dashboards/car-dashboard.html"
             }],
             "name": "car-dashboard"
@@ -193,6 +196,7 @@
             "expanded": "true",
             "packages": [ "!offline" ],
             "items": [{
+                "text": "Launch",
                 "url": "dashboards/stock-history.html"
             }],
             "name": "stock-history"
