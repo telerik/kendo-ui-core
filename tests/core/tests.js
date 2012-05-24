@@ -24,6 +24,10 @@ tests.push(
         title: "core animation"
     },
     {
+        page: "core/wrap.html",
+        title: "core wrap"
+    },
+    {
         page: "core/format.html",
         title: "core format"
     },
