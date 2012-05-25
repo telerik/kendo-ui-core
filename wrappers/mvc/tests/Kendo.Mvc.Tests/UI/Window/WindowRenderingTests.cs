@@ -8,7 +8,7 @@ namespace Kendo.Mvc.UI.Tests
     public class WindowRenderingTests
     {
         private readonly Window window;
-        private readonly Mock<IWindowHtmlBuilder> tagBuilder;
+        private readonly Mock<WindowHtmlBuilder> tagBuilder;
         private readonly Mock<IHtmlNode> rootTag;
         private readonly Mock<IHtmlNode> headerTag;
         Mock<TextWriter> textWriter;
@@ -17,7 +17,7 @@ namespace Kendo.Mvc.UI.Tests
         {
             textWriter = new Mock<TextWriter>();
 
-            tagBuilder = new Mock<IWindowHtmlBuilder>();
+            tagBuilder = new Mock<WindowHtmlBuilder>();
             rootTag = new Mock<IHtmlNode>();
             rootTag.SetupGet(t => t.Children).Returns(() => new List<IHtmlNode>());
             

@@ -10,7 +10,7 @@ namespace Kendo.Mvc.UI.Tests
     {
         public static Mock<IClientSideObjectWriter> clientSideObjectWriter;
 
-        public static Window CreateWindow(IWindowHtmlBuilder renderer)
+        public static Window CreateWindow(WindowHtmlBuilder renderer)
         {
             Mock<HttpContextBase> httpContext = TestHelper.CreateMockedHttpContext();
 
