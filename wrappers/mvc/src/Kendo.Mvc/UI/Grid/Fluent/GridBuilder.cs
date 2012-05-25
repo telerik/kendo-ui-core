@@ -3,7 +3,6 @@ namespace Kendo.Mvc.UI.Fluent
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.Globalization;
     using Extensions;
     using Infrastructure;
@@ -205,6 +204,8 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
+        //TODO: Localization
+        /*
         public GridBuilder<T> Localizable(string culture)
         {
             var localizationServiceFactory = DI.Current.Resolve<ILocalizationServiceFactory>();
@@ -214,6 +215,7 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+        */
 
         /// <summary>
         /// Configures the grid editing settings.
@@ -799,6 +801,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
+
+        //TODO: Column context menu
+        /*
         public GridBuilder<T> ColumnContextMenu()
         {
             Component.ColumnContextMenu.Enabled = true;
@@ -838,6 +843,7 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        */
         /// <summary>
         /// Configures the client-side events.
         /// </summary>
@@ -853,11 +859,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public GridBuilder<T> ClientEvents(Action<GridClientEventsBuilder> configurator)
+        public GridBuilder<T> ClientEvents(Action<GridEventBuilder> configurator)
         {
             Guard.IsNotNull(configurator, "configurator");
 
-            configurator(new GridClientEventsBuilder(Component.ClientEvents));
+            configurator(new GridEventBuilder(Component.Events));
 
             return this;
         }
@@ -934,6 +940,8 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
+        //TODO: No records template
+        /*
         public GridBuilder<T> NoRecordsTemplate(Action value)
         {
             Guard.IsNotNull(value, "value");
@@ -982,5 +990,6 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+        */
     }
 }

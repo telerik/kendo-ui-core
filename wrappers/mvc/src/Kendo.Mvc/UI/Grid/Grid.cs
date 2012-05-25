@@ -17,16 +17,7 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Resources;
     using Kendo.Mvc.UI.Fluent;
     using Kendo.Mvc.UI.Html;
-    /// isummary>
-    /// Telerik Grid for ASP.NET MVC is a view component for presenting tabular data.
-    /// It supports the following features:
-    /// <list type="bullet">
-    ///     <item>Flexible databinding - server, ajax and web service</item>
-    ///     <item>Paging, sorting and filtering</item>
-    ///     <item>Light HTML and JavaScript footprint</item>
-    /// </list>
-    /// </summary>
-    /// <typeparam name="T">The type of the data item which the grid is bound to.</typeparam>
+
     public class Grid<T> : ViewComponentBase, IGridColumnContainer<T>, IGrid where T : class
     {
         private readonly IGridHtmlBuilderFactory htmlBuilderFactory;
@@ -77,7 +68,6 @@ namespace Kendo.Mvc.UI
             Footer = true;
             IsEmpty = true;
 
-            ClientEvents = new GridClientEvents();
             Selection = new GridSelectionSettings();
 
             ToolBar = new GridToolBarSettings<T>(this);
@@ -463,16 +453,6 @@ namespace Kendo.Mvc.UI
         /// Gets the template which the grid will use to render a row
         /// </summary>
         public HtmlTemplate<T> RowTemplate
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// Gets the client events of the grid.
-        /// </summary>
-        /// <value>The client events.</value>
-        public GridClientEvents ClientEvents
         {
             get;
             private set;

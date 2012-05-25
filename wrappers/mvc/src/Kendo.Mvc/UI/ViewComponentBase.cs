@@ -32,6 +32,8 @@ namespace Kendo.Mvc.UI
             HtmlAttributes = new RouteValueDictionary();
 
             IsSelfInitialized = true;
+
+            Events = new Dictionary<string, object>();
         }
 
         public IJavaScriptInitializer Initializer
@@ -45,6 +47,12 @@ namespace Kendo.Mvc.UI
         {
             Initializer = initializer;
         }
+
+        /// <summary>
+        /// Gets the client events of the grid.
+        /// </summary>
+        /// <value>The client events.</value>
+        public IDictionary<string, object> Events { get; private set; }
 
         /// <summary>
         /// Gets or sets the name.
