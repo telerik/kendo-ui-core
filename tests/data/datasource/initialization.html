@@ -194,6 +194,7 @@
                         model: Model.define()
                     },
                     serverGrouping: true,
+                    group: [ { field: "foo", value: "bar" } ],
                     data: [ { field: "foo", value: "bar", items: [{ id: 1, foo: "bar"}, { id: 2, foo: "bar"}]}]
                 });
                 dataSource.read();
@@ -208,6 +209,7 @@
                         model: Model.define()
                     },
                     serverGrouping: true,
+                    group: [ { field: "foo", value: "bar" } ],
                     data: [ { field: "foo", value: "bar", items: [{ id: 1, foo: "bar"}, { id: 2, foo: "bar"}]}]
                 });
                 dataSource.read();
@@ -220,6 +222,7 @@
             test("getByUid returns data record if data is grouped", function() {
                 var dataSource = new DataSource({
                     serverGrouping: true,
+                    group: [ { field: "foo", value: "bar" } ],
                     data: [ { field: "foo", value: "bar", items: [{ id: 1, foo: "bar"}, { id: 2, foo: "bar"}]}]
                 });
                 dataSource.read();
@@ -233,6 +236,7 @@
             test("getByUid returns data record if data is grouped with multiple group levels", function() {
                 var dataSource = new DataSource({
                     serverGrouping: true,
+                    group: [ { field: "foo", value: "bar" } ],
                     data: [ { field: "foo", value: "bar", hasSubgroups: true, items: [
                         { field: "id", value: 1, items: [{ id: 1, foo: "bar"}]},
                         { field: "id", value: 2, items: [{ id: 2, foo: "bar"}]}
