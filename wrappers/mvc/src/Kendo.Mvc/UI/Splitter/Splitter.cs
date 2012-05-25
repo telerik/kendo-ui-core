@@ -41,6 +41,8 @@ namespace Kendo.Mvc.UI
 
         public override void WriteInitializationScript(TextWriter writer)
         {
+            // TODO: use new serialization scheme
+            // TODO: add animation configuration and builder
             IClientSideObjectWriter objectWriter = ClientSideObjectWriterFactory.Create(Id, "kendoSplitter", writer);
 
             objectWriter.Start();

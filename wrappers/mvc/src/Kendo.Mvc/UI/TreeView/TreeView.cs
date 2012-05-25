@@ -152,6 +152,7 @@ namespace Kendo.Mvc.UI
 
         public override void WriteInitializationScript(TextWriter writer)
         {
+            // TODO: use new serialization scheme
             IClientSideObjectWriter objectWriter = ClientSideObjectWriterFactory.Create(Id, "kendoTreeView", writer);
             objectWriter.Start();
 
