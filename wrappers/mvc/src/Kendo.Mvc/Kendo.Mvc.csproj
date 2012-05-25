@@ -896,8 +896,6 @@
     <Compile Include="UI\Grid\GridRow.cs" />
     <Compile Include="UI\Grid\Settings\GridScrollingSettings.cs" />
     <Compile Include="UI\Grid\Fluent\GridScrollSettingsBuilder.cs" />
-    <Compile Include="UI\Grid\Fluent\GridRequestSettingsBuilder.cs" />
-    <Compile Include="UI\Grid\Fluent\GridRequestSettingsBuilderBase.cs" />
     <Compile Include="UI\Grid\GridPagerStyles.cs" />
     <Compile Include="UI\Grid\Settings\GridSelectionSettings.cs" />
     <Compile Include="UI\Grid\Fluent\GridSelectionSettingsBuilder.cs" />
