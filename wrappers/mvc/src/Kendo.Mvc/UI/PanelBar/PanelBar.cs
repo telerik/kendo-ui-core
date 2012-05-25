@@ -13,12 +13,10 @@ namespace Kendo.Mvc.UI
 
     public class PanelBar : ViewComponentBase, INavigationItemComponent<PanelBarItem>
     {
-        private readonly INavigationComponentHtmlBuilderFactory<PanelBar, PanelBarItem> builderFactory;
-
         internal bool isPathHighlighted;
         internal bool isExpanded;
 
-        public PanelBar(ViewContext viewContext, IJavaScriptInitializer initializer, IUrlGenerator urlGenerator, INavigationItemAuthorization authorization, INavigationComponentHtmlBuilderFactory<PanelBar, PanelBarItem> rendererFactory)
+        public PanelBar(ViewContext viewContext, IJavaScriptInitializer initializer, IUrlGenerator urlGenerator, INavigationItemAuthorization authorization)
             : base(viewContext, initializer)
         {
             Guard.IsNotNull(urlGenerator, "urlGenerator");
@@ -26,8 +24,6 @@ namespace Kendo.Mvc.UI
 
             Authorization = authorization;
             UrlGenerator = urlGenerator;
-
-            this.builderFactory = rendererFactory;
 
             Animation = new ExpandableAnimation();
 
@@ -116,18 +112,13 @@ namespace Kendo.Mvc.UI
 
         public override void WriteInitializationScript(TextWriter writer)
         {
-            var options = new Dictionary<string, object>();
+            var options = new Dictionary<string, object>(ClientEvents);
 
             var animation = Animation.ToJson();
 
             if (animation.Keys.Any())
             {
                 options["animation"] = animation["animation"];
-            }
-
-            if (ClientEvents.Keys.Any())
-            {
-                options.Merge(ClientEvents);
             }
 
             options["expandMode"] = ExpandMode;
@@ -151,7 +142,7 @@ namespace Kendo.Mvc.UI
 
                 int itemIndex = 0;
 
-                INavigationComponentHtmlBuilder<PanelBarItem> builder = builderFactory.Create(this);
+                var builder = new PanelBarHtmlBuilder(this, DI.Current.Resolve<IActionMethodCache>());
 
                 IHtmlNode panelbarTag = builder.Build();
 

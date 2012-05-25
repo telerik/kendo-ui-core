@@ -81,9 +81,6 @@ namespace Kendo.Mvc.Infrastructure
         
         private static void RegisterComponentDependencies()
         {
-            Current.Register<INavigationComponentHtmlBuilderFactory<PanelBar, PanelBarItem>, IActionMethodCache>((actionMethodCache) =>
-                            new PanelBarHtmlBuilderFactory(actionMethodCache));
-
             Current.Register<INavigationComponentHtmlBuilderFactory<Menu, MenuItem>, IActionMethodCache>((actionMethodCache) =>
                 new MenuHtmlBuilderFactory(actionMethodCache));
 
