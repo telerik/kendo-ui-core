@@ -13,13 +13,13 @@
             Close = new Effects("close");
         }
 
-        public bool Enabled 
+        public bool Enabled
         { 
             get; 
             set; 
         }
 
-        public Effects Open 
+        public Effects Open
         { 
             get; 
             set; 
