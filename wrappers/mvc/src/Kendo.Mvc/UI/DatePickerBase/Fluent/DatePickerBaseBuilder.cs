@@ -1,15 +1,15 @@
 namespace Kendo.Mvc.UI.Fluent
 {
+    using Kendo.Mvc.Infrastructure;
+    using Kendo.Mvc.Resources;
     using System;
     using System.Collections.Generic;
-    using Kendo.Mvc.Extensions;
-    using Kendo.Mvc.Infrastructure;
 
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="DatePickerBase"/> component.
     /// </summary>
     public class DatePickerBaseBuilder<TPicker, TPickerBuilder> : ViewComponentBuilderBase<TPicker, TPickerBuilder>, IHideObjectMembers
-        where TPicker : ViewComponentBase, IDatePicker
+        where TPicker : DatePickerBase
         where TPickerBuilder : ViewComponentBuilderBase<TPicker, TPickerBuilder>
     {
         /// <summary>
@@ -21,100 +21,22 @@ namespace Kendo.Mvc.UI.Fluent
         {
         }
 
-        ///// <summary>
-        ///// Configures the effects of the datepicker.
-        ///// </summary>
-        ///// <param name="effectsAction">The action which configures the effects.</param>
-        ///// <example>
-        ///// <code lang="CS">
-        ///// &lt;%= Html.Telerik().DatePicker()
-        /////	           .Name("DatePicker")
-        /////	           .Effects(fx =>
-        /////	           {
-        /////		            fx.Height()
-        /////			          .Opacity()
-        /////					  .OpenDuration(AnimationDuration.Normal)
-        /////					  .CloseDuration(AnimationDuration.Normal);
-        /////	           })
-        ///// </code>
-        ///// </example>
-        //public TPickerBuilder Effects(Action<EffectsBuilder> addEffects)
-        //{
-        //    Guard.IsNotNull(addEffects, "addAction");
-
-        //    EffectsBuilderFactory factory = new EffectsBuilderFactory();
-
-        //    addEffects(factory.Create(Component.Effects));
-
-        //    return this as TPickerBuilder;
-        //}
-        
-        /// <summary>
-        /// Sets whether calendar should open on focus.
-        /// </summary>
-        public TPickerBuilder OpenOnFocus(bool value)
+        public TPickerBuilder Animation(bool enable)
         {
-            Component.OpenOnFocus = value;
+            Component.Animation.Enabled = enable;
 
             return this as TPickerBuilder;
         }
 
-        /// <summary>
-        /// Sets the date format, which will be used to parse and format the machine date.
-        /// </summary>
-        public TPickerBuilder Format(string format) 
+        public TPickerBuilder Animation(Action<PopupAnimationBuilder> animationAction)
         {
-            Guard.IsNotNullOrEmpty(format, "format");
+            Guard.IsNotNull(animationAction, "animationAction");
 
-            Component.Format = format;
+            animationAction(new PopupAnimationBuilder(Component.Animation));
 
             return this as TPickerBuilder;
         }
 
-        /// <summary>
-        /// Enables the today button of the calendar. Today should be between min/max range to be shown.
-        /// </summary>
-        public TPickerBuilder TodayButton()
-        {
-            Component.TodayFormat = "D";
-
-            return this as TPickerBuilder;
-        }
-
-        /// <summary>
-        /// Sets the format and enables the today button of the calendar. Today should be between min/max range to be shown.
-        /// </summary>
-        public TPickerBuilder TodayButton(string format)
-        {
-            Component.TodayFormat = format;
-
-            return this as TPickerBuilder;
-        }
-
-        /// <summary>
-        /// Sets the minimal date, which can be selected in DatePicker.
-        /// </summary>
-        public TPickerBuilder Min(DateTime date)
-        {
-            Guard.IsNotNull(date, "date");
-
-            Component.MinValue = date;
-
-            return this as TPickerBuilder;
-        } 
-                
-          /// <summary>
-        /// Sets the maximal date, which can be selected in DatePicker.
-        /// </summary>
-        public TPickerBuilder Max(DateTime date)
-        {
-            Guard.IsNotNull(date, "date");
-
-            Component.MaxValue = date;
-
-            return this as TPickerBuilder;
-        }
-       
         /// <summary>
         /// Configures the client-side events.
         /// </summary>
@@ -139,24 +61,19 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Sets the Input HTML attributes.
+        /// Sets the date format, which will be used to parse and format the machine date.
         /// </summary>
-        /// <param name="attributes">The HTML attributes.</param>
-        public TPickerBuilder InputHtmlAttributes(object attributes)
+        public TPickerBuilder Format(string format)
         {
-            return InputHtmlAttributes(attributes.ToDictionary());
-        }        
-        
-        /// <summary>
-        /// Sets the Input HTML attributes.
-        /// </summary>
-        /// <param name="attributes">The HTML attributes.</param>
-        public TPickerBuilder InputHtmlAttributes(IDictionary<string, object> attributes)
+            Component.Format = format;
+
+            return this as TPickerBuilder;
+        }
+
+        public TPickerBuilder ParseFormats(IEnumerable<string> formats)
         {
-            Guard.IsNotNull(attributes, "attributes");
-            
-            Component.InputHtmlAttributes.Clear();
-            Component.InputHtmlAttributes.Merge(attributes);
+            Component.ParseFormats.Clear();
+            Component.ParseFormats.AddRange(formats);
 
             return this as TPickerBuilder;
         }
@@ -167,6 +84,45 @@ namespace Kendo.Mvc.UI.Fluent
         public TPickerBuilder Enable(bool value)
         {
             Component.Enabled = value;
+
+            return this as TPickerBuilder;
+        }
+
+        /// <summary>
+        /// Sets the value of the datepicker input
+        /// </summary>
+        public TPickerBuilder Value(DateTime? date)
+        {
+            if (date.HasValue)
+            {
+                date = date.Value == DateTime.MinValue ? null : date;
+            }
+
+            Component.Value = date;
+
+            return this as TPickerBuilder;
+        }
+
+        /// <summary>
+        /// Sets the minimal date, which can be selected in DatePicker.
+        /// </summary>
+        public TPickerBuilder Min(DateTime date)
+        {
+            Guard.IsNotNull(date, "date");
+
+            Component.Min = date;
+
+            return this as TPickerBuilder;
+        }
+
+        /// <summary>
+        /// Sets the maximal date, which can be selected in DatePicker.
+        /// </summary>
+        public TPickerBuilder Max(DateTime date)
+        {
+            Guard.IsNotNull(date, "date");
+
+            Component.Max = date;
 
             return this as TPickerBuilder;
         }

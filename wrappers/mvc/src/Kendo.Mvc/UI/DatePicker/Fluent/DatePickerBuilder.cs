@@ -10,7 +10,7 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="DatePicker"/> component.
     /// </summary>
-    public class DatePickerBuilder: ViewComponentBuilderBase<DatePicker, DatePickerBuilder>, IHideObjectMembers
+    public class DatePickerBuilder: DatePickerBaseBuilder<DatePicker, DatePickerBuilder>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DatePickerBuilder"/> class.
@@ -21,24 +21,6 @@ namespace Kendo.Mvc.UI.Fluent
         {
         }
         
-        /// <summary>
-        /// Sets the date format, which will be used to parse and format the machine date.
-        /// </summary>
-        public DatePickerBuilder Format(string format)
-        {
-            Component.Format = format;
-
-            return this;
-        }
-
-        public DatePickerBuilder ParseFormats(IEnumerable<string> formats)
-        {
-            Component.ParseFormats.Clear();
-            Component.ParseFormats.AddRange(formats);
-
-            return this;
-        }
-
         public DatePickerBuilder Footer(string footer)
         {
             Component.Footer = footer;
@@ -60,45 +42,6 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
-        public DatePickerBuilder Animation(bool enable)
-        {
-            Component.Animation.Enabled = enable;
-
-            return this;
-        }
-
-        public DatePickerBuilder Animation(Action<PopupAnimationBuilder> animationAction)
-        {
-            Guard.IsNotNull(animationAction, "animationAction");
-
-            animationAction(new PopupAnimationBuilder(Component.Animation));
-
-            return this;
-        }
-
-        /// <summary>
-        /// Configures the client-side events.
-        /// </summary>
-        /// <param name="clientEventsAction">The client events action.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().DatePicker()
-        ///             .Name("DatePicker")
-        ///             .ClientEvents(events =>
-        ///                 events.OnLoad("onLoad").OnSelect("onSelect")
-        ///             )
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public DatePickerBuilder ClientEvents(Action<DatePickerBaseClientEventsBuilder> clientEventsAction)
-        {
-            Guard.IsNotNull(clientEventsAction, "clientEventsAction");
-
-            clientEventsAction(new DatePickerBaseClientEventsBuilder(Component.ClientEvents));
-
-            return this;
-        }
-
         public DatePickerBuilder MonthTemplate(string content)
         {
             Component.MonthTemplate.Content = content;
@@ -114,32 +57,7 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
-
-        /// <summary>
-        /// Enables or disables the datepicker.
-        /// </summary>
-        public DatePickerBuilder Enable(bool value)
-        {
-            Component.Enabled = value;
-
-            return this;
-        }
         
-        /// <summary>
-        /// Sets the value of the datepicker input
-        /// </summary>
-        public DatePickerBuilder Value(DateTime? date)
-        {
-            if (date.HasValue)
-            {
-                date = date.Value == DateTime.MinValue ? null : date;
-            }
-
-            Component.Value = date;
-
-            return this;
-        }
-
         /// <summary>
         /// Sets the value of the datepicker input
         /// </summary>
@@ -158,31 +76,7 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
-
-        /// <summary>
-        /// Sets the minimal date, which can be selected in DatePicker.
-        /// </summary>
-        public DatePickerBuilder Min(DateTime date)
-        {
-            Guard.IsNotNull(date, "date");
-
-            Component.Min = date;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the maximal date, which can be selected in DatePicker.
-        /// </summary>
-        public DatePickerBuilder Max(DateTime date)
-        {
-            Guard.IsNotNull(date, "date");
-
-            Component.Max = date;
-
-            return this;
-        }
-
+        
         /// <summary>
         /// Sets the minimal date, which can be selected in DatePicker.
         /// </summary>

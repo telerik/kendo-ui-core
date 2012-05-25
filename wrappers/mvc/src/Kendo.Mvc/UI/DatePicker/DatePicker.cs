@@ -12,7 +12,7 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Resources;
     using Kendo.Mvc.UI.Html;
 
-    public class DatePicker : ViewComponentBase, IInputComponent<DateTime>
+    public class DatePicker : DatePickerBase
     {
         static internal DateTime defaultMinDate = new DateTime(1900, 1, 1);
         static internal DateTime defaultMaxDate = new DateTime(2099, 12, 31);
@@ -21,47 +21,16 @@ namespace Kendo.Mvc.UI
             : base(viewContext, initializer, viewData)
         {
             Format = CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern;
-            ParseFormats = new List<string>();
 
             Min = defaultMinDate;
             Max = defaultMaxDate;
-
-            Animation = new PopupAnimation();
-            ClientEvents = new Dictionary<string, object>();
             MonthTemplate = new MonthTemplate();
-
-            Value = null;
-            Enabled = true;
-        }
-
-        public PopupAnimation Animation
-        {
-            get;
-            private set;
-        }
-
-        public IDictionary<string, object> ClientEvents
-        {
-            get;
-            private set;
         }
 
         public MonthTemplate MonthTemplate
         {
             get;
             private set;
-        }
-
-        public string Format
-        {
-            get;
-            set;
-        }
-
-        public List<string> ParseFormats
-        {
-            get;
-            set;
         }
 
         public string Footer
@@ -81,31 +50,7 @@ namespace Kendo.Mvc.UI
             get;
             set;
         }
-
-        public DateTime? Value
-        {
-            get;
-            set;
-        }
-
-        public DateTime Min
-        {
-            get;
-            set;
-        }
-
-        public DateTime Max
-        {
-            get;
-            set;
-        }
-
-        public bool Enabled
-        {
-            get;
-            set;
-        }
-        
+       
         public override void WriteInitializationScript(TextWriter writer)
         {
             var options = new Dictionary<string, object>(ClientEvents);
