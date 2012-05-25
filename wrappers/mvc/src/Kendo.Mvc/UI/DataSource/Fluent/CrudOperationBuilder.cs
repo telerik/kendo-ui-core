@@ -87,6 +87,20 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        public CrudOperationBuilder Data(Func<object, object> handler)
+        {
+            operation.Data.InlineCodeBlock = handler;
+
+            return this;
+        }
+
+        public CrudOperationBuilder Data(string handler)
+        {
+            operation.Data.HandlerName = handler;
+
+            return this;
+        }
+
         private void SetUrl()
         {
             operation.Url = operation.GenerateUrl(viewContext, urlGenerator);
