@@ -57,7 +57,7 @@ var mvcWrappersBundle = {
     suites: ["web", "dataviz", "mobile", "aspnetmvc"],
     combinedSuites: ["web", "dataviz", "mobile"],
     combinedScript: "all",
-    sourceLicense: "src-license-none.txt",
+    sourceLicense: "src-license-complete.txt",
     licenses: productionLicenses,
     skipExamples: true,
     skipPackage: true,
