@@ -955,16 +955,15 @@
     <Compile Include="UI\NavigationItemImageRenderer.cs" />
     <Compile Include="UI\NavigationItemLinkRenderer.cs" />
     <Compile Include="UI\PanelBar\PanelBar.cs" />
-    <Compile Include="UI\PanelBar\PanelBarBuilder.cs" />
+    <Compile Include="UI\PanelBar\Fluent\PanelBarBuilder.cs" />
     <Compile Include="UI\PanelBar\PanelBarClientEvents.cs" />
-    <Compile Include="UI\PanelBar\PanelBarClientEventsBuilder.cs" />
+    <Compile Include="UI\PanelBar\Fluent\PanelBarClientEventsBuilder.cs" />
     <Compile Include="UI\PanelBar\PanelBarExpandMode.cs" />
     <Compile Include="UI\PanelBar\PanelBarItem.cs" />
-    <Compile Include="UI\PanelBar\PanelBarItemBuilder.cs" />
-    <Compile Include="UI\PanelBar\PanelBarItemFactory.cs" />
-    <Compile Include="UI\PanelBar\PanelBarHtmlBuilder.cs" />
+    <Compile Include="UI\PanelBar\Fluent\PanelBarItemBuilder.cs" />
+    <Compile Include="UI\PanelBar\Fluent\PanelBarItemFactory.cs" />
+    <Compile Include="UI\PanelBar\Html\PanelBarHtmlBuilder.cs" />
     <Compile Include="Extensions\HtmlAttributesContainerExtensions.cs" />
-    <Compile Include="UI\PanelBar\PanelBarHtmlBuilderFactory.cs" />
     <Compile Include="UI\TabStrip\ITabStripHtmlBuilder.cs" />
     <Compile Include="UI\TabStrip\ITabStripHtmlBuilderFactory.cs" />
     <Compile Include="UI\TabStrip\TabStripClientEvents.cs" />
@@ -1072,10 +1071,7 @@
       <Link>Scripts\kendo.validator.aspnetmvc.js</Link>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UI\PanelBar\Fluent\" />
-    <Folder Include="UI\PanelBar\Html\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <ItemGroup>
