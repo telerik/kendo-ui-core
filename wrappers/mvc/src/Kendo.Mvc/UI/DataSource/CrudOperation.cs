@@ -14,6 +14,7 @@ namespace Kendo.Mvc.UI
         public CrudOperation()
         {            
             RouteValues = new RouteValueDictionary();
+            Data = new ClientEvent();
         }
 
         //private string Encode(string value)
@@ -37,8 +38,13 @@ namespace Kendo.Mvc.UI
                 {
                     json["dataType"] = DataType;
                 }
+
+                if (Data.HasValue())
+                {
+                    json["data"] = Data;
+                }
             }
-        }        
+        }
 
         public string DataType { get; set; }               
 
@@ -73,6 +79,8 @@ namespace Kendo.Mvc.UI
                 routeName = null;
             }
         }
+
+        public ClientEvent Data { get; set; }
 
         public RouteValueDictionary RouteValues
         {

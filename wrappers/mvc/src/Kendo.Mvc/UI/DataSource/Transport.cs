@@ -37,7 +37,6 @@ namespace Kendo.Mvc.UI
                 json["update"] = update;
             }
 
-
             var create = Create.ToJson();
 
             if (create.Keys.Any())
