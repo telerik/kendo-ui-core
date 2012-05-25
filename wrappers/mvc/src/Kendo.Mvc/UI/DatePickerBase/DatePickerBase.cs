@@ -1,21 +1,28 @@
 namespace Kendo.Mvc.UI
 {
+    using Kendo.Mvc.Infrastructure;
     using System;
     using System.Collections.Generic;
     using System.Web.Mvc;
 
-    public class DatePickerBase : ViewComponentBase, IDatePicker
+    public class DatePickerBase : ViewComponentBase, IInputComponent<DateTime>
     {
-        public DatePickerBase(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory)
-            : base(viewContext, clientSideObjectWriterFactory)
+        public DatePickerBase(ViewContext viewContext, IJavaScriptInitializer initializer, ViewDataDictionary viewData)
+            : base(viewContext, initializer, viewData)
         {
-            InputHtmlAttributes = new Dictionary<string, object>();
-
+            ParseFormats = new List<string>();
+            
+            Animation = new PopupAnimation();
+            ClientEvents = new Dictionary<string, object>();
+            
             Value = null;
             Enabled = true;
-            OpenOnFocus = false;
+        }
 
-            ClientEvents = new Dictionary<string, object>();
+        public PopupAnimation Animation
+        {
+            get;
+            private set;
         }
 
         public IDictionary<string, object> ClientEvents
@@ -23,47 +30,14 @@ namespace Kendo.Mvc.UI
             get;
             private set;
         }
-        /// <summary>
-        /// Gets the id.
-        /// </summary>
-        /// <value>The id.</value>
-        public new string Id
-        {
-            get
-            {
-                // Return from htmlattributes if user has specified
-                // otherwise build it from name
-                return InputHtmlAttributes.ContainsKey("id") ?
-                       InputHtmlAttributes["id"].ToString() :
-                       (!string.IsNullOrEmpty(Name) ? Name.Replace(".", HtmlHelper.IdAttributeDotReplacement) : null);
-            }
-        }
-
-        public IDictionary<string, object> InputHtmlAttributes
-        {
-            get;
-            set;
-        }
-
-        public Effects Effects
-        {
-            get;
-            set;
-        }
-
-        public bool OpenOnFocus
-        {
-            get;
-            set;
-        }
-
+        
         public string Format
         {
             get;
             set;
         }
 
-        public string TodayFormat
+        public List<string> ParseFormats
         {
             get;
             set;
@@ -75,13 +49,13 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        public DateTime MinValue
+        public DateTime Min
         {
             get;
             set;
         }
 
-        public DateTime MaxValue
+        public DateTime Max
         {
             get;
             set;
