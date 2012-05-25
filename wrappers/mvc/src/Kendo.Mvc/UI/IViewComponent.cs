@@ -2,7 +2,7 @@ namespace Kendo.Mvc.UI
 {
     using System.Web.Mvc;
 
-    public interface IViewComponent
+    public interface IViewComponent : IHtmlAttributesContainer
     {
         string Id { get; }
 

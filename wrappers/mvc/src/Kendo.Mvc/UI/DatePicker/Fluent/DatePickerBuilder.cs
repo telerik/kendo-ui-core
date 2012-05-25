@@ -1,16 +1,13 @@
 namespace Kendo.Mvc.UI.Fluent
 {
-    using System;
-
-    using Extensions;
-    using Infrastructure;
+    using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.Resources;
-    using System.Collections.Generic;
+    using System;
 
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="DatePicker"/> component.
     /// </summary>
-    public class DatePickerBuilder: DatePickerBaseBuilder<DatePicker, DatePickerBuilder>
+    public class DatePickerBuilder: DatePickerBuilderBase<DatePicker, DatePickerBuilder>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DatePickerBuilder"/> class.
@@ -28,16 +25,20 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
-        public DatePickerBuilder Depth(string depth)
+        public DatePickerBuilder Depth(CalendarView depth)
         {
-            Component.Depth = depth;
+            Guard.IsNotNull(depth, "depth");
+
+            Component.Depth = depth.ToString().ToLower();
 
             return this;
         }
 
-        public DatePickerBuilder Start(string start)
+        public DatePickerBuilder Start(CalendarView start)
         {
-            Component.Start = start;
+            Guard.IsNotNull(start, "start");
+
+            Component.Start = start.ToString().ToLower();
 
             return this;
         }
@@ -57,26 +58,7 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
-        
-        /// <summary>
-        /// Sets the value of the datepicker input
-        /// </summary>
-        public DatePickerBuilder Value(string date)
-        {
-            DateTime parsedDate;
-
-            if (DateTime.TryParse(date, out parsedDate))
-            {
-                Component.Value = parsedDate == DateTime.MinValue ? null : new Nullable<DateTime>(parsedDate);
-            }
-            else 
-            {
-                Component.Value = null;
-            }
-
-            return this;
-        }
-        
+                       
         /// <summary>
         /// Sets the minimal date, which can be selected in DatePicker.
         /// </summary>

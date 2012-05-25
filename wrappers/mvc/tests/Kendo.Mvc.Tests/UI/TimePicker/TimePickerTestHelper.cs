@@ -1,12 +1,8 @@
 namespace Kendo.Mvc.UI.Tests
 {
-    using System.IO;
-    using System.Web;
-    using System.Web.Mvc;
-    using System.Web.UI;
-
-
+    using Kendo.Mvc.Infrastructure;
     using Moq;
+    using System.Web.Mvc;
     
     public static class TimePickerTestHelper
     {
@@ -15,18 +11,11 @@ namespace Kendo.Mvc.UI.Tests
 
         public static TimePicker CreateTimePicker()
         {
-            Mock<HttpContextBase> httpContext = TestHelper.CreateMockedHttpContext();
-
-            httpContext.Setup(c => c.Request.Browser.CreateHtmlTextWriter(It.IsAny<TextWriter>())).Returns(new HtmlTextWriter(TextWriter.Null));
-
-            Mock<IClientSideObjectWriterFactory> clientSideObjectWriterFactory = new Mock<IClientSideObjectWriterFactory>();
-            clientSideObjectWriter = new Mock<IClientSideObjectWriter>();
+            var initializer = new Mock<IJavaScriptInitializer>();
 
             viewContext = TestHelper.CreateViewContext();
 
-            clientSideObjectWriterFactory.Setup(c => c.Create(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<TextWriter>())).Returns(clientSideObjectWriter.Object);
-
-            TimePicker timepicker = new TimePicker(viewContext, clientSideObjectWriterFactory.Object, new ViewDataDictionary());
+            TimePicker timepicker = new TimePicker(viewContext, initializer.Object, new ViewDataDictionary());
 
             return timepicker;
         }

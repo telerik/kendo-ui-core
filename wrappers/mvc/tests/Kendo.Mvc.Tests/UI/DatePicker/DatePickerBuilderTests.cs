@@ -7,203 +7,232 @@ namespace Kendo.Mvc.UI.Tests
 
     public class DatePickerBuilderTests
     {
-        //private readonly DatePicker datePicker;
-        //private readonly DatePickerBuilder builder;
+        private readonly DatePicker datePicker;
+        private readonly DatePickerBuilder builder;
 
-        //public DatePickerBuilderTests()
-        //{
-        //    datePicker = DatePickerTestHelper.CreateDatePicker(null, null);
-        //    builder = new DatePickerBuilder(datePicker);
-        //}
+        public DatePickerBuilderTests()
+        {
+            datePicker = DatePickerTestHelper.CreateDatePicker(null);
+            builder = new DatePickerBuilder(datePicker);
+        }
 
-        //[Fact]
-        //public void ShowButton_should_set_EnableButton_property_of_datePicker()
-        //{
-        //    const bool showButton = true;
-        //    builder.ShowButton(showButton);
+        [Fact]
+        public void Animation_with_false_argument_disables_animation()
+        {
+            builder.Animation(false);
 
-        //    Assert.Equal(showButton, datePicker.ShowButton);
-        //}
+            datePicker.Animation.Enabled.ShouldEqual(false);
+        }
 
-        //[Fact]
-        //public void ShowButton_should_return_builder()
-        //{
-        //    const bool showButton = true;
-        //    var returnedBuilder = builder.ShowButton(showButton);
+        [Fact]
+        public void Animation_sets_animation_effects_of_the_datepicker()
+        {
+            builder.Animation(b => b.Open(o => o.Duration(200).Expand()));
 
-        //    Assert.IsType(typeof(DatePickerBuilder), returnedBuilder);
-        //}
+            datePicker.Animation.Open.Duration.ShouldEqual(200);
+            datePicker.Animation.Open.Container[0].ShouldEqual("expand");
+        }
 
-        //[Fact]
-        //public void ButtonTitle_should_set_ButtonTitle_property_of_datePicker()
-        //{
-        //    const string buttonTitle = "button";
-        //    builder.ButtonTitle(buttonTitle);
+        [Fact]
+        public void Animation_returns_builder()
+        {
+            builder.Animation(false).ShouldBeType<DatePickerBuilder>();
+        }
 
-        //    Assert.Equal(buttonTitle, datePicker.ButtonTitle);
-        //}
+        [Fact]
+        public void ClientEvents_sets_events_of_the_datepicker()
+        {
+            builder.ClientEvents(b => b.Change("change"));
 
-        //[Fact]
-        //public void ButtonTitle_should_return_builder()
-        //{
-        //    const string buttonTitle = "button";
-        //    var returnedBuilder = builder.ButtonTitle(buttonTitle);
+            var @event = datePicker.ClientEvents["change"] as ClientEvent;
 
-        //    Assert.IsType(typeof(DatePickerBuilder), returnedBuilder);
-        //}
+            Assert.NotNull(@event);
 
-        //[Fact]
-        //public void DateFormat_should_set_DateFormat_of_the_picker() 
-        //{
-        //    const string dateFormat = "dd/MM/yyyy";
+            @event.HandlerName.ShouldEqual("change");
+        }
 
-        //    builder.Format(dateFormat);
+        [Fact]
+        public void ClientEvents_returns_builder()
+        {
+            builder.ClientEvents(b => b.Change("change")).ShouldBeType<DatePickerBuilder>();
+        }
 
-        //    Assert.Equal(dateFormat, datePicker.Format);
-        //}
+        [Fact]
+        public void Enable_method_sets_enabled_property()
+        {
+            builder.Enable(false);
 
-        //[Fact]
-        //public void DateFormat_should_return_builder()
-        //{
-        //    const string dateFormat = "dd/MM/yyyy";
-        //    var returnedBuilder = builder.Format(dateFormat);
+            datePicker.Enabled.ShouldEqual(false);
+        }
 
-        //    Assert.IsType(typeof(DatePickerBuilder), returnedBuilder);
-        //}
+        [Fact]
+        public void Enable_method_returns_DatePickerBuilder()
+        {
+            builder.Enable(true).ShouldBeType<DatePickerBuilder>();
+        }
 
-        //[Fact]
-        //public void SelectedDate_should_set_SelectedDate_of_the_picker()
-        //{
-        //    var date = DateTime.Now;
-        //    builder.Value(date);
+        [Fact]
+        public void Format_method_sets_Format_property()
+        {
+            var format = "dd/MM/yyyy";
+            
+            builder.Format(format);
 
-        //    Assert.Equal(date, datePicker.Value);
-        //}
+            datePicker.Format.ShouldEqual(format);
+        }
 
-        //[Fact]
-        //public void SelectedDate_should_return_builder()
-        //{
-        //    var returnedBuilder = builder.Value(DateTime.Now);
+        [Fact]
+        public void Format_method_returns_DatePickerBuilder()
+        {
+            builder.Format("dd").ShouldBeType<DatePickerBuilder>();
+        }
 
-        //    Assert.IsType(typeof(DatePickerBuilder), returnedBuilder);
-        //}
+        [Fact]
+        public void Footer_method_sets_footer_template()
+        {
+            var template = "#= test #";
 
-        //[Fact]
-        //public void SelectedDate_with_string_should_set_SelectedDate_of_the_picker()
-        //{
-        //    var date = new DateTime(2000, 10, 10);
-        //    builder.Value(date.ToShortDateString());
+            builder.Footer(template);
 
-        //    Assert.Equal(date, datePicker.Value);
-        //}
+            datePicker.Footer.ShouldEqual(template);
+        }
 
-        //[Fact]
-        //public void SelectedDate_with_string_should_return_builder()
-        //{
-        //    var returnedBuilder = builder.Value(DateTime.Now.ToShortDateString());
+        [Fact]
+        public void Footer_method_returns_DatePickerBuilder()
+        {
+            builder.Footer("").ShouldBeType<DatePickerBuilder>();
+        }
 
-        //    Assert.IsType(typeof(DatePickerBuilder), returnedBuilder);
-        //}
+        [Fact]
+        public void Depth_method_sets_depth_property()
+        {
+            builder.Depth(CalendarView.Year);
 
-        //[Fact]
-        //public void MinDate_should_set_MinDate_of_the_picker()
-        //{
-        //    DateTime date = DateTime.Now;
+            datePicker.Depth.ShouldEqual("year");
+        }
 
-        //    builder.Min(date);
+        [Fact]
+        public void Depth_method_returns_DatePickerBuilder()
+        {
+            builder.Depth(CalendarView.Decade).ShouldBeType<DatePickerBuilder>();
+        }
 
-        //    Assert.Equal(date, datePicker.Max);
-        //}
+        [Fact]
+        public void Start_method_sets_start_property()
+        {
+            builder.Start(CalendarView.Year);
 
-        //[Fact]
-        //public void MinDate_should_return_builder()
-        //{
-        //    var returnedBuilder = builder.Min(DateTime.Now);
+            datePicker.Start.ShouldEqual("year");
+        }
 
-        //    Assert.IsType(typeof(DatePickerBuilder), returnedBuilder);
-        //}
+        [Fact]
+        public void Start_method_returns_DatePickerBuilder()
+        {
+            builder.Start(CalendarView.Decade).ShouldBeType<DatePickerBuilder>();
+        }
 
-        //[Fact]
-        //public void MinDate_with_string_should_set_MinDate_of_the_picker()
-        //{
-        //    var date = new DateTime(2000, 10, 10);
-        //    builder.Min(date.ToShortDateString());
+        [Fact]
+        public void MonthTemplate_sets_month_content_template()
+        {
+            builder.MonthTemplate("#= test #");
 
-        //    Assert.Equal(date, datePicker.Max);
-        //}
+            datePicker.MonthTemplate.Content.ShouldEqual("#= test #");
+        }
 
-        //[Fact]
-        //public void MinDate_with_string_should_throw_exception_if_incorrect_string_is_passed()
-        //{
-        //    Assert.Throws(typeof(ArgumentException), () => builder.Min("incorrect"));
-        //}
+        [Fact]
+        public void MonthTemplate_sets_month_template_using_builder()
+        {
+            builder.MonthTemplate(month => month.Empty("empty").Content("content"));
 
-        //[Fact]
-        //public void MinDate_with_string_should_return_builder()
-        //{
-        //    var returnedBuilder = builder.Min(DateTime.Now.ToShortDateString());
+            datePicker.MonthTemplate.Empty.ShouldEqual("empty");
+            datePicker.MonthTemplate.Content.ShouldEqual("content");
+        }
 
-        //    Assert.IsType(typeof(DatePickerBuilder), returnedBuilder);
-        //}
+        [Fact]
+        public void ParseFormats_method_sets_ParseFormats_list()
+        {
+            builder.ParseFormats(new string[] { "mm/dd/yyy" });
+            builder.ParseFormats(new string[] { "mm/DD/yyyy" });
 
-        //[Fact]
-        //public void MaxDate_should_set_MaxDate_of_the_picker()
-        //{
-        //    DateTime date = DateTime.Now;
-        //    builder.Max(date);
+            datePicker.ParseFormats.Count.ShouldEqual(1);
+        }
 
-        //    Assert.Equal(date, datePicker.MaxValue);
-        //}
+        [Fact]
+        public void ParseFormats_method_returns_DatePickerBuilder()
+        {
+            builder.ParseFormats(new string[] {}).ShouldBeType<DatePickerBuilder>();
+        }
 
-        //[Fact]
-        //public void MaxDate_should_return_builder()
-        //{
-        //    var returnedBuilder = builder.Max(DateTime.Now);
+        [Fact]
+        public void Value_method_sets_value_property()
+        {
+            var date = DateTime.Today;
 
-        //    Assert.IsType(typeof(DatePickerBuilder), returnedBuilder);
-        //}
+            builder.Value(date);
 
-        //[Fact]
-        //public void MaxDate_with_string_should_set_MaxDate_of_the_picker()
-        //{
-        //    var date = new DateTime(2000, 10, 10);
-        //    builder.Max(date.ToShortDateString());
+            datePicker.Value.ShouldEqual(date);
+        }
 
-        //    Assert.Equal(date, datePicker.MaxValue);
-        //}
+        [Fact]
+        public void Value_method_parses_string_argument()
+        {
+            builder.Value("10/10/2000");
 
-        //[Fact]
-        //public void MaxDate_with_string_should_throw_exception_if_incorrect_string_is_passed()
-        //{
-        //    Assert.Throws(typeof(ArgumentException), () => builder.Max("incorrect"));
-        //}
+            datePicker.Value.Value.Year.ShouldEqual(2000);
+        }
+        
+        [Fact]
+        public void Value_method_returns_DatePickerBuilder()
+        {
+            builder.Value("").ShouldBeType<DatePickerBuilder>();
+        }
 
-        //[Fact]
-        //public void MaxDate_with_string_should_return_builder()
-        //{
-        //    var returnedBuilder = builder.Max(DateTime.Now.ToShortDateString());
+        [Fact]
+        public void Min_method_sets_min_property()
+        {
+            var date = new DateTime();
 
-        //    Assert.IsType(typeof(DatePickerBuilder), returnedBuilder);
-        //}
+            builder.Min(date);
 
-        //[Fact]
-        //public void ClientEvents_should_set_events_of_the_datepicker()
-        //{
-        //    Action<DatePickerClientEventsBuilder> clientEventsAction = eventBuilder => { eventBuilder.OnLoad("Load"); };
+            datePicker.Min.ShouldEqual(date);
+        }
 
-        //    builder.ClientEvents(clientEventsAction);
+        [Fact]
+        public void Min_method_parses_string_argument()
+        {
+            builder.Min("10/10/2000");
 
-        //    Assert.NotNull(datePicker.ClientEvents.OnLoad.HandlerName);
-        //}
+            datePicker.Min.Year.ShouldEqual(2000);
+        }
 
-        //[Fact]
-        //public void ClientEvents_should_return_builder()
-        //{
-        //    Action<DatePickerClientEventsBuilder> clientEventsAction = eventBuilder => { eventBuilder.OnLoad("Load"); };
+        [Fact]
+        public void Min_method_returns_DatePickerBuilder()
+        {
+            builder.Min(DateTime.Today).ShouldBeType<DatePickerBuilder>();
+        }
 
-        //    var returnedBuilder = builder.ClientEvents(clientEventsAction);
+        [Fact]
+        public void Max_method_sets_max_property()
+        {
+            var date = new DateTime();
 
-        //    Assert.IsType(typeof(DatePickerBuilder), returnedBuilder);
-        //}
+            builder.Max(date);
+
+            datePicker.Max.ShouldEqual(date);
+        }
+
+        [Fact]
+        public void Max_method_parses_string_argument()
+        {
+            builder.Max("10/10/2000");
+
+            datePicker.Max.Year.ShouldEqual(2000);
+        }
+
+        [Fact]
+        public void Max_method_returns_DatePickerBuilder()
+        {
+            builder.Max(DateTime.Today).ShouldBeType<DatePickerBuilder>();
+        }
     }
 }

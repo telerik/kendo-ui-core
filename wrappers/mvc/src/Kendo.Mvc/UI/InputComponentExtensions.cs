@@ -10,7 +10,7 @@ namespace Kendo.Mvc.UI
         {
             T? value = null;
 
-            object valueFromViewData = instance.ViewContext.ViewData.Eval(instance.Name);
+            object valueFromViewData = instance.ViewData.Eval(instance.Name);
 
             if (instance.Value != null)
             {
@@ -29,7 +29,7 @@ namespace Kendo.Mvc.UI
         public static string GetAttemptedValue<T>(this IInputComponent<T> instance) where T: struct
         {
             ModelState state;
-            if (instance.ViewContext.ViewData.ModelState.TryGetValue(instance.Name, out state) && state.Value != null) 
+            if (instance.ViewData.ModelState.TryGetValue(instance.Name, out state) && state.Value != null) 
             {
                 instance.Value = null;
                 return state.Value.ConvertTo(typeof(string), null) as string;

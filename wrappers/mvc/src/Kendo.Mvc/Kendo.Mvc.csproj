@@ -321,7 +321,10 @@
     <Compile Include="UI\DataSource\Fluent\DataSourceBuilder.cs" />
     <Compile Include="UI\DataSource\ModelDescriptor.cs" />
     <Compile Include="UI\DataSource\Transport.cs" />
+    <Compile Include="UI\DatePickerBase\CalendarView.cs" />
     <Compile Include="UI\DatePickerBase\Fluent\MonthTemplateBuilder.cs" />
+    <Compile Include="UI\DatePickerBase\Html\DatePickerHtmlBuilderBase.cs" />
+    <Compile Include="UI\DatePickerBase\IPicker.cs" />
     <Compile Include="UI\Effects\ExpandableAnimation.cs" />
     <Compile Include="UI\Effects\Fluent\ExpandableAnimationBuilder.cs" />
     <Compile Include="UI\Effects\PopupAnimation.cs" />
@@ -347,11 +350,9 @@
     <Compile Include="UI\Gauge\Serialization\GaugeLinearScaleSerializer.cs" />
     <Compile Include="UI\Gauge\Serialization\GaugeRadialScaleSerializer.cs" />
     <Compile Include="UI\DatePickerBase\DatePickerBase.cs" />
-    <Compile Include="UI\DatePickerBase\Fluent\DatePickerBaseBuilder.cs" />
-    <Compile Include="UI\DatePickerBase\Fluent\DatePickerBaseClientEventsBuilder.cs" />
-    <Compile Include="UI\DatePickerBase\IDatePicker.cs" />
+    <Compile Include="UI\DatePickerBase\Fluent\DatePickerBuilderBase.cs" />
+    <Compile Include="UI\DatePickerBase\Fluent\DatePickerEventBuilderBase.cs" />
     <Compile Include="UI\DateTimePicker\DateTimePicker.cs" />
-    <Compile Include="UI\DateTimePicker\Html\DateTimePickerHtmlBuilder.cs" />
     <Compile Include="UI\DateTimePicker\Fluent\DateTimePickerBuilder.cs" />
     <Compile Include="UI\DropDown\DropDownExtentions.cs" />
     <Compile Include="UI\DropDown\DropDownItem.cs" />
@@ -855,7 +856,6 @@
     <Compile Include="UI\TextBox\Fluent\NumericTextBoxClientEventsBuilder.cs" />
     <Compile Include="UI\NavigationHtmlBuilderBase.cs" />
     <Compile Include="UI\NavigationItemContainerExtensions.cs" />
-    <Compile Include="UI\TimePicker\Html\TimePickerHtmlBuilder.cs" />
     <Compile Include="UI\TimePicker\Fluent\TimePickerBuilder.cs" />
     <Compile Include="UI\TimePicker\TimePicker.cs" />
     <Compile Include="UI\TreeView\Fluent\TreeViewBindingSettingsBuilder.cs" />
@@ -878,7 +878,6 @@
     <Compile Include="UI\TreeView\TreeViewItem.cs" />
     <Compile Include="UI\DatePicker\DatePicker.cs" />
     <Compile Include="UI\DatePicker\Fluent\DatePickerBuilder.cs" />
-    <Compile Include="UI\DatePicker\Html\DatePickerHtmlBuilder.cs" />
     <Compile Include="UI\ContentNavigationItemBuilder.cs" />
     <Compile Include="UI\Grid\GridActionBindingContext.cs" />
     <Compile Include="UI\Grid\GridBindingContextExtensions.cs" />
