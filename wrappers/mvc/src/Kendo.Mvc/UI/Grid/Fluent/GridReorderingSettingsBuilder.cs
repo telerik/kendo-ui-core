@@ -1,4 +1,3 @@
-            
 namespace Kendo.Mvc.UI.Fluent
 {
     public class GridReorderingSettingsBuilder: IHideObjectMembers

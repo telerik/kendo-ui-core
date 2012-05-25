@@ -20,6 +20,8 @@ namespace Kendo.Mvc.UI.Fluent
             this.pager = pager;
         }
 
+        //TODO: pager positions
+        /*
         /// <summary>
         /// Sets the position at which to display the pager.
         /// </summary>
@@ -38,7 +40,7 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
-
+        */
         /// <summary>
         /// Sets the page size of the grid.
         /// </summary>
@@ -58,6 +60,7 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /*TODO: page sizes dropdown
         /// <summary>
         /// Sets the page size of the grid.
         /// </summary>
@@ -75,27 +78,9 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
-        /// <summary>
-        /// Sets the current page of the grid.
-        /// </summary>
-        /// <param name="page">The page which the grid should display initially. Must be greater than zero.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid(Model)
-        ///             .Name("Grid")
-        ///             .Pageable(paging => paging.PageTo(2))
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public virtual GridPagerSettingsBuilder PageTo(int page)
-        {
-            Guard.IsNotZeroOrNegative(page, "page");
+        */
 
-            pager.CurrentPage = page;
-            
-            return this;
-        }
-
+        /*TODO: Page styles
         /// <summary>
         /// Sets the pager style.
         /// </summary>
@@ -114,25 +99,7 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
-
-        /// <summary>
-        /// Sets the total number of items in the data source. Required during Custom binding.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid(Model)
-        ///             .Name("Grid")
-        ///             .Pageable(paging => paging.Total((int)ViewData["total"]))
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public virtual GridPagerSettingsBuilder Total(int value)
-        {
-            pager.Total = value;
-
-            return this;
-        }
+        */
 
         /// <summary>
         /// Enables or disables paging.
@@ -151,27 +118,6 @@ namespace Kendo.Mvc.UI.Fluent
         public GridPagerSettingsBuilder Enabled(bool value)
         {
             pager.Enabled = value;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Enables or disables paging on scroll.
-        /// </summary>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid(Model)
-        ///             .Name("Grid")
-        ///             .Pageable(paging => paging.PageOnScroll((bool)ViewData["pageOnScroll"]))
-        /// %&gt;
-        /// </code>
-        /// </example>
-        /// <remarks>
-        /// The PageOnScroll method is useful when you need to enable paging on scroll based on certain conditions.
-        /// </remarks>
-        public virtual GridPagerSettingsBuilder PageOnScroll(bool value)
-        {
-            pager.PageOnScroll = value;
 
             return this;
         }

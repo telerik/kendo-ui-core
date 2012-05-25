@@ -342,8 +342,6 @@
     <Compile Include="UI\Grid\GridBoundColumnBuilderTests.cs" />
     <Compile Include="UI\Grid\GridColumnFactoryTests.cs" />
     <Compile Include="UI\Grid\GridDataProcessorTests.cs" />
-    <Compile Include="UI\Grid\GridRequestSettingsBuilderTests.cs" />
-    <Compile Include="UI\Grid\GridPagerSettingsBuilderTests.cs" />
     <Compile Include="UI\Grid\GridPagerTests.cs" />
     <Compile Include="UI\Grid\GridTestHelper.cs" />
     <Compile Include="UI\Grid\GridWorkingConditionsTests.cs" />
