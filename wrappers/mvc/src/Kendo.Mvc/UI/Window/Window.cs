@@ -12,12 +12,9 @@ namespace Kendo.Mvc.UI
     using Extensions;
     using Infrastructure;
     using Kendo.Mvc.Resources;
-    using System.Collections;
     
     public class Window : ViewComponentBase, IContentContainer, IAsyncContentContainer
     {
-        //private readonly IList<IEffect> defaultEffects = new List<IEffect> { new ZoomAnimation(), new PropertyAnimation(PropertyAnimationType.Opacity) };
-
         private readonly IList<IWindowButton> defaultButtons = new List<IWindowButton> { new HeaderButton{Name = "Close", CssClass = "k-close"} };
         
         private string loadContentFromUrl;
@@ -33,7 +30,7 @@ namespace Kendo.Mvc.UI
             Actions = new WindowButtons();
             defaultButtons.Each(button => Actions.Container.Add(button));
 
-            //defaultEffects.Each(el => Effects.Container.Add(el));
+            Animation = new PopupAnimation();
 
             ContentHtmlAttributes = new RouteValueDictionary();
 
@@ -48,7 +45,7 @@ namespace Kendo.Mvc.UI
             private set;
         }
 
-        public Effects Effects
+        public PopupAnimation Animation
         {
             get;
             set;
@@ -180,10 +177,19 @@ namespace Kendo.Mvc.UI
 
             objectWriter.Start();
 
-            //if (!defaultEffects.SequenceEqual(Effects.Container))
-            //{
-            //    objectWriter.Serialize("effects", Effects);
-            //}
+            var animation = Animation.ToJson();
+
+            if (animation.Keys.Any())
+            {
+                if (animation["animation"] is bool)
+                {
+                    objectWriter.Append("animation", false);
+                }
+                else
+                {
+                    objectWriter.AppendCollection("animation", (Dictionary<string, object>)animation["animation"]);
+                }
+            }
 
             //client events
             objectWriter.AppendClientEvent("close", ClientEvents.OnClose);

@@ -317,31 +317,43 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
-        ///// <summary>
-        ///// Configures the effects of the window.
-        ///// </summary>
-        ///// <param name="effectsAction">The action which configures the effects.</param>
-        ///// <example>
-        ///// <code lang="CS">
-        ///// &lt;%= Html.Telerik().Window()
-        /////               .Name("Window")
-        /////               .Effects(fx =>
-        /////               {
-        /////                    fx.Zoom()
-        /////                      .Opacity()
-        /////                      .OpenDuration(AnimationDuration.Fast)
-        /////                      .CloseDuration(AnimationDuration.Fast);
-        /////               })
-        ///// </code>
-        ///// </example>
-        //public WindowBuilder Effects(Action<WindowEffectsBuilder> addEffects)
-        //{
-        //    Guard.IsNotNull(addEffects, "addAction");
+        /// <summary>
+        /// Configures the animation effects of the window.
+        /// </summary>
+        /// <param name="enable">Whether the component animation is enabled.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().Window()
+        ///             .Name("Window")
+        ///             .Animation(false)
+        /// </code>
+        /// </example>
+        public WindowBuilder Animation(bool enable)
+        {
+            Component.Animation.Enabled = enable;
 
-        //    addEffects(new WindowEffectsBuilder(Component.Effects));
+            return this;
+        }
 
-        //    return this;
-        //}
+        /// <summary>
+        /// Configures the animation effects of the panelbar.
+        /// </summary>
+        /// <param name="animationAction">The action that configures the animation.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().Window()
+        ///             .Name("Window")
+        ///             .Animation(animation => animation.Expand)
+        /// </code>
+        /// </example>
+        public WindowBuilder Animation(Action<PopupAnimationBuilder> animationAction)
+        {
+            Guard.IsNotNull(animationAction, "animationAction");
+
+            animationAction(new PopupAnimationBuilder(Component.Animation));
+
+            return this;
+        }
 
         /// <summary>
         /// Sets whether the window should be modal or not.
