@@ -13,15 +13,13 @@ namespace Kendo.Mvc.UI
 
     public class PanelBar : ViewComponentBase, INavigationItemComponent<PanelBarItem>
     {
-        //private readonly IList<IEffect> defaultEffects = new List<IEffect> { new PropertyAnimation(PropertyAnimationType.Height) };
-
         private readonly INavigationComponentHtmlBuilderFactory<PanelBar, PanelBarItem> builderFactory;
 
         internal bool isPathHighlighted;
         internal bool isExpanded;
 
-        public PanelBar(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory, IUrlGenerator urlGenerator, INavigationItemAuthorization authorization, INavigationComponentHtmlBuilderFactory<PanelBar, PanelBarItem> rendererFactory)
-            : base(viewContext, clientSideObjectWriterFactory)
+        public PanelBar(ViewContext viewContext, IJavaScriptInitializer initializer, IUrlGenerator urlGenerator, INavigationItemAuthorization authorization, INavigationComponentHtmlBuilderFactory<PanelBar, PanelBarItem> rendererFactory)
+            : base(viewContext, initializer)
         {
             Guard.IsNotNull(urlGenerator, "urlGenerator");
             Guard.IsNotNull(authorization, "authorization");
@@ -31,9 +29,9 @@ namespace Kendo.Mvc.UI
 
             this.builderFactory = rendererFactory;
 
-            ClientEvents = new PanelBarClientEvents();
+            Animation = new ExpandableAnimation();
 
-            //defaultEffects.Each(el => Effects.Container.Add(el));
+            ClientEvents = new Dictionary<string, object>();
 
             ExpandMode = PanelBarExpandMode.Multiple;
             HighlightPath = true;
@@ -56,12 +54,17 @@ namespace Kendo.Mvc.UI
             private set;
         }
 
-        public PanelBarClientEvents ClientEvents
+        public IDictionary<string, object> ClientEvents
         {
             get;
             private set;
         }
 
+        public ExpandableAnimation Animation
+        {
+            get;
+            private set;
+        }
 
         public Action<PanelBarItem> ItemAction
         {
@@ -113,26 +116,24 @@ namespace Kendo.Mvc.UI
 
         public override void WriteInitializationScript(TextWriter writer)
         {
-            IClientSideObjectWriter objectWriter = ClientSideObjectWriterFactory.Create(Id, "tPanelBar", writer);
+            var options = new Dictionary<string, object>();
 
-            objectWriter.Start();
+            var animation = Animation.ToJson();
 
-            //if (!defaultEffects.SequenceEqual(Effects.Container))
-            //{
-            //    objectWriter.Serialize("effects", Effects);
-            //}
+            if (animation.Keys.Any())
+            {
+                options["animation"] = animation["animation"];
+            }
 
-            objectWriter.AppendClientEvent("onExpand", ClientEvents.OnExpand);
-            objectWriter.AppendClientEvent("onCollapse", ClientEvents.OnCollapse);
-            objectWriter.AppendClientEvent("onSelect", ClientEvents.OnSelect);
-            objectWriter.AppendClientEvent("onLoad", ClientEvents.OnLoad);
-            objectWriter.AppendClientEvent("onError", ClientEvents.OnError);
+            if (ClientEvents.Keys.Any())
+            {
+                options.Merge(ClientEvents);
+            }
 
-            objectWriter.Append("expandMode", (int) ExpandMode);
+            options["expandMode"] = ExpandMode;
+            //options["contentUrls"] = Items;
 
-            objectWriter.AppendContentUrls("contentUrls", Items, IsSelfInitialized);
-
-            objectWriter.Complete();
+            writer.Write(Initializer.Initialize(Id, "PanelBar", options));
 
             base.WriteInitializationScript(writer);
         }

@@ -230,17 +230,17 @@ namespace Kendo.Mvc.UI.Tests
         [Fact]
         public void ClientEvents_should_set_events_of_the_menu()
         {
-            Action<PanelBarClientEventsBuilder> clientEventsAction = eventBuilder => { eventBuilder.OnLoad("Load"); };
+            Action<PanelBarClientEventsBuilder> clientEventsAction = eventBuilder => { eventBuilder.OnCollapse("collapse"); };
 
             builder.ClientEvents(clientEventsAction);
 
-            Assert.NotNull(panelBar.ClientEvents.OnLoad.HandlerName);
+            panelBar.ClientEvents.Keys.ShouldContain("collapse");
         }
 
         [Fact]
         public void ClientEvents_should_return_builder()
         {
-            Action<PanelBarClientEventsBuilder> clientEventsAction = eventBuilder => { eventBuilder.OnLoad("Load"); };
+            Action<PanelBarClientEventsBuilder> clientEventsAction = eventBuilder => { eventBuilder.OnCollapse("collapse"); };
 
             var returnedBuilder = builder.ClientEvents(clientEventsAction);
 

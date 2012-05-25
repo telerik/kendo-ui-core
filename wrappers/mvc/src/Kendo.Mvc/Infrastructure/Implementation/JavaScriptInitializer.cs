@@ -7,6 +7,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
 using Kendo.Mvc.Extensions;
+using System.Web.Script.Serialization;
 
 namespace Kendo.Mvc.Infrastructure
 {
@@ -108,6 +109,13 @@ namespace Kendo.Mvc.Infrastructure
                 if (@event != null)
                 {
                     AppendEvent(output, @event);
+
+                    continue;
+                }
+
+                if (value is Enum)
+                {
+                    output.Append(HttpUtility.JavaScriptStringEncode(value.ToString().ToLower(), true));
 
                     continue;
                 }
