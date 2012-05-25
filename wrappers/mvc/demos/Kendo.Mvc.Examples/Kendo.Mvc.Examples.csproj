@@ -311,12 +311,12 @@
     <Content Include="Areas\razor\Views\web\grid\ajaxediting.cshtml" />
     <Content Include="Areas\razor\Views\web\dropdownlist\index.cshtml" />
     <Content Include="Areas\razor\Views\web\autocomplete\index.cshtml" />
-    <Content Include="Areas\razor\Views\panelbar\index.cshtml" />
-    <Content Include="Areas\razor\Views\panelbar\images.cshtml" />
-    <Content Include="Areas\razor\Views\panelbar\ajax.cshtml" />
-    <Content Include="Areas\razor\Views\panelbar\events.cshtml" />
-    <Content Include="Areas\razor\Views\panelbar\api.cshtml" />
-    <Content Include="Areas\razor\Views\panelbar\animation.cshtml" />
+    <Content Include="Areas\razor\Views\web\panelbar\ajax.cshtml" />
+    <Content Include="Areas\razor\Views\web\panelbar\animation.cshtml" />
+    <Content Include="Areas\razor\Views\web\panelbar\api.cshtml" />
+    <Content Include="Areas\razor\Views\web\panelbar\events.cshtml" />
+    <Content Include="Areas\razor\Views\web\panelbar\images.cshtml" />
+    <Content Include="Areas\razor\Views\web\panelbar\index.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
