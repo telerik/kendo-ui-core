@@ -545,22 +545,22 @@
 
                 dateIcon.bind({
                     click: function() {
+                        that.toggle("date");
+
                         if (!touch && element[0] !== document.activeElement) {
                             element.focus();
                         }
-
-                        that.toggle("date");
                     },
                     mousedown: preventDefault
                 });
 
                 timeIcon.bind({
                     click: function() {
+                        that.toggle("time");
+
                         if (!touch && element[0] !== document.activeElement) {
                             element.focus();
                         }
-
-                        that.toggle("time");
                     },
                     mousedown: preventDefault
                 });

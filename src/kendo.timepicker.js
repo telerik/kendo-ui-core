@@ -879,11 +879,11 @@
             var that = this,
                 element = that.element;
 
+            that.timeView.toggle();
+
             if (!touch && element[0] !== document.activeElement) {
                 element.focus();
             }
-
-            that.timeView.toggle();
         },
 
         _change: function(value) {
