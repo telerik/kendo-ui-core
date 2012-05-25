@@ -676,7 +676,7 @@ namespace Kendo.Mvc.UI
 
         public override void WriteInitializationScript(TextWriter writer)
         {
-            var options = new Dictionary<string, object>();
+            var options = new Dictionary<string, object>(Events);
 
             var autoBind = DataSource.Type == DataSourceType.Ajax && DataSource.Data == null;
 
