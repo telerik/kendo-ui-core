@@ -18,7 +18,7 @@ namespace Kendo.Mvc.UI.Tests
         public InputComponentExtensionsTests()
         {
             viewContext = TestHelper.CreateViewContext();
-            datepicker = DatePickerTestHelper.CreateDatePicker(null, viewContext);
+            datepicker = DatePickerTestHelper.CreateDatePicker(viewContext);
             datepicker.Name = "DatePicker1";
 
             result = new ValueProviderResult("s", "s", System.Threading.Thread.CurrentThread.CurrentCulture);

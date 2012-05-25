@@ -1,180 +1,92 @@
 namespace Kendo.Mvc.UI.Tests
 {
-    using System;
-
-    using Xunit;
     using Kendo.Mvc.UI.Fluent;
+    using System;
+    using System.Collections.Generic;
+    using Xunit;
 
     public class DatePickerClientEventsBuilderTests
     {
-        //private DatePickerClientEventsBuilder builder;
-        //private DatePickerClientEvents clientEvents;
+        private DatePickerEventBuilderBase builder;
+        private Dictionary<string, object> clientEvents;
 
 
-        //public DatePickerClientEventsBuilderTests()
-        //{
-        //    clientEvents = new DatePickerClientEvents();
-        //    builder = new DatePickerClientEventsBuilder(clientEvents);
-        //}
+        public DatePickerClientEventsBuilderTests()
+        {
+            clientEvents = new Dictionary<string, object>();
+            builder = new DatePickerEventBuilderBase(clientEvents);
+        }
 
-        //[Fact]
-        //public void OnDateChanged_method_with_Action_param_should_set_OnSelect_property()
-        //{
-        //    Action param = () => { };
+        [Fact]
+        public void Change_sets_handlerName_of_the_datepicker()
+        {
+            builder.Change("change");
 
-        //    builder.OnChange(param);
+            var @event = clientEvents["change"] as ClientEvent;
 
-        //    Assert.NotNull(clientEvents.OnChange.CodeBlock);
-        //}
+            Assert.NotNull(@event);
 
-        //[Fact]
-        //public void OnDateChanged_method_with_string_param_should_set_OnSelect_property()
-        //{
-        //    const string param = "my_method()";
+            @event.HandlerName.ShouldEqual("change");
+        }
 
-        //    builder.OnChange(param);
+        [Fact]
+        public void Change_sets_inline_code_block_of_the_datepicker()
+        {
+            Func<object, object> codeBlock = (w) => { return w; };
 
-        //    Assert.NotNull(clientEvents.OnChange.HandlerName);
-        //}
+            builder.Change(codeBlock);
 
-        //[Fact]
-        //public void OnDateChanged_method_with_Action_param_should_return_builder()
-        //{
-        //    Action param = () => { };
+            var @event = clientEvents["change"] as ClientEvent;
 
-        //    var returned = builder.OnChange(param);
+            @event.InlineCodeBlock.ShouldBeSameAs(codeBlock);
+        }
 
-        //    Assert.IsType(typeof(DatePickerClientEventsBuilder), returned);
-        //}
+        [Fact]
+        public void Open_sets_handlerName_of_the_datepicker()
+        {
+            builder.Open("open");
 
-        //[Fact]
-        //public void OnDateChanged_method_with_string_param_should_return_builder()
-        //{
-        //    const string param = "my_method()";
+            var @event = clientEvents["open"] as ClientEvent;
 
-        //    var returned = builder.OnChange(param);
+            Assert.NotNull(@event);
 
-        //    Assert.IsType(typeof(DatePickerClientEventsBuilder), returned);
-        //}
+            @event.HandlerName.ShouldEqual("open");
+        }
 
-        //[Fact]
-        //public void Loaded_with_Action_param_should_set_Loaded_property()
-        //{
-        //    Action param = () => { };
+        [Fact]
+        public void Open_sets_inline_code_block_of_the_datepicker()
+        {
+            Func<object, object> codeBlock = (w) => { return w; };
 
-        //    builder.OnLoad(param);
+            builder.Open(codeBlock);
 
-        //    Assert.NotNull(clientEvents.OnLoad.CodeBlock);
-        //}
+            var @event = clientEvents["open"] as ClientEvent;
 
-        //[Fact]
-        //public void Loaded_with_String_param_should_set_Loaded_property()
-        //{
-        //    const string param = "my_method()";
+            @event.InlineCodeBlock.ShouldBeSameAs(codeBlock);
+        }
 
-        //    builder.OnLoad(param);
+        [Fact]
+        public void Close_sets_handlerName_of_the_datepicker()
+        {
+            builder.Close("close");
 
-        //    Assert.NotNull(clientEvents.OnLoad.HandlerName);
-        //}
+            var @event = clientEvents["close"] as ClientEvent;
 
-        //[Fact]
-        //public void Loaded_with_Action_should_return_builder()
-        //{
-        //    Action param = () => { };
+            Assert.NotNull(@event);
 
-        //    var returned = builder.OnLoad(param);
+            @event.HandlerName.ShouldEqual("close");
+        }
 
-        //    Assert.IsType(typeof(DatePickerClientEventsBuilder), returned);
-        //}
+        [Fact]
+        public void Close_sets_inline_code_block_of_the_datepicker()
+        {
+            Func<object, object> codeBlock = (w) => { return w; };
 
-        //[Fact]
-        //public void Loaded_with_String_should_return_builder()
-        //{
-        //    const string param = "my_method()";
+            builder.Close(codeBlock);
 
-        //    var returned = builder.OnLoad(param);
+            var @event = clientEvents["close"] as ClientEvent;
 
-        //    Assert.IsType(typeof(DatePickerClientEventsBuilder), returned);
-        //}
-
-        //[Fact]
-        //public void OnPopupOpen_with_Action_param_should_set_Loaded_property()
-        //{
-        //    Action param = () => { };
-
-        //    builder.OnOpen(param);
-
-        //    Assert.NotNull(clientEvents.OnOpen.CodeBlock);
-        //}
-
-        //[Fact]
-        //public void OnPopupOpen_with_String_param_should_set_Loaded_property()
-        //{
-        //    const string param = "my_method()";
-
-        //    builder.OnOpen(param);
-
-        //    Assert.NotNull(clientEvents.OnOpen.HandlerName);
-        //}
-
-        //[Fact]
-        //public void OnPopupOpen_with_Action_should_return_builder()
-        //{
-        //    Action param = () => { };
-
-        //    var returned = builder.OnOpen(param);
-
-        //    Assert.IsType(typeof(DatePickerClientEventsBuilder), returned);
-        //}
-
-        //[Fact]
-        //public void OnPopupOpen_with_String_should_return_builder()
-        //{
-        //    const string param = "my_method()";
-
-        //    var returned = builder.OnOpen(param);
-
-        //    Assert.IsType(typeof(DatePickerClientEventsBuilder), returned);
-        //}
-
-        //[Fact]
-        //public void OnPopupClose_with_Action_param_should_set_Loaded_property()
-        //{
-        //    Action param = () => { };
-
-        //    builder.OnClose(param);
-
-        //    Assert.NotNull(clientEvents.OnClose.CodeBlock);
-        //}
-
-        //[Fact]
-        //public void OnPopupClose_with_String_param_should_set_Loaded_property()
-        //{
-        //    const string param = "my_method()";
-
-        //    builder.OnClose(param);
-
-        //    Assert.NotNull(clientEvents.OnClose.HandlerName);
-        //}
-
-        //[Fact]
-        //public void OnPopupClose_with_Action_should_return_builder()
-        //{
-        //    Action param = () => { };
-
-        //    var returned = builder.OnClose(param);
-
-        //    Assert.IsType(typeof(DatePickerClientEventsBuilder), returned);
-        //}
-
-        //[Fact]
-        //public void OnPopupClose_with_String_should_return_builder()
-        //{
-        //    const string param = "my_method()";
-
-        //    var returned = builder.OnClose(param);
-
-        //    Assert.IsType(typeof(DatePickerClientEventsBuilder), returned);
-        //}
+            @event.InlineCodeBlock.ShouldBeSameAs(codeBlock);
+        }
     }
 }

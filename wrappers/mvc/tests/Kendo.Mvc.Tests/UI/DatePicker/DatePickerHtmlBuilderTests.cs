@@ -1,211 +1,183 @@
 namespace Kendo.Mvc.UI.Tests
 {
+    using Kendo.Mvc.UI.Html;
     using System;
     using System.Globalization;
     using Xunit;
-    using Kendo.Mvc.UI.Html;
 
     public class DatePickerHtmlBuilderTests
     {
-       // private IDatePickerHtmlBuilder renderer;
-       // private DatePicker datePicker;
-       // private DateTime date;
+        private DatePickerHtmlBuilderBase renderer;
+        private DatePicker datePicker;
 
-       // public DatePickerHtmlBuilderTests()
-       // {
-       //     date = new DateTime(2009, 12, 3);
+        public DatePickerHtmlBuilderTests()
+        {
+            datePicker = DatePickerTestHelper.CreateDatePicker(null);
+            datePicker.Name = "DatePicker";
 
-       //     datePicker = DatePickerTestHelper.CreateDatePicker(null, null);
-       //     datePicker.Name = "DatePicker";
-       //     renderer = new DatePickerHtmlBuilder(datePicker);
-       // }
+            renderer = new DatePickerHtmlBuilderBase(datePicker, "date");
+        }
 
-       // [Fact]
-       // public void DatePickerStart_should_render_Div_tag() 
-       // {
-       //     IHtmlNode tag = renderer.Build();
+        [Fact]
+        public void Build_render_input_tag()
+        {
+            IHtmlNode tag = renderer.Build();
 
-       //     Assert.Equal(tag.TagName, "div");
-       // }
+            tag.TagName.ShouldEqual("input");
+        }
 
-       // [Fact]
-       // public void DatePickerStart_should_render_classes()
-       // {
-       //     IHtmlNode tag = renderer.Build();
+        [Fact]
+        public void Build_render_input_with_type_date()
+        {
+            IHtmlNode tag = renderer.Build();
 
-       //     Assert.Equal(UIPrimitives.Widget.ToString() + " " + "t-datepicker", tag.Attribute("class"));
-       // }
+            tag.Attribute("type").ShouldEqual("date");
+        }
 
-       // [Fact]
-       // public void Input_should_render_input_control()
-       // {
-       //     IHtmlNode tag = renderer.InputTag();
+        [Fact]
+        public void Build_render_input_css_classes()
+        {
+            IHtmlNode tag = renderer.Build();
 
-       //     Assert.Contains(UIPrimitives.Input, tag.Attribute("class"));
-       //     Assert.Equal("input", tag.TagName);
-       // }
+            tag.Attribute("class").ShouldEqual(UIPrimitives.Input);
+        }
 
-       // [Fact]
-       // public void Input_should_render_id_and_name()
-       // {
-       //     IHtmlNode tag = renderer.InputTag();
+        [Fact]
+        public void Build_render_input_with_id_and_name()
+        {
+            datePicker.Name = "datepicker?";
 
-       //     Assert.Equal(datePicker.Id, tag.Attribute("id"));
-       //     Assert.Equal(datePicker.Name, tag.Attribute("name"));
-       // }
+            IHtmlNode tag = renderer.Build();
 
-       // [Fact]
-       // public void Input_should_render_type_text_attribute()
-       // {
-       //     IHtmlNode tag = renderer.InputTag();
+            tag.Attribute("id").ShouldEqual("datepicker_");
+            tag.Attribute("name").ShouldEqual("datepicker?");
+        }
 
-       //     Assert.Equal("text", tag.Attribute("type"));
-       // }
+        [Fact]
+        public void Build_renders_html_attributes()
+        {
+            datePicker.HtmlAttributes.Add("class", "t-test");
 
-       // [Fact]
-       // public void Input_should_render_html_attributes()
-       // {
-       //     datePicker.InputHtmlAttributes.Add("class", "t-test");
+            IHtmlNode tag = renderer.Build();
 
-       //     IHtmlNode tag = renderer.InputTag();
+            tag.Attribute("class").ShouldEqual(UIPrimitives.Input + " t-test");
+        }
+
+        [Fact]
+        public void Build_renders_disabled_input()
+        {
+            datePicker.Enabled = false;
+
+            IHtmlNode tag = renderer.Build();
+
+            tag.Attribute("disabled").ShouldEqual("disabled");
+        }
+
+        [Fact]
+        public void Build_renders_value_if_ViewData_value_exists()
+        {
+            DateTime now = DateTime.Now;
+            datePicker.ViewData["DatePicker"] = now.ToShortDateString();
+
+            IHtmlNode tag = renderer.Build();
+
+            var result = Convert.ToDateTime(now.ToShortDateString(), CultureInfo.CurrentCulture).ToShortDateString();
+
+            tag.Attribute("value").ShouldEqual(result);
+        }
+
+        [Fact]
+        public void Build_does_not_render_value_if_ViewData_value_is_not_DateTime()
+        {
+            datePicker.ViewContext.ViewData["DatePicker"] = "not date";
+
+            IHtmlNode tag = renderer.Build();
+
+            Assert.Throws(typeof(System.Collections.Generic.KeyNotFoundException), () => tag.Attribute("value"));
+        }
+
+        [Fact]
+        public void Build_does_not_render_value_if_ViewData_value_is_DateTime_MinValue()
+        {
+            datePicker.ViewContext.ViewData["DatePicker"] = "1/1/0001";
+
+            IHtmlNode tag = renderer.Build();
+
+            Assert.Throws(typeof(System.Collections.Generic.KeyNotFoundException), () => tag.Attribute("value"));
+        }
+
+        [Fact]
+        public void Build_renders_selectedDate_if_set()
+        {
+            DateTime now = DateTime.Now;
+            datePicker.Value = now;
+
+            IHtmlNode tag = renderer.Build();
+
+            tag.Attribute("value").ShouldEqual(now.ToString(datePicker.Format));
+        }
+
+        [Fact]
+        public void Build_renders_viewdata_value_even_when_selectedDate_is_set()
+        {
+            DateTime now = DateTime.Now;
+            datePicker.Value = now;
+            datePicker.ViewContext.ViewData["DatePicker"] = now.ToShortDateString();
+
+            IHtmlNode tag = renderer.Build();
             
-       //     Assert.Equal(UIPrimitives.Input + " t-test", tag.Attribute("class"));
-       // }
+            var result = Convert.ToDateTime(now.ToShortDateString(), CultureInfo.CurrentCulture).ToShortDateString();
 
-       // [Fact]
-       // public void Input_should_render_value_if_ViewData_value_exists() 
-       // {
-       //     DateTime now = DateTime.Now;
-       //     datePicker.ViewContext.ViewData["DatePicker"] = now.ToShortDateString();
+            tag.Attribute("value").ShouldEqual(result);
+        }
 
-       //     IHtmlNode tag = renderer.InputTag();
+        [Fact]
+        public void Input_value_method_should_set_attempedValue_if_GetValue_returns_null()
+        {
+            System.Web.Mvc.ValueProviderResult result = new System.Web.Mvc.ValueProviderResult("s", "s", System.Threading.Thread.CurrentThread.CurrentCulture);
+            System.Web.Mvc.ModelState state = new System.Web.Mvc.ModelState();
+            state.Value = result;
 
-       //     Assert.Equal(Convert.ToDateTime(now.ToShortDateString(), CultureInfo.CurrentCulture).ToShortDateString(),
-       //         tag.Attribute("value"));
-       // }
+            datePicker.Name = "DatePicker1";
+            datePicker.ViewData.ModelState.Add("DatePicker1", state);
+            datePicker.ViewData.ModelState.AddModelError("DatePicker1", new Exception());
 
-       // [Fact]
-       // public void Input_should_not_render_value_if_ViewData_value_is_not_DateTime()
-       // {
-       //     datePicker.ViewContext.ViewData["DatePicker"] = "not date";
+            IHtmlNode tag = renderer.Build();
 
-       //     IHtmlNode tag = renderer.InputTag();
+            tag.Attribute("value").ShouldEqual("s");
+        }
 
-       //     Assert.Throws(typeof(System.Collections.Generic.KeyNotFoundException), () => tag.Attribute("value"));
-       // }
+        [Fact]
+        public void Build_renders_what_GetValue_returns()
+        {
+            System.Web.Mvc.ValueProviderResult result = new System.Web.Mvc.ValueProviderResult("s", "s", System.Threading.Thread.CurrentThread.CurrentCulture);
+            System.Web.Mvc.ModelState state = new System.Web.Mvc.ModelState();
+            state.Value = result;
 
-       // [Fact]
-       // public void Input_should_not_render_value_if_ViewData_value_is_DateTime_MinValue()
-       // {
-       //     datePicker.ViewContext.ViewData["DatePicker"] = "1/1/0001";
+            datePicker.Name = "DatePicker1";
+            datePicker.Value = DateTime.Now;
+            datePicker.ViewData.ModelState.Add("DatePicker1", state);
+            datePicker.ViewData.ModelState.AddModelError("DatePicker1", new Exception());
 
-       //     IHtmlNode tag = renderer.InputTag();
+            IHtmlNode tag = renderer.Build();
 
-       //     Assert.Throws(typeof(System.Collections.Generic.KeyNotFoundException), () => tag.Attribute("value"));
-       // }
+            datePicker.Value.ShouldBeNull();
+        }
 
-       // [Fact]
-       // public void Input_should_render_selectedDate_if_set() 
-       // {
-       //     DateTime now = DateTime.Now;
-       //     datePicker.Value = now;
+        [Fact]
+        public void Build_renders_input_validation_class_if_ModelState_Error()
+        {
+            System.Web.Mvc.ValueProviderResult result = new System.Web.Mvc.ValueProviderResult("s", "s", System.Threading.Thread.CurrentThread.CurrentCulture);
+            System.Web.Mvc.ModelState state = new System.Web.Mvc.ModelState();
+            state.Value = result;
 
-       //     IHtmlNode tag = renderer.InputTag();
+            datePicker.Name = "DatePicker1";
+            datePicker.ViewData.ModelState.Add("DatePicker1", state);
+            datePicker.ViewData.ModelState.AddModelError("DatePicker1", new Exception());
 
-       //     Assert.Equal(now.ToString(datePicker.Format), tag.Attribute("value"));
-       // }
-        
-       // [Fact]
-       // public void Input_should_render_viewdata_value_even_when_selectedDate_is_set()
-       // {
-       //     DateTime now = DateTime.Now;
-       //     datePicker.Value = now;
-       //     datePicker.ViewContext.ViewData["DatePicker"] = now.ToShortDateString();
+            IHtmlNode tag = renderer.Build();
 
-       //     IHtmlNode tag = renderer.InputTag();
-
-       //     Assert.Equal(Convert.ToDateTime(now.ToShortDateString(), CultureInfo.CurrentCulture).ToShortDateString(),
-       //         tag.Attribute("value"));
-       // }
-
-       // [Fact]
-       // public void Input_value_method_should_set_attempedValue_if_GetValue_returns_null()
-       // {
-       //     System.Web.Mvc.ValueProviderResult result = new System.Web.Mvc.ValueProviderResult("s", "s", System.Threading.Thread.CurrentThread.CurrentCulture);
-       //     System.Web.Mvc.ModelState state = new System.Web.Mvc.ModelState();
-       //     state.Value = result;
-
-       //     datePicker.Name = "DatePicker1";
-       //     datePicker.ViewContext.ViewData.ModelState.Add("DatePicker1", state);
-       //     datePicker.ViewContext.ViewData.ModelState.AddModelError("DatePicker1", new Exception());
-
-       //     IHtmlNode tag = renderer.InputTag();
-           
-       //     tag.Attribute("value").ShouldEqual("s");
-       // }
-
-       // [Fact]
-       // public void Input_if_GetValue_returns_null_set_DatePicker_Value_to_null()
-       // {
-       //     System.Web.Mvc.ValueProviderResult result = new System.Web.Mvc.ValueProviderResult("s", "s", System.Threading.Thread.CurrentThread.CurrentCulture);
-       //     System.Web.Mvc.ModelState state = new System.Web.Mvc.ModelState();
-       //     state.Value = result;
-
-       //     datePicker.Name = "DatePicker1";
-       //     datePicker.Value = DateTime.Now;
-       //     datePicker.ViewContext.ViewData.ModelState.Add("DatePicker1", state);
-       //     datePicker.ViewContext.ViewData.ModelState.AddModelError("DatePicker1", new Exception());
-
-       //     IHtmlNode tag = renderer.InputTag();
-
-       //     datePicker.Value.ShouldBeNull();
-       // }
-
-       // [Fact]
-       // public void InputTag_should_render_input_validation_class_if_ModelState_Error()
-       // {
-       //     System.Web.Mvc.ValueProviderResult result = new System.Web.Mvc.ValueProviderResult("s", "s", System.Threading.Thread.CurrentThread.CurrentCulture);
-       //     System.Web.Mvc.ModelState state = new System.Web.Mvc.ModelState();
-       //     state.Value = result;
-
-       //     datePicker.Name = "DatePicker1";
-       //     datePicker.ViewContext.ViewData.ModelState.Add("DatePicker1", state);
-       //     datePicker.ViewContext.ViewData.ModelState.AddModelError("DatePicker1", new Exception());
-
-       //     IHtmlNode tag = renderer.InputTag();
-
-       //     tag.Attribute("class").ShouldContain("input-validation-error");
-       // }
-
-       // [Fact]
-       // public void Button_should_render_icon_with_default_title_and_class()
-       // {
-       //     IHtmlNode tag = renderer.ButtonTag().Children[0];
-
-       //     Assert.Equal("Open the calendar", tag.Attribute("title"));
-       //     Assert.Equal(UIPrimitives.Icon + " t-icon-calendar", tag.Attribute("class"));
-       //}
-
-       // [Fact]
-       // public void Button_should_render_link_with_class_with_set_title()
-       // {
-       //     datePicker.ButtonTitle = "test";
-
-       //     IHtmlNode tag = renderer.ButtonTag();
-            
-       //     Assert.Equal("test", tag.Children[0].Attribute("title"));
-       // }
-
-       // [Fact]
-       // public void DatePicker_should_be_disabled()
-       // {
-       //     datePicker.Enabled = false;
-
-       //     IHtmlNode div = renderer.Build();
-       //     IHtmlNode tag = renderer.InputTag();
-            
-       //     Assert.Equal("disabled", tag.Attribute("disabled"));
-       //     Assert.Contains("t-state-disabled", div.Attribute("class"));
-       // }
+            tag.Attribute("class").ShouldContain("input-validation-error");
+        }
     }
 }

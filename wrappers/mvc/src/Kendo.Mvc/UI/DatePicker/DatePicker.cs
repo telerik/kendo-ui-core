@@ -91,7 +91,7 @@ namespace Kendo.Mvc.UI
         {
             Guard.IsNotNull(writer, "writer");
 
-            DatePickerHtmlBuilder renderer = new DatePickerHtmlBuilder(this);
+            DatePickerHtmlBuilderBase renderer = new DatePickerHtmlBuilderBase(this, "date");
 
             renderer.Build().WriteTo(writer);
             base.WriteHtml(writer);

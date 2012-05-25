@@ -7,22 +7,19 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent interface for configuring datepicker client events.
     /// </summary>
-    public class DatePickerBaseClientEventsBuilder : IHideObjectMembers
+    public class DatePickerEventBuilderBase : EventBuilder
     {
-        private readonly IDictionary<string, object> clientEvents;
-
-        public DatePickerBaseClientEventsBuilder(IDictionary<string, object> clientEvents)
+        public DatePickerEventBuilderBase(IDictionary<string, object> events) : base(events)
         {
-            this.clientEvents = clientEvents;
         }
 
         /// <summary>
         /// Defines the inline handler of the Change client-side event
         /// </summary>
-        /// <param name="changeInlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <param name="handler">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;% Html.Telerik().DatePicker()
+        ///  &lt;% Html.Kendo().DatePicker()
         ///            .Name("DatePicker")
         ///            .ClientEvents(events => events.Change(
         ///                 @&lt;text&gt;
@@ -35,9 +32,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public DatePickerBaseClientEventsBuilder Change(Func<object, object> changeInlineCodeBlock)
+        public DatePickerEventBuilderBase Change(Func<object, object> handler)
         {
-            clientEvents["change"] = new ClientEvent { InlineCodeBlock = changeInlineCodeBlock };
+            Handler("change", handler);
 
             return this;
         }
@@ -45,18 +42,18 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         ///  Defines the name of the JavaScript function that will handle the the Change client-side event.
         /// </summary>
-        /// <param name="changeHandlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().DatePicker()
+        ///  &lt;%= Html.Kendo().DatePicker()
         ///             .Name("DatePicker")
         ///             .ClientEvents(events => events.Change("change"))
         /// %&gt;
         /// </code>
         /// </example>
-        public DatePickerBaseClientEventsBuilder Change(string changeHandlerName)
+        public DatePickerEventBuilderBase Change(string handler)
         {
-            clientEvents["change"] = new ClientEvent { HandlerName = changeHandlerName };
+            Handler("change", handler);
 
             return this;
         }
@@ -64,10 +61,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Defines the inline handler of the Open client-side event
         /// </summary>
-        /// <param name="openInlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <param name="handler">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;% Html.Telerik().DatePicker()
+        ///  &lt;% Html.Kendo().DatePicker()
         ///            .Name("DatePicker")
         ///            .ClientEvents(events => events.Open(
         ///                 @&lt;text&gt;
@@ -81,9 +78,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public DatePickerBaseClientEventsBuilder Open(Func<object, object> openInlineCodeBlock)
+        public DatePickerEventBuilderBase Open(Func<object, object> handler)
         {
-            clientEvents["open"] = new ClientEvent { InlineCodeBlock = openInlineCodeBlock };
+            Handler("open", handler);
 
             return this;
         }
@@ -91,18 +88,18 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         ///  Defines the name of the JavaScript function that will handle the Open client-side event.
         /// </summary>
-        /// <param name="openHandlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().DatePicker()
+        ///  &lt;%= Html.Kendo().DatePicker()
         ///             .Name("DatePicker")
         ///             .ClientEvents(events => events.Open("open"))
         /// %&gt;
         /// </code>
         /// </example>
-        public DatePickerBaseClientEventsBuilder Open(string openHandlerName)
+        public DatePickerEventBuilderBase Open(string handler)
         {
-            clientEvents["open"] = new ClientEvent { HandlerName = openHandlerName };
+            Handler("open", handler);
 
             return this;
         }
@@ -110,10 +107,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Defines the inline handler of the Close client-side event
         /// </summary>
-        /// <param name="closeInlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <param name="handler">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;% Html.Telerik().DatePicker()
+        ///  &lt;% Html.Kendo().DatePicker()
         ///            .Name("DatePicker")
         ///            .ClientEvents(events => events.Close(
         ///                 @&lt;text&gt;
@@ -126,9 +123,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public DatePickerBaseClientEventsBuilder Close(Func<object, object> closeInlineCodeBlock)
+        public DatePickerEventBuilderBase Close(Func<object, object> handler)
         {
-            clientEvents["close"] = new ClientEvent { InlineCodeBlock = closeInlineCodeBlock };
+            Handler("close", handler);
 
             return this;
         }
@@ -136,18 +133,18 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         ///  Defines the name of the JavaScript function that will handle the Close client-side event.
         /// </summary>
-        /// <param name="closeHandlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().DatePicker()
+        ///  &lt;%= Html.Kendo().DatePicker()
         ///             .Name("DatePicker")
         ///             .ClientEvents(events => events.Close("close"))
         /// %&gt;
         /// </code>
         /// </example>
-        public DatePickerBaseClientEventsBuilder Close(string closeHandlerName)
+        public DatePickerEventBuilderBase Close(string handler)
         {
-            clientEvents["close"] = new ClientEvent { HandlerName = closeHandlerName };
+            Handler("close", handler);
 
             return this;
         }

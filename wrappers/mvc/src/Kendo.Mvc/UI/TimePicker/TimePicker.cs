@@ -1,74 +1,28 @@
 namespace Kendo.Mvc.UI
 {
-    using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI.Html;
+    using Kendo.Mvc.Infrastructure;
+
     using System;
-    using System.Collections.Generic;
-    using System.Globalization;
     using System.IO;
     using System.Linq;
     using System.Web.Mvc;
+    using System.Globalization;
+    using System.Collections.Generic;
 
-    public class TimePicker : ViewComponentBase, IInputComponent<DateTime>
+    public class TimePicker : DatePickerBase
     {
-        public TimePicker(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory, ViewDataDictionary viewData)
-            : base(viewContext, clientSideObjectWriterFactory, viewData)
+        public TimePicker(ViewContext viewContext, IJavaScriptInitializer initializer, ViewDataDictionary viewData)
+            : base(viewContext, initializer, viewData)
         {
-            ClientEvents = new Dictionary<string, object>();
-
             Format = CultureInfo.CurrentCulture.DateTimeFormat.ShortTimePattern;
 
             Min = DateTime.Today;
             Max = DateTime.Today;
-            
-            Value = null;
-            Enabled = true;
+
             Interval = 30;
 
             Dates = new List<DateTime>();
-            ParseFormats = new List<string>();
-        }
-
-        public PopupAnimation Animation
-        {
-            get;
-            private set;
-        }
-
-        public IDictionary<string, object> ClientEvents
-        {
-            get;
-            private set;
-        }
-
-        public string Format
-        {
-            get;
-            set;
-        }
-
-        public List<string> ParseFormats
-        {
-            get;
-            set;
-        }
-
-        public DateTime? Value
-        {
-            get;
-            set;
-        }
-
-        public DateTime Min
-        {
-            get;
-            set;
-        }
-
-        public DateTime Max
-        {
-            get;
-            set;
         }
 
         public List<DateTime> Dates 
@@ -78,12 +32,6 @@ namespace Kendo.Mvc.UI
         }
 
         public int Interval
-        {
-            get;
-            set;
-        }
-
-        public bool Enabled
         {
             get;
             set;
@@ -128,7 +76,7 @@ namespace Kendo.Mvc.UI
 
         protected override void WriteHtml(System.Web.UI.HtmlTextWriter writer)
         {
-            TimePickerHtmlBuilder renderer = new TimePickerHtmlBuilder(this);
+            DatePickerHtmlBuilderBase renderer = new DatePickerHtmlBuilderBase(this, "time");
 
             renderer.Build().WriteTo(writer);
 

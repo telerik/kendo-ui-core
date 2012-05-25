@@ -176,7 +176,6 @@
     <Compile Include="UI\Grid\Html\GridForeignKeyDataCellBuilderTests.cs" />
     <Compile Include="UI\Grid\Html\GridCustomActionCommandTests.cs" />
     <Compile Include="UI\SalesData.cs" />
-    <Compile Include="UI\DateTimePicker\DateTimePickerHtmlBuilderTests.cs" />
     <Compile Include="UI\DateTimePicker\DateTimePickerTestHelper.cs" />
     <Compile Include="UI\InputComponentExtensionsTests.cs" />
     <Compile Include="UI\Editor\EditorInsertImageToolTests.cs" />
@@ -248,7 +247,6 @@
     <Compile Include="UI\Splitter\SplitterTestHelper.cs" />
     <Compile Include="UI\Splitter\SplitterBuilderTests.cs" />
     <Compile Include="UI\Splitter\SplitterHtmlBuilderTests.cs" />
-    <Compile Include="UI\TimePicker\TimePickerHtmlBuilderTests.cs" />
     <Compile Include="UI\TimePicker\TimePickerTestHelper.cs" />
     <Compile Include="UI\TimePicker\TimePickerBuilderTests.cs" />
     <Compile Include="UI\Grid\GridDataTableWrapperExtensionsTests.cs" />

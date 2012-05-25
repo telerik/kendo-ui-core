@@ -242,7 +242,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual DateTimePickerBuilder DateTimePicker()
         {
-            return new DateTimePickerBuilder(new DateTimePicker(ViewContext, ClientSideObjectWriterFactory, ViewData));
+            return new DateTimePickerBuilder(new DateTimePicker(ViewContext, Initializer, ViewData));
         }
 
 
@@ -273,7 +273,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual TimePickerBuilder TimePicker()
         {
-            return new TimePickerBuilder(new TimePicker(ViewContext, ClientSideObjectWriterFactory, ViewData));
+            return new TimePickerBuilder(new TimePicker(ViewContext, Initializer, ViewData));
         }
 
         /// <summary>

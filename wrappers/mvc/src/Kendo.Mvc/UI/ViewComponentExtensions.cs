@@ -57,7 +57,7 @@ namespace Kendo.Mvc.UI
         {
             if (instance.ViewContext != null)
             {
-                return instance.ViewContext.ViewData.ModelState.IsValidField(instance.Name ?? string.Empty);
+                return instance.ViewData.ModelState.IsValidField(instance.Name ?? string.Empty);
             }
             return true;
         }

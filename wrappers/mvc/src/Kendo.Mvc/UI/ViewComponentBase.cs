@@ -14,7 +14,7 @@ namespace Kendo.Mvc.UI
     /// <summary>
     /// View component base class.
     /// </summary>
-    public abstract class ViewComponentBase : IViewComponent, IScriptableComponent, IHtmlAttributesContainer
+    public abstract class ViewComponentBase : IViewComponent, IScriptableComponent
     {
         private string name;
 

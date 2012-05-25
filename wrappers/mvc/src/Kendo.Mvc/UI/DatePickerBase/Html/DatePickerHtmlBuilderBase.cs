@@ -6,17 +6,25 @@ namespace Kendo.Mvc.UI.Html
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
 
-    public class DatePickerHtmlBuilder
+    public class DatePickerHtmlBuilderBase
     {
-        public DatePickerHtmlBuilder(DatePicker datePicker)
+        public DatePickerHtmlBuilderBase(IPicker picker, string inputType)
         {
-            Component = datePicker;
+            Component = picker;
+
+            InputType = inputType ?? "date";
         }
 
-        public DatePicker Component
+        public IPicker Component
         {
             get;
             private set;
+        }
+
+        public string InputType 
+        { 
+            get; 
+            private set; 
         }
         
         public IHtmlNode Build()
@@ -36,23 +44,15 @@ namespace Kendo.Mvc.UI.Html
             if (value == null)
             {
                 DateTime? date = Component.GetValue(converter);
-                date = date != DateTime.MinValue ? date : null;
 
                 if (date != null)
                 {
-                    if (string.IsNullOrWhiteSpace(Component.Format))
-                    {
-                        value = date.Value.ToShortDateString();
-                    }
-                    else
-                    {
-                        value = date.Value.ToString(Component.Format);
-                    }
+                    value = date.Value.ToString(Component.Format);
                 }
             }
 
             return new HtmlElement("input", TagRenderMode.SelfClosing)
-                   .Attributes(new { name = Component.Name, id = Component.Id, type = "date" })
+                   .Attributes(new { name = Component.Name, id = Component.Id, type = InputType })
                    .Attributes(Component.HtmlAttributes)
                    .ToggleAttribute("value", value, value.HasValue())
                    .ToggleAttribute("disabled", "disabled", !Component.Enabled)

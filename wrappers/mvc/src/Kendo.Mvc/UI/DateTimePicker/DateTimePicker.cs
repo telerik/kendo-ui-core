@@ -11,61 +11,31 @@ namespace Kendo.Mvc.UI
     using System.Linq;
     using System.Web.Mvc;
 
-    public class DateTimePicker : ViewComponentBase, IInputComponent<DateTime>
+    public class DateTimePicker : DatePickerBase
     {
         static internal DateTime defaultMinDate = new DateTime(1899, 12, 31);
         static internal DateTime defaultMaxDate = new DateTime(2100, 1, 1);
 
-        public DateTimePicker(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory, ViewDataDictionary viewData)
-            : base(viewContext, clientSideObjectWriterFactory, viewData)
+        public DateTimePicker(ViewContext viewContext, IJavaScriptInitializer initializer, ViewDataDictionary viewData)
+            : base(viewContext, initializer, viewData)
         {
             DateTimeFormatInfo dateTimeFormats = CultureInfo.CurrentCulture.DateTimeFormat;
             Format = dateTimeFormats.ShortDatePattern + " " + dateTimeFormats.ShortTimePattern;
-            ParseFormats = new List<string>();
 
             Min = defaultMinDate;
             Max = defaultMaxDate;
 
-            Animation = new PopupAnimation();
-            ClientEvents = new Dictionary<string, object>();
             MonthTemplate = new MonthTemplate();
 
             Dates = new List<DateTime>();
 
             Interval = 30;
-
-            Value = null;
-            Enabled = true;
-        }
-
-        public PopupAnimation Animation
-        {
-            get;
-            private set;
-        }
-
-        public Dictionary<string, object> ClientEvents
-        {
-            get;
-            private set;
         }
 
         public MonthTemplate MonthTemplate
         {
             get;
             private set;
-        }
-
-        public string Format
-        {
-            get;
-            set;
-        }
-
-        public List<string> ParseFormats
-        {
-            get;
-            set;
         }
 
         public string Footer
@@ -81,30 +51,6 @@ namespace Kendo.Mvc.UI
         }
 
         public string Depth
-        {
-            get;
-            set;
-        }
-
-        public DateTime? Value
-        {
-            get;
-            set;
-        }
-
-        public DateTime Min
-        {
-            get;
-            set;
-        }
-
-        public DateTime Max
-        {
-            get;
-            set;
-        }
-
-        public bool Enabled
         {
             get;
             set;
@@ -175,7 +121,7 @@ namespace Kendo.Mvc.UI
         {
             Guard.IsNotNull(writer, "writer");
 
-            DateTimePickerHtmlBuilder renderer = new DateTimePickerHtmlBuilder(this);
+            DatePickerHtmlBuilderBase renderer = new DatePickerHtmlBuilderBase(this, "datetime");
 
             renderer.Build().WriteTo(writer);
             base.WriteHtml(writer);

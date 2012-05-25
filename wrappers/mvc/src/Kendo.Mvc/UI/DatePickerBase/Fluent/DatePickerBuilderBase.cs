@@ -8,7 +8,7 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="DatePickerBase"/> component.
     /// </summary>
-    public class DatePickerBaseBuilder<TPicker, TPickerBuilder> : ViewComponentBuilderBase<TPicker, TPickerBuilder>, IHideObjectMembers
+    public class DatePickerBuilderBase<TPicker, TPickerBuilder> : ViewComponentBuilderBase<TPicker, TPickerBuilder>, IHideObjectMembers
         where TPicker : DatePickerBase
         where TPickerBuilder : ViewComponentBuilderBase<TPicker, TPickerBuilder>
     {
@@ -16,7 +16,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Initializes a new instance of the <see cref="DatePickerBaseBuilder"/> class.
         /// </summary>
         /// <param name="component">The component.</param>
-        public DatePickerBaseBuilder(TPicker component)
+        public DatePickerBuilderBase(TPicker component)
             : base(component)
         {
         }
@@ -51,11 +51,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public TPickerBuilder ClientEvents(Action<DatePickerBaseClientEventsBuilder> clientEventsAction)
+        public TPickerBuilder ClientEvents(Action<DatePickerEventBuilderBase> clientEventsAction)
         {
             Guard.IsNotNull(clientEventsAction, "clientEventsAction");
 
-            clientEventsAction(new DatePickerBaseClientEventsBuilder(Component.ClientEvents));
+            clientEventsAction(new DatePickerEventBuilderBase(Component.ClientEvents));
 
             return this as TPickerBuilder;
         }
@@ -65,6 +65,8 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         public TPickerBuilder Format(string format)
         {
+            Guard.IsNotNullOrEmpty(format, "format");
+
             Component.Format = format;
 
             return this as TPickerBuilder;
@@ -79,7 +81,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Enables or disables the datepicker.
+        /// Enables or disables the picker.
         /// </summary>
         public TPickerBuilder Enable(bool value)
         {
@@ -89,22 +91,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Sets the value of the datepicker input
-        /// </summary>
-        public TPickerBuilder Value(DateTime? date)
-        {
-            if (date.HasValue)
-            {
-                date = date.Value == DateTime.MinValue ? null : date;
-            }
-
-            Component.Value = date;
-
-            return this as TPickerBuilder;
-        }
-
-        /// <summary>
-        /// Sets the minimal date, which can be selected in DatePicker.
+        /// Sets the minimal date, which can be selected in picker.
         /// </summary>
         public TPickerBuilder Min(DateTime date)
         {
@@ -116,13 +103,42 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Sets the maximal date, which can be selected in DatePicker.
+        /// Sets the maximal date, which can be selected in picker.
         /// </summary>
         public TPickerBuilder Max(DateTime date)
         {
             Guard.IsNotNull(date, "date");
 
             Component.Max = date;
+
+            return this as TPickerBuilder;
+        }
+
+        /// <summary>
+        /// Sets the value of the picker input
+        /// </summary>
+        public TPickerBuilder Value(DateTime? date)
+        {
+            Component.Value = date;
+
+            return this as TPickerBuilder;
+        }
+
+        /// <summary>
+        /// Sets the value of the picker input
+        /// </summary>
+        public TPickerBuilder Value(string date)
+        {
+            DateTime result;
+
+            if (DateTime.TryParse(date, out result))
+            {
+                Component.Value = result;
+            }
+            else
+            {
+                Component.Value = null;
+            }
 
             return this as TPickerBuilder;
         }

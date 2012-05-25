@@ -11,126 +11,126 @@ namespace Kendo.Mvc.UI.Fluent
 
         public GridEventBuilder Change(Func<object, object> handler)
         {
-            Block("change", handler);
+            Handler("change", handler);
 
             return this;
         }
 
-        public GridEventBuilder Change(string handlerName)
+        public GridEventBuilder Change(string handler)
         {
-            Handler("change", handlerName);
+            Handler("change", handler);
 
             return this;
         }
 
         public GridEventBuilder Edit(Func<object, object> handler)
         {
-            Block("edit", handler);
+            Handler("edit", handler);
 
             return this;
         }
 
-        public GridEventBuilder Edit(string handlerName)
+        public GridEventBuilder Edit(string handler)
         {
-            Handler("edit", handlerName);
+            Handler("edit", handler);
 
             return this;
         }
 
         public GridEventBuilder Save(Func<object, object> handler)
         {
-            Block("save", handler);
+            Handler("save", handler);
 
             return this;
         }
 
-        public GridEventBuilder Save(string handlerName)
+        public GridEventBuilder Save(string handler)
         {
-            Handler("save", handlerName);
+            Handler("save", handler);
 
             return this;
         }
 
         public GridEventBuilder SaveChanges(Func<object, object> handler)
         {
-            Block("saveChanges", handler);
+            Handler("saveChanges", handler);
 
             return this;
         }
 
-        public GridEventBuilder SaveChanges(string handlerName)
+        public GridEventBuilder SaveChanges(string handler)
         {
-            Handler("saveChanges", handlerName);
+            Handler("saveChanges", handler);
 
             return this;
         }
 
         public GridEventBuilder DetailExpand(Func<object, object> handler)
         {
-            Block("detailExpand", handler);
+            Handler("detailExpand", handler);
 
             return this;
         }
 
-        public GridEventBuilder DetailExpand(string handlerName)
+        public GridEventBuilder DetailExpand(string handler)
         {
-            Handler("detailExpand", handlerName);
+            Handler("detailExpand", handler);
 
             return this;
         }
 
         public GridEventBuilder DetailInit(Func<object, object> handler)
         {
-            Block("detailInit", handler);
+            Handler("detailInit", handler);
 
             return this;
         }
 
-        public GridEventBuilder DetailInit(string handlerName)
+        public GridEventBuilder DetailInit(string handler)
         {
-            Handler("detailInit", handlerName);
+            Handler("detailInit", handler);
 
             return this;
         }
 
         public GridEventBuilder DetailCollapse(Func<object, object> handler)
         {
-            Block("detailCollapse", handler);
+            Handler("detailCollapse", handler);
 
             return this;
         }
 
-        public GridEventBuilder DetailCollapse(string handlerName)
+        public GridEventBuilder DetailCollapse(string handler)
         {
-            Handler("detailCollapse", handlerName);
+            Handler("detailCollapse", handler);
 
             return this;
         }
 
         public GridEventBuilder Remove(Func<object, object> handler)
         {
-            Block("remove", handler);
+            Handler("remove", handler);
 
             return this;
         }
 
-        public GridEventBuilder Remove(string handlerName)
+        public GridEventBuilder Remove(string handler)
         {
-            Handler("remove", handlerName);
+            Handler("remove", handler);
 
             return this;
         }
 
         public GridEventBuilder DataBound(Func<object, object> handler)
         {
-            Block("dataBound", handler);
+            Handler("dataBound", handler);
 
             return this;
         }
 
-        public GridEventBuilder DataBound(string handlerName)
+        public GridEventBuilder DataBound(string handler)
         {
-            Handler("dataBound", handlerName);
+            Handler("dataBound", handler);
 
             return this;
         }

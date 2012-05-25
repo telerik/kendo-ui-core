@@ -7,13 +7,6 @@ namespace Kendo.Mvc
     /// </summary>
     public class ClientEvent
     {
-        public ClientEvent(string name = "")
-        {
-            Name = name;
-        }
-
-        public string Name { get; set; }
-
         /// <summary>
         /// An action that renders the code of the client-side handler upon execution.
         /// </summary>
@@ -32,50 +25,6 @@ namespace Kendo.Mvc
         public bool HasValue()
         {
             return HandlerName.HasValue() || InlineCodeBlock != null;
-        }
-
-        public void Serialize(System.Collections.Generic.IDictionary<string, object> json)
-        {
-            //if (this.CodeBlock != null) //does not work
-            //{
-            //    //some how we should deffer the execution of the Action
-            //    json[Name] = "";
-            //    this.CodeBlock();
-            //}
-            //else 
-            
-            object eventsValue;
-            json.TryGetValue("events", out eventsValue);
-
-            var events = eventsValue as string;
-            var clientEvent = string.Empty;
-
-            if (this.InlineCodeBlock != null)
-            {
-                var result = this.InlineCodeBlock(this);
-                if (result != null)
-                {
-                    clientEvent = string.Format("{0}:{1}", Name, result);
-                }
-            }
-            else if (!string.IsNullOrEmpty(this.HandlerName)) //does not work
-            {
-                clientEvent = string.Format("{0}:{1}", Name, this.HandlerName);
-            }
-
-            if (!string.IsNullOrEmpty(clientEvent))
-            {
-                if (!string.IsNullOrEmpty(events))
-                {
-                    events = events + "," + clientEvent;
-                }
-                else
-                {
-                    events = clientEvent;
-                }
-
-                json["events"] = events;
-            }
         }
     }
 }
