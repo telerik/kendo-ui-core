@@ -4,6 +4,7 @@ namespace Kendo.Mvc.UI
     using System.Collections;
     using System.Collections.Generic;
     using Infrastructure;
+    using Kendo.Mvc.UI.Fluent;
 
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="PanelBar"/> component.
@@ -24,7 +25,7 @@ namespace Kendo.Mvc.UI
         /// <param name="addAction">The add action.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().PanelBar()
+        ///  &lt;%= Html.Kendo().PanelBar()
         ///             .Name("PanelBar")
         ///             .Items(items =>
         ///             {
@@ -51,10 +52,10 @@ namespace Kendo.Mvc.UI
         /// <param name="clientEventsAction">The client events action.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().PanelBar()
+        ///  &lt;%= Html.Kendo().PanelBar()
         ///             .Name("PanelBar")
         ///             .ClientEvents(events =>
-        ///                 events.OnExpand("onExpand").OnCollapse("onCollapse")
+        ///                 events.OnExpand("expand").OnCollapse("collapse")
         ///             )
         /// %&gt;
         /// </code>
@@ -63,7 +64,7 @@ namespace Kendo.Mvc.UI
         {
             Guard.IsNotNull(clientEventsAction, "clientEventsAction");
 
-            clientEventsAction(new PanelBarClientEventsBuilder(Component.ClientEvents, Component.ViewContext));
+            clientEventsAction(new PanelBarClientEventsBuilder(Component.ClientEvents));
 
             return this;
         }
@@ -75,7 +76,7 @@ namespace Kendo.Mvc.UI
         /// <param name="siteMapAction">The action to configure the item.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().PanelBar()
+        ///  &lt;%= Html.Kendo().PanelBar()
         ///             .Name("PanelBar")
         ///             .BindTo("examples", (item, siteMapNode) =>
         ///             {
@@ -98,7 +99,7 @@ namespace Kendo.Mvc.UI
         /// <param name="viewDataKey">The view data key.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().PanelBar()
+        ///  &lt;%= Html.Kendo().PanelBar()
         ///             .Name("PanelBar")
         ///             .BindTo("examples")
         /// %&gt;
@@ -121,7 +122,7 @@ namespace Kendo.Mvc.UI
         /// <param name="itemDataBound">The action executed for every data bound item.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().PanelBar()
+        ///  &lt;%= Html.Kendo().PanelBar()
         ///             .Name("PanelBar")
         ///             .BindTo(new []{"First", "Second"}, (item, value)
         ///             {
@@ -146,7 +147,7 @@ namespace Kendo.Mvc.UI
         /// <param name="factoryAction">The action which will configure the mappings</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().PanelBar()
+        ///  &lt;%= Html.Kendo().PanelBar()
         ///             .Name("PanelBar")
         ///             .BindTo(Model, mapping => mapping
         ///                     .For&lt;Customer&gt;(binding => binding
@@ -169,33 +170,43 @@ namespace Kendo.Mvc.UI
             return this;
         }
 
-        ///// <summary>
-        ///// Configures the effects of the panelbar.
-        ///// </summary>
-        ///// <param name="effectsAction">The action which configures the effects.</param>
-        ///// <example>
-        ///// <code lang="CS">
-        ///// &lt;%= Html.Telerik().PanelBar()
-        /////	           .Name("PanelBar")
-        /////	           .Effects(fx =>
-        /////	           {
-        /////		            fx.Height()
-        /////			          .Opacity()
-        /////					  .OpenDuration(AnimationDuration.Normal)
-        /////					  .CloseDuration(AnimationDuration.Normal);
-        /////	           })
-        ///// </code>
-        ///// </example>
-        //public PanelBarBuilder Effects(Action<EffectsBuilder> addEffects)
-        //{
-        //    Guard.IsNotNull(addEffects, "addAction");
+        /// <summary>
+        /// Configures the animation effects of the panelbar.
+        /// </summary>
+        /// <param name="enable">Whether the component animation is enabled.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().PanelBar()
+        ///             .Name("PanelBar")
+        ///             .Animation(false)
+        /// </code>
+        /// </example>
+        public PanelBarBuilder Animation(bool enable)
+        {
+            Component.Animation.Enabled = enable;
 
-        //    EffectsBuilderFactory factory = new EffectsBuilderFactory();
+            return this;
+        }
 
-        //    addEffects(factory.Create(Component.Effects));
+        /// <summary>
+        /// Configures the animation effects of the panelbar.
+        /// </summary>
+        /// <param name="animationAction">The action that configures the animation.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().PanelBar()
+        ///             .Name("PanelBar")
+        ///             .Animation(animation => animation.Expand)
+        /// </code>
+        /// </example>
+        public PanelBarBuilder Animation(Action<ExpandableAnimationBuilder> animationAction)
+        {
+            Guard.IsNotNull(animationAction, "animationAction");
 
-        //    return this;
-        //}
+            animationAction(new ExpandableAnimationBuilder(Component.Animation));
+
+            return this;
+        }
 
         /// <summary>
         /// Callback for each item.
@@ -203,7 +214,7 @@ namespace Kendo.Mvc.UI
         /// <param name="itemAction">Action, which will be executed for each item.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().PanelBar()
+        ///  &lt;%= Html.Kendo().PanelBar()
         ///             .Name("PanelBar")
         ///             .ItemAction(item =>
         ///             {
@@ -229,7 +240,7 @@ namespace Kendo.Mvc.UI
         /// <param name="value">If true the item will be highlighted.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().PanelBar()
+        ///  &lt;%= Html.Kendo().PanelBar()
         ///             .Name("PanelBar")
         ///             .HighlightPath(true)
         /// %&gt;
@@ -248,7 +259,7 @@ namespace Kendo.Mvc.UI
         /// <param name="value">If true the panelbar will be expanded.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().PanelBar()
+        ///  &lt;%= Html.Kendo().PanelBar()
         ///             .Name("PanelBar")
         ///             .ExpandAll(true)
         /// %&gt;
@@ -267,7 +278,7 @@ namespace Kendo.Mvc.UI
         /// <param name="value">The desired expand mode.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().PanelBar()
+        ///  &lt;%= Html.Kendo().PanelBar()
         ///             .Name("PanelBar")
         ///             .ExpandMode(PanelBarExpandMode.Multiple)
         /// %&gt;
@@ -286,7 +297,7 @@ namespace Kendo.Mvc.UI
         /// <param name="index">The index.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().PanelBar()
+        ///  &lt;%= Html.Kendo().PanelBar()
         ///             .Name("PanelBar")
         ///             .Items(items =>
         ///             {
@@ -313,7 +324,7 @@ namespace Kendo.Mvc.UI
         /// <param name="value">If true security trimming is enabled.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().PanelBar()
+        ///  &lt;%= Html.Kendo().PanelBar()
         ///             .Name("PanelBar")
         ///             .SecurityTrimming(false)
         /// %&gt;

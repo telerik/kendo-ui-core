@@ -102,11 +102,7 @@ namespace Kendo.Mvc.UI
                 {
                     if (!string.IsNullOrEmpty(item.ContentUrl))
                     {
-                        var url = isSelfInitialized
-                                      ? System.Web.HttpUtility.UrlDecode(item.ContentUrl)
-                                      : item.ContentUrl;
-
-                        contentUrls.Add(url);
+                        contentUrls.Add(System.Web.HttpUtility.UrlDecode(item.ContentUrl));
                         hasVisibleAsyncItems = true;
                     }
                     else

@@ -36,8 +36,6 @@ namespace Kendo.Mvc.UI.Tests
 
             viewDataContainer.SetupGet(container => container.ViewData).Returns(viewDataDinctionary);
 
-            Mock<IClientSideObjectWriterFactory> clientSideObjectWriterFactory = new Mock<IClientSideObjectWriterFactory>();
-            clientSideObjectWriter = new Mock<IClientSideObjectWriter>();
             IUrlGenerator urlGeneratorObject = new UrlGenerator();
             Mock<INavigationItemAuthorization> authorization = new Mock<INavigationItemAuthorization>();
 
@@ -47,9 +45,8 @@ namespace Kendo.Mvc.UI.Tests
             viewContext.ViewData = viewDataDinctionary;
 
             authorization.Setup(a => a.IsAccessibleToUser(viewContext.RequestContext, It.IsAny<INavigatable>())).Returns(true);
-            clientSideObjectWriterFactory.Setup(c => c.Create(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<TextWriter>())).Returns(clientSideObjectWriter.Object);
 
-            PanelBar panelBar = new PanelBar(viewContext, clientSideObjectWriterFactory.Object, urlGeneratorObject, authorization.Object, panelBarRendererFactory.Object);
+            PanelBar panelBar = new PanelBar(viewContext, new JavaScriptInitializer(), urlGeneratorObject, authorization.Object, panelBarRendererFactory.Object);
 
             renderer = renderer ?? new PanelBarHtmlBuilder(panelBar, new Mock<IActionMethodCache>().Object);
             panelBarRendererFactory.Setup(f => f.Create(It.IsAny<PanelBar>())).Returns(renderer);
