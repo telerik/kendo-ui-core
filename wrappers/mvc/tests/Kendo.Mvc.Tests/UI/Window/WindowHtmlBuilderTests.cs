@@ -5,7 +5,7 @@ namespace Kendo.Mvc.UI.Tests
 
     public class WindowHtmlBuilderTests
     {
-        private IWindowHtmlBuilder renderer;
+        private WindowHtmlBuilder renderer;
         private Window window;
 
         public WindowHtmlBuilderTests()

@@ -1003,14 +1003,13 @@
     <Compile Include="UI\Window\Fluent\WindowResizingSettingsBuilder.cs" />
     <Compile Include="UI\Window\IWindowButton.cs" />
     <Compile Include="UI\Window\IWindowButtonsContainer.cs" />
-    <Compile Include="UI\Window\IWindowHtmlBuilder.cs" />
     <Compile Include="UI\Window\Settings\WindowResizingSettings.cs" />
     <Compile Include="UI\Window\HeaderButton.cs" />
     <Compile Include="UI\Window\WindowClientEvents.cs" />
     <Compile Include="UI\Window\Fluent\WindowClientEventsBuilder.cs" />
     <Compile Include="UI\Window\Window.cs" />
     <Compile Include="UI\Window\Fluent\WindowBuilder.cs" />
-    <Compile Include="UI\Window\WindowHtmlBuilder.cs" />
+    <Compile Include="UI\Window\Html\WindowHtmlBuilder.cs" />
     <Compile Include="UrlGenerator.cs" />
     <Compile Include="Infrastructure\IPathResolver.cs" />
     <Compile Include="Infrastructure\IConfigurationManager.cs" />

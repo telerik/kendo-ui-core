@@ -234,7 +234,7 @@ namespace Kendo.Mvc.UI
         {
             Guard.IsNotNull(writer, "writer");
 
-            IWindowHtmlBuilder builder = new WindowHtmlBuilder(this);
+            var builder = new WindowHtmlBuilder(this);
 
             builder.WindowTag().WriteTo(writer);
 
