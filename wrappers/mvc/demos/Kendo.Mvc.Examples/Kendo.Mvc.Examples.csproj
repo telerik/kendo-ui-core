@@ -189,7 +189,7 @@
     <Content Include="Scripts\MicrosoftMvcAjax.js" />
     <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
     <Content Include="Scripts\MicrosoftMvcValidation.js" />
-    <Content Include="Views\ReadMe.txt" />
+    <Content Include="Views\The-views-are-in-the-Areas-folder.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
