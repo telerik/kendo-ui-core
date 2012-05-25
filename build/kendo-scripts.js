@@ -167,8 +167,9 @@ function buildSuiteScripts(suite, outputRoot, header, compress) {
         if (!output) {
             var content = kendoBuild.readText(path.join(SCRIPTS, scriptName));
             output = compress ? kendoBuild.minifyJs(content) : content;
+            output = kendoBuild.stripBOM(output);
 
-            deployCache[cacheKey] = kendoBuild.stripBOM(output);
+            deployCache[cacheKey] = output;
         }
 
         kendoBuild.writeText(path.join(outputRoot, outName), header + output);
