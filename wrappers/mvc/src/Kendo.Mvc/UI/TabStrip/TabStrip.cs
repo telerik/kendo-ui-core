@@ -94,6 +94,8 @@ namespace Kendo.Mvc.UI
 
         public override void WriteInitializationScript(TextWriter writer)
         {
+            // TODO: use new serialization scheme
+            // TODO: add animation configuration and builder
             string id = Id;
 
             IClientSideObjectWriter objectWriter = ClientSideObjectWriterFactory.Create(id, "kendoTabStrip", writer);
