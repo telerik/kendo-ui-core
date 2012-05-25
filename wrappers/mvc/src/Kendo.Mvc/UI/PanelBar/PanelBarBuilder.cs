@@ -4,6 +4,7 @@ namespace Kendo.Mvc.UI
     using System.Collections;
     using System.Collections.Generic;
     using Infrastructure;
+    using Kendo.Mvc.UI.Fluent;
 
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="PanelBar"/> component.
@@ -169,33 +170,43 @@ namespace Kendo.Mvc.UI
             return this;
         }
 
-        ///// <summary>
-        ///// Configures the effects of the panelbar.
-        ///// </summary>
-        ///// <param name="effectsAction">The action which configures the effects.</param>
-        ///// <example>
-        ///// <code lang="CS">
-        ///// &lt;%= Html.Kendo().PanelBar()
-        /////	           .Name("PanelBar")
-        /////	           .Effects(fx =>
-        /////	           {
-        /////		            fx.Height()
-        /////			          .Opacity()
-        /////					  .OpenDuration(AnimationDuration.Normal)
-        /////					  .CloseDuration(AnimationDuration.Normal);
-        /////	           })
-        ///// </code>
-        ///// </example>
-        //public PanelBarBuilder Effects(Action<EffectsBuilder> addEffects)
-        //{
-        //    Guard.IsNotNull(addEffects, "addAction");
+        /// <summary>
+        /// Configures the animation effects of the panelbar.
+        /// </summary>
+        /// <param name="enable">Whether the component animation is enabled.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().PanelBar()
+        ///             .Name("PanelBar")
+        ///             .Animation(false)
+        /// </code>
+        /// </example>
+        public PanelBarBuilder Animation(bool enable)
+        {
+            Component.Animation.Enabled = enable;
 
-        //    EffectsBuilderFactory factory = new EffectsBuilderFactory();
+            return this;
+        }
 
-        //    addEffects(factory.Create(Component.Effects));
+        /// <summary>
+        /// Configures the animation effects of the panelbar.
+        /// </summary>
+        /// <param name="animationAction">The action that configures the animation.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().PanelBar()
+        ///             .Name("PanelBar")
+        ///             .Animation(animation => animation.Expand)
+        /// </code>
+        /// </example>
+        public PanelBarBuilder Animation(Action<ExpandableAnimationBuilder> animationAction)
+        {
+            Guard.IsNotNull(animationAction, "animationAction");
 
-        //    return this;
-        //}
+            animationAction(new ExpandableAnimationBuilder(Component.Animation));
+
+            return this;
+        }
 
         /// <summary>
         /// Callback for each item.

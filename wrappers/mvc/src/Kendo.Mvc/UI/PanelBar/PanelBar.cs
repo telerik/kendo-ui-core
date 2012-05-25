@@ -13,8 +13,6 @@ namespace Kendo.Mvc.UI
 
     public class PanelBar : ViewComponentBase, INavigationItemComponent<PanelBarItem>
     {
-        //private readonly IList<IEffect> defaultEffects = new List<IEffect> { new PropertyAnimation(PropertyAnimationType.Height) };
-
         private readonly INavigationComponentHtmlBuilderFactory<PanelBar, PanelBarItem> builderFactory;
 
         internal bool isPathHighlighted;
@@ -31,9 +29,9 @@ namespace Kendo.Mvc.UI
 
             this.builderFactory = rendererFactory;
 
-            ClientEvents = new Dictionary<string, object>();
+            Animation = new ExpandableAnimation();
 
-            //defaultEffects.Each(el => Effects.Container.Add(el));
+            ClientEvents = new Dictionary<string, object>();
 
             ExpandMode = PanelBarExpandMode.Multiple;
             HighlightPath = true;
@@ -62,6 +60,11 @@ namespace Kendo.Mvc.UI
             private set;
         }
 
+        public ExpandableAnimation Animation
+        {
+            get;
+            private set;
+        }
 
         public Action<PanelBarItem> ItemAction
         {
@@ -115,20 +118,17 @@ namespace Kendo.Mvc.UI
         {
             var options = new Dictionary<string, object>();
 
-            //if (!defaultEffects.SequenceEqual(Effects.Container))
-            //{
-            //    objectWriter.Serialize("effects", Effects);
-            //}
+            var animation = Animation.ToJson();
+
+            if (animation.Keys.Any())
+            {
+                options["animation"] = animation["animation"];
+            }
 
             if (ClientEvents.Keys.Any())
             {
                 options.Merge(ClientEvents);
             }
-
-            //objectWriter.AppendClientEvent("expand", ClientEvents.OnExpand);
-            //objectWriter.AppendClientEvent("collapse", ClientEvents.OnCollapse);
-            //objectWriter.AppendClientEvent("select", ClientEvents.OnSelect);
-            //objectWriter.AppendClientEvent("error", ClientEvents.OnError);
 
             options["expandMode"] = ExpandMode;
             //options["contentUrls"] = Items;

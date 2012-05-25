@@ -93,6 +93,7 @@
     <Compile Include="Controllers\Grid\CustomAjaxBindingController.cs" />
     <Compile Include="Controllers\PanelBar\AjaxController.cs" />
     <Compile Include="Controllers\PanelBar\ApiController.cs" />
+    <Compile Include="Controllers\PanelBar\AnimationController.cs" />
     <Compile Include="Controllers\PanelBar\EventsController.cs" />
     <Compile Include="Controllers\PanelBar\ImagesController.cs" />
     <Compile Include="Controllers\Radial_Gauge\ScaleOptoinsController.cs" />
@@ -313,8 +314,9 @@
     <Content Include="Areas\razor\Views\panelbar\index.cshtml" />
     <Content Include="Areas\razor\Views\panelbar\images.cshtml" />
     <Content Include="Areas\razor\Views\panelbar\ajax.cshtml" />
-    <Content Include="Areas\razor\Views\panelbar\api.cshtml" />
     <Content Include="Areas\razor\Views\panelbar\events.cshtml" />
+    <Content Include="Areas\razor\Views\panelbar\api.cshtml" />
+    <Content Include="Areas\razor\Views\panelbar\animation.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
