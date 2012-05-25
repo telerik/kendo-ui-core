@@ -240,7 +240,7 @@
          * Configuration options.
          *
          * @option {Boolean} [modal] <false>
-         * Specifies whether the window should block interaction with other page elements.
+         * Specifies whether the window should show a modal overlay over the page.
          *
          * @option {Boolean} [visible] <true>
          * Specifies whether the window will be initially visible.
