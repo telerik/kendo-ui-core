@@ -432,6 +432,7 @@
             var that = this;
             clearTimeout(that._busy);
             that._arrow.removeClass(LOADING);
+            that._busy = null;
         },
 
         _showBusy: function () {

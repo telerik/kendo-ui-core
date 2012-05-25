@@ -617,6 +617,12 @@
                 equal(dropdown.list.width(), 400);
             });
 
+            test("DropDownList clears the id of the timeout on hideBusy", function() {
+                var dropdown = input.kendoDropDownList().data("kendoDropDownList");
+
+                ok(dropdown._busy === null);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
