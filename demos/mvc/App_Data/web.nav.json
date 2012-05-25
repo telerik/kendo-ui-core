@@ -480,6 +480,7 @@
                     "url": "tabstrip/ajax.html"
                 },
                 {
+                    "packages": [ "!mvc" ],
                     "text": "Animation effects",
                     "url": "tabstrip/animation.html"
                 },
@@ -532,6 +533,7 @@
                     "url": "treeview/dragdrop.html"
                 },
                 {
+                    "packages": [ "!mvc" ],
                     "text": "Animation effects",
                     "url": "treeview/animation.html"
                 },
@@ -540,6 +542,7 @@
                     "url": "treeview/images.html"
                 },
                 {
+                    "packages": [ "!mvc" ],
                     "text": "Templates",
                     "url": "treeview/templates.html"
                 },
@@ -548,6 +551,7 @@
                     "url": "treeview/events.html"
                 },
                 {
+                    "packages": [ "!mvc" ],
                     "text": "API",
                     "url": "treeview/api.html"
                 }
@@ -597,6 +601,7 @@
                     "url": "window/ajax.html"
                 },
                 {
+                    "packages": [ "!mvc" ],
                     "text": "Animation effects",
                     "url": "window/animation.html"
                 },
