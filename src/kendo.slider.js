@@ -842,13 +842,13 @@
             that.wrapper
                 .find(".k-button")
                 .unbind(MOUSE_DOWN)
-                .bind(MOUSE_DOWN, false)
+                .bind(MOUSE_DOWN, kendo.preventDefault)
                 .unbind(MOUSE_UP)
-                .bind(MOUSE_UP, false)
+                .bind(MOUSE_UP, kendo.preventDefault)
                 .unbind("mouseleave")
-                .bind("mouseleave", false)
+                .bind("mouseleave", kendo.preventDefault)
                 .unbind(MOUSE_OVER)
-                .bind(MOUSE_OVER, false);
+                .bind(MOUSE_OVER, kendo.preventDefault);
 
             that.wrapper
                 .find(TICK_SELECTOR + ", " + TRACK_SELECTOR).unbind(TRACK_MOUSE_DOWN);
@@ -1455,7 +1455,7 @@
                 .unbind(MOUSE_UP)
                 .unbind(KEY_DOWN)
                 .unbind(CLICK)
-                .bind(KEY_DOWN, false);
+                .bind(KEY_DOWN, kendo.preventDefault);
 
             that.options.enabled = false;
         },
