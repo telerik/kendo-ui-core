@@ -1,9 +1,16 @@
+<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/Web.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+
+<asp:Content ContentPlaceHolderID="HeadContent" runat="server">
+</asp:Content>
+
+<asp:Content ContentPlaceHolderID="MainContent" runat="server">
+
 <div id="cap-view" class="k-header">
     <h2>Customize your Kendo Cap</h2>
     <div id="cap" class="black-cap"></div>
     <div id="options">
     <h3>Cap Color</h3>
-    @(Html.Kendo().DropDownList()
+    <%= Html.Kendo().DropDownList()
           .Name("color")
           .DataTextField("Text")
           .DataValueField("Value")
@@ -23,10 +30,10 @@
               }
           })
           .Value("1")
-    )
+    %>
 
     <h3>Cap Size</h3>
-    @(Html.Kendo().DropDownList()
+    <%= Html.Kendo().DropDownList()
           .Name("size")
           .BindTo(new List<string>() {
               "S - 6 3/4\"",
@@ -34,8 +41,8 @@
               "L - 7 1/8\"",
               "XL - 7 5/8\""
           })
-    )
-
+    %>
+    
     <button class="k-button" id="get">Customize</button>
     </div>
 </div>
@@ -58,7 +65,7 @@
         width: 242px;
         height: 225px;
         margin: 30px 40px 30px 20px;
-        background-image: url('@Url.Content("~/Content/web/dropdownlist/cap.png")');
+        background-image: url('<%= Url.Content("~/Content/web/dropdownlist/cap.png") %>');
         background-repeat: no-repeat;
         background-color: transparent;
     }
@@ -102,3 +109,4 @@
         });
     });
 </script>
+</asp:Content>

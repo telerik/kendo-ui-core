@@ -13,5 +13,15 @@ namespace Kendo.Mvc.Examples.Controllers
         {
             return View();
         }
+
+        public JsonResult GetProducts()
+        {
+            return Json(new NorthwindDataContext().Products, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetCustomers()
+        {
+            return Json(new NorthwindDataContext().Customers, JsonRequestBehavior.AllowGet);
+        }
     }
 }

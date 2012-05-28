@@ -4,7 +4,7 @@
 
     public partial class DropDownListController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Template()
         {
             return View();
         }
