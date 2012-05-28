@@ -88,6 +88,7 @@
     <Compile Include="Controllers\DateTimePicker\TemplateController.cs" />
     <Compile Include="Controllers\DateTimePicker\RangeSelectionController.cs" />
     <Compile Include="Controllers\DropDownList\IndexController.cs" />
+    <Compile Include="Controllers\ChartController.cs" />
     <Compile Include="Controllers\Linear_Gauge\IndexController.cs" />
     <Compile Include="Controllers\Linear_Gauge\ScaleOptoinsController.cs" />
     <Compile Include="Controllers\Grid\AjaxEditingController.cs" />
@@ -152,6 +153,8 @@
     <Compile Include="Helpers\KendoWebFormViewEngine.cs" />
     <Compile Include="Models\Config.cs" />
     <Compile Include="Helpers\HyphenatedRouteHandler.cs" />
+    <Compile Include="Models\SpainElectricityStats.cs" />
+    <Compile Include="Models\ElectricityProduction.cs" />
     <Compile Include="Models\NavigationItem.cs" />
     <Compile Include="Models\EditableProduct.cs" />
     <Compile Include="Models\Northwind.Designer.cs">
@@ -353,6 +356,7 @@
     <Content Include="Areas\aspx\Views\web\datetimepicker\events.aspx" />
     <Content Include="Areas\aspx\Views\web\datetimepicker\index.aspx" />
     <Content Include="Areas\aspx\Views\web\datetimepicker\rangeselection.aspx" />
+    <Content Include="Areas\razor\Views\dataviz\area_chart\remote_data.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
