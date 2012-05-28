@@ -2,7 +2,8 @@ namespace Kendo.Mvc.UI
 {
     using System.IO;
     using System.Web.Mvc;
-    using System;
+    using Kendo.Mvc.Infrastructure;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Telerik RadialGauge for ASP.NET MVC is a view component for rendering RadialGauge.
@@ -12,10 +13,10 @@ namespace Kendo.Mvc.UI
         /// Initializes a new instance of the <see cref="LinearGauge" /> class.
         /// </summary>
         /// <param name="viewContext">The view context.</param>
-        /// <param name="clientSideObjectWriterFactory">The client side object writer factory.</param>
+        /// <param name="IJavaScriptInitializer">The javascript initializer.</param>
         /// <param name="urlGenerator">The URL Generator.</param>
-        public RadialGauge(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory, IUrlGenerator urlGenerator)
-            : base(viewContext, clientSideObjectWriterFactory, urlGenerator)
+        public RadialGauge(ViewContext viewContext, IJavaScriptInitializer initializer, IUrlGenerator urlGenerator)
+            : base(viewContext, initializer, urlGenerator)
         {
             Scale = new GaugeRadialScale<T>(this);
             Pointer = new GaugeRadialPointer<T>();
@@ -45,19 +46,16 @@ namespace Kendo.Mvc.UI
         /// <param name="writer">The writer object.</param>
         public override void WriteInitializationScript(TextWriter writer)
         {
-            var objectWriter = ClientSideObjectWriterFactory.Create(Id, "kendoRadialGauge", writer);
+            var options = new Dictionary<string, object>();
 
-            objectWriter.Start();
+            SerializeData("gaugeArea", this.GaugeArea.CreateSerializer().Serialize(), options);
+            SerializeData("pointer", this.Pointer.CreateSerializer().Serialize(), options);
+            SerializeData("scale", this.Scale.CreateSerializer().Serialize(), options);
 
-            SerializeData("gaugeArea", this.GaugeArea.CreateSerializer().Serialize(), objectWriter);
-            SerializeData("pointer", this.Pointer.CreateSerializer().Serialize(), objectWriter);
-            SerializeData("scale", this.Scale.CreateSerializer().Serialize(), objectWriter);
+            SerializeTheme(options);
+            SerializeTransitions(options);
 
-            SerializeTheme(objectWriter);
-            SerializeTransitions(objectWriter);
-
-            objectWriter.Complete();
-
+            writer.Write(Initializer.Initialize(Id, "RadialGauge", options));
             base.WriteInitializationScript(writer);
         }
     }

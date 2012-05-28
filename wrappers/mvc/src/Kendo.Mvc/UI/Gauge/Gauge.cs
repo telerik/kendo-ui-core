@@ -5,6 +5,7 @@ namespace Kendo.Mvc.UI
     using System.Web.UI;
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI.Html;
+    using Kendo.Mvc.Infrastructure;
 
     /// <summary>
     /// Telerik Gauge for ASP.NET MVC is a view component for rendering gauge.
@@ -21,10 +22,10 @@ namespace Kendo.Mvc.UI
         /// Initializes a new instance of the <see cref="Gauge" /> class.
         /// </summary>
         /// <param name="viewContext">The view context.</param>
-        /// <param name="clientSideObjectWriterFactory">The client side object writer factory.</param>
+        /// <param name="IJavaScriptInitializer">The javascript initializer.</param>
         /// <param name="urlGenerator">The URL Generator.</param>
-        public Gauge(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory, IUrlGenerator urlGenerator)
-            : base(viewContext, clientSideObjectWriterFactory)
+        public Gauge(ViewContext viewContext, IJavaScriptInitializer initializer, IUrlGenerator urlGenerator)
+            : base(viewContext, initializer)
         {
             UrlGenerator = urlGenerator;
             GaugeArea = new GaugeArea();
@@ -77,27 +78,27 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        protected void SerializeData(string key, IDictionary<string, object> data, IClientSideObjectWriter objectWriter)
+        public void SerializeData(string key, IDictionary<string, object> data, IDictionary<string, object> options)
         {
             if (data.Count > 0)
             {
-                objectWriter.AppendObject(key, data);
+                options.Add(key, data);
             }
         }
 
-        protected void SerializeTheme(IClientSideObjectWriter objectWriter)
+        public void SerializeTheme(IDictionary<string, object> options)
         {
             if (Theme.HasValue())
             {
-                objectWriter.Append("theme", Theme);
+                options.Add("theme", Theme);
             }
         }
 
-        protected void SerializeTransitions(IClientSideObjectWriter objectWriter)
+        public void SerializeTransitions(IDictionary<string, object> options)
         {
             if (!Transitions)
             {
-                objectWriter.Append("transitions", Transitions);
+                options.Add("transitions", Transitions);
             }
         }
 

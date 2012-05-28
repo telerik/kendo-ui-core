@@ -233,12 +233,10 @@
     <Compile Include="UI\HtmlFragmentTests.cs" />
     <Compile Include="UI\Menu\MenuSettingsVerificationTests.cs" />
     <Compile Include="UI\Slider\RangeSliderClientEventsBuilderTests.cs" />
-    <Compile Include="UI\Slider\RangeSliderRenderingTests.cs" />
     <Compile Include="UI\Slider\SliderHtmlBuilderTests.cs" />
     <Compile Include="UI\Slider\RangeSliderBuilderTests.cs" />
     <Compile Include="UI\Slider\SliderBuilderTests.cs" />
     <Compile Include="UI\Slider\SliderClientEventsBuilderTests.cs" />
-    <Compile Include="UI\Slider\SliderRenderingTests.cs" />
     <Compile Include="UI\Slider\SliderTestHelper.cs" />
     <Compile Include="UI\Splitter\SplitterPaneBuilderTests.cs" />
     <Compile Include="UI\Splitter\SplitterPaneFactoryTests.cs" />
