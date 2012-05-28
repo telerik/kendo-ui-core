@@ -925,7 +925,7 @@
                 settings = extend({}, kendo.Template, that.options.templateSettings);
 
             if (editable.template) {
-                html += (kendo.template(editable.template, settings))(model);
+                html += (kendo.template(window.unescape(editable.template), settings))(model);
             } else {
                 for (idx = 0, length = that.columns.length; idx < length; idx++) {
                     column = that.columns[idx];

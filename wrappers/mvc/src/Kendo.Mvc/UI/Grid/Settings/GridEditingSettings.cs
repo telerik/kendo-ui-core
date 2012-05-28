@@ -162,9 +162,8 @@ namespace Kendo.Mvc.UI
 
             FluentDictionary.For(json)
                 .Add("confirmDelete", DisplayDeleteConfirmation, true)
-                .Add("mode", Mode.ToString().ToLowerInvariant());
-                //TODO: Implement editor templates
-                //.Add("editor", editorHtml, () => Mode != GridEditMode.InLine)
+                .Add("mode", Mode.ToString().ToLowerInvariant())
+                .Add("template", editorHtml, () => Mode != GridEditMode.InLine);
                 //TODO: Implement GridBeginEditEvent option                
                 //.Add("beginEdit", BeginEdit == GridBeginEditEvent.Click ? "click" : "dblclick", () => BeginEdit != GridBeginEditEvent.Auto)               
                 //TODO: Implement insert row position
