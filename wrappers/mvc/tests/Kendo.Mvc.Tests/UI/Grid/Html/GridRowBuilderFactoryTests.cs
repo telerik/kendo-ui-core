@@ -27,7 +27,7 @@ namespace Kendo.Mvc.UI.Html.Tests
                 UrlBuilder = new Mock<IGridUrlBuilder>().Object,
                 GroupMembers = new string[0],
                 Callback = delegate { },
-                EditFormHtmlAttributes = new Dictionary<string, object>(),
+              //  EditFormHtmlAttributes = new Dictionary<string, object>(),
                 Aggregates = new AggregateFunction[0]
             };
         }

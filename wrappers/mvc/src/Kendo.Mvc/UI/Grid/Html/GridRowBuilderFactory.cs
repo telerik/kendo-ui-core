@@ -260,7 +260,7 @@ namespace Kendo.Mvc.UI.Html
             });
 
             var formHtmlAttributes = CreateFormAttributes(renderingData.FormId, action(item.DataItem));
-            formHtmlAttributes.Merge(renderingData.EditFormHtmlAttributes);
+            //formHtmlAttributes.Merge(renderingData.EditFormHtmlAttributes);
 
             return new GridEditFormBuilder(new GridFormBuilder(formHtmlAttributes), 
                 () => renderingData.HtmlHelper.EditorForModel(item.DataItem, 
@@ -289,7 +289,7 @@ namespace Kendo.Mvc.UI.Html
             var cellBuilders = renderingData.Columns.Select(column => cellBuilder(column, renderingData.HtmlHelper));
 
             var formHtmlAttributes = CreateFormAttributes(renderingData.FormId, action(item.DataItem));
-            formHtmlAttributes.Merge(renderingData.EditFormHtmlAttributes);
+            //formHtmlAttributes.Merge(renderingData.EditFormHtmlAttributes);
 
             return new GridInLineEditRowBuilder(tableBuilder, new GridFormBuilder(formHtmlAttributes),
                                                 renderingData.Colspan, item.DataItem, cellBuilders);
