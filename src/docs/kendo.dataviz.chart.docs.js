@@ -15,11 +15,10 @@
      * <ul>
      *     <li>Bar / Column</li>
      *     <li>Line / Vertical Line</li>
-     *     <li>Area / Verical Area</li>
+     *     <li>Area / Vertical Area</li>
      *     <li>Pie</li>
      *     <li>Scatter</li>
      *     <li>Scatter Line</li>
-     *     <li>Area</li>
      * </ul>
      *
      * <p>
