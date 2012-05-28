@@ -107,9 +107,9 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
-        public void DataBinding_return_builder()
+        public void DataSource_return_builder()
         {
-            builder.DataBinding(dataBinding => { }).ShouldBeSameAs(builder);
+            builder.DataSource(dataSource => { }).ShouldBeSameAs(builder);
         }
 
         [Fact]

@@ -184,20 +184,19 @@ namespace Kendo.Mvc.UI.Tests.Chart
         [Fact]
         public void DataBinding_should_be_serialized_when_using_Server_binding()
         {
-            chart.DataSource = new SalesData[] { new SalesData() };
+            chart.Data = new SalesData[] { new SalesData() };
             chart.WriteInitializationScript(textWriter.Object);
 
             output.ShouldContain("{dataSource:{\"data\":[{\"RepName\":null,\"DateString\":null,\"TotalSales\":0,\"RepSales\":0,\"Explode\":false,\"Color\":null}]}}");
         }
 
         [Fact]
-        public void DataBinding_should_be_serialized_when_using_Ajax_binding()
+        public void DataSource_should_be_serialized_when_using_Ajax_binding()
         {
-            chart.DataBinding.Ajax.Enabled = true;
-            chart.DataBinding.Ajax.Select.ActionName = "Action";
+            chart.DataSource.Transport.Read.Url = "/Action";
             chart.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{dataSource:{\"transport\":{\"read\":{\"url\":\"/Action\",\"type\":\"POST\"}}}}");
+            output.ShouldContain("dataSource:{\"transport\":{\"read\":{\"url\":\"/Action\",\"type\":\"POST\"}}");
         }
 
         [Fact]
