@@ -459,10 +459,10 @@
     <Compile Include="UI\Grid\Columns\IGridForeignKeyColumn.cs" />
     <Compile Include="UI\Grid\Commands\GridCustomActionCommand.cs" />
     <Compile Include="UI\Grid\Commands\GridCustomCommandBase.cs" />
+    <Compile Include="UI\Grid\Fluent\GridNavigatableSettingsBuilder.cs" />
     <Compile Include="UI\Grid\Fluent\GridToolBarSubmitChangesCommandBuilder.cs" />
     <Compile Include="UI\Grid\Fluent\GridColumnContextMenuSettingsBuilder.cs" />
     <Compile Include="UI\Grid\Fluent\GridCustomActionCommandBuilder.cs" />
-    <Compile Include="UI\Grid\Fluent\GridKeyboardNavigationSettingsBuilder.cs" />
     <Compile Include="UI\Grid\GridActionResultAdapterFactory.cs" />
     <Compile Include="UI\Grid\AggregateDescriptor.cs" />
     <Compile Include="UI\Grid\Fluent\GridToolBarCommandBuilder.cs" />
@@ -482,7 +482,7 @@
     <Compile Include="UI\Grid\Html\IGridPagerPagingSectionsBuilder.cs" />
     <Compile Include="UI\Grid\IGridActionResultFactory.cs" />
     <Compile Include="UI\Grid\Settings\GridColumnContextMenuSettings.cs" />
-    <Compile Include="UI\Grid\Settings\GridKeyboardNavigationSettings.cs" />
+    <Compile Include="UI\Grid\Settings\GridNavigatableSettings.cs" />
     <Compile Include="UI\Grid\ToolBar\GridToolBarPosition.cs" />
     <Compile Include="UI\Grid\Html\GridButtonBuilder.cs" />
     <Compile Include="UI\Grid\Html\GridButtonBuilderBase.cs" />
