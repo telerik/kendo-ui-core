@@ -92,10 +92,28 @@ namespace Kendo.Mvc.UI
             }
             
             StringBuilder builder = new StringBuilder(id.Length);
+            int startSharpIndex = id.IndexOf("#");
+            int endSharpIndex = id.LastIndexOf("#");
 
-            for (int i = 0; i < id.Length; i++)
+            if (endSharpIndex > startSharpIndex)
             {
-                char character = id[i];
+                ReplaceInvalidCharacters(id.Substring(0, startSharpIndex), builder);
+                builder.Append(id.Substring(startSharpIndex, endSharpIndex - startSharpIndex + 1));
+                ReplaceInvalidCharacters(id.Substring(endSharpIndex + 1), builder);
+            }
+            else
+            {
+                ReplaceInvalidCharacters(id, builder);
+            }
+
+            return builder.ToString();
+        }
+
+        private static void ReplaceInvalidCharacters(string part, StringBuilder builder)
+        {
+            for (int i = 0; i < part.Length; i++)
+            {
+                char character = part[i];
                 if (IsValidCharacter(character))
                 {
                     builder.Append(character);
@@ -105,13 +123,11 @@ namespace Kendo.Mvc.UI
                     builder.Append(HtmlHelper.IdAttributeDotReplacement);
                 }
             }
-
-            return builder.ToString();
         }
 
         private static bool IsValidCharacter(char c) 
         {
-            if (c == '?' || c == '!') 
+            if (c == '?' || c == '!' || c == '#') 
             {
                 return false;
             }

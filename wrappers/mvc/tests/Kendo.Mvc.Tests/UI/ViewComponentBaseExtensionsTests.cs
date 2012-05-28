@@ -43,5 +43,23 @@ namespace Kendo.Mvc.UI.Tests
         {
             baseComponent.SanitizeId("Name?#= test #").ShouldEqual("Name_#= test #");
         }
+
+        [Fact]
+        public void SanitizeId_allows_ternary_in_client_template()
+        {
+            baseComponent.SanitizeId("Name?#= test ? test : '2' #").ShouldEqual("Name_#= test ? test : '2' #");
+        }
+
+        [Fact]
+        public void SanitizeId_replaces_sharps()
+        {
+            baseComponent.SanitizeId("Name?#").ShouldEqual("Name__");
+        }
+
+        [Fact]
+        public void SanitizeId_does_not_replace_client_template_if_it_is_in_the_begining()
+        {
+            baseComponent.SanitizeId("#:#Name?").ShouldEqual("#:#Name_");
+        }
     }
 }
