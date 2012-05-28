@@ -145,6 +145,7 @@
     <Compile Include="UI\Chart\Serialization\ChartBoundSeriesSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartSeriesSerializerBaseTests.cs" />
     <Compile Include="UI\Chart\Serialization\PlotAreaSerializerTests.cs" />
+    <Compile Include="UI\DateTimePicker\DateTimePickerBuilderTests.cs" />
     <Compile Include="UI\ViewComponentBaseExtensionsTests.cs" />
     <Compile Include="UI\DataSource\CrudOperationTests.cs" />
     <Compile Include="UI\DataSource\DataSourceBuilderTests.cs" />

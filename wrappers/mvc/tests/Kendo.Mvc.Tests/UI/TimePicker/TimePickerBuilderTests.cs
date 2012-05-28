@@ -1,6 +1,11 @@
-using Xunit;
-using System;
+using Kendo.Mvc.Extensions;
+using Kendo.Mvc.UI;
 using Kendo.Mvc.UI.Fluent;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.Query.Dynamic;
+using Xunit;
 
 namespace Kendo.Mvc.UI.Tests
 {
@@ -203,6 +208,20 @@ namespace Kendo.Mvc.UI.Tests
             var returnedBuilder = builder.Enable(true);
 
             Assert.IsType(typeof(TimePickerBuilder), returnedBuilder);
+        }
+
+        [Fact]
+        public void BindTo_method_sets_Dates_property()
+        {
+            builder.BindTo(new List<DateTime>() { DateTime.Today });
+
+            timepicker.Dates.Count.ShouldEqual(1);
+        }
+
+        [Fact]
+        public void BindTo_method_returns_DateTimePickerBuilder()
+        {
+            builder.BindTo(new List<DateTime>()).ShouldBeType<TimePickerBuilder>();
         }
     }
 }
