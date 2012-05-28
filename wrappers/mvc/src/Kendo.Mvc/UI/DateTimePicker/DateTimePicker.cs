@@ -88,10 +88,21 @@ namespace Kendo.Mvc.UI
 
             options["min"] = Min;
             options["max"] = Max;
-            options["footer"] = Footer;
 
-            options["depth"] = Depth;
-            options["start"] = Start;
+            if (Footer.HasValue())
+            {
+                options["footer"] = Footer;
+            }
+
+            if (Depth.HasValue())
+            {
+                options["depth"] = Depth;
+            }
+
+            if (Start.HasValue())
+            {
+                options["start"] = Start;
+            }
 
             var month = MonthTemplate.ToJson();
 
