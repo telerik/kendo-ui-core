@@ -97,10 +97,30 @@ namespace Kendo.Mvc.Infrastructure
                     continue;
                 }
 
+                if (value is double)
+                {
+                    output.Append(((double)value).ToString("r", CultureInfo.InvariantCulture));
+
+                    continue;
+                }
+
+                if (value is float)
+                {
+                    output.Append(((float)value).ToString("r", CultureInfo.InvariantCulture));                    
+
+                    continue;
+                }                
+
                 if (value == null)
                 {
                     output.Append("null");
 
+                    continue;
+                }
+
+                if (value.GetType().IsPrimitive || value is decimal)
+                {
+                    AppendConvertable(output, value);
                     continue;
                 }
 
@@ -174,6 +194,16 @@ namespace Kendo.Mvc.Infrastructure
                   .Append(",")
                   .Append(value.Millisecond)
                   .Append(")");
+        }
+
+        private void AppendConvertable(StringBuilder output, object value)
+        {            
+            var convertible = value as IConvertible;
+            if (convertible != null)
+            {
+                output.Append(convertible.ToString(CultureInfo.InvariantCulture));
+                return;
+            }            
         }
     }
 }

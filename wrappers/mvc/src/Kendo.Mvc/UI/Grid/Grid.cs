@@ -736,7 +736,7 @@ namespace Kendo.Mvc.UI
                 options["scrollable"] = false;
             }
 
-            if (Editing.Enabled)
+            if (Editing.Enabled && IsClientBinding)
             {
                 options["editable"] = Editing.ToJson();
             }
