@@ -79,6 +79,10 @@
     <Compile Include="Controllers\Area_Chart\IndexController.cs" />
     <Compile Include="Controllers\ComboBox\IndexController.cs" />
     <Compile Include="Controllers\AutoComplete\IndexController.cs" />
+    <Compile Include="Controllers\DatePicker\ApiController.cs" />
+    <Compile Include="Controllers\DatePicker\EventsController.cs" />
+    <Compile Include="Controllers\DatePicker\TemplateController.cs" />
+    <Compile Include="Controllers\DatePicker\RangeSelectionController.cs" />
     <Compile Include="Controllers\DropDownList\IndexController.cs" />
     <Compile Include="Controllers\Linear_Gauge\IndexController.cs" />
     <Compile Include="Controllers\Linear_Gauge\ScaleOptoinsController.cs" />
@@ -163,6 +167,11 @@
     <Content Include="Areas\aspx\Views\dataviz\linear_gauge\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\linear_gauge\scaleoptions.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\area_chart\index.aspx" />
+    <Content Include="Areas\aspx\Views\web\datepicker\api.aspx" />
+    <Content Include="Areas\aspx\Views\web\datepicker\events.aspx" />
+    <Content Include="Areas\aspx\Views\web\datepicker\index.aspx" />
+    <Content Include="Areas\aspx\Views\web\datepicker\rangeselection.aspx" />
+    <Content Include="Areas\aspx\Views\web\datepicker\template.aspx" />
     <Content Include="Areas\aspx\Views\web\numerictextbox\api.aspx" />
     <Content Include="Areas\aspx\Views\web\numerictextbox\events.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\radial_gauge\index.aspx" />
@@ -317,6 +326,10 @@
     <Content Include="Areas\razor\Views\web\panelbar\events.cshtml" />
     <Content Include="Areas\razor\Views\web\panelbar\images.cshtml" />
     <Content Include="Areas\razor\Views\web\panelbar\index.cshtml" />
+    <Content Include="Areas\razor\Views\web\datepicker\api.cshtml" />
+    <Content Include="Areas\razor\Views\web\datepicker\events.cshtml" />
+    <Content Include="Areas\razor\Views\web\datepicker\rangeselection.cshtml" />
+    <Content Include="Areas\razor\Views\web\datepicker\template.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>

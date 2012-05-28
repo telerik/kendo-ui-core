@@ -1,0 +1,24 @@
+<div class="demo-section" style="width:155px">
+@(Html.Kendo().DatePicker()
+      .Name("datepicker")
+      .ClientEvents(e =>
+      {
+          e.Change("change").Open("open").Close("close");
+      })
+)
+</div>
+
+<script>
+    function open() {
+        kendoConsole.log("Open");
+    }
+
+    function close() {
+        kendoConsole.log("Close");
+    }
+
+    function change() {
+        kendoConsole.log("Change :: " + kendo.toString(this.value(), 'd'));
+    }
+</script>
+<div class="console"></div>
