@@ -63,7 +63,7 @@ namespace Kendo.Mvc.UI
             Resizing = new GridResizingSettings();
             Reordering = new GridReorderingSettings();
 
-            TableHtmlAttributes = new RouteValueDictionary();            
+            TableHtmlAttributes = new RouteValueDictionary();
 
             Footer = true;
             IsEmpty = true;
@@ -78,7 +78,16 @@ namespace Kendo.Mvc.UI
 
             AutoGenerateColumns = true;
 
-            DataSource = new DataSource();
+            DataSource = new DataSource()
+            {
+                Type = DataSourceType.Server,
+                ServerAggregates = true,
+                ServerFiltering = true,
+                ServerGrouping = true,
+                ServerPaging = true,
+                ServerSorting = true
+            };
+
             DataSource.ModelType(typeof(T));
         }
 
