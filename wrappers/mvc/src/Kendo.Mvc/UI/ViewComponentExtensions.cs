@@ -5,6 +5,8 @@ namespace Kendo.Mvc.UI
     using System.Collections.Generic;
     
     using Kendo.Mvc.Extensions;
+    using System.Text;
+    using System.Text.RegularExpressions;
 
     internal static class ViewComponentExtensions
     {
@@ -80,6 +82,41 @@ namespace Kendo.Mvc.UI
             }
 
             return null;
+        }
+
+        public static string SanitizeId(this IViewComponent instance, string id)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                return null;
+            }
+            
+            StringBuilder builder = new StringBuilder(id.Length);
+
+            for (int i = 0; i < id.Length; i++)
+            {
+                char character = id[i];
+                if (IsValidCharacter(character))
+                {
+                    builder.Append(character);
+                }
+                else
+                {
+                    builder.Append(HtmlHelper.IdAttributeDotReplacement);
+                }
+            }
+
+            return builder.ToString();
+        }
+
+        private static bool IsValidCharacter(char c) 
+        {
+            if (c == '?' || c == '!') 
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 
