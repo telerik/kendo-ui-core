@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Grid detailView</title>
+        <title>Grid detailTemplate</title>
         <script src="../../src/jquery.js"></script>
         <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
         <script type="text/javascript" src="../qunit-runner.js"></script>
@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
     </head>
     <body>
-        <h1 id="qunit-header">Grid detailView</h1>
+        <h1 id="qunit-header">Grid detailTemplate</h1>
         <h2 id="qunit-banner"></h2>
         <div id="qunit-testrunner-toolbar"></div>
         <h2 id="qunit-userAgent"></h2>
@@ -26,7 +26,7 @@
                 return document.body.appendChild(document.createElement("table"));
             }
 
-             module("kendo.ui.Grid detailView", {
+             module("kendo.ui.Grid detailTemplate", {
                 setup: function() {
                 },
                 teardown: function() {
@@ -442,7 +442,23 @@
                 ok(detailRow.hasClass("k-detail-row"));
                 equal(detailRow.find(".k-detail-cell").text(), "foo");
             });
-        </script>
+
+            test("alternating master rows have detail row with k-alt class name", function() {
+                var grid = new Grid(table(), {
+                    dataSource: [{ foo: "foo" }, { foo: "bar" }, { foo: "boo" }],
+                    detailTemplate: "foo",
+                    columns: [{ field: "foo" }]
+                }),
+                masterRow = grid.tbody.find("tr.k-master-row:eq(1)");
+
+                grid.expandRow(masterRow);
+
+                var detailRow = masterRow.next();
+
+                ok(masterRow.hasClass("k-alt"));
+                ok(detailRow.hasClass("k-alt"));
+            });
+       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
     </body>
