@@ -25,7 +25,7 @@ namespace Kendo.Mvc.UI.Tests
             state = new ModelState();
             state.Value = result;
 
-            viewContext.ViewData.ModelState.Add("DatePicker1", state);
+            datepicker.ViewData.ModelState.Add("DatePicker1", state);
             currentCulture = CultureInfo.CurrentCulture;
         }
 
