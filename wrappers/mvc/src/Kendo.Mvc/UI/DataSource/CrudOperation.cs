@@ -43,6 +43,11 @@ namespace Kendo.Mvc.UI
                 {
                     json["data"] = Data;
                 }
+
+                if (Type.HasValue())
+                {
+                    json["type"] = Type;
+                }
             }
         }
 
@@ -107,6 +112,12 @@ namespace Kendo.Mvc.UI
         {
             get;
             set;
-        }        
+        }
+
+        public string Type
+        {
+            get;
+            set;
+        }
     }
 }

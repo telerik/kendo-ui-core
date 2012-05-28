@@ -101,6 +101,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Specifies an absolute or relative URL for the operation.
+        /// </summary>
+        /// <param name="url">Absolute or relative URL for the operation</param>
+        public CrudOperationBuilder Url(string url)
+        {
+            operation.Url = url;
+
+            return this;
+        }
+
         private void SetUrl()
         {
             operation.Url = operation.GenerateUrl(viewContext, urlGenerator);

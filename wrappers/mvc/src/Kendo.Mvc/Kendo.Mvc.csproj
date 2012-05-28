@@ -172,7 +172,6 @@
     <Compile Include="UI\Chart\Axes\IChartValueAxis.cs" />
     <Compile Include="UI\Chart\Axes\IChartCategoryAxis.cs" />
     <Compile Include="UI\Chart\Chart.cs" />
-    <Compile Include="UI\Chart\ChartClientEvents.cs" />
     <Compile Include="UI\Chart\ChartTitle.cs" />
     <Compile Include="UI\Chart\ChartLegend.cs" />
     <Compile Include="UI\Chart\ChartSpacing.cs" />
@@ -249,7 +248,6 @@
     <Compile Include="UI\Chart\Serialization\ChartPointLabelsSerializer.cs" />
     <Compile Include="UI\Chart\Serialization\PlotAreaSerializer.cs" />
     <Compile Include="UI\Chart\Series\ChartBarLabels.cs" />
-    <Compile Include="UI\Chart\Fluent\ChartBindingSettingsBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartValueAxisFactory.cs" />
     <Compile Include="UI\Chart\Fluent\ChartAxisBuilderBase.cs" />
     <Compile Include="UI\Chart\Fluent\ChartNumericAxisBuilder.cs" />
@@ -262,7 +260,6 @@
     <Compile Include="UI\Chart\Fluent\ChartSeriesFactory.cs" />
     <Compile Include="UI\Chart\Fluent\ChartBarSeriesBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartCategoryAxisBuilder.cs" />
-    <Compile Include="UI\Chart\Fluent\ChartDataBindingConfigurationBuilder.cs" />
     <Compile Include="UI\Chart\Html\ChartHtmlBuilder.cs" />
     <Compile Include="UI\Chart\Serialization\ChartSeriesSerializerBase.cs" />
     <Compile Include="UI\Chart\Serialization\ChartBarSeriesSerializer.cs" />
@@ -297,8 +294,6 @@
     <Compile Include="UI\Chart\Series\IChartBoundSeries.cs" />
     <Compile Include="UI\Chart\Series\IChartBarSeries.cs" />
     <Compile Include="UI\Chart\Series\IChartSeries.cs" />
-    <Compile Include="UI\Chart\Settings\ChartBindingSettings.cs" />
-    <Compile Include="UI\Chart\Settings\ChartDataBindingSettings.cs" />
     <Compile Include="UI\ComboBox\ComboBox.cs" />
     <Compile Include="UI\ComboBox\ComboBoxHtmlBuilder.cs" />
     <Compile Include="UI\ComboBox\Fluent\ComboBoxBuilder.cs" />
