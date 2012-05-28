@@ -383,7 +383,6 @@
     <Compile Include="UI\Window\WindowHtmlBuilderTests.cs" />
     <Compile Include="UI\Window\WindowActionsBuilderTests.cs" />
     <Compile Include="UI\Window\WindowResizingSettingsBuilderTests.cs" />
-    <Compile Include="UI\Window\WindowClientEventsBuilderTests.cs" />
     <Compile Include="UI\Window\WindowBuilderTests.cs" />
     <Compile Include="UI\Window\WindowTestHelper.cs" />
     <Compile Include="UrlGeneratorTests.cs" />

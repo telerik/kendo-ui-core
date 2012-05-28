@@ -127,14 +127,15 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
-        /// <summary>
-        /// Gets the HTML attributes of the form rendered during editing
-        /// </summary>
-        /// <param name="attributes">The attributes.</param>
-        public GridEditingSettingsBuilder<T> FormHtmlAttributes(object attributes)
-        {
-            return FormHtmlAttributes(attributes.ToDictionary());
-        }
+        //TODO: Implement edit form attributes
+        ///// <summary>
+        ///// Gets the HTML attributes of the form rendered during editing
+        ///// </summary>
+        ///// <param name="attributes">The attributes.</param>
+        //public GridEditingSettingsBuilder<T> FormHtmlAttributes(object attributes)
+        //{
+        //    return FormHtmlAttributes(attributes.ToDictionary());
+        //}
 
         //TODO: Implement edit form attributes
         ///// <summary>

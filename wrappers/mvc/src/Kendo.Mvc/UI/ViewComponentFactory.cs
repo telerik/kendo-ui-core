@@ -370,7 +370,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual WindowBuilder Window()
         {
-            return new WindowBuilder(new Window(ViewContext, ClientSideObjectWriterFactory));
+            return new WindowBuilder(new Window(ViewContext, Initializer));
         }
 
         /// <summary>
