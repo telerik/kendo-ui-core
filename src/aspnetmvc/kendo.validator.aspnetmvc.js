@@ -111,10 +111,19 @@
 
     var validationRules = {
         required: function (input) {
-            var checkbox = input.filter("[type=checkbox]").length && input.attr("checked") !== "checked",
-                value = input.val();
+            var value = input.val(),
+                checkbox = input.filter("[type=checkbox]");
 
-            return !(value === "" || !value  || checkbox);
+            if (checkbox.length) {
+                var hidden = checkbox.next("input:hidden[name=" + checkbox[0].name + "]");
+                if (hidden.length) {
+                    value = hidden.val();
+                } else {
+                    value = input.attr("checked") === "checked";
+                }
+            }
+
+            return !(value === "" || !value);
         },
         number: function (input) {
             return kendo.parseFloat(input.val()) !== null;
