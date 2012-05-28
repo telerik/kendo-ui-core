@@ -25,7 +25,7 @@ namespace Kendo.Mvc.UI
             get;
         }
 
-        GridKeyboardNavigationSettings KeyboardNavigation
+        GridNavigatableSettings Navigatable
         {
             get;
         }

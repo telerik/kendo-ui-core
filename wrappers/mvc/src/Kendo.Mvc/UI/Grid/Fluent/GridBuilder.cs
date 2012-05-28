@@ -738,13 +738,13 @@ namespace Kendo.Mvc.UI.Fluent
         ///                 columns.Add(c => c.ShipCity).Width(200);
         ///             })
         ///             .BindTo((IEnumerable&lt;Order&gt;)ViewData["Orders"])
-        ///             .KeyboardNavigation();
+        ///             .Navigatable();
         /// %&gt;
         /// </code>
         /// </example>
-        public GridBuilder<T> KeyboardNavigation()
+        public GridBuilder<T> Navigatable()
         {
-            Component.KeyboardNavigation.Enabled = true;
+            Component.Navigatable.Enabled = true;
 
             return this;
         }
@@ -766,17 +766,17 @@ namespace Kendo.Mvc.UI.Fluent
         ///                 columns.Add(c => c.ShipCity).Width(200);
         ///             })
         ///             .BindTo((IEnumerable&lt;Order&gt;)ViewData["Orders"])
-        ///             .KeyboardNavigation(navigation => navigation.Enabled(true));
+        ///             .Navigatable(navigation => navigation.Enabled(true));
         /// %&gt;
         /// </code>
         /// </example>
-        public GridBuilder<T> KeyboardNavigation(Action<GridKeyboardNavigationSettingsBuilder> configurator)
+        public GridBuilder<T> Navigatable(Action<GridNavigatableSettingsBuilder> configurator)
         {
             Guard.IsNotNull(configurator, "configurator");
 
-            KeyboardNavigation();
+            Navigatable();
 
-            configurator(new GridKeyboardNavigationSettingsBuilder(Component.KeyboardNavigation));
+            configurator(new GridNavigatableSettingsBuilder(Component.Navigatable));
 
             return this;
         }
