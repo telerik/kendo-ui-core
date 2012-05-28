@@ -331,6 +331,12 @@ function fetchChangelog(callback) {
         user: "telerik",
         repo: "kendo"
     }, function(err, openMilestones) {
+        if (err) {
+            console.log ("Network error, skipping changelog generation.");
+            changelog.available = false;
+            return callback();
+        }
+
         github.issues.getAllMilestones({
             user: "telerik",
             repo: "kendo",
@@ -423,8 +429,10 @@ function buildBundle(bundle, version, success, licenseBuilt) {
                 deployExamples(root, bundle);
             }
 
-            console.log("Deploying changelog");
-            deployChangelog(root, bundle, version);
+            if (changelog.available) {
+                console.log("Deploying changelog");
+                deployChangelog(root, bundle, version);
+            }
 
             // allow customization before packaging
             if (licenseBuilt) {
