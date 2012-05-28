@@ -16,7 +16,6 @@
             this.urlGenerator = urlGenerator;
             this.dataSource = dataSource;
 
-            dataSource.Type = DataSourceType.Ajax;
             dataSource.Schema.Data = "";
             dataSource.Schema.Total = "";
         }

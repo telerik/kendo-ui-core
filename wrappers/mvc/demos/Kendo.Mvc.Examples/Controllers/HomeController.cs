@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Kendo.Mvc.Examples.Models;
+using Kendo.Mvc.Extensions;
+using Kendo.Mvc.Infrastructure;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using Kendo.Mvc.Examples.Models;
 
 namespace Kendo.Mvc.Examples.Controllers
 {
@@ -14,9 +14,16 @@ namespace Kendo.Mvc.Examples.Controllers
             return View();
         }
 
-        public JsonResult GetProducts()
+        public JsonResult GetProducts(string filterText)
         {
-            return Json(new NorthwindDataContext().Products, JsonRequestBehavior.AllowGet);
+            var products = new NorthwindDataContext().Products.AsQueryable();
+
+            if (filterText.HasValue())
+            {
+                products = products.Where(p => p.ProductName.Contains(filterText));
+            }
+
+            return Json(products, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GetCustomers()

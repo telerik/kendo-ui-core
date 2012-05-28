@@ -1,10 +1,15 @@
+<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/Web.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
+<asp:Content ContentPlaceHolderID="HeadContent" runat="server">
+</asp:Content>
+
+<asp:Content ContentPlaceHolderID="MainContent" runat="server">
 <div id="tshirt-view" class="k-header">
 	<h2>Customize your Kendo T-shirt</h2>
 	<img id="tshirt" src="@Url.Content("~/Content/web/combobox/tShirt.png")" />
     <div id="options">
 	<h3>T-shirt Fabric</h3>
-    @(Html.Kendo().ComboBox()
+    <%= Html.Kendo().ComboBox()
           .Name("fabric")
           .Filter("contains")
           .Placeholder("Select fabric...")
@@ -26,10 +31,10 @@
           })
           .SelectedIndex(3)
           .Suggest(true)
-    )
+    %>
 
     <h3>T-shirt Size</h3>
-    @(Html.Kendo().ComboBox()
+    <%= Html.Kendo().ComboBox()
           .Name("size")
           .Placeholder("Select size...")
           .BindTo(new List<string>() {
@@ -42,7 +47,7 @@
           })
           .SelectedIndex(3)
           .Suggest(true)
-    )
+    %>
 
 	<button class="k-button" id="get">Customize</button>
 	</div>
@@ -93,3 +98,4 @@
         });
     });
 </script>
+</asp:Content>
