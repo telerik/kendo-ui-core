@@ -2,57 +2,30 @@ namespace Kendo.Mvc.UI.Fluent
 {
     using System;
     using Infrastructure;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="Upload.ClientEvents"/>.
     /// </summary>
-    public class UploadClientEventsBuilder : IHideObjectMembers
+    public class UploadClientEventsBuilder : EventBuilder
     {
-        private readonly UploadClientEvents events;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="UploadClientEventsBuilder" /> class.
         /// </summary>
         /// <param name="clientEvents">The client events.</param>
-        public UploadClientEventsBuilder(UploadClientEvents clientEvents)
+        public UploadClientEventsBuilder(IDictionary<string, object> clientEvents) : base(clientEvents)
         {
-            events = clientEvents;
         }
 
         /// <summary>
-        /// Defines the inline handler of the OnSelect client-side event
-        /// </summary>
-        /// <param name="codeBlock">The action defining the inline handler.</param>
-        /// <example>
-        /// <code lang="CS">
-        /// &lt;% Html.Telerik().Upload()
-        ///            .Name("Upload")
-        ///            .ClientEvents(events => events.OnSelect(() =>
-        ///            {
-        ///                 %&gt;
-        ///                 function(e) {
-        ///                     //event handling code
-        ///                 }
-        ///                 &lt;%
-        ///            }))
-        ///            .Render();
-        /// %&gt;
-        /// </code>
-        /// </example>        
-        public UploadClientEventsBuilder OnSelect(Action codeBlock)
-        {
-            return CodeBlock(events.OnSelect, codeBlock);
-        }
-
-        /// <summary>
-        /// Defines the inline handler of the OnSelect client-side event
+        /// Defines the inline handler of the Select client-side event
         /// </summary>
         /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;% Html.Telerik().Upload()
         ///            .Name("Upload")
-        ///            .ClientEvents(events => events.OnSelect(
+        ///            .ClientEvents(events => events.Select(
         ///                 @&lt;text&gt;
         ///                 function(e) {
         ///                     //event handling code
@@ -63,62 +36,41 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public UploadClientEventsBuilder OnSelect(Func<object, object> inlineCodeBlock)
+        public UploadClientEventsBuilder Select(Func<object, object> inlineCodeBlock)
         {
-            return InlineCodeBlock(events.OnSelect, inlineCodeBlock);
+            Handler("select", inlineCodeBlock);
+
+            return this;
         }
 
         /// <summary>
-        ///  Defines the name of the JavaScript function that will handle the the OnSelect client-side event.
+        ///  Defines the name of the JavaScript function that will handle the the Select client-side event.
         /// </summary>
         /// <param name="onSelectHandlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;%= Html.Telerik().Upload()
         ///             .Name("Upload")
-        ///             .ClientEvents(events => events.OnSelect("onSelect"))
+        ///             .ClientEvents(events => events.Select("onSelect"))
         /// %&gt;
         /// </code>
         /// </example>
-        public UploadClientEventsBuilder OnSelect(string onSelectHandlerName)
+        public UploadClientEventsBuilder Select(string onSelectHandlerName)
         {
-            return HandlerName(events.OnSelect, onSelectHandlerName);
+            Handler("select", onSelectHandlerName);
+
+            return this;
         }
 
         /// <summary>
-        /// Defines the inline handler of the OnUpload client-side event
-        /// </summary>
-        /// <param name="codeBlock">The action defining the inline handler.</param>
-        /// <example>
-        /// <code lang="CS">
-        /// &lt;% Html.Telerik().Upload()
-        ///            .Name("Upload")
-        ///            .ClientEvents(events => events.OnUpload(() =>
-        ///            {
-        ///                 %&gt;
-        ///                 function(e) {
-        ///                     //event handling code
-        ///                 }
-        ///                 &lt;%
-        ///            }))
-        ///            .Render();
-        /// %&gt;
-        /// </code>
-        /// </example>        
-        public UploadClientEventsBuilder OnUpload(Action codeBlock)
-        {
-            return CodeBlock(events.OnUpload, codeBlock);
-        }
-
-        /// <summary>
-        /// Defines the inline handler of the OnUpload client-side event
+        /// Defines the inline handler of the Upload client-side event
         /// </summary>
         /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;% Html.Telerik().Upload()
         ///            .Name("Upload")
-        ///            .ClientEvents(events => events.OnUpload(
+        ///            .ClientEvents(events => events.Upload(
         ///                 @&lt;text&gt;
         ///                 function(e) {
         ///                     //event handling code
@@ -129,62 +81,41 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public UploadClientEventsBuilder OnUpload(Func<object, object> inlineCodeBlock)
+        public UploadClientEventsBuilder Upload(Func<object, object> inlineCodeBlock)
         {
-            return InlineCodeBlock(events.OnUpload, inlineCodeBlock);
+            Handler("upload", inlineCodeBlock);
+
+            return this;
         }
 
         /// <summary>
-        ///  Defines the name of the JavaScript function that will handle the the OnUpload client-side event.
+        ///  Defines the name of the JavaScript function that will handle the the Upload client-side event.
         /// </summary>
         /// <param name="onUploadHandlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;%= Html.Telerik().Upload()
         ///             .Name("Upload")
-        ///             .ClientEvents(events => events.OnUpload("onUpload"))
+        ///             .ClientEvents(events => events.Upload("onUpload"))
         /// %&gt;
         /// </code>
         /// </example>
-        public UploadClientEventsBuilder OnUpload(string onUploadHandlerName)
+        public UploadClientEventsBuilder Upload(string onUploadHandlerName)
         {
-            return HandlerName(events.OnUpload, onUploadHandlerName);
+            Handler("upload", onUploadHandlerName);
+
+            return this;
         }
 
         /// <summary>
-        /// Defines the inline handler of the OnSuccess client-side event
-        /// </summary>
-        /// <param name="codeBlock">The action defining the inline handler.</param>
-        /// <example>
-        /// <code lang="CS">
-        /// &lt;% Html.Telerik().Upload()
-        ///            .Name("Upload")
-        ///            .ClientEvents(events => events.OnSuccess(() =>
-        ///            {
-        ///                 %&gt;
-        ///                 function(e) {
-        ///                     //event handling code
-        ///                 }
-        ///                 &lt;%
-        ///            }))
-        ///            .Render();
-        /// %&gt;
-        /// </code>
-        /// </example>        
-        public UploadClientEventsBuilder OnSuccess(Action codeBlock)
-        {
-            return CodeBlock(events.OnSuccess, codeBlock);
-        }
-
-        /// <summary>
-        /// Defines the inline handler of the OnSuccess client-side event
+        /// Defines the inline handler of the Success client-side event
         /// </summary>
         /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;% Html.Telerik().Upload()
         ///            .Name("Upload")
-        ///            .ClientEvents(events => events.OnSuccess(
+        ///            .ClientEvents(events => events.Success(
         ///                 @&lt;text&gt;
         ///                 function(e) {
         ///                     //event handling code
@@ -195,62 +126,41 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public UploadClientEventsBuilder OnSuccess(Func<object, object> inlineCodeBlock)
+        public UploadClientEventsBuilder Success(Func<object, object> inlineCodeBlock)
         {
-            return InlineCodeBlock(events.OnSuccess, inlineCodeBlock);
+            Handler("success", inlineCodeBlock);
+
+            return this;
         }
 
         /// <summary>
-        ///  Defines the name of the JavaScript function that will handle the the OnSuccess client-side event.
+        ///  Defines the name of the JavaScript function that will handle the the Success client-side event.
         /// </summary>
         /// <param name="onSuccessHandlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;%= Html.Telerik().Upload()
         ///             .Name("Upload")
-        ///             .ClientEvents(events => events.OnSuccess("onSuccess"))
+        ///             .ClientEvents(events => events.Success("onSuccess"))
         /// %&gt;
         /// </code>
         /// </example>
-        public UploadClientEventsBuilder OnSuccess(string onSuccessHandlerName)
+        public UploadClientEventsBuilder Success(string onSuccessHandlerName)
         {
-            return HandlerName(events.OnSuccess, onSuccessHandlerName);
+            Handler("success", onSuccessHandlerName);
+
+            return this;
         }
 
         /// <summary>
-        /// Defines the inline handler of the OnError client-side event
-        /// </summary>
-        /// <param name="codeBlock">The action defining the inline handler.</param>
-        /// <example>
-        /// <code lang="CS">
-        /// &lt;% Html.Telerik().Upload()
-        ///            .Name("Upload")
-        ///            .ClientEvents(events => events.OnError(() =>
-        ///            {
-        ///                 %&gt;
-        ///                 function(e) {
-        ///                     //event handling code
-        ///                 }
-        ///                 &lt;%
-        ///            }))
-        ///            .Render();
-        /// %&gt;
-        /// </code>
-        /// </example>        
-        public UploadClientEventsBuilder OnError(Action codeBlock)
-        {
-            return CodeBlock(events.OnError, codeBlock);
-        }
-
-        /// <summary>
-        /// Defines the inline handler of the OnError client-side event
+        /// Defines the inline handler of the Error client-side event
         /// </summary>
         /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;% Html.Telerik().Upload()
         ///            .Name("Upload")
-        ///            .ClientEvents(events => events.OnError(
+        ///            .ClientEvents(events => events.Error(
         ///                 @&lt;text&gt;
         ///                 function(e) {
         ///                     //event handling code
@@ -261,62 +171,41 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public UploadClientEventsBuilder OnError(Func<object, object> inlineCodeBlock)
+        public UploadClientEventsBuilder Error(Func<object, object> inlineCodeBlock)
         {
-            return InlineCodeBlock(events.OnError, inlineCodeBlock);
+            Handler("error", inlineCodeBlock);
+
+            return this;
         }
 
         /// <summary>
-        ///  Defines the name of the JavaScript function that will handle the the OnError client-side event.
+        ///  Defines the name of the JavaScript function that will handle the the Error client-side event.
         /// </summary>
         /// <param name="onErrorHandlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;%= Html.Telerik().Upload()
         ///             .Name("Upload")
-        ///             .ClientEvents(events => events.OnError("onError"))
+        ///             .ClientEvents(events => events.Error("onError"))
         /// %&gt;
         /// </code>
         /// </example>
-        public UploadClientEventsBuilder OnError(string onErrorHandlerName)
+        public UploadClientEventsBuilder Error(string onErrorHandlerName)
         {
-            return HandlerName(events.OnError, onErrorHandlerName);
+            Handler("error", onErrorHandlerName);
+
+            return this;
         }
 
         /// <summary>
-        /// Defines the inline handler of the OnComplete client-side event
-        /// </summary>
-        /// <param name="codeBlock">The action defining the inline handler.</param>
-        /// <example>
-        /// <code lang="CS">
-        /// &lt;% Html.Telerik().Upload()
-        ///            .Name("Upload")
-        ///            .ClientEvents(events => events.OnComplete(() =>
-        ///            {
-        ///                 %&gt;
-        ///                 function(e) {
-        ///                     //event handling code
-        ///                 }
-        ///                 &lt;%
-        ///            }))
-        ///            .Render();
-        /// %&gt;
-        /// </code>
-        /// </example>        
-        public UploadClientEventsBuilder OnComplete(Action codeBlock)
-        {
-            return CodeBlock(events.OnComplete, codeBlock);
-        }
-
-        /// <summary>
-        /// Defines the inline handler of the OnComplete client-side event
+        /// Defines the inline handler of the Complete client-side event
         /// </summary>
         /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;% Html.Telerik().Upload()
         ///            .Name("Upload")
-        ///            .ClientEvents(events => events.OnComplete(
+        ///            .ClientEvents(events => events.Complete(
         ///                 @&lt;text&gt;
         ///                 function(e) {
         ///                     //event handling code
@@ -327,62 +216,41 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public UploadClientEventsBuilder OnComplete(Func<object, object> inlineCodeBlock)
+        public UploadClientEventsBuilder Complete(Func<object, object> inlineCodeBlock)
         {
-            return InlineCodeBlock(events.OnComplete, inlineCodeBlock);
+            Handler("complete", inlineCodeBlock);
+
+            return this;
         }
 
         /// <summary>
-        ///  Defines the name of the JavaScript function that will handle the the OnComplete client-side event.
+        ///  Defines the name of the JavaScript function that will handle the the Complete client-side event.
         /// </summary>
         /// <param name="onCompleteHandlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;%= Html.Telerik().Upload()
         ///             .Name("Upload")
-        ///             .ClientEvents(events => events.OnComplete("onComplete"))
+        ///             .ClientEvents(events => events.Complete("onComplete"))
         /// %&gt;
         /// </code>
         /// </example>
-        public UploadClientEventsBuilder OnComplete(string onCompleteHandlerName)
+        public UploadClientEventsBuilder Complete(string onCompleteHandlerName)
         {
-            return HandlerName(events.OnComplete, onCompleteHandlerName);
+            Handler("complete", onCompleteHandlerName);
+
+            return this;
         }
 
         /// <summary>
-        /// Defines the inline handler of the OnCancel client-side event
-        /// </summary>
-        /// <param name="codeBlock">The action defining the inline handler.</param>
-        /// <example>
-        /// <code lang="CS">
-        /// &lt;% Html.Telerik().Upload()
-        ///            .Name("Upload")
-        ///            .ClientEvents(events => events.OnCancel(() =>
-        ///            {
-        ///                 %&gt;
-        ///                 function(e) {
-        ///                     //event handling code
-        ///                 }
-        ///                 &lt;%
-        ///            }))
-        ///            .Render();
-        /// %&gt;
-        /// </code>
-        /// </example>        
-        public UploadClientEventsBuilder OnCancel(Action codeBlock)
-        {
-            return CodeBlock(events.OnCancel, codeBlock);
-        }
-
-        /// <summary>
-        /// Defines the inline handler of the OnCancel client-side event
+        /// Defines the inline handler of the Cancel client-side event
         /// </summary>
         /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;% Html.Telerik().Upload()
         ///            .Name("Upload")
-        ///            .ClientEvents(events => events.OnCancel(
+        ///            .ClientEvents(events => events.Cancel(
         ///                 @&lt;text&gt;
         ///                 function(e) {
         ///                     //event handling code
@@ -393,62 +261,41 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public UploadClientEventsBuilder OnCancel(Func<object, object> inlineCodeBlock)
+        public UploadClientEventsBuilder Cancel(Func<object, object> inlineCodeBlock)
         {
-            return InlineCodeBlock(events.OnCancel, inlineCodeBlock);
+            Handler("cancel", inlineCodeBlock);
+
+            return this;
         }
 
         /// <summary>
-        ///  Defines the name of the JavaScript function that will handle the the OnCancel client-side event.
+        ///  Defines the name of the JavaScript function that will handle the the Cancel client-side event.
         /// </summary>
         /// <param name="onCancelHandlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;%= Html.Telerik().Upload()
         ///             .Name("Upload")
-        ///             .ClientEvents(events => events.OnCancel("onCancel"))
+        ///             .ClientEvents(events => events.Cancel("onCancel"))
         /// %&gt;
         /// </code>
         /// </example>
-        public UploadClientEventsBuilder OnCancel(string onCancelHandlerName)
+        public UploadClientEventsBuilder Cancel(string onCancelHandlerName)
         {
-            return HandlerName(events.OnCancel, onCancelHandlerName);
+            Handler("cancel", onCancelHandlerName);
+
+            return this;
         }
 
         /// <summary>
-        /// Defines the inline handler of the OnRemove client-side event
-        /// </summary>
-        /// <param name="codeBlock">The action defining the inline handler.</param>
-        /// <example>
-        /// <code lang="CS">
-        /// &lt;% Html.Telerik().Upload()
-        ///            .Name("Upload")
-        ///            .ClientEvents(events => events.OnRemove(() =>
-        ///            {
-        ///                 %&gt;
-        ///                 function(e) {
-        ///                     //event handling code
-        ///                 }
-        ///                 &lt;%
-        ///            }))
-        ///            .Render();
-        /// %&gt;
-        /// </code>
-        /// </example>        
-        public UploadClientEventsBuilder OnRemove(Action codeBlock)
-        {
-            return CodeBlock(events.OnRemove, codeBlock);
-        }
-
-        /// <summary>
-        /// Defines the inline handler of the OnRemove client-side event
+        /// Defines the inline handler of the Remove client-side event
         /// </summary>
         /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;% Html.Telerik().Upload()
         ///            .Name("Upload")
-        ///            .ClientEvents(events => events.OnRemove(
+        ///            .ClientEvents(events => events.Remove(
         ///                 @&lt;text&gt;
         ///                 function(e) {
         ///                     //event handling code
@@ -459,51 +306,28 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public UploadClientEventsBuilder OnRemove(Func<object, object> inlineCodeBlock)
+        public UploadClientEventsBuilder Remove(Func<object, object> inlineCodeBlock)
         {
-            return InlineCodeBlock(events.OnRemove, inlineCodeBlock);
+            Handler("remove", inlineCodeBlock);
+
+            return this;
         }
 
         /// <summary>
-        ///  Defines the name of the JavaScript function that will handle the the OnRemove client-side event.
+        ///  Defines the name of the JavaScript function that will handle the the Remove client-side event.
         /// </summary>
         /// <param name="onRemoveHandlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;%= Html.Telerik().Upload()
         ///             .Name("Upload")
-        ///             .ClientEvents(events => events.OnRemove("onRemove"))
+        ///             .ClientEvents(events => events.Remove("onRemove"))
         /// %&gt;
         /// </code>
         /// </example>
-        public UploadClientEventsBuilder OnRemove(string onRemoveHandlerName)
+        public UploadClientEventsBuilder Remove(string onRemoveHandlerName)
         {
-            return HandlerName(events.OnRemove, onRemoveHandlerName);
-        }
-
-        private UploadClientEventsBuilder CodeBlock(ClientEvent e, Action codeBlock)
-        {
-            Guard.IsNotNull(codeBlock, "codeBlock");
-
-            e.CodeBlock = codeBlock;
-
-            return this;
-        }
-
-        private UploadClientEventsBuilder InlineCodeBlock(ClientEvent e, Func<object, object> inlineCodeBlock)
-        {
-            Guard.IsNotNull(inlineCodeBlock, "inlineCodeBlock");
-
-            e.InlineCodeBlock = inlineCodeBlock;
-
-            return this;
-        }
-
-        private UploadClientEventsBuilder HandlerName(ClientEvent e, string handler)
-        {
-            Guard.IsNotNullOrEmpty(handler, "handler");
-
-            e.HandlerName = handler;
+            Handler("remove", onRemoveHandlerName);
 
             return this;
         }

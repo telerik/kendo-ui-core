@@ -57,7 +57,7 @@ namespace Kendo.Mvc.UI
         /// Serializes the asynchronous uploading settings to the writer.
         /// </summary>
         /// <param name="writer">The writer object.</param>
-        public void SerializeTo(string key, IClientSideObjectWriter writer)
+        public void SerializeTo(string key, IDictionary<string, object> options)
         {
             if (Save.HasValue())
             {
@@ -83,7 +83,7 @@ namespace Kendo.Mvc.UI
 
                 config["autoUpload"] = AutoUpload;
 
-                writer.AppendObject(key, config);
+                options.Add(key, config);
             }
         }
     }

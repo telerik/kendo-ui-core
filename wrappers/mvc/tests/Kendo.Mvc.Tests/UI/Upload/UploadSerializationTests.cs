@@ -41,7 +41,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
         {
             upload.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("jQuery('#Upload').kendoUpload();");
+            output.ShouldContain("jQuery(\"\\#Upload\").kendoUpload({});");
         }
 
         [Fact]
@@ -78,7 +78,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
             upload.Async.Save.ControllerName = "Home";
             upload.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{async:{\"saveUrl\":\"Home/Index\",\"autoUpload\":true}}");
+            output.ShouldContain("{async:{saveUrl:\"Home/Index\",autoUpload:true}}");
         }
 
         [Fact]
@@ -89,7 +89,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
             upload.Async.SaveField = "attachments";
             upload.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{async:{\"saveUrl\":\"Home/Index\",\"saveField\":\"attachments\",\"autoUpload\":true}}");
+            output.ShouldContain("{async:{saveUrl:\"Home/Index\",saveField:\"attachments\",autoUpload:true}}");
         }
 
         [Fact]
@@ -101,7 +101,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
             upload.Async.Remove.ControllerName = "Home";
             upload.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{async:{\"saveUrl\":\"Home/Index\",\"removeUrl\":\"Home/Remove\",\"autoUpload\":true}}");
+            output.ShouldContain("{async:{saveUrl:\"Home/Index\",removeUrl:\"Home/Remove\",autoUpload:true}}");
         }
 
         [Fact]
@@ -124,7 +124,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
             upload.Async.RemoveField = "attachments";
             upload.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("removeField\":\"attachments\"");
+            output.ShouldContain("removeField:\"attachments\"");
         }
 
         [Fact]
@@ -135,7 +135,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
             upload.Async.AutoUpload = false;
             upload.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{async:{\"saveUrl\":\"Home/Index\",\"autoUpload\":false}}");
+            output.ShouldContain("{async:{saveUrl:\"Home/Index\",autoUpload:false}}");
         }
 
         [Fact]
@@ -144,67 +144,67 @@ namespace Kendo.Mvc.UI.Tests.Upload
             upload.Async.AutoUpload = false;
             upload.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("jQuery('#Upload').kendoUpload();");
+            output.ShouldContain("jQuery(\"\\#Upload\").kendoUpload({});");
         }
 
         [Fact]
-        public void OnSelect_client_side_event_serialized()
+        public void Select_client_side_event_serialized()
         {
-            upload.ClientEvents.OnSelect.HandlerName = "selectHandler";
+            upload.ClientEvents["select"] = new ClientEvent() { HandlerName = "selectHandler" };
             upload.WriteInitializationScript(textWriter.Object);
 
             output.ShouldContain("{select:selectHandler}");
         }
 
         [Fact]
-        public void OnUpload_client_side_event_serialized()
+        public void Upload_client_side_event_serialized()
         {
-            upload.ClientEvents.OnUpload.HandlerName = "uploadHandler";
+            upload.ClientEvents["upload"] = new ClientEvent() { HandlerName = "uploadHandler" };
             upload.WriteInitializationScript(textWriter.Object);
 
             output.ShouldContain("{upload:uploadHandler}");
         }
 
         [Fact]
-        public void OnSuccess_client_side_event_serialized()
+        public void Success_client_side_event_serialized()
         {
-            upload.ClientEvents.OnSuccess.HandlerName = "successHandler";
+            upload.ClientEvents["success"] = new ClientEvent() { HandlerName = "successHandler" };
             upload.WriteInitializationScript(textWriter.Object);
 
             output.ShouldContain("{success:successHandler}");
         }
 
         [Fact]
-        public void OnError_client_side_event_serialized()
+        public void Error_client_side_event_serialized()
         {
-            upload.ClientEvents.OnError.HandlerName = "errorHandler";
+            upload.ClientEvents["error"] = new ClientEvent() { HandlerName = "errorHandler" };
             upload.WriteInitializationScript(textWriter.Object);
 
             output.ShouldContain("{error:errorHandler}");
         }
 
         [Fact]
-        public void OnComplete_client_side_event_serialized()
+        public void Complete_client_side_event_serialized()
         {
-            upload.ClientEvents.OnComplete.HandlerName = "completeHandler";
+            upload.ClientEvents["complete"] = new ClientEvent() { HandlerName = "completeHandler" };
             upload.WriteInitializationScript(textWriter.Object);
 
             output.ShouldContain("{complete:completeHandler}");
         }
 
         [Fact]
-        public void OnCancel_client_side_event_serialized()
+        public void Cancel_client_side_event_serialized()
         {
-            upload.ClientEvents.OnCancel.HandlerName = "cancelHandler";
+            upload.ClientEvents["cancel"] = new ClientEvent() { HandlerName = "cancelHandler" };
             upload.WriteInitializationScript(textWriter.Object);
 
             output.ShouldContain("{cancel:cancelHandler}");
         }
 
         [Fact]
-        public void OnRemove_client_side_event_serialized()
+        public void Remove_client_side_event_serialized()
         {
-            upload.ClientEvents.OnRemove.HandlerName = "removeHandler";
+            upload.ClientEvents["remove"] = new ClientEvent() { HandlerName = "removeHandler" };
             upload.WriteInitializationScript(textWriter.Object);
 
             output.ShouldContain("{remove:removeHandler}");
