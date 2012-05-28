@@ -44,7 +44,7 @@ namespace Kendo.Mvc.UI.Html
 
             var gridRowBuilder = creator(renderingData, item);
 
-            return decoratorProvider.ApplyDecorators(gridRowBuilder, item, renderingData.HasDetailView);
+            return decoratorProvider.ApplyDecorators(gridRowBuilder, item, renderingData.HasDetailTemplate);
         }
 
         public virtual IGridRowBuilder CreateFooterBuilder(GridRenderingData renderingData)
@@ -57,7 +57,7 @@ namespace Kendo.Mvc.UI.Html
                 Type = GridItemType.FooterRow
             };
 
-            return decoratorProvider.ApplyDecorators(builder, item, renderingData.HasDetailView);
+            return decoratorProvider.ApplyDecorators(builder, item, renderingData.HasDetailTemplate);
         }
 
         public virtual IGridRowBuilder CreateHeaderBuilder(GridRenderingData renderingData)
@@ -69,8 +69,8 @@ namespace Kendo.Mvc.UI.Html
                 GroupLevel = renderingData.GroupMembers.Count(),
                 Type = GridItemType.HeaderRow
             };
-            
-            return decoratorProvider.ApplyDecorators(builder, item, renderingData.HasDetailView);
+
+            return decoratorProvider.ApplyDecorators(builder, item, renderingData.HasDetailTemplate);
         }
 
         protected virtual IGridRowBuilder CreateDataRowBuilder(GridRenderingData renderingData, GridItem item)
@@ -89,7 +89,7 @@ namespace Kendo.Mvc.UI.Html
             {
                 Colspan = (renderingData.Colspan - 1) - item.GroupLevel,
                 DataItem = item.DataItem,
-                Template = renderingData.DetailViewTemplate,
+                Template = renderingData.DetailTemplate,
                 Expanded = item.Expanded,
                 IsMasterAlternate = item is GridDetailViewItem && ((item as GridDetailViewItem).Parent.State & GridItemStates.Alternating) == GridItemStates.Alternating,
                 Html = item.DetailRowHtml,

@@ -68,7 +68,7 @@ namespace Kendo.Mvc.UI.Html
             set;
         }
 
-        public Action<object, IHtmlNode> DetailViewTemplate
+        public Action<object, IHtmlNode> DetailTemplate
         {
             get;
             set;
@@ -92,7 +92,7 @@ namespace Kendo.Mvc.UI.Html
             set;
         }
 
-        public bool HasDetailView
+        public bool HasDetailTemplate
         {
             get;
             set;

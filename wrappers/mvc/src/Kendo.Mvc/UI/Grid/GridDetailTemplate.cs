@@ -2,10 +2,10 @@ namespace Kendo.Mvc.UI
 {
     using System.Web;
 
-    public class GridDetailView<TModel> : IGridDetailView<TModel>
+    public class GridDetailTemplate<TModel> : IGridDetailTemplate<TModel>
         where TModel : class
     {
-        public GridDetailView()
+        public GridDetailTemplate()
         {
             Template = new HtmlTemplate<TModel>();
         }

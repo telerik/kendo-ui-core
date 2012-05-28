@@ -180,8 +180,8 @@ namespace Kendo.Mvc.UI.Tests.Grid
         {
             grid.DataSource.Type = DataSourceType.Server;
 
-            grid.DetailView = new GridDetailView<Customer>();
-            grid.DetailView.Template.Html = "foo";
+            grid.DetailTemplate = new GridDetailTemplate<Customer>();
+            grid.DetailTemplate.Template.Html = "foo";
             Assert.DoesNotThrow(() => grid.VerifySettings());
         }
 
@@ -190,8 +190,8 @@ namespace Kendo.Mvc.UI.Tests.Grid
         {
             grid.DataSource.Type = DataSourceType.Ajax;
 
-            grid.DetailView = new GridDetailView<Customer>(); 
-            grid.DetailView.Template.Html = "foo";            
+            grid.DetailTemplate = new GridDetailTemplate<Customer>();
+            grid.DetailTemplate.Template.Html = "foo";            
             Assert.Throws<NotSupportedException>(() => grid.VerifySettings());
         }
 
@@ -200,9 +200,9 @@ namespace Kendo.Mvc.UI.Tests.Grid
         {
             grid.DataSource.Type = DataSourceType.Ajax;
 
-            grid.DetailView = new GridDetailView<Customer>();
-            grid.DetailView.Template.Html = "foo";
-            grid.DetailView.ClientTemplate = "bar";
+            grid.DetailTemplate = new GridDetailTemplate<Customer>();
+            grid.DetailTemplate.Template.Html = "foo";
+            grid.DetailTemplate.ClientTemplate = "bar";
             Assert.DoesNotThrow(() => grid.VerifySettings());
         }
 

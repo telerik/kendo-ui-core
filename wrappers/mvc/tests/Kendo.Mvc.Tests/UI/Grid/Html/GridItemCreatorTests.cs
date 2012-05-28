@@ -15,7 +15,7 @@ namespace Kendo.Mvc.UI.Html.Tests
                 set;
             }
 
-            public bool HasDetailView
+            public bool HasDetailTemplate
             {
                 get;
                 set;
@@ -89,7 +89,7 @@ namespace Kendo.Mvc.UI.Html.Tests
         public void Should_create_master_row_if_has_details()
         {
             var dataItem = "foo";
-            creatorData.HasDetailView = true;
+            creatorData.HasDetailTemplate = true;
 
             var item = creator.CreateItem(dataItem);
             

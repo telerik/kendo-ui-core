@@ -14,7 +14,7 @@ namespace Kendo.Mvc.UI.Html
         {
             var tableBuilder = CreateTableBuilder(colsData);
             tableBuilder.Decorators.Add(new GridTableBuilderGroupColDecorator(renderingData.GroupMembers.Count()));
-            tableBuilder.Decorators.Add(new GridTableBuilderDetailViewColDecorator(renderingData.HasDetailView));
+            tableBuilder.Decorators.Add(new GridTableBuilderDetailViewColDecorator(renderingData.HasDetailTemplate));
             return tableBuilder;
         }
     }

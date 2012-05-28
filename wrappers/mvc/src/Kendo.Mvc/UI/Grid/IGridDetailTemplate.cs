@@ -1,6 +1,6 @@
 namespace Kendo.Mvc.UI
 {
-    public interface IGridDetailView<TModel> 
+    public interface IGridDetailTemplate<TModel> 
         where TModel : class
     {
         HtmlTemplate<TModel> Template

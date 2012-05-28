@@ -28,7 +28,7 @@ namespace Kendo.Mvc.UI.Html
 
         private void AsMaster(GridItem item)
         {
-            if (creatorData.HasDetailView)
+            if (creatorData.HasDetailTemplate)
             {
                 item.State |= GridItemStates.Master;
             }

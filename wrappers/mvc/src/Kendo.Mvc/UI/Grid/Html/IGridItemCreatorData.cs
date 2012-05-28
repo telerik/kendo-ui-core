@@ -4,7 +4,7 @@ namespace Kendo.Mvc.UI.Html
     
     public interface IGridItemCreatorData
     {
-        bool HasDetailView
+        bool HasDetailTemplate
         {
             get;
         }
