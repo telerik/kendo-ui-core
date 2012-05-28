@@ -228,6 +228,22 @@
                 equal(div.find("input").val(), "bar");
             });
 
+            test("custom editor checkbox is bind by name", function() {
+                var model = kendo.observable({ foo: true }),
+                    editable = setup({
+                        fields: {
+                            field: "foo",
+                            type: "boonlean",
+                            editor: function(container) {
+                                container.append($('<input type="checkbox" name="foo" />'));
+                            }
+                        },
+                        model: model
+                    });
+
+                ok(div.find("input:checked").length);
+            });
+
             test("custom editor as string", function() {
                 var wasCalled = false,
                 MyModel = Model.define({
