@@ -176,14 +176,18 @@
      *
      * <h3>Getting Started</h3>
      * <p>Each mobile View initializes a scroller for its content element. In addition to that, a scroller will be initialized for every element with a
-     * <code>role</code> data attribute set to <code>scroller</code>. Alternatively, it can be initialized using jQuery selector.</p>
+     * <code>role</code> data attribute set to <code>scroller</code>.
+     * Alternatively, it can be initialized using jQuery plugin syntax in the containing mobile View <strong>init event handler</strong>.
+     * </p>
+     * <p>For the scroller to work, its element should have fixed dimensions (width and/or height) set.</p>
+     *
      * @exampleTitle Initialize mobile Scroller using a role data attribute.
      * @example
      * <div data-role="scroller">
      *   Foo
      * </div>
      *
-     * @exampleTitle Initialize mobile Scroller using a jQuery selector.
+     * @exampleTitle Initialize mobile Scroller using jQuery plugin syntax
      * @example
      * <div id="scroller"></div>
      * <script>
@@ -202,7 +206,7 @@
      * </script>
      *
      * @section
-     * <p>The scroller exposes the following fields:</p>
+     * <p>The mobile Scroller widget exposes the following fields:</p>
      * <ul>
      * <li><strong>scrollTop</strong> - the number of pixels that are hidden from view above the scrollable area.</li>
      * <li><strong>scrollLeft</strong> - the number of pixels that are hidden from view to the left of the scrollable area.</li>
@@ -216,7 +220,7 @@
          * @param {DomElement} element DOM element
          * @param {Object} options
          * @option {Boolean} [elastic] <true> Weather or not to allow out of bounds dragging and easing.
-         * @option {Number} [pullOffset] <140> The threshold bellow which a releasing the scroller will trigger the pull event.
+         * @option {Number} [pullOffset] <140> The threshold below which a releasing the scroller will trigger the pull event.
          * Has effect only when the pullToRefresh option is set to true.
          * @option {String} [pullTemplate] <Pull to refresh> The message template displayed when the user pulls the scroller.
          * Has effect only when the pullToRefresh option is set to true.
@@ -337,7 +341,7 @@
              */
             PULL,
             /**
-             * Fires when the pull option is set to true, and the user pulls the scrolling container beyond the specified pullThreshold.
+             * Fires when the user scrolls through the content.
              * @name kendo.mobile.ui.Scroller#scroll
              * @event
              * @param {Event} e
@@ -392,6 +396,30 @@
 
         /**
          * Indicate that the pull event is handled (i.e. data from the server has been retrieved).
+         * @exampleTitle Custom pull to refresh view scroll handling
+         * @example
+         *  <div data-role="view" data-init="initPullToRefreshScroller">
+         *      <h2 id="pull-to-refresh-clock"></h2>
+         *  </div>
+         * <script>
+         *
+         *  function updateClock() {
+         *      pullTime = kendo.toString(new Date(), "hh:mm:ss tt" );
+         *      $("#pull-to-refresh-clock").html("Last update at " + pullTime + ". <br /> Pull to refresh.");
+         *  }
+         *
+         *  function initPullToRefreshScroller(e) {
+         *      var scroller = e.view.scroller;
+         *
+         *      scroller.setOptions({
+         *          pullToRefresh: true,
+         *          pull: function() {
+         *              updateClock();
+         *              setTimeout(function() { scroller.pullHandled(); }, 400);
+         *          }
+         *      })
+         *  }
+         * </script>
          */
         pullHandled: function() {
             var that = this;

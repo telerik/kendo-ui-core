@@ -2,19 +2,21 @@
     /**
     * @name kendo.mobile.ui.Switch.Description
     *
-    * @section The mobile Switch widget is used to display two exclusive choices.
+    * @section
+    * <p>The mobile Switch widget is used to display two exclusive choices.</p>
     * <p>When initialized, it shows the currently selected value. User slides the control to reveal the second value.
     * The mobile Switch can be created from <code>input</code> element of type <code>checkbox</code>.</p>
     *
     * <h3>Getting Started</h3>
     *
     * <p> The Kendo Mobile Application will automatically initialize a mobile Switch for every element with <code>role</code> data attribute set to <code>swtich</code> present in the views/layouts markup.
-    * Alternatively, it can be initialized using a jQuery selector.</p>
+    * Alternatively, it can be initialized using jQuery plugin syntax in the containing mobile View <strong>init event handler</strong>.
+    *
     * @exampleTitle Initialize mobile Switch based on role data attribute
     * @example
     * <input type="checkbox" data-role="switch" />
     *
-    * @exampleTitle Initialize mobile Switch using a jQuery selector
+    * @exampleTitle Initialize mobile Switch using jQuery plugin syntax
     * @example
     * <input type="checkbox" id="switch" />
     * <script>
@@ -32,7 +34,7 @@
     * var switchWidget = $("#switch").kendoMobileSwitch();
     * </script>
     *
-    * @exampleTitle Initialize checked mobile Switch using a jQuery selector
+    * @exampleTitle Initialize checked mobile Switch using jQuery plugin syntax
     * @example
     * <input type="checkbox" id="switch" />
     * <script>
@@ -111,13 +113,13 @@
             * @param {Event} e
             * @param {Object} e.checked The checked state of the widget.
             *
-            * @exampleTitle Handle change event
+            * @exampleTitle Handle mobile Switch change event
             * @example
             * <input type="checkbox" id="switch" data-role="switch" />
             *
             * <script>
             *  $("#switch").data("kendoMobileSwitch").bind("change", function(e) {
-            *      //handle change event
+            *      console.log(e.checked); // true or false
             *  }
             * </script>
             */
@@ -132,14 +134,14 @@
         },
 
         /**
-        * Gets/Sets the checked state of the widget.
+        * Get/Set the checked state of the widget.
         * @param {Boolean} check Whether to turn the widget on or off.
         * @returns {Boolean} The checked state of the widget.
         * @example
         * <input data-role="switch" id="foo" />;
         *
         * <script>
-        *   // get a referene to the switch
+        *   // get a reference to the switch widget
         *   var switch = $("#foo").data("kendoMobileSwitch");
         *
         *   // get the checked state of the switch.
@@ -170,7 +172,7 @@
         * <input data-role="switch" id="foo" />;
         *
         * <script>
-        *   // get a referene to the switch
+        *   // get a reference to the switch
         *   var switch = $("#foo").data("kendoMobileSwitch");
         *
         *   // toggle the checked state of the switch.
