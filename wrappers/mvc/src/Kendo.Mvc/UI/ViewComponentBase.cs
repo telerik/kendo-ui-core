@@ -86,7 +86,7 @@ namespace Kendo.Mvc.UI
             {
                 // Return from htmlattributes if user has specified
                 // otherwise build it from name
-                return TagBuilder.CreateSanitizedId(HtmlAttributes.ContainsKey("id") ? (string)HtmlAttributes["id"] : Name);
+                return this.SanitizeId(HtmlAttributes.ContainsKey("id") ? (string)HtmlAttributes["id"] : Name);
             }
         }
 

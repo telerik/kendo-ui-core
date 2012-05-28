@@ -3,6 +3,7 @@ namespace Kendo.Mvc.UI.Tests
     using System.IO;
     using System.Web.Mvc;
     using System.Web.UI;
+    using Kendo.Mvc.Infrastructure;
     
     public class ViewComponentBaseTestDouble : ViewComponentBase
     {
@@ -10,6 +11,11 @@ namespace Kendo.Mvc.UI.Tests
         public bool HasWrittenHtml;
 
         public ViewComponentBaseTestDouble(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory) : base(viewContext, clientSideObjectWriterFactory)
+        {
+        }
+
+        public ViewComponentBaseTestDouble(ViewContext viewContext, IJavaScriptInitializer javaScriptInitializer)
+            : base(viewContext, javaScriptInitializer)
         {
         }
 
