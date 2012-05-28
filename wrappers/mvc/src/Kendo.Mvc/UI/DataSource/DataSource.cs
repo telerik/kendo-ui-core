@@ -19,7 +19,6 @@ namespace Kendo.Mvc.UI
             Aggregates = new List<AggregateDescriptor>();
 
             Schema = new DataSourceSchema();
-            Type = DataSourceType.Server;
 
             ServerPaging = ServerSorting = ServerGrouping = ServerFiltering = ServerAggregates = true;
         }
@@ -76,7 +75,10 @@ namespace Kendo.Mvc.UI
                 json["serverAggregates"] = ServerAggregates;
             }
 
-            json["type"] = "aspnetmvc-" + Type.ToString().ToLower();
+            if (Type != null)
+            {
+                json["type"] = "aspnetmvc-" + Type.ToString().ToLower();
+            }
 
             if (OrderBy.Any())
             {
@@ -117,7 +119,7 @@ namespace Kendo.Mvc.UI
             Schema.Model = new ModelDescriptor(modelType);
         }
         
-        public DataSourceType Type
+        public DataSourceType? Type
         {
             get;
             set;
