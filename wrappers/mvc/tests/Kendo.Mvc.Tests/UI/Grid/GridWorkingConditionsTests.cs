@@ -205,45 +205,6 @@ namespace Kendo.Mvc.UI.Tests.Grid
             grid.DetailView.ClientTemplate = "bar";
             Assert.DoesNotThrow(() => grid.VerifySettings());
         }
-        [Fact]
-        public void Should_throw_when_using_page_on_scroll_and_paging_disabled()
-        {            
-            grid.Paging.Enabled = false;
-            grid.Paging.PageOnScroll = true;
-
-            Assert.Throws<NotSupportedException>(() => grid.VerifySettings());
-        }
-
-        [Fact]
-        public void Should_throw_when_using_page_on_scroll_and_scrolling_disabled()
-        {
-            grid.Paging.Enabled = true;
-            grid.Paging.PageOnScroll = true;
-            grid.Scrolling.Enabled = false;
-
-            Assert.Throws<NotSupportedException>(() => grid.VerifySettings());
-        }
-
-        [Fact]
-        public void Should_throw_when_using_page_on_scroll_and_server()
-        {
-            grid.DataSource.Type = DataSourceType.Server;
-            grid.Paging.Enabled = true;
-            grid.Paging.PageOnScroll = true;
-
-            Assert.Throws<NotSupportedException>(() => grid.VerifySettings());
-        }
-
-        [Fact]
-        public void Should_not_throw_when_using_page_on_scroll_and_ajax()
-        {
-            grid.DataSource.Type = DataSourceType.Ajax;
-            grid.Paging.Enabled = true;
-            grid.Paging.PageOnScroll = true;
-            grid.Scrolling.Enabled = true;
-
-            Assert.DoesNotThrow(() => grid.VerifySettings());
-        }
 
         [Fact]
         public void Should_throw_if_bound_to_data_row_view_column_editor_template_is_set_and_in_inLine_mode()

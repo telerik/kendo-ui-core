@@ -41,24 +41,6 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
         */
-        /// <summary>
-        /// Sets the page size of the grid.
-        /// </summary>
-        /// <param name="value">The number of items to display in a single page.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid(Model)
-        ///             .Name("Grid")
-        ///             .Pageable(paging => paging.PageSize(20))
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public virtual GridPagerSettingsBuilder PageSize(int value)
-        {
-            pager.PageSize = value;
-
-            return this;
-        }
 
         /*TODO: page sizes dropdown
         /// <summary>

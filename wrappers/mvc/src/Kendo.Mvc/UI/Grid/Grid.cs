@@ -614,7 +614,7 @@ namespace Kendo.Mvc.UI
                     return 0;
                 }
 
-                return Paging.PageSize;
+                return DataSource.PageSize;
             }
         }
 
@@ -622,7 +622,7 @@ namespace Kendo.Mvc.UI
         {
             get
             {
-                return Paging.CurrentPage;
+                return DataSource.Page;
             }
         }
 
@@ -983,6 +983,11 @@ namespace Kendo.Mvc.UI
 
         private void ProcessDataSource()
         {
+            if (Paging.Enabled && DataSource.PageSize == 0)
+            {
+                DataSource.PageSize = 10;
+            }
+
             var binder = new DataSourceRequestModelBinder();
 
             if (this.PrefixUrlParameters)
@@ -1226,24 +1231,6 @@ namespace Kendo.Mvc.UI
                     throw new NotSupportedException(TextResource.CannotUseTemplatesInAjaxOrWebService);
                 }
             }
-
-            if (Paging.PageOnScroll)
-            {
-                if (!Paging.Enabled)
-                {
-                    throw new NotSupportedException(TextResource.PagingMustBeEnabledToUsePageOnScroll);
-                }
-
-                if (!Scrolling.Enabled)
-                {
-                    throw new NotSupportedException(TextResource.ScrollingMustBeEnabledToUsePageOnScroll);
-                }
-
-                if (!IsClientBinding)
-                {
-                    throw new NotSupportedException(TextResource.CannotUsePageOnScrollWithServerBinding);
-                }
-            }           
 
             if (!DataKeys.Any() && (Editing.Enabled || (Selection.Enabled && !IsClientBinding)))
             {

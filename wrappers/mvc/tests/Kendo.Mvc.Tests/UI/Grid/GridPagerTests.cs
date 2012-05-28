@@ -20,18 +20,6 @@ namespace Kendo.Mvc.UI.Tests.Grid
         }
 
         [Fact]
-        public void PageSize_is_ten_by_default()
-        {
-            Assert.Equal(10, pager.PageSize);
-        }
-
-        [Fact]
-        public void PageSize_throws_when_not_positive()
-        {
-            Assert.Throws<ArgumentOutOfRangeException>(() => pager.PageSize = 0);
-        }
-
-        [Fact]
         public void Enabled_is_false_by_default()
         {
             Assert.False(pager.Enabled);

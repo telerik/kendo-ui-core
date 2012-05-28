@@ -9,7 +9,6 @@ namespace Kendo.Mvc.UI
         public DataSourceRequest()
         {
             Page = 1;
-            PageSize = 10;
             Aggregates = new List<AggregateDescriptor>();
         }
 
