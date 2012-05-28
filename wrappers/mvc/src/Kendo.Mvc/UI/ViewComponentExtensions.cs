@@ -127,7 +127,7 @@ namespace Kendo.Mvc.UI
 
         private static bool IsValidCharacter(char c) 
         {
-            if (c == '?' || c == '!' || c == '#') 
+            if (c == '?' || c == '!' || c == '#' || c == '.')
             {
                 return false;
             }

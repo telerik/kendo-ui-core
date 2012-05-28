@@ -61,5 +61,11 @@ namespace Kendo.Mvc.UI.Tests
         {
             baseComponent.SanitizeId("#:#Name?").ShouldEqual("#:#Name_");
         }
+
+        [Fact]
+        public void SanitizeId_does_not_allow_points()
+        {
+            baseComponent.SanitizeId("Name.Name1?#= test.test1 #").ShouldEqual("Name_Name1_#= test.test1 #");
+        }
     }
 }
