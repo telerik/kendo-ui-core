@@ -938,6 +938,12 @@
     background: #BCC1C5 none;
 }
 
+.km-ios.km-tablet .km-actionsheet-title,
+.km-ios.km-tablet li.km-actionsheet-cancel
+{
+    display: none;
+}
+
 /* SplitView */
 
 .km-ios .km-splitview
@@ -1002,6 +1008,8 @@
     padding: 15px;
 }
 
+.km-ios .km-popup.km-pane,
+.km-ios.km-tablet .km-actionsheet-wrapper,
 .km-ios .km-popup.km-pane .km-navbar .km-button
 {
     background-color: rgba(10,18,38,.9);
@@ -1009,8 +1017,12 @@
 
 .km-ios .km-popup.km-pane
 {
-    background: rgba(10,18,38,.9);
     border: 5px solid transparent;
+}
+
+.km-ios .km-popup.km-pane,
+.km-ios.km-tablet .km-actionsheet-wrapper
+{
     .border-radius(5px);
     .box-shadow(~"0 0 15px rgba(0,0,0,.5), 0 0 2px rgba(0,0,0,.5)");
 }
