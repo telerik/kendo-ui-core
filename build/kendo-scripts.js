@@ -94,6 +94,7 @@ var suiteScripts = {
         "kendo.history.js",
         "kendo.draganddrop.js",
         "kendo.popup.js",
+        "kendo.mobile.popover.js",
         "kendo.mobile.loader.js",
         "kendo.mobile.scroller.js",
         "kendo.mobile.shim.js",
