@@ -56,11 +56,11 @@ namespace Kendo.Mvc.Infrastructure
                     continue;
                 }
 
-                var @dictionary = value as IDictionary<string, object>;
+                var dictionary = value as IDictionary<string, object>;
 
-                if (@dictionary != null)
+                if (dictionary != null)
                 {
-                    output.Append(Serialize(@dictionary));
+                    output.Append(Serialize(dictionary));
 
                     continue;
                 }
@@ -120,7 +120,7 @@ namespace Kendo.Mvc.Infrastructure
 
                 if (value.GetType().IsPrimitive || value is decimal)
                 {
-                    AppendConvertable(output, value);
+                    AppendConvertible(output, value);
                     continue;
                 }
 
@@ -196,14 +196,14 @@ namespace Kendo.Mvc.Infrastructure
                   .Append(")");
         }
 
-        private void AppendConvertable(StringBuilder output, object value)
+        private void AppendConvertible(StringBuilder output, object value)
         {            
             var convertible = value as IConvertible;
+
             if (convertible != null)
             {
                 output.Append(convertible.ToString(CultureInfo.InvariantCulture));
-                return;
-            }            
+            }
         }
     }
 }

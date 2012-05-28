@@ -110,14 +110,22 @@ namespace Kendo.Mvc.UI
 
             //TODO: add option for batch
             json["batch"] = true;
+
+            if (IsClientOperationMode && RawData != null)
+            {
+                json["data"] = new Dictionary<string, object>()
+                {
+                    { Schema.Data,  RawData },
+                    { Schema.Total, Total }
+                };
+            }
         }
 
         public bool IsClientOperationMode
         {
             get
             {
-                return Type == DataSourceType.Ajax &&
-                    !(ServerPaging && ServerSorting && ServerGrouping && ServerFiltering && ServerAggregates);
+                return Type == DataSourceType.Ajax && !(ServerPaging && ServerSorting && ServerGrouping && ServerFiltering && ServerAggregates);
             }
         }
 
@@ -204,6 +212,12 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        public IEnumerable RawData
+        {
+            get;
+            set;
+        }
+
         public IEnumerable<AggregateResult> AggregateResults
         {
             get;
@@ -212,6 +226,8 @@ namespace Kendo.Mvc.UI
 
         public void Process(DataSourceRequest request, bool processData)
         {
+            RawData = Data;
+
             if (request.Sorts == null)
             {
                 request.Sorts = OrderBy;
@@ -285,6 +301,7 @@ namespace Kendo.Mvc.UI
                     var result = Data.AsQueryable().ToDataSource(request);
 
                     Data = result.Data;
+
                     Total = result.Total;
 
                     AggregateResults = result.AggregateResults;
@@ -294,7 +311,7 @@ namespace Kendo.Mvc.UI
                     var wrapper = Data as IGridCustomGroupingWrapper;
                     if (wrapper != null)
                     {
-                        Data = wrapper.GroupedEnumerable.AsGenericEnumerable();
+                        RawData = Data = wrapper.GroupedEnumerable.AsGenericEnumerable();
                     }
                 }
             }

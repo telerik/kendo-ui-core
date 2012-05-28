@@ -86,6 +86,30 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        public DataSourceBuilder<TModel> ServerGrouping(bool enabled)
+        {
+            dataSource.ServerGrouping = enabled;
+            return this;
+        }
+
+        public DataSourceBuilder<TModel> ServerGrouping()
+        {
+            dataSource.ServerGrouping = true;
+            return this;
+        }
+
+        public DataSourceBuilder<TModel> ServerAggregates(bool enabled)
+        {
+            dataSource.ServerAggregates = enabled;
+            return this;
+        }
+
+        public DataSourceBuilder<TModel> ServerAggregates()
+        {
+            dataSource.ServerAggregates = true;
+            return this;
+        }
+
         public DataSourceBuilder<TModel> ServerSorting(bool enabled)
         {
             dataSource.ServerSorting = enabled;

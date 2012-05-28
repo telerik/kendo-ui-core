@@ -1,4 +1,6 @@
-@(Html.Kendo().Grid<EditableProduct>()    
+@model IEnumerable<EditableProduct>
+
+@(Html.Kendo().Grid<EditableProduct>(Model)    
     .Name("Grid")    
     .Columns(columns => {        
         columns.Bound(p => p.ProductName);
@@ -14,6 +16,13 @@
         .DataSource(dataSource => {            
             dataSource.Model(model => model.Id(p => p.ProductID));
             dataSource.Type(DataSourceType.Ajax);
+            
+            dataSource.ServerAggregates(false)
+                .ServerFiltering(false)
+                .ServerGrouping(false)
+                .ServerPaging(false)
+                .ServerSorting(false);
+            
             dataSource.Read(read => read.Action("AjaxEditing_Read", "Grid"))
                 .Update(update => update.Action("AjaxEditing_Update", "Grid"))
                 .Create(update => update.Action("AjaxEditing_Create", "Grid"))
