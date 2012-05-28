@@ -21,33 +21,41 @@
 
     /**
     * @name kendo.mobile.ui.ScrollView.Description
-    * @section The Kendo Mobile ScrollView widget is used to scroll content wider than the device screen.
+    * @section
+    * <p>The Kendo Mobile ScrollView widget is used to scroll content wider than the device screen.</p>
     *
     * <h3>Getting Started</h3>
     * <p>The Kendo Mobile Application automatically initializes the Mobile ScrollView for every element with <code>role</code> data attribute set to <code>scrollview</code> present in the views' markup.
-    * Alternatively, it can be initialized using a jQuery selector. </p>
+    * Alternatively, it can be initialized using jQuery plugin syntax in the containing mobile View <strong>init event handler</strong>.
+    *
     * @exampleTitle Initialize mobile ScrollView using a role data attribute.
     * @example
     * <div data-role="scrollview">
     *   Foo
     * </div>
     *
-    * @exampleTitle Initialize mobile ScrollView using a jQuery selector.
+    * @exampleTitle Initialize mobile ScrollView using jQuery plugin syntax.
     * @example
-    * <div id="scrollView"></div>
+    * <div data-role="view" data-init="initScrollView">
+    *   <div id="scrollView">
+    *     <div data-role="page">Foo</div>
+    *     <div data-role="page">Bar</div>
+    *   </div>
+    * </div>
     * <script>
-    * var listView = $("#scrollView").kendoMobileScrollView();
+    * function initScrollView(e) {
+    *   e.view.element.find("#scrollView").kendoMobileScrollView();
+    * }
     * </script>
     *
     * @section
     * <h3>Pages</h3>
-    * Content pages can be defined in order to display exactly one item per page. Pages are automatically resized
-    * on device orientation change. To define a page, wrap the content in a div with <code>role</code> data attribute
-    * set to <code>page</code>.
+    * Content pages may be defined in order to display exactly one item per page. Pages are automatically resized
+    * when the device is rotated. To define a page, wrap the content in a div with <code>data-role="page"</code> attribute set.
     *
     * @exampleTitle ScrollView with pages
     * @example
-    * <div id="scrollView">
+    * <div data-role="scrollView">
     *    <div data-role="page">Foo</div>
     *    <div data-role="page">Bar</div>
     * </div>
@@ -60,8 +68,7 @@
         * @param {Object} options
         * @option {Number} [page] <0> The initial page to display.
         * @option {Number} [duration] <300> The milliseconds that take the ScrollView to snap to the current page after released.
-        * @option {Number} [velocityThreshold] <0.8> The velocity threshold after which a swipe will navigate to the next page (as opposed to snapping back to the current view).
-        * The swipe velocity equal the pixels per millisecond change for a swipe.
+        * @option {Number} [velocityThreshold] <0.8> The velocity threshold after which a swipe will navigate to the next page (as opposed to snapping back to the current page).
         * @option {Number} [bounceVelocityThreshold] <1.6> The velocity threshold after which a swipe will result in a bounce effect.
         */
         init: function(element, options) {

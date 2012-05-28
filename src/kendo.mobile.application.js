@@ -72,13 +72,13 @@
     * <h3>Mobile Views</h3>
     *
     * <p>The mobile <strong>Application</strong> consists of a single HTML page with one or more mobile Views, linked with navigational widgets (Buttons, TabStrip, etc.).
-    * A mobile <strong>View</strong> is considered each child of the application element (<code>&lt;body&gt;</code> by default) that is decorated with <code>data-role="view"</code>.
+    * Each child of the application element (<code>&lt;body&gt;</code> by default) with <code>data-role="view"</code> is considered a mobile view.
     *
     * @section
     *
     * <h3>Navigation</h3>
-    * <p>When initialized, the mobile <strong>Application</strong> modifies the kendo mobile widgets' behavior so that they navigate between <strong>Views</strong> when pressed.
-    * The navigation <strong>Widget</strong>'s <code>href</code> attribute specifies the <strong>View</strong> id to navigate to.</p>
+    * <p>When initialized, the mobile <strong>Application</strong> modifies the kendo mobile widgets' (listview link items, buttons, tabs, etc.) behavior so that they navigate between the mobile views when the user taps them.
+    * When targeting local views, The navigation <strong>Widget</strong>'s <code>href</code> attribute specifies the <strong>View</strong> id to navigate to, prefixed with <code>#</code>, like an anchor.</p>
     *
     * @exampleTitle Views linked with mobile Buttons
     * @example
@@ -86,8 +86,8 @@
     * <div data-role="view" id="bar">Bar <a href="#foo" data-role="button">Go to Foo</a></div>
     *
     * @section
-    *
-    * <p>By default, all navigational widgets treat the links' hrefs as mobile views. This behavior can be overriden by setting <code>data-rel="external"</code> attribute to the link element.  </p>
+    * <h3>Linking to External Pages</h3>
+    * <p>By default, all navigational widgets try to navigate to loacal views when tapped. This behavior can be overridden by setting <code>data-rel="external"</code> attribute to the link element. </p>
     *
     * @exampleTitle External links
     * @example
@@ -98,7 +98,7 @@
     * <h3>View Transitions</h3>
     * <p><strong>View</strong> transitions are defined by setting a <code>data-transition</code> attribute to the <strong>View</strong> DOM element or to the navigational widget <code>A</code> DOM element.
     * If both are present, the navigational widget transition takes precedence.
-    * A default <strong>View</strong> transition may be set using the <code>transition</code> parameter in the options parameter of the <strong>Application</strong> constructor.
+    * An application-wide default transition may be set using the <code>transition</code> parameter in the options parameter of the <strong>Application</strong> constructor.
     * The following transitions are supported:</p>
     *
     * <h4>slide</h4>
@@ -108,15 +108,15 @@
     * Supported directions are <code>left</code> and <code>right</code>. By default, the direction is <code>left</code>.</p>
     *
     * <h4>zoom</h4>
-    * <p>The new <strong>View</strong> (along with its header and footer) content zooms over the previous <strong>View</strong>. The old <strong>View</strong> content fades out. Suitable for displaying dialogs.</p>
+    * <p>The new <strong>View</strong> (along with its header and footer) content zooms from the center of the previous <strong>View</strong>. The old <strong>View</strong> content fades out. Suitable for displaying dialogs.</p>
     *
     * <h4>fade</h4>
-    * <p>The new <strong>View</strong> (along with its header and footer) content fades from the center of the screen, on top of the previous <strong>View</strong> content.</p>
+    * <p>The new <strong>View</strong> (along with its header and footer) content fades in on top of the previous <strong>View</strong> content.</p>
     *
     * <h4>overlay</h4>
     * <p>The new <strong>View</strong> content slides on top of the previous <strong>View</strong>. Unlike the <code>slide</code> transition,
-    * the previous <strong>View</strong> stays "under" the new one, and the headers / footers do not transition separately. </p>
-    * <p>The transition direction can be specified by using <code>overlay:(direction)</code>.
+    * the previous View stays "under" the new one, and the headers / footers do not transition separately. </p>
+    * <p>The transition direction can be specified by using <code>overlay:(direction)</code> format.
     * Supported directions are <code>down</code>, <code>left</code>, <code>up</code> and <code>right</code>. By default, the direction is <code>left</code>.</p>
     *
     * @exampleTitle Views with Transitions
@@ -127,30 +127,27 @@
     * @section
     * <p>Each transition may be played in <strong>reverse</strong>. To do so, add <code>" reverse"</code> after the transition definition. For
     * instance, to simulate returning to previous view using slide transition, use <code>"slide:left reverse"</code></p>
+    *
     * @exampleTitle Reverse transition
     * @example
     * <div data-role="view" id="foo">Foo <a href="#bar" data-role="button">Go to Bar</a></div>
     * <div data-role="view" id="bar">Bar <a href="#foo" data-role="button" data-transition="slide:left reverse">Go to Foo</a></div>
-    * @section
     *
+    * @section
     * <p>When a <strong>View</strong> transitions to the <strong>View</strong> displayed before it (foo → bar → foo), this is considered a <strong>back</strong> navigation.
     * In this case, the animation of the current <strong>View</strong> is applied in reverse.
-    * For instance, navigating with slide animation from <code>foo</code> to <code>bar</code>, then back to <code>foo</code>
+    * For instance, navigating with slide transition from <code>foo</code> to <code>bar</code>, then back to <code>foo</code>
     * would cause the <code>foo</code> <strong>View</strong> to slide from the right side of the screen. </p>
     *
     * @section
     *
     * <h3>Remote Views</h3>
     *
-    * <p>The Kendo mobile <strong>Application</strong> can load <strong>Views</strong> remotely by using AJAX. If the navigational widget URL does not start with a hash (#),
-    * the application considers the <strong>View</strong> to be remote, and issues an AJAX request to the provided URL.
-    * The <strong>View</strong> content (the first element with <code>data-role="view"</code>) are extracted from the AJAX response and appended into the <strong>Application</strong> element.
-    * Once the remote <strong>View</strong> is fetched, no additional roundtrips to the server occur when the <strong>View</strong> is displayed. </p>
+    * <p>The Kendo mobile <strong>Application</strong> can load <strong>Views</strong> remotely, using AJAX. If the navigational widget href attribute value does not start with a hash (#),
+    * the application considers the View to be remote, and issues an AJAX request to the provided URL.
     *
-    * <p>The remote view request will also append (but not initialize) any <strong>additional views</strong> found in the AJAX
-    * response. <strong>Inline style</strong> elements, <strong>inline script</strong> elements, and <strong>mobile layout</strong> definitions will also be evaluated and appended to the
-    * application. The elements must be available in the root of the response, or nested inside the <strong>body</strong> element.
-    * Scripts and styles from the <strong>head</strong> element (if present) will <strong>not</strong> be evaluated.</p>
+    * The View content (the first element with <code>data-role="view"</code>) is extracted from the AJAX response and appended into the Application DOM element.
+    * Once the remote <strong>View</strong> is fetched, no additional round trips to the server occur when the <strong>View</strong> is displayed again. </p>
     *
     * @exampleTitle Remote View
     * @example
@@ -159,6 +156,32 @@
     *
     * <!-- bar.html -->
     * <div data-role="view">Bar</div>
+    *
+    * @section
+    * <p>The remote view request will also append (but not initialize) any <strong>additional views</strong> found in the AJAX
+    * response. <strong>Inline style</strong> elements, <strong>inline script</strong> elements, and <strong>mobile layout</strong> definitions will also be evaluated and appended to the
+    * application. The elements must be available in the root of the response, or nested inside the <strong>body</strong> element. </p>
+    * <p>Scripts and styles from the <strong>head</strong> element (if present) will <strong>not</strong> be evaluated.</p>
+    *
+    * <p>If the remote view needs an <b>additional scripting (widget initialization/binding)</b> logic, it may be defined in the view init event handler,  in the AJAX response.</p>
+    *
+    * @exampleTitle Remote view with init event handler
+    * @example
+    * <!-- foo.html -->
+    * <div data-role="view">
+    * <a data-role="button" href="bar.html">Go to bar</a>
+    * </div>
+    *
+    * <!-- bar.html -->
+    * <div data-role="view" data-init="initBar">
+    *   <a href="#" id="link">Link</a>
+    * </div>
+    *
+    * <script>
+    *   function initBar(e) {
+    *       e.view.element.find("#link").kendoMobileButton();
+    *   }
+    * </script>
     *
     * @section
     * <h3> Initial View</h3>
@@ -188,7 +211,7 @@
     * </script>
     *
     * @section
-    * <p>You can also define web clip icons with different sizes. Check this <a href="https://developer.apple.com/library/ios/#documentation/userexperience/conceptual/mobilehig/IconsImages/IconsImages.html#//apple_ref/doc/uid/TP40006556-CH14-SW11">link</a>
+    * <p>Multiple icons for different sizes can be defined. Please refer to Apple <a href="https://developer.apple.com/library/ios/#documentation/userexperience/conceptual/mobilehig/IconsImages/IconsImages.html#//apple_ref/doc/uid/TP40006556-CH14-SW11">Web Clip Icons help topic</a>
     * for more information.</p>
     *
     * @exampleTitle Define multiple web clip icons
@@ -203,7 +226,7 @@
     * </script>
     *
     * @section
-    * <h3>Force platform styles</h3>
+    * <h3>Force Platform Styles</h3>
     *
     * <p> The <strong>Application</strong> provides a way to force a specific platform look on your application upon init by
     * passing the OS name in the options parameter of the Application's constructor:
@@ -215,7 +238,7 @@
     *      });
     * </script>
     *
-    * Additionally, if you want to specify os version, you can pass the entire kendo.support.mobileOS object that is expected by Kendo UI Mobile.
+    * Additionally, the OS version can be specified by by passing kendo.support.mobileOS object that is expected by Kendo UI Mobile.
     * This is more complex, but allows fine grained tuning of the application look and behavior. A sample object initialization is like this:
     * @exampleTitle Force iOS 5 look
     * @example
