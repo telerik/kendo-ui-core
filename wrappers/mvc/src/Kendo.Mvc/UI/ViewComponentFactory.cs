@@ -27,10 +27,18 @@ namespace Kendo.Mvc.UI
             HtmlHelper = htmlHelper;
             ClientSideObjectWriterFactory = clientSideObjectWriterFactory;
             Initializer = DI.Current.Resolve<IJavaScriptInitializer>();
+            UrlGenerator = DI.Current.Resolve<IUrlGenerator>();
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
         public IJavaScriptInitializer Initializer
+        {
+            get;
+            private set;
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public IUrlGenerator UrlGenerator
         {
             get;
             private set;
@@ -79,7 +87,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual MenuBuilder Menu()
         {
-            return new MenuBuilder(new Menu(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>(), DI.Current.Resolve<INavigationItemAuthorization>(), DI.Current.Resolve<INavigationComponentHtmlBuilderFactory<Menu, MenuItem>>()));
+            return new MenuBuilder(new Menu(ViewContext, ClientSideObjectWriterFactory, UrlGenerator, DI.Current.Resolve<INavigationItemAuthorization>(), DI.Current.Resolve<INavigationComponentHtmlBuilderFactory<Menu, MenuItem>>()));
         }
 
         /// <summary>
@@ -96,7 +104,7 @@ namespace Kendo.Mvc.UI
         {
             return new EditorBuilder(new Editor(ViewContext, ClientSideObjectWriterFactory, 
                 DI.Current.Resolve<ILocalizationServiceFactory>().Create("EditorLocalization", CultureInfo.CurrentUICulture),
-                DI.Current.Resolve<IUrlGenerator>()));
+                UrlGenerator));
         }
 
         /// <summary>
@@ -118,7 +126,7 @@ namespace Kendo.Mvc.UI
         {
             return new GridBuilder<T>(new Grid<T>(ViewContext, 
                         Initializer,
-                        DI.Current.Resolve<IUrlGenerator>(),
+                        UrlGenerator,
                         DI.Current.Resolve<ILocalizationServiceFactory>().Create("GridLocalization", CultureInfo.CurrentUICulture), 
                         DI.Current.Resolve<IGridHtmlBuilderFactory>()
                     )
@@ -227,7 +235,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual TabStripBuilder TabStrip()
         {
-            return new TabStripBuilder(new TabStrip(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>(), DI.Current.Resolve<INavigationItemAuthorization>(), DI.Current.Resolve<ITabStripHtmlBuilderFactory>()));
+            return new TabStripBuilder(new TabStrip(ViewContext, ClientSideObjectWriterFactory, UrlGenerator, DI.Current.Resolve<INavigationItemAuthorization>(), DI.Current.Resolve<ITabStripHtmlBuilderFactory>()));
         }
 
         /// <summary>
@@ -385,7 +393,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual GaugeLinearBuilder<T> LinearGauge<T>() where T: struct
         {
-            return new GaugeLinearBuilder<T>(new LinearGauge<T>(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>()));
+            return new GaugeLinearBuilder<T>(new LinearGauge<T>(ViewContext, Initializer, DI.Current.Resolve<IUrlGenerator>()));
         }
 
         /// <summary>
@@ -400,7 +408,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual GaugeRadialBuilder<T> RadialGauge<T>() where T : struct
         {
-            return new GaugeRadialBuilder<T>(new RadialGauge<T>(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>()));
+            return new GaugeRadialBuilder<T>(new RadialGauge<T>(ViewContext, Initializer, DI.Current.Resolve<IUrlGenerator>()));
         }
 
         /// <summary>
