@@ -27,7 +27,7 @@ namespace Kendo.Mvc.UI.Fluent
 
         public ServerDataSourceBuilder<TModel> Server()
         {
-            dataSource.Type = DataSourceType.Ajax;
+            dataSource.Type = DataSourceType.Server;
 
             return new ServerDataSourceBuilder<TModel>(dataSource, viewContext, urlGenerator);
         }
