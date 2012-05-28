@@ -187,8 +187,14 @@ namespace Kendo.Mvc.UI
             options.Add("title", Title);
             options.Add("resizable", ResizingSettings.Enabled);
             options.Add("Content", ContentUrl);
-            options.Add("width", Width);
-            options.Add("height", Height);
+            if (Width != 0)
+            {
+                options.Add("width", Width);
+            }
+            if (Height != 0)
+            {
+                options.Add("height", Height);
+            }            
             options.Add("actions", Actions.Container.Select(item => item.Name));
 
 
