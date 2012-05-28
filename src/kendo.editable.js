@@ -105,6 +105,13 @@
             editor = editor ? editor : editors["string"];
 
             if (modelField) {
+
+                if (isCustomEditor && typeof field.editor === "string") {
+                    editor = function(container) {
+                        $(window.unescape(field.editor)).appendTo(container);
+                    };
+                }
+
                 container = container.length ? container : that.element;
                 editor(container, extend(true, {}, isObject ? field : { field: fieldName }, { model: model }));
 
