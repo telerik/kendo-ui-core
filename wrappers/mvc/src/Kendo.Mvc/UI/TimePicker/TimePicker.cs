@@ -39,7 +39,7 @@ namespace Kendo.Mvc.UI
 
         public override void WriteInitializationScript(TextWriter writer)
         {
-            var options = new Dictionary<string, object>();
+            var options = new Dictionary<string, object>(ClientEvents);
 
             var animation = Animation.ToJson();
 
@@ -47,12 +47,7 @@ namespace Kendo.Mvc.UI
             {
                 options["animation"] = animation["animation"];
             }
-
-            if (ClientEvents.Keys.Any())
-            {
-                options["events"] = ClientEvents;
-            }
-
+            
             options["format"] = Format;
 
             if (ParseFormats.Any())
