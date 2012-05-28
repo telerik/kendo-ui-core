@@ -191,7 +191,7 @@ namespace Kendo.Mvc.UI.Fluent
         {
             Guard.IsNotNull(clientEventsAction, "clientEventsAction");
 
-            clientEventsAction(new WindowClientEventsBuilder(Component.ClientEvents, Component.ViewContext));
+            clientEventsAction(new WindowClientEventsBuilder(Component.Events));
 
             return this;
         }

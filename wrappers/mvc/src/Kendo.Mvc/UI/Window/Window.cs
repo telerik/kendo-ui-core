@@ -12,19 +12,18 @@ namespace Kendo.Mvc.UI
     using Extensions;
     using Infrastructure;
     using Kendo.Mvc.Resources;
-    
+
     public class Window : ViewComponentBase, IContentContainer, IAsyncContentContainer
     {
-        private readonly IList<IWindowButton> defaultButtons = new List<IWindowButton> { new HeaderButton{Name = "Close", CssClass = "k-close"} };
-        
+        private readonly IList<IWindowButton> defaultButtons = new List<IWindowButton> { new HeaderButton { Name = "Close", CssClass = "k-close" } };
+
         private string loadContentFromUrl;
 
-        public Window(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory)
-            : base(viewContext, clientSideObjectWriterFactory)
+        public Window(ViewContext viewContext, IJavaScriptInitializer initializer)
+            : base(viewContext, initializer)
         {
             Template = new HtmlTemplate();
 
-            ClientEvents = new WindowClientEvents();
             ResizingSettings = new WindowResizingSettings();
 
             Actions = new WindowButtons();
@@ -51,64 +50,58 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        public string IconUrl 
-        { 
-            get; 
-            set; 
-        }
-        
-        public string IconAlternativeText 
-        { 
-            get; 
-            set; 
-        }
-
-        public string Title 
-        { 
-            get; 
-            set; 
-        }
-
-        public int Width 
-        { 
-            get; 
-            set; 
-        }       
-
-        public int Height 
-        { 
-            get; 
-            set; 
-        }
-
-        public bool Visible 
-        { 
-            get; 
-            set; 
-        }
-
-        public bool Scrollable 
-        { 
-            get; 
-            set; 
-        }
-
-        public bool Modal 
-        { 
-            get; 
-            set; 
-        }
-
-        public bool Draggable 
-        { 
-            get; 
-            set; 
-        }
-
-        public WindowClientEvents ClientEvents
+        public string IconUrl
         {
             get;
-            private set;
+            set;
+        }
+
+        public string IconAlternativeText
+        {
+            get;
+            set;
+        }
+
+        public string Title
+        {
+            get;
+            set;
+        }
+
+        public int Width
+        {
+            get;
+            set;
+        }
+
+        public int Height
+        {
+            get;
+            set;
+        }
+
+        public bool Visible
+        {
+            get;
+            set;
+        }
+
+        public bool Scrollable
+        {
+            get;
+            set;
+        }
+
+        public bool Modal
+        {
+            get;
+            set;
+        }
+
+        public bool Draggable
+        {
+            get;
+            set;
         }
 
         public WindowResizingSettings ResizingSettings
@@ -135,7 +128,7 @@ namespace Kendo.Mvc.UI
             }
         }
 
-        public Action Content 
+        public Action Content
         {
             get
             {
@@ -143,7 +136,7 @@ namespace Kendo.Mvc.UI
             }
             set
             {
-                Template.Content = value; 
+                Template.Content = value;
 
             }
         }
@@ -172,67 +165,58 @@ namespace Kendo.Mvc.UI
 
         public override void WriteInitializationScript(TextWriter writer)
         {
-            // TODO: use new serialization scheme
-            IClientSideObjectWriter objectWriter = ClientSideObjectWriterFactory.Create(Id, "kendoWindow", writer);
-
-            objectWriter.Start();
+            var options = new Dictionary<string, object>(Events);
 
             var animation = Animation.ToJson();
 
-            if (animation.Keys.Any())
+            if (animation.Any())
             {
                 if (animation["animation"] is bool)
                 {
-                    objectWriter.Append("animation", false);
+                    options["animation"] = false;
                 }
                 else
                 {
-                    objectWriter.AppendCollection("animation", (Dictionary<string, object>)animation["animation"]);
+                    options["animation"] = animation["animation"];
                 }
             }
 
-            //client events
-            objectWriter.AppendClientEvent("close", ClientEvents.OnClose);
-            objectWriter.AppendClientEvent("open", ClientEvents.OnOpen);
-            objectWriter.AppendClientEvent("activate", ClientEvents.OnActivate);
-            objectWriter.AppendClientEvent("deactivate", ClientEvents.OnDeactivate);
-            objectWriter.AppendClientEvent("resize", ClientEvents.OnResize);
-            objectWriter.AppendClientEvent("refresh", ClientEvents.OnRefresh);
-
             //properties
-            objectWriter.Append("modal", Modal);
-            objectWriter.Append("Content", ContentUrl);
-            objectWriter.Append("draggable", Draggable);
-            objectWriter.Append("width", Width);
-            objectWriter.Append("height", Height);
-            objectWriter.Append("title", Title);
-            objectWriter.Append("resizable", ResizingSettings.Enabled);
-            objectWriter.AppendCollection("actions", Actions.Container.Select(item => item.Name));
+            options.Add("modal", Modal);
+            options.Add("draggable", Draggable);
+            options.Add("title", Title);
+            options.Add("resizable", ResizingSettings.Enabled);
+            options.Add("Content", ContentUrl);
+            options.Add("width", Width);
+            options.Add("height", Height);
+            options.Add("actions", Actions.Container.Select(item => item.Name));
+
 
             if (ResizingSettings.Enabled)
             {
                 if (ResizingSettings.MinHeight != int.MinValue)
                 {
-                    objectWriter.Append("minHeight", ResizingSettings.MinHeight);
+                    options.Add("minHeight", ResizingSettings.MinHeight);
                 }
 
                 if (ResizingSettings.MinWidth != int.MinValue)
                 {
-                    objectWriter.Append("minWidth", ResizingSettings.MinWidth);
+                    options.Add("minWidth", ResizingSettings.MinWidth);
                 }
 
                 if (ResizingSettings.MaxHeight != int.MinValue)
                 {
-                    objectWriter.Append("maxHeight", ResizingSettings.MaxHeight);
+                    options.Add("maxHeight", ResizingSettings.MaxHeight);
                 }
 
                 if (ResizingSettings.MaxWidth != int.MinValue)
                 {
-                    objectWriter.Append("maxWidth", ResizingSettings.MaxWidth);
+                    options.Add("maxWidth", ResizingSettings.MaxWidth);
                 }
             }
 
-            objectWriter.Complete();
+            writer.Write(Initializer.Initialize(Id, "Window", options));
+
 
             base.WriteInitializationScript(writer);
         }
@@ -252,7 +236,7 @@ namespace Kendo.Mvc.UI
         {
             base.VerifySettings();
 
-            if (ResizingSettings.MinWidth != int.MinValue && 
+            if (ResizingSettings.MinWidth != int.MinValue &&
                 ResizingSettings.MaxWidth != int.MinValue &&
                 ResizingSettings.MinWidth > ResizingSettings.MaxWidth)
             {
