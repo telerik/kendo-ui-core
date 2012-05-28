@@ -110,8 +110,9 @@ namespace Kendo.Mvc.UI.Html
         {
             switch (renderingData.EditMode)
             {
-                case GridEditMode.InForm:
-                    return CreateInformEditRowBuilder(renderingData, item);
+               //TODO: Implement InForms editing
+                //case GridEditMode.InForm:
+                //    return CreateInformEditRowBuilder(renderingData, item);
                 case GridEditMode.PopUp:
                     return CreatePopUpEditRowBuilder(renderingData, item);
                 default:
@@ -227,8 +228,9 @@ namespace Kendo.Mvc.UI.Html
         {
             switch (renderingData.EditMode)
             {
-                case GridEditMode.InForm:
-                    return CreateInFormInsertRowBuilder(renderingData, item);
+                //TODO: Implement InForm editing
+                //case GridEditMode.InForm:
+                //    return CreateInFormInsertRowBuilder(renderingData, item);
                 case GridEditMode.PopUp:
                     return CreatePopUpInsertRowBuilder(renderingData, item);
                 default:
