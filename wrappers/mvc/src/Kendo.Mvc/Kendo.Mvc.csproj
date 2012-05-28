@@ -172,7 +172,6 @@
     <Compile Include="UI\Chart\Axes\IChartValueAxis.cs" />
     <Compile Include="UI\Chart\Axes\IChartCategoryAxis.cs" />
     <Compile Include="UI\Chart\Chart.cs" />
-    <Compile Include="UI\Chart\ChartClientEvents.cs" />
     <Compile Include="UI\Chart\ChartTitle.cs" />
     <Compile Include="UI\Chart\ChartLegend.cs" />
     <Compile Include="UI\Chart\ChartSpacing.cs" />

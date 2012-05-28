@@ -6,6 +6,8 @@ namespace Kendo.Mvc.UI
     using System.Web.UI;
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI.Html;
+    using Kendo.Mvc.Infrastructure;
+    using System.Web.Script.Serialization;
 
     /// <summary>
     /// Telerik Chart for ASP.NET MVC is a view component for rendering charts.
@@ -24,10 +26,10 @@ namespace Kendo.Mvc.UI
         /// <param name="viewContext">The view context.</param>
         /// <param name="clientSideObjectWriterFactory">The client side object writer factory.</param>
         /// <param name="urlGenerator">The URL Generator.</param>
-        public Chart(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory, IUrlGenerator urlGenerator)
-            : base(viewContext, clientSideObjectWriterFactory)
+        public Chart(ViewContext viewContext, IJavaScriptInitializer initializer, IUrlGenerator urlGenerator)
+            : base(viewContext, initializer)
         {
-            ClientEvents = new ChartClientEvents();
+            ClientEvents = new Dictionary<string, object>();
             UrlGenerator = urlGenerator;
             Title = new ChartTitle();
             ChartArea = new ChartArea();
@@ -58,7 +60,7 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Represents the client-side event handlers for the component
         /// </summary>
-        public ChartClientEvents ClientEvents
+        public IDictionary<string, object> ClientEvents
         {
             get;
             private set;
@@ -242,65 +244,61 @@ namespace Kendo.Mvc.UI
         /// <param name="writer">The writer object.</param>
         public override void WriteInitializationScript(TextWriter writer)
         {
-            var objectWriter = ClientSideObjectWriterFactory.Create(Id, "kendoChart", writer);
+            var options = new Dictionary<string, object>(ClientEvents);
 
-            objectWriter.Start();
+            SerializeData("chartArea", ChartArea.CreateSerializer().Serialize(), options);
+            SerializeData("plotArea", PlotArea.CreateSerializer().Serialize(), options);
 
-            SerializeData("chartArea", ChartArea.CreateSerializer().Serialize(), objectWriter);
-            SerializeData("plotArea", PlotArea.CreateSerializer().Serialize(), objectWriter);
+            SerializeTheme(options);
 
-            SerializeTheme(objectWriter);
+            SerializeData("title", Title.CreateSerializer().Serialize(), options);
 
-            SerializeData("title", Title.CreateSerializer().Serialize(), objectWriter);
+            SerializeData("legend", Legend.CreateSerializer().Serialize(), options);
 
-            SerializeData("legend", Legend.CreateSerializer().Serialize(), objectWriter);
+            SerializeSeries(options);
 
-            SerializeSeries(objectWriter);
+            SerializeData("seriesDefaults", SeriesDefaults.CreateSerializer().Serialize(), options);
 
-            SerializeData("seriesDefaults", SeriesDefaults.CreateSerializer().Serialize(), objectWriter);
+            SerializeData("axisDefaults", AxisDefaults.CreateSerializer().Serialize(), options);
 
-            SerializeData("axisDefaults", AxisDefaults.CreateSerializer().Serialize(), objectWriter);
+            SerializeData("categoryAxis", CategoryAxis.CreateSerializer().Serialize(), options);
 
-            SerializeData("categoryAxis", CategoryAxis.CreateSerializer().Serialize(), objectWriter);
+            SerializeAxes("valueAxis", ValueAxes, options);
 
-            SerializeAxes("valueAxis", ValueAxes, objectWriter);
+            SerializeAxes("xAxis", XAxes, options);
 
-            SerializeAxes("xAxis", XAxes, objectWriter);
+            SerializeAxes("yAxis", YAxes, options);
 
-            SerializeAxes("yAxis", YAxes, objectWriter);
+            SerializeTransitions(options);
 
-            SerializeTransitions(objectWriter);
+            SerializeDataSource(options);
 
-            SerializeDataSource(objectWriter);
+            SerializeSeriesColors(options);
 
-            SerializeSeriesColors(objectWriter);
+            SerializeData("tooltip", Tooltip.CreateSerializer().Serialize(), options);
 
-            SerializeData("tooltip", Tooltip.CreateSerializer().Serialize(), objectWriter);
-
-            ClientEvents.SerializeTo(objectWriter);
-
-            objectWriter.Complete();
+            writer.Write(Initializer.Initialize(Id, "Chart", options));
 
             base.WriteInitializationScript(writer);
         }
 
-        private void SerializeData(string key, IDictionary<string, object> data, IClientSideObjectWriter objectWriter)
+        private void SerializeData(string key, IDictionary<string, object> data, IDictionary<string, object> options)
         {
             if (data.Count > 0)
             {
-                objectWriter.AppendObject(key, data);
+                options.Add(key, data);
             }
         }
 
-        private void SerializeTheme(IClientSideObjectWriter objectWriter)
+        private void SerializeTheme(IDictionary<string, object> options)
         {
             if (Theme.HasValue())
             {
-                objectWriter.Append("theme", Theme);
+                options.Add("theme", Theme);
             }
         }
 
-        private void SerializeSeries(IClientSideObjectWriter objectWriter)
+        private void SerializeSeries(IDictionary<string, object> options)
         {
             if (Series.Count > 0)
             {
@@ -310,40 +308,40 @@ namespace Kendo.Mvc.UI
                     serializedSeries.Add(s.CreateSerializer().Serialize());
                 }
 
-                objectWriter.AppendCollection("series", serializedSeries);
+                options.Add("series", serializedSeries);
             }
         }
 
-        private void SerializeDataSource(IClientSideObjectWriter objectWriter)
+        private void SerializeDataSource(IDictionary<string, object> options)
         {
             if (!string.IsNullOrEmpty(DataSource.Transport.Read.Url))
             {
                 DataSource.Transport.Read.Type = "POST";
-                objectWriter.AppendObject("dataSource", DataSource.ToJson());
+                options.Add("dataSource", DataSource.ToJson());
             }
             else if (Data != null)
             {
-                objectWriter.AppendObject("dataSource", new { data = Data });
+                options.Add("dataSource", new Dictionary<string, object> { { "data", Data } });
             }
         }
 
-        private void SerializeSeriesColors(IClientSideObjectWriter objectWriter)
+        private void SerializeSeriesColors(IDictionary<string, object> options)
         {
             if (SeriesColors != null)
             {
-                objectWriter.AppendCollection("seriesColors", SeriesColors);
+                options.Add("seriesColors", SeriesColors);
             }
         }
 
-        private void SerializeTransitions(IClientSideObjectWriter objectWriter)
+        private void SerializeTransitions(IDictionary<string, object> options)
         {
             if (!Transitions)
             {
-                objectWriter.Append("transitions", Transitions);
+                options.Add("transitions", Transitions);
             }
         }
 
-        private void SerializeAxes<TAxis>(string key, IList<TAxis> axes, IClientSideObjectWriter objectWriter)
+        private void SerializeAxes<TAxis>(string key, IList<TAxis> axes, IDictionary<string, object> options)
             where TAxis : IChartAxis
         {
             if (axes.Count > 0)
@@ -366,7 +364,7 @@ namespace Kendo.Mvc.UI
 
                 if (shouldSerialize)
                 {
-                    objectWriter.AppendCollection(key, serializedAxes);
+                    options.Add(key, serializedAxes);
                 }
             }
         }

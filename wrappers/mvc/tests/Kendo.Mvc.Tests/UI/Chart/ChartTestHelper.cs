@@ -2,6 +2,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
 {
     using Moq;
     using Kendo.Mvc.UI;
+    using Kendo.Mvc.Infrastructure;
 
     public static class ChartTestHelper
     {
@@ -14,8 +15,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
         public static Chart<T> CreateChart<T>(IUrlGenerator urlGenerator) where T : class
         {
             var viewContext = TestHelper.CreateViewContext();
-            var clientSideObjectWriterFactoryMock = new Mock<ClientSideObjectWriterFactory>();
-            return new Chart<T>(viewContext, clientSideObjectWriterFactoryMock.Object, urlGenerator);
+            return new Chart<T>(viewContext, new JavaScriptInitializer(), urlGenerator);
         }
     }
 }
