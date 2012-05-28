@@ -14,6 +14,11 @@ namespace Kendo.Mvc.Examples.Controllers
     {
         public ActionResult CustomServerBinding([DataSourceRequest(Prefix = "Grid")] DataSourceRequest request)
         {
+            if (request.PageSize == 0)
+            {
+                request.PageSize = 10;
+            }
+
             IQueryable<Order> orders = new NorthwindDataContext().Orders;
 
             var total = orders.Count();

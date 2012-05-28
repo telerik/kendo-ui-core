@@ -19,8 +19,6 @@ namespace Kendo.Mvc.UI
             Aggregates = new List<AggregateDescriptor>();
 
             Schema = new DataSourceSchema();
-
-            ServerPaging = ServerSorting = ServerGrouping = ServerFiltering = ServerAggregates = true;
         }
 
         public int TotalPages { get; set; }
