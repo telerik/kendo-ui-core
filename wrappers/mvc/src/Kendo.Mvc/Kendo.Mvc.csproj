@@ -367,8 +367,7 @@
     <Compile Include="UI\Editor\IEditorTool.cs" />
     <Compile Include="UI\Editor\Tools\EditorCustomTool.cs" />
     <Compile Include="UI\Editor\Tools\EditorTool.cs" />
-    <Compile Include="UI\Editor\EditorClientEvents.cs" />
-    <Compile Include="UI\Editor\Fluent\EditorClientEventsBuilder.cs" />
+    <Compile Include="UI\Editor\Fluent\EditorEventBuilder.cs" />
     <Compile Include="UI\Editor\Fluent\EditorDropDownItemBuilder.cs" />
     <Compile Include="UI\Editor\Fluent\EditorSnippetBuilder.cs" />
     <Compile Include="UI\Editor\Html\EditorHtmlBuilder.cs" />

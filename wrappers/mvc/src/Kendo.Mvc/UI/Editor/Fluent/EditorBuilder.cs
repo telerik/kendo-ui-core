@@ -61,11 +61,11 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
         
-        public EditorBuilder ClientEvents(Action<EditorClientEventsBuilder> configurator)
+        public EditorBuilder Events(Action<EditorEventBuilder> configurator)
         {
             Guard.IsNotNull(configurator, "configurator");
 
-            configurator(new EditorClientEventsBuilder(Component.ClientEvents));
+            configurator(new EditorEventBuilder(Component.Events));
 
             return this;
         }
