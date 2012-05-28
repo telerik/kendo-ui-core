@@ -118,10 +118,11 @@
                 if (isCustomEditor) {
                     container.find(":input:not(:button), select").each(function() {
                         var bindAttr = kendo.attr("bind"),
-                            binding = this.getAttribute(bindAttr) || "";
+                            binding = this.getAttribute(bindAttr) || "",
+                            bindingName = type === "boolean" ? "checked:" : "value:";
 
-                        if (binding.indexOf("value:") === -1) {
-                            binding += (binding.length ? "," : "") + "value:" + fieldName;
+                        if (binding.indexOf(bindingName) === -1) {
+                            binding += (binding.length ? "," : "") + bindingName + fieldName;
 
                             $(this).attr(bindAttr, binding);
                         }
