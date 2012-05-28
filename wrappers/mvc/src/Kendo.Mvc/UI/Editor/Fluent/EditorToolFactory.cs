@@ -50,16 +50,6 @@ namespace Kendo.Mvc.UI.Fluent
             return Button("strikethrough");
         }
 
-        public EditorToolFactory Superscript()
-        {
-            return Button("superscript");
-        }
-
-        public EditorToolFactory Subscript()
-        {
-            return Button("subscript");
-        }
-
         public EditorToolFactory JustifyLeft()
         {
             return Button("justifyLeft");
@@ -120,6 +110,7 @@ namespace Kendo.Mvc.UI.Fluent
             return ComboBox("fontName", null);
         }
 
+        /* TODO: custom font names
         public EditorToolFactory FontName(Action<EditorDropDownItemBuilder> configurator)
         {
             var items = new List<DropDownItem>();
@@ -129,12 +120,14 @@ namespace Kendo.Mvc.UI.Fluent
 
             return ComboBox("fontName", items);
         }
+        */
 
         public EditorToolFactory FontSize()
         {
             return ComboBox("fontSize", null);
         }
 
+        /* TODO: custom font sizes
         public EditorToolFactory FontSize(Action<EditorDropDownItemBuilder> configurator)
         {
             var items = new List<DropDownItem>();
@@ -146,11 +139,13 @@ namespace Kendo.Mvc.UI.Fluent
             return ComboBox("fontSize", items);
         }
 
+        */
         public EditorToolFactory FormatBlock()
         {
             return SelectBox("formatBlock", null);
         }
 
+        /* TODO: custom formats
         public EditorToolFactory FormatBlock(Action<EditorDropDownItemBuilder> configurator)
         {
             var items = new List<DropDownItem>();
@@ -162,6 +157,9 @@ namespace Kendo.Mvc.UI.Fluent
             return DropDown("formatBlock", items);
         }
 
+        */
+
+        /* TODO: snippets
         public EditorToolFactory Snippets(Action<EditorSnippetBuilder> configurator)
         {
             var items = new List<DropDownItem>();
@@ -173,6 +171,7 @@ namespace Kendo.Mvc.UI.Fluent
             return SelectBox("insertHtml", items);
         }
        
+        */
         /*TODO: STYLES
         public EditorToolFactory Styles(Action<EditorDropDownItemBuilder> configurator)
         {
