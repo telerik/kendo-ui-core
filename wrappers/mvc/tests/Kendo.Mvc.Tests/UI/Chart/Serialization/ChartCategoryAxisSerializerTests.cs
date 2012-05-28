@@ -17,6 +17,8 @@ namespace Kendo.Mvc.UI.Tests
 
             axisMock.SetupGet(a => a.MajorGridLines).Returns(new ChartLine());
             axisMock.SetupGet(a => a.MinorGridLines).Returns(new ChartLine());
+            axisMock.SetupGet(a => a.MajorTicks).Returns(new ChartAxisTicks());
+            axisMock.SetupGet(a => a.MinorTicks).Returns(new ChartAxisTicks());
             axisMock.SetupGet(a => a.Line).Returns(new ChartLine());
             axisMock.SetupGet(a => a.Labels).Returns(new ChartAxisLabels());
             axisMock.SetupGet(a => a.PlotBands).Returns(new List<ChartPlotBand>());
