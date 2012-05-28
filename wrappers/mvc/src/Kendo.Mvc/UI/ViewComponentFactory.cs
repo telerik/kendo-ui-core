@@ -518,7 +518,7 @@ namespace Kendo.Mvc.UI
         public virtual UploadBuilder Upload()
         {
             return new UploadBuilder(
-                new Upload(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>(),
+                new Upload(ViewContext, Initializer, DI.Current.Resolve<IUrlGenerator>(),
                             DI.Current.Resolve<ILocalizationServiceFactory>().Create("UploadLocalization", CultureInfo.CurrentUICulture)));
         }
 

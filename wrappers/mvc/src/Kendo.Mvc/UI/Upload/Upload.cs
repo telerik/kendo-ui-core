@@ -6,6 +6,7 @@ namespace Kendo.Mvc.UI
     using System.Web.UI;
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.UI.Html;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Telerik Upload for ASP.NET MVC is a view component for uploading files.
@@ -26,11 +27,11 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <param name="viewContext">The view context.</param>
         /// <param name="clientSideObjectWriterFactory">The client side object writer factory.</param>
-        public Upload(  ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory,
+        public Upload(ViewContext viewContext, IJavaScriptInitializer initializer,
                         IUrlGenerator urlGenerator, ILocalizationService localizationService)
-        : base(viewContext, clientSideObjectWriterFactory)
+        : base(viewContext, initializer)
         {
-            ClientEvents = new UploadClientEvents();
+            ClientEvents = new Dictionary<string, object>();
             Enabled = true;
             Multiple = true;
             ShowFileList = true;
@@ -42,7 +43,7 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Represents the client-side event handlers for the component
         /// </summary>
-        public UploadClientEvents ClientEvents
+        public IDictionary<string, object> ClientEvents
         {
             get;
             private set;
@@ -109,18 +110,26 @@ namespace Kendo.Mvc.UI
         /// <param name="writer">The writer object.</param>
         public override void WriteInitializationScript(TextWriter writer)
         {
-            var objectWriter = ClientSideObjectWriterFactory.Create(Id, "kendoUpload", writer);
+            var options = new Dictionary<string, object>(ClientEvents);
 
-            objectWriter.Start();
+            if (!Enabled)
+            {
+                options.Add("enabled", Enabled);
+            }
 
-            objectWriter.Append("enabled", Enabled, true);
-            objectWriter.Append("multiple", Multiple, true);
-            objectWriter.Append("showFileList", ShowFileList, true);
+            if (!Multiple)
+            {
+                options.Add("multiple", Multiple);
+            }
 
-            Async.SerializeTo("async", objectWriter);
-            ClientEvents.SerializeTo(objectWriter);
+            if (!ShowFileList)
+            {
+                options.Add("showFileList", ShowFileList);
+            }
 
-            objectWriter.Complete();
+            Async.SerializeTo("async", options);
+
+            writer.Write(Initializer.Initialize(Id, "Upload", options));
 
             base.WriteInitializationScript(writer);
         }

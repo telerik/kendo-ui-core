@@ -31,8 +31,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
         public static Upload CreateUpload(IUrlGenerator urlGenerator, ILocalizationService localizationService)
         {
             var viewContext = TestHelper.CreateViewContext();
-            var clientSideObjectWriterFactoryMock = new Mock<ClientSideObjectWriterFactory>();
-            return new Upload(viewContext, clientSideObjectWriterFactoryMock.Object, urlGenerator, localizationService);
+            return new Upload(viewContext, new JavaScriptInitializer(), urlGenerator, localizationService);
         }
     }
 }

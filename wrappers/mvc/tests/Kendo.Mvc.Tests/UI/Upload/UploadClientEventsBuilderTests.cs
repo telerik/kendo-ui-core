@@ -4,18 +4,19 @@ namespace Kendo.Mvc.UI.Tests.Upload
     using Kendo.Mvc.UI;
     using Kendo.Mvc.UI.Fluent;
     using Xunit;
+    using System.Collections.Generic;
 
     public class UploadClientEventsBuilderTests
     {
         private readonly UploadClientEventsBuilder builder;
-        private readonly UploadClientEvents clientEvents;
+        private readonly IDictionary<string, object> clientEvents;
         private readonly Action emptyAction;
         private readonly Func<object, object> nullFunc;
         private readonly string handlerName;
 
         public UploadClientEventsBuilderTests()
         {
-            clientEvents = new UploadClientEvents();
+            clientEvents = new Dictionary<string, object>();
             builder = new UploadClientEventsBuilder(clientEvents);
 
             emptyAction = () => { };
@@ -24,276 +25,185 @@ namespace Kendo.Mvc.UI.Tests.Upload
         }
 
         [Fact]
-        public void OnSelect_with_Action_should_set_CodeBlock()
+        public void Select_with_Func_should_set_InlineCodeBlock()
         {
-            builder.OnSelect(emptyAction);
-            clientEvents.OnSelect.CodeBlock.ShouldNotBeNull();
+            builder.Select(nullFunc);
+            clientEvents["select"].ShouldNotBeNull();
         }
 
         [Fact]
-        public void OnSelect_with_Action_should_return_builder()
+        public void Select_with_Func_should_return_builder()
         {
-            builder.OnSelect(emptyAction).ShouldBeType<UploadClientEventsBuilder>();
+            builder.Select(nullFunc).ShouldBeType<UploadClientEventsBuilder>();
         }
 
         [Fact]
-        public void OnSelect_with_Func_should_set_InlineCodeBlock()
+        public void Select_with_string_should_set_HandlerName()
         {
-            builder.OnSelect(nullFunc);
-            clientEvents.OnSelect.InlineCodeBlock.ShouldNotBeNull();
+            builder.Select(handlerName);
+            ((ClientEvent) clientEvents["select"]).HandlerName.ShouldEqual(handlerName);
         }
 
         [Fact]
-        public void OnSelect_with_Func_should_return_builder()
+        public void Select_with_string_should_return_builder()
         {
-            builder.OnSelect(nullFunc).ShouldBeType<UploadClientEventsBuilder>();
+            builder.Select(handlerName).ShouldBeType<UploadClientEventsBuilder>();
         }
 
         [Fact]
-        public void OnSelect_with_string_should_set_HandlerName()
+        public void Upload_with_Func_should_set_InlineCodeBlock()
         {
-            builder.OnSelect(handlerName);
-            clientEvents.OnSelect.HandlerName.ShouldEqual(handlerName);
+            builder.Upload(nullFunc);
+            clientEvents["upload"].ShouldNotBeNull();
         }
 
         [Fact]
-        public void OnSelect_with_string_should_return_builder()
+        public void Upload_with_Func_should_return_builder()
         {
-            builder.OnSelect(handlerName).ShouldBeType<UploadClientEventsBuilder>();
+            builder.Upload(nullFunc).ShouldBeType<UploadClientEventsBuilder>();
         }
 
         [Fact]
-        public void OnUpload_with_Action_should_set_CodeBlock()
+        public void Upload_with_string_should_set_HandlerName()
         {
-            builder.OnUpload(emptyAction);
-            clientEvents.OnUpload.CodeBlock.ShouldNotBeNull();
+            builder.Upload(handlerName);
+            ((ClientEvent)clientEvents["upload"]).HandlerName.ShouldEqual(handlerName);
         }
 
         [Fact]
-        public void OnUpload_with_Action_should_return_builder()
+        public void Upload_with_string_should_return_builder()
         {
-            builder.OnUpload(emptyAction).ShouldBeType<UploadClientEventsBuilder>();
+            builder.Upload(handlerName).ShouldBeType<UploadClientEventsBuilder>();
         }
 
         [Fact]
-        public void OnUpload_with_Func_should_set_InlineCodeBlock()
+        public void Success_with_Func_should_set_InlineCodeBlock()
         {
-            builder.OnUpload(nullFunc);
-            clientEvents.OnUpload.InlineCodeBlock.ShouldNotBeNull();
+            builder.Success(nullFunc);
+            clientEvents["success"].ShouldNotBeNull();
         }
 
         [Fact]
-        public void OnUpload_with_Func_should_return_builder()
+        public void Success_with_Func_should_return_builder()
         {
-            builder.OnUpload(nullFunc).ShouldBeType<UploadClientEventsBuilder>();
+            builder.Success(nullFunc).ShouldBeType<UploadClientEventsBuilder>();
         }
 
         [Fact]
-        public void OnUpload_with_string_should_set_HandlerName()
+        public void Success_with_string_should_set_HandlerName()
         {
-            builder.OnUpload(handlerName);
-            clientEvents.OnUpload.HandlerName.ShouldEqual(handlerName);
+            builder.Success(handlerName);
+            ((ClientEvent)clientEvents["success"]).HandlerName.ShouldEqual(handlerName);
         }
 
         [Fact]
-        public void OnUpload_with_string_should_return_builder()
+        public void Success_with_string_should_return_builder()
         {
-            builder.OnUpload(handlerName).ShouldBeType<UploadClientEventsBuilder>();
+            builder.Success(handlerName).ShouldBeType<UploadClientEventsBuilder>();
         }
 
         [Fact]
-        public void OnSuccess_with_Action_should_set_CodeBlock()
+        public void Error_with_Func_should_set_InlineCodeBlock()
         {
-            builder.OnSuccess(emptyAction);
-            clientEvents.OnSuccess.CodeBlock.ShouldNotBeNull();
+            builder.Error(nullFunc);
+            clientEvents["error"].ShouldNotBeNull();
         }
 
         [Fact]
-        public void OnSuccess_with_Action_should_return_builder()
+        public void Error_with_Func_should_return_builder()
         {
-            builder.OnSuccess(emptyAction).ShouldBeType<UploadClientEventsBuilder>();
+            builder.Error(nullFunc).ShouldBeType<UploadClientEventsBuilder>();
         }
 
         [Fact]
-        public void OnSuccess_with_Func_should_set_InlineCodeBlock()
+        public void Error_with_string_should_set_HandlerName()
         {
-            builder.OnSuccess(nullFunc);
-            clientEvents.OnSuccess.InlineCodeBlock.ShouldNotBeNull();
+            builder.Error(handlerName);
+            ((ClientEvent)clientEvents["error"]).HandlerName.ShouldEqual(handlerName);
         }
 
         [Fact]
-        public void OnSuccess_with_Func_should_return_builder()
+        public void Error_with_string_should_return_builder()
         {
-            builder.OnSuccess(nullFunc).ShouldBeType<UploadClientEventsBuilder>();
+            builder.Error(handlerName).ShouldBeType<UploadClientEventsBuilder>();
         }
 
         [Fact]
-        public void OnSuccess_with_string_should_set_HandlerName()
+        public void Complete_with_Func_should_set_InlineCodeBlock()
         {
-            builder.OnSuccess(handlerName);
-            clientEvents.OnSuccess.HandlerName.ShouldEqual(handlerName);
+            builder.Complete(nullFunc);
+            clientEvents["complete"].ShouldNotBeNull();
         }
 
         [Fact]
-        public void OnSuccess_with_string_should_return_builder()
+        public void Complete_with_Func_should_return_builder()
         {
-            builder.OnSuccess(handlerName).ShouldBeType<UploadClientEventsBuilder>();
+            builder.Complete(nullFunc).ShouldBeType<UploadClientEventsBuilder>();
         }
 
         [Fact]
-        public void OnError_with_Action_should_set_CodeBlock()
+        public void Complete_with_string_should_set_HandlerName()
         {
-            builder.OnError(emptyAction);
-            clientEvents.OnError.CodeBlock.ShouldNotBeNull();
+            builder.Complete(handlerName);
+            ((ClientEvent)clientEvents["complete"]).HandlerName.ShouldEqual(handlerName);
         }
 
         [Fact]
-        public void OnError_with_Action_should_return_builder()
+        public void Complete_with_string_should_return_builder()
         {
-            builder.OnError(emptyAction).ShouldBeType<UploadClientEventsBuilder>();
+            builder.Complete(handlerName).ShouldBeType<UploadClientEventsBuilder>();
         }
 
         [Fact]
-        public void OnError_with_Func_should_set_InlineCodeBlock()
+        public void Cancel_with_Func_should_set_InlineCodeBlock()
         {
-            builder.OnError(nullFunc);
-            clientEvents.OnError.InlineCodeBlock.ShouldNotBeNull();
+            builder.Cancel(nullFunc);
+            clientEvents["cancel"].ShouldNotBeNull();
         }
 
         [Fact]
-        public void OnError_with_Func_should_return_builder()
+        public void Cancel_with_Func_should_return_builder()
         {
-            builder.OnError(nullFunc).ShouldBeType<UploadClientEventsBuilder>();
+            builder.Cancel(nullFunc).ShouldBeType<UploadClientEventsBuilder>();
         }
 
         [Fact]
-        public void OnError_with_string_should_set_HandlerName()
+        public void Cancel_with_string_should_set_HandlerName()
         {
-            builder.OnError(handlerName);
-            clientEvents.OnError.HandlerName.ShouldEqual(handlerName);
+            builder.Cancel(handlerName);
+            ((ClientEvent)clientEvents["cancel"]).HandlerName.ShouldEqual(handlerName);
         }
 
         [Fact]
-        public void OnError_with_string_should_return_builder()
+        public void Cancel_with_string_should_return_builder()
         {
-            builder.OnError(handlerName).ShouldBeType<UploadClientEventsBuilder>();
+            builder.Cancel(handlerName).ShouldBeType<UploadClientEventsBuilder>();
         }
 
         [Fact]
-        public void OnComplete_with_Action_should_set_CodeBlock()
+        public void Remove_with_Func_should_set_InlineCodeBlock()
         {
-            builder.OnComplete(emptyAction);
-            clientEvents.OnComplete.CodeBlock.ShouldNotBeNull();
+            builder.Remove(nullFunc);
+            clientEvents["remove"].ShouldNotBeNull();
         }
 
         [Fact]
-        public void OnComplete_with_Action_should_return_builder()
+        public void Remove_with_Func_should_return_builder()
         {
-            builder.OnComplete(emptyAction).ShouldBeType<UploadClientEventsBuilder>();
+            builder.Remove(nullFunc).ShouldBeType<UploadClientEventsBuilder>();
         }
 
         [Fact]
-        public void OnComplete_with_Func_should_set_InlineCodeBlock()
+        public void Remove_with_string_should_set_HandlerName()
         {
-            builder.OnComplete(nullFunc);
-            clientEvents.OnComplete.InlineCodeBlock.ShouldNotBeNull();
+            builder.Remove(handlerName);
+            ((ClientEvent)clientEvents["remove"]).HandlerName.ShouldEqual(handlerName);
         }
 
         [Fact]
-        public void OnComplete_with_Func_should_return_builder()
+        public void Remove_with_string_should_return_builder()
         {
-            builder.OnComplete(nullFunc).ShouldBeType<UploadClientEventsBuilder>();
-        }
-
-        [Fact]
-        public void OnComplete_with_string_should_set_HandlerName()
-        {
-            builder.OnComplete(handlerName);
-            clientEvents.OnComplete.HandlerName.ShouldEqual(handlerName);
-        }
-
-        [Fact]
-        public void OnComplete_with_string_should_return_builder()
-        {
-            builder.OnComplete(handlerName).ShouldBeType<UploadClientEventsBuilder>();
-        }
-
-        [Fact]
-        public void OnCancel_with_Action_should_set_CodeBlock()
-        {
-            builder.OnCancel(emptyAction);
-            clientEvents.OnCancel.CodeBlock.ShouldNotBeNull();
-        }
-
-        [Fact]
-        public void OnCancel_with_Action_should_return_builder()
-        {
-            builder.OnCancel(emptyAction).ShouldBeType<UploadClientEventsBuilder>();
-        }
-
-        [Fact]
-        public void OnCancel_with_Func_should_set_InlineCodeBlock()
-        {
-            builder.OnCancel(nullFunc);
-            clientEvents.OnCancel.InlineCodeBlock.ShouldNotBeNull();
-        }
-
-        [Fact]
-        public void OnCancel_with_Func_should_return_builder()
-        {
-            builder.OnCancel(nullFunc).ShouldBeType<UploadClientEventsBuilder>();
-        }
-
-        [Fact]
-        public void OnCancel_with_string_should_set_HandlerName()
-        {
-            builder.OnCancel(handlerName);
-            clientEvents.OnCancel.HandlerName.ShouldEqual(handlerName);
-        }
-
-        [Fact]
-        public void OnCancel_with_string_should_return_builder()
-        {
-            builder.OnCancel(handlerName).ShouldBeType<UploadClientEventsBuilder>();
-        }
-
-        [Fact]
-        public void OnRemove_with_Action_should_set_CodeBlock()
-        {
-            builder.OnRemove(emptyAction);
-            clientEvents.OnRemove.CodeBlock.ShouldNotBeNull();
-        }
-
-        [Fact]
-        public void OnRemove_with_Action_should_return_builder()
-        {
-            builder.OnRemove(emptyAction).ShouldBeType<UploadClientEventsBuilder>();
-        }
-
-        [Fact]
-        public void OnRemove_with_Func_should_set_InlineCodeBlock()
-        {
-            builder.OnRemove(nullFunc);
-            clientEvents.OnRemove.InlineCodeBlock.ShouldNotBeNull();
-        }
-
-        [Fact]
-        public void OnRemove_with_Func_should_return_builder()
-        {
-            builder.OnRemove(nullFunc).ShouldBeType<UploadClientEventsBuilder>();
-        }
-
-        [Fact]
-        public void OnRemove_with_string_should_set_HandlerName()
-        {
-            builder.OnRemove(handlerName);
-            clientEvents.OnRemove.HandlerName.ShouldEqual(handlerName);
-        }
-
-        [Fact]
-        public void OnRemove_with_string_should_return_builder()
-        {
-            builder.OnRemove(handlerName).ShouldBeType<UploadClientEventsBuilder>();
+            builder.Remove(handlerName).ShouldBeType<UploadClientEventsBuilder>();
         }
     }
 }
