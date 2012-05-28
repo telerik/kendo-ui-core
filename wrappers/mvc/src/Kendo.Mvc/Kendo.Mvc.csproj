@@ -311,6 +311,9 @@
     <Compile Include="UI\DataSource\DataSourceResult.cs" />
     <Compile Include="UI\DataSource\DataSourceSchema.cs" />
     <Compile Include="UI\DataSource\DataSourceType.cs" />
+    <Compile Include="UI\DataSource\Fluent\AjaxDataSourceBuilder.cs" />
+    <Compile Include="UI\DataSource\Fluent\ServerCrudOperationBuilder.cs" />
+    <Compile Include="UI\DataSource\Fluent\ServerDataSourceBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\DataSourceEventBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\DataSourceModelFieldDescriptorBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\DataSourceModelDescriptorFactory.cs" />

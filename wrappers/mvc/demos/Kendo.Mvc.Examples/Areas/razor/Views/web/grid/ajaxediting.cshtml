@@ -1,6 +1,4 @@
-@model IEnumerable<EditableProduct>
-
-@(Html.Kendo().Grid<EditableProduct>(Model)    
+@(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.EditableProduct>()    
     .Name("Grid")    
     .Columns(columns => {        
         columns.Bound(p => p.ProductName);
@@ -13,19 +11,12 @@
     .Pageable()
     .Sortable()
     .Scrollable()
-        .DataSource(dataSource => {            
-            dataSource.Model(model => model.Id(p => p.ProductID));
-            dataSource.Type(DataSourceType.Ajax);
-            
-            dataSource.ServerAggregates(false)
-                .ServerFiltering(false)
-                .ServerGrouping(false)
-                .ServerPaging(false)
-                .ServerSorting(false);
-            
-            dataSource.Read(read => read.Action("AjaxEditing_Read", "Grid"))
-                .Update(update => update.Action("AjaxEditing_Update", "Grid"))
-                .Create(update => update.Action("AjaxEditing_Create", "Grid"))
-                .Destroy(update => update.Action("AjaxEditing_Destroy", "Grid"));
-        })
+    .DataSource(dataSource => dataSource
+        .Ajax() 
+        .Model(model => model.Id(p => p.ProductID))
+        .Create(update => update.Action("AjaxEditing_Create", "Grid"))
+        .Read(read => read.Action("AjaxEditing_Read", "Grid"))
+        .Update(update => update.Action("AjaxEditing_Update", "Grid"))
+        .Destroy(update => update.Action("AjaxEditing_Destroy", "Grid"))
+    )
 )

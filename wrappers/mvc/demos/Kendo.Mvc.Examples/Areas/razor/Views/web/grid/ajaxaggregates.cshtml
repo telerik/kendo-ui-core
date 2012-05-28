@@ -17,7 +17,7 @@
     .Scrollable()
     .Sortable()        
     .DataSource(dataSource => dataSource
-        .Type(DataSourceType.Ajax)
+        .Ajax()
         .Aggregates(aggregates =>
         {
             aggregates.Add(p => p.UnitsInStock).Min().Max().Count();

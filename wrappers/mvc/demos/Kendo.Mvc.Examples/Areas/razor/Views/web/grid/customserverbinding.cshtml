@@ -15,5 +15,5 @@
     .Filterable()
     .Scrollable()
     .Groupable()
-    .DataSource(dataSource => dataSource.Total((int)ViewData["total"]))
+    .DataSource(dataSource => dataSource.Server().Total((int)ViewData["total"]))
 )

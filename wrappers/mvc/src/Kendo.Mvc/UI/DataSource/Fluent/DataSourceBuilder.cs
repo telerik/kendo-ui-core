@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Mvc;
-using Kendo.Mvc.Infrastructure;
 
 namespace Kendo.Mvc.UI.Fluent
 {
     public class DataSourceBuilder<TModel> : IHideObjectMembers
         where TModel : class
     {
-        private readonly DataSource dataSource;
-        private readonly IUrlGenerator urlGenerator;
-        private readonly ViewContext viewContext;
+        protected readonly DataSource dataSource;
+        protected readonly IUrlGenerator urlGenerator;
+        protected readonly ViewContext viewContext;
 
         public DataSourceBuilder(DataSource dataSource, ViewContext viewContext, IUrlGenerator urlGenerator)
         {
@@ -19,169 +18,18 @@ namespace Kendo.Mvc.UI.Fluent
             this.dataSource = dataSource;
         }
 
-        public DataSourceBuilder<TModel> Events(Action<DataSourceEventBuilder> configurator)
+        public AjaxDataSourceBuilder<TModel> Ajax()
         {
-            configurator(new DataSourceEventBuilder(dataSource.Events));
+            dataSource.Type = DataSourceType.Ajax;
 
-            return this;
+            return new AjaxDataSourceBuilder<TModel>(dataSource, viewContext, urlGenerator);
         }
 
-        public DataSourceBuilder<TModel> Read(Action<CrudOperationBuilder> configurator)
+        public ServerDataSourceBuilder<TModel> Server()
         {
-            configurator(new CrudOperationBuilder(dataSource.Transport.Read, viewContext, urlGenerator));
+            dataSource.Type = DataSourceType.Ajax;
 
-            return this;
-        }
-
-        public DataSourceBuilder<TModel> Total(int total)
-        {
-            dataSource.Total = total;
-
-            return this;
-        }
-
-        public DataSourceBuilder<TModel> Update(Action<CrudOperationBuilder> configurator)
-        {
-            configurator(new CrudOperationBuilder(dataSource.Transport.Update, viewContext, urlGenerator));
-
-            return this;
-        }
-
-        public DataSourceBuilder<TModel> Create(Action<CrudOperationBuilder> configurator)
-        {
-            configurator(new CrudOperationBuilder(dataSource.Transport.Create, viewContext, urlGenerator));
-
-            return this;
-        }
-
-        public DataSourceBuilder<TModel> Destroy(Action<CrudOperationBuilder> configurator)
-        {
-            configurator(new CrudOperationBuilder(dataSource.Transport.Destroy, viewContext, urlGenerator));
-
-            return this;
-        }
-
-        public DataSourceBuilder<TModel> Type(DataSourceType type)
-        {
-            dataSource.Type = type;
-
-            return this;
-        }
-
-        public DataSourceBuilder<TModel> PageSize(int pageSize)
-        {
-            dataSource.PageSize = pageSize;
-            return this;
-        }
-
-        public DataSourceBuilder<TModel> ServerPaging(bool enabled)
-        {
-            dataSource.ServerPaging = enabled;
-            return this;
-        }
-
-        public DataSourceBuilder<TModel> ServerPaging()
-        {
-            dataSource.ServerPaging = true;
-            return this;
-        }
-
-        public DataSourceBuilder<TModel> ServerGrouping(bool enabled)
-        {
-            dataSource.ServerGrouping = enabled;
-            return this;
-        }
-
-        public DataSourceBuilder<TModel> ServerGrouping()
-        {
-            dataSource.ServerGrouping = true;
-            return this;
-        }
-
-        public DataSourceBuilder<TModel> ServerAggregates(bool enabled)
-        {
-            dataSource.ServerAggregates = enabled;
-            return this;
-        }
-
-        public DataSourceBuilder<TModel> ServerAggregates()
-        {
-            dataSource.ServerAggregates = true;
-            return this;
-        }
-
-        public DataSourceBuilder<TModel> ServerSorting(bool enabled)
-        {
-            dataSource.ServerSorting = enabled;
-            return this;
-        }
-
-        public DataSourceBuilder<TModel> ServerSorting()
-        {
-            dataSource.ServerSorting = true;
-            return this;
-        }
-
-        public DataSourceBuilder<TModel> ServerFiltering()
-        {
-            dataSource.ServerFiltering = true;
-            return this;
-        }
-
-        public DataSourceBuilder<TModel> ServerFiltering(bool enabled)
-        {
-            dataSource.ServerFiltering = enabled;
-            return this;
-        }
-        
-        /// <summary>
-        /// Configures the initial sort order.
-        /// </summary>
-        /// <param name="configurator">The configurator.</param>
-        /// <returns></returns>
-        public virtual DataSourceBuilder<TModel> Sort(Action<DataSourceSortDescriptorFactory<TModel>> configurator)
-        {
-            Guard.IsNotNull(configurator, "configurator");
-
-            configurator(new DataSourceSortDescriptorFactory<TModel>(dataSource.OrderBy));
-
-            return this;
-        }
-
-        public DataSourceBuilder<TModel> Group(Action<DataSourceGroupDescriptorFactory<TModel>> configurator)
-        {
-            Guard.IsNotNull(configurator, "configurator");
-
-            configurator(new DataSourceGroupDescriptorFactory<TModel>(dataSource.Groups));
-
-            return this;
-        }
-
-        public DataSourceBuilder<TModel> Aggregates(Action<DataSourceAggregateDescriptorFactory<TModel>> aggregates)
-        {
-            Guard.IsNotNull(aggregates, "aggregates");   
-
-            aggregates(new DataSourceAggregateDescriptorFactory<TModel>(dataSource.Aggregates));
-
-            return this;
-        }
-
-        public virtual DataSourceBuilder<TModel> Filter(Action<DataSourceFilterDescriptorFactory<TModel>> configurator)
-        {
-            Guard.IsNotNull(configurator, "configurator");                        
-
-            configurator(new DataSourceFilterDescriptorFactory<TModel>(dataSource.Filters));
-
-            return this;
-        }
-
-        public DataSourceBuilder<TModel> Model(Action<DataSourceModelDescriptorFactory<TModel>> configurator)
-        {
-            Guard.IsNotNull(configurator, "configurator");            
-
-            configurator(new DataSourceModelDescriptorFactory<TModel>(dataSource.Schema.Model));
-
-            return this;
+            return new ServerDataSourceBuilder<TModel>(dataSource, viewContext, urlGenerator);
         }
     }
 }
