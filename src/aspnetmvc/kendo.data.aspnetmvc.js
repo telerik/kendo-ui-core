@@ -5,32 +5,46 @@
     function parameterMap(options, operation) {
        var result = {};
 
-       result[this.options.prefix + "orderBy"] = $.map(options.sort || [], function(sort) {
-           return sort.field + "-" + sort.dir;
-       }).join("~");
+       if (options.sort) {
+           result[this.options.prefix + "orderBy"] = $.map(options.sort, function(sort) {
+               return sort.field + "-" + sort.dir;
+           }).join("~");
+
+           delete options.sort;
+       }
 
        if (options.page) {
            result[this.options.prefix + "page"] = options.page;
+
+           delete options.page;
        }
 
        if (options.pageSize) {
            result[this.options.prefix + "pageSize"] = options.pageSize;
+
+           delete options.pageSize;
        }
 
        if (options.group) {
             result[this.options.prefix + "groupBy"] = $.map(options.group, function(group) {
                return group.field + "-" + group.dir;
            }).join("~");
+
+           delete options.group;
        }
 
        if (options.aggregate) {
            result[this.options.prefix + "aggregates"] =  $.map(options.aggregate, function(aggregate) {
                return aggregate.field + "-" + aggregate.aggregate;
            }).join("~");
+
+           delete options.aggregate;
        }
 
        if (options.filter) {
            result[this.options.prefix + "filter"] = serializeFilter(options.filter);
+
+           delete options.filter;
        } else {
            result[this.options.prefix + "filter"] = "";
        }
@@ -56,14 +70,16 @@
                    }
                }
            }
+
+           delete options.models;
        }
 
-       return result;
+       return $.extend(result, options);
     }
 
     function convert(values) {
         for (var key in values) {
-            var value = values[key], column, format;
+            var value = values[key];
 
             if (value instanceof Date) {
                 values[key] = kendo.format("{0:G}", value);
