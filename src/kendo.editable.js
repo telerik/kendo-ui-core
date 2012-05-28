@@ -16,6 +16,21 @@
         return field.type || $.type(field) || "string";
     }
 
+    function convertToValueBinding(container) {
+        container.find(":input:not(:button), select").each(function() {
+            var bindAttr = kendo.attr("bind"),
+                binding = this.getAttribute(bindAttr) || "",
+                bindingName = this.type === "checkbox" ? "checked:" : "value:",
+                fieldName = this.name;
+
+            if (binding.indexOf(bindingName) === -1 && fieldName) {
+                binding += (binding.length ? "," : "") + bindingName + fieldName;
+
+                $(this).attr(bindAttr, binding);
+            }
+        });
+    }
+
     function createAttributes(options) {
         var field = (options.model.fields || options.model)[options.field],
             type = fieldType(field),
@@ -114,20 +129,6 @@
 
                 container = container.length ? container : that.element;
                 editor(container, extend(true, {}, isObject ? field : { field: fieldName }, { model: model }));
-
-                if (isCustomEditor) {
-                    container.find(":input:not(:button), select").each(function() {
-                        var bindAttr = kendo.attr("bind"),
-                            binding = this.getAttribute(bindAttr) || "",
-                            bindingName = type === "boolean" ? "checked:" : "value:";
-
-                        if (binding.indexOf(bindingName) === -1) {
-                            binding += (binding.length ? "," : "") + bindingName + fieldName;
-
-                            $(this).attr(bindAttr, binding);
-                        }
-                    });
-                }
            }
         },
 
@@ -195,6 +196,8 @@
                 that.editor(field, modelField);
             }
 
+            convertToValueBinding(container);
+
             kendo.bind(container, that.options.model);
 
             that.options.model.bind("set", that._validateProxy);
@@ -202,7 +205,7 @@
             that.validatable = container.kendoValidator({
                 validateOnBlur: false,
                 errorTemplate: that.options.errorTemplate || undefined,
-               rules: rules }).data("kendoValidator");
+                rules: rules }).data("kendoValidator");
 
             container.find(":input:visible:first").focus();
         }
