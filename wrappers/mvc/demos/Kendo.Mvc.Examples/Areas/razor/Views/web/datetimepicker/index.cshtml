@@ -1,26 +1,22 @@
-
-        <div id="example" class="k-content">
-            <div id="email-settings">
-                <div style="margin-top: -6px; margin-left: 180px">
-                    <input id="datetimepicker" value="10/10/2011 12:00 AM" style="width:200px;" />
-                </div>
-            </div>
-        <script>
-            $(document).ready(function() {
-                // create DateTimePicker from input HTML element
-                $("#datetimepicker").kendoDateTimePicker();
-            });
-        </script>
-        <style scoped>
-            #example h2 {
-                font-weight: normal;
-            }
-            #email-settings {
-                height: 135px;
-                width: 395px;
-                margin: 30px auto;
-                padding: 110px 0 0 30px;
-                background: url('../../content/web/datepicker/mailSettings.png') transparent no-repeat 0 0;
-            }
-        </style>
-        </div>
+<div id="email-settings">
+    <div style="margin-top: -17px; margin-left: 180px">
+        @(Html.Kendo().DateTimePicker()
+              .Name("datetimepicker")
+              .Value(DateTime.Now)
+              .HtmlAttributes(new { style = "width:185px" })
+        )
+    </div>
+</div>
+<style scoped>
+    #example h2 {
+        font-weight: normal;
+    }
+    #email-settings {
+        height: 135px;
+        width: 395px;
+        margin: 30px auto;
+        padding: 110px 0 0 30px;
+        background: url('@Url.Content("~/Content/web/datetimepicker/datetimepicker-back.png")') transparent no-repeat 0 0;
+    }
+    
+</style>

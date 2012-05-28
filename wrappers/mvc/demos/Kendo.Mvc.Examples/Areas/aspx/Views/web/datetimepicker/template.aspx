@@ -1,3 +1,10 @@
+<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/Web.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+
 <div class="configuration k-widget k-header">
     <span class="infoHead">Information</span>
     <p>
@@ -5,7 +12,7 @@
     </p>
 </div>
 
-@{
+<%
     var dates = new List<long>()
     {
         new DateTime(DateTime.Today.Year, DateTime.Today.Month, 11).Ticks,
@@ -14,10 +21,10 @@
         new DateTime(DateTime.Today.Year, DateTime.Today.Month - 1, 3).Ticks,
         new DateTime(DateTime.Today.Year, DateTime.Today.Month - 2, 22).Ticks
     };
-}
+%>
 
 <div class="demo-section" style="width:155px">
-@(Html.Kendo().DateTimePicker()
+<%= Html.Kendo().DateTimePicker()
       .Name("datetimepicker")
       .Value(DateTime.Today)
       .Footer("Today - #=kendo.toString(data, 'd') #")
@@ -25,7 +32,7 @@
                          "<div class=\"birthday\"></div>" +
                      "# } #" +
                      "#= data.value #")
-)
+%>
 </div>
 
 <script>
@@ -46,3 +53,4 @@
         margin-right: 3px;
     }
 </style>
+</asp:Content>
