@@ -759,7 +759,6 @@ namespace Kendo.Mvc.UI
             }
 
             //TODO: Serialize editing
-            //TODO: Client Operation Mode
             //TODO: Localization
             //TODO: No records template
 

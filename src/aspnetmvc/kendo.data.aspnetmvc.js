@@ -128,22 +128,6 @@
        return value;
     }
 
-    kendo.data.transports["aspnetmvc-ajax"] = {
-        read: {
-            type: "POST"
-        },
-        update: {
-            type: "POST"
-        },
-        create: {
-            type: "POST"
-        },
-        destroy: {
-            type: "POST"
-        },
-        parameterMap: parameterMap,
-        prefix: ""
-    };
 
     function translateGroup(group) {
        return {
@@ -201,6 +185,35 @@
             return result;
         }
     };
+
+    kendo.data.transports["aspnetmvc-ajax"] = kendo.data.RemoteTransport.extend({
+        init: function(options) {
+            kendo.data.RemoteTransport.fn.init.call(this, $.extend(true, {}, options, this.options));
+        }, 
+        read: function(options) {
+            if (this.options.data) {
+                options.success(this.options.data);
+            } else {
+                kendo.data.RemoteTransport.fn.read.call(this, options);
+            }
+        },
+        options: {
+            read: {
+                type: "POST"
+            },
+            update: {
+                type: "POST"
+            },
+            create: {
+                type: "POST"
+            },
+            destroy: {
+                type: "POST"
+            },
+            parameterMap: parameterMap,
+            prefix: ""
+        }
+    });
 
     kendo.data.transports["aspnetmvc-server"] = kendo.data.RemoteTransport.extend({
         init: function(options) {

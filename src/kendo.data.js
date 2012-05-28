@@ -1440,7 +1440,7 @@
 
                 if (options.type) {
                     if (!isPlainObject(kendo.data.transports[options.type])) {
-                       that.transport = new kendo.data.transports[options.type](transport);
+                       that.transport = new kendo.data.transports[options.type](extend(transport, { data: options.data }));
                     } else {
                         transport = extend(true, {}, kendo.data.transports[options.type], transport);
                     }

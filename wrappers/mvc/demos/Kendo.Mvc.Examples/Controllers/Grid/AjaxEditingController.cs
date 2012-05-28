@@ -12,7 +12,7 @@ namespace Kendo.Mvc.Examples.Controllers
     {
         public ActionResult AjaxEditing()
         {
-            return View();
+            return View(SessionProductRepository.All());
         }
 
         public ActionResult AjaxEditing_Read([DataSourceRequest] DataSourceRequest request)
