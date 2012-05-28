@@ -98,6 +98,33 @@ namespace Kendo.Mvc.Infrastructure.Implementation.Tests
         }
 
         [Fact]
+        public void Should_serialize_decimal()
+        {
+            decimal foo = 12.3M;
+            data["foo"] = foo;
+
+            initializer.Serialize(data).ShouldEqual("{foo:12.3}");
+        }
+
+        [Fact]
+        public void Should_serialize_double()
+        {
+            double foo = 12.3;
+            data["foo"] = foo;
+
+            initializer.Serialize(data).ShouldEqual("{foo:12.3}");
+        }
+
+        [Fact]
+        public void Should_serialize_float()
+        {
+            float foo = 12.3f;
+            data["foo"] = foo;
+
+            initializer.Serialize(data).ShouldEqual("{foo:12.3}");
+        }
+
+        [Fact]
         public void Should_serialize_date()
         {
             data["foo"] = new DateTime(2000, 1, 1, 1, 1, 1, 1);
