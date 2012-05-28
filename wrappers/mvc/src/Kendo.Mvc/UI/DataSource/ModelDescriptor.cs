@@ -6,6 +6,7 @@
     using System.Linq;
     using System.Web.Mvc;
     using Extensions;
+    using Kendo.Mvc.Infrastructure;
 
     public class ModelDescriptor : JsonObject
     {
@@ -17,6 +18,19 @@
 
         public IList<ModelFieldDescriptor> Fields { get; private set; }
         public IDataKey Id { get; set; }
+
+        public ModelFieldDescriptor AddDescriptor(string member)
+        {
+            Guard.IsNotNullOrEmpty(member, "Member cannot be empty");
+
+            var existing = Fields.FirstOrDefault(f => f.Member == member);
+            if (existing != null)
+            {
+                return existing;
+            }
+
+            return new ModelFieldDescriptor { Member = member };
+        }
 
         protected override void Serialize(IDictionary<string, object> json)
         {
@@ -55,7 +69,7 @@
                     MemberType = p.ModelType,
                     IsEditable = !p.IsReadOnly
                 }).ToList();            
-        }
+        }        
 
         private object CreateDataItem(Type modelType)
         {
