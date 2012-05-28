@@ -177,6 +177,20 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
+        public void Should_not_serialize_Skip_if_not_set()
+        {
+            GetJson().ContainsKey("skip").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void Should_serialize_Skip_if_set()
+        {
+            labels.Skip = 2;
+
+            GetJson().ContainsKey("skip").ShouldBeTrue();
+        }
+
+        [Fact]
         public void Serializes_Opacity()
         {
             labels.Opacity = 0.5;

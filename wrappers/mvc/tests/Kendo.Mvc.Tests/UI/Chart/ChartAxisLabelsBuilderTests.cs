@@ -132,6 +132,19 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
+        public void Skip_should_set_skip()
+        {
+            builder.Skip(2);
+            labels.Skip.ShouldEqual(2);
+        }
+
+        [Fact]
+        public void Skip_should_return_builder()
+        {
+            builder.Skip(2).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
         public void Opacity_sets_Opacity()
         {
             builder.Opacity(0.5);
