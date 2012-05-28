@@ -31,6 +31,15 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// Label rendering skip. Skips rendering the first n labels.
+        /// </summary>
+        public int? Skip
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Creates a serializer
         /// </summary>
         public override IChartSerializer CreateSerializer()

@@ -19,7 +19,8 @@ namespace Kendo.Mvc.UI
 
             FluentDictionary.For(result)
                 .Add("mirror", axisLabels.Mirror, () => axisLabels.Mirror.HasValue)
-                .Add("step", axisLabels.Step, () => axisLabels.Step.HasValue);
+                .Add("step", axisLabels.Step, () => axisLabels.Step.HasValue)
+                .Add("skip", axisLabels.Skip, () => axisLabels.Skip.HasValue);
 
             return result;
         }

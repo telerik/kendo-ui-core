@@ -65,5 +65,27 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        /// <summary>
+        /// Label rendering skip.
+        /// </summary>
+        /// <param name="skip">Skips rendering the first n labels.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .CategoryAxis(axis => axis
+        ///                .Categories(product => product.Name)
+        ///                .Labels(labels => labels.Skip(2))
+        ///            )
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartAxisLabelsBuilder Skip(int skip)
+        {
+            labels.Skip = skip;
+
+            return this;
+        }
     }
 }

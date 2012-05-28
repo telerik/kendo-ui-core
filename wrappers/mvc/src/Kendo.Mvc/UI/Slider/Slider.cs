@@ -132,25 +132,5 @@ namespace Kendo.Mvc.UI
 
             base.WriteHtml(writer);
         }
-
-        public override void VerifySettings()
-        {
-            base.VerifySettings();
-
-            if (Min.CompareTo(Max) >= 0)
-            {
-                throw new ArgumentException(TextResource.MinPropertyMustBeLessThenMaxProperty.FormatWith("Min", "Max"));
-            }
-
-            if (SmallStep.CompareTo((T)Convert.ChangeType(0, typeof(T))) <= 0)
-            {
-                throw new ArgumentException(TextResource.PropertyMustBeBiggerThenZero.FormatWith("SmallStep"));
-            }
-
-            if (SmallStep.CompareTo(LargeStep) > 0)
-            {
-                throw new ArgumentException(TextResource.FirstPropertyShouldNotBeBiggerThenSecondProperty.FormatWith("SmallStep", "LargeStep"));
-            }
-        }
     }
 }
