@@ -129,7 +129,7 @@
 
 .km-blackberry .km-content .km-button
 {
-    padding: .3rem 2rem;
+    padding: .5rem 2rem;
 }
 
 .km-blackberry6 .km-content .km-button,
@@ -339,6 +339,11 @@
 .km-blackberry .km-list a:not(.km-button)
 {
     color: #000;
+}
+
+.km-blackberry .km-list .km-button
+{
+    line-height: 1.2em;
 }
 
 .km-blackberry .km-group-title
@@ -881,14 +886,13 @@
     background: none;
 }
 
-.km-blackberry .km-shim > .k-animation-container
+.km-blackberry.km-phone .km-actionsheet-wrapper
 {
-    height: 100% !important;
+    background: rgba(0,0,0,.5);
 }
 
 .km-blackberry .km-actionsheet-wrapper
 {
-    background: rgba(0,0,0,.5);
     left: 0;
     top: 0;
     width: 100%;
@@ -904,7 +908,6 @@
     display: inline-block;
     max-height: 80%;
     border: 0;
-    padding: 0;
     background-color: #e6e6e6;
     color: #fff;
     vertical-align: middle;
@@ -998,7 +1001,8 @@
 
 /* PopOver */
 
-.km-blackberry .km-popup-wrapper
+.km-blackberry .km-popup-wrapper,
+.km-blackberry .km-modalview-wrapper
 {
     padding: 10px;
 }
@@ -1009,8 +1013,10 @@
     height: 10px;
 }
 
-.km-blackberry .km-popup.km-pane
+.km-blackberry .km-popup.km-pane,
+.km-blackberry.km-tablet .km-actionsheet-wrapper
 {
+    .box-sizing(border-box);
     background: #3E8EC3;
     border: 3px solid transparent;
     .border-radius(4px);
@@ -1084,8 +1090,72 @@
     border-width: 10px 10px 10px 0;
 }
 
+.km-blackberry.km-tablet .km-actionsheet,
 .km-blackberry .km-popup.km-pane .km-content
 {
     background-image: linear-gradient(top, rgba(0,0,0,.2), rgba(0,0,0,0) 10%);
     border: 1px solid rgba(255,255,255,.7);
 }
+
+/* ModalView */
+
+.km-blackberry .km-modalview
+{
+    background-color: #7185a2;
+    .box-sizing(border-box);
+    .box-shadow(~"0 0 15px rgba(0,0,0,.5), 0 0 2px rgba(0,0,0,.5)");
+}
+
+.km-blackberry .km-modalview .km-header
+{
+    padding: 0;
+    margin: -1px 0 0;
+}
+
+.km-blackberry .km-modalview > :first-child
+{
+    border: 0;
+}
+
+/* Tablet Styles */
+
+.km-blackberry.km-tablet .km-actionsheet
+{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    .border-radius(0);
+}
+
+.km-blackberry.km-tablet .km-actionsheet-title,
+.km-blackberry.km-tablet li.km-actionsheet-cancel
+{
+    display: none;
+}
+
+.km-blackberry.km-tablet .km-popup-arrow:after
+{
+    border-color: #306E97 transparent;
+}
+
+.km-blackberry.km-tablet .km-left .km-popup-arrow:after,
+.km-blackberry.km-tablet .km-right .km-popup-arrow:after
+{
+    border-color: transparent #306E97;
+}
+
+.km-blackberry.km-tablet .km-actionsheet > li:not(.km-actionsheet-cancel) > a
+{
+    .border-radius(0);
+}
+
+.km-blackberry.km-tablet .km-actionsheet > li:not(.km-actionsheet-cancel) > a:hover,
+.km-blackberry.km-tablet .km-actionsheet > li:not(.km-actionsheet-cancel) > a:focus,
+.km-blackberry.km-tablet .km-actionsheet > li:not(.km-actionsheet-cancel) > a:active
+{
+    color: #fff;
+    background: #0868b2 linear-gradient(top, rgba(255,255,255,.3), rgba(255,255,255,0));
+}
+
