@@ -1013,6 +1013,25 @@ div.k-grid-header .k-header
     zoom: 1;
 }
 
+@media print 
+{
+    .k-grid
+    {
+        height:auto !important;
+    }
+    
+    .k-grid-header
+    {
+        padding:0 !important;
+    }
+    
+    .k-grid-content
+    {
+        overflow: visible;
+        height: auto !important;
+    }
+}
+
 .k-virtual-scrollable-wrap
 {
     height: 100%;
