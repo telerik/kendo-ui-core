@@ -1,0 +1,27 @@
+<div class="demo-section" style="width: 250px;">
+    <label for="products">Select product:</label>
+
+    @(Html.Kendo().ComboBox()
+          .Name("products")
+          .DataTextField("ProductName")
+          .DataValueField("ProductID")
+          .Filter("contains")
+          .DataSource(source => {
+              source.Read(read =>
+              {
+                  read.Action("GetProducts", "Home")
+                      .Data("onAdditionalData");
+              })
+              .ServerFiltering(true);
+          })
+    )
+</div>
+<script>
+    function onAdditionalData() {
+        var combobox = $("#products").data("kendoComboBox");
+
+        return {
+            filterText: combobox.input.val() 
+        };
+    }
+</script>

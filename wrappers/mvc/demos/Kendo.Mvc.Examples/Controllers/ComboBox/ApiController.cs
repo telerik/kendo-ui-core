@@ -4,7 +4,7 @@
 
     public partial class ComboBoxController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Api()
         {
             return View();
         }
