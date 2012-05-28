@@ -91,6 +91,7 @@
     <Compile Include="Controllers\ComboBox\EventsController.cs" />
     <Compile Include="Controllers\ComboBox\ServerFilteringController.cs" />
     <Compile Include="Controllers\ComboBox\TemplateController.cs" />
+    <Compile Include="Controllers\Chart\Area_ChartController.cs" />
     <Compile Include="Controllers\ComboBox\IndexController.cs" />
     <Compile Include="Controllers\AutoComplete\IndexController.cs" />
     <Compile Include="Controllers\DatePicker\ApiController.cs" />
@@ -106,8 +107,8 @@
     <Compile Include="Controllers\DropDownList\TemplateController.cs" />
     <Compile Include="Controllers\DropDownList\RemoteDataSourceController.cs" />
     <Compile Include="Controllers\DropDownList\IndexController.cs" />
-    <Compile Include="Controllers\ChartController.cs" />
     <Compile Include="Controllers\Editor\EditorController.cs" />
+    <Compile Include="Controllers\Chart\ChartController.cs" />
     <Compile Include="Controllers\Linear_Gauge\IndexController.cs" />
     <Compile Include="Controllers\Linear_Gauge\ScaleOptoinsController.cs" />
     <Compile Include="Controllers\Grid\AjaxEditingController.cs" />
@@ -179,6 +180,8 @@
     <Compile Include="Helpers\KendoWebFormViewEngine.cs" />
     <Compile Include="Models\Config.cs" />
     <Compile Include="Helpers\HyphenatedRouteHandler.cs" />
+    <Compile Include="Models\InternetUsersRepository.cs" />
+    <Compile Include="Models\InternetUsers.cs" />
     <Compile Include="Models\SpainElectricityStats.cs" />
     <Compile Include="Models\ElectricityProduction.cs" />
     <Compile Include="Models\NavigationItem.cs" />
@@ -200,6 +203,7 @@
     <Content Include="App_Data\Northwind_log.ldf">
       <DependentUpon>Northwind.mdf</DependentUpon>
     </Content>
+    <Content Include="Areas\aspx\Views\dataviz\area_chart\local_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\area_chart\remote_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\linear_gauge\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\linear_gauge\scale_options.aspx" />
@@ -441,6 +445,7 @@
     <Content Include="Areas\aspx\Views\web\menu\sitemapbinding.aspx" />
     <Content Include="Areas\razor\Views\web\grid\serverhierarchy.cshtml" />
     <Content Include="Areas\razor\Views\web\grid\serverdetails.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\area_chart\local_data.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
