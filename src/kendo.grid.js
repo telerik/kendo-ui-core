@@ -446,7 +446,12 @@
                 table = that.element;
 
             if (!table.is("table")) {
-                table = that.element.find("> .k-grid-content > table");
+                if (that.options.scrollable) {
+                    table = that.element.find("> .k-grid-content > table");
+                } else {
+                    table = that.element.children("table");
+                }
+
                 if (!table.length) {
                     table = $("<table />").appendTo(that.element);
                 }
