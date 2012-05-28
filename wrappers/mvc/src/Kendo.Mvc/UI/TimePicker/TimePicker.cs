@@ -47,8 +47,11 @@ namespace Kendo.Mvc.UI
             {
                 options["animation"] = animation["animation"];
             }
-            
-            options["format"] = Format;
+
+            if (!string.IsNullOrEmpty(Format))
+            {
+                options["format"] = Format;
+            }
 
             if (ParseFormats.Any())
             {

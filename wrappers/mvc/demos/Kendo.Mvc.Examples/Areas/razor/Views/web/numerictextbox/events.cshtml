@@ -1,16 +1,16 @@
 @(Html.Kendo().NumericTextBox()
         .Name("numerictextbox")
         .ClientEvents(e => e
-             .Change("onChange")
-             .Spin("onSpin")
+             .Change("change")
+             .Spin("spin")
         )
 )
 <script>
-    function onChange() {
+    function change() {
         kendoConsole.log("Change :: " + this.value());
     }
 
-    function onSpin() {
+    function spin() {
         kendoConsole.log("Spin :: " + this.value());
     }
 </script>

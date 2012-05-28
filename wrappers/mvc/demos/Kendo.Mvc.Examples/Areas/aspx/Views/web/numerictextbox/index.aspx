@@ -45,7 +45,7 @@
         width: 252px;
         margin: 30px auto;
         padding: 64px 0 0 143px;
-        background: url('../../content/web/numerictextbox/addProduct.png') transparent no-repeat 0 0;
+        background: url('/Content/web/numerictextbox/addProduct.png') transparent no-repeat 0 0;
     }
 </style>
 </asp:Content>

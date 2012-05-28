@@ -14,8 +14,8 @@ namespace Kendo.Mvc.UI
 
     public class NumericTextBox<T> : ViewComponentBase, IInputComponent<T> where T : struct
     {
-        public NumericTextBox(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory, ViewDataDictionary viewData)
-            : base(viewContext, clientSideObjectWriterFactory, viewData)
+        public NumericTextBox(ViewContext viewContext, IJavaScriptInitializer javaScriptInitializer, ViewDataDictionary viewData)
+            : base(viewContext, javaScriptInitializer, viewData)
         {
             ClientEvents = new Dictionary<string, object>();
 
@@ -91,12 +91,31 @@ namespace Kendo.Mvc.UI
         public override void WriteInitializationScript(TextWriter writer)
         {
             var options = new Dictionary<string, object>(ClientEvents);
-            
-            options["format"] = this.Format;
-            options["culture"] = this.Culture;
-            options["placeholder"] = this.Placeholder;
-            options["spinners"] = this.Spinners;
-            options["decimals"] = this.Decimals;
+
+            if (Format.HasValue())
+            {
+                options["format"] = Format;
+            }
+
+            if (Culture.HasValue())
+            {
+                options["culture"] = Culture;
+            }
+
+            if (Placeholder.HasValue())
+            {
+                options["placeholder"] = Placeholder;
+            }
+
+            if (Spinners != null)
+            {
+                options["spinners"] = Spinners;
+            }
+
+            if (Decimals != null)
+            {
+                options["decimals"] = Decimals;
+            }
 
             writer.Write(Initializer.Initialize(Id, "NumericTextBox", options));
 
