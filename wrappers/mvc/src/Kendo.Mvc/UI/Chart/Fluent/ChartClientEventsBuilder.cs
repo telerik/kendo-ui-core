@@ -1,58 +1,30 @@
 namespace Kendo.Mvc.UI.Fluent
 {
     using System;
-    using Infrastructure;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="ChartClientEvents"/>.
     /// </summary>
-    public class ChartClientEventsBuilder : IHideObjectMembers
+    public class ChartClientEventsBuilder : EventBuilder
     {
-        private readonly ChartClientEvents events;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartClientEventsBuilder" /> class.
         /// </summary>
-        /// <param name="clientEvents">The client events.</param>
-        public ChartClientEventsBuilder(ChartClientEvents clientEvents)
+        /// <param name="events">The client events.</param>
+        public ChartClientEventsBuilder(IDictionary<string, object> events) : base(events)
         {
-            events = clientEvents;
         }
 
         /// <summary>
-        /// Defines the inline handler of the OnDataBound client-side event
-        /// </summary>
-        /// <param name="codeBlock">The action defining the inline handler.</param>
-        /// <example>
-        /// <code lang="CS">
-        /// &lt;% Html.Kendo().Chart()
-        ///           .Name("Chart")
-        ///           .ClientEvents(events => events.OnDataBound(() =>
-        ///           {
-        ///                %&gt;
-        ///                function(e) {
-        ///                    //event handling code
-        ///                }
-        ///                &lt;%
-        ///           }))
-        ///           .Render();
-        /// %&gt;
-        /// </code>
-        /// </example>        
-        public ChartClientEventsBuilder OnDataBound(Action codeBlock)
-        {
-            return CodeBlock(events.OnDataBound, codeBlock);
-        }
-
-        /// <summary>
-        /// Defines the inline handler of the OnDataBound client-side event
+        /// Defines the inline handler of the DataBound client-side event
         /// </summary>
         /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
-        ///           .ClientEvents(events => events.OnDataBound(
+        ///           .ClientEvents(events => events.DataBound(
         ///                @&lt;text&gt;
         ///                function(e) {
         ///                    //event handling code
@@ -63,62 +35,41 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public ChartClientEventsBuilder OnDataBound(Func<object, object> inlineCodeBlock)
+        public ChartClientEventsBuilder DataBound(Func<object, object> inlineCodeBlock)
         {
-            return InlineCodeBlock(events.OnDataBound, inlineCodeBlock);
+            Handler("dataBound", inlineCodeBlock);
+
+            return this;
         }
 
         /// <summary>
-        ///  Defines the name of the JavaScript function that will handle the the OnDataBound client-side event.
+        ///  Defines the name of the JavaScript function that will handle the the DataBound client-side event.
         /// </summary>
         /// <param name="onDataBoundHandlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;%= Html.Kendo().Chart()
         ///            .Name("Chart")
-        ///            .ClientEvents(events => events.OnDataBound("onDataBound"))
+        ///            .ClientEvents(events => events.DataBound("onDataBound"))
         /// %&gt;
         /// </code>
         /// </example>
-        public ChartClientEventsBuilder OnDataBound(string onDataBoundHandlerName)
+        public ChartClientEventsBuilder DataBound(string onDataBoundHandlerName)
         {
-            return HandlerName(events.OnDataBound, onDataBoundHandlerName);
+            Handler("dataBound", onDataBoundHandlerName);
+
+            return this;
         }
 
         /// <summary>
-        /// Defines the inline handler of the OnDataBinding client-side event
-        /// </summary>
-        /// <param name="codeBlock">The action defining the inline handler.</param>
-        /// <example>
-        /// <code lang="CS">
-        /// &lt;% Html.Kendo().Chart()
-        ///           .Name("Chart")
-        ///           .ClientEvents(events => events.OnDataBinding(() =>
-        ///           {
-        ///                %&gt;
-        ///                function(e) {
-        ///                    //event handling code
-        ///                }
-        ///                &lt;%
-        ///           }))
-        ///           .Render();
-        /// %&gt;
-        /// </code>
-        /// </example>        
-        public ChartClientEventsBuilder OnDataBinding(Action codeBlock)
-        {
-            return CodeBlock(events.OnDataBinding, codeBlock);
-        }
-
-        /// <summary>
-        /// Defines the inline handler of the OnDataBinding client-side event
+        /// Defines the inline handler of the DataBinding client-side event
         /// </summary>
         /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
-        ///           .ClientEvents(events => events.OnDataBinding(
+        ///           .ClientEvents(events => events.DataBinding(
         ///                @&lt;text&gt;
         ///                function(e) {
         ///                    //event handling code
@@ -129,315 +80,163 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public ChartClientEventsBuilder OnDataBinding(Func<object, object> inlineCodeBlock)
+        public ChartClientEventsBuilder DataBinding(Func<object, object> inlineCodeBlock)
         {
-            return InlineCodeBlock(events.OnDataBinding, inlineCodeBlock);
+            Handler("dataBinding", inlineCodeBlock);
+
+            return this;
         }
 
         /// <summary>
-        ///  Defines the name of the JavaScript function that will handle the the OnDataBinding client-side event.
+        ///  Defines the name of the JavaScript function that will handle the the DataBinding client-side event.
         /// </summary>
         /// <param name="onDataBindingHandlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;%= Html.Kendo().Chart()
         ///            .Name("Chart")
-        ///            .ClientEvents(events => events.OnDataBinding("onDataBinding"))
+        ///            .ClientEvents(events => events.DataBinding("onDataBinding"))
         /// %&gt;
         /// </code>
         /// </example>
-        public ChartClientEventsBuilder OnDataBinding(string onDataBindingHandlerName)
+        public ChartClientEventsBuilder DataBinding(string onDataBindingHandlerName)
         {
-            return HandlerName(events.OnDataBinding, onDataBindingHandlerName);
-        }
-
-        /// <summary>
-        /// Defines the inline handler of the OnSeriesClick client-side event
-        /// </summary>
-        /// <param name="codeBlock">The action defining the inline handler.</param>
-        /// <example>
-        /// <code lang="CS">
-        /// &lt;% Html.Kendo().Chart()
-        ///           .Name("Chart")
-        ///           .ClientEvents(events => events.OnSeriesClick(() =>
-        ///           {
-        ///                %&gt;
-        ///                function(e) {
-        ///                    //event handling code
-        ///                }
-        ///                &lt;%
-        ///           }))
-        ///           .Render();
-        /// %&gt;
-        /// </code>
-        /// </example>        
-        public ChartClientEventsBuilder OnSeriesClick(Action codeBlock)
-        {
-            return CodeBlock(events.OnSeriesClick, codeBlock);
-        }
-
-        /// <summary>
-        /// Defines the inline handler of the OnSeriesClick client-side event
-        /// </summary>
-        /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
-        /// <example>
-        /// <code lang="CS">
-        /// &lt;% Html.Kendo().Chart()
-        ///           .Name("Chart")
-        ///           .ClientEvents(events => events.OnSeriesClick(
-        ///                @&lt;text&gt;
-        ///                function(e) {
-        ///                    //event handling code
-        ///                }
-        ///                &lt;/text&gt;
-        ///           ))
-        ///           .Render();
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public ChartClientEventsBuilder OnSeriesClick(Func<object, object> inlineCodeBlock)
-        {
-            return InlineCodeBlock(events.OnSeriesClick, inlineCodeBlock);
-        }
-
-        /// <summary>
-        ///  Defines the name of the JavaScript function that will handle the the OnSeriesClick client-side event.
-        /// </summary>
-        /// <param name="onSeriesClickHandlerName">The name of the JavaScript function that will handle the event.</param>
-        /// <example>
-        /// <code lang="CS">
-        /// &lt;%= Html.Kendo().Chart()
-        ///            .Name("Chart")
-        ///            .ClientEvents(events => events.OnSeriesClick("onSeriesClick"))
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public ChartClientEventsBuilder OnSeriesClick(string onSeriesClickHandlerName)
-        {
-            return HandlerName(events.OnSeriesClick, onSeriesClickHandlerName);
-        }
-
-        /// <summary>
-        /// Defines the inline handler of the OnSeriesHover client-side event
-        /// </summary>
-        /// <param name="codeBlock">The action defining the inline handler.</param>
-        /// <example>
-        /// <code lang="CS">
-        /// &lt;% Html.Kendo().Chart()
-        ///           .Name("Chart")
-        ///           .ClientEvents(events => events.OnSeriesHover(() =>
-        ///           {
-        ///                %&gt;
-        ///                function(e) {
-        ///                    //event handling code
-        ///                }
-        ///                &lt;%
-        ///           }))
-        ///           .Render();
-        /// %&gt;
-        /// </code>
-        /// </example>        
-        public ChartClientEventsBuilder OnSeriesHover(Action codeBlock)
-        {
-            return CodeBlock(events.OnSeriesHover, codeBlock);
-        }
-
-        /// <summary>
-        /// Defines the inline handler of the OnSeriesHover client-side event
-        /// </summary>
-        /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
-        /// <example>
-        /// <code lang="CS">
-        /// &lt;% Html.Kendo().Chart()
-        ///           .Name("Chart")
-        ///           .ClientEvents(events => events.OnSeriesHover(
-        ///                @&lt;text&gt;
-        ///                function(e) {
-        ///                    //event handling code
-        ///                }
-        ///                &lt;/text&gt;
-        ///           ))
-        ///           .Render();
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public ChartClientEventsBuilder OnSeriesHover(Func<object, object> inlineCodeBlock)
-        {
-            return InlineCodeBlock(events.OnSeriesHover, inlineCodeBlock);
-        }
-
-        /// <summary>
-        ///  Defines the name of the JavaScript function that will handle the the OnSeriesHover client-side event.
-        /// </summary>
-        /// <param name="onSeriesClickHandlerName">The name of the JavaScript function that will handle the event.</param>
-        /// <example>
-        /// <code lang="CS">
-        /// &lt;%= Html.Kendo().Chart()
-        ///            .Name("Chart")
-        ///            .ClientEvents(events => events.OnSeriesHover("onSeriesHover"))
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public ChartClientEventsBuilder OnSeriesHover(string onSeriesHoverHandlerName)
-        {
-            return HandlerName(events.OnSeriesHover, onSeriesHoverHandlerName);
-        }
-
-        /// <summary>
-        /// Defines the inline handler of the OnError client-side event
-        /// </summary>
-        /// <param name="codeBlock">The action defining the inline handler.</param>
-        /// <example>
-        /// <code lang="CS">
-        /// &lt;% Html.Kendo().Chart()
-        ///           .Name("Chart")
-        ///           .ClientEvents(events => events.OnError(() =>
-        ///           {
-        ///                %&gt;
-        ///                function(e) {
-        ///                    //event handling code
-        ///                }
-        ///                &lt;%
-        ///           }))
-        ///           .Render();
-        /// %&gt;
-        /// </code>
-        /// </example>        
-        public ChartClientEventsBuilder OnError(Action codeBlock)
-        {
-            return CodeBlock(events.OnError, codeBlock);
-        }
-
-        /// <summary>
-        /// Defines the inline handler of the OnError client-side event
-        /// </summary>
-        /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
-        /// <example>
-        /// <code lang="CS">
-        /// &lt;% Html.Kendo().Chart()
-        ///           .Name("Chart")
-        ///           .ClientEvents(events => events.OnError(
-        ///                @&lt;text&gt;
-        ///                function(e) {
-        ///                    //event handling code
-        ///                }
-        ///                &lt;/text&gt;
-        ///           ))
-        ///           .Render();
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public ChartClientEventsBuilder OnError(Func<object, object> inlineCodeBlock)
-        {
-            return InlineCodeBlock(events.OnError, inlineCodeBlock);
-        }
-
-        /// <summary>
-        ///  Defines the name of the JavaScript function that will handle the the OnError client-side event.
-        /// </summary>
-        /// <param name="onSeriesClickHandlerName">The name of the JavaScript function that will handle the event.</param>
-        /// <example>
-        /// <code lang="CS">
-        /// &lt;%= Html.Kendo().Chart()
-        ///            .Name("Chart")
-        ///            .ClientEvents(events => events.OnError("onSeriesClick"))
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public ChartClientEventsBuilder OnError(string onErrorHandlerName)
-        {
-            return HandlerName(events.OnError, onErrorHandlerName);
-        }
-
-        /// <summary>
-        /// Defines the inline handler of the OnAxisLabelClick client-side event
-        /// </summary>
-        /// <param name="codeBlock">The action defining the inline handler.</param>
-        /// <example>
-        /// <code lang="CS">
-        /// &lt;% Html.Kendo().Chart()
-        ///           .Name("Chart")
-        ///           .ClientEvents(events => events.OnAxisLabelClick(() =>
-        ///           {
-        ///                %&gt;
-        ///                function(e) {
-        ///                    //event handling code
-        ///                }
-        ///                &lt;%
-        ///           }))
-        ///           .Render();
-        /// %&gt;
-        /// </code>
-        /// </example>        
-        public ChartClientEventsBuilder OnAxisLabelClick(Action codeBlock)
-        {
-            return CodeBlock(events.OnAxisLabelClick, codeBlock);
-        }
-
-        /// <summary>
-        /// Defines the inline handler of the OnAxisLabelClick client-side event
-        /// </summary>
-        /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
-        /// <example>
-        /// <code lang="CS">
-        /// &lt;% Html.Kendo().Chart()
-        ///           .Name("Chart")
-        ///           .ClientEvents(events => events.OnAxisLabelClick(
-        ///                @&lt;text&gt;
-        ///                function(e) {
-        ///                    //event handling code
-        ///                }
-        ///                &lt;/text&gt;
-        ///           ))
-        ///           .Render();
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public ChartClientEventsBuilder OnAxisLabelClick(Func<object, object> inlineCodeBlock)
-        {
-            return InlineCodeBlock(events.OnAxisLabelClick, inlineCodeBlock);
-        }
-
-        /// <summary>
-        ///  Defines the name of the JavaScript function that will handle the the OnAxisLabelClick client-side event.
-        /// </summary>
-        /// <param name="onSeriesClickHandlerName">The name of the JavaScript function that will handle the event.</param>
-        /// <example>
-        /// <code lang="CS">
-        /// &lt;%= Html.Kendo().Chart()
-        ///            .Name("Chart")
-        ///            .ClientEvents(events => events.OnAxisLabelClick("onAxisLabelClick"))
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public ChartClientEventsBuilder OnAxisLabelClick(string onAxisLabelClickHandlerName)
-        {
-            return HandlerName(events.OnAxisLabelClick, onAxisLabelClickHandlerName);
-        }
-
-        private ChartClientEventsBuilder CodeBlock(ClientEvent e, Action codeBlock)
-        {
-            Guard.IsNotNull(codeBlock, "codeBlock");
-
-            e.CodeBlock = codeBlock;
+            Handler("dataBinding", onDataBindingHandlerName);
 
             return this;
         }
 
-        private ChartClientEventsBuilder InlineCodeBlock(ClientEvent e, Func<object, object> inlineCodeBlock)
+        /// <summary>
+        /// Defines the inline handler of the SeriesClick client-side event
+        /// </summary>
+        /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .ClientEvents(events => events.SeriesClick(
+        ///                @&lt;text&gt;
+        ///                function(e) {
+        ///                    //event handling code
+        ///                }
+        ///                &lt;/text&gt;
+        ///           ))
+        ///           .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartClientEventsBuilder SeriesClick(Func<object, object> inlineCodeBlock)
         {
-            Guard.IsNotNull(inlineCodeBlock, "inlineCodeBlock");
-
-            e.InlineCodeBlock = inlineCodeBlock;
+            Handler("seriesClick", inlineCodeBlock);
 
             return this;
         }
 
-        private ChartClientEventsBuilder HandlerName(ClientEvent e, string handler)
+        /// <summary>
+        ///  Defines the name of the JavaScript function that will handle the the SeriesClick client-side event.
+        /// </summary>
+        /// <param name="onSeriesClickHandlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .ClientEvents(events => events.SeriesClick("onSeriesClick"))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartClientEventsBuilder SeriesClick(string onSeriesClickHandlerName)
         {
-            Guard.IsNotNullOrEmpty(handler, "handler");
+            Handler("seriesClick", onSeriesClickHandlerName);
 
-            e.HandlerName = handler;
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the inline handler of the SeriesHover client-side event
+        /// </summary>
+        /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .ClientEvents(events => events.SeriesHover(
+        ///                @&lt;text&gt;
+        ///                function(e) {
+        ///                    //event handling code
+        ///                }
+        ///                &lt;/text&gt;
+        ///           ))
+        ///           .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartClientEventsBuilder SeriesHover(Func<object, object> inlineCodeBlock)
+        {
+            Handler("seriesHover", inlineCodeBlock);
+
+            return this;
+        }
+
+        /// <summary>
+        ///  Defines the name of the JavaScript function that will handle the the SeriesHover client-side event.
+        /// </summary>
+        /// <param name="onSeriesClickHandlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .ClientEvents(events => events.SeriesHover("onSeriesHover"))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartClientEventsBuilder SeriesHover(string onSeriesHoverHandlerName)
+        {
+            Handler("seriesHover", onSeriesHoverHandlerName);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the inline handler of the AxisLabelClick client-side event
+        /// </summary>
+        /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .ClientEvents(events => events.AxisLabelClick(
+        ///                @&lt;text&gt;
+        ///                function(e) {
+        ///                    //event handling code
+        ///                }
+        ///                &lt;/text&gt;
+        ///           ))
+        ///           .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartClientEventsBuilder AxisLabelClick(Func<object, object> inlineCodeBlock)
+        {
+            Handler("axisLabelClick", inlineCodeBlock);
+
+            return this;
+        }
+
+        /// <summary>
+        ///  Defines the name of the JavaScript function that will handle the the AxisLabelClick client-side event.
+        /// </summary>
+        /// <param name="onSeriesClickHandlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .ClientEvents(events => events.AxisLabelClick("onAxisLabelClick"))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartClientEventsBuilder AxisLabelClick(string onAxisLabelClickHandlerName)
+        {
+            Handler("axisLabelClick", onAxisLabelClickHandlerName);
 
             return this;
         }

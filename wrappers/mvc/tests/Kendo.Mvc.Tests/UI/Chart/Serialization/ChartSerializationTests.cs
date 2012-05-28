@@ -34,7 +34,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
         {
             chart.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("jQuery('#Chart').kendoChart();");
+            output.ShouldContain("jQuery(\"\\#Chart\").kendoChart({});");
         }
 
         [Fact]
@@ -43,7 +43,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
             chart.Title.Text = "Title";
             chart.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{title:{\"text\":\"Title\"}}");
+            output.ShouldContain("{title:{text:\"Title\"}}");
         }
 
         [Fact]
@@ -52,34 +52,25 @@ namespace Kendo.Mvc.UI.Tests.Chart
             chart.Legend.Visible = false;
             chart.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{legend:{\"visible\":false}}");
+            output.ShouldContain("{legend:{visible:false}}");
         }
 
         [Fact]
         public void OnDataBound_client_side_event_serialized()
         {
-            chart.ClientEvents.OnDataBound.HandlerName = "dataBoundHandler";
+            chart.ClientEvents["dataBound"] = new ClientEvent() { HandlerName = "dataBoundHandler" };
             chart.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{onDataBound:dataBoundHandler}");
+            output.ShouldContain("{dataBound:dataBoundHandler}");
         }
 
         [Fact]
         public void OnSeriesClick_client_side_event_serialized()
         {
-            chart.ClientEvents.OnSeriesClick.HandlerName = "seriesClickHandler";
+            chart.ClientEvents["seriesClick"] = new ClientEvent() { HandlerName = "seriesClickHandler" };
             chart.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{onSeriesClick:seriesClickHandler}");
-        }
-
-        [Fact]
-        public void OnError_client_side_event_serialized()
-        {
-            chart.ClientEvents.OnError.HandlerName = "errorHandler";
-            chart.WriteInitializationScript(textWriter.Object);
-
-            output.ShouldContain("{onError:errorHandler}");
+            output.ShouldContain("{seriesClick:seriesClickHandler}");
         }
 
         [Fact]
@@ -97,7 +88,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
             chart.SeriesDefaults.Bar.Gap = 4;
             chart.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{seriesDefaults:{\"bar\":{\"gap\":4}}}");
+            output.ShouldContain("{seriesDefaults:{bar:{gap:4}}}");
         }
 
         [Fact]
@@ -106,7 +97,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
             chart.CategoryAxis.Categories = new string[] { "A" };
             chart.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{categoryAxis:{\"categories\":[\"A\"]}}");
+            output.ShouldContain("{categoryAxis:{categories:[\"A\"]}}");
         }
 
         [Fact]
@@ -115,7 +106,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
             chart.CategoryAxis.Member = "RepName";
             chart.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{categoryAxis:{\"field\":\"RepName\"}}");
+            output.ShouldContain("{categoryAxis:{field:\"RepName\"}}");
         }
 
         [Fact]
@@ -184,20 +175,19 @@ namespace Kendo.Mvc.UI.Tests.Chart
         [Fact]
         public void DataBinding_should_be_serialized_when_using_Server_binding()
         {
-            chart.DataSource = new SalesData[] { new SalesData() };
+            chart.Data = new SalesData[] { new SalesData() };
             chart.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{dataSource:{\"data\":[{\"RepName\":null,\"DateString\":null,\"TotalSales\":0,\"RepSales\":0,\"Explode\":false,\"Color\":null}]}}");
+            output.ShouldContain("{dataSource:{data:[{\"RepName\":null,\"DateString\":null,\"TotalSales\":0,\"RepSales\":0,\"Explode\":false,\"Color\":null}]}}");
         }
 
         [Fact]
-        public void DataBinding_should_be_serialized_when_using_Ajax_binding()
+        public void DataSource_should_be_serialized_when_using_Ajax_binding()
         {
-            chart.DataBinding.Ajax.Enabled = true;
-            chart.DataBinding.Ajax.Select.ActionName = "Action";
+            chart.DataSource.Transport.Read.Url = "/Action";
             chart.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{dataSource:{\"transport\":{\"read\":{\"url\":\"/Action\",\"type\":\"POST\"}}}}");
+            output.ShouldContain("dataSource:{transport:{read:{url:\"/Action\",type:\"POST\"}}");
         }
 
         [Fact]
@@ -215,7 +205,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
             chart.Tooltip.Visible = true;
             chart.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{tooltip:{\"visible\":true}}");
+            output.ShouldContain("{tooltip:{visible:true}}");
         }
 
         [Fact]

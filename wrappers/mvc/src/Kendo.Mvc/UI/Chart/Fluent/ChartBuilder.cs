@@ -336,25 +336,25 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Use it to configure binding.
+        /// Data Source configuration
         /// </summary>
         /// <param name="configurator">Use the configurator to set different data binding options.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Chart()
         ///             .Name("Chart")
-        ///             .DataBinding(dataBinding =>
+        ///             .DataSource(ds =>
         ///             {
-        ///                 dataBinding.Ajax().Select("SalesData", "Chart").Enabled((bool)ViewData["bindSales"]);
+        ///                 ds.Ajax().Read(r => r.Action("SalesData", "Chart"));
         ///             })
         /// %&gt;
         /// </code>
         /// </example>
-        public ChartBuilder<T> DataBinding(Action<ChartDataBindingConfigurationBuilder> configurator)
+        public ChartBuilder<T> DataSource(Action<ReadOnlyDataSourceBuilder> configurator)
         {
             Guard.IsNotNull(configurator, "configurator");
 
-            configurator(new ChartDataBindingConfigurationBuilder(Component.DataBinding));
+            configurator(new ReadOnlyDataSourceBuilder(Component.DataSource, this.Component.ViewContext, this.Component.UrlGenerator));
 
             return this;
         }
