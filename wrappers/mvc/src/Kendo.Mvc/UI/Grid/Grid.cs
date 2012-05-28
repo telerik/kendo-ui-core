@@ -103,7 +103,7 @@ namespace Kendo.Mvc.UI
             private set;
         }
 
-        public IGridDetailView<T> DetailView
+        public IGridDetailTemplate<T> DetailTemplate
         {
             get;
             set;
@@ -753,9 +753,9 @@ namespace Kendo.Mvc.UI
 
             options["dataSource"] = DataSource.ToJson();
 
-            if (HasDetailView)
+            if (HasDetailTemplate)
             { 
-                options["detailTemplate"] = DetailView.Serialize();
+                options["detailTemplate"] = DetailTemplate.Serialize();
             }
 
             //TODO: Serialize editing
@@ -774,7 +774,7 @@ namespace Kendo.Mvc.UI
             {
                 int colspan = DataSource.Groups.Count + VisibleColumns.Count;
 
-                if (DetailView != null)
+                if (DetailTemplate != null)
                 {
                     colspan++;
                 }
@@ -1026,10 +1026,10 @@ namespace Kendo.Mvc.UI
                 GroupMembers = DataSource.Groups.Select(g => g.Member),
                 Mode = CurrentItemMode,
                 EditMode = Editing.Mode,
-                HasDetailView = HasDetailView,
+                HasDetailTemplate = HasDetailTemplate,
                 //TODO: Implement hidden columns
                 Colspan = Colspan /*- Columns.Count(column => column.Hidden)*/,
-                DetailViewTemplate = MapDetailViewTemplate(HasDetailView ? DetailView.Template : null),
+                DetailTemplate = MapDetailTemplate(HasDetailTemplate ? DetailTemplate.Template : null),
                 NoRecordsTemplate = FormatNoRecordsTemplate(),
                 Localization = Localization,
                 ScrollingHeight = Scrolling.Height,
@@ -1064,7 +1064,7 @@ namespace Kendo.Mvc.UI
             if (RowAction != null)
             {
                 var row = new GridRow<T>(this, (T)item.DataItem, item.Index);
-                if (HasDetailView)
+                if (HasDetailTemplate)
                 {
                     row.DetailRow = new GridDetailRow<T>
                     {
@@ -1076,7 +1076,7 @@ namespace Kendo.Mvc.UI
                 row.Selected = (item.State & GridItemStates.Selected) == GridItemStates.Selected;
                 RowAction(row);
 
-                if (HasDetailView)
+                if (HasDetailTemplate)
                 {
                     item.Expanded = row.DetailRow.Expanded;
                     item.DetailRowHtml = row.DetailRow.Html;
@@ -1104,12 +1104,12 @@ namespace Kendo.Mvc.UI
             }
         }
 
-        private Action<object, IHtmlNode> MapDetailViewTemplate(HtmlTemplate<T> detailViewTemplate)
+        private Action<object, IHtmlNode> MapDetailTemplate(HtmlTemplate<T> detailTemplate)
         {
             return (dataItem, container) =>
             {
-                if (detailViewTemplate != null && detailViewTemplate.HasValue())
-                    detailViewTemplate.Apply((T)dataItem, container);
+                if (detailTemplate != null && detailTemplate.HasValue())
+                    detailTemplate.Apply((T)dataItem, container);
             };
         }
 
@@ -1226,7 +1226,7 @@ namespace Kendo.Mvc.UI
                     throw new NotSupportedException(TextResource.CannotUseTemplatesInAjaxOrWebService);
                 }
 
-                if (DetailView != null && DetailView.Template.HasValue() && !DetailView.ClientTemplate.HasValue())
+                if (DetailTemplate != null && DetailTemplate.Template.HasValue() && !DetailTemplate.ClientTemplate.HasValue())
                 {
                     throw new NotSupportedException(TextResource.CannotUseTemplatesInAjaxOrWebService);
                 }
@@ -1343,11 +1343,11 @@ namespace Kendo.Mvc.UI
         }
         public string EditorHtml { get; set; }
 
-        public bool HasDetailView
+        public bool HasDetailTemplate
         {
             get
             {
-                return DetailView != null;
+                return DetailTemplate != null;
             }
         }
 

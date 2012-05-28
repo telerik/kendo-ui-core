@@ -5,9 +5,9 @@ namespace Kendo.Mvc.UI
     using System.Web.Script.Serialization;
     using Kendo.Mvc.Extensions;
 
-    public static class GridDetailViewExtensions
+    public static class GridDetailTemplateExtensions
     {        
-        public static string Serialize<T>(this IGridDetailView<T> detailView)
+        public static string Serialize<T>(this IGridDetailTemplate<T> detailView)
             where T : class
         {
             var json = string.Empty;

@@ -547,12 +547,12 @@
     <Compile Include="UI\Grid\GridRowViewDataKey.cs" />
     <Compile Include="UI\Grid\GridDataTableWrapperEnumerable.cs" />
     <Compile Include="UI\Grid\GridDetailRow.cs" />
-    <Compile Include="UI\Grid\GridDetailView.cs" />
+    <Compile Include="UI\Grid\GridDetailTemplate.cs" />
     <Compile Include="UI\Grid\Columns\IGridActionColumn.cs" />
     <Compile Include="UI\Grid\Columns\IGridBoundColumn.cs" />
     <Compile Include="UI\Grid\Columns\IGridColumn.cs" />
     <Compile Include="UI\Grid\Columns\IGridTemplateColumn.cs" />
-    <Compile Include="UI\Grid\Fluent\GridDetailViewBuilder.cs" />
+    <Compile Include="UI\Grid\Fluent\GridDetailTemplateBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\DataSourceFilterComparisonDescriptorBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\DataSourceFilterComparisonDescriptorBuilderBase.cs" />
     <Compile Include="UI\DataSource\Fluent\DataSourceFilterCompositeBuilder.cs" />
@@ -567,7 +567,7 @@
     <Compile Include="UI\Grid\Fluent\GridTemplateColumnBuilder.cs" />
     <Compile Include="UI\Grid\Fluent\GridSortDescriptorBuilder.cs" />
     <Compile Include="UI\Grid\Fluent\GridSortDescriptorFactory.cs" />
-    <Compile Include="UI\Grid\GridDetailViewExtensions.cs" />
+    <Compile Include="UI\Grid\GridDetailTemplateExtensions.cs" />
     <Compile Include="UI\Grid\GridEditMode.cs" />
     <Compile Include="UI\Grid\GridJsonResultAdapter.cs" />
     <Compile Include="UI\Grid\GroupDescriptorExtensions.cs" />
@@ -643,7 +643,7 @@
     <Compile Include="UI\HtmlFragment.cs" />
     <Compile Include="UI\IHtmlBuilder.cs" />
     <Compile Include="UI\Grid\IGrid.cs" />
-    <Compile Include="UI\Grid\IGridDetailView.cs" />
+    <Compile Include="UI\Grid\IGridDetailTemplate.cs" />
     <Compile Include="UI\Grid\GridLocalization.cs" />
     <Compile Include="UI\Grid\IGridDataKey.cs" />
     <Compile Include="UI\Grid\Settings\GridResizingSettings.cs" />

@@ -44,13 +44,13 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
-        public GridBuilder<T> DetailView(Action<GridDetailViewBuilder<T>> configurator)
+        public GridBuilder<T> DetailTemplate(Action<GridDetailTemplateBuilder<T>> configurator)
         {
             Guard.IsNotNull(configurator, "configurator");
 
-            Component.DetailView = new GridDetailView<T>();
+            Component.DetailTemplate = new GridDetailTemplate<T>();
 
-            configurator(new GridDetailViewBuilder<T>(Component.DetailView));
+            configurator(new GridDetailTemplateBuilder<T>(Component.DetailTemplate));
 
             return this;
         }

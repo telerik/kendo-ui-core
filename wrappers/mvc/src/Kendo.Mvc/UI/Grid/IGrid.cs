@@ -5,7 +5,7 @@ namespace Kendo.Mvc.UI
 
     public interface IGrid : IGridBindingContext
     {
-        bool HasDetailView
+        bool HasDetailTemplate
         {
             get;
         }
