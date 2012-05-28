@@ -40,12 +40,12 @@ namespace Kendo.Mvc.UI.Fluent.Tests
         //    builder.FormHtmlAttributes(new { @class = "test" });
         //    Assert.Equal("test", settings.FormHtmlAttributes["class"]);
         //}
-
-        [Fact]
-        public void HtmlAttributes_throws_if_null_passed_as_argument()
-        {
-            Assert.Throws<ArgumentNullException>(() => builder.FormHtmlAttributes(null));
-        }
+        //TODO: Implement edit form attributes
+        //[Fact]
+        //public void HtmlAttributes_throws_if_null_passed_as_argument()
+        //{
+        //    Assert.Throws<ArgumentNullException>(() => builder.FormHtmlAttributes(null));
+        //}
 
     }
 }

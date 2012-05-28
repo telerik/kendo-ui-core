@@ -3,7 +3,7 @@ namespace Kendo.Mvc.UI
     public enum GridEditMode
     {
         InLine,
-        InForm,
+       // InForm,
         PopUp,
         InCell
     }

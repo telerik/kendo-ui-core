@@ -1,5 +1,5 @@
 @(Html.Kendo().Window()
-    .Name("window")
+    .Name("window")    
     .Title("About Alvar Aalto")
     .Content(@<text>
         <div class="armchair">
@@ -35,7 +35,7 @@
             <a href="http://www.aalto.com/about-alvar-aalto.html" title="About Alvar Aalto">www.aalto.com</a>
         </p>
     </text>)
-    .ClientEvents(events => events.OnClose("onClose"))
+    .ClientEvents(events => events.Close("function() { alert(1) }"))
     .Draggable()
     .Resizable()
     .Width(600)

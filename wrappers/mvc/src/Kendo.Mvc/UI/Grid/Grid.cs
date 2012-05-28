@@ -49,14 +49,12 @@ namespace Kendo.Mvc.UI
             Filtering = new GridFilteringSettings();
 
             Editing = new GridEditingSettings<T>(this)
-            {
-                /* TODO: implement popup window
-                PopUp = new Window(viewContext, clientSideObjectWriterFactory)
+            {                
+                PopUp = new Window(viewContext, Initializer)
                 {
                     Modal = true,
                     Draggable = true
-                }
-                */
+                }                
             };
 
             Grouping = new GridGroupingSettings(this);
@@ -964,7 +962,7 @@ namespace Kendo.Mvc.UI
 
             if (!IsClientBinding)
             {
-                popup.ClientEvents.OnClose.InlineCodeBlock = obj => "function(e) { e.preventDefault();" + string.Format("window.location.href = \"{0}\";", cancelUrl) + "}";
+                popup.Events["close"] = new ClientEvent { InlineCodeBlock = obj => "function(e) { e.preventDefault();" + string.Format("window.location.href = \"{0}\";", cancelUrl) + "}" };
             }
             
             if (!popup.Name.HasValue())
