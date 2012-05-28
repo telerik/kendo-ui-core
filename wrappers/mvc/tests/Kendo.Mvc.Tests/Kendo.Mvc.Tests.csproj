@@ -120,7 +120,6 @@
     <Compile Include="UI\Chart\ChartBarSeriesBuilderTests.cs" />
     <Compile Include="UI\Chart\ChartCategoryAxisBuilderTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartCategoryAxisSerializerTests.cs" />
-    <Compile Include="UI\Chart\ChartBindingSettingsBuilderTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartAxisSerializerBaseTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartNumericAxisSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartTitleSerializerTests.cs" />

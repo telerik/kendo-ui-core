@@ -533,7 +533,7 @@ namespace Kendo.Mvc.UI
         /// Creates a new <see cref="Kendo.Mvc.UI.Chart{T}"/> bound to the specified data source.
         /// </summary>
         /// <typeparam name="T">The type of the data item</typeparam>
-        /// <param name="dataSource">The data source.</param>
+        /// <param name="data">The data source.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Telerik().Chart(Model)
@@ -541,11 +541,11 @@ namespace Kendo.Mvc.UI
         /// %&gt;
         /// </code>
         /// </example>
-        public virtual ChartBuilder<T> Chart<T>(IEnumerable<T> dataSource) where T : class
+        public virtual ChartBuilder<T> Chart<T>(IEnumerable<T> data) where T : class
         {
             ChartBuilder<T> builder = Chart<T>();
 
-            builder.Component.DataSource = dataSource;
+            builder.Component.Data = data;
 
             return builder;
         }
@@ -562,11 +562,11 @@ namespace Kendo.Mvc.UI
         /// %&gt;
         /// </code>
         /// </example>
-        public virtual ChartBuilder<T> Chart<T>(string dataSourceViewDataKey) where T : class
+        public virtual ChartBuilder<T> Chart<T>(string dataViewDataKey) where T : class
         {
             ChartBuilder<T> builder = Chart<T>();
 
-            builder.Component.DataSource = ViewContext.ViewData.Eval(dataSourceViewDataKey) as IEnumerable<T>;
+            builder.Component.Data = ViewContext.ViewData.Eval(dataViewDataKey) as IEnumerable<T>;
 
             return builder;
         }

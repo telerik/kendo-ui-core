@@ -12,7 +12,7 @@ namespace Kendo.Mvc.UI.Tests
         public ChartScatterSeriesSerializerTests()
         {
             chart = ChartTestHelper.CreateChart<XYData>();
-            chart.DataSource = XYDataBuilder.GetCollection();
+            chart.Data = XYDataBuilder.GetCollection();
             series = new ChartScatterSeries<XYData, float, float>(chart, s => s.X, s => s.Y);
         }
 

@@ -38,18 +38,18 @@ namespace Kendo.Mvc.UI
             ValueAxes = new List<IChartValueAxis>();
             XAxes = new List<IChartValueAxis>();
             YAxes = new List<IChartValueAxis>();
-            DataBinding = new ChartDataBindingSettings(this);
             SeriesDefaults = new ChartSeriesDefaults<T>(this);
             AxisDefaults = new ChartAxisDefaults<T>(this);
             Tooltip = new ChartTooltip();
             Transitions = true;
+            DataSource = new DataSource();
         }
 
         /// <summary>
         /// Gets or sets the data source.
         /// </summary>
         /// <value>The data source.</value>
-        public IEnumerable<T> DataSource
+        public IEnumerable<T> Data
         {
             get;
             set;
@@ -210,12 +210,12 @@ namespace Kendo.Mvc.UI
         }
         
         /// <summary>
-        /// Gets the data binding configuration.
+        /// Gets the data source configuration.
         /// </summary>
-        public ChartDataBindingSettings DataBinding
+        public DataSource DataSource
         {
             get;
-            internal set;
+            private set;
         }
 
         /// <summary>
@@ -316,13 +316,14 @@ namespace Kendo.Mvc.UI
 
         private void SerializeDataSource(IClientSideObjectWriter objectWriter)
         {
-            if (DataBinding.Ajax.Enabled)
+            if (!string.IsNullOrEmpty(DataSource.Transport.Read.Url))
             {
-                DataBinding.Ajax.SerializeTo("dataSource", objectWriter);
+                DataSource.Transport.Read.Type = "POST";
+                objectWriter.AppendObject("dataSource", DataSource.ToJson());
             }
-            else if (DataSource != null)
+            else if (Data != null)
             {
-                objectWriter.AppendObject("dataSource", new { data = DataSource });
+                objectWriter.AppendObject("dataSource", new { data = Data });
             }
         }
 

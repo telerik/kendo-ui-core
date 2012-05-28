@@ -53,11 +53,11 @@ namespace Kendo.Mvc.UI.Fluent
 
             var value = expression.Compile();
 
-            if (Container.DataSource != null)
+            if (Container.Data != null)
             {
                 var dataList = new ArrayList();
 
-                foreach (var dataPoint in Container.DataSource)
+                foreach (var dataPoint in Container.Data)
                 {
                     dataList.Add(dataPoint != null ? value(dataPoint).ToString() : string.Empty);
                 }
