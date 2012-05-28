@@ -174,6 +174,7 @@
     <Content Include="App_Data\Northwind_log.ldf">
       <DependentUpon>Northwind.mdf</DependentUpon>
     </Content>
+    <Content Include="Areas\aspx\Views\dataviz\area_chart\remote_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\linear_gauge\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\linear_gauge\scaleoptions.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\area_chart\index.aspx" />

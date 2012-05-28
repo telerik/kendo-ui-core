@@ -526,7 +526,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual ChartBuilder<T> Chart<T>() where T : class
         {
-            return new ChartBuilder<T>(new Chart<T>(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>()));
+            return new ChartBuilder<T>(new Chart<T>(ViewContext, Initializer, DI.Current.Resolve<IUrlGenerator>()));
         }
 
         /// <summary>

@@ -20,9 +20,9 @@ namespace Kendo.Mvc.UI.Tests.Chart
         [Fact]
         public void ClientEvents_should_set_events()
         {
-            Action<ChartClientEventsBuilder> clientEventsAction = eventBuilder => eventBuilder.OnDataBinding("dataBinding");
+            Action<ChartClientEventsBuilder> clientEventsAction = eventBuilder => eventBuilder.DataBinding("dataBinding");
             builder.ClientEvents(clientEventsAction);
-            chart.ClientEvents.OnDataBinding.HandlerName.ShouldEqual("dataBinding");
+            ((ClientEvent) chart.ClientEvents["dataBinding"]).HandlerName.ShouldEqual("dataBinding");
         }
 
         [Fact]
