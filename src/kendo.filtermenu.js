@@ -13,10 +13,10 @@
             '<div>' +
                 '<div class="k-filter-help-text">#=messages.info#</div>'+
                 '<label>#=messages.isTrue#'+
-                    '<input type="radio" data-#=ns#bind="checked: filters[0].value" value="true"/>' +
+                    '<input type="radio" data-#=ns#bind="checked: filters[0].value" value="true" name="filters[0].value"/>' +
                 '</label>' +
                 '<label>#=messages.isFalse#'+
-                    '<input type="radio" data-#=ns#bind="checked: filters[0].value" value="false"/>' +
+                    '<input type="radio" data-#=ns#bind="checked: filters[0].value" value="false" name="filters[0].value"/>' +
                 '</label>' +
                 '<button type="submit" class="k-button">#=messages.filter#</button>'+
                 '<button type="reset" class="k-button">#=messages.clear#</button>'+
