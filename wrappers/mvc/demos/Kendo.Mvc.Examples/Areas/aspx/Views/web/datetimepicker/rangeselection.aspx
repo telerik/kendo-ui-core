@@ -1,21 +1,28 @@
+<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/Web.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+
 <label for="start">Start date:</label>
 <div class="demo-section" style="width:535px">
-@(Html.Kendo().DateTimePicker()
+<%= Html.Kendo().DateTimePicker()
       .Name("start")
       .Value(DateTime.Today)
       .Max(DateTime.Today)
       .ParseFormats(new string[] { "MM/dd/yyyy" })
       .ClientEvents(e => e.Change("startChange"))
-)
+%>
 
 <label for="end" style="margin-left:3em">End date:</label>
-@(Html.Kendo().DateTimePicker()
+<%= Html.Kendo().DateTimePicker()
       .Name("end")
       .Value(DateTime.Today)
       .Min(DateTime.Today)
       .ParseFormats(new string[] { "MM/dd/yyyy" })
       .ClientEvents(e => e.Change("endChange"))
-)
+%>
 </div>
 
 <script>
@@ -63,3 +70,4 @@
         float:left;
     }
 </style>
+</asp:Content>

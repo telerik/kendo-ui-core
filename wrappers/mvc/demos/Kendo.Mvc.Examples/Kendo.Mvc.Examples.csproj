@@ -83,6 +83,10 @@
     <Compile Include="Controllers\DatePicker\EventsController.cs" />
     <Compile Include="Controllers\DatePicker\TemplateController.cs" />
     <Compile Include="Controllers\DatePicker\RangeSelectionController.cs" />
+    <Compile Include="Controllers\DateTimePicker\ApiController.cs" />
+    <Compile Include="Controllers\DateTimePicker\EventsController.cs" />
+    <Compile Include="Controllers\DateTimePicker\TemplateController.cs" />
+    <Compile Include="Controllers\DateTimePicker\RangeSelectionController.cs" />
     <Compile Include="Controllers\DropDownList\IndexController.cs" />
     <Compile Include="Controllers\Linear_Gauge\IndexController.cs" />
     <Compile Include="Controllers\Linear_Gauge\ScaleOptoinsController.cs" />
@@ -307,7 +311,6 @@
     <Content Include="Areas\razor\Views\web\tabstrip\api.cshtml" />
     <Content Include="Areas\razor\Views\web\grid\ajaxaggregates.cshtml" />
     <Content Include="Areas\razor\Views\web\grid\serveraggregates.cshtml" />
-    <Content Include="Areas\razor\Views\web\datetimepicker\index.cshtml" />
     <Content Include="Areas\razor\Views\dataviz\radial_gauge\index.cshtml" />
     <Content Include="Areas\razor\Views\dataviz\radial_gauge\scaleoptions.cshtml" />
     <Content Include="Areas\razor\Views\dataviz\linear_gauge\index.cshtml" />
@@ -333,10 +336,6 @@
     <Content Include="Areas\razor\Views\web\datepicker\events.cshtml" />
     <Content Include="Areas\razor\Views\web\datepicker\rangeselection.cshtml" />
     <Content Include="Areas\razor\Views\web\datepicker\template.cshtml" />
-    <Content Include="Areas\razor\Views\web\datetimepicker\api.cshtml" />
-    <Content Include="Areas\razor\Views\web\datetimepicker\events.cshtml" />
-    <Content Include="Areas\razor\Views\web\datetimepicker\rangeselection.cshtml" />
-    <Content Include="Areas\razor\Views\web\datetimepicker\template.cshtml" />
     <Content Include="Areas\razor\Views\web\timepicker\api.cshtml" />
     <Content Include="Areas\razor\Views\web\timepicker\events.cshtml" />
     <Content Include="Areas\razor\Views\web\timepicker\rangeselection.cshtml" />
@@ -344,6 +343,16 @@
     <Content Include="Areas\aspx\Views\web\timepicker\rangeselection.aspx" />
     <Content Include="Areas\aspx\Views\web\timepicker\events.aspx" />
     <Content Include="Areas\aspx\Views\web\timepicker\index.aspx" />
+    <Content Include="Areas\razor\Views\web\datetimepicker\api.cshtml" />
+    <Content Include="Areas\razor\Views\web\datetimepicker\events.cshtml" />
+    <Content Include="Areas\razor\Views\web\datetimepicker\index.cshtml" />
+    <Content Include="Areas\razor\Views\web\datetimepicker\rangeselection.cshtml" />
+    <Content Include="Areas\razor\Views\web\datetimepicker\template.cshtml" />
+    <Content Include="Areas\aspx\Views\web\datetimepicker\api.aspx" />
+    <Content Include="Areas\aspx\Views\web\datetimepicker\template.aspx" />
+    <Content Include="Areas\aspx\Views\web\datetimepicker\events.aspx" />
+    <Content Include="Areas\aspx\Views\web\datetimepicker\index.aspx" />
+    <Content Include="Areas\aspx\Views\web\datetimepicker\rangeselection.aspx" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
