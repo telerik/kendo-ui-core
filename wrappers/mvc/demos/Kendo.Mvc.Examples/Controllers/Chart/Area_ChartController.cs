@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Kendo.Mvc.Examples.Models;
 
 namespace Kendo.Mvc.Examples.Controllers
 {
@@ -17,6 +18,11 @@ namespace Kendo.Mvc.Examples.Controllers
         public ActionResult Remote_Data()
         {
             return View();
+        }
+
+        public ActionResult Local_Data()
+        {
+            return View(InternetUsersRepository.GetData());
         }
     }
 }
