@@ -33,7 +33,7 @@ namespace Kendo.Mvc.UI
 		/// <summary>
         /// Content - rendered around custom content
         /// </summary>
-        public const string Content = "k-Content";
+        public const string Content = "k-content";
 
         /// <summary>
         /// Default state of items
@@ -301,7 +301,7 @@ namespace Kendo.Mvc.UI
             /// <summary>
             /// Editor textarea element
             /// </summary>
-            public const string RawContent = "k-raw-Content";
+            public const string RawContent = "k-raw-content";
         }
 
         public static class Slider
@@ -343,7 +343,7 @@ namespace Kendo.Mvc.UI
             /// <summary>
             /// Window content area
             /// </summary>
-            public const string Content = "k-window-Content";
+            public const string Content = "k-window-content";
 
             /// <summary>
             /// Window title bar

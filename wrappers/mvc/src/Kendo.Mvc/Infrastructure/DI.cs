@@ -42,7 +42,6 @@ namespace Kendo.Mvc.Infrastructure
             RegisterComponentDependencies();
 
             GridDependencyBootstrapper.Setup();
-            ImageBrowserDependencyBootstrapper.Setup();
         }
 
         private static void RegisterCoreDependencies()

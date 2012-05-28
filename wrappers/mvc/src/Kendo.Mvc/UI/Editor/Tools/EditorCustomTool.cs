@@ -1,8 +1,7 @@
 namespace Kendo.Mvc.UI
 {
     using System.Collections.Generic;
-    using Kendo.Mvc.UI.Html;
-    
+
     public class EditorCustomTool : IEditorTool
     {
         public EditorCustomTool()
@@ -22,10 +21,7 @@ namespace Kendo.Mvc.UI
             get;
             private set;
         }
-        
-        public IHtmlBuilder CreateHtmlBuilder()
-        {
-            return new EditorCustomToolHtmlBuilder(this);
-        }
+
+        public string Name { get; set; }
     }
 }

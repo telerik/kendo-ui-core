@@ -102,9 +102,8 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual EditorBuilder Editor()
         {
-            return new EditorBuilder(new Editor(ViewContext, ClientSideObjectWriterFactory, 
-                DI.Current.Resolve<ILocalizationServiceFactory>().Create("EditorLocalization", CultureInfo.CurrentUICulture),
-                UrlGenerator));
+            return new EditorBuilder(new Editor(ViewContext,
+                Initializer));
         }
 
         /// <summary>

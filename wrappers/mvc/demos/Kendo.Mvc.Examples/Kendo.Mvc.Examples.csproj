@@ -98,6 +98,7 @@
     <Compile Include="Controllers\DropDownList\RemoteDataSourceController.cs" />
     <Compile Include="Controllers\DropDownList\IndexController.cs" />
     <Compile Include="Controllers\ChartController.cs" />
+    <Compile Include="Controllers\Editor\EditorController.cs" />
     <Compile Include="Controllers\Linear_Gauge\IndexController.cs" />
     <Compile Include="Controllers\Linear_Gauge\ScaleOptoinsController.cs" />
     <Compile Include="Controllers\Grid\AjaxEditingController.cs" />
@@ -387,6 +388,7 @@
     <Content Include="Areas\aspx\Views\web\combobox\index.aspx" />
     <Content Include="Areas\aspx\Views\web\combobox\serverfiltering.aspx" />
     <Content Include="Areas\aspx\Views\web\combobox\template.aspx" />
+    <Content Include="Areas\razor\Views\web\editor\index.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
@@ -420,7 +422,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>43495</DevelopmentServerPort>
+          <DevelopmentServerPort>7252</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

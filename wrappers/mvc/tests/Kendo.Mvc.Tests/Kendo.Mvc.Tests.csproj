@@ -177,8 +177,6 @@
     <Compile Include="UI\SalesData.cs" />
     <Compile Include="UI\DateTimePicker\DateTimePickerTestHelper.cs" />
     <Compile Include="UI\InputComponentExtensionsTests.cs" />
-    <Compile Include="UI\Editor\EditorInsertImageToolTests.cs" />
-    <Compile Include="UI\Editor\ImageBrowserControllerTests.cs" />
     <Compile Include="UI\Grid\AggregateDescriptorTests.cs" />
     <Compile Include="UI\Grid\GridDescriptorSerializerTests.cs" />
     <Compile Include="UI\NavigationItemContainerExtensionsTests.cs" />
@@ -300,7 +298,6 @@
     <Compile Include="UI\Editor\EditorDropDownItemsBuilderTests.cs" />
     <Compile Include="UI\Editor\EditorRenderingTests.cs" />
     <Compile Include="UI\Editor\EditorBuilderTests.cs" />
-    <Compile Include="UI\Editor\EditorHtmlBuilderTests.cs" />
     <Compile Include="UI\Editor\EditorTestHelper.cs" />
     <Compile Include="UI\Editor\SnippetsBuilderTests.cs" />
     <Compile Include="UI\Grid\GridToolBarCustomCommandTests.cs" />
