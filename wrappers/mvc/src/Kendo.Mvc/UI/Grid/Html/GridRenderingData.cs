@@ -140,11 +140,12 @@ namespace Kendo.Mvc.UI.Html
             set; 
         }
 
-        public IDictionary<string, object> EditFormHtmlAttributes
-        {
-            get;
-            set;
-        }
+        //TODO: Implement Edit form Html attributes
+        //public IDictionary<string, object> EditFormHtmlAttributes
+        //{
+        //    get;
+        //    set;
+        //}
 
         public string EditTemplateName
         {

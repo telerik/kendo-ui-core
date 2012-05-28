@@ -1110,6 +1110,7 @@
             var that = this,
                 wrapper = that.wrapper,
                 toolbar = that.options.toolbar,
+                editable = that.options.editable,
                 container,
                 template;
 
@@ -1126,9 +1127,11 @@
                         .prependTo(wrapper);
                 }
 
-                container.delegate(".k-grid-add", CLICK, function(e) { e.preventDefault(); that.addRow(); })
-                    .delegate(".k-grid-cancel-changes", CLICK, function(e) { e.preventDefault(); that.cancelChanges(); })
-                    .delegate(".k-grid-save-changes", CLICK, function(e) { e.preventDefault(); that.saveChanges(); });
+                if (editable && editable.create !== false) {
+                    container.delegate(".k-grid-add", CLICK, function(e) { e.preventDefault(); that.addRow(); })
+                        .delegate(".k-grid-cancel-changes", CLICK, function(e) { e.preventDefault(); that.cancelChanges(); })
+                        .delegate(".k-grid-save-changes", CLICK, function(e) { e.preventDefault(); that.saveChanges(); });
+                }
             }
         },
 

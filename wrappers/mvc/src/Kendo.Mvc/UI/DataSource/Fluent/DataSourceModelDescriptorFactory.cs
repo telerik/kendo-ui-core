@@ -65,9 +65,8 @@ namespace Kendo.Mvc.UI.Fluent
             Guard.IsNotNullOrEmpty(memberName, "memberName");
             Guard.IsNotNull(memberType, "memberType");
 
-            var descriptor = new ModelFieldDescriptor();
+            var descriptor = model.AddDescriptor(memberName);
             
-            descriptor.Member = memberName;            
             descriptor.MemberType = memberType;
 
             model.Fields.Add(descriptor);

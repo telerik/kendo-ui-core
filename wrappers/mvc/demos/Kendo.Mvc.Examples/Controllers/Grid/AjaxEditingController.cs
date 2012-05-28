@@ -23,15 +23,18 @@ namespace Kendo.Mvc.Examples.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult AjaxEditing_Create([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<EditableProduct> products)
         {
+            var results = new List<EditableProduct>();
+
             if (products != null)
             {
                 foreach (var product in products)
                 {
                     SessionProductRepository.Insert(product);
+                    results.Add(product);
                 }
             }
 
-            return Json(SessionProductRepository.All().ToDataSource(request));
+            return Json(products.ToDataSource(request));
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -54,7 +57,7 @@ namespace Kendo.Mvc.Examples.Controllers
                 }
             }
 
-            return Json(SessionProductRepository.All().ToDataSource(request));
+            return Json(null);
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -67,8 +70,8 @@ namespace Kendo.Mvc.Examples.Controllers
                     SessionProductRepository.Delete(product);
                 }
             }
-
-            return Json(SessionProductRepository.All().ToDataSource(request));
+            
+            return Json(null);
         }
     }
 }
