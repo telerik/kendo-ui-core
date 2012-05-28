@@ -44,7 +44,7 @@ namespace Kendo.Mvc.UI
             Paging = new GridPagingSettings(this);
             Sorting = new GridSortSettings(this);
             Scrolling = new GridScrollingSettings();
-            KeyboardNavigation = new GridKeyboardNavigationSettings(this);
+            Navigatable = new GridNavigatableSettings(this);
             ColumnContextMenu = new GridColumnContextMenuSettings(this);
             Filtering = new GridFilteringSettings();
 
@@ -486,7 +486,7 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Gets the keyboard navigation configuration.
         /// </summary>
-        public GridKeyboardNavigationSettings KeyboardNavigation
+        public GridNavigatableSettings Navigatable
         {
             get;
             private set;
@@ -756,6 +756,10 @@ namespace Kendo.Mvc.UI
                 options["detailTemplate"] = DetailTemplate.Serialize();
             }
 
+            if (Navigatable.Enabled)
+            {
+                options["navigatable"] = true;
+            }
             //TODO: Serialize editing
             //TODO: Localization
             //TODO: No records template
