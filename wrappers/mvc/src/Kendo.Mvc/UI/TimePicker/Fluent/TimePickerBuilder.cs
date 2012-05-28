@@ -54,9 +54,7 @@ namespace Kendo.Mvc.UI.Fluent
         {
             Guard.IsNotNullOrEmpty(value, "value");
 
-            var time = TimeSpan.Parse(value);
-            
-            Component.Min = new DateTime(time.Ticks);
+            Component.Min = DateTime.Parse(value);
             
             return this;
         }
@@ -78,9 +76,7 @@ namespace Kendo.Mvc.UI.Fluent
         {
             Guard.IsNotNullOrEmpty(value, "value");
 
-            TimeSpan time = TimeSpan.Parse(value);
-            
-            Component.Max = new DateTime(time.Ticks);
+            Component.Max = DateTime.Parse(value);
             
             return this;
         }

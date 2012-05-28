@@ -1,0 +1,29 @@
+
+        <div id="example" class="k-content">
+            <div class="demo-section" style="width: 185px;">
+                <input id="datetimepicker"/>
+            </div>
+
+            <script>
+                $(document).ready(function() {
+                    function onOpen() {
+                        kendoConsole.log("Open");
+                    }
+
+                    function onClose() {
+                        kendoConsole.log("Close");
+                    }
+
+                    function onChange() {
+                        kendoConsole.log("Change :: " + kendo.toString(this.value(), 'g'));
+                    }
+
+                    $("#datetimepicker").kendoDateTimePicker({
+                        change: onChange,
+                        close: onClose,
+                        open: onOpen
+                    });
+                });
+            </script>
+        </div>
+        <div class="console"></div>
