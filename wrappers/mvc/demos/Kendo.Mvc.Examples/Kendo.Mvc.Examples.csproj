@@ -87,6 +87,10 @@
     <Compile Include="Controllers\DateTimePicker\EventsController.cs" />
     <Compile Include="Controllers\DateTimePicker\TemplateController.cs" />
     <Compile Include="Controllers\DateTimePicker\RangeSelectionController.cs" />
+    <Compile Include="Controllers\DropDownList\ApiController.cs" />
+    <Compile Include="Controllers\DropDownList\EventsController.cs" />
+    <Compile Include="Controllers\DropDownList\TemplateController.cs" />
+    <Compile Include="Controllers\DropDownList\RemoteDataSourceController.cs" />
     <Compile Include="Controllers\DropDownList\IndexController.cs" />
     <Compile Include="Controllers\ChartController.cs" />
     <Compile Include="Controllers\Linear_Gauge\IndexController.cs" />
@@ -194,6 +198,97 @@
     <Content Include="Areas\aspx\Views\web\upload\events.aspx" />
     <Content Include="Areas\aspx\Views\web\numerictextbox\index.aspx" />
     <Content Include="Areas\aspx\Views\web\upload\result.aspx" />
+    <Content Include="Content\web\dropdownlist\Customers\ALFKI.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\ANATR.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\ANTON.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\AROUT.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\BERGS.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\BLAUS.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\BLONP.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\BOLID.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\BONAP.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\BOTTM.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\BSBEV.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\CACTU.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\CENTC.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\CHOPS.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\COMMI.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\CONSH.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\DRACD.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\DUMON.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\EASTC.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\ERNSH.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\FAMIA.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\FISSA.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\FOLIG.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\FOLKO.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\FRANK.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\FRANR.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\FRANS.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\FURIB.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\GALED.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\GODOS.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\GOURL.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\GREAL.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\GROSR.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\HANAR.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\HILAA.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\HUNGC.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\HUNGO.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\ISLAT.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\KOENE.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\LACOR.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\LAMAI.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\LAUGB.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\LAZYK.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\LEHMS.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\LETSS.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\LILAS.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\LINOD.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\LONEP.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\MAGAA.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\MAISD.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\MEREP.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\MORGK.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\NORTS.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\OCEAN.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\OLDWO.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\OTTIK.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\PARIS.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\PERIC.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\PICCO.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\PRINI.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\QUEDE.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\QUEEN.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\QUICK.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\RANCH.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\RATTC.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\REGGC.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\RICAR.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\RICSU.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\ROMEY.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\SANTG.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\SAVEA.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\SEVES.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\SIMOB.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\SPECD.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\SPLIR.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\SUPRD.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\THEBI.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\THECR.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\TOMSP.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\TORTU.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\TRADH.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\TRAIH.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\VAFFE.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\VICTE.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\VINET.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\WANDK.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\WARTH.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\WELLI.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\WHITC.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\WILMK.jpg" />
+    <Content Include="Content\web\dropdownlist\Customers\WOLZA.jpg" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\jquery-1.7.2.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
@@ -220,9 +315,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Content\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Areas\aspx\Views\Web.config" />
   </ItemGroup>
@@ -358,6 +451,15 @@
     <Content Include="Areas\aspx\Views\web\datetimepicker\index.aspx" />
     <Content Include="Areas\aspx\Views\web\datetimepicker\rangeselection.aspx" />
     <Content Include="Areas\razor\Views\dataviz\area_chart\remote_data.cshtml" />
+    <Content Include="Areas\razor\Views\web\dropdownlist\api.cshtml" />
+    <Content Include="Areas\razor\Views\web\dropdownlist\events.cshtml" />
+    <Content Include="Areas\razor\Views\web\dropdownlist\remotedatasource.cshtml" />
+    <Content Include="Areas\razor\Views\web\dropdownlist\template.cshtml" />
+    <Content Include="Areas\aspx\Views\web\dropdownlist\api.aspx" />
+    <Content Include="Areas\aspx\Views\web\dropdownlist\events.aspx" />
+    <Content Include="Areas\aspx\Views\web\dropdownlist\index.aspx" />
+    <Content Include="Areas\aspx\Views\web\dropdownlist\remotedatasource.aspx" />
+    <Content Include="Areas\aspx\Views\web\dropdownlist\template.aspx" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
