@@ -16,8 +16,6 @@ namespace Kendo.Mvc.UI
         {
             DefaultToolGroup = new EditorToolGroup(this);
 
-            ClientEvents = new EditorClientEvents();
-
             Template = new HtmlTemplate();
 
             //TODO: Implement customization of the fonts names and sizes
@@ -33,12 +31,6 @@ namespace Kendo.Mvc.UI
                 .FormatBlock()
                 .CreateLink().Unlink()
                 .InsertImage();
-        }
-
-        public EditorClientEvents ClientEvents
-        {
-            get;
-            private set;
         }
 
         public EditorToolGroup DefaultToolGroup
@@ -86,11 +78,7 @@ namespace Kendo.Mvc.UI
 
         public override void WriteInitializationScript(TextWriter writer)
         {
-/*TODO: editor tool serialization
-            ClientEvents.SerializeTo(objectWriter);
-*/
-
-            var options = new Dictionary<string, object>();
+            var options = new Dictionary<string, object>(Events);
 
             options["tools"] = DefaultToolGroup.Tools.Select(tool =>
             {

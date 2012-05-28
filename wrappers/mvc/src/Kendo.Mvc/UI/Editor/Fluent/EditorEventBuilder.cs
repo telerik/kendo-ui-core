@@ -1,0 +1,70 @@
+namespace Kendo.Mvc.UI.Fluent
+{
+    using System;
+    using System.Collections.Generic;
+    /// <summary>
+    /// Defines the fluent interface for configuring the <see cref="Editor.ClientEvents"/>.
+    /// </summary>
+    public class EditorEventBuilder : EventBuilder
+    {
+        public EditorEventBuilder(IDictionary<string, object> events) : base(events)
+        {
+        }
+
+        public EditorEventBuilder Change(string handler)
+        {
+            Handler("change", handler);
+
+            return this;
+        }
+
+        public EditorEventBuilder Change(Func<object, object> handler)
+        {
+            Handler("change", handler);
+
+            return this;
+        }
+
+        public EditorEventBuilder Execute(string handler)
+        {
+            Handler("execute", handler);
+
+            return this;
+        }
+
+        public EditorEventBuilder Execute(Func<object, object> handler)
+        {
+            Handler("execute", handler);
+
+            return this;
+        }
+
+        public EditorEventBuilder Paste(string handler)
+        {
+            Handler("paste", handler);
+
+            return this;
+        }
+
+        public EditorEventBuilder Paste(Func<object, object> handler)
+        {
+            Handler("paste", handler);
+
+            return this;
+        }
+
+        public EditorEventBuilder Select(string handler)
+        {
+            Handler("select", handler);
+
+            return this;
+        }
+
+        public EditorEventBuilder Select(Func<object, object> handler)
+        {
+            Handler("select", handler);
+
+            return this;
+        }
+    }
+}
