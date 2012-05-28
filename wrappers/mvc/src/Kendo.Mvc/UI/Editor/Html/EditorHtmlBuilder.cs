@@ -1,7 +1,6 @@
 namespace Kendo.Mvc.UI.Html
 {
     using System.Linq;
-    using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.UI;
 
     public class EditorHtmlBuilder : HtmlBuilderBase
@@ -13,12 +12,9 @@ namespace Kendo.Mvc.UI.Html
             this.editor = component;
         }
 
-        public IHtmlNode CreateEditor()
+        protected override IHtmlNode BuildCore()
         {
-            return new HtmlElement("table")
-                    .Attributes(new { id = editor.Id, cellspacing = "4", cellpadding = "0" })
-                    .Attributes(editor.HtmlAttributes)
-                    .PrependClass(UIPrimitives.Widget, "k-editor", UIPrimitives.Header);
+            return CreateTextArea();
         }
 
         public IHtmlNode CreateTextArea()
@@ -29,10 +25,10 @@ namespace Kendo.Mvc.UI.Html
                                 cols = "20",
                                 rows = "5",
                                 name = editor.Name,
-                                id = editor.Id + "-value"
+                                id = editor.Id
                             })
-                            .Attributes(editor.GetUnobtrusiveValidationAttributes())
-                            .PrependClass(UIPrimitives.Content, UIPrimitives.Editor.RawContent);
+                            .Attributes(editor.HtmlAttributes)
+                            .Attributes(editor.GetUnobtrusiveValidationAttributes());
 
             var value = editor.GetValue<string>(editor.Value);
 
@@ -50,39 +46,6 @@ namespace Kendo.Mvc.UI.Html
             }
 
             return content;
-        }
-
-        private IHtmlNode CreateToolBar()
-        {
-            return new EditorToolGroupHtmlBuilder(editor.DefaultToolGroup)
-                .Build();
-        }
-        
-        protected override IHtmlNode BuildCore()
-        {
-            var root = CreateEditor();
-
-            var toolbarRow = new HtmlElement("tr").AppendTo(root);
-
-            if (editor.DefaultToolGroup.Tools.Any())
-            {
-                CreateToolBar().AppendTo(new HtmlElement("td").AddClass("k-editor-toolbar-wrap").AppendTo(toolbarRow));
-            }
-
-            var editableCell = new HtmlElement("td")
-                .AddClass("k-editable-area")
-                .ToggleClass("input-validation-error", !editor.IsValid())
-                .AppendTo(new HtmlElement("tr").AppendTo(root));
-
-            var textarea = CreateTextArea();
-            textarea.AppendTo(editableCell);
-            
-            var script = new HtmlElement("script")
-                            .Html("document.getElementById('" + textarea.Attribute("id") + "').style.display='none'");
-
-            script.AppendTo(editableCell);
-
-            return root;
         }
     }
 }

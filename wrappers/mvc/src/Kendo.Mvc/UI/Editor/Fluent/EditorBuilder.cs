@@ -2,7 +2,6 @@ namespace Kendo.Mvc.UI.Fluent
 {
     using System;
     using Kendo.Mvc.Infrastructure;
-    using System.Globalization;
 
     public class EditorBuilder : ViewComponentBuilderBase<Editor, EditorBuilder>, IHideObjectMembers
     {
@@ -16,7 +15,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <param name="value">The action which renders the HTML content.</param>
         /// <code lang="CS">
-        ///  &lt;% Html.Telerik().Editor()
+        ///  &lt;% Html.Kendo().Editor()
         ///            .Name("Editor")
         ///            .Value(() => { %&gt;
         ///                &lt;blockquote&gt;
@@ -50,7 +49,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <param name="value">An HTML string.</param>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Editor()
+        ///  &lt;%= Html.Kendo().Editor()
         ///             .Name("Editor")
         ///             .Value("&lt;blockquote&gt;A towel has &lt;strong&gt;immense&lt;/strong&gt; psychological value&lt;/blockquote&gt;")
         /// %&gt;
@@ -84,7 +83,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Encode HTML content.
         /// </summary>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Editor()
+        ///  &lt;%= Html.Kendo().Editor()
         ///             .Name("Editor")
         ///             .Value("&lt;blockquote&gt;A towel has &lt;strong&gt;immense&lt;/strong&gt; psychological value&lt;/blockquote&gt;")
         ///             .Encode(true)
@@ -95,40 +94,6 @@ namespace Kendo.Mvc.UI.Fluent
             Guard.IsNotNull(value, "value");
 
             Component.Encode = value;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the localization culture of the editor.
-        /// </summary>
-        /// <param name="culture">The culture.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Editor()
-        ///             .Name("Editor")
-        ///             .Value("&lt;blockquote&gt;A towel has &lt;strong&gt;immense&lt;/strong&gt; psychological value&lt;/blockquote&gt;")
-        ///             .Localizable("de-DE")
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public EditorBuilder Localizable(string culture)
-        {
-            var localizationServiceFactory = DI.Current.Resolve<ILocalizationServiceFactory>();
-            var cultureInfo = new CultureInfo(culture);
-            
-            Component.Localization = new EditorLocalization(localizationServiceFactory.Create("EditorLocalization", cultureInfo), cultureInfo);
-
-            return this;
-        }
-
-        public EditorBuilder FileBrowser(Action<EditorFileBrowserSettingsBuilder> configurator)
-        {
-            Guard.IsNotNull(configurator, "configurator");
-
-            var builder = new EditorFileBrowserSettingsBuilder(Component.FileBrowserSettings);
-            
-            configurator(builder);
 
             return this;
         }

@@ -32,106 +32,92 @@ namespace Kendo.Mvc.UI.Fluent
 
         public EditorToolFactory Bold()
         {
-            return Button("Bold");
+            return Button("bold");
         }
 
         public EditorToolFactory Italic()
         {
-            return Button("Italic");
+            return Button("italic");
         }
 
         public EditorToolFactory Underline()
         {
-            return Button("Underline");
+            return Button("underline");
         }
 
         public EditorToolFactory Strikethrough()
         {
-            return Button("Strikethrough");
+            return Button("strikethrough");
         }
 
         public EditorToolFactory Superscript()
         {
-            return Button("Superscript");
+            return Button("superscript");
         }
 
         public EditorToolFactory Subscript()
         {
-            return Button("Subscript");
-        }
-
-        public EditorToolFactory Separator()
-        {
-            group.Tools.Add(new EditorSeparator());
-
-            return this;
-        }
-
-        public EditorToolFactory Break()
-        {
-            group.Tools.Add(new EditorBreak());
-
-            return this;
+            return Button("subscript");
         }
 
         public EditorToolFactory JustifyLeft()
         {
-            return Button("JustifyLeft");
+            return Button("justifyLeft");
         }
 
         public EditorToolFactory JustifyRight()
         {
-            return Button("JustifyRight");
+            return Button("justifyRight");
         }
 
         public EditorToolFactory JustifyCenter()
         {
-            return Button("JustifyCenter");
+            return Button("justifyCenter");
         }
 
         public EditorToolFactory JustifyFull()
         {
-            return Button("JustifyFull");
+            return Button("justifyFull");
         }
 
         public EditorToolFactory InsertUnorderedList()
         {
-            return Button("InsertUnorderedList");
+            return Button("insertUnorderedList");
         }
 
         public EditorToolFactory Indent()
         {
-            return Button("Indent");
+            return Button("indent");
         }
 
         public EditorToolFactory Outdent()
         {
-            return Button("Outdent");
+            return Button("outdent");
         }
 
         public EditorToolFactory InsertOrderedList()
         {
-            return Button("InsertOrderedList");
+            return Button("insertOrderedList");
         }
         
         public EditorToolFactory InsertImage()
         {
-            return Button("InsertImage");
+            return Button("insertImage");
         }
 
         public EditorToolFactory CreateLink()
         {
-            return Button("CreateLink");
+            return Button("createLink");
         }
 
         public EditorToolFactory Unlink()
         {
-            return Button("Unlink");
+            return Button("unlink");
         }
 
         public EditorToolFactory FontName()
         {
-            return ComboBox("FontName", EditorDefaultOptions.FontName);
+            return ComboBox("fontName", null);
         }
 
         public EditorToolFactory FontName(Action<EditorDropDownItemBuilder> configurator)
@@ -141,12 +127,12 @@ namespace Kendo.Mvc.UI.Fluent
 
             configurator(builder);
 
-            return ComboBox("FontName", items);
+            return ComboBox("fontName", items);
         }
 
         public EditorToolFactory FontSize()
         {
-            return ComboBox("FontSize", EditorDefaultOptions.FontSize);
+            return ComboBox("fontSize", null);
         }
 
         public EditorToolFactory FontSize(Action<EditorDropDownItemBuilder> configurator)
@@ -157,12 +143,12 @@ namespace Kendo.Mvc.UI.Fluent
 
             configurator(builder);
 
-            return ComboBox("FontSize", items);
+            return ComboBox("fontSize", items);
         }
 
         public EditorToolFactory FormatBlock()
         {
-            return SelectBox("FormatBlock", EditorDefaultOptions.FormatBlock);
+            return SelectBox("formatBlock", null);
         }
 
         public EditorToolFactory FormatBlock(Action<EditorDropDownItemBuilder> configurator)
@@ -173,7 +159,7 @@ namespace Kendo.Mvc.UI.Fluent
 
             configurator(builder);
 
-            return DropDown("FormatBlock", items);
+            return DropDown("formatBlock", items);
         }
 
         public EditorToolFactory Snippets(Action<EditorSnippetBuilder> configurator)
@@ -184,9 +170,10 @@ namespace Kendo.Mvc.UI.Fluent
 
             configurator(builder);
 
-            return SelectBox("InsertHtml", items);
+            return SelectBox("insertHtml", items);
         }
-        
+       
+        /*TODO: STYLES
         public EditorToolFactory Styles(Action<EditorDropDownItemBuilder> configurator)
         {
             var items = new List<DropDownItem>();
@@ -195,50 +182,51 @@ namespace Kendo.Mvc.UI.Fluent
 
             configurator(builder);
 
-            return SelectBox("Style", items);
+            return SelectBox("style", items);
         }
+        */
 
         public EditorToolFactory FontColor()
         {
-            return ColorPicker("ForeColor");
+            return ColorPicker("foreColor");
         }
 
         public EditorToolFactory BackColor()
         {
-            return ColorPicker("BackColor");
+            return ColorPicker("backColor");
         }
 
         private EditorToolFactory Button(string text)
         {
-            group.Tools.Add(new EditorButton(text));
+            group.Tools.Add(new EditorTool(text));
 
             return this;
         }
 
         private EditorToolFactory ComboBox(string identifier, IList<DropDownItem> items)
         {
-            group.Tools.Add(new EditorComboBox(identifier, items, group.Editor.ViewContext));
+            group.Tools.Add(new EditorTool(identifier));
 
             return this;
         }
 
         private EditorToolFactory DropDown(string identifier, IList<DropDownItem> items)
         {
-            group.Tools.Add(new EditorDropDown(identifier, items));
+            group.Tools.Add(new EditorTool(identifier));
 
             return this;
         }
 
         private EditorToolFactory SelectBox(string identifier, IList<DropDownItem> items)
         {
-            group.Tools.Add(new EditorSelectBox(identifier, items));
+            group.Tools.Add(new EditorTool(identifier));
 
             return this;
         }
 
         private EditorToolFactory ColorPicker(string identifier)
         {
-            group.Tools.Add(new EditorColorPicker(identifier));
+            group.Tools.Add(new EditorTool(identifier));
 
             return this;
         }
