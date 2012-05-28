@@ -228,6 +228,49 @@
                 equal(div.find("input").val(), "bar");
             });
 
+            test("custom editor as string", function() {
+                var wasCalled = false,
+                MyModel = Model.define({
+                        fields: {
+                            foo: {
+                                field: "foo",
+                                type: "string"
+                            }
+                        }
+                    }),
+                    model = new MyModel(),
+                    editable = setup({
+                        fields: {
+                            field: "foo",
+                            editor: '<input name="foo"/>'
+                        },
+                        model: model
+                    });
+
+                ok(div.find("input[name=foo]").length);
+            });
+
+            test("custom editor as encoded string", function() {
+                var wasCalled = false,
+                MyModel = Model.define({
+                        fields: {
+                            foo: {
+                                field: "foo",
+                                type: "string"
+                            }
+                        }
+                    }),
+                    model = new MyModel(),
+                    editable = setup({
+                        fields: {
+                            field: "foo",
+                            editor: '%3cinput name="foo" type="text" value="" /%3e'
+                        },
+                        model: model
+                    });
+
+                ok(div.find("input[name=foo]").length);
+            });
             test("custom editor name binding is added to already existing", function() {
                 var model = kendo.observable({ foo: "bar", items: ["foo", "bar"] }),
                     editable = setup({
