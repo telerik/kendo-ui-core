@@ -103,7 +103,7 @@ namespace Kendo.Mvc.UI
 
             if (Min > Max)
             {
-                throw new ArgumentException(TextResource.MinPropertyMustBeLessThenMaxProperty.FormatWith("MinValue", "MaxValue"));
+                throw new ArgumentException(TextResource.MinPropertyMustBeLessThenMaxProperty.FormatWith("Min", "Max"));
             }
         }
     }

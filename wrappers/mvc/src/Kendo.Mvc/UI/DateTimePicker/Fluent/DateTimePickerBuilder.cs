@@ -24,6 +24,8 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         public DateTimePickerBuilder Interval(int interval) 
         {
+            Guard.IsNotZeroOrNegative(interval, "interval");
+
             Component.Interval = interval;
 
             return this;
@@ -60,16 +62,20 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
-        public DateTimePickerBuilder Depth(string depth)
+        public DateTimePickerBuilder Depth(CalendarView depth)
         {
-            Component.Depth = depth;
+            Guard.IsNotNull(depth, "depth");
+
+            Component.Depth = depth.ToString().ToLower();
 
             return this;
         }
 
-        public DateTimePickerBuilder Start(string start)
+        public DateTimePickerBuilder Start(CalendarView start)
         {
-            Component.Start = start;
+            Guard.IsNotNull(start, "start");
+
+            Component.Start = start.ToString().ToLower();
 
             return this;
         }
