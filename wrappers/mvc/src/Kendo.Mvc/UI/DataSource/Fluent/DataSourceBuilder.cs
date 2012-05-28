@@ -19,6 +19,13 @@ namespace Kendo.Mvc.UI.Fluent
             this.dataSource = dataSource;
         }
 
+        public DataSourceBuilder<TModel> Events(Action<DataSourceEventBuilder> configurator)
+        {
+            configurator(new DataSourceEventBuilder(dataSource.Events));
+
+            return this;
+        }
+
         public DataSourceBuilder<TModel> Read(Action<CrudOperationBuilder> configurator)
         {
             configurator(new CrudOperationBuilder(dataSource.Transport.Read, viewContext, urlGenerator));

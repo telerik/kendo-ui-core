@@ -18,6 +18,8 @@ namespace Kendo.Mvc.UI
             Groups = new List<GroupDescriptor>();
             Aggregates = new List<AggregateDescriptor>();
 
+            Events = new Dictionary<string, object>();
+
             Schema = new DataSourceSchema();
         }
 
@@ -25,6 +27,7 @@ namespace Kendo.Mvc.UI
         public int Page { get; set; }
         public int Total { get; set; }
         public DataSourceSchema Schema { get; private set; }
+        public IDictionary<string, object> Events { get; private set; }
 
         protected override void Serialize(IDictionary<string, object> json)
         {
@@ -96,7 +99,12 @@ namespace Kendo.Mvc.UI
             if (Filters.Any() || ServerFiltering)
             {
                 json["filter"] = Filters.OfType<FilterDescriptorBase>().ToJson();
-            }            
+            }
+
+            if (Events.Keys.Any())
+            {
+                json.Merge(Events);
+            }
 
             json["schema"] = Schema.ToJson();
 
@@ -106,7 +114,8 @@ namespace Kendo.Mvc.UI
 
         public bool IsClientOperationMode
         {
-            get {
+            get
+            {
                 return Type == DataSourceType.Ajax &&
                     !(ServerPaging && ServerSorting && ServerGrouping && ServerFiltering && ServerAggregates);
             }
@@ -116,7 +125,7 @@ namespace Kendo.Mvc.UI
         {
             Schema.Model = new ModelDescriptor(modelType);
         }
-        
+
         public DataSourceType? Type
         {
             get;

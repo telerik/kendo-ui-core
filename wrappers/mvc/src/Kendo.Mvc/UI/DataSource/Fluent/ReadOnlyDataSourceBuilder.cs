@@ -39,5 +39,12 @@
             dataSource.ServerFiltering = enabled;
             return this;
         }
+        
+        public ReadOnlyDataSourceBuilder Events(Action<DataSourceEventBuilder> configurator)
+        {
+            configurator(new DataSourceEventBuilder(dataSource.Events));
+
+            return this;
+        }
     }
 }
