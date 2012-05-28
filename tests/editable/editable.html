@@ -271,6 +271,7 @@
 
                 ok(div.find("input[name=foo]").length);
             });
+
             test("custom editor name binding is added to already existing", function() {
                 var model = kendo.observable({ foo: "bar", items: ["foo", "bar"] }),
                     editable = setup({

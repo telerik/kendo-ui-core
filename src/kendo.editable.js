@@ -121,7 +121,7 @@
                             binding = this.getAttribute(bindAttr) || "";
 
                         if (binding.indexOf("value:") === -1) {
-                            binding += ",value:" + fieldName;
+                            binding += (binding.length ? "," : "") + "value:" + fieldName;
 
                             $(this).attr(bindAttr, binding);
                         }
