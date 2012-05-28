@@ -163,7 +163,7 @@
                     $.map(stylesheets, function(href){
                         return "<link rel='stylesheet' href='" + href + "'>";
                     }).join("") +
-                    "</head><body spellcheck='false'></body></html>"
+                    "</head><body></body></html>"
                 );
 
             doc.close();
