@@ -1,6 +1,6 @@
 @model IEnumerable<Kendo.Mvc.Examples.Models.Product>
            
-@{Html.Kendo().Grid(Model)
+@(Html.Kendo().Grid(Model)
     .Name("Grid")
     .Columns(columns =>
     {
@@ -19,7 +19,7 @@
     .Scrollable()
     .Sortable()    
     .DataSource(dataSource => dataSource
-        .Type(DataSourceType.Server)
+        .Server()
         .Aggregates(aggregates =>
         {
             aggregates.Add(p => p.UnitsInStock).Min().Max().Count();
@@ -29,5 +29,5 @@
         })
         .Group(groups => groups.Add(p => p.UnitsInStock))
         .Read(read => read.Action("ServerAggregates", "Grid"))
-    ).Render();
-}
+    )
+)

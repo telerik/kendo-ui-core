@@ -1410,7 +1410,9 @@
 
     var DataSource = Observable.extend({
         init: function(options) {
-            var that = this, id, model, transport;
+            var that = this, id, model, transport, data;
+
+            data = options.data;
 
             options = that.options = extend({}, that.options, options);
 
@@ -1440,7 +1442,7 @@
 
                 if (options.type) {
                     if (!isPlainObject(kendo.data.transports[options.type])) {
-                       that.transport = new kendo.data.transports[options.type](extend(transport, { data: options.data }));
+                       that.transport = new kendo.data.transports[options.type](extend(transport, { data: data }));
                     } else {
                         transport = extend(true, {}, kendo.data.transports[options.type], transport);
                     }
@@ -1460,14 +1462,6 @@
             model = that.reader.model || {};
 
             that._data = that._observe(that._data);
-
-            id = model.id;
-
-            if (id) {
-                that.id = function(record) {
-                    return id(record);
-                };
-            }
 
             that.bind([ERROR, CHANGE, REQUESTSTART], options);
         },

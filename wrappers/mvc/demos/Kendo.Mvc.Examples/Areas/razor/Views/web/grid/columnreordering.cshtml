@@ -3,7 +3,7 @@
     .Pageable()    
     .Scrollable()     
     .DataSource(dataSource => dataSource
-        .Type(DataSourceType.Ajax)
+        .Ajax()
         .Read(read => read.Action("ColumnReordering_Read", "Grid"))
      )
      .Resizable(resize => resize.Columns(true))

@@ -12,7 +12,7 @@
     .Filterable()
     .Groupable()
     .DataSource(dataSource => dataSource
-        .Type(DataSourceType.Ajax)
+        .Ajax()
         .Read(read => read.Action("AjaxBinding_Read", "Grid"))
      )
 )

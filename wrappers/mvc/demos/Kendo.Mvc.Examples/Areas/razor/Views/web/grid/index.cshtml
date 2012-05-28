@@ -1,13 +1,15 @@
 @model IEnumerable<Kendo.Mvc.Examples.Models.Product>
+
 @(Html.Kendo().Grid(Model)    
     .Name("Grid")
     .Pageable()
     .Sortable()
     .Scrollable() 
     .Filterable()             
-    .DataSource(dataSource => dataSource.Type(DataSourceType.Server)
+    .DataSource(dataSource => dataSource
+        .Server()
         .Read(read => read.Action("Index", "Grid"))
         .Sort(s => s.Add(p => p.ProductID).Descending())
         .Filter(filters => filters.Add(p => p.ProductID).IsEqualTo(2))
-        )
+    )
 )
