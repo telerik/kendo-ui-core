@@ -1410,9 +1410,11 @@
 
     var DataSource = Observable.extend({
         init: function(options) {
-            var that = this, id, model, transport, data;
+            var that = this, model, transport, data;
 
-            data = options.data;
+            if (options) {
+                data = options.data;
+            }
 
             options = that.options = extend({}, that.options, options);
 
@@ -1467,8 +1469,8 @@
         },
 
         options: {
-            data: [],
             schema: {},
+            data: [],
             serverSorting: false,
             serverPaging: false,
             serverFiltering: false,
