@@ -12,29 +12,27 @@
     </p>
 </div>
 
-<%
-    var dates = new List<long>()
-    {
-        new DateTime(DateTime.Today.Year, DateTime.Today.Month, 11).Ticks,
-        new DateTime(DateTime.Today.Year, DateTime.Today.Month + 1, 6).Ticks,
-        new DateTime(DateTime.Today.Year, DateTime.Today.Month + 1, 27).Ticks,
-        new DateTime(DateTime.Today.Year, DateTime.Today.Month - 1, 3).Ticks,
-        new DateTime(DateTime.Today.Year, DateTime.Today.Month - 2, 22).Ticks
-    };
-%>
-
 <div class="demo-section" style="width:155px">
 <%= Html.Kendo().DateTimePicker()
       .Name("datetimepicker")
       .Value(DateTime.Today)
       .Footer("Today - #=kendo.toString(data, 'd') #")
-      .MonthTemplate("# if ($.inArray(+data.date, " + new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(dates) + ") != -1) { #" +
+      .MonthTemplate("# if ($.inArray(+data.date, birthdays) != -1) { #" +
                          "<div class=\"birthday\"></div>" +
                      "# } #" +
                      "#= data.value #")
 %>
 </div>
-
+<script>
+    var today = new Date(),
+        birthdays = [
+            +new Date(today.getFullYear(), today.getMonth(), 11),
+            +new Date(today.getFullYear(), today.getMonth() + 1, 6),
+            +new Date(today.getFullYear(), today.getMonth() + 1, 27),
+            +new Date(today.getFullYear(), today.getMonth() - 1, 3),
+            +new Date(today.getFullYear(), today.getMonth() - 2, 22)
+        ];
+</script>
 <script>
     $(document).ready(function() {
         $("#datetimepicker").data("kendoDateTimePicker")
@@ -45,7 +43,7 @@
 
 <style scoped>
     .birthday {
-        background: transparent url('@Url.Content("~/Content/web/calendar/cake.png")') no-repeat 0 50%;
+        background: transparent url('<%= Url.Content("~/Content/web/calendar/cake.png") %>') no-repeat 0 50%;
         display: inline-block;
         width: 16px;
         height: 16px;
