@@ -214,7 +214,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual SplitterBuilder Splitter()
         {
-            return new SplitterBuilder(new Splitter(ViewContext, ClientSideObjectWriterFactory));
+            return new SplitterBuilder(new Splitter(ViewContext, Initializer));
         }
 
         /// <summary>

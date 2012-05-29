@@ -5,20 +5,17 @@ namespace Kendo.Mvc.UI
     using System.Linq;
     using System.Web.Mvc;
     using System.Web.UI;
-    using Kendo.Mvc.Extensions;
+    using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.UI.Html;
 
     public class Splitter : ViewComponentBase
     {
-        public Splitter(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory)
-            : base(viewContext, clientSideObjectWriterFactory)
+        public Splitter(ViewContext viewContext, IJavaScriptInitializer initializer)
+            : base(viewContext, initializer)
         {
-
             Orientation = SplitterOrientation.Horizontal;
 
             Panes = new List<SplitterPane>();
-
-            ClientEvents = new SplitterClientEvents();
         }
 
         public SplitterOrientation Orientation
@@ -33,37 +30,23 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        public SplitterClientEvents ClientEvents
-        {
-            get;
-            private set;
-        }
-
         public override void WriteInitializationScript(TextWriter writer)
         {
-            // TODO: use new serialization scheme
-            // TODO: add animation configuration and builder
-            IClientSideObjectWriter objectWriter = ClientSideObjectWriterFactory.Create(Id, "kendoSplitter", writer);
+            var options = new Dictionary<string, object>(Events);
 
-            objectWriter.Start();
-
-            objectWriter.Append<SplitterOrientation>("orientation", Orientation, SplitterOrientation.Horizontal);
-
-            var panes = new List<IDictionary<string, object>>();
-
-            Panes.Each(pane =>
+            if (Orientation != SplitterOrientation.Horizontal)
             {
-                panes.Add(pane.Serialize());
-            });
-
-            if (panes.Any())
-            {
-                objectWriter.AppendCollection("panes", panes);
+                options["orientation"] = Orientation;
             }
 
-            ClientEvents.SerializeTo(objectWriter);
+            if (Panes.Any())
+            {
+                options["panes"] = Panes.Select(pane => pane.Serialize());
+            }
 
-            objectWriter.Complete();
+            // TODO: add animation configuration and builder
+
+            writer.Write(Initializer.Initialize(Id, "Splitter", options));
 
             base.WriteInitializationScript(writer);
         }

@@ -748,11 +748,10 @@
     <Compile Include="UI\Slider\Html\SliderHtmlBuilderFactory.cs" />
     <Compile Include="UI\Splitter\Fluent\SplitterPaneBuilder.cs" />
     <Compile Include="UI\Splitter\Fluent\SplitterPaneFactory.cs" />
-    <Compile Include="UI\Splitter\Fluent\SplitterClientEventsBuilder.cs" />
+    <Compile Include="UI\Splitter\Fluent\SplitterEventBuilder.cs" />
     <Compile Include="UI\Splitter\SplitterOrientation.cs" />
     <Compile Include="UI\Splitter\Fluent\SplitterBuilder.cs" />
     <Compile Include="UI\Splitter\Html\SplitterHtmlBuilder.cs" />
-    <Compile Include="UI\Splitter\SplitterClientEvents.cs" />
     <Compile Include="UI\Splitter\Splitter.cs" />
     <Compile Include="UI\Splitter\SplitterPane.cs" />
     <Compile Include="UI\TextBox\Html\NumericTextBoxHtmlBuilder.cs" />

@@ -1,10 +1,11 @@
 namespace Kendo.Mvc.UI.Tests
 {
-    using Moq;
     using System.IO;
     using System.Web;
     using System.Web.Mvc;
     using System.Web.UI;
+    using Kendo.Mvc.Infrastructure;
+    using Moq;
 
     public static class SplitterTestHelper
     {
@@ -17,14 +18,12 @@ namespace Kendo.Mvc.UI.Tests
 
             httpContext.Setup(c => c.Request.Browser.CreateHtmlTextWriter(It.IsAny<TextWriter>())).Returns(new HtmlTextWriter(TextWriter.Null));
 
-            Mock<IClientSideObjectWriterFactory> clientSideObjectWriterFactory = new Mock<IClientSideObjectWriterFactory>();
-            clientSideObjectWriter = new Mock<IClientSideObjectWriter>();
-
             viewContext = TestHelper.CreateViewContext();
 
-            clientSideObjectWriterFactory.Setup(c => c.Create(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<TextWriter>())).Returns(clientSideObjectWriter.Object);
 
-            Splitter splitter = new Splitter(viewContext, clientSideObjectWriterFactory.Object);
+            var initializer = new Mock<IJavaScriptInitializer>();
+            
+            var splitter = new Splitter(viewContext, initializer.Object);
 
             return splitter;
         }

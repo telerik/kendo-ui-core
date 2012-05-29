@@ -238,7 +238,6 @@
     <Compile Include="UI\Slider\SliderTestHelper.cs" />
     <Compile Include="UI\Splitter\SplitterPaneBuilderTests.cs" />
     <Compile Include="UI\Splitter\SplitterPaneFactoryTests.cs" />
-    <Compile Include="UI\Splitter\SplitterClientEventsBuilderTests.cs" />
     <Compile Include="UI\Splitter\SplitterTestHelper.cs" />
     <Compile Include="UI\Splitter\SplitterBuilderTests.cs" />
     <Compile Include="UI\Splitter\SplitterHtmlBuilderTests.cs" />
