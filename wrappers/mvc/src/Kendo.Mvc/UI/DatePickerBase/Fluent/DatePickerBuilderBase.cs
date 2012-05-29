@@ -45,8 +45,8 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;%= Html.Telerik().DatePicker()
         ///             .Name("DatePicker")
-        ///             .ClientEvents(events =>
-        ///                 events.OnLoad("onLoad").OnSelect("onSelect")
+        ///             .Events(events =>
+        ///                 events.Open("open").Change("change")
         ///             )
         /// %&gt;
         /// </code>

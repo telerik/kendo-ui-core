@@ -90,8 +90,6 @@ namespace Kendo.Mvc.Infrastructure
                 new TreeViewHtmlBuilderFactory(actionMethodCache));
 
             Current.Register<IClientSideObjectWriterFactory>(() => new ClientSideObjectWriterFactory());
-            
-            Current.Register<ICalendarHtmlBuilderFactory>(() => new CalendarHtmlBuilderFactory());
         }
         
         static void RegisterCacheDependencies()

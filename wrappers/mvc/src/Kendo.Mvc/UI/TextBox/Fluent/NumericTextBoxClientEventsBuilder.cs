@@ -6,17 +6,17 @@ namespace Kendo.Mvc.UI
     using System.Collections.Generic;
 
     /// <summary>
-    /// Defines the fluent interface for configuring the <see cref="TextBoxBase.ClientEvents"/>.
+    /// Defines the fluent interface for configuring the <see cref="TextBoxBase.Events"/>.
     /// </summary>
-    public class NumericTextBoxClientEventsBuilder : IHideObjectMembers
+    public class NumericTextBoxEventsBuilder : IHideObjectMembers
     {
-        private readonly IDictionary<string, object> clientEvents;
+        private readonly IDictionary<string, object> Events;
 
-        public NumericTextBoxClientEventsBuilder(IDictionary<string, object> clientEvents)
+        public NumericTextBoxEventsBuilder(IDictionary<string, object> Events)
         {
-            Guard.IsNotNull(clientEvents, "clientEvents");
+            Guard.IsNotNull(Events, "Events");
 
-            this.clientEvents = clientEvents;
+            this.Events = Events;
         }
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace Kendo.Mvc.UI
         /// <code lang="CS">
         ///  &lt;% Html.Kendo().NumericTextBox()
         ///            .Name("NumericTextBox")
-        ///            .ClientEvents(events => events.Change(
+        ///            .Events(events => events.Change(
         ///                 @&lt;text&gt;
         ///                 function(e) {
         ///                     //event handling code
@@ -38,11 +38,11 @@ namespace Kendo.Mvc.UI
         /// %&gt;
         /// </code>
         /// </example>
-        public NumericTextBoxClientEventsBuilder Change(Func<object, object> changeInlineCodeBlock)
+        public NumericTextBoxEventsBuilder Change(Func<object, object> changeInlineCodeBlock)
         {
             Guard.IsNotNull(changeInlineCodeBlock, "changeInlineCodeBlock");
 
-            clientEvents["change"] = new ClientEvent { InlineCodeBlock = changeInlineCodeBlock };
+            Events["change"] = new ClientEvent { InlineCodeBlock = changeInlineCodeBlock };
 
             return this;
         }
@@ -55,15 +55,15 @@ namespace Kendo.Mvc.UI
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().NumericTextBox()
         ///             .Name("NumericTextBox")
-        ///             .ClientEvents(events => events.Change("change"))
+        ///             .Events(events => events.Change("change"))
         /// %&gt;
         /// </code>
         /// </example>
-        public NumericTextBoxClientEventsBuilder Change(string changeHandlerName)
+        public NumericTextBoxEventsBuilder Change(string changeHandlerName)
         {
             Guard.IsNotNullOrEmpty(changeHandlerName, "changeHandlerName");
 
-            clientEvents["change"] = new ClientEvent { HandlerName = changeHandlerName };
+            Events["change"] = new ClientEvent { HandlerName = changeHandlerName };
 
             return this;
         }
@@ -76,7 +76,7 @@ namespace Kendo.Mvc.UI
         /// <code lang="CS">
         ///  &lt;% Html.Kendo().NumericTextBox()
         ///            .Name("NumericTextBox")
-        ///            .ClientEvents(events => events.Spin(
+        ///            .Events(events => events.Spin(
         ///                 @&lt;text&gt;
         ///                 function(e) {
         ///                     //event handling code
@@ -87,11 +87,11 @@ namespace Kendo.Mvc.UI
         /// %&gt;
         /// </code>
         /// </example>
-        public NumericTextBoxClientEventsBuilder Spin(Func<object, object> spinInlineCodeBlock)
+        public NumericTextBoxEventsBuilder Spin(Func<object, object> spinInlineCodeBlock)
         {
             Guard.IsNotNull(spinInlineCodeBlock, "spinInlineCodeBlock");
 
-            clientEvents["spin"] = new ClientEvent { InlineCodeBlock = spinInlineCodeBlock };
+            Events["spin"] = new ClientEvent { InlineCodeBlock = spinInlineCodeBlock };
 
             return this;
         }
@@ -104,15 +104,15 @@ namespace Kendo.Mvc.UI
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().NumericTextBox()
         ///             .Name("NumericTextBox")
-        ///             .ClientEvents(events => events.Spin("spin"))
+        ///             .Events(events => events.Spin("spin"))
         /// %&gt;
         /// </code>
         /// </example>
-        public NumericTextBoxClientEventsBuilder Spin(string spinHandlerName)
+        public NumericTextBoxEventsBuilder Spin(string spinHandlerName)
         {
             Guard.IsNotNullOrEmpty(spinHandlerName, "spinHandlerName");
 
-            clientEvents["spin"] = new ClientEvent { HandlerName = spinHandlerName };
+            Events["spin"] = new ClientEvent { HandlerName = spinHandlerName };
 
             return this;
         }

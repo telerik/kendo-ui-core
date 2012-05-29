@@ -1,6 +1,5 @@
 namespace Kendo.Mvc.UI
 {
-    using Kendo.Mvc;
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.Resources;
@@ -8,17 +7,13 @@ namespace Kendo.Mvc.UI
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using System.Linq;
-    using System.Web.Mvc;
-    using System.Web.Query.Dynamic; 
+    using System.Web.Mvc; 
 
     public class NumericTextBox<T> : ViewComponentBase, IInputComponent<T> where T : struct
     {
         public NumericTextBox(ViewContext viewContext, IJavaScriptInitializer javaScriptInitializer, ViewDataDictionary viewData)
             : base(viewContext, javaScriptInitializer, viewData)
         {
-            Events = new Dictionary<string, object>();
-
             Enabled = true;
         }
 
@@ -80,12 +75,6 @@ namespace Kendo.Mvc.UI
         {
             get;
             set;
-        }
-
-        public IDictionary<string, object> Events
-        {
-            get;
-            private set;
         }
 
         public override void WriteInitializationScript(TextWriter writer)

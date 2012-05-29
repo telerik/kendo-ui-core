@@ -275,12 +275,6 @@
     <Compile Include="UI\AutoComplete\AutoCompleteHtmlBuilderTests.cs" />
     <Compile Include="UI\AutoComplete\AutoCompleteTestHelper.cs" />
     <Compile Include="UI\AutoComplete\AutoCompleteBuilderTests.cs" />
-    <Compile Include="UI\Calendar\CalendarBuilderTests.cs" />
-    <Compile Include="UI\Calendar\CalendarRenderingTests.cs" />
-    <Compile Include="UI\Calendar\CalendarSelectionSettingsBuilderTests.cs" />
-    <Compile Include="UI\Calendar\CalendarTestHelper.cs" />
-    <Compile Include="UI\Calendar\CalendarHtmlBuilderFactoryTests.cs" />
-    <Compile Include="UI\Calendar\CalendarHtmlBuilderTests.cs" />
     <Compile Include="UI\ClientSideObjectWriterTests.cs" />
     <Compile Include="UI\ComboBox\ComboBoxTestHelper.cs" />
     <Compile Include="UI\ContentNavigationItemBuilderTests.cs" />

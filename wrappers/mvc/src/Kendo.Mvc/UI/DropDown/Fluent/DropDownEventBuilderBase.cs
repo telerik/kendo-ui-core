@@ -9,20 +9,20 @@ namespace Kendo.Mvc.UI.Fluent
     using System.Linq;
     using System.Web.Query.Dynamic;
 
-    public class DropDownBaseClientEventsBuilder
+    public class DropDownEventBuilderBase
     {
-        private readonly IDictionary<string, object> clientEvents;       
+        private readonly IDictionary<string, object> Events;       
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DropDownBaseClientEventsBuilder"/> class.
+        /// Initializes a new instance of the <see cref="DropDownEventBuilderBase"/> class.
         /// </summary>
-        /// <param name="clientEvents">The client events.</param>
+        /// <param name="Events">The client events.</param>
         /// <param name="viewContext">The view context.</param>
-        public DropDownBaseClientEventsBuilder(IDictionary<string, object> clientEvents)
+        public DropDownEventBuilderBase(IDictionary<string, object> Events)
         {
-            Guard.IsNotNull(clientEvents, "clientEvents");
+            Guard.IsNotNull(Events, "Events");
 
-            this.clientEvents = clientEvents;
+            this.Events = Events;
         }
 
         
@@ -34,7 +34,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;% Html.Telerik().DropDownList()
         ///            .Name("DropDownList")
-        ///            .ClientEvents(events => events.Select(
+        ///            .Events(events => events.Select(
         ///                 @&lt;text&gt;
         ///                 function(e) {
         ///                     //event handling code
@@ -44,11 +44,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public DropDownBaseClientEventsBuilder Select(Func<object, object> selectInlineCodeBlock)
+        public DropDownEventBuilderBase Select(Func<object, object> selectInlineCodeBlock)
         {
             Guard.IsNotNull(selectInlineCodeBlock, "selectInlineCodeBlock");
 
-            clientEvents["select"] = new ClientEvent { InlineCodeBlock = selectInlineCodeBlock };
+            Events["select"] = new ClientEvent { InlineCodeBlock = selectInlineCodeBlock };
 
 
             return this;
@@ -62,15 +62,15 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;%= Html.Telerik().DropDownList()
         ///             .Name("DropDownList")
-        ///             .ClientEvents(events => events.Select("select"))
+        ///             .Events(events => events.Select("select"))
         /// %&gt;
         /// </code>
         /// </example>
-        public DropDownBaseClientEventsBuilder Select(string selectHandlerName)
+        public DropDownEventBuilderBase Select(string selectHandlerName)
         {
             Guard.IsNotNullOrEmpty(selectHandlerName, "selectHandlerName");
 
-            clientEvents["select"] = new ClientEvent { HandlerName = selectHandlerName };
+            Events["select"] = new ClientEvent { HandlerName = selectHandlerName };
 
             return this;
         }
@@ -83,7 +83,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;% Html.Telerik().DropDownList()
         ///            .Name("DropDownList")
-        ///            .ClientEvents(events => events.Change(
+        ///            .Events(events => events.Change(
         ///                 @&lt;text&gt;
         ///                 function(e) {
         ///                     //event handling code
@@ -93,11 +93,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public DropDownBaseClientEventsBuilder Change(Func<object, object> changeInlineCodeBlock)
+        public DropDownEventBuilderBase Change(Func<object, object> changeInlineCodeBlock)
         {
             Guard.IsNotNull(changeInlineCodeBlock, "changeInlineCodeBlock");
 
-            clientEvents["change"] = new ClientEvent { InlineCodeBlock = changeInlineCodeBlock };
+            Events["change"] = new ClientEvent { InlineCodeBlock = changeInlineCodeBlock };
 
             return this;
         }
@@ -110,15 +110,15 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;%= Html.Telerik().DropDownList()
         ///             .Name("DropDownList")
-        ///             .ClientEvents(events => events.Change("onChange"))
+        ///             .Events(events => events.Change("onChange"))
         /// %&gt;
         /// </code>
         /// </example>
-        public DropDownBaseClientEventsBuilder Change(string changeHandlerName)
+        public DropDownEventBuilderBase Change(string changeHandlerName)
         {
             Guard.IsNotNullOrEmpty(changeHandlerName, "changeHandlerName");
 
-            clientEvents["change"] = new ClientEvent { HandlerName = changeHandlerName };
+            Events["change"] = new ClientEvent { HandlerName = changeHandlerName };
 
             return this;
         }
@@ -131,15 +131,15 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;%= Html.Telerik().DropDownList()
         ///             .Name("DropDownList")
-        ///             .ClientEvents(events => events.Open("Open"))
+        ///             .Events(events => events.Open("Open"))
         /// %&gt;
         /// </code>
         /// </example>
-        public DropDownBaseClientEventsBuilder Open(string openHandlerName)
+        public DropDownEventBuilderBase Open(string openHandlerName)
         {
             Guard.IsNotNullOrEmpty(openHandlerName, "openHandlerName");
 
-            clientEvents["open"] = new ClientEvent { HandlerName = openHandlerName };
+            Events["open"] = new ClientEvent { HandlerName = openHandlerName };
 
             return this;
         }
@@ -152,7 +152,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;% Html.Telerik().DropDownList()
         ///            .Name("DropDownList")
-        ///            .ClientEvents(events => events.Open(
+        ///            .Events(events => events.Open(
         ///                 @&lt;text&gt;
         ///                 function(e) {
         ///                     //event handling code
@@ -162,11 +162,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public DropDownBaseClientEventsBuilder Open(Func<object, object> openInlineCodeBlock)
+        public DropDownEventBuilderBase Open(Func<object, object> openInlineCodeBlock)
         {
             Guard.IsNotNull(openInlineCodeBlock, "openInlineCodeBlock");
 
-            clientEvents["open"] = new ClientEvent { InlineCodeBlock = openInlineCodeBlock };
+            Events["open"] = new ClientEvent { InlineCodeBlock = openInlineCodeBlock };
 
             return this;
         }
@@ -179,7 +179,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;% Html.Telerik().DropDownList()
         ///            .Name("DropDownList")
-        ///            .ClientEvents(events => events.Close(
+        ///            .Events(events => events.Close(
         ///                 @&lt;text&gt;
         ///                 function(e) {
         ///                     //event handling code
@@ -189,11 +189,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public DropDownBaseClientEventsBuilder Close(Func<object, object> closeInlineCodeBlock)
+        public DropDownEventBuilderBase Close(Func<object, object> closeInlineCodeBlock)
         {
             Guard.IsNotNull(closeInlineCodeBlock, "closeInlineCodeBlock");
             
-            clientEvents["close"] = new ClientEvent { InlineCodeBlock = closeInlineCodeBlock };
+            Events["close"] = new ClientEvent { InlineCodeBlock = closeInlineCodeBlock };
 
             return this;
         }
@@ -206,15 +206,15 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;%= Html.Telerik().DropDownList()
         ///             .Name("DropDownList")
-        ///             .ClientEvents(events => events.Close("close"))
+        ///             .Events(events => events.Close("close"))
         /// %&gt;
         /// </code>
         /// </example>
-        public DropDownBaseClientEventsBuilder Close(string closeHandlerName)
+        public DropDownEventBuilderBase Close(string closeHandlerName)
         {
             Guard.IsNotNullOrEmpty(closeHandlerName, "closeHandlerName");
             
-            clientEvents["close"] = new ClientEvent { HandlerName = closeHandlerName };
+            Events["close"] = new ClientEvent { HandlerName = closeHandlerName };
 
             return this;
         }

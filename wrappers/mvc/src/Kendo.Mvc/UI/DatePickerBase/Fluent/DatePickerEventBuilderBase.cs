@@ -21,7 +21,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;% Html.Kendo().DatePicker()
         ///            .Name("DatePicker")
-        ///            .ClientEvents(events => events.Change(
+        ///            .Events(events => events.Change(
         ///                 @&lt;text&gt;
         ///                 function(e) {
         ///                     //event handling code
@@ -47,7 +47,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().DatePicker()
         ///             .Name("DatePicker")
-        ///             .ClientEvents(events => events.Change("change"))
+        ///             .Events(events => events.Change("change"))
         /// %&gt;
         /// </code>
         /// </example>
@@ -66,7 +66,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;% Html.Kendo().DatePicker()
         ///            .Name("DatePicker")
-        ///            .ClientEvents(events => events.Open(
+        ///            .Events(events => events.Open(
         ///                 @&lt;text&gt;
         ///                 %&gt;
         ///                 function(e) {
@@ -93,7 +93,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().DatePicker()
         ///             .Name("DatePicker")
-        ///             .ClientEvents(events => events.Open("open"))
+        ///             .Events(events => events.Open("open"))
         /// %&gt;
         /// </code>
         /// </example>
@@ -112,7 +112,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;% Html.Kendo().DatePicker()
         ///            .Name("DatePicker")
-        ///            .ClientEvents(events => events.Close(
+        ///            .Events(events => events.Close(
         ///                 @&lt;text&gt;
         ///                 function(e) {
         ///                     //event handling code
@@ -138,7 +138,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().DatePicker()
         ///             .Name("DatePicker")
-        ///             .ClientEvents(events => events.Close("close"))
+        ///             .Events(events => events.Close("close"))
         /// %&gt;
         /// </code>
         /// </example>
