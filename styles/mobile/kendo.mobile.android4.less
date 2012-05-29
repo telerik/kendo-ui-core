@@ -907,20 +907,14 @@
     height: 100% !important;
 }
 
-.km-android .km-shim
-{
-    background: none;
-}
-
-.km-android .km-shim > .k-animation-container
-{
-    height: 100% !important;
-}
-
-.km-android .km-popup,
-.km-android .km-actionsheet-wrapper
+.km-android .km-shim,
+.km-android.km-phone .km-actionsheet-wrapper
 {
     background: rgba(0,0,0,.5);
+}
+
+.km-android .km-actionsheet-wrapper
+{
     left: 0;
     top: 0;
     width: 100%;
@@ -1142,6 +1136,20 @@
     background: #202125;
 }
 
+/* ModalView */
+
+.km-android .km-modalview-wrapper
+{
+    padding: 10px;
+}
+
+.km-android .km-modalview
+{
+    .box-sizing(border-box);
+    .box-shadow(~"0 0 10px rgba(0,0,0,.5), 0 0 2px rgba(255,255,255,.7)");
+    border: 1px solid #000;
+}
+
 /* Tablet Styles */
 
 .km-android.km-tablet .km-actionsheet-title,
@@ -1153,7 +1161,6 @@
 
 .km-android.km-tablet .km-actionsheet-wrapper
 {
-    background: none;
     padding: 7px;
     .box-sizing(border-box);
 }
