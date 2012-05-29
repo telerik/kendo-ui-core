@@ -16,5 +16,15 @@ namespace Kendo.Mvc.Examples.Controllers
         {
             return View(new NorthwindDataContext().Products);
         }
+
+        public ActionResult ServerHierarchy()
+        {
+            return View(new NorthwindDataContext().Employees);
+        }
+
+        public ActionResult ServerDetails()
+        {
+            return View(new NorthwindDataContext().Employees);
+        }
     }
 }
