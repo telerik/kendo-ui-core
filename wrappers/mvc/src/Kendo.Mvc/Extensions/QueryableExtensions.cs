@@ -11,6 +11,7 @@ namespace Kendo.Mvc.Extensions
     using Kendo.Mvc.Infrastructure.Implementation;
     using Infrastructure.Implementation.Expressions;
     using Kendo.Mvc.UI;
+    using System.Web.Mvc;
 
     public static class QueryableExtensions
     {
@@ -50,12 +51,22 @@ namespace Kendo.Mvc.Extensions
             return dataTable.Columns.Contains(memberName) ? dataTable.Columns[memberName].DataType : null;
         }
 
-        public static DataSourceResult ToDataSource(this IEnumerable enumerable, DataSourceRequest request)
+        public static DataSourceResult ToDataSourceResult(this IEnumerable enumerable, DataSourceRequest request)
         {
-            return enumerable.AsQueryable().ToDataSource(request);
+            return enumerable.AsQueryable().ToDataSourceResult(request);
         }
 
-        public static DataSourceResult ToDataSource(this IQueryable queryable, DataSourceRequest request)
+        public static DataSourceResult ToDataSourceResult(this IEnumerable enumerable, DataSourceRequest request, ModelStateDictionary modelState)
+        {
+            return enumerable.AsQueryable().ToDataSourceResult(request, modelState);
+        }
+
+        public static DataSourceResult ToDataSourceResult(this IQueryable enumerable, DataSourceRequest request)
+        {
+            return enumerable.AsQueryable().ToDataSourceResult(request, null);
+        }
+
+        public static DataSourceResult ToDataSourceResult(this IQueryable queryable, DataSourceRequest request, ModelStateDictionary modelState)
         {
             var result = new DataSourceResult();
 
@@ -146,6 +157,11 @@ namespace Kendo.Mvc.Extensions
             }
 
             result.Data = data;
+
+            if (modelState != null && !modelState.IsValid)
+            {
+                result.Errors = modelState.SerializeErrors();
+            }
 
             temporarySortDescriptors.Each(sortDescriptor => sort.Remove(sortDescriptor));            
 

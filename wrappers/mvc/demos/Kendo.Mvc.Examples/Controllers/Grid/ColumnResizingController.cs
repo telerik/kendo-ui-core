@@ -23,7 +23,7 @@ namespace Kendo.Mvc.Examples.Controllers
         {
             var products = new NorthwindDataContext().Products;
 
-            return Json(products.ToDataSource(request));
+            return Json(products.ToDataSourceResult(request));
         }
     }
 }

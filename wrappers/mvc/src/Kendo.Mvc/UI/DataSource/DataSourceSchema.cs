@@ -10,6 +10,8 @@ namespace Kendo.Mvc.UI
 
         public string Total { get; set; }
 
+        public string Errors { get; set; }
+
         public ModelDescriptor Model
         {
             get;
@@ -19,13 +21,15 @@ namespace Kendo.Mvc.UI
         public DataSourceSchema()
         {
             Data = "Data";
-            Total = "Total";
+            Total = "Total"; 
+            Errors = "Errors";
         }
 
         protected override void Serialize(IDictionary<string, object> json)
         {
             json.Add("data", Data);
             json.Add("total", Total);
+            json.Add("errors", Errors);
 
             if (Model != null)
             {

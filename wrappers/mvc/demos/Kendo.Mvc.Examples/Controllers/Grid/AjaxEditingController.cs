@@ -1,10 +1,9 @@
-﻿using System.Web.Mvc;
-using System.Web.Routing;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Web.Mvc;
 using Kendo.Mvc.Examples.Models;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Kendo.Mvc.Examples.Controllers
 {
@@ -17,7 +16,7 @@ namespace Kendo.Mvc.Examples.Controllers
 
         public ActionResult AjaxEditing_Read([DataSourceRequest] DataSourceRequest request)
         {
-            return Json(SessionProductRepository.All().ToDataSource(request));
+            return Json(SessionProductRepository.All().ToDataSourceResult(request));
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -25,7 +24,7 @@ namespace Kendo.Mvc.Examples.Controllers
         {
             var results = new List<EditableProduct>();
 
-            if (products != null)
+            if (products != null && ModelState.IsValid)
             {
                 foreach (var product in products)
                 {
@@ -33,14 +32,14 @@ namespace Kendo.Mvc.Examples.Controllers
                     results.Add(product);
                 }
             }
-
-            return Json(products.ToDataSource(request));
+            
+            return Json(products.ToDataSourceResult(request, ModelState));
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult AjaxEditing_Update([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<EditableProduct> products)
         {
-            if (products != null)
+            if (products != null && ModelState.IsValid)
             {
                 foreach (var product in products)
                 {
@@ -55,9 +54,9 @@ namespace Kendo.Mvc.Examples.Controllers
                         SessionProductRepository.Update(target);
                     }
                 }
-            }
+            }            
 
-            return Json(null);
+            return Json(ModelState.ToDataSourceResult());
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -70,8 +69,8 @@ namespace Kendo.Mvc.Examples.Controllers
                     SessionProductRepository.Delete(product);
                 }
             }
-            
-            return Json(null);
+
+            return Json(ModelState.ToDataSourceResult());
         }
     }
 }
