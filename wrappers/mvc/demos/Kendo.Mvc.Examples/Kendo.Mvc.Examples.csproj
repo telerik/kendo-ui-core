@@ -103,6 +103,7 @@
     <Compile Include="Controllers\DataViz\Bar_Charts\Multiple_AxesController.cs" />
     <Compile Include="Controllers\DataViz\Bar_Charts\Remote_DataController.cs" />
     <Compile Include="Controllers\DataViz\Bar_Charts\Local_DataController.cs" />
+    <Compile Include="Controllers\DataViz\Customization\PlotBandsController.cs" />
     <Compile Include="Controllers\DataViz\Scatter_Charts\Multiple_AxesController.cs" />
     <Compile Include="Controllers\DataViz\Scatter_Charts\Scatter_LineController.cs" />
     <Compile Include="Controllers\DataViz\Scatter_Charts\IndexController.cs" />
@@ -237,6 +238,7 @@
     <Content Include="Areas\aspx\Views\dataviz\bar_charts\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\bar_charts\local_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\bar_charts\remote_data.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\customization\plotbands.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\scatter_charts\multiple_axes.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\scatter_charts\scatter_line.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\scatter_charts\index.aspx" />
@@ -509,6 +511,7 @@
     <Content Include="Areas\razor\Views\dataviz\scatter_charts\remote_data.cshtml" />
     <Content Include="Areas\razor\Views\dataviz\scatter_charts\scatter_line.cshtml" />
     <Content Include="Areas\razor\Views\dataviz\scatter_charts\multiple_axes.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\customization\plotbands.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
