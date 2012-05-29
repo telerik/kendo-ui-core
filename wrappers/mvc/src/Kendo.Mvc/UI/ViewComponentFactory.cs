@@ -143,7 +143,8 @@ namespace Kendo.Mvc.UI
 
             return builder;
         }
-
+        //TODO: Implement binding to DataTable
+/*
         /// <summary>
         /// Creates a new <see cref="Telerik.Web.UI.Grid&lt;T&gt;"/> bound to a DataTable.
         /// </summary>
@@ -171,7 +172,7 @@ namespace Kendo.Mvc.UI
 
             return builder;
         }   
-
+        */
         /// <summary>
         /// Creates a new <see cref="Telerik.Web.UI.Grid&lt;T&gt;"/> bound an item in ViewData.
         /// </summary>
