@@ -15,8 +15,7 @@
     .Scrollable() 
     .Filterable()             
     .DataSource(dataSource => dataSource
-        .Server()
-        .Read(read => read.Action("Index", "Grid"))
-        .Sort(s => s.Add(p => p.ProductID).Descending())        
+        .Ajax()
+        .Read(read => read.Action("AjaxBinding_Read", "Grid"))        
     )
 )
