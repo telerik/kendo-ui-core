@@ -337,7 +337,7 @@
          * @option {String}  [type] The type of the control. Can be either <code>flat</code> (default) or <code>group</code>. Determined automatically in databound mode.
          * @option {String}  [style] The style of the control. Can be either empty string(""), or <code>inset</code>.
          * @option {String}  [template] <${data}> The item template.
-         * @option {String}  [headerTemplate] <${value}> The header item template (applies for grouped mode).
+         * @option {String}  [headerTemplate] <${value}> The header item template (applicable when the type is set to <code>group</code>).
          * @option {Boolean} [pullToRefresh] <false> If set to true, the listview will reload its data when the user pulls the view over the top limit.
          * @option {Boolean} [appendOnRefresh] <false> Used in combination with pullToRefresh. If set to true, newly loaded data will be appended on top when refershing.
          * @option {String}  [pullTemplate] <"Pull to refresh"> The message template displayed when the user pulls the listView. Applicable only when pullToRefresh is set to true.
