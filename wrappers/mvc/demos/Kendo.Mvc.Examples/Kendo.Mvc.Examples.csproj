@@ -86,6 +86,8 @@
     <Compile Include="Controllers\Calendar\EventsController.cs" />
     <Compile Include="Controllers\Calendar\TemplateController.cs" />
     <Compile Include="Controllers\Chart\Bar_ChartsController.cs" />
+    <Compile Include="Controllers\DataViz\Api\EventsController.cs" />
+    <Compile Include="Controllers\DataViz\Api\IndexController.cs" />
     <Compile Include="Controllers\DataViz\Area_Charts\Remote_DataController.cs" />
     <Compile Include="Controllers\DataViz\Area_Charts\Local_DataController.cs" />
     <Compile Include="Controllers\DataViz\Bar_Charts\IndexController.cs" />
@@ -229,6 +231,8 @@
     <Content Include="App_Data\Northwind_log.ldf">
       <DependentUpon>Northwind.mdf</DependentUpon>
     </Content>
+    <Content Include="Areas\aspx\Views\dataviz\api\events.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\api\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\area_charts\local_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\area_charts\remote_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\bar_charts\column.aspx" />
@@ -512,6 +516,8 @@
     <Content Include="Areas\razor\Views\dataviz\scatter_charts\scatter_line.cshtml" />
     <Content Include="Areas\razor\Views\dataviz\scatter_charts\multiple_axes.cshtml" />
     <Content Include="Areas\razor\Views\dataviz\customization\plotbands.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\api\index.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\api\events.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
