@@ -885,7 +885,6 @@
     <Compile Include="UI\INavigationItemContainer.cs" />
     <Compile Include="UI\INavigationComponentHtmlBuilderFactory.cs" />
     <Compile Include="UI\Menu\Html\MenuHtmlBuilder.cs" />
-    <Compile Include="UI\Menu\Html\MenuHtmlBuilderFactory.cs" />
     <Compile Include="UI\Menu\Menu.cs" />
     <Compile Include="UI\Menu\Fluent\MenuBuilder.cs" />
     <Compile Include="UI\Menu\MenuItem.cs" />

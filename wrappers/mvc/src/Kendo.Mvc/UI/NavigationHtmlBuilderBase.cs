@@ -9,10 +9,9 @@ namespace Kendo.Mvc.UI
         where TComponent : ViewComponentBase, INavigationItemComponent<TItem>
         where TItem : NavigationItem<TItem>
     {
-        public NavigationHtmlBuilderBase(TComponent component, IActionMethodCache cache)
+        public NavigationHtmlBuilderBase(TComponent component)
         {
             Component = component;
-            ActionMethodCache = cache;
         }
 
         public TComponent Component
@@ -20,13 +19,7 @@ namespace Kendo.Mvc.UI
             get;
             private set;
         }
-
-        public IActionMethodCache ActionMethodCache
-        {
-            get;
-            private set;
-        }
-
+        
         public IHtmlNode ListTag()
         {
             return new HtmlElement("ul")
@@ -52,9 +45,9 @@ namespace Kendo.Mvc.UI
         public IHtmlNode Text(TItem item)
         {
             if (item.Encoded)
-                return new TextNode(Component.GetItemText(item, ActionMethodCache));
+                return new TextNode(item.Text);
             else
-                return new LiteralNode(Component.GetItemText(item, ActionMethodCache));
+                return new LiteralNode(item.Text);
         }
 
         public IHtmlNode SpriteTag(TItem item)

@@ -1,0 +1,170 @@
+﻿@model MenuOrientation
+
+@using(Html.BeginForm()) {
+    <text>
+    <div class="configuration k-widget k-header">
+        <span class="configHead">Orientation Settings</span>
+        <ul class="options">
+            <li>
+                @(Html.Kendo().DropDownList()
+                      .Name("orientation")
+                      .BindTo(new string[] 
+                      {
+                          "Horizontal",
+                          "Vertical"
+                      })
+                      .SelectedIndex(Model == MenuOrientation.Horizontal ? 0 : 1)
+                )
+                <label for="orientation">orientation</label>
+            </li>
+        </ul>
+        <button>Apply</button>
+    </div>
+    </text>
+}
+
+@(Html.Kendo().Menu()
+      .Name("Menu")
+      .HtmlAttributes(new { style = "margin-right: 220px; width: 300px;" })
+      .Items(items =>
+      {
+          items.Add()
+              .Text("Mens")
+              .Items(children =>
+               {
+                   children.Add().Text("Footwear")
+                           .Items(innerChildren =>
+                           {
+                               innerChildren.Add().Text("Leisure Trainers");
+                               innerChildren.Add().Text("Running Shoes");
+                               innerChildren.Add().Text("Outdoor Footwear");
+                               innerChildren.Add().Text("Sandals/Flip Flops");
+                               innerChildren.Add().Text("Footwear Accessories");
+                           });
+
+                   children.Add().Text("Leisure Clothing")
+                           .Items(innerChildren =>
+                           {
+                               innerChildren.Add().Text("T-Shirts");
+                               innerChildren.Add().Text("Hoodies & Sweatshirts");
+                               innerChildren.Add().Text("Jackets");
+                               innerChildren.Add().Text("Pants");
+                               innerChildren.Add().Text("Shorts");
+                           });
+
+                   children.Add().Text("Sports Clothing")
+                           .Items(innerChildren =>
+                           {
+                               innerChildren.Add().Text("Football");
+                               innerChildren.Add().Text("Basketball");
+                               innerChildren.Add().Text("Golf");
+                               innerChildren.Add().Text("Tennis");
+                               innerChildren.Add().Text("Swimwear");
+                           });
+
+                   children.Add().Text("Accessories");
+               });
+
+          items.Add().Text("Womens")
+               .Items(children =>
+               {
+                   children.Add().Text("Footwear")
+                           .Items(innerChildren =>
+                           {
+                               innerChildren.Add().Text("Leisure Trainers");
+                               innerChildren.Add().Text("Running Shoes");
+                               innerChildren.Add().Text("Outdoor Footwear");
+                               innerChildren.Add().Text("Sandals/Flip Flops");
+                               innerChildren.Add().Text("Footwear Accessories");
+                           });
+
+                   children.Add().Text("Leisure Clothing")
+                           .Items(innerChildren =>
+                           {
+                               innerChildren.Add().Text("T-Shirts");
+                               innerChildren.Add().Text("Jackets");
+                           });
+
+                   children.Add().Text("Sports Clothing")
+                           .Items(innerChildren =>
+                           {
+                               innerChildren.Add().Text("Basketball");
+                               innerChildren.Add().Text("Golf");
+                               innerChildren.Add().Text("Tennis");
+                               innerChildren.Add().Text("Swimwear");
+                           });
+
+                   children.Add().Text("Accessories");
+               });
+
+          items.Add()
+              .Text("Boys")
+              .Items(children =>
+              {
+                  children.Add().Text("Footwear")
+                          .Items(innerChildren =>
+                          {
+                              innerChildren.Add().Text("Leisure Trainers");
+                              innerChildren.Add().Text("Running Shoes");
+                              innerChildren.Add().Text("Outdoor Footwear");
+                              innerChildren.Add().Text("Sandals/Flip Flops");
+                              innerChildren.Add().Text("Footwear Accessories");
+                          });
+
+                  children.Add().Text("Leisure Clothing")
+                          .Items(innerChildren =>
+                          {
+                              innerChildren.Add().Text("T-Shirts");
+                              innerChildren.Add().Text("Hoodies & Sweatshirts");
+                              innerChildren.Add().Text("Jackets");
+                              innerChildren.Add().Text("Pants");
+                              innerChildren.Add().Text("Shorts");
+                          });
+
+                  children.Add().Text("Sports Clothing")
+                          .Items(innerChildren =>
+                          {
+                              innerChildren.Add().Text("Football");
+                              innerChildren.Add().Text("Basketball");
+                              innerChildren.Add().Text("Golf");
+                              innerChildren.Add().Text("Tennis");
+                              innerChildren.Add().Text("Swimwear");
+                          });
+
+                  children.Add().Text("Accessories");
+              });
+
+          items.Add().Text("Girls")
+               .Items(children =>
+               {
+                   children.Add().Text("Footwear")
+                           .Items(innerChildren =>
+                           {
+                               innerChildren.Add().Text("Leisure Trainers");
+                               innerChildren.Add().Text("Running Shoes");
+                               innerChildren.Add().Text("Outdoor Footwear");
+                               innerChildren.Add().Text("Sandals/Flip Flops");
+                               innerChildren.Add().Text("Footwear Accessories");
+                           });
+
+                   children.Add().Text("Leisure Clothing")
+                           .Items(innerChildren =>
+                           {
+                               innerChildren.Add().Text("T-Shirts");
+                               innerChildren.Add().Text("Jackets");
+                           });
+
+                   children.Add().Text("Sports Clothing")
+                           .Items(innerChildren =>
+                           {
+                               innerChildren.Add().Text("Basketball");
+                               innerChildren.Add().Text("Golf");
+                               innerChildren.Add().Text("Tennis");
+                               innerChildren.Add().Text("Swimwear");
+                           });
+
+                   children.Add().Text("Accessories");
+               });
+      })
+      .Orientation(Model)
+)

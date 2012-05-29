@@ -9,14 +9,12 @@ namespace Kendo.Mvc.UI
 
         public TabStripHtmlBuilderFactory(IActionMethodCache actionMethodCache)
         {
-            Guard.IsNotNull(actionMethodCache, "actionMethodCache");
-
             this.actionMethodCache = actionMethodCache;
         }
 
         public ITabStripHtmlBuilder Create(TabStrip tabStrip)
         {
-            return new TabStripHtmlBuilder(tabStrip, actionMethodCache);
+            return new TabStripHtmlBuilder(tabStrip);
         }
     }
 }

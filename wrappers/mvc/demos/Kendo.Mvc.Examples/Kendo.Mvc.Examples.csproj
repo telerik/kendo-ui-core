@@ -119,6 +119,10 @@
     <Compile Include="Controllers\Grid\CustomServerBindingController.cs" />
     <Compile Include="Controllers\Grid\ColumnResizingController.cs" />
     <Compile Include="Controllers\Grid\CustomAjaxBindingController.cs" />
+    <Compile Include="Controllers\Menu\ApiController.cs" />
+    <Compile Include="Controllers\Menu\EventsController.cs" />
+    <Compile Include="Controllers\Menu\OrientationController.cs" />
+    <Compile Include="Controllers\Menu\ImagesController.cs" />
     <Compile Include="Controllers\Menu\MenuController.cs" />
     <Compile Include="Controllers\PanelBar\AjaxController.cs" />
     <Compile Include="Controllers\PanelBar\ApiController.cs" />
@@ -420,6 +424,10 @@
     <Content Include="Areas\aspx\Views\web\calendar\index.aspx" />
     <Content Include="Areas\aspx\Views\web\calendar\template.aspx" />
     <Content Include="Areas\razor\Views\web\grid\localdata.cshtml" />
+    <Content Include="Areas\razor\Views\web\menu\images.cshtml" />
+    <Content Include="Areas\razor\Views\web\menu\orientation.cshtml" />
+    <Content Include="Areas\razor\Views\web\menu\events.cshtml" />
+    <Content Include="Areas\razor\Views\web\menu\api.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>

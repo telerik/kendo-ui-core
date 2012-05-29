@@ -22,30 +22,23 @@ namespace Kendo.Mvc.UI
 			{
 				httpContext.Setup(c => c.Request.Browser.CreateHtmlTextWriter(It.IsAny<TextWriter>())).Returns(writer);
 			}
-
-            Mock<INavigationComponentHtmlBuilderFactory<Menu, MenuItem>> menuRendererFactory = new Mock<INavigationComponentHtmlBuilderFactory<Menu, MenuItem>>();
-
-			Mock<IViewDataContainer> viewDataContainer = new Mock<IViewDataContainer>();
-			var viewDataDinctionary = new ViewDataDictionary();
-			viewDataDinctionary.Add("sample", TestHelper.CreateXmlSiteMap());
-
-			viewDataContainer.SetupGet(container => container.ViewData).Returns(viewDataDinctionary);
-
+            
             UrlGenerator urlGeneratorObject = new UrlGenerator();
 			Mock<INavigationItemAuthorization> authorization = new Mock<INavigationItemAuthorization>();
 
             TestHelper.RegisterDummyRoutes();
 
             ViewContext viewContext = TestHelper.CreateViewContext();
+
+            var viewDataDinctionary = new ViewDataDictionary();
+            viewDataDinctionary.Add("sample", TestHelper.CreateXmlSiteMap());
             viewContext.ViewData = viewDataDinctionary;
 
 			authorization.Setup(a => a.IsAccessibleToUser(viewContext.RequestContext, It.IsAny<INavigatable>())).Returns(true);
 
             var initializer = new Mock<IJavaScriptInitializer>();
-            Menu menu = new Menu(viewContext, initializer.Object, urlGeneratorObject, authorization.Object, menuRendererFactory.Object);
 
-			renderer = renderer ?? new MenuHtmlBuilder(menu, new Mock<IActionMethodCache>().Object);
-			menuRendererFactory.Setup(f => f.Create(It.IsAny<Menu>())).Returns(renderer);
+            Menu menu = new Menu(viewContext, initializer.Object, urlGeneratorObject, authorization.Object);
 
 			return menu;
 		}

@@ -22,7 +22,7 @@ namespace Kendo.Mvc.Tests.Menu
 
             item = new MenuItem();
 
-            builder = new MenuHtmlBuilder(menu, new Mock<IActionMethodCache>().Object);
+            builder = new MenuHtmlBuilder(menu);
         }
 
         [Fact]

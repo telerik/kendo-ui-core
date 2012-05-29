@@ -12,20 +12,16 @@ namespace Kendo.Mvc.UI
 
     public class Menu : ViewComponentBase, INavigationItemComponent<MenuItem>
     {
-        //private readonly IList<IEffect> defaultEffects = new List<IEffect> { new SlideAnimation() };
-
-        private readonly INavigationComponentHtmlBuilderFactory<Menu, MenuItem> rendererFactory;
         internal bool isPathHighlighted;
 
-        public Menu(ViewContext viewContext, IJavaScriptInitializer initializer, IUrlGenerator urlGenerator, INavigationItemAuthorization authorization, INavigationComponentHtmlBuilderFactory<Menu, MenuItem> factory)
+        public Menu(ViewContext viewContext, IJavaScriptInitializer initializer, IUrlGenerator urlGenerator, INavigationItemAuthorization authorization)
             : base(viewContext, initializer)
         {
             UrlGenerator = urlGenerator;
             Authorization = authorization;
-            rendererFactory = factory;
 
-            //defaultEffects.Each(el => Effects.Container.Add(el));
-
+            //TODO: add animation property
+            
             Items = new LinkedObjectCollection<MenuItem>(null);
 
             SelectedIndex = -1;
@@ -102,12 +98,8 @@ namespace Kendo.Mvc.UI
                options["orientation"] = Orientation; 
             }
 
-
-            //if (!defaultEffects.SequenceEqual(Effects.Container))
-            //{
-            //    objectWriter.Serialize("effects", Effects);
-            //}
-
+            //TODO: serialize animation options
+            
             if (OpenOnClick)
             {
                 options["openOnClick"] = true;
@@ -127,8 +119,6 @@ namespace Kendo.Mvc.UI
 
         protected override void WriteHtml(HtmlTextWriter writer)
         {
-            Guard.IsNotNull(writer, "writer");
-
             if (Items.Any())
             {
                 if (SelectedIndex != -1 && Items.Count < SelectedIndex)
@@ -141,7 +131,7 @@ namespace Kendo.Mvc.UI
                     Items.Each(HighlightSelectedItem);
                 }
 
-                INavigationComponentHtmlBuilder<MenuItem> builder = rendererFactory.Create(this);
+                INavigationComponentHtmlBuilder<MenuItem> builder = new MenuHtmlBuilder(this);
 
                 IHtmlNode menuTag = builder.Build();
 

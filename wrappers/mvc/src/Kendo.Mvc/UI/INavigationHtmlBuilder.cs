@@ -10,10 +10,5 @@ namespace Kendo.Mvc.UI
         {
             get;
         }
-
-        IActionMethodCache ActionMethodCache
-        {
-            get;
-        }
     }
 }
