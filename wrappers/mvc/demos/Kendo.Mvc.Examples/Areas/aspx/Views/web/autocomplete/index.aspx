@@ -1,7 +1,12 @@
+<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/Web.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
+<asp:Content ContentPlaceHolderID="HeadContent" runat="server">
+</asp:Content>
+
+<asp:Content ContentPlaceHolderID="MainContent" runat="server">
 <div id="shipping">
     <label for="input" class="info">Choose shipping countries:</label>
-    @(Html.Kendo().AutoComplete()
+    <%= Html.Kendo().AutoComplete()
           .Name("country")
           .Filter("startswith")
           .Placeholder("Select country...")
@@ -58,7 +63,7 @@
 				"Vatican City"
           })
           .Separator(", ")
-    )
+    %>
     <div class="hint">Start typing the name of an European country</div>
 </div>
 
@@ -74,7 +79,7 @@
 		width: 482px;
 		height: 152px;
 		padding: 110px 0 0 30px;
-		background: url('@Url.Content("~/Content/web/autocomplete/shipping.png")') transparent no-repeat 0 0;
+		background: url('<%= Url.Content("~/Content/web/autocomplete/shipping.png") %>') transparent no-repeat 0 0;
 		margin: 30px auto;
  	}
 
@@ -92,3 +97,4 @@
 		color: #7496d4;
     }
 </style>
+</asp:Content>
