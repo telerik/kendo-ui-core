@@ -103,6 +103,9 @@
     <Compile Include="Controllers\DataViz\Bar_Charts\Multiple_AxesController.cs" />
     <Compile Include="Controllers\DataViz\Bar_Charts\Remote_DataController.cs" />
     <Compile Include="Controllers\DataViz\Bar_Charts\Local_DataController.cs" />
+    <Compile Include="Controllers\DataViz\Line_Charts\IndexController.cs" />
+    <Compile Include="Controllers\DataViz\Line_Charts\Local_DataController.cs" />
+    <Compile Include="Controllers\DataViz\Line_Charts\Remote_DataController.cs" />
     <Compile Include="Controllers\DataViz\Radial_Gauge\Scale_OptionsController.cs" />
     <Compile Include="Controllers\DataViz\Radial_Gauge\IndexController.cs" />
     <Compile Include="Controllers\DatePicker\ApiController.cs" />
@@ -221,6 +224,9 @@
     <Content Include="Areas\aspx\Views\dataviz\bar_charts\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\bar_charts\local_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\bar_charts\remote_data.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\line_charts\index.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\line_charts\local_data.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\line_charts\remote_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\linear_gauge\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\linear_gauge\scale_options.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\area_charts\index.aspx" />
@@ -469,6 +475,9 @@
     <Content Include="Areas\razor\Views\dataviz\bar_charts\multiple_axes.cshtml" />
     <Content Include="Areas\razor\Views\dataviz\bar_charts\local_data.cshtml" />
     <Content Include="Areas\razor\Views\dataviz\bar_charts\remote_data.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\line_charts\index.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\line_charts\local_data.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\line_charts\remote_data.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
