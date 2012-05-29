@@ -119,7 +119,7 @@ namespace Kendo.Mvc.UI
                     { Schema.Total, Total }
                 };
             }
-            else if (Type == DataSourceType.Ajax && !IsClientOperationMode)
+            else if (Type == DataSourceType.Ajax && !IsClientOperationMode && Data != null)
             {
                 json["data"] = new Dictionary<string, object>()
                 {
@@ -306,7 +306,7 @@ namespace Kendo.Mvc.UI
             {
                 if (processData)
                 {
-                    var result = Data.AsQueryable().ToDataSource(request);
+                    var result = Data.AsQueryable().ToDataSourceResult(request);
 
                     Data = result.Data;
 

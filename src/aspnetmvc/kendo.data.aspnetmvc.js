@@ -47,6 +47,7 @@
            delete options.filter;
        } else {
            result[this.options.prefix + "filter"] = "";
+           delete options.filter;
        }
 
        if (operation != "read" && options.models) {
