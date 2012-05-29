@@ -1109,6 +1109,134 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// Creates a new <see cref="LinearGaugeFor{TValue}"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Telerik().LinearGaugeFor(m=>m.Property) %&gt;
+        /// </code>
+        /// </example>
+        public virtual GaugeLinearBuilder<TValue> LinearGaugeFor<TValue>(Expression<Func<TModel, TValue>> expression)
+            where TValue : struct, IComparable
+        {
+            Guard.IsNotNull(expression, "expression");
+
+            var value = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
+
+            IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
+
+            TValue? minimum = GetRangeValidationParameter<TValue>(validators, minimumValidator);
+            TValue? maximum = GetRangeValidationParameter<TValue>(validators, maximumValidator);
+
+            minimum = minimum.HasValue ? minimum : (TValue)Convert.ChangeType(0, typeof(TValue));
+            maximum = maximum.HasValue ? maximum : (TValue)Convert.ChangeType(10, typeof(TValue));
+
+            return LinearGauge<TValue>()
+                       .Name(GetName(expression))
+                       .Pointer(pointer => pointer.Value(value == null ? minimum : (TValue)value))
+                       .Scale(scale => scale
+                           .Min(minimum.Value)
+                           .Max(maximum.Value)
+                       );
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="LinearGaugeFor{Nullable{TValue}}"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Telerik().LinearGaugeFor(m=>m.NullableProperty) %&gt;
+        /// </code>
+        /// </example>
+        public virtual GaugeLinearBuilder<TValue> LinearGaugeFor<TValue>(Expression<Func<TModel, Nullable<TValue>>> expression)
+            where TValue : struct, IComparable
+        {
+            Guard.IsNotNull(expression, "expression");
+
+            IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
+
+            TValue? minimum = GetRangeValidationParameter<TValue>(validators, minimumValidator);
+            TValue? maximum = GetRangeValidationParameter<TValue>(validators, maximumValidator);
+
+            var value = (Nullable<TValue>)ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
+
+            minimum = minimum.HasValue ? minimum : (TValue)Convert.ChangeType(0, typeof(TValue));
+            maximum = maximum.HasValue ? maximum : (TValue)Convert.ChangeType(10, typeof(TValue));
+
+            return LinearGauge<TValue>()
+                       .Name(GetName(expression))
+                       .Pointer(pointer => pointer.Value(value.HasValue ? value.Value : minimum))
+                       .Scale(scale => scale
+                           .Min(minimum.Value)
+                           .Max(maximum.Value)
+                       );
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="RadialGaugeFor{TValue}"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Telerik().RadialGaugeFor(m=>m.Property) %&gt;
+        /// </code>
+        /// </example>
+        public virtual GaugeRadialBuilder<TValue> RadialGaugeFor<TValue>(Expression<Func<TModel, TValue>> expression)
+            where TValue : struct, IComparable
+        {
+            Guard.IsNotNull(expression, "expression");
+
+            var value = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
+
+            IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
+
+            TValue? minimum = GetRangeValidationParameter<TValue>(validators, minimumValidator);
+            TValue? maximum = GetRangeValidationParameter<TValue>(validators, maximumValidator);
+
+            minimum = minimum.HasValue ? minimum : (TValue)Convert.ChangeType(0, typeof(TValue));
+            maximum = maximum.HasValue ? maximum : (TValue)Convert.ChangeType(10, typeof(TValue));
+
+            return RadialGauge<TValue>()
+                       .Name(GetName(expression))
+                       .Pointer(pointer => pointer.Value(value == null ? minimum : (TValue)value))
+                       .Scale(scale => scale
+                           .Min(minimum.Value)
+                           .Max(maximum.Value)
+                       );
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="RadialGaugeFor{Nullable{TValue}}"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Telerik().RadialGaugeFor(m=>m.NullableProperty) %&gt;
+        /// </code>
+        /// </example>
+        public virtual GaugeRadialBuilder<TValue> RadialGaugeFor<TValue>(Expression<Func<TModel, Nullable<TValue>>> expression)
+            where TValue : struct, IComparable
+        {
+            Guard.IsNotNull(expression, "expression");
+
+            IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
+
+            TValue? minimum = GetRangeValidationParameter<TValue>(validators, minimumValidator);
+            TValue? maximum = GetRangeValidationParameter<TValue>(validators, maximumValidator);
+
+            var value = (Nullable<TValue>)ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
+
+            minimum = minimum.HasValue ? minimum : (TValue)Convert.ChangeType(0, typeof(TValue));
+            maximum = maximum.HasValue ? maximum : (TValue)Convert.ChangeType(10, typeof(TValue));
+
+            return RadialGauge<TValue>()
+                       .Name(GetName(expression))
+                       .Pointer(pointer => pointer.Value(value.HasValue ? value.Value : minimum))
+                       .Scale(scale => scale
+                           .Min(minimum.Value)
+                           .Max(maximum.Value)
+                       );
+        }
+
+        /// <summary>
         /// Creates a new <see cref="RangeSliderFor{TValue}"/>.
         /// </summary>
         /// <example>

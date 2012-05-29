@@ -79,7 +79,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public GaugeRadialPointerBuilder<T> Value(T value)
+        public GaugeRadialPointerBuilder<T> Value(T? value)
         {
             pointer.Value = value;
             return this;
