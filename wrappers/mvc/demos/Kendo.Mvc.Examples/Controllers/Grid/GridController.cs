@@ -11,5 +11,10 @@ namespace Kendo.Mvc.Examples.Controllers
         {
             return View(new NorthwindDataContext().Products);
         }
+
+        public ActionResult LocalData()
+        {
+            return View(new NorthwindDataContext().Products);
+        }
     }
 }

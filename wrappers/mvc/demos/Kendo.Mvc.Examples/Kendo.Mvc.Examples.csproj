@@ -419,6 +419,7 @@
     <Content Include="Areas\aspx\Views\web\calendar\events.aspx" />
     <Content Include="Areas\aspx\Views\web\calendar\index.aspx" />
     <Content Include="Areas\aspx\Views\web\calendar\template.aspx" />
+    <Content Include="Areas\razor\Views\web\grid\localdata.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
