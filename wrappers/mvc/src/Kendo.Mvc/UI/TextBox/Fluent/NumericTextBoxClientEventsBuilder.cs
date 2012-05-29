@@ -1,28 +1,22 @@
 namespace Kendo.Mvc.UI
 {
-    using Kendo.Mvc;
-    using Kendo.Mvc.Infrastructure;
+    using Kendo.Mvc.UI.Fluent;
     using System;
     using System.Collections.Generic;
 
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="TextBoxBase.Events"/>.
     /// </summary>
-    public class NumericTextBoxEventsBuilder : IHideObjectMembers
+    public class NumericTextBoxEventBuilder : EventBuilder
     {
-        private readonly IDictionary<string, object> Events;
-
-        public NumericTextBoxEventsBuilder(IDictionary<string, object> Events)
+        public NumericTextBoxEventBuilder(IDictionary<string, object> events) : base(events)
         {
-            Guard.IsNotNull(Events, "Events");
-
-            this.Events = Events;
         }
 
         /// <summary>
         /// Defines the inline handler of the Change client-side event
         /// </summary>
-        /// <param name="onChangeInlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <param name="handler">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;% Html.Kendo().NumericTextBox()
@@ -38,11 +32,9 @@ namespace Kendo.Mvc.UI
         /// %&gt;
         /// </code>
         /// </example>
-        public NumericTextBoxEventsBuilder Change(Func<object, object> changeInlineCodeBlock)
+        public NumericTextBoxEventBuilder Change(Func<object, object> handler)
         {
-            Guard.IsNotNull(changeInlineCodeBlock, "changeInlineCodeBlock");
-
-            Events["change"] = new ClientEvent { InlineCodeBlock = changeInlineCodeBlock };
+            Handler("change", handler);
 
             return this;
         }
@@ -50,7 +42,7 @@ namespace Kendo.Mvc.UI
         /// <summary>
         ///  Defines the name of the JavaScript function that will handle the the Change client-side event.
         /// </summary>
-        /// <param name="changeHandlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().NumericTextBox()
@@ -59,11 +51,9 @@ namespace Kendo.Mvc.UI
         /// %&gt;
         /// </code>
         /// </example>
-        public NumericTextBoxEventsBuilder Change(string changeHandlerName)
+        public NumericTextBoxEventBuilder Change(string handler)
         {
-            Guard.IsNotNullOrEmpty(changeHandlerName, "changeHandlerName");
-
-            Events["change"] = new ClientEvent { HandlerName = changeHandlerName };
+            Handler("change", handler);
 
             return this;
         }
@@ -71,7 +61,7 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Defines the inline handler of the Spin client-side event
         /// </summary>
-        /// <param name="spinInlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <param name="handler">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;% Html.Kendo().NumericTextBox()
@@ -87,19 +77,17 @@ namespace Kendo.Mvc.UI
         /// %&gt;
         /// </code>
         /// </example>
-        public NumericTextBoxEventsBuilder Spin(Func<object, object> spinInlineCodeBlock)
+        public NumericTextBoxEventBuilder Spin(Func<object, object> handler)
         {
-            Guard.IsNotNull(spinInlineCodeBlock, "spinInlineCodeBlock");
-
-            Events["spin"] = new ClientEvent { InlineCodeBlock = spinInlineCodeBlock };
-
+            Handler("spin", handler);
+            
             return this;
         }
 
         /// <summary>
         ///  Defines the name of the JavaScript function that will handle the the Spin client-side event.
         /// </summary>
-        /// <param name="spinHandlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().NumericTextBox()
@@ -108,11 +96,9 @@ namespace Kendo.Mvc.UI
         /// %&gt;
         /// </code>
         /// </example>
-        public NumericTextBoxEventsBuilder Spin(string spinHandlerName)
+        public NumericTextBoxEventBuilder Spin(string handler)
         {
-            Guard.IsNotNullOrEmpty(spinHandlerName, "spinHandlerName");
-
-            Events["spin"] = new ClientEvent { HandlerName = spinHandlerName };
+            Handler("spin", handler);
 
             return this;
         }

@@ -1,13 +1,7 @@
 namespace Kendo.Mvc.UI.Fluent
 {
-    using Kendo.Mvc;
-    using Kendo.Mvc.Extensions;
-    using Kendo.Mvc.Infrastructure;
     using System;
     using System.Collections.Generic;
-    using System.Data;
-    using System.Linq;
-    using System.Web.Query.Dynamic;
 
     public class DropDownEventBuilderBase : EventBuilder
     {
@@ -41,8 +35,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public DropDownEventBuilderBase Select(Func<object, object> handler)
         {
-            Guard.IsNotNull(handler, "handler");
-
             Handler("select", handler);
 
             return this;

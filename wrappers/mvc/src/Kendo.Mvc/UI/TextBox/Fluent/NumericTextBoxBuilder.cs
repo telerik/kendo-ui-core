@@ -97,11 +97,11 @@ namespace Kendo.Mvc.UI
         /// %&gt;
         /// </code>
         /// </example>
-        public NumericTextBoxBuilder<T> Events(Action<NumericTextBoxEventsBuilder> EventsAction)
+        public NumericTextBoxBuilder<T> Events(Action<NumericTextBoxEventBuilder> EventsAction)
         {
             Guard.IsNotNull(EventsAction, "EventsAction");
 
-            EventsAction(new NumericTextBoxEventsBuilder(Component.Events));
+            EventsAction(new NumericTextBoxEventBuilder(Component.Events));
 
             return this;
         }

@@ -1,7 +1,7 @@
 <div class="demo-section" style="width:155px">
 @(Html.Kendo().DateTimePicker()
       .Name("datetimepicker")
-      .ClientEvents(e =>
+      .Events(e =>
       {
           e.Change("change").Open("open").Close("close");
       })
