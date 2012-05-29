@@ -76,7 +76,6 @@
   <ItemGroup>
     <Compile Include="Areas\aspx\ASPXAreaRegistration.cs" />
     <Compile Include="Areas\razor\RazorAreaRegistration.cs" />
-    <Compile Include="Controllers\Area_Chart\IndexController.cs" />
     <Compile Include="Controllers\AutoComplete\ApiController.cs" />
     <Compile Include="Controllers\AutoComplete\ClientFilteringController.cs" />
     <Compile Include="Controllers\AutoComplete\EventsController.cs" />
@@ -87,14 +86,25 @@
     <Compile Include="Controllers\Calendar\EventsController.cs" />
     <Compile Include="Controllers\Calendar\TemplateController.cs" />
     <Compile Include="Controllers\Chart\Bar_ChartsController.cs" />
+    <Compile Include="Controllers\DataViz\Area_Charts\Remote_DataController.cs" />
+    <Compile Include="Controllers\DataViz\Area_Charts\Local_DataController.cs" />
+    <Compile Include="Controllers\DataViz\Bar_Charts\IndexController.cs" />
     <Compile Include="Controllers\ComboBox\ClientFilteringController.cs" />
     <Compile Include="Controllers\ComboBox\ApiController.cs" />
     <Compile Include="Controllers\ComboBox\EventsController.cs" />
     <Compile Include="Controllers\ComboBox\ServerFilteringController.cs" />
     <Compile Include="Controllers\ComboBox\TemplateController.cs" />
-    <Compile Include="Controllers\Chart\Area_ChartsController.cs" />
+    <Compile Include="Controllers\DataViz\Area_Charts\IndexController.cs" />
     <Compile Include="Controllers\ComboBox\IndexController.cs" />
     <Compile Include="Controllers\AutoComplete\IndexController.cs" />
+    <Compile Include="Controllers\DataViz\Bar_Charts\ColumnController.cs" />
+    <Compile Include="Controllers\DataViz\Bar_Charts\Stacked_BarController.cs" />
+    <Compile Include="Controllers\DataViz\Bar_Charts\Grouped_Stacked_BarController.cs" />
+    <Compile Include="Controllers\DataViz\Bar_Charts\Multiple_AxesController.cs" />
+    <Compile Include="Controllers\DataViz\Bar_Charts\Remote_DataController.cs" />
+    <Compile Include="Controllers\DataViz\Bar_Charts\Local_DataController.cs" />
+    <Compile Include="Controllers\DataViz\Radial_Gauge\Scale_OptionsController.cs" />
+    <Compile Include="Controllers\DataViz\Radial_Gauge\IndexController.cs" />
     <Compile Include="Controllers\DatePicker\ApiController.cs" />
     <Compile Include="Controllers\DatePicker\EventsController.cs" />
     <Compile Include="Controllers\DatePicker\TemplateController.cs" />
@@ -109,9 +119,9 @@
     <Compile Include="Controllers\DropDownList\RemoteDataSourceController.cs" />
     <Compile Include="Controllers\DropDownList\IndexController.cs" />
     <Compile Include="Controllers\Editor\EditorController.cs" />
-    <Compile Include="Controllers\Chart\ChartController.cs" />
-    <Compile Include="Controllers\Linear_Gauge\IndexController.cs" />
-    <Compile Include="Controllers\Linear_Gauge\ScaleOptoinsController.cs" />
+    <Compile Include="Controllers\DataViz\ChartController.cs" />
+    <Compile Include="Controllers\DataViz\Linear_Gauge\IndexController.cs" />
+    <Compile Include="Controllers\DataViz\Linear_Gauge\Scale_OptoinsController.cs" />
     <Compile Include="Controllers\Grid\AjaxEditingController.cs" />
     <Compile Include="Controllers\DateTimePicker\IndexController.cs" />
     <Compile Include="Controllers\Grid\AjaxBindingController.cs" />
@@ -133,7 +143,6 @@
     <Compile Include="Controllers\PanelBar\AnimationController.cs" />
     <Compile Include="Controllers\PanelBar\EventsController.cs" />
     <Compile Include="Controllers\PanelBar\ImagesController.cs" />
-    <Compile Include="Controllers\Radial_Gauge\ScaleOptoinsController.cs" />
     <Compile Include="Controllers\PanelBar\IndexController.cs" />
     <Compile Include="Controllers\Splitter\AjaxController.cs" />
     <Compile Include="Controllers\Splitter\ApiController.cs" />
@@ -144,7 +153,6 @@
     <Compile Include="Controllers\TabStrip\EventsController.cs" />
     <Compile Include="Controllers\TabStrip\ImagesController.cs" />
     <Compile Include="Controllers\TabStrip\IndexController.cs" />
-    <Compile Include="Controllers\Radial_Gauge\IndexController.cs" />
     <Compile Include="Controllers\Grid\AjaxAggregatesController.cs" />
     <Compile Include="Controllers\Grid\ServerAggregatesController.cs" />
     <Compile Include="Controllers\TimePicker\EventsController.cs" />
@@ -206,6 +214,13 @@
     </Content>
     <Content Include="Areas\aspx\Views\dataviz\area_charts\local_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\area_charts\remote_data.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\bar_charts\column.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\bar_charts\multiple_axes.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\bar_charts\stacked_bar.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\bar_charts\grouped_stacked_bar.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\bar_charts\index.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\bar_charts\local_data.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\bar_charts\remote_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\linear_gauge\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\linear_gauge\scale_options.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\area_charts\index.aspx" />
