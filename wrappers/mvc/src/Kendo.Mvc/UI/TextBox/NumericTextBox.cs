@@ -17,7 +17,7 @@ namespace Kendo.Mvc.UI
         public NumericTextBox(ViewContext viewContext, IJavaScriptInitializer javaScriptInitializer, ViewDataDictionary viewData)
             : base(viewContext, javaScriptInitializer, viewData)
         {
-            ClientEvents = new Dictionary<string, object>();
+            Events = new Dictionary<string, object>();
 
             Enabled = true;
         }
@@ -82,7 +82,7 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        public IDictionary<string, object> ClientEvents
+        public IDictionary<string, object> Events
         {
             get;
             private set;
@@ -90,7 +90,7 @@ namespace Kendo.Mvc.UI
 
         public override void WriteInitializationScript(TextWriter writer)
         {
-            var options = new Dictionary<string, object>(ClientEvents);
+            var options = new Dictionary<string, object>(Events);
 
             if (Format.HasValue())
             {

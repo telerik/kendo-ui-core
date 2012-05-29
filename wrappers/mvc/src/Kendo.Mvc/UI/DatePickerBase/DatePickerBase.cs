@@ -13,7 +13,7 @@ namespace Kendo.Mvc.UI
             ParseFormats = new List<string>();
             
             Animation = new PopupAnimation();
-            ClientEvents = new Dictionary<string, object>();
+            Events = new Dictionary<string, object>();
             
             Value = null;
             Enabled = true;
@@ -25,7 +25,7 @@ namespace Kendo.Mvc.UI
             private set;
         }
 
-        public IDictionary<string, object> ClientEvents
+        public IDictionary<string, object> Events
         {
             get;
             private set;
