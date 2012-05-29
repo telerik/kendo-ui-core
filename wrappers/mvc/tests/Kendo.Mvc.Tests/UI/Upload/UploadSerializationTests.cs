@@ -1,11 +1,9 @@
 namespace Kendo.Mvc.UI.Tests.Upload
 {
     using Moq;
-    using System.Collections.Generic;
     using System.IO;
     using System.Web.Routing;
     using Kendo.Mvc;
-    using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.UI;
     using Xunit;
 
@@ -13,7 +11,6 @@ namespace Kendo.Mvc.UI.Tests.Upload
     {
         private readonly Upload upload;
         private readonly Mock<TextWriter> textWriter;
-        private readonly Mock<ILocalizationService> localizationServiceMock;
         private string output;
 
         public UploadSerializationTests()
@@ -27,12 +24,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
                     (context, navigatable) => navigatable.ControllerName + "/" + navigatable.ActionName
                 );
 
-            localizationServiceMock = new Mock<ILocalizationService>();
-            localizationServiceMock.SetupGet(ls => ls.IsDefault).Returns(true);
-            localizationServiceMock.Setup(l => l.All()).Returns(() =>
-                new Dictionary<string, string> { { "Remove", "Entfernen" } });
-
-            upload = UploadTestHelper.CreateUpload(urlGeneratorMock.Object, localizationServiceMock.Object);
+            upload = UploadTestHelper.CreateUpload(urlGeneratorMock.Object);
             upload.Name = "Upload";
         }
 

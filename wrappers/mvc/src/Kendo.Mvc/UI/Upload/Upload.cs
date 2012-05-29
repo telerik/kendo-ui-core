@@ -28,7 +28,7 @@ namespace Kendo.Mvc.UI
         /// <param name="viewContext">The view context.</param>
         /// <param name="clientSideObjectWriterFactory">The client side object writer factory.</param>
         public Upload(ViewContext viewContext, IJavaScriptInitializer initializer,
-                        IUrlGenerator urlGenerator, ILocalizationService localizationService)
+                        IUrlGenerator urlGenerator)
         : base(viewContext, initializer)
         {
             ClientEvents = new Dictionary<string, object>();
