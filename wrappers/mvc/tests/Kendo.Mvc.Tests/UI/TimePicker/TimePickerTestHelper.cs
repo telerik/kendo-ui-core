@@ -6,7 +6,6 @@ namespace Kendo.Mvc.UI.Tests
     
     public static class TimePickerTestHelper
     {
-        public static Mock<IClientSideObjectWriter> clientSideObjectWriter;
         public static ViewContext viewContext;
 
         public static TimePicker CreateTimePicker()

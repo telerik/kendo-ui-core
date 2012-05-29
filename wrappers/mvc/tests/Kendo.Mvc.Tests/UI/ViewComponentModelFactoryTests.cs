@@ -17,7 +17,7 @@ namespace Kendo.Mvc.UI.Tests
 
             htmlHelper.ViewData.Model = new TestModel { ID = 1, DoubleProperty = 1.0, DecimalProperty = 1.0m, DateTimeProperty = DateTime.Today, TimeProperty = DateTime.Now.TimeOfDay, ComplexModel = new TestModel() };
 
-            factory = new ViewComponentFactory<TestModel>(htmlHelper, new Mock<IClientSideObjectWriterFactory>().Object);
+            factory = new ViewComponentFactory<TestModel>(htmlHelper);
         }
 
         [Fact]

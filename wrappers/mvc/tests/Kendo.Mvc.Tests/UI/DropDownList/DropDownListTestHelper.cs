@@ -11,7 +11,6 @@ namespace Kendo.Mvc.UI.Tests
     public static class DropDownListTestHelper
     {
         public static Mock<INavigationItemAuthorization> authorization;
-        public static Mock<IClientSideObjectWriter> clientSideObjectWriter;
         public static UrlGenerator urlGenerator;
 
         public static ViewContext viewContext;
@@ -31,9 +30,6 @@ namespace Kendo.Mvc.UI.Tests
             viewDataDinctionary = new ViewDataDictionary();
             viewDataContainer.SetupGet(container => container.ViewData).Returns(viewDataDinctionary);
 
-            // needed for testing serialization
-            Mock<IClientSideObjectWriterFactory> clientSideObjectWriterFactory = new Mock<IClientSideObjectWriterFactory>();
-            clientSideObjectWriter = new Mock<IClientSideObjectWriter>();
             valueProvider = new Mock<IValueProvider>();
 
             Controller controller = new ControllerTestDouble(new Dictionary<string, ValueProviderResult>(), viewDataContainer.Object.ViewData);
@@ -43,8 +39,6 @@ namespace Kendo.Mvc.UI.Tests
             viewContext = new ViewContext(controllerContext, new Mock<IView>().Object, new ViewDataDictionary(), new TempDataDictionary(), TextWriter.Null);
 
             viewContext.ViewData = viewDataDinctionary;
-
-            clientSideObjectWriterFactory.Setup(c => c.Create(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<TextWriter>())).Returns(clientSideObjectWriter.Object);
 
             authorization.Setup(a => a.IsAccessibleToUser(viewContext.RequestContext, It.IsAny<INavigatable>())).Returns(true);
 

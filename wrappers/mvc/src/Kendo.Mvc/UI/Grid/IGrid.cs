@@ -109,7 +109,5 @@ namespace Kendo.Mvc.UI
         {
             get;
         }
-
-        void SerializeDataSource(IClientSideObjectWriter writer);
     }
 }

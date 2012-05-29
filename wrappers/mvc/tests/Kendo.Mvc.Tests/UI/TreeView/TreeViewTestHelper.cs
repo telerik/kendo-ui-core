@@ -14,7 +14,7 @@ namespace Kendo.Mvc.UI.Tests
 
         public static ViewContext viewContext;
 
-        public static TreeView CreateTreeView(HtmlTextWriter writer, ITreeViewHtmlBuilder renderer, IClientSideObjectWriter clientSideObjectWriter)
+        public static TreeView CreateTreeView(HtmlTextWriter writer, ITreeViewHtmlBuilder renderer)
         {
             Mock<HttpContextBase> httpContext = TestHelper.CreateMockedHttpContext();
 

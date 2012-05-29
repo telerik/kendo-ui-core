@@ -4,11 +4,9 @@ namespace Kendo.Mvc.UI
     public enum SliderOrientation
     {
         /// <summary>The slider is oriented horizontally.</summary>
-        [ClientSideEnumValue("'horizontal'")]
         Horizontal = 0,
 
         /// <summary>The slider is oriented vertically.</summary>
-        [ClientSideEnumValue("'vertical'")]
         Vertical = 1
     }
 }

@@ -275,7 +275,6 @@
     <Compile Include="UI\AutoComplete\AutoCompleteHtmlBuilderTests.cs" />
     <Compile Include="UI\AutoComplete\AutoCompleteTestHelper.cs" />
     <Compile Include="UI\AutoComplete\AutoCompleteBuilderTests.cs" />
-    <Compile Include="UI\ClientSideObjectWriterTests.cs" />
     <Compile Include="UI\ComboBox\ComboBoxTestHelper.cs" />
     <Compile Include="UI\ContentNavigationItemBuilderTests.cs" />
     <Compile Include="UI\DropDownList\DropDownExtensionsTests.cs" />
@@ -286,7 +285,6 @@
     <Compile Include="UI\DropDownList\DropDownItemBuilderTests.cs" />
     <Compile Include="UI\DropDown\DropDownBaseClientEventsBuilderTests.cs" />
     <Compile Include="UI\Editor\EditorDropDownItemsBuilderTests.cs" />
-    <Compile Include="UI\Editor\EditorRenderingTests.cs" />
     <Compile Include="UI\Editor\EditorBuilderTests.cs" />
     <Compile Include="UI\Editor\EditorTestHelper.cs" />
     <Compile Include="UI\Editor\SnippetsBuilderTests.cs" />
@@ -333,7 +331,6 @@
     <Compile Include="UI\Menu\MenuRenderingTests.cs" />
     <Compile Include="UI\Menu\MenuTestHelper.cs" />
     <Compile Include="UI\Menu\MenuItemBuilderTests.cs" />
-    <Compile Include="UI\Menu\MenuSerializationTests.cs" />
     <Compile Include="UI\NavigationBindingBuilderTests.cs" />
     <Compile Include="UI\NavigationBindingFactoryTests.cs" />
     <Compile Include="UI\NavigationItemBuilderTests.cs" />
@@ -359,7 +356,6 @@
     <Compile Include="UI\TreeView\TreeViewHtmlBuilderTests.cs" />
     <Compile Include="UI\TreeView\TreeViewItemBuilderTests.cs" />
     <Compile Include="UI\TreeView\TreeViewItemFactoryTests.cs" />
-    <Compile Include="UI\TreeView\TreeViewSerializationTests.cs" />
     <Compile Include="UI\TreeView\TreeViewTestHelper.cs" />
     <Compile Include="UI\TreeView\TreeViewRendererTests.cs" />
     <Compile Include="UI\Window\WindowRenderingTests.cs" />
@@ -369,7 +365,6 @@
     <Compile Include="UI\Window\WindowBuilderTests.cs" />
     <Compile Include="UI\Window\WindowTestHelper.cs" />
     <Compile Include="UrlGeneratorTests.cs" />
-    <Compile Include="UI\ClientSideEnumValueAttributeTests.cs" />
     <Compile Include="Extensions\CollectionExtensionsTests.cs" />
     <Compile Include="Extensions\DictionaryExtensionsTests.cs" />
     <Compile Include="Extensions\HttpContextBaseExtensionsTests.cs" />
@@ -377,13 +372,11 @@
     <Compile Include="Extensions\EnumerableExtensionsTests.cs" />
     <Compile Include="Extensions\ReaderWriterLockSlimExtensionsTests.cs" />
     <Compile Include="Extensions\StringExtensionsTests.cs" />
-    <Compile Include="UI\ClientSideObjectWriterFactoryTests.cs" />
     <Compile Include="UI\ViewComponentFactoryTests.cs" />
     <Compile Include="UI\ViewComponentBaseTestDouble.cs" />
     <Compile Include="UI\ViewComponentBaseTests.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="UI\ViewComponentBuilderBaseTests.cs" />
     <Compile Include="Infrastructure\Implementation\UrlResolverTests.cs">
       <SubType>Code</SubType>
     </Compile>

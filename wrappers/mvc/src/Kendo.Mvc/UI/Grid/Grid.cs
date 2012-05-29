@@ -799,6 +799,7 @@ namespace Kendo.Mvc.UI
             }
         }
 
+        /*TODO : Serialize data source
         public void SerializeDataSource(IClientSideObjectWriter writer)
         {
             IEnumerable dataSource = DataSource.Data;
@@ -826,6 +827,7 @@ namespace Kendo.Mvc.UI
 
             writer.AppendCollection("data", dataSource);
         }
+        */
 
         protected override void WriteHtml(HtmlTextWriter writer)
         {

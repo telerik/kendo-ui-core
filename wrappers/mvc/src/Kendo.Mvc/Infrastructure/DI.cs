@@ -88,8 +88,6 @@ namespace Kendo.Mvc.Infrastructure
 
             Current.Register<ITreeViewHtmlBuilderFactory, IActionMethodCache>((actionMethodCache) =>
                 new TreeViewHtmlBuilderFactory(actionMethodCache));
-
-            Current.Register<IClientSideObjectWriterFactory>(() => new ClientSideObjectWriterFactory());
         }
         
         static void RegisterCacheDependencies()

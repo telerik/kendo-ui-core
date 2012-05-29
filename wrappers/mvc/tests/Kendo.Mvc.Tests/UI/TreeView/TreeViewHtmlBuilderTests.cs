@@ -19,7 +19,7 @@ namespace Kendo.Mvc.UI.Tests
         {
             writer = new Mock<HtmlTextWriter>(TextWriter.Null);
 
-            treeView = TreeViewTestHelper.CreateTreeView(writer.Object, null, null);
+            treeView = TreeViewTestHelper.CreateTreeView(writer.Object, null);
             treeView.Name = "TreeView1";
 
             treeView.Items.Add(new TreeViewItem());

@@ -9,7 +9,6 @@ namespace Kendo.Mvc.UI.Tests
 
     public static class TabStripTestHelper
     {
-        public static Mock<IClientSideObjectWriter> clientSideObjectWriter;
         public static Mock<INavigationItemAuthorization> authorization;
         public static Mock<IUrlGenerator> urlGenerator;
 
@@ -35,9 +34,6 @@ namespace Kendo.Mvc.UI.Tests
             viewDataDinctionary.Add("sample", TestHelper.CreateXmlSiteMap());
 
             viewDataContainer.SetupGet(container => container.ViewData).Returns(viewDataDinctionary);
-
-            Mock<IClientSideObjectWriterFactory> clientSideObjectWriterFactory = new Mock<IClientSideObjectWriterFactory>();
-            clientSideObjectWriter = new Mock<IClientSideObjectWriter>();
 
             viewContext = TestHelper.CreateViewContext();
             viewContext.ViewData = viewDataDinctionary;

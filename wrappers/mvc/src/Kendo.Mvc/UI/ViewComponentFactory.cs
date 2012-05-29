@@ -19,13 +19,11 @@ namespace Kendo.Mvc.UI
     /// </summary>
     public class ViewComponentFactory : IHideObjectMembers
     {
-        public ViewComponentFactory(HtmlHelper htmlHelper, IClientSideObjectWriterFactory clientSideObjectWriterFactory)
+        public ViewComponentFactory(HtmlHelper htmlHelper)
         {
             Guard.IsNotNull(htmlHelper, "htmlHelper");
-            Guard.IsNotNull(clientSideObjectWriterFactory, "clientSideObjectWriterFactory");
 
             HtmlHelper = htmlHelper;
-            ClientSideObjectWriterFactory = clientSideObjectWriterFactory;
             Initializer = DI.Current.Resolve<IJavaScriptInitializer>();
             UrlGenerator = DI.Current.Resolve<IUrlGenerator>();
         }
@@ -49,13 +47,6 @@ namespace Kendo.Mvc.UI
         {
             get;
             set;
-        }
-
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public IClientSideObjectWriterFactory ClientSideObjectWriterFactory
-        {
-            get;
-            private set;
         }
 
         private ViewContext ViewContext
@@ -603,8 +594,8 @@ namespace Kendo.Mvc.UI
         private string minimumValidator;
         private string maximumValidator;
 
-        public ViewComponentFactory(HtmlHelper<TModel> htmlHelper, IClientSideObjectWriterFactory clientSideObjectWriterFactory)
-            : base(htmlHelper, clientSideObjectWriterFactory)
+        public ViewComponentFactory(HtmlHelper<TModel> htmlHelper)
+            : base(htmlHelper)
         {
             this.HtmlHelper = htmlHelper;
 

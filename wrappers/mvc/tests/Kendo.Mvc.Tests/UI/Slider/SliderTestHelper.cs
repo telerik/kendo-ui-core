@@ -20,11 +20,8 @@ namespace Kendo.Mvc.UI.Tests
             var builderFactory = new Mock<ISliderHtmlBuilderFactory>();
             builderFactory.Setup(f => f.Create(It.IsAny<SliderRenderingData>())).Returns(builder);
 
-            var writerFactory = new Mock<IClientSideObjectWriterFactory>();
-            var objectWriter = new Mock<IClientSideObjectWriter>();
 
             viewContext = viewContext ?? TestHelper.CreateViewContext();
-            writerFactory.Setup(c => c.Create(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<TextWriter>())).Returns(objectWriter.Object);
 
             var component = new Slider<T>(viewContext, new JavaScriptInitializer(), builderFactory.Object);           
 
@@ -41,11 +38,7 @@ namespace Kendo.Mvc.UI.Tests
             var builderFactory = new Mock<IRangeSliderHtmlBuilderFactory>();
             builderFactory.Setup(f => f.Create(It.IsAny<RangeSliderRenderingData>())).Returns(builder);
 
-            var writerFactory = new Mock<IClientSideObjectWriterFactory>();
-            var objectWriter = new Mock<IClientSideObjectWriter>();
-
             viewContext = viewContext ?? TestHelper.CreateViewContext();
-            writerFactory.Setup(c => c.Create(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<TextWriter>())).Returns(objectWriter.Object);
 
             var component = new RangeSlider<T>(viewContext, new JavaScriptInitializer(), builderFactory.Object);
 

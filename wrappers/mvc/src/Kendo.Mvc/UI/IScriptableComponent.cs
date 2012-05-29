@@ -7,15 +7,6 @@ namespace Kendo.Mvc.UI
     /// </summary>
     public interface IScriptableComponent
     {
-        /// <summary>
-        /// Gets the client side object writer factory.
-        /// </summary>
-        /// <value>The client side object writer factory.</value>
-        IClientSideObjectWriterFactory ClientSideObjectWriterFactory
-        {
-            get;
-        }
-
         bool IsSelfInitialized
         {
             get;

@@ -8,12 +8,9 @@ namespace Kendo.Mvc.UI.Tests
     using Infrastructure;
 
     using Moq;
-    using UI;
 
     public static class PanelBarTestHelper
     {
-        public static Mock<IClientSideObjectWriter> clientSideObjectWriter;
-
         public static PanelBar CreatePanelbar()
         {
             return CreatePanelbar(new HtmlTextWriter(TextWriter.Null), new Mock<INavigationComponentHtmlBuilder<PanelBarItem>>().Object);

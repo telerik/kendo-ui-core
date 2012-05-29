@@ -19,7 +19,7 @@ namespace Kendo.Mvc.UI.Fluent.Tests
         public GridBuilderTests()
         {
             Mock<HtmlTextWriter> writer = new Mock<HtmlTextWriter>(TextWriter.Null);
-            grid = GridTestHelper.CreateGrid<Customer>(writer.Object, null);
+            grid = GridTestHelper.CreateGrid<Customer>(writer.Object);
             builder = new GridBuilder<Customer>(grid);
         }
 

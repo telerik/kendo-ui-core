@@ -5,6 +5,7 @@ namespace Kendo.Mvc.UI.Tests
     using System.Web;
     using System.Web.Mvc;
 
+    using Kendo.Mvc.Infrastructure;
     using Moq;
     using Xunit;
 
@@ -12,7 +13,6 @@ namespace Kendo.Mvc.UI.Tests
     {
         private readonly ViewContext _viewContext;
         private readonly Mock<HttpContextBase> _httpContext;
-        private readonly Mock<IClientSideObjectWriterFactory> _clientSideObjectWriterFactory;
 
         private readonly Mock<ViewComponentBase> _baseComponent;
 
@@ -20,9 +20,7 @@ namespace Kendo.Mvc.UI.Tests
         {
             _httpContext = TestHelper.CreateMockedHttpContext();
             _viewContext = new ViewContext { HttpContext = _httpContext.Object, Writer = TextWriter.Null };
-            _clientSideObjectWriterFactory = new Mock<IClientSideObjectWriterFactory>();
-
-            _baseComponent = new Mock<ViewComponentBase>(_viewContext, _clientSideObjectWriterFactory.Object, null);
+            _baseComponent = new Mock<ViewComponentBase>(_viewContext, null);
         }
 
         [Fact]
@@ -50,7 +48,7 @@ namespace Kendo.Mvc.UI.Tests
         [Fact]
         public void EnsureRequired_should_throw_exception_when_internal_name_is_blank()
         {
-            ViewComponentBaseTestDouble component = new ViewComponentBaseTestDouble(_viewContext, _clientSideObjectWriterFactory.Object);
+            ViewComponentBaseTestDouble component = new ViewComponentBaseTestDouble(_viewContext, null);
 
             Assert.Throws<InvalidOperationException>(() => component.CheckRequired());
         }
@@ -58,7 +56,7 @@ namespace Kendo.Mvc.UI.Tests
         [Fact]
         public void EnsureRequired_should_not_throw_exception_when_internal_name_is_not_blank()
         {
-            ViewComponentBaseTestDouble component = new ViewComponentBaseTestDouble(_viewContext, _clientSideObjectWriterFactory.Object) { Name = "dummyComponent" };
+            ViewComponentBaseTestDouble component = new ViewComponentBaseTestDouble(_viewContext, null) { Name = "dummyComponent" };
 
             Assert.DoesNotThrow(component.CheckRequired);
         }
@@ -66,7 +64,7 @@ namespace Kendo.Mvc.UI.Tests
         [Fact]
         public void Render_should_ensure_required()
         {
-            ViewComponentBaseTestDouble component = new ViewComponentBaseTestDouble(_viewContext, _clientSideObjectWriterFactory.Object) { Name = "dummyComponent" };
+            ViewComponentBaseTestDouble component = new ViewComponentBaseTestDouble(_viewContext, null) { Name = "dummyComponent" };
 
             component.Render();
 
@@ -76,7 +74,7 @@ namespace Kendo.Mvc.UI.Tests
         [Fact]
         public void Render_should_write_html()
         {
-            ViewComponentBaseTestDouble component = new ViewComponentBaseTestDouble(_viewContext, _clientSideObjectWriterFactory.Object) { Name = "dummyComponent" };
+            ViewComponentBaseTestDouble component = new ViewComponentBaseTestDouble(_viewContext, null) { Name = "dummyComponent" };
 
             component.Render();
 

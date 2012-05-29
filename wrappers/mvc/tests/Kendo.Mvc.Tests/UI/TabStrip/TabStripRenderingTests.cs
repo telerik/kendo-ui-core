@@ -1,10 +1,9 @@
 namespace Kendo.Mvc.UI.Tests
 {
-    using Moq;
     using System.IO;
     using System.Web.UI;
-    using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.UI;
+    using Moq;
     using Xunit;
 
     public class TabStripRenderingTests
@@ -172,30 +171,5 @@ namespace Kendo.Mvc.UI.Tests
             Assert.True(tabStrip.Items[1].Selected);
         }
 
-        ////
-
-        [Fact]
-        public void Render_should_call_objectWriter_start_method()
-        {
-            Mock<TextWriter> writer = new Mock<TextWriter>();
-
-            TabStripTestHelper.clientSideObjectWriter.Setup(ow => ow.Start()).Verifiable();
-
-            tabStrip.WriteInitializationScript(writer.Object);
-
-            TabStripTestHelper.clientSideObjectWriter.Verify(ow => ow.Start());
-        }
-
-        [Fact]
-        public void ObjectWriter_should_call_objectWriter_complete_method()
-        {
-            Mock<TextWriter> writer = new Mock<TextWriter>();
-
-            TabStripTestHelper.clientSideObjectWriter.Setup(w => w.Complete());
-
-            tabStrip.WriteInitializationScript(writer.Object);
-
-            TabStripTestHelper.clientSideObjectWriter.Verify(w => w.Complete());
-        }
     }
 }

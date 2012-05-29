@@ -13,8 +13,6 @@ namespace Kendo.Mvc.UI.Tests
 
     public static class EditorTestHelper
     {
-        public static Mock<IClientSideObjectWriter> clientSideObjectWriter;
-
         public static ViewContext viewContext;
 
         public static Editor CreateEditor()
