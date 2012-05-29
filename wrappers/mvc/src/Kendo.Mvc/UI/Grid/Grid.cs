@@ -685,7 +685,7 @@ namespace Kendo.Mvc.UI
         {
             var options = new Dictionary<string, object>(Events);
 
-            var autoBind = DataSource.Type == DataSourceType.Ajax && DataSource.Data == null;
+            var autoBind = DataSource.Type != DataSourceType.Server;
 
             var columns = VisibleColumns.Select(c => c.ToJson());
 
