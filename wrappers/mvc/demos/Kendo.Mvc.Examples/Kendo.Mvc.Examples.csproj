@@ -86,12 +86,13 @@
     <Compile Include="Controllers\Calendar\ApiController.cs" />
     <Compile Include="Controllers\Calendar\EventsController.cs" />
     <Compile Include="Controllers\Calendar\TemplateController.cs" />
+    <Compile Include="Controllers\Chart\Bar_ChartsController.cs" />
     <Compile Include="Controllers\ComboBox\ClientFilteringController.cs" />
     <Compile Include="Controllers\ComboBox\ApiController.cs" />
     <Compile Include="Controllers\ComboBox\EventsController.cs" />
     <Compile Include="Controllers\ComboBox\ServerFilteringController.cs" />
     <Compile Include="Controllers\ComboBox\TemplateController.cs" />
-    <Compile Include="Controllers\Chart\Area_ChartController.cs" />
+    <Compile Include="Controllers\Chart\Area_ChartsController.cs" />
     <Compile Include="Controllers\ComboBox\IndexController.cs" />
     <Compile Include="Controllers\AutoComplete\IndexController.cs" />
     <Compile Include="Controllers\DatePicker\ApiController.cs" />
@@ -203,11 +204,11 @@
     <Content Include="App_Data\Northwind_log.ldf">
       <DependentUpon>Northwind.mdf</DependentUpon>
     </Content>
-    <Content Include="Areas\aspx\Views\dataviz\area_chart\local_data.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\area_chart\remote_data.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\area_charts\local_data.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\area_charts\remote_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\linear_gauge\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\linear_gauge\scale_options.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\area_chart\index.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\area_charts\index.aspx" />
     <Content Include="Areas\aspx\Views\web\datepicker\api.aspx" />
     <Content Include="Areas\aspx\Views\web\datepicker\events.aspx" />
     <Content Include="Areas\aspx\Views\web\datepicker\index.aspx" />
@@ -356,7 +357,7 @@
     <Content Include="Areas\razor\Views\web\combobox\index.cshtml" />
     <Content Include="Areas\aspx\Views\web\slider\index.aspx" />
     <Content Include="Areas\razor\Views\web\splitter\api.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\area_chart\index.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\area_charts\index.cshtml" />
     <Content Include="Areas\razor\Views\web\grid\ajaxediting.cshtml" />
     <Content Include="Areas\razor\Views\web\dropdownlist\index.cshtml" />
     <Content Include="Areas\razor\Views\web\autocomplete\index.cshtml" />
@@ -387,7 +388,7 @@
     <Content Include="Areas\aspx\Views\web\datetimepicker\events.aspx" />
     <Content Include="Areas\aspx\Views\web\datetimepicker\index.aspx" />
     <Content Include="Areas\aspx\Views\web\datetimepicker\rangeselection.aspx" />
-    <Content Include="Areas\razor\Views\dataviz\area_chart\remote_data.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\area_charts\remote_data.cshtml" />
     <Content Include="Areas\razor\Views\web\dropdownlist\api.cshtml" />
     <Content Include="Areas\razor\Views\web\dropdownlist\events.cshtml" />
     <Content Include="Areas\razor\Views\web\dropdownlist\remotedatasource.cshtml" />
@@ -445,7 +446,14 @@
     <Content Include="Areas\aspx\Views\web\menu\sitemapbinding.aspx" />
     <Content Include="Areas\razor\Views\web\grid\serverhierarchy.cshtml" />
     <Content Include="Areas\razor\Views\web\grid\serverdetails.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\area_chart\local_data.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\area_charts\local_data.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\bar_charts\index.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\bar_charts\column.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\bar_charts\stacked_bar.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\bar_charts\grouped_stacked_bar.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\bar_charts\multiple_axes.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\bar_charts\local_data.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\bar_charts\remote_data.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
