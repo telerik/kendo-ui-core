@@ -1,0 +1,19 @@
+@model IEnumerable<ElectricityProduction>
+
+<div class="chart-wrapper">
+    @(Html.Kendo().Chart(Model)
+        .Name("chart")
+        .Title("Spain electricity production (GWh)")
+        .Legend(legend => legend
+            .Position(ChartLegendPosition.Top)
+        )
+        .DataSource(ds => ds.Read(read => read.Action("_SpainElectricity", "Chart")))
+        .Series(series => {
+            series.Pie(model => model.Nuclear, model => model.Year);
+        })
+        .Tooltip(tooltip => tooltip
+            .Visible(true)
+            .Format("{0:N0}")
+        )
+    ) 
+</div>

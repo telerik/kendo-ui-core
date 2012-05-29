@@ -9,7 +9,12 @@ namespace Kendo.Mvc.Examples.Controllers
     {
         public ActionResult _SpainElectricity()
         {
-            return Json(SpainElectricityStats.GetStats());
+            return Json(SpainElectricityStats.GetProductionByYear());
+        }
+
+        public ActionResult _SpainElectricitySources()
+        {
+            return Json(SpainElectricityStats.GetSourceBreakdown());
         }
     }
 }
