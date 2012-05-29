@@ -77,6 +77,11 @@
     <Compile Include="Areas\aspx\ASPXAreaRegistration.cs" />
     <Compile Include="Areas\razor\RazorAreaRegistration.cs" />
     <Compile Include="Controllers\Area_Chart\IndexController.cs" />
+    <Compile Include="Controllers\AutoComplete\ApiController.cs" />
+    <Compile Include="Controllers\AutoComplete\ClientFilteringController.cs" />
+    <Compile Include="Controllers\AutoComplete\EventsController.cs" />
+    <Compile Include="Controllers\AutoComplete\ServerFilteringController.cs" />
+    <Compile Include="Controllers\AutoComplete\TemplateController.cs" />
     <Compile Include="Controllers\Calendar\CalendarController.cs" />
     <Compile Include="Controllers\ComboBox\ClientFilteringController.cs" />
     <Compile Include="Controllers\ComboBox\ApiController.cs" />
@@ -393,6 +398,17 @@
     <Content Include="Areas\razor\Views\web\editor\index.cshtml" />
     <Content Include="Areas\razor\Views\web\calendar\index.cshtml" />
     <Content Include="Areas\razor\Views\web\menu\index.cshtml" />
+    <Content Include="Areas\razor\Views\web\autocomplete\template.cshtml" />
+    <Content Include="Areas\razor\Views\web\autocomplete\api.cshtml" />
+    <Content Include="Areas\razor\Views\web\autocomplete\clientfiltering.cshtml" />
+    <Content Include="Areas\razor\Views\web\autocomplete\events.cshtml" />
+    <Content Include="Areas\razor\Views\web\autocomplete\serverfiltering.cshtml" />
+    <Content Include="Areas\aspx\Views\web\autocomplete\api.aspx" />
+    <Content Include="Areas\aspx\Views\web\autocomplete\clientfiltering.aspx" />
+    <Content Include="Areas\aspx\Views\web\autocomplete\events.aspx" />
+    <Content Include="Areas\aspx\Views\web\autocomplete\index.aspx" />
+    <Content Include="Areas\aspx\Views\web\autocomplete\serverfiltering.aspx" />
+    <Content Include="Areas\aspx\Views\web\autocomplete\template.aspx" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
