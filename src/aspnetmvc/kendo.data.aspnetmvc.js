@@ -49,25 +49,39 @@
            result[this.options.prefix + "filter"] = "";
            delete options.filter;
        }
+       if (operation != "read" ) {
+           if (options.models) {
+               var prefix = "models",
+                   models = options.models;
 
-       if (operation != "read" && options.models) {
-           var prefix = "models",
-               models = options.models;
+               for (var i = 0; i < models.length; i++) {
+                   var item = convert(models[i]),
+                       value,
+                       key;
 
-           for (var i = 0; i < models.length; i++) {
-               var item = convert(models[i]),
-                   value,
-                   key;
+                   for (var member in item) {
+                       key = prefix + "[" + i + "]." + member;
+                       value = item[member];
+
+                       if ($.isPlainObject(value)) {
+                           flatten(result, value, key);
+                       }
+                       else {
+                           result[key] = value;
+                       }
+                   }
+               }
+           } else if (options) {
+               var item = convert(options);
 
                for (var member in item) {
-                   key = prefix + "[" + i + "]." + member;
                    value = item[member];
 
                    if ($.isPlainObject(value)) {
-                       flatten(result, value, key);
+                       flatten(result, value, member);
                    }
                    else {
-                       result[key] = value;
+                       result[member] = value;
                    }
                }
            }
