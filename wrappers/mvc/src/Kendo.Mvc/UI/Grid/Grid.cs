@@ -711,7 +711,7 @@ namespace Kendo.Mvc.UI
 
             if (Selection.Enabled)
             {
-                options["selectable"] = true;
+                options["selectable"] = String.Format("{0}, {1}", Selection.Mode, Selection.Type);
             }
 
             if (Filtering.Enabled)
