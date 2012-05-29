@@ -15,7 +15,7 @@ namespace Kendo.Mvc.UI.Tests.UITests
         {
             var viewContext = TestHelper.CreateViewContext();
             component = new TComponentTestDouble(viewContext);
-            builder = new NavigationHtmlBuilderBaseTestDouble(component, null);
+            builder = new NavigationHtmlBuilderBaseTestDouble(component);
         }
 
         [Fact]
@@ -50,8 +50,8 @@ namespace Kendo.Mvc.UI.Tests.UITests
 
     public class NavigationHtmlBuilderBaseTestDouble : NavigationHtmlBuilderBase<TComponentTestDouble, NavigationItemTestDouble>
     {
-        public NavigationHtmlBuilderBaseTestDouble(TComponentTestDouble component, IActionMethodCache cache)
-            : base(component, cache)
+        public NavigationHtmlBuilderBaseTestDouble(TComponentTestDouble component)
+            : base(component)
         {
 
         }

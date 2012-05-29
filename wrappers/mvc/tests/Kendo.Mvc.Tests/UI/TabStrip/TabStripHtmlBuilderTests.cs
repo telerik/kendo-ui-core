@@ -23,7 +23,7 @@ namespace Kendo.Mvc.UI.Tests
             item = new TabStripItem();
             item.Visible = true;
 
-            builder = new TabStripHtmlBuilder(tabStrip, new Mock<IActionMethodCache>().Object);
+            builder = new TabStripHtmlBuilder(tabStrip);
         }
 
         [Fact]

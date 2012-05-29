@@ -6,8 +6,8 @@ namespace Kendo.Mvc.UI
 
     public class MenuHtmlBuilder : NavigationHtmlBuilderBase<Menu, MenuItem>, INavigationComponentHtmlBuilder<MenuItem>
     {
-        public MenuHtmlBuilder(Menu menu, IActionMethodCache actionMethodCache)
-            : base(menu, actionMethodCache)
+        public MenuHtmlBuilder(Menu menu)
+            : base(menu)
         {
         }
 

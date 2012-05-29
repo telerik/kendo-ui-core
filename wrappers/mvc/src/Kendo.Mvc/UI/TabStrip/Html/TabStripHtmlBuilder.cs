@@ -5,8 +5,8 @@ namespace Kendo.Mvc.UI
 
     public class TabStripHtmlBuilder: NavigationHtmlBuilderBase<TabStrip, TabStripItem>, ITabStripHtmlBuilder
     {
-        public TabStripHtmlBuilder(TabStrip tabStrip, IActionMethodCache actionMethodCache)
-            : base(tabStrip, actionMethodCache)
+        public TabStripHtmlBuilder(TabStrip tabStrip)
+            : base(tabStrip)
         {
         }
 

@@ -106,32 +106,6 @@ namespace Kendo.Mvc.UI
                    "{0}-{1}".FormatWith(component.Id, (component.Items.Where(i => i.Visible == true).IndexOf(item) + 1).ToString(CultureInfo.InvariantCulture));
         }
 
-        public static string GetItemText<TComponent, TItem>(this TComponent component, TItem item, IActionMethodCache actionMethodCache)
-            where TComponent : ViewComponentBase, INavigationItemContainer<TItem>
-            where TItem : NavigationItem<TItem>, IContentContainer
-        {
-            string text = item.Text;
-
-            if (string.IsNullOrEmpty(text) && ((!string.IsNullOrEmpty(item.ControllerName) && !string.IsNullOrEmpty(item.ActionName))))
-            {
-                foreach (MethodInfo method in actionMethodCache.GetActionMethods(component.ViewContext.RequestContext, item.ControllerName, item.ActionName))
-                {
-                    if (method != null)
-                    {
-                        string displayName = method.GetDisplayName();
-
-                        if (!string.IsNullOrEmpty(displayName))
-                        {
-                            text = displayName;
-                            break;
-                        }
-                    }
-                }
-            }
-
-            return text;
-        }
-
         public static void BindTo<T>(this INavigationItemComponent<T> component, string sitemapName, Action<T, SiteMapNode> siteMapAction) where T : NavigationItem<T>, new()
         {
             var siteMap = component.ViewContext.ViewData.Eval(sitemapName) as SiteMapBase ??

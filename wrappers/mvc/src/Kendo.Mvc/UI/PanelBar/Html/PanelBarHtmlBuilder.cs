@@ -7,7 +7,7 @@ namespace Kendo.Mvc.UI
     public class PanelBarHtmlBuilder : NavigationHtmlBuilderBase<PanelBar, PanelBarItem>, INavigationComponentHtmlBuilder<PanelBarItem>
     {
         public PanelBarHtmlBuilder(PanelBar panelBar, IActionMethodCache actionMethodCache)
-            : base(panelBar, actionMethodCache)
+            : base(panelBar)
         {
         }
 

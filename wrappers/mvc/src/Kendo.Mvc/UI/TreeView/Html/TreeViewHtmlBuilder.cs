@@ -8,7 +8,7 @@ namespace Kendo.Mvc.UI
     public class TreeViewHtmlBuilder : NavigationHtmlBuilderBase<TreeView, TreeViewItem>, ITreeViewHtmlBuilder
     {
         public TreeViewHtmlBuilder(TreeView treeView, IActionMethodCache actionMethodCache)
-            : base(treeView, actionMethodCache)
+            : base(treeView)
         {
         }
 

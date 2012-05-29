@@ -80,9 +80,6 @@ namespace Kendo.Mvc.Infrastructure
         
         private static void RegisterComponentDependencies()
         {
-            Current.Register<INavigationComponentHtmlBuilderFactory<Menu, MenuItem>, IActionMethodCache>((actionMethodCache) =>
-                new MenuHtmlBuilderFactory(actionMethodCache));
-
             Current.Register<ITabStripHtmlBuilderFactory, IActionMethodCache>((actionMethodCache) =>
                 new TabStripHtmlBuilderFactory(actionMethodCache));
 

@@ -45,7 +45,7 @@ namespace Kendo.Mvc.UI.Tests
 
             TabStrip tabStrip = new TabStrip(viewContext, initializer.Object, urlGenerator.Object, authorization.Object, tabStripRendererFactory.Object);
 
-            renderer = renderer ?? new TabStripHtmlBuilder(tabStrip, new Mock<IActionMethodCache>().Object);
+            renderer = renderer ?? new TabStripHtmlBuilder(tabStrip);
             tabStripRendererFactory.Setup(f => f.Create(It.IsAny<TabStrip>())).Returns(renderer);
 
             return tabStrip;
