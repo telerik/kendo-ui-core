@@ -439,6 +439,8 @@
     <Content Include="Areas\aspx\Views\web\menu\modelbinding.aspx" />
     <Content Include="Areas\aspx\Views\web\menu\orientation.aspx" />
     <Content Include="Areas\aspx\Views\web\menu\sitemapbinding.aspx" />
+    <Content Include="Areas\razor\Views\web\grid\serverhierarchy.cshtml" />
+    <Content Include="Areas\razor\Views\web\grid\serverdetails.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
