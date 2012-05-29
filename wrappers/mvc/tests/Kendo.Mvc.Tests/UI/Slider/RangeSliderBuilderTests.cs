@@ -164,15 +164,5 @@ namespace Kendo.Mvc.UI.Tests
             const bool enabled = true;
             builder.Enable(enabled).ShouldBeType<RangeSliderBuilder<int>>();
         }
-
-        [Fact]
-        public void ClientEvents_should_return_builder()
-        {
-            Action<RangeSliderClientEventsBuilder> clientEventsAction = delegate { };
-
-            var returnedBuilder = builder.ClientEvents(clientEventsAction).ShouldBeType<RangeSliderBuilder<int>>();
-
-            Assert.IsType(typeof(RangeSliderBuilder<int>), returnedBuilder);
-        }
     }
 }

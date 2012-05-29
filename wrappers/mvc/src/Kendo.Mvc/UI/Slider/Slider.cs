@@ -5,14 +5,15 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Extensions;
     using System.Web.UI;
     using Kendo.Mvc.UI.Html;
-    using Kendo.Mvc.Resources;
+    using Kendo.Mvc.Infrastructure;
+    using System.Collections.Generic;
 
     public class Slider<T> : ViewComponentBase, IInputComponent<T> where T : struct, IComparable
     {
         private readonly ISliderHtmlBuilderFactory rendererFactory;
 
-        public Slider(ViewContext viewContext, IClientSideObjectWriterFactory writerFactory, ISliderHtmlBuilderFactory rendererFactory)
-            : base(viewContext, writerFactory)
+        public Slider(ViewContext viewContext, IJavaScriptInitializer initializer, ISliderHtmlBuilderFactory rendererFactory)
+            : base(viewContext, initializer)
         {
             this.rendererFactory = rendererFactory;
 
@@ -24,7 +25,7 @@ namespace Kendo.Mvc.UI
             Min = (T)Convert.ChangeType(0, typeof(T));
             Max = (T)Convert.ChangeType(10, typeof(T));
             SmallStep = (T)Convert.ChangeType(1, typeof(T));
-            ClientEvents = new SliderBaseClientEvents();
+            ClientEvents = new Dictionary<string, object>();
             Enabled = true;
 
             Settings = new SliderTooltipSettings();
@@ -42,7 +43,7 @@ namespace Kendo.Mvc.UI
 
         public T? LargeStep { get; set; }
 
-        public SliderBaseClientEvents ClientEvents { get; private set; }
+        public IDictionary<string, object> ClientEvents { get; private set; }
 
         public bool Enabled { get; set; }
 
@@ -58,33 +59,30 @@ namespace Kendo.Mvc.UI
 
         public override void WriteInitializationScript(System.IO.TextWriter writer)
         {
-            var objectWriter = ClientSideObjectWriterFactory.Create(Id, "kendoSlider", writer);
+            var options = new Dictionary<string, object>(ClientEvents);
 
-            objectWriter.Start();
+            SerializeProperties(options);
 
-            SerializeProperties(objectWriter);
-
-            ClientEvents.SerializeTo(objectWriter);
-
-            objectWriter.Complete();
+            writer.Write(Initializer.Initialize(Id, "Slider", options));
 
             base.WriteInitializationScript(writer);
         }
 
-        private void SerializeProperties(IClientSideObjectWriter objectWriter)
+        private void SerializeProperties(IDictionary<string, object> options)
         {
-            objectWriter.Append("orientation", Orientation, SliderOrientation.Horizontal);
-            objectWriter.Append("tickPlacement", TickPlacement, SliderTickPlacement.Both);
-            objectWriter.Append("increaseButtonTitle", IncreaseButtonTitle);
-            objectWriter.Append("decreaseButtonTitle", DecreaseButtonTitle);
-            objectWriter.AppendObject("showButtons", ShowButtons);
-            objectWriter.AppendObject("enabled", Enabled);
-            objectWriter.AppendObject("smallStep", SmallStep);
-            objectWriter.AppendObject("largeStep", LargeStep);
-            objectWriter.AppendObject("min", Min);
-            objectWriter.AppendObject("max", Max);
+            FluentDictionary.For(options)
+                .Add("orientation", Orientation, SliderOrientation.Horizontal)
+                .Add("tickPlacement", TickPlacement, SliderTickPlacement.Both)
+                .Add("increaseButtonTitle", IncreaseButtonTitle, "Increase")
+                .Add("decreaseButtonTitle", DecreaseButtonTitle, "Decrease")
+                .Add("showButtons", ShowButtons, () => ShowButtons.HasValue)
+                .Add("enabled", Enabled, true)
+                .Add("smallStep", SmallStep)
+                .Add("largeStep", LargeStep)
+                .Add("min", Min)
+                .Add("max", Max);
 
-            Settings.SerializeTo("tooltip", objectWriter);
+            Settings.SerializeTo("tooltip", options);
         }
 
         protected override void WriteHtml(HtmlTextWriter writer)

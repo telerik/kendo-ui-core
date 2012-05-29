@@ -145,14 +145,6 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
-        public void ClientEvents_should_return_builder()
-        {
-            Action<SliderClientEventsBuilder> clientEventsAction = delegate { };
-
-            builder.ClientEvents(clientEventsAction).ShouldBeType<SliderBuilder<int>>();
-        }
-
-        [Fact]
         public void Should_set_increaseButtonTitle_property_of_the_slider()
         {
             const string increaseButtonTitle = "foo";

@@ -6,6 +6,7 @@ namespace Kendo.Mvc.UI.Tests
     using System.Web.Mvc;
     using System.IO;
     using System.Web.UI;
+    using Kendo.Mvc.Infrastructure;
 
     public class SliderTestHelper
     {
@@ -24,8 +25,8 @@ namespace Kendo.Mvc.UI.Tests
 
             viewContext = viewContext ?? TestHelper.CreateViewContext();
             writerFactory.Setup(c => c.Create(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<TextWriter>())).Returns(objectWriter.Object);
-            
-            var component = new Slider<T>(viewContext, writerFactory.Object, builderFactory.Object);           
+
+            var component = new Slider<T>(viewContext, new JavaScriptInitializer(), builderFactory.Object);           
 
             return component;
         }
@@ -46,7 +47,7 @@ namespace Kendo.Mvc.UI.Tests
             viewContext = viewContext ?? TestHelper.CreateViewContext();
             writerFactory.Setup(c => c.Create(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<TextWriter>())).Returns(objectWriter.Object);
 
-            var component = new RangeSlider<T>(viewContext, writerFactory.Object, builderFactory.Object);
+            var component = new RangeSlider<T>(viewContext, new JavaScriptInitializer(), builderFactory.Object);
 
             return component;
         }

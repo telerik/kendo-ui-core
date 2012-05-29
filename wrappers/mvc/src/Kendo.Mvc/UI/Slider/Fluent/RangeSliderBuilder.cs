@@ -134,11 +134,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public RangeSliderBuilder<T> ClientEvents(Action<RangeSliderClientEventsBuilder> events)
+        public RangeSliderBuilder<T> ClientEvents(Action<RangeSliderEventBuilder> events)
         {
             Guard.IsNotNull(events, "events");
 
-            events(new RangeSliderClientEventsBuilder(Component.ClientEvents));
+            events(new RangeSliderEventBuilder(Component.ClientEvents));
 
             return this;
         }
