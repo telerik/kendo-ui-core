@@ -242,7 +242,7 @@
                 .css("overflow", "hidden")
                 .addClass("km-scroll-wrapper")
                 .wrapInner('<div class="km-scroll-container"/>')
-                .prepend('<div class="fixed-header">Foo</div>');
+                .prepend('<div class="km-scroll-header"/>');
 
             var inner = element.children().eq(1),
 

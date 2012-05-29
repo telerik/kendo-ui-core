@@ -47,15 +47,16 @@
 
 
     var flatData = [ "Sashimi salad", "Chirashi sushi", "Seaweed salad", "Edamame", "Miso soup", "Maguro", "Shake", "Shiromi", "Tekka maki", "Hosomaki Mix", "California rolls", "Seattle rolls", "Spicy Tuna rolls", "Ebi rolls", "Chicken Teriyaki", "Salmon Teriyaki", "Gohan", "Tori Katsu", "Yaki Udon" ];
-    
+
     function mobileListViewDataBindInitFlat() {
         $("#flat-listview").kendoMobileListView({ dataSource: flatData });
     }
 
     function mobileListViewDataBindInitGrouped() {
         $("#grouped-listview").kendoMobileListView({
-            dataSource: kendo.data.DataSource.create({data: groupedData, group: "letter" }),
-            template: "${name}"
+            dataSource: kendo.data.DataSource.create({data: groupedData, group: "letter"}),
+            template: "${name}",
+            fixedHeaders: true
         });
     }
 </script>
