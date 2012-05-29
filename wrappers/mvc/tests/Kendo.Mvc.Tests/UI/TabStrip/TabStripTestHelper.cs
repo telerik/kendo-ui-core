@@ -44,9 +44,10 @@ namespace Kendo.Mvc.UI.Tests
 
             authorization.Setup(a => a.IsAccessibleToUser(viewContext.RequestContext, It.IsAny<INavigatable>())).Returns(true);
 
-            clientSideObjectWriterFactory.Setup(c => c.Create(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<TextWriter>())).Returns(clientSideObjectWriter.Object);
 
-            TabStrip tabStrip = new TabStrip(viewContext, clientSideObjectWriterFactory.Object, urlGenerator.Object, authorization.Object, tabStripRendererFactory.Object);
+            var initializer = new Mock<IJavaScriptInitializer>();
+
+            TabStrip tabStrip = new TabStrip(viewContext, initializer.Object, urlGenerator.Object, authorization.Object, tabStripRendererFactory.Object);
 
             renderer = renderer ?? new TabStripHtmlBuilder(tabStrip, new Mock<IActionMethodCache>().Object);
             tabStripRendererFactory.Setup(f => f.Create(It.IsAny<TabStrip>())).Returns(renderer);

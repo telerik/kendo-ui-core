@@ -3,8 +3,9 @@ namespace Kendo.Mvc.Tests.TabStrip
 
     using System;
     using System.Web.Mvc;
-    using Moq;
     using Kendo.Mvc.UI;
+    using Kendo.Mvc.UI.Fluent;
+    using Moq;
     using Xunit;
 
     public class TabStripItemBuilderTests

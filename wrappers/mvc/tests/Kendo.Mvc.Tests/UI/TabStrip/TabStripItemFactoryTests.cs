@@ -2,8 +2,9 @@ namespace Kendo.Mvc.Tests.TabStrip
 {
     using System.Collections.Generic;
     using System.Web.Mvc;
-    using Moq;
     using Kendo.Mvc.UI;
+    using Kendo.Mvc.UI.Fluent;
+    using Moq;
     using Xunit;
 
     public class TabItemFactoryTests

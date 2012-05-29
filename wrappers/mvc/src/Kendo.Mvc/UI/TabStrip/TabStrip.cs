@@ -4,10 +4,10 @@ namespace Kendo.Mvc.UI
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Web;
     using System.Web.Mvc;
     using System.Web.UI;
-
-    using Extensions;
+    using Kendo.Mvc.Extensions;
     using Infrastructure;
 
     public class TabStrip : ViewComponentBase, INavigationItemComponent<TabStripItem>
@@ -17,20 +17,15 @@ namespace Kendo.Mvc.UI
         private readonly ITabStripHtmlBuilderFactory builderFactory;
         internal bool isPathHighlighted;
 
-        public TabStrip(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory, IUrlGenerator urlGenerator, INavigationItemAuthorization authorization, ITabStripHtmlBuilderFactory rendererFactory) : base(viewContext, clientSideObjectWriterFactory)
+        public TabStrip(ViewContext viewContext, IJavaScriptInitializer initializer, 
+            IUrlGenerator urlGenerator, INavigationItemAuthorization authorization, ITabStripHtmlBuilderFactory rendererFactory) : base(viewContext, initializer)
         {
-            Guard.IsNotNull(urlGenerator, "urlGenerator");
-            Guard.IsNotNull(authorization, "authorization");
-            Guard.IsNotNull(rendererFactory, "rendererFactory");
-
             this.builderFactory = rendererFactory;
 
             UrlGenerator = urlGenerator;
             Authorization = authorization;
 
             //defaultEffects.Each(el => Effects.Container.Add(el));
-
-            ClientEvents = new TabStripClientEvents();
 
             Items = new List<TabStripItem>();
             SelectedIndex = -1;
@@ -45,12 +40,6 @@ namespace Kendo.Mvc.UI
         }
 
         public INavigationItemAuthorization Authorization
-        {
-            get;
-            private set;
-        }
-
-        public TabStripClientEvents ClientEvents
         {
             get;
             private set;
@@ -94,27 +83,32 @@ namespace Kendo.Mvc.UI
 
         public override void WriteInitializationScript(TextWriter writer)
         {
-            // TODO: use new serialization scheme
+            var options = new Dictionary<string, object>(Events);
+
             // TODO: add animation configuration and builder
-            string id = Id;
-
-            IClientSideObjectWriter objectWriter = ClientSideObjectWriterFactory.Create(id, "kendoTabStrip", writer);
-
-            objectWriter.Start();
-
             //if (!defaultEffects.SequenceEqual(Effects.Container))
             //{
             //    objectWriter.Serialize("effects", Effects);
             //}
 
-            objectWriter.AppendClientEvent("select", ClientEvents.OnSelect);
-            objectWriter.AppendClientEvent("activate", ClientEvents.OnActivate);
-            objectWriter.AppendClientEvent("contentLoad", ClientEvents.OnContentLoad);
-            objectWriter.AppendClientEvent("error", ClientEvents.OnError);
+            var urls = Items.Where(item => item.Visible).Select(item =>
+                {
+                    if (item.ContentUrl.HasValue())
+                    {
+                        return HttpUtility.UrlDecode(item.ContentUrl);
+                    }
+                    else
+                    {
+                        return "";
+                    }
+                });
 
-            objectWriter.AppendContentUrls("contentUrls", Items, IsSelfInitialized);
+            if (urls.Any(url => url.HasValue()))
+            {
+                options["contentUrls"] = urls;
+            }
 
-            objectWriter.Complete();
+            writer.Write(Initializer.Initialize(Id, "TabStrip", options));
 
             base.WriteInitializationScript(writer);
         }

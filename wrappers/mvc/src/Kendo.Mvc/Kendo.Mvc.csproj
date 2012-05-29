@@ -920,27 +920,27 @@
     <Compile Include="UI\PanelBar\Fluent\PanelBarItemFactory.cs" />
     <Compile Include="UI\PanelBar\Html\PanelBarHtmlBuilder.cs" />
     <Compile Include="Extensions\HtmlAttributesContainerExtensions.cs" />
-    <Compile Include="UI\TabStrip\ITabStripHtmlBuilder.cs" />
-    <Compile Include="UI\TabStrip\ITabStripHtmlBuilderFactory.cs" />
+    <Compile Include="UI\TabStrip\Html\ITabStripHtmlBuilder.cs" />
+    <Compile Include="UI\TabStrip\Html\ITabStripHtmlBuilderFactory.cs" />
     <Compile Include="UI\TabStrip\TabStripClientEvents.cs" />
-    <Compile Include="UI\TabStrip\TabStripClientEventsBuilder.cs" />
-    <Compile Include="UI\TabStrip\TabStripHtmlBuilderFactory.cs" />
+    <Compile Include="UI\TabStrip\Fluent\TabStripClientEventsBuilder.cs" />
+    <Compile Include="UI\TabStrip\Html\TabStripHtmlBuilderFactory.cs" />
     <Compile Include="UI\TabStrip\TabStrip.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="UI\TabStrip\TabStripBuilder.cs">
+    <Compile Include="UI\TabStrip\Fluent\TabStripBuilder.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="UI\TabStrip\TabStripItem.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="UI\TabStrip\TabStripItemBuilder.cs">
+    <Compile Include="UI\TabStrip\Fluent\TabStripItemBuilder.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="UI\TabStrip\TabStripItemFactory.cs">
+    <Compile Include="UI\TabStrip\Fluent\TabStripItemFactory.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="UI\TabStrip\TabStripHtmlBuilder.cs" />
+    <Compile Include="UI\TabStrip\Html\TabStripHtmlBuilder.cs" />
     <Compile Include="UI\UiPrimitives.cs" />
     <Compile Include="UI\Upload\Fluent\UploadAsyncSettingsBuilder.cs" />
     <Compile Include="UI\Upload\Fluent\UploadBuilder.cs" />
