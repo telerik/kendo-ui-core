@@ -6,7 +6,7 @@
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 <div id="tshirt-view" class="k-header">
 	<h2>Customize your Kendo T-shirt</h2>
-	<img id="tshirt" src="@Url.Content("~/Content/web/combobox/tShirt.png")" />
+	<img id="tshirt" src='@Url.Content("~/Content/web/combobox/tShirt.png")' />
     <div id="options">
 	<h3>T-shirt Fabric</h3>
     <%= Html.Kendo().ComboBox()

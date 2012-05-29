@@ -4,6 +4,7 @@ namespace Kendo.Mvc.UI
 
     using Infrastructure;
     using Resources;
+    using Kendo.Mvc.UI.Fluent;
 
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="Calendar"/>.
@@ -24,7 +25,7 @@ namespace Kendo.Mvc.UI
         /// Sets selected date.
         /// </summary>
         /// <param name="date">DateTime object represents the selected date.</param>
-        public CalendarBuilder Value(DateTime date) 
+        public CalendarBuilder Value(DateTime date)
         {
             Guard.IsNotNull(date, "date");
 
@@ -152,11 +153,9 @@ namespace Kendo.Mvc.UI
         /// %&gt;
         /// </code>
         /// </example>
-        public CalendarBuilder ClientEvents(Action<CalendarClientEventsBuilder> clientEventsAction)
+        public CalendarBuilder Events(Action<CalendarEventBuilder> configurator)
         {
-            Guard.IsNotNull(clientEventsAction, "clientEventsAction");
-
-            clientEventsAction(new CalendarClientEventsBuilder(Component.ClientEvents, Component.ViewContext));
+            configurator(new CalendarEventBuilder(Component.Events));
 
             return this;
         }
@@ -166,7 +165,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <param name="selectionAction">SelectAction settings, which includes Action name and IEnumerable of DateTime objects.</param>
         /// <returns></returns>
-        public CalendarBuilder Selection(Action<CalendarSelectionSettingsBuilder> selectionAction) 
+        public CalendarBuilder Selection(Action<CalendarSelectionSettingsBuilder> selectionAction)
         {
             Guard.IsNotNull(selectionAction, "selectionAction");
 

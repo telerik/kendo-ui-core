@@ -295,7 +295,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual CalendarBuilder Calendar()
         {
-            return new CalendarBuilder(new Calendar(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>(), DI.Current.Resolve<ICalendarHtmlBuilderFactory>()));
+            return new CalendarBuilder(new Calendar(ViewContext, Initializer, DI.Current.Resolve<IUrlGenerator>(), DI.Current.Resolve<ICalendarHtmlBuilderFactory>()));
         }
 
         /// <summary>

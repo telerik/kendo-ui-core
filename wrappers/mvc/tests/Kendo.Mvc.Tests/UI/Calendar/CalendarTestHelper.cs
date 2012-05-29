@@ -6,6 +6,7 @@ namespace Kendo.Mvc.UI.Tests
     using System.Web.UI;
 
 
+    using Kendo.Mvc.Infrastructure;
     using Moq;
 
     public static class CalendarTestHelper
@@ -20,16 +21,14 @@ namespace Kendo.Mvc.UI.Tests
 
             Mock<ICalendarHtmlBuilderFactory> calendarHtmlBuilderFactory = new Mock<ICalendarHtmlBuilderFactory>();
 
-            Mock<IClientSideObjectWriterFactory> clientSideObjectWriterFactory = new Mock<IClientSideObjectWriterFactory>();
-            clientSideObjectWriter = new Mock<IClientSideObjectWriter>();
-
             Mock<IUrlGenerator> urlGenerator = new Mock<IUrlGenerator>();
 
             ViewContext viewContext = TestHelper.CreateViewContext();
 
-            clientSideObjectWriterFactory.Setup(c => c.Create(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<TextWriter>())).Returns(clientSideObjectWriter.Object);
 
-            Calendar calendar = new Calendar(viewContext, clientSideObjectWriterFactory.Object, urlGenerator.Object, calendarHtmlBuilderFactory.Object);
+            var initializer = new Mock<IJavaScriptInitializer>();
+
+            Calendar calendar = new Calendar(viewContext, initializer.Object, urlGenerator.Object, calendarHtmlBuilderFactory.Object);
 
             renderer = renderer ?? new CalendarHtmlBuilder(calendar);
             calendarHtmlBuilderFactory.Setup(f => f.Create(It.IsAny<Calendar>())).Returns(renderer);

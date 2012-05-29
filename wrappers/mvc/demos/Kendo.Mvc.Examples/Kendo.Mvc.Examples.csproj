@@ -77,6 +77,7 @@
     <Compile Include="Areas\aspx\ASPXAreaRegistration.cs" />
     <Compile Include="Areas\razor\RazorAreaRegistration.cs" />
     <Compile Include="Controllers\Area_Chart\IndexController.cs" />
+    <Compile Include="Controllers\Calendar\CalendarController.cs" />
     <Compile Include="Controllers\ComboBox\ClientFilteringController.cs" />
     <Compile Include="Controllers\ComboBox\ApiController.cs" />
     <Compile Include="Controllers\ComboBox\EventsController.cs" />
@@ -389,6 +390,7 @@
     <Content Include="Areas\aspx\Views\web\combobox\serverfiltering.aspx" />
     <Content Include="Areas\aspx\Views\web\combobox\template.aspx" />
     <Content Include="Areas\razor\Views\web\editor\index.cshtml" />
+    <Content Include="Areas\razor\Views\web\calendar\index.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
