@@ -320,7 +320,7 @@
     <Compile Include="UI\DataSource\Fluent\DataSourceBuilder.cs" />
     <Compile Include="UI\DataSource\ModelDescriptor.cs" />
     <Compile Include="UI\DataSource\Transport.cs" />
-    <Compile Include="UI\DatePickerBase\CalendarView.cs" />
+    <Compile Include="UI\Calendar\CalendarView.cs" />
     <Compile Include="UI\DatePickerBase\Fluent\MonthTemplateBuilder.cs" />
     <Compile Include="UI\DatePickerBase\Html\DatePickerHtmlBuilderBase.cs" />
     <Compile Include="UI\DatePickerBase\IPicker.cs" />
@@ -785,15 +785,7 @@
     <Compile Include="SiteMap\XmlSiteMap.cs" />
     <Compile Include="UI\Calendar\Calendar.cs" />
     <Compile Include="UI\Calendar\Fluent\CalendarBuilder.cs" />
-    <Compile Include="UI\Calendar\Fluent\CalendarEventBuilder.cs" />
-    <Compile Include="UI\Calendar\CalendarExtension.cs" />
     <Compile Include="UI\Calendar\Html\CalendarHtmlBuilder.cs" />
-    <Compile Include="UI\Calendar\Html\CalendarHtmlBuilderFactory.cs" />
-    <Compile Include="UI\Calendar\CalendarNavigation.cs" />
-    <Compile Include="UI\Calendar\CalendarSelectionSettings.cs" />
-    <Compile Include="UI\Calendar\Fluent\CalendarSelectionSettingsBuilder.cs" />
-    <Compile Include="UI\Calendar\Html\ICalendarHtmlBuilder.cs" />
-    <Compile Include="UI\Calendar\Html\ICalendarHtmlBuilderFactory.cs" />
     <Compile Include="UI\Grid\Commands\GridSelectActionCommand.cs" />
     <Compile Include="UI\Grid\Fluent\GridDeleteActionCommandBuilder.cs" />
     <Compile Include="UI\Grid\Columns\GridActionColumn.cs" />

@@ -13,7 +13,7 @@ namespace Kendo.Mvc.UI
         {
             Animation = new PopupAnimation();
 
-            ClientEvents = new Dictionary<string, object>();
+            Events = new Dictionary<string, object>();
 
             DataSource = new DataSource();
 
@@ -38,7 +38,7 @@ namespace Kendo.Mvc.UI
             private set;
         }
 
-        public IDictionary<string, object> ClientEvents
+        public IDictionary<string, object> Events
         {
             get;
             private set;
@@ -142,7 +142,7 @@ namespace Kendo.Mvc.UI
 
         public override void WriteInitializationScript(TextWriter writer)
         {
-            var options = new Dictionary<string, object>(ClientEvents);
+            var options = new Dictionary<string, object>(Events);
 
             if (!string.IsNullOrEmpty(DataSource.Transport.Read.Url))
             {

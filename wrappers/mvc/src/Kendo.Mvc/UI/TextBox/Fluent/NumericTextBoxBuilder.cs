@@ -101,7 +101,7 @@ namespace Kendo.Mvc.UI
         {
             Guard.IsNotNull(clientEventsAction, "clientEventsAction");
 
-            clientEventsAction(new NumericTextBoxClientEventsBuilder(Component.ClientEvents));
+            clientEventsAction(new NumericTextBoxClientEventsBuilder(Component.Events));
 
             return this;
         }

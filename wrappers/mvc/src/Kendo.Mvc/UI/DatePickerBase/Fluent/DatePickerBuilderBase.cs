@@ -55,7 +55,7 @@ namespace Kendo.Mvc.UI.Fluent
         {
             Guard.IsNotNull(clientEventsAction, "clientEventsAction");
 
-            clientEventsAction(new DatePickerEventBuilderBase(Component.ClientEvents));
+            clientEventsAction(new DatePickerEventBuilderBase(Component.Events));
 
             return this as TPickerBuilder;
         }

@@ -44,7 +44,7 @@ namespace Kendo.Mvc.UI.Tests
         {
             builder.Events(b => b.Change("change"));
 
-            var @event = datePicker.ClientEvents["change"] as ClientEvent;
+            var @event = datePicker.Events["change"] as ClientEvent;
 
             Assert.NotNull(@event);
 
