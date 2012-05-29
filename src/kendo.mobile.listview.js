@@ -569,7 +569,6 @@
                 scroller = that._scroller(),
                 scrollTop = e.scrollTop,
                 headers = that.headers,
-                length = headers.length - 1,
                 headerPair,
                 offset,
                 header;
@@ -596,8 +595,7 @@
 
         _cacheHeaders: function() {
             var that = this,
-                headers = [],
-                options = that.options;
+                headers = [];
 
             that.element.find(".km-group-title").each(function(_, header) {
                 header = $(header);
@@ -612,19 +610,22 @@
         },
 
         _fixHeaders: function() {
-            var that = this;
+            var that = this,
+                scroller = that._scroller();
 
-            kendo.onResize(function(){
-                if (that._shouldFixHeader()) {
-                    that._cacheHeaders();
-                }
-            });
+            if (scroller) {
+                kendo.onResize(function(){
+                    if (that._shouldFixHeader()) {
+                        that._cacheHeaders();
+                    }
+                });
 
-            that._scroller().bind("scroll", function(e) {
-                if (that._shouldFixHeader()) {
-                    that._fixHeader(e);
-                }
-            ;});
+                scroller.bind("scroll", function(e) {
+                    if (that._shouldFixHeader()) {
+                        that._fixHeader(e);
+                    }
+                });
+            }
         },
 
         _bindScroller: function() {
