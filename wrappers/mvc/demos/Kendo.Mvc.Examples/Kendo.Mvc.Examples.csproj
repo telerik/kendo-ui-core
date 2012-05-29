@@ -85,7 +85,6 @@
     <Compile Include="Controllers\Calendar\ApiController.cs" />
     <Compile Include="Controllers\Calendar\EventsController.cs" />
     <Compile Include="Controllers\Calendar\TemplateController.cs" />
-    <Compile Include="Controllers\Chart\Bar_ChartsController.cs" />
     <Compile Include="Controllers\DataViz\Api\EventsController.cs" />
     <Compile Include="Controllers\DataViz\Api\IndexController.cs" />
     <Compile Include="Controllers\DataViz\Area_Charts\Remote_DataController.cs" />

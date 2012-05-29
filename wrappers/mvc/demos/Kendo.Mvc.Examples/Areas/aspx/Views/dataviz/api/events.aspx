@@ -31,7 +31,7 @@
             .Visible(true)
             .Format("{0:N0}")
         )
-        .ClientEvents(events => events
+        .Events(events => events
             .SeriesClick("onSeriesClick")
             .SeriesHover("onSeriesHover")
             .DataBound("onDataBound")
