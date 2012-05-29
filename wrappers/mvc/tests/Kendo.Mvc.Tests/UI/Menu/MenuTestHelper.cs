@@ -31,9 +31,6 @@ namespace Kendo.Mvc.UI
 
 			viewDataContainer.SetupGet(container => container.ViewData).Returns(viewDataDinctionary);
 
-			// needed for testing serialization
-			Mock<ClientSideObjectWriterFactory> clientSideObjectWriterFactory = new Mock<ClientSideObjectWriterFactory>();
-
             UrlGenerator urlGeneratorObject = new UrlGenerator();
 			Mock<INavigationItemAuthorization> authorization = new Mock<INavigationItemAuthorization>();
 
@@ -44,7 +41,8 @@ namespace Kendo.Mvc.UI
 
 			authorization.Setup(a => a.IsAccessibleToUser(viewContext.RequestContext, It.IsAny<INavigatable>())).Returns(true);
 
-            Menu menu = new Menu(viewContext, clientSideObjectWriterFactory.Object, urlGeneratorObject, authorization.Object, menuRendererFactory.Object);
+            var initializer = new Mock<IJavaScriptInitializer>();
+            Menu menu = new Menu(viewContext, initializer.Object, urlGeneratorObject, authorization.Object, menuRendererFactory.Object);
 
 			renderer = renderer ?? new MenuHtmlBuilder(menu, new Mock<IActionMethodCache>().Object);
 			menuRendererFactory.Setup(f => f.Create(It.IsAny<Menu>())).Returns(renderer);

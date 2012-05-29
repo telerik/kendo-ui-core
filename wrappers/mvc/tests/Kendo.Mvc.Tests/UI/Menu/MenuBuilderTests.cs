@@ -5,11 +5,12 @@ namespace Kendo.Mvc.Tests.Menu
     using System.Collections.Generic;
     using System.IO;
     using System.Web.UI;
-    using Moq;
     using Kendo.Mvc.UI;
+    using Kendo.Mvc.UI.Fluent;
+    using Moq;
     using Xunit;
 
-	public class MenuBuilderTests
+    public class MenuBuilderTests
 	{
 		private readonly Menu menu;
 		private readonly MenuBuilder builder;
@@ -195,26 +196,6 @@ namespace Kendo.Mvc.Tests.Menu
         {
             const bool value = true;
             var returnedBuilder = builder.HighlightPath(value);
-
-            Assert.IsType(typeof(MenuBuilder), returnedBuilder);
-        }
-
-        [Fact]
-        public void ClientEvents_should_set_events_of_the_menu()
-        {
-            Action<MenuClientEventsBuilder> clientEventsAction = eventBuilder => { eventBuilder.OnLoad("Load"); };
-
-            builder.ClientEvents(clientEventsAction);
-
-            Assert.NotNull(menu.ClientEvents.OnLoad.HandlerName);
-        }
-
-        [Fact]
-        public void ClientEvents_should_return_builder()
-        {
-            Action<MenuClientEventsBuilder> clientEventsAction = eventBuilder => { eventBuilder.OnLoad("Load"); };
-
-            var returnedBuilder = builder.ClientEvents(clientEventsAction);
 
             Assert.IsType(typeof(MenuBuilder), returnedBuilder);
         }

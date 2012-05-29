@@ -279,7 +279,6 @@
     <Compile Include="UI\AutoComplete\AutoCompleteTestHelper.cs" />
     <Compile Include="UI\AutoComplete\AutoCompleteBuilderTests.cs" />
     <Compile Include="UI\Calendar\CalendarBuilderTests.cs" />
-    <Compile Include="UI\Calendar\CalendarClientEventsBuilderTests.cs" />
     <Compile Include="UI\Calendar\CalendarRenderingTests.cs" />
     <Compile Include="UI\Calendar\CalendarSelectionSettingsBuilderTests.cs" />
     <Compile Include="UI\Calendar\CalendarTestHelper.cs" />
@@ -339,7 +338,6 @@
     <Compile Include="UI\Grid\GridWorkingConditionsTests.cs" />
     <Compile Include="UI\TextBox\NumericTextBoxBuilderTests.cs" />
     <Compile Include="UI\Menu\MenuBuilderTests.cs" />
-    <Compile Include="UI\Menu\MenuClientEventsBuilderTests.cs" />
     <Compile Include="UI\Menu\MenuHtmlBuilderTests.cs" />
     <Compile Include="UI\Menu\MenuRenderingTests.cs" />
     <Compile Include="UI\Menu\MenuTestHelper.cs" />

@@ -1,8 +1,9 @@
 namespace Kendo.Mvc.Tests.Menu
 {
-    using Kendo.Mvc.UI;
-    using Xunit;
     using System.Collections.Generic;
+    using Kendo.Mvc.UI;
+    using Kendo.Mvc.UI.Fluent;
+    using Xunit;
 
     public class MenuItemBuilderTests
     {
