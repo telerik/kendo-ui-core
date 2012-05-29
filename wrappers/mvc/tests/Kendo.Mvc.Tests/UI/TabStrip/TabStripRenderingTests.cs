@@ -18,7 +18,7 @@ namespace Kendo.Mvc.UI.Tests
             Mock<HtmlTextWriter> writer = new Mock<HtmlTextWriter>(textWriter.Object);
 
             builder = new Mock<ITabStripHtmlBuilder>();
-            builder.Setup(r => r.TabStripTag()).Returns(() => 
+            builder.Setup(r => r.TabStripTag()).Returns(() =>
             {
                 IHtmlNode result = new HtmlElement("div");
 
@@ -85,7 +85,7 @@ namespace Kendo.Mvc.UI.Tests
 
             tabStrip.Render();
 
-            builder.Verify(r => r.ItemInnerTag(It.IsAny<TabStripItem>()), Times.Never());            
+            builder.Verify(r => r.ItemInnerTag(It.IsAny<TabStripItem>()), Times.Never());
         }
 
         [Fact]
@@ -139,9 +139,9 @@ namespace Kendo.Mvc.UI.Tests
             builder.Verify();
         }
 
-        public void When_urlGenerator_returns_null_url_should_be_ds() 
+        public void When_urlGenerator_returns_null_url_should_be_ds()
         {
-            TabStripTestHelper.urlGenerator.Setup(g => g.Generate(TabStripTestHelper.viewContext.RequestContext, It.IsAny<INavigatable>())).Returns(()=>null);
+            TabStripTestHelper.urlGenerator.Setup(g => g.Generate(TabStripTestHelper.viewContext.RequestContext, It.IsAny<INavigatable>())).Returns(() => null);
 
             tabStrip.Render();
 
@@ -196,34 +196,6 @@ namespace Kendo.Mvc.UI.Tests
             tabStrip.WriteInitializationScript(writer.Object);
 
             TabStripTestHelper.clientSideObjectWriter.Verify(w => w.Complete());
-        }
-
-        [Fact]
-        public void ObjectWriter_should_append_Select_property_of_clientEvents()
-        {
-            Mock<TextWriter> writer = new Mock<TextWriter>();
-
-            tabStrip.ClientEvents.OnSelect.CodeBlock = () => { };
-
-            TabStripTestHelper.clientSideObjectWriter.Setup(w => w.AppendClientEvent("select", tabStrip.ClientEvents.OnSelect)).Verifiable();
-
-            tabStrip.WriteInitializationScript(writer.Object);
-
-            TabStripTestHelper.clientSideObjectWriter.Verify(w => w.AppendClientEvent("select", tabStrip.ClientEvents.OnSelect));
-        }
-
-        [Fact]
-        public void ObjectWriter_should_append_Error_property_of_clientEvents()
-        {
-            Mock<TextWriter> writer = new Mock<TextWriter>();
-
-            tabStrip.ClientEvents.OnError.CodeBlock = () => { };
-
-            TabStripTestHelper.clientSideObjectWriter.Setup(w => w.AppendClientEvent("error", tabStrip.ClientEvents.OnError)).Verifiable();
-
-            tabStrip.WriteInitializationScript(writer.Object);
-
-            TabStripTestHelper.clientSideObjectWriter.Verify(w => w.AppendClientEvent("error", tabStrip.ClientEvents.OnError));
         }
     }
 }

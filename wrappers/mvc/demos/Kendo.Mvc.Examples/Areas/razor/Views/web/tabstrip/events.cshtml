@@ -18,11 +18,11 @@
 
 @(Html.Kendo().TabStrip()
         .Name("tabstrip")
-        .ClientEvents(events => events
-            .OnSelect("onSelect")
-            .OnActivate("onActivate")
-            .OnContentLoad("onContentLoad")
-            .OnError("onError")
+        .Events(events => events
+            .Select("onSelect")
+            .Activate("onActivate")
+            .ContentLoad("onContentLoad")
+            .Error("onError")
         )
         .Items(tabstrip =>
         {

@@ -354,7 +354,6 @@
     <Compile Include="UI\PanelBar\PanelBarHtmlBuilderTests.cs" />
     <Compile Include="UI\PanelBar\PanelBarRenderingTests.cs" />
     <Compile Include="UI\PanelBar\PanelBarTestHelper.cs" />
-    <Compile Include="UI\TabStrip\TabStripClientEventsBuilderTests.cs" />
     <Compile Include="UI\TabStrip\TabStripItemBuilderTests.cs" />
     <Compile Include="UI\TabStrip\TabStripItemFactoryTests.cs" />
     <Compile Include="UI\TabStrip\TabStripItemTests.cs" />

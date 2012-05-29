@@ -234,7 +234,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual TabStripBuilder TabStrip()
         {
-            return new TabStripBuilder(new TabStrip(ViewContext, ClientSideObjectWriterFactory, UrlGenerator, DI.Current.Resolve<INavigationItemAuthorization>(), DI.Current.Resolve<ITabStripHtmlBuilderFactory>()));
+            return new TabStripBuilder(new TabStrip(ViewContext, Initializer, UrlGenerator, DI.Current.Resolve<INavigationItemAuthorization>(), DI.Current.Resolve<ITabStripHtmlBuilderFactory>()));
         }
 
         /// <summary>

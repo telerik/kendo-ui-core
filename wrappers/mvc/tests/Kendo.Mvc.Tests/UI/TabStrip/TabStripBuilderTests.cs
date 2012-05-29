@@ -4,8 +4,9 @@ namespace Kendo.Mvc.UI.Tests
     using System.Collections.Generic;
     using System.IO;
     using System.Web.UI;
-    using Moq;
     using Kendo.Mvc.UI;
+    using Kendo.Mvc.UI.Fluent;
+    using Moq;
     using Xunit;
 
     public class TabStripBuilderTests
@@ -162,26 +163,6 @@ namespace Kendo.Mvc.UI.Tests
         {
             const bool value = true;
             var returnedBuilder = _builder.HighlightPath(value);
-
-            Assert.IsType(typeof(TabStripBuilder), returnedBuilder);
-        }
-
-        [Fact]
-        public void ClientEvents_should_set_events_of_the_tabstrip()
-        {
-            Action<TabStripClientEventsBuilder> clientEventsAction = eventBuilder => { eventBuilder.OnSelect("select"); };
-
-            _builder.ClientEvents(clientEventsAction);
-
-            Assert.NotNull(_tabStrip.ClientEvents.OnSelect.HandlerName);
-        }
-
-        [Fact]
-        public void ClientEvents_should_return_builder()
-        {
-            Action<TabStripClientEventsBuilder> clientEventsAction = eventBuilder => { eventBuilder.OnSelect("select"); };
-
-            var returnedBuilder = _builder.ClientEvents(clientEventsAction);
 
             Assert.IsType(typeof(TabStripBuilder), returnedBuilder);
         }
