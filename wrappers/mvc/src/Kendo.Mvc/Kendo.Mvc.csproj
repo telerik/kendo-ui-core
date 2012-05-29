@@ -953,7 +953,6 @@
     <Compile Include="UI\Upload\Settings\IUploadAsyncSettings.cs" />
     <Compile Include="UI\Upload\Settings\UploadAsyncSettings.cs" />
     <Compile Include="UI\Upload\Upload.cs" />
-    <Compile Include="UI\Upload\UploadLocalization.cs" />
     <Compile Include="UI\ViewComponentExtensions.cs" />
     <Compile Include="UI\ViewComponentFactory.cs" />
     <Compile Include="UI\Window\WindowButtons.cs" />
