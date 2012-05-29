@@ -1381,6 +1381,9 @@
                 };
             }
         },
+        errors: function(data) {
+            return data ? data.errors : null;
+        },
         parse: identity,
         data: identity,
         total: function(data) {
@@ -1558,6 +1561,10 @@
 
             if (response) {
                 response = that.reader.parse(response);
+
+                if (that._handleCustomErrors(response)) {
+                    return;
+                }
 
                 response = that.reader.data(response);
 
@@ -1773,6 +1780,15 @@
             this.trigger(ERROR, { xhr: xhr, status: status, errorThrown: errorThrown });
         },
 
+        _handleCustomErrors: function(response) {
+            var errors = this.reader.errors(response);
+            if (errors) {
+                this.trigger(ERROR, { xhr: null, status: "customerror", errorThrown: "custom error", errors: errors });
+                return true;
+            }
+            return false;
+        },
+
         _parent: noop,
 
         success: function(data) {
@@ -1781,6 +1797,10 @@
                 hasGroups = options.serverGrouping === true && that._group && that._group.length > 0;
 
             data = that.reader.parse(data);
+
+            if (that._handleCustomErrors(data)) {
+                return;
+            }
 
             that._pristine = isPlainObject(data) ? $.extend(true, {}, data) : data.slice(0);
 

@@ -232,6 +232,66 @@
                 dataSource.read();
             });
 
+            test("error event is raised if custom schema error returns non empty object", 3, function() {
+                var dataSource = new DataSource({
+                        transport: {
+                            read: function(options) {
+                                options.success({ myerrors: { myError: "some error" } });
+                            }
+                        },
+                        schema: {
+                            errors: "myerrors"
+                        }
+                    });
+
+                dataSource.bind("error", function(e) {
+                    ok(e);
+                    equal(e.status, "customerror");
+                    same(e.errors, { myError: "some error" });
+                });
+                dataSource.read();
+            });
+
+            test("error event is raised if custom schema error function returns non empty object", 3, function() {
+                var dataSource = new DataSource({
+                        transport: {
+                            read: function(options) {
+                                options.success({ errors: { myError: "some error" } });
+                            }
+                        },
+                        schema: {
+                            errors: function(data) { return data.errors; }
+                        }
+                    });
+
+                dataSource.bind("error", function(e) {
+                    ok(e);
+                    equal(e.status, "customerror");
+                    same(e.errors, { myError: "some error" });
+                });
+                dataSource.read();
+            });
+
+            test("error event is raised if schema error returns non empty object", 3, function() {
+                var dataSource = new DataSource({
+                        transport: {
+                            read: function(options) {
+                                options.success({ errors: { myError: "some error" } });
+                            }
+                        },
+                        schema: {
+                            errors: "errors"
+                        }
+                    });
+
+                dataSource.bind("error", function(e) {
+                    ok(e);
+                    equal(e.status, "customerror");
+                    same(e.errors, { myError: "some error" });
+                });
+                dataSource.read();
+            });
+
             test("dequeue the request if transport fails to load data", function() {
                 var dataSource = new DataSource({
                         transport: {
