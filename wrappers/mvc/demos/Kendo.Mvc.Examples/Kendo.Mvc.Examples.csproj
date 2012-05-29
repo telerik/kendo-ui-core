@@ -134,7 +134,6 @@
     <Compile Include="Controllers\DropDownList\RemoteDataSourceController.cs" />
     <Compile Include="Controllers\DropDownList\IndexController.cs" />
     <Compile Include="Controllers\Editor\EditorController.cs" />
-    <Compile Include="Controllers\DataViz\ChartController.cs" />
     <Compile Include="Controllers\DataViz\Linear_Gauge\IndexController.cs" />
     <Compile Include="Controllers\DataViz\Linear_Gauge\Scale_OptoinsController.cs" />
     <Compile Include="Controllers\Grid\AjaxEditingController.cs" />
@@ -206,11 +205,9 @@
     <Compile Include="Helpers\HyphenatedRouteHandler.cs" />
     <Compile Include="Models\ElectricitySource.cs" />
     <Compile Include="Models\EngineDataPoint.cs" />
-    <Compile Include="Models\InternetUsersRepository.cs" />
     <Compile Include="Models\InternetUsers.cs" />
     <Compile Include="Models\PricePerformance.cs" />
     <Compile Include="Models\ChartDataRepository.cs" />
-    <Compile Include="Models\SpainElectricityStats.cs" />
     <Compile Include="Models\ElectricityProduction.cs" />
     <Compile Include="Models\NavigationItem.cs" />
     <Compile Include="Models\EditableProduct.cs" />
