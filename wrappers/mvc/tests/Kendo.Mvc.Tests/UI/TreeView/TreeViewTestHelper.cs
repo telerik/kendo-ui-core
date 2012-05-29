@@ -36,19 +36,17 @@ namespace Kendo.Mvc.UI.Tests
             viewDataContainer.SetupGet(container => container.ViewData).Returns(viewDataDinctionary);
 
             // needed for testing serialization
-            Mock<IClientSideObjectWriterFactory> clientSideObjectWriterFactory = new Mock<IClientSideObjectWriterFactory>();
 
             viewContext = TestHelper.CreateViewContext();
             viewContext.ViewData = viewDataDinctionary;
-
-            clientSideObjectWriterFactory.Setup(c => c.Create(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<TextWriter>())).Returns(clientSideObjectWriter);
 
             viewContext = TestHelper.CreateViewContext();
             viewContext.ViewData = viewDataDinctionary;
 
             authorization.Setup(a => a.IsAccessibleToUser(viewContext.RequestContext, It.IsAny<INavigatable>())).Returns(true);
+            var initializer = new Mock<IJavaScriptInitializer>();
 
-            TreeView TreeView = new TreeView(viewContext, clientSideObjectWriterFactory.Object, urlGenerator, authorization.Object, TreeViewRendererFactory.Object);
+            TreeView TreeView = new TreeView(viewContext, initializer.Object, urlGenerator, authorization.Object, TreeViewRendererFactory.Object);
 
             renderer = renderer ?? new TreeViewHtmlBuilder(TreeView, new Mock<IActionMethodCache>().Object);
             TreeViewRendererFactory.Setup(f => f.Create(It.IsAny<TreeView>())).Returns(renderer);

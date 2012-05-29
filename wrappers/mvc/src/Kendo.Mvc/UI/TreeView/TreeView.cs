@@ -10,9 +10,6 @@ namespace Kendo.Mvc.UI
     using Infrastructure;
     using Kendo.Mvc.Resources;
 
-    /// <summary>
-    /// Telerik Treeview for ASP.NET MVC is a view component for presenting hierarchical data.
-    /// </summary>
     public class TreeView : ViewComponentBase, INavigationItemComponent<TreeViewItem>
     {
         //private readonly IList<IEffect> defaultEffects = new List<IEffect> { new PropertyAnimation(PropertyAnimationType.Height) };
@@ -21,27 +18,14 @@ namespace Kendo.Mvc.UI
 
         internal bool isPathHighlighted;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TreeView"/> class.
-        /// </summary>
-        /// <param name="viewContext">The view context.</param>
-        /// <param name="clientSideObjectWriterFactory">The client side object writer factory.</param>
-        /// <param name="urlGenerator">The URL generator.</param>
-        /// <param name="urlGenerator">The navigation item authorization.</param>
-        /// <param name="builderFactory">The builder factory.</param>
-        public TreeView(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory, IUrlGenerator urlGenerator, INavigationItemAuthorization authorization, ITreeViewHtmlBuilderFactory factory)
-            : base(viewContext, clientSideObjectWriterFactory)
+        public TreeView(ViewContext viewContext, IJavaScriptInitializer initializer, IUrlGenerator urlGenerator, INavigationItemAuthorization authorization, ITreeViewHtmlBuilderFactory factory)
+            : base(viewContext, initializer)
         {
-            Guard.IsNotNull(urlGenerator, "urlGenerator");
-            Guard.IsNotNull(authorization, "authorization");
-            Guard.IsNotNull(factory, "factory");
-
             UrlGenerator = urlGenerator;
             Authorization = authorization;
             builderFactory = factory;
             
             Animation = new ExpandableAnimation();
-            ClientEvents = new TreeViewClientEvents();
 
             this.DragAndDrop = false;
 
@@ -64,16 +48,6 @@ namespace Kendo.Mvc.UI
         }
 
         public INavigationItemAuthorization Authorization
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// Gets the client events of the treeview.
-        /// </summary>
-        /// <value>The client events.</value>
-        public TreeViewClientEvents ClientEvents
         {
             get;
             private set;
@@ -152,33 +126,26 @@ namespace Kendo.Mvc.UI
 
         public override void WriteInitializationScript(TextWriter writer)
         {
-            // TODO: use new serialization scheme
-            IClientSideObjectWriter objectWriter = ClientSideObjectWriterFactory.Create(Id, "kendoTreeView", writer);
-            objectWriter.Start();
+            var options = new Dictionary<string, object>(Events);
+
+            /*TODO: ShowCheckBox
 
             if (ShowCheckBox)
             {
                 objectWriter.Append("showCheckBox", ShowCheckBox);
             }
+            */
 
             if (DragAndDrop)
             {
-                objectWriter.Append("dragAndDrop", true);
+                options["dragAndDrop"] = true;
             }
-
-            objectWriter.AppendClientEvent("expand", ClientEvents.OnExpand);
-            objectWriter.AppendClientEvent("collapse", ClientEvents.OnCollapse);
-            objectWriter.AppendClientEvent("select", ClientEvents.OnSelect);
-            objectWriter.AppendClientEvent("dragstart", ClientEvents.OnDragStart);
-            objectWriter.AppendClientEvent("drag", ClientEvents.OnDrag);
-            objectWriter.AppendClientEvent("dragcancelled", ClientEvents.OnDragCancelled);
-            objectWriter.AppendClientEvent("drop", ClientEvents.OnDrop);
-            objectWriter.AppendClientEvent("dragend", ClientEvents.OnDragEnd);
 
             //TODO: Use new Init writer to output animation dictionary
             // Animation.SerializeTo(objectWriter);
 
-            objectWriter.Complete();
+            writer.Write(Initializer.Initialize(Id, "TreeView", options));
+
             base.WriteInitializationScript(writer);
         }
 
