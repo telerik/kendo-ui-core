@@ -1,0 +1,20 @@
+@model IEnumerable<Kendo.Mvc.Examples.Models.Product>
+
+@(Html.Kendo().Grid(Model)
+    .Name("Grid")
+    .Columns(columns =>
+    {
+        columns.Bound(p => p.ProductID).Groupable(false);
+        columns.Bound(p => p.ProductName);
+        columns.Bound(p => p.UnitPrice);
+        columns.Bound(p => p.UnitsInStock);
+    })
+    .Pageable()
+    .Sortable()
+    .Scrollable() 
+    .Filterable()    
+    .DataSource(dataSource => dataSource        
+        .Ajax()
+        .ServerOperation(false)        
+     )
+)

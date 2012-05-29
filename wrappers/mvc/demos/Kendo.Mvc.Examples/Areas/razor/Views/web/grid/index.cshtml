@@ -2,6 +2,14 @@
 
 @(Html.Kendo().Grid(Model)    
     .Name("Grid")
+    .Columns(columns =>
+    {
+        columns.Bound(p => p.ProductID).Groupable(false);
+        columns.Bound(p => p.ProductName);
+        columns.Bound(p => p.UnitPrice);
+        columns.Bound(p => p.UnitsInStock);
+    })
+    .Groupable()
     .Pageable()
     .Sortable()
     .Scrollable() 
@@ -9,7 +17,6 @@
     .DataSource(dataSource => dataSource
         .Server()
         .Read(read => read.Action("Index", "Grid"))
-        .Sort(s => s.Add(p => p.ProductID).Descending())
-        .Filter(filters => filters.Add(p => p.ProductID).IsEqualTo(2))
+        .Sort(s => s.Add(p => p.ProductID).Descending())        
     )
 )
