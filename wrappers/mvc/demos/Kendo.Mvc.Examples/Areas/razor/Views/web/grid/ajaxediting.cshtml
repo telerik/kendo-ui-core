@@ -13,6 +13,7 @@
     .Scrollable()
     .DataSource(dataSource => dataSource        
         .Ajax()         
+        .Batch(true)
         .Events(events => events.Error("error_handler"))
         .Model(model => model.Id(p => p.ProductID))
         .Create(update => update.Action("AjaxEditing_Create", "Grid"))

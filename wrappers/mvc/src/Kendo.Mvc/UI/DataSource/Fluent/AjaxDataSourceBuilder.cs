@@ -114,11 +114,18 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
-        public AjaxDataSourceBuilder<TModel> Model(Action<DataSourceModelDescriptorFactory<TModel>> configurator)
+        public virtual AjaxDataSourceBuilder<TModel> Model(Action<DataSourceModelDescriptorFactory<TModel>> configurator)
         {
             Guard.IsNotNull(configurator, "configurator");            
 
             configurator(new DataSourceModelDescriptorFactory<TModel>(dataSource.Schema.Model));
+
+            return this;
+        }
+
+        public virtual AjaxDataSourceBuilder<TModel> Batch(bool enabled)
+        {
+            dataSource.Batch = enabled;
 
             return this;
         }

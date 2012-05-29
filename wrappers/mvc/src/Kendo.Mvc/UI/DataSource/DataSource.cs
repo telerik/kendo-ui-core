@@ -108,8 +108,10 @@ namespace Kendo.Mvc.UI
 
             json["schema"] = Schema.ToJson();
 
-            //TODO: add option for batch
-            json["batch"] = true;
+            if (Batch)
+            {
+                json["batch"] = Batch;
+            }
 
             if (IsClientOperationMode && RawData != null)
             {
@@ -140,6 +142,12 @@ namespace Kendo.Mvc.UI
         public void ModelType(Type modelType)
         {
             Schema.Model = new ModelDescriptor(modelType);
+        }
+
+        public bool Batch
+        {
+            get;
+            set;
         }
 
         public DataSourceType? Type
