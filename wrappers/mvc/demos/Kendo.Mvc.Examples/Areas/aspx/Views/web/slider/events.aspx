@@ -13,8 +13,8 @@
             .LargeStep(10)
             .Value(18)
             .ClientEvents(events => events
-                .OnSlide("sliderOnSlide")
-                .OnChange("sliderOnChange"))
+                .Slide("sliderSlide")
+                .Change("sliderChange"))
             .HtmlAttributes(new { @class = "temperature" })
       %>
 
@@ -25,26 +25,26 @@
              .SmallStep(1)
              .LargeStep(10)
              .ClientEvents(events => events
-                 .OnSlide("rangeSliderOnSlide")
-                 .OnChange("rangeSliderOnChange"))
+                 .Slide("rangeSliderSlide")
+                 .Change("rangeSliderChange"))
              .HtmlAttributes(new { @class = "humidity" })
      %>
 </div>
 
 <script>
-    function sliderOnSlide(e) {
+    function sliderSlide(e) {
         kendoConsole.log("Slide :: new slide value is: " + e.value);
     }
 
-    function sliderOnChange(e) {
+    function sliderChange(e) {
         kendoConsole.log("Change :: new value is: " + e.value);
     }
 
-    function rangeSliderOnSlide(e) {
+    function rangeSliderSlide(e) {
         kendoConsole.log("Slide :: new slide values are: " + e.values.toString().replace(",", " - "));
     }
 
-    function rangeSliderOnChange(e) {
+    function rangeSliderChange(e) {
         kendoConsole.log("Change :: new values are: " + e.values.toString().replace(",", " - "));
     }
 </script>

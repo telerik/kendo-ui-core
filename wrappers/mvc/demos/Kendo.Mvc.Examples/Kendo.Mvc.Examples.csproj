@@ -188,7 +188,7 @@
     </Content>
     <Content Include="Areas\aspx\Views\dataviz\area_chart\remote_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\linear_gauge\index.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\linear_gauge\scaleoptions.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\linear_gauge\scale_options.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\area_chart\index.aspx" />
     <Content Include="Areas\aspx\Views\web\datepicker\api.aspx" />
     <Content Include="Areas\aspx\Views\web\datepicker\events.aspx" />
@@ -198,7 +198,7 @@
     <Content Include="Areas\aspx\Views\web\numerictextbox\api.aspx" />
     <Content Include="Areas\aspx\Views\web\numerictextbox\events.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\radial_gauge\index.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\radial_gauge\scaleoptions.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\radial_gauge\scale_options.aspx" />
     <Content Include="Areas\aspx\Views\web\slider\api.aspx" />
     <Content Include="Areas\aspx\Views\web\slider\events.aspx" />
     <Content Include="Areas\aspx\Views\web\upload\api.aspx" />
@@ -328,9 +328,9 @@
     <Content Include="Areas\razor\Views\web\grid\ajaxaggregates.cshtml" />
     <Content Include="Areas\razor\Views\web\grid\serveraggregates.cshtml" />
     <Content Include="Areas\razor\Views\dataviz\radial_gauge\index.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\radial_gauge\scaleoptions.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\radial_gauge\scale_options.cshtml" />
     <Content Include="Areas\razor\Views\dataviz\linear_gauge\index.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\linear_gauge\scaleoptions.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\linear_gauge\scale_options.cshtml" />
     <Content Include="Areas\razor\Views\web\splitter\index.cshtml" />
     <Content Include="Areas\razor\Views\web\splitter\ajax.cshtml" />
     <Content Include="Areas\razor\Views\web\splitter\events.cshtml" />

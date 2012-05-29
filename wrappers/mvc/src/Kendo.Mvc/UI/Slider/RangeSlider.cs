@@ -5,14 +5,15 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI.Html;
     using System.Web.UI;
-    using Kendo.Mvc.Resources;
+    using Kendo.Mvc.Infrastructure;
+    using System.Collections.Generic;
 
     public class RangeSlider<T> : ViewComponentBase where T : struct, IComparable
     {
         private readonly IRangeSliderHtmlBuilderFactory rendererFactory;
 
-        public RangeSlider(ViewContext viewContext, IClientSideObjectWriterFactory writerFactory, IRangeSliderHtmlBuilderFactory rendererFactory)
-            : base(viewContext, writerFactory)
+        public RangeSlider(ViewContext viewContext, IJavaScriptInitializer initializer, IRangeSliderHtmlBuilderFactory rendererFactory)
+            : base(viewContext, initializer)
         {
             this.rendererFactory = rendererFactory;
 
@@ -21,7 +22,7 @@ namespace Kendo.Mvc.UI
             Min = (T)Convert.ChangeType(0, typeof(T));
             Max = (T)Convert.ChangeType(10, typeof(T));
             SmallStep = (T)Convert.ChangeType(1, typeof(T));
-            ClientEvents = new SliderBaseClientEvents();
+            ClientEvents = new Dictionary<string, object>();
             Enabled = true;
             Settings = new SliderTooltipSettings();
         }
@@ -62,7 +63,7 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        public SliderBaseClientEvents ClientEvents
+        public IDictionary<string, object> ClientEvents
         {
             get;
             private set;
@@ -94,30 +95,27 @@ namespace Kendo.Mvc.UI
 
         public override void WriteInitializationScript(System.IO.TextWriter writer)
         {
-            var objectWriter = ClientSideObjectWriterFactory.Create(Id, "kendoRangeSlider", writer);
+            var options = new Dictionary<string, object>(ClientEvents);
 
-            objectWriter.Start();
+            SerializeProperties(options);
 
-            SerializeProperties(objectWriter);
-
-            ClientEvents.SerializeTo(objectWriter);
-
-            objectWriter.Complete();
+            writer.Write(Initializer.Initialize(Id, "RangeSlider", options));
 
             base.WriteInitializationScript(writer);
         }
 
-        private void SerializeProperties(IClientSideObjectWriter objectWriter)
+        private void SerializeProperties(IDictionary<string, object> options)
         {
-            objectWriter.Append("orientation", Orientation, SliderOrientation.Horizontal);
-            objectWriter.Append("tickPlacement", TickPlacement, SliderTickPlacement.Both);
-            objectWriter.AppendObject("smallStep", SmallStep);
-            objectWriter.AppendObject("largeStep", LargeStep);
-            objectWriter.AppendObject("min", Min);
-            objectWriter.AppendObject("max", Max);
-            objectWriter.Append("enabled", Enabled, true);
+            FluentDictionary.For(options)
+                .Add("orientation", Orientation, SliderOrientation.Horizontal)
+                .Add("tickPlacement", TickPlacement, SliderTickPlacement.Both)
+                .Add("smallStep", SmallStep)
+                .Add("largeStep", LargeStep)
+                .Add("min", Min)
+                .Add("max", Max)
+                .Add("enabled", Enabled, true);
 
-            Settings.SerializeTo("tooltip", objectWriter);
+            Settings.SerializeTo("tooltip", options);
         }
 
         protected override void WriteHtml(HtmlTextWriter writer)

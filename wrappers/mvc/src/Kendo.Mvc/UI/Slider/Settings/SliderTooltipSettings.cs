@@ -29,7 +29,7 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        public void SerializeTo(string key, IClientSideObjectWriter writer)
+        public void SerializeTo(string key, IDictionary<string, object> options)
         {
             if (Format != "{0}" || !Enabled || Template.HasValue())
             {
@@ -39,7 +39,7 @@ namespace Kendo.Mvc.UI
                 settings["format"] = Format;
                 settings["template"] = Template;
 
-                writer.AppendObject(key, settings);
+                options.Add(key, settings);
             }
         }
     }

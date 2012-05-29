@@ -14,11 +14,11 @@
           .Name("slider")
           .Max(180)
           .ShowButtons(false)
-          .ClientEvents(events => events.OnChange("onChange"))
+          .ClientEvents(events => events.Change("change"))
     )
 </div>
 <script type="text/javascript">
-    function onChange(e) {
+    function change(e) {
         $("#radialGauge").data("kendoRadialGauge").value(e.value);
     }
 </script>

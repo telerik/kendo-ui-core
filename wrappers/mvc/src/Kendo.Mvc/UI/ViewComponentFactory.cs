@@ -295,7 +295,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual CalendarBuilder Calendar()
         {
-            return new CalendarBuilder(new Calendar(ViewContext, Initializer, DI.Current.Resolve<IUrlGenerator>(), DI.Current.Resolve<ICalendarHtmlBuilderFactory>()));
+            return new CalendarBuilder(new Calendar(ViewContext, Initializer, UrlGenerator, DI.Current.Resolve<ICalendarHtmlBuilderFactory>()));
         }
 
         /// <summary>
@@ -315,7 +315,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual PanelBarBuilder PanelBar()
         {
-            return new PanelBarBuilder(new PanelBar(ViewContext, Initializer, DI.Current.Resolve<IUrlGenerator>(), DI.Current.Resolve<INavigationItemAuthorization>()));
+            return new PanelBarBuilder(new PanelBar(ViewContext, Initializer, UrlGenerator, DI.Current.Resolve<INavigationItemAuthorization>()));
         }
 
         /// <summary>
@@ -331,7 +331,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual TreeViewBuilder TreeView()
         {
-            return new TreeViewBuilder(new TreeView(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IUrlGenerator>(), DI.Current.Resolve<INavigationItemAuthorization>(), DI.Current.Resolve<ITreeViewHtmlBuilderFactory>()));
+            return new TreeViewBuilder(new TreeView(ViewContext, ClientSideObjectWriterFactory, UrlGenerator, DI.Current.Resolve<INavigationItemAuthorization>(), DI.Current.Resolve<ITreeViewHtmlBuilderFactory>()));
         }
 
         /// <summary>
@@ -392,7 +392,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual GaugeLinearBuilder<T> LinearGauge<T>() where T: struct
         {
-            return new GaugeLinearBuilder<T>(new LinearGauge<T>(ViewContext, Initializer, DI.Current.Resolve<IUrlGenerator>()));
+            return new GaugeLinearBuilder<T>(new LinearGauge<T>(ViewContext, Initializer, UrlGenerator));
         }
 
         /// <summary>
@@ -407,7 +407,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual GaugeRadialBuilder<T> RadialGauge<T>() where T : struct
         {
-            return new GaugeRadialBuilder<T>(new RadialGauge<T>(ViewContext, Initializer, DI.Current.Resolve<IUrlGenerator>()));
+            return new GaugeRadialBuilder<T>(new RadialGauge<T>(ViewContext, Initializer, UrlGenerator));
         }
 
         /// <summary>
@@ -427,7 +427,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual DropDownListBuilder DropDownList()
         {
-            return new DropDownListBuilder(new DropDownList(ViewContext, Initializer, ViewData, DI.Current.Resolve<IUrlGenerator>()));
+            return new DropDownListBuilder(new DropDownList(ViewContext, Initializer, ViewData, UrlGenerator));
         }
 
         /// <summary>
@@ -447,7 +447,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual ComboBoxBuilder ComboBox()
         {
-            return new ComboBoxBuilder(new ComboBox(ViewContext, Initializer, ViewData, DI.Current.Resolve<IUrlGenerator>()));
+            return new ComboBoxBuilder(new ComboBox(ViewContext, Initializer, ViewData, UrlGenerator));
         }
 
         /// <summary>
@@ -467,7 +467,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual AutoCompleteBuilder AutoComplete()
         {
-            return new AutoCompleteBuilder(new AutoComplete(ViewContext, Initializer, ViewData, DI.Current.Resolve<IUrlGenerator>()));
+            return new AutoCompleteBuilder(new AutoComplete(ViewContext, Initializer, ViewData, UrlGenerator));
         }
 
         /// <summary>
@@ -482,7 +482,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual SliderBuilder<T> Slider<T>() where T: struct, IComparable
         {
-            return new SliderBuilder<T>(new Slider<T>(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<ISliderHtmlBuilderFactory>()));
+            return new SliderBuilder<T>(new Slider<T>(ViewContext, Initializer, DI.Current.Resolve<ISliderHtmlBuilderFactory>()));
         }
 
         /// <summary>
@@ -497,7 +497,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual RangeSliderBuilder<T> RangeSlider<T>() where T : struct, IComparable
         {
-            return new RangeSliderBuilder<T>(new RangeSlider<T>(ViewContext, ClientSideObjectWriterFactory, DI.Current.Resolve<IRangeSliderHtmlBuilderFactory>()));
+            return new RangeSliderBuilder<T>(new RangeSlider<T>(ViewContext, Initializer, DI.Current.Resolve<IRangeSliderHtmlBuilderFactory>()));
         }
 
         /// <summary>
@@ -517,7 +517,7 @@ namespace Kendo.Mvc.UI
         public virtual UploadBuilder Upload()
         {
             return new UploadBuilder(
-                new Upload(ViewContext, Initializer, DI.Current.Resolve<IUrlGenerator>()));
+                new Upload(ViewContext, Initializer, UrlGenerator));
         }
 
         /// <summary>
@@ -532,7 +532,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual ChartBuilder<T> Chart<T>() where T : class
         {
-            return new ChartBuilder<T>(new Chart<T>(ViewContext, Initializer, DI.Current.Resolve<IUrlGenerator>()));
+            return new ChartBuilder<T>(new Chart<T>(ViewContext, Initializer, UrlGenerator));
         }
 
         /// <summary>

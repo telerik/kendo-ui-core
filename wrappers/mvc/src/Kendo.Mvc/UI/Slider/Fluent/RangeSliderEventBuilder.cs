@@ -1,24 +1,20 @@
 namespace Kendo.Mvc.UI.Fluent
 {
     using System;
-    using Infrastructure;
+    using System.Collections.Generic;
 
     /// <summary>Defines the fluent interface for configuring the <see cref="RangeSlider.ClientEvents"/>.</summary>
-    public class RangeSliderClientEventsBuilder : IHideObjectMembers
+    public class RangeSliderEventBuilder : EventBuilder
     {
-        private readonly SliderBaseClientEvents clientEvents;
-
-        public RangeSliderClientEventsBuilder(SliderBaseClientEvents clientEvents)
+        public RangeSliderEventBuilder(IDictionary<string, object> events)
+            : base(events)
         {
-            Guard.IsNotNull(clientEvents, "clientEvents");
-
-            this.clientEvents = clientEvents;
         }
 
         /// <summary>
         /// Defines the inline handler of the OnChange client-side event
         /// </summary>
-        /// <param name="action">The action defining the inline handler.</param>
+        /// <param name="handlerName">The action defining the inline handler.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;% Html.Telerik().RangeSlider()
@@ -35,32 +31,28 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public RangeSliderClientEventsBuilder OnChange(Action action)
+        public RangeSliderEventBuilder Change(Func<object, object> handlerName)
         {
-            Guard.IsNotNull(action, "action");
-
-            clientEvents.OnChange.CodeBlock = action;
+            Handler("slide", handlerName);
 
             return this;
         }
 
         /// <summary>
-        ///  Defines the name of the JavaScript function that will handle the the OnChange client-side event.
+        ///  Defines the name of the JavaScript function that will handle the the Kendo client-side event.
         /// </summary>
         /// <param name="handlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().RangeSlider()
+        ///  &lt;%= Html.Kendo().RangeSlider()
         ///             .Name("RangeSlider")
-        ///             .ClientEvents(events => events.OnChange("onChange"))
+        ///             .ClientEvents(events => events.Change("change"))
         /// %&gt;
         /// </code>
         /// </example>
-        public RangeSliderClientEventsBuilder OnChange(string handlerName)
+        public RangeSliderEventBuilder Change(string handlerName)
         {
-            Guard.IsNotNullOrEmpty(handlerName, "handlerName");
-
-            clientEvents.OnChange.HandlerName = handlerName;
+            Handler("slide", handlerName);
 
             return this;
         }
@@ -68,12 +60,12 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Defines the inline handler of the OnSlide client-side event.
         /// </summary>
-        /// <param name="action">The action defining the inline handler.</param>
+        /// <param name="handlerName">The action defining the inline handler.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;% Html.Telerik().RangeSlider()
+        ///  &lt;% Html.Kendo().RangeSlider()
         ///            .Name("RangeSlider")
-        ///            .ClientEvents(events => events.OnSlide(() =>
+        ///            .ClientEvents(events => events.Slide(() =>
         ///            {
         ///                 %&gt;
         ///                 function(e) {
@@ -85,32 +77,28 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public RangeSliderClientEventsBuilder OnSlide(Action action)
+        public RangeSliderEventBuilder Slide(Func<object, object> handlerName)
         {
-            Guard.IsNotNull(action, "action");
-
-            clientEvents.OnSlide.CodeBlock = action;
+            Handler("slide", handlerName);
 
             return this;
         }
 
         /// <summary>
-        ///  Defines the name of the JavaScript function that will handle the the OnSlide client-side event.
+        ///  Defines the name of the JavaScript function that will handle the the Slide client-side event.
         /// </summary>
         /// <param name="handlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().RangeSlider()
+        ///  &lt;%= Html.Kendo().RangeSlider()
         ///             .Name("RangeSlider")
-        ///             .ClientEvents(events => events.OnSlide("OnSlide"))
+        ///             .ClientEvents(events => events.Slide("slide"))
         /// %&gt;
         /// </code>
         /// </example>
-        public RangeSliderClientEventsBuilder OnSlide(string handlerName)
+        public RangeSliderEventBuilder Slide(string handlerName)
         {
-            Guard.IsNotNullOrEmpty(handlerName, "handlerName");
-
-            clientEvents.OnSlide.HandlerName = handlerName;
+            Handler("slide", handlerName);
 
             return this;
         }

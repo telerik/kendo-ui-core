@@ -1,42 +1,42 @@
 <div id="climateCtrl">
     @(Html.Kendo().Slider<int>()
-            .Name("slider")
-            .Min(0)
-            .Max(30)
-            .SmallStep(1)
-            .LargeStep(10)
-            .Value(18)
-            .ClientEvents(events => events
-                .OnSlide("sliderOnSlide")
-                .OnChange("sliderOnChange"))
-            .HtmlAttributes(new { @class = "temperature" }))
+          .Name("slider")
+          .Min(0)
+          .Max(30)
+          .SmallStep(1)
+          .LargeStep(10)
+          .Value(18)
+          .ClientEvents(events => events
+              .Slide("sliderSlide")
+              .Change("sliderChange"))
+          .HtmlAttributes(new { @class = "temperature" }))
 
     @(Html.Kendo().RangeSlider<int>()
-            .Name("rangeslider")
-            .Min(0)
-            .Max(30)
-            .SmallStep(1)
-            .LargeStep(10)
-            .ClientEvents(events => events
-                .OnSlide("rangeSliderOnSlide")
-                .OnChange("rangeSliderOnChange"))
-            .HtmlAttributes(new { @class = "humidity" }))
+          .Name("rangeslider")
+          .Min(0)
+          .Max(30)
+          .SmallStep(1)
+          .LargeStep(10)
+          .ClientEvents(events => events
+              .Slide("rangeSliderSlide")
+              .Change("rangeSliderChange"))
+          .HtmlAttributes(new { @class = "humidity" }))
 </div>
 
 <script>
-    function sliderOnSlide(e) {
+    function sliderSlide(e) {
         kendoConsole.log("Slide :: new slide value is: " + e.value);
     }
 
-    function sliderOnChange(e) {
+    function sliderChange(e) {
         kendoConsole.log("Change :: new value is: " + e.value);
     }
 
-    function rangeSliderOnSlide(e) {
+    function rangeSliderSlide(e) {
         kendoConsole.log("Slide :: new slide values are: " + e.values.toString().replace(",", " - "));
     }
 
-    function rangeSliderOnChange(e) {
+    function rangeSliderChange(e) {
         kendoConsole.log("Change :: new values are: " + e.values.toString().replace(",", " - "));
     }
 </script>

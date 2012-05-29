@@ -725,8 +725,8 @@
     <Compile Include="Infrastructure\IAuthorizeAttributeCache.cs" />
     <Compile Include="UI\RequestSettings.cs" />
     <Compile Include="UI\Slider\Fluent\SliderTooltipBuilder.cs" />
-    <Compile Include="UI\Slider\Fluent\RangeSliderClientEventsBuilder.cs" />
-    <Compile Include="UI\Slider\Fluent\SliderClientEventsBuilder.cs" />
+    <Compile Include="UI\Slider\Fluent\RangeSliderEventBuilder.cs" />
+    <Compile Include="UI\Slider\Fluent\SliderEventBuilder.cs" />
     <Compile Include="UI\Slider\Settings\SliderTooltipSettings.cs" />
     <Compile Include="UI\Slider\Html\IRangeSliderHtmlBuilder.cs" />
     <Compile Include="UI\Slider\Html\IRangeSliderHtmlBuilderFactory.cs" />
