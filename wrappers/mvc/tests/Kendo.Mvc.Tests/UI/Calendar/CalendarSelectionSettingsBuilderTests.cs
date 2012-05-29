@@ -3,8 +3,10 @@ namespace Kendo.Mvc.UI.Tests
     using System;
     using System.Collections.Generic;
     using System.Web.Mvc;
-    using Xunit;
     using System.Web.Routing;
+    using Kendo.Mvc.UI;
+    using Kendo.Mvc.UI.Fluent;
+    using Xunit;
 
     public class CalendarSelectionSettingsBuilderTests
     {

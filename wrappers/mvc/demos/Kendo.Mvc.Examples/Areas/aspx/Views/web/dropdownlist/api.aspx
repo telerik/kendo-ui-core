@@ -127,5 +127,4 @@
             width: 40px;
         }
     </style>
-</div>
 </asp:Content>

@@ -7,6 +7,7 @@ namespace Kendo.Mvc.UI
     using System.Web;
     using System.Web.Mvc;
     using Kendo.Mvc.Extensions;
+    using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.Resources;
     
     public class Calendar : ViewComponentBase
@@ -15,12 +16,10 @@ namespace Kendo.Mvc.UI
 
         private string urlFormat;
 
-        public Calendar(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory, IUrlGenerator urlGenerator, ICalendarHtmlBuilderFactory rendererFactory)
-            : base(viewContext, clientSideObjectWriterFactory)
+        public Calendar(ViewContext viewContext, IJavaScriptInitializer initializer, IUrlGenerator urlGenerator, ICalendarHtmlBuilderFactory rendererFactory)
+            : base(viewContext, initializer)
         {
             UrlGenerator = urlGenerator;
-
-            ClientEvents = new CalendarClientEvents();
 
             SelectionSettings = new CalendarSelectionSettings { Dates = new List<DateTime>() };
 
@@ -61,12 +60,6 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        public CalendarClientEvents ClientEvents 
-        {
-            get;
-            private set;
-        }
-
         public CalendarSelectionSettings SelectionSettings
         {
             get;
@@ -75,22 +68,18 @@ namespace Kendo.Mvc.UI
 
         public override void WriteInitializationScript(System.IO.TextWriter writer)
         {
-            IClientSideObjectWriter objectWriter = ClientSideObjectWriterFactory.Create(Id, "tCalendar", writer);
+            var options = new Dictionary<string, object>();
 
-            objectWriter.Start();
+            options["value"] = Value;
+            options["min"] = MinDate;
+            options["max"] = MaxDate;
+            options["dates"] = SelectionSettings.Dates;
 
-            objectWriter.AppendDateOnly("selectedDate", this.Value);
-            objectWriter.AppendDateOnly("minDate", this.MinDate);
-            objectWriter.AppendDateOnly("maxDate", this.MaxDate);
+            //TODO: urlFormat??
+            //objectWriter.Append("urlFormat", urlFormat);
+            //objectWriter.Append("todayFormat", TodayFormat);
 
-            objectWriter.AppendDatesOnly("dates", SelectionSettings.Dates);
-            objectWriter.Append("urlFormat", urlFormat);
-            objectWriter.Append("todayFormat", TodayFormat);
-
-            objectWriter.AppendClientEvent("onLoad", ClientEvents.OnLoad);
-            objectWriter.AppendClientEvent("onChange", ClientEvents.OnChange);
-
-            objectWriter.Complete();
+            writer.Write(Initializer.Initialize(Id, "Calendar", options));
 
             base.WriteInitializationScript(writer);
         }

@@ -173,34 +173,6 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
-        public void ObjectWriter_should_append_Load_property_of_clientEvents()
-        {
-            Mock<TextWriter> writer = new Mock<TextWriter>();
-
-            calendar.ClientEvents.OnLoad.CodeBlock = () => { };
-
-            CalendarTestHelper.clientSideObjectWriter.Setup(w => w.AppendClientEvent("onLoad", calendar.ClientEvents.OnLoad)).Verifiable();
-
-            calendar.WriteInitializationScript(writer.Object);
-
-            CalendarTestHelper.clientSideObjectWriter.Verify(w => w.AppendClientEvent("onLoad", calendar.ClientEvents.OnLoad));
-        }
-
-        [Fact]
-        public void ObjectWriter_should_append_OnChange_property_of_clientEvents()
-        {
-            Mock<TextWriter> writer = new Mock<TextWriter>();
-
-            calendar.ClientEvents.OnChange.CodeBlock = () => { };
-
-            CalendarTestHelper.clientSideObjectWriter.Setup(w => w.AppendClientEvent("onChange", calendar.ClientEvents.OnChange)).Verifiable();
-
-            calendar.WriteInitializationScript(writer.Object);
-
-            CalendarTestHelper.clientSideObjectWriter.Verify(w => w.AppendClientEvent("onChange", calendar.ClientEvents.OnChange));
-        }
-
-        [Fact]
         public void ObjectWriter_should_append_SelectedDate_property()
         {
             Mock<TextWriter> writer = new Mock<TextWriter>();

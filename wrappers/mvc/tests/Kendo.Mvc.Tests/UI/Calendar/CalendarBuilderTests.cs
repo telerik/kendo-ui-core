@@ -2,6 +2,7 @@ namespace Kendo.Mvc.UI.Tests
 {
     using System;
     using System.Collections.Generic;
+    using Kendo.Mvc.UI.Fluent;
     using Xunit;    
 
     public class CalendarBuilderTests
@@ -128,26 +129,6 @@ namespace Kendo.Mvc.UI.Tests
         public void MaxDate_with_string_should_return_builder()
         {
             var returnedBuilder = builder.MaxDate(DateTime.Now.ToShortDateString());
-
-            Assert.IsType(typeof(CalendarBuilder), returnedBuilder);
-        }
-
-        [Fact]
-        public void ClientEvents_should_set_events_of_the_calendar()
-        {
-            Action<CalendarClientEventsBuilder> clientEventsAction = eventBuilder => { eventBuilder.OnLoad("Load"); };
-
-            builder.ClientEvents(clientEventsAction);
-
-            Assert.NotNull(calendar.ClientEvents.OnLoad.HandlerName);
-        }
-
-        [Fact]
-        public void ClientEvents_should_return_builder()
-        {
-            Action<CalendarClientEventsBuilder> clientEventsAction = eventBuilder => { eventBuilder.OnLoad("Load"); };
-
-            var returnedBuilder = builder.ClientEvents(clientEventsAction);
 
             Assert.IsType(typeof(CalendarBuilder), returnedBuilder);
         }
