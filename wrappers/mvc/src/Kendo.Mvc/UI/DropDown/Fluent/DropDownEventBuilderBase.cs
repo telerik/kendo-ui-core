@@ -16,7 +16,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <param name="Events">The client events.</param>
         /// <param name="viewContext">The view context.</param>
-        public DropDownEventBuilderBase(IDictionary<string, object> Events) : base(events)
+        public DropDownEventBuilderBase(IDictionary<string, object> events) : base(events)
         {
         }
 
