@@ -87,7 +87,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual MenuBuilder Menu()
         {
-            return new MenuBuilder(new Menu(ViewContext, ClientSideObjectWriterFactory, UrlGenerator, DI.Current.Resolve<INavigationItemAuthorization>(), DI.Current.Resolve<INavigationComponentHtmlBuilderFactory<Menu, MenuItem>>()));
+            return new MenuBuilder(new Menu(ViewContext, Initializer, UrlGenerator, DI.Current.Resolve<INavigationItemAuthorization>(), DI.Current.Resolve<INavigationComponentHtmlBuilderFactory<Menu, MenuItem>>()));
         }
 
         /// <summary>

@@ -68,7 +68,7 @@ namespace Kendo.Mvc.UI
 
         public override void WriteInitializationScript(System.IO.TextWriter writer)
         {
-            var options = new Dictionary<string, object>();
+            var options = new Dictionary<string, object>(Events);
 
             options["value"] = Value;
             options["min"] = MinDate;

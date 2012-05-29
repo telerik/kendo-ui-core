@@ -1,15 +1,14 @@
 namespace Kendo.Mvc.UI
 {
-    using Kendo.Mvc.Extensions;
-    using Kendo.Mvc.Infrastructure;
-    using Kendo.Mvc.Resources;
-    using Kendo.Mvc.UI;
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Web.Mvc;
     using System.Web.UI;
+    using Kendo.Mvc.Extensions;
+    using Kendo.Mvc.Infrastructure;
+    using Kendo.Mvc.Resources;
 
     public class Menu : ViewComponentBase, INavigationItemComponent<MenuItem>
     {
@@ -18,18 +17,12 @@ namespace Kendo.Mvc.UI
         private readonly INavigationComponentHtmlBuilderFactory<Menu, MenuItem> rendererFactory;
         internal bool isPathHighlighted;
 
-        public Menu(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory, IUrlGenerator urlGenerator, INavigationItemAuthorization authorization, INavigationComponentHtmlBuilderFactory<Menu, MenuItem> factory)
-            : base(viewContext, clientSideObjectWriterFactory)
+        public Menu(ViewContext viewContext, IJavaScriptInitializer initializer, IUrlGenerator urlGenerator, INavigationItemAuthorization authorization, INavigationComponentHtmlBuilderFactory<Menu, MenuItem> factory)
+            : base(viewContext, initializer)
         {
-            Guard.IsNotNull(urlGenerator, "urlGenerator");
-            Guard.IsNotNull(authorization, "authorization");
-            Guard.IsNotNull(factory, "factory");
-
             UrlGenerator = urlGenerator;
             Authorization = authorization;
             rendererFactory = factory;
-
-            ClientEvents = new MenuClientEvents();
 
             //defaultEffects.Each(el => Effects.Container.Add(el));
 
@@ -62,12 +55,6 @@ namespace Kendo.Mvc.UI
         {
             get;
             set;
-        }
-
-        public MenuClientEvents ClientEvents
-        {
-            get;
-            private set;
         }
 
         public Effects Effects
@@ -108,10 +95,13 @@ namespace Kendo.Mvc.UI
 
         public override void WriteInitializationScript(TextWriter writer)
         {
-            IClientSideObjectWriter objectWriter = ClientSideObjectWriterFactory.Create(Id, "kendoMenu", writer);
+            var options = new Dictionary<string, object>(Events);
 
-            objectWriter.Start()
-                        .Append("orientation", Orientation, MenuOrientation.Horizontal);
+            if (Orientation != MenuOrientation.Horizontal)
+            {
+               options["orientation"] = Orientation; 
+            }
+
 
             //if (!defaultEffects.SequenceEqual(Effects.Container))
             //{
@@ -120,15 +110,10 @@ namespace Kendo.Mvc.UI
 
             if (OpenOnClick)
             {
-                objectWriter.Append("openOnClick", true);
+                options["openOnClick"] = true;
             }
 
-            objectWriter.AppendClientEvent("onOpen", ClientEvents.OnOpen);
-            objectWriter.AppendClientEvent("onClose", ClientEvents.OnClose);
-            objectWriter.AppendClientEvent("onSelect", ClientEvents.OnSelect);
-            objectWriter.AppendClientEvent("onLoad", ClientEvents.OnLoad);
-
-            objectWriter.Complete();
+            writer.Write(Initializer.Initialize(Id, "Menu", options));
 
             base.WriteInitializationScript(writer);
         }

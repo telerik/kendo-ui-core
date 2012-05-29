@@ -1,0 +1,13 @@
+﻿@(Html.Kendo().Menu()
+      .Name("Menu")
+      .Items(items => items
+          .Add()
+          .Text("Products")
+          .Items(children => 
+           {
+                children.Add().Text("Furniture");
+                children.Add().Text("Decor");
+                children.Add().Text("Storage");
+           })
+    )
+)

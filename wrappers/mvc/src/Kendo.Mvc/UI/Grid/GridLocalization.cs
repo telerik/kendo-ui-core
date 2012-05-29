@@ -4,7 +4,7 @@ namespace Kendo.Mvc.UI
     using System.Globalization;
     using Infrastructure;
 
-    public class GridLocalization : ViewComponentLocalization, IClientSerializable, IGridLocalization
+    public class GridLocalization : ViewComponentLocalization, IGridLocalization
     {
         public GridLocalization(ILocalizationService localizationService, CultureInfo culture) 
             : base(localizationService, null, "GridLocalization", culture)
@@ -94,14 +94,6 @@ namespace Kendo.Mvc.UI
         public string UnGroup
         {
             get { return GetValue("UnGroup"); }
-        }
-
-        public void SerializeTo(string key, IClientSideObjectWriter writer)
-        {
-            if (!IsDefault)
-            {
-                writer.AppendObject(key, ToJson());
-            }
         }
 
         public string CancelChanges

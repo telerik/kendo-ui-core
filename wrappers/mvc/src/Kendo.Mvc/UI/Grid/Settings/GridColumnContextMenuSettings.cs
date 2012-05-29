@@ -1,6 +1,6 @@
 namespace Kendo.Mvc.UI
 {
-    public class GridColumnContextMenuSettings : IClientSerializable
+    public class GridColumnContextMenuSettings
     {
         private readonly IGrid grid;
 
@@ -14,13 +14,5 @@ namespace Kendo.Mvc.UI
             get;
             set;
         }        
-
-        public void SerializeTo(string key, IClientSideObjectWriter writer)
-        {
-            if (Enabled)
-            {                
-                writer.Append("columnContextMenu", Enabled);
-            }
-        }
     }
 }
