@@ -1141,3 +1141,31 @@
 {
     background: #202125;
 }
+
+/* Tablet Styles */
+
+.km-android.km-tablet .km-actionsheet-title,
+.km-android.km-tablet li.km-actionsheet-cancel,
+.km-android.km-tablet .km-popup-arrow
+{
+    display: none;
+}
+
+.km-android.km-tablet .km-actionsheet-wrapper
+{
+    background: none;
+    padding: 7px;
+    .box-sizing(border-box);
+}
+
+.km-android.km-tablet .km-actionsheet
+{
+    margin: 0;
+    width: 100%;
+    .box-shadow(0 0 7px #000);
+}
+
+.km-android.km-tablet .km-actionsheet :nth-last-child(2) > a
+{
+    border-bottom: 0;
+}
