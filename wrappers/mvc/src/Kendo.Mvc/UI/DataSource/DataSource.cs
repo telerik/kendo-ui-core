@@ -119,6 +119,14 @@ namespace Kendo.Mvc.UI
                     { Schema.Total, Total }
                 };
             }
+            else if (Type == DataSourceType.Ajax && !IsClientOperationMode)
+            {
+                json["data"] = new Dictionary<string, object>()
+                {
+                    { Schema.Data,  Data },
+                    { Schema.Total, Total }
+                };
+            }
         }
 
         public bool IsClientOperationMode
