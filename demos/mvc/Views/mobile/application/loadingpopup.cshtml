@@ -1,6 +1,7 @@
 <div id="loading" data-role="view" class="km-insetcontent" data-init="viewInit" data-hide="viewHide" data-title="Loading Popup">
     <button id="show" data-role="button">Show Loading Popup</button>
 </div>
+
 <script>
     var showButton, interval;
 
@@ -11,10 +12,12 @@
                      });
     }
 
+    var loaderElement = kendoMobileApplication.pane.loader.element.find("h1");
+
     function hideLoader() {
         clearInterval(interval);
         kendoMobileApplication.hideLoading(); //hide loading popup
-        kendoMobileApplication.loader.find("h1").removeClass("loaderHeading").text("Loading...");
+        loaderElement.removeClass("loaderHeading").text("Loading...");
     }
 
     function viewHide(e) {
@@ -24,13 +27,14 @@
 
     function startLoading() {
         hideLoader();
-        var seconds = 5,
-            headingTag = kendoMobileApplication.loader.find("h1").text(seconds + " seconds left!").addClass("loaderHeading");
+        var seconds = 5;
+
+        loaderElement.text(seconds + " seconds left!").addClass("loaderHeading");
 
         kendoMobileApplication.showLoading(); //show loading popup
 
         interval = setInterval(function() {
-            headingTag.text(--seconds + " seconds left!"); //update text of the loading popup
+            loaderElement.text(--seconds + " seconds left!"); //update text of the loading popup
 
             if (seconds == 0) {
                 showButton.stop(true,true).fadeIn();
@@ -39,6 +43,7 @@
         }, 1000);
     }
 </script>
+
 <style scoped>
     .km-ios #loading .km-content
     {
