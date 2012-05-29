@@ -338,6 +338,7 @@
          * @option {String}  [style] The style of the control. Can be either empty string(""), or inset.
          * @option {String}  [template] <#:data#> The item template.
          * @option {String}  [headerTemplate] <#:value#> The header item template (applicable when the type is set to group).
+         * @option {Boolean}  [fixedHeaders] <false> If set to true, the group headers will persist their position when the user scrolls through the listview. Applicable only when the type is set to group, or when binding to grouped datasource.
          * @option {Boolean} [pullToRefresh] <false> If set to true, the listview will reload its data when the user pulls the view over the top limit.
          * @option {Boolean} [appendOnRefresh] <false> Used in combination with pullToRefresh. If set to true, newly loaded data will be appended on top when refershing.
          * @option {String}  [pullTemplate] <"Pull to refresh"> The message template displayed when the user pulls the listView. Applicable only when pullToRefresh is set to true.
@@ -368,6 +369,8 @@
             that._dataSource();
 
             that._bindScroller();
+
+            that._fixHeaders();
 
             if (options.dataSource) {
                 that.dataSource.fetch();
@@ -424,6 +427,7 @@
         options: {
             name: "ListView",
             type: "flat",
+            fixedHeaders: false,
             template: "#:data#",
             headerTemplate: '<span class="km-text">#:value#</span>',
             appendOnRefresh: false,
@@ -559,6 +563,70 @@
             }
         },
 
+        _fixHeader: function(e) {
+            var i = 0,
+                that = this,
+                scroller = that._scroller(),
+                scrollTop = e.scrollTop,
+                headers = that.headers,
+                length = headers.length - 1,
+                headerPair,
+                offset,
+                header;
+
+            do {
+                headerPair = headers[i++];
+                if (!headerPair) {
+                    header = $("<div />");
+                    break;
+                }
+                offset = headerPair.offset;
+                header = headerPair.header;
+            } while (offset > scrollTop);
+
+            if (that.currentHeader != i) {
+                scroller.fixedContainer.html(header.clone());
+                that.currentHeader = i;
+            }
+        },
+
+        _shouldFixHeader: function() {
+            return this.options.type === "group" && this.options.fixedHeaders;
+        },
+
+        _cacheHeaders: function() {
+            var that = this,
+                headers = [],
+                options = that.options;
+
+            that.element.find(".km-group-title").each(function(_, header) {
+                header = $(header);
+                headers.unshift({
+                    offset: header.position().top,
+                    header: header
+                });
+            });
+
+            that.headers = headers;
+            that._fixHeader({scrollTop: 0});
+        },
+
+        _fixHeaders: function() {
+            var that = this;
+
+            kendo.onResize(function(){
+                if (that._shouldFixHeader()) {
+                    that._cacheHeaders();
+                }
+            });
+
+            that._scroller().bind("scroll", function(e) {
+                if (that._shouldFixHeader()) {
+                    that._fixHeader(e);
+                }
+            ;});
+        },
+
         _bindScroller: function() {
             var that = this,
                 options = that.options,
@@ -568,21 +636,6 @@
             if (!scroller) {
                 return;
             }
-
-
-            scroller.bind("scroll", function(e) {
-                var offset, i = 0, pair;
-                do {
-                    pair = that.headers[++i];
-                    offset = pair[0];
-                    header = pair[1];
-                } while (offset > e.scrollTop && i < that.headers.length - 1);
-
-                if (that.currentHeader != i) {
-                    scroller.fixedContainer.html(header.clone());
-                    that.currentHeader = i;
-                }
-            });
 
             if (options.pullToRefresh) {
                 scroller.setOptions({
@@ -726,12 +779,9 @@
 
             element.closest(".km-content").toggleClass("km-insetcontent", inset); // iOS has white background when the list is not inset.
 
-            var headers = [];
-
-            that.element.find(".km-group-title").each(function() {
-                headers.unshift([$(this).offset().top, $(this)]);
-            });
-            that.headers = headers;
+            if (that._shouldFixHeader()) {
+                that._cacheHeaders();
+            }
         },
 
         _footer: function() {
@@ -775,8 +825,14 @@
         },
 
         _scroller: function() {
-            var view = this.view();
-            return view && view.scroller;
+            var that = this, view;
+
+            if (!that._scrollerInstance) {
+                view = that.view();
+                that._scrollerInstance = view && view.scroller;
+            }
+
+            return that._scrollerInstance;
         },
 
         _showLoading: function() {
