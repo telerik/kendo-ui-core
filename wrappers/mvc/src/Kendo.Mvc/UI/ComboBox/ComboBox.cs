@@ -224,13 +224,7 @@ namespace Kendo.Mvc.UI
 
         protected override void WriteHtml(System.Web.UI.HtmlTextWriter writer)
         {
-            //hasItems = Items.Any();
-            //this.AddPlaceholderItem();
-            //if (hasItems)
-            //{
-            //    this.SyncSelectedIndex();
-            //}
-
+            //TODO: Determine index of the selected item if SelectList is used
             ComboBoxHtmlBuilder builder = new ComboBoxHtmlBuilder(this);
 
             builder.Build().WriteTo(writer);

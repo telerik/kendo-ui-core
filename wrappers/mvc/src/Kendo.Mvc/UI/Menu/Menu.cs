@@ -17,19 +17,33 @@ namespace Kendo.Mvc.UI
         public Menu(ViewContext viewContext, IJavaScriptInitializer initializer, IUrlGenerator urlGenerator, INavigationItemAuthorization authorization)
             : base(viewContext, initializer)
         {
+            Animation = new PopupAnimation();
+
             UrlGenerator = urlGenerator;
             Authorization = authorization;
-
-            //TODO: add animation property
-            
+          
             Items = new LinkedObjectCollection<MenuItem>(null);
 
             SelectedIndex = -1;
+
+            CloseOnClick = true;
             HighlightPath = true;
             SecurityTrimming = true;
         }
 
+        public PopupAnimation Animation
+        {
+            get;
+            private set;
+        }
+
         public bool OpenOnClick
+        {
+            get;
+            set;
+        }
+
+        public bool CloseOnClick
         {
             get;
             set;
@@ -48,12 +62,6 @@ namespace Kendo.Mvc.UI
         }
 
         public MenuOrientation Orientation
-        {
-            get;
-            set;
-        }
-
-        public Effects Effects
         {
             get;
             set;
@@ -89,20 +97,41 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        public int? HoverDelay
+        {
+            get;
+            set;
+        }
+
         public override void WriteInitializationScript(TextWriter writer)
         {
             var options = new Dictionary<string, object>(Events);
 
-            if (Orientation != MenuOrientation.Horizontal)
+            var animation = Animation.ToJson();
+
+            if (animation.Keys.Any())
             {
-               options["orientation"] = Orientation; 
+                options["animation"] = animation["animation"];
             }
 
-            //TODO: serialize animation options
+            if (Orientation != MenuOrientation.Horizontal)
+            {
+                options["orientation"] = Orientation.ToString().ToLower();
+            }
             
             if (OpenOnClick)
             {
                 options["openOnClick"] = true;
+            }
+
+            if (!CloseOnClick)
+            {
+                options["closeOnClick"] = false;
+            }
+
+            if (HoverDelay != null)
+            {
+                options["hoverDelay"] = HoverDelay;
             }
 
             writer.Write(Initializer.Initialize(Id, "Menu", options));

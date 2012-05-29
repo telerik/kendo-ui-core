@@ -19,6 +19,20 @@ namespace Kendo.Mvc.UI.Fluent
         {
         }
 
+        public MenuBuilder Animation(bool enable)
+        {
+            Component.Animation.Enabled = enable;
+
+            return this;
+        }
+
+        public MenuBuilder Animation(Action<PopupAnimationBuilder> animationAction)
+        {
+            animationAction(new PopupAnimationBuilder(Component.Animation));
+
+            return this;
+        }
+
         /// <summary>
         /// Defines the items in the menu
         /// </summary>
@@ -37,8 +51,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public MenuBuilder Items(Action<MenuItemFactory> addAction)
         {
-            Guard.IsNotNull(addAction, "addAction");
-
             MenuItemFactory factory = new MenuItemFactory(Component, Component.ViewContext);
 
             addAction(factory);
@@ -62,8 +74,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public MenuBuilder Events(Action<MenuEventBuilder> clientEventsAction)
         {
-            Guard.IsNotNull(clientEventsAction, "clientEventsAction");
-
             clientEventsAction(new MenuEventBuilder(Component.Events));
 
             return this;
@@ -107,6 +117,42 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Specifies that sub menus should close after item selection (provided they won't navigate).
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Menu()
+        ///             .Name("Menu")
+        ///             .CloseOnClick(false)
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public MenuBuilder CloseOnClick(bool value)
+        {
+            Component.CloseOnClick = value;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Specifies the delay in ms before the menu is opened/closed - used to avoid accidental closure on leaving.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Menu()
+        ///             .Name("Menu")
+        ///             .HoverDelay(300)
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public MenuBuilder HoverDelay(int value)
+        {
+            Component.HoverDelay = value;
+
+            return this;
+        }
+
+        /// <summary>
         /// Binds the menu to a sitemap
         /// </summary>
         /// <param name="viewDataKey">The view data key.</param>
@@ -123,8 +169,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public MenuBuilder BindTo(string viewDataKey, Action<MenuItem, SiteMapNode> siteMapAction)
         {
-            Guard.IsNotNullOrEmpty(viewDataKey, "viewDataKey");
-
             Component.BindTo(viewDataKey, siteMapAction);
 
             return this;
@@ -145,8 +189,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public MenuBuilder BindTo(string viewDataKey)
         {
-            Guard.IsNotNullOrEmpty(viewDataKey, "viewDataKey");
-
             Component.BindTo(viewDataKey);
 
             return this;
@@ -172,8 +214,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public MenuBuilder BindTo<T>(IEnumerable<T> dataSource, Action<MenuItem, T> itemDataBound)
         {
-            Guard.IsNotNull(itemDataBound, "itemDataBound");
-
             Component.BindTo(dataSource, itemDataBound);
 
             return this;
@@ -204,8 +244,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public MenuBuilder BindTo(IEnumerable dataSource, Action<NavigationBindingFactory<MenuItem>> factoryAction)
         {
-            Guard.IsNotNull(factoryAction, "factoryAction");
-
             Component.BindTo(dataSource, factoryAction);
 
             return this;
@@ -227,47 +265,12 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public MenuBuilder BindTo(IEnumerable<MenuItem> items)
         {
-            Guard.IsNotNull(items, "items");
-
             Component.Items.Clear();
 
             (items as List<MenuItem>).ForEach(item => Component.Items.Add(item));
 
             return this;
         }
-
-        ///// <summary>
-        ///// Configures the effects of the menu.
-        ///// </summary>
-        ///// <param name="effectsAction">The action which configures the effects.</param>
-        ///// <example>
-        ///// <code lang="CS">
-        ///// &lt;%= Html.Kendo().Menu()
-        /////	           .Name("Menu")
-        /////	           .Effects(fx =>
-        /////	           {
-        /////		            fx.Slide()
-        /////			          .Opacity()
-        /////					  .OpenDuration(AnimationDuration.Normal)
-        /////					  .CloseDuration(AnimationDuration.Normal);
-        /////	           })
-        ///// </code>
-        ///// </example>
-        //public MenuBuilder Effects(Action<EffectsBuilder> addEffects)
-        //{
-        //    Guard.IsNotNull(addEffects, "addAction");
-
-        //    EffectsBuilderFactory factory = new EffectsBuilderFactory();
-
-        //    addEffects(factory.Create(Component.Effects));
-
-        //    if (Component.Effects.Container.Count == 0)
-        //    {
-        //        factory.Create(Component.Effects).Slide();
-        //    }
-
-        //    return this;
-        //}
 
         /// <summary>
         /// Selects the item at the specified index.
@@ -288,9 +291,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public MenuBuilder SelectedIndex(int index)
         {
-            Guard.IsNotNull(index, "index");
-            Guard.IsNotNegative(index, "index");
-
             Component.SelectedIndex = index;
 
             return this;
@@ -315,8 +315,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public MenuBuilder ItemAction(Action<MenuItem> action)
         {
-            Guard.IsNotNull(action, "action");
-
             Component.ItemAction = action;
 
             return this;
@@ -336,8 +334,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public MenuBuilder HighlightPath(bool value)
         {
-            Guard.IsNotNull(value, "value");
-
             Component.HighlightPath = value;
 
             return this;
@@ -357,8 +353,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public MenuBuilder SecurityTrimming(bool value)
         {
-            Guard.IsNotNull(value, "value");
-
             Component.SecurityTrimming = value;
 
             return this;
