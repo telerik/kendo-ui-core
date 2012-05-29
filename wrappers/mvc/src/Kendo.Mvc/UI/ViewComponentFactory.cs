@@ -331,7 +331,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual TreeViewBuilder TreeView()
         {
-            return new TreeViewBuilder(new TreeView(ViewContext, ClientSideObjectWriterFactory, UrlGenerator, DI.Current.Resolve<INavigationItemAuthorization>(), DI.Current.Resolve<ITreeViewHtmlBuilderFactory>()));
+            return new TreeViewBuilder(new TreeView(ViewContext, Initializer, UrlGenerator, DI.Current.Resolve<INavigationItemAuthorization>(), DI.Current.Resolve<ITreeViewHtmlBuilderFactory>()));
         }
 
         /// <summary>

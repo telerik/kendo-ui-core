@@ -230,15 +230,5 @@ namespace Kendo.Mvc.UI.Tests
 
             Assert.IsType(typeof(TreeViewBuilder), returnedBuilder);
         }
-
-        [Fact]
-        public void ClientEvents_should_return_builder()
-        {
-            Action<TreeViewClientEventsBuilder> clientEventsAction = eventBuilder => { eventBuilder.OnExpand("onExpand"); };
-
-            var returnedBuilder = builder.ClientEvents(clientEventsAction);
-
-            Assert.IsType(typeof(TreeViewBuilder), returnedBuilder);
-        }
     }
 }

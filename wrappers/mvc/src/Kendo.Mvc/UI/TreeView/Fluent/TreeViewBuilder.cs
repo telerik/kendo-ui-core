@@ -61,11 +61,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public TreeViewBuilder ClientEvents(Action<TreeViewClientEventsBuilder> clientEventsAction)
+        public TreeViewBuilder Events(Action<TreeViewEventBuilder> clientEventsAction)
         {
-            Guard.IsNotNull(clientEventsAction, "clientEventsAction");
-
-            clientEventsAction(new TreeViewClientEventsBuilder(Component.ClientEvents, Component.ViewContext));
+            clientEventsAction(new TreeViewEventBuilder(Component.Events));
 
             return this;
         }

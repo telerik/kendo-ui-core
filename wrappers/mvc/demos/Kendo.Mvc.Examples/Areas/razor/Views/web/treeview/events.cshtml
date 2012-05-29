@@ -2,15 +2,14 @@
     .Name("treeview")
     .HtmlAttributes(new { @class = "demo-section" })
     .DragAndDrop(true)
-    .ClientEvents(events => events
-        .OnSelect("onSelect")
-        .OnCollapse("onCollapse")
-        .OnExpand("onExpand")
-        .OnDragStart("onDragStart")
-        .OnDrag("onDrag")
-        .OnDragCancelled("onDragCancelled")
-        .OnDrop("onDrop")
-        .OnDragEnd("onDragEnd")
+    .Events(events => events
+        .Select("onSelect")
+        .Collapse("onCollapse")
+        .Expand("onExpand")
+        .DragStart("onDragStart")
+        .Drag("onDrag")
+        .Drop("onDrop")
+        .DragEnd("onDragEnd")
     )
     .Items(treeview =>
     {
