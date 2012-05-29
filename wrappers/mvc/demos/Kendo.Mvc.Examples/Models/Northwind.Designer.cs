@@ -51,7 +51,7 @@ namespace Kendo.Mvc.Examples.Models
     #endregion
 		
 		public NorthwindDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["NorthwindConnectionString1"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["NorthwindConnectionString"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
