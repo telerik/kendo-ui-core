@@ -10,18 +10,24 @@
         HIGHLIGHT_SELECTOR = ".km-list > li > .km-listview-link, .km-list > li > .km-listview-label",
         HANDLED_INPUTS_SELECTOR = ".km-list > li > .km-listview-label > input",
         proxy = $.proxy,
+        data = kendo.data,
         GROUP_CLASS = "km-group-title",
+        ACTIVE_CLASS = "km-state-active",
         GROUP_WRAPPER = '<div class="' + GROUP_CLASS + '"><span class="km-text"></span></div>',
         GROUP_TEMPLATE = kendo.template('<li><div class="' + GROUP_CLASS + '">#= this.headerTemplate(data) #</div><ul>#= kendo.render(this.template, data.items)#</ul></li>'),
         WRAPPER = '<div class="km-listview-wrapper" />',
-        FUNCTION = "function",
+
         MOUSEDOWN = support.mousedown,
         MOUSEMOVE = support.mousemove,
         MOUSECANCEL = support.mousecancel,
         MOUSEUP = support.mouseup,
+
         CLICK = "click",
-        data = kendo.data,
-        REQUEST_START = "requestStart";
+        REQUEST_START = "requestStart",
+        FUNCTION = "function",
+
+        whitespaceRegExp = /^\s+$/,
+        buttonRegExp = /button/;
 
     function toggleItemActiveClass(e) {
         if (e.which > 1) {
@@ -31,11 +37,11 @@
         var clicked = $(e.currentTarget),
             item = clicked.parent(),
             role = data(clicked, "role") || "",
-            plainItem = (!role.match(/button/)),
+            plainItem = (!role.match(buttonRegExp)),
             prevented = e.isDefaultPrevented();
 
         if (plainItem) {
-            item.toggleClass("km-state-active", e.type === MOUSEDOWN && !prevented);
+            item.toggleClass(ACTIVE_CLASS, e.type === MOUSEDOWN && !prevented);
         }
 
         if (clicked.is("label") && e.type === MOUSEUP && !prevented) {
@@ -52,24 +58,20 @@
     }
 
     function whitespace() {
-        return this.nodeType === Node.TEXT_NODE && this.nodeValue.match(/^\s+$/);
+        return this.nodeType === Node.TEXT_NODE && this.nodeValue.match(whitespaceRegExp);
     }
 
-    function enhanceItem(i, item) {
-        item = $(item);
-
-        var icon = data(item, "icon"),
-            iconSpan = $('<span class="km-icon"/>');
-
+    function addIcon(item, icon) {
         if (icon) {
-            item.prepend(iconSpan);
-            iconSpan.addClass("km-" + icon);
+            item.prepend('<span class="km-icon km-' + icon + '"/>');
         }
     }
 
-    function enhanceLinkItem(i, item) {
-        item = $(item);
+    function enhanceItem(item) {
+        addIcon(item, data(item, "icon"));
+    }
 
+    function enhanceLinkItem(item) {
         var parent = item.parent(),
             itemAndDetailButtons = item.add(parent.children(kendo.roleSelector("detailbutton"))),
             otherNodes = parent.contents().not(itemAndDetailButtons).not(whitespace);
@@ -78,21 +80,13 @@
             return;
         }
 
-        var icon = data(parent, "icon"),
-            iconSpan = $('<span class="km-icon"/>');
-
         item.addClass("km-listview-link")
             .attr(kendo.attr("role"), "listview-link");
 
-        if (icon) {
-            item.prepend(iconSpan);
-            iconSpan.addClass("km-" + icon);
-        }
+        addIcon(item, data(parent, "icon"));
     }
 
-    function enhanceCheckBoxItem(i, label) {
-        label = $(label);
-
+    function enhanceCheckBoxItem(label) {
         if (!label.children("input[type=checkbox],input[type=radio]").length) {
             return;
         }
@@ -759,32 +753,36 @@
                 });
             }
 
-            items = that.items();
-
-            items.each(function () {
-                var that = this, enhanced = false;
-
-                for (i = 0, len = that.childNodes.length; i < len; i++) {
-                    node = that.childNodes[i];
-                    nodeName = node.nodeName.toUpperCase();
-
-                    if (nodeName == "A") {
-                        enhanceLinkItem(i, node);
-                        enhanced = true;
-                    } if (nodeName == "LABEL") {
-                        enhanceCheckBoxItem(i, node);
-                        enhanced = true;
-                    }
-                }
-
-                if (!enhanced) {
-                    enhanceItem(i, that);
-                }
-            });
+            that._enhanceItems();
 
             element.closest(".km-content").toggleClass("km-insetcontent", inset); // iOS has white background when the list is not inset.
 
             that._cacheHeaders();
+        },
+
+        _enhanceItems: function() {
+            items = this.items();
+
+            items.each(function() {
+                var item = $(this),
+                    child,
+                    enhanced = false;
+
+                item.children().each(function() {
+                    child = $(this);
+                    if (child.is("a")) {
+                        enhanceLinkItem(child);
+                        enhanced = true;
+                    } else if (child.is("label")) {
+                       enhanceCheckBoxItem(child);
+                       enhanced = true;
+                    }
+                });
+
+                if (!enhanced) {
+                    enhanceItem(item);
+                }
+            });
         },
 
         _footer: function() {
