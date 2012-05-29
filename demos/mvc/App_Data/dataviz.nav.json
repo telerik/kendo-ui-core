@@ -17,16 +17,16 @@
             "spriteCssClass": "chartAreaIcon",
             "items": [{
                     "text": "Basic usage",
-                    "url": "area-chart/index.html"
+                    "url": "area-charts/index.html"
                 }, {
                     "text": "Binding to remote data",
-                    "url": "area-chart/remote-data.html",
+                    "url": "area-charts/remote-data.html",
                     "packages": [ "!offline" ]
                 }, {
                     "text": "Binding to local data",
-                    "url": "area-chart/local-data.html"
+                    "url": "area-charts/local-data.html"
             }],
-            "name": "area-chart"
+            "name": "area-charts"
         }, {
             "text": "Bar Charts",
             "documentation": "dataviz/chart",
@@ -62,38 +62,38 @@
             "items": [
                 {
                     "text": "Basic usage",
-                    "url": "line-chart/index.html"
+                    "url": "line-charts/index.html"
                 },
                 {
                     "text": "Binding to remote data",
-                    "url": "line-chart/remote-data.html",
+                    "url": "line-charts/remote-data.html",
                     "packages": [ "!offline" ]
                 },
                 {
                     "text": "Binding to local data",
-                    "url": "line-chart/local-data.html"
+                    "url": "line-charts/local-data.html"
                 }
             ],
-            "name": "line-chart"
+            "name": "line-charts"
         }, {
             "text": "Pie Charts",
             "documentation": "dataviz/chart",
             "spriteCssClass": "chartPieIcon",
             "items": [{
                     "text": "Basic usage",
-                    "url": "pie-chart/index.html"
+                    "url": "pie-charts/index.html"
                 }, {
                     "text": "Pie labels",
-                    "url": "pie-chart/pie-labels.html"
+                    "url": "pie-charts/pie-labels.html"
                 }, {
                     "text": "Binding to remote data",
-                    "url": "pie-chart/remote-data.html",
+                    "url": "pie-charts/remote-data.html",
                     "packages": [ "!offline" ]
                 }, {
                     "text": "Binding to local data",
-                    "url": "pie-chart/local-data.html"
+                    "url": "pie-charts/local-data.html"
             }],
-            "name": "pie-chart"
+            "name": "pie-charts"
         }, {
             "text": "Scatter Charts",
             "documentation": "dataviz/chart",

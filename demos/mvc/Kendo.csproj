@@ -453,15 +453,15 @@
     <Content Include="Views\dataviz\bar-charts\local-data.cshtml" />
     <Content Include="Views\dataviz\bar-charts\remote-data.cshtml" />
     <Content Include="Views\dataviz\bar-charts\stacked-bar.cshtml" />
-    <Content Include="Views\dataviz\line-chart\index.cshtml" />
-    <Content Include="Views\dataviz\line-chart\local-data.cshtml" />
-    <Content Include="Views\dataviz\line-chart\remote-data.cshtml" />
+    <Content Include="Views\dataviz\line-charts\index.cshtml" />
+    <Content Include="Views\dataviz\line-charts\local-data.cshtml" />
+    <Content Include="Views\dataviz\line-charts\remote-data.cshtml" />
     <Content Include="Views\dataviz\overview\high-performance.cshtml" />
     <Content Include="Views\dataviz\overview\index.cshtml" />
-    <Content Include="Views\dataviz\pie-chart\index.cshtml" />
-    <Content Include="Views\dataviz\pie-chart\local-data.cshtml" />
-    <Content Include="Views\dataviz\pie-chart\pie-labels.cshtml" />
-    <Content Include="Views\dataviz\pie-chart\remote-data.cshtml" />
+    <Content Include="Views\dataviz\pie-charts\index.cshtml" />
+    <Content Include="Views\dataviz\pie-charts\local-data.cshtml" />
+    <Content Include="Views\dataviz\pie-charts\pie-labels.cshtml" />
+    <Content Include="Views\dataviz\pie-charts\remote-data.cshtml" />
     <Content Include="Views\dataviz\scatter-charts\index.cshtml" />
     <Content Include="Views\dataviz\scatter-charts\local-data.cshtml" />
     <Content Include="Views\dataviz\scatter-charts\remote-data.cshtml" />
@@ -496,9 +496,9 @@
     <Content Include="Views\mobile\buttongroup\appearance.cshtml" />
     <Content Include="Views\mobile\scrollview\index.cshtml" />
     <Content Include="Views\mobile\tabstrip\appearance.cshtml" />
-    <Content Include="Views\dataviz\area-chart\index.cshtml" />
-    <Content Include="Views\dataviz\area-chart\local-data.cshtml" />
-    <Content Include="Views\dataviz\area-chart\remote-data.cshtml" />
+    <Content Include="Views\dataviz\area-charts\index.cshtml" />
+    <Content Include="Views\dataviz\area-charts\local-data.cshtml" />
+    <Content Include="Views\dataviz\area-charts\remote-data.cshtml" />
     <Content Include="Views\dataviz\customization\plotbands.cshtml" />
     <Content Include="Views\dataviz\scatter-charts\multiple-axes.cshtml" />
     <Content Include="Views\web\grid\aggregates.cshtml" />
@@ -516,6 +516,15 @@
     <Content Include="Views\web\grid\editing-custom.cshtml" />
     <Content Include="Views\web\grid\editing-inline.cshtml" />
     <Content Include="Views\web\grid\editing-popup.cshtml" />
+    <Content Include="Views\dataviz\bar-charts\grouped-stacked-bar.cshtml" />
+    <Content Include="Views\dataviz\bar-charts\multiple-axes.cshtml" />
+    <Content Include="Views\dataviz\dashboards\car-dashboard.cshtml" />
+    <Content Include="Views\dataviz\dashboards\high-performance.cshtml" />
+    <Content Include="Views\dataviz\dashboards\stock-history.cshtml" />
+    <Content Include="Views\dataviz\linear-gauge\index.cshtml" />
+    <Content Include="Views\dataviz\linear-gauge\scale-options.cshtml" />
+    <Content Include="Views\dataviz\radial-gauge\index.cshtml" />
+    <Content Include="Views\dataviz\radial-gauge\scale-options.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />

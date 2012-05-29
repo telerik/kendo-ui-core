@@ -35,7 +35,14 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
-        public void Bar_should_not_seriale_default_stack()
+        public void Bar_serializes_stack_name()
+        {
+            series.StackName = "Female";
+            GetJson(series)["stack"].ShouldEqual("Female");
+        }
+
+        [Fact]
+        public void Bar_should_not_serialize_default_stack()
         {
             GetJson(series).ContainsKey("stack").ShouldBeFalse();
         }
