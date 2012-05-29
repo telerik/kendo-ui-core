@@ -12,7 +12,7 @@
           .Value("8:00 AM")
           .Min("8:00 AM")
           .Max("6:00 PM")
-          .ClientEvents(e => e.Change("startChange"))
+          .Events(e => e.Change("startChange"))
      %>
 
     <label for="end" style="margin-left:3em">End time:</label>

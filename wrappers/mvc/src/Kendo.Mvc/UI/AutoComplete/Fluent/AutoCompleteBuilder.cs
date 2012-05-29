@@ -41,7 +41,7 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
-        public AutoCompleteBuilder ClientEvents(Action<DropDownBaseClientEventsBuilder> clientEventsAction)
+        public AutoCompleteBuilder Events(Action<DropDownBaseClientEventsBuilder> clientEventsAction)
         {
             clientEventsAction(new DropDownBaseClientEventsBuilder(Component.ClientEvents));
 

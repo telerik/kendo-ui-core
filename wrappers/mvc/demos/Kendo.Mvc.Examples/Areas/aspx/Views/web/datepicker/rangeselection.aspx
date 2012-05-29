@@ -10,7 +10,7 @@
       .Name("start")
       .Value(DateTime.Today)
       .Max(DateTime.Today)
-      .ClientEvents(e => e.Change("startChange"))
+      .Events(e => e.Change("startChange"))
 %>
 
 <label for="end" style="margin-left:3em">End date:</label>
@@ -18,7 +18,7 @@
       .Name("end")
       .Value(DateTime.Today)
       .Min(DateTime.Today)
-      .ClientEvents(e => e.Change("endChange"))
+      .Events(e => e.Change("endChange"))
 %>
 </div>
 

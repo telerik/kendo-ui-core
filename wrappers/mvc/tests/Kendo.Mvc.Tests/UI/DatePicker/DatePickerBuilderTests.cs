@@ -42,7 +42,7 @@ namespace Kendo.Mvc.UI.Tests
         [Fact]
         public void ClientEvents_sets_events_of_the_datepicker()
         {
-            builder.ClientEvents(b => b.Change("change"));
+            builder.Events(b => b.Change("change"));
 
             var @event = datePicker.ClientEvents["change"] as ClientEvent;
 
@@ -54,7 +54,7 @@ namespace Kendo.Mvc.UI.Tests
         [Fact]
         public void ClientEvents_returns_builder()
         {
-            builder.ClientEvents(b => b.Change("change")).ShouldBeType<DatePickerBuilder>();
+            builder.Events(b => b.Change("change")).ShouldBeType<DatePickerBuilder>();
         }
 
         [Fact]

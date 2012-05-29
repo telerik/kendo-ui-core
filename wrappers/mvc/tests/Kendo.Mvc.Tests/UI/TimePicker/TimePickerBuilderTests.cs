@@ -93,10 +93,10 @@ namespace Kendo.Mvc.UI.Tests
         [Fact]
         public void MinTime_method_with_string_param_should_set_MinTime_property()
         {
-            TimeSpan time = TimeSpan.Parse("07:00");
+            DateTime time = DateTime.Parse("07:00");
 
             builder.Min("07:00");
-            Assert.Equal(new DateTime(time.Ticks), timepicker.Min);
+            Assert.Equal(time, timepicker.Min);
         }
 
         [Fact]
@@ -136,10 +136,10 @@ namespace Kendo.Mvc.UI.Tests
         [Fact]
         public void MaxTime_method_with_string_param_should_set_MaxTime_property()
         {
-            TimeSpan time = TimeSpan.Parse("23:00");
+            DateTime time = DateTime.Parse("23:00");
 
             builder.Max("23:00");
-            Assert.Equal(new DateTime(time.Ticks), timepicker.Max);
+            Assert.Equal(time, timepicker.Max);
         }
 
         [Fact]
