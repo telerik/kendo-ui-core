@@ -63,19 +63,17 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;%= Html.Telerik().Splitter()
         ///             .Name("Splitter")
-        ///             .ClientEvents(events => events
+        ///             .Events(events => events
         ///                 .OnLoad("onLoad")
         ///             )
         /// %&gt;
         /// </code>
         /// </example>
-        public SplitterBuilder ClientEvents(Action<SplitterClientEventsBuilder> configureClientEvents)
+        public SplitterBuilder Events(Action<SplitterEventBuilder> configurator)
         {
-            Guard.IsNotNull(configureClientEvents, "configureClientEvents");
+            var clientEventsBuilder = new SplitterEventBuilder(Component.Events);
 
-            var clientEventsBuilder = new SplitterClientEventsBuilder(Component.ClientEvents);
-
-            configureClientEvents(clientEventsBuilder);
+            configurator(clientEventsBuilder);
 
             return this;
         }

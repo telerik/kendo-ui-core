@@ -1,11 +1,11 @@
 @(Html.Kendo().Splitter()
       .Name("splitter")
       .HtmlAttributes(new { style = "height: 400px;" })
-      .ClientEvents(events => events
-          .OnCollapse("collapse")
-          .OnResize("resize")
-          .OnExpand("expand")
-          .OnContentLoad("contentLoad")
+      .Events(events => events
+          .Collapse("collapse")
+          .Resize("resize")
+          .Expand("expand")
+          .ContentLoad("contentLoad")
       )
       .Panes(panes =>
       {
