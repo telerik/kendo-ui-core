@@ -8,7 +8,7 @@ using Kendo.Mvc.Examples.Models;
 
 namespace Kendo.Mvc.Examples.Controllers
 {
-    public partial class Area_ChartController : Controller
+    public partial class Area_ChartsController : Controller
     {
         public ActionResult Index()
         {
