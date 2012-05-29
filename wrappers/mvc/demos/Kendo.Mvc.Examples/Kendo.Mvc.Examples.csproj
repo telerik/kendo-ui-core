@@ -120,6 +120,8 @@
     <Compile Include="Controllers\Grid\ColumnResizingController.cs" />
     <Compile Include="Controllers\Grid\CustomAjaxBindingController.cs" />
     <Compile Include="Controllers\Menu\ApiController.cs" />
+    <Compile Include="Controllers\Menu\ModelBindingController.cs" />
+    <Compile Include="Controllers\Menu\SiteMapBindingController.cs" />
     <Compile Include="Controllers\Menu\EventsController.cs" />
     <Compile Include="Controllers\Menu\OrientationController.cs" />
     <Compile Include="Controllers\Menu\ImagesController.cs" />
@@ -427,12 +429,17 @@
     <Content Include="Areas\razor\Views\web\menu\images.cshtml" />
     <Content Include="Areas\razor\Views\web\menu\orientation.cshtml" />
     <Content Include="Areas\razor\Views\web\menu\events.cshtml" />
+    <Content Include="Areas\razor\Views\web\menu\sitemapbinding.cshtml" />
     <Content Include="Areas\razor\Views\web\menu\api.cshtml" />
+    <Content Include="Areas\razor\Views\web\menu\modelbinding.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
+    <Content Include="sample.sitemap">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />

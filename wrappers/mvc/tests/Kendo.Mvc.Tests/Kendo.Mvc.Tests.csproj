@@ -328,7 +328,6 @@
     <Compile Include="UI\TextBox\NumericTextBoxBuilderTests.cs" />
     <Compile Include="UI\Menu\MenuBuilderTests.cs" />
     <Compile Include="UI\Menu\MenuHtmlBuilderTests.cs" />
-    <Compile Include="UI\Menu\MenuRenderingTests.cs" />
     <Compile Include="UI\Menu\MenuTestHelper.cs" />
     <Compile Include="UI\Menu\MenuItemBuilderTests.cs" />
     <Compile Include="UI\NavigationBindingBuilderTests.cs" />
