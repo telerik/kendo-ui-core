@@ -191,7 +191,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public GaugeLinearPointerBuilder<T> Value(T value)
+        public GaugeLinearPointerBuilder<T> Value(T? value)
         {
             pointer.Value = value;
             return this;

@@ -12,14 +12,14 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Defines the inline handler of the OnChange client-side event
+        /// Defines the inline handler of the Change client-side event
         /// </summary>
         /// <param name="handlerName">The action defining the inline handler.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;% Html.Telerik().RangeSlider()
         ///            .Name("RangeSlider")
-        ///            .Events(events => events.OnChange(() =>
+        ///            .Events(events => events.Change(() =>
         ///            {
         ///                 %&gt;
         ///                 function(e) {
@@ -33,7 +33,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public RangeSliderEventBuilder Change(Func<object, object> handlerName)
         {
-            Handler("slide", handlerName);
+            Handler("change", handlerName);
 
             return this;
         }
@@ -52,13 +52,13 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public RangeSliderEventBuilder Change(string handlerName)
         {
-            Handler("slide", handlerName);
+            Handler("change", handlerName);
 
             return this;
         }
 
         /// <summary>
-        /// Defines the inline handler of the OnSlide client-side event.
+        /// Defines the inline handler of the Slide client-side event.
         /// </summary>
         /// <param name="handlerName">The action defining the inline handler.</param>
         /// <example>
