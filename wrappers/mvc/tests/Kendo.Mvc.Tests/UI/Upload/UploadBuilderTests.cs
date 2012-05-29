@@ -23,15 +23,15 @@ namespace Kendo.Mvc.UI.Tests.Upload
         [Fact]
         public void ClientEvents_should_set_events()
         {
-            Action<UploadClientEventsBuilder> clientEventsAction = eventBuilder => eventBuilder.Upload("upload");
-            builder.ClientEvents(clientEventsAction);
-            ((ClientEvent) upload.ClientEvents["upload"]).HandlerName.ShouldEqual("upload");
+            Action<UploadEventBuilder> clientEventsAction = eventBuilder => eventBuilder.Upload("upload");
+            builder.Events(clientEventsAction);
+            ((ClientEvent) upload.Events["upload"]).HandlerName.ShouldEqual("upload");
         }
 
         [Fact]
         public void ClientEvents_should_return_builder()
         {
-            builder.ClientEvents(eventBuilder => { }).ShouldBeSameAs(builder);
+            builder.Events(eventBuilder => { }).ShouldBeSameAs(builder);
         }
 
         [Fact]

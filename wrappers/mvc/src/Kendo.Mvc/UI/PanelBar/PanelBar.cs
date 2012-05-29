@@ -27,8 +27,6 @@ namespace Kendo.Mvc.UI
 
             Animation = new ExpandableAnimation();
 
-            ClientEvents = new Dictionary<string, object>();
-
             ExpandMode = PanelBarExpandMode.Multiple;
             HighlightPath = true;
 
@@ -45,12 +43,6 @@ namespace Kendo.Mvc.UI
         }
 
         public IUrlGenerator UrlGenerator
-        {
-            get;
-            private set;
-        }
-
-        public IDictionary<string, object> ClientEvents
         {
             get;
             private set;
@@ -112,7 +104,7 @@ namespace Kendo.Mvc.UI
 
         public override void WriteInitializationScript(TextWriter writer)
         {
-            var options = new Dictionary<string, object>(ClientEvents);
+            var options = new Dictionary<string, object>(Events);
 
             var animation = Animation.ToJson();
 

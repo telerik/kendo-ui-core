@@ -852,14 +852,13 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;%= Html.Telerik().Grid()
         ///             .Name("Grid")
-        ///             .ClientEvents(events => events
-        ///                 .OnDataBinding("onDataBinding")
-        ///                 .OnRowDataBound("onRowDataBound")
+        ///             .Events(events => events
+        ///                 .DataBinding("onDataBinding")
         ///             )
         /// %&gt;
         /// </code>
         /// </example>
-        public GridBuilder<T> ClientEvents(Action<GridEventBuilder> configurator)
+        public GridBuilder<T> Events(Action<GridEventBuilder> configurator)
         {
             Guard.IsNotNull(configurator, "configurator");
 

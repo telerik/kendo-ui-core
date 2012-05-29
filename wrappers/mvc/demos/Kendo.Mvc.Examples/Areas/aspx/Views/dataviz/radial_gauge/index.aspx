@@ -20,7 +20,7 @@
             .Name("slider")
             .Max(180)
             .ShowButtons(false)
-            .ClientEvents(events => events.Change("change"))
+            .Events(events => events.Change("change"))
     %>
 </div>
 <script type="text/javascript">

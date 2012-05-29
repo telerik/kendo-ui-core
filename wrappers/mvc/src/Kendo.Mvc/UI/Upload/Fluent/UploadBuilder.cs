@@ -26,18 +26,18 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;%= Html.Telerik().Upload()
         ///             .Name("Upload")
-        ///             .ClientEvents(events => events
+        ///             .Events(events => events
         ///                 .OnLoad("onLoad")
         ///                 .OnUpload("onUpload")
         ///             )
         /// %&gt;
         /// </code>
         /// </example>
-        public UploadBuilder ClientEvents(Action<UploadClientEventsBuilder> configurator)
+        public UploadBuilder Events(Action<UploadEventBuilder> configurator)
         {
             Guard.IsNotNull(configurator, "configurator");
 
-            configurator(new UploadClientEventsBuilder(Component.ClientEvents));
+            configurator(new UploadEventBuilder(Component.Events));
 
             return this;
         }

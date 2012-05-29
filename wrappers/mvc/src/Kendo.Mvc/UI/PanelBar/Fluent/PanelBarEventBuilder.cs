@@ -1,25 +1,14 @@
-namespace Kendo.Mvc.UI
+namespace Kendo.Mvc.UI.Fluent
 {
     using System;
-    using System.Web.Mvc;
-
-    using Infrastructure;
     using System.Collections.Generic;
-
     /// <summary>
-    /// Defines the fluent interface for configuring the <see cref="PanelBar.ClientEvents"/>.
+    /// Defines the fluent interface for configuring the <see cref="PanelBar.Events"/>.
     /// </summary>
-    public class PanelBarClientEventsBuilder
+    public class PanelBarEventBuilder : EventBuilder
     {
-        private readonly IDictionary<string, object> clientEvents;
-        
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PanelBarClientEventsBuilder"/> class.
-        /// </summary>
-        /// <param name="clientEvents">The client events.</param>
-        public PanelBarClientEventsBuilder(IDictionary<string, object> clientEvents)
+        public PanelBarEventBuilder(IDictionary<string, object> events) : base(events)
         {
-            this.clientEvents = clientEvents;
         }
 
         /// <summary>
@@ -30,7 +19,7 @@ namespace Kendo.Mvc.UI
         /// <code lang="CS">
         ///  &lt;% Html.Kendo().PanelBar()
         ///            .Name("PanelBar")
-        ///            .ClientEvents(events => events.OnExpand(
+        ///            .Events(events => events.Expand(
         ///                 @&lt;text&gt;
         ///                 function(e) {
         ///                     //event handling code
@@ -41,9 +30,9 @@ namespace Kendo.Mvc.UI
         /// %&gt;
         /// </code>
         /// </example>
-        public PanelBarClientEventsBuilder OnExpand(Func<object, object> expandInlineCodeBlock)
+        public PanelBarEventBuilder Expand(Func<object, object> handler)
         {
-            clientEvents["expand"] = new ClientEvent { InlineCodeBlock = expandInlineCodeBlock };
+            Handler("expand", handler);
 
             return this;
         }
@@ -56,13 +45,13 @@ namespace Kendo.Mvc.UI
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().PanelBar()
         ///             .Name("PanelBar")
-        ///             .ClientEvents(events => events.OnExpand("expand"))
+        ///             .Events(events => events.Expand("expand"))
         /// %&gt;
         /// </code>
         /// </example>
-        public PanelBarClientEventsBuilder OnExpand(string expandHandlerName)
+        public PanelBarEventBuilder Expand(string handler)
         {
-            clientEvents["expand"] = new ClientEvent { HandlerName = expandHandlerName };
+            Handler("expand", handler);
 
             return this;
         }
@@ -75,7 +64,7 @@ namespace Kendo.Mvc.UI
         /// <code lang="CS">
         ///  &lt;% Html.Kendo().PanelBar()
         ///            .Name("PanelBar")
-        ///            .ClientEvents(events => events.OnContentLoad(
+        ///            .Events(events => events.ContentLoad(
         ///                 @&lt;text&gt;
         ///                 function(e) {
         ///                     //event handling code
@@ -86,9 +75,9 @@ namespace Kendo.Mvc.UI
         /// %&gt;
         /// </code>
         /// </example>
-        public PanelBarClientEventsBuilder OnContentLoad(Func<object, object> contentLoadInlineCodeBlock)
+        public PanelBarEventBuilder ContentLoad(Func<object, object> handler)
         {
-            clientEvents["contentLoad"] = new ClientEvent { InlineCodeBlock = contentLoadInlineCodeBlock };
+            Handler("contentLoad", handler);
 
             return this;
         }
@@ -101,58 +90,27 @@ namespace Kendo.Mvc.UI
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().PanelBar()
         ///             .Name("PanelBar")
-        ///             .ClientEvents(events => events.OnContentLoad("contentLoad"))
+        ///             .Events(events => events.ContentLoad("contentLoad"))
         /// %&gt;
         /// </code>
         /// </example>
-        public PanelBarClientEventsBuilder OnContentLoad(string contentLoadHandlerName)
+        public PanelBarEventBuilder ContentLoad(string handler)
         {
-            clientEvents["contentLoad"] = new ClientEvent { HandlerName = contentLoadHandlerName };
+            Handler("contentLoad", handler);
 
             return this;
         }
 
-        /// <summary>
-        /// Defines the inline handler of the Activate client-side event
-        /// </summary>
-        /// <param name="activateInlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;% Html.Kendo().PanelBar()
-        ///            .Name("PanelBar")
-        ///            .ClientEvents(events => events.OnContentLoad(
-        ///                 @&lt;text&gt;
-        ///                 function(e) {
-        ///                     //event handling code
-        ///                 }
-        ///                 &lt;/text&gt;
-        ///            ))
-        ///            .Render();
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public PanelBarClientEventsBuilder OnActivate(Func<object, object> activateInlineCodeBlock)
+        public PanelBarEventBuilder Activate(Func<object, object> handler)
         {
-            clientEvents["activate"] = new ClientEvent { InlineCodeBlock = activateInlineCodeBlock };
+            Handler("activate", handler);
 
             return this;
         }
 
-        /// <summary>
-        ///  Defines the name of the JavaScript function that will handle the the Activate client-side event.
-        /// </summary>
-        /// <param name="activateLoadHandlerName">The name of the JavaScript function that will handle the event.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().PanelBar()
-        ///             .Name("PanelBar")
-        ///             .ClientEvents(events => events.OnContentLoad("contentLoad"))
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public PanelBarClientEventsBuilder OnActivate(string activateLoadHandlerName)
+        public PanelBarEventBuilder Activate(string handler)
         {
-            clientEvents["activate"] = new ClientEvent { HandlerName = activateLoadHandlerName };
+            Handler("activate", handler);
 
             return this;
         }
@@ -165,7 +123,7 @@ namespace Kendo.Mvc.UI
         /// <code lang="CS">
         ///  &lt;% Html.Kendo().PanelBar()
         ///            .Name("PanelBar")
-        ///            .ClientEvents(events => events.OnCollapse(
+        ///            .Events(events => events.Collapse(
         ///                 @&lt;text&gt;
         ///                 function(e) {
         ///                     //event handling code
@@ -176,9 +134,9 @@ namespace Kendo.Mvc.UI
         /// %&gt;
         /// </code>
         /// </example>
-        public PanelBarClientEventsBuilder OnCollapse(Func<object, object> collapseInlineCodeBlock)
+        public PanelBarEventBuilder Collapse(Func<object, object> handler)
         {
-            clientEvents["collapse"] = new ClientEvent { InlineCodeBlock = collapseInlineCodeBlock };
+            Handler("collapse", handler);
 
             return this;
         }
@@ -191,13 +149,13 @@ namespace Kendo.Mvc.UI
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().PanelBar()
         ///             .Name("PanelBar")
-        ///             .ClientEvents(events => events.OnCollapse("collapse"))
+        ///             .Events(events => events.Collapse("collapse"))
         /// %&gt;
         /// </code>
         /// </example>
-        public PanelBarClientEventsBuilder OnCollapse(string collapseHandlerName)
+        public PanelBarEventBuilder Collapse(string handler)
         {
-            clientEvents["collapse"] = new ClientEvent { HandlerName = collapseHandlerName };
+            Handler("collapse", handler);
 
             return this;
         }
@@ -210,7 +168,7 @@ namespace Kendo.Mvc.UI
         /// <code lang="CS">
         ///  &lt;% Html.Kendo().PanelBar()
         ///            .Name("PanelBar")
-        ///            .ClientEvents(events => events.OnSelect(
+        ///            .Events(events => events.Select(
         ///                 @&lt;text&gt;
         ///                 function(e) {
         ///                     //event handling code
@@ -221,9 +179,9 @@ namespace Kendo.Mvc.UI
         /// %&gt;
         /// </code>
         /// </example>
-        public PanelBarClientEventsBuilder OnSelect(Func<object, object> selectInlineCodeBlock)
+        public PanelBarEventBuilder Select(Func<object, object> handler)
         {
-            clientEvents["select"] = new ClientEvent { InlineCodeBlock = selectInlineCodeBlock };
+            Handler("select", handler);
 
             return this;
         }
@@ -236,13 +194,13 @@ namespace Kendo.Mvc.UI
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().PanelBar()
         ///             .Name("PanelBar")
-        ///             .ClientEvents(events => events.OnSelect("select"))
+        ///             .Events(events => events.Select("select"))
         /// %&gt;
         /// </code>
         /// </example>
-        public PanelBarClientEventsBuilder OnSelect(string selectHandlerName)
+        public PanelBarEventBuilder Select(string handler)
         {
-            clientEvents["select"] = new ClientEvent { HandlerName = selectHandlerName };
+            Handler("select", handler);
 
             return this;
         }
@@ -255,7 +213,7 @@ namespace Kendo.Mvc.UI
         /// <code lang="CS">
         ///  &lt;% Html.Kendo().PanelBar()
         ///            .Name("PanelBar")
-        ///            .ClientEvents(events => events.OnError(
+        ///            .Events(events => events.Error(
         ///                 @&lt;text&gt;
         ///                 function(e) {
         ///                     //event handling code
@@ -266,28 +224,28 @@ namespace Kendo.Mvc.UI
         /// %&gt;
         /// </code>
         /// </example>
-        public PanelBarClientEventsBuilder OnError(Func<object, object> errorInlineCodeBlock)
+        public PanelBarEventBuilder Error(Func<object, object> handler)
         {
-            clientEvents["error"] = new ClientEvent { InlineCodeBlock = errorInlineCodeBlock };
+            Handler("error", handler);
 
             return this;
         }
 
         /// <summary>
-        ///  Defines the name of the JavaScript function that will handle the the OnError client-side event.
+        ///  Defines the name of the JavaScript function that will handle the the Error client-side event.
         /// </summary>
         /// <param name="errorHandlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().PanelBar()
         ///             .Name("PanelBar")
-        ///             .ClientEvents(events => events.OnError("onError"))
+        ///             .Events(events => events.Error("onError"))
         /// %&gt;
         /// </code>
         /// </example>
-        public PanelBarClientEventsBuilder OnError(string errorHandlerName)
+        public PanelBarEventBuilder Error(string handler)
         {
-            clientEvents["error"] = new ClientEvent { HandlerName = errorHandlerName };
+            Handler("error", handler);
 
             return this;
         }

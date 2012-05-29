@@ -8,7 +8,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
 
     public class ChartClientEventsBuilderTests
     {
-        private readonly ChartClientEventsBuilder builder;
+        private readonly ChartEventBuilder builder;
         private readonly IDictionary<string, object> clientEvents;
         private readonly Action emptyAction;
         private readonly Func<object, object> nullFunc;
@@ -17,7 +17,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
         public ChartClientEventsBuilderTests()
         {
             clientEvents = new Dictionary<string, object>();
-            builder = new ChartClientEventsBuilder(clientEvents);
+            builder = new ChartEventBuilder(clientEvents);
 
             emptyAction = () => { };
             nullFunc = (o) => null;
@@ -34,7 +34,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
         [Fact]
         public void DataBound_with_Func_should_return_builder()
         {
-            builder.DataBound(nullFunc).ShouldBeType<ChartClientEventsBuilder>();
+            builder.DataBound(nullFunc).ShouldBeType<ChartEventBuilder>();
         }
 
         [Fact]
@@ -47,7 +47,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
         [Fact]
         public void DataBound_with_string_should_return_builder()
         {
-            builder.DataBound(handlerName).ShouldBeType<ChartClientEventsBuilder>();
+            builder.DataBound(handlerName).ShouldBeType<ChartEventBuilder>();
         }
 
         [Fact]
@@ -60,7 +60,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
         [Fact]
         public void SeriesClick_with_Func_should_return_builder()
         {
-            builder.SeriesClick(nullFunc).ShouldBeType<ChartClientEventsBuilder>();
+            builder.SeriesClick(nullFunc).ShouldBeType<ChartEventBuilder>();
         }
 
         [Fact]
@@ -73,7 +73,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
         [Fact]
         public void SeriesClick_with_string_should_return_builder()
         {
-            builder.SeriesClick(handlerName).ShouldBeType<ChartClientEventsBuilder>();
+            builder.SeriesClick(handlerName).ShouldBeType<ChartEventBuilder>();
         }
 
         [Fact]
@@ -86,7 +86,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
         [Fact]
         public void SeriesHover_with_Func_should_return_builder()
         {
-            builder.SeriesHover(nullFunc).ShouldBeType<ChartClientEventsBuilder>();
+            builder.SeriesHover(nullFunc).ShouldBeType<ChartEventBuilder>();
         }
 
         [Fact]
@@ -99,7 +99,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
         [Fact]
         public void SeriesHover_with_string_should_return_builder()
         {
-            builder.SeriesHover(handlerName).ShouldBeType<ChartClientEventsBuilder>();
+            builder.SeriesHover(handlerName).ShouldBeType<ChartEventBuilder>();
         }
 
         [Fact]
@@ -112,7 +112,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
         [Fact]
         public void AxisLabelClick_with_Func_should_return_builder()
         {
-            builder.AxisLabelClick(nullFunc).ShouldBeType<ChartClientEventsBuilder>();
+            builder.AxisLabelClick(nullFunc).ShouldBeType<ChartEventBuilder>();
         }
 
         [Fact]
@@ -125,7 +125,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
         [Fact]
         public void AxisLabelClick_with_string_should_return_builder()
         {
-            builder.AxisLabelClick(handlerName).ShouldBeType<ChartClientEventsBuilder>();
+            builder.AxisLabelClick(handlerName).ShouldBeType<ChartEventBuilder>();
         }
     }
 }

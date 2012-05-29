@@ -25,7 +25,6 @@ namespace Kendo.Mvc.UI
             Min = (T)Convert.ChangeType(0, typeof(T));
             Max = (T)Convert.ChangeType(10, typeof(T));
             SmallStep = (T)Convert.ChangeType(1, typeof(T));
-            ClientEvents = new Dictionary<string, object>();
             Enabled = true;
 
             Settings = new SliderTooltipSettings();
@@ -43,8 +42,6 @@ namespace Kendo.Mvc.UI
 
         public T? LargeStep { get; set; }
 
-        public IDictionary<string, object> ClientEvents { get; private set; }
-
         public bool Enabled { get; set; }
 
         public T? Value { get; set; }
@@ -59,7 +56,7 @@ namespace Kendo.Mvc.UI
 
         public override void WriteInitializationScript(System.IO.TextWriter writer)
         {
-            var options = new Dictionary<string, object>(ClientEvents);
+            var options = new Dictionary<string, object>(Events);
 
             SerializeProperties(options);
 

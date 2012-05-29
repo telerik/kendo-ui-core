@@ -25,7 +25,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="addAction">The add action.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Menu()
+        ///  &lt;%= Html.Kendo().Menu()
         ///             .Name("Menu")
         ///             .Items(items =>
         ///             {
@@ -52,15 +52,15 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="clientEventsAction">The client events action.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Menu()
+        ///  &lt;%= Html.Kendo().Menu()
         ///             .Name("Menu")
-        ///             .ClientEvents(events =>
-        ///                 events.OnOpen("onOpen").OnClose("onClose")
+        ///             .Events(events =>
+        ///                 events.Open("onOpen").OnClose("onClose")
         ///             )
         /// %&gt;
         /// </code>
         /// </example>
-        public MenuBuilder ClientEvents(Action<MenuEventBuilder> clientEventsAction)
+        public MenuBuilder Events(Action<MenuEventBuilder> clientEventsAction)
         {
             Guard.IsNotNull(clientEventsAction, "clientEventsAction");
 
@@ -75,7 +75,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="value">The desired orientation.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Menu()
+        ///  &lt;%= Html.Kendo().Menu()
         ///             .Name("Menu")
         ///             .Orientation(MenuOrientation.Vertical)
         /// %&gt;
@@ -93,7 +93,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Menu()
+        ///  &lt;%= Html.Kendo().Menu()
         ///             .Name("Menu")
         ///             .OpenOnClick(true)
         /// %&gt;
@@ -113,7 +113,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="siteMapAction">The action to configure the item.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Menu()
+        ///  &lt;%= Html.Kendo().Menu()
         ///             .Name("Menu")
         ///             .BindTo("examples", (item, siteMapNode) =>
         ///             {
@@ -137,7 +137,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="viewDataKey">The view data key.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Menu()
+        ///  &lt;%= Html.Kendo().Menu()
         ///             .Name("Menu")
         ///             .BindTo("examples")
         /// %&gt;
@@ -161,7 +161,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="itemDataBound">The action executed for every data bound item.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Menu()
+        ///  &lt;%= Html.Kendo().Menu()
         ///             .Name("Menu")
         ///             .BindTo(new []{"First", "Second"}, (item, value)
         ///             {
@@ -187,7 +187,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="factoryAction">The action which will configure the mappings</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Menu()
+        ///  &lt;%= Html.Kendo().Menu()
         ///             .Name("Menu")
         ///             .BindTo(Model, mapping => mapping
         ///                     .For&lt;Customer&gt;(binding => binding
@@ -219,7 +219,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="items">The list of items</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Menu()
+        ///  &lt;%= Html.Kendo().Menu()
         ///             .Name("TreeView")
         ///             .BindTo(model)
         /// %&gt;
@@ -242,7 +242,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///// <param name="effectsAction">The action which configures the effects.</param>
         ///// <example>
         ///// <code lang="CS">
-        ///// &lt;%= Html.Telerik().Menu()
+        ///// &lt;%= Html.Kendo().Menu()
         /////	           .Name("Menu")
         /////	           .Effects(fx =>
         /////	           {
@@ -275,7 +275,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="index">The index.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Menu()
+        ///  &lt;%= Html.Kendo().Menu()
         ///             .Name("Menu")
         ///             .Items(items =>
         ///             {
@@ -302,7 +302,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="action">Action, which will be executed for each item.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Menu()
+        ///  &lt;%= Html.Kendo().Menu()
         ///             .Name("Menu")
         ///             .ItemAction(item =>
         ///             {
@@ -328,7 +328,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="value">If true the item will be highlighted.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Menu()
+        ///  &lt;%= Html.Kendo().Menu()
         ///             .Name("Menu")
         ///             .HighlightPath(true)
         /// %&gt;
@@ -349,7 +349,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="value">If true security trimming is enabled.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Menu()
+        ///  &lt;%= Html.Kendo().Menu()
         ///             .Name("Menu")
         ///             .SecurityTrimming(false)
         /// %&gt;

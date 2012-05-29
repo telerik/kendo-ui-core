@@ -3,7 +3,7 @@ namespace Kendo.Mvc.UI.Fluent
     using System;
     using System.Collections.Generic;
 
-    /// <summary>Defines the fluent interface for configuring the <see cref="Slider.ClientEvents"/>.</summary>
+    /// <summary>Defines the fluent interface for configuring the <see cref="Slider.Events"/>.</summary>
     public class SliderEventBuilder : EventBuilder
     {
         public SliderEventBuilder(IDictionary<string, object> events)
@@ -19,7 +19,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;% Html.Kendo().Slider()
         ///            .Name("Slider")
-        ///            .ClientEvents(events => events.Change(() =>
+        ///            .Events(events => events.Change(() =>
         ///            {
         ///                 %&gt;
         ///                 function(e) {
@@ -46,7 +46,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Slider()
         ///             .Name("Slider")
-        ///             .ClientEvents(events => events.Change("change"))
+        ///             .Events(events => events.Change("change"))
         /// %&gt;
         /// </code>
         /// </example>
@@ -65,7 +65,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;% Html.Kendo().Slider()
         ///            .Name("Slider")
-        ///            .ClientEvents(events => events.Slide(() =>
+        ///            .Events(events => events.Slide(() =>
         ///            {
         ///                 %&gt;
         ///                 function(e) {
@@ -92,7 +92,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Slider()
         ///             .Name("Slider")
-        ///             .ClientEvents(events => events.Slide("slide"))
+        ///             .Events(events => events.Slide("slide"))
         /// %&gt;
         /// </code>
         /// </example>

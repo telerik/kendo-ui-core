@@ -54,7 +54,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///  &lt;%= Html.Telerik().TabStrip()
         ///             .Name("TabStrip")
         ///             .Events(events =>
-        ///                 events.OnSelect("onSelect").OnLoad("onLoad")
+        ///                 events.Select("onSelect").OnLoad("onLoad")
         ///             )
         /// %&gt;
         /// </code>

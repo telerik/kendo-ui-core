@@ -4,6 +4,8 @@ namespace Kendo.Mvc.UI.Tests
     using System.Collections.Generic;
     using System.IO;
     using System.Web.UI;
+    using Kendo.Mvc.UI;
+    using Kendo.Mvc.UI.Fluent;
     using Moq;
     using Xunit;
 
@@ -226,25 +228,5 @@ namespace Kendo.Mvc.UI.Tests
             Assert.IsType(typeof(PanelBarBuilder), returnedBuilder);
         }
 
-
-        [Fact]
-        public void ClientEvents_should_set_events_of_the_menu()
-        {
-            Action<PanelBarClientEventsBuilder> clientEventsAction = eventBuilder => { eventBuilder.OnCollapse("collapse"); };
-
-            builder.ClientEvents(clientEventsAction);
-
-            panelBar.ClientEvents.Keys.ShouldContain("collapse");
-        }
-
-        [Fact]
-        public void ClientEvents_should_return_builder()
-        {
-            Action<PanelBarClientEventsBuilder> clientEventsAction = eventBuilder => { eventBuilder.OnCollapse("collapse"); };
-
-            var returnedBuilder = builder.ClientEvents(clientEventsAction);
-
-            Assert.IsType(typeof(PanelBarBuilder), returnedBuilder);
-        }
     }
 }

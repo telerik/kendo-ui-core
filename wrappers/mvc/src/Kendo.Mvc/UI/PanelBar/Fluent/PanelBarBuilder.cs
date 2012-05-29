@@ -1,4 +1,4 @@
-namespace Kendo.Mvc.UI
+namespace Kendo.Mvc.UI.Fluent
 {
     using System;
     using System.Collections;
@@ -54,17 +54,17 @@ namespace Kendo.Mvc.UI
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().PanelBar()
         ///             .Name("PanelBar")
-        ///             .ClientEvents(events =>
-        ///                 events.OnExpand("expand").OnCollapse("collapse")
+        ///             .Events(events =>
+        ///                 events.Expand("expand").Collapse("collapse")
         ///             )
         /// %&gt;
         /// </code>
         /// </example>
-        public PanelBarBuilder ClientEvents(Action<PanelBarClientEventsBuilder> clientEventsAction)
+        public PanelBarBuilder Events(Action<PanelBarEventBuilder> clientEventsAction)
         {
             Guard.IsNotNull(clientEventsAction, "clientEventsAction");
 
-            clientEventsAction(new PanelBarClientEventsBuilder(Component.ClientEvents));
+            clientEventsAction(new PanelBarEventBuilder(Component.Events));
 
             return this;
         }

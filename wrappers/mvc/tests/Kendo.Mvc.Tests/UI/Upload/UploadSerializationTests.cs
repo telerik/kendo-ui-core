@@ -142,7 +142,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
         [Fact]
         public void Select_client_side_event_serialized()
         {
-            upload.ClientEvents["select"] = new ClientEvent() { HandlerName = "selectHandler" };
+            upload.Events["select"] = new ClientEvent() { HandlerName = "selectHandler" };
             upload.WriteInitializationScript(textWriter.Object);
 
             output.ShouldContain("{select:selectHandler}");
@@ -151,7 +151,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
         [Fact]
         public void Upload_client_side_event_serialized()
         {
-            upload.ClientEvents["upload"] = new ClientEvent() { HandlerName = "uploadHandler" };
+            upload.Events["upload"] = new ClientEvent() { HandlerName = "uploadHandler" };
             upload.WriteInitializationScript(textWriter.Object);
 
             output.ShouldContain("{upload:uploadHandler}");
@@ -160,7 +160,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
         [Fact]
         public void Success_client_side_event_serialized()
         {
-            upload.ClientEvents["success"] = new ClientEvent() { HandlerName = "successHandler" };
+            upload.Events["success"] = new ClientEvent() { HandlerName = "successHandler" };
             upload.WriteInitializationScript(textWriter.Object);
 
             output.ShouldContain("{success:successHandler}");
@@ -169,7 +169,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
         [Fact]
         public void Error_client_side_event_serialized()
         {
-            upload.ClientEvents["error"] = new ClientEvent() { HandlerName = "errorHandler" };
+            upload.Events["error"] = new ClientEvent() { HandlerName = "errorHandler" };
             upload.WriteInitializationScript(textWriter.Object);
 
             output.ShouldContain("{error:errorHandler}");
@@ -178,7 +178,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
         [Fact]
         public void Complete_client_side_event_serialized()
         {
-            upload.ClientEvents["complete"] = new ClientEvent() { HandlerName = "completeHandler" };
+            upload.Events["complete"] = new ClientEvent() { HandlerName = "completeHandler" };
             upload.WriteInitializationScript(textWriter.Object);
 
             output.ShouldContain("{complete:completeHandler}");
@@ -187,7 +187,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
         [Fact]
         public void Cancel_client_side_event_serialized()
         {
-            upload.ClientEvents["cancel"] = new ClientEvent() { HandlerName = "cancelHandler" };
+            upload.Events["cancel"] = new ClientEvent() { HandlerName = "cancelHandler" };
             upload.WriteInitializationScript(textWriter.Object);
 
             output.ShouldContain("{cancel:cancelHandler}");
@@ -196,7 +196,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
         [Fact]
         public void Remove_client_side_event_serialized()
         {
-            upload.ClientEvents["remove"] = new ClientEvent() { HandlerName = "removeHandler" };
+            upload.Events["remove"] = new ClientEvent() { HandlerName = "removeHandler" };
             upload.WriteInitializationScript(textWriter.Object);
 
             output.ShouldContain("{remove:removeHandler}");

@@ -18,7 +18,7 @@
             .Remove("Remove", "Upload")
             .AutoUpload(true)
         )
-        .ClientEvents(events => events
+        .Events(events => events
             .Select("onSelect")
             .Upload("onUpload")
             .Success("onSuccess")

@@ -181,17 +181,17 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Window()
         ///             .Name("Window")
-        ///             .ClientEvents(events =>
-        ///                 events.OnOpen("onOpen").OnClose("onClose")
+        ///             .Events(events =>
+        ///                 events.Open("onOpen").Close("onClose")
         ///             )
         /// %&gt;
         /// </code>
         /// </example>
-        public WindowBuilder ClientEvents(Action<WindowClientEventsBuilder> clientEventsAction)
+        public WindowBuilder Events(Action<WindowEventBuilder> clientEventsAction)
         {
             Guard.IsNotNull(clientEventsAction, "clientEventsAction");
 
-            clientEventsAction(new WindowClientEventsBuilder(Component.Events));
+            clientEventsAction(new WindowEventBuilder(Component.Events));
 
             return this;
         }
