@@ -30,9 +30,9 @@ namespace Kendo.Mvc.UI.Html
         {
             var div = CreateWrapper(htmlAttributes);
 
-            AppendTopToolBar(div, functionalData);
-
             AppendGroupHeader(div, functionalData);
+
+            AppendTopToolBar(div, functionalData);            
 
             AppendTopPager(div, functionalData);
 
