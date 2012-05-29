@@ -8,7 +8,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
 
     public class UploadClientEventsBuilderTests
     {
-        private readonly UploadClientEventsBuilder builder;
+        private readonly UploadEventBuilder builder;
         private readonly IDictionary<string, object> clientEvents;
         private readonly Action emptyAction;
         private readonly Func<object, object> nullFunc;
@@ -17,7 +17,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
         public UploadClientEventsBuilderTests()
         {
             clientEvents = new Dictionary<string, object>();
-            builder = new UploadClientEventsBuilder(clientEvents);
+            builder = new UploadEventBuilder(clientEvents);
 
             emptyAction = () => { };
             nullFunc = (o) => null;
@@ -34,7 +34,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
         [Fact]
         public void Select_with_Func_should_return_builder()
         {
-            builder.Select(nullFunc).ShouldBeType<UploadClientEventsBuilder>();
+            builder.Select(nullFunc).ShouldBeType<UploadEventBuilder>();
         }
 
         [Fact]
@@ -47,7 +47,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
         [Fact]
         public void Select_with_string_should_return_builder()
         {
-            builder.Select(handlerName).ShouldBeType<UploadClientEventsBuilder>();
+            builder.Select(handlerName).ShouldBeType<UploadEventBuilder>();
         }
 
         [Fact]
@@ -60,7 +60,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
         [Fact]
         public void Upload_with_Func_should_return_builder()
         {
-            builder.Upload(nullFunc).ShouldBeType<UploadClientEventsBuilder>();
+            builder.Upload(nullFunc).ShouldBeType<UploadEventBuilder>();
         }
 
         [Fact]
@@ -73,7 +73,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
         [Fact]
         public void Upload_with_string_should_return_builder()
         {
-            builder.Upload(handlerName).ShouldBeType<UploadClientEventsBuilder>();
+            builder.Upload(handlerName).ShouldBeType<UploadEventBuilder>();
         }
 
         [Fact]
@@ -86,7 +86,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
         [Fact]
         public void Success_with_Func_should_return_builder()
         {
-            builder.Success(nullFunc).ShouldBeType<UploadClientEventsBuilder>();
+            builder.Success(nullFunc).ShouldBeType<UploadEventBuilder>();
         }
 
         [Fact]
@@ -99,7 +99,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
         [Fact]
         public void Success_with_string_should_return_builder()
         {
-            builder.Success(handlerName).ShouldBeType<UploadClientEventsBuilder>();
+            builder.Success(handlerName).ShouldBeType<UploadEventBuilder>();
         }
 
         [Fact]
@@ -112,7 +112,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
         [Fact]
         public void Error_with_Func_should_return_builder()
         {
-            builder.Error(nullFunc).ShouldBeType<UploadClientEventsBuilder>();
+            builder.Error(nullFunc).ShouldBeType<UploadEventBuilder>();
         }
 
         [Fact]
@@ -125,7 +125,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
         [Fact]
         public void Error_with_string_should_return_builder()
         {
-            builder.Error(handlerName).ShouldBeType<UploadClientEventsBuilder>();
+            builder.Error(handlerName).ShouldBeType<UploadEventBuilder>();
         }
 
         [Fact]
@@ -138,7 +138,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
         [Fact]
         public void Complete_with_Func_should_return_builder()
         {
-            builder.Complete(nullFunc).ShouldBeType<UploadClientEventsBuilder>();
+            builder.Complete(nullFunc).ShouldBeType<UploadEventBuilder>();
         }
 
         [Fact]
@@ -151,7 +151,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
         [Fact]
         public void Complete_with_string_should_return_builder()
         {
-            builder.Complete(handlerName).ShouldBeType<UploadClientEventsBuilder>();
+            builder.Complete(handlerName).ShouldBeType<UploadEventBuilder>();
         }
 
         [Fact]
@@ -164,7 +164,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
         [Fact]
         public void Cancel_with_Func_should_return_builder()
         {
-            builder.Cancel(nullFunc).ShouldBeType<UploadClientEventsBuilder>();
+            builder.Cancel(nullFunc).ShouldBeType<UploadEventBuilder>();
         }
 
         [Fact]
@@ -177,7 +177,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
         [Fact]
         public void Cancel_with_string_should_return_builder()
         {
-            builder.Cancel(handlerName).ShouldBeType<UploadClientEventsBuilder>();
+            builder.Cancel(handlerName).ShouldBeType<UploadEventBuilder>();
         }
 
         [Fact]
@@ -190,7 +190,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
         [Fact]
         public void Remove_with_Func_should_return_builder()
         {
-            builder.Remove(nullFunc).ShouldBeType<UploadClientEventsBuilder>();
+            builder.Remove(nullFunc).ShouldBeType<UploadEventBuilder>();
         }
 
         [Fact]
@@ -203,7 +203,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
         [Fact]
         public void Remove_with_string_should_return_builder()
         {
-            builder.Remove(handlerName).ShouldBeType<UploadClientEventsBuilder>();
+            builder.Remove(handlerName).ShouldBeType<UploadEventBuilder>();
         }
     }
 }

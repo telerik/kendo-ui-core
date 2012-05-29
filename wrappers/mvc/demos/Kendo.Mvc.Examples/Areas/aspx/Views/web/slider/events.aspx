@@ -12,7 +12,7 @@
             .SmallStep(1)
             .LargeStep(10)
             .Value(18)
-            .ClientEvents(events => events
+            .Events(events => events
                 .Slide("sliderSlide")
                 .Change("sliderChange"))
             .HtmlAttributes(new { @class = "temperature" })
@@ -24,7 +24,7 @@
              .Max(30)
              .SmallStep(1)
              .LargeStep(10)
-             .ClientEvents(events => events
+             .Events(events => events
                  .Slide("rangeSliderSlide")
                  .Change("rangeSliderChange"))
              .HtmlAttributes(new { @class = "humidity" })

@@ -26,17 +26,17 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Chart()
         ///             .Name("Chart")
-        ///             .ClientEvents(events => events
+        ///             .Events(events => events
         ///                 .OnLoad("onLoad")
         ///             )
         /// %&gt;
         /// </code>
         /// </example>
-        public ChartBuilder<T> ClientEvents(Action<ChartClientEventsBuilder> configurator)
+        public ChartBuilder<T> Events(Action<ChartEventBuilder> configurator)
         {
             Guard.IsNotNull(configurator, "configurator");
 
-            configurator(new ChartClientEventsBuilder(Component.ClientEvents));
+            configurator(new ChartEventBuilder(Component.Events));
 
             return this;
         }

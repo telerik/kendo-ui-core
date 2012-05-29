@@ -255,7 +255,7 @@
     <Compile Include="UI\Chart\Fluent\ChartTitleBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartLegendBuilder.cs" />
     <Compile Include="UI\Chart\IChart.cs" />
-    <Compile Include="UI\Chart\Fluent\ChartClientEventsBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartEventBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartSeriesBuilderBase.cs" />
     <Compile Include="UI\Chart\Fluent\ChartSeriesFactory.cs" />
@@ -902,8 +902,7 @@
     <Compile Include="UI\NavigationItemLinkRenderer.cs" />
     <Compile Include="UI\PanelBar\PanelBar.cs" />
     <Compile Include="UI\PanelBar\Fluent\PanelBarBuilder.cs" />
-    <Compile Include="UI\PanelBar\PanelBarClientEvents.cs" />
-    <Compile Include="UI\PanelBar\Fluent\PanelBarClientEventsBuilder.cs" />
+    <Compile Include="UI\PanelBar\Fluent\PanelBarEventBuilder.cs" />
     <Compile Include="UI\PanelBar\PanelBarExpandMode.cs" />
     <Compile Include="UI\PanelBar\PanelBarItem.cs" />
     <Compile Include="UI\PanelBar\Fluent\PanelBarItemBuilder.cs" />
@@ -933,7 +932,7 @@
     <Compile Include="UI\UiPrimitives.cs" />
     <Compile Include="UI\Upload\Fluent\UploadAsyncSettingsBuilder.cs" />
     <Compile Include="UI\Upload\Fluent\UploadBuilder.cs" />
-    <Compile Include="UI\Upload\Fluent\UploadClientEventsBuilder.cs" />
+    <Compile Include="UI\Upload\Fluent\UploadEventBuilder.cs" />
     <Compile Include="UI\Upload\Html\UploadHtmlBuilder.cs" />
     <Compile Include="UI\Upload\Settings\IUploadAsyncSettings.cs" />
     <Compile Include="UI\Upload\Settings\UploadAsyncSettings.cs" />

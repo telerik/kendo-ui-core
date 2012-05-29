@@ -337,7 +337,6 @@
     <Compile Include="UI\NavigationItemImageRendererTests.cs" />
     <Compile Include="UI\NavigationItemTests.cs" />
     <Compile Include="UI\PanelBar\PanelBarBuilderTests.cs" />
-    <Compile Include="UI\PanelBar\PanelBarClientEventsBuilderTests.cs" />
     <Compile Include="UI\PanelBar\PanelBarItemBuilderTests.cs" />
     <Compile Include="UI\PanelBar\PanelBarItemFactoryTests.cs" />
     <Compile Include="UI\PanelBar\PanelBarHtmlBuilderTests.cs" />

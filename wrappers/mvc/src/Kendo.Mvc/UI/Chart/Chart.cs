@@ -5,10 +5,8 @@ namespace Kendo.Mvc.UI
     using System.Web.Mvc;
     using System.Web.UI;
     using Kendo.Mvc.Extensions;
-    using Kendo.Mvc.UI.Html;
     using Kendo.Mvc.Infrastructure;
-    using System.Web.Script.Serialization;
-
+    using Kendo.Mvc.UI.Html;
     /// <summary>
     /// Telerik Chart for ASP.NET MVC is a view component for rendering charts.
     /// For more information, see the online documentation.
@@ -24,7 +22,6 @@ namespace Kendo.Mvc.UI
         public Chart(ViewContext viewContext, IJavaScriptInitializer initializer, IUrlGenerator urlGenerator)
             : base(viewContext, initializer)
         {
-            ClientEvents = new Dictionary<string, object>();
             UrlGenerator = urlGenerator;
             Title = new ChartTitle();
             ChartArea = new ChartArea();
@@ -50,15 +47,6 @@ namespace Kendo.Mvc.UI
         {
             get;
             set;
-        }
-
-        /// <summary>
-        /// Represents the client-side event handlers for the component
-        /// </summary>
-        public IDictionary<string, object> ClientEvents
-        {
-            get;
-            private set;
         }
 
         /// <summary>
@@ -239,7 +227,7 @@ namespace Kendo.Mvc.UI
         /// <param name="writer">The writer object.</param>
         public override void WriteInitializationScript(TextWriter writer)
         {
-            var options = new Dictionary<string, object>(ClientEvents);
+            var options = new Dictionary<string, object>(Events);
 
             SerializeData("chartArea", ChartArea.CreateSerializer().Serialize(), options);
             SerializeData("plotArea", PlotArea.CreateSerializer().Serialize(), options);

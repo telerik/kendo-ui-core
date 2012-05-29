@@ -129,16 +129,16 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         /// &lt;%= Html.Kendo().RangeSlider()
         ///            .Name("RangeSlider")
-        ///            .ClientEvents(events =>
+        ///            .Events(events =>
         ///                events.OnChange("onChange"))
         /// %&gt;
         /// </code>
         /// </example>
-        public RangeSliderBuilder<T> ClientEvents(Action<RangeSliderEventBuilder> events)
+        public RangeSliderBuilder<T> Events(Action<RangeSliderEventBuilder> events)
         {
             Guard.IsNotNull(events, "events");
 
-            events(new RangeSliderEventBuilder(Component.ClientEvents));
+            events(new RangeSliderEventBuilder(Component.Events));
 
             return this;
         }

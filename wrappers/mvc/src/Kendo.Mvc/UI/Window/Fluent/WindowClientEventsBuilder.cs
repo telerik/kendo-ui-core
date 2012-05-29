@@ -2,15 +2,12 @@ namespace Kendo.Mvc.UI.Fluent
 {
     using System;
     using System.Collections.Generic;
-    using System.Web.Mvc;
-    using Infrastructure;
-
     /// <summary>
-    /// Defines the fluent interface for configuring the <see cref="Window.ClientEvents"/>.
+    /// Defines the fluent interface for configuring the <see cref="Window.Events"/>.
     /// </summary>
-    public class WindowClientEventsBuilder : EventBuilder
+    public class WindowEventBuilder : EventBuilder
     {
-        public WindowClientEventsBuilder(IDictionary<string, object> events)
+        public WindowEventBuilder(IDictionary<string, object> events)
             : base(events)
         {
         }
@@ -21,16 +18,14 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Window()
+        ///  &lt;%= Html.Kendo().Window()
         ///             .Name("Window")
-        ///             .ClientEvents(events => events.Open("onOpen"))
+        ///             .Events(events => events.Open("onOpen"))
         /// %&gt;
         /// </code>
         /// </example>
-        public WindowClientEventsBuilder Open(string handler)
+        public WindowEventBuilder Open(string handler)
         {
-            Guard.IsNotNullOrEmpty(handler, "handler");
-
             Handler("open", handler);            
 
             return this;
@@ -42,16 +37,14 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Window()
+        ///  &lt;%= Html.Kendo().Window()
         ///             .Name("Window")
-        ///             .ClientEvents(events => events.Open("onOpen"))
+        ///             .Events(events => events.Open("onOpen"))
         /// %&gt;
         /// </code>
         /// </example>
-        public WindowClientEventsBuilder Open(Func<object, object> handler)
+        public WindowEventBuilder Open(Func<object, object> handler)
         {
-            Guard.IsNotNull(handler, "handler");
-
             Handler("open", handler);
 
             return this;
@@ -63,16 +56,14 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Window()
+        ///  &lt;%= Html.Kendo().Window()
         ///             .Name("Window")
-        ///             .ClientEvents(events => events.Activate("onActivate"))
+        ///             .Events(events => events.Activate("onActivate"))
         /// %&gt;
         /// </code>
         /// </example>
-        public WindowClientEventsBuilder Activate(string handler)
+        public WindowEventBuilder Activate(string handler)
         {
-            Guard.IsNotNullOrEmpty(handler, "handler");
-
             Handler("activate", handler);
 
             return this;
@@ -84,16 +75,14 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Window()
+        ///  &lt;%= Html.Kendo().Window()
         ///             .Name("Window")
-        ///             .ClientEvents(events => events.Activate("onActivate"))
+        ///             .Events(events => events.Activate("onActivate"))
         /// %&gt;
         /// </code>
         /// </example>
-        public WindowClientEventsBuilder Activate(Func<object, object> handler)
+        public WindowEventBuilder Activate(Func<object, object> handler)
         {
-            Guard.IsNotNull(handler, "handler");
-
             Handler("activate", handler);
 
             return this;
@@ -105,16 +94,14 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Window()
+        ///  &lt;%= Html.Kendo().Window()
         ///             .Name("Window")
-        ///             .ClientEvents(events => events.Deactivate("onDeactivate"))
+        ///             .Events(events => events.Deactivate("onDeactivate"))
         /// %&gt;
         /// </code>
         /// </example>
-        public WindowClientEventsBuilder Deactivate(string handler)
+        public WindowEventBuilder Deactivate(string handler)
         {
-            Guard.IsNotNullOrEmpty(handler, "handler");
-
             Handler("deactivate", handler);
            
             return this;
@@ -126,16 +113,14 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Window()
+        ///  &lt;%= Html.Kendo().Window()
         ///             .Name("Window")
-        ///             .ClientEvents(events => events.Deactivate("onDeactivate"))
+        ///             .Events(events => events.Deactivate("onDeactivate"))
         /// %&gt;
         /// </code>
         /// </example>
-        public WindowClientEventsBuilder Deactivate(Func<object, object> handler)
+        public WindowEventBuilder Deactivate(Func<object, object> handler)
         {
-            Guard.IsNotNull(handler, "handler");
-
             Handler("deactivate", handler);
 
             return this;
@@ -147,16 +132,14 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Window()
+        ///  &lt;%= Html.Kendo().Window()
         ///             .Name("Window")
-        ///             .ClientEvents(events => events.Close("onClose"))
+        ///             .Events(events => events.Close("onClose"))
         /// %&gt;
         /// </code>
         /// </example>
-        public WindowClientEventsBuilder Close(string handler)
+        public WindowEventBuilder Close(string handler)
         {
-            Guard.IsNotNullOrEmpty(handler, "handler");
-
             Handler("close", handler);
             
             return this;
@@ -168,16 +151,14 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Window()
+        ///  &lt;%= Html.Kendo().Window()
         ///             .Name("Window")
-        ///             .ClientEvents(events => events.Close("onClose"))
+        ///             .Events(events => events.Close("onClose"))
         /// %&gt;
         /// </code>
         /// </example>
-        public WindowClientEventsBuilder Close(Func<object, object> handler)
+        public WindowEventBuilder Close(Func<object, object> handler)
         {
-            Guard.IsNotNull(handler, "handler");
-
             Handler("close", handler);
 
             return this;
@@ -189,16 +170,14 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Window()
+        ///  &lt;%= Html.Kendo().Window()
         ///             .Name("Window")
-        ///             .ClientEvents(events => events.DragStart("onDragStart"))
+        ///             .Events(events => events.DragStart("onDragStart"))
         /// %&gt;
         /// </code>
         /// </example>
-        public WindowClientEventsBuilder DragStart(string handler)
+        public WindowEventBuilder DragStart(string handler)
         {
-            Guard.IsNotNullOrEmpty(handler, "handler");
-
             Handler("dragstart", handler);            
 
             return this;
@@ -210,16 +189,14 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Window()
+        ///  &lt;%= Html.Kendo().Window()
         ///             .Name("Window")
-        ///             .ClientEvents(events => events.DragStart("onDragStart"))
+        ///             .Events(events => events.DragStart("onDragStart"))
         /// %&gt;
         /// </code>
         /// </example>
-        public WindowClientEventsBuilder DragStart(Func<object, object> handler)
+        public WindowEventBuilder DragStart(Func<object, object> handler)
         {
-            Guard.IsNotNull(handler, "handler");
-
             Handler("dragstart", handler);
 
             return this;
@@ -231,16 +208,14 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Window()
+        ///  &lt;%= Html.Kendo().Window()
         ///             .Name("Window")
-        ///             .ClientEvents(events => events.DragEnd("onDragEnd"))
+        ///             .Events(events => events.DragEnd("onDragEnd"))
         /// %&gt;
         /// </code>
         /// </example>
-        public WindowClientEventsBuilder DragEnd(string handler)
+        public WindowEventBuilder DragEnd(string handler)
         {
-            Guard.IsNotNullOrEmpty(handler, "handler");
-
             Handler("dragend", handler);
 
             return this;
@@ -252,16 +227,14 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Window()
+        ///  &lt;%= Html.Kendo().Window()
         ///             .Name("Window")
-        ///             .ClientEvents(events => events.DragEnd("onDragEnd"))
+        ///             .Events(events => events.DragEnd("onDragEnd"))
         /// %&gt;
         /// </code>
         /// </example>
-        public WindowClientEventsBuilder DragEnd(Func<object, object> handler)
+        public WindowEventBuilder DragEnd(Func<object, object> handler)
         {
-            Guard.IsNotNull(handler, "handler");
-
             Handler("dragend", handler);
 
             return this;
@@ -273,16 +246,14 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Window()
+        ///  &lt;%= Html.Kendo().Window()
         ///             .Name("Window")
-        ///             .ClientEvents(events => events.Resize("onResize"))
+        ///             .Events(events => events.Resize("onResize"))
         /// %&gt;
         /// </code>
         /// </example>
-        public WindowClientEventsBuilder Resize(string handler)
+        public WindowEventBuilder Resize(string handler)
         {
-            Guard.IsNotNullOrEmpty(handler, "handler");
-
             Handler("resize", handler);
             return this;
         }
@@ -293,16 +264,14 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Window()
+        ///  &lt;%= Html.Kendo().Window()
         ///             .Name("Window")
-        ///             .ClientEvents(events => events.Resize("onResize"))
+        ///             .Events(events => events.Resize("onResize"))
         /// %&gt;
         /// </code>
         /// </example>
-        public WindowClientEventsBuilder Resize(Func<object, object> handler)
+        public WindowEventBuilder Resize(Func<object, object> handler)
         {
-            Guard.IsNotNull(handler, "handler");
-
             Handler("resize", handler);
             return this;
         }  
@@ -313,16 +282,14 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Window()
+        ///  &lt;%= Html.Kendo().Window()
         ///             .Name("Window")
-        ///             .ClientEvents(events => events.Refresh("onRefresh"))
+        ///             .Events(events => events.Refresh("onRefresh"))
         /// %&gt;
         /// </code>
         /// </example>
-        public WindowClientEventsBuilder Refresh(string handler)
+        public WindowEventBuilder Refresh(string handler)
         {
-            Guard.IsNotNullOrEmpty(handler, "handler");
-
             Handler("refresh", handler);
 
             return this;
@@ -334,16 +301,14 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Window()
+        ///  &lt;%= Html.Kendo().Window()
         ///             .Name("Window")
-        ///             .ClientEvents(events => events.Refresh("onRefresh"))
+        ///             .Events(events => events.Refresh("onRefresh"))
         /// %&gt;
         /// </code>
         /// </example>
-        public WindowClientEventsBuilder Refresh(Func<object, object> handler)
+        public WindowEventBuilder Refresh(Func<object, object> handler)
         {
-            Guard.IsNotNull(handler, "handler");
-
             Handler("refresh", handler);
 
             return this;
@@ -355,16 +320,14 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Window()
+        ///  &lt;%= Html.Kendo().Window()
         ///             .Name("Window")
-        ///             .ClientEvents(events => events.Error("onError"))
+        ///             .Events(events => events.Error("onError"))
         /// %&gt;
         /// </code>
         /// </example>
-        public WindowClientEventsBuilder Error(string handler)
+        public WindowEventBuilder Error(string handler)
         {
-            Guard.IsNotNullOrEmpty(handler, "handler");
-
             Handler("refresh", handler);
 
             return this;
@@ -376,16 +339,14 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Window()
+        ///  &lt;%= Html.Kendo().Window()
         ///             .Name("Window")
-        ///             .ClientEvents(events => events.Error("onError"))
+        ///             .Events(events => events.Error("onError"))
         /// %&gt;
         /// </code>
         /// </example>
-        public WindowClientEventsBuilder Error(Func<object, object> handler)
+        public WindowEventBuilder Error(Func<object, object> handler)
         {
-            Guard.IsNotNull(handler, "handler");
-
             Handler("refresh", handler);
 
             return this;

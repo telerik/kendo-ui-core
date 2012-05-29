@@ -30,7 +30,7 @@ namespace Kendo.Mvc.UI
         ///  &lt;%= Html.Telerik().Calendar()
         ///             .Name("Calendar")
         ///             .Events(events =>
-        ///                 events.OnLoad("onLoad").OnSelect("onSelect")
+        ///                 events.OnLoad("onLoad").Select("onSelect")
         ///             )
         /// %&gt;
         /// </code>

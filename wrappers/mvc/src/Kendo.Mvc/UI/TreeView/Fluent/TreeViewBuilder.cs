@@ -54,7 +54,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().TreeView()
         ///             .Name("TreeView")
-        ///             .ClientEvents(events =>
+        ///             .Events(events =>
         ///                 .OnDataBinding("onDataBinding")
         ///                 .OnItemDataBound("onItemDataBound")
         ///             )

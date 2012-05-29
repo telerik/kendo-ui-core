@@ -1,13 +1,13 @@
 @(Html.Kendo().PanelBar()
     .Name("panelbar")
     .ExpandMode(PanelBarExpandMode.Single)
-    .ClientEvents(events => events
-        .OnSelect("select")
-        .OnExpand("expand")
-        .OnCollapse("collapse")
-        .OnActivate("activate")
-        .OnContentLoad("contentLoad")
-        .OnError("error")
+    .Events(events => events
+        .Select("select")
+        .Expand("expand")
+        .Collapse("collapse")
+        .Activate("activate")
+        .ContentLoad("contentLoad")
+        .Error("error")
     )
     .HtmlAttributes(new { style = "width: 250px; margin: 20px auto;" })
     .Items(panelbar =>

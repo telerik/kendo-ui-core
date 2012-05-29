@@ -31,22 +31,12 @@ namespace Kendo.Mvc.UI
                         IUrlGenerator urlGenerator)
         : base(viewContext, initializer)
         {
-            ClientEvents = new Dictionary<string, object>();
             Enabled = true;
             Multiple = true;
             ShowFileList = true;
             Async = new UploadAsyncSettings(this);
 
             UrlGenerator = urlGenerator;
-        }
-
-        /// <summary>
-        /// Represents the client-side event handlers for the component
-        /// </summary>
-        public IDictionary<string, object> ClientEvents
-        {
-            get;
-            private set;
         }
 
         /// <summary>
@@ -110,7 +100,7 @@ namespace Kendo.Mvc.UI
         /// <param name="writer">The writer object.</param>
         public override void WriteInitializationScript(TextWriter writer)
         {
-            var options = new Dictionary<string, object>(ClientEvents);
+            var options = new Dictionary<string, object>(Events);
 
             if (!Enabled)
             {
