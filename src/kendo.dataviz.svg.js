@@ -100,7 +100,7 @@
 
             view.setupAnimations();
 
-            renderSVG(container, view.render());
+            dataviz.renderSVG(container, view.render());
             viewElement = container.firstChild.nextSibling;
             view.alignToScreen(viewElement);
 
@@ -120,7 +120,7 @@
             var container = doc.createElement("div"),
                 domElement;
 
-            renderSVG(container,
+            dataviz.renderSVG(container,
                 "<?xml version='1.0' ?>" +
                 "<svg xmlns='" + SVG_NS + "' version='1.1'>" +
                 element.render() +
@@ -874,6 +874,7 @@
 
     // Exports ================================================================
     deepExtend(dataviz, {
+        renderSVG: renderSVG,
         SVGCircle: SVGCircle,
         SVGClipAnimationDecorator: SVGClipAnimationDecorator,
         SVGClipPath: SVGClipPath,
