@@ -506,6 +506,7 @@
                 dataSource.sync();
                 ok(!dataSource._destroyed.length);
             });
+
             test("deleted items are synced after other record changes are reverted", 2, function() {
                 dataSource = new kendo.data.DataSource({
                     transport: {
@@ -525,6 +526,22 @@
                 dataSource.cancelChanges(dataSource.get(2));
                 dataSource.sync();
                 equal(dataSource._destroyed.length, 1);
+            });
+
+            test("error event is raised if custom errors are returned", 1, function() {
+                setup({
+                    data: [ { id: 1, foo: "1" } ],
+                    schema: { model: { id: "id", fields: { foo: { type: "number" } } } }
+                });
+                stubTransport("create", { errors: "error" });
+
+                dataSource.add({});
+
+                dataSource.bind("error", function(e) {
+                    equal(e.errors, "error");
+                });
+
+                dataSource.sync();
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
