@@ -40,6 +40,25 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Sets the name of the stack that this series belongs to. Each unique name creates a new stack.
+        /// </summary>
+        /// <param name="stacked">The name of the stack.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Chart(Model)
+        ///             .Name("Chart")
+        ///             .Series(series => series.Bar(s => s.Sales).Stack("Female"))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartBarSeriesBuilder<T> Stack(string stackName)
+        {
+            Series.StackName = stackName;
+
+            return this;
+        }
+
+        /// <summary>
         /// Set distance between category clusters. 
         /// <param name="gap">
         /// A value of 1 means that there is a total of 1 column width / bar height between categories.
