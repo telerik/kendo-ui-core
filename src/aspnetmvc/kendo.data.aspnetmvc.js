@@ -55,41 +55,34 @@
                    models = options.models;
 
                for (var i = 0; i < models.length; i++) {
-                   var item = convert(models[i]),
-                       value,
-                       key;
-
-                   for (var member in item) {
-                       key = prefix + "[" + i + "]." + member;
-                       value = item[member];
-
-                       if ($.isPlainObject(value)) {
-                           flatten(result, value, key);
-                       }
-                       else {
-                           result[key] = value;
-                       }
-                   }
+                   serializeItem(result, models[i], prefix + "[" + i + "].");
                }
            } else if (options) {
-               var item = convert(options);
-
-               for (var member in item) {
-                   value = item[member];
-
-                   if ($.isPlainObject(value)) {
-                       flatten(result, value, member);
-                   }
-                   else {
-                       result[member] = value;
-                   }
-               }
+               serializeItem(result, options, "");
            }
 
            delete options.models;
        }
 
        return $.extend(result, options);
+    }
+
+    function serializeItem(result, item, prefix) {
+        var item = convert(item),
+            value,
+            key;
+
+        for (var member in item) {
+            key = prefix + member;
+            value = item[member];
+
+            if ($.isPlainObject(value)) {
+                flatten(result, value, key);
+            }
+            else {
+                result[key] = value;
+            }
+        }
     }
 
     function convert(values) {
