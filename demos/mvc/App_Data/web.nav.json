@@ -23,8 +23,19 @@
                     "url": "autocomplete/index.html"
                 },
                 {
+                    "packages": [ "!mvc" ],
                     "text": "Binding to remote data",
                     "url": "autocomplete/remotedatasource.html"
+                },
+                {
+                    "packages": [ "mvc" ],
+                    "text": "Server filtering",
+                    "url": "autocomplete/serverfiltering.html"
+                },
+                {
+                    "packages": [ "mvc" ],
+                    "text": "Client filtering",
+                    "url": "autocomplete/clientfiltering.html"
                 },
                 {
                     "text": "Customizing templates",
@@ -75,14 +86,27 @@
                     "url": "combobox/index.html"
                 },
                 {
+                    "packages": [ "!mvc" ],
                     "text": "Binding to remote data",
                     "url": "combobox/remotedatasource.html"
                 },
+                {
+                    "packages": [ "mvc" ],
+                    "text": "Server filtering",
+                    "url": "combobox/serverfiltering.html"
+                },
+                {
+                    "packages": [ "mvc" ],
+                    "text": "Client filtering",
+                    "url": "combobox/clientfiltering.html"
+                },
+
                 {
                     "text": "Customizing templates",
                     "url": "combobox/template.html"
                 },
                 {
+                    "packages": [ "!mvc" ],
                     "text": "Cascading ComboBox",
                     "url": "combobox/cascadingcombobox.html"
                 },
@@ -171,6 +195,7 @@
                     "url": "dropdownlist/template.html"
                 },
                 {
+                    "packages": [ "!mvc" ],
                     "text": "Cascading DropDownList",
                     "url": "dropdownlist/cascadingdropdownlist.html"
                 },
@@ -348,10 +373,27 @@
                     "url": "menu/images.html"
                 },
                 {
+                    "packages": [ "!mvc" ],
                     "text": "Direction",
                     "url": "menu/direction.html"
                 },
                 {
+                    "packages": [ "mvc" ],
+                    "text": "Orientation",
+                    "url": "menu/orientation.html"
+                },
+                {
+                    "packages": [ "mvc" ],
+                    "text": "SiteMapBinding",
+                    "url": "menu/sitemapbinding.html"
+                },
+                {
+                    "packages": [ "mvc" ],
+                    "text": "ModelBinding",
+                    "url": "menu/modelbinding.html"
+                },
+                {
+                    "packages": [ "!mvc" ],
                     "text": "Animation effects",
                     "url": "menu/animation.html"
                 },
@@ -742,6 +784,7 @@
             "name": "globalization",
             "documentation": "framework/globalization",
             "spriteCssClass": "globalizationIcon",
+            "packages": [ "online" ],
             "items": [
                 {
                     "text": "Basic usage",
@@ -753,6 +796,7 @@
             "text": "Integration",
             "name": "integration",
             "spriteCssClass": "integrationIcon",
+            "packages": [ "online" ],
             "items": [
                 {
                     "text": "Using KnockoutJS with Kendo",
