@@ -12,7 +12,7 @@ namespace Kendo.Mvc.UI.Html
 
         protected override void ApplyDecoration(IHtmlNode htmlNode)
         {
-            htmlNode.AddClass("t-state-selected");
+            htmlNode.AddClass(UIPrimitives.SelectedState);
         }
     }
 }

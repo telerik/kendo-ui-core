@@ -436,6 +436,8 @@
     <Compile Include="UI\Grid\GridGroupAggregateResult.cs" />
     <Compile Include="UI\Grid\GridActionResultFactory.cs" />
     <Compile Include="UI\Grid\GridOperationMode.cs" />
+    <Compile Include="UI\Grid\GridSelectionMode.cs" />
+    <Compile Include="UI\Grid\GridSelectionType.cs" />
     <Compile Include="UI\Grid\Html\GridForeignKeyDataCellBuilder.cs" />
     <Compile Include="UI\Grid\Html\GridForeignKeyEditorForCellBuilder.cs" />
     <Compile Include="UI\Grid\Html\GridPagerPageSizeSection.cs" />
