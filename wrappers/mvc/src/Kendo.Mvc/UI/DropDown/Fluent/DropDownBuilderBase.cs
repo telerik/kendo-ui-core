@@ -20,22 +20,22 @@ namespace Kendo.Mvc.UI.Fluent
         ///// <summary>
         ///// Configures the client-side events.
         ///// </summary>
-        ///// <param name="clientEventsAction">The client events action.</param>
+        ///// <param name="EventsAction">The client events action.</param>
         ///// <example>
         ///// <code lang="CS">
         /////  &lt;%= Html.Telerik().DropDownList()
         /////             .Name("DropDownList")
-        /////             .ClientEvents(events =>
+        /////             .Events(events =>
         /////                 events.OnLoad("onLoad")
         /////             )
         ///// %&gt;
         ///// </code>
         ///// </example>
-        //public TDropDownBuilder ClientEvents(Action<DropDownClientEventsBuilder> clientEventsAction)
+        //public TDropDownBuilder Events(Action<DropDownEventsBuilder> EventsAction)
         //{
-        //    Guard.IsNotNull(clientEventsAction, "clientEventsAction");
+        //    Guard.IsNotNull(EventsAction, "EventsAction");
 
-        //    clientEventsAction(new DropDownClientEventsBuilder(Component.ClientEvents));
+        //    EventsAction(new DropDownEventsBuilder(Component.Events));
 
         //    return this as TDropDownBuilder;
         //}

@@ -15,8 +15,6 @@ namespace Kendo.Mvc.UI
         {
             Animation = new PopupAnimation();
 
-            Events = new Dictionary<string, object>();
-
             DataSource = new DataSource();
 
             UrlGenerator = urlGenerator;
@@ -32,13 +30,7 @@ namespace Kendo.Mvc.UI
             get;
             private set;
         }
-
-        public IDictionary<string, object> Events
-        {
-            get;
-            private set;
-        }
-
+        
         public string DataTextField
         {
             get;

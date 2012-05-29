@@ -22,124 +22,6 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
-        /// Sets selected date.
-        /// </summary>
-        /// <param name="date">DateTime object represents the selected date.</param>
-        public CalendarBuilder Value(DateTime date)
-        {
-            Guard.IsNotNull(date, "date");
-
-            Component.Value = date;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Sets selected date.
-        /// </summary>
-        /// <param name="date">Date passed as string.</param>
-        public CalendarBuilder Value(string date)
-        {
-            Guard.IsNotNullOrEmpty(date, "date");
-
-            DateTime parsedDate;
-
-            if (DateTime.TryParse(date, out parsedDate))
-            {
-                Component.Value = parsedDate;
-            }
-            else
-            {
-                throw new ArgumentException(TextResource.StringNotCorrectDate);
-            }
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the smallest possible date, which user can choose.
-        /// </summary>
-        public CalendarBuilder MinDate(DateTime date)
-        {
-            Guard.IsNotNull(date, "date");
-
-            Component.MinDate = date;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the smallest possible date, which user can choose.
-        /// </summary>
-        public CalendarBuilder MinDate(string date)
-        {
-            Guard.IsNotNullOrEmpty(date, "date");
-
-            DateTime parsedDate;
-
-            if (DateTime.TryParse(date, out parsedDate))
-            {
-                Component.MinDate = parsedDate;
-            }
-            else
-            {
-                throw new ArgumentException(TextResource.StringNotCorrectDate);
-            }
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the biggest possible date, which user can choose.
-        /// </summary>
-        public CalendarBuilder MaxDate(DateTime date)
-        {
-            Guard.IsNotNull(date, "date");
-
-            Component.MaxDate = date;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the smallest possible date, which user can choose.
-        /// </summary>
-        public CalendarBuilder MaxDate(string date)
-        {
-            Guard.IsNotNullOrEmpty(date, "date");
-
-            DateTime parsedDate;
-
-            if (DateTime.TryParse(date, out parsedDate))
-            {
-                Component.MaxDate = parsedDate;
-            }
-            else
-            {
-                throw new ArgumentException(TextResource.StringNotCorrectDate);
-            }
-            return this;
-        }
-
-        /// <summary>
-        /// Enables the today button of the calendar. Today should be between min/max range to be shown.
-        /// </summary>
-        public CalendarBuilder TodayButton()
-        {
-            Component.TodayFormat = "D";
-
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the format and enables the today button of the calendar. Today should be between min/max range to be shown.
-        /// </summary>
-        public CalendarBuilder TodayButton(string format)
-        {
-            Component.TodayFormat = format;
-
-            return this;
-        }
-
-        /// <summary>
         /// Configures the client-side events.
         /// </summary>
         /// <param name="clientEventsAction">The client events action.</param>
@@ -147,29 +29,147 @@ namespace Kendo.Mvc.UI
         /// <code lang="CS">
         ///  &lt;%= Html.Telerik().Calendar()
         ///             .Name("Calendar")
-        ///             .ClientEvents(events =>
-        ///                 events.OnLoad("onLoad")
+        ///             .Events(events =>
+        ///                 events.OnLoad("onLoad").OnSelect("onSelect")
         ///             )
         /// %&gt;
         /// </code>
         /// </example>
-        public CalendarBuilder Events(Action<CalendarEventBuilder> configurator)
+        public CalendarBuilder Events(Action<CalendarEventBuilder> clientEventsAction)
         {
-            configurator(new CalendarEventBuilder(Component.Events));
+            clientEventsAction(new CalendarEventBuilder(Component.Events));
 
             return this;
         }
 
         /// <summary>
-        /// Configures the selection settings of the calendar.
+        /// Sets the date format, which will be used to parse and format the machine date.
         /// </summary>
-        /// <param name="selectionAction">SelectAction settings, which includes Action name and IEnumerable of DateTime objects.</param>
-        /// <returns></returns>
-        public CalendarBuilder Selection(Action<CalendarSelectionSettingsBuilder> selectionAction)
+        public CalendarBuilder Format(string format)
         {
-            Guard.IsNotNull(selectionAction, "selectionAction");
+            Component.Format = format;
 
-            selectionAction(new CalendarSelectionSettingsBuilder(Component.SelectionSettings, Component.ViewContext));
+            return this;
+        }
+        
+        public CalendarBuilder Footer(string footer)
+        {
+            Component.Footer = footer;
+
+            return this;
+        }
+
+        public CalendarBuilder Depth(CalendarView depth)
+        {
+            Component.Depth = depth.ToString().ToLower();
+
+            return this;
+        }
+
+        public CalendarBuilder Start(CalendarView start)
+        {
+            Component.Start = start.ToString().ToLower();
+
+            return this;
+        }
+
+        public CalendarBuilder MonthTemplate(string content)
+        {
+            Component.MonthTemplate.Content = content;
+
+            return this;
+        }
+
+        public CalendarBuilder MonthTemplate(Action<MonthTemplateBuilder> monthTemplateAction)
+        {
+            Guard.IsNotNull(monthTemplateAction, "clientEventsAction");
+
+            monthTemplateAction(new MonthTemplateBuilder(Component.MonthTemplate));
+
+            return this;
+        }
+                       
+        /// <summary>
+        /// Sets the minimal date, which can be selected in the calendar.
+        /// </summary>
+        public CalendarBuilder Min(string date)
+        {
+            DateTime parsedDate;
+
+            if (DateTime.TryParse(date, out parsedDate))
+            {
+                Component.Min = parsedDate;
+            }
+            else
+            {
+                throw new ArgumentException(TextResource.StringNotCorrectDate);
+            }
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the maximal date, which can be selected in the calendar.
+        /// </summary>
+        public CalendarBuilder Max(string date)
+        {
+            DateTime parsedDate;
+
+            if (DateTime.TryParse(date, out parsedDate))
+            {
+                Component.Max = parsedDate;
+            }
+            else
+            {
+                throw new ArgumentException(TextResource.StringNotCorrectDate);
+            }
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the minimal date, which can be selected in the calendar
+        /// </summary>
+        public CalendarBuilder Min(DateTime date)
+        {
+            Component.Min = date;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the maximal date, which can be selected in the calendar
+        /// </summary>
+        public CalendarBuilder Max(DateTime date)
+        {
+            Component.Max = date;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the value of the calendar
+        /// </summary>
+        public CalendarBuilder Value(DateTime? date)
+        {
+            Component.Value = date;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the value of the calendar
+        /// </summary>
+        public CalendarBuilder Value(string date)
+        {
+            DateTime result;
+
+            if (DateTime.TryParse(date, out result))
+            {
+                Component.Value = result;
+            }
+            else
+            {
+                Component.Value = null;
+            }
 
             return this;
         }

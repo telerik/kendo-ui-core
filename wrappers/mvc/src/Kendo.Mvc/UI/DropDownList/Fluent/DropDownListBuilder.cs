@@ -43,9 +43,9 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
-        public DropDownListBuilder Events(Action<DropDownBaseClientEventsBuilder> clientEventsAction)
+        public DropDownListBuilder Events(Action<DropDownEventBuilderBase> clientEventsAction)
         {
-            clientEventsAction(new DropDownBaseClientEventsBuilder(Component.Events));
+            clientEventsAction(new DropDownEventBuilderBase(Component.Events));
 
             return this;
         }

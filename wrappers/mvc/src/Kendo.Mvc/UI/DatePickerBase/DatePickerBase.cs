@@ -13,7 +13,6 @@ namespace Kendo.Mvc.UI
             ParseFormats = new List<string>();
             
             Animation = new PopupAnimation();
-            Events = new Dictionary<string, object>();
             
             Value = null;
             Enabled = true;
@@ -24,13 +23,7 @@ namespace Kendo.Mvc.UI
             get;
             private set;
         }
-
-        public IDictionary<string, object> Events
-        {
-            get;
-            private set;
-        }
-        
+                
         public string Format
         {
             get;

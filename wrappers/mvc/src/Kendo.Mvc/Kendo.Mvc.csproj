@@ -158,6 +158,7 @@
     <Compile Include="UI\AutoComplete\AutoComplete.cs" />
     <Compile Include="UI\AutoComplete\AutoCompleteHtmlBuilder.cs" />
     <Compile Include="UI\AutoComplete\Fluent\AutoCompleteBuilder.cs" />
+    <Compile Include="UI\Calendar\Fluent\CalendarEventBuilder.cs" />
     <Compile Include="UI\Chart\Axes\ChartAxisLabels.cs" />
     <Compile Include="UI\Chart\Axes\ChartCategoryAxis.cs" />
     <Compile Include="UI\Chart\Axes\ChartAxisBase.cs" />
@@ -321,15 +322,16 @@
     <Compile Include="UI\DataSource\ModelDescriptor.cs" />
     <Compile Include="UI\DataSource\Transport.cs" />
     <Compile Include="UI\Calendar\CalendarView.cs" />
-    <Compile Include="UI\DatePickerBase\Fluent\MonthTemplateBuilder.cs" />
+    <Compile Include="UI\Calendar\Fluent\MonthTemplateBuilder.cs" />
     <Compile Include="UI\DatePickerBase\Html\DatePickerHtmlBuilderBase.cs" />
     <Compile Include="UI\DatePickerBase\IPicker.cs" />
+    <Compile Include="UI\DropDown\Fluent\DropDownBuilderBase.cs" />
     <Compile Include="UI\Editor\Tools\EditorListTool.cs" />
     <Compile Include="UI\Effects\ExpandableAnimation.cs" />
     <Compile Include="UI\Effects\Fluent\ExpandableAnimationBuilder.cs" />
     <Compile Include="UI\Effects\PopupAnimation.cs" />
     <Compile Include="UI\Effects\Fluent\PopupAnimationBuilder.cs" />
-    <Compile Include="UI\DatePicker\MonthTemplate.cs" />
+    <Compile Include="UI\Calendar\MonthTemplate.cs" />
     <Compile Include="Infrastructure\JsonObject.cs" />
     <Compile Include="UI\EventBuilder.cs" />
     <Compile Include="UI\Gauge\Enums\GaugeRadialScaleLabelsPosition.cs" />
@@ -359,9 +361,8 @@
     <Compile Include="UI\DropDownList\DropDownList.cs" />
     <Compile Include="UI\DropDownList\DropDownListHtmlBuilder.cs" />
     <Compile Include="UI\DropDownList\Fluent\DropDownListBuilder.cs" />
-    <Compile Include="UI\DropDown\Fluent\DropDownBaseClientEventsBuilder.cs" />
+    <Compile Include="UI\DropDown\Fluent\DropDownEventBuilderBase.cs" />
     <Compile Include="UI\DropDown\Fluent\DropDownItemBuilder.cs" />
-    <Compile Include="UI\DropDown\Fluent\DropDownBuilderBase.cs" />
     <Compile Include="UI\DropDown\Fluent\DropDownItemFactory.cs" />
     <Compile Include="UI\Editor\Fluent\EditorCustomToolBuilder.cs" />
     <Compile Include="UI\Editor\IEditorTool.cs" />

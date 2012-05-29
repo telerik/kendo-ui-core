@@ -86,22 +86,22 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Configures the client-side events.
         /// </summary>
-        /// <param name="clientEventsAction">The client events action.</param>
+        /// <param name="EventsAction">The client events action.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Telerik().NumericTextBox()
         ///             .Name("NumericTextBox")
-        ///             .ClientEvents(events =>
+        ///             .Events(events =>
         ///                 events.OnLoad("onLoad").OnChange("onChange")
         ///             )
         /// %&gt;
         /// </code>
         /// </example>
-        public NumericTextBoxBuilder<T> Events(Action<NumericTextBoxClientEventsBuilder> clientEventsAction)
+        public NumericTextBoxBuilder<T> Events(Action<NumericTextBoxEventsBuilder> EventsAction)
         {
-            Guard.IsNotNull(clientEventsAction, "clientEventsAction");
+            Guard.IsNotNull(EventsAction, "EventsAction");
 
-            clientEventsAction(new NumericTextBoxClientEventsBuilder(Component.Events));
+            EventsAction(new NumericTextBoxEventsBuilder(Component.Events));
 
             return this;
         }
