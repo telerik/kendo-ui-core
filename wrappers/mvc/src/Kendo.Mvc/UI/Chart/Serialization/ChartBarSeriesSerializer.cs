@@ -20,7 +20,8 @@ namespace Kendo.Mvc.UI
 
             FluentDictionary.For(result)
                 .Add("type", series.Orientation == ChartSeriesOrientation.Horizontal ? "bar" : "column")
-                .Add("stack", series.Stacked, false)
+                .Add("stack", series.Stacked, () => series.Stacked == true && !series.StackName.HasValue())
+                .Add("stack", series.StackName, () => series.StackName.HasValue())
                 .Add("gap", series.Gap, () => series.Gap.HasValue)
                 .Add("spacing", series.Spacing, () => series.Spacing.HasValue)
                 .Add("field", series.Member, () => { return series.Data == null && series.Member != null; })

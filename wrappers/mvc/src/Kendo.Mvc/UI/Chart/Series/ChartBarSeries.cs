@@ -53,6 +53,15 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// The stack name that this series belongs to.
+        /// </summary>
+        public string StackName
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// The distance between category clusters.
         /// </summary>
         /// <value>

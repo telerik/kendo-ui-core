@@ -22,6 +22,25 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
+        public void Stack_should_return_builder()
+        {
+            builder.Stack(true).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void Stack_should_set_StackName()
+        {
+            builder.Stack("Female");
+            series.StackName.ShouldEqual("Female");
+        }
+
+        [Fact]
+        public void Stack_name_should_return_builder()
+        {
+            builder.Stack("Female").ShouldBeSameAs(builder);
+        }
+
+        [Fact]
         public void Gap_should_set_gap()
         {
             builder.Gap(1);
