@@ -527,7 +527,9 @@
 
             that._hideLoading();
 
+            that._shouldFixHeaders();
             that._style();
+
             that.trigger("dataBound", { ns: ui });
         },
 
@@ -573,57 +575,59 @@
                 offset,
                 header;
 
-            do {
-                headerPair = headers[i++];
-                if (!headerPair) {
-                    header = $("<div />");
-                    break;
-                }
-                offset = headerPair.offset;
-                header = headerPair.header;
-            } while (offset > scrollTop);
+            if (that.fixedHeaders) {
+                do {
+                    headerPair = headers[i++];
+                    if (!headerPair) {
+                        header = $("<div />");
+                        break;
+                    }
+                    offset = headerPair.offset;
+                    header = headerPair.header;
+                } while (offset > scrollTop);
 
-            if (that.currentHeader != i) {
-                scroller.fixedContainer.html(header.clone());
-                that.currentHeader = i;
+                if (that.currentHeader != i) {
+                    scroller.fixedContainer.html(header.clone());
+                    that.currentHeader = i;
+                }
             }
         },
 
-        _shouldFixHeader: function() {
-            return this.options.type === "group" && this.options.fixedHeaders;
+        _shouldFixHeaders: function() {
+            this.fixedHeaders = this.options.type === "group" && this.options.fixedHeaders;
         },
 
         _cacheHeaders: function() {
             var that = this,
                 headers = [];
 
-            that.element.find(".km-group-title").each(function(_, header) {
-                header = $(header);
-                headers.unshift({
-                    offset: header.position().top,
-                    header: header
+            if (that.fixedHeaders) {
+                that.element.find("." + GROUP_CLASS).each(function(_, header) {
+                    header = $(header);
+                    headers.unshift({
+                        offset: header.position().top,
+                        header: header
+                    });
                 });
-            });
 
-            that.headers = headers;
-            that._fixHeader({scrollTop: 0});
+                that.headers = headers;
+                that._fixHeader({scrollTop: 0});
+            }
         },
 
         _fixHeaders: function() {
             var that = this,
                 scroller = that._scroller();
 
+            that._shouldFixHeaders();
+
             if (scroller) {
                 kendo.onResize(function(){
-                    if (that._shouldFixHeader()) {
-                        that._cacheHeaders();
-                    }
+                    that._cacheHeaders();
                 });
 
                 scroller.bind("scroll", function(e) {
-                    if (that._shouldFixHeader()) {
-                        that._fixHeader(e);
-                    }
+                    that._fixHeader(e);
                 });
             }
         },
@@ -780,9 +784,7 @@
 
             element.closest(".km-content").toggleClass("km-insetcontent", inset); // iOS has white background when the list is not inset.
 
-            if (that._shouldFixHeader()) {
-                that._cacheHeaders();
-            }
+            that._cacheHeaders();
         },
 
         _footer: function() {
