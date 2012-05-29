@@ -83,6 +83,9 @@
     <Compile Include="Controllers\AutoComplete\ServerFilteringController.cs" />
     <Compile Include="Controllers\AutoComplete\TemplateController.cs" />
     <Compile Include="Controllers\Calendar\CalendarController.cs" />
+    <Compile Include="Controllers\Calendar\ApiController.cs" />
+    <Compile Include="Controllers\Calendar\EventsController.cs" />
+    <Compile Include="Controllers\Calendar\TemplateController.cs" />
     <Compile Include="Controllers\ComboBox\ClientFilteringController.cs" />
     <Compile Include="Controllers\ComboBox\ApiController.cs" />
     <Compile Include="Controllers\ComboBox\EventsController.cs" />
@@ -409,6 +412,13 @@
     <Content Include="Areas\aspx\Views\web\autocomplete\index.aspx" />
     <Content Include="Areas\aspx\Views\web\autocomplete\serverfiltering.aspx" />
     <Content Include="Areas\aspx\Views\web\autocomplete\template.aspx" />
+    <Content Include="Areas\razor\Views\web\calendar\template.cshtml" />
+    <Content Include="Areas\razor\Views\web\calendar\events.cshtml" />
+    <Content Include="Areas\razor\Views\web\calendar\api.cshtml" />
+    <Content Include="Areas\aspx\Views\web\calendar\api.aspx" />
+    <Content Include="Areas\aspx\Views\web\calendar\events.aspx" />
+    <Content Include="Areas\aspx\Views\web\calendar\index.aspx" />
+    <Content Include="Areas\aspx\Views\web\calendar\template.aspx" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
