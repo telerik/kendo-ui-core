@@ -97,7 +97,7 @@ namespace Kendo.Mvc.UI
         /// %&gt;
         /// </code>
         /// </example>
-        public NumericTextBoxBuilder<T> ClientEvents(Action<NumericTextBoxClientEventsBuilder> clientEventsAction)
+        public NumericTextBoxBuilder<T> Events(Action<NumericTextBoxClientEventsBuilder> clientEventsAction)
         {
             Guard.IsNotNull(clientEventsAction, "clientEventsAction");
 

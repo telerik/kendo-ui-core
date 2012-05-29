@@ -14,7 +14,7 @@
           .Name("color")
           .DataTextField("Text")
           .DataValueField("Value")
-          .ClientEvents(e => e.Change("change"))
+          .Events(e => e.Change("change"))
           .BindTo(new List<SelectListItem>() {
               new SelectListItem() {
                   Text = "Black",

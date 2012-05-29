@@ -6,7 +6,7 @@
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 <%= Html.Kendo().NumericTextBox()
         .Name("numerictextbox")
-        .ClientEvents(e => e
+        .Events(e => e
              .Change("change")
              .Spin("spin")
         )

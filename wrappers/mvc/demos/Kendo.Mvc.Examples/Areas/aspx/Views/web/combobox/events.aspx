@@ -20,7 +20,7 @@
                 Text = "Item3", Value = "3"  
             }
         })
-        .ClientEvents(e =>
+        .Events(e =>
         {
             e.Change("change").Select("select").Open("open").Close("close");
         })

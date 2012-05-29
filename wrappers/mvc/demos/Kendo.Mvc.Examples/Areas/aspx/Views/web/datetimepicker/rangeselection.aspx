@@ -12,7 +12,7 @@
       .Value(DateTime.Today)
       .Max(DateTime.Today)
       .ParseFormats(new string[] { "MM/dd/yyyy" })
-      .ClientEvents(e => e.Change("startChange"))
+      .Events(e => e.Change("startChange"))
 %>
 
 <label for="end" style="margin-left:3em">End date:</label>
@@ -21,7 +21,7 @@
       .Value(DateTime.Today)
       .Min(DateTime.Today)
       .ParseFormats(new string[] { "MM/dd/yyyy" })
-      .ClientEvents(e => e.Change("endChange"))
+      .Events(e => e.Change("endChange"))
 %>
 </div>
 

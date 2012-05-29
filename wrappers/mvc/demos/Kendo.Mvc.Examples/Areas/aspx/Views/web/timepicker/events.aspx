@@ -10,7 +10,7 @@
     <label for="timepicker">Pick time:</label>
     <%= Html.Kendo().TimePicker()
             .Name("timepicker")
-            .ClientEvents(e =>
+            .Events(e =>
             {
                 e.Change("change").Open("open").Close("close");
             })
