@@ -27,9 +27,9 @@ namespace Kendo.Mvc.UI.Tests.Grid
             valueProvider = new Dictionary<string, ValueProviderResult>();
 
             context = new Mock<IGridBindingContext>();
-            context.Setup(c => c.Prefix(GridUrlParameters.OrderBy)).Returns(GridUrlParameters.OrderBy);
-            context.Setup(c => c.Prefix(GridUrlParameters.GroupBy)).Returns(GridUrlParameters.GroupBy);
-            context.Setup(c => c.Prefix(GridUrlParameters.CurrentPage)).Returns(GridUrlParameters.CurrentPage);
+            context.Setup(c => c.Prefix(GridUrlParameters.Sort)).Returns(GridUrlParameters.Sort);
+            context.Setup(c => c.Prefix(GridUrlParameters.Group)).Returns(GridUrlParameters.Group);
+            context.Setup(c => c.Prefix(GridUrlParameters.Page)).Returns(GridUrlParameters.Page);
             context.Setup(c => c.Prefix(GridUrlParameters.Filter)).Returns(GridUrlParameters.Filter);
             context.Setup(c => c.Prefix(GridUrlParameters.Aggregates)).Returns(GridUrlParameters.Aggregates);
             context.Setup(c => c.Prefix(GridUrlParameters.PageSize)).Returns(GridUrlParameters.PageSize);
@@ -102,7 +102,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
                 new Customer {Name = "A"}
             };
 
-            valueProvider.Add(GridUrlParameters.OrderBy, "Name-asc");
+            valueProvider.Add(GridUrlParameters.Sort, "Name-asc");
             context.SetupGet(c => c.Data).Returns(dataSource);
             IEnumerable<Customer> processedDataSource = dataProcessor.ProcessedDataSource.Cast<Customer>();
 
@@ -210,7 +210,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
         [Fact]
         public void Should_page_if_current_page_is_specified_and_paging_is_enabled()
         {
-            valueProvider.Add(GridUrlParameters.CurrentPage, 2);
+            valueProvider.Add(GridUrlParameters.Page, 2);
             context.SetupGet(c => c.Data).Returns(DataSource(20));
 
             IEnumerable<int> processedDataSource = dataProcessor.ProcessedDataSource.Cast<int>();
@@ -229,7 +229,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
         [Fact]
         public void CurrentPage_should_read_from_value_provider_to_binding_context()
         {
-            valueProvider.Add(GridUrlParameters.CurrentPage, 3);
+            valueProvider.Add(GridUrlParameters.Page, 3);
             context.SetupGet(c => c.CurrentPage).Returns(2);
 
             Assert.Equal(3, dataProcessor.CurrentPage);

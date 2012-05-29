@@ -60,7 +60,7 @@ namespace Kendo.Mvc.UI.Html
 
         private string GetUrl(IGridUrlBuilder urlBuilder, int pageIndex)
         {
-            return urlBuilder.SelectUrl(GridUrlParameters.CurrentPage, pageIndex);
+            return urlBuilder.SelectUrl(GridUrlParameters.Page, pageIndex);
         }
 
         private int CalculateEndIndex(int numericStart, int pageCount)

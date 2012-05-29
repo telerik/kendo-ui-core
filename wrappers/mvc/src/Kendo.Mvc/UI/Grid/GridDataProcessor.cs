@@ -45,7 +45,7 @@ namespace Kendo.Mvc.UI
             {
                 if (sortDescriptors == null)
                 {
-                    var sortExpression = bindingContext.GetGridParameter<string>(GridUrlParameters.OrderBy);
+                    var sortExpression = bindingContext.GetGridParameter<string>(GridUrlParameters.Sort);
 
                     if (sortExpression != null)
                     {
@@ -68,7 +68,7 @@ namespace Kendo.Mvc.UI
             {
                 if (groupDescriptors == null)
                 {
-                    var groupExpression = bindingContext.GetGridParameter<string>(GridUrlParameters.GroupBy);
+                    var groupExpression = bindingContext.GetGridParameter<string>(GridUrlParameters.Group);
                     
                     if (groupExpression != null)
                     {
@@ -139,7 +139,7 @@ namespace Kendo.Mvc.UI
         {
             get
             {
-                return bindingContext.GetGridParameter<int?>(GridUrlParameters.CurrentPage) ?? bindingContext.CurrentPage;
+                return bindingContext.GetGridParameter<int?>(GridUrlParameters.Page) ?? bindingContext.CurrentPage;
             }
         }
 

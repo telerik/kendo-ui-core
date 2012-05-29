@@ -59,7 +59,7 @@ namespace Kendo.Mvc.UI.Html
         private void AppendUngroupButton(IHtmlNode indicator, IGridUrlBuilder urlBuilder, List<GroupDescriptor> groups, string ungroupText)
         {
             var button = new HtmlElement("a")
-                            .Attribute("href", urlBuilder.SelectUrl(GridUrlParameters.GroupBy,
+                            .Attribute("href", urlBuilder.SelectUrl(GridUrlParameters.Group,
                                     GridDescriptorSerializer.Serialize(groups)))
                             .AddClass(new[] { UIPrimitives.Button, UIPrimitives.ButtonIcon, UIPrimitives.ButtonBare })
                             .AppendTo(indicator);
@@ -76,7 +76,7 @@ namespace Kendo.Mvc.UI.Html
 
             var a = new HtmlElement("a")
                  .AddClass(UIPrimitives.Link)
-                 .Attribute("href", urlBuilder.SelectUrl(GridUrlParameters.GroupBy, GridDescriptorSerializer.Serialize(groups)))
+                 .Attribute("href", urlBuilder.SelectUrl(GridUrlParameters.Group, GridDescriptorSerializer.Serialize(groups)))
                  .AppendTo(indicator);
 
             group.CycleSortDirection();

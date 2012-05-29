@@ -153,11 +153,11 @@ namespace Kendo.Mvc.UI.Tests
         [Fact]
         public void OnActionExecuting_updates_the_grid_command_parameter()
         {
-            valueProvider.Add(GridUrlParameters.CurrentPage, "1");
-            valueProvider.Add(GridUrlParameters.OrderBy, "Name-asc");
+            valueProvider.Add(GridUrlParameters.Page, "1");
+            valueProvider.Add(GridUrlParameters.Sort, "Name-asc");
             valueProvider.Add(GridUrlParameters.Filter, "Age~eq~1");
             valueProvider.Add(GridUrlParameters.PageSize, "42");
-            valueProvider.Add(GridUrlParameters.GroupBy, "Name-asc");
+            valueProvider.Add(GridUrlParameters.Group, "Name-asc");
 
             gridAttribute.OnActionExecuting(filterExecutingContext.Object);
 
@@ -173,11 +173,11 @@ namespace Kendo.Mvc.UI.Tests
         [Fact]
         public void OnActionExecuting_finds_grid_command_parameter_by_type()
         {
-            valueProvider.Add(GridUrlParameters.CurrentPage, "1");
-            valueProvider.Add(GridUrlParameters.OrderBy, "Name-asc");
+            valueProvider.Add(GridUrlParameters.Page, "1");
+            valueProvider.Add(GridUrlParameters.Sort, "Name-asc");
             valueProvider.Add(GridUrlParameters.Filter, "Age~eq~1");
             valueProvider.Add(GridUrlParameters.PageSize, "42");
-            valueProvider.Add(GridUrlParameters.GroupBy, "Name-asc");
+            valueProvider.Add(GridUrlParameters.Group, "Name-asc");
 
             filterExecutingContext.Object.ActionParameters["foo"] = new GridCommand();
             
@@ -195,11 +195,11 @@ namespace Kendo.Mvc.UI.Tests
         [Fact]
         public void OnActionExecuting_updates_the_grid_command_parameter_with_prefixed_values()
         {
-            valueProvider.Add("test-" + GridUrlParameters.CurrentPage, "1");
-            valueProvider.Add("test-" + GridUrlParameters.OrderBy, "Name-asc");
+            valueProvider.Add("test-" + GridUrlParameters.Page, "1");
+            valueProvider.Add("test-" + GridUrlParameters.Sort, "Name-asc");
             valueProvider.Add("test-" + GridUrlParameters.Filter, "Age~eq~1");
             valueProvider.Add("test-" + GridUrlParameters.PageSize, "42");
-            valueProvider.Add("test-" + GridUrlParameters.GroupBy, "Name-asc");
+            valueProvider.Add("test-" + GridUrlParameters.Group, "Name-asc");
 
             gridAttribute.GridName = "test";
             gridAttribute.OnActionExecuting(filterExecutingContext.Object);

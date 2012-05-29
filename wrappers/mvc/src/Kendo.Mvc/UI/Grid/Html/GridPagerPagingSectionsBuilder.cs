@@ -84,7 +84,7 @@ namespace Kendo.Mvc.UI.Html
 
         private string GetUrl(IGridUrlBuilder urlBuilder, int page)
         {
-            return urlBuilder.SelectUrl(GridUrlParameters.CurrentPage, page);
+            return urlBuilder.SelectUrl(GridUrlParameters.Page, page);
         }
     }
 }

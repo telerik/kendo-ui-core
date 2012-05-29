@@ -347,7 +347,7 @@ namespace Kendo.Mvc.UI
                 orderBy.Add(new SortDescriptor { Member = Member, SortDirection = ListSortDirection.Ascending });
             }
 
-            return Grid.UrlBuilder.SelectUrl(GridUrlParameters.OrderBy, GridDescriptorSerializer.Serialize(orderBy));
+            return Grid.UrlBuilder.SelectUrl(GridUrlParameters.Sort, GridDescriptorSerializer.Serialize(orderBy));
         }
 
         public ListSortDirection? SortDirection

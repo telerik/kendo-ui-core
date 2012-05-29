@@ -16,12 +16,12 @@ namespace Kendo.Mvc.UI
             int currentPage;
             int pageSize;            
 
-            if (TryGetValue(bindingContext, GridUrlParameters.OrderBy, out sort))
+            if (TryGetValue(bindingContext, GridUrlParameters.Sort, out sort))
             {
                 request.Sorts = GridDescriptorSerializer.Deserialize<SortDescriptor>(sort);
             }
 
-            if (TryGetValue(bindingContext, GridUrlParameters.CurrentPage, out currentPage))
+            if (TryGetValue(bindingContext, GridUrlParameters.Page, out currentPage))
             {
                 request.Page = currentPage;
             }
@@ -36,7 +36,7 @@ namespace Kendo.Mvc.UI
                 request.Filters = FilterDescriptorFactory.Create(filter);
             }
 
-            if (TryGetValue(bindingContext, GridUrlParameters.GroupBy, out group))
+            if (TryGetValue(bindingContext, GridUrlParameters.Group, out group))
             {
                 request.Groups = GridDescriptorSerializer.Deserialize<GroupDescriptor>(group);
             }
