@@ -9,7 +9,7 @@
         .Legend(legend => legend
             .Position(ChartLegendPosition.Top)
         )
-        .DataSource(ds => ds.Read(read => read.Action("_SpainElectricity", "Chart")))
+        .DataSource(ds => ds.Read(read => read.Action("_SpainElectricityProduction", "Line_Charts")))
         .Series(series => {
             series.Line(model => model.Nuclear).Name("Nuclear");
             series.Line(model => model.Hydro).Name("Hydro");

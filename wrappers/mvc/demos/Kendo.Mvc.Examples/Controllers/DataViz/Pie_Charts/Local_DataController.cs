@@ -9,7 +9,7 @@ namespace Kendo.Mvc.Examples.Controllers
     {
         public ActionResult Local_Data()
         {
-            return View(SpainElectricityStats.GetSourceBreakdown());
+            return View(ChartDataRepository.SpainElectricityBreakdown());
         }
     }
 }
