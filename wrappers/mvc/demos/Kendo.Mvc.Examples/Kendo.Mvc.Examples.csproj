@@ -103,6 +103,11 @@
     <Compile Include="Controllers\DataViz\Bar_Charts\Multiple_AxesController.cs" />
     <Compile Include="Controllers\DataViz\Bar_Charts\Remote_DataController.cs" />
     <Compile Include="Controllers\DataViz\Bar_Charts\Local_DataController.cs" />
+    <Compile Include="Controllers\DataViz\Scatter_Charts\Multiple_AxesController.cs" />
+    <Compile Include="Controllers\DataViz\Scatter_Charts\Scatter_LineController.cs" />
+    <Compile Include="Controllers\DataViz\Scatter_Charts\IndexController.cs" />
+    <Compile Include="Controllers\DataViz\Scatter_Charts\Local_DataController.cs" />
+    <Compile Include="Controllers\DataViz\Scatter_Charts\Remote_DataController.cs" />
     <Compile Include="Controllers\DataViz\Pie_Charts\Pie_LabelsController.cs" />
     <Compile Include="Controllers\DataViz\Pie_Charts\IndexController.cs" />
     <Compile Include="Controllers\DataViz\Pie_Charts\Local_DataController.cs" />
@@ -197,8 +202,11 @@
     <Compile Include="Models\Config.cs" />
     <Compile Include="Helpers\HyphenatedRouteHandler.cs" />
     <Compile Include="Models\ElectricitySource.cs" />
+    <Compile Include="Models\EngineDataPoint.cs" />
     <Compile Include="Models\InternetUsersRepository.cs" />
     <Compile Include="Models\InternetUsers.cs" />
+    <Compile Include="Models\PricePerformance.cs" />
+    <Compile Include="Models\ChartDataRepository.cs" />
     <Compile Include="Models\SpainElectricityStats.cs" />
     <Compile Include="Models\ElectricityProduction.cs" />
     <Compile Include="Models\NavigationItem.cs" />
@@ -229,6 +237,11 @@
     <Content Include="Areas\aspx\Views\dataviz\bar_charts\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\bar_charts\local_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\bar_charts\remote_data.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\scatter_charts\multiple_axes.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\scatter_charts\scatter_line.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\scatter_charts\index.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\scatter_charts\local_data.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\scatter_charts\remote_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\pie_charts\pie_labels.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\pie_charts\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\pie_charts\local_data.aspx" />
@@ -491,6 +504,11 @@
     <Content Include="Areas\razor\Views\dataviz\pie_charts\local_data.cshtml" />
     <Content Include="Areas\razor\Views\dataviz\pie_charts\remote_data.cshtml" />
     <Content Include="Areas\razor\Views\dataviz\pie_charts\pie_labels.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\scatter_charts\index.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\scatter_charts\local_data.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\scatter_charts\remote_data.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\scatter_charts\scatter_line.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\scatter_charts\multiple_axes.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
