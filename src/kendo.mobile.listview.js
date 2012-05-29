@@ -727,7 +727,6 @@
 
         _style: function() {
             var that = this,
-                items, i, len, node, nodeName,
                 options = that.options,
                 grouped = options.type === "group",
                 element = that.element,
@@ -761,9 +760,7 @@
         },
 
         _enhanceItems: function() {
-            items = this.items();
-
-            items.each(function() {
+            this.items().each(function() {
                 var item = $(this),
                     child,
                     enhanced = false;
