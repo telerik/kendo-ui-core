@@ -108,8 +108,8 @@
             $.extend(that, options);
 
             that._layout();
-            that._model();
             that._scroller();
+            that._model();
         },
 
         events: [
