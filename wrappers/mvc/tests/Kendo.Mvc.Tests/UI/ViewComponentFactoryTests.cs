@@ -1,9 +1,6 @@
 namespace Kendo.Mvc.UI.Tests
 {
-    using Moq;
-    using System.Collections.Generic;
     using System.Web.Mvc;
-    using Kendo.Mvc.Infrastructure;
     using Xunit;
 
     public class ViewComponentFactoryTests
@@ -20,7 +17,7 @@ namespace Kendo.Mvc.UI.Tests
                                           };
 
             htmlHelper = TestHelper.CreateHtmlHelper();
-            _factory = new ViewComponentFactory(htmlHelper, new Mock<IClientSideObjectWriterFactory>().Object);
+            _factory = new ViewComponentFactory(htmlHelper);
         }
 
         [Fact]

@@ -627,7 +627,6 @@
     <Compile Include="Infrastructure\FilterDescriptorFactory.cs" />
     <Compile Include="Infrastructure\Implementation\Expressions\ExpressionBuilderOptions.cs" />
     <Compile Include="UI\HtmlElement.cs" />
-    <Compile Include="UI\IClientSerializable.cs" />
     <Compile Include="UI\IHtmlAdorner.cs" />
     <Compile Include="UI\IHtmlNode.cs" />
     <Compile Include="Infrastructure\Implementation\Filtering\Parsing\AndNode.cs" />
@@ -744,7 +743,6 @@
     <Compile Include="UI\Slider\RangeSlider.cs" />
     <Compile Include="UI\Slider\Settings\ISliderTooltipSettings.cs" />
     <Compile Include="UI\Slider\Slider.cs" />
-    <Compile Include="UI\Slider\SliderBaseClientEvents.cs" />
     <Compile Include="UI\Slider\SliderOrientation.cs" />
     <Compile Include="UI\Slider\SliderTickPlacement.cs" />
     <Compile Include="UI\Slider\Html\SliderHtmlBuilder.cs" />
@@ -860,8 +858,6 @@
     <Compile Include="UI\Grid\IGridBindingContext.cs" />
     <Compile Include="UI\Effects\AnimationDuration.cs" />
     <Compile Include="UI\IAsyncContentContainer.cs" />
-    <Compile Include="UI\IClientSideObjectWriter.cs" />
-    <Compile Include="UI\IClientSideObjectWriterFactory.cs" />
     <Compile Include="UI\IContentContainer.cs" />
     <Compile Include="UI\Grid\GridDataProcessor.cs" />
     <Compile Include="UI\Grid\GridDescriptorSerializer.cs" />
@@ -959,8 +955,6 @@
     <Compile Include="Infrastructure\IPathResolver.cs" />
     <Compile Include="Infrastructure\IConfigurationManager.cs" />
     <Compile Include="Infrastructure\PathHelper.cs" />
-    <Compile Include="UI\ClientSideObjectWriterFactory.cs" />
-    <Compile Include="UI\ClientSideEnumValueAttribute.cs" />
     <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="Infrastructure\Implementation\ConfigurationManagerWrapper.cs" />
     <Compile Include="Extensions\DictionaryExtensions.cs" />
@@ -975,7 +969,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TextResource.resx</DependentUpon>
     </Compile>
-    <Compile Include="UI\ClientSideObjectWriter.cs" />
     <Compile Include="Infrastructure\IUrlResolver.cs" />
     <Compile Include="UI\HtmlHelperExtension.cs" />
     <Compile Include="UI\IScriptableComponent.cs" />

@@ -16,7 +16,7 @@ namespace Kendo.Mvc.UI.Tests
         public TreeViewBuilderTests()
         {
             Mock<HtmlTextWriter> writer = new Mock<HtmlTextWriter>(TextWriter.Null);
-            treeView = TreeViewTestHelper.CreateTreeView(writer.Object, null, new Mock<IClientSideObjectWriter>().Object);
+            treeView = TreeViewTestHelper.CreateTreeView(writer.Object, null);
             builder = new TreeViewBuilder(treeView);
         }
 

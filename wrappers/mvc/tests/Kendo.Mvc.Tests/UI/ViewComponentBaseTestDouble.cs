@@ -10,10 +10,6 @@ namespace Kendo.Mvc.UI.Tests
         public bool HasEnsuredRequired;
         public bool HasWrittenHtml;
 
-        public ViewComponentBaseTestDouble(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory) : base(viewContext, clientSideObjectWriterFactory)
-        {
-        }
-
         public ViewComponentBaseTestDouble(ViewContext viewContext, IJavaScriptInitializer javaScriptInitializer)
             : base(viewContext, javaScriptInitializer)
         {

@@ -8,13 +8,11 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Only one item can be expanded.
         /// </summary>
-        [ClientSideEnumValue("'single'")]
         Single,
 
         /// <summary>
         /// All items can be expanded
         /// </summary>
-        [ClientSideEnumValue("'multiple'")]
         Multiple
     }
 }

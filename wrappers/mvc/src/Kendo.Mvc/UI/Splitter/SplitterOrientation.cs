@@ -8,13 +8,11 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Panes are oredered horizontally
         /// </summary>
-        [ClientSideEnumValue("'horizontal'")]
         Horizontal = 0,
 
         /// <summary>
         /// Panes are oredered vertically
         /// </summary>
-        [ClientSideEnumValue("'vertical'")]
         Vertical = 1
     }
 }

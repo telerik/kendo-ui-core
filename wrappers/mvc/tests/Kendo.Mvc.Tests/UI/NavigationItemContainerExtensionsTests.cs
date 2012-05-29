@@ -103,7 +103,7 @@ namespace Kendo.Mvc.UI.Tests
         public Mock<IUrlGenerator> UrlGeneratorMock;
 
         public ContentNavigationItemComponentTestDouble()
-            : base(TestHelper.CreateViewContext(), new Mock<IClientSideObjectWriterFactory>().Object)
+            : base(TestHelper.CreateViewContext())
         {
             AuthorizationMock = new Mock<INavigationItemAuthorization>();
             Authorization = AuthorizationMock.Object;

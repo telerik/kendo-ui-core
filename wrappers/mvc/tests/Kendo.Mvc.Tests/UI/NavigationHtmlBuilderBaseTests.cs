@@ -8,15 +8,13 @@ namespace Kendo.Mvc.UI.Tests.UITests
 
     public class NavigationHtmlBuilderBaseTests
     {
-        private Mock<IClientSideObjectWriterFactory> rendererFactory;
         private TComponentTestDouble component;
         NavigationHtmlBuilderBaseTestDouble builder;
 
         public NavigationHtmlBuilderBaseTests()
         {
             var viewContext = TestHelper.CreateViewContext();
-            rendererFactory = new Mock<IClientSideObjectWriterFactory>();
-            component = new TComponentTestDouble(viewContext, rendererFactory.Object);
+            component = new TComponentTestDouble(viewContext);
             builder = new NavigationHtmlBuilderBaseTestDouble(component, null);
         }
 
@@ -61,11 +59,6 @@ namespace Kendo.Mvc.UI.Tests.UITests
 
     public class TComponentTestDouble : ViewComponentBase, INavigationItemComponent<NavigationItemTestDouble>
     {
-        public TComponentTestDouble(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory)
-            : base(viewContext, clientSideObjectWriterFactory)
-        {
-        }
-
         public IList<TComponentTestDouble> Items
         {
             get;
@@ -76,6 +69,10 @@ namespace Kendo.Mvc.UI.Tests.UITests
         {
             get;
             set;
+        }
+
+        public TComponentTestDouble(ViewContext viewContext, ViewDataDictionary viewData = null) : base(viewContext, viewData)
+        {
         }
 
         IList<NavigationItemTestDouble> INavigationItemContainer<NavigationItemTestDouble>.Items

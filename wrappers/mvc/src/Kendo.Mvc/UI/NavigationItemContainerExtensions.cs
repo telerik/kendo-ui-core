@@ -90,36 +90,6 @@ namespace Kendo.Mvc.UI
             return defaultValue;
         }
 
-        public static void AppendContentUrls<TItem>(this IClientSideObjectWriter objectWriter, string identifier, IList<TItem> items, bool isSelfInitialized)
-            where TItem : NavigationItem<TItem>, IAsyncContentContainer
-        {
-            var contentUrls = new List<string>();
-            var hasVisibleAsyncItems = false;
-
-            items.Each(item =>
-            {
-                if (item.Visible)
-                {
-                    if (!string.IsNullOrEmpty(item.ContentUrl))
-                    {
-                        contentUrls.Add(System.Web.HttpUtility.UrlDecode(item.ContentUrl));
-                        hasVisibleAsyncItems = true;
-                    }
-                    else
-                    {
-                        contentUrls.Add("");
-                    }
-                }
-            });
-
-            if (hasVisibleAsyncItems)
-            {
-                objectWriter.AppendCollection(identifier, contentUrls);
-            }
-        }
-
-            
-
         public static string GetImageUrl<T>(this T item, ViewContext viewContext) where T : NavigationItem<T>
         {
             var urlHelper = new UrlHelper(viewContext.RequestContext);

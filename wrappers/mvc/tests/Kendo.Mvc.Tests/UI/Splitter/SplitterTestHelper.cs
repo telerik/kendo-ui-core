@@ -9,7 +9,6 @@ namespace Kendo.Mvc.UI.Tests
 
     public static class SplitterTestHelper
     {
-        public static Mock<IClientSideObjectWriter> clientSideObjectWriter;
         public static ViewContext viewContext;
 
         public static Splitter CreateSplitter()
