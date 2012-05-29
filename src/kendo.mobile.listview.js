@@ -206,7 +206,7 @@
      * <script type="text/javascript">
      *     function initListView(e) {
      *         e.view.element.find("#listview").kendoMobileListView({
-     *             template : "<strong>${data.foo}</strong>",
+     *             template : "<strong>#:data.foo#</strong>",
      *             dataSource: kendo.data.DataSource.create([{foo: "bar"}, {foo: "baz"}])
      *         });
      *     });
@@ -333,11 +333,11 @@
          * @extends kendo.mobile.ui.Widget
          * @param {DomElement} element DOM element.
          * @param {Object} options Configuration options.
-         * @option {kendo.data.DataSource|Object} [dataSource] Instance of DataSource or the data that the mobile ListView will be bound to.
-         * @option {String}  [type] The type of the control. Can be either <code>flat</code> (default) or <code>group</code>. Determined automatically in databound mode.
-         * @option {String}  [style] The style of the control. Can be either empty string(""), or <code>inset</code>.
-         * @option {String}  [template] <${data}> The item template.
-         * @option {String}  [headerTemplate] <${value}> The header item template (applicable when the type is set to <code>group</code>).
+         * @option {kendo.data.DataSource | Object} [dataSource] Instance of DataSource or the data that the mobile ListView will be bound to.
+         * @option {String}  [type] The type of the control. Can be either <code>flat</code> (default) or group. Determined automatically in databound mode.
+         * @option {String}  [style] The style of the control. Can be either empty string(""), or inset.
+         * @option {String}  [template] <#:data#> The item template.
+         * @option {String}  [headerTemplate] <#:value#> The header item template (applicable when the type is set to group).
          * @option {Boolean} [pullToRefresh] <false> If set to true, the listview will reload its data when the user pulls the view over the top limit.
          * @option {Boolean} [appendOnRefresh] <false> Used in combination with pullToRefresh. If set to true, newly loaded data will be appended on top when refershing.
          * @option {String}  [pullTemplate] <"Pull to refresh"> The message template displayed when the user pulls the listView. Applicable only when pullToRefresh is set to true.
@@ -424,8 +424,8 @@
         options: {
             name: "ListView",
             type: "flat",
-            template: "${data}",
-            headerTemplate: '<span class="km-text">${value}</span>',
+            template: "#:data#",
+            headerTemplate: '<span class="km-text">#:value#</span>',
             appendOnRefresh: false,
             loadMore: false,
             loadMoreText: "Press to load more",
