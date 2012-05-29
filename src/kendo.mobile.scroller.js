@@ -241,9 +241,10 @@
             element
                 .css("overflow", "hidden")
                 .addClass("km-scroll-wrapper")
-                .wrapInner('<div class="km-scroll-container"/>');
+                .wrapInner('<div class="km-scroll-container"/>')
+                .prepend('<div class="fixed-header">Foo</div>');
 
-            var inner = element.children().first(),
+            var inner = element.children().eq(1),
 
                 tap = new kendo.Tap(element),
 
@@ -294,7 +295,8 @@
                 pane: pane,
                 tap: tap,
                 pulled: false,
-                scrollElement: inner
+                scrollElement: inner,
+                fixedContainer: element.children().first()
             });
 
             that._initAxis("x");

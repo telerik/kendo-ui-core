@@ -569,6 +569,21 @@
                 return;
             }
 
+
+            scroller.bind("scroll", function(e) {
+                var offset, i = 0, pair;
+                do {
+                    pair = that.headers[++i];
+                    offset = pair[0];
+                    header = pair[1];
+                } while (offset > e.scrollTop && i < that.headers.length - 1);
+
+                if (that.currentHeader != i) {
+                    scroller.fixedContainer.html(header.clone());
+                    that.currentHeader = i;
+                }
+            });
+
             if (options.pullToRefresh) {
                 scroller.setOptions({
                     pullToRefresh: true,
@@ -710,6 +725,13 @@
             });
 
             element.closest(".km-content").toggleClass("km-insetcontent", inset); // iOS has white background when the list is not inset.
+
+            var headers = [];
+
+            that.element.find(".km-group-title").each(function() {
+                headers.unshift([$(this).offset().top, $(this)]);
+            });
+            that.headers = headers;
         },
 
         _footer: function() {
