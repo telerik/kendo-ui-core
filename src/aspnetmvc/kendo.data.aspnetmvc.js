@@ -6,7 +6,7 @@
        var result = {};
 
        if (options.sort) {
-           result[this.options.prefix + "orderBy"] = $.map(options.sort, function(sort) {
+           result[this.options.prefix + "sort"] = $.map(options.sort, function(sort) {
                return sort.field + "-" + sort.dir;
            }).join("~");
 
@@ -26,7 +26,7 @@
        }
 
        if (options.group) {
-            result[this.options.prefix + "groupBy"] = $.map(options.group, function(group) {
+            result[this.options.prefix + "group"] = $.map(options.group, function(group) {
                return group.field + "-" + group.dir;
            }).join("~");
 
@@ -34,7 +34,7 @@
        }
 
        if (options.aggregate) {
-           result[this.options.prefix + "aggregates"] =  $.map(options.aggregate, function(aggregate) {
+           result[this.options.prefix + "aggregate"] =  $.map(options.aggregate, function(aggregate) {
                return aggregate.field + "-" + aggregate.aggregate;
            }).join("~");
 

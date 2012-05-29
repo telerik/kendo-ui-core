@@ -107,10 +107,10 @@ namespace Kendo.Mvc
             if (filterContext.ActionParameters.ContainsKey(parameterName))
             {
                 var command = ((GridCommand)filterContext.ActionParameters[parameterName] ?? new GridCommand());
-                command.Page = filterContext.Controller.ValueOf<int>(Prefix(GridUrlParameters.CurrentPage));
+                command.Page = filterContext.Controller.ValueOf<int>(Prefix(GridUrlParameters.Page));
                 command.PageSize = filterContext.Controller.ValueOf<int>(Prefix(GridUrlParameters.PageSize));
 
-                var orderBy = filterContext.Controller.ValueOf<string>(Prefix(GridUrlParameters.OrderBy));
+                var orderBy = filterContext.Controller.ValueOf<string>(Prefix(GridUrlParameters.Sort));
 
                 command.SortDescriptors.AddRange(GridDescriptorSerializer.Deserialize<SortDescriptor>(orderBy));
 
@@ -118,7 +118,7 @@ namespace Kendo.Mvc
 
                 command.FilterDescriptors.AddRange(FilterDescriptorFactory.Create(filter));
 
-                var groupBy = filterContext.Controller.ValueOf<string>(Prefix(GridUrlParameters.GroupBy));
+                var groupBy = filterContext.Controller.ValueOf<string>(Prefix(GridUrlParameters.Group));
 
                 command.GroupDescriptors.AddRange(GridDescriptorSerializer.Deserialize<GroupDescriptor>(groupBy));
 

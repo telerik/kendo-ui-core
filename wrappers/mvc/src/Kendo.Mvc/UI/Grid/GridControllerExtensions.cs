@@ -19,10 +19,10 @@ namespace Kendo.Mvc.Extensions
 
             foreach (string key in values.Keys)
             {
-                if (key.EndsWith(GridUrlParameters.CurrentPage, StringComparison.OrdinalIgnoreCase) ||
+                if (key.EndsWith(GridUrlParameters.Page, StringComparison.OrdinalIgnoreCase) ||
                     key.EndsWith(GridUrlParameters.Filter, StringComparison.OrdinalIgnoreCase) ||
-                    key.EndsWith(GridUrlParameters.OrderBy, StringComparison.OrdinalIgnoreCase) ||
-                    key.EndsWith(GridUrlParameters.GroupBy, StringComparison.OrdinalIgnoreCase) ||
+                    key.EndsWith(GridUrlParameters.Sort, StringComparison.OrdinalIgnoreCase) ||
+                    key.EndsWith(GridUrlParameters.Group, StringComparison.OrdinalIgnoreCase) ||
                     key.EndsWith(GridUrlParameters.PageSize, StringComparison.OrdinalIgnoreCase))
                 {
                     routeValues[key] = values[key];

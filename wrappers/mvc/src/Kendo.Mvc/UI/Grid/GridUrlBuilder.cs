@@ -34,17 +34,17 @@ namespace Kendo.Mvc.UI
 
             if (grid.Paging.Enabled)
             {
-                state[grid.Prefix(GridUrlParameters.CurrentPage)] = "<#=__page#>";
+                state[grid.Prefix(GridUrlParameters.Page)] = "<#=__page#>";
             }
 
             if (grid.Sorting.Enabled)
             {
-                state[grid.Prefix(GridUrlParameters.OrderBy)] = "<#=__orderBy#>";
+                state[grid.Prefix(GridUrlParameters.Sort)] = "<#=__orderBy#>";
             }
 
             if (grid.Grouping.Enabled)
             {
-                state[grid.Prefix(GridUrlParameters.GroupBy)] = "<#=__groupBy#>";
+                state[grid.Prefix(GridUrlParameters.Group)] = "<#=__groupBy#>";
             }
 
             if (grid.Filtering.Enabled)
