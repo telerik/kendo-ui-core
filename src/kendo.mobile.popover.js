@@ -62,7 +62,6 @@
                 container = mobile.application.element,
                 popupOptions = {
                     viewport: kendo.mobile.application.element,
-                    appendTo: container,
                     open: function() {
                         that.overlay.show();
                     },
@@ -95,6 +94,7 @@
             that.arrow = $(ARROW).prependTo(that.wrapper).hide();
 
             that.overlay = $(OVERLAY).appendTo(container).hide();
+            popupOptions.appendTo = that.overlay;
 
             that.popup = new kendo.ui.Popup(that.wrapper, $.extend(true, popupOptions, ANIMATION, DIRECTIONS[options.direction]));
         },
