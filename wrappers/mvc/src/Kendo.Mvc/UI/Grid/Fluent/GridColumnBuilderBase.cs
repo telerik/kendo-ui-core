@@ -131,6 +131,8 @@ namespace Kendo.Mvc.UI.Fluent
             return this as TColumnBuilder;
         }
         */
+        //TODO: Implement HtmlAttributes
+        /*
         /// <summary>
         /// Sets the HTML attributes applied to the content cell of the column.
         /// </summary>
@@ -143,13 +145,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public TColumnBuilder HtmlAttributes(object attributes)
-        {
-            return HtmlAttributes(attributes.ToDictionary());
-        }
-
-        //TODO: Implement HtmlAttributes
-        /*
+        //public TColumnBuilder HtmlAttributes(object attributes)
+        //{
+        //    return HtmlAttributes(attributes.ToDictionary());
+        //}       
+        
         /// <summary>
         /// Sets the HTML attributes applied to the content cell of the column.
         /// </summary>
