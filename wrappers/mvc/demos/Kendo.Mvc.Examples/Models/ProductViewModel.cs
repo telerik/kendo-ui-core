@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using System;
+
 namespace Kendo.Mvc.Examples.Models
 {
-    public class EditableProduct
+    public class ProductViewModel
     {
         [ScaffoldColumn(false)]
         public int ProductID
@@ -53,5 +54,7 @@ namespace Kendo.Mvc.Examples.Models
             get;
             set;
         }
+
+        public short UnitsOnOrder { get; set; }
     }
 }

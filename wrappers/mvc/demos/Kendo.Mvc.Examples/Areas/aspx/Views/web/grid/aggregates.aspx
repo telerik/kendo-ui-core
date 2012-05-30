@@ -2,7 +2,7 @@
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 
-    <%: Html.Kendo().Grid<ProductDto>()
+    <%: Html.Kendo().Grid<ProductViewModel>()
         .Name("Grid")
         .Columns(columns =>
         {

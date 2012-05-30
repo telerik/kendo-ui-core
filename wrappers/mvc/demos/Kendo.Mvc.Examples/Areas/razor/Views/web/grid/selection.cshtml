@@ -1,5 +1,5 @@
 ﻿<h3>Grid with multiple row selection enabled</h3>
-@(Html.Kendo().Grid<ProductDto>()    
+@(Html.Kendo().Grid<ProductViewModel>()    
     .Name("Grid")
     .Columns(columns =>
     {
@@ -19,7 +19,7 @@
 )
 
 <h3>Grid with multiple cell selection enabled</h3>
-@(Html.Kendo().Grid<ProductDto>()    
+@(Html.Kendo().Grid<ProductViewModel>()    
     .Name("Grid2")
     .Columns(columns =>
     {

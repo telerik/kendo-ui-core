@@ -16,7 +16,8 @@ namespace Kendo.Mvc.Examples.Controllers
         {
             var northwind = new NorthwindDataContext();
 
-            var products = northwind.Products.Select(product => new ProductDto
+
+            var products = northwind.Products.Select(product => new ProductViewModel
             {
                 ProductID = product.ProductID,
                 ProductName = product.ProductName,

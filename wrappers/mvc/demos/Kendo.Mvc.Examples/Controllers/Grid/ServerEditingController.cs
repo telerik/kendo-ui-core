@@ -13,7 +13,7 @@ namespace Kendo.Mvc.Examples.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Create(EditableProduct product)
+        public ActionResult Create(ProductViewModel product)
         {   
             if (ModelState.IsValid)
             {
@@ -32,7 +32,7 @@ namespace Kendo.Mvc.Examples.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Update(EditableProduct product)
+        public ActionResult Update(ProductViewModel product)
         {   
             if (ModelState.IsValid)
             {
@@ -54,7 +54,7 @@ namespace Kendo.Mvc.Examples.Controllers
         public ActionResult Destroy(int productID)
         {
             //Find a product with ProductID equal to the id action parameter
-            EditableProduct product = SessionProductRepository.One(p => p.ProductID == productID);
+            ProductViewModel product = SessionProductRepository.One(p => p.ProductID == productID);
 
             RouteValueDictionary routeValues;
 

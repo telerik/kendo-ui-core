@@ -20,7 +20,7 @@ namespace Kendo.Mvc.Examples.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult EditingInline_Create([DataSourceRequest] DataSourceRequest request, EditableProduct product)
+        public ActionResult EditingInline_Create([DataSourceRequest] DataSourceRequest request, ProductViewModel product)
         {
             if (product != null && ModelState.IsValid)
             {         
@@ -31,7 +31,7 @@ namespace Kendo.Mvc.Examples.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult EditingInline_Update([DataSourceRequest] DataSourceRequest request, EditableProduct product)
+        public ActionResult EditingInline_Update([DataSourceRequest] DataSourceRequest request, ProductViewModel product)
         {
             if (product != null && ModelState.IsValid)
             {                
@@ -51,7 +51,7 @@ namespace Kendo.Mvc.Examples.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult EditingInline_Destroy([DataSourceRequest] DataSourceRequest request, EditableProduct product)
+        public ActionResult EditingInline_Destroy([DataSourceRequest] DataSourceRequest request, ProductViewModel product)
         {            
             if (product != null)
             {                
