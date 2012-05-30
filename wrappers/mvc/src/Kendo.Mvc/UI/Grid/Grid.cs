@@ -552,54 +552,6 @@ namespace Kendo.Mvc.UI
             }
         }
 
-        int IGridBindingContext.Total
-        {
-            get
-            {
-                return Paging.Total;
-            }
-        }
-
-        IEnumerable IGridBindingContext.Data
-        {
-            get
-            {
-                return DataSource.Data;
-            }
-        }
-
-        IList<SortDescriptor> IGridBindingContext.SortDescriptors
-        {
-            get
-            {
-                return Sorting.OrderBy;
-            }
-        }
-
-        IList<GroupDescriptor> IGridBindingContext.GroupDescriptors
-        {
-            get
-            {
-                return Grouping.Groups;
-            }
-        }
-
-        IList<CompositeFilterDescriptor> IGridBindingContext.FilterDescriptors
-        {
-            get
-            {
-                return Filtering.Filters;
-            }
-        }
-
-        ControllerBase IGridBindingContext.Controller
-        {
-            get
-            {
-                return ViewContext.Controller;
-            }
-        }
-
         /// <summary>
         /// Gets the page size of the grid.
         /// </summary>
@@ -792,7 +744,7 @@ namespace Kendo.Mvc.UI
             {
                 if (currentItemMode == null)
                 {
-                    currentItemMode = this.GetGridParameter<string>(GridUrlParameters.Mode);
+                    currentItemMode = this.ViewContext.Controller.ValueOf<string>(Prefix(GridUrlParameters.Mode));
                 }
 
                 return currentItemMode.ToEnum(GridItemMode.Default);
@@ -1379,14 +1331,6 @@ namespace Kendo.Mvc.UI
                 }
 
                 return urlBuilder;   
-            }
-        }
-
-        IGridEditingSettings IGrid.Editing
-        {
-            get
-            {
-                return this.Editing;
             }
         }
     }
