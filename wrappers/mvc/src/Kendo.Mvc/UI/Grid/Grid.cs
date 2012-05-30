@@ -914,8 +914,9 @@ namespace Kendo.Mvc.UI
             var cancelUrl = renderingData.UrlBuilder.CancelUrl(null);
 
             new WindowBuilder(popup)
-                .Content(renderingData.PopUpContainer.InnerHtml)
-                .HtmlAttributes(new { style = "top:10%;left:50%;margin-left: -" + (popup.Width == 0 ? 360 : popup.Width) / 4 + "px" })                
+                .Content(renderingData.PopUpContainer.InnerHtml)                
+                //TODO: Add positioning of the window
+                //.HtmlAttributes(new { style = "top:10%;left:50%;margin-left: -" + (popup.Width == 0 ? 360 : popup.Width) / 4 + "px" })                
                 .Actions(buttons => buttons
                     .Close()
                 );
