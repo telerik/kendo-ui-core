@@ -348,7 +348,6 @@
     <Compile Include="UI\TabStrip\TabStripHtmlBuilderTests.cs" />
     <Compile Include="UI\TabStrip\TabStripRenderingTests.cs" />
     <Compile Include="UI\TabStrip\TabStripTestHelper.cs" />
-    <Compile Include="UI\TreeView\TreeViewDataBindingConfigurationBuilderTests.cs" />
     <Compile Include="UI\TreeView\TreeViewBuilderTests.cs" />
     <Compile Include="UI\TreeView\TreeViewBindingSettingsBuilderBuilderTests.cs" />
     <Compile Include="UI\TreeView\TreeViewHtmlBuilderTests.cs" />

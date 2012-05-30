@@ -1,10 +1,8 @@
 namespace Kendo.Mvc.UI.Fluent
 {
-    using Kendo.Mvc.Infrastructure;
-    using Kendo.Mvc.Resources;
     using System;
     using System.Collections.Generic;
-
+    using Kendo.Mvc.Infrastructure;
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="DatePickerBase"/> component.
     /// </summary>

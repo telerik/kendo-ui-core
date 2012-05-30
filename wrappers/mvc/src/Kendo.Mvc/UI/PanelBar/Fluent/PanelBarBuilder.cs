@@ -4,8 +4,6 @@ namespace Kendo.Mvc.UI.Fluent
     using System.Collections;
     using System.Collections.Generic;
     using Infrastructure;
-    using Kendo.Mvc.UI.Fluent;
-
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="PanelBar"/> component.
     /// </summary>

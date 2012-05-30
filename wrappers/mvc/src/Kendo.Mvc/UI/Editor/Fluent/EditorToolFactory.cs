@@ -2,8 +2,7 @@ namespace Kendo.Mvc.UI.Fluent
 {
     using System;
     using System.Collections.Generic;
-    using Kendo.Mvc.Infrastructure;
-    
+
     public class EditorToolFactory : IHideObjectMembers
     {
         private readonly EditorToolGroup group;
@@ -13,6 +12,7 @@ namespace Kendo.Mvc.UI.Fluent
             this.group = group;
         }
 
+        /*TODO :Custom tools
         public EditorToolFactory Custom(Action<EditorCustomToolBuilder> configurator)
         {
             Guard.IsNotNull(configurator, "configurator");
@@ -22,6 +22,7 @@ namespace Kendo.Mvc.UI.Fluent
             
             return this;
         }
+        */
 
         public EditorToolFactory Clear()
         {

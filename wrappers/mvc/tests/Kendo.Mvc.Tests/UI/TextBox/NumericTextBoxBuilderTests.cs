@@ -1,9 +1,10 @@
 namespace Kendo.Mvc.UI.Tests
 {
 
-    using Xunit;
-    using Moq;
     using System;
+    using System.Linq;
+    using Kendo.Mvc.UI.Fluent;
+    using Xunit;
 
     public class NumericTextBoxBuilderTests
     {
