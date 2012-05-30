@@ -11,6 +11,8 @@
            }).join("~");
 
            delete options.sort;
+       } else {
+           result[this.options.prefix + "sort"] = "";
        }
 
        if (options.page) {
@@ -31,6 +33,8 @@
            }).join("~");
 
            delete options.group;
+       } else {
+            result[this.options.prefix + "group"] = "";
        }
 
        if (options.aggregate) {
@@ -49,6 +53,7 @@
            result[this.options.prefix + "filter"] = "";
            delete options.filter;
        }
+
        if (operation != "read" ) {
            if (options.models) {
                var prefix = "models",
@@ -63,6 +68,9 @@
 
            delete options.models;
        }
+
+       delete options.take;
+       delete options.skip;
 
        return $.extend(result, options);
     }
@@ -232,14 +240,22 @@
             kendo.data.RemoteTransport.fn.init.call(this, $.extend(options, { parameterMap: $.proxy(parameterMap, this) } ));
         },
         read: function(options) {
-            var url;
+            var url,
+                regExp = new RegExp(this.options.prefix + "[^&]*&?", "g"),
+                query;
+
+            query = location.search.replace(regExp, "").replace("?", "");
+            if (query.length && !(/&$/.test(query))) {
+                query += "&";
+            }
+
             options = this.setup(options, "read");
             url = options.url;
 
             if (url.indexOf("?") >= 0) {
-                url += "&";
+                url += "&" + query;
             } else {
-                url += "?";
+                url += "?" + query;
             }
 
             url += $.map(options.data, function(value, key) {
