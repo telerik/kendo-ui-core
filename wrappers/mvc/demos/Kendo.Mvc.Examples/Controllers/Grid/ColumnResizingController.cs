@@ -11,7 +11,7 @@ namespace Kendo.Mvc.Examples.Controllers
     {
         public ActionResult ColumnResizing()
         {
-            return View(new NorthwindDataContext().Products);
+            return View();
         }
 
         /// <summary>
@@ -21,9 +21,7 @@ namespace Kendo.Mvc.Examples.Controllers
         /// <returns></returns>
         public ActionResult ColumnResizing_Read([DataSourceRequest] DataSourceRequest request)
         {
-            var products = new NorthwindDataContext().Products;
-
-            return Json(products.ToDataSourceResult(request));
+            return Json(GetProductDto().ToDataSourceResult(request));
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Northwind" Class="NorthwindDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-    <Connection Mode="WebSettings" ConnectionString="Data Source=.\SQLEXPRESS;AttachDbFilename=|DataDirectory|\Northwind.mdf;Integrated Security=True;User Instance=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="NorthwindConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=.\SQLEXPRESS;AttachDbFilename=|DataDirectory|\Northwind.mdf;Integrated Security=True;User Instance=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="NorthwindConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Products" Member="Products">
     <Type Name="Product">
       <Column Name="ProductID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -32,7 +32,7 @@
       <Column Name="ShipPostalCode" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
       <Column Name="ShipCountry" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
       <Association Name="Customer_Order" Member="Customer" ThisKey="CustomerID" OtherKey="CustomerID" Type="Customer" IsForeignKey="true" />
-      <Association Name="Employee_Order" Member="Employee" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Employee" IsForeignKey="true" />
+      <Association Name="Employee_Order" Member="Employee" AccessModifier="Internal" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Employee" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Customers" Member="Customers">
