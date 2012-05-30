@@ -535,6 +535,17 @@
     <Content Include="Views\Shared\EditorTemplates\Time.cshtml" />
     <Content Include="Areas\razor\Views\web\grid\hierarchy.cshtml" />
     <Content Include="Areas\razor\Views\web\grid\selection.cshtml" />
+    <Content Include="Areas\aspx\Views\web\panelbar\ajax.aspx" />
+    <Content Include="Areas\aspx\Views\web\panelbar\animation.aspx" />
+    <Content Include="Areas\aspx\Views\web\panelbar\api.aspx" />
+    <Content Include="Areas\aspx\Views\web\panelbar\events.aspx" />
+    <Content Include="Areas\aspx\Views\web\panelbar\images.aspx" />
+    <Content Include="Areas\aspx\Views\web\panelbar\index.aspx" />
+    <Content Include="Areas\aspx\Views\web\tabstrip\ajax.aspx" />
+    <Content Include="Areas\aspx\Views\web\tabstrip\api.aspx" />
+    <Content Include="Areas\aspx\Views\web\tabstrip\events.aspx" />
+    <Content Include="Areas\aspx\Views\web\tabstrip\images.aspx" />
+    <Content Include="Areas\aspx\Views\web\tabstrip\index.aspx" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>

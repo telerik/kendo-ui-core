@@ -1,11 +1,17 @@
+<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/Web.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 <form class="configuration k-widget k-header">
     <span class="configHead">Animation Settings</span>
     <ul class="options">
         <li>
-            <input name="animation" type="radio" @(ViewBag.animation == "toggle" ? "checked=\"checked\"" : "") value="toggle" /> <label for="toggle">toggle animation</label>
+            <input name="animation" type="radio" <%= ViewBag.animation == "toggle" ? "checked=\"checked\"" : "" %> value="toggle" /> <label for="toggle">toggle animation</label>
         </li>
         <li>
-            <input name="animation" type="radio" @(ViewBag.animation != "toggle" ? "checked=\"checked\"" : "") value="expand" /> <label for="expand">expand animation</label>
+            <input name="animation" type="radio" <%= ViewBag.animation != "toggle" ? "checked=\"checked\"" : "" %> value="expand" /> <label for="expand">expand animation</label>
         </li>
         <li>
             <input type="checkbox" checked="checked" value="opacity" /> <label for="opacity">animate opacity</label>
@@ -16,7 +22,7 @@
 </form>
 
 <div class="history">
-    @(Html.Kendo().PanelBar()
+    <%= Html.Kendo().PanelBar()
         .Name("panelbar")
         .Animation(animation =>
         {
@@ -83,7 +89,7 @@
                     items.Add().Text("Jenn Heinlein");
                 });
         })
-    )
+    %>
     <div class="bottom"></div>
 </div>
 
@@ -92,11 +98,12 @@
         width: 252px;
         margin: 20px auto;
         padding: 36px 0 0 0;
-        background: url('@Url.Content("~/Content/web/panelbar/history.png")') transparent no-repeat 0 0;
+        background: url('<%= Url.Content("~/Content/web/panelbar/history.png") %>') transparent no-repeat 0 0;
     }
     .bottom {
         width: 252px;
         height: 9px;
-        background: url('@Url.Content("~/Content/web/panelbar/history.png")') transparent no-repeat 0 -35px;
+        background: url('<%= Url.Content("~/Content/web/panelbar/history.png") %>') transparent no-repeat 0 -35px;
     }
 </style>
+</asp:Content>
