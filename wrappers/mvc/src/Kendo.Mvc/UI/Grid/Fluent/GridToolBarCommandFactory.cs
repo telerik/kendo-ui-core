@@ -12,12 +12,13 @@ namespace Kendo.Mvc.UI.Fluent
             this.settings = settings;
         }
 
-        public GridToolBarCommandFactory<T> Position(GridToolBarPosition value)
-        {
-            settings.Position = value;
+        //TODO: Implement Toolbar positioning
+        //public GridToolBarCommandFactory<T> Position(GridToolBarPosition value)
+        //{
+        //    settings.Position = value;
 
-            return this;
-        }
+        //    return this;
+        //}
 
         public GridToolBarCommandBuilder<T> Insert()
         {

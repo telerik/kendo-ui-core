@@ -9,18 +9,18 @@ namespace Kendo.Mvc.Examples.Controllers
 {
     public partial class GridController : Controller
     {
-        public ActionResult AjaxEditing()
+        public ActionResult Editing()
         {
-            return View(SessionProductRepository.All());
+            return View();
         }
 
-        public ActionResult AjaxEditing_Read([DataSourceRequest] DataSourceRequest request)
+        public ActionResult Editing_Read([DataSourceRequest] DataSourceRequest request)
         {
             return Json(SessionProductRepository.All().ToDataSourceResult(request));
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult AjaxEditing_Create([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<EditableProduct> products)
+        public ActionResult Editing_Create([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<EditableProduct> products)
         {
             var results = new List<EditableProduct>();
 
@@ -37,7 +37,7 @@ namespace Kendo.Mvc.Examples.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult AjaxEditing_Update([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<EditableProduct> products)
+        public ActionResult Editing_Update([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<EditableProduct> products)
         {
             if (products != null && ModelState.IsValid)
             {
@@ -60,7 +60,7 @@ namespace Kendo.Mvc.Examples.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult AjaxEditing_Destroy([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<EditableProduct> products)
+        public ActionResult Editing_Destroy([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<EditableProduct> products)
         {            
             if (products.Any())
             {

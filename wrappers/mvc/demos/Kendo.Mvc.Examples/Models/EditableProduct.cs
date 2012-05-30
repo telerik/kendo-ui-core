@@ -23,6 +23,7 @@ namespace Kendo.Mvc.Examples.Models
         [Required]
         [DisplayName("Unit price")]
         [DataType(DataType.Currency)]
+        [Range(0, int.MaxValue)]
         public decimal UnitPrice
         {
             get;
@@ -32,6 +33,7 @@ namespace Kendo.Mvc.Examples.Models
         [Required]
         [DisplayName("Units in stock")]
         [DataType("Integer")]
+        [Range(0, int.MaxValue)]
         public int UnitsInStock
         {
             get;

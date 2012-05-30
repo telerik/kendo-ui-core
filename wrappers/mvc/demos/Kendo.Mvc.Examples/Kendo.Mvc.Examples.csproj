@@ -136,7 +136,8 @@
     <Compile Include="Controllers\Editor\EditorController.cs" />
     <Compile Include="Controllers\DataViz\Linear_Gauge\IndexController.cs" />
     <Compile Include="Controllers\DataViz\Linear_Gauge\Scale_OptoinsController.cs" />
-    <Compile Include="Controllers\Grid\AjaxEditingController.cs" />
+    <Compile Include="Controllers\Grid\EditingInlineController.cs" />
+    <Compile Include="Controllers\Grid\EditingController.cs" />
     <Compile Include="Controllers\DateTimePicker\IndexController.cs" />
     <Compile Include="Controllers\Grid\AjaxBindingController.cs" />
     <Compile Include="Controllers\Grid\ServerEditingController.cs" />
@@ -405,7 +406,7 @@
     <Content Include="Areas\aspx\Views\web\slider\index.aspx" />
     <Content Include="Areas\razor\Views\web\splitter\api.cshtml" />
     <Content Include="Areas\razor\Views\dataviz\area_charts\index.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\ajaxediting.cshtml" />
+    <Content Include="Areas\razor\Views\web\grid\editing.cshtml" />
     <Content Include="Areas\razor\Views\web\dropdownlist\index.cshtml" />
     <Content Include="Areas\razor\Views\web\autocomplete\index.cshtml" />
     <Content Include="Areas\razor\Views\web\panelbar\ajax.cshtml" />
@@ -524,6 +525,13 @@
     <Content Include="Areas\aspx\Views\web\window\events.aspx" />
     <Content Include="Areas\aspx\Views\web\window\index.aspx" />
     <Content Include="Areas\razor\Views\dataviz\dashboards\car_dashboard.cshtml" />
+    <Content Include="Areas\razor\Views\web\grid\editing_inline.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Currency.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Integer.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Number.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Time.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
