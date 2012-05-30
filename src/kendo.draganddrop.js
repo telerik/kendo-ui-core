@@ -328,6 +328,7 @@
 
             that.pressed = true;
             that.moved = false;
+            that.startTime = null;
 
             if (support.touch) {
                 touch = originalEvent.changedTouches[0];
@@ -368,6 +369,7 @@
                     }
 
                     if (!Drag.captured) {
+                        that.startTime = e.timeStamp;
                         that._trigger(START, e);
                         that.moved = true;
                     } else {
@@ -389,6 +391,7 @@
 
             that._withEvent(e, function() {
                 if (that.moved) {
+                    that.endTime = e.timeStamp;
                     that._trigger(END, e);
                     that.moved = false;
                 } else {

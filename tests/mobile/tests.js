@@ -56,6 +56,10 @@ tests.push(
         title: "mobile splitview"
     },
     {
+        page: "mobile/swipe.html",
+        title: "mobile swipe"
+    },
+    {
         page: "mobile/switch/index.html",
         title: "mobile switch"
     },
