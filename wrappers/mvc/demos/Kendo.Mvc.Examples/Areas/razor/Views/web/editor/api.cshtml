@@ -1,6 +1,22 @@
-﻿@(Html.Kendo().Editor()
+﻿<div class="configuration k-widget k-header">
+    <span class="configHead">Get value</span>
+    <ul class="options">
+        <li>
+            <button id="get" class="k-button">Get value</button>
+        </li>
+    </ul>
+    <span class="configTitle">Set value</span>
+    <ul class="options">
+        <li>
+            <textarea id="value" style="width: 200px;" rows="4" cols="20">new value</textarea>
+            <button id="set" class="k-button">Set value</button>
+        </li>
+    </ul>
+</div>
+
+@(Html.Kendo().Editor()
       .Name("Editor")
-      .HtmlAttributes(new { style = "width: 740px;height:440px" })
+      .HtmlAttributes(new { style = "width: 600px;height:440px" })
       .Value(@<text>
             <p>
                <img src="http://www.kendoui.com/Image/kendo-logo.png" alt="Editor for ASP.NET MVC logo" style="display:block;margin-left:auto;margin-right:auto;" />
@@ -26,3 +42,19 @@
             </p>
       </text>)
 )
+
+<script>
+    $(document).ready(function() {
+        var editor = $("#Editor").data("kendoEditor");
+
+        var setValue = function () {
+            editor.value($("#value").val());
+        };
+
+        $("#get").click(function() {
+            alert(editor.value());
+        });
+
+        $("#set").click(setValue);
+    });
+</script>

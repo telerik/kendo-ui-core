@@ -9,13 +9,16 @@ html
 {
     overflow-y:scroll;
     font:75% 'Lucida Sans Unicode','Lucida Grande',arial,helvetica,sans-serif;
+    background:#e2e2e2 url("flowers-left.png") no-repeat fixed 0 400px;
 }
 
-#example
+.page
 {
     width:940px;
-    margin:0 auto;
-    padding:0;
+    margin:30px auto;
+    padding:30px;
+    background:#fff;
+    box-shadow: 1px 1px 7px 1px #999;
 }
 
 .offline-button {
@@ -30,10 +33,22 @@ html
     text-decoration: none;
 }
 
+.page .offline-button
+{
+    margin-top:0;
+}
+
 .offline-button:hover {
     background: #e36028;
 }
 
+#example
+{
+    margin: 20px 0;
+    padding: 20px 0;
+    border: solid #999;
+    border-width: 1px 0;
+}
 
 /*console*/
 
@@ -45,7 +60,7 @@ html
     color: #333;
     font: 11px Consolas, Monaco, "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
     height: 200px;
-    margin: 0 0 1.4em;
+    margin: 1.4em 0;
     overflow-x: hidden;
     overflow-y: scroll;
     text-align: left;
@@ -221,6 +236,7 @@ html
 .prettyprint
 {
     font-size: 12px;
+    overflow: auto;
 }
 
 pre .nocode { background-color: transparent; color: #000; }

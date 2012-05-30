@@ -1,6 +1,12 @@
 ﻿@(Html.Kendo().Editor()
       .Name("Editor")
       .HtmlAttributes(new { style = "width: 740px;height:440px" })
+      .Events(events => events
+          .Change("change")
+          .Execute("execute")
+          .Select("select")
+          .Paste("paste")
+       )
       .Value(@<text>
             <p>
                <img src="http://www.kendoui.com/Image/kendo-logo.png" alt="Editor for ASP.NET MVC logo" style="display:block;margin-left:auto;margin-right:auto;" />
@@ -26,3 +32,32 @@
             </p>
       </text>)
 )
+
+<script>
+    function change(e) {
+        kendoConsole.log("change");
+    }
+
+    function execute(e) {
+        kendoConsole.log("execute command :: " + e.name);
+    }
+
+    function select(e) {
+        kendoConsole.log("selection change");
+    }
+
+    function paste(e) {
+        kendoConsole.log("paste");
+    }
+
+    function contentLoad(e) {
+        kendoConsole.log("Content loaded in <b>"+ $(e.item).find("> .k-link").text() +
+                            "</b> and starts with <b>" + $(e.contentElement).text().substr(0, 20) + "...</b>");
+    }
+
+    function error(e) {
+        kendoConsole.error("Loading failed with " + e.xhr.statusText + " " + e.xhr.status);
+    }
+</script>
+
+<div class="console"></div>
