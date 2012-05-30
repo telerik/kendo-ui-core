@@ -392,9 +392,9 @@ namespace Kendo.Mvc.UI
         /// %&gt;
         /// </code>
         /// </example>
-        public virtual GaugeRadialBuilder RadialGauge()
+        public virtual RadialGaugeBuilder RadialGauge()
         {
-            return new GaugeRadialBuilder(new RadialGauge(ViewContext, Initializer, UrlGenerator));
+            return new RadialGaugeBuilder(new RadialGauge(ViewContext, Initializer, UrlGenerator));
         }
 
         /// <summary>
@@ -1157,7 +1157,7 @@ namespace Kendo.Mvc.UI
         ///  &lt;%= Html.Kendo().RadialGaugeFor(m=>m.Property) %&gt;
         /// </code>
         /// </example>
-        public virtual GaugeRadialBuilder RadialGaugeFor<TValue>(Expression<Func<TModel, TValue>> expression)
+        public virtual RadialGaugeBuilder RadialGaugeFor<TValue>(Expression<Func<TModel, TValue>> expression)
             where TValue : struct, IComparable
         {
             var value = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
@@ -1177,7 +1177,7 @@ namespace Kendo.Mvc.UI
         ///  &lt;%= Html.Kendo().RadialGaugeFor(m=>m.Property) %&gt;
         /// </code>
         /// </example>
-        public virtual GaugeRadialBuilder RadialGaugeFor<TValue>(Expression<Func<TModel, Nullable<TValue>>> expression)
+        public virtual RadialGaugeBuilder RadialGaugeFor<TValue>(Expression<Func<TModel, Nullable<TValue>>> expression)
             where TValue : struct, IComparable
         {
             var value = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
