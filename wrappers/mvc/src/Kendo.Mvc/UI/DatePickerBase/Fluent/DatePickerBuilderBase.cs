@@ -43,7 +43,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="clientEventsAction">The client events action.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().DatePicker()
+        ///  &lt;%= Html.Kendo().DatePicker()
         ///             .Name("DatePicker")
         ///             .Events(events =>
         ///                 events.Open("open").Change("change")

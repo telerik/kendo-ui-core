@@ -1,12 +1,10 @@
 namespace Kendo.Mvc.UI
 {
-    using Kendo.Mvc.Extensions;
-    using Kendo.Mvc.Infrastructure;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Web.Mvc;
-
+    using Kendo.Mvc.Infrastructure;
 
     public class AutoComplete : ViewComponentBase
     {

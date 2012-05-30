@@ -17,7 +17,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handlerName">The action defining the inline handler.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;% Html.Telerik().RangeSlider()
+        ///  &lt;% Html.Kendo().RangeSlider()
         ///            .Name("RangeSlider")
         ///            .Events(events => events.Change(() =>
         ///            {

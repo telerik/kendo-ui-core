@@ -5,8 +5,6 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Infrastructure;
     using System.Collections.Generic;
 
-    /// <summary>
-    /// Telerik LinearGauge for ASP.NET MVC is a view component for rendering LinearGauge.
     public class LinearGauge<T> : Gauge where T : struct
     {
         /// <summary>

@@ -42,7 +42,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="text">The text.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid(Model)
+        ///  &lt;%= Html.Kendo().Grid(Model)
         ///             .Name("Grid")
         ///             .Columns(columns => columns.Bound(o => o.OrderID).Title("ID"))
         /// %&gt;
@@ -63,7 +63,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="attributes">The attributes.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid(Model)
+        ///  &lt;%= Html.Kendo().Grid(Model)
         ///             .Name("Grid")
         ///             .Columns(columns => columns.Bound(o => o.OrderID).HeaderHtmlAttributes(new {@class="order-header"}))
         /// %&gt;
@@ -80,7 +80,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="attributes">The attributes.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid(Model)
+        ///  &lt;%= Html.Kendo().Grid(Model)
         ///             .Name("Grid")
         ///             .Columns(columns => columns.Bound(o => o.OrderID).HeaderHtmlAttributes(new {@class="order-header"}))
         /// %&gt;
@@ -101,7 +101,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="attributes">The attributes.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid(Model)
+        ///  &lt;%= Html.Kendo().Grid(Model)
         ///             .Name("Grid")
         ///             .Columns(columns => columns.Bound(o => o.OrderID).FooterHtmlAttributes(new {@class="order-footer"}))
         /// %&gt;
@@ -118,7 +118,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="attributes">The attributes.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid(Model)
+        ///  &lt;%= Html.Kendo().Grid(Model)
         ///             .Name("Grid")
         ///             .Columns(columns => columns.Bound(o => o.OrderID).FooterHtmlAttributes(new {@class="order-footer"}))
         /// %&gt;
@@ -137,7 +137,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="attributes">The attributes.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid(Model)
+        ///  &lt;%= Html.Kendo().Grid(Model)
         ///             .Name("Grid")
         ///             .Columns(columns => columns.Bound(o => o.OrderID).HtmlAttributes(new {@class="order-cell"}))
         /// %&gt;
@@ -156,7 +156,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="attributes">The attributes.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid(Model)
+        ///  &lt;%= Html.Kendo().Grid(Model)
         ///             .Name("Grid")
         ///             .Columns(columns => columns.Bound(o => o.OrderID).HtmlAttributes(new {@class="order-cell"}))
         /// %&gt;
@@ -176,7 +176,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="pixelWidth">The width in pixels.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid(Model)
+        ///  &lt;%= Html.Kendo().Grid(Model)
         ///             .Name("Grid")
         ///             .Columns(columns => columns.Bound(o => o.OrderID).Width(100))
         /// %&gt;
@@ -197,7 +197,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="value">The width to set.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;% Html.Telerik().Grid(Model)
+        ///  &lt;% Html.Kendo().Grid(Model)
         ///            .Name("Grid")
         ///            .Columns(columns => columns.Bound(o => 
         ///            {
@@ -225,7 +225,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid(Model)
+        ///  &lt;%= Html.Kendo().Grid(Model)
         ///             .Name("Grid")
         ///             .Columns(columns => columns.Bound(o => o.OrderID).Visible((bool)ViewData["visible"]))
         /// %&gt;
@@ -245,7 +245,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid(Model)
+        ///  &lt;%= Html.Kendo().Grid(Model)
         ///             .Name("Grid")
         ///             .Columns(columns => columns.Bound(o => o.OrderID).Hidden((bool)ViewData["hidden"]))
         /// %&gt;
@@ -263,7 +263,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid(Model)
+        ///  &lt;%= Html.Kendo().Grid(Model)
         ///             .Name("Grid")
         ///             .Columns(columns => columns.Bound(o => o.OrderID).Hidden())
         /// %&gt;
@@ -284,7 +284,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid(Model)
+        ///  &lt;%= Html.Kendo().Grid(Model)
         ///             .Name("Grid")
         ///             .Columns(columns => columns.Bound(o => o.OrderID).IncludeInContextMenu((bool)ViewData["hidden"]))
         /// %&gt;

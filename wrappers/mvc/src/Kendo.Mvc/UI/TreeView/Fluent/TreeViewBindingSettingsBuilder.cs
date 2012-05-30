@@ -23,7 +23,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().TreeView()
+        ///  &lt;%= Html.Kendo().TreeView()
         ///             .Name("TreeView")
         ///             .DataBinding(dataBinding => 
         ///             {
@@ -48,7 +48,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="routeValues">The route values of the Action method.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid(Model)
+        ///  &lt;%= Html.Kendo().Grid(Model)
         ///             .Name("Grid")
         ///             .DataBinding(dataBinding => 
         ///             {
@@ -72,7 +72,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="routeValues">The route values.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().TreeView()
+        ///  &lt;%= Html.Kendo().TreeView()
         ///             .Name("TreeView")
         ///             .DataBinding(dataBinding => 
         ///             {
@@ -96,7 +96,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="routeValues">The route values.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().TreeView()
+        ///  &lt;%= Html.Kendo().TreeView()
         ///             .Name("TreeView")
         ///             .DataBinding(dataBinding => 
         ///             {
@@ -119,7 +119,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="controllerName">Name of the controller.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().TreeView()
+        ///  &lt;%= Html.Kendo().TreeView()
         ///             .Name("TreeView")
         ///             .DataBinding(dataBinding => 
         ///             {
@@ -140,7 +140,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="routeValues">The route values.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().TreeView()
+        ///  &lt;%= Html.Kendo().TreeView()
         ///             .Name("TreeView")
         ///             .DataBinding(dataBinding => 
         ///             {
@@ -163,7 +163,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="routeValues">The route values.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().TreeView()
+        ///  &lt;%= Html.Kendo().TreeView()
         ///             .Name("TreeView")
         ///             .DataBinding(dataBinding => 
         ///             {
@@ -185,7 +185,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="routeName">Name of the route.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().TreeView()
+        ///  &lt;%= Html.Kendo().TreeView()
         ///             .Name("TreeView")
         ///             .DataBinding(dataBinding => 
         ///             {

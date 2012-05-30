@@ -1,25 +1,12 @@
 namespace Kendo.Mvc.UI
 {
-    using System.Globalization;
+    using System.Collections.Generic;
     using System.IO;
     using System.Web.Mvc;
     using System.Web.UI;
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.UI.Html;
-    using System.Collections.Generic;
 
-    /// <summary>
-    /// Telerik Upload for ASP.NET MVC is a view component for uploading files.
-    /// It supports the following features:
-    /// <list type="bullet">
-    ///     <item>Asynchronous uploading</item>
-    ///     <item>Progress tracking</item>
-    ///     <item>Multiple file selection</item>
-    ///     <item>Drag &amp; drop</item>
-    /// </list>
-    /// Note that some of the features depend on browser capabilities.
-    /// For more information, see the online documentation.
-    /// </summary>
     public class Upload : ViewComponentBase
     {
         /// <summary>

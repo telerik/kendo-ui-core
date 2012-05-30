@@ -16,7 +16,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="value">The desired orientation.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Splitter()
+        ///  &lt;%= Html.Kendo().Splitter()
         ///             .Name("Splitter")
         ///             .Orientation(SplitterOrientation.Vertical)
         /// %&gt;
@@ -35,7 +35,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurePanes">The action that configures the panes.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Splitter()
+        ///  &lt;%= Html.Kendo().Splitter()
         ///             .Name("Splitter")
         ///             .Panes(panes => {
         ///                 panes.Add().LoadContentFrom("Navigation", "Shared");
@@ -61,7 +61,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configureClientEvents">The action that configures the client events.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Splitter()
+        ///  &lt;%= Html.Kendo().Splitter()
         ///             .Name("Splitter")
         ///             .Events(events => events
         ///                 .OnLoad("onLoad")

@@ -28,7 +28,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="value">The desired size. Only sizes in pixels and percentages are allowed.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Splitter()
+        ///  &lt;%= Html.Kendo().Splitter()
         ///             .Name("Splitter")
         ///             .Panes(panes =>
         ///             {
@@ -57,7 +57,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="value">The desired minimum size. Only sizes in pixels and percentages are allowed.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Splitter()
+        ///  &lt;%= Html.Kendo().Splitter()
         ///             .Name("Splitter")
         ///             .Panes(panes =>
         ///             {
@@ -86,7 +86,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="value">The desired maximum size. Only sizes in pixels and percentages are allowed.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Splitter()
+        ///  &lt;%= Html.Kendo().Splitter()
         ///             .Name("Splitter")
         ///             .Panes(panes =>
         ///             {
@@ -115,7 +115,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="isScrollable">Whether the pane will be scrollable.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Splitter()
+        ///  &lt;%= Html.Kendo().Splitter()
         ///             .Name("Splitter")
         ///             .Panes(panes =>
         ///             {
@@ -137,7 +137,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="isResizable">Whether the pane will be resizable.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Splitter()
+        ///  &lt;%= Html.Kendo().Splitter()
         ///             .Name("Splitter")
         ///             .Panes(panes =>
         ///             {
@@ -159,7 +159,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="isCollapsed">Whether the pane will be initially collapsed.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Splitter()
+        ///  &lt;%= Html.Kendo().Splitter()
         ///             .Name("Splitter")
         ///             .Panes(panes =>
         ///             {
@@ -181,7 +181,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="isCollapsible">Whether the pane can be collapsed by the user.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Splitter()
+        ///  &lt;%= Html.Kendo().Splitter()
         ///             .Name("Splitter")
         ///             .Panes(panes =>
         ///             {
@@ -203,7 +203,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="attributes">The attributes.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Splitter()
+        ///  &lt;%= Html.Kendo().Splitter()
         ///             .Name("Splitter")
         ///             .Panes(panes =>
         ///             {
@@ -236,7 +236,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <param name="value">The action which renders the HTML content.</param>
         /// <code lang="CS">
-        ///  &lt;%  Html.Telerik().Splitter()
+        ///  &lt;%  Html.Kendo().Splitter()
         ///             .Name("Splitter")
         ///             .Panes(panes =>
         ///             {
@@ -262,7 +262,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <param name="value">The Razor template for the HTML content.</param>
         /// <code lang="CS">
-        ///  @(Html.Telerik().Splitter()
+        ///  @(Html.Kendo().Splitter()
         ///        .Name("Splitter")
         ///        .Panes(panes =>
         ///        {
@@ -285,7 +285,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <param name="value">The HTML content.</param>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Splitter()
+        ///  &lt;%= Html.Kendo().Splitter()
         ///          .Name("Splitter")
         ///          .Panes(panes =>
         ///          {
@@ -309,7 +309,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="routeValues">The route values of the Action method.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Splitter()
+        ///  &lt;%= Html.Kendo().Splitter()
         ///          .Name("Splitter")
         ///          .Panes(panes => {
         ///               panes.Add()
@@ -330,7 +330,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="controllerName">The controller name.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Splitter()
+        ///  &lt;%= Html.Kendo().Splitter()
         ///          .Name("Splitter")
         ///          .Panes(panes => {
         ///               panes.Add()
@@ -352,7 +352,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="routeValues">Route values.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Splitter()
+        ///  &lt;%= Html.Kendo().Splitter()
         ///          .Name("Splitter")
         ///          .Panes(panes => {
         ///               panes.Add()
@@ -379,7 +379,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="value">The url.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Splitter()
+        ///  &lt;%= Html.Kendo().Splitter()
         ///          .Name("Splitter")
         ///          .Panes(panes => {
         ///               panes.Add()

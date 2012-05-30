@@ -18,7 +18,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="value">The value.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Slider()
+        ///  &lt;%= Html.Kendo().Slider()
         ///             .Name("Slider")
         ///             .Tooltip(tooltip => tooltip.Format("{0:P"))
         /// %&gt;
@@ -36,7 +36,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="value">The value.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Slider()
+        ///  &lt;%= Html.Kendo().Slider()
         ///             .Name("Slider")
         ///             .Tooltip(tooltip => tooltip.Enable(false))
         /// %&gt;
@@ -53,7 +53,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="template">The template.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Slider()
+        ///  &lt;%= Html.Kendo().Slider()
         ///             .Name("Slider")
         ///             .Tooltip(tooltip => tooltip.template("<#= value #>"))
         /// %&gt;

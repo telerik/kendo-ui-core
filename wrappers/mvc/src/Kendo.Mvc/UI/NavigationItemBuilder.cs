@@ -57,7 +57,7 @@ namespace Kendo.Mvc.UI
         /// <param name="attributes">The attributes.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Menu()
+        ///  &lt;%= Html.Kendo().Menu()
         ///             .Name("Menu")
         ///             .Items(items => items.Add().Attributes(new {@class="first-item"}))
         /// %&gt;
@@ -103,7 +103,7 @@ namespace Kendo.Mvc.UI
         /// <param name="value">The value.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Menu()
+        ///  &lt;%= Html.Kendo().Menu()
         ///             .Name("Menu")
         ///             .Items(items => items.Add().Text("First Item"))
         /// %&gt;
@@ -125,7 +125,7 @@ namespace Kendo.Mvc.UI
         /// <param name="value">The value.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Menu()
+        ///  &lt;%= Html.Kendo().Menu()
         ///             .Name("Menu")
         ///             .Items(items => items.Add().Text("First Item").Visible((bool)ViewData["visible"])
         /// %&gt;
@@ -143,7 +143,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Menu()
+        ///  &lt;%= Html.Kendo().Menu()
         ///             .Name("Menu")
         ///             .Items(items => items.Add().Text("First Item").Enabled((bool)ViewData["enabled"])
         /// %&gt;
@@ -161,7 +161,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Menu()
+        ///  &lt;%= Html.Kendo().Menu()
         ///             .Name("Menu")
         ///             .Items(items => items.Add().Text("First Item").Selected(true))
         /// %&gt;
@@ -181,7 +181,7 @@ namespace Kendo.Mvc.UI
         /// <param name="routeValues">The route values.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Menu()
+        ///  &lt;%= Html.Kendo().Menu()
         ///             .Name("Menu")
         ///             .Items(items => items.Add().Text("First Item").Route("Default", new RouteValueDictionary{{"id", 1}}))
         /// %&gt;
@@ -203,7 +203,7 @@ namespace Kendo.Mvc.UI
         /// <param name="routeValues">The route values.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Menu()
+        ///  &lt;%= Html.Kendo().Menu()
         ///             .Name("Menu")
         ///             .Items(items => items.Add().Text("First Item").Route("Default", new {id, 1}))
         /// %&gt;
@@ -224,7 +224,7 @@ namespace Kendo.Mvc.UI
         /// <param name="routeName">Name of the route.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Menu()
+        ///  &lt;%= Html.Kendo().Menu()
         ///             .Name("Menu")
         ///             .Items(items => items.Add().Text("First Item").Route("Default"))
         /// %&gt;
@@ -241,7 +241,7 @@ namespace Kendo.Mvc.UI
         /// <param name="routeValues">The route values of the Action method.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Menu()
+        ///  &lt;%= Html.Kendo().Menu()
         ///             .Name("Menu")
         ///             .Items(items => items.Add().Text("Index").Action(MVC.Home.Index(3).GetRouteValueDictionary()))
         /// %&gt;
@@ -267,7 +267,7 @@ namespace Kendo.Mvc.UI
         /// <param name="routeValues">The route values.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Menu()
+        ///  &lt;%= Html.Kendo().Menu()
         ///             .Name("Menu")
         ///             .Items(items => items.Add().Text("Index").Action("Index", "Home", new RouteValueDictionary{{"id", 1}}))
         /// %&gt;
@@ -289,7 +289,7 @@ namespace Kendo.Mvc.UI
         /// <param name="routeValues">The route values.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Menu()
+        ///  &lt;%= Html.Kendo().Menu()
         ///             .Name("Menu")
         ///             .Items(items => items.Add().Text("Index").Action("Index", "Home", new {id, 1}))
         /// %&gt;
@@ -310,7 +310,7 @@ namespace Kendo.Mvc.UI
         /// <param name="controllerName">Name of the controller.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Menu()
+        ///  &lt;%= Html.Kendo().Menu()
         ///             .Name("Menu")
         ///             .Items(items => items.Add().Text("Index").Action("Index", "Home"))
         /// %&gt;
@@ -327,7 +327,7 @@ namespace Kendo.Mvc.UI
         /// <param name="value">The value.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Menu()
+        ///  &lt;%= Html.Kendo().Menu()
         ///             .Name("Menu")
         ///             .Items(items => items.Add().Text("www.example.com").Url("http://www.example.com"))
         /// %&gt;
@@ -346,7 +346,7 @@ namespace Kendo.Mvc.UI
         /// <param name="value">The value.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Menu()
+        ///  &lt;%= Html.Kendo().Menu()
         ///             .Name("Menu")
         ///             .Items(items => items.Add().Text("First Item").ImageUrl("~/Content/first.png"))
         /// %&gt;
@@ -367,7 +367,7 @@ namespace Kendo.Mvc.UI
         /// <param name="attributes">The attributes.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Menu()
+        ///  &lt;%= Html.Kendo().Menu()
         ///             .Name("Menu")
         ///             .Items(items => items
         ///                    .Add().Text("First Item")
@@ -401,7 +401,7 @@ namespace Kendo.Mvc.UI
         /// <param name="cssClasses">The CSS classes.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Menu()
+        ///  &lt;%= Html.Kendo().Menu()
         ///             .Name("Menu")
         ///             .Items(items => items
         ///                    .Add().Text("First Item")
@@ -421,7 +421,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <param name="value">The action which renders the content.</param>
         /// <code lang="CS">
-        ///  &lt;% Html.Telerik().Menu()
+        ///  &lt;% Html.Kendo().Menu()
         ///            .Name("Menu")
         ///            .Items(items => items
         ///                     .Add()
@@ -449,7 +449,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <param name="value">The content wrapped in a regular HTML tag or text tag (Razor syntax).</param>
         /// <code lang="CS">
-        ///  @(Html.Telerik().Menu()
+        ///  @(Html.Kendo().Menu()
         ///       .Name("Menu")
         ///       .Items(items => items
         ///                .Add()
@@ -477,7 +477,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <param name="value">The action which renders the content.</param>
         /// <code lang="CS">
-        ///  &lt;% Html.Telerik().Menu()
+        ///  &lt;% Html.Kendo().Menu()
         ///            .Name("Menu")
         ///            .Items(items => items
         ///                     .Add()
@@ -502,7 +502,7 @@ namespace Kendo.Mvc.UI
         /// <param name="attributes">The attributes.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Menu()
+        ///  &lt;%= Html.Kendo().Menu()
         ///             .Name("Menu")
         ///             .Items(items => items
         ///                    .Add().Text("First Item")
@@ -537,7 +537,7 @@ namespace Kendo.Mvc.UI
         /// <param name="controllerAction">The action.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Menu()
+        ///  &lt;%= Html.Kendo().Menu()
         ///             .Name("Menu")
         ///             .Items(items => items
         ///                    .Add().Text("First Item")
@@ -558,7 +558,7 @@ namespace Kendo.Mvc.UI
         /// <param name="isEncoded">Whether the property should be encoded. Default: true.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Menu()
+        ///  &lt;%= Html.Kendo().Menu()
         ///             .Name("Menu")
         ///             .Items(items => items.Add().Text("&lt;strong&gt;First Item&lt;/strong&gt;").Encoded(false))
         /// %&gt;

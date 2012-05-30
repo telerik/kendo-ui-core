@@ -24,7 +24,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="addAction">The add action.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().TabStrip()
+        ///  &lt;%= Html.Kendo().TabStrip()
         ///             .Name("TabStrip")
         ///             .Items(items =>
         ///             {
@@ -51,7 +51,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="clientEventsAction">The client events action.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().TabStrip()
+        ///  &lt;%= Html.Kendo().TabStrip()
         ///             .Name("TabStrip")
         ///             .Events(events =>
         ///                 events.Select("onSelect").OnLoad("onLoad")
@@ -75,7 +75,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="siteMapAction">The action to configure the item.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().TabStrip()
+        ///  &lt;%= Html.Kendo().TabStrip()
         ///             .Name("TabStrip")
         ///             .BindTo("examples", (item, siteMapNode) =>
         ///             {
@@ -98,7 +98,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="viewDataKey">The view data key.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().TabStrip()
+        ///  &lt;%= Html.Kendo().TabStrip()
         ///             .Name("TabStrip")
         ///             .BindTo("examples")
         /// %&gt;
@@ -121,7 +121,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="itemDataBound">The action executed for every data bound item.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().TabStrip()
+        ///  &lt;%= Html.Kendo().TabStrip()
         ///             .Name("TabStrip")
         ///             .BindTo(new []{"First", "Second"}, (item, value)
         ///             {
@@ -144,7 +144,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///// <param name="addEffects">The action which configures the effects.</param>
         ///// <example>
         ///// <code lang="CS">
-        ///// &lt;%= Html.Telerik().TabStrip()
+        ///// &lt;%= Html.Kendo().TabStrip()
         /////	           .Name("TabStrip")
         /////	           .Effects(fx =>
         /////	           {
@@ -172,7 +172,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="index">The index.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().TabStrip()
+        ///  &lt;%= Html.Kendo().TabStrip()
         ///             .Name("TabStrip")
         ///             .Items(items =>
         ///             {
@@ -199,7 +199,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="action">Action, which will be executed for each item.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().TabStrip()
+        ///  &lt;%= Html.Kendo().TabStrip()
         ///             .Name("TabStrip")
         ///             .ItemAction(item =>
         ///             {
@@ -225,7 +225,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="value">If true the item will be highlighted.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().TabStrip()
+        ///  &lt;%= Html.Kendo().TabStrip()
         ///             .Name("TabStrip")
         ///             .HighlightPath(true)
         /// %&gt;
@@ -244,7 +244,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="value">If true security trimming is enabled.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().TabStrip()
+        ///  &lt;%= Html.Kendo().TabStrip()
         ///             .Name("TabStrip")
         ///             .SecurityTrimming(false)
         /// %&gt;

@@ -34,7 +34,7 @@ namespace Kendo.Mvc.UI
         /// <param name="addAction">The add action.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().PanelBar()
+        ///  &lt;%= Html.Kendo().PanelBar()
         ///             .Name("PanelBar")
         ///             .Items(items =>
         ///             {
@@ -64,7 +64,7 @@ namespace Kendo.Mvc.UI
         /// <param name="value">If true the item will be expanded.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().PanelBar()
+        ///  &lt;%= Html.Kendo().PanelBar()
         ///             .Name("PanelBar")
         ///             .Items(items =>
         ///             {

@@ -100,7 +100,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().ComboBox()
+        ///  &lt;%= Html.Kendo().ComboBox()
         ///             .Name("ComboBox")
         ///             .Filter("startswith");
         /// %&gt;
@@ -118,7 +118,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().ComboBox()
+        ///  &lt;%= Html.Kendo().ComboBox()
         ///             .Name("ComboBox")
         ///             .IgnoreCase(true)
         /// %&gt;
@@ -147,7 +147,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().ComboBox()
+        ///  &lt;%= Html.Kendo().ComboBox()
         ///             .Name("ComboBox")
         ///             .HighlightFirst(true)
         /// %&gt;
@@ -175,7 +175,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="index">Item index.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().ComboBox()
+        ///  &lt;%= Html.Kendo().ComboBox()
         ///             .Name("ComboBox")
         ///             .SelectedIndex(0);
         /// %&gt;

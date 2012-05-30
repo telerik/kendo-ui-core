@@ -25,7 +25,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid(Model)
+        ///  &lt;%= Html.Kendo().Grid(Model)
         ///             .Name("Grid")
         ///             .Sorting(sorting => sorting.Enabled((bool)ViewData["enableSorting"]))
         /// %&gt;
@@ -47,7 +47,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="value">The value.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid(Model)
+        ///  &lt;%= Html.Kendo().Grid(Model)
         ///             .Name("Grid")
         ///             .Sorting(sorting => sorting.SortMode(GridSortMode.MultipleColumns))
         /// %&gt;
@@ -66,7 +66,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="value">The value.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid(Model)
+        ///  &lt;%= Html.Kendo().Grid(Model)
         ///             .Name("Grid")
         ///             .Sorting(sorting => sorting.AllowUnsort(true))
         /// %&gt;

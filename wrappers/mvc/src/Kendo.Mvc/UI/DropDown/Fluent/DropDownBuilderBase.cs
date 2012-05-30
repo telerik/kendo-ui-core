@@ -23,7 +23,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///// <param name="EventsAction">The client events action.</param>
         ///// <example>
         ///// <code lang="CS">
-        /////  &lt;%= Html.Telerik().DropDownList()
+        /////  &lt;%= Html.Kendo().DropDownList()
         /////             .Name("DropDownList")
         /////             .Events(events =>
         /////                 events.OnLoad("onLoad")
@@ -46,7 +46,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///// <param name="effectsAction">The action which configures the effects.</param>
         ///// <example>
         ///// <code lang="CS">
-        ///// &lt;%= Html.Telerik().DropDownList()
+        ///// &lt;%= Html.Kendo().DropDownList()
         /////	           .Name("DropDownList")
         /////	           .Effects(fx =>
         /////	           {
@@ -73,7 +73,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///// <param name="addAction">The add action.</param>
         ///// <example>
         ///// <code lang="CS">
-        /////  &lt;%= Html.Telerik().DropDownList()
+        /////  &lt;%= Html.Kendo().DropDownList()
         /////             .Name("DropDownList")
         /////             .Items(items =>
         /////             {
@@ -102,7 +102,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///// <param name="dataSource">The data source.</param>
         ///// <example>
         ///// <code lang="CS">
-        /////  &lt;%= Html.Telerik().DropDownList()
+        /////  &lt;%= Html.Kendo().DropDownList()
         /////             .Name("DropDownList")
         /////             .BindTo(new List<DropDownItem>
         /////             {
@@ -138,7 +138,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///// <param name="dataSource">The data source.</param>
         ///// <example>
         ///// <code lang="CS">
-        /////  &lt;%= Html.Telerik().DropDownList()
+        /////  &lt;%= Html.Kendo().DropDownList()
         /////             .Name("DropDownList")
         /////             .BindTo(new List<SelectListItem>
         /////             {
@@ -178,7 +178,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///// <param name="placeholder">Text of the default empty item.</param>
         ///// <example>
         ///// <code lang="CS">
-        /////  &lt;%= Html.Telerik().DropDownList()
+        /////  &lt;%= Html.Kendo().DropDownList()
         /////             .Name("DropDownList")
         /////             .Placeholder("-- Select Item --")
         /////             .BindTo(new List<DropDownItem>
@@ -208,7 +208,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///// <param name="value">Value of the item which should be selected.</param>
         ///// <example>
         ///// <code lang="CS">
-        /////  &lt;%= Html.Telerik().DropDownList()
+        /////  &lt;%= Html.Kendo().DropDownList()
         /////             .Name("DropDownList")
         /////             .Encode(true)
         /////             .BindTo(new List<DropDownItem>

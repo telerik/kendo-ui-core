@@ -1,7 +1,6 @@
 namespace Kendo.Mvc.UI.Fluent
 {
     using System;
-    using System.Globalization;
     using Kendo.Mvc.Infrastructure;
 
     /// <summary>
@@ -24,7 +23,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">The client events configuration action.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Upload()
+        ///  &lt;%= Html.Kendo().Upload()
         ///             .Name("Upload")
         ///             .Events(events => events
         ///                 .OnLoad("onLoad")
@@ -48,7 +47,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="value">true if the component should be enabled, false otherwise; the default is true.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Upload()
+        ///  &lt;%= Html.Kendo().Upload()
         ///             .Name("Upload")
         ///             .Enable(false)
         /// %&gt;
@@ -67,7 +66,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="value">true if multiple file selection should be enabled, false otherwise; the default is true.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Upload()
+        ///  &lt;%= Html.Kendo().Upload()
         ///             .Name("Upload")
         ///             .Multiple(false)
         /// %&gt;
@@ -97,7 +96,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">Use builder to set different asynchronous uploading options.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Upload()
+        ///  &lt;%= Html.Kendo().Upload()
         ///             .Name("Upload")
         ///             .Async(async => async
         ///                 .Save("Save", "Compose")

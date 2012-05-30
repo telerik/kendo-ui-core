@@ -18,7 +18,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="asyncSettings">The async settings.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;%= Html.Telerik().Upload()
+        /// &lt;%= Html.Kendo().Upload()
         ///             .Name("Upload")
         ///             .Async(async => async
         ///                 .Save("Save", "Home", new RouteValueDictionary{ {"id", 1} })
@@ -53,7 +53,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="routeValues">The route values.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Upload()
+        ///  &lt;%= Html.Kendo().Upload()
         ///             .Name("Upload")
         ///             .Async(async => async
         ///                 .Save("Save", "Home", new RouteValueDictionary{ {"id", 1} });
@@ -76,7 +76,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="routeValues">The route values.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Upload()
+        ///  &lt;%= Html.Kendo().Upload()
         ///             .Name("Upload")
         ///             .Async(async => async
         ///                 .Save("Save", "Home", new { id = 1 });
@@ -98,7 +98,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="controllerName">Name of the controller.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Upload()
+        ///  &lt;%= Html.Kendo().Upload()
         ///             .Name("Upload")
         ///             .Async(async => async
         ///                 .Save("Save", "Home");
@@ -117,7 +117,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="routeName">Name of the route.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Upload()
+        ///  &lt;%= Html.Kendo().Upload()
         ///             .Name("Upload")
         ///             .Async(async => async
         ///                 .Save("Default");
@@ -136,7 +136,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="routeValues">The route values of the action method.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Upload()
+        ///  &lt;%= Html.Kendo().Upload()
         ///             .Name("Upload")
         ///             .Async(async => async
         ///                 .Save(MVC.Home.Save(1).GetRouteValueDictionary());
@@ -158,7 +158,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="routeValues">The route values.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Upload()
+        ///  &lt;%= Html.Kendo().Upload()
         ///             .Name("Upload")
         ///             .Async(async => async
         ///                 .Save("Default", "Home", new RouteValueDictionary{ {"id", 1} });
@@ -180,7 +180,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="routeValues">The route values.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Upload()
+        ///  &lt;%= Html.Kendo().Upload()
         ///             .Name("Upload")
         ///             .Async(async => async
         ///                 .Save("Default", new { id = 1 });
@@ -202,7 +202,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="controllerAction">The action.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Upload()
+        ///  &lt;%= Html.Kendo().Upload()
         ///             .Name("Upload")
         ///             .Async(async => async
         ///                 .Save&lt;HomeController&gt;(controller => controller.Save()));
@@ -227,7 +227,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Upload()
+        ///  &lt;%= Html.Kendo().Upload()
         ///             .Name("Upload")
         ///             .Async(async => async
         ///                 .SaveField("attachment");
@@ -248,7 +248,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="url">The Save action URL.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Upload()
+        ///  &lt;%= Html.Kendo().Upload()
         ///             .Name("Upload")
         ///             .Async(async => async
         ///                 .SaveUrl("/save");
@@ -270,7 +270,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="routeValues">The route values.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Upload()
+        ///  &lt;%= Html.Kendo().Upload()
         ///             .Name("Upload")
         ///             .Async(async => async
         ///                 .Remove("Remove", "Home", new RouteValueDictionary{ {"id", 1} });
@@ -293,7 +293,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="routeValues">The route values.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Upload()
+        ///  &lt;%= Html.Kendo().Upload()
         ///             .Name("Upload")
         ///             .Async(async => async
         ///                 .Remove("Remove", "Home", new { id = 1 });
@@ -315,7 +315,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="controllerName">Name of the controller.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Upload()
+        ///  &lt;%= Html.Kendo().Upload()
         ///             .Name("Upload")
         ///             .Async(async => async
         ///                 .Remove("Remove", "Home");
@@ -334,7 +334,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="routeName">Name of the route.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Upload()
+        ///  &lt;%= Html.Kendo().Upload()
         ///             .Name("Upload")
         ///             .Async(async => async
         ///                 .Remove("Default");
@@ -353,7 +353,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="routeValues">The route values of the action method.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Upload()
+        ///  &lt;%= Html.Kendo().Upload()
         ///             .Name("Upload")
         ///             .Async(async => async
         ///                 .Remove(MVC.Home.Remove(1).GetRouteValueDictionary());
@@ -375,7 +375,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="routeValues">The route values.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Upload()
+        ///  &lt;%= Html.Kendo().Upload()
         ///             .Name("Upload")
         ///             .Async(async => async
         ///                 .Remove("Default", "Home", new RouteValueDictionary{ {"id", 1} });
@@ -397,7 +397,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="routeValues">The route values.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Upload()
+        ///  &lt;%= Html.Kendo().Upload()
         ///             .Name("Upload")
         ///             .Async(async => async
         ///                 .Remove("Default", new { id = 1 });
@@ -419,7 +419,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="controllerAction">The action.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Upload()
+        ///  &lt;%= Html.Kendo().Upload()
         ///             .Name("Upload")
         ///             .Async(async => async
         ///                 .Remove&lt;HomeController&gt;(controller => controller.Remove()));
@@ -442,7 +442,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="url">The Remove action URL.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Upload()
+        ///  &lt;%= Html.Kendo().Upload()
         ///             .Name("Upload")
         ///             .Async(async => async
         ///                 .RemoveUrl("/remove");
@@ -465,7 +465,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Upload()
+        ///  &lt;%= Html.Kendo().Upload()
         ///             .Name("Upload")
         ///             .Async(async => async
         ///                 .RemoveField("attachments");

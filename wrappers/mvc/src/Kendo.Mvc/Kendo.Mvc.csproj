@@ -821,7 +821,6 @@
     <Compile Include="UI\TreeView\Fluent\TreeViewItemBuilder.cs" />
     <Compile Include="UI\TreeView\Fluent\TreeViewItemFactory.cs" />
     <Compile Include="UI\TreeView\Html\TreeViewHtmlBuilderFactory.cs" />
-    <Compile Include="UI\TreeView\Fluent\TreeViewWebServiceBindingSettingsBuilder.cs" />
     <Compile Include="UI\TreeView\Settings\TreeViewBindingSettings.cs" />
     <Compile Include="UI\TreeView\TreeViewDataBindingConfiguration.cs" />
     <Compile Include="UI\TreeView\TreeViewItemModel.cs" />

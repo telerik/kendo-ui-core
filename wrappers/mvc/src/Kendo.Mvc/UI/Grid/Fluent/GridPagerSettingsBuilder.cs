@@ -28,7 +28,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="value">The pager position.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid(Model)
+        ///  &lt;%= Html.Kendo().Grid(Model)
         ///             .Name("Grid")
         ///             .Pageable(paging => paging.Position(GridPagerPosition.Bottom))
         /// %&gt;
@@ -69,7 +69,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="value">The pager style to set.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid(Model)
+        ///  &lt;%= Html.Kendo().Grid(Model)
         ///             .Name("Grid")
         ///             .Pageable(paging => paging.Style(GridPagerStyles.PageInput | GridPagerStyles.Numeric))
         /// %&gt;
@@ -88,7 +88,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid(Model)
+        ///  &lt;%= Html.Kendo().Grid(Model)
         ///             .Name("Grid")
         ///             .Pageable(paging => paging.Enabled((bool)ViewData["enablePaging"]))
         /// %&gt;
