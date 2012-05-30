@@ -65,11 +65,7 @@ namespace Kendo.Mvc.UI
             }
 
             set
-            {
-                if (value.Contains("<#="))
-                {
-                    IsSelfInitialized = true;
-                }
+            {                
                 name = value;
             }
         }

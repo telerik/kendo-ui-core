@@ -44,6 +44,18 @@
             set;
         }
 
+        public string Address
+        {
+            get;
+            set;
+        }
+
+        public string HomePhone
+        {
+            get;
+            set;
+        }
+
         [Required]
         [AllowHtml]
         public string Notes

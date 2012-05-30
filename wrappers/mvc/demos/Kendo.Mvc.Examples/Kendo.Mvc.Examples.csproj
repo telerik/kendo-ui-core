@@ -573,6 +573,7 @@
     <Content Include="Areas\razor\Views\web\grid\ajaxbinding.cshtml" />
     <Content Include="Areas\razor\Views\web\editor\events.cshtml" />
     <Content Include="Areas\razor\Views\web\editor\api.cshtml" />
+    <Content Include="Areas\razor\Views\web\grid\detailtemplate.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
