@@ -97,22 +97,6 @@ namespace Kendo.Mvc.UI
             }
         }
 
-        /// <summary>
-        /// Gets the name of the column
-        /// </summary>
-        [Obsolete("Use the Member property instead")]
-        public string Name
-        {
-            get
-            {
-                return Member;
-            }
-            set
-            {
-                Member = value;
-            }
-        }
-
         public object AdditionalViewData
         {
             get;
