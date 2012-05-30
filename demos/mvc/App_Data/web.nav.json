@@ -302,7 +302,7 @@
                 {
                     "text": "Server Editing",
                     "url": "grid/serverediting.html",
-                    "packages": ["mvc", "offline"]
+                    "packages": ["mvc"]
                 },
                 {
                     "text": "Virtualization of local data",
@@ -321,7 +321,7 @@
                 {
                     "text": "Server Hierarchy",
                     "url": "grid/serverhierarchy.html",
-                    "packages": ["mvc", "offline"]
+                    "packages": ["mvc"]
                 },
                 {
                     "text": "Detail template",
@@ -330,7 +330,7 @@
                 {
                     "text": "Server Detail template",
                     "url": "grid/serverdetails.html",
-                    "packages": ["mvc", "offline"]
+                    "packages": ["mvc"]
                 },
                 {
                     "text": "Toolbar template",
@@ -349,7 +349,7 @@
                 {
                     "text": "Server Aggregates",
                     "url": "grid/serveraggregates.html",
-                    "packages": ["mvc", "offline"]
+                    "packages": ["mvc"]
                 },
                 {
                     "text": "Sorting",
