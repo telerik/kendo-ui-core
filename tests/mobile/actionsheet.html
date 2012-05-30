@@ -122,7 +122,6 @@
 
             test("data-rel=actionsheet widget passes the target and the context", 2, function() {
                 window.foo = function(e) {
-                    console.log(e);
                     equal(e.target[0], source[0]);
                     equal(e.context, 1);
                 };

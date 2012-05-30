@@ -62,7 +62,6 @@
 
             test("Uses content container if present", function() {
                 setup('<div data-role="view" id="page1"><div data-role="content">Content</div></div>');
-                console.log(root.html());
                 equal(root.find("[data-role=content]").length, 1);
             });
 
