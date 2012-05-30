@@ -64,7 +64,10 @@ namespace Kendo.Mvc.Examples.Controllers
                 ContactName = order.Customer.ContactName,
                 OrderDate = order.OrderDate,
                 OrderID = order.OrderID,
-                ShipAddress = order.ShipAddress
+                ShipAddress = order.ShipAddress,
+                ShipCountry = order.ShipCountry,
+                ShipName = order.ShipName,
+                EmployeeID = order.EmployeeID
             });
         }
 
@@ -80,6 +83,22 @@ namespace Kendo.Mvc.Examples.Controllers
                 UnitsInStock = product.UnitsInStock ?? 0,
                 UnitsOnOrder = product.UnitsOnOrder ?? 0,
                 Discontinued = product.Discontinued
+            });
+        }
+
+        private static IEnumerable<EmployeeDto> GetEmployeeDto()
+        {
+            var northwind = new NorthwindDataContext();
+
+            return northwind.Employees.Select(employee => new EmployeeDto
+            {
+                EmployeeID = employee.EmployeeID,
+                FirstName = employee.FirstName,
+                LastName = employee.LastName,
+                Country = employee.Country,
+                City = employee.City,
+                Notes = employee.Notes,
+                Title = employee.Title
             });
         }
     }

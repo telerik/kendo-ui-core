@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Web.Routing;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.Infrastructure;
+using System.Text.RegularExpressions;
 
 namespace Kendo.Mvc.UI
 {
@@ -17,22 +18,21 @@ namespace Kendo.Mvc.UI
             Data = new ClientEvent();
         }
 
-        //private string Encode(string value)
-        //{
-        //    if (grid.IsSelfInitialized)
-        //    {
-        //        value = Regex.Replace(value, "(%20)*%3C%23%3D(%20)*", "<#=", RegexOptions.IgnoreCase);
-        //        value = Regex.Replace(value, "(%20)*%23%3E(%20)*", "#>", RegexOptions.IgnoreCase);
-        //    }
+        private string Encode(string value)
+        {            
+            value = Regex.Replace(value, "(%20)*%23%3D(%20)*", "#=", RegexOptions.IgnoreCase);
+            value = Regex.Replace(value, "(%20)*%23(%20)*", "#", RegexOptions.IgnoreCase);
+            value = Regex.Replace(value, "(%20)*%24%7B(%20)*", "${", RegexOptions.IgnoreCase);
+            value = Regex.Replace(value, "(%20)*%7D(%20)*", "}", RegexOptions.IgnoreCase);
 
-        //    return value;
-        //}
+            return value;
+        }
 
         protected override void Serialize(IDictionary<string, object> json)
         {
             if (Url != null)
             {
-                json["url"] = Url;
+                json["url"] = Encode(Url);
 
                 if (DataType.HasValue())
                 {

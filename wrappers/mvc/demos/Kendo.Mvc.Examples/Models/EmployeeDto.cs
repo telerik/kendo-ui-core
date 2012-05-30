@@ -1,0 +1,55 @@
+﻿namespace Kendo.Mvc.Examples.Models
+{
+    using System;
+    using System.ComponentModel.DataAnnotations;
+    using System.Web.Mvc;   
+
+    public class EmployeeDto
+    {
+        public int EmployeeID
+        {
+            get;
+            set;
+        }
+
+        [Required]
+        public string FirstName
+        {
+            get;
+            set;
+        }
+
+        [Required]
+        public string LastName
+        {
+            get;
+            set;
+        }
+        
+        public string Title
+        {
+            get;
+            set;
+        }
+
+        public string Country
+        {
+            get;
+            set;
+        }
+
+        public string City
+        {
+            get;
+            set;
+        }
+
+        [Required]
+        [AllowHtml]
+        public string Notes
+        {
+            get;
+            set;
+        }
+    }
+}

@@ -140,6 +140,7 @@
     <Compile Include="Controllers\Grid\EditingController.cs" />
     <Compile Include="Controllers\DateTimePicker\IndexController.cs" />
     <Compile Include="Controllers\Grid\AjaxBindingController.cs" />
+    <Compile Include="Controllers\Grid\HierarchyController.cs" />
     <Compile Include="Controllers\Grid\ServerEditingController.cs" />
     <Compile Include="Controllers\Grid\ServerBindingController.cs" />
     <Compile Include="Controllers\Grid\CustomServerBindingController.cs" />
@@ -203,6 +204,7 @@
     <Compile Include="Models\Config.cs" />
     <Compile Include="Helpers\HyphenatedRouteHandler.cs" />
     <Compile Include="Models\ElectricitySource.cs" />
+    <Compile Include="Models\EmployeeDto.cs" />
     <Compile Include="Models\EngineDataPoint.cs" />
     <Compile Include="Models\InternetUsers.cs" />
     <Compile Include="Models\OrderDto.cs" />
@@ -532,6 +534,7 @@
     <Content Include="Views\Shared\EditorTemplates\Integer.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Number.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Time.cshtml" />
+    <Content Include="Areas\razor\Views\web\grid\hierarchy.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
