@@ -25,6 +25,6 @@
             aggregates.Add(p => p.UnitPrice).Sum();
         })
         .Group(groups => groups.Add(p => p.UnitsInStock))
-        .Read(read => read.Action("AjaxAggregates_Read", "Grid"))
+        .Read(read => read.Action("Aggregates_Read", "Grid"))
     )
 )

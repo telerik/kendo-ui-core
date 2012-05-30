@@ -4,7 +4,7 @@
     .Scrollable()     
     .DataSource(dataSource => dataSource
         .Ajax()
-        .Read(read => read.Action("ColumnResizing_Read", "Grid"))
+        .Read(read => read.Action("Products_Read", "Grid"))
      )
      .Resizable(resize => resize.Columns(true))
 )
