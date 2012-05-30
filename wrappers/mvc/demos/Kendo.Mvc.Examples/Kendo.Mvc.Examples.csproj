@@ -138,11 +138,9 @@
     <Compile Include="Controllers\Grid\AjaxEditingController.cs" />
     <Compile Include="Controllers\DateTimePicker\IndexController.cs" />
     <Compile Include="Controllers\Grid\AjaxBindingController.cs" />
-    <Compile Include="Controllers\Grid\ColumnReorderingController.cs" />
     <Compile Include="Controllers\Grid\ServerEditingController.cs" />
     <Compile Include="Controllers\Grid\ServerBindingController.cs" />
     <Compile Include="Controllers\Grid\CustomServerBindingController.cs" />
-    <Compile Include="Controllers\Grid\ColumnResizingController.cs" />
     <Compile Include="Controllers\Grid\CustomAjaxBindingController.cs" />
     <Compile Include="Controllers\Menu\ApiController.cs" />
     <Compile Include="Controllers\Menu\ModelBindingController.cs" />
@@ -166,7 +164,7 @@
     <Compile Include="Controllers\TabStrip\EventsController.cs" />
     <Compile Include="Controllers\TabStrip\ImagesController.cs" />
     <Compile Include="Controllers\TabStrip\IndexController.cs" />
-    <Compile Include="Controllers\Grid\AjaxAggregatesController.cs" />
+    <Compile Include="Controllers\Grid\AggregatesController.cs" />
     <Compile Include="Controllers\Grid\ServerAggregatesController.cs" />
     <Compile Include="Controllers\TimePicker\EventsController.cs" />
     <Compile Include="Controllers\TimePicker\ApiController.cs" />
@@ -383,15 +381,15 @@
     <Content Include="Areas\razor\Views\web\treeview\images.cshtml" />
     <Content Include="Areas\razor\Views\web\treeview\events.cshtml" />
     <Content Include="Areas\razor\Views\web\grid\customserverbinding.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\columnresizing.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\columnreordering.cshtml" />
+    <Content Include="Areas\razor\Views\web\grid\column_resizing.cshtml" />
+    <Content Include="Areas\razor\Views\web\grid\column_reordering.cshtml" />
     <Content Include="Areas\razor\Views\web\grid\serverbinding.cshtml" />
     <Content Include="Areas\razor\Views\web\tabstrip\index.cshtml" />
     <Content Include="Areas\razor\Views\web\tabstrip\images.cshtml" />
     <Content Include="Areas\razor\Views\web\tabstrip\ajax.cshtml" />
     <Content Include="Areas\razor\Views\web\tabstrip\events.cshtml" />
     <Content Include="Areas\razor\Views\web\tabstrip\api.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\ajaxaggregates.cshtml" />
+    <Content Include="Areas\razor\Views\web\grid\aggregates.cshtml" />
     <Content Include="Areas\razor\Views\web\grid\serveraggregates.cshtml" />
     <Content Include="Areas\razor\Views\dataviz\radial_gauge\index.cshtml" />
     <Content Include="Areas\razor\Views\dataviz\radial_gauge\scale_options.cshtml" />
@@ -516,6 +514,7 @@
     <Content Include="Areas\razor\Views\dataviz\customization\plotbands.cshtml" />
     <Content Include="Areas\razor\Views\dataviz\api\index.cshtml" />
     <Content Include="Areas\razor\Views\dataviz\api\events.cshtml" />
+    <Content Include="Areas\razor\Views\web\grid\api.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>

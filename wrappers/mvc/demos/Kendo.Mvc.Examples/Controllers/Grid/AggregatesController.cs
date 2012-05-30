@@ -6,7 +6,7 @@ namespace Kendo.Mvc.Examples.Controllers
 {
     public partial class GridController : Controller
     {
-        public ActionResult AjaxAggregates()
+        public ActionResult Aggregates()
         {
             return View();
         }
@@ -16,7 +16,7 @@ namespace Kendo.Mvc.Examples.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public ActionResult AjaxAggregates_Read([DataSourceRequest] DataSourceRequest request)
+        public ActionResult Aggregates_Read([DataSourceRequest] DataSourceRequest request)
         {
             return Json(GetProductDto().ToDataSourceResult(request));
         }

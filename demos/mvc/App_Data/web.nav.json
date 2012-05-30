@@ -249,7 +249,8 @@
                 },
                 {
                     "text": "Initialization from table",
-                    "url": "grid/from-table.html"
+                    "url": "grid/from-table.html",
+                    "packages": ["!mvc"]
                 },
                 {
                     "text": "Binding to local data",
@@ -273,15 +274,18 @@
                 },
                 {
                     "text": "Editing Custom Editor",
-                    "url": "grid/editing-custom.html"
+                    "url": "grid/editing-custom.html",
+                    "packages": ["!mvc"]
                 },
                 {
                     "text": "Virtualization of local data",
-                    "url": "grid/virtualization-local-data.html"
+                    "url": "grid/virtualization-local-data.html",
+                    "packages": ["!mvc"]
                 },
                 {
                     "text": "Virtualization of remote data",
-                    "url": "grid/virtualization-remote-data.html"
+                    "url": "grid/virtualization-remote-data.html",
+                    "packages": ["!mvc"]
                 },
                 {
                     "text": "Hierarchy",
@@ -305,7 +309,8 @@
                 },
                 {
                     "text": "Sorting",
-                    "url": "grid/sorting.html"
+                    "url": "grid/sorting.html",
+                    "packages": ["!mvc"]
                 },
                 {
                     "text": "Selection",
@@ -322,7 +327,8 @@
 
                 {
                     "text": "Row template",
-                    "url": "grid/rowtemplate.html"
+                    "url": "grid/rowtemplate.html",
+                    "packages": ["!mvc"]
                 },
                 {
                     "text": "Events",

@@ -1,9 +1,10 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System.Data.Linq;
 using System.Linq;
 using System.Web.Mvc;
 using Kendo.Mvc.Examples.Models;
-using System.Collections.Generic;
-using System.Data.Linq;
+using Kendo.Mvc.Extensions;
+using Kendo.Mvc.UI;
 
 namespace Kendo.Mvc.Examples.Controllers
 {
@@ -27,6 +28,26 @@ namespace Kendo.Mvc.Examples.Controllers
         public ActionResult ServerDetails()
         {
             return View(new NorthwindDataContext().Employees);
+        }
+
+        public ActionResult Column_Resizing()
+        {
+            return View();
+        }
+
+        public ActionResult Column_Reordering()
+        {
+            return View();
+        }
+
+        public ActionResult Api()
+        {
+            return View();
+        }
+
+        public ActionResult Products_Read([DataSourceRequest] DataSourceRequest request)
+        {
+            return Json(GetProductDto().ToDataSourceResult(request));
         }
 
         private static IEnumerable<OrderDto> GetOrderDto()
