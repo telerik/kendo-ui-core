@@ -22,7 +22,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Upload()
+        /// &lt;% Html.Kendo().Upload()
         ///            .Name("Upload")
         ///            .Events(events => events.Select(
         ///                 @&lt;text&gt;
@@ -48,7 +48,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="onSelectHandlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;%= Html.Telerik().Upload()
+        /// &lt;%= Html.Kendo().Upload()
         ///             .Name("Upload")
         ///             .Events(events => events.Select("onSelect"))
         /// %&gt;
@@ -67,7 +67,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Upload()
+        /// &lt;% Html.Kendo().Upload()
         ///            .Name("Upload")
         ///            .Events(events => events.Upload(
         ///                 @&lt;text&gt;
@@ -93,7 +93,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="onUploadHandlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;%= Html.Telerik().Upload()
+        /// &lt;%= Html.Kendo().Upload()
         ///             .Name("Upload")
         ///             .Events(events => events.Upload("onUpload"))
         /// %&gt;
@@ -112,7 +112,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Upload()
+        /// &lt;% Html.Kendo().Upload()
         ///            .Name("Upload")
         ///            .Events(events => events.Success(
         ///                 @&lt;text&gt;
@@ -138,7 +138,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="onSuccessHandlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;%= Html.Telerik().Upload()
+        /// &lt;%= Html.Kendo().Upload()
         ///             .Name("Upload")
         ///             .Events(events => events.Success("onSuccess"))
         /// %&gt;
@@ -157,7 +157,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Upload()
+        /// &lt;% Html.Kendo().Upload()
         ///            .Name("Upload")
         ///            .Events(events => events.Error(
         ///                 @&lt;text&gt;
@@ -183,7 +183,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="onErrorHandlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;%= Html.Telerik().Upload()
+        /// &lt;%= Html.Kendo().Upload()
         ///             .Name("Upload")
         ///             .Events(events => events.Error("onError"))
         /// %&gt;
@@ -202,7 +202,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Upload()
+        /// &lt;% Html.Kendo().Upload()
         ///            .Name("Upload")
         ///            .Events(events => events.Complete(
         ///                 @&lt;text&gt;
@@ -228,7 +228,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="onCompleteHandlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;%= Html.Telerik().Upload()
+        /// &lt;%= Html.Kendo().Upload()
         ///             .Name("Upload")
         ///             .Events(events => events.Complete("onComplete"))
         /// %&gt;
@@ -247,7 +247,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Upload()
+        /// &lt;% Html.Kendo().Upload()
         ///            .Name("Upload")
         ///            .Events(events => events.Cancel(
         ///                 @&lt;text&gt;
@@ -273,7 +273,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="onCancelHandlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;%= Html.Telerik().Upload()
+        /// &lt;%= Html.Kendo().Upload()
         ///             .Name("Upload")
         ///             .Events(events => events.Cancel("onCancel"))
         /// %&gt;
@@ -292,7 +292,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;% Html.Telerik().Upload()
+        /// &lt;% Html.Kendo().Upload()
         ///            .Name("Upload")
         ///            .Events(events => events.Remove(
         ///                 @&lt;text&gt;
@@ -318,7 +318,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="onRemoveHandlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        /// &lt;%= Html.Telerik().Upload()
+        /// &lt;%= Html.Kendo().Upload()
         ///             .Name("Upload")
         ///             .Events(events => events.Remove("onRemove"))
         /// %&gt;

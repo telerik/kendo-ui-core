@@ -7,10 +7,7 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.UI.Html;
-    /// <summary>
-    /// Telerik Chart for ASP.NET MVC is a view component for rendering charts.
-    /// For more information, see the online documentation.
-    /// </summary>
+
     public class Chart<T> : ViewComponentBase, IChart where T : class
     {
         /// <summary>

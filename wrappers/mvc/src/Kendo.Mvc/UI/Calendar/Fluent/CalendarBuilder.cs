@@ -27,10 +27,10 @@ namespace Kendo.Mvc.UI
         /// <param name="clientEventsAction">The client events action.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Calendar()
+        ///  &lt;%= Html.Kendo().Calendar()
         ///             .Name("Calendar")
         ///             .Events(events =>
-        ///                 events.OnLoad("onLoad").Select("onSelect")
+        ///                 events.Select("onSelect")
         ///             )
         /// %&gt;
         /// </code>

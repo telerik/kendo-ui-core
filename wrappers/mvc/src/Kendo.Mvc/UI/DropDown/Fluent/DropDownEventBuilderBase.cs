@@ -21,7 +21,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handler">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;% Html.Telerik().DropDownList()
+        ///  &lt;% Html.Kendo().DropDownList()
         ///            .Name("DropDownList")
         ///            .Events(events => events.Select(
         ///                 @&lt;text&gt;
@@ -46,7 +46,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().DropDownList()
+        ///  &lt;%= Html.Kendo().DropDownList()
         ///             .Name("DropDownList")
         ///             .Events(events => events.Select("select"))
         /// %&gt;
@@ -65,7 +65,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handler">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;% Html.Telerik().DropDownList()
+        ///  &lt;% Html.Kendo().DropDownList()
         ///            .Name("DropDownList")
         ///            .Events(events => events.Change(
         ///                 @&lt;text&gt;
@@ -90,7 +90,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().DropDownList()
+        ///  &lt;%= Html.Kendo().DropDownList()
         ///             .Name("DropDownList")
         ///             .Events(events => events.Change("onChange"))
         /// %&gt;
@@ -109,7 +109,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().DropDownList()
+        ///  &lt;%= Html.Kendo().DropDownList()
         ///             .Name("DropDownList")
         ///             .Events(events => events.Open("Open"))
         /// %&gt;
@@ -128,7 +128,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handler">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;% Html.Telerik().DropDownList()
+        ///  &lt;% Html.Kendo().DropDownList()
         ///            .Name("DropDownList")
         ///            .Events(events => events.Open(
         ///                 @&lt;text&gt;
@@ -153,7 +153,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handler">The handler code wrapped in a text tag (Razor syntax).</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;% Html.Telerik().DropDownList()
+        ///  &lt;% Html.Kendo().DropDownList()
         ///            .Name("DropDownList")
         ///            .Events(events => events.Close(
         ///                 @&lt;text&gt;
@@ -178,7 +178,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().DropDownList()
+        ///  &lt;%= Html.Kendo().DropDownList()
         ///             .Name("DropDownList")
         ///             .Events(events => events.Close("close"))
         /// %&gt;

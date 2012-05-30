@@ -61,7 +61,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="codeBlockTemplate">The template</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid(Model)
+        ///  &lt;%= Html.Kendo().Grid(Model)
         ///     .RowTemplate(o =>
         ///     {
         ///        %&gt;
@@ -86,7 +86,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="codeBlockTemplate">The template</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid(Model)
+        ///  &lt;%= Html.Kendo().Grid(Model)
         ///     .RowTemplate(o =>
         ///     {
         ///        %&gt;
@@ -112,7 +112,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="inlineTemplate">The template</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid(Model)
+        ///  &lt;%= Html.Kendo().Grid(Model)
         ///     .RowTemplate(@&lt;text&gt;
         ///           @item.Name
         ///           @item.Age
@@ -157,7 +157,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">Resizing settings configurator method</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid(Model)
+        ///  &lt;%= Html.Kendo().Grid(Model)
         ///             .Name("Grid")
         ///             .Resizable(resizing => resizing.Columns(true))
         /// %&gt;
@@ -177,7 +177,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">Resizing settings configurator method</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid(Model)
+        ///  &lt;%= Html.Kendo().Grid(Model)
         ///             .Name("Grid")
         ///             .Reorderable(reordering => reordering.Columns(true))
         /// %&gt;
@@ -198,7 +198,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="culture">The culture.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid&lt;Order&gt;()
+        ///  &lt;%= Html.Kendo().Grid&lt;Order&gt;()
         ///             .Name("Orders")
         ///             .Localizable("de-DE")
         /// %&gt;
@@ -223,7 +223,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">Configurator for the edit settings.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid&lt;Order&gt;()
+        ///  &lt;%= Html.Kendo().Grid&lt;Order&gt;()
         ///             .Name("Orders")
         ///             .Editable(settings => settings.Enabled(true))
         /// %&gt;
@@ -244,7 +244,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">ToolBar configurator.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid&lt;Order&gt;()
+        ///  &lt;%= Html.Kendo().Grid&lt;Order&gt;()
         ///             .Name("Orders")
         ///             .ToolBar(commands => commands.Insert())
         /// %&gt;
@@ -265,7 +265,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///// <param name="configurator">DataKeys configurator.</param>
         ///// <example>
         ///// <code lang="CS">
-        /////  &lt;%= Html.Telerik().Grid&lt;Order&gt;()
+        /////  &lt;%= Html.Kendo().Grid&lt;Order&gt;()
         /////             .Name("Orders")
         /////             .DataKeys(keys =>
         /////             {
@@ -300,7 +300,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="dataSource">The data source.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid&lt;Order&gt;()
+        ///  &lt;%= Html.Kendo().Grid&lt;Order&gt;()
         ///             .Name("Orders")
         ///             .Ajax(ajax => ajax.Action("_RelatedGrids_Orders", "Grid", new { customerID = "ALFKI" }))
         ///             .Columns(columns=>
@@ -334,7 +334,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// You can format the entire row</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid()
+        ///  &lt;%= Html.Kendo().Grid()
         ///             .Name("Grid")
         ///             .RowAction(row =>
         ///             {
@@ -364,7 +364,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// You can format a concrete cell.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid()
+        ///  &lt;%= Html.Kendo().Grid()
         ///             .Name("Grid")
         ///             .CellAction(cell =>
         ///             {
@@ -407,7 +407,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">The add action.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid()
+        ///  &lt;%= Html.Kendo().Grid()
         ///             .Name("Grid")
         ///             .Ajax(ajax => ajax.Action("_RelatedGrids_Orders", "Grid", new { customerID = "ALFKI" }))
         ///             .Columns(columns=>
@@ -437,7 +437,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid()
+        ///  &lt;%= Html.Kendo().Grid()
         ///             .Name("Grid")
         ///             .Ajax(ajax => ajax.Action("_RelatedGrids_Orders", "Grid", new { customerID = "ALFKI" }))
         ///             .Columns(columns=>
@@ -465,7 +465,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">Use builder to define sort settings.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid()
+        ///  &lt;%= Html.Kendo().Grid()
         ///             .Name("Grid")
         ///             .Ajax(ajax => ajax.Action("_RelatedGrids_Orders", "Grid", new { customerID = "ALFKI" }))
         ///             .Columns(columns=>
@@ -496,7 +496,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid()
+        ///  &lt;%= Html.Kendo().Grid()
         ///             .Name("Grid")
         ///             .Selectable()
         /// %&gt;
@@ -515,7 +515,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="selectionAction">Use builder to define the selection settings.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid()
+        ///  &lt;%= Html.Kendo().Grid()
         ///             .Name("Grid")
         ///             .Selectable(selection => selection.Enabled(true))
         /// %&gt;
@@ -547,7 +547,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid()
+        ///  &lt;%= Html.Kendo().Grid()
         ///             .Name("Grid")
         ///             .Ajax(ajax => ajax.Action("_RelatedGrids_Orders", "Grid", new { customerID = "ALFKI" }))
         ///             .Columns(columns=>
@@ -573,7 +573,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="pagerAction">Use builder to define paging settings.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid()
+        ///  &lt;%= Html.Kendo().Grid()
         ///             .Name("Grid")
         ///             .Ajax(ajax => ajax.Action("_RelatedGrids_Orders", "Grid", new { customerID = "ALFKI" }))
         ///             .Columns(columns=>
@@ -610,7 +610,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid()
+        ///  &lt;%= Html.Kendo().Grid()
         ///             .Name("Grid")
         ///             .Ajax(ajax => ajax.Action("_RelatedGrids_Orders", "Grid", new { customerID = "ALFKI" }))
         ///             .Columns(columns=>
@@ -637,7 +637,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">Use builder to define filtering settings.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid()
+        ///  &lt;%= Html.Kendo().Grid()
         ///             .Name("Grid")
         ///             .Ajax(ajax => ajax.Action("_RelatedGrids_Orders", "Grid", new { customerID = "ALFKI" }))
         ///             .Columns(columns=>
@@ -668,7 +668,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid()
+        ///  &lt;%= Html.Kendo().Grid()
         ///             .Name("Grid")
         ///             .Ajax(ajax => ajax.Action("_RelatedGrids_Orders", "Grid", new { customerID = "ALFKI" }))
         ///             .Columns(columns=>
@@ -696,7 +696,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">Use builder to define scrolling settings.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid()
+        ///  &lt;%= Html.Kendo().Grid()
         ///             .Name("Grid")
         ///             .Ajax(ajax => ajax.Action("_RelatedGrids_Orders", "Grid", new { customerID = "ALFKI" }))
         ///             .Columns(columns=>
@@ -727,7 +727,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid()
+        ///  &lt;%= Html.Kendo().Grid()
         ///             .Name("Grid")
         ///             .Ajax(ajax => ajax.Action("_RelatedGrids_Orders", "Grid", new { customerID = "ALFKI" }))
         ///             .Columns(columns=>
@@ -755,7 +755,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">Use builder to define keyboard navigation settings.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid()
+        ///  &lt;%= Html.Kendo().Grid()
         ///             .Name("Grid")
         ///             .Ajax(ajax => ajax.Action("_RelatedGrids_Orders", "Grid", new { customerID = "ALFKI" }))
         ///             .Columns(columns=>
@@ -786,7 +786,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid()
+        ///  &lt;%= Html.Kendo().Grid()
         ///             .Name("Grid")
         ///             .Ajax(ajax => ajax.Action("_RelatedGrids_Orders", "Grid", new { customerID = "ALFKI" }))
         ///             .Columns(columns=>
@@ -817,7 +817,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">Use builder to column context menu settings.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid()
+        ///  &lt;%= Html.Kendo().Grid()
         ///             .Name("Grid")
         ///             .Ajax(ajax => ajax.Action("_RelatedGrids_Orders", "Grid", new { customerID = "ALFKI" }))
         ///             .Columns(columns=>
@@ -850,7 +850,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">The client events action.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid()
+        ///  &lt;%= Html.Kendo().Grid()
         ///             .Name("Grid")
         ///             .Events(events => events
         ///                 .DataBinding("onDataBinding")
@@ -872,7 +872,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid()
+        ///  &lt;%= Html.Kendo().Grid()
         ///             .Name("Grid")
         ///             .Ajax(ajax => ajax.Action("_RelatedGrids_Orders", "Grid", new { customerID = "ALFKI" }))
         ///             .Columns(columns=>
@@ -902,7 +902,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid()
+        ///  &lt;%= Html.Kendo().Grid()
         ///             .Name("Grid")
         ///             .Ajax(ajax => ajax.Action("_RelatedGrids_Orders", "Grid", new { customerID = "ALFKI" }))
         ///             .Columns(columns=>
@@ -928,7 +928,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="value">The action which renders the message when grid has no data.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;% Html.Telerik().Grid()
+        ///  &lt;% Html.Kendo().Grid()
         ///            .Name("Grid")
         ///            .NoRecordsTemplate(() => 
         ///            { 
@@ -956,7 +956,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="value">The Razor inline message.</param>
         /// <example>
         /// <code lang="CS">
-        ///  @(Html.Telerik().Grid()
+        ///  @(Html.Kendo().Grid()
         ///            .Name("Grid")
         ///            .NoRecordsTemplate(@&lt;strong&gt; Hello World!!!&lt;/strong&gt;))
         /// </code>        
@@ -976,7 +976,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <param name="value">The action which renders the message when grid has no data.</param>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid()
+        ///  &lt;%= Html.Kendo().Grid()
         ///             .Name("Grid")
         ///             .NoRecordsTemplate("&lt;strong&gt; Hello World!!!&lt;/strong&gt;")
         /// %&gt;

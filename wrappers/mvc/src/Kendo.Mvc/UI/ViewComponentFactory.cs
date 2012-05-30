@@ -14,9 +14,6 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.UI.Fluent;
     using Kendo.Mvc.UI.Html;
 
-    /// <summary>
-    /// Provides the factory methods for creating Telerik View Components.
-    /// </summary>
     public class ViewComponentFactory : IHideObjectMembers
     {
         public ViewComponentFactory(HtmlHelper htmlHelper)
@@ -70,7 +67,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Menu()
+        ///  &lt;%= Html.Kendo().Menu()
         ///             .Name("Menu")
         ///             .Items(items => { /* add items here */ });
         /// %&gt;
@@ -86,7 +83,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Editor()
+        ///  &lt;%= Html.Kendo().Editor()
         ///             .Name("Editor");
         /// %&gt;
         /// </code>
@@ -103,7 +100,7 @@ namespace Kendo.Mvc.UI
         /// <example>
         /// <typeparam name="T">The type of the data item</typeparam>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid&lt;Order&gt;()
+        ///  &lt;%= Html.Kendo().Grid&lt;Order&gt;()
         ///             .Name("Grid")
         ///             .BindTo(Model)
         /// %&gt;
@@ -124,13 +121,13 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
-        /// Creates a new <see cref="Telerik.Web.UI.Grid&lt;T&gt;"/> bound to the specified data source.
+        /// Creates a new <see cref="Kendo.Web.UI.Grid&lt;T&gt;"/> bound to the specified data source.
         /// </summary>
         /// <typeparam name="T">The type of the data item</typeparam>
         /// <param name="dataSource">The data source.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid(Model)
+        ///  &lt;%= Html.Kendo().Grid(Model)
         ///             .Name("Grid")
         /// %&gt;
         /// </code>
@@ -146,7 +143,7 @@ namespace Kendo.Mvc.UI
         //TODO: Implement binding to DataTable
 /*
         /// <summary>
-        /// Creates a new <see cref="Telerik.Web.UI.Grid&lt;T&gt;"/> bound to a DataTable.
+        /// Creates a new <see cref="Kendo.Web.UI.Grid&lt;T&gt;"/> bound to a DataTable.
         /// </summary>
         /// <param name="dataSource">DataTable from which the grid instance will be bound</param>
         public virtual GridBuilder<DataRowView> Grid(DataTable dataSource)
@@ -159,7 +156,7 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
-        /// Creates a new <see cref="Telerik.Web.UI.Grid&lt;T&gt;"/> bound to a DataView.
+        /// Creates a new <see cref="Kendo.Web.UI.Grid&lt;T&gt;"/> bound to a DataView.
         /// </summary>
         /// <param name="dataSource">DataView from which the grid instance will be bound</param>
         public virtual GridBuilder<DataRowView> Grid(DataView dataSource)
@@ -174,13 +171,13 @@ namespace Kendo.Mvc.UI
         }   
         */
         /// <summary>
-        /// Creates a new <see cref="Telerik.Web.UI.Grid&lt;T&gt;"/> bound an item in ViewData.
+        /// Creates a new <see cref="Kendo.Web.UI.Grid&lt;T&gt;"/> bound an item in ViewData.
         /// </summary>
         /// <typeparam name="T">Type of the data item</typeparam>
         /// <param name="dataSourceViewDataKey">The data source view data key.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid&lt;Order&gt;("orders")
+        ///  &lt;%= Html.Kendo().Grid&lt;Order&gt;("orders")
         ///             .Name("Grid")
         /// %&gt;
         /// </code>
@@ -199,7 +196,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Splitter()
+        ///  &lt;%= Html.Kendo().Splitter()
         ///             .Name("Splitter");
         /// %&gt;
         /// </code>
@@ -214,7 +211,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().TabStrip()
+        ///  &lt;%= Html.Kendo().TabStrip()
         ///             .Name("TabStrip")
         ///             .Items(items =>
         ///             {
@@ -234,7 +231,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().DateTimePicker()
+        ///  &lt;%= Html.Kendo().DateTimePicker()
         ///             .Name("DateTimePicker")
         /// %&gt;
         /// </code>
@@ -250,7 +247,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().DatePicker()
+        ///  &lt;%= Html.Kendo().DatePicker()
         ///             .Name("DatePicker")
         /// %&gt;
         /// </code>
@@ -265,7 +262,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().TimePicker()
+        ///  &lt;%= Html.Kendo().TimePicker()
         ///             .Name("TimePicker")
         /// %&gt;
         /// </code>
@@ -280,7 +277,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Calendar()
+        ///  &lt;%= Html.Kendo().Calendar()
         ///             .Name("Calendar")
         /// %&gt;
         /// </code>
@@ -295,7 +292,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().PanelBar()
+        ///  &lt;%= Html.Kendo().PanelBar()
         ///             .Name("PanelBar")
         ///             .Items(items =>
         ///             {
@@ -315,7 +312,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().TreeView()
+        ///  &lt;%= Html.Kendo().TreeView()
         ///             .Name("TreeView")
         ///             .Items(items => { /* add items here */ });
         /// %&gt;
@@ -331,7 +328,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().NumericTextBox()
+        ///  &lt;%= Html.Kendo().NumericTextBox()
         ///             .Name("NumericTextBox")
         /// %&gt;
         /// </code>
@@ -347,7 +344,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().NumericTextBox<double>()
+        ///  &lt;%= Html.Kendo().NumericTextBox<double>()
         ///             .Name("NumericTextBox")
         /// %&gt;
         /// </code>
@@ -362,7 +359,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Window()
+        ///  &lt;%= Html.Kendo().Window()
         ///             .Name("Window")
         /// %&gt;
         /// </code>
@@ -407,7 +404,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().DropDownList()
+        ///  &lt;%= Html.Kendo().DropDownList()
         ///             .Name("DropDownList")
         ///             .Items(items =>
         ///             {
@@ -427,7 +424,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().ComboBox()
+        ///  &lt;%= Html.Kendo().ComboBox()
         ///             .Name("ComboBox")
         ///             .Items(items =>
         ///             {
@@ -447,7 +444,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().AutoComplete()
+        ///  &lt;%= Html.Kendo().AutoComplete()
         ///             .Name("AutoComplete")
         ///             .Items(items =>
         ///             {
@@ -467,7 +464,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Slider()
+        ///  &lt;%= Html.Kendo().Slider()
         ///             .Name("Slider")
         /// %&gt;
         /// </code>
@@ -482,7 +479,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().RangeSlider()
+        ///  &lt;%= Html.Kendo().RangeSlider()
         ///             .Name("RangeSlider")
         /// %&gt;
         /// </code>
@@ -497,7 +494,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Upload()
+        ///  &lt;%= Html.Kendo().Upload()
         ///             .Name("Upload")
         ///             .Async(async => async
         ///                 .Save("ProcessAttachments", "Home")
@@ -517,7 +514,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart()
+        ///  &lt;%= Html.Kendo().Chart()
         ///             .Name("Chart")
         /// %&gt;
         /// </code>
@@ -534,7 +531,7 @@ namespace Kendo.Mvc.UI
         /// <param name="data">The data source.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart(Model)
+        ///  &lt;%= Html.Kendo().Chart(Model)
         ///             .Name("Chart")
         /// %&gt;
         /// </code>
@@ -555,7 +552,7 @@ namespace Kendo.Mvc.UI
         /// <param name="dataSourceViewDataKey">The data source view data key.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Chart&lt;SalesData&gt;("sales")
+        ///  &lt;%= Html.Kendo().Chart&lt;SalesData&gt;("sales")
         ///             .Name("Chart")
         /// %&gt;
         /// </code>
@@ -574,7 +571,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        /// &lt;%= Html.Telerik().Chart("sales")
+        /// &lt;%= Html.Kendo().Chart("sales")
         ///             .Name("Chart")
         ///             .Series(series => {
         ///                 series.Bar(new int[] { 1, 2, 3 }).Name("Total Sales");
@@ -627,7 +624,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().NumericTextBoxFor(m=>m.Property) %&gt;
+        ///  &lt;%= Html.Kendo().NumericTextBoxFor(m=>m.Property) %&gt;
         /// </code>
         /// </example>
         public virtual NumericTextBoxBuilder<TValue> NumericTextBoxFor<TValue>(Expression<Func<TModel, TValue>> expression)
@@ -661,7 +658,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().NumericTextBoxFor(m=>m.NullableProperty) %&gt;
+        ///  &lt;%= Html.Kendo().NumericTextBoxFor(m=>m.NullableProperty) %&gt;
         /// </code>
         /// </example>
         public virtual NumericTextBoxBuilder<TValue> NumericTextBoxFor<TValue>(Expression<Func<TModel, Nullable<TValue>>> expression)
@@ -692,7 +689,7 @@ namespace Kendo.Mvc.UI
         ///// </summary>
         ///// <example>
         ///// <code lang="CS">
-        /////  &lt;%= Html.Telerik().IntegerTextBoxFor(m=>m.Property) %&gt;
+        /////  &lt;%= Html.Kendo().IntegerTextBoxFor(m=>m.Property) %&gt;
         ///// </code>
         ///// </example>
         //public virtual IntegerTextBoxBuilder IntegerTextBoxFor(Expression<Func<TModel, Nullable<int>>> expression)
@@ -713,7 +710,7 @@ namespace Kendo.Mvc.UI
         ///// </summary>
         ///// <example>
         ///// <code lang="CS">
-        /////  &lt;%= Html.Telerik().IntegerTextBoxFor(m=>m.Property) %&gt;
+        /////  &lt;%= Html.Kendo().IntegerTextBoxFor(m=>m.Property) %&gt;
         ///// </code>
         ///// </example>
         //public virtual IntegerTextBoxBuilder IntegerTextBoxFor(Expression<Func<TModel, int>> expression)
@@ -736,7 +733,7 @@ namespace Kendo.Mvc.UI
         ///// </summary>
         ///// <example>
         ///// <code lang="CS">
-        /////  &lt;%= Html.Telerik().CurrencyTextBoxFor(m=>m.Property) %&gt;
+        /////  &lt;%= Html.Kendo().CurrencyTextBoxFor(m=>m.Property) %&gt;
         ///// </code>
         ///// </example>
         //public virtual CurrencyTextBoxBuilder CurrencyTextBoxFor(Expression<Func<TModel, Nullable<decimal>>> expression)
@@ -757,7 +754,7 @@ namespace Kendo.Mvc.UI
         ///// </summary>
         ///// <example>
         ///// <code lang="CS">
-        /////  &lt;%= Html.Telerik().CurrencyTextBoxFor(m=>m.Property) %&gt;
+        /////  &lt;%= Html.Kendo().CurrencyTextBoxFor(m=>m.Property) %&gt;
         ///// </code>
         ///// </example>
         //public virtual CurrencyTextBoxBuilder CurrencyTextBoxFor(Expression<Func<TModel, decimal>> expression)
@@ -780,7 +777,7 @@ namespace Kendo.Mvc.UI
         ///// </summary>
         ///// <example>
         ///// <code lang="CS">
-        /////  &lt;%= Html.Telerik().PercentTextBoxFor(m=>m.Property) %&gt;
+        /////  &lt;%= Html.Kendo().PercentTextBoxFor(m=>m.Property) %&gt;
         ///// </code>
         ///// </example>
         //public virtual PercentTextBoxBuilder PercentTextBoxFor(Expression<Func<TModel, Nullable<double>>> expression)
@@ -801,7 +798,7 @@ namespace Kendo.Mvc.UI
         ///// </summary>
         ///// <example>
         ///// <code lang="CS">
-        /////  &lt;%= Html.Telerik().PercentTextBoxFor(m=>m.Property) %&gt;
+        /////  &lt;%= Html.Kendo().PercentTextBoxFor(m=>m.Property) %&gt;
         ///// </code>
         ///// </example>
         //public virtual PercentTextBoxBuilder PercentTextBoxFor(Expression<Func<TModel, double>> expression)
@@ -824,7 +821,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().DateTimePickerFor(m=>m.Property) %&gt;
+        ///  &lt;%= Html.Kendo().DateTimePickerFor(m=>m.Property) %&gt;
         /// </code>
         /// </example>
         public virtual DateTimePickerBuilder DateTimePickerFor(Expression<Func<TModel, Nullable<DateTime>>> expression)
@@ -845,7 +842,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().DateTimePickerFor(m=>m.Property) %&gt;
+        ///  &lt;%= Html.Kendo().DateTimePickerFor(m=>m.Property) %&gt;
         /// </code>
         /// </example>
         public virtual DateTimePickerBuilder DateTimePickerFor(Expression<Func<TModel, DateTime>> expression)
@@ -868,7 +865,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().DatePickerFor(m=>m.Property) %&gt;
+        ///  &lt;%= Html.Kendo().DatePickerFor(m=>m.Property) %&gt;
         /// </code>
         /// </example>
         public virtual DatePickerBuilder DatePickerFor(Expression<Func<TModel, Nullable<DateTime>>> expression)
@@ -889,7 +886,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().DatePickerFor(m=>m.Property) %&gt;
+        ///  &lt;%= Html.Kendo().DatePickerFor(m=>m.Property) %&gt;
         /// </code>
         /// </example>
         public virtual DatePickerBuilder DatePickerFor(Expression<Func<TModel, DateTime>> expression)
@@ -912,7 +909,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().TimePickerFor(m=>m.Property) %&gt;
+        ///  &lt;%= Html.Kendo().TimePickerFor(m=>m.Property) %&gt;
         /// </code>
         /// </example>
         public virtual TimePickerBuilder TimePickerFor(Expression<Func<TModel, Nullable<DateTime>>> expression)
@@ -933,7 +930,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().TimePickerFor(m=>m.Property) %&gt;
+        ///  &lt;%= Html.Kendo().TimePickerFor(m=>m.Property) %&gt;
         /// </code>
         /// </example>
         public virtual TimePickerBuilder TimePickerFor(Expression<Func<TModel, DateTime>> expression)
@@ -956,7 +953,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().TimePickerFor(m=>m.Property) %&gt;
+        ///  &lt;%= Html.Kendo().TimePickerFor(m=>m.Property) %&gt;
         /// </code>
         /// </example>
         public virtual TimePickerBuilder TimePickerFor(Expression<Func<TModel, Nullable<TimeSpan>>> expression)
@@ -980,7 +977,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().TimePickerFor(m=>m.Property) %&gt;
+        ///  &lt;%= Html.Kendo().TimePickerFor(m=>m.Property) %&gt;
         /// </code>
         /// </example>
         public virtual TimePickerBuilder TimePickerFor(Expression<Func<TModel, TimeSpan>> expression)
@@ -1006,7 +1003,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().DropDownListFor(m=>m.Property) %&gt;
+        ///  &lt;%= Html.Kendo().DropDownListFor(m=>m.Property) %&gt;
         /// </code>
         /// </example>
         public virtual DropDownListBuilder DropDownListFor<TProperty>(Expression<Func<TModel, TProperty>> expression)
@@ -1022,7 +1019,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().ComboBoxFor(m=>m.Property) %&gt;
+        ///  &lt;%= Html.Kendo().ComboBoxFor(m=>m.Property) %&gt;
         /// </code>
         /// </example>
         public virtual ComboBoxBuilder ComboBoxFor<TProperty>(Expression<Func<TModel, TProperty>> expression)
@@ -1038,7 +1035,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().AutoCompleteFor(m=>m.Property) %&gt;
+        ///  &lt;%= Html.Kendo().AutoCompleteFor(m=>m.Property) %&gt;
         /// </code>
         /// </example>
         public virtual AutoCompleteBuilder AutoCompleteFor<TProperty>(Expression<Func<TModel, TProperty>> expression)
@@ -1054,7 +1051,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().SliderFor(m=>m.Property) %&gt;
+        ///  &lt;%= Html.Kendo().SliderFor(m=>m.Property) %&gt;
         /// </code>
         /// </example>
         public virtual SliderBuilder<TValue> SliderFor<TValue>(Expression<Func<TModel, TValue>> expression)
@@ -1084,7 +1081,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().SliderFor(m=>m.NullableProperty) %&gt;
+        ///  &lt;%= Html.Kendo().SliderFor(m=>m.NullableProperty) %&gt;
         /// </code>
         /// </example>
         public virtual SliderBuilder<TValue> SliderFor<TValue>(Expression<Func<TModel, Nullable<TValue>>> expression)
@@ -1114,7 +1111,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().LinearGaugeFor(m=>m.Property) %&gt;
+        ///  &lt;%= Html.Kendo().LinearGaugeFor(m=>m.Property) %&gt;
         /// </code>
         /// </example>
         public virtual GaugeLinearBuilder<TValue> LinearGaugeFor<TValue>(Expression<Func<TModel, TValue>> expression)
@@ -1146,7 +1143,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().LinearGaugeFor(m=>m.NullableProperty) %&gt;
+        ///  &lt;%= Html.Kendo().LinearGaugeFor(m=>m.NullableProperty) %&gt;
         /// </code>
         /// </example>
         public virtual GaugeLinearBuilder<TValue> LinearGaugeFor<TValue>(Expression<Func<TModel, Nullable<TValue>>> expression)
@@ -1178,7 +1175,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().RadialGaugeFor(m=>m.Property) %&gt;
+        ///  &lt;%= Html.Kendo().RadialGaugeFor(m=>m.Property) %&gt;
         /// </code>
         /// </example>
         public virtual GaugeRadialBuilder<TValue> RadialGaugeFor<TValue>(Expression<Func<TModel, TValue>> expression)
@@ -1210,7 +1207,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().RadialGaugeFor(m=>m.NullableProperty) %&gt;
+        ///  &lt;%= Html.Kendo().RadialGaugeFor(m=>m.NullableProperty) %&gt;
         /// </code>
         /// </example>
         public virtual GaugeRadialBuilder<TValue> RadialGaugeFor<TValue>(Expression<Func<TModel, Nullable<TValue>>> expression)
@@ -1242,7 +1239,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().RangeSliderFor(m=>m.Property) %&gt;
+        ///  &lt;%= Html.Kendo().RangeSliderFor(m=>m.Property) %&gt;
         /// </code>
         /// </example>
         public virtual RangeSliderBuilder<TValue> RangeSliderFor<TValue>(Expression<Func<TModel, TValue[]>> expression)

@@ -23,7 +23,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid(Model)
+        ///  &lt;%= Html.Kendo().Grid(Model)
         ///             .Name("Grid")
         ///             .Scrolling(scrolling => scrolling.Enabled((bool)ViewData["enableScrolling"]))
         /// %&gt;
@@ -45,7 +45,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="pixelHeight">The height in pixels.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid(Model)
+        ///  &lt;%= Html.Kendo().Grid(Model)
         ///             .Name("Grid")
         ///             .Scrolling(scrolling => scrolling.Height(400))
         /// %&gt;
@@ -66,7 +66,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="value">The height in pixels.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid(Model)
+        ///  &lt;%= Html.Kendo().Grid(Model)
         ///             .Name("Grid")
         ///             .Scrolling(scrolling => scrolling.Height("20em"))
         /// %&gt;

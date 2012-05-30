@@ -33,7 +33,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="addAction">The add action.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Menu()
+        ///  &lt;%= Html.Kendo().Menu()
         ///             .Name("Menu")
         ///             .Items(items =>
         ///             {
@@ -64,7 +64,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="items">items</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Menu()
+        ///  &lt;%= Html.Kendo().Menu()
         ///             .Name("Menu")
         ///             .Items(items =>
         ///             {

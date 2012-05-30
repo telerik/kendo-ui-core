@@ -26,7 +26,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="value">The value.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid(Model)
+        ///  &lt;%= Html.Kendo().Grid(Model)
         ///             .Name("Grid")
         ///             .Columns(columns => columns.Bound(o => o.OrderDate).Format("{0:dd/MM/yyyy}"))
         /// %&gt;
@@ -50,7 +50,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="additionalViewData">An anonymous object which contains the additional data</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid(Model)
+        ///  &lt;%= Html.Kendo().Grid(Model)
         ///             .Name("Grid")
         ///             .Columns(columns => {
         ///                 columns.Bound(o => o.Customer).EditorViewData(new { customers = Model.Customers });
@@ -74,7 +74,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="value"><c>true</c> if the column should be read-only;otherwise <c>false</c></param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid(Model)
+        ///  &lt;%= Html.Kendo().Grid(Model)
         ///             .Name("Grid")
         ///             .Columns(columns => columns.Bound(o => o.OrderDate).ReadOnly(true))
         /// %&gt;
@@ -94,7 +94,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </remarks>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid(Model)
+        ///  &lt;%= Html.Kendo().Grid(Model)
         ///             .Name("Grid")
         ///             .Columns(columns => columns.Bound(o => o.OrderDate).ReadOnly())
         /// %&gt;
@@ -121,7 +121,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid(Model)
+        ///  &lt;%= Html.Kendo().Grid(Model)
         ///             .Name("Grid")
         ///             .Columns(columns => columns.Bound(o => o.OrderDate).Sortable(false))
         /// %&gt;
@@ -139,7 +139,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid(Model)
+        ///  &lt;%= Html.Kendo().Grid(Model)
         ///             .Name("Grid")
         ///             .Columns(columns => columns.Bound(o => o.OrderDate).Groupable(false))
         /// %&gt;
@@ -157,7 +157,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid(Model)
+        ///  &lt;%= Html.Kendo().Grid(Model)
         ///             .Name("Grid")
         ///             .Columns(columns => columns.Bound(o => o.OrderDate).Filterable(false))
         /// %&gt;
@@ -175,7 +175,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid(Model)
+        ///  &lt;%= Html.Kendo().Grid(Model)
         ///             .Name("Grid")
         ///             .Columns(columns => columns.Bound(o => o.OrderDate).Encoded(false))
         /// %&gt;
@@ -194,7 +194,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="templateAction">The action defining the template.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;% Html.Telerik().Grid(Model)
+        ///  &lt;% Html.Kendo().Grid(Model)
         ///            .Name("Grid")
         ///            .Columns(columns => columns
         ///                     .Add(c => c.CustomerID)

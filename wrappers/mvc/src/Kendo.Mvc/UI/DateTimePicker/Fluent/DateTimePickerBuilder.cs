@@ -37,7 +37,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="dataSource">The data source.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().TimePicker()
+        ///  &lt;%= Html.Kendo().TimePicker()
         ///             .Name("TimePicker")
         ///             .BindTo(new List<DateTime>
         ///             {

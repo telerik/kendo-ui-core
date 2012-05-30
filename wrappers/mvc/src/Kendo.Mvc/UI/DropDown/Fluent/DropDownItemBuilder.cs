@@ -28,7 +28,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="value">The value.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().DropDownList()
+        ///  &lt;%= Html.Kendo().DropDownList()
         ///             .Name("DropDownList")
         ///             .Items(items => items.Add().Text("First item."))
         /// %&gt;
@@ -47,7 +47,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="value">The value.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().DropDownList()
+        ///  &lt;%= Html.Kendo().DropDownList()
         ///             .Name("DropDownList")
         ///             .Items(items => items.Add().Value("1"))
         /// %&gt;
@@ -66,7 +66,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="value">If true the item will be selected.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().DropDownList()
+        ///  &lt;%= Html.Kendo().DropDownList()
         ///             .Name("DropDownList")
         ///             .Items(items =>
         ///             {

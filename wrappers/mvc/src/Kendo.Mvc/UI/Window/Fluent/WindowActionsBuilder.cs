@@ -25,7 +25,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Window()
+        ///  &lt;%= Html.Kendo().Window()
         ///             .Name("Window")
         ///             .Actions(actions => actions.Close())
         /// %&gt;
@@ -41,7 +41,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Window()
+        ///  &lt;%= Html.Kendo().Window()
         ///             .Name("Window")
         ///             .Actions(actions => actions.Maximize())
         /// %&gt;
@@ -57,7 +57,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Window()
+        ///  &lt;%= Html.Kendo().Window()
         ///             .Name("Window")
         ///             .Actions(actions => actions.Maximize())
         /// %&gt;
@@ -73,7 +73,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Window()
+        ///  &lt;%= Html.Kendo().Window()
         ///             .Name("Window")
         ///             .Actions(actions => actions.Refresh())
         /// %&gt;
@@ -89,7 +89,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Window()
+        ///  &lt;%= Html.Kendo().Window()
         ///             .Name("Window")
         ///             .Actions(actions => actions.Custom("menu"))
         /// %&gt;
@@ -105,7 +105,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Window()
+        ///  &lt;%= Html.Kendo().Window()
         ///             .Name("Window")
         ///             .Actions(actions => actions.Clear())
         /// %&gt;

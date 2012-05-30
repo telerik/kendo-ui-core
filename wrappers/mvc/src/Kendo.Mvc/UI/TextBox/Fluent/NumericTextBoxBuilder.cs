@@ -1,12 +1,8 @@
 namespace Kendo.Mvc.UI
 {
 
-    using Kendo.Mvc.Extensions;
-    using Kendo.Mvc.Infrastructure;
-    using Kendo.Mvc.UI;
     using System;
-    using System.Collections.Generic;
-
+    using Kendo.Mvc.Infrastructure;
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="NumericTextBox"/> component.
     /// </summary>
@@ -89,7 +85,7 @@ namespace Kendo.Mvc.UI
         /// <param name="EventsAction">The client events action.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().NumericTextBox()
+        ///  &lt;%= Html.Kendo().NumericTextBox()
         ///             .Name("NumericTextBox")
         ///             .Events(events =>
         ///                 events.OnLoad("onLoad").OnChange("onChange")

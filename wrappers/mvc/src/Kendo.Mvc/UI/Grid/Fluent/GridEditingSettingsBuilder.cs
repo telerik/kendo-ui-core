@@ -28,7 +28,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid&lt;Order&gt;()
+        ///  &lt;%= Html.Kendo().Grid&lt;Order&gt;()
         ///             .Name("Orders")
         ///             .Editable(settings => settings.Enabled(true))
         /// %&gt;
@@ -97,7 +97,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="additionalViewData">An anonymous object which contains the additional data</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid(Model)
+        ///  &lt;%= Html.Kendo().Grid(Model)
         ///             .Name("Grid")
         ///             .Editable(editing => editing.AdditionalViewData(new { customers = Model.Customers }))
         /// %&gt;
@@ -114,7 +114,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().Grid&lt;Order&gt;()
+        ///  &lt;%= Html.Kendo().Grid&lt;Order&gt;()
         ///             .Name("Orders")
         ///             .Editable(settings => settings.DisplayDeleteConfirmation(true))
         /// %&gt;

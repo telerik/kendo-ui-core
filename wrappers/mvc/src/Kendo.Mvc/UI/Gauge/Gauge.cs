@@ -7,15 +7,6 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.UI.Html;
     using Kendo.Mvc.Infrastructure;
 
-    /// <summary>
-    /// Telerik Gauge for ASP.NET MVC is a view component for rendering gauge.
-    /// Features:
-    /// <list type="bullet">
-    ///     <item>Linear</item>
-    ///     <item>Radial</item>
-    /// </list>
-    /// For more information, see the online documentation.
-    /// </summary>
     public class Gauge : ViewComponentBase, IGauge
     {
         /// <summary>

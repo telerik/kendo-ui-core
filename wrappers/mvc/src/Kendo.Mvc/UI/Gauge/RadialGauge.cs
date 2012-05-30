@@ -5,8 +5,6 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Infrastructure;
     using System.Collections.Generic;
 
-    /// <summary>
-    /// Telerik RadialGauge for ASP.NET MVC is a view component for rendering RadialGauge.
     public class RadialGauge<T> : Gauge where T : struct
     {
         /// <summary>

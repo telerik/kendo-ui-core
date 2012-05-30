@@ -22,7 +22,7 @@ namespace Kendo.Mvc.UI
         /// <param name="routeValues">The route values of the Action method.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().PanelBar()
+        ///  &lt;%= Html.Kendo().PanelBar()
         ///         .Name("PanelBar")
         ///         .Items(parent => {
         ///
@@ -44,7 +44,7 @@ namespace Kendo.Mvc.UI
         /// <param name="controllerName">The controller name.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().PanelBar()
+        ///  &lt;%= Html.Kendo().PanelBar()
         ///         .Name("PanelBar")
         ///         .Items(parent => {
         ///
@@ -68,7 +68,7 @@ namespace Kendo.Mvc.UI
         /// <param name="routeValues">Route values.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().PanelBar()
+        ///  &lt;%= Html.Kendo().PanelBar()
         ///         .Name("PanelBar")
         ///         .Items(parent => {
         ///
@@ -97,7 +97,7 @@ namespace Kendo.Mvc.UI
         /// <param name="value">The url.</param>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().PanelBar()
+        ///  &lt;%= Html.Kendo().PanelBar()
         ///         .Name("PanelBar")
         ///         .Items(parent => {
         ///
