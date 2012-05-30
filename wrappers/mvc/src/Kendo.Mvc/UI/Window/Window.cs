@@ -185,7 +185,7 @@ namespace Kendo.Mvc.UI
             options.Add("draggable", Draggable);
             options.Add("title", Title);
             options.Add("resizable", ResizingSettings.Enabled);
-            options.Add("Content", ContentUrl);
+            options.Add("content", ContentUrl);
             if (Width != 0)
             {
                 options.Add("width", Width);
@@ -193,7 +193,7 @@ namespace Kendo.Mvc.UI
             if (Height != 0)
             {
                 options.Add("height", Height);
-            }            
+            }
             options.Add("actions", Actions.Container.Select(item => item.Name));
 
 
