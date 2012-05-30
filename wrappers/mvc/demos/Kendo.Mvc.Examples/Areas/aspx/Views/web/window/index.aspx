@@ -1,9 +1,17 @@
-@(Html.Kendo().Window()
-    .Name("window")
+<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/Web.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+
+<asp:Content ContentPlaceHolderID="HeadContent" runat="server">
+</asp:Content>
+
+<asp:Content ContentPlaceHolderID="MainContent" runat="server">
+<% Html.Kendo().Window()
+    .Name("window")    
     .Title("About Alvar Aalto")
-    .Content(@<text>
+    .Content(() => 
+    {
+        %>
         <div class="armchair">
-            <img src="@Url.Content("~/content/web/window/armchair-402.png")"
+            <img src="<%= Url.Content("~/Content/web/window/armchair-402.png") %>"
                     alt="Artek Alvar Aalto - Armchair 402" />
             Artek Alvar Aalto - Armchair 402
         </div>
@@ -11,7 +19,7 @@
         <p>
             Alvar Aalto is one of the greatest names in modern architecture and design.
             Glassblowers at the iittala factory still meticulously handcraft the legendary
-            vases that are variations on one theme, fluid organic shapes that let the end user
+            vases that are variations on one theme, fluid organic shapes that let the end user 
             ecide the use. Interpretations of the shape in new colors and materials add to the
             growing Alvar Aalto Collection that remains true to his original design.
         </p>
@@ -34,11 +42,13 @@
             Source:
             <a href="http://www.aalto.com/about-alvar-aalto.html" title="About Alvar Aalto">www.aalto.com</a>
         </p>
-    </text>)
+        <%
+    })
     .Draggable()
     .Resizable()
     .Width(600)
-)
+    .Render();
+%>
 
 <span id="undo" style="display:none" class="k-button">Click here to open the window.</span>
 
@@ -56,7 +66,7 @@
 </script>
 
 <style scoped>
-    #example
+    #example 
     {
         min-height:500px;
     }
@@ -78,3 +88,4 @@
         margin-bottom: 10px;
     }
 </style>
+</asp:Content>
