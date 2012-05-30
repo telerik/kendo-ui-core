@@ -33,7 +33,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <returns></returns>
         public TBuilder ButtonType(GridButtonType type)
         {
-            Guard.IsNotNull(type, "type");
 
             Command.ButtonType = type;
 

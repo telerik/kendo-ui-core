@@ -33,7 +33,6 @@ namespace Kendo.Mvc.UI.Fluent
         ///// </example>
         //public TDropDownBuilder Events(Action<DropDownEventsBuilder> EventsAction)
         //{
-        //    Guard.IsNotNull(EventsAction, "EventsAction");
 
         //    EventsAction(new DropDownEventsBuilder(Component.Events));
 
@@ -58,7 +57,6 @@ namespace Kendo.Mvc.UI.Fluent
         ///// </example>
         //public TDropDownBuilder Effects(Action<EffectsBuilder> addEffects)
         //{
-        //    Guard.IsNotNull(addEffects, "addAction");
 
         //    EffectsBuilderFactory factory = new EffectsBuilderFactory();
 
@@ -85,7 +83,6 @@ namespace Kendo.Mvc.UI.Fluent
         ///// </example>
         //public TDropDownBuilder Items(Action<DropDownItemFactory> addAction)
         //{
-        //    Guard.IsNotNull(addAction, "addAction");
 
         //    Component.Items.Clear();
 
@@ -120,7 +117,6 @@ namespace Kendo.Mvc.UI.Fluent
         ///// </example>
         //public TDropDownBuilder BindTo(IEnumerable<DropDownItem> dataSource)
         //{
-        //    Guard.IsNotNull(dataSource, "dataSource");
 
         //    Component.Items.Clear();
 
@@ -156,7 +152,6 @@ namespace Kendo.Mvc.UI.Fluent
         ///// </example>
         //public TDropDownBuilder BindTo(IEnumerable<SelectListItem> dataSource)
         //{
-        //    Guard.IsNotNull(dataSource, "dataSource");
 
         //    Component.Items.Clear();
 

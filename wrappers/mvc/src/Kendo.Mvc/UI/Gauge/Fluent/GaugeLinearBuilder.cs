@@ -50,7 +50,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public GaugeLinearBuilder<T> GaugeArea(Action<GaugeAreaBuilder> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             configurator(new GaugeAreaBuilder(Component.GaugeArea));
             return this;
@@ -72,7 +71,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public GaugeLinearBuilder<T> Scale(Action<GaugeLinearScaleBuilder<T>> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             configurator(new GaugeLinearScaleBuilder<T>(Component));
 
@@ -95,7 +93,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public GaugeLinearBuilder<T> Pointer(Action<GaugeLinearPointerBuilder<T>> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             configurator(new GaugeLinearPointerBuilder<T>(Component.Pointer));
 

@@ -85,7 +85,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public GaugeRadialScaleBuilder<T> Labels(Action<GaugeRadialScaleLabelsBuilder> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             configurator(new GaugeRadialScaleLabelsBuilder(Scale.Labels));
 

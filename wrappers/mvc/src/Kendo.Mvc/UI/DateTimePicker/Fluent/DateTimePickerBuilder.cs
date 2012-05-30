@@ -24,7 +24,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         public DateTimePickerBuilder Interval(int interval) 
         {
-            Guard.IsNotZeroOrNegative(interval, "interval");
 
             Component.Interval = interval;
 
@@ -48,7 +47,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public DateTimePickerBuilder BindTo(List<DateTime> dates)
         {
-            Guard.IsNotNull(dates, "dates");
 
             Component.Dates = dates;
 
@@ -64,7 +62,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public DateTimePickerBuilder Depth(CalendarView depth)
         {
-            Guard.IsNotNull(depth, "depth");
 
             Component.Depth = depth.ToString().ToLower();
 
@@ -73,7 +70,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public DateTimePickerBuilder Start(CalendarView start)
         {
-            Guard.IsNotNull(start, "start");
 
             Component.Start = start.ToString().ToLower();
 
@@ -89,7 +85,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public DateTimePickerBuilder MonthTemplate(Action<MonthTemplateBuilder> monthTemplateAction)
         {
-            Guard.IsNotNull(monthTemplateAction, "clientEventsAction");
 
             monthTemplateAction(new MonthTemplateBuilder(Component.MonthTemplate));
 
@@ -101,7 +96,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         public DateTimePickerBuilder Min(string date)
         {
-            Guard.IsNotNullOrEmpty(date, "date");
 
             DateTime parsedDate;
 
@@ -121,7 +115,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         public DateTimePickerBuilder Max(string date)
         {
-            Guard.IsNotNullOrEmpty(date, "date");
 
             DateTime parsedDate;
 

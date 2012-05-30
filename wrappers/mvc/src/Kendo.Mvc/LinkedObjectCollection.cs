@@ -77,7 +77,6 @@ namespace Kendo.Mvc
                     throw new ArgumentOutOfRangeException("index");
                 }
 
-                Guard.IsNotNull(value, "value");
 
                 T previousObject = null;
                 T nextObject = null;
@@ -111,7 +110,6 @@ namespace Kendo.Mvc
         /// <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.</exception>
         public void Add(T item)
         {
-            Guard.IsNotNull(item, "item");
 
             item.Parent = Parent;
 
@@ -215,7 +213,6 @@ namespace Kendo.Mvc
                 throw new ArgumentOutOfRangeException("index");
             }
 
-            Guard.IsNotNull(item, "item");
 
             if (index == innerList.Count)
             {

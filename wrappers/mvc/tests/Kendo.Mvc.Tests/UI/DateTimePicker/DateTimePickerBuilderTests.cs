@@ -87,12 +87,6 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
-        public void Interval_throws_exception_if_not_valid_argument()
-        {
-            Assert.Throws<ArgumentOutOfRangeException>(() => builder.Interval(0));
-        }
-
-        [Fact]
         public void Interval_method_returns_DateTimePickerBuilder()
         {
             builder.Interval(10).ShouldBeType<DateTimePickerBuilder>();

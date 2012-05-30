@@ -15,8 +15,6 @@ namespace KendoUI.Mvc.UI
 
         public TextBoxBaseClientEventsBuilder(TextBoxBaseClientEvents clientEvents, ViewContext viewContext)
         {
-            Guard.IsNotNull(clientEvents, "clientEvents");
-            Guard.IsNotNull(viewContext, "viewContext");
 
             this.clientEvents = clientEvents;
             this.viewContext = viewContext;
@@ -44,7 +42,6 @@ namespace KendoUI.Mvc.UI
         /// </example>
         public TextBoxBaseClientEventsBuilder OnChange(Action onChangeCodeBlock)
         {
-            Guard.IsNotNull(onChangeCodeBlock, "onChangeCodeBlock");
 
             clientEvents.OnChange.CodeBlock = onChangeCodeBlock;
 
@@ -72,7 +69,6 @@ namespace KendoUI.Mvc.UI
         /// </example>
         public TextBoxBaseClientEventsBuilder OnChange(Func<object, object> onChangeInlineCodeBlock)
         {
-            Guard.IsNotNull(onChangeInlineCodeBlock, "onChangeInlineCodeBlock");
 
             clientEvents.OnChange.InlineCodeBlock = onChangeInlineCodeBlock;
 
@@ -93,7 +89,6 @@ namespace KendoUI.Mvc.UI
         /// </example>
         public TextBoxBaseClientEventsBuilder OnChange(string onChangeHandlerName)
         {
-            Guard.IsNotNullOrEmpty(onChangeHandlerName, "onChangeHandlerName");
 
             clientEvents.OnChange.HandlerName = onChangeHandlerName;
 
@@ -122,7 +117,6 @@ namespace KendoUI.Mvc.UI
         /// </example>
         public TextBoxBaseClientEventsBuilder OnLoad(Action onLoadCodeBlock)
         {
-            Guard.IsNotNull(onLoadCodeBlock, "onLoadCodeBlock");
 
             clientEvents.OnLoad.CodeBlock = onLoadCodeBlock;
 
@@ -150,7 +144,6 @@ namespace KendoUI.Mvc.UI
         /// </example>
         public TextBoxBaseClientEventsBuilder OnLoad(Func<object, object> onLoadInlineCodeBlock)
         {
-            Guard.IsNotNull(onLoadInlineCodeBlock, "onLoadInlineCodeBlock");
 
             clientEvents.OnLoad.InlineCodeBlock = onLoadInlineCodeBlock;
 
@@ -171,7 +164,6 @@ namespace KendoUI.Mvc.UI
         /// </example>
         public TextBoxBaseClientEventsBuilder OnLoad(string onLoadHandlerName)
         {
-            Guard.IsNotNullOrEmpty(onLoadHandlerName, "onLoadHandlerName");
 
             clientEvents.OnLoad.HandlerName = onLoadHandlerName;
 

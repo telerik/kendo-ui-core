@@ -43,7 +43,6 @@ namespace Kendo.Mvc
 
             set
             {
-                Guard.IsNotNullOrEmpty(value, "value");
 
                 title = value;
             }
@@ -82,7 +81,6 @@ namespace Kendo.Mvc
 
             set
             {
-                Guard.IsNotNullOrEmpty(value, "value");
 
                 routeName = value;
                 controllerName = actionName = url = null;
@@ -102,7 +100,6 @@ namespace Kendo.Mvc
 
             set
             {
-                Guard.IsNotNullOrEmpty(value, "value");
 
                 controllerName = value;
 
@@ -123,7 +120,6 @@ namespace Kendo.Mvc
 
             set
             {
-                Guard.IsNotNullOrEmpty(value, "value");
 
                 actionName = value;
 
@@ -155,7 +151,6 @@ namespace Kendo.Mvc
 
             set
             {
-                Guard.IsNotNullOrEmpty(value, "value");
 
                 url = value;
 
@@ -223,7 +218,6 @@ namespace Kendo.Mvc
         /// <returns>The result of the conversion.</returns>
         public static implicit operator SiteMapNodeBuilder(SiteMapNode node)
         {
-            Guard.IsNotNull(node, "node");
 
             return node.ToBuilder();
         }

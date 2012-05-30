@@ -35,14 +35,5 @@ namespace Kendo.Mvc.UI.Tests.Grid
 
             templateHtml.ShouldEqual(expectedHtml);
         }
-
-        [Fact]
-        public void Should_throws_if_toolbar_template_is_null_or_empty()
-        {
-            Assert.Throws<ArgumentNullException>(() => factory.Template((Action)null));
-
-            Assert.Throws<ArgumentException>(() => factory.Template(string.Empty));
-            Assert.Throws<ArgumentException>(() => factory.Template((string)null));
-        }
     }
 }

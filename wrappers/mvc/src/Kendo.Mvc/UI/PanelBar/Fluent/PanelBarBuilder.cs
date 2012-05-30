@@ -35,7 +35,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public PanelBarBuilder Items(Action<PanelBarItemFactory> addAction)
         {
-            Guard.IsNotNull(addAction, "addAction");
 
             var factory = new PanelBarItemFactory(Component, Component.ViewContext);
 
@@ -60,7 +59,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public PanelBarBuilder Events(Action<PanelBarEventBuilder> clientEventsAction)
         {
-            Guard.IsNotNull(clientEventsAction, "clientEventsAction");
 
             clientEventsAction(new PanelBarEventBuilder(Component.Events));
 
@@ -84,7 +82,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public PanelBarBuilder BindTo(string viewDataKey, Action<PanelBarItem, SiteMapNode> siteMapAction)
         {
-            Guard.IsNotNullOrEmpty(viewDataKey, "viewDataKey");
 
             Component.BindTo(viewDataKey, siteMapAction);
 
@@ -105,7 +102,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public PanelBarBuilder BindTo(string viewDataKey)
         {
-            Guard.IsNotNullOrEmpty(viewDataKey, "viewDataKey");
 
             Component.BindTo(viewDataKey);
 
@@ -131,7 +127,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public PanelBarBuilder BindTo<T>(IEnumerable<T> dataSource, Action<PanelBarItem, T> itemDataBound)
         {
-            Guard.IsNotNull(itemDataBound, "itemDataBound");
             Component.BindTo(dataSource, itemDataBound);
 
             return this;
@@ -162,7 +157,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public PanelBarBuilder BindTo(IEnumerable dataSource, Action<NavigationBindingFactory<PanelBarItem>> factoryAction)
         {
-            Guard.IsNotNull(factoryAction, "factoryAction");
             Component.BindTo(dataSource, factoryAction);
 
             return this;
@@ -199,7 +193,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public PanelBarBuilder Animation(Action<ExpandableAnimationBuilder> animationAction)
         {
-            Guard.IsNotNull(animationAction, "animationAction");
 
             animationAction(new ExpandableAnimationBuilder(Component.Animation));
 
@@ -225,7 +218,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public PanelBarBuilder ItemAction(Action<PanelBarItem> action)
         {
-            Guard.IsNotNull(action, "action");
 
             Component.ItemAction = action;
 
@@ -308,8 +300,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public PanelBarBuilder SelectedIndex(int index)
         {
-            Guard.IsNotNull(index, "index");
-            Guard.IsNotNegative(index, "index");
 
             Component.SelectedIndex = index;
 
@@ -330,7 +320,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public PanelBarBuilder SecurityTrimming(bool value)
         {
-            Guard.IsNotNull(value, "value");
 
             Component.SecurityTrimming = value;
 

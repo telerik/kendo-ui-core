@@ -125,7 +125,6 @@ namespace Kendo.Mvc.UI
 
         protected override void WriteHtml(System.Web.UI.HtmlTextWriter writer)
         {
-            Guard.IsNotNull(writer, "writer");
 
             DatePickerHtmlBuilderBase renderer = new DatePickerHtmlBuilderBase(this, "datetime");
 

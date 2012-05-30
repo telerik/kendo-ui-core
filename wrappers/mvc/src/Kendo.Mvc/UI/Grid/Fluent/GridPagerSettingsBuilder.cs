@@ -15,7 +15,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="pager">The pager.</param>
         public GridPagerSettingsBuilder(GridPagingSettings pager)
         {
-            Guard.IsNotNull(pager, "pager");
 
             this.pager = pager;
         }
@@ -51,7 +50,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <returns></returns>
         public virtual GridPagerSettingsBuilder PageSize(int value, int[] sizesInDropDown)
         {
-            Guard.IsNotNull(sizesInDropDown, "sizesInDropDown");
 
             pager.PageSize = value;
 

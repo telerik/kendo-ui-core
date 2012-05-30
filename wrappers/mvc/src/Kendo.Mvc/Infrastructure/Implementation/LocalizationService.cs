@@ -15,8 +15,6 @@ namespace Kendo.Mvc.Infrastructure.Implementation
 
         public LocalizationService(string resourceName, CultureInfo culture)
         {
-            Guard.IsNotNullOrEmpty(resourceName, "resourceName");
-            Guard.IsNotNull(culture, "culture");
 
             resource = DetectResource("~/App_GlobalResources", resourceName, culture);
         }

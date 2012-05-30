@@ -11,7 +11,6 @@ namespace Kendo.Mvc.UI.Fluent
     {
         public DataSourceFilterDescriptorFactory(IList<IFilterDescriptor> filters)
         {
-            Guard.IsNotNull(filters, "filters");
 
             Filters = filters;
         }

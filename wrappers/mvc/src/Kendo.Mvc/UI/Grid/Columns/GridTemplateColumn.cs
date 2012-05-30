@@ -8,7 +8,6 @@ namespace Kendo.Mvc.UI
     {
         public GridTemplateColumn(Grid<T> grid, Action<T> template) : base(grid)
         {
-            Guard.IsNotNull(template, "value");
 
             Template = template;
         }
@@ -16,7 +15,6 @@ namespace Kendo.Mvc.UI
         public GridTemplateColumn(Grid<T> grid, Func<T, object> template)
             : base(grid)
         {
-            Guard.IsNotNull(template, "value");
 
             InlineTemplate = template;
         }

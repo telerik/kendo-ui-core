@@ -13,8 +13,6 @@ namespace Kendo.Mvc.Infrastructure.Implementation
 
         public bool IsAccessibleToUser(RequestContext requestContext, string url)
         {
-            Guard.IsNotNull(requestContext, "requestContext");
-            Guard.IsNotNullOrEmpty(url, "url");
 
             InternalSiteMapNode node = new InternalSiteMapNode(provider, url.ToLowerInvariant(), url);
             bool allowed = node.IsAccessibleToUser(requestContext.HttpContext);

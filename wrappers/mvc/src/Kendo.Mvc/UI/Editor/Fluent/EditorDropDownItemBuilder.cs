@@ -9,7 +9,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public EditorDropDownItemBuilder(IList<DropDownItem> items)
         {
-            Guard.IsNotNull(items, "items");
 
             this.items = items;
         }

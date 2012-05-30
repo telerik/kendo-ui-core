@@ -10,8 +10,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public TabStripItemFactory(INavigationItemContainer<TabStripItem> container, ViewContext viewContext)
         {
-            Guard.IsNotNull(container, "container");
-            Guard.IsNotNull(viewContext, "viewContext");
 
             this.container = container;
             this.viewContext = viewContext;

@@ -6,7 +6,6 @@ namespace Kendo.Mvc.UI.Fluent
     {
         protected DataSourceFilterCompositeBuilderBase(CompositeFilterDescriptor descriptor)
         {
-            Guard.IsNotNull(descriptor, "descriptor");
 
             Descriptor = descriptor;
         }

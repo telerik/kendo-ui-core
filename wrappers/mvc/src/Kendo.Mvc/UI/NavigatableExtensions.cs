@@ -118,7 +118,6 @@ namespace Kendo.Mvc.UI
         /// <param name="actionName">The Url.</param>
         public static void Url(this INavigatable navigatable, string value)
         {
-            Guard.IsNotNullOrEmpty(value, "value");
 
             navigatable.Url = value;
         }
@@ -131,7 +130,6 @@ namespace Kendo.Mvc.UI
         /// <param name="routeValues">Route values as an object.</param>
         public static void Route(this INavigatable navigatable, string routeName, object routeValues)
         {
-            Guard.IsNotNullOrEmpty(routeName, "routeName");
 
             navigatable.RouteName = routeName;
             navigatable.SetRouteValues(routeValues);
@@ -145,7 +143,6 @@ namespace Kendo.Mvc.UI
         /// <param name="routeValues">Route values as <see cref="RouteValueDictionary"/>.</param>
         public static void Route(this INavigatable navigatable, string routeName, RouteValueDictionary routeValues)
         {
-            Guard.IsNotNullOrEmpty(routeName, "routeName");
 
             navigatable.RouteName = routeName;
             navigatable.SetRouteValues(routeValues);

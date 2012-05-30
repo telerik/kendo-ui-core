@@ -97,7 +97,6 @@ namespace Kendo.Mvc.UI
 
             set
             {
-                Guard.IsNotNullOrEmpty(value, "value");
 
                 loadContentFromUrl = value;
             }

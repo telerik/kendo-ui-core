@@ -13,8 +13,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public SplitterPaneFactory(Splitter container, ViewContext viewContext)
         {
-            Guard.IsNotNull(container, "container");
-            Guard.IsNotNull(viewContext, "viewContext");
 
             this.container = container;
             this.viewContext = viewContext;

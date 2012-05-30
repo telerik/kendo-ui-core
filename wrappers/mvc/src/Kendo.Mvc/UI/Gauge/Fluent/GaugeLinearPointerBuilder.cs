@@ -214,7 +214,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public GaugeLinearPointerBuilder<T> Track(Action<GaugeLinearTrackBuilder> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             configurator(new GaugeLinearTrackBuilder(pointer.Track));
 

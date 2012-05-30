@@ -9,8 +9,6 @@ namespace Kendo.Mvc.UI
     {
         public NavigationItemImageRenderer(HtmlTextWriter writer, ViewContext viewContext)
         {
-            Guard.IsNotNull(writer, "writer");
-            Guard.IsNotNull(viewContext, "viewContext");
             
             Writer = writer;
             ViewContext = viewContext;
@@ -30,7 +28,6 @@ namespace Kendo.Mvc.UI
 
         public void WriteImage(T item)
         {
-            Guard.IsNotNull(item, "item");
 
             if (!string.IsNullOrEmpty(item.ImageUrl))
             {
@@ -45,7 +42,6 @@ namespace Kendo.Mvc.UI
 
         public void WriteSprite(T item)
         {
-            Guard.IsNotNull(item, "item");
 
             if (!string.IsNullOrEmpty(item.SpriteCssClasses))
             {

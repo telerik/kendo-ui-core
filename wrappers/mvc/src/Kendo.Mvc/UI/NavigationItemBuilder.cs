@@ -74,7 +74,6 @@ namespace Kendo.Mvc.UI
         /// <param name="attributes">The attributes.</param>
         public TBuilder HtmlAttributes(IDictionary<string, object> attributes)
         {
-            Guard.IsNotNull(attributes, "attributes");
 
             item.HtmlAttributes.Clear();
             item.HtmlAttributes.Merge(attributes);
@@ -89,7 +88,6 @@ namespace Kendo.Mvc.UI
 
         public TBuilder LinkHtmlAttributes(IDictionary<string, object> attributes)
         {
-            Guard.IsNotNull(attributes, "attributes");
 
             item.LinkHtmlAttributes.Clear();
             item.LinkHtmlAttributes.Merge(attributes);
@@ -354,7 +352,6 @@ namespace Kendo.Mvc.UI
         /// </example>
         public TBuilder ImageUrl(string value)
         {
-            Guard.IsNotNullOrEmpty(value, "value");
 
             item.ImageUrl = value;
 
@@ -387,7 +384,6 @@ namespace Kendo.Mvc.UI
         /// <param name="attributes">The attributes.</param>
         public TBuilder ImageHtmlAttributes(IDictionary<string, object> attributes)
         {
-            Guard.IsNotNull(attributes, "attributes");
 
             item.ImageHtmlAttributes.Clear();
             item.ImageHtmlAttributes.Merge(attributes);
@@ -437,7 +433,6 @@ namespace Kendo.Mvc.UI
         /// </code>        
         public TBuilder Content(Action value)
         {
-            Guard.IsNotNull(value, "value");
 
             Item.Template.Content = value;
 
@@ -465,7 +460,6 @@ namespace Kendo.Mvc.UI
         /// </code>  
         public TBuilder Content(Func<object,object> value)
         {
-            Guard.IsNotNull(value, "value");
 
             Item.Template.InlineTemplate = value;
 
@@ -489,7 +483,6 @@ namespace Kendo.Mvc.UI
         /// </code>        
         public TBuilder Content(string value)
         {
-            Guard.IsNotNull(value, "value");
 
             Item.Template.Html = value;
 
@@ -522,7 +515,6 @@ namespace Kendo.Mvc.UI
         /// <param name="attributes">The attributes.</param>     
         public TBuilder ContentHtmlAttributes(IDictionary<string, object> attributes)
         {
-            Guard.IsNotNull(attributes, "attributes");
 
             item.ContentHtmlAttributes.Clear();
             item.ContentHtmlAttributes.Merge(attributes);

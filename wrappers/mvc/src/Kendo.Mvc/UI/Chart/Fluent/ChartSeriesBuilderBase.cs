@@ -18,7 +18,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="series">The series.</param>
         protected ChartSeriesBuilderBase(TSeries series)
         {
-            Guard.IsNotNull(series, "series");
 
             Series = series;
         }
@@ -113,7 +112,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TSeriesBuilder Tooltip(Action<ChartTooltipBuilder> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             configurator(new ChartTooltipBuilder(Series.Tooltip));
 

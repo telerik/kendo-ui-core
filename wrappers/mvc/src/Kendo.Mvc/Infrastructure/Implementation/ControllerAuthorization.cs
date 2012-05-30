@@ -13,9 +13,6 @@ namespace Kendo.Mvc.Infrastructure.Implementation
 
         public ControllerAuthorization(IAuthorizeAttributeCache authorizeAttributeCache, IAuthorizationContextCache authorizationContextCache, RouteCollection routes)
         {
-            Guard.IsNotNull(authorizeAttributeCache, "authorizeAttributeCache");
-            Guard.IsNotNull(authorizationContextCache, "authorizationContextCache");
-            Guard.IsNotNull(routes, "routes");
 
             this.authorizeAttributeCache = authorizeAttributeCache;
             this.authorizationContextCache = authorizationContextCache;
@@ -24,8 +21,6 @@ namespace Kendo.Mvc.Infrastructure.Implementation
 
         public bool IsAccessibleToUser(RequestContext requestContext, string routeName)
         {
-            Guard.IsNotNull(requestContext, "requestContext");
-            Guard.IsNotNullOrEmpty(routeName, "routeName");
 
             RouteBase route = routes[routeName];
             RouteData routeData = route.GetRouteData(requestContext.HttpContext);
@@ -52,9 +47,6 @@ namespace Kendo.Mvc.Infrastructure.Implementation
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "We will not allow if there is any exception.")]
         public bool IsAccessibleToUser(RequestContext requestContext, string controllerName, string actionName, RouteValueDictionary routeValues)
         {
-            Guard.IsNotNull(requestContext, "requestContext");
-            Guard.IsNotNullOrEmpty(controllerName, "controllerName");
-            Guard.IsNotNullOrEmpty(actionName, "actionName");
 
             AuthorizationContext authorizationContext = authorizationContextCache.GetAuthorizationContext(requestContext, controllerName, actionName, routeValues);
             List<AuthorizeAttribute> authorizeAttributes = authorizeAttributeCache.GetAuthorizeAttributes(requestContext, controllerName, actionName, routeValues).ToList();      

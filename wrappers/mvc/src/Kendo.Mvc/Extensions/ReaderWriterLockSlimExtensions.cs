@@ -17,7 +17,6 @@ namespace Kendo.Mvc.Extensions
         /// <returns></returns>
         public static IDisposable ReadAndWrite(this ReaderWriterLockSlim instance)
         {
-            Guard.IsNotNull(instance, "instance");
 
             instance.EnterUpgradeableReadLock();
 
@@ -31,7 +30,6 @@ namespace Kendo.Mvc.Extensions
         /// <returns></returns>
         public static IDisposable Read(this ReaderWriterLockSlim instance)
         {
-            Guard.IsNotNull(instance, "instance");
 
             instance.EnterReadLock();
 
@@ -45,7 +43,6 @@ namespace Kendo.Mvc.Extensions
         /// <returns></returns>
         public static IDisposable Write(this ReaderWriterLockSlim instance)
         {
-            Guard.IsNotNull(instance, "instance");
 
             instance.EnterWriteLock();
 

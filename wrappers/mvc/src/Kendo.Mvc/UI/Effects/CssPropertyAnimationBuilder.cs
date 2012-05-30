@@ -21,7 +21,6 @@ namespace KendoUI.Mvc.UI
 
         public CssPropertyAnimationBuilder OpenDuration(int value)
         {
-            Guard.IsNotNegative(value, "value");
 
             effect.OpenDuration = value;
 
@@ -30,7 +29,6 @@ namespace KendoUI.Mvc.UI
 
         public CssPropertyAnimationBuilder CloseDuration(int value)
         {
-            Guard.IsNotNegative(value, "value");
 
             effect.CloseDuration = value;
 

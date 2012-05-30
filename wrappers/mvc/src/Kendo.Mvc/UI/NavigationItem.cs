@@ -132,7 +132,6 @@ namespace Kendo.Mvc.UI
             }
             set
             {
-                Guard.IsNotNullOrEmpty(value, "value");
 
                 text = value;
             }
@@ -181,7 +180,6 @@ namespace Kendo.Mvc.UI
             }
             set
             {
-                Guard.IsNotNullOrEmpty(value, "value");
 
                 controllerName = value;
 
@@ -198,7 +196,6 @@ namespace Kendo.Mvc.UI
             }
             set
             {
-                Guard.IsNotNullOrEmpty(value, "value");
 
                 actionName = value;
 
@@ -215,7 +212,6 @@ namespace Kendo.Mvc.UI
             }
             set
             {
-                Guard.IsNotNullOrEmpty(value, "value");
 
                 routeName = value;
                 controllerName = actionName = url = null;
@@ -230,7 +226,6 @@ namespace Kendo.Mvc.UI
             }
             set
             {
-                Guard.IsNotNullOrEmpty(value, "value");
 
                 url = value;
 

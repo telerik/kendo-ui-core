@@ -20,7 +20,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="scale">The scale.</param>
         protected GaugeScaleBuilderBase(TScale scale)
         {
-            Guard.IsNotNull(scale, "scale");
 
             Scale = scale;
         }
@@ -53,7 +52,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TScaleBuilder MinorTicks(Action<GaugeScaleTicksBuilder> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             configurator(new GaugeScaleTicksBuilder(Scale.MinorTicks));
         
@@ -78,7 +76,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TScaleBuilder MajorTicks(Action<GaugeScaleTicksBuilder> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             configurator(new GaugeScaleTicksBuilder(Scale.MajorTicks));
 
@@ -103,7 +100,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TScaleBuilder Ranges(Action<GaugeScaleRangesFactory<TScale, T>> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             GaugeScaleRangesFactory<TScale, T> factory = new GaugeScaleRangesFactory<TScale, T>(Scale);
 

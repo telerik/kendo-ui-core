@@ -88,12 +88,6 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
-        public void Width_should_throw_exception_when_param_is_negative()
-        {
-            Assert.Throws(typeof(ArgumentOutOfRangeException), () => builder.Width(-100));
-        }
-
-        [Fact]
         public void Width_returns_builder()
         {
             builder.Width(400).ShouldBeSameAs(builder);
@@ -107,12 +101,6 @@ namespace Kendo.Mvc.UI.Tests
             builder.Height(height);
 
             component.Height.ShouldEqual(height);
-        }
-
-        [Fact]
-        public void Height_should_throw_exception_when_param_is_negative()
-        {
-            Assert.Throws(typeof(ArgumentOutOfRangeException), () => builder.Height(-100));
         }
 
         [Fact]

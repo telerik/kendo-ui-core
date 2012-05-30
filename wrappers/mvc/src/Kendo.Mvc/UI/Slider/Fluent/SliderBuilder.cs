@@ -26,7 +26,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>Sets the title of the slider increase button.</summary>
         public SliderBuilder<T> IncreaseButtonTitle(string title)
         {
-            Guard.IsNotNullOrEmpty(title, "title");
 
             Component.IncreaseButtonTitle = title;
 
@@ -44,7 +43,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>Sets the title of the slider decrease button.</summary>
         public SliderBuilder<T> DecreaseButtonTitle(string title)
         {
-            Guard.IsNotNullOrEmpty(title, "title");
 
             Component.DecreaseButtonTitle = title;
 
@@ -142,7 +140,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public SliderBuilder<T> Events(Action<SliderEventBuilder> events)
         {
-            Guard.IsNotNull(events, "events");
 
             events(new SliderEventBuilder(Component.Events));
 

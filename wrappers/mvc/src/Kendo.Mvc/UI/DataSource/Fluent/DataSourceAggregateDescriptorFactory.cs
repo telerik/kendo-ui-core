@@ -24,8 +24,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         private DataSourceAggregatesFactory AddDescriptor(string memberName, Type memberType)
         {
-            Guard.IsNotNullOrEmpty(memberName, "memberName");
-            Guard.IsNotNull(memberType, "memberType");
 
             var descriptor = new AggregateDescriptor();
             descriptor.Member = memberName;                        

@@ -21,7 +21,6 @@
 
         public ModelFieldDescriptor AddDescriptor(string member)
         {
-            Guard.IsNotNullOrEmpty(member, "Member cannot be empty");
 
             var existing = Fields.FirstOrDefault(f => f.Member == member);
             if (existing != null)

@@ -149,7 +149,6 @@ namespace Kendo.Mvc.UI
             }
             set
             {
-                Guard.IsNotNullOrEmpty(value, "value");
 
                 loadContentFromUrl = value;
                 ContentHtmlAttributes.Clear();
@@ -229,7 +228,6 @@ namespace Kendo.Mvc.UI
 
         protected override void WriteHtml(HtmlTextWriter writer)
         {
-            Guard.IsNotNull(writer, "writer");
 
             var builder = new WindowHtmlBuilder(this);
 

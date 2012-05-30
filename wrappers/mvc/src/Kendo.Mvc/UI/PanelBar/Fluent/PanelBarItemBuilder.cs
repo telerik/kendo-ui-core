@@ -21,8 +21,6 @@ namespace Kendo.Mvc.UI.Fluent
         public PanelBarItemBuilder(PanelBarItem item, ViewContext viewContext)
             : base(item, viewContext)
         {
-            Guard.IsNotNull(item, "item");
-            Guard.IsNotNull(viewContext, "viewContext");
 
             this.item = item;
             this.viewContext = viewContext;
@@ -49,7 +47,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public PanelBarItemBuilder Items(Action<PanelBarItemFactory> addAction)
         {
-            Guard.IsNotNull(addAction, "addAction");
 
             var factory = new PanelBarItemFactory(item, viewContext);
 

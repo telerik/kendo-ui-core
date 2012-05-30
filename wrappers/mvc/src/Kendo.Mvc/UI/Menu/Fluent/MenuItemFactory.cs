@@ -11,8 +11,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public MenuItemFactory(INavigationItemContainer<MenuItem> container, ViewContext viewContext)
         {
-            Guard.IsNotNull(container, "container");
-            Guard.IsNotNull(viewContext, "viewContext");
 
             this.container = container;
             this.viewContext = viewContext;

@@ -67,7 +67,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public GridEditingSettingsBuilder<T> Window(Action<WindowBuilder> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             configurator(new WindowBuilder(settings.PopUp));
 
@@ -82,7 +81,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// or <see cref="GridEditMode.PopUp"/></remarks>
         public GridEditingSettingsBuilder<T> TemplateName(string templateName)
         {
-            Guard.IsNotNullOrEmpty(templateName, "templateName");
 
             settings.TemplateName = templateName;
             return this;
@@ -151,7 +149,6 @@ namespace Kendo.Mvc.UI.Fluent
         
         private static void MergeAttributes(IDictionary<string, object> target, IDictionary<string, object> attributes)
         {
-            Guard.IsNotNull(attributes, "attributes");
 
             target.Clear();
             target.Merge(attributes);

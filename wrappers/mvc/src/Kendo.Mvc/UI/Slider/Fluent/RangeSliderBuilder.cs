@@ -136,7 +136,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public RangeSliderBuilder<T> Events(Action<RangeSliderEventBuilder> events)
         {
-            Guard.IsNotNull(events, "events");
 
             events(new RangeSliderEventBuilder(Component.Events));
 

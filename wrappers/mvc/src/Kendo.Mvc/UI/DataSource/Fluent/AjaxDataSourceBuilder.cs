@@ -80,7 +80,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public virtual AjaxDataSourceBuilder<TModel> Sort(Action<DataSourceSortDescriptorFactory<TModel>> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             configurator(new DataSourceSortDescriptorFactory<TModel>(dataSource.OrderBy));
 
@@ -89,7 +88,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public AjaxDataSourceBuilder<TModel> Group(Action<DataSourceGroupDescriptorFactory<TModel>> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             configurator(new DataSourceGroupDescriptorFactory<TModel>(dataSource.Groups));
 
@@ -98,7 +96,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public AjaxDataSourceBuilder<TModel> Aggregates(Action<DataSourceAggregateDescriptorFactory<TModel>> aggregates)
         {
-            Guard.IsNotNull(aggregates, "aggregates");   
 
             aggregates(new DataSourceAggregateDescriptorFactory<TModel>(dataSource.Aggregates));
 
@@ -107,7 +104,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public virtual AjaxDataSourceBuilder<TModel> Filter(Action<DataSourceFilterDescriptorFactory<TModel>> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");                        
 
             configurator(new DataSourceFilterDescriptorFactory<TModel>(dataSource.Filters));
 
@@ -116,7 +112,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public virtual AjaxDataSourceBuilder<TModel> Model(Action<DataSourceModelDescriptorFactory<TModel>> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");            
 
             configurator(new DataSourceModelDescriptorFactory<TModel>(dataSource.Schema.Model));
 

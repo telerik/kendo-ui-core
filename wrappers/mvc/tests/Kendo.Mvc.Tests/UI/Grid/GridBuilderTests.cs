@@ -30,13 +30,7 @@ namespace Kendo.Mvc.UI.Fluent.Tests
 
             Assert.True(grid.Paging.Enabled);
         }
-        
-        [Fact]
-        public void Pager_throws_when_action_is_null()
-        {
-            Assert.Throws<ArgumentNullException>(() => builder.Pageable(null));
-        }
-
+      
         [Fact]
         public void BindTo_sets_the_data_source()
         {
@@ -60,12 +54,6 @@ namespace Kendo.Mvc.UI.Fluent.Tests
             builder.Columns(columns => columns.Bound(c => c.Id));
 
             Assert.Equal(1, grid.Columns.Count);
-        }
-
-        [Fact]
-        public void Columns_throws_if_null_supplied_as_argument()
-        {
-            Assert.Throws<ArgumentNullException>(() => builder.Columns((Action<GridColumnFactory<Customer>>)null));
         }
 
         [Fact]

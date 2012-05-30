@@ -22,7 +22,6 @@ namespace Kendo.Mvc.UI
         protected ChartBoundSeries(Chart<TModel> chart, Expression<Func<TModel, TValue>> expression)
         : base(chart)
         {
-            Guard.IsNotNull(expression, "expression");
 
             if (typeof(TModel).IsPlainType() && !expression.IsBindable())
             {
@@ -45,7 +44,6 @@ namespace Kendo.Mvc.UI
         protected ChartBoundSeries(Chart<TModel> chart, IEnumerable data)
             : base(chart)
         {
-            Guard.IsNotNull(data, "data");
 
             Data = data;
         }

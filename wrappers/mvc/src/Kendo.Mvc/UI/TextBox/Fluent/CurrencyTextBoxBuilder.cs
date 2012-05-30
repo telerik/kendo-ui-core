@@ -20,7 +20,6 @@ namespace KendoUI.Mvc.UI
         /// </summary>
         public CurrencyTextBoxBuilder DecimalDigits(int digits)
         {
-            Guard.IsNotNull(digits, "digits");
 
             ((CurrencyTextBox)Component).DecimalDigits = digits;
 
@@ -32,7 +31,6 @@ namespace KendoUI.Mvc.UI
         /// </summary>
         public CurrencyTextBoxBuilder DecimalSeparator(string value)
         {
-            Guard.IsNotNullOrEmpty(value, "value");
 
             ((CurrencyTextBox)Component).DecimalSeparator = value;
 
@@ -44,7 +42,6 @@ namespace KendoUI.Mvc.UI
         /// </summary>
         public CurrencyTextBoxBuilder PositivePatternIndex(int value)
         {
-            Guard.IsNotNull(value, "value");
 
             ((CurrencyTextBox)Component).PositivePatternIndex = value;
 
@@ -56,7 +53,6 @@ namespace KendoUI.Mvc.UI
         /// </summary>
         public CurrencyTextBoxBuilder CurrencySymbol(string value)
         {
-            Guard.IsNotNullOrEmpty(value, "value");
 
             ((CurrencyTextBox)Component).CurrencySymbol = value;
 

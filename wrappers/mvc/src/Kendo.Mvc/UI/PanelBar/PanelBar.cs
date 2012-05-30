@@ -19,8 +19,6 @@ namespace Kendo.Mvc.UI
         public PanelBar(ViewContext viewContext, IJavaScriptInitializer initializer, IUrlGenerator urlGenerator, INavigationItemAuthorization authorization)
             : base(viewContext, initializer)
         {
-            Guard.IsNotNull(urlGenerator, "urlGenerator");
-            Guard.IsNotNull(authorization, "authorization");
 
             Authorization = authorization;
             UrlGenerator = urlGenerator;
@@ -123,7 +121,6 @@ namespace Kendo.Mvc.UI
         
         protected override void WriteHtml(HtmlTextWriter writer)
         {
-            Guard.IsNotNull(writer, "writer");
 
             if (Items.Any())
             {

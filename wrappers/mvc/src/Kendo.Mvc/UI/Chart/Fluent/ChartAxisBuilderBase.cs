@@ -19,7 +19,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="axis">The axis.</param>
         protected ChartAxisBuilderBase(TAxis axis)
         {
-            Guard.IsNotNull(axis, "axis");
 
             Axis = axis;
         }
@@ -52,7 +51,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TAxisBuilder MajorTicks(Action<ChartAxisTicksBuilder> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             configurator(new ChartAxisTicksBuilder(Axis.MajorTicks));
 
@@ -77,7 +75,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TAxisBuilder MinorTicks(Action<ChartAxisTicksBuilder> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             configurator(new ChartAxisTicksBuilder(Axis.MinorTicks));
 
@@ -101,7 +98,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TAxisBuilder MajorGridLines(Action<ChartLineBuilder> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             configurator(new ChartLineBuilder(Axis.MajorGridLines));
 
@@ -151,7 +147,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TAxisBuilder MinorGridLines(Action<ChartLineBuilder> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             configurator(new ChartLineBuilder(Axis.MinorGridLines));
 
@@ -201,7 +196,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TAxisBuilder Line(Action<ChartLineBuilder> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             configurator(new ChartLineBuilder(Axis.Line));
 
@@ -314,7 +308,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TAxisBuilder Labels(Action<ChartAxisLabelsBuilder> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             configurator(new ChartAxisLabelsBuilder(Axis.Labels));
 
@@ -358,7 +351,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TAxisBuilder PlotBands(Action<ChartAxisPlotBandsFactory<TAxis>> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             ChartAxisPlotBandsFactory<TAxis> factory = new ChartAxisPlotBandsFactory<TAxis>(Axis);
 
@@ -384,7 +376,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TAxisBuilder Title(Action<ChartAxisTitleBuilder> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             configurator(new ChartAxisTitleBuilder(Axis.Title));
 

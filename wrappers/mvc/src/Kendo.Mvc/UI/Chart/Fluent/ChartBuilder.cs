@@ -34,7 +34,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public ChartBuilder<T> Events(Action<ChartEventBuilder> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             configurator(new ChartEventBuilder(Component.Events));
 
@@ -73,7 +72,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public ChartBuilder<T> ChartArea(Action<ChartAreaBuilder> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             configurator(new ChartAreaBuilder(Component.ChartArea));
             return this;
@@ -93,7 +91,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public ChartBuilder<T> PlotArea(Action<PlotAreaBuilder> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             configurator(new PlotAreaBuilder(Component.PlotArea));
             return this;
@@ -131,7 +128,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public ChartBuilder<T> Title(Action<ChartTitleBuilder> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             configurator(new ChartTitleBuilder(Component.Title));
 
@@ -171,7 +167,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public ChartBuilder<T> Legend(Action<ChartLegendBuilder> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             configurator(new ChartLegendBuilder(Component.Legend));
 
@@ -195,7 +190,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public ChartBuilder<T> Series(Action<ChartSeriesFactory<T>> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             ChartSeriesFactory<T> factory = new ChartSeriesFactory<T>(Component);
 
@@ -218,7 +212,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public ChartBuilder<T> SeriesDefaults(Action<ChartSeriesDefaultsBuilder<T>> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             configurator(new ChartSeriesDefaultsBuilder<T>(Component));
 
@@ -239,7 +232,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public ChartBuilder<T> AxisDefaults(Action<ChartAxisDefaultsBuilder<T>> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             configurator(new ChartAxisDefaultsBuilder<T>(Component));
 
@@ -262,7 +254,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public ChartBuilder<T> CategoryAxis(Action<ChartCategoryAxisBuilder<T>> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             configurator(new ChartCategoryAxisBuilder<T>(Component));
 
@@ -283,7 +274,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public ChartBuilder<T> ValueAxis(Action<ChartValueAxisFactory<T>> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             ChartValueAxisFactory<T> factory = new ChartValueAxisFactory<T>(Component, Component.ValueAxes);
             configurator(factory);
@@ -305,7 +295,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public ChartBuilder<T> XAxis(Action<ChartValueAxisFactory<T>> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             var factory = new ChartValueAxisFactory<T>(Component, Component.XAxes);
             configurator(factory);
@@ -327,7 +316,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public ChartBuilder<T> YAxis(Action<ChartValueAxisFactory<T>> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             var factory = new ChartValueAxisFactory<T>(Component, Component.YAxes);
             configurator(factory);
@@ -352,7 +340,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public ChartBuilder<T> DataSource(Action<ReadOnlyDataSourceBuilder> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             configurator(new ReadOnlyDataSourceBuilder(Component.DataSource, this.Component.ViewContext, this.Component.UrlGenerator));
 
@@ -414,7 +401,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public ChartBuilder<T> Tooltip(Action<ChartTooltipBuilder> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             configurator(new ChartTooltipBuilder(Component.Tooltip));
 

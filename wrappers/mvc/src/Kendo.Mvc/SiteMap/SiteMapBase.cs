@@ -39,7 +39,6 @@ namespace Kendo.Mvc
 
             set
             {
-                Guard.IsNotNegative(value, "value");
 
                 defaultCacheDurationInMinutes = value;
             }
@@ -104,7 +103,6 @@ namespace Kendo.Mvc
 
             set
             {
-                Guard.IsNotNegative(value, "value");
 
                 cacheDurationInMinutes = value;
             }
@@ -139,7 +137,6 @@ namespace Kendo.Mvc
         /// <returns>The result of the conversion.</returns>
         public static implicit operator SiteMapBuilder(SiteMapBase siteMap)
         {
-            Guard.IsNotNull(siteMap, "siteMap");
 
             return siteMap.ToBuilder();
         }

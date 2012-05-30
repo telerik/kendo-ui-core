@@ -13,7 +13,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public EditorSnippetBuilder(IList<DropDownItem> items, IVirtualPathProvider provider)
         {
-            Guard.IsNotNull(items, "items");
             this.provider = provider;
             this.items = items;
         }

@@ -15,7 +15,6 @@ namespace Kendo.Mvc
         /// <param name="parent">The parent.</param>
         public SiteMapNodeFactory(SiteMapNode parent)
         {
-            Guard.IsNotNull(parent, "parent");
 
             this.parent = parent;
         }

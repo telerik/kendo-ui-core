@@ -27,7 +27,6 @@ namespace Kendo.Mvc
         /// <param name="siteMapNode">The site map node.</param>
         public SiteMapNodeBuilder(SiteMapNode siteMapNode)
         {
-            Guard.IsNotNull(siteMapNode, "siteMapNode");
 
             this.siteMapNode = siteMapNode;
         }
@@ -39,7 +38,6 @@ namespace Kendo.Mvc
         /// <returns>The result of the conversion.</returns>
         public static implicit operator SiteMapNode(SiteMapNodeBuilder builder)
         {
-            Guard.IsNotNull(builder, "builder");
 
             return builder.ToNode();
         }
@@ -305,7 +303,6 @@ namespace Kendo.Mvc
         /// <returns></returns>
         public virtual SiteMapNodeBuilder Attributes(IDictionary<string, object> value)
         {
-            Guard.IsNotNull(value, "value");
 
             siteMapNode.Attributes.Clear();
             siteMapNode.Attributes.Merge(value);
@@ -320,7 +317,6 @@ namespace Kendo.Mvc
         /// <returns></returns>
         public virtual SiteMapNodeBuilder Attributes(object value)
         {
-            Guard.IsNotNull(value, "value");
 
             return Attributes(new RouteValueDictionary(value));
         }
@@ -332,7 +328,6 @@ namespace Kendo.Mvc
         /// <returns></returns>
         public virtual SiteMapNodeBuilder ChildNodes(Action<SiteMapNodeFactory> addActions)
         {
-            Guard.IsNotNull(addActions, "addActions");
 
             SiteMapNodeFactory factory = new SiteMapNodeFactory(siteMapNode);
 

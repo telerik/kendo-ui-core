@@ -2,16 +2,10 @@ namespace Kendo.Mvc.UI.Fluent
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.Linq;
     using System.Linq.Expressions;
-    using System.Reflection;
     using Kendo.Mvc.Extensions;
-    using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.UI;
-    using System.Web.Mvc;
-    using System.Collections;
-
     /// <summary>
     /// Creates columns for the <see cref="Grid{TModel}" />.
     /// </summary>
@@ -27,8 +21,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="container">The container.</param>
         public GridColumnFactory(Grid<TModel> container)
         {
-            Guard.IsNotNull(container, "container");
-
             Container = container;
         }
 
@@ -56,8 +48,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <returns></returns>
         public virtual GridBoundColumnBuilder<TModel> Bound<TValue>(Expression<Func<TModel, TValue>> expression)
         {
-            Guard.IsNotNull(expression, "expression");
-
             GridBoundColumn<TModel, TValue> column = new GridBoundColumn<TModel, TValue>(Container, expression);
 
             Container.Columns.Add(column);
@@ -179,7 +169,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="columnAction">Action which will be executed for each generated column.</param>
         public virtual void AutoGenerate(Action<GridColumnBase<TModel>> columnAction)
         {
-            Guard.IsNotNull(columnAction, "callback");
             AutoGenerate(true, columnAction);
         }
 
@@ -190,8 +179,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <returns></returns>
         public virtual GridTemplateColumnBuilder<TModel> Template(Action<TModel> templateAction)
         {
-            Guard.IsNotNull(templateAction, "templateAction");
-
             GridTemplateColumn<TModel> column = new GridTemplateColumn<TModel>(Container, templateAction);
             Container.Columns.Add(column);
 
@@ -200,8 +187,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public virtual GridTemplateColumnBuilder<TModel> Template(Func<TModel, object> template)
         {
-            Guard.IsNotNull(template, "templateAction");
-
             GridTemplateColumn<TModel> column = new GridTemplateColumn<TModel>(Container, template);
             Container.Columns.Add(column);
 
@@ -215,8 +200,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <returns></returns>
         public virtual GridActionColumnBuilder Command(Action<GridActionCommandFactory<TModel>> commandAction)
         {
-            Guard.IsNotNull(commandAction, "commandAction");
-
             GridActionColumn<TModel> column = new GridActionColumn<TModel>(Container);
             
             commandAction(new GridActionCommandFactory<TModel>(column));

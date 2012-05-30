@@ -25,7 +25,6 @@ namespace Kendo.Mvc.UI
         public ChartPieSeries(Chart<TModel> chart, Expression<Func<TModel, TValue>> expressionValue, Expression<Func<TModel, string>> expressionCategory, Expression<Func<TModel, string>> expressionColor, Expression<Func<TModel, bool>> expressionExplode)
             : base(chart)
         {
-            Guard.IsNotNull(expressionValue, "expressionValue");
 
             if (typeof(TModel).IsPlainType() && !expressionValue.IsBindable())
             {
@@ -68,7 +67,6 @@ namespace Kendo.Mvc.UI
         public ChartPieSeries(Chart<TModel> chart, IEnumerable data)
             : base(chart)
         {
-            Guard.IsNotNull(data, "data");
 
             Data = data;
             Initialize();

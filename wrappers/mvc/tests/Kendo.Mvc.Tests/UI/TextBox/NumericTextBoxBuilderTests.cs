@@ -63,25 +63,12 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
-        public void Decimals_method_throws_exception_when_value_is_negative()
-        {
-            Assert.Throws<ArgumentOutOfRangeException>(() => builder.Decimals(-1));
-        }
-
-        [Fact]
         public void Format_method_sets_format_property()
         {
             string format = "n";
             builder.Format(format);
 
             input.Format.ShouldEqual(format);
-        }
-
-        [Fact]
-        public void Format_method_does_not_allow_empty_string()
-        {
-            string format = "";
-            Assert.Throws<ArgumentException>(() => builder.Format(format));
         }
 
         [Fact]

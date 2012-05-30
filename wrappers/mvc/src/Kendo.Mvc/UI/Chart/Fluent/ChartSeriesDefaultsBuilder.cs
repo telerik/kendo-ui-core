@@ -8,7 +8,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public ChartSeriesDefaultsBuilder(Chart<TModel> chart)
         {
-            Guard.IsNotNull(chart, "chart");
 
             Chart = chart;
         }

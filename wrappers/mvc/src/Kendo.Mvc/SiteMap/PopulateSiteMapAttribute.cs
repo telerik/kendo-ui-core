@@ -20,7 +20,6 @@ namespace Kendo.Mvc
         /// <param name="siteMaps">The site maps.</param>
         public PopulateSiteMapAttribute(SiteMapDictionary siteMaps)
         {
-            Guard.IsNotNull(siteMaps, "siteMaps");
 
             SiteMaps = siteMaps;
         }
@@ -45,7 +44,6 @@ namespace Kendo.Mvc
 
             set
             {
-                Guard.IsNotNullOrEmpty(value, "value");
 
                 defaultViewDataKey = value;
             }
@@ -87,7 +85,6 @@ namespace Kendo.Mvc
         /// <param name="filterContext">The filter context.</param>
         public virtual void OnResultExecuting(ResultExecutingContext filterContext)
         {
-            Guard.IsNotNull(filterContext, "filterContext");
 
             SiteMapBase siteMap = string.IsNullOrEmpty(SiteMapName) ? SiteMaps.DefaultSiteMap : SiteMaps[SiteMapName];
             string viewDataKey = ViewDataKey ?? DefaultViewDataKey;

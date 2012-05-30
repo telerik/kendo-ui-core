@@ -15,7 +15,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="axis">The axis.</param>
         public ChartAxisPlotBandsFactory(TAxis axis)
         {
-            Guard.IsNotNull(axis, "axis");
 
             Axis = axis;
         }

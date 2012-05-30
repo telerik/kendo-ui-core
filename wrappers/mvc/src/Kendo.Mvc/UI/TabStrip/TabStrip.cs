@@ -115,7 +115,6 @@ namespace Kendo.Mvc.UI
 
         protected override void WriteHtml(HtmlTextWriter writer)
         {
-            Guard.IsNotNull(writer, "writer");
 
             if (Items.Any())
             {

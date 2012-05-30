@@ -61,7 +61,6 @@ namespace Kendo.Mvc.UI
             }
             set
             {
-                Guard.IsNotNullOrEmpty(value, "value");
 
                 actionName = value;
 
@@ -77,7 +76,6 @@ namespace Kendo.Mvc.UI
             }
             set
             {
-                Guard.IsNotNullOrEmpty(value, "value");
 
                 controllerName = value;
 
@@ -101,7 +99,6 @@ namespace Kendo.Mvc.UI
             }
             set
             {
-                Guard.IsNotNullOrEmpty(value, "value");
 
                 routeName = value;
                 controllerName = actionName = null;

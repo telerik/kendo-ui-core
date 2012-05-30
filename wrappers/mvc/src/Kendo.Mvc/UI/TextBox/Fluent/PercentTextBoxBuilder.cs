@@ -20,7 +20,6 @@ namespace KendoUI.Mvc.UI
         /// </summary>
         public PercentTextBoxBuilder DecimalDigits(int digits)
         {
-            Guard.IsNotNull(digits, "digits");
 
             ((PercentTextBox)Component).DecimalDigits = digits;
 
@@ -32,7 +31,6 @@ namespace KendoUI.Mvc.UI
         /// </summary>
         public PercentTextBoxBuilder DecimalSeparator(string separator)
         {
-            Guard.IsNotNullOrEmpty(separator, "separator");
 
             ((PercentTextBox)Component).DecimalSeparator = separator;
 
@@ -44,7 +42,6 @@ namespace KendoUI.Mvc.UI
         /// </summary>
         public PercentTextBoxBuilder PositivePatternIndex(int positivePatternIndex)
         {
-            Guard.IsNotNull(positivePatternIndex, "positivePatternIndex");
 
             ((PercentTextBox)Component).PositivePatternIndex = positivePatternIndex;
 
@@ -56,7 +53,6 @@ namespace KendoUI.Mvc.UI
         /// </summary>
         public PercentTextBoxBuilder PercentSymbol(string percentSymbol)
         {
-            Guard.IsNotNullOrEmpty(percentSymbol, "percentSymbol");
 
             ((PercentTextBox)Component).PercentSymbol = percentSymbol;
 

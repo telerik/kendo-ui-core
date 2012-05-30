@@ -17,7 +17,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="series">The series.</param>
         public ChartPieSeriesBuilder(IChartPieSeries series)
         {
-             Guard.IsNotNull(series, "series");
 
              Series = series;
         }
@@ -131,7 +130,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public ChartPieSeriesBuilder<T> Labels(Action<ChartPieLabelsBuilder> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             configurator(new ChartPieLabelsBuilder(Series.Labels));
 
@@ -224,7 +222,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public ChartPieSeriesBuilder<T> Connectors(Action<ChartPieConnectorsBuilder> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             configurator(new ChartPieConnectorsBuilder(Series.Connectors));
 

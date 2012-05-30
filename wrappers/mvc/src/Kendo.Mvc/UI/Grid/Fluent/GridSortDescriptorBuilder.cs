@@ -8,7 +8,6 @@ namespace Kendo.Mvc.UI.Fluent
     {
         public DataSourceSortDescriptorBuilder(SortDescriptor descriptor)
         {
-            Guard.IsNotNull(descriptor, "descriptor");
 
             Descriptor = descriptor;
         }

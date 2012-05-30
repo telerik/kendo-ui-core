@@ -20,7 +20,6 @@ namespace Kendo.Mvc.UI
         /// <param name="component">The component.</param>
         public ViewComponentBuilderBase(TViewComponent component)
         {
-            Guard.IsNotNull(component, "component");
             this.component = component;
         }
 
@@ -47,7 +46,6 @@ namespace Kendo.Mvc.UI
         /// <returns>The result of the conversion.</returns>
         public static implicit operator TViewComponent(ViewComponentBuilderBase<TViewComponent, TBuilder> builder)
         {
-            Guard.IsNotNull(builder, "builder");
 
             return builder.ToComponent();
         }
@@ -90,7 +88,6 @@ namespace Kendo.Mvc.UI
         /// <returns></returns>
         public virtual TBuilder HtmlAttributes(IDictionary<string, object> attributes)
         {
-            Guard.IsNotNull(attributes, "attributes");
 
             Component.HtmlAttributes.Clear();
             Component.HtmlAttributes.Merge(attributes);

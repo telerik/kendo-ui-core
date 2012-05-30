@@ -20,8 +20,6 @@ namespace Kendo.Mvc.UI.Fluent
         public TreeViewItemBuilder(TreeViewItem item, ViewContext viewContext)
             : base(item, viewContext)
         {
-            Guard.IsNotNull(item, "item");
-            Guard.IsNotNull(viewContext, "viewContext");
             
             this.item = item;
             this.viewContext = viewContext;
@@ -48,7 +46,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public virtual TreeViewItemBuilder Items(Action<TreeViewItemFactory> addAction)
         {
-            Guard.IsNotNull(addAction, "addAction");
 
             TreeViewItemFactory factory = new TreeViewItemFactory(item, viewContext);
 

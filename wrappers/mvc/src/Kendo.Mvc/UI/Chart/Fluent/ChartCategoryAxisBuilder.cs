@@ -22,7 +22,6 @@ namespace Kendo.Mvc.UI.Fluent
         public ChartCategoryAxisBuilder(Chart<TModel> chart)
             : base(chart.CategoryAxis)
         {
-            Guard.IsNotNull(chart, "container");
 
             Container = chart;
         }
@@ -44,7 +43,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public ChartCategoryAxisBuilder<TModel> Categories<TValue>(Expression<Func<TModel, TValue>> expression)
         {
-            Guard.IsNotNull(expression, "expression");
 
             if (typeof(TModel).IsPlainType() && !expression.IsBindable())
             {
@@ -80,7 +78,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public ChartCategoryAxisBuilder<TModel> Categories(IEnumerable categories)
         {
-            Guard.IsNotNull(categories, "categories");
             
             Container.CategoryAxis.Categories = categories;
 
@@ -95,7 +92,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public ChartCategoryAxisBuilder<TModel> Categories(params string[] categories)
         {
-            Guard.IsNotNull(categories, "categories");
 
             Container.CategoryAxis.Categories = categories;
 

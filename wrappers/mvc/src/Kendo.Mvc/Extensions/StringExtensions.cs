@@ -64,7 +64,6 @@ namespace Kendo.Mvc.Extensions
         /// <returns></returns>
         public static string Compress(this string instance)
         {
-            Guard.IsNotNullOrEmpty(instance, "instance");
 
             byte[] binary = Encoding.UTF8.GetBytes(instance);
             byte[] compressed;
@@ -94,7 +93,6 @@ namespace Kendo.Mvc.Extensions
         /// <returns></returns>
         public static string Decompress(this string instance)
         {
-            Guard.IsNotNullOrEmpty(instance, "instance");
 
             var compressed = Decode(instance);
             
@@ -142,7 +140,6 @@ namespace Kendo.Mvc.Extensions
 
         public static string ToCamelCase(this string instance)
         {
-            Guard.IsNotNullOrEmpty(instance, "instance");
 
             return instance[0].ToString().ToLowerInvariant() + instance.Substring(1);
         }

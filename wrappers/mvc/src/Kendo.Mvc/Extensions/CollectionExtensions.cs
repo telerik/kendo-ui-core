@@ -7,8 +7,6 @@ namespace Kendo.Mvc.Extensions
     {
         public static void AddRange<T>(this ICollection<T> instance, IEnumerable<T> collection)
         {
-            Guard.IsNotNull(instance, "instance");
-            Guard.IsNotNull(collection, "collection");
 
             foreach (T item in collection)
             {

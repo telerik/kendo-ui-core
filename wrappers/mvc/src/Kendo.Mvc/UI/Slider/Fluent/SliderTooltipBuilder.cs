@@ -9,7 +9,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public SliderTooltipBuilder(SliderTooltipSettings settings)
         {
-            Guard.IsNotNull(settings, "settings");
 
             this.settings = settings;
         }

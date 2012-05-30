@@ -40,17 +40,6 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
-        public void Size_should_throw_exception_when_calling_with_invalid_size()
-        {
-            Assert.Throws<ArgumentException>(() => builder.Size(null));
-            Assert.Throws<ArgumentException>(() => builder.Size(""));
-            Assert.Throws<ArgumentException>(() => builder.Size("120bars"));
-            Assert.Throws<ArgumentException>(() => builder.Size("foo"));
-            Assert.Throws<ArgumentException>(() => builder.Size("some120px"));
-            Assert.Throws<ArgumentException>(() => builder.Size("12%ish"));
-        }
-
-        [Fact]
         public void MinSize_should_return_builder()
         {
             builder.MinSize("200px").ShouldBeSameAs(builder);
@@ -73,17 +62,6 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
-        public void MinSize_should_throw_exception_when_calling_with_invalid_size()
-        {
-            Assert.Throws<ArgumentException>(() => builder.MinSize(null));
-            Assert.Throws<ArgumentException>(() => builder.MinSize(""));
-            Assert.Throws<ArgumentException>(() => builder.MinSize("120bars"));
-            Assert.Throws<ArgumentException>(() => builder.MinSize("foo"));
-            Assert.Throws<ArgumentException>(() => builder.MinSize("some120px"));
-            Assert.Throws<ArgumentException>(() => builder.MinSize("12%ish"));
-        }
-
-        [Fact]
         public void MaxSize_should_return_builder()
         {
             builder.MaxSize("200px").ShouldBeSameAs(builder);
@@ -103,17 +81,6 @@ namespace Kendo.Mvc.UI.Tests
             const string size = "101%";
             builder.MaxSize(size);
             Assert.Equal(size, pane.MaxSize);
-        }
-
-        [Fact]
-        public void MaxSize_should_throw_exception_when_calling_with_invalid_size()
-        {
-            Assert.Throws<ArgumentException>(() => builder.MaxSize(null));
-            Assert.Throws<ArgumentException>(() => builder.MaxSize(""));
-            Assert.Throws<ArgumentException>(() => builder.MaxSize("120bars"));
-            Assert.Throws<ArgumentException>(() => builder.MaxSize("foo"));
-            Assert.Throws<ArgumentException>(() => builder.MaxSize("some120px"));
-            Assert.Throws<ArgumentException>(() => builder.MaxSize("12%ish"));
         }
 
         [Fact]

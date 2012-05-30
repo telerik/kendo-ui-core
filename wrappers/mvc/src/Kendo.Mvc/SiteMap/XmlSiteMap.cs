@@ -39,9 +39,6 @@ namespace Kendo.Mvc
 
         public XmlSiteMap(IPathResolver pathResolver, IVirtualPathProvider provider, ICacheProvider cacheProvider)
         {
-            Guard.IsNotNull(pathResolver, "pathResolver");
-            Guard.IsNotNull(provider, "fileSystem");
-            Guard.IsNotNull(cacheProvider, "cacheProvider");
 
             this.pathResolver = pathResolver;
             this.provider = provider;
@@ -68,7 +65,6 @@ namespace Kendo.Mvc
 
             set
             {
-                Guard.IsNotNullOrEmpty(value, "value");
 
                 defaultPath = value;
             }
@@ -88,7 +84,6 @@ namespace Kendo.Mvc
         /// <param name="relativeVirtualPath">The relative virtual path.</param>
         public virtual void LoadFrom(string relativeVirtualPath)
         {
-            Guard.IsNotNullOrEmpty(relativeVirtualPath, "relativeVirtualPath");
 
             if (!string.IsNullOrEmpty(relativeVirtualPath))
             {

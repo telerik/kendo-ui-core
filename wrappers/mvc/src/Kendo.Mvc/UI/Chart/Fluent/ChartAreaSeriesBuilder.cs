@@ -59,7 +59,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public ChartAreaSeriesBuilder<T> Labels(Action<ChartPointLabelsBuilder> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             configurator(new ChartPointLabelsBuilder(Series.Labels));
 
@@ -131,7 +130,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>        
         public ChartAreaSeriesBuilder<T> Line(Action<ChartAreaLineBuilder> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             configurator(new ChartAreaLineBuilder(Series.Line));
 
@@ -157,7 +155,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public ChartAreaSeriesBuilder<T> Markers(Action<ChartMarkersBuilder> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             configurator(new ChartMarkersBuilder(Series.Markers));
 

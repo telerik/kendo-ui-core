@@ -18,8 +18,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="settings">The settings.</param>
         public TreeViewItemFactory(INavigationItemContainer<TreeViewItem> container, ViewContext viewContext)
         {
-            Guard.IsNotNull(container, "container");
-            Guard.IsNotNull(viewContext, "viewContext");
 
             this.container = container;
             this.viewContext = viewContext;

@@ -72,7 +72,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <returns></returns>
         public GridCustomActionCommandBuilder<T> Custom(string name)
         {
-            Guard.IsNotNullOrEmpty(name, "name");
 
             var command = new GridCustomActionCommand<T>();
             command.Name = name;

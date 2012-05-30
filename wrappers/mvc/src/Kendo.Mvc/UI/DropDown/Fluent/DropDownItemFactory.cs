@@ -16,7 +16,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="settings">The settings.</param>
         public DropDownItemFactory(IList<DropDownItem> container)
         {
-            Guard.IsNotNull(container, "container");
 
             this.container = container;
         }

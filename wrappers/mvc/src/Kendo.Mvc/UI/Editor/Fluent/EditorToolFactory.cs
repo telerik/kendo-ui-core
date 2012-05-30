@@ -15,7 +15,6 @@ namespace Kendo.Mvc.UI.Fluent
         /*TODO :Custom tools
         public EditorToolFactory Custom(Action<EditorCustomToolBuilder> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
             var tool = new EditorCustomTool();
             configurator(new EditorCustomToolBuilder(tool));
             group.Tools.Add(tool);

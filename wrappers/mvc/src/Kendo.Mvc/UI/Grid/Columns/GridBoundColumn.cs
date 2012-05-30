@@ -26,7 +26,6 @@ namespace Kendo.Mvc.UI
         public GridBoundColumn(Grid<TModel> grid, Expression<Func<TModel, TValue>> expression)
             : base(grid)
         {
-            Guard.IsNotNull(expression, "expression");
 
             if (typeof(TModel).IsPlainType() && !expression.IsBindable())
             {

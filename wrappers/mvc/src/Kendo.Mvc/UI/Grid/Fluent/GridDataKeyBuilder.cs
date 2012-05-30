@@ -27,7 +27,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <returns></returns>
         public void RouteKey(string value)
         {
-            Guard.IsNotNullOrEmpty(value, "value");
 
             dataKey.RouteKey = value;
         }

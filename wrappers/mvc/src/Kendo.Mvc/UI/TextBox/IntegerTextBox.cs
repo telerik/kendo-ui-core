@@ -49,7 +49,6 @@ namespace KendoUI.Mvc.UI
 
         protected override void WriteHtml(System.Web.UI.HtmlTextWriter writer)
         {
-            Guard.IsNotNull(writer, "writer");
 
             ITextBoxBaseHtmlBuilder renderer = rendererFactory.Create(this);
 

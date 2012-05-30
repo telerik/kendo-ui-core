@@ -66,7 +66,6 @@ namespace Kendo.Mvc.UI
 
             set
             {
-                Guard.IsNotNullOrEmpty(value, "value");
                 if (value.Contains("<#="))
                 {
                     IsSelfInitialized = true;
