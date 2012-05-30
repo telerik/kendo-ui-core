@@ -22,7 +22,7 @@
         translateXRegExp = /translatex?$/i,
         oldEffectsRegExp = /(zoom|fade|expand)(\w+)/,
         singleEffectRegExp = /(zoom|fade|expand)/,
-        transformProps = ["perspective", "rotate", "rotateX", "rotateY", "rotateZ", "rotate3d", "scale", "scaleX", "scaleY", "scaleZ", "scale3d", "skew", "skewX", "skewY", "translate", "translateX", "translateY", "translateZ", "translate3d", "matrix", "matrix3d"],
+        transformProps = ["perspective", "rotate", "rotatex", "rotatey", "rotatez", "rotate3d", "scale", "scalex", "scaley", "scalez", "scale3d", "skew", "skewx", "skewy", "translate", "translatex", "translatey", "translatez", "translate3d", "matrix", "matrix3d"],
         cssPrefix = transforms.css,
         round = Math.round,
         BLANK = "",
@@ -37,7 +37,9 @@
         OVERFLOW = "overflow",
         TRANSLATE = "translate",
         TRANSITION = cssPrefix + "transition",
-        TRANSFORM = cssPrefix + "transform";
+        TRANSFORM = cssPrefix + "transform",
+        PERSPECTIVE = cssPrefix + "perspective",
+        BACKFACE = cssPrefix + "backface-visibility";
 
     kendo.directions = {
         left: {
@@ -280,7 +282,40 @@
 
         }, currentTransition.duration));
 
-        element.css(currentTransition.CSS);
+        element.css(currentTransition.CSS).css(TRANSFORM);
+    }
+
+    function normalizeCSS(element, properties, options) {
+        var transforms = [],
+            cssValues = {},
+            key, value, exitValue;
+
+        for (key in properties) {
+            exitValue = false;
+
+            if ($.isFunction(properties[key])) {
+                value = properties[key](element, options);
+                if (value !== undefined) {
+                    exitValue = properties[key](element, options);
+                }
+            } else {
+                exitValue = properties[key];
+            }
+
+            if (exitValue !== false) {
+                if (transformProps.indexOf(key.toLowerCase()) != -1) {
+                    transforms.push(key + "(" + exitValue + ")");
+                } else {
+                    cssValues[key] = exitValue;
+                }
+            }
+        }
+
+        if (transforms.length) {
+            cssValues[TRANSFORM] = transforms.join(" ");
+        }
+
+        return cssValues;
     }
 
     if (transitions) {
@@ -299,25 +334,10 @@
 
                 options.duration = $.fx ? $.fx.speeds[options.duration] || options.duration : options.duration;
 
-                var transforms = [],
-                    cssValues = {},
-                    key;
-
-                for (key in properties) {
-                    if (transformProps.indexOf(key) != -1) {
-                        transforms.push(key + "(" + properties[key] + ")");
-                    } else {
-                        cssValues[key] = properties[key];
-                    }
-                }
-
-                if (transforms.length) {
-                    cssValues[TRANSFORM] = transforms.join(" ");
-                }
-
-                var currentTask = {
-                    keys: keys(cssValues),
-                    CSS: cssValues,
+                var css = normalizeCSS(element, properties, options),
+                    currentTask = {
+                    keys: keys(css),
+                    CSS: css,
                     object: element,
                     setup: {},
                     duration: options.duration,
@@ -419,7 +439,6 @@
                             var dir = kendo.directions[settings.direction];
                             if (settings.direction && dir) {
                                 settings.direction = (options.reverse ? dir.reverse : settings.direction);
-                                element.data(effectName, settings);
                             }
 
                             opts = extend(true, opts, settings);
@@ -453,14 +472,14 @@
                             css = extend(css, { display: element.data("olddisplay") || "block" }); // Add show to the set
                         }
 
-                        var buffer = css.transform;
-                        delete css.transform;
-                        if (transforms) {
-                            css[TRANSFORM] = buffer;
+                        css = normalizeCSS(element, css, opts);
+                        if (transforms && css.transform) {
+                            css[TRANSFORM] += css.transform;
                         }
+                        delete css.transform;
 
-                        element.css(css);
-                        element.css("overflow"); // Nudge Chrome
+                        element.css(css)
+                               .css(TRANSFORM); // Nudge
 
                         each (methods.setup, function() { properties = extend(properties, this(element, opts)); });
 
@@ -651,31 +670,25 @@
         },
 
         fade: {
+            keep: [ "opacity" ],
             css: {
-                opacity: function() {
-                    var fade = $(this).data("fade"),
-                        inDirection = fade ? fade.direction == "in" : false;
-
-                    return inDirection && !this.style.opacity ? 0 : undefined;
+                opacity: function(element, options) {
+                    var opacity = element[0].style.opacity;
+                    return options.effects.fade.direction == "in" && (!opacity || opacity == 1) ? 0 : 1;
                 }
             },
+            restore: [ "opacity" ],
             setup: function(element, options) {
                 return extend({ opacity: options.effects.fade.direction == "out" ? 0 : 1 }, options.properties);
             }
         },
         zoom: {
             css: {
-                transform: function() {
-                    var zoom = $(this).data("zoom"),
-                        inDirection = zoom ? zoom.direction == "in" : false;
-
-                    return inDirection && transitions ? "scale(.01)" : undefined;
+                scale: function(element, options) {
+                    return options.effects.zoom.direction == "in" && transitions ? ".01" : 1;
                 },
-                zoom: function() {
-                    var zoom = $(this).data("zoom"),
-                        inDirection = zoom ? zoom.direction == "in" : false;
-
-                    return inDirection && hasZoom ? ".01" : undefined;
+                zoom: function(element, options) {
+                    return options.effects.zoom.direction == "in" && hasZoom ? ".01" : undefined;
                 }
             },
             setup: function(element, options) {
@@ -749,6 +762,22 @@
             }
         },
         slideIn: {
+            css: {
+                translatex: function (element, options) {
+                    var dir = kendo.directions[options.effects.slideIn.direction], reverse = options.reverse,
+                        direction = reverse ? kendo.directions[dir.reverse] : dir,
+                        offset = -direction.modifier * (direction.vertical ? element.outerHeight() : element.outerWidth());
+
+                    return direction.transition == "translateX" ? (!reverse ? offset : 0) + "px" : undefined;
+                },
+                translatey: function (element, options) {
+                    var dir = kendo.directions[options.effects.slideIn.direction], reverse = options.reverse,
+                        direction = reverse ? kendo.directions[dir.reverse] : dir,
+                        offset = -direction.modifier * (direction.vertical ? element.outerHeight() : element.outerWidth());
+
+                    return direction.transition == "translateY" ? (!reverse ? offset : 0) + "px" : undefined;
+                }
+            },
             setup: function(element, options) {
                 var dir = kendo.directions[options.effects.slideIn.direction],
                     reverse = options.reverse,
@@ -757,15 +786,13 @@
                     extender = {};
 
                 if (transitions && options.transition !== false) {
-                    element.css(TRANSFORM, direction.transition + "(" + (!reverse ? offset : 0) + "px)");
                     extender[direction.transition] = reverse ? offset + PX : 0;
-                    element.css(TRANSFORM);
                 } else {
                     if (!reverse) {
                         element.css(direction.property, offset + PX);
                     }
                     extender[direction.property] = reverse ? offset + PX : 0;
-                    element.css(direction.property); // Read a style to force Chrome to apply the change.
+                    element.css(direction.property);
                 }
 
                 return extend(extender, options.properties);
@@ -798,6 +825,53 @@
                     length = element.data(property);
                 if (length == AUTO || length === BLANK) {
                     setTimeout(function() { element.css(property, AUTO).css(property); }, 0); // jQuery animate complete callback in IE is called before the last animation step!
+                }
+            }
+        },
+        flip: {
+            css: {
+                rotatex: function (element, options) {
+                    return options.effects.flip.direction == "vertical" ? options.reverse ? "180deg" : "0deg" : undefined;
+                },
+                rotatey: function (element, options) {
+                    return options.effects.flip.direction == "horizontal" ? options.reverse ? "180deg" : "0deg" : undefined;
+                }
+            },
+            setup: function(element, options) {
+                var reverse = options.reverse,
+                    rotation = options.effects.flip.direction == "horizontal" ? "rotatey" : "rotatex",
+                    parent = element.parent(),
+                    degree = options.degree, face = options.face, back = options.back,
+                    faceRotation = rotation + (reverse ? "(180deg)" : "(0deg)"),
+                    backRotation = rotation + (reverse ? "(0deg)" : "(180deg)"),
+                    completion = {};
+
+                if (support.hasHW3D) {
+                    if (parent.css(PERSPECTIVE) == "none") {
+                        parent.css(PERSPECTIVE, 500);
+                    }
+
+                    element.css(cssPrefix + "transform-style", "preserve-3d");
+                    face.css(BACKFACE, HIDDEN).css(TRANSFORM, faceRotation).css("z-index", reverse ? 0 : -1);
+                    back.css(BACKFACE, HIDDEN).css(TRANSFORM, backRotation).css("z-index", reverse ? -1 : 0);
+                    completion[rotation] = (reverse ? "-" : "") + (degree ? degree : 180) + "deg";
+                } else {
+                    if (kendo.size(options.effects) == 1) {
+                        options.duration = 0;
+                    }
+                }
+                face.show();
+                back.show();
+
+                return extend(completion, options.properties);
+            },
+            teardown: function(element, options) {
+                options[options.reverse ? "back" : "face"].hide();
+
+                if (support.hasHW3D) {
+                    $().add(options.face).add(options.back).add(element)
+                        .css(BACKFACE, "")
+                        .css(TRANSFORM, "");
                 }
             }
         },

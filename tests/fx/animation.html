@@ -168,12 +168,14 @@
                 kendo.fx.foo = {
                     keep: [ "overflow" ],
                     restore: [ "overflow" ],
-                    css: { overflow: function (element) {
-                        if ($(this).data("overflow") == "visible")
-                            cssWasKept = true;
+                    css: {
+                        overflow: function (element) {
+                            if (element.data("overflow") == "visible")
+                                cssWasKept = true;
 
-                        return "hidden";
-                    } },
+                            return "hidden";
+                        }
+                    },
                     setup: function(element, options) {
                         if (element[0].style.overflow == "hidden") // element.css() fails to detect overflow is hidden in Opera?!?
                             cssWasSet = true;
@@ -269,6 +271,8 @@
                 span.css({ position: "absolute", display: "block" });
 
                 var opacity = 5;
+
+                kendo.fx.fade.restore = [];
 
                 span.kendoAnimate({
                     effects: "fadeOut",
