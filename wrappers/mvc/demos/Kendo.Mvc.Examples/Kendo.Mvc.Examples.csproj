@@ -138,8 +138,7 @@
     <Compile Include="Controllers\DataViz\Linear_Gauge\Scale_OptoinsController.cs" />
     <Compile Include="Controllers\Grid\EditingInlineController.cs" />
     <Compile Include="Controllers\Grid\EditingController.cs" />
-    <Compile Include="Controllers\DateTimePicker\IndexController.cs" />
-    <Compile Include="Controllers\Grid\AjaxBindingController.cs" />
+    <Compile Include="Controllers\DateTimePicker\IndexController.cs" />    
     <Compile Include="Controllers\Grid\HierarchyController.cs" />
     <Compile Include="Controllers\Grid\ServerEditingController.cs" />
     <Compile Include="Controllers\Grid\ServerBindingController.cs" />
