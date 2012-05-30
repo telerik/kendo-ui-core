@@ -1,4 +1,5 @@
 *.dll
+*.tmp
 *.gpState
 *.pdb
 *.suo
