@@ -1,6 +1,10 @@
-@(Html.Kendo().Grid<Order>()
+<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/Web.Master" %>
+
+<asp:Content ContentPlaceHolderID="MainContent" runat="server">
+<%: Html.Kendo().Grid<Order>()
     .Name("Grid")
-    .Columns(columns => {
+    .Columns(columns =>
+    {
         columns.Bound(o => o.OrderID).Groupable(false);
         columns.Bound(o => o.ShipCity);
         columns.Bound(o => o.ShipCountry);
@@ -15,4 +19,5 @@
         .Ajax()
         .Read(read => read.Action("CustomAjaxBinding_Read", "Grid"))
     )
-)
+%>
+</asp:Content>
