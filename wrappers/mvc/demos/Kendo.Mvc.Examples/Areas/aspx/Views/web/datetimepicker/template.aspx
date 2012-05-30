@@ -12,7 +12,6 @@
     </p>
 </div>
 
-<div class="demo-section" style="width:155px">
 <%= Html.Kendo().DateTimePicker()
       .Name("datetimepicker")
       .Value(DateTime.Today)
@@ -22,7 +21,7 @@
                      "# } #" +
                      "#= data.value #")
 %>
-</div>
+
 <script>
     var today = new Date(),
         birthdays = [
@@ -37,11 +36,11 @@
     $(document).ready(function() {
         $("#datetimepicker").data("kendoDateTimePicker")
                             .dateView.calendar.element
-                            .width(300);
+                            .width(340);
     });
 </script>
 
-<style scoped>
+<style scoped="scoped">
     .birthday {
         background: transparent url('<%= Url.Content("~/Content/web/calendar/cake.png") %>') no-repeat 0 50%;
         display: inline-block;

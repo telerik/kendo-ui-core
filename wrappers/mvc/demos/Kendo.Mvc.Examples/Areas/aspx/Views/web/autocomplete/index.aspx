@@ -5,7 +5,10 @@
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 <div id="shipping">
-    <label for="input" class="info">Choose shipping countries:</label>
+    <p>Start typing the name of a European country</p>
+    
+    <label for="country">Shipping countries:</label>
+    
     <%= Html.Kendo().AutoComplete()
           .Name("country")
           .Filter("startswith")
@@ -64,37 +67,14 @@
           })
           .Separator(", ")
     %>
-    <div class="hint">Start typing the name of an European country</div>
+
 </div>
 
 <style scoped="scoped">
-    .info {
-        display: block;
-        line-height: 22px;
-        padding: 0 5px 5px 0;
-		color: #36558e;
-    }
-
-	#shipping {
-		width: 482px;
-		height: 152px;
-		padding: 110px 0 0 30px;
-		background: url('<%= Url.Content("~/Content/web/autocomplete/shipping.png") %>') transparent no-repeat 0 0;
-		margin: 30px auto;
- 	}
-
     .k-autocomplete
     {
         width: 250px;
-		vertical-align: middle;
     }
 
-    .hint {
-        line-height: 22px;
-        color: #aaa;
-        font-style: italic;
-		font-size: .9em;
-		color: #7496d4;
-    }
 </style>
 </asp:Content>

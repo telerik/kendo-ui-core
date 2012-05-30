@@ -5,7 +5,6 @@
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 
-<div id="megaStore">
 <% Html.Kendo().Menu()
       .Name("Menu")
       .Items(items =>
@@ -84,14 +83,9 @@
       })
       .Render();
     %>
-</div>
-<style scoped>
-    #megaStore {
-        width: 600px;
-        margin: 30px auto;
-        padding-top: 120px;
-        background: url('<%= Url.Content("~/Content/web/menu/header.jpg") %>') no-repeat 0 0;
-    }
+
+<style scoped="scoped">
+
     #menu h2 {
         font-size: 1em;
         text-transform: uppercase;
@@ -121,5 +115,6 @@
         clear: left;
         margin: 5px 0 5px 12px;
     }
+
 </style>
 </asp:Content>

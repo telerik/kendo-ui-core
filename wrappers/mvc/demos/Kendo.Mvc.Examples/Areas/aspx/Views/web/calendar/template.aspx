@@ -4,26 +4,25 @@
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
-<div id="special-days">
-  <%= Html.Kendo().Calendar()
-          .Name("calendar")
-          .Value(DateTime.Today)
-          .HtmlAttributes(new { style = "width:300px" })
-          .Footer("Today - #=kendo.toString(data, 'd') #")
-                .MonthTemplate("# if ($.inArray(+data.date, events) != -1) { #" +
-                             "'<div class=\"" +
-                             "# if (data.value < 10) { #" +
-                                        "exhibition" +
-                                    "# } else if ( data.value < 20 ) { #" +
-                                        "party" +
-                                    "# } else { #" +
-                                        "cocktail" +
-                                    "# } #" +
-                                "\"></div>" +
-                         "# } #" +
-                         "#= data.value #")                     
-  %>
-</div>
+<%= Html.Kendo().Calendar()
+        .Name("calendar")
+        .Value(DateTime.Today)
+        .HtmlAttributes(new { style = "width:330px" })
+        .Footer("Today - #=kendo.toString(data, 'd') #")
+            .MonthTemplate("# if ($.inArray(+data.date, events) != -1) { #" +
+                            "'<div class=\"" +
+                            "# if (data.value < 10) { #" +
+                                    "exhibition" +
+                                "# } else if ( data.value < 20 ) { #" +
+                                    "party" +
+                                "# } else { #" +
+                                    "cocktail" +
+                                "# } #" +
+                            "\"></div>" +
+                        "# } #" +
+                        "#= data.value #")                     
+%>
+
 <script>
     var today = new Date(),
         events = [
@@ -40,27 +39,10 @@
             +new Date(today.getFullYear(), today.getMonth() - 2, 27)
         ];
 </script>
-<style scoped>
-    #special-days {
-        height: 270px;
-        width: 500px;
-        margin: 30px auto;
-        padding: 22px 0 0 21px;
-        background: url('<%= Url.Content("~/Content/web/calendar/specialDays.png") %>') transparent no-repeat 0 0;
-    }
-
-    #calendar {
-        border-radius: 3px 3px 3px 3px;
-        border-style: solid;
-        border-width: 1px;
-    }
-
-    .k-header {
-        border-radius: 3px 3px 0 0;
-    }
+<style scoped="scoped">
 
     #calendar .k-content {
-        height: 168px;
+        height: 200px;
     }
 
     .exhibition {
