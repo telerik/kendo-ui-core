@@ -10,6 +10,8 @@
         <span class="configHead">Orientation Settings</span>
         <ul class="options">
             <li>
+                <label for="orientation">orientation</label>
+
                 <%= Html.Kendo().DropDownList()
                       .Name("orientation")
                       .BindTo(new string[] 
@@ -19,10 +21,9 @@
                       })
                       .SelectedIndex(Model == MenuOrientation.Horizontal ? 0 : 1)
                 %>
-                <label for="orientation">orientation</label>
             </li>
         </ul>
-        <button>Apply</button>
+        <button class="k-button">Apply</button>
     </div>
     </text>
 <% Html.EndForm(); %>

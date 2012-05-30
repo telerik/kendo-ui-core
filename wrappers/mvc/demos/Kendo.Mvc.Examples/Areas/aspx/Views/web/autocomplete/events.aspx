@@ -4,6 +4,9 @@
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
+
+The AutoComplete is bound to a collection of strings: "Item1", "Item2", "Item3".
+
 <%= Html.Kendo().AutoComplete()
         .Name("autocomplete")
         .BindTo(new string[]

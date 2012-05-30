@@ -6,7 +6,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
 <label for="start">Start date:</label>
-<div class="demo-section" style="width:535px">
+
 <%= Html.Kendo().DateTimePicker()
       .Name("start")
       .Value(DateTime.Today)
@@ -23,7 +23,6 @@
       .ParseFormats(new string[] { "MM/dd/yyyy" })
       .Events(e => e.Change("endChange"))
 %>
-</div>
 
 <script>
     function startChange() {
@@ -49,25 +48,4 @@
     }
 </script>
 
-<style scoped>
-    #example .k-datetimepicker {
-        vertical-align: middle;
-    }
-
-    #example h3 {
-        clear: both;
-    }
-
-    #example .code-sample {
-        width: 60%;
-        float:left;
-        margin-bottom: 20px;
-    }
-
-    #example .output {
-        width: 24%;
-        margin-left: 4%;
-        float:left;
-    }
-</style>
 </asp:Content>
