@@ -11,14 +11,18 @@
 
         this.each(function(_, element) {
              new kendo.Drag(element, {
-                global: true,
+                start: function(e) {
+                    if (abs(e.x.velocity) * 2 >= abs(e.y.velocity)) {
+                        e.sender.capture();
+                    }
+                },
                 end: function(e) {
                     var duration = e.sender.endTime - e.sender.startTime,
-                        direction = e.x.delta > 0 ? "right" : "left";
+                        direction = e.x.initialDelta > 0 ? "right" : "left";
 
                     if (
-                        abs(e.x.delta) >= options.minXDelta &&
-                        abs(e.y.delta) < options.maxYDelta &&
+                        abs(e.x.initialDelta) >= options.minXDelta &&
+                        abs(e.y.initialDelta) < options.maxYDelta &&
                         duration < options.maxDuration)
                     {
                         callback({
