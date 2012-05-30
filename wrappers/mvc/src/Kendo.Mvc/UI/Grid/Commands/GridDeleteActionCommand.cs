@@ -3,7 +3,7 @@ namespace Kendo.Mvc.UI
     using System.Collections.Generic;
     using Kendo.Mvc.UI.Html;
 
-    public class GridDeleteActionCommand : GridActionCommandBase
+    public class GridDestroyActionCommand : GridActionCommandBase
     {
         public override string Name
         {

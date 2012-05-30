@@ -43,11 +43,11 @@ namespace Kendo.Mvc.UI.Fluent.Tests
         {
             column.Commands.Clear();
 
-            Factory().Delete();
+            Factory().Destroy();
 
             var command = column.Commands[0];
 
-            Assert.NotNull(command as GridDeleteActionCommand);
+            Assert.NotNull(command as GridDestroyActionCommand);
         }
 
         [Fact]
@@ -55,7 +55,7 @@ namespace Kendo.Mvc.UI.Fluent.Tests
         {
             column.Grid.Editing.Enabled = false;
 
-            Factory().Delete();
+            Factory().Destroy();
 
             Assert.True(column.Grid.Editing.Enabled);
         }

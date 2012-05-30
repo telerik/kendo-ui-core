@@ -6,7 +6,7 @@
         columns.Bound(p => p.ProductName);
         columns.Bound(p => p.UnitPrice);
         columns.Bound(p => p.UnitsInStock);
-        columns.Command(command => { command.Edit(); command.Delete(); });
+        columns.Command(command => { command.Edit(); command.Destroy(); });
     })
     .ToolBar(toolbar => toolbar.Create())
     .Editable(editable => editable.Mode(GridEditMode.PopUp))

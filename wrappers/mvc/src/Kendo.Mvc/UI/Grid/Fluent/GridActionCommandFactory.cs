@@ -42,15 +42,15 @@ namespace Kendo.Mvc.UI.Fluent
         /// Defines a delete command.
         /// </summary>
         /// <returns></returns>
-        public GridDeleteActionCommandBuilder Delete()
+        public GridDestroyActionCommandBuilder Destroy()
         {
-            GridDeleteActionCommand command = new GridDeleteActionCommand();
+            GridDestroyActionCommand command = new GridDestroyActionCommand();
 
             Column.Commands.Add(command);
 
             Column.Grid.Editing.Enabled = true;
 
-            return new GridDeleteActionCommandBuilder(command);
+            return new GridDestroyActionCommandBuilder(command);
         }
 
         /// <summary>

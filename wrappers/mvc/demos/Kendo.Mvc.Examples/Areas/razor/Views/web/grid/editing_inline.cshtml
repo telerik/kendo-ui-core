@@ -5,7 +5,7 @@
         columns.Bound(p => p.UnitPrice).Width(140);
         columns.Bound(p => p.UnitsInStock).Width(140);
         columns.Bound(p => p.Discontinued).Width(100);
-        columns.Command(command => { command.Edit(); command.Delete(); }).Width(200);
+        columns.Command(command => { command.Edit(); command.Destroy(); }).Width(200);
     })
     .ToolBar(toolbar => toolbar.Create())
     .Editable(editable => editable.Mode(GridEditMode.InLine))
@@ -24,7 +24,7 @@
 )
 <script type="text/javascript">
     function error_handler(e) {    
-        if (e.status == "customerror" && e.errors) {
+        if (e.errors) {
             var message = "Errors:\n";
             $.each(e.errors, function (key, value) {
                 if ('errors' in value) {
