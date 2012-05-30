@@ -377,9 +377,9 @@ namespace Kendo.Mvc.UI
         /// %&gt;
         /// </code>
         /// </example>
-        public virtual GaugeLinearBuilder LinearGauge()
+        public virtual LinearGaugeBuilder LinearGauge()
         {
-            return new GaugeLinearBuilder(new LinearGauge(ViewContext, Initializer, UrlGenerator));
+            return new LinearGaugeBuilder(new LinearGauge(ViewContext, Initializer, UrlGenerator));
         }
 
         /// <summary>
@@ -1117,7 +1117,7 @@ namespace Kendo.Mvc.UI
         ///  &lt;%= Html.Kendo().LinearGaugeFor(m=>m.Property) %&gt;
         /// </code>
         /// </example>
-        public virtual GaugeLinearBuilder LinearGaugeFor<TValue>(Expression<Func<TModel, TValue>> expression)
+        public virtual LinearGaugeBuilder LinearGaugeFor<TValue>(Expression<Func<TModel, TValue>> expression)
             where TValue : struct, IComparable
         {
             var value = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
@@ -1137,7 +1137,7 @@ namespace Kendo.Mvc.UI
         ///  &lt;%= Html.Kendo().LinearGaugeFor(m=>m.Property) %&gt;
         /// </code>
         /// </example>
-        public virtual GaugeLinearBuilder LinearGaugeFor<TValue>(Expression<Func<TModel, Nullable<TValue>>> expression)
+        public virtual LinearGaugeBuilder LinearGaugeFor<TValue>(Expression<Func<TModel, Nullable<TValue>>> expression)
             where TValue : struct, IComparable
         {
             var value = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
