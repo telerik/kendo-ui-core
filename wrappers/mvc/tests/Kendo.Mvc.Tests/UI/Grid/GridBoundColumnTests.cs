@@ -241,14 +241,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
             column.Hidden = false;
             column.HtmlAttributes.ContainsKey("style").ShouldBeFalse();
         }
-        */
-        [Fact]
-        public void Readonly_is_populated_from_metadata()
-        {
-            var column = new GridBoundColumn<User, string>(GridTestHelper.CreateGrid<User>(), u => u.Name);
-
-            Assert.Equal(true, column.ReadOnly);
-        }
+        */     
 
         [Fact]
         public void Should_create_displayfor_builder()
@@ -273,16 +266,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
             var column = new GridBoundColumn<User, bool>(GridTestHelper.CreateGrid<User>(), u => u.Active);
 
             column.CreateInsertBuilder(null).ShouldBeType<GridEditorForCellBuilder<User, bool>>();
-        }
-
-        [Fact]
-        public void Should_return_display_builder_if_readonly()
-        {
-            var column = new GridBoundColumn<User, bool>(GridTestHelper.CreateGrid<User>(), u => u.Active);
-            column.ReadOnly = true;
-
-            column.CreateEditBuilder(null).ShouldBeType<GridDisplayForCellBuilder<User, bool>>();
-        }
+        }        
 
         [Fact]
         public void Should_not_use_display_for_if_format_is_set()
@@ -300,17 +284,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
             column.Encoded = false;
             var builder = column.CreateDisplayBuilder(null);
             builder.ShouldBeType<GridDataCellBuilder<User, bool>>();
-        }
-
-        [Fact]
-        public void Should_create_display_builder_if_column_is_readonly()
-        {
-            var column = new GridBoundColumn<User, bool>(GridTestHelper.CreateGrid<User>(), u => u.Active);
-            column.ReadOnly = true;
-
-            var builder = column.CreateEditBuilder(null);
-            builder.ShouldBeType<GridDisplayForCellBuilder<User, bool>>();
-        }        
+        }           
         
         [Fact]
         public void Should_create_edit_builder_if_column_is_readonly()

@@ -39,7 +39,7 @@ namespace Kendo.Mvc.UI
 
         protected override IGridDataCellBuilder CreateEditBuilderCore(IGridHtmlHelper htmlHelper)
         {
-            if (!ReadOnly)
+            if (!Grid.DataSource.IsReadOnly(Member))
             {
                 var builder = new GridForeignKeyEditorForCellBuilder<TModel, TValue>()
                 {

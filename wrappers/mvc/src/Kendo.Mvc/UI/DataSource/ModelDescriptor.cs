@@ -21,7 +21,6 @@
 
         public ModelFieldDescriptor AddDescriptor(string member)
         {
-
             var existing = Fields.FirstOrDefault(f => f.Member == member);
             if (existing != null)
             {
@@ -83,6 +82,14 @@
             }
 
             return Activator.CreateInstance(modelType);
+        }
+    }
+
+    internal static class ModelDescriptorExtentions
+    {
+        public static bool IsReadOnly(this DataSource dataSource, string fieldName)
+        {
+            return dataSource.Schema.Model.Fields.Any(f => f.Member == fieldName && !f.IsEditable);
         }
     }
 }

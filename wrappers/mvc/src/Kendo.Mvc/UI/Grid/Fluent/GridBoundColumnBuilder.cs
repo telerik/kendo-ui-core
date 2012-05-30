@@ -63,47 +63,7 @@ namespace Kendo.Mvc.UI.Fluent
             Column.AdditionalViewData = additionalViewData;
 
             return this;
-        }
-
-        /// <summary>
-        /// Makes the column read-only or not. By default bound columns are not read-only.
-        /// </summary>
-        /// <remarks>
-        /// If a column is read-only it cannot be modified during editing.
-        /// </remarks>
-        /// <param name="value"><c>true</c> if the column should be read-only;otherwise <c>false</c></param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().Grid(Model)
-        ///             .Name("Grid")
-        ///             .Columns(columns => columns.Bound(o => o.OrderDate).ReadOnly(true))
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public GridBoundColumnBuilder<T> ReadOnly(bool value)
-        {
-            Column.ReadOnly = value;
-            return this;
-        }
-
-        /// <summary>
-        /// Makes the column read-only.
-        /// </summary>
-        /// <remarks>
-        /// If a column is read-only it cannot be modified during editing.
-        /// </remarks>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().Grid(Model)
-        ///             .Name("Grid")
-        ///             .Columns(columns => columns.Bound(o => o.OrderDate).ReadOnly())
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public GridBoundColumnBuilder<T> ReadOnly()
-        {
-            return ReadOnly(true);
-        }
+        }       
 
         /// <summary>
         /// Specify which editor template should be used for the column
@@ -111,7 +71,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="templateName">name of the editor template</param>
         public GridBoundColumnBuilder<T> EditorTemplateName(string templateName)
         {
-
             Column.EditorTemplateName = templateName;
             return this;
         }
@@ -212,7 +171,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public GridBoundColumnBuilder<T> Template(Action<T> templateAction)
         {
-
             (Column as GridColumnBase<T>).Template = templateAction;
 
             return this;
@@ -220,7 +178,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public GridBoundColumnBuilder<T> Template(Func<T, object> inlineTemplate)
         {
-
             (Column as GridColumnBase<T>).InlineTemplate = inlineTemplate;
 
             return this;
@@ -254,7 +211,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="template">The action defining the template.</param>
         public GridBoundColumnBuilder<T> FooterTemplate(Action<GridAggregateResult> template)
         {
-
             Column.FooterTemplate.CodeBlockTemplate = template;
 
             return this;
@@ -265,8 +221,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <param name="template">The action defining the template.</param>
         public GridBoundColumnBuilder<T> FooterTemplate(Func<GridAggregateResult, object> template)
-        {
-
+        {            
             Column.FooterTemplate.InlineTemplate = template;
 
             return this;
@@ -278,7 +233,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="template">The action defining the template.</param>
         public GridBoundColumnBuilder<T> GroupFooterTemplate(Action<GridAggregateResult> template)
         {
-
             Column.GroupFooterTemplate.CodeBlockTemplate = template;
 
             return this;
@@ -290,7 +244,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="template">The action defining the template.</param>
         public GridBoundColumnBuilder<T> GroupFooterTemplate(Func<GridAggregateResult, object> template)
         {
-
             Column.GroupFooterTemplate.InlineTemplate = template;
 
             return this;
@@ -303,7 +256,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="template">The action defining the template.</param>
         public GridBoundColumnBuilder<T> GroupHeaderTemplate(Action<GridGroupAggregateResult> template)
         {
-
             Column.GroupHeaderTemplate.CodeBlockTemplate = template;
 
             return this;
@@ -315,7 +267,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="template">The action defining the template.</param>
         public GridBoundColumnBuilder<T> GroupHeaderTemplate(Func<GridGroupAggregateResult, object> template)
         {
-
             Column.GroupHeaderTemplate.InlineTemplate = template;
 
             return this;
