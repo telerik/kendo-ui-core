@@ -4,13 +4,7 @@ namespace Kendo.Mvc.Examples.Controllers
 {
     public partial class PanelBarController : Controller
     {
-        public ActionResult Animation()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Animation(string animation, bool opacity)
+        public ActionResult Animation(string animation, bool? opacity)
         {
             ViewBag.animation = animation;
             ViewBag.opacity = opacity;

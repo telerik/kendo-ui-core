@@ -12,8 +12,6 @@ namespace Kendo.Mvc.UI
 
     public class TreeView : ViewComponentBase, INavigationItemComponent<TreeViewItem>
     {
-        //private readonly IList<IEffect> defaultEffects = new List<IEffect> { new PropertyAnimation(PropertyAnimationType.Height) };
-
         private readonly ITreeViewHtmlBuilderFactory builderFactory;
 
         internal bool isPathHighlighted;
