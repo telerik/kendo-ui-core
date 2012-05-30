@@ -68,17 +68,22 @@ namespace Kendo.Mvc.UI
         {
             if (instance.ViewContext.UnobtrusiveJavaScriptEnabled)
             {
-                var name = instance.Name;
-                var htmlPrefix = instance.ViewData.TemplateInfo.HtmlFieldPrefix;
-
-                if (name.HasValue() && htmlPrefix.HasValue() && name != htmlPrefix && name.StartsWith(htmlPrefix, StringComparison.Ordinal))
-                {
-                    name = name.Substring(htmlPrefix.Length + 1);
-                }
-
                 var htmlHelper = new HtmlHelper(instance.ViewContext, new ViewComponentViewDataContainer { ViewData = instance.ViewData });
 
-                return htmlHelper.GetUnobtrusiveValidationAttributes(name);
+                var name = instance.ViewData.TemplateInfo.GetFullHtmlFieldName(string.Empty);
+
+                ModelMetadata metadata = null;
+
+                if (name.HasValue())
+                {
+                    metadata = instance.ViewData.ModelMetadata;
+                }
+                else
+                {
+                    name = instance.Name;
+                }
+
+                return htmlHelper.GetUnobtrusiveValidationAttributes(name, metadata);
             }
 
             return null;
