@@ -1,250 +1,250 @@
 ﻿/* Office2007 theme*/
 
-.t-widget,
-.t-input
+.k-widget,
+.k-input
 {
     border-color: #688caf;
     /*font-size: .75em; /* 12px base, if there are no inherited font-sizes (MVC default) */
     background-color: #fff;
 }
 
-/* .small .t-widget { font-size: .687em; } /* 11px base, if there are no inherited font-sizes (MVC default) */
+/* .small .k-widget { font-size: .687em; } /* 11px base, if there are no inherited font-sizes (MVC default) */
 
-.t-header,
-.t-grid-header
+.k-header,
+.k-grid-header
 {
     border-color: #688caf;
     background: #c3d8f1 url('Office2007/sprite.png') repeat-x 0 -852px;
 }
 
-.t-icon { background-image: url('Office2007/sprite.png'); }
-.t-editor .t-tool-icon { background-image: url('Office2007/editor.png'); }
+.k-icon { background-image: url('Office2007/sprite.png'); }
+.k-editor .k-tool-icon { background-image: url('Office2007/editor.png'); }
 
-.t-loading,
-.t-widget .t-loading { background: transparent url('Office2007/loading.gif') no-repeat 0 0; }
+.k-loading,
+.k-widget .k-loading { background: transparent url('Office2007/loading.gif') no-repeat 0 0; }
 
-.t-widget,
-.t-link:link,
-.t-link:active,
-.t-link:visited,
-.t-popup
+.k-widget,
+.k-link:link,
+.k-link:active,
+.k-link:visited,
+.k-popup
 {
     color: #000;
 }
 
-.t-group,
-.t-content,
-.t-editable-area
+.k-group,
+.k-content,
+.k-editable-area
 {
     border-color: #688caf;
     background-color: #fff;
 }
 
-.t-colorpicker .t-arrow-down
+.k-colorpicker .k-arrow-down
 {
     border-color: #688caf;
 }
 
-.t-separator
+.k-separator
 {
     border-color: #ebf1f9;
     background-color: #a0b2c7;
 }
 
-.t-alt
+.k-alt
 {
     background-color: #fff;
 }
 
-.t-state-default
+.k-state-default
 {
     border-color: #688caf;
 }
 
-.t-active-filter
+.k-active-filter
 {
     background-color: #c0d9ef;
 }
 
-.t-state-hover,
-.t-state-hover:hover
+.k-state-hover,
+.k-state-hover:hover
 {
     background-color: #d6e5f3;
     border-color: #688caf;
 }
 
-.t-state-active
+.k-state-active
 {
     background-color: #fff;
     border-color: #688caf;
 }
 
-.t-state-selected
+.k-state-selected
 {
     background-color: #ffd176;
 }
 
-.t-state-focused
+.k-state-focused
 {
     background-color:#d6e5f3;
     color:#092061;
 }
 
-.t-dropdown .t-state-focused
+.k-dropdown .k-state-focused
 {
     border-color: #eaad33;
     background: #fedf84 url('Office2007/sprite.png') repeat-x 0 -752px;
 }
 
-.t-state-error,
-.t-widget.input-validation-error,
-.t-widget .input-validation-error
+.k-state-error,
+.k-widget.input-validation-error,
+.k-widget .input-validation-error
 {
     border-color: #f00;
     background-color: #ffc0cb;
 }
 
-.t-button
+.k-button
 {
     color: #333;
 }
 
-.t-button,
-button.t-button.t-state-disabled:hover,
-a.t-button.t-state-disabled:hover,
-.t-state-disabled .t-button:hover
+.k-button,
+button.k-button.k-state-disabled:hover,
+a.k-button.k-state-disabled:hover,
+.k-state-disabled .k-button:hover
 {
 	border-color: #688caf;
     background: #e5effb url('Office2007/sprite.png') repeat-x 0 -560px;
 }
 
-.t-button:hover
+.k-button:hover
 {
     border-color: #d8ca95 #b9a073 #c6b99c;
     background-position: 0 -624px;
     background-color: #ffdf84;
 }
 
-.t-state-disabled,
-.t-state-disabled .t-link,
-.t-state-disabled .t-button
+.k-state-disabled,
+.k-state-disabled .k-link,
+.k-state-disabled .k-button
 {
     color: #82a6d7;
 }
 
-.t-toolbar,
-.t-grouping-header,
-.t-grid-pager,
-.t-widget .t-status
+.k-toolbar,
+.k-grouping-header,
+.k-grid-pager,
+.k-widget .k-status
 {
     border-color: #5d8cc9;
     background-color: #d6e5f3;
 }
 
-.t-grid-header-wrap,
-.t-grid-footer-wrap
+.k-grid-header-wrap,
+.k-grid-footer-wrap
 {
     border-color: #688caf;
 }
 
-.t-grid td
+.k-grid td
 {
     border-color: #d6e5f3;
 }
 
-.t-grouping-row td
+.k-grouping-row td
 {
     background: #fff url('Office2007/sprite.png') repeat-x 0 -48px;
 }
 
-.t-footer-template td
+.k-footer-template td
 {
     background-color: #d6e5f3;
     border-color: #567db0 #d6e5f3 #fff;
 }
 
-.t-group-footer td
+.k-group-footer td
 {
     background-color: #d6e5f3;
     border-color: #567db0;
 }
 
-.t-grid-footer,
-.t-grid-footer-wrap table
+.k-grid-footer,
+.k-grid-footer-wrap table
 {
     background-color: #d6e5f3;
     border-color: #567db0;
 }
 
-.t-grouping-header .t-group-indicator
+.k-grouping-header .k-group-indicator
 {
     color: #333;
     border-color: #aaa;
 }
 
-.t-grouping-dropclue
+.k-grouping-dropclue
 {
     background: url('Office2007/sprite.png') no-repeat -48px -288px;
 }
 
-.t-grouping-row .t-group-cell,
-.t-grouping-row p
+.k-grouping-row .k-group-cell,
+.k-grouping-row p
 {
     background: #fff;
 }
 
-.t-treeview .t-drop-clue
+.k-treeview .k-drop-clue
 {
     background-image: url('Office2007/sprite.png');
     background-position: 0 -358px;
 }
 
-.t-treeview .t-state-selected
+.k-treeview .k-state-selected
 {
     border-color: #a79d87;
 }
 
-.t-panelbar .t-link,
-.t-panelbar .t-group,
-.t-panelbar .t-content
+.k-panelbar .k-link,
+.k-panelbar .k-group,
+.k-panelbar .k-content
 {
     border-color: #5d8cc9;
 }
 
-.t-calendar th
+.k-calendar th
 {
     border-color: #9ebfdb;
 }
 
-.t-other-month .t-link
+.k-other-month .k-link
 {
     color: #777;
 }
 
-.t-treeview-lines .t-top,
-.t-treeview-lines .t-mid,
-.t-treeview-lines .t-bot
+.k-treeview-lines .k-top,
+.k-treeview-lines .k-mid,
+.k-treeview-lines .k-bot
 {
     background-image: url('Office2007/treeview-nodes.png');
 }
 
-.t-rtl .t-treeview-lines .t-top,
-.t-rtl .t-treeview-lines .t-mid,
-.t-rtl .t-treeview-lines .t-bot
+.k-rtl .k-treeview-lines .k-top,
+.k-rtl .k-treeview-lines .k-mid,
+.k-rtl .k-treeview-lines .k-bot
 {
     background-image: url('Office2007/treeview-nodes-rtl.png');
 }
 
-.t-treeview-lines .t-item { background-image: url('Office2007/treeview-line.png'); }
-.t-treeview-lines .t-last { background-image: none; }
+.k-treeview-lines .k-item { background-image: url('Office2007/treeview-line.png'); }
+.k-treeview-lines .k-last { background-image: none; }
 
-.t-editor-button .t-state-hover
+.k-editor-button .k-state-hover
 {
     border-color: #e8f0fa #98b2d0 #98b2d0 #e8f0fa;
     background-color: #d4e3f5;
 }
 
-.t-editor-button .t-state-active
+.k-editor-button .k-state-active
 {
     border-color: #88a4c5 #d0dcea #d0dcea #88a4c5;
     background-color: #9fbad9;
@@ -252,111 +252,111 @@ a.t-button.t-state-disabled:hover,
 
 /*Slider*/
 
-.t-slider .t-draghandle
+.k-slider .k-draghandle
 {
 	background-image:url('Office2007/sprite.png');
 	color:#688caf;
 }
 
-.t-slider-track
+.k-slider-track
 {
 	border-color:#6b89b2;
 }
 
-.t-slider-horizontal .t-slider-track,
-.t-slider-horizontal .t-slider-selection
+.k-slider-horizontal .k-slider-track,
+.k-slider-horizontal .k-slider-selection
 {
 	background-image:url('Office2007/sprite.png');
 }
 
-.t-slider-vertical .t-slider-track,
-.t-slider-vertical .t-slider-selection
+.k-slider-vertical .k-slider-track,
+.k-slider-vertical .k-slider-selection
 {
 	background-image:url('Office2007/sprite-vertical.png');
 }
 
-.t-slider-horizontal .t-tick
+.k-slider-horizontal .k-tick
 {
     background-image:url('Office2007/slider-h.gif');
 }
 
-.t-slider-vertical .t-tick
+.k-slider-vertical .k-tick
 {
     background-image:url('Office2007/slider-v.gif');
 }
 
 /*Tooltip*/
 
-.t-tooltip
+.k-tooltip
 {
     border-color:#767676;
 	background:#cad9ef 0 -96px repeat-x url('Office2007/sprite.png');
 	color:#333;
 }
 
-.t-callout
+.k-callout
 {
 	background-image:url('Office2007/sprite.png');
 }
 
 /* Splitter */
 
-.t-splitter
+.k-splitter
 {
     border-color: #9eb6ce;
 }
 
-.t-splitbar-vertical,
-.t-splitbar-horizontal
+.k-splitbar-vertical,
+.k-splitbar-horizontal
 {
     background-color: #d7e6f7;
     border-color: #9eb6ce;
 }
 
-.t-splitbar-vertical,
-.t-ghost-splitbar-vertical
+.k-splitbar-vertical,
+.k-ghost-splitbar-vertical
 {
     background-image: url('Office2007/sprite.png');
 }
 
-.t-splitbar-horizontal,
-.t-ghost-splitbar-horizontal
+.k-splitbar-horizontal,
+.k-ghost-splitbar-horizontal
 {
     background-image: url('Office2007/sprite-vertical.png');
 }
 
 /* Upload */
 
-.t-dropzone-active,
-.t-upload-files
+.k-dropzone-active,
+.k-upload-files
 {
     border-color: #688caf;
 }
 
-.t-dropzone-hovered,
-.t-upload-files
+.k-dropzone-hovered,
+.k-upload-files
 {
     background-color: #d6e5f3;    
 }
 
-.t-dropzone em
+.k-dropzone em
 {
     color: #3e7ecf;
 }
 
-.t-progress,
-.t-progress-status
+.k-progress,
+.k-progress-status
 {
     background-image: url('Office2007/sprite.png');
 }
 
-.t-progress
+.k-progress
 {
     background-position: 0 -465px;
     border-color: #82a6d7 #8aacda #82a6d7;
 }
 
-.t-progress-status
+.k-progress-status
 {
     background-position: 0 -472px;
     border-color: #6b89b2 transparent;
@@ -364,75 +364,75 @@ a.t-button.t-state-disabled:hover,
 
 /* ImageBrowser */
 
-.t-imagebrowser .t-content
+.k-imagebrowser .k-content
 {
     background: #dde8f5;
 }
 
-.t-breadcrumbs .t-link
+.k-breadcrumbs .k-link
 {
     color: #3e7ecf;
 }
 
-.t-breadcrumbs .t-link:hover
+.k-breadcrumbs .k-link:hover
 {
     color: #00156e;
 }
 
-.t-breadcrumbs .t-first,
-.t-breadcrumbs .t-first:hover,
-.t-search-wrap label
+.k-breadcrumbs .k-first,
+.k-breadcrumbs .k-first:hover,
+.k-search-wrap label
 {
     color: #8bb2e2;
 }
 
-.t-tiles-arrange
+.k-tiles-arrange
 {
     color: #3e7ecf;
 }
 
-.t-toolbar .t-upload .t-button,
-.t-tiles-arrange .t-link
+.k-toolbar .k-upload .k-button,
+.k-tiles-arrange .k-link
 {
     color: #00156e;
 }
 
-.t-tiles
+.k-tiles
 {
     border-color: #8bb2e2;
     background: #fff;
 }
 
-.t-tile
+.k-tile
 {
     border-color: #fff;
     background:0 100px repeat-x url('Office2007/imagebrowser.png');
 }
 
-.t-tiles li.t-state-hover
+.k-tiles li.k-state-hover
 {
     border-color: #c5af7f;
     background-position: 0 0;
 }
 
-.t-tiles li.t-state-selected
+.k-tiles li.k-state-selected
 {
     border-color: #c0a776;
     background-position: 0 -100px;
 }
 
-.t-tile .t-folder
+.k-tile .k-folder
 {
     background-image:url('Office2007/imagebrowser.png');
 }
 
-.t-tile em,
-.t-tile .t-filesize
+.k-tile em,
+.k-tile .k-filesize
 {
     color: #636363;
 }
 
-.t-tile-empty strong
+.k-tile-empty strong
 {
     color: #8bb2e2;
 }

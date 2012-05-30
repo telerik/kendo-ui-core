@@ -1,313 +1,313 @@
 ﻿/* Office2010Blue theme*/
 
-.t-widget,
-.t-input
+.k-widget,
+.k-input
 {
     border-color: #8ba0bc;
     /*font-size: .75em; /* 12px base, if there are no inherited font-sizes (MVC default) */
     background-color: #fff; /** #bccadd;*/
 }
 
-/* .small .t-widget { font-size: .687em; } /* 11px base, if there are no inherited font-sizes (MVC default) */
+/* .small .k-widget { font-size: .687em; } /* 11px base, if there are no inherited font-sizes (MVC default) */
 
-.t-header,
-.t-grid-header,
-.t-toolbar,
-.t-grouping-header,
-.t-tooltip,
-.t-grid-pager
+.k-header,
+.k-grid-header,
+.k-toolbar,
+.k-grouping-header,
+.k-tooltip,
+.k-grid-pager
 {
     border-color: #8ba0bc;
     background: #bccadd url('Office2010Blue/gradient.png') repeat-x 0 center;
 }
 
-.t-menu-vertical,
-.t-editor,
-.t-tooltip,
-.t-tabstrip
+.k-menu-vertical,
+.k-editor,
+.k-tooltip,
+.k-tabstrip
 {
     background-position:0 -48px;
 }
 
-.t-icon { background-image: url('Office2010Blue/sprite.png'); }
-.t-editor .t-tool-icon { background-image: url('Office2010Blue/editor.png'); }
+.k-icon { background-image: url('Office2010Blue/sprite.png'); }
+.k-editor .k-tool-icon { background-image: url('Office2010Blue/editor.png'); }
 
-.t-picker-wrap{padding-right: 23px;}
+.k-picker-wrap{padding-right: 23px;}
 
-.t-loading,
-.t-widget .t-loading { background: transparent url('Office2010Blue/loading.gif') no-repeat 0 0; }
+.k-loading,
+.k-widget .k-loading { background: transparent url('Office2010Blue/loading.gif') no-repeat 0 0; }
 
-.t-widget,
-.t-link:link,
-.t-link:active,
-.t-link:visited,
-.t-popup,
-.t-grid .t-header
+.k-widget,
+.k-link:link,
+.k-link:active,
+.k-link:visited,
+.k-popup,
+.k-grid .k-header
 {
     color: #384e73;
 }
 
-.t-group
+.k-group
 {
     background-color:#dce3ed;
     border-color:#8ba0bc;
 }
 
-.t-content,
-.t-editable-area
+.k-content,
+.k-editable-area
 {
     border-color: #8ba0bc;
     background-color: #fff;
 }
 
-.t-colorpicker .t-arrow-down
+.k-colorpicker .k-arrow-down
 {
     border-color: #8ba0bc;
 }
 
-.t-separator
+.k-separator
 {
     border-color: #8ba0bc;
     background-color: #f1f4f8;
 }
 
-.t-alt
+.k-alt
 {
     background-color: #eff2f6;
 }
 
-.t-state-default
+.k-state-default
 {
     border-color: #8ba0bc;
 }
 
-.t-active-filter
+.k-active-filter
 {
     background-color: #fff;
 }
 
-.t-state-hover,
-.t-state-hover:hover
+.k-state-hover,
+.k-state-hover:hover
 {
     background-color: #fae185;
     border-color: #f3d64a;
     color: #1e395b;
 }
 
-.t-state-active,
-.t-header .t-state-active
+.k-state-active,
+.k-header .k-state-active
 {
     background-color: #fafbfd;
     border-color: #8ba0bc;
 }
 
-.t-state-selected
+.k-state-selected
 {
     background-color: #ffcd42;
 }
 
-.t-state-focused
+.k-state-focused
 {
     background-color:#bfcde0;
 }
 
-.t-dropdown .t-state-focused
+.k-dropdown .k-state-focused
 {
     border-color: #ffd86b;
     background: #fff17e url('Office2010Blue/sprite.png') repeat-x 0 -752px;
 }
 
-.t-state-hover,
-.t-state-selected
+.k-state-hover,
+.k-state-selected
 {
     color:#1e395b;
 }
 
-.t-state-error,
-.t-widget.input-validation-error,
-.t-widget .input-validation-error
+.k-state-error,
+.k-widget.input-validation-error,
+.k-widget .input-validation-error
 {
     border-color: #ff7c7c;
     background-color: #ffe4e4;
     color:#f20000;
 }
 
-.t-button
+.k-button
 {
 	border-color: #8ba0bc;
     color: #384e73;
 }
 
-.t-button,
-button.t-button.t-state-disabled:hover,
-a.t-button.t-state-disabled:hover,
-.t-state-disabled .t-button:hover
+.k-button,
+button.k-button.k-state-disabled:hover,
+a.k-button.k-state-disabled:hover,
+.k-state-disabled .k-button:hover
 {
     background: #bccadd url('Office2010Blue/gradient.png') repeat-x 0 center;
 }
 
-.t-button:hover
+.k-button:hover
 {
     border-color:#f3d64a;
     background-color: #fae185;
     color: #1e395b;
 }
 
-.t-state-disabled,
-.t-state-disabled:hover,
-.t-state-disabled .t-link,
-.t-state-disabled .t-button
+.k-state-disabled,
+.k-state-disabled:hover,
+.k-state-disabled .k-link,
+.k-state-disabled .k-button
 {
     border-color: #8ba0bc;
     color: #8ba0bc;
 }
 
-.t-autocomplete
+.k-autocomplete
 {
     background-color: #fff;
 }
 
-.t-toolbar,
-.t-grouping-header,
-.t-grid-pager,
-.t-group-footer td,
-.t-grid-footer,
-.t-footer-template td,
-.t-widget .t-status
+.k-toolbar,
+.k-grouping-header,
+.k-grid-pager,
+.k-group-footer td,
+.k-grid-footer,
+.k-footer-template td,
+.k-widget .k-status
 {
     border-color: #8ba0bc;
     background-color: #dce3ed;
 }
 
-.t-widget .t-status
+.k-widget .k-status
 {
     background-color:transparent;
 }
 
-.t-grid-header-wrap,
-.t-grid-footer-wrap
+.k-grid-header-wrap,
+.k-grid-footer-wrap
 {
     border-color: #8ba0bc;
 }
 
-.t-grid td
+.k-grid td
 {
     border-color: #bfcde0;
 }
 
-.t-grouping-row td
+.k-grouping-row td
 {
     background:url('Office2010Blue/sprite.png') repeat-x 0 -48px;
 }
 
-.t-grouping-header .t-group-indicator
+.k-grouping-header .k-group-indicator
 {
     border-color: #8ba0bc;
 }
 
-.t-grouping-dropclue
+.k-grouping-dropclue
 {
     background: url('Office2010Blue/sprite.png') no-repeat -48px -288px;
 }
 
-.t-grouping-row .t-group-cell,
-.t-grouping-row p
+.k-grouping-row .k-group-cell,
+.k-grouping-row p
 {
     background: #fff;
 }
 
-.t-treeview .t-drop-clue
+.k-treeview .k-drop-clue
 {
     background-image: url('Office2010Blue/sprite.png');
     background-position: 0 -358px;
 }
 
-.t-treeview .t-state-selected
+.k-treeview .k-state-selected
 {
     border-color: #e3bb4a;
 }
 
-.t-panelbar .t-link,
-.t-panelbar .t-group,
-.t-panelbar .t-content
+.k-panelbar .k-link,
+.k-panelbar .k-group,
+.k-panelbar .k-content
 {
     border-color: #8ba0bc;
 }
 
-.t-calendar th
+.k-calendar th
 {
     border-color: #dadcdd;
     background-color:#dbe3ee;
 }
 
-.t-other-month .t-link
+.k-other-month .k-link
 {
     color: #8ba0bc;
 }
 
 /* Slider */
 
-.t-slider .t-draghandle
+.k-slider .k-draghandle
 {
 	background-image: url('Office2010Blue/sprite.png');
 	color: #666;
 }
 
-.t-slider-track
+.k-slider-track
 {
 	border-color:#8ba0bc;
 }
 
-.t-slider-horizontal .t-slider-track,
-.t-slider-horizontal .t-slider-selection
+.k-slider-horizontal .k-slider-track,
+.k-slider-horizontal .k-slider-selection
 {
 	background-image: url('Office2010Blue/sprite.png');
 }
 
-.t-slider-vertical .t-slider-track,
-.t-slider-vertical .t-slider-selection
+.k-slider-vertical .k-slider-track,
+.k-slider-vertical .k-slider-selection
 {
 	background-image: url('Office2010Blue/sprite-vertical.png');
 }
 
-.t-slider-horizontal .t-tick
+.k-slider-horizontal .k-tick
 {
     background-image:url('Office2010Blue/slider-h.gif');
 }
 
-.t-slider-vertical .t-tick
+.k-slider-vertical .k-tick
 {
     background-image:url('Office2010Blue/slider-v.gif');
 }
 
 /* Tooltip */
 
-.t-tooltip
+.k-tooltip
 {
     border-width:2px;
     border-color:#beccde;
 }
 
-.t-callout
+.k-callout
 {
 	background-image: url('Office2010Blue/sprite.png');
 }
 
-.t-callout-n,
-.t-callout-s
+.k-callout-n,
+.k-callout-s
 {
 	width: 10px;
 	height: 5px;
 }
 
-.t-callout-w,
-.t-callout-e
+.k-callout-w,
+.k-callout-e
 {
 	width: 5px;
 	height: 10px;
 }
 
-.t-callout-n
+.k-callout-n
 {
 	top: -7px;
 	left: 50%;
@@ -315,7 +315,7 @@ a.t-button.t-state-disabled:hover,
 	background-position: -64px -368px;
 }
 
-.t-callout-w
+.k-callout-w
 {
 	left: -7px;
 	top: 50%;
@@ -323,7 +323,7 @@ a.t-button.t-state-disabled:hover,
 	background-position: -64px -384px;
 }
 
-.t-callout-s
+.k-callout-s
 {
 	top: 100%;
 	left: 50%;
@@ -332,7 +332,7 @@ a.t-button.t-state-disabled:hover,
 	background-position: -64px -400px;
 }
 
-.t-callout-e
+.k-callout-e
 {
 	left: 100%;
 	top: 50%;
@@ -343,56 +343,56 @@ a.t-button.t-state-disabled:hover,
 
 /* Splitter */
 
-.t-splitbar
+.k-splitbar
 {
     border-color: #8ba0bc;
     background-color: #dce3ed;
 }
 
-.t-splitbar-vertical,
-.t-ghost-splitbar-vertical
+.k-splitbar-vertical,
+.k-ghost-splitbar-vertical
 {
     background-image: url('Office2010Blue/sprite.png');
 }
 
-.t-splitbar-horizontal,
-.t-ghost-splitbar-horizontal
+.k-splitbar-horizontal,
+.k-ghost-splitbar-horizontal
 {
     background-image: url('Office2010Blue/sprite-vertical.png');
 }
 
 /* Upload */
 
-.t-dropzone-active,
-.t-upload-files
+.k-dropzone-active,
+.k-upload-files
 {
     border-color: #8ba0bc;
 }
 
-.t-dropzone-hovered,
-.t-upload-files
+.k-dropzone-hovered,
+.k-upload-files
 {
     background-color: #dce3ed;    
 }
 
-.t-dropzone em
+.k-dropzone em
 {
     color: #8ba0bc;
 }
 
-.t-progress,
-.t-progress-status
+.k-progress,
+.k-progress-status
 {
     background-image: url('Office2010Blue/sprite.png');
 }
 
-.t-progress
+.k-progress
 {
     background-position: 0 -464px;
     border-color: #8ba0bc;
 }
 
-.t-progress-status
+.k-progress-status
 {
     background-position: 0 -472px;
     border-color: #f3d64a transparent;
@@ -400,13 +400,13 @@ a.t-button.t-state-disabled:hover,
 
 /* ImageBrowser */
 
-.t-tiles
+.k-tiles
 {
     border-color: #8ba0bc;
     background: #fff;
 }
 
-.t-tile
+.k-tile
 {
     border-color: #fff;
     background-image:url('Office2010Blue/gradient.png');
@@ -414,24 +414,24 @@ a.t-button.t-state-disabled:hover,
     background-repeat:repeat-x;
 }
 
-.t-tiles li.t-state-hover
+.k-tiles li.k-state-hover
 {
     border-color: #f3d64a;
     background-position: 0 0;
 }
 
-.t-tiles li.t-state-selected
+.k-tiles li.k-state-selected
 {
     border-color: #e3bb4a;
     background-position: 0 0;
 }
 
-.t-tile .t-folder
+.k-tile .k-folder
 {
     background-image: url('Office2010Blue/imagebrowser.png');
 }
 
-.t-tile-empty strong
+.k-tile-empty strong
 {
     color: #aaa;
 }
