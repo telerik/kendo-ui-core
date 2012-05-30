@@ -34,7 +34,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <returns></returns>
         public ChartPlotBandsBuilder Add()
         {
-            ChartPlotBand item = new ChartPlotBand();
+            var item = new ChartPlotBand();
 
             Axis.PlotBands.Add(item);
 

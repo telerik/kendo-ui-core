@@ -5,7 +5,7 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Infrastructure;
     using System.Collections.Generic;
 
-    public class RadialGauge<T> : Gauge where T : struct
+    public class RadialGauge : Gauge
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="LinearGauge" /> class.
@@ -16,14 +16,14 @@ namespace Kendo.Mvc.UI
         public RadialGauge(ViewContext viewContext, IJavaScriptInitializer initializer, IUrlGenerator urlGenerator)
             : base(viewContext, initializer, urlGenerator)
         {
-            Scale = new GaugeRadialScale<T>(this);
-            Pointer = new GaugeRadialPointer<T>();
+            Scale = new GaugeRadialScale(this);
+            Pointer = new GaugeRadialPointer();
         }
 
         /// <summary>
         /// Configuration for the default scale (if any)
         /// </summary>
-        public IRadialScale<T> Scale
+        public IRadialScale Scale
         {
             get;
             set;
@@ -32,7 +32,7 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Configuration for the default pointer (if any)
         /// </summary>
-        public GaugeRadialPointer<T> Pointer
+        public GaugeRadialPointer Pointer
         {
             get;
             set;

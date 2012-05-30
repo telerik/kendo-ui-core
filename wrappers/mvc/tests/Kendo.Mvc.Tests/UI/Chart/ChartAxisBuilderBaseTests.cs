@@ -129,10 +129,10 @@ namespace Kendo.Mvc.UI.Tests.Chart
         [Fact]
         public void PlotBands_should_set_PlotBands()
         {
-            builder.PlotBands(pb => pb.Add().Color("Color").From(1.1M).To(2.0M).Opacity(0.5));
+            builder.PlotBands(pb => pb.Add().Color("Color").From(1.1).To(2.0).Opacity(0.5));
             axis.PlotBands[0].Color.ShouldEqual("Color");
-            axis.PlotBands[0].From.ShouldEqual(1.1M);
-            axis.PlotBands[0].To.ShouldEqual(2.0M);
+            axis.PlotBands[0].From.ShouldEqual(1.1);
+            axis.PlotBands[0].To.ShouldEqual(2.0);
             axis.PlotBands[0].Opacity.ShouldEqual(0.5);
         }
 

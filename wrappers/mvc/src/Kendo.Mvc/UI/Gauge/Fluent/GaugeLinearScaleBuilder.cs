@@ -5,14 +5,13 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent interface for configuring the gauge scale.
     /// </summary>
-    public class GaugeLinearScaleBuilder<T> : GaugeScaleBuilderBase<ILinearScale<T>, GaugeLinearScaleBuilder<T>, T>
-        where T : struct
+    public class GaugeLinearScaleBuilder : GaugeScaleBuilderBase<ILinearScale, GaugeLinearScaleBuilder>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GaugeLinearScaleBuilder{T}" /> class.
         /// </summary>
         /// <param name="gauge">The gauge component.</param>
-        public GaugeLinearScaleBuilder(LinearGauge<T> gauge)
+        public GaugeLinearScaleBuilder(LinearGauge gauge)
             : base(gauge.Scale)
         {
             linearGauge = gauge;
@@ -21,7 +20,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// The parent Guage
         /// </summary>
-        public LinearGauge<T> linearGauge
+        public LinearGauge linearGauge
         {
             get;
             private set;
@@ -41,7 +40,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>        
-        public GaugeLinearScaleBuilder<T> Mirror(bool mirror)
+        public GaugeLinearScaleBuilder Mirror(bool mirror)
         {
             linearGauge.Scale.Mirror = mirror;
             return this;
@@ -61,7 +60,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>        
-        public GaugeLinearScaleBuilder<T> Vertical(bool vertical)
+        public GaugeLinearScaleBuilder Vertical(bool vertical)
         {
             linearGauge.Scale.Vertical = vertical;
             return this;
@@ -83,7 +82,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public GaugeLinearScaleBuilder<T> Labels(Action<GaugeLinearScaleLabelsBuilder> configurator)
+        public GaugeLinearScaleBuilder Labels(Action<GaugeLinearScaleLabelsBuilder> configurator)
         {
 
             configurator(new GaugeLinearScaleLabelsBuilder(Scale.Labels));

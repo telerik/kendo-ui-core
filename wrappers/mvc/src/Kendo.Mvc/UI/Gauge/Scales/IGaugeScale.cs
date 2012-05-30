@@ -5,8 +5,7 @@ namespace Kendo.Mvc.UI
     /// <summary>
     /// Defines a generic IGaugeScale.
     /// </summary>
-    public interface IGaugeScale<T>
-        where T : struct
+    public interface IGaugeScale
     {
         /// <summary>
         /// The scale ranges.
@@ -36,12 +35,12 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// The scale min value.
         /// </summary>
-        T? Min { get; set; }
+        double? Min { get; set; }
 
         /// <summary>
         /// The scale max value.
         /// </summary>
-        T? Max { get; set; }
+        double? Max { get; set; }
 
         /// <summary>
         /// The scale reverse.

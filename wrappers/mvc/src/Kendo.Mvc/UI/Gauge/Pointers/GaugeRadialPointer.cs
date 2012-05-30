@@ -3,7 +3,7 @@ namespace Kendo.Mvc.UI
     /// <summary>
     /// Represents the gauge pointer
     /// </summary>
-    public class GaugeRadialPointer<T> where T : struct
+    public class GaugeRadialPointer
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GaugeRadialPointer" /> class.
@@ -40,7 +40,7 @@ namespace Kendo.Mvc.UI
         /// <value>
         /// The pointer value
         /// </value>
-        public T? Value
+        public double? Value
         {
             get;
             set;
@@ -63,7 +63,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         public IChartSerializer CreateSerializer()
         {
-            return new GaugeRadialPointerSerializer<T>(this);
+            return new GaugeRadialPointerSerializer(this);
         }
     }
 }

@@ -9,10 +9,9 @@ namespace Kendo.Mvc.UI.Fluent
     /// <typeparam name="TScale"></typeparam>
     /// <typeparam name="TScaleBuilder">The type of the series builder.</typeparam>
     /// <typeparam name="T"></typeparam>
-    public abstract class GaugeScaleBuilderBase<TScale, TScaleBuilder, T> : IHideObjectMembers
-        where TScaleBuilder : GaugeScaleBuilderBase<TScale, TScaleBuilder, T>
-        where TScale : IGaugeScale<T>
-        where T : struct
+    public abstract class GaugeScaleBuilderBase<TScale, TScaleBuilder> : IHideObjectMembers
+        where TScaleBuilder : GaugeScaleBuilderBase<TScale, TScaleBuilder>
+        where TScale : IGaugeScale
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GaugeScaleBuilderBase{TScale, TScaleBuilder, T}"/> class.
@@ -98,10 +97,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public TScaleBuilder Ranges(Action<GaugeScaleRangesFactory<TScale, T>> configurator)
+        public TScaleBuilder Ranges(Action<GaugeScaleRangesFactory<TScale>> configurator)
         {
 
-            GaugeScaleRangesFactory<TScale, T> factory = new GaugeScaleRangesFactory<TScale, T>(Scale);
+            GaugeScaleRangesFactory<TScale> factory = new GaugeScaleRangesFactory<TScale>(Scale);
 
             configurator(factory);
 
@@ -120,7 +119,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public TScaleBuilder MajorUnit(int majorUnit)
+        public TScaleBuilder MajorUnit(double majorUnit)
         {
             Scale.MajorUnit = majorUnit;
 
@@ -139,7 +138,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public TScaleBuilder MinorUnit(int minorUnit)
+        public TScaleBuilder MinorUnit(double minorUnit)
         {
             Scale.MinorUnit = minorUnit;
 
@@ -158,7 +157,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public TScaleBuilder Min(T min)
+        public TScaleBuilder Min(double min)
         {
             Scale.Min = min;
 
@@ -177,7 +176,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public TScaleBuilder Max(T max)
+        public TScaleBuilder Max(double max)
         {
             Scale.Max = max;
 

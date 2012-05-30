@@ -5,15 +5,15 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="GaugeLinearPointer{T}"/>.
     /// </summary>
-    public class GaugeLinearPointerBuilder<T> : IHideObjectMembers where T : struct
+    public class GaugeLinearPointerBuilder : IHideObjectMembers
     {
-        private readonly GaugeLinearPointer<T> pointer;
+        private readonly GaugeLinearPointer pointer;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GaugeLinearPointerBuilder{T}" /> class.
         /// </summary>
         /// <param name="pointer">The gauge pointer.</param>
-        public GaugeLinearPointerBuilder(GaugeLinearPointer<T> pointer)
+        public GaugeLinearPointerBuilder(GaugeLinearPointer pointer)
         {
             this.pointer = pointer;
         }
@@ -33,7 +33,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>        
-        public GaugeLinearPointerBuilder<T> Color(string color)
+        public GaugeLinearPointerBuilder Color(string color)
         {
             pointer.Color = color;
             return this;
@@ -54,7 +54,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>        
-        public GaugeLinearPointerBuilder<T> Shape(GaugeLinearPointerShape shape)
+        public GaugeLinearPointerBuilder Shape(GaugeLinearPointerShape shape)
         {
             pointer.Shape = shape;
             return this;
@@ -78,7 +78,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>        
-        public GaugeLinearPointerBuilder<T> Margin(int top, int right, int bottom, int left)
+        public GaugeLinearPointerBuilder Margin(int top, int right, int bottom, int left)
         {
             pointer.Margin.Top = top;
             pointer.Margin.Right = right;
@@ -102,7 +102,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>        
-        public GaugeLinearPointerBuilder<T> Margin(int margin)
+        public GaugeLinearPointerBuilder Margin(int margin)
         {
             pointer.Margin = new ChartSpacing(margin);
             return this;
@@ -125,7 +125,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>        
-        public GaugeLinearPointerBuilder<T> Border(int width, string color, ChartDashType dashType)
+        public GaugeLinearPointerBuilder Border(int width, string color, ChartDashType dashType)
         {
             pointer.Border = new ChartElementBorder(width, color, dashType);
             return this;
@@ -149,7 +149,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public GaugeLinearPointerBuilder<T> Opacity(double opacity)
+        public GaugeLinearPointerBuilder Opacity(double opacity)
         {
             pointer.Opacity = opacity;
             return this;
@@ -170,7 +170,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public GaugeLinearPointerBuilder<T> Size(double size)
+        public GaugeLinearPointerBuilder Size(double size)
         {
             pointer.Size = size;
             return this;
@@ -191,7 +191,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public GaugeLinearPointerBuilder<T> Value(T? value)
+        public GaugeLinearPointerBuilder Value(double value)
         {
             pointer.Value = value;
             return this;
@@ -212,7 +212,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public GaugeLinearPointerBuilder<T> Track(Action<GaugeLinearTrackBuilder> configurator)
+        public GaugeLinearPointerBuilder Track(Action<GaugeLinearTrackBuilder> configurator)
         {
 
             configurator(new GaugeLinearTrackBuilder(pointer.Track));

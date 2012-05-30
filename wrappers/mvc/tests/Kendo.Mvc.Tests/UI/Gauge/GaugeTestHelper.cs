@@ -6,28 +6,28 @@ namespace Kendo.Mvc.UI.Tests.Gauge
 
     public static class GaugeTestHelper
     {
-        public static RadialGauge<double> CreateRadialGauge()
+        public static RadialGauge CreateRadialGauge()
         {
             var urlGeneratorMock = new Mock<IUrlGenerator>();
             return CreateRadialGauge(urlGeneratorMock.Object);
         }
 
-        public static RadialGauge<double> CreateRadialGauge(IUrlGenerator urlGenerator)
+        public static RadialGauge CreateRadialGauge(IUrlGenerator urlGenerator)
         {
             var viewContext = TestHelper.CreateViewContext();
-            return new RadialGauge<double>(viewContext, new JavaScriptInitializer(), urlGenerator);
+            return new RadialGauge(viewContext, new JavaScriptInitializer(), urlGenerator);
         }
 
-        public static LinearGauge<double> CreateLinearGauge()
+        public static LinearGauge CreateLinearGauge()
         {
             var urlGeneratorMock = new Mock<IUrlGenerator>();
             return CreateLinearGauge(urlGeneratorMock.Object);
         }
 
-        public static LinearGauge<double> CreateLinearGauge(IUrlGenerator urlGenerator)
+        public static LinearGauge CreateLinearGauge(IUrlGenerator urlGenerator)
         {
             var viewContext = TestHelper.CreateViewContext();
-            return new LinearGauge<double>(viewContext, new JavaScriptInitializer(), urlGenerator);
+            return new LinearGauge(viewContext, new JavaScriptInitializer(), urlGenerator);
         }
     }
 }

@@ -3,8 +3,7 @@ namespace Kendo.Mvc.UI
     /// <summary>
     /// Defines a generic ILinearScale.
     /// </summary>
-    public interface ILinearScale<T> : IGaugeScale<T>
-        where T : struct
+    public interface ILinearScale : IGaugeScale
     {
         /// <summary>
         /// The scale mirror.

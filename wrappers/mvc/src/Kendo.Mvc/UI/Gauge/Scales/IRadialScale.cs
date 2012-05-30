@@ -3,8 +3,7 @@ namespace Kendo.Mvc.UI
     /// <summary>
     /// Defines a generic IRadialScale.
     /// </summary>
-    public interface IRadialScale<T> : IGaugeScale<T>
-        where T : struct
+    public interface IRadialScale : IGaugeScale
     {
         /// <summary>
         /// The scale end angle.s

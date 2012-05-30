@@ -5,8 +5,8 @@ namespace Kendo.Mvc.UI.Tests.Gauge
     using Xunit;
 
     public abstract class GaugeScaleBuilderBaseTests<TScale, TScaleBuilder>
-        where TScale : IGaugeScale<double>
-        where TScaleBuilder : GaugeScaleBuilderBase<TScale, TScaleBuilder, double>
+        where TScale : IGaugeScale
+        where TScaleBuilder : GaugeScaleBuilderBase<TScale, TScaleBuilder>
     {
         protected TScale scale;
         protected TScaleBuilder builder;
@@ -67,10 +67,10 @@ namespace Kendo.Mvc.UI.Tests.Gauge
         [Fact]
         public void Ranges_should_set_Ranges()
         {
-            builder.Ranges(r => r.Add().Color("Color").From(1.1M).To(2.0M).Opacity(0.5));
+            builder.Ranges(r => r.Add().Color("Color").From(1.1).To(2.0).Opacity(0.5));
             scale.Ranges[0].Color.ShouldEqual("Color");
-            scale.Ranges[0].From.ShouldEqual(1.1M);
-            scale.Ranges[0].To.ShouldEqual(2.0M);
+            scale.Ranges[0].From.ShouldEqual(1.1);
+            scale.Ranges[0].To.ShouldEqual(2.0);
             scale.Ranges[0].Opacity.ShouldEqual(0.5);
         }
 
