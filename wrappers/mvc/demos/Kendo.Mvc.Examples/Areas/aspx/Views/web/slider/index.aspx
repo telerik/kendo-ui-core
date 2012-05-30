@@ -5,7 +5,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 <div id="wrapper">
-    <%= Html.Kendo().Slider<int>()
+    <%= Html.Kendo().Slider()
             .Name("slider")
             .IncreaseButtonTitle("Right")
             .DecreaseButtonTitle("Left")
@@ -16,7 +16,7 @@
             .HtmlAttributes(new { @class = "balSlider" })
     %>
     <div id="equalizer">
-        <%= Html.Kendo().Slider<int>()
+        <%= Html.Kendo().Slider()
                 .Name("eqSlider1")
                 .Orientation(SliderOrientation.Vertical)
                 .Min(-20)
@@ -28,7 +28,7 @@
                 .HtmlAttributes(new { @class = "eqSlider" })
         %>
 
-        <%= Html.Kendo().Slider<int>()
+        <%= Html.Kendo().Slider()
                 .Name("eqSlider2")
                 .Orientation(SliderOrientation.Vertical)
                 .Min(-20)
@@ -40,7 +40,7 @@
                 .HtmlAttributes(new { @class = "eqSlider" })
         %>
 
-        <%= Html.Kendo().Slider<int>()
+        <%= Html.Kendo().Slider()
                 .Name("eqSlider3")
                 .Orientation(SliderOrientation.Vertical)
                 .Min(-20)
@@ -52,7 +52,7 @@
                 .HtmlAttributes(new { @class = "eqSlider" })
         %>
 
-        <%= Html.Kendo().Slider<int>()
+        <%= Html.Kendo().Slider()
                 .Name("eqSlider4")
                 .Orientation(SliderOrientation.Vertical)
                 .Min(-20)
@@ -64,7 +64,7 @@
                 .HtmlAttributes(new { @class = "eqSlider" })
         %>
 
-        <%= Html.Kendo().Slider<int>()
+        <%= Html.Kendo().Slider()
                 .Name("eqSlider5")
                 .Orientation(SliderOrientation.Vertical)
                 .Min(-20)

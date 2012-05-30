@@ -38,11 +38,12 @@
 </div>
 
 <div id="wrapper" class="climateCtrl">
-    <%= Html.Kendo().Slider<int>()
+    <%= Html.Kendo().Slider()
             .Name("slider")
             .HtmlAttributes(new { @class = "temperature" })
     %>
-    <%= Html.Kendo().RangeSlider<int>()
+
+    <%= Html.Kendo().RangeSlider()
             .Name("rangeslider")
             .HtmlAttributes(new { @class = "humidity" })
     %>
