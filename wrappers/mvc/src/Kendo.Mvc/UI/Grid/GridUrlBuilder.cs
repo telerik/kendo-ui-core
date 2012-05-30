@@ -201,7 +201,7 @@ namespace Kendo.Mvc.UI
             
             if (grid.EnableCustomBinding)
             {
-                result[grid.Prefix(GridUrlParameters.PageSize)] = grid.PageSize;
+                result[grid.Prefix(GridUrlParameters.PageSize)] = grid.DataSource.PageSize;
             }
 
             foreach (string key in grid.ViewContext.HttpContext.Request.QueryString)

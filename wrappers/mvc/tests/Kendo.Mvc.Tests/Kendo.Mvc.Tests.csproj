@@ -183,9 +183,6 @@
     <Compile Include="UI\Grid\GridDynamicDataKeyTests.cs" />
     <Compile Include="UI\Grid\GridEditingSettingsBuilderTests.cs" />
     <Compile Include="UI\Grid\GridGroupingSettingsBuilderTests.cs" />
-    <Compile Include="UI\Grid\GridJsonResultAdapterTests.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="UI\Grid\GridRowViewDataKeyTests.cs" />
     <Compile Include="UI\Grid\Html\GridEditFormBuilderTests.cs" />
     <Compile Include="UI\Grid\Html\GridFooterCellBuilderTests.cs" />
@@ -196,9 +193,6 @@
     <Compile Include="UI\Grid\Html\GridSortableHeaderCellBuilderTests.cs" />
     <Compile Include="UI\Grid\GridToolBarCommandFactoryTests.cs" />
     <Compile Include="UI\Grid\GridToolBarSettingsTests.cs" />
-    <Compile Include="UI\Grid\GridViewResultAdapterTests.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="UI\Grid\Html\GridActionCellBuilderTests.cs" />
     <Compile Include="UI\Grid\Html\GridButtonBaseTests.cs" />
     <Compile Include="UI\Grid\Html\GridButtonFactoryTests.cs" />
@@ -314,14 +308,11 @@
     <Compile Include="UI\DatePicker\DatePickerHtmlBuilderTests.cs" />
     <Compile Include="UI\DatePicker\DatePickerTestHelper.cs" />
     <Compile Include="UI\DatePicker\DatePickerClientEventsBuilderTests.cs" />
-    <Compile Include="UI\Grid\GridActionAttributeTests.cs" />
-    <Compile Include="UI\Grid\GridActionBindingContextTests.cs" />
     <Compile Include="UI\Grid\GridActionCommandFactoryTests.cs" />
     <Compile Include="UI\Grid\GridBoundColumnTests.cs" />
     <Compile Include="UI\Grid\GridBuilderTests.cs" />
     <Compile Include="UI\Grid\GridBoundColumnBuilderTests.cs" />
     <Compile Include="UI\Grid\GridColumnFactoryTests.cs" />
-    <Compile Include="UI\Grid\GridDataProcessorTests.cs" />
     <Compile Include="UI\Grid\GridPagerTests.cs" />
     <Compile Include="UI\Grid\GridTestHelper.cs" />
     <Compile Include="UI\Grid\GridWorkingConditionsTests.cs" />

@@ -52,10 +52,6 @@ namespace Kendo.Mvc.UI.Html
 
             DI.Current.Register<IGridHtmlBuilderFactory, IGridFunctionalSectionBuilder, IGridDataSectionBuilder, IGridTableBulderFactory>((functionalSectionBuilder, dataSectionBuilder, tableBuilderFactory)
                 => new GridHtmlBuilderFactory(functionalSectionBuilder, dataSectionBuilder, tableBuilderFactory));
-
-            DI.Current.Register<IGridActionResultAdapterFactory>(() => new GridActionResultAdapterFactory());
-
-            DI.Current.Register<IGridActionResultFactory>(() => new GridActionResultFactory());
         }
     }
 }

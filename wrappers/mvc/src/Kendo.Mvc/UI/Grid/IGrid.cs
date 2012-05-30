@@ -3,12 +3,19 @@ namespace Kendo.Mvc.UI
     using System.Collections.Generic;
     using System.Web.Mvc;
 
-    public interface IGrid : IGridBindingContext
+    public interface IGrid
     {
         bool HasDetailTemplate
         {
             get;
         }
+
+        bool EnableCustomBinding
+        {
+            get;
+        }
+
+        string Prefix(string value);
 
         GridPagingSettings Paging
         {
@@ -25,16 +32,6 @@ namespace Kendo.Mvc.UI
             get;
         }
 
-        GridNavigatableSettings Navigatable
-        {
-            get;
-        }
-
-        GridColumnContextMenuSettings ColumnContextMenu
-        {
-            get;
-        }
-
         bool IsSelfInitialized
         {
             get;
@@ -43,16 +40,6 @@ namespace Kendo.Mvc.UI
         string EditorHtml 
         { 
             get; 
-        }
-
-        GridResizingSettings Resizing
-        {
-            get;
-        }        
-        
-        GridReorderingSettings Reordering
-        {
-            get;
         }
 
         DataSource DataSource 
@@ -70,22 +57,7 @@ namespace Kendo.Mvc.UI
             get;
         }
 
-        IGridEditingSettings Editing 
-        { 
-            get; 
-        }
-
-        bool IsClientBinding
-        {
-            get;
-        }
-
         IUrlGenerator UrlGenerator
-        {
-            get;
-        }
-
-        IGridUrlBuilder UrlBuilder
         {
             get;
         }
@@ -101,11 +73,6 @@ namespace Kendo.Mvc.UI
         }
 
         IEnumerable<IDataKey> DataKeys
-        {
-            get;
-        }
-
-        bool IsEmpty
         {
             get;
         }
