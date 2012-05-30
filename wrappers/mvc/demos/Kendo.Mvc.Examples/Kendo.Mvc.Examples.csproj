@@ -264,6 +264,8 @@
     <Content Include="Areas\aspx\Views\web\datepicker\rangeselection.aspx" />
     <Content Include="Areas\aspx\Views\web\datepicker\template.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\aggregates.aspx" />
+    <Content Include="Areas\aspx\Views\web\grid\ajaxbinding.aspx" />
+    <Content Include="Areas\aspx\Views\web\grid\api.aspx" />
     <Content Include="Areas\aspx\Views\web\numerictextbox\api.aspx" />
     <Content Include="Areas\aspx\Views\web\numerictextbox\events.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\radial_gauge\index.aspx" />
@@ -379,7 +381,6 @@
     <Content Include="Areas\razor\Views\web\window\ajaxcontent.cshtml" />
     <Content Include="Areas\razor\Views\web\window\api.cshtml" />
     <Content Include="Areas\razor\Views\web\window\events.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\ajaxbinding.cshtml" />
     <Content Include="Areas\razor\Views\web\grid\customajaxbinding.cshtml" />
     <Content Include="Areas\razor\Views\web\treeview\index.cshtml" />
     <Content Include="Areas\razor\Views\web\treeview\dragdrop.cshtml" />
@@ -555,6 +556,7 @@
     <Content Include="Areas\aspx\Views\web\treeview\events.aspx" />
     <Content Include="Areas\aspx\Views\web\treeview\images.aspx" />
     <Content Include="Areas\aspx\Views\web\treeview\index.aspx" />
+    <Content Include="Areas\razor\Views\web\grid\ajaxbinding.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
