@@ -158,7 +158,8 @@ namespace Kendo.Mvc.UI.Html
         protected virtual IHtmlNode CreateFooter(GridRenderingData renderingData)
         {
             var tfoot = new HtmlElement("tfoot");
-
+            tfoot.AddClass("k-grid-footer");
+            
             var tr = DataSectionBuilder.CreateFooter(renderingData);
             tr.AppendTo(tfoot);
             return tfoot;

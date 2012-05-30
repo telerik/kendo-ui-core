@@ -15,8 +15,7 @@
             .FooterTemplate(@<text><div>Min: @item.Min </div><div>Max: @item.Max </div></text>)
             .GroupHeaderTemplate(@<text>@item.Title: @item.Key (Count: @item.Count)</text>);            
     })
-    .Pageable()
-    .Scrollable()
+    .Pageable()    
     .Sortable()    
     .DataSource(dataSource => dataSource
         .Server()

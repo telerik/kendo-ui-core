@@ -13,8 +13,7 @@
             .ClientGroupHeaderTemplate("Units In Stock: #= value # (Count: #= count#)")
             .ClientFooterTemplate("<div>Min: #= min #</div><div>Max: #= max #</div>");
     })
-    .Pageable()
-    .Scrollable()
+    .Pageable()    
     .Sortable()        
     .DataSource(dataSource => dataSource
         .Ajax()
