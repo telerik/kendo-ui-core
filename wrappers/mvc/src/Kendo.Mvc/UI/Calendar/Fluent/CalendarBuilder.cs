@@ -1,11 +1,9 @@
-namespace Kendo.Mvc.UI
+namespace Kendo.Mvc.UI.Fluent
 {
     using System;
 
     using Infrastructure;
     using Resources;
-    using Kendo.Mvc.UI.Fluent;
-
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="Calendar"/>.
     /// </summary>

@@ -2,8 +2,6 @@ namespace Kendo.Mvc.UI.Fluent
 {
     using System;
     using System.Collections.Generic;
-    using Infrastructure;
-
     /// <summary>
     /// Defines the fluent interface for configuring datepicker client events.
     /// </summary>
