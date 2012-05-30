@@ -390,6 +390,7 @@
             "name": "listview",
             "documentation": "ui-widgets/listview",
             "spriteCssClass": "listViewIcon",
+            "packages": ["!mvc"],
             "items": [
                 {
                     "text": "Basic usage",
