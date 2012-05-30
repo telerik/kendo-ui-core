@@ -264,22 +264,22 @@
                 {
                     "text": "Ajax binding",
                     "url": "grid/ajaxbinding.html",
-                    "packages": ["mvc", "offline"]
+                    "packages": ["mvc"]
                 },
                 {
                     "text": "Custom remote binding",
                     "url": "grid/customajaxbinding.html",
-                    "packages": ["mvc", "offline"]
+                    "packages": ["mvc"]
                 },
                 {
                     "text": "Server binding",
                     "url": "grid/serverbinding.html",
-                    "packages": ["mvc", "offline"]
+                    "packages": ["mvc"]
                 },
                 {
                     "text": "Custom server binding",
                     "url": "grid/customserverbinding.html",
-                    "packages": ["mvc", "offline"]
+                    "packages": ["mvc"]
                 },
                 {
                     "text": "Batch Editing",
