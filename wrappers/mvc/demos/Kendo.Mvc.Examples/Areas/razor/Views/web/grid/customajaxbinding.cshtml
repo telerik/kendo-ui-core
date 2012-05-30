@@ -1,10 +1,10 @@
-@(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.Product>()
+@(Html.Kendo().Grid<Order>()
     .Name("Grid")
     .Columns(columns => {
-        columns.Bound(p => p.ProductID).Groupable(false);
-        columns.Bound(p => p.ProductName);
-        columns.Bound(p => p.UnitPrice);
-        columns.Bound(p => p.UnitsInStock);
+        columns.Bound(o => o.OrderID).Groupable(false);
+        columns.Bound(o => o.ShipCity);
+        columns.Bound(o => o.ShipCountry);
+        columns.Bound(o => o.ShipName);
     })
     .Pageable()
     .Sortable()

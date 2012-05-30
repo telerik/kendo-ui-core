@@ -3,8 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web.Mvc;
 using Kendo.Mvc.Examples.Models;
+using Kendo.Mvc.Extensions;
 using Kendo.Mvc.Infrastructure;
 using Kendo.Mvc.UI;
 
@@ -20,6 +22,8 @@ namespace Kendo.Mvc.Examples.Controllers
             }
 
             IQueryable<Order> orders = new NorthwindDataContext().Orders;
+
+            orders = orders.ApplyFiltering(request.Filters);
 
             var total = orders.Count();
 
@@ -96,26 +100,28 @@ namespace Kendo.Mvc.Examples.Controllers
         }
 
         private static Func<IEnumerable<Order>, IEnumerable<AggregateFunctionsGroup>>
-            BuildGroup<T>(Func<Order, T> groupSelector, Func<IEnumerable<Order>,
+            BuildGroup<T>(Expression<Func<Order, T>> groupSelector, Func<IEnumerable<Order>,
             IEnumerable<AggregateFunctionsGroup>> selectorBuilder)
         {
             var tempSelector = selectorBuilder;
-            return g => g.GroupBy(groupSelector)
+            return g => g.GroupBy(groupSelector.Compile())
                          .Select(c => new AggregateFunctionsGroup
                          {
                              Key = c.Key,
                              HasSubgroups = true,
+                             Member = groupSelector.MemberWithoutInstance(),
                              Items = tempSelector.Invoke(c).ToList()
                          });
         }
 
         private static IEnumerable<AggregateFunctionsGroup> BuildInnerGroup<T>(IEnumerable<Order>
-            group, Func<Order, T> groupSelector)
+            group, Expression<Func<Order, T>> groupSelector)
         {
-            return group.GroupBy(groupSelector)
+            return group.GroupBy(groupSelector.Compile())
                     .Select(i => new AggregateFunctionsGroup
                     {
                         Key = i.Key,
+                        Member = groupSelector.MemberWithoutInstance(),
                         Items = i.ToList()
                     });
         }
@@ -149,16 +155,16 @@ namespace Kendo.Mvc.Examples.Controllers
                 switch (memberName)
                 {
                     case "OrderID":
-                        data = data.OrderBy(o => o.OrderID);
+                        data = data.OrderBy(order => order.OrderID);
                         break;
-                    case "ShipCity":
-                        data = data.OrderBy(o => o.ShipCity);
+                    case "Customer.ContactName":
+                        data = data.OrderBy(order => order.Customer.ContactName);
                         break;
                     case "ShipAddress":
-                        data = data.OrderBy(o => o.ShipAddress);
+                        data = data.OrderBy(order => order.ShipAddress);
                         break;
-                    case "ShipName":
-                        data = data.OrderBy(o => o.ShipName);
+                    case "OrderDate":
+                        data = data.OrderBy(order => order.OrderDate);
                         break;
                 }
             }
@@ -167,18 +173,28 @@ namespace Kendo.Mvc.Examples.Controllers
                 switch (memberName)
                 {
                     case "OrderID":
-                        data = data.OrderByDescending(o => o.OrderID);
+                        data = data.OrderByDescending(order => order.OrderID);
                         break;
-                    case "ShipCity":
-                        data = data.OrderByDescending(o => o.ShipCity);
+                    case "Customer.ContactName":
+                        data = data.OrderByDescending(order => order.Customer.ContactName);
                         break;
                     case "ShipAddress":
-                        data = data.OrderByDescending(o => o.ShipAddress);
+                        data = data.OrderByDescending(order => order.ShipAddress);
                         break;
-                    case "ShipName":
-                        data = data.OrderByDescending(o => o.ShipName);
+                    case "OrderDate":
+                        data = data.OrderByDescending(order => order.OrderDate);
                         break;
                 }
+            }
+            return data;
+        }
+
+        public static IQueryable<Order> ApplyFiltering(this IQueryable<Order> data,
+            IList<IFilterDescriptor> filterDescriptors)
+        {
+            if (filterDescriptors.Any())
+            {
+                data = data.Where(ExpressionBuilder.Expression<Order>(filterDescriptors));
             }
             return data;
         }

@@ -2,9 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.Linq;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web.Mvc;
 using Kendo.Mvc.Examples.Models;
+using Kendo.Mvc.Extensions;
 using Kendo.Mvc.Infrastructure;
 using Kendo.Mvc.UI;
 
@@ -19,15 +22,24 @@ namespace Kendo.Mvc.Examples.Controllers
 
         public ActionResult CustomAjaxBinding_Read([DataSourceRequest] DataSourceRequest request)
         {
-            IQueryable<Product> products = new NorthwindDataContext().Products;
+            var loadOptions = new DataLoadOptions();
+            loadOptions.LoadWith<Order>(o => o.Customer);
+            var dataContext = new NorthwindDataContext
+            {
+                LoadOptions = loadOptions
+            };
+            
+            IQueryable<Order> orders = dataContext.Orders;            
 
-            var total = products.Count();
+            orders = orders.ApplyOrdersFiltering(request.Filters);
 
-            products = products.ApplySorting(request.Groups, request.Sorts);
+            var total = orders.Count();
 
-            products = products.ApplyPaging(request.Page, request.PageSize);
+            orders = orders.ApplyOrdersSorting(request.Groups, request.Sorts);
 
-            IEnumerable data =  products.ApplyGrouping(request.Groups);
+            orders = orders.ApplyOrdersPaging(request.Page, request.PageSize);
+
+            IEnumerable data =  orders.ApplyOrdersGrouping(request.Groups);
 
             var result = new DataSourceResult()
             {
@@ -39,9 +51,9 @@ namespace Kendo.Mvc.Examples.Controllers
         }
     }
 
-    public static class ProductCustomBindingExtensions
+    public static class AjaxCustomBindingExtensions
     {
-        public static IQueryable<Product> ApplyPaging(this IQueryable<Product> data, int page, int pageSize)
+        public static IQueryable<Order> ApplyOrdersPaging(this IQueryable<Order> data, int page, int pageSize)
         {
             if (pageSize > 0 && page > 0)
             {
@@ -53,42 +65,42 @@ namespace Kendo.Mvc.Examples.Controllers
             return data;
         }
 
-        public static IEnumerable ApplyGrouping(this IQueryable<Product> data, IList<GroupDescriptor>
+        public static IEnumerable ApplyOrdersGrouping(this IQueryable<Order> data, IList<GroupDescriptor>
             groupDescriptors)
         {
             if (groupDescriptors != null && groupDescriptors.Any())
             {
-                Func<IEnumerable<Product>, IEnumerable<AggregateFunctionsGroup>> selector = null;
+                Func<IEnumerable<Order>, IEnumerable<AggregateFunctionsGroup>> selector = null;
                 foreach (var group in groupDescriptors.Reverse())
                 {
                     if (selector == null)
                     {
-                        if (group.Member == "ProductName")
+                        if (group.Member == "ShipCity")
                         {
-                            selector = Products => BuildInnerGroup(Products, o => o.ProductName);
+                            selector = Orders => BuildInnerGroup(Orders, o => o.ShipCity);
                         }
-                        else if (group.Member == "UnitPrice")
+                        else if (group.Member == "ShipAddress")
                         {
-                            selector = Products => BuildInnerGroup(Products, o => o.UnitPrice);
+                            selector = Orders => BuildInnerGroup(Orders, o => o.ShipAddress);
                         }
-                        else if (group.Member == "UnitsInStock")
+                        else if (group.Member == "ShipName")
                         {
-                            selector = Products => BuildInnerGroup(Products, o => o.UnitsInStock);
+                            selector = Orders => BuildInnerGroup(Orders, o => o.ShipName);
                         }
                     }
                     else
                     {
-                        if (group.Member == "ProductName")
+                        if (group.Member == "ShipCity")
                         {
-                            selector = BuildGroup(o => o.ProductName, selector);
+                            selector = BuildGroup(o => o.ShipCity, selector);
                         }
-                        else if (group.Member == "UnitPrice")
+                        else if (group.Member == "ShipAddress")
                         {
-                            selector = BuildGroup(o => o.UnitPrice, selector);
+                            selector = BuildGroup(o => o.ShipAddress, selector);
                         }
-                        else if (group.Member == "UnitsInStock")
+                        else if (group.Member == "ShipName")
                         {
-                            selector = BuildGroup(o => o.UnitsInStock, selector);
+                            selector = BuildGroup(o => o.ShipName, selector);
                         }
                     }
                 }
@@ -96,34 +108,37 @@ namespace Kendo.Mvc.Examples.Controllers
                 return selector.Invoke(data).ToList();
             }
 
-            return data;
+            return data.ToList();
         }
 
-        private static Func<IEnumerable<Product>, IEnumerable<AggregateFunctionsGroup>>
-            BuildGroup<T>(Func<Product, T> groupSelector, Func<IEnumerable<Product>,
+        private static Func<IEnumerable<Order>, IEnumerable<AggregateFunctionsGroup>>
+            BuildGroup<T>(Expression<Func<Order, T>> groupSelector, Func<IEnumerable<Order>,
             IEnumerable<AggregateFunctionsGroup>> selectorBuilder)
         {
             var tempSelector = selectorBuilder;
-            return g => g.GroupBy(groupSelector)
+            return g => g.GroupBy(groupSelector.Compile())
                          .Select(c => new AggregateFunctionsGroup
                          {
                              Key = c.Key,
                              HasSubgroups = true,
+                             Member = groupSelector.MemberWithoutInstance(),
                              Items = tempSelector.Invoke(c).ToList()
                          });
         }
 
-        private static IEnumerable<AggregateFunctionsGroup> BuildInnerGroup<T>(IEnumerable<Product>
-            group, Func<Product, T> groupSelector)
+        private static IEnumerable<AggregateFunctionsGroup> BuildInnerGroup<T>(IEnumerable<Order>
+            group, Expression<Func<Order, T>> groupSelector)
         {
-            return group.GroupBy(groupSelector)
+            return group.GroupBy(groupSelector.Compile())
                     .Select(i => new AggregateFunctionsGroup
                     {
                         Key = i.Key,
+                        Member = groupSelector.MemberWithoutInstance(),
                         Items = i.ToList()
                     });
         }
-        public static IQueryable<Product> ApplySorting(this IQueryable<Product> data,
+
+        public static IQueryable<Order> ApplyOrdersSorting(this IQueryable<Order> data,
                     IList<GroupDescriptor> groupDescriptors, IList<SortDescriptor> sortDescriptors)
         {
             if (groupDescriptors != null && groupDescriptors.Any())
@@ -145,24 +160,24 @@ namespace Kendo.Mvc.Examples.Controllers
             return data;
         }
 
-        private static IQueryable<Product> AddSortExpression(IQueryable<Product> data, ListSortDirection
+        private static IQueryable<Order> AddSortExpression(IQueryable<Order> data, ListSortDirection
                     sortDirection, string memberName)
         {
             if (sortDirection == ListSortDirection.Ascending)
             {
                 switch (memberName)
                 {
-                    case "ProductID":
-                        data = data.OrderBy(Product => Product.ProductID);
+                    case "OrderID":
+                        data = data.OrderBy(order => order.OrderID);
                         break;
-                    case "ProductName":
-                        data = data.OrderBy(Product => Product.ProductName);
+                    case "Customer.ContactName":
+                        data = data.OrderBy(order => order.Customer.ContactName);
                         break;
-                    case "UnitPrice":
-                        data = data.OrderBy(Product => Product.UnitPrice);
+                    case "ShipAddress":
+                        data = data.OrderBy(order => order.ShipAddress);
                         break;
-                    case "UnitsInStock":
-                        data = data.OrderBy(Product => Product.UnitsInStock);
+                    case "OrderDate":
+                        data = data.OrderBy(order => order.OrderDate);
                         break;
                 }
             }
@@ -170,19 +185,29 @@ namespace Kendo.Mvc.Examples.Controllers
             {
                 switch (memberName)
                 {
-                    case "ProductID":
-                        data = data.OrderByDescending(Product => Product.ProductID);
+                    case "OrderID":
+                        data = data.OrderByDescending(order => order.OrderID);
                         break;
-                    case "ProductName":
-                        data = data.OrderByDescending(Product => Product.ProductName);
+                    case "Customer.ContactName":
+                        data = data.OrderByDescending(order => order.Customer.ContactName);
                         break;
-                    case "UnitPrice":
-                        data = data.OrderByDescending(Product => Product.UnitPrice);
+                    case "ShipAddress":
+                        data = data.OrderByDescending(order => order.ShipAddress);
                         break;
-                    case "UnitsInStock":
-                        data = data.OrderByDescending(Product => Product.UnitsInStock);
+                    case "OrderDate":
+                        data = data.OrderByDescending(order => order.OrderDate);
                         break;
                 }
+            }
+            return data;
+        }
+
+        public static IQueryable<Order> ApplyOrdersFiltering(this IQueryable<Order> data,
+           IList<IFilterDescriptor> filterDescriptors)
+        {
+            if (filterDescriptors.Any())
+            {
+                data = data.Where(ExpressionBuilder.Expression<Order>(filterDescriptors));
             }
             return data;
         }

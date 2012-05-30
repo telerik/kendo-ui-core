@@ -5,7 +5,7 @@
     .EnableCustomBinding(true)
     .BindTo(Model)
     .Columns(columns => {
-        columns.Bound(o => o.OrderID);
+        columns.Bound(o => o.OrderID).Groupable(false);
         columns.Bound(o => o.ShipCity);
         columns.Bound(o => o.ShipCountry);
         columns.Bound(o => o.ShipName);

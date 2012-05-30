@@ -205,6 +205,7 @@
     <Compile Include="Models\ElectricitySource.cs" />
     <Compile Include="Models\EngineDataPoint.cs" />
     <Compile Include="Models\InternetUsers.cs" />
+    <Compile Include="Models\OrderDto.cs" />
     <Compile Include="Models\PricePerformance.cs" />
     <Compile Include="Models\ChartDataRepository.cs" />
     <Compile Include="Models\ElectricityProduction.cs" />
@@ -219,6 +220,7 @@
     <Compile Include="Models\NavigationExample.cs" />
     <Compile Include="Models\NavigationProvider.cs" />
     <Compile Include="Models\NavigationWidget.cs" />
+    <Compile Include="Models\ProductDto.cs" />
     <Compile Include="Models\SessionProductRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
