@@ -7,14 +7,13 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="RadialGauge{T}"/> component.
     /// </summary>
-    public class GaugeRadialBuilder<T> : ViewComponentBuilderBase<RadialGauge<T>, GaugeRadialBuilder<T>>, IHideObjectMembers
-        where T : struct
+    public class GaugeRadialBuilder : ViewComponentBuilderBase<RadialGauge, GaugeRadialBuilder>, IHideObjectMembers
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GaugeRadialBuilder{T}"/> class.
         /// </summary>
         /// <param name="component">The component.</param>
-        public GaugeRadialBuilder(RadialGauge<T> component)
+        public GaugeRadialBuilder(RadialGauge component)
             : base(component)
         {
         }
@@ -31,7 +30,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public GaugeRadialBuilder<T> Theme(string theme)
+        public GaugeRadialBuilder Theme(string theme)
         {
             Component.Theme = theme;
             return this;
@@ -49,7 +48,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public GaugeRadialBuilder<T> GaugeArea(Action<GaugeAreaBuilder> configurator)
+        public GaugeRadialBuilder GaugeArea(Action<GaugeAreaBuilder> configurator)
         {
 
             configurator(new GaugeAreaBuilder(Component.GaugeArea));
@@ -70,10 +69,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public GaugeRadialBuilder<T> Scale(Action<GaugeRadialScaleBuilder<T>> configurator)
+        public GaugeRadialBuilder Scale(Action<GaugeRadialScaleBuilder> configurator)
         {
 
-            configurator(new GaugeRadialScaleBuilder<T>(Component));
+            configurator(new GaugeRadialScaleBuilder(Component));
 
             return this;
         }
@@ -92,10 +91,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public GaugeRadialBuilder<T> Pointer(Action<GaugeRadialPointerBuilder<T>> configurator)
+        public GaugeRadialBuilder Pointer(Action<GaugeRadialPointerBuilder> configurator)
         {
 
-            configurator(new GaugeRadialPointerBuilder<T>(Component.Pointer));
+            configurator(new GaugeRadialPointerBuilder(Component.Pointer));
 
             return this;
         }
@@ -114,7 +113,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public GaugeRadialBuilder<T> Transitions(bool transitions)
+        public GaugeRadialBuilder Transitions(bool transitions)
         {
             Component.Transitions = transitions;
             return this;

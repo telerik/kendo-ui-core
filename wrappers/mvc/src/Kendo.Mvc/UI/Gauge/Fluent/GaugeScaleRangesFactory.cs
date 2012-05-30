@@ -6,9 +6,8 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Creates scale ranges for the <see cref="GaugeScaleRangesFactory{TScale, T}" />.
     /// </summary>
-    public class GaugeScaleRangesFactory<TScale, T> : IHideObjectMembers
-        where TScale : IGaugeScale<T>
-        where T : struct
+    public class GaugeScaleRangesFactory<TScale> : IHideObjectMembers
+        where TScale : IGaugeScale
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GaugeScaleRangesFactory{TScale, T}"/> class.
@@ -35,7 +34,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <returns></returns>
         public GaugeScaleRangesBuilder Add()
         {
-            GaugeScaleRanges item = new GaugeScaleRanges();
+            var item = new GaugeScaleRanges();
 
             Scale.Ranges.Add(item);
 

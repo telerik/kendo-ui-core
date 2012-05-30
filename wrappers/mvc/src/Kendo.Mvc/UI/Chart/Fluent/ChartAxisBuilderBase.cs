@@ -352,7 +352,7 @@ namespace Kendo.Mvc.UI.Fluent
         public TAxisBuilder PlotBands(Action<ChartAxisPlotBandsFactory<TAxis>> configurator)
         {
 
-            ChartAxisPlotBandsFactory<TAxis> factory = new ChartAxisPlotBandsFactory<TAxis>(Axis);
+            var factory = new ChartAxisPlotBandsFactory<TAxis>(Axis);
 
             configurator(factory);
 

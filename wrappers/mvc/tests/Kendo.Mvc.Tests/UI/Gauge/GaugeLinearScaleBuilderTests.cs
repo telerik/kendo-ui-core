@@ -5,14 +5,14 @@ namespace Kendo.Mvc.UI.Tests.Gauge
     using Xunit;
 
     public class GaugeLinearScaleBuilderTests
-        : GaugeScaleBuilderBaseTests<ILinearScale<double>, GaugeLinearScaleBuilder<double>>
+        : GaugeScaleBuilderBaseTests<ILinearScale, GaugeLinearScaleBuilder>
     {
         public GaugeLinearScaleBuilderTests()
         {
             var gauge = GaugeTestHelper.CreateLinearGauge();
-            scale = new GaugeLinearScale<double>(gauge);
+            scale = new GaugeLinearScale(gauge);
             gauge.Scale = scale;
-            builder = new GaugeLinearScaleBuilder<double>(gauge);
+            builder = new GaugeLinearScaleBuilder(gauge);
         }
 
         [Fact]

@@ -5,11 +5,11 @@ namespace Kendo.Mvc.UI.Tests
 
     public class GaugeRadialPointerSerializerTests
     {
-        private readonly GaugeRadialPointer<double> pointer;
+        private readonly GaugeRadialPointer pointer;
 
         public GaugeRadialPointerSerializerTests()
         {
-            pointer = new GaugeRadialPointer<double>();
+            pointer = new GaugeRadialPointer();
         }
 
         [Fact]

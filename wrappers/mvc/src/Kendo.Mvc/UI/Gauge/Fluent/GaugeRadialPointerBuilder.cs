@@ -5,16 +5,15 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="GaugeRadialPointer{T}"/>.
     /// </summary>
-    public class GaugeRadialPointerBuilder<T> : IHideObjectMembers
-         where T : struct
+    public class GaugeRadialPointerBuilder : IHideObjectMembers
     {
-        private readonly GaugeRadialPointer<T> pointer;
+        private readonly GaugeRadialPointer pointer;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GaugeRadialPointerBuilder{T}" /> class.
         /// </summary>
         /// <param name="pointer">The gauge pointer.</param>
-        public GaugeRadialPointerBuilder(GaugeRadialPointer<T> pointer)
+        public GaugeRadialPointerBuilder(GaugeRadialPointer pointer)
         {
             this.pointer = pointer;
         }
@@ -34,7 +33,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>        
-        public GaugeRadialPointerBuilder<T> Color(string color)
+        public GaugeRadialPointerBuilder Color(string color)
         {
             pointer.Color = color;
             return this;
@@ -58,7 +57,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public GaugeRadialPointerBuilder<T> Opacity(double opacity)
+        public GaugeRadialPointerBuilder Opacity(double opacity)
         {
             pointer.Opacity = opacity;
             return this;
@@ -79,7 +78,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public GaugeRadialPointerBuilder<T> Value(T? value)
+        public GaugeRadialPointerBuilder Value(double value)
         {
             pointer.Value = value;
             return this;
@@ -100,7 +99,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public GaugeRadialPointerBuilder<T> Cap(Action<GaugeRadialCapBuilder> configurator)
+        public GaugeRadialPointerBuilder Cap(Action<GaugeRadialCapBuilder> configurator)
         {
 
             configurator(new GaugeRadialCapBuilder(pointer.Cap));

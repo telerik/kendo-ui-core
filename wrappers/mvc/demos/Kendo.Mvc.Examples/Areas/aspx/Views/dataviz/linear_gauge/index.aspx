@@ -5,7 +5,7 @@
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 <div id="gauge-container">
-    <%= Html.Kendo().LinearGauge<int>()
+    <%= Html.Kendo().LinearGauge()
             .Name("lineargauge")
             .Pointer(pointer => pointer.Value(28))
             .Scale(scale => scale

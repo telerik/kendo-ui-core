@@ -37,7 +37,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>        
-        public GaugeScaleRangesBuilder From(decimal from)
+        public GaugeScaleRangesBuilder From(double from)
         {
             item.From = from;
             return this;
@@ -60,7 +60,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>        
-        public GaugeScaleRangesBuilder To(decimal to)
+        public GaugeScaleRangesBuilder To(double to)
         {
             item.To = to;
             return this;

@@ -377,9 +377,9 @@ namespace Kendo.Mvc.UI
         /// %&gt;
         /// </code>
         /// </example>
-        public virtual GaugeLinearBuilder<T> LinearGauge<T>() where T: struct
+        public virtual GaugeLinearBuilder LinearGauge()
         {
-            return new GaugeLinearBuilder<T>(new LinearGauge<T>(ViewContext, Initializer, UrlGenerator));
+            return new GaugeLinearBuilder(new LinearGauge(ViewContext, Initializer, UrlGenerator));
         }
 
         /// <summary>
@@ -392,9 +392,9 @@ namespace Kendo.Mvc.UI
         /// %&gt;
         /// </code>
         /// </example>
-        public virtual GaugeRadialBuilder<T> RadialGauge<T>() where T : struct
+        public virtual GaugeRadialBuilder RadialGauge()
         {
-            return new GaugeRadialBuilder<T>(new RadialGauge<T>(ViewContext, Initializer, UrlGenerator));
+            return new GaugeRadialBuilder(new RadialGauge(ViewContext, Initializer, UrlGenerator));
         }
 
         /// <summary>
@@ -1080,130 +1080,6 @@ namespace Kendo.Mvc.UI
                     .Value(value.HasValue ? value.Value : minimum)
                     .Min(minimum.Value)
                     .Max(maximum.Value);
-        }
-
-        /// <summary>
-        /// Creates a new <see cref="LinearGaugeFor{TValue}"/>.
-        /// </summary>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().LinearGaugeFor(m=>m.Property) %&gt;
-        /// </code>
-        /// </example>
-        public virtual GaugeLinearBuilder<TValue> LinearGaugeFor<TValue>(Expression<Func<TModel, TValue>> expression)
-            where TValue : struct, IComparable
-        {
-
-            var value = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
-
-            IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
-
-            TValue? minimum = GetRangeValidationParameter<TValue>(validators, minimumValidator);
-            TValue? maximum = GetRangeValidationParameter<TValue>(validators, maximumValidator);
-
-            minimum = minimum.HasValue ? minimum : (TValue)Convert.ChangeType(0, typeof(TValue));
-            maximum = maximum.HasValue ? maximum : (TValue)Convert.ChangeType(10, typeof(TValue));
-
-            return LinearGauge<TValue>()
-                       .Name(GetName(expression))
-                       .Pointer(pointer => pointer.Value(value == null ? minimum : (TValue)value))
-                       .Scale(scale => scale
-                           .Min(minimum.Value)
-                           .Max(maximum.Value)
-                       );
-        }
-
-        /// <summary>
-        /// Creates a new <see cref="LinearGaugeFor{Nullable{TValue}}"/>.
-        /// </summary>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().LinearGaugeFor(m=>m.NullableProperty) %&gt;
-        /// </code>
-        /// </example>
-        public virtual GaugeLinearBuilder<TValue> LinearGaugeFor<TValue>(Expression<Func<TModel, Nullable<TValue>>> expression)
-            where TValue : struct, IComparable
-        {
-
-            IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
-
-            TValue? minimum = GetRangeValidationParameter<TValue>(validators, minimumValidator);
-            TValue? maximum = GetRangeValidationParameter<TValue>(validators, maximumValidator);
-
-            var value = (Nullable<TValue>)ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
-
-            minimum = minimum.HasValue ? minimum : (TValue)Convert.ChangeType(0, typeof(TValue));
-            maximum = maximum.HasValue ? maximum : (TValue)Convert.ChangeType(10, typeof(TValue));
-
-            return LinearGauge<TValue>()
-                       .Name(GetName(expression))
-                       .Pointer(pointer => pointer.Value(value.HasValue ? value.Value : minimum))
-                       .Scale(scale => scale
-                           .Min(minimum.Value)
-                           .Max(maximum.Value)
-                       );
-        }
-
-        /// <summary>
-        /// Creates a new <see cref="RadialGaugeFor{TValue}"/>.
-        /// </summary>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().RadialGaugeFor(m=>m.Property) %&gt;
-        /// </code>
-        /// </example>
-        public virtual GaugeRadialBuilder<TValue> RadialGaugeFor<TValue>(Expression<Func<TModel, TValue>> expression)
-            where TValue : struct, IComparable
-        {
-
-            var value = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
-
-            IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
-
-            TValue? minimum = GetRangeValidationParameter<TValue>(validators, minimumValidator);
-            TValue? maximum = GetRangeValidationParameter<TValue>(validators, maximumValidator);
-
-            minimum = minimum.HasValue ? minimum : (TValue)Convert.ChangeType(0, typeof(TValue));
-            maximum = maximum.HasValue ? maximum : (TValue)Convert.ChangeType(10, typeof(TValue));
-
-            return RadialGauge<TValue>()
-                       .Name(GetName(expression))
-                       .Pointer(pointer => pointer.Value(value == null ? minimum : (TValue)value))
-                       .Scale(scale => scale
-                           .Min(minimum.Value)
-                           .Max(maximum.Value)
-                       );
-        }
-
-        /// <summary>
-        /// Creates a new <see cref="RadialGaugeFor{Nullable{TValue}}"/>.
-        /// </summary>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().RadialGaugeFor(m=>m.NullableProperty) %&gt;
-        /// </code>
-        /// </example>
-        public virtual GaugeRadialBuilder<TValue> RadialGaugeFor<TValue>(Expression<Func<TModel, Nullable<TValue>>> expression)
-            where TValue : struct, IComparable
-        {
-
-            IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
-
-            TValue? minimum = GetRangeValidationParameter<TValue>(validators, minimumValidator);
-            TValue? maximum = GetRangeValidationParameter<TValue>(validators, maximumValidator);
-
-            var value = (Nullable<TValue>)ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
-
-            minimum = minimum.HasValue ? minimum : (TValue)Convert.ChangeType(0, typeof(TValue));
-            maximum = maximum.HasValue ? maximum : (TValue)Convert.ChangeType(10, typeof(TValue));
-
-            return RadialGauge<TValue>()
-                       .Name(GetName(expression))
-                       .Pointer(pointer => pointer.Value(value.HasValue ? value.Value : minimum))
-                       .Scale(scale => scale
-                           .Min(minimum.Value)
-                           .Max(maximum.Value)
-                       );
         }
 
         /// <summary>

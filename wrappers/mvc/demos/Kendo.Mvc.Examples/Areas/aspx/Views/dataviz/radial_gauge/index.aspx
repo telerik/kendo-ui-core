@@ -5,7 +5,7 @@
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 <div id="gauge-container">
-    <%= Html.Kendo().RadialGauge<int>()
+    <%= Html.Kendo().RadialGauge()
             .Name("radialgauge")
             .Pointer(pointer => pointer.Value(0))
             .Scale(scale => scale

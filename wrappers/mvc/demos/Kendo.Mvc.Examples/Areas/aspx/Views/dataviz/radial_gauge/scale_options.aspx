@@ -29,7 +29,7 @@
     </ul>
 </div>
 <div id="gauge-container">
-    <%= Html.Kendo().RadialGauge<int>()
+    <%= Html.Kendo().RadialGauge()
             .Name("radialgauge")
             .Pointer(pointer => pointer.Value(65))
             .Scale(scale => scale
