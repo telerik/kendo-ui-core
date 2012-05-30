@@ -1109,6 +1109,86 @@ namespace Kendo.Mvc.UI
                     .Max(maximum.Value);
         }
 
+        /// <summary>
+        /// Creates a new <see cref="LinearGauge"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().LinearGaugeFor(m=>m.Property) %&gt;
+        /// </code>
+        /// </example>
+        public virtual GaugeLinearBuilder LinearGaugeFor<TValue>(Expression<Func<TModel, TValue>> expression)
+            where TValue : struct, IComparable
+        {
+            var value = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
+
+            return LinearGauge()
+                    .Name(GetName(expression))
+                    .Pointer(pointer => pointer.Value(
+                        Convert.ToDouble(value)
+                    ));
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="LinearGauge"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().LinearGaugeFor(m=>m.Property) %&gt;
+        /// </code>
+        /// </example>
+        public virtual GaugeLinearBuilder LinearGaugeFor<TValue>(Expression<Func<TModel, Nullable<TValue>>> expression)
+            where TValue : struct, IComparable
+        {
+            var value = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
+
+            return LinearGauge()
+                    .Name(GetName(expression))
+                    .Pointer(pointer => pointer.Value(
+                        Convert.ToDouble(value)
+                    ));
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="RadialGauge"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().RadialGaugeFor(m=>m.Property) %&gt;
+        /// </code>
+        /// </example>
+        public virtual GaugeRadialBuilder RadialGaugeFor<TValue>(Expression<Func<TModel, TValue>> expression)
+            where TValue : struct, IComparable
+        {
+            var value = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
+
+            return RadialGauge()
+                    .Name(GetName(expression))
+                    .Pointer(pointer => pointer.Value(
+                        Convert.ToDouble(value)
+                    ));
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="RadialGauge"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().RadialGaugeFor(m=>m.Property) %&gt;
+        /// </code>
+        /// </example>
+        public virtual GaugeRadialBuilder RadialGaugeFor<TValue>(Expression<Func<TModel, Nullable<TValue>>> expression)
+            where TValue : struct, IComparable
+        {
+            var value = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
+
+            return RadialGauge()
+                    .Name(GetName(expression))
+                    .Pointer(pointer => pointer.Value(
+                        Convert.ToDouble(value)
+                    ));
+        }
+
         private string GetName(LambdaExpression expression)
         {
             string name = ExpressionHelper.GetExpressionText(expression);
