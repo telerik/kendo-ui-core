@@ -40,6 +40,11 @@ namespace Kendo.Mvc.Examples.Controllers
             return View();
         }
 
+        public ActionResult AjaxBinding()
+        {
+            return View();
+        }
+
         public ActionResult Api()
         {
             return View();
