@@ -74,7 +74,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
             ConfigureEditing(g =>
             {
                 g.DataSource.Type = DataSourceType.Ajax;
-                g.ToolBar.Commands.Add(new GridToolBarInsertCommand<Customer>());
+                g.ToolBar.Commands.Add(new GridToolBarCreateCommand<Customer>());
             });
         }        
 
@@ -113,7 +113,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
         {
             ConfigureEditing(g =>
             {
-                g.ToolBar.Commands.Add(new GridToolBarInsertCommand<Customer>());
+                g.ToolBar.Commands.Add(new GridToolBarCreateCommand<Customer>());
             });
         }
 
@@ -245,7 +245,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
         {
             ConfigureEditing(g =>
             {
-                g.ToolBar.Commands.Add(new GridToolBarSubmitChangesCommand<Customer>());
+                g.ToolBar.Commands.Add(new GridToolBarSaveCommand<Customer>());
             });
         }
         
@@ -256,7 +256,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
             grid.Editing.Mode = GridEditMode.InCell;
             grid.DataSource.Type = DataSourceType.Ajax;
             grid.DataKeys.Add(new GridDataKey<Customer, int>(c => c.Id));
-            grid.ToolBar.Commands.Add(new GridToolBarInsertCommand<Customer>());
+            grid.ToolBar.Commands.Add(new GridToolBarCreateCommand<Customer>());
 
             Assert.DoesNotThrow(() => grid.VerifySettings());
         }        

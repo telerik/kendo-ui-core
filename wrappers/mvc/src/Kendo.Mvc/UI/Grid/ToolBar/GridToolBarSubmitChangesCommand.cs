@@ -3,7 +3,7 @@ namespace Kendo.Mvc.UI
     using System.Collections.Generic;
     using Kendo.Mvc.UI.Html;
     
-    public class GridToolBarSubmitChangesCommand<T> : GridToolBarCommandBase<T> where T : class
+    public class GridToolBarSaveCommand<T> : GridToolBarCommandBase<T> where T : class
     {
         public string SaveText
         {

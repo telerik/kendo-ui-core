@@ -1,8 +1,8 @@
 namespace Kendo.Mvc.UI.Fluent
 {
-    public class GridToolBarSubmitChangesCommandBuilder<T> : GridToolBarCommandBuilderBase<T, GridToolBarSubmitChangesCommand<T>, GridToolBarSubmitChangesCommandBuilder<T>> where T : class
+    public class GridToolBarSaveCommandBuilder<T> : GridToolBarCommandBuilderBase<T, GridToolBarSaveCommand<T>, GridToolBarSaveCommandBuilder<T>> where T : class
     {
-        public GridToolBarSubmitChangesCommandBuilder(GridToolBarSubmitChangesCommand<T> command)
+        public GridToolBarSaveCommandBuilder(GridToolBarSaveCommand<T> command)
             : base(command)
         {
         }
@@ -12,7 +12,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <param name="text">The text which should be displayed</param>
         /// <returns></returns>
-        public GridToolBarSubmitChangesCommandBuilder<T> SaveText(string text)
+        public GridToolBarSaveCommandBuilder<T> SaveText(string text)
         {
             Command.SaveText = text;
 
@@ -24,7 +24,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <param name="text">The text which should be displayed</param>
         /// <returns></returns>
-        public GridToolBarSubmitChangesCommandBuilder<T> CancelText(string text)
+        public GridToolBarSaveCommandBuilder<T> CancelText(string text)
         {
             Command.CancelText = text;
 

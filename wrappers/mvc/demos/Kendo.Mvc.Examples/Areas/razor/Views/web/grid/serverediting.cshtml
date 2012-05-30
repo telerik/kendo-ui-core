@@ -8,7 +8,7 @@
         columns.Bound(p => p.UnitsInStock);
         columns.Command(command => { command.Edit(); command.Delete(); });
     })
-    .ToolBar(toolbar => toolbar.Insert())
+    .ToolBar(toolbar => toolbar.Create())
     .Editable(editable => editable.Mode(GridEditMode.PopUp))
     .Pageable()
     .Sortable()

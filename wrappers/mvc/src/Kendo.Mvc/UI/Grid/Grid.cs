@@ -392,21 +392,21 @@ namespace Kendo.Mvc.UI
         //    return DeleteButton(dataItem, GridButtonType.ImageAndText);
         //}
 
-        public object InsertButton(/*GridButtonType buttonType,*/ object htmlAttributes, object imageHtmlAttributes)
+        public object CreateButton(/*GridButtonType buttonType,*/ object htmlAttributes, object imageHtmlAttributes)
         {
             Editing.Enabled = true;
             InitializeEditors();
-            return Button<GridToolBarInsertCommand<T>>(null/*, buttonType*/, htmlAttributes, imageHtmlAttributes);
+            return Button<GridToolBarCreateCommand<T>>(null/*, buttonType*/, htmlAttributes, imageHtmlAttributes);
         }
 
-        public object InsertButton(/*GridButtonType buttonType,*/ object htmlAttributes)
+        public object CreateButton(/*GridButtonType buttonType,*/ object htmlAttributes)
         {
-            return InsertButton(/*buttonType,*/ htmlAttributes, null);
+            return CreateButton(/*buttonType,*/ htmlAttributes, null);
         }
 
-        public object InsertButton(/*GridButtonType buttonType*/)
+        public object CreateButton(/*GridButtonType buttonType*/)
         {
-            return InsertButton(/*buttonType,*/ null);
+            return CreateButton(/*buttonType,*/ null);
         }
 
         //public object InsertButton()
@@ -414,21 +414,21 @@ namespace Kendo.Mvc.UI
         //    return InsertButton(GridButtonType.ImageAndText);
         //}
 
-        public object SubmitChangesButton(/*GridButtonType buttonType,*/ object htmlAttributes, object imageHtmlAttributes)
+        public object SaveButton(/*GridButtonType buttonType,*/ object htmlAttributes, object imageHtmlAttributes)
         {
             Editing.Enabled = true;
             InitializeEditors();
-            return Button<GridToolBarSubmitChangesCommand<T>>(null/*, buttonType*/, htmlAttributes, imageHtmlAttributes);
+            return Button<GridToolBarSaveCommand<T>>(null/*, buttonType*/, htmlAttributes, imageHtmlAttributes);
         }
 
-        public object SubmitChangesButton(/*GridButtonType buttonType,*/ object htmlAttributes)
+        public object SaveButton(/*GridButtonType buttonType,*/ object htmlAttributes)
         {
-            return SubmitChangesButton(/*buttonType,*/ htmlAttributes, null);
+            return SaveButton(/*buttonType,*/ htmlAttributes, null);
         }
 
-        public object SubmitChangesButton(/*GridButtonType buttonType*/)
+        public object SaveButton(/*GridButtonType buttonType*/)
         {
-            return SubmitChangesButton(/*buttonType,*/ null);
+            return SaveButton(/*buttonType,*/ null);
         }
 
         //public object SubmitChangesButton()
@@ -1213,7 +1213,7 @@ namespace Kendo.Mvc.UI
                     }
                 }
 
-                if (HasCommandOfType<GridToolBarInsertCommand<T>>())
+                if (HasCommandOfType<GridToolBarCreateCommand<T>>())
                 {
                     if (!DataSource.Transport.Create.HasValue() && Editing.Mode != GridEditMode.InCell)
                     {
@@ -1221,7 +1221,7 @@ namespace Kendo.Mvc.UI
                     }
                 }
 
-                if (HasCommandOfType<GridToolBarSubmitChangesCommand<T>>())
+                if (HasCommandOfType<GridToolBarSaveCommand<T>>())
                 {
                     if (Editing.Mode != GridEditMode.InCell)
                     {
