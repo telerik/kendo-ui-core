@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.mobile.ui.Swipe Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.mobile.swipe.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <h1 id="qunit-header">kendo.mobile.ui.Swipe Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <ul id="log"></ul>
+
+        <script type="text/fixture" id="fixture">
+            <div id="foo">Foo</div>
+        </script>
+
+        <script>
+            var root = $('#qunit-fixture');
+
+            function setup(fixtureID) {
+                root.html($(fixtureID).text()).wrapInner("<div />");
+            }
+
+            function teardown() {
+                root.empty();
+            }
+
+            function triggerEvent(type, e, el) {
+                el = el || root;
+                el.trigger($.Event(type, e));
+            }
+
+            module("Swipe", {
+                setup: function() {
+                    setup("#fixture");
+                },
+
+                teardown: teardown
+            });
+
+            test("triggers swipe event", 1, function() {
+                root.kendoMobileSwipe(function(e) {
+                    ok(true);
+                });
+
+                triggerEvent("mousedown", {pageX: 1, pageY: 1});
+                triggerEvent("mousemove", {pageX: 40, pageY: 1});
+                triggerEvent("mouseup", {pageX: 40, pageY: 1});
+            });
+
+            test("ignores shorter swipes", 0, function(){
+                root.kendoMobileSwipe(function(e) {
+                    ok();
+                });
+
+                triggerEvent("mousedown", {pageX: 1, pageY: 1});
+                triggerEvent("mousemove", {pageX: 10, pageY: 1});
+                triggerEvent("mouseup", {pageX: 10, pageY: 1});
+            });
+
+            test("ignores vertical swipes", 0, function() {
+                root.kendoMobileSwipe(function(e) {
+                    ok();
+                });
+
+                triggerEvent("mousedown", {pageX: 1, pageY: 1});
+                triggerEvent("mousemove", {pageX: 40, pageY: 40});
+                triggerEvent("mouseup", {pageX: 40, pageY: 40});
+            });
+
+            asyncTest("ignores slow swipe event", 0, function() {
+                root.kendoMobileSwipe(function(e) {
+                    ok();
+                });
+
+                triggerEvent("mousedown", {pageX: 1, pageY: 1});
+                triggerEvent("mousemove", {pageX: 2, pageY: 2});
+                setTimeout(function() {
+                    triggerEvent("mousemove", {pageX: 40, pageY: 1});
+                    triggerEvent("mouseup", {pageX: 40, pageY: 1});
+                    start();
+                }, 1100);
+            });
+
+            test("detects right swipe", 1, function() {
+                root.kendoMobileSwipe(function(e) {
+                    equal(e.direction, "right");
+                });
+
+                triggerEvent("mousedown", {pageX: 1, pageY: 1});
+                triggerEvent("mousemove", {pageX: 40, pageY: 1});
+                triggerEvent("mouseup", {pageX: 40, pageY: 1});
+            });
+
+            test("detects left swipe", 1, function() {
+                root.kendoMobileSwipe(function(e) {
+                    equal(e.direction, "left");
+                });
+
+                triggerEvent("mousedown", {pageX: 40, pageY: 1});
+                triggerEvent("mousemove", {pageX: 1, pageY: 1});
+                triggerEvent("mouseup", {pageX: 1, pageY: 1});
+            });
+
+            test("passes the swiped element", 1, function() {
+                root.kendoMobileSwipe(function(e) {
+                    equal(e.target[0], root[0]);
+                });
+
+                triggerEvent("mousedown", {pageX: 40, pageY: 1});
+                triggerEvent("mousemove", {pageX: 1, pageY: 1});
+                triggerEvent("mouseup", {pageX: 1, pageY: 1});
+            });
+
+        </script>
+    </body>
+</html>
