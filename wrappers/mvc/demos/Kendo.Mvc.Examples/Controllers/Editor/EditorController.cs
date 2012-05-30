@@ -10,5 +10,15 @@ namespace Kendo.Mvc.Examples.Controllers
         {
             return View();
         }
+
+        public ActionResult Api()
+        {
+            return View();
+        }
+
+        public ActionResult Events()
+        {
+            return View();
+        }
     }
 }

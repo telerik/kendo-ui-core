@@ -571,6 +571,8 @@
     <Content Include="Areas\aspx\Views\web\treeview\images.aspx" />
     <Content Include="Areas\aspx\Views\web\treeview\index.aspx" />
     <Content Include="Areas\razor\Views\web\grid\ajaxbinding.cshtml" />
+    <Content Include="Areas\razor\Views\web\editor\events.cshtml" />
+    <Content Include="Areas\razor\Views\web\editor\api.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
