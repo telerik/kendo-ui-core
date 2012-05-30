@@ -1,7 +1,7 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/Web.Master" %>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
-    <%: Html.Kendo().Grid<ProductDto>()    
+    <%: Html.Kendo().Grid<ProductViewModel>()    
             .Name("Grid")
             .Columns(columns => {
                 columns.Bound(p => p.ProductID).Groupable(false);

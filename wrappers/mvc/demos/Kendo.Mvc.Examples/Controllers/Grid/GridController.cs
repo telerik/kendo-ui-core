@@ -12,12 +12,12 @@ namespace Kendo.Mvc.Examples.Controllers
     {
         public ActionResult Index()
         {
-            return View(GetProductDto());
+            return View(GetProducts());
         }
 
         public ActionResult Local_Data()
         {
-            return View(GetProductDto());
+            return View(GetProducts());
         }
 
         public ActionResult ServerHierarchy()
@@ -62,7 +62,7 @@ namespace Kendo.Mvc.Examples.Controllers
 
         public ActionResult Products_Read([DataSourceRequest] DataSourceRequest request)
         {
-            return Json(GetProductDto().ToDataSourceResult(request));
+            return Json(GetProducts().ToDataSourceResult(request));
         }
 
         private static IEnumerable<OrderDto> GetOrderDto()
@@ -86,11 +86,11 @@ namespace Kendo.Mvc.Examples.Controllers
             });
         }
 
-        private static IEnumerable<ProductDto> GetProductDto()
+        private static IEnumerable<ProductViewModel> GetProducts()
         {
             var northwind = new NorthwindDataContext();
 
-            return northwind.Products.Select(product => new ProductDto
+            return northwind.Products.Select(product => new ProductViewModel
             {
                 ProductID = product.ProductID,
                 ProductName = product.ProductName,

@@ -20,9 +20,9 @@ namespace Kendo.Mvc.Examples.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Editing_Create([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<EditableProduct> products)
+        public ActionResult Editing_Create([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<ProductViewModel> products)
         {
-            var results = new List<EditableProduct>();
+            var results = new List<ProductViewModel>();
 
             if (products != null && ModelState.IsValid)
             {
@@ -37,7 +37,7 @@ namespace Kendo.Mvc.Examples.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Editing_Update([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<EditableProduct> products)
+        public ActionResult Editing_Update([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<ProductViewModel> products)
         {
             if (products != null && ModelState.IsValid)
             {
@@ -60,7 +60,7 @@ namespace Kendo.Mvc.Examples.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Editing_Destroy([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<EditableProduct> products)
+        public ActionResult Editing_Destroy([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<ProductViewModel> products)
         {            
             if (products.Any())
             {

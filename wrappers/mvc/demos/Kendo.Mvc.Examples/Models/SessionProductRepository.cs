@@ -7,15 +7,15 @@
 
     public static class SessionProductRepository
     {
-        public static IList<EditableProduct> All()
+        public static IList<ProductViewModel> All()
         {
-            IList<EditableProduct> result = (IList<EditableProduct>)HttpContext.Current.Session["Products"];
+            IList<ProductViewModel> result = (IList<ProductViewModel>)HttpContext.Current.Session["Products"];
 
             if (result == null)
             {
                 HttpContext.Current.Session["Products"] = result =
                     (from product in new NorthwindDataContext().Products
-                     select new EditableProduct
+                     select new ProductViewModel
                      {
                          ProductID = product.ProductID,
                          ProductName = product.ProductName,
@@ -29,21 +29,21 @@
             return result;
         }
 
-        public static EditableProduct One(Func<EditableProduct, bool> predicate)
+        public static ProductViewModel One(Func<ProductViewModel, bool> predicate)
         {
             return All().Where(predicate).FirstOrDefault();
         }
 
-        public static void Insert(EditableProduct product)
+        public static void Insert(ProductViewModel product)
         {
             product.ProductID = All().OrderByDescending(p => p.ProductID).First().ProductID + 1;
 
             All().Insert(0, product);
         }
 
-        public static void Update(EditableProduct product)
+        public static void Update(ProductViewModel product)
         {
-            EditableProduct target = One(p => p.ProductID == product.ProductID);
+            ProductViewModel target = One(p => p.ProductID == product.ProductID);
             if (target != null)
             {
                 target.ProductName = product.ProductName;
@@ -54,9 +54,9 @@
             }
         }
 
-        public static void Delete(EditableProduct product)
+        public static void Delete(ProductViewModel product)
         {
-            EditableProduct target = One(p => p.ProductID == product.ProductID);
+            ProductViewModel target = One(p => p.ProductID == product.ProductID);
             if (target != null)
             {
                 All().Remove(target);

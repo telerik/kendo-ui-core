@@ -211,7 +211,7 @@
     <Compile Include="Models\ChartDataRepository.cs" />
     <Compile Include="Models\ElectricityProduction.cs" />
     <Compile Include="Models\NavigationItem.cs" />
-    <Compile Include="Models\EditableProduct.cs" />
+    <Compile Include="Models\ProductViewModel.cs" />
     <Compile Include="Models\Northwind.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -221,7 +221,6 @@
     <Compile Include="Models\NavigationExample.cs" />
     <Compile Include="Models\NavigationProvider.cs" />
     <Compile Include="Models\NavigationWidget.cs" />
-    <Compile Include="Models\ProductDto.cs" />
     <Compile Include="Models\SessionProductRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

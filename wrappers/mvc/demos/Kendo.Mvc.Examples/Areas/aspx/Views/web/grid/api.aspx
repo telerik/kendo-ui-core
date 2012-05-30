@@ -21,7 +21,7 @@
     </ul>
 </div>
 
-<%: Html.Kendo().Grid<ProductDto>()
+<%: Html.Kendo().Grid<ProductViewModel>()
     .Name("Grid")
     .HtmlAttributes(new { style = "width:700px" })
     .Columns(columns =>
