@@ -62,7 +62,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
                 {
                     Commands =
                     {
-                        new GridDeleteActionCommand()
+                        new GridDestroyActionCommand()
                     }
                 });
             });
@@ -272,7 +272,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
             {
                 Commands =
                     {
-                        new GridDeleteActionCommand()
+                        new GridDestroyActionCommand()
                     }
             });
 

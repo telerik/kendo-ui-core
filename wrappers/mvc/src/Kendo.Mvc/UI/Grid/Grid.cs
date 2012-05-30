@@ -370,20 +370,20 @@ namespace Kendo.Mvc.UI
         //}
 
         //TODO: Implement command button types
-        public object DeleteButton(T dataItem/*, GridButtonType buttonType*/, object htmlAttributes, object imageHtmlAttributes)
+        public object DestroyButton(T dataItem/*, GridButtonType buttonType*/, object htmlAttributes, object imageHtmlAttributes)
         {
             Editing.Enabled = true;
-            return Button<GridDeleteActionCommand>(dataItem/*, buttonType*/, htmlAttributes, imageHtmlAttributes);
+            return Button<GridDestroyActionCommand>(dataItem/*, buttonType*/, htmlAttributes, imageHtmlAttributes);
         }
 
-        public object DeleteButton(T dataItem/*, GridButtonType buttonType*/, object htmlAttributes)
+        public object DestroyButton(T dataItem/*, GridButtonType buttonType*/, object htmlAttributes)
         {
-            return DeleteButton(dataItem/*, buttonType*/, htmlAttributes, null);
+            return DestroyButton(dataItem/*, buttonType*/, htmlAttributes, null);
         }
 
-        public object DeleteButton(T dataItem/*, GridButtonType buttonType*/)
+        public object DestroyButton(T dataItem/*, GridButtonType buttonType*/)
         {
-            return DeleteButton(dataItem/*, buttonType*/, null);
+            return DestroyButton(dataItem/*, buttonType*/, null);
         }
 
         //TODO: Implement command button types
@@ -1205,7 +1205,7 @@ namespace Kendo.Mvc.UI
                     }
                 }
 
-                if (HasCommandOfType<GridDeleteActionCommand>())
+                if (HasCommandOfType<GridDestroyActionCommand>())
                 {
                     if (!DataSource.Transport.Destroy.HasValue() && Editing.Mode != GridEditMode.InCell)
                     {

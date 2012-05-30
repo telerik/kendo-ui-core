@@ -5,7 +5,7 @@
         columns.Bound(p => p.UnitPrice).Width(140);
         columns.Bound(p => p.UnitsInStock).Width(140);
         columns.Bound(p => p.Discontinued).Width(100);
-        columns.Command(command => command.Delete()).Width(110);
+        columns.Command(command => command.Destroy()).Width(110);
     })
     .ToolBar(toolbar => {
         toolbar.Create();
