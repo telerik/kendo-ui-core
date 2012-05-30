@@ -30,5 +30,23 @@
             get;
             set;
         }
+
+        public string ShipCountry
+        {
+            get;
+            set;
+        }
+
+        public string ShipName
+        {
+            get;
+            set;
+        }
+
+        public int? EmployeeID
+        {
+            get;
+            set;
+        }
     }
 }
