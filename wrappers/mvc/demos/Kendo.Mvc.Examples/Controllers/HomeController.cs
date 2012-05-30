@@ -12,11 +12,11 @@ namespace Kendo.Mvc.Examples.Controllers
             return View();
         }
 
-        public JsonResult GetProducts()
+        public JsonResult GetProducts(string filterText)
         {
             var northwind = new NorthwindDataContext();
 
-            return Json(northwind.Products.Select(product => new ProductDto
+            var products = northwind.Products.Select(product => new ProductDto
             {
                 ProductID = product.ProductID,
                 ProductName = product.ProductName,
@@ -24,7 +24,14 @@ namespace Kendo.Mvc.Examples.Controllers
                 UnitsInStock = product.UnitsInStock ?? 0,
                 UnitsOnOrder = product.UnitsOnOrder ?? 0,
                 Discontinued = product.Discontinued
-            }), JsonRequestBehavior.AllowGet);
+            });
+
+            if (!string.IsNullOrEmpty(filterText))
+            {
+                products = products.Where(p => p.ProductName.Contains(filterText));
+            }
+
+            return Json(products, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GetCustomers()
