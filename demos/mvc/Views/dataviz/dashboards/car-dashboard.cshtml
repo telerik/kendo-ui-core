@@ -69,13 +69,13 @@
                             min: 0,
                             max: 220,
 
-                            minorTicks: {
-                                size: 10
-                            },
-
                             majorTicks: {
                                 width: 1,
                                 size: 14
+                            },
+
+                            minorTicks: {
+                                size: 10
                             },
 
                             minorUnit: 2
@@ -97,26 +97,26 @@
                             min: 0,
                             max: 1,
 
-                            minorUnit: 0.25,
-                            minorTicks: {
-                                size: 3
-                            },
-
                             majorUnit: 0.5,
                             majorTicks: {
                                 width: 2,
                                 size: 6
                             },
 
-                            labels: {
-                                font: "9px Arial,Helvetica,sans-serif"
+                            minorUnit: 0.25,
+                            minorTicks: {
+                                size: 3
                             },
 
                             ranges: [{
                                 from: 0,
                                 to: 0.1,
                                 color: "#c20000"
-                            }]
+                            }],
+
+                            labels: {
+                                font: "9px Arial,Helvetica,sans-serif"
+                            }
                         }
                     });
 
@@ -141,20 +141,20 @@
                                 size: 6
                             },
 
+                            minorUnit: 10,
                             minorTicks: {
                                 size: 3
-                            },
-                            minorUnit: 10,
-
-                            labels: {
-                                font: "9px Arial,Helvetica,sans-serif"
                             },
 
                             ranges: [{
                                 from: 110,
                                 to: 120,
                                 color: "#c20000"
-                            }]
+                            }],
+
+                            labels: {
+                                font: "9px Arial,Helvetica,sans-serif"
+                            }
                         }
                     });
                 }
