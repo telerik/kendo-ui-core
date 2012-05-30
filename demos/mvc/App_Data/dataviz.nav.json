@@ -171,6 +171,7 @@
             "text": "Performance Benchmark",
             "spriteCssClass": "chartIcon",
             "thumbnailUrl": "content/dataviz/dashboards/performance.gif",
+            "packages": [ "!mvc" ],
             "expanded": "true",
             "items": [{
                 "text": "Launch",
@@ -194,7 +195,7 @@
             "spriteCssClass": "chartAreaIcon",
             "thumbnailUrl": "content/dataviz/dashboards/stock.gif",
             "expanded": "true",
-            "packages": [ "!offline" ],
+            "packages": [ "!offline", "!mvc" ],
             "items": [{
                 "text": "Launch",
                 "url": "dashboards/stock-history.html"
