@@ -1,18 +1,9 @@
 namespace Kendo.Mvc.UI
-{
-    using System.Collections.Generic;
-    using System.Linq;
-
-    public class GridSortSettings
+{    
+    public class GridSortSettings : JsonObject
     {
-        private readonly IGrid grid;
-
-        public GridSortSettings(IGrid grid)
+        public GridSortSettings()
         {
-            this.grid = grid;
-            
-            OrderBy = new List<SortDescriptor>();
-
             AllowUnsort = true;
         }
 
@@ -34,10 +25,17 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        public IList<SortDescriptor> OrderBy
+        protected override void Serialize(System.Collections.Generic.IDictionary<string, object> json)
         {
-            get;
-            private set;
+            if (!AllowUnsort)
+            {
+                json["allowUnsort"] = AllowUnsort;                
+            }
+
+            if (SortMode != GridSortMode.SingleColumn)
+            {
+                json["mode"] = "multiple";
+            }
         }
     }
 }

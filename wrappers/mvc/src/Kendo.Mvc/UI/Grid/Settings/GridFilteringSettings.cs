@@ -1,14 +1,7 @@
 namespace Kendo.Mvc.UI
 {
-    using System.Collections.Generic;
-
-    public class GridFilteringSettings
+    public class GridFilteringSettings : JsonObject
     {
-        public GridFilteringSettings()
-        {
-            Filters = new List<CompositeFilterDescriptor>();
-        }
-
         public bool Enabled
         {
             get;
@@ -21,10 +14,12 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        public IList<CompositeFilterDescriptor> Filters
+        protected override void Serialize(System.Collections.Generic.IDictionary<string, object> json)
         {
-            get;
-            private set;
+            if (!ShowOrOption)
+            {
+                json["extra"] = false;
+            }
         }
     }
 }
