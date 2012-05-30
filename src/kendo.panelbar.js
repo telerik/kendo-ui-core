@@ -346,7 +346,8 @@
             .removeAttr("disabled");
         item
             .filter(":not([class*=k-state])")
-            .children("a:focus")
+            .children("a")
+            .filter(":focus")
             .parent()
             .addClass(ACTIVECLASS.substr(1));
         item

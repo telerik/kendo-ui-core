@@ -303,7 +303,8 @@
             .addClass(DISABLEDSTATE)
             .removeAttr("disabled");
         item
-            .children("a:focus")
+            .children("a")
+            .filter(":focus")
             .parent()
             .addClass("k-state-active");
 
