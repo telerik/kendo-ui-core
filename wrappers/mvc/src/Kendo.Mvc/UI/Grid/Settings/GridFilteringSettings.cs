@@ -2,6 +2,11 @@ namespace Kendo.Mvc.UI
 {
     public class GridFilteringSettings : JsonObject
     {
+        public GridFilteringSettings()
+        {
+            ShowOrOption = true;
+        }
+
         public bool Enabled
         {
             get;

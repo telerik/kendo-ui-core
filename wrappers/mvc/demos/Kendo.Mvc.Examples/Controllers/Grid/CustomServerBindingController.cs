@@ -192,7 +192,7 @@ namespace Kendo.Mvc.Examples.Controllers
         public static IQueryable<Order> ApplyFiltering(this IQueryable<Order> data,
             IList<IFilterDescriptor> filterDescriptors)
         {
-            if (filterDescriptors.Any())
+            if (filterDescriptors != null && filterDescriptors.Any())
             {
                 data = data.Where(ExpressionBuilder.Expression<Order>(filterDescriptors));
             }

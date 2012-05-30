@@ -261,6 +261,21 @@
                     "url": "grid/remote-data.html"
                 },
                 {
+                    "text": "Custom remote binding",
+                    "url": "grid/customajaxbinding.html",
+                    "packages": ["mvc", "offline"]
+                },
+                {
+                    "text": "Server binding",
+                    "url": "grid/serverbinding.html",
+                    "packages": ["mvc", "offline"]
+                },
+                {
+                    "text": "Custom server binding",
+                    "url": "grid/customserverbinding.html",
+                    "packages": ["mvc", "offline"]
+                },
+                {
                     "text": "Batch Editing",
                     "url": "grid/editing.html"
                 },
@@ -270,12 +285,18 @@
                 },
                 {
                     "text": "Popup Editing",
-                    "url": "grid/editing-popup.html"
+                    "url": "grid/editing-popup.html",
+                    "packages": ["!mvc"]
                 },
                 {
                     "text": "Editing Custom Editor",
                     "url": "grid/editing-custom.html",
                     "packages": ["!mvc"]
+                },
+                {
+                    "text": "Server Editing",
+                    "url": "grid/serverediting.html",
+                    "packages": ["mvc", "offline"]
                 },
                 {
                     "text": "Virtualization of local data",
@@ -292,20 +313,37 @@
                     "url": "grid/hierarchy.html"
                 },
                 {
+                    "text": "Server Hierarchy",
+                    "url": "grid/serverhierarchy.html",
+                    "packages": ["mvc", "offline"]
+                },
+                {
                     "text": "Detail template",
                     "url": "grid/detailtemplate.html"
                 },
                 {
+                    "text": "Server Detail template",
+                    "url": "grid/serverdetails.html",
+                    "packages": ["mvc", "offline"]
+                },
+                {
                     "text": "Toolbar template",
-                    "url": "grid/toolbar-template.html"
+                    "url": "grid/toolbar-template.html",
+                    "packages": ["!mvc"]
                 },
                 {
                     "text": "Custom command",
-                    "url": "grid/custom-command.html"
+                    "url": "grid/custom-command.html",
+                    "packages": ["!mvc"]
                 },
                 {
                     "text": "Aggregates",
                     "url": "grid/aggregates.html"
+                },
+                {
+                    "text": "Server Aggregates",
+                    "url": "grid/serveraggregates.html",
+                    "packages": ["mvc", "offline"]
                 },
                 {
                     "text": "Sorting",
@@ -332,7 +370,8 @@
                 },
                 {
                     "text": "Events",
-                    "url": "grid/events.html"
+                    "url": "grid/events.html",
+                    "packages": ["!mvc"]
                 },
                 {
                     "text": "API",
