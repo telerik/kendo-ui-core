@@ -109,6 +109,8 @@ namespace Kendo.Mvc.UI.Fluent
             return new GridBoundColumnBuilder<TModel>(column);
         }
 
+        //TODO: ForeignKey column
+        /*
         /// <summary>
         /// Defines a foreign key column.
         /// </summary>
@@ -139,6 +141,7 @@ namespace Kendo.Mvc.UI.Fluent
 
             return new GridBoundColumnBuilder<TModel>(column);
         }
+        */
 
         protected virtual void AutoGenerate(bool shouldGenerate, Action<GridColumnBase<TModel>> columnAction)
         {
