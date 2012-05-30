@@ -58,12 +58,6 @@ namespace Kendo.Mvc.UI
             get;
         }
 
-        bool ReadOnly
-        {
-            get;
-            set;
-        }
-
         string EditorTemplateName
         {
             get; 

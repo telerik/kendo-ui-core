@@ -26,7 +26,6 @@ namespace Kendo.Mvc.UI
         public GridBoundColumn(Grid<TModel> grid, Expression<Func<TModel, TValue>> expression)
             : base(grid)
         {
-
             if (typeof(TModel).IsPlainType() && !expression.IsBindable())
             {
                 throw new InvalidOperationException(TextResource.MemberExpressionRequired);
@@ -64,8 +63,7 @@ namespace Kendo.Mvc.UI
                 Title = Metadata.DisplayName;
                 Format = Metadata.DisplayFormatString;
                 //TODO: Implement Column visibility
-                //Visible = Metadata.ShowForDisplay;
-                ReadOnly = Metadata.IsReadOnly;
+                //Visible = Metadata.ShowForDisplay;              
             }
 
             if (string.IsNullOrEmpty(Title))
@@ -119,19 +117,7 @@ namespace Kendo.Mvc.UI
         {
             get;
             set;
-        }
-
-        public bool ReadOnly
-        {
-            get
-            {
-                return Settings.ReadOnly;
-            }
-            set
-            {
-                Settings.ReadOnly = value;
-            }
-        }
+        }       
 
         public ModelMetadata Metadata
         {
@@ -241,14 +227,9 @@ namespace Kendo.Mvc.UI
             if (Grid.IsSelfInitialized && editorHtml != null)
             {
                 editorHtml = editorHtml.Replace("<", "%3c").Replace(">", "%3e");
-            }
-
-            if (ReadOnly)
-            {
-                json["readonly"] = true;
-            }
-
-            if (!ReadOnly && Grid.Editing.Enabled && Grid.IsClientBinding)
+            }           
+            
+            if (!Grid.DataSource.IsReadOnly(Member) && Grid.Editing.Enabled && Grid.IsClientBinding)
             {               
                 json["editor"] = editorHtml;
             }
@@ -404,7 +385,7 @@ namespace Kendo.Mvc.UI
 
         protected override IGridDataCellBuilder CreateEditBuilderCore(IGridHtmlHelper htmlHelper)
         {
-            if (!ReadOnly)
+            if (!Grid.DataSource.IsReadOnly(Member))
             {
                 var builder = new GridEditorForCellBuilder<TModel, TValue>()
                 {
