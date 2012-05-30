@@ -15,14 +15,14 @@ namespace Kendo.Mvc.Extensions
 
     public static class QueryableExtensions
     {
-        public static GridModel ToGridModel(this IQueryable queryable, int page, int pageSize, string orderBy, string groupBy, string filter)
+        private static GridModel ToGridModel(this IQueryable queryable, int page, int pageSize, string orderBy, string groupBy, string filter)
         {
             GridCommand command = GridCommand.Parse(page, pageSize, orderBy, groupBy, filter);
 
             return queryable.ToGridModel(page, pageSize, command.SortDescriptors, command.FilterDescriptors, command.GroupDescriptors);
         }
 
-        public static GridModel ToGridModel(this IQueryable queryable, GridState state)
+        private static GridModel ToGridModel(this IQueryable queryable, GridState state)
         {
             return queryable.ToGridModel(state.Page, state.Size, state.OrderBy, state.GroupBy, state.Filter);
         }
@@ -125,7 +125,18 @@ namespace Kendo.Mvc.Extensions
                 }
             }
 
-            result.Total = data.Count();            
+            result.Total = data.Count();
+
+            if (!sort.Any() && queryable.Provider.IsEntityFrameworkProvider())
+            {
+                // The Entity Framework provider demands OrderBy before calling Skip.
+                SortDescriptor sortDescriptor = new SortDescriptor
+                {
+                    Member = queryable.ElementType.FirstSortableProperty()
+                };
+                sort.Add(sortDescriptor);
+                temporarySortDescriptors.Add(sortDescriptor);
+            }
 
             if (group.Any())
             {                
@@ -168,7 +179,7 @@ namespace Kendo.Mvc.Extensions
             return result;
         }
 
-        public static GridModel ToGridModel(this IQueryable queryable, int page, int pageSize, IList<SortDescriptor> sortDescriptors, IEnumerable<IFilterDescriptor> filterDescriptors,
+        private static GridModel ToGridModel(this IQueryable queryable, int page, int pageSize, IList<SortDescriptor> sortDescriptors, IEnumerable<IFilterDescriptor> filterDescriptors,
             IEnumerable<GroupDescriptor> groupDescriptors)
         {
             IQueryable data = queryable;
