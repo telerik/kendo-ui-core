@@ -473,6 +473,21 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// Creates a new <see cref="Slider"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Slider()
+        ///             .Name("Slider")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual SliderBuilder<double> Slider()
+        {
+            return new SliderBuilder<double>(new Slider<double>(ViewContext, Initializer, DI.Current.Resolve<ISliderHtmlBuilderFactory>()));
+        }
+
+        /// <summary>
         /// Creates a new <see cref="RangeSlider"/>.
         /// </summary>
         /// <example>
@@ -485,6 +500,21 @@ namespace Kendo.Mvc.UI
         public virtual RangeSliderBuilder<T> RangeSlider<T>() where T : struct, IComparable
         {
             return new RangeSliderBuilder<T>(new RangeSlider<T>(ViewContext, Initializer, DI.Current.Resolve<IRangeSliderHtmlBuilderFactory>()));
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="RangeSlider"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().RangeSlider()
+        ///             .Name("RangeSlider")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual RangeSliderBuilder<double> RangeSlider()
+        {
+            return new RangeSliderBuilder<double>(new RangeSlider<double>(ViewContext, Initializer, DI.Current.Resolve<IRangeSliderHtmlBuilderFactory>()));
         }
 
         /// <summary>

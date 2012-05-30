@@ -5,7 +5,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 <div id="climateCtrl">
-    <%= Html.Kendo().Slider<int>()
+    <%= Html.Kendo().Slider()
             .Name("slider")
             .Min(0)
             .Max(30)
@@ -18,7 +18,7 @@
             .HtmlAttributes(new { @class = "temperature" })
       %>
 
-     <%= Html.Kendo().RangeSlider<int>()
+     <%= Html.Kendo().RangeSlider()
              .Name("rangeslider")
              .Min(0)
              .Max(30)

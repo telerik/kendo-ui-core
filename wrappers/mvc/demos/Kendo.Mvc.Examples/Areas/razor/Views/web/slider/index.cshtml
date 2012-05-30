@@ -1,5 +1,5 @@
 <div id="wrapper">
-    @(Html.Kendo().Slider<int>()
+    @(Html.Kendo().Slider()
             .Name("slider")
             .IncreaseButtonTitle("Right")
             .DecreaseButtonTitle("Left")
@@ -9,7 +9,7 @@
             .LargeStep(5)
             .HtmlAttributes(new { @class = "balSlider" }))
     <div id="equalizer">
-        @(Html.Kendo().Slider<int>()
+        @(Html.Kendo().Slider()
                 .Name("eqSlider1")
                 .Orientation(SliderOrientation.Vertical)
                 .Min(-20)
@@ -20,7 +20,7 @@
                 .Value(10)
                 .HtmlAttributes(new { @class = "eqSlider" }))
 
-        @(Html.Kendo().Slider<int>()
+        @(Html.Kendo().Slider()
                 .Name("eqSlider2")
                 .Orientation(SliderOrientation.Vertical)
                 .Min(-20)
@@ -31,7 +31,7 @@
                 .Value(5)
                 .HtmlAttributes(new { @class = "eqSlider" }))
 
-        @(Html.Kendo().Slider<int>()
+        @(Html.Kendo().Slider()
                 .Name("eqSlider3")
                 .Orientation(SliderOrientation.Vertical)
                 .Min(-20)
@@ -42,7 +42,7 @@
                 .Value(0)
                 .HtmlAttributes(new { @class = "eqSlider" }))
 
-        @(Html.Kendo().Slider<int>()
+        @(Html.Kendo().Slider()
                 .Name("eqSlider4")
                 .Orientation(SliderOrientation.Vertical)
                 .Min(-20)
@@ -53,7 +53,7 @@
                 .Value(10)
                 .HtmlAttributes(new { @class = "eqSlider" }))
 
-        @(Html.Kendo().Slider<int>()
+        @(Html.Kendo().Slider()
                 .Name("eqSlider5")
                 .Orientation(SliderOrientation.Vertical)
                 .Min(-20)
