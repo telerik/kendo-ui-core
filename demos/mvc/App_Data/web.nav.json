@@ -258,7 +258,13 @@
                 },
                 {
                     "text": "Binding to remote data",
-                    "url": "grid/remote-data.html"
+                    "url": "grid/remote-data.html",
+                    "packages": ["online"]
+                },
+                {
+                    "text": "Ajax binding",
+                    "url": "grid/ajaxbinding.html",
+                    "packages": ["mvc", "offline"]
                 },
                 {
                     "text": "Custom remote binding",

@@ -45,6 +45,11 @@ namespace Kendo.Mvc.Examples.Controllers
             return View();
         }
 
+        public ActionResult Remote_Data()
+        {
+            return View("AjaxBinding");
+        }
+
         public ActionResult Api()
         {
             return View();
