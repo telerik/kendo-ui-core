@@ -546,6 +546,14 @@
     <Content Include="Areas\aspx\Views\web\tabstrip\events.aspx" />
     <Content Include="Areas\aspx\Views\web\tabstrip\images.aspx" />
     <Content Include="Areas\aspx\Views\web\tabstrip\index.aspx" />
+    <Content Include="Areas\aspx\Views\web\splitter\ajax.aspx" />
+    <Content Include="Areas\aspx\Views\web\splitter\api.aspx" />
+    <Content Include="Areas\aspx\Views\web\splitter\events.aspx" />
+    <Content Include="Areas\aspx\Views\web\splitter\index.aspx" />
+    <Content Include="Areas\aspx\Views\web\treeview\dragdrop.aspx" />
+    <Content Include="Areas\aspx\Views\web\treeview\events.aspx" />
+    <Content Include="Areas\aspx\Views\web\treeview\images.aspx" />
+    <Content Include="Areas\aspx\Views\web\treeview\index.aspx" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
