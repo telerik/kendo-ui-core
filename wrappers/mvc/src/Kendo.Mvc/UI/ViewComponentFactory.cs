@@ -377,9 +377,9 @@ namespace Kendo.Mvc.UI
         /// %&gt;
         /// </code>
         /// </example>
-        public virtual GaugeLinearBuilder LinearGauge()
+        public virtual LinearGaugeBuilder LinearGauge()
         {
-            return new GaugeLinearBuilder(new LinearGauge(ViewContext, Initializer, UrlGenerator));
+            return new LinearGaugeBuilder(new LinearGauge(ViewContext, Initializer, UrlGenerator));
         }
 
         /// <summary>
@@ -392,9 +392,9 @@ namespace Kendo.Mvc.UI
         /// %&gt;
         /// </code>
         /// </example>
-        public virtual GaugeRadialBuilder RadialGauge()
+        public virtual RadialGaugeBuilder RadialGauge()
         {
-            return new GaugeRadialBuilder(new RadialGauge(ViewContext, Initializer, UrlGenerator));
+            return new RadialGaugeBuilder(new RadialGauge(ViewContext, Initializer, UrlGenerator));
         }
 
         /// <summary>
@@ -1107,6 +1107,86 @@ namespace Kendo.Mvc.UI
                     .Values((TValue[])ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model)
                     .Min(minimum.Value)
                     .Max(maximum.Value);
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="LinearGauge"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().LinearGaugeFor(m=>m.Property) %&gt;
+        /// </code>
+        /// </example>
+        public virtual LinearGaugeBuilder LinearGaugeFor<TValue>(Expression<Func<TModel, TValue>> expression)
+            where TValue : struct, IComparable
+        {
+            var value = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
+
+            return LinearGauge()
+                    .Name(GetName(expression))
+                    .Pointer(pointer => pointer.Value(
+                        Convert.ToDouble(value)
+                    ));
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="LinearGauge"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().LinearGaugeFor(m=>m.Property) %&gt;
+        /// </code>
+        /// </example>
+        public virtual LinearGaugeBuilder LinearGaugeFor<TValue>(Expression<Func<TModel, Nullable<TValue>>> expression)
+            where TValue : struct, IComparable
+        {
+            var value = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
+
+            return LinearGauge()
+                    .Name(GetName(expression))
+                    .Pointer(pointer => pointer.Value(
+                        Convert.ToDouble(value)
+                    ));
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="RadialGauge"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().RadialGaugeFor(m=>m.Property) %&gt;
+        /// </code>
+        /// </example>
+        public virtual RadialGaugeBuilder RadialGaugeFor<TValue>(Expression<Func<TModel, TValue>> expression)
+            where TValue : struct, IComparable
+        {
+            var value = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
+
+            return RadialGauge()
+                    .Name(GetName(expression))
+                    .Pointer(pointer => pointer.Value(
+                        Convert.ToDouble(value)
+                    ));
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="RadialGauge"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().RadialGaugeFor(m=>m.Property) %&gt;
+        /// </code>
+        /// </example>
+        public virtual RadialGaugeBuilder RadialGaugeFor<TValue>(Expression<Func<TModel, Nullable<TValue>>> expression)
+            where TValue : struct, IComparable
+        {
+            var value = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
+
+            return RadialGauge()
+                    .Name(GetName(expression))
+                    .Pointer(pointer => pointer.Value(
+                        Convert.ToDouble(value)
+                    ));
         }
 
         private string GetName(LambdaExpression expression)
