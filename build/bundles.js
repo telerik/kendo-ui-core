@@ -61,7 +61,7 @@ var mvcWrappersBundle = {
     licenses: productionLicenses,
     skipExamples: true,
     skipPackage: true,
-    eula: "eula"
+    eula: "mvc-beta-eula"
 };
 
 var bundles = [{
