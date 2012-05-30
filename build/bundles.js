@@ -277,13 +277,13 @@ function deployExamples(root, bundle) {
                     viewName = example.url.replace(".html", ".cshtml"),
                     fileName = path.join(viewsRoot, suite, viewName),
                     outputName = path.join(suiteDest, example.url),
-                    exampleBody = readText(fileName);
+                    exampleBody;
 
                     if (!shouldInclude(example)) {
                         continue;
                     }
 
-                    exampleBody = exampleBody
+                    exampleBody = readText(fileName)
                         .replace(/@section \w+ {(.|\n|\r)+?}/gi, "")
                         .replace(/@{(.|\n|\r)+?}/gi, "")
                         .replace(/@@/gi, "");
