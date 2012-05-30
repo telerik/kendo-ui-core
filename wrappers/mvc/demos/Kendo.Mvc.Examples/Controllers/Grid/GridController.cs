@@ -60,6 +60,11 @@ namespace Kendo.Mvc.Examples.Controllers
             return View();
         }
 
+        public ActionResult DetailTemplate()
+        {
+            return View();
+        }
+
         public ActionResult Products_Read([DataSourceRequest] DataSourceRequest request)
         {
             return Json(GetProducts().ToDataSourceResult(request));
@@ -113,7 +118,9 @@ namespace Kendo.Mvc.Examples.Controllers
                 Country = employee.Country,
                 City = employee.City,
                 Notes = employee.Notes,
-                Title = employee.Title
+                Title = employee.Title,
+                Address = employee.Address,
+                HomePhone = employee.HomePhone
             });
         }
     }

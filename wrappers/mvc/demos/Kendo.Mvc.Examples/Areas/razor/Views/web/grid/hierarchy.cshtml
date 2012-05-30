@@ -1,4 +1,4 @@
-@{ Html.Kendo().Grid<EmployeeDto>()
+@(Html.Kendo().Grid<EmployeeDto>()
     .Name("Employees")
     .Columns(columns =>
     {
@@ -32,6 +32,12 @@
         .Read(read => read.Action("HierarchyBinding_Employees", "Grid"))
         .PageSize(5)
     )    
-    .Sortable()
-    .Render();
-} 
+    .Sortable()        
+    .Events(events => events.DataBound("dataBound"))
+)
+
+<script>
+    function dataBound() {
+        this.expandRow(this.tbody.find("tr.k-master-row").first());
+    }
+</script>
