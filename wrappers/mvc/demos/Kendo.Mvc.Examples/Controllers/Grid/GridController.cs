@@ -50,6 +50,11 @@ namespace Kendo.Mvc.Examples.Controllers
             return View();
         }
 
+        public ActionResult Selection()
+        {
+            return View();
+        }
+
         public ActionResult Products_Read([DataSourceRequest] DataSourceRequest request)
         {
             return Json(GetProductDto().ToDataSourceResult(request));
