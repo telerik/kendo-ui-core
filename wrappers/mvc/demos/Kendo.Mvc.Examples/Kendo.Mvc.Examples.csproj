@@ -138,7 +138,7 @@
     <Compile Include="Controllers\DataViz\Linear_Gauge\Scale_OptoinsController.cs" />
     <Compile Include="Controllers\Grid\EditingInlineController.cs" />
     <Compile Include="Controllers\Grid\EditingController.cs" />
-    <Compile Include="Controllers\DateTimePicker\IndexController.cs" />    
+    <Compile Include="Controllers\DateTimePicker\IndexController.cs" />
     <Compile Include="Controllers\Grid\HierarchyController.cs" />
     <Compile Include="Controllers\Grid\ServerEditingController.cs" />
     <Compile Include="Controllers\Grid\ServerBindingController.cs" />
@@ -479,7 +479,7 @@
     <Content Include="Areas\aspx\Views\web\calendar\events.aspx" />
     <Content Include="Areas\aspx\Views\web\calendar\index.aspx" />
     <Content Include="Areas\aspx\Views\web\calendar\template.aspx" />
-    <Content Include="Areas\razor\Views\web\grid\localdata.cshtml" />
+    <Content Include="Areas\razor\Views\web\grid\local_data.cshtml" />
     <Content Include="Areas\razor\Views\web\menu\images.cshtml" />
     <Content Include="Areas\razor\Views\web\menu\orientation.cshtml" />
     <Content Include="Areas\razor\Views\web\menu\events.cshtml" />

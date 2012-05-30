@@ -15,7 +15,7 @@ namespace Kendo.Mvc.Examples.Controllers
             return View(GetProductDto());
         }
 
-        public ActionResult LocalData()
+        public ActionResult Local_Data()
         {
             return View(GetProductDto());
         }
