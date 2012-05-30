@@ -2173,7 +2173,12 @@
     function measureText(text, style, rotation) {
         var styleHash = getHash(style),
             cacheKey = text + styleHash + rotation,
-            cachedResult = measureText.cache[cacheKey];
+            cachedResult = measureText.cache[cacheKey],
+            size = {
+                width: 0,
+                height: 0,
+                baseline: 0
+            };
 
         if (cachedResult) {
             return cachedResult;
@@ -2195,11 +2200,13 @@
         measureBox.innerHTML = text;
         measureBox.appendChild(baselineMarker);
 
-        var size = {
+        if ((text + "").length) {
+            size = {
                 width: measureBox.offsetWidth - BASELINE_MARKER_SIZE,
                 height: measureBox.offsetHeight,
                 baseline: baselineMarker.offsetTop + BASELINE_MARKER_SIZE
             };
+        }
 
         if (rotation) {
             var width = size.width,
