@@ -596,9 +596,7 @@ namespace Kendo.Mvc.UI.Fluent
         {
             Guard.IsNotNull(pagerAction, "pagerAction");
 
-            Component.Paging.Enabled = true;
-
-            Component.DataSource.PageSize = 10;
+            Component.Paging.Enabled = true;            
 
             pagerAction(new GridPagerSettingsBuilder(Component.Paging));
 
