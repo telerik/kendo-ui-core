@@ -8,7 +8,6 @@ namespace Kendo.Mvc.UI
     {
         public Effects(string name)
         {
-            Guard.IsNotNullOrEmpty(name, "name");
 
             Name = name;
 

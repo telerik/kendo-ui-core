@@ -53,7 +53,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public virtual GridScrollSettingsBuilder Height(int pixelHeight)
         {
-            Guard.IsNotNegative(pixelHeight, "pixelHeight");
 
             settings.Height = pixelHeight + "px";
 

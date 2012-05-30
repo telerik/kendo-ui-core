@@ -102,7 +102,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public GaugeRadialPointerBuilder<T> Cap(Action<GaugeRadialCapBuilder> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             configurator(new GaugeRadialCapBuilder(pointer.Cap));
 

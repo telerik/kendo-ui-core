@@ -46,7 +46,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public SplitterBuilder Panes(Action<SplitterPaneFactory> configurePanes)
         {
-            Guard.IsNotNull(configurePanes, "configurePanes");
 
             var paneFactory = new SplitterPaneFactory(Component, Component.ViewContext);
 

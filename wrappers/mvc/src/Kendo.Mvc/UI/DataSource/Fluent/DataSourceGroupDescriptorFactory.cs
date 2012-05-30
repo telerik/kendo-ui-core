@@ -64,8 +64,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         private DataSourceGroupDescriptorBuilder<TModel> AddDescriptor(string memberName, Type memberType, ListSortDirection sortDirection)
         {
-            Guard.IsNotNullOrEmpty(memberName, "memberName");
-            Guard.IsNotNull(memberType, "memberType");
 
             var descriptor = new GroupDescriptor();
             descriptor.Member = memberName;

@@ -16,8 +16,6 @@ namespace Kendo.Mvc
 
         public string Generate(RequestContext requestContext, INavigatable navigationItem, RouteValueDictionary routeValues)
         {
-            Guard.IsNotNull(requestContext, "requestContext");
-            Guard.IsNotNull(navigationItem, "navigationItem");
 
             UrlHelper urlHelper = new UrlHelper(requestContext);
             string generatedUrl = null;

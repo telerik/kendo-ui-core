@@ -23,8 +23,6 @@ namespace Kendo.Mvc.UI
         public ChartScatterSeries(Chart<TModel> chart, Expression<Func<TModel, TXValue>> xValueExpression, Expression<Func<TModel, TYValue>> yValueExpression)
             : base(chart)
         {
-            Guard.IsNotNull(xValueExpression, "xValueExpression");
-            Guard.IsNotNull(yValueExpression, "yValueExpression");
 
             if (typeof(TModel).IsPlainType() && !(xValueExpression.IsBindable() || yValueExpression.IsBindable()))
             {
@@ -45,7 +43,6 @@ namespace Kendo.Mvc.UI
         public ChartScatterSeries(Chart<TModel> chart, IEnumerable data)
             : base(chart)
         {
-            Guard.IsNotNull(data, "data");
 
             Data = data;
             Initialize();

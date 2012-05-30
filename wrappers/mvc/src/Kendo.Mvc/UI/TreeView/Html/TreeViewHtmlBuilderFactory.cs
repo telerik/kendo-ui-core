@@ -9,7 +9,6 @@ namespace Kendo.Mvc.UI
 
         public TreeViewHtmlBuilderFactory(IActionMethodCache actionMethodCache)
         {
-            Guard.IsNotNull(actionMethodCache, "actionMethodCache");
 
             this.actionMethodCache = actionMethodCache;
         }

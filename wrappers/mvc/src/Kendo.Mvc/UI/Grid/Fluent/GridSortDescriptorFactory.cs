@@ -14,7 +14,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public DataSourceSortDescriptorFactory(IList<SortDescriptor> descriptors)
         {
-            Guard.IsNotNull(descriptors, "descriptors");
 
             this.descriptors = descriptors;
         }

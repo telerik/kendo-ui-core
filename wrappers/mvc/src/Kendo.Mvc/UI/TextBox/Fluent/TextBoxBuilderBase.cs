@@ -37,7 +37,6 @@ namespace KendoUI.Mvc.UI
         /// </summary>
         public TBuilder IncrementStep(T step)
         {
-            Guard.IsNotNull(step, "step");
 
             Component.IncrementStep = step;
 
@@ -69,7 +68,6 @@ namespace KendoUI.Mvc.UI
         /// </summary>
         public TBuilder NumberGroupSize(int size)
         {
-            Guard.IsNotNull(size, "size");
 
             Component.NumberGroupSize = size;
 
@@ -81,7 +79,6 @@ namespace KendoUI.Mvc.UI
         /// </summary>
         public TBuilder NumberGroupSeparator(string separator)
         {
-            Guard.IsNotNull(separator, "separator");
 
             Component.NumberGroupSeparator = separator;
 
@@ -93,7 +90,6 @@ namespace KendoUI.Mvc.UI
         /// </summary>
         public TBuilder NegativePatternIndex(int negativePatternIndex)
         {
-            Guard.IsNotNull(negativePatternIndex, "negativePatternIndex");
 
             Component.NegativePatternIndex = negativePatternIndex;
 
@@ -127,7 +123,6 @@ namespace KendoUI.Mvc.UI
         /// </summary>
         public TBuilder ButtonTitleUp(string buttonTileUp)
         {
-            Guard.IsNotNullOrEmpty(buttonTileUp, "buttonTileUp");
 
             Component.ButtonTitleUp = buttonTileUp;
 
@@ -139,7 +134,6 @@ namespace KendoUI.Mvc.UI
         /// </summary>
         public TBuilder ButtonTitleDown(string buttonTileDown)
         {
-            Guard.IsNotNullOrEmpty(buttonTileDown, "buttonTileDown");
 
             Component.ButtonTitleDown = buttonTileDown;
 
@@ -162,7 +156,6 @@ namespace KendoUI.Mvc.UI
         /// </example>
         public TBuilder ClientEvents(Action<TextBoxBaseClientEventsBuilder> clientEventsAction)
         {
-            Guard.IsNotNull(clientEventsAction, "clientEventsAction");
 
             clientEventsAction(new TextBoxBaseClientEventsBuilder(Component.ClientEvents, Component.ViewContext));
 
@@ -184,7 +177,6 @@ namespace KendoUI.Mvc.UI
         /// <param name="attributes">The HTML attributes.</param>
         public TBuilder InputHtmlAttributes(IDictionary<string, object> attributes)
         {
-            Guard.IsNotNull(attributes, "attributes");
 
             Component.InputHtmlAttributes.Clear();
             Component.InputHtmlAttributes.Merge(attributes);

@@ -30,7 +30,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         public NumericTextBoxBuilder<T> Step(T step)
         {
-            Guard.IsNotNull(step, "step");
 
             Component.Step = step;
 
@@ -95,7 +94,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public NumericTextBoxBuilder<T> Events(Action<NumericTextBoxEventBuilder> EventsAction)
         {
-            Guard.IsNotNull(EventsAction, "EventsAction");
 
             EventsAction(new NumericTextBoxEventBuilder(Component.Events));
 
@@ -121,7 +119,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <returns></returns>
         public NumericTextBoxBuilder<T> Format(string format)
         {
-            Guard.IsNotNullOrEmpty(format, "format");
 
             Component.Format = format;
 
@@ -137,7 +134,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public NumericTextBoxBuilder<T> Decimals(int decimals)
         {
-            Guard.IsNotNegative(decimals, "decimals");
 
             Component.Decimals = decimals;
 

@@ -39,7 +39,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public SplitterPaneBuilder Size(string size)
         {
-            Guard.IsNotNullOrEmpty(size, "size");
 
             if (!sizeValueRegex.IsMatch(size))
             {
@@ -68,7 +67,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public SplitterPaneBuilder MinSize(string size)
         {
-            Guard.IsNotNullOrEmpty(size, "size");
 
             if (!sizeValueRegex.IsMatch(size))
             {
@@ -97,7 +95,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public SplitterPaneBuilder MaxSize(string size)
         {
-            Guard.IsNotNullOrEmpty(size, "size");
 
             if (!sizeValueRegex.IsMatch(size))
             {
@@ -223,7 +220,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="attributes">The attributes.</param>
         public SplitterPaneBuilder HtmlAttributes(IDictionary<string, object> attributes)
         {
-            Guard.IsNotNull(attributes, "attributes");
 
             pane.HtmlAttributes.Clear();
             pane.HtmlAttributes.Merge(attributes);
@@ -250,7 +246,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </code>        
         public SplitterPaneBuilder Content(Action content)
         {
-            Guard.IsNotNull(content, "Content");
 
             pane.Template.Content = content;
 
@@ -273,7 +268,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </code>        
         public SplitterPaneBuilder Content(Func<object, object> content)
         {
-            Guard.IsNotNull(content, "Content");
 
             pane.Template.InlineTemplate = content;
 
@@ -296,7 +290,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </code>        
         public SplitterPaneBuilder Content(string content)
         {
-            Guard.IsNotNull(content, "Content");
 
             pane.Template.Html = content;
 

@@ -47,7 +47,6 @@ namespace Kendo.Mvc.UI
             }
             set
             {
-                Guard.IsNotNegative(value, "value");
 
                 total = value;
             }

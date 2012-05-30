@@ -17,7 +17,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="container">The container.</param>
         public ChartValueAxisFactory(Chart<TModel> container, IList<IChartValueAxis> axes)
         {
-            Guard.IsNotNull(container, "container");
 
             Container = container;
             Axes = axes;

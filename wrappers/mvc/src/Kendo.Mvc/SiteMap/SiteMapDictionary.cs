@@ -28,7 +28,6 @@ namespace Kendo.Mvc
             }
             set
             {
-                Guard.IsNotNull(value, "value");
 
                 defaultSiteMapFactory = value;
             }
@@ -141,8 +140,6 @@ namespace Kendo.Mvc
         /// <returns></returns>
         public SiteMapDictionary Register<TSiteMap>(string name, Action<TSiteMap> configure) where TSiteMap : SiteMapBase, new()
         {
-            Guard.IsNotNullOrEmpty(name, "name");
-            Guard.IsNotNull(configure, "configure");
 
             TSiteMap siteMap = new TSiteMap();
             configure(siteMap);

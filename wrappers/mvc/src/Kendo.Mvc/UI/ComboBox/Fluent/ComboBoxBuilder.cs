@@ -27,7 +27,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public ComboBoxBuilder Animation(Action<PopupAnimationBuilder> animationAction)
         {
-            Guard.IsNotNull(animationAction, "animationAction");
 
             animationAction(new PopupAnimationBuilder(Component.Animation));
 
@@ -78,7 +77,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public ComboBoxBuilder Delay(int delay)
         {
-            Guard.IsNotNegative(delay, "delay");
 
             Component.Delay = delay;
 
@@ -126,7 +124,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public ComboBoxBuilder IgnoreCase(bool ignoreCase)
         {
-            Guard.IsNotNull(ignoreCase, "ignoreCase");
 
             Component.IgnoreCase = ignoreCase;
 
@@ -135,7 +132,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public ComboBoxBuilder Height(int height)
         {
-            Guard.IsNotNegative(height, "height");
 
             Component.Height = height;
 
@@ -162,7 +158,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public ComboBoxBuilder MinLength(int length)
         {
-            Guard.IsNotNegative(length, "length");
 
             Component.MinLength = length;
 
@@ -185,7 +180,6 @@ namespace Kendo.Mvc.UI.Fluent
         {
             if (index != -1)
             {
-                Guard.IsNotNegative(index, "index");
             }
 
             Component.SelectedIndex = index;
@@ -209,7 +203,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public ComboBoxBuilder Template(string template)
         {
-            Guard.IsNotNullOrEmpty(template, "template");
 
             Component.Template = template;
 

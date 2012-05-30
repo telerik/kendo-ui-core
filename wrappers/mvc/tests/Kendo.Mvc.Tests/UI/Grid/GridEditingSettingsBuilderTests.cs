@@ -27,12 +27,6 @@ namespace Kendo.Mvc.UI.Fluent.Tests
             settings.TemplateName.ShouldEqual(templateName);
         }
 
-        [Fact]
-        public void Should_throw_if_editor_template_name_is_empty()
-        {
-            Assert.Throws<ArgumentException>(() => builder.TemplateName(string.Empty));
-        }
-
         //TODO: Implement edit form attributes
         //[Fact]
         //public void FormHtmlAttributes_sets_the_html_attributes_of_the_editing_settings()

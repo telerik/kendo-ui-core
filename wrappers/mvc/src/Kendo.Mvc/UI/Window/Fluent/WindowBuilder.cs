@@ -20,7 +20,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         public WindowBuilder Title(string title)
         {
-            Guard.IsNotNullOrEmpty(title, "title");
 
             Component.Title = title;
 
@@ -46,7 +45,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public WindowBuilder Content(Action value)
         {
-            Guard.IsNotNull(value, "value");
 
             Component.Template.Content = value;
 
@@ -67,7 +65,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <returns></returns>
         public WindowBuilder Content(Func<object, object> value)
         {
-            Guard.IsNotNull(value, "value");
 
             Component.Template.InlineTemplate = value;
 
@@ -86,7 +83,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </code>        
         public WindowBuilder Content(string value)
         {
-            Guard.IsNotNull(value, "value");
 
             Component.Template.Html = value;
 
@@ -189,7 +185,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public WindowBuilder Events(Action<WindowEventBuilder> clientEventsAction)
         {
-            Guard.IsNotNull(clientEventsAction, "clientEventsAction");
 
             clientEventsAction(new WindowEventBuilder(Component.Events));
 
@@ -230,7 +225,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public WindowBuilder Resizable(Action<WindowResizingSettingsBuilder> resizingSettingsAction)
         {
-            Guard.IsNotNull(resizingSettingsAction, "resizingSettingsAction");
 
             Component.ResizingSettings.Enabled = true;
 
@@ -255,7 +249,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public WindowBuilder Actions(Action<WindowActionsBuilder> actionsBuilderAction)
         {
-            Guard.IsNotNull(actionsBuilderAction, "buttonsBuilderAction");
 
             Component.Actions.Container.Clear();
 
@@ -269,8 +262,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         public WindowBuilder Width(int width)
         {
-            Guard.IsNotNull(width, "width");
-            Guard.IsNotNegative(width, "width");
 
             Component.Width = width;
 
@@ -283,8 +274,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         public WindowBuilder Height(int height)
         {
-            Guard.IsNotNull(height, "height");
-            Guard.IsNotNegative(height, "height");
 
             Component.Height = height;
 
@@ -296,7 +285,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         public WindowBuilder Visible(bool visible)
         {
-            Guard.IsNotNull(visible, "visible");
 
             Component.Visible = visible;
 
@@ -310,7 +298,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         public WindowBuilder Scrollable(bool scrollable)
         {
-            Guard.IsNotNull(scrollable, "scrollable");
 
             Component.Scrollable = scrollable;
 
@@ -348,7 +335,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public WindowBuilder Animation(Action<PopupAnimationBuilder> animationAction)
         {
-            Guard.IsNotNull(animationAction, "animationAction");
 
             animationAction(new PopupAnimationBuilder(Component.Animation));
 
@@ -360,7 +346,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         public WindowBuilder Modal(bool modal)
         {
-            Guard.IsNotNull(modal, "modal");
 
             Component.Modal = modal;
 
@@ -380,7 +365,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         public WindowBuilder Draggable(bool value)
         {
-            Guard.IsNotNull(value, "value");
 
             Component.Draggable = value;
 

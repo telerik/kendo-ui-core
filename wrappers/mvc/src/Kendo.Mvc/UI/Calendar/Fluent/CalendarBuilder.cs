@@ -80,7 +80,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public CalendarBuilder MonthTemplate(Action<MonthTemplateBuilder> monthTemplateAction)
         {
-            Guard.IsNotNull(monthTemplateAction, "clientEventsAction");
 
             monthTemplateAction(new MonthTemplateBuilder(Component.MonthTemplate));
 

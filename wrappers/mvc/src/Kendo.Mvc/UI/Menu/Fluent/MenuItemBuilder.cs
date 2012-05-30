@@ -20,8 +20,6 @@ namespace Kendo.Mvc.UI.Fluent
         public MenuItemBuilder(MenuItem item, ViewContext viewContext)
             : base(item, viewContext)
         {
-            Guard.IsNotNull(item, "item");
-            Guard.IsNotNull(viewContext, "viewContext");
 
             this.item = item;
             this.viewContext = viewContext;
@@ -48,7 +46,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public virtual MenuItemBuilder Items(Action<MenuItemFactory> addAction)
         {
-            Guard.IsNotNull(addAction, "addAction");
 
             MenuItemFactory factory = new MenuItemFactory(item, viewContext);
 
@@ -75,7 +72,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public virtual MenuItemBuilder Items(IEnumerable<MenuItem> items)
         {
-            Guard.IsNotNull(items, "items");
 
             item.Items.Clear();
 

@@ -62,8 +62,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         private DataSourceModelFieldDescriptorBuilder<TValue> AddFieldDescriptor<TValue>(string memberName, Type memberType)
         {
-            Guard.IsNotNullOrEmpty(memberName, "memberName");
-            Guard.IsNotNull(memberType, "memberType");
 
             var descriptor = model.AddDescriptor(memberName);
             

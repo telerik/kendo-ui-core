@@ -16,7 +16,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="item">The scale ranges.</param>
         public GaugeScaleRangesBuilder(GaugeScaleRanges item)
         {
-            Guard.IsNotNull(item, "item");
 
             this.item = item;
         }

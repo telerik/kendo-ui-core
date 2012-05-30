@@ -123,7 +123,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public ChartBarSeriesBuilder<T> Labels(Action<ChartBarLabelsBuilder> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             configurator(new ChartBarLabelsBuilder(Series.Labels));
 

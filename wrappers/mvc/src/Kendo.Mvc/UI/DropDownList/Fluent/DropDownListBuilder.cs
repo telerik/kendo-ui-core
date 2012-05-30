@@ -22,7 +22,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public DropDownListBuilder Animation(Action<PopupAnimationBuilder> animationAction)
         {
-            Guard.IsNotNull(animationAction, "animationAction");
 
             animationAction(new PopupAnimationBuilder(Component.Animation));
 
@@ -73,7 +72,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public DropDownListBuilder Delay(int delay)
         {
-            Guard.IsNotNegative(delay, "delay");
 
             Component.Delay = delay;
 
@@ -103,7 +101,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public DropDownListBuilder IgnoreCase(bool ignoreCase)
         {
-            Guard.IsNotNull(ignoreCase, "ignoreCase");
 
             Component.IgnoreCase = ignoreCase;
 
@@ -112,7 +109,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public DropDownListBuilder Height(int height)
         {
-            Guard.IsNotNegative(height, "height");
 
             Component.Height = height;
 
@@ -135,7 +131,6 @@ namespace Kendo.Mvc.UI.Fluent
         {
             if (index != -1)
             {
-                Guard.IsNotNegative(index, "index");
             }
 
             Component.SelectedIndex = index;
@@ -152,7 +147,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public DropDownListBuilder Template(string template)
         {
-            Guard.IsNotNullOrEmpty(template, "template");
 
             Component.Template = template;
 

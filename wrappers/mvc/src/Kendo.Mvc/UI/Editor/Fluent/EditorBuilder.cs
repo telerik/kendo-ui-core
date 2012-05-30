@@ -28,7 +28,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </code>        
         public EditorBuilder Value(Action value)
         {
-            Guard.IsNotNull(value, "value");
 
             Component.Template.Content = value;
 
@@ -37,7 +36,6 @@ namespace Kendo.Mvc.UI.Fluent
         
         public EditorBuilder Value(Func<object, object> value)
         {
-            Guard.IsNotNull(value, "value");
 
             Component.Template.InlineTemplate = value;
 
@@ -63,7 +61,6 @@ namespace Kendo.Mvc.UI.Fluent
         
         public EditorBuilder Events(Action<EditorEventBuilder> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             configurator(new EditorEventBuilder(Component.Events));
 
@@ -72,7 +69,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public EditorBuilder Tools(Action<EditorToolFactory> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             configurator(new EditorToolFactory(Component.DefaultToolGroup));
 
@@ -91,7 +87,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </code>   
         public EditorBuilder Encode(bool value)
         {
-            Guard.IsNotNull(value, "value");
 
             Component.Encode = value;
 

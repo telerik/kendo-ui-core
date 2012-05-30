@@ -27,7 +27,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public DatePickerBuilder Depth(CalendarView depth)
         {
-            Guard.IsNotNull(depth, "depth");
 
             Component.Depth = depth.ToString().ToLower();
 
@@ -36,7 +35,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public DatePickerBuilder Start(CalendarView start)
         {
-            Guard.IsNotNull(start, "start");
 
             Component.Start = start.ToString().ToLower();
 
@@ -52,7 +50,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public DatePickerBuilder MonthTemplate(Action<MonthTemplateBuilder> monthTemplateAction)
         {
-            Guard.IsNotNull(monthTemplateAction, "clientEventsAction");
 
             monthTemplateAction(new MonthTemplateBuilder(Component.MonthTemplate));
 
@@ -64,7 +61,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         public DatePickerBuilder Min(string date)
         {
-            Guard.IsNotNullOrEmpty(date, "date");
 
             DateTime parsedDate;
 
@@ -84,7 +80,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         public DatePickerBuilder Max(string date)
         {
-            Guard.IsNotNullOrEmpty(date, "date");
 
             DateTime parsedDate;
 

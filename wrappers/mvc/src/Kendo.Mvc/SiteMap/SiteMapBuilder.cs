@@ -17,7 +17,6 @@ namespace Kendo.Mvc
         /// <param name="siteMap">The site map.</param>
         public SiteMapBuilder(SiteMapBase siteMap)
         {
-            Guard.IsNotNull(siteMap, "siteMap");
 
             this.siteMap = siteMap;
             siteMapNodeBuilder = new SiteMapNodeBuilder(this.siteMap.RootNode);
@@ -42,7 +41,6 @@ namespace Kendo.Mvc
         /// <returns>The result of the conversion.</returns>
         public static implicit operator SiteMapBase(SiteMapBuilder builder)
         {
-            Guard.IsNotNull(builder, "builder");
 
             return builder.ToSiteMap();
         }

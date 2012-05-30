@@ -9,7 +9,6 @@ namespace Kendo.Mvc.Extensions
     {
         public static void AddAttributes(this HtmlTextWriter writer, IDictionary<string, object> attributes)
         {
-            Guard.IsNotNull(writer, "writer");
 
             if (attributes.Any())
             {

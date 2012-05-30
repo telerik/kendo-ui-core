@@ -27,7 +27,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public AutoCompleteBuilder Animation(Action<PopupAnimationBuilder> animationAction)
         {
-            Guard.IsNotNull(animationAction, "animationAction");
 
             animationAction(new PopupAnimationBuilder(Component.Animation));
 
@@ -64,7 +63,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public AutoCompleteBuilder Delay(int delay)
         {
-            Guard.IsNotNegative(delay, "delay");
 
             Component.Delay = delay;
 
@@ -112,7 +110,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public AutoCompleteBuilder IgnoreCase(bool ignoreCase)
         {
-            Guard.IsNotNull(ignoreCase, "ignoreCase");
 
             Component.IgnoreCase = ignoreCase;
 
@@ -121,7 +118,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public AutoCompleteBuilder Height(int height)
         {
-            Guard.IsNotNegative(height, "height");
 
             Component.Height = height;
 
@@ -148,7 +144,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public AutoCompleteBuilder MinLength(int length)
         {
-            Guard.IsNotNegative(length, "length");
 
             Component.MinLength = length;
 
@@ -157,7 +152,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public AutoCompleteBuilder Separator(string separator)
         {
-            Guard.IsNotNullOrEmpty(separator, "separator");
 
             Component.Separator = separator;
 
@@ -180,7 +174,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public AutoCompleteBuilder Template(string template)
         {
-            Guard.IsNotNullOrEmpty(template, "template");
 
             Component.Template = template;
 

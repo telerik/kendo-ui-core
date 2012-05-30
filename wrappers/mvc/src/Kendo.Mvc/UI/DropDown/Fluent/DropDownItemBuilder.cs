@@ -15,7 +15,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="item">The item.</param>
         public DropDownItemBuilder(DropDownItem item)
         {
-            Guard.IsNotNull(item, "item");
 
             this.item = item;
         }

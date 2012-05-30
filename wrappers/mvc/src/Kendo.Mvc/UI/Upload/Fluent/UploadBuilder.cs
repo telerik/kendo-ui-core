@@ -34,7 +34,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public UploadBuilder Events(Action<UploadEventBuilder> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             configurator(new UploadEventBuilder(Component.Events));
 
@@ -107,7 +106,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public UploadBuilder Async(Action<UploadAsyncSettingsBuilder> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             configurator(new UploadAsyncSettingsBuilder(Component.Async));
 

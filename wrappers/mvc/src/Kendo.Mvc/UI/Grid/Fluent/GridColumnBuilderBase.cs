@@ -21,8 +21,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="column">The column.</param>
         protected GridColumnBuilderBase(TColumn column)
         {
-            Guard.IsNotNull(column, "column");
-
             Column = column;
         }
 
@@ -184,8 +182,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TColumnBuilder Width(int pixelWidth)
         {
-            Guard.IsNotNegative(pixelWidth, "pixelWidth");
-
             Column.Width = pixelWidth + "px";
 
             return this as TColumnBuilder;
@@ -212,8 +208,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TColumnBuilder Width(string value)
         {
-            Guard.IsNotNullOrEmpty(value, "value");
-
             Column.Width = value;
 
             return this as TColumnBuilder;
@@ -306,8 +300,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="template">The action defining the template.</param>
         public TColumnBuilder HeaderTemplate(Action template)
         {
-            Guard.IsNotNull(template, "template");
-
             Column.HeaderTemplate.Content = template;
             return this as TColumnBuilder;
         }
@@ -318,8 +310,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="template">The string defining the template.</param>
         public TColumnBuilder HeaderTemplate(string template)
         {
-            Guard.IsNotNullOrEmpty(template, "template");
-
             Column.HeaderTemplate.Html = template;
             return this as TColumnBuilder;
         }
@@ -330,8 +320,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="template">The action defining the template.</param>
         public TColumnBuilder HeaderTemplate(Func<object, object> template)
         {
-            Guard.IsNotNull(template, "template");
-
             Column.HeaderTemplate.InlineTemplate = template;
             return this as TColumnBuilder;
         }
@@ -343,8 +331,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="template">The action defining the template.</param>
         public TColumnBuilder FooterTemplate(Action template)
         {
-            Guard.IsNotNull(template, "template");
-
             Column.FooterTemplate.CodeBlockTemplate = delegate { template(); };
             return this as TColumnBuilder;
         }
@@ -355,8 +341,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="template">The string defining the template.</param>
         public TColumnBuilder FooterTemplate(string template)
         {
-            Guard.IsNotNullOrEmpty(template, "template");
-
             Column.FooterTemplate.Html = template;
             return this as TColumnBuilder;
         }
@@ -367,8 +351,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="template">The action defining the template.</param>
         public TColumnBuilder FooterTemplate(Func<object, object> template)
         {
-            Guard.IsNotNull(template, "template");
-
             Column.FooterTemplate.InlineTemplate = (result) => template(result);
 
             return this as TColumnBuilder;
@@ -376,8 +358,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public TColumnBuilder ClientFooterTemplate(string template)
         {
-            Guard.IsNotNullOrEmpty(template, "template");
-
             Column.ClientFooterTemplate = template;
             
             return this as TColumnBuilder;
@@ -385,8 +365,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         private static void MergeAttributes(IDictionary<string, object> target, IDictionary<string, object> attributes)
         {
-            Guard.IsNotNull(attributes, "attributes");
-
             target.Merge(attributes);
         }
     }

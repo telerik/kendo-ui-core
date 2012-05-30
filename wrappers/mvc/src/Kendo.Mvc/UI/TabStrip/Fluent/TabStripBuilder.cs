@@ -36,7 +36,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TabStripBuilder Items(Action<TabStripItemFactory> addAction)
         {
-            Guard.IsNotNull(addAction, "addAction");
 
             TabStripItemFactory factory = new TabStripItemFactory(Component, Component.ViewContext);
 
@@ -61,7 +60,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TabStripBuilder Events(Action<TabStripEventBuilder> clientEventsAction)
         {
-            Guard.IsNotNull(clientEventsAction, "clientEventsAction");
 
             clientEventsAction(new TabStripEventBuilder(Component.Events));
 
@@ -85,7 +83,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TabStripBuilder BindTo(string viewDataKey, Action<TabStripItem, SiteMapNode> siteMapAction)
         {
-            Guard.IsNotNullOrEmpty(viewDataKey, "viewDataKey");
 
             Component.BindTo(viewDataKey, siteMapAction);
 
@@ -106,7 +103,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TabStripBuilder BindTo(string viewDataKey)
         {
-            Guard.IsNotNullOrEmpty(viewDataKey, "viewDataKey");
 
             Component.BindTo(viewDataKey);
 
@@ -132,7 +128,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TabStripBuilder BindTo<T>(IEnumerable<T> dataSource, Action<TabStripItem, T> itemDataBound)
         {
-            Guard.IsNotNull(itemDataBound, "itemDataBound");
             Component.BindTo(dataSource, itemDataBound);
 
             return this;
@@ -157,7 +152,6 @@ namespace Kendo.Mvc.UI.Fluent
         ///// </example>
         //public TabStripBuilder Effects(Action<EffectsBuilder> addEffects)
         //{
-        //    Guard.IsNotNull(addEffects, "addAction");
 
         //    EffectsBuilderFactory factory = new EffectsBuilderFactory();
 
@@ -185,8 +179,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TabStripBuilder SelectedIndex(int index)
         {
-            Guard.IsNotNull(index, "index");
-            Guard.IsNotNegative(index, "index");
 
             Component.SelectedIndex = index;
 
@@ -212,7 +204,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TabStripBuilder ItemAction(Action<TabStripItem> action)
         {
-            Guard.IsNotNull(action, "action");
 
             Component.ItemAction = action;
 
@@ -252,7 +243,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TabStripBuilder SecurityTrimming(bool value)
         {
-            Guard.IsNotNull(value, "value");
 
             Component.SecurityTrimming = value;
 

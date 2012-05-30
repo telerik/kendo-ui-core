@@ -22,7 +22,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="container">The container.</param>
         public ChartSeriesFactory(Chart<TModel> container)
         {
-            Guard.IsNotNull(container, "container");
 
             Container = container;
         }
@@ -44,7 +43,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartBarSeriesBuilder<TModel> Bar<TValue>(Expression<Func<TModel, TValue>> expression)
         {
-            Guard.IsNotNull(expression, "expression");
 
             ChartBarSeries<TModel, TValue> barSeries = new ChartBarSeries<TModel, TValue>(Container, expression);
 
@@ -99,7 +97,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartBarSeriesBuilder<TModel> Bar(IEnumerable data)
         {
-            Guard.IsNotNull(data, "data");
 
             ChartBarSeries<TModel, object> barSeries = new ChartBarSeries<TModel, object>(Container, data);
 
@@ -172,7 +169,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartLineSeriesBuilder<TModel> Line<TValue>(Expression<Func<TModel, TValue>> expression)
         {
-            Guard.IsNotNull(expression, "expression");
 
             ChartLineSeries<TModel, TValue> LineSeries = new ChartLineSeries<TModel, TValue>(Container, expression);
 
@@ -227,7 +223,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartLineSeriesBuilder<TModel> Line(IEnumerable data)
         {
-            Guard.IsNotNull(data, "data");
 
             ChartLineSeries<TModel, object> lineSeries = new ChartLineSeries<TModel, object>(Container, data);
 
@@ -303,7 +298,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartAreaSeriesBuilder<TModel> Area<TValue>(Expression<Func<TModel, TValue>> expression)
         {
-            Guard.IsNotNull(expression, "expression");
 
             ChartAreaSeries<TModel, TValue> areaSeries = new ChartAreaSeries<TModel, TValue>(Container, expression);
 
@@ -358,7 +352,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartAreaSeriesBuilder<TModel> Area(IEnumerable data)
         {
-            Guard.IsNotNull(data, "data");
 
             ChartAreaSeries<TModel, object> areaSeries = new ChartAreaSeries<TModel, object>(Container, data);
 
@@ -437,8 +430,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartScatterSeriesBuilder<TModel> Scatter<TXValue, TYValue>(Expression<Func<TModel, TXValue>> xValueExpression, Expression<Func<TModel, TYValue>> yValueExpression)
         {
-            Guard.IsNotNull(xValueExpression, "xValueExpression");
-            Guard.IsNotNull(yValueExpression, "yValueExpression");
 
             var scatterSeries = new ChartScatterSeries<TModel, TXValue, TYValue>(Container, xValueExpression, yValueExpression);
 
@@ -502,7 +493,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartScatterSeriesBuilder<TModel> Scatter(IEnumerable data)
         {
-            Guard.IsNotNull(data, "data");
 
             ChartScatterSeries<TModel, object, object> scatterSeries = new ChartScatterSeries<TModel, object, object>(Container, data);
 
@@ -522,8 +512,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartScatterLineSeriesBuilder<TModel> ScatterLine<TXValue, TYValue>(Expression<Func<TModel, TXValue>> xValueExpression, Expression<Func<TModel, TYValue>> yValueExpression)
         {
-            Guard.IsNotNull(xValueExpression, "xValueExpression");
-            Guard.IsNotNull(yValueExpression, "yValueExpression");
 
             var scatterLineSeries = new ChartScatterLineSeries<TModel, TXValue, TYValue>(Container, xValueExpression, yValueExpression);
 
@@ -587,7 +575,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartScatterLineSeriesBuilder<TModel> ScatterLine(IEnumerable data)
         {
-            Guard.IsNotNull(data, "data");
 
             ChartScatterLineSeries<TModel, object, object> scatterLineSeries = new ChartScatterLineSeries<TModel, object, object>(Container, data);
 
@@ -604,8 +591,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartPieSeriesBuilder<TModel> Pie<TValue>(Expression<Func<TModel, TValue>> expressionValue, Expression<Func<TModel, string>> expressionCategory)
         {
-            Guard.IsNotNull(expressionValue, "expressionValue");
-            Guard.IsNotNull(expressionCategory, "expressionCategory");
 
             ChartPieSeries<TModel, TValue> pieSeries = new ChartPieSeries<TModel, TValue>(Container, expressionValue, expressionCategory, null, null);
 
@@ -622,9 +607,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartPieSeriesBuilder<TModel> Pie<TValue>(Expression<Func<TModel, TValue>> expressionValue, Expression<Func<TModel, string>> expressionCategory, Expression<Func<TModel, string>> expressionColor, Expression<Func<TModel, bool>> expressionExplode)
         {
-            Guard.IsNotNull(expressionValue, "expressionValue");
-            Guard.IsNotNull(expressionCategory, "expressionCategory");
-            Guard.IsNotNull(expressionExplode, "expressionExplode");
 
             ChartPieSeries<TModel, TValue> pieSeries = new ChartPieSeries<TModel, TValue>(Container, expressionValue, expressionCategory, expressionColor, expressionExplode);
 
@@ -724,7 +706,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartPieSeriesBuilder<TModel> Pie(IEnumerable data)
         {
-            Guard.IsNotNull(data, "data");
 
             ChartPieSeries<TModel, object> pieSeries = new ChartPieSeries<TModel, object>(Container, data);
 

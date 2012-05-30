@@ -48,7 +48,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public GridDataKeyBuilder<TModel> Add(string fieldName)
         {
-            Guard.IsNotNullOrEmpty(fieldName, "fieldName");
 
             IGridDataKey<TModel> dataKey;
             if (typeof(TModel) == typeof(System.Data.DataRowView))

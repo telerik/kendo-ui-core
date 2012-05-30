@@ -946,7 +946,6 @@
     <Compile Include="Extensions\HttpContextBaseExtensions.cs" />
     <Compile Include="IHideObjectMembers.cs" />
     <Compile Include="Infrastructure\Implementation\PathResolver.cs" />
-    <Compile Include="Infrastructure\Guard.cs" />
     <Compile Include="Extensions\ReaderWriterLockSlimExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Resources\TextResource.Designer.cs">

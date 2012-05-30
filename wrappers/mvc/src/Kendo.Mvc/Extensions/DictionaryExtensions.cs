@@ -24,9 +24,6 @@ namespace Kendo.Mvc.Extensions
         /// <param name="replaceExisting">if set to <c>true</c> [replace existing].</param>
         public static void Merge(this IDictionary<string, object> instance, string key, object value, bool replaceExisting)
         {
-            Guard.IsNotNull(instance, "instance");
-            Guard.IsNotNullOrEmpty(key, "key");
-            Guard.IsNotNull(value, "value");
 
             if (replaceExisting || !instance.ContainsKey(key))
             {
@@ -43,19 +40,12 @@ namespace Kendo.Mvc.Extensions
         /// <param name="value">The value.</param>
         public static void AppendInValue(this IDictionary<string, object> instance, string key, string separator, object value)
         {
-            Guard.IsNotNull(instance, "instance");
-            Guard.IsNotNullOrEmpty(key, "key");
-            Guard.IsNotNullOrEmpty(separator, "separator");
-            Guard.IsNotNull(value, "value");
 
             instance[key] = instance.ContainsKey(key) ? instance[key] + separator + value : value.ToString();
         }
 
         public static void AddStyleAttribute(this IDictionary<string, object> instance, string key, string value)
         {
-            Guard.IsNotNull(instance, "instance");
-            Guard.IsNotNullOrEmpty(key, "key");
-            Guard.IsNotNull(value, "value");
 
             string style = string.Empty;
             
@@ -81,10 +71,6 @@ namespace Kendo.Mvc.Extensions
         /// <param name="value"></param>
         public static void PrependInValue(this IDictionary<string, object> instance, string key, string separator, object value)
         {
-            Guard.IsNotNull(instance, "instance");
-            Guard.IsNotNullOrEmpty(key, "key");
-            Guard.IsNotNullOrEmpty(separator, "separator");
-            Guard.IsNotNull(value, "value");
 
             instance[key] = instance.ContainsKey(key) ? value + separator + instance[key] : value.ToString();
         }
@@ -96,7 +82,6 @@ namespace Kendo.Mvc.Extensions
         /// <returns></returns>
         public static string ToAttributeString(this IDictionary<string, object> instance)
         {
-            Guard.IsNotNull(instance, "instance");
 
             StringBuilder attributes = new StringBuilder();
 
@@ -116,8 +101,6 @@ namespace Kendo.Mvc.Extensions
         /// <param name="replaceExisting">if set to <c>true</c> [replace existing].</param>
         public static void Merge(this IDictionary<string, object> instance, IDictionary<string, object> from, bool replaceExisting)
         {
-            Guard.IsNotNull(instance, "instance");
-            Guard.IsNotNull(from, "from");
 
             foreach (KeyValuePair<string, object> pair in from)
             {

@@ -37,7 +37,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TreeViewBuilder Items(Action<TreeViewItemFactory> addAction)
         {
-            Guard.IsNotNull(addAction, "addAction");
 
             TreeViewItemFactory factory = new TreeViewItemFactory(Component, Component.ViewContext);
 
@@ -86,7 +85,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TreeViewBuilder BindTo(string viewDataKey, Action<TreeViewItem, SiteMapNode> siteMapAction)
         {
-            Guard.IsNotNullOrEmpty(viewDataKey, "viewDataKey");
 
             Component.BindTo(viewDataKey, siteMapAction);
 
@@ -108,7 +106,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TreeViewBuilder BindTo(string viewDataKey)
         {
-            Guard.IsNotNullOrEmpty(viewDataKey, "viewDataKey");
 
             Component.BindTo(viewDataKey);
 
@@ -130,7 +127,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TreeViewBuilder BindTo(IEnumerable<TreeViewItemModel> items)
         {
-            Guard.IsNotNull(items, "items");
 
             Component.BindTo(items, mapping => mapping
                 .For<TreeViewItemModel>(binding => binding
@@ -178,7 +174,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TreeViewBuilder BindTo<T>(IEnumerable<T> dataSource, Action<TreeViewItem, T> itemDataBound)
         {
-            Guard.IsNotNull(itemDataBound, "itemDataBound");
 
             Component.BindTo(dataSource, itemDataBound);
 
@@ -210,7 +205,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TreeViewBuilder BindTo(IEnumerable dataSource, Action<NavigationBindingFactory<TreeViewItem>> factoryAction)
         {
-            Guard.IsNotNull(factoryAction, "factoryAction");
 
             Component.BindTo(dataSource, factoryAction);
 
@@ -236,7 +230,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TreeViewBuilder ItemAction(Action<TreeViewItem> action)
         {
-            Guard.IsNotNull(action, "action");
 
             Component.ItemAction = action;
 
@@ -271,7 +264,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public TreeViewBuilder Animation(Action<ExpandableAnimationBuilder> animationAction)
         {
-            Guard.IsNotNull(animationAction, "animationAction");
 
             animationAction(new ExpandableAnimationBuilder(Component.Animation));
 
@@ -354,7 +346,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TreeViewBuilder SecurityTrimming(bool value)
         {
-            Guard.IsNotNull(value, "value");
 
             Component.SecurityTrimming = value;
 

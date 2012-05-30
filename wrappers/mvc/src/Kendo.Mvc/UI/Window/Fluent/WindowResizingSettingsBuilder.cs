@@ -8,13 +8,11 @@ namespace Kendo.Mvc.UI.Fluent
 
         public WindowResizingSettingsBuilder(WindowResizingSettings settings)
         {
-            Guard.IsNotNull(settings, "settings");
             this.settings = settings;
         }
 
         public WindowResizingSettingsBuilder Enabled(bool enable) 
         {
-            Guard.IsNotNull(enable, "enable");
 
             settings.Enabled = enable;
 
@@ -23,7 +21,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public WindowResizingSettingsBuilder MinWidth(int minWidth)
         {
-            Guard.IsNotNull(minWidth, "minWidth");
 
             settings.MinWidth = minWidth;
 
@@ -32,7 +29,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public WindowResizingSettingsBuilder MaxWidth(int maxWidth)
         {
-            Guard.IsNotNull(maxWidth, "maxWidth");
 
             settings.MaxWidth = maxWidth;
 
@@ -41,7 +37,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public WindowResizingSettingsBuilder MinHeight(int minHeight)
         {
-            Guard.IsNotNull(minHeight, "minHeight");
 
             settings.MinHeight = minHeight;
 
@@ -50,7 +45,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public WindowResizingSettingsBuilder MaxHeight(int maxHeight)
         {
-            Guard.IsNotNull(maxHeight, "maxHeight");
 
             settings.MaxHeight = maxHeight;
 

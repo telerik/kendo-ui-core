@@ -18,7 +18,6 @@ namespace Kendo.Mvc.UI
     {
         public ViewComponentFactory(HtmlHelper htmlHelper)
         {
-            Guard.IsNotNull(htmlHelper, "htmlHelper");
 
             HtmlHelper = htmlHelper;
             Initializer = DI.Current.Resolve<IJavaScriptInitializer>();
@@ -161,7 +160,6 @@ namespace Kendo.Mvc.UI
         /// <param name="dataSource">DataView from which the grid instance will be bound</param>
         public virtual GridBuilder<DataRowView> Grid(DataView dataSource)
         {
-            Guard.IsNotNull(dataSource, "dataSource");
 
             GridBuilder<DataRowView> builder = Grid<DataRowView>();
 
@@ -614,7 +612,6 @@ namespace Kendo.Mvc.UI
         /// </summary>
         public virtual EditorBuilder EditorFor(Expression<Func<TModel, string>> expression)
         {
-            Guard.IsNotNull(expression, "expression");
             return Editor()
                     .Name(GetName(expression))
                     .Value((string)ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model);
@@ -630,7 +627,6 @@ namespace Kendo.Mvc.UI
         public virtual NumericTextBoxBuilder<TValue> NumericTextBoxFor<TValue>(Expression<Func<TModel, TValue>> expression)
             where TValue : struct
         {
-            Guard.IsNotNull(expression, "expression");
 
             var validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
             
@@ -664,7 +660,6 @@ namespace Kendo.Mvc.UI
         public virtual NumericTextBoxBuilder<TValue> NumericTextBoxFor<TValue>(Expression<Func<TModel, Nullable<TValue>>> expression)
             where TValue : struct
         {
-            Guard.IsNotNull(expression, "expression");
 
             IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
@@ -694,7 +689,6 @@ namespace Kendo.Mvc.UI
         ///// </example>
         //public virtual IntegerTextBoxBuilder IntegerTextBoxFor(Expression<Func<TModel, Nullable<int>>> expression)
         //{
-        //    Guard.IsNotNull(expression, "expression");
 
         //    IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
@@ -715,7 +709,6 @@ namespace Kendo.Mvc.UI
         ///// </example>
         //public virtual IntegerTextBoxBuilder IntegerTextBoxFor(Expression<Func<TModel, int>> expression)
         //{
-        //    Guard.IsNotNull(expression, "expression");
 
         //    IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
@@ -738,7 +731,6 @@ namespace Kendo.Mvc.UI
         ///// </example>
         //public virtual CurrencyTextBoxBuilder CurrencyTextBoxFor(Expression<Func<TModel, Nullable<decimal>>> expression)
         //{
-        //    Guard.IsNotNull(expression, "expression");
 
         //    IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
@@ -759,7 +751,6 @@ namespace Kendo.Mvc.UI
         ///// </example>
         //public virtual CurrencyTextBoxBuilder CurrencyTextBoxFor(Expression<Func<TModel, decimal>> expression)
         //{
-        //    Guard.IsNotNull(expression, "expression");
 
         //    IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
@@ -782,7 +773,6 @@ namespace Kendo.Mvc.UI
         ///// </example>
         //public virtual PercentTextBoxBuilder PercentTextBoxFor(Expression<Func<TModel, Nullable<double>>> expression)
         //{
-        //    Guard.IsNotNull(expression, "expression");
 
         //    IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
@@ -803,7 +793,6 @@ namespace Kendo.Mvc.UI
         ///// </example>
         //public virtual PercentTextBoxBuilder PercentTextBoxFor(Expression<Func<TModel, double>> expression)
         //{
-        //    Guard.IsNotNull(expression, "expression");
 
         //    IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
@@ -826,7 +815,6 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual DateTimePickerBuilder DateTimePickerFor(Expression<Func<TModel, Nullable<DateTime>>> expression)
         {
-            Guard.IsNotNull(expression, "expression");
 
             IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
@@ -847,7 +835,6 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual DateTimePickerBuilder DateTimePickerFor(Expression<Func<TModel, DateTime>> expression)
         {
-            Guard.IsNotNull(expression, "expression");
 
             IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
@@ -870,7 +857,6 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual DatePickerBuilder DatePickerFor(Expression<Func<TModel, Nullable<DateTime>>> expression)
         {
-            Guard.IsNotNull(expression, "expression");
 
             IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
@@ -891,7 +877,6 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual DatePickerBuilder DatePickerFor(Expression<Func<TModel, DateTime>> expression)
         {
-            Guard.IsNotNull(expression, "expression");
 
             IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
@@ -914,7 +899,6 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual TimePickerBuilder TimePickerFor(Expression<Func<TModel, Nullable<DateTime>>> expression)
         {
-            Guard.IsNotNull(expression, "expression");
 
             IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
@@ -935,7 +919,6 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual TimePickerBuilder TimePickerFor(Expression<Func<TModel, DateTime>> expression)
         {
-            Guard.IsNotNull(expression, "expression");
 
             IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
@@ -958,7 +941,6 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual TimePickerBuilder TimePickerFor(Expression<Func<TModel, Nullable<TimeSpan>>> expression)
         {
-            Guard.IsNotNull(expression, "expression");
 
             IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
@@ -982,7 +964,6 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual TimePickerBuilder TimePickerFor(Expression<Func<TModel, TimeSpan>> expression)
         {
-            Guard.IsNotNull(expression, "expression");
 
             IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
@@ -1008,7 +989,6 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual DropDownListBuilder DropDownListFor<TProperty>(Expression<Func<TModel, TProperty>> expression)
         {
-            Guard.IsNotNull(expression, "expression");
 
             return DropDownList().Name(GetName(expression));
                                  //.Value(GetValue(expression));
@@ -1024,7 +1004,6 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual ComboBoxBuilder ComboBoxFor<TProperty>(Expression<Func<TModel, TProperty>> expression)
         {
-            Guard.IsNotNull(expression, "expression");
 
             return ComboBox().Name(GetName(expression))
                              .Value(GetValue(expression));
@@ -1040,7 +1019,6 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual AutoCompleteBuilder AutoCompleteFor<TProperty>(Expression<Func<TModel, TProperty>> expression)
         {
-            Guard.IsNotNull(expression, "expression");
             
             return AutoComplete().Name(GetName(expression))
                                  .Value(GetValue(expression));
@@ -1057,7 +1035,6 @@ namespace Kendo.Mvc.UI
         public virtual SliderBuilder<TValue> SliderFor<TValue>(Expression<Func<TModel, TValue>> expression)
             where TValue : struct, IComparable
         {
-            Guard.IsNotNull(expression, "expression");
 
             var value = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
 
@@ -1087,7 +1064,6 @@ namespace Kendo.Mvc.UI
         public virtual SliderBuilder<TValue> SliderFor<TValue>(Expression<Func<TModel, Nullable<TValue>>> expression)
             where TValue : struct, IComparable
         {
-            Guard.IsNotNull(expression, "expression");
 
             IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
@@ -1117,7 +1093,6 @@ namespace Kendo.Mvc.UI
         public virtual GaugeLinearBuilder<TValue> LinearGaugeFor<TValue>(Expression<Func<TModel, TValue>> expression)
             where TValue : struct, IComparable
         {
-            Guard.IsNotNull(expression, "expression");
 
             var value = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
 
@@ -1149,7 +1124,6 @@ namespace Kendo.Mvc.UI
         public virtual GaugeLinearBuilder<TValue> LinearGaugeFor<TValue>(Expression<Func<TModel, Nullable<TValue>>> expression)
             where TValue : struct, IComparable
         {
-            Guard.IsNotNull(expression, "expression");
 
             IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
@@ -1181,7 +1155,6 @@ namespace Kendo.Mvc.UI
         public virtual GaugeRadialBuilder<TValue> RadialGaugeFor<TValue>(Expression<Func<TModel, TValue>> expression)
             where TValue : struct, IComparable
         {
-            Guard.IsNotNull(expression, "expression");
 
             var value = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
 
@@ -1213,7 +1186,6 @@ namespace Kendo.Mvc.UI
         public virtual GaugeRadialBuilder<TValue> RadialGaugeFor<TValue>(Expression<Func<TModel, Nullable<TValue>>> expression)
             where TValue : struct, IComparable
         {
-            Guard.IsNotNull(expression, "expression");
 
             IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
@@ -1245,7 +1217,6 @@ namespace Kendo.Mvc.UI
         public virtual RangeSliderBuilder<TValue> RangeSliderFor<TValue>(Expression<Func<TModel, TValue[]>> expression)
             where TValue : struct, IComparable
         {
-            Guard.IsNotNull(expression, "expression");
 
             IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 

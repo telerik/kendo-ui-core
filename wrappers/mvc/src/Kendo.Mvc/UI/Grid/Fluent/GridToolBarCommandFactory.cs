@@ -52,28 +52,24 @@ namespace Kendo.Mvc.UI.Fluent
 
         public void Template(Action template)
         {
-            Guard.IsNotNull(template, "template");
 
             settings.Template.Content = template;
         }
 
         public void Template(string template)
         {
-            Guard.IsNotNullOrEmpty(template, "template");
 
             settings.Template.Html = template;
         }
 
         public void Template(Action<Grid<T>> template)
         {
-            Guard.IsNotNull(template, "template");
 
             settings.Template.Content = () => template(settings.Grid);
         }
 
         public void Template(Func<Grid<T>, object> template)
         {
-            Guard.IsNotNull(template, "template");
 
             settings.Template.InlineTemplate = (obj) => template(settings.Grid);
         }

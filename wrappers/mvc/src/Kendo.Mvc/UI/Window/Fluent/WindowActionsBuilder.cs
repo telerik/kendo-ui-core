@@ -15,7 +15,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="container">The <see cref="IWindowButton" /> instance that is to be configured</param>
         public WindowActionsBuilder(IWindowButtonsContainer container)
         {
-            Guard.IsNotNull(container, "container");
 
             this.container = container;
         }

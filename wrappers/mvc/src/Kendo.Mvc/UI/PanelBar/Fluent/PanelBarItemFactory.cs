@@ -11,8 +11,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public PanelBarItemFactory(INavigationItemContainer<PanelBarItem> container, ViewContext viewContext)
         {
-            Guard.IsNotNull(container, "container");
-            Guard.IsNotNull(viewContext, "viewContext");
 
             this.container = container;
             this.viewContext = viewContext;

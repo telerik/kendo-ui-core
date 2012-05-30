@@ -100,14 +100,6 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
-        public void MinTime_method_with_string_param_should_throw_exception_if_string_is_not_correct()
-        {
-            Assert.Throws(typeof(ArgumentException), () => {
-                              builder.Min("");
-                          });
-        }
-
-        [Fact]
         public void MinTime_with_string_param_should_return_builder()
         {
             var returnedBuilder = builder.Min("10:10");
@@ -140,14 +132,6 @@ namespace Kendo.Mvc.UI.Tests
 
             builder.Max("23:00");
             Assert.Equal(time, timepicker.Max);
-        }
-
-        [Fact]
-        public void MaxTime_method_with_string_param_should_throw_exception_if_string_is_not_correct()
-        {
-            Assert.Throws(typeof(ArgumentException), () => {
-                              builder.Max("");
-                          });
         }
 
         [Fact]

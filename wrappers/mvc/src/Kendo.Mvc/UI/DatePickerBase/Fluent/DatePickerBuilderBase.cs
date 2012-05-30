@@ -28,7 +28,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public TPickerBuilder Animation(Action<PopupAnimationBuilder> animationAction)
         {
-            Guard.IsNotNull(animationAction, "animationAction");
 
             animationAction(new PopupAnimationBuilder(Component.Animation));
 
@@ -51,7 +50,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TPickerBuilder Events(Action<DatePickerEventBuilderBase> clientEventsAction)
         {
-            Guard.IsNotNull(clientEventsAction, "clientEventsAction");
 
             clientEventsAction(new DatePickerEventBuilderBase(Component.Events));
 
@@ -63,7 +61,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         public TPickerBuilder Format(string format)
         {
-            Guard.IsNotNullOrEmpty(format, "format");
 
             Component.Format = format;
 
@@ -93,7 +90,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         public TPickerBuilder Min(DateTime date)
         {
-            Guard.IsNotNull(date, "date");
 
             Component.Min = date;
 
@@ -105,7 +101,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         public TPickerBuilder Max(DateTime date)
         {
-            Guard.IsNotNull(date, "date");
 
             Component.Max = date;
 

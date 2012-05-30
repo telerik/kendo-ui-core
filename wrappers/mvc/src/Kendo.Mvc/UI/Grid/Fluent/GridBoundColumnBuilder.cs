@@ -111,7 +111,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="templateName">name of the editor template</param>
         public GridBoundColumnBuilder<T> EditorTemplateName(string templateName)
         {
-            Guard.IsNotNullOrEmpty(templateName, "templateName");
 
             Column.EditorTemplateName = templateName;
             return this;
@@ -213,7 +212,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public GridBoundColumnBuilder<T> Template(Action<T> templateAction)
         {
-            Guard.IsNotNull(templateAction, "templateAction");
 
             (Column as GridColumnBase<T>).Template = templateAction;
 
@@ -222,7 +220,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public GridBoundColumnBuilder<T> Template(Func<T, object> inlineTemplate)
         {
-            Guard.IsNotNull(inlineTemplate, "inlineTemplate");
 
             (Column as GridColumnBase<T>).InlineTemplate = inlineTemplate;
 
@@ -257,7 +254,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="template">The action defining the template.</param>
         public GridBoundColumnBuilder<T> FooterTemplate(Action<GridAggregateResult> template)
         {
-            Guard.IsNotNull(template, "template");
 
             Column.FooterTemplate.CodeBlockTemplate = template;
 
@@ -270,7 +266,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="template">The action defining the template.</param>
         public GridBoundColumnBuilder<T> FooterTemplate(Func<GridAggregateResult, object> template)
         {
-            Guard.IsNotNull(template, "template");
 
             Column.FooterTemplate.InlineTemplate = template;
 
@@ -283,7 +278,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="template">The action defining the template.</param>
         public GridBoundColumnBuilder<T> GroupFooterTemplate(Action<GridAggregateResult> template)
         {
-            Guard.IsNotNull(template, "template");
 
             Column.GroupFooterTemplate.CodeBlockTemplate = template;
 
@@ -296,7 +290,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="template">The action defining the template.</param>
         public GridBoundColumnBuilder<T> GroupFooterTemplate(Func<GridAggregateResult, object> template)
         {
-            Guard.IsNotNull(template, "template");
 
             Column.GroupFooterTemplate.InlineTemplate = template;
 
@@ -310,7 +303,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="template">The action defining the template.</param>
         public GridBoundColumnBuilder<T> GroupHeaderTemplate(Action<GridGroupAggregateResult> template)
         {
-            Guard.IsNotNull(template, "template");
 
             Column.GroupHeaderTemplate.CodeBlockTemplate = template;
 
@@ -323,7 +315,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="template">The action defining the template.</param>
         public GridBoundColumnBuilder<T> GroupHeaderTemplate(Func<GridGroupAggregateResult, object> template)
         {
-            Guard.IsNotNull(template, "template");
 
             Column.GroupHeaderTemplate.InlineTemplate = template;
 

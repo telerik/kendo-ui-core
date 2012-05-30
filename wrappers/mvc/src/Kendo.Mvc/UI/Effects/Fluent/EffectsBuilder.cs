@@ -29,7 +29,6 @@ namespace Kendo.Mvc.UI
 
         private EffectsBuilder Add(string effect)
         {
-            Guard.IsNotNullOrEmpty(effect, "effect");
 
             Container.Add(effect);
 
@@ -38,8 +37,6 @@ namespace Kendo.Mvc.UI
 
         private EffectsBuilder Add(string effect, string direction)
         {
-            Guard.IsNotNullOrEmpty(effect, "effect");
-            Guard.IsNotNullOrEmpty(direction, "direction");
 
             Container.Add("{0}:{1}".FormatWith(effect, direction));
 
@@ -78,7 +75,6 @@ namespace Kendo.Mvc.UI
 
         public EffectsBuilder Duration(int value)
         {
-            Guard.IsNotNegative(value, "value");
 
             Effects.Duration = value;
 

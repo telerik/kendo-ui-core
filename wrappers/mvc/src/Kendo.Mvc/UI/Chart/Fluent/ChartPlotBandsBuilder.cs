@@ -16,7 +16,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="item">The plot band.</param>
         public ChartPlotBandsBuilder(ChartPlotBand item)
         {
-            Guard.IsNotNull(item, "item");
 
             this.item = item;
         }

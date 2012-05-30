@@ -191,17 +191,6 @@ namespace Kendo.Mvc.UI.Tests.Grid
         }
 
         [Fact]
-        public void Should_throw_if_null_is_passed_as_footer_template()
-        {
-            Assert.Throws<ArgumentNullException>(() => builder.FooterTemplate((Action)null));
-
-            Assert.Throws<ArgumentNullException>(() => builder.FooterTemplate((Func<object, object>)null));
-
-            Assert.Throws<ArgumentException>(() => builder.FooterTemplate((string)null));
-            Assert.Throws<ArgumentException>(() => builder.FooterTemplate(String.Empty));
-        }
-
-        [Fact]
         public void Footer_template_should_return_not_null_column_builder()
         {
             builder.FooterTemplate(() => { }).ShouldNotBeNull();
@@ -233,12 +222,6 @@ namespace Kendo.Mvc.UI.Tests.Grid
             builder.EditorTemplateName(expectedValue);
 
             column.EditorTemplateName.ShouldEqual(expectedValue);
-        }
-
-        [Fact]
-        public void Should_throw_if_editor_template_name_is_empty()
-        {
-            Assert.Throws<ArgumentException>(() => builder.EditorTemplateName(string.Empty));
         }
     }
 }

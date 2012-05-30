@@ -10,8 +10,6 @@ namespace Kendo.Mvc.Infrastructure.Implementation
 
         public NavigationItemAuthorization(IControllerAuthorization controllerAuthorization, IUrlAuthorization urlAuthorization)
         {
-            Guard.IsNotNull(controllerAuthorization, "controllerAuthorization");
-            Guard.IsNotNull(urlAuthorization, "urlAuthorization");
 
             this.controllerAuthorization = controllerAuthorization;
             this.urlAuthorization = urlAuthorization;
@@ -19,8 +17,6 @@ namespace Kendo.Mvc.Infrastructure.Implementation
 
         public bool IsAccessibleToUser(RequestContext requestContext, INavigatable navigationItem)
         {
-            Guard.IsNotNull(requestContext, "requestContext");
-            Guard.IsNotNull(navigationItem, "navigationItem");
 
             bool isAllowed = true;
 

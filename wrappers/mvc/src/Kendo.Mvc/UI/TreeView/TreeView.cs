@@ -151,7 +151,6 @@ namespace Kendo.Mvc.UI
 
         protected override void WriteHtml(HtmlTextWriter writer)
         {
-            Guard.IsNotNull(writer, "writer");
 
             ITreeViewHtmlBuilder builder = builderFactory.Create(this);
 

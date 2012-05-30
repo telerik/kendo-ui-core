@@ -16,7 +16,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="scale">The scale.</param>
         public GaugeScaleRangesFactory(TScale scale)
         {
-            Guard.IsNotNull(scale, "scale");
 
             Scale = scale;
         }

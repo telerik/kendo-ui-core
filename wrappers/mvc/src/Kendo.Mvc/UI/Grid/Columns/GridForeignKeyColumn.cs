@@ -98,6 +98,6 @@ namespace Kendo.Mvc.UI
         public Action<IDictionary<string, object>, object> SerializeSelectList
         {
             get { return AppendSelectList; }
-        }        
+        }
     }
 }

@@ -29,7 +29,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public GridBuilder<T> TableHtmlAttributes(IDictionary<string, object> attributes)
         {
-            Guard.IsNotNull(attributes, "attributes");
 
             Component.TableHtmlAttributes.Clear();
             Component.TableHtmlAttributes.Merge(attributes);
@@ -46,7 +45,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public GridBuilder<T> DetailTemplate(Action<GridDetailTemplateBuilder<T>> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             Component.DetailTemplate = new GridDetailTemplate<T>();
 
@@ -74,7 +72,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public GridBuilder<T> RowTemplate(Action<T, Grid<T>> codeBlockTemplate)
         {
-            Guard.IsNotNull(codeBlockTemplate, "codeBlockTemplate");
 
             Component.RowTemplate.CodeBlockTemplate = (dataItem) => codeBlockTemplate(dataItem, Component);
             
@@ -99,7 +96,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public GridBuilder<T> RowTemplate(Action<T> codeBlockTemplate)
         {
-            Guard.IsNotNull(codeBlockTemplate, "codeBlockTemplate");
 
             Component.RowTemplate.CodeBlockTemplate = codeBlockTemplate;
 
@@ -122,7 +118,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public GridBuilder<T> RowTemplate(Func<T, object> inlineTemplate)
         {
-            Guard.IsNotNull(inlineTemplate, "inlineTemplate");
 
             Component.RowTemplate.InlineTemplate = inlineTemplate;
 
@@ -131,7 +126,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public GridBuilder<T> RowTemplate(Func<Grid<T>, Func<T, object>> inlineTemplate)
         {
-            Guard.IsNotNull(inlineTemplate, "inlineTemplate");
 
             Component.RowTemplate.InlineTemplate = (dataItem)  => inlineTemplate(Component)(dataItem);
 
@@ -165,7 +159,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public GridBuilder<T> Resizable(Action<GridResizingSettingsBuilder> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             configurator(new GridResizingSettingsBuilder(Component.Resizing));
 
@@ -185,7 +178,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public GridBuilder<T> Reorderable(Action<GridReorderingSettingsBuilder> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             configurator(new GridReorderingSettingsBuilder(Component.Reordering));
 
@@ -231,7 +223,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public GridBuilder<T> Editable(Action<GridEditingSettingsBuilder<T>> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             configurator(new GridEditingSettingsBuilder<T>(Component.Editing));
 
@@ -252,7 +243,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public GridBuilder<T> ToolBar(Action<GridToolBarCommandFactory<T>> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             configurator(new GridToolBarCommandFactory<T>(Component.ToolBar));
 
@@ -276,7 +266,6 @@ namespace Kendo.Mvc.UI.Fluent
         ///// </example>
         //public GridBuilder<T> DataKeys(Action<GridDataKeyFactory<T>> configurator)
         //{
-        //    Guard.IsNotNull(configurator, "configurator");
 
         //    configurator(new GridDataKeyFactory<T>(Component.DataKeys, false));
 
@@ -350,7 +339,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public GridBuilder<T> RowAction(Action<GridRow<T>> configurator)
         {
-            Guard.IsNotNull(configurator, "callback");
 
             Component.RowAction = configurator;
 
@@ -382,7 +370,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public GridBuilder<T> CellAction(Action<GridCell<T>> configurator)
         {
-            Guard.IsNotNull(configurator, "callback");
 
             Component.CellAction = configurator;
 
@@ -423,7 +410,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public GridBuilder<T> Columns(Action<GridColumnFactory<T>> configurator)
         {
-            Guard.IsNotNull(configurator, "addAction");
 
             GridColumnFactory<T> factory = new GridColumnFactory<T>(Component);
 
@@ -482,7 +468,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public GridBuilder<T> Sortable(Action<GridSortSettingsBuilder<T>> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             Component.Sorting.Enabled = true;
 
@@ -523,7 +508,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public GridBuilder<T> Selectable(Action<GridSelectionSettingsBuilder> selectionAction)
         {
-            Guard.IsNotNull(selectionAction, "selectionAction");
 
             Selectable();
 
@@ -594,7 +578,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public GridBuilder<T> Pageable(Action<GridPagerSettingsBuilder> pagerAction)
         {
-            Guard.IsNotNull(pagerAction, "pagerAction");
 
             Component.Paging.Enabled = true;            
 
@@ -652,7 +635,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public GridBuilder<T> Filterable(Action<GridFilteringSettingsBuilder<T>> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             Component.Filtering.Enabled = true;
 
@@ -711,7 +693,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public GridBuilder<T> Scrollable(Action<GridScrollSettingsBuilder> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             Scrollable();
 
@@ -770,7 +751,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public GridBuilder<T> Navigatable(Action<GridNavigatableSettingsBuilder> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             Navigatable();
 
@@ -832,7 +812,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public GridBuilder<T> ColumnContextMenu(Action<GridColumnContextMenuSettingsBuilder> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             ColumnContextMenu();
 
@@ -858,7 +837,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public GridBuilder<T> Events(Action<GridEventBuilder> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             configurator(new GridEventBuilder(Component.Events));
 
@@ -887,7 +865,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public GridBuilder<T> Groupable(Action<GridGroupingSettingsBuilder<T>> configurator)
         {
-            Guard.IsNotNull(configurator, "configurator");
 
             Component.Grouping.Enabled = true;
             configurator(new GridGroupingSettingsBuilder<T>(Component.Grouping));
@@ -941,7 +918,6 @@ namespace Kendo.Mvc.UI.Fluent
         /*
         public GridBuilder<T> NoRecordsTemplate(Action value)
         {
-            Guard.IsNotNull(value, "value");
 
             Component.NoRecordsTemplate.Content = value;
 
@@ -962,7 +938,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <returns></returns>
         public GridBuilder<T> NoRecordsTemplate(Func<object, object> value)
         {
-            Guard.IsNotNull(value, "value");
 
             Component.NoRecordsTemplate.InlineTemplate = value;
 
@@ -981,7 +956,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </code>        
         public GridBuilder<T> NoRecordsTemplate(string value)
         {
-            Guard.IsNotNull(value, "value");
 
             Component.NoRecordsTemplate.Html = value;
 

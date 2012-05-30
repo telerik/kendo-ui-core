@@ -49,7 +49,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         public TimePickerBuilder Min(string value)
         {
-            Guard.IsNotNullOrEmpty(value, "value");
 
             Component.Min = DateTime.Parse(value);
             
@@ -71,7 +70,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         public TimePickerBuilder Max(string value)
         {
-            Guard.IsNotNullOrEmpty(value, "value");
 
             Component.Max = DateTime.Parse(value);
             
@@ -105,7 +103,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TimePickerBuilder BindTo(List<DateTime> dates)
         {
-            Guard.IsNotNull(dates, "dates");
 
             Component.Dates = dates;
 

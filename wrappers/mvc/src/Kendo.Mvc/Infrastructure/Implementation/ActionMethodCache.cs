@@ -24,9 +24,6 @@ namespace Kendo.Mvc.Infrastructure.Implementation
 
         public IList<MethodInfo> GetActionMethods(RequestContext requestContext, string controllerName, string actionName)
         {
-            Guard.IsNotNull(requestContext, "requestContext");
-            Guard.IsNotNullOrEmpty(controllerName, "controllerName");
-            Guard.IsNotNullOrEmpty(actionName, "actionName");
 
             IDictionary<string, IList<MethodInfo>> allActionMethods = GetAllActionMethods(requestContext, controllerName);
             IList<MethodInfo> actionMethods;
@@ -36,8 +33,6 @@ namespace Kendo.Mvc.Infrastructure.Implementation
 
         public IDictionary<string, IList<MethodInfo>> GetAllActionMethods(RequestContext requestContext, string controllerName)
         {
-            Guard.IsNotNull(requestContext, "requestContext");
-            Guard.IsNotNullOrEmpty(controllerName, "controllerName");
 
             Type controllerType = controllerTypeCache.GetControllerTypes(requestContext, controllerName).FirstOrDefault();
 
@@ -46,7 +41,6 @@ namespace Kendo.Mvc.Infrastructure.Implementation
 
         public IDictionary<string, IList<MethodInfo>> GetAllActionMethods(Type controllerType)
         {
-            Guard.IsNotNull(controllerType, "controllerType");
 
             return cache.Get(controllerType.AssemblyQualifiedName, () => GetInternal(controllerType));
         }
