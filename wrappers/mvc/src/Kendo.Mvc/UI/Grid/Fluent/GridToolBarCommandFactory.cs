@@ -20,9 +20,9 @@ namespace Kendo.Mvc.UI.Fluent
         //    return this;
         //}
 
-        public GridToolBarCommandBuilder<T> Insert()
+        public GridToolBarCommandBuilder<T> Create()
         {
-            var command = new GridToolBarInsertCommand<T>();
+            var command = new GridToolBarCreateCommand<T>();
 
             settings.Commands.Add(command);
 
@@ -31,15 +31,15 @@ namespace Kendo.Mvc.UI.Fluent
             return new GridToolBarCommandBuilder<T>(command);
         }
 
-        public GridToolBarSubmitChangesCommandBuilder<T> SubmitChanges()
+        public GridToolBarSaveCommandBuilder<T> Save()
         {
-            var command = new GridToolBarSubmitChangesCommand<T>();
+            var command = new GridToolBarSaveCommand<T>();
 
             settings.Commands.Add(command);
 
             settings.Grid.Editing.Enabled = true;
 
-            return new GridToolBarSubmitChangesCommandBuilder<T>(command);
+            return new GridToolBarSaveCommandBuilder<T>(command);
         }
 
         public GridToolBarCustomCommandBuilder<T> Custom()

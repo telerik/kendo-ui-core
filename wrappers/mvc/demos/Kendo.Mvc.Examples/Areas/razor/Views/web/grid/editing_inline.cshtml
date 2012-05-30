@@ -7,7 +7,7 @@
         columns.Bound(p => p.Discontinued).Width(100);
         columns.Command(command => { command.Edit(); command.Delete(); }).Width(200);
     })
-    .ToolBar(toolbar => toolbar.Insert())
+    .ToolBar(toolbar => toolbar.Create())
     .Editable(editable => editable.Mode(GridEditMode.InLine))
     .Pageable()
     .Sortable()

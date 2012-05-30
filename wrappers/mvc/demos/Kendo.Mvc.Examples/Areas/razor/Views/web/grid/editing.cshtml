@@ -8,8 +8,8 @@
         columns.Command(command => command.Delete()).Width(110);
     })
     .ToolBar(toolbar => {
-        toolbar.Insert();
-        toolbar.SubmitChanges();        
+        toolbar.Create();
+        toolbar.Save();        
     })
     .Editable(editable => editable.Mode(GridEditMode.InCell))
     .Pageable()
@@ -29,7 +29,7 @@
 )
 <script type="text/javascript">
     function error_handler(e) {    
-        if (e.status == "customerror" && e.errors) {
+        if (e.errors) {
             var message = "Errors:\n";
             $.each(e.errors, function (key, value) {
                 if ('errors' in value) {

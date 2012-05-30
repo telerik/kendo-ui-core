@@ -237,7 +237,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Grid&lt;Order&gt;()
         ///             .Name("Orders")
-        ///             .ToolBar(commands => commands.Insert())
+        ///             .ToolBar(commands => commands.Create())
         /// %&gt;
         /// </code>
         /// </example>
