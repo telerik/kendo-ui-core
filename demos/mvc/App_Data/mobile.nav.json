@@ -231,6 +231,18 @@
             ]
         },
         {
+            "text": "Events",
+            "name": "events",
+            "documentation": "mobile/events",
+            "spriteCssClass": "mobileAppIcon",
+            "items": [
+                {
+                    "text": "Swipe Events",
+                    "url": "events/swipe.html"
+                }
+            ]
+        },
+        {
             "text": "View",
             "name": "view",
             "documentation": "mobile/view",
