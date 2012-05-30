@@ -1,52 +1,46 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/DataViz.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
 <asp:Content ContentPlaceHolderID="HeadContent" runat="server">
+    <style>
+        #gauge-container {
+            background: transparent url(<%= Url.Content("~/Content/dataviz/gauge/gauge-container-partial.png") %>) no-repeat 50% 50%;
+            width: 386px;
+            height: 386px;
+            text-align: center;
+            margin: 0 auto 30px auto;
+        }
+
+        #gauge {
+            width: 350px;
+            height: 300px;
+            margin: 0 auto;
+        }
+
+        #gauge-container input {
+            margin-top: -11px;
+            width: 140px;
+        }
+    </style>
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 <div id="gauge-container">
     <%= Html.Kendo().RadialGauge()
-            .Name("radialgauge")
-            .Pointer(pointer => pointer.Value(0))
-            .Scale(scale => scale
-                .MinorUnit(5)
-                .StartAngle(-30)
-                .EndAngle(210)
-                .Max(180)
-            )
+        .Name("gauge")
+        .Pointer(pointer => pointer.Value(65))
+        .Scale(scale => scale
+            .MinorUnit(5)
+            .StartAngle(-30)
+            .EndAngle(210)
+            .Max(180)
+        )
     %>
 
-    <%= Html.Kendo().Slider<int>()
-            .Name("slider")
-            .Max(180)
-            .ShowButtons(false)
-            .Events(events => events.Change("change"))
-    %>
+    <input id="gauge-value" value="65" onchange="javascript:change();">
 </div>
-<script type="text/javascript">
+<script>
     function change(e) {
-        $("#radialGauge").data("kendoRadialGauge").value(e.value);
+        $("#gauge").data("kendoRadialGauge").value($("#gauge-value").val());
     }
 </script>
-
-<style>
-    #gauge-container {
-        background: transparent url(<%= Url.Content("~/Content/dataviz/gauge/gauge-container-partial.png") %>) no-repeat 50% 50%;
-        width: 386px;
-        height: 386px;
-        text-align: center;
-        margin: 0 auto 30px auto;
-    }
-
-    #radialgauge {
-        width: 350px;
-        height: 300px;
-        margin: 0 auto;
-    }
-
-    #gauge-container .k-slider {
-        margin-top: -11px;
-        width: 140px;
-    }
-</style>
 </asp:Content>

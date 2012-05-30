@@ -1,6 +1,21 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/DataViz.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
 <asp:Content ContentPlaceHolderID="HeadContent" runat="server">
+    <style>
+        #gauge-container {
+            background: transparent url(<%= Url.Content("~/Content/dataviz/gauge/gauge-container.png") %>) no-repeat 50% 50%;
+            width: 404px;
+            height: 404px;
+            text-align: center;
+            margin: auto;
+        }
+
+        #gauge {
+            width: 330px;
+            height: 330px;
+            margin: 0 auto 0;
+        }
+    </style>
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
@@ -30,7 +45,7 @@
 </div>
 <div id="gauge-container">
     <%= Html.Kendo().RadialGauge()
-            .Name("radialgauge")
+            .Name("gauge")
             .Pointer(pointer => pointer.Value(65))
             .Scale(scale => scale
                 .MinorUnit(5)
@@ -52,11 +67,11 @@
     $(document).ready(function () {
         $(".configuration").bind("change", refresh);
 
-        window.configuredRanges = $("#radialGauge").data("kendoRadialGauge").options.scale.ranges;
+        window.configuredRanges = $("#gauge").data("kendoRadialGauge").options.scale.ranges;
     });
 
     function refresh() {
-        var gauge = $("#radialGauge").data("kendoRadialGauge"),
+        var gauge = $("#gauge").data("kendoRadialGauge"),
             showLabels = $("#labels").prop("checked"),
             showRanges = $("#ranges").prop("checked"),
             positionInputs = $("input[name='labels-position']"),
@@ -72,20 +87,4 @@
         gauge.redraw();
     }
 </script>
-
-<style scoped>
-    #gauge-container {
-        background: transparent url(<%= Url.Content("~/Content/dataviz/gauge/gauge-container.png") %>) no-repeat 50% 50%;
-        width: 404px;
-        height: 404px;
-        text-align: center;
-        margin: 0 0 30px 50px;
-    }
-
-    #radialgauge {
-        width: 330px;
-        height: 330px;
-        margin: 0 auto 0;
-    }
-</style>
 </asp:Content>

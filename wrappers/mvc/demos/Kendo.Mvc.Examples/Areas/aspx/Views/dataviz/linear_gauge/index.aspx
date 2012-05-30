@@ -1,12 +1,29 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/DataViz.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
 <asp:Content ContentPlaceHolderID="HeadContent" runat="server">
+    <style>
+        #gauge-container {
+            text-align: center;
+            margin: 0 auto;
+            background: transparent url(<%= Url.Content("~/Content/dataviz/gauge/linear-gauge-container.png") %>) no-repeat 50% 50%;
+            padding: 18px;
+            width: 300px;
+            height: 300px;
+        }
+
+        #gauge {
+            height: 300px;
+            display: inline-block;
+            *display: inline;
+            zoom: 1;
+        }
+    </style>
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 <div id="gauge-container">
     <%= Html.Kendo().LinearGauge()
-            .Name("lineargauge")
+            .Name("gauge")
             .Pointer(pointer => pointer.Value(28))
             .Scale(scale => scale
                 .MajorUnit(20)
@@ -22,22 +39,4 @@
             )
     %>
 </div>
-
-<style scoped>
-    #gauge-container {
-        text-align: center;
-        margin: 0 auto;
-        background: transparent url(<%= Url.Content("~/Content/dataviz/gauge/linear-gauge-container.png") %>) no-repeat 50% 50%;
-        padding: 18px;
-        width: 300px;
-        height: 300px;
-    }
-
-    #lineargauge {
-        height: 300px;
-        display: inline-block;
-        *display: inline;
-        zoom: 1;
-    }
-</style>
 </asp:Content>

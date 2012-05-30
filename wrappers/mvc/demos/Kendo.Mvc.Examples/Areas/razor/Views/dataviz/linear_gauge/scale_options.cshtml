@@ -1,3 +1,27 @@
+@section HeadContent
+{
+    <style>
+        #gauge-container {
+            text-align: center;
+            background: transparent url(@Url.Content("~/Content/dataviz/gauge/linear-gauge-container.png")) no-repeat 50% 50%;
+            padding: 18px;
+            width: 300px;
+            height: 300px;
+            margin: auto;
+        }
+
+        #gauge-container.horizontal {
+            background-image: url(@Url.Content("~/Content/dataviz/gauge/linear-gauge-container-h.png"));
+        }
+
+        #gauge {
+            width: 100%;
+            height: 100%;
+            margin: 0 auto 0;
+        }
+    </style>
+}
+
 <div class="configuration k-widget k-header" style="width:170px;">
     <span class="configHead">Configuration</span>
     <span class="configTitle">Gauge scale should...</span>
@@ -18,7 +42,7 @@
 </div>
 <div id="gauge-container">
     @(Html.Kendo().LinearGauge()
-          .Name("lineargauge")
+          .Name("gauge")
           .Pointer(pointer => pointer
               .Value(65)
               .Shape(GaugeLinearPointerShape.Arrow)
@@ -38,14 +62,14 @@
     )
 </div>
 
-<script type="text/javascript">
+<script>
     $(document).ready(function () {
         $(".configuration").bind("change", refresh);
-        window.configuredRanges = $("#lineargauge").data("kendoLinearGauge").options.scale.ranges;
+        window.configuredRanges = $("#gauge").data("kendoLinearGauge").options.scale.ranges;
     });
 
     function refresh() {
-        var gauge = $("#lineargauge").data("kendoLinearGauge"),
+        var gauge = $("#gauge").data("kendoLinearGauge"),
             showLabels = $("#labels").prop("checked"),
             showRanges = $("#ranges").prop("checked"),
             isVertical = $("#vertical").prop("checked"),
@@ -63,24 +87,3 @@
         gauge.redraw();
     }
 </script>
-
-<style>
-    #gauge-container {
-        text-align: center;
-        margin-left: 30px;
-        background: transparent url(@Url.Content("~/Content/dataviz/gauge/linear-gauge-container.png")) no-repeat 50% 50%;
-        padding: 18px;
-        width: 300px;
-        height: 300px;
-    }
-
-    #gauge-container.horizontal {
-        background-image: url(@Url.Content("~/Content/dataviz/gauge/linear-gauge-container-h.png"));
-    }
-
-    #lineargauge {
-        width: 100%;
-        height: 100%;
-        margin: 0 auto 0;
-    }
-</style>
