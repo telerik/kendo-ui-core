@@ -11,9 +11,9 @@
     })
     .Groupable()
     .Pageable()
-    .Sortable()
+    .Sortable(sortable => sortable.AllowUnsort(true).SortMode(GridSortMode.MultipleColumn))
     .Scrollable() 
-    .Filterable()             
+    .Filterable(f => f.ShowOrOption(true))             
     .DataSource(dataSource => dataSource
         .Ajax()
         .Read(read => read.Action("AjaxBinding_Read", "Grid"))        

@@ -42,7 +42,7 @@ namespace Kendo.Mvc.UI
             DataKeys = new List<IDataKey>();
 
             Paging = new GridPagingSettings(this);
-            Sorting = new GridSortSettings(this);
+            Sorting = new GridSortSettings();
             Scrolling = new GridScrollingSettings();
             Navigatable = new GridNavigatableSettings(this);
             ColumnContextMenu = new GridColumnContextMenuSettings(this);
@@ -658,7 +658,8 @@ namespace Kendo.Mvc.UI
 
             if (Sorting.Enabled)
             {
-                options["sortable"] = true;
+                var sorting = Sorting.ToJson();
+                options["sortable"] = sorting.Any() ? (object)sorting : true;
             }
 
             if (Selection.Enabled)
@@ -668,7 +669,8 @@ namespace Kendo.Mvc.UI
 
             if (Filtering.Enabled)
             {
-                options["filterable"] = true;
+                var filtering = Filtering.ToJson();
+                options["filterable"] = filtering.Any() ? (object)filtering : true;
             }
 
             if (Resizing.Enabled)
