@@ -79,6 +79,36 @@
                 equal(input.val(), kendo.toString(date, datetimepicker.options.format));
             });
 
+            test("TimeView puts in range if max less than today", function() {
+                var max = new Date(2000, 10, 10, 10, 0, 0),
+                    datetimepicker = new DateTimePicker(input, {
+                        max: max
+                    }),
+                    timeView = datetimepicker.timeView;
+
+                datetimepicker.open("time");
+
+                timeView.ul.children(":last").click();
+
+                equal(+timeView.options.max, +max);
+                equal(+datetimepicker.value(), +max);
+            });
+
+            test("TimeView puts in range if min bigger than today", function() {
+                var min = new Date(2030, 10, 10, 10, 0, 0),
+                    datetimepicker = new DateTimePicker(input, {
+                        min: min
+                    }),
+                    timeView = datetimepicker.timeView;
+
+                datetimepicker.open("time");
+
+                timeView.ul.children(":first").click();
+
+                equal(+timeView.options.min, +min);
+                equal(+datetimepicker.value(), +min);
+            });
+
             test("DateTimePicker closes all views on blur", function() {
                 var datetimepicker = new DateTimePicker(input);
 
@@ -297,23 +327,6 @@
 
                 equal(liElements.eq(0).text(), "10:00 AM");
                 equal(liElements.eq(liElements.length - 1).text(), "12:00 AM");
-            });
-
-            test("DateTimePicker shows all hours if date is not max", function() {
-                var datetimepicker = new DateTimePicker(input, {
-                    max: new Date(2000, 1, 1, 18, 30, 0),
-                    value: new Date(2000, 1, 1, 18, 30, 0)
-                });
-
-                datetimepicker.open("date");
-
-                equal(datetimepicker.timeView.ul.children(":last").text(), "6:30 PM");
-
-                datetimepicker.dateView.calendar.value(new Date(2010, 1, 1));
-                datetimepicker.dateView.calendar.trigger("change");
-
-                equal(datetimepicker.timeView.ul.children(":first").text(), "12:00 AM");
-                equal(datetimepicker.timeView.ul.children(":last").text(), "11:30 PM");
             });
 
             test("DateTimePicker shows all hours in TimeView when date is not min", function() {

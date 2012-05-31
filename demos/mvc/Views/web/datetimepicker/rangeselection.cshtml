@@ -2,7 +2,7 @@
         <div id="example" class="k-content">
             <div class="demo-section" style="width: 535px;">
                 <label for="start">Start date:</label>
-                <input id="start" value="10/10/2011" />
+                <input id="start" value="10/10/2012" />
 
                 <label for="end" style="margin-left:3em">End date:</label>
                 <input id="end" value="10/10/2012"/>
@@ -14,7 +14,7 @@
 
                         if (startDate) {
                             startDate = new Date(startDate);
-                            startDate.setDate(startDate.getDate() + 1);
+                            startDate.setDate(startDate.getDate());
                             end.min(startDate);
                         }
                     }
@@ -24,7 +24,7 @@
 
                         if (endDate) {
                             endDate = new Date(endDate);
-                            endDate.setDate(endDate.getDate() - 1);
+                            endDate.setDate(endDate.getDate());
                             start.max(endDate);
                         }
                     }

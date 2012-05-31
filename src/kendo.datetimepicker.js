@@ -380,6 +380,8 @@
                        that.value(element[0].defaultValue);
                    });
 
+            that._midnight = getMilliseconds(options.min) + getMilliseconds(options.max) === 0;
+
             that.enable(!element.is('[disabled]'));
             that.value(options.value || element.val());
 
@@ -756,7 +758,10 @@
 
         _option: function(option, value) {
             var that = this,
-                options = that.options;
+                options = that.options,
+                timeView = that.timeView,
+                timeViewOptions = timeView.options,
+                current = that._value || that._old;
 
             if (value === undefined) {
                 return options[option];
@@ -770,53 +775,23 @@
 
             options[option] = new DATE(value);
             that.dateView[option](value);
-            that._setTime();
-        },
 
-        _setTime: function() {
-            var that = this,
-                timeView = that.timeView,
-                timeViewOptions = timeView.options,
-                options = that.options,
-                min = options.min,
-                max = options.max,
-                dates = options.dates,
-                previous = that._old,
-                current = that._value,
-                isTimeEqualToZero,
-                rebind;
+            that._midnight = getMilliseconds(options.min) + getMilliseconds(options.max) === 0;
 
-            if (!previous && !current || that._timeSelected) {
-                that._timeSelected = false;
-                return;
-            }
-
-            if (isSameDate(current, min)) {
-                timeViewOptions.min = min;
-                rebind = true;
-            } else if (isSameDate(current, max)) {
-                isTimeEqualToZero = (getMilliseconds(min) + getMilliseconds(max)) === 0;
-                timeViewOptions.max = max;
-                rebind = true;
-            } else if (previous && isSameDate(previous, min)) {
-                timeView.options.min = new DATE(MIN);
-                rebind = true;
-            } else if (previous && isSameDate(previous, max)) {
-                timeView.options.max = new DATE(MAX);
-                rebind = true;
-            }
-
-            if (rebind) {
-                if (!isTimeEqualToZero) {
-                    if (dates && dates[0]) {
-                        timeView.dataBind(dates);
-                    } else {
-                        timeView.refresh();
-                    }
-                } else {
-                    timeView.dataBind([MIN]);
+            if (current && isEqualDatePart(value, current)) {
+                if (that._midnight && option == "max") {
+                    timeViewOptions[option] = MAX;
+                    that.timeView.dataBind([MAX]);
+                    return;
                 }
+
+                timeViewOptions[option] = value;
+            } else {
+                timeViewOptions.max = MAX;
+                timeViewOptions.min = MIN;
             }
+
+            that.timeView.bind();
         },
 
         _toggleHover: function(e) {
@@ -828,17 +803,56 @@
         _update: function(value) {
             var that = this,
                 options = that.options,
-                date = parse(value, options.parseFormats);
+                min = options.min,
+                max = options.max,
+                timeView = that.timeView,
+                date = parse(value, options.parseFormats),
+                rebind, timeViewOptions, old;
 
-            if (!isInRange(date, options.min, options.max)) {
+            if (+date === +that._value) {
+                return date;
+            }
+
+            if (!isInRange(date, min, max)) {
                 date = null;
             }
 
             that._value = date;
+            timeView.value(date);
             that.dateView.value(date);
-            that.timeView.value(date);
 
-            that._setTime();
+            if (date) {
+                old = that._old;
+                timeViewOptions = timeView.options;
+
+                if (isEqualDatePart(date, min)) {
+                    timeViewOptions.min = min;
+                    timeViewOptions.max = MAX;
+                    rebind = true;
+                }
+
+                if (isEqualDatePart(date, max)) {
+                    if (that._midnight) {
+                        timeView.dataBind([MAX]);
+                        return date;
+                    }
+
+                    timeViewOptions.max = max;
+                    if (!rebind) {
+                        timeViewOptions.min = MIN;
+                    }
+                    rebind = true;
+                }
+
+                if ((!old && rebind) || (old && !isEqualDatePart(old, date))) {
+                    if (!rebind) {
+                        timeViewOptions.max = MAX;
+                        timeViewOptions.min = MIN;
+                    }
+
+                    timeView.bind();
+                }
+            }
 
             that.element.val(date ? kendo.toString(date, options.format) : value);
 
@@ -917,6 +931,15 @@
                 value: options.value,
                 change: function(value, trigger) {
                     value = that.timeView._parse(value);
+
+                    if (value < options.min) {
+                        value = new DATE(options.min);
+                        that.timeView.options.min = value;
+                    } else if (value > options.max) {
+                        value = new DATE(options.max);
+                        that.timeView.options.max = value;
+                    }
+
                     if (trigger) {
                         that._timeSelected = true;
                         that._change(value);
@@ -989,7 +1012,7 @@
         options.parseFormats.splice(1, 0, options.timeFormat);
     }
 
-    function isSameDate(value1, value2) {
+    function isEqualDatePart(value1, value2) {
         if (value1) {
             return value1.getFullYear() === value2.getFullYear() &&
                    value1.getMonth() === value2.getMonth() &&

@@ -343,6 +343,227 @@
 
                 equal(+datetimepicker.timeView.options.max, oldMax);
             });
+
+            test("change max date shows all hours", function() {
+                var datetimepicker = input.kendoDateTimePicker({
+                        value: new Date(2010, 10, 10),
+                        max: new Date(2010, 10, 10, 16, 0, 0)
+                    }).data("kendoDateTimePicker");
+
+                datetimepicker.max(new Date(2011, 11, 11, 16, 0, 0));
+
+                equal(datetimepicker.timeView.ul.children(":last").html(), "11:30 PM");
+            });
+
+            test("min method shows all hours in timeView if not edge date", function() {
+                var datetimepicker = new kendo.ui.DateTimePicker(input, {
+                    value: new Date(2010, 10, 10)
+                });
+
+                datetimepicker.min(new Date(2000, 10, 10));
+
+                var ul = datetimepicker.timeView.ul;
+
+                equal(ul.children(":first").html(), "12:00 AM");
+                equal(ul.children(":last").html(), "11:30 PM");
+            });
+
+            test("max method shows only hour from max date if current is edge", function() {
+                var datetimepicker = new kendo.ui.DateTimePicker(input, {
+                    value: new Date(2010, 10, 10)
+                });
+
+                datetimepicker.max(new Date(2010, 10, 10));
+
+                var ul = datetimepicker.timeView.ul;
+
+                equal(ul.children().length, 1);
+                equal(ul.children(":first").html(), "12:00 AM");
+            });
+
+            test("min method rebinds timeView to honor min value if current value is min", function() {
+                var datetimepicker = new kendo.ui.DateTimePicker(input, {
+                    value: new Date(2010, 10, 10)
+                });
+
+                datetimepicker.min(new Date(2010, 10, 10, 10, 0, 0));
+
+                var ul = datetimepicker.timeView.ul;
+
+                equal(ul.children(":first").html(), "10:00 AM");
+                equal(ul.children(":last").html(), "12:00 AM");
+            });
+
+            test("max method rebinds timeView to honor max value if current value is max", function() {
+                var datetimepicker = new kendo.ui.DateTimePicker(input, {
+                    value: new Date(2010, 10, 10)
+                });
+
+                datetimepicker.max(new Date(2010, 10, 10, 10, 0, 0));
+
+                var ul = datetimepicker.timeView.ul;
+
+                equal(ul.children(":first").html(), "12:00 AM");
+                equal(ul.children(":last").html(), "10:00 AM");
+            });
+
+            test("min method shows all hours if current value is null", function() {
+                var datetimepicker = new kendo.ui.DateTimePicker(input);
+
+                datetimepicker.min(new Date(2000, 10, 10));
+
+                var ul = datetimepicker.timeView.ul;
+
+                equal(ul.children(":first").html(), "12:00 AM");
+                equal(ul.children(":last").html(), "11:30 PM");
+            });
+
+            test("value method do not rebind timeView if date is not edge", function () {
+                var datetimepicker = new kendo.ui.DateTimePicker(input);
+
+                datetimepicker.value(new Date(2000, 10, 10));
+
+                var ul = datetimepicker.timeView.ul;
+
+                equal(ul.children().length, 0);
+            });
+
+            test("value method rebinds timeView if current is equal to min", function() {
+                var datetimepicker = new kendo.ui.DateTimePicker(input, {
+                    value: new Date(2010, 10, 10),
+                    min: new Date(2000, 10, 10)
+                });
+
+                datetimepicker.value(new Date(2000, 10, 10));
+
+                var ul = datetimepicker.timeView.ul;
+
+                equal(ul.children(":first").html(), "12:00 AM");
+                equal(ul.children(":last").html(), "11:30 PM");
+            });
+
+            test("value method rebinds timeView if current is equal to max", function() {
+                var datetimepicker = new kendo.ui.DateTimePicker(input, {
+                    value: new Date(2000, 10, 10),
+                    max: new Date(2010, 10, 10, 20, 0, 0)
+                });
+
+                datetimepicker.value(new Date(2010, 10, 10));
+
+                var ul = datetimepicker.timeView.ul;
+
+                equal(ul.children(":first").html(), "12:00 AM");
+                equal(ul.children(":last").html(), "8:00 PM");
+            });
+
+            test("value method shows only one hour when max is midnight", function() {
+                var datetimepicker = new kendo.ui.DateTimePicker(input, {
+                    value: new Date(2000, 10, 10),
+                    max: new Date(2010, 10, 10)
+                });
+
+                datetimepicker.value(new Date(2010, 10, 10));
+
+                var ul = datetimepicker.timeView.ul;
+
+                equal(ul.children().length, 1);
+                equal(ul.children(":first").html(), "12:00 AM");
+            });
+
+            test("value method shows all hours when set diff then edge", function() {
+                var datetimepicker = new kendo.ui.DateTimePicker(input, {
+                    value: new Date(2010, 10, 10),
+                    max: new Date(2010, 10, 10)
+                });
+
+                var ul = datetimepicker.timeView.ul;
+
+                equal(ul.children().length, 1);
+                equal(ul.children(":first").html(), "12:00 AM");
+
+                //set value
+                datetimepicker.value(new Date(2000, 10, 10));
+
+                ul = datetimepicker.timeView.ul;
+
+                equal(ul.children(":first").html(), "12:00 AM");
+                equal(ul.children(":last").html(), "11:30 PM");
+            });
+
+            test("value method do nothing if set to same value as current", function() {
+                var datetimepicker = new kendo.ui.DateTimePicker(input, {
+                    value: new Date(2010, 10, 10)
+                });
+
+                stub(datetimepicker.timeView, "value");
+
+                datetimepicker.value(new Date(2010, 10, 10));
+
+                equal(datetimepicker.timeView.calls("value"), 0);
+            });
+
+            test("value method do nothing if argument is null", function() {
+                var datetimepicker = new kendo.ui.DateTimePicker(input, {
+                    value: new Date(2010, 10, 10)
+                });
+
+                stub(datetimepicker.timeView, "_bind");
+
+                datetimepicker.value(null);
+
+                equal(datetimepicker.timeView.calls("_bind"), 0);
+            });
+
+            test("value method shows only one date if min and max are in same day", function() {
+                var datetimepicker = new kendo.ui.DateTimePicker(input, {
+                    value: new Date(2010, 10, 10),
+                    min: new Date(2010, 10, 10),
+                    max: new Date(2010, 10, 10)
+                });
+
+                var ul = datetimepicker.timeView.ul;
+
+                equal(ul.children().length, 1);
+                equal(ul.children(":first").html(), "12:00 AM");
+            });
+
+            test("value method should rebind timeView if select min after max was selected", function() {
+                var datetimepicker = new kendo.ui.DateTimePicker(input, {
+                    max: new Date(2010, 10, 10, 20, 0, 0),
+                    min: new Date(2000, 10, 10, 10, 0, 0)
+                });
+
+                //set value
+                datetimepicker.value(new Date(2010, 10, 10, 20, 0, 0));
+
+                var ul = datetimepicker.timeView.ul;
+
+                equal(ul.children(":first").html(), "12:00 AM");
+                equal(ul.children(":last").html(), "8:00 PM");
+
+                //set value
+                datetimepicker.value(new Date(2000, 10, 10, 10, 0, 0));
+
+                ul = datetimepicker.timeView.ul;
+
+                equal(ul.children(":first").html(), "10:00 AM");
+                equal(ul.children(":last").html(), "12:00 AM");
+            });
+
+            test("value method persist min and max range in timeview", function() {
+                var datetimepicker = new kendo.ui.DateTimePicker(input, {
+                    min: new Date(2000, 10, 10, 10, 0, 0),
+                    max: new Date(2000, 10, 10, 20, 0, 0)
+                });
+
+                //set value
+                datetimepicker.value(new Date(2000, 10, 10, 12, 0, 0));
+
+                var ul = datetimepicker.timeView.ul;
+
+                equal(ul.children(":first").html(), "10:00 AM");
+                equal(ul.children(":last").html(), "8:00 PM");
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

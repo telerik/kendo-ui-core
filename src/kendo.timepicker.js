@@ -157,15 +157,10 @@
         },
 
         open: function() {
-            var that = this,
-                dates = that.options.dates;
+            var that = this;
 
             if (!that.ul[0].firstChild) {
-                if (dates && dates[0]) {
-                    that.dataBind(dates);
-                } else {
-                    that.refresh();
-                }
+                that.bind();
             }
 
             that.popup.open();
@@ -193,7 +188,7 @@
                 }
             }
 
-            that._bind(html, length);
+            that._html(html, length);
         },
 
         refresh: function() {
@@ -239,10 +234,21 @@
                 html += template(toString(start, format));
             }
 
-            that._bind(html, length);
+            that._html(html, length);
         },
 
-        _bind: function(html, length) {
+        bind: function() {
+            var that = this,
+                dates = that.options.dates;
+
+            if (dates && dates[0]) {
+                that.dataBind(dates);
+            } else {
+                that.refresh();
+            }
+        },
+
+        _html: function(html, length) {
             var that = this;
 
             that.ul[0].innerHTML = html;
@@ -944,7 +950,7 @@
 
             options[option] = value;
             that.timeView.options[option] = value;
-            that.timeView.refresh();
+            that.timeView.bind();
         },
 
         _toggleHover: function(e) {
