@@ -23,6 +23,7 @@
         oldEffectsRegExp = /(zoom|fade|expand)(\w+)/,
         singleEffectRegExp = /(zoom|fade|expand)/,
         transformProps = ["perspective", "rotate", "rotatex", "rotatey", "rotatez", "rotate3d", "scale", "scalex", "scaley", "scalez", "scale3d", "skew", "skewx", "skewy", "translate", "translatex", "translatey", "translatez", "translate3d", "matrix", "matrix3d"],
+        transform2d = ["rotate", "scale", "scalex", "scaley", "skew", "skewx", "skewy", "translate", "translatex", "translatey", "matrix"],
         cssPrefix = transforms.css,
         round = Math.round,
         BLANK = "",
@@ -132,7 +133,7 @@
 
                 element.css(TRANSITION, options.exclusive + " " + options.duration + "ms " + options.ease);
                 setTimeout(function() {
-                    element.css(TRANSITION, NONE).css(HEIGHT);
+                    element.css(TRANSITION, "").css(HEIGHT);
                 }, options.duration); // TODO: this should fire a kendoAnimate session instead.
             }
 
@@ -258,10 +259,10 @@
     }
 
     function removeTransitionStyles(element) {
-        element.css(TRANSITION, NONE);
+        element.css(TRANSITION, "");
 
         if (!browser.safari) {
-            element.css(HEIGHT);
+            element.css(TRANSITION);
         }
     }
 
@@ -304,27 +305,32 @@
     }
 
     function normalizeCSS(element, properties, options) {
-        var transformation = [],
-            cssValues = {},
-            key, value, exitValue;
+        var transformation = [], cssValues = {}, lowerKey, key, value, exitValue, isTransformed;
 
         for (key in properties) {
-            exitValue = false;
+            lowerKey = key.toLowerCase();
+            isTransformed = transformProps.indexOf(lowerKey) != -1;
 
-            if ($.isFunction(properties[key])) {
-                value = properties[key](element, options);
-                if (value !== undefined) {
-                    exitValue = value;
-                }
+            if (transforms && isTransformed && transform2d.indexOf(lowerKey) == -1) {
+                delete properties[key];
             } else {
-                exitValue = properties[key];
-            }
+                exitValue = false;
 
-            if (exitValue !== false) {
-                if (transforms && transformProps.indexOf(key.toLowerCase()) != -1) {
-                    transformation.push(key + "(" + exitValue + ")");
+                if ($.isFunction(properties[key])) {
+                    value = properties[key](element, options);
+                    if (value !== undefined) {
+                        exitValue = value;
+                    }
                 } else {
-                    cssValues[key] = exitValue;
+                    exitValue = properties[key];
+                }
+
+                if (exitValue !== false) {
+                    if (transforms && isTransformed) {
+                        transformation.push(key + "(" + exitValue + ")");
+                    } else {
+                        cssValues[key] = exitValue;
+                    }
                 }
             }
         }
@@ -407,7 +413,7 @@
     function animationProperty(element, property) {
         if (transforms) {
             var transform = element.css(TRANSFORM);
-            if (transform == "none") {
+            if (transform == NONE) {
                 return property == "scale" ? 1 : 0;
             }
 
@@ -716,10 +722,10 @@
         zoom: {
             css: {
                 scale: function(element, options) {
-                    return options.effects.zoom.direction == "in" && transitions ? ".01" : 1;
+                    return options.effects.zoom.direction == "in" && transitions ? "0.01" : 1;
                 },
                 zoom: function(element, options) {
-                    return options.effects.zoom.direction == "in" && hasZoom ? ".01" : undefined;
+                    return options.effects.zoom.direction == "in" && hasZoom ? "0.01" : undefined;
                 }
             },
             setup: function(element, options) {
@@ -729,8 +735,8 @@
                     var version = $.browser.version,
                         style = element[0].currentStyle,
                         width = style.width.indexOf("%") != -1 ? element.parent().width() : element.width(),
-                        height = style.height.indexOf("%") != -1 ? element.parent().height() : parseInt(style.height, 10),
-                        half = version < 9 && options.effects.fade ? 0 : (1 - (parseInt(element.css("zoom"), 10) / 100)) / 2; // Kill margins in IE7/8 if using fade
+                        height = style.height.indexOf("%") != -1 ? element.parent().height() : parseInteger(style.height),
+                        half = version < 9 && options.effects.fade ? 0 : (1 - (parseInteger(element.css("zoom")) / 100)) / 2; // Kill margins in IE7/8 if using fade
 
                     element.css({
                         marginLeft: width * (version < 8 ? 0 : half),
@@ -767,7 +773,7 @@
                     extender = {}, reverse = options.reverse;
 
                 if (!reverse && !origin && origin !== 0) {
-                    element.data(ORIGIN, parseInt(element.css("margin-" + options.axis), 10));
+                    element.data(ORIGIN, parseFloat(element.css("margin-" + options.axis)));
                 }
 
                 margin = (element.data(ORIGIN) || 0);
@@ -830,7 +836,7 @@
                     property = (direction ? direction == "vertical" : true) ? HEIGHT : WIDTH,
                     setLength = element[0].style[property],
                     oldLength = element.data(property),
-                    length = parseInteger(oldLength || setLength) || round(element.css(property, AUTO )[property]()),
+                    length = parseFloat(oldLength || setLength) || round(element.css(property, AUTO )[property]()),
                     completion = {};
 
                 completion[property] = (reverse ? 0 : length) + PX;
@@ -868,7 +874,7 @@
                     completion = {};
 
                 if (support.hasHW3D) {
-                    if (parent.css(PERSPECTIVE) == "none") {
+                    if (parent.css(PERSPECTIVE) == NONE) {
                         parent.css(PERSPECTIVE, 500);
                     }
 
