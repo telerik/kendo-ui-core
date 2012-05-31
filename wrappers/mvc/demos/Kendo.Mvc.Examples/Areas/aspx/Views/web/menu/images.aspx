@@ -96,7 +96,7 @@
         padding-bottom: 10px;
     }
     #menuSprites .k-sprite {
-        background-image: url("<%= Url.Content("~/Content/shared/styles/flags.png") %>");
+        background-image: url("<%= Url.Content("~/Content/shared/flags.png") %>");
     }
     .brazilFlag {
         background-position: 0 0;

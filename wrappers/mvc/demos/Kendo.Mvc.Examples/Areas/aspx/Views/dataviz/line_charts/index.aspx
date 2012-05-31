@@ -3,7 +3,7 @@
 <asp:Content ContentPlaceHolderID="HeadContent" runat="server">
 <style>
     #chart {
-        background: center no-repeat url('<%= Url.Content("~/Content/world-map.png") %>')
+        background: center no-repeat url('<%= Url.Content("~/Content/shared/world-map.png") %>')
     }
 </style>
 </asp:Content>

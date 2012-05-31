@@ -257,13 +257,8 @@ namespace("mvc", function() {
                 src: path.join(DEMOS_SHARED, SCRIPTS_PATH),
                 dst: scriptsDest
             }, {
-                name: SUITE_CSS,
-                src: sharedStyles,
-                dst: stylesDest
-            }, {
-                name: DEMOS_OFFLINE_CSS,
-                src: sharedStyles,
-                dst: stylesDest
+                src: path.join(DEMOS_SHARED, "styles"),
+                dst: sharedStylesDest
             }, {
                 src: path.join(DEMOS_SHARED, "icons"),
                 dst: iconsDest
@@ -371,9 +366,6 @@ namespace("mvc", function() {
             }, {
                 src: path.join(DEMOS_PATH, "content", suite),
                 dst: suiteStylesDest
-            }, {
-                src: path.join(DEMOS_PATH, "content", "shared", "styles"),
-                dst: stylesDest
             }
         ];
 
