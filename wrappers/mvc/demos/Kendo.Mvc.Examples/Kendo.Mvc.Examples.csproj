@@ -81,7 +81,7 @@
     <Compile Include="Controllers\Web\AutoComplete\EventsController.cs" />
     <Compile Include="Controllers\Web\AutoComplete\ServerFilteringController.cs" />
     <Compile Include="Controllers\Web\AutoComplete\TemplateController.cs" />
-    <Compile Include="Controllers\Web\Calendar\CalendarController.cs" />
+    <Compile Include="Controllers\Web\Calendar\IndexController.cs" />
     <Compile Include="Controllers\Web\Calendar\ApiController.cs" />
     <Compile Include="Controllers\Web\Calendar\EventsController.cs" />
     <Compile Include="Controllers\Web\Calendar\TemplateController.cs" />
@@ -152,7 +152,7 @@
     <Compile Include="Controllers\Web\Menu\EventsController.cs" />
     <Compile Include="Controllers\Web\Menu\OrientationController.cs" />
     <Compile Include="Controllers\Web\Menu\ImagesController.cs" />
-    <Compile Include="Controllers\Web\Menu\MenuController.cs" />
+    <Compile Include="Controllers\Web\Menu\IndexController.cs" />
     <Compile Include="Controllers\Web\PanelBar\AjaxController.cs" />
     <Compile Include="Controllers\Web\PanelBar\ApiController.cs" />
     <Compile Include="Controllers\Web\PanelBar\AnimationController.cs" />
