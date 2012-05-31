@@ -163,25 +163,6 @@ namespace Kendo.Mvc.Tests.Menu
         }
 
         [Fact]
-        public void SelectedIndex_should_set_SelectedIndex_property_of_PanelBar()
-        {
-            const int value = 0;
-
-            builder.SelectedIndex(value);
-
-            Assert.Equal(value, menu.SelectedIndex);
-        }
-
-        [Fact]
-        public void SelectedIndex_should_return_builder()
-        {
-            const int value = 0;
-            var returnedBuilder = builder.SelectedIndex(value);
-
-            Assert.IsType(typeof(MenuBuilder), returnedBuilder);
-        }
-
-        [Fact]
         public void HighlightPath_should_set_HighlightPath_property_of_Menu()
         {
             const bool value = true;

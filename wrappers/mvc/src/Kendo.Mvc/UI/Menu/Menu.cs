@@ -24,8 +24,6 @@ namespace Kendo.Mvc.UI
           
             Items = new LinkedObjectCollection<MenuItem>(null);
 
-            SelectedIndex = -1;
-
             CloseOnClick = true;
             HighlightPath = true;
             SecurityTrimming = true;
@@ -74,12 +72,6 @@ namespace Kendo.Mvc.UI
         }
 
         public Action<MenuItem> ItemAction
-        {
-            get;
-            set;
-        }
-
-        public int SelectedIndex
         {
             get;
             set;
@@ -150,11 +142,6 @@ namespace Kendo.Mvc.UI
         {
             if (Items.Any())
             {
-                if (SelectedIndex != -1 && Items.Count < SelectedIndex)
-                {
-                    throw new ArgumentOutOfRangeException(TextResource.IndexOutOfRange);
-                }
-
                 if (HighlightPath)
                 {
                     Items.Each(HighlightSelectedItem);
@@ -179,18 +166,7 @@ namespace Kendo.Mvc.UI
                 isPathHighlighted = true;
 
                 item.Selected = item.Parent != null;
-
-                MenuItem tmpItem = item;
-                do
-                {
-                    if (!tmpItem.Selected)
-                    {
-                        tmpItem.HtmlAttributes.AppendInValue("class", " ", "t-highlighted");
-                    }
-                    tmpItem = tmpItem.Parent;
-                }
-                while (tmpItem != null);
-
+                
                 return;
             }
             item.Items.Each(HighlightSelectedItem);

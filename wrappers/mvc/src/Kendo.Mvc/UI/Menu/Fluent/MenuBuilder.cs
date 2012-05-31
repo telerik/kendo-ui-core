@@ -271,30 +271,6 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Selects the item at the specified index.
-        /// </summary>
-        /// <param name="index">The index.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().Menu()
-        ///             .Name("Menu")
-        ///             .Items(items =>
-        ///             {
-        ///                 items.Add().Text("First Item");
-        ///                 items.Add().Text("Second Item");
-        ///             })
-        ///             .SelectedIndex(1)
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public MenuBuilder SelectedIndex(int index)
-        {
-            Component.SelectedIndex = index;
-
-            return this;
-        }
-
-        /// <summary>
         /// Callback for each item.
         /// </summary>
         /// <param name="action">Action, which will be executed for each item.</param>
