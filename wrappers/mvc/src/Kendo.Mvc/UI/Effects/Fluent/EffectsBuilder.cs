@@ -43,24 +43,24 @@ namespace Kendo.Mvc.UI
             return this;
         }
 
-        public EffectsBuilder Fade(string direction)
+        public EffectsBuilder Fade(FadeDirection direction)
         {
-            return Add(EffectsList.Fade, direction);
+            return Add(EffectsList.Fade, direction.ToString().ToLower());
         }
 
-        public EffectsBuilder Zoom(string direction)
+        public EffectsBuilder Zoom(ZoomDirection direction)
         {
-            return Add(EffectsList.Zoom, direction);
+            return Add(EffectsList.Zoom, direction.ToString().ToLower());
         }
 
-        public EffectsBuilder Slide(string direction)
+        public EffectsBuilder Slide(SlideDirection direction)
         {
-            return Add(EffectsList.Slide, direction);
+            return Add(EffectsList.Slide, direction.ToString().ToLower());
         }
 
-        public EffectsBuilder SlideIn(string direction)
+        public EffectsBuilder SlideIn(SlideDirection direction)
         {
-            return Add(EffectsList.SlideIn, direction);
+            return Add(EffectsList.SlideIn, direction.ToString().ToLower());
         }
 
         public EffectsBuilder Expand()
@@ -68,9 +68,9 @@ namespace Kendo.Mvc.UI
             return Add(EffectsList.Expand);
         }
 
-        public EffectsBuilder Expand(string direction)
+        public EffectsBuilder Expand(ExpandDirection direction)
         {
-            return Add(EffectsList.Expand, direction);
+            return Add(EffectsList.Expand, direction.ToString().ToLower());
         }
 
         public EffectsBuilder Duration(int value)
