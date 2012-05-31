@@ -5,6 +5,11 @@
                 <span class="configHead">Configuration</span>
                 <ul class="options">
                     <li><label for="cursorOffset"><input type="checkbox" id="cursorOffset"> Enable <code>cursorOffset</code></label></li>
+                    <li><label for="axis">Axis: <select id="axis">
+                                <option value="">(none)</option>
+                                <option value="x">Horizontal (x)</option>
+                                <option value="y">Vertical (y)</option>
+                        </select></label></li>
                 </ul>
             </div>
             <div id="draggable"></div>
@@ -64,6 +69,10 @@
                         } else {
                             draggable.options.cursorOffset = null;
                         }
+                    });
+
+                    $("#axis").change(function(e) {
+                        draggable.options.axis = $(this).val();
                     });
                 });
             </script>

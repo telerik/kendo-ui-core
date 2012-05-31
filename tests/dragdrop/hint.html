@@ -93,6 +93,34 @@
                 equal(parseInt(hint.css("left")), parseInt(offset.left + 20));
             });
 
+            test("the hint can be constrained horizontally", function() {
+                var draggable = setup({axis: "x"});
+
+                var offset = kendo.getOffset(span);
+                console.log(offset);
+
+                trigger("mousedown", { pageX: 1, pageY: 1 });
+                trigger("mousemove", { pageX: 21, pageY: 21 });
+
+                var result = kendo.getOffset(hint);
+                equal(result.top, offset.top);
+                equal(result.left, offset.left + 20);
+            });
+
+            test("the hint can be constrained vertically", function() {
+                var draggable = setup({axis: "y"});
+
+                var offset = kendo.getOffset(span);
+                console.log(offset);
+
+                trigger("mousedown", { pageX: 1, pageY: 1 });
+                trigger("mousemove", { pageX: 21, pageY: 21 });
+
+                var result = kendo.getOffset(hint);
+                equal(result.top, offset.top + 20);
+                equal(result.left, offset.left);
+            });
+
             test("the hint is positioned using options.cursorOffset", function() {
                 var draggable = setup({ cursorOffset: { left: 1, top: 1 } });
 

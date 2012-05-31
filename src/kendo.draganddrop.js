@@ -813,6 +813,7 @@
          * @option {Integer} [distance] <5> The required distance that the mouse should travel in order to initiate a drag.
          * @option {Selector} [filter] Selects child elements that are draggable if a widget is attached to a container.
          * @option {String} [group] <"default"> Used to group sets of draggable and drop targets. A draggable with the same group value as a drop target will be accepted by the drop target.
+         * @option {String} [axis] <null> Constrains the hint movement to either the horizontal (x) or vertical (y) axis. Can be set to either "x" or "y".
          * @option {Object} [cursorOffset] <null> If set, specifies the offset of the hint relative to the mouse cursor/finger.
          * By default, the hint is initially positioned on top of the draggable source offset. The option accepts an object with two keys: <code>top</code> and <code>left</code>.
          * _exampleTitle Initialize Draggable with cursorOffset
@@ -895,6 +896,7 @@
             distance: 5,
             group: "default",
             cursorOffset: null,
+            axis: null,
             dropped: false
         },
 
@@ -911,11 +913,12 @@
 
                 var offset = getOffset(that.currentTarget);
                 that.hintOffset = offset;
+
                 that.hint.css( {
                     position: "absolute",
                     zIndex: 20000, // the Window's z-index is 10000 and can be raised because of z-stacking
-                    left: offset.x,
-                    top: offset.y
+                    left: offset.left,
+                    top: offset.top
                 })
                 .appendTo(document.body);
             }
@@ -935,6 +938,8 @@
         updateHint: function(e) {
             var that = this,
                 coordinates,
+                options = that.options,
+                axis = options.axis,
                 cursorOffset = that.options.cursorOffset;
 
             if (cursorOffset) {
@@ -943,6 +948,12 @@
                that.hintOffset.left += e.x.delta;
                that.hintOffset.top += e.y.delta;
                coordinates = that.hintOffset;
+            }
+
+            if (axis === "x") {
+                coordinates = { "left": coordinates.left };
+            } else if (axis === "y") {
+                coordinates = { "top": coordinates.top };
             }
 
             that.hint.css(coordinates);
