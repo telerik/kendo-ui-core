@@ -220,10 +220,12 @@
                     "url": "editor/index.html"
                 },
                 {
+                    "packages": [ "!mvc" ],
                     "text": "Custom tools",
                     "url": "editor/custom-tools.html"
                 },
                 {
+                    "packages": [ "!mvc" ],
                     "text": "Snippets",
                     "url": "editor/snippets.html"
                 },
