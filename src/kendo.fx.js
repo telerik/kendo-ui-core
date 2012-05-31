@@ -311,7 +311,7 @@
             lowerKey = key.toLowerCase();
             isTransformed = transformProps.indexOf(lowerKey) != -1;
 
-            if (transforms && isTransformed && transform2d.indexOf(lowerKey) == -1) {
+            if (transforms && !support.hasHW3D && isTransformed && transform2d.indexOf(lowerKey) == -1) {
                 delete properties[key];
             } else {
                 exitValue = false;
