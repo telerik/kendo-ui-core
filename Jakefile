@@ -238,7 +238,7 @@ namespace("mvc", function() {
     var projectRoot = path.join("wrappers", "mvc", "demos", "Kendo.Mvc.Examples"),
         sharedStyles = path.join(DEMOS_SHARED, STYLES_PATH),
         stylesDest = path.join(projectRoot, "Content"),
-        iconsDest = path.join(stylesDest, "icons"),
+        iconsDest = path.join(stylesDest, "shared", "icons"),
         scriptsDest = path.join(projectRoot, "Scripts");
 
     mkdir(stylesDest);
