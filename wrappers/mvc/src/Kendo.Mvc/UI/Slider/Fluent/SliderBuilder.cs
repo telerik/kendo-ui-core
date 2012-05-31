@@ -145,13 +145,5 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
-
-        /// <summary>Sets a value indicating whether the slider can respond to user interaction.</summary>
-        public SliderBuilder<T> Enable(bool value)
-        {
-            Component.Enabled = value;
-
-            return this;
-        }
     }
 }

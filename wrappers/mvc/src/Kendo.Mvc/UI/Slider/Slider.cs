@@ -10,39 +10,23 @@ namespace Kendo.Mvc.UI
 
     public class Slider<T> : ViewComponentBase, IInputComponent<T> where T : struct, IComparable
     {
-        private readonly ISliderHtmlBuilderFactory rendererFactory;
-
-        public Slider(ViewContext viewContext, IJavaScriptInitializer initializer, ISliderHtmlBuilderFactory rendererFactory)
-            : base(viewContext, initializer)
+        public Slider(ViewContext viewContext, IJavaScriptInitializer initializer, ViewDataDictionary viewData)
+            : base(viewContext, initializer, viewData)
         {
-            this.rendererFactory = rendererFactory;
-
-            Orientation = SliderOrientation.Horizontal;
-            TickPlacement = SliderTickPlacement.Both;
-            ShowButtons = true;
-            IncreaseButtonTitle = "Increase";
-            DecreaseButtonTitle = "Decrease";
-            Min = (T)Convert.ChangeType(0, typeof(T));
-            Max = (T)Convert.ChangeType(10, typeof(T));
-            SmallStep = (T)Convert.ChangeType(1, typeof(T));
-            Enabled = true;
-
             Settings = new SliderTooltipSettings();
         }
 
-        public SliderOrientation Orientation { get; set; }
+        public SliderOrientation? Orientation { get; set; }
 
-        public SliderTickPlacement TickPlacement { get; set; }
+        public SliderTickPlacement? TickPlacement { get; set; }
 
-        public T Min { get; set; }
+        public T? Min { get; set; }
 
-        public T Max { get; set; }
+        public T? Max { get; set; }
 
-        public T SmallStep { get; set; }
+        public T? SmallStep { get; set; }
 
         public T? LargeStep { get; set; }
-
-        public bool Enabled { get; set; }
 
         public T? Value { get; set; }
 
@@ -68,16 +52,15 @@ namespace Kendo.Mvc.UI
         private void SerializeProperties(IDictionary<string, object> options)
         {
             FluentDictionary.For(options)
-                .Add("orientation", Orientation, SliderOrientation.Horizontal)
-                .Add("tickPlacement", TickPlacement, SliderTickPlacement.Both)
-                .Add("increaseButtonTitle", IncreaseButtonTitle, "Increase")
-                .Add("decreaseButtonTitle", DecreaseButtonTitle, "Decrease")
+                .Add("orientation", Orientation.ToString().ToLowerInvariant(), () => Orientation.HasValue)
+                .Add("tickPlacement", TickPlacement.ToString().ToLowerInvariant(), () => TickPlacement.HasValue)
+                .Add("increaseButtonTitle", IncreaseButtonTitle, () => IncreaseButtonTitle.HasValue())
+                .Add("decreaseButtonTitle", DecreaseButtonTitle, () => DecreaseButtonTitle.HasValue())
                 .Add("showButtons", ShowButtons, () => ShowButtons.HasValue)
-                .Add("enabled", Enabled, true)
-                .Add("smallStep", SmallStep)
-                .Add("largeStep", LargeStep)
-                .Add("min", Min)
-                .Add("max", Max);
+                .Add("smallStep", SmallStep, () => SmallStep.HasValue)
+                .Add("largeStep", LargeStep, () => LargeStep.HasValue)
+                .Add("min", Min, () => Min.HasValue)
+                .Add("max", Max, () => Max.HasValue);
 
             Settings.SerializeTo("tooltip", options);
         }
@@ -111,19 +94,9 @@ namespace Kendo.Mvc.UI
                 }
             }
 
-            var builder = rendererFactory.Create(new SliderRenderingData
-            {
-                Id = Id,
-                Name = Name,
-                HtmlAttributes = HtmlAttributes,
-                MaxValue = Max,
-                MinValue = Min,
-                SmallStep = SmallStep,
-                Value = value,
-                Enabled = Enabled
-            });
+            var renderer = new SliderHtmlBuilder<T>(this);
 
-            builder.Build().WriteTo(writer);
+            renderer.Build().WriteTo(writer);
 
             base.WriteHtml(writer);
         }

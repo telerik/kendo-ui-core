@@ -7,11 +7,9 @@ namespace Kendo.Mvc.UI
     {
         public SliderTooltipSettings()
         {
-            Enabled = true;
-            Format = "{0}";
         }
 
-        public bool Enabled
+        public bool? Enabled
         {
             get;
             set;
@@ -31,7 +29,7 @@ namespace Kendo.Mvc.UI
 
         public void SerializeTo(string key, IDictionary<string, object> options)
         {
-            if (Format != "{0}" || !Enabled || Template.HasValue())
+            if (Enabled.HasValue || Format.HasValue() || Template.HasValue())
             {
                 var settings = new Dictionary<string, object>();
 

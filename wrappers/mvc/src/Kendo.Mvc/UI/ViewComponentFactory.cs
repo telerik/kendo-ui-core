@@ -469,7 +469,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual SliderBuilder<T> Slider<T>() where T: struct, IComparable
         {
-            return new SliderBuilder<T>(new Slider<T>(ViewContext, Initializer, DI.Current.Resolve<ISliderHtmlBuilderFactory>()));
+            return new SliderBuilder<T>(new Slider<T>(ViewContext, Initializer, ViewData));
         }
 
         /// <summary>
@@ -484,7 +484,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual SliderBuilder<double> Slider()
         {
-            return new SliderBuilder<double>(new Slider<double>(ViewContext, Initializer, DI.Current.Resolve<ISliderHtmlBuilderFactory>()));
+            return new SliderBuilder<double>(new Slider<double>(ViewContext, Initializer, ViewData));
         }
 
         /// <summary>
@@ -499,7 +499,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual RangeSliderBuilder<T> RangeSlider<T>() where T : struct, IComparable
         {
-            return new RangeSliderBuilder<T>(new RangeSlider<T>(ViewContext, Initializer, DI.Current.Resolve<IRangeSliderHtmlBuilderFactory>()));
+            return new RangeSliderBuilder<T>(new RangeSlider<T>(ViewContext, Initializer, ViewData));
         }
 
         /// <summary>
@@ -514,7 +514,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual RangeSliderBuilder<double> RangeSlider()
         {
-            return new RangeSliderBuilder<double>(new RangeSlider<double>(ViewContext, Initializer, DI.Current.Resolve<IRangeSliderHtmlBuilderFactory>()));
+            return new RangeSliderBuilder<double>(new RangeSlider<double>(ViewContext, Initializer, ViewData));
         }
 
         /// <summary>
@@ -1066,25 +1066,32 @@ namespace Kendo.Mvc.UI
             where TValue : struct, IComparable
         {
 
-            var value = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
+            var value = (Nullable<TValue>)ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
 
             IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
             TValue? minimum = GetRangeValidationParameter<TValue>(validators, minimumValidator);
             TValue? maximum = GetRangeValidationParameter<TValue>(validators, maximumValidator);
 
-            minimum = minimum.HasValue ? minimum : (TValue)Convert.ChangeType(0, typeof(TValue));
-            maximum = maximum.HasValue ? maximum : (TValue)Convert.ChangeType(10, typeof(TValue));
+            var slider = Slider<TValue>()
+                            .Name(GetName(expression))
+                            .Value(value);
 
-            return Slider<TValue>()
-                    .Name(GetName(expression))
-                    .Value(value == null ? minimum : (TValue)value)
-                    .Min(minimum.Value)
-                    .Max(maximum.Value);
+            if (minimum.HasValue)
+            {
+                slider.Min(minimum.Value);
+            }
+
+            if (maximum.HasValue)
+            {
+                slider.Max(maximum.Value);
+            }
+
+            return slider;
         }
 
         /// <summary>
-        /// Creates a new <see cref="NumericTextBox{Nullable{TValue}}"/>.
+        /// Creates a new <see cref="SliderFor{Nullable{TValue}}"/>.
         /// </summary>
         /// <example>
         /// <code lang="CS">
@@ -1102,14 +1109,90 @@ namespace Kendo.Mvc.UI
 
             var value = (Nullable<TValue>)ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
 
-            minimum = minimum.HasValue ? minimum : (TValue)Convert.ChangeType(0, typeof(TValue));
-            maximum = maximum.HasValue ? maximum : (TValue)Convert.ChangeType(10, typeof(TValue));
+            var slider = Slider<TValue>()
+                            .Name(GetName(expression))
+                            .Value(value);
 
-            return Slider<TValue>()
-                    .Name(GetName(expression))
-                    .Value(value.HasValue ? value.Value : minimum)
-                    .Min(minimum.Value)
-                    .Max(maximum.Value);
+            if (minimum.HasValue)
+            {
+                slider.Min(minimum.Value);
+            }
+
+            if (maximum.HasValue)
+            {
+                slider.Max(maximum.Value);
+            }
+
+            return slider;
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="SliderFor"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().SliderFor(m=>m.Property) %&gt;
+        /// </code>
+        /// </example>
+        public virtual SliderBuilder<double> SliderFor(Expression<Func<TModel, double>> expression)
+        {
+            IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
+
+            double? minimum = GetRangeValidationParameter<double>(validators, minimumValidator);
+            double? maximum = GetRangeValidationParameter<double>(validators, maximumValidator);
+
+            var value = (Nullable<double>)ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
+
+            var slider = Slider<double>()
+                            .Name(GetName(expression))
+                            .Value(value);
+
+            if (minimum.HasValue)
+            {
+                slider.Min(minimum.Value);
+            }
+
+            if (maximum.HasValue)
+            {
+                slider.Max(maximum.Value);
+            }
+
+            return slider;
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="SliderFor"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().SliderFor(m=>m.NullableProperty) %&gt;
+        /// </code>
+        /// </example>
+        public virtual SliderBuilder<double> SliderFor(Expression<Func<TModel, Nullable<double>>> expression)
+        {
+
+            IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
+
+            double? minimum = GetRangeValidationParameter<double>(validators, minimumValidator);
+            double? maximum = GetRangeValidationParameter<double>(validators, maximumValidator);
+
+            var value = (Nullable<double>)ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
+
+            var slider = Slider<double>()
+                            .Name(GetName(expression))
+                            .Value(value);
+
+            if (minimum.HasValue)
+            {
+                slider.Min(minimum.Value);
+            }
+
+            if (maximum.HasValue)
+            {
+                slider.Max(maximum.Value);
+            }
+
+            return slider;
         }
 
         /// <summary>
@@ -1129,14 +1212,52 @@ namespace Kendo.Mvc.UI
             TValue? minimum = GetRangeValidationParameter<TValue>(validators, minimumValidator);
             TValue? maximum = GetRangeValidationParameter<TValue>(validators, maximumValidator);
 
-            minimum = minimum.HasValue ? minimum : (TValue)Convert.ChangeType(0, typeof(TValue));
-            maximum = maximum.HasValue ? maximum : (TValue)Convert.ChangeType(10, typeof(TValue));
+            var rangeSlider = RangeSlider<TValue>()
+                                .Name(GetName(expression))
+                                .Values((TValue[])ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model);
 
-            return RangeSlider<TValue>()
-                    .Name(GetName(expression))
-                    .Values((TValue[])ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model)
-                    .Min(minimum.Value)
-                    .Max(maximum.Value);
+            if (minimum.HasValue)
+            {
+                rangeSlider.Min(minimum.Value);
+            }
+
+            if (maximum.HasValue)
+            {
+                rangeSlider.Max(maximum.Value);
+            }
+
+            return rangeSlider;
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="RangeSliderFor{TValue}"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().RangeSliderFor(m=>m.Property) %&gt;
+        /// </code>
+        /// </example>
+        public virtual RangeSliderBuilder<double> RangeSliderFor(Expression<Func<TModel, double[]>> expression)
+        {
+
+            IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
+
+            double? minimum = GetRangeValidationParameter<double>(validators, minimumValidator);
+            double? maximum = GetRangeValidationParameter<double>(validators, maximumValidator);
+
+            var rangeSlider = RangeSlider<double>()
+                                .Name(GetName(expression))
+                                .Values((double[])ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model);
+
+            if (minimum.HasValue) {
+                rangeSlider.Min(minimum.Value);
+            }
+
+            if (maximum.HasValue) {
+                rangeSlider.Max(maximum.Value);
+            }
+
+            return rangeSlider;
         }
 
         /// <summary>

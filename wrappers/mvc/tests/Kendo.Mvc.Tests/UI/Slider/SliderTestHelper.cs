@@ -17,13 +17,9 @@ namespace Kendo.Mvc.UI.Tests
             var httpContext = TestHelper.CreateMockedHttpContext();
             httpContext.Setup(c => c.Request.Browser.CreateHtmlTextWriter(It.IsAny<TextWriter>())).Returns(new HtmlTextWriter(TextWriter.Null));
 
-            var builderFactory = new Mock<ISliderHtmlBuilderFactory>();
-            builderFactory.Setup(f => f.Create(It.IsAny<SliderRenderingData>())).Returns(builder);
-
-
             viewContext = viewContext ?? TestHelper.CreateViewContext();
 
-            var component = new Slider<T>(viewContext, new JavaScriptInitializer(), builderFactory.Object);           
+            var component = new Slider<T>(viewContext, new JavaScriptInitializer(), new ViewDataDictionary());           
 
             return component;
         }
@@ -35,12 +31,9 @@ namespace Kendo.Mvc.UI.Tests
             var httpContext = TestHelper.CreateMockedHttpContext();
             httpContext.Setup(c => c.Request.Browser.CreateHtmlTextWriter(It.IsAny<TextWriter>())).Returns(new HtmlTextWriter(TextWriter.Null));
 
-            var builderFactory = new Mock<IRangeSliderHtmlBuilderFactory>();
-            builderFactory.Setup(f => f.Create(It.IsAny<RangeSliderRenderingData>())).Returns(builder);
-
             viewContext = viewContext ?? TestHelper.CreateViewContext();
 
-            var component = new RangeSlider<T>(viewContext, new JavaScriptInitializer(), builderFactory.Object);
+            var component = new RangeSlider<T>(viewContext, new JavaScriptInitializer(), new ViewDataDictionary());
 
             return component;
         }

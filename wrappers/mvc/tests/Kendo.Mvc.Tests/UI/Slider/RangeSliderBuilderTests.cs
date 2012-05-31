@@ -148,21 +148,5 @@ namespace Kendo.Mvc.UI.Tests
             const int largeStep = 4;
             builder.LargeStep(largeStep).ShouldBeType<RangeSliderBuilder<int>>();
         }
-
-        [Fact]
-        public void Should_set_Enabled_property_of_the_slider()
-        {
-            const bool enabled = true;
-            builder.Enable(enabled);
-         
-            component.Enabled.ShouldEqual(enabled);
-        }
-
-        [Fact]
-        public void Enable_should_return_builder()
-        {
-            const bool enabled = true;
-            builder.Enable(enabled).ShouldBeType<RangeSliderBuilder<int>>();
-        }
     }
 }

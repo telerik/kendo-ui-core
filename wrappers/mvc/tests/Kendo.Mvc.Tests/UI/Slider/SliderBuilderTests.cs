@@ -129,22 +129,6 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
-        public void Should_set_enabled_property_of_the_slider()
-        {
-            const bool enabled = true;
-            builder.Enable(enabled);
-
-            component.Enabled.ShouldEqual(enabled);
-        }
-
-        [Fact]
-        public void Enable_should_return_builder()
-        {
-            const bool enabled = true;
-            builder.Enable(enabled).ShouldBeType<SliderBuilder<int>>();
-        }
-
-        [Fact]
         public void Should_set_increaseButtonTitle_property_of_the_slider()
         {
             const string increaseButtonTitle = "foo";

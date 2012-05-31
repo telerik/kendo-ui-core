@@ -60,10 +60,6 @@ namespace Kendo.Mvc.Infrastructure
 
             Current.Register<IUrlAuthorization>(() => new UrlAuthorization());
 
-            Current.Register<ISliderHtmlBuilderFactory>(() => new SliderHtmlBuilderFactory());
-
-            Current.Register<IRangeSliderHtmlBuilderFactory>(() => new RangeSliderHtmlBuilderFactory());
-
             Current.Register<IJavaScriptInitializer>(() => new JavaScriptInitializer());
         }
 
