@@ -33,7 +33,7 @@ namespace Kendo.Mvc.Tests.Data
         {
             IEnumerable<Person> people = new[] { new Person { Name = "A" }, new Person { Name = null } };
 
-            var quearyablePeople = QueryableFactory.CreateQueryable(people);
+            var quearyablePeople = people.AsQueryable();
 
             var filteredPeople = quearyablePeople.Where(new[] { new FilterDescriptor
             {
@@ -50,7 +50,7 @@ namespace Kendo.Mvc.Tests.Data
         {
             IEnumerable<Person> people = new[] { new Person { Name = "A" }, new Person { Name = "B" } };
 
-            var quearyablePeople = QueryableFactory.CreateQueryable(people);
+            var quearyablePeople = people.AsQueryable();
 
             var filteredPeople = quearyablePeople.Where(new[] { new FilterDescriptor
             {
@@ -67,7 +67,7 @@ namespace Kendo.Mvc.Tests.Data
         {
             IEnumerable<Person> people = new[] { new Person { Name = "A" }, new Person { Name = "B" } };
 
-            var quearyablePeople = QueryableFactory.CreateQueryable(people);
+            var quearyablePeople = people.AsQueryable();
 
             var filteredPeople = quearyablePeople.Where(new[] { new FilterDescriptor
             {
@@ -84,7 +84,7 @@ namespace Kendo.Mvc.Tests.Data
         {
             IEnumerable<Person> people = new[] { new Person { Name = "A" }, new Person { Name = "B" } };
 
-            var quearyablePeople = QueryableFactory.CreateQueryable(people);
+            var quearyablePeople = people.AsQueryable();
 
             var filteredPeople = quearyablePeople.Where(new[] { new FilterDescriptor
             {
@@ -101,7 +101,7 @@ namespace Kendo.Mvc.Tests.Data
         {
             IEnumerable<Person> people = new[] { new Person { Name = "A" }, new Person { Name = "B" } };
 
-            var quearyablePeople = QueryableFactory.CreateQueryable(people);
+            var quearyablePeople = people.AsQueryable();
 
             var sortedPeople = quearyablePeople.Sort(new[] { 
                 new SortDescriptor { 
@@ -117,7 +117,7 @@ namespace Kendo.Mvc.Tests.Data
         public void Sort_without_member()
         {
             var strings = new[] { "One", "Two" };
-            var queryableStrings = QueryableFactory.CreateQueryable(strings);
+            var queryableStrings = strings.AsQueryable();
 
             var sortedStrings = queryableStrings.Sort(new[] { 
                 new SortDescriptor { 
@@ -198,7 +198,7 @@ namespace Kendo.Mvc.Tests.Data
         {
             IEnumerable<Person> people = new[]
                                              {new Person {Name = "A"}, new Person {Name = "A"}, new Person {Name = "B"}};
-            IQueryable queryablePeople = QueryableFactory.CreateQueryable(people);
+            IQueryable queryablePeople = people.AsQueryable();
 
             var groupDescriptor = new GroupDescriptor {Member = "Name", MemberType = typeof (string)};
             groupDescriptor.AggregateFunctions.Add(new CountFunction());
@@ -218,7 +218,7 @@ namespace Kendo.Mvc.Tests.Data
         {
             IEnumerable<Person> people = new[]{ new Person { Name = "A" }, new Person { Name = "A" },new Person { Name = "B" }};
 
-            var queryablePeople = QueryableFactory.CreateQueryable(people);
+            var queryablePeople = people.AsQueryable();
 
             var groupDescriptor = new GroupDescriptor { Member = "Name", MemberType = typeof(string) };
             groupDescriptor.AggregateFunctions.Add(new CountFunction());
@@ -238,7 +238,7 @@ namespace Kendo.Mvc.Tests.Data
         public void Should_calculate_group_aggregate_on_multiple_groups()
         {
             IEnumerable<Person> people = new[] { new Person { ID = 0, Name = "A" }, new Person { ID = 1, Name = "A" }, new Person { ID = 2, Name = "B" } };
-            var queryablePeople = QueryableFactory.CreateQueryable(people);
+            var queryablePeople = people.AsQueryable();
 
             var outterGroup = new GroupDescriptor { Member = "Name", MemberType = typeof(string) };
             outterGroup.AggregateFunctions.Add(new CountFunction());
@@ -280,7 +280,7 @@ namespace Kendo.Mvc.Tests.Data
             var enumerable = 
                 new System.Dynamic.IDynamicMetaObjectProvider[] { expando };
 
-            var data = QueryableFactory.CreateQueryable(enumerable)
+            var data = enumerable.AsQueryable()
                                        .Where(new[] { new FilterDescriptor
                                                         {
                                                             Member = "Foo",
@@ -300,7 +300,7 @@ namespace Kendo.Mvc.Tests.Data
             expando.Foo = new Customer { Name = "Name1"};
             IEnumerable<object> enumerable = new[] { expando };
             
-            var data = QueryableFactory.CreateQueryable(enumerable).Where(new[] { new FilterDescriptor
+            var data = enumerable.AsQueryable().Where(new[] { new FilterDescriptor
             {
                 Member = "Foo.Name",
                 Operator = FilterOperator.IsEqualTo,
@@ -319,7 +319,7 @@ namespace Kendo.Mvc.Tests.Data
                 people.Add(new Person { ID = i, Name = "Person#" + i });
             }
 
-            return QueryableFactory.CreateQueryable(people);
+            return people.AsQueryable();
         }
     }
 }

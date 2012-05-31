@@ -117,7 +117,6 @@
     <Compile Include="Infrastructure\IControllerDescriptorCache.cs" />
     <Compile Include="Infrastructure\IControllerContextCache.cs" />
     <Compile Include="Infrastructure\IAuthorizationContextCache.cs" />
-    <Compile Include="Infrastructure\DynamicTypeBuilder.cs" />
     <Compile Include="Infrastructure\FluentDictionary.cs" />
     <Compile Include="Infrastructure\ICacheFactory.cs" />
     <Compile Include="Infrastructure\ICacheProvider.cs" />
@@ -634,7 +633,6 @@
     <Compile Include="Infrastructure\Implementation\Filtering\Parsing\FilterParser.cs" />
     <Compile Include="Infrastructure\Implementation\Filtering\Parsing\FilterParserException.cs" />
     <Compile Include="Infrastructure\Implementation\Filtering\Parsing\FilterToken.cs" />
-    <Compile Include="Infrastructure\GlobalizationInfo.cs" />
     <Compile Include="Infrastructure\IControllerAuthorization.cs" />
     <Compile Include="Infrastructure\IControllerTypeCache.cs" />
     <Compile Include="Infrastructure\Implementation\ActionMethodCache.cs" />
@@ -755,7 +753,6 @@
     <Compile Include="UI\Grid\ToolBar\GridToolBarSettings.cs" />
     <Compile Include="UI\Grid\SortDescriptor.cs" />
     <Compile Include="Infrastructure\Implementation\Sorting\SortDescriptorCollectionExpressionBuilder.cs" />
-    <Compile Include="Infrastructure\QueryableFactory.cs" />
     <Compile Include="Infrastructure\Implementation\NavigationItemAuthorization.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -937,10 +934,7 @@
     <Compile Include="UI\Window\Html\WindowHtmlBuilder.cs" />
     <Compile Include="UrlGenerator.cs" />
     <Compile Include="Infrastructure\IPathResolver.cs" />
-    <Compile Include="Infrastructure\IConfigurationManager.cs" />
-    <Compile Include="Infrastructure\PathHelper.cs" />
     <Compile Include="Extensions\CollectionExtensions.cs" />
-    <Compile Include="Infrastructure\Implementation\ConfigurationManagerWrapper.cs" />
     <Compile Include="Extensions\DictionaryExtensions.cs" />
     <Compile Include="Extensions\HttpContextBaseExtensions.cs" />
     <Compile Include="IHideObjectMembers.cs" />
