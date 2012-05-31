@@ -313,6 +313,10 @@
                 that._attachMeta();
                 that._setupDocumentTitle();
                 that._startHistory();
+
+                if (support.touch) {
+                    $(document.documentElement).on("touchmove", false);
+                }
             });
         },
 
