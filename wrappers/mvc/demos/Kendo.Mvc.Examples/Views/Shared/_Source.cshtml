@@ -6,8 +6,12 @@
     var suiteName = routeData.GetRequiredString("suite");
     var controllerName = routeData.GetRequiredString("controller");
     var viewName = routeData.GetRequiredString("action");
-    var controllerPath = "~/Controllers/" + suiteName + "/" + controllerName + "/" + viewName + "Controller.cs";
-    var controllerSource = System.IO.File.ReadAllText(Server.MapPath(controllerPath));
+    var controllerPath = Server.MapPath("~/Controllers/" + suiteName + "/" + controllerName + "/" + viewName + "Controller.cs");
+    
+    string controllerSource = "";
+    if (System.IO.File.Exists(controllerPath)) {
+        controllerSource = System.IO.File.ReadAllText(controllerPath);
+    }
 }
 <div class="source">
     Source:
