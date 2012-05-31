@@ -159,6 +159,7 @@
                     "url": "datetimepicker/index.html"
                 },
                 {
+                    "packages": [ "!mvc" ],
                     "text": "Range selection",
                     "url": "datetimepicker/rangeselection.html"
                 },
