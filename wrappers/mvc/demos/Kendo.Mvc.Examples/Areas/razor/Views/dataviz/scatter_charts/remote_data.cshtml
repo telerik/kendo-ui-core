@@ -1,7 +1,5 @@
-@model IEnumerable<Kendo.Mvc.Examples.Models.PricePerformance>
-
 <div class="chart-wrapper">
-    @(Html.Kendo().Chart(Model)
+    @(Html.Kendo().Chart<Kendo.Mvc.Examples.Models.PricePerformance>()
         .Name("chart")
         .Title("Price-Performance Ratio")
         .Legend(legend => legend

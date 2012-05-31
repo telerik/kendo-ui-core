@@ -1,9 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/DataViz.Master"
-Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.PricePerformance>>" %>
+         Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 <div class="chart-wrapper">
-    <%= Html.Kendo().Chart(Model)
+    <%= Html.Kendo().Chart<Kendo.Mvc.Examples.Models.PricePerformance>()
         .Name("chart")
         .Title("Price-Performance Ratio")
         .Legend(legend => legend
