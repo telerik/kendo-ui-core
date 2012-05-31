@@ -201,10 +201,28 @@
                 });
 
                 var childFoo = childElement.children(".foo");
-                
+
                 triggerEvent("mousedown", {pageX: 10, pageY: 20}, childFoo);
                 triggerEvent("mousemove", {pageX: 24, pageY: 54}, childFoo);
             });
+
+            module("Drag Container", {});
+
+            test("Calculates correct dimensions for a given container", 4, function() {
+                $("#qunit-fixture").empty().html($("#container-fixture").html());
+
+                var boundaries = kendo.containerBoundaries($("#foo"), $("#bar"));
+                var offset = kendo.getOffset($("#foo"));
+                equal(boundaries.x.min, offset.left + 20);
+                equal(boundaries.x.max, offset.left + 20 + 200 - 60);
+                equal(boundaries.y.min, offset.top + 20);
+                equal(boundaries.y.max, offset.top + 20 + 200 - 60);
+            });
+
+        </script>
+        <script type="text/x-template" id="container-fixture">
+            <div id="foo" style="margin: 10px; width: 200px; padding: 20px; height: 200px">Foo</div>
+            <div id="bar" style="padding: 20px; width: 20px; height:20px">Bar</div>
         </script>
     </body>
 </html>

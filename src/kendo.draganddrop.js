@@ -62,6 +62,23 @@
         return document.elementFromPoint(e.x.client, e.y.client);
     }
 
+    function numericCssPropery(element, property) {
+        return parseInt(element.css(property), 10) || 0;
+    }
+
+    function containerBoundaries(container, element) {
+        var offset = container.offset(),
+            minX = offset.left + numericCssPropery(container, "borderLeftWidth") + numericCssPropery(container, "paddingLeft"),
+            minY = offset.top + numericCssPropery(container, "borderTopWidth") + numericCssPropery(container, "paddingTop"),
+            maxX = minX + container.width() - element.outerWidth(true),
+            maxY = minY + container.height() - element.outerHeight(true);
+
+        return {
+            x: { min: minX, max: maxX },
+            y: { min: minY, max: maxY }
+        };
+    }
+
     function addNS(events, ns) {
         return events.replace(/ /g, ns + " ");
     }
@@ -1085,6 +1102,7 @@
     kendo.ui.plugin(Draggable);
     kendo.Drag = Drag;
     kendo.Tap = Tap;
+    kendo.containerBoundaries = containerBoundaries;
 
     extend(kendo.ui, {
         Pane: Pane,
