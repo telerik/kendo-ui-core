@@ -54,8 +54,6 @@ namespace Kendo.Mvc.Infrastructure
 
             Current.Register<IUrlResolver>(() => new UrlResolver());
 
-            Current.Register<IConfigurationManager>(() => new ConfigurationManagerWrapper());
-
             Current.Register<IVirtualPathProvider>(() => new VirtualPathProviderWrapper());
 
             Current.Register<ILocalizationServiceFactory>(() => new LocalizationServiceFactory());

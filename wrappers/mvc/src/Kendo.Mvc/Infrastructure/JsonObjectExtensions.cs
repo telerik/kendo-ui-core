@@ -1,7 +1,6 @@
 ﻿namespace Kendo.Mvc
 {
     using System.Collections.Generic;
-    using Extensions;
     using System.Linq;
 
     public static class JsonObjectExtension

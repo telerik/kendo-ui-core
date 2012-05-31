@@ -7,7 +7,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
 using Kendo.Mvc.Extensions;
-using System.Web.Script.Serialization;
 
 namespace Kendo.Mvc.Infrastructure
 {
