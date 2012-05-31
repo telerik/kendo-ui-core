@@ -4,7 +4,6 @@
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
-<div id="example" class="k-content">
     <div class="configuration k-widget k-header">
         <span class="infoHead">Information</span>
         <p>
@@ -26,5 +25,4 @@
             </p>
         </div>
     </form>
-</div>
 </asp:Content>

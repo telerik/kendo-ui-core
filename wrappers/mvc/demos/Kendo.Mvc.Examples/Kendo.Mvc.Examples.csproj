@@ -133,7 +133,9 @@
     <Compile Include="Controllers\Web\DropDownList\TemplateController.cs" />
     <Compile Include="Controllers\Web\DropDownList\RemoteDataSourceController.cs" />
     <Compile Include="Controllers\Web\DropDownList\IndexController.cs" />
-    <Compile Include="Controllers\Web\Editor\EditorController.cs" />
+    <Compile Include="Controllers\Web\Editor\EventsController.cs" />
+    <Compile Include="Controllers\Web\Editor\ApiController.cs" />
+    <Compile Include="Controllers\Web\Editor\IndexController.cs" />
     <Compile Include="Controllers\DataViz\Linear_Gauge\IndexController.cs" />
     <Compile Include="Controllers\DataViz\Linear_Gauge\Scale_OptoinsController.cs" />
     <Compile Include="Controllers\Web\Grid\EditingInlineController.cs" />
@@ -262,6 +264,9 @@
     <Content Include="Areas\aspx\Views\web\datepicker\index.aspx" />
     <Content Include="Areas\aspx\Views\web\datepicker\rangeselection.aspx" />
     <Content Include="Areas\aspx\Views\web\datepicker\template.aspx" />
+    <Content Include="Areas\aspx\Views\web\editor\api.aspx" />
+    <Content Include="Areas\aspx\Views\web\editor\events.aspx" />
+    <Content Include="Areas\aspx\Views\web\editor\index.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\aggregates.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\ajaxbinding.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\api.aspx" />
@@ -291,6 +296,7 @@
     <Content Include="Areas\aspx\Views\web\upload\async.aspx" />
     <Content Include="Areas\aspx\Views\web\upload\events.aspx" />
     <Content Include="Areas\aspx\Views\web\numerictextbox\index.aspx" />
+    <Content Include="Areas\aspx\Views\web\upload\index.aspx" />
     <Content Include="Areas\aspx\Views\web\upload\result.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\jquery-1.7.2.min.js" />
