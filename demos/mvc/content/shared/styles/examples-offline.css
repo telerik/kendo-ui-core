@@ -232,6 +232,16 @@ html
     margin-bottom: 3px;
 }
 
+/* Code Viewer */
+.source a.selected 
+{
+    text-decoration: underline;
+}
+    
+.source .code .controller {
+    display: none;
+}
+
 /* Pretty Print */
 .prettyprint
 {
