@@ -88,7 +88,7 @@
 
                 move: function(e) {
                     var drag = e.sender,
-                    duration = drag.endTime - drag.startTime,
+                    duration = e.event.timeStamp - drag.startTime,
                     direction = e.x.initialDelta > 0 ? "right" : "left";
 
                     if (
