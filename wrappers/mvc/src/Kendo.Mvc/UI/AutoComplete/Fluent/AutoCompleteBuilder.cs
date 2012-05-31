@@ -98,6 +98,24 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Use it to enable filtering of items.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().AutoComplete()
+        ///             .Name("AutoComplete")
+        ///             .Filter(FilterType.Contains);
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public AutoCompleteBuilder Filter(FilterType filter)
+        {
+            Component.Filter = filter.ToString().ToLower();
+
+            return this;
+        }
+
+        /// <summary>
         /// Use it to enable case insensitive bahavior of the AutoComplete. If true the AutoComplete will select the first matching item ignoring its casing.
         /// </summary>
         /// <example>
