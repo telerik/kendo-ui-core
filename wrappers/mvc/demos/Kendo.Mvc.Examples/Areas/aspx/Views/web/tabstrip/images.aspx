@@ -82,7 +82,7 @@ The Netherlands is a constituent country of the Kingdom of the Netherlands, loca
     }
                 
     #tabstrip-sprites .k-sprite {
-        background-image: url("<%= Url.Content("~/Content/shared/styles/flags.png") %>");
+        background-image: url("<%= Url.Content("~/Content/shared/flags.png") %>");
     }
 
     .brazilFlag { background-position: 0 0; }

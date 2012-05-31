@@ -125,7 +125,7 @@
     }
 
     #panelbar-sprites .k-sprite {
-        background-image: url("<%= Url.Content("~/Content/shared/styles/flags.png") %>");
+        background-image: url("<%= Url.Content("~/Content/shared/flags.png") %>");
     }
     .brazilFlag { background-position: 0 0; }
     .indiaFlag { background-position: 0 -32px; }
