@@ -112,6 +112,24 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Use it to enable filtering of items.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ComboBox()
+        ///             .Name("ComboBox")
+        ///             .Filter(FilterType.Contains);
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ComboBoxBuilder Filter(FilterType filter)
+        {
+            Component.Filter = filter.ToString().ToLower();
+
+            return this;
+        }
+
+        /// <summary>
         /// Use it to enable case insensitive bahavior of the combobox. If true the combobox will select the first matching item ignoring its casing.
         /// </summary>
         /// <example>

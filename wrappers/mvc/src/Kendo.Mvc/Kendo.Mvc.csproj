@@ -324,6 +324,7 @@
     <Compile Include="UI\Calendar\Fluent\MonthTemplateBuilder.cs" />
     <Compile Include="UI\DatePickerBase\Html\DatePickerHtmlBuilderBase.cs" />
     <Compile Include="UI\DatePickerBase\IPicker.cs" />
+    <Compile Include="UI\DropDown\FilterType.cs" />
     <Compile Include="UI\DropDown\Fluent\DropDownBuilderBase.cs" />
     <Compile Include="UI\Editor\Tools\EditorListTool.cs" />
     <Compile Include="UI\Effects\ExpandableAnimation.cs" />
