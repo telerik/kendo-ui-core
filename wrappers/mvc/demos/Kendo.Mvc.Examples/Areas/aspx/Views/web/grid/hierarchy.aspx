@@ -1,7 +1,7 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/Web.Master" %>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
-    <% Html.Kendo().Grid<Kendo.Mvc.Examples.Models.EmployeeViewModel>()
+    <%: Html.Kendo().Grid<Kendo.Mvc.Examples.Models.EmployeeViewModel>()
             .Name("Employees")
             .Columns(columns =>
             {
@@ -36,6 +36,12 @@
                 .PageSize(5)
             )
             .Sortable()
-            .Render();
+            .Events(events => events.DataBound("dataBound"))            
     %>
+
+    <script>
+        function dataBound() {
+            this.expandRow(this.tbody.find("tr.k-master-row").first());
+        }
+    </script>
 </asp:Content>

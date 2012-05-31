@@ -10,12 +10,7 @@ namespace Kendo.Mvc.Examples.Controllers
         {
             return View();
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
+        
         public ActionResult Aggregates_Read([DataSourceRequest] DataSourceRequest request)
         {
             return Json(GetProducts().ToDataSourceResult(request));

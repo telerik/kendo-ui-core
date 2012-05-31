@@ -2,7 +2,6 @@
 using System.Linq;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
-using Kendo.Mvc.Examples.Models;
 
 namespace Kendo.Mvc.Examples.Controllers
 {
