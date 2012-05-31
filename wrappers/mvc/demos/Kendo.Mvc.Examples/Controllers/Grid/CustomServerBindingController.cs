@@ -75,6 +75,10 @@ namespace Kendo.Mvc.Examples.Controllers
                         {
                             selector = Orders => BuildInnerGroup(Orders, o => o.ShipName);
                         }
+                        else if (group.Member == "ShipCountry")
+                        {
+                            selector = Orders => BuildInnerGroup(Orders, o => o.ShipCountry);
+                        } 
                     }
                     else
                     {
@@ -90,6 +94,10 @@ namespace Kendo.Mvc.Examples.Controllers
                         {
                             selector = BuildGroup(o => o.ShipName, selector);
                         }
+                        else if (group.Member == "ShipCountry")
+                        {
+                            selector = BuildGroup(o => o.ShipCountry, selector);
+                        } 
                     }
                 }
 
