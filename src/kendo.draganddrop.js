@@ -146,6 +146,7 @@
          * @param {Object} options Configuration options.
          * @option {Integer} [threshold] <0> The minimum distance the mouse/touch should move before the event is triggered.
          * @option {Boolean} [global] <false> If set to true, the drag event will be tracked beyond the element boundaries.
+         * @option {DomElement} [surface]  If set, the drag event will be tracked for the surface boundaries. By default, leaving the element boundaries will end the drag.
          * @option {Boolean} [allowSelection] <false> If set to true, the mousedown and selectstart events will not be prevented.
          * @option {Boolean} [stopPropagation] <false> If set to true, the mousedown event propagation will stopped, disabling
          * drag capturing at parent elements.
@@ -175,7 +176,7 @@
                 x: new DragAxis("X"),
                 y: new DragAxis("Y"),
                 element: element,
-                surface: options.global ? SURFACE : element,
+                surface: options.global ? SURFACE : options.surface || element,
                 stopPropagation: options.stopPropagation,
                 pressed: false,
                 eventMap: eventMap,
@@ -321,6 +322,8 @@
             if (!that.target.length) {
                 return;
             }
+
+            that.currentTarget = e.currentTarget;
 
             if (that.stopPropagation) {
               e.stopPropagation();

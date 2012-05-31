@@ -1,4 +1,4 @@
-<div data-role="view" data-init="bindSwipeEvents">
+<div data-role="view" data-init="bindSwipeEvents" data-title="Swipe Events">
     <ul data-role="listview" data-style="inset" id="swipeListView">
         <li>Swipe me!</li>
         <li>Swipe me!</li>
@@ -31,12 +31,12 @@
     function bindSwipeEvents(e) {
         e.view.element.find("#swipeListView li").kendoMobileSwipe(function(e) {
             e.target.html("You swiped "  + e.direction);
-        });
+        }, { surface: e.view.element.find("#swipeListView") });
     }
 </script>
 
 <style scoped>
     #swipeListView li {
-        line-height: 90px;
+        /* line-height: 90px; */
     }
 </style>
