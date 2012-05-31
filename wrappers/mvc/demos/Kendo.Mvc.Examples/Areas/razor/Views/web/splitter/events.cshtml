@@ -31,22 +31,22 @@
       }))
 
 <script>
-        function resize(e) {
-            kendoConsole.log("Resized :: Splitter #" + this.element[0].id);
-        }
+    function resize(e) {
+        kendoConsole.log("Resized :: Splitter <b>#" + this.element[0].id + "</b>");
+    }
 
-        function expand(e) {
-            kendoConsole.log("Expanded :: Pane #" + e.pane.id + " from splitter #" + this.element[0].id + " expanded");
-        }
+    function expand(e) {
+        kendoConsole.log("Expanded :: Pane <b>#" + e.pane.id + "</b> from splitter <b>#" + this.element[0].id + "</b> expanded");
+    }
 
-        function collapse(e) {
-            kendoConsole.log("Collapsed :: Pane #" + e.pane.id + " from splitter #" + this.element[0].id + " collapsed");
-        }
+    function collapse(e) {
+        kendoConsole.log("Collapsed :: Pane <b>#" + e.pane.id + "</b> from splitter <b>#" + this.element[0].id + "</b> collapsed");
+    }
 
-        function contentLoad(e) {
-            kendoConsole.log("Content loaded in <b>"+ e.pane.id +
-                "</b> and starts with <b>" + $(e.pane).text().substr(0, 20) + "...</b>");
-        }
+    function contentLoad(e) {
+        kendoConsole.log("Content loaded in <b>#"+ e.pane.id +
+            "</b> and starts with <b>" + $(e.pane).text().substr(0, 20) + "...</b>");
+    }
 </script>
 <br/>
 <div class="console"></div>
