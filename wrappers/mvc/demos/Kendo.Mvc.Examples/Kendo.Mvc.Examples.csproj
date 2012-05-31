@@ -203,10 +203,10 @@
     <Compile Include="Models\Config.cs" />
     <Compile Include="Helpers\HyphenatedRouteHandler.cs" />
     <Compile Include="Models\ElectricitySource.cs" />
-    <Compile Include="Models\EmployeeDto.cs" />
+    <Compile Include="Models\EmployeeViewModel.cs" />
     <Compile Include="Models\EngineDataPoint.cs" />
     <Compile Include="Models\InternetUsers.cs" />
-    <Compile Include="Models\OrderDto.cs" />
+    <Compile Include="Models\OrderViewModel.cs" />
     <Compile Include="Models\PricePerformance.cs" />
     <Compile Include="Models\ChartDataRepository.cs" />
     <Compile Include="Models\ElectricityProduction.cs" />
