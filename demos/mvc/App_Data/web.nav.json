@@ -821,6 +821,10 @@
                     "url": "dragdrop/index.html"
                 },
                 {
+                    "text": "Container",
+                    "url": "dragdrop/container.html"
+                },
+                {
                     "text": "Events",
                     "url": "dragdrop/events.html"
                 }

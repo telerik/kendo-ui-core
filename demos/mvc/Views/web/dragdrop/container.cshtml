@@ -1,0 +1,33 @@
+<div id="draggable-container">
+    <div id="draggable-item">Foo</div>
+</div>
+
+<style scoped>
+    #draggable-container {
+        margin: 10px auto;
+        width: 200px;
+        height: 200px;
+        background: #eee;
+        padding: 10px;
+        border: 1px solid black;
+    }
+
+    #draggable-item {
+        width: 20px;
+        height: 20px;
+        padding: 10px;
+        border: 1px solid black;
+        margin: 5px;
+        background: #666;
+        color: white;
+    }
+</style>
+
+<script>
+    $("#draggable-item").kendoDraggable({
+        container: $("#draggable-container"),
+        hint: function() {
+            return $("#draggable-item").clone();
+        }
+    });
+</script>

@@ -66,6 +66,10 @@
         return parseInt(element.css(property), 10) || 0;
     }
 
+    function within(value, range) {
+        return Math.min(Math.max(value, range.min), range.max);
+    }
+
     function containerBoundaries(container, element) {
         var offset = container.offset(),
             minX = offset.left + numericCssPropery(container, "borderLeftWidth") + numericCssPropery(container, "paddingLeft"),
@@ -831,6 +835,7 @@
          * @option {Selector} [filter] Selects child elements that are draggable if a widget is attached to a container.
          * @option {String} [group] <"default"> Used to group sets of draggable and drop targets. A draggable with the same group value as a drop target will be accepted by the drop target.
          * @option {String} [axis] <null> Constrains the hint movement to either the horizontal (x) or vertical (y) axis. Can be set to either "x" or "y".
+         * @option {jQueryObject} [container] If set, the hint movement is constrained to the container boundaries.
          * @option {Object} [cursorOffset] <null> If set, specifies the offset of the hint relative to the mouse cursor/finger.
          * By default, the hint is initially positioned on top of the draggable source offset. The option accepts an object with two keys: <code>top</code> and <code>left</code>.
          * _exampleTitle Initialize Draggable with cursorOffset
@@ -914,12 +919,14 @@
             group: "default",
             cursorOffset: null,
             axis: null,
+            container: null,
             dropped: false
         },
 
         _start: function(e) {
             var that = this,
                 options = that.options,
+                container = options.container,
                 hint = options.hint;
 
             that.currentTarget = that.drag.target;
@@ -944,6 +951,10 @@
 
             that.dropped = false;
 
+            if (container) {
+                that.boundaries = containerBoundaries(container, that.hint);
+            }
+
             if (that._trigger(DRAGSTART, e)) {
                 that.drag.cancel();
                 that.destroy();
@@ -956,6 +967,7 @@
             var that = this,
                 coordinates,
                 options = that.options,
+                boundaries = that.boundaries,
                 axis = options.axis,
                 cursorOffset = that.options.cursorOffset;
 
@@ -964,13 +976,18 @@
             } else {
                that.hintOffset.left += e.x.delta;
                that.hintOffset.top += e.y.delta;
-               coordinates = that.hintOffset;
+               coordinates = $.extend({}, that.hintOffset);
+            }
+
+            if (boundaries) {
+                coordinates.top = within(coordinates.top, boundaries.y);
+                coordinates.left = within(coordinates.left, boundaries.x);
             }
 
             if (axis === "x") {
-                coordinates = { "left": coordinates.left };
+                delete coordinates.top;
             } else if (axis === "y") {
-                coordinates = { "top": coordinates.top };
+                delete coordinates.left;
             }
 
             that.hint.css(coordinates);
