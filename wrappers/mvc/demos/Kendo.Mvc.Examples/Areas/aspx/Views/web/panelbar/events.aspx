@@ -15,7 +15,7 @@
         .ContentLoad("contentLoad")
         .Error("error")
     )
-    .HtmlAttributes(new { style = "width: 250px; margin: 20px auto;" })
+    .HtmlAttributes(new { style = "width: 250px;" })
     .Items(panelbar =>
     {
         panelbar.Add().Text("Metallica - Master of Puppets 1986")
