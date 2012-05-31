@@ -238,10 +238,12 @@ namespace("mvc", function() {
     var projectRoot = path.join("wrappers", "mvc", "demos", "Kendo.Mvc.Examples"),
         sharedStyles = path.join(DEMOS_SHARED, STYLES_PATH),
         stylesDest = path.join(projectRoot, "Content"),
-        iconsDest = path.join(stylesDest, "shared", "icons"),
+        sharedStylesDest = path.join(stylesDest, "shared"),
+        iconsDest = path.join(sharedStylesDest, "icons"),
         scriptsDest = path.join(projectRoot, "Scripts");
 
     mkdir(stylesDest);
+    mkdir(sharedStylesDest);
     mkdir(iconsDest);
 
     desc("Copy debug scripts and styles to the MVC demo site");
