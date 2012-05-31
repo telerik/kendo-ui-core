@@ -4,7 +4,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;   
 
-    public class EmployeeDto
+    public class EmployeeViewModel
     {
         public int EmployeeID
         {
