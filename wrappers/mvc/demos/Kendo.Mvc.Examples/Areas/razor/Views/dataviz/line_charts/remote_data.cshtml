@@ -1,7 +1,5 @@
-@model IEnumerable<Kendo.Mvc.Examples.Models.ElectricityProduction>
-
 <div class="chart-wrapper">
-    @(Html.Kendo().Chart(Model)
+    @(Html.Kendo().Chart<Kendo.Mvc.Examples.Models.ElectricityProduction>()
         .Name("chart")
         .Title("Spain electricity production (GWh)")
         .Legend(legend => legend
