@@ -33,7 +33,7 @@ namespace Kendo.Mvc.UI.Tests
         {
             contentItem.Template.Html = "<strong>foo</strong>";
 
-            Assert.Equal("#Component-1", NavigationItemContainerExtensions.GetItemUrl(component, contentItem));
+            Assert.Equal("\\#Component-1", NavigationItemContainerExtensions.GetItemUrl(component, contentItem));
         }
 
         [Fact]

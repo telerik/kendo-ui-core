@@ -129,7 +129,7 @@ namespace Kendo.Mvc.UI.Tests
             item.ContentHtmlAttributes["id"] = id;
 
             IHtmlNode tag = builder.ItemInnerTag(item);
-            Assert.Equal("#id", tag.Attribute("href"));
+            Assert.Equal("\\#id", tag.Attribute("href"));
         }
 
         [Fact]
