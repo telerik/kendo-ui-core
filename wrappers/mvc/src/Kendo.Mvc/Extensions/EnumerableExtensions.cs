@@ -4,7 +4,6 @@ namespace Kendo.Mvc.Extensions
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     
     public static class EnumerableExtensions
@@ -57,7 +56,6 @@ namespace Kendo.Mvc.Extensions
             }
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
         internal static IEnumerable AsGenericEnumerable(this IEnumerable source)
         {
             Type elementType = typeof(Object);
@@ -136,7 +134,7 @@ namespace Kendo.Mvc.Extensions
         }
 
         //Source: http://work.j832.com/2008/01/selectrecursive-if-3rd-times-charm-4th.html
-        public static IEnumerable<TSource> SelectRecursive<TSource>(this IEnumerable<TSource> source, 
+        internal static IEnumerable<TSource> SelectRecursive<TSource>(this IEnumerable<TSource> source, 
             Func<TSource, IEnumerable<TSource>> recursiveSelector)
         {
             Stack<IEnumerator<TSource>> stack = new Stack<IEnumerator<TSource>>();
@@ -173,10 +171,7 @@ namespace Kendo.Mvc.Extensions
             }
         }
 
-        /// <exception cref="ArgumentNullException"><c>first</c> is null.</exception>
-        /// <exception cref="ArgumentNullException"><c>second</c> is null.</exception>
-        /// <exception cref="ArgumentNullException"><c>resultSelector</c> is null.</exception>
-        public static IEnumerable<TResult> Consolidate<TFirst, TSecond, TResult> (
+        internal static IEnumerable<TResult> Consolidate<TFirst, TSecond, TResult> (
             this IEnumerable<TFirst> first, IEnumerable<TSecond> second, Func<TFirst, TSecond, TResult> resultSelector)
         {
             if (first == null) throw new ArgumentNullException("first");
@@ -195,7 +190,7 @@ namespace Kendo.Mvc.Extensions
                     yield return resultSelector(e1.Current, e2.Current);
         }
 
-        public static ReadOnlyCollection<T> ToReadOnlyCollection<T>(this IEnumerable<T> sequence)
+        internal static ReadOnlyCollection<T> ToReadOnlyCollection<T>(this IEnumerable<T> sequence)
         {
             if (sequence == null)
             {

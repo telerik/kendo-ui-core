@@ -31,15 +31,6 @@ namespace Kendo.Mvc.Extensions.Tests
         }
 
         [Fact]
-        public void Should_be_able_to_compress_and_decompress()
-        {
-            var compressed = new String('x', 10 * 1024).Compress();
-            var plain = compressed.Decompress();
-
-            Assert.True(plain.Length > compressed.Length);
-        }
-
-        [Fact]
         public void AsTitle_should_return_empty_string_when_null()
         {
             Assert.Equal("", ((string)null).AsTitle());
@@ -57,12 +48,6 @@ namespace Kendo.Mvc.Extensions.Tests
             Assert.Equal("Contact Name", "ContactName".AsTitle());
         }
 
-        [Fact]
-        public void Should_not_throw_exception_on_invalid_base64_string()
-        {
-            Assert.DoesNotThrow(() => "x;ls%20-l;dir;".Decompress());
-        }        
-        
         [Fact]
         public void ToEnum_parses_enum()
         {
