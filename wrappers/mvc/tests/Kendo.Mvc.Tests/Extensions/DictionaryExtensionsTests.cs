@@ -7,25 +7,6 @@ namespace Kendo.Mvc.Extensions.Tests
     public class DictionaryExtensionsTests
     {
         [Fact]
-        public void AddStyleAttribute_creates_style_attribute()
-        {
-            IDictionary<string, object> target = new Dictionary<string, object>();
-            target.AddStyleAttribute("height", "100px");
-
-            Assert.Equal("height:100px;", target["style"]);
-        }
-
-        [Fact]
-        public void AddStyleAttribute_style_attribute_appends_existing_attribute()
-        {
-            IDictionary<string, object> target = new Dictionary<string, object>();
-            target.AddStyleAttribute("width", "100px");
-            target.AddStyleAttribute("height", "100px");
-
-            Assert.Equal("width:100px;height:100px;", target["style"]);
-        }
-
-        [Fact]
         public void Should_be_able_to_merge_item()
         {
             IDictionary<string, object> target = new Dictionary<string, object>();

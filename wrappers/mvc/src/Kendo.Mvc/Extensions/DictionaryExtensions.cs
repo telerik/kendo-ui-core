@@ -1,15 +1,11 @@
 namespace Kendo.Mvc.Extensions
 {
-    using Kendo.Mvc.Extensions;
-    using Kendo.Mvc.Infrastructure;
+    using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Text;
     using System.Web;
     using System.Web.Routing;
-    using System.Web.UI;
-    using System;
-    using System.Linq;
-
     /// <summary>
     /// Contains extension methods of IDictionary&lt;string, objectT&gt;.
     /// </summary>
@@ -40,28 +36,9 @@ namespace Kendo.Mvc.Extensions
         /// <param name="value">The value.</param>
         public static void AppendInValue(this IDictionary<string, object> instance, string key, string separator, object value)
         {
-
             instance[key] = instance.ContainsKey(key) ? instance[key] + separator + value : value.ToString();
         }
 
-        public static void AddStyleAttribute(this IDictionary<string, object> instance, string key, string value)
-        {
-
-            string style = string.Empty;
-            
-            if (instance.ContainsKey("style"))
-            {
-                style = (string)instance["style"];
-            }
-
-            StringBuilder builder = new StringBuilder(style);
-            builder.Append(key);
-            builder.Append(":");
-            builder.Append(value);
-            builder.Append(";");
-
-            instance["style"] = builder.ToString();
-        }
         /// <summary>
         /// Appends the specified value at the beginning of the existing value
         /// </summary>
@@ -71,7 +48,6 @@ namespace Kendo.Mvc.Extensions
         /// <param name="value"></param>
         public static void PrependInValue(this IDictionary<string, object> instance, string key, string separator, object value)
         {
-
             instance[key] = instance.ContainsKey(key) ? value + separator + instance[key] : value.ToString();
         }
 
@@ -142,50 +118,6 @@ namespace Kendo.Mvc.Extensions
         public static void Merge(this IDictionary<string, object> instance, object values)
         {
             Merge(instance, values, true);
-        }
-
-        public static string ToJson(this IDictionary<string, object> instance)
-        {
-            Func<IDictionary<string, object>, string> serialize = null;
-            serialize = dict =>
-            {
-                return "{" + string.Join(",", dict.Select(d =>
-                {
-                    if (d.Value is IDictionary<string, object>)
-                    {
-                        var value = d.Value as IDictionary<string, object>;
-                        if (value.Count == 0)
-                        {
-                            return null;
-                        }
-                        return d.Key + ":" + serialize(value);
-                    }
-                    
-                    if (d.Value != null)
-                    {
-                        if (d.Key == "events")
-                        {
-                            return d.Value as string;
-                        } 
-                        else if (d.Value is string)
-                        {
-                            return "{0}:\"{1}\"".FormatWith(d.Key.ToString(), d.Value);
-                        }
-                        else if (d.Value is bool)
-                        {
-                            return "{0}:{1}".FormatWith(d.Key.ToString(), Convert.ToBoolean(d.Value) == true ? "true" : "false");
-                        }
-                        else
-                        {
-                            return "{0}:{1}".FormatWith(d.Key.ToString(), d.Value);
-                        }
-                    }
-
-                    return null;
-                }).Where(item => !string.IsNullOrEmpty(item))) + "}";
-            };
-
-            return serialize(instance);
         }
     }
 }

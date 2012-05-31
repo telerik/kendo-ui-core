@@ -3,8 +3,6 @@ namespace Kendo.Mvc.Extensions
     using System;
     using System.Threading;
 
-    using Infrastructure;
-
     /// <summary>
     /// Contains extension methods of <see cref="ReaderWriterLockSlim"/>.
     /// </summary>

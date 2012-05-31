@@ -15,18 +15,6 @@ namespace Kendo.Mvc.Extensions
 
     public static class QueryableExtensions
     {
-        private static GridModel ToGridModel(this IQueryable queryable, int page, int pageSize, string orderBy, string groupBy, string filter)
-        {
-            GridCommand command = GridCommand.Parse(page, pageSize, orderBy, groupBy, filter);
-
-            return queryable.ToGridModel(page, pageSize, command.SortDescriptors, command.FilterDescriptors, command.GroupDescriptors);
-        }
-
-        private static GridModel ToGridModel(this IQueryable queryable, GridState state)
-        {
-            return queryable.ToGridModel(state.Page, state.Size, state.OrderBy, state.GroupBy, state.Filter);
-        }
-
         internal static GridModel ToGridModel(this GridDataTableWrapper enumerable, int page, int pageSize, IList<SortDescriptor> sortDescriptors, IEnumerable<IFilterDescriptor> filterDescriptors,
             IEnumerable<GroupDescriptor> groupDescriptors)
         {
@@ -596,19 +584,7 @@ namespace Kendo.Mvc.Extensions
                     Expression.Constant(index)));
         }
 
-        /// <summary>
-        /// Creates a <see cref="IList{T}" /> from an <see cref="IQueryable" /> where T is <see cref="IQueryable.ElementType"/>.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="List{T}" /> that contains elements from the input sequence.
-        /// </returns>
-        /// <param name="source">
-        /// The <see cref="IQueryable" /> to create a <see cref="List{T}" /> from.
-        /// </param>
-        /// <exception cref="ArgumentNullException"> 
-        /// <paramref name="source" /> is null.
-        /// </exception>
-        public static IList ToIList(this IQueryable source)
+        internal static IList ToList(this IQueryable source)
         {
             if (source == null) throw new ArgumentNullException("source");
 

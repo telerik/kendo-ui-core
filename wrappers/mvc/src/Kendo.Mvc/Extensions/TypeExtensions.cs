@@ -6,7 +6,6 @@ namespace Kendo.Mvc.Extensions
     using System.Data;
     using System.Linq;
     using System.Reflection;
-    using Kendo.Mvc.Extensions;
     using Kendo.Mvc.Resources;
 
     internal static class TypeExtensions
@@ -161,7 +160,6 @@ namespace Kendo.Mvc.Extensions
             return GetNonNullableType(type).IsEnum;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         internal static bool IsCompatibleWith(this Type source, Type target)
         {
             if (source == target) return true;

@@ -2,12 +2,7 @@ namespace Kendo.Mvc.Extensions
 {
     using System;
     using System.Globalization;
-    using System.IO;
-    using System.IO.Compression;
-    using System.Text;
     using System.Text.RegularExpressions;
-    using Kendo.Mvc.Infrastructure;
-
     /// <summary>
     /// Contains the extension methods of <see cref="string"/>.
     /// </summary>
@@ -55,87 +50,6 @@ namespace Kendo.Mvc.Extensions
         public static bool IsCaseInsensitiveEqual(this string instance, string comparing)
         {
             return string.Compare(instance, comparing, StringComparison.OrdinalIgnoreCase) == 0;
-        }
-
-        /// <summary>
-        /// Compresses the specified instance.
-        /// </summary>
-        /// <param name="instance">The instance.</param>
-        /// <returns></returns>
-        public static string Compress(this string instance)
-        {
-
-            byte[] binary = Encoding.UTF8.GetBytes(instance);
-            byte[] compressed;
-
-            using (MemoryStream ms = new MemoryStream())
-            {
-                using (GZipStream zip = new GZipStream(ms, CompressionMode.Compress))
-                {
-                    zip.Write(binary, 0, binary.Length);
-                }
-
-                compressed = ms.ToArray();
-            }
-
-            byte[] compressedWithLength = new byte[compressed.Length + 4];
-
-            Buffer.BlockCopy(compressed, 0, compressedWithLength, 4, compressed.Length);
-            Buffer.BlockCopy(BitConverter.GetBytes(binary.Length), 0, compressedWithLength, 0, 4);
-
-            return Convert.ToBase64String(compressedWithLength);
-        }
-
-        /// <summary>
-        /// Decompresses the specified instance.
-        /// </summary>
-        /// <param name="instance">The instance.</param>
-        /// <returns></returns>
-        public static string Decompress(this string instance)
-        {
-
-            var compressed = Decode(instance);
-            
-            if (compressed.Length < 4)
-            {
-                return string.Empty;
-            }
-
-            using (var stream = new MemoryStream())
-            {
-                var length = BitConverter.ToInt32(compressed, 0);
-                stream.Write(compressed, 4, compressed.Length - 4);
-
-                var binary = new byte[length];
-
-                stream.Seek(0, SeekOrigin.Begin);
-
-                using (var zip = new GZipStream(stream, CompressionMode.Decompress))
-                {
-                    try
-                    {
-                        zip.Read(binary, 0, binary.Length);
-                        
-                        return Encoding.UTF8.GetString(binary);
-                    }
-                    catch (InvalidDataException)
-                    {
-                        return string.Empty;
-                    }
-                }
-            }
-        }
-
-        private static byte[] Decode(string value)
-        {
-            try
-            {
-                return Convert.FromBase64String(value);
-            }
-            catch (FormatException)
-            {
-                return new byte[0];
-            }
         }
 
         public static string ToCamelCase(this string instance)

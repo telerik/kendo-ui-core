@@ -107,7 +107,6 @@
     <Compile Include="Extensions\ModelStateExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\StructExtensions.cs" />
-    <Compile Include="Extensions\CustomAttributeProviderExtensions.cs" />
     <Compile Include="Extensions\HttpRequestBaseExtensions.cs" />
     <Compile Include="Extensions\ListSortDirectionExtensions.cs" />
     <Compile Include="Extensions\QueryProviderExtensions.cs" />
