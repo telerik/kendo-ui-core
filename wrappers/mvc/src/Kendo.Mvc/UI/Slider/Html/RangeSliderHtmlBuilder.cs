@@ -1,41 +1,54 @@
 namespace Kendo.Mvc.UI.Html
 {
     using System.Web.Mvc;
+    using System;
+    using System.Collections.Generic;
+    using Kendo.Mvc.Infrastructure;
+    using Kendo.Mvc.Extensions;
 
-    public class RangeSliderHtmlBuilder : IRangeSliderHtmlBuilder 
+    public class RangeSliderHtmlBuilder<T> : IRangeSliderHtmlBuilder  where T : struct, IComparable
     {
-        private readonly RangeSliderRenderingData renderingData;
-
-        public RangeSliderHtmlBuilder(RangeSliderRenderingData renderingData)
+        public RangeSliderHtmlBuilder(RangeSlider<T> component)
         {
-            this.renderingData = renderingData;
+            Component = component;
+        }
+
+        public RangeSlider<T> Component
+        {
+            get;
+            private set;
         }
 
         public IHtmlNode Build()
         {
             var div = new HtmlElement("div")
-                        .Attributes( new { id = renderingData.Id }) 
-                        .Attributes(renderingData.HtmlAttributes)
-                        .ToggleClass("k-state-disabled", !renderingData.Enabled);
+                        .Attributes(new { id = Component.Id })
+                        .Attributes(Component.HtmlAttributes)
+                        .Attributes(Component.GetUnobtrusiveValidationAttributes());
+
+            var defaultOptions = new Dictionary<string, object>();
+            FluentDictionary.For(defaultOptions)
+                .Add("type", "range")
+                .Add("step", Component.SmallStep, () => Component.SmallStep.HasValue)
+                .Add("min", Component.Min, () => Component.Min.HasValue)
+                .Add("max", Component.Max, () => Component.Max.HasValue);
+
+            var firstInputOptions = new Dictionary<string, object>(defaultOptions);
+            FluentDictionary.For(firstInputOptions)
+                .Add("name ", string.Format("{0}[0]", Component.Name))
+                .Add("value", Component.GetValue("{0}[0]".FormatWith(Component.Name), Component.SelectionStart), () => Component.SelectionStart.HasValue);
+
+            var secondInputOptions = new Dictionary<string, object>(defaultOptions);
+            FluentDictionary.For(secondInputOptions)
+                .Add("name ", string.Format("{0}[1]", Component.Name))
+                .Add("value", Component.GetValue("{0}[1]".FormatWith(Component.Name), Component.SelectionEnd), () => Component.SelectionEnd.HasValue);
 
             new HtmlElement("input", TagRenderMode.SelfClosing)
-                   .Attributes(new
-                   {
-                       type = "range",
-                       name = string.Format("{0}[0]",renderingData.Name),
-                       step = renderingData.SmallStep,
-                       value = renderingData.SelectionStart
-                   })
+                   .Attributes(firstInputOptions)
                    .AppendTo(div);
 
             new HtmlElement("input", TagRenderMode.SelfClosing)
-                   .Attributes(new
-                   {
-                       type = "range",
-                       name = string.Format("{0}[1]", renderingData.Name),
-                       step = renderingData.SmallStep,
-                       value = renderingData.SelectionEnd
-                   })
+                   .Attributes(secondInputOptions)
                    .AppendTo(div);
 
             return div;

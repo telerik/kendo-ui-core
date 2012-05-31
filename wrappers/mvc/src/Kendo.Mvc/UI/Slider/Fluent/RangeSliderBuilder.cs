@@ -141,13 +141,5 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
-
-        /// <summary>Sets a value indicating whether the range slider can respond to user interaction.</summary>
-        public RangeSliderBuilder<T> Enable(bool value)
-        {
-            Component.Enabled = value;
-
-            return this;
-        }
     }
 }
