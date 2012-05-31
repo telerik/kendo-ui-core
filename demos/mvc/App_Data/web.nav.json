@@ -714,6 +714,7 @@
     ],
     "Framework": [
         {
+            "packages": ["!mvc"],
             "text": "DataSource",
             "name": "datasource",
             "documentation": "framework/datasource",
@@ -746,6 +747,7 @@
             ]
         },
         {
+            "packages": ["!mvc"],
             "text": "Templates",
             "name": "templates",
             "documentation": "framework/templates",
@@ -762,6 +764,7 @@
             ]
         },
         {
+            "packages": ["!mvc"],
             "text": "MVVM",
             "name": "mvvm",
             "documentation": "framework/mvvm",
@@ -806,6 +809,7 @@
             ]
         },
         {
+            "packages": ["!mvc"],
             "text": "Drag & Drop",
             "name": "dragdrop",
             "documentation": "framework/draganddrop",
@@ -822,6 +826,7 @@
             ]
         },
         {
+            "packages": ["!mvc"],
             "text": "Validator",
             "name": "validator",
             "documentation": "framework/validator",
@@ -834,6 +839,7 @@
             ]
         },
         {
+            "packages": ["!mvc"],
             "text": "Globalization",
             "name": "globalization",
             "documentation": "framework/globalization",
