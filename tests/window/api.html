@@ -68,6 +68,22 @@
                 ok(!window.options.isMaximized);
             });
 
+            test('document scroll position is preserved on maximize and restore', function () {
+                var window = createWindow();
+
+                var div = $("<div style='height:2000px' />").appendTo(document.body),
+                    scrollPosition = 300;
+
+                $(document).scrollTop(scrollPosition);
+
+                window.maximize();
+
+                window.restore();
+
+                equal($(document).scrollTop(), scrollPosition);
+                div.remove();
+            });
+
             test("destroying a modal window moves overlay before previous window", function() {
                 var dialog = createWindow({
                         modal: true

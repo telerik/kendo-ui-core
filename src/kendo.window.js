@@ -987,7 +987,8 @@
             }
 
             if (that.options.isMaximized) {
-               $("html, body").css(OVERFLOW, "hidden");
+                this._documentScrollTop = $(document).scrollTop();
+                $("html, body").css(OVERFLOW, "hidden");
             }
 
             return that;
@@ -1048,6 +1049,9 @@
 
             if (that.options.isMaximized) {
                 $("html, body").css(OVERFLOW, "");
+                if (this._documentScrollTop && this._documentScrollTop > 0) {
+                    $(document).scrollTop(this._documentScrollTop);
+                }
             }
 
             return that;
@@ -1146,6 +1150,9 @@
                 .find(MINIMIZE_MAXIMIZE).parent().show();
 
             $("html, body").css(OVERFLOW, "");
+            if (this._documentScrollTop && this._documentScrollTop > 0) {
+                $(document).scrollTop(this._documentScrollTop);
+            }
 
             options.isMaximized = options.isMinimized = false;
 
@@ -1183,6 +1190,7 @@
                     position: "fixed"
                 });
 
+            this._documentScrollTop = $(document).scrollTop();
             $("html, body").css(OVERFLOW, "hidden");
 
             that.options.isMaximized = true;
