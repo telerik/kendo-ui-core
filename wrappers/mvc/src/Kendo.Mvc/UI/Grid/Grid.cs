@@ -338,7 +338,8 @@ namespace Kendo.Mvc.UI
         //    return CustomCommandToolBarButton(name, text, url);
         //}
 
-        public object CustomCommandToolBarButton(string name, string text)
+        //TODO: Implement custom commands
+        internal object CustomCommandToolBarButton(string name, string text)
         {
             return CustomCommandToolBarButton(name, text, null, null);
         }
