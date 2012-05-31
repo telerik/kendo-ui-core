@@ -37,7 +37,7 @@
 
                 if (ViewBag.opacity != null)
                 {
-                    config.Fade("in");
+                    config.Fade(FadeDirection.In);
                 }
             });
         })

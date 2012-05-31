@@ -1,8 +1,8 @@
 namespace Kendo.Mvc.UI
 {
-    public static class FadeDirection
+    public enum FadeDirection
     {
-        public const string In = "in";
-        public const string Out = "out";
+        In,
+        Out
     }
 }

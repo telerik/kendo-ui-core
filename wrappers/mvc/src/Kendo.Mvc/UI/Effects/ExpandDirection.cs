@@ -1,8 +1,8 @@
 namespace Kendo.Mvc.UI
 {
-    public static class ExpandDirection
+    public enum ExpandDirection
     {
-        public const string Vertical = "vertical";
-        public const string Horizontal = "horizontal";
+        Vertical,
+        Horizontal
     }
 }
