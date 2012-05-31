@@ -70,7 +70,7 @@ namespace Kendo.Mvc.Examples.Controllers
             return Json(GetProducts().ToDataSourceResult(request));
         }
 
-        private static IEnumerable<OrderDto> GetOrderDto()
+        private static IEnumerable<OrderViewModel> GetOrderDto()
         {
             var northwind = new NorthwindDataContext();
 
@@ -79,7 +79,7 @@ namespace Kendo.Mvc.Examples.Controllers
             loadOptions.LoadWith<Order>(o => o.Customer);
             northwind.LoadOptions = loadOptions;
 
-            return northwind.Orders.Select(order => new OrderDto
+            return northwind.Orders.Select(order => new OrderViewModel
             {
                 ContactName = order.Customer.ContactName,
                 OrderDate = order.OrderDate,
@@ -106,11 +106,11 @@ namespace Kendo.Mvc.Examples.Controllers
             });
         }
 
-        private static IEnumerable<EmployeeDto> GetEmployeeDto()
+        private static IEnumerable<EmployeeViewModel> GetEmployeeDto()
         {
             var northwind = new NorthwindDataContext();
 
-            return northwind.Employees.Select(employee => new EmployeeDto
+            return northwind.Employees.Select(employee => new EmployeeViewModel
             {
                 EmployeeID = employee.EmployeeID,
                 FirstName = employee.FirstName,

@@ -1,7 +1,7 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/Web.Master" %>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
-    <% Html.Kendo().Grid<EmployeeDto>()
+    <% Html.Kendo().Grid<Kendo.Mvc.Examples.Models.EmployeeViewModel>()
             .Name("Employees")
             .Columns(columns =>
             {
@@ -12,7 +12,7 @@
                 columns.Bound(e => e.City);
             })
             .DetailTemplate(detail => detail.ClientTemplate(
-                Html.Kendo().Grid<OrderDto>()
+                Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
                     .Name("Orders_#=EmployeeID#")
                     .Columns(columns =>
                     {
