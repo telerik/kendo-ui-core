@@ -2,7 +2,7 @@
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 <h3>Grid with multiple row selection enabled</h3>
-<%: Html.Kendo().Grid<ProductViewModel>()
+<%: Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()
     .Name("Grid")
     .Columns(columns =>
     {
@@ -22,7 +22,7 @@
 %>
 
 <h3>Grid with multiple cell selection enabled</h3>
-<%: Html.Kendo().Grid<ProductViewModel>()    
+<%: Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()    
     .Name("Grid2")
     .Columns(columns =>
     {

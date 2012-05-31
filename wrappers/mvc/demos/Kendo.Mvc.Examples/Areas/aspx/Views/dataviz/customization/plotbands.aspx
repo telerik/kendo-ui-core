@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/DataViz.Master"
-         Inherits="System.Web.Mvc.ViewPage<IEnumerable<ElectricityProduction>>" %>
+Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.ElectricityProduction>>" %>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 <div class="chart-wrapper">

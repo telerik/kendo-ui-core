@@ -1,5 +1,5 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/Web.Master"
-    Inherits="System.Web.Mvc.ViewPage<IEnumerable<Employee>>" %>
+    Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.Employee>>" %>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <%Html.Kendo().Grid(Model)

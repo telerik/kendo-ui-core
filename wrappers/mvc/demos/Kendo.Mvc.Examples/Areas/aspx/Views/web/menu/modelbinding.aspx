@@ -1,4 +1,5 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/Web.Master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<Category>>" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/Web.Master" 
+    Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.Category>>" %>
 
 <asp:Content ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
@@ -8,13 +9,13 @@
       .Name("Menu")
       .BindTo(Model, mappings => 
       {
-            mappings.For<Category>(binding => binding
+            mappings.For<Kendo.Mvc.Examples.Models.Category>(binding => binding
                     .ItemDataBound((item, category) =>
                     {
                         item.Text = category.CategoryName;
                     })
                     .Children(category => category.Products));
-            mappings.For<Product>(binding => binding
+            mappings.For<Kendo.Mvc.Examples.Models.Product>(binding => binding
                     .ItemDataBound((item, product) =>
                     {
                         item.Text = product.ProductName;
