@@ -66,11 +66,13 @@ namespace Kendo.Mvc.UI.Fluent
             return new GridSelectActionCommandBuilder(command);
         }
 
+
+        //TODO: Custom commands
         /// <summary>
         /// Defines a custom command.
         /// </summary>
         /// <returns></returns>
-        public GridCustomActionCommandBuilder<T> Custom(string name)
+        internal GridCustomActionCommandBuilder<T> Custom(string name)
         {
 
             var command = new GridCustomActionCommand<T>();

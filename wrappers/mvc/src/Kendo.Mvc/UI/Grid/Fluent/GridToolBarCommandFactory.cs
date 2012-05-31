@@ -42,7 +42,8 @@ namespace Kendo.Mvc.UI.Fluent
             return new GridToolBarSaveCommandBuilder<T>(command);
         }
 
-        public GridToolBarCustomCommandBuilder<T> Custom()
+        //TODO: Implement custom commands
+        internal GridToolBarCustomCommandBuilder<T> Custom()
         {
             var command = new GridToolBarCustomCommand<T>();
 
