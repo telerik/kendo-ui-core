@@ -48,11 +48,11 @@
         }
 
         function expand(e) {
-            kendoConsole.log("Expanded :: Pane #" + e.pane.id + " from splitter #" + this.id + "expanded");
+            kendoConsole.log("Expanded :: Pane #" + e.pane.id + " from splitter #" + this.element[0].id + " expanded");
         }
 
         function collapse(e) {
-            kendoConsole.log("Collapsed :: Pane #" + e.pane.id + " from splitter #" + this.id + "collapsed");
+            kendoConsole.log("Collapsed :: Pane #" + e.pane.id + " from splitter #" + this.element[0].id + " collapsed");
         }
 
         function contentLoad(e) {
