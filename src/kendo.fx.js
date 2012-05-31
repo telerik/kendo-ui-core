@@ -14,8 +14,8 @@
         support = kendo.support,
         transforms = support.transforms,
         transitions = support.transitions,
-        scaleProperties = { scale: 0, scaleX: 0, scaleY: 0, scale3d: 0 },
-        translateProperties = { translate: 0, translateX: 0, translateY: 0, translate3d: 0 },
+        scaleProperties = { scale: 0, scalex: 0, scaley: 0, scale3d: 0 },
+        translateProperties = { translate: 0, translatex: 0, translatey: 0, translate3d: 0 },
         hasZoom = (typeof document.documentElement.style.zoom !== "undefined") && !transitions,
         matrix3dRegExp = /matrix3?d?\s*\(.*,\s*([\d\w\.\-]+),\s*([\d\w\.\-]+),\s*([\d\w\.\-]+)/,
         cssParamsRegExp = /^(-?[\d\.\-]+)?[\w\s]*,?\s*(-?[\d\.\-]+)?[\w\s]*/i,
@@ -45,28 +45,28 @@
         left: {
             reverse: "right",
             property: "left",
-            transition: "translateX",
+            transition: "translatex",
             vertical: false,
             modifier: -1
         },
         right: {
             reverse: "left",
             property: "left",
-            transition: "translateX",
+            transition: "translatex",
             vertical: false,
             modifier: 1
         },
         down: {
             reverse: "up",
             property: "top",
-            transition: "translateY",
+            transition: "translatey",
             vertical: true,
             modifier: 1
         },
         up: {
             reverse: "down",
             property: "top",
-            transition: "translateY",
+            transition: "translatey",
             vertical: true,
             modifier: -1
         },
@@ -285,8 +285,26 @@
         element.css(currentTransition.CSS).css(TRANSFORM);
     }
 
+    function evaluateCSS(element, properties, options) {
+        var key, value;
+
+        for (key in properties) {
+            if ($.isFunction(properties[key])) {
+                value = properties[key](element, options);
+                if (value !== undefined) {
+                    properties[key] = value;
+                } else {
+                    delete properties[key];
+                }
+            }
+
+        }
+
+        return properties;
+    }
+
     function normalizeCSS(element, properties, options) {
-        var transforms = [],
+        var transformation = [],
             cssValues = {},
             key, value, exitValue;
 
@@ -296,23 +314,23 @@
             if ($.isFunction(properties[key])) {
                 value = properties[key](element, options);
                 if (value !== undefined) {
-                    exitValue = properties[key](element, options);
+                    exitValue = value;
                 }
             } else {
                 exitValue = properties[key];
             }
 
             if (exitValue !== false) {
-                if (transformProps.indexOf(key.toLowerCase()) != -1) {
-                    transforms.push(key + "(" + exitValue + ")");
+                if (transforms && transformProps.indexOf(key.toLowerCase()) != -1) {
+                    transformation.push(key + "(" + exitValue + ")");
                 } else {
                     cssValues[key] = exitValue;
                 }
             }
         }
 
-        if (transforms.length) {
-            cssValues[TRANSFORM] = transforms.join(" ");
+        if (transformation.length) {
+            cssValues[TRANSFORM] = transformation.join(" ");
         }
 
         return cssValues;
@@ -336,13 +354,13 @@
 
                 var css = normalizeCSS(element, properties, options),
                     currentTask = {
-                    keys: keys(css),
-                    CSS: css,
-                    object: element,
-                    setup: {},
-                    duration: options.duration,
-                    complete: options.complete
-                };
+                        keys: keys(css),
+                        CSS: css,
+                        object: element,
+                        setup: {},
+                        duration: options.duration,
+                        complete: options.complete
+                    };
                 currentTask.setup[TRANSITION] = options.exclusive + " " + options.duration + "ms " + options.ease;
 
                 var oldKeys = element.data("keys") || [];
@@ -416,6 +434,13 @@
         }
     }
 
+    function initDirection (element, direction, reverse) {
+        var real = kendo.directions[direction],
+            dir = reverse ? kendo.directions[real.reverse] : real;
+
+        return { direction: dir, offset: -dir.modifier * (dir.vertical ? element.outerHeight() : element.outerWidth()) };
+    }
+
     kendo.fx.promise = function(element, options) {
         var promises = [], effects;
 
@@ -424,7 +449,7 @@
 
         element.data("animating", true);
 
-        var props = { keep: [], restore: [] }, css = {},
+        var props = { keep: [], restore: [] }, css = {}, target,
             methods = { setup: [], teardown: [] }, properties = {},
 
             // create a promise for each effect
@@ -472,11 +497,16 @@
                             css = extend(css, { display: element.data("olddisplay") || "block" }); // Add show to the set
                         }
 
-                        css = normalizeCSS(element, css, opts);
-                        if (transforms && css.transform) {
-                            css[TRANSFORM] += css.transform;
+                        if (transforms && !options.reset) {
+                            css = evaluateCSS(element, css, opts);
+
+                            target = element.data("targetTransform");
+
+                            if (target) {
+                                css = extend(target, css);
+                            }
                         }
-                        delete css.transform;
+                        css = normalizeCSS(element, css, opts);
 
                         element.css(css)
                                .css(TRANSFORM); // Nudge
@@ -485,6 +515,7 @@
 
                         if (kendo.fx.animate) {
                             options.init();
+                            element.data("targetTransform", properties);
                             kendo.fx.animate(element, properties, opts);
                         }
 
@@ -712,20 +743,19 @@
         },
         slide: {
             setup: function(element, options) {
-                var direction = kendo.directions[options.effects.slide.direction],
-                    extender = {}, offset, reverse = options.reverse,
-                    property = transitions && options.transition !== false ? direction.transition : direction.property,
-                    divisor = options.divisor || 1;
+                var reverse = options.reverse, extender = {},
+                    init = initDirection(element, options.effects.slide.direction, reverse),
+                    property = transitions && options.transition !== false ? init.direction.transition : init.direction.property;
 
+                init.offset /= -(options.divisor || 1);
                 if (!reverse) {
                     var origin = element.data(ORIGIN);
-                    offset = (direction.modifier * (direction.vertical ? element.outerHeight() : element.outerWidth()) / divisor);
                     if (!origin && origin !== 0) {
                         element.data(ORIGIN, parseFloat(animationProperty(element, property)));
                     }
                 }
 
-                extender[property] = reverse ? (element.data(ORIGIN) || 0) : (element.data(ORIGIN) || 0) + offset + PX;
+                extender[property] = reverse ? (element.data(ORIGIN) || 0) : (element.data(ORIGIN) || 0) + init.offset + PX;
 
                 return extend(extender, options.properties);
             }
@@ -764,35 +794,27 @@
         slideIn: {
             css: {
                 translatex: function (element, options) {
-                    var dir = kendo.directions[options.effects.slideIn.direction], reverse = options.reverse,
-                        direction = reverse ? kendo.directions[dir.reverse] : dir,
-                        offset = -direction.modifier * (direction.vertical ? element.outerHeight() : element.outerWidth());
-
-                    return direction.transition == "translateX" ? (!reverse ? offset : 0) + "px" : undefined;
+                    var init = initDirection(element, options.effects.slideIn.direction, options.reverse);
+                    return init.direction.transition == "translatex" ? (!options.reverse ? init.offset : 0) + PX : undefined;
                 },
                 translatey: function (element, options) {
-                    var dir = kendo.directions[options.effects.slideIn.direction], reverse = options.reverse,
-                        direction = reverse ? kendo.directions[dir.reverse] : dir,
-                        offset = -direction.modifier * (direction.vertical ? element.outerHeight() : element.outerWidth());
-
-                    return direction.transition == "translateY" ? (!reverse ? offset : 0) + "px" : undefined;
+                    var init = initDirection(element, options.effects.slideIn.direction, options.reverse);
+                    return init.direction.transition == "translatey" ? (!options.reverse ? init.offset : 0) + PX : undefined;
                 }
             },
             setup: function(element, options) {
-                var dir = kendo.directions[options.effects.slideIn.direction],
-                    reverse = options.reverse,
-                    direction = reverse ? kendo.directions[dir.reverse] : dir,
-                    offset = -direction.modifier * (direction.vertical ? element.outerHeight() : element.outerWidth()),
+                var reverse = options.reverse,
+                    init = initDirection(element, options.effects.slideIn.direction, reverse),
                     extender = {};
 
                 if (transitions && options.transition !== false) {
-                    extender[direction.transition] = reverse ? offset + PX : 0;
+                    extender[init.direction.transition] = reverse ? init.offset + PX : 0;
                 } else {
                     if (!reverse) {
-                        element.css(direction.property, offset + PX);
+                        element.css(init.direction.property, init.offset + PX);
                     }
-                    extender[direction.property] = reverse ? offset + PX : 0;
-                    element.css(direction.property);
+                    extender[init.direction.property] = reverse ? init.offset + PX : 0;
+                    element.css(init.direction.property);
                 }
 
                 return extend(extender, options.properties);
@@ -838,9 +860,8 @@
                 }
             },
             setup: function(element, options) {
-                var reverse = options.reverse,
-                    rotation = options.effects.flip.direction == "horizontal" ? "rotatey" : "rotatex",
-                    parent = element.parent(),
+                var rotation = options.effects.flip.direction == "horizontal" ? "rotatey" : "rotatex",
+                    reverse = options.reverse, parent = element.parent(),
                     degree = options.degree, face = options.face, back = options.back,
                     faceRotation = rotation + (reverse ? "(180deg)" : "(0deg)"),
                     backRotation = rotation + (reverse ? "(0deg)" : "(180deg)"),
@@ -870,8 +891,7 @@
 
                 if (support.hasHW3D) {
                     $().add(options.face).add(options.back).add(element)
-                        .css(BACKFACE, "")
-                        .css(TRANSFORM, "");
+                        .css(BACKFACE, "");
                 }
             }
         },
