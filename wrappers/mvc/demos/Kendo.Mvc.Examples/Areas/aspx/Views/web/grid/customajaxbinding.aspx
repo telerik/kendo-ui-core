@@ -1,7 +1,7 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/Web.Master" %>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
-<%: Html.Kendo().Grid<Order>()
+<%: Html.Kendo().Grid<Kendo.Mvc.Examples.Models.Order>()
     .Name("Grid")
     .Columns(columns =>
     {

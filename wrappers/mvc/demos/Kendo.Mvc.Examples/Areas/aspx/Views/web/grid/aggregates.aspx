@@ -2,8 +2,8 @@
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 
-    <%: Html.Kendo().Grid<ProductViewModel>()
-        .Name("Grid")
+<%: Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()
+    .Name("Grid")
         .Columns(columns =>
         {
             columns.Bound(p => p.ProductName)
