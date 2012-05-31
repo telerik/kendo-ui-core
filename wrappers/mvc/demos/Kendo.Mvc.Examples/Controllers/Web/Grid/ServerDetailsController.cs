@@ -4,10 +4,10 @@ using Kendo.Mvc.Examples.Models;
 namespace Kendo.Mvc.Examples.Controllers
 {
     public partial class GridController : Controller
-    {
-        public ActionResult ServerBinding()
+    {        
+        public ActionResult ServerDetails()
         {
-            return View(new NorthwindDataContext().Products);
+            return View(new NorthwindDataContext().Employees);
         }
     }
 }

@@ -55,7 +55,14 @@
         .PageSize(5)
     )    
     .Sortable()
+    .Events(events => events.DataBound("dataBound"))
     %>
+
+    <script>
+        function dataBound() {
+            this.expandRow(this.tbody.find("tr.k-master-row").first());
+        }
+    </script>
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="HeadContent" runat="server">

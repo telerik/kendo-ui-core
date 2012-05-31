@@ -138,7 +138,16 @@
     <Compile Include="Controllers\Web\Editor\IndexController.cs" />
     <Compile Include="Controllers\DataViz\Linear_Gauge\IndexController.cs" />
     <Compile Include="Controllers\DataViz\Linear_Gauge\Scale_OptoinsController.cs" />
-    <Compile Include="Controllers\Web\Grid\EditingInlineController.cs" />
+    <Compile Include="Controllers\Web\Grid\AjaxBindingController.cs" />
+    <Compile Include="Controllers\Web\Grid\Column_ReorderingController.cs" />
+    <Compile Include="Controllers\Web\Grid\Column_ResizingController.cs" />
+    <Compile Include="Controllers\Web\Grid\ApiController.cs" />
+    <Compile Include="Controllers\Web\Grid\SelectionController.cs" />
+    <Compile Include="Controllers\Web\Grid\ServerDetailsController.cs" />
+    <Compile Include="Controllers\Web\Grid\DetailTemplateController.cs" />
+    <Compile Include="Controllers\Web\Grid\ServerHierarchyController.cs" />
+    <Compile Include="Controllers\Web\Grid\Local_DataController.cs" />
+    <Compile Include="Controllers\Web\Grid\Editing_InlineController.cs" />
     <Compile Include="Controllers\Web\Grid\EditingController.cs" />
     <Compile Include="Controllers\Web\DateTimePicker\IndexController.cs" />
     <Compile Include="Controllers\Web\Grid\HierarchyController.cs" />
@@ -175,7 +184,7 @@
     <Compile Include="Controllers\Web\TimePicker\RangeSelectionController.cs" />
     <Compile Include="Controllers\Web\TimePicker\IndexController.cs" />
     <Compile Include="Controllers\Web\DatePicker\IndexController.cs" />
-    <Compile Include="Controllers\Web\Grid\GridController.cs" />
+    <Compile Include="Controllers\Web\Grid\IndexController.cs" />
     <Compile Include="Controllers\Web\NumericTextBox\ApiController.cs" />
     <Compile Include="Controllers\Web\NumericTextBox\EventsController.cs" />
     <Compile Include="Controllers\Web\NumericTextBox\IndexController.cs" />
