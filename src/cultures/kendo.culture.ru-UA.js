@@ -7,7 +7,7 @@
 * GNU General Public License (GPL) version 3.
 * For GPL requirements, please review: http://www.gnu.org/copyleft/gpl.html
 */
-﻿(function( window, undefined ) {
+(function( window, undefined ) {
     kendo.cultures["ru-UA"] = {
         name: "ru-UA",
         numberFormat: {
