@@ -1465,7 +1465,7 @@
             that.elementPadding = parseInt(wnd.wrapper.css("padding-top"), 10);
             that.initialCursorPosition = wrapper.offset();
 
-            that.resizeDirection = e.currentTarget.prop("className").replace("k-resize-handle k-resize-", "").split("");
+            that.resizeDirection = e.currentTarget.prop("className").replace("k-resize-handle k-resize-", "");
 
             that.initialSize = {
                 width: wrapper.width(),
