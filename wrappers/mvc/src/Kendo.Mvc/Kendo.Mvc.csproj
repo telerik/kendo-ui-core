@@ -741,7 +741,7 @@
     <Compile Include="UI\Splitter\Html\SplitterHtmlBuilder.cs" />
     <Compile Include="UI\Splitter\Splitter.cs" />
     <Compile Include="UI\Splitter\SplitterPane.cs" />
-    <Compile Include="UI\TextBox\Html\NumericTextBoxHtmlBuilder.cs" />
+    <Compile Include="UI\NumericTextBox\Html\NumericTextBoxHtmlBuilder.cs" />
     <Compile Include="UI\TextNode.cs" />
     <Compile Include="IUrlGenerator.cs" />
     <Compile Include="UI\Grid\Settings\GridGroupingSettings.cs" />
@@ -789,9 +789,9 @@
     <Compile Include="UI\Grid\GridViewDataContainer.cs" />
     <Compile Include="UI\INavigationHtmlBuilder.cs" />
     <Compile Include="UI\INavigationItemComponent.cs" />
-    <Compile Include="UI\TextBox\Fluent\NumericTextBoxBuilder.cs" />
-    <Compile Include="UI\TextBox\NumericTextBox.cs" />
-    <Compile Include="UI\TextBox\Fluent\NumericTextBoxClientEventsBuilder.cs" />
+    <Compile Include="UI\NumericTextBox\Fluent\NumericTextBoxBuilder.cs" />
+    <Compile Include="UI\NumericTextBox\NumericTextBox.cs" />
+    <Compile Include="UI\NumericTextBox\Fluent\NumericTextBoxClientEventsBuilder.cs" />
     <Compile Include="UI\NavigationHtmlBuilderBase.cs" />
     <Compile Include="UI\NavigationItemContainerExtensions.cs" />
     <Compile Include="UI\TimePicker\Fluent\TimePickerBuilder.cs" />
