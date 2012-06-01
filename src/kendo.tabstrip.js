@@ -82,7 +82,8 @@
      * <p>
      *  While any valid technique for loading AJAX content can be used, a <strong>TabStrip</strong> supports loading
      *  content from URLs in an asynchronous manner. These URLs should return HTML fragments that can be loaded in a
-     *  TabStrip content area.
+     *  TabStrip content area. Content DIVs are not required and if present should be completely empty for AJAX loading
+     *  to work.
      * </p>
      *
      * @exampleTitle Loading Tab content asynchronously

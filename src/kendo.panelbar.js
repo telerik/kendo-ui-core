@@ -108,7 +108,8 @@
      * <p>
      *  While any valid technique for loading AJAX content can be used, the <strong>PanelBar</strong> provides built-in
      *  support for asynchronously loading content from URLs. These URLs should return HTML fragments that can be
-     *  loaded in the <strong>PanelBar</strong> item content area.
+     *  loaded in the <strong>PanelBar</strong> item content area. Content DIVs should be completely empty for AJAX
+     *  loading to work.
      * </p>
      *
      * @exampleTitle Create a list of items with a target for dynamic content
