@@ -564,6 +564,16 @@
                 equal(ul.children(":first").html(), "10:00 AM");
                 equal(ul.children(":last").html(), "8:00 PM");
             });
+
+            test("value method updates input element when select max date", function() {
+                var datetimepicker = new kendo.ui.DateTimePicker(input, {
+                    max: new Date(2000, 9, 10)
+                });
+
+                datetimepicker.value(new Date(2000, 9, 10));
+
+                equal(datetimepicker.element.val(), "10/10/2000 12:00 AM");
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

@@ -781,7 +781,7 @@
             if (current && isEqualDatePart(value, current)) {
                 if (that._midnight && option == "max") {
                     timeViewOptions[option] = MAX;
-                    that.timeView.dataBind([MAX]);
+                    timeView.dataBind([MAX]);
                     return;
                 }
 
@@ -791,7 +791,7 @@
                 timeViewOptions.min = MIN;
             }
 
-            that.timeView.bind();
+            timeView.bind();
         },
 
         _toggleHover: function(e) {
@@ -807,7 +807,7 @@
                 max = options.max,
                 timeView = that.timeView,
                 date = parse(value, options.parseFormats),
-                rebind, timeViewOptions, old;
+                rebind, timeViewOptions, old, skip;
 
             if (+date === +that._value) {
                 return date;
@@ -834,17 +834,17 @@
                 if (isEqualDatePart(date, max)) {
                     if (that._midnight) {
                         timeView.dataBind([MAX]);
-                        return date;
+                        skip = true;
+                    } else {
+                        timeViewOptions.max = max;
+                        if (!rebind) {
+                            timeViewOptions.min = MIN;
+                        }
+                        rebind = true;
                     }
-
-                    timeViewOptions.max = max;
-                    if (!rebind) {
-                        timeViewOptions.min = MIN;
-                    }
-                    rebind = true;
                 }
 
-                if ((!old && rebind) || (old && !isEqualDatePart(old, date))) {
+                if (!skip && ((!old && rebind) || (old && !isEqualDatePart(old, date)))) {
                     if (!rebind) {
                         timeViewOptions.max = MAX;
                         timeViewOptions.min = MIN;
