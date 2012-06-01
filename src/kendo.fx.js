@@ -514,6 +514,10 @@
                         }
                         css = normalizeCSS(element, css, opts);
 
+                        if (hasZoom) {
+                            delete css[TRANSFORM]; // Temporary fix
+                        }
+
                         element.css(css)
                                .css(TRANSFORM); // Nudge
 
