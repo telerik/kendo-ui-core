@@ -1,7 +1,11 @@
 namespace Kendo.Mvc.UI.Fluent
 {
+    using Kendo.Mvc.UI;
+    using Kendo.Mvc.UI.Fluent;
     using System;
-    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Web.Mvc;
 
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="ComboBox"/> component.
@@ -22,6 +26,68 @@ namespace Kendo.Mvc.UI.Fluent
             Component.AutoBind = autoBind;
 
             return this;
+        }
+
+        /// <summary>
+        /// Binds the DropDownList to a list of DropDownListItem.
+        /// </summary>
+        /// <param name="dataSource">The data source.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Telerik().ComboBox()
+        ///             .Name("ComboBox")
+        ///             .BindTo(new List<DropDownListItem>
+        ///             {
+        ///                 new DropDownListItem{
+        ///                     Text = "Text1",
+        ///                     Value = "Value1"
+        ///                 },
+        ///                 new DropDownListItem{
+        ///                     Text = "Text2",
+        ///                     Value = "Value2"
+        ///                 }
+        ///             })
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ComboBoxBuilder BindTo(IEnumerable<DropDownListItem> dataSource)
+        {
+            Component.DataSource.Data = dataSource;
+            Component.ValueOfSelectedItem(dataSource);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Binds the DropDownList to a list of SelectListItem.
+        /// </summary>
+        /// <param name="dataSource">The data source.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Telerik().ComboBox()
+        ///             .Name("ComboBox")
+        ///             .BindTo(new List<SelectListItem>
+        ///             {
+        ///                 new SelectListItem{
+        ///                     Text = "Text1",
+        ///                     Value = "Value1"
+        ///                 },
+        ///                 new SelectListItem{
+        ///                     Text = "Text2",
+        ///                     Value = "Value2"
+        ///                 }
+        ///             })
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ComboBoxBuilder BindTo(IEnumerable<SelectListItem> dataSource)
+        {
+            return BindTo(dataSource.Select(item => new DropDownListItem
+            {
+                Text = item.Text,
+                Value = item.Value,
+                Selected = item.Selected
+            }));
         }
 
         public ComboBoxBuilder DataValueField(string field)
@@ -65,6 +131,31 @@ namespace Kendo.Mvc.UI.Fluent
             Component.Filter = filter.ToString().ToLower();
 
             return this;
+        }
+
+        /// <summary>
+        /// Defines the items in the ComboBox
+        /// </summary>
+        /// <param name="addAction">The add action.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Telerik().ComboBox()
+        ///             .Name("ComboBox")
+        ///             .Items(items =>
+        ///             {
+        ///                 items.Add().Text("First Item");
+        ///                 items.Add().Text("Second Item");
+        ///             })
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ComboBoxBuilder Items(Action<DropDownListItemFactory> addAction)
+        {
+            var items = new List<DropDownListItem>();
+
+            addAction(new DropDownListItemFactory(items));
+
+            return BindTo(items);
         }
 
         /// <summary>

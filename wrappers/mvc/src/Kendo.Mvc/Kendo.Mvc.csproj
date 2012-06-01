@@ -361,8 +361,8 @@
     <Compile Include="UI\DropDownListBase\Html\DropDownListHtmlBuilderBase.cs" />
     <Compile Include="UI\DropDownList\Fluent\DropDownListBuilder.cs" />
     <Compile Include="UI\DropDownListBase\Fluent\DropDownListEventBuilderBase.cs" />
-    <Compile Include="UI\DropDownListBase\Fluent\DropDownItemBuilder.cs" />
-    <Compile Include="UI\DropDownListBase\Fluent\DropDownItemFactory.cs" />
+    <Compile Include="UI\DropDownListBase\Fluent\DropDownListItemBuilder.cs" />
+    <Compile Include="UI\DropDownListBase\Fluent\DropDownListItemFactory.cs" />
     <Compile Include="UI\Editor\Fluent\EditorCustomToolBuilder.cs" />
     <Compile Include="UI\Editor\IEditorTool.cs" />
     <Compile Include="UI\Editor\Tools\EditorCustomTool.cs" />

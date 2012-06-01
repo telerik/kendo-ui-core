@@ -6,13 +6,13 @@ namespace Kendo.Mvc.UI.Tests
 
     public class DropDownItemFactoryTests
     {
-        private readonly DropDownItemFactory factory;
+        private readonly DropDownListItemFactory factory;
         private IList<DropDownListItem> collection;
 
         public DropDownItemFactoryTests()
         {
             collection = new List<DropDownListItem>();
-            factory = new DropDownItemFactory(collection);
+            factory = new DropDownListItemFactory(collection);
         }
 
         [Fact]

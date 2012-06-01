@@ -1,21 +1,18 @@
 namespace Kendo.Mvc.UI.Fluent
 {
-    using Infrastructure;    
-
     /// <summary>
     /// Defines the fluent interface for configuring child DropDonwList items.
     /// </summary>
-    public class DropDownItemBuilder : IHideObjectMembers
+    public class DropDownListItemBuilder : IHideObjectMembers
     {
         private readonly DropDownListItem item;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DropDownItemBuilder"/> class.
+        /// Initializes a new instance of the <see cref="DropDownListItemBuilder"/> class.
         /// </summary>
         /// <param name="item">The item.</param>
-        public DropDownItemBuilder(DropDownListItem item)
+        public DropDownListItemBuilder(DropDownListItem item)
         {
-
             this.item = item;
         }
 
@@ -31,7 +28,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public DropDownItemBuilder Text(string value)
+        public DropDownListItemBuilder Text(string value)
         {
             item.Text = value;
 
@@ -50,7 +47,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public DropDownItemBuilder Value(string value)
+        public DropDownListItemBuilder Value(string value)
         {
             item.Value = value;
 
@@ -72,7 +69,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public DropDownItemBuilder Selected(bool value)
+        public DropDownListItemBuilder Selected(bool value)
         {
             item.Selected = value;
 

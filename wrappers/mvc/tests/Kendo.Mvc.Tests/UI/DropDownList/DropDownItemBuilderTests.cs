@@ -8,12 +8,12 @@ namespace Kendo.Mvc.UnitTest.Menu
     public class DropDownItemBuilderTests
     {
         private readonly DropDownListItem item;
-        private readonly DropDownItemBuilder builder;
+        private readonly DropDownListItemBuilder builder;
 
         public DropDownItemBuilderTests()
         {
             item = new DropDownListItem();
-            builder = new DropDownItemBuilder(item);
+            builder = new DropDownListItemBuilder(item);
         }
 
         [Fact]
@@ -29,7 +29,7 @@ namespace Kendo.Mvc.UnitTest.Menu
         public void Text_method_should_return_builder()
         {
             var sameBuilder = builder.Text("test");
-            Assert.IsType(typeof(DropDownItemBuilder), sameBuilder);
+            Assert.IsType(typeof(DropDownListItemBuilder), sameBuilder);
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace Kendo.Mvc.UnitTest.Menu
         public void Value_method_should_return_builder()
         {
             var sameBuilder = builder.Value("test");
-            Assert.IsType(typeof(DropDownItemBuilder), sameBuilder);
+            Assert.IsType(typeof(DropDownListItemBuilder), sameBuilder);
         }
 
         [Fact]
@@ -61,7 +61,7 @@ namespace Kendo.Mvc.UnitTest.Menu
         public void Select_method_should_return_builder()
         {
             var sameBuilder = builder.Selected(false);
-            Assert.IsType(typeof(DropDownItemBuilder), sameBuilder);
+            Assert.IsType(typeof(DropDownListItemBuilder), sameBuilder);
         }
     }
 }
