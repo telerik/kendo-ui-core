@@ -5,9 +5,9 @@ namespace Kendo.Mvc.UI.Fluent
 
     public class EditorDropDownItemBuilder : IHideObjectMembers
     {
-        private readonly IList<DropDownItem> items;
+        private readonly IList<DropDownListItem> items;
 
-        public EditorDropDownItemBuilder(IList<DropDownItem> items)
+        public EditorDropDownItemBuilder(IList<DropDownListItem> items)
         {
 
             this.items = items;
@@ -15,7 +15,7 @@ namespace Kendo.Mvc.UI.Fluent
 
         public EditorDropDownItemBuilder Add(string text, string value)
         {
-            items.Add(new DropDownItem() { Text = text, Value = value });
+            items.Add(new DropDownListItem() { Text = text, Value = value });
 
             return this;
         }

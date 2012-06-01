@@ -1,23 +1,18 @@
 namespace Kendo.Mvc.UI.Tests
 {
-    using Moq;
+    using Kendo.Mvc.UI.Html;
     using Xunit;
-
-    using System.IO;
-    using System.Web.UI;
-using System.Collections.Generic;
-    using Kendo.Mvc.Infrastructure;
 
     public class DropDownListHtmlBuilderTests
     {
 
         private DropDownList dropDownList;
-        private DropDownListHtmlBuilder renderer;
+        private DropDownListHtmlBuilderBase renderer;
 
         public DropDownListHtmlBuilderTests()
         {
             dropDownList = DropDownListTestHelper.CreateDropDownList();
-            renderer = new DropDownListHtmlBuilder(dropDownList);
+            renderer = new DropDownListHtmlBuilderBase(dropDownList);
             dropDownList.Name = "DropDownList1";
         }
 
@@ -47,23 +42,23 @@ using System.Collections.Generic;
             Assert.Equal("input", tag.TagName);
         }
 
-        //[Fact]
-        //public void InputTag_should_render_input_validation_error_class_if_ModelState_Error()
-        //{
-        //    dropDownList.ViewContext.UnobtrusiveJavaScriptEnabled = true;
+        [Fact]
+        public void InputTag_should_render_input_validation_error_class_if_ModelState_Error()
+        {
+            dropDownList.ViewContext.UnobtrusiveJavaScriptEnabled = true;
 
-        //    System.Web.Mvc.ValueProviderResult result = new System.Web.Mvc.ValueProviderResult("s", "s", System.Threading.Thread.CurrentThread.CurrentCulture);
-        //    System.Web.Mvc.ModelState state = new System.Web.Mvc.ModelState();
-        //    state.Value = result;
+            System.Web.Mvc.ValueProviderResult result = new System.Web.Mvc.ValueProviderResult("s", "s", System.Threading.Thread.CurrentThread.CurrentCulture);
+            System.Web.Mvc.ModelState state = new System.Web.Mvc.ModelState();
+            state.Value = result;
 
-        //    dropDownList.Name = "dropDownList1";
-        //    dropDownList.ViewData.ModelState.Add("dropDownList1", state);
-        //    dropDownList.ViewData.ModelState.AddModelError("dropDownList1", "error");
+            dropDownList.Name = "dropDownList1";
+            dropDownList.ViewData.ModelState.Add("dropDownList1", state);
+            dropDownList.ViewData.ModelState.AddModelError("dropDownList1", "error");
 
-        //    IHtmlNode tag = renderer.Build();
+            IHtmlNode tag = renderer.Build();
 
-        //    tag.Attribute("class").ShouldContain("input-validation-error");
-        //}
+            tag.Attribute("class").ShouldContain("input-validation-error");
+        }
 
         [Fact]
         public void Build_should_render_input() 
@@ -92,40 +87,6 @@ using System.Collections.Generic;
             Assert.Equal(dropDownList.Name, tag.Attribute("name"));
         }
 
-        //[Fact]
-        //public void Build_should_not_add_attr_value_if_no_items() 
-        //{
-        //    dropDownList.Items.Clear();
-
-        //    IHtmlNode tag = renderer.Build();
-        //    Assert.Throws(typeof(System.Collections.Generic.KeyNotFoundException), () => tag.Attribute("value"));
-        //}
-
-        //[Fact]
-        //public void Build_should_not_add_attr_value_with_selected_item_value()
-        //{
-        //    dropDownList.Items.Add(new DropDownItem { Text = "Item1", Value = "1" });
-        //    dropDownList.Items.Add(new DropDownItem { Text = "Item2", Value = "2" });
-        //    dropDownList.SelectedIndex = 0;
-
-        //    IHtmlNode tag = renderer.Build();
-        //    Assert.Equal("1", tag.Attribute("value"));
-        //}
-
-
-        //[Fact]
-        //public void Build_should_add_attr_value_with_selected_item_text_if_value_is_not_set()
-        //{
-        //    dropDownList.Items.Add(new DropDownItem { Text = "Item1", Value = "1" });
-        //    dropDownList.Items.Add(new DropDownItem { Text = "Item2" });
-
-        //    dropDownList.SelectedIndex = 1;
-
-        //    IHtmlNode tag = renderer.Build();
-
-        //    Assert.Equal("Item2", tag.Attribute("value"));
-        //}
-        
         [Fact]
         public void Build_should_output_html_attributes()
         {

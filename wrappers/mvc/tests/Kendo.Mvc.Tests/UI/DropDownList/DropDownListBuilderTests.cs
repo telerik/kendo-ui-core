@@ -36,10 +36,10 @@ namespace Kendo.Mvc.UI.Tests
         //[Fact]
         //public void BindTo_for_DropDownItem_IEnumerable_should_create_two_items()
         //{
-        //    List<DropDownItem> list = new List<DropDownItem>
+        //    List<DropDownListItem> list = new List<DropDownListItem>
         //                            {
-        //                                new DropDownItem{Text="", Value=""},
-        //                                new DropDownItem{Text="", Value=""}
+        //                                new DropDownListItem{Text="", Value=""},
+        //                                new DropDownListItem{Text="", Value=""}
         //                            };
 
         //    builder.BindTo(list);
@@ -50,7 +50,7 @@ namespace Kendo.Mvc.UI.Tests
         //[Fact]
         //public void BindTo_for_DropDownItem_IEnumerable_should_return_builder()
         //{
-        //    var returnedBuilder = builder.BindTo(new List<DropDownItem>());
+        //    var returnedBuilder = builder.BindTo(new List<DropDownListItem>());
 
         //    Assert.IsType(typeof(DropDownListBuilder), returnedBuilder);
         //}
@@ -72,7 +72,7 @@ namespace Kendo.Mvc.UI.Tests
         //[Fact]
         //public void BindTo_for_SelectListItem_IEnumerable_should_return_builder()
         //{
-        //    var returnedBuilder = builder.BindTo(new List<DropDownItem>());
+        //    var returnedBuilder = builder.BindTo(new List<DropDownListItem>());
 
         //    Assert.IsType(typeof(DropDownListBuilder), returnedBuilder);
         //}

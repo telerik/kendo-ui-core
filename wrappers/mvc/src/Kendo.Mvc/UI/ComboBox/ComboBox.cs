@@ -1,45 +1,21 @@
 namespace Kendo.Mvc.UI
 {
     using Kendo.Mvc.Infrastructure;
-    using System.Collections.Generic;
+    using Kendo.Mvc.UI.Html;
     using System.IO;
-    using System.Linq;
     using System.Web.Mvc;
 
-    public class ComboBox : ViewComponentBase
+    public class ComboBox : DropDownListBase
     {
         public ComboBox(ViewContext viewContext,  IJavaScriptInitializer initializer, ViewDataDictionary viewData, IUrlGenerator urlGenerator)
-            : base(viewContext, initializer, viewData)
+            : base(viewContext, initializer, viewData, urlGenerator)
         {
-            Animation = new PopupAnimation();
-
-            DataSource = new DataSource();
-
-            UrlGenerator = urlGenerator;
-
-            AutoBind = true;
-            Enabled = true;
-            HighlightFirst = true;
-            IgnoreCase = true;
-            Suggest = false;
         }
 
-        public bool AutoBind
+        public bool? AutoBind
         {
             get;
             set;
-        }
-
-        public PopupAnimation Animation
-        {
-            get;
-            private set;
-        }
-                
-        public string DataTextField 
-        { 
-            get; 
-            set; 
         }
 
         public string DataValueField 
@@ -48,37 +24,13 @@ namespace Kendo.Mvc.UI
             set; 
         }
 
-        public int? Delay
-        {
-            get;
-            set;
-        }
-
-        public bool Enabled
-        {
-            get;
-            set;
-        }
-
         public string Filter
         {
             get;
             set;
-        }   
-
-        public int? Height
-        {
-            get;
-            set;
         }
 
-        public bool HighlightFirst
-        {
-            get;
-            set;
-        }
-
-        public bool IgnoreCase
+        public bool? HighlightFirst
         {
             get;
             set;
@@ -96,70 +48,25 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        public DataSource DataSource
-        {
-            get;
-            private set;
-        }
-
         public int? SelectedIndex
         {
             get;
             set;
         }
 
-        public bool Suggest
+        public bool? Suggest
         {
             get;
             set;
         }     
 
-        public string Template
-        {
-            get;
-            set;
-        }
-       
-        public IUrlGenerator UrlGenerator
-        {
-            get;
-            set;
-        }
-       
-        public string Value
-        { 
-            get; 
-            set; 
-        }
-
         public override void WriteInitializationScript(TextWriter writer)
         {
-            var options = new Dictionary<string, object>(Events);
+            var options = this.SeriailzeBaseOptions();
 
-            if (!string.IsNullOrEmpty(DataSource.Transport.Read.Url))
-            {
-                options["dataSource"] = DataSource.ToJson();
-            }
-            else if (DataSource.Data != null)
-            {
-                options["dataSource"] = DataSource.Data;
-            }
-
-            var animation = Animation.ToJson();
-
-            if (animation.Keys.Any())
-            {
-                options["animation"] = animation["animation"];
-            }
-
-            if (!AutoBind)
+            if (AutoBind != null)
             {
                 options["autoBind"] = AutoBind;
-            }
-
-            if (!string.IsNullOrEmpty(DataTextField))
-            {
-                options["dataTextField"] = DataTextField;
             }
 
             if (!string.IsNullOrEmpty(DataValueField))
@@ -167,34 +74,19 @@ namespace Kendo.Mvc.UI
                 options["dataValueField"] = DataValueField;
             }
 
-            if (Delay != null)
-            {
-                options["delay"] = Delay;
-            }
-
             if (!string.IsNullOrEmpty(Filter))
             {
                 options["filter"] = Filter;
             }
 
-            if (Height != null)
-            {
-                options["height"] = Height;
-            }
-
-            if (!HighlightFirst)
-            {
-                options["highlightFirst"] = HighlightFirst;
-            }
-
-            if (!IgnoreCase)
-            {
-                options["ignoreCase"] = IgnoreCase;
-            }
-
             if (SelectedIndex != null)
             {
                 options["index"] = SelectedIndex;
+            }
+
+            if (HighlightFirst != null)
+            {
+                options["highlightFirst"] = HighlightFirst;
             }
 
             if (MinLength != null)
@@ -207,16 +99,11 @@ namespace Kendo.Mvc.UI
                 options["placeholder"] = Placeholder;
             }
 
-            if (Suggest)
+            if (Suggest != null)
             {
                 options["suggest"] = Suggest;
             }
-
-            if (!string.IsNullOrEmpty(Template))
-            {
-                options["template"] = Template;
-            }
-
+            
             writer.Write(Initializer.Initialize(Id, "ComboBox", options));
 
             base.WriteInitializationScript(writer);
@@ -225,9 +112,7 @@ namespace Kendo.Mvc.UI
         protected override void WriteHtml(System.Web.UI.HtmlTextWriter writer)
         {
             //TODO: Determine index of the selected item if SelectList is used
-            ComboBoxHtmlBuilder builder = new ComboBoxHtmlBuilder(this);
-
-            builder.Build().WriteTo(writer);
+            new DropDownListHtmlBuilderBase(this).Build().WriteTo(writer);
 
             base.WriteHtml(writer);
         }

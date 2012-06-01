@@ -155,7 +155,6 @@
       <DependentUpon>EditorLocalization.resx</DependentUpon>
     </Compile>
     <Compile Include="UI\AutoComplete\AutoComplete.cs" />
-    <Compile Include="UI\AutoComplete\AutoCompleteHtmlBuilder.cs" />
     <Compile Include="UI\AutoComplete\Fluent\AutoCompleteBuilder.cs" />
     <Compile Include="UI\Calendar\Fluent\CalendarEventBuilder.cs" />
     <Compile Include="UI\Chart\Axes\ChartAxisLabels.cs" />
@@ -295,7 +294,6 @@
     <Compile Include="UI\Chart\Series\IChartBarSeries.cs" />
     <Compile Include="UI\Chart\Series\IChartSeries.cs" />
     <Compile Include="UI\ComboBox\ComboBox.cs" />
-    <Compile Include="UI\ComboBox\ComboBoxHtmlBuilder.cs" />
     <Compile Include="UI\ComboBox\Fluent\ComboBoxBuilder.cs" />
     <Compile Include="UI\ClientEvent.cs" />
     <Compile Include="UI\DataSource\CrudOperation.cs" />
@@ -324,8 +322,9 @@
     <Compile Include="UI\Calendar\Fluent\MonthTemplateBuilder.cs" />
     <Compile Include="UI\DatePickerBase\Html\DatePickerHtmlBuilderBase.cs" />
     <Compile Include="UI\DatePickerBase\IPicker.cs" />
-    <Compile Include="UI\DropDown\FilterType.cs" />
-    <Compile Include="UI\DropDown\Fluent\DropDownBuilderBase.cs" />
+    <Compile Include="UI\DropDownListBase\DropDownListBase.cs" />
+    <Compile Include="UI\DropDownListBase\FilterType.cs" />
+    <Compile Include="UI\DropDownListBase\Fluent\DropDownListBuilderBase.cs" />
     <Compile Include="UI\Editor\Tools\EditorListTool.cs" />
     <Compile Include="UI\Effects\ExpandableAnimation.cs" />
     <Compile Include="UI\Effects\Fluent\ExpandableAnimationBuilder.cs" />
@@ -356,14 +355,14 @@
     <Compile Include="UI\DatePickerBase\Fluent\DatePickerEventBuilderBase.cs" />
     <Compile Include="UI\DateTimePicker\DateTimePicker.cs" />
     <Compile Include="UI\DateTimePicker\Fluent\DateTimePickerBuilder.cs" />
-    <Compile Include="UI\DropDown\DropDownExtentions.cs" />
-    <Compile Include="UI\DropDown\DropDownItem.cs" />
+    <Compile Include="UI\DropDownListBase\DropDownExtentions.cs" />
+    <Compile Include="UI\DropDownListBase\DropDownListItem.cs" />
     <Compile Include="UI\DropDownList\DropDownList.cs" />
-    <Compile Include="UI\DropDownList\DropDownListHtmlBuilder.cs" />
+    <Compile Include="UI\DropDownListBase\Html\DropDownListHtmlBuilderBase.cs" />
     <Compile Include="UI\DropDownList\Fluent\DropDownListBuilder.cs" />
-    <Compile Include="UI\DropDown\Fluent\DropDownEventBuilderBase.cs" />
-    <Compile Include="UI\DropDown\Fluent\DropDownItemBuilder.cs" />
-    <Compile Include="UI\DropDown\Fluent\DropDownItemFactory.cs" />
+    <Compile Include="UI\DropDownListBase\Fluent\DropDownListEventBuilderBase.cs" />
+    <Compile Include="UI\DropDownListBase\Fluent\DropDownItemBuilder.cs" />
+    <Compile Include="UI\DropDownListBase\Fluent\DropDownItemFactory.cs" />
     <Compile Include="UI\Editor\Fluent\EditorCustomToolBuilder.cs" />
     <Compile Include="UI\Editor\IEditorTool.cs" />
     <Compile Include="UI\Editor\Tools\EditorCustomTool.cs" />

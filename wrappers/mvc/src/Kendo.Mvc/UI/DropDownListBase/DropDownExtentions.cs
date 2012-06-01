@@ -12,7 +12,7 @@ namespace Kendo.Mvc.UI
         //{
         //    if (instance.Placeholder.HasValue())
         //    {
-        //        instance.Items.Insert(0, new DropDownItem
+        //        instance.Items.Insert(0, new DropDownListItem
         //        {
         //            Text = instance.Placeholder,
         //            Value = string.Empty,
@@ -24,7 +24,7 @@ namespace Kendo.Mvc.UI
         //internal static void SyncSelectedIndex(this IDropDown instance)
         //{
         //    int selectedItemIndex = -1;
-        //    IList<DropDownItem> items = instance.Items;
+        //    IList<DropDownListItem> items = instance.Items;
         //    string value = instance.GetValue<string>(instance.Value);
 
         //    if (value.HasValue())
@@ -61,7 +61,7 @@ namespace Kendo.Mvc.UI
 
         //internal static void EncodeTextPropertyofItems(this IDropDown instance) 
         //{
-        //    foreach (DropDownItem item in instance.Items)
+        //    foreach (DropDownListItem item in instance.Items)
         //    {
         //        item.Text = HttpUtility.HtmlEncode(item.Text);
         //    }

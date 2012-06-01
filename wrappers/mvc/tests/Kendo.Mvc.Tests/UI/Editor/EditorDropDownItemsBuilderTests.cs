@@ -7,11 +7,11 @@ namespace Kendo.Mvc.UI.Tests
     public class EditorDropDownItemsBuilderTests
     {
         private readonly EditorDropDownItemBuilder builder;
-        private readonly IList<DropDownItem> container;
+        private readonly IList<DropDownListItem> container;
 
         public EditorDropDownItemsBuilderTests()
         {
-            container = new List<DropDownItem>();
+            container = new List<DropDownListItem>();
             
             builder = new EditorDropDownItemBuilder(container);
         }

@@ -113,7 +113,7 @@ namespace Kendo.Mvc.UI.Fluent
         /* TODO: custom font names
         public EditorToolFactory FontName(Action<EditorDropDownItemBuilder> configurator)
         {
-            var items = new List<DropDownItem>();
+            var items = new List<DropDownListItem>();
             var builder = new EditorDropDownItemBuilder(items);
 
             configurator(builder);
@@ -130,7 +130,7 @@ namespace Kendo.Mvc.UI.Fluent
         /* TODO: custom font sizes
         public EditorToolFactory FontSize(Action<EditorDropDownItemBuilder> configurator)
         {
-            var items = new List<DropDownItem>();
+            var items = new List<DropDownListItem>();
             
             var builder = new EditorDropDownItemBuilder(items);
 
@@ -148,7 +148,7 @@ namespace Kendo.Mvc.UI.Fluent
         /* TODO: custom formats
         public EditorToolFactory FormatBlock(Action<EditorDropDownItemBuilder> configurator)
         {
-            var items = new List<DropDownItem>();
+            var items = new List<DropDownListItem>();
             
             var builder = new EditorDropDownItemBuilder(items);
 
@@ -162,7 +162,7 @@ namespace Kendo.Mvc.UI.Fluent
         /* TODO: snippets
         public EditorToolFactory Snippets(Action<EditorSnippetBuilder> configurator)
         {
-            var items = new List<DropDownItem>();
+            var items = new List<DropDownListItem>();
             
             var builder = new EditorSnippetBuilder(items, DI.Current.Resolve<IVirtualPathProvider>());
 
@@ -175,7 +175,7 @@ namespace Kendo.Mvc.UI.Fluent
         /*TODO: STYLES
         public EditorToolFactory Styles(Action<EditorDropDownItemBuilder> configurator)
         {
-            var items = new List<DropDownItem>();
+            var items = new List<DropDownListItem>();
 
             var builder = new EditorDropDownItemBuilder(items);
 
@@ -202,21 +202,21 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
-        private EditorToolFactory ComboBox(string identifier, IList<DropDownItem> items)
+        private EditorToolFactory ComboBox(string identifier, IList<DropDownListItem> items)
         {
             group.Tools.Add(new EditorTool(identifier));
 
             return this;
         }
 
-        private EditorToolFactory DropDown(string identifier, IList<DropDownItem> items)
+        private EditorToolFactory DropDown(string identifier, IList<DropDownListItem> items)
         {
             group.Tools.Add(new EditorTool(identifier));
 
             return this;
         }
 
-        private EditorToolFactory SelectBox(string identifier, IList<DropDownItem> items)
+        private EditorToolFactory SelectBox(string identifier, IList<DropDownListItem> items)
         {
             group.Tools.Add(new EditorTool(identifier));
 

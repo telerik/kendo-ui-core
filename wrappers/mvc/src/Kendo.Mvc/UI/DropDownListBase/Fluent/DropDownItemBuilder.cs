@@ -7,13 +7,13 @@ namespace Kendo.Mvc.UI.Fluent
     /// </summary>
     public class DropDownItemBuilder : IHideObjectMembers
     {
-        private readonly DropDownItem item;
+        private readonly DropDownListItem item;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DropDownItemBuilder"/> class.
         /// </summary>
         /// <param name="item">The item.</param>
-        public DropDownItemBuilder(DropDownItem item)
+        public DropDownItemBuilder(DropDownListItem item)
         {
 
             this.item = item;

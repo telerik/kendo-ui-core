@@ -5,7 +5,7 @@ namespace Kendo.Mvc.UI
     /// <summary>
     /// Represent item in the DropDownList/ComboBox items.
     /// </summary>
-    public class DropDownItem
+    public class DropDownListItem
     {
         public string Text { get; set; }
         public string Value { get; set; }

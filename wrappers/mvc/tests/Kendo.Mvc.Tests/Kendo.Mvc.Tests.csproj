@@ -265,7 +265,6 @@
     <Compile Include="SiteMap\SiteMapNodeFactoryTests.cs" />
     <Compile Include="SiteMap\SiteMapNodeTests.cs" />
     <Compile Include="SiteMap\XmlSiteMapTests.cs" />
-    <Compile Include="UI\AutoComplete\AutoCompleteHtmlBuilderTests.cs" />
     <Compile Include="UI\AutoComplete\AutoCompleteTestHelper.cs" />
     <Compile Include="UI\AutoComplete\AutoCompleteBuilderTests.cs" />
     <Compile Include="UI\ComboBox\ComboBoxTestHelper.cs" />

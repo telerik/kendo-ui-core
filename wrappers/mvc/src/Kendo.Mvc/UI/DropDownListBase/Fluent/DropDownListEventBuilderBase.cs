@@ -3,14 +3,14 @@ namespace Kendo.Mvc.UI.Fluent
     using System;
     using System.Collections.Generic;
 
-    public class DropDownEventBuilderBase : EventBuilder
+    public class DropDownListEventBuilderBase : EventBuilder
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="DropDownEventBuilderBase"/> class.
+        /// Initializes a new instance of the <see cref="DropDownListEventBuilderBase"/> class.
         /// </summary>
         /// <param name="Events">The client events.</param>
         /// <param name="viewContext">The view context.</param>
-        public DropDownEventBuilderBase(IDictionary<string, object> events) : base(events)
+        public DropDownListEventBuilderBase(IDictionary<string, object> events) : base(events)
         {
         }
 
@@ -33,7 +33,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public DropDownEventBuilderBase Select(Func<object, object> handler)
+        public DropDownListEventBuilderBase Select(Func<object, object> handler)
         {
             Handler("select", handler);
 
@@ -52,7 +52,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public DropDownEventBuilderBase Select(string handler)
+        public DropDownListEventBuilderBase Select(string handler)
         {
             Handler("select", handler);
 
@@ -77,7 +77,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public DropDownEventBuilderBase Change(Func<object, object> handler)
+        public DropDownListEventBuilderBase Change(Func<object, object> handler)
         {
             Handler("change", handler);
 
@@ -96,7 +96,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public DropDownEventBuilderBase Change(string handler)
+        public DropDownListEventBuilderBase Change(string handler)
         {
             Handler("change", handler);
             
@@ -115,7 +115,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public DropDownEventBuilderBase Open(string handler)
+        public DropDownListEventBuilderBase Open(string handler)
         {
             Handler("open", handler);
             
@@ -140,7 +140,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public DropDownEventBuilderBase Open(Func<object, object> handler)
+        public DropDownListEventBuilderBase Open(Func<object, object> handler)
         {
             Handler("open", handler);
             
@@ -165,7 +165,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public DropDownEventBuilderBase Close(Func<object, object> handler)
+        public DropDownListEventBuilderBase Close(Func<object, object> handler)
         {
             Handler("close", handler);
 
@@ -184,7 +184,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public DropDownEventBuilderBase Close(string handler)
+        public DropDownListEventBuilderBase Close(string handler)
         {
             Handler("close", handler);
             

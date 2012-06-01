@@ -7,12 +7,12 @@ namespace Kendo.Mvc.UnitTest.Menu
 
     public class DropDownItemBuilderTests
     {
-        private readonly DropDownItem item;
+        private readonly DropDownListItem item;
         private readonly DropDownItemBuilder builder;
 
         public DropDownItemBuilderTests()
         {
-            item = new DropDownItem();
+            item = new DropDownListItem();
             builder = new DropDownItemBuilder(item);
         }
 

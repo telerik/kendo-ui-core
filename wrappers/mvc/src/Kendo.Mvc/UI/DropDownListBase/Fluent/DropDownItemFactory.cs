@@ -4,19 +4,18 @@ namespace Kendo.Mvc.UI.Fluent
     using Infrastructure;
 
     /// <summary>
-    /// Creates items for the <see cref="DropDownItem" />.
+    /// Creates items for the <see cref="DropDownListItem" />.
     /// </summary>
     public class DropDownItemFactory : IHideObjectMembers
     {
-        private readonly IList<DropDownItem> container;
+        private readonly IList<DropDownListItem> container;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DropDownItemFactory"/> class.
         /// </summary>
         /// <param name="settings">The settings.</param>
-        public DropDownItemFactory(IList<DropDownItem> container)
+        public DropDownItemFactory(IList<DropDownListItem> container)
         {
-
             this.container = container;
         }
 
@@ -26,7 +25,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <returns></returns>
         public DropDownItemBuilder Add()
         {
-            DropDownItem item = new DropDownItem();
+            DropDownListItem item = new DropDownListItem();
 
             container.Add(item);
 

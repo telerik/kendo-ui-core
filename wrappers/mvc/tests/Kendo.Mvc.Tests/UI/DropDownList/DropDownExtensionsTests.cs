@@ -13,10 +13,10 @@ namespace Kendo.Mvc.UI.Tests.UI
         //    dropdownlist = DropDownListTestHelper.CreateDropDownList();
         //    dropdownlist.Name = "dropdownlist";
 
-        //    dropdownlist.Items.Add(new DropDownItem { Text = "item1", Value = "item1" });
-        //    dropdownlist.Items.Add(new DropDownItem { Text = "item2", Value = "item2" });
-        //    dropdownlist.Items.Add(new DropDownItem { Text = "item3", Value = "item3" });
-        //    dropdownlist.Items.Add(new DropDownItem { Text = "item4", Value = "item4" });
+        //    dropdownlist.Items.Add(new DropDownListItem { Text = "item1", Value = "item1" });
+        //    dropdownlist.Items.Add(new DropDownListItem { Text = "item2", Value = "item2" });
+        //    dropdownlist.Items.Add(new DropDownListItem { Text = "item3", Value = "item3" });
+        //    dropdownlist.Items.Add(new DropDownListItem { Text = "item4", Value = "item4" });
         //}
 
         //[Fact]
@@ -86,10 +86,10 @@ namespace Kendo.Mvc.UI.Tests.UI
 
         //    combobox.Name = "Combo";
 
-        //    combobox.Items.Add(new DropDownItem { Text = "item1", Value = "item1" });
-        //    combobox.Items.Add(new DropDownItem { Text = "item2", Value = "item2" });
-        //    combobox.Items.Add(new DropDownItem { Text = "item3", Value = "item3" });
-        //    combobox.Items.Add(new DropDownItem { Text = "item4", Value = "item4" });
+        //    combobox.Items.Add(new DropDownListItem { Text = "item1", Value = "item1" });
+        //    combobox.Items.Add(new DropDownListItem { Text = "item2", Value = "item2" });
+        //    combobox.Items.Add(new DropDownListItem { Text = "item3", Value = "item3" });
+        //    combobox.Items.Add(new DropDownListItem { Text = "item4", Value = "item4" });
 
         //    combobox.SyncSelectedIndex();
 

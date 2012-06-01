@@ -10,7 +10,7 @@ namespace Kendo.Mvc.UI.Tests
     {
         private readonly Mock<IVirtualPathProvider> pathProvider;
         private readonly EditorSnippetBuilder builder;
-        private readonly IList<DropDownItem> container;
+        private readonly IList<DropDownListItem> container;
         private const string text = "text";
         private const string value = "value";
 
@@ -18,7 +18,7 @@ namespace Kendo.Mvc.UI.Tests
         {
             pathProvider = new Mock<IVirtualPathProvider>();
 
-            container = new List<DropDownItem>();
+            container = new List<DropDownListItem>();
 
             pathProvider.Setup(p => p.FileExists(It.IsAny<string>())).Returns(true);
 

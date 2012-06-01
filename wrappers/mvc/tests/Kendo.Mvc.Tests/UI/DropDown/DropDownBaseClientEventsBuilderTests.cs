@@ -8,14 +8,14 @@ namespace Kendo.Mvc.UI.Tests
 
     public class DropDownBaseClientEventsBuilderTests
     {
-        private DropDownEventBuilderBase builder;
+        private DropDownListEventBuilderBase builder;
         private IDictionary<string, object> clientEvents;
 
 
         public DropDownBaseClientEventsBuilderTests()
         {
             clientEvents = new Dictionary<string, object>();
-            builder = new DropDownEventBuilderBase(clientEvents);
+            builder = new DropDownListEventBuilderBase(clientEvents);
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace Kendo.Mvc.UI.Tests
 
             var returned = builder.Change(param);
 
-            Assert.IsType(typeof(DropDownEventBuilderBase), returned);
+            Assert.IsType(typeof(DropDownListEventBuilderBase), returned);
         }
 
         [Fact]
@@ -55,7 +55,7 @@ namespace Kendo.Mvc.UI.Tests
 
             var returned = builder.Change(param);
 
-            Assert.IsType(typeof(DropDownEventBuilderBase), returned);
+            Assert.IsType(typeof(DropDownListEventBuilderBase), returned);
         }
 
         [Fact]
@@ -75,7 +75,7 @@ namespace Kendo.Mvc.UI.Tests
 
             var returned = builder.Open(param);
 
-            Assert.IsType(typeof(DropDownEventBuilderBase), returned);
+            Assert.IsType(typeof(DropDownListEventBuilderBase), returned);
         }
 
         [Fact]
@@ -115,7 +115,7 @@ namespace Kendo.Mvc.UI.Tests
 
             var returned = builder.Close(param);
 
-            Assert.IsType(typeof(DropDownEventBuilderBase), returned);
+            Assert.IsType(typeof(DropDownListEventBuilderBase), returned);
         }
 
         [Fact]
@@ -125,7 +125,7 @@ namespace Kendo.Mvc.UI.Tests
 
             var returned = builder.Close(param);
 
-            Assert.IsType(typeof(DropDownEventBuilderBase), returned);
+            Assert.IsType(typeof(DropDownListEventBuilderBase), returned);
         }
 
         [Fact]
@@ -155,7 +155,7 @@ namespace Kendo.Mvc.UI.Tests
 
             var returned = builder.Select(param);
 
-            Assert.IsType(typeof(DropDownEventBuilderBase), returned);
+            Assert.IsType(typeof(DropDownListEventBuilderBase), returned);
         }
 
         [Fact]
@@ -165,7 +165,7 @@ namespace Kendo.Mvc.UI.Tests
 
             var returned = builder.Select(param);
 
-            Assert.IsType(typeof(DropDownEventBuilderBase), returned);
+            Assert.IsType(typeof(DropDownListEventBuilderBase), returned);
         }
 
     }

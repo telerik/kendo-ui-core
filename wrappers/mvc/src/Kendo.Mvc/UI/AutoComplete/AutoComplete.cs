@@ -1,50 +1,15 @@
 namespace Kendo.Mvc.UI
 {
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
-    using System.Web.Mvc;
     using Kendo.Mvc.Infrastructure;
+    using Kendo.Mvc.UI.Html;
+    using System.IO;
+    using System.Web.Mvc;
 
-    public class AutoComplete : ViewComponentBase
+    public class AutoComplete : DropDownListBase
     {
         public AutoComplete(ViewContext viewContext, IJavaScriptInitializer initializer, ViewDataDictionary viewData, IUrlGenerator urlGenerator)
-            : base(viewContext, initializer, viewData)
+            : base(viewContext, initializer, viewData, urlGenerator)
         {
-            Animation = new PopupAnimation();
-
-            DataSource = new DataSource();
-
-            UrlGenerator = urlGenerator;
-
-            Enabled = true;
-            HighlightFirst = false;
-            IgnoreCase = true;
-            Suggest = false;
-        }
-
-        public PopupAnimation Animation
-        {
-            get;
-            private set;
-        }
-        
-        public string DataTextField
-        {
-            get;
-            set;
-        }
-        
-        public int? Delay
-        {
-            get;
-            set;
-        }
-
-        public bool Enabled
-        {
-            get;
-            set;
         }
 
         public string Filter
@@ -53,19 +18,7 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        public int? Height
-        {
-            get;
-            set;
-        }
-
-        public bool HighlightFirst
-        {
-            get;
-            set;
-        }
-
-        public bool IgnoreCase
+        public bool? HighlightFirst
         {
             get;
             set;
@@ -83,90 +36,30 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        public DataSource DataSource
-        {
-            get;
-            private set;
-        }
-
         public string Separator
         {
             get;
             set;
         }
 
-        public bool Suggest
+        public bool? Suggest
         {
             get;
             set;
         }
-
-        public string Template
-        {
-            get;
-            set;
-        }
-
-        public IUrlGenerator UrlGenerator
-        {
-            get;
-            set;
-        }
-
-        public string Value
-        {
-            get;
-            set;
-        }
-
+        
         public override void WriteInitializationScript(TextWriter writer)
         {
-            var options = new Dictionary<string, object>(Events);
-
-            if (!string.IsNullOrEmpty(DataSource.Transport.Read.Url))
-            {
-                options["dataSource"] = DataSource.ToJson();
-            }
-            else if (DataSource.Data != null)
-            {
-                options["dataSource"] = DataSource.Data;
-            }
-
-            var animation = Animation.ToJson();
-
-            if (animation.Keys.Any())
-            {
-                options["animation"] = animation["animation"];
-            }
-            
-            if (!string.IsNullOrEmpty(DataTextField))
-            {
-                options["dataTextField"] = DataTextField;
-            }
-
-            if (Delay != null)
-            {
-                options["delay"] = Delay;
-            }
+            var options = this.SeriailzeBaseOptions();
 
             if (!string.IsNullOrEmpty(Filter))
             {
                 options["filter"] = Filter;
             }
 
-            if (Height != null)
-            {
-                options["height"] = Height;
-            }
-
-            if (!HighlightFirst)
+            if (HighlightFirst != null)
             {
                 options["highlightFirst"] = HighlightFirst;
-            }
-
-            if (!IgnoreCase)
-            {
-                options["ignoreCase"] = IgnoreCase;
             }
 
             if (MinLength != null)
@@ -179,19 +72,14 @@ namespace Kendo.Mvc.UI
                 options["placeholder"] = Placeholder;
             }
 
-            if (!string.IsNullOrEmpty(Separator))
-            {
-                options["separator"] = Separator;
-            }
-
-            if (Suggest)
+            if (Suggest != null)
             {
                 options["suggest"] = Suggest;
             }
 
-            if (!string.IsNullOrEmpty(Template))
+            if (!string.IsNullOrEmpty(Separator))
             {
-                options["template"] = Template;
+                options["separator"] = Separator;
             }
 
             writer.Write(Initializer.Initialize(Id, "AutoComplete", options));
@@ -201,7 +89,7 @@ namespace Kendo.Mvc.UI
 
         protected override void WriteHtml(System.Web.UI.HtmlTextWriter writer)
         {
-            new AutoCompleteHtmlBuilder(this).Build().WriteTo(writer);
+            new DropDownListHtmlBuilderBase(this).Build().WriteTo(writer);
 
             base.WriteHtml(writer);
         }

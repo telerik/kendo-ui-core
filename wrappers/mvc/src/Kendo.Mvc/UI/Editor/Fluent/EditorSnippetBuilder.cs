@@ -8,10 +8,10 @@ namespace Kendo.Mvc.UI.Fluent
 
     public class EditorSnippetBuilder : IHideObjectMembers
     {
-        private readonly IList<DropDownItem> items;
+        private readonly IList<DropDownListItem> items;
         private readonly IVirtualPathProvider provider;
 
-        public EditorSnippetBuilder(IList<DropDownItem> items, IVirtualPathProvider provider)
+        public EditorSnippetBuilder(IList<DropDownListItem> items, IVirtualPathProvider provider)
         {
             this.provider = provider;
             this.items = items;
@@ -19,14 +19,14 @@ namespace Kendo.Mvc.UI.Fluent
 
         public EditorSnippetBuilder Add(string title, string snippet)
         {
-            items.Add(new DropDownItem { Text = title, Value = snippet });
+            items.Add(new DropDownListItem { Text = title, Value = snippet });
 
             return this;
         }
 
         public EditorSnippetBuilder AddFromFile(string title, string pathToSnippet)
         {
-            items.Add(new DropDownItem { Text = title, Value = ReadFile(pathToSnippet) });
+            items.Add(new DropDownListItem { Text = title, Value = ReadFile(pathToSnippet) });
 
             return this;
         }
