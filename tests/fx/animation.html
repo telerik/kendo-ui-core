@@ -215,9 +215,11 @@
                         oldTime = +new Date();
                     },
                     complete: function() {
-                        called = true;
-                        ok(true);
-                        start();
+                        setTimeout( function () {
+                            called = true;
+                            ok(true);
+                            start();
+                        }, 50);
                     }
                 });
 
@@ -241,9 +243,11 @@
                         height = span.height();
                     },
                     complete: function(element) {
-                        ok(height == 0);
-                        ok(span.height() == 100);
-                        start();
+                        setTimeout( function () {
+                            ok(height == 0);
+                            ok(span.height() == 100);
+                            start();
+                        }, 50);
                     }
                 });
             });
@@ -260,9 +264,11 @@
                         opacity = span.css("opacity");
                     },
                     complete: function () {
-                        ok(opacity == 0);
-                        ok(span.css("opacity") == 1);
-                        start();
+                        setTimeout( function () {
+                            ok(opacity == 0);
+                            ok(span.css("opacity") == 1);
+                            start();
+                        }, 50);
                     }
                 });
             });
@@ -281,9 +287,11 @@
                         opacity = span.css("opacity");
                     },
                     complete: function () {
-                        ok(opacity == 1);
-                        ok(span.css("opacity") == 0);
-                        start();
+                        setTimeout( function () {
+                            ok(opacity == 1);
+                            ok(span.css("opacity") == 0);
+                            start();
+                        }, 50);
                     }
                 });
             });
@@ -301,9 +309,11 @@
                             scale = animationProperty(span, "scale");
                         },
                         complete: function () {
-                            ok(scale == 0.01);
-                            ok(animationProperty(span, "scale") == 1);
-                            start();
+                            setTimeout( function () {
+                                ok(scale == 0.01);
+                                ok(animationProperty(span, "scale") == 1);
+                                start();
+                            }, 50);
                         }
                     });
                 });
@@ -316,7 +326,7 @@
                     setTimeout( function () {
                         ok((transitions ? animationProperty(span, "translateX") : span.offset().left - position) == span.width());
                         start();
-                    }, 0);
+                    }, 50);
                 });
             });
 
@@ -328,7 +338,7 @@
                     setTimeout( function () {
                         ok((transitions ? animationProperty(span, "translateY") : span.offset().top - position) == span.height());
                         start();
-                    }, 0);
+                    }, 50);
                 });
             });
 
@@ -346,9 +356,11 @@
                         position = (transitions ? animationProperty(span, "translateX") : span.offset().left);
                     },
                     complete: function () {
-                        ok(position == -span.width());
-                        ok((transitions ? animationProperty(span, "translateX") : span.offset().left) == 0);
-                        start();
+                        setTimeout( function () {
+                            ok(position == -span.width());
+                            ok((transitions ? animationProperty(span, "translateX") : span.offset().left) == 0);
+                            start();
+                        }, 50);
                     }
                 });
             });
@@ -367,9 +379,11 @@
                         position = (transitions ? animationProperty(span, "translateY") : span.offset().top);
                     },
                     complete: function () {
-                        ok(position == -span.height());
-                        ok((transitions ? animationProperty(span, "translateY") : span.offset().top) == 0);
-                        start();
+                        setTimeout( function () {
+                            ok(position == -span.height());
+                            ok((transitions ? animationProperty(span, "translateY") : span.offset().top) == 0);
+                            start();
+                        }, 50);
                     }
                 });
             });
@@ -385,9 +399,11 @@
                         initialHeight = span.height();
                     },
                     complete: function () {
-                        ok(initialHeight == 0);
-                        ok(span.height() == 100);
-                        start();
+                        setTimeout( function () {
+                            ok(initialHeight == 0);
+                            ok(span.height() == 100);
+                            start();
+                        }, 50);
                     }
                 });
             });
@@ -403,9 +419,11 @@
                         initialWidth = span.width();
                     },
                     complete: function () {
-                        ok(initialWidth == 0);
-                        ok(span.width() == 100);
-                        start();
+                        setTimeout( function () {
+                            ok(initialWidth == 0);
+                            ok(span.width() == 100);
+                            start();
+                        }, 50);
                     }
                 });
             });
