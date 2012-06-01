@@ -1,0 +1,28 @@
+#!/usr/bin/env node
+
+var jsDocToolkit = require("build/node-jsdoc-toolkit/app/nodemodule").jsdoctoolkit,
+    fs = require("fs"),
+    path = require("path");
+
+
+function sourceFiles(sourcePath) {
+    return fs.readdirSync(sourcePath)
+        .filter(function(file) {
+            return file.indexOf(".js") > -1 && file.indexOf("jquery") === -1;
+        })
+        .map(function(file) {
+            return path.join(sourcePath, file)
+        });
+}
+
+var params = [
+    "-d=/tmp",
+    "-t=build/md-doc-template",
+    // constants
+    "-D=\"copyright:" + new Date().getFullYear() + "\"",
+    "-D=\"title:Kendo UI Documentation\""
+].concat(sourceFiles("src"));
+
+jsDocToolkit.run(params);
+
+// vim: ft=javascript
