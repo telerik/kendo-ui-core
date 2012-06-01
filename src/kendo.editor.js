@@ -3584,15 +3584,22 @@ var GreedyInlineFormatter = InlineFormatter.extend({
     },
 
     activate: function(range, nodes) {
-        var that = this;
+        var that = this,
+            camelCase,
+            greedyProperty = that.greedyProperty,
+            action = "apply";
+
         that.split(range);
 
-        if (that.greedyProperty) {
-            var camelCase = that.greedyProperty.replace(/-([a-z])/, function(all, letter) { return letter.toUpperCase(); });
-            that[that.values.style[camelCase] == "inherit" ? "remove" : "apply"](nodes);
-        } else {
-            that.apply(nodes);
+        if (greedyProperty) {
+            camelCase = greedyProperty.replace(/-([a-z])/, function(all, letter) { return letter.toUpperCase(); });
+
+            if (that.values.style[camelCase] == "inherit") {
+                action = "remove";
+            }
         }
+
+        that[action](nodes);
     }
 });
 
@@ -3675,7 +3682,7 @@ var ColorTool = Tool.extend({
         Tool.fn.init.call(this, options);
 
         this.options = options;
-        this.format = [{ tags: dom.inlineElements }];
+        this.format = [{ tags: ["span"] }];
     },
 
     update: function(ui) {

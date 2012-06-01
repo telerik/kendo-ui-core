@@ -131,14 +131,14 @@ test('consolidate does not merge different tags', function() {
     equal(editor.value(), '<span style="color:#ff0000;">f</span><a href="#" style="color:#ff0000;">oo</a>');
 });
 
-test('remove removes format whole node contents selected', function() {
+test('remove removes format when whole node contents are selected', function() {
     var range = createRangeFromText(editor, "<strong>|foo|</strong>");
     var formatter = new InlineFormatter(editor.options.formats.bold);
     formatter.remove(new RangeEnumerator(range).enumerate());
     equal(editor.value(), 'foo');
 });
 
-test('remove removes format whole node selected', function() {
+test('remove removes format when whole node is selected', function() {
     var range = createRangeFromText(editor, "|<strong>foo</strong>|");
     var formatter = new InlineFormatter(editor.options.formats.bold);
     formatter.remove(new RangeEnumerator(range).enumerate());

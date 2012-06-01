@@ -78,6 +78,13 @@
                 equal(editor.value(), '<span style="font-family:Courier;">fo</span>obar');
             });
 
+            test("leaves inner inline nodes", function() {
+                var range = createRangeFromText(editor, "<span style='color:#ff0000;'><em>|foo|</em></span>");
+                var formatter = new GreedyInlineFormatter([{ tags: ["span"] }], { style: { color: 'inherit' } }, 'color');
+                formatter.activate(range, new kendo.ui.editor.RangeEnumerator(range).enumerate());
+
+                equal(editor.value(), "<em>foo</em>");
+            });
         </script>
 
         <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
