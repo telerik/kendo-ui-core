@@ -18,10 +18,29 @@ namespace Kendo.Mvc.Examples.Controllers
 
         public ActionResult Index(string suite)
         {
-            ViewBag.Navigation = NavigationProvider.SuiteWidgets(suite);
+            ViewBag.Navigation = FilterEmptyCategories(NavigationProvider.SuiteWidgets(suite));
             ViewBag.SuiteTitle = SuiteTitles[suite];
             
             return View();
+        }
+
+        private dynamic FilterEmptyCategories(IDictionary<string, NavigationWidget[]> navigation)
+        {
+            var result = new Dictionary<string, NavigationWidget[]>();
+
+            foreach (string category in navigation.Keys)
+            {
+                foreach (NavigationWidget widget in navigation[category])
+                {
+                    if (widget.ShouldInclude)
+                    {
+                        result.Add(category, navigation[category]);
+                        break;
+                    }
+                }
+            }
+
+            return result;
         }
     }
 }
