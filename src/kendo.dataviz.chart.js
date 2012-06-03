@@ -3292,7 +3292,7 @@
                 axis = yAxes[i];
                 plotArea.alignAxisTo(axis, xAnchor, yAnchorCrossings[i], xAnchorCrossings[i]);
 
-                if (axis.lineBox().x1 === xAnchor.lineBox().x1) {
+                if (round(axis.lineBox().x1) === round(xAnchor.lineBox().x1)) {
                     if (leftAnchor) {
                         axis.reflow(axis.box
                             .alignTo(leftAnchor.box, LEFT)
@@ -3303,7 +3303,7 @@
                     leftAnchor = axis;
                 }
 
-                if (axis.lineBox().x2 === xAnchor.lineBox().x2) {
+                if (round(axis.lineBox().x2) === round(xAnchor.lineBox().x2)) {
                     if (!axis._mirrored) {
                         axis.options.labels.mirror = !axis.options.labels.mirror;
                         axis._mirrored = true;
@@ -3325,7 +3325,7 @@
                 axis = xAxes[i];
                 plotArea.alignAxisTo(axis, yAnchor, xAnchorCrossings[i], yAnchorCrossings[i]);
 
-                if (axis.lineBox().y1 === yAnchor.lineBox().y1) {
+                if (round(axis.lineBox().y1) === round(yAnchor.lineBox().y1)) {
                     if (!axis._mirrored) {
                         axis.options.labels.mirror = !axis.options.labels.mirror;
                         axis._mirrored = true;
@@ -3342,7 +3342,7 @@
                     topAnchor = axis;
                 }
 
-                if (axis.lineBox().y2 === yAnchor.lineBox().y2) {
+                if (round(axis.lineBox().y2, COORD_PRECISION) === round(yAnchor.lineBox().y2, COORD_PRECISION)) {
                     if (bottomAnchor) {
                         axis.reflow(axis.box
                             .alignTo(bottomAnchor.box, BOTTOM)
