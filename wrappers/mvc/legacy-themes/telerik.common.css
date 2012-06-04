@@ -588,7 +588,7 @@ div.k-window-content
     vertical-align: middle;
     margin-right: 5px;
     margin-top: 4px;
-    float: left;
+    float:left;
 }
 
 .k-panelbar .k-group .k-image,
@@ -606,6 +606,13 @@ div.k-window-content
     position: relative;
     text-decoration: none;
     zoom: 1;
+}
+
+.k-panelbar .k-link:after
+{
+    content:"";
+    display:block;
+    clear:both;
 }
 
 .k-panelbar .k-state-hover
@@ -679,6 +686,7 @@ div.k-window-content
 .k-menu .k-group .k-link
 {
     padding-right: 2em;
+    background:none;
 }
 
 .k-menu .k-item
@@ -756,6 +764,11 @@ div.k-window-content
 {
     left: -1px;
     position: absolute;
+}
+
+.k-list
+{
+    height: 100%;
 }
 
 .k-menu-context .k-group
@@ -1360,13 +1373,14 @@ html body div.k-grid tbody .k-button-icon
 *+html .k-combobox,*+html .k-dropdown,*+html .k-selectbox{display: inline;zoom: 1;}
 *+html .k-combobox{overflow: visible} /*positions icon properly*/
 
-.k-dropdown-wrap,
-.k-picker-wrap,
-.k-numeric-wrap
+.k-widget span.k-dropdown-wrap,
+.k-widget span.k-picker-wrap,
+.k-widget span.k-numeric-wrap
 {
     position: relative;
     display: block;
     cursor: default;
+    background:none;
 }
 
 .k-picker-wrap
@@ -1547,6 +1561,11 @@ html body div.k-grid tbody .k-button-icon
     text-align: center;
     position: relative;
     zoom: 1;
+}
+
+.k-calendar>.k-header>.k-link
+{
+    background:none;
 }
 
 .k-footer .k-nav-today:hover
@@ -1878,6 +1897,14 @@ span.k-numerictextbox
 .k-numerictextbox .k-input /*alignment of arrows in WebKit*/
 {
     margin: 0;
+}
+
+.k-grid-edit-row .k-numerictextbox .k-input
+{
+    width:100%;
+    box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
 }
 
 .k-numerictextbox .k-link
@@ -2839,6 +2866,11 @@ div.k-slider
     background-repeat: repeat-y;
 }
 
+.k-splitbar-static-horizontal
+{
+    width: 1px;
+}
+
 .k-ghost-splitbar-vertical,
 .k-splitbar-vertical
 {
@@ -2846,6 +2878,11 @@ div.k-slider
     height: 5px;
     border-width: 1px 0;
     background-repeat: repeat-x;
+}
+
+.k-splitbar-static-vertical
+{
+    height: 1px;
 }
 
 .k-splitbar-draggable-horizontal

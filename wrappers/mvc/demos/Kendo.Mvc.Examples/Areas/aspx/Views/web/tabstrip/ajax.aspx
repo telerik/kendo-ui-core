@@ -24,7 +24,7 @@
     </div>
 </div>
 
-<style scoped>
+<style scoped="scoped">
     .wrapper {
         width: 270px;
         height: 455px;
@@ -37,15 +37,12 @@
         float: right;
         margin-bottom: 20px;
     }
-    #tabstrip .k-content 
-    {
-    	height: 320px;
-    	overflow: auto;
-    }
     .specification {
         max-width: 670px;
         margin: 10px 0;
         padding: 0;
+        height:360px;
+        overflow:auto;
     }
     .specification dt, dd {
         width: 140px;
@@ -63,7 +60,7 @@
         opacity: 0.7;
     }
     .specification:after, .wrapper:after {
-        content: ".";
+        content: "";
         display: block;
         clear: both;
         height: 0;
