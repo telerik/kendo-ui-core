@@ -22,9 +22,6 @@
                 chartBox = new dataviz.Box2D(0, 0, 800, 600),
                 view;
 
-            var TIME_PER_DAY = 60 * 60 * 24 * 1000,
-                TOLERANCE = 1.5;
-
             // Tests expect particular font size
             dataviz.Text.fn.options.font = "16px Verdana, sans-serif";
 
@@ -229,6 +226,7 @@
                         new Date("2012-02-07 00:00"), new Date("2012-02-08 00:00")
                     ]);
                 });
+
             })();
 
             (function() {
