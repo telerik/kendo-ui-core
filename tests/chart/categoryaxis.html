@@ -760,7 +760,7 @@
 
                     plotArea.reflow(chartBox);
                     plotArea.getViewElements(view);
-                    plotBands = view.log.rect[3];
+                    plotBands = view.log.rect[0];
                 }
 
                 // ------------------------------------------------------------
@@ -796,7 +796,7 @@
 
                 test("renders box", function() {
                     same([plotBands.x1, plotBands.y1, plotBands.x2, plotBands.y2],
-                         [ 20, 0, 785, 191 ], TOLERANCE);
+                         [ 20, 0, 785, 200 ], TOLERANCE);
                 });
 
                 test("renders color", function() {

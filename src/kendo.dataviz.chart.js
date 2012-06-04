@@ -3964,6 +3964,8 @@
                 options = plotArea.options,
                 series = plotArea.series;
 
+            plotArea.createCategoryAxis();
+
             if (options.categoryAxis.type == "Date") {
                 plotArea.aggregateDateSeries();
             }
@@ -3981,7 +3983,7 @@
                 return inArray(s.type, [LINE, VERTICAL_LINE]);
             }));
 
-            plotArea.createAxes();
+            plotArea.createValueAxes();
         },
 
         aggregateDateSeries: function() {
@@ -4173,18 +4175,36 @@
             plotArea.appendChart(areaChart);
         },
 
-        createAxes: function() {
+        createCategoryAxis: function() {
+            var plotArea = this,
+                options = plotArea.options,
+                invertAxes = plotArea.invertAxes,
+                categoriesCount = options.categoryAxis.categories.length,
+                categoryAxis;
+
+            categoryAxis = new CategoryAxis(deepExtend({
+                    vertical: invertAxes,
+                    axisCrossingValue: invertAxes ? categoriesCount : 0
+                },
+                options.categoryAxis)
+            );
+
+            if (invertAxes) {
+                plotArea.axisY = categoryAxis;
+            } else {
+                plotArea.axisX = categoryAxis;
+            }
+
+            plotArea.categoryAxis = categoryAxis;
+            plotArea.axes.push(categoryAxis);
+            plotArea.append(plotArea.categoryAxis);
+        },
+
+        createValueAxes: function() {
             var plotArea = this,
                 options = plotArea.options,
                 range,
                 invertAxes = plotArea.invertAxes,
-                categoriesCount = options.categoryAxis.categories.length,
-                categoryAxis = new CategoryAxis(deepExtend({
-                        vertical: invertAxes,
-                        axisCrossingValue: invertAxes ? categoriesCount : 0
-                    },
-                    options.categoryAxis)
-                ),
                 axis,
                 axisName,
                 namedValueAxes = plotArea.namedValueAxes,
@@ -4209,12 +4229,11 @@
             primaryValueAxis = namedValueAxes[PRIMARY] || plotArea.axes[0];
 
             // TODO: Consider removing axisX and axisY aliases
-            plotArea.axisX = invertAxes ? primaryValueAxis : categoryAxis;
-            plotArea.axisY = invertAxes ? categoryAxis : primaryValueAxis;
-
-            plotArea.categoryAxis = categoryAxis;
-            plotArea.axes.push(categoryAxis);
-            plotArea.append(plotArea.categoryAxis);
+            if (invertAxes) {
+                plotArea.axisX = primaryValueAxis;
+            } else {
+                plotArea.axisY = primaryValueAxis;
+            }
         }
     });
 

@@ -183,7 +183,7 @@
                 });
 
                 test("axis limit is [0, 1] when no series are configured", 2, function() {
-                    stubMethod(dataviz.CategoricalPlotArea.fn, "createAxes",
+                    stubMethod(dataviz.CategoricalPlotArea.fn, "createValueAxes",
                         function() {
                             equal(this.valueAxisRangeTracker.query("primary").min, 0);
                             equal(this.valueAxisRangeTracker.query("primary").max, 1);
@@ -476,7 +476,7 @@
                 });
 
                 test("sets axis min/max to series limits", 2, function() {
-                    stubMethod(dataviz.CategoricalPlotArea.fn, "createAxes",
+                    stubMethod(dataviz.CategoricalPlotArea.fn, "createValueAxes",
                         function() {
                             equal(this.valueAxisRangeTracker.query("primary").min, 10);
                             equal(this.valueAxisRangeTracker.query("primary").max, 300);
