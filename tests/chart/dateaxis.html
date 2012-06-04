@@ -120,10 +120,14 @@
             })();
 
             (function() {
+                var categories;
+
                 function createDateCategoryAxis(options) {
                     dateAxis = new dataviz.DateCategoryAxis(
                         options
                     );
+
+                    categories = dateAxis.options.categories;
 
                     view = new ViewStub();
                     dateAxis.reflow(chartBox);
@@ -179,23 +183,23 @@
                 test("Min date can be parsed from string", function() {
                     createDateCategoryAxis({
                         categories: [
-                            new Date("2012-02-01"), new Date("2012-03-10")
+                            new Date("2012-02-05"), new Date("2012-02-10")
                         ],
                         min: "2012-02-01"
                     });
 
-                    same(dateAxis.options.min, new Date("2012-02-01"));
+                    same(dateAxis.options.min, new Date("2012-02-01 00:00"));
                 });
 
                 test("Max date can be parsed from string", function() {
                     createDateCategoryAxis({
                         categories: [
-                            new Date("2012-02-01"), new Date("2012-03-10")
+                            new Date("2012-02-01"), new Date("2012-02-10")
                         ],
-                        max: "2012-02-29"
+                        max: "2012-02-15"
                     });
 
-                    same(dateAxis.options.max, new Date("2012-02-29"));
+                    same(dateAxis.options.max.toString(), new Date("2012-02-16 00:00").toString());
                 });
 
                 test("Axis crossing value can be parsed from string", function() {
@@ -222,6 +226,100 @@
                     );
                 });
 
+                // ------------------------------------------------------------
+                module("Date Category Axis / Min-Max values", {
+                    setup: function() {
+                        createDateCategoryAxis({
+                            categories: [
+                                new Date("2012-02-01"), new Date("2012-02-10")
+                            ]
+                        });
+                    }
+                });
+
+                test("Min equals first category by default", function() {
+                    equals(dateAxis.options.min, categories[0]);
+                });
+
+                test("Max equals last category by default", function() {
+                    equals(dateAxis.options.max, categories[categories.length - 1]);
+                });
+
+                test("User set min value is rounded to base unit", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012-02-05"), new Date("2012-02-10")
+                        ],
+                        min: new Date("2012-02-01 14:00")
+                    });
+
+                    same(dateAxis.options.min, new Date("2012-02-01 00:00"));
+                });
+
+                test("User set max value is rounded to base unit", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012-02-05"), new Date("2012-02-10")
+                        ],
+                        max: new Date("2012-02-15 14:00")
+                    });
+
+                    same(dateAxis.options.max, new Date("2012-02-16 00:00"));
+                });
+
+                test("User set min value smaller than first category is applied", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012-02-05"), new Date("2012-02-06")
+                        ],
+                        min: new Date("2012-02-04")
+                    });
+
+                    same(categories, [
+                        new Date("2012-02-04 00:00"), new Date("2012-02-05 00:00"),
+                        new Date("2012-02-06 00:00"), new Date("2012-02-07 00:00")
+                    ]);
+                });
+
+                test("User set min value larger than first category is applied", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012-02-05"), new Date("2012-02-06")
+                        ],
+                        min: new Date("2012-02-06")
+                    });
+
+                    same(categories, [
+                        new Date("2012-02-06 00:00"), new Date("2012-02-07 00:00")
+                    ]);
+                });
+
+                test("User set max value smaller than last category", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012-02-05"), new Date("2012-02-06")
+                        ],
+                        max: new Date("2012-02-05")
+                    });
+
+                    same(categories, [
+                        new Date("2012-02-05 00:00"), new Date("2012-02-06 00:00")
+                    ]);
+                });
+
+                test("User set max value larger than last category", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012-02-05"), new Date("2012-02-06")
+                        ],
+                        max: new Date("2012-02-07")
+                    });
+
+                    same(categories, [
+                        new Date("2012-02-05 00:00"), new Date("2012-02-06 00:00"),
+                        new Date("2012-02-07 00:00"), new Date("2012-02-08 00:00")
+                    ]);
+                });
             })();
 
             (function() {

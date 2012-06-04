@@ -1060,6 +1060,10 @@
     function ceilDate(date, unit) {
         date = toDate(date);
 
+        if (floorDate(date, unit).getTime() === date.getTime()) {
+            return date;
+        }
+
         if (unit === YEARS) {
             return new Date(date.getFullYear() + 1, 0, 1);
         } else if (unit === MONTHS) {
@@ -1239,8 +1243,12 @@
                 options = chart.options,
                 categories = options.categories,
                 baseUnit = options.baseUnit,
-                start = floorDate(toTime(categories[0]), baseUnit),
-                end = ceilDate(toTime(last(categories)), baseUnit),
+                min = toTime(options.min),
+                max = toTime(options.max),
+                firstCategory = toTime(categories[0]),
+                lastCategory = toTime(last(categories)),
+                start = floorDate(min || firstCategory, baseUnit),
+                end = ceilDate(max || lastCategory, baseUnit),
                 date,
                 groups = [];
 
@@ -1248,6 +1256,8 @@
                 groups.push(date);
             }
 
+            options.min = groups[0];
+            options.max = last(groups);
             options.categories = groups;
         }
     });
@@ -1285,8 +1295,8 @@
                 max = options.max || seriesMax,
                 baseUnit = options.baseUnit || timeUnit(max - min),
                 baseUnitTime = TIME_PER_UNIT[baseUnit],
-                autoMin = floorDate(min - baseUnitTime, baseUnit),
-                autoMax = ceilDate(max + baseUnitTime, baseUnit),
+                autoMin = floorDate(toTime(min) - 1, baseUnit),
+                autoMax = ceilDate(toTime(max) + 1, baseUnit),
                 userMajorUnit = options.majorUnit ? options.majorUnit : undefined,
                 majorUnit = userMajorUnit || dataviz.ceil(
                                 dataviz.autoMajorUnit(autoMin.getTime(), autoMax.getTime()),
