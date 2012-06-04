@@ -2421,7 +2421,7 @@ function pad(number) {
     kendo.notify = noop;
 
     var templateRegExp = /template$/i,
-        jsonRegExp = /^(?:\{(?:.|\n)*\}|\[(?:.|\n)*\])$/,
+        jsonRegExp = /^\s*(?:\{(?:.|\n)*\}|\[(?:.|\n)*\])\s*$/,
         jsonFormatRegExp = /^\{(\d+)(:[^\}]+)?\}/,
         dashRegExp = /([A-Z])/g;
 
