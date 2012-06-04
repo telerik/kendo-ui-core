@@ -2,7 +2,7 @@
 
             <p>
                 <label for="categories">Catergories:</label>
-                <input id="categories"/>
+                <input id="categories" />
             </p>
             <p>
                 <label for="products">Products:</label>
@@ -15,22 +15,6 @@
 
             <script>
                 $(document).ready(function() {
-                    var productsDataSource = new kendo.data.DataSource({
-                        type: "odata",
-                        serverFiltering: true,
-                        transport: {
-                            read: "http://demos.kendoui.com/service/Northwind.svc/Products"
-                        }
-                    });
-
-                    var ordersDataSource = new kendo.data.DataSource({
-                        type: "odata",
-                        serverFiltering: true,
-                        transport: {
-                            read: "http://demos.kendoui.com/service/Northwind.svc/Order_Details?$expand=Order"
-                        }
-                    });
-
                     $("#categories").kendoDropDownList({
                         optionLabel: "Select category...",
                         dataTextField: "CategoryName",
@@ -41,57 +25,37 @@
                             transport: {
                                 read: "http://demos.kendoui.com/service/Northwind.svc/Categories"
                             }
-                        },
-                        change: function() {
-                            var value = this.value();
-
-                            if (value) {
-                                productsDataSource.filter({
-                                    field: "CategoryID",
-                                    operator: "eq",
-                                    value: parseInt(value)
-                                });
-                                products.enable();
-                            } else {
-                                products.enable(false);
-                            }
-
-                            products.select(0);
-                            orders.select(0);
-                            orders.enable(false);
                         }
                     });
 
                     var products = $("#products").kendoDropDownList({
                         autoBind: false,
+                        cascadeFrom: "categories",
                         optionLabel: "Select product...",
                         dataTextField: "ProductName",
                         dataValueField: "ProductID",
-                        dataSource: productsDataSource,
-                        change: function() {
-                            var value = this.value();
-
-                            if (value) {
-                                ordersDataSource.filter({
-                                    field: "ProductID",
-                                    operator: "eq",
-                                    value: parseInt(value)
-                                });
-                                orders.enable();
-                            } else {
-                                orders.enable(false);
+                        dataSource: {
+                            type: "odata",
+                            serverFiltering: true,
+                            transport: {
+                                read: "http://demos.kendoui.com/service/Northwind.svc/Products"
                             }
-
-                            orders.select(0);
                         }
                     }).data("kendoDropDownList");
 
                     var orders = $("#orders").kendoDropDownList({
                         autoBind: false,
+                        cascadeFrom: "products",
                         optionLabel: "Select order...",
                         dataTextField: "Order.ShipCity",
                         dataValueField: "OrderID",
-                        dataSource: ordersDataSource
+                        dataSource: {
+                            type: "odata",
+                            serverFiltering: true,
+                            transport: {
+                                read: "http://demos.kendoui.com/service/Northwind.svc/Order_Details?$expand=Order"
+                            }
+                        }
                     }).data("kendoDropDownList");
                 });
             </script>

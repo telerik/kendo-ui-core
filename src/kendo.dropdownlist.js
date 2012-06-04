@@ -334,6 +334,8 @@
 
             that._enable();
 
+            that._cascade();
+
             that.selectedIndex = -1;
 
             if (options.autoBind) {
@@ -362,6 +364,7 @@
             dataTextField: "",
             dataValueField: "",
             optionLabel: "",
+            cascadeFrom: "",
             ignoreCase: true,
             animation: {}
         },
@@ -769,6 +772,8 @@
                 } else {
                     that.select(that.options.index);
                 }
+
+                that.trigger("selected");
             }).fetch();
         },
 

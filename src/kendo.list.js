@@ -20,6 +20,7 @@
         OPEN = "open",
         CLOSE = "close",
         SELECT = "select",
+        SELECTED = "selected",
         extend = $.extend,
         proxy = $.proxy,
         isIE8 = $.browser.msie && parseInt($.browser.version, 10) < 9,
@@ -638,6 +639,60 @@
                             that.value(element[0].value);
                        });
                    });
+        },
+
+        _cascade: function() {
+            var that = this,
+                cascade = that.options.cascadeFrom,
+                parent, select, valueField, deactivate, changeHandler;
+
+            if (cascade) {
+                parent = $("#" + cascade).data("kendo" + that.options.name);
+                if (parent) {
+                    valueField = parent.options.dataValueField;
+                    deactivate = function() {
+                        that.value("");
+                        that.enable(false);
+                    };
+                    changeHandler = function() {
+                        var value = that.value();
+                        if (value) {
+                            that.value(value);
+                            if (that.selectedIndex == -1) {
+                                that.value("");
+                            }
+                        } else {
+                            that.select(that.options.index);
+                        }
+                        that.trigger(SELECTED);
+                        that.enable();
+                    };
+                    select = function(dataItem) {
+                        var filterValue = dataItem ? parent._value(dataItem) : null;
+                        if (filterValue) {
+                            //TODO: preserve filters
+                            that.dataSource
+                                .one(CHANGE, changeHandler)
+                                .filter({
+                                    field: valueField,
+                                    operator: "eq",
+                                    value: filterValue
+                                });
+                        } else {
+                            deactivate();
+                        }
+                    };
+
+                    parent.bind("cascade", deactivate)
+                          .bind(CHANGE, function() {
+                              select(parent.dataItem());
+                              that.trigger("cascade");
+                          })
+                          .one(SELECTED, function() {
+                              select(parent.dataItem())
+                          });
+                }
+            }
         }
     });
 

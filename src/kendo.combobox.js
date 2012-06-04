@@ -370,6 +370,8 @@
 
             that._enable();
 
+            that._cascade();
+
             wrapper = that._inputWrapper;
 
             that.input.bind({
@@ -1163,6 +1165,7 @@
                 } else {
                     that.select(that.options.index);
                 }
+                that.trigger("selected");
             }).filter(expression);
         },
 
