@@ -8,13 +8,13 @@ namespace Kendo.Mvc.Extensions
         private static readonly IDictionary<string, FilterOperator> tokenToOperator = new Dictionary<string, FilterOperator>
         {
             { "eq", FilterOperator.IsEqualTo },
-            { "ne", FilterOperator.IsNotEqualTo },
+            { "neq", FilterOperator.IsNotEqualTo },
             { "lt", FilterOperator.IsLessThan },
-            { "le", FilterOperator.IsLessThanOrEqualTo },
+            { "lte", FilterOperator.IsLessThanOrEqualTo },
             { "gt", FilterOperator.IsGreaterThan },
-            { "ge", FilterOperator.IsGreaterThanOrEqualTo },
+            { "gte", FilterOperator.IsGreaterThanOrEqualTo },
             { "startswith", FilterOperator.StartsWith },
-            { "substringof", FilterOperator.Contains },
+            { "contains", FilterOperator.Contains },
             { "notsubstringof", FilterOperator.DoesNotContain },
             { "endswith", FilterOperator.EndsWith }
         };
@@ -22,13 +22,13 @@ namespace Kendo.Mvc.Extensions
         private static readonly IDictionary<FilterOperator, string> operatorToToken = new Dictionary<FilterOperator, string>
         {
             { FilterOperator.IsEqualTo, "eq" },
-            { FilterOperator.IsNotEqualTo, "ne" },
+            { FilterOperator.IsNotEqualTo, "neq" },
             { FilterOperator.IsLessThan, "lt" },
-            { FilterOperator.IsLessThanOrEqualTo, "le" },
+            { FilterOperator.IsLessThanOrEqualTo, "lte" },
             { FilterOperator.IsGreaterThan, "gt" },
-            { FilterOperator.IsGreaterThanOrEqualTo, "ge" },
+            { FilterOperator.IsGreaterThanOrEqualTo, "gte" },
             { FilterOperator.StartsWith, "startswith" },
-            { FilterOperator.Contains, "substringof" },
+            { FilterOperator.Contains, "contains" },
             { FilterOperator.DoesNotContain,"notsubstringof" },
             { FilterOperator.EndsWith, "endswith" }
         };
