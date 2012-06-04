@@ -92,6 +92,7 @@
     <Compile Include="Controllers\DataViz\Bar_Charts\IndexController.cs" />
     <Compile Include="Controllers\Web\ComboBox\ClientFilteringController.cs" />
     <Compile Include="Controllers\Web\ComboBox\ApiController.cs" />
+    <Compile Include="Controllers\Web\ComboBox\CascadingComboBoxController.cs" />
     <Compile Include="Controllers\Web\ComboBox\EventsController.cs" />
     <Compile Include="Controllers\Web\ComboBox\ServerFilteringController.cs" />
     <Compile Include="Controllers\Web\ComboBox\TemplateController.cs" />
@@ -590,6 +591,7 @@
     <Content Include="Areas\razor\Views\web\editor\events.cshtml" />
     <Content Include="Areas\razor\Views\web\editor\api.cshtml" />
     <Content Include="Areas\razor\Views\web\grid\detailtemplate.cshtml" />
+    <Content Include="Areas\razor\Views\web\combobox\cascadingcombobox.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>

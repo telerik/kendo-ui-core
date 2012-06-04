@@ -18,6 +18,12 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        public string CascadeFrom
+        {
+            get;
+            set;
+        }
+
         public string DataValueField 
         { 
             get; 
@@ -103,6 +109,11 @@ namespace Kendo.Mvc.UI
             {
                 options["suggest"] = Suggest;
             }
+
+            if (!string.IsNullOrEmpty(CascadeFrom))
+            {
+                options["cascadeFrom"] = CascadeFrom;
+            }
             
             writer.Write(Initializer.Initialize(Id, "ComboBox", options));
 
@@ -111,7 +122,6 @@ namespace Kendo.Mvc.UI
 
         protected override void WriteHtml(System.Web.UI.HtmlTextWriter writer)
         {
-            //TODO: Determine index of the selected item if SelectList is used
             new DropDownListHtmlBuilderBase(this).Build().WriteTo(writer);
 
             base.WriteHtml(writer);

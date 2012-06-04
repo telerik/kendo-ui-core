@@ -220,5 +220,12 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        public ComboBoxBuilder CascadeFrom(string cascadeFrom)
+        {
+            Component.CascadeFrom = cascadeFrom;
+
+            return this;
+        }
     }
 }
