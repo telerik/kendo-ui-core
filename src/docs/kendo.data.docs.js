@@ -227,7 +227,7 @@
         *         <dt><b>Ends With</b></dt>
         *         <dd>"endswith"</dd>
         *         <dt><b>Contains</b></dt>
-        *         <dd>"contains", "substringof"</dd>
+        *         <dd>"contains"</dd>
         *     </dl>
         * </div>
         * <p>It is possible to modify these parameters by using the <b>parameterMap</b> function found on the <b>transport</b> object (see <b>transport</b> in Configuration).</p>
