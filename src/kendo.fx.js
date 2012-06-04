@@ -266,32 +266,32 @@
         return acc;
     }
 
-    function removeTransitionStyles(element) {
-        element.css(TRANSITION, "");
-
-        if (!browser.safari) {
-            element.css(TRANSITION);
+    function stopTransition(element, transition) {
+        if (element.data(ABORT_ID)) {
+            clearTimeout(element.data(ABORT_ID));
+            element.removeData(ABORT_ID);
         }
+
+        element.css(TRANSITION, "").css(TRANSITION);
+        element.dequeue();
+        transition.complete.call(element);
     }
 
     function activateTask(currentTransition) {
-        var element = currentTransition.object;
+        var element = currentTransition.object, delay = 0;
 
         if (!currentTransition) {
             return;
         }
 
-        element.css(currentTransition.setup);
-        element.css(TRANSITION);
-        element.data(ABORT_ID, setTimeout(function() {
-
-            removeTransitionStyles(element);
-            element.dequeue();
-            currentTransition.complete.call(element);
-
-        }, currentTransition.duration));
-
+        element.css(currentTransition.setup).css(TRANSITION);
         element.css(currentTransition.CSS).css(TRANSFORM);
+
+        if (browser.mozilla) {
+            element.one("transitionend", function () { stopTransition(element, currentTransition); } );
+            delay = 50;
+        }
+        element.data(ABORT_ID, setTimeout(stopTransition, currentTransition.duration + delay, element, currentTransition));
     }
 
     function strip3DTransforms(properties) {
@@ -409,7 +409,7 @@
                     cssValues = getComputedStyles(element[0], taskKeys);
                 }
 
-                removeTransitionStyles(element);
+                element.css(TRANSITION, "").css(TRANSITION);
 
                 if (retainPosition) {
                     element.css(cssValues);
@@ -579,8 +579,8 @@
                     });
                 };
 
-                if ($.browser.msie) {
-                    setTimeout(restore, 0); // Again jQuery callback in IE.
+                if (hasZoom && !transforms) {
+                    setTimeout(restore, 0); // Again jQuery callback in IE8-.
                 }
                 else {
                     restore();
@@ -695,7 +695,7 @@
                             }
                         });
 
-                        if ($.browser.msie) {
+                        if (browser.msie) {
                             delete multiple.scale;
                         }
 
@@ -726,7 +726,7 @@
                 }
             }
 
-            options.complete = $.browser.msie ? function() { setTimeout(complete); } : complete;
+            options.complete = browser.msie ? function() { setTimeout(complete, 0); } : complete;
 
             if ("slide" in options.effects) {
               element.kendoAnimate(options);
@@ -753,7 +753,7 @@
             css: {
                 scale: function(element, options) {
                     var scale = animationProperty(element, "scale");
-                    return options.effects.zoom.direction == "in" ? (scale ? scale : "0.01") : 1;
+                    return options.effects.zoom.direction == "in" ? (scale != 1 ? scale : "0.01") : 1;
                 },
                 zoom: function(element, options) {
                     var zoom = element[0].style.zoom;
@@ -764,7 +764,7 @@
                 var reverse = options.effects.zoom.direction == "out";
 
                 if (hasZoom) {
-                    var version = $.browser.version,
+                    var version = browser.version,
                         style = element[0].currentStyle,
                         width = style.width.indexOf("%") != -1 ? element.parent().width() : element.width(),
                         height = style.height.indexOf("%") != -1 ? element.parent().height() : parseInteger(style.height),
@@ -789,7 +789,7 @@
                 if (!reverse) {
                     var origin = element.data(ORIGIN);
                     if (!origin && origin !== 0) {
-                        element.data(ORIGIN, parseFloat(animationProperty(element, property)));
+                        element.data(ORIGIN, animationProperty(element, property));
                     }
                 }
 

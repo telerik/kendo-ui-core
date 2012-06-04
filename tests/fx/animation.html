@@ -20,40 +20,50 @@
 
         <script>
             var animate = kendo.animate,
-                transitions = kendo.support.transitions,
-                matrix3dRegExp = /matrix3?d?\s*\(.*,\s*([\d\w\.\-]+),\s*([\d\w\.\-]+),\s*([\d\w\.\-]+)/,
+                transforms = kendo.support.transforms,
+                matrix3dRegExp = /matrix3?d?\s*\(.*,\s*([\d\.\-]+)\w*?,\s*([\d\.\-]+)\w*?,\s*([\d\.\-]+)\w*?,\s*([\d\.\-]+)\w*?/i,
                 translateXRegExp = /translatex?$/i,
-                TRANSFORM = kendo.support.transitions.css + "transform",
+                TRANSFORM = kendo.support.transforms.css + "transform",
                 span;
 
-            function animationProperty (element, property) {
-                if (transitions) {
-                    var transform = element.css(TRANSFORM),
-                        match = transform.match(new RegExp(property + "\\s*\\(([\\d\\w\\.]+)")),
+            QUnit.config.reorder = false;
+
+            function animationProperty(element, property) {
+                if (transforms) {
+                    var transform = element.css(TRANSFORM);
+                    if (transform == "none") {
+                        return property == "scale" ? 1 : 0;
+                    }
+
+                    var match = transform.match(new RegExp(property + "\\s*\\(([\\d\\w\\.]+)")),
                         computed = 0;
 
-                    if (match)
+                    if (match) {
                         computed = parseInt(match[1], 10);
-                    else {
-                        match = transform.match(matrix3dRegExp) || [0, 0, 0];
+                    } else {
+                        match = transform.match(matrix3dRegExp) || [0, 0, 0, 0, 0];
+                        property = property.toLowerCase();
 
                         if (translateXRegExp.test(property)) {
-                            computed = parseInt(match[2], 10);
-                        } else if (property.toLowerCase() == "translatey") {
-                            computed = parseInt(match[3], 10);
-                        } else if (property.toLowerCase() == "scale") {
-                            computed = parseFloat(match[1]);
+                            computed = parseFloat(match[3] / match[2]);
+                        } else if (property == "translatey") {
+                            computed = parseFloat(match[4] / match[2]);
+                        } else if (property == "scale") {
+                            computed = parseFloat(match[2]);
+                        } else if (property == "rotate") {
+                            computed = parseFloat(Math.atan2(match[2], match[1]));
                         }
                     }
 
                     return computed;
-                } else
+                } else {
                     return element.css(property);
+                }
             }
 
             module("animate", {
                 setup: function() {
-                    span = $("<span>foo</span>").appendTo(document.body);
+                    span = $("<span style='position: absolute; top: 0; left: 0; visibility: hidden;'>foo</span>").appendTo(document.body);
                 },
                 teardown: function() {
                     span.remove();
@@ -215,11 +225,9 @@
                         oldTime = +new Date();
                     },
                     complete: function() {
-                        setTimeout( function () {
-                            called = true;
-                            ok(true);
-                            start();
-                        }, 50);
+                        called = true;
+                        ok(true);
+                        start();
                     }
                 });
 
@@ -243,11 +251,9 @@
                         height = span.height();
                     },
                     complete: function(element) {
-                        setTimeout( function () {
-                            ok(height == 0);
-                            ok(span.height() == 100);
-                            start();
-                        }, 50);
+                        ok(height == 0);
+                        ok(span.height() == 100);
+                        start();
                     }
                 });
             });
@@ -264,11 +270,9 @@
                         opacity = span.css("opacity");
                     },
                     complete: function () {
-                        setTimeout( function () {
-                            ok(opacity == 0);
-                            ok(span.css("opacity") == 1);
-                            start();
-                        }, 50);
+                        ok(opacity == 0);
+                        ok(span.css("opacity") == 1);
+                        start();
                     }
                 });
             });
@@ -287,11 +291,9 @@
                         opacity = span.css("opacity");
                     },
                     complete: function () {
-                        setTimeout( function () {
-                            ok(opacity == 1);
-                            ok(span.css("opacity") == 0);
-                            start();
-                        }, 50);
+                        ok(opacity == 1);
+                        ok(span.css("opacity") == 0);
+                        start();
                     }
                 });
             });
@@ -309,36 +311,30 @@
                             scale = animationProperty(span, "scale");
                         },
                         complete: function () {
-                            setTimeout( function () {
-                                ok(scale == 0.01);
-                                ok(animationProperty(span, "scale") == 1);
-                                start();
-                            }, 50);
+                            ok(scale == 0.01);
+                            ok(animationProperty(span, "scale") == 1);
+                            start();
                         }
                     });
                 });
 
             asyncTest("slide:right moves the element right with its width", function() {
-                span.css({ position: "absolute", display: "block", left: 10, width: 20 });
+                span.css({ left: 10, width: 20 });
                 var position = span.offset().left;
 
                 span.kendoAnimate("slide:right", 20, function () {
-                    setTimeout( function () {
-                        ok((transitions ? animationProperty(span, "translateX") : span.offset().left - position) == span.width());
-                        start();
-                    }, 50);
+                    ok((transforms ? animationProperty(span, "translatex") : span.offset().left - position) == span.width());
+                    start();
                 });
             });
 
             asyncTest("slide:down moves the element down with its height", function() {
-                span.css({ position: "absolute", display: "block", top: 10, height: 20 });
+                span.css({ top: 10, height: 20 });
                 var position = span.offset().top;
 
                 span.kendoAnimate("slide:down", 20, function () {
-                    setTimeout( function () {
-                        ok((transitions ? animationProperty(span, "translateY") : span.offset().top - position) == span.height());
-                        start();
-                    }, 50);
+                    ok((transforms ? animationProperty(span, "translatey") : span.offset().top - position) == span.height());
+                    start();
                 });
             });
 
@@ -346,21 +342,19 @@
                 span.css({ position: "absolute", display: "block", left: 10 });
 
                 var position = 1;
-                if (transitions)
+                if (transforms)
                     span.css(TRANSFORM, "translateX(10px)");
 
                 span.kendoAnimate({
                     effects: "slideIn:right",
                     duration: 20,
                     init: function () {
-                        position = (transitions ? animationProperty(span, "translateX") : span.offset().left);
+                        position = (transforms ? animationProperty(span, "translateX") : span.offset().left);
                     },
                     complete: function () {
-                        setTimeout( function () {
-                            ok(position == -span.width());
-                            ok((transitions ? animationProperty(span, "translateX") : span.offset().left) == 0);
-                            start();
-                        }, 50);
+                        ok(position == -span.width());
+                        ok((transforms ? animationProperty(span, "translateX") : span.offset().left) == 0);
+                        start();
                     }
                 });
             });
@@ -369,21 +363,19 @@
                 span.css({ position: "absolute", display: "block", top: 10 });
 
                 var position = 1;
-                if (transitions)
+                if (transforms)
                     span.css(TRANSFORM, "translateY(10px)");
 
                 span.kendoAnimate({
                     effects: "slideIn:down",
                     duration: 20,
                     init: function () {
-                        position = (transitions ? animationProperty(span, "translateY") : span.offset().top);
+                        position = (transforms ? animationProperty(span, "translateY") : span.offset().top);
                     },
                     complete: function () {
-                        setTimeout( function () {
-                            ok(position == -span.height());
-                            ok((transitions ? animationProperty(span, "translateY") : span.offset().top) == 0);
-                            start();
-                        }, 50);
+                        ok(position == -span.height());
+                        ok((transforms ? animationProperty(span, "translateY") : span.offset().top) == 0);
+                        start();
                     }
                 });
             });
@@ -399,11 +391,9 @@
                         initialHeight = span.height();
                     },
                     complete: function () {
-                        setTimeout( function () {
-                            ok(initialHeight == 0);
-                            ok(span.height() == 100);
-                            start();
-                        }, 50);
+                        ok(initialHeight == 0);
+                        ok(span.height() == 100);
+                        start();
                     }
                 });
             });
@@ -419,11 +409,9 @@
                         initialWidth = span.width();
                     },
                     complete: function () {
-                        setTimeout( function () {
-                            ok(initialWidth == 0);
-                            ok(span.width() == 100);
-                            start();
-                        }, 50);
+                        ok(initialWidth == 0);
+                        ok(span.width() == 100);
+                        start();
                     }
                 });
             });
