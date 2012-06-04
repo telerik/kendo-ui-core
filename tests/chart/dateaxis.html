@@ -120,9 +120,9 @@
             })();
 
             (function() {
-                function createDateCategoryAxis(min, max, options) {
+                function createDateCategoryAxis(options) {
                     dateAxis = new dataviz.DateCategoryAxis(
-                        min, max, options
+                        options
                     );
 
                     view = new ViewStub();
@@ -133,9 +133,11 @@
                 // ------------------------------------------------------------
                 module("Date Category Axis / Configuration", {
                     setup: function() {
-                        createDateCategoryAxis(
-                            new Date("2012-02-01"), new Date("2012-02-10")
-                        );
+                        createDateCategoryAxis({
+                            categories: [
+                                new Date("2012-02-01"), new Date("2012-02-10")
+                            ]
+                        });
                     }
                 });
 
@@ -144,61 +146,75 @@
                 });
 
                 test("Base unit is determined by series delta (months)", function() {
-                    createDateCategoryAxis(
-                        new Date("2012-02-01"), new Date("2012-03-10"), TIME_PER_DAY * 31
-                    );
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012-02-01"), new Date("2012-03-10")
+                        ]
+                    });
 
                     equals(dateAxis.options.baseUnit, "months");
                 });
 
                 test("Base unit is determined by series delta (years)", function() {
-                    createDateCategoryAxis(
-                        new Date("2012-02-01"), new Date("2012-03-10"), TIME_PER_DAY * 365
-                    );
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012-02-01"), new Date("2013-03-10")
+                        ]
+                    });
 
                     equals(dateAxis.options.baseUnit, "years");
                 });
 
                 test("User set base unit is applied", function() {
-                    createDateCategoryAxis(
-                        new Date("2012-02-01"), new Date("2012-03-10"), TIME_PER_DAY * 365, {
-                            baseUnit: "days"
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012-02-01"), new Date("2012-03-10")
+                        ],
+                        baseUnit: "days"
                     });
 
                     equals(dateAxis.options.baseUnit, "days");
                 });
 
                 test("Min date can be parsed from string", function() {
-                    createDateCategoryAxis(
-                        new Date("2012-02-01"), new Date("2012-02-20"), TIME_PER_DAY, {
-                            min: "2012-02-01"
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012-02-01"), new Date("2012-03-10")
+                        ],
+                        min: "2012-02-01"
                     });
 
                     same(dateAxis.options.min, new Date("2012-02-01"));
                 });
 
                 test("Max date can be parsed from string", function() {
-                    createDateCategoryAxis(
-                        new Date("2012-02-01"), new Date("2012-02-20"), TIME_PER_DAY, {
-                            max: "2012-02-29"
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012-02-01"), new Date("2012-03-10")
+                        ],
+                        max: "2012-02-29"
                     });
 
                     same(dateAxis.options.max, new Date("2012-02-29"));
                 });
 
                 test("Axis crossing value can be parsed from string", function() {
-                    createDateCategoryAxis(
-                        new Date("2012-02-01"), new Date("2012-02-20"), TIME_PER_DAY, {
-                            axisCrossingValue: "2012-02-29"
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012-02-01"), new Date("2012-03-10")
+                        ],
+                        axisCrossingValue: "2012-02-29"
                     });
 
                     same(dateAxis.options.axisCrossingValue, new Date("2012-02-29"));
                 });
 
                 test("Axis crossing values can be parsed from string array", function() {
-                    createDateCategoryAxis(
-                        new Date("2012-02-01"), new Date("2012-02-20"), TIME_PER_DAY, {
-                            axisCrossingValue: ["2012-02-28", "2012-02-29"]
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012-02-01"), new Date("2012-03-10")
+                        ],
+                        axisCrossingValue: ["2012-02-28", "2012-02-29"]
                     });
 
                     same(dateAxis.options.axisCrossingValue,

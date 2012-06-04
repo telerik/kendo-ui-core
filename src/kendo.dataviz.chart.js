@@ -1229,9 +1229,9 @@
                 lastCategory = currentCategory;
             }
 
-            return {
+            return deepExtend({
                 baseUnit: timeUnit(minInterval)
-            };
+            }, options);
         },
 
         groupCategories: function() {
@@ -4823,6 +4823,7 @@
         CategoricalPlotArea: CategoricalPlotArea,
         CategoryAxis: CategoryAxis,
         ClusterLayout: ClusterLayout,
+        DateCategoryAxis: DateCategoryAxis,
         DateValueAxis: DateValueAxis,
         Highlight: Highlight,
         Legend: Legend,
