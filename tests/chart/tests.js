@@ -44,6 +44,10 @@ tests.push(
         title: "chart category axis"
     },
     {
+        page: "chart/dateaxis.html",
+        title: "chart date axis"
+    },
+    {
         page: "chart/barseries.html",
         title: "chart bar series"
     },
