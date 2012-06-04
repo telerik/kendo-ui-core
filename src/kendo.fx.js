@@ -107,8 +107,14 @@
                 if (typeof val == "undefined") {
                     return animationProperty(this, value);
                 } else {
-                    var that = $(this)[0];
-                    that.style.cssText = that.style.cssText.replace(new RegExp(value + "\\(.*?\\)", "i"), value + "(" + val + transform2units[value.replace(unitRegExp, "")] + ")");
+                    var that = $(this)[0],
+                        transformValue = value + "(" + val + transform2units[value.replace(unitRegExp, "")] + ")";
+
+                    if (that.style.cssText.indexOf(TRANSFORM) == -1) {
+                        $(this).css(TRANSFORM, transformValue);
+                    } else {
+                        that.style.cssText = that.style.cssText.replace(new RegExp(value + "\\(.*?\\)", "i"), transformValue);
+                    }
                 }
                 return this;
             };
@@ -579,11 +585,9 @@
                     });
                 };
 
+                restore();
                 if (hasZoom && !transforms) {
                     setTimeout(restore, 0); // Again jQuery callback in IE8-.
-                }
-                else {
-                    restore();
                 }
 
                 each(methods.teardown, function() { this(element, options); }); // call the internal completion callbacks
