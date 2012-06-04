@@ -1057,42 +1057,21 @@
         }
     }
 
-    function ceilDate(date, unit) {
+    function addDuration(date, value, unit) {
         date = toDate(date);
 
-        if (floorDate(date, unit).getTime() === date.getTime()) {
-            return date;
-        }
-
         if (unit === YEARS) {
-            return new Date(date.getFullYear() + 1, 0, 1);
+            return new Date(date.getFullYear() + value, 0, 1);
         } else if (unit === MONTHS) {
-            return new Date(date.getFullYear(), date.getMonth() + 1, 1);
+            return new Date(date.getFullYear(), date.getMonth() + value, 1);
         } else if (unit === DAYS) {
-            return new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1);
+            return new Date(date.getFullYear(), date.getMonth(), date.getDate() + value);
         } else if (unit === HOURS) {
-            return new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours() + 1);
+            return new Date(date.getFullYear(), date.getMonth(), date.getDate(),
+                            date.getHours() + value);
         } else if (unit === MINUTES) {
             return new Date(date.getFullYear(), date.getMonth(), date.getDate(),
-                            date.getHours(), date.getMinutes() + 1);
-        }
-
-        return date;
-    }
-
-    function dateUnits(date, unit) {
-        date = toDate(date);
-
-        if (unit === YEARS) {
-            return date.getFullYear();
-        } else if (unit === MONTHS) {
-            return date.getMonth();
-        } else if (unit === DAYS) {
-            return date.getDate();
-        } else if (unit === HOURS) {
-            return date.getHours();
-        } else if (unit === MINUTES) {
-            return date.getMinutes();
+                            date.getHours(), date.getMinutes() + value);
         }
 
         return date;
@@ -1101,23 +1080,20 @@
     function floorDate(date, unit) {
         date = toDate(date);
 
-        if (unit === YEARS) {
-            return new Date(date.getFullYear(), 0, 1);
-        } else if (unit === MONTHS) {
-            return new Date(date.getFullYear(), date.getMonth(), 1);
-        } else if (unit === DAYS) {
-            return new Date(date.getFullYear(), date.getMonth(), date.getDate());
-        } else if (unit === HOURS) {
-            return new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours());
-        } else if (unit === MINUTES) {
-            return new Date(date.getFullYear(), date.getMonth(), date.getDate(),
-                            date.getHours(), date.getMinutes());
-        }
-
-        return date;
+        return addDuration(date, 0, unit);
     }
 
-    function timeUnit(delta) {
+    function ceilDate(date, unit) {
+        date = toDate(date);
+
+        if (floorDate(date, unit).getTime() === date.getTime()) {
+            return date;
+        }
+
+        return addDuration(date, 1, unit);
+    }
+
+    function timeUnits(delta) {
         var unit = HOURS;
 
         if (delta >= TIME_PER_YEAR) {
@@ -1129,14 +1105,6 @@
         }
 
         return unit;
-    }
-
-    function dateAdd(date, time) {
-        var offset = date.getTimezoneOffset(),
-            result = new Date(date.getTime() + time),
-            offsetDiff = result.getTimezoneOffset() - offset;
-
-        return new Date(result.getTime() + offsetDiff * TIME_PER_MINUTE);
     }
 
     function dateDiff(a, b) {
@@ -1160,25 +1128,6 @@
         }
 
         return diff;
-    }
-
-    function addDuration(date, value, unit) {
-        date = toDate(date);
-
-        if (unit === YEARS) {
-            return new Date(date.getFullYear() + value, 0, 1);
-        } else if (unit === MONTHS) {
-            return new Date(date.getFullYear(), date.getMonth() + value, 1);
-        } else if (unit === DAYS) {
-            return new Date(date.getFullYear(), date.getMonth(), date.getDate() + value);
-        } else if (unit === HOURS) {
-            return new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours() + value);
-        } else if (unit === MINUTES) {
-            return new Date(date.getFullYear(), date.getMonth(), date.getDate(),
-                            date.getHours(), date.getMinutes() + value);
-        }
-
-        return date;
     }
 
     var DateCategoryAxis = CategoryAxis.extend({
@@ -1212,10 +1161,8 @@
         },
 
         applyDefaults: function(options) {
-            var chart = this,
-                categories = options.categories,
+            var categories = options.categories,
                 count = categories.length,
-                baseUnit,
                 categoryIx,
                 currentCategory,
                 lastCategory,
@@ -1234,7 +1181,7 @@
             }
 
             return deepExtend({
-                baseUnit: timeUnit(minInterval)
+                baseUnit: timeUnits(minInterval)
             }, options);
         },
 
@@ -1293,7 +1240,7 @@
         applyDefaults: function(seriesMin, seriesMax, options) {
             var min = options.min || seriesMin,
                 max = options.max || seriesMax,
-                baseUnit = options.baseUnit || timeUnit(max - min),
+                baseUnit = options.baseUnit || timeUnits(max - min),
                 baseUnitTime = TIME_PER_UNIT[baseUnit],
                 autoMin = floorDate(toTime(min) - 1, baseUnit),
                 autoMax = ceilDate(toTime(max) + 1, baseUnit),
@@ -4022,7 +3969,7 @@
                     lastCategory = currentCategory;
                 }
 
-                baseUnit = timeUnit(minInterval);
+                baseUnit = timeUnits(minInterval);
             }
 
             var startDate = floorDate(toTime(categories[0]));
@@ -4067,7 +4014,7 @@
                 for (var seriesIx = 0; seriesIx < series.length; seriesIx++) {
                     var data = series[seriesIx].data;
 
-                    if (categoryIndexes.length == 0) {
+                    if (categoryIndexes.length === 0) {
                         return;
                     }
 
@@ -4103,7 +4050,8 @@
 
             function partition(values, bins, callback) {
                 var bin,
-                    valueIndexes;
+                    valueIndexes,
+                    val;
 
                 for (var binIx = 0; binIx < bins.length; binIx++) {
                     bin = bins[binIx];
