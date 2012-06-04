@@ -495,17 +495,11 @@
             });
 
             // ------------------------------------------------------------
-            var TIME_PER_MINUTE = 60000,
-                TIME_PER_HOUR = 60 * TIME_PER_MINUTE,
-                TIME_PER_DAY = 24 * TIME_PER_HOUR,
-                TIME_PER_MONTH = 31 * TIME_PER_DAY,
-                TIME_PER_YEAR = 365 * TIME_PER_DAY;
-
             var floorDate = dataviz.floorDate,
                 ceilDate = dataviz.ceilDate,
                 date;
 
-            module("Date helpers", {
+            module("Date helpers / floorDate", {
                 setup: function() {
                     date = new Date("2012/03/29 17:40:10");
                 }
@@ -533,6 +527,13 @@
 
             test("floorDate returns date when no unit is specified", function() {
                 same(floorDate(date), date);
+            });
+
+            // ------------------------------------------------------------
+            module("Date helpers / ceilDate", {
+                setup: function() {
+                    date = new Date("2012/03/29 17:40:10");
+                }
             });
 
             test("ceilDate rounds date up to years", function() {
@@ -592,6 +593,94 @@
 
             test("ceilDate returns date when no unit is specified", function() {
                 same(ceilDate(date), date);
+            });
+
+            // ------------------------------------------------------------
+            var duration = dataviz.duration,
+                dateA = new Date("2010/01/01 10:00"),
+                dateB = new Date("2011/03/01 15:00");
+
+            module("Date helpers / duration");
+
+            test("calculates duration in years", function() {
+                equals(duration(dateA, dateB, "years"), 1);
+            });
+
+            test("calculates duration in months", function() {
+                equals(duration(dateA, dateB, "months"), 14);
+            });
+
+            test("calculates duration in days", function() {
+                equals(duration(dateA, dateB, "days"), 424);
+            });
+
+            test("calculates duration in days during DST transition", function() {
+                equals(duration(
+                    new Date("2012/03/24 GMT+0200 (FLE Standard Time)"),
+                    new Date("2012/03/26 GMT+0300 (FLE Daylight Time)"),
+                    "days"
+                    ), 2
+                );
+            });
+
+            test("calculates duration in hours", function() {
+                equals(duration(dateA, dateB, "hours"), 10181);
+            });
+
+            test("calculates duration in hours during DST transition", function() {
+                equals(duration(
+                    new Date("2012/03/25 00:00 GMT+0200 (FLE Standard Time)"),
+                    new Date("2012/03/25 06:00 GMT+0300 (FLE Daylight Time)"),
+                    "hours"
+                    ), 5
+                );
+            });
+
+            test("calculates duration in minutes", function() {
+                equals(duration(dateA, dateB, "minutes"), 610860);
+            });
+
+            // ------------------------------------------------------------
+            var addDuration = dataviz.addDuration;
+
+            module("Date helpers / addDuration");
+
+            test("rounds date to years", function() {
+                same(addDuration(dateA, 10, "years"), new Date("2020/01/01"));
+            });
+
+            test("rounds date to months", function() {
+                same(addDuration(dateA, 15, "months"), new Date("2011/04/01"));
+            });
+
+            test("rounds date to days", function() {
+                same(addDuration(dateA, 35, "days"), new Date("2010/02/05"));
+            });
+
+            test("rounds to days during DST transition", function() {
+                same(addDuration(
+                        new Date("2012/03/25 GMT+0200 (FLE Standard Time)"),
+                        2,
+                        "days"
+                    ), new Date("2012/03/27 GMT+0300 (FLE Daylight Time)")
+                );
+            });
+
+            test("rounds date to hours", function() {
+                same(addDuration(dateA, 24, "hours"), new Date("2010/01/02 10:00"));
+            });
+
+            test("rounds to hours during DST transition", function() {
+                same(addDuration(
+                        new Date("2012/03/25 00:00 GMT+0200 (FLE Standard Time)"),
+                        6,
+                        "hours"
+                    ), new Date("2012/03/25 06:00 GMT+0300 (FLE Daylight Time)")
+                );
+            });
+
+            test("rounds date to minutes", function() {
+                same(addDuration(dateA, 75, "minutes"), new Date("2010/01/01 11:15"));
             });
 
             // ------------------------------------------------------------
