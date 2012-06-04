@@ -2401,11 +2401,14 @@
         expandGroup: function(group) {
             group = $(group).find(".k-icon").addClass("k-collapse").removeClass("k-expand").end();
             var that = this,
-                level = group.find(".k-group-cell").length;
+                level = group.find(".k-group-cell").length,
+                tr,
+                offset,
+                groupsCount = 1;
 
             group.nextAll("tr").each(function () {
-                var tr = $(this);
-                var offset = tr.find(".k-group-cell").length;
+                tr = $(this);
+                offset = tr.find(".k-group-cell").length;
                 if (offset <= level) {
                     return false;
                 }
@@ -2419,6 +2422,18 @@
 
                     if (tr.hasClass("k-master-row") && tr.find(".k-icon").hasClass("k-minus")) {
                         tr.next().show();
+                    }
+                }
+
+                if (tr.hasClass("k-grouping-row")) {
+                    groupsCount ++;
+                }
+
+                if (tr.hasClass("k-group-footer")) {
+                    if (groupsCount == 1) {
+                        tr.show();
+                    } else {
+                        groupsCount --;
                     }
                 }
             });

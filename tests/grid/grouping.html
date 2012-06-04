@@ -475,6 +475,45 @@
                 equal(grid.table.find("tr.k-group-footer:visible").length, 0);
             });
 
+            test("expand group shows group footer", function() {
+                var grid = new Grid(table(), {
+                    dataSource: {
+                        data: [{ foo: "foo", bar: "bar" }],
+                        group: [{ field: "foo" }, { field: "bar" }]
+                    },
+                    columns: [
+                        { field: "foo", groupFooterTemplate: "foo" },
+                        { field: "bar"
+                    }]
+                });
+
+                var groups = grid.table.find("tr.k-grouping-row");
+                grid.collapseGroup(groups.eq(1));
+                grid.expandGroup(groups.eq(1));
+
+                equal(grid.table.find(".k-group-footer:visible").length, 2);
+            });
+
+            test("expand outer group shows outer group footer", function() {
+                var grid = new Grid(table(), {
+                    dataSource: {
+                        data: [{ foo: "foo", bar: "bar" }],
+                        group: [{ field: "foo" }, { field: "bar" }]
+                    },
+                    columns: [
+                        { field: "foo", groupFooterTemplate: "foo" },
+                        { field: "bar"
+                    }]
+                });
+
+                var groups = grid.table.find("tr.k-grouping-row");
+                grid.collapseGroup(groups.eq(1));
+                grid.collapseGroup(groups.eq(0));
+                grid.expandGroup(groups.eq(0));
+
+                equal(grid.table.find(".k-group-footer:visible").length, 1);
+            });
+
             test("items skips the group footer rows", function() {
                 var grid = new Grid(table(), {
                     dataSource: {
