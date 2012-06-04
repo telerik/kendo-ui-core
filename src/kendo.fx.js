@@ -327,9 +327,9 @@
 
         for (key in properties) {
             lowerKey = key.toLowerCase();
-            isTransformed = transformProps.indexOf(lowerKey) != -1;
+            isTransformed = transforms && transformProps.indexOf(lowerKey) != -1;
 
-            if (transforms && !support.hasHW3D && isTransformed && transform2d.indexOf(lowerKey) == -1) {
+            if (!support.hasHW3D && isTransformed && transform2d.indexOf(lowerKey) == -1) {
                 delete properties[key];
             } else {
                 exitValue = false;
@@ -344,7 +344,7 @@
                 }
 
                 if (exitValue !== false) {
-                    if (transforms && isTransformed) {
+                    if (isTransformed) {
                         transformation.push(key + "(" + exitValue + ")");
                     } else {
                         cssValues[key] = exitValue;
@@ -457,7 +457,7 @@
 
             return computed;
         } else {
-            return element.css(property);
+            return parseFloat(element.css(property));
         }
     }
 
