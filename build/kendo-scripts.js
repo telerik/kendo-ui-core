@@ -23,6 +23,7 @@ var multipartScripts = [{
               path.join("editor", "image.js"),
               path.join("editor", "components.js"),
               path.join("editor", "indent.js"),
+              path.join("editor", "viewhtml.js"),
               path.join("editor", "pendingformats.js")]
       }, {
       output:   "kendo.aspnetmvc.js",

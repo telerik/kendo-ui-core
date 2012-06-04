@@ -222,5 +222,9 @@ tests.push(
     {
         page: "editor/unlinkcommand.html",
         title: "editor unlinkcommand"
+    },
+    {
+        page: "editor/viewhtmlcommand.html",
+        title: "editor viewhtmlcommand"
     }
 );
