@@ -12,6 +12,7 @@
         <script src="../../src/kendo.pager.js"></script>
         <script src="../../src/kendo.grid.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+        <link rel="stylesheet" href="../../styles/web/kendo.common.css" />
     </head>
     <body>
         <h1 id="qunit-header">Grid aggregates</h1>
@@ -104,6 +105,27 @@
                 })
 
                 ok(grid.table.find("tfoot>tr.k-footer-template").length);
+            });
+
+            test("footer row scrolls together with the data area", function() {
+                var grid = new Grid(table(), {
+                        dataSource: {
+                            data: [ {foo: 1},{foo: 2},{foo: 3}],
+                            aggregate: { field: "foo", aggregate: "count" }
+                        },
+                        columns: [ { field: "foo", footerTemplate: "baz", width: "3000px" } ]
+                    }),
+                    footerWrap = grid.wrapper.find("div.k-grid-footer-wrap"),
+                    contentDiv = grid.wrapper.children("div.k-grid-content");
+                
+                contentDiv.scrollLeft(100);
+
+                stop();
+
+                window.setTimeout(function(){
+                    start();
+                    equal(footerWrap.scrollLeft(), 100);
+                }, 1);
             });
 
             test("footer cell is rendered for each column", function() {
@@ -216,7 +238,7 @@
                 footer = grid.wrapper.children("div.k-grid-footer"),
                 col  = footer.find("colgroup").find("col").first();
 
-                equal(col.width(), "100");
+                ok(col.attr("style").indexOf("100px") != -1);
             });
 
             test("group cell is added to footer row when grid is groupped", function() {
