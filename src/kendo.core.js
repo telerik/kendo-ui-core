@@ -2280,6 +2280,7 @@ function pad(number) {
             SPACEBAR: 32,
             PAGEUP: 33,
             PAGEDOWN: 34,
+            F2: 113,
             F10: 121,
             F12: 123
         },

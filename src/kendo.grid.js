@@ -1388,7 +1388,7 @@
                             handled = true;
                         } else if (that.options.editable) {
                             current = current ? current : table.find(FIRST_CELL_SELECTOR);
-                            if (keys.ENTER == key || keys.F12 == key) {
+                            if (keys.ENTER == key || keys.F2 == key) {
                                 that._handleEditing(current);
                                 handled = true;
                             } else if (keys.TAB == key && isInCell) {
