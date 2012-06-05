@@ -8,8 +8,8 @@ function publish(symbolSet) {
 }
 
 function processClass(theClass) {
-    var events = theClass.getEvents(),   // 1 order matters
-    methods = theClass.getMethods(); // 2
+    theClass.events = theClass.getEvents();   // 1 order matters
+    theClass.methods = theClass.getMethods(); // 2
 
     var description = theClass.properties.filter(function(x) { return x._name == "Description"; })[0];
     if (description) {
@@ -20,7 +20,10 @@ function processClass(theClass) {
             outputDescription(description.comment).replace(/\r/g, "\n") +
             "\n\n------------------------------------------\n\n" +
             '## Configuration\n\n' +
-            outputConfiguration(theClass)
+            outputConfiguration(theClass) +
+            "\n\n------------------------------------------\n\n" +
+            '## Methods\n\n' +
+            outputMethods(theClass).replace(/\r/g, "\n")
         );
     }
 
@@ -48,6 +51,10 @@ function makeSortby(attribute) {
         }
     }
 }
+function toCodeBlock(string) {
+    return "\n\n    " + string.replace(/\r/g, "\n    ") + "\n\n";
+
+}
 
 // custom output for descriptions -- enables titled code examples and multiple text sections
 function outputDescription(description) {
@@ -68,7 +75,7 @@ function outputDescription(description) {
                     output += "\n#### Example";
                 }
 
-                output += "\n\n```\n" + tag.desc + "\n```\n";
+                output += toCodeBlock(tag.desc);
                 hasTitle = false;
             break;
 
@@ -275,7 +282,7 @@ function outputDescription(description) {
             "<%= desc %>\n\n" +
             '<% for (var exampleIdx = 0; typeof example != "undefined" && exampleIdx < example.length; exampleIdx++) { %>' +
                     "#### Example\n\n" +
-                    "```\n<%= example[exampleIdx] %>\n```\n\n" +
+                    "<%= toCodeBlock(example[exampleIdx]) %>" +
             '<% } %>' +
             '<%= typeof subOptions != "undefined" ? renderChildOptions(subOptions) : "" %>'
     );
@@ -300,6 +307,68 @@ function outputDescription(description) {
 }
 
 ////// Configuration end
+//
+//
+//
+///// Methods
+function outputMethods(data) {
+    var ownMethods = data.methods.filter(function($){return $.memberOf == data.alias  && !$.isNamespace}).sort(makeSortby("name"));
+    var html = "";
+
+    if (defined(ownMethods) && ownMethods.length) {
+        for (var i = 0; i < ownMethods.length; i ++) {
+            var member = ownMethods[i];
+            html += "### `" + member.name.replace(/\^\d+$/, '') + "`" + makeSignature(member.params)
+
+           if (member.type) {
+               html += "`" + member.type + "`";
+           }
+           html += "\n\n";
+           html += outputDescription(member.comment);
+
+           if (member.params.length) {
+               html += "#### Parameters \n\n"
+
+               for (var j = 0; j < member.params.length; j ++) {
+                   var item = member.params[j];
+                   html += "##### " + item.name + " `" + item.type + "`\n\n";
+                   if (item.isOptional) {
+                       html += "_optional, default: " + item.defaultValue + "_\n\n";
+                   }
+
+                   html += toMarkdown(item.desc) + "\n\n";
+               }
+           }
+
+           if (member.returns.length) {
+               var item = member.returns[0];
+               html += "#### Returns \n\n"
+               html += "`" + item.type + "` " + item.desc + "\n\n";
+           }
+        }
+    }
+
+    return html;
+}
+
+/** Build output for displaying function parameters. */
+function makeSignature(params) {
+    if (!params) return "()";
+    var signature = "("
+    +
+    params.filter(
+        function($) {
+            return $.name.indexOf(".") == -1; // don't show config params in signature
+        }
+    ).map(
+        function($) {
+            return $.name;
+        }
+    ).join(", ")
+    +
+    ")";
+    return signature;
+}
 
 // to-markdown npm module
 var toMarkdown = function(string) {
