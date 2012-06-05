@@ -350,9 +350,10 @@
                 }
             }
 
-            if (pieSeries.length > 0 || donutSeries.length > 0) {
-                //plotArea = new PiePlotArea(pieSeries, options);
-                plotArea = new PiePlotArea(donutSeries, options);
+            if (pieSeries.length > 0) {
+                plotArea = new PiePlotArea(pieSeries, options);
+            } else if (donutSeries.length > 0) {
+                plotArea = new DonutPlotArea(donutSeries, options);
             } else if (xySeries.length > 0) {
                 plotArea = new XYPlotArea(xySeries, options);
             } else {
@@ -4991,8 +4992,7 @@
             var plotArea = this,
                 series = plotArea.series;
 
-            plotArea.createDonutChart(series);
-           // plotArea.createPieChart(series);
+            plotArea.createPieChart(series);
         },
 
         createPieChart: function(series) {
@@ -5006,19 +5006,6 @@
                 });
 
             plotArea.appendChart(pieChart);
-        },
-
-        createDonutChart: function(series) {
-            var plotArea = this,
-                firstSeries = series[0],
-                donutChart = new DonutChart(plotArea, {
-                    series: series,
-                    padding: firstSeries.padding,
-                    startAngle: firstSeries.startAngle,
-                    connectors: firstSeries.connectors
-                });
-
-            plotArea.appendChart(donutChart);
         },
 
         addToLegend: function(chart) {
@@ -5038,6 +5025,28 @@
                     });
                 }
             }
+        }
+    });
+
+    var DonutPlotArea = PiePlotArea.extend({
+        render: function() {
+            var plotArea = this,
+                series = plotArea.series;
+
+            plotArea.createDonutChart(series);
+        },
+
+        createDonutChart: function(series) {
+            var plotArea = this,
+                firstSeries = series[0],
+                donutChart = new DonutChart(plotArea, {
+                    series: series,
+                    padding: firstSeries.padding,
+                    startAngle: firstSeries.startAngle,
+                    connectors: firstSeries.connectors
+                });
+
+            plotArea.appendChart(donutChart);
         }
     });
 
