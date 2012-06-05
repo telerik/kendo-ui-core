@@ -19,6 +19,7 @@ var Serializer = {
             b: { start: function () { result.push('<strong>'); }, end: function () { result.push('</strong>'); } },
             i: { start: function () { result.push('<em>'); }, end: function () { result.push('</em>'); } },
             u: { start: function () { result.push('<span style="text-decoration:underline;">'); }, end: function () { result.push('</span>'); } },
+            iframe: { start: function (node) { result.push('<iframe'); attr(node); result.push('>'); }, end: function () { result.push('</iframe>') } },
             font: {
                 start: function (node) {
                     result.push('<span style="');
@@ -80,7 +81,8 @@ var Serializer = {
                 var name = attribute.nodeName;
                 // In IE < 8 the 'value' attribute is not returned as 'specified'. The same goes for type="text"
                 if (attribute.specified || (name == 'value' && !node.value) || (name == 'type' && attribute.nodeValue == 'text')) {
-                    if (name.indexOf('_moz') < 0 && name != 'complete') {
+                    // altHtml is injected by IE8 when an <object> tag is used in the Editor
+                    if (name.indexOf('_moz') < 0 && name != 'complete' && name != 'altHtml') {
                         specifiedAttributes.push(attribute);
                     }
                 }
