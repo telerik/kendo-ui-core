@@ -1050,7 +1050,8 @@ p#copy
     background:rgba(191,191,191,.2);
 }
 
-.widgetGrid .wideCol
+.widgetGrid .wideCol,
+.widgetGrid .narrowCol
 {
     float:left;
     width:650px;
@@ -1059,14 +1060,17 @@ p#copy
 
 .widgetGrid .narrowCol
 {
-    float:left;
     width:310px;
-    min-height:158px;
+}
+
+.widgetGrid .mobile-widgets
+{
+    width:410px;
 }
 
 .widgetGrid .mobile-framework
 {
-    width:276px;
+    width:176px;
     background:rgba(221, 221, 221, 0.2);
 }
 

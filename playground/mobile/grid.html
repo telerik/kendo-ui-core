@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Basic usage</title>
+        <link href="../../styles/web/kendo.common.css" rel="stylesheet" />
+        <link href="../../styles/web/kendo.default.less" rel="stylesheet/less" />
+        <link href="../../styles/mobile/kendo.mobile.all.less" rel="stylesheet/less" />
+        <script src="../../demos/mvc/content/shared/js/less.js"></script>
+        <script src="../../src/jquery.min.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.history.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.mobile.scroller.js"></script>
+        <script src="../../src/kendo.mobile.loader.js"></script>
+        <script src="../../src/kendo.mobile.view.js"></script>
+        <script src="../../src/kendo.mobile.pane.js"></script>
+        <script src="../../src/kendo.mobile.navbar.js"></script>
+        <script src="../../src/kendo.mobile.button.js"></script>
+        <script src="../../src/kendo.mobile.application.js"></script>
+        <script src="../../src/kendo.mobile.listview.js"></script>
+        <script src="../../src/kendo.grid.js"></script>
+        <style>
+            #grid {
+                height: 300px;
+            }
+        </style>
+    </head>
+
+<body>
+   <div data-role="view" data-title="Header" data-layout="mobile-tabstrip" data-init="initGrid">
+        <div id="grid"></div>
+	</div>
+
+<div data-role="layout" data-id="mobile-tabstrip">
+    <header data-role="header">
+        <div data-role="navbar">
+            <!--<a class="nav-button" data-align="left" data-role="backbutton">Back</a>-->
+            <span data-role="view-title"></span>
+            <a data-align="right" data-role="button" class="nav-button" href="#index">Index</a>
+        </div>
+    </header>
+
+    <p>TabStrip</p>
+
+    <div data-role="footer">
+
+    </div>
+</div>
+
+   <script>
+  //window.kendoMobileApplication = new kendo.mobile.Application(document.body);
+  var app = new kendo.mobile.Application(); //document.body is used by default
+
+  function initGrid() {
+  $("#grid").kendoGrid({
+	dataSource: {
+		data: [
+			{"year": 1994,
+ 			 "title": "The Shawshank Redemption"
+			},{
+			"year": 1972,
+			"title": "The Godfather"
+			},{
+			"year": 1957,
+			"title": "12 Angry Men"
+			},
+			{"year": 1994,
+ 			 "title": "The Shawshank Redemption"
+			},{
+			"year": 1972,
+			"title": "The Godfather"
+			},{
+			"year": 1957,
+			"title": "12 Angry Men"
+			},
+			{"year": 1994,
+ 			 "title": "The Shawshank Redemption"
+			},{
+			"year": 1972,
+			"title": "The Godfather"
+			},{
+			"year": 1957,
+			"title": "12 Angry Men"
+			},
+			{"year": 1994,
+ 			 "title": "The Shawshank Redemption"
+			},{
+			"year": 1972,
+			"title": "The Godfather"
+			},{
+			"year": 1957,
+			"title": "12 Angry Men"
+			},{"year": 1994,
+ 			 "title": "The Shawshank Redemption"
+			},{
+			"year": 1972,
+			"title": "The Godfather"
+			},{
+			"year": 1957,
+			"title": "12 Angry Men"
+			}
+			,{"year": 1994,
+ 			 "title": "The Shawshank Redemption1111111111111111111111111111"
+			},{
+			"year": 1972,
+			"title": "The Godfather"
+			},{
+			"year": 1957,
+			"title": "12 Angry Men"
+			},{"year": 1994,
+ 			 "title": "The Shawshank Redemption"
+			},{
+			"year": 1972,
+			"title": "The Godfather"
+			},{
+			"year": 1957,
+			"title": "12 Angry Men"
+			},{"year": 1994,
+ 			 "title": "The Shawshank Redemption"
+			},{
+			"year": 1972,
+			"title": "The Godfather"
+			},{
+			"year": 1957,
+			"title": "12 Angry Men"
+			},{"year": 1994,
+ 			 "title": "The Shawshank Redemption"
+			},{
+			"year": 1972,
+			"title": "The Godfather"
+			},{
+			"year": 1957,
+			"title": "12 Angry Men"
+			},{"year": 1994,
+ 			 "title": "The Shawshank Redemption"
+			},{
+			"year": 1972,
+			"title": "The Godfather"
+			},{
+			"year": 1957,
+			"title": "12 Angry Men"
+			},{"year": 1994,
+ 			 "title": "The Shawshank Redemption"
+			},{
+			"year": 1972,
+			"title": "The Godfather"
+			},{
+			"year": 1957,
+			"title": "12 Angry Men"
+			},{"year": 1994,
+ 			 "title": "The Shawshank Redemption"
+			},{
+			"year": 1972,
+			"title": "The Godfather"
+			},{
+			"year": 1957,
+			"title": "12 Angry Men"
+			},{"year": 1994,
+ 			 "title": "The Shawshank Redemption"
+			},{
+			"year": 1972,
+			"title": "The Godfather"
+			},{
+			"year": 1957,
+			"title": "12 Angry Men"
+			},{"year": 1994,
+ 			 "title": "The Shawshank Redemption"
+			},{
+			"year": 1972,
+			"title": "The Godfather"
+			},{
+			"year": 1957,
+			"title": "12 Angry Men"
+			},{"year": 1994,
+ 			 "title": "The Shawshank Redemption"
+			},{
+			"year": 1972,
+			"title": "The Godfather"
+			},{
+			"year": 1957,
+			"title": "12 Angry Men"
+			},{"year": 1994,
+ 			 "title": "The Shawshank Redemption"
+			},{
+			"year": 1972,
+			"title": "The Godfather"
+			},{
+			"year": 1957,
+			"title": "12 Angry Men"
+			},{"year": 1994,
+ 			 "title": "The Shawshank Redemption"
+			},{
+			"year": 1972,
+			"title": "The Godfather"
+			},{
+			"year": 1957,
+			"title": "12 Angry Men"
+			},{"year": 1994,
+ 			 "title": "The Shawshank Redemption"
+			},{
+			"year": 1972,
+			"title": "The Godfather"
+			},{
+			"year": 1957,
+			"title": "12 Angry Men"
+			},{"year": 1994,
+ 			 "title": "The Shawshank Redemption"
+			},{
+			"year": 1972,
+			"title": "The Godfather"
+			},{
+			"year": 1957,
+			"title": "12 Angry Men"
+			},{"year": 1994,
+ 			 "title": "The Shawshank Redemption"
+			},{
+			"year": 1972,
+			"title": "The Godfather"
+			},{
+			"year": 1957,
+			"title": "12 Angry Men"
+			},{"year": 1994,
+ 			 "title": "The Shawshank Redemption"
+			},{
+			"year": 1972,
+			"title": "The Godfather"
+			},{
+			"year": 1957,
+			"title": "12 Angry Men"
+			},{"year": 1994,
+ 			 "title": "The Shawshank Redemption"
+			},{
+			"year": 1972,
+			"title": "The Godfather"
+			},{
+			"year": 1957,
+			"title": "12 Angry Men"
+			},{"year": 1994,
+ 			 "title": "The Shawshank Redemption"
+			},{
+			"year": 1972,
+			"title": "The Godfather"
+			},{
+			"year": 1957,
+			"title": "12 Angry Men22222222222222222"
+			}],
+		 columns: [
+			{
+				field: "year",
+				title: "year"
+			},
+			{
+				field: "title",
+				title: "title"
+			}]
+		}
+        });
+    }
+   </script>
+
+</body>
+</html>

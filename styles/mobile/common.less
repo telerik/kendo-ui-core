@@ -1175,6 +1175,11 @@
     border: 0;
 }
 
+.km-shim .k-animation-container
+{
+    width: auto;
+}
+
 /* Checkboxes and Radios */
 
 .km-listview-label input[type=radio],
@@ -1225,13 +1230,15 @@
 
 /* PopOver */
 
-.km-popup-wrapper
+.km-popup-wrapper,
+.km-modalview-wrapper
 {
+    z-index: 10001;
     position: relative;
     overflow: hidden;
-    .box-shadow(none);
     background: none;
     border: 0;
+    .box-shadow(none);
 }
 
 .km-popup-overlay
@@ -1239,6 +1246,7 @@
     position: absolute;
     width: 100%;
     height: 100%;
+    z-index: 10000;
 }
 
 .km-popup-arrow,
@@ -1251,6 +1259,18 @@
     top: 0;
     left: 0;
     z-index: 2;
+}
+
+.km-left .km-popup-arrow,
+.km-right .km-popup-arrow
+{
+    margin-top: -8px;
+}
+
+.km-up .km-popup-arrow,
+.km-down .km-popup-arrow
+{
+    margin-left: -8px;
 }
 
 .km-popup-arrow:after,
@@ -1281,3 +1301,16 @@
     height: 100%;
 }
 
+/* ModalView */
+
+.km-modalview
+{
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.km-modalview .km-content {
+    box-flex: 1;
+}

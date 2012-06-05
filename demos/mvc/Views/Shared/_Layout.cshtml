@@ -29,14 +29,14 @@
         {
             if (ViewBag.Navigation.Keys.Count > 1)
             {
-                <div class="@((category.ToLower().Contains("ui") || category.ToLower().IndexOf("dashboard") > -1) ? "wideCol" : "narrowCol") floatWrap @(category.ToLower().IndexOf("dashboard") > -1 ? "dashboards" : "")@(category.ToLower().Contains("mobile framework") ? "mobile-framework" : "")@(category.ToLower().Contains("chart") ? "chart" : "")@(category.ToLower().Contains("gauges") ? "gauges" : "")">
+                <div class="@((category.ToLower().Contains("ui") || category.ToLower().IndexOf("dashboard") > -1) ? "wideCol" : "narrowCol") floatWrap @(category.ToLower().IndexOf("dashboard") > -1 ? "dashboards" : "")@(category.ToLower().Contains("mobile widgets") ? "mobile-widgets" : "")@(category.ToLower().Contains("mobile framework") ? "mobile-framework" : "")@(category.ToLower().Contains("chart") ? "chart" : "")@(category.ToLower().Contains("gauges") ? "gauges" : "")">
                     <h2>@category</h2>
                     @{ var idx = 0; }
                     <ul>
                         @foreach (NavigationWidget widget in ViewBag.Navigation[category])
                         {
                             if (!widget.ShouldInclude) { continue; }
-                            
+
                             if (widget.Name != "overview")
                             {
                                 var isActive = false;
@@ -61,7 +61,7 @@
                                 </li>
 
                                 idx++;
-                                if (idx > 0 && idx % 5 == 0)
+                                if (idx > 0 && idx % 6 == 0)
                                 {
                                     @Html.Raw("</ul><ul>")
                                 }

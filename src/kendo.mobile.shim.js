@@ -3,9 +3,6 @@
     var kendo = window.kendo,
         ui = kendo.mobile.ui,
         Popup = kendo.ui.Popup,
-        VISIBILITY = "visibility",
-        HIDDEN = "hidden",
-        VISIBLE = "visible",
         SHIM = '<div class="km-shim"/>',
         Widget = ui.Widget;
 
@@ -17,18 +14,14 @@
         */
         init: function(element, options) {
             var that = this,
-                align = "center center",
-                effect = "fade:in",
-                view,
-                shim = $(SHIM).hide();
-
-            if (kendo.support.mobileOS.ios) {
-                align = "bottom left";
-                effect = "slideIn:up";
-            }
+                ios = kendo.mobile.application.os === "ios",
+                align = options.align || (ios ?  "bottom center" : "center center"),
+                position = options.position || (ios ? "bottom center" : "center center"),
+                effect = options.effect || (ios ? "slideIn:up" : "fade:in"),
+                shim = $(SHIM).hide(), view;
 
             Widget.fn.init.call(that, element, options);
-            view = that.view(),
+            view = that.view();
 
             that.shim = shim;
             that.element = element;
@@ -43,7 +36,7 @@
                 anchor: shim,
                 appendTo: shim,
                 origin: align,
-                position: align,
+                position: position,
                 animation: {
                     open: {
                         effects: effect,
@@ -67,16 +60,14 @@
         options: {
             name: "Shim",
             modal: true,
+            align: undefined,
+            position: undefined,
+            effect: undefined,
             duration: 200
         },
 
         show: function() {
             this.popup.open();
-            this.popup.wrapper.css({
-                width: "",
-                left: "",
-                top: ""
-            });
         },
 
         hide: function() {

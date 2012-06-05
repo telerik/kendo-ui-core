@@ -15,7 +15,7 @@
         NAVIGATE = "navigate",
         VIEW_SHOW = "viewShow",
 
-        WIDGET_RELS = /popover|actionsheet/,
+        WIDGET_RELS = /popover|actionsheet|modalview/,
         BACK = "#:back",
 
         data = kendo.data,

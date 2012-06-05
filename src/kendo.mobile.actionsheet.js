@@ -149,7 +149,6 @@
             var that = this;
             that.target = $(target);
             that.context = context;
-            that.trigger(OPEN, { target: that.target, context: that.context });
             that.shim.show();
         },
 
