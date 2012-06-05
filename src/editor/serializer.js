@@ -19,7 +19,7 @@ var Serializer = {
             b: { start: function () { result.push('<strong>'); }, end: function () { result.push('</strong>'); } },
             i: { start: function () { result.push('<em>'); }, end: function () { result.push('</em>'); } },
             u: { start: function () { result.push('<span style="text-decoration:underline;">'); }, end: function () { result.push('</span>'); } },
-            iframe: { start: function (node) { result.push('<iframe'); attr(node); result.push('>'); }, end: function () { result.push('</iframe>') } },
+            iframe: { start: function (node) { result.push('<iframe'); attr(node); result.push('>'); }, end: function () { result.push('</iframe>'); } },
             font: {
                 start: function (node) {
                     result.push('<span style="');
