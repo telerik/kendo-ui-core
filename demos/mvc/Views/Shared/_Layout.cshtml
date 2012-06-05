@@ -36,7 +36,7 @@
                         @foreach (NavigationWidget widget in ViewBag.Navigation[category])
                         {
                             if (!widget.ShouldInclude) { continue; }
-                            
+
                             if (widget.Name != "overview")
                             {
                                 var isActive = false;
@@ -61,7 +61,7 @@
                                 </li>
 
                                 idx++;
-                                if (idx > 0 && idx % 5 == 0)
+                                if (idx > 0 && idx % 6 == 0)
                                 {
                                     @Html.Raw("</ul><ul>")
                                 }
