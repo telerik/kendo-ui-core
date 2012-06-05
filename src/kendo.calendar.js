@@ -718,7 +718,9 @@
             //Safari cannot create corretly date from "1/1/2090"
             value = new DATE(value[0], value[1], value[2]);
 
-            e.preventDefault();
+            if (link[0].href.indexOf("#") == -1) {
+                e.preventDefault();
+            };
 
             if (link.parent().hasClass(OTHERMONTH)) {
                 currentValue = value;
