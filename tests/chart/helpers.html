@@ -700,6 +700,30 @@
                 equals(autoFormat("N2", 1), "1.00");
             });
 
+            (function() {
+                // ------------------------------------------------------------
+                var Aggregates = kendo.dataviz.Aggregates;
+                var values = [1, 2, 3];
+
+                module("Aggregates");
+
+                test("min", function() {
+                    equals(Aggregates.min(values), 1);
+                });
+
+                test("max", function() {
+                    equals(Aggregates.max(values), 3);
+                });
+
+                test("avg", function() {
+                    equals(Aggregates.avg(values), 2);
+                });
+
+                test("count", function() {
+                    equals(Aggregates.count(values), 3);
+                });
+            })();
+
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>
