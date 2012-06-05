@@ -330,6 +330,11 @@
             }
 
             return box;
+        },
+
+        expand: function(value) {
+            this.r += value;
+            return this;
         }
     });
 
@@ -339,8 +344,7 @@
         },
 
         expand: function(value) {
-            this.r += value;
-            return this;
+            return Ring.fn.expand.call(this, value);
         },
 
         clone: function() {

@@ -30,6 +30,7 @@
         Point2D = dataviz.Point2D,
         RootElement = dataviz.RootElement,
         Sector = dataviz.Sector,
+        Ring = dataviz.Ring,
         Text = dataviz.Text,
         TextBox = dataviz.TextBox,
         Title = dataviz.Title,
@@ -74,6 +75,7 @@
         DEFAULT_HEIGHT = dataviz.DEFAULT_HEIGHT,
         DEFAULT_PRECISION = dataviz.DEFAULT_PRECISION,
         DEFAULT_WIDTH = dataviz.DEFAULT_WIDTH,
+        DONUT = "donut",
         FADEIN = "fadeIn",
         GLASS = "glass",
         HOURS = "hours",
@@ -331,6 +333,7 @@
                 categoricalSeries = [],
                 xySeries = [],
                 pieSeries = [],
+                donutSeries = [],
                 plotArea;
 
             for (i = 0; i < length; i++) {
@@ -342,11 +345,14 @@
                     xySeries.push(currentSeries);
                 } else if (currentSeries.type === PIE) {
                     pieSeries.push(currentSeries);
+                } else if (currentSeries.type === DONUT) {
+                    donutSeries.push(currentSeries);
                 }
             }
 
-            if (pieSeries.length > 0) {
-                plotArea = new PiePlotArea(pieSeries, options);
+            if (pieSeries.length > 0 || donutSeries.length > 0) {
+                //plotArea = new PiePlotArea(pieSeries, options);
+                plotArea = new PiePlotArea(donutSeries, options);
             } else if (xySeries.length > 0) {
                 plotArea = new XYPlotArea(xySeries, options);
             } else {
@@ -3584,6 +3590,7 @@
             if (overlay) {
                 overlay = deepExtend({}, options.overlay, {
                     r: sector.r,
+                    ir: sector.ir,
                     cx: sector.c.x,
                     cy: sector.c.y,
                     bbox: sector.getBBox()
@@ -3591,7 +3598,7 @@
             }
 
             if (segment.value !== 0) {
-                elements.push(view.createSector(sector, deepExtend({
+                elements.push(view.createRing(sector, deepExtend({
                     id: options.id,
                     fill: options.color,
                     overlay: overlay,
@@ -3713,7 +3720,7 @@
                     currentSeries.color = currentData.color ?
                         currentData.color : colors[i % colorsCount];
 
-                    callback(value, new Sector(null, 0, startAngle, angle), {
+                    callback(value, new Ring(null, 0, 0, startAngle, angle), {
                         owner: chart,
                         category: currentData.category || "",
                         categoryIx: i,
@@ -3722,7 +3729,9 @@
                         dataItem: dataItems ? dataItems[i] : currentData,
                         percentage: value / total,
                         explode: explode,
-                        visibleInLegend: currentData.visibleInLegend
+                        visibleInLegend: currentData.visibleInLegend,
+                        margin: currentData.margin,
+                        size: currentData.Size
                     });
 
                     startAngle += angle;
@@ -3734,7 +3743,7 @@
             var chart = this,
                 segment;
 
-            segment = new PieSegment(value, sector, fields.series);
+            segment = new DonutSegment(value, sector, fields.series);
             segment.options.id = uniqueId();
             extend(segment, fields);
             chart.append(segment);
@@ -3805,29 +3814,75 @@
                     box.x1 + minWidth, box.y1 + minWidth),
                 newBoxCenter = newBox.center(),
                 boxCenter = box.center(),
+                series = options.series,
+                currentSeries,
                 segments = chart.segments,
                 count = segments.length,
+                seriesCount = series.length,
                 leftSideLabels = [],
                 rightSideLabels = [],
+                seriesWithoutSize = 0,
                 label,
                 segment,
                 sector,
-                i;
+                holeSize,
+                totalSize,
+                size,
+                margin = 0,
+                seriesConfigs = [],
+                seriesIndex,
+                c, i, r, ir = 0;
 
             padding = padding > halfMinWidth - space ? halfMinWidth - space : padding,
             newBox.translate(boxCenter.x - newBoxCenter.x, boxCenter.y - newBoxCenter.y);
+            totalSize = halfMinWidth - padding;
+            c = new Point2D(
+                totalSize + newBox.x1 + padding,
+                totalSize + newBox.y1 + padding
+            );
+
+            for (i = 0; i < seriesCount; i++) {
+                currentSeries = series[i];
+                if (i == 0 && defined(currentSeries.holeSize)) {
+                    holeSize = currentSeries.holeSize;
+                    totalSize -= currentSeries.holeSize;
+                }
+
+                if (defined(currentSeries.size)) {
+                    totalSize -= currentSeries.size;
+                } else {
+                    seriesWithoutSize++;
+                }
+
+                if (defined(currentSeries.margin)) {
+                    totalSize -= currentSeries.margin;
+                } else {
+                    currentSeries.margin = 0;
+                }
+            }
+
+            ir = holeSize || 0;
+
+            for (i = 0; i < seriesCount; i++) {
+                currentSeries = series[i];
+                size = defined(currentSeries.size) ? currentSeries.size : totalSize / seriesWithoutSize;
+                ir += margin;
+                r = ir + size;
+                seriesConfigs.push({ ir: ir, r: r });
+                margin = currentSeries.margin;
+                ir = r;
+            }
 
             for (i = 0; i < count; i++) {
                 segment = segments[i];
-
                 sector = segment.sector;
-                sector.r = halfMinWidth - padding;
-                sector.c = new Point2D(
-                    sector.r + newBox.x1 + padding,
-                    sector.r + newBox.y1 + padding
-                );
+                seriesIndex = segment.seriesIx;
+                seriesConfig = seriesConfigs[seriesIndex];
+                sector.c = c;
+                sector.ir = seriesConfig.ir;
+                sector.r = seriesConfig.r;
 
-                if (segment.explode) {
+                if (seriesIndex == seriesCount - 1 && segment.explode) {
                     sector.c = sector.clone().radius(sector.r * 0.15).point(sector.middle());
                 }
 
@@ -3835,7 +3890,7 @@
 
                 label = segment.label;
                 if (label) {
-                    if (label.options.position === OUTSIDE_END) {
+                    if (label.options.position === OUTSIDE_END && seriesIndex == seriesCount - 1) {
                         if (label.orientation === RIGHT) {
                             rightSideLabels.push(label);
                         } else {
@@ -4936,7 +4991,8 @@
             var plotArea = this,
                 series = plotArea.series;
 
-            plotArea.createPieChart(series);
+            plotArea.createDonutChart(series);
+           // plotArea.createPieChart(series);
         },
 
         createPieChart: function(series) {
@@ -4950,6 +5006,19 @@
                 });
 
             plotArea.appendChart(pieChart);
+        },
+
+        createDonutChart: function(series) {
+            var plotArea = this,
+                firstSeries = series[0],
+                donutChart = new DonutChart(plotArea, {
+                    series: series,
+                    padding: firstSeries.padding,
+                    startAngle: firstSeries.startAngle,
+                    connectors: firstSeries.connectors
+                });
+
+            plotArea.appendChart(donutChart);
         },
 
         addToLegend: function(chart) {

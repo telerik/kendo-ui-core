@@ -448,7 +448,7 @@
                 secondOuterPoint,
                 secondInnerPoint;
 
-            endAngle = (endAngle - startAngle) === 360 ? endAngle - 0.001 : endAngle;
+            endAngle = (endAngle - startAngle) === 360 ? endAngle - 0.002 : endAngle;
             secondOuterPoint = ringConfig.point(endAngle);
             secondInnerPoint = ringConfig.point(endAngle, true);
 
