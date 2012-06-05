@@ -12,27 +12,25 @@ function processClass(theClass) {
     theClass.methods = theClass.getMethods(); // 2
 
     var description = theClass.properties.filter(function(x) { return x._name == "Description"; })[0];
+    var html = "";
+
     if (description) {
-        IO.saveFile(
-            "/tmp",
-            theClass.alias.toLowerCase() + ".description.md",
-            '## Description\n\n' +
-            outputDescription(description.comment).replace(/\r/g, "\n") +
-            "\n\n------------------------------------------\n\n" +
-            '## Configuration\n\n' +
-            outputConfiguration(theClass) +
-            "\n\n------------------------------------------\n\n" +
-            '## Methods\n\n' +
-            outputMethods(theClass).replace(/\r/g, "\n")
-        );
+        html += '## Description\n\n' +
+        outputDescription(description.comment).replace(/\r/g, "\n");
     }
 
-    /*
-    SECTIONS.forEach(function(section) {
-        debugger;
-        console.log(theClass, events, methods);
-    });
-    */
+    html += theClass.alias.toLowerCase() + ".description.md",
+        "\n\n------------------------------------------\n\n" +
+        '## Configuration\n\n' +
+        outputConfiguration(theClass) +
+        "\n\n------------------------------------------\n\n" +
+        '## Methods\n\n' +
+        outputMethods(theClass).replace(/\r/g, "\n") +
+        "\n\n------------------------------------------\n\n" +
+        '## Events\n\n' +
+        outputEvents(theClass).replace(/\r/g, "\n");
+
+    IO.saveFile( "/tmp", html);
 }
 
 function isaClass($) {
@@ -345,6 +343,38 @@ function outputMethods(data) {
                html += "#### Returns \n\n"
                html += "`" + item.type + "` " + item.desc + "\n\n";
            }
+        }
+    }
+
+    return html;
+}
+
+
+function outputEvents(data) {
+     var ownEvents = data.events.filter(function($){return !$.isNamespace}).sort(makeSortby("name"));
+     var html = "";
+
+    if (defined(ownEvents) && ownEvents.length) {
+        for (var i = 0; i < ownEvents.length; i ++) {
+            var member = ownEvents[i];
+            html += "### `" + member.name + "`"
+            html += outputDescription(member.comment)
+            if (member.params.length > 1) {
+
+               html += "#### Event Data \n\n"
+               member.params.forEach(function(item) {
+                   if (item.name === "e") {
+                       return;
+                   }
+
+                   html += "##### " + item.name + " `" + item.type + "`\n\n";
+                   if (item.isOptional) {
+                       html += "_optional, default: " + item.defaultValue + "_\n\n";
+                   }
+
+                   html += toMarkdown(item.desc) + "\n\n";
+               });
+            }
         }
     }
 
