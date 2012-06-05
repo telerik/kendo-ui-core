@@ -836,10 +836,8 @@
     border-bottom: 1px solid rgba(127,127,127,.5);
     margin-bottom: 1px;
     background-clip: padding-box;
-    background: linear-gradient(top, transparent 90%, #777 90%, #777),
-                linear-gradient(top, transparent 90%, #777 90%, #777) transparent;
-    background-position: 0 0, 100% 0;
-    background-repeat: no-repeat;
+    background: linear-gradient(top, transparent 90%, #777 90%, #777) no-repeat 0 0,
+                linear-gradient(top, transparent 90%, #777 90%, #777) transparent no-repeat 100% 0;
     background-size: 1px 100%;
 }
 
@@ -851,10 +849,8 @@
 .km-android input[type=email]:focus,
 .km-android input[type=text]:not(.k-input):focus
 {
-    background: linear-gradient(top, rgba(40,170,220,0) 90%, rgba(40,170,220,.6) 90%, rgba(40,170,220,.6)),
-                linear-gradient(top, rgba(40,170,220,0) 90%, rgba(40,170,220,.6) 90%, rgba(40,170,220,.6)) transparent;
-    background-position: 0 0, 100% 0;
-    background-repeat: no-repeat;
+    background: linear-gradient(top, rgba(40,170,220,0) 90%, rgba(40,170,220,.6) 90%, rgba(40,170,220,.6)) no-repeat 0 0,
+                linear-gradient(top, rgba(40,170,220,0) 90%, rgba(40,170,220,.6) 90%, rgba(40,170,220,.6)) transparent no-repeat 100% 0;
     background-size: 2px 100%;
     margin-bottom: 0;
     border-bottom: 2px solid rgba(40,170,220,.6);
