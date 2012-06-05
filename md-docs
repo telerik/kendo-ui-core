@@ -21,7 +21,7 @@ var params = [
     // constants
     "-D=\"copyright:" + new Date().getFullYear() + "\"",
     "-D=\"title:Kendo UI Documentation\""
-].concat(sourceFiles("src"));
+].concat(sourceFiles("src")).concat(sourceFiles("src/docs/"));
 
 jsDocToolkit.run(params);
 
