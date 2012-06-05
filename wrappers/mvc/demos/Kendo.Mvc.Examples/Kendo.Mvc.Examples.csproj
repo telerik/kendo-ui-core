@@ -130,6 +130,7 @@
     <Compile Include="Controllers\Web\DateTimePicker\TemplateController.cs" />
     <Compile Include="Controllers\Web\DateTimePicker\RangeSelectionController.cs" />
     <Compile Include="Controllers\Web\DropDownList\ApiController.cs" />
+    <Compile Include="Controllers\Web\DropDownList\CascadingDropDownListController.cs" />
     <Compile Include="Controllers\Web\DropDownList\EventsController.cs" />
     <Compile Include="Controllers\Web\DropDownList\TemplateController.cs" />
     <Compile Include="Controllers\Web\DropDownList\RemoteDataSourceController.cs" />
@@ -592,6 +593,9 @@
     <Content Include="Areas\razor\Views\web\editor\api.cshtml" />
     <Content Include="Areas\razor\Views\web\grid\detailtemplate.cshtml" />
     <Content Include="Areas\razor\Views\web\combobox\cascadingcombobox.cshtml" />
+    <Content Include="Areas\aspx\Views\web\dropdownlist\cascadingdropdownlist.aspx" />
+    <Content Include="Areas\aspx\Views\web\combobox\cascadingcombobox.aspx" />
+    <Content Include="Areas\razor\Views\web\dropdownlist\cascadingdropdownlist.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>

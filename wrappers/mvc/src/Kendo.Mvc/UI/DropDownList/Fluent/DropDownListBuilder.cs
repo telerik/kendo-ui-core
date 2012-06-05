@@ -140,5 +140,12 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        public DropDownListBuilder CascadeFrom(string cascadeFrom)
+        {
+            Component.CascadeFrom = cascadeFrom;
+
+            return this;
+        }
     }
 }

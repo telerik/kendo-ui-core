@@ -18,6 +18,12 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        public string CascadeFrom
+        {
+            get;
+            set;
+        }
+
         public string DataValueField
         {
             get;
@@ -58,6 +64,11 @@ namespace Kendo.Mvc.UI
             if (!string.IsNullOrEmpty(OptionLabel))
             {
                 options["optionLabel"] = OptionLabel;
+            }
+
+            if (!string.IsNullOrEmpty(CascadeFrom))
+            {
+                options["cascadeFrom"] = CascadeFrom;
             }
 
             writer.Write(Initializer.Initialize(Id, "DropDownList", options));

@@ -106,7 +106,6 @@
                     "url": "combobox/template.html"
                 },
                 {
-                    "packages": [ "!mvc" ],
                     "text": "Cascading ComboBox",
                     "url": "combobox/cascadingcombobox.html"
                 },
@@ -196,7 +195,6 @@
                     "url": "dropdownlist/template.html"
                 },
                 {
-                    "packages": [ "!mvc" ],
                     "text": "Cascading DropDownList",
                     "url": "dropdownlist/cascadingdropdownlist.html"
                 },
