@@ -3474,7 +3474,7 @@
                 margin: getSpacing(0.5),
                 align: CIRCLE,
                 zIndex: 1,
-                position: OUTSIDE_END
+                position: CENTER
             },
             animation: {
                 type: PIE
@@ -3554,7 +3554,7 @@
                 labelHeight = label.box.height();
                 labelWidth = label.box.width();
                 if (labelsOptions.position == CENTER) {
-                    sector.r = math.abs((sector.r - labelHeight) / 2) + labelHeight;
+                    sector.r -= (sector.r - sector.ir) / 2 ;
                     lp = sector.point(angle);
                     label.reflow(new Box2D(lp.x, lp.y - labelHeight / 2, lp.x, lp.y));
                 } else if (labelsOptions.position == INSIDE_END) {
@@ -3658,7 +3658,7 @@
             return point.owner.formatPointValue(point.value, format);
         }
     });
-    deepExtend(PieSegment.fn, PointEventsMixin);
+    deepExtend(DonutSegment.fn, PointEventsMixin);
 
     var DonutChart = ChartElement.extend({
         init: function(plotArea, options) {
@@ -3694,6 +3694,7 @@
                 startAngle = options.startAngle,
                 colorsCount = colors.length,
                 series = options.series,
+                seriesCount = series.length,
                 dataItems,
                 currentSeries,
                 currentData,
@@ -3704,14 +3705,21 @@
                 value,
                 explode,
                 total,
+                currentAngle,
                 i;
 
-            for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
+            for (seriesIx = 0; seriesIx < seriesCount; seriesIx++) {
                 currentSeries = series[seriesIx];
                 dataItems = currentSeries.dataItems;
                 data = currentSeries.data;
                 total = chart.pointsTotal(data);
                 anglePerValue = 360 / total;
+                currentAngle = startAngle;
+                if (seriesIx != seriesCount - 1) {
+                    if (currentSeries.labels.position == OUTSIDE_END) {
+                        currentSeries.labels.position = CENTER;
+                    }
+                }
 
                 for (i = 0; i < data.length; i++) {
                     currentData = chart.pointData(currentSeries, i);
@@ -3721,7 +3729,7 @@
                     currentSeries.color = currentData.color ?
                         currentData.color : colors[i % colorsCount];
 
-                    callback(value, new Ring(null, 0, 0, startAngle, angle), {
+                    callback(value, new Ring(null, 0, 0, currentAngle, angle), {
                         owner: chart,
                         category: currentData.category || "",
                         categoryIx: i,
@@ -3735,7 +3743,7 @@
                         size: currentData.Size
                     });
 
-                    startAngle += angle;
+                    currentAngle += angle;
                 }
             }
         },
@@ -3891,11 +3899,13 @@
 
                 label = segment.label;
                 if (label) {
-                    if (label.options.position === OUTSIDE_END && seriesIndex == seriesCount - 1) {
-                        if (label.orientation === RIGHT) {
-                            rightSideLabels.push(label);
-                        } else {
-                            leftSideLabels.push(label);
+                    if (label.options.position === OUTSIDE_END) {
+                        if (seriesIndex == seriesCount - 1) {
+                            if (label.orientation === RIGHT) {
+                                rightSideLabels.push(label);
+                            } else {
+                                leftSideLabels.push(label);
+                            }
                         }
                     }
                 }
@@ -3930,7 +3940,8 @@
 
         distanceBetweenLabels: function(labels) {
             var chart = this,
-                segment = chart.segments[0],
+                segments = chart.segments,
+                segment = segments[segments.length - 1],
                 sector = segment.sector,
                 firstBox = labels[0].box,
                 secondBox,
@@ -3988,7 +3999,7 @@
         reflowLabels: function(distances, labels) {
             var chart = this,
                 segments = chart.segments,
-                segment = segments[0],
+                segment = segments[segments.length - 1],
                 sector = segment.sector,
                 labelsCount = labels.length,
                 labelOptions = segment.options.labels,
