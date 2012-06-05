@@ -156,7 +156,9 @@
     </Compile>
     <Compile Include="UI\AutoComplete\AutoComplete.cs" />
     <Compile Include="UI\AutoComplete\Fluent\AutoCompleteBuilder.cs" />
+    <Compile Include="UI\Calendar\CalendarSelectionSettings.cs" />
     <Compile Include="UI\Calendar\Fluent\CalendarEventBuilder.cs" />
+    <Compile Include="UI\Calendar\Fluent\CalendarSelectionSettingsBuilder.cs" />
     <Compile Include="UI\Chart\Axes\ChartAxisLabels.cs" />
     <Compile Include="UI\Chart\Axes\ChartCategoryAxis.cs" />
     <Compile Include="UI\Chart\Axes\ChartAxisBase.cs" />

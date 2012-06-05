@@ -3,24 +3,24 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.Resources;
-    using Kendo.Mvc.UI;
     using System;
     using System.Collections.Generic;
-    using System.Data;
-    using System.Globalization;
     using System.IO;
     using System.Linq;
-    using System.Web;
     using System.Web.Mvc;
-    using System.Web.Query.Dynamic;
-    using System.Web.UI.WebControls;
     
     public class Calendar : ViewComponentBase
     {
-        public Calendar(ViewContext viewContext, IJavaScriptInitializer initializer)
+        private readonly IUrlGenerator urlGenerator;
+
+        public Calendar(ViewContext viewContext, IJavaScriptInitializer initializer, IUrlGenerator urlGenerator)
             : base(viewContext, initializer)
         {
+            this.urlGenerator = urlGenerator;
+
             MonthTemplate = new MonthTemplate();
+
+            SelectionSettings = new CalendarSelectionSettings();
         }
 
         public MonthTemplate MonthTemplate
@@ -70,13 +70,16 @@ namespace Kendo.Mvc.UI
             get;
             set;
         }
+
+        public CalendarSelectionSettings SelectionSettings
+        {
+            get;
+            set;
+        }
         
         public override void WriteInitializationScript(TextWriter writer)
         {
             var options = new Dictionary<string, object>(Events);
-
-            //TODO: urlFormat??
-            //objectWriter.Append("urlFormat", urlFormat);
 
             if (Value.HasValue)
             {
@@ -118,6 +121,18 @@ namespace Kendo.Mvc.UI
             if (month.Keys.Any())
             {
                 options["month"] = month;
+            }
+
+            if (SelectionSettings.Dates.Any())
+            {
+                options["dates"] = SelectionSettings.Dates;
+            }
+
+            var url = SelectionSettings.GenerateUrl(ViewContext, urlGenerator);
+
+            if (url.HasValue())
+            {
+                options["url"] = url;
             }
 
             writer.Write(Initializer.Initialize(Id, "Calendar", options));

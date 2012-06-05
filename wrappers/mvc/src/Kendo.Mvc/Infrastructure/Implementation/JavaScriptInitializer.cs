@@ -64,6 +64,15 @@ namespace Kendo.Mvc.Infrastructure
                     continue;
                 }
 
+                var dates = value as IEnumerable<DateTime>;
+
+                if (dates != null)
+                {
+                    AppendDates(output, dates);
+
+                    continue;
+                }
+
                 var enumerable = value as IEnumerable;
 
                 if (enumerable != null)
@@ -174,6 +183,24 @@ namespace Kendo.Mvc.Infrastructure
             {
                 output.Append(value.InlineCodeBlock(value));
             }
+        }
+
+        private void AppendDates(StringBuilder output, IEnumerable<DateTime> dates)
+        {
+            output.Append("[");
+
+            if (dates.Any())
+            {
+                foreach (var date in dates)
+                {
+                    AppendDate(output, date);
+                    output.Append(",");
+                }
+
+                output.Remove(output.Length - 1, 1);
+            }
+
+            output.Append("]");
         }
 
         private void AppendDate(StringBuilder output, DateTime value)

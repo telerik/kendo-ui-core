@@ -282,7 +282,7 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual CalendarBuilder Calendar()
         {
-            return new CalendarBuilder(new Calendar(ViewContext, Initializer));
+            return new CalendarBuilder(new Calendar(ViewContext, Initializer, UrlGenerator));
         }
 
         /// <summary>

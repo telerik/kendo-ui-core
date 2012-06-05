@@ -93,7 +93,7 @@ namespace Kendo.Mvc.UI
         {
             if (string.IsNullOrWhiteSpace(id))
             {
-                return null;
+                return string.Empty;
             }
             
             StringBuilder builder = new StringBuilder(id.Length);

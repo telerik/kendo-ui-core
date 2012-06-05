@@ -10,7 +10,7 @@ namespace Kendo.Mvc.UI
     {
         private string routeName;
         private string controllerName;
-        private string actionName;        
+        private string actionName;
 
         public CrudOperation()
         {            

@@ -133,6 +133,30 @@ namespace Kendo.Mvc.Infrastructure.Implementation.Tests
         }
 
         [Fact]
+        public void Should_serialize_array_of_dates()
+        {
+            data["dates"] = new List<DateTime> { new DateTime(2000, 1, 1, 1, 1, 1, 1) };
+
+            initializer.Serialize(data).ShouldEqual("{dates:[new Date(2000,0,1,1,1,1,1)]}");
+        }
+
+        [Fact]
+        public void Should_serialize_array_of_dates_without_a_comma_at_the_end()
+        {
+            data["dates"] = new List<DateTime> { new DateTime(2000, 1, 1, 1, 1, 1, 1), new DateTime(2010, 1, 1, 1, 1, 1, 1), new DateTime(2020, 1, 1, 1, 1, 1, 1) };
+
+            initializer.Serialize(data).ShouldEqual("{dates:[new Date(2000,0,1,1,1,1,1),new Date(2010,0,1,1,1,1,1),new Date(2020,0,1,1,1,1,1)]}");
+        }
+
+        [Fact]
+        public void Should_serialize_array_of_dates_as_empty_array()
+        {
+            data["dates"] = new List<DateTime>();
+
+            initializer.Serialize(data).ShouldEqual("{dates:[]}");
+        }
+
+        [Fact]
         public void Should_serialize_null()
         {
             data["foo"] = null;

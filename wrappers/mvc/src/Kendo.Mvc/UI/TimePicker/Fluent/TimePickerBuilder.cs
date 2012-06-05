@@ -89,7 +89,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Binds the TimePicker to a list of DateTime objects.
         /// </summary>
-        /// <param name="dataSource">The data source.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().TimePicker()
@@ -103,7 +102,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TimePickerBuilder BindTo(List<DateTime> dates)
         {
-
             Component.Dates = dates;
 
             return this;

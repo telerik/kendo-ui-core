@@ -1,0 +1,5 @@
+﻿@(Html.Kendo().Calendar()
+      .Name("calendar")
+      .Value(DateTime.Today)
+      .Selection(select => select.Dates(new List<DateTime> { DateTime.Today }).Action("Index", "Home", new { url = "{0}" }))  
+)
