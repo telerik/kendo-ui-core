@@ -89,6 +89,7 @@
          *      "unlink",
          *      "insertImage",
          *      "insertHtml",
+         *      "viewHtml",
          *      {
          *          name: "customTool",
          *          tooltip: "Custom Tool",
