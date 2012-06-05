@@ -100,6 +100,7 @@ var suiteScripts = {
         "kendo.mobile.loader.js",
         "kendo.mobile.scroller.js",
         "kendo.mobile.shim.js",
+        "kendo.mobile.modalview.js",
         "kendo.mobile.view.js",
         "kendo.mobile.splitview.js",
         "kendo.mobile.pane.js",
