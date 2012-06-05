@@ -234,7 +234,12 @@
           * $("#calendar").kendoCalendar({
           *     depth: "year"
           * });
-          * @option {Function} [footer] <> Template to be used for rendering the footer. If false, the footer will not be rendered.
+          * @option {Array} [dates] <> Specifies a list of dates, which will be passed to the month template.
+          *  _example
+          * $("#calendar").kendoCalendar({
+          *     dates: [new Date(2000, 10, 10, 10, 0, 0), new Date(2000, 10, 10, 30, 0)] //can manipulate month template depending on this array.
+          * });
+          * @option {String} [footer] <> Template to be used for rendering the footer. If false, the footer will not be rendered.
           * _example
           *
           *  //calendar intialization
@@ -244,7 +249,7 @@
           *      });
           *  &lt;/script&gt;
           * @option {Object} [month] <> Templates for the cells rendered in the "month" view.
-          * @option {Function} [month.content] <> Template to be used for rendering the cells in the "month" view, which are in range.
+          * @option {String} [month.content] <> Template to be used for rendering the cells in the "month" view, which are in range.
           * _example
           *  //template
           *  &lt;script id="cellTemplate" type="text/x-kendo-tmpl"&gt;
@@ -261,7 +266,7 @@
           *          }
           *      });
           *  &lt;/script&gt;
-          * @option {Function} [month.empty] <> Template to be used for rendering the cells in the "month" view, which are not in the min/max range.
+          * @option {String} [month.empty] <> Template to be used for rendering the cells in the "month" view, which are not in the min/max range.
           */
         init: function(element, options) {
             var that = this, value;
@@ -300,6 +305,8 @@
             value: null,
             min: new DATE(1900, 0, 1),
             max: new DATE(2099, 11, 31),
+            dates: [],
+            url: "",
             footer : '#= kendo.toString(data,"D") #',
             format : "",
             month : {},
@@ -527,7 +534,10 @@
                 that._table = to = $(currentView.content(extend({
                     min: min,
                     max: max,
-                    date: value
+                    date: value,
+                    url: options.url,
+                    dates: options.dates,
+                    format: options.format
                 }, that[currentView.name])));
 
                 makeUnselectable(to);
@@ -882,7 +892,7 @@
                 empty = month.empty;
 
             that.month = {
-                content: template('<td#=data.cssClass#><a class="k-link" href="\\#" ' + kendo.attr("value") + '="#=data.dateString#" title="#=data.title#">' + (content || "#=data.value#") + '</a></td>', { useWithBlock: !!content }),
+                content: template('<td#=data.cssClass#><a class="k-link#=data.linkClass#" href="#=data.url#" ' + kendo.attr("value") + '="#=data.dateString#" title="#=data.title#">' + (content || "#=data.value#") + '</a></td>', { useWithBlock: !!content }),
                 empty: template("<td>" + (empty || "&nbsp;") + "</td>", { useWithBlock: !!empty })
             };
 
@@ -932,6 +942,10 @@
                 min = options.min,
                 max = options.max,
                 date = options.date,
+                dates = options.dates,
+                format = options.format,
+                urlNavigate = options.url,
+                hasUrl = urlNavigate && dates[0],
                 currentCalendar = kendo.culture().calendar,
                 firstDayIdx = currentCalendar.firstDay,
                 days = currentCalendar.days,
@@ -962,7 +976,9 @@
                     setter: that.setDate,
                     build: function(date, idx) {
                         var cssClass = [],
-                        day = date.getDay();
+                            day = date.getDay(),
+                            linkClass = "",
+                            url = "#";
 
                         if (date < firstDayOfMonth || date > lastDayOfMonth) {
                             cssClass.push(OTHERMONTH);
@@ -976,13 +992,21 @@
                             cssClass.push("k-weekend");
                         }
 
+                        if (hasUrl && inArray(+date, dates)) {
+                            url = urlNavigate.replace("{0}", kendo.toString(date, format));
+                            linkClass = " k-action-link";
+                        }
+
                         return {
                             date: date,
+                            dates: dates,
                             ns: kendo.ns,
                             title: kendo.toString(date, "D"),
                             value: date.getDate(),
                             dateString: toDateString(date),
-                            cssClass: cssClass[0] ? ' class="' + cssClass.join(" ") + '"' : ""
+                            cssClass: cssClass[0] ? ' class="' + cssClass.join(" ") + '"' : "",
+                            linkClass: linkClass,
+                            url: url
                         };
                     }
                 });
@@ -1295,6 +1319,15 @@
         if (isIE8) {
             element.find("*").attr("unselectable", "on");
         }
+    }
+
+    function inArray(date, dates) {
+        for(var i = 0, length = dates.length; i < length; i++) {
+            if (date === +dates[i]) {
+                return true;
+            }
+        }
+        return false;
     }
 
     calendar.makeUnselectable =  makeUnselectable;

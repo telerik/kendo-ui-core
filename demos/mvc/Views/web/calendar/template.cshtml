@@ -23,9 +23,10 @@
 
                     $("#calendar").kendoCalendar({
                         value: today,
+                        dates: birthdays,
                         month: {
                             // template for dates in month view
-                            content: '# if ($.inArray(+data.date, [' + birthdays + ']) != -1) { #' +
+                            content: '# if ($.inArray(+data.date, data.dates) != -1) { #' +
                                         '<div class="' +
                                            '# if (data.value < 10) { #' +
                                                "exhibition" +

@@ -364,6 +364,43 @@
                 equal(cell.length, 12);
             });
 
+            test("month view passes dates array", function() {
+                var today = new Date(2011, 9, 10),
+                    dates = [today];
+
+                div.html(calendar.views[0].content({
+                    date: today,
+                    dates: dates,
+                    empty: template.empty,
+                    min: new Date(1900,0,1),
+                    max: new Date(2900,0,1),
+                    content: function(data) {
+                        equal(data.dates, dates);
+                    }
+                }));
+            });
+
+            test("month view renders URL if current date is in dates", function() {
+                var today = new Date(2011, 9, 10),
+                    dates = [today];
+
+                div.html(calendar.views[0].content({
+                    url: "/home/index?url={0}",
+                    date: today,
+                    dates: dates,
+                    format: "MM/dd/yyyy",
+                    empty: template.empty,
+                    min: new Date(1900,0,1),
+                    max: new Date(2900,0,1),
+                    content: template.content
+                }));
+
+                var a = div.find("a[href*=home]");
+
+                ok(a[0]);
+                equal(a.attr("href"), "/home/index?url=10/10/2011");
+            });
+
             test("year view renders title", function() {
                 var today = new Date(2011, 9, 10);
 
