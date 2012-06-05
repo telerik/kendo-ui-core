@@ -276,6 +276,8 @@
             element = that.wrapper = that.element;
             options = that.options;
 
+            options.url = unescape(options.url);
+
             element.addClass("k-widget k-calendar");
 
             that._templates();
