@@ -248,6 +248,7 @@ html body .k-button-bare
 .k-search { background-position: -32px -240px; }
 .k-custom { background-position: -115px -113px; }
 .k-editor .k-custom { background-position: -112px -110px; }
+.k-viewHtml { background-position: -112px -132px; }
 
 .k-insert-top { background-position: -160px -32px; }
 .k-insert-middle { background-position: -160px -48px; }
@@ -2397,6 +2398,11 @@ span.k-numerictextbox
     border: 0;
     margin: 0;
     padding: 0;
+}
+
+.k-editor .k-raw-content,
+.k-editor-dialog .k-editor-textarea
+{
     font-size: inherit;
     font-family: consolas, "courier new", monospace;
 }
@@ -2474,6 +2480,16 @@ span.k-numerictextbox
 .k-editor-dialog .k-button-wrapper button
 {
     vertical-align: baseline;
+}
+
+.k-editor-dialog .k-editor-textarea
+{
+    width: 600px;
+    height: 350px;
+    padding: .2em .2em .2em .4em;
+    border-width: 1px;
+    border-style: solid;
+    overflow: auto;
 }
 
 .k-button-wrapper .k-link:hover {

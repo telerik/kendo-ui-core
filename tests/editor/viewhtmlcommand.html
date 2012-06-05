@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>ViewHtml command tests</title>
+
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.combobox.js"></script>
+        <script src="../../src/kendo.dropdownlist.js"></script>
+        <script src="../../src/kendo.window.js"></script>
+        <script src="../../src/kendo.editor.js"></script>
+        <script src="util.js"></script>
+
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+        <link rel="stylesheet" href="../../styles/web/kendo.common.css" />
+
+        <style> html { font-size: 12px; } </style>
+    </head>
+    <body>
+
+        <div><textarea cols="20" rows="4" id="editor" name="EditorEncodeFalse"></textarea></div>
+
+        <script>
+            var editor,
+                command;
+
+            $("#editor").kendoEditor();
+
+            module("ViewHtml command tests", {
+                setup: function() {
+                    editor = getEditor("#editor");
+                },
+                teardown: function() {
+                    $(".k-window,.k-overlay").remove()
+                }
+            });
+
+            function createViewHtmlCommand() {
+                command = new kendo.ui.editor.ViewHtmlCommand({ range: editor.getRange() });
+
+                command.editor = editor;
+
+                command.exec();
+            }
+
+            test("textarea shows editor content", function() {
+                var html = "<strong>foo</strong>";
+
+                editor.value(html);
+
+                createViewHtmlCommand();
+
+                equal($(".k-window textarea").val(), html);
+            });
+
+            test("textarea applies basic formatting for paragraphs", function() {
+                editor.value("<p>foo</p><p>bar</p>");
+
+                createViewHtmlCommand();
+
+                equal($(".k-window textarea").val(), "<p>foo</p>\n<p>bar</p>");
+            });
+
+            test("textarea applies basic formatting for lists", function() {
+                editor.value("<ul><li>foo</li><li>bar</li></ul>");
+
+                createViewHtmlCommand();
+
+                equal($(".k-window textarea").val(), "<ul>\n<li>foo</li>\n<li>bar</li>\n</ul>");
+            });
+
+            test("update button sets the editor content", function() {
+                var html = "<strong>bar</strong>";
+
+                editor.value("<p>foo</p>");
+
+                createViewHtmlCommand();
+
+                $(".k-window textarea").val(html);
+
+                $(".k-dialog-update").click();
+
+                equal(editor.value(), html);
+            });
+
+            test("cancel button does not modify the editor content", function() {
+                var initialHtml = "<p>foo</p>";
+
+                editor.value(initialHtml);
+
+                createViewHtmlCommand();
+
+                $(".k-window textarea").val("<strong>bar</strong>");
+
+                $(".k-dialog-cancel").click();
+
+                equal(editor.value(), initialHtml);
+            });
+        </script>
+
+        <h1 id="qunit-header">ViewHtml command tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
