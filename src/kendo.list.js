@@ -643,57 +643,89 @@
 
         _cascade: function() {
             var that = this,
-                cascade = that.options.cascadeFrom,
-                parent, select, valueField, deactivate, changeHandler;
+                options = that.options,
+                cascade = options.cascadeFrom,
+                parent, select, valueField,
+                deactivate, change, dataSource;
 
             if (cascade) {
-                parent = $("#" + cascade).data("kendo" + that.options.name);
-                if (parent) {
-                    valueField = parent.options.dataValueField;
-                    deactivate = function() {
-                        that.value("");
-                        that.enable(false);
-                    };
-                    changeHandler = function() {
-                        var value = that.value();
-                        if (value) {
-                            that.value(value);
-                            if (that.selectedIndex == -1) {
-                                that.value("");
-                            }
-                        } else {
-                            that.select(that.options.index);
-                        }
-                        that.trigger(SELECTED);
-                        that.enable();
-                    };
-                    select = function(dataItem) {
-                        var filterValue = dataItem ? parent._value(dataItem) : null;
-                        if (filterValue) {
-                            //TODO: preserve filters
-                            that.dataSource
-                                .one(CHANGE, changeHandler)
-                                .filter({
-                                    field: valueField,
-                                    operator: "eq",
-                                    value: filterValue
-                                });
-                        } else {
-                            deactivate();
-                        }
-                    };
+                parent = $("#" + cascade).data("kendo" + options.name);
 
-                    parent.bind("cascade", deactivate)
-                          .bind(CHANGE, function() {
-                              select(parent.dataItem());
-                              that.trigger("cascade");
-                          })
-                          .one(SELECTED, function() {
-                              select(parent.dataItem());
-                          });
+                if (!parent) {
+                    return;
                 }
+
+                dataSource = that.dataSource;
+                valueField = parent.options.dataValueField;
+                deactivate = function() {
+                    that.value("");
+                    that.enable(false);
+                };
+                change = function() {
+                    var value = that.value();
+                    if (value) {
+                        that.value(value);
+                        if (that.selectedIndex == -1) {
+                            that.value("");
+                        }
+                    } else {
+                        that.select(options.index);
+                    }
+                    that.trigger(SELECTED);
+                    that.enable();
+                };
+                select = function() {
+                    var dataItem = parent.dataItem(),
+                        filterValue = dataItem ? parent._value(dataItem) : null,
+                        expressions, filters;
+
+                    if (filterValue) {
+                        expressions = dataSource.filter() || {};
+                        removeFiltersForField(expressions, valueField);
+                        filters = expressions.filters || [];
+
+                        filters.push({
+                            field: valueField,
+                            operator: "eq",
+                            value: filterValue
+                        });
+
+                        dataSource
+                            .one(CHANGE, change)
+                            .filter(filters);
+
+                    } else {
+                        deactivate();
+                    }
+                };
+
+                parent.bind("cascade", deactivate)
+                      .bind(CHANGE, function() {
+                          select();
+                          that.trigger("cascade");
+                      })
+                      .one(SELECTED, function() {
+                          select();
+                      });
+
+                select();
             }
         }
     });
+
+    function removeFiltersForField(expression, field) {
+        if (expression.filters) {
+            expression.filters = $.grep(expression.filters, function(filter) {
+                removeFiltersForField(filter, field);
+                if (filter.filters) {
+                    return filter.filters.length;
+                } else {
+                    return filter.field != field;
+                }
+            });
+        }
+    }
+
+    ui.Select.removeFiltersForField = removeFiltersForField;
 
 })(jQuery);

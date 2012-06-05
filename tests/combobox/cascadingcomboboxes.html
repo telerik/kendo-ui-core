@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Cascading ComboBoxes</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.combobox.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">ComboBox Initialization</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            kendo.ns = "kendo-";
+            var ComboBox = kendo.ui.ComboBox,
+                parent, child;
+
+            function destroy(input) {
+                var cb = input.data("kendoComboBox");
+
+                if (cb) {
+                    if (cb.popup.element.parent().hasClass("k-animation-container")) {
+                        cb.popup.element.parent().remove();
+                    } else {
+                        cb.popup.element.remove();
+                    }
+                }
+
+                input.closest(".k-widget").remove();
+            }
+
+            module("kendo.ui.ComboBox Cascading ComboBoxes", {
+                setup: function() {
+                    parent = $("<input id='parent' />").appendTo(document.body);
+                    child = $("<input />").appendTo(document.body);
+                },
+                teardown: function() {
+                    destroy(parent);
+                    destroy(child);
+               }
+            });
+
+            test("Parent filter child on change", function() {
+                parent.kendoComboBox({
+                    dataTextField: "parentID",
+                    dataValueField: "parentID",
+                    dataSource: [
+                        { parentID: 1 },
+                        { parentID: 2 }
+                    ]
+                });
+
+                child.kendoComboBox({
+                    cascadeFrom: "parent", //id of the parent
+                    dataTextField: "childID",
+                    dataValueField: "childID",
+                    dataSource: [
+                        { parentID: 1, childID: "1" },
+                        { parentID: 2, childID: "2" },
+                        { parentID: 1, childID: "3" },
+                        { parentID: 2, childID: "4" }
+                    ]
+                });
+
+                var parentCB = parent.data("kendoComboBox"),
+                    childCB = child.data("kendoComboBox"),
+                    ds = childCB.dataSource;
+
+                parentCB.select(0);
+                parentCB.trigger("change");
+
+
+                equal(ds.view().length, 2);
+                equal(ds.view()[0].parentID, 1);
+                equal(ds.view()[1].parentID, 1);
+            });
+
+            test("Parent with empty value deactivates child", function() {
+                parent.kendoComboBox({
+                    dataTextField: "parentID",
+                    dataValueField: "parentID",
+                    dataSource: [
+                        { parentID: 1 },
+                        { parentID: 2 }
+                    ]
+                });
+
+                child.kendoComboBox({
+                    cascadeFrom: "parent", //id of the parent
+                    dataTextField: "childID",
+                    dataValueField: "childID",
+                    dataSource: [
+                        { parentID: 1, childID: "1" },
+                        { parentID: 2, childID: "2" },
+                        { parentID: 1, childID: "3" },
+                        { parentID: 2, childID: "4" }
+                    ]
+                });
+
+                var parentCB = parent.data("kendoComboBox"),
+                    childCB = child.data("kendoComboBox"),
+                    ds = childCB.dataSource;
+
+                parentCB.select(0);
+                parentCB.trigger("change");
+                childCB.select(0);
+
+                //clear parent
+                parentCB.select(-1);
+                parentCB.trigger("change");
+
+                equal(childCB.selectedIndex, -1);
+                equal(childCB.element.attr("disabled"), "disabled");
+            });
+
+            test("Parent with custom value deactivates child", function() {
+                parent.kendoComboBox({
+                    dataTextField: "parentID",
+                    dataValueField: "parentID",
+                    dataSource: [
+                        { parentID: 1 },
+                        { parentID: 2 }
+                    ]
+                });
+
+                child.kendoComboBox({
+                    cascadeFrom: "parent", //id of the parent
+                    dataTextField: "childID",
+                    dataValueField: "childID",
+                    dataSource: [
+                        { parentID: 1, childID: "1" },
+                        { parentID: 2, childID: "2" },
+                        { parentID: 1, childID: "3" },
+                        { parentID: 2, childID: "4" }
+                    ]
+                });
+
+                var parentCB = parent.data("kendoComboBox"),
+                    childCB = child.data("kendoComboBox"),
+                    ds = childCB.dataSource;
+
+                parentCB.select(0);
+                parentCB.trigger("change");
+                childCB.select(0);
+
+                parentCB.value("custom");
+                parentCB.trigger("change");
+
+                equal(childCB.selectedIndex, -1);
+                equal(childCB.element.attr("disabled"), "disabled");
+            });
+
+            test("Child clear selection if not items left after filtering", function() {
+                parent.kendoComboBox({
+                    dataTextField: "parentID",
+                    dataValueField: "parentID",
+                    dataSource: [
+                        { parentID: 1 },
+                        { parentID: 2 },
+                        { parentID: 3 }
+                    ]
+                });
+
+                child.kendoComboBox({
+                    cascadeFrom: "parent", //id of the parent
+                    dataTextField: "childID",
+                    dataValueField: "childID",
+                    dataSource: [
+                        { parentID: 1, childID: "1" },
+                        { parentID: 2, childID: "2" },
+                        { parentID: 1, childID: "3" },
+                        { parentID: 2, childID: "4" }
+                    ]
+                });
+
+                var parentCB = parent.data("kendoComboBox"),
+                    childCB = child.data("kendoComboBox"),
+                    ds = childCB.dataSource;
+
+                parentCB.value(3);
+                parentCB.trigger("change");
+
+                equal(childCB.selectedIndex, -1);
+                equal(childCB.value(), "");
+                notEqual(childCB.element.attr("disabled"), "disabled");
+            });
+
+            test("Use index if no value", function() {
+                parent.kendoComboBox({
+                    dataTextField: "parentID",
+                    dataValueField: "parentID",
+                    dataSource: [
+                        { parentID: 1 },
+                        { parentID: 2 },
+                        { parentID: 3 }
+                    ]
+                });
+
+                child.kendoComboBox({
+                    cascadeFrom: "parent", //id of the parent
+                    index: 0,
+                    dataTextField: "childID",
+                    dataValueField: "childID",
+                    dataSource: [
+                        { parentID: 1, childID: "1" },
+                        { parentID: 2, childID: "2" },
+                        { parentID: 1, childID: "3" },
+                        { parentID: 2, childID: "4" }
+                    ]
+                });
+
+                var parentCB = parent.data("kendoComboBox"),
+                    childCB = child.data("kendoComboBox"),
+                    ds = childCB.dataSource;
+
+                parentCB.select(0);
+                parentCB.trigger("change");
+
+                equal(childCB.selectedIndex, 0);
+            });
+
+            test("Use index if no value", function() {
+                parent.kendoComboBox({
+                    dataTextField: "parentID",
+                    dataValueField: "parentID",
+                    dataSource: [
+                        { parentID: 1 },
+                        { parentID: 2 },
+                        { parentID: 3 }
+                    ]
+                });
+
+                child.kendoComboBox({
+                    cascadeFrom: "parent", //id of the parent
+                    index: 0,
+                    dataTextField: "childID",
+                    dataValueField: "childID",
+                    dataSource: [
+                        { parentID: 1, childID: "1" },
+                        { parentID: 2, childID: "2" },
+                        { parentID: 1, childID: "3" },
+                        { parentID: 2, childID: "4" }
+                    ]
+                });
+
+                var parentCB = parent.data("kendoComboBox"),
+                    childCB = child.data("kendoComboBox"),
+                    ds = childCB.dataSource;
+
+                parentCB.select(0);
+                parentCB.trigger("change");
+
+                equal(childCB.selectedIndex, 0);
+            });
+
+            test("Parent selects element in child on load", function() {
+                parent.kendoComboBox({
+                    dataTextField: "parentID",
+                    dataValueField: "parentID",
+                    dataSource: [
+                        { parentID: 1 },
+                        { parentID: 2 },
+                        { parentID: 3 }
+                    ],
+                    index: 0
+                });
+
+                child.kendoComboBox({
+                    cascadeFrom: "parent", //id of the parent
+                    dataTextField: "childID",
+                    dataValueField: "childID",
+                    dataSource: [
+                        { parentID: 1, childID: "1" },
+                        { parentID: 2, childID: "2" },
+                        { parentID: 1, childID: "3" },
+                        { parentID: 2, childID: "4" }
+                    ]
+                });
+
+                var parentCB = parent.data("kendoComboBox"),
+                    childCB = child.data("kendoComboBox"),
+                    ds = childCB.dataSource;
+
+                equal(ds.view().length, 2);
+                equal(ds.view()[0].parentID, 1);
+                equal(ds.view()[1].parentID, 1);
+            });
+
+            test("Parent with autoBind:false selects element in the child combo", function() {
+                parent.kendoComboBox({
+                    dataTextField: "parentID",
+                    dataValueField: "parentID",
+                    dataSource: [
+                        { parentID: 1 },
+                        { parentID: 2 },
+                        { parentID: 3 }
+                    ],
+                    autoBind: false,
+                    index: 0
+                });
+
+                child.kendoComboBox({
+                    cascadeFrom: "parent", //id of the parent
+                    dataTextField: "childID",
+                    dataValueField: "childID",
+                    dataSource: [
+                        { parentID: 1, childID: "1" },
+                        { parentID: 2, childID: "2" },
+                        { parentID: 1, childID: "3" },
+                        { parentID: 2, childID: "4" }
+                    ]
+                });
+
+                var parentCB = parent.data("kendoComboBox"),
+                    childCB = child.data("kendoComboBox"),
+                    ds = childCB.dataSource;
+
+                parentCB.open();
+
+                equal(ds.view().length, 2);
+                equal(ds.view()[0].parentID, 1);
+                equal(ds.view()[1].parentID, 1);
+            });
+
+            test("Child on third level is disabled", function() {
+                parent.kendoComboBox({
+                    dataTextField: "parentID",
+                    dataValueField: "parentID",
+                    dataSource: [
+                        { parentID: 1 },
+                        { parentID: 2 },
+                        { parentID: 3 }
+                    ]
+                });
+
+                child.attr("id", "child").kendoComboBox({
+                    cascadeFrom: "parent", //id of the parent
+                    dataTextField: "childID",
+                    dataValueField: "childID",
+                    dataSource: [
+                        { parentID: 1, childID: "1" },
+                        { parentID: 2, childID: "2" },
+                        { parentID: 1, childID: "3" },
+                        { parentID: 2, childID: "4" }
+                    ]
+                });
+
+                var third = $("<input/>").appendTo(document.body).kendoComboBox({
+                    cascadeFrom: "child", //id of the child
+                    dataTextField: "childID",
+                    dataValueField: "childID",
+                    dataSource: [
+                        { parentID: 1, childID: "1" },
+                        { parentID: 2, childID: "2" },
+                        { parentID: 1, childID: "3" },
+                        { parentID: 2, childID: "4" }
+                    ]
+                }).data("kendoComboBox");
+
+                var parentCB = parent.data("kendoComboBox"),
+                    childCB = child.data("kendoComboBox");
+
+                equal(third.value(), "");
+                equal(third.element.attr("disabled"), "disabled");
+
+                third.popup.element.remove();
+                third.element.closest(".k-widget").remove();
+            });
+
+            test("Preserve filter expressions of the child combo", function() {
+                parent.kendoComboBox({
+                    dataTextField: "parentID",
+                    dataValueField: "parentID",
+                    dataSource: [
+                        { parentID: 1 },
+                        { parentID: 2 },
+                        { parentID: 3 }
+                    ]
+                });
+
+                child.kendoComboBox({
+                    cascadeFrom: "parent", //id of the parent
+                    dataTextField: "childID",
+                    dataValueField: "childID",
+                    dataSource: {
+                        data: [
+                            { parentID: 1, childID: "1", id: 1 },
+                            { parentID: 2, childID: "2", id: 1 },
+                            { parentID: 1, childID: "3", id: 3 },
+                            { parentID: 2, childID: "4", id: 1 }
+                        ],
+                        filter: {
+                            field: "id",
+                            operator: "eq",
+                            value: 1
+                        }
+                    }
+                });
+
+                var parentCB = parent.data("kendoComboBox"),
+                    childCB = child.data("kendoComboBox"),
+                    ds = childCB.dataSource;
+
+                parentCB.select(0);
+                parentCB.trigger("change");
+
+                equal(ds.view().length, 1);
+                equal(ds.view()[0].parentID, 1);
+                equal(ds.view()[0].childID, "1");
+                equal(ds.view()[0].id, 1);
+            });
+      </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

@@ -153,6 +153,7 @@
         Select = ui.Select,
         support = kendo.support,
         placeholderSupported = support.placeholder,
+        removeFiltersForField = Select.removeFiltersForField,
         keys = kendo.keys,
         CLICK = support.touch ? "touchend" : "click",
         ATTRIBUTE = "disabled",
@@ -1186,19 +1187,6 @@
                                   .show();
         }
     });
-
-    function removeFiltersForField(expression, field) {
-        if (expression.filters) {
-            expression.filters = $.grep(expression.filters, function(filter) {
-                removeFiltersForField(filter, field);
-                if (filter.filters) {
-                    return filter.filters.length;
-                } else {
-                    return filter.field != field;
-                }
-            });
-        }
-    }
 
     ui.plugin(ComboBox);
 })(jQuery);

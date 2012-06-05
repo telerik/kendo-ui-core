@@ -32,6 +32,10 @@ tests.push(
         title: "combobox mvvm"
     },
     {
+        page: "combobox/cascadingcomboboxes.html",
+        title: "cascading comboboxes"
+    },
+    {
         page: "combobox/lint.html",
         title: "combobox lint"
     }
