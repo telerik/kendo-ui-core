@@ -2492,12 +2492,44 @@
         return data;
     }
 
+    var Node = Model.define({
+        init: function(value) {
+            var that = this,
+                data = {},
+                children = {};
+
+            kendo.data.Model.fn.init.call(that, value);
+
+            data[that.idField] = that.id;
+
+            children = extend(true, {}, that.children, {
+                data: value
+            });
+
+            that.children = new HierarchicalDataSource(children);
+            that.children.bind("change", function(){
+               that.trigger("change");
+            });
+        },
+        shouldSerialize: function(field) {
+            return Model.fn.shouldSerialize.call(this, field) && field !== "children";
+        }
+    });
+
+    var HierarchicalDataSource = DataSource.extend({
+        init: function(options) {
+            DataSource.fn.init.call(this, extend(true, {}, { schema: { modelBase: Node, model: Node } }, options));
+        }
+    });
+
     extend(true, kendo.data, /** @lends kendo.data */ {
         readers: {
             json: DataReader
         },
         Query: Query,
         DataSource: DataSource,
+        HierarchicalDataSource: HierarchicalDataSource,
+        Node: Node,
         ObservableObject: ObservableObject,
         ObservableArray: ObservableArray,
         LocalTransport: LocalTransport,

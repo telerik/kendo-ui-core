@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>HierarchicalDataSource tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">HierarchicalDataSource tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var Node = kendo.data.Node;
+            var HierarchicalDataSource = kendo.data.HierarchicalDataSource;
+
+            function categories() {
+                return new HierarchicalDataSource({
+                    schema: {
+                        model: {
+                            children: {
+                                schema: {
+                                    data: "products"
+                                }
+                            }
+                        }
+                    },
+                    data: [ {
+                            categoryName: "Category 1",
+                            products: [
+                                { productName: "Product 1" }
+                            ]
+                        }]
+                });
+            }
+
+            test("Node inherits from Model", function() {
+                var node = new Node({});
+
+                ok(node instanceof kendo.data.Model);
+            });
+
+            test("HierarchicalDataSource contains objects of Node type", function() {
+                var dataSource = new HierarchicalDataSource( {
+                    data: [{}]
+                });
+
+                dataSource.read();
+
+                ok(dataSource.data()[0] instanceof Node);
+            });
+
+            test("the children field of a node is a HierarchicalDataSource", function() {
+                var dataSource = new HierarchicalDataSource( {
+                    data: [{}]
+                });
+
+                dataSource.read();
+
+                var root = dataSource.data()[0];
+
+                ok(root.children instanceof HierarchicalDataSource);
+            });
+
+            test("heterogeneous data source from local data", function() {
+                var dataSource = categories();
+
+                dataSource.read();
+                dataSource.data()[0].children.read();
+
+                equal(dataSource.data()[0].children.data()[0].productName, "Product 1");
+            });
+
+            test("changes of the children are propagated to the parent data source", 1, function() {
+                var dataSource = categories();
+
+                dataSource.read();
+
+                var parent = dataSource.data()[0];
+                parent.children.read();
+                dataSource.bind("change", function() {
+                    ok(true, "Change was raised");
+                });
+
+                parent.children.add({ productName: "Product 2" });
+            });
+
+            test("the event argument contains the node whose data source changed", function() {
+            });
+        </script>
+    </body>
+</html>
