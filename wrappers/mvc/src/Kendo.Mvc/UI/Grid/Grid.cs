@@ -708,8 +708,8 @@ namespace Kendo.Mvc.UI
             options["dataSource"] = DataSource.ToJson();
 
             if (HasDetailTemplate)
-            { 
-                options["detailTemplate"] = DetailTemplate.Serialize();
+            {
+                options["detailTemplate"] = new ClientEvent { HandlerName = String.Format("kendo.template($('\\#{0}').html())", DetailTemplate.ClientTemplate) };
             }
 
             if (Navigatable.Enabled)

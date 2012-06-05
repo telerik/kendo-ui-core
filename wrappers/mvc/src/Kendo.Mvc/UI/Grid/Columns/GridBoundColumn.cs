@@ -220,12 +220,13 @@ namespace Kendo.Mvc.UI
 
             if (Grid.IsSelfInitialized && editorHtml != null)
             {
-                editorHtml = editorHtml.Replace("<", "%3c").Replace(">", "%3e");
+                //editorHtml = editorHtml.Replace("<", "%3c").Replace(">", "%3e");
+                editorHtml = editorHtml.Trim();
             }           
             
             if (!Grid.DataSource.IsReadOnly(Member) && Grid.Editing.Enabled && Grid.IsClientBinding)
-            {               
-                json["editor"] = editorHtml;
+            {
+                json["editor"] = editorHtml;// System.Web.HttpUtility.JavaScriptStringEncode(editorHtml, false);
             }
 
             if (ClientGroupHeaderTemplate.HasValue())
