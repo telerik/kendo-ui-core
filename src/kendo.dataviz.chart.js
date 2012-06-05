@@ -1144,9 +1144,9 @@
 
             options = axis.applyDefaults(options);
 
-            CategoryAxis.fn.init.call(axis, options);
+            axis.groupCategories(options);
 
-            axis.groupCategories();
+            CategoryAxis.fn.init.call(axis, options);
         },
 
         options: {
@@ -1185,27 +1185,46 @@
             }, options);
         },
 
-        groupCategories: function() {
-            var chart = this,
-                options = chart.options,
+        groupCategories: function(options) {
+            var axis = this,
                 categories = options.categories,
                 baseUnit = options.baseUnit,
                 min = toTime(options.min),
                 max = toTime(options.max),
-                firstCategory = toTime(categories[0]),
-                lastCategory = toTime(last(categories)),
-                start = floorDate(min || firstCategory, baseUnit),
-                end = ceilDate(max || lastCategory, baseUnit),
+                minCategory = toTime(sparseArrayMin(categories)),
+                maxCategory = toTime(sparseArrayMax(categories)),
+                start = floorDate(min || minCategory, baseUnit),
+                end = ceilDate((max || maxCategory) + 1, baseUnit),
                 date,
-                groups = [];
+                nextDate,
+                groups = [],
+                categoryMap = [],
+                categoryIndicies,
+                categoryIx,
+                categoryDate;
 
-            for (date = start; date <= end; date = addDuration(date, 1, baseUnit)) {
+            for (date = start; date < end; date = nextDate) {
                 groups.push(date);
+                nextDate = addDuration(date, 1, baseUnit);
+
+                categoryIndicies = [];
+                for (categoryIx = 0; categoryIx < categories.length; categoryIx++) {
+                    categoryDate = toDate(categories[categoryIx]);
+                    if (categoryDate && categoryDate >= date && categoryDate < nextDate) {
+                        categoryIndicies.push(categoryIx);
+                    }
+                }
+
+                categoryMap.push(categoryIndicies);
             }
+
+            // TODO: Don't render undefined values in bar charts
+            // TODO: Reverse
 
             options.min = groups[0];
             options.max = last(groups);
             options.categories = groups;
+            axis.categoryMap = categoryMap;
         }
     });
 
@@ -3918,14 +3937,10 @@
 
         render: function() {
             var plotArea = this,
-                options = plotArea.options,
                 series = plotArea.series;
 
             plotArea.createCategoryAxis();
-
-            if (options.categoryAxis.type == "Date") {
-                plotArea.aggregateDateSeries();
-            }
+            plotArea.aggregateDateSeries();
 
             series = plotArea.series;
             plotArea.createAreaChart(grep(series, function(s) {
@@ -3947,124 +3962,46 @@
             var plotArea = this,
                 options = plotArea.options,
                 series = plotArea.series,
-                categories = options.categoryAxis.categories || [],
-                baseUnit = options.categoryAxis.baseUnit,
+                categoryAxis = plotArea.categoryAxis,
+                categories = categoryAxis.options.categories,
+                categoryMap = categoryAxis.categoryMap,
+                groupIx,
+                categoryIndicies,
+                seriesIx,
+                data,
+                rawValues,
+                i,
                 categoryIx,
-                count = categoriesCount(series),
-                currentCategory,
-                lastCategory,
-                minInterval = MAX_VALUE;
+                value;
 
-            if (!baseUnit) {
-                // TODO: autoBaseUnit(dates)
-                for (categoryIx = 0; categoryIx < count; categoryIx++) {
-                    currentCategory = toTime(categories[categoryIx]);
-
-                    if (currentCategory && lastCategory) {
-                        minInterval = math.min(
-                            currentCategory - lastCategory, minInterval
-                        );
-                    }
-
-                    lastCategory = currentCategory;
-                }
-
-                baseUnit = timeUnits(minInterval);
+            if (options.categoryAxis.type !== "Date") {
+                return;
             }
 
-            var startDate = floorDate(toTime(categories[0]));
-            var endDate = floorDate(toTime(categories[categories.length - 1]));
-            var bins = [];
-            var newCategories = [];
-
-            for (var date = startDate; date <= endDate; date = addDuration(date, 1, baseUnit)) {
-                bins.push({
-                    from: date,
-                    to: addDuration(date, 1, baseUnit)
-                });
-
-                newCategories.push(date);
-            }
-
-            // TODO: Accept predefined and user-defined functions
-            var aggregates = {
-                max: function(values) {
-                    return math.max.apply(math, values);
-                },
-
-                min: function(values) {
-                    return math.min.apply(math, values);
-                },
-
-                avg: function(values) {
-                    var i,
-                        length = values.length,
-                        sum = 0;
-
-                    for (i = 0; i < length; i++) {
-                        sum++;
-                    }
-
-                    return sum / length;
-                }
-            };
-
-            // TODO: partitionSeries
-            partition(categories, bins, function(binIx, categoryIndexes) {
-                for (var seriesIx = 0; seriesIx < series.length; seriesIx++) {
-                    var data = series[seriesIx].data;
-
-                    if (categoryIndexes.length === 0) {
-                        return;
-                    }
-
-                    var rawValues = [];
-                    for (var i = 0; i < categoryIndexes.length; i++) {
-                        var categoryIx = categoryIndexes[i],
-                            value = data[categoryIx];
+            for (groupIx = 0; groupIx < categories.length; groupIx++) {
+                categoryIndicies = categoryMap[groupIx];
+                for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
+                    data = series[seriesIx].data;
+                    rawValues = [];
+                    for (i = 0; i < categoryIndicies.length; i++) {
+                        categoryIx = categoryIndicies[i];
+                        value = data[categoryIx];
 
                         if (defined(value)) {
                             rawValues.push(value);
                         }
 
+                        // TODO: DataItems
+
                         delete data[categoryIx];
                     }
 
                     if (rawValues.length > 0) {
-                        data[binIx] = aggregates.avg(rawValues);
-                    }
-                }
-            });
-
-            // TODO: trimSeries
-            for (var seriesIx = 0; seriesIx < series.length; seriesIx++) {
-                var data = series[seriesIx].data;
-                var lastPointIx = data.length - 1;
-                while (lastPointIx > 0 && !defined(data[lastPointIx])) {
-                    lastPointIx--;
-                }
-                data.splice(lastPointIx + 1, data.length - lastPointIx);
-            }
-
-            options.categoryAxis.categories = newCategories;
-
-            function partition(values, bins, callback) {
-                var bin,
-                    valueIndexes,
-                    val;
-
-                for (var binIx = 0; binIx < bins.length; binIx++) {
-                    bin = bins[binIx];
-                    valueIndexes = [];
-
-                    for (var i = 0; i < values.length; i++) {
-                        val = values[i];
-                        if (val >= bin.from && val < bin.to) {
-                            valueIndexes.push(i);
-                        }
+                        data[groupIx] = Aggregates.avg(rawValues, series[seriesIx]);
                     }
 
-                    callback(binIx, valueIndexes);
+                    // TODO: Swap inner and outer loop to avoid excessive trimming
+                    trimArrayEnd(data);
                 }
             }
         },
@@ -4140,12 +4077,20 @@
                 categoriesCount = options.categoryAxis.categories.length,
                 categoryAxis;
 
-            categoryAxis = new CategoryAxis(deepExtend({
-                    vertical: invertAxes,
-                    axisCrossingValue: invertAxes ? categoriesCount : 0
-                },
-                options.categoryAxis)
-            );
+            if (options.categoryAxis.type === "Date") {
+                categoryAxis = new DateCategoryAxis(deepExtend({
+                        vertical: invertAxes
+                    },
+                    options.categoryAxis)
+                );
+            } else {
+                categoryAxis = new CategoryAxis(deepExtend({
+                        vertical: invertAxes,
+                        axisCrossingValue: invertAxes ? categoriesCount : 0
+                    },
+                    options.categoryAxis)
+                );
+            }
 
             if (invertAxes) {
                 plotArea.axisY = categoryAxis;
@@ -4584,6 +4529,32 @@
         }
     });
 
+    var Aggregates = {
+        max: function(values) {
+            return math.max.apply(math, values);
+        },
+
+        min: function(values) {
+            return math.min.apply(math, values);
+        },
+
+        avg: function(values) {
+            var i,
+                length = values.length,
+                sum = 0;
+
+            for (i = 0; i < length; i++) {
+                sum += values[i];
+            }
+
+            return sum / length;
+        },
+
+        count: function(values) {
+            return values.length;
+        }
+    };
+
     function sparseArrayMin(arr) {
         return sparseArrayLimits(arr).min;
     }
@@ -4608,6 +4579,16 @@
         }
 
         return { min: min, max: max };
+    }
+
+    function trimArrayEnd(array) {
+        var lastIx = array.length - 1;
+        while (lastIx > 0 && !defined(array[lastIx])) {
+            lastIx--;
+        }
+        array.splice(lastIx + 1, array.length - lastIx);
+
+        return array;
     }
 
     function intersection(a1, a2, b1, b2) {
@@ -4773,6 +4754,7 @@
     dataviz.ui.plugin(Chart);
 
     deepExtend(dataviz, {
+        Aggregates: Aggregates,
         AreaChart: AreaChart,
         Bar: Bar,
         BarAnimationDecorator: BarAnimationDecorator,

@@ -105,7 +105,7 @@
                         max: "2012-02-15"
                     });
 
-                    same(dateAxis.options.max.toString(), new Date("2012-02-16 00:00").toString());
+                    same(dateAxis.options.max, new Date("2012-02-15 00:00"));
                 });
 
                 test("Axis crossing value can be parsed from string", function() {
@@ -144,14 +144,14 @@
                 });
 
                 test("Min equals first category by default", function() {
-                    equals(dateAxis.options.min, categories[0]);
+                    same(dateAxis.options.min, categories[0]);
                 });
 
                 test("Max equals last category by default", function() {
-                    equals(dateAxis.options.max, categories[categories.length - 1]);
+                    same(dateAxis.options.max, categories[categories.length - 1]);
                 });
 
-                test("User set min value is rounded to base unit", function() {
+                test("User set min value is trimmed to base unit", function() {
                     createDateCategoryAxis({
                         categories: [
                             new Date("2012-02-05"), new Date("2012-02-10")
@@ -162,7 +162,7 @@
                     same(dateAxis.options.min, new Date("2012-02-01 00:00"));
                 });
 
-                test("User set max value is rounded to base unit", function() {
+                test("User set max value is trimmed to base unit", function() {
                     createDateCategoryAxis({
                         categories: [
                             new Date("2012-02-05"), new Date("2012-02-10")
@@ -170,7 +170,7 @@
                         max: new Date("2012-02-15 14:00")
                     });
 
-                    same(dateAxis.options.max, new Date("2012-02-16 00:00"));
+                    same(dateAxis.options.max, new Date("2012-02-15 00:00"));
                 });
 
                 test("User set min value smaller than first category is applied", function() {
@@ -183,7 +183,7 @@
 
                     same(categories, [
                         new Date("2012-02-04 00:00"), new Date("2012-02-05 00:00"),
-                        new Date("2012-02-06 00:00"), new Date("2012-02-07 00:00")
+                        new Date("2012-02-06 00:00")
                     ]);
                 });
 
@@ -196,7 +196,7 @@
                     });
 
                     same(categories, [
-                        new Date("2012-02-06 00:00"), new Date("2012-02-07 00:00")
+                        new Date("2012-02-06 00:00")
                     ]);
                 });
 
@@ -209,7 +209,7 @@
                     });
 
                     same(categories, [
-                        new Date("2012-02-05 00:00"), new Date("2012-02-06 00:00")
+                        new Date("2012-02-05 00:00")
                     ]);
                 });
 
@@ -223,7 +223,7 @@
 
                     same(categories, [
                         new Date("2012-02-05 00:00"), new Date("2012-02-06 00:00"),
-                        new Date("2012-02-07 00:00"), new Date("2012-02-08 00:00")
+                        new Date("2012-02-07 00:00")
                     ]);
                 });
 
