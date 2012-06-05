@@ -187,10 +187,10 @@
      *
      * @section
      * <h3>Customizing Item Templates</h3>
-     * <p>
-     *     The mobile ListView leverages Kendo UI high-performance Templates to provide complete control
-     *     over item rendering. For a complete overview of Kendo UI Template capabilities and syntax,
-     *     please review the <a href="http://www.kendoui.com/documentation/framework/templates/" title="Kendo UI Template">Kendo UI Templates</a> documentation.
+     *
+     * <p>The mobile ListView leverages Kendo UI high-performance Templates to provide complete control
+     * over item rendering. For a complete overview of Kendo UI Template capabilities and syntax,
+     * please review the <a href="http://www.kendoui.com/documentation/framework/templates/" title="Kendo UI Template">Kendo UI Templates</a> documentation.
      * </p>
      *
      * @exampleTitle Basic item template customization
