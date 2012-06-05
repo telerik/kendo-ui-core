@@ -689,7 +689,7 @@
                               that.trigger("cascade");
                           })
                           .one(SELECTED, function() {
-                              select(parent.dataItem())
+                              select(parent.dataItem());
                           });
                 }
             }
