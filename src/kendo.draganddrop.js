@@ -8,6 +8,7 @@
         Widget = kendo.ui.Widget,
         Observable = kendo.Observable,
         proxy = $.proxy,
+        now = $.now,
         extend = $.extend,
         getOffset = kendo.getOffset,
         draggables = {},
@@ -365,7 +366,7 @@
                 location = originalEvent;
             }
 
-            that._perAxis(START, location, e.timeStamp);
+            that._perAxis(START, location, now());
             that.surface.off(that.eventMap).on(that.eventMap);
             Drag.captured = false;
         },
@@ -380,7 +381,7 @@
 
             that._withEvent(e, function(location) {
 
-                that._perAxis(MOVE, location, e.timeStamp);
+                that._perAxis(MOVE, location, now());
 
                 if (!that.moved) {
                     xDelta = that.x.initialDelta;
@@ -393,7 +394,7 @@
                     }
 
                     if (!Drag.captured) {
-                        that.startTime = e.timeStamp;
+                        that.startTime = now();
                         that._trigger(START, e);
                         that.moved = true;
                     } else {
@@ -415,7 +416,7 @@
 
             that._withEvent(e, function() {
                 if (that.moved) {
-                    that.endTime = e.timeStamp;
+                    that.endTime = now();
                     that._trigger(END, e);
                     that.moved = false;
                 } else {
