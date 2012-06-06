@@ -598,6 +598,7 @@
     <Content Include="Areas\aspx\Views\web\combobox\cascadingcombobox.aspx" />
     <Content Include="Areas\razor\Views\web\dropdownlist\cascadingdropdownlist.cshtml" />
     <Content Include="Areas\razor\Views\web\calendar\selectaction.cshtml" />
+    <Content Include="Areas\aspx\Views\web\calendar\selectaction.aspx" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
