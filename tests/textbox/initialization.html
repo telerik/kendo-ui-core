@@ -156,6 +156,40 @@
                 ok(textbox._inputWrapper.hasClass("k-expand-padding"));
             });
 
+            test("NumericTextBox gets the placeholder value from the element", function() {
+                input.attr("placeholder", "Select...");
+                var textbox = new NumericTextBox(input);
+
+                equal(textbox.options.placeholder, "Select...");
+            });
+
+            test("NumericTextBox copies the placeholder attribute to the fake input", function() {
+                input.attr("placeholder", "Select...");
+                var textbox = new NumericTextBox(input);
+
+                equal(textbox._text.attr("placeholder"), "Select...");
+            });
+
+            if (!kendo.support.placeholder) {
+                test("NumericTextBox sets the placeholder in the input element", function() {
+                    var textbox = new NumericTextBox(input, {
+                        placeholder: "Select..."
+                    });
+
+                    equal(textbox._text.val(), "Select...");
+                });
+
+                test("NumericTextBox clears the placeholder", function() {
+                    var textbox = new NumericTextBox(input, {
+                        placeholder: "Select..."
+                    });
+
+                    textbox.value(10);
+
+                    equal(textbox._text.val(), "10.00");
+                });
+            }
+
             asyncTest("form reset support", 2, function() {
                 input.attr("value", "123");
 

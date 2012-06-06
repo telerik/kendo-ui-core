@@ -89,6 +89,7 @@
         ui = kendo.ui,
         Widget = ui.Widget,
         parse = kendo.parseFloat,
+        placeholderSupported = kendo.support.placeholder,
         touch = kendo.support.touch,
         getCulture = kendo.getCulture,
         CHANGE = "change",
@@ -231,6 +232,8 @@
                             that.value(element[0].value);
                         });
                     });
+
+             options.placeholder = options.placeholder || element.attr("placeholder");
 
              that._wrapper();
              that._arrows();
@@ -558,9 +561,11 @@
 
             element.type = TYPE;
             text[0].type = "text";
-
             text[0].style.cssText = element.style.cssText;
-            that._text = text.attr("readonly", true).addClass(element.className);
+            text.attr("placeholder", that.options.placeholder);
+
+            that._text = text.attr("readonly", true)
+                             .addClass(element.className);
         },
 
         _keydown: function(e) {
@@ -699,8 +704,15 @@
             }
 
             that._value = value = that._adjust(value);
-            that._text.val(isNotNull ? kendo.toString(value, format, culture) : options.placeholder);
+            that._placeholder(kendo.toString(value, format, culture));
             that.element.val(isNotNull ? value.toString().replace(POINT, numberFormat[POINT]) : "");
+        },
+
+        _placeholder: function(value) {
+            this._text.val(value);
+            if (!placeholderSupported && !value) {
+                this._text.val(this.options.placeholder);
+            }
         },
 
         _wrapper: function() {
