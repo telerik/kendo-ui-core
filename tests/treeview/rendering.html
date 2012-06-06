@@ -390,6 +390,20 @@
 
                 equal(treeview.find(".k-item").length, 2);
             });
+
+            test("sets data-uid", function() {
+                treeview.kendoTreeView({
+                    dataSource: [
+                        { id: 1, text: "foo" }
+                    ]
+                });
+
+                var node = treeview.data("kendoTreeView").dataSource.get(1),
+                    uidNodes = treeview.find("[" + kendo.attr("uid") + "]");
+
+                equal(uidNodes.length, 1);
+                equal(uidNodes.data("kendo-uid"), node.uid);
+            });
         </script>
 
         <div id="qunit-fixture">test markup, will be hidden</div>

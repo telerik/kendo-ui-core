@@ -65,6 +65,22 @@
 
                 equal(treeview.find(".k-item").length, 2);
             });
+
+            test("Adding items to the datasource adds them to the proper level", function() {
+                createTreeView({
+                    dataSource: [
+                        { id: 1, text: "foo" },
+                        { id: 2, text: "bar" }
+                    ]
+                });
+
+                var foo = treeviewObject.dataSource.get(1);
+
+                foo.children.add({ id: 3, text: "baz" });
+
+                equal(treeview.find(".k-item").length, 3);
+                equal(treeview.find(".k-item:first .k-item").length, 1);
+            });
         </script>
 
         <div id="qunit-fixture"> </div>

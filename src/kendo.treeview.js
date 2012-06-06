@@ -380,7 +380,8 @@
             var that = this,
                 clickableItems = ".k-in:not(.k-state-selected,.k-state-disabled)",
                 MOUSEENTER = "mouseenter",
-                dataInit;
+                dataInit,
+                inferred = false;
 
             if ($.isArray(options)) {
                 dataInit = true;
@@ -406,19 +407,14 @@
                 item: that._itemTemplate()
             };
 
+            inferred = element.is("ul");
+
             // render treeview if it's not already rendered
             if (!element.hasClass(KTREEVIEW)) {
                 that._wrapper();
 
-                if (!that.root.length) { // treeview initialized from empty element
-                    that.root = that.wrapper.html(that._renderGroup({
-                        items: options.dataSource,
-                        group: {
-                            firstLevel: true,
-                            expanded: true
-                        }
-                    })).children("ul");
-                } else {
+                if (inferred) {
+                    that.root = element;
                     that._group(that.wrapper);
                 }
             } else {
@@ -439,7 +435,9 @@
                 that.dragging = new TreeViewDragAndDrop(that);
             }
 
-            that.dataSource.read();
+            if (!inferred) {
+                that.dataSource.read();
+            }
         },
 
         _animation: function() {
@@ -478,8 +476,26 @@
         },
 
         refresh: function(e) {
+            var that = this,
+                parentNode = that.element;
+
             if (e.action == "add") {
-                this.append(e.items);
+                if (e.node) {
+                    // adding to subgroup
+                    parentNode = that.element.find(".k-item[" + kendo.attr("uid") + "=" + e.node.uid + "]");
+                }
+
+                that.append(e.items, parentNode);
+            } else if (e.action == "remove") {
+            } else {
+                // TODO: handle loading of subgroups
+                that.root = that.wrapper.html(that._renderGroup({
+                    items: e.items,
+                    group: {
+                        firstLevel: true,
+                        expanded: true
+                    }
+                })).children("ul");
             }
         },
 
@@ -697,7 +713,9 @@
                     return "item['" + (bindings[fieldName] || fieldName) + "']";
                 },
                 templateText =
-                    "<li class='#= r.wrapperCssClass(group, item) #'>" +
+                    "<li class='#= r.wrapperCssClass(group, item) #'" +
+                        " " + kendo.attr("uid") + "='#= item.uid #'" +
+                    ">" +
                         "<div class='#= r.cssClass(group, item) #'>" +
                             "# if (" + field("items") + ") { #" +
                                 "<span class='#= r.toggleButtonClass(item) #'></span>" +
