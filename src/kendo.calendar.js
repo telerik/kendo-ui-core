@@ -277,7 +277,7 @@
             element = that.wrapper = that.element;
             options = that.options;
 
-            options.url = unescape(options.url);
+            options.url = window.unescape(options.url);
 
             element.addClass("k-widget k-calendar");
 
@@ -949,8 +949,8 @@
                 date = options.date,
                 dates = options.dates,
                 format = options.format,
-                urlNavigate = options.url,
-                hasUrl = urlNavigate && dates[0],
+                navigateUrl = options.url,
+                hasUrl = navigateUrl && dates[0],
                 currentCalendar = kendo.culture().calendar,
                 firstDayIdx = currentCalendar.firstDay,
                 days = currentCalendar.days,
@@ -998,7 +998,7 @@
                         }
 
                         if (hasUrl && inArray(+date, dates)) {
-                            url = urlNavigate.replace("{0}", kendo.toString(date, format));
+                            url = navigateUrl.replace("{0}", kendo.toString(date, format));
                             linkClass = " k-action-link";
                         }
 
