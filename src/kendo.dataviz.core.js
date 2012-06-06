@@ -1223,6 +1223,7 @@
         },
 
         options: {
+            type: "Numeric",
             min: 0,
             max: 1,
             vertical: true,

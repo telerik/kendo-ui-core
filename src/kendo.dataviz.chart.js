@@ -217,9 +217,6 @@
             legend: {
                 visible: true
             },
-            valueAxis: {
-                type: "Numeric"
-            },
             categoryAxis: {
                 categories: []
             },
@@ -1075,6 +1072,7 @@
         },
 
         options: {
+            type: DATE,
             labels: {
                 dateFormats: DateLabelFormats
             }
@@ -1176,6 +1174,7 @@
         },
 
         options: {
+            type: DATE,
             labels: {
                 dateFormats: DateLabelFormats
             }
@@ -4029,13 +4028,11 @@
                 categoryAxisOptions = options.categoryAxis,
                 categories = categoryAxisOptions.categories,
                 categoriesCount = categories.length,
-                isDateAxis = categoryAxisOptions.type === DATE ||
-                             categories[0] instanceof Date,
-                forceCategoryAxis = categoryAxisOptions.type === CATEGORY,
+                axisType  = categoryAxisOptions.type,
+                dateCategory = categories[0] instanceof Date,
                 categoryAxis;
 
-            if (!forceCategoryAxis && isDateAxis) {
-                categoryAxisOptions.type = DATE;
+            if (axisType === DATE || (!axisType && dateCategory)) {
                 categoryAxis = new DateCategoryAxis(deepExtend({
                         vertical: invertAxes
                     },
@@ -4214,10 +4211,26 @@
                 rangeTracker = vertical ? plotArea.yAxisRangeTracker : plotArea.xAxisRangeTracker,
                 range = rangeTracker.query(axisName),
                 axisOptions = deepExtend({}, options, { vertical: vertical }),
-                axis;
+                axis,
+                seriesIx,
+                series = plotArea.series,
+                currentSeries,
+                firstPoint,
+                dateData;
 
-            // TODO: Automatic detection
-            if (options.type === DATE) {
+            for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
+                currentSeries = series[seriesIx];
+                if (currentSeries[vertical ? "yAxis" : "xAxis"] == axisOptions.name) {
+                    firstPoint = currentSeries.data[0];
+                    if (firstPoint) {
+                        dateData = firstPoint[vertical ? 1 : 0] instanceof Date;
+                    }
+
+                    break;
+                }
+            }
+
+            if (axisOptions.type === DATE || (!axisOptions.type && dateData)) {
                 axis = new DateValueAxis(range.min, range.max, axisOptions);
             } else {
                 axis = new NumericAxis(range.min, range.max, axisOptions);

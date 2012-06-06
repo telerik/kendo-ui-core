@@ -1252,6 +1252,54 @@
                     ok(plotArea.axisY instanceof dataviz.DateValueAxis);
                 });
 
+                test("Automatically detects date X axis", function() {
+                    createPlotArea([{
+                        name: "Value A",
+                        type: "scatter",
+                        data: [[new Date(2012, 02, 01), 100]]
+                    }]);
+
+                    same(plotArea.axisX.options.type, "Date");
+                });
+
+                test("Automatic detection of X axis can be overriden", function() {
+                    createPlotArea([{
+                        name: "Value A",
+                        type: "scatter",
+                        data: [[new Date(2012, 02, 01), 100]]
+                    }], {
+                        xAxis: {
+                            type: "Numeric"
+                        }
+                    });
+
+                    ok(plotArea.axisX instanceof kendo.dataviz.NumericAxis);
+                });
+
+                test("Automatically detects date Y axis", function() {
+                    createPlotArea([{
+                        name: "Value A",
+                        type: "scatter",
+                        data: [[100, new Date(2012, 02, 01)]]
+                    }]);
+
+                    same(plotArea.axisY.options.type, "Date");
+                });
+
+                test("Automatic detection of Y axis can be overriden", function() {
+                    createPlotArea([{
+                        name: "Value A",
+                        type: "scatter",
+                        data: [[100, new Date(2012, 02, 01)]]
+                    }], {
+                        yAxis: {
+                            type: "Numeric"
+                        }
+                    });
+
+                    same(plotArea.axisX.options.type, "Numeric");
+                });
+
                 // ------------------------------------------------------------
                 module("XY PlotArea / Multiple Axes", {
                     setup: function() {
