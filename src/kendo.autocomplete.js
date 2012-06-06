@@ -258,7 +258,7 @@
         * $("#autoComplete").kendoAutoComplete({
         *     separator: ", "
         * });
-        * @option {Function} [template] Template to be used for rendering the items in the list.
+        * @option {String} [template] Template to be used for rendering the items in the list.
         * _example
         *  //template
         *

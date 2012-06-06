@@ -243,29 +243,29 @@
           * _example
           *
           *  //calendar intialization
-          *  &lt;script&gt;
+          *  <script>
           *      $("#calendar").kendoCalendar({
           *          footer: kendo.template("Today - #=kendo.toString(data, 'd') #")
           *      });
-          *  &lt;/script&gt;
+          *  </script>
           * @option {Object} [month] <> Templates for the cells rendered in the "month" view.
           * @option {String} [month.content] <> Template to be used for rendering the cells in the "month" view, which are in range.
           * _example
           *  //template
-          *  &lt;script id="cellTemplate" type="text/x-kendo-tmpl"&gt;
-          *      &lt;div class="${ data.value < 10 ? exhibition : party }"&gt;
-          *      &lt;/div&gt;
+          * <script id="cellTemplate" type="text/x-kendo-tmpl">
+          *      <div class="${ data.value < 10 ? exhibition : party }">
+          *      </div>
           *      ${ data.value }
-          *  &lt;/script&gt;
+          *  </script>
           *
           *  //calendar intialization
-          *  &lt;script&gt;
+          *  <script>
           *      $("#calendar").kendoCalendar({
           *          month: {
           *             content:  kendo.template($("#cellTemplate").html()),
           *          }
           *      });
-          *  &lt;/script&gt;
+          *  </script>
           * @option {String} [month.empty] <> Template to be used for rendering the cells in the "month" view, which are not in the min/max range.
           */
         init: function(element, options) {
