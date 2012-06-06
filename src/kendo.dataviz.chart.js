@@ -63,6 +63,7 @@
         CENTER = "center",
         CHANGE = "change",
         CIRCLE = "circle",
+        CIRCLE_GLASS = "circleGlass",
         CLICK = "click",
         CLIP = dataviz.CLIP,
         COLUMN = "column",
@@ -3462,7 +3463,7 @@
         options: {
             color: WHITE,
             overlay: {
-                gradient: ROUNDED_BEVEL
+                gradient: CIRCLE_GLASS
             },
             border: {
                 width: 0.5
@@ -3629,7 +3630,7 @@
             options = deepExtend({}, options, { id: outlineId });
 
             if (segment.value !== 0) {
-                element = view.createSector(segment.sector, deepExtend({}, options, {
+                element = view.createRing(segment.sector, deepExtend({}, options, {
                     fill: highlight.color,
                     fillOpacity: highlight.opacity,
                     strokeOpacity: border.opacity,

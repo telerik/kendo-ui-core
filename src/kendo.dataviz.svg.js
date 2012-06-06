@@ -189,7 +189,8 @@
 
         createGradient: function(options) {
             if (options.type === RADIAL) {
-                return new SVGRadialGradient(options);
+                //return new SVGRadialGradient(options);
+                return new SVGDonutGradient(options);
             } else {
                 return new SVGLinearGradient(options);
             }
@@ -463,6 +464,14 @@
                 firstInnerPoint: firstInnerPoint,
                 secondInnerPoint: secondInnerPoint
             });
+        },
+
+        clone: function() {
+            var ring = this;
+            return new SVGRing(
+                deepExtend({}, ring.config),
+                deepExtend({}, ring.options)
+            );
         }
     });
 
@@ -697,6 +706,59 @@
         }
     });
 
+    var SVGDonutGradient = ViewElement.extend({
+        init: function(options) {
+            var gradient = this;
+
+            ViewElement.fn.init.call(gradient, options);
+
+            gradient.template = SVGDonutGradient.template;
+            gradient.stopTemplate = SVGDonutGradient.stopTemplate;
+            if (!gradient.template) {
+                gradient.template = SVGDonutGradient.template = renderTemplate(
+                    "<radialGradient id='#= d.options.id #' " +
+                    "cx='#= d.options.cx #' cy='#= d.options.cy #' " +
+                    "fx='#= d.options.cx #' fy='#= d.options.cy #' " +
+                    "r='#= d.options.r #' gradientUnits='userSpaceOnUse'>" +
+                    "#= d.renderStops() #" +
+                    "</radialGradient>"
+                );
+
+                gradient.stopTemplate = SVGDonutGradient.stopTemplate = renderTemplate(
+                    "<stop offset='#= Math.round(d.offset) #%' " +
+                    "style='stop-color:#= d.color #;stop-opacity:#= d.opacity #' />");
+            }
+        },
+
+        options: {
+            id: ""
+        },
+
+        renderStops: function() {
+            var gradient = this,
+                options = gradient.options,
+                stops = options.stops,
+                stopTemplate = gradient.stopTemplate,
+                usedSpace = ((options.ir / options.r) * 100),
+                i,
+                length = stops.length,
+                currentStop,
+                output = '';
+
+            currentStop = stops[0];
+            currentStop.offset = usedSpace;
+            output += stopTemplate(currentStop);
+
+            for (i = 1; i < length; i++) {
+                currentStop = stops[i];
+                currentStop.offset = currentStop.offset * (100 -  usedSpace) + usedSpace;
+                output += stopTemplate(currentStop);
+            }
+
+            return output;
+        }
+    });
+
     // Decorators =============================================================
     function SVGOverlayDecorator(view) {
         this.view = view;
@@ -885,6 +947,7 @@
         SVGOverlayDecorator: SVGOverlayDecorator,
         SVGPath: SVGPath,
         SVGRadialGradient: SVGRadialGradient,
+        SVGDonutGradient: SVGDonutGradient,
         SVGRing: SVGRing,
         SVGSector: SVGSector,
         SVGText: SVGText,

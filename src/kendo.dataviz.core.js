@@ -1648,6 +1648,29 @@
                 opacity: 0.25
             }]
         },
+        circleGlass: {
+            type: RADIAL,
+            stops: [{
+                color: BLACK,
+                opacity: 0.5
+            }, {
+                offset: 0.2,
+                color: BLACK,
+                opacity: 0.15
+            }, {
+                offset: 0.2,
+                color: WHITE,
+                opacity: 0.15
+            }, {
+                offset: 0.8,
+                color: WHITE,
+                opacity: 0.15
+            }, {
+                offset: 0.8,
+                color: WHITE,
+                opacity: 0
+            }]
+        },
         roundedBevel: {
             type: RADIAL,
             stops: [{
