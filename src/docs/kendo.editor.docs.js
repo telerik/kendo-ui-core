@@ -211,7 +211,7 @@
         focus: function() {},
 
         /**
-         * Serializes the current state of the editable area to the &lt;textarea&gt; element.
+         * Serializes the current state of the editable area to the <textarea> element.
          * This method should be called after modifying the editor content through the DOM.
          */
         update: function () {},

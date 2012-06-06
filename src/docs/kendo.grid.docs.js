@@ -191,7 +191,7 @@
          * $("#grid").kendoGrid({
          *     dataSource: sharedDataSource,
          *     columns: [ { title: "Action", command: "destroy" }, // creates a column with delete buttons
-         *                { title: "Title", field: "title", width: 200, template: "&lt;h1 id='title'&gt;${ title }&lt;/div&gt;" },
+         *                { title: "Title", field: "title", width: 200, template: "<div id='title'>${ title }</div>" },
          *                { title: "Year", field: "year", filterable: false, sortable: true, format: "{0:dd/MMMM/yyyy}" } ];
          * });
          * @option {String} [columns.field] The field from the datasource that will be displayed in the column.
@@ -225,7 +225,7 @@
          *              field: "Name",
          *              editor: function(container, options) {
          *                  // create a KendoUI AutoComplete widget as column editor
-         *                   $('&lt;input name="' + options.field + '"/&gt;')
+         *                   $('<input name="' + options.field + '"/>')
          *                       .appendTo(container)
          *                       .kendoAutoComplete({
          *                           dataTextField: "ProductName",
@@ -285,7 +285,7 @@
          *      toolbar: [
          *          "create",
          *          { name: "save", text: "Save This Record" },
-         *          { name: "cancel", template: '&lt;img src="icons/cancel.png' rel='cancel' /&gt;" }
+         *          { name: "cancel", template: '<img src="icons/cancel.png' rel='cancel' />" }
          *      ],
          *      editable: true
          *   });
@@ -313,7 +313,7 @@
          *      toolbar: [
          *          "create",
          *          { name: "save", text: "Save This Record" },
-         *          { name: "cancel", template: "&lt;img src="icons/cancel.png' rel='cancel' /&gt;" }
+         *          { name: "cancel", template: "<img src="icons/cancel.png' rel='cancel' />" }
          *      ],
          *      editable: {
          *          update: true, // puts the row in edit mode when it is clicked
@@ -466,28 +466,28 @@
          * @option {Function} [rowTemplate] Template to be used for rendering the rows in the grid.
          * _example
          *  //template
-         *  &lt;script id="rowTemplate" type="text/x-kendo-tmpl"&gt;
-         *      &lt;tr&gt;
-         *          &lt;td&gt;
-         *              &lt;img src="${ BoxArt.SmallUrl }" alt="${ Name }" /&gt;
-         *          &lt;/td&gt;
-         *          &lt;td&gt;
+         *  <script id="rowTemplate" type="text/x-kendo-tmpl">
+         *      <tr>
+         *          <td>
+         *              <img src="${ BoxArt.SmallUrl }" alt="${ Name }" />
+         *          </td>
+         *          <td>
          *              ${ Name }
-         *          &lt;/td&gt;
-         *          &lt;td&gt;
+         *          </td>
+         *          <td>
          *              ${ AverageRating }
-         *          &lt;/td&gt;
-         *      &lt;/tr&gt;
-         *  &lt;/script&gt;
+         *          </td>
+         *      </tr>
+         *  </script>
          *
          *  //grid intialization
-         *  &lt;script&gt;PO details informaiton
+         *  <script>PO details informaiton
          *      $("#grid").kendoGrid({
          *          dataSource: dataSource,
          *          rowTemplate: kendo.template($("#rowTemplate").html()),
          *          height: 200
          *      });
-         *  &lt;/script&gt;
+         *  </script>
          */
         init: function(element, options) {
         },

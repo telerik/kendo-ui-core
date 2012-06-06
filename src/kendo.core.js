@@ -1805,7 +1805,7 @@ function pad(number) {
             table.innerHTML = "<tr><td></td></tr>";
 
             /**
-             * Indicates whether the browser supports setting of the &lt;tbody&gt; innerHtml.
+             * Indicates whether the browser supports setting of the <tbody> innerHtml.
              * @name kendo.support.tbodyInnerHtml
              * @property {Boolean}
              */
