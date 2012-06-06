@@ -51,40 +51,6 @@
                     }
                 });
 
-                test("Base unit is determined by series delta (days)", function() {
-                    equals(dateAxis.options.baseUnit, "days");
-                });
-
-                test("Base unit is determined by series delta (months)", function() {
-                    createDateCategoryAxis({
-                        categories: [
-                            new Date("2012-02-01"), new Date("2012-03-10")
-                        ]
-                    });
-
-                    equals(dateAxis.options.baseUnit, "months");
-                });
-
-                test("Base unit is determined by series delta (years)", function() {
-                    createDateCategoryAxis({
-                        categories: [
-                            new Date("2012-02-01"), new Date("2013-03-10")
-                        ]
-                    });
-
-                    equals(dateAxis.options.baseUnit, "years");
-                });
-
-                test("Base unit calculation ignores repeating categories", function() {
-                    createDateCategoryAxis({
-                        categories: [
-                            new Date("2012-02-01"), new Date("2012-02-01"), new Date("2012-02-02")
-                        ]
-                    });
-
-                    equals(dateAxis.options.baseUnit, "days");
-                });
-
                 test("User set base unit is applied", function() {
                     createDateCategoryAxis({
                         categories: [
@@ -262,6 +228,176 @@
                         new Date("2012-02-05 00:00"), new Date("2012-02-06 00:00"),
                         new Date("2012-02-07 00:00")
                     ]);
+                });
+
+                // ------------------------------------------------------------
+                module("Date CategoryAxis / Base unit / Days");
+
+                test("Base unit is determined by series delta", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012-02-05"), new Date("2012-02-06")
+                        ]
+                    });
+
+                    equals(dateAxis.options.baseUnit, "days");
+                });
+
+                test("Base unit calculation ignores repeating categories", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012-02-01"), new Date("2012-02-01"), new Date("2012-02-02")
+                        ]
+                    });
+
+                    equals(dateAxis.options.baseUnit, "days");
+                });
+
+                test("creates labels with default format", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012-02-01"), new Date("2012-02-03")
+                        ]
+                    });
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["2/1", "2/2", "2/3"]);
+                });
+
+                test("labels have associated data items", function() {
+                    createDateCategoryAxis({
+                        dataItems: ["a", "b", "c"],
+                        categories: [
+                            new Date("2012-02-01"), new Date("2012-02-03")
+                        ]
+                    });
+
+                    same(dateAxis.labels[0].dataItem, "a");
+                });
+
+                test("creates labels with custom date format", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012-02-01"), new Date("2012-02-03")
+                        ],
+                        labels: {
+                            dateFormats: {
+                                days: "M/d/yy"
+                            }
+                        }
+                    });
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["2/1/12", "2/2/12", "2/3/12"]);
+                });
+
+                test("creates labels with custom format", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012-02-01"), new Date("2012-02-03")
+                        ],
+                        labels: {
+                            format: "M/d/yy"
+                        }
+                    });
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["2/1/12", "2/2/12", "2/3/12"]);
+                });
+
+                test("creates labels with custom culture", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012-02-01"), new Date("2012-02-03")
+                        ],
+                        labels: {
+                            format: "d.MMM",
+                            culture: "es-ES"
+                        }
+                    });
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["1.feb", "2.feb", "3.feb"]);
+                });
+
+                // ------------------------------------------------------------
+                module("Date CategoryAxis / Base unit / Months");
+
+                test("Base unit is determined by series delta", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012-02-01"), new Date("2012-03-10")
+                        ]
+                    });
+
+                    equals(dateAxis.options.baseUnit, "months");
+                });
+
+                test("creates labels with default format", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012-01-01"), new Date("2012-02-01")
+                        ]
+                    });
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["Jan '12", "Feb '12"]);
+                });
+
+                test("creates labels with custom date format", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012-01-01"), new Date("2012-02-01")
+                        ],
+                        labels: {
+                            dateFormats: {
+                                months: "M/d/yy"
+                            }
+                        }
+                    });
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["1/1/12", "2/1/12"]);
+                });
+
+                // ------------------------------------------------------------
+                module("Date CategoryAxis / Base unit / Years");
+
+                test("Base unit is determined by series delta", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012-02-01"), new Date("2013-03-10")
+                        ]
+                    });
+
+                    equals(dateAxis.options.baseUnit, "years");
+                });
+
+                test("creates labels with default format", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012-01-01"), new Date("2013-02-01")
+                        ]
+                    });
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["2012", "2013"]);
+                });
+
+                test("creates labels with custom date format", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012-01-01"), new Date("2013-02-01")
+                        ],
+                        labels: {
+                            dateFormats: {
+                                years: "M/d/yy"
+                            }
+                        }
+                    });
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["1/1/12", "1/1/13"]);
                 });
 
             })();

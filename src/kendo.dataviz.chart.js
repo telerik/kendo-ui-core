@@ -110,6 +110,13 @@
     var CATEGORICAL_CHARTS = [BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA],
         XY_CHARTS = [SCATTER, SCATTER_LINE];
 
+    var DateLabelFormats = {
+        hours: "HH:mm",
+        days: "M/d",
+        months: "MMM 'yy",
+        years: "yyyy"
+    };
+
     // Chart ==================================================================
     var Chart = Widget.extend({
         init: function(element, userOptions) {
@@ -1151,12 +1158,7 @@
 
         options: {
             labels: {
-                dateFormats: {
-                    hours: "HH:mm",
-                    days: "M/d",
-                    months: "MMM 'yy",
-                    years: "yyyy"
-                }
+                dateFormats: DateLabelFormats
             }
         },
 
@@ -1224,6 +1226,17 @@
             options.max = last(groups);
             options.categories = groups;
             axis.categoryMap = categoryMap;
+        },
+
+        createAxisLabel: function(index, labelOptions) {
+            var options = this.options,
+                dataItem = options.dataItems ? options.dataItems[index] : null,
+                date = options.categories[index],
+                unitFormat = labelOptions.dateFormats[options.baseUnit],
+                format = labelOptions.format || unitFormat,
+                value = kendo.toString(date, format, labelOptions.culture);
+
+            return new AxisLabel(value, index, dataItem, labelOptions);
         }
     });
 
@@ -1246,12 +1259,7 @@
 
         options: {
             labels: {
-                dateFormats: {
-                    hours: "HH:mm",
-                    days: "M/d",
-                    months: "MMM 'yy",
-                    years: "yyyy"
-                }
+                dateFormats: DateLabelFormats
             }
         },
 
