@@ -117,7 +117,7 @@
                     }),
                     footerWrap = grid.wrapper.find("div.k-grid-footer-wrap"),
                     contentDiv = grid.wrapper.children("div.k-grid-content");
-                
+
                 contentDiv.scrollLeft(100);
 
                 stop();
@@ -198,19 +198,32 @@
                 equal(footerCells.last().html(), "&nbsp;");
             });
 
-            test("column footer template with aggregate expression and empty data", function() {
+            test("aggregates are set to zero when bound to empty data", function() {
                 var grid = new Grid(table(), {
                     dataSource: {
-                        data: [ ],
+                        data: [],
                         aggregate: { field: "foo", aggregate: "count" }
                     },
-                    columns: [ { field: "foo", footerTemplate: "count:#= typeof sum != 'undefined' ? sum : 0 #" },"bar" ]
+                    columns: [ { field: "foo", footerTemplate: "#=count#" },"bar" ]
                 }),
                 footer = grid.wrapper.children("div.k-grid-footer"),
                 footerCells = footer.find("tr.k-footer-template").find("td");
 
-                equal(footerCells.first().text(), "count:0");
-                equal(footerCells.last().html(), "&nbsp;");
+                equal(footerCells.first().text(), "0");
+            });
+
+            test("aggregates are undefined if not specified", function() {
+                var grid = new Grid(table(), {
+                    dataSource: {
+                        data: [],
+                        aggregate: [{ field: "foo", aggregate: "count" }, { field: "foo", aggregate: "min" } ]
+                    },
+                    columns: [ { field: "foo", footerTemplate: "#=typeof max == 'undefined'#" },"bar" ]
+                }),
+                footer = grid.wrapper.children("div.k-grid-footer"),
+                footerCells = footer.find("tr.k-footer-template").find("td");
+
+                equal(footerCells.first().text(), "true");
             });
 
             test("column footer template with both aggregate expression and column template", function() {

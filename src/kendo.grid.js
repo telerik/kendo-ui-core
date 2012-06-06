@@ -302,20 +302,24 @@
             .add(document.body)
             .css('cursor', value);
     }
+
     function buildEmptyAggregatesObject(aggregates) {
             var idx,
                 length,
+                aggregate = {},
                 fieldsMap = {};
 
             if (!isEmptyObject(aggregates)) {
-                if (isArray(aggregates)) {
-                    for (idx = 0, length = aggregates.length; idx < length; idx++) {
-                        fieldsMap[aggregates[idx].field] = {};
-                    }
-                } else {
-                    fieldsMap[aggregates.field] = {};
+                if (!isArray(aggregates)){
+                    aggregates = [aggregates];
+                }
+
+                for (idx = 0, length = aggregates.length; idx < length; idx++) {
+                    aggregate[aggregates[idx].aggregate] = 0;
+                    fieldsMap[aggregates[idx].field] = aggregate;
                 }
             }
+
             return fieldsMap;
     }
 
