@@ -635,10 +635,10 @@
                 "formatBlock",
                 "createLink",
                 "unlink",
-                "insertImage"
+                "insertImage",
                 //"style",
-                //"subscript",
-                //"superscript",
+                "subscript",
+                "superscript"
             ]
         },
 

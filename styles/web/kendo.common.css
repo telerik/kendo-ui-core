@@ -2347,6 +2347,8 @@ span.k-numerictextbox
 .k-createLink { background-position: -112px -44px; }
 .k-unlink { background-position: -112px -66px; }
 .k-insertImage { background-position: -112px -88px; }
+.k-subscript { background-position: -112px -154px; }
+.k-superscript { background-position: -112px -176px; }
 
 /* default tool widths */
 .k-fontName { width: 110px; }
