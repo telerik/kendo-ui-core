@@ -397,7 +397,7 @@
                     os = platform;
                 }
 
-                support.mobileOS = os;
+                support.mobileOS = OS = os;
             }
 
             if (os) {
@@ -449,7 +449,7 @@
                 osCssClass = that.options.platform ? "km-" + that.options.platform : that.osCssClass,
                 element = that.element;
 
-            element.parent().addClass("km-root km-" + (that.os.tablet ? "tablet" : "phone"));
+            element.parent().addClass("km-root km-" + (OS.tablet ? "tablet" : "phone"));
             element.addClass(osCssClass + " " + getOrientationClass());
 
             if (BERRYPHONEGAP) {

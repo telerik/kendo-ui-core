@@ -43,7 +43,8 @@
             QUnit.config.testTimeout = 500;
             QUnit.config.reorder = false;
 
-            var init = kendo.mobile.init;
+            var init = kendo.mobile.init,
+                os = kendo.support.mobileOS;
             module("kendo.Application", {
                 setup: function() {
                     location.hash = '';
@@ -205,6 +206,11 @@
                 equal(location.hash, "#../../test1");
                 equal(application.view().id, "../../test1");
                 equal(application.view().content.find(".km-scroll-container").html(), "Page 2");
+            });
+
+            test("Appends root and phone/tablet classes on documentElement", function () {
+                ok($("#qunit-fixture").parent().hasClass("km-root"));
+                ok($("#qunit-fixture").parent().hasClass("km-" + (os && os.tablet ? "tablet" : "phone")));
             });
         </script>
     </body>
