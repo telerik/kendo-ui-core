@@ -38,14 +38,15 @@
             module("kendo.ui.ComboBox selection", {
                 setup: function() {
                     input = $("<input />").appendTo(document.body);
-                    combobox = input.kendoComboBox({
+
+                    var element = $("<input />").appendTo(document.body);
+                    combobox = element.kendoComboBox({
                         dataTextField: "text",
                         dataValueField: "value",
                         dataSource: data
                     }).data("kendoComboBox");
                 },
                 teardown: function() {
-                    combobox = null;
                     var ul = $(document.body).children(":last");
                     if(!ul[0].id) {
                         ul.remove();
@@ -57,6 +58,16 @@
                     } else {
                         input.remove();
                     }
+
+                    var element = combobox.element;
+                    var parent = element.parent();
+                    if (parent.is("span")) {
+                        parent.remove();
+                    } else {
+                        element.remove();
+                    }
+
+                    combobox = null;
                 }
             });
 
@@ -83,26 +94,6 @@
                 });
 
                 combobox._arrow.trigger(CLICK);
-            });
-
-            asyncTest("empty input should clear focused item", 3, function() {
-                var combobox = input.kendoComboBox({
-                                    dataTextField: "text",
-                                    dataValueField: "value",
-                                    dataSource: data,
-                                    highlightFirst: false
-                                }).data("kendoComboBox");
-
-                combobox.dataSource.query();
-                combobox.select(combobox.ul.children(":last"));
-                combobox.input.val("").focus().press(keys.BACKSPACE);
-
-                setTimeout(function() {
-                    start();
-                    ok(!combobox._current);
-                    ok(!combobox.ul.find(".k-state-selected")[0]);
-                    ok(!combobox.ul.find(".k-state-focused")[0]);
-                }, 200);
             });
 
             test("select item depending on the options.index", function() {
@@ -311,7 +302,28 @@
                 combobox.input.focus().press(kendo.keys.ENTER);
             });
 
+            test("empty input should clear focused item", function() {
+                var combobox = input.kendoComboBox({
+                                    dataTextField: "text",
+                                    dataValueField: "value",
+                                    dataSource: data,
+                                    highlightFirst: false,
+                                    delay: 0
+                                }).data("kendoComboBox");
 
+                combobox.dataSource.query();
+                combobox.select(combobox.ul.children(":last"));
+
+                stub(combobox, {
+                    current: combobox.current
+                });
+
+                window.setTimeout = function(func) { func() };
+                combobox.input.val("").focus().press(keys.BACKSPACE);
+
+                equal(combobox.calls("current"), 1);
+                equal(combobox.args("current")[0], null);
+            });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

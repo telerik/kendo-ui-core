@@ -31,18 +31,6 @@
                 }
             });
 
-            asyncTest("focus should hide the _text and show the input value", 2, function() {
-                var textbox = new NumericTextBox(input);
-
-                textbox._text.focus();
-
-                setTimeout(function() {
-                    start();
-                    ok(!textbox._text.is(":visible"));
-                    equal(input[0], document.activeElement);
-                }, 100);
-            });
-
             test("_change should call value() method", 2, function() {
                 var textbox = new NumericTextBox(input, {
                     change: function() {
@@ -121,6 +109,19 @@
                         keyCode: kendo.keys.UP
                     });
             });
+
+            asyncTest("focus should hide the _text and show the input value", 2, function() {
+                var textbox = new NumericTextBox(input);
+
+                textbox._text.focus();
+
+                setTimeout(function() {
+                    start();
+                    ok(!textbox._text.is(":visible"));
+                    equal(input[0], document.activeElement);
+                }, 100);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
