@@ -66,12 +66,14 @@
         COLUMN = "column",
         COORD_PRECISION = dataviz.COORD_PRECISION,
         DATABOUND = "dataBound",
+        DAYS = "days",
         DEFAULT_FONT = dataviz.DEFAULT_FONT,
         DEFAULT_HEIGHT = dataviz.DEFAULT_HEIGHT,
         DEFAULT_PRECISION = dataviz.DEFAULT_PRECISION,
         DEFAULT_WIDTH = dataviz.DEFAULT_WIDTH,
         FADEIN = "fadeIn",
         GLASS = "glass",
+        HOURS = "hours",
         INITIAL_ANIMATION_DURATION = dataviz.INITIAL_ANIMATION_DURATION,
         INSIDE_BASE = "insideBase",
         INSIDE_END = "insideEnd",
@@ -81,6 +83,8 @@
         LINE_MARKER_SIZE = 8,
         MAX_VALUE = Number.MAX_VALUE,
         MIN_VALUE = -Number.MAX_VALUE,
+        MINUTES = "minutes",
+        MONTHS = "months",
         MOUSEMOVE_TRACKING = "mousemove.tracking",
         MOUSEOVER = "mouseover",
         OUTSIDE_END = "outsideEnd",
@@ -95,6 +99,18 @@
         SERIES_CLICK = "seriesClick",
         SERIES_HOVER = "seriesHover",
         STRING = "string",
+        TIME_PER_MINUTE = 60000,
+        TIME_PER_HOUR = 60 * TIME_PER_MINUTE,
+        TIME_PER_DAY = 24 * TIME_PER_HOUR,
+        TIME_PER_MONTH = 31 * TIME_PER_DAY,
+        TIME_PER_YEAR = 365 * TIME_PER_DAY,
+        TIME_PER_UNIT = {
+            "years": TIME_PER_YEAR,
+            "months": TIME_PER_MONTH,
+            "days": TIME_PER_DAY,
+            "hours": TIME_PER_HOUR,
+            "minutes": TIME_PER_MINUTE
+        },
         TOP = "top",
         TOOLTIP_ANIMATION_DURATION = 150,
         TOOLTIP_OFFSET = 5,
@@ -105,6 +121,7 @@
         WHITE = "#fff",
         X = "x",
         Y = "y",
+        YEARS = "years",
         ZERO = "zero";
 
     var CATEGORICAL_CHARTS = [BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA],
@@ -1029,113 +1046,6 @@
             return new AxisLabel(category, index, dataItem, labelOptions);
         }
     });
-
-    var TIME_PER_MINUTE = 60000,
-        TIME_PER_HOUR = 60 * TIME_PER_MINUTE,
-        TIME_PER_DAY = 24 * TIME_PER_HOUR,
-        TIME_PER_MONTH = 31 * TIME_PER_DAY,
-        TIME_PER_YEAR = 365 * TIME_PER_DAY,
-        TIME_PER_UNIT = {
-            "years": TIME_PER_YEAR,
-            "months": TIME_PER_MONTH,
-            "days": TIME_PER_DAY,
-            "hours": TIME_PER_HOUR,
-            "minutes": TIME_PER_MINUTE
-        },
-        YEARS = "years",
-        MONTHS = "months",
-        DAYS = "days",
-        HOURS = "hours",
-        MINUTES = "minutes";
-
-    function toDate(value) {
-        if (isArray(value)) {
-            return map(value, toDate);
-        } else if (value) {
-            return (value instanceof Date) ? value : new Date(value);
-        }
-    }
-
-    function toTime(value) {
-        if (isArray(value)) {
-            return map(value, toTime);
-        } else if (value) {
-            return toDate(value).getTime();
-        }
-    }
-
-    function addDuration(date, value, unit) {
-        date = toDate(date);
-
-        if (unit === YEARS) {
-            return new Date(date.getFullYear() + value, 0, 1);
-        } else if (unit === MONTHS) {
-            return new Date(date.getFullYear(), date.getMonth() + value, 1);
-        } else if (unit === DAYS) {
-            return new Date(date.getFullYear(), date.getMonth(), date.getDate() + value);
-        } else if (unit === HOURS) {
-            return new Date(date.getFullYear(), date.getMonth(), date.getDate(),
-                            date.getHours() + value);
-        } else if (unit === MINUTES) {
-            return new Date(date.getFullYear(), date.getMonth(), date.getDate(),
-                            date.getHours(), date.getMinutes() + value);
-        }
-
-        return date;
-    }
-
-    function floorDate(date, unit) {
-        date = toDate(date);
-
-        return addDuration(date, 0, unit);
-    }
-
-    function ceilDate(date, unit) {
-        date = toDate(date);
-
-        if (floorDate(date, unit).getTime() === date.getTime()) {
-            return date;
-        }
-
-        return addDuration(date, 1, unit);
-    }
-
-    function timeUnits(delta) {
-        var unit = HOURS;
-
-        if (delta >= TIME_PER_YEAR) {
-            unit = YEARS;
-        } else if (delta >= TIME_PER_MONTH) {
-            unit = MONTHS;
-        } else if (delta >= TIME_PER_DAY) {
-            unit = DAYS;
-        }
-
-        return unit;
-    }
-
-    function dateDiff(a, b) {
-        var diff = a.getTime() - b,
-            offsetDiff = a.getTimezoneOffset() - b.getTimezoneOffset();
-
-        return diff - (offsetDiff * TIME_PER_MINUTE);
-    }
-
-    function duration(a, b, unit) {
-        var diff;
-
-        if (unit === YEARS) {
-            diff = b.getFullYear() - a.getFullYear();
-        } else if (unit === MONTHS) {
-            diff = duration(a, b, YEARS) * 12 + b.getMonth() - a.getMonth();
-        } else if (unit === DAYS) {
-            diff = math.floor(dateDiff(b, a) / TIME_PER_DAY);
-        } else {
-            diff = math.floor((b - a) / TIME_PER_UNIT[unit]);
-        }
-
-        return diff;
-    }
 
     var AxisDateLabel = AxisLabel.extend({
         formatValue: function(value, options) {
@@ -4781,6 +4691,95 @@
         return get(row);
     }
     getField.cache = {};
+
+    function toDate(value) {
+        if (isArray(value)) {
+            return map(value, toDate);
+        } else if (value) {
+            return (value instanceof Date) ? value : new Date(value);
+        }
+    }
+
+    function toTime(value) {
+        if (isArray(value)) {
+            return map(value, toTime);
+        } else if (value) {
+            return toDate(value).getTime();
+        }
+    }
+
+    function addDuration(date, value, unit) {
+        date = toDate(date);
+
+        if (unit === YEARS) {
+            return new Date(date.getFullYear() + value, 0, 1);
+        } else if (unit === MONTHS) {
+            return new Date(date.getFullYear(), date.getMonth() + value, 1);
+        } else if (unit === DAYS) {
+            return new Date(date.getFullYear(), date.getMonth(), date.getDate() + value);
+        } else if (unit === HOURS) {
+            return new Date(date.getFullYear(), date.getMonth(), date.getDate(),
+                            date.getHours() + value);
+        } else if (unit === MINUTES) {
+            return new Date(date.getFullYear(), date.getMonth(), date.getDate(),
+                            date.getHours(), date.getMinutes() + value);
+        }
+
+        return date;
+    }
+
+    function floorDate(date, unit) {
+        date = toDate(date);
+
+        return addDuration(date, 0, unit);
+    }
+
+    function ceilDate(date, unit) {
+        date = toDate(date);
+
+        if (floorDate(date, unit).getTime() === date.getTime()) {
+            return date;
+        }
+
+        return addDuration(date, 1, unit);
+    }
+
+    function timeUnits(delta) {
+        var unit = HOURS;
+
+        if (delta >= TIME_PER_YEAR) {
+            unit = YEARS;
+        } else if (delta >= TIME_PER_MONTH) {
+            unit = MONTHS;
+        } else if (delta >= TIME_PER_DAY) {
+            unit = DAYS;
+        }
+
+        return unit;
+    }
+
+    function dateDiff(a, b) {
+        var diff = a.getTime() - b,
+            offsetDiff = a.getTimezoneOffset() - b.getTimezoneOffset();
+
+        return diff - (offsetDiff * TIME_PER_MINUTE);
+    }
+
+    function duration(a, b, unit) {
+        var diff;
+
+        if (unit === YEARS) {
+            diff = b.getFullYear() - a.getFullYear();
+        } else if (unit === MONTHS) {
+            diff = duration(a, b, YEARS) * 12 + b.getMonth() - a.getMonth();
+        } else if (unit === DAYS) {
+            diff = math.floor(dateDiff(b, a) / TIME_PER_DAY);
+        } else {
+            diff = math.floor((b - a) / TIME_PER_UNIT[unit]);
+        }
+
+        return diff;
+    }
 
     // Exports ================================================================
 
