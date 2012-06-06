@@ -1166,28 +1166,30 @@
                 categoryIx,
                 currentCategory,
                 lastCategory,
-                minInterval = MAX_VALUE;
+                delta,
+                minDelta = MAX_VALUE;
 
             for (categoryIx = 0; categoryIx < count; categoryIx++) {
                 currentCategory = toTime(categories[categoryIx]);
 
                 if (currentCategory && lastCategory) {
-                    minInterval = math.min(
-                        currentCategory - lastCategory, minInterval
-                    );
+                    delta = currentCategory - lastCategory;
+                    if (delta > 0) {
+                        minDelta = math.min(delta, minDelta);
+                    }
                 }
 
                 lastCategory = currentCategory;
             }
 
             return deepExtend({
-                baseUnit: timeUnits(minInterval)
+                baseUnit: timeUnits(minDelta)
             }, options);
         },
 
         groupCategories: function(options) {
             var axis = this,
-                categories = options.categories,
+                categories = toDate(options.categories),
                 baseUnit = options.baseUnit,
                 min = toTime(options.min),
                 max = toTime(options.max),
@@ -3940,7 +3942,10 @@
                 series = plotArea.series;
 
             plotArea.createCategoryAxis();
-            plotArea.aggregateDateSeries();
+
+            if (plotArea.options.categoryAxis.type === "Date") {
+                plotArea.aggregateDateSeries();
+            }
 
             series = plotArea.series;
             plotArea.createAreaChart(grep(series, function(s) {
@@ -3962,48 +3967,70 @@
             var plotArea = this,
                 options = plotArea.options,
                 series = plotArea.series,
+                processedSeries = [],
                 categoryAxis = plotArea.categoryAxis,
                 categories = categoryAxis.options.categories,
                 categoryMap = categoryAxis.categoryMap,
                 groupIx,
                 categoryIndicies,
                 seriesIx,
+                currentSeries,
+                seriesClone,
+                srcData,
                 data,
+                srcDataItems,
+                dataItems,
+                aggregate,
                 rawValues,
                 i,
                 categoryIx,
                 value;
 
-            if (options.categoryAxis.type !== "Date") {
-                return;
-            }
+            for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
+                currentSeries = series[seriesIx];
+                seriesClone = deepExtend({}, currentSeries);
+                aggregate = plotArea.seriesAggregate(seriesClone);
 
-            for (groupIx = 0; groupIx < categories.length; groupIx++) {
-                categoryIndicies = categoryMap[groupIx];
-                for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
-                    data = series[seriesIx].data;
+                srcData = seriesClone.data;
+                srcDataItems = seriesClone.dataItems || [];
+
+                seriesClone.data = data = [];
+                seriesClone.dataItems = dataItems = [];
+
+                for (groupIx = 0; groupIx < categories.length; groupIx++) {
+                    categoryIndicies = categoryMap[groupIx];
                     rawValues = [];
+
                     for (i = 0; i < categoryIndicies.length; i++) {
                         categoryIx = categoryIndicies[i];
-                        value = data[categoryIx];
+                        value = srcData[categoryIx];
 
                         if (defined(value)) {
                             rawValues.push(value);
                         }
-
-                        // TODO: DataItems
-
-                        delete data[categoryIx];
                     }
 
                     if (rawValues.length > 0) {
-                        data[groupIx] = Aggregates.avg(rawValues, series[seriesIx]);
+                        data[groupIx] = aggregate(rawValues, currentSeries);
                     }
 
-                    // TODO: Swap inner and outer loop to avoid excessive trimming
-                    trimArrayEnd(data);
+                    dataItems[groupIx] = rawValues.length > 1 ?
+                        undefined : srcDataItems[categoryIndicies[0]];
                 }
+
+                processedSeries.push(seriesClone);
             }
+
+            plotArea.series = processedSeries;
+        },
+
+        seriesAggregate: function(series) {
+            var aggregate = series.aggregate;
+            if (typeof aggregate === STRING) {
+                aggregate = Aggregates[aggregate];
+            }
+
+            return aggregate || Aggregates.default;
         },
 
         appendChart: function(chart) {
@@ -4554,6 +4581,7 @@
             return values.length;
         }
     };
+    Aggregates.default = Aggregates.max;
 
     function sparseArrayMin(arr) {
         return sparseArrayLimits(arr).min;
@@ -4579,16 +4607,6 @@
         }
 
         return { min: min, max: max };
-    }
-
-    function trimArrayEnd(array) {
-        var lastIx = array.length - 1;
-        while (lastIx > 0 && !defined(array[lastIx])) {
-            lastIx--;
-        }
-        array.splice(lastIx + 1, array.length - lastIx);
-
-        return array;
     }
 
     function intersection(a1, a2, b1, b2) {

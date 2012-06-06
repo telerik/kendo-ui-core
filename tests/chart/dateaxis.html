@@ -75,6 +75,16 @@
                     equals(dateAxis.options.baseUnit, "years");
                 });
 
+                test("Base unit calculation ignores repeating categories", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012-02-01"), new Date("2012-02-01"), new Date("2012-02-02")
+                        ]
+                    });
+
+                    equals(dateAxis.options.baseUnit, "days");
+                });
+
                 test("User set base unit is applied", function() {
                     createDateCategoryAxis({
                         categories: [

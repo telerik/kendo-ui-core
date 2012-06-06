@@ -705,6 +705,120 @@
                     ok(!chartSeries.options.isStacked);
                 });
 
+                // ------------------------------------------------------------
+                var dateCategoryAxis = {
+                    type: "Date",
+                    categories: ["2012-02-01", "2012-02-02", "2012-02-04"]
+                };
+
+                module("Categorical PlotArea / Date series", {
+                    setup: function() {
+                        moduleSetup();
+                    }
+                });
+
+                test("Does not alter data points when no grouping is done", function() {
+                    createPlotArea([{
+                        data: [100, 200, 300]
+                    }], {
+                        categoryAxis: dateCategoryAxis
+                    });
+
+                    same(plotArea.series[0].data, [100, 200, undefined, 300]);
+                });
+
+                test("Does not alter data items when no grouping is done", function() {
+                    createPlotArea([{
+                        data: [100, 200, 300],
+                        dataItems: ["a", "b", "c"]
+                    }], {
+                        categoryAxis: dateCategoryAxis
+                    });
+
+                    same(plotArea.series[0].dataItems, ["a", "b", undefined, "c"]);
+                });
+
+                test("Does not alter original series data", function() {
+                    var series = [{
+                        data: [100, 200, 300]
+                    }];
+
+                    createPlotArea(series, {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    same(series[0].data, [100, 200, 300]);
+                });
+
+                test("Does not alter original series data items", function() {
+                    var series = [{
+                        data: [100, 200, 300],
+                        dataItems: ["a", "b", "c"]
+                    }];
+
+                    createPlotArea(series, {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    same(series[0].dataItems, ["a", "b", "c"]);
+                });
+
+                test("Aggregates series data using max by default", function() {
+                    createPlotArea([{
+                        data: [100, 200, 300]
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    same(plotArea.series[0].data, [300]);
+                });
+
+                test("Aggregates series data with predefined function", function() {
+                    createPlotArea([{
+                        data: [100, 200, 300],
+                        aggregate: "min"
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    same(plotArea.series[0].data, [100]);
+                });
+
+                test("Aggregates series data with user function", 1, function() {
+                    createPlotArea([{
+                        data: [100, 200, 300],
+                        aggregate: function(values, series) {
+                            same(values, series.data);
+                            return 0;
+                        }
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+                });
+
+                test("Aggregated points don't have data items", function() {
+                    createPlotArea([{
+                        data: [100, 200, 300],
+                        dataItems: ["a", "b", "c"]
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    same(plotArea.series[0].dataItems, [undefined]);
+                });
+
             })();
 
             (function() {
