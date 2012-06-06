@@ -287,6 +287,32 @@
                 ok($(".k-overlay").is(":visible"));
             });
 
+            test("visible:false option is inferred from content element", function() {
+                var div = $("<div style='display: none'>foo</div>").appendTo(document.body),
+                    clientObject;
+
+                div.kendoWindow();
+
+                clientObject = div.data("kendoWindow");
+
+                ok(clientObject.wrapper.is(":hidden"));
+                equal(div.css("display"), "block");
+                ok(!clientObject.options.visible);
+            });
+
+            test("visible:true option is inferred from content element", function() {
+                var div = $("<div>foo</div>").appendTo(document.body),
+                    clientObject;
+
+                div.kendoWindow();
+
+                clientObject = div.data("kendoWindow");
+
+                ok(clientObject.wrapper.is(":visible"));
+                ok(div.is(":visible"));
+                ok(clientObject.options.visible);
+            });
+
             var form;
 
             module("appendTo option", {

@@ -330,6 +330,10 @@
                 }
             }
 
+            if (typeof options.visible == "undefined") {
+                options.visible = element.is(VISIBLE);
+            }
+
             wrapper = that.wrapper = element.closest(KWINDOW);
 
             if (!element.is(".k-content") || !wrapper[0]) {
@@ -341,19 +345,10 @@
             }
 
             if (offset) {
-                if (isVisible) {
-                    wrapper.css({
-                        top: offset.top,
-                        left: offset.left
-                    });
-                } else {
-                   wrapper.css({
-                        top: offset.top,
-                        left: offset.left,
-                        visibility: "visible",
-                        display: "none"
-                    });
-                }
+                wrapper.css({
+                    top: offset.top,
+                    left: offset.left
+                });
             }
 
             if (content) {
@@ -393,7 +388,7 @@
 
             $(window).resize(proxy(that._onDocumentResize, that));
 
-            if (wrapper.is(VISIBLE)) {
+            if (options.visible) {
                 that.trigger(OPEN);
                 that.trigger(ACTIVATE);
             }
@@ -792,8 +787,7 @@
             minWidth: 90,
             minHeight: 50,
             maxWidth: Infinity,
-            maxHeight: Infinity,
-            visible: true
+            maxHeight: Infinity
         },
 
         _overlay: function (visible) {
@@ -1412,6 +1406,8 @@
                    // Restore the src attribute of the iframes when they are part of the live DOM tree
                    this.src = iframeSrcAttributes[index];
                 });
+
+            contentHtml.show();
         }
     });
 
