@@ -207,10 +207,14 @@
                     suggest: true
                 }).data("kendoComboBox");
 
+                var origin = window.setTimeout;
                 window.setTimeout = function(func) { func() };
+
                 combobox.input.val("o").keydown();
 
                 equal(combobox.text(), "oo");
+
+                window.setTimeout = origin;
             });
 
             test("refresh method suggests if no item is highlighted", 2, function() {
@@ -224,12 +228,16 @@
                     delay: 0
                 }).data("kendoComboBox");
 
+                var origin = window.setTimeout;
                 window.setTimeout = function(func) { func() };
+
                 combobox.input.val("f");
                 combobox.search("f");
 
                 equal(combobox.text(), "foo");
                 equal(combobox.current(), null);
+
+                window.setTimeout = origin;
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

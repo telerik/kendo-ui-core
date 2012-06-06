@@ -136,23 +136,6 @@
                 equal(textbox.options.format, "c");
             });
 
-            asyncTest("form reset support", 2, function() {
-                input.attr("value", "123");
-
-                var form = $("<form/>").appendTo(document).append(input),
-                    textbox = new NumericTextBox(input);
-
-                textbox.value("1");
-
-                form[0].reset();
-
-                setTimeout(function() {
-                    equal(textbox.element.val(), "123");
-                    equal(textbox._text.val(), "123.00");
-                    start();
-                }, 200);
-            });
-
             test("NumericTextBox uses specific culture", function() {
                 var textbox = new NumericTextBox(input, {
                     value: 10,
@@ -171,6 +154,23 @@
 
                 ok(!textbox._upArrow.is(":visible"));
                 ok(textbox._inputWrapper.hasClass("k-expand-padding"));
+            });
+
+            asyncTest("form reset support", 2, function() {
+                input.attr("value", "123");
+
+                var form = $("<form/>").appendTo(document).append(input),
+                    textbox = new NumericTextBox(input);
+
+                textbox.value("1");
+
+                form[0].reset();
+
+                setTimeout(function() {
+                    equal(textbox.element.val(), "123");
+                    equal(textbox._text.val(), "123.00");
+                    start();
+                }, 200);
             });
 
         </script>

@@ -291,29 +291,34 @@
                 kendo.culture().numberFormat.percent.decimals = 2;
             });
 
-            asyncTest("focusing text input should call _focus", 2, function() {
+            test("focusing text input should call _focus", 2, function() {
                 var textbox = new NumericTextBox(input);
+
+                var origin = window.setTimeout;
+                window.setTimeout = function(func) { func() };
 
                 textbox._text.focus();
 
-                setTimeout(function() {
-                    ok(input.is(":visible"));
-                    ok(!textbox._text.is(":visible"));
-                    start();
-                }, 100);
+                ok(input.is(":visible"));
+                ok(!textbox._text.is(":visible"));
+
+                window.setTimeout = origin;
             });
 
-            asyncTest("on blur should hide input text", 2, function() {
+            test("on blur should hide input text", 2, function() {
                 var textbox = new NumericTextBox(input);
 
-                textbox._text.focus();
-                setTimeout(function() { input.blur(); }, 100);
+                var origin = window.setTimeout;
+                window.setTimeout = function(func) { func() };
 
-                setTimeout(function() {
-                    ok(!input.is(":visible"));
-                    ok(textbox._text.is(":visible"));
-                    start();
-                }, 300);
+                textbox._text.focus();
+
+                input.blur();
+
+                ok(!input.is(":visible"));
+                ok(textbox._text.is(":visible"));
+
+                window.setTimeout = origin;
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

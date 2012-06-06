@@ -110,16 +110,18 @@
                     });
             });
 
-            asyncTest("focus should hide the _text and show the input value", 2, function() {
+            test("focus should hide the _text and show the input value", 2, function() {
                 var textbox = new NumericTextBox(input);
+
+                var origin = window.setTimeout;
+                window.setTimeout = function(func) { func() };
 
                 textbox._text.focus();
 
-                setTimeout(function() {
-                    start();
-                    ok(!textbox._text.is(":visible"));
-                    equal(input[0], document.activeElement);
-                }, 100);
+                ok(!textbox._text.is(":visible"));
+                equal(input[0], document.activeElement);
+
+                window.setTimeout = origin;
             });
 
         </script>

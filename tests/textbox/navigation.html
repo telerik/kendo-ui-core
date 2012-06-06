@@ -22,6 +22,8 @@
                 keys = kendo.keys,
                 input;
 
+            QUnit.reorder = false;
+
             $.fn.pressKey = function(key, eventName) {
                 key = key || kendo.keys.DOWN;
                 eventName = eventName || "keydown";
@@ -40,30 +42,6 @@
                 teardown: function() {
                     input.parents(".k-widget").andSelf().remove();
                 }
-            });
-
-            asyncTest("pressing mousedown of the up arrow increment value", 1, function() {
-                var textbox = new NumericTextBox(input);
-
-                textbox._upArrow.mousedown();
-
-                setTimeout(function() {
-                    clearTimeout(textbox._spinning);
-                    ok(textbox.value() > 1);
-                    start();
-                }, 500);
-            });
-
-            asyncTest("pressing mousedown of the down arrow decrement value", 1, function() {
-                var textbox = new NumericTextBox(input);
-
-                textbox._downArrow.mousedown();
-
-                setTimeout(function() {
-                    clearTimeout(textbox._spinning);
-                    ok(textbox.value() < -1);
-                    start();
-                }, 500);
             });
 
             test("pressing DOWN arrow calls _step()", function() {
@@ -218,6 +196,30 @@
                 input.pressKey(110);
 
                 equal(input.val(), "");
+            });
+
+            asyncTest("pressing mousedown of the up arrow increment value", 1, function() {
+                var textbox = new NumericTextBox(input);
+
+                textbox._upArrow.mousedown();
+
+                setTimeout(function() {
+                    clearTimeout(textbox._spinning);
+                    ok(textbox.value() > 1);
+                    start();
+                }, 500);
+            });
+
+            asyncTest("pressing mousedown of the down arrow decrement value", 1, function() {
+                var textbox = new NumericTextBox(input);
+
+                textbox._downArrow.mousedown();
+
+                setTimeout(function() {
+                    clearTimeout(textbox._spinning);
+                    ok(textbox.value() < -1);
+                    start();
+                }, 500);
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

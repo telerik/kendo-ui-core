@@ -318,11 +318,15 @@
                     current: combobox.current
                 });
 
+                var origin = window.setTimeout;
                 window.setTimeout = function(func) { func() };
+
                 combobox.input.val("").focus().press(keys.BACKSPACE);
 
                 equal(combobox.calls("current"), 1);
                 equal(combobox.args("current")[0], null);
+
+                window.setTimeout = origin;
             });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
