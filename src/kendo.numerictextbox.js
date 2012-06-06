@@ -241,9 +241,9 @@
 
              that._text.focus(proxy(that._click, that));
 
-             min = parse(element.attr("min"));
-             max = parse(element.attr("max"));
-             step = parse(element.attr("step"));
+             min = that.min(element.attr("min"));
+             max = that.max(element.attr("max"));
+             step = that._parse(element.attr("step"));
 
              if (options.min === NULL && min !== NULL) {
                  options.min = min;
@@ -379,6 +379,42 @@
         },
 
         /**
+        * Gets/Sets the min value of the NumericTextBox.
+        * @param {Number | String} value The min value to set.
+        * @returns {Number} The min value of the NumericTextBox.
+        * @example
+        * // get a reference to the NumericTextBox widget
+        * var numerictextbox = $("#numerictextbox").data("kendoNumericTextBox");
+        *
+        * // get the min value of the numerictextbox.
+        * var min = numerictextbox.min();
+        *
+        * // set the min value of the numerictextbox.
+        * numerictextbox.min(-10);
+        */
+        min: function(value) {
+            return this._option("min", value);
+        },
+
+        /**
+        * Gets/Sets the max value of the NumericTextBox.
+        * @param {Number | String} value The max value to set.
+        * @returns {Number} The max value of the NumericTextBox.
+        * @example
+        * // get a reference to the NumericTextBox widget
+        * var numerictextbox = $("#numerictextbox").data("kendoNumericTextBox");
+        *
+        * // get the max value of the numerictextbox.
+        * var max = numerictextbox.max();
+        *
+        * // set the max value of the numerictextbox.
+        * numerictextbox.max(10);
+        */
+        max: function(value) {
+            return this._option("max", value);
+        },
+
+        /**
         * Gets/Sets the value of the numerictextbox.
         * @param {Number | String} value The value to set.
         * @returns {Number} The value of the numerictextbox.
@@ -399,7 +435,7 @@
                 return that._value;
             }
 
-            value = parse(value);
+            value = that._parse(value);
             adjusted = that._adjust(value);
 
             if (value !== adjusted) {
@@ -591,7 +627,7 @@
                 value = element.value;
 
             setTimeout(function() {
-                if (parse(element.value) === NULL) {
+                if (that._parse(element.value) === NULL) {
                     that._update(value);
                 }
             });
@@ -639,6 +675,17 @@
             return prevent;
         },
 
+        _option: function(option, value) {
+            var that = this,
+                options = that.options;
+
+            if (value === undefined) {
+                return options[option];
+            }
+
+            options[option] = that._parse(value);
+        },
+
         _spin: function(step, timeout) {
             var that = this;
 
@@ -682,6 +729,14 @@
             that.element.toggle(!toggle);
         },
 
+        _parse: function(value, culture) {
+            if (!culture) {
+                culture = getCulture(this.options.culture);
+            }
+
+            return parse(value, culture);
+        },
+
         _update: function(value) {
             var that = this,
                 options = that.options,
@@ -695,7 +750,7 @@
                 decimals = numberFormat.decimals;
             }
 
-            value = parse(value);
+            value = that._parse(value, culture);
 
             isNotNull = value !== NULL;
 

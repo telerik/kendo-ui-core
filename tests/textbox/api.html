@@ -7,6 +7,7 @@
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.numerictextbox.js"></script>
+        <script src="../../src/cultures/kendo.culture.bg-BG.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
     </head>
     <body>
@@ -289,6 +290,35 @@
                 equal(textbox._text.val(), kendo.toString(number, "p"));
 
                 kendo.culture().numberFormat.percent.decimals = 2;
+            });
+
+            test("value method uses options.culture to parse value", function() {
+                var textbox = new NumericTextBox(input, {
+                    culture: "bg-BG"
+                });
+
+                textbox.value("10,20");
+
+                equal(textbox.value(), 10.20);
+                equal(textbox._text.val(), kendo.toString(10.20, "n", "bg-BG"));
+            });
+
+            test("min method sets min value", function() {
+                var textbox = new NumericTextBox(input);
+
+                textbox.min("10");
+
+                equal(textbox.options.min, 10);
+            });
+
+            test("min method sets max value", function() {
+                var textbox = new NumericTextBox(input, {
+                    culture: "bg-BG"
+                });
+
+                textbox.max("10,10");
+
+                equal(textbox.options.max, 10.10);
             });
 
             test("focusing text input should call _focus", 2, function() {
