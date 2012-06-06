@@ -12,6 +12,7 @@ function processClass(theClass) {
     theClass.methods = theClass.getMethods(); // 2
 
     var suiteID = theClass.alias.match(/kendo\.(\w+)/);
+    var className = theClass.alias.match(/\w+$/)[0].toLowerCase();
     var suite = "framework";
     if (!suiteID) {
         suiteID = ['', '_framework'];
@@ -49,7 +50,7 @@ function processClass(theClass) {
 
     if (html) {
         IO.mkPath("docs/" + suite);
-        IO.saveFile("docs/" + suite, theClass.alias.toLowerCase() + ".md", html);
+        IO.saveFile("docs/" + suite, className + ".md", html);
     }
 }
 
