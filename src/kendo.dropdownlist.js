@@ -79,12 +79,8 @@
      *         index: 0,
      *         dataTextField: "Name",
      *         dataValueField: "Id",
-     *         filter: "contains",
      *         dataSource: {
      *             type: "odata",
-     *             serverFiltering: true,
-     *             serverPaging: true,
-     *             pageSize: 20,
      *             transport: {
      *                 read: "http://odata.netflix.com/Catalog/Titles"
      *             }
@@ -127,9 +123,6 @@
      *             template: $("#scriptTemplate").html(),
      *             dataSource: {
      *                 type: "odata",
-     *                 serverFiltering: true,
-     *                 serverPaging: true,
-     *                 pageSize: 20,
      *                 transport: {
      *                     read: "http://odata.netflix.com/Catalog/Titles"
      *                 }
