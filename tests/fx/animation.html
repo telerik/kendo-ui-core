@@ -234,187 +234,189 @@
                 ok(!called);
             });
 
-            asyncTest("animating height from 0 to 100 results in 100px high element", function() {
-                var height = -1;
+            if (!$.browser.mozilla) {
+                asyncTest("animating height from 0 to 100 results in 100px high element", function() {
+                    var height = -1;
 
-                kendo.fx.foo = {
-                    css: { height: 0, display: "block" },
-                    setup: function(element, options) {
-                        return { height: 100 };
-                    }
-                };
-
-                span.kendoAnimate({
-                    effects: "foo",
-                    duration: 20,
-                    init: function () {
-                        height = span.height();
-                    },
-                    complete: function(element) {
-                        ok(height == 0);
-                        ok(span.height() == 100);
-                        start();
-                    }
-                });
-            });
-
-            asyncTest("fadeIn animates the opacity from 0 to 1", function() {
-                span.css({ position: "absolute", display: "block" });
-
-                var opacity = 5;
-
-                span.kendoAnimate({
-                    effects: "fadeIn",
-                    duration: 10,
-                    init: function () {
-                        opacity = span.css("opacity");
-                    },
-                    complete: function () {
-                        ok(opacity == 0);
-                        ok(span.css("opacity") == 1);
-                        start();
-                    }
-                });
-            });
-
-            asyncTest("fadeOut animates the opacity from 1 to 0", function() {
-                span.css({ position: "absolute", display: "block" });
-
-                var opacity = 5;
-
-                kendo.fx.fade.restore = [];
-
-                span.kendoAnimate({
-                    effects: "fadeOut",
-                    duration: 10,
-                    init: function () {
-                        opacity = span.css("opacity");
-                    },
-                    complete: function () {
-                        ok(opacity == 1);
-                        ok(span.css("opacity") == 0);
-                        start();
-                    }
-                });
-            });
-
-            if (!$.browser.msie) // TODO: Write the IE part of this test.
-                asyncTest("zoomIn animates the scale from 0.01 to 1", function() {
-                    span.css({ position: "absolute", display: "block" });
-
-                    var scale = 5;
+                    kendo.fx.foo = {
+                        css: { height: 0, display: "block" },
+                        setup: function(element, options) {
+                            return { height: 100 };
+                        }
+                    };
 
                     span.kendoAnimate({
-                        effects: "zoomIn",
-                        duration: 10,
+                        effects: "foo",
+                        duration: 20,
                         init: function () {
-                            scale = animationProperty(span, "scale");
+                            height = span.height();
                         },
-                        complete: function () {
-                            ok(scale == 0.01);
-                            ok(animationProperty(span, "scale") == 1);
+                        complete: function(element) {
+                            ok(height == 0);
+                            ok(span.height() == 100);
                             start();
                         }
                     });
                 });
 
-            asyncTest("slide:right moves the element right with its width", function() {
-                span.css({ left: 10, width: 20 });
-                var position = span.offset().left;
+                asyncTest("fadeIn animates the opacity from 0 to 1", function() {
+                    span.css({ position: "absolute", display: "block" });
 
-                span.kendoAnimate("slide:right", 20, function () {
-                    ok((transforms ? animationProperty(span, "translatex") : span.offset().left - position) == span.width());
-                    start();
+                    var opacity = 5;
+
+                    span.kendoAnimate({
+                        effects: "fadeIn",
+                        duration: 10,
+                        init: function () {
+                            opacity = span.css("opacity");
+                        },
+                        complete: function () {
+                            ok(opacity == 0);
+                            ok(span.css("opacity") == 1);
+                            start();
+                        }
+                    });
                 });
-            });
 
-            asyncTest("slide:down moves the element down with its height", function() {
-                span.css({ top: 10, height: 20 });
-                var position = span.offset().top;
+                asyncTest("fadeOut animates the opacity from 1 to 0", function() {
+                    span.css({ position: "absolute", display: "block" });
 
-                span.kendoAnimate("slide:down", 20, function () {
-                    ok((transforms ? animationProperty(span, "translatey") : span.offset().top - position) == span.height());
-                    start();
+                    var opacity = 5;
+
+                    kendo.fx.fade.restore = [];
+
+                    span.kendoAnimate({
+                        effects: "fadeOut",
+                        duration: 10,
+                        init: function () {
+                            opacity = span.css("opacity");
+                        },
+                        complete: function () {
+                            ok(opacity == 1);
+                            ok(span.css("opacity") == 0);
+                            start();
+                        }
+                    });
                 });
-            });
 
-            asyncTest("slideIn:right moves the element right from - its width to 0", function() {
-                span.css({ position: "absolute", display: "block", left: 10 });
+                if (!$.browser.msie) // TODO: Write the IE part of this test.
+                    asyncTest("zoomIn animates the scale from 0.01 to 1", function() {
+                        span.css({ position: "absolute", display: "block" });
 
-                var position = 1;
-                if (transforms)
-                    span.css(TRANSFORM, "translateX(10px)");
+                        var scale = 5;
 
-                span.kendoAnimate({
-                    effects: "slideIn:right",
-                    duration: 20,
-                    init: function () {
-                        position = (transforms ? animationProperty(span, "translateX") : span.offset().left);
-                    },
-                    complete: function () {
-                        ok(position == -span.width());
-                        ok((transforms ? animationProperty(span, "translateX") : span.offset().left) == 0);
+                        span.kendoAnimate({
+                            effects: "zoomIn",
+                            duration: 10,
+                            init: function () {
+                                scale = animationProperty(span, "scale");
+                            },
+                            complete: function () {
+                                ok(scale == 0.01);
+                                ok(animationProperty(span, "scale") == 1);
+                                start();
+                            }
+                        });
+                    });
+
+                asyncTest("slide:right moves the element right with its width", function() {
+                    span.css({ left: 10, width: 20 });
+                    var position = span.offset().left;
+
+                    span.kendoAnimate("slide:right", 20, function () {
+                        ok((transforms ? animationProperty(span, "translatex") : span.offset().left - position) == span.width());
                         start();
-                    }
+                    });
                 });
-            });
 
-            asyncTest("slideIn:down moves the element down from - its height to 0", function() {
-                span.css({ position: "absolute", display: "block", top: 10 });
+                asyncTest("slide:down moves the element down with its height", function() {
+                    span.css({ top: 10, height: 20 });
+                    var position = span.offset().top;
 
-                var position = 1;
-                if (transforms)
-                    span.css(TRANSFORM, "translateY(10px)");
-
-                span.kendoAnimate({
-                    effects: "slideIn:down",
-                    duration: 20,
-                    init: function () {
-                        position = (transforms ? animationProperty(span, "translateY") : span.offset().top);
-                    },
-                    complete: function () {
-                        ok(position == -span.height());
-                        ok((transforms ? animationProperty(span, "translateY") : span.offset().top) == 0);
+                    span.kendoAnimate("slide:down", 20, function () {
+                        ok((transforms ? animationProperty(span, "translatey") : span.offset().top - position) == span.height());
                         start();
-                    }
+                    });
                 });
-            });
 
-            asyncTest("expand:vertical expands the element from 0 to its height", function() {
-                span.css({ position: "absolute", display: "block", height: 100 });
-                var initialHeight = 100;
+                asyncTest("slideIn:right moves the element right from - its width to 0", function() {
+                    span.css({ position: "absolute", display: "block", left: 10 });
 
-                span.kendoAnimate({
-                    effects: "expand:vertical",
-                    duration: 20,
-                    init: function () {
-                        initialHeight = span.height();
-                    },
-                    complete: function () {
-                        ok(initialHeight == 0);
-                        ok(span.height() == 100);
-                        start();
-                    }
+                    var position = 1;
+                    if (transforms)
+                        span.css(TRANSFORM, "translateX(10px)");
+
+                    span.kendoAnimate({
+                        effects: "slideIn:right",
+                        duration: 20,
+                        init: function () {
+                            position = (transforms ? animationProperty(span, "translateX") : span.offset().left);
+                        },
+                        complete: function () {
+                            ok(position == -span.width());
+                            ok((transforms ? animationProperty(span, "translateX") : span.offset().left) == 0);
+                            start();
+                        }
+                    });
                 });
-            });
 
-            asyncTest("expand:horizontal expands the element from 0 to its width", function() {
-                span.css({ position: "absolute", display: "block", width: 100, height: 100 });
-                var initialWidth = 100;
+                asyncTest("slideIn:down moves the element down from - its height to 0", function() {
+                    span.css({ position: "absolute", display: "block", top: 10 });
 
-                span.kendoAnimate({
-                    effects: "expand:horizontal",
-                    duration: 20,
-                    init: function () {
-                        initialWidth = span.width();
-                    },
-                    complete: function () {
-                        ok(initialWidth == 0);
-                        ok(span.width() == 100);
-                        start();
-                    }
+                    var position = 1;
+                    if (transforms)
+                        span.css(TRANSFORM, "translateY(10px)");
+
+                    span.kendoAnimate({
+                        effects: "slideIn:down",
+                        duration: 20,
+                        init: function () {
+                            position = (transforms ? animationProperty(span, "translateY") : span.offset().top);
+                        },
+                        complete: function () {
+                            ok(position == -span.height());
+                            ok((transforms ? animationProperty(span, "translateY") : span.offset().top) == 0);
+                            start();
+                        }
+                    });
                 });
-            });
+
+                asyncTest("expand:vertical expands the element from 0 to its height", function() {
+                    span.css({ position: "absolute", display: "block", height: 100 });
+                    var initialHeight = 100;
+
+                    span.kendoAnimate({
+                        effects: "expand:vertical",
+                        duration: 20,
+                        init: function () {
+                            initialHeight = span.height();
+                        },
+                        complete: function () {
+                            ok(initialHeight == 0);
+                            ok(span.height() == 100);
+                            start();
+                        }
+                    });
+                });
+
+                asyncTest("expand:horizontal expands the element from 0 to its width", function() {
+                    span.css({ position: "absolute", display: "block", width: 100, height: 100 });
+                    var initialWidth = 100;
+
+                    span.kendoAnimate({
+                        effects: "expand:horizontal",
+                        duration: 20,
+                        init: function () {
+                            initialWidth = span.width();
+                        },
+                        complete: function () {
+                            ok(initialWidth == 0);
+                            ok(span.width() == 100);
+                            start();
+                        }
+                    });
+                });
+            }
 
             module("animationFrame Animation", {});
 
