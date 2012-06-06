@@ -3840,6 +3840,7 @@
                 size,
                 margin = 0,
                 seriesConfigs = [],
+                seriesConfig,
                 seriesIndex,
                 c, i, r, ir = 0;
 
@@ -3853,7 +3854,7 @@
 
             for (i = 0; i < seriesCount; i++) {
                 currentSeries = series[i];
-                if (i == 0 && defined(currentSeries.holeSize)) {
+                if (i === 0 && defined(currentSeries.holeSize)) {
                     holeSize = currentSeries.holeSize;
                     totalSize -= currentSeries.holeSize;
                 }
