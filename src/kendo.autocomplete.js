@@ -33,7 +33,7 @@
      * <p>
      *  Locally defined values are best for small, fixed sets of suggestions.
      *  Remote suggestions should be used for larger data sets. When used
-     *  with the <a href="../datasource/index.html">DataSource</a> component,
+     *  with the <strong>DataSource</strong> component,
      *  filtering large remote data services can be pushed to the server as
      *  well, maximizing client-side performance.
      * </p>
@@ -60,7 +60,7 @@
      * <p>
      *  The easiest way to bind an <b>AutoComplete</b> to remote
      *  suggestions is to use the
-     *  <a href="../datasource/index.html">DataSource</a> component; an
+     *  <strong>DataSource</strong> component; an
      *  abstraction for local and remote data. The <b>DataSource</b>
      *  component can be used to serve data from a variety of data services,
      *  such as
@@ -258,31 +258,32 @@
         * $("#autoComplete").kendoAutoComplete({
         *     separator: ", "
         * });
-        * @option {Function} [template] Template to be used for rendering the items in the list.
+        * @option {String} [template] Template to be used for rendering the items in the list.
         * _example
         *  //template
-        * &lt;script id="template" type="text/x-kendo-tmpl"&gt;
+        *
+        * <script id="template" type="text/x-kendo-tmpl">
         *       # if (data.BoxArt.SmallUrl) { #
-        *           &lt;img src="${ data.BoxArt.SmallUrl }" alt="${ data.Name }" /&gt;Title:${ data.Name }, Year: ${ data.Name }
+        *           <img src="${ data.BoxArt.SmallUrl }" alt="${ data.Name }" />Title:${ data.Name }, Year: ${ data.Name }
         *       # } else { #
-        *           &lt;img alt="${ data.Name }" /&gt;Title:${ data.Name }, Year: ${ data.Name }
+        *           <img alt="${ data.Name }" />Title:${ data.Name }, Year: ${ data.Name }
         *       # } #
-        *  &lt;/script&gt;
+        *  </script>
         *
         *  //autocomplete initialization
-        *  &lt;script&gt;
+        *  <script>
         *      $("#autocomplete").kendoAutoComplete({
         *          dataSource: dataSource,
         *          dataTextField: "Name",
         *          dataValueField: "Id",
         *          template: kendo.template($("#template").html())
         *      });
-        *  &lt;/script&gt;
+        *  </script>
         * @option {Object} [animation] <> Animations to be used for opening/closing the popup. Setting to false will turn of the animation.
         * @option {Object} [animation.open] <> Animation to be used for opening of the popup.
         * _example
         *  //autocomplete initialization
-        *  &lt;script&gt;
+        *  <script>
         *      $("#autocomplete").kendoAutoComplete({
         *          dataSource: dataSource,
         *          animation: {
@@ -293,11 +294,11 @@
         *             }
         *          }
         *      });
-        *  &lt;/script&gt;
+        *  </script>
         * @option {Object} [animation.close] <> Animation to be used for closing of the popup.
         * _example
         *  //autocomplete initialization
-        *  &lt;script&gt;
+        *  <script>
         *      $("#autocomplete").kendoAutoComplete({
         *          dataSource: dataSource,
         *          animation: {
@@ -309,7 +310,7 @@
         *             }
         *          }
         *      });
-        *  &lt;/script&gt;
+        *  </script>
         *  @option {String} [placeholder] <""> A string that appears in the textbox when it has no value.
         *  _example
         *  //autocomplete initialization

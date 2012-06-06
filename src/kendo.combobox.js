@@ -7,7 +7,7 @@
      * The <strong>ComboBox</strong> displays a list of values and allows the selection of a single value from this
      * list. Custom values may also be entered via keyboard input. If you do not wish permit keyboard input - that is,
      * custom values are not permitted - use the
-     * <a href="../dropdownlist/index.html" title="DropDownList">DropDownList</a>.
+     * <strong>DropDownList</strong>.
      * </p>
      * <p>
      * The <strong>ComboBox</strong> represents a richer version of a &lt;select&gt; element, providing support for
@@ -66,7 +66,7 @@
      * <h3>Binding to Local or Remote Data</h3>
      * <p>
      *  The <strong>ComboBox</strong> can be bound to both local arrays and remote data via the
-     *  <a href="../datasource/index.html" title="DataSource">DataSource</a> component; an abstraction for local and
+     *  <strong>DataSource</strong> component; an abstraction for local and
      *  remote data. Local arrays are appropriate for limited value options, while remote data binding is better for
      *  larger data sets. With remote data-binding, items will be loaded on-demand; when they are displayed.
      * </p>
@@ -96,7 +96,7 @@
      * <p>
      *  The <strong>ComboBox</strong> uses Kendo UI templates to enable you to control how items are rendered. For a
      *  detailed description of the capabilities and syntax of the Kendo UI templates, please refer to the
-     *  <a href="../templates/index.html" title="Kendo UI Template">demos and documentation</a>.
+     *  <a href="http://www.kendoui.com/documentation/framework/templates/overview.aspx" title="Kendo UI Template">documentation</a>.
      * </p>
      *
      * @exampleTitle Basic item template customization
@@ -266,26 +266,26 @@
         * $("#comboBox").kendoComboBox({
         *     height: 500
         * });
-        * @option {Function} [template] Template to be used for rendering the items in the list.
+        * @option {string} [template] Template to be used for rendering the items in the list.
         * _example
         *  //template
-        * &lt;script id="template" type="text/x-kendo-tmpl"&gt;
+        * <script id="template" type="text/x-kendo-tmpl">
         *       # if (data.BoxArt.SmallUrl) { #
-        *           &lt;img src="${ data.BoxArt.SmallUrl }" alt="${ data.Name }" /&gt;Title:${ data.Name }, Year: ${ data.Name }
+        *           <img src="${ data.BoxArt.SmallUrl }" alt="${ data.Name }" />Title:${ data.Name }, Year: ${ data.Name }
         *       # } else { #
-        *           &lt;img alt="${ data.Name }" /&gt;Title:${ data.Name }, Year: ${ data.Name }
+        *           <img alt="${ data.Name }" />Title:${ data.Name }, Year: ${ data.Name }
         *       # } #
-        *  &lt;/script&gt;
+        *  </script>
         *
         *  //combobox initialization
-        *  &lt;script&gt;
+        *  <script>
         *      $("#combobox").kendoComboBox({
         *          dataSource: dataSource,
         *          dataTextField: "Name",
         *          dataValueField: "Id",
         *          template: kendo.template($("#template").html())
         *      });
-        *  &lt;/script&gt;
+        *  </script>
         * @option {Object} [animation] <> Animations to be used for opening/closing the popup. Setting to false will turn off the animation.
         * _exampleTitle Turn of animation
         * _example
@@ -295,7 +295,8 @@
         * @option {Object} [animation.open] <> Animation to be used for opening of the popup.
         * _example
         *  //combobox initialization
-        *  &lt;script&gt;
+        *
+        * <script>
         *      $("#combobox").kendoComboBox({
         *          dataSource: dataSource,
         *          animation: {
@@ -306,12 +307,12 @@
         *             }
         *          }
         *      });
-        *  &lt;/script&gt;
+        *  </script>
         *
         * @option {Object} [animation.close] <> Animation to be used for closing of the popup.
         * _example
         *  //combobox initialization
-        *  &lt;script&gt;
+        *  <script>
         *      $("#combobox").kendoComboBox({
         *          dataSource: dataSource,
         *          animation: {
@@ -323,7 +324,7 @@
         *             }
         *          }
         *      });
-        *  &lt;/script&gt;
+        *  </script>
         *  @option {String} [placeholder] <""> A string that appears in the textbox when the combobox has no value.
         *  _example
         *  //combobox initialization
