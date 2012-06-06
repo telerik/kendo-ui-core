@@ -772,7 +772,7 @@
                 label.template = template(options.template);
                 text = label.template({ value: value, dataItem: dataItem });
             } else if (options.format) {
-                text = autoFormat(options.format, value);
+                text = label.formatValue(value, options);
             }
 
             label.text = text;
@@ -784,6 +784,10 @@
             TextBox.fn.init.call(label, text, options);
 
             label.makeDiscoverable();
+        },
+
+        formatValue: function(value, options) {
+            return autoFormat(options.format, value);
         },
 
         click: function(widget, e) {

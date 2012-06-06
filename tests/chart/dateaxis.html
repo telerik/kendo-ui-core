@@ -320,6 +320,20 @@
                          ["1.feb", "2.feb", "3.feb"]);
                 });
 
+                test("creates labels with custom template", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012-02-01"), new Date("2012-02-03")
+                        ],
+                        labels: {
+                            template: "#= kendo.toString(value, 'yyyy') #"
+                        }
+                    });
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["2012", "2012", "2012"]);
+                });
+
                 // ------------------------------------------------------------
                 module("Date CategoryAxis / Base unit / Months");
 
@@ -636,6 +650,20 @@
 
                     same($.map(view.log.text, function(text) { return text.content }),
                          ["31.ene", "1.feb", "2.feb", "3.feb"]);
+                });
+
+                test("creates labels with custom template", function() {
+                    createDateValueAxis(new Date("2012/02/01"), new Date("2012/02/02"), {
+                        categories: [
+                            new Date("2012-02-01"), new Date("2012-02-01")
+                        ],
+                        labels: {
+                            template: "#= kendo.toString(value, 'yyyy') #"
+                        }
+                    });
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["2012", "2012", "2012", "2012"]);
                 });
 
                 // ------------------------------------------------------------

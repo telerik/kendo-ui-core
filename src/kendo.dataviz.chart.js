@@ -1137,6 +1137,12 @@
         return diff;
     }
 
+    var AxisDateLabel = AxisLabel.extend({
+        formatValue: function(value, options) {
+            return kendo.toString(value, options.format, options.culture);
+        }
+    });
+
     var DateCategoryAxis = CategoryAxis.extend({
         init: function(options) {
             var axis = this;
@@ -1232,11 +1238,11 @@
             var options = this.options,
                 dataItem = options.dataItems ? options.dataItems[index] : null,
                 date = options.categories[index],
-                unitFormat = labelOptions.dateFormats[options.baseUnit],
-                format = labelOptions.format || unitFormat,
-                value = kendo.toString(date, format, labelOptions.culture);
+                unitFormat = labelOptions.dateFormats[options.baseUnit];
 
-            return new AxisLabel(value, index, dataItem, labelOptions);
+            labelOptions.format = labelOptions.format || unitFormat;
+
+            return new AxisDateLabel(date, index, dataItem, labelOptions);
         }
     });
 
@@ -1387,11 +1393,11 @@
             var options = this.options,
                 offset =  index * options.majorUnit,
                 date = addDuration(options.min, offset, options.baseUnit),
-                unitFormat = labelOptions.dateFormats[options.baseUnit],
-                format = labelOptions.format || unitFormat,
-                value = kendo.toString(date, format, labelOptions.culture);
+                unitFormat = labelOptions.dateFormats[options.baseUnit];
 
-            return new AxisLabel(value, index, null, labelOptions);
+            labelOptions.format = labelOptions.format || unitFormat;
+
+            return new AxisDateLabel(date, index, null, labelOptions);
         }
     });
 
