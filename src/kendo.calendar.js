@@ -128,6 +128,7 @@
         ui = kendo.ui,
         Widget = ui.Widget,
         parse = kendo.parseDate,
+        unescape = window.unescape,
         extractFormat = kendo._extractFormat,
         template = kendo.template,
         touch = kendo.support.touch,
@@ -720,7 +721,7 @@
 
             if (link[0].href.indexOf("#") != -1) {
                 e.preventDefault();
-            };
+            }
 
             if (link.parent().hasClass(OTHERMONTH)) {
                 currentValue = value;
