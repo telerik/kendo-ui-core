@@ -2514,12 +2514,15 @@
 
             that.children = new HierarchicalDataSource(children);
             that.children.bind("change", function(e){
-                if (!e.node) {
-                    e.node = that;
-                }
+                e.node = e.node || that;
                 that.trigger("change", e);
             });
         },
+
+        load: function() {
+            this.children.fetch();
+        },
+
         shouldSerialize: function(field) {
             return Model.fn.shouldSerialize.call(this, field) && field !== "children";
         }

@@ -170,6 +170,18 @@
 
                 parent.children.read();
             });
+
+            test("load fetches data from the children data source", function() {
+                var dataSource = categories();
+
+                dataSource.read();
+
+                var parent = dataSource.data()[0];
+
+                parent.load();
+
+                equal(parent.children.data().length, 1);
+            });
         </script>
     </body>
 </html>
