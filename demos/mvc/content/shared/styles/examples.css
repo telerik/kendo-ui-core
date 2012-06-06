@@ -1055,7 +1055,7 @@ p#copy
 {
     float:left;
     width:650px;
-    min-height:158px;
+    min-height:176px;
 }
 
 .widgetGrid .narrowCol
@@ -1063,9 +1063,14 @@ p#copy
     width:310px;
 }
 
+.widgetGrid .narrowCol ul:empty
+{
+    display: none;
+}
+
 .widgetGrid .mobile-widgets
 {
-    width:410px;
+    width:300px;
 }
 
 .widgetGrid .mobile-framework
@@ -1167,14 +1172,17 @@ p#copy
 
 .widgetGrid .mobile-devices
 {
-    width:380px;
+    width:470px;
+    position: relative;
 }
 
 #deviceList
 {
-    margin-top:13px;
-    padding-bottom:0;
-    color:#4e4e4e;
+    float: none;
+    position: absolute;
+    bottom: 0;
+    padding-bottom: 0;
+    color: #4e4e4e;
 }
 
 #deviceList li
@@ -1191,6 +1199,12 @@ p#copy
 .osThumb
 {
     cursor:pointer;
+}
+
+.osName
+{
+    height: 57px;
+    display: block;
 }
 
 .osName strong
@@ -1221,10 +1235,12 @@ p#copy
 #deviceList .iosThumb{background-position: 0 18px;}
 #deviceList .androidThumb{background-position: -97px 18px;}
 #deviceList .blackberryThumb{background-position: -194px 18px;}
+#deviceList .meegoThumb{background-position: -194px 18px;}
 
 #deviceList .selectedThumb .iosThumb,#deviceList li:hover .iosThumb{background-position: 0 0;}
 #deviceList .selectedThumb .androidThumb,#deviceList li:hover .androidThumb{background-position: -97px 0;}
 #deviceList .selectedThumb .blackberryThumb,#deviceList li:hover .blackberryThumb{background-position: -194px 0;}
+#deviceList .selectedThumb .meegoThumb,#deviceList li:hover .meegoThumb{background-position: -194px 0;}
 
 #deviceList .selectedThumb,
 #deviceList li:hover

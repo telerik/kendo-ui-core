@@ -1060,6 +1060,26 @@
 
 /* Form elements */
 
+.km-list input[type=password],
+.km-list input[type=search],
+.km-list input[type=number],
+.km-list input[type=tel],
+.km-list input[type=url],
+.km-list input[type=email],
+.km-list input[type=text]:not(.k-input),
+.km-list input[type=month],
+.km-list input[type=color],
+.km-list input[type=week],
+.km-list input[type=date],
+.km-list input[type=time],
+.km-list input[type=datetime],
+.km-list select:not([multiple]),
+.km-list .k-dropdown
+{
+    width: 50%;
+    .box-sizing(border-box);
+}
+
 .km-root input:not([type=button]):not([type=submit]):not([type=reset]):not([type=image]):not([type=checkbox]):not([type=radio]):not(.k-input):not(.k-button),
 .km-root select:not([multiple]),
 .km-root .k-dropdown

@@ -10,20 +10,21 @@
     background: #f0f1f2;
 }
 
+.km-meego,
 .km-meego .km-view
 {
     overflow: hidden;
+    .border-radius(9px);
 }
 
 .km-meego .km-view-title,
 .km-meego .km-dialog-title
 {
-    text-align: center;
+    display: inline-block;
     color: #fff;
     font-size: 1.5rem;
-    line-height: 2.2rem;
-    font-weight: bold;
-    text-shadow: 0 -1px rgba(0,0,0,.3);
+    line-height: 2.3rem;
+    margin-left: 1rem;
     float: left;
     width: 100%;
 }
@@ -232,7 +233,7 @@
 {
     width: 90%;
     text-align: center;
-    .border-radius(~".5rem");
+    .border-radius(~".8rem");
     .box-shadow(0 1px 1px rgba(0,0,0,.4));
 }
 
@@ -275,14 +276,28 @@
     background-image: linear-gradient(top, rgba(255,255,255,0), rgba(255,255,255,.2));
 }
 
+.km-meego .km-content:first-child
+{
+    .border-radius(8px 8px 0 0);
+}
+
+.km-meego .km-content:last-child
+{
+    .border-radius(0 0 8px 8px);
+}
+
+.km-meego .km-content:first-child:last-child
+{
+    .border-radius(8px);
+}
+
 .km-meego .km-navbar,
 .km-meego .km-toolbar
 {
-    background: #e5e5e5;
-    background-image: linear-gradient(top, rgba(0,0,0,.2), rgba(0,0,0,0));
-    background-clip: padding-box;
-    border-bottom: 1px solid #fff;
-    .box-shadow(0 0 5px rgba(0,0,0,.8))
+    background: #207BC4;
+    background-clip: border-box;
+    border-bottom: 1px solid rgba(255,255,255,.3);
+    .border-radius(8px 8px 0 0);
 }
 
 .km-meego .km-tabstrip
@@ -293,7 +308,8 @@
     background-image: linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.2));
     background-clip: padding-box;
     border-top: 1px solid #fff;
-    .box-shadow(0 0 5px rgba(0,0,0,.8))
+    .box-shadow(0 0 5px rgba(0,0,0,.8));
+    .border-radius(0 0 8px 8px);
 }
 
 .km-meego .km-tabstrip .km-button
@@ -330,6 +346,16 @@
 {
     background: #f5f5f5;
     background-image: linear-gradient(top, rgba(255,255,255,0), rgba(255,255,255,.1));
+}
+
+.km-meego .km-tabstrip .km-state-active:last-child
+{
+    .border-radius(0 0 8px 0);
+}
+
+.km-meego .km-tabstrip .km-state-active:first-child
+{
+    .border-radius(0 0 0 8px);
 }
 
 .km-meego .km-tabstrip .km-badge
@@ -688,13 +714,13 @@
 
 /* Forms */
 
-.km-meego input:not([type=button]):not([type=submit]):not([type=reset]):not([type=image]):not([type=checkbox]):not([type=radio]):not(.k-input):not(.k-button),
+.km-meego .km-list input:not([type=button]):not([type=submit]):not([type=reset]):not([type=image]):not([type=checkbox]):not([type=radio]):not(.k-input):not(.k-button),
 .km-meego select:not([multiple]),
 .km-meego .k-dropdown
 {
     .appearance(none);
     border: 0;
-    right: .8em;
+    right: .4em;
     padding: .4em;
     outline: none;
     .border-radius(~".8em");
@@ -763,6 +789,7 @@
     height: 100% !important;
 }
 
+.km-meego .km-shim,
 .km-meego .km-popup,
 .km-meego .km-actionsheet-wrapper
 {
@@ -867,8 +894,12 @@
 {
     font-size: 1.3em;
     color: #fff;
+    padding: 0 1.8em 0 .8em;
     border-bottom: 1px solid #fff;
     .border-radius(5px 5px 0 0);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .km-meego li.km-actionsheet-cancel:before,
@@ -877,7 +908,7 @@
     width: 20px;
     height: 20px;
     position: absolute;
-    right: 0;
+    right: -.4em;
     top: 0;
 }
 
@@ -974,3 +1005,29 @@
 {
     background: transparent;
 }
+
+/* ModalView */
+
+.km-meego .km-modalview-wrapper
+{
+    padding: 20px 10px;
+}
+
+.km-meego .km-modalview
+{
+    background-color: #7185a2;
+    .box-sizing(border-box);
+    .box-shadow(~"0 0 15px rgba(0,0,0,.5), 0 0 2px rgba(0,0,0,.5)");
+}
+
+.km-meego .km-modalview .km-header
+{
+    padding: 0;
+    margin: -1px 0 0;
+}
+
+.km-meego .km-modalview > :first-child
+{
+    border: 0;
+}
+
