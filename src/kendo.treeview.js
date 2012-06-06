@@ -1281,7 +1281,7 @@
             options.treeview = that.options;
             options.subGroup = function(group, item) {
                     return that._renderGroup({
-                        items: item[bindings["items"] || "items"],
+                        items: item[bindings.items || "items"],
                         group: {
                            expanded: item.expanded
                         }
