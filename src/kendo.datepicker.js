@@ -512,34 +512,35 @@
          *     start: "decade",
          *     depth: "year" // the datePicker will only go to the year level
          * });
-         * @option {Function} [footer] <> Template to be used for rendering the footer of the calendar.
+         * @option {String} [footer] <> Template to be used for rendering the footer of the calendar.
          * _example
          *  // DatePicker initialization
-         *  &lt;script&gt;
+         *  <script>
          *      $("#datePicker").kendoDatePicker({
          *          footer: kendo.template("Today - #=kendo.toString(data, 'd') #")
          *      });
-         *  &lt;/script&gt;
+         *  </script>
          * @option {Object} [month] <> Templates for the cells rendered in the calendar "month" view.
-         * @option {Function} [month.content] <> Template to be used for rendering the cells in the calendar "month" view, which are in range.
+         * @option {String} [month.content] <> Template to be used for rendering the cells in the calendar "month" view, which are in range.
          * _example
          *  //template
-         *  &lt;script id="cellTemplate" type="text/x-kendo-tmpl"&gt;
-         *      &lt;div class="${ data.value < 10 ? exhibition : party }"&gt;
-         *      &lt;/div&gt;
+         *
+         * <script id="cellTemplate" type="text/x-kendo-tmpl">
+         *      <div class="${ data.value < 10 ? exhibition : party }">
+         *      </div>
          *      ${ data.value }
-         *  &lt;/script&gt;
+         *  </script>
          *
          *  //datePicker initialization
-         *  &lt;script&gt;
+         *  <script>
          *      $("#datePicker").kendoDatePicker({
          *          month: {
          *             content:  kendo.template($("#cellTemplate").html()),
          *          }
          *      });
-         *  &lt;/script&gt;
+         *  </script>
          *
-         * @option {Function} [month.empty]
+         * @option {String} [month.empty]
          * The template used for rendering the cells in the calendar "month" view, which are not in the range between
          * the minimum and maximum values.
          *
