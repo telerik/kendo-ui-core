@@ -1763,6 +1763,24 @@
                     sameBox(rect, box);
                 });
 
+                test("does not render rectangle when box height is zero", function() {
+                    bar.reflow(new Box2D(0, 0, 100, 0));
+
+                    view = new ViewStub();
+                    bar.getViewElements(view);
+
+                    equals(view.log.rect.length, 0);
+                });
+
+                test("does not render rectangle when box width is zero", function() {
+                    bar.reflow(new Box2D(0, 0, 0, 100));
+
+                    view = new ViewStub();
+                    bar.getViewElements(view);
+
+                    equals(view.log.rect.length, 0);
+                });
+
                 test("sets fill color", function() {
                     same(rect.style.fill, bar.options.color);
                 });

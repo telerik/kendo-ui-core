@@ -1220,8 +1220,6 @@
                 categoryMap.push(categoryIndicies);
             }
 
-            // TODO: Don't render undefined values in bar charts
-
             options.min = groups[0];
             options.max = last(groups);
             options.categories = groups;
@@ -1618,14 +1616,17 @@
                 }, border),
                 elements = [];
 
-            if (options.overlay) {
-                rectStyle.overlay = deepExtend({rotation: vertical ? 0 : 90}, options.overlay);
+            if (box.width() > 0 && box.height() > 0) {
+                if (options.overlay) {
+                    rectStyle.overlay = deepExtend({
+                        rotation: vertical ? 0 : 90
+                    }, options.overlay);
+                }
+
+                elements.push(view.createRect(box, rectStyle));
             }
 
-            elements.push(view.createRect(box, rectStyle));
-
-            append(elements,
-                ChartElement.fn.getViewElements.call(bar, view));
+            append(elements, ChartElement.fn.getViewElements.call(bar, view));
 
             return elements;
         },
