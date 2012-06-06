@@ -322,7 +322,7 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
-        /// Creates a new <see cref="NumericTextBox{T}"/>.
+        /// Creates a new <see cref="NumericTextBox{double}"/>.
         /// </summary>
         /// <example>
         /// <code lang="CS">
@@ -350,6 +350,54 @@ namespace Kendo.Mvc.UI
         public virtual NumericTextBoxBuilder<T> NumericTextBox<T>() where T: struct
         {
             return new NumericTextBoxBuilder<T>(new NumericTextBox<T>(ViewContext, Initializer, ViewData));
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="CurrencyTextBox"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().CurrencyTextBox()
+        ///             .Name("CurrencyTextBox")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        /// <returns>Returns <see cref="NumericTextBoxBuilder{decimal}"/>.</returns>
+        public virtual NumericTextBoxBuilder<decimal> CurrencyTextBox()
+        {
+            return NumericTextBox<decimal>().Format("c");
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="PercentTextBox"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().PercentTextBox()
+        ///             .Name("PercentTextBox")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        /// <returns>Returns <see cref="NumericTextBoxBuilder{double}"/>.</returns>
+        public virtual NumericTextBoxBuilder<double> PercentTextBox()
+        {
+            return NumericTextBox().Format("p");
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="IntegerTextBox"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().IntegerTextBox()
+        ///             .Name("IntegerTextBox")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        /// <returns>Returns <see cref="NumericTextBoxBuilder{int}"/>.</returns>
+        public virtual NumericTextBoxBuilder<int> IntegerTextBox()
+        {
+            return NumericTextBox<int>().Format("n0").Decimals(0);
         }
 
         /// <summary>
@@ -646,6 +694,7 @@ namespace Kendo.Mvc.UI
                     .Name(GetName(expression))
                     .Value((string)ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model);
         }
+
         /// <summary>
         /// Creates a new <see cref="NumericTextBox{TValue}"/>.
         /// </summary>
@@ -654,29 +703,16 @@ namespace Kendo.Mvc.UI
         ///  &lt;%= Html.Kendo().NumericTextBoxFor(m=>m.Property) %&gt;
         /// </code>
         /// </example>
-        public virtual NumericTextBoxBuilder<TValue> NumericTextBoxFor<TValue>(Expression<Func<TModel, TValue>> expression)
+        public virtual NumericTextBoxBuilder<TValue> NumericTextBoxFor<TValue>(Expression<Func<TModel, Nullable<TValue>>> expression)
             where TValue : struct
         {
+            IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
-            var validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
-            
-            var value = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
-
-            var builder = NumericTextBox<TValue>()
-                        .Name(GetName(expression))
-                        .Value(value == null ? default(TValue) : (TValue)value);
-
-            var min = GetRangeValidationParameter<TValue>(validators, minimumValidator);
-            var max = GetRangeValidationParameter<TValue>(validators, maximumValidator);
-
-            if(min != null)
-                builder.Min(min);
-            
-            if(max != null)
-                builder.Max(max);
-
-            return builder;
-                
+            return NumericTextBox<TValue>()
+                    .Name(GetName(expression))
+                    .Value((Nullable<TValue>)ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model)
+                    .Min(GetRangeValidationParameter<TValue>(validators, minimumValidator))
+                    .Max(GetRangeValidationParameter<TValue>(validators, maximumValidator));
         }
 
         /// <summary>
@@ -687,153 +723,95 @@ namespace Kendo.Mvc.UI
         ///  &lt;%= Html.Kendo().NumericTextBoxFor(m=>m.NullableProperty) %&gt;
         /// </code>
         /// </example>
-        public virtual NumericTextBoxBuilder<TValue> NumericTextBoxFor<TValue>(Expression<Func<TModel, Nullable<TValue>>> expression)
+        public virtual NumericTextBoxBuilder<TValue> NumericTextBoxFor<TValue>(Expression<Func<TModel, TValue>> expression)
             where TValue : struct
         {
-
             IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
-            var builder = NumericTextBox<TValue>()
-                        .Name(GetName(expression))
-                        .Value((Nullable<TValue>)ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model);
-
-            var min = GetRangeValidationParameter<TValue>(validators, minimumValidator);
-            var max = GetRangeValidationParameter<TValue>(validators, maximumValidator);
-
-            if (min != null)
-                builder.Min(min);
-
-            if (max != null)
-                builder.Max(max);
-
-            return builder;
+            return NumericTextBox<TValue>()
+                    .Name(GetName(expression))
+                    .Value((Nullable<TValue>)ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model)
+                    .Min(GetRangeValidationParameter<TValue>(validators, minimumValidator))
+                    .Max(GetRangeValidationParameter<TValue>(validators, maximumValidator));
         }
 
-        ///// <summary>
-        ///// Creates a new <see cref="IntegerTextBox{Nullable{int}}"/>.
-        ///// </summary>
-        ///// <example>
-        ///// <code lang="CS">
-        /////  &lt;%= Html.Kendo().IntegerTextBoxFor(m=>m.Property) %&gt;
-        ///// </code>
-        ///// </example>
-        //public virtual IntegerTextBoxBuilder IntegerTextBoxFor(Expression<Func<TModel, Nullable<int>>> expression)
-        //{
+        /// <summary>
+        /// Creates a new <see cref="NumericTextBox{Nullable{int}}"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().IntegerTextBoxFor(m=>m.Property) %&gt;
+        /// </code>
+        /// </example>
+        public virtual NumericTextBoxBuilder<int> IntegerTextBoxFor(Expression<Func<TModel, Nullable<int>>> expression)
+        {
+            return NumericTextBoxFor<int>(expression).Format("n0").Decimals(0);
+        }
 
-        //    IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
+        /// <summary>
+        /// Creates a new <see cref="NumericTextBox{int}"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().IntegerTextBoxFor(m=>m.Property) %&gt;
+        /// </code>
+        /// </example>
+        public virtual NumericTextBoxBuilder<int> IntegerTextBoxFor(Expression<Func<TModel, int>> expression)
+        {
+            return NumericTextBoxFor<int>(expression).Format("n0").Decimals(0);
+        }
 
-        //    return IntegerTextBox()
-        //            .Name(GetName(expression))
-        //            .Value((Nullable<int>)ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model)
-        //            .Max(GetRangeValidationParameter<int>(validators, minimumValidator) ?? int.Max)
-        //            .MaxValue(GetRangeValidationParameter<int>(validators, maximumValidator) ?? int.MaxValue);
-        //}
+        /// <summary>
+        /// Creates a new <see cref="NumericTextBox{Nullable{decimal}}"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().CurrencyTextBoxFor(m=>m.Property) %&gt;
+        /// </code>
+        /// </example>
+        public virtual NumericTextBoxBuilder<decimal> CurrencyTextBoxFor(Expression<Func<TModel, Nullable<decimal>>> expression)
+        {
+            return NumericTextBoxFor<decimal>(expression).Format("c");
+        }
 
-        ///// <summary>
-        ///// Creates a new <see cref="IntegerTextBox{int}"/>.
-        ///// </summary>
-        ///// <example>
-        ///// <code lang="CS">
-        /////  &lt;%= Html.Kendo().IntegerTextBoxFor(m=>m.Property) %&gt;
-        ///// </code>
-        ///// </example>
-        //public virtual IntegerTextBoxBuilder IntegerTextBoxFor(Expression<Func<TModel, int>> expression)
-        //{
+        /// <summary>
+        /// Creates a new <see cref="NumericTextBox{decimal}"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().CurrencyTextBoxFor(m=>m.Property) %&gt;
+        /// </code>
+        /// </example>
+        public virtual NumericTextBoxBuilder<decimal> CurrencyTextBoxFor(Expression<Func<TModel, decimal>> expression)
+        {
+            return NumericTextBoxFor<decimal>(expression).Format("c");
+        }
 
-        //    IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
+        /// <summary>
+        /// Creates a new <see cref="NumericTextBox{Nullable{double}}"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().PercentTextBoxFor(m=>m.Property) %&gt;
+        /// </code>
+        /// </example>
+        public virtual NumericTextBoxBuilder<double> PercentTextBoxFor(Expression<Func<TModel, Nullable<double>>> expression)
+        {
+            return NumericTextBoxFor<double>(expression).Format("p");
+        }
 
-        //    var value = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
-
-        //    return IntegerTextBox()
-        //            .Name(GetName(expression))
-        //            .Value(value == null ? default(int) : (int)value)
-        //            .Max(GetRangeValidationParameter<int>(validators, minimumValidator) ?? int.Max)
-        //            .MaxValue(GetRangeValidationParameter<int>(validators, maximumValidator) ?? int.MaxValue);
-        //}
-
-        ///// <summary>
-        ///// Creates a new <see cref="CurrencyTextBox{Nullable{decimal}}"/>.
-        ///// </summary>
-        ///// <example>
-        ///// <code lang="CS">
-        /////  &lt;%= Html.Kendo().CurrencyTextBoxFor(m=>m.Property) %&gt;
-        ///// </code>
-        ///// </example>
-        //public virtual CurrencyTextBoxBuilder CurrencyTextBoxFor(Expression<Func<TModel, Nullable<decimal>>> expression)
-        //{
-
-        //    IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
-
-        //    return CurrencyTextBox()
-        //            .Name(GetName(expression))
-        //            .Value((Nullable<decimal>)ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model)
-        //            .Max(GetRangeValidationParameter<decimal>(validators, minimumValidator) ?? decimal.Max)
-        //            .MaxValue(GetRangeValidationParameter<decimal>(validators, maximumValidator) ?? decimal.MaxValue);
-        //}
-
-        ///// <summary>
-        ///// Creates a new <see cref="CurrencyTextBox{decimal}"/>.
-        ///// </summary>
-        ///// <example>
-        ///// <code lang="CS">
-        /////  &lt;%= Html.Kendo().CurrencyTextBoxFor(m=>m.Property) %&gt;
-        ///// </code>
-        ///// </example>
-        //public virtual CurrencyTextBoxBuilder CurrencyTextBoxFor(Expression<Func<TModel, decimal>> expression)
-        //{
-
-        //    IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
-
-        //    var value = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
-
-        //    return CurrencyTextBox()
-        //            .Name(GetName(expression))
-        //            .Value(value == null ? default(decimal) : (decimal)value)
-        //            .Max(GetRangeValidationParameter<decimal>(validators, minimumValidator) ?? decimal.Max)
-        //            .MaxValue(GetRangeValidationParameter<decimal>(validators, maximumValidator) ?? decimal.MaxValue);
-        //}
-
-        ///// <summary>
-        ///// Creates a new <see cref="PercentTextBox{Nullable{double}}"/>.
-        ///// </summary>
-        ///// <example>
-        ///// <code lang="CS">
-        /////  &lt;%= Html.Kendo().PercentTextBoxFor(m=>m.Property) %&gt;
-        ///// </code>
-        ///// </example>
-        //public virtual PercentTextBoxBuilder PercentTextBoxFor(Expression<Func<TModel, Nullable<double>>> expression)
-        //{
-
-        //    IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
-
-        //    return PercentTextBox()
-        //            .Name(GetName(expression))
-        //            .Value((Nullable<double>)ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model)
-        //            .Max(GetRangeValidationParameter<double>(validators, minimumValidator) ?? double.Max)
-        //            .MaxValue(GetRangeValidationParameter<double>(validators, maximumValidator) ?? double.MaxValue);
-        //}
-
-        ///// <summary>
-        ///// Creates a new <see cref="PercentTextBox{double}"/>.
-        ///// </summary>
-        ///// <example>
-        ///// <code lang="CS">
-        /////  &lt;%= Html.Kendo().PercentTextBoxFor(m=>m.Property) %&gt;
-        ///// </code>
-        ///// </example>
-        //public virtual PercentTextBoxBuilder PercentTextBoxFor(Expression<Func<TModel, double>> expression)
-        //{
-
-        //    IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
-
-        //    var value = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
-
-        //    return PercentTextBox()
-        //            .Name(GetName(expression))
-        //            .Value(value == null ? default(double) : (double)value)
-        //            .Max(GetRangeValidationParameter<double>(validators, minimumValidator) ?? double.Max)
-        //            .MaxValue(GetRangeValidationParameter<double>(validators, maximumValidator) ?? double.MaxValue);
-        //}
+        /// <summary>
+        /// Creates a new <see cref="NumericTextBox{double}"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().PercentTextBoxFor(m=>m.Property) %&gt;
+        /// </code>
+        /// </example>
+        public virtual NumericTextBoxBuilder<double> PercentTextBoxFor(Expression<Func<TModel, double>> expression)
+        {
+            return NumericTextBoxFor<double>(expression).Format("p");
+        }
 
         /// <summary>
         /// Creates a new <see cref="DateTimePicker{Nullable{DateTime}}"/>.
@@ -865,16 +843,16 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual DateTimePickerBuilder DateTimePickerFor(Expression<Func<TModel, DateTime>> expression)
         {
+            return DateTimePickerFor(expression);
+            //IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
-            IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
+            //var value = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
 
-            var value = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
-
-            return DateTimePicker()
-                    .Name(GetName(expression))
-                    .Value(value == null ? default(DateTime) : (DateTime)value)
-                    .Min(GetRangeValidationParameter<DateTime>(validators, minimumValidator) ?? Kendo.Mvc.UI.DateTimePicker.defaultMinDate)
-                    .Max(GetRangeValidationParameter<DateTime>(validators, maximumValidator) ?? Kendo.Mvc.UI.DateTimePicker.defaultMaxDate);
+            //return DateTimePicker()
+            //        .Name(GetName(expression))
+            //        .Value(value == null ? default(DateTime) : (DateTime)value)
+            //        .Min(GetRangeValidationParameter<DateTime>(validators, minimumValidator) ?? Kendo.Mvc.UI.DateTimePicker.defaultMinDate)
+            //        .Max(GetRangeValidationParameter<DateTime>(validators, maximumValidator) ?? Kendo.Mvc.UI.DateTimePicker.defaultMaxDate);
         }
 
         /// <summary>
@@ -907,16 +885,16 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual DatePickerBuilder DatePickerFor(Expression<Func<TModel, DateTime>> expression)
         {
+            return DatePickerFor(expression);
+            //IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
-            IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
+            //var value = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
 
-            var value = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
-
-            return DatePicker()
-                    .Name(GetName(expression))
-                    .Value(value == null ? default(DateTime) : (DateTime)value)
-                    .Min(GetRangeValidationParameter<DateTime>(validators, minimumValidator) ?? Kendo.Mvc.UI.DatePicker.defaultMinDate)
-                    .Max(GetRangeValidationParameter<DateTime>(validators, maximumValidator) ?? Kendo.Mvc.UI.DatePicker.defaultMaxDate);
+            //return DatePicker()
+            //        .Name(GetName(expression))
+            //        .Value(value == null ? default(DateTime) : (DateTime)value)
+            //        .Min(GetRangeValidationParameter<DateTime>(validators, minimumValidator) ?? Kendo.Mvc.UI.DatePicker.defaultMinDate)
+            //        .Max(GetRangeValidationParameter<DateTime>(validators, maximumValidator) ?? Kendo.Mvc.UI.DatePicker.defaultMaxDate);
         }
 
         /// <summary>
@@ -949,16 +927,16 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual TimePickerBuilder TimePickerFor(Expression<Func<TModel, DateTime>> expression)
         {
+            return TimePickerFor(expression);
+            //IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
-            IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
+            //var value = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
 
-            var value = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
-
-            return TimePicker()
-                    .Name(GetName(expression))
-                    .Value(value == null ? default(DateTime) : (DateTime)value)
-                    .Min(GetRangeValidationParameter<DateTime>(validators, minimumValidator) ?? DateTime.Today)
-                    .Max(GetRangeValidationParameter<DateTime>(validators, maximumValidator) ?? DateTime.Today);
+            //return TimePicker()
+            //        .Name(GetName(expression))
+            //        .Value(value == null ? default(DateTime) : (DateTime)value)
+            //        .Min(GetRangeValidationParameter<DateTime>(validators, minimumValidator) ?? DateTime.Today)
+            //        .Max(GetRangeValidationParameter<DateTime>(validators, maximumValidator) ?? DateTime.Today);
         }
 
         /// <summary>
@@ -994,19 +972,19 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual TimePickerBuilder TimePickerFor(Expression<Func<TModel, TimeSpan>> expression)
         {
+            return TimePickerFor(expression);
+            //IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
-            IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
+            //TimeSpan? minimum = GetRangeValidationParameter<TimeSpan>(validators, minimumValidator);
+            //TimeSpan? maximum = GetRangeValidationParameter<TimeSpan>(validators, maximumValidator);
 
-            TimeSpan? minimum = GetRangeValidationParameter<TimeSpan>(validators, minimumValidator);
-            TimeSpan? maximum = GetRangeValidationParameter<TimeSpan>(validators, maximumValidator);
+            //var value = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
 
-            var value = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
-
-            return TimePicker()
-                    .Name(GetName(expression))
-                    .Value(value == null ? default(TimeSpan) : (TimeSpan)value)
-                    .Min(minimum.HasValue ? new DateTime(minimum.Value.Ticks) : DateTime.Today)
-                    .Max(maximum.HasValue ? new DateTime(maximum.Value.Ticks) : DateTime.Today);
+            //return TimePicker()
+            //        .Name(GetName(expression))
+            //        .Value(value == null ? default(TimeSpan) : (TimeSpan)value)
+            //        .Min(minimum.HasValue ? new DateTime(minimum.Value.Ticks) : DateTime.Today)
+            //        .Max(maximum.HasValue ? new DateTime(maximum.Value.Ticks) : DateTime.Today);
         }
 
         /// <summary>
@@ -1020,8 +998,8 @@ namespace Kendo.Mvc.UI
         public virtual DropDownListBuilder DropDownListFor<TProperty>(Expression<Func<TModel, TProperty>> expression)
         {
 
-            return DropDownList().Name(GetName(expression));
-                                 //.Value(GetValue(expression));
+            return DropDownList().Name(GetName(expression))
+                                 .Value(GetValue(expression));
         }
 
         /// <summary>

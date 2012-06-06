@@ -33,9 +33,9 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
-        public void SanitizeId_returns_null_if_name_is_empty()
+        public void SanitizeId_returns_empty_string_if_name_is_empty()
         {
-            baseComponent.SanitizeId("").ShouldEqual(null);
+            baseComponent.SanitizeId("").ShouldEqual("");
         }
 
         [Fact]
