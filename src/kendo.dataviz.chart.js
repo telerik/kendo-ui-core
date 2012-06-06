@@ -3965,7 +3965,6 @@
 
         aggregateDateSeries: function() {
             var plotArea = this,
-                options = plotArea.options,
                 series = plotArea.series,
                 processedSeries = [],
                 categoryAxis = plotArea.categoryAxis,
@@ -3981,7 +3980,7 @@
                 srcDataItems,
                 dataItems,
                 aggregate,
-                rawValues,
+                srcValues,
                 i,
                 categoryIx,
                 value;
@@ -3999,22 +3998,22 @@
 
                 for (groupIx = 0; groupIx < categories.length; groupIx++) {
                     categoryIndicies = categoryMap[groupIx];
-                    rawValues = [];
+                    srcValues = [];
 
                     for (i = 0; i < categoryIndicies.length; i++) {
                         categoryIx = categoryIndicies[i];
                         value = srcData[categoryIx];
 
                         if (defined(value)) {
-                            rawValues.push(value);
+                            srcValues.push(value);
                         }
                     }
 
-                    if (rawValues.length > 0) {
-                        data[groupIx] = aggregate(rawValues, currentSeries);
+                    if (srcValues.length > 0) {
+                        data[groupIx] = aggregate(srcValues, currentSeries);
                     }
 
-                    dataItems[groupIx] = rawValues.length > 1 ?
+                    dataItems[groupIx] = srcValues.length > 1 ?
                         undefined : srcDataItems[categoryIndicies[0]];
                 }
 
@@ -4030,7 +4029,7 @@
                 aggregate = Aggregates[aggregate];
             }
 
-            return aggregate || Aggregates.default;
+            return aggregate || Aggregates.max;
         },
 
         appendChart: function(chart) {
@@ -4581,7 +4580,6 @@
             return values.length;
         }
     };
-    Aggregates.default = Aggregates.max;
 
     function sparseArrayMin(arr) {
         return sparseArrayLimits(arr).min;
