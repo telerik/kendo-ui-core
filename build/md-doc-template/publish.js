@@ -11,6 +11,24 @@ function processClass(theClass) {
     theClass.events = theClass.getEvents();   // 1 order matters
     theClass.methods = theClass.getMethods(); // 2
 
+    var suiteID = theClass.alias.match(/kendo\.(\w+)/);
+    var suite = "framework";
+    if (!suiteID) {
+        suiteID = ['', '_framework'];
+    }
+
+    switch(suiteID[1]) {
+        case 'ui':
+            suite = "web";
+            break;
+        case 'mobile':
+            suite = 'mobile';
+            break;
+        case 'dataviz':
+            suite = 'dataviz';
+            break;
+    }
+
     var description = theClass.properties.filter(function(x) { return x._name == "Description"; })[0];
     var html = "";
 
@@ -19,8 +37,7 @@ function processClass(theClass) {
         outputDescription(description.comment).replace(/\r/g, "\n");
     }
 
-    html += theClass.alias.toLowerCase() + ".description.md",
-        "\n\n------------------------------------------\n\n" +
+    html += "\n\n------------------------------------------\n\n" +
         '## Configuration\n\n' +
         outputConfiguration(theClass) +
         "\n\n------------------------------------------\n\n" +
@@ -30,7 +47,10 @@ function processClass(theClass) {
         '## Events\n\n' +
         outputEvents(theClass).replace(/\r/g, "\n");
 
-    IO.saveFile( "/tmp", html);
+    if (html) {
+        IO.mkPath("docs/" + suite);
+        IO.saveFile("docs/" + suite, theClass.alias.toLowerCase() + ".md", html);
+    }
 }
 
 function isaClass($) {
