@@ -508,7 +508,7 @@
 
                         if (toolName == "fontSize" || toolName == "fontName") {
                             var inheritText = options.localization[toolName + "Inherit"] || localization[toolName + "Inherit"];
-                            options[toolName][0].Text = inheritText;
+                            options[toolName][0].text = inheritText;
                             $this.find("input").val(inheritText).end()
                                  .find("span.k-input").text(inheritText).end();
                         }
@@ -584,36 +584,36 @@
                 animation: false
             },
             fontName: [
-                { Text: localization.fontNameInherit,  Value: "inherit" },
-                { Text: "Arial", Value: "Arial,Helvetica,sans-serif" },
-                { Text: "Courier New", Value: "'Courier New',Courier,monospace" },
-                { Text: "Georgia", Value: "Georgia,serif" },
-                { Text: "Impact", Value: "Impact,Charcoal,sans-serif" },
-                { Text: "Lucida Console", Value: "'Lucida Console',Monaco,monospace" },
-                { Text: "Tahoma", Value: "Tahoma,Geneva,sans-serif" },
-                { Text: "Times New Roman", Value: "'Times New Roman',Times,serif" },
-                { Text: "Trebuchet MS", Value: "'Trebuchet MS',Helvetica,sans-serif" },
-                { Text: "Verdana", Value: "Verdana,Geneva,sans-serif" }
+                { text: localization.fontNameInherit,  value: "inherit" },
+                { text: "Arial", value: "Arial,Helvetica,sans-serif" },
+                { text: "Courier New", value: "'Courier New',Courier,monospace" },
+                { text: "Georgia", value: "Georgia,serif" },
+                { text: "Impact", value: "Impact,Charcoal,sans-serif" },
+                { text: "Lucida Console", value: "'Lucida Console',Monaco,monospace" },
+                { text: "Tahoma", value: "Tahoma,Geneva,sans-serif" },
+                { text: "Times New Roman", value: "'Times New Roman',Times,serif" },
+                { text: "Trebuchet MS", value: "'Trebuchet MS',Helvetica,sans-serif" },
+                { text: "Verdana", value: "Verdana,Geneva,sans-serif" }
             ],
             fontSize: [
-                { Text: localization.fontSizeInherit,  Value: "inherit" },
-                { Text: "1 (8pt)",  Value: "xx-small" },
-                { Text: "2 (10pt)", Value: "x-small" },
-                { Text: "3 (12pt)", Value: "small" },
-                { Text: "4 (14pt)", Value: "medium" },
-                { Text: "5 (18pt)", Value: "large" },
-                { Text: "6 (24pt)", Value: "x-large" },
-                { Text: "7 (36pt)", Value: "xx-large" }
+                { text: localization.fontSizeInherit,  value: "inherit" },
+                { text: "1 (8pt)",  value: "xx-small" },
+                { text: "2 (10pt)", value: "x-small" },
+                { text: "3 (12pt)", value: "small" },
+                { text: "4 (14pt)", value: "medium" },
+                { text: "5 (18pt)", value: "large" },
+                { text: "6 (24pt)", value: "x-large" },
+                { text: "7 (36pt)", value: "xx-large" }
             ],
             formatBlock: [
-                { Text: "Paragraph", Value: "p" },
-                { Text: "Quotation", Value: "blockquote" },
-                { Text: "Heading 1", Value: "h1" },
-                { Text: "Heading 2", Value: "h2" },
-                { Text: "Heading 3", Value: "h3" },
-                { Text: "Heading 4", Value: "h4" },
-                { Text: "Heading 5", Value: "h5" },
-                { Text: "Heading 6", Value: "h6" }
+                { text: "Paragraph", value: "p" },
+                { text: "Quotation", value: "blockquote" },
+                { text: "Heading 1", value: "h1" },
+                { text: "Heading 2", value: "h2" },
+                { text: "Heading 3", value: "h3" },
+                { text: "Heading 4", value: "h4" },
+                { text: "Heading 5", value: "h5" },
+                { text: "Heading 6", value: "h6" }
             ],
             tools: [
                 "bold",
@@ -3663,8 +3663,8 @@ var FontTool = Tool.extend({
             toolName = this.options.name;
 
         ui[this.type]({
-            dataTextField: "Text",
-            dataValueField: "Value",
+            dataTextField: "text",
+            dataValueField: "value",
             dataSource: editor.options[toolName],
             change: function (e) {
                 Tool.exec(editor, toolName, this.value());
@@ -3750,7 +3750,7 @@ var StyleTool = Tool.extend({
             data: editor.style,
             title: editor.options.localization.style,
             itemCreate: function (e) {
-                var style = dom.inlineStyle(editor.document, "span", {className : e.dataItem.Value});
+                var style = dom.inlineStyle(editor.document, "span", {className : e.dataItem.value});
 
                 e.html = '<span unselectable="on" style="display:block;' + style +'">' + e.html + '</span>';
             },
@@ -4097,8 +4097,8 @@ var FormatBlockTool = Tool.extend({
             toolName = "formatBlock";
 
         new Editor.SelectBox(ui, {
-            dataTextField: "Text",
-            dataValueField: "Value",
+            dataTextField: "text",
+            dataValueField: "value",
             dataSource: editor.options.formatBlock,
             title: editor.options.localization.formatBlock,
             change: function (e) {

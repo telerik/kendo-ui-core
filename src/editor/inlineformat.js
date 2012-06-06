@@ -365,8 +365,8 @@ var FontTool = Tool.extend({
             toolName = this.options.name;
 
         ui[this.type]({
-            dataTextField: "Text",
-            dataValueField: "Value",
+            dataTextField: "text",
+            dataValueField: "value",
             dataSource: editor.options[toolName],
             change: function (e) {
                 Tool.exec(editor, toolName, this.value());
@@ -452,7 +452,7 @@ var StyleTool = Tool.extend({
             data: editor.style,
             title: editor.options.localization.style,
             itemCreate: function (e) {
-                var style = dom.inlineStyle(editor.document, "span", {className : e.dataItem.Value});
+                var style = dom.inlineStyle(editor.document, "span", {className : e.dataItem.value});
 
                 e.html = '<span unselectable="on" style="display:block;' + style +'">' + e.html + '</span>';
             },

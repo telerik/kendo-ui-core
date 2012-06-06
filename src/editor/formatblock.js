@@ -293,8 +293,8 @@ var FormatBlockTool = Tool.extend({
             toolName = "formatBlock";
 
         new Editor.SelectBox(ui, {
-            dataTextField: "Text",
-            dataValueField: "Value",
+            dataTextField: "text",
+            dataValueField: "value",
             dataSource: editor.options.formatBlock,
             title: editor.options.localization.formatBlock,
             change: function (e) {
