@@ -828,7 +828,7 @@ namespace Kendo.Mvc.UI
 
             return DateTimePicker()
                     .Name(GetName(expression))
-                    .Value((Nullable<DateTime>)ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model)
+                    .Value(ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model as DateTime?)
                     .Min(GetRangeValidationParameter<DateTime>(validators, minimumValidator) ?? Kendo.Mvc.UI.DateTimePicker.defaultMinDate)
                     .Max(GetRangeValidationParameter<DateTime>(validators, maximumValidator) ?? Kendo.Mvc.UI.DateTimePicker.defaultMaxDate);
         }
@@ -843,16 +843,13 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual DateTimePickerBuilder DateTimePickerFor(Expression<Func<TModel, DateTime>> expression)
         {
-            return DateTimePickerFor(expression);
-            //IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
+            IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
-            //var value = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
-
-            //return DateTimePicker()
-            //        .Name(GetName(expression))
-            //        .Value(value == null ? default(DateTime) : (DateTime)value)
-            //        .Min(GetRangeValidationParameter<DateTime>(validators, minimumValidator) ?? Kendo.Mvc.UI.DateTimePicker.defaultMinDate)
-            //        .Max(GetRangeValidationParameter<DateTime>(validators, maximumValidator) ?? Kendo.Mvc.UI.DateTimePicker.defaultMaxDate);
+            return DateTimePicker()
+                    .Name(GetName(expression))
+                    .Value(ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model as DateTime?)
+                    .Min(GetRangeValidationParameter<DateTime>(validators, minimumValidator) ?? Kendo.Mvc.UI.DateTimePicker.defaultMinDate)
+                    .Max(GetRangeValidationParameter<DateTime>(validators, maximumValidator) ?? Kendo.Mvc.UI.DateTimePicker.defaultMaxDate);
         }
 
         /// <summary>
@@ -870,7 +867,7 @@ namespace Kendo.Mvc.UI
 
             return DatePicker()
                     .Name(GetName(expression))
-                    .Value((Nullable<DateTime>)ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model)
+                    .Value(ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model as DateTime?)
                     .Min(GetRangeValidationParameter<DateTime>(validators, minimumValidator) ?? Kendo.Mvc.UI.DatePicker.defaultMinDate)
                     .Max(GetRangeValidationParameter<DateTime>(validators, maximumValidator) ?? Kendo.Mvc.UI.DatePicker.defaultMaxDate);
         }
@@ -885,16 +882,13 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual DatePickerBuilder DatePickerFor(Expression<Func<TModel, DateTime>> expression)
         {
-            return DatePickerFor(expression);
-            //IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
+            IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
-            //var value = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
-
-            //return DatePicker()
-            //        .Name(GetName(expression))
-            //        .Value(value == null ? default(DateTime) : (DateTime)value)
-            //        .Min(GetRangeValidationParameter<DateTime>(validators, minimumValidator) ?? Kendo.Mvc.UI.DatePicker.defaultMinDate)
-            //        .Max(GetRangeValidationParameter<DateTime>(validators, maximumValidator) ?? Kendo.Mvc.UI.DatePicker.defaultMaxDate);
+            return DatePicker()
+                    .Name(GetName(expression))
+                    .Value(ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model as DateTime?)
+                    .Min(GetRangeValidationParameter<DateTime>(validators, minimumValidator) ?? Kendo.Mvc.UI.DatePicker.defaultMinDate)
+                    .Max(GetRangeValidationParameter<DateTime>(validators, maximumValidator) ?? Kendo.Mvc.UI.DatePicker.defaultMaxDate);
         }
 
         /// <summary>
@@ -912,7 +906,7 @@ namespace Kendo.Mvc.UI
 
             return TimePicker()
                     .Name(GetName(expression))
-                    .Value((Nullable<DateTime>)ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model)
+                    .Value(ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model as DateTime?)
                     .Min(GetRangeValidationParameter<DateTime>(validators, minimumValidator) ?? DateTime.Today)
                     .Max(GetRangeValidationParameter<DateTime>(validators, maximumValidator) ?? DateTime.Today);
         }
@@ -927,16 +921,15 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual TimePickerBuilder TimePickerFor(Expression<Func<TModel, DateTime>> expression)
         {
-            return TimePickerFor(expression);
-            //IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
+            IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
-            //var value = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
+            var value = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
 
-            //return TimePicker()
-            //        .Name(GetName(expression))
-            //        .Value(value == null ? default(DateTime) : (DateTime)value)
-            //        .Min(GetRangeValidationParameter<DateTime>(validators, minimumValidator) ?? DateTime.Today)
-            //        .Max(GetRangeValidationParameter<DateTime>(validators, maximumValidator) ?? DateTime.Today);
+            return TimePicker()
+                    .Name(GetName(expression))
+                    .Value(ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model as DateTime?)
+                    .Min(GetRangeValidationParameter<DateTime>(validators, minimumValidator) ?? DateTime.Today)
+                    .Max(GetRangeValidationParameter<DateTime>(validators, maximumValidator) ?? DateTime.Today);
         }
 
         /// <summary>
@@ -957,7 +950,7 @@ namespace Kendo.Mvc.UI
 
             return TimePicker()
                     .Name(GetName(expression))
-                    .Value((Nullable<TimeSpan>)ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model)
+                    .Value(ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model as TimeSpan?)
                     .Min(minimum.HasValue ? new DateTime(minimum.Value.Ticks) : DateTime.Today)
                     .Max(maximum.HasValue ? new DateTime(maximum.Value.Ticks) : DateTime.Today);
         }
@@ -972,19 +965,16 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual TimePickerBuilder TimePickerFor(Expression<Func<TModel, TimeSpan>> expression)
         {
-            return TimePickerFor(expression);
-            //IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
+            IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
-            //TimeSpan? minimum = GetRangeValidationParameter<TimeSpan>(validators, minimumValidator);
-            //TimeSpan? maximum = GetRangeValidationParameter<TimeSpan>(validators, maximumValidator);
+            TimeSpan? minimum = GetRangeValidationParameter<TimeSpan>(validators, minimumValidator);
+            TimeSpan? maximum = GetRangeValidationParameter<TimeSpan>(validators, maximumValidator);
 
-            //var value = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
-
-            //return TimePicker()
-            //        .Name(GetName(expression))
-            //        .Value(value == null ? default(TimeSpan) : (TimeSpan)value)
-            //        .Min(minimum.HasValue ? new DateTime(minimum.Value.Ticks) : DateTime.Today)
-            //        .Max(maximum.HasValue ? new DateTime(maximum.Value.Ticks) : DateTime.Today);
+            return TimePicker()
+                    .Name(GetName(expression))
+                    .Value(ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model as TimeSpan?)
+                    .Min(minimum.HasValue ? new DateTime(minimum.Value.Ticks) : DateTime.Today)
+                    .Max(maximum.HasValue ? new DateTime(maximum.Value.Ticks) : DateTime.Today);
         }
 
         /// <summary>
@@ -1344,7 +1334,9 @@ namespace Kendo.Mvc.UI
                                                             .Cast<ModelClientValidationRangeRule>();
 
                 if (clientValidationsRules.Any() && clientValidationsRules.First().ValidationParameters.TryGetValue(parameter, out value))
+                {
                     return (TValue)Convert.ChangeType(value, typeof(TValue));
+                }
             }
             return null;
         }
