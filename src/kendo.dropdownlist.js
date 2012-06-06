@@ -11,7 +11,7 @@
      * <p>
      *  A <strong>DropDownList</strong> displays a list of values and allows the selection of a single value from the
      *  list.Custom values may not be entered via keyboard input.If you wish permit keyboard input - that is, custom
-     *  values are allowed - use the <a href="../combobox/index.html" title="ComboBox">ComboBox</a>.
+     *  values are allowed - use the <strong>ComboBox</strong>.
      * </p>
      * <h3>Getting Started</h3>
      * <p>There are two ways to create a <strong>DropDownList</strong>:</p>
@@ -67,7 +67,7 @@
      * <h3>Binding to Local or Remote Data</h3>
      * <p>
      *  The <strong>DropDownList</strong> can be bound to both local arrays and remote data via the
-     *  <a href="../datasource/index.html" title="DataSource">DataSource</a> component; an abstraction for local and
+     *  <strong>DataSource</strong> component; an abstraction for local and
      *  remote data. Local arrays are appropriate for limited value options, while remote data binding is better for
      *  larger data sets. With remote data-binding, items will be loaded on-demand; when they are displayed.
      * </p>
@@ -98,7 +98,7 @@
      * <p>
      *  The <strong>DropDownList</strong> uses Kendo UI templates to enable you to control how items are rendered. For
      *  a detailed description of the capabilities and syntax of the Kendo UI templates, please refer to the
-     *  <a href="../templates/index.html" title="Kendo UI Template">demos and documentation</a>.
+     *  <a href="http://www.kendoui.com/documentation/framework/templates/overview.aspx" title="Kendo UI Template">documentation</a>.
      * </p>
      *
      * @exampleTitle Basic item template customization
@@ -246,31 +246,31 @@
          * $("#dropdownlist").kendoDropDownList({
          *     optionLabel: "Select An Option"
          * });
-         * @option {Function} [template] Template to be used for rendering the items in the list.
+         * @option {String} [template] Template to be used for rendering the items in the list.
          * _example
          *  //template
-         * &lt;script id="template" type="text/x-kendo-tmpl"&gt;
+         * <script id="template" type="text/x-kendo-tmpl">
          *       # if (data.BoxArt.SmallUrl) { #
-         *           &lt;img src="${ data.BoxArt.SmallUrl }" alt="${ data.Name }" /&gt;Title:${ data.Name }, Year: ${ data.Name }
+         *           <img src="${ data.BoxArt.SmallUrl }" alt="${ data.Name }" />Title:${ data.Name }, Year: ${ data.Name }
          *       # } else { #
-         *           &lt;img alt="${ data.Name }" /&gt;Title:${ data.Name }, Year: ${ data.Name }
+         *           <img alt="${ data.Name }" />Title:${ data.Name }, Year: ${ data.Name }
          *       # } #
-         *  &lt;/script&gt;
+         *  </script>
          *
          *  //dropdownlist initialization
-         *  &lt;script&gt;
+         *  <script>
          *      $("#dropdownlist").kendoDropDownList({
          *          dataSource: dataSource,
          *          dataTextField: "Name",
          *          dataValueField: "Id",
          *          template: kendo.template($("#template").html())
          *      });
-         *  &lt;/script&gt;
+         *  </script>
          * @option {Object} [animation] <> Animations to be used for opening/closing the popup. Setting to false will turn of the animation.
          * @option {Object} [animation.open] <> Animation to be used for opening of the popup.
          * _example
          *  //dropdownlist initialization
-         *  &lt;script&gt;
+         *  <script>
          *      $("#dropdownlist").kendoDropDownList({
          *          dataSource: dataSource,
          *          animation: {
@@ -281,11 +281,11 @@
          *             }
          *          }
          *      });
-         *  &lt;/script&gt;
+         *  </script>
          * @option {Object} [animation.close] <> Animation to be used for closing of the popup.
          * _example
          *  //dropdownlist initialization
-         *  &lt;script&gt;
+         *  <script>
          *      $("#dropdownlist").kendoDropDownList({
          *          dataSource: dataSource,
          *          animation: {
@@ -297,7 +297,7 @@
          *             }
          *          }
          *      });
-         *  &lt;/script&gt;
+         *  </script>
          * @option {String} [ignoreCase] <true> Controls whether the search should be case sensitive.
          * _example
          * $("#dropdownlist").kendoDropDownList({
