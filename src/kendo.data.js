@@ -105,8 +105,9 @@
                 object.bind(CHANGE, function(e) {
                     that.trigger(CHANGE, {
                         field: e.field,
-                        items: [this],
-                        action: "itemchange"
+                        node: e.node,
+                        items: e.items || [this],
+                        action: e.action || "itemchange"
                     });
                 });
             }
@@ -1388,7 +1389,7 @@
 
     var DataReader = Class.extend({
         init: function(schema) {
-            var that = this, member, get, model;
+            var that = this, member, get, model, base;
 
             schema = schema || {};
 
@@ -1398,8 +1399,10 @@
                 that[member] = typeof get === STRING ? getter(get) : get;
             }
 
+            base = schema.modelBase || Model;
+
             if (isPlainObject(that.model)) {
-                that.model = model = schema.modelBase.define(that.model);
+                that.model = model = base.define(that.model);
 
                 var dataFunction = proxy(that.data, that),
                     groupsFunction = proxy(that.groups, that),
@@ -1510,7 +1513,6 @@
         },
 
         options: {
-            schema: {},
             data: [],
             schema: {
                modelBase: Model
@@ -1959,6 +1961,10 @@
             if (result.total !== undefined && !that.options.serverFiltering) {
                 that._total = result.total;
             }
+
+            e = e || {};
+
+            e.items = e.items || data;
 
             that.trigger(CHANGE, e);
         },
@@ -2507,8 +2513,11 @@
             });
 
             that.children = new HierarchicalDataSource(children);
-            that.children.bind("change", function(){
-               that.trigger("change");
+            that.children.bind("change", function(e){
+                if (!e.node) {
+                    e.node = that;
+                }
+                that.trigger("change", e);
             });
         },
         shouldSerialize: function(field) {
