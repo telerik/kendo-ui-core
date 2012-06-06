@@ -734,6 +734,24 @@
                     same(plotArea.series[0].data, [100, 200, undefined, 300]);
                 });
 
+                test("User can override automatic category axis type", function() {
+                    createPlotArea([{
+                            data: [100, 200, 300]
+                        }], {
+                        categoryAxis: {
+                            type: "Category",
+                            categories: [
+                                new Date(2012, 02, 01),
+                                new Date(2012, 02, 02),
+                                new Date(2012, 02, 04)
+                            ]
+                        }
+                    });
+
+                    same(plotArea.categoryAxis.options.type, "Category");
+                    same(plotArea.series[0].data, [100, 200, 300]);
+                });
+
                 test("Does not alter data points when no grouping is done", function() {
                     createPlotArea([{
                         data: [100, 200, 300]

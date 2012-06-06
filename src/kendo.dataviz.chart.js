@@ -58,6 +58,7 @@
         BELOW = "below",
         BLACK = "#000",
         BOTTOM = "bottom",
+        CATEGORY = "Category",
         CENTER = "center",
         CHANGE = "change",
         CIRCLE = "circle",
@@ -220,7 +221,6 @@
                 type: "Numeric"
             },
             categoryAxis: {
-                type: "Category",
                 categories: []
             },
             autoBind: true,
@@ -953,6 +953,7 @@
 
     var CategoryAxis = Axis.extend({
         options: {
+            type: CATEGORY,
             categories: [],
             vertical: false,
             majorGridLines: {
@@ -4027,11 +4028,13 @@
                 invertAxes = plotArea.invertAxes,
                 categoryAxisOptions = options.categoryAxis,
                 categories = categoryAxisOptions.categories,
-                dateCategories = categories[0] instanceof Date,
                 categoriesCount = categories.length,
+                isDateAxis = categoryAxisOptions.type === DATE ||
+                             categories[0] instanceof Date,
+                forceCategoryAxis = categoryAxisOptions.type === CATEGORY,
                 categoryAxis;
 
-            if (categoryAxisOptions.type === DATE || dateCategories) {
+            if (!forceCategoryAxis && isDateAxis) {
                 categoryAxisOptions.type = DATE;
                 categoryAxis = new DateCategoryAxis(deepExtend({
                         vertical: invertAxes
