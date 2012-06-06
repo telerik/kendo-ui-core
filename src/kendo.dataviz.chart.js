@@ -66,6 +66,7 @@
         COLUMN = "column",
         COORD_PRECISION = dataviz.COORD_PRECISION,
         DATABOUND = "dataBound",
+        DATE = "Date",
         DAYS = "days",
         DEFAULT_FONT = dataviz.DEFAULT_FONT,
         DEFAULT_HEIGHT = dataviz.DEFAULT_HEIGHT,
@@ -3867,8 +3868,7 @@
 
             plotArea.createCategoryAxis();
 
-            // TODO: Automatic detection
-            if (plotArea.options.categoryAxis.type === "Date") {
+            if (plotArea.categoryAxis.options.type === DATE) {
                 plotArea.aggregateDateSeries();
             }
 
@@ -4025,22 +4025,25 @@
             var plotArea = this,
                 options = plotArea.options,
                 invertAxes = plotArea.invertAxes,
-                categoriesCount = options.categoryAxis.categories.length,
+                categoryAxisOptions = options.categoryAxis,
+                categories = categoryAxisOptions.categories,
+                dateCategories = categories[0] instanceof Date,
+                categoriesCount = categories.length,
                 categoryAxis;
 
-            // TODO: Automatic detection
-            if (options.categoryAxis.type === "Date") {
+            if (categoryAxisOptions.type === DATE || dateCategories) {
+                categoryAxisOptions.type = DATE;
                 categoryAxis = new DateCategoryAxis(deepExtend({
                         vertical: invertAxes
                     },
-                    options.categoryAxis)
+                    categoryAxisOptions)
                 );
             } else {
                 categoryAxis = new CategoryAxis(deepExtend({
                         vertical: invertAxes,
                         axisCrossingValue: invertAxes ? categoriesCount : 0
                     },
-                    options.categoryAxis)
+                    categoryAxisOptions)
                 );
             }
 
@@ -4211,7 +4214,7 @@
                 axis;
 
             // TODO: Automatic detection
-            if (options.type === "Date") {
+            if (options.type === DATE) {
                 axis = new DateValueAxis(range.min, range.max, axisOptions);
             } else {
                 axis = new NumericAxis(range.min, range.max, axisOptions);

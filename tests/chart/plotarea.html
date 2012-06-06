@@ -717,6 +717,23 @@
                     }
                 });
 
+                test("Automatically detects date category axis", function() {
+                    createPlotArea([{
+                            data: [100, 200, 300]
+                        }], {
+                        categoryAxis: {
+                            categories: [
+                                new Date(2012, 02, 01),
+                                new Date(2012, 02, 02),
+                                new Date(2012, 02, 04)
+                            ]
+                        }
+                    });
+
+                    same(plotArea.categoryAxis.options.type, "Date");
+                    same(plotArea.series[0].data, [100, 200, undefined, 300]);
+                });
+
                 test("Does not alter data points when no grouping is done", function() {
                     createPlotArea([{
                         data: [100, 200, 300]
