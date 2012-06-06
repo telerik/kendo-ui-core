@@ -55,7 +55,7 @@
      * <script>
      *  $("p").kendoMobileSwipe(function(e) {
      *      console.log("You swiped" + e.target.text() );
-     *  }, { minXDelta: 200, duration: 100 });
+     *  }, { minXDelta: 200, maxDuration: 100 });
      * </script>
      */
 
