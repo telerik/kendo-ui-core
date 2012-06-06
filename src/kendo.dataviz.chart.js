@@ -1221,7 +1221,6 @@
             }
 
             // TODO: Don't render undefined values in bar charts
-            // TODO: Reverse
 
             options.min = groups[0];
             options.max = last(groups);
@@ -3943,6 +3942,7 @@
 
             plotArea.createCategoryAxis();
 
+            // TODO: Automatic detection
             if (plotArea.options.categoryAxis.type === "Date") {
                 plotArea.aggregateDateSeries();
             }
@@ -4103,6 +4103,7 @@
                 categoriesCount = options.categoryAxis.categories.length,
                 categoryAxis;
 
+            // TODO: Automatic detection
             if (options.categoryAxis.type === "Date") {
                 categoryAxis = new DateCategoryAxis(deepExtend({
                         vertical: invertAxes
@@ -4284,6 +4285,7 @@
                 axisOptions = deepExtend({}, options, { vertical: vertical }),
                 axis;
 
+            // TODO: Automatic detection
             if (options.type === "Date") {
                 axis = new DateValueAxis(range.min, range.max, axisOptions);
             } else {

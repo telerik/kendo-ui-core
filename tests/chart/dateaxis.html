@@ -41,7 +41,7 @@
                 }
 
                 // ------------------------------------------------------------
-                module("Date Category Axis / Configuration", {
+                module("Date CategoryAxis / Configuration", {
                     setup: function() {
                         createDateCategoryAxis({
                             categories: [
@@ -143,7 +143,34 @@
                 });
 
                 // ------------------------------------------------------------
-                module("Date Category Axis / Min-Max values", {
+                module("Date CategoryAxis / Grouping", {
+                    setup: function() {
+                    }
+                });
+
+                test("categoryMap for aggregated categories", function() {
+                    createDateCategoryAxis({
+                        baseUnit: "months",
+                        categories: [
+                            new Date("2012-02-01"), new Date("2012-02-03")
+                        ]
+                    });
+
+                    same(dateAxis.categoryMap, [[0, 1]]);
+                });
+
+                test("categoryMap for sparse categories", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012-02-01"), new Date("2012-02-03")
+                        ]
+                    });
+
+                    same(dateAxis.categoryMap, [[0], [], [1]]);
+                });
+
+                // ------------------------------------------------------------
+                module("Date CategoryAxis / Min-Max values", {
                     setup: function() {
                         createDateCategoryAxis({
                             categories: [
