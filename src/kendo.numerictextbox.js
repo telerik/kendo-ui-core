@@ -122,8 +122,8 @@
          * @option {Number} [value] <null> Specifies the value of the NumericTextBox widget.
          * _example
          *  // specify in the HTML
-         * &lt;input id="numeric" value="10" type="number" min="-100" max="100" step="10"/&gt;
-         * <br />
+         * <input id="numeric" value="10" type="number" min="-100" max="100" step="10"/>
+         *
          * // specify on widget initialization
          * $("#numeric").kendoNumericTextBox({
          *     min: 0,
@@ -133,7 +133,7 @@
          * @option {Number} [min] <null> Specifies the smallest value the user can enter.
          * _example
          *  // specify in the HTML
-         * &lt;input id="numeric" value="10" type="number" min="-100" max="100" step="10"/&gt;
+         * <input id="numeric" value="10" type="number" min="-100" max="100" step="10"/>
          * <br />
          * // specify on widget initialization
          * $("#numeric").kendoNumericTextBox({
@@ -144,7 +144,7 @@
          * @option {Number} [max] <null> Specifies the largest value the user can enter.
          * _example
          *  // specify in the HTML
-         * &lt;input id="numeric" value="10" type="number" min="-100" max="100" step="10"/&gt;
+         * <input id="numeric" value="10" type="number" min="-100" max="100" step="10"/>
          * <br />
          * // specify on widget initialization
          * $("#numeric").kendoNumericTextBox({
@@ -164,7 +164,7 @@
          * @option {Number} [step] <1> Specifies the increment/decrement step.
          * _example
          *  // specify in the HTML
-         * &lt;input id="numeric" value="10" type="number" /&gt;
+         * <input id="numeric" value="10" type="number" />
          * <br />
          * // specify on widget initialization
          * $("#numeric").kendoNumericTextBox({
