@@ -230,6 +230,7 @@
     *
     * <p> The <strong>Application</strong> provides a way to force a specific platform look on your application upon init by
     * passing the OS name in the options parameter of the Application's constructor:
+    *
     * @exampleTitle Force iOS look
     * @example
     * <script>
@@ -238,8 +239,10 @@
     *      });
     * </script>
     *
+    * @section
     * Additionally, the OS version can be specified by by passing kendo.support.mobileOS object that is expected by Kendo UI Mobile.
     * This is more complex, but allows fine grained tuning of the application look and behavior. A sample object initialization is like this:
+    *
     * @exampleTitle Force iOS 5 look
     * @example
     * <script>
@@ -264,6 +267,13 @@
          * @param {DomElement} element DOM element. By default, the body element is used.
          * @param {Object} options Configuration options.
          * @option {String} [layout] <> The id of the default Application Layout.
+         * _example
+         * <div data-role="view">Bar</div>
+         *
+         * <div data-role="layout" data-id="foo">
+         *   <div data-role="header">Header</div>
+         * </div>
+         *
          * @option {String} [initial] <> The id of the initial mobilie View to display.
          * _example
          * <script>
@@ -273,13 +283,6 @@
          * </script>
          * @option {String} [loading] <Loading...> The text displayed in the loading popup. Setting this value to false will disable the loading popup.
          * @option {Boolean} [hideAddressBar] <true> Whether to hide the browser address bar.
-         * _example
-         * <div data-role="view">Bar</div>
-         *
-         * <div data-role="layout" data-id="foo">
-         *   <div data-role="header">Header</div>
-         * </div>
-         *
          * <script>
          *      new kendo.mobile.Application($(document.body), { layout: "foo" });
          * </script>
@@ -321,7 +324,7 @@
         },
 
         /**
-         * Navigate the local or remote view.
+         * Navigate to local or to remote view.
          * @param {String} url The id or url of the view.
          * @param {String} transition The transition to apply when navigating. See View Transitions section for more
          * information.
