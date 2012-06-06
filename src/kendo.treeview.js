@@ -133,9 +133,11 @@
         extend = $.extend,
         template = kendo.template,
         Widget = ui.Widget,
+        HierarchicalDataSource = kendo.data.HierarchicalDataSource,
         proxy = $.proxy,
         SELECT = "select",
         EXPAND = "expand",
+        CHANGE = "change",
         COLLAPSE = "collapse",
         DRAGSTART = "dragstart",
         DRAG = "drag",
@@ -392,6 +394,8 @@
 
             that._animation();
 
+            that._dataSource();
+
             if (options.template && typeof options.template == "string") {
                 options.template = template(options.template);
             } else if (!options.template) {
@@ -434,6 +438,8 @@
             if (options.dragAndDrop) {
                 that.dragging = new TreeViewDragAndDrop(that);
             }
+
+            that.dataSource.read();
         },
 
         _animation: function() {
@@ -444,6 +450,36 @@
                     expand: { show: true, effects: {} },
                     collapse: { hide: true, effects: {} }
                 };
+            }
+        },
+
+        _dataSource: function() {
+            var that = this,
+                options = that.options,
+                dataSource = options.dataSource;
+
+            dataSource = { data: dataSource };
+            //dataSource = isArray(dataSource) ? { data: dataSource } : dataSource;
+
+            if (that.dataSource && that._refreshHandler) {
+                that.dataSource.unbind(CHANGE, that._refreshHandler);
+                                //.unbind(REQUESTSTART, that._requestStartHandler)
+                                //.unbind(ERROR, that._errorHandler);
+            } else {
+                that._refreshHandler = proxy(that.refresh, that);
+                //that._requestStartHandler = proxy(that._requestStart, that);
+                //that._errorHandler = proxy(that._error, that);
+            }
+
+            that.dataSource = new HierarchicalDataSource(dataSource)
+                                .bind(CHANGE, that._refreshHandler);
+                                //.bind(REQUESTSTART, that._requestStartHandler)
+                                //.bind(ERROR, that._errorHandler);
+        },
+
+        refresh: function(e) {
+            if (e.action == "add") {
+                this.append(e.items);
             }
         },
 

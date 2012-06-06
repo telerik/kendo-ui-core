@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+    <head>
+        <title>TreeView DataSource binding</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.treeview.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+        <link rel="stylesheet" href="../../styles/web/kendo.common.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">TreeView DataSource binding</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+
+        <script>
+            var treeview, treeviewObject;
+
+            function createTreeView(options) {
+                treeview = $("<div />").appendTo(document.body).kendoTreeView(options);
+                treeviewObject = treeview.data("kendoTreeView");
+            }
+
+            var HierarchicalDataSource = kendo.data.HierarchicalDataSource;
+
+            module("DataSource binding", {
+                teardown: function () {
+                    $(".k-treeview,.k-item").remove();
+                }
+            });
+
+            test("Initializing from JSON creates HierarchicalDataSource", function() {
+                createTreeView({
+                    dataSource: []
+                });
+
+                ok(treeviewObject.dataSource instanceof HierarchicalDataSource);
+            });
+
+            test("Initializing from JSON populates dataSource", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "foo" },
+                        { text: "bar" }
+                    ]
+                });
+
+                equal(treeviewObject.dataSource.view().length, 2);
+            });
+
+            test("Adding items to the datasource adds them to the treeview", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "foo" }
+                    ]
+                });
+
+                treeviewObject.dataSource.add({ text: "bar" });
+
+                equal(treeview.find(".k-item").length, 2);
+            });
+        </script>
+
+        <div id="qunit-fixture"> </div>
+        <ul id="log"></ul>
+    </body>
+</html>
+
+
