@@ -8,13 +8,22 @@
     <ul data-role="listview" data-style="inset">
         <li><a href="#secondview">Local View</a></li>
     </ul>
+
     <ul data-role="listview" data-style="inset">
         <li><a href="../../content/mobile/view/remoteview.html">Remote View</a></li>
+    </ul>
+
+    <ul data-role="listview" data-style="inset">
+        <li><a href="#stretchview">Stretching View</a></li>
     </ul>
 </div>
 
 <div data-role="view" id="secondview" data-layout="mobile-view" data-title="Local View">
     <p>Hello world!</p>
+</div>
+
+<div data-role="view" id="stretchview" data-layout="mobile-view" data-title="Strecthing View" data-stretch="true">
+    <div style="background: orange;line-height: 100px;text-align: center;">Hello world!</div>
 </div>
 
 <div data-role="layout" data-id="mobile-view">

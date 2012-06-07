@@ -83,6 +83,8 @@
          * @param {DomElement} element DOM element.
          * @param {Object} options Configuration options.
          * @option {String} [title] <> The text to display in the navbar title (if present) and the browser title.
+         * @option {Boolean} [stretch] <false> If set to true, the view will stretch its child contents to occupy the entire view, while disabling kinetic scrolling.
+         * Useful if the view contains an image or a map.
          * @option {String | ObservableObject} [model] <null> The MVVM model to bind to. If a string is passed, The view
          * will try to resolve a reference to the view model variable in the global scope.
          * _exampleTitle Bind a Mobile View
@@ -151,6 +153,7 @@
             name: "View",
             title: "",
             defaultTransition: "",
+            stretch: false,
             model: null
         },
 
@@ -233,10 +236,14 @@
         _scroller: function() {
             var that = this;
 
-            that.content.kendoMobileScroller();
+            if (that.options.stretch) {
+                that.content.addClass("km-stretched-view");
+            } else {
+                that.content.kendoMobileScroller();
 
-            that.scroller = that.content.data("kendoMobileScroller");
-            that.scrollerContent = that.scroller.scrollElement;
+                that.scroller = that.content.data("kendoMobileScroller");
+                that.scrollerContent = that.scroller.scrollElement;
+            }
         },
 
         _model: function() {
