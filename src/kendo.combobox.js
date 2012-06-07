@@ -286,6 +286,18 @@
         *          template: kendo.template($("#template").html())
         *      });
         *  </script>
+        * @option {String} [text] <""> Define the text of the widget, when the autoBind is set to false.
+        * _example
+        * $("#combobox").kendoComboBox({
+        *      autoBind: false,
+        *      text: "Chai"
+        * });
+        * @option {String} [value] <""> Define the value of the widget
+        * _example
+        * $("#combobox").kendoComboBox({
+        *      dataSource: ["Item1", "Item2"],
+        *      value: "Item1"
+        * });
         * @option {Object} [animation] <> Animations to be used for opening/closing the popup. Setting to false will turn off the animation.
         * _exampleTitle Turn of animation
         * _example
