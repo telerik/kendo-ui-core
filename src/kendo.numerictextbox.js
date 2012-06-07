@@ -210,6 +210,13 @@
          *     upArrowText: "More",
          *     downArrowText: "Less"
          * });
+         * @option {String} [culture] <en-US> Specifies the culture info used by the NumericTextBox widget.
+         * _example
+         *
+         * // specify on widget initialization
+         * $("#numeric").kendoNumericTextBox({
+         *     culture: "de-DE"
+         * });
          */
          init: function(element, options) {
              var that = this,
