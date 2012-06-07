@@ -1100,6 +1100,10 @@
                 lastCategory = currentCategory;
             }
 
+            if (!options.baseUnit) {
+                delete options.baseUnit;
+            }
+
             return deepExtend({
                 baseUnit: timeUnits(minDelta)
             }, options);
@@ -1197,6 +1201,7 @@
                     minorUnit: majorUnit / 5
                 };
 
+            // TODO: Refactor
             var actualUnits = duration(autoMin, autoMax, baseUnit);
             var totalUnits = dataviz.ceil(actualUnits, majorUnit);
             var unitsToAdd = totalUnits - actualUnits;
@@ -1206,6 +1211,10 @@
 
             defaults.min = addDuration(autoMin, -head, baseUnit);
             defaults.max = addDuration(autoMax, tail, baseUnit);
+
+            if (!options.baseUnit) {
+                delete options.baseUnit;
+            }
 
             return deepExtend(defaults, options, {
                 majorUnit: majorUnit
