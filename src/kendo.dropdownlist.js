@@ -157,7 +157,6 @@
         SELECTED = "k-state-selected",
         TABINDEX = "tabIndex",
         HOVEREVENTS = "mouseenter mouseleave",
-        trimRegExp = /^\s/,
         proxy = $.proxy;
 
     var DropDownList = Select.extend( /** @lends kendo.ui.DropDownList.prototype */ {
@@ -259,6 +258,12 @@
          *          template: kendo.template($("#template").html())
          *      });
          *  </script>
+         * @option {String} [text] <""> Define the text of the widget, when the autoBind is set to false.
+         * _example
+         * $("#dropdownlist").kendoDropDownList({
+         *      autoBind: false,
+         *      text: "Chai"
+         * });
          * @option {Object} [animation] <> Animations to be used for opening/closing the popup. Setting to false will turn of the animation.
          * @option {Object} [animation.open] <> Animation to be used for opening of the popup.
          * _example
@@ -298,7 +303,9 @@
          * });
          */
         init: function(element, options) {
-            var that = this;
+            var that = this,
+                index = options && options.index,
+                optionLabel, text;
 
             options = $.isArray(options) ? { dataSource: options } : options;
 
@@ -331,16 +338,27 @@
 
             that.selectedIndex = -1;
 
+            if (index !== undefined) {
+                options.index = index;
+            }
+
             if (options.autoBind) {
                 that._selectItem();
             } else {
-                if (element.is(SELECT)) {
-                    that.text(element.children(":selected").text());
+                text = options.text;
+                if (!text) {
+                    optionLabel = options.optionLabel;
+                    if (element.is(SELECT)) {
+                        if (options.index === 0 && optionLabel) {
+                            text = optionLabel;
+                        } else {
+                            text = element.children(":selected").text();
+                        }
+                    } else if (!element[0].value) {
+                        text = optionLabel;
+                    }
                 }
-
-                if (!that.text().replace(trimRegExp, "") && options.optionLabel) {
-                    that.text(options.optionLabel);
-                }
+                that.text(text);
             }
 
             kendo.notify(that);
@@ -351,6 +369,7 @@
             enable: true,
             index: 0,
             autoBind: true,
+            text: "",
             template: "",
             delay: 500,
             height: 200,

@@ -513,6 +513,25 @@
                 }, 200);
             });
 
+            test("set selected text on init if autoBind:true (select)", function() {
+                var dropdownlist = new DropDownList($("<select><option>text</option></select>"), {
+                    optionLabel: "Select...",
+                    index: 1
+                });
+
+                equal(dropdownlist.text(), "text");
+            });
+
+            test("set selected text on init if autoBind:false (select)", function() {
+                var dropdownlist = new DropDownList($("<select><option>text</option></select>"), {
+                    autoBind: false,
+                    optionLabel: "Select...",
+                    index: 1
+                });
+
+                equal(dropdownlist.text(), "text");
+            });
+
             test("set optionLabel on init if autoBind:false (select)", function() {
                 var dropdownlist = new DropDownList($("<select/>"), {
                     autoBind: false,
@@ -523,15 +542,6 @@
             });
 
             test("set optionLabel on init if autoBind:false (input)", function() {
-                var dropdownlist = new DropDownList($("<input/>"), {
-                    autoBind: false,
-                    optionLabel: "Select..."
-                });
-
-                equal(dropdownlist.text(), "Select...");
-            });
-
-            test("use optionLabel option", function() {
                 var dropdownlist = new DropDownList($("<input/>"), {
                     autoBind: false,
                     optionLabel: "Select..."
@@ -623,6 +633,14 @@
                 ok(dropdown._busy === null);
             });
 
+            test("DropDownList displays text if autoBind false", function() {
+                var dropdown = input.kendoDropDownList({
+                    text: "Chai",
+                    autoBind: false
+                }).data("kendoDropDownList");
+
+                equal(dropdown.text(), "Chai");
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
