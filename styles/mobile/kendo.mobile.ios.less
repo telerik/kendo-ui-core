@@ -771,6 +771,7 @@
     color: #000;
     font-size: 1.4em;
     text-align: center;
+    background-color: #ddd;
 }
 
 .km-ios .km-popup .k-item,
@@ -778,16 +779,18 @@
 {
     background: linear-gradient(top, rgba(0,0,0,.3), rgba(0,0,0,0) 5%, rgba(0,0,0,0) 98%, rgba(70,70,70,.5)),
                 linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.1) 50%, rgba(0,0,0,.2) 50%, rgba(0,0,0,.2)) #fff;
-    background-color: #ddd;
     padding: .3em 0 .3em .6em;
     color: #000;
-    border-color: #32353a;
-    border-width: 3px;
     .border-radius(.6em);
     .box-shadow(~"inset 0 1px 1px rgba(255,255,255,.5), 0 1px 1px rgba(255,255,255,.5)");
     .box-sizing(border-box);
     background-clip: padding-box;
     text-shadow: 0 1px #fff;
+}
+
+.km-root .km-ios .km-popup .k-item
+{
+    border: 3px solid #32353a;
 }
 
 .km-ios .km-popup .k-item,
@@ -853,7 +856,8 @@
     height: auto !important;
 }
 
-.km-ios .km-actionsheet
+.km-ios .km-actionsheet,
+.km-phone .km-ios .km-popup .k-list-container
 {
     max-height: 80%;
 }

@@ -936,7 +936,6 @@
     margin-left: 5%;
     width: 90%;
     display: inline-block;
-    max-height: 80%;
     border: 0;
     padding: 0;
     background: #222;
@@ -944,6 +943,12 @@
     vertical-align: middle;
     .border-radius(0);
     .box-shadow(~"2px 2px 5px rgba(0,0,0,.5)");
+}
+
+.km-android .km-actionsheet,
+.km-phone .km-android .km-popup .k-list-container
+{
+    max-height: 80%;
 }
 
 .km-android > .k-list-container
