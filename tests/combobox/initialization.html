@@ -480,6 +480,34 @@
                 equal(input.attr("tabIndex"), 5);
             });
 
+            test("ComboBox sets element value if option.value is defined", function() {
+                var dropdown = input.kendoComboBox({
+                    dataSource: ["Item1", "Item2"],
+                    value: "Item2",
+                }).data("kendoComboBox");
+
+                equal(dropdown.value(), "Item2");
+            });
+
+            test("ComboBox sets element value if option.value is defined (select)", function() {
+                var dropdown = $("<select/>").kendoComboBox({
+                    dataSource: ["Item1", "Item2"],
+                    value: "Item2",
+                }).data("kendoComboBox");
+
+                equal(dropdown.value(), "Item2");
+            });
+
+            test("ComboBox displays text if autoBind false", function() {
+                var dropdown = input.kendoComboBox({
+                    text: "Chai",
+                    placeholder: "Select...",
+                    autoBind: false
+                }).data("kendoComboBox");
+
+                equal(dropdown.text(), "Chai");
+            });
+
             asyncTest("form reset support", 2, function() {
                 input.attr("value", "123");
 

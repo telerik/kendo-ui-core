@@ -345,7 +345,7 @@
         *  </script>
         */
         init: function(element, options) {
-            var that = this, wrapper;
+            var that = this, wrapper, text;
 
             options = $.isArray(options) ? { dataSource: options } : options;
 
@@ -396,11 +396,21 @@
 
             if (options.autoBind) {
                 that._selectItem();
-            } else if (element.is(SELECT)) {
-                that.input.val(element.children(":selected").text());
+            } else {
+                text = options.text;
+
+                if (!text && element.is(SELECT)) {
+                    text = element.children(":selected").text();
+                }
+
+                if (text) {
+                    that.input.val(text);
+                }
             }
 
-            that._placeholder();
+            if (!text) {
+                that._placeholder();
+            }
 
             kendo.notify(that);
         },
@@ -1155,17 +1165,18 @@
 
         _selectItem: function() {
             var that = this,
+                options = that.options,
                 dataSource = that.dataSource,
                 expression = dataSource.filter() || {};
 
             removeFiltersForField(expression, that.options.dataTextField);
 
             that.dataSource.one(CHANGE, function() {
-                var value = that.value();
+                var value = options.value || that.value();
                 if (value) {
                     that.value(value);
                 } else {
-                    that.select(that.options.index);
+                    that.select(options.index);
                 }
                 that.trigger("selected");
             }).filter(expression);
