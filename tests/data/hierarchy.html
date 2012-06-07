@@ -182,6 +182,45 @@
 
                 equal(parent.children.data().length, 1);
             });
+
+            test("load data from remote data source", 1, function() {
+                var dataSource = new HierarchicalDataSource({
+                    transport: {
+                        read: function(options) {
+                            ok(true, "The read method of the transport is called");
+                        }
+                    }
+                });
+
+                dataSource.fetch();
+            });
+
+            test("the parent id is passed when reading children from remote service", 1, function() {
+                var dataSource = new HierarchicalDataSource({
+                    transport: {
+                        read: function(options) {
+                            options.success([ { categoryId: 1 }])
+                        }
+                    },
+                    schema: {
+                        model: {
+                            id: "categoryId",
+                            children: {
+                                transport: {
+                                    read: function(options) {
+                                        equal(options.data.categoryId, 1);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+
+                dataSource.fetch();
+
+                dataSource.data()[0].load();
+            });
+
         </script>
     </body>
 </html>

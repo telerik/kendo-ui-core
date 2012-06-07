@@ -2520,7 +2520,11 @@
         },
 
         load: function() {
-            this.children.fetch();
+            var options = {};
+
+            options[this.idField] = this.id;
+
+            this.children.query(options);
         },
 
         shouldSerialize: function(field) {
