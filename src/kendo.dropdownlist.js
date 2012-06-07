@@ -264,6 +264,12 @@
          *      autoBind: false,
          *      text: "Chai"
          * });
+         * @option {String} [value] <""> Define the value of the widget
+         * _example
+         * $("#dropdownlist").kendoDropDownList({
+         *      dataSource: ["Item1", "Item2"],
+         *      value: "Item1"
+         * });
          * @option {Object} [animation] <> Animations to be used for opening/closing the popup. Setting to false will turn of the animation.
          * @option {Object} [animation.open] <> Animation to be used for opening of the popup.
          * _example
@@ -305,7 +311,7 @@
         init: function(element, options) {
             var that = this,
                 index = options && options.index,
-                optionLabel, text;
+                optionLabel, useOptionLabel, text;
 
             options = $.isArray(options) ? { dataSource: options } : options;
 
@@ -315,6 +321,10 @@
             element = that.element.focus(function() {
                 that.wrapper.focus();
             });
+
+            if (options.value) {
+                //element.val(options.value);
+            }
 
             that._reset();
 
@@ -348,13 +358,15 @@
                 text = options.text;
                 if (!text) {
                     optionLabel = options.optionLabel;
+                    useOptionLabel = optionLabel && options.index === 0;
+
                     if (element.is(SELECT)) {
-                        if (options.index === 0 && optionLabel) {
+                        if (useOptionLabel) {
                             text = optionLabel;
                         } else {
                             text = element.children(":selected").text();
                         }
-                    } else if (!element[0].value) {
+                    } else if (!element[0].value && useOptionLabel) {
                         text = optionLabel;
                     }
                 }
@@ -778,7 +790,7 @@
             var that = this;
 
             that.dataSource.one(CHANGE, function() {
-                var value = that.value();
+                var value = that.options.value || that.value();
                 if (value) {
                     that.value(value);
                 } else {

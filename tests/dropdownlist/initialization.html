@@ -550,6 +550,16 @@
                 equal(dropdownlist.text(), "Select...");
             });
 
+            test("set empty text if autoBind:false and index = 1", function() {
+                var dropdownlist = new DropDownList($("<input/>"), {
+                    autoBind: false,
+                    index: 1,
+                    optionLabel: "Select..."
+                });
+
+                equal(dropdownlist.text(), "");
+            });
+
             test("Add km-popup class to the animation container", function() {
                 var dropdownlist = new DropDownList($("<input/>"));
                 dropdownlist.popup.trigger("open");
@@ -640,6 +650,24 @@
                 }).data("kendoDropDownList");
 
                 equal(dropdown.text(), "Chai");
+            });
+
+            test("DropDownList sets element value if option.value is defined", function() {
+                var dropdown = input.kendoDropDownList({
+                    dataSource: ["Item1", "Item2"],
+                    value: "Item2",
+                }).data("kendoDropDownList");
+
+                equal(dropdown.value(), "Item2");
+            });
+
+            test("DropDownList sets element value if option.value is defined (select)", function() {
+                var dropdown = $("<select/>").kendoDropDownList({
+                    dataSource: ["Item1", "Item2"],
+                    value: "Item2",
+                }).data("kendoDropDownList");
+
+                equal(dropdown.value(), "Item2");
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
