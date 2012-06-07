@@ -7,6 +7,8 @@
 .km-ios
 {
     background: #fff;
+    font: bold .9em HelveticaNeue, sans-serif;
+    font-size: .9rem;
 }
 
 .km-ios .km-view
@@ -68,13 +70,6 @@
 {
     border-width: 0;
     color: white;
-}
-
-.km-ios,
-.km-ios .km-button
-{
-    font: bold .9em HelveticaNeue, sans-serif;
-    font-size: .9rem;
 }
 
 .km-ios .km-back
@@ -147,7 +142,7 @@
 .km-ios .km-slider-background
 {
     background:
-        linear-gradient(top, rgb(219, 219, 219), rgb(238, 238, 238) 50%) 6em 0 no-repeat #3074e7;
+        linear-gradient(top, rgb(219, 219, 219), rgb(238, 238, 238) 50%) 6.4em 0 no-repeat #3074e7;
 }
 
 .km-ios5 .km-switch-background
@@ -163,7 +158,7 @@
     display: inline-block;
     margin: 0;
     width: 100%;
-    height: 55%;
+    height: 50%;
     line-height: 100%;
     vertical-align: bottom;
     background: linear-gradient(top,  rgba(255,255,255,.14) 0, rgba(255,255,255,.4));
@@ -258,8 +253,9 @@
 .km-ios5 .km-switch-label-on,
 .km-ios5 .km-switch-label-off
 {
+    width: 200%;
     font-size: 1.05rem;
-    line-height: 1.45rem;
+    line-height: 1.5rem;
 }
 
 .km-ios5 .km-switch-label-off
@@ -388,36 +384,28 @@
 
 .km-ios .km-tabstrip
 {
-    padding: .4em 0 .2em;
+    padding: .1em 0;
+    border-top: 1px solid rgba(255,255,255,.2);
     background-color: #222;
     background-image: linear-gradient(top, rgba(46, 46, 46, 0.8), rgba(21, 21, 21, 0.5) 50%, rgba(0, 0, 0, 0.8) 50%, rgba(0, 0, 0, 0.8));
-}
-
-.km-ios.km-horizontal .km-tabstrip
-{
-    padding: .2em 0 0;
+    .box-shadow(0 -1px 0 0 #000);
 }
 
 .km-ios .km-tabstrip .km-button
 {
-    .border-radius(5pt);
+    .border-radius(3pt);
     .box-shadow(none);
     background: transparent;
     border: 0;
     font-size: .7em;
     font-size: .7rem;
-    padding: .1em .4em;
-    padding: .1rem .3rem;
-    min-width: 5em;
-    min-width: 3.6rem;
-    margin: 0 1.5%;
+    padding: 0 .3em;
+    padding: 0 .2rem;
+    min-width: 4.4em;
+    min-width: 3.2rem;
+    margin: 0 .5%;
     text-shadow: none;
-}
-
-.km-ios.km-horizontal .km-tabstrip .km-button
-{
-    padding: 0 .4em;
-    padding: 0 .3rem;
+    color: #777;
 }
 
 .km-ios .km-tabstrip .km-badge
@@ -429,7 +417,7 @@
 .km-ios .km-tabstrip .km-state-active
 {
     color: #FFF;
-    background: rgba(100, 100, 100, 0.5);
+    background: rgba(100,100,100,.3);
 }
 
 .km-ios .km-list
@@ -591,17 +579,7 @@
 
 .km-ios .km-tabstrip .km-icon
 {
-    margin: .3em auto;
     background: rgba(255,255,255,.3) linear-gradient(top, rgba(255,255,255,.2), rgba(255,255,255,0));
-}
-
-.km-ios.km-horizontal .km-tabstrip .km-icon
-{
-    width: 3.6em;
-    height: 3.6em;
-    width: 2.2rem;
-    height: 2.2rem;
-    margin: 0 auto;
 }
 
 .km-ios .km-tabstrip .km-state-active .km-icon
@@ -910,6 +888,37 @@
 }
 
 /* Tablet Styles */
+
+.km-tablet .km-ios .km-tabstrip
+{
+    padding: .4em 0 .2em;
+}
+
+.km-tablet .km-ios.km-horizontal .km-tabstrip
+{
+    padding: .2em 0 0;
+}
+
+.km-tablet .km-ios .km-tabstrip .km-icon
+{
+    margin: .3em auto;
+}
+
+.km-tablet .km-ios.km-horizontal .km-tabstrip .km-icon
+{
+    margin: 0 auto;
+}
+
+.km-tablet .km-ios .km-tabstrip .km-button
+{
+    padding: .1rem .3rem;
+    margin: 0 1.5%;
+}
+
+.km-tablet .km-ios.km-horizontal .km-tabstrip .km-button
+{
+    padding: 0 .2rem;
+}
 
 .km-tablet .km-ios .km-view-title,
 .km-tablet .km-ios .km-modalview .km-view-title
