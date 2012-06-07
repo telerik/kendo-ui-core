@@ -1,0 +1,77 @@
+#!/usr/bin/env node
+
+var fs = require("fs");
+
+
+processFilesRecursive("docs", /.+md/, function(fileName) {
+    var contents = fs.readFileSync(fileName).toString();
+
+    var root = {
+        title: "Root",
+        contents: "",
+        children: []
+    };
+
+    var node = root, level = 0;
+
+    contents.split("\n").forEach(function(line) {
+        match = line.match(/^(#+) (.+)$/);
+        if (match) {
+            var currentLevel = match[1].length;
+            var currentTitle = match[2];
+
+            var newNode = {
+                title: currentTitle,
+                contents: "",
+                children: []
+            };
+
+
+            if (currentLevel > level + 1) {
+                while (level < currentLevel - 1) {
+                    var filler = { title: "-Dummy-", contents: "", children: [], parent: node };
+                    node.children.push(filler);
+                    node  = filler;
+                    // console.log("++");
+                    level ++;
+                }
+            } else {
+                while (level >= currentLevel) {
+                    node = node.parent;
+                    level --;
+                    // console.log("--");
+                }
+            }
+
+            level = currentLevel;
+
+            newNode.parent = node;
+            // console.log("new node", newNode.title, "level" , currentLevel, "parent", node.title);
+            node.children.push(newNode);
+            node = newNode;
+        } else {
+            node.contents += line + "\n";
+        }
+    });
+
+    console.log(root.children[0].children[2]);
+    // process.exit();
+});
+
+function processFilesRecursive(dir, filterRegex, callback) {
+    var files = fs.readdirSync(dir),
+        fileName,
+        stat;
+
+    for (var i = 0; i < files.length; i++) {
+        fileName = dir + "/" + files[i];
+        stat = fs.statSync(fileName);
+
+        if (!stat.isFile()) {
+            processFilesRecursive(fileName, filterRegex, callback);
+        } else if (filterRegex.test(fileName)) {
+            callback(fileName);
+        }
+    }
+}
+// vim: ft=javascript
