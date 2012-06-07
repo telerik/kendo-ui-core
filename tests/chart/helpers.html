@@ -715,6 +715,10 @@
                     equals(Aggregates.max(values), 3);
                 });
 
+                test("sum", function() {
+                    equals(Aggregates.sum(values), 6);
+                });
+
                 test("avg", function() {
                     equals(Aggregates.avg(values), 2);
                 });

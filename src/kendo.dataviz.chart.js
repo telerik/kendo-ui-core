@@ -4519,7 +4519,7 @@
             return math.min.apply(math, values);
         },
 
-        avg: function(values) {
+        sum: function(values) {
             var i,
                 length = values.length,
                 sum = 0;
@@ -4528,11 +4528,15 @@
                 sum += values[i];
             }
 
-            return sum / length;
+            return sum;
         },
 
         count: function(values) {
             return values.length;
+        },
+
+        avg: function(values) {
+            return Aggregates.sum(values) / Aggregates.count(values);
         }
     };
 
