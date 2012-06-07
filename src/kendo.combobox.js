@@ -1060,7 +1060,7 @@
                 tabIndex = element.tabIndex,
                 wrapper = that.wrapper,
                 SELECTOR = ".k-input",
-                input;
+                input, DOMInput;
 
             input = wrapper.find(SELECTOR);
 
@@ -1071,8 +1071,11 @@
                 input = wrapper.find(SELECTOR);
             }
 
-            input[0].tabIndex = tabIndex;
-            input[0].style.cssText = element.style.cssText;
+            DOMInput = input[0];
+            DOMInput.tabIndex = tabIndex;
+            DOMInput.maxLength = element.maxLength;
+            DOMInput.style.cssText = element.style.cssText;
+
             input.addClass(element.className)
                  .val(element.value)
                  .css({

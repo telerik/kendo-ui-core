@@ -508,6 +508,13 @@
                 equal(dropdown.text(), "Chai");
             });
 
+            test("ComboBox copies maxlength attr to the fake input", function() {
+                input.attr("maxLength", 10);
+                var combo = new kendo.ui.ComboBox(input);
+
+                equal(combo.input.attr("maxLength"), 10);
+            });
+
             asyncTest("form reset support", 2, function() {
                 input.attr("value", "123");
 
