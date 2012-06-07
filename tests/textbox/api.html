@@ -321,6 +321,36 @@
                 equal(textbox.options.max, 10.10);
             });
 
+            test("min method sets 0 value", function() {
+                var textbox = new NumericTextBox(input, {
+                    culture: "bg-BG"
+                });
+
+                textbox.max(0);
+
+                equal(textbox.options.max, 0);
+            });
+
+            test("step method sets step value", function() {
+                var textbox = new NumericTextBox(input, {
+                    culture: "bg-BG"
+                });
+
+                textbox.step("0,1");
+
+                equal(textbox.options.step, 0.1);
+            });
+
+            test("step method does not sets 0", function() {
+                var textbox = new NumericTextBox(input, {
+                    culture: "bg-BG"
+                });
+
+                textbox.step(0);
+
+                equal(textbox.options.step, 1);
+            });
+
             test("focusing text input should call _focus", 2, function() {
                 var textbox = new NumericTextBox(input);
 

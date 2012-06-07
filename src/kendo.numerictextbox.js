@@ -415,6 +415,24 @@
         },
 
         /**
+        * Gets/Sets the step value of the NumericTextBox.
+        * @param {Number | String} value The step value to set.
+        * @returns {Number} The step value of the NumericTextBox.
+        * @example
+        * // get a reference to the NumericTextBox widget
+        * var numerictextbox = $("#numerictextbox").data("kendoNumericTextBox");
+        *
+        * // get the step value of the numerictextbox.
+        * var step = numerictextbox.step();
+        *
+        * // set the step value of the numerictextbox.
+        * numerictextbox.step(0.1);
+        */
+        step: function(value) {
+            return this._option("step", value);
+        },
+
+        /**
         * Gets/Sets the value of the numerictextbox.
         * @param {Number | String} value The value to set.
         * @returns {Number} The value of the numerictextbox.
@@ -681,6 +699,12 @@
 
             if (value === undefined) {
                 return options[option];
+            }
+
+            value = that._parse(value);
+
+            if (!value && option === "step") {
+                return;
             }
 
             options[option] = that._parse(value);
