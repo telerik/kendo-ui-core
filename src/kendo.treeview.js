@@ -456,8 +456,7 @@
                 options = that.options,
                 dataSource = options.dataSource;
 
-            dataSource = { data: dataSource };
-            //dataSource = isArray(dataSource) ? { data: dataSource } : dataSource;
+            dataSource = $.isArray(dataSource) ? { data: dataSource } : dataSource;
 
             if (that.dataSource && that._refreshHandler) {
                 that.dataSource.unbind(CHANGE, that._refreshHandler);

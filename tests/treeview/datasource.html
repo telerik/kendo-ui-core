@@ -97,6 +97,20 @@
 
             });
 
+            test("DataSource as an object", 2, function() {
+                createTreeView({
+                    dataSource: {
+                        data: [
+                            { text: "foo" }
+                        ]
+                    }
+                });
+
+                var item = treeview.find(".k-item");
+
+                equal(item.length, 1);
+                equal(treeviewObject.text(item), "foo");
+            });
             /*
             test("Removing items from the datasource removes them from the treeview at the proper level", function() {
                 createTreeView({
