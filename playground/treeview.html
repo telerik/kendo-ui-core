@@ -14,39 +14,6 @@
         <script src="../src/kendo.draganddrop.js"></script>
         <script src="../src/kendo.fx.js"></script>
         <script src="../src/kendo.treeview.js"></script>
-        <script>
-            var Node = kendo.data.Model.define({
-                init: function(value) {
-                    var data = {},
-                        children = {};
-
-
-                    kendo.data.Model.fn.init.call(this, value);
-
-                    data[this.idField] = this.id;
-
-                    children = $.extend(true, {}, this.children, {
-                        transport: {
-                            read: {
-                                data: data
-                            }
-                        }
-                    });
-
-                    this.children = new TreeDataSource(children);
-                },
-                shouldSerialize: function(field) {
-                    return kendo.data.Model.fn.shouldSerialize.call(this, field) && field !== "children";
-                }
-            });
-
-            var TreeDataSource = kendo.data.DataSource.extend({
-                init: function(options) {
-                    kendo.data.DataSource.fn.init.call(this, $.extend(true, {}, { schema: { modelBase: Node } }, options));
-                }
-            });
-
-        </script>
     </head>
     <body>
         <h2>Heterogeneous data source</h2>
@@ -54,7 +21,7 @@
         <h2>Homogeneous data source</h2>
         <ul id="treeview2"></ul>
         <script>
-            var heterogeneous = new TreeDataSource({
+            var heterogeneous = new kendo.data.HierarchicalDataSource({
                 transport: {
                     read: {
                         url: "http://korchev:8080/Northwind/Home/Categories",
@@ -90,7 +57,7 @@
                     li.find("a").text(category.categoryName).click(function(e) {
                         e.preventDefault();
 
-                        category.children.fetch(function() {
+                        category.children.one("change", function() {
                             li.find("ul").remove();
                             var products = category.children.data();
                             var ul = $("<ul></ul>").appendTo(li);
@@ -99,11 +66,13 @@
                                 $("<li></li>").text(product.productName).appendTo(ul);
                             });
                         });
+
+                        category.load();
                     });
                 });
             });
 
-            var homogeneous = new TreeDataSource({
+            var homogeneous = new kendo.data.HierarchicalDataSource({
                 transport: {
                     read: {
                         url: "http://korchev:8080/Northwind/Home/Employees",
@@ -142,7 +111,7 @@
                     li.find("a").text(category.employeeName).click(function(e) {
                         e.preventDefault();
 
-                        category.children.fetch(function() {
+                        category.children.one("change", function() {
                             li.find("ul").remove();
                             var products = category.children.data();
                             var ul = $("<ul></ul>").appendTo(li);
@@ -151,24 +120,12 @@
                                 $("<li></li>").text(product.employeeName).appendTo(ul);
                             });
                         });
+
+                        category.load();
                     });
                 });
             });
 
-            var inline = {
-                data: [
-                    {
-                        text: "root",
-                        items: [
-                            { text: "leaf" },
-                            {
-                                text: "node with children",
-                                items: [ { text: "leaf" }]
-                            }
-                        ]
-                    }
-                ]
-            }
         </script>
     </body>
 </html>
