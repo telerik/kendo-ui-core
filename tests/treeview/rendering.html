@@ -376,21 +376,6 @@
                 equal(treeview.find("a").attr("href"), "bar");
             });
 
-            test("uses items field binding", function() {
-                treeview.kendoTreeView({
-                    bindings: {
-                        items: "children"
-                    },
-                    dataSource: [
-                        { text: "foo", children: [
-                            { text: "bar" }
-                        ] }
-                    ]
-                });
-
-                equal(treeview.find(".k-item").length, 2);
-            });
-
             test("sets data-uid", function() {
                 treeview.kendoTreeView({
                     dataSource: [

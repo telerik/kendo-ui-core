@@ -475,30 +475,6 @@
                                 //.bind(ERROR, that._errorHandler);
         },
 
-        refresh: function(e) {
-            var that = this,
-                parentNode = that.element;
-
-            if (e.action == "add") {
-                if (e.node) {
-                    // adding to subgroup
-                    parentNode = that.element.find(".k-item[" + kendo.attr("uid") + "=" + e.node.uid + "]");
-                }
-
-                that.append(e.items, parentNode);
-            } else if (e.action == "remove") {
-            } else {
-                // TODO: handle loading of subgroups
-                that.root = that.wrapper.html(that._renderGroup({
-                    items: e.items,
-                    group: {
-                        firstLevel: true,
-                        expanded: true
-                    }
-                })).children("ul");
-            }
-        },
-
         events: [
             /**
             *
@@ -857,6 +833,42 @@
             that.element.find(nodes).each(function(index, item) {
                 callback.call(that, index, $(item).closest(NODE));
             });
+        },
+
+        /**
+         *
+         * Returns the dataItem that corresponds to a TreeView node
+         *
+         */
+        dataItem: function(node) {
+            var uid = $(node).closest(NODE).attr(kendo.attr("uid"));
+
+            return this.dataSource.getByUid(uid);
+        },
+
+        refresh: function(e) {
+            var that = this,
+                parentNode = that.element;
+
+            if (e.action == "add") {
+                if (e.node) {
+                    // adding to subgroup
+                    parentNode = that.findByUid(e.node.uid);
+                }
+
+                that.append(e.items, parentNode);
+            } else if (e.action == "remove") {
+                that.remove(that.root.children(NODE).eq(e.index));
+            } else {
+                // TODO: handle loading of subgroups
+                that.root = that.wrapper.html(that._renderGroup({
+                    items: e.items,
+                    group: {
+                        firstLevel: true,
+                        expanded: true
+                    }
+                })).children("ul");
+            }
         },
 
         /**
@@ -1322,6 +1334,27 @@
             return $(this.element).find(".k-in").filter(function(i, element) {
                 return $(element).text() == text;
             }).closest(NODE);
+        },
+
+        /**
+         *
+         * Searches a TreeView for a node with the given unique identifier.
+         * Applicable when the widget is bound to a HierarchicalDataSource.
+         *
+         * @param {String} text
+         * The text that is being searched for.
+         *
+         * @returns {jQueryObject}
+         * All nodes that have the text.
+         *
+         * @exampleTitle Search a TreeView for the item that has the text, "CSS3 is da bomb!"
+         * @example
+         * var treeView = $("#treeView").data("kendoTreeView");
+         * var foundNode = treeView.findByText("CSS3 is da bomb!");
+         *
+         */
+        findByUid: function(uid) {
+            return this.element.find(".k-item[" + kendo.attr("uid") + "=" + uid + "]");
         },
 
         _renderItem: function (options) {

@@ -21,8 +21,11 @@
         <ol id="qunit-tests"></ol>
 
         <script>
+            var treeview, treeviewObject;
+
             function createTreeView(options) {
-                return $("<div />").appendTo(document.body).kendoTreeView(options);
+                treeview = $("<div />").appendTo(document.body).kendoTreeView(options);
+                treeviewObject = treeview.data("kendoTreeView");
             }
 
             module("api", {
@@ -32,7 +35,7 @@
             });
 
             test("enable(node, false) disables node", function() {
-                var treeview = createTreeView({
+                createTreeView({
                         dataSource: [
                             { text: "foo", items: [
                                 { text: "bar" }
@@ -42,14 +45,14 @@
 
                 var node = treeview.find(".k-item:first");
 
-                treeview.data("kendoTreeView").enable(node, false);
+                treeviewObject.enable(node, false);
 
                 equals(node.find(".k-plus-disabled").length, 1);
                 ok(node.find(".k-in").hasClass("k-state-disabled"));
             });
 
             test("enable(node) enables node", function() {
-                var treeview = createTreeView({
+                createTreeView({
                         dataSource: [
                             { text: "foo", enabled: false, items: [
                                 { text: "bar" }
@@ -59,14 +62,14 @@
 
                 var node = treeview.find(".k-item:first");
 
-                treeview.data("kendoTreeView").enable(node);
+                treeviewObject.enable(node);
 
                 equals(node.find(".k-plus").length, 1);
                 ok(!node.find(".k-in").hasClass("k-state-disabled"));
             });
 
             test("select(node) selects node", function() {
-                var treeview = createTreeView({
+                createTreeView({
                         dataSource: [
                             { text: "foo" }
                         ]
@@ -74,13 +77,13 @@
 
                 var node = treeview.find(".k-item:first");
 
-                treeview.data("kendoTreeView").select(node);
+                treeviewObject.select(node);
 
                 ok(node.find(".k-in").hasClass("k-state-selected"));
             });
 
             test("select(node) works with inner elements", function() {
-                var treeview = createTreeView({
+                createTreeView({
                         dataSource: [
                             { text: "foo" }
                         ]
@@ -88,13 +91,13 @@
 
                 var node = treeview.find(".k-item:first").find(".k-in");
 
-                treeview.data("kendoTreeView").select(node);
+                treeviewObject.select(node);
 
                 ok(node.hasClass("k-state-selected"));
             });
 
             test("select(node) deselects other node", function() {
-                var treeview = createTreeView({
+                createTreeView({
                         dataSource: [
                             { text: "foo", selected: true },
                             { text: "bar" }
@@ -103,13 +106,13 @@
 
                 var node = treeview.find(".k-item:last");
 
-                treeview.data("kendoTreeView").select(node);
+                treeviewObject.select(node);
 
                 equals(treeview.find(".k-state-selected").length, 1);
             });
 
             test("select(selector) limits selector to treeview", function() {
-                var treeview = createTreeView({
+                createTreeView({
                         dataSource: [
                             { text: "foo" }
                         ]
@@ -117,13 +120,13 @@
 
                 $("<div class='k-item' />").appendTo(document.body);
 
-                treeview.data("kendoTreeView").select(".k-item:last");
+                treeviewObject.select(".k-item:last");
 
                 equals(treeview.find(".k-state-selected").length, 1);
             });
 
             test("text(node) returns node text", function() {
-                var treeview = createTreeView({
+                createTreeView({
                         dataSource: [
                             { text: "foo", items: [
                                 { text: "bar" }
@@ -133,12 +136,12 @@
 
                 var node = treeview.find(".k-item:first");
 
-                equals(treeview.data("kendoTreeView").text(node), "foo");
-                equals(treeview.data("kendoTreeView").text(node.find(".k-in:first")), "foo");
+                equals(treeviewObject.text(node), "foo");
+                equals(treeviewObject.text(node.find(".k-in:first")), "foo");
             });
 
             test("text(node) returns node text if inner element is passed", function() {
-                var treeview = createTreeView({
+                createTreeView({
                         dataSource: [
                             { text: "foo", items: [
                                 { text: "bar" }
@@ -148,11 +151,11 @@
 
                 var node = treeview.find(".k-item .k-in:first");
 
-                equals(treeview.data("kendoTreeView").text(node), "foo");
+                equals(treeviewObject.text(node), "foo");
             });
 
             test("findByText(text) returns single node", function() {
-                var treeview = createTreeView({
+                createTreeView({
                         dataSource: [
                             { text: "foo", items: [
                                 { text: "bar" }
@@ -162,11 +165,11 @@
 
                 var node = treeview.find(".k-item:first");
 
-                equals(treeview.data("kendoTreeView").findByText("foo")[0], node[0]);
+                equals(treeviewObject.findByText("foo")[0], node[0]);
             });
 
             test("findByText(text) returns multiple nodes", function() {
-                var treeview = createTreeView({
+                createTreeView({
                         dataSource: [
                             { text: "foo" },
                             { text: "bar" },
@@ -175,19 +178,18 @@
                     });
 
                 var nodes = treeview.find(".k-item"),
-                    result = treeview.data("kendoTreeView").findByText("foo");
+                    result = treeviewObject.findByText("foo");
 
                 equals(result[0], nodes[0]);
                 equals(result[1], nodes[2]);
             });
 
             test("append(nodeData, root) appends new node to empty parent", function() {
-                var treeview = createTreeView({
+                createTreeView({
                         dataSource: [
                             { text: "foo" }
                         ]
                     }),
-                    treeviewObject = treeview.data("kendoTreeView"),
                     root = treeview.find(".k-item:first");
 
                 var appendedNode = treeviewObject.append({ text: "bar" }, root);
@@ -203,14 +205,13 @@
             });
 
             test("append(nodeData, parentNode) appends new node to parent with existing group", function() {
-                var treeview = createTreeView({
+                createTreeView({
                         dataSource: [
                             { text: "foo", expanded: true, items: [
                                 { text: "bar" }
                             ] }
                         ]
                     }),
-                    treeviewObject = treeview.data("kendoTreeView"),
                     parentNode = treeview.find(".k-item:first");
 
                 var appendedNode = treeviewObject.append({ text: "bar" }, parentNode);
@@ -224,12 +225,11 @@
             });
 
             test("append(nodeData) appends new node to root", function() {
-                var treeview = createTreeView({
+                createTreeView({
                         dataSource: [
                             { text: "foo" }
                         ]
                     }),
-                    treeviewObject = treeview.data("kendoTreeView"),
                     rootGroup = treeview.find(".k-group");
 
                 var appendedNode = treeviewObject.append({ text: "bar" });
@@ -241,7 +241,7 @@
             });
 
             test("append(nodeElement, parentNode) appends node to parent", function() {
-                var treeview = createTreeView({
+                createTreeView({
                         dataSource: [
                             { text: "foo", expanded: true, items: [
                                 { text: "buzz" },
@@ -250,7 +250,6 @@
                             { text: "baz" }
                         ]
                     }),
-                    treeviewObject = treeview.data("kendoTreeView"),
                     rootGroup = treeview.find("> .k-group"),
                     subNode = treeviewObject.findByText("buzz"),
                     newParent = treeviewObject.findByText("baz");
@@ -263,14 +262,13 @@
             });
 
             test("append(nodeElement) appends node to root", function() {
-                var treeview = createTreeView({
+                createTreeView({
                         dataSource: [
                             { text: "foo", expanded: true, items: [
                                 { text: "bar" }
                             ] }
                         ]
                     }),
-                    treeviewObject = treeview.data("kendoTreeView"),
                     rootGroup = treeview.find("> .k-group"),
                     subNode = treeviewObject.findByText("bar");
 
@@ -283,15 +281,15 @@
             });
 
             test("append() of single child to same parent does not remove it", function() {
-                var treeview = createTreeView({
+                createTreeView({
                         dataSource: [
                             { text: "foo", expanded: true, items: [
                                 { text: "bar" }
                             ] }
                         ]
-                    }),
-                    treeviewObject = treeview.data("kendoTreeView"),
-                    rootGroup = treeview.find("> .k-group"),
+                    });
+
+                var rootGroup = treeview.find("> .k-group"),
                     subNode = treeviewObject.findByText("bar"),
                     rootNode = treeviewObject.findByText("foo");
 
@@ -311,8 +309,7 @@
             });
 
             test("append() of array of items", function() {
-                var treeview = createTreeView({}),
-                    treeviewObject = treeview.data("kendoTreeView");
+                createTreeView({});
 
                 var appendedNodes = treeviewObject.append([
                         { text: "foo" },
@@ -324,23 +321,22 @@
             });
 
             test("append() persists node data", function() {
-                var treeview = createTreeView([
+                createTreeView([
                             { text: "foo" },
                             { text: "bar" }
-                        ]).data("kendoTreeView");
+                        ]);
 
-                treeview.findByText("foo").data("id", 1);
+                treeviewObject.findByText("foo").data("id", 1);
 
-                treeview.append(treeview.findByText("foo"), treeview.findByText("bar"));
+                treeviewObject.append(treeviewObject.findByText("foo"), treeviewObject.findByText("bar"));
 
-                equals(treeview.findByText("foo").data("id"), 1);
+                equals(treeviewObject.findByText("foo").data("id"), 1);
             });
 
             test("append() uses item template when creating items", function() {
-                var treeview = createTreeView({
-                        template: kendo.template("item: #= item.text #")
-                    }),
-                    treeviewObject = treeview.data("kendoTreeView");
+                createTreeView({
+                    template: kendo.template("item: #= item.text #")
+                });
 
                 treeviewObject.append({ text: "foo" });
 
@@ -354,9 +350,7 @@
             });
 
             test("append() of observable object", function() {
-                var treeview = createTreeView({
-                    }),
-                    treeviewObject = treeview.data("kendoTreeView");
+                createTreeView({})
 
                 treeviewObject.append(kendo.observable({ text: "foo" }));
 
@@ -364,10 +358,9 @@
             });
 
             test("append() of observable array", function() {
-                var treeview = createTreeView({
-                    }),
-                    treeviewObject = treeview.data("kendoTreeView"),
-                    array = new kendo.data.ObservableArray([{ text: "foo" }]);
+                createTreeView({});
+
+                var array = new kendo.data.ObservableArray([{ text: "foo" }]);
 
                 treeviewObject.append(array);
 
@@ -375,9 +368,9 @@
             });
 
             test("append() of observable hierarchy", function() {
-                var treeview = createTreeView({}),
-                    treeviewObject = treeview.data("kendoTreeView"),
-                    viewModel = new kendo.observable({
+                createTreeView({});
+
+                var viewModel = new kendo.observable({
                         text: "foo",
                         items: [
                             { text: "bar" }
@@ -393,29 +386,29 @@
             });
 
             test("detach() removes node and persists data", function() {
-                var treeview = createTreeView([
-                            { text: "foo" },
-                            { text: "bar" }
-                        ]).data("kendoTreeView");
+                createTreeView([
+                    { text: "foo" },
+                    { text: "bar" }
+                ]);
 
-                var foo = treeview.findByText("foo");
+                var foo = treeviewObject.findByText("foo");
 
                 foo.data("id", 1);
 
-                foo = treeview.detach(foo);
+                foo = treeviewObject.detach(foo);
 
                 equal(foo.data("id"), 1);
             });
 
             test("insertAfter(nodeData, element) inserts new node after element", function() {
-                var treeview = createTreeView({
-                        dataSource: [
-                            { text: "foo", expanded: true },
-                            { text: "baz", expanded: true }
-                        ]
-                    }),
-                    treeviewObject = treeview.data("kendoTreeView"),
-                    rootItem = treeview.find(".k-item:first"),
+                createTreeView({
+                    dataSource: [
+                        { text: "foo", expanded: true },
+                        { text: "baz", expanded: true }
+                    ]
+                });
+
+                var rootItem = treeview.find(".k-item:first"),
                     rootGroup = treeview.find(".k-group");
 
                 var insertedNode = treeviewObject.insertAfter({ text: "bar" }, rootItem);
@@ -426,7 +419,7 @@
             });
 
             test("insertBefore(nodeData, element) inserts new node before element", function() {
-                var treeview = createTreeView({
+                createTreeView({
                         dataSource: [
                             { text: "foo", expanded: true },
                             { text: "baz", expanded: true }
@@ -444,7 +437,7 @@
             });
 
             test("insertBefore(nodeData, element) updates item classes", function() {
-                var treeview = createTreeView({
+                createTreeView({
                         dataSource: [
                             { text: "foo" }
                         ]
@@ -464,13 +457,12 @@
             });
 
             test("remove(node) removes nodes", function() {
-                var treeview = createTreeView({
+                createTreeView({
                         dataSource: [
                             { text: "foo" },
                             { text: "bar" }
                         ]
                     }),
-                    treeviewObject = treeview.data("kendoTreeView"),
                     rootItems = treeview.find(".k-item"),
                     rootGroup = treeview.find(".k-group");
 
@@ -485,14 +477,13 @@
             });
 
             test("remove(node) updates classes", function() {
-                var treeview = createTreeView({
+                createTreeView({
                         dataSource: [
                             { text: "foo", items: [
                                 { text: "bar" }
                             ] }
                         ]
-                    }),
-                    treeviewObject = treeview.data("kendoTreeView");
+                    });
 
                 treeviewObject.remove(treeviewObject.findByText("bar"));
 
@@ -503,14 +494,13 @@
             });
 
             test("remove('.k-item') removes all items, but not root list", function() {
-                var treeview = createTreeView({
+                createTreeView({
                         dataSource: [
                             { text: "foo", items: [
                                 { text: "bar" }
                             ] }
                         ]
-                    }),
-                    treeviewObject = treeview.data("kendoTreeView");
+                    });
 
                 treeviewObject.remove(".k-item");
 
@@ -520,14 +510,13 @@
             });
 
             test("remove('.k-item') works only with own items", function() {
-                var treeview = createTreeView({
+                createTreeView({
                         dataSource: [
                             { text: "foo", items: [
                                 { text: "bar" }
                             ] }
                         ]
-                    }),
-                    treeviewObject = treeview.data("kendoTreeView");
+                    });
 
                 var arbitraryItem = $("<div class='k-item' />").appendTo(document.body);
 
@@ -537,15 +526,14 @@
             });
 
             test("expand() with selector string", function() {
-                var treeview = createTreeView({
+                createTreeView({
                         dataSource: [
                             { text: "foo", items: [
                                 { text: "bar" }
                             ] }
                         ]
                     }),
-                    calls = 0,
-                    treeviewObject = treeview.data("kendoTreeView");
+                    calls = 0;
 
                 treeviewObject.toggle = function() {
                     calls++;
@@ -557,15 +545,14 @@
             });
 
             test("expand() with DOM elements", function() {
-                var treeview = createTreeView({
+                createTreeView({
                         dataSource: [
                             { text: "foo", items: [
                                 { text: "bar" }
                             ] }
                         ]
                     }),
-                    calls = 0,
-                    treeviewObject = treeview.data("kendoTreeView");
+                    calls = 0;
 
                 treeviewObject.toggle = function() {
                     calls++;
@@ -575,6 +562,39 @@
 
                 equal(calls, 1);
             });
+
+            test("dataItem returns the ObservableObject that corresponds to a node", function() {
+                createTreeView({
+                    dataSource: [
+                        { id: 1, text: "foo" },
+                        { id: 2, text: "bar" }
+                    ]
+                });
+
+                var foo = treeviewObject.dataItem(treeview.find(".k-item:first"));
+
+                equal(foo.id, 1);
+                equal(foo.text, "foo");
+            });
+
+            /*
+            test("dataItem searches throgh child dataSources", function() {
+                createTreeView({
+                        dataSource: [
+                            { id: 1, text: "foo", baz: "qux", items: [
+                                { id: 2, text: "bar", baz: "lux" }
+                            ] }
+                        ]
+                    });
+
+                var bar = treeviewObject.dataItem(treeview.find(".k-item:last"));
+
+                ok(bar);
+                equal(bar.id, 2);
+                equal(bar.text, "bar");
+                equal(bar.baz, "lux");
+            });
+            */
         </script>
 
         <div id="qunit-fixture"> </div>

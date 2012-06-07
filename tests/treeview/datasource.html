@@ -81,6 +81,41 @@
                 equal(treeview.find(".k-item").length, 3);
                 equal(treeview.find(".k-item:first .k-item").length, 1);
             });
+
+            test("Removing items from the datasource removes them from the treeview", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "foo" }
+                    ]
+                });
+
+                var uid = treeview.find(".k-item").data("uid");
+
+                treeviewObject.dataSource.remove({ uid: uid });
+
+                equal(treeview.find(".k-item").length, 0);
+
+            });
+
+            /*
+            test("Removing items from the datasource removes them from the treeview at the proper level", function() {
+                createTreeView({
+                    dataSource: [
+                        { id: 1, text: "foo", items: [
+                            { id: 2, text: "bar" }
+                        ] }
+                    ]
+                });
+
+                var uid = treeview.find(".k-item:last").data("uid");
+
+                //treeviewObject.dataSource.remove({ uid: uid });
+                treeviewObject.dataSource.get(1).children.remove({ uid: uid });
+
+                equal(treeview.find(".k-item").length, 1);
+
+            });
+            */
         </script>
 
         <div id="qunit-fixture"> </div>
