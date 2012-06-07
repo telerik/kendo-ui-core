@@ -566,6 +566,10 @@
             }
         },
 
+        _culture: function(culture) {
+            return culture || getCulture(this.options.culture);
+        },
+
         _focusin: function() {
             var that = this;
             that._toggleText(false);
@@ -582,13 +586,9 @@
         },
 
         _format: function(format, culture) {
+            var numberFormat = this._culture(culture).numberFormat;
+
             format = format.toLowerCase();
-
-            if (!culture) {
-                culture = getCulture(this.options.culture);
-            }
-
-            var numberFormat = culture.numberFormat;
 
             if (format.indexOf("c") > -1) {
                 numberFormat = numberFormat.currency;
@@ -754,11 +754,7 @@
         },
 
         _parse: function(value, culture) {
-            if (!culture) {
-                culture = getCulture(this.options.culture);
-            }
-
-            return parse(value, culture);
+            return parse(value, this._culture(culture));
         },
 
         _update: function(value) {
@@ -766,7 +762,7 @@
                 options = that.options,
                 format = options.format,
                 decimals = options.decimals,
-                culture = getCulture(options.culture),
+                culture = that._culture(),
                 numberFormat = that._format(format, culture),
                 isNotNull;
 
