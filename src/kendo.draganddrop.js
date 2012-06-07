@@ -841,7 +841,7 @@
          * By default, the hint is initially positioned on top of the draggable source offset. The option accepts an object with two keys: <code>top</code> and <code>left</code>.
          * _exampleTitle Initialize Draggable with cursorOffset
          * _example
-         * $("#draggable").kendoDraggable({cursorOffset: {top: 10, left: 10});
+         * $("#draggable").kendoDraggable({cursorOffset: {top: 10, left: 10}});
          * @option {Function | jQueryObject} [hint] Provides a way for customization of the drag indicator. If a function is supplied, it receives one argument - the draggable element's jQuery object.
          * _example
          *  //hint as a function
