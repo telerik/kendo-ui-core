@@ -31,7 +31,7 @@ function processClass(theClass) {
     }
 
     var description = theClass.properties.filter(function(x) { return x._name == "Description"; })[0];
-    var html = "";
+    var html = "# " + theClass.alias + "\n";
 
     if (description) {
         html += '## Description\n\n' +
