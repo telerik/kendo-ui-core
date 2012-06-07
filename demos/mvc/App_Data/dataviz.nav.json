@@ -44,6 +44,9 @@
                     "text": "Stacked and grouped bar chart",
                     "url": "bar-charts/grouped-stacked-bar.html"
                 }, {
+                    "text": "Date axis",
+                    "url": "bar-charts/date-axis.html"
+                }, {
                     "text": "Multiple axes",
                     "url": "bar-charts/multiple-axes.html"
                 }, {
