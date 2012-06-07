@@ -45,7 +45,7 @@
                     setup: function() {
                         createDateCategoryAxis({
                             categories: [
-                                new Date("2012-02-01"), new Date("2012-02-10")
+                                new Date("2012/02/01"), new Date("2012/02/10")
                             ]
                         });
                     }
@@ -54,7 +54,7 @@
                 test("User set base unit is applied", function() {
                     createDateCategoryAxis({
                         categories: [
-                            new Date("2012-02-01"), new Date("2012-03-10")
+                            new Date("2012/02/01"), new Date("2012/03/10")
                         ],
                         baseUnit: "days"
                     });
@@ -65,46 +65,46 @@
                 test("Min date can be parsed from string", function() {
                     createDateCategoryAxis({
                         categories: [
-                            new Date("2012-02-05"), new Date("2012-02-10")
+                            new Date("2012/02/05"), new Date("2012/02/10")
                         ],
-                        min: "2012-02-01"
+                        min: "2012/02/01"
                     });
 
-                    same(dateAxis.options.min, new Date("2012-02-01 00:00"));
+                    same(dateAxis.options.min, new Date("2012/02/01 00:00"));
                 });
 
                 test("Max date can be parsed from string", function() {
                     createDateCategoryAxis({
                         categories: [
-                            new Date("2012-02-01"), new Date("2012-02-10")
+                            new Date("2012/02/01"), new Date("2012/02/10")
                         ],
-                        max: "2012-02-15"
+                        max: "2012/02/15"
                     });
 
-                    same(dateAxis.options.max, new Date("2012-02-15 00:00"));
+                    same(dateAxis.options.max, new Date("2012/02/15 00:00"));
                 });
 
                 test("Axis crossing value can be parsed from string", function() {
                     createDateCategoryAxis({
                         categories: [
-                            new Date("2012-02-01"), new Date("2012-03-10")
+                            new Date("2012/02/01"), new Date("2012/03/10")
                         ],
-                        axisCrossingValue: "2012-02-29"
+                        axisCrossingValue: "2012/02/29"
                     });
 
-                    same(dateAxis.options.axisCrossingValue, new Date("2012-02-29"));
+                    same(dateAxis.options.axisCrossingValue, new Date("2012/02/29"));
                 });
 
                 test("Axis crossing values can be parsed from string array", function() {
                     createDateCategoryAxis({
                         categories: [
-                            new Date("2012-02-01"), new Date("2012-03-10")
+                            new Date("2012/02/01"), new Date("2012/03/10")
                         ],
-                        axisCrossingValue: ["2012-02-28", "2012-02-29"]
+                        axisCrossingValue: ["2012/02/28", "2012/02/29"]
                     });
 
                     same(dateAxis.options.axisCrossingValue,
-                        [new Date("2012-02-28"), new Date("2012-02-29")]
+                        [new Date("2012/02/28"), new Date("2012/02/29")]
                     );
                 });
 
@@ -118,7 +118,7 @@
                     createDateCategoryAxis({
                         baseUnit: "months",
                         categories: [
-                            new Date("2012-02-01"), new Date("2012-02-03")
+                            new Date("2012/02/01"), new Date("2012/02/03")
                         ]
                     });
 
@@ -128,7 +128,7 @@
                 test("categoryMap for sparse categories", function() {
                     createDateCategoryAxis({
                         categories: [
-                            new Date("2012-02-01"), new Date("2012-02-03")
+                            new Date("2012/02/01"), new Date("2012/02/03")
                         ]
                     });
 
@@ -140,7 +140,7 @@
                     setup: function() {
                         createDateCategoryAxis({
                             categories: [
-                                new Date("2012-02-01"), new Date("2012-02-10")
+                                new Date("2012/02/01"), new Date("2012/02/10")
                             ]
                         });
                     }
@@ -157,76 +157,76 @@
                 test("User set min value is trimmed to base unit", function() {
                     createDateCategoryAxis({
                         categories: [
-                            new Date("2012-02-05"), new Date("2012-02-10")
+                            new Date("2012/02/05"), new Date("2012/02/10")
                         ],
-                        min: new Date("2012-02-01 14:00")
+                        min: new Date("2012/02/01 14:00")
                     });
 
-                    same(dateAxis.options.min, new Date("2012-02-01 00:00"));
+                    same(dateAxis.options.min, new Date("2012/02/01"));
                 });
 
                 test("User set max value is trimmed to base unit", function() {
                     createDateCategoryAxis({
                         categories: [
-                            new Date("2012-02-05"), new Date("2012-02-10")
+                            new Date("2012/02/05"), new Date("2012/02/10")
                         ],
-                        max: new Date("2012-02-15 14:00")
+                        max: new Date("2012/02/15 14:00")
                     });
 
-                    same(dateAxis.options.max, new Date("2012-02-15 00:00"));
+                    same(dateAxis.options.max, new Date("2012/02/15"));
                 });
 
                 test("User set min value smaller than first category is applied", function() {
                     createDateCategoryAxis({
                         categories: [
-                            new Date("2012-02-05"), new Date("2012-02-06")
+                            new Date("2012/02/05"), new Date("2012/02/06")
                         ],
-                        min: new Date("2012-02-04")
+                        min: new Date("2012/02/04")
                     });
 
                     same(categories, [
-                        new Date("2012-02-04 00:00"), new Date("2012-02-05 00:00"),
-                        new Date("2012-02-06 00:00")
+                        new Date("2012/02/04"), new Date("2012/02/05"),
+                        new Date("2012/02/06")
                     ]);
                 });
 
                 test("User set min value larger than first category is applied", function() {
                     createDateCategoryAxis({
                         categories: [
-                            new Date("2012-02-05"), new Date("2012-02-06")
+                            new Date("2012/02/05"), new Date("2012/02/06")
                         ],
-                        min: new Date("2012-02-06")
+                        min: new Date("2012/02/06")
                     });
 
                     same(categories, [
-                        new Date("2012-02-06 00:00")
+                        new Date("2012/02/06")
                     ]);
                 });
 
                 test("User set max value smaller than last category", function() {
                     createDateCategoryAxis({
                         categories: [
-                            new Date("2012-02-05"), new Date("2012-02-06")
+                            new Date("2012/02/05"), new Date("2012/02/06")
                         ],
-                        max: new Date("2012-02-05")
+                        max: new Date("2012/02/05")
                     });
 
                     same(categories, [
-                        new Date("2012-02-05 00:00")
+                        new Date("2012/02/05")
                     ]);
                 });
 
                 test("User set max value larger than last category", function() {
                     createDateCategoryAxis({
                         categories: [
-                            new Date("2012-02-05"), new Date("2012-02-06")
+                            new Date("2012/02/05"), new Date("2012/02/06")
                         ],
-                        max: new Date("2012-02-07")
+                        max: new Date("2012/02/07")
                     });
 
                     same(categories, [
-                        new Date("2012-02-05 00:00"), new Date("2012-02-06 00:00"),
-                        new Date("2012-02-07 00:00")
+                        new Date("2012/02/05"), new Date("2012/02/06"),
+                        new Date("2012/02/07")
                     ]);
                 });
 
@@ -236,7 +236,7 @@
                 test("Base unit is determined by series delta", function() {
                     createDateCategoryAxis({
                         categories: [
-                            new Date("2012-02-05"), new Date("2012-02-06")
+                            new Date("2012/02/05"), new Date("2012/02/06")
                         ]
                     });
 
@@ -246,7 +246,7 @@
                 test("Base unit calculation ignores repeating categories", function() {
                     createDateCategoryAxis({
                         categories: [
-                            new Date("2012-02-01"), new Date("2012-02-01"), new Date("2012-02-02")
+                            new Date("2012/02/01"), new Date("2012/02/01"), new Date("2012/02/02")
                         ]
                     });
 
@@ -256,7 +256,7 @@
                 test("creates labels with default format", function() {
                     createDateCategoryAxis({
                         categories: [
-                            new Date("2012-02-01"), new Date("2012-02-03")
+                            new Date("2012/02/01"), new Date("2012/02/03")
                         ]
                     });
 
@@ -268,7 +268,7 @@
                     createDateCategoryAxis({
                         dataItems: ["a", "b", "c"],
                         categories: [
-                            new Date("2012-02-01"), new Date("2012-02-03")
+                            new Date("2012/02/01"), new Date("2012/02/03")
                         ]
                     });
 
@@ -278,7 +278,7 @@
                 test("creates labels with custom date format", function() {
                     createDateCategoryAxis({
                         categories: [
-                            new Date("2012-02-01"), new Date("2012-02-03")
+                            new Date("2012/02/01"), new Date("2012/02/03")
                         ],
                         labels: {
                             dateFormats: {
@@ -294,7 +294,7 @@
                 test("creates labels with custom format", function() {
                     createDateCategoryAxis({
                         categories: [
-                            new Date("2012-02-01"), new Date("2012-02-03")
+                            new Date("2012/02/01"), new Date("2012/02/03")
                         ],
                         labels: {
                             format: "M/d/yy"
@@ -308,7 +308,7 @@
                 test("creates labels with custom culture", function() {
                     createDateCategoryAxis({
                         categories: [
-                            new Date("2012-02-01"), new Date("2012-02-03")
+                            new Date("2012/02/01"), new Date("2012/02/03")
                         ],
                         labels: {
                             format: "d.MMM",
@@ -323,7 +323,7 @@
                 test("creates labels with custom template", function() {
                     createDateCategoryAxis({
                         categories: [
-                            new Date("2012-02-01"), new Date("2012-02-03")
+                            new Date("2012/02/01"), new Date("2012/02/03")
                         ],
                         labels: {
                             template: "#= kendo.toString(value, 'yyyy') #"
@@ -340,7 +340,7 @@
                 test("Base unit is determined by series delta", function() {
                     createDateCategoryAxis({
                         categories: [
-                            new Date("2012-02-01"), new Date("2012-03-10")
+                            new Date("2012/02/01"), new Date("2012/03/10")
                         ]
                     });
 
@@ -350,7 +350,7 @@
                 test("creates labels with default format", function() {
                     createDateCategoryAxis({
                         categories: [
-                            new Date("2012-01-01"), new Date("2012-02-01")
+                            new Date("2012/01/01"), new Date("2012/02/01")
                         ]
                     });
 
@@ -361,7 +361,7 @@
                 test("creates labels with custom date format", function() {
                     createDateCategoryAxis({
                         categories: [
-                            new Date("2012-01-01"), new Date("2012-02-01")
+                            new Date("2012/01/01"), new Date("2012/02/01")
                         ],
                         labels: {
                             dateFormats: {
@@ -380,7 +380,7 @@
                 test("Base unit is determined by series delta", function() {
                     createDateCategoryAxis({
                         categories: [
-                            new Date("2012-02-01"), new Date("2013-03-10")
+                            new Date("2012/02/01"), new Date("2013/03/10")
                         ]
                     });
 
@@ -390,7 +390,7 @@
                 test("creates labels with default format", function() {
                     createDateCategoryAxis({
                         categories: [
-                            new Date("2012-01-01"), new Date("2013-02-01")
+                            new Date("2012/01/01"), new Date("2013/02/01")
                         ]
                     });
 
@@ -401,7 +401,7 @@
                 test("creates labels with custom date format", function() {
                     createDateCategoryAxis({
                         categories: [
-                            new Date("2012-01-01"), new Date("2013-02-01")
+                            new Date("2012/01/01"), new Date("2013/02/01")
                         ],
                         labels: {
                             dateFormats: {
