@@ -393,13 +393,14 @@
             value: null,
             format: "",
             timeFormat: "",
+            culture: "",
             parseFormats: [],
             dates: [],
             min: new DATE(MIN),
             max: new DATE(MAX),
             interval: 30,
             height: 200,
-            footer: '#= kendo.toString(data,"D") #',
+            footer: "",
             start: MONTH,
             depth: MONTH,
             animation: {},
@@ -767,7 +768,7 @@
                 return options[option];
             }
 
-            value = parse(value, options.parseFormats);
+            value = parse(value, options.parseFormats, options.culture);
 
             if (!value) {
                 return;
@@ -806,7 +807,7 @@
                 min = options.min,
                 max = options.max,
                 timeView = that.timeView,
-                date = parse(value, options.parseFormats),
+                date = parse(value, options.parseFormats, options.culture),
                 rebind, timeViewOptions, old, skip;
 
             if (+date === +that._value) {
@@ -854,7 +855,7 @@
                 }
             }
 
-            that.element.val(date ? kendo.toString(date, options.format) : value);
+            that.element.val(date ? kendo.toString(date, options.format, options.culture) : value);
 
             return date;
         },
@@ -923,6 +924,7 @@
                 animation: options.animation,
                 dates: options.dates,
                 format: options.timeFormat,
+                culture: options.culture,
                 height: options.height,
                 interval: options.interval,
                 min: new DATE(MIN),
@@ -944,7 +946,7 @@
                         that._timeSelected = true;
                         that._change(value);
                     } else {
-                        that.element.val(kendo.toString(value, options.format));
+                        that.element.val(kendo.toString(value, options.format, options.culture));
                     }
                 },
                 close: function(e) {
@@ -1004,7 +1006,7 @@
     }
 
     function normalize(options) {
-        var patterns = kendo.culture().calendar.patterns;
+        var patterns = kendo.getCulture(options.culture).calendars.standard.patterns;
 
         options.format = extractFormat(options.format || patterns.g);
         options.timeFormat = extractFormat(options.timeFormat || patterns.t);
