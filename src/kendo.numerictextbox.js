@@ -373,7 +373,7 @@
 
                 upArrow.bind(MOUSEDOWN, function(e) {
                     e.preventDefault();
-                    tring(date, format)
+                    that._spin(1);
                     that._upArrow.addClass(SELECTED);
                 });
 
