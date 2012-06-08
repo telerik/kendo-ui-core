@@ -111,6 +111,23 @@
                 equal(item.length, 1);
                 equal(treeviewObject.text(item), "foo");
             });
+
+            test("Passing existing dataSource", function() {
+                var dataSource = new HierarchicalDataSource({
+                    data: [
+                        { text: "foo" }
+                    ]
+                });
+
+                createTreeView({
+                    dataSource: dataSource
+                });
+
+                var item = treeview.find(".k-item");
+
+                equal(item.length, 1);
+                equal(treeviewObject.text(item), "foo");
+            });
             /*
             test("Removing items from the datasource removes them from the treeview at the proper level", function() {
                 createTreeView({
@@ -130,6 +147,79 @@
 
             });
             */
+
+            test("Loading root nodes from remote datasource inserts them in the TreeView", function() {
+                createTreeView({
+                    dataSource: {
+                        transport: {
+                            read: function(options) {
+                                options.success([ { id: 1, text: "foo" } ]);
+                            }
+                        }
+                    }
+                });
+
+                var item = treeview.find(".k-item");
+
+                equal(item.length, 1);
+                equal(treeviewObject.text(item), "foo");
+            });
+
+            test("Non-leaf nodes are rendered as expandable", function() {
+                var i = 1;
+
+                createTreeView({
+                    dataSource: {
+                        transport: {
+                            read: function(options) {
+                                options.success([ { id: i++, leaf: false, text: "foo" } ]);
+                            }
+                        }
+                    }
+                });
+
+                var icon = treeview.find(".k-plus");
+
+                equal(icon.length, 1);
+            });
+
+            test("Expanding non-leaf nodes loads subgroups", function() {
+                var i = 0;
+
+                function readAction(options) {
+                    i++;
+
+                    options.success([
+                        {
+                            id: i,
+                            leaf: false,
+                            text: "foo " + i
+                        }
+                    ]);
+                }
+
+                createTreeView({
+                    dataSource: {
+                        transport: {
+                            read: readAction
+                        },
+                        schema: {
+                            model: {
+                                children: {
+                                    transport: {
+                                        read: readAction
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    animation: false
+                });
+
+                treeviewObject.toggle(treeview.find(".k-item"));
+
+                equal(treeview.find(".k-item").length, 2);
+            });
         </script>
 
         <div id="qunit-fixture"> </div>

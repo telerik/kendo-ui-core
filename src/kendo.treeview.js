@@ -460,18 +460,17 @@
 
             if (that.dataSource && that._refreshHandler) {
                 that.dataSource.unbind(CHANGE, that._refreshHandler);
-                                //.unbind(REQUESTSTART, that._requestStartHandler)
-                                //.unbind(ERROR, that._errorHandler);
             } else {
                 that._refreshHandler = proxy(that.refresh, that);
-                //that._requestStartHandler = proxy(that._requestStart, that);
-                //that._errorHandler = proxy(that._error, that);
+
+                if ($.isPlainObject(dataSource)) {
+                    dataSource = new HierarchicalDataSource(dataSource);
+                }
+
+                that.dataSource = dataSource;
             }
 
-            that.dataSource = new HierarchicalDataSource(dataSource)
-                                .bind(CHANGE, that._refreshHandler);
-                                //.bind(REQUESTSTART, that._requestStartHandler)
-                                //.bind(ERROR, that._errorHandler);
+            that.dataSource.bind(CHANGE, that._refreshHandler);
         },
 
         events: [
@@ -692,7 +691,7 @@
                         " " + kendo.attr("uid") + "='#= item.uid #'" +
                     ">" +
                         "<div class='#= r.cssClass(group, item) #'>" +
-                            "# if (" + field("items") + ") { #" +
+                            "# if ((typeof " + field("leaf") + " != 'undefined' && !" + field("leaf") + ") || " + field("items") + ") { #" +
                                 "<span class='#= r.toggleButtonClass(item) #'></span>" +
                             "# } #" +
 
@@ -847,26 +846,36 @@
 
         refresh: function(e) {
             var that = this,
-                parentNode = that.element;
+                parentNode = that.element,
+                node = e.node,
+                action = e.action,
+                items = e.items;
 
-            if (e.action == "add") {
-                if (e.node) {
-                    // adding to subgroup
-                    parentNode = that.findByUid(e.node.uid);
-                }
+            if (node) {
+                parentNode = that.findByUid(node.uid);
+            }
 
-                that.append(e.items, parentNode);
-            } else if (e.action == "remove") {
+            if (action == "add") {
+                that.append(items, parentNode);
+            } else if (action == "remove") {
                 that.remove(that.root.children(NODE).eq(e.index));
             } else {
-                // TODO: handle loading of subgroups
-                that.root = that.wrapper.html(that._renderGroup({
-                    items: e.items,
-                    group: {
-                        firstLevel: true,
-                        expanded: true
-                    }
-                })).children("ul");
+                if (action == "itemchange") {
+                    parentNode.append(that._renderGroup({
+                        items: e.items,
+                        group: {
+                            expanded: true
+                        }
+                    }));
+                } else {
+                    that.root = that.wrapper.html(that._renderGroup({
+                        items: items,
+                        group: {
+                            firstLevel: true,
+                            expanded: true
+                        }
+                    })).children("ul");
+                }
             }
         },
 
@@ -1035,7 +1044,8 @@
                 animationSettings = that.options.animation || {},
                 animation = animationSettings.expand,
                 collapse = extend({}, animationSettings.collapse),
-                hasCollapseAnimation = collapse && "effects" in collapse;
+                hasCollapseAnimation = collapse && "effects" in collapse,
+                dataItem = that.dataItem(node);
 
             if (contents.data("animating")) {
                 return;
@@ -1046,8 +1056,8 @@
                                     : extend({ reverse: true }, animation), { show: false, hide: true });
             }
 
-            if (contents.children().length > 0) {
-                if (!that._trigger(isExpanding ? "expand" : "collapse", node)) {
+            if (!that._trigger(isExpanding ? "expand" : "collapse", node)) {
+                if (contents.children().length > 0) {
                     node.find("> div > .k-icon")
                         .toggleClass("k-minus", isExpanding)
                         .toggleClass("k-plus", !isExpanding);
@@ -1063,6 +1073,8 @@
                             }
                         }
                     }));
+                } else if (dataItem) {
+                    dataItem.load();
                 }
             }
         },
