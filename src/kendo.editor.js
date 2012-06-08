@@ -85,15 +85,23 @@
                     currentTool = tools[i];
 
                     if ($.isPlainObject(currentTool)) {
-                        options = extend({ cssClass: "k-custom", type: "button", tooltip: "" }, currentTool);
 
-                        if (options.name) {
-                            options.cssClass = "k-" + options.name;
-                        }
+                        if (currentTool.name && editor._tools[currentTool.name]) {
+                            $.extend(editor._tools[currentTool.name].options, currentTool);
 
-                        if (!options.template) {
-                            if (options.type == "button") {
-                                options.template = EditorUtils.buttonTemplate;
+                            editorTools[currentTool.name] = editor._tools[currentTool.name];
+                            options = editorTools[currentTool.name].options;
+                        } else {
+                            options = extend({ cssClass: "k-custom", type: "button", tooltip: "" }, currentTool);
+
+                            if (options.name) {
+                                options.cssClass = "k-" + options.name;
+                            }
+
+                            if (!options.template) {
+                                if (options.type == "button") {
+                                    options.template = EditorUtils.buttonTemplate;
+                                }
                             }
                         }
                     } else if (editor._tools[currentTool]) {
@@ -584,7 +592,6 @@
                 animation: false
             },
             fontName: [
-                { text: localization.fontNameInherit,  value: "inherit" },
                 { text: "Arial", value: "Arial,Helvetica,sans-serif" },
                 { text: "Courier New", value: "'Courier New',Courier,monospace" },
                 { text: "Georgia", value: "Georgia,serif" },
@@ -596,7 +603,6 @@
                 { text: "Verdana", value: "Verdana,Geneva,sans-serif" }
             ],
             fontSize: [
-                { text: localization.fontSizeInherit,  value: "inherit" },
                 { text: "1 (8pt)",  value: "xx-small" },
                 { text: "2 (10pt)", value: "x-small" },
                 { text: "3 (12pt)", value: "small" },
@@ -635,10 +641,10 @@
                 "formatBlock",
                 "createLink",
                 "unlink",
-                "insertImage",
-                //"style",
-                "subscript",
-                "superscript"
+                "insertImage"/*,
+                "style",
+                "subscript", // declare explicitly
+                "superscript" // declare explicitly */
             ]
         },
 
@@ -3660,12 +3666,15 @@ var FontTool = Tool.extend({
 
     initialize: function (ui, initOptions) {
         var editor = initOptions.editor,
-            toolName = this.options.name;
+            options = this.options,
+            toolName = options.name,
+            defaultValue = options.defaultValue ? options.defaultValue : [],
+            dataSource = defaultValue.concat(options.items ? options.items : editor.options[toolName]);
 
         ui[this.type]({
             dataTextField: "text",
             dataValueField: "value",
-            dataSource: editor.options[toolName],
+            dataSource: dataSource,
             change: function (e) {
                 Tool.exec(editor, toolName, this.value());
             },
@@ -3797,9 +3806,9 @@ registerTool("foreColor", new ColorTool({cssAttr:"color", domAttr:"color", name:
 
 registerTool("backColor", new ColorTool({cssAttr:"background-color", domAttr: "backgroundColor", name:"backColor", template: new ToolTemplate({template: EditorUtils.colorPickerTemplate, title: "Background Color"})}));
 
-registerTool("fontName", new FontTool({cssAttr:"font-family", domAttr: "fontFamily", name:"fontName", template: new ToolTemplate({template: EditorUtils.comboBoxTemplate, title: "Font Name", initialValue: "(inherited font)"})}));
+registerTool("fontName", new FontTool({cssAttr:"font-family", domAttr: "fontFamily", name:"fontName", defaultValue: [{ text: kendo.ui.Editor.fn.options.localization.fontNameInherit,  value: "inherit" }], template: new ToolTemplate({template: EditorUtils.comboBoxTemplate, title: "Font Name"})}));
 
-registerTool("fontSize", new FontTool({cssAttr:"font-size", domAttr:"fontSize", name:"fontSize", template: new ToolTemplate({template: EditorUtils.comboBoxTemplate, title: "Font Size", initialValue: "(inherited size)"})}));
+registerTool("fontSize", new FontTool({cssAttr:"font-size", domAttr:"fontSize", name:"fontSize", defaultValue: [{ text: kendo.ui.Editor.fn.options.localization.fontSizeInherit,  value: "inherit" }], template: new ToolTemplate({template: EditorUtils.comboBoxTemplate, title: "Font Size"})}));
 
 })(jQuery);
 (function($) {
@@ -4099,7 +4108,7 @@ var FormatBlockTool = Tool.extend({
         new Editor.SelectBox(ui, {
             dataTextField: "text",
             dataValueField: "value",
-            dataSource: editor.options.formatBlock,
+            dataSource: this.options.items ? this.options.items : editor.options.formatBlock,
             title: editor.options.localization.formatBlock,
             change: function (e) {
                 Tool.exec(editor, toolName, this.value());

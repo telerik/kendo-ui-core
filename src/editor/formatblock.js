@@ -295,7 +295,7 @@ var FormatBlockTool = Tool.extend({
         new Editor.SelectBox(ui, {
             dataTextField: "text",
             dataValueField: "value",
-            dataSource: editor.options.formatBlock,
+            dataSource: this.options.items ? this.options.items : editor.options.formatBlock,
             title: editor.options.localization.formatBlock,
             change: function (e) {
                 Tool.exec(editor, toolName, this.value());
@@ -316,7 +316,7 @@ extend(Editor, {
     FormatBlockTool: FormatBlockTool
 });
 
-registerTool("formatBlock", new FormatBlockTool({template: new ToolTemplate({template: EditorUtils.dropDownListTemplate, title: "Format Block", initialValue: "Select Block Type"})}));
+registerTool("formatBlock", new FormatBlockTool({template: new ToolTemplate({template: EditorUtils.dropDownListTemplate})}));
 
 registerFormat("justifyLeft", [ { tags: dom.blockElements, attr: { style: { textAlign: "left"}} }, { tags: ["img"], attr: { style: { "float": "left"}} } ]);
 registerTool("justifyLeft", new BlockFormatTool({format: formats.justifyLeft, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Justify Left"})}));

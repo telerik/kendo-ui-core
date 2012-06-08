@@ -85,15 +85,23 @@
                     currentTool = tools[i];
 
                     if ($.isPlainObject(currentTool)) {
-                        options = extend({ cssClass: "k-custom", type: "button", tooltip: "" }, currentTool);
 
-                        if (options.name) {
-                            options.cssClass = "k-" + options.name;
-                        }
+                        if (currentTool.name && editor._tools[currentTool.name]) {
+                            $.extend(editor._tools[currentTool.name].options, currentTool);
 
-                        if (!options.template) {
-                            if (options.type == "button") {
-                                options.template = EditorUtils.buttonTemplate;
+                            editorTools[currentTool.name] = editor._tools[currentTool.name];
+                            options = editorTools[currentTool.name].options;
+                        } else {
+                            options = extend({ cssClass: "k-custom", type: "button", tooltip: "" }, currentTool);
+
+                            if (options.name) {
+                                options.cssClass = "k-" + options.name;
+                            }
+
+                            if (!options.template) {
+                                if (options.type == "button") {
+                                    options.template = EditorUtils.buttonTemplate;
+                                }
                             }
                         }
                     } else if (editor._tools[currentTool]) {
@@ -584,7 +592,6 @@
                 animation: false
             },
             fontName: [
-                { text: localization.fontNameInherit,  value: "inherit" },
                 { text: "Arial", value: "Arial,Helvetica,sans-serif" },
                 { text: "Courier New", value: "'Courier New',Courier,monospace" },
                 { text: "Georgia", value: "Georgia,serif" },
@@ -596,7 +603,6 @@
                 { text: "Verdana", value: "Verdana,Geneva,sans-serif" }
             ],
             fontSize: [
-                { text: localization.fontSizeInherit,  value: "inherit" },
                 { text: "1 (8pt)",  value: "xx-small" },
                 { text: "2 (10pt)", value: "x-small" },
                 { text: "3 (12pt)", value: "small" },
@@ -635,10 +641,10 @@
                 "formatBlock",
                 "createLink",
                 "unlink",
-                "insertImage",
-                //"style",
-                "subscript",
-                "superscript"
+                "insertImage"/*,
+                "style",
+                "subscript", // declare explicitly
+                "superscript" // declare explicitly */
             ]
         },
 
