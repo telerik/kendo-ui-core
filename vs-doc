@@ -1,7 +1,11 @@
 #!/usr/bin/env node
 
 var fs = require("fs");
+var template = require("build/kendo-template").template;
 
+var classes = [];
+
+var vsDocTemplate = fs.readFileSync("kendo.all-vsdoc.js.tpl").toString();
 
 processFilesRecursive("docs", /.+md/, function(fileName) {
     var contents = fs.readFileSync(fileName).toString();
@@ -54,9 +58,48 @@ processFilesRecursive("docs", /.+md/, function(fileName) {
         }
     });
 
-    console.log(root.children[0].children[2]);
-    // process.exit();
+    var theClass = {
+        name: root.children[0].title,
+        methods: []
+    }
+
+    root.children[0].children[2].children.forEach(function(child) {
+        var match = child.title.match(/\w+/);
+
+        var method = {
+            name: match[0],
+            description: child.contents,
+            parameters: []
+        };
+
+        child.children.forEach(function(member) {
+            if (/Parameters/.test(member.title)) {
+                member.children.forEach(function(param) {
+                    var match = param.title.match(/(\w+).+`(.*)`/);
+                    method.parameters.push({
+                            name: match[1],
+                            type: match[2],
+                            description: param.contents
+                        })
+                });
+            }
+            else if (/Returns/.test(member.title)) {
+                match = member.contents.match(/`(\w+)`(.*)/);
+                method.returns = match[1];
+                method.returnsDescription = match[2];
+            }
+        });
+
+        theClass.methods.push(method);
+
+    });
+
+    classes.push(theClass);
 });
+
+var theTemplate = template(vsDocTemplate);
+
+console.log(theTemplate(classes));
 
 function processFilesRecursive(dir, filterRegex, callback) {
     var files = fs.readdirSync(dir),
@@ -74,4 +117,5 @@ function processFilesRecursive(dir, filterRegex, callback) {
         }
     }
 }
+
 // vim: ft=javascript
