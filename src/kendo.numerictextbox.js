@@ -373,7 +373,7 @@
 
                 upArrow.bind(MOUSEDOWN, function(e) {
                     e.preventDefault();
-                    that._spin(1);
+                    tring(date, format)
                     that._upArrow.addClass(SELECTED);
                 });
 
@@ -733,13 +733,13 @@
         _step: function(step) {
             var that = this,
                 element = that.element,
-                value = parse(element.val()) || 0;
+                value = that._parse(element.val()) || 0;
 
             if (document.activeElement != element[0]) {
                 that._focusin();
             }
 
-            value += that.options.step * parse(step);
+            value += that.options.step * step;
 
             that._update(that._adjust(value));
 
