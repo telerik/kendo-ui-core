@@ -1042,6 +1042,8 @@
          * @option {Object} [xAxis] Scatter charts X-axis configuration options.
          * Includes <strong>all valueAxis options</strong> in addition to:
          * @option {String} [xAxis.type] <"Numeric"> The axis type.
+         * <p>Note: The Chart will automatically switch to a date axis if the series X value
+         * is of type Date. Specify type explicitly when such behavior is undesired.</p>
          * <div class="details-list">
          *     <dl>
          *         <dt>
