@@ -341,6 +341,13 @@
          *     }
          * });
          *
+         * @option {String} [culture] <en-US> Specifies the culture info used by the widget.
+         * _example
+         *
+         * // specify on widget initialization
+         * $("#datetimepicker").kendoDateTimePicker({
+         *     culture: "de-DE"
+         * });
          */
         init: function(element, options) {
             var that = this;
