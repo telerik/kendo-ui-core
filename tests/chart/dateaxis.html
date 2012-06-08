@@ -62,6 +62,16 @@
                     equals(dateAxis.options.baseUnit, "days");
                 });
 
+                test("Default base unit is days", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01")
+                        ]
+                    });
+
+                    equals(dateAxis.options.baseUnit, "days");
+                });
+
                 test("User set empty base unit defaults to automatic", function() {
                     createDateCategoryAxis({
                         categories: [

@@ -1110,7 +1110,7 @@
                 delete options.baseUnit;
             }
 
-            return deepExtend({ baseUnit: baseUnit }, options);
+            return deepExtend({ baseUnit: baseUnit || DAYS }, options);
         },
 
         groupCategories: function(options) {
