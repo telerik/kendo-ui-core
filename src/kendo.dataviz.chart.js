@@ -1079,34 +1079,40 @@
         },
 
         applyDefaults: function(options) {
-            var categories = options.categories,
+            var axis = this,
+                categories = options.categories,
                 count = categories.length,
                 categoryIx,
-                currentCategory,
-                lastCategory,
-                delta,
-                minDelta = MAX_VALUE;
+                cat,
+                lastCat,
+                unit,
+                baseUnit;
 
             for (categoryIx = 0; categoryIx < count; categoryIx++) {
-                currentCategory = toTime(categories[categoryIx]);
+                cat = toDate(categories[categoryIx]);
 
-                if (currentCategory && lastCategory) {
-                    delta = currentCategory - lastCategory;
-                    if (delta > 0) {
-                        minDelta = math.min(delta, minDelta);
+                if (cat && lastCat && (cat - lastCat > 0)) {
+                    if (cat.getFullYear() - lastCat.getFullYear() > 0) {
+                        unit = YEARS;
+                    } else if (cat.getMonth() - lastCat.getMonth() > 0) {
+                        unit = MONTHS;
+                    } else if (cat.getDay() - lastCat.getDay() > 0) {
+                        unit = DAYS;
+                    } else {
+                        unit = HOURS;
                     }
+
+                    baseUnit = baseUnit || unit;
                 }
 
-                lastCategory = currentCategory;
+                lastCat = cat;
             }
 
             if (!options.baseUnit) {
                 delete options.baseUnit;
             }
 
-            return deepExtend({
-                baseUnit: timeUnits(minDelta)
-            }, options);
+            return deepExtend({ baseUnit: baseUnit }, options);
         },
 
         groupCategories: function(options) {
@@ -1185,9 +1191,10 @@
         },
 
         applyDefaults: function(seriesMin, seriesMax, options) {
-            var min = options.min || seriesMin,
+            var axis = this,
+                min = options.min || seriesMin,
                 max = options.max || seriesMax,
-                baseUnit = options.baseUnit || timeUnits(max - min),
+                baseUnit = options.baseUnit || axis.timeUnits(max - min),
                 baseUnitTime = TIME_PER_UNIT[baseUnit],
                 autoMin = floorDate(toTime(min) - 1, baseUnit),
                 autoMax = ceilDate(toTime(max) + 1, baseUnit),
@@ -1318,6 +1325,20 @@
             labelOptions.format = labelOptions.format || unitFormat;
 
             return new AxisDateLabel(date, index, null, labelOptions);
+        },
+
+        timeUnits: function(delta) {
+            var unit = HOURS;
+
+            if (delta >= TIME_PER_YEAR) {
+                unit = YEARS;
+            } else if (delta >= TIME_PER_MONTH) {
+                unit = MONTHS;
+            } else if (delta >= TIME_PER_DAY) {
+                unit = DAYS;
+            }
+
+            return unit;
         }
     });
 
@@ -4774,20 +4795,6 @@
         }
 
         return addDuration(date, 1, unit);
-    }
-
-    function timeUnits(delta) {
-        var unit = HOURS;
-
-        if (delta >= TIME_PER_YEAR) {
-            unit = YEARS;
-        } else if (delta >= TIME_PER_MONTH) {
-            unit = MONTHS;
-        } else if (delta >= TIME_PER_DAY) {
-            unit = DAYS;
-        }
-
-        return unit;
     }
 
     function dateDiff(a, b) {

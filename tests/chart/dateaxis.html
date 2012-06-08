@@ -358,6 +358,16 @@
                     equals(dateAxis.options.baseUnit, "months");
                 });
 
+                test("Base unit is determined by series delta (2)", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2011/01/31"), new Date("2011/02/28")
+                        ]
+                    });
+
+                    equals(dateAxis.options.baseUnit, "months");
+                });
+
                 test("creates labels with default format", function() {
                     createDateCategoryAxis({
                         categories: [
