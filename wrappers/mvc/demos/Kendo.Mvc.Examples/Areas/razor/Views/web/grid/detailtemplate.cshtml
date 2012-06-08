@@ -8,13 +8,13 @@
         columns.Bound(e => e.Country).Width(200);
         columns.Bound(e => e.City);
     })
-    .DetailTemplate(detail => detail.ClientTemplate("empl"))    
+    .DetailTemplate(detail => detail.ClientTemplate("employeesTemplate"))
     .Pageable()
     .DataSource(dataSource => dataSource
         .Ajax()
         .Read(read => read.Action("HierarchyBinding_Employees", "Grid"))
         .PageSize(5)
-    )    
+    )
     .Sortable()
     .Events(events => events.DataBound("dataBound"))
 )
@@ -25,7 +25,7 @@
     }
 </script>
 
-<script id="empl" type="text/kendo-tmpl">
+<script id="employeesTemplate" type="text/kendo-tmpl">
     @(Html.Kendo().TabStrip()
             .Name("TabStrip_#=EmployeeID#")
             .SelectedIndex(0)
@@ -40,19 +40,13 @@
                             columns.Bound(o => o.ShipCountry).Width(140);
                             columns.Bound(o => o.ShipAddress).Width(200);
                             columns.Bound(o => o.ShipName).Width(200);
-                            columns.Bound(o => o.OrderDate).Width(200);
-                            columns.Command(cmd => cmd.Edit());
                         })
-                        .Editable(editable => editable.Mode(GridEditMode.PopUp))
                         .DataSource(dataSource => dataSource
                             .Ajax()
-                            .Model(m => m.Id("OrderID"))
                             .Read(read => read.Action("HierarchyBinding_Orders", "Grid", new { employeeID = "#=EmployeeID#" }))
-                            .Update(read => read.Action("HierarchyBinding_Orders", "Grid"))
                         )
                         .Pageable()
                         .Sortable()
-                                .DetailTemplate(d => d.ClientTemplate("ord"))
                         .ToClientTemplate())
                 </text>                        
                 );
@@ -70,8 +64,10 @@
             .ToClientTemplate())
 </script>
 
-<script id="ord" type="text/x-kendo-tmpl">    
-    @(Html.Kendo().NumericTextBox().Name("asdas_#=OrderID#").Format("0\\#\\#").ToClientTemplate())
+<script>
+    function dataBound() {
+        this.expandRow(this.tbody.find("tr.k-master-row").first());
+    }
 </script>
 
 @section HeadContent {
