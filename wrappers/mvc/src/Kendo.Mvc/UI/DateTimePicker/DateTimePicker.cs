@@ -117,8 +117,8 @@ namespace Kendo.Mvc.UI
             {
                 options["dates"] = Dates;
             }
-            
-            writer.Write(Initializer.Initialize(Id, "DateTimePicker", options));
+
+            writer.Write(Initializer.Initialize(Selector, "DateTimePicker", options));
 
             base.WriteInitializationScript(writer);
         }

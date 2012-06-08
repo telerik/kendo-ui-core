@@ -218,15 +218,18 @@ namespace Kendo.Mvc.UI
 
             string editorHtml = EditorHtml;
 
-            if (Grid.IsSelfInitialized && editorHtml != null)
+            if (Grid.IsInClientTemplate && editorHtml != null)
             {
                 //editorHtml = editorHtml.Replace("<", "%3c").Replace(">", "%3e");
-                editorHtml = editorHtml.Trim();
+                editorHtml = editorHtml.Trim()
+                                .Replace("\r\n", string.Empty)
+                                .Replace("</script>", "<\\/script>")
+                                .Replace("jQuery(\"#", "jQuery(\"\\#");                                               
             }           
             
             if (!Grid.DataSource.IsReadOnly(Member) && Grid.Editing.Enabled && Grid.IsClientBinding)
             {
-                json["editor"] = editorHtml;// System.Web.HttpUtility.JavaScriptStringEncode(editorHtml, false);
+                json["editor"] = editorHtml;
             }
 
             if (ClientGroupHeaderTemplate.HasValue())

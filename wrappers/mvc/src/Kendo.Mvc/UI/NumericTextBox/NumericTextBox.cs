@@ -106,7 +106,7 @@ namespace Kendo.Mvc.UI
                 options["decimals"] = Decimals;
             }
 
-            writer.Write(Initializer.Initialize(Id, "NumericTextBox", options));
+            writer.Write(Initializer.Initialize(Selector, "NumericTextBox", options));
 
             base.WriteInitializationScript(writer);
         }

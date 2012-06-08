@@ -1,3 +1,4 @@
+
 @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.EmployeeViewModel>()
     .Name("Employees")
     .Columns(columns =>
@@ -7,12 +8,16 @@
         columns.Bound(e => e.Title).Width(200);
         columns.Bound(e => e.Country).Width(200);
         columns.Bound(e => e.City);
+        //columns.Command(cmd => cmd.Edit());
     })
+    //.Editable(editable => editable.Mode(GridEditMode.PopUp))
     .DetailTemplate(detail => detail.ClientTemplate("empl"))   
     .Pageable()
     .DataSource(dataSource => dataSource
         .Ajax()
+        .Model(m => m.Id("EmployeeID"))
         .Read(read => read.Action("HierarchyBinding_Employees", "Grid"))
+        .Update(read => read.Action("HierarchyBinding_Employees", "Grid"))
         .PageSize(5)
     )    
     .Sortable()        
@@ -25,25 +30,32 @@
     }
 </script>
 
-<script id="empl" type="text/kendo-tmpl">
+
+<script id="empl" type="text/kendo-tmpl">  
+
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
-                    .Name("Orders_#=EmployeeID#")
+                    .Name("Orders_#=EmployeeID#")                    
                     .Columns(columns =>
                     {
-                        columns.Bound(o => o.OrderID).Width(101).Title("\"Kur\"");
+                        columns.Bound(o => o.OrderID);
+                        columns.Bound(o => o.OrderDate).Width(101);
+                        columns.Command(cmd => cmd.Edit());
                     })
-                    .Editable(editable => editable.Mode(GridEditMode.InCell))
+                    .Editable(editable => editable.Mode(GridEditMode.PopUp))
                     .DataSource(dataSource => dataSource
                         .Ajax()
                         .Model(m => { m.Id("OrderID"); m.Field(f => f.OrderID).Editable(true); })
-                        .Read(read => read.Action("HierarchyBinding_Orders", "Grid"))
+                        .Read(read => read.Action("HierarchyBinding_Orders", "Grid", new { employeeId = "#=EmployeeID#" }))
+                        .Update(read => read.Action("HierarchyBinding_Orders", "Grid", new { employeeId = "#=EmployeeID#" }))
                     )
-            // .DetailTemplate(d => d.ClientTemplate("ord"))
+                .DetailTemplate(d => d.ClientTemplate("ord"))
                     .Pageable()
                     .Sortable()
                     .ToClientTemplate())
 </script>
 
-<script id="ord" type="text/x-kendo-tmpl">
-    @(Html.Kendo().NumericTextBox().Name("asdas_#=OrderID#").ToClientTemplate())
+<script id="ord" type="text/x-kendo-tmpl">     
+    @(Html.Kendo().NumericTextBox().Name("asdas_#=OrderID#")
+        //.Format("0##")
+        .ToClientTemplate())
 </script>

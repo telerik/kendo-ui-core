@@ -159,7 +159,12 @@ namespace Kendo.Mvc.UI
 
             if (editorHtml != null)
             {
-                editorHtml = editorHtml.Replace("%", "%25").Replace("<", "%3c").Replace(">", "%3e");
+                //editorHtml = editorHtml.Replace("%", "%25").Replace("<", "%3c").Replace(">", "%3e");                
+                editorHtml = editorHtml.Trim()
+                                .Replace("\r\n", string.Empty)
+                                .Replace("</script>", "<\\/script>")                                
+                                .Replace("jQuery(\"#", "jQuery(\"\\\\#")
+                                .Replace("#", "\\#");                
             }
 
             FluentDictionary.For(json)

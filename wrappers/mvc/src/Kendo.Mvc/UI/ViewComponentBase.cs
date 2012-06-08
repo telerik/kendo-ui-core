@@ -136,6 +136,20 @@ namespace Kendo.Mvc.UI
             private set;
         }
 
+        public bool IsInClientTemplate
+        {
+            get;
+            private set;
+        }
+
+        public string Selector
+        {
+            get
+            { 
+                return (IsInClientTemplate ? "\\#" : "#") + Id;
+            }
+        }
+
         public virtual void VerifySettings()
         {
             if (string.IsNullOrEmpty(Name))
@@ -176,7 +190,8 @@ namespace Kendo.Mvc.UI
         }
         
         public MvcHtmlString ToClientTemplate()
-        {            
+        {
+            IsInClientTemplate = true;
             return MvcHtmlString.Create(ToHtmlString().Replace("</script>", "<\\/script>"));
         }
     }

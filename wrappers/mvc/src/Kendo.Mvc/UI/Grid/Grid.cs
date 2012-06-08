@@ -643,6 +643,12 @@ namespace Kendo.Mvc.UI
 
             var columns = VisibleColumns.Select(c => c.ToJson());
 
+            var idPrefix = "#";
+            if (IsInClientTemplate)
+            {
+                idPrefix = "\\" + idPrefix;
+            }
+
             if (columns.Any())
             {
                 options["columns"] = columns;
@@ -707,9 +713,9 @@ namespace Kendo.Mvc.UI
 
             options["dataSource"] = DataSource.ToJson();
 
-            if (HasDetailTemplate)
+            if (HasDetailTemplate && !String.IsNullOrEmpty(DetailTemplate.ClientTemplate))
             {
-                options["detailTemplate"] = new ClientEvent { HandlerName = String.Format("kendo.template($('\\#{0}').html())", DetailTemplate.ClientTemplate) };
+                options["detailTemplate"] = new ClientEvent { HandlerName = String.Format("kendo.template($('{0}{1}').html())", idPrefix, DetailTemplate.ClientTemplate) };
             }
 
             if (Navigatable.Enabled)
@@ -720,7 +726,7 @@ namespace Kendo.Mvc.UI
             //TODO: Localization
             //TODO: No records template
 
-            writer.Write(Initializer.Initialize(Id, "Grid", options));
+            writer.Write(Initializer.Initialize(Selector, "Grid", options));
 
             base.WriteInitializationScript(writer);
         }

@@ -959,7 +959,7 @@
             html += '</div></div>';
 
             var container = that._editContainer = $(html)
-                .appendTo(that.wrapper)
+                .appendTo(that.wrapper).eq(0)
                 .kendoWindow(extend({
                     modal: true,
                     resizable: false,

@@ -123,7 +123,7 @@
 
                 if (isCustomEditor && typeof field.editor === "string") {
                     editor = function(container) {
-                        $(window.unescape(field.editor)).appendTo(container);
+                        container.append(field.editor);
                     };
                 }
 
