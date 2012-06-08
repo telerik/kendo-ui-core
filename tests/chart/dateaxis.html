@@ -95,30 +95,6 @@
                     same(dateAxis.options.max, new Date("2012/02/15 00:00"));
                 });
 
-                test("Axis crossing value can be parsed from string", function() {
-                    createDateCategoryAxis({
-                        categories: [
-                            new Date("2012/02/01"), new Date("2012/03/10")
-                        ],
-                        axisCrossingValue: "2012/02/29"
-                    });
-
-                    same(dateAxis.options.axisCrossingValue, new Date("2012/02/29"));
-                });
-
-                test("Axis crossing values can be parsed from string array", function() {
-                    createDateCategoryAxis({
-                        categories: [
-                            new Date("2012/02/01"), new Date("2012/03/10")
-                        ],
-                        axisCrossingValue: ["2012/02/28", "2012/02/29"]
-                    });
-
-                    same(dateAxis.options.axisCrossingValue,
-                        [new Date("2012/02/28"), new Date("2012/02/29")]
-                    );
-                });
-
                 // ------------------------------------------------------------
                 module("Date CategoryAxis / Grouping", {
                     setup: function() {

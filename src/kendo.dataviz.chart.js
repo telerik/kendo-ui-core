@@ -1060,8 +1060,7 @@
 
             deepExtend(options, {
                 min: toDate(options.min),
-                max: toDate(options.max),
-                axisCrossingValue: toDate(options.axisCrossingValue)
+                max: toDate(options.max)
             });
 
             options = axis.applyDefaults(options);
