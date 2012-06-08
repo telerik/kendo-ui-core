@@ -333,20 +333,18 @@
         },
 
         selectText: function (element, selectionStart, selectionEnd) {
-            if (element.createTextRange) {
-                try {
-                    element.focus();
-                    var textRange = element.createTextRange();
-                    textRange.collapse(true);
-                    textRange.moveStart(CHARACTER, selectionStart);
-                    textRange.moveEnd(CHARACTER, selectionEnd - selectionStart);
-                    textRange.select();
-                } catch(e) {
-                    //createTextRange is quite unstable.
+            try {
+                if (element.createTextRange) {
+                        element.focus();
+                        var textRange = element.createTextRange();
+                        textRange.collapse(true);
+                        textRange.moveStart(CHARACTER, selectionStart);
+                        textRange.moveEnd(CHARACTER, selectionEnd - selectionStart);
+                        textRange.select();
+                } else {
+                    element.setSelectionRange(selectionStart, selectionEnd);
                 }
-            } else {
-                element.setSelectionRange(selectionStart, selectionEnd);
-            }
+            } catch(e) { /* element is not focused or it is not in the DOM */ }
         },
         inArray: function(node, parentNode) {
             var idx, length, siblings = parentNode.children;
