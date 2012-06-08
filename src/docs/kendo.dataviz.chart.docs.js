@@ -1132,6 +1132,79 @@
          * @option {Object} [yAxis] The scatter charts Y-axis configuration options.
          * See <strong>xAxis</strong> for list of available options.
          * @option {Object} [categoryAxis] The category axis configuration options.
+         * @option {String} [categoryAxis.type] <"Category"> The axis type.
+         * <div class="details-list">
+         *     <dl>
+         *         <dt>
+         *              <code>"Category"</code>
+         *         </dt>
+         *         <dd>
+         *              Discrete category axis.
+         *         </dd>
+         *         <dt>
+         *              <code>"Date"</code>
+         *         </dt>
+         *         <dd>
+         *              Specialized axis for displaying chronological data.
+         *         </dd>
+         *    </dl>
+         * </div>
+         * @option [categoryAxis.type: "Date"] Properties specific to the date-time value axis.
+         * <p>Note: The Chart will automatically switch to a date category axis if the categories
+         * are of type Date. Specify type explicitly when such behavior is undesired.</p>
+         * @option {String} [categoryAxis.type: "Date".baseUnit] The base time interval for the axis.
+         * The default baseUnit is determined automatically from the minimum difference
+         * between subsequent categories. Available options:
+         * <ul>
+         *     <li>hours</li>
+         *     <li>days</li>
+         *     <li>months</li>
+         *     <li>years</li>
+         * </ul>
+         * Series data is aggregated for the specified base unit by using the
+         * <b>series.aggregate</b> function.
+         * @option {Number} [categoryAxis.type: "Date".min] The first date displayed on the axis.
+         * By default, the minimum date is the same as the first category.
+         * This is often used in combination with the <b>max</b> configuration option to
+         * set up a fixed date range.
+         * @option {Number} [categoryAxis.type: "Date".max] The last date displayed on the axis.
+         * By default, the minimum date is the same as the last category.
+         * This is often used in combination with the <b>min</b> configuration option to
+         * set up a fixed date range.
+         * @option {Object} [categoryAxis.type: "Date".labels] Label settings specific to the date axis.
+         * @option {String} [categoryAxis.type: "Date".labels.dateFormats] Date format strings
+         * <div class="details-list">
+         *    <dl>
+         *         <dt>
+         *              <code>"hours"</code>
+         *         </dt>
+         *         <dd>
+         *              "HH:mm"
+         *         </dd>
+         *         <dt>
+         *              <code>"days"</code>
+         *         </dt>
+         *         <dd>
+         *              "M/d"
+         *         </dd>
+         *         <dt>
+         *              <code>"months"</code>
+         *         </dt>
+         *         <dd>
+         *              "MMM 'yy"
+         *         </dd>
+         *         <dt>
+         *              <code>"years"</code>
+         *         </dt>
+         *         <dd>
+         *              "yyyy"
+         *         </dd>
+         *    </dl>
+         * </div>
+         * The Chart will choose the appropriate format for the current <code>baseUnit</code>.
+         * Setting the labels <strong>format</strong> option will override these defaults.
+         * @option {String} [categoryAxis.type: "Date".labels.culture] <global culture>
+         * Culture to use for formatting the dates. See <a href="http://www.kendoui.com/documentation/framework/globalization/overview.aspx">Globalization</a> for more information.
          * @option {Object} [categoryAxis.name] <primary> The unique axis name.
          * @option {Boolean} [categoryAxis.visible] <true> The visibility of the axis.
          * @option {Array} [categoryAxis.categories] Array of category names.
@@ -2008,6 +2081,49 @@
          * @option {String} [series.field] The data field containing the series value.
          * @option {Boolean} [series.visibleInLegend] <true> A value indicating whether to show the series in the legend.
          * @option [series.type="bar"] Available options for bar series:
+         * @option {String} [series.type="bar".aggregate] <"max"> Aggregate function for date series.
+         * This function is used when a category (an year, month, etc.) contains two or more points.
+         * The function return value is displayed instead of the individual points.
+         * <div class="details-list">
+         *    <dl>
+         *         <dt>
+         *              <code>"max"</code>
+         *         </dt>
+         *         <dd>
+         *              The highest value for the date period.
+         *         </dd>
+         *         <dt>
+         *              <code>"min"</code>
+         *         </dt>
+         *         <dd>
+         *              The lowest value for the date period.
+         *         </dd>
+         *         <dt>
+         *              <code>"sum"</code>
+         *         </dt>
+         *         <dd>
+         *              The sum of all values for the date period.
+         *         </dd>
+         *         <dt>
+         *              <code>"count"</code>
+         *         </dt>
+         *         <dd>
+         *              The number of values for the date period.
+         *         </dd>
+         *         <dt>
+         *              <code>"avg"</code>
+         *         </dt>
+         *         <dd>
+         *              The average of all values for the date period.
+         *         </dd>
+         *         <dt>
+         *              <code>function (values, series)</code>
+         *         </dt>
+         *         <dd>
+         *              User-defined aggregate function.
+         *         </dd>
+         *    </dl>
+         * </div>
          * @option {Boolean} [series.type="bar".stack] <false>
          * A value indicating if the series should be stacked.
          * @option {String} [series.type="bar".stack]
@@ -2283,6 +2399,49 @@
          * The difference is that column series are rendered on a horizontal category axis.
          *
          * @option [series.type="line"] Available options for line series:
+         * @option {String} [series.type="line".aggregate] <"max"> Aggregate function for date series.
+         * This function is used when a category (an year, month, etc.) contains two or more points.
+         * The function return value is displayed instead of the individual points.
+         * <div class="details-list">
+         *    <dl>
+         *         <dt>
+         *              <code>"max"</code>
+         *         </dt>
+         *         <dd>
+         *              The highest value for the date period.
+         *         </dd>
+         *         <dt>
+         *              <code>"min"</code>
+         *         </dt>
+         *         <dd>
+         *              The lowest value for the date period.
+         *         </dd>
+         *         <dt>
+         *              <code>"sum"</code>
+         *         </dt>
+         *         <dd>
+         *              The sum of all values for the date period.
+         *         </dd>
+         *         <dt>
+         *              <code>"count"</code>
+         *         </dt>
+         *         <dd>
+         *              The number of values for the date period.
+         *         </dd>
+         *         <dt>
+         *              <code>"avg"</code>
+         *         </dt>
+         *         <dd>
+         *              The average of all values for the date period.
+         *         </dd>
+         *         <dt>
+         *              <code>function (values, series)</code>
+         *         </dt>
+         *         <dd>
+         *              User-defined aggregate function.
+         *         </dd>
+         *    </dl>
+         * </div>
          * @option {Boolean} [series.type="line".stack] <false>
          * A value indicating if the series should be stacked.
          * @option {String} [series.type="line".name] The series name.
@@ -3460,6 +3619,49 @@
          * @option {Number} [series.type="scatterLine".width] <1> The line width of the scatter line chart.
          *
          * @option [series.type="area"] Available options for area series:
+         * @option {String} [series.type="area".aggregate] <"max"> Aggregate function for date series.
+         * This function is used when a category (an year, month, etc.) contains two or more points.
+         * The function return value is displayed instead of the individual points.
+         * <div class="details-list">
+         *    <dl>
+         *         <dt>
+         *              <code>"max"</code>
+         *         </dt>
+         *         <dd>
+         *              The highest value for the date period.
+         *         </dd>
+         *         <dt>
+         *              <code>"min"</code>
+         *         </dt>
+         *         <dd>
+         *              The lowest value for the date period.
+         *         </dd>
+         *         <dt>
+         *              <code>"sum"</code>
+         *         </dt>
+         *         <dd>
+         *              The sum of all values for the date period.
+         *         </dd>
+         *         <dt>
+         *              <code>"count"</code>
+         *         </dt>
+         *         <dd>
+         *              The number of values for the date period.
+         *         </dd>
+         *         <dt>
+         *              <code>"avg"</code>
+         *         </dt>
+         *         <dd>
+         *              The average of all values for the date period.
+         *         </dd>
+         *         <dt>
+         *              <code>function (values, series)</code>
+         *         </dt>
+         *         <dd>
+         *              User-defined aggregate function.
+         *         </dd>
+         *    </dl>
+         * </div>
          * @option {Boolean} [series.type="area".stack] <false>
          * A value indicating if the series should be stacked.
          * @option {String} [series.type="area".name] The series name.
