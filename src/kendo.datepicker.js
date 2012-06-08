@@ -187,6 +187,7 @@
 
                 calendar.month = that.month;
                 calendar.options.depth = options.depth;
+                calendar.options.culture = options.culture;
 
                 calendar._footer(that.footer);
 
@@ -382,8 +383,8 @@
                 empty: template("<td>" + (empty || "&nbsp;") + "</td>", { useWithBlock: !!empty })
             };
 
-            if (footer) {
-                that.footer = template(footer, { useWithBlock: false });
+            if (footer !== false) {
+                that.footer = template(footer || '#= kendo.toString(data,"D","' + options.culture +'") #', { useWithBlock: false });
             }
         }
     };
@@ -579,6 +580,13 @@
          *     }
          * });
          *
+         * @option {String} [culture] <en-US> Specifies the culture info used by the widget.
+         * _example
+         *
+         * // specify on widget initialization
+         * $("#datepicker").kendoDatePicker({
+         *     culture: "de-DE"
+         * });
          */
         init: function(element, options) {
             var that = this;
@@ -702,11 +710,12 @@
         options: {
             name: "DatePicker",
             value: null,
+            footer: "",
             format: "",
+            culture: "",
             parseFormats: [],
             min: new Date(1900, 0, 1),
             max: new Date(2099, 11, 31),
-            footer: '#= kendo.toString(data,"D") #',
             start: MONTH,
             depth: MONTH,
             animation: {},
@@ -922,7 +931,7 @@
                 return options[option];
             }
 
-            value = parse(value, options.parseFormats);
+            value = parse(value, options.parseFormats, options.culture);
 
             if (!value) {
                 return;
@@ -935,8 +944,7 @@
         _update: function(value) {
             var that = this,
                 options = that.options,
-                format = options.format,
-                date = parse(value, options.parseFormats);
+                date = parse(value, options.parseFormats, options.culture);
 
             if (!isInRange(date, options.min, options.max)) {
                 date = null;
@@ -944,7 +952,7 @@
 
             that._value = date;
             that.dateView.value(date);
-            that.element.val(date ? kendo.toString(date, format) : value);
+            that.element.val(date ? kendo.toString(date, options.format, options.culture) : value);
 
             return date;
         },

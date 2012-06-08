@@ -9,6 +9,7 @@
         <script src="../../src/kendo.popup.js"></script>
         <script src="../../src/kendo.calendar.js"></script>
         <script src="../../src/kendo.datepicker.js"></script>
+        <script src="../../src/cultures/kendo.culture.bg-BG.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
     </head>
     <body>
@@ -50,7 +51,8 @@
                     open: function() {},
                     close: function() {},
                     start: "month",
-                    depth: "month"
+                    depth: "month",
+                    culture: "bg-BG"
                 },
                 dv1 = new DateView({
                     value: new Date(),
@@ -67,6 +69,7 @@
                 var calendar = dv1.calendar,
                     popup = dv2.popup;
 
+                equal(calendar.options.culture, options.culture);
                 equal(+calendar.options.min, +options.min);
                 equal(+calendar.options.max, +options.max);
                 equal(calendar._events["change"][0], options.change);
@@ -91,6 +94,15 @@
                 });
 
                 ok(dateView.footer);
+            });
+
+            test("DateView's footer template honors options.culture", function() {
+                var dateView = new DateView({
+                    culture: "bg-BG"
+                }),
+                today = new Date();
+
+                equal(dateView.footer(today), kendo.toString(today, "D", "bg-BG"));
             });
 
             test("DateView sets the calendar.month templates", function() {

@@ -268,6 +268,13 @@
           *      });
           *  </script>
           * @option {String} [month.empty] <> Template to be used for rendering the cells in the "month" view, which are not in the min/max range.
+          * @option {String} [culture] <en-US> Specifies the culture info used by the widget.
+          * _example
+          *
+          * // specify on widget initialization
+          * $("#calendar").kendoCalendar({
+          *     culture: "de-DE"
+          * });
           */
         init: function(element, options) {
             var that = this, value;
