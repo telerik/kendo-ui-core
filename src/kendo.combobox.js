@@ -1073,8 +1073,11 @@
 
             DOMInput = input[0];
             DOMInput.tabIndex = tabIndex;
-            DOMInput.maxLength = element.maxLength;
             DOMInput.style.cssText = element.style.cssText;
+
+            if (element.maxLength > -1) {
+                DOMInput.maxLength = element.maxLength;
+            }
 
             input.addClass(element.className)
                  .val(element.value)
