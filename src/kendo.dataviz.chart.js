@@ -1078,8 +1078,7 @@
         },
 
         applyDefaults: function(options) {
-            var axis = this,
-                categories = options.categories,
+            var categories = options.categories,
                 count = categories.length,
                 categoryIx,
                 cat,
@@ -1202,29 +1201,25 @@
                                 dataviz.autoMajorUnit(autoMin.getTime(), autoMax.getTime()),
                                 baseUnitTime
                             ) / baseUnitTime,
-                defaults = {
-                    baseUnit: baseUnit,
-                    minorUnit: majorUnit / 5
-                };
-
-            // TODO: Refactor
-            var actualUnits = duration(autoMin, autoMax, baseUnit);
-            var totalUnits = dataviz.ceil(actualUnits, majorUnit);
-            var unitsToAdd = totalUnits - actualUnits;
-
-            var head = math.floor(unitsToAdd / 2);
-            var tail = unitsToAdd - head;
-
-            defaults.min = addDuration(autoMin, -head, baseUnit);
-            defaults.max = addDuration(autoMax, tail, baseUnit);
+                actualUnits = duration(autoMin, autoMax, baseUnit),
+                totalUnits = dataviz.ceil(actualUnits, majorUnit),
+                unitsToAdd = totalUnits - actualUnits,
+                head = math.floor(unitsToAdd / 2),
+                tail = unitsToAdd - head;
 
             if (!options.baseUnit) {
                 delete options.baseUnit;
             }
 
-            return deepExtend(defaults, options, {
-                majorUnit: majorUnit
-            });
+            return deepExtend({
+                    baseUnit: baseUnit,
+                    min: addDuration(autoMin, -head, baseUnit),
+                    max: addDuration(autoMax, tail, baseUnit),
+                    minorUnit: majorUnit / 5
+                }, options, {
+                    majorUnit: majorUnit
+                }
+            );
         },
 
         range: function() {
