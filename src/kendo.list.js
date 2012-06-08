@@ -334,11 +334,16 @@
 
         selectText: function (element, selectionStart, selectionEnd) {
             if (element.createTextRange) {
-                var textRange = element.createTextRange();
-                textRange.collapse(true);
-                textRange.moveStart(CHARACTER, selectionStart);
-                textRange.moveEnd(CHARACTER, selectionEnd - selectionStart);
-                textRange.select();
+                try {
+                    element.focus();
+                    var textRange = element.createTextRange();
+                    textRange.collapse(true);
+                    textRange.moveStart(CHARACTER, selectionStart);
+                    textRange.moveEnd(CHARACTER, selectionEnd - selectionStart);
+                    textRange.select();
+                } catch(e) {
+                    //createTextRange is quite unstable.
+                }
             } else {
                 element.setSelectionRange(selectionStart, selectionEnd);
             }

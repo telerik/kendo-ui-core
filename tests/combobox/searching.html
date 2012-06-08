@@ -604,6 +604,22 @@
                 equal(combobox.current().index(), 1);
             });
 
+            test("ComboBox does not throw exception when activeElement is not input", 1, function() {
+                var select = $("<select><option value=1>Item1</option><option value=2>2Item</option></select>"),
+                    combobox = select.kendoComboBox({
+                        filter: "contains",
+                        suggest: true,
+                        delay: 0
+                    }).data("kendoComboBox");
+
+                combobox.input.val("2");
+                combobox.search("2");
+
+                combobox.input.blur();
+
+                ok(true);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
