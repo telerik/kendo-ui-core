@@ -7,6 +7,7 @@
         <script type="text/javascript" src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.calendar.js"></script>
+        <script src="../../src/cultures/kendo.culture.bg-BG.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
     </head>
     <body>
@@ -178,6 +179,13 @@
                     equal(calendar.views[0].title(date), text);
             });
 
+            test("Month view title honors options.culture", function() {
+                var date = new Date(),
+                    text = kendo.getCulture("bg-BG").calendars.standard.months.names[date.getMonth()] + " " + date.getFullYear();
+
+                    equal(calendar.views[0].title(date, "bg-BG"), text);
+            });
+
             test("month view renders days", function() {
                 var today = new Date(),
                     days = kendo.culture().calendar.days;
@@ -197,6 +205,23 @@
                 equal(div.find("tbody").find("tr").length, 6);
                 equal(div.find("tbody").find("td").length, 42);
                 equal(div.find("tbody").find("a").length, 42);
+            });
+
+            test("month view's content method honors culture", function() {
+                var today = new Date(),
+                    days = kendo.getCulture("bg-BG").calendars.standard.days;
+
+                div.html(calendar.views[0].content({
+                        date: today,
+                        empty: template.empty,
+                        content: template.content,
+                        min: new Date(2000, 10, 10),
+                        max: new Date(2020, 10, 10),
+                        culture: "bg-BG"
+                    }));
+
+                equal(div.find("thead").find("th").eq(0).html(), days.namesShort[1]);
+                equal(div.find("thead").find("th").eq(0).attr("title"), days.names[1]);
             });
 
             test("month view renderer honors firstDayOfWeek property", function() {
@@ -246,6 +271,22 @@
 
                 equal(div.find("tbody").find("a").attr("title"), kendo.toString(firstVisibleDay, "D"));
                 equal(div.find("tbody").find("a").attr("class"), "k-link");
+            });
+
+            test("month view renders anchor in td with title depending on the options.culture", function() {
+                var today = new Date(2011, 9, 10),
+                    firstVisibleDay = calendar.firstVisibleDay(today, kendo.getCulture("bg-BG").calendars.standard);
+
+                div.html(calendar.views[0].content({
+                    date: today,
+                    empty: template.empty,
+                    content: template.content,
+                    culture: "bg-BG",
+                    min: new Date(2000, 10, 10),
+                    max: new Date(2020, 10, 10)
+                }));
+
+                equal(div.find("tbody").find("a").attr("title"), kendo.toString(firstVisibleDay, "D", "bg-BG"));
             });
 
             test("month view renders empty string if date is not in range", function() {
@@ -401,6 +442,30 @@
                 equal(a.attr("href"), "/home/index?url=10/10/2011");
             });
 
+            test("month view honors culture when renders URL", function() {
+                var today = new Date(2011, 9, 10),
+                    culture = kendo.getCulture("bg-BG"),
+                    format = culture.calendars.standard.patterns["D"],
+                    dates = [today];
+
+                div.html(calendar.views[0].content({
+                    url: "/home/index?url={0}",
+                    date: today,
+                    dates: dates,
+                    culture: "bg-BG",
+                    format: format,
+                    empty: template.empty,
+                    min: new Date(1900,0,1),
+                    max: new Date(2900,0,1),
+                    content: template.content
+                }));
+
+                var a = div.find("a[href*=home]");
+
+                ok(a[0]);
+                equal(a.attr("href"), "/home/index?url=" + kendo.toString(today, format, culture));
+            });
+
             test("year view renders title", function() {
                 var today = new Date(2011, 9, 10);
 
@@ -416,6 +481,25 @@
                     date: today,
                     min: new Date(2000, 10, 10),
                     max: new Date(2020, 10, 10)
+                }));
+
+                equal(div.find("tbody").find("tr:first").find("td").length, 4);
+                equal(div.find("tbody").find("td > a").length, 12);
+                equal(div.find("tbody").find("a:first").eq(0).html(), firstMonth);
+                equal(div.find("tbody").find("a:last").eq(0).html(), lastMonth);
+            });
+
+            test("year view's content method honors culture", function() {
+                var today = new Date(2011, 9, 10),
+                    calendarInfo = kendo.getCulture("bg-BG").calendars.standard,
+                    firstMonth = calendarInfo.months.namesAbbr[0],
+                    lastMonth = calendarInfo.months.namesAbbr[11];
+
+                div.html(calendar.views[1].content({
+                    date: today,
+                    min: new Date(2000, 10, 10),
+                    max: new Date(2020, 10, 10),
+                    culture: "bg-BG"
                 }));
 
                 equal(div.find("tbody").find("tr:first").find("td").length, 4);

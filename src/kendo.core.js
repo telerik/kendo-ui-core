@@ -1432,7 +1432,7 @@ function pad(number) {
                     valueIdx++;
                 }
             },
-            calendar = culture.calendar,
+            calendar = culture.calendars.standard,
             year = null,
             month = null,
             day = null,

@@ -7,6 +7,7 @@
         <script type="text/javascript" src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.calendar.js"></script>
+        <script src="../../src/cultures/kendo.culture.bg-BG.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
     </head>
     <body>
@@ -234,6 +235,29 @@
                 cal._footer(false);
 
                 ok(!cal.element.find(".k-footer").is("visible"));
+            });
+
+            test("Calendar honors culture property", function() {
+                var cal = new Calendar(div, {
+                    culture: "bg-BG"
+                });
+
+                var culture = kendo.getCulture("bg-BG");
+                var format = culture.calendars.standard.patterns["d"];
+
+                equal(cal.options.format, format);
+            });
+
+            test("footer honors options.culture", function() {
+                var cal = new Calendar(div, {
+                    culture: "bg-BG"
+                });
+
+                var culture = kendo.getCulture("bg-BG");
+                var format = culture.calendars.standard.patterns["d"];
+
+                equal(cal._today.html(), kendo.toString(new Date(), "D", culture));
+                equal(cal._today.attr("title"), kendo.toString(new Date(), "D", culture));
             });
 
         </script>

@@ -130,6 +130,7 @@
         parse = kendo.parseDate,
         extractFormat = kendo._extractFormat,
         template = kendo.template,
+        getCulture = kendo.getCulture,
         touch = kendo.support.touch,
         transitions = kendo.support.transitions,
         transitionOrigin = transitions ? transitions.css + "transform-origin" : "",
@@ -309,7 +310,8 @@
             max: new DATE(2099, 11, 31),
             dates: [],
             url: "",
-            footer : '#= kendo.toString(data,"D") #',
+            culture: "",
+            footer : "",
             format : "",
             month : {},
             start: MONTH,
@@ -501,6 +503,7 @@
 
             var that = this,
                 options = that.options,
+                culture = options.culture,
                 min = options.min,
                 max = options.max,
                 title = that._title,
@@ -531,7 +534,7 @@
             that[NEXTARROW].toggleClass(DISABLED, compare(value, max) > -1);
 
             if (!from || that._changeView) {
-                title.html(currentView.title(value));
+                title.html(currentView.title(value, culture));
 
                 that._table = to = $(currentView.content(extend({
                     min: min,
@@ -539,7 +542,8 @@
                     date: value,
                     url: options.url,
                     dates: options.dates,
-                    format: options.format
+                    format: options.format,
+                    culture: culture
                 }, that[currentView.name])));
 
                 makeUnselectable(to);
@@ -586,7 +590,7 @@
                 return that._value;
             }
 
-            value = parse(value, options.format);
+            value = parse(value, options.format, options.culture);
 
             if (value !== null) {
                 value = new DATE(value);
@@ -763,7 +767,7 @@
             that._today = footer.show()
                                 .find(".k-link")
                                 .html(template(today))
-                                .attr("title", kendo.toString(today, "D"));
+                                .attr("title", kendo.toString(today, "D", that.options.culture));
 
             that._toggle();
         },
@@ -819,7 +823,7 @@
                 return options[option];
             }
 
-            value = parse(value, options.format);
+            value = parse(value, options.format, options.culture);
 
             if (!value) {
                 return;
@@ -900,8 +904,8 @@
                 empty: template("<td>" + (empty || "&nbsp;") + "</td>", { useWithBlock: !!empty })
             };
 
-            if (footer) {
-                that.footer = template(footer, { useWithBlock: false });
+            if (footer !== false) {
+                that.footer = template(footer || '#= kendo.toString(data,"D","' + options.culture +'") #', { useWithBlock: false });
             }
         }
     });
@@ -917,8 +921,10 @@
             );
         },
 
-        firstVisibleDay: function (date) {
-            var firstDay = kendo.culture().calendar.firstDay,
+        firstVisibleDay: function (date, calendarInfo) {
+            calendarInfo = calendarInfo || kendo.culture().calendar;
+
+            var firstDay = calendarInfo.firstDay,
             firstVisibleDay = new DATE(date.getFullYear(), date.getMonth(), 0, date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds());
 
             while (firstVisibleDay.getDay() != firstDay) {
@@ -937,8 +943,8 @@
         },
         views: [{
             name: MONTH,
-            title: function(date) {
-                return kendo.culture().calendar.months.names[date.getMonth()] + " " + date.getFullYear();
+            title: function(date, culture) {
+                return getCalendarInfo(culture).months.names[date.getMonth()] + " " + date.getFullYear();
             },
             content: function(options) {
                 var that = this,
@@ -948,14 +954,15 @@
                 date = options.date,
                 dates = options.dates,
                 format = options.format,
+                culture = options.culture,
                 navigateUrl = options.url,
                 hasUrl = navigateUrl && dates[0],
-                currentCalendar = kendo.culture().calendar,
+                currentCalendar = getCalendarInfo(culture),
                 firstDayIdx = currentCalendar.firstDay,
                 days = currentCalendar.days,
                 names = shiftArray(days.names, firstDayIdx),
                 short = shiftArray(days.namesShort, firstDayIdx),
-                start = calendar.firstVisibleDay(date),
+                start = calendar.firstVisibleDay(date, currentCalendar),
                 firstDayOfMonth = that.first(date),
                 lastDayOfMonth = that.last(date),
                 toDateString = that.toDateString,
@@ -997,7 +1004,7 @@
                         }
 
                         if (hasUrl && inArray(+date, dates)) {
-                            url = navigateUrl.replace("{0}", kendo.toString(date, format));
+                            url = navigateUrl.replace("{0}", kendo.toString(date, format, culture));
                             linkClass = " k-action-link";
                         }
 
@@ -1005,7 +1012,7 @@
                             date: date,
                             dates: dates,
                             ns: kendo.ns,
-                            title: kendo.toString(date, "D"),
+                            title: kendo.toString(date, "D", culture),
                             value: date.getDate(),
                             dateString: toDateString(date),
                             cssClass: cssClass[0] ? ' class="' + cssClass.join(" ") + '"' : "",
@@ -1055,7 +1062,7 @@
                 return date.getFullYear();
             },
             content: function(options) {
-                var namesAbbr = kendo.culture().calendar.months.namesAbbr,
+                var namesAbbr = getCalendarInfo(options.culture).months.namesAbbr,
                 toDateString = this.toDateString,
                 min = options.min,
                 max = options.max;
@@ -1303,11 +1310,16 @@
         e.preventDefault();
     }
 
+    function getCalendarInfo(culture) {
+        return getCulture(culture).calendars.standard;
+    }
+
     function normalize(options) {
         var start = views[options.start],
-            depth = views[options.depth];
+            depth = views[options.depth],
+            culture = getCulture(options.culture);
 
-        options.format = extractFormat(options.format || kendo.culture().calendar.patterns.d);
+        options.format = extractFormat(options.format || culture.calendars.standard.patterns.d);
 
         if (isNaN(start)) {
             start = 0;
