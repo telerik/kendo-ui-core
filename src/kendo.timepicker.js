@@ -184,7 +184,7 @@
                 date = dates[idx];
 
                 if (isInRange(date, options.min, options.max)) {
-                    html += template(toString(date, format));
+                    html += template(toString(date, format, options.culture));
                 }
             }
 
@@ -231,7 +231,7 @@
                     start = new DATE(max);
                 }
 
-                html += template(toString(start, format));
+                html += template(toString(start, format, options.culture));
             }
 
             that._html(html, length);
@@ -277,10 +277,11 @@
 
         select: function(li) {
             var that = this,
+                options = that.options,
                 current = that._current;
 
             if (li instanceof Date) {
-                li = kendo.toString(li, that.options.format);
+                li = kendo.toString(li, options.format, options.culture);
             }
 
             if (typeof li === "string") {
@@ -344,13 +345,14 @@
 
         _parse: function(value) {
             var that = this,
+                options = that.options,
                 current = that._value || TODAY;
 
             if (value instanceof DATE) {
                 return value;
             }
 
-            value = kendo.parseDate(value, that.options.parseFormats);
+            value = kendo.parseDate(value, options.parseFormats, options.culture);
 
             if (value) {
                 value = new DATE(current.getFullYear(),
@@ -545,6 +547,13 @@
          *     }
          * });
          *
+         * @option {String} [culture] <en-US> Specifies the culture info used by the widget.
+         * _example
+         *
+         * // specify on widget initialization
+         * $("#timepicker").kendoTimePicker({
+         *     culture: "de-DE"
+         * });
          */
         init: function(element, options) {
             var that = this;
@@ -969,7 +978,7 @@
             }
 
             that._value = date;
-            that.element.val(date ? kendo.toString(date, options.format) : value);
+            that.element.val(date ? kendo.toString(date, options.format, options.culture) : value);
             that.timeView.value(date);
 
             return date;
@@ -1001,7 +1010,7 @@
     function normalize(options) {
         var parseFormats = options.parseFormats;
 
-        options.format = extractFormat(options.format || kendo.culture().calendar.patterns.t);
+        options.format = extractFormat(options.format || kendo.getCulture(options.culture).calendars.standard.patterns.t);
 
         parseFormats = isArray(parseFormats) ? parseFormats : [parseFormats];
         parseFormats.splice(0, 0, options.format);
