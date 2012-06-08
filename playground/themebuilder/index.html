@@ -24,37 +24,12 @@
     <script src="../../src/kendo.mobile.view.js"></script>
     <script src="../../src/kendo.mobile.pane.js"></script>
     <script src="../../src/kendo.mobile.application.js"></script>
-    <script type="text/javascript">
-        var iOSStyleGrid = {
-            view: {
-                selector: ".km-view",
-                whitelist: [],
-                children: {
-                    tabstrip: {
-                        selector: ".km-tabstrip",
-                        whitelist: [ "background-color", "border-color", "border-width", "border-style" ],
-                        children: {
-                            button: {
-                                selector: ".km-button",
-                                whitelist: [ "background-color", "border-color", "border-width", "border-style" ],
-                                children: {
-                                    icon: {
-                                        selector: ".km-icon",
-                                        whitelist: [ "background-color", "background-image" ]
-                                    },
-                                    text: {
-                                        selector: ".km-icon",
-                                        whitelist: [ "background-color", "background-image" ]
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        };
-    </script>
     <style type="text/css">
+        html
+        {
+            font-size: 75%;
+        }
+
         body
         {
             margin: 0;
@@ -77,9 +52,13 @@
             border-color: #555;
         }
 
-        #device
+        .device
         {
-            width: 400px; height: 600px; position: relative;
+            width: 300px;
+            height: 480px;
+            position: relative;
+            display: inline-block;
+            margin-right: 10px;
         }
     </style>
 </head>
@@ -92,7 +71,7 @@
     <div class="drop" style="background: #ba55d3;">&nbsp;</div>
     <div class="adddrop">+</div>
     <br /><br />
-    <div id="device">
+    <div id="iosDevice" class="device">
         <div data-role="view" data-layout="overview-layout" id="overview-cities" data-title="Favourite Cities" data-show="initTargets">
             <ul data-role="listview" data-style="inset" data-type="group">
                 <li>
@@ -265,7 +244,7 @@
             function mobileAccountViewInit() {
                 var listviews = this.element.find("ul.km-listview");
 
-                $("#settings-view").kendoMobileButtonGroup({
+                this.element.find("[id^=settings-view]").kendoMobileButtonGroup({
                     select: function() {
                         listviews.hide()
                                  .eq(this.selectedIndex)
@@ -277,26 +256,26 @@
         </script>
 
         <style scoped>
-            #overview-contacts h2,
-            #overview-cities h2 {
+            [id^="overview-contacts"] h2,
+            [id^="overview-cities"] h2 {
                 display: inline-block;
                 font-size: 1.1em;
                 margin: 1em 0 .5em 1em;
             }
-            #overview-account h2 {
+            [id^="overview-account"] h2 {
                 display: inline-block;
                 font-size: 1.1em;
                 margin: 1.5em 0 0 1em;
             }
-            #overview-account h2 span {
+            [id^="overview-account"] h2 span {
                 display: block;
                 clear: both;
                 font-size: 2em;
                 margin: .2em 0 0 0;
             }
-            #overview-contacts img,
-            #overview-cities img,
-            #overview-account img {
+            [id^="overview-contacts"] img,
+            [id^="overview-cities"] img,
+            [id^="overview-account"] img {
                 float: left;
                 width: 4em;
                 height: 4em;
@@ -306,19 +285,19 @@
                 -webkit-border-radius: 8px;
                 border-radius: 8px;
             }
-            #overview-account img {
+            [id^="overview-account"] img {
                 width: 5em;
                 height: 5em;
                 margin: 1em;
             }
-            #overview-account .value {
+            [id^="overview-account"] .value {
                 float: right;
                 color: #ccc;
             }
-            #settings-view {
+            [id^="settings-view"] {
                 margin: 1em auto .4em auto;
             }
-            #overview-gallery .photo {
+            [id^="overview-gallery"] .photo {
                 width: 100%;
                 margin: 20px 0 7px;
                 height: 200px;
@@ -340,7 +319,7 @@
             .photo9 {background-image: url("images/cities/melbourne.jpg");}
             .photo10 {background-image: url("images/cities/san-francisco.jpg");}
 
-            #scrollview-container {
+            [id^="scrollview-container"] {
                 width: 100%;
                 margin: 3px 0 1em 0;
                 padding-bottom: 10px;
@@ -349,7 +328,7 @@
                 border-width: 1px 0;
                 box-shadow: 0 1px 1px rgba(255,255,255,.3);
             }
-            #overview-gallery .km-ios .km-content {
+            [id^="overview-gallery"] .km-ios .km-content {
                 background: #bbb;
             }
         </style>
