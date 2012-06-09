@@ -745,12 +745,12 @@
                 currentStop,
                 output = '';
 
-            currentStop = stops[0];
+            currentStop = deepExtend({}, stops[0]);
             currentStop.offset = usedSpace;
             output += stopTemplate(currentStop);
 
             for (i = 1; i < length; i++) {
-                currentStop = stops[i];
+                currentStop = deepExtend({}, stops[i]);
                 currentStop.offset = currentStop.offset * (100 -  usedSpace) + usedSpace;
                 output += stopTemplate(currentStop);
             }

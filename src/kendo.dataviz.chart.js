@@ -3025,6 +3025,7 @@
                 colorsCount = colors.length,
                 series = options.series,
                 seriesCount = series.length,
+                overlayId = uniqueId(),
                 dataItems,
                 currentSeries,
                 currentData,
@@ -3070,7 +3071,10 @@
                         explode: explode,
                         visibleInLegend: currentData.visibleInLegend,
                         margin: currentData.margin,
-                        size: currentData.size
+                        size: currentData.size,
+                        overlay: {
+                            id: overlayId + seriesIx
+                        }
                     });
 
                     currentAngle += angle;
