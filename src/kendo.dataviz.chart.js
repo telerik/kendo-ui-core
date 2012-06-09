@@ -29,7 +29,6 @@
         NumericAxis = dataviz.NumericAxis,
         Point2D = dataviz.Point2D,
         RootElement = dataviz.RootElement,
-        Sector = dataviz.Sector,
         Ring = dataviz.Ring,
         Text = dataviz.Text,
         TextBox = dataviz.TextBox,
@@ -2918,6 +2917,7 @@
             if (overlay) {
                 overlay = deepExtend({}, options.overlay, {
                     r: sector.r,
+                    ir: sector.ir,
                     cx: sector.c.x,
                     cy: sector.c.y,
                     bbox: sector.getBBox()
@@ -2925,7 +2925,7 @@
             }
 
             if (segment.value !== 0) {
-                elements.push(view.createSector(sector, deepExtend({
+                elements.push(segment.createSegment(view, sector, deepExtend({
                     id: options.id,
                     fill: options.color,
                     overlay: overlay,
@@ -2945,6 +2945,10 @@
             return elements;
         },
 
+        createSegment: function(view, sector, options) {
+            return view.createSector(sector, options);
+        },
+
         getOutlineElement: function(view, options) {
             var segment = this,
                 highlight = segment.options.highlight || {},
@@ -2955,7 +2959,7 @@
             options = deepExtend({}, options, { id: outlineId });
 
             if (segment.value !== 0) {
-                element = view.createSector(segment.sector, deepExtend({}, options, {
+                element = segment.createSegment(view, segment.sector, deepExtend({}, options, {
                     fill: highlight.color,
                     fillOpacity: highlight.opacity,
                     strokeOpacity: border.opacity,
@@ -2987,681 +2991,6 @@
     deepExtend(PieSegment.fn, PointEventsMixin);
 
     var PieChart = ChartElement.extend({
-        init: function(plotArea, options) {
-            var chart = this;
-
-            ChartElement.fn.init.call(chart, options);
-
-            chart.plotArea = plotArea;
-            chart.segments = [];
-            chart.seriesPoints = [];
-            chart.render();
-        },
-
-        options: {
-            startAngle: 90,
-            connectors: {
-                width: 1,
-                color: "#939393",
-                padding: 4
-            }
-        },
-
-        render: function() {
-            var chart = this;
-
-            chart.traverseDataPoints(proxy(chart.addValue, chart));
-        },
-
-        traverseDataPoints: function(callback) {
-            var chart = this,
-                options = chart.options,
-                colors = chart.plotArea.options.seriesColors || [],
-                startAngle = options.startAngle,
-                colorsCount = colors.length,
-                series = options.series,
-                dataItems,
-                currentSeries,
-                currentData,
-                seriesIx,
-                angle,
-                data,
-                anglePerValue,
-                value,
-                explode,
-                total,
-                i;
-
-            for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
-                currentSeries = series[seriesIx];
-                dataItems = currentSeries.dataItems;
-                data = currentSeries.data;
-                total = chart.pointsTotal(data);
-                anglePerValue = 360 / total;
-
-                for (i = 0; i < data.length; i++) {
-                    currentData = chart.pointData(currentSeries, i);
-                    value = currentData.value;
-                    angle = round(value * anglePerValue, DEFAULT_PRECISION);
-                    explode = data.length != 1 && !!currentData.explode;
-                    currentSeries.color = currentData.color ?
-                        currentData.color : colors[i % colorsCount];
-
-                    callback(value, new Sector(null, 0, startAngle, angle), {
-                        owner: chart,
-                        category: currentData.category || "",
-                        categoryIx: i,
-                        series: currentSeries,
-                        seriesIx: seriesIx,
-                        dataItem: dataItems ? dataItems[i] : currentData,
-                        percentage: value / total,
-                        explode: explode,
-                        visibleInLegend: currentData.visibleInLegend
-                    });
-
-                    startAngle += angle;
-                }
-            }
-        },
-
-        addValue: function(value, sector, fields) {
-            var chart = this,
-                segment;
-
-            segment = new PieSegment(value, sector, fields.series);
-            segment.options.id = uniqueId();
-            extend(segment, fields);
-            chart.append(segment);
-            chart.segments.push(segment);
-        },
-
-        pointValue: function(point) {
-            return defined(point.value) ? point.value : point;
-        },
-
-        pointData: function(series, index) {
-            var chart = this,
-                data = series.data[index],
-                dataItems = [ "category", "color", "explode", "visibleInLegend" ],
-                count = dataItems.length,
-                dataItemValue,
-                dataItemText,
-                result = {},
-                i;
-
-            for (i = 0; i < count; i++) {
-                dataItemText = dataItems[i];
-                dataItemValue = chart.pointGetter(series, index, dataItemText);
-                if (dataItemValue !== "") {
-                    result[dataItemText] = dataItemValue;
-                }
-            }
-            result.value = chart.pointValue(data);
-
-            return result;
-        },
-
-        pointGetter: function(series, index, prop) {
-            var valueField = series[prop + "Field"],
-                data = series.data[index],
-                value = data[prop];
-
-            if (valueField && series.dataItems) {
-                return getField(valueField, series.dataItems[index]);
-            } else {
-                return defined(value) ? value : "";
-            }
-        },
-
-        pointsTotal: function(data) {
-            var chart = this,
-                length = data.length,
-                sum = 0,
-                i;
-
-            for(i = 0; i < length; i++) {
-                sum += chart.pointValue(data[i]);
-            }
-
-            return sum;
-        },
-
-        reflow: function(targetBox) {
-            var chart = this,
-                options = chart.options,
-                box = targetBox.clone(),
-                space = 5,
-                minWidth = math.min(box.width(), box.height()),
-                halfMinWidth = minWidth / 2,
-                defaultPadding = minWidth - minWidth * 0.85,
-                padding = defined(options.padding) ? options.padding : defaultPadding,
-                newBox = new Box2D(box.x1, box.y1,
-                    box.x1 + minWidth, box.y1 + minWidth),
-                newBoxCenter = newBox.center(),
-                boxCenter = box.center(),
-                segments = chart.segments,
-                count = segments.length,
-                leftSideLabels = [],
-                rightSideLabels = [],
-                label,
-                segment,
-                sector,
-                i;
-
-            padding = padding > halfMinWidth - space ? halfMinWidth - space : padding,
-            newBox.translate(boxCenter.x - newBoxCenter.x, boxCenter.y - newBoxCenter.y);
-
-            for (i = 0; i < count; i++) {
-                segment = segments[i];
-
-                sector = segment.sector;
-                sector.r = halfMinWidth - padding;
-                sector.c = new Point2D(
-                    sector.r + newBox.x1 + padding,
-                    sector.r + newBox.y1 + padding
-                );
-
-                if (segment.explode) {
-                    sector.c = sector.clone().radius(sector.r * 0.15).point(sector.middle());
-                }
-
-                segment.reflow(newBox);
-
-                label = segment.label;
-                if (label) {
-                    if (label.options.position === OUTSIDE_END) {
-                        if (label.orientation === RIGHT) {
-                            rightSideLabels.push(label);
-                        } else {
-                            leftSideLabels.push(label);
-                        }
-                    }
-                }
-            }
-
-            if (leftSideLabels.length > 0) {
-                leftSideLabels.sort(chart.labelComparator(true));
-                chart.leftLabelsReflow(leftSideLabels);
-            }
-
-            if (rightSideLabels.length > 0) {
-                rightSideLabels.sort(chart.labelComparator(false));
-                chart.rightLabelsReflow(rightSideLabels);
-            }
-
-            chart.box = newBox;
-        },
-
-        leftLabelsReflow: function(labels) {
-            var chart = this,
-                distances = chart.distanceBetweenLabels(labels);
-
-            chart.distributeLabels(distances, labels);
-        },
-
-        rightLabelsReflow: function(labels) {
-            var chart = this,
-                distances = chart.distanceBetweenLabels(labels);
-
-            chart.distributeLabels(distances, labels);
-        },
-
-        distanceBetweenLabels: function(labels) {
-            var chart = this,
-                segment = chart.segments[0],
-                sector = segment.sector,
-                firstBox = labels[0].box,
-                secondBox,
-                count = labels.length - 1,
-                distances = [],
-                distance,
-                lr = sector.r + segment.options.labels.distance,
-                i;
-
-            distance = round(firstBox.y1 - (sector.c.y - lr - firstBox.height() - firstBox.height() / 2));
-            distances.push(distance);
-            for (i = 0; i < count; i++) {
-                firstBox = labels[i].box;
-                secondBox = labels[i + 1].box;
-                distance = round(secondBox.y1 - firstBox.y2);
-                distances.push(distance);
-            }
-            distance = round(sector.c.y + lr - labels[count].box.y2 - labels[count].box.height() / 2);
-            distances.push(distance);
-
-            return distances;
-        },
-
-        distributeLabels: function(distances, labels) {
-            var chart = this,
-                count = distances.length,
-                remaining,
-                left,
-                right,
-                i;
-
-            for (i = 0; i < count; i++) {
-                left = right = i;
-                remaining = -distances[i];
-                while(remaining > 0 && (left >= 0 || right < count)) {
-                    remaining = chart._takeDistance(distances, i, --left, remaining);
-                    remaining = chart._takeDistance(distances, i, ++right, remaining);
-                }
-            }
-
-            chart.reflowLabels(distances, labels);
-        },
-
-        _takeDistance: function(distances, anchor, position, amount) {
-            if (distances[position] > 0) {
-                var available = math.min(distances[position], amount);
-                amount -= available;
-                distances[position] -= available;
-                distances[anchor] += available;
-            }
-
-            return amount;
-        },
-
-        reflowLabels: function(distances, labels) {
-            var chart = this,
-                segments = chart.segments,
-                segment = segments[0],
-                sector = segment.sector,
-                labelsCount = labels.length,
-                labelOptions = segment.options.labels,
-                labelDistance = labelOptions.distance,
-                boxY = sector.c.y - (sector.r + labelDistance) - labels[0].box.height(),
-                label,
-                boxX,
-                box,
-                i;
-
-            distances[0] += 2;
-            for (i = 0; i < labelsCount; i++) {
-                label = labels[i];
-                boxY += distances[i];
-                box = label.box;
-                boxX = chart.hAlignLabel(
-                    box.x2,
-                    sector.clone().expand(labelDistance),
-                    boxY,
-                    boxY + box.height(),
-                    label.orientation == RIGHT);
-
-                if (label.orientation == RIGHT) {
-                    if (labelOptions.align !== CIRCLE) {
-                        boxX = sector.r + sector.c.x + labelDistance;
-                    }
-                    label.reflow(new Box2D(boxX + box.width(), boxY,
-                        boxX, boxY));
-                } else {
-                    if (labelOptions.align !== CIRCLE) {
-                        boxX = sector.c.x - sector.r - labelDistance;
-                    }
-                    label.reflow(new Box2D(boxX - box.width(), boxY,
-                        boxX, boxY));
-                }
-
-                boxY += box.height();
-            }
-        },
-
-        getViewElements: function(view) {
-            var chart = this,
-                options = chart.options,
-                connectors = options.connectors,
-                segments = chart.segments,
-                connectorLine,
-                sector,
-                count = segments.length,
-                space = 4,
-                angle,
-                lines = [],
-                points,
-                segment,
-                seriesIx,
-                label,
-                i;
-
-            for (i = 0; i < count; i++) {
-                segment = segments[i];
-                sector = segment.sector;
-                angle = sector.middle();
-                label = segment.label;
-                seriesIx = { seriesId: segment.seriesIx };
-
-                if (label) {
-                    points = [];
-                    if (label.options.position === OUTSIDE_END && segment.value !== 0) {
-                        var box = label.box,
-                            centerPoint = sector.c,
-                            start = sector.point(angle),
-                            middle = new Point2D(box.x1, box.center().y),
-                            sr,
-                            end,
-                            crossing;
-
-                        start = sector.clone().expand(connectors.padding).point(angle);
-                        points.push(start);
-                        if (label.orientation == RIGHT) {
-                            end = new Point2D(box.x1 - connectors.padding, box.center().y);
-                            crossing = intersection(centerPoint, start, middle, end);
-                            middle = new Point2D(end.x - space, end.y);
-                            crossing = crossing || middle;
-                            crossing.x = math.min(crossing.x, middle.x);
-
-                            if (chart.pointInCircle(crossing, sector.c, sector.r + space) ||
-                                crossing.x < sector.c.x) {
-                                sr = sector.c.x + sector.r + space;
-                                if (segment.options.labels.align !== COLUMN) {
-                                    if (sr < middle.x) {
-                                        points.push(new Point2D(sr, start.y));
-                                    } else {
-                                        points.push(new Point2D(start.x + space * 2, start.y));
-                                    }
-                                } else {
-                                    points.push(new Point2D(sr, start.y));
-                                }
-                                points.push(new Point2D(middle.x, end.y));
-                            } else {
-                                crossing.y = end.y;
-                                points.push(crossing);
-                            }
-                        } else {
-                            end = new Point2D(box.x2 + connectors.padding, box.center().y);
-                            crossing = intersection(centerPoint, start, middle, end);
-                            middle = new Point2D(end.x + space, end.y);
-                            crossing = crossing || middle;
-                            crossing.x = math.max(crossing.x, middle.x);
-
-                            if (chart.pointInCircle(crossing, sector.c, sector.r + space) ||
-                                crossing.x > sector.c.x) {
-                                sr = sector.c.x - sector.r - space;
-                                if (segment.options.labels.align !== COLUMN) {
-                                    if (sr > middle.x) {
-                                        points.push(new Point2D(sr, start.y));
-                                    } else {
-                                        points.push(new Point2D(start.x - space * 2, start.y));
-                                    }
-                                } else {
-                                    points.push(new Point2D(sr, start.y));
-                                }
-                                points.push(new Point2D(middle.x, end.y));
-                            } else {
-                                crossing.y = end.y;
-                                points.push(crossing);
-                            }
-                        }
-
-                        points.push(end);
-                        connectorLine = view.createPolyline(points, false, {
-                            id: uniqueId(),
-                            stroke: connectors.color,
-                            strokeWidth: connectors.width,
-                            animation: {
-                                type: FADEIN,
-                                delay: segment.categoryIx * PIE_SECTOR_ANIM_DELAY
-                            },
-                            data: { modelId: segment.options.modelId }
-                        });
-
-                        lines.push(connectorLine);
-                    }
-                }
-            }
-
-            append(lines,
-                ChartElement.fn.getViewElements.call(chart, view));
-
-            return lines;
-        },
-
-        labelComparator: function (reverse) {
-            reverse = (reverse) ? -1 : 1;
-
-            return function(a, b) {
-                a = (a.parent.sector.middle() + 270) % 360;
-                b = (b.parent.sector.middle() + 270) % 360;
-                return (a - b) * reverse;
-            };
-        },
-
-        hAlignLabel: function(originalX, sector, y1, y2, direction) {
-            var cx = sector.c.x,
-                cy = sector.c.y,
-                r = sector.r,
-                t = math.min(math.abs(cy - y1), math.abs(cy - y2));
-
-            if (t > r) {
-                return originalX;
-            } else {
-                return cx + math.sqrt((r * r) - (t * t)) * (direction ? 1 : -1);
-            }
-        },
-
-        pointInCircle: function(point, c, r) {
-            return sqr(c.x - point.x) + sqr(c.y - point.y) < sqr(r);
-        },
-
-        formatPointValue: function(value, format) {
-            return autoFormat(format, value);
-        }
-    });
-
-    var DonutSegment = ChartElement.extend({
-        init: function(value, sector, options) {
-            var segment = this;
-
-            segment.value = value;
-            segment.sector = sector;
-            segment.makeDiscoverable();
-
-            ChartElement.fn.init.call(segment, options);
-        },
-
-        options: {
-            color: WHITE,
-            overlay: {
-                gradient: CIRCLE_GLASS
-            },
-            border: {
-                width: 0.5
-            },
-            labels: {
-                visible: false,
-                distance: 35,
-                font: DEFAULT_FONT,
-                margin: getSpacing(0.5),
-                align: CIRCLE,
-                zIndex: 1,
-                position: CENTER
-            },
-            animation: {
-                type: PIE
-            },
-            highlight: {
-                visible: true,
-                border: {
-                    width: 1
-                }
-            }
-        },
-
-        render: function() {
-            var segment = this,
-                options = segment.options,
-                labels = options.labels,
-                labelText = segment.value,
-                labelTemplate;
-
-            if (segment._rendered) {
-                return;
-            } else {
-                segment._rendered = true;
-            }
-
-            if (labels.template) {
-                labelTemplate = template(labels.template);
-                labelText = labelTemplate({
-                    dataItem: segment.dataItem,
-                    category: segment.category,
-                    value: segment.value,
-                    series: segment.series,
-                    percentage: segment.percentage
-                });
-            }
-
-            if (labels.visible) {
-                segment.label = new TextBox(labelText, deepExtend({}, labels, {
-                        id: uniqueId(),
-                        align: CENTER,
-                        vAlign: "",
-                        animation: {
-                            type: FADEIN,
-                            delay: segment.categoryIx * PIE_SECTOR_ANIM_DELAY
-                        }
-                    }));
-
-                segment.append(segment.label);
-            }
-        },
-
-        reflow: function(targetBox) {
-            var segment = this;
-
-            segment.render();
-
-            segment.box = targetBox;
-            targetBox.clone();
-
-            segment.reflowLabel();
-        },
-
-        reflowLabel: function() {
-            var segment = this,
-                sector = segment.sector.clone(),
-                options = segment.options,
-                label = segment.label,
-                labelsOptions = options.labels,
-                labelsDistance = labelsOptions.distance,
-                lp,
-                x1,
-                angle = sector.middle(),
-                labelWidth,
-                labelHeight;
-
-            if (label) {
-                labelHeight = label.box.height();
-                labelWidth = label.box.width();
-                if (labelsOptions.position == CENTER) {
-                    sector.r -= (sector.r - sector.ir) / 2 ;
-                    lp = sector.point(angle);
-                    label.reflow(new Box2D(lp.x, lp.y - labelHeight / 2, lp.x, lp.y));
-                } else if (labelsOptions.position == INSIDE_END) {
-                    sector.r = sector.r - labelHeight / 2;
-                    lp = sector.point(angle);
-                    label.reflow(new Box2D(lp.x, lp.y - labelHeight / 2, lp.x, lp.y));
-                } else {
-                    lp = sector.clone().expand(labelsDistance).point(angle);
-                    if (lp.x >= sector.c.x) {
-                        x1 = lp.x + labelWidth;
-                        label.orientation = RIGHT;
-                    } else {
-                        x1 = lp.x - labelWidth;
-                        label.orientation = LEFT;
-                    }
-                    label.reflow(new Box2D(x1, lp.y - labelHeight, lp.x, lp.y));
-                }
-            }
-        },
-
-        getViewElements: function(view) {
-            var segment = this,
-                sector = segment.sector,
-                options = segment.options,
-                borderOptions = options.border || {},
-                border = borderOptions.width > 0 ? {
-                    stroke: borderOptions.color,
-                    strokeWidth: borderOptions.width,
-                    dashType: borderOptions.dashType
-                } : {},
-                elements = [],
-                overlay = options.overlay;
-
-            if (overlay) {
-                overlay = deepExtend({}, options.overlay, {
-                    r: sector.r,
-                    ir: sector.ir,
-                    cx: sector.c.x,
-                    cy: sector.c.y,
-                    bbox: sector.getBBox()
-                });
-            }
-
-            if (segment.value !== 0) {
-                elements.push(view.createRing(sector, deepExtend({
-                    id: options.id,
-                    fill: options.color,
-                    overlay: overlay,
-                    fillOpacity: options.opacity,
-                    strokeOpacity: options.opacity,
-                    animation: deepExtend(options.animation, {
-                        delay: segment.categoryIx * PIE_SECTOR_ANIM_DELAY
-                    }),
-                    data: { modelId: options.modelId }
-                }, border)));
-            }
-
-            append(elements,
-                ChartElement.fn.getViewElements.call(segment, view)
-            );
-
-            return elements;
-        },
-
-        getOutlineElement: function(view, options) {
-            var segment = this,
-                highlight = segment.options.highlight || {},
-                border = highlight.border || {},
-                outlineId = segment.options.id + OUTLINE_SUFFIX,
-                element;
-
-            options = deepExtend({}, options, { id: outlineId });
-
-            if (segment.value !== 0) {
-                element = view.createRing(segment.sector, deepExtend({}, options, {
-                    fill: highlight.color,
-                    fillOpacity: highlight.opacity,
-                    strokeOpacity: border.opacity,
-                    strokeWidth: border.width,
-                    stroke: border.color,
-                    data: { modelId: segment.options.modelId }
-                }));
-            }
-
-            return element;
-        },
-
-        tooltipAnchor: function(tooltipWidth, tooltipHeight) {
-            var w = tooltipWidth / 2,
-                h = tooltipHeight / 2,
-                r = math.sqrt((w * w) + (h * h)),
-                sector = this.sector.clone().expand(r + TOOLTIP_OFFSET),
-                tooltipCenter = sector.point(sector.middle());
-
-            return new Point2D(tooltipCenter.x - w, tooltipCenter.y - h);
-        },
-
-        formatPointValue: function(format) {
-            var point = this;
-
-            return point.owner.formatPointValue(point.value, format);
-        }
-    });
-    deepExtend(DonutSegment.fn, PointEventsMixin);
-
-    var DonutChart = ChartElement.extend({
         init: function(plotArea, options) {
             var chart = this;
 
@@ -3753,7 +3082,7 @@
             var chart = this,
                 segment;
 
-            segment = new DonutSegment(value, sector, fields.series);
+            segment = new PieSegment(value, sector, fields.series);
             segment.options.id = uniqueId();
             extend(segment, fields);
             chart.append(segment);
@@ -3823,75 +3152,40 @@
                 newBox = new Box2D(box.x1, box.y1,
                     box.x1 + minWidth, box.y1 + minWidth),
                 newBoxCenter = newBox.center(),
+                seriesConfigs = chart.seriesConfigs || [],
                 boxCenter = box.center(),
-                series = options.series,
-                currentSeries,
                 segments = chart.segments,
                 count = segments.length,
-                seriesCount = series.length,
+                seriesCount = options.series.length,
                 leftSideLabels = [],
                 rightSideLabels = [],
-                seriesWithoutSize = 0,
+                seriesConfig,
+                seriesIndex,
                 label,
                 segment,
                 sector,
-                holeSize,
-                totalSize,
-                size,
-                margin = 0,
-                seriesConfigs = [],
-                seriesConfig,
-                seriesIndex,
-                c, i, r, ir = 0;
+                r, i, c;
 
             padding = padding > halfMinWidth - space ? halfMinWidth - space : padding,
             newBox.translate(boxCenter.x - newBoxCenter.x, boxCenter.y - newBoxCenter.y);
-            totalSize = halfMinWidth - padding;
+            r = halfMinWidth - padding;
             c = new Point2D(
-                totalSize + newBox.x1 + padding,
-                totalSize + newBox.y1 + padding
+                r + newBox.x1 + padding,
+                r + newBox.y1 + padding
             );
-
-            for (i = 0; i < seriesCount; i++) {
-                currentSeries = series[i];
-                if (i === 0 && defined(currentSeries.holeSize)) {
-                    holeSize = currentSeries.holeSize;
-                    totalSize -= currentSeries.holeSize;
-                }
-
-                if (defined(currentSeries.size)) {
-                    totalSize -= currentSeries.size;
-                } else {
-                    seriesWithoutSize++;
-                }
-
-                if (defined(currentSeries.margin)) {
-                    totalSize -= currentSeries.margin;
-                } else {
-                    currentSeries.margin = 0;
-                }
-            }
-
-            ir = holeSize || 0;
-
-            for (i = 0; i < seriesCount; i++) {
-                currentSeries = series[i];
-                size = defined(currentSeries.size) ? currentSeries.size : totalSize / seriesWithoutSize;
-                ir += margin;
-                r = ir + size;
-                seriesConfigs.push({ ir: ir, r: r });
-                margin = currentSeries.margin;
-                ir = r;
-            }
 
             for (i = 0; i < count; i++) {
                 segment = segments[i];
+
                 sector = segment.sector;
-                seriesIndex = segment.seriesIx;
-                seriesConfig = seriesConfigs[seriesIndex];
+                sector.r = r;
                 sector.c = c;
-                sector.ir = seriesConfig.ir;
-                sector.r = seriesConfig.r;
+                seriesIndex = segment.seriesIx;
+                if (seriesConfigs.length) {
+                    seriesConfig = seriesConfigs[seriesIndex];
+                    sector.ir = seriesConfig.ir;
+                    sector.r = seriesConfig.r;
+                }
 
                 if (seriesIndex == seriesCount - 1 && segment.explode) {
                     sector.c = sector.clone().radius(sector.r * 0.15).point(sector.middle());
@@ -4179,8 +3473,129 @@
             return sqr(c.x - point.x) + sqr(c.y - point.y) < sqr(r);
         },
 
-        formatPointValue: function(value, tooltipFormat) {
-            return format(tooltipFormat, value);
+        formatPointValue: function(value, format) {
+            return autoFormat(format, value);
+        }
+    });
+
+    var DonutSegment = PieSegment.extend({
+        options: {
+            overlay: {
+                gradient: CIRCLE_GLASS
+            },
+            labels: {
+                position: CENTER
+            },
+            animation: {
+                type: PIE
+            }
+        },
+
+        reflowLabel: function() {
+            var segment = this,
+                sector = segment.sector.clone(),
+                options = segment.options,
+                label = segment.label,
+                labelsOptions = options.labels,
+                lp,
+                angle = sector.middle(),
+                labelHeight;
+
+            if (label) {
+                labelHeight = label.box.height();
+                if (labelsOptions.position == CENTER) {
+                    sector.r -= (sector.r - sector.ir) / 2;
+                    lp = sector.point(angle);
+                    label.reflow(new Box2D(lp.x, lp.y - labelHeight / 2, lp.x, lp.y));
+                } else {
+                    PieSegment.fn.reflowLabel.call(segment);
+                }
+            }
+        },
+
+        createSegment: function(view, sector, options) {
+            return view.createRing(sector, options);
+        }
+    });
+    deepExtend(DonutSegment.fn, PointEventsMixin);
+
+    var DonutChart = PieChart.extend({
+        options: {
+            startAngle: 90,
+            connectors: {
+                width: 1,
+                color: "#939393",
+                padding: 4
+            }
+        },
+
+        addValue: function(value, sector, fields) {
+            var chart = this,
+                segment;
+
+            segment = new DonutSegment(value, sector, fields.series);
+            segment.options.id = uniqueId();
+            extend(segment, fields);
+            chart.append(segment);
+            chart.segments.push(segment);
+        },
+
+        reflow: function(targetBox) {
+            var chart = this,
+                options = chart.options,
+                box = targetBox.clone(),
+                space = 5,
+                minWidth = math.min(box.width(), box.height()),
+                halfMinWidth = minWidth / 2,
+                defaultPadding = minWidth - minWidth * 0.85,
+                padding = defined(options.padding) ? options.padding : defaultPadding,
+                series = options.series,
+                currentSeries,
+                seriesCount = series.length,
+                seriesWithoutSize = 0,
+                holeSize,
+                totalSize,
+                size,
+                margin = 0,
+                i, r, ir = 0;
+
+            chart.seriesConfigs = [];
+            padding = padding > halfMinWidth - space ? halfMinWidth - space : padding,
+            totalSize = halfMinWidth - padding;
+
+            for (i = 0; i < seriesCount; i++) {
+                currentSeries = series[i];
+                if (i === 0 && defined(currentSeries.holeSize)) {
+                    holeSize = currentSeries.holeSize;
+                    totalSize -= currentSeries.holeSize;
+                }
+
+                if (defined(currentSeries.size)) {
+                    totalSize -= currentSeries.size;
+                } else {
+                    seriesWithoutSize++;
+                }
+
+                if (defined(currentSeries.margin)) {
+                    totalSize -= currentSeries.margin;
+                } else {
+                    currentSeries.margin = 0;
+                }
+            }
+
+            ir = holeSize || 0;
+
+            for (i = 0; i < seriesCount; i++) {
+                currentSeries = series[i];
+                size = defined(currentSeries.size) ? currentSeries.size : totalSize / seriesWithoutSize;
+                ir += margin;
+                r = ir + size;
+                chart.seriesConfigs.push({ ir: ir, r: r });
+                margin = currentSeries.margin;
+                ir = r;
+            }
+
+            PieChart.fn.reflow.call(chart, targetBox);
         }
     });
 
