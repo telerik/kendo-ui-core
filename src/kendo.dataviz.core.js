@@ -1611,17 +1611,9 @@
                 color: WHITE,
                 opacity: 0
             }, {
-                offset: 0.1,
-                color: WHITE,
-                opacity: 0
-            }, {
                 offset: 0.25,
                 color: WHITE,
                 opacity: 0.3
-            }, {
-                offset: 0.92,
-                color: WHITE,
-                opacity: 0
             }, {
                 offset: 1,
                 color: WHITE,
@@ -1636,10 +1628,6 @@
                 opacity: 0.55
             }, {
                 offset: 0.65,
-                color: WHITE,
-                opacity: 0
-            }, {
-                offset: 0.95,
                 color: WHITE,
                 opacity: 0
             }, {
