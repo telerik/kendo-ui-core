@@ -27,6 +27,7 @@
         DEFAULT_WIDTH = dataviz.DEFAULT_WIDTH,
         DEFAULT_HEIGHT = dataviz.DEFAULT_HEIGHT,
         DEFAULT_FONT = dataviz.DEFAULT_FONT,
+        DONUT = "donut",
         NONE = "none",
         RADIAL = "radial",
         SOLID = "solid",
@@ -189,7 +190,8 @@
 
         createGradient: function(options) {
             if (options.type === RADIAL) {
-                //return new SVGRadialGradient(options);
+                return new SVGRadialGradient(options);
+            } else if (options.type == DONUT) {
                 return new SVGDonutGradient(options);
             } else {
                 return new SVGLinearGradient(options);
