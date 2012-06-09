@@ -3741,7 +3741,7 @@
                         explode: explode,
                         visibleInLegend: currentData.visibleInLegend,
                         margin: currentData.margin,
-                        size: currentData.Size
+                        size: currentData.size
                     });
 
                     currentAngle += angle;

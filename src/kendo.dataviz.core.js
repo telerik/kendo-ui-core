@@ -1651,22 +1651,15 @@
         circleGlass: {
             type: RADIAL,
             stops: [{
-                color: BLACK,
-                opacity: 0.5
-            }, {
-                offset: 0.2,
-                color: BLACK,
-                opacity: 0.15
-            }, {
-                offset: 0.2,
+                offset: 0,
                 color: WHITE,
-                opacity: 0.15
+                opacity: 0
             }, {
-                offset: 0.8,
+                offset: 0.5,
                 color: WHITE,
-                opacity: 0.15
+                opacity: 0.3
             }, {
-                offset: 0.8,
+                offset: 0.99,
                 color: WHITE,
                 opacity: 0
             }]
