@@ -228,67 +228,6 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Sets value at which the first perpendicular axis crosses this axis.
-        /// </summary>
-        /// <param name="axisCrossingValue">The value at which the first perpendicular axis crosses this axis.</param>
-        /// <example>
-        /// <code lang="CS">
-        /// &lt;%= Html.Kendo().Chart(Model)
-        ///            .Name("Chart")
-        ///            .CategoryAxis(axis => axis.AxisCrossingValue(4))
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public TAxisBuilder AxisCrossingValue(double axisCrossingValue)
-        {
-            Axis.AxisCrossingValues = new double[] { axisCrossingValue };
-
-            return this as TAxisBuilder;
-        }
-
-        /// <summary>
-        /// Sets value at which perpendicular axes cross this axis.
-        /// </summary>
-        /// <param name="axisCrossingValues">The values at which perpendicular axes cross this axis.</param>
-        /// <example>
-        /// <code lang="CS">
-        /// &lt;%= Html.Kendo().Chart(Model)
-        ///            .Name("Chart")
-        ///            .CategoryAxis(axis => axis.AxisCrossingValue(0, 10))
-        ///            .ValueAxis(axis => axis.Numeric().Title("Axis 1"))
-        ///            .ValueAxis(axis => axis.Numeric("secondary").Title("Axis 2"))
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public TAxisBuilder AxisCrossingValue(params double[] axisCrossingValues)
-        {
-            Axis.AxisCrossingValues = axisCrossingValues;
-
-            return this as TAxisBuilder;
-        }
-
-        /// <summary>
-        /// Sets value at which perpendicular axes cross this axis.
-        /// </summary>
-        /// <param name="axisCrossingValues">The values at which perpendicular axes cross this axis.</param>
-        /// <example>
-        /// <code lang="CS">
-        /// &lt;%= Html.Kendo().Chart(Model)
-        ///            .Name("Chart")
-        ///            .CategoryAxis(axis => axis.AxisCrossingValue(new double[] { 0, 10 }))
-        ///            .ValueAxis(axis => axis.Numeric().Title("Axis 1"))
-        ///            .ValueAxis(axis => axis.Numeric("secondary").Title("Axis 2"))
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public TAxisBuilder AxisCrossingValue(IEnumerable<double> axisCrossingValues)
-        {
-            Axis.AxisCrossingValues = axisCrossingValues;
-
-            return this as TAxisBuilder;
-        }
-
-        /// <summary>
         /// Configures the axis labels.
         /// </summary>
         /// <param name="configurator">The configuration action.</param>

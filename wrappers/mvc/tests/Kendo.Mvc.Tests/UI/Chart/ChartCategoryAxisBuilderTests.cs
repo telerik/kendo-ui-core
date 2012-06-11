@@ -81,6 +81,45 @@ namespace Kendo.Mvc.UI.Tests.Chart
             axis.Type.ShouldEqual(ChartCategoryAxisType.Date);
         }
 
+        [Fact]
+        public void AxisCrossingValue_should_set_single_value()
+        {
+            builder.AxisCrossingValue(42);
+            axis.AxisCrossingValues.ShouldEqual(new double[] { 42 });
+        }
+
+        [Fact]
+        public void AxisCrossingValue_should_return_builder()
+        {
+            builder.AxisCrossingValue(42).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void AxisCrossingValue_should_set_multiple_values_from_params()
+        {
+            builder.AxisCrossingValue(42, 43);
+            axis.AxisCrossingValues.ShouldEqual(new double[] { 42, 43 });
+        }
+
+        [Fact]
+        public void AxisCrossingValue_overload_with_params_should_return_builder()
+        {
+            builder.AxisCrossingValue(42, 43).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void AxisCrossingValue_should_set_multiple_values_from_enumerable()
+        {
+            builder.AxisCrossingValue(new double[] { 42, 43 });
+            axis.AxisCrossingValues.ShouldEqual(new double[] { 42, 43 });
+        }
+
+        [Fact]
+        public void AxisCrossingValue_overload_with_enumerable_should_return_builder()
+        {
+            builder.AxisCrossingValue(new double[] { 42, 43 }).ShouldBeSameAs(builder);
+        }
+
         private void AssertCategories<T>(IEnumerable<T> categories)
         {
             var expectedCategories = new Queue<T>();

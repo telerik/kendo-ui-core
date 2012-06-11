@@ -2,6 +2,7 @@ namespace Kendo.Mvc.UI
 {
     using System;
     using System.Collections;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Represents a category axis in the <see cref="Chart{T}"/> component
@@ -16,9 +17,19 @@ namespace Kendo.Mvc.UI
         public ChartCategoryAxis(Chart<T> chart)
             : base(chart)
         {
+            Labels = new ChartAxisLabels();
             MajorGridLines = new ChartLine();
             MinorGridLines = new ChartLine();
-            Labels = new ChartAxisLabels();
+            AxisCrossingValues = new List<double>();
+        }
+
+        /// <summary>
+        /// The values at which perpendicular axes cross this axis.
+        /// </summary>
+        public IEnumerable<double> AxisCrossingValues
+        {
+            get;
+            set;
         }
 
         /// <summary>

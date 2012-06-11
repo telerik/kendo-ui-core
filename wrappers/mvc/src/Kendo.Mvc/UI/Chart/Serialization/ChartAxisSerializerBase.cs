@@ -18,7 +18,6 @@ namespace Kendo.Mvc.UI
             var result = new Dictionary<string, object>();
             
             FluentDictionary.For(result)
-                .Add("axisCrossingValue", axis.AxisCrossingValues, () => axis.AxisCrossingValues.Count() > 0)
                 .Add("name", axis.Name, string.Empty)
                 .Add("color", axis.Color, string.Empty)
                 .Add("reverse", axis.Reverse, () => axis.Reverse.HasValue);

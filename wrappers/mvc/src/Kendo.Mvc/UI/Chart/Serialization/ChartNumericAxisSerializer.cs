@@ -1,6 +1,7 @@
 namespace Kendo.Mvc.UI
 {
     using System.Collections.Generic;
+    using System.Linq;
     using Kendo.Mvc.Infrastructure;
 
     internal class ChartNumericAxisSerializer : ChartAxisSerializerBase
@@ -18,6 +19,7 @@ namespace Kendo.Mvc.UI
             var result = base.Serialize();
 
             FluentDictionary.For(result)
+                .Add("axisCrossingValue", axis.AxisCrossingValues, () => axis.AxisCrossingValues.Count() > 0)
                 .Add("min", axis.Min, () => axis.Min.HasValue)
                 .Add("max", axis.Max, () => axis.Max.HasValue)
                 .Add("majorUnit", axis.MajorUnit, () => axis.MajorUnit.HasValue);

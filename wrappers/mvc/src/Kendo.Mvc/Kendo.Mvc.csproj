@@ -103,6 +103,7 @@
     <Compile Include="..\shared\CommonAssemblyInfo.cs">
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\MemberExpressionExtensions.cs" />
     <Compile Include="Extensions\ModelStateExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
@@ -168,6 +169,8 @@
     <Compile Include="UI\Chart\Axes\ChartAxisTitle.cs" />
     <Compile Include="UI\Chart\Axes\ChartAxisTicks.cs" />
     <Compile Include="UI\Chart\Axes\ChartAxisLabelDateFormats.cs" />
+    <Compile Include="UI\Chart\Axes\ChartDateAxis.cs" />
+    <Compile Include="UI\Chart\Axes\IChartDateAxis.cs" />
     <Compile Include="UI\Chart\Axes\IChartAxisDefaults.cs" />
     <Compile Include="UI\Chart\Axes\IChartNumericAxis.cs" />
     <Compile Include="UI\Chart\Axes\IChartAxis.cs" />
@@ -221,6 +224,7 @@
     <Compile Include="UI\Chart\Fluent\ChartDateCategoryAxisBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartDateAxisLabelsBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartAxisLabelsDateFormatsBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartDateAxisBuilder.cs" />
     <Compile Include="UI\Chart\Serialization\ChartAxisSerializerBase.cs" />
     <Compile Include="UI\Chart\Serialization\ChartBarSeriesOverlaySerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartLabelsBase.cs" />
@@ -237,6 +241,7 @@
     <Compile Include="UI\Chart\Serialization\ChartAreaSeriesSerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartAxisTicksSerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartAxisLabelsDateFormatsSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartDateAxisSerializer.cs" />
     <Compile Include="UI\Chart\Series\ChartMarkers.cs" />
     <Compile Include="UI\Chart\Fluent\ChartLineSeriesBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartPointLabelsBuilder.cs" />

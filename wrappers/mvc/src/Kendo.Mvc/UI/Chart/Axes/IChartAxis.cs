@@ -33,11 +33,6 @@ namespace Kendo.Mvc.UI
         ChartLine Line { get; set; }
 
         /// <summary>
-        /// The values at which perpendicular axes cross this axis.
-        /// </summary>
-        IEnumerable<double> AxisCrossingValues { get; set; }
-
-        /// <summary>
         /// The axis labels.
         /// </summary>
         ChartAxisLabels Labels { get; set; }

@@ -3,8 +3,8 @@ namespace Kendo.Mvc.UI
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Globalization;
     using System.Linq;
+    using Kendo.Mvc.Extensions;
     using Kendo.Mvc.Infrastructure;
 
     internal class ChartCategoryAxisSerializer : ChartAxisSerializerBase
@@ -24,8 +24,9 @@ namespace Kendo.Mvc.UI
                 .Add("type", axis.Type.ToString(), () => axis.Type != null)
                 .Add("categories", SerializeCategories(), () => axis.Categories != null)
                 .Add("field", axis.Member, () => axis.Categories == null && axis.Member != null)
-                .Add("min", FormatDate(axis.Min), () => axis.Min != null)
-                .Add("max", FormatDate(axis.Max), () => axis.Max != null);
+                .Add("axisCrossingValue", axis.AxisCrossingValues, () => axis.AxisCrossingValues.Count() > 0)
+                .Add("min", axis.Min.ToJavaScriptString(), () => axis.Min != null)
+                .Add("max", axis.Max.ToJavaScriptString(), () => axis.Max != null);
 
             if (axis.BaseUnit != null) {
                 result.Add("baseUnit", axis.BaseUnit.ToString().ToLowerInvariant());
@@ -41,7 +42,7 @@ namespace Kendo.Mvc.UI
                 var categories = new List<string>();
                 foreach (DateTime? date in axis.Categories)
                 {
-                    categories.Add(FormatDate(date));
+                    categories.Add(date.ToJavaScriptString());
                 }
 
                 return categories;
@@ -50,13 +51,6 @@ namespace Kendo.Mvc.UI
             {
                 return axis.Categories;
             }
-        }
-        
-        private string FormatDate(DateTime? date)
-        {
-            return date.HasValue ?
-                date.Value.ToString("yyyy/MM/dd HH:mm:ss", CultureInfo.InvariantCulture) :
-                string.Empty;
         }
     }
 }
