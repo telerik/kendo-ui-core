@@ -2501,12 +2501,9 @@
     var Node = Model.define({
         init: function(value) {
             var that = this,
-                data = {},
                 children = {};
 
             kendo.data.Model.fn.init.call(that, value);
-
-            data[that.idField] = that.id;
 
             children = extend(true, {}, that.children, {
                 data: value
