@@ -166,7 +166,7 @@
          * @extends kendo.Observable
          * @param {DomElement} element the DOM element from which the drag event starts.
          * @param {Object} options Configuration options.
-         * @option {Integer} [threshold] <0> The minimum distance the mouse/touch should move before the event is triggered.
+         * @option {Number} [threshold] <0> The minimum distance the mouse/touch should move before the event is triggered.
          * @option {Boolean} [global] <false> If set to true, the drag event will be tracked beyond the element boundaries.
          * @option {DomElement} [surface]  If set, the drag event will be tracked for the surface boundaries. By default, leaving the element boundaries will end the drag.
          * @option {Boolean} [allowSelection] <false> If set to true, the mousedown and selectstart events will not be prevented.
@@ -832,7 +832,7 @@
          * @extends kendo.ui.Widget
          * @param {DomElement} element DOM element
          * @param {Object} options Configuration options.
-         * @option {Integer} [distance] <5> The required distance that the mouse should travel in order to initiate a drag.
+         * @option {Number} [distance] <5> The required distance that the mouse should travel in order to initiate a drag.
          * @option {Selector} [filter] Selects child elements that are draggable if a widget is attached to a container.
          * @option {String} [group] <"default"> Used to group sets of draggable and drop targets. A draggable with the same group value as a drop target will be accepted by the drop target.
          * @option {String} [axis] <null> Constrains the hint movement to either the horizontal (x) or vertical (y) axis. Can be set to either "x" or "y".

@@ -510,10 +510,10 @@
             * @param {DomElement} e.dropTarget
             * The element that the node is placed over.
             *
-            * @param {Integer} e.pageX
+            * @param {Number} e.pageX
             * The x coordinate of the mouse.
             *
-            * @param {Integer} e.pageY
+            * @param {Number} e.pageY
             * The y coordinate of the mouse.
             *
             * @param {String} e.statusClass
