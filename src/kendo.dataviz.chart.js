@@ -76,6 +76,7 @@
         DEFAULT_PRECISION = dataviz.DEFAULT_PRECISION,
         DEFAULT_WIDTH = dataviz.DEFAULT_WIDTH,
         DONUT = "donut",
+        DONUT_SECTOR_ANIM_DELAY = 50
         FADEIN = "fadeIn",
         GLASS = "glass",
         HOURS = "hours",
@@ -2844,7 +2845,7 @@
                         vAlign: "",
                         animation: {
                             type: FADEIN,
-                            delay: segment.categoryIx * PIE_SECTOR_ANIM_DELAY
+                            delay: segment.animationDelay
                         }
                     }));
 
@@ -2932,9 +2933,10 @@
                     fillOpacity: options.opacity,
                     strokeOpacity: options.opacity,
                     animation: deepExtend(options.animation, {
-                        delay: segment.categoryIx * PIE_SECTOR_ANIM_DELAY
+                        delay: segment.animationDelay
                     }),
-                    data: { modelId: options.modelId }
+                    data: { modelId: options.modelId },
+                    zIndex: options.zIndex
                 }, border)));
             }
 
@@ -3074,7 +3076,9 @@
                         size: currentData.size,
                         overlay: {
                             id: overlayId + seriesIx
-                        }
+                        },
+                        zIndex: seriesCount - seriesIx,
+                        animationDelay: chart.animationDelay(i, seriesIx, seriesCount)
                     });
 
                     currentAngle += angle;
@@ -3434,7 +3438,7 @@
                             strokeWidth: connectors.width,
                             animation: {
                                 type: FADEIN,
-                                delay: segment.categoryIx * PIE_SECTOR_ANIM_DELAY
+                                delay: segment.animationDelay
                             },
                             data: { modelId: segment.options.modelId }
                         });
@@ -3479,6 +3483,10 @@
 
         formatPointValue: function(value, format) {
             return autoFormat(format, value);
+        },
+
+        animationDelay: function(categoryIndex, seriesIndex, seriesCount) {
+            return categoryIndex * PIE_SECTOR_ANIM_DELAY;
         }
     });
 
@@ -3600,6 +3608,11 @@
             }
 
             PieChart.fn.reflow.call(chart, targetBox);
+        },
+
+        animationDelay: function(categoryIndex, seriesIndex, seriesCount) {
+            return categoryIndex * DONUT_SECTOR_ANIM_DELAY +
+                (INITIAL_ANIMATION_DURATION * (seriesIndex + 1) / (seriesCount + 1));
         }
     });
 
@@ -4489,17 +4502,19 @@
         },
 
         setup: function() {
-            var sector = this.element.config;
-
+            var sector = this.element.config,
+                startRadius;
             this.endRadius = sector.r;
-            sector.r = 0;
+            startRadius = this.startRadius = sector.ir || 0;
+            sector.r = startRadius;
         },
 
         step: function(pos) {
             var endRadius = this.endRadius,
-                sector = this.element.config;
+                sector = this.element.config,
+                startRadius = this.startRadius;
 
-            sector.r = interpolateValue(0, endRadius, pos);
+            sector.r = interpolateValue(this.startRadius, endRadius, pos);
         }
     });
 
