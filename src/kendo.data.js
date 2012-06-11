@@ -2535,6 +2535,25 @@
     var HierarchicalDataSource = DataSource.extend({
         init: function(options) {
             DataSource.fn.init.call(this, extend(true, {}, { schema: { modelBase: Node, model: Node } }, options));
+        },
+
+        getByUid: function(uid) {
+            var idx, length, node, data;
+
+            node = DataSource.fn.getByUid.call(this, uid);
+
+            if (node) {
+                return node;
+            }
+
+            data = this._flatData(this.data())
+
+            for (idx = 0, length = data.length; idx < length; idx++) {
+                node = data[idx].children.getByUid(uid);
+                if (node) {
+                    return node;
+                }
+            }
         }
     });
 

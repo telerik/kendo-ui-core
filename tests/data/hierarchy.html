@@ -221,6 +221,17 @@
                 dataSource.data()[0].load();
             });
 
+            test("getByUid is recursive", function() {
+                var dataSource = categories();
+
+                dataSource.fetch();
+                dataSource.data()[0].load();
+
+                var product = dataSource.data()[0].children.data()[0];
+
+                strictEqual(dataSource.getByUid(product.uid), product);
+            });
+
         </script>
     </body>
 </html>
