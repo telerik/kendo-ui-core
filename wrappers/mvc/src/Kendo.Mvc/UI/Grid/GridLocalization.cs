@@ -112,5 +112,13 @@ namespace Kendo.Mvc.UI
                 return GetValue("SaveChanges");
             }
         }
+
+        public string DeleteConfirmation
+        {
+            get
+            {
+                return GetValue("DeleteConfirmation");
+            }
+        }
     }
 }

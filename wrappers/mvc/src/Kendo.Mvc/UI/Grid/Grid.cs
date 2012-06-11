@@ -48,7 +48,9 @@ namespace Kendo.Mvc.UI
             ColumnContextMenu = new GridColumnContextMenuSettings(this);
             Filtering = new GridFilteringSettings();
 
-            Editing = new GridEditingSettings<T>(this)
+            Localization = new GridLocalization(localizationService, CultureInfo.CurrentUICulture);
+
+            Editing = new GridEditingSettings<T>(this, Localization)
             {                
                 PopUp = new Window(viewContext, Initializer)
                 {
@@ -68,8 +70,7 @@ namespace Kendo.Mvc.UI
 
             Selection = new GridSelectionSettings();
 
-            ToolBar = new GridToolBarSettings<T>(this);
-            Localization = new GridLocalization(localizationService, CultureInfo.CurrentUICulture);
+            ToolBar = new GridToolBarSettings<T>(this);            
             NoRecordsTemplate = new HtmlTemplate();
 
             ValidationMetadata = new Dictionary<string, object>();

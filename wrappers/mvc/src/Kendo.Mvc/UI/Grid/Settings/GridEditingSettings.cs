@@ -28,10 +28,12 @@ namespace Kendo.Mvc.UI
         where T : class
     {
         private readonly IGrid grid;
+        private readonly IGridLocalization localization;
 
-        public GridEditingSettings(IGrid grid)
+        public GridEditingSettings(IGrid grid, IGridLocalization localization)
         {
             this.grid = grid;
+            this.localization = localization;
 
             DisplayDeleteConfirmation = true;
             //TODO: Implement edit form attributes
@@ -161,7 +163,7 @@ namespace Kendo.Mvc.UI
             }
 
             FluentDictionary.For(json)
-                .Add("confirmDelete", DisplayDeleteConfirmation, true)
+                .Add("confirmation", localization.DeleteConfirmation, () => DisplayDeleteConfirmation)
                 .Add("mode", Mode.ToString().ToLowerInvariant())
                 .Add("template", editorHtml, () => Mode != GridEditMode.InLine);
                 //TODO: Implement GridBeginEditEvent option                

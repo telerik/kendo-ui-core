@@ -45,5 +45,10 @@ namespace Kendo.Mvc.UI
         {
             get;
         }
+
+        string DeleteConfirmation
+        {
+            get;
+        }
     }
 }
