@@ -3582,10 +3582,12 @@
                     totalSize -= currentSeries.holeSize;
                 }
 
-                if (defined(currentSeries.size)) {
-                    totalSize -= currentSeries.size;
-                } else if (i != seriesCount - 1) {
-                    seriesWithoutSize++;
+                if (i != seriesCount - 1) {
+                    if (defined(currentSeries.size)) {
+                        totalSize -= currentSeries.size;
+                    } else {
+                        seriesWithoutSize++;
+                    }
                 }
 
                 if (defined(currentSeries.margin)) {

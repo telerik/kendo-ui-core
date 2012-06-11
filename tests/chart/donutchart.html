@@ -31,7 +31,7 @@
             function setupDonutChart(plotArea, options) {
                 view = new ViewStub();
 
-                donutChart = new dataviz.PieChart(plotArea, $.extend({}, { padding: 60 }, options));
+                donutChart = new dataviz.DonutChart(plotArea, $.extend({}, { padding: 60 }, options));
 
                 root = new dataviz.RootElement();
                 root.append(donutChart);
@@ -318,7 +318,7 @@
                 var labelElement,
                     segmentElement;
 
-                function createPieChart(options) {
+                function createDonutChart(options) {
                     var chart = createChart($.extend({
                         series: [{
                             type: "donut",
@@ -340,7 +340,7 @@
 
                 module("Donut Chart / Events / seriesClick ", {
                     setup: function() {
-                        createPieChart({
+                        createDonutChart({
                             seriesClick: function() { ok(true); }
                         });
                     },
@@ -358,7 +358,7 @@
                 // ------------------------------------------------------------
                 module("Donut Chart / Events / seriesHover", {
                     setup: function() {
-                        createPieChart({
+                        createDonutChart({
                             seriesHover: function() { ok(true); }
                         });
                     },
@@ -373,6 +373,54 @@
                     labelElement.mouseover();
                 });
 
+            })();
+
+            (function() {
+                var segments,
+                    chartBox = new Box2D(0,0,400,400);
+
+                function setupDonutChart(plotArea, options) {
+                    view = new ViewStub();
+
+                    var donutChart = new dataviz.DonutChart(plotArea, $.extend({}, {
+                        series: [{
+                            type: "donut",
+                            data: [1, 1],
+                            margin: 20
+                        }, {
+                            type: "donut",
+                            data: [1, 2],
+                            margin: 20
+                        }]}, options));
+
+                    donutChart.reflow(chartBox);
+                    donutChart.getViewElements(view);
+
+                    segments = donutChart.segments[0];
+                }
+                // ------------------------------------------------------------
+                function createDonutChart(options) {
+                    var chart = createChart($.extend({
+                    }, options));
+
+                    var plotArea = chart._model.children[1];
+//                    segments = plotArea.charts[0].segments;
+                }
+
+                module("Donut Chart / Series / Configuration", {
+                    setup: function() {
+                        createDonutChart({
+                            seriesClick: function() { ok(true); }
+                        });
+                    },
+                    teardown: destroyChart
+                });
+
+                test("first level segments have margin", function() {
+                    //$.each(segments, function(item) {
+                    //    ok(item.margin == 20);
+                    //});
+                });
             })();
 
         </script>
