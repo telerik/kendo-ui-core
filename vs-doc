@@ -97,6 +97,14 @@ processFilesRecursive("docs", /.+md/, function(fileName) {
     classes.push(theClass);
 });
 
+classes = classes.sort(function(a, b) {
+    if (a.name < b.name) {
+        return -1;
+    } else {
+        return 1;
+    }
+});
+
 var theTemplate = template(vsDocTemplate);
 
 console.log(theTemplate(classes));
