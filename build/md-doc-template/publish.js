@@ -31,21 +31,21 @@ function processClass(theClass) {
     }
 
     var description = theClass.properties.filter(function(x) { return x._name == "Description"; })[0];
-    var html = "# " + theClass.alias + "\n";
+    var html = "# " + theClass.alias;
 
     if (description) {
-        html += '## Description\n\n' +
-        outputDescription(description.comment).replace(/\r/g, "\n");
+        html += "\n\n## Description" +
+        "\n\n" + outputDescription(description.comment).replace(/\r/g, "\n");
     }
 
-    html += "\n\n------------------------------------------\n\n" +
-        '## Configuration\n\n' +
-        outputConfiguration(theClass) +
-        "\n\n------------------------------------------\n\n" +
-        '## Methods\n\n' +
+    html += "\n\n------------------------------------------" +
+        "\n\n## Configuration" +
+        outputConfiguration(theClass).replace(/\r/g, "\n") +
+        "\n\n------------------------------------------" +
+        "\n\n## Methods" +
         outputMethods(theClass).replace(/\r/g, "\n") +
-        "\n\n------------------------------------------\n\n" +
-        '## Events\n\n' +
+        "\n\n------------------------------------------" +
+        '\n\n## Events' +
         outputEvents(theClass).replace(/\r/g, "\n");
 
     if (html) {
@@ -71,7 +71,7 @@ function makeSortby(attribute) {
     }
 }
 function toCodeBlock(string) {
-    return "\n\n    " + string.replace(/\r/g, "\n    ") + "\n\n";
+    return "\n\n    " + string.replace(/\r/g, "\n    ");
 
 }
 
@@ -86,12 +86,12 @@ function outputDescription(description) {
         switch (tag.title) {
             case "exampleTitle":
                 hasTitle = true;
-                output += "\n#### " + toMarkdown(tag.desc);
+                output += "\n\n#### " + toMarkdown(tag.desc);
             break;
 
             case "example":
                 if (!hasTitle) {
-                    output += "\n#### Example";
+                    output += "\n\n#### Example";
                 }
 
                 output += toCodeBlock(tag.desc);
@@ -104,9 +104,12 @@ function outputDescription(description) {
             case "return":
             break;
 
+            case "name":
+            break;
+
             case "section":
             default:
-                output += "\n" + toMarkdown(tag.desc) + "\n";
+                output += toMarkdown(tag.desc);
             break;
         }
     }
@@ -115,7 +118,7 @@ function outputDescription(description) {
 }
 /////// Configuration
 
-    function outputConfiguration(data) {
+function outputConfiguration(data) {
     var ownOptions = data.comment.getTag("option")
         exampleTitleRe = /^[\r\n]?_exampleTitle(.*)/i,
         exampleRe = /[\r\n]?_example(([\r\n]|.)*)/i;
@@ -295,18 +298,18 @@ function outputDescription(description) {
 
 
     var optionsTemplate = tmpl(
-            '### `<%= name %>` ' +
-            "<%= type ? ': **' + type + '**'  : '' %> " +
-            "<%= defaultValue ? '*(default: ' + defaultValue + ')*' : '' %> \n\n" +
-            "<%= desc %>\n\n" +
+            "\n\n### `<%= name %>`" +
+            " <%= type ? ': **' + type + '**'  : '' %> " +
+            "<%= defaultValue ? '*(default: ' + defaultValue + ')*' : '' %>" +
+            "\n\n<%= toMarkdown(desc) %>" +
             '<% for (var exampleIdx = 0; typeof example != "undefined" && exampleIdx < example.length; exampleIdx++) { %>' +
-                    "#### Example\n\n" +
+                    "\n\n#### Example" +
                     "<%= toCodeBlock(example[exampleIdx]) %>" +
             '<% } %>' +
             '<%= typeof subOptions != "undefined" ? renderChildOptions(subOptions) : "" %>'
     );
 
-    function renderOptions (options) {
+    function renderOptions(options) {
         var html = "";
 
         for (var i in options) {
@@ -337,32 +340,28 @@ function outputMethods(data) {
     if (defined(ownMethods) && ownMethods.length) {
         for (var i = 0; i < ownMethods.length; i ++) {
             var member = ownMethods[i];
-            html += "### `" + member.name.replace(/\^\d+$/, '') + "`" + makeSignature(member.params)
+            html += "\n\n### " + member.name.replace(/\^\d+$/, '');
 
-           if (member.type) {
-               html += "`" + member.type + "`";
-           }
-           html += "\n\n";
-           html += outputDescription(member.comment);
+           html += "\n\n" + outputDescription(member.comment);
 
            if (member.params.length) {
-               html += "#### Parameters \n\n"
+               html += "\n\n#### Parameters"
 
                for (var j = 0; j < member.params.length; j ++) {
                    var item = member.params[j];
-                   html += "##### " + item.name + " `" + item.type + "`\n\n";
+                   html += "\n\n##### " + item.name + " `" + item.type + "`";
                    if (item.isOptional) {
-                       html += "_optional, default: " + item.defaultValue + "_\n\n";
+                       html += "\n\n_optional, default: " + item.defaultValue + "_";
                    }
 
-                   html += toMarkdown(item.desc) + "\n\n";
+                   html += "\n\n" + toMarkdown(item.desc);
                }
            }
 
            if (member.returns.length) {
                var item = member.returns[0];
-               html += "#### Returns \n\n"
-               html += "`" + item.type + "` " + item.desc + "\n\n";
+               html += "\n\n#### Returns"
+               html += "\n\n`" + item.type + "` " + item.desc;
            }
         }
     }
@@ -378,22 +377,22 @@ function outputEvents(data) {
     if (defined(ownEvents) && ownEvents.length) {
         for (var i = 0; i < ownEvents.length; i ++) {
             var member = ownEvents[i];
-            html += "### `" + member.name + "`"
-            html += outputDescription(member.comment)
+            html += "\n\n### " + member.name
+            html += "\n\n" + outputDescription(member.comment)
             if (member.params.length > 1) {
 
-               html += "#### Event Data \n\n"
+               html += "\n\n#### Event Data"
                member.params.forEach(function(item) {
                    if (item.name === "e") {
                        return;
                    }
 
-                   html += "##### " + item.name + " `" + item.type + "`\n\n";
+                   html += "\n\n##### " + item.name + " `" + item.type + "`";
                    if (item.isOptional) {
-                       html += "_optional, default: " + item.defaultValue + "_\n\n";
+                       html += "\n\n_optional, default: " + item.defaultValue + "_";
                    }
 
-                   html += toMarkdown(item.desc) + "\n\n";
+                   html += "\n\n" + toMarkdown(item.desc);
                });
             }
         }
