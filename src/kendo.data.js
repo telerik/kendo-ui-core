@@ -2551,7 +2551,11 @@
 
     var HierarchicalDataSource = DataSource.extend({
         init: function(options) {
-            DataSource.fn.init.call(this, extend(true, {}, { schema: { modelBase: Node, model: Node } }, options));
+            var node = Node.define({
+                children: options
+            });
+
+            DataSource.fn.init.call(this, extend(true, {}, { schema: { modelBase: node, model: node } }, options));
         },
 
         getByUid: function(uid) {
