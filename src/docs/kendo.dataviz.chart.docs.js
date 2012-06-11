@@ -1070,9 +1070,9 @@
          *     <li>years</li>
          * </ul>
          * @option {Date} [xAxis.type: "Date".axisCrossingValue] Date at which the Y axis crosses this axis.
-         * @option {Number} [xAxis.type: "Date".min] The start date of the axis.
+         * @option {Date} [xAxis.type: "Date".min] The start date of the axis.
          * This is often used in combination with the <b>max</b> configuration option.
-         * @option {Number} [xAxis.type: "Date".max] The end date of the axis.
+         * @option {Date} [xAxis.type: "Date".max] The end date of the axis.
          * This is often used in combination with the <b>min</b> configuration option.
          * @option {Number} [xAxis.type: "Date".majorUnit] The interval between major divisions in base units.
          * @option {Number} [xAxis.type: "Date".minorUnit] The interval between minor divisions in base units.
