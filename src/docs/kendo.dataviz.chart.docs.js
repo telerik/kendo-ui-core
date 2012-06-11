@@ -1079,7 +1079,7 @@
          * It defaults to 1/5th of the majorUnit.
          * This is often used in combination with the <b>min</b> configuration option.
          * @option {Object} [xAxis.type: "Date".labels] Label settings specific to the date axis.
-         * @option {String} [xAxis.type: "Date".labels.dateFormats] Date format strings
+         * @option {Object} [xAxis.type: "Date".labels.dateFormats] Date format strings
          * <div class="details-list">
          *    <dl>
          *         <dt>
@@ -1174,7 +1174,7 @@
          * This is often used in combination with the <b>min</b> configuration option to
          * set up a fixed date range.
          * @option {Object} [categoryAxis.type: "Date".labels] Label settings specific to the date axis.
-         * @option {String} [categoryAxis.type: "Date".labels.dateFormats] Date format strings
+         * @option {Object} [categoryAxis.type: "Date".labels.dateFormats] Date format strings
          * <div class="details-list">
          *    <dl>
          *         <dt>
