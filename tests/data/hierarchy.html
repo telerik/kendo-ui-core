@@ -282,6 +282,88 @@
 
                 ok(dataSource.data()[0].children.data()[0].leaf === false);
             });
+
+            test("loaded returns false for nodes whose children are not loaded", function() {
+                var dataSource = categories();
+
+                dataSource.fetch();
+                ok(!dataSource.data()[0].loaded());
+            });
+
+            test("loaded returns true for nodes whose children are loaded", function() {
+                var dataSource = categories();
+
+                dataSource.fetch();
+                dataSource.data()[0].load()
+
+                ok(dataSource.data()[0].loaded());
+            });
+
+            test("setting loaded to false after a node is loaded returns false", function() {
+                var dataSource = categories();
+
+                dataSource.fetch();
+                dataSource.data()[0].load()
+                dataSource.data()[0].loaded(false)
+
+                ok(!dataSource.data()[0].loaded());
+            });
+
+            test("load calls the read method of the transport after setting loaded to false", 2, function() {
+                var dataSource = new HierarchicalDataSource({
+                    transport: {
+                        read: function(options) {
+                            options.success([ { categoryId: 1 }])
+                        }
+                    },
+                    schema: {
+                        model: {
+                            children: {
+                                transport: {
+                                    read: function(options) {
+                                        options.success([]);
+                                        ok(true, "Read is called");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+
+                dataSource.fetch();
+
+                dataSource.data()[0].load();
+                dataSource.data()[0].loaded(false);
+                dataSource.data()[0].load();
+            });
+
+            test("load does not call the read method of the transport", 1, function() {
+                var dataSource = new HierarchicalDataSource({
+                    transport: {
+                        read: function(options) {
+                            options.success([ { categoryId: 1 }])
+                        }
+                    },
+                    schema: {
+                        model: {
+                            children: {
+                                transport: {
+                                    read: function(options) {
+                                        options.success([]);
+                                        ok(true, "Read is called");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+
+                dataSource.fetch();
+
+                dataSource.data()[0].load();
+                dataSource.data()[0].load();
+            });
+
         </script>
     </body>
 </html>

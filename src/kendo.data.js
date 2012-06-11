@@ -2520,18 +2520,32 @@
                 e.node = e.node || that;
                 that.trigger(CHANGE, e);
             });
+            that._loaded = false;
         },
 
         load: function() {
-            var options = {};
+            var that = this, options = {};
 
-            options[this.idField] = this.id;
+            if (!that._loaded) {
+                options[that.idField] = that.id;
 
-            this.children.query(options);
+                that.children._data = undefined;
+                that.children.one(CHANGE, function() {
+                   that._loaded = true;
+                }).query(options);
+            }
+        },
+
+        loaded: function(value) {
+            if (value !== undefined) {
+                this._loaded = value;
+            } else {
+                return this._loaded;
+            }
         },
 
         shouldSerialize: function(field) {
-            return Model.fn.shouldSerialize.call(this, field) && field !== "children";
+            return Model.fn.shouldSerialize.call(this, field) && field !== "children" && field !== "_loaded";
         }
     });
 
