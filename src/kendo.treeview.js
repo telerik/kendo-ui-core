@@ -130,10 +130,11 @@
      */
     var kendo = window.kendo,
         ui = kendo.ui,
+        data = kendo.data,
         extend = $.extend,
         template = kendo.template,
         Widget = ui.Widget,
-        HierarchicalDataSource = kendo.data.HierarchicalDataSource,
+        HierarchicalDataSource = data.HierarchicalDataSource,
         proxy = $.proxy,
         SELECT = "select",
         EXPAND = "expand",
@@ -847,6 +848,7 @@
         refresh: function(e) {
             var that = this,
                 parentNode = that.element,
+                group,
                 node = e.node,
                 action = e.action,
                 items = e.items;
@@ -861,12 +863,11 @@
                 that.remove(that.root.children(NODE).eq(e.index));
             } else {
                 if (action == "itemchange") {
-                    parentNode.append(that._renderGroup({
-                        items: e.items,
-                        group: {
-                            expanded: true
-                        }
-                    }));
+                    group = subGroup(parentNode);
+
+                    that._insertNode(e.items, group.children().length, parentNode, group, function(item, group) {
+                        item.appendTo(group);
+                    });
                 } else {
                     that.root = that.wrapper.html(that._renderGroup({
                         items: items,
@@ -1037,7 +1038,6 @@
             if (node.find("> div > .k-state-disabled").length) {
                 return;
             }
-
             var that = this,
                 contents = nodeContents(node),
                 isExpanding = !contents.is(VISIBLE),
@@ -1116,12 +1116,8 @@
                 });
             }
 
-            if (nodeData.toJSON) {
-                nodeData = nodeData.toJSON();
-            }
-
-            isArrayData = $.isArray(nodeData);
-            fromNodeData = isArrayData || $.isPlainObject(nodeData);
+            isArrayData = nodeData instanceof data.ObservableArray || $.isArray(nodeData);
+            fromNodeData = isArrayData || nodeData instanceof data.ObservableObject || $.isPlainObject(nodeData);
 
             if (fromNodeData) {
                 if (isArrayData) {

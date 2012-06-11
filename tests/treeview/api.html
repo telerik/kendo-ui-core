@@ -350,11 +350,14 @@
             });
 
             test("append() of observable object", function() {
-                createTreeView({})
+                createTreeView({});
 
-                treeviewObject.append(kendo.observable({ text: "foo" }));
+                var obj = kendo.observable({ text: "foo" });
+
+                treeviewObject.append(obj);
 
                 equal(treeview.find(".k-in").text(), "foo");
+                equal(treeview.find(".k-item").attr(kendo.attr("uid")), obj.uid);
             });
 
             test("append() of observable array", function() {
@@ -365,6 +368,7 @@
                 treeviewObject.append(array);
 
                 equal(treeview.find(".k-in").text(), "foo");
+                equal(treeview.find(".k-item").attr(kendo.attr("uid")), array[0].uid);
             });
 
             test("append() of observable hierarchy", function() {
