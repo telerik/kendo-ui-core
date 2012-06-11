@@ -265,10 +265,16 @@ namespace("mvc", function() {
             }
         ];
 
+        var cultures = [{
+            src: path.join(SOURCE_PATH, "cultures"),
+            dst: path.join(scriptsDest, "cultures")
+        }];
+
         deploySuiteFiles("web");
         deploySuiteFiles("dataviz");
         kendoScripts.buildSuiteScripts("aspnetmvc", scriptsDest, "", false);
         deployFiles(sharedFiles);
+        deployFiles(cultures);
     });
 
     desc("Build release version");

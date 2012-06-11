@@ -72,6 +72,11 @@
                 {
                     "text": "API",
                     "url": "calendar/api.html"
+                },
+                {
+                    "packages": [ "mvc" ],
+                    "text": "Globalization",
+                    "url": "calendar/globalization.html"
                 }
             ]
         },

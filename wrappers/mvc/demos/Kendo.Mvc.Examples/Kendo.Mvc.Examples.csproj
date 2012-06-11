@@ -81,6 +81,7 @@
     <Compile Include="Controllers\Web\AutoComplete\EventsController.cs" />
     <Compile Include="Controllers\Web\AutoComplete\ServerFilteringController.cs" />
     <Compile Include="Controllers\Web\AutoComplete\TemplateController.cs" />
+    <Compile Include="Controllers\Web\Calendar\GlobalizationController.cs" />
     <Compile Include="Controllers\Web\Calendar\SelectActionController.cs" />
     <Compile Include="Controllers\Web\Calendar\IndexController.cs" />
     <Compile Include="Controllers\Web\Calendar\ApiController.cs" />
@@ -599,6 +600,8 @@
     <Content Include="Areas\razor\Views\web\dropdownlist\cascadingdropdownlist.cshtml" />
     <Content Include="Areas\razor\Views\web\calendar\selectaction.cshtml" />
     <Content Include="Areas\aspx\Views\web\calendar\selectaction.aspx" />
+    <Content Include="Areas\razor\Views\web\calendar\globalization.cshtml" />
+    <Content Include="Areas\aspx\Views\web\calendar\globalization.aspx" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
