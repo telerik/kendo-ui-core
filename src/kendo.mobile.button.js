@@ -157,8 +157,8 @@
          * @name kendo.mobile.ui.Button#click
          * @event
          * @param {Event} e
-         * @param {jQueryObject} e.target The clicked DOM element
-         * @param {jQueryObject} e.button The button DOM element
+         * @param {jQuery} e.target The clicked DOM element
+         * @param {jQuery} e.button The button DOM element
          */
         CLICK
         ],

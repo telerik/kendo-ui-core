@@ -68,7 +68,7 @@
          * @option {Number} [minXDelta] <30> The minimum horizontal distance in pixels the user should swipe before the event is triggered.
          * @option {Number} [maxYDelta] <10> The maximum vertical deviation in pixels of the swipe event. Swipe with higher deviation are discarded.
          * @option {Number} [maxDuration] <1000> The maximum amount of time in milliseconds the swipe event can last. Slower swipes are discarded.
-         * @option {jQueryObject} [surface] By default, swipe events are tracked only within the element boundries. If a surface is specified, the swipe events are extended to the provided surface. This is useful if  the swipe targets are small (or narrow).
+         * @option {jQuery} [surface] By default, swipe events are tracked only within the element boundries. If a surface is specified, the swipe events are extended to the provided surface. This is useful if  the swipe targets are small (or narrow).
          */
         init: function(element, callback, options) {
             options = $.extend({

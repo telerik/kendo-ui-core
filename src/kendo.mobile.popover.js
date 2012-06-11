@@ -233,7 +233,7 @@
 
         /**
          * Open the ActionSheet.
-         * @param {jQueryObject} target The target of the Popover, to which the visual arrow will point to.
+         * @param {jQuery} target The target of the Popover, to which the visual arrow will point to.
          */
         openFor: function(target) {
             this.popup.show(target);

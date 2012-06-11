@@ -381,8 +381,8 @@
              * @name kendo.mobile.ui.ListView#click
              * @event
              * @param {Event} e
-             * @param {jQueryObject} e.item The selected list item.
-             * @param {jQueryObject} e.target The tapped DOM element.
+             * @param {jQuery} e.item The selected list item.
+             * @param {jQuery} e.target The tapped DOM element.
              * @param {Object} e.dataItem The corresponding dataItem associated with the item (available in databound mode only).
              * Note: The dataItem must be from a non-primitive type (Object).
              * @param {kendo.mobile.ui.Button} e.button The tapped Kendo mobile Button (if present).
@@ -529,7 +529,7 @@
 
         /**
          * Get the listview DOM element items
-         * @returns {jQueryObject} The listview DOM element items
+         * @returns {jQuery} The listview DOM element items
          */
         items: function() {
             if (this.options.type === "group") {

@@ -1199,7 +1199,7 @@
          * @param {Selector} node
          * The node that is to be detached.
          *
-         * @returns {jQueryObject}
+         * @returns {jQuery}
          * The node that has been detached.
          *
          * @exampleTitle Remove the node with ID, firstItem
@@ -1222,7 +1222,7 @@
          * @param {String} text
          * The text that is being searched for.
          *
-         * @returns {jQueryObject}
+         * @returns {jQuery}
          * All nodes that have the text.
          *
          * @exampleTitle Search a TreeView for the item that has the text, "CSS3 is da bomb!"

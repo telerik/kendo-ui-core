@@ -120,7 +120,7 @@
              * @name kendo.mobile.ui.TabStrip#select
              * @event
              * @param {Event} e
-             * @param {jQueryObject} e.item The selected tab
+             * @param {jQuery} e.item The selected tab
              */
             SELECT
         ],
@@ -144,7 +144,7 @@
 
         /**
          * Get the currently selected tab DOM element.
-         * @returns {jQueryObject} the currently selected tab DOM element.
+         * @returns {jQuery} the currently selected tab DOM element.
          */
         currentItem: function() {
             return this.element.children("." + ACTIVE_STATE_CLASS);

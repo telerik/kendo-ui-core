@@ -128,8 +128,8 @@
              * @name kendo.mobile.ui.ActionSheet#open
              * @event
              * @param {Event} e
-             * @param {jQueryObject} e.target The invocation target of the ActionSheet.
-             * @param {jQueryObject} e.context The defined ActionSheet context.
+             * @param {jQuery} e.target The invocation target of the ActionSheet.
+             * @param {jQuery} e.context The defined ActionSheet context.
              */
             OPEN
         ],
@@ -142,7 +142,7 @@
 
         /**
          * Open the ActionSheet.
-         * @param {jQueryObject} target (optional) The target of the ActionSheet, available in the callback methods.
+         * @param {jQuery} target (optional) The target of the ActionSheet, available in the callback methods.
          * @param {Object} context (optional) The context of the ActionSheet, available in the callback methods.
          */
         open: function(target, context) {

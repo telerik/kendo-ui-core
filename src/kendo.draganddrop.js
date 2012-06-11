@@ -751,7 +751,7 @@
              * @name kendo.ui.DropTarget#dragenter
              * @event
              * @param {Event} e
-             * @param {jQueryObject} e.draggable Reference to the draggable that enters the drop target.
+             * @param {jQuery} e.draggable Reference to the draggable that enters the drop target.
              */
             DRAGENTER,
             /**
@@ -759,7 +759,7 @@
              * @name kendo.ui.DropTarget#dragleave
              * @event
              * @param {Event} e
-             * @param {jQueryObject} e.draggable Reference to the draggable that leaves the drop target.
+             * @param {jQuery} e.draggable Reference to the draggable that leaves the drop target.
              */
             DRAGLEAVE,
             /**
@@ -767,8 +767,8 @@
              * @name kendo.ui.DropTarget#drop
              * @event
              * @param {Event} e
-             * @param {jQueryObject} e.draggable Reference to the draggable that is dropped over the drop target.
-             * @param {jQueryObject} e.draggable.currentTarget The element that the drag and drop operation started from.
+             * @param {jQuery} e.draggable Reference to the draggable that is dropped over the drop target.
+             * @param {jQuery} e.draggable.currentTarget The element that the drag and drop operation started from.
              */
             DROP
         ],
@@ -836,13 +836,13 @@
          * @option {Selector} [filter] Selects child elements that are draggable if a widget is attached to a container.
          * @option {String} [group] <"default"> Used to group sets of draggable and drop targets. A draggable with the same group value as a drop target will be accepted by the drop target.
          * @option {String} [axis] <null> Constrains the hint movement to either the horizontal (x) or vertical (y) axis. Can be set to either "x" or "y".
-         * @option {jQueryObject} [container] If set, the hint movement is constrained to the container boundaries.
+         * @option {jQuery} [container] If set, the hint movement is constrained to the container boundaries.
          * @option {Object} [cursorOffset] <null> If set, specifies the offset of the hint relative to the mouse cursor/finger.
          * By default, the hint is initially positioned on top of the draggable source offset. The option accepts an object with two keys: <code>top</code> and <code>left</code>.
          * _exampleTitle Initialize Draggable with cursorOffset
          * _example
          * $("#draggable").kendoDraggable({cursorOffset: {top: 10, left: 10}});
-         * @option {Function | jQueryObject} [hint] Provides a way for customization of the drag indicator. If a function is supplied, it receives one argument - the draggable element's jQuery object.
+         * @option {Function | jQuery} [hint] Provides a way for customization of the drag indicator. If a function is supplied, it receives one argument - the draggable element's jQuery object.
          * _example
          *  //hint as a function
          *  $("#draggable").kendoDraggable({

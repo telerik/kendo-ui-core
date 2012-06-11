@@ -2577,7 +2577,7 @@ function pad(number) {
          * Shows an overlay with a loading message, indicating that an action is in progress.
          * @name kendo.ui.progress
          * @function
-         * @param {jQueryObject} container The container that will hold the overlay
+         * @param {jQuery} container The container that will hold the overlay
          * @param {Boolean} toggle Whether the overlay should be shown or hidden
          */
         progress: function(container, toggle) {

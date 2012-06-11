@@ -153,7 +153,7 @@
 
         /**
          * Get the currently selected Button.
-         * @returns {jQueryObject} the currently selected Button.
+         * @returns {jQuery} the currently selected Button.
          */
         current: function() {
             return this.element.find("." + ACTIVE);
@@ -161,7 +161,7 @@
 
         /**
          * Select a Button.
-         * @param {jQueryObject | Number} li LI element or index of the Button.
+         * @param {jQuery | Number} li LI element or index of the Button.
          * @example
          * var buttongroup = $("#buttongroup").data("kendoMobileButtonGroup");
          *

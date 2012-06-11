@@ -126,7 +126,7 @@
              * @name kendo.mobile.ui.Pane#navigate
              * @event
              * @param {Event} e
-             * @param {jQueryObject} e.url The url of the view
+             * @param {jQuery} e.url The url of the view
              */
             NAVIGATE,
             /**
