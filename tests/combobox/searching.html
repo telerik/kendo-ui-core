@@ -603,6 +603,14 @@
 
                 equal(combobox.current().index(), 1);
             });
+
+            test("ComboBox does not throw exception when try to search empty DS", function() {
+                var combobox = input.kendoComboBox().data("kendoComboBox");
+
+                combobox.search("12");
+
+                ok(true);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

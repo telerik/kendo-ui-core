@@ -1017,7 +1017,11 @@
             }
 
             if (!that.ul[0].firstChild) {
-                dataSource.one(CHANGE, function () { that.search(word); }).fetch();
+                dataSource.one(CHANGE, function () {
+                    if (dataSource.data()[0]) {
+                        that.search(word);
+                    }
+                }).fetch();
                 return;
             }
 
