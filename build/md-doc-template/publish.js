@@ -46,8 +46,8 @@ function processClass(theClass) {
         outputEvents(theClass).replace(/\r/g, "\n");
 
     if (html) {
-        IO.mkPath("docs/" + suite);
-        IO.saveFile("docs/" + suite, className + ".md", html);
+        IO.mkPath("docs/api/" + suite);
+        IO.saveFile("docs/api/" + suite, className + ".md", html);
     }
 }
 
@@ -105,6 +105,9 @@ function outputDescription(description) {
             break;
 
             case "section":
+                output += "\n\n" + toMarkdown(tag.desc);
+            break;
+
             default:
                 output += toMarkdown(tag.desc);
             break;

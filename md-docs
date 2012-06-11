@@ -16,7 +16,6 @@ function sourceFiles(sourcePath) {
 }
 
 var params = [
-    "-d=/tmp",
     "-t=build/md-doc-template",
     // constants
     "-D=\"copyright:" + new Date().getFullYear() + "\"",
