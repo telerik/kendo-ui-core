@@ -1056,8 +1056,8 @@
                 }, that));
             }
 
-            if (!e.handled) { // We shouldn't stop propagation.
-                that.trigger(SELECT, { item: element[0] });
+            if (!e.handled && that.trigger(SELECT, { item: element[0] })) { // We shouldn't stop propagation.
+                e.preventDefault();
             }
 
             e.handled = true;
