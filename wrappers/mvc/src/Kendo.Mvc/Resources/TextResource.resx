@@ -164,7 +164,7 @@ The request for '{0}' has found the following matching controllers:{2}</value>
     <value>Controller name must end with 'Controller'.</value>
   </data>
   <data name="DataKeysEmpty" xml:space="preserve">
-    <value>The DataKeys collection is empty. Please specify a data key.</value>
+    <value>There is no DataSource Model Id property specified.</value>
   </data>
   <data name="DataTableInLineEditingWithCustomEditorTemplates" xml:space="preserve">
     <value>DataTable InLine editing and custom EditorTemplate per column is not supported</value>
