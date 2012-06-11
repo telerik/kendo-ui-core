@@ -33,7 +33,6 @@ namespace Kendo.Mvc.UI
             AxisDefaults = new ChartAxisDefaults<T>(this);
             Tooltip = new ChartTooltip();
             Transitions = true;
-
             DataSource = new DataSource();
             DataSource.Schema.Data = "";
             DataSource.Schema.Total = "";
@@ -262,7 +261,7 @@ namespace Kendo.Mvc.UI
 
             SerializeData("tooltip", Tooltip.CreateSerializer().Serialize(), options);
 
-            writer.Write(Initializer.Initialize(Id, "Chart", options));
+            writer.Write(Initializer.Initialize(Selector, "Chart", options));
 
             base.WriteInitializationScript(writer);
         }

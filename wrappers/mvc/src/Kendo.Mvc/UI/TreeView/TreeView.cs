@@ -142,7 +142,7 @@ namespace Kendo.Mvc.UI
             //TODO: Use new Init writer to output animation dictionary
             // Animation.SerializeTo(objectWriter);
 
-            writer.Write(Initializer.Initialize(Id, "TreeView", options));
+            writer.Write(Initializer.Initialize(Selector, "TreeView", options));
 
             base.WriteInitializationScript(writer);
         }

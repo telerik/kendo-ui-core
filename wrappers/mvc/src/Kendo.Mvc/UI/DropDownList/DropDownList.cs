@@ -71,7 +71,7 @@ namespace Kendo.Mvc.UI
                 options["cascadeFrom"] = CascadeFrom;
             }
 
-            writer.Write(Initializer.Initialize(Id, "DropDownList", options));
+            writer.Write(Initializer.Initialize(Selector, "DropDownList", options));
 
             base.WriteInitializationScript(writer);
         }

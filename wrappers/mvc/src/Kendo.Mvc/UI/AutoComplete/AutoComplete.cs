@@ -82,7 +82,7 @@ namespace Kendo.Mvc.UI
                 options["separator"] = Separator;
             }
 
-            writer.Write(Initializer.Initialize(Id, "AutoComplete", options));
+            writer.Write(Initializer.Initialize(Selector, "AutoComplete", options));
 
             base.WriteInitializationScript(writer);
         }

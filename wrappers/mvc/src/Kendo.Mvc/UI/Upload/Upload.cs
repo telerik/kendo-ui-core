@@ -106,7 +106,7 @@ namespace Kendo.Mvc.UI
 
             Async.SerializeTo("async", options);
 
-            writer.Write(Initializer.Initialize(Id, "Upload", options));
+            writer.Write(Initializer.Initialize(Selector, "Upload", options));
 
             base.WriteInitializationScript(writer);
         }

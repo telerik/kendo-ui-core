@@ -53,7 +53,7 @@ namespace Kendo.Mvc.UI
             SerializeTheme(options);
             SerializeTransitions(options);
 
-            writer.Write(Initializer.Initialize(Id, "LinearGauge", options));
+            writer.Write(Initializer.Initialize(Selector, "LinearGauge", options));
             base.WriteInitializationScript(writer);
         }
     }

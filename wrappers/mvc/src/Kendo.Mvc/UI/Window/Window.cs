@@ -220,7 +220,7 @@ namespace Kendo.Mvc.UI
                 }
             }
 
-            writer.Write(Initializer.Initialize(Id, "Window", options));
+            writer.Write(Initializer.Initialize(Selector, "Window", options));
 
 
             base.WriteInitializationScript(writer);

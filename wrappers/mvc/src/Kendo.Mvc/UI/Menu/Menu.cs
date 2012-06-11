@@ -126,7 +126,7 @@ namespace Kendo.Mvc.UI
                 options["hoverDelay"] = HoverDelay;
             }
 
-            writer.Write(Initializer.Initialize(Id, "Menu", options));
+            writer.Write(Initializer.Initialize(Selector, "Menu", options));
 
             base.WriteInitializationScript(writer);
         }
