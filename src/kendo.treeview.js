@@ -692,7 +692,7 @@
                         " " + kendo.attr("uid") + "='#= item.uid #'" +
                     ">" +
                         "<div class='#= r.cssClass(group, item) #'>" +
-                            "# if ((typeof " + field("leaf") + " != 'undefined' && !" + field("leaf") + ") || " + field("items") + ") { #" +
+                            "# if (item.leaf === false || " + field("items") + ") { #" +
                                 "<span class='#= r.toggleButtonClass(item) #'></span>" +
                             "# } #" +
 
