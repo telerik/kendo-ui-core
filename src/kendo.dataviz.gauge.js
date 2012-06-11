@@ -722,12 +722,8 @@
                 position: INSIDE,
                 padding: 2
             },
-
-            mirror: false
-        },
-
-        shouldAlign: function() {
-            return false;
+            mirror: false,
+            _alignLines: false
         },
 
         renderRanges: function(view) {

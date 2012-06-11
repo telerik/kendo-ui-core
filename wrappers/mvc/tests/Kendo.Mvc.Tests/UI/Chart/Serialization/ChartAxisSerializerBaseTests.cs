@@ -24,20 +24,6 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
-        public void Should_serialize_AxisCrossingValues()
-        {
-            axisMock.SetupGet(a => a.AxisCrossingValues).Returns(new double[10]);
-            serializer.Serialize()["axisCrossingValue"].ShouldEqual(new double[10]);
-        }
-
-        [Fact]
-        public void Should_not_serialize_AxisCrossingValue_if_not_set()
-        {
-            axisMock.SetupGet(a => a.AxisCrossingValues).Returns(new double[] { });
-            serializer.Serialize().ContainsKey("axisCrossingValues").ShouldBeFalse();
-        }
-
-        [Fact]
         public void Should_serialize_minorTicks()
         {
             axisMock.SetupGet(a => a.MinorTicks).Returns(new ChartAxisTicks { Size = 1 });

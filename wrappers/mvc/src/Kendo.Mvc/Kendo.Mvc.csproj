@@ -103,6 +103,7 @@
     <Compile Include="..\shared\CommonAssemblyInfo.cs">
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\MemberExpressionExtensions.cs" />
     <Compile Include="Extensions\ModelStateExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
@@ -167,6 +168,9 @@
     <Compile Include="UI\Chart\Axes\ChartPlotBand.cs" />
     <Compile Include="UI\Chart\Axes\ChartAxisTitle.cs" />
     <Compile Include="UI\Chart\Axes\ChartAxisTicks.cs" />
+    <Compile Include="UI\Chart\Axes\ChartAxisLabelDateFormats.cs" />
+    <Compile Include="UI\Chart\Axes\ChartDateAxis.cs" />
+    <Compile Include="UI\Chart\Axes\IChartDateAxis.cs" />
     <Compile Include="UI\Chart\Axes\IChartAxisDefaults.cs" />
     <Compile Include="UI\Chart\Axes\IChartNumericAxis.cs" />
     <Compile Include="UI\Chart\Axes\IChartAxis.cs" />
@@ -197,6 +201,9 @@
     <Compile Include="UI\Chart\Enums\ChartAxisOrientation.cs" />
     <Compile Include="UI\Chart\Enums\ChartAxisTitlePosition.cs" />
     <Compile Include="UI\Chart\Enums\ChartAreaMissingValues.cs" />
+    <Compile Include="UI\Chart\Enums\ChartSeriesAggregate.cs" />
+    <Compile Include="UI\Chart\Enums\ChartCategoryAxisType.cs" />
+    <Compile Include="UI\Chart\Enums\ChartAxisBaseUnit.cs" />
     <Compile Include="UI\Chart\Fluent\ChartAxisDefaultsBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartAxisLabelsBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartPieLabelsBuilder.cs" />
@@ -214,6 +221,10 @@
     <Compile Include="UI\Chart\Fluent\ChartAreaLineBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartLineBuilderBase.cs" />
     <Compile Include="UI\Chart\Fluent\ChartAxisTicksBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartDateCategoryAxisBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartDateAxisLabelsBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartAxisLabelsDateFormatsBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartDateAxisBuilder.cs" />
     <Compile Include="UI\Chart\Serialization\ChartAxisSerializerBase.cs" />
     <Compile Include="UI\Chart\Serialization\ChartBarSeriesOverlaySerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartLabelsBase.cs" />
@@ -229,6 +240,8 @@
     <Compile Include="UI\Chart\Serialization\ChartAxisTitleSerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartAreaSeriesSerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartAxisTicksSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartAxisLabelsDateFormatsSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartDateAxisSerializer.cs" />
     <Compile Include="UI\Chart\Series\ChartMarkers.cs" />
     <Compile Include="UI\Chart\Fluent\ChartLineSeriesBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartPointLabelsBuilder.cs" />
@@ -276,7 +289,7 @@
     <Compile Include="UI\Chart\Series\ChartPieSeries.cs" />
     <Compile Include="UI\Chart\Series\ChartSeriesBase.cs" />
     <Compile Include="UI\Chart\Series\ChartBoundSeries.cs" />
-    <Compile Include="UI\Chart\Enums\ChartBarSeriesOrientation.cs" />
+    <Compile Include="UI\Chart\Enums\ChartSeriesOrientation.cs" />
     <Compile Include="UI\Chart\ChartLabels.cs" />
     <Compile Include="UI\Chart\Series\ChartSeriesDefaults.cs" />
     <Compile Include="UI\Chart\Series\ChartPointLabels.cs" />
@@ -307,6 +320,7 @@
     <Compile Include="UI\DataSource\DataSourceSchema.cs" />
     <Compile Include="UI\DataSource\DataSourceType.cs" />
     <Compile Include="UI\DataSource\Fluent\AjaxDataSourceBuilder.cs" />
+    <Compile Include="UI\DataSource\Fluent\ReadOnlyAjaxDataSourceBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\ServerCrudOperationBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\ServerDataSourceBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\DataSourceEventBuilder.cs" />

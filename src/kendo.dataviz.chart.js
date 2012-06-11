@@ -2,6 +2,7 @@
     // Imports ================================================================
     var each = $.each,
         grep = $.grep,
+        isArray = $.isArray,
         map = $.map,
         math = Math,
         extend = $.extend,
@@ -14,7 +15,6 @@
         Widget = kendo.ui.Widget,
         template = kendo.template,
         deepExtend = kendo.deepExtend,
-        format = kendo.format,
         getter = kendo.getter,
 
         dataviz = kendo.dataviz,
@@ -35,6 +35,7 @@
         Title = dataviz.Title,
         animationDecorator = dataviz.animationDecorator,
         append = dataviz.append,
+        autoFormat = dataviz.autoFormat,
         defined = dataviz.defined,
         getSpacing = dataviz.getSpacing,
         inArray = dataviz.inArray,
@@ -57,6 +58,7 @@
         BELOW = "below",
         BLACK = "#000",
         BOTTOM = "bottom",
+        CATEGORY = "Category",
         CENTER = "center",
         CHANGE = "change",
         CIRCLE = "circle",
@@ -65,12 +67,16 @@
         COLUMN = "column",
         COORD_PRECISION = dataviz.COORD_PRECISION,
         DATABOUND = "dataBound",
+        DATE = "Date",
+        DATE_REGEXP = /^\/Date\((.*?)\)\/$/,
+        DAYS = "days",
         DEFAULT_FONT = dataviz.DEFAULT_FONT,
         DEFAULT_HEIGHT = dataviz.DEFAULT_HEIGHT,
         DEFAULT_PRECISION = dataviz.DEFAULT_PRECISION,
         DEFAULT_WIDTH = dataviz.DEFAULT_WIDTH,
         FADEIN = "fadeIn",
         GLASS = "glass",
+        HOURS = "hours",
         INITIAL_ANIMATION_DURATION = dataviz.INITIAL_ANIMATION_DURATION,
         INSIDE_BASE = "insideBase",
         INSIDE_END = "insideEnd",
@@ -80,9 +86,10 @@
         LINE_MARKER_SIZE = 8,
         MAX_VALUE = Number.MAX_VALUE,
         MIN_VALUE = -Number.MAX_VALUE,
+        MINUTES = "minutes",
+        MONTHS = "months",
         MOUSEMOVE_TRACKING = "mousemove.tracking",
         MOUSEOVER = "mouseover",
-        ON_MINOR_TICKS = "onMinorTicks",
         OUTSIDE_END = "outsideEnd",
         OUTLINE_SUFFIX = "_outline",
         PIE = "pie",
@@ -95,6 +102,18 @@
         SERIES_CLICK = "seriesClick",
         SERIES_HOVER = "seriesHover",
         STRING = "string",
+        TIME_PER_MINUTE = 60000,
+        TIME_PER_HOUR = 60 * TIME_PER_MINUTE,
+        TIME_PER_DAY = 24 * TIME_PER_HOUR,
+        TIME_PER_MONTH = 31 * TIME_PER_DAY,
+        TIME_PER_YEAR = 365 * TIME_PER_DAY,
+        TIME_PER_UNIT = {
+            "years": TIME_PER_YEAR,
+            "months": TIME_PER_MONTH,
+            "days": TIME_PER_DAY,
+            "hours": TIME_PER_HOUR,
+            "minutes": TIME_PER_MINUTE
+        },
         TOP = "top",
         TOOLTIP_ANIMATION_DURATION = 150,
         TOOLTIP_OFFSET = 5,
@@ -105,10 +124,18 @@
         WHITE = "#fff",
         X = "x",
         Y = "y",
+        YEARS = "years",
         ZERO = "zero";
 
     var CATEGORICAL_CHARTS = [BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA],
         XY_CHARTS = [SCATTER, SCATTER_LINE];
+
+    var DateLabelFormats = {
+        hours: "HH:mm",
+        days: "M/d",
+        months: "MMM 'yy",
+        years: "yyyy"
+    };
 
     // Chart ==================================================================
     var Chart = Widget.extend({
@@ -191,11 +218,7 @@
             legend: {
                 visible: true
             },
-            valueAxis: {
-                type: "Numeric"
-            },
             categoryAxis: {
-                type: "Category",
                 categories: []
             },
             autoBind: true,
@@ -928,6 +951,7 @@
 
     var CategoryAxis = Axis.extend({
         options: {
+            type: CATEGORY,
             categories: [],
             vertical: false,
             majorGridLines: {
@@ -935,42 +959,13 @@
                 width: 1,
                 color: BLACK
             },
-            zIndex: 1
+            zIndex: 1,
+
+            _labelsOnTicks: false
         },
 
         range: function() {
             return { min: 0, max: this.options.categories.length };
-        },
-
-        reflow: function(targetBox) {
-            this.reflowAxis(targetBox, ON_MINOR_TICKS);
-        },
-
-        getViewElements: function(view) {
-            var axis = this,
-                options = axis.options,
-                line = options.line,
-                lineBox = axis.lineBox(),
-                childElements = ChartElement.fn.getViewElements.call(axis, view),
-                lineOptions;
-
-            if (line.width > 0 && line.visible) {
-                lineOptions = {
-                    strokeWidth: line.width,
-                    stroke: line.color,
-                    dashType: line.dashType,
-                    zIndex: line.zIndex
-                };
-
-                childElements.push(view.createLine(
-                    lineBox.x1, lineBox.y1, lineBox.x2, lineBox.y2,
-                    lineOptions));
-
-                append(childElements, axis.renderTicks(view));
-                append(childElements, axis.renderPlotBands(view));
-            }
-
-            return childElements;
         },
 
         getTickPositions: function(itemsCount) {
@@ -1049,6 +1044,296 @@
                 category = defined(options.categories[index]) ? options.categories[index] : "";
 
             return new AxisLabel(category, index, dataItem, labelOptions);
+        }
+    });
+
+    var AxisDateLabel = AxisLabel.extend({
+        formatValue: function(value, options) {
+            return kendo.toString(value, options.format, options.culture);
+        }
+    });
+
+    var DateCategoryAxis = CategoryAxis.extend({
+        init: function(options) {
+            var axis = this;
+
+            options = options || {};
+
+            deepExtend(options, {
+                min: toDate(options.min),
+                max: toDate(options.max)
+            });
+
+            options = axis.applyDefaults(options);
+
+            axis.groupCategories(options);
+
+            CategoryAxis.fn.init.call(axis, options);
+        },
+
+        options: {
+            type: DATE,
+            labels: {
+                dateFormats: DateLabelFormats
+            }
+        },
+
+        applyDefaults: function(options) {
+            var categories = options.categories,
+                count = categories.length,
+                categoryIx,
+                cat,
+                lastCat,
+                unit,
+                baseUnit;
+
+            for (categoryIx = 0; categoryIx < count; categoryIx++) {
+                cat = toDate(categories[categoryIx]);
+
+                if (cat && lastCat && (cat - lastCat > 0)) {
+                    if (cat.getFullYear() - lastCat.getFullYear() > 0) {
+                        unit = YEARS;
+                    } else if (cat.getMonth() - lastCat.getMonth() > 0) {
+                        unit = MONTHS;
+                    } else if (cat.getDay() - lastCat.getDay() > 0) {
+                        unit = DAYS;
+                    } else {
+                        unit = HOURS;
+                    }
+
+                    baseUnit = baseUnit || unit;
+                }
+
+                lastCat = cat;
+            }
+
+            if (!options.baseUnit) {
+                delete options.baseUnit;
+            }
+
+            return deepExtend({ baseUnit: baseUnit || DAYS }, options);
+        },
+
+        groupCategories: function(options) {
+            var axis = this,
+                categories = toDate(options.categories),
+                baseUnit = options.baseUnit,
+                min = toTime(options.min),
+                max = toTime(options.max),
+                minCategory = toTime(sparseArrayMin(categories)),
+                maxCategory = toTime(sparseArrayMax(categories)),
+                start = floorDate(min || minCategory, baseUnit),
+                end = ceilDate((max || maxCategory) + 1, baseUnit),
+                date,
+                nextDate,
+                groups = [],
+                categoryMap = [],
+                categoryIndicies,
+                categoryIx,
+                categoryDate;
+
+            for (date = start; date < end; date = nextDate) {
+                groups.push(date);
+                nextDate = addDuration(date, 1, baseUnit);
+
+                categoryIndicies = [];
+                for (categoryIx = 0; categoryIx < categories.length; categoryIx++) {
+                    categoryDate = toDate(categories[categoryIx]);
+                    if (categoryDate && categoryDate >= date && categoryDate < nextDate) {
+                        categoryIndicies.push(categoryIx);
+                    }
+                }
+
+                categoryMap.push(categoryIndicies);
+            }
+
+            options.min = groups[0];
+            options.max = last(groups);
+            options.categories = groups;
+            axis.categoryMap = categoryMap;
+        },
+
+        createAxisLabel: function(index, labelOptions) {
+            var options = this.options,
+                dataItem = options.dataItems ? options.dataItems[index] : null,
+                date = options.categories[index],
+                unitFormat = labelOptions.dateFormats[options.baseUnit];
+
+            labelOptions.format = labelOptions.format || unitFormat;
+
+            return new AxisDateLabel(date, index, dataItem, labelOptions);
+        }
+    });
+
+    var DateValueAxis = Axis.extend({
+        init: function(seriesMin, seriesMax, options) {
+            var axis = this;
+
+            options = options || {};
+
+            deepExtend(options, {
+                min: toDate(options.min),
+                max: toDate(options.max),
+                axisCrossingValue: toDate(options.axisCrossingValue)
+            });
+
+            options = axis.applyDefaults(toDate(seriesMin), toDate(seriesMax), options);
+
+            Axis.fn.init.call(axis, options);
+        },
+
+        options: {
+            type: DATE,
+            labels: {
+                dateFormats: DateLabelFormats
+            }
+        },
+
+        applyDefaults: function(seriesMin, seriesMax, options) {
+            var axis = this,
+                min = options.min || seriesMin,
+                max = options.max || seriesMax,
+                baseUnit = options.baseUnit || axis.timeUnits(max - min),
+                baseUnitTime = TIME_PER_UNIT[baseUnit],
+                autoMin = floorDate(toTime(min) - 1, baseUnit),
+                autoMax = ceilDate(toTime(max) + 1, baseUnit),
+                userMajorUnit = options.majorUnit ? options.majorUnit : undefined,
+                majorUnit = userMajorUnit || dataviz.ceil(
+                                dataviz.autoMajorUnit(autoMin.getTime(), autoMax.getTime()),
+                                baseUnitTime
+                            ) / baseUnitTime,
+                actualUnits = duration(autoMin, autoMax, baseUnit),
+                totalUnits = dataviz.ceil(actualUnits, majorUnit),
+                unitsToAdd = totalUnits - actualUnits,
+                head = math.floor(unitsToAdd / 2),
+                tail = unitsToAdd - head;
+
+            if (!options.baseUnit) {
+                delete options.baseUnit;
+            }
+
+            return deepExtend({
+                    baseUnit: baseUnit,
+                    min: addDuration(autoMin, -head, baseUnit),
+                    max: addDuration(autoMax, tail, baseUnit),
+                    minorUnit: majorUnit / 5
+                }, options, {
+                    majorUnit: majorUnit
+                }
+            );
+        },
+
+        range: function() {
+            var options = this.options;
+            return { min: options.min, max: options.max };
+        },
+
+        getDivisions: function(stepValue) {
+            var options = this.options;
+
+            return math.floor(
+                duration(options.min, options.max, options.baseUnit) / stepValue + 1
+            );
+        },
+
+        getTickPositions: function(stepValue) {
+            var axis = this,
+                options = axis.options,
+                vertical = options.vertical,
+                reverse = options.reverse,
+                lineBox = axis.lineBox(),
+                lineSize = vertical ? lineBox.height() : lineBox.width(),
+                timeRange = duration(options.min, options.max, options.baseUnit),
+                scale = lineSize / timeRange,
+                step = stepValue * scale,
+                divisions = axis.getDivisions(stepValue),
+                dir = (vertical ? -1 : 1) * (reverse ? -1 : 1),
+                startEdge = dir === 1 ? 1 : 2,
+                pos = lineBox[(vertical ? Y : X) + startEdge],
+                positions = [],
+                i;
+
+            for (i = 0; i < divisions; i++) {
+                positions.push(round(pos, COORD_PRECISION));
+                pos = pos + step * dir;
+            }
+
+            return positions;
+        },
+
+        getMajorTickPositions: function() {
+            var axis = this;
+
+            return axis.getTickPositions(axis.options.majorUnit);
+        },
+
+        getMinorTickPositions: function() {
+            var axis = this;
+
+            return axis.getTickPositions(axis.options.minorUnit);
+        },
+
+        getSlot: function(a, b) {
+            var axis = this,
+                options = axis.options,
+                reverse = options.reverse,
+                vertical = options.vertical,
+                valueAxis = vertical ? Y : X,
+                lineBox = axis.lineBox(),
+                lineStart = lineBox[valueAxis + (reverse ? 2 : 1)],
+                lineSize = vertical ? lineBox.height() : lineBox.width(),
+                dir = reverse ? -1 : 1,
+                step = dir * (lineSize / (options.max - options.min)),
+                p1,
+                p2,
+                slotBox = new Box2D(lineBox.x1, lineBox.y1, lineBox.x1, lineBox.y1);
+
+            a = defined(a) ? a : options.axisCrossingValue;
+            b = defined(b) ? b : options.axisCrossingValue;
+            a = math.max(math.min(a, options.max), options.min);
+            b = math.max(math.min(b, options.max), options.min);
+
+            if (vertical) {
+                p1 = options.max - math.max(a, b);
+                p2 = options.max - math.min(a, b);
+            } else {
+                p1 = math.min(a, b) - options.min;
+                p2 = math.max(a, b) - options.min;
+            }
+
+            slotBox[valueAxis + 1] = lineStart + step * (reverse ? p2 : p1);
+            slotBox[valueAxis + 2] = lineStart + step * (reverse ? p1 : p2);
+
+            return slotBox;
+        },
+
+        labelsCount: function() {
+            return this.getDivisions(this.options.majorUnit);
+        },
+
+        createAxisLabel: function(index, labelOptions) {
+            var options = this.options,
+                offset =  index * options.majorUnit,
+                date = addDuration(options.min, offset, options.baseUnit),
+                unitFormat = labelOptions.dateFormats[options.baseUnit];
+
+            labelOptions.format = labelOptions.format || unitFormat;
+
+            return new AxisDateLabel(date, index, null, labelOptions);
+        },
+
+        timeUnits: function(delta) {
+            var unit = HOURS;
+
+            if (delta >= TIME_PER_YEAR) {
+                unit = YEARS;
+            } else if (delta >= TIME_PER_MONTH) {
+                unit = MONTHS;
+            } else if (delta >= TIME_PER_DAY) {
+                unit = DAYS;
+            }
+
+            return unit;
         }
     });
 
@@ -1226,6 +1511,8 @@
                         value: bar.value,
                         series: bar.series
                     });
+                } else if (labels.format) {
+                    labelText = autoFormat(labels.format, labelText);
                 }
 
                 bar.append(
@@ -1279,14 +1566,17 @@
                 }, border),
                 elements = [];
 
-            if (options.overlay) {
-                rectStyle.overlay = deepExtend({rotation: vertical ? 0 : 90}, options.overlay);
+            if (box.width() > 0 && box.height() > 0) {
+                if (options.overlay) {
+                    rectStyle.overlay = deepExtend({
+                        rotation: vertical ? 0 : 90
+                    }, options.overlay);
+                }
+
+                elements.push(view.createRect(box, rectStyle));
             }
 
-            elements.push(view.createRect(box, rectStyle));
-
-            append(elements,
-                ChartElement.fn.getViewElements.call(bar, view));
+            append(elements, ChartElement.fn.getViewElements.call(bar, view));
 
             return elements;
         },
@@ -1339,7 +1629,7 @@
             return new Point2D(x, y);
         },
 
-        formatPointValue: function(format) {
+        formatValue: function(format) {
             var point = this;
 
             return point.owner.formatPointValue(point.value, format);
@@ -1503,8 +1793,8 @@
             }
         },
 
-        formatPointValue: function(value, tooltipFormat) {
-            return format(tooltipFormat, value);
+        formatPointValue: function(value, format) {
+            return autoFormat(format, value);
         }
     });
 
@@ -1848,7 +2138,7 @@
                         series: point.series
                     });
                 } else if (labels.format) {
-                    labelText = point.formatPointValue(labels.format);
+                    labelText = point.formatValue(labels.format);
                 }
                 point.label = new TextBox(labelText,
                     deepExtend({
@@ -1859,7 +2149,7 @@
                             left: 5,
                             right: 5
                         }
-                    }, labels, { format: "" })
+                    }, labels)
                 );
                 point.append(point.label);
             }
@@ -1940,7 +2230,7 @@
             );
         },
 
-        formatPointValue: function(format) {
+        formatValue: function(format) {
             var point = this;
 
             return point.owner.formatPointValue(point.value, format);
@@ -2474,8 +2764,8 @@
             }
         },
 
-        formatPointValue: function(value, tooltipFormat) {
-            return format(tooltipFormat, value.x, value.y);
+        formatPointValue: function(value, format) {
+            return autoFormat(format, value.x, value.y);
         }
     });
 
@@ -2564,6 +2854,8 @@
                     series: segment.series,
                     percentage: segment.percentage
                 });
+            } else if (labels.format) {
+                labelText = autoFormat(labels.format, labelText);
             }
 
             if (labels.visible) {
@@ -2706,7 +2998,7 @@
             return new Point2D(tooltipCenter.x - w, tooltipCenter.y - h);
         },
 
-        formatPointValue: function(format) {
+        formatValue: function(format) {
             var point = this;
 
             return point.owner.formatPointValue(point.value, format);
@@ -3172,8 +3464,8 @@
             return sqr(c.x - point.x) + sqr(c.y - point.y) < sqr(r);
         },
 
-        formatPointValue: function(value, tooltipFormat) {
-            return format(tooltipFormat, value);
+        formatPointValue: function(value, format) {
+            return autoFormat(format, value);
         }
     });
 
@@ -3599,6 +3891,13 @@
             var plotArea = this,
                 series = plotArea.series;
 
+            plotArea.createCategoryAxis();
+
+            if (plotArea.categoryAxis.options.type === DATE) {
+                plotArea.aggregateDateSeries();
+            }
+
+            series = plotArea.series;
             plotArea.createAreaChart(grep(series, function(s) {
                 return inArray(s.type, [AREA, VERTICAL_AREA]);
             }));
@@ -3611,7 +3910,76 @@
                 return inArray(s.type, [LINE, VERTICAL_LINE]);
             }));
 
-            plotArea.createAxes();
+            plotArea.createValueAxes();
+        },
+
+        aggregateDateSeries: function() {
+            var plotArea = this,
+                series = plotArea.series,
+                processedSeries = [],
+                categoryAxis = plotArea.categoryAxis,
+                categories = categoryAxis.options.categories,
+                categoryMap = categoryAxis.categoryMap,
+                groupIx,
+                categoryIndicies,
+                seriesIx,
+                currentSeries,
+                seriesClone,
+                srcData,
+                data,
+                srcDataItems,
+                dataItems,
+                aggregate,
+                srcValues,
+                i,
+                categoryIx,
+                value;
+
+            for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
+                currentSeries = series[seriesIx];
+                seriesClone = deepExtend({}, currentSeries);
+                aggregate = plotArea.seriesAggregate(seriesClone);
+
+                srcData = seriesClone.data;
+                srcDataItems = seriesClone.dataItems || [];
+
+                seriesClone.data = data = [];
+                seriesClone.dataItems = dataItems = [];
+
+                for (groupIx = 0; groupIx < categories.length; groupIx++) {
+                    categoryIndicies = categoryMap[groupIx];
+                    srcValues = [];
+
+                    for (i = 0; i < categoryIndicies.length; i++) {
+                        categoryIx = categoryIndicies[i];
+                        value = srcData[categoryIx];
+
+                        if (defined(value)) {
+                            srcValues.push(value);
+                        }
+                    }
+
+                    if (srcValues.length > 0) {
+                        data[groupIx] = aggregate(srcValues, currentSeries);
+                    }
+
+                    dataItems[groupIx] = srcValues.length > 1 ?
+                        undefined : srcDataItems[categoryIndicies[0]];
+                }
+
+                processedSeries.push(seriesClone);
+            }
+
+            plotArea.series = processedSeries;
+        },
+
+        seriesAggregate: function(series) {
+            var aggregate = series.aggregate;
+            if (typeof aggregate === STRING) {
+                aggregate = Aggregates[aggregate];
+            }
+
+            return aggregate || Aggregates.max;
         },
 
         appendChart: function(chart) {
@@ -3678,18 +4046,48 @@
             plotArea.appendChart(areaChart);
         },
 
-        createAxes: function() {
+        createCategoryAxis: function() {
             var plotArea = this,
                 options = plotArea.options,
-                range,
                 invertAxes = plotArea.invertAxes,
-                categoriesCount = options.categoryAxis.categories.length,
+                categoryAxisOptions = options.categoryAxis,
+                categories = categoryAxisOptions.categories,
+                categoriesCount = categories.length,
+                axisType  = categoryAxisOptions.type,
+                dateCategory = categories[0] instanceof Date,
+                categoryAxis;
+
+            if (axisType === DATE || (!axisType && dateCategory)) {
+                categoryAxis = new DateCategoryAxis(deepExtend({
+                        vertical: invertAxes
+                    },
+                    categoryAxisOptions)
+                );
+            } else {
                 categoryAxis = new CategoryAxis(deepExtend({
                         vertical: invertAxes,
                         axisCrossingValue: invertAxes ? categoriesCount : 0
                     },
-                    options.categoryAxis)
-                ),
+                    categoryAxisOptions)
+                );
+            }
+
+            if (invertAxes) {
+                plotArea.axisY = categoryAxis;
+            } else {
+                plotArea.axisX = categoryAxis;
+            }
+
+            plotArea.categoryAxis = categoryAxis;
+            plotArea.axes.push(categoryAxis);
+            plotArea.append(plotArea.categoryAxis);
+        },
+
+        createValueAxes: function() {
+            var plotArea = this,
+                options = plotArea.options,
+                range,
+                invertAxes = plotArea.invertAxes,
                 axis,
                 axisName,
                 namedValueAxes = plotArea.namedValueAxes,
@@ -3714,12 +4112,11 @@
             primaryValueAxis = namedValueAxes[PRIMARY] || plotArea.axes[0];
 
             // TODO: Consider removing axisX and axisY aliases
-            plotArea.axisX = invertAxes ? primaryValueAxis : categoryAxis;
-            plotArea.axisY = invertAxes ? categoryAxis : primaryValueAxis;
-
-            plotArea.categoryAxis = categoryAxis;
-            plotArea.axes.push(categoryAxis);
-            plotArea.append(plotArea.categoryAxis);
+            if (invertAxes) {
+                plotArea.axisX = primaryValueAxis;
+            } else {
+                plotArea.axisY = primaryValueAxis;
+            }
         }
     });
 
@@ -3839,8 +4236,30 @@
                 rangeTracker = vertical ? plotArea.yAxisRangeTracker : plotArea.xAxisRangeTracker,
                 range = rangeTracker.query(axisName),
                 axisOptions = deepExtend({}, options, { vertical: vertical }),
-                axis = new NumericAxis(range.min, range.max, axisOptions);
+                axis,
+                seriesIx,
+                series = plotArea.series,
+                currentSeries,
+                firstPoint,
+                dateData;
 
+            for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
+                currentSeries = series[seriesIx];
+                if (currentSeries[vertical ? "yAxis" : "xAxis"] == axisOptions.name) {
+                    firstPoint = currentSeries.data[0];
+                    if (firstPoint) {
+                        dateData = firstPoint[vertical ? 1 : 0] instanceof Date;
+                    }
+
+                    break;
+                }
+            }
+
+            if (axisOptions.type === DATE || (!axisOptions.type && dateData)) {
+                axis = new DateValueAxis(range.min, range.max, axisOptions);
+            } else {
+                axis = new NumericAxis(range.min, range.max, axisOptions);
+            }
             namedAxes[axisName] = axis;
             plotArea.append(axis);
             plotArea.axes.push(axis);
@@ -4062,7 +4481,7 @@
                     percentage: point.percentage
                 });
             } else if (tooltipOptions.format) {
-                content = point.formatPointValue(tooltipOptions.format);
+                content = point.formatValue(tooltipOptions.format);
             }
 
             element.html(content);
@@ -4106,6 +4525,36 @@
             }
         }
     });
+
+    var Aggregates = {
+        max: function(values) {
+            return math.max.apply(math, values);
+        },
+
+        min: function(values) {
+            return math.min.apply(math, values);
+        },
+
+        sum: function(values) {
+            var i,
+                length = values.length,
+                sum = 0;
+
+            for (i = 0; i < length; i++) {
+                sum += values[i];
+            }
+
+            return sum;
+        },
+
+        count: function(values) {
+            return values.length;
+        },
+
+        avg: function(values) {
+            return Aggregates.sum(values) / Aggregates.count(values);
+        }
+    };
 
     function sparseArrayMin(arr) {
         return sparseArrayLimits(arr).min;
@@ -4291,11 +4740,96 @@
     }
     getField.cache = {};
 
+    function toDate(value) {
+        if (isArray(value)) {
+            return map(value, toDate);
+        } else if (value) {
+            if (value instanceof Date) {
+                return value;
+            } else {
+                if (typeof value === STRING) {
+                    var date = DATE_REGEXP.exec(value);
+                    return new Date(date ? parseInt(date[1], 10) : value);
+                } else {
+                    return new Date(value);
+                }
+            }
+        }
+    }
+
+    function toTime(value) {
+        if (isArray(value)) {
+            return map(value, toTime);
+        } else if (value) {
+            return toDate(value).getTime();
+        }
+    }
+
+    function addDuration(date, value, unit) {
+        date = toDate(date);
+
+        if (unit === YEARS) {
+            return new Date(date.getFullYear() + value, 0, 1);
+        } else if (unit === MONTHS) {
+            return new Date(date.getFullYear(), date.getMonth() + value, 1);
+        } else if (unit === DAYS) {
+            return new Date(date.getFullYear(), date.getMonth(), date.getDate() + value);
+        } else if (unit === HOURS) {
+            return new Date(date.getFullYear(), date.getMonth(), date.getDate(),
+                            date.getHours() + value);
+        } else if (unit === MINUTES) {
+            return new Date(date.getFullYear(), date.getMonth(), date.getDate(),
+                            date.getHours(), date.getMinutes() + value);
+        }
+
+        return date;
+    }
+
+    function floorDate(date, unit) {
+        date = toDate(date);
+
+        return addDuration(date, 0, unit);
+    }
+
+    function ceilDate(date, unit) {
+        date = toDate(date);
+
+        if (floorDate(date, unit).getTime() === date.getTime()) {
+            return date;
+        }
+
+        return addDuration(date, 1, unit);
+    }
+
+    function dateDiff(a, b) {
+        var diff = a.getTime() - b,
+            offsetDiff = a.getTimezoneOffset() - b.getTimezoneOffset();
+
+        return diff - (offsetDiff * TIME_PER_MINUTE);
+    }
+
+    function duration(a, b, unit) {
+        var diff;
+
+        if (unit === YEARS) {
+            diff = b.getFullYear() - a.getFullYear();
+        } else if (unit === MONTHS) {
+            diff = duration(a, b, YEARS) * 12 + b.getMonth() - a.getMonth();
+        } else if (unit === DAYS) {
+            diff = math.floor(dateDiff(b, a) / TIME_PER_DAY);
+        } else {
+            diff = math.floor((b - a) / TIME_PER_UNIT[unit]);
+        }
+
+        return diff;
+    }
+
     // Exports ================================================================
 
     dataviz.ui.plugin(Chart);
 
     deepExtend(dataviz, {
+        Aggregates: Aggregates,
         AreaChart: AreaChart,
         Bar: Bar,
         BarAnimationDecorator: BarAnimationDecorator,
@@ -4304,6 +4838,8 @@
         CategoricalPlotArea: CategoricalPlotArea,
         CategoryAxis: CategoryAxis,
         ClusterLayout: ClusterLayout,
+        DateCategoryAxis: DateCategoryAxis,
+        DateValueAxis: DateValueAxis,
         Highlight: Highlight,
         Legend: Legend,
         LineChart: LineChart,
@@ -4320,7 +4856,12 @@
         Tooltip: Tooltip,
         XYPlotArea: XYPlotArea,
 
-        categoriesCount: categoriesCount
+        addDuration: addDuration,
+        categoriesCount: categoriesCount,
+        ceilDate: ceilDate,
+        duration: duration,
+        floorDate: floorDate,
+        toDate: toDate
     });
 
 })(jQuery);

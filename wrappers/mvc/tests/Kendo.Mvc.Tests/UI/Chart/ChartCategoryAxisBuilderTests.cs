@@ -1,5 +1,6 @@
 namespace Kendo.Mvc.UI.Tests.Chart
 {
+    using System;
     using System.Collections.Generic;
     using Kendo.Mvc.UI;
     using Kendo.Mvc.UI.Fluent;
@@ -26,6 +27,22 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
+        public void Categories_should_return_builder_with_expression()
+        {
+            builder.Categories(s => s.DateString).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void Categories_set_member_field_with_expression()
+        {
+            builder.Container.Data = null;
+            builder.Categories(s => s.Date);
+            builder.Container.Data = SalesDataBuilder.GetCollection();
+
+            axis.Member.ShouldEqual("Date");
+        }
+
+        [Fact]
         public void Categories_should_set_categories_from_IEnumerable()
         {
             var categories = new string[] { "Aug 2010", "Sept 2010" };
@@ -36,6 +53,14 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
+        public void Categories_should_return_builder_with_IEnumerable()
+        {
+            var categories = new string[] { "Aug 2010", "Sept 2010" };
+
+            builder.Categories(categories).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
         public void Categories_should_set_categories_from_list()
         {
             builder.Categories("Aug 2010", "Sept 2010");
@@ -43,18 +68,70 @@ namespace Kendo.Mvc.UI.Tests.Chart
             AssertCategories(new string[] { "Aug 2010", "Sept 2010" });
         }
 
-        private void AssertCategories(IEnumerable<string> categories)
+        [Fact]
+        public void Categories_should_return_builder_with_list()
         {
-            var expectedCategories = new Queue<string>();
+            builder.Categories("Aug 2010", "Sept 2010").ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void Date_sets_type_to_date()
+        {
+            builder.Date();
+            axis.Type.ShouldEqual(ChartCategoryAxisType.Date);
+        }
+
+        [Fact]
+        public void AxisCrossingValue_should_set_single_value()
+        {
+            builder.AxisCrossingValue(42);
+            axis.AxisCrossingValues.ShouldEqual(new double[] { 42 });
+        }
+
+        [Fact]
+        public void AxisCrossingValue_should_return_builder()
+        {
+            builder.AxisCrossingValue(42).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void AxisCrossingValue_should_set_multiple_values_from_params()
+        {
+            builder.AxisCrossingValue(42, 43);
+            axis.AxisCrossingValues.ShouldEqual(new double[] { 42, 43 });
+        }
+
+        [Fact]
+        public void AxisCrossingValue_overload_with_params_should_return_builder()
+        {
+            builder.AxisCrossingValue(42, 43).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void AxisCrossingValue_should_set_multiple_values_from_enumerable()
+        {
+            builder.AxisCrossingValue(new double[] { 42, 43 });
+            axis.AxisCrossingValues.ShouldEqual(new double[] { 42, 43 });
+        }
+
+        [Fact]
+        public void AxisCrossingValue_overload_with_enumerable_should_return_builder()
+        {
+            builder.AxisCrossingValue(new double[] { 42, 43 }).ShouldBeSameAs(builder);
+        }
+
+        private void AssertCategories<T>(IEnumerable<T> categories)
+        {
+            var expectedCategories = new Queue<T>();
             foreach (var category in categories)
             {
                 expectedCategories.Enqueue(category);
             }
 
             var categoryStrings = builder.Axis.Categories;
-            foreach (object category in categoryStrings)
+            foreach (T category in categoryStrings)
             {
-                expectedCategories.Dequeue().ShouldEqual(category.ToString());
+                category.ShouldEqual<T>(expectedCategories.Dequeue());
             }
         }
     }

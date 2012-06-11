@@ -59,6 +59,26 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Sets the aggregate function for date series.
+        /// This function is used when a category (an year, month, etc.) contains two or more points.
+        /// </summary>
+        /// <param name="aggregate">Aggregate function name.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Chart(Model)
+        ///             .Name("Chart")
+        ///             .Series(series => series.Bar(s => s.Sales).Aggregate())
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartBarSeriesBuilder<T> Aggregate(ChartSeriesAggregate aggregate)
+        {
+            Series.Aggregate = aggregate;
+
+            return this;
+        }
+
+        /// <summary>
         /// Set distance between category clusters. 
         /// <param name="gap">
         /// A value of 1 means that there is a total of 1 column width / bar height between categories.

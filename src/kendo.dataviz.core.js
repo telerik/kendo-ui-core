@@ -6,7 +6,6 @@
         dataviz = kendo.dataviz = {},
         Class = kendo.Class,
         template = kendo.template,
-        format = kendo.format,
         map = $.map,
         noop = $.noop,
         indexOf = $.inArray,
@@ -42,7 +41,6 @@
         MAX_VALUE = Number.MAX_VALUE,
         MIN_VALUE = -Number.MAX_VALUE,
         NONE = "none",
-        ON_MINOR_TICKS = "onMinorTicks",
         OUTSIDE = "outside",
         RADIAL = "radial",
         RIGHT = "right",
@@ -724,10 +722,6 @@
             BoxElement.fn.init.call(textBox, options);
             options = textBox.options;
 
-            if (!options.template) {
-                content = options.format ? format(options.format, content) : content;
-            }
-
             text = new Text(content, deepExtend({ }, options, { align: LEFT, vAlign: TOP }));
             textBox.append(text);
 
@@ -777,6 +771,8 @@
             if (options.template) {
                 label.template = template(options.template);
                 text = label.template({ value: value, dataItem: dataItem });
+            } else if (options.format) {
+                text = label.formatValue(value, options);
             }
 
             label.text = text;
@@ -788,6 +784,10 @@
             TextBox.fn.init.call(label, text, options);
 
             label.makeDiscoverable();
+        },
+
+        formatValue: function(value, options) {
+            return autoFormat(options.format, value);
         },
 
         click: function(widget, e) {
@@ -882,7 +882,9 @@
             // TODO: Move to line or labels options
             margin: 5,
             visible: true,
-            _align: true
+
+            _alignLines: true,
+            _labelsOnTicks: true
         },
 
         // abstract labelsCount(): Number
@@ -918,15 +920,23 @@
                 options = axis.options,
                 box = axis.box,
                 vertical = options.vertical,
+                labels = axis.labels,
+                labelSize = vertical ? HEIGHT : WIDTH,
+                labelsOnTicks = options._labelsOnTicks,
                 mirror = options.labels.mirror,
                 axisX = mirror ? box.x1 : box.x2,
-                axisY = mirror ? box.y2 : box.y1;
+                axisY = mirror ? box.y2 : box.y1,
+                startMargin = 0,
+                endMargin = 0;
 
-            if (vertical) {
-                return new Box2D(axisX, box.y1, axisX, box.y2);
+            if (labelsOnTicks && labels.length > 1) {
+                startMargin = labels[0].box[labelSize]() / 2;
+                endMargin = last(labels).box[labelSize]() / 2;
             }
 
-            return new Box2D(box.x1, axisY, box.x2, axisY);
+            return vertical ?
+                new Box2D(axisX, box.y1 + startMargin, axisX, box.y2 - endMargin) :
+                new Box2D(box.x1 + startMargin, axisY, box.x2 - endMargin, axisY);
         },
 
         createTitle: function() {
@@ -971,7 +981,7 @@
                         lineOptions = {
                                 strokeWidth: tick.width,
                                 stroke: tick.color,
-                                align: axis.shouldAlign()
+                                align: options._alignLines
                             };
 
                         if (options.vertical) {
@@ -999,8 +1009,32 @@
             return ticks;
         },
 
-        shouldAlign: function() {
-            return true;
+        getViewElements: function(view) {
+            var axis = this,
+                options = axis.options,
+                line = options.line,
+                lineBox = axis.lineBox(),
+                childElements = ChartElement.fn.getViewElements.call(axis, view),
+                lineOptions;
+
+            if (line.width > 0 && line.visible) {
+                lineOptions = {
+                    strokeWidth: line.width,
+                    stroke: line.color,
+                    dashType: line.dashType,
+                    zIndex: line.zIndex,
+                    align: options._alignLines
+                };
+
+                childElements.push(view.createLine(
+                    lineBox.x1, lineBox.y1, lineBox.x2, lineBox.y2,
+                    lineOptions));
+
+                append(childElements, axis.renderTicks(view));
+                append(childElements, axis.renderPlotBands(view));
+            }
+
+            return childElements;
         },
 
         getActualTickSize: function () {
@@ -1048,7 +1082,7 @@
             return result;
         },
 
-        reflowAxis: function(box, position) {
+        reflow: function(box) {
             var axis = this,
                 options = axis.options,
                 vertical = options.vertical,
@@ -1088,14 +1122,15 @@
             }
 
             axis.arrangeTitle();
-            axis.arrangeLabels(maxLabelWidth, maxLabelHeight, position);
+            axis.arrangeLabels(maxLabelWidth, maxLabelHeight);
         },
 
-        arrangeLabels: function(maxLabelWidth, maxLabelHeight, position) {
+        arrangeLabels: function(maxLabelWidth, maxLabelHeight) {
             var axis = this,
                 options = axis.options,
                 labelOptions = options.labels,
                 labels = axis.labels,
+                labelsBetweenTicks = !options._labelsOnTicks,
                 vertical = options.vertical,
                 lineBox = axis.lineBox(),
                 mirror = options.labels.mirror,
@@ -1116,7 +1151,7 @@
                     labelX;
 
                 if (vertical) {
-                    if (position == ON_MINOR_TICKS) {
+                    if (labelsBetweenTicks) {
                         firstTickPosition = tickPositions[tickIx];
                         nextTickPosition = tickPositions[tickIx + 1];
 
@@ -1134,7 +1169,7 @@
 
                     labelBox = label.box.move(labelX, labelPos);
                 } else {
-                    if (position == ON_MINOR_TICKS) {
+                    if (labelsBetweenTicks) {
                         firstTickPosition = tickPositions[tickIx];
                         nextTickPosition = tickPositions[tickIx + 1];
                     } else {
@@ -1184,14 +1219,11 @@
             var axis = this,
                 defaultOptions = axis.initDefaults(seriesMin, seriesMax, options);
 
-            defaultOptions.minorUnit = defined(options.minorUnit) ?
-                options.minorUnit :
-                defaultOptions.majorUnit / 5;
-
             Axis.fn.init.call(axis, defaultOptions);
         },
 
         options: {
+            type: "Numeric",
             min: 0,
             max: 1,
             vertical: true,
@@ -1247,51 +1279,14 @@
                 }
             }
 
+            autoOptions.minorUnit = autoOptions.majorUnit / 5;
+
             return deepExtend(autoOptions, options);
         },
 
         range: function() {
             var options = this.options;
             return { min: options.min, max: options.max };
-        },
-
-        reflow: function(targetBox) {
-            this.reflowAxis(targetBox);
-        },
-
-        getViewElements: function(view) {
-            var axis = this,
-                options = axis.options,
-                line = options.line,
-                childElements = ChartElement.fn.getViewElements.call(axis, view),
-                lineBox = axis.lineBox(),
-                lineOptions;
-
-            if (line.width > 0 && line.visible) {
-                lineOptions = {
-                    strokeWidth: line.width,
-                    stroke: line.color,
-                    dashType: line.dashType,
-                    zIndex: options.zIndex,
-                    align: axis.shouldAlign()
-                };
-                if (options.vertical) {
-                    childElements.push(view.createLine(
-                        lineBox.x1, lineBox.y1,
-                        lineBox.x1, lineBox.y2,
-                        lineOptions));
-                } else {
-                    childElements.push(view.createLine(
-                        lineBox.x1, lineBox.y1,
-                        lineBox.x2, lineBox.y1,
-                        lineOptions));
-                }
-
-                append(childElements, axis.renderTicks(view));
-                append(childElements, axis.renderPlotBands(view));
-            }
-
-            return childElements;
         },
 
         autoAxisMax: function(min, max) {
@@ -1382,30 +1377,6 @@
             var axis = this;
 
             return axis.getTickPositions(axis.options.minorUnit);
-        },
-
-        lineBox: function() {
-            var axis = this,
-                options = axis.options,
-                vertical = options.vertical,
-                labelSize = vertical ? "height" : "width",
-                labels = axis.labels,
-                baseBox = Axis.fn.lineBox.call(axis),
-                startMargin = 0,
-                endMargin = 0;
-
-            if (labels.length > 1) {
-                startMargin = labels[0].box[labelSize]() / 2;
-                endMargin = last(labels).box[labelSize]() / 2;
-            }
-
-            if (vertical) {
-               return new Box2D(baseBox.x1, baseBox.y1 + startMargin,
-                 baseBox.x1, baseBox.y2 - endMargin);
-            } else {
-               return new Box2D(baseBox.x1 + startMargin, baseBox.y1,
-                 baseBox.x2 - endMargin, baseBox.y1);
-            }
         },
 
         getSlot: function(a, b) {
@@ -2401,6 +2372,14 @@
         }
     }
 
+    function autoFormat(format, value) {
+        if (format.indexOf("{0:") !== -1 || format.indexOf("{0}") !== -1) {
+            return kendo.format.apply(this, arguments);
+        }
+
+        return kendo.toString(value, format);
+    }
+
     // Exports ================================================================
     /**
      * @name kendo.dataviz
@@ -2485,6 +2464,7 @@
 
         animationDecorator: animationDecorator,
         append: append,
+        autoFormat: autoFormat,
         autoMajorUnit: autoMajorUnit,
         defined: defined,
         getSpacing: getSpacing,
@@ -2494,6 +2474,8 @@
         measureText: measureText,
         rotatePoint: rotatePoint,
         round: round,
+        ceil: ceil,
+        floor: floor,
         supportsSVG: supportsSVG,
         renderTemplate: renderTemplate,
         uniqueId: uniqueId

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 namespace Kendo.Mvc.UI.Fluent
 {
     /// <summary>
@@ -67,6 +68,67 @@ namespace Kendo.Mvc.UI.Fluent
         public ChartNumericAxisBuilder MajorUnit(double majorUnit)
         {
             Axis.MajorUnit = majorUnit;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets value at which the first perpendicular axis crosses this axis.
+        /// </summary>
+        /// <param name="axisCrossingValue">The value at which the first perpendicular axis crosses this axis.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().Chart(Model)
+        ///            .Name("Chart")
+        ///            .ValueAxis(axis => axis.AxisCrossingValue(4))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartNumericAxisBuilder AxisCrossingValue(double axisCrossingValue)
+        {
+            Axis.AxisCrossingValues = new double[] { axisCrossingValue };
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets value at which perpendicular axes cross this axis.
+        /// </summary>
+        /// <param name="axisCrossingValues">The values at which perpendicular axes cross this axis.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().Chart(Model)
+        ///            .Name("Chart")
+        ///            .XAxis(axis => axis.Numeric().AxisCrossingValue(0, 10))
+        ///            .YAxis(axis => axis.Numeric().Title("Axis 1"))
+        ///            .YAxis(axis => axis.Numeric("secondary").Title("Axis 2"))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartNumericAxisBuilder AxisCrossingValue(params double[] axisCrossingValues)
+        {
+            Axis.AxisCrossingValues = axisCrossingValues;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets value at which perpendicular axes cross this axis.
+        /// </summary>
+        /// <param name="axisCrossingValues">The values at which perpendicular axes cross this axis.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().Chart(Model)
+        ///            .Name("Chart")
+        ///            .XAxis(axis => axis.Numeric().AxisCrossingValue(new double[] { 0, 10 }))
+        ///            .YAxis(axis => axis.Numeric().Title("Axis 1"))
+        ///            .YAxis(axis => axis.Numeric("secondary").Title("Axis 2"))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartNumericAxisBuilder AxisCrossingValue(IEnumerable<double> axisCrossingValues)
+        {
+            Axis.AxisCrossingValues = axisCrossingValues;
 
             return this;
         }

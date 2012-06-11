@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System;
 
 namespace Kendo.Mvc.Examples.Models
 {
@@ -161,6 +162,337 @@ namespace Kendo.Mvc.Examples.Models
                 new ElectricitySource("Solar", 2),
                 new ElectricitySource("Nuclear", 49),
                 new ElectricitySource("Wind", 27)
+            };
+        }
+
+        public static IEnumerable<StockDataPoint> StockData()
+        {
+            return new StockDataPoint[]
+            {
+                new StockDataPoint {
+                    Date = DateTime.Parse("2011/12/30"),
+                    Close = 405,
+                    Volume = 6414369,
+                    Open = 403.51,
+                    High = 406.28,
+                    Low = 403.49,
+                    Symbol = "2. AAPL"
+                },
+                new StockDataPoint {
+                    Date = DateTime.Parse("2011/11/30"),
+                    Close = 382.2,
+                    Volume = 14464710,
+                    Open = 381.29,
+                    High = 382.276,
+                    Low = 378.3,
+                    Symbol = "2. AAPL"
+                },
+                new StockDataPoint {
+                    Date = DateTime.Parse("2011/10/31"),
+                    Close = 404.78,
+                    Volume = 13762250,
+                    Open = 402.42,
+                    High = 409.33,
+                    Low = 401.05,
+                    Symbol = "2. AAPL"
+                },
+                new StockDataPoint {
+                    Date = DateTime.Parse("2011/9/30"),
+                    Close = 381.32,
+                    Volume = 19553550,
+                    Open = 387.12,
+                    High = 388.89,
+                    Low = 381.18,
+                    Symbol = "2. AAPL"
+                },
+                new StockDataPoint {
+                    Date = DateTime.Parse("2011/8/31"),
+                    Close = 384.83,
+                    Volume = 18643770,
+                    Open = 390.57,
+                    High = 392.08,
+                    Low = 381.86,
+                    Symbol = "2. AAPL"
+                },
+                new StockDataPoint {
+                    Date = DateTime.Parse("2011/7/29"),
+                    Close = 390.48,
+                    Volume = 22550900,
+                    Open = 387.64,
+                    High = 395.15,
+                    Low = 384,
+                    Symbol = "2. AAPL"
+                },
+                new StockDataPoint {
+                    Date = DateTime.Parse("2011/6/30"),
+                    Close = 335.67,
+                    Volume = 11526680,
+                    Open = 334.7,
+                    High = 336.13,
+                    Low = 332.84,
+                    Symbol = "2. AAPL"
+                },
+                new StockDataPoint {
+                    Date = DateTime.Parse("2011/5/31"),
+                    Close = 347.83,
+                    Volume = 14869200,
+                    Open = 341.1,
+                    High = 347.83,
+                    Low = 341,
+                    Symbol = "2. AAPL"
+                },
+                new StockDataPoint {
+                    Date = DateTime.Parse("2011/4/29"),
+                    Close = 350.13,
+                    Volume = 29776300,
+                    Open = 346.78,
+                    High = 353.95,
+                    Low = 346.666,
+                    Symbol = "2. AAPL"
+                },
+                new StockDataPoint {
+                    Date = DateTime.Parse("2011/3/31"),
+                    Close = 348.5075,
+                    Volume = 9779020,
+                    Open = 346.36,
+                    High = 349.8,
+                    Low = 346.06,
+                    Symbol = "2. AAPL"
+                },
+                new StockDataPoint {
+                    Date = DateTime.Parse("2011/2/28"),
+                    Close = 353.21,
+                    Volume = 14356740,
+                    Open = 351.24,
+                    High = 355.05,
+                    Low = 351.12,
+                    Symbol = "2. AAPL"
+                },
+                new StockDataPoint {
+                    Date = DateTime.Parse("2011/1/31"),
+                    Close = 339.32,
+                    Volume = 13457510,
+                    Open = 335.8,
+                    High = 340.04,
+                    Low = 334.3,
+                    Symbol = "2. AAPL"
+                },
+                new StockDataPoint {
+                    Date = DateTime.Parse("2011/12/30"),
+                    Close = 173.1,
+                    Volume = 4279069,
+                    Open = 173.36,
+                    High = 175.17,
+                    Low = 172.49,
+                    Symbol = "3. AMZN"
+                },
+                new StockDataPoint {
+                    Date = DateTime.Parse("2011/11/30"),
+                    Close = 192.29,
+                    Volume = 7700490,
+                    Open = 194.76,
+                    High = 195.3,
+                    Low = 188.75,
+                    Symbol = "3. AMZN"
+                },
+                new StockDataPoint {
+                    Date = DateTime.Parse("2011/10/31"),
+                    Close = 213.51,
+                    Volume = 7336799,
+                    Open = 215.79,
+                    High = 218.89,
+                    Low = 213.04,
+                    Symbol = "3. AMZN"
+                },
+                new StockDataPoint {
+                    Date = DateTime.Parse("2011/9/30"),
+                    Close = 216.23,
+                    Volume = 6549641,
+                    Open = 218.19,
+                    High = 223,
+                    Low = 215.21,
+                    Symbol = "3. AMZN"
+                },
+                new StockDataPoint {
+                    Date = DateTime.Parse("2011/8/31"),
+                    Close = 215.23,
+                    Volume = 7397287,
+                    Open = 212.27,
+                    High = 216.17,
+                    Low = 211.35,
+                    Symbol = "3. AMZN"
+                },
+                new StockDataPoint {
+                    Date = DateTime.Parse("2011/7/29"),
+                    Close = 222.52,
+                    Volume = 5166268,
+                    Open = 221.29,
+                    High = 225.75,
+                    Low = 219.51,
+                    Symbol = "3. AMZN"
+                },
+                new StockDataPoint {
+                    Date = DateTime.Parse("2011/6/30"),
+                    Close = 204.49,
+                    Volume = 4446007,
+                    Open = 200.78,
+                    High = 205.2,
+                    Low = 200.5,
+                    Symbol = "3. AMZN"
+                },
+                new StockDataPoint {
+                    Date = DateTime.Parse("2011/5/31"),
+                    Close = 196.69,
+                    Volume = 3405698,
+                    Open = 195.94,
+                    High = 198.44,
+                    Low = 195.03,
+                    Symbol = "3. AMZN"
+                },
+                new StockDataPoint {
+                    Date = DateTime.Parse("2011/4/29"),
+                    Close = 195.81,
+                    Volume = 5697726,
+                    Open = 194.38,
+                    High = 196.59,
+                    Low = 193.78,
+                    Symbol = "3. AMZN"
+                },
+                new StockDataPoint {
+                    Date = DateTime.Parse("2011/3/31"),
+                    Close = 180.13,
+                    Volume = 4824628,
+                    Open = 179.31,
+                    High = 181.57,
+                    Low = 178.5,
+                    Symbol = "3. AMZN"
+                },
+                new StockDataPoint {
+                    Date = DateTime.Parse("2011/2/28"),
+                    Close = 173.29,
+                    Volume = 6781774,
+                    Open = 173.91,
+                    High = 175.89,
+                    Low = 172.15,
+                    Symbol = "3. AMZN"
+                },
+                new StockDataPoint {
+                    Date = DateTime.Parse("2011/1/31"),
+                    Close = 169.64,
+                    Volume = 6716002,
+                    Open = 170.16,
+                    High = 171.44,
+                    Low = 167.41,
+                    Symbol = "3. AMZN"
+                },
+                new StockDataPoint {
+                    Date = DateTime.Parse("2011/12/30"),
+                    Close = 645.9,
+                    Volume = 1780941,
+                    Open = 642.02,
+                    High = 646.76,
+                    Low = 642.02,
+                    Symbol = "1. GOOG"
+                },
+                new StockDataPoint {
+                    Date = DateTime.Parse("2011/11/30"),
+                    Close = 599.39,
+                    Volume = 3390173,
+                    Open = 597.95,
+                    High = 599.51,
+                    Low = 592.09,
+                    Symbol = "1. GOOG"
+                },
+                new StockDataPoint {
+                    Date = DateTime.Parse("2011/10/31"),
+                    Close = 592.64,
+                    Volume = 2557538,
+                    Open = 595.09,
+                    High = 599.69,
+                    Low = 591.67,
+                    Symbol = "1. GOOG"
+                },
+                new StockDataPoint {
+                    Date = DateTime.Parse("2011/9/30"),
+                    Close = 515.04,
+                    Volume = 2723353,
+                    Open = 520.21,
+                    High = 524,
+                    Low = 514.38,
+                    Symbol = "1. GOOG"
+                },
+                new StockDataPoint {
+                    Date = DateTime.Parse("2011/8/31"),
+                    Close = 540.96,
+                    Volume = 2689989,
+                    Open = 544.74,
+                    High = 546.3,
+                    Low = 536,
+                    Symbol = "1. GOOG"
+                },
+                new StockDataPoint {
+                    Date = DateTime.Parse("2011/7/29"),
+                    Close = 603.69,
+                    Volume = 4133695,
+                    Open = 604.23,
+                    High = 614.96,
+                    Low = 603.69,
+                    Symbol = "1. GOOG"
+                },
+                new StockDataPoint {
+                    Date = DateTime.Parse("2011/6/30"),
+                    Close = 506.38,
+                    Volume = 2427330,
+                    Open = 501.99,
+                    High = 506.67,
+                    Low = 501.5,
+                    Symbol = "1. GOOG"
+                },
+                new StockDataPoint {
+                    Date = DateTime.Parse("2011/5/31"),
+                    Close = 529.02,
+                    Volume = 2685830,
+                    Open = 525,
+                    High = 529.05,
+                    Low = 523.5,
+                    Symbol = "1. GOOG"
+                },
+                new StockDataPoint {
+                    Date = DateTime.Parse("2011/4/29"),
+                    Close = 544.1,
+                    Volume = 3522997,
+                    Open = 540,
+                    High = 544.1,
+                    Low = 538.51,
+                    Symbol = "1. GOOG"
+                },
+                new StockDataPoint {
+                    Date = DateTime.Parse("2011/3/31"),
+                    Close = 586.76,
+                    Volume = 2028228,
+                    Open = 583,
+                    High = 588.1612,
+                    Low = 581.74,
+                    Symbol = "1. GOOG"
+                },
+                new StockDataPoint {
+                    Date = DateTime.Parse("2011/2/28"),
+                    Close = 613.4,
+                    Volume = 2281411,
+                    Open = 610,
+                    High = 616.49,
+                    Low = 608.01,
+                    Symbol = "1. GOOG"
+                },
+                new StockDataPoint {
+                    Date = DateTime.Parse("2011/1/31"),
+                    Close = 600.36,
+                    Volume = 2804332,
+                    Open = 603.6,
+                    High = 604.47,
+                    Low = 595.55,
+                    Symbol = "1. GOOG"
+                }
             };
         }
     }

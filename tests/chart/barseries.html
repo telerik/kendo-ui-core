@@ -795,11 +795,25 @@
                     });
                 });
 
-                test("format", 1, function() {
+                test("creates labels with full format", 1, function() {
                     setupBarChart(plotArea, { series: [{
                         data: positiveData,
                         labels: {
                             format: "{0:C}",
+                            visible: true
+                        }
+                    }] });
+
+                    same($.map(series.points, function(bar) {
+                        return bar.children[0].children[0].children[0].content }
+                    ), ["$100.00", "$150.00"]);
+                });
+
+                test("creates labels with simple format", 1, function() {
+                    setupBarChart(plotArea, { series: [{
+                        data: positiveData,
+                        labels: {
+                            format: "C",
                             visible: true
                         }
                     }] });
@@ -1747,6 +1761,24 @@
 
                 test("renders rectangle", function() {
                     sameBox(rect, box);
+                });
+
+                test("does not render rectangle when box height is zero", function() {
+                    bar.reflow(new Box2D(0, 0, 100, 0));
+
+                    view = new ViewStub();
+                    bar.getViewElements(view);
+
+                    equals(view.log.rect.length, 0);
+                });
+
+                test("does not render rectangle when box width is zero", function() {
+                    bar.reflow(new Box2D(0, 0, 0, 100));
+
+                    view = new ViewStub();
+                    bar.getViewElements(view);
+
+                    equals(view.log.rect.length, 0);
                 });
 
                 test("sets fill color", function() {

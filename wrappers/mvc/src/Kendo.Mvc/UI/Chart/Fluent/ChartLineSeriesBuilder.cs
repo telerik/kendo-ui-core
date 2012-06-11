@@ -40,6 +40,26 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Sets the aggregate function for date series.
+        /// This function is used when a category (an year, month, etc.) contains two or more points.
+        /// </summary>
+        /// <param name="aggregate">Aggregate function name.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Chart(Model)
+        ///             .Name("Chart")
+        ///             .Series(series => series.Line(s => s.Sales).Aggregate())
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartLineSeriesBuilder<T> Aggregate(ChartSeriesAggregate aggregate)
+        {
+            Series.Aggregate = aggregate;
+
+            return this;
+        }
+
+        /// <summary>
         /// Configures the line chart labels.
         /// </summary>
         /// <param name="configurator">The configuration action.</param>

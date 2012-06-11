@@ -15,6 +15,15 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// Aggregate function for date series.
+        /// </summary>
+        ChartSeriesAggregate? Aggregate
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Gets the line chart data labels configuration
         /// </summary>
         ChartPointLabels Labels

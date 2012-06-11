@@ -41,6 +41,19 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
+        public void Aggregate_should_set_Aggregate()
+        {
+            builder.Aggregate(ChartSeriesAggregate.Max);
+            series.Aggregate.ShouldEqual(ChartSeriesAggregate.Max);
+        }
+
+        [Fact]
+        public void Aggregate_should_return_builder()
+        {
+            builder.Aggregate(ChartSeriesAggregate.Max).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
         public void Gap_should_set_gap()
         {
             builder.Gap(1);

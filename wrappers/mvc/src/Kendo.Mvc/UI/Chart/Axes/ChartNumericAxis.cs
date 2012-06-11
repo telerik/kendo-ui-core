@@ -1,5 +1,7 @@
 namespace Kendo.Mvc.UI
 {
+    using System.Collections.Generic;
+
     /// <summary>
     /// Represents a numeric axis in the <see cref="Chart{T}"/> component
     /// </summary>
@@ -13,10 +15,19 @@ namespace Kendo.Mvc.UI
         public ChartNumericAxis(Chart<T> chart)
             : base(chart)
         {
+            AxisCrossingValues = new List<double>();
             MajorGridLines = new ChartLine();
             MinorGridLines = new ChartLine();
             Labels = new ChartAxisLabels();
-            Format = "";
+        }
+
+        /// <summary>
+        /// The values at which perpendicular axes cross this axis.
+        /// </summary>
+        public IEnumerable<double> AxisCrossingValues
+        {
+            get;
+            set;
         }
 
         /// <summary>
@@ -45,11 +56,6 @@ namespace Kendo.Mvc.UI
             get;
             set;
         }
-
-        /// <summary>
-        /// The axis label format
-        /// </summary>
-        public string Format { get; set; }
 
         /// <summary>
         /// Gets the axis serializer.

@@ -494,6 +494,293 @@
                 });
             });
 
+            // ------------------------------------------------------------
+            var floorDate = dataviz.floorDate,
+                ceilDate = dataviz.ceilDate,
+                date;
+
+            module("Date helpers / floorDate", {
+                setup: function() {
+                    date = new Date("2012/03/29 17:40:10");
+                }
+            });
+
+            test("floorDate rounds date down to years", function() {
+                same(floorDate(date, "years"), new Date("2012/01/01 00:00"));
+            });
+
+            test("floorDate rounds date down to months", function() {
+                same(floorDate(date, "months"), new Date("2012/03/01 00:00"));
+            });
+
+            test("floorDate rounds date down to days", function() {
+                same(floorDate(date, "days"), new Date("2012/03/29 00:00"));
+            });
+
+            test("floorDate rounds date down to hours", function() {
+                same(floorDate(date, "hours"), new Date("2012/03/29 17:00"));
+            });
+
+            test("floorDate rounds date down to minutes", function() {
+                same(floorDate(date, "minutes"), new Date("2012/03/29 17:40"));
+            });
+
+            test("floorDate returns date when no unit is specified", function() {
+                same(floorDate(date), date);
+            });
+
+            // ------------------------------------------------------------
+            module("Date helpers / ceilDate", {
+                setup: function() {
+                    date = new Date("2012/03/29 17:40:10");
+                }
+            });
+
+            test("ceilDate rounds date up to years", function() {
+                same(ceilDate(date, "years"), new Date("2013/01/01 00:00"));
+            });
+
+            test("ceilDate does not increment year for dates divisable by the baseUnit", function() {
+                same(
+                    ceilDate(new Date("2013/01/01 00:00"), "years"),
+                    new Date("2013/01/01 00:00")
+                );
+            });
+
+            test("ceilDate rounds date up to months", function() {
+                same(ceilDate(date, "months"), new Date("2012/04/01 00:00"));
+            });
+
+            test("ceilDate does not increment month for dates divisable by the baseUnit", function() {
+                same(
+                    ceilDate(new Date("2013/01/01 00:00"), "months"),
+                    new Date("2013/01/01 00:00")
+                );
+            });
+
+            test("ceilDate rounds date up to days", function() {
+                same(ceilDate(date, "days"), new Date("2012/03/30 00:00"));
+            });
+
+            test("ceilDate does not increment day for dates divisable by the baseUnit", function() {
+                same(
+                    ceilDate(new Date("2013/01/01 00:00"), "days"),
+                    new Date("2013/01/01 00:00")
+                );
+            });
+
+            test("ceilDate rounds date up to hours", function() {
+                same(ceilDate(date, "hours"), new Date("2012/03/29 18:00"));
+            });
+
+            test("ceilDate does not increment hour for dates divisable by the baseUnit", function() {
+                same(
+                    ceilDate(new Date("2013/01/01 00:00"), "hours"),
+                    new Date("2013/01/01 00:00")
+                );
+            });
+
+            test("ceilDate rounds date up to minutes", function() {
+                same(ceilDate(date, "minutes"), new Date("2012/03/29 17:41"));
+            });
+
+            test("ceilDate does not increment minute for dates divisable by the baseUnit", function() {
+                same(
+                    ceilDate(new Date("2013/01/01 00:00"), "minutes"),
+                    new Date("2013/01/01 00:00")
+                );
+            });
+
+            test("ceilDate returns date when no unit is specified", function() {
+                same(ceilDate(date), date);
+            });
+
+            // ------------------------------------------------------------
+            var duration = dataviz.duration,
+                dateA = new Date("2010/01/01 10:00"),
+                dateB = new Date("2011/03/01 15:00");
+
+            module("Date helpers / duration");
+
+            test("calculates duration in years", function() {
+                equals(duration(dateA, dateB, "years"), 1);
+            });
+
+            test("calculates duration in months", function() {
+                equals(duration(dateA, dateB, "months"), 14);
+            });
+
+            test("calculates duration in days", function() {
+                equals(duration(dateA, dateB, "days"), 424);
+            });
+
+            test("calculates duration in days during DST transition", function() {
+                equals(duration(
+                    new Date("2012/03/24 GMT+0200 (FLE Standard Time)"),
+                    new Date("2012/03/26 GMT+0300 (FLE Daylight Time)"),
+                    "days"
+                    ), 2
+                );
+            });
+
+            test("calculates duration in hours", function() {
+                equals(duration(dateA, dateB, "hours"), 10181);
+            });
+
+            test("calculates duration in hours during DST transition", function() {
+                equals(duration(
+                    new Date("2012/03/25 00:00 GMT+0200 (FLE Standard Time)"),
+                    new Date("2012/03/25 06:00 GMT+0300 (FLE Daylight Time)"),
+                    "hours"
+                    ), 5
+                );
+            });
+
+            test("calculates duration in minutes", function() {
+                equals(duration(dateA, dateB, "minutes"), 610860);
+            });
+
+            // ------------------------------------------------------------
+            var addDuration = dataviz.addDuration;
+
+            module("Date helpers / addDuration");
+
+            test("rounds date to years", function() {
+                same(addDuration(dateA, 10, "years"), new Date("2020/01/01"));
+            });
+
+            test("rounds date to months", function() {
+                same(addDuration(dateA, 15, "months"), new Date("2011/04/01"));
+            });
+
+            test("rounds date to days", function() {
+                same(addDuration(dateA, 35, "days"), new Date("2010/02/05"));
+            });
+
+            test("rounds to days during DST transition", function() {
+                same(addDuration(
+                        new Date("2012/03/25 GMT+0200 (FLE Standard Time)"),
+                        2,
+                        "days"
+                    ), new Date("2012/03/27 GMT+0300 (FLE Daylight Time)")
+                );
+            });
+
+            test("rounds date to hours", function() {
+                same(addDuration(dateA, 24, "hours"), new Date("2010/01/02 10:00"));
+            });
+
+            test("rounds to hours during DST transition", function() {
+                same(addDuration(
+                        new Date("2012/03/25 00:00 GMT+0200 (FLE Standard Time)"),
+                        6,
+                        "hours"
+                    ), new Date("2012/03/25 06:00 GMT+0300 (FLE Daylight Time)")
+                );
+            });
+
+            test("rounds date to minutes", function() {
+                same(addDuration(dateA, 75, "minutes"), new Date("2010/01/01 11:15"));
+            });
+
+            // ------------------------------------------------------------
+            var toDate = dataviz.toDate;
+
+            module("Date helpers / toDate");
+
+            test("Returns date unchanged", function() {
+                var date = new Date();
+
+                same(date, toDate(date));
+            });
+
+            test("Returns array of dates unchanged", function() {
+                var dates = [new Date(), new Date()];
+
+                same(dates, toDate(dates));
+            });
+
+            test("Converts string to date", function() {
+                var date = "2012/01/01 00:00";
+
+                same(new Date(date), toDate(date));
+            });
+
+            test("Converts array of strings to dates", function() {
+                var dates = ["2012/01/01 00:00", "2012/01/02 00:00"];
+
+                same([new Date(dates[0]), new Date(dates[1])], toDate(dates));
+            });
+
+            test("Converts time to date", function() {
+                var time = 1325368800000;
+
+                same(new Date(time), toDate(time));
+            });
+
+            test("Converts array of times to dates", function() {
+                var times = [1325368800000, 1325455200000];
+
+                same([new Date(times[0]), new Date(times[1])], toDate(times));
+            });
+
+            test("Converts MS JSON string to date", function() {
+                var jsonDate = "/Date(1325368800000)/";
+
+                same(new Date("2012/01/01 00:00"), toDate(jsonDate));
+            });
+
+            test("Converts array of MS JSON strings to dates", function() {
+                var jsonDates = ["/Date(1325368800000)/", "/Date(1325455200000)/"];
+
+                same([new Date("2012/01/01 00:00"), new Date("2012/01/02 00:00")], toDate(jsonDates));
+            });
+
+            // ------------------------------------------------------------
+            var autoFormat = dataviz.autoFormat;
+
+            module("autoFormat");
+
+            test("Applies standard format with one argument", function() {
+                equals(autoFormat("{0:N2}", 1), "1.00");
+            });
+
+            test("Applies standard format with one argument", function() {
+                equals(autoFormat("{0:N2} {1:N2}", 1, 2), "1.00 2.00");
+            });
+
+            test("Applies simple format", function() {
+                equals(autoFormat("N2", 1), "1.00");
+            });
+
+            (function() {
+                // ------------------------------------------------------------
+                var Aggregates = kendo.dataviz.Aggregates;
+                var values = [1, 2, 3];
+
+                module("Aggregates");
+
+                test("min", function() {
+                    equals(Aggregates.min(values), 1);
+                });
+
+                test("max", function() {
+                    equals(Aggregates.max(values), 3);
+                });
+
+                test("sum", function() {
+                    equals(Aggregates.sum(values), 6);
+                });
+
+                test("avg", function() {
+                    equals(Aggregates.avg(values), 2);
+                });
+
+                test("count", function() {
+                    equals(Aggregates.count(values), 3);
+                });
+            })();
+
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>

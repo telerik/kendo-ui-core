@@ -20,7 +20,6 @@ namespace Kendo.Mvc.UI
             Labels = new ChartAxisLabels();
             PlotBands = new List<ChartPlotBand>();
             Title = new ChartAxisTitle();
-            AxisCrossingValues = new List<double>();
             MajorTicks = new ChartAxisTicks();
             MinorTicks = new ChartAxisTicks();
         }
@@ -75,15 +74,6 @@ namespace Kendo.Mvc.UI
         /// The axis line configuration.
         /// </summary>
         public ChartLine Line
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// The values at which perpendicular axes cross this axis.
-        /// </summary>
-        public IEnumerable<double> AxisCrossingValues
         {
             get;
             set;

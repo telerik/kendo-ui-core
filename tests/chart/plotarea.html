@@ -183,7 +183,7 @@
                 });
 
                 test("axis limit is [0, 1] when no series are configured", 2, function() {
-                    stubMethod(dataviz.CategoricalPlotArea.fn, "createAxes",
+                    stubMethod(dataviz.CategoricalPlotArea.fn, "createValueAxes",
                         function() {
                             equal(this.valueAxisRangeTracker.query("primary").min, 0);
                             equal(this.valueAxisRangeTracker.query("primary").max, 1);
@@ -476,7 +476,7 @@
                 });
 
                 test("sets axis min/max to series limits", 2, function() {
-                    stubMethod(dataviz.CategoricalPlotArea.fn, "createAxes",
+                    stubMethod(dataviz.CategoricalPlotArea.fn, "createValueAxes",
                         function() {
                             equal(this.valueAxisRangeTracker.query("primary").min, 10);
                             equal(this.valueAxisRangeTracker.query("primary").max, 300);
@@ -703,6 +703,155 @@
                 test("does not set isStacked when first and only series is stacked", function() {
                     createPlotArea([{ type: "bar", data: [], stack: true }]);
                     ok(!chartSeries.options.isStacked);
+                });
+
+                // ------------------------------------------------------------
+                var dateCategoryAxis = {
+                    type: "Date",
+                    categories: ["2012-02-01", "2012-02-02", "2012-02-04"]
+                };
+
+                module("Categorical PlotArea / Date series", {
+                    setup: function() {
+                        moduleSetup();
+                    }
+                });
+
+                test("Automatically detects date category axis", function() {
+                    createPlotArea([{
+                            data: [100, 200, 300]
+                        }], {
+                        categoryAxis: {
+                            categories: [
+                                new Date(2012, 02, 01),
+                                new Date(2012, 02, 02),
+                                new Date(2012, 02, 04)
+                            ]
+                        }
+                    });
+
+                    same(plotArea.categoryAxis.options.type, "Date");
+                    same(plotArea.series[0].data, [100, 200, undefined, 300]);
+                });
+
+                test("User can override automatic category axis type", function() {
+                    createPlotArea([{
+                            data: [100, 200, 300]
+                        }], {
+                        categoryAxis: {
+                            type: "Category",
+                            categories: [
+                                new Date(2012, 02, 01),
+                                new Date(2012, 02, 02),
+                                new Date(2012, 02, 04)
+                            ]
+                        }
+                    });
+
+                    same(plotArea.categoryAxis.options.type, "Category");
+                    same(plotArea.series[0].data, [100, 200, 300]);
+                });
+
+                test("Does not alter data points when no grouping is done", function() {
+                    createPlotArea([{
+                        data: [100, 200, 300]
+                    }], {
+                        categoryAxis: dateCategoryAxis
+                    });
+
+                    same(plotArea.series[0].data, [100, 200, undefined, 300]);
+                });
+
+                test("Does not alter data items when no grouping is done", function() {
+                    createPlotArea([{
+                        data: [100, 200, 300],
+                        dataItems: ["a", "b", "c"]
+                    }], {
+                        categoryAxis: dateCategoryAxis
+                    });
+
+                    same(plotArea.series[0].dataItems, ["a", "b", undefined, "c"]);
+                });
+
+                test("Does not alter original series data", function() {
+                    var series = [{
+                        data: [100, 200, 300]
+                    }];
+
+                    createPlotArea(series, {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    same(series[0].data, [100, 200, 300]);
+                });
+
+                test("Does not alter original series data items", function() {
+                    var series = [{
+                        data: [100, 200, 300],
+                        dataItems: ["a", "b", "c"]
+                    }];
+
+                    createPlotArea(series, {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    same(series[0].dataItems, ["a", "b", "c"]);
+                });
+
+                test("Aggregates series data using max by default", function() {
+                    createPlotArea([{
+                        data: [100, 200, 300]
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    same(plotArea.series[0].data, [300]);
+                });
+
+                test("Aggregates series data with predefined function", function() {
+                    createPlotArea([{
+                        data: [100, 200, 300],
+                        aggregate: "min"
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    same(plotArea.series[0].data, [100]);
+                });
+
+                test("Aggregates series data with user function", 1, function() {
+                    createPlotArea([{
+                        data: [100, 200, 300],
+                        aggregate: function(values, series) {
+                            same(values, series.data);
+                            return 0;
+                        }
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+                });
+
+                test("Aggregated points don't have data items", function() {
+                    createPlotArea([{
+                        data: [100, 200, 300],
+                        dataItems: ["a", "b", "c"]
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    same(plotArea.series[0].dataItems, [undefined]);
                 });
 
             })();
@@ -1084,20 +1233,71 @@
                     );
                 });
 
-                test("assigns axisX alias to first named X axis", function() {
-                    createPlotArea(scatterSeriesData, {
-                        xAxis: [{ name: "a" }, { name: "b" }]
-                    });
-
-                    equals(plotArea.axisX.options.name, "a");
+                test("creates Numeric axes by default", function() {
+                    ok(plotArea.axisX instanceof dataviz.NumericAxis);
+                    ok(plotArea.axisY instanceof dataviz.NumericAxis);
                 });
 
-                test("assigns axisY alias to first named Y axis", function() {
+                test("creates Date value axes", function() {
                     createPlotArea(scatterSeriesData, {
-                        yAxis: [{ name: "a" }, { name: "b" }]
+                        xAxis: {
+                            type: "Date"
+                        },
+                        yAxis: {
+                            type: "Date"
+                        }
                     });
 
-                    equals(plotArea.axisY.options.name, "a");
+                    ok(plotArea.axisX instanceof dataviz.DateValueAxis);
+                    ok(plotArea.axisY instanceof dataviz.DateValueAxis);
+                });
+
+                test("Automatically detects date X axis", function() {
+                    createPlotArea([{
+                        name: "Value A",
+                        type: "scatter",
+                        data: [[new Date(2012, 02, 01), 100]]
+                    }]);
+
+                    same(plotArea.axisX.options.type, "Date");
+                });
+
+                test("Automatic detection of X axis can be overriden", function() {
+                    createPlotArea([{
+                        name: "Value A",
+                        type: "scatter",
+                        data: [[new Date(2012, 02, 01), 100]]
+                    }], {
+                        xAxis: {
+                            type: "Numeric"
+                        }
+                    });
+
+                    ok(plotArea.axisX instanceof kendo.dataviz.NumericAxis);
+                });
+
+                test("Automatically detects date Y axis", function() {
+                    createPlotArea([{
+                        name: "Value A",
+                        type: "scatter",
+                        data: [[100, new Date(2012, 02, 01)]]
+                    }]);
+
+                    same(plotArea.axisY.options.type, "Date");
+                });
+
+                test("Automatic detection of Y axis can be overriden", function() {
+                    createPlotArea([{
+                        name: "Value A",
+                        type: "scatter",
+                        data: [[100, new Date(2012, 02, 01)]]
+                    }], {
+                        yAxis: {
+                            type: "Numeric"
+                        }
+                    });
+
+                    same(plotArea.axisX.options.type, "Numeric");
                 });
 
                 // ------------------------------------------------------------
@@ -1114,6 +1314,22 @@
                             }]
                         });
                     }
+                });
+
+                test("assigns axisX alias to first named X axis", function() {
+                    createPlotArea(scatterSeriesData, {
+                        xAxis: [{ name: "a" }, { name: "b" }]
+                    });
+
+                    equals(plotArea.axisX.options.name, "a");
+                });
+
+                test("assigns axisY alias to first named Y axis", function() {
+                    createPlotArea(scatterSeriesData, {
+                        yAxis: [{ name: "a" }, { name: "b" }]
+                    });
+
+                    equals(plotArea.axisY.options.name, "a");
                 });
 
                 test("secondary X axis added to children collection", function() {

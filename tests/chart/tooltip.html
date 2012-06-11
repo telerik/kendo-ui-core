@@ -60,10 +60,10 @@
                         },
                         owner: {
                             formatPointValue: function(value, tooltipFormat) {
-                                return kendo.format(tooltipFormat, value);
+                                return kendo.dataviz.autoFormat(tooltipFormat, value);
                             }
                         },
-                        formatPointValue: function(format) {
+                        formatValue: function(format) {
                             var point = this;
 
                             return point.owner.formatPointValue(point.value, format);
@@ -141,10 +141,16 @@
                     equals(element.css("color").replace(/\s/g, ''), GREEN);
                 });
 
-                test("applies format", function() {
+                test("applies full label format", function() {
                     createTooltip({ format: "{0}%" });
                     showNow(dataPointMock);
                     equals(element.text(), "1%");
+                });
+
+                test("applies simple label format", function() {
+                    createTooltip({ format: "p0" });
+                    showNow(dataPointMock);
+                    equals(element.text(), "100 %");
                 });
 
                 test("renders template", function() {

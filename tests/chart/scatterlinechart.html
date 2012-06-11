@@ -338,6 +338,24 @@
                     ]);
                 });
 
+                // ------------------------------------------------------------
+                module("Scatter Line Chart / Labels", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                    }
+                });
+
+                test("applies full label format", function() {
+                    setupScatterLineChart(plotArea, {
+                        series: [{
+                            data: [[1, 10], [2, 20]],
+                            labels: { visible: true, format: "{0:C} {1:C}" }
+                        }]
+                    });
+
+                    equals(view.log.text[0].content, "$1.00 $10.00");
+                });
+
             })();
 
             (function() {

@@ -525,6 +525,8 @@
     <Content Include="Views\dataviz\linear-gauge\scale-options.cshtml" />
     <Content Include="Views\dataviz\radial-gauge\index.cshtml" />
     <Content Include="Views\dataviz\radial-gauge\scale-options.cshtml" />
+    <Content Include="Views\dataviz\bar-charts\date-axis.cshtml" />
+    <Content Include="Views\dataviz\scatter-charts\date-axis.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />

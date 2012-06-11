@@ -24,6 +24,15 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// Aggregate function for date series.
+        /// </summary>
+        ChartSeriesAggregate? Aggregate
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// The distance between category clusters.
         /// </summary>
         double? Gap

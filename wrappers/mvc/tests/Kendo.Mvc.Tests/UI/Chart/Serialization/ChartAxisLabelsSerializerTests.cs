@@ -203,6 +203,32 @@ namespace Kendo.Mvc.UI.Tests
             GetJson().ContainsKey("opacity").ShouldBeFalse();
         }
 
+        [Fact]
+        public void Serializes_culture()
+        {
+            labels.Culture = new System.Globalization.CultureInfo("es-ES");
+            GetJson()["culture"].ShouldEqual("es-ES");
+        }
+
+        [Fact]
+        public void Does_not_serialize_default_culture()
+        {
+            GetJson().ContainsKey("culture").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void Serializes_date_formats()
+        {
+            labels.DateFormats.Hours = "test";
+            GetJson().ContainsKey("dateFormats");
+        }
+
+        [Fact]
+        public void Does_not_serialize_default_date_formats()
+        {
+            GetJson().ContainsKey("dateFormats").ShouldBeFalse();
+        }
+
         private IDictionary<string, object> GetJson()
         {
             return labels.CreateSerializer().Serialize();

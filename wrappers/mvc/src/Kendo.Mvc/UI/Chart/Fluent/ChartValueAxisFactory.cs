@@ -54,5 +54,26 @@ namespace Kendo.Mvc.UI.Fluent
 
             return new ChartNumericAxisBuilder(numericAxis);
         }
+
+        /// <summary>
+        /// Defines a date value axis.
+        /// </summary>
+        public virtual ChartDateAxisBuilder Date()
+        {
+            return Date("");
+        }
+
+        /// <summary>
+        /// Defines a date value axis.
+        /// </summary>
+        public virtual ChartDateAxisBuilder Date(string name)
+        {
+            var dateAxis = new ChartDateAxis<TModel>(Container);
+            dateAxis.Name = name;
+
+            Axes.Add(dateAxis);
+
+            return new ChartDateAxisBuilder(dateAxis);
+        }
     }
 }

@@ -33,7 +33,12 @@ namespace Kendo.Mvc.UI
             AxisDefaults = new ChartAxisDefaults<T>(this);
             Tooltip = new ChartTooltip();
             Transitions = true;
+
             DataSource = new DataSource();
+            DataSource.Schema.Data = "";
+            DataSource.Schema.Total = "";
+            DataSource.Schema.Errors = "";
+            DataSource.ModelType(typeof(T));
         }
 
         /// <summary>

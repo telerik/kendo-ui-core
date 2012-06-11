@@ -473,6 +473,35 @@
                 });
 
                 // ------------------------------------------------------------
+                module("Pie Chart / Labels", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                    }
+                });
+
+                test("applies full label format", function() {
+                    setupPieChart(plotArea, {
+                        series: [{
+                            data: [1, 2],
+                            labels: { visible: true, format: "{0:C}" }
+                        }]
+                    });
+
+                    equals(view.log.text[0].content, "$1.00");
+                });
+
+                test("applies simple label format", function() {
+                    setupPieChart(plotArea, {
+                        series: [{
+                            data: [1, 2],
+                            labels: { visible: true, format: "C" }
+                        }]
+                    });
+
+                    equals(view.log.text[0].content, "$1.00");
+                });
+
+                // ------------------------------------------------------------
                 module("Pie Chart / Labels / Configuration", {
                     setup: function() {
                         plotArea = new PlotAreaStub();

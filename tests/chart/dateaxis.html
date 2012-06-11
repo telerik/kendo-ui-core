@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.chart</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.chart.js"></script>
+        <script src="../../src/kendo.dataviz.themes.js"></script>
+        <script src="../../src/kendo.dataviz.svg.js"></script>
+        <script src="../../src/kendo.dataviz.vml.js"></script>
+        <script src="../../src/cultures/kendo.culture.es-ES.js"></script>
+        <script src="util.js"></script>
+        <script type="text/javascript">
+            var dataviz = kendo.dataviz,
+                dateAxis,
+                chartBox = new dataviz.Box2D(0, 0, 800, 600),
+                view;
+
+            // Tests expect particular font size
+            dataviz.Text.fn.options.font = "16px Verdana, sans-serif";
+
+            (function() {
+                var categories;
+
+                function createDateCategoryAxis(options) {
+                    dateAxis = new dataviz.DateCategoryAxis(
+                        options
+                    );
+
+                    categories = dateAxis.options.categories;
+
+                    view = new ViewStub();
+                    dateAxis.reflow(chartBox);
+                    dateAxis.getViewElements(view);
+                }
+
+                // ------------------------------------------------------------
+                module("Date CategoryAxis / Configuration", {
+                    setup: function() {
+                        createDateCategoryAxis({
+                            categories: [
+                                new Date("2012/02/01"), new Date("2012/02/10")
+                            ]
+                        });
+                    }
+                });
+
+                test("User set base unit is applied", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01"), new Date("2012/03/10")
+                        ],
+                        baseUnit: "days"
+                    });
+
+                    equals(dateAxis.options.baseUnit, "days");
+                });
+
+                test("Default base unit is days", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01")
+                        ]
+                    });
+
+                    equals(dateAxis.options.baseUnit, "days");
+                });
+
+                test("User set empty base unit defaults to automatic", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01"), new Date("2012/03/10")
+                        ],
+                        baseUnit: ""
+                    });
+
+                    equals(dateAxis.options.baseUnit, "months");
+                });
+
+                test("Min date can be parsed from string", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/05"), new Date("2012/02/10")
+                        ],
+                        min: "2012/02/01"
+                    });
+
+                    same(dateAxis.options.min, new Date("2012/02/01 00:00"));
+                });
+
+                test("Max date can be parsed from string", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01"), new Date("2012/02/10")
+                        ],
+                        max: "2012/02/15"
+                    });
+
+                    same(dateAxis.options.max, new Date("2012/02/15 00:00"));
+                });
+
+                // ------------------------------------------------------------
+                module("Date CategoryAxis / Grouping", {
+                    setup: function() {
+                    }
+                });
+
+                test("categoryMap for aggregated categories", function() {
+                    createDateCategoryAxis({
+                        baseUnit: "months",
+                        categories: [
+                            new Date("2012/02/01"), new Date("2012/02/03")
+                        ]
+                    });
+
+                    same(dateAxis.categoryMap, [[0, 1]]);
+                });
+
+                test("categoryMap for sparse categories", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01"), new Date("2012/02/03")
+                        ]
+                    });
+
+                    same(dateAxis.categoryMap, [[0], [], [1]]);
+                });
+
+                // ------------------------------------------------------------
+                module("Date CategoryAxis / Min-Max values", {
+                    setup: function() {
+                        createDateCategoryAxis({
+                            categories: [
+                                new Date("2012/02/01"), new Date("2012/02/10")
+                            ]
+                        });
+                    }
+                });
+
+                test("Min equals first category by default", function() {
+                    same(dateAxis.options.min, categories[0]);
+                });
+
+                test("Max equals last category by default", function() {
+                    same(dateAxis.options.max, categories[categories.length - 1]);
+                });
+
+                test("User set min value is trimmed to base unit", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/05"), new Date("2012/02/10")
+                        ],
+                        min: new Date("2012/02/01 14:00")
+                    });
+
+                    same(dateAxis.options.min, new Date("2012/02/01"));
+                });
+
+                test("User set max value is trimmed to base unit", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/05"), new Date("2012/02/10")
+                        ],
+                        max: new Date("2012/02/15 14:00")
+                    });
+
+                    same(dateAxis.options.max, new Date("2012/02/15"));
+                });
+
+                test("User set min value smaller than first category is applied", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/05"), new Date("2012/02/06")
+                        ],
+                        min: new Date("2012/02/04")
+                    });
+
+                    same(categories, [
+                        new Date("2012/02/04"), new Date("2012/02/05"),
+                        new Date("2012/02/06")
+                    ]);
+                });
+
+                test("User set min value larger than first category is applied", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/05"), new Date("2012/02/06")
+                        ],
+                        min: new Date("2012/02/06")
+                    });
+
+                    same(categories, [
+                        new Date("2012/02/06")
+                    ]);
+                });
+
+                test("User set max value smaller than last category", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/05"), new Date("2012/02/06")
+                        ],
+                        max: new Date("2012/02/05")
+                    });
+
+                    same(categories, [
+                        new Date("2012/02/05")
+                    ]);
+                });
+
+                test("User set max value larger than last category", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/05"), new Date("2012/02/06")
+                        ],
+                        max: new Date("2012/02/07")
+                    });
+
+                    same(categories, [
+                        new Date("2012/02/05"), new Date("2012/02/06"),
+                        new Date("2012/02/07")
+                    ]);
+                });
+
+                // ------------------------------------------------------------
+                module("Date CategoryAxis / Base unit / Days");
+
+                test("Base unit is determined by series delta", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/05"), new Date("2012/02/06")
+                        ]
+                    });
+
+                    equals(dateAxis.options.baseUnit, "days");
+                });
+
+                test("Base unit calculation ignores repeating categories", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01"), new Date("2012/02/01"), new Date("2012/02/02")
+                        ]
+                    });
+
+                    equals(dateAxis.options.baseUnit, "days");
+                });
+
+                test("creates labels with default format", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01"), new Date("2012/02/03")
+                        ]
+                    });
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["2/1", "2/2", "2/3"]);
+                });
+
+                test("labels have associated data items", function() {
+                    createDateCategoryAxis({
+                        dataItems: ["a", "b", "c"],
+                        categories: [
+                            new Date("2012/02/01"), new Date("2012/02/03")
+                        ]
+                    });
+
+                    same(dateAxis.labels[0].dataItem, "a");
+                });
+
+                test("creates labels with custom date format", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01"), new Date("2012/02/03")
+                        ],
+                        labels: {
+                            dateFormats: {
+                                days: "M/d/yy"
+                            }
+                        }
+                    });
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["2/1/12", "2/2/12", "2/3/12"]);
+                });
+
+                test("creates labels with custom format", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01"), new Date("2012/02/03")
+                        ],
+                        labels: {
+                            format: "M/d/yy"
+                        }
+                    });
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["2/1/12", "2/2/12", "2/3/12"]);
+                });
+
+                test("creates labels with custom culture", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01"), new Date("2012/02/03")
+                        ],
+                        labels: {
+                            format: "d.MMM",
+                            culture: "es-ES"
+                        }
+                    });
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["1.feb", "2.feb", "3.feb"]);
+                });
+
+                test("creates labels with custom template", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01"), new Date("2012/02/03")
+                        ],
+                        labels: {
+                            template: "#= kendo.toString(value, 'yyyy') #"
+                        }
+                    });
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["2012", "2012", "2012"]);
+                });
+
+                // ------------------------------------------------------------
+                module("Date CategoryAxis / Base unit / Months");
+
+                test("Base unit is determined by series delta", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01"), new Date("2012/03/10")
+                        ]
+                    });
+
+                    equals(dateAxis.options.baseUnit, "months");
+                });
+
+                test("Base unit is determined by series delta (2)", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2011/01/31"), new Date("2011/02/28")
+                        ]
+                    });
+
+                    equals(dateAxis.options.baseUnit, "months");
+                });
+
+                test("creates labels with default format", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/01/01"), new Date("2012/02/01")
+                        ]
+                    });
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["Jan '12", "Feb '12"]);
+                });
+
+                test("creates labels with custom date format", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/01/01"), new Date("2012/02/01")
+                        ],
+                        labels: {
+                            dateFormats: {
+                                months: "M/d/yy"
+                            }
+                        }
+                    });
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["1/1/12", "2/1/12"]);
+                });
+
+                // ------------------------------------------------------------
+                module("Date CategoryAxis / Base unit / Years");
+
+                test("Base unit is determined by series delta", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01"), new Date("2013/03/10")
+                        ]
+                    });
+
+                    equals(dateAxis.options.baseUnit, "years");
+                });
+
+                test("creates labels with default format", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/01/01"), new Date("2013/02/01")
+                        ]
+                    });
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["2012", "2013"]);
+                });
+
+                test("creates labels with custom date format", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/01/01"), new Date("2013/02/01")
+                        ],
+                        labels: {
+                            dateFormats: {
+                                years: "M/d/yy"
+                            }
+                        }
+                    });
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["1/1/12", "1/1/13"]);
+                });
+
+            })();
+
+            (function() {
+                function createDateValueAxis(min, max, options) {
+                    dateAxis = new dataviz.DateValueAxis(
+                        min, max, options
+                    );
+
+                    view = new ViewStub();
+                    dateAxis.reflow(chartBox);
+                    dateAxis.getViewElements(view);
+                }
+
+                // ------------------------------------------------------------
+                module("Date Value Axis / Configuration");
+
+                test("Min date can be parsed from string", function() {
+                    createDateValueAxis(
+                        new Date("2012/02/01"), new Date("2012/02/10"), {
+                            min: "2012/02/01"
+                    });
+
+                    same(new Date(dateAxis.options.min), new Date("2012/02/01"));
+                });
+
+                test("Max date can be parsed from string", function() {
+                    createDateValueAxis(
+                        new Date("2012/02/01"), new Date("2012/02/10"), {
+                            max: "2012/02/29"
+                    });
+
+                    same(new Date(dateAxis.options.max), new Date("2012/02/29"));
+                });
+
+                test("Axis crossing value can be parsed from string", function() {
+                    createDateValueAxis(
+                        new Date("2012/02/01"), new Date("2012/02/10"), {
+                            axisCrossingValue: "2012/02/29"
+                    });
+
+                    same(new Date(dateAxis.options.axisCrossingValue), new Date("2012/02/29"));
+                });
+
+                test("Axis crossing values can be parsed from string array", function() {
+                    createDateValueAxis(
+                        new Date("2012/02/01"), new Date("2012/02/10"), {
+                            axisCrossingValue: ["2012/02/28", "2012/02/29"]
+                    });
+
+                    same(dateAxis.options.axisCrossingValue,
+                        [new Date("2012/02/28"), new Date("2012/02/29")]
+                    );
+                });
+
+                test("Major ticks count is correct", function() {
+                    createDateValueAxis(new Date("2012/02/01"), new Date("2012/02/10"));
+                    equals(dateAxis.getMajorTickPositions().length, 7);
+                });
+
+                test("Minor ticks count is correct", function() {
+                    createDateValueAxis(new Date("2012/02/01"), new Date("2012/02/10"));
+                    equals(dateAxis.getMinorTickPositions().length, 31);
+                });
+
+                test("User set empty base unit defaults to automatic", function() {
+                    createDateValueAxis(new Date("2012/02/01"), new Date("2012/02/10"), {
+                        baseUnit: ""
+                    });
+
+                    equals(dateAxis.options.baseUnit, "days");
+                });
+
+                // ------------------------------------------------------------
+                module("Date Value Axis / Base unit / Days");
+
+                test("Base unit is inferred from series range", function() {
+                    createDateValueAxis(
+                        new Date("2012/02/01"), new Date("2012/02/10")
+                    );
+
+                    equals("days", dateAxis.options.baseUnit);
+                });
+
+                test("Base unit is inferred from user set min/max", function() {
+                    createDateValueAxis(
+                        new Date("2012/02/01"), new Date("2012/12/01"), {
+                            min: new Date("2012/02/01"),
+                            max: new Date("2012/02/10")
+                    });
+
+                    equals(dateAxis.options.baseUnit, "days");
+                });
+
+                test("Base unit can be overriden", function() {
+                    createDateValueAxis(
+                        new Date("2012/01/01"), new Date("2012/12/01"), {
+                            min: new Date("2012/01/01"),
+                            max: new Date("2012/03/01"),
+                            baseUnit: "days"
+                    });
+
+                    equals("days", dateAxis.options.baseUnit);
+                });
+
+                test("Major unit is calculated for user set min/max", function() {
+                    createDateValueAxis(
+                        new Date("2012/01/01"), new Date("2012/12/01"), {
+                            min: new Date("2012/02/01"),
+                            max: new Date("2012/02/28")
+                    });
+
+                    equals(dateAxis.options.majorUnit, 6);
+                });
+
+                test("Major unit is calculated for user set min/max and base unit", function() {
+                    createDateValueAxis(
+                        new Date("2012/01/01"), new Date("2012/12/01"), {
+                            min: new Date("2012/01/01"),
+                            max: new Date("2012/03/01"),
+                            baseUnit: "days"
+                    });
+
+                    equals(dateAxis.options.majorUnit, 12);
+                });
+
+                test("Major unit is calculated for user set min and automatic max", function() {
+                    createDateValueAxis(
+                        new Date("2012/01/01"), new Date("2012/12/01"), {
+                            min: new Date("2012/11/01")
+                    });
+
+                    equals(dateAxis.options.majorUnit, 6);
+                });
+
+                test("Major unit is calculated for user set max and automatic min", function() {
+                    createDateValueAxis(
+                        new Date("2012/01/01"), new Date("2012/12/01"), {
+                            max: new Date("2012/01/10")
+                    });
+
+                    equals(dateAxis.options.majorUnit, 2);
+                });
+
+                test("Major unit is calculated for series when user min/max are not set", function() {
+                    createDateValueAxis(new Date("2012/02/01"), new Date("2012/02/10"));
+                    equal(dateAxis.options.majorUnit, 2);
+                });
+
+                test("Minor unit is derived from major unit", function() {
+                    createDateValueAxis(new Date("2012/02/01"), new Date("2012/02/10"));
+                    equal(dateAxis.options.minorUnit, 0.4);
+                });
+
+                test("Automatic maximum is rounded to set major unit", function() {
+                    createDateValueAxis(
+                        new Date("2012/02/01"), new Date("2012/02/10"), {
+                            majorUnit: 4
+                    });
+
+                    same(dateAxis.options.max, new Date("2012/02/12"));
+                });
+
+                test("Automatic maximum is rounded to auto major unit", function() {
+                    createDateValueAxis(
+                        new Date("2012/02/01"), new Date("2012/02/10"));
+
+                    same(dateAxis.options.max, new Date("2012/02/12"));
+                });
+
+                test("Automatic minimum is rounded to set major unit", function() {
+                    createDateValueAxis(
+                        new Date("2012/02/01"), new Date("2012/02/10"), {
+                            majorUnit: 4
+                    });
+
+                    same(dateAxis.options.min, new Date("2012/01/31"));
+                });
+
+                test("Automatic minimum is rounded to auto major unit", function() {
+                    createDateValueAxis(
+                        new Date("2012/02/01"), new Date("2012/02/10"));
+
+                    same(dateAxis.options.min, new Date("2012/01/31"));
+                });
+
+                test("Reports range minimum equal to options.min", function() {
+                    createDateValueAxis(
+                        new Date("2012/02/01"), new Date("2012/02/10"), {
+                            min: new Date("2012/02/05")
+                    });
+
+                    same(dateAxis.range().min, new Date("2012/02/05"));
+                });
+
+                test("Reports range maximum equal to options.max", function() {
+                    createDateValueAxis(
+                        new Date("2012/02/01"), new Date("2012/02/10"), {
+                            max: new Date("2012/02/05")
+                    });
+
+                    same(dateAxis.range().max, new Date("2012/02/05"));
+                });
+
+                test("creates labels with default format", function() {
+                    createDateValueAxis(new Date("2012/02/01"), new Date("2012/02/02"));
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["1/31", "2/1", "2/2", "2/3"]);
+                });
+
+                test("creates labels with custom date format", function() {
+                    createDateValueAxis(new Date("2012/02/01"), new Date("2012/02/02"), {
+                        labels: {
+                            dateFormats: {
+                                days: "M/d/yy"
+                            }
+                        }
+                    });
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["1/31/12", "2/1/12", "2/2/12", "2/3/12"]);
+                });
+
+                test("creates labels with custom format", function() {
+                    createDateValueAxis(new Date("2012/02/01"), new Date("2012/02/02"), {
+                        labels: {
+                            format: "M/d/yy"
+                        }
+                    });
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["1/31/12", "2/1/12", "2/2/12", "2/3/12"]);
+                });
+
+                test("creates labels with custom culture", function() {
+                    createDateValueAxis(new Date("2012/02/01"), new Date("2012/02/02"), {
+                        labels: {
+                            format: "d.MMM",
+                            culture: "es-ES"
+                        }
+                    });
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["31.ene", "1.feb", "2.feb", "3.feb"]);
+                });
+
+                test("creates labels with custom template", function() {
+                    createDateValueAxis(new Date("2012/02/01"), new Date("2012/02/02"), {
+                        categories: [
+                            new Date("2012-02-01"), new Date("2012-02-01")
+                        ],
+                        labels: {
+                            template: "#= kendo.toString(value, 'yyyy') #"
+                        }
+                    });
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["2012", "2012", "2012", "2012"]);
+                });
+
+                // ------------------------------------------------------------
+                module("Date Value Axis / Base unit / Months");
+
+                test("Major unit is calculated for user set min/max (in months)", function() {
+                    createDateValueAxis(
+                        new Date("2012/01/01"), new Date("2012/12/01"), {
+                            min: new Date("2012/02/01"),
+                            max: new Date("2012/02/29"),
+                            baseUnit: "months"
+                    });
+
+                    equals(dateAxis.options.majorUnit, 1);
+                });
+
+                test("creates labels with default format", function() {
+                    createDateValueAxis(
+                        new Date("2012/01/01"), new Date("2012/02/01")
+                    );
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["Dec '11", "Jan '12", "Feb '12", "Mar '12"]);
+                });
+
+                test("creates labels with custom date format", function() {
+                    createDateValueAxis(new Date("2012/01/01"), new Date("2012/02/01"), {
+                        labels: {
+                            dateFormats: {
+                                months: "M/d/yy"
+                            }
+                        }
+                    });
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["12/1/11", "1/1/12", "2/1/12", "3/1/12"]);
+                });
+
+                // ------------------------------------------------------------
+                module("Date Value Axis / Base unit / Years");
+
+                test("Major unit is calculated for user set min/max (in years)", function() {
+                    createDateValueAxis(
+                        new Date("2012/01/01"), new Date("2100/01/01"), {
+                            min: new Date("2012/02/01"),
+                            max: new Date("2013/02/01"),
+                            baseUnit: "years"
+                    });
+
+                    equals(dateAxis.options.majorUnit, 1);
+                });
+
+                test("creates labels with default format", function() {
+                    createDateValueAxis(
+                        new Date("2012/01/01"), new Date("2013/02/01")
+                    );
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["2011", "2012", "2013", "2014"]);
+                });
+
+                test("creates labels with custom date format", function() {
+                    createDateValueAxis(new Date("2012/01/01"), new Date("2013/02/01"), {
+                        labels: {
+                            dateFormats: {
+                                years: "M/d/yy"
+                            }
+                        }
+                    });
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["1/1/11", "1/1/12", "1/1/13", "1/1/14"]);
+                });
+
+                // ------------------------------------------------------------
+                module("Date Value Axis / Base unit / Hours");
+
+                test("Major unit is calculated for user set min/max (in hours)", function() {
+                    createDateValueAxis(
+                        new Date("2012/01/01"), new Date("2012/01/02"), {
+                            min: new Date("2012/02/01 15:00"),
+                            max: new Date("2012/02/01 16:00"),
+                            baseUnit: "hours"
+                    });
+
+                    equals(dateAxis.options.majorUnit, 1);
+                });
+
+                test("creates labels with default format", function() {
+                    createDateValueAxis(
+                        new Date("2012/01/01 15:00"), new Date("2012/01/01 16:00")
+                    );
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["14:00", "15:00", "16:00", "17:00"]);
+                });
+
+                test("creates labels with custom date format", function() {
+                    createDateValueAxis(
+                        new Date("2012/01/01 15:00"), new Date("2012/01/01 16:00"), {
+                        labels: {
+                            dateFormats: {
+                                hours: "M/d HH:mm"
+                            }
+                        }
+                    });
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["1/1 14:00", "1/1 15:00", "1/1 16:00", "1/1 17:00"]);
+                });
+
+            })();
+
+        </script>
+
+        <h1 id="qunit-header">kendo.chart</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+    </body>
+</html>

@@ -1,5 +1,6 @@
 namespace Kendo.Mvc.UI.Tests
 {
+    using System;
     using Moq;
     using System.Collections;
     using Xunit;
@@ -30,6 +31,24 @@ namespace Kendo.Mvc.UI.Tests
         {
             axisMock.SetupGet(a => a.Categories).Returns(new string[] { "A", "B" });
             (serializer.Serialize()["categories"] is IEnumerable).ShouldBeTrue();
+        }
+
+        [Fact]
+        public void Should_serialize_date_categories_as_strings()
+        {
+            axisMock.SetupGet(a => a.Type).Returns(ChartCategoryAxisType.Date);
+            axisMock.SetupGet(a => a.Categories).Returns(new DateTime[] { DateTime.Parse("2012/01/01"), DateTime.Parse("2012/01/02") });
+
+            AssertCategories("2012/01/01 00:00:00", "2012/01/02 00:00:00");
+        }
+
+        [Fact]
+        public void Should_serialize_null_date_categories_as_empty_strings()
+        {
+            axisMock.SetupGet(a => a.Type).Returns(ChartCategoryAxisType.Date);
+            axisMock.SetupGet(a => a.Categories).Returns(new DateTime?[] { DateTime.Parse("2012/01/01"), null });
+
+            AssertCategories("2012/01/01 00:00:00", "");
         }
 
         [Fact]
@@ -138,6 +157,87 @@ namespace Kendo.Mvc.UI.Tests
             axisMock.SetupGet(a => a.Title).Returns(new ChartAxisTitle() { Color = "Red" });
 
             serializer.Serialize().ContainsKey("title").ShouldBeTrue();
+        }
+
+        [Fact]
+        public void Should_serialize_Type_if_set()
+        {
+            axisMock.SetupGet(a => a.Type).Returns(ChartCategoryAxisType.Date);
+
+            serializer.Serialize()["type"].ShouldEqual("Date");
+        }
+
+        [Fact]
+        public void Should_not_serialize_Type_if_not_set()
+        {
+            serializer.Serialize().ContainsKey("type").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void Should_serialize_BaseUnit_if_set()
+        {
+            axisMock.SetupGet(a => a.BaseUnit).Returns(ChartAxisBaseUnit.Years);
+
+            serializer.Serialize()["baseUnit"].ShouldEqual("years");
+        }
+
+        [Fact]
+        public void Should_not_serialize_BaseUnit_if_not_set()
+        {
+            serializer.Serialize().ContainsKey("baseUnit").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void Should_serialize_Min_if_set()
+        {
+            axisMock.SetupGet(a => a.Min).Returns(DateTime.Parse("2012/01/01"));
+
+            serializer.Serialize()["min"].ShouldEqual("2012/01/01 00:00:00");
+        }
+
+        [Fact]
+        public void Should_not_serialize_Min_if_not_set()
+        {
+            serializer.Serialize().ContainsKey("min").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void Should_serialize_Max_if_set()
+        {
+            axisMock.SetupGet(a => a.Max).Returns(DateTime.Parse("2012/01/01"));
+
+            serializer.Serialize()["max"].ShouldEqual("2012/01/01 00:00:00");
+        }
+
+        [Fact]
+        public void Should_not_serialize_Max_if_not_set()
+        {
+            serializer.Serialize().ContainsKey("max").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void Should_serialize_AxisCrossingValues()
+        {
+            axisMock.SetupGet(a => a.AxisCrossingValues).Returns(new double[10]);
+            serializer.Serialize()["axisCrossingValue"].ShouldEqual(new double[10]);
+        }
+
+        [Fact]
+        public void Should_not_serialize_AxisCrossingValue_if_not_set()
+        {
+            axisMock.SetupGet(a => a.AxisCrossingValues).Returns(new double[] { });
+            serializer.Serialize().ContainsKey("axisCrossingValues").ShouldBeFalse();
+        }
+
+        private void AssertCategories(params string[] categories)
+        {
+            var expectedCategories = new Queue<string>(categories);
+
+            var categoryStrings = (IEnumerable<string>)serializer.Serialize()["categories"];
+            foreach (string category in categoryStrings)
+            {
+                category.ShouldEqual(expectedCategories.Dequeue());
+            }
         }
     }
 }

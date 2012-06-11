@@ -22,6 +22,7 @@ namespace Kendo.Mvc.UI
                 .Add("type", series.Orientation == ChartSeriesOrientation.Horizontal ? "bar" : "column")
                 .Add("stack", series.Stacked, () => series.Stacked == true && !series.StackName.HasValue())
                 .Add("stack", series.StackName, () => series.StackName.HasValue())
+                .Add("aggregate", series.Aggregate.ToString().ToLowerInvariant(), () => series.Aggregate != null)
                 .Add("gap", series.Gap, () => series.Gap.HasValue)
                 .Add("spacing", series.Spacing, () => series.Spacing.HasValue)
                 .Add("field", series.Member, () => { return series.Data == null && series.Member != null; })
