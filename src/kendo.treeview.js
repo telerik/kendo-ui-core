@@ -862,10 +862,10 @@
             } else if (action == "remove") {
                 that.remove(that.root.children(NODE).eq(e.index));
             } else {
-                if (action == "itemchange") {
+                if (node) {
                     group = subGroup(parentNode);
 
-                    that._insertNode(e.items, group.children().length, parentNode, group, function(item, group) {
+                    that._insertNode(items, group.children().length, parentNode, group, function(item, group) {
                         item.appendTo(group);
                     });
                 } else {
