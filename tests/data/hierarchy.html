@@ -232,6 +232,56 @@
                 strictEqual(dataSource.getByUid(product.uid), product);
             });
 
+            test("maps leaf flag", function() {
+                var dataSource = new HierarchicalDataSource({
+                    transport: {
+                        read: function(options) {
+                            options.success([
+                                { id: 1, isLeaf: true },
+                                { id: 2, isLeaf: false }
+                            ])
+                        }
+                    },
+                    schema: {
+                        model: {
+                            leaf: "isLeaf"
+                        }
+                    }
+                });
+
+                dataSource.fetch();
+
+                ok(dataSource.view()[0].leaf === true)
+                ok(dataSource.view()[1].leaf === false)
+            });
+
+            test("maps leaf flag of child datasources", function() {
+                var readData = function(options) {
+                        options.success([
+                            { isLeaf: false }
+                        ])
+                    },
+                    dataSource = new HierarchicalDataSource({
+                        transport: {
+                            read: readData
+                        },
+                        schema: {
+                            model: {
+                                leaf: "isLeaf",
+                                children: {
+                                    transport: {
+                                        read: readData
+                                    }
+                                }
+                            }
+                        }
+                    });
+
+                dataSource.fetch();
+                dataSource.data()[0].load();
+
+                ok(dataSource.data()[0].children.data()[0].leaf === false);
+            });
         </script>
     </body>
 </html>

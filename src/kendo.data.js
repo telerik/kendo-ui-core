@@ -510,10 +510,15 @@
             field,
             type,
             value,
-            id = proto.id;
+            id = proto.id,
+            leafField = proto.leaf;
 
         if (id) {
             proto.idField = id;
+        }
+
+        if (leafField) {
+            proto.leafField = leafField;
         }
 
         if (proto.id) {
@@ -2505,15 +2510,21 @@
 
             kendo.data.Model.fn.init.call(that, value);
 
-            children = extend(true, {}, that.children, {
-                data: value
-            });
+            if (value) {
+                that.leaf = value[that.leafField];
+            }
 
-            that.children = new HierarchicalDataSource(children);
-            that.children.bind("change", function(e){
-                e.node = e.node || that;
-                that.trigger("change", e);
-            });
+            if (that.leaf !== true) {
+                children = extend(true, { schema: { model: { leafField: that.leafField || "leaf" } } }, that.children, {
+                    data: value
+                });
+
+                that.children = new HierarchicalDataSource(children);
+                that.children.bind(CHANGE, function(e){
+                    e.node = e.node || that;
+                    that.trigger(CHANGE, e);
+                });
+            }
         },
 
         load: function() {
