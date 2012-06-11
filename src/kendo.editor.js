@@ -4129,7 +4129,7 @@ extend(Editor, {
     FormatBlockTool: FormatBlockTool
 });
 
-registerTool("formatBlock", new FormatBlockTool({template: new ToolTemplate({template: EditorUtils.dropDownListTemplate, title: "Format Block", initialValue: "Select Block Type"})}));
+registerTool("formatBlock", new FormatBlockTool({template: new ToolTemplate({template: EditorUtils.dropDownListTemplate})}));
 
 registerFormat("justifyLeft", [ { tags: dom.blockElements, attr: { style: { textAlign: "left"}} }, { tags: ["img"], attr: { style: { "float": "left"}} } ]);
 registerTool("justifyLeft", new BlockFormatTool({format: formats.justifyLeft, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Justify Left"})}));
@@ -4143,8 +4143,7 @@ registerTool("justifyRight", new BlockFormatTool({format: formats.justifyRight, 
 registerFormat("justifyFull", [ { tags: dom.blockElements, attr: { style: { textAlign: "justify"}} } ]);
 registerTool("justifyFull", new BlockFormatTool({format: formats.justifyFull, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Justify Full"})}));
 
-})(jQuery);
-(function($) {
+})(jQuery);(function($) {
 
 // Imports ================================================================
 var kendo = window.kendo,
