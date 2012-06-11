@@ -1077,7 +1077,6 @@
          * @option {Number} [xAxis.type: "Date".majorUnit] The interval between major divisions in base units.
          * @option {Number} [xAxis.type: "Date".minorUnit] The interval between minor divisions in base units.
          * It defaults to 1/5th of the majorUnit.
-         * This is often used in combination with the <b>min</b> configuration option.
          * @option {Object} [xAxis.type: "Date".labels] Label settings specific to the date axis.
          * @option {Object} [xAxis.type: "Date".labels.dateFormats] Date format strings
          * <div class="details-list">
