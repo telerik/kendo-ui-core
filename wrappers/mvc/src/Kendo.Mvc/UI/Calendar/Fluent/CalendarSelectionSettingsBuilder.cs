@@ -1,5 +1,8 @@
 ﻿namespace Kendo.Mvc.UI.Fluent
 {
+    //Mono build requires this line
+    using Kendo.Mvc.UI;
+
     using System;
     using System.Collections.Generic;
     using System.Web.Mvc.Html;
