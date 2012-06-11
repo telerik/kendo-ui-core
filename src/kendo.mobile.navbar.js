@@ -85,7 +85,7 @@
         /**
          * @constructs
          * @extends kendo.mobile.ui.Widget
-         * @param {DomElement} element DOM element
+         * @param {Element} element DOM element
          */
         init: function(element, options) {
             var that = this;

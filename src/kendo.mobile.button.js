@@ -122,7 +122,7 @@
         /**
         * @constructs
         * @extends kendo.mobile.ui.Widget
-        * @param {DomElement} element DOM element.
+        * @param {Element} element DOM element.
         * @param {Object} options Configuration options.
         * @option {String} [icon] <> The icon of the button. It can be either one of the built-in icons, or a custom one.
         * _example
@@ -246,7 +246,7 @@
         /**
         * @constructs
         * @extends kendo.mobile.ui.Button
-        * @param {DomElement} element DOM element.
+        * @param {Element} element DOM element.
         * @param {Object} options Configuration options.
         */
         init: function(element, options) {
@@ -283,7 +283,7 @@
         /**
         * @constructs
         * @extends kendo.mobile.ui.Button
-        * @param {DomElement} element DOM element.
+        * @param {Element} element DOM element.
         * @param {Object} options Configuration options.
         */
         init: function(element, options) {

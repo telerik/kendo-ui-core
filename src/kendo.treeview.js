@@ -294,7 +294,7 @@
          * @constructs
          * @extends kendo.ui.Widget
          *
-         * @param {DomElement} element DOM element
+         * @param {Element} element DOM element
          * @param {Object} options Configuration options.
          *
          * @option {Array} [dataSource]
@@ -507,7 +507,7 @@
             * @param {Node} e.sourceNode
             * The node that is being dragged.
             *
-            * @param {DomElement} e.dropTarget
+            * @param {Element} e.dropTarget
             * The element that the node is placed over.
             *
             * @param {Number} e.pageX
@@ -574,7 +574,7 @@
             * @param {Function} e.setValid
             * Allows the drop to be prevented.
             *
-            * @param {DomElement} e.dropTarget
+            * @param {Element} e.dropTarget
             * The element that the node is placed over.
             *
             * @param {String} e.dropPosition

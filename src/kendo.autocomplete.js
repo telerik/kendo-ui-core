@@ -180,7 +180,7 @@
         /**
         * @constructs
         * @extends kendo.ui.List
-        * @param {DomElement} element DOM element
+        * @param {Element} element DOM element
         * @param {Object} options Configuration options.
         * @option {Object | kendo.data.DataSource } [dataSource] The set of data that the AutoComplete will be bound to.
         *  Either a local JavaScript object, or an instance of the Kendo UI DataSource.

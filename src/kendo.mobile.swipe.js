@@ -62,7 +62,7 @@
     var Swipe = kendo.Class.extend(/** @lends kendo.mobile.ui.Swipe.prototype */{
         /**
          * @constructs
-         * @param {DomElement} element DOM element.
+         * @param {Element} element DOM element.
          * @param {Function} callback The callback to execute when the user swipes the element
          * @param {Object} options Configuration options.
          * @option {Number} [minXDelta] <30> The minimum horizontal distance in pixels the user should swipe before the event is triggered.

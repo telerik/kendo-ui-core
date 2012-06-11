@@ -603,7 +603,7 @@
          * @constructs
          * @extends kendo.ui.Widget
          *
-         * @param {DomElement} element DOM element
+         * @param {Element} element DOM element
          * @param {Object} options Configuration options.
          *
          * @option {Number} [min] <0>
@@ -1231,7 +1231,7 @@
          * @constructs
          * @extends kendo.ui.Widget
          *
-         * @param {DomElement} element DOM element
+         * @param {Element} element DOM element
          * @param {Object} options Configuration options.
          *
          * @option {Number} [min] <0>

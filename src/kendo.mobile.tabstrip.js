@@ -95,7 +95,7 @@
         /**
          * @constructs
          * @extends kendo.ui.Widget
-         * @param {DomElement} element DOM element.
+         * @param {Element} element DOM element.
          * @param {Object} options Configuration options.
          * @option {Number} [selectedIndex] <0> The index of the initially selected tab.
          */

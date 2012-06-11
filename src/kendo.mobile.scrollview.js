@@ -64,7 +64,7 @@
         /**
         * @constructs
         * @extends kendo.mobile.ui.Widget
-        * @param {DomElement} element DOM element
+        * @param {Element} element DOM element
         * @param {Object} options
         * @option {Number} [page] <0> The initial page to display.
         * @option {Number} [duration] <300> The milliseconds that take the ScrollView to snap to the current page after released.

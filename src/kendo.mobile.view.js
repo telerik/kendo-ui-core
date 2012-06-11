@@ -80,7 +80,7 @@
         /**
          * @constructs
          * @extends kendo.mobile.ui.Widget
-         * @param {DomElement} element DOM element.
+         * @param {Element} element DOM element.
          * @param {Object} options Configuration options.
          * @option {String} [title] <> The text to display in the navbar title (if present) and the browser title.
          * @option {Boolean} [stretch] <false> If set to true, the view will stretch its child contents to occupy the entire view, while disabling kinetic scrolling.
@@ -457,7 +457,7 @@
         /**
          * @constructs
          * @extends kendo.mobile.ui.Widget
-         * @param {DomElement} element DOM element.
+         * @param {Element} element DOM element.
          * @param {Object} options Configuration options.
          * @option {String} [id] <null> The id of the layout. Required.
          * @option {String} [platform] <> The specific platform this layout targets. By default, layouts are displayed

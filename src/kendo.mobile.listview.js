@@ -325,7 +325,7 @@
         /**
          * @constructs
          * @extends kendo.mobile.ui.Widget
-         * @param {DomElement} element DOM element.
+         * @param {Element} element DOM element.
          * @param {Object} options Configuration options.
          * @option {kendo.data.DataSource | Object} [dataSource] Instance of DataSource or the data that the mobile ListView will be bound to.
          * @option {String}  [type] The type of the control. Can be either <code>flat</code> (default) or group. Determined automatically in databound mode.

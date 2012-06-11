@@ -233,7 +233,7 @@
          * @constructs
          * @extends kendo.ui.Widget
          *
-         * @param {DomElement} element
+         * @param {Element} element
          * DOM element
          *
          * @param {Object} options

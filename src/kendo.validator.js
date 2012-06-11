@@ -173,7 +173,7 @@
     var Validator = Widget.extend(/** @lends kendo.ui.Validator.prototype */{ /**
          * @constructs
          * @extends kendo.ui.Widget
-         * @param {DomElement} element DOM element
+         * @param {Element} element DOM element
          * @param {Object} options Configuration options.
          * @option {Object} [rules] Set of validation rules. Those rules will extend the built-in ones.
          * _example
@@ -362,7 +362,7 @@
 
         /**
          * Validates the input element against the declared validation rules.
-         * @param {DomElement} input Input element to be validated.
+         * @param {Element} input Input element to be validated.
          * @returns {Boolean} If all rules are passed successfully.
          */
         validateInput: function(input) {

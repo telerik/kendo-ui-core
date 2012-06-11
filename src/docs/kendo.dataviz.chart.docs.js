@@ -110,7 +110,7 @@
         /**
          * @constructs
          * @extends kendo.ui.Widget
-         * @param {DomElement} element DOM element
+         * @param {Element} element DOM element
          * @param {Object} options Configuration options.
          * @option {String} [theme] Sets Chart theme. Available themes: default, blueOpal, black.
          * @option {Object} [dataSource] DataSource configuration or instance.

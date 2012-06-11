@@ -70,7 +70,7 @@
         /**
         * @constructs
         * @extends kendo.mobile.ui.Widget
-        * @param {DomElement} element DOM element.
+        * @param {Element} element DOM element.
         * @param {Object} options Configuration options.
         * @option {Boolean} [checked] <false> The checked state of the widget.
         * @option {String} [onLabel] <ON> The ON label.

@@ -89,7 +89,7 @@
         /**
          * @constructs
          * @extends kendo.mobile.ui.Widget
-         * @param {DomElement} element DOM element.
+         * @param {Element} element DOM element.
          * @param {Object} options Configuration options.
          * @option {String} [cancel] <Cancel> The text of the cancel button.
          * @option {Object} [popup] The popup configuration options (tablet only).

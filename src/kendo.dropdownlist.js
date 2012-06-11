@@ -163,7 +163,7 @@
         /**
          * @constructs
          * @extends kendo.ui.Select
-         * @param {DomElement} element DOM element
+         * @param {Element} element DOM element
          * @param {Object} options Configuration options.
          * @option {kendo.data.DataSource | Object} [dataSource] Instance of DataSource or the data that the DropDownList will be bound to.
          * _exampleTitle Bind to a local array

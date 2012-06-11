@@ -80,7 +80,7 @@
         /**
          * @constructs
          * @extends kendo.mobile.ui.Widget
-         * @param {DomElement} element DOM element.
+         * @param {Element} element DOM element.
          * @param {Object} options Configuration options.
          * @option {Number} [width] The width of the ModalView container in pixels. If not set, the element style is used.
          * @option {Number} [height] The height of the ModalView container in pixels. If not set, the element style is used.

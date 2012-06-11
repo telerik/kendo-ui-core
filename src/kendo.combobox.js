@@ -175,7 +175,7 @@
         /**
         * @constructs
         * @extends kendo.ui.Select
-        * @param {DomElement} element DOM element
+        * @param {Element} element DOM element
         * @param {Object} options Configuration options.
         * @option {Object | kendo.data.DataSource} [dataSource] A local JavaScript object or instance of DataSource or the data that the ComboBox will be bound to.
         * _example

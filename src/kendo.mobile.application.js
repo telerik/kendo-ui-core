@@ -264,7 +264,7 @@
         /**
          * @constructs
          * @extends kendo.Observable
-         * @param {DomElement} element DOM element. By default, the body element is used.
+         * @param {Element} element DOM element. By default, the body element is used.
          * @param {Object} options Configuration options.
          * @option {String} [layout] <> The id of the default Application Layout.
          * _example

@@ -78,7 +78,7 @@
         /**
          * @constructs
          * @extends kendo.mobile.ui.Widget
-         * @param {DomElement} element DOM element
+         * @param {Element} element DOM element
          * @param {Object} options Configuration options.
          * @option {String} [layout] <> The id of the default Pane Layout.
          * @option {String} [initial] <> The id of the initial mobilie View to display.
