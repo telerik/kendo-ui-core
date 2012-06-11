@@ -38,13 +38,10 @@ function processClass(theClass) {
         "\n\n" + outputDescription(description.comment).replace(/\r/g, "\n");
     }
 
-    html += "\n\n------------------------------------------" +
-        "\n\n## Configuration" +
+    html += "\n\n## Configuration" +
         outputConfiguration(theClass).replace(/\r/g, "\n") +
-        "\n\n------------------------------------------" +
         "\n\n## Methods" +
         outputMethods(theClass).replace(/\r/g, "\n") +
-        "\n\n------------------------------------------" +
         '\n\n## Events' +
         outputEvents(theClass).replace(/\r/g, "\n");
 
