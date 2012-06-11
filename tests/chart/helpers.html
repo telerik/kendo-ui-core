@@ -684,6 +684,59 @@
             });
 
             // ------------------------------------------------------------
+            var toDate = dataviz.toDate;
+
+            module("Date helpers / toDate");
+
+            test("Returns date unchanged", function() {
+                var date = new Date();
+
+                same(date, toDate(date));
+            });
+
+            test("Returns array of dates unchanged", function() {
+                var dates = [new Date(), new Date()];
+
+                same(dates, toDate(dates));
+            });
+
+            test("Converts string to date", function() {
+                var date = "2012/01/01 00:00";
+
+                same(new Date(date), toDate(date));
+            });
+
+            test("Converts array of strings to dates", function() {
+                var dates = ["2012/01/01 00:00", "2012/01/02 00:00"];
+
+                same([new Date(dates[0]), new Date(dates[1])], toDate(dates));
+            });
+
+            test("Converts time to date", function() {
+                var time = 1325368800000;
+
+                same(new Date(time), toDate(time));
+            });
+
+            test("Converts array of times to dates", function() {
+                var times = [1325368800000, 1325455200000];
+
+                same([new Date(times[0]), new Date(times[1])], toDate(times));
+            });
+
+            test("Converts MS JSON string to date", function() {
+                var jsonDate = "/Date(1325368800000)/";
+
+                same(new Date("2012/01/01 00:00"), toDate(jsonDate));
+            });
+
+            test("Converts array of MS JSON strings to dates", function() {
+                var jsonDates = ["/Date(1325368800000)/", "/Date(1325455200000)/"];
+
+                same([new Date("2012/01/01 00:00"), new Date("2012/01/02 00:00")], toDate(jsonDates));
+            });
+
+            // ------------------------------------------------------------
             var autoFormat = dataviz.autoFormat;
 
             module("autoFormat");

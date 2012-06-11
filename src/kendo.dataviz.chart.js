@@ -68,6 +68,7 @@
         COORD_PRECISION = dataviz.COORD_PRECISION,
         DATABOUND = "dataBound",
         DATE = "Date",
+        DATE_REGEXP = /^\/Date\((.*?)\)\/$/,
         DAYS = "days",
         DEFAULT_FONT = dataviz.DEFAULT_FONT,
         DEFAULT_HEIGHT = dataviz.DEFAULT_HEIGHT,
@@ -4743,7 +4744,16 @@
         if (isArray(value)) {
             return map(value, toDate);
         } else if (value) {
-            return (value instanceof Date) ? value : new Date(value);
+            if (value instanceof Date) {
+                return value;
+            } else {
+                if (typeof value === STRING) {
+                    var date = DATE_REGEXP.exec(value);
+                    return new Date(date ? parseInt(date[1], 10) : value);
+                } else {
+                    return new Date(value);
+                }
+            }
         }
     }
 
@@ -4850,7 +4860,8 @@
         categoriesCount: categoriesCount,
         ceilDate: ceilDate,
         duration: duration,
-        floorDate: floorDate
+        floorDate: floorDate,
+        toDate: toDate
     });
 
 })(jQuery);
