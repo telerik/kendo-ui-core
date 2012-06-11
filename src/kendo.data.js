@@ -510,16 +510,13 @@
             field,
             type,
             value,
-            id = proto.id,
-            leafField = proto.leaf;
+            id = proto.id;
 
         if (id) {
             proto.idField = id;
         }
 
-        if (leafField) {
-            proto.leafField = leafField;
-        }
+        proto.leafField = proto.leaf || "leaf";
 
         if (proto.id) {
             delete proto.id;
@@ -2514,17 +2511,15 @@
                 that.leaf = value[that.leafField];
             }
 
-            if (that.leaf !== true) {
-                children = extend(true, { schema: { model: { leafField: that.leafField || "leaf" } } }, that.children, {
-                    data: value
-                });
+            children = extend(true, { schema: { model: { leaf: that.leafField } } }, that.children, {
+                data: value
+            });
 
-                that.children = new HierarchicalDataSource(children);
-                that.children.bind(CHANGE, function(e){
-                    e.node = e.node || that;
-                    that.trigger(CHANGE, e);
-                });
-            }
+            that.children = new HierarchicalDataSource(children);
+            that.children.bind(CHANGE, function(e){
+                e.node = e.node || that;
+                that.trigger(CHANGE, e);
+            });
         },
 
         load: function() {
