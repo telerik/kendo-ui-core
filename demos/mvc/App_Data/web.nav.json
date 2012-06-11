@@ -321,6 +321,11 @@
                     "packages": ["mvc"]
                 },
                 {
+                    "text": "Custom Validator Editing",
+                    "url": "grid/editingcustomvalidation.html",
+                    "packages": ["mvc"]
+                },
+                {
                     "text": "Virtualization of local data",
                     "url": "grid/virtualization-local-data.html",
                     "packages": ["!mvc"]

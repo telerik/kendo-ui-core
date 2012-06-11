@@ -176,7 +176,7 @@
                 }
             }
         },
-        rulesResolvers: {
+        ruleResolvers: {
             mvcMetaDataResolver: {
                 resolve: function (element) {
                     var metadata = window.mvcClientValidationMetadata || [];

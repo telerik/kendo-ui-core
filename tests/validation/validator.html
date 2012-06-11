@@ -972,7 +972,7 @@
             });
 
             test("rules resolver is called", 1, function() {
-                kendo.ui.validator.rulesResolvers = {
+                kendo.ui.validator.ruleResolvers = {
                     foo: {
                         resolve: function(element) {
                            same(element[0], container[0]);
@@ -985,7 +985,7 @@
             });
 
             test("resolves empty rules", 1, function() {
-                kendo.ui.validator.rulesResolvers = {
+                kendo.ui.validator.ruleResolvers = {
                     foo: {
                         resolve: function(element) {
                             ok(true);
@@ -999,7 +999,7 @@
             });
 
             test("resolved rules and messages are added to the validator", 2, function() {
-                kendo.ui.validator.rulesResolvers = {
+                kendo.ui.validator.ruleResolvers = {
                     foo: {
                         resolve: function(element) {
                             return { rules: { foo: function() {} }, messages: { foo: "foo" } };
@@ -1014,7 +1014,7 @@
             });
 
             test("all rules resolver are called", 2, function() {
-                kendo.ui.validator.rulesResolvers = {
+                kendo.ui.validator.ruleResolvers = {
                     foo: {
                         resolve: function(element) {
                            same(element[0], container[0]);
@@ -1032,7 +1032,7 @@
             });
 
             test("resolved rules from multiple resolvers are merged", 2, function() {
-                kendo.ui.validator.rulesResolvers = {
+                kendo.ui.validator.ruleResolvers = {
                     foo: {
                         resolve: function(element) {
                             return { rules: { foo: $.noop }};

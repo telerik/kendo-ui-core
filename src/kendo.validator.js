@@ -39,7 +39,7 @@
     }
 
     function resolveRules(element) {
-        var resolvers = kendo.ui.validator.rulesResolvers || {},
+        var resolvers = kendo.ui.validator.ruleResolvers || {},
             rules = {},
             name;
 

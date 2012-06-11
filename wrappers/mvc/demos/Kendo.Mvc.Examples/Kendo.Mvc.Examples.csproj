@@ -148,6 +148,7 @@
     <Compile Include="Controllers\Web\Grid\Column_ReorderingController.cs" />
     <Compile Include="Controllers\Web\Grid\Column_ResizingController.cs" />
     <Compile Include="Controllers\Web\Grid\ApiController.cs" />
+    <Compile Include="Controllers\Web\Grid\EditingCustomValidationController.cs" />
     <Compile Include="Controllers\Web\Grid\SelectionController.cs" />
     <Compile Include="Controllers\Web\Grid\ServerDetailsController.cs" />
     <Compile Include="Controllers\Web\Grid\DetailTemplateController.cs" />
@@ -221,6 +222,7 @@
     <Compile Include="Helpers\KendoWebFormViewEngine.cs" />
     <Compile Include="Models\Config.cs" />
     <Compile Include="Helpers\HyphenatedRouteHandler.cs" />
+    <Compile Include="Models\CustomValidationProductViewModel.cs" />
     <Compile Include="Models\ElectricitySource.cs" />
     <Compile Include="Models\EmployeeViewModel.cs" />
     <Compile Include="Models\EngineDataPoint.cs" />
@@ -290,6 +292,7 @@
     <Content Include="Areas\aspx\Views\web\grid\api.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\column_reordering.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\column_resizing.aspx" />
+    <Content Include="Areas\aspx\Views\web\grid\editingcustomvalidation.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\detailtemplate.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\serverhierarchy.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\serverediting.aspx" />
@@ -614,6 +617,7 @@
     <Content Include="Areas\razor\Views\web\datetimepicker\globalization.cshtml" />
     <Content Include="Areas\razor\Views\web\numerictextbox\globalization.cshtml" />
     <Content Include="Areas\razor\Views\web\timepicker\globalization.cshtml" />
+    <Content Include="Areas\razor\Views\web\grid\editingcustomvalidation.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
