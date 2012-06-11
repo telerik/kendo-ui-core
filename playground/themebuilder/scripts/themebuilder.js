@@ -31,6 +31,30 @@ var counter = 1, oldColor, applications = {},
         }
     };
 
+// Override Kendo History to avoid URL breaks and bad refresh
+kendo.history.navigate = function(to, silent) {
+    var that = this;
+
+    if (to === '#:back') {
+        return;
+    }
+
+    to = to.replace(/^#*/, '');
+
+    if (that.current === to || that.current === decodeURIComponent(to)) {
+        return;
+    }
+
+    if (that._pushState) {
+        history.pushState({}, document.title, that._makePushStateUrl(to));
+        that.current = to;
+    }
+
+    if (!silent) {
+        that.trigger("change", {url: that.current});
+    }
+};
+
 function replaceIDs() {
     var id = this.id;
     this.id += counter;
@@ -59,7 +83,6 @@ $.each(clones.reverse(), function () {
         .insertAfter("#iosDevice");
 });
 
-console.log(devices);
 $.each(devices, function () {
     var that = this.toString();
     applications[that] = new kendo.mobile.Application("#" + that + "Device", { platform: that });
