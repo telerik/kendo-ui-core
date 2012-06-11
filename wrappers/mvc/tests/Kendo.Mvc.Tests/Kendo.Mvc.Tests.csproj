@@ -111,6 +111,7 @@
     <Compile Include="UI\Chart\ChartAreaSeriesBuilderTests.cs" />
     <Compile Include="UI\Chart\ChartAxisBuilderBaseTests.cs" />
     <Compile Include="UI\Chart\ChartSeriesBuilderBaseTests.cs" />
+    <Compile Include="UI\Chart\ChartDateCategoryAxisBuilderTests.cs" />
     <Compile Include="UI\Chart\PlotAreaBuilderTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartSerializationTests.cs" />
     <Compile Include="UI\Chart\ChartHtmlBuilderTests.cs" />
@@ -143,6 +144,7 @@
     <Compile Include="UI\Chart\Serialization\ChartAreaSeriesSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartBoundSeriesSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartSeriesSerializerBaseTests.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartAxisLabelsDateFormatsSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\PlotAreaSerializerTests.cs" />
     <Compile Include="UI\DateTimePicker\DateTimePickerBuilderTests.cs" />
     <Compile Include="UI\ViewComponentBaseExtensionsTests.cs" />

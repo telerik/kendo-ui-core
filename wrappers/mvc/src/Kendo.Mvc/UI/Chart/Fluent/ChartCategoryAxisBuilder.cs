@@ -2,9 +2,9 @@ namespace Kendo.Mvc.UI.Fluent
 {
     using System;
     using System.Collections;
+    using System.Linq;
     using System.Linq.Expressions;
     using Kendo.Mvc.Extensions;
-    using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.Resources;
     using Kendo.Mvc.UI;
 
@@ -22,7 +22,6 @@ namespace Kendo.Mvc.UI.Fluent
         public ChartCategoryAxisBuilder(Chart<TModel> chart)
             : base(chart.CategoryAxis)
         {
-
             Container = chart;
         }
 
@@ -35,6 +34,11 @@ namespace Kendo.Mvc.UI.Fluent
             private set;
         }
 
+        public ChartDateCategoryAxisBuilder<TModel> Date()
+        {
+            return new ChartDateCategoryAxisBuilder<TModel>(Container);
+        }
+
         /// <summary>
         /// Defines bound categories.
         /// </summary>
@@ -43,7 +47,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public ChartCategoryAxisBuilder<TModel> Categories<TValue>(Expression<Func<TModel, TValue>> expression)
         {
-
             if (typeof(TModel).IsPlainType() && !expression.IsBindable())
             {
                 throw new InvalidOperationException(TextResource.MemberExpressionRequired);
@@ -78,7 +81,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public ChartCategoryAxisBuilder<TModel> Categories(IEnumerable categories)
         {
-            
             Container.CategoryAxis.Categories = categories;
 
             return this;
@@ -92,7 +94,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public ChartCategoryAxisBuilder<TModel> Categories(params string[] categories)
         {
-
             Container.CategoryAxis.Categories = categories;
 
             return this;

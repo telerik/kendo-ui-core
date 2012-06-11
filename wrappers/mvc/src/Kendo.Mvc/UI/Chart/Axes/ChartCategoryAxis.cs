@@ -1,5 +1,6 @@
 namespace Kendo.Mvc.UI
 {
+    using System;
     using System.Collections;
 
     /// <summary>
@@ -34,6 +35,42 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <value>The member.</value>
         public string Member
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Specifies the category axis type.
+        /// </summary>
+        public ChartCategoryAxisType? Type
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Specifies the date category axis base unit.
+        /// </summary>
+        public ChartAxisBaseUnit? BaseUnit
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Specifies the date category axis minimum (start) date.
+        /// </summary>
+        public DateTime? Min
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Specifies the date category axis maximum (end) date.
+        /// </summary>
+        public DateTime? Max
         {
             get;
             set;

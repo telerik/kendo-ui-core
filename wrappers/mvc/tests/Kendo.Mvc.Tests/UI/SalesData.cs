@@ -1,5 +1,6 @@
 namespace Kendo.Mvc.UI.Tests
 {
+    using System;
     using System.Collections.Generic;
 
     public class SalesData
@@ -7,6 +8,8 @@ namespace Kendo.Mvc.UI.Tests
         public string RepName { get; set; }
 
         public string DateString { get; set; }
+
+        public DateTime Date { get; set; }
 
         public decimal TotalSales { get; set; }
 
@@ -25,7 +28,8 @@ namespace Kendo.Mvc.UI.Tests
             {
                 new SalesData
                 {
-                    RepName = "Nancy Davolio", 
+                    RepName = "Nancy Davolio",
+                    Date = DateTime.Parse("2010/08/01"),
                     DateString = "Aug 2010",
                     TotalSales = 15458,
                     RepSales = 2015,
@@ -38,6 +42,7 @@ namespace Kendo.Mvc.UI.Tests
                 new SalesData
                 {
                     RepName = "Nancy Davolio", 
+                    Date = DateTime.Parse("2010/09/01"),
                     DateString = "Sept 2010",
                     TotalSales = 26598,
                     RepSales = 6003,

@@ -1,3 +1,4 @@
+using System.Globalization;
 namespace Kendo.Mvc.UI
 {
     /// <summary>
@@ -10,6 +11,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         public ChartAxisLabels()
         {
+            DateFormats = new ChartAxisLabelsDateFormats();
         }
 
         /// <summary>
@@ -34,6 +36,24 @@ namespace Kendo.Mvc.UI
         /// Label rendering skip. Skips rendering the first n labels.
         /// </summary>
         public int? Skip
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Date formats for the date axis.
+        /// </summary>
+        public ChartAxisLabelsDateFormats DateFormats
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Culture to use for formatting date labels.
+        /// </summary>
+        public CultureInfo Culture
         {
             get;
             set;

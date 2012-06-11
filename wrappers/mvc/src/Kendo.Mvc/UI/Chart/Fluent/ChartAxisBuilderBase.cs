@@ -1,7 +1,6 @@
 namespace Kendo.Mvc.UI.Fluent
 {
     using System;
-    using Kendo.Mvc.Infrastructure;
     using System.Collections.Generic;
 
     /// <summary>
@@ -306,7 +305,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public TAxisBuilder Labels(Action<ChartAxisLabelsBuilder> configurator)
+        public virtual TAxisBuilder Labels(Action<ChartAxisLabelsBuilder> configurator)
         {
 
             configurator(new ChartAxisLabelsBuilder(Axis.Labels));

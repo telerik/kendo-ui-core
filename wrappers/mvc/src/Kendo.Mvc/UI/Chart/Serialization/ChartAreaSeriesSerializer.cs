@@ -21,6 +21,7 @@ namespace Kendo.Mvc.UI
             FluentDictionary.For(result)
                 .Add("type", series.Orientation == ChartSeriesOrientation.Horizontal ? "area" : "verticalArea")
                 .Add("stack", series.Stacked, false)
+                .Add("aggregate", series.Aggregate.ToString().ToLowerInvariant(), () => series.Aggregate != null)
                 .Add("field", series.Member, () => { return series.Data == null && series.Member.HasValue(); })
                 .Add("data", series.Data, () => { return series.Data != null; })
                 .Add("color", series.Color, () => series.Color.HasValue())

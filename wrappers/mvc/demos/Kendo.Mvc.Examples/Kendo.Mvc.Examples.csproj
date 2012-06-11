@@ -76,6 +76,7 @@
   <ItemGroup>
     <Compile Include="Areas\aspx\ASPXAreaRegistration.cs" />
     <Compile Include="Areas\razor\RazorAreaRegistration.cs" />
+    <Compile Include="Controllers\DataViz\Bar_Charts\Date_AxisController.cs" />
     <Compile Include="Controllers\Web\AutoComplete\ApiController.cs" />
     <Compile Include="Controllers\Web\AutoComplete\ClientFilteringController.cs" />
     <Compile Include="Controllers\Web\AutoComplete\EventsController.cs" />
@@ -255,6 +256,7 @@
     <Content Include="Areas\aspx\Views\dataviz\area_charts\local_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\area_charts\remote_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\bar_charts\column.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\bar_charts\date_axis.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\bar_charts\multiple_axes.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\bar_charts\stacked_bar.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\bar_charts\grouped_stacked_bar.aspx" />
@@ -618,6 +620,7 @@
     <Content Include="Areas\razor\Views\web\numerictextbox\globalization.cshtml" />
     <Content Include="Areas\razor\Views\web\timepicker\globalization.cshtml" />
     <Content Include="Areas\razor\Views\web\grid\editingcustomvalidation.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\bar_charts\date_axis.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>

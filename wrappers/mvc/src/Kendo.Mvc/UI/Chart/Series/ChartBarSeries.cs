@@ -53,6 +53,15 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// Aggregate function for date series.
+        /// </summary>
+        public ChartSeriesAggregate? Aggregate
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// The stack name that this series belongs to.
         /// </summary>
         public string StackName

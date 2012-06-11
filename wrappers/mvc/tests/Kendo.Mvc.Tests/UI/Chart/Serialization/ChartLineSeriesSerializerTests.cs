@@ -40,6 +40,19 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
+        public void Serializes_aggregate()
+        {
+            series.Aggregate = ChartSeriesAggregate.Max;
+            GetJson(series)["aggregate"].ShouldEqual("max");
+        }
+
+        [Fact]
+        public void Should_not_serialize_default_aggregate()
+        {
+            GetJson(series).ContainsKey("aggregate").ShouldBeFalse();
+        }
+
+        [Fact]
         public void Serializes_width()
         {
             series.Width = 2;
