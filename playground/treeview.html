@@ -86,6 +86,7 @@
                     data: "employees",
                     model: {
                         id: "employeeId",
+                        leaf: "employeeLeaf",
                         children: {
                             transport: {
                                 read: {
@@ -124,6 +125,13 @@
                         category.load();
                     });
                 });
+            });
+
+            $("<div />").appendTo(document.body).kendoTreeView({
+                dataSource: homogeneous,
+                bindings: {
+                    text: "employeeName"
+                }
             });
 
         </script>
