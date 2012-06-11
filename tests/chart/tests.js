@@ -64,6 +64,10 @@ tests.push(
         title: "chart pie"
     },
     {
+        page: "chart/donutchart.html",
+        title: "chart donut"
+    },
+    {
         page: "chart/tooltip.html",
         title: "chart tooltip"
     },
