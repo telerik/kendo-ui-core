@@ -76,7 +76,7 @@
         DEFAULT_PRECISION = dataviz.DEFAULT_PRECISION,
         DEFAULT_WIDTH = dataviz.DEFAULT_WIDTH,
         DONUT = "donut",
-        DONUT_SECTOR_ANIM_DELAY = 50
+        DONUT_SECTOR_ANIM_DELAY = 50,
         FADEIN = "fadeIn",
         GLASS = "glass",
         HOURS = "hours",
@@ -3584,7 +3584,7 @@
 
                 if (defined(currentSeries.size)) {
                     totalSize -= currentSeries.size;
-                } else {
+                } else if (i != seriesCount - 1) {
                     seriesWithoutSize++;
                 }
 
@@ -3599,7 +3599,11 @@
 
             for (i = 0; i < seriesCount; i++) {
                 currentSeries = series[i];
-                size = defined(currentSeries.size) ? currentSeries.size : totalSize / seriesWithoutSize;
+                if (i != seriesCount - 1) {
+                    size = defined(currentSeries.size) ? currentSeries.size : totalSize / seriesWithoutSize;
+                } else {
+                    size = 0;
+                }
                 ir += margin;
                 r = ir + size;
                 chart.seriesConfigs.push({ ir: ir, r: r });
@@ -4514,7 +4518,7 @@
                 sector = this.element.config,
                 startRadius = this.startRadius;
 
-            sector.r = interpolateValue(this.startRadius, endRadius, pos);
+            sector.r = interpolateValue(startRadius, endRadius, pos);
         }
     });
 
