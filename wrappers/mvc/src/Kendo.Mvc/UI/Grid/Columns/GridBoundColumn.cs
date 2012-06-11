@@ -196,6 +196,16 @@ namespace Kendo.Mvc.UI
                 json["groupable"] = false;
             }
 
+            if (!Sortable)
+            {
+                json["sortable"] = false;
+            }
+
+            if (!Filterable)
+            {
+                json["filterable"] = false;
+            }
+
             if (Encoded)
             {
                 json["encoded"] = true;
