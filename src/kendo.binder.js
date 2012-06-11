@@ -528,7 +528,7 @@
                     value = element.value;
 
                 if (element.type == "checkbox") {
-                    if (value == "on" || value == "off") {
+                    if (value == "on" || value == "off" || value === "true") {
                         value = element.checked;
                     }
                 }
