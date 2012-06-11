@@ -2543,7 +2543,7 @@
                 return node;
             }
 
-            data = this._flatData(this.data())
+            data = this._flatData(this.data());
 
             for (idx = 0, length = data.length; idx < length; idx++) {
                 node = data[idx].children.getByUid(uid);
