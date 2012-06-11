@@ -2516,6 +2516,10 @@
             });
 
             that.children = new HierarchicalDataSource(children);
+            that.children._parent = function(){
+                return that;
+            }
+
             that.children.bind(CHANGE, function(e){
                 e.node = e.node || that;
                 that.trigger(CHANGE, e);
@@ -2534,6 +2538,12 @@
                    that._loaded = true;
                 }).query(options);
             }
+        },
+
+        parentNode: function() {
+            var array = this.parent();
+
+            return array.parent();
         },
 
         loaded: function(value) {
@@ -2556,6 +2566,17 @@
             });
 
             DataSource.fn.init.call(this, extend(true, {}, { schema: { modelBase: node, model: node } }, options));
+        },
+
+        remove: function(node){
+            var parent = node.parentNode(),
+                dataSource = this;
+
+            if (parent) {
+                dataSource = parent.children;
+            }
+
+            DataSource.fn.remove.call(dataSource, node);
         },
 
         getByUid: function(uid) {

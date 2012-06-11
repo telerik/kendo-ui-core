@@ -364,6 +364,29 @@
                 dataSource.data()[0].load();
             });
 
+            test("parentNode returns the parent of a child node", function() {
+                var dataSource = categories();
+
+                dataSource.read();
+                var parent = dataSource.data()[0];
+                parent.load();
+                var child = parent.children.data()[0];
+
+                strictEqual(child.parentNode(), parent);
+            });
+
+            test("remove is recursive", function() {
+                var dataSource = categories();
+
+                dataSource.read();
+                var parent = dataSource.data()[0];
+                parent.load();
+                var child = parent.children.data()[0];
+
+                dataSource.remove(child);
+
+                ok(!dataSource.getByUid(child.uid));
+            });
         </script>
     </body>
 </html>
