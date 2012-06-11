@@ -149,6 +149,11 @@
                 {
                     "text": "API",
                     "url": "datepicker/api.html"
+                },
+                {
+                    "packages": [ "mvc" ],
+                    "text": "Globalization",
+                    "url": "datepicker/globalization.html"
                 }
             ]
         },
@@ -178,6 +183,11 @@
                 {
                     "text": "API",
                     "url": "datetimepicker/api.html"
+                },
+                {
+                    "packages": [ "mvc" ],
+                    "text": "Globalization",
+                    "url": "datetimepicker/globalization.html"
                 }
             ]
         },
@@ -482,6 +492,11 @@
                 {
                     "text": "API",
                     "url": "numerictextbox/api.html"
+                },
+                {
+                    "packages": [ "mvc" ],
+                    "text": "Globalization",
+                    "url": "numerictextbox/globalization.html"
                 }
             ]
         },
@@ -615,6 +630,11 @@
                 {
                     "text": "API",
                     "url": "timepicker/api.html"
+                },
+                {
+                    "packages": [ "mvc" ],
+                    "text": "Globalization",
+                    "url": "timepicker/globalization.html"
                 }
             ]
         },

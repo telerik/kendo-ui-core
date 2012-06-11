@@ -1,0 +1,17 @@
+﻿@section HeadContent {
+    <script src="@Url.Content("~/Scripts/cultures/kendo.culture.de-DE.js")"></script>
+}
+
+<script type="text/javascript">
+    //set culture of the Kendo UI
+    kendo.culture("de-DE");
+</script>
+
+@{ 
+    Culture = "de-DE";
+}
+
+@(Html.Kendo().TimePicker()
+      .Name("timepicker")
+      .Value(DateTime.Now)
+)

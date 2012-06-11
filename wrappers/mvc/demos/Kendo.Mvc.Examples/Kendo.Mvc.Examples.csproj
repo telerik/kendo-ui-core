@@ -124,11 +124,13 @@
     <Compile Include="Controllers\DataViz\Radial_Gauge\Scale_OptionsController.cs" />
     <Compile Include="Controllers\DataViz\Radial_Gauge\IndexController.cs" />
     <Compile Include="Controllers\Web\DatePicker\ApiController.cs" />
+    <Compile Include="Controllers\Web\DatePicker\GlobalizationController.cs" />
     <Compile Include="Controllers\Web\DatePicker\EventsController.cs" />
     <Compile Include="Controllers\Web\DatePicker\TemplateController.cs" />
     <Compile Include="Controllers\Web\DatePicker\RangeSelectionController.cs" />
     <Compile Include="Controllers\Web\DateTimePicker\ApiController.cs" />
     <Compile Include="Controllers\Web\DateTimePicker\EventsController.cs" />
+    <Compile Include="Controllers\Web\DateTimePicker\GlobalizationController.cs" />
     <Compile Include="Controllers\Web\DateTimePicker\TemplateController.cs" />
     <Compile Include="Controllers\Web\DateTimePicker\RangeSelectionController.cs" />
     <Compile Include="Controllers\Web\DropDownList\ApiController.cs" />
@@ -166,6 +168,7 @@
     <Compile Include="Controllers\Web\Menu\OrientationController.cs" />
     <Compile Include="Controllers\Web\Menu\ImagesController.cs" />
     <Compile Include="Controllers\Web\Menu\IndexController.cs" />
+    <Compile Include="Controllers\Web\NumericTextBox\GlobalizationController.cs" />
     <Compile Include="Controllers\Web\PanelBar\AjaxController.cs" />
     <Compile Include="Controllers\Web\PanelBar\ApiController.cs" />
     <Compile Include="Controllers\Web\PanelBar\AnimationController.cs" />
@@ -185,6 +188,7 @@
     <Compile Include="Controllers\Web\Grid\ServerAggregatesController.cs" />
     <Compile Include="Controllers\Web\TimePicker\EventsController.cs" />
     <Compile Include="Controllers\Web\TimePicker\ApiController.cs" />
+    <Compile Include="Controllers\Web\TimePicker\GlobalizationController.cs" />
     <Compile Include="Controllers\Web\TimePicker\RangeSelectionController.cs" />
     <Compile Include="Controllers\Web\TimePicker\IndexController.cs" />
     <Compile Include="Controllers\Web\DatePicker\IndexController.cs" />
@@ -277,6 +281,7 @@
     <Content Include="Areas\aspx\Views\web\datepicker\index.aspx" />
     <Content Include="Areas\aspx\Views\web\datepicker\rangeselection.aspx" />
     <Content Include="Areas\aspx\Views\web\datepicker\template.aspx" />
+    <Content Include="Areas\aspx\Views\web\datetimepicker\globalization.aspx" />
     <Content Include="Areas\aspx\Views\web\editor\api.aspx" />
     <Content Include="Areas\aspx\Views\web\editor\events.aspx" />
     <Content Include="Areas\aspx\Views\web\editor\index.aspx" />
@@ -303,8 +308,10 @@
     <Content Include="Areas\aspx\Views\web\numerictextbox\events.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\radial_gauge\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\radial_gauge\scale_options.aspx" />
+    <Content Include="Areas\aspx\Views\web\numerictextbox\globalization.aspx" />
     <Content Include="Areas\aspx\Views\web\slider\api.aspx" />
     <Content Include="Areas\aspx\Views\web\slider\events.aspx" />
+    <Content Include="Areas\aspx\Views\web\timepicker\globalization.aspx" />
     <Content Include="Areas\aspx\Views\web\upload\api.aspx" />
     <Content Include="Areas\aspx\Views\web\upload\async.aspx" />
     <Content Include="Areas\aspx\Views\web\upload\events.aspx" />
@@ -602,6 +609,11 @@
     <Content Include="Areas\aspx\Views\web\calendar\selectaction.aspx" />
     <Content Include="Areas\razor\Views\web\calendar\globalization.cshtml" />
     <Content Include="Areas\aspx\Views\web\calendar\globalization.aspx" />
+    <Content Include="Areas\razor\Views\web\datepicker\globalization.cshtml" />
+    <Content Include="Areas\aspx\Views\web\datepicker\globalization.aspx" />
+    <Content Include="Areas\razor\Views\web\datetimepicker\globalization.cshtml" />
+    <Content Include="Areas\razor\Views\web\numerictextbox\globalization.cshtml" />
+    <Content Include="Areas\razor\Views\web\timepicker\globalization.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
