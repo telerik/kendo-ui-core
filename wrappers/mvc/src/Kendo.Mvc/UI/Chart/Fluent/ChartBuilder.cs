@@ -338,10 +338,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public ChartBuilder<T> DataSource(Action<ReadOnlyDataSourceBuilder> configurator)
+        public ChartBuilder<T> DataSource(Action<ReadOnlyAjaxDataSourceBuilder<T>> configurator)
         {
-
-            configurator(new ReadOnlyDataSourceBuilder(Component.DataSource, this.Component.ViewContext, this.Component.UrlGenerator));
+            configurator(new ReadOnlyAjaxDataSourceBuilder<T>(Component.DataSource, this.Component.ViewContext, this.Component.UrlGenerator));
 
             return this;
         }

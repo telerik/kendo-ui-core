@@ -77,6 +77,7 @@
     <Compile Include="Areas\aspx\ASPXAreaRegistration.cs" />
     <Compile Include="Areas\razor\RazorAreaRegistration.cs" />
     <Compile Include="Controllers\DataViz\Bar_Charts\Date_AxisController.cs" />
+    <Compile Include="Controllers\DataViz\Scatter_Charts\Date_AxisController.cs" />
     <Compile Include="Controllers\Web\AutoComplete\ApiController.cs" />
     <Compile Include="Controllers\Web\AutoComplete\ClientFilteringController.cs" />
     <Compile Include="Controllers\Web\AutoComplete\EventsController.cs" />
@@ -224,6 +225,7 @@
     <Compile Include="Models\Config.cs" />
     <Compile Include="Helpers\HyphenatedRouteHandler.cs" />
     <Compile Include="Models\CustomValidationProductViewModel.cs" />
+    <Compile Include="Models\StockDataPoint.cs" />
     <Compile Include="Models\ElectricitySource.cs" />
     <Compile Include="Models\EmployeeViewModel.cs" />
     <Compile Include="Models\EngineDataPoint.cs" />
@@ -265,6 +267,7 @@
     <Content Include="Areas\aspx\Views\dataviz\bar_charts\remote_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\customization\plotbands.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\dashboards\car_dashboard.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\scatter_charts\date_axis.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\scatter_charts\multiple_axes.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\scatter_charts\scatter_line.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\scatter_charts\index.aspx" />
@@ -621,6 +624,7 @@
     <Content Include="Areas\razor\Views\web\timepicker\globalization.cshtml" />
     <Content Include="Areas\razor\Views\web\grid\editingcustomvalidation.cshtml" />
     <Content Include="Areas\razor\Views\dataviz\bar_charts\date_axis.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\scatter_charts\date_axis.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>

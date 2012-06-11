@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Kendo.Mvc.Infrastructure;
 
 namespace Kendo.Mvc.UI
 {
@@ -27,9 +28,10 @@ namespace Kendo.Mvc.UI
 
         protected override void Serialize(IDictionary<string, object> json)
         {
-            json.Add("data", Data);
-            json.Add("total", Total);
-            json.Add("errors", Errors);
+            FluentDictionary.For(json)
+                .Add("data", Data, string.Empty)
+                .Add("total", Total, string.Empty)
+                .Add("errors", Errors, string.Empty);
 
             if (Model != null)
             {
