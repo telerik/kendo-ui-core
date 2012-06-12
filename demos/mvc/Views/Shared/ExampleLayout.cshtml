@@ -58,7 +58,7 @@
     @if (ViewBag.ShowCodeStrip == true)
     {
         <div id="codeStrip">
-            @if (!string.IsNullOrEmpty(ViewBag.Documentation))
+            <!--@if (!string.IsNullOrEmpty(ViewBag.Documentation))
             {
                 <a class="documentation-link k-link" href="http://www.kendoui.com/documentation/@ViewBag.Documentation"><span class="documentation-icon"></span>Documentation</a>
             }
@@ -85,11 +85,29 @@
             <div class="description">
                 @Html.Raw(ViewBag.Description)
                 @RenderSection("Description", false)
-            </div>
+            </div>-->
         </div>
 
         <script>
-            $("#codeStrip").kendoTabStrip({
+            var codestrip = $("#codeStrip").kendoTabStrip({
+                animation: {
+                    open: {
+                        effects: "fadeIn"
+                    }
+                }
+            }).data("kendoTabStrip");
+            window.docs.load("@ViewBag.Suite", "@ViewBag.Section", function(sections) {
+                for (var section in sections) {
+                    codestrip.append({
+                        text: section,
+                        content: sections[section]
+                    });
+                }
+
+                codestrip.select(0);
+            });
+
+            /*{
                 contentUrls: [null,
                     "@Url.RouteUrl("Source", new { suite = ViewBag.suite, section = ViewBag.Section, example = ViewBag.Example })"
                     @if (ViewBag.ConfigurationDocPath != null)
@@ -119,7 +137,7 @@
                         effects: "fadeIn"
                     }
                 }
-            });
+            });*/
         </script>
     }
 </div>
