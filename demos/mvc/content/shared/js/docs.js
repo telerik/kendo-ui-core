@@ -2,7 +2,9 @@
     var decode = window.atob,
         kendo = window.kendo,
         markdown = window.markdown,
-        sectionRegExp = /^##\s/m;
+        sectionRegExp = /^##\s/m,
+        appName = location.pathname.split("/")[1] || "kendo-demos",
+        url = "/" + appName + "/docs/{0}/{1}";
 
     if (!decode) {
         //code snippet from http://www.nczonline.net/blog/2009/12/08/computer-science-in-javascript-base64-encoding/
@@ -50,6 +52,7 @@
     }
 
     var docs = {
+        url: url,
         load: function (suite, widget, success) {
             $.ajax({
                 url: this.getURL(suite, widget),
@@ -87,9 +90,7 @@
         },
 
         getURL: function(suite, widget) {
-            var appName = location.pathname.split("/")[1] || "kendo-demos";
-
-            return kendo.format("/{0}/docs/{1}/{2}", appName, suite, widget);
+            return kendo.format(this.url, suite, widget);
         }
     }
 

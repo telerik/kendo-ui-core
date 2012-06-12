@@ -74,21 +74,31 @@
                         effects: "fadeIn"
                     }
                 }
-            }).data("kendoTabStrip");
+            }).data("kendoTabStrip"),
+            docURL = "@ViewBag.Documentation",
+            docs = window.docs,
+            suite, section;
 
-            var docURL = "@ViewBag.Documentation";
+            @if (ViewBag.Debug == false) {
+                <text>
+                    docs.url = "https://raw.github.com/telerik/kendo-docs/master/api/{0}/{1}.md
+                </text>
+            }
 
             if (docURL) {
                 docURL = docURL.split("/");
-
-                var suite = docURL[0],
-                    section = docURL[1].replace("-", "");
+                suite = docURL[0];
+                section = docURL[1];
 
                 if (suite === "ui-widgets") {
                     suite = "web";
                 }
 
-                window.docs.load(suite, section, function(sections) {
+                if (section) {
+                    section = section.replace("-", "");
+                }
+
+                docs.load(suite, section, function(sections) {
                     for (var section in sections) {
                         codestrip.append({
                             text: section,
