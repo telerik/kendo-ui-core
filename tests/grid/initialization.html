@@ -605,6 +605,58 @@
                 equal(th.length, 2);
                 ok(th.eq(0).hasClass("k-hierarchy-cell"));
             });
+
+            test("render column attribute", function() {
+                var grid = new Grid($("<table/>"), {
+                    dataSource: [{ foo: 1, bar: "bar"}],
+                    columns: [
+                        { field: "foo", attributes: { baz: "baz1" } },
+                        { field: "bar", attributes: { moo: "moo1" } }
+                    ]
+                });
+
+                equal(grid.tbody.find("tr:first > td:first").attr("baz"), "baz1");
+                equal(grid.tbody.find("tr:first > td:last").attr("moo"), "moo1");
+            });
+
+            test("render command column attribute", function() {
+                var grid = new Grid($("<table/>"), {
+                    dataSource: [{ foo: 1, bar: "bar"}],
+                    columns: [
+                        { command: "foo", attributes: { baz: "baz1" } },
+                        { command: "bar", attributes: { moo: "moo1" } }
+                    ]
+                });
+
+                equal(grid.tbody.find("tr:first > td:first").attr("baz"), "baz1");
+                equal(grid.tbody.find("tr:first > td:last").attr("moo"), "moo1");
+            });
+
+            test("render column header attribute", function() {
+                var grid = new Grid($("<table/>"), {
+                    dataSource: [{ foo: 1, bar: "bar"}],
+                    columns: [
+                        { field: "foo", headerAttributes: { baz: "baz1" } },
+                        { field: "bar", headerAttributes: { moo: "moo1" } }
+                    ]
+                });
+
+                equal(grid.thead.find("th:first").attr("baz"), "baz1");
+                equal(grid.thead.find("th:last").attr("moo"), "moo1");
+            });
+
+            test("render command column header attribute", function() {
+                var grid = new Grid($("<table/>"), {
+                    dataSource: [{ foo: 1, bar: "bar"}],
+                    columns: [
+                        { command: "foo", headerAttributes: { baz: "baz1" } },
+                        { command: "bar", headerAttributes: { moo: "moo1" } }
+                    ]
+                });
+
+                equal(grid.thead.find("th:first").attr("baz"), "baz1");
+                equal(grid.thead.find("th:last").attr("moo"), "moo1");
+            });
        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

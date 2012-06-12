@@ -244,6 +244,18 @@
         return new Array(count + 1).join('<td class="k-group-cell">&nbsp;</td>');
     }
 
+    function stringifyAttributes(attributes) {
+        var attr,
+            result = " ";
+
+        if (attributes) {
+            for (attr in attributes) {
+                result += attr + '="' + attributes[attr] + '"';
+            }
+        }
+        return result;
+    }
+
     var defaultCommands = {
         create: {
             text: "Add new record",
@@ -1952,7 +1964,7 @@
                     template = column.template;
                     type = typeof template;
 
-                    rowTemplate += "<td>";
+                    rowTemplate += "<td" + stringifyAttributes(column.attributes) + ">";
                     rowTemplate += that._cellTmpl(column, state);
 
                     rowTemplate += "</td>";
@@ -2241,9 +2253,11 @@
                             html += kendo.attr("aggregates") + "='" + th.aggregates + "'";
                         }
 
+                        html += stringifyAttributes(th.headerAttributes);
+
                         html += ">" + (th.title || th.field || "") + "</th>";
                     } else {
-                        html += "<th>" + (th.title || "") + "</th>";
+                        html += "<th" + stringifyAttributes(th.headerAttributes) + ">" + (th.title || "") + "</th>";
                     }
                 }
 
