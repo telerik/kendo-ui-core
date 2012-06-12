@@ -4,7 +4,7 @@
         markdown = window.markdown,
         sectionRegExp = /^##\s/m;
 
-    if (!atob) {
+    if (!decode) {
         decode = function base64Decode(text){
             text = text.replace(/\s/g,"");
 
