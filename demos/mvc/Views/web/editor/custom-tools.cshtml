@@ -1,4 +1,12 @@
 <div id="example" class="k-content">
+    <div class="configuration k-widget k-header" style="float:none;max-width:none;margin:0 0 2em;">
+        <span class="infoHead">Information</span>
+        <p>
+            The following demo shows how to customize some of the Editor native tools (font size, font name and block format), as well as how to create a completely
+    custom tools that can provide random functionality.
+        </p>
+    </div>
+
     <textarea id="editor" rows="10" cols="30" style="width:100%;height:400px">
             &lt;p&gt;&lt;img src=&quot;http://www.kendoui.com/Image/kendo-logo.png&quot; alt=&quot;Editor for ASP.NET MVC logo&quot; style=&quot;display:block;margin-left:auto;margin-right:auto;&quot; /&gt;&lt;/p&gt;
             &lt;p&gt;
@@ -36,6 +44,18 @@
         $("#editor").kendoEditor({
             tools: [
                 {
+                    name: "fontName",
+                    items: /*Array.concat(kendo.ui.Editor.prototype.options.fontName[0],*/ [{ text: "Garamond", value: "Garamond, serif" }]/*)*/
+                },
+                {
+                    name: "fontSize",
+                    items: Array.concat(kendo.ui.Editor.prototype.options.fontSize[0], [{ text: "16px", value: "16px" }])
+                },
+                {
+                    name: "formatBlock",
+                    items: Array.concat(kendo.ui.Editor.prototype.options.formatBlock[0], [{ text: "Fieldset", value: "fieldset" }])
+                },
+                {
                     name: "viewHtml",
                     tooltip: "View HTML",
                     exec: function(e) {
@@ -64,6 +84,14 @@
 
                         dialog.center().open();
                     }
+                },
+                {
+                    name: "custom",
+                    tooltip: "Insert a horizontal rule",
+                    exec: function(e) {
+                        var editor = $(this).data("kendoEditor");
+                        editor.exec("inserthtml", { value: "<hr />" });
+                    }
                 }
             ]
         });
@@ -73,5 +101,9 @@
         .k-viewHtml {
             background: transparent url(../../content/web/editor/insert-html-icon.png) no-repeat 50% 50%;
         }
+        
+        /*.k-editor .k-insertHtml {
+            display:none;
+        }*/
     </style>
 </div>

@@ -109,6 +109,10 @@
                         options = editorTools[currentTool].options;
                     }
 
+                    if (!options) {
+                        continue;
+                    }
+
                     template = options.template;
 
                     if (template) {
@@ -133,7 +137,9 @@
             }
 
             for (i = 0; i < nativeTools.length; i++) {
-                editorTools[nativeTools[i]] = editor._tools[nativeTools[i]];
+                if (!editorTools[nativeTools[i]]) {
+                    editorTools[nativeTools[i]] = editor._tools[nativeTools[i]];
+                }
             }
 
             editor.options.tools = editorTools;
@@ -365,6 +371,16 @@
 
             Widget.fn.init.call(that, element, options);
 
+            function deleteCustomItems(editor) {
+                // this function removes any customized item collections prior to initializing a new Editor, which otherwise will assume them erroneously
+                var customizableTools = ["fontName", "fontSize", "formatBlock"];
+                for (var j = 0, l = customizableTools.length; j < l; j++) {
+                    delete editor._tools[customizableTools[j]].options.items;
+                }
+            }
+
+            deleteCustomItems(that);
+
             that.options = deepExtend({}, that.options, options);
 
             element = $(element);
@@ -516,7 +532,6 @@
 
                         if (toolName == "fontSize" || toolName == "fontName") {
                             var inheritText = options.localization[toolName + "Inherit"] || localization[toolName + "Inherit"];
-                            options[toolName][0].text = inheritText;
                             $this.find("input").val(inheritText).end()
                                  .find("span.k-input").text(inheritText).end();
                         }
@@ -652,7 +667,8 @@
             "insertLineBreak",
             "insertParagraph",
             "redo",
-            "undo"
+            "undo",
+            "insertHtml"
         ],
 
         _tools: {

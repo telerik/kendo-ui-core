@@ -240,6 +240,11 @@
                 },
                 {
                     "packages": [ "!mvc" ],
+                    "text": "All tools",
+                    "url": "editor/all-tools.html"
+                },
+                {
+                    "packages": [ "!mvc" ],
                     "text": "Snippets",
                     "url": "editor/snippets.html"
                 },
