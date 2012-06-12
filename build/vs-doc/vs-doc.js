@@ -13,9 +13,11 @@ function vsdoc(directory, filter) {
                 name: name,
                 plugin: plugin,
                 methods: []
-            };
+            },
+            methods = tree.children[0].children.filter(function(child) { return /Methods/.test(child.title) })[0];
 
-        tree.children[0].children[2].children.forEach(function(child) {
+
+        methods.children.forEach(function(child) {
             theClass.methods.push(parseMethod(child));
         });
 
