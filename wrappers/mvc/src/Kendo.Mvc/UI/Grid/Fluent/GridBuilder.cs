@@ -41,14 +41,25 @@ namespace Kendo.Mvc.UI.Fluent
             configurator(new DataSourceBuilder<T>(Component.DataSource, this.Component.ViewContext, this.Component.UrlGenerator));
 
             return this;
+        }        
+
+        public GridBuilder<T> DetailTemplate(Action<T> codeBlockTemplate)
+        {
+            Component.DetailTemplate.CodeBlockTemplate = codeBlockTemplate;
+
+            return this;
         }
 
-        public GridBuilder<T> DetailTemplate(Action<GridDetailTemplateBuilder<T>> configurator)
+        public GridBuilder<T> DetailTemplate(Func<T, object> inlineTemplate)
         {
+            Component.DetailTemplate.InlineTemplate = inlineTemplate;
 
-            Component.DetailTemplate = new GridDetailTemplate<T>();
+            return this;
+        }
 
-            configurator(new GridDetailTemplateBuilder<T>(Component.DetailTemplate));
+        public GridBuilder<T> ClientDetailTemplateId(string id)
+        {
+            Component.ClientDetailTemplateId = id;
 
             return this;
         }

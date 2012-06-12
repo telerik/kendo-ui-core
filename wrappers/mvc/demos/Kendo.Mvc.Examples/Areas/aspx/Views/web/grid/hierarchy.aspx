@@ -11,7 +11,7 @@
                 columns.Bound(e => e.Country).Width(200);
                 columns.Bound(e => e.City);
             })
-            .DetailTemplate(detail => detail.ClientTemplate("employeesTemplate"))
+            .ClientDetailTemplateId("employeesTemplate")
             .Pageable()
             .DataSource(dataSource => dataSource
                 .Ajax()
