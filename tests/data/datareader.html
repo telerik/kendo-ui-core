@@ -97,6 +97,66 @@
                 strictEqual(result[2].baz, "baz3");
             });
 
+            test("converts field values to the specifed type with server groups", function() {
+                var reader = new DataReader({
+                    model: {
+                        fields: {
+                            bar: { type: "number" },
+                            baz: "baz"
+                        }
+                    }
+                });
+
+                var result = reader.parse([ { items: [{ bar: "1", baz: "baz1"}, { bar: "", baz: "baz2"}, { bar: "0", baz: "baz3"}], field: "bar", value: "0" }]);
+                result = reader.groups(result)[0];
+
+                var items = result.items;
+
+                equal(items.length, 3);
+                strictEqual(items[0].bar, 1);
+                strictEqual(items[0].baz, "baz1");
+                strictEqual(items[1].bar, null);
+                strictEqual(items[1].baz, "baz2");
+                strictEqual(items[2].bar, 0);
+                strictEqual(items[2].baz, "baz3");
+
+                strictEqual(result.value, 0);
+            });
+
+            test("converts field values to the specifed type with multiple nested server groups", function() {
+                var reader = new DataReader({
+                    model: {
+                        fields: {
+                            bar: { type: "number" },
+                            baz: "baz"
+                        }
+                    }
+                });
+
+                var result = reader.parse([ {
+                    hasSubgroups: true, items: [
+                            { items: [{ bar: "1", baz: "baz1"}, { bar: "", baz: "baz2"}, { bar: "0", baz: "baz3"}], field:"bar", value: "0" }
+                        ],
+                        field: "bar",
+                        value: "0"
+                    }]);
+
+                result = reader.groups(result)[0];
+
+                strictEqual(result.items[0].value, 0);
+
+                var items = result.items[0].items;
+
+                equal(items.length, 3);
+                strictEqual(items[0].bar, 1);
+                strictEqual(items[0].baz, "baz1");
+                strictEqual(items[1].bar, null);
+                strictEqual(items[1].baz, "baz2");
+                strictEqual(items[2].bar, 0);
+                strictEqual(items[2].baz, "baz3");
+
+            });
+
             test("fields not in the model are persisted", function() {
                 var reader = new DataReader({
                     model: {

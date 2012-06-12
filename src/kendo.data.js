@@ -1327,6 +1327,53 @@
         return store[options]();
     };
 
+    function convertRecords(data, getters, modelInstance) {
+        var record,
+            getter,
+            idx,
+            length;
+
+        for (idx = 0, length = data.length; idx < length; idx++) {
+            record = data[idx];
+            for (getter in getters) {
+                record[getter] = modelInstance._parse(getter, getters[getter](record));
+            }
+        }
+    }
+
+    function convertGroup(data, getters, modelInstance) {
+        var record,
+            idx,
+            length;
+
+        for (idx = 0, length = data.length; idx < length; idx++) {
+            record = data[idx];
+            record.value = modelInstance._parse(record.field, record.value);
+
+            if (record.hasSubgroups) {
+                convertGroup(record.items, getters, modelInstance);
+            } else {
+                convertRecords(record.items, getters, modelInstance);
+            }
+        }
+    }
+
+    function wrapDataAccess(originalFunction, model, converter, getters) {
+        return function(data) {
+            data = originalFunction(data);
+
+            if (data && !isEmptyObject(getters)) {
+                if (toString.call(data) !== "[object Array]" && !(data instanceof ObservableArray)) {
+                    data = [data];
+                }
+
+                converter(data, getters, new model());
+            }
+
+            return data || [];
+        };
+    }
+
     var DataReader = Class.extend({
         init: function(schema) {
             var that = this, member, get, model;
@@ -1342,8 +1389,9 @@
             if (isPlainObject(that.model)) {
                 that.model = model = kendo.data.Model.define(that.model);
 
-                var dataFunction = that.data,
-                getters = {};
+                var dataFunction = proxy(that.data, that),
+                    groupsFunction = proxy(that.groups, that),
+                    getters = {};
 
                 if (model.fields) {
                     each(model.fields, function(field, value) {
@@ -1355,30 +1403,8 @@
                     });
                 }
 
-                that.data = function(data) {
-                    var record,
-                        getter,
-                        idx,
-                        length,
-                        modelInstance = new that.model();
-
-                    data = dataFunction(data);
-
-                    if (data && !isEmptyObject(getters)) {
-                        if (toString.call(data) !== "[object Array]" && !(data instanceof ObservableArray)) {
-                            data = [data];
-                        }
-
-                        for (idx = 0, length = data.length; idx < length; idx++) {
-                            record = data[idx];
-                            for (getter in getters) {
-                                record[getter] = modelInstance._parse(getter, getters[getter](record));
-                            }
-                        }
-                    }
-
-                    return data || [];
-                };
+                that.data = wrapDataAccess(dataFunction, model, convertRecords, getters);
+                that.groups = wrapDataAccess(groupsFunction, model, convertGroup, getters);
             }
         },
         errors: function(data) {
