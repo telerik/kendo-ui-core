@@ -47,6 +47,13 @@ var kendo = {
     }
 }
 
+$.fn.get#= theClass.plugin.replace("kendo", "Kendo") # = function() {
+    /// <summary>
+    /// Returns a reference to the #= theClass.name # widget, instantiated on the selector.
+    /// </summary>
+    /// <returns type="#= theClass.name #">The #= theClass.name # instance (if present).</returns>
+}
+
 # } else { #
 # /* Namespace */ #
 #= theClass.name # = {};
