@@ -89,9 +89,9 @@
                     ]
                 });
 
-                var uid = treeview.find(".k-item").data("uid");
+                var dataItem = treeviewObject.dataItem(treeview.find(".k-item"));
 
-                treeviewObject.dataSource.remove({ uid: uid });
+                treeviewObject.dataSource.remove(dataItem);
 
                 equal(treeview.find(".k-item").length, 0);
 
