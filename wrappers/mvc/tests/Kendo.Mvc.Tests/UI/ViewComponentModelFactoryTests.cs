@@ -70,16 +70,6 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
-        public void NumericTextBoxFor_should_return_new_instance_and_value_should_be_default_property_value_when_model_is_null()
-        {
-            htmlHelper.ViewData.Model = null;
-
-            var builder = factory.NumericTextBoxFor(m => m.ID);
-
-            Assert.Equal(0, builder.ToComponent().Value);
-        }
-
-        [Fact]
         public void NumericTextBoxFor_should_return_new_instance_with_set_min_and_max()
         {
             var builder = factory.NumericTextBoxFor(m => m.DoubleProperty);
