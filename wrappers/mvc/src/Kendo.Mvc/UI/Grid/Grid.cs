@@ -38,6 +38,7 @@ namespace Kendo.Mvc.UI
 
             PrefixUrlParameters = true;
             RowTemplate = new HtmlTemplate<T>();
+            DetailTemplate = new HtmlTemplate<T>();
             Columns = new List<GridColumnBase<T>>();
             DataKeys = new List<IDataKey>();
 
@@ -100,12 +101,6 @@ namespace Kendo.Mvc.UI
         {
             get;
             private set;
-        }
-
-        public IGridDetailTemplate<T> DetailTemplate
-        {
-            get;
-            set;
         }
 
         public IDictionary<string, object> TableHtmlAttributes
@@ -643,6 +638,12 @@ namespace Kendo.Mvc.UI
 
             var columns = VisibleColumns.Select(c => c.ToJson());
 
+            var idPrefix = "#";
+            if (IsInClientTemplate)
+            {
+                idPrefix = "\\" + idPrefix;
+            }
+
             if (columns.Any())
             {
                 options["columns"] = columns;
@@ -707,9 +708,9 @@ namespace Kendo.Mvc.UI
 
             options["dataSource"] = DataSource.ToJson();
 
-            if (HasDetailTemplate)
-            { 
-                options["detailTemplate"] = DetailTemplate.Serialize();
+            if (!String.IsNullOrEmpty(ClientDetailTemplateId))
+            {
+                options["detailTemplate"] = new ClientEvent { HandlerName = String.Format("kendo.template($('{0}{1}').html())", idPrefix, ClientDetailTemplateId) };                                
             }
 
             if (Navigatable.Enabled)
@@ -720,7 +721,7 @@ namespace Kendo.Mvc.UI
             //TODO: Localization
             //TODO: No records template
 
-            writer.Write(Initializer.Initialize(Id, "Grid", options));
+            writer.Write(Initializer.Initialize(Selector, "Grid", options));
 
             base.WriteInitializationScript(writer);
         }
@@ -989,7 +990,7 @@ namespace Kendo.Mvc.UI
                 HasDetailTemplate = HasDetailTemplate,
                 //TODO: Implement hidden columns
                 Colspan = Colspan /*- Columns.Count(column => column.Hidden)*/,
-                DetailTemplate = MapDetailTemplate(HasDetailTemplate ? DetailTemplate.Template : null),
+                DetailTemplate = MapDetailTemplate(HasDetailTemplate ? DetailTemplate : null),
                 NoRecordsTemplate = FormatNoRecordsTemplate(),
                 Localization = Localization,
                 ScrollingHeight = Scrolling.Height,
@@ -1186,7 +1187,7 @@ namespace Kendo.Mvc.UI
                     throw new NotSupportedException(TextResource.CannotUseTemplatesInAjaxOrWebService);
                 }
 
-                if (DetailTemplate != null && DetailTemplate.Template.HasValue() && !DetailTemplate.ClientTemplate.HasValue())
+                if (DetailTemplate != null && DetailTemplate.HasValue() && string.IsNullOrEmpty(ClientDetailTemplateId))
                 {
                     throw new NotSupportedException(TextResource.CannotUseTemplatesInAjaxOrWebService);
                 }
@@ -1307,8 +1308,20 @@ namespace Kendo.Mvc.UI
         {
             get
             {
-                return DetailTemplate != null;
+                return DetailTemplate.HasValue();
             }
+        }
+
+        public HtmlTemplate<T> DetailTemplate
+        {
+            get;
+            private set;
+        }
+
+        public string ClientDetailTemplateId
+        {
+            get;
+            set;
         }
 
         private IGridDataKeyStore DataKeyStore

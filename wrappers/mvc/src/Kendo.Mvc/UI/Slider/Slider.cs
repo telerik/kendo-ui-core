@@ -44,7 +44,7 @@ namespace Kendo.Mvc.UI
 
             SerializeProperties(options);
 
-            writer.Write(Initializer.Initialize(Id, "Slider", options));
+            writer.Write(Initializer.Initialize(Selector, "Slider", options));
 
             base.WriteInitializationScript(writer);
         }

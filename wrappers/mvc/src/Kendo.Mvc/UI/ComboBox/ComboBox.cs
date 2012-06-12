@@ -114,8 +114,8 @@ namespace Kendo.Mvc.UI
             {
                 options["cascadeFrom"] = CascadeFrom;
             }
-            
-            writer.Write(Initializer.Initialize(Id, "ComboBox", options));
+
+            writer.Write(Initializer.Initialize(Selector, "ComboBox", options));
 
             base.WriteInitializationScript(writer);
         }

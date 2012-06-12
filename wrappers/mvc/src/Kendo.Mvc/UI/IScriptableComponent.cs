@@ -12,6 +12,16 @@ namespace Kendo.Mvc.UI
             get;
         }
 
+        bool IsInClientTemplate
+        {
+            get;        
+        }
+
+         string Selector
+         {
+             get;
+         }
+
         /// <summary>
         /// Writes the initialization script.
         /// </summary>

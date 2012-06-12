@@ -233,6 +233,7 @@
          if (stringPart) {
              return "'" +
                  part.split("'").join("\\'")
+                     .split('\\"').join('\\\\\\"')
                      .replace(/\n/g, "\\n")
                      .replace(/\r/g, "\\r")
                      .replace(/\t/g, "\\t") + "'";

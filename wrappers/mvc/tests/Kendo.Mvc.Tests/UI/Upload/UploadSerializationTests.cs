@@ -33,7 +33,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
         {
             upload.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("jQuery(\"\\#Upload\").kendoUpload({});");
+            output.ShouldContain("jQuery(\"#Upload\").kendoUpload({});");
         }
 
         [Fact]
@@ -136,7 +136,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
             upload.Async.AutoUpload = false;
             upload.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("jQuery(\"\\#Upload\").kendoUpload({});");
+            output.ShouldContain("jQuery(\"#Upload\").kendoUpload({});");
         }
 
         [Fact]

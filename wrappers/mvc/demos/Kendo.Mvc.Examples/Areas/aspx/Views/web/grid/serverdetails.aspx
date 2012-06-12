@@ -12,7 +12,7 @@
         columns.Bound(e => e.Country).Width(200);
         columns.Bound(e => e.City);
     })
-    .DetailTemplate(detail => detail.Template(e =>
+    .DetailTemplate(e =>
     {            
             Html.Kendo().TabStrip()
                     .Name("TabStrip_" + e.EmployeeID)
@@ -59,7 +59,7 @@
                                 <% });                                                                                       
                     })
                     .Render();
-    }))
+    })
     .RowAction(row =>
     {
         if (row.Index == 0)

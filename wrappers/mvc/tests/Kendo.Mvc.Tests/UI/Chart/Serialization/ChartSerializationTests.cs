@@ -34,7 +34,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
         {
             chart.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("jQuery(\"\\#Chart\").kendoChart({});");
+            output.ShouldContain("jQuery(\"#Chart\").kendoChart({});");
         }
 
         [Fact]

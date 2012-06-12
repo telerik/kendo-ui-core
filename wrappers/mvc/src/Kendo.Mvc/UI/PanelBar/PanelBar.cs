@@ -114,7 +114,7 @@ namespace Kendo.Mvc.UI
             options["expandMode"] = ExpandMode;
             //options["contentUrls"] = Items;
 
-            writer.Write(Initializer.Initialize(Id, "PanelBar", options));
+            writer.Write(Initializer.Initialize(Selector, "PanelBar", options));
 
             base.WriteInitializationScript(writer);
         }

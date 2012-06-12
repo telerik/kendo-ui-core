@@ -135,7 +135,7 @@ namespace Kendo.Mvc.UI
                 options["url"] = url;
             }
 
-            writer.Write(Initializer.Initialize(Id, "Calendar", options));
+            writer.Write(Initializer.Initialize(Selector, "Calendar", options));
 
             base.WriteInitializationScript(writer);
         }

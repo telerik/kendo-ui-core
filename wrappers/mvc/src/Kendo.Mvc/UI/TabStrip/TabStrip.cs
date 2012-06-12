@@ -108,7 +108,7 @@ namespace Kendo.Mvc.UI
                 options["contentUrls"] = urls;
             }
 
-            writer.Write(Initializer.Initialize(Id, "TabStrip", options));
+            writer.Write(Initializer.Initialize(Selector, "TabStrip", options));
 
             base.WriteInitializationScript(writer);
         }

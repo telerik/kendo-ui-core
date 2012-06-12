@@ -16,7 +16,7 @@ namespace Kendo.Mvc.UI
     /// </summary>
     public abstract class ViewComponentBase : IViewComponent, IScriptableComponent
     {
-        private string name;
+        private string name;        
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewComponentBase"/> class.
@@ -80,7 +80,7 @@ namespace Kendo.Mvc.UI
             {
                 // Return from htmlattributes if user has specified
                 // otherwise build it from name
-                return this.SanitizeId(HtmlAttributes.ContainsKey("id") ? (string)HtmlAttributes["id"] : Name);
+                return this.SanitizeId(HtmlAttributes.ContainsKey("id") ? (string)HtmlAttributes["id"] : Name);                
             }
         }
 
@@ -136,6 +136,20 @@ namespace Kendo.Mvc.UI
             private set;
         }
 
+        public bool IsInClientTemplate
+        {
+            get;
+            private set;
+        }
+
+        public string Selector
+        {
+            get
+            { 
+                return (IsInClientTemplate ? "\\#" : "#") + Id;
+            }
+        }
+
         public virtual void VerifySettings()
         {
             if (string.IsNullOrEmpty(Name))
@@ -173,6 +187,12 @@ namespace Kendo.Mvc.UI
                 WriteInitializationScript(writer);
                 writer.RenderEndTag();
             }
+        }
+        
+        public MvcHtmlString ToClientTemplate()
+        {
+            IsInClientTemplate = true;
+            return MvcHtmlString.Create(ToHtmlString().Replace("</script>", "<\\/script>"));
         }
     }
 }

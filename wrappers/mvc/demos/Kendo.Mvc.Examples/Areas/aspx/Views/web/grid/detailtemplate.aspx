@@ -11,14 +11,25 @@
         columns.Bound(e => e.Country).Width(200);
         columns.Bound(e => e.City);
     })
-    .DetailTemplate(detail => detail.ClientTemplate(
-        Html.Kendo().TabStrip()
+    .ClientDetailTemplateId("employeesTemplate")
+    .Pageable()
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .Read(read => read.Action("HierarchyBinding_Employees", "Grid"))
+        .PageSize(5)
+    )    
+    .Sortable()
+    .Events(events => events.DataBound("dataBound"))
+    %>
+
+    <script id="employeesTemplate" type="text/kendo-tmpl">
+       <%: Html.Kendo().TabStrip()
             .Name("TabStrip_#=EmployeeID#")
             .SelectedIndex(0)
             .Items(items =>
             {
-                items.Add().Text("Orders").Content(
-                    Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
+                items.Add().Text("Orders").Content(obj => 
+                     Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
                         .Name("Orders_#=EmployeeID#")
                         .Columns(columns =>
                         {
@@ -33,7 +44,7 @@
                         )
                         .Pageable()
                         .Sortable()
-                        .ToHtmlString()
+                        .ToClientTemplate()                     
                 );
                 items.Add().Text("Contact Information").Content(
                     "<div class='employee-details'>" +
@@ -46,17 +57,9 @@
                     "</div>"
                 );                
             })
-            .ToHtmlString()
-    ))    
-    .Pageable()
-    .DataSource(dataSource => dataSource
-        .Ajax()
-        .Read(read => read.Action("HierarchyBinding_Employees", "Grid"))
-        .PageSize(5)
-    )    
-    .Sortable()
-    .Events(events => events.DataBound("dataBound"))
-    %>
+            .ToClientTemplate()
+            %>
+    </script>
 
     <script>
         function dataBound() {

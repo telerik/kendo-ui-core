@@ -46,7 +46,7 @@ namespace Kendo.Mvc.UI
 
             // TODO: add animation configuration and builder
 
-            writer.Write(Initializer.Initialize(Id, "Splitter", options));
+            writer.Write(Initializer.Initialize(Selector, "Splitter", options));
 
             base.WriteInitializationScript(writer);
         }

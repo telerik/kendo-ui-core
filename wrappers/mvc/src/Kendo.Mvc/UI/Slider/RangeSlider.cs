@@ -39,7 +39,7 @@ namespace Kendo.Mvc.UI
 
             SerializeProperties(options);
 
-            writer.Write(Initializer.Initialize(Id, "RangeSlider", options));
+            writer.Write(Initializer.Initialize(Selector, "RangeSlider", options));
 
             base.WriteInitializationScript(writer);
         }

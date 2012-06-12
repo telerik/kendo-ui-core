@@ -179,9 +179,8 @@ namespace Kendo.Mvc.UI.Tests.Grid
         public void Should_not_throw_if_binding_mode_is_server_and_server_detailView_template_is_used()
         {
             grid.DataSource.Type = DataSourceType.Server;
-
-            grid.DetailTemplate = new GridDetailTemplate<Customer>();
-            grid.DetailTemplate.Template.Html = "foo";
+            
+            grid.DetailTemplate.Html = "foo";
             Assert.DoesNotThrow(() => grid.VerifySettings());
         }
 
@@ -189,9 +188,8 @@ namespace Kendo.Mvc.UI.Tests.Grid
         public void Should_throw_if_binding_mode_is_ajax_and_server_detailView_template_is_used()
         {
             grid.DataSource.Type = DataSourceType.Ajax;
-
-            grid.DetailTemplate = new GridDetailTemplate<Customer>();
-            grid.DetailTemplate.Template.Html = "foo";            
+            
+            grid.DetailTemplate.Html = "foo";            
             Assert.Throws<NotSupportedException>(() => grid.VerifySettings());
         }
 
@@ -199,10 +197,9 @@ namespace Kendo.Mvc.UI.Tests.Grid
         public void Should_not_throw_if_binding_mode_is_ajax_and_server_detailView_template_is_used_and_client_template_is_set()
         {
             grid.DataSource.Type = DataSourceType.Ajax;
-
-            grid.DetailTemplate = new GridDetailTemplate<Customer>();
-            grid.DetailTemplate.Template.Html = "foo";
-            grid.DetailTemplate.ClientTemplate = "bar";
+           
+            grid.DetailTemplate.Html = "foo";
+            grid.ClientDetailTemplateId = "bar";
             Assert.DoesNotThrow(() => grid.VerifySettings());
         }
 

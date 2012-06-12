@@ -94,7 +94,7 @@ namespace Kendo.Mvc.UI
                 options["month"] = month;
             }
 
-            writer.Write(Initializer.Initialize(Id, "DatePicker", options));
+            writer.Write(Initializer.Initialize(Selector, "DatePicker", options));
 
             base.WriteInitializationScript(writer);
         }

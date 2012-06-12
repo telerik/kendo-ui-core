@@ -67,7 +67,7 @@ namespace Kendo.Mvc.UI
                 options["dates"] = Dates;
             }
 
-            writer.Write(Initializer.Initialize(Id, "TimePicker", options));
+            writer.Write(Initializer.Initialize(Selector, "TimePicker", options));
 
             base.WriteInitializationScript(writer);
         }

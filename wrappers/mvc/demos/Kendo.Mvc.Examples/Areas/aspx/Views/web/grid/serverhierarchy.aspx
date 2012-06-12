@@ -12,7 +12,7 @@
             columns.Bound(e => e.Country).Width(200);
             columns.Bound(e => e.City);
         })
-        .DetailTemplate(detail => detail.Template(employee => {
+        .DetailTemplate(employee => {
             %>            
                 <%: Html.Kendo().Grid(employee.Orders)
                         .Name("Orders_" + employee.EmployeeID)
@@ -30,7 +30,7 @@
                         .Filterable()
                 %>
             <%}
-        ))
+        )
         .RowAction(row => 
         {
             if (row.Index == 0)

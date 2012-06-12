@@ -90,7 +90,7 @@ namespace Kendo.Mvc.UI
                 options["encoded"] = Encode.Value;
             }
 
-            writer.Write(Initializer.Initialize(Id, "Editor", options));
+            writer.Write(Initializer.Initialize(Selector, "Editor", options));
 
             base.WriteInitializationScript(writer);
         }

@@ -2,8 +2,9 @@ namespace Kendo.Mvc.UI
 {
     using System.Collections.Generic;
     using System.Web;
+    using System.Web.Mvc;
     using Kendo.Mvc.Extensions;
-    using Kendo.Mvc.Infrastructure;
+    using Kendo.Mvc.Infrastructure;    
 
     /// <summary>
     /// View component Builder base class.
@@ -106,6 +107,11 @@ namespace Kendo.Mvc.UI
         public string ToHtmlString()
         {
             return ToComponent().ToHtmlString();
+        }
+
+        public MvcHtmlString ToClientTemplate()
+        {
+            return ToComponent().ToClientTemplate();
         }
 
         public override string ToString()
