@@ -8,6 +8,8 @@ var kendo = {
 
 # data.forEach(function(theClass) {  #
 
+# if (theClass.methods.length) { #
+// Class
 #= theClass.name # = function() { };
 
 #= theClass.name #.prototype = {
@@ -27,6 +29,12 @@ var kendo = {
         },
 # }); #
 }
+
+# } else { #
+// Namespace
+#= theClass.name# = {};
+# } #
+
 # }); #
 
 // vim:ft=javascript
