@@ -17,10 +17,46 @@
         <script src="../src/kendo.treeview.js"></script>
     </head>
     <body>
-        <h2>Homogeneous data source</h2>
+        <h2>heterogeneous data source</h2>
         <div id="treeview2"></div>
         <script>
-            var homogeneous = new kendo.data.HierarchicalDataSource({
+            var OrderDetails = {
+                type: "odata",
+                transport: {
+                    read: {
+                        url: function(options) {
+                            return kendo.format("http://services.odata.org/Northwind/Northwind.svc/Products({0})/Order_Details", options.ProductID);
+                        }
+                    }
+                },
+                schema: {
+                    model: {
+                        hasChildren: function() {
+                            return false;
+                        }
+                    }
+                }
+            };
+
+            var Products = {
+                type: "odata",
+                schema: {
+                    model: {
+                        id: "ProductID",
+                        hasChildren: "Order_Details",
+                        children: OrderDetails
+                    }
+                },
+                transport: {
+                    read: {
+                        url: function(options) {
+                            return kendo.format("http://services.odata.org/Northwind/Northwind.svc/Categories({0})/Products", options.CategoryID);
+                        }
+                    }
+                }
+            };
+
+            var heterogeneous = new kendo.data.HierarchicalDataSource({
                 type: "odata",
                 transport: {
                     read: {
@@ -29,15 +65,20 @@
                 },
                 schema: {
                     model: {
-                        leaf: "__deferred"
+                        hasChildren: "Products",
+                        id: "CategoryID",
+                        children: Products
                     }
                 }
             });
 
             $("#treeview2").kendoTreeView({
-                dataSource: homogeneous,
+                dataSource: heterogeneous,
                 bindings: {
-                    text: "CategoryName"
+                    text: "CategoryName",
+                    bindings: {
+                        text: "ProductName"
+                    }
                 }
             });
 
