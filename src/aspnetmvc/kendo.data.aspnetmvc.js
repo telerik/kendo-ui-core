@@ -136,8 +136,13 @@
 
     function encodeFilterValue(value) {
        if (typeof value === "string") {
-           return "'" + value.replace(escapeQuoteRegExp, "''") + "'";
+           if (value.indexOf('Date(') > -1) {
+               value = new Date(parseInt(value.replace(/^\/Date\((.*?)\)\/$/, '$1')));
+           } else {
+               return "'" + value.replace(escapeQuoteRegExp, "''") + "'";
+           }
        }
+
        if (value && value.getTime) {
            return "datetime'" + kendo.format("{0:yyyy-MM-ddTHH-mm-ss}", value) + "'";
        }
