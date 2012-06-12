@@ -18,6 +18,7 @@ namespace Kendo.Controllers
             new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
                 { ".js", "application/x-javascript" },
                 { ".json", "application/json" },
+                { ".md", "text/html" },
                 { ".css", "text/css" },
                 { ".less", "text/css" },
                 { ".jpg", "image/jpg" },

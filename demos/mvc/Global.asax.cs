@@ -83,6 +83,12 @@ namespace Kendo
             );
 
             routes.MapRoute(
+                "DocsDebug",
+                "docs/{suite}/{*widget}",
+                new { controller = "Debug", action = "Docs" }
+            );
+
+            routes.MapRoute(
                 "ThemeBuilder",
                 "themebuilder/index.html",
                 new { controller = "ThemeBuilder", action = "Index" }

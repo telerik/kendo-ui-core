@@ -17,5 +17,14 @@ namespace Kendo.Controllers
 
             return StaticContent(path);
         }
+
+        public ActionResult Docs(string suite, string widget)
+        {
+            var root = Server.MapPath("~/");
+
+            var path = Path.Combine(root, "..", "..", "..", "kendo-docs", "api", suite, widget + ".md");
+
+            return StaticContent(path);
+        }
     }
 }
