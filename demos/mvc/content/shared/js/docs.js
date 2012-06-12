@@ -5,6 +5,7 @@
         sectionRegExp = /^##\s/m;
 
     if (!decode) {
+        //code snippet from http://www.nczonline.net/blog/2009/12/08/computer-science-in-javascript-base64-encoding/
         decode = function base64Decode(text){
             text = text.replace(/\s/g,"");
 
@@ -63,21 +64,21 @@
 
                     result = result.split(sectionRegExp);
                     var contents = {
-                        "Getting started": markdown.toHTML("## " + result[1]),
+                        "Getting started": markdown.toHTML(result[1].replace("Description", "")),
                     };
 
                     if (result[index].charAt(0) === "C") {
-                        contents.Configuration = markdown.toHTML("## " + result[index])
+                        contents.Configuration = markdown.toHTML(result[index].replace("Configuration", ""))
                         index += 1;
                     }
 
                     if (result[index].charAt(0) === "M") {
-                        contents.Methods = markdown.toHTML("## " + result[index])
+                        contents.Methods = markdown.toHTML(result[index].replace("Methods", ""))
                         index += 1;
                     }
 
                     if (result[index].charAt(0) === "E") {
-                        contents.Events = markdown.toHTML("## " + result[index])
+                        contents.Events = markdown.toHTML(result[index].replace("Events", ""))
                     }
 
                     success(contents);

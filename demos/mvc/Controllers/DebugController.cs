@@ -22,7 +22,7 @@ namespace Kendo.Controllers
         public JsonpResult Docs(string suite, string widget)
         {
             var root = Server.MapPath("~/");
-            var path = Path.Combine(root, "..", "..", "..", "kendo-docs", "api", suite, widget + ".md");
+            var path = Path.Combine(root, "..", "..", "docs", "api", suite, widget + ".md");
 
             if (!IOFile.Exists(path))
             {
