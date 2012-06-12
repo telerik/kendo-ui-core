@@ -516,8 +516,6 @@
             proto.idField = id;
         }
 
-        proto.leafField = proto.leaf || "leaf";
-
         if (proto.id) {
             delete proto.id;
         }
@@ -2503,28 +2501,50 @@
     var Node = Model.define({
         init: function(value) {
             var that = this,
+                hasChildren = that.hasChildren,
                 children = {};
 
             kendo.data.Model.fn.init.call(that, value);
 
-            if (value) {
-                that.leaf = value[that.leafField];
-            }
-
-            children = extend(true, { schema: { model: { leaf: that.leafField } } }, that.children, {
+            children = extend({
+                schema: {
+                    data: "items",
+                    model: {
+                        hasChildren: hasChildren
+                    }
+                },
                 data: value
-            });
+            }, that.children, { data: value });
+
+            if (typeof hasChildren === STRING) {
+                hasChildren = kendo.getter(hasChildren);
+
+                that.hasChildren = function() {
+                    return !!hasChildren(this);
+                };
+            } else if (hasChildren === Node.fn.hasChildren && children.schema.data) {
+                hasChildren = kendo.getter(children.schema.data);
+
+                that.hasChildren = function() {
+                    return !!hasChildren(this);
+                };
+            }
 
             that.children = new HierarchicalDataSource(children);
             that.children._parent = function(){
                 return that;
-            }
+            };
 
             that.children.bind(CHANGE, function(e){
                 e.node = e.node || that;
                 that.trigger(CHANGE, e);
             });
+
             that._loaded = false;
+        },
+
+        hasChildren: function() {
+            return false;
         },
 
         load: function() {

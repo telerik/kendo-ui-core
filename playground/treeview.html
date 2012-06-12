@@ -11,6 +11,7 @@
         <script src="../src/jquery.js"></script>
         <script src="../src/kendo.core.js"></script>
         <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.data.odata.js"></script>
         <script src="../src/kendo.draganddrop.js"></script>
         <script src="../src/kendo.fx.js"></script>
         <script src="../src/kendo.treeview.js"></script>
@@ -20,20 +21,15 @@
         <div id="treeview2"></div>
         <script>
             var homogeneous = new kendo.data.HierarchicalDataSource({
+                type: "odata",
                 transport: {
                     read: {
-                        url: "http://korchev:8080/Northwind/Home/Employees",
-                        dataType: "json",
-                        data: {
-                            employeeId: "root"
-                        }
+                        url: "http://services.odata.org/Northwind/Northwind.svc/Categories"
                     }
                 },
                 schema: {
-                    data: "employees",
                     model: {
-                        id: "employeeId",
-                        leaf: "employeeLeaf"
+                        leaf: "__deferred"
                     }
                 }
             });
@@ -41,7 +37,7 @@
             $("#treeview2").kendoTreeView({
                 dataSource: homogeneous,
                 bindings: {
-                    text: "employeeName"
+                    text: "CategoryName"
                 }
             });
 

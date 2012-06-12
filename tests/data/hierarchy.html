@@ -232,33 +232,148 @@
                 strictEqual(dataSource.getByUid(product.uid), product);
             });
 
-            test("maps leaf flag", function() {
+            test("hasChildren returns the value of the specified field", function() {
                 var dataSource = new HierarchicalDataSource({
                     transport: {
                         read: function(options) {
                             options.success([
-                                { id: 1, isLeaf: true },
-                                { id: 2, isLeaf: false }
+                                { id: 1, isParent: true },
+                                { id: 2, isParent: false }
                             ])
                         }
                     },
                     schema: {
                         model: {
-                            leaf: "isLeaf"
+                            hasChildren: "isParent"
                         }
                     }
                 });
 
                 dataSource.fetch();
 
-                ok(dataSource.view()[0].leaf === true)
-                ok(dataSource.view()[1].leaf === false)
+                equal(dataSource.view()[0].hasChildren(), true)
+                equal(dataSource.view()[1].hasChildren(), false)
             });
 
-            test("maps leaf flag of child datasources", function() {
+            test("hasChildren returns the false if the specified field is undefined", function() {
+                var dataSource = new HierarchicalDataSource({
+                    transport: {
+                        read: function(options) {
+                            options.success([
+                                { id: 1 }
+                            ])
+                        }
+                    },
+                    schema: {
+                        model: {
+                            hasChildren: "isParent"
+                        }
+                    }
+                });
+
+                dataSource.fetch();
+
+                equal(dataSource.view()[0].hasChildren(), false)
+            });
+
+            test("hasChildren returns false by default", function() {
+                var dataSource = new HierarchicalDataSource({
+                    transport: {
+                        read: function(options) {
+                            options.success([
+                                { id: 1 },
+                                { id: 2 }
+                            ])
+                        }
+                    }
+                });
+
+                dataSource.fetch();
+                equal(dataSource.data()[0].hasChildren(), false);
+            });
+
+            test("hasChildren as function", 1, function() {
+                var dataSource = new HierarchicalDataSource({
+                    transport: {
+                        read: function(options) {
+                            options.success([
+                                { id: 1 },
+                                { id: 2 }
+                            ])
+                        }
+                    },
+                    schema: {
+                        model: {
+                            hasChildren: function() {
+                                ok(true);
+                            }
+                        }
+                    }
+                });
+
+                dataSource.fetch();
+                dataSource.data()[0].hasChildren();
+            });
+
+            test("the this context in hasChildren is the node itself", 1, function() {
+                var node;
+
+                var dataSource = new HierarchicalDataSource({
+                    transport: {
+                        read: function(options) {
+                            options.success([
+                                { id: 1 },
+                                { id: 2 }
+                            ])
+                        }
+                    },
+                    schema: {
+                        model: {
+                            hasChildren: function() {
+                                strictEqual(this, node);
+                            }
+                        }
+                    }
+                });
+
+                dataSource.fetch();
+                node = dataSource.data()[0];
+                node.hasChildren();
+            });
+
+            test("hasChildren and inline defined data source", function() {
+                var dataSource = categories();
+
+                dataSource.fetch();
+
+                dataSource.data()[0].load();
+
+                equal(dataSource.data()[0].hasChildren(), true);
+                equal(dataSource.data()[0].children.data()[0].hasChildren(), false);
+            });
+
+            test("the default children field name is 'items'", function() {
+                var dataSource = new HierarchicalDataSource({
+                    data: [ {
+                        text: "foo",
+                        items: [
+                           { text : "bar" }
+                        ]
+                    } ]
+                });
+
+                dataSource.fetch();
+
+                dataSource.data()[0].load();
+
+                equal(dataSource.data()[0].hasChildren(), true);
+                equal(dataSource.data()[0].children.data()[0].text, "bar");
+            });
+
+            test("hasChildren propagates to child data sources", function() {
                 var readData = function(options) {
                         options.success([
-                            { isLeaf: false }
+                            { isParent: true }
                         ])
                     },
                     dataSource = new HierarchicalDataSource({
@@ -267,7 +382,7 @@
                         },
                         schema: {
                             model: {
-                                leaf: "isLeaf",
+                                hasChildren: "isParent",
                                 children: {
                                     transport: {
                                         read: readData
@@ -280,7 +395,7 @@
                 dataSource.fetch();
                 dataSource.data()[0].load();
 
-                ok(dataSource.data()[0].children.data()[0].leaf === false);
+                ok(dataSource.data()[0].children.data()[0].hasChildren() === true);
             });
 
             test("loaded returns false for nodes whose children are not loaded", function() {
