@@ -16,7 +16,7 @@ tests.push(
         title: "core observable"
     },
     {
-        page: "core/component.html",
+        page: "core/widget.html",
         title: "core widget"
     },
     {

@@ -2624,6 +2624,7 @@ function pad(number) {
 
             getter = "getKendo" + prefix + name;
             name = "kendo" + prefix + name;
+
             $.fn[name] = function(options) {
                 var value = this,
                     args;
@@ -2664,7 +2665,7 @@ function pad(number) {
 
             $.fn[getter] = function() {
                 return this.data(name);
-            }
+            };
         }
     });
 

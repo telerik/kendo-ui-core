@@ -81,18 +81,20 @@
             });
 
             test("plugin provides get widget shortcut", 2, function() {
-                var Foo = Widget.extend({
+                var Bar = Widget.extend({
                     options: {
-                        name: "Foo"
+                        name: "Bar",
+                        prefix: ""
                     }
-                });
+                }),
+                el = $("<div />");
 
-                kendo.ui.plugin(Foo);
+                kendo.ui.plugin(Bar);
 
-                $("#qunit-fixture").kendoFoo();
+                el.kendoBar();
 
-                ok($("#qunit-fixture").getKendoFoo());
-                equal($("#qunit-fixture").getKendoFoo(), $("#qunit-fixture").data("kendoFoo"));
+                ok(el.getKendoBar());
+                equal(el.getKendoBar(), el.data("kendoBar"));
             });
        </script>
     </body>
