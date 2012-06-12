@@ -80,7 +80,7 @@
         /**
          * @constructs
          * @extends kendo.mobile.ui.Widget
-         * @param {DomElement} element DOM element.
+         * @param {Element} element DOM element.
          * @param {Object} options Configuration options.
          * @option {Number} [width] The width of the ModalView container in pixels. If not set, the element style is used.
          * @option {Number} [height] The height of the ModalView container in pixels. If not set, the element style is used.
@@ -119,7 +119,7 @@
              * @name kendo.mobile.ui.ModalView#open
              * @event
              * @param {Event} e
-             * @param {jQueryObject} e.target The invocation target of the ModalView.
+             * @param {jQuery} e.target The invocation target of the ModalView.
              * @example
              * <div data-role="view">
              *  <a href="#foo" data-rel="modalview">Foo</a>
@@ -145,7 +145,7 @@
 
         /**
          * Open the ModalView
-         * @param {jQueryObject} target (optional) The target of the ModalView
+         * @param {jQuery} target (optional) The target of the ModalView
          */
         open: function(target) {
             var that = this;

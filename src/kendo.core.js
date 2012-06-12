@@ -2577,7 +2577,7 @@ function pad(number) {
          * Shows an overlay with a loading message, indicating that an action is in progress.
          * @name kendo.ui.progress
          * @function
-         * @param {jQueryObject} container The container that will hold the overlay
+         * @param {jQuery} container The container that will hold the overlay
          * @param {Boolean} toggle Whether the overlay should be shown or hidden
          */
         progress: function(container, toggle) {
@@ -2612,7 +2612,8 @@ function pad(number) {
          * $("input").data("kendoTextBox").value();
          */
         plugin: function(widget, register, prefix) {
-            var name = widget.fn.options.name;
+            var name = widget.fn.options.name,
+                getter;
 
             register = register || kendo.ui;
             prefix = prefix || "";
@@ -2621,6 +2622,7 @@ function pad(number) {
 
             register.roles[name.toLowerCase()] = widget;
 
+            getter = "getKendo" + prefix + name;
             name = "kendo" + prefix + name;
             $.fn[name] = function(options) {
                 var value = this,
@@ -2659,6 +2661,10 @@ function pad(number) {
 
                 return value;
             };
+
+            $.fn[getter] = function() {
+                return this.data(name);
+            }
         }
     });
 

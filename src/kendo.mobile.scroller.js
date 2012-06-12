@@ -217,7 +217,7 @@
         /**
          * @constructs
          * @extends kendo.mobile.ui.Widget
-         * @param {DomElement} element DOM element
+         * @param {Element} element DOM element
          * @param {Object} options
          * @option {Boolean} [elastic] <true> Weather or not to allow out of bounds dragging and easing.
          * @option {Number} [pullOffset] <140> The threshold below which a releasing the scroller will trigger the pull event.

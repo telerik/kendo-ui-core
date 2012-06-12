@@ -64,7 +64,7 @@
         /**
         * @constructs
         * @extends kendo.mobile.ui.Widget
-        * @param {DomElement} element DOM element
+        * @param {Element} element DOM element
         * @param {Object} options
         * @option {Number} [page] <0> The initial page to display.
         * @option {Number} [duration] <300> The milliseconds that take the ScrollView to snap to the current page after released.
@@ -156,7 +156,7 @@
              * @name kendo.mobile.ui.ScrollView#change
              * @event
              * @param {Event} e
-             * @param {jQueryObject} e.page The current page (zero based index)
+             * @param {jQuery} e.page The current page (zero based index)
              */
             CHANGE
         ],
@@ -202,7 +202,7 @@
 
         /**
          * Update the scrollview HTML content
-         * @param {String | jQueryObject} content the new scrollView content.
+         * @param {String | jQuery} content the new scrollView content.
          *
          * @example
          * <div data-role="scrollview" id="scrollview"></div>

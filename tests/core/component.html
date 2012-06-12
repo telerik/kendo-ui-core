@@ -79,6 +79,21 @@
 
                 ok($.fn.kendoFoo);
             });
+
+            test("plugin provides get widget shortcut", 2, function() {
+                var Foo = Widget.extend({
+                    options: {
+                        name: "Foo"
+                    }
+                });
+
+                kendo.ui.plugin(Foo);
+
+                $("#qunit-fixture").kendoFoo();
+
+                ok($("#qunit-fixture").getKendoFoo());
+                equal($("#qunit-fixture").getKendoFoo(), $("#qunit-fixture").data("kendoFoo"));
+            });
        </script>
     </body>
 </html>

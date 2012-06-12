@@ -107,7 +107,7 @@
         /**
          * @constructs
          * @extends kendo.mobile.ui.Widget
-         * @param {DomElement} element DOM element.
+         * @param {Element} element DOM element.
          * @param {Object} options Configuration options.
          * @option {Number} [index] Defines the initially selected Button.
          */
@@ -153,7 +153,7 @@
 
         /**
          * Get the currently selected Button.
-         * @returns {jQueryObject} the currently selected Button.
+         * @returns {jQuery} the currently selected Button.
          */
         current: function() {
             return this.element.find("." + ACTIVE);
@@ -161,7 +161,7 @@
 
         /**
          * Select a Button.
-         * @param {jQueryObject | Number} li LI element or index of the Button.
+         * @param {jQuery | Number} li LI element or index of the Button.
          * @example
          * var buttongroup = $("#buttongroup").data("kendoMobileButtonGroup");
          *

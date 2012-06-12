@@ -46,7 +46,7 @@
         /**
          * @constructs
          * @extends kendo.ui.Widget
-         * @param {DomElement} element DOM element
+         * @param {Element} element DOM element
          * @param {Object} options Configuration options.
          * @option {Boolean} [transitions] <true>
          * A value indicating if transition animations should be played.
@@ -371,7 +371,7 @@
         /**
          * @constructs
          * @extends kendo.ui.Widget
-         * @param {DomElement} element DOM element
+         * @param {Element} element DOM element
          * @param {Object} options Configuration options.
          * @option {Boolean} [transitions] <true>
          * A value indicating if transition animations should be played.

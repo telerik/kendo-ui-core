@@ -58,7 +58,7 @@
         /**
          * @constructs
          * @extends kendo.ui.Widget
-         * @param {DomElement} element DOM element
+         * @param {Element} element DOM element
          * @param {Object} options Configuration options.
          * @option {Boolean} [encoded] <true> Indicates whether the Editor should submit encoded HTML tags.
          * _example

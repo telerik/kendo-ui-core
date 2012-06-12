@@ -233,7 +233,7 @@
          * @constructs
          * @extends kendo.ui.Widget
          *
-         * @param {DomElement} element
+         * @param {Element} element
          * DOM element
          *
          * @param {Object} options
@@ -253,16 +253,16 @@
          * Enables (<strong>true</strong>) or disables (<strong>false</strong>) the ability for users to resize a
          * <strong>Window</strong>.
          *
-         * @option {Integer} [minWidth] <50>
+         * @option {Number} [minWidth] <50>
          * The minimum width (in pixels) that may be achieved by resizing the window.
          *
-         * @option {Integer} [minHeight] <50>
+         * @option {Number} [minHeight] <50>
          * The minimum height (in pixels) that may be achieved by resizing the window.
          *
-         * @option {Integer} [maxWidth] <Infinity>
+         * @option {Number} [maxWidth] <Infinity>
          * The maximum width (in pixels) that may be achieved by resizing the window.
          *
-         * @option {Integer} [maxHeight] <Infinity>
+         * @option {Number} [maxHeight] <Infinity>
          * The maximum height (in pixels) that may be achieved by resizing the window.
          *
          * @option {Object|String} [content]

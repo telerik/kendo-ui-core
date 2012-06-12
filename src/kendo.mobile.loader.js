@@ -12,7 +12,7 @@
         /**
         * @constructs
         * @extends kendo.mobile.ui.Widget
-        * @param {DomElement} element DOM element
+        * @param {Element} element DOM element
         */
         init: function(container, options) {
             var that = this,

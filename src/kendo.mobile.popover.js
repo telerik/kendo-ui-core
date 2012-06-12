@@ -176,7 +176,7 @@
         /**
          * @constructs
          * @extends kendo.mobile.ui.Widget
-         * @param {DomElement} element DOM element
+         * @param {Element} element DOM element
          * @option {Object} [pane] The pane configuration options.
          * @option {String} [pane.layout] <> The id of the default Pane Layout.
          * @option {String} [pane.initial] <> The id of the initial mobile View to display.
@@ -233,7 +233,7 @@
 
         /**
          * Open the ActionSheet.
-         * @param {jQueryObject} target The target of the Popover, to which the visual arrow will point to.
+         * @param {jQuery} target The target of the Popover, to which the visual arrow will point to.
          */
         openFor: function(target) {
             this.popup.show(target);

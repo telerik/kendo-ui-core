@@ -294,7 +294,7 @@
          * @constructs
          * @extends kendo.ui.Widget
          *
-         * @param {DomElement} element DOM element
+         * @param {Element} element DOM element
          * @param {Object} options Configuration options.
          *
          * @option {Array} [dataSource]
@@ -507,13 +507,13 @@
             * @param {Node} e.sourceNode
             * The node that is being dragged.
             *
-            * @param {DomElement} e.dropTarget
+            * @param {Element} e.dropTarget
             * The element that the node is placed over.
             *
-            * @param {Integer} e.pageX
+            * @param {Number} e.pageX
             * The x coordinate of the mouse.
             *
-            * @param {Integer} e.pageY
+            * @param {Number} e.pageY
             * The y coordinate of the mouse.
             *
             * @param {String} e.statusClass
@@ -574,7 +574,7 @@
             * @param {Function} e.setValid
             * Allows the drop to be prevented.
             *
-            * @param {DomElement} e.dropTarget
+            * @param {Element} e.dropTarget
             * The element that the node is placed over.
             *
             * @param {String} e.dropPosition
@@ -1199,7 +1199,7 @@
          * @param {Selector} node
          * The node that is to be detached.
          *
-         * @returns {jQueryObject}
+         * @returns {jQuery}
          * The node that has been detached.
          *
          * @exampleTitle Remove the node with ID, firstItem
@@ -1222,7 +1222,7 @@
          * @param {String} text
          * The text that is being searched for.
          *
-         * @returns {jQueryObject}
+         * @returns {jQuery}
          * All nodes that have the text.
          *
          * @exampleTitle Search a TreeView for the item that has the text, "CSS3 is da bomb!"

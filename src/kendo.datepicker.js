@@ -397,7 +397,7 @@
         /**
          * @constructs
          * @extends kendo.ui.Widget
-         * @param {DomElement} element DOM element
+         * @param {Element} element DOM element
          * @param {Object} options Configuration options.
          * @option {Date} [value] <null> Specifies the selected date.
          * _example

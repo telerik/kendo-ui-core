@@ -78,7 +78,7 @@
         /**
          * @constructs
          * @extends kendo.mobile.ui.Widget
-         * @param {DomElement} element DOM element
+         * @param {Element} element DOM element
          * @param {Object} options Configuration options.
          * @option {String} [layout] <> The id of the default Pane Layout.
          * @option {String} [initial] <> The id of the initial mobilie View to display.
@@ -126,7 +126,7 @@
              * @name kendo.mobile.ui.Pane#navigate
              * @event
              * @param {Event} e
-             * @param {jQueryObject} e.url The url of the view
+             * @param {jQuery} e.url The url of the view
              */
             NAVIGATE,
             /**

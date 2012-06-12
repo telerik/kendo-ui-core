@@ -5,6 +5,7 @@ var path = require("path"),
     bundles = require("build/bundles"),
     themebuilder = require("build/themebuilder"),
     kendoBuild = require("build/kendo-build"),
+    vsdoc = require("build/vs-doc/vs-doc").vsdoc,
     copyDir = kendoBuild.copyDirSyncRecursive,
     mkdir = kendoBuild.mkdir,
     zip = kendoBuild.zip,
@@ -185,6 +186,11 @@ task("winjs", ["clean"], function() {
 
 desc("Build debug demos site");
 task("default", ["clean", "demos:debug"], function() {
+});
+
+desc("Build vsdoc");
+task("vsdoc", function() {
+    console.log(vsdoc("docs/api/", /.+md/));
 });
 
 desc("Build bundles");

@@ -163,7 +163,7 @@
         /**
          * @constructs
          * @extends kendo.ui.Select
-         * @param {DomElement} element DOM element
+         * @param {Element} element DOM element
          * @param {Object} options Configuration options.
          * @option {kendo.data.DataSource | Object} [dataSource] Instance of DataSource or the data that the DropDownList will be bound to.
          * _exampleTitle Bind to a local array
@@ -701,8 +701,8 @@
 
         /**
         * Selects drop-down list item and sets the value and the text of the dropdownlist.
-        * @param {jQueryObject | Number | Function} li LI element or index of the item or predicate function, which defines the item that should be selected.
-        * @returns {Integer} The index of the selected LI element.
+        * @param {jQuery | Number | Function} li LI element or index of the item or predicate function, which defines the item that should be selected.
+        * @returns {Number} The index of the selected LI element.
         * @example
         * // get a reference to the dropdown list
         * var dropdownlist = $("#dropdownlist").data("kendoDropDownList");

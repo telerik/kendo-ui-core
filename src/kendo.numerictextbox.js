@@ -118,7 +118,7 @@
         /**
          * @constructs
          * @extends kendo.ui.Widget
-         * @param {DomElement} element DOM element
+         * @param {Element} element DOM element
          * @param {Object} options Configuration options
          * @option {Number} [value] <null> Specifies the value of the NumericTextBox widget.
          * _example

@@ -80,7 +80,7 @@
         /**
          * @constructs
          * @extends kendo.mobile.ui.Widget
-         * @param {DomElement} element DOM element.
+         * @param {Element} element DOM element.
          * @param {Object} options Configuration options.
          * @option {String} [title] <> The text to display in the navbar title (if present) and the browser title.
          * @option {Boolean} [stretch] <false> If set to true, the view will stretch its child contents to occupy the entire view, while disabling kinetic scrolling.
@@ -120,7 +120,7 @@
              * @name kendo.mobile.ui.View#init
              * @event
              * @param {Event} e
-             * @param {jQueryObject} e.view The mobile view instance
+             * @param {jQuery} e.view The mobile view instance
              */
             INIT,
             /**
@@ -128,7 +128,7 @@
              * @name kendo.mobile.ui.View#beforeShow
              * @event
              * @param {Event} e
-             * @param {jQueryObject} e.view The mobile view instance
+             * @param {jQuery} e.view The mobile view instance
              */
             BEFORE_SHOW,
             /**
@@ -136,7 +136,7 @@
              * @name kendo.mobile.ui.View#show
              * @event
              * @param {Event} e
-             * @param {jQueryObject} e.view The mobile view instance
+             * @param {jQuery} e.view The mobile view instance
              */
             SHOW,
             /**
@@ -144,7 +144,7 @@
              * @name kendo.mobile.ui.View#hide
              * @event
              * @param {Event} e
-             * @param {jQueryObject} e.view The mobile view instance
+             * @param {jQuery} e.view The mobile view instance
              */
             HIDE
         ],
@@ -457,7 +457,7 @@
         /**
          * @constructs
          * @extends kendo.mobile.ui.Widget
-         * @param {DomElement} element DOM element.
+         * @param {Element} element DOM element.
          * @param {Object} options Configuration options.
          * @option {String} [id] <null> The id of the layout. Required.
          * @option {String} [platform] <> The specific platform this layout targets. By default, layouts are displayed
@@ -487,7 +487,7 @@
              * @name kendo.mobile.ui.Layout#init
              * @event
              * @param {Event} e
-             * @param {jQueryObject} e.layout The mobile layout instance
+             * @param {jQuery} e.layout The mobile layout instance
              */
             INIT,
             /**
@@ -495,8 +495,8 @@
              * @name kendo.mobile.ui.Layout#show
              * @event
              * @param {Event} e
-             * @param {jQueryObject} e.layout The mobile layout instance
-             * @param {jQueryObject} e.view The mobile view instance
+             * @param {jQuery} e.layout The mobile layout instance
+             * @param {jQuery} e.view The mobile view instance
              */
             SHOW,
             /**
@@ -504,8 +504,8 @@
              * @name kendo.mobile.ui.Layout#hide
              * @event
              * @param {Event} e
-             * @param {jQueryObject} e.layout The mobile layout instance
-             * @param {jQueryObject} e.view The mobile view instance
+             * @param {jQuery} e.layout The mobile layout instance
+             * @param {jQuery} e.view The mobile view instance
              */
             HIDE
         ],
