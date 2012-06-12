@@ -18,7 +18,7 @@ var kendo = {
     /// #= trim(method.description).replace(/\n/g, "\n/// ")  #
     /// </summary>
 # method.parameters.forEach(function(param) { #
-    /// <param name="#= param.name #" type="#=param.type #">#= trim(param.description).replace(/\n/g, " ") #</param>
+    /// <param name="#= param.name #" type="#=param.type #" #= param.type === "Element" ? 'domElement="true"' : '' #>#= trim(param.description).replace(/\n/g, " ") #</param>
 # }) #
 # if (method.returns) { #
     /// <returns type="#= method.returns #">#= trim(method.returnsDescription) #</returns>
