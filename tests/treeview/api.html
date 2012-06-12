@@ -389,6 +389,19 @@
                 equal(items.eq(1).text(), "bar");
             });
 
+            /*
+            test("append() adds element to dataSource", function() {
+                createTreeView({});
+
+                treeviewObject.append({ text: "foo" });
+
+                var data = treeviewObject.dataSource.data();
+
+                equal(data.length, 1);
+                equal(data[0].text, "foo");
+            });
+            */
+
             test("detach() removes node and persists data", function() {
                 createTreeView([
                     { text: "foo" },
@@ -581,8 +594,7 @@
                 equal(foo.text, "foo");
             });
 
-            /*
-            test("dataItem searches throgh child dataSources", function() {
+            test("dataItem searches through child dataSources", function() {
                 createTreeView({
                         dataSource: [
                             { id: 1, text: "foo", baz: "qux", items: [
@@ -591,6 +603,8 @@
                         ]
                     });
 
+                treeviewObject.dataSource.data()[0].children.read();
+
                 var bar = treeviewObject.dataItem(treeview.find(".k-item:last"));
 
                 ok(bar);
@@ -598,7 +612,6 @@
                 equal(bar.text, "bar");
                 equal(bar.baz, "lux");
             });
-            */
         </script>
 
         <div id="qunit-fixture"> </div>

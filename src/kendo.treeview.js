@@ -93,14 +93,6 @@
      *     // useful when rendering node-specific HTML
      *     encoded: false,
      *
-     *     items: [
-     *         // child items
-     *     ]
-     * }
-     *
-     * @section
-     * <h3>Configuring TreeView Behavior</h3>
-     * <p>
      *  A number of <strong>TreeView</strong> behaviors can be easily controlled by simple configuration properties,
      *  such as animation behaviors and drag-and-drop behaviors.
      * </p>
@@ -664,7 +656,8 @@
                     duration: 100
                 }
             },
-            dragAndDrop: false
+            dragAndDrop: false,
+            loadOnDemand: true
         },
 
         _textTemplate: function() {
@@ -692,7 +685,7 @@
                         " " + kendo.attr("uid") + "='#= item.uid #'" +
                     ">" +
                         "<div class='#= r.cssClass(group, item) #'>" +
-                            "# if (item.hasChildren() || " + field("items") + ") { #" +
+                            "# if (item.hasChildren()) { #" +
                                 "<span class='#= r.toggleButtonClass(item) #'></span>" +
                             "# } #" +
 
@@ -719,10 +712,6 @@
                                 "#= treeview.template(data) #" +
                             "</#=tag#>" +
                         "</div>" +
-
-                        "# if (" + field("items") + ") { #" +
-                            "#= subGroup(group, item) #" +
-                        "# } #" +
                     "</li>";
 
             return template(templateText);
@@ -851,11 +840,16 @@
                 group,
                 node = e.node,
                 action = e.action,
-                items = e.items;
+                items = e.items,
+                i;
 
             if (node) {
                 parentNode = that.findByUid(node.uid);
             }
+
+            console.log(items);
+
+            console.log("refreshings! args: ", e, " node: ", node);
 
             if (action == "add") {
                 that.append(items, parentNode);
@@ -876,6 +870,12 @@
                             expanded: true
                         }
                     })).children("ul");
+                }
+
+                if (!that.options.loadOnDemand) {
+                    for (i = 0; i < items.length; i++) {
+                        items[i].load();
+                    }
                 }
             }
         },
@@ -1249,6 +1249,14 @@
          *
          */
         append: function (nodeData, parentNode) {
+            //var dataSource = this.dataSource;
+
+            //if (parentNode) {
+                //console.log(parentNode, this.dataItem(parentNode).children);
+                //dataSource = this.dataItem(parentNode).children;
+            //}
+
+            //dataSource.add(nodeData);
             parentNode = parentNode || this.element;
 
             var group = subGroup(parentNode);
@@ -1365,26 +1373,15 @@
         },
 
         _renderItem: function (options) {
-            var that = this,
-                bindings = that.options.bindings || {};
-
             if (!options.group) {
                 options.group = {};
             }
 
-            options.treeview = that.options;
-            options.subGroup = function(group, item) {
-                    return that._renderGroup({
-                        items: item[bindings.items || "items"],
-                        group: {
-                           expanded: item.expanded
-                        }
-                    });
-                };
+            options.treeview = this.options;
 
             options.r = rendering;
 
-            return that.templates.item(options);
+            return this.templates.item(options);
         },
 
         _renderGroup: function (options) {

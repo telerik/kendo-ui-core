@@ -128,6 +128,7 @@
                 equal(item.length, 1);
                 equal(treeviewObject.text(item), "foo");
             });
+
             /*
             test("Removing items from the datasource removes them from the treeview at the proper level", function() {
                 createTreeView({
@@ -138,10 +139,9 @@
                     ]
                 });
 
-                var uid = treeview.find(".k-item:last").data("uid");
+                var dataItem = treeviewObject.dataItem(treeview.find(".k-item:last"));
 
-                //treeviewObject.dataSource.remove({ uid: uid });
-                treeviewObject.dataSource.get(1).children.remove({ uid: uid });
+                treeviewObject.dataSource.remove(dataItem);
 
                 equal(treeview.find(".k-item").length, 1);
 
