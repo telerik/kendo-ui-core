@@ -2612,7 +2612,8 @@ function pad(number) {
          * $("input").data("kendoTextBox").value();
          */
         plugin: function(widget, register, prefix) {
-            var name = widget.fn.options.name;
+            var name = widget.fn.options.name,
+                getter;
 
             register = register || kendo.ui;
             prefix = prefix || "";
@@ -2621,6 +2622,7 @@ function pad(number) {
 
             register.roles[name.toLowerCase()] = widget;
 
+            getter = "getKendo" + prefix + name;
             name = "kendo" + prefix + name;
             $.fn[name] = function(options) {
                 var value = this,
@@ -2659,6 +2661,10 @@ function pad(number) {
 
                 return value;
             };
+
+            $.fn[getter] = function() {
+                return this.data(name);
+            }
         }
     });
 
