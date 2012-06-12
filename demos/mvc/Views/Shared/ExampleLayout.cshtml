@@ -58,38 +58,17 @@
     @if (ViewBag.ShowCodeStrip == true)
     {
         <div id="codeStrip">
-            <!--@if (!string.IsNullOrEmpty(ViewBag.Documentation))
+            @if (!string.IsNullOrEmpty(ViewBag.Documentation))
             {
                 <a class="documentation-link k-link" href="http://www.kendoui.com/documentation/@ViewBag.Documentation"><span class="documentation-icon"></span>Documentation</a>
             }
-            <ul>
-                <li class="k-state-active">Getting started</li>
-                <li>Demo source code</li>
-
-                @if (ViewBag.ConfigurationDocPath != null)
-                {
-                    <li>Configuration</li>
-                }
-
-                @if (ViewBag.MethodsDocPath != null)
-                {
-                    <li>Methods</li>
-                }
-
-                @if (ViewBag.EventsDocPath != null)
-                {
-                    <li>Events</li>
-                }
-            </ul>
-
-            <div class="description">
-                @Html.Raw(ViewBag.Description)
-                @RenderSection("Description", false)
-            </div>-->
         </div>
 
         <script>
             var codestrip = $("#codeStrip").kendoTabStrip({
+                contentLoad: function() {
+                    prettyPrint();
+                },
                 animation: {
                     open: {
                         effects: "fadeIn"
@@ -97,19 +76,39 @@
                 }
             }).data("kendoTabStrip");
 
-            window.docs.load("@ViewBag.Suite", "@ViewBag.Section", function(sections) {
-                for (var section in sections) {
-                    codestrip.append({
-                        text: section,
-                        content: sections[section]
-                    });
+            var docURL = "@ViewBag.Documentation";
+
+            if (docURL) {
+                docURL = docURL.split("/");
+
+                var suite = docURL[0],
+                    section = docURL[1].replace("-", "");
+
+                if (suite === "ui-widgets") {
+                    suite = "web";
                 }
 
-                codestrip.select(0);
+                window.docs.load(suite, section, function(sections) {
+                    for (var section in sections) {
+                        codestrip.append({
+                            text: section,
+                            content: sections[section]
+                        });
+                    }
 
-                $("pre").addClass("prettyprint");
-                prettyPrint();
-            });
+                    codestrip.select(0);
+
+                    //add demo source code
+                    codestrip.insertAfter({
+                        text: "Demo source code",
+                        contentUrl: "@Url.RouteUrl("Source", new { suite = ViewBag.suite, section = ViewBag.Section, example = ViewBag.Example })"
+                    }, codestrip.select());
+
+                    //prettify pre tags
+                    $("pre").addClass("prettyprint");
+                    prettyPrint();
+                });
+            }
         </script>
     }
 </div>
