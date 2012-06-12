@@ -3582,15 +3582,13 @@
                     totalSize -= currentSeries.holeSize;
                 }
 
-                if (i != seriesCount - 1) {
-                    if (defined(currentSeries.size)) {
-                        totalSize -= currentSeries.size;
-                    } else {
-                        seriesWithoutSize++;
-                    }
+                if (defined(currentSeries.size)) {
+                    totalSize -= currentSeries.size;
+                } else {
+                    seriesWithoutSize++;
                 }
 
-                if (defined(currentSeries.margin)) {
+                if (defined(currentSeries.margin) && i != seriesCount - 1) {
                     totalSize -= currentSeries.margin;
                 } else {
                     currentSeries.margin = 0;
@@ -3601,11 +3599,7 @@
 
             for (i = 0; i < seriesCount; i++) {
                 currentSeries = series[i];
-                if (i != seriesCount - 1) {
-                    size = defined(currentSeries.size) ? currentSeries.size : totalSize / seriesWithoutSize;
-                } else {
-                    size = 0;
-                }
+                size = defined(currentSeries.size) ? currentSeries.size : totalSize / seriesWithoutSize;
                 ir += margin;
                 r = ir + size;
                 chart.seriesConfigs.push({ ir: ir, r: r });

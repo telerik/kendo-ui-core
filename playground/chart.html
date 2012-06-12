@@ -15,63 +15,21 @@
         <div id="chart" style="width: 500px; height; 300px;"></div>
         <script>
             $(function() {
-                var data = [{
-                    price: 10,
-                    date: new Date("2012/02/01"),
-                    series: "a"
-                    }, {
-                    price: 20,
-                    date: new Date("2012/02/09"),
-                    series: "a"
-                    }, {
-                    price: -15,
-                    date: new Date("2012/02/10"),
-                    series: "a"
-                }, {
-                    price: 10,
-                    date: new Date("2012/02/01"),
-                    series: "b"
-                    }, {
-                    price: 20,
-                    date: new Date("2012/02/09"),
-                    series: "b"
-                    }, {
-                    price: -15,
-                    date: new Date("2012/02/10"),
-                    series: "b"
-                }];
-
                 $("#chart").kendoChart({
                     legend: {
                         visible: false
                     },
-                    dataSource: {
-                        data: data,
-                        group: {
-                            field: "series",
-                            dir: "asc"
-                        }
+                    seriesDefaults: {
+                        type: "donut"
                     },
                     series: [{
-                        stack: false,
-                        type: "column",
-                        field: "price"
-                    }],
-                    categoryAxis: {
-                        type: "Date",
-                        field: "date",
-                        baseUnit: "months",
-                        minorTicks: {
-                            visible: true
-                        },
-                        labels: {
-                            template: "#= kendo.toString(value, 'dd/MM') #"
-                        }
-                        //baseUnit: "months",
-                        //majorUnit: 9,
-                        //min: new Date("2012/02/01"),
-                        //max: "2012/02/10"
-                    }
+                        type: "donut",
+                        data: [1,2,3],
+                        margin: 50
+                    },{
+                        type: "donut",
+                        data: [1,2,3]
+                    }]
                 });
             });
         </script>

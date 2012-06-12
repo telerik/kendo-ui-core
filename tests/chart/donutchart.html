@@ -377,49 +377,60 @@
 
             (function() {
                 var segments,
-                    chartBox = new Box2D(0,0,400,400);
+                    chartBox = new Box2D(0,0,400,400),
+                    plotArea;
 
-                function setupDonutChart(plotArea, options) {
+                function PlotAreaStub() { }
+
+                $.extend(PlotAreaStub.prototype, {
+                    options: { }
+                });
+
+                function createDonutChart(plotArea, options) {
                     view = new ViewStub();
 
                     var donutChart = new dataviz.DonutChart(plotArea, $.extend({}, {
                         series: [{
                             type: "donut",
                             data: [1, 1],
-                            margin: 20
+                            labels: {},
+                            margin: 20,
+                            holeSize: 40
                         }, {
                             type: "donut",
                             data: [1, 2],
+                            labels: {},
                             margin: 20
                         }]}, options));
 
                     donutChart.reflow(chartBox);
                     donutChart.getViewElements(view);
 
-                    segments = donutChart.segments[0];
+                    segments = donutChart.segments;
                 }
+
                 // ------------------------------------------------------------
-                function createDonutChart(options) {
-                    var chart = createChart($.extend({
-                    }, options));
-
-                    var plotArea = chart._model.children[1];
-//                    segments = plotArea.charts[0].segments;
-                }
-
                 module("Donut Chart / Series / Configuration", {
                     setup: function() {
-                        createDonutChart({
-                            seriesClick: function() { ok(true); }
-                        });
-                    },
-                    teardown: destroyChart
+                        plotArea = new PlotAreaStub();
+                        createDonutChart(plotArea, {});
+                    }
                 });
 
                 test("first level segments have margin", function() {
-                    //$.each(segments, function(item) {
-                    //    ok(item.margin == 20);
-                    //});
+                    var segment = segments[segments.length - 1],
+                        sector = segment.sector,
+                        size = sector.r - sector.ir;
+
+                    ok(size === 40);
+                });
+
+                test("first level segments have holeSize", function() {
+                    $.each(segments, function() {
+                        if (this.seriesIx == 0) {
+                            ok(this.sector.ir == 40);
+                        }
+                    });
                 });
             })();
 
