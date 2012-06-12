@@ -692,7 +692,7 @@
                         " " + kendo.attr("uid") + "='#= item.uid #'" +
                     ">" +
                         "<div class='#= r.cssClass(group, item) #'>" +
-                            "# if (item.leaf === false || " + field("items") + ") { #" +
+                            "# if (item.hasChildren() || " + field("items") + ") { #" +
                                 "<span class='#= r.toggleButtonClass(item) #'></span>" +
                             "# } #" +
 
