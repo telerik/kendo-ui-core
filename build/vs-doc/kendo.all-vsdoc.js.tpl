@@ -45,14 +45,14 @@ var kendo = {
         /// <param name="event" type="String">The event name</param>
         /// <param name="callback" type="Function">The callback to be removed.</param>
     }
-}
+};
 
 $.fn.get#= theClass.plugin.replace("kendo", "Kendo") # = function() {
     /// <summary>
     /// Returns a reference to the #= theClass.name # widget, instantiated on the selector.
     /// </summary>
     /// <returns type="#= theClass.name #">The #= theClass.name # instance (if present).</returns>
-}
+};
 
 # } else { #
 # /* Namespace */ #
