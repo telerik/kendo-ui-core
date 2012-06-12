@@ -5,24 +5,26 @@ namespace Kendo.Mvc.UI.Tests
     public class GridEditingSettingsTests
     {
         [Fact]
-        public void Should_serialize_confirm_delete_if_false()
+        public void Should_serialize_confirm_delete_if_true()
         {
             var grid = GridTestHelper.CreateGrid<Customer>();
-            grid.Editing.Enabled = true;
-            grid.Editing.DisplayDeleteConfirmation = false;
+            grid.Editing.Enabled = true;            
 
             var result = grid.Editing.ToJson();
-            Assert.Equal(false, result["confirmDelete"]);
+            result.ContainsKey("confirmation").ShouldBeTrue();
         }
 
         [Fact]
-        public void Should_not_serialize_confirm_delete_if_true()
+        public void Should_not_serialize_confirm_delete_if_false()
         {
             var grid = GridTestHelper.CreateGrid<Customer>();
             grid.Editing.Enabled = true;
 
+            grid.Editing.DisplayDeleteConfirmation = false;
+
             var result = grid.Editing.ToJson();
-            Assert.False(result.ContainsKey("confirmDelete"));
+
+            result.ContainsKey("confirmation").ShouldBeFalse();
         }       
     }
 }
