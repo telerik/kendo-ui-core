@@ -2028,6 +2028,8 @@
          * The default options for all vertical line series. For more details see the series options.
          * @option {Object} [seriesDefaults.pie] The pie configuration options.
          * The default options for all pie series. For more details see the series options.
+         * @option {Object} [seriesDefaults.donut] The donut configuration options.
+         * The default options for all donut series. For more details see the series options.
          * @option {Object} [seriesDefaults.scatter] The scatter configuration options.
          * The default options for all scatter series. For more details see the series options.
          * @option {Object} [seriesDefaults.scatterLine] The scatterLine configuration options.
@@ -2746,8 +2748,8 @@
          * @option {Boolean} [series.type="line".tooltip.visible] <false> A value indicating if the tooltip should be displayed.
          * @option [series.type="verticalLine"]
          * Vertical line series accepts the same parameters as line series.
-         *
          * The line and the category axis are now vertical instead of horizontal.
+         *
          * @option [series.type="pie"] Available options for pie series:
          * @option {String} [series.type="pie".categoryField]
          * The data field containing the sector category name.
@@ -2916,10 +2918,7 @@
          *                  visible: true
          *              }
          *          }
-         *      ],
-         *      categoryAxis: {
-         *          categories: [2000, 2001, 2002, 2003]
-         *      }
+         *      ]
          * });
          * @option {String} [series.type="pie".labels.format] The format of the labels.
          * _example
@@ -3078,6 +3077,335 @@
          * @option {Number} [series.type="pie".tooltip.border.width] <0> The width of the border.
          * @option {String} [series.type="pie".tooltip.border.color] <"black"> The color of the border.
          * @option {Boolean} [series.type="pie".tooltip.visible] <false> A value indicating if the tooltip should be displayed.
+         *
+         * @option [series.type="donut"] Available options for donut series:
+         * @option {String} [series.type="donut".categoryField]
+         * The data field containing the sector category name.
+         * @option {String} [series.type="donut".colorField]
+         * The data field containing the sector color.
+         * @option {Array} [series.type="donut".data] Array of data items (optional).
+         * The donut chart can be bound to an array of numbers or an array of objects
+         * with the following fields:
+         * <div class="details-list">
+         *    <dl>
+         *         <dt>
+         *              <code>"value"</code>
+         *         </dt>
+         *         <dd>
+         *              The sector value.
+         *         </dd>
+         *         <dt>
+         *              <code>"category"</code>
+         *         </dt>
+         *         <dd>
+         *              The sector category that is shown in the legend.
+         *         </dd>
+         *         <dt>
+         *              <code>"color"</code>
+         *         </dt>
+         *         <dd>
+         *              The sector color.
+         *         </dd>
+         *         <dt>
+         *              <code>"explode"</code>
+         *         </dt>
+         *         <dd>
+         *              A boolean value indicating whether to explode the sector(available only for the last level of the series).
+         *         </dd>
+         *         <dt>
+         *              <code>"visibleInLegend"</code>
+         *         </dt>
+         *         <dd>
+         *              A boolean value indicating whether to show the sector in the legend.
+         *         </dd>
+         *    </dl>
+         * </div>
+         *  _example
+         *  // ...
+         *  series:[{
+         *      type: "donut",
+         *      data:[{
+         *          value: 40,
+         *          category: "Apples"
+         *      }, {
+         *          value: 60,
+         *          category: "Oranges",
+         *          color: "#ff6103"
+         *      }],
+         *      name: "Sales in Percent"
+         *  }]
+         *  // ...
+         * @option {String} [series.type="donut".explodeField]
+         * The data field containing a boolean value that indicates if the sector is exploded
+         * (available only for the last level of the series).
+         * @option {Number} [series.type="donut".padding] The padding around the donut chart (equal on all sides).
+         * @option {Number} [series.type="donut".opacity] <1> The series opacity.
+         * @option {Number} [series.type="donut".margin] <1> The margin around each series
+         * (not available for the last level of the series).
+         * @option {Number} [series.type="donut".size] The size of the series.
+         * @option {Number} [series.type="donut".holeSize] The the size of the donut hole.
+         * @option {Object} [series.type="donut".labels] Configures the series data labels.
+         * @option {String} [series.type="donut".labels.color] The text color of the labels.
+         * @option {String} [series.type="donut".labels.background] The background color of the labels.
+         * @option {String} [series.type="donut".labels.font] <"12px Arial, sans-serif">
+         * The font style of the labels.
+         * @option {Boolean} [series.type="donut".labels.visible] <false> The visibility of the labels.
+         * @option {Number} [series.type="donut".labels.distance] <35> The distance of the labels.
+         * @option {Number|Object} [series.type="donut".labels.margin] <0.5> The margin of the labels.
+         * _example
+         * // sets the top, right, bottom and left margin to 3px.
+         * margin: 3
+         *
+         * // sets the top and left margin to 1px
+         * // margin right and bottom are with 2px (by default)
+         * margin: { top: 1, left: 1 }
+         * @option {Number|Object} [series.type="donut".labels.padding] <0> The padding of the labels.
+         * _example
+         * // sets the top, right, bottom and left padding to 3px.
+         * padding: 3
+         *
+         * // sets the top and left padding to 1px
+         * // padding right and bottom are with 2px (by default)
+         * padding: { top: 1, left: 1 }
+         * @option {Object} [series.type="donut".labels.border] The border of the labels.
+         * @option {Number} [series.type="donut".labels.border.width] <0> The width of the border.
+         * @option {String} [series.type="donut".labels.border.color] <"black"> The color of the border.
+         * @option {String} [series.type="donut".labels.border.dashType] <"solid"> The dash type of the border.
+         * <div class="details-list">
+         *     <dl>
+         *         <dt>
+         *              <code>"solid"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a solid line.
+         *         </dd>
+         *         <dt>
+         *              <code>"dot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dots.
+         *         </dd>
+         *         <dt>
+         *              <code>"dash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dashes.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash.
+         *         </dd>
+         *         <dt>
+         *              <code>"dashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDotDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
+         *         </dd>
+         *    </dl>
+         * </div>
+         * @option {String/Function} [series.type="donut".labels.template] The label template.
+         * Template variables:
+         * <ul>
+         *     <li><strong>value</strong> - the point value</li>
+         *     <li><strong>percentage</strong> - the point value represented as a percentage value</li>
+         *     <li><strong>category</strong> - the category name</li>
+         *     <li><strong>series</strong> - the data series</li>
+         *     <li><strong>dataItem</strong> - the original data item used to construct the point.
+         *         Will be null if binding to array.
+         *     </li>
+         * </ul>
+         * _example
+         * // chart intialization
+         * $("#chart").kendoChart({
+         *      title: {
+         *          text: "My Chart Title"
+         *      },
+         *      series: [{
+         *          type: "donut",
+         *          data: [
+         *              { value: 200, category: 2000 },
+         *              { value: 450, category: 2001 },
+         *              { value: 300, category: 2002 },
+         *              { value: 125, category: 2003 }
+         *          ],
+         *          labels: {
+         *              // label template
+         *              template: "#= value #%",
+         *              visible: true
+         *          }
+         *      }]
+         * });
+         * @option {String} [series.type="donut".labels.format] The format of the labels.
+         * _example
+         * //sets format of the labels
+         * format: "C"
+         * @option {String} [series.type="donut".labels.align] <"circle">
+         * Defines the alignment of the donut labels.
+         * <div class="details-list">
+         *    <dl>
+         *         <dt>
+         *             <code>"circle"</code>
+         *         </dt>
+         *         <dd>
+         *              The labels are positioned in circle around the donut chart.
+         *         </dd>
+         *         <dt>
+         *             <code>"column"</code>
+         *         </dt>
+         *         <dd>
+         *              The labels are positioned in columns to the left and right of the donut chart.
+         *         </dd>
+         *    </dl>
+         * </div>
+         * @option {String} [series.type="donut".labels.position] <"outsideEnd">
+         * Defines the position of the donut labels.
+         * <div class="details-list">
+         *     <dl>
+         *         <dt>
+         *              <code>"center"</code>
+         *         </dt>
+         *         <dd>
+         *              The labels are positioned at the center of the donut segments.
+         *         </dd>
+         *         <dt>
+         *              <code>"insideEnd"</code>
+         *         </dt>
+         *         <dd>
+         *              The labels are positioned inside, near the end of the donut segments.
+         *         </dd>
+         *         <dt>
+         *              <code>"outsideEnd"</code>
+         *         </dt>
+         *         <dd>
+         *              The labels are positioned outside, near the end of the donut segments.
+         *              The labels and the donut segments are connected with connector line.
+         *         </dd>
+         *    </dl>
+         * </div>
+         * @option {Object} [series.type="donut".border] The border of the series.
+         * @option {Number} [series.type="donut".border.width] <1> The width of the border.
+         * @option {String} [series.type="donut".border.color] <the color of the curren series>
+         * The color of the border.
+         * @option {String} [series.type="donut".border.dashType] <solid> The dash type of the border.
+         * <div class="details-list">
+         *     <dl>
+         *         <dt>
+         *              <code>"solid"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a solid line.
+         *         </dd>
+         *         <dt>
+         *              <code>"dot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dots.
+         *         </dd>
+         *         <dt>
+         *              <code>"dash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dashes.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash.
+         *         </dd>
+         *         <dt>
+         *              <code>"dashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDotDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
+         *         </dd>
+         *    </dl>
+         * </div>
+         * @option {Object} [series.type="donut".overlay] The effects overlay.
+         * @option {String} [series.type="donut".overlay.gradient] <"roundedBevel"> The gradient name.
+         * Available options are "none" and "roundedCircle".
+         * @option {Object} [series.type="donut".connectors] The label connectors options.
+         * @option {Number} [series.type="donut".connectors.width] <1> The width of the connector line.
+         * @option {String} [series.type="donut".connectors.color] The color of the connector line.
+         * @option {Number} [series.type="donut".connectors.padding] <4>
+         * The padding between the connector line and the label, and connector line and donut chart.
+         * @option {number} [series.type="donut".startAngle] <90> The start angle of the first donut segment.
+         * @option {Object} [series.type="donut".tooltip] The data point tooltip configuration options.
+         * @option {String} [series.type="donut".tooltip.format] The tooltip format.
+         * _example
+         * //sets format of the tooltip
+         * format: "C"
+         * @option {String|Function} [series.type="donut".tooltip.template] The tooltip template.
+         * Template variables:
+         * <ul>
+         *     <li><strong>value</strong> - the point value</li>
+         *     <li><strong>percentage</strong> - the point value represented as a percentage value</li>
+         *     <li><strong>category</strong> - the category name</li>
+         *     <li><strong>series</strong> - the data series</li>
+         *     <li><strong>dataItem</strong> - the original data item used to construct the point.
+         *         Will be null if binding to array.
+         *     </li>
+         * </ul>
+         * _example
+         * $("#chart").kendoChart({
+         *      title: {
+         *          text: "My Chart Title"
+         *      },
+         *      series: [
+         *          {
+         *              type: "donut",
+         *              name: "Series 1",
+         *              data: [200, 450, 300, 125],
+         *              tooltip: {
+         *                  visible: true,
+         *                  template: "#= category # - #= value #"
+         *              }
+         *          }
+         *      ]
+         * });
+         * @option {String} [series.type="donut".tooltip.font] <"12px Arial,Helvetica,sans-serif"> The tooltip font.
+         * @option {String} [series.type="donut".tooltip.color]
+         * The text color of the tooltip. The default is the same as the series labels color.
+         * @option {String} [series.type="donut".tooltip.background]
+         * The background color of the tooltip. The default is determined from the series color.
+         * @option {Number|Object} [series.type="donut".tooltip.padding] The padding of the tooltip.
+         * _example
+         * // sets the top, right, bottom and left padding to 3px.
+         * padding: 3
+         *
+         * // sets the top and left padding to 1px
+         * // right and bottom padding are left at their default values
+         * padding: { top: 1, left: 1 }
+         * @option {Object} [series.type="donut".tooltip.border] The border configuration options.
+         * @option {Number} [series.type="donut".tooltip.border.width] <0> The width of the border.
+         * @option {String} [series.type="donut".tooltip.border.color] <"black"> The color of the border.
+         * @option {Boolean} [series.type="donut".tooltip.visible] <false> A value indicating if the tooltip should be displayed.
          *
          * @option [series.type="scatter"] Available options for scatter series:
          * @option {String} [series.type="scatter".color] The series base color.
