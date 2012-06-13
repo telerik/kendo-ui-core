@@ -394,11 +394,15 @@
                     "text": "Column resizing",
                     "url": "grid/column-resizing.html"
                 },
-
                 {
                     "text": "Row template",
                     "url": "grid/rowtemplate.html",
                     "packages": ["!mvc"]
+                },
+                {
+                    "text": "Server row template",
+                    "url": "grid/serverrowtemplate.html",
+                    "packages": ["mvc"]
                 },
                 {
                     "text": "Events",
