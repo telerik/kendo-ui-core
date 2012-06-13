@@ -2,6 +2,10 @@
 {
     public class EngineDataPoint
     {
+        public EngineDataPoint()
+        {
+        }
+
         public EngineDataPoint(int rpm, double torque, double power)
         {
             RPM = rpm;

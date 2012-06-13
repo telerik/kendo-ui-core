@@ -5,6 +5,10 @@ namespace Kendo.Mvc.Examples.Models
 {
     public class ElectricitySource
     {
+        public ElectricitySource()
+        {
+        }
+
         public ElectricitySource(string source, int percentage)
         {
             Source = source;

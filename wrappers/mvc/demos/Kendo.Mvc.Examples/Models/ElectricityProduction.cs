@@ -5,6 +5,10 @@ namespace Kendo.Mvc.Examples.Models
 {
     public class ElectricityProduction
     {
+        public ElectricityProduction()
+        {
+        }
+
         public ElectricityProduction(string year, int solar, int hydro, int wind, int nuclear)
         {
             Year = year;

@@ -1,12 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace Kendo.Mvc.Examples.Models
 {
     public class InternetUsers
     {
+        public InternetUsers()
+        {
+        }
+
         public InternetUsers(int year, string country, double value)
         {
             Year = year;
