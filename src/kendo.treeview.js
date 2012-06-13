@@ -908,6 +908,7 @@
 
             if (node) {
                 parentNode = that.findByUid(node.uid);
+                that._progress(parentNode, false);
             }
 
             if (action == "add") {
@@ -1104,7 +1105,8 @@
             var that = this,
                 contents = nodeContents(node),
                 isExpanding = !contents.is(VISIBLE),
-                animationSettings = that.options.animation || {},
+                options = that.options,
+                animationSettings = options.animation || {},
                 animation = animationSettings.expand,
                 collapse = extend({}, animationSettings.collapse),
                 hasCollapseAnimation = collapse && "effects" in collapse,
@@ -1137,10 +1139,17 @@
                         }
                     }));
                 } else if (dataItem) {
+                    if (options.loadOnDemand) {
+                        that._progress(node, true);
+                    }
                     dataItem.expanded = true;
                     dataItem.load();
                 }
             }
+        },
+
+        _progress: function(node, showProgress) {
+            node.find("> div > .k-icon").toggleClass("k-loading", showProgress);
         },
 
         /**
