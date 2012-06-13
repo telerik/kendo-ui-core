@@ -258,7 +258,7 @@
             that.model = model;
 
             element.find(roleSelector("popover")).each(function(){
-                kendo.initWidget(this, {}, ui);
+                kendo.initWidget(this, {}, ui.roles);
             });
 
             if (model) {
@@ -657,7 +657,7 @@
                 layout: layout
             };
 
-            return kendo.initWidget(element, viewOptions, kendo.mobile.ui);
+            return kendo.initWidget(element, viewOptions, ui.roles);
         },
 
         _loadView: function(url, callback) {
@@ -726,7 +726,7 @@
                     platform = data(layout,  "platform");
 
                 if (platform === undefined || platform === mobile.application.os) {
-                    that.layouts[layout.data("id")] = kendo.initWidget(layout, {}, kendo.mobile.ui);
+                    that.layouts[layout.data("id")] = kendo.initWidget(layout, {}, ui.roles);
                 }
             });
         }

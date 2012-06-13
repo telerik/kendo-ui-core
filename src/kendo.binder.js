@@ -1020,10 +1020,11 @@
     }
 
     function bindingTargetForRole(role, element, namespace) {
-        var type = namespace.roles[role];
+        var roles = namespace.roles,
+            type = roles[role];
 
         if (type) {
-            return new WidgetBindingTarget(kendo.initWidget(element, type.options, namespace));
+            return new WidgetBindingTarget(kendo.initWidget(element, type.options, roles));
         }
     }
 

@@ -116,7 +116,7 @@
             that.panes = [];
 
             that.element.children(kendo.roleSelector("pane")).each(function() {
-                that.panes.push(kendo.initWidget(this, {}, kendo.mobile.ui));
+                that.panes.push(kendo.initWidget(this, {}, ui.roles));
             });
         },
 

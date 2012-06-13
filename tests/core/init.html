@@ -40,6 +40,15 @@
 
             kendo.ui.plugin(TestWidget);
 
+            var TestWidget2 = kendo.mobile.ui.Widget.extend({
+                options: {
+                    name: "TestWidget2"
+                }
+            });
+
+            kendo.mobile.ui.plugin(TestWidget2);
+
+
             module("kendo.init", {
                 teardown: function() {
                     kendo.ns = "";
@@ -70,7 +79,7 @@
                 ok(dom.data("kendoTestWidget") instanceof TestWidget, "TestWidget is initialized");
             });
 
-            test("initializes a widgets in dom tree", function() {
+            test("initializes widgets in dom tree", function() {
                 var dom = $('<div><div data-role="testwidget"/></div>');
 
                 kendo.init(dom);
@@ -229,6 +238,7 @@
                 equal(testwidget.options.columns.foo, "foo");
                 equal(testwidget.options.columns.bar, "bar");
             });
+
             test("does not treat format strings as JSON", function() {
                 var dom = $('<div data-role="testwidget" data-foo="{0:d}"/>');
 
@@ -248,6 +258,20 @@
                 equal(testwidget.options.foo.bar, "{0:d}");
             });
 
+            test("accepts multiple suites", function() {
+                var dom = $($("#multiple-widgets-template").html().toString());
+                kendo.init(dom, kendo.ui, kendo.mobile.ui);
+
+                ok(dom.find("#foo").data("kendoTestWidget") instanceof TestWidget, "TestWidget is initialized");
+                ok(dom.find("#bar").data("kendoMobileTestWidget2") instanceof TestWidget2, "TestWidget2 is initialized");
+            });
+
+        </script>
+        <script id="multiple-widgets-template" type="text/x-kendo-template">
+            <div>
+                <div id="foo" data-role="testwidget"></div>
+                <div id="bar" data-role="testwidget2"></div>
+            </div>
         </script>
         <script id="template" type="text/x-kendo-template">
             foo

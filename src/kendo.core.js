@@ -2294,6 +2294,7 @@ function pad(number) {
         fx: kendo.fx || fx,
         data: kendo.data || {},
         mobile: kendo.mobile || {},
+        dataviz: kendo.dataviz || {ui: {}},
         keys: {
             INSERT: 45,
             DELETE: 46,
@@ -2505,7 +2506,7 @@ function pad(number) {
         return result;
     }
 
-    kendo.initWidget = function(element, options, namespace) {
+    kendo.initWidget = function(element, options, roles) {
         var result,
             option,
             widget,
@@ -2515,6 +2516,13 @@ function pad(number) {
             value,
             dataSource;
 
+        // Preserve backwards compatibility with (element, options, namespace) signature, where namespace was kendo.ui
+        if (!roles) {
+            roles = kendo.ui.roles;
+        } else if (roles.roles) {
+            roles = roles.roles;
+        }
+
         element = element.nodeType ? element : element[0];
 
         role = element.getAttribute("data-" + kendo.ns + "role");
@@ -2523,13 +2531,13 @@ function pad(number) {
             return;
         }
 
-        dataSource = parseOption(element, "dataSource");
-
-        widget = (namespace || kendo.ui).roles[role];
+        widget = roles[role];
 
         if (!widget) {
             return;
         }
+
+        dataSource = parseOption(element, "dataSource");
 
         options = $.extend({}, parseOptions(element, widget.fn.options), options);
 
@@ -2562,9 +2570,20 @@ function pad(number) {
         return result;
     };
 
-    kendo.init = function(element, namespace) {
+    kendo.init = function(element) {
+        var namespaces = slice.call(arguments, 1),
+            roles;
+
+        if (!namespaces[0]) {
+            namespaces = [kendo.ui, kendo.dataviz.ui];
+        }
+
+        roles = $.map(namespaces, function(namespace) { return namespace.roles; }).reverse();
+
+        roles = extend.apply(null, [{}].concat(roles));
+
         $(element).find("[data-" + kendo.ns + "role]").andSelf().each(function(){
-            kendo.initWidget(this, {}, namespace);
+            kendo.initWidget(this, {}, roles);
         });
     };
 
@@ -2700,7 +2719,7 @@ function pad(number) {
      */
     extend(kendo.mobile, {
         init: function(element) {
-            kendo.init(element, kendo.mobile.ui);
+            kendo.init(element, kendo.mobile.ui, kendo.ui, kendo.dataviz.ui);
         },
 
         /**
