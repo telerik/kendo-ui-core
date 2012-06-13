@@ -150,6 +150,7 @@
     <Compile Include="Controllers\Web\Grid\Column_ReorderingController.cs" />
     <Compile Include="Controllers\Web\Grid\Column_ResizingController.cs" />
     <Compile Include="Controllers\Web\Grid\ApiController.cs" />
+    <Compile Include="Controllers\Web\Grid\RowTemplateController.cs" />
     <Compile Include="Controllers\Web\Grid\ServerRowTemplateController.cs" />
     <Compile Include="Controllers\Web\Grid\EditingCustomValidationController.cs" />
     <Compile Include="Controllers\Web\Grid\SelectionController.cs" />
@@ -298,6 +299,7 @@
     <Content Include="Areas\aspx\Views\web\grid\api.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\column_reordering.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\column_resizing.aspx" />
+    <Content Include="Areas\aspx\Views\web\grid\rowtemplate.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\serverrowtemplate.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\editingcustomvalidation.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\detailtemplate.aspx" />
@@ -628,6 +630,7 @@
     <Content Include="Areas\razor\Views\dataviz\bar_charts\date_axis.cshtml" />
     <Content Include="Areas\razor\Views\dataviz\scatter_charts\date_axis.cshtml" />
     <Content Include="Areas\razor\Views\web\grid\serverrowtemplate.cshtml" />
+    <Content Include="Areas\razor\Views\web\grid\rowtemplate.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>

@@ -396,8 +396,7 @@
                 },
                 {
                     "text": "Row template",
-                    "url": "grid/rowtemplate.html",
-                    "packages": ["!mvc"]
+                    "url": "grid/rowtemplate.html"
                 },
                 {
                     "text": "Server row template",
