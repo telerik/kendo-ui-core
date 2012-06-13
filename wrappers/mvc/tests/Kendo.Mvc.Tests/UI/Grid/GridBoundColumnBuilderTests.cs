@@ -25,14 +25,14 @@ namespace Kendo.Mvc.UI.Tests.Grid
             Assert.Equal("Header", column.Title);
         }
 
-        //TODO: Implement HeaderTemplate 
-        //[Fact]
-        //public void HeaderHtmlAttributes_sets_the_header_attributes_of_the_column()
-        //{
-        //    builder.HeaderHtmlAttributes(new { @class="test" });
 
-        //    Assert.Equal("test", column.HeaderHtmlAttributes["class"]);
-        //}
+        [Fact]
+        public void HeaderHtmlAttributes_sets_the_header_attributes_of_the_column()
+        {
+            builder.HeaderHtmlAttributes(new { @class = "test" });
+
+            Assert.Equal("test", column.HeaderHtmlAttributes["class"]);
+        }
 
         //TODO: Expose footer html attributes
         /*
@@ -49,13 +49,8 @@ namespace Kendo.Mvc.UI.Tests.Grid
 
             Assert.Equal("test", column.FooterHtmlAttributes["class"]);
         }
-        */
-        //TODO: Implement Header html attrbiutes
-        //[Fact]
-        //public void HeaderHtmlAttributes_throws_if_null_passed_as_argument()
-        //{
-        //    Assert.Throws<ArgumentNullException>(() => builder.HeaderHtmlAttributes(null));
-        //}
+        */       
+     
 
         [Fact]
         public void Format_sets_the_format_string_of_the_column()

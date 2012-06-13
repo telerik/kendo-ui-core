@@ -87,12 +87,13 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        //TODO: Implement HeaderHtmlAttributes
-        internal IDictionary<string, object> HeaderHtmlAttributes
+        
+        public IDictionary<string, object> HeaderHtmlAttributes
         {
             get;
             private set;
         }
+
         //TODO: Implement FooterHtmlAttributes
         /*
         public IDictionary<string, object> FooterHtmlAttributes

@@ -44,14 +44,11 @@ namespace Kendo.Mvc.UI
             get;
             set;
         }
-
-        //TODO: Expose header html attributes
-        /*
+      
         IDictionary<string, object> HeaderHtmlAttributes 
         { 
             get; 
         }
-        */
 
         //TODO: Expose footer html attributes
         /*

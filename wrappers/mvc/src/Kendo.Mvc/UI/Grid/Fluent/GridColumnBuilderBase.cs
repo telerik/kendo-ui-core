@@ -54,7 +54,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         //TODO: Header template builder
-/*
+
         /// <summary>
         /// Sets the HTML attributes applied to the header cell of the column.
         /// </summary>
@@ -90,7 +90,7 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this as TColumnBuilder;
         }
-        */
+
         //TODO: Expose footer html attributes
         /*
         /// <summary>

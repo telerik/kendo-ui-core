@@ -251,7 +251,7 @@ namespace Kendo.Mvc.UI
         /// Gets the header HTML attributes.
         /// </summary>
         /// <value>The header HTML attributes.</value>
-        protected IDictionary<string, object> HeaderHtmlAttributes //TODO: Implement Header html attrbiutes
+        public IDictionary<string, object> HeaderHtmlAttributes
         {
             get
             {
