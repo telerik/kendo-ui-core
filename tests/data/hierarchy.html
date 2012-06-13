@@ -502,6 +502,19 @@
 
                 ok(!dataSource.getByUid(child.uid));
             });
+
+            test("level returns the node level", function() {
+                var dataSource = categories();
+
+                dataSource.read();
+                var parent = dataSource.data()[0];
+                parent.load();
+
+                var child = parent.children.data()[0];
+
+                equal(parent.level(), 0);
+                equal(child.level(), 1);
+            });
         </script>
     </body>
 </html>

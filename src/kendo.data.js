@@ -2543,6 +2543,17 @@
             that._loaded = false;
         },
 
+        level: function() {
+            var parentNode = this,
+                level = 0;
+
+            while (parentNode = parentNode.parentNode()) {
+                level++;
+            }
+
+            return level;
+        },
+
         hasChildren: function() {
             return false;
         },
