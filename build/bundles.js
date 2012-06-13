@@ -40,6 +40,7 @@ var cdnBundle = {
     combinedScript: "all",
     sourceLicense: "src-license-complete.txt",
     licenses: [commercialLicense],
+    skipExamples: true,
     eula: "eula"
 };
 
