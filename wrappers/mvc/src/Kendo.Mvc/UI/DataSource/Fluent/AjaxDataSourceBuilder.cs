@@ -4,7 +4,7 @@ using System.Web.Mvc;
 
 namespace Kendo.Mvc.UI.Fluent
 {
-    public class AjaxDataSourceBuilder<TModel> : ReadOnlyAjaxDataSourceBuilder<TModel>, IHideObjectMembers
+    public class AjaxDataSourceBuilder<TModel> : AjaxDataSourceBuilderBase<TModel, AjaxDataSourceBuilder<TModel>>, IHideObjectMembers
         where TModel : class
     {
         public AjaxDataSourceBuilder(DataSource dataSource, ViewContext viewContext, IUrlGenerator urlGenerator)
@@ -33,7 +33,7 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
-        public virtual ReadOnlyAjaxDataSourceBuilder<TModel> Model(Action<DataSourceModelDescriptorFactory<TModel>> configurator)
+        public virtual AjaxDataSourceBuilder<TModel> Model(Action<DataSourceModelDescriptorFactory<TModel>> configurator)
         {
 
             configurator(new DataSourceModelDescriptorFactory<TModel>(dataSource.Schema.Model));
