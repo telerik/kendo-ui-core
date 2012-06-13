@@ -62,6 +62,17 @@
             {
                 <a class="documentation-link k-link" href="http://www.kendoui.com/documentation/@ViewBag.Documentation"><span class="documentation-icon"></span>Documentation</a>
             }
+
+            @if (ViewBag.Section.ToLower() == "overview") {
+                <ul>
+                    <li class="k-state-active">Getting started</li>
+                </ul>
+
+                <div class="description">
+                    @Html.Raw(ViewBag.Description)
+                    @RenderSection("Description", false)
+                </div>
+            }
         </div>
 
         <script>
@@ -118,6 +129,18 @@
                     $("pre").addClass("prettyprint");
                     prettyPrint();
                 });
+            }
+
+            @if (ViewBag.Section.ToLower() == "overview") {
+                <text>
+                codestrip.select(0);
+
+                //add demo source code
+                codestrip.insertAfter({
+                    text: "Demo source code",
+                    contentUrl: "@Url.RouteUrl("Source", new { suite = ViewBag.suite, section = ViewBag.Section, example = ViewBag.Example })"
+                }, codestrip.select());
+                </text>
             }
         </script>
     }
