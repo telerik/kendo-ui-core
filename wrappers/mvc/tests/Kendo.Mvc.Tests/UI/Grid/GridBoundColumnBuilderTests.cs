@@ -33,23 +33,14 @@ namespace Kendo.Mvc.UI.Tests.Grid
 
             Assert.Equal("test", column.HeaderHtmlAttributes["class"]);
         }
-
-        //TODO: Expose footer html attributes
-        /*
-        [Fact]
-        public void FooterHtmlAttributes_throws_if_null_passed_as_argument()
-        {
-            Assert.Throws<ArgumentNullException>(() => builder.FooterHtmlAttributes(null));
-        }
-
+       
         [Fact]
         public void FooterHtmlAttributes_sets_the_header_attributes_of_the_column()
         {
             builder.FooterHtmlAttributes(new { @class = "test" });
 
             Assert.Equal("test", column.FooterHtmlAttributes["class"]);
-        }
-        */       
+        }        
      
 
         [Fact]

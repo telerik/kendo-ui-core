@@ -438,18 +438,16 @@ namespace Kendo.Mvc.UI
         }
 
         protected override IGridCellBuilder CreateFooterBuilderCore(IEnumerable<AggregateResult> aggregateResults)
-        {
-            //TODO: Expose footer html attributes
-            return new GridFooterCellBuilder(/*FooterHtmlAttributes,*/ FooterTemplate)
+        {            
+            return new GridFooterCellBuilder(FooterHtmlAttributes, FooterTemplate)
             {
                 AggregateResults = CalculateAggregates(aggregateResults)
             };
         }
 
         protected override IGridCellBuilder CreateGroupFooterBuilderCore(IEnumerable<AggregateResult> aggregateResults)
-        {
-            //TODO: Expose footer html attributes
-            return new GridFooterCellBuilder(/*FooterHtmlAttributes,*/ GroupFooterTemplate)
+        {            
+            return new GridFooterCellBuilder(FooterHtmlAttributes, GroupFooterTemplate)
             {
                 AggregateResults = CalculateAggregates(aggregateResults)
             };

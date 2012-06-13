@@ -11,9 +11,8 @@ namespace Kendo.Mvc.UI.Html.Tests
         private readonly GridFooterCellBuilder builder;
 
         public GridFooterCellBuilderTests()
-        {
-            //TODO: Expose footer html attributes
-            builder = new GridFooterCellBuilder(/*new Dictionary<string, object>(),*/ new HtmlTemplate<GridAggregateResult>());
+        {            
+            builder = new GridFooterCellBuilder(new Dictionary<string, object>(), new HtmlTemplate<GridAggregateResult>());
         }
 
         [Fact]
@@ -33,9 +32,7 @@ namespace Kendo.Mvc.UI.Html.Tests
         {
             builder.CreateCell().InnerHtml.ShouldEqual("&nbsp;");
         }
-
-        //TODO: Expose footer html attributes
-        /*
+               
         [Fact]
         public void Should_apply_footer_html_attributes()
         {
@@ -48,7 +45,7 @@ namespace Kendo.Mvc.UI.Html.Tests
 
             cell.Attribute(key).ShouldEqual(value);
         }
-        */
+        
 
         [Fact]
         public void Should_render_column_footer_template_if_declared()
@@ -60,7 +57,7 @@ namespace Kendo.Mvc.UI.Html.Tests
                                    Html = expectedContent
                                };
 
-            var cell = new GridFooterCellBuilder(/*new Dictionary<string, object>(),*/ template).CreateCell();
+            var cell = new GridFooterCellBuilder(new Dictionary<string, object>(), template).CreateCell();
             
             cell.InnerHtml.ShouldEqual(expectedContent);
         }
@@ -75,8 +72,8 @@ namespace Kendo.Mvc.UI.Html.Tests
             {
                 InlineTemplate = arg => result = arg
             };
-            //TODO: Expose footer html attributes
-            var cellBuilder = new GridFooterCellBuilder(/*new Dictionary<string, object>(),*/ template)
+            
+            var cellBuilder = new GridFooterCellBuilder(new Dictionary<string, object>(), template)
             {
                 AggregateResults = expectedResult
             };

@@ -50,13 +50,10 @@ namespace Kendo.Mvc.UI
             get; 
         }
 
-        //TODO: Expose footer html attributes
-        /*
         IDictionary<string, object> FooterHtmlAttributes
         {
             get;
-        }
-         */
+        }         
 
         //TODO: Implement hidden columns
         /*

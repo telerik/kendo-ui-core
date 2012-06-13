@@ -257,10 +257,7 @@ namespace Kendo.Mvc.UI
             {
                 return Settings.HeaderHtmlAttributes;
             }
-        }
-
-        //TODO: Expose footer html attributes
-        /*
+        }        
         /// <summary>
         /// Gets the footer HTML attributes.
         /// </summary>
@@ -272,7 +269,7 @@ namespace Kendo.Mvc.UI
                 return Settings.FooterHtmlAttributes;
             }
         }
-        */
+        
         //TODO: Implement Column visibility
         /*
         /// <summary>
@@ -464,15 +461,13 @@ namespace Kendo.Mvc.UI
         }
 
         protected virtual IGridCellBuilder CreateFooterBuilderCore(IEnumerable<AggregateResult> aggregateResults)
-        {
-            //TODO: Expose footer html attributes
-            return new GridFooterCellBuilder(/*FooterHtmlAttributes,*/ FooterTemplate);
+        {            
+            return new GridFooterCellBuilder(FooterHtmlAttributes, FooterTemplate);
         }
         
         protected virtual IGridCellBuilder CreateGroupFooterBuilderCore(IEnumerable<AggregateResult> aggregateResults)
-        {
-            //TODO: Expose footer html attributes
-            return new GridFooterCellBuilder(/*FooterHtmlAttributes,*/ FooterTemplate);
+        {            
+            return new GridFooterCellBuilder(FooterHtmlAttributes, FooterTemplate);
         }
 
         protected void AppendHeaderContent(IHtmlNode container)

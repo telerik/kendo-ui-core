@@ -32,9 +32,8 @@ namespace Kendo.Mvc.UI
             //TODO: Implement HeaderContextMenu
             //IncludeInContextMenu = true;
             HeaderHtmlAttributes = new RouteValueDictionary();            
-            HtmlAttributes = new RouteValueDictionary();
-            //TODO: Implement FooterHtmlAttributes
-          //  FooterHtmlAttributes = new RouteValueDictionary();
+            HtmlAttributes = new RouteValueDictionary();            
+            FooterHtmlAttributes = new RouteValueDictionary();
         }
 
         //TODO: Implement HeaderTemplate
@@ -93,15 +92,13 @@ namespace Kendo.Mvc.UI
             get;
             private set;
         }
-
-        //TODO: Implement FooterHtmlAttributes
-        /*
+        
         public IDictionary<string, object> FooterHtmlAttributes
         {
             get;
             private set;
         }
-        */
+        
         private string PrepareStyle(string style)
         {
             if (string.IsNullOrEmpty(style))
