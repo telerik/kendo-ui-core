@@ -15,7 +15,7 @@
         {
             "text": "ActionSheet",
             "name": "actionsheet",
-            "documentation": "mobile",
+            "documentation": "mobile/actionsheet",
             "spriteCssClass": "mobileActionSheetIcon",
             "items": [
                 {
@@ -27,7 +27,7 @@
         {
             "text": "Button",
             "name": "button",
-            "documentation": "mobile",
+            "documentation": "mobile/button",
             "spriteCssClass": "mobileButtonIcon",
             "items": [
                 {
