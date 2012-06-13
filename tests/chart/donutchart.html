@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Donut chart</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.chart.js"></script>
+        <script src="../../src/kendo.dataviz.themes.js"></script>
+        <script src="../../src/kendo.dataviz.svg.js"></script>
+        <script src="../../src/kendo.dataviz.vml.js"></script>
+        <script src="util.js"></script>
+        <script type="text/javascript">
+            var dataviz = kendo.dataviz,
+                Box2D = dataviz.Box2D,
+                categoriesCount = dataviz.categoriesCount,
+                chartBox = new Box2D(0, 0, 800, 600),
+                plotArea,
+                donutChart,
+                firstSegment,
+                TOLERANCE = 0.1,
+                root,
+                view;
+
+            function setupDonutChart(plotArea, options) {
+                view = new ViewStub();
+
+                donutChart = new dataviz.DonutChart(plotArea, $.extend({}, { padding: 60 }, options));
+
+                root = new dataviz.RootElement();
+                root.append(donutChart);
+
+                donutChart.reflow(chartBox);
+                donutChart.getViewElements(view);
+
+                firstSegment = donutChart.segments[0];
+            }
+
+            (function() {
+                var values = { data: [1, 2] },
+                    dataValues = {
+                       data: [{
+                           value: 1,
+                           category: "A",
+                           explode: true
+                       }, {
+                           value: 2,
+                           category: "B"
+                       }]
+                    };
+
+                function PlotAreaStub() { }
+
+                $.extend(PlotAreaStub.prototype, {
+                    options: { }
+                });
+
+                // ------------------------------------------------------------
+                module("Donut Chart / Array with values", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                        setupDonutChart(plotArea, { series: [ values ] });
+                    }
+                });
+
+                test("creates segments for donut chart data points", function() {
+                    equal(donutChart.segments.length, values.data.length);
+                });
+
+                test("segments have set angle", function() {
+                    $.each(donutChart.segments, function() {
+                        ok(this.sector.angle);
+                    });
+                });
+
+                test("segments have set startAngle", function() {
+                    $.each(donutChart.segments, function() {
+                        ok(this.sector.angle);
+                    });
+                });
+
+                test("segments have set owner", function() {
+                    ok(firstSegment.owner === donutChart);
+                });
+
+                test("sets segment category", function() {
+                    equal(firstSegment.category, "");
+                });
+
+                test("sets segment series", function() {
+                    ok(firstSegment.series === values);
+                });
+
+                test("sets segment series index", function() {
+                    ok(firstSegment.seriesIx === 0);
+                });
+
+                test("sets segment dataItem", function() {
+                    equal(typeof firstSegment.dataItem, "object");
+                });
+
+                // ------------------------------------------------------------
+                module("Donut Chart / Array with items", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                        setupDonutChart(plotArea, { series: [ dataValues ] });
+                    }
+                });
+
+                test("sets segment category", function() {
+                    equal(firstSegment.category, "A");
+                });
+
+                test("segments have set owner", function() {
+                    ok(firstSegment.owner === donutChart);
+                });
+
+                test("sets segment series", function() {
+                    ok(firstSegment.series === dataValues);
+                });
+
+                test("sets segment series index", function() {
+                    ok(firstSegment.seriesIx === 0);
+                });
+
+                test("sets segment dataItem", function() {
+                    equal(typeof firstSegment.dataItem, "object");
+                });
+
+                test("sets segment dataItem", function() {
+                    equal(firstSegment.percentage, 0.333, TOLERANCE);
+                });
+
+                test("sets segment explode", function() {
+                    ok(firstSegment.explode == true);
+                });
+
+                test("sets segment different center if segment have explode sets to true", function() {
+                    ok(firstSegment.sector.c != donutChart.segments[1].sector.c);
+                });
+            })();
+
+
+            (function() {
+                var data = [{
+                        value: 10,
+                        explode: true,
+                        color: "red",
+                        category: "A"
+                    }, {
+                        value: 50,
+                        explode: false,
+                        color: "red",
+                        category: "B"
+                    }],
+                    chart,
+                    donutChart,
+                    firstSegment;
+
+                // ------------------------------------------------------------
+                module("Donut Chart / Data Source", {
+                    setup: function() {
+                        $("#container").kendoChart({
+                            dataSource: {
+                                data: data
+                            },
+                            series: [{
+                                type: "donut",
+                                field: "value",
+                                categoryField: "category",
+                                colorField: "color",
+                                explodeField: "explode"
+                            }]
+                        });
+
+                        chart = $("#container").data("kendoChart");
+                        donutChart = chart._plotArea.charts[0];
+                        firstSegment = donutChart.segments[0];
+                    }
+                });
+
+                test("sets segment angle based on value", function() {
+                    equal(firstSegment.sector.angle, 60);
+                });
+
+                test("sets segment category from dataItem", function() {
+                    equal(firstSegment.category, "A");
+                });
+
+                test("sets segment color from dataItem", function() {
+                    equal(firstSegment.options.color, "red");
+                });
+
+                test("sets segment explode from dataItem", function() {
+                    ok(firstSegment.explode == true);
+                });
+
+            })();
+
+
+            (function() {
+                var point,
+                    box,
+                    label,
+                    root,
+                    ring,
+                    VALUE = 1,
+                    CATEGORY = "A",
+                    segment,
+                    view,
+                    SERIES_NAME = "series";
+
+                function createSegment(options) {
+                    segment = new dataviz.DonutSegment(
+                        VALUE,
+                        new dataviz.Ring(new dataviz.Point2D(0,0), 20, 100, 90, 100),
+                        options
+                    );
+
+                    segment.dataItem = { value: VALUE };
+
+                    box = new Box2D(0, 0, 100, 100);
+                    segment.reflow(box);
+
+                    root = new dataviz.RootElement();
+                    root.append(segment);
+
+                    view = new ViewStub();
+                    segment.getViewElements(view);
+                    ring = view.log.ring[0];
+                }
+
+                // ------------------------------------------------------------
+                module("Donut Segment", {
+                    setup: function() {
+                        createSegment();
+                    }
+                });
+
+                test("is discoverable", function() {
+                    ok(segment.options.modelId);
+                });
+
+                test("fills target box", function() {
+                    sameBox(segment.box, box);
+                });
+
+                test("sets segment border color", function() {
+                    createSegment({ border: { color: "red" } });
+                    equals(segment.options.border.color, "red");
+                });
+
+                test("sets donut border width", function() {
+                    createSegment({ border: { width: 4 } });
+                    equals(segment.options.border.width, 4);
+                });
+
+                test("tooltipAnchor is set distance from segment", function() {
+                    var anchor = segment.tooltipAnchor(10, 10);
+                    same([Math.round(anchor.x), Math.round(anchor.y)], [81, -77], TOLERANCE);
+                });
+
+                test("sets overlay radius", function() {
+                    equals(ring.style.overlay.r, segment.sector.r);
+                });
+
+                test("sets overlay inner radius", function() {
+                    equals(ring.style.overlay.ir, segment.sector.ir);
+                });
+
+                test("sets overlay cx", function() {
+                    equals(ring.style.overlay.cx, segment.sector.c.x);
+                });
+
+                test("sets overlay cy", function() {
+                    equals(ring.style.overlay.cy, segment.sector.c.y);
+                });
+
+                test("does not set overlay options when no overlay is defined", function() {
+                    createSegment({ overlay: null });
+                    ok(!ring.style.overlay);
+                });
+
+                test("getOutlineElement returns segment outline", function() {
+                    view = new ViewStub();
+
+                    segment.getOutlineElement(view);
+                    equals(view.log.ring.length, 1);
+                });
+
+                test("outline element has same model id", function() {
+                    view = new ViewStub();
+
+                    segment.getOutlineElement(view);
+                    equals(view.log.ring[0].style.data.modelId, segment.options.modelId);
+                });
+
+                test("ring has same model id", function() {
+                    equals(ring.style.data.modelId, segment.options.modelId);
+                });
+
+                test("label has same model id", function() {
+                    createSegment({ labels: { visible: true } });
+                    equals(segment.label.options.modelId, segment.options.modelId);
+                });
+
+            })();
+
+
+            (function() {
+                // ------------------------------------------------------------
+                var labelElement,
+                    segmentElement;
+
+                function createDonutChart(options) {
+                    var chart = createChart($.extend({
+                        series: [{
+                            type: "donut",
+                            data: [1],
+                            labels: {
+                                visible: true,
+                                distance: 20
+                            }
+                        }]
+                    }, options));
+
+                    var plotArea = chart._model.children[1],
+                        segment = plotArea.charts[0].segments[0],
+                        label = segment.children[0];
+
+                    segmentElement = $("#" + segment.options.id);
+                    labelElement = $("#" + label.options.id);
+                }
+
+                module("Donut Chart / Events / seriesClick ", {
+                    setup: function() {
+                        createDonutChart({
+                            seriesClick: function() { ok(true); }
+                        });
+                    },
+                    teardown: destroyChart
+                });
+
+                test("fires when clicking segments", 1, function() {
+                    segmentElement.click();
+                });
+
+                test("fires when clicking labels", 1, function() {
+                    labelElement.click();
+                });
+
+                // ------------------------------------------------------------
+                module("Donut Chart / Events / seriesHover", {
+                    setup: function() {
+                        createDonutChart({
+                            seriesHover: function() { ok(true); }
+                        });
+                    },
+                    teardown: destroyChart
+                });
+
+                test("fires when clicking segments", 1, function() {
+                    segmentElement.mouseover();
+                });
+
+                test("fires when clicking labels", 1, function() {
+                    labelElement.mouseover();
+                });
+
+            })();
+
+            (function() {
+                var segments,
+                    chartBox = new Box2D(0,0,400,400);
+
+                function setupDonutChart(plotArea, options) {
+                    view = new ViewStub();
+
+                    var donutChart = new dataviz.DonutChart(plotArea, $.extend({}, {
+                        series: [{
+                            type: "donut",
+                            data: [1, 1],
+                            margin: 20
+                        }, {
+                            type: "donut",
+                            data: [1, 2],
+                            margin: 20
+                        }]}, options));
+
+                    donutChart.reflow(chartBox);
+                    donutChart.getViewElements(view);
+
+                    segments = donutChart.segments[0];
+                }
+                // ------------------------------------------------------------
+                function createDonutChart(options) {
+                    var chart = createChart($.extend({
+                    }, options));
+
+                    var plotArea = chart._model.children[1];
+//                    segments = plotArea.charts[0].segments;
+                }
+
+                module("Donut Chart / Series / Configuration", {
+                    setup: function() {
+                        createDonutChart({
+                            seriesClick: function() { ok(true); }
+                        });
+                    },
+                    teardown: destroyChart
+                });
+
+                test("first level segments have margin", function() {
+                    //$.each(segments, function(item) {
+                    //    ok(item.margin == 20);
+                    //});
+                });
+            })();
+
+        </script>
+
+        <h1 id="qunit-header">kendo.chart</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <div id="container">
+        </div>
+    </body>
+</html>

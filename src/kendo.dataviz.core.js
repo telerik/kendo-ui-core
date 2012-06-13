@@ -32,6 +32,7 @@
         DEFAULT_PRECISION = 6,
         DEFAULT_WIDTH = 600,
         DEGREE = math.PI / 180,
+        DONUT = "donut",
         FADEIN = "fadeIn",
         HEIGHT = "height",
         ID_PREFIX = "k",
@@ -330,6 +331,11 @@
             }
 
             return box;
+        },
+
+        expand: function(value) {
+            this.r += value;
+            return this;
         }
     });
 
@@ -339,8 +345,7 @@
         },
 
         expand: function(value) {
-            this.r += value;
-            return this;
+            return Ring.fn.expand.call(this, value);
         },
 
         clone: function() {
@@ -1607,17 +1612,9 @@
                 color: WHITE,
                 opacity: 0
             }, {
-                offset: 0.1,
-                color: WHITE,
-                opacity: 0
-            }, {
                 offset: 0.25,
                 color: WHITE,
                 opacity: 0.3
-            }, {
-                offset: 0.92,
-                color: WHITE,
-                opacity: 0
             }, {
                 offset: 1,
                 color: WHITE,
@@ -1632,10 +1629,6 @@
                 opacity: 0.55
             }, {
                 offset: 0.65,
-                color: WHITE,
-                opacity: 0
-            }, {
-                offset: 0.95,
                 color: WHITE,
                 opacity: 0
             }, {
@@ -1656,6 +1649,22 @@
                 opacity: 0.2
             }, {
                 offset: 0.95,
+                color: WHITE,
+                opacity: 0
+            }]
+        },
+        circleGlass: {
+            type: DONUT,
+            stops: [{
+                offset: 0,
+                color: WHITE,
+                opacity: 0
+            }, {
+                offset: 0.5,
+                color: WHITE,
+                opacity: 0.3
+            }, {
+                offset: 0.99,
                 color: WHITE,
                 opacity: 0
             }]

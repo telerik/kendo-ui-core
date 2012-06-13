@@ -29,7 +29,7 @@
         NumericAxis = dataviz.NumericAxis,
         Point2D = dataviz.Point2D,
         RootElement = dataviz.RootElement,
-        Sector = dataviz.Sector,
+        Ring = dataviz.Ring,
         Text = dataviz.Text,
         TextBox = dataviz.TextBox,
         Title = dataviz.Title,
@@ -62,6 +62,7 @@
         CENTER = "center",
         CHANGE = "change",
         CIRCLE = "circle",
+        CIRCLE_GLASS = "circleGlass",
         CLICK = "click",
         CLIP = dataviz.CLIP,
         COLUMN = "column",
@@ -74,6 +75,8 @@
         DEFAULT_HEIGHT = dataviz.DEFAULT_HEIGHT,
         DEFAULT_PRECISION = dataviz.DEFAULT_PRECISION,
         DEFAULT_WIDTH = dataviz.DEFAULT_WIDTH,
+        DONUT = "donut",
+        DONUT_SECTOR_ANIM_DELAY = 50,
         FADEIN = "fadeIn",
         GLASS = "glass",
         HOURS = "hours",
@@ -331,6 +334,7 @@
                 categoricalSeries = [],
                 xySeries = [],
                 pieSeries = [],
+                donutSeries = [],
                 plotArea;
 
             for (i = 0; i < length; i++) {
@@ -342,11 +346,15 @@
                     xySeries.push(currentSeries);
                 } else if (currentSeries.type === PIE) {
                     pieSeries.push(currentSeries);
+                } else if (currentSeries.type === DONUT) {
+                    donutSeries.push(currentSeries);
                 }
             }
 
             if (pieSeries.length > 0) {
                 plotArea = new PiePlotArea(pieSeries, options);
+            } else if (donutSeries.length > 0) {
+                plotArea = new DonutPlotArea(donutSeries, options);
             } else if (xySeries.length > 0) {
                 plotArea = new XYPlotArea(xySeries, options);
             } else {
@@ -2837,7 +2845,7 @@
                         vAlign: "",
                         animation: {
                             type: FADEIN,
-                            delay: segment.categoryIx * PIE_SECTOR_ANIM_DELAY
+                            delay: segment.animationDelay
                         }
                     }));
 
@@ -2910,6 +2918,7 @@
             if (overlay) {
                 overlay = deepExtend({}, options.overlay, {
                     r: sector.r,
+                    ir: sector.ir,
                     cx: sector.c.x,
                     cy: sector.c.y,
                     bbox: sector.getBBox()
@@ -2917,16 +2926,17 @@
             }
 
             if (segment.value !== 0) {
-                elements.push(view.createSector(sector, deepExtend({
+                elements.push(segment.createSegment(view, sector, deepExtend({
                     id: options.id,
                     fill: options.color,
                     overlay: overlay,
                     fillOpacity: options.opacity,
                     strokeOpacity: options.opacity,
                     animation: deepExtend(options.animation, {
-                        delay: segment.categoryIx * PIE_SECTOR_ANIM_DELAY
+                        delay: segment.animationDelay
                     }),
-                    data: { modelId: options.modelId }
+                    data: { modelId: options.modelId },
+                    zIndex: options.zIndex
                 }, border)));
             }
 
@@ -2935,6 +2945,10 @@
             );
 
             return elements;
+        },
+
+        createSegment: function(view, sector, options) {
+            return view.createSector(sector, options);
         },
 
         getOutlineElement: function(view, options) {
@@ -2947,7 +2961,7 @@
             options = deepExtend({}, options, { id: outlineId });
 
             if (segment.value !== 0) {
-                element = view.createSector(segment.sector, deepExtend({}, options, {
+                element = segment.createSegment(view, segment.sector, deepExtend({}, options, {
                     fill: highlight.color,
                     fillOpacity: highlight.opacity,
                     strokeOpacity: border.opacity,
@@ -3012,6 +3026,8 @@
                 startAngle = options.startAngle,
                 colorsCount = colors.length,
                 series = options.series,
+                seriesCount = series.length,
+                overlayId = uniqueId(),
                 dataItems,
                 currentSeries,
                 currentData,
@@ -3022,14 +3038,21 @@
                 value,
                 explode,
                 total,
+                currentAngle,
                 i;
 
-            for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
+            for (seriesIx = 0; seriesIx < seriesCount; seriesIx++) {
                 currentSeries = series[seriesIx];
                 dataItems = currentSeries.dataItems;
                 data = currentSeries.data;
                 total = chart.pointsTotal(data);
                 anglePerValue = 360 / total;
+                currentAngle = startAngle;
+                if (seriesIx != seriesCount - 1) {
+                    if (currentSeries.labels.position == OUTSIDE_END) {
+                        currentSeries.labels.position = CENTER;
+                    }
+                }
 
                 for (i = 0; i < data.length; i++) {
                     currentData = chart.pointData(currentSeries, i);
@@ -3039,7 +3062,7 @@
                     currentSeries.color = currentData.color ?
                         currentData.color : colors[i % colorsCount];
 
-                    callback(value, new Sector(null, 0, startAngle, angle), {
+                    callback(value, new Ring(null, 0, 0, currentAngle, angle), {
                         owner: chart,
                         category: currentData.category || "",
                         categoryIx: i,
@@ -3048,10 +3071,17 @@
                         dataItem: dataItems ? dataItems[i] : currentData,
                         percentage: value / total,
                         explode: explode,
-                        visibleInLegend: currentData.visibleInLegend
+                        visibleInLegend: currentData.visibleInLegend,
+                        margin: currentData.margin,
+                        size: currentData.size,
+                        overlay: {
+                            id: overlayId + seriesIx
+                        },
+                        zIndex: seriesCount - seriesIx,
+                        animationDelay: chart.animationDelay(i, seriesIx, seriesCount)
                     });
 
-                    startAngle += angle;
+                    currentAngle += angle;
                 }
             }
         },
@@ -3130,30 +3160,42 @@
                 newBox = new Box2D(box.x1, box.y1,
                     box.x1 + minWidth, box.y1 + minWidth),
                 newBoxCenter = newBox.center(),
+                seriesConfigs = chart.seriesConfigs || [],
                 boxCenter = box.center(),
                 segments = chart.segments,
                 count = segments.length,
+                seriesCount = options.series.length,
                 leftSideLabels = [],
                 rightSideLabels = [],
+                seriesConfig,
+                seriesIndex,
                 label,
                 segment,
                 sector,
-                i;
+                r, i, c;
 
             padding = padding > halfMinWidth - space ? halfMinWidth - space : padding,
             newBox.translate(boxCenter.x - newBoxCenter.x, boxCenter.y - newBoxCenter.y);
+            r = halfMinWidth - padding;
+            c = new Point2D(
+                r + newBox.x1 + padding,
+                r + newBox.y1 + padding
+            );
 
             for (i = 0; i < count; i++) {
                 segment = segments[i];
 
                 sector = segment.sector;
-                sector.r = halfMinWidth - padding;
-                sector.c = new Point2D(
-                    sector.r + newBox.x1 + padding,
-                    sector.r + newBox.y1 + padding
-                );
+                sector.r = r;
+                sector.c = c;
+                seriesIndex = segment.seriesIx;
+                if (seriesConfigs.length) {
+                    seriesConfig = seriesConfigs[seriesIndex];
+                    sector.ir = seriesConfig.ir;
+                    sector.r = seriesConfig.r;
+                }
 
-                if (segment.explode) {
+                if (seriesIndex == seriesCount - 1 && segment.explode) {
                     sector.c = sector.clone().radius(sector.r * 0.15).point(sector.middle());
                 }
 
@@ -3162,10 +3204,12 @@
                 label = segment.label;
                 if (label) {
                     if (label.options.position === OUTSIDE_END) {
-                        if (label.orientation === RIGHT) {
-                            rightSideLabels.push(label);
-                        } else {
-                            leftSideLabels.push(label);
+                        if (seriesIndex == seriesCount - 1) {
+                            if (label.orientation === RIGHT) {
+                                rightSideLabels.push(label);
+                            } else {
+                                leftSideLabels.push(label);
+                            }
                         }
                     }
                 }
@@ -3200,7 +3244,8 @@
 
         distanceBetweenLabels: function(labels) {
             var chart = this,
-                segment = chart.segments[0],
+                segments = chart.segments,
+                segment = segments[segments.length - 1],
                 sector = segment.sector,
                 firstBox = labels[0].box,
                 secondBox,
@@ -3258,7 +3303,7 @@
         reflowLabels: function(distances, labels) {
             var chart = this,
                 segments = chart.segments,
-                segment = segments[0],
+                segment = segments[segments.length - 1],
                 sector = segment.sector,
                 labelsCount = labels.length,
                 labelOptions = segment.options.labels,
@@ -3393,7 +3438,7 @@
                             strokeWidth: connectors.width,
                             animation: {
                                 type: FADEIN,
-                                delay: segment.categoryIx * PIE_SECTOR_ANIM_DELAY
+                                delay: segment.animationDelay
                             },
                             data: { modelId: segment.options.modelId }
                         });
@@ -3438,6 +3483,142 @@
 
         formatPointValue: function(value, format) {
             return autoFormat(format, value);
+        },
+
+        animationDelay: function(categoryIndex, seriesIndex, seriesCount) {
+            return categoryIndex * PIE_SECTOR_ANIM_DELAY;
+        }
+    });
+
+    var DonutSegment = PieSegment.extend({
+        options: {
+            overlay: {
+                gradient: CIRCLE_GLASS
+            },
+            labels: {
+                position: CENTER
+            },
+            animation: {
+                type: PIE
+            }
+        },
+
+        reflowLabel: function() {
+            var segment = this,
+                sector = segment.sector.clone(),
+                options = segment.options,
+                label = segment.label,
+                labelsOptions = options.labels,
+                lp,
+                angle = sector.middle(),
+                labelHeight;
+
+            if (label) {
+                labelHeight = label.box.height();
+                if (labelsOptions.position == CENTER) {
+                    sector.r -= (sector.r - sector.ir) / 2;
+                    lp = sector.point(angle);
+                    label.reflow(new Box2D(lp.x, lp.y - labelHeight / 2, lp.x, lp.y));
+                } else {
+                    PieSegment.fn.reflowLabel.call(segment);
+                }
+            }
+        },
+
+        createSegment: function(view, sector, options) {
+            return view.createRing(sector, options);
+        }
+    });
+    deepExtend(DonutSegment.fn, PointEventsMixin);
+
+    var DonutChart = PieChart.extend({
+        options: {
+            startAngle: 90,
+            connectors: {
+                width: 1,
+                color: "#939393",
+                padding: 4
+            }
+        },
+
+        addValue: function(value, sector, fields) {
+            var chart = this,
+                segment;
+
+            segment = new DonutSegment(value, sector, fields.series);
+            segment.options.id = uniqueId();
+            extend(segment, fields);
+            chart.append(segment);
+            chart.segments.push(segment);
+        },
+
+        reflow: function(targetBox) {
+            var chart = this,
+                options = chart.options,
+                box = targetBox.clone(),
+                space = 5,
+                minWidth = math.min(box.width(), box.height()),
+                halfMinWidth = minWidth / 2,
+                defaultPadding = minWidth - minWidth * 0.85,
+                padding = defined(options.padding) ? options.padding : defaultPadding,
+                series = options.series,
+                currentSeries,
+                seriesCount = series.length,
+                seriesWithoutSize = 0,
+                holeSize,
+                totalSize,
+                size,
+                margin = 0,
+                i, r, ir = 0;
+
+            chart.seriesConfigs = [];
+            padding = padding > halfMinWidth - space ? halfMinWidth - space : padding,
+            totalSize = halfMinWidth - padding;
+
+            for (i = 0; i < seriesCount; i++) {
+                currentSeries = series[i];
+                if (i === 0 && defined(currentSeries.holeSize)) {
+                    holeSize = currentSeries.holeSize;
+                    totalSize -= currentSeries.holeSize;
+                }
+
+                if (i != seriesCount - 1) {
+                    if (defined(currentSeries.size)) {
+                        totalSize -= currentSeries.size;
+                    } else {
+                        seriesWithoutSize++;
+                    }
+                }
+
+                if (defined(currentSeries.margin)) {
+                    totalSize -= currentSeries.margin;
+                } else {
+                    currentSeries.margin = 0;
+                }
+            }
+
+            ir = holeSize || 0;
+
+            for (i = 0; i < seriesCount; i++) {
+                currentSeries = series[i];
+                if (i != seriesCount - 1) {
+                    size = defined(currentSeries.size) ? currentSeries.size : totalSize / seriesWithoutSize;
+                } else {
+                    size = 0;
+                }
+                ir += margin;
+                r = ir + size;
+                chart.seriesConfigs.push({ ir: ir, r: r });
+                margin = currentSeries.margin;
+                ir = r;
+            }
+
+            PieChart.fn.reflow.call(chart, targetBox);
+        },
+
+        animationDelay: function(categoryIndex, seriesIndex, seriesCount) {
+            return categoryIndex * DONUT_SECTOR_ANIM_DELAY +
+                (INITIAL_ANIMATION_DURATION * (seriesIndex + 1) / (seriesCount + 1));
         }
     });
 
@@ -4298,6 +4479,28 @@
         }
     });
 
+    var DonutPlotArea = PiePlotArea.extend({
+        render: function() {
+            var plotArea = this,
+                series = plotArea.series;
+
+            plotArea.createDonutChart(series);
+        },
+
+        createDonutChart: function(series) {
+            var plotArea = this,
+                firstSeries = series[0],
+                donutChart = new DonutChart(plotArea, {
+                    series: series,
+                    padding: firstSeries.padding,
+                    startAngle: firstSeries.startAngle,
+                    connectors: firstSeries.connectors
+                });
+
+            plotArea.appendChart(donutChart);
+        }
+    });
+
     var PieAnimation = ElementAnimation.extend({
         options: {
             easing: "easeOutElastic",
@@ -4305,17 +4508,19 @@
         },
 
         setup: function() {
-            var sector = this.element.config;
-
+            var sector = this.element.config,
+                startRadius;
             this.endRadius = sector.r;
-            sector.r = 0;
+            startRadius = this.startRadius = sector.ir || 0;
+            sector.r = startRadius;
         },
 
         step: function(pos) {
             var endRadius = this.endRadius,
-                sector = this.element.config;
+                sector = this.element.config,
+                startRadius = this.startRadius;
 
-            sector.r = interpolateValue(0, endRadius, pos);
+            sector.r = interpolateValue(startRadius, endRadius, pos);
         }
     });
 
@@ -4812,6 +5017,9 @@
         ClusterLayout: ClusterLayout,
         DateCategoryAxis: DateCategoryAxis,
         DateValueAxis: DateValueAxis,
+        DonutChart: DonutChart,
+        DonutPlotArea: DonutPlotArea,
+        DonutSegment: DonutSegment,
         Highlight: Highlight,
         Legend: Legend,
         LineChart: LineChart,
