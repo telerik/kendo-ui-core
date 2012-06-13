@@ -24,7 +24,7 @@
           });
       })
       .Height(300)
-      .Template("<img src=\"/Content/web/dropdownlist/Customers/${data.CustomerID}.jpg\" alt=\"${data.CustomerID}\" />" +
+          .Template("<img src=\"" + Url.Content("~/Content/web/Customers/") + "${data.CustomerID}.jpg\" alt=\"${data.CustomerID}\" />" +
                         "<dl>" +
                             "<dt>Contact:</dt><dd>${ data.ContactName }</dd>" +
                             "<dt>Company:</dt><dd>${ data.CompanyName }</dd>" +
