@@ -28,11 +28,11 @@ namespace Kendo.Mvc.UI.Html
 
         public virtual IHtmlNode CreateGrid(IDictionary<string, object> htmlAttributes, GridFunctionalData functionalData, GridRenderingData renderingData)
         {
-            var div = CreateWrapper(htmlAttributes);
+            var div = CreateWrapper(htmlAttributes);            
+
+            AppendTopToolBar(div, functionalData);
 
             AppendGroupHeader(div, functionalData);
-
-            AppendTopToolBar(div, functionalData);            
 
             AppendTopPager(div, functionalData);
 
