@@ -348,9 +348,7 @@
 
             test("uses imageUrl field binding", function() {
                 treeview.kendoTreeView({
-                    bindings: {
-                        imageUrl: "foo"
-                    },
+                    dataImageUrlField: "foo",
                     dataSource: [
                         { foo: "bar" }
                     ]
@@ -363,9 +361,7 @@
 
             test("uses spriteCssClass field binding", function() {
                 treeview.kendoTreeView({
-                    bindings: {
-                        spriteCssClass: "foo"
-                    },
+                    dataSpriteCssClassField: "foo",
                     dataSource: [
                         { foo: "bar" }
                     ]
@@ -376,9 +372,7 @@
 
             test("uses url field binding", function() {
                 treeview.kendoTreeView({
-                    bindings: {
-                        url: "foo"
-                    },
+                    dataUrlField: "foo",
                     dataSource: [
                         { foo: "bar" }
                     ]

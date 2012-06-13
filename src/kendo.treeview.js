@@ -145,6 +145,12 @@
         NODE = ".k-item",
         templates, rendering, TreeView,
         subGroup, nodeContents,
+        bindings = {
+            text: "dataTextField",
+            url: "dataUrlField",
+            spriteCssClass: "dataSpriteCssClassField",
+            imageUrl: "dataImageUrlField"
+        },
         isDomElement = function (o){
             return (
                 typeof HTMLElement === "object" ? o instanceof HTMLElement : //DOM2
@@ -674,10 +680,7 @@
         },
 
         _accessors: function() {
-            var bindings = {
-                    text: "dataTextField"
-                },
-                that = this,
+            var that = this,
                 options = that.options,
                 i, field, textField,
                 element = that.element;
@@ -703,10 +706,7 @@
         },
 
         _fieldFor: function(field) {
-            var bindings = {
-                    text: "dataTextField"
-                },
-                fieldBindings = this.options[bindings[field]],
+            var fieldBindings = this.options[bindings[field]],
                 count = fieldBindings.length;
 
             // generates ['foo', 'bar'][item.level() < 3 ? item.level() : 3]
@@ -714,21 +714,24 @@
         },
 
         _textTemplate: function() {
-            var field = "item[" + this._fieldFor("text") + "] || item.text",
+            var that = this,
+                field = function(fieldName) {
+                    return "(item[" + that._fieldFor(fieldName) + "] || item['" + fieldName + "'])";
+                },
                 templateText =
                     "# if (typeof item.encoded != 'undefined' && item.encoded === false) {#" +
-                        "#=" + field + "#" +
+                        "#=" + field("text") + "#" +
                     "# } else { #" +
-                        "#:" + field + "#" +
+                        "#:" + field("text") + "#" +
                     "# } #";
 
             return template(templateText);
         },
 
         _itemTemplate: function() {
-            var bindings = this.options.bindings || {},
+            var that = this,
                 field = function(fieldName) {
-                    return "item['" + (bindings[fieldName] || fieldName) + "']";
+                    return "(item[" + that._fieldFor(fieldName) + "] || item['" + fieldName + "'])";
                 },
                 templateText =
                     "<li class='#= r.wrapperCssClass(group, item) #'" +
