@@ -360,11 +360,11 @@
 
             that._pageable();
 
-            that._toolbar();
-
             that._thead();
 
             that._groupable();
+
+            that._toolbar();
 
             that._setContentHeight();
 

@@ -47,6 +47,17 @@
                 equal(groupingHeader.length, 1);
             });
 
+            test("groupable creates .k-grouping-header after the toolbar", function() {
+                var grid = new Grid(table(), {
+                        dataSource:[],
+                        toolbar: "toolbar",
+                        groupable: true
+                    }),
+                    gridElement = grid.wrapper;
+
+                var groupingHeader = gridElement.find("div.k-grouping-header");
+                ok(groupingHeader.prev().hasClass("k-grid-toolbar"));
+            });
             test("grouping row is created for every group", function() {
                 var grid = new Grid(table(), {
                     dataSource:[{foo: "foo"}, {foo: "bar"}], groupable: true
