@@ -2524,10 +2524,8 @@
                 hasChildren = kendo.getter(hasChildren);
             }
 
-            if (hasChildren) {
+            if (isFunction(hasChildren)) {
                 that.hasChildren = !!hasChildren.call(that, that);
-            } else {
-                that.hasChildren = false;
             }
 
             that.children = new HierarchicalDataSource(children);
@@ -2542,6 +2540,8 @@
 
             that._loaded = false;
         },
+
+        hasChildren: false,
 
         level: function() {
             var parentNode = this,

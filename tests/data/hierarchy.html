@@ -313,6 +313,46 @@
                 dataSource.fetch();
             });
 
+            test("hasChildren set as true", 1, function() {
+                var dataSource = new HierarchicalDataSource({
+                    transport: {
+                        read: function(options) {
+                            options.success([
+                                { id: 1 }
+                            ])
+                        }
+                    },
+                    schema: {
+                        model: {
+                            hasChildren: true
+                        }
+                    }
+                });
+
+                dataSource.fetch();
+                equal(dataSource.data()[0].hasChildren, true);
+            });
+
+            test("hasChildren set as false", 1, function() {
+                var dataSource = new HierarchicalDataSource({
+                    transport: {
+                        read: function(options) {
+                            options.success([
+                                { id: 1 }
+                            ])
+                        }
+                    },
+                    schema: {
+                        model: {
+                            hasChildren: false
+                        }
+                    }
+                });
+
+                dataSource.fetch();
+                equal(dataSource.data()[0].hasChildren, false);
+            });
+
             test("the this context in hasChildren is the node itself", 1, function() {
                 var that;
 
