@@ -153,14 +153,20 @@
             return box;
         },
 
-        alignTo: function(targetBox, edge) {
+        alignTo: function(targetBox, anchor) {
             var box = this,
                 height = box.height(),
                 width = box.width(),
-                axis = edge == TOP || edge == BOTTOM ? Y : X,
+                axis = anchor == TOP || anchor == BOTTOM ? Y : X,
                 offset = axis == Y ? height : width;
 
-            if (edge == TOP || edge == LEFT) {
+            if (anchor === CENTER) {
+                var targetCenter = targetBox.center();
+                var center = box.center();
+
+                box.x1 += targetCenter.x - center.x;
+                box.y1 += targetCenter.y - center.y;
+            } else if (anchor === TOP || anchor === LEFT) {
                 box[axis + 1] = targetBox[axis + 1] - offset;
             } else {
                 box[axis + 1] = targetBox[axis + 2];

@@ -58,6 +58,7 @@
         BELOW = "below",
         BLACK = "#000",
         BOTTOM = "bottom",
+        BUBBLE = "bubble",
         CATEGORY = "Category",
         CENTER = "center",
         CHANGE = "change",
@@ -131,7 +132,7 @@
         ZERO = "zero";
 
     var CATEGORICAL_CHARTS = [BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA],
-        XY_CHARTS = [SCATTER, SCATTER_LINE];
+        XY_CHARTS = [SCATTER, SCATTER_LINE, BUBBLE];
 
     var DateLabelFormats = {
         hours: "HH:mm",
@@ -566,6 +567,10 @@
                     } else if (currentSeries.xField && currentSeries.yField) {
                         value = [getField(currentSeries.xField, row),
                                  getField(currentSeries.yField, row)];
+
+                        if (currentSeries.zField) {
+                            value.push(getField(currentSeries.zField, row));
+                        }
                     } else {
                         value = undefined;
                     }
@@ -2103,7 +2108,8 @@
                 height: markers.size,
                 background: markerBackground,
                 border: markerBorder,
-                opacity: markers.opacity
+                opacity: markers.opacity,
+                zIndex: markers.zIndex
             });
 
             point.append(point.marker);
@@ -2174,14 +2180,14 @@
                 options = point.options,
                 marker = point.marker,
                 label = point.label,
-                edge = options.labels.position;
+                anchor = options.labels.position;
 
             if (label) {
-                edge = edge === ABOVE ? TOP : edge;
-                edge = edge === BELOW ? BOTTOM : edge;
+                anchor = anchor === ABOVE ? TOP : anchor;
+                anchor = anchor === BELOW ? BOTTOM : anchor;
 
                 label.reflow(box);
-                label.box.alignTo(marker.box, edge);
+                label.box.alignTo(marker.box, anchor);
                 label.reflow(label.box);
             }
         },
@@ -2731,7 +2737,7 @@
                 for (pointIx = 0; pointIx < currentSeries.data.length; pointIx++) {
                     pointData = currentSeries.data[pointIx] || [];
                     dataItems = currentSeries.dataItems;
-                    value = { x: pointData[0], y: pointData[1] };
+                    value = { x: pointData[0], y: pointData[1], z: pointData[2] };
 
                     callback(value, {
                         pointIx: pointIx,
@@ -2759,6 +2765,7 @@
         },
 
         getViewElements: function(view) {
+            // TODO: Remove. Same as base!?
             var chart = this,
                 elements = ScatterChart.fn.getViewElements.call(chart, view),
                 group = view.createGroup({
@@ -2772,6 +2779,73 @@
         }
     });
     deepExtend(ScatterLineChart.fn, LineChartMixin);
+
+    var BubbleChart = ScatterChart.extend({
+        options: {
+            markers: {
+                maxSize: 50
+            },
+            labels: {
+                position: CENTER
+            }
+        },
+
+        addValue: function(value, fields) {
+            var chart = this,
+                colors = chart.plotArea.options.seriesColors || [];
+
+            fields.series.color = fields.dataItem.color ||
+                colors[fields.pointIx % colors.length];
+
+            ScatterChart.fn.addValue.call(this, value, fields);
+        },
+
+        createPoint: function(value, series, seriesIx) {
+            var chart = this,
+                options = chart.options,
+                point = ScatterChart.fn.createPoint.call(chart, value, series, seriesIx),
+                maxValue = chart.seriesMax(series),
+                maxR = options.markers.maxSize / 2,
+                maxArea = math.PI * maxR * maxR,
+                area = math.abs(value.z) * (maxArea / maxValue),
+                r = math.sqrt(area / math.PI);
+
+            // TODO: Label positioning
+            // TODO: Negative values
+            // TODO: Animations
+            // TODO: Hover
+            // TODO: Color for each point
+            // TODO: Coloring by value
+
+            deepExtend(point.options, {
+                markers: {
+                    size: r * 2,
+                    type: CIRCLE,
+                    zIndex: maxR - r
+                },
+                labels: { position: CENTER, zIndex: maxR - r + 1, background: "" }
+            });
+
+            return point;
+        },
+
+        seriesMax: function(series) {
+            var data = series.data,
+                length = data.length,
+                max = 0,
+                i;
+
+            for(i = 0; i < length; i++) {
+                max = math.max(max, data[i][2]);
+            }
+
+            return max;
+        },
+
+        getViewElements: function(view) {
+            return ScatterChart.fn.getViewElements.call(this, view);
+        }
+    });
 
     var PieSegment = ChartElement.extend({
         init: function(value, sector, options) {
@@ -4351,6 +4425,10 @@
                 return s.type === SCATTER_LINE;
             }));
 
+            plotArea.createBubbleChart(grep(series, function(s) {
+                return s.type === BUBBLE;
+            }));
+
             plotArea.createAxes();
         },
 
@@ -4379,6 +4457,16 @@
             if (series.length > 0) {
                 plotArea.appendChart(
                     new ScatterLineChart(plotArea, { series: series })
+                );
+            }
+        },
+
+        createBubbleChart: function(series) {
+            var plotArea = this;
+
+            if (series.length > 0) {
+                plotArea.appendChart(
+                    new BubbleChart(plotArea, { series: series })
                 );
             }
         },
@@ -4815,6 +4903,7 @@
         delete seriesDefaults.verticalArea;
         delete seriesDefaults.scatter;
         delete seriesDefaults.scatterLine;
+        delete seriesDefaults.bubble;
     }
 
     function applySeriesColors(options) {

@@ -15,23 +15,49 @@
         <div id="chart" style="width: 200px; height; 200px;"></div>
         <script>
             $(function() {
+                var data = [{
+                    id: "CAN",
+                    lifeExpectancy: 80.66,
+                    fertilityRate: 1.67,
+                    population: 33739900
+                }, {
+                    id: "DEU",
+                    lifeExpectancy: 79.84,
+                    fertilityRate: 1.36,
+                    population: 81902307
+                }, {
+                    id: "DNK",
+                    lifeExpectancy: 78.6,
+                    fertilityRate: 1.84,
+                    population: 5523095
+                }, {
+                    id: "IRQ",
+                    lifeExpectancy: 68.09,
+                    fertilityRate: 4.77,
+                    population: 31090763
+                }, {
+                    id: "Oops",
+                    lifeExpectancy: 100,
+                    fertilityRate: 5,
+                    population: -100000000
+                }];
+
                 $("#chart").kendoChart({
                     legend: {
                         visible: false
                     },
-                    theme: "metro",
-                    seriesDefaults: {
-                        type: "donut"
+                    dataSource: {
+                        data: data
                     },
                     series: [{
-                        type: "donut",
-                        data: [1,2,3]
-                    },{
-                        type: "donut",
-                        data: [1,2,3]
-                    },{
-                        type: "donut",
-                        data: [1,2,3]
+                        type: "bubble",
+                        labels: {
+                            visible: true,
+                            template: "#= dataItem.id #"
+                        },
+                        xField: "lifeExpectancy",
+                        yField: "fertilityRate",
+                        zField: "population"
                     }]
                 });
             });
