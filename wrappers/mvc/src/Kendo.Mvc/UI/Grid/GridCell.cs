@@ -13,9 +13,8 @@ namespace Kendo.Mvc.UI
             DataItem = dataItem;
             Template = new HtmlTemplate<T>();
             
-            HtmlAttributes = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
-            //TODO: Implement HtmlAttributes
-            //HtmlAttributes.Merge(column.HtmlAttributes);
+            HtmlAttributes = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);            
+            HtmlAttributes.Merge(column.HtmlAttributes);
         }
 
         public Grid<T> Grid 

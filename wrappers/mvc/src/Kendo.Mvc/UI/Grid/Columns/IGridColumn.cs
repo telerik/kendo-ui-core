@@ -76,14 +76,13 @@ namespace Kendo.Mvc.UI
             get;
             set;
         }
-        */
-        //TODO: Implement HtmlAttributes
-        /*
+        */        
+        
         IDictionary<string, object> HtmlAttributes 
         { 
             get; 
         }
-        */
+        
         string Title 
         { 
             get; 

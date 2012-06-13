@@ -6,6 +6,7 @@ namespace Kendo.Mvc.UI
     using Infrastructure;
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI.Html;
+    using System.Web;
 
     /// <summary>
     /// Represents a column in the <see cref="Grid{T}"/> component
@@ -87,8 +88,16 @@ namespace Kendo.Mvc.UI
                 json["title"] = Title;
             }
 
-            //TODO: implement attributes
-            //.Add("attr", column.HtmlAttributes.ToAttributeString(), () => column.HtmlAttributes.Any())
+            if (HtmlAttributes.Any())
+            {
+                var attributes = new Dictionary<string, object>();
+
+                HtmlAttributes.Each(attr => {
+                    attributes[HttpUtility.HtmlAttributeEncode(attr.Key)] = HttpUtility.HtmlAttributeEncode(attr.Value.ToString());
+                });
+
+                json["attributes"] = attributes;
+            }
 
             //TODO: Implement hidden columns
             //.Add("hidden", column.Hidden, false)
@@ -284,10 +293,8 @@ namespace Kendo.Mvc.UI
                 Settings.Visible = value;
             }
         }
-        */
-
-        //TODO: Implement HtmlAttributes
-        /*
+        */        
+        
         /// <summary>
         /// Gets the HTML attributes of the cell rendered for the column
         /// </summary>
@@ -299,7 +306,7 @@ namespace Kendo.Mvc.UI
                 return Settings.HtmlAttributes;
             }
         }
-        */
+        
         IGrid IGridColumn.Grid
         {
             get
@@ -392,9 +399,8 @@ namespace Kendo.Mvc.UI
                 template.InlineTemplate = InlineTemplate;
             }
 
-            var builder = new GridTemplateCellBuilder<T>(template);
-            //TODO: Implement HtmlAttributes
-            //builder.HtmlAttributes.Merge(HtmlAttributes);
+            var builder = new GridTemplateCellBuilder<T>(template);            
+            builder.HtmlAttributes.Merge(HtmlAttributes);
             return builder;
         }
 

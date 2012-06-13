@@ -77,9 +77,8 @@ namespace Kendo.Mvc.UI.Tests.Grid
         {
             builder.Encoded(false);
             Assert.False(column.Encoded);
-        }
-        //TODO: Implement HtmlAttributes
-        /*
+        }        
+        
         [Fact]
         public void HtmlAttributes_sets_the_html_attributes_of_the_column()
         {
@@ -88,12 +87,6 @@ namespace Kendo.Mvc.UI.Tests.Grid
             Assert.Equal("test", column.HtmlAttributes["class"]);
         }
 
-        [Fact]
-        public void HtmlAttributes_throws_if_null_passed_as_argument()
-        {
-            Assert.Throws<ArgumentNullException>(() => builder.HtmlAttributes(null));
-        }
-        */
         [Fact]
         public void Template_sets_the_template_of_the_column()
         {

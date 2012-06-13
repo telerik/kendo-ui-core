@@ -361,9 +361,8 @@ namespace Kendo.Mvc.UI
                     Expression = Expression,
                     ViewContext = Grid.ViewContext
                 };
-
-                //TODO: Implement HtmlAttributes
-                //builder.HtmlAttributes.Merge(HtmlAttributes);
+                
+                builder.HtmlAttributes.Merge(HtmlAttributes);
                 
                 return builder;
             }
@@ -374,9 +373,8 @@ namespace Kendo.Mvc.UI
                 Format = Format,
                 Value = Value,
 
-            };
-            //TODO: Implement HtmlAttributes
-            //builder.HtmlAttributes.Merge(HtmlAttributes);
+            };            
+            builder.HtmlAttributes.Merge(HtmlAttributes);
             
             return builder;
         }
@@ -392,9 +390,8 @@ namespace Kendo.Mvc.UI
                     ViewContext = Grid.ViewContext,
                     TemplateName = EditorTemplateName,
                     Member = Member
-                };
-                //TODO: Implement HtmlAttributes
-                //builder.HtmlAttributes.Merge(HtmlAttributes);
+                };                
+                builder.HtmlAttributes.Merge(HtmlAttributes);
 
                 return builder;
             }

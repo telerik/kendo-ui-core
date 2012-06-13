@@ -129,8 +129,8 @@ namespace Kendo.Mvc.UI.Fluent
             return this as TColumnBuilder;
         }
         */
-        //TODO: Implement HtmlAttributes
-        /*
+        
+        
         /// <summary>
         /// Sets the HTML attributes applied to the content cell of the column.
         /// </summary>
@@ -143,10 +143,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        //public TColumnBuilder HtmlAttributes(object attributes)
-        //{
-        //    return HtmlAttributes(attributes.ToDictionary());
-        //}       
+        public TColumnBuilder HtmlAttributes(object attributes)
+        {
+            return HtmlAttributes(attributes.ToDictionary());
+        }       
         
         /// <summary>
         /// Sets the HTML attributes applied to the content cell of the column.
@@ -165,8 +165,7 @@ namespace Kendo.Mvc.UI.Fluent
             MergeAttributes(Column.HtmlAttributes, attributes);
 
             return this as TColumnBuilder;
-        }
-        */
+        }        
 
         /// <summary>
         /// Sets the width of the column in pixels.

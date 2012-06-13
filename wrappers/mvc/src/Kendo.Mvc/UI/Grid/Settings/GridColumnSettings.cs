@@ -31,9 +31,8 @@ namespace Kendo.Mvc.UI
             Visible = true;
             //TODO: Implement HeaderContextMenu
             //IncludeInContextMenu = true;
-            HeaderHtmlAttributes = new RouteValueDictionary();
-            //TODO: Implement HtmlAttributes
-            //HtmlAttributes = new RouteValueDictionary();
+            HeaderHtmlAttributes = new RouteValueDictionary();            
+            HtmlAttributes = new RouteValueDictionary();
             //TODO: Implement FooterHtmlAttributes
           //  FooterHtmlAttributes = new RouteValueDictionary();
         }
@@ -149,15 +148,14 @@ namespace Kendo.Mvc.UI
             get;
             set;
         }
-        */
-        //TODO: Implement HtmlAttributes
-        /*
+        */        
+        
         public IDictionary<string, object> HtmlAttributes
         {
             get;
             private set;
         }
-        */
+        
         public string Member
         {
             get

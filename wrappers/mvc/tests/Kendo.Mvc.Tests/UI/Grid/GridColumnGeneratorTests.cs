@@ -42,8 +42,8 @@ namespace Kendo.Mvc.UI.Tests
                 HeaderHtmlAttributes = { },
                 //TODO: Implement hidden Columns
                 //Hidden = true,
-                //TODO: Implement HtmlAttributes
-                //HtmlAttributes = { },
+                
+                HtmlAttributes = { },
                 ReadOnly = true,
                 Title = "foo",
                 Visible = false,
@@ -61,8 +61,8 @@ namespace Kendo.Mvc.UI.Tests
             //Assert.Equal(column.HeaderHtmlAttributes, settings.HeaderHtmlAttributes);
             //TODO: Implement hidden columns
             //Assert.Equal(column.Hidden, settings.Hidden);
-            //TODO: Implement HtmlAttributes
-            //Assert.Equal(column.HtmlAttributes, settings.HtmlAttributes);
+            
+            Assert.Equal(column.HtmlAttributes, settings.HtmlAttributes);
            // Assert.Equal(column.ReadOnly, settings.ReadOnly);
             Assert.Equal(column.Title, settings.Title);
             //TODO: Implement Column visibility
