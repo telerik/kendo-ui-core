@@ -705,18 +705,25 @@
             }
         },
 
-        _fieldFor: function(field) {
-            var fieldBindings = this.options[bindings[field]],
+        _fieldFor: function(fieldName) {
+            var fieldBindings = this.options[bindings[fieldName]],
                 count = fieldBindings.length;
 
-            // generates ['foo', 'bar'][item.level() < 3 ? item.level() : 3]
-            return "['" + fieldBindings.join("','") + "']" + "[item.level() < " + count + " ? item.level() : " + count + "]";
+            if (count === 0) {
+                return "'" + fieldName + "'";
+            } else if (count == 1) {
+                return "'" + fieldBindings[0] + "'";
+            } else {
+                // generates ['foo', 'bar'][item.level() < 3 ? item.level() : 2]
+                return "['" + fieldBindings.join("','") + "']" +
+                       "[item.level() < " + count + " ? item.level() : " + (count-1) + "]";
+            }
         },
 
         _textTemplate: function() {
             var that = this,
                 field = function(fieldName) {
-                    return "(item[" + that._fieldFor(fieldName) + "] || item['" + fieldName + "'])";
+                    return "item[" + that._fieldFor(fieldName) + "]";
                 },
                 templateText =
                     "# var text = " + field("text") + "; #" +
@@ -732,7 +739,7 @@
         _itemTemplate: function() {
             var that = this,
                 field = function(fieldName) {
-                    return "(item[" + that._fieldFor(fieldName) + "] || item['" + fieldName + "'])";
+                    return "item[" + that._fieldFor(fieldName) + "]";
                 },
                 templateText =
                     "<li class='#= r.wrapperCssClass(group, item) #'" +

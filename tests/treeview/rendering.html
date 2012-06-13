@@ -332,6 +332,19 @@
                 equal(treeview.find(".k-in:first").text(), "bar");
             });
 
+            test("uses last text field binding for deeper levels", function() {
+                treeview.kendoTreeView({
+                    dataTextField: "foo",
+                    dataSource: [
+                        { foo: "bar", items: [
+                            { foo: "baz" }
+                        ] }
+                    ]
+                });
+
+                equal(treeview.find(".k-in:last").text(), "baz");
+            });
+
             test("uses accurate text field binding for subnodes", function() {
                 treeview.kendoTreeView({
                     dataTextField: ["foo", "baz"],
