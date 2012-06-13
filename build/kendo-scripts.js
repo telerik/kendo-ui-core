@@ -92,6 +92,7 @@ var suiteScripts = {
         "kendo.data.xml.js",
         "kendo.data.js",
         "kendo.binder.js",
+        "kendo.validator.js",
         "kendo.history.js",
         "kendo.draganddrop.js",
         "kendo.popup.js",
