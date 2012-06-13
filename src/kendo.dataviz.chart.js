@@ -3569,7 +3569,8 @@
                 totalSize,
                 size,
                 margin = 0,
-                i, r, ir = 0;
+                i, r, ir = 0,
+                currentSize = 0;
 
             chart.seriesConfigs = [];
             padding = padding > halfMinWidth - space ? halfMinWidth - space : padding,
@@ -3577,9 +3578,11 @@
 
             for (i = 0; i < seriesCount; i++) {
                 currentSeries = series[i];
-                if (i === 0 && defined(currentSeries.holeSize)) {
-                    holeSize = currentSeries.holeSize;
-                    totalSize -= currentSeries.holeSize;
+                if (i === 0) {
+                    if (defined(currentSeries.holeSize)) {
+                        holeSize = currentSeries.holeSize;
+                        totalSize -= currentSeries.holeSize;
+                    }
                 }
 
                 if (defined(currentSeries.size)) {
@@ -3595,7 +3598,13 @@
                 }
             }
 
-            ir = holeSize || 0;
+            if (!defined(holeSize)) {
+                currentSize = (halfMinWidth - padding) / (seriesCount + 0.75);
+                holeSize = currentSize * 0.75;
+                totalSize -= holeSize;
+            }
+
+            ir = holeSize;
 
             for (i = 0; i < seriesCount; i++) {
                 currentSeries = series[i];
