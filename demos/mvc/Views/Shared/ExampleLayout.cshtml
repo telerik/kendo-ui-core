@@ -92,7 +92,8 @@
 
             @if (ViewBag.Debug == false) {
                 <text>
-                    docs.url = "https://raw.github.com/telerik/kendo-docs/master/api/{0}/{1}.md
+                    //http://developer.github.com/v3/repos/contents/
+                    docs.url = "https://api.github.com/repos/telerik/kendo-docs/contents/api/{0}/{1}.md"
                 </text>
             }
 

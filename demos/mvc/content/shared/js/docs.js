@@ -1,54 +1,52 @@
 (function() {
-    var decode = window.atob,
-        kendo = window.kendo,
+    var kendo = window.kendo,
         markdown = window.markdown,
         sectionRegExp = /^##\s/m,
         appName = location.pathname.split("/")[1] || "kendo-demos",
-        url = "/" + appName + "/docs/{0}/{1}";
+        url = "/" + appName + "/docs/{0}/{1}",
+        base64Decode;
 
-    if (!decode) {
-        //code snippet from http://www.nczonline.net/blog/2009/12/08/computer-science-in-javascript-base64-encoding/
-        decode = function base64Decode(text){
-            text = text.replace(/\s/g,"");
+    //code snippet from http://www.nczonline.net/blog/2009/12/08/computer-science-in-javascript-base64-encoding/
+    base64Decode = function base64Decode(text){
+        text = text.replace(/\s/g,"");
 
-            if(!(/^[a-z0-9\+\/\s]+\={0,2}$/i.test(text)) || text.length % 4 > 0){
-                throw new Error("Not a base64-encoded string.");
-            }
-
-            //local variables
-            var digits = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",
-                cur, prev, digitNum,
-                i=0,
-                result = [];
-
-            text = text.replace(/=/g, "");
-
-            while (i < text.length) {
-                cur = digits.indexOf(text.charAt(i));
-                digitNum = i % 4;
-
-                switch(digitNum){
-                    //case 0: first digit - do nothing, not enough info to work with
-
-                    case 1: //second digit
-                        result.push(String.fromCharCode(prev << 2 | cur >> 4));
-                        break;
-
-                    case 2: //third digit
-                        result.push(String.fromCharCode((prev & 0x0f) << 4 | cur >> 2));
-                        break;
-
-                    case 3: //fourth digit
-                        result.push(String.fromCharCode((prev & 3) << 6 | cur));
-                        break;
-                }
-
-                prev = cur;
-                i++;
-            }
-
-            return result.join("");
+        if(!(/^[a-z0-9\+\/\s]+\={0,2}$/i.test(text)) || text.length % 4 > 0){
+            throw new Error("Not a base64-encoded string.");
         }
+
+        //local variables
+        var digits = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",
+            cur, prev, digitNum,
+            i=0,
+            result = [];
+
+        text = text.replace(/=/g, "");
+
+        while (i < text.length) {
+            cur = digits.indexOf(text.charAt(i));
+            digitNum = i % 4;
+
+            switch(digitNum){
+                //case 0: first digit - do nothing, not enough info to work with
+
+                case 1: //second digit
+                    result.push(String.fromCharCode(prev << 2 | cur >> 4));
+                    break;
+
+                case 2: //third digit
+                    result.push(String.fromCharCode((prev & 0x0f) << 4 | cur >> 2));
+                    break;
+
+                case 3: //fourth digit
+                    result.push(String.fromCharCode((prev & 3) << 6 | cur));
+                    break;
+            }
+
+            prev = cur;
+            i++;
+        }
+
+        return result.join("");
     }
 
     var docs = {
@@ -58,11 +56,17 @@
                 url: this.getURL(suite, widget),
                 dataType: "jsonp",
                 success: function(data) {
+                    if (data.meta && data.meta.status === 404) {
+                        return;
+                    }
+
                     var result = "",
                         index = 2;
 
                     if (data.data.content) {
-                        result = decode(data.data.content);
+                        result = base64Decode(data.data.content);
+                    } else {
+                        return;
                     }
 
                     result = result.split(sectionRegExp);
