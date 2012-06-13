@@ -713,6 +713,11 @@ namespace Kendo.Mvc.UI
                 options["detailTemplate"] = new ClientEvent { HandlerName = String.Format("kendo.template($('{0}{1}').html())", idPrefix, ClientDetailTemplateId) };                                
             }
 
+            if (!String.IsNullOrEmpty(ClientRowTemplate))
+            {
+                options["rowTemplate"] = ClientRowTemplate;
+            }
+
             if (Navigatable.Enabled)
             {
                 options["navigatable"] = true;
