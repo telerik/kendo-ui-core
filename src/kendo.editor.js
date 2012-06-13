@@ -86,10 +86,10 @@
 
                     if ($.isPlainObject(currentTool)) {
 
-                        if (currentTool.name && editor._tools[currentTool.name]) {
-                            $.extend(editor._tools[currentTool.name].options, currentTool);
+                        if (currentTool.name && editor.tools[currentTool.name]) {
+                            $.extend(editor.tools[currentTool.name].options, currentTool);
 
-                            editorTools[currentTool.name] = editor._tools[currentTool.name];
+                            editorTools[currentTool.name] = editor.tools[currentTool.name];
                             options = editorTools[currentTool.name].options;
                         } else {
                             options = extend({ cssClass: "k-custom", type: "button", tooltip: "" }, currentTool);
@@ -104,8 +104,8 @@
                                 }
                             }
                         }
-                    } else if (editor._tools[currentTool]) {
-                        editorTools[currentTool] = editor._tools[currentTool];
+                    } else if (editor.tools[currentTool]) {
+                        editorTools[currentTool] = editor.tools[currentTool];
                         options = editorTools[currentTool].options;
                     }
 
@@ -138,7 +138,7 @@
 
             for (i = 0; i < nativeTools.length; i++) {
                 if (!editorTools[nativeTools[i]]) {
-                    editorTools[nativeTools[i]] = editor._tools[nativeTools[i]];
+                    editorTools[nativeTools[i]] = editor.tools[nativeTools[i]];
                 }
             }
 
@@ -371,15 +371,7 @@
 
             Widget.fn.init.call(that, element, options);
 
-            function deleteCustomItems(editor) {
-                // this function removes any customized item collections prior to initializing a new Editor, which otherwise will assume them erroneously
-                var customizableTools = ["fontName", "fontSize", "formatBlock"];
-                for (var j = 0, l = customizableTools.length; j < l; j++) {
-                    delete editor._tools[customizableTools[j]].options.items;
-                }
-            }
-
-            deleteCustomItems(that);
+            that.tools = deepExtend({}, kendo.ui.Editor.fn._tools);
 
             that.options = deepExtend({}, that.options, options);
 
@@ -389,8 +381,8 @@
                 that.update();
             });
 
-            for (var id in that._tools) {
-                that._tools[id].name = id.toLowerCase();
+            for (var id in that.tools) {
+                that.tools[id].name = id.toLowerCase();
             }
 
             that.textarea = element.attr("autocomplete", "off")[0];
@@ -675,6 +667,8 @@
             undo: { options: { key: "Z", ctrl: true } },
             redo: { options: { key: "Y", ctrl: true } }
         },
+
+        tools: {}, // tools collection is copied from _tools during initialization
 
         value: function (html) {
             var body = this.body,
