@@ -378,6 +378,25 @@
                 strictEqual(dataSource.data()[0], that);
             });
 
+            test("children as string and inline data source", function() {
+                var dataSource = new kendo.data.HierarchicalDataSource({
+                    data: [{
+                        text: "Root 1",
+                        products: [ { text: "Child 1.1" } ]
+                    }],
+                    schema: {
+                        model: {
+                            children: "products"
+                        }
+                    }
+                });
+
+                dataSource.fetch();
+
+                dataSource.data()[0].load();
+                equal(dataSource.data()[0].children.data()[0].text, "Child 1.1");
+            });
+
             test("hasChildren and inline defined data source", function() {
                 var dataSource = categories();
 

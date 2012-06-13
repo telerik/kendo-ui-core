@@ -2502,18 +2502,22 @@
         init: function(value) {
             var that = this,
                 hasChildren = that.hasChildren,
+                data = "items",
                 children = {};
 
             kendo.data.Model.fn.init.call(that, value);
 
+            if (typeof that.children === STRING) {
+               data = that.children;
+            }
+
             children = extend({
                 schema: {
-                    data: "items",
+                    data: data,
                     model: {
                         hasChildren: hasChildren
                     }
-                },
-                data: value
+                }
             }, that.children, { data: value });
 
             if (!hasChildren) {
