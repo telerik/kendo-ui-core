@@ -4,10 +4,12 @@
 <%: Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()    
             .Name("Grid")
             .Columns(columns => {
-                columns.Bound(p => p.ProductID).Groupable(false);
+                columns.Bound(p => p.ProductID).Groupable(false).Width(140);
                 columns.Bound(p => p.ProductName);
-                columns.Bound(p => p.UnitPrice);
-                columns.Bound(p => p.UnitsInStock);
+                columns.Bound(p => p.UnitPrice)
+                    .HtmlAttributes(new { style = "text-align: right" })
+                    .Width(140);
+                columns.Bound(p => p.UnitsInStock).Width(160);
             })
             .Pageable()
             .Sortable()
