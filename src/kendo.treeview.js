@@ -746,7 +746,7 @@
                         " " + kendo.attr("uid") + "='#= item.uid #'" +
                     ">" +
                         "<div class='#= r.cssClass(group, item) #'>" +
-                            "# if (item.hasChildren && item.hasChildren()) { #" +
+                            "# if (item.hasChildren) { #" +
                                 "<span class='#= r.toggleButtonClass(item) #'></span>" +
                             "# } #" +
 

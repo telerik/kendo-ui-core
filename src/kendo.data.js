@@ -2516,18 +2516,18 @@
                 data: value
             }, that.children, { data: value });
 
+            if (!hasChildren) {
+                hasChildren = children.schema.data;
+            }
+
             if (typeof hasChildren === STRING) {
                 hasChildren = kendo.getter(hasChildren);
+            }
 
-                that.hasChildren = function() {
-                    return !!hasChildren(this);
-                };
-            } else if (hasChildren === Node.fn.hasChildren && children.schema.data) {
-                hasChildren = kendo.getter(children.schema.data);
-
-                that.hasChildren = function() {
-                    return !!hasChildren(this);
-                };
+            if (hasChildren) {
+                that.hasChildren = !!hasChildren.call(that, that);
+            } else {
+                that.hasChildren = false;
             }
 
             that.children = new HierarchicalDataSource(children);
@@ -2552,10 +2552,6 @@
             }
 
             return level;
-        },
-
-        hasChildren: function() {
-            return false;
         },
 
         load: function() {
@@ -2586,7 +2582,7 @@
         },
 
         shouldSerialize: function(field) {
-            return Model.fn.shouldSerialize.call(this, field) && field !== "children" && field !== "_loaded";
+            return Model.fn.shouldSerialize.call(this, field) && field !== "children" && field !== "_loaded" && field !== "hasChildren";
         }
     });
 
