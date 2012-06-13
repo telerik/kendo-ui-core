@@ -567,11 +567,11 @@ function pad(number) {
     }};
 
     /**
-     * @name kendo.ui.Globalization
+     * @name kendo.Globalization
      * @namespace
      */
      /**
-     * @name kendo.ui.Globalization.Description
+     * @name kendo.Globalization.Description
      *
      * @section Globalization is the process of designing and developing an
      * application that works in multiple cultures. The culture defines specific information

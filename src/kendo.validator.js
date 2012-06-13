@@ -58,7 +58,7 @@
     }
 
     /**
-     *  @name kendo.ui.Validator.Description
+     *  @name kendo.Validator.Description
      *
      *  @section
      *  <p>
@@ -178,9 +178,9 @@
      *      $("#myform").kendoValidator();
      *  </script>
      */
-    var Validator = Widget.extend(/** @lends kendo.ui.Validator.prototype */{ /**
+    var Validator = Widget.extend(/** @lends kendo.Validator.prototype */{ /**
          * @constructs
-         * @extends kendo.ui.Widget
+         * @extends kendo.Widget
          * @param {Element} element DOM element
          * @param {Object} options Configuration options.
          * @option {Object} [rules] Set of validation rules. Those rules will extend the built-in ones.

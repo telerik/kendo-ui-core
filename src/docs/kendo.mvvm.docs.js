@@ -1,11 +1,11 @@
 (function () {
 
     /**
-    * @name kendo.ui.MVVM
+    * @name kendo.MVVM
     * @namespace
     */
 
-    /** @name kendo.ui.MVVM.Description
+    /** @name kendo.MVVM.Description
     * @section
     *  <p>
     *       Model View ViewModel (<a href="http://en.wikipedia.org/wiki/Model_View_ViewModel">MVVM</a>) is a design pattern which helps developers separate the Model from the View. The View-Model part of MVVM is responsible for
@@ -47,7 +47,7 @@
     *  </script>
     */
 
-    var kendo = { /** @lends kendo.ui.MVVM.prototype */
+    var kendo = { /** @lends kendo.MVVM.prototype */
         /**
          * Binds a tree of HTML elements to a View-Model
          * @param {String|Selector|Node} element

@@ -832,7 +832,7 @@
             "packages": ["!mvc"],
             "text": "Templates",
             "name": "templates",
-            "documentation": "framework/templates",
+            "documentation": "framework/template",
             "spriteCssClass": "templatesIcon",
             "items": [
                 {
@@ -894,7 +894,7 @@
             "packages": ["!mvc"],
             "text": "Drag & Drop",
             "name": "dragdrop",
-            "documentation": "framework/draganddrop",
+            "documentation": "framework/drag",
             "spriteCssClass": "dragDropIcon",
             "items": [
                 {
