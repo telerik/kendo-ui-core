@@ -719,10 +719,11 @@
                     return "(item[" + that._fieldFor(fieldName) + "] || item['" + fieldName + "'])";
                 },
                 templateText =
+                    "# var text = " + field("text") + "; #" +
                     "# if (typeof item.encoded != 'undefined' && item.encoded === false) {#" +
-                        "#=" + field("text") + "#" +
+                        "#= text #" +
                     "# } else { #" +
-                        "#:" + field("text") + "#" +
+                        "#: text #" +
                     "# } #";
 
             return template(templateText);
@@ -748,18 +749,20 @@
                                 "</span>" +
                             "# } #" +
 
-                            "# var tag = " + field("url") + " ? 'a' : 'span'; #" +
-                            "# var textAttr = " + field("url") +
-                                    " ? ' href=\\''+" + field("url") + "+'\\'' : ''; #" +
+                            "# var url = " + field("url") + "; #" +
+                            "# var tag = url ? 'a' : 'span'; #" +
+                            "# var textAttr = url ? ' href=\\'' + url + '\\'' : ''; #" +
 
                             "<#=tag# class='#= r.textClass(item) #'#= textAttr #>" +
 
-                                "# if (" + field("imageUrl") + ") { #" +
-                                    "<img class='k-image' alt='' src='#=" + field("imageUrl") + "#'>" +
+                                "# var imageUrl = " + field("imageUrl") + "; #" +
+                                "# if (imageUrl) { #" +
+                                    "<img class='k-image' alt='' src='#= imageUrl #'>" +
                                 "# } #" +
 
-                                "# if (" + field("spriteCssClass") + ") { #" +
-                                    "<span class='k-sprite #=" + field("spriteCssClass") + "#'></span>" +
+                                "# var spriteCssClass = " + field("spriteCssClass") + "; #" +
+                                "# if (spriteCssClass) { #" +
+                                    "<span class='k-sprite #= spriteCssClass #'></span>" +
                                 "# } #" +
 
                                 "#= treeview.template(data) #" +
