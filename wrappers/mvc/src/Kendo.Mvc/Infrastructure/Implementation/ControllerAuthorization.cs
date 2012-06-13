@@ -47,14 +47,14 @@ namespace Kendo.Mvc.Infrastructure.Implementation
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "We will not allow if there is any exception.")]
         public bool IsAccessibleToUser(RequestContext requestContext, string controllerName, string actionName, RouteValueDictionary routeValues)
         {
-
-            AuthorizationContext authorizationContext = authorizationContextCache.GetAuthorizationContext(requestContext, controllerName, actionName, routeValues);
-            List<AuthorizeAttribute> authorizeAttributes = authorizeAttributeCache.GetAuthorizeAttributes(requestContext, controllerName, actionName, routeValues).ToList();      
-            authorizeAttributes.AddRange(GlobalFilters.Filters.Select(f => f.Instance).OfType<AuthorizeAttribute>());
             bool allowed = true;
+            AuthorizationContext authorizationContext = authorizationContextCache.GetAuthorizationContext(requestContext, controllerName, actionName, routeValues);
 
             if (authorizationContext != null)
             {
+                List<AuthorizeAttribute> authorizeAttributes = authorizeAttributeCache.GetAuthorizeAttributes(requestContext, controllerName, actionName, routeValues).ToList();
+                authorizeAttributes.AddRange(GlobalFilters.Filters.Select(f => f.Instance).OfType<AuthorizeAttribute>());
+
                 foreach (AuthorizeAttribute authorizeAttribute in authorizeAttributes)
                 {
                     authorizeAttribute.OnAuthorization(authorizationContext);
