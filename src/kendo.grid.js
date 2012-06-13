@@ -1570,13 +1570,12 @@
 
                 if (!that.content.is(".k-grid-content, .k-virtual-scrollable-wrap")) {
                     that.content = that.table.wrap('<div class="k-grid-content" />').parent();
-
-                    if (scrollable !== true && scrollable.virtual) {
-                        that.virtualScrollable = new VirtualScrollable(that.content, {
-                                dataSource: that.dataSource,
-                                itemHeight: proxy(that._averageRowHeight, that)
-                            });
-                    }
+                }
+                if (scrollable !== true && scrollable.virtual && !that.virtualScrollable) {
+                    that.virtualScrollable = new VirtualScrollable(that.content, {
+                        dataSource: that.dataSource,
+                        itemHeight: proxy(that._averageRowHeight, that)
+                    });
                 }
 
                 that.scrollables = header.children(".k-grid-header-wrap"); // the footer does not exists here yet!

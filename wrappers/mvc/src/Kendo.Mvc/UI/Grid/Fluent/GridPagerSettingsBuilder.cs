@@ -15,7 +15,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="pager">The pager.</param>
         public GridPagerSettingsBuilder(GridPagingSettings pager)
         {
-
             this.pager = pager;
         }
 

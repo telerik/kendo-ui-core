@@ -152,6 +152,7 @@
     <Compile Include="Controllers\Web\Grid\ApiController.cs" />
     <Compile Include="Controllers\Web\Grid\RowTemplateController.cs" />
     <Compile Include="Controllers\Web\Grid\ServerRowTemplateController.cs" />
+    <Compile Include="Controllers\Web\Grid\Virtualization_Remote_DataController.cs" />
     <Compile Include="Controllers\Web\Grid\EditingCustomValidationController.cs" />
     <Compile Include="Controllers\Web\Grid\SelectionController.cs" />
     <Compile Include="Controllers\Web\Grid\ServerDetailsController.cs" />
@@ -301,6 +302,7 @@
     <Content Include="Areas\aspx\Views\web\grid\column_resizing.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\rowtemplate.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\serverrowtemplate.aspx" />
+    <Content Include="Areas\aspx\Views\web\grid\virtualization_remote_data.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\editingcustomvalidation.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\detailtemplate.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\serverhierarchy.aspx" />
@@ -631,6 +633,7 @@
     <Content Include="Areas\razor\Views\dataviz\scatter_charts\date_axis.cshtml" />
     <Content Include="Areas\razor\Views\web\grid\serverrowtemplate.cshtml" />
     <Content Include="Areas\razor\Views\web\grid\rowtemplate.cshtml" />
+    <Content Include="Areas\razor\Views\web\grid\virtualization_remote_data.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>

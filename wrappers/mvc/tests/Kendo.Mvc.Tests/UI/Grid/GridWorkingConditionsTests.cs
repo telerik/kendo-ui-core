@@ -185,6 +185,16 @@ namespace Kendo.Mvc.UI.Tests.Grid
         }
 
         [Fact]
+        public void Should_throw_if_binding_mode_is_server_and_virtual_scrolling_is_enabled()
+        {
+            grid.DataSource.Type = DataSourceType.Server;
+
+            grid.Scrolling.Enabled = true;
+            grid.Scrolling.Virtual = true;
+            Assert.Throws<NotSupportedException>(() => grid.VerifySettings());
+        }
+
+        [Fact]
         public void Should_throw_if_binding_mode_is_ajax_and_server_detailView_template_is_used()
         {
             grid.DataSource.Type = DataSourceType.Ajax;

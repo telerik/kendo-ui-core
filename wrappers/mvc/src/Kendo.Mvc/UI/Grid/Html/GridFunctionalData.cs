@@ -8,12 +8,6 @@ namespace Kendo.Mvc.UI.Html
             set;
         }
 
-        public bool ShowFooter
-        {
-            get;
-            set;
-        }
-
         public GridGroupingData GroupingData
         {
             get;

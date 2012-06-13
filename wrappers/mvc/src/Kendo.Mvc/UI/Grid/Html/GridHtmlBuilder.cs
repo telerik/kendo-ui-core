@@ -110,7 +110,7 @@ namespace Kendo.Mvc.UI.Html
         
         protected void AppendBottomPager(IHtmlNode div, GridFunctionalData functionalData)
         {
-            if (functionalData.ShowFooter)
+            if (functionalData.ShowBottomPager)
             {
                 var pager = new HtmlElement("div").AddClass("k-pager-wrap", "k-grid-pager");
                 

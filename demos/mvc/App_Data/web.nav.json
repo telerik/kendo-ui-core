@@ -337,8 +337,7 @@
                 },
                 {
                     "text": "Virtualization of remote data",
-                    "url": "grid/virtualization-remote-data.html",
-                    "packages": ["!mvc"]
+                    "url": "grid/virtualization-remote-data.html"
                 },
                 {
                     "text": "Hierarchy",

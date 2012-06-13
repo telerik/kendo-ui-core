@@ -1,6 +1,6 @@
 namespace Kendo.Mvc.UI
 {    
-    public class GridScrollingSettings
+    public class GridScrollingSettings : JsonObject
     {        
         public GridScrollingSettings()
         {            
@@ -17,6 +17,20 @@ namespace Kendo.Mvc.UI
         {
             get;
             set;
+        }
+
+        public bool Virtual
+        {
+            get;
+            set;
+        }
+
+        protected override void Serialize(System.Collections.Generic.IDictionary<string, object> json)
+        {
+            if (Virtual)
+            {
+                json["virtual"] = Virtual;
+            }
         }
     }
 }

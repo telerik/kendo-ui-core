@@ -160,20 +160,20 @@ namespace Kendo.Mvc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot use PageOnScroll with Server binding..
-        /// </summary>
-        internal static string CannotUsePageOnScrollWithServerBinding {
-            get {
-                return ResourceManager.GetString("CannotUsePageOnScrollWithServerBinding", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Cannot use only server templates in Ajax or WebService binding mode. Please specify a client template as well..
         /// </summary>
         internal static string CannotUseTemplatesInAjaxOrWebService {
             get {
                 return ResourceManager.GetString("CannotUseTemplatesInAjaxOrWebService", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot use Virtual Scroll with Server binding..
+        /// </summary>
+        internal static string CannotUseVirtualScrollWithServerBinding {
+            get {
+                return ResourceManager.GetString("CannotUseVirtualScrollWithServerBinding", resourceCulture);
             }
         }
         

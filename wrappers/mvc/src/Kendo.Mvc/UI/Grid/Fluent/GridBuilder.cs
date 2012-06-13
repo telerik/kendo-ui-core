@@ -589,7 +589,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public GridBuilder<T> Pageable(Action<GridPagerSettingsBuilder> pagerAction)
         {
-
             Component.Paging.Enabled = true;            
 
             pagerAction(new GridPagerSettingsBuilder(Component.Paging));

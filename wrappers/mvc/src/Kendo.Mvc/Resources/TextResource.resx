@@ -298,8 +298,8 @@ The request for '{0}' has found the following matching controllers:{2}</value>
   <data name="InCellModeNotSupportedWithRowTemplate" xml:space="preserve">
     <value>InCell editing mode is not supported when ClientRowTemplate is used</value>
   </data>
-  <data name="CannotUsePageOnScrollWithServerBinding" xml:space="preserve">
-    <value>Cannot use PageOnScroll with Server binding.</value>
+  <data name="CannotUseVirtualScrollWithServerBinding" xml:space="preserve">
+    <value>Cannot use Virtual Scroll with Server binding.</value>
   </data>
   <data name="PagingMustBeEnabledToUsePageOnScroll" xml:space="preserve">
     <value>Paging must be enabled to use PageOnScroll.</value>

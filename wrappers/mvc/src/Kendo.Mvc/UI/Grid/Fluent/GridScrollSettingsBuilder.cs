@@ -76,6 +76,13 @@ namespace Kendo.Mvc.UI.Fluent
             settings.Height = value;
 
             return this;
-        }        
+        }
+
+        public virtual GridScrollSettingsBuilder Virtual(bool value)
+        {
+            settings.Virtual = value;
+
+            return this;
+        } 
     }
 }

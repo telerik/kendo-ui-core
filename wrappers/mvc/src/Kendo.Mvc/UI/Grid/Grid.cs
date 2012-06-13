@@ -690,6 +690,14 @@ namespace Kendo.Mvc.UI
             {
                 options["scrollable"] = false;
             }
+            else
+            {
+                var scrolling = Scrolling.ToJson();
+                if (scrolling.Any())
+                {
+                    options["scrollable"] = scrolling;
+                }
+            }
 
             if (Editing.Enabled && IsClientBinding)
             {
@@ -868,8 +876,7 @@ namespace Kendo.Mvc.UI
                 ShowGroupHeader = Grouping.Enabled && Grouping.Visible,
                 PagerData = CreatePagerData(),
                 GroupingData = CreateGroupingData(),
-                ToolBarData = CreateToolbarData(),
-                ShowFooter = Footer
+                ToolBarData = CreateToolbarData()                
             };
         }
         
@@ -1184,6 +1191,11 @@ namespace Kendo.Mvc.UI
             base.VerifySettings();
             
             this.ThrowIfClassIsPresent("k-grid-rtl", TextResource.Rtl);
+
+            if (!IsClientBinding && Scrolling.Enabled && Scrolling.Virtual)
+            {
+                throw new NotSupportedException(TextResource.CannotUseVirtualScrollWithServerBinding);
+            }
 
             if (IsClientBinding)
             {
