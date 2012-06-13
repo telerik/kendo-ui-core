@@ -399,6 +399,8 @@
 
             that._animation();
 
+            that._accessors();
+
             that._dataSource();
 
             if (options.template && typeof options.template == "string") {
@@ -671,16 +673,53 @@
             loadOnDemand: true
         },
 
-        _textTemplate: function() {
-            var bindings = this.options.bindings || {},
-                field = function(fieldName) {
-                    return "item['" + (bindings[fieldName] || fieldName) + "']";
+        _accessors: function() {
+            var bindings = {
+                    text: "dataTextField"
                 },
+                that = this,
+                options = that.options,
+                i, field, textField,
+                element = that.element;
+
+            for (i in bindings) {
+                field = options[bindings[i]];
+                textField = element.attr(kendo.attr(i + "-field"));
+
+                if (textField) {
+                    field = textField;
+                }
+
+                if (!field) {
+                    field = i;
+                }
+
+                if (!isArray(field)) {
+                    field = [field];
+                }
+
+                options[bindings[i]] = field;
+            }
+        },
+
+        _fieldFor: function(field) {
+            var bindings = {
+                    text: "dataTextField"
+                },
+                fieldBindings = this.options[bindings[field]],
+                count = fieldBindings.length;
+
+            // generates ['foo', 'bar'][item.level() < 3 ? item.level() : 3]
+            return "['" + fieldBindings.join("','") + "']" + "[item.level() < " + count + " ? item.level() : " + count + "]";
+        },
+
+        _textTemplate: function() {
+            var field = "item[" + this._fieldFor("text") + "] || item.text",
                 templateText =
                     "# if (typeof item.encoded != 'undefined' && item.encoded === false) {#" +
-                        "#=" + field("text") + "#" +
+                        "#=" + field + "#" +
                     "# } else { #" +
-                        "#:" + field("text") + "#" +
+                        "#:" + field + "#" +
                     "# } #";
 
             return template(templateText);

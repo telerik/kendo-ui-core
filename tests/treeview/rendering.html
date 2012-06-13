@@ -323,15 +323,27 @@
 
             test("uses text field binding", function() {
                 treeview.kendoTreeView({
-                    bindings: {
-                        text: "foo"
-                    },
+                    dataTextField: "foo",
                     dataSource: [
                         { foo: "bar" }
                     ]
                 });
 
                 equal(treeview.find(".k-in:first").text(), "bar");
+            });
+
+            test("uses accurate text field binding for subnodes", function() {
+                treeview.kendoTreeView({
+                    dataTextField: ["foo", "baz"],
+                    dataSource: [
+                        { foo: "bar", items: [
+                            { baz: "qux" }
+                        ] }
+                    ]
+                });
+
+                equal(treeview.find(".k-in:first").text(), "bar");
+                equal(treeview.find(".k-in:last").text(), "qux");
             });
 
             test("uses imageUrl field binding", function() {
