@@ -2090,7 +2090,7 @@
                 template = column[templateName];
                 type = typeof template;
 
-                html += "<td>";
+                html += "<td" + stringifyAttributes(column.footerAttributes) + ">";
 
                 if (template) {
                     if (type !== FUNCTION) {

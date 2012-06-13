@@ -657,6 +657,32 @@
                 equal(grid.thead.find("th:first").attr("baz"), "baz1");
                 equal(grid.thead.find("th:last").attr("moo"), "moo1");
             });
+
+            test("render column footer attribute", function() {
+                var grid = new Grid($("<table/>"), {
+                    dataSource: [{ foo: 1, bar: "bar"}],
+                    columns: [
+                        { field: "foo", footerAttributes: { baz: "baz1" }, footerTemplate: "foo" },
+                        { field: "bar", footerAttributes: { moo: "moo1" }, footerTemplate: "bar" }
+                    ]
+                });
+
+                equal(grid.footer.find("td:first").attr("baz"), "baz1");
+                equal(grid.footer.find("td:last").attr("moo"), "moo1");
+            });
+
+            test("render command column footer attribute", function() {
+                var grid = new Grid($("<table/>"), {
+                    dataSource: [{ foo: 1, bar: "bar"}],
+                    columns: [
+                        { field: "foo", footerAttributes: { baz: "baz1" }, footerTemplate: "foo" },
+                        { command: "bar", footerAttributes: { moo: "moo1" }, footerTemplate: "bar" }
+                    ]
+                });
+
+                equal(grid.footer.find("td:first").attr("baz"), "baz1");
+                equal(grid.footer.find("td:last").attr("moo"), "moo1");
+            });
        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
