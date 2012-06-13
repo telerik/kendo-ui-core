@@ -4,7 +4,7 @@ namespace Kendo.Mvc.UI
     using System.Linq;
     using Kendo.Mvc.Infrastructure;
 
-    internal class ChartNumericAxisSerializer : ChartAxisSerializerBase
+    internal class ChartNumericAxisSerializer : ChartAxisSerializerBase<double>
     {
         private readonly IChartNumericAxis axis;
 

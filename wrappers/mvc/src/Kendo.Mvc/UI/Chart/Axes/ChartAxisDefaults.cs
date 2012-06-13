@@ -4,7 +4,8 @@ namespace Kendo.Mvc.UI
     /// Represents a category axis in the <see cref="Chart{T}"/> component
     /// </summary>
     /// <typeparam name="T">The type of the data item</typeparam>
-    public class ChartAxisDefaults<T> : ChartAxisBase<T>, IChartAxisDefaults where T : class
+    public class ChartAxisDefaults<T> : ChartAxisBase<T, double>, IChartAxisDefaults
+        where T : class
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartCategoryAxis{T}" /> class.
@@ -24,7 +25,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         public override IChartSerializer CreateSerializer()
         {
-            return new ChartAxisSerializerBase(this);
+            return new ChartAxisSerializerBase<double>(this);
         }
     }
 }

@@ -7,7 +7,7 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent interface for configuring numeric axis.
     /// </summary>
-    public class ChartDateAxisBuilder : ChartAxisBuilderBase<IChartDateAxis, ChartDateAxisBuilder>
+    public class ChartDateAxisBuilder : ChartAxisBuilderBase<IChartDateAxis, DateTime, ChartDateAxisBuilder>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartDateAxisBuilder"/> class.

@@ -4,11 +4,12 @@ namespace Kendo.Mvc.UI
     using System.Linq;
     using Kendo.Mvc.Infrastructure;
 
-    internal class ChartAxisSerializerBase : IChartSerializer
+    internal class ChartAxisSerializerBase<TValue> : IChartSerializer
+        where TValue : struct
     {
-        private readonly IChartAxis axis;
+        private readonly IChartAxis<TValue> axis;
 
-        public ChartAxisSerializerBase(IChartAxis axis)
+        public ChartAxisSerializerBase(IChartAxis<TValue> axis)
         {
             this.axis = axis;
         }

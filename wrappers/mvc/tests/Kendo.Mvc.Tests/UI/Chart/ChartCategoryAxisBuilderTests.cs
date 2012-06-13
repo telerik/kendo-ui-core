@@ -7,7 +7,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
     using Xunit;
 
     public class ChartCategoryAxisBuilderTests
-        : ChartAxisBuilderBaseTests<IChartCategoryAxis, ChartCategoryAxisBuilder<SalesData>>
+        : ChartAxisBuilderBaseTests<IChartCategoryAxis, int, ChartCategoryAxisBuilder<SalesData>>
     {
         public ChartCategoryAxisBuilderTests()
         {

@@ -326,7 +326,7 @@ namespace Kendo.Mvc.UI
         }
 
         private void SerializeAxes<TAxis>(string key, IList<TAxis> axes, IDictionary<string, object> options)
-            where TAxis : IChartAxis
+            where TAxis : IChartAxisBase
         {
             if (axes.Count > 0)
             {

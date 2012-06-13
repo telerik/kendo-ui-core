@@ -3,7 +3,8 @@ namespace Kendo.Mvc.UI
     /// <summary>
     /// Represents the options of the axis plot band
     /// </summary>
-    public class ChartPlotBand
+    public class ChartPlotBand<T>
+        where T : struct
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartPlotBand" /> class.
@@ -18,7 +19,7 @@ namespace Kendo.Mvc.UI
         /// <value>
         /// The start position of the plot band.
         /// </value>
-        public double? From
+        public T? From
         {
             get;
             set;
@@ -30,7 +31,7 @@ namespace Kendo.Mvc.UI
         /// <value>
         /// The end position of the plot band.
         /// </value>
-        public double? To
+        public T? To
         {
             get;
             set;
@@ -65,7 +66,7 @@ namespace Kendo.Mvc.UI
         /// </summary>
         public IChartSerializer CreateSerializer()
         {
-            return new ChartPlotBandsSerializer(this);
+            return new ChartPlotBandsSerializer<T>(this);
         }
     }
 }

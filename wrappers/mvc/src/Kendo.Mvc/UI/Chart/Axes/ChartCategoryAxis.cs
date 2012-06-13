@@ -8,7 +8,7 @@ namespace Kendo.Mvc.UI
     /// Represents a category axis in the <see cref="Chart{T}"/> component
     /// </summary>
     /// <typeparam name="T">The type of the data item</typeparam>
-    public class ChartCategoryAxis<T> : ChartAxisBase<T>, IChartCategoryAxis where T : class
+    public class ChartCategoryAxis<T> : ChartAxisBase<T, int>, IChartCategoryAxis where T : class
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartCategoryAxis{T}" /> class.
