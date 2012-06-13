@@ -151,5 +151,48 @@
                 });
             </script>
         </section>
+        <section>
+            <h2>Inline data (deafault settings)</h2>
+            <div id="treeview4"></div>
+            <script>
+                var inlineDefault = new kendo.data.HierarchicalDataSource({
+                    data: [{
+                        text: "Root 1",
+                        items: [ { text: "Child 1.1", items: [ { text: "Child 1.1.1" }] } ]
+                    }, {
+                        text: "Root 2",
+                        items: [ { text: "Child 2.1" } ]
+                    }]
+                });
+
+                $("#treeview4").kendoTreeView({
+                    dataSource: inlineDefault
+                });
+            </script>
+        </section>
+        <section>
+            <h2>Inline data</h2>
+            <div id="treeview5"></div>
+            <script>
+                var inline = new kendo.data.HierarchicalDataSource({
+                    data: [{
+                        text: "Root 1",
+                        products: [ { text: "Child 1.1" } ]
+                    }, {
+                        text: "Root 2",
+                        products: [ { text: "Child 2.1" } ]
+                    }],
+                    schema: {
+                        model: {
+                            children: "products"
+                        }
+                    }
+                });
+
+                $("#treeview5").kendoTreeView({
+                    dataSource: inline
+                });
+            </script>
+        </section>
     </body>
 </html>
