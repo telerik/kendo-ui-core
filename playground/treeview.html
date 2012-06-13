@@ -74,12 +74,7 @@
 
             $("#treeview2").kendoTreeView({
                 dataSource: heterogeneous,
-                bindings: {
-                    text: "CategoryName",
-                    bindings: {
-                        text: "ProductName"
-                    }
-                }
+                dataTextField: ["CategoryName", "ProductName", "OrderID"]
             });
 
         </script>
