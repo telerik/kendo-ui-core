@@ -516,6 +516,53 @@
          * @option {Number} [valueAxis.majorTicks.size] <4> The axis major tick size. This is the length of the line in pixels that is drawn to indicate the tick
          * on the chart.
          * @option {Object} [valueAxis.minorGridLines] Configures the minor grid lines.  These are the lines that are an extension of the minor ticks through the
+         * @option {String} [valueAxis.minorGridLines.dashType] <"solid"> The dash type of the minor grid lines.
+         * <div class="details-list">
+         *     <dl>
+         *         <dt>
+         *              <code>"solid"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a solid line.
+         *         </dd>
+         *         <dt>
+         *              <code>"dot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dots.
+         *         </dd>
+         *         <dt>
+         *              <code>"dash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dashes.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash.
+         *         </dd>
+         *         <dt>
+         *              <code>"dashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDotDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
+         *         </dd>
+         *    </dl>
+         * </div>
          * body of the chart.  <p>Note that minor grid lines are not visible by default, therefore none of these settings will take effect without the minor grid
          * lines visibility being set to <b>true</b></p>.
          * _example
@@ -527,7 +574,9 @@
          *             // set width to 2 pixels
          *             width: 2,
          *             // set the color to a dark blue
-         *             color: "#336699"
+         *             color: "#336699",
+         *             // set the dashType to dot
+         *             dashType: "dot"
          *         }
          *     },
          *     ...
@@ -558,12 +607,61 @@
          *             // set width to 2 pixels
          *             width: 2,
          *             // set the color to a dark blue
-         *             color: "#336699"
+         *             color: "#336699",
+         *             // set the dashType to dot
+         *             dashType: "dot"
          *         }
          *     },
          *     ...
          * });
          * @option {Number} [valueAxis.majorGridLines.width] <1> The width of the lines.
+         * @option {String} [valueAxis.majorGirdLines.dashType] <"solid"> The dash type of the lines.
+         * <div class="details-list">
+         *     <dl>
+         *         <dt>
+         *              <code>"solid"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a solid line.
+         *         </dd>
+         *         <dt>
+         *              <code>"dot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dots.
+         *         </dd>
+         *         <dt>
+         *              <code>"dash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dashes.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash.
+         *         </dd>
+         *         <dt>
+         *              <code>"dashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDotDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
+         *         </dd>
+         *    </dl>
+         * </div>
          * @option {String} [valueAxis.majorGridLines.color] <"black"> The color of the lines.
          * @option {Boolean} [valueAxis.majorGridLines.visible] <true> The visibility of the lines.
          * _example
@@ -578,7 +676,7 @@
          * });
          * @option {String} [valueAxis.color] Color to apply to all axis elements.
          * Individual color settings for line and labels take priority. Any valid CSS color string will work here, including hex and rgb.
-         * @option {Object} [valueAxis.line] Configures the axis line.  This will also affect the major and minor ticks, but not the grid lines.
+         * @option {Object} [valueAxis.line] Configures the axis line. This will also affect the major and minor ticks, but not the grid lines.
          * _example
          * $("#chart").kendoChart({
          *     valueAxis: {
@@ -591,10 +689,58 @@
          *     },
          *     ...
          * });
-         * @option {Number} [valueAxis.line.width] <1> The width of the lines.
-         * @option {String} [valueAxis.line.color] <"black"> The color of the lines. This will also affect the major and minor ticks, but not the
-         * grid lines.
-         * @option {Boolean} [valueAxis.line.visible] <true> The visibility of the lines.
+         * @option {Number} [valueAxis.line.width] <1> The width of the line. This will also effect the major and minor ticks, but
+         * not the grid lines.
+         * @option {String} [valueAxis.line.dashType] <"solid"> The dash type of the line.
+         * <div class="details-list">
+         *     <dl>
+         *         <dt>
+         *              <code>"solid"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a solid line.
+         *         </dd>
+         *         <dt>
+         *              <code>"dot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dots.
+         *         </dd>
+         *         <dt>
+         *              <code>"dash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dashes.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash.
+         *         </dd>
+         *         <dt>
+         *              <code>"dashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDotDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
+         *         </dd>
+         *    </dl>
+         * </div>
+         * @option {String} [valueAxis.line.color] <"black"> The color of the line. This will also effect the major and minor ticks, but
+         * not the grid lines.
+         * @option {Boolean} [valueAxis.line.visible] <true> The visibility of the line.
          * _example
          * $("#chart").kendoChart({
          *     valueAxis: {
@@ -1274,6 +1420,53 @@
          * });
          * @option {Number} [categoryAxis.minorGridLines.width] <1> The width of the lines. <p>Note that this setting has no effect if the visibility of the minor
          * grid lines is not set to <b>true</b>.</p>
+         * @option {String} [categoryAxis.minorGridLines.dashType] <"solid"> The dash type of the grid lines.
+         * <div class="details-list">
+         *     <dl>
+         *         <dt>
+         *              <code>"solid"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a solid line.
+         *         </dd>
+         *         <dt>
+         *              <code>"dot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dots.
+         *         </dd>
+         *         <dt>
+         *              <code>"dash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dashes.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash.
+         *         </dd>
+         *         <dt>
+         *              <code>"dashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDotDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
+         *         </dd>
+         *    </dl>
+         * </div>
          * @option {String} [categoryAxis.minorGridLines.color] <"black"> The color of the lines. Any valid CSS color string will work here, including hex and
          * rgb. <p>Note that this setting has no effect if the visibility of the minor
          * grid lines is not set to <b>true</b>.</p>
@@ -1293,6 +1486,53 @@
          *     ...
          * });
          * @option {Number} [categoryAxis.majorGridLines.width] <1> The width of the lines.
+         * @option {String} [categoryAxis.majorGridLines.dashType] <"solid"> The dash type of the grid lines.
+         * <div class="details-list">
+         *     <dl>
+         *         <dt>
+         *              <code>"solid"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a solid line.
+         *         </dd>
+         *         <dt>
+         *              <code>"dot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dots.
+         *         </dd>
+         *         <dt>
+         *              <code>"dash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dashes.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash.
+         *         </dd>
+         *         <dt>
+         *              <code>"dashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDotDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
+         *         </dd>
+         *    </dl>
+         * </div>
          * @option {String} [categoryAxis.majorGridLines.color] <"black"> The color of the lines. Any valid CSS color string will work here, including hex and rgb.
          * @option {Boolean} [categoryAxis.majorGridLines.visible] <false> The visibility of the lines.
          * _example
@@ -1320,8 +1560,55 @@
          *     },
          *     ...
          * });
-         * @option {Number} [categoryAxis.line.width] <1> The width of the line.  This will also effect the major and minor ticks, but
+         * @option {Number} [categoryAxis.line.width] <1> The width of the line. This will also effect the major and minor ticks, but
          * not the grid lines.
+         * @option {String} [categoryAxis.line.dashType] <"solid"> The dash type of the line.
+         * <div class="details-list">
+         *     <dl>
+         *         <dt>
+         *              <code>"solid"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a solid line.
+         *         </dd>
+         *         <dt>
+         *              <code>"dot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dots.
+         *         </dd>
+         *         <dt>
+         *              <code>"dash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dashes.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash.
+         *         </dd>
+         *         <dt>
+         *              <code>"dashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDotDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
+         *         </dd>
+         *    </dl>
+         * </div>
          * @option {String} [categoryAxis.line.color] <"black"> The color of the lines. Any valid CSS color string will work here, including hex and rgb.
          * <p><b>Note:</b> This will also effect the major and minor ticks, but not the grid lines.</p>
          * @option {Boolean} [categoryAxis.line.visible] <true> The visibility of the lines.
