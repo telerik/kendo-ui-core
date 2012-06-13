@@ -494,6 +494,16 @@
                 });
 
                 // ------------------------------------------------------------
+                module("Date Value Axis / Slots");
+
+                test("Returns slot from date string", function() {
+                    createDateValueAxis(new Date("2012/02/01"), new Date("2012/02/10"));
+
+                    same(dateAxis.getSlot("2012/02/01", "2012/02/02"),
+                         dateAxis.getSlot(new Date("2012/02/01"), new Date("2012/02/02")));
+                });
+
+                // ------------------------------------------------------------
                 module("Date Value Axis / Base unit / Days");
 
                 test("Base unit is inferred from series range", function() {

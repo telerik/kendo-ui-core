@@ -1274,37 +1274,9 @@
         },
 
         getSlot: function(a, b) {
-            var axis = this,
-                options = axis.options,
-                reverse = options.reverse,
-                vertical = options.vertical,
-                valueAxis = vertical ? Y : X,
-                lineBox = axis.lineBox(),
-                lineStart = lineBox[valueAxis + (reverse ? 2 : 1)],
-                lineSize = vertical ? lineBox.height() : lineBox.width(),
-                dir = reverse ? -1 : 1,
-                step = dir * (lineSize / (options.max - options.min)),
-                p1,
-                p2,
-                slotBox = new Box2D(lineBox.x1, lineBox.y1, lineBox.x1, lineBox.y1);
-
-            a = defined(a) ? a : options.axisCrossingValue;
-            b = defined(b) ? b : options.axisCrossingValue;
-            a = math.max(math.min(a, options.max), options.min);
-            b = math.max(math.min(b, options.max), options.min);
-
-            if (vertical) {
-                p1 = options.max - math.max(a, b);
-                p2 = options.max - math.min(a, b);
-            } else {
-                p1 = math.min(a, b) - options.min;
-                p2 = math.max(a, b) - options.min;
-            }
-
-            slotBox[valueAxis + 1] = lineStart + step * (reverse ? p2 : p1);
-            slotBox[valueAxis + 2] = lineStart + step * (reverse ? p1 : p2);
-
-            return slotBox;
+            return NumericAxis.fn.getSlot.call(
+                this, toDate(a), toDate(b)
+            );
         },
 
         labelsCount: function() {
