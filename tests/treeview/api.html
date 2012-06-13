@@ -8,7 +8,6 @@
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.treeview.js"></script>
-        <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.binder.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
         <link rel="stylesheet" href="../../styles/web/kendo.common.css" />
@@ -258,7 +257,7 @@
 
                 equals(appendedNode[0], newParent.find(".k-item")[0]);
                 equals(rootGroup.children().length, 2);
-                equals(subNode.find(".k-bot").length, 1);
+                equals(treeviewObject.findByText("buzz").find(".k-bot").length, 1);
             });
 
             test("append(nodeElement) appends node to root", function() {
@@ -274,7 +273,7 @@
 
                 var appendedNode = treeviewObject.append(subNode[0]);
 
-                equals(subNode[0], appendedNode[0]);
+                equals(treeviewObject.findByText("bar")[0], appendedNode[0]);
                 equals(rootGroup.children().length, 2);
                 equals(treeview.find(".k-icon").length, 0);
                 equals(rootGroup.find(".k-group").length, 0);
@@ -295,12 +294,16 @@
 
                 var appendedNode = treeviewObject.append(subNode, rootNode);
 
+                subNode = treeviewObject.findByText("bar");
+
                 equals(subNode[0], appendedNode[0]);
                 equals(rootGroup.children().length, 1);
                 equals(rootNode.find(".k-group").length, 1);
                 equals(rootNode.find(".k-group").children().length, 1);
 
                 appendedNode = treeviewObject.append(subNode[0], rootNode);
+
+                subNode = treeviewObject.findByText("bar");
 
                 equals(subNode[0], appendedNode[0]);
                 equals(rootGroup.children().length, 1);
@@ -318,19 +321,6 @@
 
                 equals(treeview.find(".k-group").length, 1);
                 equals(treeview.find(".k-group").children().length, 2);
-            });
-
-            test("append() persists node data", function() {
-                createTreeView([
-                            { text: "foo" },
-                            { text: "bar" }
-                        ]);
-
-                treeviewObject.findByText("foo").data("id", 1);
-
-                treeviewObject.append(treeviewObject.findByText("foo"), treeviewObject.findByText("bar"));
-
-                equals(treeviewObject.findByText("foo").data("id"), 1);
             });
 
             test("append() uses item template when creating items", function() {
@@ -357,7 +347,6 @@
                 treeviewObject.append(obj);
 
                 equal(treeview.find(".k-in").text(), "foo");
-                equal(treeview.find(".k-item").attr(kendo.attr("uid")), obj.uid);
             });
 
             test("append() of observable array", function() {
@@ -368,9 +357,9 @@
                 treeviewObject.append(array);
 
                 equal(treeview.find(".k-in").text(), "foo");
-                equal(treeview.find(".k-item").attr(kendo.attr("uid")), array[0].uid);
             });
 
+            /*
             test("append() of observable hierarchy", function() {
                 createTreeView({});
 
@@ -385,11 +374,12 @@
 
                 var items = treeview.find(".k-in");
 
+                equal(items.length, 2);
                 equal(items.eq(0).text(), "foo");
                 equal(items.eq(1).text(), "bar");
             });
+            */
 
-            /*
             test("append() adds element to dataSource", function() {
                 createTreeView({});
 
@@ -400,7 +390,6 @@
                 equal(data.length, 1);
                 equal(data[0].text, "foo");
             });
-            */
 
             test("detach() removes node and persists data", function() {
                 createTreeView([

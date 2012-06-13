@@ -86,36 +86,6 @@
                 treeviewObject = treeview.data("kendoTreeView");
             }
 
-            module("loadOnDemand property", {
-                teardown: function () {
-                    $(".k-treeview,.k-item").remove();
-                }
-            });
-
-            test("subgroups are not initially loaded", function() {
-                createTreeView({
-                    dataSource: [
-                        { text: "foo", items: [
-                            { text: "bar" }
-                        ] }
-                    ]
-                });
-
-                equal(treeview.find(".k-item").length, 1);
-            });
-
-            test("loadOnDemand=false loads subgroups", function() {
-                createTreeView({
-                    loadOnDemand: false,
-                    dataSource: [
-                        { text: "foo", items: [
-                            { text: "bar" }
-                        ] }
-                    ]
-                });
-
-                equal(treeview.find(".k-item").length, 2);
-            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

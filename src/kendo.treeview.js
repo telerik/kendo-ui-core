@@ -125,6 +125,7 @@
         data = kendo.data,
         extend = $.extend,
         template = kendo.template,
+        isArray = $.isArray,
         Widget = ui.Widget,
         HierarchicalDataSource = data.HierarchicalDataSource,
         proxy = $.proxy,
@@ -143,7 +144,13 @@
         VISIBLE = ":visible",
         NODE = ".k-item",
         templates, rendering, TreeView,
-        subGroup, nodeContents;
+        subGroup, nodeContents,
+        isDomElement = function (o){
+            return (
+                typeof HTMLElement === "object" ? o instanceof HTMLElement : //DOM2
+                o && typeof o === "object" && o.nodeType === 1 && typeof o.nodeName === "string"
+            );
+        };
 
     function contentChild(filter) {
         return function(node) {
@@ -376,9 +383,13 @@
                 dataInit,
                 inferred = false;
 
-            if ($.isArray(options)) {
+            if (isArray(options)) {
                 dataInit = true;
                 options = { dataSource: options };
+            }
+
+            if (options && typeof options.loadOnDemand == "undefined" && isArray(options.dataSource)) {
+                options.loadOnDemand = false;
             }
 
             Widget.prototype.init.call(that, element, options);
@@ -449,7 +460,7 @@
                 options = that.options,
                 dataSource = options.dataSource;
 
-            dataSource = $.isArray(dataSource) ? { data: dataSource } : dataSource;
+            dataSource = isArray(dataSource) ? { data: dataSource } : dataSource;
 
             if (that.dataSource && that._refreshHandler) {
                 that.dataSource.unbind(CHANGE, that._refreshHandler);
@@ -685,7 +696,7 @@
                         " " + kendo.attr("uid") + "='#= item.uid #'" +
                     ">" +
                         "<div class='#= r.cssClass(group, item) #'>" +
-                            "# if (item.hasChildren()) { #" +
+                            "# if (item.hasChildren && item.hasChildren()) { #" +
                                 "<span class='#= r.toggleButtonClass(item) #'></span>" +
                             "# } #" +
 
@@ -847,21 +858,21 @@
                 parentNode = that.findByUid(node.uid);
             }
 
-            console.log(items);
-
-            console.log("refreshings! args: ", e, " node: ", node);
-
             if (action == "add") {
-                that.append(items, parentNode);
+                group = subGroup(parentNode);
+
+                this._insertNode(items, group.children().length, parentNode, group, function(item, group) {
+                    item.appendTo(group);
+                });
             } else if (action == "remove") {
-                that.remove(that.root.children(NODE).eq(e.index));
+                that.remove(that.findByUid(items[0].uid));
             } else {
                 if (node) {
                     group = subGroup(parentNode);
 
                     that._insertNode(items, group.children().length, parentNode, group, function(item, group) {
                         item.appendTo(group);
-                    });
+                    }, !node.expanded);
                 } else {
                     that.root = that.wrapper.html(that._renderGroup({
                         items: items,
@@ -1074,6 +1085,7 @@
                         }
                     }));
                 } else if (dataItem) {
+                    dataItem.expanded = true;
                     dataItem.load();
                 }
             }
@@ -1099,13 +1111,13 @@
             return $(node).closest(NODE).find(">div>.k-in").text();
         },
 
-        _insertNode: function(nodeData, index, parentNode, group, insertCallback) {
+        _insertNode: function(nodeData, index, parentNode, group, insertCallback, collapsed) {
             var that = this,
                 updatedGroupLength = group.children().length + 1,
                 isArrayData, fromNodeData,
                 groupData = {
                     firstLevel: parentNode.hasClass(KTREEVIEW),
-                    expanded: true,
+                    expanded: !collapsed,
                     length: updatedGroupLength
                 }, node, i, nodeHtml = "";
 
@@ -1116,7 +1128,7 @@
                 });
             }
 
-            isArrayData = nodeData instanceof data.ObservableArray || $.isArray(nodeData);
+            isArrayData = nodeData instanceof data.ObservableArray || isArray(nodeData);
             fromNodeData = isArrayData || nodeData instanceof data.ObservableObject || $.isPlainObject(nodeData);
 
             if (fromNodeData) {
@@ -1140,6 +1152,10 @@
                 if (node.closest(".k-treeview")[0] == that.wrapper[0]) {
                     that.detach(node);
                 }
+            }
+
+            if (!node.length) {
+                return;
             }
 
             if (!group.length) {
@@ -1249,21 +1265,34 @@
          *
          */
         append: function (nodeData, parentNode) {
-            //var dataSource = this.dataSource;
+            var that = this,
+                dataSource = that.dataSource,
+                treeview,
+                i,
+                dataItem;
 
-            //if (parentNode) {
-                //console.log(parentNode, this.dataItem(parentNode).children);
-                //dataSource = this.dataItem(parentNode).children;
-            //}
+            if (parentNode) {
+                dataSource = that.dataItem(parentNode).children;
+            }
 
-            //dataSource.add(nodeData);
-            parentNode = parentNode || this.element;
+            if (nodeData instanceof $ || isDomElement(nodeData)) {
+                // move node
+                nodeData = $(nodeData);
+                treeview = nodeData.closest("[data-role=treeview]").data("kendoTreeView");
+                dataItem = treeview.dataSource.getByUid(nodeData.attr(kendo.attr("uid")));
 
-            var group = subGroup(parentNode);
+                treeview.dataSource.remove(dataItem);
 
-            return this._insertNode(nodeData, group.children().length, parentNode, group, function(item, group) {
-                item.appendTo(group);
-            });
+                dataItem = dataSource.add(dataItem);
+            } else if (isArray(nodeData) || nodeData instanceof data.ObservableArray){
+                for (i = 0; i < nodeData.length; i++) {
+                    dataItem = dataSource.add(nodeData[i]);
+                }
+            } else {
+                dataItem = dataSource.add(nodeData);
+            }
+
+            return that.findByUid(dataItem.uid);
         },
 
         _remove: function (node, keepData) {
