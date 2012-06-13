@@ -7,7 +7,7 @@ namespace Kendo.Mvc.UI
     /// <summary>
     /// Represents a category axis
     /// </summary>
-    public interface IChartCategoryAxis : IChartAxis
+    public interface IChartCategoryAxis : IChartAxis<int>
     {
         /// <summary>
         /// The categories displayed on the axis

@@ -1069,10 +1069,15 @@
                 result = map(plotBands, function(item) {
                     from = defined(item.from) ? item.from : MIN_VALUE;
                     to = defined(item.to) ? item.to : MAX_VALUE;
-                    item.from = math.min(from, to);
-                    item.to = math.max(from, to);
-                    slotX = vertical ? plotArea.axisX.lineBox()  : plotArea.axisX.getSlot(item.from, item.to);
-                    slotY = vertical ? plotArea.axisY.getSlot(item.from, item.to) : plotArea.axisY.lineBox();
+
+                    if (vertical) {
+                        slotX = plotArea.axisX.lineBox();
+                        slotY = plotArea.axisY.getSlot(item.from, item.to);
+                    } else {
+                        slotX = plotArea.axisX.getSlot(item.from, item.to);
+                        slotY = plotArea.axisY.lineBox();
+                    }
+
                     return view.createRect(
                             new Box2D(slotX.x1, slotY.y1, slotX.x2, slotY.y2),
                             { fill: item.color, fillOpacity: item.opacity, zIndex: -1 });

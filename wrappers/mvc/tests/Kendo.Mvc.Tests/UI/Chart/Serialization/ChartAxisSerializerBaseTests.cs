@@ -6,12 +6,12 @@ namespace Kendo.Mvc.UI.Tests
 
     public class ChartAxisSerializerBaseTests
     {
-        private readonly Mock<IChartAxis> axisMock;
-        private readonly ChartAxisSerializerBase serializer;
+        private readonly Mock<IChartAxis<double>> axisMock;
+        private readonly ChartAxisSerializerBase<double> serializer;
 
         public ChartAxisSerializerBaseTests()
         {
-            axisMock = new Mock<IChartAxis>();
+            axisMock = new Mock<IChartAxis<double>>();
             axisMock.SetupGet(axis => axis.MajorGridLines).Returns(new ChartLine());
             axisMock.SetupGet(axis => axis.MinorGridLines).Returns(new ChartLine());
             axisMock.SetupGet(a => a.Line).Returns(new ChartLine());
@@ -19,8 +19,8 @@ namespace Kendo.Mvc.UI.Tests
             axisMock.SetupGet(a => a.Labels).Returns(new ChartAxisLabels());
             axisMock.SetupGet(a => a.MinorTicks).Returns(new ChartAxisTicks());
             axisMock.SetupGet(a => a.MajorTicks).Returns(new ChartAxisTicks());
-            axisMock.SetupGet(a => a.PlotBands).Returns(new List<ChartPlotBand>());
-            serializer = new ChartAxisSerializerBase(axisMock.Object);
+            axisMock.SetupGet(a => a.PlotBands).Returns(new List<ChartPlotBand<double>>());
+            serializer = new ChartAxisSerializerBase<double>(axisMock.Object);
         }
 
         [Fact]
@@ -123,8 +123,8 @@ namespace Kendo.Mvc.UI.Tests
         [Fact]
         public void Should_serialize_PlotBands_if_set()
         {
-            var data = new List<ChartPlotBand>();
-            data.Add(new ChartPlotBand() { Color = "red" });
+            var data = new List<ChartPlotBand<double>>();
+            data.Add(new ChartPlotBand<double>() { Color = "red" });
             axisMock.SetupGet(a => a.PlotBands).Returns(data);
 
             serializer.Serialize().ContainsKey("plotBands").ShouldBeTrue();

@@ -4,9 +4,10 @@ namespace Kendo.Mvc.UI.Tests.Chart
     using Kendo.Mvc.UI.Fluent;
     using Xunit;
 
-    public abstract class ChartAxisBuilderBaseTests<TAxis, TAxisBuilder>
-        where TAxis : IChartAxis
-        where TAxisBuilder : ChartAxisBuilderBase<TAxis, TAxisBuilder>
+    public abstract class ChartAxisBuilderBaseTests<TAxis, TValue, TAxisBuilder>
+        where TAxis : IChartAxis<TValue>
+        where TAxisBuilder : ChartAxisBuilderBase<TAxis, TValue, TAxisBuilder>
+        where TValue : struct
     {
         protected TAxis axis;
         protected TAxisBuilder builder;
@@ -124,16 +125,6 @@ namespace Kendo.Mvc.UI.Tests.Chart
         public void Labels_should_return_builder()
         {
             builder.Labels(true).ShouldBeSameAs(builder);
-        }
-
-        [Fact]
-        public void PlotBands_should_set_PlotBands()
-        {
-            builder.PlotBands(pb => pb.Add().Color("Color").From(1.1).To(2.0).Opacity(0.5));
-            axis.PlotBands[0].Color.ShouldEqual("Color");
-            axis.PlotBands[0].From.ShouldEqual(1.1);
-            axis.PlotBands[0].To.ShouldEqual(2.0);
-            axis.PlotBands[0].Opacity.ShouldEqual(0.5);
         }
 
         [Fact]

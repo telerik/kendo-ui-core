@@ -7,7 +7,7 @@ namespace Kendo.Mvc.UI
     /// Represents a date axis in the <see cref="Chart{T}"/> component
     /// </summary>
     /// <typeparam name="T">The type of the data item</typeparam>
-    public class ChartDateAxis<T> : ChartAxisBase<T>, IChartDateAxis where T : class
+    public class ChartDateAxis<T> : ChartAxisBase<T, DateTime>, IChartDateAxis where T : class
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartNumericAxis{T}" /> class.

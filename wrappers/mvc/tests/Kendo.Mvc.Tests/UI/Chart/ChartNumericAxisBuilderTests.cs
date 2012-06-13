@@ -5,7 +5,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
     using Xunit;
 
     public class ChartNumericAxisBuilderTests
-        : ChartAxisBuilderBaseTests<IChartNumericAxis, ChartNumericAxisBuilder>
+        : ChartAxisBuilderBaseTests<IChartNumericAxis, double, ChartNumericAxisBuilder>
     {
         public ChartNumericAxisBuilderTests()
         {
@@ -90,6 +90,16 @@ namespace Kendo.Mvc.UI.Tests.Chart
         public void AxisCrossingValue_overload_with_enumerable_should_return_builder()
         {
             builder.AxisCrossingValue(new double[] { 42, 43 }).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void PlotBands_should_set_PlotBands()
+        {
+            builder.PlotBands(pb => pb.Add().Color("Color").From(1.1).To(2.0).Opacity(0.5));
+            axis.PlotBands[0].Color.ShouldEqual("Color");
+            axis.PlotBands[0].From.ShouldEqual(1.1);
+            axis.PlotBands[0].To.ShouldEqual(2.0);
+            axis.PlotBands[0].Opacity.ShouldEqual(0.5);
         }
     }
 }

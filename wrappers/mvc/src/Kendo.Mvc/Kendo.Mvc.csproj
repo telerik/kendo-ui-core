@@ -170,10 +170,11 @@
     <Compile Include="UI\Chart\Axes\ChartAxisTicks.cs" />
     <Compile Include="UI\Chart\Axes\ChartAxisLabelDateFormats.cs" />
     <Compile Include="UI\Chart\Axes\ChartDateAxis.cs" />
+    <Compile Include="UI\Chart\Axes\IChartAxis.cs" />
     <Compile Include="UI\Chart\Axes\IChartDateAxis.cs" />
     <Compile Include="UI\Chart\Axes\IChartAxisDefaults.cs" />
     <Compile Include="UI\Chart\Axes\IChartNumericAxis.cs" />
-    <Compile Include="UI\Chart\Axes\IChartAxis.cs" />
+    <Compile Include="UI\Chart\Axes\IChartAxisBase.cs" />
     <Compile Include="UI\Chart\Axes\IChartValueAxis.cs" />
     <Compile Include="UI\Chart\Axes\IChartCategoryAxis.cs" />
     <Compile Include="UI\Chart\Chart.cs" />

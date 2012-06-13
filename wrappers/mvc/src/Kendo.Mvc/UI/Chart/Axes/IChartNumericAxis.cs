@@ -4,7 +4,7 @@ namespace Kendo.Mvc.UI
     /// <summary>
     /// Represents a numeric axis
     /// </summary>
-    public interface IChartNumericAxis : IChartValueAxis
+    public interface IChartNumericAxis : IChartValueAxis, IChartAxis<double>
     {
         /// <summary>
         /// The values at which perpendicular axes cross this axis.

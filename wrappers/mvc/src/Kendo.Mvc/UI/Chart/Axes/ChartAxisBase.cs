@@ -5,7 +5,9 @@ namespace Kendo.Mvc.UI
     /// <summary>
     /// Represents a chart axis base.
     /// </summary>
-    public abstract class ChartAxisBase<T> : IChartAxis where T : class
+    public abstract class ChartAxisBase<T, TValue> : IChartAxis<TValue>
+        where T : class
+        where TValue : struct
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartAxisBase{T}" /> class.
@@ -18,7 +20,7 @@ namespace Kendo.Mvc.UI
             MinorGridLines = new ChartLine();
             Line = new ChartLine();
             Labels = new ChartAxisLabels();
-            PlotBands = new List<ChartPlotBand>();
+            PlotBands = new List<ChartPlotBand<TValue>>();
             Title = new ChartAxisTitle();
             MajorTicks = new ChartAxisTicks();
             MinorTicks = new ChartAxisTicks();
@@ -91,7 +93,7 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// The axis plot bands.
         /// </summary>
-        public IList<ChartPlotBand> PlotBands
+        public IList<ChartPlotBand<TValue>> PlotBands
         {
             get;
             set;

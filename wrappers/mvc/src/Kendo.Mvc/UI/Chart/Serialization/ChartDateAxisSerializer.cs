@@ -1,11 +1,12 @@
 namespace Kendo.Mvc.UI
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.Extensions;
 
-    internal class ChartDateAxisSerializer : ChartAxisSerializerBase
+    internal class ChartDateAxisSerializer : ChartAxisSerializerBase<DateTime>
     {
         private readonly IChartDateAxis axis;
 

@@ -13,7 +13,7 @@ namespace Kendo.Mvc.UI.Fluent
     /// Configures the category axis for the <see cref="Chart{TModel}" />.
     /// </summary>
     /// <typeparam name="TModel">The type of the data item to which the chart is bound to</typeparam>
-    public class ChartCategoryAxisBuilder<TModel> : ChartAxisBuilderBase<IChartCategoryAxis, ChartCategoryAxisBuilder<TModel>>
+    public class ChartCategoryAxisBuilder<TModel> : ChartAxisBuilderBase<IChartCategoryAxis, int, ChartCategoryAxisBuilder<TModel>>
         where TModel : class
     {
         /// <summary>

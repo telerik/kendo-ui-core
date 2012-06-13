@@ -7,7 +7,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
     using Xunit;
 
     public class ChartDateCategoryAxisBuilderTests
-        : ChartAxisBuilderBaseTests<IChartCategoryAxis, ChartDateCategoryAxisBuilder<SalesData>>
+        : ChartAxisBuilderBaseTests<IChartCategoryAxis, int, ChartDateCategoryAxisBuilder<SalesData>>
     {
         public ChartDateCategoryAxisBuilderTests()
         {
@@ -125,6 +125,16 @@ namespace Kendo.Mvc.UI.Tests.Chart
         public void AxisCrossingValue_overload_with_enumerable_should_return_builder()
         {
             builder.AxisCrossingValue(new double[] { 42, 43 }).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void PlotBands_should_set_PlotBands()
+        {
+            builder.PlotBands(pb => pb.Add().Color("Color").From(1).To(2).Opacity(0.5));
+            axis.PlotBands[0].Color.ShouldEqual("Color");
+            axis.PlotBands[0].From.ShouldEqual(1);
+            axis.PlotBands[0].To.ShouldEqual(2);
+            axis.PlotBands[0].Opacity.ShouldEqual(0.5);
         }
 
         private void AssertCategories<T>(IEnumerable<T> categories)

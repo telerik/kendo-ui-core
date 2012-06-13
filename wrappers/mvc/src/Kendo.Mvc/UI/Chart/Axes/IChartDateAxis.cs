@@ -6,7 +6,7 @@ namespace Kendo.Mvc.UI
     /// <summary>
     /// Represents a numeric axis
     /// </summary>
-    public interface IChartDateAxis : IChartValueAxis
+    public interface IChartDateAxis : IChartValueAxis, IChartAxis<DateTime>
     {
         /// <summary>
         /// The base time interval for the axis labels.

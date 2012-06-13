@@ -3,7 +3,7 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent interface for configuring of all axes.
     /// </summary>
-    public class ChartAxisDefaultsBuilder<TModel> : ChartAxisBuilderBase<IChartAxisDefaults, ChartAxisDefaultsBuilder<TModel>>
+    public class ChartAxisDefaultsBuilder<TModel> : ChartAxisBuilderBase<IChartAxisDefaults, double, ChartAxisDefaultsBuilder<TModel>>
         where TModel : class
     {
         /// <summary>

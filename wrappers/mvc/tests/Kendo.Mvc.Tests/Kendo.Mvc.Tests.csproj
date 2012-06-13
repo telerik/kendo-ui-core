@@ -112,6 +112,7 @@
     <Compile Include="UI\Chart\ChartAxisBuilderBaseTests.cs" />
     <Compile Include="UI\Chart\ChartSeriesBuilderBaseTests.cs" />
     <Compile Include="UI\Chart\ChartDateCategoryAxisBuilderTests.cs" />
+    <Compile Include="UI\Chart\ChartPlotBandsFactoryTests.cs" />
     <Compile Include="UI\Chart\PlotAreaBuilderTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartSerializationTests.cs" />
     <Compile Include="UI\Chart\ChartHtmlBuilderTests.cs" />

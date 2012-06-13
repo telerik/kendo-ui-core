@@ -1,16 +1,16 @@
 namespace Kendo.Mvc.UI.Fluent
 {
     using System;
-    using System.Collections.Generic;
 
     /// <summary>
     /// Defines the fluent interface for configuring axes.
     /// </summary>
     /// <typeparam name="TAxis"></typeparam>
     /// <typeparam name="TAxisBuilder">The type of the series builder.</typeparam>
-    public abstract class ChartAxisBuilderBase<TAxis, TAxisBuilder> : IHideObjectMembers
-        where TAxisBuilder : ChartAxisBuilderBase<TAxis, TAxisBuilder>
-        where TAxis : IChartAxis
+    public abstract class ChartAxisBuilderBase<TAxis, TValue, TAxisBuilder> : IHideObjectMembers
+        where TAxisBuilder : ChartAxisBuilderBase<TAxis, TValue, TAxisBuilder>
+        where TValue : struct
+        where TAxis : IChartAxis<TValue>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartAxisBuilderBase{TAxis, TAxisBuilder}"/> class.
@@ -287,10 +287,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public TAxisBuilder PlotBands(Action<ChartAxisPlotBandsFactory<TAxis>> configurator)
+        public TAxisBuilder PlotBands(Action<ChartAxisPlotBandsFactory<TAxis, TValue>> configurator)
         {
 
-            var factory = new ChartAxisPlotBandsFactory<TAxis>(Axis);
+            var factory = new ChartAxisPlotBandsFactory<TAxis, TValue>(Axis);
 
             configurator(factory);
 
