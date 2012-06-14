@@ -568,6 +568,7 @@
                     row = data[dataIx];
 
                     if (currentSeries.field) {
+                        // TODO: Replace with ScatterChart pointValue and make color bindable
                         value = getField(currentSeries.field, row);
                     } else {
                         value = undefined;
@@ -2898,6 +2899,7 @@
         },
 
         seriesMax: function(series) {
+            // TODO: Call once per series by overriding render
             var chart = this,
                 length = series.data.length,
                 max = 0,
@@ -3249,6 +3251,7 @@
             return defined(point.value) ? point.value : point;
         },
 
+        // TODO: Replace with ScatterChart pointValue
         pointData: function(series, index) {
             var chart = this,
                 data = series.data[index],
