@@ -410,6 +410,11 @@
                 {
                     "text": "API",
                     "url": "grid/api.html"
+                },
+                {
+                    "text": "Globalization",
+                    "url": "grid/globalization.html",
+                    "packages": ["mvc"]
                 }
             ]
         },
