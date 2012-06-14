@@ -4,6 +4,7 @@
     var kendo = window.kendo,
         Class = kendo.Class,
         Widget = kendo.ui.Widget,
+        os = kendo.support.mobileOS,
         extend = $.extend,
         deepExtend = kendo.deepExtend,
         keys = kendo.keys;
@@ -355,7 +356,7 @@
         directoryNotFound: "A directory with this name was not found."
     };
 
-    var supportedBrowser = !kendo.support.mobileOS || (kendo.support.mobileOS.ios && kendo.support.mobileOS.majorVersion >= 5);
+    var supportedBrowser = !os || (os.ios && os.flatVersion >= 500) || (!os.ios && typeof(document.documentElement.contentEditable) != 'undefined');
 
     var Editor = Widget.extend({
         init: function (element, options) {
