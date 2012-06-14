@@ -2774,7 +2774,7 @@ function pad(number) {
      * Binds to orientation change or resize (depending on the platform)
      * Abstracts problem with android triggering event before the dimensions have changed.
      * @function
-     * @param {Function} The callback to be executed
+     * @param {Function} callback The callback to be executed
      */
     kendo.onResize = function(callback) {
         var handler = callback;
