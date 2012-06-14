@@ -34,12 +34,29 @@
                that.list = $('<ul class="k-pager k-reset k-numeric" />').appendTo(that.element);
             }
 
+            if (options.input) {
+                that.input = that.element.children(".k-pager-input");
+
+                if (!that.input.length) {
+                   that.input = $('<span class="k-pager-input">'+
+                       options.messages.page +
+                       '<input class="k-textbox">' +
+                       kendo.format(options.messages.of, that.totalPages()) +
+                       '</span>').appendTo(that.element);
+                }
+
+                that._keydownHandler = proxy(that._keydown, that);
+                that.input.on("keydown", "input", that._keydownHandler);
+            }
+
             if (options.info) {
                 that.info = that.element.children(".k-pager-info");
 
                 if (!that.info.length) {
                    that.info = $('<span class="k-pager-info" />').appendTo(that.element);
                 }
+
+                that.info.addClass("k-label");
             }
 
             that._clickHandler = proxy(that._click, that);
@@ -55,6 +72,11 @@
             var that = this;
 
             that.element.undelegate("a", "click", that._clickHandler);
+
+            if (that.input) {
+                that.input.off("keydown", "input", that._keydownHandler);
+            }
+
             that.dataSource.unbind("change", that._refreshHandler);
         },
 
@@ -71,7 +93,9 @@
             info: true,
             messages: {
                 display: "Displaying items {0} - {1} of {2}",
-                empty: "No items to display"
+                empty: "No items to display",
+                page: "Page",
+                of: "of {0}"
             }
         },
 
@@ -110,7 +134,7 @@
             }
 
             if (html === "") {
-                html = that.selectTemplate({ text: 1 });
+                html = that.selectTemplate({ text: 0 });
             }
 
             that.list.empty().append(html);
@@ -127,15 +151,39 @@
 
                 that.info.html(html);
             }
+
+            if (that.options.input) {
+                that.input
+                    .html(that.options.messages.page +
+                        '<input class="k-textbox">' +
+                        kendo.format(that.options.messages.of, totalPages))
+                    .find("input")
+                    .val(page)
+                    .attr("disabled", total < 1)
+                    .toggleClass("k-state-disabled", total < 1);
+            }
+        },
+
+        _keydown: function(e) {
+            if (e.keyCode === kendo.keys.ENTER) {
+                var input = this.input.find("input"),
+                    page = parseInt(input.val(), 10);
+
+                if (isNaN(page) || page < 1 || page > this.totalPages()) {
+                    page = this.page();
+                }
+
+                input.val(page);
+
+                this.page(page);
+            }
         },
 
         _click: function(e) {
             var page = $(e.currentTarget).attr(kendo.attr("page"));
             e.preventDefault();
 
-            this.dataSource.page(page);
-
-            this.trigger("change", { index: page });
+            this.page(page);
         },
 
         totalPages: function() {
@@ -146,8 +194,18 @@
             return this.dataSource.pageSize() || this.dataSource.total();
         },
 
-        page: function() {
-            return this.dataSource.page() || 1;
+        page: function(page) {
+            if (page !== undefined) {
+                this.dataSource.page(page);
+
+                this.trigger("change", { index: page });
+            } else {
+                if (this.dataSource.total() > 0) {
+                    return this.dataSource.page();
+                } else {
+                    return 0;
+                }
+            }
         }
     });
 

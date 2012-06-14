@@ -67,7 +67,7 @@
                 var links = ul.find("a").add(ul.find(".k-state-active"));
 
                 equal(links.length, 1);
-                equal(links[0].innerHTML, "1");
+                equal(links[0].innerHTML, "0");
             });
 
             test("buttons are rendered if read before init", function() {
@@ -259,11 +259,79 @@
                 equal(pager.find(".k-pager-info").length, 0);
             });
 
-            test("pager displays empty messae when total is zero", function(){
+            test("pager displays empty message when total is zero", function(){
                 var pager = setup({data: []});
                     dataSource.read();
 
                 equal(pager.find(".k-pager-info").text(), "No items to display");
+            });
+
+            test("pager displays input", function() {
+                var pager = setup({data: []}, { input: true });
+                    dataSource.read();
+
+                equal(pager.find(".k-pager-input").length, 1);
+            });
+
+            test("input pager changes the page", function() {
+                var pager = setup({}, { input: true });
+                    dataSource.read();
+
+                pager.find(".k-pager-input").find("input").val(2).trigger({ type: "keydown", keyCode: 13 });
+
+                equal(dataSource.page(), 2);
+            });
+
+            test("input pager stays on current page if the input value is less than one is specified", function() {
+                var pager = setup({}, { input: true });
+                    dataSource.read();
+
+                pager.find(".k-pager-input").find("input").val(0).trigger({ type: "keydown", keyCode: 13 });
+
+                equal(dataSource.page(), 1);
+                equal(pager.find(".k-pager-input").find("input").val(), "1");
+            });
+
+            test("input pager stays on current page if the input value is more than the total number of pages", function() {
+                var pager = setup({}, { input: true });
+                    dataSource.read();
+
+                pager.find(".k-pager-input").find("input").val(10).trigger({ type: "keydown", keyCode: 13 });
+
+                equal(dataSource.page(), 1);
+                equal(pager.find(".k-pager-input").find("input").val(), "1");
+            });
+
+            test("input pager stays on current page if the input value is not a number", function() {
+                var pager = setup({}, { input: true });
+                    dataSource.read();
+
+                pager.find(".k-pager-input").find("input").val("foo").trigger({ type: "keydown", keyCode: 13 });
+
+                equal(dataSource.page(), 1);
+                equal(pager.find(".k-pager-input").find("input").val(), "1");
+            });
+
+            test("input pager is updated when the page is changed", function() {
+                var pager = setup({}, { input: true });
+                    dataSource.read();
+
+                dataSource.page(2);
+                equal(pager.find(".k-pager-input").find("input").val(), "2");
+            });
+
+            test("input pager is disabled if the data source is empty", function() {
+                var pager = setup({data:[]}, { input: true });
+                    dataSource.read();
+
+                equal(pager.find(".k-pager-input").find("input").attr("disabled"), "disabled");
+            });
+
+            test("input pager shows the available pages", function() {
+                var pager = setup({}, { input: true });
+                    dataSource.read();
+
+                equal(pager.find(".k-pager-input").text(), "Pageof 5");
             });
         </script>
     </body>
