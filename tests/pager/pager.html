@@ -36,7 +36,7 @@
                 options = $.extend({
                     dataSource: dataSource
                 }, options);
-                var element = $("<ul />").kendoPager(options);
+                var element = $("<div />").kendoPager(options);
                 pager = element.data("kendoPager");
                 return element;
             }
@@ -216,6 +216,7 @@
 
                 equal(ul.data("kendoPager").pageSize(), dataSource.pageSize());
             });
+
             test("page returns the current page", function(){
                 var ul = setup();
                 dataSource.read();
@@ -242,6 +243,27 @@
 
                 data.read();
                 equal(ul.find(".k-state-active").length, 1);
+            });
+
+            test("pager displays info", function(){
+                var pager = setup();
+                dataSource.read();
+
+                equal(pager.find(".k-pager-info").text(), "Displaying items 1 - 1 of 5");
+            });
+
+            test("pager does not displays info if info is set to false", function(){
+                var pager = setup({}, { info: false });
+                    dataSource.read();
+
+                equal(pager.find(".k-pager-info").length, 0);
+            });
+
+            test("pager displays empty messae when total is zero", function(){
+                var pager = setup({data: []});
+                    dataSource.read();
+
+                equal(pager.find(".k-pager-info").text(), "No items to display");
             });
         </script>
     </body>
