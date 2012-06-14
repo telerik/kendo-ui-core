@@ -1807,10 +1807,12 @@
         },
 
         _handleCustomErrors: function(response) {
-            var errors = this.reader.errors(response);
-            if (errors) {
-                this.trigger(ERROR, { xhr: null, status: "customerror", errorThrown: "custom error", errors: errors });
-                return true;
+            if (this.reader.errors) {
+                var errors = this.reader.errors(response);
+                if (errors) {
+                    this.trigger(ERROR, { xhr: null, status: "customerror", errorThrown: "custom error", errors: errors });
+                    return true;
+                }
             }
             return false;
         },

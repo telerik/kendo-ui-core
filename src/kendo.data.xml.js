@@ -79,6 +79,9 @@
         total: function(result) {
             return this.data(result).length;
         },
+        errors: function(data) {
+            return data ? data.errors : null;
+        },
         parseDOM: function(element) {
             var result = {},
                 parsedNode,
