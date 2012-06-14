@@ -2,7 +2,7 @@
 
     var CssRgbaRegExp = /rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,?\s*([\.\d]+?)?\s*\)/i,
         CssHexRegExp = /^#(([0-9a-f]{3})|([0-9a-f]{6}))$/i,
-        zeroTrimRegExp = /^0+|0+$/g;
+        zeroTrimRegExp = /^0+|\.?0+$/g;
 
     function trimZeroes(value) {
         return value.toPrecision(2).replace(zeroTrimRegExp, "");
