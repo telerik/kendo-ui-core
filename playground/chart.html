@@ -36,7 +36,7 @@
                     fertilityRate: 4.77,
                     population: 31090763
                 }, {
-                    id: "Oops",
+                    id: "Negative",
                     lifeExpectancy: 100,
                     fertilityRate: 5,
                     population: -100000000
@@ -54,6 +54,9 @@
                         labels: {
                             visible: true,
                             template: "#= dataItem.id #"
+                        },
+                        markers: {
+                            maxSize: 120
                         },
                         xField: "lifeExpectancy",
                         yField: "fertilityRate",

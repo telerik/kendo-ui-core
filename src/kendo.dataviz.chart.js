@@ -2224,6 +2224,38 @@
     });
     deepExtend(LinePoint.fn, PointEventsMixin);
 
+    var Bubble = LinePoint.extend({
+        options: {
+            markers: {
+                border: {
+                    width: 1,
+                    color: WHITE
+                },
+                opacity: 0.5,
+                maxSize: 50
+            },
+            labels: {
+                position: CENTER,
+                background: "transparent"
+            }
+        },
+
+        getOutlineElement: function(view, options) {
+            var element = this,
+                marker = element.marker;
+
+            // TODO: Gradiented stroke (shadow filter?)
+            return view.createCircle(
+                [element.box.center().x, element.box.center().y],
+                element.options.markers.size / 2 - 0.5, {
+                    data: { modelId: element.options.modelId },
+                    stroke: new Color(element.options.markers.background).brightness(0.75).toHex(),
+                    strokeWidth: 2,
+                    strokeOpacity: 1
+                });
+        }
+    });
+
     var LineSegment = ChartElement.extend({
         init: function(linePoints, series, seriesIx) {
             var segment = this;
@@ -2594,14 +2626,18 @@
         addValue: function(value, fields) {
             var chart = this,
                 point,
+                x = value.x,
+                y = value.y,
                 seriesIx = fields.seriesIx,
                 seriesPoints = chart.seriesPoints[seriesIx];
 
             chart.updateRange(value, fields.series);
 
-            point = chart.createPoint(value, fields.series, seriesIx);
-            if (point) {
-                extend(point, fields);
+            if (defined(x) && x !== null && defined(y) && y !== null) {
+                point = chart.createPoint(value, fields.series, seriesIx);
+                if (point) {
+                    extend(point, fields);
+                }
             }
 
             chart.points.push(point);
@@ -2636,13 +2672,7 @@
 
         createPoint: function(value, series, seriesIx) {
             var chart = this,
-                point,
-                x = value.x,
-                y = value.y;
-
-            if (!defined(x) || x === null || !defined(y) || y === null) {
-                return null;
-            }
+                point;
 
             point = new LinePoint(value,
                 deepExtend({
@@ -2781,15 +2811,6 @@
     deepExtend(ScatterLineChart.fn, LineChartMixin);
 
     var BubbleChart = ScatterChart.extend({
-        options: {
-            markers: {
-                maxSize: 50
-            },
-            labels: {
-                position: CENTER
-            }
-        },
-
         addValue: function(value, fields) {
             var chart = this,
                 colors = chart.plotArea.options.seriesColors || [];
@@ -2802,31 +2823,45 @@
 
         createPoint: function(value, series, seriesIx) {
             var chart = this,
-                options = chart.options,
-                point = ScatterChart.fn.createPoint.call(chart, value, series, seriesIx),
+                point,
                 maxValue = chart.seriesMax(series),
-                maxR = options.markers.maxSize / 2,
+                maxR = series.markers.maxSize / 2,
                 maxArea = math.PI * maxR * maxR,
                 area = math.abs(value.z) * (maxArea / maxValue),
                 r = math.sqrt(area / math.PI);
 
-            // TODO: Label positioning
+            point = new Bubble(value,
+                deepExtend({
+                    markers: {
+                        background: series.color,
+                    },
+                    tooltip: {
+                        format: chart.options.tooltip.format
+                    },
+                    labels: {
+                        format: chart.options.labels.format
+                    }
+                }, series, {
+                    markers: {
+                        background: value.z < 0 ? WHITE : undefined,
+                        size: r * 2,
+                        type: CIRCLE,
+                        zIndex: maxR - r
+                    },
+                    labels: { position: CENTER, zIndex: maxR - r + 1, background: "" }
+                })
+            );
+
+            chart.append(point);
+
+            return point;
+
             // TODO: Negative values
             // TODO: Animations
             // TODO: Hover
             // TODO: Color for each point
             // TODO: Coloring by value
-
-            deepExtend(point.options, {
-                markers: {
-                    size: r * 2,
-                    type: CIRCLE,
-                    zIndex: maxR - r
-                },
-                labels: { position: CENTER, zIndex: maxR - r + 1, background: "" }
-            });
-
-            return point;
+            // TODO: Clip to axis line box
         },
 
         seriesMax: function(series) {
