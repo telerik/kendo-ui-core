@@ -82,6 +82,9 @@ tests.push(
     {
         page: "mobile/view/engine.html",
         title: "mobile view engine"
+    },
+    {
+        page: "mobile/themebuilder/colorengine.html",
+        title: "theme builder color engine"
     }
-
 );

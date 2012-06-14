@@ -1,0 +1,171 @@
+<!DOCTYPE dom>
+<html>
+    <head>
+        <title>kendo.mobile.themebuilder.ColorEngine Tests</title>
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../qunit/qunit/qunit.js"></script>
+        <script src="../../qunit-runner.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../playground/themebuilder/scripts/colorengine.js"></script>
+        <link rel="stylesheet" href="../../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.mobile.themebuilder.ColorEngine Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var colorEngine = new Color("#000"),
+                root = $("#qunit-fixture");
+
+            function success() {
+                ok(true);
+            }
+
+            ////////////////////////////////////////////////////////////////////
+            module("color engine", {});
+
+            test("css2rgba returns alpha 0 for transparent color", 1, function() {
+                ok(colorEngine.css2rgba("transparent").alpha === 0);
+            });
+
+            test("css2rgba returns alpha 0 for transparent RGBA color", 1, function() {
+                ok(colorEngine.css2rgba("rgba(0,0,0,0)").alpha === 0);
+            });
+
+            test("css2rgba returns alpha 1 for RGB and HEX colors", 2, function() {
+                ok(colorEngine.css2rgba("rgb(0,0,0)").alpha === 1);
+                ok(colorEngine.css2rgba("#365").alpha === 1);
+            });
+
+            test("css2rgba splits shorthand HEX to RGB colors", 3, function() {
+                var color = colorEngine.css2rgba("#365");
+                ok(color.red === 0x33);
+                ok(color.green === 0x66);
+                ok(color.blue === 0x55);
+            });
+
+            test("css2rgba splits HEX to RGB colors", 4, function() {
+                var color = colorEngine.css2rgba("#316253");
+                ok(color.red === 0x31);
+                ok(color.green === 0x62);
+                ok(color.blue === 0x53);
+                ok(color.alpha === 1);
+            });
+
+            test("css2rgba keeps RGB colors", 3, function() {
+                var color = colorEngine.css2rgba("rgb(33,66,55)");
+                ok(color.red === 33);
+                ok(color.green === 66);
+                ok(color.blue === 55);
+            });
+
+            test("css2rgba keeps RGBA colors", 4, function() {
+                var color = colorEngine.css2rgba("rgba(33,66,55,.5)");
+                ok(color.red === 33);
+                ok(color.green === 66);
+                ok(color.blue === 55);
+                ok(color.alpha === .5);
+            });
+
+            test("Color object keeps internal value in RGBA", 4, function() {
+                var color = new Color("#345"),
+                    color2 = colorEngine.css2rgba("rgba(33,44,55,1)");
+
+                ok(color.value.red == parseInt(color2.red, 16));
+                ok(color.value.green == parseInt(color2.green, 16));
+                ok(color.value.blue == parseInt(color2.blue, 16));
+                ok(color.value.alpha == color2.alpha);
+            });
+
+            test("toHex method returns shorthand values when possible", 2, function () {
+                var color = new Color("#000"),
+                    color2 = new Color("#34f");
+
+                ok(color.toHex() == "#000");
+                ok(color2.toHex() == "#34f");
+            });
+
+            test("toHex method pads with zeroes when necessary", 1, function () {
+                var color = new Color("rgb(3,4,5)");
+
+                ok(color.toHex() == "#030405");
+            });
+
+            test("toRgb method returns RGB value", 1, function () {
+                var color = new Color("#030405");
+
+                ok(color.toRgb() == "rgb(3,4,5)");
+            });
+
+            test("toRgba method returns RGBA value", 2, function () {
+                var color = new Color("#030405"),
+                    color2 = new Color("rgba(10,10,10,.3)");
+
+                ok(color.toRgba() == "rgba(3,4,5,1)");
+                ok(color2.toRgba() == "rgba(10,10,10,.3)");
+            });
+
+            test("isHex returns true for HEX values only", 3, function () {
+                ok(colorEngine.isHex("#345"));
+                ok(!colorEngine.isHex("345"));
+                ok(!colorEngine.isHex("rgb(3,4,5)"));
+            });
+
+            test("isRgba returns true for RGB and RGBA values only", 4, function () {
+                ok(colorEngine.isRgba("rgb(0,0,0)"));
+                ok(colorEngine.isRgba("rgba(0,0,0,1)"));
+                ok(!colorEngine.isRgba("#345"));
+                ok(!colorEngine.isRgba("rg(3,4,5)"));
+            });
+
+            /* difference */
+
+            test("difference() between HEX colors", function() {
+                var diff = colorEngine.difference("#000000", "rgba(136,136,136,.5)");
+
+                ok(diff.red == -0x88);
+                ok(diff.blue == -0x88);
+                ok(diff.green == -0x88);
+                ok(diff.alpha == .5);
+            });
+
+            test("difference() between RGB colors", function() {
+                var diff = colorEngine.difference("rgb(0, 0, 0)", "rgb(136, 136, 136)");
+
+                ok(diff.red == -0x88);
+                ok(diff.blue == -0x88);
+                ok(diff.green == -0x88);
+                ok(diff.alpha == 0);
+            });
+
+            test("difference() between RGBA colors", function() {
+                var diff = colorEngine.difference("rgba(0, 0, 0, .5)", "rgb(136, 136, 136)");
+
+                ok(diff.red == -0x88);
+                ok(diff.blue == -0x88);
+                ok(diff.green == -0x88);
+                ok(diff.alpha == -.5);
+            });
+
+            /* complementary*/
+
+            test("complementary() of HEX Black is #fff", function() {
+                var hex = colorEngine.complementary("#000000");
+
+                equals(hex, "#fff");
+            });
+
+            test("complementary() of HEX White is #000000", function() {
+                var hex = colorEngine.complementary("#fff");
+
+                equals(hex, "#000");
+            });
+
+        </script>
+    </body>
+</html>
