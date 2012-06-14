@@ -310,4 +310,7 @@ The request for '{0}' has found the following matching controllers:{2}</value>
   <data name="NameCannotContainSpaces" xml:space="preserve">
     <value>Name cannot contain spaces.</value>
   </data>
+  <data name="DataTablePopUpTemplate" xml:space="preserve">
+    <value>You must specify TemplateName when PopUp edit mode is enabled with DataTable binding</value>
+  </data>
 </root>

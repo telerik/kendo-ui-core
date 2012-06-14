@@ -1852,7 +1852,7 @@
                 that.thead
                     .find("th:not(.k-hierarchy-cell,.k-group-cell)")
                     .each(function(index) {
-                        if (columns[index].filterable !== false) {
+                        if (columns[index].filterable !== false && !columns[index].command) {
                             $(this).kendoFilterMenu(extend(true, {}, filterable, columns[index].filterable, { dataSource: that.dataSource }));
                         }
                     });

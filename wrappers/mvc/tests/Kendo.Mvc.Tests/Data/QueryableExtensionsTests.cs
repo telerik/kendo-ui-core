@@ -308,7 +308,7 @@ namespace Kendo.Mvc.Tests.Data
             }});
 
             Assert.NotNull(data.ElementAt(0));
-        }
+        }        
 
         private IQueryable CreateTestData()
         {

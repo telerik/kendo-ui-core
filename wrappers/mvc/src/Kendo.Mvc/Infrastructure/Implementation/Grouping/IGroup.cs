@@ -25,6 +25,8 @@ namespace Kendo.Mvc.Infrastructure
         /// </value>
         bool HasSubgroups { get; }
 
+        string Member { get; set; }
+
         /// <summary>
         /// Gets the <see cref="Items"/> count.
         /// </summary>

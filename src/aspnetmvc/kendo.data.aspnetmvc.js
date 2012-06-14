@@ -212,12 +212,18 @@
             kendo.data.RemoteTransport.fn.init.call(this, $.extend(true, {}, options, this.options));
         },
         read: function(options) {
-            var data = this.options.data;
+            var data = this.options.data,
+                url = this.options.read.url;
             if (data) {
-                if (this.options.read.url) {
+                if (url) {
                     this.options.data = null;
                 }
-                options.success(data);
+
+                if (!data.length && url) {
+                    kendo.data.RemoteTransport.fn.read.call(this, options);
+                } else {
+                    options.success(data);
+                }
             } else {
                 kendo.data.RemoteTransport.fn.read.call(this, options);
             }

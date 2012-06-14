@@ -117,7 +117,7 @@ namespace Kendo.Mvc.UI
             {
                 json["data"] = new Dictionary<string, object>()
                 {
-                    { Schema.Data,  RawData },
+                    { Schema.Data,  SerializeDataSource(RawData) },
                     { Schema.Total, Total }
                 };
             }
@@ -125,11 +125,22 @@ namespace Kendo.Mvc.UI
             {
                 json["data"] = new Dictionary<string, object>()
                 {
-                    { Schema.Data,  Data },
+                    { Schema.Data,  SerializeDataSource(Data) },
                     { Schema.Total, Total }
                 };
             }
         }
+
+        private object SerializeDataSource(IEnumerable data)
+        {
+            var dataTableEnumerable = data as GridDataTableWrapper;
+
+            if (dataTableEnumerable != null && dataTableEnumerable.Table != null)
+            {
+                return data.SerializeToDictionary(dataTableEnumerable.Table);
+            }
+            return data;
+        }       
 
         public bool IsClientOperationMode
         {

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿﻿using System.Collections.Generic;
 using System.Data.Linq;
 using System.Linq;
 using System.Web.Mvc;
@@ -15,7 +15,7 @@ namespace Kendo.Mvc.Examples.Controllers
         {
             return View(GetProducts());
         }
-                               
+
         public ActionResult Remote_Data()
         {
             return View("AjaxBinding");

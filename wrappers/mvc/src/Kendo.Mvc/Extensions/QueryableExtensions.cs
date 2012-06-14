@@ -12,31 +12,53 @@ namespace Kendo.Mvc.Extensions
     using Infrastructure.Implementation.Expressions;
     using Kendo.Mvc.UI;
     using System.Web.Mvc;
+    using System.Data;
 
     public static class QueryableExtensions
     {
-        internal static GridModel ToGridModel(this GridDataTableWrapper enumerable, int page, int pageSize, IList<SortDescriptor> sortDescriptors, IEnumerable<IFilterDescriptor> filterDescriptors,
-            IEnumerable<GroupDescriptor> groupDescriptors)
+        private static DataSourceResult ToDataSourceResult(this GridDataTableWrapper enumerable, DataSourceRequest request)
         {
-            if (filterDescriptors.Any())
+            var filters = new List<IFilterDescriptor>();
+
+            if (request.Filters != null)
+            {
+                filters.AddRange(request.Filters);
+            }
+
+            if (filters.Any())
             {
                 var dataTable = enumerable.Table;
-                filterDescriptors.SelectMemberDescriptors()
+                filters.SelectMemberDescriptors()
                     .Each(f => f.MemberType = GetFieldByTypeFromDataColumn(dataTable, f.Member));
             }
 
-            if (groupDescriptors.Any())
+            var group = new List<GroupDescriptor>();
+
+            if (request.Groups != null)
             {
-                var dataTable = enumerable.Table;
-                groupDescriptors.Each(g => g.MemberType = GetFieldByTypeFromDataColumn(dataTable, g.Member));
+                group.AddRange(request.Groups);
             }
 
-            return enumerable.AsQueryable().ToGridModel(page, pageSize, sortDescriptors, filterDescriptors, groupDescriptors);
+            if (group.Any())
+            {
+                var dataTable = enumerable.Table;
+                group.Each(g => g.MemberType = GetFieldByTypeFromDataColumn(dataTable, g.Member));
+            }
+
+            var result = enumerable.AsEnumerable().ToDataSourceResult(request);
+            result.Data = result.Data.SerializeToDictionary(enumerable.Table);
+
+            return result;
         }
 
         private static Type GetFieldByTypeFromDataColumn(System.Data.DataTable dataTable, string memberName)
         {
             return dataTable.Columns.Contains(memberName) ? dataTable.Columns[memberName].DataType : null;
+        }
+
+        public static DataSourceResult ToDataSourceResult(this DataTable dataTable, DataSourceRequest request)
+        {
+            return dataTable.WrapAsEnumerable().ToDataSourceResult(request);
         }
 
         public static DataSourceResult ToDataSourceResult(this IEnumerable enumerable, DataSourceRequest request)
@@ -153,7 +175,7 @@ namespace Kendo.Mvc.Extensions
             if (group.Any())
             {
                 data = data.GroupBy(notPagedData, group);
-            }
+            }           
 
             result.Data = data;
 

@@ -1272,6 +1272,12 @@ namespace Kendo.Mvc.UI
                 {
                     throw new NotSupportedException(TextResource.DataTableInLineEditingWithCustomEditorTemplates);
                 }
+
+                if (typeof(T) == typeof(System.Data.DataRowView) && Editing.Mode == GridEditMode.PopUp
+                    && !Editing.TemplateName.HasValue())
+                {
+                    throw new NotSupportedException(TextResource.DataTablePopUpTemplate);
+                }
             }
         }
 

@@ -1,4 +1,5 @@
 (function ($, undefined) {
+    var nameSpecialCharRegExp = /(\[|\]|\$|\.|\:|\+)/g;
 
     function generateMessages() {
         var name,
@@ -161,6 +162,7 @@
         messageLocators: {
             mvcLocator: {
                 locate: function (element, fieldName) {
+                    fieldName = fieldName.replace(nameSpecialCharRegExp, "\\$1");
                     return element.find(".field-validation-valid[data-valmsg-for=" + fieldName + "], .field-validation-error[data-valmsg-for=" + fieldName + "]");
                 },
                 decorate: function (message, fieldName) {
@@ -169,6 +171,7 @@
             },
             mvcMetadataLocator: {
                 locate: function (element, fieldName) {
+                    fieldName = fieldName.replace(nameSpecialCharRegExp, "\\$1");
                     return element.find("#" + fieldName + "_validationMessage.field-validation-valid");
                 },
                 decorate: function (message, fieldName) {

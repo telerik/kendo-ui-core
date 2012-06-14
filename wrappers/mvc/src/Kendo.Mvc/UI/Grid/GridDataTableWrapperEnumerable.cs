@@ -61,6 +61,7 @@ namespace Kendo.Mvc.UI
                         {                         
                             {"Key", group.Key},
                             {"HasSubgroups", group.HasSubgroups},
+                            {"Member", group.Member},
                             {"Items", group.Items.SerializeToDictionary(ownerDataTable)}, 
                             {"Subgroups", group.Subgroups.SerializeToDictionary(ownerDataTable)}
                         };

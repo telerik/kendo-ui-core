@@ -236,6 +236,15 @@ namespace Kendo.Mvc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You must specify TemplateName when PopUp edit mode is enabled with DataTable binding.
+        /// </summary>
+        internal static string DataTablePopUpTemplate {
+            get {
+                return ResourceManager.GetString("DataTablePopUpTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The Delete data binding setting is required by the delete command. Please specify the Delete action or url in the DataBinding configuration..
         /// </summary>
         internal static string DeleteCommandRequiresDelete {
