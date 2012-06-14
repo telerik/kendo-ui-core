@@ -12,13 +12,19 @@ function vsdoc(directory, filter) {
             theClass = {
                 name: name,
                 plugin: plugin,
-                methods: []
+                methods: [],
+                configuration: []
             },
-            methods = tree.children[0].children.filter(function(child) { return /Methods/.test(child.title) })[0];
-
+            sections = tree.children[0].children,
+            methods = sections.filter(function(child) { return /Methods/.test(child.title) })[0],
+            configuration = sections.filter(function(child) { return /Configuration/.test(child.title) })[0];
 
         methods.children.forEach(function(child) {
             theClass.methods.push(parseMethod(child));
+        });
+
+        configuration.children.forEach(function(child) {
+            theClass.configuration.push(parseConfiguration(child));
         });
 
         classes.push(theClass);
@@ -108,6 +114,16 @@ function parseMethod(child) {
     });
 
     return method;
+}
+
+function parseConfiguration(child) {
+   var match = child.title.match(/`(.+)`(\s*:\s*)?(.*)/);
+
+   return {
+       name: match[1],
+       type: match[3],
+       description: child.contents
+   };
 }
 
 function sortByName(a, b) {
