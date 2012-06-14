@@ -278,27 +278,25 @@ var oldColor, devices = [ "ios", "android", "blackberry", "meego" ],
 })(jQuery);
 
 function initTargets() {
-    $(getPropertySelector("background-color")).kendoDropTarget({
-        dragenter: function (e) {
-            oldColor = this.element.css("background-color");
-            var color = e.draggable.element.css("background-color");
+    var property = "background-color",
+        defaultCSS = { cursor: "default" };
+    defaultCSS[property] = "";
 
-            this.element.css({
-                cursor: cursorSvg.replace("%23f984ef", color),
-                backgroundColor: color
-            });
+    $(getPropertySelector(property)).kendoDropTarget({
+        dragenter: function (e) {
+            oldColor = this.element.css(property);
+            var color = e.draggable.element.css(property),
+                css = { cursor: cursorSvg.replace("%23f984ef", color) };
+
+            css[property] = color;
+
+            this.element.css(css);
         },
-        dragleave: function (e) {
-            this.element.css({
-                cursor: "default",
-                backgroundColor: oldColor
-            });
+        dragleave: function () {
+            this.element.css(defaultCSS);
         },
         drop: function (e) {
-            this.element.css({
-                cursor: "default",
-                backgroundColor: ""
-            });
+            this.element.css(defaultCSS);
             this.element.parents(".device").data("kendoStyleEngine").update(this.element, { "background-color": e.draggable.element.css("background-color") });
         }
     });
