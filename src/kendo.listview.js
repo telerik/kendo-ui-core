@@ -43,6 +43,8 @@
 
             that._selectable();
 
+            that._pageable();
+
             if (that.options.autoBind){
                 that.dataSource.fetch();
             }
@@ -157,6 +159,23 @@
             that.element.html(html);
 
             that.trigger(DATABOUND);
+        },
+
+        _pageable: function() {
+            var that = this,
+                pageable = that.options.pageable,
+                settings,
+                pagerId;
+
+            if ($.isPlainObject(pageable)) {
+                pagerId = pageable.pagerId;
+                settings = $.extend({}, pageable, {
+                    dataSource: that.dataSource,
+                    pagerId: null
+                });
+
+                $("#" + pagerId).kendoPager(settings);
+            }
         },
 
         _selectable: function() {

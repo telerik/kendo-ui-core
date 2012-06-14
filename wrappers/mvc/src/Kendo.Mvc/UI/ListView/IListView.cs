@@ -24,5 +24,10 @@
             get;
             set;
         }
+
+        ListViewPagingSettings Paging
+        {
+            get;        
+        }
     }
 }

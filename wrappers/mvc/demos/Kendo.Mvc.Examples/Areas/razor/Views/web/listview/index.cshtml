@@ -6,6 +6,7 @@
     .DataSource(d =>
         d.Read(read => read.Action("Products_Read", "ListView"))
     )
+    .Pageable()
 )
 
 
@@ -14,9 +15,4 @@
         #:ProductID#
     </div>
 </script>
-<div id="pager"></div>
-<script>
- $(document).ready(function() {
-    $("#pager").kendoPager({ dataSource: $("#ListView").data("kendoListView").dataSource });
- });
-</script>
+

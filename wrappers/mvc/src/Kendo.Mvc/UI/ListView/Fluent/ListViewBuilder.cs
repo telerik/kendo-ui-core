@@ -77,6 +77,45 @@
             return this;
         }
 
+        /// <summary>
+        /// Allows paging of the data.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ListView()
+        ///             .Name("ListView")
+        ///             .Ajax(ajax => ajax.Action("Orders", "ListView"))        
+        ///             .Pageable();
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ListViewBuilder<T> Pageable()
+        {
+            return Pageable(delegate { });
+        }
+
+        /// <summary>
+        /// Allows paging of the data.
+        /// </summary>
+        /// <param name="pagerAction">Use builder to define paging settings.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ListView()
+        ///             .Name("Grid")
+        ///             .Ajax(ajax => ajax.Action("Orders", "ListView"))        
+        ///             .Pageable(paging => paging.Enabled(true))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ListViewBuilder<T> Pageable(Action<ListViewPagerSettingsBuilder> pagerAction)
+        {
+            Component.Paging.Enabled = true;
+
+            pagerAction(new ListViewPagerSettingsBuilder(Component.Paging));
+
+            return this;
+        }
+
         public ListViewBuilder<T> DataSource(Action<AjaxDataSourceBuilder<T>> configurator)
         {
             configurator(new AjaxDataSourceBuilder<T>(Component.DataSource, Component.ViewContext, Component.UrlGenerator));

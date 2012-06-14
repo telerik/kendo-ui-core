@@ -47,6 +47,14 @@ namespace Kendo.Mvc.UI.Fluent.Tests
             builder.ClientTemplateId("foo");
 
             Assert.Equal("foo", listView.ClientTemplateId);
-        }        
+        }
+
+        [Fact]
+        public void Pageable_enables_ListView_pager()
+        {
+            builder.Pageable();
+
+            Assert.True(listView.Paging.Enabled);
+        }  
     }
 }

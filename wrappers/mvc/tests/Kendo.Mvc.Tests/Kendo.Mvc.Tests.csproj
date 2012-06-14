@@ -149,6 +149,8 @@
     <Compile Include="UI\Chart\Serialization\PlotAreaSerializerTests.cs" />
     <Compile Include="UI\DateTimePicker\DateTimePickerBuilderTests.cs" />
     <Compile Include="UI\Grid\GridScrollingSettingsTests.cs" />
+    <Compile Include="UI\ListView\ListViewHtmlBuilderTests.cs" />
+    <Compile Include="UI\ListView\ListViewPagerSettingsBuilderTests.cs" />
     <Compile Include="UI\ListView\ListViewWorkingConditionsTests.cs" />
     <Compile Include="UI\ListView\ListViewTestHelper.cs" />
     <Compile Include="UI\ListView\ListViewBuilderTests.cs" />

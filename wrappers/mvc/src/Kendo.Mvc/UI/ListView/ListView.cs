@@ -1,16 +1,19 @@
 ﻿namespace Kendo.Mvc.UI
 {
+    using System;
+    using System.Web.UI;
     using System.Web.Mvc;
     using System.Collections.Generic;
-    using Kendo.Mvc.Infrastructure;
-    using System;
+    using Kendo.Mvc.Infrastructure;    
 
     public class ListView<T> : ViewComponentBase, IListView where T : class
-    {
+    {        
         public ListView(ViewContext viewContext, IJavaScriptInitializer initializer, IUrlGenerator urlGenerator)
             : base(viewContext, initializer)
         {
             UrlGenerator = urlGenerator;
+
+            Paging = new ListViewPagingSettings();
 
             DataSource = new DataSource()
             {
@@ -22,7 +25,7 @@
                 ServerSorting = true
             };
 
-            DataSource.ModelType(typeof(T));
+            DataSource.ModelType(typeof(T));            
         }
 
         public IUrlGenerator UrlGenerator
@@ -42,6 +45,12 @@
             get;
             set;
         }
+        
+        public ListViewPagingSettings Paging
+        {
+            get;
+            internal set;
+        }
 
         public override void WriteInitializationScript(System.IO.TextWriter writer)
         {
@@ -60,6 +69,13 @@
                 options["template"] = new ClientEvent { HandlerName = String.Format("kendo.template($('{0}{1}').html())", idPrefix, ClientTemplateId) };
             }
 
+            if (Paging.Enabled)
+            {
+                var paging = Paging.ToJson();
+                paging.Add("pagerId", Id + "_pager");
+                options["pageable"] = paging;
+            }
+
             options["dataSource"] = DataSource.ToJson();
 
             writer.Write(Initializer.Initialize(Selector, "ListView", options));
@@ -67,12 +83,10 @@
             base.WriteInitializationScript(writer);
         }
 
-        protected override void WriteHtml(System.Web.UI.HtmlTextWriter writer)
-        {            
-            //temp. render list view wrapper element
-            HtmlElement e = new HtmlElement("div");
-            e.Attribute("id", Name);
-            writer.Write(e);
+        protected override void WriteHtml(HtmlTextWriter writer)
+        {
+            var html = new ListViewHtmlBuilder<T>(this).Build();
+            writer.Write(html.InnerHtml);
 
             base.WriteHtml(writer);
         }
@@ -89,10 +103,10 @@
 
         private void ProcessDataSource()
         {
-            //if (Paging.Enabled && DataSource.PageSize == 0)
-            //{
+            if (Paging.Enabled && DataSource.PageSize == 0)
+            {
                 DataSource.PageSize = 10;
-            //}
+            }
 
             var binder = new DataSourceRequestModelBinder();
 
