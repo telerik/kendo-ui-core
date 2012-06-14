@@ -172,6 +172,7 @@
     <Compile Include="Controllers\Web\Grid\ServerBindingController.cs" />
     <Compile Include="Controllers\Web\Grid\CustomServerBindingController.cs" />
     <Compile Include="Controllers\Web\Grid\CustomAjaxBindingController.cs" />
+    <Compile Include="Controllers\Web\ListView\IndexController.cs" />
     <Compile Include="Controllers\Web\Menu\ApiController.cs" />
     <Compile Include="Controllers\Web\Menu\ModelBindingController.cs" />
     <Compile Include="Controllers\Web\Menu\SiteMapBindingController.cs" />
@@ -651,6 +652,7 @@
     <Content Include="Areas\razor\Views\web\grid\paging.cshtml" />
     <Content Include="Areas\aspx\Views\web\grid\paging.aspx" />
     <Content Include="Areas\razor\Views\web\grid\headertemplate.cshtml" />
+    <Content Include="Areas\razor\Views\web\listview\index.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>

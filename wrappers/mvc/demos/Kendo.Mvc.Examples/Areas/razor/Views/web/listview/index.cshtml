@@ -1,0 +1,22 @@
+@model IEnumerable<Kendo.Mvc.Examples.Models.ProductViewModel>
+
+@(Html.Kendo().ListView<Kendo.Mvc.Examples.Models.ProductViewModel>(Model)
+    .Name("ListView")
+    .ClientTemplateId("list-view-template")
+    .DataSource(d =>
+        d.Read(read => read.Action("Products_Read", "ListView"))
+    )
+)
+
+
+<script id="list-view-template" type="text/x-kendo-template">
+    <div>
+        #:ProductID#
+    </div>
+</script>
+<div id="pager"></div>
+<script>
+ $(document).ready(function() {
+    $("#pager").kendoPager({ dataSource: $("#ListView").data("kendoListView").dataSource });
+ });
+</script>

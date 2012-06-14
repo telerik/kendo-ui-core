@@ -714,6 +714,9 @@
     <Compile Include="UI\InputComponentExtensions.cs" />
     <Compile Include="UI\IViewComponent.cs" />
     <Compile Include="Infrastructure\JsonObjectExtensions.cs" />
+    <Compile Include="UI\ListView\Fluent\ListViewBuilder.cs" />
+    <Compile Include="UI\ListView\IListView.cs" />
+    <Compile Include="UI\ListView\ListView.cs" />
     <Compile Include="UI\LiteralNode.cs" />
     <Compile Include="Infrastructure\Implementation\PredicateFilterDescription.cs" />
     <Compile Include="Infrastructure\Implementation\Grouping\AggregateFunctionsGroup.cs" />
