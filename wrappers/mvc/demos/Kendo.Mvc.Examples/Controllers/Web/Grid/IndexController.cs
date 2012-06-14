@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using Kendo.Mvc.Examples.Models;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
+using System;
 
 namespace Kendo.Mvc.Examples.Controllers
 {
@@ -57,7 +58,8 @@ namespace Kendo.Mvc.Examples.Controllers
                 UnitPrice = product.UnitPrice ?? 0,
                 UnitsInStock = product.UnitsInStock ?? 0,
                 UnitsOnOrder = product.UnitsOnOrder ?? 0,
-                Discontinued = product.Discontinued
+                Discontinued = product.Discontinued,
+                LastSupply = DateTime.Today
             });
         }
 
