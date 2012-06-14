@@ -1,7 +1,12 @@
 ﻿(function($, undefined) {
 
     var CssRgbaRegExp = /rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,?\s*([\.\d]+?)?\s*\)/i,
-        CssHexRegExp = /^#(([0-9a-f]{3})|([0-9a-f]{6}))$/i;
+        CssHexRegExp = /^#(([0-9a-f]{3})|([0-9a-f]{6}))$/i,
+        zeroTrimRegExp = /^0+|0+$/g;
+
+    function trimZeroes(value) {
+        return value.toPrecision(2).replace(zeroTrimRegExp, "");
+    }
 
     window.Color = kendo.Observable.extend({
         init: function(color) {
@@ -19,7 +24,17 @@
 
         toRgba: function () {
             var value = this.value;
-            return "rgba(" + value.red + "," + value.green + "," + value.blue + "," + value.alpha.toString().replace("0.", ".") + ")";
+            return "rgba(" + value.red + "," + value.green + "," + value.blue + "," + trimZeroes(value.alpha) + ")";
+        },
+
+        get: function() {
+            var that = this;
+
+            if (that.value.alpha === 1) {
+                return that.toHex();
+            } else {
+                return that.toRgba();
+            }
         },
 
         add: function (color) {
@@ -72,25 +87,22 @@
             if (red.length < 2) {
                 red = "0" + red;
             }
-            if (red[0] == red[1]) {
-                red = red[0];
-            }
-            result[result.length] = red;
 
             if (green.length < 2) {
                 green = "0" + green;
             }
-            if (green[0] == green[1]) {
-                green = green[0];
-            }
-            result[result.length] = green;
 
             if (blue.length < 2) {
                 blue = "0" + blue;
             }
-            if (blue[0] == blue[1]) {
+
+            if (red[0] == red[1] && green[0] == green[1] && blue[0] == blue[1]) {
+                red = red[0];
+                green = green[0];
                 blue = blue[0];
             }
+            result[result.length] = red;
+            result[result.length] = green;
             result[result.length] = blue;
 
             return result.join('');

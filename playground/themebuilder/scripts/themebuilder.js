@@ -279,17 +279,18 @@ var oldColor, devices = [ "ios", "android", "blackberry", "meego" ],
 
 function initTargets() {
     var property = "background-color",
+        color = "transparent",
         defaultCSS = { cursor: "default" };
+
     defaultCSS[property] = "";
 
     $(getPropertySelector(property)).kendoDropTarget({
         dragenter: function (e) {
-            oldColor = this.element.css(property);
-            var color = e.draggable.element.css(property),
-                css = { cursor: cursorSvg.replace("%23f984ef", color) };
+            color = new Color(e.draggable.element.css(property)).get();
+
+            var css = { cursor: cursorSvg.replace("%23f984ef", color) };
 
             css[property] = color;
-
             this.element.css(css);
         },
         dragleave: function () {
@@ -297,7 +298,7 @@ function initTargets() {
         },
         drop: function (e) {
             this.element.css(defaultCSS);
-            this.element.parents(".device").data("kendoStyleEngine").update(this.element, { "background-color": e.draggable.element.css("background-color") });
+            this.element.parents(".device").data("kendoStyleEngine").update(this.element, { "background-color": color });
         }
     });
 }
