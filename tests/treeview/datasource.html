@@ -235,6 +235,72 @@
                 equal(treeview.find(".k-item").length, 2);
                 equal(treeview.find(".k-minus").length, 1);
             });
+
+            test("Sorting the datasource sorts the treeview", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "bravo" },
+                        { text: "alpha" }
+                    ]
+                });
+
+                treeviewObject.dataSource.sort({ field: "text", dir: "asc" });
+
+                var items = treeview.find(".k-item");
+
+                equal(items.length, 2);
+                equal(items.eq(0).text(), "alpha");
+                equal(items.eq(1).text(), "bravo");
+            });
+
+            test("Sorting expanded nodes persists their expanded state", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "alpha", expanded: true, items: [
+                            { text: "charlie" },
+                            { text: "bravo" }
+                        ] }
+                    ]
+                });
+
+                treeviewObject.dataSource.sort({ field: "text", dir: "asc" });
+
+                var items = treeview.find(".k-item");
+
+                equal(items.length, 3);
+                equal(treeviewObject.text(items.eq(0)), "alpha");
+
+                var subitems = items.eq(0).find(".k-item");
+                equal(subitems.length, 2);
+                equal(treeviewObject.text(subitems.eq(0)), "charlie");
+                equal(treeviewObject.text(subitems.eq(1)), "bravo");
+            });
+
+            test("Sorting dynamically expanded nodes persists their expanded state", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "alpha", items: [
+                            { text: "charlie" },
+                            { text: "bravo" }
+                        ] }
+                    ]
+                });
+
+                treeviewObject.expand(".k-item:first");
+
+                treeviewObject.dataSource.sort({ field: "text", dir: "asc" });
+
+                var items = treeview.find(".k-item");
+
+                equal(items.length, 3);
+                equal(treeviewObject.text(items.eq(0)), "alpha");
+
+                var subitems = items.eq(0).find(".k-item");
+                equal(subitems.length, 2);
+                equal(subitems.parent().css("display"), "block");
+                equal(treeviewObject.text(subitems.eq(0)), "charlie");
+                equal(treeviewObject.text(subitems.eq(1)), "bravo");
+            });
         </script>
 
         <div id="qunit-fixture"> </div>

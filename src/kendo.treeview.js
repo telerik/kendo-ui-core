@@ -914,6 +914,10 @@
                 }, collapsed);
             }
 
+            if (e.field) {
+                return;
+            }
+
             if (node) {
                 parentNode = that.findByUid(node.uid);
                 that._progress(parentNode, false);
@@ -942,7 +946,11 @@
 
                 if (!loadOnDemand) {
                     for (i = 0; i < items.length; i++) {
-                        items[i].load();
+                        if (items[i]._loaded) {
+                            items[i].children.read();
+                        } else {
+                            items[i].load();
+                        }
                     }
                 }
             }
@@ -1114,6 +1122,8 @@
             }
 
             if (!that._trigger(isExpanding ? "expand" : "collapse", node)) {
+                dataItem.set("expanded", isExpanding);
+
                 if (contents.children().length > 0) {
                     updateNodeClasses(node, {}, { expanded: isExpanding });
 
@@ -1133,7 +1143,6 @@
                         that._progress(node, true);
                     }
 
-                    dataItem.expanded = true;
                     dataItem.load();
                 }
             }
