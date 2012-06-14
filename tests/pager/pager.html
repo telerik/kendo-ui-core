@@ -314,7 +314,7 @@
 
             test("input pager is updated when the page is changed", function() {
                 var pager = setup({}, { input: true });
-                    dataSource.read();
+                dataSource.read();
 
                 dataSource.page(2);
                 equal(pager.find(".k-pager-input").find("input").val(), "2");
@@ -329,9 +329,35 @@
 
             test("input pager shows the available pages", function() {
                 var pager = setup({}, { input: true });
-                    dataSource.read();
+
+                dataSource.read();
 
                 equal(pager.find(".k-pager-input").text(), "Pageof 5");
+            });
+
+            test("pager localization", function() {
+                var pager = setup({}, {
+                        input: true,
+                        messages: {
+                            display: "Showing {0} - {1} of {2}",
+                            page: "Foo",
+                            of: "bar{0}"
+                        }
+                    });
+
+                dataSource.read();
+
+                equal(pager.find(".k-pager-info").text(), "Showing 1 - 1 of 5");
+                equal(pager.find(".k-pager-input").text(), "Foobar5");
+
+                pager = setup({ data: [] }, {
+                    messages: {
+                        empty: "zero"
+                    }
+                });
+
+                dataSource.read();
+                equal(pager.find(".k-pager-info").text(), "zero");
             });
         </script>
     </body>
