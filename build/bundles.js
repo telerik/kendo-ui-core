@@ -7,6 +7,7 @@ var fs = require("fs"),
     kendoScripts = require("./kendo-scripts"),
     Changelog = require("./changelog"),
     GitHubApi = require("build/github-api"),
+    vsdoc = require("./vs-doc/vs-doc").vsdoc,
     copyDir = kendoBuild.copyDirSyncRecursive,
     processFiles = kendoBuild.processFilesRecursive,
     mkdir = kendoBuild.mkdir,
@@ -50,6 +51,7 @@ var winjsBundle = {
     combinedScript: "winjs",
     sourceLicense: "src-license-none.txt",
     licenses: [commercialLicense],
+    vsdoc: /(web|framework|dataviz).+md/,
     skipExamples: true,
     eula: "eula"
 };
@@ -61,6 +63,7 @@ var mvcWrappersBundle = {
     combinedScript: "all",
     sourceLicense: "src-license-complete.txt",
     licenses: productionLicenses,
+    vsdoc: /.+md/,
     skipExamples: true,
     skipPackage: true,
     eula: "mvc-beta-eula"
@@ -71,24 +74,28 @@ var bundles = [{
     suites: ["web", "dataviz", "mobile"],
     combinedScript: "all",
     sourceLicense: "src-license-complete.txt",
+    vsdoc: /.+md/,
     licenses: productionLicenses,
     eula: "eula",
 }, {
     name: "kendoui.web",
     suites: ["web"],
     sourceLicense: "src-license-web.txt",
+    vsdoc: /(framework|web).+md/,
     licenses: productionLicenses.concat(openSourceLicense),
     eula: "eula",
 }, {
     name: "kendoui.dataviz",
     suites: ["dataviz"],
     sourceLicense: "src-license-dataviz.txt",
+    vsdoc: /(framework|dataviz).+md/,
     licenses: productionLicenses,
     eula: "eula"
 }, {
     name: "kendoui.mobile",
     suites: ["mobile"],
     sourceLicense: "src-license-mobile.txt",
+    vsdoc: /(framework|mobile).+md/,
     licenses: productionLicenses,
     eula: "eula"
 }];
@@ -398,6 +405,13 @@ function deployChangelog(root, bundle, version) {
     }));
 }
 
+function deployVsDoc(root, bundle) {
+        kendoBuild.mkdir(path.join(root, "vsdoc"));
+        var contents  = vsdoc("docs/api/", bundle.vsdoc);
+        var scriptName = bundle.combinedScript || bundle.suites[0];
+        kendoBuild.writeText(path.join(root, "vsdoc", "kendo." + scriptName + "-vsdoc.js"), contents);
+}
+
 function buildBundle(bundle, version, success, licenseBuilt) {
     fetchChangelog(function() {
         var name = bundle.name,
@@ -429,6 +443,11 @@ function buildBundle(bundle, version, success, licenseBuilt) {
             if (!bundle.skipExamples) {
                 console.log("Deploying examples");
                 deployExamples(root, bundle);
+            }
+
+            if (bundle.vsdoc) {
+                console.log("Deploying vsdoc");
+                deployVsDoc(root, bundle);
             }
 
             if (changelog.available) {
