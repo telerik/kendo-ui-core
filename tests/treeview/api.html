@@ -569,6 +569,20 @@
                 equal(calls, 1);
             });
 
+            test("toggle() toggles disabled nodes", function() {
+                createTreeView({
+                        dataSource: [
+                            { text: "foo", enabled: false, items: [
+                                { text: "bar" }
+                            ] }
+                        ]
+                    });
+
+                treeviewObject.toggle(treeviewObject.findByText("foo"));
+
+                equal(treeview.find(".k-group:last").css("display"), "block");
+            });
+
             test("dataItem returns the ObservableObject that corresponds to a node", function() {
                 createTreeView({
                     dataSource: [

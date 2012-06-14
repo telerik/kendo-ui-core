@@ -299,11 +299,14 @@
             });
 
             test("renders disabled minus icon if item is disabled and expanded", function() {
-                treeview.kendoTreeView([
-                    { text: "foo", enabled: false, expanded: true, items: [
-                        { text: "bar" }
-                    ] }
-                ]);
+                treeview.kendoTreeView({
+                    animation: false,
+                    dataSource: [
+                        { text: "foo", enabled: false, expanded: true, items: [
+                            { text: "bar" }
+                        ] }
+                    ]
+                });
 
                 var icon = treeview.find(".k-icon");
 

@@ -223,20 +223,16 @@
             return;
         }
 
-        if (!nodeData) {
-            nodeData = {
-                expanded: group.css("display") != "none",
-                index: node.index(),
-                enabled: !wrapper.children(".k-in").hasClass("k-state-disabled")
-            };
-        }
+        nodeData = extend({
+            expanded: group.css("display") != "none",
+            index: node.index(),
+            enabled: !wrapper.children(".k-in").hasClass("k-state-disabled")
+        }, nodeData);
 
-        if (!groupData) {
-            groupData = {
-                firstLevel: node.parent().parent().hasClass(KTREEVIEW),
-                length: node.parent().children().length
-            };
-        }
+        groupData = extend({
+            firstLevel: node.parent().parent().hasClass(KTREEVIEW),
+            length: node.parent().children().length
+        }, groupData);
 
         // li
         node.removeClass("k-first k-last")
@@ -245,6 +241,10 @@
         // div
         wrapper.removeClass("k-top k-mid k-bot")
                .addClass(rendering.cssClass(groupData, nodeData));
+
+        // span
+        wrapper.children(".k-in").removeClass("k-in k-state-default k-state-disabled")
+            .addClass(rendering.textClass(nodeData));
 
         // toggle button
         if (group.length) {
@@ -900,11 +900,19 @@
         refresh: function(e) {
             var that = this,
                 parentNode = that.element,
-                group,
                 node = e.node,
                 action = e.action,
                 items = e.items,
+                loadOnDemand = that.options.loadOnDemand,
                 i;
+
+            function append(items, parentNode, collapsed) {
+                var group = subGroup(parentNode);
+
+                that._insertNode(items, group.children().length, parentNode, group, function(item, group) {
+                    item.appendTo(group);
+                }, collapsed);
+            }
 
             if (node) {
                 parentNode = that.findByUid(node.uid);
@@ -912,20 +920,16 @@
             }
 
             if (action == "add") {
-                group = subGroup(parentNode);
-
-                this._insertNode(items, group.children().length, parentNode, group, function(item, group) {
-                    item.appendTo(group);
-                });
+                append(items, parentNode);
             } else if (action == "remove") {
                 that.remove(that.findByUid(items[0].uid));
             } else {
                 if (node) {
-                    group = subGroup(parentNode);
+                    append(items, parentNode, true);
 
-                    that._insertNode(items, group.children().length, parentNode, group, function(item, group) {
-                        item.appendTo(group);
-                    }, !node.expanded);
+                    if (node.expanded) {
+                        that.expand(parentNode);
+                    }
                 } else {
                     that.root = that.wrapper.html(that._renderGroup({
                         items: items,
@@ -936,7 +940,7 @@
                     })).children("ul");
                 }
 
-                if (!that.options.loadOnDemand) {
+                if (!loadOnDemand) {
                     for (i = 0; i < items.length; i++) {
                         items[i].load();
                     }
@@ -1029,16 +1033,7 @@
                     isCollapsed = true;
                 }
 
-                item.children("div")
-                        .children(".k-in")
-                            .toggleClass("k-state-default", enable)
-                            .toggleClass("k-state-disabled", !enable)
-                        .end()
-                        .children(".k-icon")
-                            .toggleClass("k-plus", isCollapsed && enable)
-                            .toggleClass("k-plus-disabled", isCollapsed && !enable)
-                            .toggleClass("k-minus", !isCollapsed && enable)
-                            .toggleClass("k-minus-disabled", !isCollapsed && !enable);
+                updateNodeClasses(item, {}, { enabled: enable, expanded: !isCollapsed });
             });
         },
 
@@ -1095,13 +1090,10 @@
         toggle: function (node) {
             node = $(node);
 
-            if (!node.find(".k-minus,.k-plus").length) {
+            if (!node.find(">div>.k-icon").is(".k-minus,.k-plus,.k-minus-disabled,.k-plus-disabled")) {
                 return;
             }
 
-            if (node.find("> div > .k-state-disabled").length) {
-                return;
-            }
             var that = this,
                 contents = nodeContents(node),
                 isExpanding = !contents.is(VISIBLE),
@@ -1123,9 +1115,7 @@
 
             if (!that._trigger(isExpanding ? "expand" : "collapse", node)) {
                 if (contents.children().length > 0) {
-                    node.find("> div > .k-icon")
-                        .toggleClass("k-minus", isExpanding)
-                        .toggleClass("k-plus", !isExpanding);
+                    updateNodeClasses(node, {}, { expanded: isExpanding });
 
                     if (!isExpanding) {
                         contents.css("height", contents.height()).css("height");
@@ -1142,6 +1132,7 @@
                     if (options.loadOnDemand) {
                         that._progress(node, true);
                     }
+
                     dataItem.expanded = true;
                     dataItem.load();
                 }
