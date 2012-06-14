@@ -34,7 +34,8 @@
                     id: "IRQ",
                     lifeExpectancy: 68.09,
                     fertilityRate: 4.77,
-                    population: 31090763
+                    population: 31090763,
+                    color: "red"
                 }, {
                     id: "Negative",
                     lifeExpectancy: 100,
@@ -60,7 +61,11 @@
                         },
                         xField: "lifeExpectancy",
                         yField: "fertilityRate",
-                        zField: "population"
+                        zField: "population",
+                        colorField: "color"
+                        // TODO: colorField
+                        // TODO: data: [{ x, y, z, color, ... }]
+                        // TODO: data: [[ x, y, z], ...]
                     }]
                 });
             });

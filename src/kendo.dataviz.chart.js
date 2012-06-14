@@ -244,6 +244,11 @@
                 scatterLine: {
                     width: 1
                 },
+                bubble: {
+                    markers: {
+                        maxSize: 50
+                    }
+                },
                 labels: {}
             },
             series: [],
@@ -564,13 +569,6 @@
 
                     if (currentSeries.field) {
                         value = getField(currentSeries.field, row);
-                    } else if (currentSeries.xField && currentSeries.yField) {
-                        value = [getField(currentSeries.xField, row),
-                                 getField(currentSeries.yField, row)];
-
-                        if (currentSeries.zField) {
-                            value.push(getField(currentSeries.zField, row));
-                        }
                     } else {
                         value = undefined;
                     }
@@ -2231,8 +2229,7 @@
                     width: 1,
                     color: WHITE
                 },
-                opacity: 0.5,
-                maxSize: 50
+                opacity: 0.5
             },
             labels: {
                 position: CENTER,
@@ -2753,11 +2750,11 @@
                 currentSeries,
                 currentSeriesPoints,
                 dataItems,
-                value,
-                pointData;
+                value;
 
             for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
                 currentSeries = series[seriesIx];
+                dataItems = currentSeries.dataItems;
 
                 currentSeriesPoints = seriesPoints[seriesIx];
                 if (!currentSeriesPoints) {
@@ -2765,9 +2762,7 @@
                 }
 
                 for (pointIx = 0; pointIx < currentSeries.data.length; pointIx++) {
-                    pointData = currentSeries.data[pointIx] || [];
-                    dataItems = currentSeries.dataItems;
-                    value = { x: pointData[0], y: pointData[1], z: pointData[2] };
+                    value = chart.pointValue(currentSeries, pointIx);
 
                     callback(value, {
                         pointIx: pointIx,
@@ -2778,6 +2773,45 @@
                     });
                 }
             }
+        },
+
+        bindableFields: function() {
+            return ["x", "y"];
+        },
+
+        pointValue: function(series, pointIx) {
+            var fields = this.bindableFields(),
+                data = series.data[pointIx],
+                dataItems = series.dataItems,
+                value = data || {},
+                i,
+                fieldsLength = fields.length,
+                fieldName,
+                sourceField,
+                fieldValue;
+
+            if (isArray(data)) {
+                value = {};
+                for (i = 0; i < fields.length; i++) {
+                    fieldValue = data[i];
+                    if (defined(fieldValue)) {
+                        value[fields[i]] = fieldValue;
+                    }
+                }
+            }
+
+            if (!defined(data) && series.dataItems) {
+                for (i = 0; i < fields.length; i++) {
+                    fieldName = fields[i];
+                    sourceField = series[fieldName + "Field"];
+
+                    if (sourceField) {
+                        value[fieldName] = getField(sourceField, dataItems[pointIx]);
+                    }
+                }
+            }
+
+            return value;
         },
 
         formatPointValue: function(value, format) {
@@ -2815,7 +2849,7 @@
             var chart = this,
                 colors = chart.plotArea.options.seriesColors || [];
 
-            fields.series.color = fields.dataItem.color ||
+            fields.series.color = fields.series.color ||
                 colors[fields.pointIx % colors.length];
 
             ScatterChart.fn.addValue.call(this, value, fields);
@@ -2824,6 +2858,7 @@
         createPoint: function(value, series, seriesIx) {
             var chart = this,
                 point,
+                color = value.color || series.color,
                 maxValue = chart.seriesMax(series),
                 maxR = series.markers.maxSize / 2,
                 maxArea = math.PI * maxR * maxR,
@@ -2833,7 +2868,7 @@
             point = new Bubble(value,
                 deepExtend({
                     markers: {
-                        background: series.color,
+                        background: color,
                     },
                     tooltip: {
                         format: chart.options.tooltip.format
@@ -2856,25 +2891,29 @@
 
             return point;
 
-            // TODO: Negative values
             // TODO: Animations
-            // TODO: Hover
-            // TODO: Color for each point
-            // TODO: Coloring by value
             // TODO: Clip to axis line box
+            // TODO: Negative values
+            // TODO: Coloring by value
         },
 
         seriesMax: function(series) {
-            var data = series.data,
-                length = data.length,
+            var chart = this,
+                length = series.data.length,
                 max = 0,
-                i;
+                i,
+                value;
 
             for(i = 0; i < length; i++) {
-                max = math.max(max, data[i][2]);
+                max = math.max(max, chart.pointValue(series, i).z);
             }
 
             return max;
+        },
+
+        bindableFields: function() {
+            return ScatterChart.fn.bindableFields.call(this)
+                   .concat(["z", "color", "category"]);
         },
 
         getViewElements: function(view) {
