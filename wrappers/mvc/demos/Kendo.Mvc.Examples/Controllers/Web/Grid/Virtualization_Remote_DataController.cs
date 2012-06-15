@@ -13,7 +13,7 @@ namespace Kendo.Mvc.Examples.Controllers
 
         public ActionResult Virtualization_Read([DataSourceRequest] DataSourceRequest request)
         {
-            return Json(GetOrderDto().ToDataSourceResult(request));
+            return Json(GetOrders().ToDataSourceResult(request));
         }
     }
 }

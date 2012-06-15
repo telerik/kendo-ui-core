@@ -79,7 +79,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
             chart.Series.Add(new ChartBarSeries<SalesData, decimal>(chart, s => s.RepSales));
             chart.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{series:[{\"name\":\"Rep Sales\",\"type\":\"bar\",\"field\":\"RepSales\"}]}");
+            output.ShouldContain("{series:[{name:\"Rep Sales\",type:\"bar\",field:\"RepSales\"}]}");
         }
 
         [Fact]
@@ -117,7 +117,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
             chart.ValueAxes.Add(numericAxis);
             chart.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{valueAxis:[{\"min\":1}]}");
+            output.ShouldContain("{valueAxis:[{min:1}]}");
         }
 
         [Fact]
@@ -127,7 +127,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
             chart.ValueAxes.Add(new ChartNumericAxis<SalesData>(chart) { Name = "tri" });
             chart.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{valueAxis:[{\"name\":\"sec\"},{\"name\":\"tri\"}]}");
+            output.ShouldContain("{valueAxis:[{name:\"sec\"},{name:\"tri\"}]}");
         }
 
         [Fact]
@@ -138,7 +138,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
             chart.XAxes.Add(numericAxis);
             chart.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{xAxis:[{\"name\":\"X Axis\"}]}");
+            output.ShouldContain("{xAxis:[{name:\"X Axis\"}]}");
         }
 
         [Fact]
@@ -148,7 +148,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
             chart.XAxes.Add(new ChartNumericAxis<SalesData>(chart) { Name = "tri" });
             chart.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{xAxis:[{\"name\":\"sec\"},{\"name\":\"tri\"}]}");
+            output.ShouldContain("{xAxis:[{name:\"sec\"},{name:\"tri\"}]}");
         }
 
         [Fact]
@@ -159,7 +159,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
             chart.YAxes.Add(numericAxis);
             chart.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{yAxis:[{\"name\":\"Y Axis\"}]}");
+            output.ShouldContain("{yAxis:[{name:\"Y Axis\"}]}");
         }
 
         [Fact]
@@ -169,7 +169,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
             chart.YAxes.Add(new ChartNumericAxis<SalesData>(chart) { Name = "tri" });
             chart.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{yAxis:[{\"name\":\"sec\"},{\"name\":\"tri\"}]}");
+            output.ShouldContain("{yAxis:[{name:\"sec\"},{name:\"tri\"}]}");
         }
 
         [Fact]

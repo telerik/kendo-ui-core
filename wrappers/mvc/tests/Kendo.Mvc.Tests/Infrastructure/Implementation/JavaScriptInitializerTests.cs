@@ -176,6 +176,19 @@ namespace Kendo.Mvc.Infrastructure.Implementation.Tests
         }
 
         [Fact]
+        public void Should_serialize_nested_object_client_event_handler_name_within_an_array()
+        {
+            var nested = new Dictionary<string, object>() 
+            {
+                { "bar", new ClientEvent { HandlerName = "baz" } }
+            };
+
+            data["foo"] = new[] { nested };
+
+            initializer.Serialize(data).ShouldEqual("{foo:[{bar:baz}]}");
+        }
+
+        [Fact]
         public void Should_serialize_comma_separated_key_value_pairs()
         {
             data["foo"] = null;

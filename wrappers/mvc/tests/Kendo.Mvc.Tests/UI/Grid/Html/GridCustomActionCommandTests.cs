@@ -37,6 +37,20 @@ namespace Kendo.Mvc.UI
             button.Text.ShouldEqual(command.Text);
         }
 
+        [Fact]
+        public void Should_serialize_custom_click_handler()
+        {
+            command.Click.HandlerName = "myCustomClickHandler";
+
+            ((ClientEvent)Serialize()["click"]).HandlerName.ShouldEqual("myCustomClickHandler");
+        }
+
+        [Fact]
+        public void Should_not_serialize_custom_click_handler()
+        {
+            Serialize().ContainsKey("click").ShouldBeFalse();
+        }
+
         //[Fact]
         //public void Should_set_use_url_of_the_button_builder()
         //{

@@ -73,6 +73,14 @@ namespace Kendo.Mvc.Infrastructure
                     continue;
                 }
 
+                var nested = value as IEnumerable<IDictionary<string, object>>;
+
+                if (nested != null)
+                {
+                    AppendArrayOfObjects(output, nested);
+                    continue;
+                }
+
                 var enumerable = value as IEnumerable;
 
                 if (enumerable != null)
@@ -194,6 +202,24 @@ namespace Kendo.Mvc.Infrastructure
                 foreach (var date in dates)
                 {
                     AppendDate(output, date);
+                    output.Append(",");
+                }
+
+                output.Remove(output.Length - 1, 1);
+            }
+
+            output.Append("]");
+        }
+
+        private void AppendArrayOfObjects(StringBuilder output, IEnumerable<IDictionary<string, object>> array)
+        {
+            output.Append("[");
+
+            if (array.Any())
+            {
+                foreach (var obj in array)
+                {
+                    output.Append(Serialize(obj));
                     output.Append(",");
                 }
 

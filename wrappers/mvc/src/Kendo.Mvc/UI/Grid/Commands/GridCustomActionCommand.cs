@@ -13,6 +13,7 @@ namespace Kendo.Mvc.UI
             //DataRouteValues = new List<IGridDataKey<T>>();
             //SendDataKeys = true;
             //SendState = true;
+            Click = new ClientEvent();
         }
         
         //TODO: Implement custom command routing
@@ -33,7 +34,13 @@ namespace Kendo.Mvc.UI
         //    get;
         //    set;
         //}
-        
+
+        public ClientEvent Click
+        {
+            get;
+            set;
+        }
+
         public override IDictionary<string, object> Serialize(IGridUrlBuilder urlBuilder)
         {
             var state = base.Serialize(urlBuilder);
@@ -41,6 +48,11 @@ namespace Kendo.Mvc.UI
             if (Text.HasValue())
             {
                 state["text"] = Text;
+            }
+
+            if (Click.HasValue())
+            {
+                state["click"] = Click;
             }
 
             //TODO: Implement custom command routing

@@ -14,12 +14,12 @@ namespace Kendo.Mvc.Examples.Controllers
 
         public ActionResult HierarchyBinding_Employees([DataSourceRequest] DataSourceRequest request)
         {
-            return Json(GetEmployeeDto().ToDataSourceResult(request));
+            return Json(GetEmployees().ToDataSourceResult(request));
         }
 
         public ActionResult HierarchyBinding_Orders(int employeeID, [DataSourceRequest] DataSourceRequest request)
         {
-            return Json(GetOrderDto()
+            return Json(GetOrders()
                 .Where(order => order.EmployeeID == employeeID)
                 .ToDataSourceResult(request));
         }

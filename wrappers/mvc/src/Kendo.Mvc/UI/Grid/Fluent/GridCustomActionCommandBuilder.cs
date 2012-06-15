@@ -11,6 +11,21 @@ namespace Kendo.Mvc.UI.Fluent
         {
 
         }
+
+        public GridCustomActionCommandBuilder<T> Click(Func<object, object> handler)
+        {            
+            Command.Click.InlineCodeBlock = handler;
+
+            return this;
+        }
+
+        public GridCustomActionCommandBuilder<T> Click(string handler)
+        {
+            Command.Click.HandlerName = handler;
+
+            return this;
+        }
+
         //TODO: Implement custom command routing
         //public GridCustomActionCommandBuilder<T> Action(string actionName, string controllerName, RouteValueDictionary routeValues)
         //{

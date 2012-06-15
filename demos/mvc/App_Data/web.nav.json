@@ -364,8 +364,7 @@
                 },
                 {
                     "text": "Custom command",
-                    "url": "grid/custom-command.html",
-                    "packages": ["!mvc"]
+                    "url": "grid/custom-command.html"
                 },
                 {
                     "text": "Aggregates",

@@ -26,7 +26,7 @@ namespace Kendo.Mvc.Examples.Controllers
             return Json(GetProducts().ToDataSourceResult(request));
         }
 
-        private static IEnumerable<OrderViewModel> GetOrderDto()
+        private static IEnumerable<OrderViewModel> GetOrders()
         {
             var northwind = new NorthwindDataContext();
 
@@ -63,7 +63,7 @@ namespace Kendo.Mvc.Examples.Controllers
             });
         }
 
-        private static IEnumerable<EmployeeViewModel> GetEmployeeDto()
+        private static IEnumerable<EmployeeViewModel> GetEmployees()
         {
             var northwind = new NorthwindDataContext();
 
