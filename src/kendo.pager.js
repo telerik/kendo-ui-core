@@ -3,7 +3,7 @@
         ui = kendo.ui,
         Widget = ui.Widget,
         proxy = $.proxy,
-        iconTemplate = kendo.template('<a href="\\#" class="k-link k-state-disabled" data-#=ns#page="#=idx#"><span class="k-icon #= className #">#=text#</span></a>');
+        iconTemplate = kendo.template('<a href="\\#" class="#=state#" data-#=ns#page="#=idx#"><span class="k-icon #= className #">#=text#</span></a>');
 
     function button(template, idx, text, numeric) {
         return template( {
@@ -14,10 +14,11 @@
         });
     }
 
-    function icon(className, idx, text) {
+    function icon(className, idx, enabled, text) {
         return iconTemplate({
             idx: idx,
             className: className,
+            state: enabled ? "k-link" : "k-link k-state-disabled",
             text: text,
             ns: kendo.ns
         })
@@ -40,11 +41,11 @@
 
             if (options.previousNext) {
                 if (!that.element.find(".k-first").length) {
-                    that.element.append(icon("k-first", 1, options.messages.first));
+                    that.element.append(icon("k-first", 1, that.page() > 1, options.messages.first));
                 }
 
                 if (!that.element.find(".k-prev").length) {
-                    that.element.append(icon("k-prev", Math.max(1, that.page() - 1), options.messages.previous));
+                    that.element.append(icon("k-prev", Math.max(1, that.page() - 1), that.page() > 1, options.messages.previous));
                 }
             }
 
@@ -71,11 +72,11 @@
 
             if (options.previousNext) {
                 if (!that.element.find(".k-next").length) {
-                    that.element.append(icon("k-next", Math.min(that.totalPages(), that.page() + 1), options.messages.next));
+                    that.element.append(icon("k-next", Math.min(that.totalPages(), that.page() + 1), that.page() <= that.totalPages(), options.messages.next));
                 }
 
                 if (!that.element.find(".k-last").length) {
-                    that.element.append(icon("k-last", that.totalPages(), options.messages.last));
+                    that.element.append(icon("k-last", that.totalPages(), that.page() <= that.totalPages(), options.messages.last));
                 }
             }
 

@@ -471,6 +471,75 @@
                 equal(pager.find(".k-last").parent().data(kendo.ns + "page"), dataSource.totalPages());
             });
 
+            test("first is enabled if the data source is read before pager init", function() {
+                var dataSource = new DataSource({
+                    pageSize: 1,
+                    data: [1,2,3]
+                });
+
+                dataSource.read();
+                dataSource.page(2);
+
+                var pager = $("<div />").kendoPager({
+                    dataSource: dataSource,
+                    autoBind: false
+                });
+
+                ok(!pager.find(".k-first").parent().hasClass("k-state-disabled"));
+            });
+
+            test("previous is enabled if the data source is read before pager init", function() {
+                var dataSource = new DataSource({
+                    pageSize: 1,
+                    data: [1,2,3]
+                });
+
+                dataSource.read();
+                dataSource.page(2);
+
+                var pager = $("<div />").kendoPager({
+                    dataSource: dataSource,
+                    autoBind: false
+                });
+
+                console.log(pager);
+                ok(!pager.find(".k-prev").parent().hasClass("k-state-disabled"));
+            });
+
+            test("next is enabled if the data source is read before pager init", function() {
+                var dataSource = new DataSource({
+                    pageSize: 1,
+                    data: [1,2,3]
+                });
+
+                dataSource.read();
+                dataSource.page(2);
+
+                var pager = $("<div />").kendoPager({
+                    dataSource: dataSource,
+                    autoBind: false
+                });
+
+                ok(!pager.find(".k-next").parent().hasClass("k-state-disabled"));
+            });
+
+            test("last is enabled if the data source is read before pager init", function() {
+                var dataSource = new DataSource({
+                    pageSize: 1,
+                    data: [1,2,3]
+                });
+
+                dataSource.read();
+                dataSource.page(2);
+
+                var pager = $("<div />").kendoPager({
+                    dataSource: dataSource,
+                    autoBind: false
+                });
+
+                console.log(pager);
+                ok(!pager.find(".k-last").parent().hasClass("k-state-disabled"));
+            });
         </script>
     </body>
 </html>
