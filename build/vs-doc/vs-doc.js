@@ -8,9 +8,10 @@ function vsdoc(directory, filter) {
     processFilesRecursive(directory, filter, function(fileName) {
         var tree = toHeadingTree(fs.readFileSync(fileName).toString()),
             name = tree.children[0].title,
-            plugin = name.replace(".ui", "").replace(/\.(.)/g, function() { return arguments[1].toUpperCase() });
+            plugin = name.replace(".ui", "").replace(/\.(.)/g, function() { return arguments[1].toUpperCase() }),
             theClass = {
                 name: name,
+                isClass: /[A-Z]\w+$/.test(name),
                 plugin: plugin,
                 methods: [],
                 configuration: []

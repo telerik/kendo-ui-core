@@ -9,7 +9,7 @@ var kendo = {
 # data.forEach(function(theClass) {  #
 
 # /* Class */ #
-# if (theClass.methods.length) { #
+# if (theClass.isClass) { #
 #= theClass.name # = function() { };
 
 #= theClass.name #.prototype = {
