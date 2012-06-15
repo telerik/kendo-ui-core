@@ -10,6 +10,7 @@
         CHANGE = "change",
         CLICK = "click",
         KEYDOWN = "keydown",
+        DISABLED = "disabled",
         iconTemplate = kendo.template('<a href="\\#" title="#=text#" class="k-link"><span class="k-icon #= className #">#=text#</span></a>');
 
     function button(template, idx, text, numeric) {
@@ -32,7 +33,7 @@
        element.find(selector)
               .parent()
               .attr(kendo.attr("page"), page)
-              .attr("disabled", disabled)
+              .attr(DISABLED, disabled)
               .toggleClass("k-state-disabled", disabled);
     }
 
@@ -54,7 +55,7 @@
 
     var Pager = Widget.extend( {
         init: function(element, options) {
-            var that = this;
+            var that = this, page, totalPages;
 
             Widget.fn.init.call(that, element, options);
 
@@ -62,6 +63,10 @@
             that.dataSource = options.dataSource;
             that.linkTemplate = kendo.template(that.options.linkTemplate);
             that.selectTemplate = kendo.template(that.options.selectTemplate);
+
+            page = that.page();
+            totalPages = that.totalPages();
+
 
             that._refreshHandler = proxy(that.refresh, that);
 
@@ -71,82 +76,77 @@
                 if (!that.element.find(FIRST).length) {
                     that.element.append(icon(FIRST, options.messages.first));
 
-                    first(that.element, that.page(), that.totalPages());
+                    first(that.element, page, totalPages);
                 }
 
                 if (!that.element.find(PREV).length) {
                     that.element.append(icon(PREV, options.messages.previous));
 
-                    prev(that.element, that.page(), that.totalPages());
+                    prev(that.element, page, totalPages);
                 }
             }
 
-            that.list = that.element.children(".k-pager");
+            that.list = that.element.find(".k-pager");
 
             if (!that.list.length) {
                that.list = $('<ul class="k-pager k-reset k-numeric" />').appendTo(that.element);
             }
 
             if (options.input) {
-                that.input = that.element.children(".k-pager-input");
-
-                if (!that.input.length) {
-                   that.input = $('<span class="k-pager-input">'+
+                if (!that.element.find(".k-pager-input").length) {
+                   that.element.append('<span class="k-pager-input">'+
                        options.messages.page +
                        '<input class="k-textbox">' +
-                       kendo.format(options.messages.of, that.totalPages()) +
-                       '</span>').appendTo(that.element);
+                       kendo.format(options.messages.of, totalPages) +
+                       '</span>');
                 }
 
                 that._keydownHandler = proxy(that._keydown, that);
-                that.input.on(KEYDOWN, "input", that._keydownHandler);
+                that.element.on(KEYDOWN, ".k-pager-input input", that._keydownHandler);
             }
 
             if (options.previousNext) {
                 if (!that.element.find(NEXT).length) {
                     that.element.append(icon(NEXT, options.messages.next));
 
-                    next(that.element, that.page(), that.totalPages());
+                    next(that.element, page, totalPages);
                 }
 
                 if (!that.element.find(LAST).length) {
                     that.element.append(icon(LAST, options.messages.last));
 
-                    last(that.element, that.page(), that.totalPages());
+                    last(that.element, page, totalPages);
                 }
             }
 
             if (options.pageSizes){
-                that.pageSizes = that.element.find(".k-pager-sizes");
-
-                if (!that.pageSizes.length){
-                    that.pageSizes = $('<span class="k-pager-sizes k-label"><select/></span>')
+                if (!that.element.find(".k-pager-size").length){
+                     $('<span class="k-pager-sizes k-label"><select/></span>')
                         .appendTo(that.element)
                         .find("select")
-                        .html($.map( $.isArray(options.pageSizes) ? options.pageSizes : [5,10,20], function(page){
+                        .html($.map($.isArray(options.pageSizes) ? options.pageSizes : [5,10,20], function(page){
                             return "<option>" + page + "</option>";
                         }).join(""))
                         .val(that.pageSize())
-                        .end();
+                        .end()
+                        .appendTo(that.element);
 
                     if (kendo.ui.DropDownList) {
-                       that.pageSizes.find("select").kendoDropDownList();
+                       that.element.find(".k-pager-sizes select").kendoDropDownList();
                     }
                 }
 
                 that._changeHandler = proxy(that._change, that);
 
-                that.pageSizes.find("select").change(that._changeHandler);
+                that.element.on(CHANGE, ".k-pager-sizes select", that._changeHandler);
             }
 
             if (options.info) {
-                that.info = that.element.children(".k-pager-info");
-
-                if (!that.info.length) {
-                   that.info = $('<span class="k-pager-info" />').appendTo(that.element);
+                if (!that.element.find(".k-pager-info").length) {
+                    that.element.append('<span class="k-pager-info k-label" />');
                 }
 
-                that.info.addClass("k-label");
+                that.element.find("")
             }
 
             if (options.refresh) {
@@ -156,7 +156,7 @@
 
                 that._reloadHandler = proxy(that._refreshClick, that);
 
-                that.element.find(".k-refresh").parent().click(that._reloadHandler);
+                that.element.on(CLICK, ".k-link:has(.k-refresh)", that._reloadHandler);
             }
 
             that._clickHandler = proxy(that._click, that);
@@ -173,15 +173,11 @@
 
             that.element.off(CLICK, "a", that._clickHandler);
 
-            if (that.input) {
-                that.input.off(KEYDOWN, "input", that._keydownHandler);
-            }
+            that.element.off(KEYDOWN, ".k-pager-input input", that._keydownHandler);
 
-            if (that.pageSizes) {
-                that.pageSizes.find("select").unbind("change", that._changeHandler);
-            }
+            that.element.off(CHANGE, ".k-pager-sizes select", that._changeHandler);
 
-            that.element.find(".k-refresh").parent().unbind(CLICK, that._reloadHandler);
+            that.element.off(CLICK, ".k-link:has(.k-refresh)", that._reloadHandler);
 
             that.dataSource.unbind(CHANGE, that._refreshHandler);
         },
@@ -263,17 +259,18 @@
                     html = that.options.messages.empty;
                 }
 
-                that.info.html(html);
+                that.element.find(".k-pager-info").html(html);
             }
 
             if (that.options.input) {
-                that.input
+                that.element
+                    .find(".k-pager-input")
                     .html(that.options.messages.page +
                         '<input class="k-textbox">' +
                         kendo.format(that.options.messages.of, totalPages))
                     .find("input")
                     .val(page)
-                    .attr("disabled", total < 1)
+                    .attr(DISABLED, total < 1)
                     .toggleClass("k-state-disabled", total < 1);
             }
 
@@ -288,13 +285,13 @@
             }
 
             if (that.options.pageSizes) {
-                that.pageSizes.find("select").val(pageSize);
+                that.element.find(".k-pager-sizes select").val(pageSize);
             }
         },
 
         _keydown: function(e) {
             if (e.keyCode === kendo.keys.ENTER) {
-                var input = this.input.find("input"),
+                var input = this.element.find(".k-pager-input").find("input"),
                     page = parseInt(input.val(), 10);
 
                 if (isNaN(page) || page < 1 || page > this.totalPages()) {
