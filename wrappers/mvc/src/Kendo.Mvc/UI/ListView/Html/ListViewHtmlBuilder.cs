@@ -23,12 +23,20 @@ namespace Kendo.Mvc.UI
         public IHtmlNode Build()
         {            
             var html = new HtmlElement("div");
-                            
-            html.Children.Add(new HtmlElement(listView.TagName).Attribute("id", listView.Id));
+
+            var tagName = listView.TagName;
+            if (string.IsNullOrEmpty(tagName))
+            {
+                tagName = "div";
+            }
+
+            html.Children.Add(new HtmlElement(tagName).Attribute("id", listView.Id));
 
             if (listView.Paging.Enabled)
-            {
-                html.Children.Add(new HtmlElement("div").Attribute("id", listView.Id + "_pager"));
+            {                
+                var pagerWrapper = new HtmlElement("div").AddClass("k-pager-wrap");
+                pagerWrapper.Children.Add(new HtmlElement("div").Attribute("id", listView.Id + "_pager"));
+                html.Children.Add(pagerWrapper);
             }
 
             return html;            

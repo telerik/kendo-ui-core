@@ -344,6 +344,9 @@
     <Content Include="Areas\aspx\Views\web\numerictextbox\index.aspx" />
     <Content Include="Areas\aspx\Views\web\upload\index.aspx" />
     <Content Include="Areas\aspx\Views\web\upload\result.aspx" />
+    <Content Include="Areas\razor\Views\web\listview\EditorTemplates\ProductViewModel.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Global.asax" />
     <Content Include="Scripts\jquery-1.7.2.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />

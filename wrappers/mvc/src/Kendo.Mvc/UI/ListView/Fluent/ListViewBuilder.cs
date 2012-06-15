@@ -196,6 +196,24 @@
             return this;
         }
 
+        /// <summary>
+        /// Enables ListView editing.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ListView()
+        ///             .Name("ListView")
+        ///             .Editable()
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ListViewBuilder<T> Editable()
+        {
+            Component.Editing.Enabled = true;
+
+            return this;
+        }
+
         public ListViewBuilder<T> DataSource(Action<AjaxDataSourceBuilder<T>> configurator)
         {
             configurator(new AjaxDataSourceBuilder<T>(Component.DataSource, Component.ViewContext, Component.UrlGenerator));

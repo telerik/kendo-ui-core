@@ -1,6 +1,7 @@
 ﻿namespace Kendo.Mvc.UI
 {
     using System.Collections.Generic;
+    using System.Web.Mvc;
     
     public class ListViewSettingsSerializer<T> where T : class
     {
@@ -22,6 +23,8 @@
             SerializeNavigatable(options);
 
             SerializeSelection(options);
+
+            SerializeEditTemplate(options);
         }
 
         private void SerializeClientTemplate(IDictionary<string, object> options)
@@ -63,6 +66,18 @@
             {
                 options["selectable"] = listView.Selection.Mode.ToString().ToLower();
             }
-        }        
+        }
+
+        private void SerializeEditTemplate(IDictionary<string, object> options)
+        {
+            if (listView.Editing.Enabled && !string.IsNullOrEmpty(listView.EditorHtml))
+            {                
+                var html = listView.EditorHtml.Trim()
+                                .Replace("\r\n", string.Empty)
+                                .Replace("jQuery(\"#", "jQuery(\"\\#");
+
+                options["editTemplate"] = html;
+            }
+        }       
     }
 }

@@ -86,5 +86,13 @@ namespace Kendo.Mvc.UI.Fluent.Tests
 
             Assert.Equal("div", listView.TagName);
         }
+
+        [Fact]
+        public void Editable_enables_ediging()
+        {
+            builder.Editable();
+
+            Assert.True(listView.Editing.Enabled);
+        }
     }
 }

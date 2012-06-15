@@ -103,5 +103,41 @@ namespace Kendo.Mvc.UI.Tests.ListView
 
             Assert.Equal(false, json.ContainsKey("pagable"));
         }
+
+        [Fact]
+        public void Edit_template_should_be_serialized_if_editing_enabled()
+        {
+            listView.Editing.Enabled = true;
+            listView.EditorHtml = "foo";
+            var json = new Dictionary<string, object>();
+
+            serializer.Serialize(json);
+
+            Assert.Equal("foo", json["editTemplate"]);
+        }
+        
+        [Fact]
+        public void Edit_template_should_not_be_serialized_if_editing_disabled()
+        {
+            listView.Editing.Enabled = false;
+            listView.EditorHtml = "foo";
+            var json = new Dictionary<string, object>();
+
+            serializer.Serialize(json);
+
+            Assert.Equal(false, json.ContainsKey("editTemplate"));
+        }
+
+        [Fact]
+        public void Edit_template_should_not_be_serialized_if_not_present()
+        {
+            listView.Editing.Enabled = true;
+            listView.EditorHtml = string.Empty;
+            var json = new Dictionary<string, object>();
+
+            serializer.Serialize(json);
+
+            Assert.Equal(false, json.ContainsKey("editTemplate"));
+        }
     }
 }

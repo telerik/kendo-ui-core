@@ -43,5 +43,15 @@
         {
             get;
         }
+
+        string EditorHtml
+        {
+            get;
+        }
+
+        IListViewEditingSettings Editing
+        {
+            get;
+        }
     }
 }

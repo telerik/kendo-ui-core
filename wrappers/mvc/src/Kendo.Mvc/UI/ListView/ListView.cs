@@ -3,6 +3,7 @@
     using System;
     using System.Web.UI;
     using System.Web.Mvc;
+    using System.Web.Mvc.Html;
     using System.Collections.Generic;
     using Kendo.Mvc.Infrastructure;
     using System.IO;    
@@ -19,6 +20,8 @@
             Paging = new ListViewPagingSettings();
 
             Selection = new ListViewSelectionSettings();
+
+            Editing = new ListViewEditingSettings<T>();
 
             settingsSerializer = new ListViewSettingsSerializer<T>(this);
 
@@ -62,7 +65,7 @@
         public ListViewPagingSettings Paging
         {
             get;
-            internal set;
+            private set;
         }
 
         public bool Navigatable
@@ -77,13 +80,47 @@
             private set;
         }
 
+        public string EditorHtml
+        {
+            get;
+            set;
+        }
+
+        public ListViewEditingSettings<T> Editing
+        {
+            get;
+            private set;
+        }
+
+        IListViewEditingSettings IListView.Editing
+        {
+            get 
+            {
+                return Editing;
+            }
+        }
+
         public override void WriteInitializationScript(TextWriter writer)
         {
             var options = new Dictionary<string, object>(Events);
+
+            var orignalClientValidationEnabled = ViewContext.ClientValidationEnabled;
+            var originalFormContext = ViewContext.FormContext;
+
+            ViewContext.ClientValidationEnabled = true;
+            ViewContext.FormContext = new FormContext
+            {
+                FormId = Name + "form"
+            };
                    
             ProcessDataSource();
 
+            InitializeEditor();
+
             settingsSerializer.Serialize(options);
+
+            ViewContext.FormContext = originalFormContext;
+            ViewContext.ClientValidationEnabled = orignalClientValidationEnabled;
             
             writer.Write(Initializer.Initialize(Selector, "ListView", options));
 
@@ -91,11 +128,11 @@
         }
 
         protected override void WriteHtml(HtmlTextWriter writer)
-        {
-            base.WriteHtml(writer);
-
+        {                        
             var html = new ListViewHtmlBuilder<T>(this).Build();
-            writer.Write(html.InnerHtml);            
+            writer.Write(html.InnerHtml);
+
+            base.WriteHtml(writer);
         }
 
         public override void VerifySettings()
@@ -109,7 +146,12 @@
 
             if (string.IsNullOrEmpty(TagName))
             {
-                throw new NotSupportedException("Tag name cannot be blank.");
+                throw new NotSupportedException("Tag name cannot be null or an empty string.");
+            }
+
+            if (Editing.Enabled && DataSource.Schema.Model.Id == null)
+            {
+                throw new NotSupportedException("Model Id cannot be blank when editing is enabled.");
             }
         }
 
@@ -128,11 +170,16 @@
             var request = (DataSourceRequest)binder.BindModel(controller.ControllerContext, bindingContext);
 
             DataSource.Process(request, true/*!EnableCustomBinding*/);
+        }
 
-            //if (DataSource.Schema.Model.Id != null)
-            //{
-            //    DataKeys.Add(DataSource.Schema.Model.Id);
-            //}
-        }        
+        private void InitializeEditor()
+        {
+            if (Editing.Enabled)
+            {
+                var helper = new HtmlHelper<T>(ViewContext, new ListViewViewDataContainer<T>(Editing.DefaultDataItem(), ViewData));
+
+                EditorHtml = helper.EditorForModel().ToHtmlString();
+            }
+        }
     }
 }

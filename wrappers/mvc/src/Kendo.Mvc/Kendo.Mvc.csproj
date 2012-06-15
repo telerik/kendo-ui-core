@@ -722,6 +722,8 @@
     <Compile Include="UI\ListView\Html\ListViewHtmlBuilder.cs" />
     <Compile Include="UI\ListView\IListView.cs" />
     <Compile Include="UI\ListView\ListView.cs" />
+    <Compile Include="UI\ListView\ListViewViewDataContainer.cs" />
+    <Compile Include="UI\ListView\Settings\ListViewEditingSettings.cs" />
     <Compile Include="UI\ListView\Settings\ListViewSelectionSettings.cs" />
     <Compile Include="UI\ListView\Settings\ListViewPagingSettings.cs" />
     <Compile Include="UI\LiteralNode.cs" />
