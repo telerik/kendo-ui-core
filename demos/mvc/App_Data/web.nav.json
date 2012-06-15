@@ -394,6 +394,11 @@
                     "url": "grid/column-resizing.html"
                 },
                 {
+                    "text": "Column Settings",
+                    "url": "grid/columnsettings.html",
+                    "packages": ["mvc"]
+                },
+                {
                     "text": "Row template",
                     "url": "grid/rowtemplate.html"
                 },

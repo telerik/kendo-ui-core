@@ -150,6 +150,7 @@
     <Compile Include="Controllers\Web\Grid\Column_ReorderingController.cs" />
     <Compile Include="Controllers\Web\Grid\Column_ResizingController.cs" />
     <Compile Include="Controllers\Web\Grid\ApiController.cs" />
+    <Compile Include="Controllers\Web\Grid\ColumnSettingsController.cs" />
     <Compile Include="Controllers\Web\Grid\GlobalizationController.cs" />
     <Compile Include="Controllers\Web\Grid\RowTemplateController.cs" />
     <Compile Include="Controllers\Web\Grid\ServerRowTemplateController.cs" />
@@ -301,6 +302,7 @@
     <Content Include="Areas\aspx\Views\web\grid\api.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\column_reordering.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\column_resizing.aspx" />
+    <Content Include="Areas\aspx\Views\web\grid\columnsettings.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\globalization.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\rowtemplate.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\serverrowtemplate.aspx" />
@@ -638,6 +640,7 @@
     <Content Include="Areas\razor\Views\web\grid\virtualization_remote_data.cshtml" />
     <Content Include="Areas\razor\Views\web\grid\globalization.cshtml" />
     <Content Include="Areas\razor\Views\web\grid\datatablebinding.cshtml" />
+    <Content Include="Areas\razor\Views\web\grid\columnsettings.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
