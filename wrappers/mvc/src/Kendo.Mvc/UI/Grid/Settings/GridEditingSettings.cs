@@ -147,7 +147,7 @@ namespace Kendo.Mvc.UI
             FluentDictionary.For(result)
                 .Add("title", PopUp.Title, "")
                 .Add("modal", PopUp.Modal)
-                .Add("draggable", PopUp.Modal)
+                .Add("draggable", PopUp.Draggable)
                 .Add("resizable", PopUp.ResizingSettings.Enabled);
 
             return result;
@@ -170,13 +170,12 @@ namespace Kendo.Mvc.UI
             FluentDictionary.For(json)
                 .Add("confirmation", localization.DeleteConfirmation, () => DisplayDeleteConfirmation)
                 .Add("mode", Mode.ToString().ToLowerInvariant())
-                .Add("template", editorHtml, () => Mode != GridEditMode.InLine);
+                .Add("template", editorHtml, () => Mode != GridEditMode.InLine)
                 //TODO: Implement GridBeginEditEvent option                
                 //.Add("beginEdit", BeginEdit == GridBeginEditEvent.Click ? "click" : "dblclick", () => BeginEdit != GridBeginEditEvent.Auto)               
                 //TODO: Implement insert row position
-                //.Add("insertRowPosition", InsertRowPosition.ToString().ToLower(), () => InsertRowPosition != GridInsertRowPosition.Top)
-                //TODO: Implement popup settings
-                //.Add("popup", SerializePopUp(), () => Mode == GridEditMode.PopUp && grid.IsClientBinding);            
+                //.Add("insertRowPosition", InsertRowPosition.ToString().ToLower(), () => InsertRowPosition != GridInsertRowPosition.Top)                
+                .Add("window", SerializePopUp(), () => Mode == GridEditMode.PopUp && grid.DataSource.Type == DataSourceType.Ajax);            
         }
     }
     
