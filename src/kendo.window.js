@@ -1096,7 +1096,7 @@
 
         /**
          *
-         * Toggles a Window between a maximized and restored state.
+         * Toggles a Window between a maximized and restored state. Triggers the resize event.
          *
          * @returns {Window}
          * Returns the (Kendo UI) Window object to support chaining.
@@ -1112,7 +1112,7 @@
 
         /**
          *
-         * Restores a maximized or minimized Window to its previous state.
+         * Restores a maximized or minimized Window to its previous state. Triggers the resize event.
          *
          * @returns {Window}
          * Returns the (Kendo UI) Window object to support chaining.
@@ -1157,7 +1157,7 @@
 
         /**
          *
-         * Maximizes a Window to the entire viewing area of the user agent.
+         * Maximizes a Window to the entire viewing area of the user agent. Triggers the resize event.
          *
          * @function
          * @returns {Window}
