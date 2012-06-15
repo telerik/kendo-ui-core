@@ -109,7 +109,7 @@
             });
 
             test("closing a modal window moves overlay below previous window", function() {
-                
+
                 function resumeTest() {
                     window.setTimeout(function(){
                         start();
@@ -371,9 +371,7 @@
                 firstWindow.open();
             });
 
-            test("open() calls toFront() before _overlay()", function() {
-                expect(1);
-
+            test("open() calls toFront() before _overlay()", 1, function() {
                 var firstWindow = createWindow({
                         visible: false,
                         modal: true
@@ -390,6 +388,28 @@
                 };
 
                 firstWindow.open();
+            });
+
+            test("open() sets options.visible", function() {
+                var dialog = createWindow({
+                    visible: false,
+                    animation: false
+                });
+
+                dialog.open();
+
+                ok(dialog.options.visible);
+            });
+
+            test("close() sets options.visible", function() {
+                var dialog = createWindow({
+                    visible: true,
+                    animation: false
+                });
+
+                dialog.close();
+
+                ok(!dialog.options.visible);
             });
 
             test("title() on titleless window does not fail", function() {
@@ -427,11 +447,11 @@
 
         <div id="modalWindow1">
             modalWindow1
-        </div> 
+        </div>
 
         <div id="modalWindow2">
             modalWindow2
-        </div> 
+        </div>
 
     </body>
 </html>

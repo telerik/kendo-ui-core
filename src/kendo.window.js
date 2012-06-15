@@ -167,6 +167,7 @@
         KHOVERSTATE = "k-state-hover",
         // constants
         VISIBLE = ":visible",
+        HIDDEN = "hidden",
         CURSOR = "cursor",
         // events
         OPEN = "open",
@@ -324,7 +325,7 @@
                     visibility = element.css("visibility");
                     display = element.css("display");
 
-                    element.css({ visibility: "hidden", display: "" });
+                    element.css({ visibility: HIDDEN, display: "" });
                     offset = element.offset();
                     element.css({ visibility: visibility, display: display });
                 }
@@ -946,15 +947,19 @@
         open: function () {
             var that = this,
                 wrapper = that.wrapper,
-                showOptions = that.options.animation.open,
+                options = that.options,
+                showOptions = options.animation.open,
                 contentElement = wrapper.children(KWINDOWCONTENT),
-                initialOverflow = contentElement.css(OVERFLOW);
+                initialOverflow = contentElement.css(OVERFLOW),
+                overlay;
 
             if (!that.trigger(OPEN)) {
                 that.toFront();
 
-                if (that.options.modal) {
-                    var overlay = that._overlay(false);
+                options.visible = true;
+
+                if (options.modal) {
+                    overlay = that._overlay(false);
 
                     if (showOptions.duration) {
                         overlay.kendoStop().kendoAnimate({
@@ -968,7 +973,7 @@
                 }
 
                 if (!wrapper.is(VISIBLE)) {
-                    contentElement.css(OVERFLOW, "hidden");
+                    contentElement.css(OVERFLOW, HIDDEN);
                     wrapper.show().kendoStop().kendoAnimate({
                         effects: showOptions.effects,
                         duration: showOptions.duration,
@@ -980,9 +985,9 @@
                 }
             }
 
-            if (that.options.isMaximized) {
-                this._documentScrollTop = $(document).scrollTop();
-                $("html, body").css(OVERFLOW, "hidden");
+            if (options.isMaximized) {
+                that._documentScrollTop = $(document).scrollTop();
+                $("html, body").css(OVERFLOW, HIDDEN);
             }
 
             return that;
@@ -1010,6 +1015,8 @@
                 shouldHideOverlay, overlay;
 
             if (wrapper.is(VISIBLE) && !that.trigger(CLOSE)) {
+                options.visible = false;
+
                 modalWindows = openedModalWindows();
 
                 shouldHideOverlay = options.modal && modalWindows.length == 1;
@@ -1185,7 +1192,7 @@
                 });
 
             this._documentScrollTop = $(document).scrollTop();
-            $("html, body").css(OVERFLOW, "hidden");
+            $("html, body").css(OVERFLOW, HIDDEN);
 
             that.options.isMaximized = true;
 
