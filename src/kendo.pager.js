@@ -86,10 +86,10 @@
                 }
             }
 
-            that.list = that.element.find(".k-pager");
+            that.list = that.element.find(".k-pager-numbers");
 
             if (!that.list.length) {
-               that.list = $('<ul class="k-pager k-reset k-numeric" />').appendTo(that.element);
+               that.list = $('<ul class="k-pager-numbers" />').appendTo(that.element);
             }
 
             if (options.input) {
