@@ -141,22 +141,21 @@
                 that.element.on(CHANGE, ".k-pager-sizes select", that._changeHandler);
             }
 
-            if (options.info) {
-                if (!that.element.find(".k-pager-info").length) {
-                    that.element.append('<span class="k-pager-info k-label" />');
-                }
-
-                that.element.find("")
-            }
-
             if (options.refresh) {
-                if (!that.element.find(".k-refresh").length) {
-                    that.element.append(icon(".k-refresh", options.messages.refresh));
+                if (!that.element.find(".k-pager-refresh").length) {
+                    that.element.append('<a href="#" class="k-icon k-pager-refresh" title="' + options.messages.refresh +
+                        '"><span class="k-icon k-refresh">' + options.messages.refresh + "</span></a>");
                 }
 
                 that._reloadHandler = proxy(that._refreshClick, that);
 
-                that.element.on(CLICK, ".k-link:has(.k-refresh)", that._reloadHandler);
+                that.element.on(CLICK, ".k-pager-refresh", that._reloadHandler);
+            }
+
+            if (options.info) {
+                if (!that.element.find(".k-pager-info").length) {
+                    that.element.append('<span class="k-pager-info k-label" />');
+                }
             }
 
             that._clickHandler = proxy(that._click, that);
@@ -177,7 +176,7 @@
 
             that.element.off(CHANGE, ".k-pager-sizes select", that._changeHandler);
 
-            that.element.off(CLICK, ".k-link:has(.k-refresh)", that._reloadHandler);
+            that.element.off(CLICK, ".k-pager-refresh", that._reloadHandler);
 
             that.dataSource.unbind(CHANGE, that._refreshHandler);
         },
