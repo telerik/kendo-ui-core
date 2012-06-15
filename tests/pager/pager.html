@@ -8,6 +8,9 @@
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.pager.js"></script>
         <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.dropdownlist.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
     </head>
     <body>
@@ -502,7 +505,6 @@
                     autoBind: false
                 });
 
-                console.log(pager);
                 ok(!pager.find(".k-prev").parent().hasClass("k-state-disabled"));
             });
 
@@ -537,8 +539,47 @@
                     autoBind: false
                 });
 
-                console.log(pager);
                 ok(!pager.find(".k-last").parent().hasClass("k-state-disabled"));
+            });
+
+            test("creates a dropdown for the page sizes", function() {
+                var pager = setup({}, { pageSizes: true });
+
+                equal(pager.find(".k-pager-sizes select").length, 1);
+            });
+
+            test("default page sizes", function() {
+                var pager = setup({}, { pageSizes: true });
+
+                equal(pager.find(".k-pager-sizes select option").text(), "51020");
+            });
+
+            test("pageSizes can be array with numbers specifying custom page sizes", function() {
+                var pager = setup({}, { pageSizes: [1,2] });
+
+                equal(pager.find(".k-pager-sizes select option").text(), "12");
+            });
+
+            test("the page size of the data source is selected", function() {
+                var pager = setup({pageSize: 2}, { pageSizes: [1, 2] });
+
+                equal(pager.find(".k-pager-sizes select").val(), "2");
+            });
+
+            test("changing the page size of the data source selects the corresponding option", function() {
+                var pager = setup({}, { pageSizes: [1, 2] });
+
+                dataSource.pageSize(2);
+
+                equal(pager.find(".k-pager-sizes select").val(), "2");
+            });
+
+            test("changing the page size from the select changes the page size in the data source", function() {
+                var pager = setup({}, { pageSizes: [1, 2] });
+
+                pager.find(".k-pager-sizes select").val(2).trigger("change");
+
+                equal(dataSource.pageSize(), 2);
             });
         </script>
     </body>

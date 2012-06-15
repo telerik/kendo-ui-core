@@ -116,6 +116,29 @@
                 }
             }
 
+            if (options.pageSizes){
+                that.pageSizes = that.element.find(".k-pager-sizes");
+
+                if (!that.pageSizes.length){
+                    that.pageSizes = $('<span class="k-pager-sizes k-label"><select/></span>')
+                        .appendTo(that.element)
+                        .find("select")
+                        .html($.map( $.isArray(options.pageSizes) ? options.pageSizes : [5,10,20], function(page){
+                            return "<option>" + page + "</option>";
+                        }).join(""))
+                        .val(that.pageSize())
+                        .end();
+
+                    if (kendo.ui.DropDownList) {
+                       that.pageSizes.find("select").kendoDropDownList();
+                    }
+                }
+
+                that._changeHandler = proxy(that._change, that);
+
+                that.pageSizes.find("select").change(that._changeHandler);
+            }
+
             if (options.info) {
                 that.info = that.element.children(".k-pager-info");
 
@@ -144,6 +167,10 @@
                 that.input.off(KEYDOWN, "input", that._keydownHandler);
             }
 
+            if (that.pageSizes) {
+                that.pageSizes.find("select").unbind("change", that._changeHandler);
+            }
+
             that.dataSource.unbind(CHANGE, that._refreshHandler);
         },
 
@@ -159,6 +186,7 @@
             autoBind: true,
             info: true,
             previousNext: true,
+            pageSizes: false,
             messages: {
                 display: "Displaying items {0} - {1} of {2}",
                 empty: "No items to display",
@@ -244,6 +272,10 @@
 
                 last(that.element, page, totalPages);
             }
+
+            if (that.options.pageSizes) {
+                that.pageSizes.find("select").val(pageSize);
+            }
         },
 
         _keydown: function(e) {
@@ -258,6 +290,14 @@
                 input.val(page);
 
                 this.page(page);
+            }
+        },
+
+        _change: function(e) {
+            var pageSize = parseInt(e.currentTarget.value, 10);
+
+            if (!isNaN(pageSize)){
+               this.dataSource.pageSize(pageSize);
             }
         },
 
