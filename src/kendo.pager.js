@@ -7,6 +7,9 @@
         LAST = ".k-last",
         PREV = ".k-prev",
         NEXT = ".k-next",
+        CHANGE = "change",
+        CLICK = "click",
+        KEYDOWN = "keydown",
         iconTemplate = kendo.template('<a href="\\#" title="#=text#" class="k-link"><span class="k-icon #= className #">#=text#</span></a>');
 
     function button(template, idx, text, numeric) {
@@ -20,7 +23,7 @@
 
     function icon(className, text) {
         return iconTemplate({
-            className: className,
+            className: className.substring(1),
             text: text
         });
     }
@@ -28,7 +31,7 @@
     function update(element, selector, page, disabled) {
        element.find(selector)
               .parent()
-              .attr("data-" + kendo.ns + "page", page)
+              .attr(kendo.attr("page"), page)
               .attr("disabled", disabled)
               .toggleClass("k-state-disabled", disabled);
     }
@@ -62,17 +65,17 @@
 
             that._refreshHandler = proxy(that.refresh, that);
 
-            that.dataSource.bind("change", that._refreshHandler);
+            that.dataSource.bind(CHANGE, that._refreshHandler);
 
             if (options.previousNext) {
-                if (!that.element.find(".k-first").length) {
-                    that.element.append(icon("k-first", options.messages.first));
+                if (!that.element.find(FIRST).length) {
+                    that.element.append(icon(FIRST, options.messages.first));
 
                     first(that.element, that.page(), that.totalPages());
                 }
 
-                if (!that.element.find(".k-prev").length) {
-                    that.element.append(icon("k-prev", options.messages.previous));
+                if (!that.element.find(PREV).length) {
+                    that.element.append(icon(PREV, options.messages.previous));
 
                     prev(that.element, that.page(), that.totalPages());
                 }
@@ -96,18 +99,18 @@
                 }
 
                 that._keydownHandler = proxy(that._keydown, that);
-                that.input.on("keydown", "input", that._keydownHandler);
+                that.input.on(KEYDOWN, "input", that._keydownHandler);
             }
 
             if (options.previousNext) {
-                if (!that.element.find(".k-next").length) {
-                    that.element.append(icon("k-next", options.messages.next));
+                if (!that.element.find(NEXT).length) {
+                    that.element.append(icon(NEXT, options.messages.next));
 
                     next(that.element, that.page(), that.totalPages());
                 }
 
-                if (!that.element.find(".k-last").length) {
-                    that.element.append(icon("k-last", options.messages.last));
+                if (!that.element.find(LAST).length) {
+                    that.element.append(icon(LAST, options.messages.last));
 
                     last(that.element, that.page(), that.totalPages());
                 }
@@ -125,7 +128,7 @@
 
             that._clickHandler = proxy(that._click, that);
 
-            that.element.delegate("a", "click", that._clickHandler);
+            that.element.on(CLICK, "a", that._clickHandler);
 
             if (options.autoBind) {
                 that.refresh();
@@ -135,17 +138,17 @@
         destroy: function() {
             var that = this;
 
-            that.element.undelegate("a", "click", that._clickHandler);
+            that.element.off(CLICK, "a", that._clickHandler);
 
             if (that.input) {
-                that.input.off("keydown", "input", that._keydownHandler);
+                that.input.off(KEYDOWN, "input", that._keydownHandler);
             }
 
-            that.dataSource.unbind("change", that._refreshHandler);
+            that.dataSource.unbind(CHANGE, that._refreshHandler);
         },
 
         events: [
-            "change"
+            CHANGE
         ],
 
         options: {
@@ -277,7 +280,7 @@
             if (page !== undefined) {
                 this.dataSource.page(page);
 
-                this.trigger("change", { index: page });
+                this.trigger(CHANGE, { index: page });
             } else {
                 if (this.dataSource.total() > 0) {
                     return this.dataSource.page();
