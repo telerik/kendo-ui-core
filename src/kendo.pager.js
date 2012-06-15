@@ -121,7 +121,7 @@
 
             if (options.pageSizes){
                 if (!that.element.find(".k-pager-size").length){
-                     $('<span class="k-pager-sizes k-label"><select/></span>')
+                     $('<span class="k-pager-sizes k-label"><select/>' + options.messages.itemsPerPage + "</span>")
                         .appendTo(that.element)
                         .find("select")
                         .html($.map($.isArray(options.pageSizes) ? options.pageSizes : [5,10,20], function(page){
@@ -193,6 +193,7 @@
             buttonCount: 10,
             autoBind: true,
             info: true,
+            input: false,
             previousNext: true,
             pageSizes: false,
             refresh: false,
@@ -201,6 +202,7 @@
                 empty: "No items to display",
                 page: "Page",
                 of: "of {0}",
+                itemsPerPage: "items per page",
                 first: "Go to the first page",
                 previous: "Go to the previous page",
                 next: "Go to the next page",
