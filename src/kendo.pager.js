@@ -2,7 +2,8 @@
     var kendo = window.kendo,
         ui = kendo.ui,
         Widget = ui.Widget,
-        proxy = $.proxy;
+        proxy = $.proxy,
+        iconTemplate = kendo.template('<a href="\\#" class="k-link k-state-disabled" data-#=ns#page="#=idx#"><span class="k-icon #= className #">#=text#</span></a>');
 
     function button(template, idx, text, numeric) {
         return template( {
@@ -11,6 +12,15 @@
             ns: kendo.ns,
             numeric: numeric
         });
+    }
+
+    function icon(className, idx, text) {
+        return iconTemplate({
+            idx: idx,
+            className: className,
+            text: text,
+            ns: kendo.ns
+        })
     }
 
     var Pager = Widget.extend( {
@@ -27,6 +37,16 @@
             that._refreshHandler = proxy(that.refresh, that);
 
             that.dataSource.bind("change", that._refreshHandler);
+
+            if (options.previousNext) {
+                if (!that.element.find(".k-first").length) {
+                    that.element.append(icon("k-first", 1, options.messages.first));
+                }
+
+                if (!that.element.find(".k-prev").length) {
+                    that.element.append(icon("k-prev", Math.max(1, that.page() - 1), options.messages.previous));
+                }
+            }
 
             that.list = that.element.children(".k-pager");
 
@@ -47,6 +67,16 @@
 
                 that._keydownHandler = proxy(that._keydown, that);
                 that.input.on("keydown", "input", that._keydownHandler);
+            }
+
+            if (options.previousNext) {
+                if (!that.element.find(".k-next").length) {
+                    that.element.append(icon("k-next", Math.min(that.totalPages(), that.page() + 1), options.messages.next));
+                }
+
+                if (!that.element.find(".k-last").length) {
+                    that.element.append(icon("k-last", that.totalPages(), options.messages.last));
+                }
             }
 
             if (options.info) {
@@ -91,11 +121,16 @@
             buttonCount: 10,
             autoBind: true,
             info: true,
+            previousNext: true,
             messages: {
                 display: "Displaying items {0} - {1} of {2}",
                 empty: "No items to display",
                 page: "Page",
-                of: "of {0}"
+                of: "of {0}",
+                first: "Go to the first page",
+                previous: "Go to the previous page",
+                next: "Go to the next page",
+                last: "Go to the last page"
             }
         },
 
@@ -161,6 +196,31 @@
                     .val(page)
                     .attr("disabled", total < 1)
                     .toggleClass("k-state-disabled", total < 1);
+            }
+
+            if (that.options.previousNext) {
+                that.element
+                    .find(".k-first")
+                    .parent()
+                    .toggleClass("k-state-disabled", page <= 1);
+
+                that.element
+                    .find(".k-prev")
+                    .parent()
+                    .toggleClass("k-state-disabled", page <= 1)
+                    .attr("data-" + kendo.ns + "page", Math.max(1, page - 1));
+
+                that.element
+                    .find(".k-next")
+                    .parent()
+                    .toggleClass("k-state-disabled", page >= totalPages)
+                    .attr("data-" + kendo.ns + "page", Math.min(totalPages, page + 1));
+
+                that.element
+                    .find(".k-last")
+                    .parent()
+                    .toggleClass("k-state-disabled", page >= totalPages)
+                    .attr("data-" + kendo.ns + "page", totalPages);
             }
         },
 

@@ -136,7 +136,7 @@
                         pageSize: 1
                     }
                 });
-                $(".k-grid-pager").find("a:not(.currentPage)").click();
+                $(".k-grid-pager").find("ul a:not(.currentPage)").click();
                 table.focus().press(kendo.keys.PAGEUP);
                 equal(grid.dataSource.page(), 1);
             });
