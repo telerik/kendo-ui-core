@@ -77,6 +77,14 @@ namespace Kendo.Mvc.UI.Fluent.Tests
 
             Assert.True(listView.Selection.Enabled);
             Assert.Equal(ListViewSelectionMode.Multiple, listView.Selection.Mode);
-        }  
+        }
+
+        [Fact]
+        public void Wrapper_tag_name_is_set()
+        {
+            builder.TagName("div");
+
+            Assert.Equal("div", listView.TagName);
+        }
     }
 }

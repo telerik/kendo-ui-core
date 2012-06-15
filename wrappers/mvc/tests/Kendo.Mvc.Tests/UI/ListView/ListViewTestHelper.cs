@@ -31,7 +31,7 @@ namespace Kendo.Mvc.UI.Tests
 
             var initializer = new Mock<IJavaScriptInitializer>();
 
-            ListView<T> listView = new ListView<T>(viewContext, initializer.Object, urlGenerator.Object) { Name = "ListView" };
+            ListView<T> listView = new ListView<T>(viewContext, initializer.Object, urlGenerator.Object) { Name = "ListView", TagName = "div" };
 
             return listView;
         }

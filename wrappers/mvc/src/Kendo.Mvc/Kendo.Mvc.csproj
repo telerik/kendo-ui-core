@@ -714,6 +714,7 @@
     <Compile Include="UI\InputComponentExtensions.cs" />
     <Compile Include="UI\IViewComponent.cs" />
     <Compile Include="Infrastructure\JsonObjectExtensions.cs" />
+    <Compile Include="UI\ListView\ListViewSettingsSerializer.cs" />
     <Compile Include="UI\ListView\Fluent\ListViewSelectionSettingsBuilder.cs" />
     <Compile Include="UI\ListView\Fluent\ListViewPagerSettingsBuilder.cs" />
     <Compile Include="UI\ListView\Fluent\ListViewBuilder.cs" />

@@ -19,7 +19,15 @@ namespace Kendo.Mvc.UI.Tests.ListView
 
         [Fact]
         public void Should_throw_when_ClientTemplateId_is_not_set()
-        {            
+        {                        
+            Assert.Throws<NotSupportedException>(() => listView.VerifySettings());
+        }
+
+        [Fact]
+        public void Should_throw_when_WrapperTagName_is_not_set()
+        {
+            listView.ClientTemplateId = "foo";
+            listView.TagName = string.Empty;
             Assert.Throws<NotSupportedException>(() => listView.VerifySettings());
         }
     }

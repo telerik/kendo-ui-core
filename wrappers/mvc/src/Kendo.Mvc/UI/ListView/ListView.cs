@@ -8,7 +8,9 @@
     using System.IO;    
 
     public class ListView<T> : ViewComponentBase, IListView where T : class
-    {        
+    {
+        private readonly ListViewSettingsSerializer<T> settingsSerializer;
+
         public ListView(ViewContext viewContext, IJavaScriptInitializer initializer, IUrlGenerator urlGenerator)
             : base(viewContext, initializer)
         {
@@ -17,6 +19,8 @@
             Paging = new ListViewPagingSettings();
 
             Selection = new ListViewSelectionSettings();
+
+            settingsSerializer = new ListViewSettingsSerializer<T>(this);
 
             DataSource = new DataSource()
             {
@@ -29,6 +33,12 @@
             };
 
             DataSource.ModelType(typeof(T));            
+        }
+
+        public string TagName
+        {
+            get;
+            set;
         }
 
         public IUrlGenerator UrlGenerator
@@ -71,17 +81,9 @@
         {
             var options = new Dictionary<string, object>(Events);
                    
-            ProcessDataSource();            
-            
-            options["dataSource"] = DataSource.ToJson();            
+            ProcessDataSource();
 
-            SerializeClientTemplate(options);
-
-            SerializePaging(options);
-
-            SerializeNavigatable(options);
-
-            SerializeSelection(options);
+            settingsSerializer.Serialize(options);
             
             writer.Write(Initializer.Initialize(Selector, "ListView", options));
 
@@ -90,10 +92,10 @@
 
         protected override void WriteHtml(HtmlTextWriter writer)
         {
-            var html = new ListViewHtmlBuilder<T>(this).Build();
-            writer.Write(html.InnerHtml);
-
             base.WriteHtml(writer);
+
+            var html = new ListViewHtmlBuilder<T>(this).Build();
+            writer.Write(html.InnerHtml);            
         }
 
         public override void VerifySettings()
@@ -104,6 +106,11 @@
             {
                 throw new NotSupportedException("ClientTemplateId cannot be blank.");
             }
+
+            if (string.IsNullOrEmpty(TagName))
+            {
+                throw new NotSupportedException("Tag name cannot be blank.");
+            }
         }
 
         private void ProcessDataSource()
@@ -113,17 +120,7 @@
                 DataSource.PageSize = 10;
             }
 
-            var binder = new DataSourceRequestModelBinder();
-
-            //if (this.PrefixUrlParameters)
-            //{
-            //    binder.Prefix = Name;
-
-            //    if (DataSource.Type == DataSourceType.Server)
-            //    {
-            //        DataSource.Transport.Prefix = Name + "-";
-            //    }
-            //}
+            var binder = new DataSourceRequestModelBinder();            
 
             var controller = ViewContext.Controller;
             var bindingContext = new ModelBindingContext() { ValueProvider = controller.ValueProvider };
@@ -136,47 +133,6 @@
             //{
             //    DataKeys.Add(DataSource.Schema.Model.Id);
             //}
-        }
-
-        private void SerializeClientTemplate(Dictionary<string, object> options)
-        {
-            var idPrefix = "#";
-
-            if (IsInClientTemplate)
-            {
-                idPrefix = "\\" + idPrefix;
-            }     
-
-            if (!String.IsNullOrEmpty(ClientTemplateId))
-            {
-                options["template"] = new ClientEvent { HandlerName = String.Format("kendo.template($('{0}{1}').html())", idPrefix, ClientTemplateId) };
-            }
-        }
-
-        private void SerializePaging(Dictionary<string, object> options)
-        {
-            if (Paging.Enabled)
-            {
-                var paging = Paging.ToJson();
-                paging.Add("pagerId", Id + "_pager");
-                options["pageable"] = paging;
-            }
-        }
-
-        private void SerializeNavigatable(Dictionary<string, object> options)
-        {
-            if (Navigatable)
-            {
-                options["navigatable"] = Navigatable;
-            }
-        }
-
-        private void SerializeSelection(Dictionary<string, object> options)
-        {
-            if (Selection.Enabled)
-            {
-                options["selectable"] = Selection.Mode;
-            }
         }        
     }
 }

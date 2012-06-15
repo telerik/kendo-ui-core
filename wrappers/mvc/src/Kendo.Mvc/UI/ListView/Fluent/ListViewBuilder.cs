@@ -178,6 +178,24 @@
             return this;
         }
 
+        /// <summary>
+        /// Specifies ListView wrapper element tag name.
+        /// </summary>       
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ListView()
+        ///             .Name("ListView")
+        ///             .TagName("div")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ListViewBuilder<T> TagName(string tagName)
+        {
+            Component.TagName = tagName;
+
+            return this;
+        }
+
         public ListViewBuilder<T> DataSource(Action<AjaxDataSourceBuilder<T>> configurator)
         {
             configurator(new AjaxDataSourceBuilder<T>(Component.DataSource, Component.ViewContext, Component.UrlGenerator));

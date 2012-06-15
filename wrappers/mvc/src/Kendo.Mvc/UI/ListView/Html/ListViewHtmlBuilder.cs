@@ -24,7 +24,7 @@ namespace Kendo.Mvc.UI
         {            
             var html = new HtmlElement("div");
                             
-            html.Children.Add(new HtmlElement("div").Attribute("id", listView.Id));
+            html.Children.Add(new HtmlElement(listView.TagName).Attribute("id", listView.Id));
 
             if (listView.Paging.Enabled)
             {

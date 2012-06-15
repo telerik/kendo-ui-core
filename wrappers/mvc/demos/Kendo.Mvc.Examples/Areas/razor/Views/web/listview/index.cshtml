@@ -2,6 +2,7 @@
 
 @(Html.Kendo().ListView<Kendo.Mvc.Examples.Models.ProductViewModel>(Model)
     .Name("ListView")
+    .TagName("div")
     .ClientTemplateId("list-view-template")
     .DataSource(d =>
         d.Read(read => read.Action("Products_Read", "ListView"))

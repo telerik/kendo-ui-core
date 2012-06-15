@@ -19,6 +19,11 @@
             get;
         }
 
+        string TagName
+        {
+            get;
+        }
+
         string ClientTemplateId
         {
             get;            
