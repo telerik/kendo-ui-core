@@ -215,6 +215,7 @@
          *         }]
          *     }
          *  });
+         * @option {Number} [rangeSize] The width of the range indicators.
          * @option {Object} [gaugeArea] The gauge area configuration options.
          * This is the entire visible area of the gauge.
          * @option {Number|Object} [gaugeArea.margin] <5> The margin of the gauge area.

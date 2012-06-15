@@ -378,7 +378,7 @@
                 labelsOptions = options.labels,
                 padding = labelsOptions.padding,
                 rangeDistance = scale.options.rangeDistance = ring.r * 0.05,
-                rangeSize = scale.options.rangeSize = ring.r * 0.1,
+                rangeSize = options.rangeSize = options.rangeSize || ring.r * 0.1,
                 ranges = options.ranges || [],
                 halfWidth, halfHeight, labelAngle,
                 angle, label, lp, i, cx, cy, isInside;
@@ -737,7 +737,7 @@
                 result = [],
                 count = ranges.length,
                 range, slotX, slotY, i,
-                rangeSize = options.minorTicks.size / 2,
+                rangeSize = options.rangeSize || options.minorTicks.size / 2,
                 slot;
 
             if (count) {
