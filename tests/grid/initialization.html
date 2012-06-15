@@ -683,6 +683,112 @@
                 equal(grid.footer.find("td:first").attr("baz"), "baz1");
                 equal(grid.footer.find("td:last").attr("moo"), "moo1");
             });
+
+            test("css class is added to custom command button", function() {
+                var grid = new Grid($("<table/>"), {
+                    dataSource: [{ foo: 1, bar: "bar"}],
+                    columns: [ { command: "bar" }]
+                });
+
+                ok(grid.tbody.find("tr:first > td:first a").hasClass("k-grid-bar"));
+            });
+
+            test("both service and custom css classes are added to custom command button", function() {
+                var grid = new Grid($("<table/>"), {
+                    dataSource: [{ foo: 1, bar: "bar"}],
+                    columns: [ { command: { className: "bar", name: "foo" } }]
+                });
+
+                var button = grid.tbody.find("tr:first > td:first a");
+                ok(button.hasClass("k-grid-foo"));
+                ok(button.hasClass("bar"));
+            });
+
+            test("text is used if no name is set", function() {
+                var grid = new Grid($("<table/>"), {
+                    dataSource: [{ foo: 1, bar: "bar"}],
+                    columns: [ { command: { text: "bar"} }]
+                });
+
+                ok(grid.tbody.find("tr:first > td:first a").hasClass("k-grid-bar"));
+            });
+
+            test("custom command without name throws error", function() {
+                raises(function() {
+                    var grid = new Grid($("<table/>"), {
+                        dataSource: [{ foo: 1, bar: "bar"}],
+                        columns: [{ command: { className: "foo" } }]
+                    });
+                },
+                function(error) {
+                    return error.message === "Custom commands should have name specified";
+                });
+            });
+
+            test("custom command click handler is called", 1, function() {
+                var grid = new Grid($("<table/>"), {
+                    dataSource: [{ foo: 1, bar: "bar"}],
+                    columns: [
+                    {
+                        command: {
+                            name: "bar",
+                            click: function() {
+                                ok(true);
+                            }
+                        }
+                    }]
+                });
+                grid.items().first().find("td:first a").click();
+            });
+
+            test("custom command click handler is called if multiple commands", 1, function() {
+                var grid = new Grid($("<table/>"), {
+                    dataSource: [{ foo: 1, bar: "bar"}],
+                    columns: [
+                    {
+                        command: [{
+                            name: "bar",
+                            click: function() {
+                                ok(true);
+                            }
+                        }, "othercommand"]
+                    }]
+                });
+                grid.items().first().find("td:first a:first").click();
+                grid.items().first().find("td:first a:last").click();
+            });
+
+            test("command name is passed to custom command click handler", 1, function() {
+                var grid = new Grid($("<table/>"), {
+                    dataSource: [{ foo: 1, bar: "bar"}],
+                    columns: [
+                    {
+                        command: [{
+                            name: "bar",
+                            click: function(e) {
+                                equal(e.data.commandName, "bar");
+                            }
+                        }]
+                    }]
+                });
+                grid.items().first().find("td:first a:first").click();
+            });
+
+            test("grid instance is the context for the custom command handler", 1, function() {
+                var grid = new Grid($("<table/>"), {
+                    dataSource: [{ foo: 1, bar: "bar"}],
+                    columns: [
+                    {
+                        command: [{
+                            name: "bar",
+                            click: function(e) {
+                                same(this, grid);
+                            }
+                        }]
+                    }]
+                });
+                grid.items().first().find("td:first a:first").click();
+            });
        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

@@ -6,6 +6,9 @@
             <div id="details"></div>
 
             <script>
+                var wnd,
+                    detailsTemplate;
+
                 $(document).ready(function () {
                     var grid = $("#grid").kendoGrid({
                         dataSource: {
@@ -18,10 +21,10 @@
                             { field: "FirstName", title: "First Name" },
                             { field: "LastName", title: "Last Name" },
                             { field: "Title" },
-                            { command: { text: "Details", className: "details-button" }, title: " ", width: "110px" }]
+                            { command: { text: "Details", click: showDetails }, title: " ", width: "110px" }]
                     }).data("kendoGrid");
 
-                    var wnd = $("#details")
+                    wnd = $("#details")
                         .kendoWindow({
                             title: "Customer Details",
                             modal: true,
@@ -30,16 +33,16 @@
                             width: 300
                         }).data("kendoWindow");
 
-                    var detailsTemplate = kendo.template($("#template").html());
-
-                    $("#grid").delegate(".details-button", "click", function(e) {
-                        e.preventDefault();
-
-                        var dataItem = grid.dataItem($(this).closest("tr"));
-                        wnd.content(detailsTemplate(dataItem));
-                        wnd.center().open();
-                    });
+                    detailsTemplate = kendo.template($("#template").html());
                 });
+
+                function showDetails(e) {
+                    e.preventDefault();
+
+                    var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+                    wnd.content(detailsTemplate(dataItem));
+                    wnd.center().open();
+                }
             </script>
 
             <script type="text/x-kendo-template" id="template">
