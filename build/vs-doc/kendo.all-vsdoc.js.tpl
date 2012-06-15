@@ -14,8 +14,11 @@ var kendo = {
 
 #= theClass.name #.prototype = {
 
+# var bind = false, unbind = false; #
 # theClass.methods.forEach(function(method) { #
     # var params = method.parameters.map(function(param) { return param.name }).join(","); #
+    # if (method.name === "bind") { bind = true }; #
+    # if (method.name === "unbind") { unbind = true }; #
     #= method.name#: function(#= params #) {
         /// <summary>
         /// #= trim(method.description).replace(/\n/g, "\n/// ")  #
@@ -30,6 +33,7 @@ var kendo = {
         },
 # }); #
 
+    # if (!bind) { #
     bind: function(event, callback) {
         /// <summary>
         /// Binds to a widget event.
@@ -37,14 +41,20 @@ var kendo = {
         /// <param name="event" type="String">The event name</param>
         /// <param name="callback" type="Function">The callback to be executed when the event is triggered.</param>
     },
+    # } #
 
+    # if (!unbind) { #
     unbind: function(event, callback) {
         /// <summary>
         /// Unbinds a callback from a widget event.
         /// </summary>
         /// <param name="event" type="String">The event name</param>
         /// <param name="callback" type="Function">The callback to be removed.</param>
-    }
+    },
+    # } #
+
+    # /* Workaround JsHint */ #
+    __: function() {}
 };
 
 $.fn.get#= theClass.plugin.replace("kendo", "Kendo") # = function() {
@@ -66,7 +76,7 @@ $.fn.#= theClass.plugin # = function(options) {
     /// <param name="options" type="Object">
     /// The widget configuration options
     /// </param>
-}
+};
 
 # } else { #
 # /* Namespace */ #

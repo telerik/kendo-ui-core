@@ -99,6 +99,10 @@ function parseMethod(child) {
     child.children.forEach(function(member) {
         if (/Parameters/.test(member.title)) {
             member.children.forEach(function(param) {
+                // Skip composite parameters like "options.url"
+                if (param.title.indexOf(".") > -1) {
+                    return;
+                }
                 match = param.title.match(/(\w+).+`(.*)`/);
                 method.parameters.push({
                     name: match[1],
