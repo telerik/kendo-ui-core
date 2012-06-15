@@ -1,14 +1,5 @@
 namespace Kendo.Mvc.UI.Fluent.Tests
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Data;
-    using System.IO;
-    using System.Linq.Expressions;
-    using System.Web.UI;
-    using Moq;
-    using UI.Tests;
-    using UI;
     using Xunit;
 
     public class ListViewPagerSettingsBuilderTests

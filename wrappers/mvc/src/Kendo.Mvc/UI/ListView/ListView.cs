@@ -4,7 +4,8 @@
     using System.Web.UI;
     using System.Web.Mvc;
     using System.Collections.Generic;
-    using Kendo.Mvc.Infrastructure;    
+    using Kendo.Mvc.Infrastructure;
+    using System.IO;    
 
     public class ListView<T> : ViewComponentBase, IListView where T : class
     {        
@@ -14,6 +15,8 @@
             UrlGenerator = urlGenerator;
 
             Paging = new ListViewPagingSettings();
+
+            Selection = new ListViewSelectionSettings();
 
             DataSource = new DataSource()
             {
@@ -52,32 +55,34 @@
             internal set;
         }
 
-        public override void WriteInitializationScript(System.IO.TextWriter writer)
+        public bool Navigatable
+        {
+            get;
+            set;
+        }
+
+        public ListViewSelectionSettings Selection
+        {
+            get;
+            private set;
+        }
+
+        public override void WriteInitializationScript(TextWriter writer)
         {
             var options = new Dictionary<string, object>(Events);
-            var idPrefix = "#";
+                   
+            ProcessDataSource();            
+            
+            options["dataSource"] = DataSource.ToJson();            
 
-            if (IsInClientTemplate)
-            {
-                idPrefix = "\\" + idPrefix;
-            }            
+            SerializeClientTemplate(options);
 
-            ProcessDataSource();
+            SerializePaging(options);
 
-            if (!String.IsNullOrEmpty(ClientTemplateId))
-            {
-                options["template"] = new ClientEvent { HandlerName = String.Format("kendo.template($('{0}{1}').html())", idPrefix, ClientTemplateId) };
-            }
+            SerializeNavigatable(options);
 
-            if (Paging.Enabled)
-            {
-                var paging = Paging.ToJson();
-                paging.Add("pagerId", Id + "_pager");
-                options["pageable"] = paging;
-            }
-
-            options["dataSource"] = DataSource.ToJson();
-
+            SerializeSelection(options);
+            
             writer.Write(Initializer.Initialize(Selector, "ListView", options));
 
             base.WriteInitializationScript(writer);
@@ -132,5 +137,46 @@
             //    DataKeys.Add(DataSource.Schema.Model.Id);
             //}
         }
+
+        private void SerializeClientTemplate(Dictionary<string, object> options)
+        {
+            var idPrefix = "#";
+
+            if (IsInClientTemplate)
+            {
+                idPrefix = "\\" + idPrefix;
+            }     
+
+            if (!String.IsNullOrEmpty(ClientTemplateId))
+            {
+                options["template"] = new ClientEvent { HandlerName = String.Format("kendo.template($('{0}{1}').html())", idPrefix, ClientTemplateId) };
+            }
+        }
+
+        private void SerializePaging(Dictionary<string, object> options)
+        {
+            if (Paging.Enabled)
+            {
+                var paging = Paging.ToJson();
+                paging.Add("pagerId", Id + "_pager");
+                options["pageable"] = paging;
+            }
+        }
+
+        private void SerializeNavigatable(Dictionary<string, object> options)
+        {
+            if (Navigatable)
+            {
+                options["navigatable"] = Navigatable;
+            }
+        }
+
+        private void SerializeSelection(Dictionary<string, object> options)
+        {
+            if (Selection.Enabled)
+            {
+                options["selectable"] = Selection.Mode;
+            }
+        }        
     }
 }

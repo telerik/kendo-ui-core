@@ -714,11 +714,14 @@
     <Compile Include="UI\InputComponentExtensions.cs" />
     <Compile Include="UI\IViewComponent.cs" />
     <Compile Include="Infrastructure\JsonObjectExtensions.cs" />
+    <Compile Include="UI\ListView\Fluent\ListViewSelectionSettingsBuilder.cs" />
     <Compile Include="UI\ListView\Fluent\ListViewPagerSettingsBuilder.cs" />
     <Compile Include="UI\ListView\Fluent\ListViewBuilder.cs" />
+    <Compile Include="UI\ListView\ListViewSelectionMode.cs" />
     <Compile Include="UI\ListView\Html\ListViewHtmlBuilder.cs" />
     <Compile Include="UI\ListView\IListView.cs" />
     <Compile Include="UI\ListView\ListView.cs" />
+    <Compile Include="UI\ListView\Settings\ListViewSelectionSettings.cs" />
     <Compile Include="UI\ListView\Settings\ListViewPagingSettings.cs" />
     <Compile Include="UI\LiteralNode.cs" />
     <Compile Include="Infrastructure\Implementation\PredicateFilterDescription.cs" />

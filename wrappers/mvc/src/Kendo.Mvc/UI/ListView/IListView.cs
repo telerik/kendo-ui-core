@@ -21,13 +21,22 @@
 
         string ClientTemplateId
         {
-            get;
-            set;
+            get;            
         }
 
         ListViewPagingSettings Paging
         {
             get;        
+        }
+
+        bool Navigatable
+        {
+            get;
+        }
+
+        ListViewSelectionSettings Selection
+        {
+            get;
         }
     }
 }

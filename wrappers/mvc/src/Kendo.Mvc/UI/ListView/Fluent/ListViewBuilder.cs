@@ -116,6 +116,68 @@
             return this;
         }
 
+        /// <summary>
+        /// Enables keyboard navigation.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ListView()
+        ///             .Name("ListView")
+        ///             .Ajax(ajax => ajax.Action("Orders", "ListView"))        
+        ///             .Navigatable();
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ListViewBuilder<T> Navigatable()
+        {
+            Component.Navigatable = true;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Enables single item selection.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ListView()
+        ///             .Name("ListView")
+        ///             .Selectable()
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ListViewBuilder<T> Selectable()
+        {
+            Component.Selection.Enabled = true;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Enables item selection.
+        /// </summary>
+        /// <param name="selectionAction">Use builder to define the selection mode.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ListView()
+        ///             .Name("ListView")
+        ///             .Selectable(selection => {
+        ///                 selection.Enabled(true);
+        ///                 selection.Mode(ListViewSelectionMode.Multiple);
+        ///             })
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ListViewBuilder<T> Selectable(Action<ListViewSelectionSettingsBuilder> selectionAction)
+        {
+
+            Selectable();
+
+            selectionAction(new ListViewSelectionSettingsBuilder(Component.Selection));
+
+            return this;
+        }
+
         public ListViewBuilder<T> DataSource(Action<AjaxDataSourceBuilder<T>> configurator)
         {
             configurator(new AjaxDataSourceBuilder<T>(Component.DataSource, Component.ViewContext, Component.UrlGenerator));

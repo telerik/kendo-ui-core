@@ -1,15 +1,11 @@
 namespace Kendo.Mvc.UI.Fluent.Tests
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Data;
-    using System.IO;
-    using System.Linq.Expressions;
-    using System.Web.UI;
-    using Moq;
-    using UI.Tests;
-    using UI;
+{    
     using Xunit;
+    using Kendo.Mvc.UI.Tests;
+    using Moq;
+    using System.Collections.Generic;
+    using System.Web.UI;
+    using System.IO;
 
     public class ListViewBuilderTests
     {
@@ -55,6 +51,32 @@ namespace Kendo.Mvc.UI.Fluent.Tests
             builder.Pageable();
 
             Assert.True(listView.Paging.Enabled);
+        }
+
+        [Fact]
+        public void Navigatable_enables_ListView_navigation()
+        {
+            builder.Navigatable();
+
+            Assert.True(listView.Navigatable);
+        }
+
+        [Fact]
+        public void Selectable_enables_single_mode_selection()
+        {
+            builder.Selectable();
+
+            Assert.True(listView.Selection.Enabled);
+            Assert.Equal(ListViewSelectionMode.Single,listView.Selection.Mode);
+        }
+
+        [Fact]
+        public void Selectable_enables_multi_mode_selection()
+        {
+            builder.Selectable(select => select.Mode(ListViewSelectionMode.Multiple));
+
+            Assert.True(listView.Selection.Enabled);
+            Assert.Equal(ListViewSelectionMode.Multiple, listView.Selection.Mode);
         }  
     }
 }
