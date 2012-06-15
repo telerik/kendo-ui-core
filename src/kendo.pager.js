@@ -3,7 +3,11 @@
         ui = kendo.ui,
         Widget = ui.Widget,
         proxy = $.proxy,
-        iconTemplate = kendo.template('<a href="\\#" class="#=state#" data-#=ns#page="#=idx#"><span class="k-icon #= className #">#=text#</span></a>');
+        FIRST = ".k-first",
+        LAST = ".k-last",
+        PREV = ".k-prev",
+        NEXT = ".k-next",
+        iconTemplate = kendo.template('<a href="\\#" title="#=text#" class="k-link"><span class="k-icon #= className #">#=text#</span></a>');
 
     function button(template, idx, text, numeric) {
         return template( {
@@ -14,14 +18,35 @@
         });
     }
 
-    function icon(className, idx, enabled, text) {
+    function icon(className, text) {
         return iconTemplate({
-            idx: idx,
             className: className,
-            state: enabled ? "k-link" : "k-link k-state-disabled",
-            text: text,
-            ns: kendo.ns
-        })
+            text: text
+        });
+    }
+
+    function update(element, selector, page, disabled) {
+       element.find(selector)
+              .parent()
+              .attr("data-" + kendo.ns + "page", page)
+              .attr("disabled", disabled)
+              .toggleClass("k-state-disabled", disabled);
+    }
+
+    function first(element, page, totalPages) {
+        update(element, FIRST, 1, page <= 1);
+    }
+
+    function prev(element, page, totalPages) {
+        update(element, PREV, Math.max(1, page - 1), page <= 1);
+    }
+
+    function next(element, page, totalPages) {
+        update(element, NEXT, Math.min(totalPages, page + 1), page >= totalPages);
+    }
+
+    function last(element, page, totalPages) {
+        update(element, LAST, totalPages, page >= totalPages);
     }
 
     var Pager = Widget.extend( {
@@ -41,11 +66,15 @@
 
             if (options.previousNext) {
                 if (!that.element.find(".k-first").length) {
-                    that.element.append(icon("k-first", 1, that.page() > 1, options.messages.first));
+                    that.element.append(icon("k-first", options.messages.first));
+
+                    first(that.element, that.page(), that.totalPages());
                 }
 
                 if (!that.element.find(".k-prev").length) {
-                    that.element.append(icon("k-prev", Math.max(1, that.page() - 1), that.page() > 1, options.messages.previous));
+                    that.element.append(icon("k-prev", options.messages.previous));
+
+                    prev(that.element, that.page(), that.totalPages());
                 }
             }
 
@@ -72,11 +101,15 @@
 
             if (options.previousNext) {
                 if (!that.element.find(".k-next").length) {
-                    that.element.append(icon("k-next", Math.min(that.totalPages(), that.page() + 1), that.page() <= that.totalPages(), options.messages.next));
+                    that.element.append(icon("k-next", options.messages.next));
+
+                    next(that.element, that.page(), that.totalPages());
                 }
 
                 if (!that.element.find(".k-last").length) {
-                    that.element.append(icon("k-last", that.totalPages(), that.page() <= that.totalPages(), options.messages.last));
+                    that.element.append(icon("k-last", options.messages.last));
+
+                    last(that.element, that.page(), that.totalPages());
                 }
             }
 
@@ -200,28 +233,13 @@
             }
 
             if (that.options.previousNext) {
-                that.element
-                    .find(".k-first")
-                    .parent()
-                    .toggleClass("k-state-disabled", page <= 1);
+                first(that.element, page, totalPages);
 
-                that.element
-                    .find(".k-prev")
-                    .parent()
-                    .toggleClass("k-state-disabled", page <= 1)
-                    .attr("data-" + kendo.ns + "page", Math.max(1, page - 1));
+                prev(that.element, page, totalPages);
 
-                that.element
-                    .find(".k-next")
-                    .parent()
-                    .toggleClass("k-state-disabled", page >= totalPages)
-                    .attr("data-" + kendo.ns + "page", Math.min(totalPages, page + 1));
+                next(that.element, page, totalPages);
 
-                that.element
-                    .find(".k-last")
-                    .parent()
-                    .toggleClass("k-state-disabled", page >= totalPages)
-                    .attr("data-" + kendo.ns + "page", totalPages);
+                last(that.element, page, totalPages);
             }
         },
 
