@@ -581,6 +581,28 @@
 
                 equal(dataSource.pageSize(), 2);
             });
+
+            test("displays refresh button", function() {
+                var pager = setup({}, { refresh: true });
+
+                equal(pager.find(".k-refresh").length, 1);
+            });
+
+            test("clicking the refresh button reads from the data source", function() {
+                var pager = setup({}, { refresh: true });
+
+                dataSource.read();
+
+                stub(dataSource, {
+                    read: function() {
+                    }
+                });
+
+                pager.find(".k-refresh").click();
+
+                equal(dataSource.calls("read"), 1);
+            });
+
         </script>
     </body>
 </html>

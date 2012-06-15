@@ -149,6 +149,16 @@
                 that.info.addClass("k-label");
             }
 
+            if (options.refresh) {
+                if (!that.element.find(".k-refresh").length) {
+                    that.element.append(icon(".k-refresh", options.messages.refresh));
+                }
+
+                that._reloadHandler = proxy(that._refreshClick, that);
+
+                that.element.find(".k-refresh").parent().click(that._reloadHandler);
+            }
+
             that._clickHandler = proxy(that._click, that);
 
             that.element.on(CLICK, "a", that._clickHandler);
@@ -171,6 +181,8 @@
                 that.pageSizes.find("select").unbind("change", that._changeHandler);
             }
 
+            that.element.find(".k-refresh").parent().unbind(CLICK, that._reloadHandler);
+
             that.dataSource.unbind(CHANGE, that._refreshHandler);
         },
 
@@ -187,6 +199,7 @@
             info: true,
             previousNext: true,
             pageSizes: false,
+            refresh: false,
             messages: {
                 display: "Displaying items {0} - {1} of {2}",
                 empty: "No items to display",
@@ -195,7 +208,8 @@
                 first: "Go to the first page",
                 previous: "Go to the previous page",
                 next: "Go to the next page",
-                last: "Go to the last page"
+                last: "Go to the last page",
+                refresh: "Refresh"
             }
         },
 
@@ -291,6 +305,12 @@
 
                 this.page(page);
             }
+        },
+
+        _refreshClick: function(e) {
+            e.preventDefault();
+
+            this.dataSource.read();
         },
 
         _change: function(e) {
