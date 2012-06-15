@@ -50,11 +50,11 @@ var kendo = {
         /// </summary>
         /// <param name="event" type="String">The event name</param>
         /// <param name="callback" type="Function">The callback to be removed.</param>
-    },
+    }
+    # } else { #
+        self: null
     # } #
 
-    # /* Workaround JsHint */ #
-    __: function() {}
 };
 
 $.fn.get#= theClass.plugin.replace("kendo", "Kendo") # = function() {
