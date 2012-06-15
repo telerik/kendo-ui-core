@@ -67,12 +67,13 @@ $.fn.get#= theClass.plugin.replace("kendo", "Kendo") # = function() {
 $.fn.#= theClass.plugin # = function(options) {
     /// <summary>
     /// Instantiates a #= theClass.name # widget based the DOM elements that match the selector.
+    # if (theClass.configuration.length) { #
     /// &\#10;Accepts an object with the following configuration options:
     /// &\#10;
-    # theClass.configuration.forEach(function(option) { if (option.name.indexOf(".") > -1) { return; } #/// &\#10;#= option.name #       <i>#= option.type.replace(/\*/g, '') #</i>
-    ///&\#10;#= trim(option.description).replace(/\n/g, "\n/// &\\#10;") #
+    # theClass.configuration.forEach(function(option) { if (option.name.indexOf(".") > -1) { return; } #/// &\#10;#= option.name # — #= option.type.replace(/\*/g, '') #
+    ///&\#10;#= trim(option.description).replace(/\n/g, "\n/// &\\#10;").replace(/<(?:.|\n)*?>/gm, '') #
     ///&\#10;
-    # }); #/// </summary>
+    # }); } #/// </summary>
     /// <param name="options" type="Object">
     /// The widget configuration options
     /// </param>
