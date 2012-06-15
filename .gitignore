@@ -5,7 +5,7 @@
 *.suo
 *.swp
 *.user
-bin/
+*.mdb
 obj/
 !**/References/*.dll
 .DS_Store
