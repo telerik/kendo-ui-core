@@ -62,7 +62,6 @@
         CENTER = "center",
         CHANGE = "change",
         CIRCLE = "circle",
-        CIRCLE_GLASS = "circleGlass",
         CLICK = "click",
         CLIP = dataviz.CLIP,
         COLUMN = "column",
@@ -100,6 +99,7 @@
         PRIMARY = "primary",
         RIGHT = "right",
         ROUNDED_BEVEL = "roundedBevel",
+        ROUNDED_GLASS = "roundedGlass",
         SCATTER = "scatter",
         SCATTER_LINE = "scatterLine",
         SERIES_CLICK = "seriesClick",
@@ -3493,7 +3493,7 @@
     var DonutSegment = PieSegment.extend({
         options: {
             overlay: {
-                gradient: CIRCLE_GLASS
+                gradient: ROUNDED_GLASS
             },
             labels: {
                 position: CENTER

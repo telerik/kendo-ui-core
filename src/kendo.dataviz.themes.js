@@ -70,6 +70,20 @@
                         gradient: "sharpBevel"
                     }
                 },
+                donut: {
+                    highlight: {
+                        opacity: 0.6,
+                        color: "#3d3d3d",
+                        border: {
+                            width: 0.5,
+                            opacity: 0.9,
+                            color: BLACK
+                        }
+                    },
+                    overlay: {
+                        gradient: "sharpGlass"
+                    }
+                },
                 line: {
                     markers: {
                         background: "#3d3d3d"
@@ -263,6 +277,11 @@
                     }
                 },
                 pie: {
+                    connectors: {
+                        color: "#A6B1C0"
+                    }
+                },
+                donut: {
                     connectors: {
                         color: "#A6B1C0"
                     }

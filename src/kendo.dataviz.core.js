@@ -1653,7 +1653,7 @@
                 opacity: 0
             }]
         },
-        circleGlass: {
+        roundedGlass: {
             type: DONUT,
             stops: [{
                 offset: 0,
@@ -1667,6 +1667,26 @@
                 offset: 0.99,
                 color: WHITE,
                 opacity: 0
+            }]
+        },
+        sharpGlass: {
+            type: DONUT,
+            stops: [{
+                offset: 0,
+                color: BLACK,
+                opacity: 0.5
+            }, {
+                offset: 0.2,
+                color: BLACK,
+                opacity: 0.15
+            }, {
+                offset: 0.2,
+                color: WHITE,
+                opacity: 0.15
+            }, {
+                offset: 0.8,
+                color: WHITE,
+                opacity: 0.15
             }]
         }
     };
