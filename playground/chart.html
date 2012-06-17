@@ -12,16 +12,16 @@
         <script src="../src/kendo.dataviz.svg.js"></script>
     </head>
     <body>
-        <div id="chart" style="width: 500px; height; 300px;"></div>
+        <div id="chart" style="width: 200px; height; 200px;"></div>
         <script>
             $(function() {
                 $("#chart").kendoChart({
                     legend: {
                         visible: false
                     },
+                    theme: "metro",
                     seriesDefaults: {
-                        type: "donut",
-                        margin: 1
+                        type: "donut"
                     },
                     series: [{
                         type: "donut",

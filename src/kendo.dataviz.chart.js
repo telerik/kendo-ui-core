@@ -3593,8 +3593,6 @@
 
                 if (defined(currentSeries.margin) && i != seriesCount - 1) {
                     totalSize -= currentSeries.margin;
-                } else {
-                    currentSeries.margin = 0;
                 }
             }
 
@@ -3612,7 +3610,7 @@
                 ir += margin;
                 r = ir + size;
                 chart.seriesConfigs.push({ ir: ir, r: r });
-                margin = currentSeries.margin;
+                margin = currentSeries.margin || 0;
                 ir = r;
             }
 
