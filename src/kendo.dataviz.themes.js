@@ -26,6 +26,9 @@
             seriesDefaults: {
                 labels: {
                     font: SANS11
+                },
+                donut: {
+                    margin: 1
                 }
             },
             axisDefaults: {
