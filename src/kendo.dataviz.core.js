@@ -1673,20 +1673,28 @@
             type: DONUT,
             stops: [{
                 offset: 0,
-                color: BLACK,
-                opacity: 0.5
+                color: WHITE,
+                opacity: 0.2
             }, {
-                offset: 0.2,
-                color: BLACK,
-                opacity: 0.15
-            }, {
-                offset: 0.2,
+                offset: 0.15,
                 color: WHITE,
                 opacity: 0.15
             }, {
-                offset: 0.8,
+                offset: 0.17,
+                color: WHITE,
+                opacity: 0.35
+            }, {
+                offset: 0.85,
+                color: WHITE,
+                opacity: 0.05
+            }, {
+                offset: 0.87,
                 color: WHITE,
                 opacity: 0.15
+            }, {
+                offset: 0.99,
+                color: WHITE,
+                opacity: 0
             }]
         }
     };

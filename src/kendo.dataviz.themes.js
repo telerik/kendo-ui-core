@@ -60,29 +60,11 @@
                     color: WHITE
                 },
                 pie: {
-                    highlight: {
-                        opacity: 0.6,
-                        color: "#3d3d3d",
-                        border: {
-                            width: 0.5,
-                            opacity: 0.9,
-                            color: BLACK
-                        }
-                    },
                     overlay: {
                         gradient: "sharpBevel"
                     }
                 },
                 donut: {
-                    highlight: {
-                        opacity: 0.6,
-                        color: "#3d3d3d",
-                        border: {
-                            width: 0.5,
-                            opacity: 0.9,
-                            color: BLACK
-                        }
-                    },
                     overlay: {
                         gradient: "sharpGlass"
                     }
