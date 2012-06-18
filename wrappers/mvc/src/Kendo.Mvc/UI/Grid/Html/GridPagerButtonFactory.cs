@@ -1,7 +1,5 @@
 namespace Kendo.Mvc.UI.Html
 {
-    using Infrastructure;
-
     class GridPagerButtonFactory : IGridPagerButtonFactory
     {
         public IHtmlNode CreateButton(GridPagerButtonType buttonType, bool enabled, string url, string text, int page)
@@ -39,7 +37,7 @@ namespace Kendo.Mvc.UI.Html
                 .ToggleAttribute("href", "#", !enabled);
 
             var span = new HtmlElement("span")
-                .AddClass(UIPrimitives.Icon, "t-arrow-" + text)
+                .AddClass(UIPrimitives.Icon, "k-" + text)
                 .Text(text);
 
             span.AppendTo(a);

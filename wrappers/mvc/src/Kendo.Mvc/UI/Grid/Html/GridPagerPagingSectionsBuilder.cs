@@ -53,11 +53,13 @@ namespace Kendo.Mvc.UI.Html
             {
                 buttonFactory.CreateButton(GridPagerButtonType.Icon, section.Page < section.TotalPages,
                                            GetUrl(urlBuilder, section.Page + 1),
-                                           section.Messages.Next, section.Page + 1)
+                                           "next", section.Page + 1)
+                             .Attribute("title", section.Messages.Next)
                              .AppendTo(container);
 
                 buttonFactory.CreateButton(GridPagerButtonType.Icon, section.Page < section.TotalPages,
-                                           GetUrl(urlBuilder, section.TotalPages), section.Messages.Last, section.TotalPages)
+                                           GetUrl(urlBuilder, section.TotalPages), "last", section.TotalPages)
+                             .Attribute("title", section.Messages.Last)
                              .AppendTo(container);
             }
         }
@@ -76,11 +78,13 @@ namespace Kendo.Mvc.UI.Html
             if (section.PreviousNext)
             {
                 buttonFactory.CreateButton(GridPagerButtonType.Icon, section.Page > 1,
-                                           GetUrl(urlBuilder, 1), section.Messages.First, 1)
+                                           GetUrl(urlBuilder, 1), "first", 1)
+                             .Attribute("title", section.Messages.First)
                              .AppendTo(container);
 
                 buttonFactory.CreateButton(GridPagerButtonType.Icon, section.Page > 1,
-                                           GetUrl(urlBuilder, section.Page - 1), section.Messages.Previous, section.Page - 1)
+                                           GetUrl(urlBuilder, section.Page - 1), "prev", section.Page - 1)
+                             .Attribute("title", section.Messages.Previous)
                              .AppendTo(container);
             }
         }
