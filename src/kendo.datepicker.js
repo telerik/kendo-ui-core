@@ -121,6 +121,7 @@
     calendar = kendo.calendar,
     isInRange = calendar.isInRange,
     restrictValue = calendar.restrictValue,
+    isEqualDatePart = calendar.isEqualDatePart,
     extend = $.extend,
     proxy = $.proxy,
     DATE = Date;
@@ -944,9 +945,17 @@
         _update: function(value) {
             var that = this,
                 options = that.options,
+                min = options.min,
+                max = options.max,
                 date = parse(value, options.parseFormats, options.culture);
 
-            if (!isInRange(date, options.min, options.max)) {
+            if (+date === +that._value) {
+                return date;
+            }
+
+            if (date !== null && isEqualDatePart(date, min)) {
+                date = restrictValue(date, min, max);
+            } else if (!isInRange(date, min, max)) {
                 date = null;
             }
 

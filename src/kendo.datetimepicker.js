@@ -117,7 +117,10 @@
         touch = kendo.support.touch,
         parse = kendo.parseDate,
         extractFormat = kendo._extractFormat,
-        isInRange = kendo.calendar.isInRange,
+        calendar = kendo.calendar,
+        isInRange = calendar.isInRange,
+        restrictValue = calendar.restrictValue,
+        isEqualDatePart = calendar.isEqualDatePart,
         getMilliseconds = TimeView.getMilliseconds,
         ui = kendo.ui,
         Widget = ui.Widget,
@@ -821,7 +824,9 @@
                 return date;
             }
 
-            if (!isInRange(date, min, max)) {
+            if (date !== null && isEqualDatePart(date, min)) {
+                date = restrictValue(date, min, max);
+            } else if (!isInRange(date, min, max)) {
                 date = null;
             }
 
@@ -1019,16 +1024,6 @@
         options.timeFormat = extractFormat(options.timeFormat || patterns.t);
         kendo.DateView.normalize(options);
         options.parseFormats.splice(1, 0, options.timeFormat);
-    }
-
-    function isEqualDatePart(value1, value2) {
-        if (value1) {
-            return value1.getFullYear() === value2.getFullYear() &&
-                   value1.getMonth() === value2.getMonth() &&
-                   value1.getDate() === value2.getDate();
-        }
-
-        return false;
     }
 
     ui.plugin(DateTimePicker);

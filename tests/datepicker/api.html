@@ -366,6 +366,34 @@
                 equal(datepicker.element.val(), formatted);
             });
 
+            test("value method restricts time of the value if it's date part is equal to min", function() {
+                var today = new Date(),
+                    midnight = new Date(today.getFullYear(), today.getMonth(), today.getDate()),
+                    datepicker = input.kendoDatePicker({
+                        min: today,
+                        value: today
+                    }).data("kendoDatePicker");
+
+                datepicker.value(midnight);
+
+                notEqual(datepicker._value, null);
+                equal(+datepicker._value, +today);
+            });
+
+            test("value method restricts time of the value if it's date part is equal to max", function() {
+                var today = new Date(),
+                    midnight = new Date(today.getFullYear(), today.getMonth(), today.getDate()),
+                    datepicker = input.kendoDatePicker({
+                        max: today,
+                        value: today
+                    }).data("kendoDatePicker");
+
+                datepicker.value(midnight);
+
+                notEqual(datepicker._value, null);
+                equal(+datepicker._value, +midnight);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
