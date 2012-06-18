@@ -543,9 +543,8 @@ namespace Kendo.Mvc.UI
         public IList<GridColumnBase<T>> VisibleColumns
         {
             get
-            {
-                //TODO: Implement Column visibility
-                return Columns/*.Where(c => c.Visible)*/.ToList();
+            {                
+                return Columns.Where(c => c.Visible).ToList();
             }
         }
 

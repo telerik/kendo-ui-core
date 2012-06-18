@@ -82,13 +82,13 @@ namespace Kendo.Mvc.UI
             get; 
             set; 
         }
-        /*
+        
         bool Visible 
         { 
             get; 
             set; 
         }
-        */
+        
         string Width 
         { 
             get; 

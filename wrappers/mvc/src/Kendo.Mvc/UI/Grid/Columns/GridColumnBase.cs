@@ -35,9 +35,8 @@ namespace Kendo.Mvc.UI
         protected GridColumnBase(Grid<T> grid)
         {
             Grid = grid;
-            Settings = new GridColumnSettings();
-            //TODO: Implement Column visibility
-            //Visible = true;
+            Settings = new GridColumnSettings();            
+            Visible = true;
             //TODO: Implement HeaderContextMenu
             //IncludeInContextMenu = true;
             //TODO: Implement HeaderTemplate
@@ -270,8 +269,6 @@ namespace Kendo.Mvc.UI
             }
         }
         
-        //TODO: Implement Column visibility
-        /*
         /// <summary>
         /// Gets or sets a value indicating whether this column is visible.
         /// </summary>
@@ -289,8 +286,7 @@ namespace Kendo.Mvc.UI
             {
                 Settings.Visible = value;
             }
-        }
-        */        
+        }        
         
         /// <summary>
         /// Gets the HTML attributes of the cell rendered for the column

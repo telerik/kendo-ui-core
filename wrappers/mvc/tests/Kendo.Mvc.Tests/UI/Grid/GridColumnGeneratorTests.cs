@@ -65,8 +65,8 @@ namespace Kendo.Mvc.UI.Tests
             Assert.Equal(column.HtmlAttributes, settings.HtmlAttributes);
            // Assert.Equal(column.ReadOnly, settings.ReadOnly);
             Assert.Equal(column.Title, settings.Title);
-            //TODO: Implement Column visibility
-           // Assert.Equal(column.Visible, settings.Visible);
+            
+            Assert.Equal(column.Visible, settings.Visible);
             Assert.Equal(column.Width, settings.Width);
         }
 

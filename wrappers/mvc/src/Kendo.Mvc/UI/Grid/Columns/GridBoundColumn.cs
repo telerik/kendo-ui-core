@@ -61,9 +61,8 @@ namespace Kendo.Mvc.UI
                 Metadata = ModelMetadata.FromLambdaExpression(expression, new ViewDataDictionary<TModel>());
                 MemberType = Metadata.ModelType;
                 Title = Metadata.DisplayName;
-                Format = Metadata.DisplayFormatString;
-                //TODO: Implement Column visibility
-                //Visible = Metadata.ShowForDisplay;              
+                Format = Metadata.DisplayFormatString;                
+                Visible = Metadata.ShowForDisplay;              
             }
 
             if (string.IsNullOrEmpty(Title))
