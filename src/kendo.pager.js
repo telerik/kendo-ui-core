@@ -89,7 +89,7 @@
                 that.list = that.element.find(".k-pager-numbers");
 
                 if (!that.list.length) {
-                   that.list = $('<ul class="k-pager-numbers" />').appendTo(that.element);
+                   that.list = $('<ul class="k-pager-numbers k-reset" />').appendTo(that.element);
                 }
             }
 
@@ -145,7 +145,7 @@
 
             if (options.refresh) {
                 if (!that.element.find(".k-pager-refresh").length) {
-                    that.element.append('<a href="#" class="k-icon k-pager-refresh" title="' + options.messages.refresh +
+                    that.element.append('<a href="#" class="k-pager-refresh k-link"  title="' + options.messages.refresh +
                         '"><span class="k-icon k-refresh">' + options.messages.refresh + "</span></a>");
                 }
 

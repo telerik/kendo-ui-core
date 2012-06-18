@@ -12,7 +12,7 @@ namespace Kendo.Mvc.UI.Html
 
         public IHtmlNode Create(IGridUrlBuilder urlBuilder, int currentPage, int pageCount)
         {
-            var ul = new HtmlElement("ul").AddClass("k-pager-numbers");
+            var ul = new HtmlElement("ul").AddClass("k-pager-numbers k-reset");
 
             AppendContent(urlBuilder, ul, pageCount, currentPage);
 
