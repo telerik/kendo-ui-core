@@ -120,7 +120,31 @@
   <data name="Pager_Display" xml:space="preserve">
     <value>{0} - {1} of {2} items</value>
   </data>
+  <data name="Pager_Empty" xml:space="preserve">
+    <value>No items to display</value>
+  </data>
+  <data name="Pager_First" xml:space="preserve">
+    <value>Go to the first page</value>
+  </data>
+  <data name="Pager_ItemsPerPage" xml:space="preserve">
+    <value>items per page</value>
+  </data>
+  <data name="Pager_Last" xml:space="preserve">
+    <value>Go to the last page</value>
+  </data>
+  <data name="Pager_Next" xml:space="preserve">
+    <value>Go to the next page</value>
+  </data>
   <data name="Pager_Of" xml:space="preserve">
     <value>of {0}</value>
+  </data>
+  <data name="Pager_Page" xml:space="preserve">
+    <value>Page</value>
+  </data>
+  <data name="Pager_Previous" xml:space="preserve">
+    <value>Go to the previous page</value>
+  </data>
+  <data name="Pager_Refresh" xml:space="preserve">
+    <value>Refresh</value>
   </data>
 </root>

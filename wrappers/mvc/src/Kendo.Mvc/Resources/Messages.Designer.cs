@@ -70,11 +70,83 @@ namespace Kendo.Mvc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No items to display.
+        /// </summary>
+        public static string Pager_Empty {
+            get {
+                return ResourceManager.GetString("Pager_Empty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Go to the first page.
+        /// </summary>
+        public static string Pager_First {
+            get {
+                return ResourceManager.GetString("Pager_First", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to items per page.
+        /// </summary>
+        public static string Pager_ItemsPerPage {
+            get {
+                return ResourceManager.GetString("Pager_ItemsPerPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Go to the last page.
+        /// </summary>
+        public static string Pager_Last {
+            get {
+                return ResourceManager.GetString("Pager_Last", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Go to the next page.
+        /// </summary>
+        public static string Pager_Next {
+            get {
+                return ResourceManager.GetString("Pager_Next", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to of {0}.
         /// </summary>
         public static string Pager_Of {
             get {
                 return ResourceManager.GetString("Pager_Of", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Page.
+        /// </summary>
+        public static string Pager_Page {
+            get {
+                return ResourceManager.GetString("Pager_Page", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Go to the previous page.
+        /// </summary>
+        public static string Pager_Previous {
+            get {
+                return ResourceManager.GetString("Pager_Previous", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Refresh.
+        /// </summary>
+        public static string Pager_Refresh {
+            get {
+                return ResourceManager.GetString("Pager_Refresh", resourceCulture);
             }
         }
     }

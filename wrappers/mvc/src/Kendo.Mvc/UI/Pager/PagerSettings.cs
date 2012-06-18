@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Kendo.Mvc.UI
 {
@@ -66,6 +67,13 @@ namespace Kendo.Mvc.UI
             if (PageSizes != null && PageSizes.Length > 0)
             {
                 json["pageSizes"] = PageSizes;
+            }
+
+            var messages = Messages.ToJson();
+
+            if (messages.Keys.Any())
+            {
+                json["messages"] = messages;
             }
         }
     }

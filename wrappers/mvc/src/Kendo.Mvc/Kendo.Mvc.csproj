@@ -466,6 +466,8 @@
     <Compile Include="UI\Grid\Html\IGridFormatableCellBuilder.cs" />
     <Compile Include="UI\Grid\Html\IGridPagerPageSizeSection.cs" />
     <Compile Include="UI\Grid\Html\IGridPagerPagingSectionsBuilder.cs" />
+    <Compile Include="UI\Pager\DefaultPagerMessages.cs" />
+    <Compile Include="UI\Pager\Fluent\PagerMessagesBuilder.cs" />
     <Compile Include="UI\Pager\PagerMessages.cs" />
     <Compile Include="UI\Grid\Settings\GridColumnContextMenuSettings.cs" />
     <Compile Include="UI\Grid\Settings\GridNavigatableSettings.cs" />

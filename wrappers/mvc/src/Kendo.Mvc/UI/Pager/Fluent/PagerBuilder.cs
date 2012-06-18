@@ -1,3 +1,5 @@
+using System;
+
 namespace Kendo.Mvc.UI.Fluent
 {
     /// <summary>
@@ -69,6 +71,13 @@ namespace Kendo.Mvc.UI.Fluent
         public PagerBuilder Refresh(bool enabled)
         {
             pager.Refresh = enabled;
+
+            return this;
+        }
+
+        public PagerBuilder Messages(Action<PagerMessagesBuilder> configurator)
+        {
+            configurator(new PagerMessagesBuilder(pager.Messages));
 
             return this;
         }
