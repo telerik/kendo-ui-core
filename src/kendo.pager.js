@@ -96,7 +96,7 @@
 
             if (options.input) {
                 if (!that.element.find(".k-pager-input").length) {
-                   that.element.append('<span class="k-pager-input">'+
+                   that.element.append('<span class="k-pager-input k-label">'+
                        options.messages.page +
                        '<input class="k-textbox">' +
                        kendo.format(options.messages.of, totalPages) +
@@ -133,9 +133,10 @@
                         .end()
                         .appendTo(that.element);
 
-                    if (kendo.ui.DropDownList) {
-                       that.element.find(".k-pager-sizes select").kendoDropDownList();
-                    }
+                }
+
+                if (kendo.ui.DropDownList) {
+                   that.element.find(".k-pager-sizes select").kendoDropDownList();
                 }
 
                 that._changeHandler = proxy(that._change, that);
