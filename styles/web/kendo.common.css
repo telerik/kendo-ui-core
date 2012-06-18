@@ -1179,11 +1179,9 @@ div.k-grid-header .k-header
     line-height: 34px;/*IE7*/
 }
 
-.k-pager-wrap .k-pager-refresh
+.k-pager-wrap>.k-link .k-icon
 {
-    float:right;
-    border-right-width:1px;
-    border-right-style:solid;
+    margin-top:-2px;
 }
 
 *+html .k-pager-wrap>.k-link .k-icon
@@ -1204,6 +1202,12 @@ div.k-grid-header .k-header
     border-width:0 1px 0 0;
 }
 
+.k-pager-wrap .k-pager-refresh
+{
+    float:right;
+    border-width:0 0 0 1px;
+}
+
 .k-pager-numbers .k-state-active
 {
     border-style:solid;
@@ -1215,6 +1219,12 @@ div.k-grid-header .k-header
 .k-pager-wrap .k-textbox
 {
     width:40px;
+}
+
+*+html .k-pager-wrap .k-textbox
+{
+    height:16px;
+    margin-top:2px;
 }
 
 .k-pager-wrap .k-dropdown
@@ -1230,7 +1240,13 @@ div.k-grid-header .k-header
 .k-pager-input,
 .k-pager-sizes
 {
-    padding:0 22px;
+    padding:0 17px;
+}
+
+.k-pager-wrap .k-textbox,
+.k-pager-wrap .k-widget
+{
+    margin:-.3em .4em 0;
 }
 
 /* Grid :: filtering */
