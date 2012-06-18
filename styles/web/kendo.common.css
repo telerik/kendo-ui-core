@@ -1136,25 +1136,25 @@ div.k-grid-header .k-header
     border-width: 1px 0 0;
 }
 
-.k-grid .k-pager,
-.k-pager .k-link,
-.k-pager .k-state-active
+.k-grid .k-pager-numbers,
+.k-pager-numbers .k-link,
+.k-pager-numbers .k-state-active
 {
     display: inline-block;
     vertical-align: top;
 }
 
-.k-pager .k-state-active
+.k-pager-numbers .k-state-active
 {
     vertical-align:top;
 }
 
-.k-pager li
+.k-pager-numbers li
 {
     float:left;
 }
 
-.k-grid .k-pager
+.k-grid .k-pager-numbers
 {
     float: left;
     cursor: default;
@@ -1164,11 +1164,15 @@ div.k-grid-header .k-header
 {
     float: right;
     padding:0 22px;
+}
+
+.k-pager-refresh
+{
     border-left-width:1px;
     border-left-style:solid;
 }
 
-.k-pager .k-link
+.k-pager-numbers .k-link
 {
     text-decoration: none;
 }
@@ -1186,25 +1190,46 @@ div.k-grid-header .k-header
     margin-top:9px;
 }
 
-.k-numeric .k-link,
-.k-numeric .k-state-active
+.k-pager-numbers .k-link,
+.k-pager-numbers .k-state-active
 {
     padding: 0 13px;
 }
 
 .k-pager-wrap>.k-link,
-.k-numeric .k-link
+.k-pager-numbers .k-link
 {
     border-style:solid;
     border-width:0 1px 0 0;
 }
 
-.k-numeric .k-state-active
+.k-pager-numbers .k-state-active
 {
     border-style:solid;
     border-width:1px;
     line-height:32px;
     padding-left:12px;
+}
+
+.k-pager-wrap .k-textbox
+{
+    width:40px;
+}
+
+.k-pager-wrap .k-dropdown
+{
+    width:50px;
+}
+
+.k-pager-refresh
+{
+    float:right;
+}
+
+.k-pager-input,
+.k-pager-sizes
+{
+    padding:0 22px;
 }
 
 /* Grid :: filtering */
@@ -3542,14 +3567,11 @@ html input.k-breadcrumbs-input
 *+html .k-button,
 
 *+html .k-grid-filter,
-*+html .k-grid .k-pager,
+*+html .k-grid .k-pager-numbers,
 *+html .k-grid .k-status-text,
-*+html .k-pager .k-numeric,
-*+html .k-pager .k-page-i-of-n,
-*+html .k-pager .k-link,
-*+html .k-pager span,
-*+html .k-pager input,
-*+html .k-pager .k-page-size,
+*+html .k-pager-numbers .k-link,
+*+html .k-pager-numbers span,
+*+html .k-pager-numbers input,
 *+html .k-grouping-row p,
 *+html .k-grouping-header a,
 *+html .k-grouping-header .k-group-indicator,
