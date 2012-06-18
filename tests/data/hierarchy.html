@@ -121,6 +121,23 @@
                 child.children.add({ productName: "Product 2" });
             });
 
+            test("the event argument contains the index",1, function() {
+                var dataSource = categories();
+
+                dataSource.read();
+
+                var parent = dataSource.data()[0];
+                parent.children.read();
+
+                var child = parent.children.data()[0];
+
+                dataSource.bind("change", function(e) {
+                    strictEqual(e.index, 0);
+                });
+
+                child.children.add({ productName: "Product 2" });
+            });
+
             test("adding a child node triggers the change event of the data source", 2, function() {
                 var dataSource = categories();
 

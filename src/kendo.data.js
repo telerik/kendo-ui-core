@@ -106,6 +106,7 @@
                     that.trigger(CHANGE, {
                         field: e.field,
                         node: e.node,
+                        index: e.index,
                         items: e.items || [this],
                         action: e.action || "itemchange"
                     });
@@ -2555,11 +2556,12 @@
         hasChildren: false,
 
         level: function() {
-            var parentNode = this,
+            var parentNode = this.parentNode(),
                 level = 0;
 
-            while (parentNode = parentNode.parentNode()) {
+            while (parentNode) {
                 level++;
+                parentNode = parentNode.parentNode();
             }
 
             return level;

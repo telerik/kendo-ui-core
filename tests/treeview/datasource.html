@@ -33,7 +33,7 @@
 
             module("DataSource binding", {
                 teardown: function () {
-                    //$(".k-treeview,.k-item").remove();
+                    $(".k-treeview,.k-item").remove();
                 }
             });
 
@@ -326,6 +326,24 @@
 
                 equal(treeview.find(".k-item").length, 3);
                 equal(treeview.find(".k-item:last").text(), "charlie");
+            });
+
+            test("insertBefore", function() {
+                createTreeView([
+                    { text: "foo", expanded: true, items: [
+                        { text: "bar" },
+                        { text: "baz" }
+                    ] }
+                ]);
+
+                console.log("ACT");
+
+                treeviewObject.insertBefore(treeviewObject.findByText("baz"), treeviewObject.findByText("bar"));
+
+                var subitems = treeview.find(".k-item > .k-group > .k-item");
+
+                equal(subitems.eq(0).text(), "baz");
+                equal(subitems.eq(1).text(), "bar");
             });
         </script>
 
