@@ -130,8 +130,6 @@
                         }).join(""))
                         .end()
                         .appendTo(that.element);
-
-                    console.log(that.pageSize());
                 }
 
                 that.element.find(".k-pager-sizes select").val(that.pageSize());
