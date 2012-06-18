@@ -870,10 +870,9 @@ namespace Kendo.Mvc.UI
         {
             return new GridFunctionalData
             {
-                ShowBottomPager = Paging.Enabled,
-                ShowTopToolBar = ToolBar.Enabled && (ToolBar.Position == GridToolBarPosition.Top || ToolBar.Position == GridToolBarPosition.Both),
-                ShowBottomToolBar = ToolBar.Enabled && (ToolBar.Position == GridToolBarPosition.Bottom || ToolBar.Position == GridToolBarPosition.Both),
-                ShowGroupHeader = Grouping.Enabled && Grouping.Visible,
+                Pager = Paging.Enabled,
+                ToolBar = ToolBar.Enabled,
+                GroupHeader = Grouping.Enabled && Grouping.Visible,
                 PagerData = CreatePagerData(),
                 GroupingData = CreateGroupingData(),
                 ToolBarData = CreateToolbarData()                

@@ -455,7 +455,6 @@
     <Compile Include="UI\DataSource\Fluent\DataSourceAggregatesFactory.cs" />
     <Compile Include="UI\Grid\GridColumnExtensions.cs" />
     <Compile Include="UI\Grid\GridGroupAggregateResult.cs" />
-    <Compile Include="UI\Grid\GridOperationMode.cs" />
     <Compile Include="UI\Grid\GridSelectionMode.cs" />
     <Compile Include="UI\Grid\GridSelectionType.cs" />
     <Compile Include="UI\Grid\Html\GridForeignKeyDataCellBuilder.cs" />
@@ -471,7 +470,6 @@
     <Compile Include="UI\Pager\PagerMessages.cs" />
     <Compile Include="UI\Grid\Settings\GridColumnContextMenuSettings.cs" />
     <Compile Include="UI\Grid\Settings\GridNavigatableSettings.cs" />
-    <Compile Include="UI\Grid\ToolBar\GridToolBarPosition.cs" />
     <Compile Include="UI\Grid\Html\GridButtonBuilder.cs" />
     <Compile Include="UI\Grid\Html\GridButtonBuilderBase.cs" />
     <Compile Include="UI\Grid\Html\GridButtonFactory.cs" />

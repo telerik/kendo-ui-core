@@ -2,12 +2,6 @@ namespace Kendo.Mvc.UI.Html
 {
     public class GridFunctionalData
     {
-        public bool ShowBottomToolBar
-        {
-            get;
-            set;
-        }
-
         public GridGroupingData GroupingData
         {
             get;
@@ -26,25 +20,19 @@ namespace Kendo.Mvc.UI.Html
             set;
         }
 
-        public bool ShowTopPager
+        public bool Pager
         {
             get;
             set;
         }
 
-        public bool ShowBottomPager
+        public bool GroupHeader
         {
             get;
             set;
         }
 
-        public bool ShowGroupHeader
-        {
-            get;
-            set;
-        }
-
-        public bool ShowTopToolBar
+        public bool ToolBar
         {
             get;
             set;

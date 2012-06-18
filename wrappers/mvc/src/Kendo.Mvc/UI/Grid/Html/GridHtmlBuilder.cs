@@ -34,11 +34,7 @@ namespace Kendo.Mvc.UI.Html
 
             AppendGroupHeader(div, functionalData);
 
-            AppendTopPager(div, functionalData);
-
             AppendData(div, renderingData);
-
-            AppendBottomToolBar(div, functionalData);
 
             AppendBottomPager(div, functionalData);
 
@@ -76,20 +72,11 @@ namespace Kendo.Mvc.UI.Html
 
         protected void AppendTopToolBar(IHtmlNode div, GridFunctionalData functionalData)
         {
-            if (functionalData.ShowTopToolBar)
+            if (functionalData.ToolBar)
             {
                 var toolBar = CreateToolBar(functionalData.ToolBarData);
                 
                 toolBar.AddClass("k-grid-top").AppendTo(div);
-            }
-        }
-        
-        protected void AppendBottomToolBar(IHtmlNode div, GridFunctionalData functionalData)
-        {
-            if (functionalData.ShowBottomToolBar)
-            {
-                var toolBar = CreateToolBar(functionalData.ToolBarData);
-                toolBar.AppendTo(div);
             }
         }
         
@@ -100,7 +87,7 @@ namespace Kendo.Mvc.UI.Html
         
         protected void AppendGroupHeader(IHtmlNode div, GridFunctionalData functionalData)
         {
-            if (functionalData.ShowGroupHeader)
+            if (functionalData.GroupHeader)
             {
                 var groupHeader = CreateGroupHeader(functionalData);
 
@@ -110,38 +97,16 @@ namespace Kendo.Mvc.UI.Html
         
         protected void AppendBottomPager(IHtmlNode div, GridFunctionalData functionalData)
         {
-            if (functionalData.ShowBottomPager)
+            if (functionalData.Pager)
             {
                 var pager = new HtmlElement("div").AddClass("k-pager-wrap", "k-grid-pager");
                 
                 pager.AppendTo(div);
 
-                //AppendRefreshButton(pager, functionalData.PagerData);
-                
-                if (functionalData.ShowBottomPager)
+                if (functionalData.Pager)
                 {
                     CreateBottomPager(functionalData.PagerData).AppendTo(pager);
                 }
-            }
-        }
-        
-        protected void AppendRefreshButton(IHtmlNode div, GridPagerData pagerData)
-        {
-            var button = CreateRefreshButton(pagerData);
-            button.AppendTo(div);
-        }
-
-        protected void AppendTopPager(IHtmlNode div, GridFunctionalData functionalData)
-        {
-            if (functionalData.ShowTopPager)
-            {
-                var pager = new HtmlElement("div").AddClass("k-grid-pager", "k-grid-top");
-                
-                pager.AppendTo(div);
-
-                AppendRefreshButton(pager, functionalData.PagerData);
-
-                CreateTopPager(functionalData.PagerData).AppendTo(pager);
             }
         }
         
@@ -191,19 +156,9 @@ namespace Kendo.Mvc.UI.Html
             return DataSectionBuilder.CreateBody(renderingData);
         }
 
-        protected virtual IHtmlNode CreateTopPager(GridPagerData pagerData)
-        {
-            return FunctionalSectionBuilder.CreatePager(pagerData);
-        }
-        
         protected virtual IHtmlNode CreateBottomPager(GridPagerData pagerData)
         {
             return FunctionalSectionBuilder.CreatePager(pagerData);
-        }
-
-        protected virtual IHtmlNode CreateRefreshButton(GridPagerData pagerData)
-        {
-            return FunctionalSectionBuilder.CreateRefreshButton(pagerData);
         }
     }
 }

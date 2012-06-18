@@ -14,12 +14,6 @@ namespace Kendo.Mvc.UI
             Template = new HtmlTemplate();
         }
 
-        public GridToolBarPosition Position
-        {
-            get;
-            set;
-        }
-
         public Grid<T> Grid
         {
             get;
