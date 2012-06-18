@@ -1,6 +1,6 @@
 <div id="example" class="k-content">
     <div>
-        <ul id="forms">
+        <ul class="forms">
             <li>
                 <input type="text" class="k-textbox" value="Input" />
             </li>
@@ -12,20 +12,38 @@
             <li>
                 <textarea class="k-textbox">Textarea</textarea>
             </li>
+        </ul>
+        <ul class="forms">
             <li>
                 <button class="k-button">Button</button>
             </li>
             <li>
                 <a href="http://www.google.com" class="k-button">Link to Google.com</a>
             </li>
+            <li>
+                <span class="k-textbox k-space-left">
+                    <input type="text" value="Input with icon left" />
+                    <a href="#" class="k-icon k-search">&nbsp;</a>
+                </span>
+            </li>
+            <li>
+                <span class="k-textbox k-space-right">
+                    <input type="text" value="Input with icon right" />
+                    <a href="#" class="k-icon k-search">&nbsp;</a>
+                </span>
+            </li>
         </ul>
         <style scoped>
-            #forms li {
+            .forms {
+                float: left;
+            }
+
+            .forms li {
                 margin-bottom: 5px;
                 list-style: none;
             }
 
-            #forms li > * {
+            .forms li > * {
                 width: 200px;
             }
         </style>

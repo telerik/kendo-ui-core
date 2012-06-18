@@ -110,8 +110,7 @@
 .k-editable-area,
 .k-separator,
 .k-colorpicker .k-arrow-down,
-span.k-textbox,
-span.k-textbox > input,
+.k-textbox > input,
 .k-autocomplete,
 .k-dropdown-wrap,
 .k-toolbar,
@@ -190,7 +189,7 @@ td.k-group-cell,
 .k-widget .k-dropdown-wrap,
 .k-widget .k-picker-wrap,
 .k-widget .k-numeric-wrap,
-span.k-textbox,
+.k-textbox,
 .k-autocomplete.k-header,
 .k-autocomplete.k-state-focused,
 div.k-dropdown-wrap.k-state-active,
@@ -207,7 +206,7 @@ span.k-numeric-wrap.k-state-active,
     background-color: @select-background-color;
 }
 
-span.k-textbox > input,
+.k-textbox > input,
 .k-autocomplete .k-input,
 .k-dropdown-wrap .k-input,
 .k-autocomplete.k-state-focused .k-input,
@@ -218,9 +217,12 @@ span.k-textbox > input,
     border-color: @widget-border-color;
 }
 
-span.k-textbox > input,
 .k-input,
-.k-textbox
+input.k-textbox,
+textarea.k-textbox,
+input.k-textbox:hover,
+textarea.k-textbox:hover,
+.k-textbox > input
 {
     background-color: @input-background-color;
     color: @input-text-color;
@@ -257,7 +259,7 @@ span.k-textbox > input,
 .k-button,
 .k-draghandle,
 .k-tile,
-span.k-textbox,
+.k-textbox,
 .k-autocomplete,
 .k-state-hover,
 .k-state-selected,
@@ -396,7 +398,7 @@ span.k-textbox,
     color: @hover-text-color;
 }
 
-span.k-textbox:hover,
+.k-textbox:hover,
 .k-autocomplete.k-state-hover,
 .k-picker-wrap.k-state-hover,
 .k-numeric-wrap.k-state-hover,
@@ -548,7 +550,7 @@ span.k-textbox:hover,
     .window-shadow(@shadow-color);
 }
 
-span.k-textbox > input,
+.k-textbox > input,
 .k-autocomplete .k-input,
 .k-combobox .k-input,
 .k-picker-wrap .k-input
@@ -625,7 +627,7 @@ span.k-textbox > input,
     .border-radius(0 @main-border-radius @main-border-radius 0);
 }
 
-span.k-textbox > input,
+.k-textbox > input,
 .k-autocomplete .k-input,
 .k-dropdown-wrap .k-input,
 .k-picker-wrap .k-input,

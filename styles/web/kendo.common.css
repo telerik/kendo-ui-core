@@ -20,8 +20,8 @@
 .k-pager-wrap,
 .k-tabstrip-items .k-item,
 .k-link.k-state-hover,
-span.k-textbox,
-span.k-textbox:hover,
+.k-textbox,
+.k-textbox:hover,
 .k-autocomplete,
 .k-dropdown-wrap,
 .k-picker-wrap,
@@ -51,7 +51,7 @@ span.k-textbox:hover,
 
 .k-block,
 .k-widget,
-span.k-textbox > input,
+.k-textbox > input,
 .k-input[type="text"],
 .k-input[type="number"],
 .k-textbox,
@@ -432,6 +432,7 @@ div.k-window
     position: absolute;
     width: 100%;
     height: 1.1em;
+    line-height: 1.1em;
     border-bottom-style: solid;
     border-bottom-width: 1px;
     margin-top: -2em;
@@ -1043,18 +1044,18 @@ div.k-grid-header .k-header
     zoom: 1;
 }
 
-@media print 
+@media print
 {
     .k-grid
     {
         height:auto !important;
     }
-    
+
     .k-grid-header
     {
         padding:0 !important;
     }
-    
+
     .k-grid-content
     {
         overflow: visible;
@@ -1612,7 +1613,7 @@ span.k-dropdown
 .k-numerictextbox,
 .k-dropdown,
 .k-selectbox,
-span.k-textbox
+.k-textbox
 {
     position: relative;
     display: inline-block;
@@ -1696,7 +1697,7 @@ span.k-textbox
     padding-bottom: 3px;
 }
 
-span.k-textbox,
+.k-textbox,
 .k-autocomplete,
 .k-dropdown-wrap,
 .k-picker-wrap,
@@ -1712,10 +1713,38 @@ span.k-textbox,
     padding-right : 2px;
 }
 
-span.k-textbox,
+.k-textbox,
 .k-autocomplete
 {
     padding: 2px;
+}
+
+.k-textbox.k-space-left
+{
+    padding-left: 22px;
+}
+
+.k-textbox.k-space-right
+{
+    padding-right: 22px;
+}
+
+.k-textbox .k-icon
+{
+    font-size: inherit;
+    top: 50%;
+    margin: -8px 0 0;
+    position: absolute;
+}
+
+.k-space-left .k-icon
+{
+    left: 3px;
+}
+
+.k-space-right .k-icon
+{
+    right: 3px;
 }
 
 .k-autocomplete,
@@ -1733,7 +1762,7 @@ span.k-textbox,
     transition: box-shadow .15s ease-out;
 }
 
-span.k-textbox > input,
+.k-textbox > input,
 .k-picker-wrap .k-input,
 .k-numeric-wrap .k-input,
 .k-combobox .k-input
@@ -1799,7 +1828,7 @@ span.k-datetimepicker .k-select+.k-select
     right: 0;
 }
 
-span.k-textbox,
+.k-textbox,
 .k-autocomplete
 {
     -moz-box-sizing: border-box;
@@ -1807,7 +1836,7 @@ span.k-textbox,
     box-sizing: border-box;
 }
 
-span.k-textbox > input,
+.k-textbox > input,
 .k-autocomplete .k-input
 {
     display: block;
@@ -1837,7 +1866,7 @@ span.k-textbox > input,
     text-overflow: ellipsis;
 }
 
-span.k-textbox > input,
+.k-textbox > input,
 .k-autocomplete .k-input,
 .k-picker-wrap .k-input,
 .k-numeric-wrap .k-input,
@@ -2184,7 +2213,7 @@ div.k-treeview
 }
 
 .k-input,
-span.k-textbox > input
+.k-textbox > input
 {
     outline: 0;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
