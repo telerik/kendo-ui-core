@@ -223,7 +223,7 @@
         ///  &lt;%= Html.Kendo().ListView()
         ///             .Name("ListView")
         ///             .Events(events => events
-        ///                 .DataBinding("onDataBinding")
+        ///                 .DataBound("onDataBound")
         ///             )
         /// %&gt;
         /// </code>

@@ -38,25 +38,12 @@
 
 <script>
     $(function() {
-        var listView = $("#listView")
-            .delegate(".k-edit-button", "click", function(e) {
-                listView.edit($(this).closest(".product-view"));
-                e.preventDefault();
-            }).delegate(".k-delete-button", "click", function(e) {
-                listView.remove($(this).closest(".product-view"));
-                e.preventDefault();
-            }).delegate(".k-update-button", "click", function(e) {
-                listView.save();
-                e.preventDefault();
-            }).delegate(".k-cancel-button", "click", function(e) {
-                listView.cancel();
-                e.preventDefault();
-            }).data("kendoListView");
+        var listView = $("#listView").data("kendoListView");
 
-            $(".k-add-button").click(function(e) {
-                listView.add();
-                e.preventDefault();
-            });
+        $(".k-add-button").click(function(e) {
+            listView.add();
+            e.preventDefault();
+        });
     });
 </script>
 <style scoped>
