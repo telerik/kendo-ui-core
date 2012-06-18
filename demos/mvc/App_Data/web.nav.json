@@ -371,7 +371,7 @@
                     "text": "Column header template",
                     "url": "grid/headertemplate.html",
                     "packages": ["mvc"]
-                }
+                },
                 {
                     "text": "Custom command",
                     "url": "grid/custom-command.html"
@@ -898,12 +898,11 @@
             ]
         },
         {
-            "packages": ["!mvc"],
+            "packages": ["!mvc", "online"],
             "text": "Globalization",
             "name": "globalization",
             "documentation": "framework/globalization",
             "spriteCssClass": "globalizationIcon",
-            "packages": [ "online" ],
             "items": [
                 {
                     "text": "Basic usage",
@@ -917,7 +916,6 @@
             "name": "styling",
             "documentation": "framework/styling",
             "spriteCssClass": "stylingIcon",
-            "packages": [ "online" ],
             "items": [
                 {
                     "text": "Forms",
