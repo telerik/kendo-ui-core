@@ -1166,12 +1166,6 @@ div.k-grid-header .k-header
     padding:0 22px;
 }
 
-.k-pager-refresh
-{
-    border-left-width:1px;
-    border-left-style:solid;
-}
-
 .k-pager-numbers .k-link
 {
     text-decoration: none;
@@ -1183,6 +1177,13 @@ div.k-grid-header .k-header
     padding: 0 8px;
     height: 34px;/*IE7*/
     line-height: 34px;/*IE7*/
+}
+
+.k-pager-wrap .k-pager-refresh
+{
+    float:right;
+    border-right-width:1px;
+    border-right-style:solid;
 }
 
 *+html .k-pager-wrap>.k-link .k-icon
