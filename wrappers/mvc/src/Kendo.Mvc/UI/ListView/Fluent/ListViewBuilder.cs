@@ -214,6 +214,28 @@
             return this;
         }
 
+        /// <summary>
+        /// Configures the client-side events.
+        /// </summary>
+        /// <param name="configurator">The client events action.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ListView()
+        ///             .Name("ListView")
+        ///             .Events(events => events
+        ///                 .DataBinding("onDataBinding")
+        ///             )
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ListViewBuilder<T> Events(Action<ListViewEventBuilder> configurator)
+        {
+
+            configurator(new ListViewEventBuilder(Component.Events));
+
+            return this;
+        }
+
         public ListViewBuilder<T> DataSource(Action<AjaxDataSourceBuilder<T>> configurator)
         {
             configurator(new AjaxDataSourceBuilder<T>(Component.DataSource, Component.ViewContext, Component.UrlGenerator));
