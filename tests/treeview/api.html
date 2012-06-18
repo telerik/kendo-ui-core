@@ -615,6 +615,16 @@
                 equal(bar.text, "bar");
                 equal(bar.baz, "lux");
             });
+
+            test("remove() removes item from dataSource", function() {
+                createTreeView([
+                    { text: "foo" }
+                ]);
+
+                treeviewObject.remove(".k-item");
+
+                equal(treeviewObject.dataSource.data().length, 0);
+            });
         </script>
 
         <div id="qunit-fixture"> </div>

@@ -926,7 +926,7 @@
             if (action == "add") {
                 append(items, parentNode);
             } else if (action == "remove") {
-                that.remove(that.findByUid(items[0].uid));
+                that._remove(that.findByUid(items[0].uid), false);
             } else {
                 if (node) {
                     append(items, parentNode, true);
@@ -1394,7 +1394,10 @@
          *
          */
         remove: function (node) {
-            return this._remove(node, false);
+            var dataItem = this.dataItem(node);
+            if (dataItem) {
+                this.dataSource.remove(dataItem);
+            }
         },
 
         /**
