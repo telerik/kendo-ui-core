@@ -1,12 +1,21 @@
 namespace Kendo.Mvc.UI
 {
     using System.Collections.Generic;
-    using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.Extensions;
+    using Kendo.Mvc.Infrastructure;
+    using Kendo.Mvc.Resources;
     using Kendo.Mvc.UI.Html;
 
     public class GridEditActionCommand : GridActionCommandBase
     {
+        public GridEditActionCommand()
+        {
+            InsertText = Messages.Grid_Update;
+            UpdateText = Messages.Grid_Update;
+            Text = Messages.Grid_Edit;
+            CancelText = Messages.Grid_Cancel;
+        }
+
         public string UpdateText { get; set; }
 
         public string CancelText { get; set; }
@@ -18,9 +27,9 @@ namespace Kendo.Mvc.UI
             get { return "edit"; }
         }
 
-        public override IEnumerable<IGridButtonBuilder> CreateDisplayButtons(IGridLocalization localization, IGridUrlBuilder urlBuilder, IGridHtmlHelper htmlHelper)
+        public override IEnumerable<IGridButtonBuilder> CreateDisplayButtons(IGridUrlBuilder urlBuilder, IGridHtmlHelper htmlHelper)
         {
-            var editButton = CreateButton<GridLinkButtonBuilder>(Text ?? localization.Edit, UIPrimitives.Grid.Edit);
+            var editButton = CreateButton<GridLinkButtonBuilder>(Text, UIPrimitives.Grid.Edit);
 
             editButton.Url = urlBuilder.EditUrl;
 
@@ -44,15 +53,15 @@ namespace Kendo.Mvc.UI
             return result;
         }
 
-        public override IEnumerable<IGridButtonBuilder> CreateEditButtons(IGridLocalization localization, IGridUrlBuilder urlBuilder, IGridHtmlHelper htmlHelper)
+        public override IEnumerable<IGridButtonBuilder> CreateEditButtons(IGridUrlBuilder urlBuilder, IGridHtmlHelper htmlHelper)
         {
-            var cancelButton = CreateButton<GridLinkButtonBuilder>(CancelText ?? localization.Cancel, UIPrimitives.Grid.Cancel);
+            var cancelButton = CreateButton<GridLinkButtonBuilder>(CancelText, UIPrimitives.Grid.Cancel);
 
             cancelButton.Url = urlBuilder.CancelUrl;
             
             cancelButton.SpriteCssClass = "k-cancel";
 
-            var updateButton = CreateButton<GridButtonBuilder>(UpdateText ?? localization.Update, UIPrimitives.Grid.Update);
+            var updateButton = CreateButton<GridButtonBuilder>(UpdateText, UIPrimitives.Grid.Update);
             updateButton.ShouldAppendDataKeys = true;
             updateButton.SpriteCssClass = "k-update";
             updateButton.HtmlHelper = htmlHelper;
@@ -64,15 +73,15 @@ namespace Kendo.Mvc.UI
             };
         }
 
-        public override IEnumerable<IGridButtonBuilder> CreateInsertButtons(IGridLocalization localization, IGridUrlBuilder urlBuilder, IGridHtmlHelper htmlHelper)
+        public override IEnumerable<IGridButtonBuilder> CreateInsertButtons(IGridUrlBuilder urlBuilder, IGridHtmlHelper htmlHelper)
         {
-            var cancelButton = CreateButton<GridLinkButtonBuilder>(CancelText ?? localization.Cancel, UIPrimitives.Grid.Cancel);
+            var cancelButton = CreateButton<GridLinkButtonBuilder>(CancelText, UIPrimitives.Grid.Cancel);
 
             cancelButton.Url = urlBuilder.CancelUrl;
 
             cancelButton.SpriteCssClass = "k-cancel";
 
-            var insertButton = CreateButton<GridButtonBuilder>(InsertText ?? localization.Insert, UIPrimitives.Grid.Insert);
+            var insertButton = CreateButton<GridButtonBuilder>(InsertText, UIPrimitives.Grid.Insert);
             insertButton.SpriteCssClass = "k-insert";
             insertButton.HtmlHelper = htmlHelper;
 

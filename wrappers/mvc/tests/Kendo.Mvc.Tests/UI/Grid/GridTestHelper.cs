@@ -30,11 +30,6 @@ namespace Kendo.Mvc.UI.Tests
             return localizationService.Object;
         }
 
-        public static GridLocalization CreateLocalization()
-        {
-            return new GridLocalization(CreateLocalizationService(), null);
-        }
-
         public static Grid<T> CreateGrid<T>(HtmlTextWriter writer) where T : class
         {
             Mock<HttpContextBase> httpContext = TestHelper.CreateMockedHttpContext();
@@ -55,7 +50,7 @@ namespace Kendo.Mvc.UI.Tests
             
             var htmlBuilderFactory = new Mock<IGridHtmlBuilderFactory>();
 
-            Grid<T> grid = new Grid<T>(viewContext, initializer.Object, urlGenerator.Object, CreateLocalizationService(), htmlBuilderFactory.Object) { Name = "Grid" };
+            Grid<T> grid = new Grid<T>(viewContext, initializer.Object, urlGenerator.Object, htmlBuilderFactory.Object) { Name = "Grid" };
 
             return grid;
         }

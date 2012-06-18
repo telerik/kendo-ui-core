@@ -4,10 +4,9 @@ namespace Kendo.Mvc.UI
     using System.Collections.Generic;
     using System.Data;
     using System.Linq;
-    using System.Web.Routing;
-    using Kendo.Mvc.Infrastructure;
     using Extensions;
-
+    using Kendo.Mvc.Infrastructure;
+    using Kendo.Mvc.Resources;
     //TODO: Implement GridBeginEditEvent option
     //public enum GridBeginEditEvent
     //{
@@ -28,12 +27,10 @@ namespace Kendo.Mvc.UI
         where T : class
     {
         private readonly IGrid grid;
-        private readonly IGridLocalization localization;
 
-        public GridEditingSettings(IGrid grid, IGridLocalization localization)
+        public GridEditingSettings(IGrid grid)
         {
             this.grid = grid;
-            this.localization = localization;
 
             DisplayDeleteConfirmation = true;
             //TODO: Implement edit form attributes
@@ -43,6 +40,7 @@ namespace Kendo.Mvc.UI
             //InsertRowPosition = GridInsertRowPosition.Top;
 
             DefaultDataItem = CreateDefaultItem;
+            Confirmation = Messages.Grid_Confirmation;
         }
 
         //TODO: Implement GridBeginEditEvent option
@@ -60,6 +58,12 @@ namespace Kendo.Mvc.UI
         //}
 
         public Window PopUp
+        {
+            get;
+            set;
+        }
+
+        public string Confirmation
         {
             get;
             set;
@@ -168,7 +172,7 @@ namespace Kendo.Mvc.UI
             }
 
             FluentDictionary.For(json)
-                .Add("confirmation", localization.DeleteConfirmation, () => DisplayDeleteConfirmation)
+                .Add("confirmation", Confirmation, () => DisplayDeleteConfirmation)
                 .Add("mode", Mode.ToString().ToLowerInvariant())
                 .Add("template", editorHtml, () => Mode != GridEditMode.InLine)
                 //TODO: Implement GridBeginEditEvent option                

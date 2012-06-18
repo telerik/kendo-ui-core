@@ -523,7 +523,6 @@
     <Compile Include="UI\Grid\Html\GridTableBuilderFactory.cs" />
     <Compile Include="UI\Grid\Html\IGridButtonBuilder.cs" />
     <Compile Include="UI\Grid\Commands\IGridActionCommand.cs" />
-    <Compile Include="UI\Grid\Commands\IGridLocalization.cs" />
     <Compile Include="UI\Grid\Html\GridButtonTextDecorator.cs" />
     <Compile Include="UI\Grid\CustomGroupingWrapper.cs" />
     <Compile Include="UI\Grid\Fluent\GridReorderingSettingsBuilder.cs" />
@@ -619,18 +618,17 @@
     <Compile Include="UI\Grid\Settings\GridReorderingSettings.cs" />
     <Compile Include="UI\Grid\Settings\GridColumnSettings.cs" />
     <Compile Include="UI\Grid\Settings\GridCommandColumnSettings.cs" />
-    <Compile Include="UI\Grid\ToolBar\GridToolBarSubmitChangesCommand.cs" />
+    <Compile Include="UI\Grid\ToolBar\GridToolBarSaveCommand.cs" />
     <Compile Include="UI\HtmlBuilderBase.cs" />
     <Compile Include="UI\HtmlFragment.cs" />
     <Compile Include="UI\IHtmlBuilder.cs" />
     <Compile Include="UI\Grid\IGrid.cs" />
     <Compile Include="UI\Grid\IGridDetailTemplate.cs" />
-    <Compile Include="UI\Grid\GridLocalization.cs" />
     <Compile Include="UI\Grid\IGridDataKey.cs" />
     <Compile Include="UI\Grid\Settings\GridResizingSettings.cs" />
     <Compile Include="UI\Grid\Commands\GridToolBarCustomCommand.cs" />
     <Compile Include="UI\Grid\Fluent\GridToolBarCustomCommandBuilder.cs" />
-    <Compile Include="UI\Grid\Commands\GridToolBarInsertCommand.cs" />
+    <Compile Include="UI\Grid\Commands\GridToolBarCreateCommand.cs" />
     <Compile Include="UI\DataSource\Fluent\DataSourceGroupDescriptorBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\DataSourceGroupDescriptorFactory.cs" />
     <Compile Include="UI\Grid\Fluent\GridGroupingSettingsBuilder.cs" />
@@ -800,7 +798,7 @@
     <Compile Include="UI\Grid\Columns\GridActionColumn.cs" />
     <Compile Include="UI\Grid\Commands\GridActionCommandBase.cs" />
     <Compile Include="UI\Grid\Fluent\GridActionCommandBuilderBase.cs" />
-    <Compile Include="UI\Grid\Commands\GridDeleteActionCommand.cs" />
+    <Compile Include="UI\Grid\Commands\GridDestroyActionCommand.cs" />
     <Compile Include="UI\Grid\Commands\GridEditActionCommand.cs" />
     <Compile Include="UI\Grid\Fluent\GridEditActionCommandBuilder.cs" />
     <Compile Include="UI\Grid\Fluent\GridSelectActionCommandBuilder.cs" />

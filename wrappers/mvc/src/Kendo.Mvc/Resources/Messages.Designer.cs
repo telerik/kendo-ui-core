@@ -61,6 +61,87 @@ namespace Kendo.Mvc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string Grid_Cancel {
+            get {
+                return ResourceManager.GetString("Grid_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel changes.
+        /// </summary>
+        public static string Grid_CancelChanges {
+            get {
+                return ResourceManager.GetString("Grid_CancelChanges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete this item?.
+        /// </summary>
+        public static string Grid_Confirmation {
+            get {
+                return ResourceManager.GetString("Grid_Confirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add new item.
+        /// </summary>
+        public static string Grid_Create {
+            get {
+                return ResourceManager.GetString("Grid_Create", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string Grid_Destroy {
+            get {
+                return ResourceManager.GetString("Grid_Destroy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        public static string Grid_Edit {
+            get {
+                return ResourceManager.GetString("Grid_Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save changes.
+        /// </summary>
+        public static string Grid_SaveChanges {
+            get {
+                return ResourceManager.GetString("Grid_SaveChanges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select.
+        /// </summary>
+        public static string Grid_Select {
+            get {
+                return ResourceManager.GetString("Grid_Select", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update.
+        /// </summary>
+        public static string Grid_Update {
+            get {
+                return ResourceManager.GetString("Grid_Update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} - {1} of {2} items.
         /// </summary>
         public static string Pager_Display {

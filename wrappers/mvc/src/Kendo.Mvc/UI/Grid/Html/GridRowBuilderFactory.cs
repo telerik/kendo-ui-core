@@ -101,7 +101,7 @@ namespace Kendo.Mvc.UI.Html
         {
             return CreateEditFormBuilder(renderingData, 
                 item, 
-                (command) => command.CreateEditButtons(renderingData.Localization, renderingData.UrlBuilder, renderingData.HtmlHelper), 
+                (command) => command.CreateEditButtons(renderingData.UrlBuilder, renderingData.HtmlHelper), 
                 renderingData.UrlBuilder.UpdateUrl
             );
         }
@@ -218,8 +218,8 @@ namespace Kendo.Mvc.UI.Html
         {
             return CreateEditFormBuilder(renderingData,
                 item,
-                (command) => command.CreateInsertButtons(renderingData.Localization, renderingData.UrlBuilder,
-                                                        renderingData.HtmlHelper), 
+                (command) => command.CreateInsertButtons(renderingData.UrlBuilder,
+                    renderingData.HtmlHelper), 
                 renderingData.UrlBuilder.InsertUrl
             );
         }

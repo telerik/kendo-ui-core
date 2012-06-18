@@ -8,13 +8,11 @@ namespace Kendo.Mvc.UI.Html.Tests
     public class GridToolBarCustomCommandTests
     {
         private readonly GridToolBarCustomCommand<Customer> command;
-        private readonly Mock<IGridLocalization> localization;
         private readonly Mock<IGridUrlBuilder> urlBuilder;
         private readonly Mock<IGridHtmlHelper> htmlHelper;
 
         public GridToolBarCustomCommandTests()
         {
-            localization = new Mock<IGridLocalization>();
             urlBuilder = new Mock<IGridUrlBuilder>();
             htmlHelper = new Mock<IGridHtmlHelper>();
             command = new GridToolBarCustomCommand<Customer>();
@@ -23,7 +21,7 @@ namespace Kendo.Mvc.UI.Html.Tests
         [Fact]
         public void Should_create_one_button()
         {
-            var buttons = command.CreateDisplayButtons(localization.Object, urlBuilder.Object, htmlHelper.Object);
+            var buttons = command.CreateDisplayButtons(urlBuilder.Object, htmlHelper.Object);
             buttons.Count().ShouldEqual(1);
         }
         
@@ -32,7 +30,7 @@ namespace Kendo.Mvc.UI.Html.Tests
         {
             command.Text = "foo";
             
-            var button = command.CreateDisplayButtons(localization.Object, urlBuilder.Object, htmlHelper.Object).First();
+            var button = command.CreateDisplayButtons(urlBuilder.Object, htmlHelper.Object).First();
 
             button.Text.ShouldEqual(command.Text);
         }

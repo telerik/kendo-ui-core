@@ -54,10 +54,5 @@ namespace Kendo.Mvc.UI.Tests
 
             return localizationService.Object;
         }
-
-        public static GridLocalization CreateLocalization()
-        {
-            return new GridLocalization(CreateLocalizationService(), null);
-        }
     }
 }

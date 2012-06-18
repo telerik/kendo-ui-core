@@ -13,7 +13,7 @@ namespace Kendo.Mvc.UI.Fluent.Tests
 
         public GridEditingSettingsBuilderTests()
         {
-            settings = new GridEditingSettings<Customer>(new Mock<IGrid>().Object, new Mock<IGridLocalization>().Object);
+            settings = new GridEditingSettings<Customer>(new Mock<IGrid>().Object);
             builder = new GridEditingSettingsBuilder<Customer>(settings);
         }
 

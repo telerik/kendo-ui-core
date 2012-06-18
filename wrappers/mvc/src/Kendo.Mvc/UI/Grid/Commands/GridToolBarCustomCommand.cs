@@ -5,7 +5,7 @@ namespace Kendo.Mvc.UI
 
     public class GridToolBarCustomCommand<T> : GridCustomCommandBase where T : class
     {
-        public override IEnumerable<IGridButtonBuilder> CreateDisplayButtons(IGridLocalization localization, IGridUrlBuilder urlBuilder, IGridHtmlHelper htmlHelper)
+        public override IEnumerable<IGridButtonBuilder> CreateDisplayButtons(IGridUrlBuilder urlBuilder, IGridHtmlHelper htmlHelper)
         {
             var button = CreateButton<GridLinkButtonBuilder>(Text, CssClass());
 

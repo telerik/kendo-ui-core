@@ -16,12 +16,6 @@ namespace Kendo.Mvc.UI.Html
             set;
         }
 
-        public IGridLocalization Localization 
-        { 
-            get; 
-            set; 
-        }
-
         public HtmlTemplate Template
         {
             get;

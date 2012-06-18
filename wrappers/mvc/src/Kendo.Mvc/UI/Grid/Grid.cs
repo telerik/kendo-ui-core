@@ -3,7 +3,6 @@ namespace Kendo.Mvc.UI
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Globalization;
     using System.IO;
     using System.Linq;
     using System.Web;
@@ -28,9 +27,10 @@ namespace Kendo.Mvc.UI
 
         private string clientRowTemplate;
 
-        public Grid(ViewContext viewContext, IJavaScriptInitializer initializer, IUrlGenerator urlGenerator,
-            ILocalizationService localizationService, IGridHtmlBuilderFactory htmlBuilderFactory)
-            : base(viewContext, initializer)
+        public Grid(ViewContext viewContext,
+                    IJavaScriptInitializer initializer,
+                    IUrlGenerator urlGenerator,
+                    IGridHtmlBuilderFactory htmlBuilderFactory) : base(viewContext, initializer)
         {
             this.htmlBuilderFactory = htmlBuilderFactory;
 
@@ -49,10 +49,8 @@ namespace Kendo.Mvc.UI
             ColumnContextMenu = new GridColumnContextMenuSettings(this);
             Filtering = new GridFilteringSettings();
 
-            Localization = new GridLocalization(localizationService, CultureInfo.CurrentUICulture);
-
-            Editing = new GridEditingSettings<T>(this, Localization)
-            {                
+            Editing = new GridEditingSettings<T>(this)
+            { 
                 PopUp = new Window(viewContext, Initializer)
                 {
                     Modal = true,
@@ -127,12 +125,6 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        public GridLocalization Localization
-        {
-            get;
-            set;
-        }
-
         public GridToolBarSettings<T> ToolBar
         {
             get;
@@ -179,7 +171,7 @@ namespace Kendo.Mvc.UI
             //command.HtmlAttributes = htmlAttributes.ToDictionary();
             //command.ImageHtmlAttributes = imageHtmlAttributes.ToDictionary();
 
-            var buttons = command.CreateDisplayButtons(Localization, UrlBuilder, new GridHtmlHelper<T>(ViewContext, DataKeyStore));
+            var buttons = command.CreateDisplayButtons(UrlBuilder, new GridHtmlHelper<T>(ViewContext, DataKeyStore));
 
             var fragment = new HtmlFragment();
 
@@ -241,7 +233,7 @@ namespace Kendo.Mvc.UI
                 command.Text = text;
             }
 
-            var buttons = command.CreateDisplayButtons(Localization, UrlBuilder, new GridHtmlHelper<T>(ViewContext, DataKeyStore));
+            var buttons = command.CreateDisplayButtons(UrlBuilder, new GridHtmlHelper<T>(ViewContext, DataKeyStore));
             var fragment = new HtmlFragment();
             buttons.Each(button => button.Create(null).AppendTo(fragment));
 
@@ -885,7 +877,6 @@ namespace Kendo.Mvc.UI
             {
                 Commands = ToolBar.Commands.Cast<IGridActionCommand>(),
                 UrlBuilder = UrlBuilder,
-                Localization = Localization,
                 Template = ToolBar.Template
             };
         }
@@ -896,11 +887,13 @@ namespace Kendo.Mvc.UI
             {
                 GetTitle = VisibleColumns.Cast<IGridColumn>().GroupTitleForMember,
                 GroupDescriptors = DataSource.Groups,
-                Hint = Localization.GroupHint,
+                //todo: group hint localization
+                Hint = "Drag a column header and drop it here to group by that column",
                 UrlBuilder = UrlBuilder,
-                SortedAscText = Localization.SortedAsc,
-                SortedDescText = Localization.SortedDesc,
-                UnGroupText = Localization.UnGroup
+                SortedAscText = "asc",
+                SortedDescText = "desc",
+                //todo: group hint localization
+                UnGroupText = "ungroup"
             };
         }
 
@@ -949,7 +942,8 @@ namespace Kendo.Mvc.UI
 
             if (!popup.Title.HasValue())
             {
-                popup.Title = CurrentItemMode == GridItemMode.Edit ? Localization.Edit : Localization.AddNew;
+                //todo: grid popup localization
+                popup.Title = CurrentItemMode == GridItemMode.Edit ? "Edit" : "Add new record";
             }
 
             new LiteralNode(popup.ToHtmlString()).AppendTo(container);
@@ -1005,7 +999,6 @@ namespace Kendo.Mvc.UI
                 Colspan = Colspan /*- Columns.Count(column => column.Hidden)*/,
                 DetailTemplate = MapDetailTemplate(HasDetailTemplate ? DetailTemplate : null),
                 NoRecordsTemplate = FormatNoRecordsTemplate(),
-                Localization = Localization,
                 ScrollingHeight = Scrolling.Height,
                 //EditFormHtmlAttributes = Editing.FormHtmlAttributes,
                 ShowFooter = Footer && VisibleColumns.Any(c => c.FooterTemplate.HasValue() || c.ClientFooterTemplate.HasValue()),
@@ -1089,9 +1082,6 @@ namespace Kendo.Mvc.UI
 
         private HtmlTemplate FormatNoRecordsTemplate()
         {
-            if (!NoRecordsTemplate.HasValue())
-                NoRecordsTemplate.Html = Localization.NoRecords;
-
             return NoRecordsTemplate;
         }
 

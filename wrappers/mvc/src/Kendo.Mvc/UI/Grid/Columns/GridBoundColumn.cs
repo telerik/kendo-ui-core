@@ -417,7 +417,8 @@ namespace Kendo.Mvc.UI
 
             if (Sortable && Grid.Sorting.Enabled && !HeaderTemplate.HasValue())
             {
-                builder = new GridSortableHeaderCellBuilder(HeaderHtmlAttributes, GetSortUrl(), SortDirection, Grid.Localization.SortedAsc, Grid.Localization.SortedDesc, AppendHeaderContent);
+                //todo: sorting text localization
+                builder = new GridSortableHeaderCellBuilder(HeaderHtmlAttributes, GetSortUrl(), SortDirection, "asc", "desc", AppendHeaderContent);
             }
             else
             {
@@ -430,7 +431,8 @@ namespace Kendo.Mvc.UI
                                    .SelectMemberDescriptors()
                                    .Any(filter => filter.Member.IsCaseInsensitiveEqual(Member));
 
-                builder.Decorators.Add(new GridFilterCellDecorator(filtered, Grid.Localization.Filter));
+                //todo: filter text localization
+                builder.Decorators.Add(new GridFilterCellDecorator(filtered, "filter"));
             }
 
             return builder;

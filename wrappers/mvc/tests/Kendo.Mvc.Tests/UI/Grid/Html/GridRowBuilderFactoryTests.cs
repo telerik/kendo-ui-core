@@ -23,7 +23,6 @@ namespace Kendo.Mvc.UI.Html.Tests
             renderingData = new GridRenderingData
             {
                 Columns = new IGridColumn[0],
-                Localization = new Mock<IGridLocalization>().Object,
                 UrlBuilder = new Mock<IGridUrlBuilder>().Object,
                 GroupMembers = new string[0],
                 Callback = delegate { },

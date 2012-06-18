@@ -83,7 +83,7 @@ namespace Kendo.Mvc.UI
             return state;
         }
 
-        public override IEnumerable<IGridButtonBuilder> CreateDisplayButtons(IGridLocalization localization, IGridUrlBuilder urlBuilder, IGridHtmlHelper htmlHelper)
+        public override IEnumerable<IGridButtonBuilder> CreateDisplayButtons(IGridUrlBuilder urlBuilder, IGridHtmlHelper htmlHelper)
         {
             var button = CreateButton<GridLinkButtonBuilder>(Text, CssClass());
 

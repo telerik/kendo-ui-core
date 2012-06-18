@@ -27,7 +27,7 @@ namespace Kendo.Mvc.UI.Html
                 return toolBarBuilder.CreateToolBar(toolBarData.Template);
             }
 
-            return toolBarBuilder.CreateToolBar(toolBarData.Commands.SelectMany(command => command.CreateDisplayButtons(toolBarData.Localization, toolBarData.UrlBuilder, null)));
+            return toolBarBuilder.CreateToolBar(toolBarData.Commands.SelectMany(command => command.CreateDisplayButtons(toolBarData.UrlBuilder, null)));
         }
         
         public IHtmlNode CreateGroupHeader(GridGroupingData groupingData)

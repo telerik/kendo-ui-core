@@ -41,7 +41,7 @@ namespace Kendo.Mvc.UI
         {
             var urlBuilder = Grid.UrlBuilder;
 
-            var buttons = Commands.SelectMany(command => command.CreateDisplayButtons(Grid.Localization, urlBuilder, htmlHelper));
+            var buttons = Commands.SelectMany(command => command.CreateDisplayButtons(urlBuilder, htmlHelper));
 
             GridActionCellBuilder builder = new GridActionCellBuilder(buttons.Select(button => (Func<object, IHtmlNode>)button.Create));            
             builder.HtmlAttributes.Merge(HtmlAttributes);
@@ -53,7 +53,7 @@ namespace Kendo.Mvc.UI
         {
             var urlBuilder = Grid.UrlBuilder;
 
-            var buttons = Commands.SelectMany(command => command.CreateEditButtons(Grid.Localization, urlBuilder, htmlHelper));
+            var buttons = Commands.SelectMany(command => command.CreateEditButtons(urlBuilder, htmlHelper));
 
             return new GridActionCellBuilder(buttons.Select(button => (Func<object, IHtmlNode>)button.Create));
         }
@@ -62,7 +62,7 @@ namespace Kendo.Mvc.UI
         {
             var urlBuilder = Grid.UrlBuilder;
 
-            var buttons = Commands.SelectMany(command => command.CreateInsertButtons(Grid.Localization, urlBuilder, htmlHelper));
+            var buttons = Commands.SelectMany(command => command.CreateInsertButtons(urlBuilder, htmlHelper));
 
             return new GridActionCellBuilder(buttons.Select(button => (Func<object, IHtmlNode>)button.Create));
         }
