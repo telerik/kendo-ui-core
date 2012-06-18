@@ -1,9 +1,9 @@
 (function($, undefined) {
 
     // Removing the G flag will cause infinite loop.
-    var GradientRegExp = /(?:-\w+?-)?(?:linear|webkit)-gradient\s*?\((?:linear)?[\s,]*?(.+?,)([^#\(]+?,)?\s*((?:(?:(?:rgba?|color-stop)\(.+?\)|#[\d\w]+)[\s\d\w%]*?[,\s]*)+)\)/ig,
-        DetailRegExp = /((?:rgba?|color-stop)\([^\)]+?\)|#[\d\w]+)\s*([\d\.\w%]*)/ig,
-        StripRegExp = / |,/g;
+    var GradientRegExp = /(?:-\w+?-)?(?:linear|webkit)-gradient\s*?\((?:linear\s*,\s*)?[\s,]*?(.+?,)([^#\(]+?,)?\s*((?:(?:(?:rgba?|color-stop)\(.+?\)|#[\d\w]+)[\s\d\w%]*?[,\s\)]*)+)\)/ig,
+        DetailRegExp = /(rgba?\([^\)]+?\)|#[\d\w]+)\s*([\d\.\w%]*)|color-stop\(([\d.]*)[\s,]*(rgba?\([^\)]+?\)|#[\d\w]+)\s*\)/ig,
+        StripRegExp = /^\s*|\s*$|,/g;
 
     window.Gradient = kendo.Observable.extend({
         init: function(cssValue) {
@@ -11,7 +11,7 @@
         },
 
         parseGradient: function (cssValue) {
-            var output = [], counter = -1, matches, details, i, lastPosition;
+            var output = [], counter = -1, matches, details, i, lastPosition, color, position, isStandard;
 
             while((matches = GradientRegExp.exec(cssValue)) !== null) {
                 output[++counter] = {};
@@ -26,12 +26,15 @@
                 i = 0;
 
                 while((details = DetailRegExp.exec(matches[3])) !== null) {
-                    output[counter].stops[i++] = {
-                        color: new Color(details[1]),
-                        position: details[2] || 0
-                    };
+                    color = details[1] || details[4];
+                    isStandard = typeof details[2] != "undefined";
+                    position = isStandard ? details[2] || 0 : details[3] * 100 || 0;
+                    lastPosition = isStandard ? details[2] : details[3] * 100;
 
-                    lastPosition = details[2];
+                    output[counter].stops[i++] = {
+                        color: new Color(color),
+                        position: position
+                    };
                 }
 
                 if (output[counter].stops[i-1].position === 0 && lastPosition == "") {
@@ -46,8 +49,5 @@
 
         }
     });
-
-    var test = new Gradient("-webkit-linear-gradient(left, right, #0b47a2, #04b7a2 5%, #0b4a72 98%, #20b47a), -webkit-linear-gradient(top, #0b47a2, #04b7a2 5%, #0b4a72 98%, #20b47a), linear-gradient(top, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0)) #0b47a2;");
-    console.log(test.value);
 
 })(jQuery);

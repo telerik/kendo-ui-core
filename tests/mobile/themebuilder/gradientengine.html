@@ -1,0 +1,43 @@
+<!DOCTYPE dom>
+<html>
+    <head>
+        <title>kendo.mobile.themebuilder.GradientEngine Tests</title>
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../qunit/qunit/qunit.js"></script>
+        <script src="../../qunit-runner.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../playground/themebuilder/scripts/colorengine.js"></script>
+        <script src="../../../playground/themebuilder/scripts/gradientengine.js"></script>
+        <link rel="stylesheet" href="../../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.mobile.themebuilder.GradientEngine Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var gradientEngine = new Gradient("#000"),
+                root = $("#qunit-fixture");
+
+            ////////////////////////////////////////////////////////////////////
+            module("gradient engine", {});
+
+            test("parseGradient preserves start point", 1, function() {
+                //"-webkit-linear-gradient(left, right, #0b47a2, #04b7a2 5%, #0b4a72 98%, #20b47a), -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(0, 0, 0, 0.3)), color-stop(0.05, rgba(0, 0, 0, 0)), color-stop(0.98, rgba(0, 0, 0, 0)), color-stop(1, rgba(70, 70, 70, 0.5))), linear-gradient(top, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0)) #0b47a2;"
+                ok(gradientEngine.parseGradient("-webkit-linear-gradient(left, #0b47a2)")[0].start == "left");
+            });
+
+            test("parseGradient parses color and position", 2, function() {
+                var gradientStop = gradientEngine.parseGradient("-webkit-linear-gradient(left, #0b47a2 5%)")[0].stops[0];
+
+                ok(gradientStop.color.get() == "#0b47a2");
+                ok(gradientStop.position == "5%");
+            });
+
+        </script>
+    </body>
+</html>
