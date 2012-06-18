@@ -1328,12 +1328,13 @@
         append: function (nodeData, parentNode) {
             var that = this,
                 dataSource = that.dataSource,
-                treeview,
+                treeview, parentTreeview,
                 i,
                 dataItem;
 
             if (parentNode) {
-                dataSource = that.dataItem(parentNode).children;
+                parentTreeview = parentNode.closest("[data-role=treeview]").data("kendoTreeView");
+                dataSource = parentTreeview.dataItem(parentNode).children;
             }
 
             if (nodeData instanceof $ || isDomElement(nodeData)) {

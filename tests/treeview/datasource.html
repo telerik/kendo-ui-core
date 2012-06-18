@@ -301,6 +301,17 @@
                 equal(treeviewObject.text(subitems.eq(0)), "charlie");
                 equal(treeviewObject.text(subitems.eq(1)), "bravo");
             });
+
+            test("moving nodes between treeviews", function() {
+                var tree1 = $("<div />").appendTo("body").kendoTreeView([
+                        { text: "foo" }
+                    ]),
+                    tree2 = $("<div />").appendTo("body").kendoTreeView([
+                        { text: "bar" }
+                    ]);
+
+                tree2.data("kendoTreeView").append(tree2.find(".k-item"), tree1.find(".k-item"));
+            });
         </script>
 
         <div id="qunit-fixture"> </div>
