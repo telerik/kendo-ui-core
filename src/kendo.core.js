@@ -1458,7 +1458,8 @@ function pad(number) {
             date = new Date(),
             defaultYear = date.getFullYear(),
             shortYearCutOff = 30,
-            ch, count, pmHour, length, pattern;
+            pmHour,
+            ch, count, length, pattern;
 
         if (!format) {
             format = "d"; //shord date format
@@ -1543,6 +1544,10 @@ function pad(number) {
                 } else if (ch === "t") {
                     count = lookAhead("t");
                     pmHour = getIndexByName(calendar.PM);
+
+                    if (!pmHour && !getIndexByName(calendar.AM)) {
+                        return null;
+                    }
                 } else if (ch === "'") {
                     checkLiteral();
                     literal = true;

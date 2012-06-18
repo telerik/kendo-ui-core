@@ -587,6 +587,10 @@
                 notEqual(result1, null);
             });
 
+            test("parseExact method does not parse if time does not have AM designator", function() {
+                equal(parse("10:00", "hh:mm tt"), null);
+            });
+
         </script>
     </body>
 </html>
