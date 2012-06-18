@@ -1024,6 +1024,11 @@ p#copy
     min-height:200px;
 }
 
+*+html #example
+{
+    z-index: 2;
+}
+
 .widgetOverview #example
 {
     padding-left:0;
