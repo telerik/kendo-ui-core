@@ -39,7 +39,15 @@
             }
 
             function ev(options) {
-                return $.extend(new $.Event, options);
+                return new $.Event(options.type, options);
+            }
+
+            function dragEvent(x, y, handle) {
+                return {
+                    x: { location: x },
+                    y: { location: y },
+                    currentTarget: handle
+                };
             }
 
             test("start is raised when element is dragged", function() {
@@ -51,7 +59,7 @@
                         }
                     });
                 handle.trigger(ev({ type: "mousedown", pageX:0, pageY: 0 }));
-                handle.trigger( { type: "mousemove", pageX: 10, pageY: 0 } );
+                handle.trigger(ev({ type: "mousemove", pageX: 10, pageY: 0 }));
                 ok(called);
             });
 
@@ -64,8 +72,8 @@
                         }
                     });
                 handle.trigger(ev({ type: "mousedown", pageX:0, pageY: 0 }));
-                handle.trigger( { type: "mousemove", pageX: 10, pageY: 0 } );
-                handle.trigger( { type: "mousemove", pageX: 11, pageY: 0 } );
+                handle.trigger(ev({ type: "mousemove", pageX: 10, pageY: 0 }));
+                handle.trigger(ev({ type: "mousemove", pageX: 11, pageY: 0 }));
                 ok(called);
             });
 
@@ -79,8 +87,8 @@
                     });
                 handle = div.find("b");
                 handle.trigger(ev({ type: "mousedown", pageX:0, pageY: 0 }));
-                handle.trigger( { type: "mousemove", pageX: 10, pageY: 0 } );
-                handle.trigger( { type: "mousemove", pageX: 11, pageY: 0 } );
+                handle.trigger(ev({ type: "mousemove", pageX: 10, pageY: 0 }));
+                handle.trigger(ev({ type: "mousemove", pageX: 11, pageY: 0 }));
                 ok(!called);
             });
 
@@ -94,8 +102,8 @@
                         }
                     });
                 handle.trigger(ev({ type: "mousedown", pageX:1, pageY: 1 }));
-                handle.trigger( { type: "mousemove", pageX: 1, pageY: 10 } );
-                handle.trigger( { type: "mousemove", pageX: 1, pageY: 11 } );
+                handle.trigger( ev( { type: "mousemove", pageX: 1, pageY: 10 } ) );
+                handle.trigger( ev( { type: "mousemove", pageX: 1, pageY: 11 } ) );
                 ok(called);
             });
 
@@ -108,8 +116,8 @@
                         }
                     });
                 handle.trigger(ev({ type: "mousedown", pageX:1, pageY: 1 }));
-                handle.trigger( { type: "mousemove", pageX: 10, pageY: 1 } );
-                handle.trigger( { type: "mousemove", pageX: 11, pageY: 1 } );
+                handle.trigger( ev( { type: "mousemove", pageX: 10, pageY: 1 } ) );
+                handle.trigger( ev( { type: "mousemove", pageX: 11, pageY: 1 } ) );
                 $(document.documentElement).trigger( { type: "mouseup" } );
                 ok(called);
             });
@@ -120,8 +128,8 @@
                         hint: $("<div class='hint'/>")
                     });
 
-                resizable._start(ev({ pageX: 0, pageY: 0, currentTarget: handle }));
-                resizable._resize(ev({ pageX: 10, pageY: 0, currentTarget: handle }));
+                resizable._start(dragEvent(0, 0, handle));
+                resizable._resize(dragEvent(10, 0, handle));
 
                 equals(parseInt(div.find(".hint").offset().left), 10);
             });
@@ -133,8 +141,8 @@
                         hint: $("<div class='hint'/>")
                     });
 
-                resizable._start(ev({ pageX: 0, pageY: 0, currentTarget: handle }));
-                resizable._resize(ev({ pageX: 10, pageY: 0, currentTarget: handle }));
+                resizable._start(dragEvent(0, 0, handle));
+                resizable._resize(dragEvent(10, 10, handle));
 
                 ok(!parseInt(div.find(".hint").offset().left));
             });
@@ -146,8 +154,8 @@
                         hint: $("<div class='hint'/>")
                     });
 
-                resizable._start(ev({ pageX: 0, pageY: 0, currentTarget: handle }));
-                resizable._resize(ev({ pageX: 0, pageY: 10, currentTarget: handle }));
+                resizable._start(dragEvent(0, 0, handle));
+                resizable._resize(dragEvent(0, 10, handle));
 
                 ok(!parseInt(div.find(".hint").offset().top));
             });
@@ -159,8 +167,8 @@
                         hint: $("<div class='hint'/>")
                     });
 
-                resizable._start(ev({ pageX: 0, pageY: 0, currentTarget: handle }));
-                resizable._resize(ev({ pageX: 0, pageY: 10, currentTarget: handle }));
+                resizable._start(dragEvent(0, 0, handle));
+                resizable._resize(dragEvent(0, 10, handle));
 
                 equals(parseInt(div.find(".hint").offset().top), 10);
             });
@@ -171,9 +179,9 @@
                         hint: $("<div class='hint'/>")
                     });
 
-                resizable._start(ev({ pageX: 0, pageY: 0, currentTarget: handle }));
-                resizable._resize(ev({ pageX: 10, pageY: 0, currentTarget: handle }));
-                resizable._stop(ev({ pageX: 10, pageY: 0, currentTarget: handle }));
+                resizable._start(dragEvent(0, 0, handle));
+                resizable._resize(dragEvent(10, 0, handle));
+                resizable._stop(dragEvent(10, 0, handle));
 
                 equals(div.find(".hint").length, 0);
             });
@@ -187,7 +195,7 @@
                             return $("<div class='hint'/>");
                         }
                     });
-                resizable._start(ev({ pageX: 0, pageY: 0, currentTarget: handle }));
+                resizable._start(dragEvent(0, 0, handle));
 
                 ok(resizable.hint);
                 ok(el);
@@ -198,8 +206,8 @@
                         hint: $("<div class='hint'/>"),
                         max: 30
                     });
-                resizable._start(ev({ pageX: 0, pageY: 0, currentTarget: handle }));
-                resizable._resize(ev({ pageX: 60, pageY: 0, currentTarget: handle }));
+                resizable._start(dragEvent(0, 0, handle));
+                resizable._resize(dragEvent(60, 0, handle));
 
                 equals(parseInt(div.find(".hint").offset().left), 30);
             });
@@ -210,8 +218,8 @@
                         hint: $("<div class='hint'/>"),
                         min: 30
                     });
-                resizable._start(ev({ pageX: 60, pageY: 0, currentTarget: handle }));
-                resizable._resize(ev({ pageX: 20, pageY: 0, currentTarget: handle }));
+                resizable._start(dragEvent(60, 0, handle));
+                resizable._resize(dragEvent(20, 0, handle));
 
                 equals(parseInt(div.find(".hint").offset().left), 30);
             });
@@ -226,8 +234,8 @@
                             return 30;
                         }
                     });
-                resizable._start(ev({ pageX: 60, pageY: 0, currentTarget: handle }));
-                resizable._resize(ev({ pageX: 20, pageY: 0, currentTarget: handle }));
+                resizable._start(dragEvent(60, 0, handle));
+                resizable._resize(dragEvent(20, 0, handle));
 
                 equals(parseInt(div.find(".hint").offset().left), 30);
                 ok(el);
@@ -243,8 +251,8 @@
                             return 30;
                         }
                     });
-                resizable._start(ev({ pageX: 0, pageY: 0, currentTarget: handle }));
-                resizable._resize(ev({ pageX: 40, pageY: 0, currentTarget: handle }));
+                resizable._start(dragEvent(0, 0, handle));
+                resizable._resize(dragEvent(40, 0, handle));
 
                 equals(parseInt(div.find(".hint").offset().left), 30);
                 ok(el);
@@ -261,8 +269,8 @@
                         },
                         invalidClass: "foo"
                     });
-                resizable._start(ev({ pageX: 0, pageY: 0, currentTarget: handle }));
-                resizable._resize(ev({ pageX: 40, pageY: 0, currentTarget: handle }));
+                resizable._start(dragEvent(0, 0, handle));
+                resizable._resize(dragEvent(40, 0, handle));
 
                 ok(div.find(".hint").hasClass("foo"));
             });

@@ -594,19 +594,19 @@
                             col = contentTable.children("colgroup").find("col:eq(" + index + ")");
                         }
 
-                        columnStart = e.pageX;
+                        columnStart = e.x.location;
                         columnWidth = th.outerWidth();
                         gridWidth = that.tbody.outerWidth();
                     },
                     resize: function(e) {
-                        var width = columnWidth + e.pageX - columnStart,
+                        var width = columnWidth + e.x.location - columnStart,
                             footer = that.footer || $();
 
                         if (width > 10) {
                             col.css('width', width);
 
                             if (options.scrollable) {
-                                that._footerWidth = gridWidth + e.pageX - columnStart;
+                                that._footerWidth = gridWidth + e.x.location - columnStart;
                                 that.tbody.parent()
                                     .add(that.thead.parent())
                                     .add(footer.find("table"))
