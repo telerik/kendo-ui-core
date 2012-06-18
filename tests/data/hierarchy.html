@@ -571,6 +571,26 @@
                 equal(parent.level(), 0);
                 equal(child.level(), 1);
             });
+
+            test("removing and adding the same model does not add multiple change events", function() {
+                var counter = 0;
+
+                var dataSource = categories();
+
+                dataSource.read();
+
+                var category = dataSource.data()[0];
+                dataSource.bind("change", function() {
+                    counter++;
+                });
+
+                dataSource.remove(category);
+                dataSource.add(category);
+
+                category.set("categoryName", "foo");
+
+                equal(counter, 3);
+            });
         </script>
     </body>
 </html>
