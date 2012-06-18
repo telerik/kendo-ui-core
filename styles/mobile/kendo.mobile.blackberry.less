@@ -416,7 +416,7 @@
 
 .km-blackberry .km-tabstrip
 {
-    padding: .2em 0 0;
+    padding: .1em 0 0;
     border-top: 2px solid rgba(0,0,0,.3);
     background-color: #2a3235;
     background-image: linear-gradient(top, rgba(255,255,255,.05), rgba(0,0,0,.2) 27%, rgba(0,0,0,0));
@@ -425,11 +425,16 @@
 .km-blackberry .km-tabstrip .km-button
 {
     border: 0;
-    margin: 0 1%;
-    padding: .2em 1em;
+    margin: 0 .5%;
+    padding: .1em .7em;
     background: transparent;
     .border-radius(5pt);
     .box-shadow(none);
+}
+
+.km-blackberry .km-tabstrip.km-vertical .km-button
+{
+    padding: 0 .7em;
 }
 
 .km-blackberry .km-tabstrip .km-text
@@ -460,12 +465,12 @@
     width: 2.4rem;
     height: 2.4rem;
     position: relative;
-    margin: ~".5rem 0";
+    margin: .2rem 0;
 }
 
 .km-blackberry.km-vertical .km-tabstrip .km-icon
 {
-    margin: ~".1rem 0 .2rem 0";
+    margin: 0 0 .1rem 0;
 }
 
 .km-blackberry .km-button .km-icon
@@ -1126,6 +1131,37 @@
 }
 
 /* Tablet Styles */
+
+.km-tablet .km-blackberry .km-tabstrip
+{
+    padding: .4em 0 .2em;
+}
+
+.km-tablet .km-blackberry.km-vertical .km-tabstrip
+{
+    padding: .2em 0 0;
+}
+
+.km-tablet .km-blackberry .km-tabstrip .km-icon
+{
+    margin: .5rem 0;
+}
+
+.km-tablet .km-blackberry.km-vertical .km-tabstrip .km-icon
+{
+    margin: .1rem 0 .2rem 0;
+}
+
+.km-tablet .km-blackberry .km-tabstrip .km-button
+{
+    padding: .2em 1em;
+    margin: 0 1%;
+}
+
+.km-tablet .km-blackberry.km-vertical .km-tabstrip .km-button
+{
+    padding: 0 .1em;
+}
 
 .km-tablet .km-blackberry .km-actionsheet
 {

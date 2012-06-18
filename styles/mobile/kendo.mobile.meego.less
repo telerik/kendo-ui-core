@@ -24,9 +24,15 @@
     color: #fff;
     font-size: 1.5rem;
     line-height: 2.3rem;
-    margin-left: 1rem;
+    margin-left: 0;
     float: left;
     width: 100%;
+}
+
+.km-meego .km-navbar .km-view-title
+{
+    width: auto;
+    position: static;
 }
 
 .km-meego .km-tabstrip .km-button
@@ -90,9 +96,36 @@
     font-weight: bold;
 }
 
-.km-meego .km-back:before
+.km-meego .km-back
+{
+    background: transparent;
+    border-color: transparent;
+    .box-shadow(none);
+    height: 1em;
+    padding: .4em;
+}
+
+.km-meego .km-back.km-state-active
+{
+    background: transparent;
+}
+
+.km-meego .km-back .km-text
 {
     display: none;
+}
+
+.km-meego .km-back:before
+{
+    width: .5rem;
+    height: .5rem;
+    content: "\a0";
+    display: inline-block;
+    margin: .25rem 0 0 .25rem;
+    vertical-align: middle;
+    border: 0 solid #fff;
+    border-width: .24rem 0 0 .24rem;
+    .transform(rotate(-45deg));
 }
 
 .km-meego .km-switch-background,
@@ -350,12 +383,12 @@
 
 .km-meego .km-tabstrip .km-state-active:last-child
 {
-    .border-radius(0 0 8px 0);
+    .border-radius(0 0 5px 0);
 }
 
 .km-meego .km-tabstrip .km-state-active:first-child
 {
-    .border-radius(0 0 0 8px);
+    .border-radius(0 0 0 5px);
 }
 
 .km-meego .km-tabstrip .km-badge
@@ -553,6 +586,11 @@
 .km-meego label.km-item-checked:after
 {
     background: transparent url("images/meego-sprite.png") 0 -36px no-repeat;
+}
+
+.km-meego .km-footer
+{
+    background: transparent;
 }
 
 /* Icon styles */
