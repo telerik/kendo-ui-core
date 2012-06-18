@@ -1398,7 +1398,7 @@ pre.prettyprint
     width: 30px;
 }
 
-.configuration .options li { display: block; margin: 0; padding: 0.2em 0;}
+.configuration .options li { display: block; margin: 0; padding: 0.2em 0; zoom: 1; }
 
 .configuration .options li:after
 {
