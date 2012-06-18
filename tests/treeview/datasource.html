@@ -33,7 +33,7 @@
 
             module("DataSource binding", {
                 teardown: function () {
-                    $(".k-treeview,.k-item").remove();
+                    //$(".k-treeview,.k-item").remove();
                 }
             });
 
@@ -311,6 +311,21 @@
                     ]);
 
                 tree2.data("kendoTreeView").append(tree2.find(".k-item"), tree1.find(".k-item"));
+            });
+
+            test("moving of parent nodes", function() {
+                createTreeView([
+                    { text: "alpha", expanded: true, items: [
+                        { text: "charlie" }
+                    ] },
+                    { text: "bravo" }
+                ]);
+
+                // move alpha over bravo
+                treeviewObject.append(treeview.find(".k-item:first"), treeview.find(".k-item:last"));
+
+                equal(treeview.find(".k-item").length, 3);
+                equal(treeview.find(".k-item:last").text(), "charlie");
             });
         </script>
 

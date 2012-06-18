@@ -956,14 +956,14 @@
                         }
                     })).children("ul");
                 }
+            }
 
-                if (!loadOnDemand) {
-                    for (i = 0; i < items.length; i++) {
-                        if (items[i]._loaded) {
-                            items[i].children.read();
-                        } else {
-                            items[i].load();
-                        }
+            if (!loadOnDemand) {
+                for (i = 0; i < items.length; i++) {
+                    if (items[i]._loaded) {
+                        items[i].children.read();
+                    } else {
+                        items[i].load();
                     }
                 }
             }
