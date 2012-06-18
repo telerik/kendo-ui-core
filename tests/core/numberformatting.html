@@ -130,6 +130,10 @@
                 equal(toString(3.235555, "0.#0"), "3.24");
             });
 
+            test("toString method formats correctly negative number", function() {
+                equal(toString(-1, "0##"), "-001");
+            });
+
             //negative custom toString
             test("toString decimal number -0.001 with negative format", function() {
                 equal(toString(-0.001, "####;-(#.#)"), "-(0.001)");

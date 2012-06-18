@@ -1047,6 +1047,7 @@ function pad(number) {
             length,
             ch,
             hasGroup,
+            hasNegativeFormat,
             decimalIndex,
             sharpIndex,
             zeroIndex,
@@ -1157,11 +1158,17 @@ function pad(number) {
         //custom formatting
         //
         //separate format by sections.
+
+        //make number positive
+        if (negative) {
+            number = -number;
+        }
+
         format = format.split(";");
         if (negative && format[1]) {
-            //make number positive and get negative format
-            number = -number;
+            //get negative format
             format = format[1];
+            hasNegativeFormat = true;
         } else if (number === 0) {
             //format for zeros
             format = format[2] || format[0];
@@ -1279,6 +1286,10 @@ function pad(number) {
             }
 
             number = format.substring(0, start);
+
+            if (negative && !hasNegativeFormat) {
+                number += "-";
+            }
 
             for (idx = start; idx < length; idx++) {
                 ch = format.charAt(idx);
