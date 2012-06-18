@@ -1303,10 +1303,10 @@
          * @param {Node} referenceNode
          * The node that will be preceed the newly-appended node.
          *
-         * @exampleTitle Insert a node with the text, "Y U NO insert node?" after the node with ID, firstItem
+         * @exampleTitle Insert a node with the text, "JavaScript" after the node with ID, firstItem
          * @example
          * var treeView = $("#treeView").data("kendoTreeView");
-         * treeView.insertAfter({ text: "Y U NO insert node?" }, $("#firstItem"));
+         * treeView.insertAfter({ text: "JavaScript" }, $("#firstItem"));
          *
          * @exampleTitle Moves a node with ID, secondNode after a node with ID, firstItem
          * @example
@@ -1338,10 +1338,10 @@
          * @param {Node} referenceNode
          * The node that follows the inserted node.
          *
-         * @exampleTitle Inserts a new node with the text, "It's over 9000!" before the node with ID, firstItem
+         * @exampleTitle Inserts a new node with the text, "CSS3" before the node with ID, firstItem
          * @example
          * var treeView = $("#treeView").data("kendoTreeView");
-         * treeView.insertBefore({ text: "It's over 9000!" }, $("#firstItem"));
+         * treeView.insertBefore({ text: "CSS3" }, $("#firstItem"));
          *
          * @exampleTitle Moves the node with ID, secondNode before the node with ID, firstItem
          * @example
@@ -1374,10 +1374,10 @@
          * The node that will contain the newly appended node. If not specified, the new node will be appended to the
          * root group of the TreeView.
          *
-         * @exampleTitle Append a new node with the text, "Meanwhile, in HTML5..." to the node with ID, firstItem
+         * @exampleTitle Append a new node with the text, "HTML5" to the node with ID, firstItem
          * @example
          * var treeView = $("#treeView").data("kendoTreeView");
-         * treeView.append({ text: "Meanwhile, in HTML5..." }, $("#firstItem"));
+         * treeView.append({ text: "HTML5" }, $("#firstItem"));
          *
          * @exampleTitle Moves the node with ID, secondNode as a last child of the node with ID, firstItem
          * @example
