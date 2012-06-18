@@ -28,7 +28,7 @@
 
             test("parseGradient preserves start point", 1, function() {
                 //"-webkit-linear-gradient(left, right, #0b47a2, #04b7a2 5%, #0b4a72 98%, #20b47a), -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(0, 0, 0, 0.3)), color-stop(0.05, rgba(0, 0, 0, 0)), color-stop(0.98, rgba(0, 0, 0, 0)), color-stop(1, rgba(70, 70, 70, 0.5))), linear-gradient(top, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0)) #0b47a2;"
-                ok(gradientEngine.parseGradient("-webkit-linear-gradient(left, #0b47a2)")[0].start == "left");
+                ok(gradientEngine.parseGradient("-webkit-linear-gradient(left, #0b47a2)")[0].start.original == "left");
             });
 
             test("parseGradient parses color and position", 2, function() {
@@ -36,6 +36,48 @@
 
                 ok(gradientStop.color.get() == "#0b47a2");
                 ok(gradientStop.position == "5%");
+            });
+
+            test("get method returns browser specific gradient", 1, function () {
+                var gradient = new Gradient("-webkit-linear-gradient(left, #0b47a2 5%)");
+
+                ok(gradient.get().match(/-\w*?-/)[0] == kendo.support.transforms.css);
+            });
+
+            test("get method returns WebKit style gradient in WebKit browsers", 1, function () {
+                var gradient = new Gradient("-webkit-linear-gradient(left, #0b47a2 5%)");
+
+                ok(gradient.get("-webkit-") == "-webkit-gradient(linear,0 50%,100% 50%,color-stop(.05 #0b47a2));");
+            });
+
+            test("multiple get method returns multiple WebKit style gradient in WebKit browsers", 1, function () {
+                var gradient = new Gradient("-webkit-linear-gradient(left, #0b47a2 5%), -webkit-linear-gradient(left, #0b47a2 5%)");
+
+                ok(gradient.get("-webkit-") == "-webkit-gradient(linear,0 50%,100% 50%,color-stop(.05 #0b47a2)),-webkit-gradient(linear,0 50%,100% 50%,color-stop(.05 #0b47a2));");
+            });
+
+            test("get method returns W3C style gradients in the rest of the browsers", 4, function () {
+                var gradient = new Gradient("-webkit-linear-gradient(left, #0b47a2 5%)");
+
+                ok(gradient.get("-moz-") == "-moz-linear-gradient(left,#0b47a2 5%);");
+                ok(gradient.get("-ms-") == "-ms-linear-gradient(left,#0b47a2 5%);");
+                ok(gradient.get("-o-") == "-o-linear-gradient(left,#0b47a2 5%);");
+                ok(gradient.get("") == "linear-gradient(left,#0b47a2 5%);");
+            });
+
+            test("multiple get method returns multiple W3C style gradients in the rest of the browsers", 4, function () {
+                var gradient = new Gradient("-webkit-linear-gradient(left, #0b47a2 5%), -webkit-linear-gradient(left, #0b47a2 5%)");
+
+                ok(gradient.get("-moz-") == "-moz-linear-gradient(left,#0b47a2 5%),-moz-linear-gradient(left,#0b47a2 5%);");
+                ok(gradient.get("-ms-") == "-ms-linear-gradient(left,#0b47a2 5%),-ms-linear-gradient(left,#0b47a2 5%);");
+                ok(gradient.get("-o-") == "-o-linear-gradient(left,#0b47a2 5%),-o-linear-gradient(left,#0b47a2 5%);");
+                ok(gradient.get("") == "linear-gradient(left,#0b47a2 5%),linear-gradient(left,#0b47a2 5%);");
+            });
+
+            test("0 and 100% are stripped in W3C style gradients", 1, function () {
+                var gradient = new Gradient("-webkit-linear-gradient(left, #0b47a2 0%, #0b47a3 10%, #0b47a4 100%)");
+
+                ok(gradient.get("") == "linear-gradient(left,#0b47a2,#0b47a3 10%,#0b47a4);");
             });
 
         </script>
