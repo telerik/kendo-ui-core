@@ -3098,6 +3098,7 @@
          * @option {String} [series.type="pie".explodeField]
          * The data field containing a boolean value that indicates if the sector is exploded.
          * @option {Number} [series.type="pie".padding] The padding around the pie chart (equal on all sides).
+         * @option {Number} [series.type="pie".visibleInLegendField] A boolean value indicating whether to show the sector in the legend.
          * @option {Number} [series.type="pie".opacity] <1> The series opacity.
          * @option {Object} [series.type="pie".labels] Configures the series data labels.
          * @option {String} [series.type="pie".labels.color] The text color of the labels.
@@ -3426,6 +3427,7 @@
          * The data field containing a boolean value that indicates if the sector is exploded
          * (available only for the last level of the series).
          * @option {Number} [series.type="donut".padding] The padding around the donut chart (equal on all sides).
+         * @option {Number} [series.type="pie".visibleInLegendField] A boolean value indicating whether to show the sector in the legend.
          * @option {Number} [series.type="donut".opacity] <1> The series opacity.
          * @option {Number} [series.type="donut".margin] <1> The margin around each series
          * (not available for the last level of the series).
@@ -3558,7 +3560,7 @@
          *         </dd>
          *    </dl>
          * </div>
-         * @option {String} [series.type="donut".labels.position] <"outsideEnd">
+         * @option {String} [series.type="donut".labels.position] <"center">
          * Defines the position of the donut labels.
          * <div class="details-list">
          *     <dl>
@@ -3664,8 +3666,7 @@
          *      title: {
          *          text: "My Chart Title"
          *      },
-         *      series: [
-         *          {
+         *      series: [{
          *              type: "donut",
          *              name: "Series 1",
          *              data: [200, 450, 300, 125],
@@ -3673,8 +3674,7 @@
          *                  visible: true,
          *                  template: "#= category # - #= value #"
          *              }
-         *          }
-         *      ]
+         *      }]
          * });
          * @option {String} [series.type="donut".tooltip.font] <"12px Arial,Helvetica,sans-serif"> The tooltip font.
          * @option {String} [series.type="donut".tooltip.color]
