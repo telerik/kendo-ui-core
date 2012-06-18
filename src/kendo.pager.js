@@ -86,10 +86,12 @@
                 }
             }
 
-            that.list = that.element.find(".k-pager-numbers");
+            if (options.numeric) {
+                that.list = that.element.find(".k-pager-numbers");
 
-            if (!that.list.length) {
-               that.list = $('<ul class="k-pager-numbers" />').appendTo(that.element);
+                if (!that.list.length) {
+                   that.list = $('<ul class="k-pager-numbers" />').appendTo(that.element);
+                }
             }
 
             if (options.input) {
@@ -191,6 +193,7 @@
             linkTemplate: '<li><a href="\\#" class="k-link" data-#=ns#page="#=idx#">#=text#</a></li>',
             buttonCount: 10,
             autoBind: true,
+            numeric: true,
             info: true,
             input: false,
             previousNext: true,
@@ -218,64 +221,67 @@
                 html = "",
                 reminder,
                 page = that.page(),
+                options = that.options,
                 pageSize = that.pageSize(),
                 total = that.dataSource.total(),
                 totalPages = that.totalPages(),
                 linkTemplate = that.linkTemplate,
-                buttonCount = that.options.buttonCount;
+                buttonCount = options.buttonCount;
 
-            if (page > buttonCount) {
-                reminder = (page % buttonCount);
+            if (options.numeric) {
+                if (page > buttonCount) {
+                    reminder = (page % buttonCount);
 
-                start = (reminder === 0) ? (page - buttonCount) + 1 : (page - reminder) + 1;
+                    start = (reminder === 0) ? (page - buttonCount) + 1 : (page - reminder) + 1;
+                }
+
+                end = Math.min((start + buttonCount) - 1, totalPages);
+
+                if (start > 1) {
+                    html += button(linkTemplate, start - 1, "...", false);
+                }
+
+                for (idx = start; idx <= end; idx++) {
+                    html += button(idx == page ? that.selectTemplate : linkTemplate, idx, idx, true);
+                }
+
+                if (end < totalPages) {
+                    html += button(linkTemplate, idx, "...", false);
+                }
+
+                if (html === "") {
+                    html = that.selectTemplate({ text: 0 });
+                }
+
+                that.list.html(html);
             }
 
-            end = Math.min((start + buttonCount) - 1, totalPages);
-
-            if (start > 1) {
-                html += button(linkTemplate, start - 1, "...", false);
-            }
-
-            for (idx = start; idx <= end; idx++) {
-                html += button(idx == page ? that.selectTemplate : linkTemplate, idx, idx, true);
-            }
-
-            if (end < totalPages) {
-                html += button(linkTemplate, idx, "...", false);
-            }
-
-            if (html === "") {
-                html = that.selectTemplate({ text: 0 });
-            }
-
-            that.list.empty().append(html);
-
-            if (that.options.info) {
+            if (options.info) {
                 if (total > 0) {
-                    html = kendo.format(that.options.messages.display,
+                    html = kendo.format(options.messages.display,
                         (page - 1) * pageSize + 1, // first item in the page
                         Math.min(page * pageSize, total), // last item in the page
                     total);
                 } else {
-                    html = that.options.messages.empty;
+                    html = options.messages.empty;
                 }
 
                 that.element.find(".k-pager-info").html(html);
             }
 
-            if (that.options.input) {
+            if (options.input) {
                 that.element
                     .find(".k-pager-input")
                     .html(that.options.messages.page +
                         '<input class="k-textbox">' +
-                        kendo.format(that.options.messages.of, totalPages))
+                        kendo.format(options.messages.of, totalPages))
                     .find("input")
                     .val(page)
                     .attr(DISABLED, total < 1)
                     .toggleClass("k-state-disabled", total < 1);
             }
 
-            if (that.options.previousNext) {
+            if (options.previousNext) {
                 first(that.element, page, totalPages);
 
                 prev(that.element, page, totalPages);
@@ -285,7 +291,7 @@
                 last(that.element, page, totalPages);
             }
 
-            if (that.options.pageSizes) {
+            if (options.pageSizes) {
                 that.element.find(".k-pager-sizes select").val(pageSize);
             }
         },

@@ -603,6 +603,13 @@
                 equal(dataSource.calls("read"), 1);
             });
 
+            test("does not render numeric pager if numeric is set to false", function() {
+                var pager = setup({}, { numeric: false });
+
+                dataSource.read();
+
+                equal(pager.find(".k-pager-numbers").length, 0);
+            });
         </script>
     </body>
 </html>
