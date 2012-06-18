@@ -783,7 +783,7 @@ div.k-window-content
     margin: -2px 0 0;
 }
 
-*+html .k-menu .k-icon,
+*+html .k-menu .k-arrow-down,
 *+html .k-menu .k-image,
 *+html .k-menu .k-sprite { margin-top: 0; }
 
