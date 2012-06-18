@@ -1985,7 +1985,7 @@ function pad(number) {
     function size(obj) {
         var result = 0, key;
         for (key in obj) {
-            if (obj.hasOwnProperty(key)) {
+            if (obj.hasOwnProperty(key) && key != "toJSON") { // Ignore fake IE7 toJSON.
                 result++;
             }
         }
