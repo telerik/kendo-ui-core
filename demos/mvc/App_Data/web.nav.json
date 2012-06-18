@@ -368,6 +368,11 @@
                     "packages": ["!mvc"]
                 },
                 {
+                    "text": "Column header template",
+                    "url": "grid/headertemplate.html",
+                    "packages": ["mvc"]
+                }
+                {
                     "text": "Custom command",
                     "url": "grid/custom-command.html"
                 },

@@ -1,0 +1,63 @@
+@model Kendo.Mvc.Examples.Models.HeaderTemplateViewModel
+@{using (Html.BeginForm())
+  {		  
+    @(Html.Kendo().Grid(Model.Products)
+        .Name("Grid")
+        .Columns(columns =>
+        {
+            columns.Template(@<text>
+                     <input name="selectedProducts" type="checkbox" title="select product" value="@item.ProductID" 
+                     @{
+                         if (Model.SelectedProducts.Any(p => p.ProductID == item.ProductID))
+                         {
+                            @("checked=checked")
+                         }
+                     }/>
+                    </text>)
+                .HeaderTemplate(@<text>
+                        <input id="selectAllProducts" type="checkbox" title="select all"
+                          @{
+                              if (Model.SelectedProducts.Any())
+                              {
+                                @("checked=checked")
+                              }
+                           } />
+                    </text>)
+                .Width(50)
+                .HtmlAttributes(new { style = "text-align:center" })
+                .HeaderHtmlAttributes(new { style = "text-align:center" });
+            columns.Bound(p => p.ProductName);
+            columns.Bound(p => p.UnitPrice);
+            columns.Bound(p => p.UnitsInStock);
+        })
+        .Pageable()
+    )
+    <p>
+        <button class="k-button">
+            Display selected products</button>
+    </p>    
+  }   
+}
+
+@{if (Model.SelectedProducts.Any())
+  {
+   @(Html.Kendo().Grid(Model.SelectedProducts)
+        .Name("SelectedProductsGrid")
+        .Columns(columns =>
+        {
+            columns.Bound(p => p.ProductName);
+            columns.Bound(p => p.UnitPrice);
+            columns.Bound(p => p.UnitsInStock);
+        })        
+    )   
+  }
+}
+
+
+<script type="text/javascript">
+    $(document).ready(function() {    
+        $('#selectAllProducts').click(function() {                    
+            $("#Grid tbody input:checkbox").attr("checked", this.checked);
+        });
+    });   
+</script>
