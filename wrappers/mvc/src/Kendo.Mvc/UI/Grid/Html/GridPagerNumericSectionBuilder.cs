@@ -12,11 +12,11 @@ namespace Kendo.Mvc.UI.Html
 
         public IHtmlNode Create(IGridUrlBuilder urlBuilder, int currentPage, int pageCount)
         {
-            var fragment = new HtmlFragment();
+            var ul = new HtmlElement("ul").AddClass("k-pager-numbers");
 
-            AppendContent(urlBuilder, fragment, pageCount, currentPage);
+            AppendContent(urlBuilder, ul, pageCount, currentPage);
 
-            return fragment;
+            return ul;
         }
 
         private void AppendContent(IGridUrlBuilder urlBuilder, IHtmlNode numericDiv, int pageCount, int currentPage)

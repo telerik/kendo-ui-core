@@ -4,70 +4,30 @@ namespace Kendo.Mvc.UI.Html
 
     public class GridPagerData
     {
-        public GridPagerStyles Style
-        {
-            get;
-            set;
-        }
+        public PagerMessages Messages { get; set; }
 
-        public int CurrentPage
-        {
-            get;
-            set;
-        }
+        public int Page { get; set; }
 
-        public int PageCount
-        {
-            get;
-            set;
-        }
+        public int TotalPages { get; set; }
 
-        public string PageText
-        {
-            get;
-            set;
-        }
+        public int Total { get; set; }
 
-        public int Total
-        {
-            get;
-            set;
-        }
+        public IGridUrlBuilder UrlBuilder { get; set; }
 
-        public IGridUrlBuilder UrlBuilder
-        {
-            get;
-            set;
-        }
+        public int Colspan { get; set; }
 
-        public string PageOfText
-        {
-            get;
-            set;
-        }
+        public int PageSize { get; set; }
 
-        public int Colspan
-        {
-            get;
-            set;
-        }
+        public bool Numeric { get; set; }
 
-        public string DisplayingItemsText
-        {
-            get;
-            set;
-        }
+        public bool Info { get; set; }
 
-        public int PageSize
-        {
-            get;
-            set;
-        }
+        public bool Input { get; set; }
 
-        public string RefreshText
-        {
-            get;
-            set;
-        }
+        public bool Refresh { get; set; }
+
+        public bool PreviousNext { get; set; }
+
+        public int[] PageSizes { get; set; }
     }
 }

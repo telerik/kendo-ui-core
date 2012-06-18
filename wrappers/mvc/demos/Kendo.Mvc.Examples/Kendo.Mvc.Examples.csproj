@@ -151,6 +151,7 @@
     <Compile Include="Controllers\Web\Grid\Column_ResizingController.cs" />
     <Compile Include="Controllers\Web\Grid\ApiController.cs" />
     <Compile Include="Controllers\Web\Grid\ColumnSettingsController.cs" />
+    <Compile Include="Controllers\Web\Grid\PagingController.cs" />
     <Compile Include="Controllers\Web\Grid\Custom_CommandController.cs" />
     <Compile Include="Controllers\Web\Grid\GlobalizationController.cs" />
     <Compile Include="Controllers\Web\Grid\RowTemplateController.cs" />
@@ -231,6 +232,7 @@
     <Compile Include="Models\Config.cs" />
     <Compile Include="Helpers\HyphenatedRouteHandler.cs" />
     <Compile Include="Models\CustomValidationProductViewModel.cs" />
+    <Compile Include="Models\PagerViewModel.cs" />
     <Compile Include="Models\StockDataPoint.cs" />
     <Compile Include="Models\ElectricitySource.cs" />
     <Compile Include="Models\EmployeeViewModel.cs" />
@@ -641,9 +643,9 @@
     <Content Include="Areas\razor\Views\web\grid\rowtemplate.cshtml" />
     <Content Include="Areas\razor\Views\web\grid\virtualization_remote_data.cshtml" />
     <Content Include="Areas\razor\Views\web\grid\globalization.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\datatablebinding.cshtml" />
     <Content Include="Areas\razor\Views\web\grid\columnsettings.cshtml" />
     <Content Include="Areas\razor\Views\web\grid\custom_command.cshtml" />
+    <Content Include="Areas\razor\Views\web\grid\paging.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>

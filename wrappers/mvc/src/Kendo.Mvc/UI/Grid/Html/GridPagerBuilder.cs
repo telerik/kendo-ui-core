@@ -18,18 +18,24 @@ namespace Kendo.Mvc.UI.Html
         {
             var fragment = new HtmlFragment();
 
-            
             pagerSections.CreateSections(section).AppendTo(fragment);
 
-            //TODO: pager status
-            //statusBuilder.Create(section).AppendTo(fragment);
+            if (section.Refresh)
+            {
+                refreshBuilder.Create(section.UrlBuilder.SelectUrl(), section.Messages.Refresh).AppendTo(fragment);
+            }
+
+            if (section.Input)
+            {
+                statusBuilder.Create(section).AppendTo(fragment);
+            }
 
             return fragment;
         }
         
         public IHtmlNode CreateRefreshButton(GridPagerData pagerData)
         {
-            return refreshBuilder.Create(pagerData.UrlBuilder.SelectUrl(), pagerData.RefreshText);
+            return refreshBuilder.Create(pagerData.UrlBuilder.SelectUrl(), pagerData.Messages.Refresh);
         }
     }
 }

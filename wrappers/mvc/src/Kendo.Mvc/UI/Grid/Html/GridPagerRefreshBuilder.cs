@@ -1,7 +1,5 @@
 namespace Kendo.Mvc.UI.Html
 {
-    using Infrastructure;
-
     public interface IGridPagerRefreshBuilder
     {
         IHtmlNode Create(string url, string refreshText);
@@ -11,17 +9,16 @@ namespace Kendo.Mvc.UI.Html
     {
         public IHtmlNode Create(string url, string refreshText)
         {
-            var div = new HtmlElement("div")
-                .AddClass("k-status");
-
             var a = new HtmlElement("a")
-                .AddClass(UIPrimitives.Icon, "k-refresh")
                 .Attribute("href", url)
-                .Text(refreshText);
+                .AddClass("k-pager-refresh");
 
-            a.AppendTo(div);
+            new HtmlElement("span")
+                .AddClass("k-icon", "k-refresh")
+                .Text(refreshText)
+                .AppendTo(a);
 
-            return div;
+            return a;
         }
     }
 }

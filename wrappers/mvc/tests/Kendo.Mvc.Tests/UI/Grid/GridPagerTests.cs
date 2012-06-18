@@ -6,17 +6,11 @@ namespace Kendo.Mvc.UI.Tests.Grid
     
     public class GridPagerTests
     {
-		private GridPagingSettings pager;
+		private GridPagerSettings pager;
 
         public GridPagerTests()
         {
-            pager = new GridPagingSettings(null);
-        }
-
-        [Fact]
-        public void Position_is_bottom_by_default()
-        {
-            Assert.Equal(GridPagerPosition.Bottom, pager.Position);
+            pager = new GridPagerSettings(null);
         }
 
         [Fact]

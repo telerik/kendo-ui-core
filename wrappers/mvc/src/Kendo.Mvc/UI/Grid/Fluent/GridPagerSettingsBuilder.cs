@@ -7,79 +7,62 @@ namespace Kendo.Mvc.UI.Fluent
     /// </summary>
     public class GridPagerSettingsBuilder : IHideObjectMembers
     {
-        private readonly GridPagingSettings pager;
+        private readonly GridPagerSettings pager;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GridPagerSettingsBuilder"/> class.
         /// </summary>
         /// <param name="pager">The pager.</param>
-        public GridPagerSettingsBuilder(GridPagingSettings pager)
+        public GridPagerSettingsBuilder(GridPagerSettings pager)
         {
             this.pager = pager;
         }
 
-        //TODO: pager positions
-        /*
         /// <summary>
-        /// Sets the position at which to display the pager.
+        /// Sets the page sizes of the grid.
         /// </summary>
-        /// <param name="value">The pager position.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().Grid(Model)
-        ///             .Name("Grid")
-        ///             .Pageable(paging => paging.Position(GridPagerPosition.Bottom))
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public virtual GridPagerSettingsBuilder Position(GridPagerPosition value)
+        /// <param name="pageSizes">The values shown in the pageSize dropdown</param>
+        public GridPagerSettingsBuilder PageSizes(int[] pageSizes)
         {
-            pager.Position = value;
-
-            return this;
-        }
-        */
-
-        /*TODO: page sizes dropdown
-        /// <summary>
-        /// Sets the page size of the grid.
-        /// </summary>
-        /// <param name="value">The number of items to display in a single page.</param>
-        /// <param name="sizesInDropDown">The values shown in the pageSize dropdown</param>
-        /// <returns></returns>
-        public virtual GridPagerSettingsBuilder PageSize(int value, int[] sizesInDropDown)
-        {
-
-            pager.PageSize = value;
-
-            pager.PageSizesInDropDown = sizesInDropDown;
+            pager.PageSizes = pageSizes;
 
             return this;
         }
 
-        */
-
-        /*TODO: Page styles
-        /// <summary>
-        /// Sets the pager style.
-        /// </summary>
-        /// <param name="value">The pager style to set.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().Grid(Model)
-        ///             .Name("Grid")
-        ///             .Pageable(paging => paging.Style(GridPagerStyles.PageInput | GridPagerStyles.Numeric))
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public virtual GridPagerSettingsBuilder Style(GridPagerStyles value)
+        public GridPagerSettingsBuilder Numeric(bool enabled)
         {
-            pager.Style = value;
+            pager.Numeric = enabled;
 
             return this;
         }
-        */
 
+        public GridPagerSettingsBuilder Info(bool enabled)
+        {
+            pager.Info = enabled;
+
+            return this;
+        }
+
+        public GridPagerSettingsBuilder Input(bool enabled)
+        {
+            pager.Input = enabled;
+
+            return this;
+        }
+
+        public GridPagerSettingsBuilder Refresh(bool enabled)
+        {
+            pager.Refresh = enabled;
+
+            return this;
+        }
+
+        public GridPagerSettingsBuilder PreviousNext(bool enabled)
+        {
+            pager.PreviousNext = enabled;
+
+            return this;
+        }
         /// <summary>
         /// Enables or disables paging.
         /// </summary>

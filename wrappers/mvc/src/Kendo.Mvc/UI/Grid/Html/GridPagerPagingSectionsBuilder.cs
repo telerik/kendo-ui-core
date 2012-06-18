@@ -19,67 +19,70 @@ namespace Kendo.Mvc.UI.Html
 
         public IHtmlNode CreateSections(GridPagerData section)
         {
-            var currentPage = section.CurrentPage;
-            var pageCount = section.PageCount;
-
             var container = new HtmlFragment();
-            var style = section.Style;
 
-            //TODO: AppendFirstPrevButtons(container, style, section.UrlBuilder, currentPage);
-            AppendNumericSection(container, style, section.UrlBuilder, section.CurrentPage, section.PageCount);
-            //TODO: AppendPageSizeDropDown(container, style, section);
-            //TODO: AppendPageInput(container, style, section);
-            //TODO: AppendNextLast(container, style, section.UrlBuilder, currentPage, pageCount);
+            AppendFirstPrevButtons(container, section.UrlBuilder, section);
+            AppendNumericSection(container, section.UrlBuilder, section);
+            AppendPageInput(container, section);
+            AppendNextLast(container, section.UrlBuilder, section);
+            AppendPageSizeDropDown(container, section);
+
             return container;
         }
 
-        private void AppendPageInput(IHtmlNode container, GridPagerStyles style, GridPagerData section)
+        private void AppendPageInput(IHtmlNode container, GridPagerData section)
         {
-            if ((style & GridPagerStyles.PageInput) != GridPagerStyles.PageInput)
-                return;
-
-            inputSectionBuilder.Create(section).AppendTo(container);
-        }
-
-        private void AppendPageSizeDropDown(IHtmlNode container, GridPagerStyles style, GridPagerData section)
-        {
-            if ((style & GridPagerStyles.PageSizeDropDown) != GridPagerStyles.PageSizeDropDown)
-                return;
-
-            gridPagerPageSizeSection.Create(section).AppendTo(container);
-        }
-
-        private void AppendNextLast(IHtmlNode container, GridPagerStyles style, 
-            IGridUrlBuilder urlBuilder, int currentPage, int pageCount)
-        {
-            if ((style & GridPagerStyles.NextPrevious) != GridPagerStyles.NextPrevious) 
-                return;
-
-            buttonFactory.CreateButton(GridPagerButtonType.Icon, currentPage < pageCount,
-                                       GetUrl(urlBuilder, currentPage + 1), "next", currentPage + 1).AppendTo(container);
-
-            buttonFactory.CreateButton(GridPagerButtonType.Icon, currentPage < pageCount,
-                                       GetUrl(urlBuilder, pageCount),"last", pageCount).AppendTo(container);
-        }
-
-        private void AppendNumericSection(IHtmlNode container, GridPagerStyles style, IGridUrlBuilder urlBuilder, int currentPage, int pageCount)
-        {
-            if ((style & GridPagerStyles.Numeric) == GridPagerStyles.Numeric)
+            if (section.Input)
             {
-                numericSectionBuilder.Create(urlBuilder, currentPage, pageCount).AppendTo(container);    
+                inputSectionBuilder.Create(section).AppendTo(container);
             }
         }
 
-        private void AppendFirstPrevButtons(IHtmlNode container, GridPagerStyles style, IGridUrlBuilder urlBuilder, int currentPage)
+        private void AppendPageSizeDropDown(IHtmlNode container, GridPagerData section)
         {
-            if ((style & GridPagerStyles.NextPrevious) != GridPagerStyles.NextPrevious) 
-                return;
+            if (section.PageSizes != null)
+            {
+                gridPagerPageSizeSection.Create(section).AppendTo(container);
+            }
+        }
 
-            buttonFactory.CreateButton(GridPagerButtonType.Icon, currentPage > 1,
-                                       GetUrl(urlBuilder, 1), "first", 1).AppendTo(container);
+        private void AppendNextLast(IHtmlNode container,
+                                    IGridUrlBuilder urlBuilder, GridPagerData section)
+        {
+            if (section.PreviousNext)
+            {
+                buttonFactory.CreateButton(GridPagerButtonType.Icon, section.Page < section.TotalPages,
+                                           GetUrl(urlBuilder, section.Page + 1),
+                                           section.Messages.Next, section.Page + 1)
+                             .AppendTo(container);
 
-            buttonFactory.CreateButton(GridPagerButtonType.Icon, currentPage > 1,
-                                       GetUrl(urlBuilder, currentPage - 1), "previous", currentPage -1).AppendTo(container);
+                buttonFactory.CreateButton(GridPagerButtonType.Icon, section.Page < section.TotalPages,
+                                           GetUrl(urlBuilder, section.TotalPages), section.Messages.Last, section.TotalPages)
+                             .AppendTo(container);
+            }
+        }
+
+        private void AppendNumericSection(IHtmlNode container, IGridUrlBuilder urlBuilder, GridPagerData section)
+        {
+            if (section.Numeric)
+            {
+                numericSectionBuilder.Create(urlBuilder, section.Page, section.TotalPages)
+                                     .AppendTo(container);
+            }
+        }
+
+        private void AppendFirstPrevButtons(IHtmlNode container, IGridUrlBuilder urlBuilder, GridPagerData section)
+        {
+            if (section.PreviousNext)
+            {
+                buttonFactory.CreateButton(GridPagerButtonType.Icon, section.Page > 1,
+                                           GetUrl(urlBuilder, 1), section.Messages.First, 1)
+                             .AppendTo(container);
+
+                buttonFactory.CreateButton(GridPagerButtonType.Icon, section.Page > 1,
+                                           GetUrl(urlBuilder, section.Page - 1), section.Messages.Previous, section.Page - 1)
+                             .AppendTo(container);
+            }
         }
 
         private string GetUrl(IGridUrlBuilder urlBuilder, int page)

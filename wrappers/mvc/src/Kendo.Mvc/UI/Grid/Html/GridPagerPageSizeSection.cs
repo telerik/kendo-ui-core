@@ -1,35 +1,23 @@
+using System.Globalization;
+
 namespace Kendo.Mvc.UI.Html
 {
     class GridPagerPageSizeSection : IGridPagerPageSizeSection
     {
         public IHtmlNode Create(GridPagerData section)
         {
-            var div = new HtmlElement("div")
-                .AddClass("t-page-size");
+            var span = new HtmlElement("span")
+                .AddClass("k-pager-sizes", "k-label");
 
-            var dropDown = new HtmlElement("div")
-                .AddClass("t-dropdown", "t-header")
-                .Css("width","50px")
-                .AppendTo(div);
+            var select = new HtmlElement("select")
+                .AppendTo(span);
 
-            var wrapper = new HtmlElement("div")
-                .AddClass("t-dropdown-wrap", "t-state-default")
-                .AppendTo(dropDown);
+            foreach (var pageSize in section.PageSizes)
+            {
+                new HtmlElement("option").Text(pageSize.ToString(CultureInfo.InvariantCulture)).AppendTo(select);
+            }
 
-            new HtmlElement("span")
-                .AddClass("t-input")
-                .Text(section.PageSize.ToString())
-                .AppendTo(wrapper);
-
-            var select = new HtmlElement("span")
-                .AddClass("t-select").AppendTo(wrapper);
-
-            new HtmlElement("span")
-                .AddClass("t-icon", "t-arrow-down")
-                .Text("select")
-                .AppendTo(select);
-
-            return div;
+            return span;
         }
     }
 }

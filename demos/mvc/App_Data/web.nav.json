@@ -331,6 +331,11 @@
                     "packages": ["mvc"]
                 },
                 {
+                    "text": "Paging",
+                    "url": "grid/paging.html",
+                    "packages": ["mvc"]
+                },
+                {
                     "text": "Virtualization of local data",
                     "url": "grid/virtualization-local-data.html",
                     "packages": ["!mvc"]

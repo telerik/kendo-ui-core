@@ -1,0 +1,31 @@
+﻿@model Kendo.Mvc.Examples.Models.PagerViewModel
+
+@using (Html.BeginForm())
+{
+    <div class="configuration k-widget k-header" style="max-width:490px;width: 490px;float: none">
+        <span class="configHead">The pager should ...</span>
+        <ul class="options">
+            <li>@Html.CheckBoxFor(pager => pager.Input) @Html.LabelFor(m => m.Input, "have an input box for the page number")</li>
+            <li>@Html.CheckBoxFor(pager => pager.Numeric) @Html.LabelFor(m => m.Numeric, "have numeric pager")</li>
+            <li>@Html.CheckBoxFor(pager => pager.Info) @Html.LabelFor(m => m.Info, "display the current range of items")</li>
+            <li>@Html.CheckBoxFor(pager => pager.PreviousNext) @Html.LabelFor(m => m.Info, "display the 'first', 'previous', 'next' and 'last' buttons")</li>
+            <li>@Html.CheckBoxFor(pager => pager.Refresh) @Html.LabelFor(m => m.Refresh, "display the 'refresh' button")</li>
+        </ul>
+        <button class="k-button" type="submit">Apply</button>
+    </div>
+}
+
+@(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
+      .Name("Grid")
+      .Pageable(pager => pager
+        .Input(Model.Input)
+        .Numeric(Model.Numeric)
+        .Info(Model.Info)
+        .PreviousNext(Model.PreviousNext)
+        .Refresh(Model.Refresh)
+      )
+      .DataSource(dataSource => dataSource
+          .Ajax()
+              .Read(read => read.Action("Paging_Orders", "Grid"))
+      )
+)

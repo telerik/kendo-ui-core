@@ -443,6 +443,15 @@ namespace Kendo.Mvc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to of {0}.
+        /// </summary>
+        internal static string Pager_Of {
+            get {
+                return ResourceManager.GetString("Pager_Of", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Paging must be enabled to use PageOnScroll..
         /// </summary>
         internal static string PagingMustBeEnabledToUsePageOnScroll {

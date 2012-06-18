@@ -42,7 +42,7 @@ namespace Kendo.Mvc.UI
             Columns = new List<GridColumnBase<T>>();
             DataKeys = new List<IDataKey>();
 
-            Paging = new GridPagingSettings(this);
+            Paging = new GridPagerSettings(this);
             Sorting = new GridSortSettings();
             Scrolling = new GridScrollingSettings();
             Navigatable = new GridNavigatableSettings(this);
@@ -517,7 +517,7 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Gets the paging configuration.
         /// </summary>
-        public GridPagingSettings Paging
+        public GridPagerSettings Paging
         {
             get;
             internal set;
@@ -655,7 +655,9 @@ namespace Kendo.Mvc.UI
 
             if (Paging.Enabled)
             {
-                options["pageable"] = new Dictionary<string, object> { { "autoBind", autoBind } };
+                Paging.AutoBind = autoBind;
+
+                options["pageable"] = Paging.ToJson();
             }
 
             if (Sorting.Enabled)
@@ -868,8 +870,7 @@ namespace Kendo.Mvc.UI
         {
             return new GridFunctionalData
             {
-                ShowTopPager = Paging.Enabled && (Paging.Position == GridPagerPosition.Top || Paging.Position == GridPagerPosition.Both),
-                ShowBottomPager = Paging.Enabled && (Paging.Position == GridPagerPosition.Bottom || Paging.Position == GridPagerPosition.Both),
+                ShowBottomPager = Paging.Enabled,
                 ShowTopToolBar = ToolBar.Enabled && (ToolBar.Position == GridToolBarPosition.Top || ToolBar.Position == GridToolBarPosition.Both),
                 ShowBottomToolBar = ToolBar.Enabled && (ToolBar.Position == GridToolBarPosition.Bottom || ToolBar.Position == GridToolBarPosition.Both),
                 ShowGroupHeader = Grouping.Enabled && Grouping.Visible,
@@ -908,17 +909,19 @@ namespace Kendo.Mvc.UI
         {
             return new GridPagerData
             {
-                CurrentPage = DataSource.Page,
-                PageCount = DataSource.TotalPages,
-                Style = Paging.Style,
+                Page = DataSource.Page,
+                TotalPages = DataSource.TotalPages,
                 UrlBuilder = UrlBuilder,
                 Total = DataSource.Total,
-                PageOfText = Localization.PageOf,
-                PageText = Localization.Page,
                 Colspan = Colspan,
-                DisplayingItemsText = Localization.DisplayingItems,
                 PageSize = DataSource.PageSize,
-                RefreshText = Localization.Refresh
+                Numeric = Paging.Numeric,
+                Input = Paging.Input,
+                Info = Paging.Info,
+                PreviousNext = Paging.PreviousNext,
+                Refresh = Paging.Refresh,
+                PageSizes = Paging.PageSizes,
+                Messages = Paging.Messages
             };
         }
 

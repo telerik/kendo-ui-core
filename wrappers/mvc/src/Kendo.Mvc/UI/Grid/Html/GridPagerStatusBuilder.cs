@@ -1,20 +1,18 @@
 namespace Kendo.Mvc.UI.Html
 {
     using System;
-    using Extensions;
-    using Infrastructure;
+    using Kendo.Mvc.Extensions;
 
     class GridPagerStatusBuilder : IGridPagerStatusBuilder
     {
-        public IHtmlNode Create(GridPagerData pagerSection)
+        public IHtmlNode Create(GridPagerData pager)
         {
-            var firstItemInPage = pagerSection.Total > 0 ? (pagerSection.CurrentPage - 1) * pagerSection.PageSize + 1 : 0;
-            var lastItemInPage = Math.Min(pagerSection.PageSize*pagerSection.CurrentPage, pagerSection.Total);
+            var firstItemInPage = pager.Total > 0 ? (pager.Page - 1) * pager.PageSize + 1 : 0;
+            var lastItemInPage = Math.Min(pager.PageSize * pager.Page, pager.Total);
 
-            var itemsText = pagerSection.DisplayingItemsText ?? string.Empty;
-            return new HtmlElement("div")
-                        .AddClass("t-status-text")
-                        .Text(itemsText.FormatWith(firstItemInPage, lastItemInPage, pagerSection.Total));
+            return new HtmlElement("span")
+                        .AddClass("k-pager-info", "k-label")
+                        .Text(pager.Messages.Display.FormatWith(firstItemInPage, lastItemInPage, pager.Total));
         }
     }
 }

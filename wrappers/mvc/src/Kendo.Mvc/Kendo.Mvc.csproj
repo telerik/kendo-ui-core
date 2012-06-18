@@ -155,6 +155,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EditorLocalization.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\Messages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.resx</DependentUpon>
+    </Compile>
     <Compile Include="UI\AutoComplete\AutoComplete.cs" />
     <Compile Include="UI\AutoComplete\Fluent\AutoCompleteBuilder.cs" />
     <Compile Include="UI\Calendar\CalendarSelectionSettings.cs" />
@@ -461,6 +466,7 @@
     <Compile Include="UI\Grid\Html\IGridFormatableCellBuilder.cs" />
     <Compile Include="UI\Grid\Html\IGridPagerPageSizeSection.cs" />
     <Compile Include="UI\Grid\Html\IGridPagerPagingSectionsBuilder.cs" />
+    <Compile Include="UI\Pager\PagerMessages.cs" />
     <Compile Include="UI\Grid\Settings\GridColumnContextMenuSettings.cs" />
     <Compile Include="UI\Grid\Settings\GridNavigatableSettings.cs" />
     <Compile Include="UI\Grid\ToolBar\GridToolBarPosition.cs" />
@@ -844,7 +850,6 @@
     <Compile Include="UI\Grid\GridRow.cs" />
     <Compile Include="UI\Grid\Settings\GridScrollingSettings.cs" />
     <Compile Include="UI\Grid\Fluent\GridScrollSettingsBuilder.cs" />
-    <Compile Include="UI\Grid\GridPagerStyles.cs" />
     <Compile Include="UI\Grid\Settings\GridSelectionSettings.cs" />
     <Compile Include="UI\Grid\Fluent\GridSelectionSettingsBuilder.cs" />
     <Compile Include="UI\Grid\Settings\GridSortSettings.cs" />
@@ -867,9 +872,8 @@
     <Compile Include="UI\Grid\Fluent\GridColumnFactory.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="UI\Grid\Settings\GridPagingSettings.cs" />
+    <Compile Include="UI\Grid\Settings\GridPagerSettings.cs" />
     <Compile Include="UI\Grid\Fluent\GridPagerSettingsBuilder.cs" />
-    <Compile Include="UI\Grid\GridPagerPosition.cs" />
     <Compile Include="UI\Grid\GridUrlBuilder.cs" />
     <Compile Include="UI\Grid\IGridColumnContainer.cs" />
     <Compile Include="UI\IHtmlAttributesContainer.cs" />
@@ -973,6 +977,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\Messages.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\UploadLocalization.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
