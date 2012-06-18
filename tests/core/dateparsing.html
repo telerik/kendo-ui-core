@@ -591,6 +591,14 @@
                 equal(parse("10:00", "hh:mm tt"), null);
             });
 
+            test("parseExact method supports single 't' format specifier (P)", function() {
+                equal(+parse("10/10/2000 10:00 p", "MM/dd/yyyy hh:mm t"), +new Date(2000, 9, 10, 22, 0, 0));
+            });
+
+            test("parseExact method supports single 't' format specifier (A)", function() {
+                equal(+parse("10/10/2000 10:00 a", "MM/dd/yyyy hh:mm t"), +new Date(2000, 9, 10, 10, 0, 0));
+            });
+
         </script>
     </body>
 </html>

@@ -1543,10 +1543,21 @@ function pad(number) {
                     }
                 } else if (ch === "t") {
                     count = lookAhead("t");
-                    pmHour = getIndexByName(calendar.PM);
 
-                    if (!pmHour && !getIndexByName(calendar.AM)) {
-                        return null;
+                    if (count === 2) {
+                        pmHour = getIndexByName(calendar.PM);
+
+                        if (!pmHour && !getIndexByName(calendar.AM)) {
+                            return null;
+                        }
+                    } else if (count === 1) {
+                        var pm = $.map(calendar.PM, function(str) { return str.charAt(0); });
+
+                        pmHour = getIndexByName(pm);
+
+                        if (!pmHour && !getIndexByName($.map(calendar.AM, function(str) { return str.charAt(0); }))) {
+                            return null;
+                        }
                     }
                 } else if (ch === "'") {
                     checkLiteral();
