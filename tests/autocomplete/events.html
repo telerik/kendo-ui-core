@@ -233,6 +233,21 @@
 
                 ok(!autocomplete.popup.visible());
             });
+
+            test("select event is not raised when custom value is entered", 0, function() {
+                var autocomplete = input.kendoAutoComplete({
+                    dataSource: ["foo"],
+                    select: function(e) {
+                        ok(false);
+                    }
+                }).data("kendoAutoComplete");
+
+                autocomplete.dataSource.read();
+                autocomplete.popup.open();
+
+                //simulate enter
+                autocomplete._focus(null);
+            });
        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
