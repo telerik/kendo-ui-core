@@ -17,7 +17,7 @@ namespace Kendo.Mvc.UI
 
         string Prefix(string value);
 
-        GridPagerSettings Paging
+        PagerSettings Paging
         {
             get;
         }

@@ -42,7 +42,7 @@ namespace Kendo.Mvc.UI
             Columns = new List<GridColumnBase<T>>();
             DataKeys = new List<IDataKey>();
 
-            Paging = new GridPagerSettings(this);
+            Paging = new PagerSettings();
             Sorting = new GridSortSettings();
             Scrolling = new GridScrollingSettings();
             Navigatable = new GridNavigatableSettings(this);
@@ -517,7 +517,7 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Gets the paging configuration.
         /// </summary>
-        public GridPagerSettings Paging
+        public PagerSettings Paging
         {
             get;
             internal set;

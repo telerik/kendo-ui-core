@@ -587,11 +587,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public GridBuilder<T> Pageable(Action<GridPagerSettingsBuilder> pagerAction)
+        public GridBuilder<T> Pageable(Action<PagerBuilder> pagerAction)
         {
             Component.Paging.Enabled = true;            
 
-            pagerAction(new GridPagerSettingsBuilder(Component.Paging));
+            pagerAction(new PagerBuilder(Component.Paging));
 
             return this;
         }        

@@ -10,6 +10,7 @@
             <li>@Html.CheckBoxFor(pager => pager.Info) @Html.LabelFor(m => m.Info, "display the current range of items")</li>
             <li>@Html.CheckBoxFor(pager => pager.PreviousNext) @Html.LabelFor(m => m.Info, "display the 'first', 'previous', 'next' and 'last' buttons")</li>
             <li>@Html.CheckBoxFor(pager => pager.Refresh) @Html.LabelFor(m => m.Refresh, "display the 'refresh' button")</li>
+            <li>@Html.CheckBoxFor(pager => pager.PageSizes) @Html.LabelFor(m => m.PageSizes, "allow the user to change the page size")</li>
         </ul>
         <button class="k-button" type="submit">Apply</button>
     </div>
@@ -23,6 +24,7 @@
         .Info(Model.Info)
         .PreviousNext(Model.PreviousNext)
         .Refresh(Model.Refresh)
+        .PageSizes(Model.PageSizes)
       )
       .DataSource(dataSource => dataSource
           .Ajax()

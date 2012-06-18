@@ -872,8 +872,8 @@
     <Compile Include="UI\Grid\Fluent\GridColumnFactory.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="UI\Grid\Settings\GridPagerSettings.cs" />
-    <Compile Include="UI\Grid\Fluent\GridPagerSettingsBuilder.cs" />
+    <Compile Include="UI\Pager\PagerSettings.cs" />
+    <Compile Include="UI\Pager\Fluent\PagerBuilder.cs" />
     <Compile Include="UI\Grid\GridUrlBuilder.cs" />
     <Compile Include="UI\Grid\IGridColumnContainer.cs" />
     <Compile Include="UI\IHtmlAttributesContainer.cs" />

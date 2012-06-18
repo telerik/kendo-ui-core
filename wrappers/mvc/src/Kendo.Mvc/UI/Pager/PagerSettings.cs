@@ -3,71 +3,33 @@ using System.Collections.Generic;
 
 namespace Kendo.Mvc.UI
 {
-    public class GridPagerSettings : JsonObject
+    public class PagerSettings : JsonObject
     {
-        private readonly IGrid grid;
-
-        public GridPagerSettings(IGrid grid)
+        public PagerSettings()
         {
-            this.grid = grid;
             Messages = new PagerMessages();
             Numeric = true;
             Info = true;
             PreviousNext = true;
         }
 
-        public bool AutoBind
-        {
-            get;
-            set;
-        }
+        public bool AutoBind { get; set; }
 
-        public PagerMessages Messages
-        {
-            get;
-            private set;
-        }
+        public PagerMessages Messages { get; private set; }
 
-        public bool Numeric
-        {
-            get;
-            set;
-        }
+        public bool Numeric { get; set; }
 
-        public bool Info
-        {
-            get;
-            set;
-        }
+        public bool Info { get; set; }
 
-        public bool Input
-        {
-            get;
-            set;
-        }
+        public bool Input { get; set; }
 
-        public bool PreviousNext
-        {
-            get;
-            set;
-        }
+        public bool PreviousNext { get; set; }
 
-        public bool Enabled
-        {
-            get;
-            set;
-        }
+        public bool Enabled { get; set; }
 
-        public bool Refresh
-        {
-            get;
-            set;
-        }
+        public bool Refresh { get; set; }
 
-        public int[] PageSizes
-        {
-            get; set;
-        }
+        public int[] PageSizes { get; set; }
 
         protected override void Serialize(IDictionary<string, object> json)
         {
@@ -99,6 +61,11 @@ namespace Kendo.Mvc.UI
             if (Refresh)
             {
                 json["refresh"] = Refresh;
+            }
+
+            if (PageSizes != null && PageSizes.Length > 0)
+            {
+                json["pageSizes"] = PageSizes;
             }
         }
     }

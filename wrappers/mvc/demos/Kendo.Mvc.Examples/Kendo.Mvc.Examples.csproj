@@ -646,6 +646,7 @@
     <Content Include="Areas\razor\Views\web\grid\columnsettings.cshtml" />
     <Content Include="Areas\razor\Views\web\grid\custom_command.cshtml" />
     <Content Include="Areas\razor\Views\web\grid\paging.cshtml" />
+    <Content Include="Areas\aspx\Views\web\grid\paging.aspx" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>

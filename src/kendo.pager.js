@@ -67,7 +67,6 @@
             page = that.page();
             totalPages = that.totalPages();
 
-
             that._refreshHandler = proxy(that.refresh, that);
 
             that.dataSource.bind(CHANGE, that._refreshHandler);
@@ -122,18 +121,20 @@
             }
 
             if (options.pageSizes){
-                if (!that.element.find(".k-pager-size").length){
+                if (!that.element.find(".k-pager-sizes").length){
                      $('<span class="k-pager-sizes k-label"><select/>' + options.messages.itemsPerPage + "</span>")
                         .appendTo(that.element)
                         .find("select")
                         .html($.map($.isArray(options.pageSizes) ? options.pageSizes : [5,10,20], function(page){
                             return "<option>" + page + "</option>";
                         }).join(""))
-                        .val(that.pageSize())
                         .end()
                         .appendTo(that.element);
 
+                    console.log(that.pageSize());
                 }
+
+                that.element.find(".k-pager-sizes select").val(that.pageSize());
 
                 if (kendo.ui.DropDownList) {
                    that.element.find(".k-pager-sizes select").kendoDropDownList();

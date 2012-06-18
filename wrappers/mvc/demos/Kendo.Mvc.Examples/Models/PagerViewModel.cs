@@ -21,5 +21,7 @@ namespace Kendo.Mvc.Examples.Models
         public bool PreviousNext { get; set; }
 
         public bool Refresh { get; set; }
+
+        public bool PageSizes { get; set; }
     }
 }
