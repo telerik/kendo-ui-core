@@ -1,13 +1,13 @@
 
         <div id="example" class="k-content absConf">
-            <div class="chart-wrapper" style="margin: auto;">
-                <div id="chart"></div>
-            </div>
+            <div style="width: 450px; margin: 0 auto;">
+                <div id="chart" style="width: 400px; height: 300px;"></div>
                 <div>
                     <div id="chart2006" style="float:left; width: 150px; height: 150px;"></div>
                     <div id="chart2008" style="float:left; width: 150px; height: 150px;"></div>
                     <div id="chart2010" style="float:left; width: 150px; height: 150px;"></div>
                 </div>
+            </div>
             <script>
                 function createChart() {
                     $("#chart").kendoChart({
@@ -36,7 +36,8 @@
                         series: [{
                             field: "share",
                             categoryField: "resolution",
-                            visibleInLegendField: "visibleInLegend"
+                            visibleInLegendField: "visibleInLegend",
+                            padding: 20
                         }],
                         tooltip: {
                             visible: true,
