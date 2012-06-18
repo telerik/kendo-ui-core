@@ -2025,6 +2025,21 @@
             return rowTemplate;
         },
 
+        _headerCellText: function(column) {
+            var that = this,
+                settings = extend({}, kendo.Template, that.options.templateSettings),
+                template = column.headerTemplate,
+                type = typeof(template),
+                text = column.title || column.field || "";
+
+            if (type === FUNCTION) {
+                text = kendo.template(template, settings)({});
+            } else if (type === STRING) {
+                text = template;
+            }
+            return text;
+        },
+
         _cellTmpl: function(column, state) {
             var that = this,
                 settings = extend({}, kendo.Template, that.options.templateSettings),
@@ -2259,6 +2274,7 @@
                 html = "",
                 thead = that.table.find(">thead"),
                 tr,
+                text,
                 th;
 
             if (!thead.length) {
@@ -2281,6 +2297,7 @@
 
                 for (idx = 0, length = columns.length; idx < length; idx++) {
                     th = columns[idx];
+                    text = that._headerCellText(th);
 
                     if (!th.command) {
                         html += "<th " + kendo.attr("field") + "='" + th.field + "' ";
@@ -2298,9 +2315,9 @@
 
                         html += stringifyAttributes(th.headerAttributes);
 
-                        html += ">" + (th.title || th.field || "") + "</th>";
+                        html += ">" + text + "</th>";
                     } else {
-                        html += "<th" + stringifyAttributes(th.headerAttributes) + ">" + (th.title || "") + "</th>";
+                        html += "<th" + stringifyAttributes(th.headerAttributes) + ">" + text + "</th>";
                     }
                 }
 

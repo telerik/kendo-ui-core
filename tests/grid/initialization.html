@@ -789,7 +789,32 @@
                 });
                 grid.items().first().find("td:first a:first").click();
             });
-       </script>
+
+            test("render column header template", function() {
+                var grid = new Grid($("<table/>"), {
+                    dataSource: [{ foo: 1, bar: "bar"}],
+                    columns: [ { field: "foo", headerTemplate: "custom text" } ]
+                });
+                equal(grid.thead.find("tr:first > th:first").text(), "custom text");
+            });
+
+            test("column header template as function", function() {
+                var grid = new Grid($("<table/>"), {
+                    dataSource: [{ foo: 1, bar: "bar"}],
+                    columns: [ { field: "foo", headerTemplate: function() { return "custom text" } } ]
+                });
+                equal(grid.thead.find("tr:first > th:first").text(), "custom text");
+            });
+
+            test("render command column header template", function() {
+                var grid = new Grid($("<table/>"), {
+                    dataSource: [{ foo: 1, bar: "bar"}],
+                    columns: [ { command: "foo", headerTemplate: "custom text" } ]
+                });
+                equal(grid.thead.find("tr:first > th:first").text(), "custom text");
+            });
+
+        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
     </body>
