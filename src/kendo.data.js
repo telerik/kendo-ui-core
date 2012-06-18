@@ -105,8 +105,10 @@
                 object.bind(CHANGE, function(e) {
                     that.trigger(CHANGE, {
                         field: e.field,
-                        items: [this],
-                        action: "itemchange"
+                        node: e.node,
+                        index: e.index,
+                        items: e.items || [this],
+                        action: e.action || "itemchange"
                     });
                 });
             }
@@ -160,6 +162,12 @@
                     index: index,
                     items: result
                 });
+
+                for (var i = 0, len = result.length; i < len; i++) {
+                    if (result[i].children) {
+                        result[i].unbind(CHANGE);
+                    }
+                }
             }
 
             if (item) {
@@ -497,9 +505,18 @@
         }
     });
 
-    Model.define = function(options) {
+    Model.define = function(base, options) {
+        if (options === undefined) {
+            options = base;
+            base = Model;
+        }
+
         var model,
             proto = extend({}, { defaults: {} }, options),
+            name,
+            field,
+            type,
+            value,
             id = proto.id;
 
         if (id) {
@@ -514,10 +531,10 @@
             proto.defaults[id] = proto._defaultId = "";
         }
 
-        for (var name in proto.fields) {
-            var field = proto.fields[name],
-                type = field.type || "default",
-                value = null;
+        for (name in proto.fields) {
+            field = proto.fields[name];
+            type = field.type || "default";
+            value = null;
 
             name = typeof (field.field) === STRING ? field.field : name;
 
@@ -534,7 +551,10 @@
             field.parse = field.parse || parsers[type];
         }
 
-        model = Model.extend(proto);
+        model = base.extend(proto);
+        model.define = function(options) {
+            return Model.define(model, options);
+        };
 
         if (proto.fields) {
             model.fields = proto.fields;
@@ -1376,7 +1396,7 @@
 
     var DataReader = Class.extend({
         init: function(schema) {
-            var that = this, member, get, model;
+            var that = this, member, get, model, base;
 
             schema = schema || {};
 
@@ -1386,8 +1406,10 @@
                 that[member] = typeof get === STRING ? getter(get) : get;
             }
 
+            base = schema.modelBase || Model;
+
             if (isPlainObject(that.model)) {
-                that.model = model = kendo.data.Model.define(that.model);
+                that.model = model = base.define(that.model);
 
                 var dataFunction = proxy(that.data, that),
                     groupsFunction = proxy(that.groups, that),
@@ -1498,8 +1520,10 @@
         },
 
         options: {
-            schema: {},
             data: [],
+            schema: {
+               modelBase: Model
+            },
             serverSorting: false,
             serverPaging: false,
             serverFiltering: false,
@@ -1902,6 +1926,7 @@
                 }
 
                 that._total = total;
+
                 that._process(that._data, e);
             }
         },
@@ -1944,6 +1969,10 @@
             if (result.total !== undefined && !that.options.serverFiltering) {
                 that._total = result.total;
             }
+
+            e = e || {};
+
+            e.items = e.items || data;
 
             that.trigger(CHANGE, e);
         },
@@ -2026,7 +2055,7 @@
 
                 that._view = result.data;
                 that._aggregateResult = calculateAggregates(that._data, options);
-                that.trigger(CHANGE);
+                that.trigger(CHANGE, { items: result.data });
             }
         },
 
@@ -2477,12 +2506,147 @@
         return data;
     }
 
+    var Node = Model.define({
+        init: function(value) {
+            var that = this,
+                hasChildren = that.hasChildren,
+                data = "items",
+                children = {};
+
+            kendo.data.Model.fn.init.call(that, value);
+
+            if (typeof that.children === STRING) {
+               data = that.children;
+            }
+
+            children = extend({
+                schema: {
+                    data: data,
+                    model: {
+                        hasChildren: hasChildren
+                    }
+                }
+            }, that.children, { data: value });
+
+            if (!hasChildren) {
+                hasChildren = children.schema.data;
+            }
+
+            if (typeof hasChildren === STRING) {
+                hasChildren = kendo.getter(hasChildren);
+            }
+
+            if (isFunction(hasChildren)) {
+                that.hasChildren = !!hasChildren.call(that, that);
+            }
+
+            that.children = new HierarchicalDataSource(children);
+            that.children._parent = function(){
+                return that;
+            };
+
+            that.children.bind(CHANGE, function(e){
+                e.node = e.node || that;
+                that.trigger(CHANGE, e);
+            });
+
+            that._loaded = false;
+        },
+
+        hasChildren: false,
+
+        level: function() {
+            var parentNode = this.parentNode(),
+                level = 0;
+
+            while (parentNode) {
+                level++;
+                parentNode = parentNode.parentNode();
+            }
+
+            return level;
+        },
+
+        load: function() {
+            var that = this, options = {};
+
+            if (!that._loaded) {
+                options[that.idField] = that.id;
+
+                that.children._data = undefined;
+                that.children.one(CHANGE, function() {
+                   that._loaded = true;
+                }).query(options);
+            }
+        },
+
+        parentNode: function() {
+            var array = this.parent();
+
+            return array.parent();
+        },
+
+        loaded: function(value) {
+            if (value !== undefined) {
+                this._loaded = value;
+            } else {
+                return this._loaded;
+            }
+        },
+
+        shouldSerialize: function(field) {
+            return Model.fn.shouldSerialize.call(this, field) && field !== "children" && field !== "_loaded" && field !== "hasChildren";
+        }
+    });
+
+    var HierarchicalDataSource = DataSource.extend({
+        init: function(options) {
+            var node = Node.define({
+                children: options
+            });
+
+            DataSource.fn.init.call(this, extend(true, {}, { schema: { modelBase: node, model: node } }, options));
+        },
+
+        remove: function(node){
+            var parent = node.parentNode(),
+                dataSource = this;
+
+            if (parent) {
+                dataSource = parent.children;
+            }
+
+            DataSource.fn.remove.call(dataSource, node);
+        },
+
+        getByUid: function(uid) {
+            var idx, length, node, data;
+
+            node = DataSource.fn.getByUid.call(this, uid);
+
+            if (node) {
+                return node;
+            }
+
+            data = this._flatData(this.data());
+
+            for (idx = 0, length = data.length; idx < length; idx++) {
+                node = data[idx].children.getByUid(uid);
+                if (node) {
+                    return node;
+                }
+            }
+        }
+    });
+
     extend(true, kendo.data, /** @lends kendo.data */ {
         readers: {
             json: DataReader
         },
         Query: Query,
         DataSource: DataSource,
+        HierarchicalDataSource: HierarchicalDataSource,
+        Node: Node,
         ObservableObject: ObservableObject,
         ObservableArray: ObservableArray,
         LocalTransport: LocalTransport,

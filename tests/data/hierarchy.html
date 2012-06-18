@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>HierarchicalDataSource tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">HierarchicalDataSource tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var Node = kendo.data.Node;
+            var HierarchicalDataSource = kendo.data.HierarchicalDataSource;
+
+            function categories() {
+                return new HierarchicalDataSource({
+                    schema: {
+                        model: {
+                            children: {
+                                schema: {
+                                    data: "products"
+                                }
+                            }
+                        }
+                    },
+                    data: [ {
+                            categoryName: "Category 1",
+                            products: [
+                                { productName: "Product 1" }
+                            ]
+                        }]
+                });
+            }
+
+            test("Node inherits from Model", function() {
+                var node = new Node({});
+
+                ok(node instanceof kendo.data.Model);
+            });
+
+            test("HierarchicalDataSource contains objects of Node type", function() {
+                var dataSource = new HierarchicalDataSource( {
+                    data: [{}]
+                });
+
+                dataSource.read();
+
+                ok(dataSource.data()[0] instanceof Node);
+            });
+
+            test("the children field of a node is a HierarchicalDataSource", function() {
+                var dataSource = new HierarchicalDataSource( {
+                    data: [{}]
+                });
+
+                dataSource.read();
+
+                var root = dataSource.data()[0];
+
+                ok(root.children instanceof HierarchicalDataSource);
+            });
+
+            test("heterogeneous data source from local data", function() {
+                var dataSource = categories();
+
+                dataSource.read();
+                dataSource.data()[0].children.read();
+
+                equal(dataSource.data()[0].children.data()[0].productName, "Product 1");
+            });
+
+            test("changes of the children are propagated to the parent data source", 1, function() {
+                var dataSource = categories();
+
+                dataSource.read();
+
+                var parent = dataSource.data()[0];
+                parent.children.read();
+                dataSource.bind("change", function() {
+                    ok(true, "Change was raised");
+                });
+
+                parent.children.add({ productName: "Product 2" });
+            });
+
+            test("the event argument contains the node whose data source changed",1, function() {
+                var dataSource = categories();
+
+                dataSource.read();
+
+                var parent = dataSource.data()[0];
+                parent.children.read();
+                dataSource.bind("change", function(e) {
+                    strictEqual(e.node, parent);
+                });
+
+                parent.children.add({ productName: "Product 2" });
+            });
+
+            test("the event argument contains the closest node",1, function() {
+                var dataSource = categories();
+
+                dataSource.read();
+
+                var parent = dataSource.data()[0];
+                parent.children.read();
+
+                var child = parent.children.data()[0];
+
+                dataSource.bind("change", function(e) {
+                    strictEqual(e.node, child);
+                });
+
+                child.children.add({ productName: "Product 2" });
+            });
+
+            test("the event argument contains the index",1, function() {
+                var dataSource = categories();
+
+                dataSource.read();
+
+                var parent = dataSource.data()[0];
+                parent.children.read();
+
+                var child = parent.children.data()[0];
+
+                dataSource.bind("change", function(e) {
+                    strictEqual(e.index, 0);
+                });
+
+                child.children.add({ productName: "Product 2" });
+            });
+
+            test("adding a child node triggers the change event of the data source", 2, function() {
+                var dataSource = categories();
+
+                dataSource.read();
+
+                var parent = dataSource.data()[0];
+
+                parent.children.read();
+
+                dataSource.bind("change", function(e) {
+                    equal(e.items[0].productName, "added");
+                    equal(e.action, "add");
+                });
+
+                parent.children.add({ productName: "added" });
+            });
+
+            test("removing a child node triggers the change event of the data source", 2, function() {
+                var dataSource = categories();
+
+                dataSource.read();
+
+                var parent = dataSource.data()[0];
+
+                parent.children.read();
+
+                var child = parent.children.data()[0];
+
+                dataSource.bind("change", function(e) {
+                    strictEqual(e.items[0], child);
+                    equal(e.action, "remove");
+                });
+
+                parent.children.remove(child);
+            });
+
+            test("reading a the children raises the change event", 1, function() {
+                var dataSource = categories();
+
+                dataSource.read();
+
+                var parent = dataSource.data()[0];
+
+                dataSource.bind("change", function(e) {
+                    strictEqual(e.items[0], parent.children.data()[0]);
+                });
+
+                parent.children.read();
+            });
+
+            test("load fetches data from the children data source", function() {
+                var dataSource = categories();
+
+                dataSource.read();
+
+                var parent = dataSource.data()[0];
+
+                parent.load();
+
+                equal(parent.children.data().length, 1);
+            });
+
+            test("load data from remote data source", 1, function() {
+                var dataSource = new HierarchicalDataSource({
+                    transport: {
+                        read: function(options) {
+                            ok(true, "The read method of the transport is called");
+                        }
+                    }
+                });
+
+                dataSource.fetch();
+            });
+
+            test("the parent id is passed when reading children from remote service", 1, function() {
+                var dataSource = new HierarchicalDataSource({
+                    transport: {
+                        read: function(options) {
+                            options.success([ { categoryId: 1 }])
+                        }
+                    },
+                    schema: {
+                        model: {
+                            id: "categoryId",
+                            children: {
+                                transport: {
+                                    read: function(options) {
+                                        equal(options.data.categoryId, 1);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+
+                dataSource.fetch();
+
+                dataSource.data()[0].load();
+            });
+
+            test("getByUid is recursive", function() {
+                var dataSource = categories();
+
+                dataSource.fetch();
+                dataSource.data()[0].load();
+
+                var product = dataSource.data()[0].children.data()[0];
+
+                strictEqual(dataSource.getByUid(product.uid), product);
+            });
+
+            test("hasChildren returns the value of the specified field", function() {
+                var dataSource = new HierarchicalDataSource({
+                    transport: {
+                        read: function(options) {
+                            options.success([
+                                { id: 1, isParent: true },
+                                { id: 2, isParent: false }
+                            ])
+                        }
+                    },
+                    schema: {
+                        model: {
+                            hasChildren: "isParent"
+                        }
+                    }
+                });
+
+                dataSource.fetch();
+
+                equal(dataSource.view()[0].hasChildren, true)
+                equal(dataSource.view()[1].hasChildren, false)
+            });
+
+            test("hasChildren returns the false if the specified field is undefined", function() {
+                var dataSource = new HierarchicalDataSource({
+                    transport: {
+                        read: function(options) {
+                            options.success([
+                                { id: 1 }
+                            ])
+                        }
+                    },
+                    schema: {
+                        model: {
+                            hasChildren: "isParent"
+                        }
+                    }
+                });
+
+                dataSource.fetch();
+
+                equal(dataSource.view()[0].hasChildren, false)
+            });
+
+            test("hasChildren returns false by default", function() {
+                var dataSource = new HierarchicalDataSource({
+                    transport: {
+                        read: function(options) {
+                            options.success([
+                                { id: 1 },
+                                { id: 2 }
+                            ])
+                        }
+                    }
+                });
+
+                dataSource.fetch();
+                equal(dataSource.data()[0].hasChildren, false);
+            });
+
+            test("hasChildren as function", 1, function() {
+                var dataSource = new HierarchicalDataSource({
+                    transport: {
+                        read: function(options) {
+                            options.success([
+                                { id: 1 }
+                            ])
+                        }
+                    },
+                    schema: {
+                        model: {
+                            hasChildren: function() {
+                                ok(true);
+                            }
+                        }
+                    }
+                });
+
+                dataSource.fetch();
+            });
+
+            test("hasChildren set as true", 1, function() {
+                var dataSource = new HierarchicalDataSource({
+                    transport: {
+                        read: function(options) {
+                            options.success([
+                                { id: 1 }
+                            ])
+                        }
+                    },
+                    schema: {
+                        model: {
+                            hasChildren: true
+                        }
+                    }
+                });
+
+                dataSource.fetch();
+                equal(dataSource.data()[0].hasChildren, true);
+            });
+
+            test("hasChildren set as false", 1, function() {
+                var dataSource = new HierarchicalDataSource({
+                    transport: {
+                        read: function(options) {
+                            options.success([
+                                { id: 1 }
+                            ])
+                        }
+                    },
+                    schema: {
+                        model: {
+                            hasChildren: false
+                        }
+                    }
+                });
+
+                dataSource.fetch();
+                equal(dataSource.data()[0].hasChildren, false);
+            });
+
+            test("the this context in hasChildren is the node itself", 1, function() {
+                var that;
+
+                var dataSource = new HierarchicalDataSource({
+                    transport: {
+                        read: function(options) {
+                            options.success([
+                                { id: 1 }
+                            ])
+                        }
+                    },
+                    schema: {
+                        model: {
+                            hasChildren: function() {
+                                that = this;
+                            }
+                        }
+                    }
+                });
+
+                dataSource.fetch();
+
+                strictEqual(dataSource.data()[0], that);
+            });
+
+            test("children as string and inline data source", function() {
+                var dataSource = new kendo.data.HierarchicalDataSource({
+                    data: [{
+                        text: "Root 1",
+                        products: [ { text: "Child 1.1" } ]
+                    }],
+                    schema: {
+                        model: {
+                            children: "products"
+                        }
+                    }
+                });
+
+                dataSource.fetch();
+
+                dataSource.data()[0].load();
+                equal(dataSource.data()[0].children.data()[0].text, "Child 1.1");
+            });
+
+            test("hasChildren and inline defined data source", function() {
+                var dataSource = categories();
+
+                dataSource.fetch();
+
+                dataSource.data()[0].load();
+
+                equal(dataSource.data()[0].hasChildren, true);
+                equal(dataSource.data()[0].children.data()[0].hasChildren, false);
+            });
+
+            test("the default children field name is 'items'", function() {
+                var dataSource = new HierarchicalDataSource({
+                    data: [ {
+                        text: "foo",
+                        items: [
+                           { text : "bar" }
+                        ]
+                    } ]
+                });
+
+                dataSource.fetch();
+
+                dataSource.data()[0].load();
+
+                equal(dataSource.data()[0].hasChildren, true);
+                equal(dataSource.data()[0].children.data()[0].text, "bar");
+            });
+
+            test("hasChildren propagates to child data sources", function() {
+                var readData = function(options) {
+                        options.success([
+                            { isParent: true }
+                        ])
+                    },
+                    dataSource = new HierarchicalDataSource({
+                        transport: {
+                            read: readData
+                        },
+                        schema: {
+                            model: {
+                                hasChildren: "isParent",
+                                children: {
+                                    transport: {
+                                        read: readData
+                                    }
+                                }
+                            }
+                        }
+                    });
+
+                dataSource.fetch();
+                dataSource.data()[0].load();
+
+                ok(dataSource.data()[0].children.data()[0].hasChildren === true);
+            });
+
+            test("loaded returns false for nodes whose children are not loaded", function() {
+                var dataSource = categories();
+
+                dataSource.fetch();
+                ok(!dataSource.data()[0].loaded());
+            });
+
+            test("loaded returns true for nodes whose children are loaded", function() {
+                var dataSource = categories();
+
+                dataSource.fetch();
+                dataSource.data()[0].load()
+
+                ok(dataSource.data()[0].loaded());
+            });
+
+            test("setting loaded to false after a node is loaded returns false", function() {
+                var dataSource = categories();
+
+                dataSource.fetch();
+                dataSource.data()[0].load()
+                dataSource.data()[0].loaded(false)
+
+                ok(!dataSource.data()[0].loaded());
+            });
+
+            test("load calls the read method of the transport after setting loaded to false", 2, function() {
+                var dataSource = new HierarchicalDataSource({
+                    transport: {
+                        read: function(options) {
+                            options.success([ { categoryId: 1 }])
+                        }
+                    },
+                    schema: {
+                        model: {
+                            children: {
+                                transport: {
+                                    read: function(options) {
+                                        options.success([]);
+                                        ok(true, "Read is called");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+
+                dataSource.fetch();
+
+                dataSource.data()[0].load();
+                dataSource.data()[0].loaded(false);
+                dataSource.data()[0].load();
+            });
+
+            test("load does not call the read method of the transport", 1, function() {
+                var dataSource = new HierarchicalDataSource({
+                    transport: {
+                        read: function(options) {
+                            options.success([ { categoryId: 1 }])
+                        }
+                    },
+                    schema: {
+                        model: {
+                            children: {
+                                transport: {
+                                    read: function(options) {
+                                        options.success([]);
+                                        ok(true, "Read is called");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+
+                dataSource.fetch();
+
+                dataSource.data()[0].load();
+                dataSource.data()[0].load();
+            });
+
+            test("parentNode returns the parent of a child node", function() {
+                var dataSource = categories();
+
+                dataSource.read();
+                var parent = dataSource.data()[0];
+                parent.load();
+                var child = parent.children.data()[0];
+
+                strictEqual(child.parentNode(), parent);
+            });
+
+            test("remove is recursive", function() {
+                var dataSource = categories();
+
+                dataSource.read();
+                var parent = dataSource.data()[0];
+                parent.load();
+                var child = parent.children.data()[0];
+
+                dataSource.remove(child);
+
+                ok(!dataSource.getByUid(child.uid));
+            });
+
+            test("level returns the node level", function() {
+                var dataSource = categories();
+
+                dataSource.read();
+                var parent = dataSource.data()[0];
+                parent.load();
+
+                var child = parent.children.data()[0];
+
+                equal(parent.level(), 0);
+                equal(child.level(), 1);
+            });
+
+            test("removing and adding the same model does not add multiple change events", function() {
+                var counter = 0;
+
+                var dataSource = categories();
+
+                dataSource.read();
+
+                var category = dataSource.data()[0];
+                dataSource.bind("change", function() {
+                    counter++;
+                });
+
+                dataSource.remove(category);
+                dataSource.add(category);
+
+                category.set("categoryName", "foo");
+
+                equal(counter, 3);
+            });
+        </script>
+    </body>
+</html>

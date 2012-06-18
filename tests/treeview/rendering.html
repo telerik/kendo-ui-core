@@ -6,6 +6,7 @@
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.treeview.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
     </head>
@@ -237,7 +238,7 @@
                 var image = treeview.find(".k-image");
 
                 equal(image.length, 1);
-                equal(image.attr("src").lastIndexOf("foo"), image.attr("src").length - 3);
+                ok(image.attr("src").indexOf("foo") >= 0);
             });
 
             test("renders text", function() {
@@ -298,11 +299,14 @@
             });
 
             test("renders disabled minus icon if item is disabled and expanded", function() {
-                treeview.kendoTreeView([
-                    { text: "foo", enabled: false, expanded: true, items: [
-                        { text: "bar" }
-                    ] }
-                ]);
+                treeview.kendoTreeView({
+                    animation: false,
+                    dataSource: [
+                        { text: "foo", enabled: false, expanded: true, items: [
+                            { text: "bar" }
+                        ] }
+                    ]
+                });
 
                 var icon = treeview.find(".k-icon");
 
@@ -316,6 +320,96 @@
                 ]);
 
                 equal(treeview.find(".k-item .k-group").length, 0);
+            });
+
+            module("template generation", moduleOptions);
+
+            test("uses text field binding", function() {
+                treeview.kendoTreeView({
+                    dataTextField: "foo",
+                    dataSource: [
+                        { foo: "bar" }
+                    ]
+                });
+
+                equal(treeview.find(".k-in:first").text(), "bar");
+            });
+
+            test("uses last text field binding for deeper levels", function() {
+                treeview.kendoTreeView({
+                    dataTextField: "foo",
+                    dataSource: [
+                        { foo: "bar", items: [
+                            { foo: "baz" }
+                        ] }
+                    ]
+                });
+
+                equal(treeview.find(".k-in:last").text(), "baz");
+            });
+
+            test("uses accurate text field binding for subnodes", function() {
+                treeview.kendoTreeView({
+                    dataTextField: ["foo", "baz"],
+                    dataSource: [
+                        { foo: "bar", items: [
+                            { baz: "qux" }
+                        ] }
+                    ]
+                });
+
+                equal(treeview.find(".k-in:first").text(), "bar");
+                equal(treeview.find(".k-in:last").text(), "qux");
+            });
+
+            test("uses imageUrl field binding", function() {
+                treeview.kendoTreeView({
+                    dataImageUrlField: "foo",
+                    dataSource: [
+                        { foo: "bar" }
+                    ]
+                });
+
+                var image = treeview.find(".k-image:first");
+
+                ok(image.attr("src").indexOf("bar") >= 0);
+            });
+
+            test("uses spriteCssClass field binding", function() {
+                treeview.kendoTreeView({
+                    dataSpriteCssClassField: "foo",
+                    dataSource: [
+                        { foo: "bar" }
+                    ]
+                });
+
+                ok(treeview.find(".k-sprite").hasClass("bar"));
+            });
+
+            test("uses url field binding", function() {
+                treeview.kendoTreeView({
+                    dataUrlField: "foo",
+                    dataSource: [
+                        { foo: "bar" }
+                    ]
+                });
+
+                equal(treeview.find("a").length, 1);
+                equal(treeview.find("a").attr("href"), "bar");
+            });
+
+            test("sets data-uid", function() {
+                treeview.kendoTreeView({
+                    dataSource: [
+                        { id: 1, text: "foo" }
+                    ]
+                });
+
+                var node = treeview.data("kendoTreeView").dataSource.get(1),
+                    uidNodes = treeview.find("[" + kendo.attr("uid") + "]");
+
+                equal(uidNodes.length, 1);
+                equal(uidNodes.data("kendo-uid"), node.uid);
             });
         </script>
 

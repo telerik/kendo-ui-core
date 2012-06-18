@@ -32,6 +32,10 @@ tests.push(
         title: "data range"
     },
     {
+        page: "data/hierarchy.html",
+        title: "data hierarchy"
+    },
+    {
         page: "data/datasource/observable-array.html",
         title: "data observableArray"
     },

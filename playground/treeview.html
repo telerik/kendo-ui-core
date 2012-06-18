@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TreeView binding</title>
+        <link rel="stylesheet" href="../styles/web/kendo.common.css"/>
+        <link rel="stylesheet/less" type="text/css" href="../styles/web/kendo.default.less"/>
+        <link rel="stylesheet" type="text/css" href="../demos/mvc/content/shared/styles/examples.css"></link>
+
+        <script src="../demos/mvc/content/shared/js/less.js"></script>
+
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.data.odata.js"></script>
+        <script src="../src/kendo.draganddrop.js"></script>
+        <script src="../src/kendo.fx.js"></script>
+        <script src="../src/kendo.treeview.js"></script>
+        <style>
+            section {
+                float: left;
+                width: 300px;
+            }
+        </style>
+    </head>
+    <body>
+        <section>
+        <h2>homogeneous remote</h2>
+        <div id="treeview1"></div>
+        <script>
+            var homogeneous = new kendo.data.HierarchicalDataSource({
+                transport: {
+                    read: {
+                        url: "http://korchev:8080/Northwind/Home/Employees",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    data: "employees",
+                    model: {
+                        id: "employeeId",
+                        hasChildren: "hasChildren"
+                    }
+                }
+            });
+
+            $("#treeview1").kendoTreeView({
+                dataSource: homogeneous,
+                dataTextField: "employeeName"
+            });
+        </script>
+        </section>
+        <section>
+        <h2>heterogeneous OData</h2>
+        <div id="treeview2"></div>
+        <script>
+            var OrderDetails = {
+                type: "odata",
+                transport: {
+                    read: {
+                        url: function(options) {
+                            return kendo.format("http://services.odata.org/Northwind/Northwind.svc/Products({0})/Order_Details", options.ProductID);
+                        }
+                    }
+                },
+                schema: {
+                    model: {
+                        hasChildren: function() {
+                            return false;
+                        }
+                    }
+                }
+            };
+
+            var Products = {
+                type: "odata",
+                schema: {
+                    model: {
+                        id: "ProductID",
+                        hasChildren: "Order_Details",
+                        children: OrderDetails
+                    }
+                },
+                transport: {
+                    read: {
+                        url: function(options) {
+                            return kendo.format("http://services.odata.org/Northwind/Northwind.svc/Categories({0})/Products", options.CategoryID);
+                        }
+                    }
+                }
+            };
+
+            var Categories = new kendo.data.HierarchicalDataSource({
+                type: "odata",
+                transport: {
+                    read: {
+                        url: "http://services.odata.org/Northwind/Northwind.svc/Categories"
+                    }
+                },
+                schema: {
+                    model: {
+                        hasChildren: "Products",
+                        id: "CategoryID",
+                        children: Products
+                    }
+                }
+            });
+
+            $("#treeview2").kendoTreeView({
+                dataSource: Categories,
+                dataTextField: ["CategoryName", "ProductName", "OrderID"]
+            });
+        </script>
+        </section>
+        <section>
+            <h2>Heterogeneous</h2>
+            <div id="treeview3"></div>
+            <script>
+                var heterogeneous = new kendo.data.HierarchicalDataSource({
+                    transport: {
+                        read: {
+                            url: "http://korchev:8080/Northwind/Home/Categories",
+                            dataType: "json"
+                        }
+                    },
+                    schema: {
+                        data: "categories",
+                        model: {
+                            hasChildren: true,
+                            id: "categoryId",
+                            children: {
+                                transport: {
+                                    read: {
+                                        url: "http://korchev:8080/Northwind/Home/Products",
+                                        dataType: "json"
+                                    }
+                                },
+                                schema: {
+                                    data: "products",
+                                    model: {
+                                        hasChildren: false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+
+                $("#treeview3").kendoTreeView({
+                    dataSource: heterogeneous,
+                    dataTextField: ["categoryName", "productName"]
+                });
+            </script>
+        </section>
+        <section>
+            <h2>Inline data (deafault settings)</h2>
+            <div id="treeview4"></div>
+            <script>
+                var inlineDefault = new kendo.data.HierarchicalDataSource({
+                    data: [{
+                        text: "Root 1",
+                        items: [ { text: "Child 1.1", items: [ { text: "Child 1.1.1" }] } ]
+                    }, {
+                        text: "Root 2",
+                        items: [ { text: "Child 2.1" } ]
+                    }]
+                });
+
+                $("#treeview4").kendoTreeView({
+                    dataSource: inlineDefault
+                });
+            </script>
+        </section>
+        <section>
+            <h2>Inline data</h2>
+            <div id="treeview5"></div>
+            <script>
+                var inline = new kendo.data.HierarchicalDataSource({
+                    data: [{
+                        text: "Root 1",
+                        products: [ { text: "Child 1.1" } ]
+                    }, {
+                        text: "Root 2",
+                        products: [ { text: "Child 2.1" } ]
+                    }],
+                    schema: {
+                        model: {
+                            children: "products"
+                        }
+                    }
+                });
+
+                $("#treeview5").kendoTreeView({
+                    dataSource: inline
+                });
+            </script>
+        </section>
+    </body>
+</html>

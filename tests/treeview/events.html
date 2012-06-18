@@ -6,6 +6,7 @@
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.draganddrop.js"></script>
         <script src="../../src/kendo.treeview.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
@@ -129,7 +130,7 @@
                 moveNode(treeviewObject, "bar", "baz");
 
                 ok(dragStartTriggered);
-                equals(dragStartTriggered.sourceNode, treeviewObject.findByText("bar")[0]);
+                equals(treeviewObject.text(dragStartTriggered.sourceNode), "bar");
             });
 
             test("dragstart can be prevented", function () {
@@ -167,7 +168,7 @@
                 moveNode(treeviewObject, "bar", "baz");
 
                 ok(dragTriggered);
-                equals(dragTriggered.sourceNode, treeviewObject.findByText("bar")[0]);
+                equals(treeviewObject.text(dragTriggered.sourceNode), "bar");
                 ok(dragTriggered.setStatusClass);
                 equals(dragTriggered.statusClass, "add");
                 ok(dragTriggered.pageX);
@@ -191,7 +192,7 @@
                 moveNode(treeviewObject, "bar", "baz");
 
                 ok(dropTriggered);
-                equals(dropTriggered.sourceNode, treeviewObject.findByText("bar")[0]);
+                equals(treeviewObject.text(dropTriggered.sourceNode), "bar");
                 equals(dropTriggered.destinationNode, treeviewObject.findByText("baz")[0]);
                 ok(dropTriggered.valid);
                 equals(dropTriggered.dropPosition, "over");
@@ -214,7 +215,7 @@
                 moveNode(treeviewObject, "bar", "baz");
 
                 ok(dragEndTriggered);
-                equals(dragEndTriggered.sourceNode, treeviewObject.findByText("bar")[0]);
+                equals(treeviewObject.text(dragEndTriggered.sourceNode), "bar");
                 equals(dragEndTriggered.destinationNode, treeviewObject.findByText("baz")[0]);
                 equals(dragEndTriggered.dropPosition, "over");
             });

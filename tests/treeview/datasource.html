@@ -1,0 +1,355 @@
+<!doctype html>
+<html>
+    <head>
+        <title>TreeView DataSource binding</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.treeview.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+        <link rel="stylesheet" href="../../styles/web/kendo.common.css" />
+        <link rel="stylesheet/less" href="../../styles/web/kendo.default.less"/>
+        <script src="../../demos/mvc/content/shared/js/less.js"></script>
+    </head>
+    <body>
+        <h1 id="qunit-header">TreeView DataSource binding</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+
+        <script>
+            var treeview, treeviewObject;
+
+            function createTreeView(options) {
+                treeview = $("<div />").appendTo(document.body).kendoTreeView(options);
+                treeviewObject = treeview.data("kendoTreeView");
+            }
+
+            var HierarchicalDataSource = kendo.data.HierarchicalDataSource;
+
+            module("DataSource binding", {
+                teardown: function () {
+                    $(".k-treeview,.k-item").remove();
+                }
+            });
+
+            test("Initializing from JSON creates HierarchicalDataSource", function() {
+                createTreeView({
+                    dataSource: []
+                });
+
+                ok(treeviewObject.dataSource instanceof HierarchicalDataSource);
+            });
+
+            test("Initializing from JSON populates dataSource", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "foo" },
+                        { text: "bar" }
+                    ]
+                });
+
+                equal(treeviewObject.dataSource.view().length, 2);
+            });
+
+            test("Adding items to the datasource adds them to the treeview", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "foo" }
+                    ]
+                });
+
+                treeviewObject.dataSource.add({ text: "bar" });
+
+                equal(treeview.find(".k-item").length, 2);
+            });
+
+            test("Adding items to the datasource adds them to the proper level", function() {
+                createTreeView({
+                    dataSource: [
+                        { id: 1, text: "foo" },
+                        { id: 2, text: "bar" }
+                    ]
+                });
+
+                var foo = treeviewObject.dataSource.get(1);
+
+                foo.children.add({ id: 3, text: "baz" });
+
+                equal(treeview.find(".k-item").length, 3);
+                equal(treeview.find(".k-item:first .k-item").length, 1);
+            });
+
+            test("Removing items from the datasource removes them from the treeview", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "foo" }
+                    ]
+                });
+
+                var dataItem = treeviewObject.dataItem(treeview.find(".k-item"));
+
+                treeviewObject.dataSource.remove(dataItem);
+
+                equal(treeview.find(".k-item").length, 0);
+            });
+
+            test("Removing subgroup items from the datasource removes them from the treeview", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "foo", items: [
+                            { text: "bar" }
+                        ] }
+                    ]
+                });
+
+                var dataItem = treeviewObject.dataItem(treeview.find(".k-item:last"));
+
+                treeviewObject.dataSource.remove(dataItem);
+
+                equal(treeview.find(".k-item").length, 1);
+            });
+
+            test("DataSource as an object", 2, function() {
+                createTreeView({
+                    dataSource: {
+                        data: [
+                            { text: "foo" }
+                        ]
+                    }
+                });
+
+                var item = treeview.find(".k-item");
+
+                equal(item.length, 1);
+                equal(treeviewObject.text(item), "foo");
+            });
+
+            test("Passing existing dataSource", function() {
+                var dataSource = new HierarchicalDataSource({
+                    data: [
+                        { text: "foo" }
+                    ]
+                });
+
+                createTreeView({
+                    dataSource: dataSource
+                });
+
+                var item = treeview.find(".k-item");
+
+                equal(item.length, 1);
+                equal(treeviewObject.text(item), "foo");
+            });
+
+            /*
+            test("Removing items from the datasource removes them from the treeview at the proper level", function() {
+                createTreeView({
+                    dataSource: [
+                        { id: 1, text: "foo", items: [
+                            { id: 2, text: "bar" }
+                        ] }
+                    ]
+                });
+
+                var dataItem = treeviewObject.dataItem(treeview.find(".k-item:last"));
+
+                treeviewObject.dataSource.remove(dataItem);
+
+                equal(treeview.find(".k-item").length, 1);
+
+            });
+            */
+
+            test("Loading root nodes from remote datasource inserts them in the TreeView", function() {
+                createTreeView({
+                    dataSource: {
+                        transport: {
+                            read: function(options) {
+                                options.success([ { id: 1, text: "foo" } ]);
+                            }
+                        }
+                    }
+                });
+
+                var item = treeview.find(".k-item");
+
+                equal(item.length, 1);
+                equal(treeviewObject.text(item), "foo");
+            });
+
+            test("Non-leaf nodes are rendered as expandable", function() {
+                var i = 1;
+
+                createTreeView({
+                    dataSource: {
+                        transport: {
+                            read: function(options) {
+                                options.success([ { id: i++, hasChildren: true, text: "foo" } ]);
+                            }
+                        },
+                        schema: {
+                            model: {
+                                hasChildren: "hasChildren"
+                            }
+                        }
+                    }
+                });
+
+                var icon = treeview.find(".k-plus");
+
+                equal(icon.length, 1);
+            });
+
+            test("Expanding non-leaf nodes loads subgroups", function() {
+                var i = 0;
+
+                function readAction(options) {
+                    i++;
+
+                    options.success([
+                        { id: i, hasChildren: true, text: "foo " + i }
+                    ]);
+                }
+
+                createTreeView({
+                    dataSource: {
+                        transport: {
+                            read: readAction
+                        },
+                        schema: {
+                            model: {
+                                hasChildren: "hasChildren"
+                            }
+                        }
+                    },
+                    animation: false
+                });
+
+                treeviewObject.toggle(treeview.find(".k-item"));
+
+                equal(treeview.find(".k-item").length, 2);
+                equal(treeview.find(".k-minus").length, 1);
+            });
+
+            test("Sorting the datasource sorts the treeview", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "bravo" },
+                        { text: "alpha" }
+                    ]
+                });
+
+                treeviewObject.dataSource.sort({ field: "text", dir: "asc" });
+
+                var items = treeview.find(".k-item");
+
+                equal(items.length, 2);
+                equal(items.eq(0).text(), "alpha");
+                equal(items.eq(1).text(), "bravo");
+            });
+
+            test("Sorting expanded nodes persists their expanded state", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "alpha", expanded: true, items: [
+                            { text: "charlie" },
+                            { text: "bravo" }
+                        ] }
+                    ]
+                });
+
+                treeviewObject.dataSource.sort({ field: "text", dir: "asc" });
+
+                var items = treeview.find(".k-item");
+
+                equal(items.length, 3);
+                equal(treeviewObject.text(items.eq(0)), "alpha");
+
+                var subitems = items.eq(0).find(".k-item");
+                equal(subitems.length, 2);
+                equal(treeviewObject.text(subitems.eq(0)), "charlie");
+                equal(treeviewObject.text(subitems.eq(1)), "bravo");
+            });
+
+            test("Sorting dynamically expanded nodes persists their expanded state", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "alpha", items: [
+                            { text: "charlie" },
+                            { text: "bravo" }
+                        ] }
+                    ]
+                });
+
+                treeviewObject.expand(".k-item:first");
+
+                treeviewObject.dataSource.sort({ field: "text", dir: "asc" });
+
+                var items = treeview.find(".k-item");
+
+                equal(items.length, 3);
+                equal(treeviewObject.text(items.eq(0)), "alpha");
+
+                var subitems = items.eq(0).find(".k-item");
+                equal(subitems.length, 2);
+                equal(subitems.parent().css("display"), "block");
+                equal(treeviewObject.text(subitems.eq(0)), "charlie");
+                equal(treeviewObject.text(subitems.eq(1)), "bravo");
+            });
+
+            test("moving nodes between treeviews", function() {
+                var tree1 = $("<div />").appendTo("body").kendoTreeView([
+                        { text: "foo" }
+                    ]),
+                    tree2 = $("<div />").appendTo("body").kendoTreeView([
+                        { text: "bar" }
+                    ]);
+
+                tree2.data("kendoTreeView").append(tree2.find(".k-item"), tree1.find(".k-item"));
+            });
+
+            test("moving of parent nodes", function() {
+                createTreeView([
+                    { text: "alpha", expanded: true, items: [
+                        { text: "charlie" }
+                    ] },
+                    { text: "bravo" }
+                ]);
+
+                // move alpha over bravo
+                treeviewObject.append(treeview.find(".k-item:first"), treeview.find(".k-item:last"));
+
+                equal(treeview.find(".k-item").length, 3);
+                equal(treeview.find(".k-item:last").text(), "charlie");
+            });
+
+            test("insertBefore", function() {
+                createTreeView([
+                    { text: "foo", expanded: true, items: [
+                        { text: "bar" },
+                        { text: "baz" }
+                    ] }
+                ]);
+
+                console.log("ACT");
+
+                treeviewObject.insertBefore(treeviewObject.findByText("baz"), treeviewObject.findByText("bar"));
+
+                var subitems = treeview.find(".k-item > .k-group > .k-item");
+
+                equal(subitems.eq(0).text(), "baz");
+                equal(subitems.eq(1).text(), "bar");
+            });
+        </script>
+
+        <div id="qunit-fixture"> </div>
+        <ul id="log"></ul>
+    </body>
+</html>
+
+

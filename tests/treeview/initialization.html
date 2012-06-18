@@ -6,6 +6,7 @@
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.treeview.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
     </head>
@@ -77,6 +78,14 @@
                 ok(element.find("li").is(".k-item"));
                 equals(element.find("li").text(), "foo");
             });
+
+            var treeview, treeviewObject;
+
+            function createTreeView(options) {
+                treeview = $("<div />").appendTo(document.body).kendoTreeView(options);
+                treeviewObject = treeview.data("kendoTreeView");
+            }
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
