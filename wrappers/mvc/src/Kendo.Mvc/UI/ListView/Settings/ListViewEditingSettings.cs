@@ -27,6 +27,12 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        public string TemplateName
+        {
+            get;
+            set;
+        }
+
         public Func<T> DefaultDataItem
         {
             get;

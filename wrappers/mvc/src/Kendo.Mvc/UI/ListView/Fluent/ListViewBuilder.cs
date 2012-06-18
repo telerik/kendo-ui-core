@@ -197,6 +197,24 @@
         }
 
         /// <summary>
+        /// Configures the ListView editing settings.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ListView()
+        ///             .Name("ListView")
+        ///             .Editable(settings => settings.Enabled(true))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ListViewBuilder<T> Editable(Action<ListViewEditingSettingsBuilder<T>> configurator)
+        {
+            configurator(new ListViewEditingSettingsBuilder<T>(Component.Editing));
+
+            return this;
+        }
+
+        /// <summary>
         /// Enables ListView editing.
         /// </summary>
         /// <example>
@@ -209,9 +227,7 @@
         /// </example>
         public ListViewBuilder<T> Editable()
         {
-            Component.Editing.Enabled = true;
-
-            return this;
+            return Editable(settings => settings.Enabled(true) );
         }
 
         /// <summary>

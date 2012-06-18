@@ -1,12 +1,14 @@
 ﻿namespace Kendo.Mvc.UI
 {
     using System;
+    using System.IO;    
     using System.Web.UI;
     using System.Web.Mvc;
     using System.Web.Mvc.Html;
     using System.Collections.Generic;
     using Kendo.Mvc.Infrastructure;
-    using System.IO;    
+    using Kendo.Mvc.Extensions;
+    using Kendo.Mvc.Resources;    
 
     public class ListView<T> : ViewComponentBase, IListView where T : class
     {
@@ -140,18 +142,18 @@
             base.VerifySettings();
             
             if (string.IsNullOrEmpty(ClientTemplateId))
-            {
-                throw new NotSupportedException("ClientTemplateId cannot be blank.");
+            {               
+                throw new NotSupportedException(string.Format(TextResource.CannotBeNullOrEmpty, "ClientTemplateId"));
             }
 
             if (string.IsNullOrEmpty(TagName))
-            {
-                throw new NotSupportedException("Tag name cannot be null or an empty string.");
+            {                
+                throw new NotSupportedException(string.Format(TextResource.CannotBeNullOrEmpty, "TagName"));
             }
 
             if (Editing.Enabled && DataSource.Schema.Model.Id == null)
             {
-                throw new NotSupportedException("Model Id cannot be blank when editing is enabled.");
+                throw new NotSupportedException(TextResource.DataKeysEmpty);
             }
         }
 
@@ -178,7 +180,14 @@
             {
                 var helper = new HtmlHelper<T>(ViewContext, new ListViewViewDataContainer<T>(Editing.DefaultDataItem(), ViewData));
 
-                EditorHtml = helper.EditorForModel().ToHtmlString();
+                if (Editing.TemplateName.HasValue())
+                {
+                    EditorHtml = helper.EditorForModel(Editing.TemplateName).ToHtmlString();
+                }
+                else
+                {
+                    EditorHtml = helper.EditorForModel().ToHtmlString();
+                }
             }
         }
     }

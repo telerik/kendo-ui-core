@@ -1,8 +1,8 @@
-using System;
-using System.Collections.Generic;
-
 namespace Kendo.Mvc.UI.Fluent
 {
+    using System;
+    using System.Collections.Generic;
+
     public class ListViewEventBuilder : EventBuilder
     {
         public ListViewEventBuilder(IDictionary<string, object> events) : base(events)
