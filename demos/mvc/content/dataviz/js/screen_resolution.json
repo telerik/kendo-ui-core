@@ -2,74 +2,90 @@
 	"year": 2006,
 	"resolution": "Higher",
 	"share": 17,
+	"visibleInLegend": true,
 	"order": 1
 },{
 	"year": 2006,
 	"resolution": "1024x768",
 	"share": 57,
+	"visibleInLegend": true,
 	"order": 2
 },{
 	"year": 2006,
 	"resolution": "800x600",
 	"share": 20,
+	"visibleInLegend": true,
 	"order": 3
 },{
 	"year": 2006,
 	"resolution": "640x480",
 	"share": 0,
+	"visibleInLegend": true,
 	"order": 4
 },{
 	"year": 2006,
 	"resolution": "Unknown",
 	"share": 6,
+	"visibleInLegend": true,
 	"order": 5
 },{
 	"year": 2008,
 	"resolution": "Higher",
 	"share": 38,
+	"visibleInLegend": false,
 	"order": 1
 },{
 	"year": 2008,
 	"resolution": "1024x768",
 	"share": 48,
+	"visibleInLegend": false,
 	"order": 2
 },{
 	"year": 2008,
 	"resolution": "800x600",
 	"share": 8,
+	"visibleInLegend": false,
 	"order": 3
 },{
 	"year": 2008,
 	"resolution": "640x480",
 	"share": 0,
+	"visibleInLegend": false,
 	"order": 4
 },{
 	"year": 2008,
 	"resolution": "Unknown",
 	"share": 6,
+	"visibleInLegend": false,
 	"order": 5
 },{
 	"year": 2010,
 	"resolution": "Higher",
 	"share": 76,
+	"visibleInLegend": false,
 	"order": 1
 },{
 	"year": 2010,
 	"resolution": "1024x768",
 	"share": 20,
+	"visibleInLegend": false,
 	"order": 2
 },{
 	"year": 2010,
 	"resolution": "800x600",
-	"share": 3
+	"share": 3,
+	"visibleInLegend": false,
+	"order": 3
 },{
 	"year": 2010,
 	"resolution": "640x480",
 	"share": 0,
+	"visibleInLegend": false,
 	"order": 4
 },{
 	"year": 2010,
 	"resolution": "Unknown",
 	"share": 3,
+	"visibleInLegend": false,
 	"order": 5
 }]
