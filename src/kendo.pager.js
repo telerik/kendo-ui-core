@@ -201,7 +201,7 @@
             pageSizes: false,
             refresh: false,
             messages: {
-                display: "Displaying items {0} - {1} of {2}",
+                display: "{0} - {1} of {2} items",
                 empty: "No items to display",
                 page: "Page",
                 of: "of {0}",

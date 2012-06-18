@@ -254,7 +254,7 @@
                 var pager = setup();
                 dataSource.read();
 
-                equal(pager.find(".k-pager-info").text(), "Displaying items 1 - 1 of 5");
+                equal(pager.find(".k-pager-info").text(), "1 - 1 of 5 items");
             });
 
             test("pager does not displays info if info is set to false", function(){
