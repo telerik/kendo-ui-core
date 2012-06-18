@@ -481,6 +481,7 @@
     </Content>
     <Content Include="Views\MobileDevice\Index.cshtml" />
     <Content Include="Views\Shared\NoLayout.cshtml" />
+    <None Include="content\dataviz\js\screen_resolution.json" />
     <None Include="content\web\datasource\internet-users.json" />
     <None Include="content\web\datasource\top250movies.json" />
     <Content Include="Views\mobile\button\appearance.cshtml" />
@@ -527,6 +528,10 @@
     <Content Include="Views\dataviz\radial-gauge\scale-options.cshtml" />
     <Content Include="Views\dataviz\bar-charts\date-axis.cshtml" />
     <Content Include="Views\dataviz\scatter-charts\date-axis.cshtml" />
+    <Content Include="Views\dataviz\donut-charts\index.cshtml" />
+    <Content Include="Views\dataviz\donut-charts\local-data.cshtml" />
+    <Content Include="Views\dataviz\donut-charts\donut-labels.cshtml" />
+    <Content Include="Views\dataviz\donut-charts\remote-data.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />

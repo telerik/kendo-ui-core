@@ -1,0 +1,156 @@
+
+        <div id="example" class="k-content absConf">
+            <div class="chart-wrapper" style="margin: auto;">
+                <div id="chart"></div>
+            </div>
+                <div>
+                    <div id="chart2006" style="float:left; width: 150px; height: 150px;"></div>
+                    <div id="chart2008" style="float:left; width: 150px; height: 150px;"></div>
+                    <div id="chart2010" style="float:left; width: 150px; height: 150px;"></div>
+                </div>
+            <script>
+                function createChart() {
+                    $("#chart").kendoChart({
+                        theme: $(document).data("kendoSkin") || "default",
+                        dataSource: {
+                            transport: {
+                                read: {
+                                    url: "../../content/dataviz/js/screen_resolution.json",
+                                    dataType: "json"
+                                }
+                            },
+                            sort: {
+                                field: "order",
+                                dir: "asc"
+                            },
+                            group: {
+                                field: "year"
+                            }
+                        },
+                        title: {
+                            text: "Combine View"
+                        },
+                        seriesDefaults: {
+                            type: "donut"
+                        },
+                        series: [{
+                            field: "share",
+                            categoryField: "resolution"
+                        }],
+                        tooltip: {
+                            visible: true,
+                            template: "#= dataItem.resolution #: #= value # (#= dataItem.year #)"
+                        }
+                    });
+
+                    $("#chart2006").kendoChart({
+                        theme: $(document).data("kendoSkin") || "default",
+                        title: {
+                            text: "2006"
+                        },
+                        legend: {
+                            visible: false
+                        },
+                        dataSource: {
+                            transport: {
+                                read: {
+                                    url: "../../content/dataviz/js/screen_resolution.json",
+                                    dataType: "json"
+                                }
+                            },
+                            filter: {
+                                field: "year",
+                                operator: "eq",
+                                value: 2006
+                            },
+                            sort: {
+                                field: "order",
+                                dir: "asc"
+                            }
+                        },
+                        series: [{
+                            type: "donut",
+                            field: "share",
+                            padding: 0
+                        }]
+                    });
+
+                    $("#chart2008").kendoChart({
+                        theme: $(document).data("kendoSkin") || "default",
+                        title: {
+                            text: "2008"
+                        },
+                        legend: {
+                            visible: false
+                        },
+                        dataSource: {
+                            transport: {
+                                read: {
+                                    url: "../../content/dataviz/js/screen_resolution.json",
+                                    dataType: "json"
+                                }
+                            },
+                            filter: {
+                                field: "year",
+                                operator: "eq",
+                                value: 2008
+                            },
+                            sort: {
+                                field: "order",
+                                dir: "asc"
+                            }
+                        },
+                        series: [{
+                            type: "donut",
+                            field: "share",
+                            padding: 0
+                        }]
+                    });
+
+
+                    $("#chart2010").kendoChart({
+                        theme: $(document).data("kendoSkin") || "default",
+                        title: {
+                            text: "2010"
+                        },
+                        legend: {
+                            visible: false
+                        },
+                        dataSource: {
+                            transport: {
+                                read: {
+                                    url: "../../content/dataviz/js/screen_resolution.json",
+                                    dataType: "json"
+                                }
+                            },
+                            filter: {
+                                field: "year",
+                                operator: "eq",
+                                value: 2010
+                            },
+                            sort: {
+                                field: "order",
+                                dir: "asc"
+                            }
+                        },
+                        series: [{
+                            type: "donut",
+                            field: "share",
+                            padding: 0
+                        }]
+                    });
+                }
+
+                $(document).ready(function() {
+                    setTimeout(function() {
+                        // Initialize the chart with a delay to make sure
+                        // the initial animation is visible
+                        createChart();
+
+                        $("#example").bind("kendo:skinChange", function(e) {
+                            createChart();
+                        });
+                    }, 400);
+                });
+            </script>
+        </div>

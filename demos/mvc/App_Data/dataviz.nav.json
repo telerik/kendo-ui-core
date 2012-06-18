@@ -79,6 +79,25 @@
             ],
             "name": "line-charts"
         }, {
+            "text": "Donut Charts",
+            "documentation": "dataviz/chart",
+            "spriteCssClass": "chartDonutIcon",
+            "items": [{
+                    "text": "Basic usage",
+                    "url": "donut-charts/index.html"
+                }, {
+                    "text": "Donut labels",
+                    "url": "donut-charts/donut-labels.html"
+                }, {
+                    "text": "Binding to remote data",
+                    "url": "donut-charts/remote-data.html",
+                    "packages": [ "!offline" ]
+                }, {
+                    "text": "Binding to local data",
+                    "url": "donut-charts/local-data.html"
+            }],
+            "name": "donut-charts"
+        }, {
             "text": "Pie Charts",
             "documentation": "dataviz/chart",
             "spriteCssClass": "chartPieIcon",

@@ -1,0 +1,75 @@
+[{
+	"year": 2006,
+	"resolution": "Higher",
+	"share": 17,
+	"order": 1
+},{
+	"year": 2006,
+	"resolution": "1024x768",
+	"share": 57,
+	"order": 2
+},{
+	"year": 2006,
+	"resolution": "800x600",
+	"share": 20,
+	"order": 3
+},{
+	"year": 2006,
+	"resolution": "640x480",
+	"share": 0,
+	"order": 4
+},{
+	"year": 2006,
+	"resolution": "Unknown",
+	"share": 6,
+	"order": 5
+},{
+	"year": 2008,
+	"resolution": "Higher",
+	"share": 38,
+	"order": 1
+},{
+	"year": 2008,
+	"resolution": "1024x768",
+	"share": 48,
+	"order": 2
+},{
+	"year": 2008,
+	"resolution": "800x600",
+	"share": 8,
+	"order": 3
+},{
+	"year": 2008,
+	"resolution": "640x480",
+	"share": 0,
+	"order": 4
+},{
+	"year": 2008,
+	"resolution": "Unknown",
+	"share": 6,
+	"order": 5
+},{
+	"year": 2010,
+	"resolution": "Higher",
+	"share": 76,
+	"order": 1
+},{
+	"year": 2010,
+	"resolution": "1024x768",
+	"share": 20,
+	"order": 2
+},{
+	"year": 2010,
+	"resolution": "800x600",
+	"share": 3
+},{
+	"year": 2010,
+	"resolution": "640x480",
+	"share": 0,
+	"order": 4
+},{
+	"year": 2010,
+	"resolution": "Unknown",
+	"share": 3,
+	"order": 5
+}]
