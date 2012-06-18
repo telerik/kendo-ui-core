@@ -1,8 +1,11 @@
-@model IEnumerable<Kendo.Mvc.Examples.Models.ProductViewModel>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/Web.Master" 
+Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.ProductViewModel>>" %>
+
+<asp:Content ContentPlaceHolderID="MainContent" runat="server">
 
 <script type="text/x-kendo-tmpl" id="template">
     <div class="product">
-        <img src="@Url.Content("~/content/web/foods/")${ProductID}.jpg" alt="${ProductName} image" />
+        <img src="<%=Url.Content("~/content/web/foods/")%>${ProductID}.jpg" alt="${ProductName} image" />
         <h3>${ProductName}</h3>
         <dl>
             <dt>Price:</dt>
@@ -11,7 +14,7 @@
     </div>
 </script>
 
-@(Html.Kendo().ListView<Kendo.Mvc.Examples.Models.ProductViewModel>(Model)
+<%: Html.Kendo().ListView<Kendo.Mvc.Examples.Models.ProductViewModel>(Model)
     .Name("listView")
     .TagName("div")
     .ClientTemplateId("template")
@@ -19,8 +22,8 @@
         dataSource.Read(read => read.Action("Products_Read", "ListView"));
         dataSource.PageSize(12);
     })
-    .Pageable()        
-)
+    .Pageable()
+%>
 
 <style scoped>
     .product
@@ -106,4 +109,4 @@
         min-width: 0;
     }
 </style>
-
+</asp:Content>

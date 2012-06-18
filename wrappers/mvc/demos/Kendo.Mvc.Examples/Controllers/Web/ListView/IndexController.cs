@@ -21,27 +21,6 @@ namespace Kendo.Mvc.Examples.Controllers
             return Json(GetProducts().ToDataSourceResult(request));
         }
 
-        private static IEnumerable<OrderViewModel> GetOrderDto()
-        {
-            var northwind = new NorthwindDataContext();
-
-            var loadOptions = new DataLoadOptions();
-
-            loadOptions.LoadWith<Order>(o => o.Customer);
-            northwind.LoadOptions = loadOptions;
-
-            return northwind.Orders.Select(order => new OrderViewModel
-            {
-                ContactName = order.Customer.ContactName,
-                OrderDate = order.OrderDate,
-                OrderID = order.OrderID,
-                ShipAddress = order.ShipAddress,
-                ShipCountry = order.ShipCountry,
-                ShipName = order.ShipName,
-                EmployeeID = order.EmployeeID
-            });
-        }
-
         private static IEnumerable<ProductViewModel> GetProducts()
         {
             var northwind = new NorthwindDataContext();
@@ -55,24 +34,6 @@ namespace Kendo.Mvc.Examples.Controllers
                 UnitsOnOrder = product.UnitsOnOrder ?? 0,
                 Discontinued = product.Discontinued,
                 LastSupply = DateTime.Today
-            });
-        }
-
-        private static IEnumerable<EmployeeViewModel> GetEmployeeDto()
-        {
-            var northwind = new NorthwindDataContext();
-
-            return northwind.Employees.Select(employee => new EmployeeViewModel
-            {
-                EmployeeID = employee.EmployeeID,
-                FirstName = employee.FirstName,
-                LastName = employee.LastName,
-                Country = employee.Country,
-                City = employee.City,
-                Notes = employee.Notes,
-                Title = employee.Title,
-                Address = employee.Address,
-                HomePhone = employee.HomePhone
             });
         }
     }

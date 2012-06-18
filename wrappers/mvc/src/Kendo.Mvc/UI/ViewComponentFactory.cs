@@ -209,7 +209,7 @@ namespace Kendo.Mvc.UI
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().ListView(Model)
-        ///             .Name("Grid")
+        ///             .Name("ListView")
         /// %&gt;
         /// </code>
         /// </example>
@@ -230,7 +230,7 @@ namespace Kendo.Mvc.UI
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().ListView&lt;Order&gt;("orders")
-        ///             .Name("Grid")
+        ///             .Name("ListView")
         /// %&gt;
         /// </code>
         /// </example>

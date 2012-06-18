@@ -424,19 +424,23 @@
            that.element.on(CLICK, ".k-edit-button", function(e) {
                var item = $(this).closest("[" + kendo.attr("uid") + "]");
                that.edit(item);
+               e.preventDefault();
            });
 
            that.element.on(CLICK, ".k-delete-button", function(e) {
                var item = $(this).closest("[" + kendo.attr("uid") + "]");
                that.remove(item);
+               e.preventDefault();
            });
 
            that.element.on(CLICK, ".k-update-button", function(e) {
                that.save();
+               e.preventDefault();
            });
 
            that.element.on(CLICK, ".k-cancel-button", function(e) {
                that.cancel();
+               e.preventDefault();
            });
        }
     });
