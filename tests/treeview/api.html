@@ -427,8 +427,8 @@
             test("insertBefore(nodeData, element) inserts new node before element", function() {
                 createTreeView({
                         dataSource: [
-                            { text: "foo", expanded: true },
-                            { text: "baz", expanded: true }
+                            { text: "foo" },
+                            { text: "baz" }
                         ]
                     }),
                     treeviewObject = treeview.data("kendoTreeView"),
@@ -624,6 +624,36 @@
                 treeviewObject.remove(".k-item");
 
                 equal(treeviewObject.dataSource.data().length, 0);
+            });
+
+            test("insertBefore() moves item in the dataSource", function() {
+                createTreeView([
+                    { text: "foo" },
+                    { text: "bar" }
+                ]);
+
+                treeviewObject.insertBefore(treeviewObject.findByText("bar"), treeviewObject.findByText("foo"));
+
+                var data = treeviewObject.dataSource.data();
+
+                equal(data.length, 2);
+                equal(data[0].text, "bar");
+                equal(data[1].text, "foo");
+            });
+
+            test("insertAfter() moves item in the dataSource", function() {
+                createTreeView([
+                    { text: "foo" },
+                    { text: "bar" }
+                ]);
+
+                treeviewObject.insertAfter(treeviewObject.findByText("foo"), treeviewObject.findByText("bar"));
+
+                var data = treeviewObject.dataSource.data();
+
+                equal(data.length, 2);
+                equal(data[0].text, "bar");
+                equal(data[1].text, "foo");
             });
         </script>
 

@@ -170,6 +170,10 @@
         };
     }
 
+    function treeviewFromNode(node) {
+        return node.closest("[data-role=treeview]").data("kendoTreeView");
+    }
+
     subGroup = contentChild(".k-group");
     nodeContents = contentChild(".k-group,.k-content");
 
@@ -907,10 +911,19 @@
                 i;
 
             function append(items, parentNode, collapsed) {
-                var group = subGroup(parentNode);
+                var group = subGroup(parentNode),
+                    children = group.children();
 
-                that._insertNode(items, group.children().length, parentNode, group, function(item, group) {
-                    item.appendTo(group);
+                if (typeof e.index == "undefined") {
+                    e.index = children.length;
+                }
+
+                that._insertNode(items, e.index, parentNode, group, function(item, group) {
+                    if (e.index == children.length) {
+                        item.appendTo(group);
+                    } else {
+                        item.insertBefore(children.eq(e.index));
+                    }
                 }, collapsed);
             }
 
@@ -1242,6 +1255,43 @@
             return node;
         },
 
+        _dataSourceMove: function(nodeData, group, parentNode, callback) {
+            var that = this,
+                dataSource = that.dataSource,
+                treeview, destinationTreeview,
+                referenceDataItem, i, dataItem;
+
+            if (parentNode) {
+                destinationTreeview = treeviewFromNode(parentNode);
+                referenceDataItem = destinationTreeview.dataItem(parentNode);
+
+                if (parentNode != that.root) {
+                    dataSource = referenceDataItem.children;
+                }
+            }
+
+            if (nodeData instanceof $ || isDomElement(nodeData)) {
+                // move node
+                nodeData = $(nodeData);
+                treeview = treeviewFromNode(nodeData);
+                dataItem = treeview.dataSource.getByUid(nodeData.attr(kendo.attr("uid")));
+
+                treeview.dataSource.remove(dataItem);
+
+                dataItem = callback(dataSource, dataItem);
+            } else if (isArray(nodeData) || nodeData instanceof data.ObservableArray){
+                // insert array of nodes
+                for (i = 0; i < nodeData.length; i++) {
+                    dataItem = callback(dataSource, nodeData[i]);
+                }
+            } else {
+                // insert single node from data
+                dataItem = callback(dataSource, nodeData);
+            }
+
+            return that.findByUid(dataItem.uid);
+        },
+
         /**
          *
          * Inserts a node after a specified node in a TreeView. This method may also be used to reorder the nodes of a
@@ -1265,10 +1315,15 @@
          *
          */
         insertAfter: function (nodeData, referenceNode) {
-            var group = referenceNode.parent();
+            var group = referenceNode.parent(),
+                parentNode;
 
-            return this._insertNode(nodeData, referenceNode.index() + 1, group.parent(), group, function(item, group) {
-                item.insertAfter(referenceNode);
+            if (group.parent().is("li")) {
+                parentNode = group.parent();
+            }
+
+            return this._dataSourceMove(nodeData, group, parentNode, function (dataSource, model) {
+                return dataSource.insert(referenceNode.index() + 1, model);
             });
         },
 
@@ -1295,10 +1350,15 @@
          *
          */
         insertBefore: function (nodeData, referenceNode) {
-            var group = referenceNode.parent();
+            var group = referenceNode.parent(),
+                parentNode;
 
-            return this._insertNode(nodeData, referenceNode.index(), group.parent(), group, function(item, group) {
-                item.insertBefore(referenceNode);
+            if (group.parent().is("li")) {
+                parentNode = group.parent();
+            }
+
+            return this._dataSourceMove(nodeData, group, parentNode, function (dataSource, model) {
+                return dataSource.insert(referenceNode.index(), model);
             });
         },
 
@@ -1326,35 +1386,15 @@
          *
          */
         append: function (nodeData, parentNode) {
-            var that = this,
-                dataSource = that.dataSource,
-                treeview, parentTreeview,
-                i,
-                dataItem;
+            var group = this.root;
 
             if (parentNode) {
-                parentTreeview = parentNode.closest("[data-role=treeview]").data("kendoTreeView");
-                dataSource = parentTreeview.dataItem(parentNode).children;
+                group = subGroup(parentNode);
             }
 
-            if (nodeData instanceof $ || isDomElement(nodeData)) {
-                // move node
-                nodeData = $(nodeData);
-                treeview = nodeData.closest("[data-role=treeview]").data("kendoTreeView");
-                dataItem = treeview.dataSource.getByUid(nodeData.attr(kendo.attr("uid")));
-
-                treeview.dataSource.remove(dataItem);
-
-                dataItem = dataSource.add(dataItem);
-            } else if (isArray(nodeData) || nodeData instanceof data.ObservableArray){
-                for (i = 0; i < nodeData.length; i++) {
-                    dataItem = dataSource.add(nodeData[i]);
-                }
-            } else {
-                dataItem = dataSource.add(nodeData);
-            }
-
-            return that.findByUid(dataItem.uid);
+            return this._dataSourceMove(nodeData, group, parentNode, function (dataSource, model) {
+                return dataSource.add(model);
+            });
         },
 
         _remove: function (node, keepData) {
