@@ -912,6 +912,24 @@
             ]
         },
         {
+            "packages": ["!mvc"],
+            "text": "Styling",
+            "name": "styling",
+            "documentation": "framework/styling",
+            "spriteCssClass": "stylingIcon",
+            "packages": [ "online" ],
+            "items": [
+                {
+                    "text": "Forms",
+                    "url": "styling/index.html"
+                },
+                {
+                    "text": "Panels",
+                    "url": "styling/panels.html"
+                }
+            ]
+        },
+        {
             "text": "Integration",
             "name": "integration",
             "spriteCssClass": "integrationIcon",

@@ -10,6 +10,7 @@
 
 /* main gradient */
 
+.k-block,
 .k-button,
 .k-header,
 .k-grid-header,
@@ -19,6 +20,8 @@
 .k-pager-wrap,
 .k-tabstrip-items .k-item,
 .k-link.k-state-hover,
+span.k-textbox,
+span.k-textbox:hover,
 .k-autocomplete,
 .k-dropdown-wrap,
 .k-picker-wrap,
@@ -46,7 +49,9 @@
 
 /* widget */
 
+.k-block,
 .k-widget,
+span.k-textbox > input,
 .k-input[type="text"],
 .k-input[type="number"],
 .k-textbox,
@@ -61,9 +66,22 @@
     -webkit-appearance: none;
 }
 
+.k-block,
 .k-widget
 {
     line-height: normal;
+}
+
+/* Block */
+
+.k-block
+{
+    width: 200px;
+    height: 100px;
+    padding: 2px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 /* button */
@@ -79,6 +97,9 @@
     cursor: pointer;
     outline: 0;
     text-decoration: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 a.k-button
@@ -405,6 +426,7 @@ div.k-window
     padding-top: 2em;
 }
 
+.k-block > .k-header,
 .k-window-titlebar
 {
     position: absolute;
@@ -417,6 +439,13 @@ div.k-window
     font-size: 1.2em;
     white-space: nowrap;
     min-height: 16px; /* icon size */
+}
+
+.k-block > .k-header
+{
+    position: relative;
+    margin: -2px 0 0 -2px;
+    padding: .3em 2px;
 }
 
 .k-window-title
@@ -1555,7 +1584,8 @@ span.k-dropdown
 .k-datetimepicker,
 .k-numerictextbox,
 .k-dropdown,
-.k-selectbox
+.k-selectbox,
+span.k-textbox
 {
     position: relative;
     display: inline-block;
@@ -1592,6 +1622,7 @@ span.k-dropdown
     background: none;
 }
 
+.k-block,
 .k-widget,
 .k-grid,
 .k-slider,
@@ -1638,6 +1669,7 @@ span.k-dropdown
     padding-bottom: 3px;
 }
 
+span.k-textbox,
 .k-autocomplete,
 .k-dropdown-wrap,
 .k-picker-wrap,
@@ -1653,6 +1685,7 @@ span.k-dropdown
     padding-right : 2px;
 }
 
+span.k-textbox,
 .k-autocomplete
 {
     padding: 2px;
@@ -1673,6 +1706,7 @@ span.k-dropdown
     transition: box-shadow .15s ease-out;
 }
 
+span.k-textbox > input,
 .k-picker-wrap .k-input,
 .k-numeric-wrap .k-input,
 .k-combobox .k-input
@@ -1738,6 +1772,7 @@ span.k-datetimepicker .k-select+.k-select
     right: 0;
 }
 
+span.k-textbox,
 .k-autocomplete
 {
     -moz-box-sizing: border-box;
@@ -1745,6 +1780,7 @@ span.k-datetimepicker .k-select+.k-select
     box-sizing: border-box;
 }
 
+span.k-textbox > input,
 .k-autocomplete .k-input
 {
     display: block;
@@ -1774,6 +1810,7 @@ span.k-datetimepicker .k-select+.k-select
     text-overflow: ellipsis;
 }
 
+span.k-textbox > input,
 .k-autocomplete .k-input,
 .k-picker-wrap .k-input,
 .k-numeric-wrap .k-input,
@@ -2117,6 +2154,11 @@ div.k-treeview
 .k-input
 {
     padding: 0.25em 0;
+}
+
+.k-input,
+span.k-textbox > input
+{
     outline: 0;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
@@ -2132,6 +2174,11 @@ div.k-treeview
     padding: 2px .3em;
     text-indent: 2px\9;
     width: 12.4em;
+}
+
+textarea.k-textbox
+{
+    height: auto;
 }
 
 *+html .k-textbox

@@ -94,11 +94,13 @@
 
 /* main colors */
 
+.k-block,
 .k-widget
 {
     background-color: @widget-background-color;
 }
 
+.k-block,
 .k-widget,
 .k-input,
 .k-textbox,
@@ -108,6 +110,8 @@
 .k-editable-area,
 .k-separator,
 .k-colorpicker .k-arrow-down,
+span.k-textbox,
+span.k-textbox > input,
 .k-autocomplete,
 .k-dropdown-wrap,
 .k-toolbar,
@@ -125,7 +129,6 @@
 .k-grouping-header,
 .k-grouping-header .k-group-indicator,
 .k-dropdown-wrap,
-.k-autocomplete,
 .k-panelbar > .k-item > .k-link,
 .k-panel > .k-item > .k-link,
 .k-panelbar .k-panel,
@@ -185,6 +188,7 @@ td.k-group-cell,
 .k-widget .k-dropdown-wrap,
 .k-widget .k-picker-wrap,
 .k-widget .k-numeric-wrap,
+span.k-textbox,
 .k-autocomplete.k-header,
 .k-autocomplete.k-state-focused,
 div.k-dropdown-wrap.k-state-active,
@@ -201,6 +205,7 @@ span.k-numeric-wrap.k-state-active,
     background-color: @select-background-color;
 }
 
+span.k-textbox > input,
 .k-autocomplete .k-input,
 .k-dropdown-wrap .k-input,
 .k-autocomplete.k-state-focused .k-input,
@@ -211,6 +216,7 @@ span.k-numeric-wrap.k-state-active,
     border-color: @widget-border-color;
 }
 
+span.k-textbox > input,
 .k-input,
 .k-textbox
 {
@@ -218,6 +224,7 @@ span.k-numeric-wrap.k-state-active,
     color: @input-text-color;
 }
 
+.k-block,
 .k-widget,
 .k-popup,
 .k-content,
@@ -248,6 +255,7 @@ span.k-numeric-wrap.k-state-active,
 .k-button,
 .k-draghandle,
 .k-tile,
+span.k-textbox,
 .k-autocomplete,
 .k-state-hover,
 .k-state-selected,
@@ -257,6 +265,7 @@ span.k-numeric-wrap.k-state-active,
     background-image: @texture-url;
 }
 
+.k-block,
 .k-header,
 .k-grid-header,
 .k-toolbar,
@@ -385,6 +394,7 @@ span.k-numeric-wrap.k-state-active,
     color: @hover-text-color;
 }
 
+span.k-textbox:hover,
 .k-autocomplete.k-state-hover,
 .k-picker-wrap.k-state-hover,
 .k-numeric-wrap.k-state-hover,
@@ -516,6 +526,7 @@ span.k-numeric-wrap.k-state-active,
 
 /* Shadows */
 
+.k-shadow,
 .k-popup,
 .k-menu .k-group,
 .k-grid .k-filter-options,
@@ -535,6 +546,7 @@ span.k-numeric-wrap.k-state-active,
     .window-shadow(@shadow-color);
 }
 
+span.k-textbox > input,
 .k-autocomplete .k-input,
 .k-combobox .k-input,
 .k-picker-wrap .k-input
@@ -544,6 +556,7 @@ span.k-numeric-wrap.k-state-active,
 
 /* Border radius */
 
+.k-block,
 .k-button,
 .k-textbox,
 .k-drag-clue,
@@ -588,6 +601,7 @@ span.k-numeric-wrap.k-state-active,
 }
 
 .k-window-titlebar,
+.k-block > .k-header,
 .k-tabstrip-items .k-item,
 .k-panelbar .k-tabstrip-items .k-item,
 .k-tabstrip-items .k-link,
@@ -611,6 +625,7 @@ span.k-numeric-wrap.k-state-active,
     .border-radius(0 @main-border-radius @main-border-radius 0);
 }
 
+span.k-textbox > input,
 .k-autocomplete .k-input,
 .k-dropdown-wrap .k-input,
 .k-picker-wrap .k-input,
