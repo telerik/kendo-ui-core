@@ -139,6 +139,14 @@ namespace Kendo.Mvc.UI
             {
                 return data.SerializeToDictionary(dataTableEnumerable.Table);
             }
+            else if (data is IEnumerable<AggregateFunctionsGroup> || 
+                data is IQueryable<AggregateFunctionsGroup>)
+            {
+                if (!ServerGrouping)
+                {
+                    return data.Cast<IGroup>().Leaves();               
+                }                
+            }
             return data;
         }       
 
