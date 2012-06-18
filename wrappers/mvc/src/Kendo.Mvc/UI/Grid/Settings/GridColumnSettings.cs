@@ -34,16 +34,14 @@ namespace Kendo.Mvc.UI
             HeaderHtmlAttributes = new RouteValueDictionary();            
             HtmlAttributes = new RouteValueDictionary();            
             FooterHtmlAttributes = new RouteValueDictionary();
-        }
-
-        //TODO: Implement HeaderTemplate
-        /*
+        }        
+        
         public Action HeaderTemplate
         {
             get;
             set;
         }
-        */
+        
         public Action<GridAggregateResult> FooterTemplate
         {
             get;

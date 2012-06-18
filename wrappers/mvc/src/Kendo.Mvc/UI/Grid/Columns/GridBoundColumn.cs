@@ -415,7 +415,7 @@ namespace Kendo.Mvc.UI
 
             AppendAggregateAttributes();
 
-            if (Sortable && Grid.Sorting.Enabled /*&& !HeaderTemplate.HasValue()*/) //TODO: Implement header template
+            if (Sortable && Grid.Sorting.Enabled && !HeaderTemplate.HasValue())
             {
                 builder = new GridSortableHeaderCellBuilder(HeaderHtmlAttributes, GetSortUrl(), SortDirection, Grid.Localization.SortedAsc, Grid.Localization.SortedDesc, AppendHeaderContent);
             }

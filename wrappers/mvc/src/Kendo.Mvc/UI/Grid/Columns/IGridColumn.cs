@@ -22,16 +22,13 @@ namespace Kendo.Mvc.UI
         {
             get;
             set;
-        }
-
-        //TODO: Implement HeaderTemplate
-        /*
+        }        
+        
         HtmlTemplate HeaderTemplate
         {
             get;
             set;
-        }
-        */
+        }        
 
         HtmlTemplate<GridAggregateResult> FooterTemplate
         {

@@ -38,9 +38,8 @@ namespace Kendo.Mvc.UI
             Settings = new GridColumnSettings();            
             Visible = true;
             //TODO: Implement HeaderContextMenu
-            //IncludeInContextMenu = true;
-            //TODO: Implement HeaderTemplate
-            //HeaderTemplate = new HtmlTemplate();
+            //IncludeInContextMenu = true;            
+            HeaderTemplate = new HtmlTemplate();
             FooterTemplate = new HtmlTemplate<GridAggregateResult>();
         }
 
@@ -119,10 +118,8 @@ namespace Kendo.Mvc.UI
             {
                 json["footerTemplate"] = ClientFooterTemplate;
             }
-        }
-
-        //TODO: Implement Header Template
-        /*
+        }       
+        
         /// <summary>
         /// Gets the header template of the column.
         /// </summary>
@@ -130,8 +127,7 @@ namespace Kendo.Mvc.UI
         {
             get;
             set;
-        }
-        */
+        }        
 
         /// <summary>
         /// Gets the footer template of the column.
@@ -433,9 +429,8 @@ namespace Kendo.Mvc.UI
         }
 
         protected virtual IGridCellBuilder CreateHeaderBuilderCore()
-        {
-            //TODO: Implement HeaderTemplate
-            return new GridHeaderCellBuilder(HeaderHtmlAttributes, AppendHeaderContent/*, HeaderTemplate.HasValue()*/);
+        {            
+            return new GridHeaderCellBuilder(HeaderHtmlAttributes, AppendHeaderContent, HeaderTemplate.HasValue());
         }
 
         public IGridCellBuilder CreateFooterBuilder(IEnumerable<AggregateResult> aggregateResults)
@@ -467,17 +462,15 @@ namespace Kendo.Mvc.UI
         }
 
         protected void AppendHeaderContent(IHtmlNode container)
-        {
-            //TODO Implement HeaderTemplate
-            /*
+        {   
             if (HeaderTemplate != null && HeaderTemplate.HasValue())
             {
                 HeaderTemplate.Apply(container);
             }
             else
-            {*/
+            {
                 container.Html(Title.HasValue() ? Title : "&nbsp;");
-            //}
+            }
         }
     }
 }
