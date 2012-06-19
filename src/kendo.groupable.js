@@ -2,7 +2,6 @@
     var kendo = window.kendo,
         Widget = kendo.ui.Widget,
         proxy = $.proxy,
-        CONTAINER_EMPTY_TEXT = "Drag a column header and drop it here to group by that column",
         indicatorTmpl = kendo.template('<div class="k-group-indicator" data-#=data.ns#field="${data.field}" data-#=data.ns#title="${data.title || ""}" data-#=data.ns#dir="${data.dir || "asc"}">' +
                 '<a href="\\#" class="k-link">' +
                     '<span class="k-icon k-arrow-${(data.dir || "asc") == "asc" ? "up" : "down"}-small">(sorted ${(data.dir || "asc") == "asc" ? "ascending": "descending"})</span>' +
@@ -180,7 +179,10 @@
 
         options: {
             name: "Groupable",
-            filter: "th"
+            filter: "th",
+            messages: {
+                empty: "Drag a column header and drop it here to group by that column"
+            }
         },
 
         indicator: function(field) {
@@ -321,7 +323,7 @@
         _invalidateGroupContainer: function() {
             var groupContainer = this.groupContainer;
             if(groupContainer.is(":empty")) {
-                groupContainer.html(CONTAINER_EMPTY_TEXT);
+                groupContainer.html(this.options.messages.empty);
             }
         }
     });
