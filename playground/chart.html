@@ -12,7 +12,7 @@
         <script src="../src/kendo.dataviz.svg.js"></script>
     </head>
     <body>
-        <div id="chart" style="width: 200px; height; 200px;"></div>
+        <div id="chart" style="width: 500px; height: 400px;"></div>
         <script>
             $(function() {
                 var data = [{
@@ -53,8 +53,7 @@
                     series: [{
                         type: "bubble",
                         labels: {
-                            visible: true,
-                            template: "#= dataItem.id #"
+                            visible: true
                         },
                         markers: {
                             maxSize: 120
@@ -62,10 +61,8 @@
                         xField: "lifeExpectancy",
                         yField: "fertilityRate",
                         zField: "population",
+                        categoryField: "id",
                         colorField: "color"
-                        // TODO: colorField
-                        // TODO: data: [{ x, y, z, color, ... }]
-                        // TODO: data: [[ x, y, z], ...]
                     }]
                 });
             });

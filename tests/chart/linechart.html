@@ -1058,7 +1058,7 @@
                 // ------------------------------------------------------------
                 module("ShapeElement", {
                     setup: function() {
-                        createShape();
+                        createShape({ type: "square" });
                     }
                 });
 
@@ -1086,7 +1086,7 @@
 
                 test("renders id", function() {
                     createShape({ id: "id" });
-                    equals(view.log.rect[0].style.id, "id");
+                    equals(view.log.circle[0].style.id, "id");
                 });
 
                 test("does not render element when hidden", function() {

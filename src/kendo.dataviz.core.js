@@ -615,35 +615,44 @@
 
         getViewElements: function(view, renderOptions) {
             var boxElement = this,
-                options = boxElement.options;
+                options = boxElement.options,
+                elements = [];
 
             if (!options.visible) {
                 return [];
             }
 
-            var border = options.border || {},
-                elements = [];
-
             if (boxElement.hasBox()) {
                 elements.push(
-                    view.createRect(boxElement.paddingBox, deepExtend({
-                        id: options.id,
-                        stroke: border.width ? border.color : "",
-                        strokeWidth: border.width,
-                        dashType: border.dashType,
-                        strokeOpacity: options.opacity,
-                        fill: options.background,
-                        fillOpacity: options.opacity,
-                        animation: options.animation,
-                        zIndex: options.zIndex,
-                        data: { modelId: options.modelId }
-                    }, renderOptions))
+                    view.createRect(
+                        boxElement.paddingBox,
+                        deepExtend(boxElement.elementStyle(), renderOptions)
+                    )
                 );
             }
 
             return elements.concat(
                 ChartElement.fn.getViewElements.call(boxElement, view)
             );
+        },
+
+        elementStyle: function() {
+            var boxElement = this,
+                options = boxElement.options,
+                border = options.border || {};
+
+            return {
+                id: options.id,
+                stroke: border.width ? border.color : "",
+                strokeWidth: border.width,
+                dashType: border.dashType,
+                strokeOpacity: options.opacity,
+                fill: options.background,
+                fillOpacity: options.opacity,
+                animation: options.animation,
+                zIndex: options.zIndex,
+                data: { modelId: options.modelId }
+            };
         }
     });
 

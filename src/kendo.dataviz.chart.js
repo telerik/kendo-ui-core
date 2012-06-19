@@ -2019,24 +2019,29 @@
                 options = marker.options,
                 type = options.type,
                 box = marker.paddingBox,
-                element = BoxElement.fn.getViewElements.call(marker, view, renderOptions)[0],
+                element,
+                elementOptions,
                 halfWidth = box.width() / 2;
 
-            if (!element) {
+            if (!options.visible || !marker.hasBox()) {
                 return [];
             }
+
+            elementOptions = deepExtend(marker.elementStyle(), renderOptions);
 
             if (type === TRIANGLE) {
                 element = view.createPolyline([
                     new Point2D(box.x1 + halfWidth, box.y1),
                     new Point2D(box.x1, box.y2),
                     new Point2D(box.x2, box.y2)
-                ], true, element.options);
+                ], true, elementOptions);
             } else if (type === CIRCLE) {
                 element = view.createCircle([
                     round(box.x1 + halfWidth, COORD_PRECISION),
                     round(box.y1 + box.height() / 2, COORD_PRECISION)
-                ], halfWidth, element.options);
+                ], halfWidth, elementOptions);
+            } else {
+                element = view.createRect(box, elementOptions)
             }
 
             return [ element ];
@@ -2108,7 +2113,8 @@
                 background: markerBackground,
                 border: markerBorder,
                 opacity: markers.opacity,
-                zIndex: markers.zIndex
+                zIndex: markers.zIndex,
+                animation: markers.animation
             });
 
             point.append(point.marker);
@@ -2230,7 +2236,10 @@
                     width: 1,
                     color: WHITE
                 },
-                opacity: 0.5
+                opacity: 0.6,
+                animation: {
+                    type: BUBBLE
+                }
             },
             labels: {
                 position: CENTER,
@@ -2632,7 +2641,7 @@
             chart.updateRange(value, fields.series);
 
             if (defined(x) && x !== null && defined(y) && y !== null) {
-                point = chart.createPoint(value, fields.series, seriesIx);
+                point = chart.createPoint(value, fields.series, seriesIx, fields.pointIx);
                 if (point) {
                     extend(point, fields);
                 }
@@ -2856,7 +2865,7 @@
             ScatterChart.fn.addValue.call(this, value, fields);
         },
 
-        createPoint: function(value, series, seriesIx) {
+        createPoint: function(value, series, seriesIx, pointIx) {
             var chart = this,
                 point,
                 color = value.color || series.color,
@@ -2864,18 +2873,26 @@
                 maxR = series.markers.maxSize / 2,
                 maxArea = math.PI * maxR * maxR,
                 area = math.abs(value.z) * (maxArea / maxValue),
-                r = math.sqrt(area / math.PI);
+                r = math.sqrt(area / math.PI),
+                pointsCount = series.data.length,
+                delay = pointIx * (INITIAL_ANIMATION_DURATION / pointsCount),
+                animationOptions = {
+                    delay: delay,
+                    duration: INITIAL_ANIMATION_DURATION - delay
+                };
 
             point = new Bubble(value,
                 deepExtend({
                     markers: {
                         background: color,
+                        animation: animationOptions
                     },
                     tooltip: {
                         format: chart.options.tooltip.format
                     },
                     labels: {
-                        format: chart.options.labels.format
+                        format: chart.options.labels.format,
+                        animation: animationOptions
                     }
                 }, series, {
                     markers: {
@@ -2892,10 +2909,10 @@
 
             return point;
 
-            // TODO: Animations
+            // TODO: Render point category as label
+            // TODO: Negative values - color, visibility
+            // TODO: Hover that updates rendered element
             // TODO: Clip to axis line box
-            // TODO: Negative values
-            // TODO: Coloring by value
         },
 
         seriesMax: function(series) {
@@ -2907,7 +2924,7 @@
                 value;
 
             for(i = 0; i < length; i++) {
-                max = math.max(max, chart.pointValue(series, i).z);
+                max = math.max(max, math.abs(chart.pointValue(series, i).z));
             }
 
             return max;
@@ -2919,7 +2936,9 @@
         },
 
         getViewElements: function(view) {
-            return ScatterChart.fn.getViewElements.call(this, view);
+            var chart = this;
+
+            return ChartElement.fn.getViewElements.call(chart, view);
         }
     });
 
@@ -4690,8 +4709,30 @@
         }
     });
 
+    var BubbleAnimation = ElementAnimation.extend({
+        options: {
+            easing: "easeOutElastic",
+            duration: INITIAL_ANIMATION_DURATION
+        },
+
+        setup: function() {
+            var circle = this.element;
+
+            circle.endRadius = circle.radius;
+            circle.radius = 0;
+        },
+
+        step: function(pos) {
+            var circle = this.element,
+                endRadius = circle.endRadius;
+
+            circle.radius = interpolateValue(0, endRadius, pos);
+        }
+    });
+
     var BarAnimationDecorator = animationDecorator(BAR, BarAnimation),
-        PieAnimationDecorator = animationDecorator(PIE, PieAnimation);
+        PieAnimationDecorator = animationDecorator(PIE, PieAnimation),
+        BubbleAnimationDecorator = animationDecorator(BUBBLE, BubbleAnimation);
 
     var Highlight = Class.extend({
         init: function(view, viewElement, options) {
@@ -5179,6 +5220,7 @@
         BarAnimationDecorator: BarAnimationDecorator,
         BarChart: BarChart,
         BarLabel: BarLabel,
+        BubbleAnimationDecorator: BubbleAnimationDecorator,
         CategoricalPlotArea: CategoricalPlotArea,
         CategoryAxis: CategoryAxis,
         ClusterLayout: ClusterLayout,
