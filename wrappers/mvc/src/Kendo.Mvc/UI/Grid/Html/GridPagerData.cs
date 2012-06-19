@@ -4,7 +4,7 @@ namespace Kendo.Mvc.UI.Html
 
     public class GridPagerData
     {
-        public PagerMessages Messages { get; set; }
+        public PageableMessages Messages { get; set; }
 
         public int Page { get; set; }
 

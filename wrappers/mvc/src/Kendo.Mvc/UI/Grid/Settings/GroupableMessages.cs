@@ -5,9 +5,9 @@ using Kendo.Mvc.Resources;
 
 namespace Kendo.Mvc.UI
 {
-    public class GroupingMessages : JsonObject
+    public class GroupableMessages : JsonObject
     {
-        public GroupingMessages()
+        public GroupableMessages()
         {
             this.Empty = Messages.Group_Empty;
         }

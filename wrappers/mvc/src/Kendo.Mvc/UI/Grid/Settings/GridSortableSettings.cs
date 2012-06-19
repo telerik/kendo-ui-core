@@ -1,8 +1,8 @@
 namespace Kendo.Mvc.UI
 {    
-    public class GridSortSettings : JsonObject
+    public class GridSortableSettings : JsonObject
     {
-        public GridSortSettings()
+        public GridSortableSettings()
         {
             AllowUnsort = true;
         }

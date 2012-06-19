@@ -4,13 +4,13 @@ namespace Kendo.Mvc.UI
     using System.Collections.Generic;
     using System.Linq;
 
-    public class GridGroupingSettings : JsonObject
+    public class GridGroupableSettings : JsonObject
     {
-        public GridGroupingSettings()
+        public GridGroupableSettings()
         {
             Groups = new List<GroupDescriptor>();
             Visible = true;
-            Messages = new GroupingMessages();
+            Messages = new GroupableMessages();
         }
 
         public bool Enabled { get; set; }
@@ -19,7 +19,7 @@ namespace Kendo.Mvc.UI
 
         public IList<GroupDescriptor> Groups { get; private set; }
         
-        public GroupingMessages Messages { get; private set; }
+        public GroupableMessages Messages { get; private set; }
 
         protected override void Serialize(IDictionary<string, object> json)
         {

@@ -226,7 +226,7 @@ namespace Kendo.Mvc.UI
                                 .Replace("jQuery(\"#", "jQuery(\"\\#");                                               
             }           
             
-            if (!Grid.DataSource.IsReadOnly(Member) && Grid.Editing.Enabled && Grid.IsClientBinding)
+            if (!Grid.DataSource.IsReadOnly(Member) && Grid.Editable.Enabled && Grid.IsClientBinding)
             {
                 json["editor"] = editorHtml;
             }
@@ -291,7 +291,7 @@ namespace Kendo.Mvc.UI
 
                 if (newDirection == null)
                 {
-                    if (!Grid.Sorting.AllowUnsort)
+                    if (!Grid.Sortable.AllowUnsort)
                     {
                         newDirection = ListSortDirection.Ascending;
                     }
@@ -303,7 +303,7 @@ namespace Kendo.Mvc.UI
 
                 if (newDirection != null)
                 {
-                    if (Grid.Sorting.SortMode == GridSortMode.SingleColumn)
+                    if (Grid.Sortable.SortMode == GridSortMode.SingleColumn)
                     {
                         orderBy.Clear();
                         orderBy.Add(new SortDescriptor { SortDirection = newDirection.Value, Member = descriptor.Member });
@@ -316,7 +316,7 @@ namespace Kendo.Mvc.UI
             }
             else
             {
-                if (Grid.Sorting.SortMode == GridSortMode.SingleColumn)
+                if (Grid.Sortable.SortMode == GridSortMode.SingleColumn)
                 {
                     orderBy.Clear();
                 }
@@ -415,7 +415,7 @@ namespace Kendo.Mvc.UI
 
             AppendAggregateAttributes();
 
-            if (Sortable && Grid.Sorting.Enabled && !HeaderTemplate.HasValue())
+            if (Sortable && Grid.Sortable.Enabled && !HeaderTemplate.HasValue())
             {
                 builder = new GridSortableHeaderCellBuilder(HeaderHtmlAttributes, GetSortUrl(), SortDirection, AppendHeaderContent);
             }
@@ -424,7 +424,7 @@ namespace Kendo.Mvc.UI
                 builder = base.CreateHeaderBuilderCore();
             }
 
-            if (Filterable && Grid.Filtering.Enabled)
+            if (Filterable && Grid.Filterable.Enabled)
             {
                 var filtered = Grid.DataSource.Filters
                                    .SelectMemberDescriptors()

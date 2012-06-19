@@ -4,17 +4,17 @@ namespace Kendo.Mvc.UI.Fluent
     using Infrastructure;
 
     /// <summary>
-    /// Defines the fluent interface for configuring <see cref="Grid{T}.Filtering"/>.
+    /// Defines the fluent interface for configuring <see cref="Grid{T}.Filterable"/>.
     /// </summary>
     public class GridFilteringSettingsBuilder<TModel>  : IHideObjectMembers where TModel : class
     {
-        private readonly GridFilteringSettings settings;
+        private readonly GridFilterableSettings settings;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GridFilteringSettings"/> class.
+        /// Initializes a new instance of the <see cref="GridFilterableSettings"/> class.
         /// </summary>
         /// <param name="settings">The settings.</param>
-        public GridFilteringSettingsBuilder(GridFilteringSettings settings)
+        public GridFilteringSettingsBuilder(GridFilterableSettings settings)
         {
             this.settings = settings;
         }
@@ -42,14 +42,14 @@ namespace Kendo.Mvc.UI.Fluent
 
         public virtual GridFilteringSettingsBuilder<TModel> ShowOrOption(bool value)
         {
-            settings.ShowOrOption = value;
+            settings.Extra = value;
             settings.Enabled = true;
             return this;
         }
 
         public virtual GridFilteringSettingsBuilder<TModel> ShowOrOption()
         {
-            settings.ShowOrOption = true;
+            settings.Extra = true;
             settings.Enabled = true;
             return this;
         }

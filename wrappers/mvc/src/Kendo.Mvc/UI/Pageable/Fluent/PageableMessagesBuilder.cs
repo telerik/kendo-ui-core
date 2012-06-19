@@ -1,78 +1,78 @@
 namespace Kendo.Mvc.UI.Fluent
 {
-    public class PagerMessagesBuilder : IHideObjectMembers
+    public class PageableMessagesBuilder : IHideObjectMembers
     {
-        private readonly PagerMessages messages;
+        private readonly PageableMessages messages;
 
-        public PagerMessagesBuilder(PagerMessages messages)
+        public PageableMessagesBuilder(PageableMessages messages)
         {
             this.messages = messages;
         }
 
-        public PagerMessagesBuilder Display(string message)
+        public PageableMessagesBuilder Display(string message)
         {
             messages.Display = message;
 
             return this;
         }
 
-        public PagerMessagesBuilder Empty(string message)
+        public PageableMessagesBuilder Empty(string message)
         {
             messages.Empty = message;
 
             return this;
         }
 
-        public PagerMessagesBuilder Page(string message)
+        public PageableMessagesBuilder Page(string message)
         {
             messages.Page = message;
 
             return this;
         }
 
-        public PagerMessagesBuilder Of(string message)
+        public PageableMessagesBuilder Of(string message)
         {
             messages.Of = message;
 
             return this;
         }
 
-        public PagerMessagesBuilder ItemsPerPage(string message)
+        public PageableMessagesBuilder ItemsPerPage(string message)
         {
             messages.ItemsPerPage = message;
 
             return this;
         }
 
-        public PagerMessagesBuilder First(string message)
+        public PageableMessagesBuilder First(string message)
         {
             messages.First = message;
 
             return this;
         }
 
-        public PagerMessagesBuilder Previous(string message)
+        public PageableMessagesBuilder Previous(string message)
         {
             messages.Previous = message;
 
             return this;
         }
 
-        public PagerMessagesBuilder Next(string message)
+        public PageableMessagesBuilder Next(string message)
         {
             messages.Next = message;
 
             return this;
         }
 
-        public PagerMessagesBuilder Last(string message)
+        public PageableMessagesBuilder Last(string message)
         {
             messages.Last = message;
 
             return this;
         }
 
-        public PagerMessagesBuilder Refresh(string message)
+        public PageableMessagesBuilder Refresh(string message)
         {
             messages.Refresh = message;
 

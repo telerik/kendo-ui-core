@@ -26,7 +26,7 @@ namespace Kendo.Mvc.UI.Fluent
 
             settings.Commands.Add(command);
 
-            settings.Grid.Editing.Enabled = true;
+            settings.Grid.Editable.Enabled = true;
 
             return new GridToolBarCommandBuilder<T>(command);
         }
@@ -37,7 +37,7 @@ namespace Kendo.Mvc.UI.Fluent
 
             settings.Commands.Add(command);
 
-            settings.Grid.Editing.Enabled = true;
+            settings.Grid.Editable.Enabled = true;
 
             return new GridToolBarSaveCommandBuilder<T>(command);
         }

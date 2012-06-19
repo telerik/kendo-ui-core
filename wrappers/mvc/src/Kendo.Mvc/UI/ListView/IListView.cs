@@ -29,7 +29,7 @@
             get;            
         }
 
-        PagerSettings Pageable
+        PageableSettings Pageable
         {
             get;        
         }

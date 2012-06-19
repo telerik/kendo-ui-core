@@ -32,12 +32,12 @@ namespace Kendo.Mvc.UI
         {
             var state = new Dictionary<string, object>();
 
-            if (grid.Paging.Enabled)
+            if (grid.Pageable.Enabled)
             {
                 state[grid.Prefix(GridUrlParameters.Page)] = "<#=__page#>";
             }
 
-            if (grid.Sorting.Enabled)
+            if (grid.Sortable.Enabled)
             {
                 state[grid.Prefix(GridUrlParameters.Sort)] = "<#=__orderBy#>";
             }
@@ -47,7 +47,7 @@ namespace Kendo.Mvc.UI
                 state[grid.Prefix(GridUrlParameters.Group)] = "<#=__groupBy#>";
             }
 
-            if (grid.Filtering.Enabled)
+            if (grid.Filterable.Enabled)
             {
                 state[grid.Prefix(GridUrlParameters.Filter)] = "<#=__filter#>";
             }

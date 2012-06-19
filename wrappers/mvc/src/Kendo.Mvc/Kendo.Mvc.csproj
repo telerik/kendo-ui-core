@@ -466,10 +466,9 @@
     <Compile Include="UI\Grid\Html\IGridFormatableCellBuilder.cs" />
     <Compile Include="UI\Grid\Html\IGridPagerPageSizeSection.cs" />
     <Compile Include="UI\Grid\Html\IGridPagerPagingSectionsBuilder.cs" />
-    <Compile Include="UI\Grid\Settings\GroupingMessages.cs" />
-    <Compile Include="UI\Pager\DefaultPagerMessages.cs" />
-    <Compile Include="UI\Pager\Fluent\PagerMessagesBuilder.cs" />
-    <Compile Include="UI\Pager\PagerMessages.cs" />
+    <Compile Include="UI\Grid\Settings\GroupableMessages.cs" />
+    <Compile Include="UI\Pageable\Fluent\PageableMessagesBuilder.cs" />
+    <Compile Include="UI\Pageable\PageableMessages.cs" />
     <Compile Include="UI\Grid\Settings\GridColumnContextMenuSettings.cs" />
     <Compile Include="UI\Grid\Settings\GridNavigatableSettings.cs" />
     <Compile Include="UI\Grid\Html\GridButtonBuilder.cs" />
@@ -617,7 +616,7 @@
     <Compile Include="UI\Grid\Html\IGridToolBarBuilder.cs" />
     <Compile Include="UI\Grid\IGridDataKeyStore.cs" />
     <Compile Include="UI\Grid\IGridUrlBuilder.cs" />
-    <Compile Include="UI\Grid\Settings\GridReorderingSettings.cs" />
+    <Compile Include="UI\Grid\Settings\GridReorderableSettings.cs" />
     <Compile Include="UI\Grid\Settings\GridColumnSettings.cs" />
     <Compile Include="UI\Grid\Settings\GridCommandColumnSettings.cs" />
     <Compile Include="UI\Grid\ToolBar\GridToolBarSaveCommand.cs" />
@@ -627,7 +626,7 @@
     <Compile Include="UI\Grid\IGrid.cs" />
     <Compile Include="UI\Grid\IGridDetailTemplate.cs" />
     <Compile Include="UI\Grid\IGridDataKey.cs" />
-    <Compile Include="UI\Grid\Settings\GridResizingSettings.cs" />
+    <Compile Include="UI\Grid\Settings\GridResizableSettings.cs" />
     <Compile Include="UI\Grid\Commands\GridToolBarCustomCommand.cs" />
     <Compile Include="UI\Grid\Fluent\GridToolBarCustomCommandBuilder.cs" />
     <Compile Include="UI\Grid\Commands\GridToolBarCreateCommand.cs" />
@@ -779,7 +778,7 @@
     <Compile Include="UI\NumericTextBox\Html\NumericTextBoxHtmlBuilder.cs" />
     <Compile Include="UI\TextNode.cs" />
     <Compile Include="IUrlGenerator.cs" />
-    <Compile Include="UI\Grid\Settings\GridGroupingSettings.cs" />
+    <Compile Include="UI\Grid\Settings\GridGroupableSettings.cs" />
     <Compile Include="UI\Grid\ToolBar\GridToolBarSettings.cs" />
     <Compile Include="UI\Grid\SortDescriptor.cs" />
     <Compile Include="Infrastructure\Implementation\Sorting\SortDescriptorCollectionExpressionBuilder.cs" />
@@ -819,7 +818,7 @@
     <Compile Include="UI\Grid\GridDataKey.cs" />
     <Compile Include="UI\Grid\Fluent\GridDataKeyBuilder.cs" />
     <Compile Include="UI\Grid\GridState.cs" />
-    <Compile Include="UI\Grid\Settings\GridEditingSettings.cs" />
+    <Compile Include="UI\Grid\Settings\GridEditableSettings.cs" />
     <Compile Include="UI\Grid\Fluent\GridDataKeyFactory.cs" />
     <Compile Include="UI\Grid\GridViewDataContainer.cs" />
     <Compile Include="UI\INavigationHtmlBuilder.cs" />
@@ -857,14 +856,14 @@
     <Compile Include="UI\Grid\GridCommand.cs" />
     <Compile Include="UI\Grid\Fluent\GridActionColumnBuilder.cs" />
     <Compile Include="UI\Grid\Fluent\GridActionCommandFactory.cs" />
-    <Compile Include="UI\Grid\Settings\GridFilteringSettings.cs" />
+    <Compile Include="UI\Grid\Settings\GridFilterableSettings.cs" />
     <Compile Include="UI\Grid\Fluent\GridFilteringSettingsBuilder.cs" />
     <Compile Include="UI\Grid\GridRow.cs" />
-    <Compile Include="UI\Grid\Settings\GridScrollingSettings.cs" />
+    <Compile Include="UI\Grid\Settings\GridScrollableSettings.cs" />
     <Compile Include="UI\Grid\Fluent\GridScrollSettingsBuilder.cs" />
-    <Compile Include="UI\Grid\Settings\GridSelectionSettings.cs" />
+    <Compile Include="UI\Grid\Settings\GridSelectableSettings.cs" />
     <Compile Include="UI\Grid\Fluent\GridSelectionSettingsBuilder.cs" />
-    <Compile Include="UI\Grid\Settings\GridSortSettings.cs" />
+    <Compile Include="UI\Grid\Settings\GridSortableSettings.cs" />
     <Compile Include="UI\Grid\Fluent\GridSortSettingsBuilder.cs" />
     <Compile Include="UI\Grid\Columns\GridTemplateColumn.cs" />
     <Compile Include="UI\Grid\GridUrlParameters.cs" />
@@ -884,8 +883,8 @@
     <Compile Include="UI\Grid\Fluent\GridColumnFactory.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="UI\Pager\PagerSettings.cs" />
-    <Compile Include="UI\Pager\Fluent\PagerBuilder.cs" />
+    <Compile Include="UI\Pageable\PageableSettings.cs" />
+    <Compile Include="UI\Pageable\Fluent\PageableBuilder.cs" />
     <Compile Include="UI\Grid\GridUrlBuilder.cs" />
     <Compile Include="UI\Grid\IGridColumnContainer.cs" />
     <Compile Include="UI\IHtmlAttributesContainer.cs" />

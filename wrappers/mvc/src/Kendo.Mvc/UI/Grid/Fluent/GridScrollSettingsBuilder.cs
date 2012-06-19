@@ -3,17 +3,17 @@ namespace Kendo.Mvc.UI.Fluent
     using Infrastructure;
 
     /// <summary>
-    /// Defines the fluent interface for configuring <see cref="Grid{T}.Scrolling"/>
+    /// Defines the fluent interface for configuring <see cref="Grid{T}.Scrollable"/>
     /// </summary>
     public class GridScrollSettingsBuilder : IHideObjectMembers
     {
-        private readonly GridScrollingSettings settings;
+        private readonly GridScrollableSettings settings;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GridScrollSettingsBuilder"/> class.
         /// </summary>
         /// <param name="settings">The settings.</param>
-        public GridScrollSettingsBuilder(GridScrollingSettings settings)
+        public GridScrollSettingsBuilder(GridScrollableSettings settings)
         {
             this.settings = settings;
         }

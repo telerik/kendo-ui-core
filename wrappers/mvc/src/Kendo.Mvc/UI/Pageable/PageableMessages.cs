@@ -4,7 +4,7 @@ namespace Kendo.Mvc.UI
     using System.Collections.Generic;
     using Kendo.Mvc.Resources;
 
-    public class PagerMessages : JsonObject
+    public class PageableMessages : JsonObject
     { 
         public const string DefaultDisplay = "{0} - {1} of {2} items";
 
@@ -26,7 +26,7 @@ namespace Kendo.Mvc.UI
 
         public const string DefaultRefresh = "Refresh";
 
-        public PagerMessages()
+        public PageableMessages()
         {
             Display = Messages.Pager_Display;
             Empty = Messages.Pager_Empty;

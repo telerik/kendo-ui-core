@@ -171,7 +171,7 @@ namespace Kendo.Mvc.UI.Fluent
         public GridBuilder<T> Resizable(Action<GridResizingSettingsBuilder> configurator)
         {
 
-            configurator(new GridResizingSettingsBuilder(Component.Resizing));
+            configurator(new GridResizingSettingsBuilder(Component.Resizable));
 
             return this;
         }
@@ -190,7 +190,7 @@ namespace Kendo.Mvc.UI.Fluent
         public GridBuilder<T> Reorderable(Action<GridReorderingSettingsBuilder> configurator)
         {
 
-            configurator(new GridReorderingSettingsBuilder(Component.Reordering));
+            configurator(new GridReorderingSettingsBuilder(Component.Reorderable));
 
             return this;
         }
@@ -210,7 +210,7 @@ namespace Kendo.Mvc.UI.Fluent
         public GridBuilder<T> Editable(Action<GridEditingSettingsBuilder<T>> configurator)
         {
 
-            configurator(new GridEditingSettingsBuilder<T>(Component.Editing));
+            configurator(new GridEditingSettingsBuilder<T>(Component.Editable));
 
             return this;
         }
@@ -426,7 +426,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public GridBuilder<T> Sortable()
         {
-            Component.Sorting.Enabled = true;
+            Component.Sortable.Enabled = true;
 
             return this;
         }
@@ -455,9 +455,9 @@ namespace Kendo.Mvc.UI.Fluent
         public GridBuilder<T> Sortable(Action<GridSortSettingsBuilder<T>> configurator)
         {
 
-            Component.Sorting.Enabled = true;
+            Component.Sortable.Enabled = true;
 
-            configurator(new GridSortSettingsBuilder<T>(Component.Sorting));
+            configurator(new GridSortSettingsBuilder<T>(Component.Sortable));
 
             return this;
         }
@@ -475,7 +475,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public GridBuilder<T> Selectable()
         {
-            Component.Selection.Enabled = true;
+            Component.Selectable.Enabled = true;
 
             return this;
         }
@@ -497,7 +497,7 @@ namespace Kendo.Mvc.UI.Fluent
 
             Selectable();
 
-            selectionAction(new GridSelectionSettingsBuilder(Component.Selection));
+            selectionAction(new GridSelectionSettingsBuilder(Component.Selectable));
 
             return this;
         }
@@ -562,11 +562,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public GridBuilder<T> Pageable(Action<PagerBuilder> pagerAction)
+        public GridBuilder<T> Pageable(Action<PageableBuilder> pagerAction)
         {
-            Component.Paging.Enabled = true;            
+            Component.Pageable.Enabled = true;            
 
-            pagerAction(new PagerBuilder(Component.Paging));
+            pagerAction(new PageableBuilder(Component.Pageable));
 
             return this;
         }        
@@ -593,7 +593,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public GridBuilder<T> Filterable()
         {
-            Component.Filtering.Enabled = true;
+            Component.Filterable.Enabled = true;
             return this;
         }
 
@@ -621,9 +621,9 @@ namespace Kendo.Mvc.UI.Fluent
         public GridBuilder<T> Filterable(Action<GridFilteringSettingsBuilder<T>> configurator)
         {
 
-            Component.Filtering.Enabled = true;
+            Component.Filterable.Enabled = true;
 
-            configurator(new GridFilteringSettingsBuilder<T>(Component.Filtering));
+            configurator(new GridFilteringSettingsBuilder<T>(Component.Filterable));
 
             return this;
         }
@@ -650,7 +650,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public GridBuilder<T> Scrollable()
         {
-            Component.Scrolling.Enabled = true;
+            Component.Scrollable.Enabled = true;
 
             return this;
         }
@@ -681,7 +681,7 @@ namespace Kendo.Mvc.UI.Fluent
 
             Scrollable();
 
-            configurator(new GridScrollSettingsBuilder(Component.Scrolling));
+            configurator(new GridScrollSettingsBuilder(Component.Scrollable));
 
             return this;
         }

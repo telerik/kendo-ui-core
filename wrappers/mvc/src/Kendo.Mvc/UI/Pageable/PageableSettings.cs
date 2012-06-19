@@ -4,11 +4,11 @@ using System.Linq;
 
 namespace Kendo.Mvc.UI
 {
-    public class PagerSettings : JsonObject
+    public class PageableSettings : JsonObject
     {
-        public PagerSettings()
+        public PageableSettings()
         {
-            Messages = new PagerMessages();
+            Messages = new PageableMessages();
             Numeric = true;
             Info = true;
             PreviousNext = true;
@@ -16,7 +16,7 @@ namespace Kendo.Mvc.UI
 
         public bool AutoBind { get; set; }
 
-        public PagerMessages Messages { get; private set; }
+        public PageableMessages Messages { get; private set; }
 
         public bool Numeric { get; set; }
 

@@ -42,14 +42,14 @@ namespace Kendo.Mvc.UI
             Columns = new List<GridColumnBase<T>>();
             DataKeys = new List<IDataKey>();
 
-            Paging = new PagerSettings();
-            Sorting = new GridSortSettings();
-            Scrolling = new GridScrollingSettings();
+            Pageable = new PageableSettings();
+            Sortable = new GridSortableSettings();
+            Scrollable = new GridScrollableSettings();
             Navigatable = new GridNavigatableSettings(this);
             ColumnContextMenu = new GridColumnContextMenuSettings(this);
-            Filtering = new GridFilteringSettings();
+            Filterable = new GridFilterableSettings();
 
-            Editing = new GridEditingSettings<T>(this)
+            Editable = new GridEditableSettings<T>(this)
             { 
                 PopUp = new Window(viewContext, Initializer)
                 {
@@ -58,16 +58,16 @@ namespace Kendo.Mvc.UI
                 }                
             };
 
-            Grouping = new GridGroupingSettings();
-            Resizing = new GridResizingSettings();
-            Reordering = new GridReorderingSettings();
+            Grouping = new GridGroupableSettings();
+            Resizable = new GridResizableSettings();
+            Reorderable = new GridReorderableSettings();
 
             TableHtmlAttributes = new RouteValueDictionary();
 
             Footer = true;
             IsEmpty = true;
 
-            Selection = new GridSelectionSettings();
+            Selectable = new GridSelectableSettings();
 
             ToolBar = new GridToolBarSettings<T>(this);            
             NoRecordsTemplate = new HtmlTemplate();
@@ -107,13 +107,13 @@ namespace Kendo.Mvc.UI
             private set;
         }
 
-        public GridResizingSettings Resizing
+        public GridResizableSettings Resizable
         {
             get;
             private set;
         }
 
-        public GridReorderingSettings Reordering
+        public GridReorderableSettings Reorderable
         {
             get;
             private set;
@@ -131,13 +131,13 @@ namespace Kendo.Mvc.UI
             private set;
         }
 
-        public GridGroupingSettings Grouping
+        public GridGroupableSettings Grouping
         {
             get;
             private set;
         }
 
-        public GridEditingSettings<T> Editing
+        public GridEditableSettings<T> Editable
         {
             get;
             private set;
@@ -146,7 +146,7 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Gets the selection configuration
         /// </summary>
-        public GridSelectionSettings Selection
+        public GridSelectableSettings Selectable
         {
             get;
             private set;
@@ -335,7 +335,7 @@ namespace Kendo.Mvc.UI
         //TODO: Implement command button types
         public object EditButton(T dataItem/*, GridButtonType buttonType*/, object htmlAttributes, object imageHtmlAttributes)
         {
-            Editing.Enabled = true;
+            Editable.Enabled = true;
 
             return Button<GridEditActionCommand>(dataItem/*, buttonType*/, htmlAttributes, imageHtmlAttributes);
         }
@@ -361,7 +361,7 @@ namespace Kendo.Mvc.UI
         //TODO: Implement command button types
         public object DestroyButton(T dataItem/*, GridButtonType buttonType*/, object htmlAttributes, object imageHtmlAttributes)
         {
-            Editing.Enabled = true;
+            Editable.Enabled = true;
             return Button<GridDestroyActionCommand>(dataItem/*, buttonType*/, htmlAttributes, imageHtmlAttributes);
         }
 
@@ -383,7 +383,7 @@ namespace Kendo.Mvc.UI
 
         public object CreateButton(/*GridButtonType buttonType,*/ object htmlAttributes, object imageHtmlAttributes)
         {
-            Editing.Enabled = true;
+            Editable.Enabled = true;
             InitializeEditors();
             return Button<GridToolBarCreateCommand<T>>(null/*, buttonType*/, htmlAttributes, imageHtmlAttributes);
         }
@@ -405,7 +405,7 @@ namespace Kendo.Mvc.UI
 
         public object SaveButton(/*GridButtonType buttonType,*/ object htmlAttributes, object imageHtmlAttributes)
         {
-            Editing.Enabled = true;
+            Editable.Enabled = true;
             InitializeEditors();
             return Button<GridToolBarSaveCommand<T>>(null/*, buttonType*/, htmlAttributes, imageHtmlAttributes);
         }
@@ -457,7 +457,7 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Gets the filtering configuration.
         /// </summary>
-        public GridFilteringSettings Filtering
+        public GridFilterableSettings Filterable
         {
             get;
             private set;
@@ -466,7 +466,7 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Gets the scrolling configuration.
         /// </summary>
-        public GridScrollingSettings Scrolling
+        public GridScrollableSettings Scrollable
         {
             get;
             private set;
@@ -509,7 +509,7 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Gets the paging configuration.
         /// </summary>
-        public PagerSettings Paging
+        public PageableSettings Pageable
         {
             get;
             internal set;
@@ -547,7 +547,7 @@ namespace Kendo.Mvc.UI
         {
             get
             {
-                if (!Paging.Enabled)
+                if (!Pageable.Enabled)
                 {
                     return 0;
                 }
@@ -568,7 +568,7 @@ namespace Kendo.Mvc.UI
         /// Gets the sorting configuration.
         /// </summary>
         /// <value>The sorting.</value>
-        public GridSortSettings Sorting
+        public GridSortableSettings Sortable
         {
             get;
             internal set;
@@ -645,56 +645,56 @@ namespace Kendo.Mvc.UI
                 options["groupable"] = Grouping.ToJson();
             }
 
-            if (Paging.Enabled)
+            if (Pageable.Enabled)
             {
-                Paging.AutoBind = autoBind;
+                Pageable.AutoBind = autoBind;
 
-                options["pageable"] = Paging.ToJson();
+                options["pageable"] = Pageable.ToJson();
             }
 
-            if (Sorting.Enabled)
+            if (Sortable.Enabled)
             {
-                var sorting = Sorting.ToJson();
+                var sorting = Sortable.ToJson();
                 options["sortable"] = sorting.Any() ? (object)sorting : true;
             }
 
-            if (Selection.Enabled)
+            if (Selectable.Enabled)
             {
-                options["selectable"] = String.Format("{0}, {1}", Selection.Mode, Selection.Type);
+                options["selectable"] = String.Format("{0}, {1}", Selectable.Mode, Selectable.Type);
             }
 
-            if (Filtering.Enabled)
+            if (Filterable.Enabled)
             {
-                var filtering = Filtering.ToJson();
+                var filtering = Filterable.ToJson();
                 options["filterable"] = filtering.Any() ? (object)filtering : true;
             }
 
-            if (Resizing.Enabled)
+            if (Resizable.Enabled)
             {
                 options["resizable"] = true;
             }
 
-            if (Reordering.Enabled)
+            if (Reorderable.Enabled)
             {
                 options["reorderable"] = true;
             }
 
-            if (!Scrolling.Enabled)
+            if (!Scrollable.Enabled)
             {
                 options["scrollable"] = false;
             }
             else
             {
-                var scrolling = Scrolling.ToJson();
+                var scrolling = Scrollable.ToJson();
                 if (scrolling.Any())
                 {
                     options["scrollable"] = scrolling;
                 }
             }
 
-            if (Editing.Enabled && IsClientBinding)
+            if (Editable.Enabled && IsClientBinding)
             {
-                options["editable"] = Editing.ToJson();
+                options["editable"] = Editable.ToJson();
             }
 
             if (ToolBar.Enabled)
@@ -780,7 +780,7 @@ namespace Kendo.Mvc.UI
                     FormId = Name + "form"
                 };
 
-                if (Editing.Enabled && IsClientBinding)
+                if (Editable.Enabled && IsClientBinding)
                 {
                     InitializeEditors();
                 }
@@ -792,7 +792,7 @@ namespace Kendo.Mvc.UI
                     HtmlAttributes["id"] = Id;
                 }
 
-                var builder = htmlBuilderFactory.CreateBuilder(Scrolling.Enabled);
+                var builder = htmlBuilderFactory.CreateBuilder(Scrollable.Enabled);
 
                 ProcessDataSource();
 
@@ -802,7 +802,7 @@ namespace Kendo.Mvc.UI
 
                 var container = builder.CreateGrid(HtmlAttributes, functionalData, renderingData);
 
-                if (Editing.Mode == GridEditMode.PopUp && (CurrentItemMode == GridItemMode.Insert || CurrentItemMode == GridItemMode.Edit))
+                if (Editable.Mode == GridEditMode.PopUp && (CurrentItemMode == GridItemMode.Insert || CurrentItemMode == GridItemMode.Edit))
                 {
                     AppendPopupEditor(container, renderingData);
                 }
@@ -829,7 +829,7 @@ namespace Kendo.Mvc.UI
         {
             return new GridFunctionalData
             {
-                Pager = Paging.Enabled,
+                Pager = Pageable.Enabled,
                 ToolBar = ToolBar.Enabled,
                 GroupHeader = Grouping.Enabled && Grouping.Visible,
                 PagerData = CreatePagerData(),
@@ -869,19 +869,19 @@ namespace Kendo.Mvc.UI
                 Total = DataSource.Total,
                 Colspan = Colspan,
                 PageSize = DataSource.PageSize,
-                Numeric = Paging.Numeric,
-                Input = Paging.Input,
-                Info = Paging.Info,
-                PreviousNext = Paging.PreviousNext,
-                Refresh = Paging.Refresh,
-                PageSizes = Paging.PageSizes,
-                Messages = Paging.Messages
+                Numeric = Pageable.Numeric,
+                Input = Pageable.Input,
+                Info = Pageable.Info,
+                PreviousNext = Pageable.PreviousNext,
+                Refresh = Pageable.Refresh,
+                PageSizes = Pageable.PageSizes,
+                Messages = Pageable.Messages
             };
         }
 
         private void AppendPopupEditor(IHtmlNode container, GridRenderingData renderingData)
         {
-            var popup = Editing.PopUp;
+            var popup = Editable.PopUp;
             var cancelUrl = renderingData.UrlBuilder.CancelUrl(null);
 
             new WindowBuilder(popup)
@@ -913,7 +913,7 @@ namespace Kendo.Mvc.UI
 
         private void ProcessDataSource()
         {
-            if (Paging.Enabled && DataSource.PageSize == 0)
+            if (Pageable.Enabled && DataSource.PageSize == 0)
             {
                 DataSource.PageSize = 10;
             }
@@ -955,13 +955,13 @@ namespace Kendo.Mvc.UI
                 Columns = VisibleColumns.Cast<IGridColumn>(),
                 GroupMembers = DataSource.Groups.Select(g => g.Member),
                 Mode = CurrentItemMode,
-                EditMode = Editing.Mode,
+                EditMode = Editable.Mode,
                 HasDetailTemplate = HasDetailTemplate,
                 //TODO: Implement hidden columns
                 Colspan = Colspan /*- Columns.Count(column => column.Hidden)*/,
                 DetailTemplate = MapDetailTemplate(HasDetailTemplate ? DetailTemplate : null),
                 NoRecordsTemplate = FormatNoRecordsTemplate(),
-                ScrollingHeight = Scrolling.Height,
+                ScrollingHeight = Scrollable.Height,
                 //EditFormHtmlAttributes = Editing.FormHtmlAttributes,
                 ShowFooter = Footer && VisibleColumns.Any(c => c.FooterTemplate.HasValue() || c.ClientFooterTemplate.HasValue()),
                 AggregateResults = DataSource.AggregateResults ?? new List<AggregateResult>(),
@@ -969,11 +969,11 @@ namespace Kendo.Mvc.UI
                 GroupsCount = DataSource.Groups.Count,
                 ShowGroupFooter = Aggregates.Any() && VisibleColumns.OfType<IGridBoundColumn>().Any(c => c.GroupFooterTemplate.HasValue()),
                 PopUpContainer = new HtmlFragment(),
-                CreateNewDataItem = () => Editing.DefaultDataItem(),
+                CreateNewDataItem = () => Editable.DefaultDataItem(),
                 //TODO: Implement insert row position
                 //InsertRowPosition = Editing.InsertRowPosition,
-                EditTemplateName = Editing.TemplateName,
-                AdditionalViewData = Editing.AdditionalViewData,
+                EditTemplateName = Editable.TemplateName,
+                AdditionalViewData = Editable.AdditionalViewData,
                 FormId = ViewContext.FormContext.FormId,
                 Callback = RowActionCallback
             };
@@ -1117,7 +1117,7 @@ namespace Kendo.Mvc.UI
         {
             get
             {
-                return (CurrentItemMode == GridItemMode.Insert || CurrentItemMode == GridItemMode.Edit || (Editing.Enabled && IsClientBinding))
+                return (CurrentItemMode == GridItemMode.Insert || CurrentItemMode == GridItemMode.Edit || (Editable.Enabled && IsClientBinding))
                        && !ViewContext.UnobtrusiveJavaScriptEnabled
                     ;
             }
@@ -1145,7 +1145,7 @@ namespace Kendo.Mvc.UI
             
             this.ThrowIfClassIsPresent("k-grid-rtl", TextResource.Rtl);
 
-            if (!IsClientBinding && Scrolling.Enabled && Scrolling.Virtual)
+            if (!IsClientBinding && Scrollable.Enabled && Scrollable.Virtual)
             {
                 throw new NotSupportedException(TextResource.CannotUseVirtualScrollWithServerBinding);
             }
@@ -1163,12 +1163,12 @@ namespace Kendo.Mvc.UI
                 }
             }
 
-            if (!DataKeys.Any() && (Editing.Enabled || (Selection.Enabled && !IsClientBinding)))
+            if (!DataKeys.Any() && (Editable.Enabled || (Selectable.Enabled && !IsClientBinding)))
             {
                 throw new NotSupportedException(TextResource.DataKeysEmpty);
             }          
 
-            if (Editing.Enabled)
+            if (Editable.Enabled)
             {
                 if (HasCommandOfType<GridEditActionCommand>())
                 {
@@ -1180,7 +1180,7 @@ namespace Kendo.Mvc.UI
 
                 if (HasCommandOfType<GridDestroyActionCommand>())
                 {
-                    if (!DataSource.Transport.Destroy.HasValue() && Editing.Mode != GridEditMode.InCell)
+                    if (!DataSource.Transport.Destroy.HasValue() && Editable.Mode != GridEditMode.InCell)
                     {
                         throw new NotSupportedException(TextResource.DeleteCommandRequiresDelete);
                     }
@@ -1188,7 +1188,7 @@ namespace Kendo.Mvc.UI
 
                 if (HasCommandOfType<GridToolBarCreateCommand<T>>())
                 {
-                    if (!DataSource.Transport.Create.HasValue() && Editing.Mode != GridEditMode.InCell)
+                    if (!DataSource.Transport.Create.HasValue() && Editable.Mode != GridEditMode.InCell)
                     {
                         throw new NotSupportedException(TextResource.InsertCommandRequiresInsert);
                     }
@@ -1196,7 +1196,7 @@ namespace Kendo.Mvc.UI
 
                 if (HasCommandOfType<GridToolBarSaveCommand<T>>())
                 {
-                    if (Editing.Mode != GridEditMode.InCell)
+                    if (Editable.Mode != GridEditMode.InCell)
                     {
                         throw new NotSupportedException(TextResource.BatchUpdatesRequireInCellMode);
                     }
@@ -1207,7 +1207,7 @@ namespace Kendo.Mvc.UI
                     }
                 }                
 
-                if (Editing.Mode == GridEditMode.InCell) 
+                if (Editable.Mode == GridEditMode.InCell) 
                 {
                     if (!IsClientBinding)
                     {
@@ -1220,14 +1220,14 @@ namespace Kendo.Mvc.UI
                     }
                 }
 
-                if(typeof(T) == typeof(System.Data.DataRowView) && Editing.Mode == GridEditMode.InLine 
+                if(typeof(T) == typeof(System.Data.DataRowView) && Editable.Mode == GridEditMode.InLine 
                     && Columns.OfType<IGridBoundColumn>().Where(c => c.EditorTemplateName.HasValue()).Any())
                 {
                     throw new NotSupportedException(TextResource.DataTableInLineEditingWithCustomEditorTemplates);
                 }
 
-                if (typeof(T) == typeof(System.Data.DataRowView) && Editing.Mode == GridEditMode.PopUp
-                    && !Editing.TemplateName.HasValue())
+                if (typeof(T) == typeof(System.Data.DataRowView) && Editable.Mode == GridEditMode.PopUp
+                    && !Editable.TemplateName.HasValue())
                 {
                     throw new NotSupportedException(TextResource.DataTablePopUpTemplate);
                 }
@@ -1246,15 +1246,15 @@ namespace Kendo.Mvc.UI
 
             ViewContext.HttpContext.Items["$SelfInitialize$"] = true;            
             
-            var dataItem = Editing.DefaultDataItem();
+            var dataItem = Editable.DefaultDataItem();
 
             var htmlHelper = new GridHtmlHelper<T>(ViewContext, DataKeyStore);
 
-            if (Editing.Mode != GridEditMode.InLine && Editing.Mode != GridEditMode.InCell)
+            if (Editable.Mode != GridEditMode.InLine && Editable.Mode != GridEditMode.InCell)
             {
                 var container = new HtmlElement("div").AddClass(UIPrimitives.Grid.InFormContainer);
 
-                htmlHelper.EditorForModel(dataItem, Editing.TemplateName, Columns.OfType<IGridForeignKeyColumn>().Select(c => c.SerializeSelectList), Editing.AdditionalViewData).AppendTo(container);
+                htmlHelper.EditorForModel(dataItem, Editable.TemplateName, Columns.OfType<IGridForeignKeyColumn>().Select(c => c.SerializeSelectList), Editable.AdditionalViewData).AppendTo(container);
 
                 EditorHtml = container.InnerHtml;
             }

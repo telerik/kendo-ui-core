@@ -23,7 +23,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
         [Fact]
         public void Should_throw_when_editing_enabled_but_no_data_keys_set()
         {
-            grid.Editing.Enabled = true;
+            grid.Editable.Enabled = true;
 
             Assert.Throws<NotSupportedException>(() => grid.VerifySettings());
         }
@@ -31,7 +31,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
         [Fact]
         public void Should_throw_when_selection_enabled_but_no_data_keys_set()
         {
-            grid.Selection.Enabled = true;
+            grid.Selectable.Enabled = true;
 
             Assert.Throws<NotSupportedException>(() => grid.VerifySettings());
         }
@@ -119,7 +119,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
 
         private void ConfigureEditing(Action<Grid<Customer>> configurator)
         {
-            grid.Editing.Enabled = true;
+            grid.Editable.Enabled = true;
             grid.DataKeys.Add(new GridDataKey<Customer, int>(c => c.Id));
 
             configurator(grid);
@@ -189,8 +189,8 @@ namespace Kendo.Mvc.UI.Tests.Grid
         {
             grid.DataSource.Type = DataSourceType.Server;
 
-            grid.Scrolling.Enabled = true;
-            grid.Scrolling.Virtual = true;
+            grid.Scrollable.Enabled = true;
+            grid.Scrollable.Virtual = true;
             Assert.Throws<NotSupportedException>(() => grid.VerifySettings());
         }
 
@@ -218,10 +218,10 @@ namespace Kendo.Mvc.UI.Tests.Grid
         {
             var dataRowViewGrid = GridTestHelper.CreateGrid<System.Data.DataRowView>();
 
-            dataRowViewGrid.Editing.Mode = GridEditMode.InLine;
+            dataRowViewGrid.Editable.Mode = GridEditMode.InLine;
             dataRowViewGrid.Columns.Add(new GridBoundColumn<System.Data.DataRowView, object>(dataRowViewGrid, c => c) { EditorTemplateName = "sometemplate" });
 
-            dataRowViewGrid.Editing.Enabled = true;
+            dataRowViewGrid.Editable.Enabled = true;
             Assert.Throws<NotSupportedException>(() => dataRowViewGrid.VerifySettings());
         }
 
@@ -230,8 +230,8 @@ namespace Kendo.Mvc.UI.Tests.Grid
         {
             var grid = GridTestHelper.CreateGrid<Customer>();
             grid.DataKeys.Add(new GridDataKey<Customer, int>(c => c.Id));
-            grid.Editing.Enabled = true;
-            grid.Editing.Mode = GridEditMode.InCell;
+            grid.Editable.Enabled = true;
+            grid.Editable.Mode = GridEditMode.InCell;
             Assert.Throws<NotSupportedException>(() => grid.VerifySettings());
         }
 
@@ -241,8 +241,8 @@ namespace Kendo.Mvc.UI.Tests.Grid
             var grid = GridTestHelper.CreateGrid<Customer>();
             grid.DataKeys.Add(new GridDataKey<Customer, int>(c => c.Id));
             grid.DataSource.Type = DataSourceType.Ajax;
-            grid.Editing.Enabled = true;
-            grid.Editing.Mode = GridEditMode.InCell;
+            grid.Editable.Enabled = true;
+            grid.Editable.Mode = GridEditMode.InCell;
             grid.ClientRowTemplate = "foo";
             Assert.Throws<NotSupportedException>(() => grid.VerifySettings());
         }
@@ -259,8 +259,8 @@ namespace Kendo.Mvc.UI.Tests.Grid
         [Fact]
         public void Should_not_throw_if_in_cell_mode_and_add_command_is_defined_and_insert_setting_is_not_specified()
         {
-            grid.Editing.Enabled = true;
-            grid.Editing.Mode = GridEditMode.InCell;
+            grid.Editable.Enabled = true;
+            grid.Editable.Mode = GridEditMode.InCell;
             grid.DataSource.Type = DataSourceType.Ajax;
             grid.DataKeys.Add(new GridDataKey<Customer, int>(c => c.Id));
             grid.ToolBar.Commands.Add(new GridToolBarCreateCommand<Customer>());
@@ -271,8 +271,8 @@ namespace Kendo.Mvc.UI.Tests.Grid
         [Fact]
         public void Should_not_throw_if_in_cell_mode_and_delete_command_is_defined_and_delete_setting_is_not_specified()
         {
-            grid.Editing.Enabled = true;
-            grid.Editing.Mode = GridEditMode.InCell;
+            grid.Editable.Enabled = true;
+            grid.Editable.Mode = GridEditMode.InCell;
             grid.DataSource.Type = DataSourceType.Ajax;
             grid.DataKeys.Add(new GridDataKey<Customer, int>(c => c.Id));
             grid.Columns.Add(new GridActionColumn<Customer>(grid)

@@ -23,12 +23,12 @@ namespace Kendo.Mvc.UI
         }
     }
 
-    public class GridEditingSettings<T> : JsonObject, IGridEditingSettings
+    public class GridEditableSettings<T> : JsonObject, IGridEditingSettings
         where T : class
     {
         private readonly IGrid grid;
 
-        public GridEditingSettings(IGrid grid)
+        public GridEditableSettings(IGrid grid)
         {
             this.grid = grid;
 

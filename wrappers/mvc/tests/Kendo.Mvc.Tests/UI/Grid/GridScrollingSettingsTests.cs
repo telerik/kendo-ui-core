@@ -8,10 +8,10 @@ namespace Kendo.Mvc.UI.Tests
         public void Should_serialize_virtual_if_set()
         {
             var grid = GridTestHelper.CreateGrid<Customer>();
-            grid.Scrolling.Enabled = true;
-            grid.Scrolling.Virtual = true;
+            grid.Scrollable.Enabled = true;
+            grid.Scrollable.Virtual = true;
 
-            var result = grid.Scrolling.ToJson();
+            var result = grid.Scrollable.ToJson();
             result.ContainsKey("virtual").ShouldBeTrue();
         }
 
@@ -19,10 +19,10 @@ namespace Kendo.Mvc.UI.Tests
         public void Should__not_serialize_virtual_if_not_set()
         {
             var grid = GridTestHelper.CreateGrid<Customer>();
-            grid.Scrolling.Enabled = true;
-            grid.Scrolling.Virtual = false;
+            grid.Scrollable.Enabled = true;
+            grid.Scrollable.Virtual = false;
 
-            var result = grid.Scrolling.ToJson();
+            var result = grid.Scrollable.ToJson();
             result.ContainsKey("virtual").ShouldBeFalse();
         }   
     }

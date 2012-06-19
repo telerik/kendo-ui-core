@@ -104,7 +104,7 @@ namespace Kendo.Mvc.UI
                 {
                     if (!(command is GridSelectActionCommand))
                     {
-                        grid.Editing.Enabled = true;
+                        grid.Editable.Enabled = true;
                     }
                     column.Commands.Add(command);
                 }

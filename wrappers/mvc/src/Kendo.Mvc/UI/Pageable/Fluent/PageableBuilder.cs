@@ -3,17 +3,17 @@ using System;
 namespace Kendo.Mvc.UI.Fluent
 {
     /// <summary>
-    /// Defines the fluent interface for configuring <see cref="Grid{T}.Paging"/>
+    /// Defines the fluent interface for configuring <see cref="Grid{T}.Pageable"/>
     /// </summary>
-    public class PagerBuilder : IHideObjectMembers
+    public class PageableBuilder : IHideObjectMembers
     {
-        private readonly PagerSettings pager;
+        private readonly PageableSettings pager;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PagerBuilder"/> class.
+        /// Initializes a new instance of the <see cref="PageableBuilder"/> class.
         /// </summary>
         /// <param name="pager">The pager.</param>
-        public PagerBuilder(PagerSettings pager)
+        public PageableBuilder(PageableSettings pager)
         {
             this.pager = pager;
         }
@@ -22,7 +22,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Sets the page sizes of the grid.
         /// </summary>
         /// <param name="pageSizes">The values shown in the pageSize dropdown</param>
-        public PagerBuilder PageSizes(int[] pageSizes)
+        public PageableBuilder PageSizes(int[] pageSizes)
         {
             pager.PageSizes = pageSizes;
 
@@ -33,7 +33,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Sets the page sizes of the grid.
         /// </summary>
         /// <param name="enabled">A value indicating whether to enable the page sizes dropdown</param>
-        public PagerBuilder PageSizes(bool enabled)
+        public PageableBuilder PageSizes(bool enabled)
         {
             if (enabled)
             {
@@ -47,42 +47,42 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
-        public PagerBuilder Numeric(bool enabled)
+        public PageableBuilder Numeric(bool enabled)
         {
             pager.Numeric = enabled;
 
             return this;
         }
 
-        public PagerBuilder Info(bool enabled)
+        public PageableBuilder Info(bool enabled)
         {
             pager.Info = enabled;
 
             return this;
         }
 
-        public PagerBuilder Input(bool enabled)
+        public PageableBuilder Input(bool enabled)
         {
             pager.Input = enabled;
 
             return this;
         }
 
-        public PagerBuilder Refresh(bool enabled)
+        public PageableBuilder Refresh(bool enabled)
         {
             pager.Refresh = enabled;
 
             return this;
         }
 
-        public PagerBuilder Messages(Action<PagerMessagesBuilder> configurator)
+        public PageableBuilder Messages(Action<PageableMessagesBuilder> configurator)
         {
-            configurator(new PagerMessagesBuilder(pager.Messages));
+            configurator(new PageableMessagesBuilder(pager.Messages));
 
             return this;
         }
 
-        public PagerBuilder PreviousNext(bool enabled)
+        public PageableBuilder PreviousNext(bool enabled)
         {
             pager.PreviousNext = enabled;
 
@@ -102,7 +102,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <remarks>
         /// The Enabled method is useful when you need to enable paging based on certain conditions.
         /// </remarks>
-        public PagerBuilder Enabled(bool value)
+        public PageableBuilder Enabled(bool value)
         {
             pager.Enabled = value;
 

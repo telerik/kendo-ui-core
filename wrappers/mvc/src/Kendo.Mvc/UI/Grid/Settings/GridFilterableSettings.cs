@@ -1,10 +1,10 @@
 namespace Kendo.Mvc.UI
 {
-    public class GridFilteringSettings : JsonObject
+    public class GridFilterableSettings : JsonObject
     {
-        public GridFilteringSettings()
+        public GridFilterableSettings()
         {
-            ShowOrOption = true;
+            Extra = true;
         }
 
         public bool Enabled
@@ -13,7 +13,7 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        public bool ShowOrOption
+        public bool Extra
         {
             get;
             set;
@@ -21,7 +21,7 @@ namespace Kendo.Mvc.UI
 
         protected override void Serialize(System.Collections.Generic.IDictionary<string, object> json)
         {
-            if (!ShowOrOption)
+            if (!Extra)
             {
                 json["extra"] = false;
             }

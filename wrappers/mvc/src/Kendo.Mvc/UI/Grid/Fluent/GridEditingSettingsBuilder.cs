@@ -11,13 +11,13 @@ namespace Kendo.Mvc.UI.Fluent
     public class GridEditingSettingsBuilder<T> : IHideObjectMembers
         where T : class
     {
-        private readonly GridEditingSettings<T> settings;
+        private readonly GridEditableSettings<T> settings;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GridEditingSettingsBuilder"/> class.
         /// </summary>
         /// <param name="settings">The settings.</param>
-        public GridEditingSettingsBuilder(GridEditingSettings<T> settings)
+        public GridEditingSettingsBuilder(GridEditableSettings<T> settings)
         {
             this.settings = settings;
             this.settings.Enabled = true;

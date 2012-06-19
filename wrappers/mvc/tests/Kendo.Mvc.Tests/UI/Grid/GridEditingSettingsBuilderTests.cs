@@ -8,12 +8,12 @@ namespace Kendo.Mvc.UI.Fluent.Tests
 
     public class GridEditingSettingsBuilderTests
     {
-        private readonly GridEditingSettings<Customer> settings;
+        private readonly GridEditableSettings<Customer> settings;
         private readonly GridEditingSettingsBuilder<Customer> builder;
 
         public GridEditingSettingsBuilderTests()
         {
-            settings = new GridEditingSettings<Customer>(new Mock<IGrid>().Object);
+            settings = new GridEditableSettings<Customer>(new Mock<IGrid>().Object);
             builder = new GridEditingSettingsBuilder<Customer>(settings);
         }
 

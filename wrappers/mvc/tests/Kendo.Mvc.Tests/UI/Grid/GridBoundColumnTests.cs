@@ -75,7 +75,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
         public void Should_return_sortable_header_builder_if_sortable()
         {
             var grid = GridTestHelper.CreateGrid<Customer>();
-            grid.Sorting.Enabled = true;
+            grid.Sortable.Enabled = true;
             var column = new GridBoundColumn<Customer, int>(grid, c => c.Id);
             column.Settings.Sortable = true;
             column.CreateHeaderBuilder().ShouldBeType<GridSortableHeaderCellBuilder>();
@@ -85,7 +85,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
         public void Should_return_decorated_header_builder_if_filtarable()
         {
             var grid = GridTestHelper.CreateGrid<Customer>();
-            grid.Filtering.Enabled = true;
+            grid.Filterable.Enabled = true;
             var column = new GridBoundColumn<Customer, int>(grid, c => c.Id);
             column.Settings.Filterable = true;
 

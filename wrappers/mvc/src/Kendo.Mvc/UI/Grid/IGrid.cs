@@ -17,17 +17,17 @@ namespace Kendo.Mvc.UI
 
         string Prefix(string value);
 
-        PagerSettings Paging
+        PageableSettings Pageable
         {
             get;
         }
 
-        GridSortSettings Sorting
+        GridSortableSettings Sortable
         {
             get;
         }
 
-        GridScrollingSettings Scrolling
+        GridScrollableSettings Scrollable
         {
             get;
         }
@@ -47,12 +47,12 @@ namespace Kendo.Mvc.UI
             get;
         }
 
-        GridFilteringSettings Filtering
+        GridFilterableSettings Filterable
         {
             get;
         }
 
-        GridGroupingSettings Grouping
+        GridGroupableSettings Grouping
         {
             get;
         }

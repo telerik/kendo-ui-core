@@ -5,17 +5,17 @@ namespace Kendo.Mvc.UI.Fluent
     using Infrastructure;
 
     /// <summary>
-    /// Defines the fluent interface for configuring the <see cref="Grid{T}.Sorting"/>.
+    /// Defines the fluent interface for configuring the <see cref="Grid{T}.Sortable"/>.
     /// </summary>
     public class GridSortSettingsBuilder<TModel> : IHideObjectMembers where TModel : class
     {
-        private readonly GridSortSettings settings;
+        private readonly GridSortableSettings settings;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GridSortSettingsBuilder{T}"/> class.
         /// </summary>
         /// <param name="settings">The settings.</param>
-        public GridSortSettingsBuilder(GridSortSettings settings)
+        public GridSortSettingsBuilder(GridSortableSettings settings)
         {
             this.settings = settings;
         }

@@ -28,7 +28,7 @@ namespace Kendo.Mvc.UI.Fluent.Tests
         {
             builder.Pageable();
 
-            Assert.True(grid.Paging.Enabled);
+            Assert.True(grid.Pageable.Enabled);
         }
       
         [Fact]
@@ -75,21 +75,21 @@ namespace Kendo.Mvc.UI.Fluent.Tests
         public void Sortable_sets_the_corresponding_property()
         {
             builder.Sortable();
-            Assert.Equal(GridSortMode.SingleColumn, grid.Sorting.SortMode);
+            Assert.Equal(GridSortMode.SingleColumn, grid.Sortable.SortMode);
         }
 
         [Fact]
         public void Sortable_sets_the_allow_unsort()
         {
             builder.Sortable();
-            Assert.Equal(true, grid.Sorting.AllowUnsort);
+            Assert.Equal(true, grid.Sortable.AllowUnsort);
         }
 
         [Fact]
         public void Sortable_sets_the_allow_unsort_to_false()
         {
             builder.Sortable(sortable => sortable.AllowUnsort(false));
-            Assert.Equal(false, grid.Sorting.AllowUnsort);
+            Assert.Equal(false, grid.Sortable.AllowUnsort);
         }       
     }
 }

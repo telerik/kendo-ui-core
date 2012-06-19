@@ -19,7 +19,7 @@
         {
             UrlGenerator = urlGenerator;
 
-            Pageable = new PagerSettings();
+            Pageable = new PageableSettings();
 
             Selectable = new ListViewSelectionSettings();
 
@@ -64,7 +64,7 @@
             set;
         }
         
-        public PagerSettings Pageable
+        public PageableSettings Pageable
         {
             get;
             private set;

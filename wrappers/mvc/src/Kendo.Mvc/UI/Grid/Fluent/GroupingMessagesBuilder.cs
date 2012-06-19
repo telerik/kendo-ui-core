@@ -5,9 +5,9 @@ namespace Kendo.Mvc.UI.Fluent
 {
     public class GroupingMessagesBuilder : IHideObjectMembers
     {
-        private readonly GroupingMessages messages;
+        private readonly GroupableMessages messages;
 
-        public GroupingMessagesBuilder(GroupingMessages messages)
+        public GroupingMessagesBuilder(GroupableMessages messages)
         {
             this.messages = messages;
         }

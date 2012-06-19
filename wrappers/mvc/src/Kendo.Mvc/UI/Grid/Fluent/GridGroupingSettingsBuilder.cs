@@ -4,9 +4,9 @@ namespace Kendo.Mvc.UI.Fluent
     
     public class GridGroupingSettingsBuilder : IHideObjectMembers
     {
-        private readonly GridGroupingSettings settings;
+        private readonly GridGroupableSettings settings;
         
-        public GridGroupingSettingsBuilder(GridGroupingSettings settings)
+        public GridGroupingSettingsBuilder(GridGroupableSettings settings)
         {
             this.settings = settings;
         }

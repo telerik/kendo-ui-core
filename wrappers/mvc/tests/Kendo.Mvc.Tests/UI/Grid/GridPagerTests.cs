@@ -6,11 +6,11 @@ namespace Kendo.Mvc.UI.Tests.Grid
     
     public class GridPagerTests
     {
-		private PagerSettings pager;
+		private PageableSettings pager;
 
         public GridPagerTests()
         {
-            pager = new PagerSettings();
+            pager = new PageableSettings();
         }
 
         [Fact]

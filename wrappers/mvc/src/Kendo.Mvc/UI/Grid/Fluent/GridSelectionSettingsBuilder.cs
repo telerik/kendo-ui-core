@@ -1,13 +1,13 @@
 namespace Kendo.Mvc.UI.Fluent
 {
     /// <summary>
-    ///  Defines the fluent interface for configuring <see cref="Grid{T}.Selection"/>
+    ///  Defines the fluent interface for configuring <see cref="Grid{T}.Selectable"/>
     /// </summary>
     public class GridSelectionSettingsBuilder : IHideObjectMembers
     {
-        private readonly GridSelectionSettings settings;
+        private readonly GridSelectableSettings settings;
 
-        public GridSelectionSettingsBuilder(GridSelectionSettings settings)
+        public GridSelectionSettingsBuilder(GridSelectableSettings settings)
         {
             this.settings = settings;
         }

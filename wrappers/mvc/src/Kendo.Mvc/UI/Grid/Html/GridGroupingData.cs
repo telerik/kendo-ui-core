@@ -23,7 +23,7 @@ namespace Kendo.Mvc.UI.Html
             set;
         }
 
-        public GroupingMessages Messages
+        public GroupableMessages Messages
         {
             get;
             set;

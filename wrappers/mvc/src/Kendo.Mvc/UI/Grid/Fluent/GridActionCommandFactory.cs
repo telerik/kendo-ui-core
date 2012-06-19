@@ -33,7 +33,7 @@ namespace Kendo.Mvc.UI.Fluent
             
             Column.Commands.Add(command);
 
-            Column.Grid.Editing.Enabled = true;
+            Column.Grid.Editable.Enabled = true;
 
             return new GridEditActionCommandBuilder(command);
         }
@@ -48,7 +48,7 @@ namespace Kendo.Mvc.UI.Fluent
 
             Column.Commands.Add(command);
 
-            Column.Grid.Editing.Enabled = true;
+            Column.Grid.Editable.Enabled = true;
 
             return new GridDestroyActionCommandBuilder(command);
         }
