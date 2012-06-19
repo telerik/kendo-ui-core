@@ -472,21 +472,6 @@
                 equal(dataSource.pageSize(), 2);
             });
 
-            test("pageSize without page should return all data", function(){
-                var dataSource = new DataSource({
-                    data: [{ age: 1 }, { age: 2 }, { age: 3}]
-                });
-
-                dataSource.read();
-                dataSource.pageSize(2);
-
-                var view = dataSource.view();
-                equal(view.length, 3);
-                equal(view[0].age, 1);
-                equal(dataSource.pageSize(), 2);
-
-            });
-
             test("data is populated if query is called without call to read", function() {
                  var dataSource = new DataSource({
                     data: [{ age: 1 }, { age: 2 }, { age: 3}]
