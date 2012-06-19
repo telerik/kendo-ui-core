@@ -89,7 +89,7 @@
             }
         }),
         hexValueRe = /^#([0-9a-f]{3}){1,2}$/i,
-        rgbValuesRe = /rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/gi,
+        rgbValuesRe = /rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/i,
         toHex = function(value) {
             return value.replace(rgbValuesRe, function(match, r, g, b) {
                 function pad(x) {
