@@ -2225,11 +2225,15 @@ div.k-treeview
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    height: 2.12em;
-    line-height: 1.6em;
-    padding: 2px .3em;
     text-indent: 2px\9;
     width: 12.4em;
+}
+
+input.k-textbox
+{
+    padding: 2px .3em;
+    height: 2.12em;
+    line-height: 1.6em;
 }
 
 textarea.k-textbox
