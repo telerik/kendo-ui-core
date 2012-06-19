@@ -1396,6 +1396,14 @@ function pad(number) {
         return !(value >= start && value <= end);
     }
 
+    function designatorPredicate(designator) {
+        return designator.charAt(0);
+    }
+
+    function mapDesignators(designators) {
+        return $.map(designators, designatorPredicate);
+    }
+
     function parseExact(value, format, culture) {
         if (!value) {
             return null;
@@ -1458,8 +1466,9 @@ function pad(number) {
             date = new Date(),
             defaultYear = date.getFullYear(),
             shortYearCutOff = 30,
-            pmHour,
-            ch, count, length, pattern;
+            amDesignators, pmDesignators,
+            ch, count, length, pattern,
+            pmHour;
 
         if (!format) {
             format = "d"; //shord date format
@@ -1543,21 +1552,17 @@ function pad(number) {
                     }
                 } else if (ch === "t") {
                     count = lookAhead("t");
+                    amDesignators = calendar.AM;
+                    pmDesignators = calendar.PM;
 
-                    if (count === 2) {
-                        pmHour = getIndexByName(calendar.PM);
+                    if (count === 1) {
+                        amDesignators = mapDesignators(amDesignators);
+                        pmDesignators = mapDesignators(pmDesignators);
+                    }
 
-                        if (!pmHour && !getIndexByName(calendar.AM)) {
-                            return null;
-                        }
-                    } else if (count === 1) {
-                        var pm = $.map(calendar.PM, function(str) { return str.charAt(0); });
-
-                        pmHour = getIndexByName(pm);
-
-                        if (!pmHour && !getIndexByName($.map(calendar.AM, function(str) { return str.charAt(0); }))) {
-                            return null;
-                        }
+                    pmHour = getIndexByName(pmDesignators);
+                    if (!pmHour && !getIndexByName(amDesignators)) {
+                        return null;
                     }
                 } else if (ch === "'") {
                     checkLiteral();
