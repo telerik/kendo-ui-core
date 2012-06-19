@@ -6,25 +6,25 @@ namespace Kendo.Mvc.UI.Html
     {
         public IHtmlNode Create(GridPagerData section)
         {
-            var div = new HtmlElement("span")
+            var span = new HtmlElement("span")
                 .AddClass("k-pager-input", "k-label");
 
             var page = new LiteralNode(section.Messages.Page);
 
-            page.AppendTo(div);
+            page.AppendTo(span);
 
             var input = new HtmlElement("input", TagRenderMode.SelfClosing)
                 .Attribute("type", "text")
                 .AddClass("k-textbox")
                 .Attribute("value", section.Page.ToString());
 
-            input.AppendTo(div);
+            input.AppendTo(span);
 
             var of = new LiteralNode(string.Format(section.Messages.Of, section.TotalPages));
 
-            of.AppendTo(div);
+            of.AppendTo(span);
 
-            return div;
+            return span;
         }
     }
 }

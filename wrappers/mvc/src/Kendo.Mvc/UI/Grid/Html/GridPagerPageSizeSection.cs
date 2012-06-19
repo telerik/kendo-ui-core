@@ -17,6 +17,8 @@ namespace Kendo.Mvc.UI.Html
                 new HtmlElement("option").Text(pageSize.ToString(CultureInfo.InvariantCulture)).AppendTo(select);
             }
 
+            new LiteralNode(section.Messages.ItemsPerPage).AppendTo(span);
+
             return span;
         }
     }
