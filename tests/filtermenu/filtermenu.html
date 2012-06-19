@@ -657,6 +657,73 @@
 
                 equal(dataSource.view().length, 1);
             });
+
+            test("values are displayed as select if set", function() {
+                filterMenu = new FilterMenu(dom, {dataSource: dataSource, values: [ { value: 0, text: "foo" } ]});
+
+                equal(filterMenu.form.find("select").length, 5);
+                strictEqual(filterMenu.form.find("select").eq(1).data("kendoDropDownList").value(), "");
+            });
+
+            test("values as plain array", function() {
+                filterMenu = new FilterMenu(dom, {dataSource: dataSource, values: [ "foo", "bar" ]});
+
+                var view = filterMenu.form.find("select").eq(1).data("kendoDropDownList").dataSource.view(),
+                    firstItem = view[0];
+
+                equal(view.length, 2);
+                equal(firstItem.text, "foo");
+                equal(firstItem.value, "foo");
+            });
+
+            test("values as array with text only", function() {
+                filterMenu = new FilterMenu(dom, {dataSource: dataSource, values: [ { text: "foo" }, { text:"bar" } ]});
+
+                var view = filterMenu.form.find("select").eq(1).data("kendoDropDownList").dataSource.view(),
+                    firstItem = view[0];
+
+                equal(view.length, 2);
+                equal(firstItem.text, "foo");
+                equal(firstItem.value, "foo");
+            });
+
+            test("values as array with text value pair", function() {
+                filterMenu = new FilterMenu(dom, {dataSource: dataSource, values: [ { text: "foo", value: 0 }, { text:"bar", value: 1 } ]});
+
+                var view = filterMenu.form.find("select").eq(1).data("kendoDropDownList").dataSource.view(),
+                    firstItem = view[0];
+
+                equal(view.length, 2);
+                equal(firstItem.text, "foo");
+                equal(firstItem.value, 0);
+            });
+
+            test("operators are constrained if values are set", function() {
+                filterMenu = new FilterMenu(dom, {dataSource: dataSource, values: [ { value: 0, text: "foo" } ]});
+
+                equal(filterMenu.form.find("select:first").find("option").length, 2);
+            });
+
+            test("filter value is selected from values", function() {
+                filterMenu = new FilterMenu(dom, {dataSource: dataSource, values: [ { value: 0, text: "foo" },{ value: 42, text: "bar" }]});
+
+                dataSource.filter({ field: "foo", value: 42, op: "eq" });
+
+                equal(filterMenu.form.find("select").eq(1).val(), 42);
+            });
+
+            test("filter is populated with selected value from values list", function() {
+                filterMenu = new FilterMenu(dom, {dataSource: dataSource, values: [ { value: 0, text: "foo" },{ value: 42, text: "bar" }]});
+
+                var operators = filterMenu.form.find("select").eq(1).data("kendoDropDownList")
+                operators.value(42);
+                operators.trigger("change");
+
+                filterMenu.form.submit();
+
+                equal(dataSource.filter().filters[0].value, 42);
+                equal(dataSource.filter().filters[0].field, "foo");
+            });
        </script>
     </body>
 </html>
