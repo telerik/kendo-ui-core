@@ -2134,7 +2134,7 @@
             var that = this;
 
             if(val !== undefined) {
-                that._query({ pageSize: val });
+                that._query({ pageSize: val, page: 1 });
                 return;
             }
 

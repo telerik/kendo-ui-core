@@ -7,7 +7,5 @@ namespace Kendo.Mvc.UI.Html
         IHtmlNode CreateGroupHeader(GridGroupingData renderingData);
         
         IHtmlNode CreatePager(GridPagerData pagerSection);
-
-        IHtmlNode CreateRefreshButton(GridPagerData pagerData);
     }
 }

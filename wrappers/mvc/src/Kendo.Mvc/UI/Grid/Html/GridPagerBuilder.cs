@@ -25,17 +25,12 @@ namespace Kendo.Mvc.UI.Html
                 refreshBuilder.Create(section.UrlBuilder.SelectUrl(), section.Messages.Refresh).AppendTo(fragment);
             }
 
-            if (section.Input)
+            if (section.Info)
             {
                 statusBuilder.Create(section).AppendTo(fragment);
             }
 
             return fragment;
-        }
-        
-        public IHtmlNode CreateRefreshButton(GridPagerData pagerData)
-        {
-            return refreshBuilder.Create(pagerData.UrlBuilder.SelectUrl(), pagerData.Messages.Refresh);
         }
     }
 }

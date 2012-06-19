@@ -282,6 +282,8 @@ namespace Kendo.Mvc.UI
                 request.PageSize = PageSize;
             }
 
+            PageSize = request.PageSize;
+
             if (request.Groups == null)
             {
                 request.Groups = Groups;

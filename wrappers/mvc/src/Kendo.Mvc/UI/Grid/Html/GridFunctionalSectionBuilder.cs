@@ -39,10 +39,5 @@ namespace Kendo.Mvc.UI.Html
         {
             return pagerBuilder.Create(pagerData);
         }
-        
-        public IHtmlNode CreateRefreshButton(GridPagerData pagerData)
-        {
-            return pagerBuilder.CreateRefreshButton(pagerData);
-        }
     }
 }
