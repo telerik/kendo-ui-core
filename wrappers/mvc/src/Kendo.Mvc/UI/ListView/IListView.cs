@@ -29,7 +29,7 @@
             get;            
         }
 
-        PagerSettings Paging
+        PagerSettings Pageable
         {
             get;        
         }
@@ -39,7 +39,7 @@
             get;
         }
 
-        ListViewSelectionSettings Selection
+        ListViewSelectionSettings Selectable
         {
             get;
         }
@@ -49,7 +49,7 @@
             get;
         }
 
-        IListViewEditingSettings Editing
+        IListViewEditingSettings Editable
         {
             get;
         }

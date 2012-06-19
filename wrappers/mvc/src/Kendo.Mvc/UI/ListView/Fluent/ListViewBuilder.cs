@@ -109,9 +109,9 @@
         /// </example>
         public ListViewBuilder<T> Pageable(Action<PagerBuilder> pagerAction)
         {
-            Component.Paging.Enabled = true;
+            Component.Pageable.Enabled = true;
 
-            pagerAction(new PagerBuilder(Component.Paging));
+            pagerAction(new PagerBuilder(Component.Pageable));
 
             return this;
         }
@@ -148,7 +148,7 @@
         /// </example>
         public ListViewBuilder<T> Selectable()
         {
-            Component.Selection.Enabled = true;
+            Component.Selectable.Enabled = true;
 
             return this;
         }
@@ -173,7 +173,7 @@
 
             Selectable();
 
-            selectionAction(new ListViewSelectionSettingsBuilder(Component.Selection));
+            selectionAction(new ListViewSelectionSettingsBuilder(Component.Selectable));
 
             return this;
         }
@@ -209,7 +209,7 @@
         /// </example>
         public ListViewBuilder<T> Editable(Action<ListViewEditingSettingsBuilder<T>> configurator)
         {
-            configurator(new ListViewEditingSettingsBuilder<T>(Component.Editing));
+            configurator(new ListViewEditingSettingsBuilder<T>(Component.Editable));
 
             return this;
         }

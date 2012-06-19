@@ -52,7 +52,7 @@ namespace Kendo.Mvc.UI.Tests.ListView
         [Fact]
         public void Selection_mode_single_should_be_serialized_if_enabled()
         {
-            listView.Selection.Enabled = true;
+            listView.Selectable.Enabled = true;
             var json = new Dictionary<string, object>();
 
             serializer.Serialize(json);
@@ -63,7 +63,7 @@ namespace Kendo.Mvc.UI.Tests.ListView
         [Fact]
         public void Selectio_mode_should_not_be_serialized_when_not_enabled()
         {
-            listView.Selection.Mode = ListViewSelectionMode.Multiple;
+            listView.Selectable.Mode = ListViewSelectionMode.Multiple;
             var json = new Dictionary<string, object>();
 
             serializer.Serialize(json);
@@ -74,8 +74,8 @@ namespace Kendo.Mvc.UI.Tests.ListView
         [Fact]
         public void Selection_mode_multiple_should_be_serialized_if_enabled()
         {
-            listView.Selection.Enabled = true;
-            listView.Selection.Mode = ListViewSelectionMode.Multiple;
+            listView.Selectable.Enabled = true;
+            listView.Selectable.Mode = ListViewSelectionMode.Multiple;
             var json = new Dictionary<string, object>();
 
             serializer.Serialize(json);
@@ -85,8 +85,8 @@ namespace Kendo.Mvc.UI.Tests.ListView
 
         [Fact]
         public void PagerId_should_be_serialized_if_paging_enabled()
-        {            
-            listView.Paging.Enabled = true;
+        {
+            listView.Pageable.Enabled = true;
             var json = new Dictionary<string, object>();
 
             serializer.Serialize(json);
@@ -107,7 +107,7 @@ namespace Kendo.Mvc.UI.Tests.ListView
         [Fact]
         public void Edit_template_should_be_serialized_if_editing_enabled()
         {
-            listView.Editing.Enabled = true;
+            listView.Editable.Enabled = true;
             listView.EditorHtml = "foo";
             var json = new Dictionary<string, object>();
 
@@ -119,7 +119,7 @@ namespace Kendo.Mvc.UI.Tests.ListView
         [Fact]
         public void Edit_template_should_not_be_serialized_if_editing_disabled()
         {
-            listView.Editing.Enabled = false;
+            listView.Editable.Enabled = false;
             listView.EditorHtml = "foo";
             var json = new Dictionary<string, object>();
 
@@ -131,7 +131,7 @@ namespace Kendo.Mvc.UI.Tests.ListView
         [Fact]
         public void Edit_template_should_not_be_serialized_if_not_present()
         {
-            listView.Editing.Enabled = true;
+            listView.Editable.Enabled = true;
             listView.EditorHtml = string.Empty;
             var json = new Dictionary<string, object>();
 

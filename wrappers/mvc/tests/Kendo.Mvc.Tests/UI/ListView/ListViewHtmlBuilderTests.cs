@@ -37,7 +37,7 @@ namespace Kendo.Mvc.UI.Html.Tests
         [Fact]
         public void Build_should_output_listview_pager_as_second_child()
         {
-            listView.Paging.Enabled = true;
+            listView.Pageable.Enabled = true;
             var html = builder.Build();
 
             Assert.Equal(2, html.Children.Count);
@@ -48,7 +48,7 @@ namespace Kendo.Mvc.UI.Html.Tests
         public void Build_should_output_listview_pager_with_id()
         {
             listView.Name = "foo";
-            listView.Paging.Enabled = true;
+            listView.Pageable.Enabled = true;
             var html = builder.Build();
 
             html.Children[1].Children[0].Attribute("id").ShouldEqual("foo_pager");

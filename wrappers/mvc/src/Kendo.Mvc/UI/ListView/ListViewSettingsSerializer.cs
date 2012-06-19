@@ -44,9 +44,9 @@
 
         private void SerializePaging(IDictionary<string, object> options)
         {
-            if (listView.Paging.Enabled)
+            if (listView.Pageable.Enabled)
             {
-                var paging = listView.Paging.ToJson();
+                var paging = listView.Pageable.ToJson();
                 paging.Add("pagerId", listView.Id + "_pager");
                 options["pageable"] = paging;
             }
@@ -62,15 +62,15 @@
 
         private void SerializeSelection(IDictionary<string, object> options)
         {
-            if (listView.Selection.Enabled)
+            if (listView.Selectable.Enabled)
             {
-                options["selectable"] = listView.Selection.Mode.ToString().ToLower();
+                options["selectable"] = listView.Selectable.Mode.ToString().ToLower();
             }
         }
 
         private void SerializeEditTemplate(IDictionary<string, object> options)
         {
-            if (listView.Editing.Enabled && !string.IsNullOrEmpty(listView.EditorHtml))
+            if (listView.Editable.Enabled && !string.IsNullOrEmpty(listView.EditorHtml))
             {                
                 var html = listView.EditorHtml.Trim()
                                 .Replace("\r\n", string.Empty)

@@ -19,11 +19,11 @@
         {
             UrlGenerator = urlGenerator;
 
-            Paging = new PagerSettings();
+            Pageable = new PagerSettings();
 
-            Selection = new ListViewSelectionSettings();
+            Selectable = new ListViewSelectionSettings();
 
-            Editing = new ListViewEditingSettings<T>();
+            Editable = new ListViewEditingSettings<T>();
 
             settingsSerializer = new ListViewSettingsSerializer<T>(this);
 
@@ -64,7 +64,7 @@
             set;
         }
         
-        public PagerSettings Paging
+        public PagerSettings Pageable
         {
             get;
             private set;
@@ -76,7 +76,7 @@
             set;
         }
 
-        public ListViewSelectionSettings Selection
+        public ListViewSelectionSettings Selectable
         {
             get;
             private set;
@@ -88,17 +88,17 @@
             set;
         }
 
-        public ListViewEditingSettings<T> Editing
+        public ListViewEditingSettings<T> Editable
         {
             get;
             private set;
         }
 
-        IListViewEditingSettings IListView.Editing
+        IListViewEditingSettings IListView.Editable
         {
             get 
             {
-                return Editing;
+                return Editable;
             }
         }
 
@@ -151,7 +151,7 @@
                 throw new NotSupportedException(string.Format(TextResource.CannotBeNullOrEmpty, "TagName"));
             }
 
-            if (Editing.Enabled && DataSource.Schema.Model.Id == null)
+            if (Editable.Enabled && DataSource.Schema.Model.Id == null)
             {
                 throw new NotSupportedException(TextResource.DataKeysEmpty);
             }
@@ -159,7 +159,7 @@
 
         private void ProcessDataSource()
         {
-            if (Paging.Enabled && DataSource.PageSize == 0)
+            if (Pageable.Enabled && DataSource.PageSize == 0)
             {
                 DataSource.PageSize = 10;
             }
@@ -176,13 +176,13 @@
 
         private void InitializeEditor()
         {
-            if (Editing.Enabled)
+            if (Editable.Enabled)
             {
-                var helper = new HtmlHelper<T>(ViewContext, new ListViewViewDataContainer<T>(Editing.DefaultDataItem(), ViewData));
+                var helper = new HtmlHelper<T>(ViewContext, new ListViewViewDataContainer<T>(Editable.DefaultDataItem(), ViewData));
 
-                if (Editing.TemplateName.HasValue())
+                if (Editable.TemplateName.HasValue())
                 {
-                    EditorHtml = helper.EditorForModel(Editing.TemplateName).ToHtmlString();
+                    EditorHtml = helper.EditorForModel(Editable.TemplateName).ToHtmlString();
                 }
                 else
                 {

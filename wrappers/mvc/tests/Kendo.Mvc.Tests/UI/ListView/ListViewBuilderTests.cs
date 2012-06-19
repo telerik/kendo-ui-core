@@ -50,7 +50,7 @@ namespace Kendo.Mvc.UI.Fluent.Tests
         {
             builder.Pageable();
 
-            Assert.True(listView.Paging.Enabled);
+            Assert.True(listView.Pageable.Enabled);
         }
 
         [Fact]
@@ -66,8 +66,8 @@ namespace Kendo.Mvc.UI.Fluent.Tests
         {
             builder.Selectable();
 
-            Assert.True(listView.Selection.Enabled);
-            Assert.Equal(ListViewSelectionMode.Single,listView.Selection.Mode);
+            Assert.True(listView.Selectable.Enabled);
+            Assert.Equal(ListViewSelectionMode.Single, listView.Selectable.Mode);
         }
 
         [Fact]
@@ -75,8 +75,8 @@ namespace Kendo.Mvc.UI.Fluent.Tests
         {
             builder.Selectable(select => select.Mode(ListViewSelectionMode.Multiple));
 
-            Assert.True(listView.Selection.Enabled);
-            Assert.Equal(ListViewSelectionMode.Multiple, listView.Selection.Mode);
+            Assert.True(listView.Selectable.Enabled);
+            Assert.Equal(ListViewSelectionMode.Multiple, listView.Selectable.Mode);
         }
 
         [Fact]
@@ -92,7 +92,7 @@ namespace Kendo.Mvc.UI.Fluent.Tests
         {
             builder.Editable();
 
-            Assert.True(listView.Editing.Enabled);
+            Assert.True(listView.Editable.Enabled);
         }
     }
 }

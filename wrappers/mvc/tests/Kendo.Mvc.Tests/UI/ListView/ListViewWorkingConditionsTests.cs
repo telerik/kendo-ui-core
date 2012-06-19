@@ -34,7 +34,7 @@ namespace Kendo.Mvc.UI.Tests.ListView
         [Fact]
         public void Should_throw_when_mode_id_not_set_and_editing_enabled()
         {
-            listView.Editing.Enabled = true;
+            listView.Editable.Enabled = true;
             Assert.Throws<NotSupportedException>(() => listView.VerifySettings());
         }
     }
