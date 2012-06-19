@@ -2315,6 +2315,8 @@
          * The default options for all vertical line series. For more details see the series options.
          * @option {Object} [seriesDefaults.pie] The pie configuration options.
          * The default options for all pie series. For more details see the series options.
+         * @option {Object} [seriesDefaults.bubble] The bubble configuration options.
+         * The default options for all bubble series. For more details see the series options.
          * @option {Object} [seriesDefaults.donut] The donut configuration options.
          * The default options for all donut series. For more details see the series options.
          * @option {Object} [seriesDefaults.scatter] The scatter configuration options.
@@ -4537,6 +4539,232 @@
          * @option [series.type="verticalArea"]
          * Vertical area series use the same options as area series.
          * The category axis is rendered vertically instead of horizontally.
+         *
+         * @option [series.type="bubble"] Available options for bubble series:
+         * @option {String} [series.type="bubble".color] The series base color.
+         * @option {Array} [series.type="bubble".data] Array of data items (optional).
+         * The bubble chart can be bound to an array of arrays with three numbers (X, Y and Size).
+         *  _example
+         *  // ...
+         *  series:[{
+         *      type: "bubble",
+         *      data:[[1, 1, 1], [1, 2, 2]],
+         *      name: "Points"
+         *  }]
+         *  // ...
+         * @option {Number} [series.type="bubble".opacity] <1> The series opacity.
+         * @option {String} [series.type="bubble".categoryField]
+         * The data field containing the bubble category name.
+         * @option {String} [series.type="bubble".colorField]
+         * The data field containing the bubble color.
+         * @option {String} [series.type="bubble".xField]
+         * The data field containing the bubble x value.
+         * @option {String} [series.type="bubble".yField]
+         * The data field containing the bubble y value.
+         * @option {String} [series.type="bubble".visibleInLegendField]
+         * A boolean value indicating whether to show the bubble category name in the legend.
+         * @option {String} [series.type="bubble".sizeField]
+         * The data field containing the bubble size value.
+         * @option {Number} [series.type="bubble".maxSize] <100> The max size of the bubble.
+         * @option {Number} [series.type="bubble".minSize] <5> The min size of the bubble.
+         * @option {Object} [series.type="bubble".negativeValues] The series negative values.
+         * @option {Boolean} [series.type="bubble".negativeValues.visible] The visibility of the negative values.
+         * @option {String} [series.type="bubble".negativeValues.color] The color of the negative values.
+         * @option {Object} [series.type="bubble".labels] Configures the series data labels.
+         * @option {String} [series.type="bubble".labels.color] The text color of the labels.
+         * @option {String} [series.type="bubble".labels.background] The background color of the labels.
+         * @option {Object} [series.type="bubble".labels.border] The border of the labels.
+         * @option {Number} [series.type="bubble".labels.border.width] <0> The width of the border.
+         * @option {String} [series.type="bubble".labels.border.color] <"black"> The color of the border.
+         * @option {String} [series.type="bubble".labels.border.dashType] <"solid"> The dash type of the border.
+         * <div class="details-list">
+         *     <dl>
+         *         <dt>
+         *              <code>"solid"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a solid line.
+         *         </dd>
+         *         <dt>
+         *              <code>"dot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dots.
+         *         </dd>
+         *         <dt>
+         *              <code>"dash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dashes.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash.
+         *         </dd>
+         *         <dt>
+         *              <code>"dashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDotDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
+         *         </dd>
+         *    </dl>
+         * </div>
+         * @option {String} [series.type="bubble".labels.font] <"12px Arial,Helvetica,sans-serif">
+         * The font style of the labels.
+         * @option {String} [series.type="bubble".labels.format] The format of the labels.
+         * _example
+         * //sets format of the labels
+         * format: "C"
+         * @option {Number|Object} [series.type="bubble".labels.margin] <{ left: 5, right: 5}>
+         * The margin of the labels.
+         * _example
+         * // sets the top, right, bottom and left margin to 3px.
+         * margin: 3
+         *
+         * // sets the top and bottom margin to 1px
+         * // margin left and right are with 5px (by default)
+         * margin: { top: 1, bottom: 1 }
+         * @option {Number|Object} [series.type="bubble".labels.padding] <0> The padding of the labels.
+         * _example
+         * // sets the top, right, bottom and left padding to 3px.
+         * padding: 3
+         *
+         * // sets the top and left padding to 1px
+         * // padding right and bottom are with 0px (by default)
+         * padding: { top: 1, left: 1 }
+         * @option {String} [series.type="bubble".labels.position] <"above">
+         * Defines the position of the bubble labels.
+         * <div class="details-list">
+         *    <dl>
+         *         <dt>
+         *              <code>"above"</code>
+         *         </dt>
+         *         <dd>
+         *              The label is positioned at the top of the bubble chart marker.
+         *         </dd>
+         *         <dt>
+         *              <code>"right"</code>
+         *         </dt>
+         *         <dd>
+         *              The label is positioned at the right of the bubble chart marker.
+         *         </dd>
+         *         <dt>
+         *              <code>"below"</code>
+         *         </dt>
+         *         <dd>
+         *              The label is positioned at the bottom of the bubble chart marker.
+         *         </dd>
+         *         <dt>
+         *              <code>"left"</code>
+         *         </dt>
+         *         <dd>
+         *              The label is positioned at the left of the bubble chart marker.
+         *         </dd>
+         *    </dl>
+         * </div>
+         * @option {String/Function} [series.type="bubble".labels.template] The label template.
+         * Template variables:
+         * <ul>
+         *     <li><strong>value.x</strong> - the x value</li>
+         *     <li><strong>value.y</strong> - the y value</li>
+         *     <li><strong>value.size</strong> - the size value</li>
+         *     <li><strong>category</strong> - the category name</li>
+         *     <li><strong>series</strong> - the data series</li>
+         *     <li><strong>dataItem</strong> - the original data item used to construct the point.
+         *         Will be null if binding to array.
+         *     </li>
+         * </ul>
+         * _example
+         * // chart intialization
+         * $("#chart").kendoChart({
+         *      title: {
+         *          text: "My Chart Title"
+         *      },
+         *      series: [
+         *          {
+         *              type: "bubble",
+         *              name: "Series 1",
+         *              data: [[1, 1, 1], [1, 2, 2], [1, 3, 3]],
+         *              labels: {
+         *                  // label template
+         *                  template: "#= value.x # - #= value.y # - #= value.size #",
+         *                  visible: true
+         *              }
+         *          }
+         *      ]
+         * });
+         * @option {Boolean} [series.type="bubble".labels.visible] <false> The visibility of the labels.
+         * @option {Object} [series.type="bubble".border] The border of the bubble.
+         * @option {Number} [series.type="bubble".border.width] <0> The width of the border.
+         * @option {String} [series.type="bubble".border.color] <"black"> The color of the border.
+         * @option {String} [series.type="bubble".name] The series name.
+         * @option {String} [series.type="bubble".xAxis] <primary> The name of the X axis to use.
+         * @option {String} [series.type="bubble".yAxis] <primary> The name of the Y axis to use.
+         * @option {Object} [series.type="bubble".tooltip] The data point tooltip configuration options.
+         * @option {String} [series.type="bubble".tooltip.background]
+         * The background color of the tooltip. The default is determined from the series color.
+         * @option {Object} [series.type="bubble".tooltip.border] The border configuration options.
+         * @option {Number} [series.type="bubble".tooltip.border.width] <0> The width of the border.
+         * @option {String} [series.type="bubble".tooltip.border.color] <"black"> The color of the border.
+         * @option {String} [series.type="bubble".tooltip.color]
+         * The text color of the tooltip. The default is the same as the series labels color.
+         * @option {String} [series.type="bubble".tooltip.font] <"12px Arial,Helvetica,sans-serif"> The tooltip font.
+         * @option {String} [series.type="bubble".tooltip.format] The tooltip format.
+         * _example
+         * //sets format of the tooltip
+         * format: "{0:C}--{1:C}"
+         * @option {Number|Object} [series.type="bubble".tooltip.padding] The padding of the tooltip.
+         * _example
+         * // sets the top, right, bottom and left padding to 3px.
+         * padding: 3
+         *
+         * // sets the top and left padding to 1px
+         * // right and bottom padding are left at their default values
+         * padding: { top: 1, left: 1 }
+         * @option {String|Function} [series.type="bubble".tooltip.template] The tooltip template.
+         * Template variables:
+         * <ul>
+         *     <li><strong>value.x</strong> - the x value</li>
+         *     <li><strong>value.y</strong> - the y value</li>
+         *     <li><strong>value.size</strong> - the size value</li>
+         *     <li><strong>category</strong> - the category name</li>
+         *     <li><strong>series</strong> - the data series</li>
+         *     <li><strong>dataItem</strong> - the original data item used to construct the point.
+         *         Will be null if binding to array.
+         *     </li>
+         * </ul>
+         * _example
+         * $("#chart").kendoChart({
+         *      title: {
+         *          text: "My Chart Title"
+         *      },
+         *      series: [
+         *          {
+         *              type: "bubble",
+         *              name: "Series 1",
+         *              data: [[1, 1, 1], [1, 2, 2], [1, 3, 3]],
+         *              tooltip: {
+         *                  visible: true,
+         *                  template: "#= category # - #= value.x # - #= value.y # - #= value.size #"
+         *              }
+         *          }
+         *      ]
+         * });
+         * @option {Boolean} [series.type="bubble".tooltip.visible] <false> A value indicating if the tooltip should be displayed.
          *
          * @option {Object} [chartArea] The chart area configuration options.
          * This is the entire visible area of the chart.
