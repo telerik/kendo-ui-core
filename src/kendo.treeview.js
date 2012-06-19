@@ -1270,6 +1270,12 @@
                 if (parentNode != that.root) {
                     dataSource = referenceDataItem.children;
                 }
+            } else {
+                destinationTreeview = treeviewFromNode(group);
+
+                if (destinationTreeview != that) {
+                    dataSource = destinationTreeview.dataSource;
+                }
             }
 
             if (nodeData instanceof $ || isDomElement(nodeData)) {

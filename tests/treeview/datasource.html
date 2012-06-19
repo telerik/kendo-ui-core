@@ -328,7 +328,7 @@
                 equal(treeview.find(".k-item:last").text(), "charlie");
             });
 
-            test("insertBefore", function() {
+            test("insertBefore refreshes the treeview", function() {
                 createTreeView([
                     { text: "foo", expanded: true, items: [
                         { text: "bar" },
@@ -336,14 +336,26 @@
                     ] }
                 ]);
 
-                console.log("ACT");
-
                 treeviewObject.insertBefore(treeviewObject.findByText("baz"), treeviewObject.findByText("bar"));
 
                 var subitems = treeview.find(".k-item > .k-group > .k-item");
 
                 equal(subitems.eq(0).text(), "baz");
                 equal(subitems.eq(1).text(), "bar");
+            });
+
+            test("Dragging to root level between treeviews", function() {
+                var tree1 = $("<div />").appendTo("body").kendoTreeView([
+                        { text: "foo" }
+                    ]),
+                    tree2 = $("<div />").appendTo("body").kendoTreeView([
+                        { text: "bar" }
+                    ]);
+
+                tree2.data("kendoTreeView").insertBefore(tree2.find(".k-item"), tree1.find(".k-item"));
+
+                equal(tree1.find(".k-item").length, 2);
+                equal(tree2.find(".k-item").length, 0);
             });
         </script>
 
