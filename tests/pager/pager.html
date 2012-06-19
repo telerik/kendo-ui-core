@@ -57,7 +57,7 @@
 
                 dataSource.read();
 
-                var links = ul.find("a").add(ul.find(".k-state-active"));
+                var links = ul.find("a").add(ul.find(".k-state-selected"));
                 equal(links.length, 5);
                 equal(links[0].innerHTML, "1");
                 equal(links[1].innerHTML, "2");
@@ -68,7 +68,7 @@
 
             test("one button is rendered on init", function() {
                 var ul = setup();
-                var links = ul.find("a").add(ul.find(".k-state-active"));
+                var links = ul.find("a").add(ul.find(".k-state-selected"));
 
                 equal(links.length, 1);
                 equal(links[0].innerHTML, "0");
@@ -86,7 +86,7 @@
                     dataSource: dataSource,
                     previousNext: false
                 });
-                var links = ul.find("a").add(ul.find(".k-state-active"));
+                var links = ul.find("a").add(ul.find(".k-state-selected"));
 
                 equal(links.length, 3);
                 equal(links[0].innerHTML, "1");
@@ -100,7 +100,7 @@
                 dataSource.read();
 
                 var links = ul.find("a");
-                equal(ul.find(".k-state-active").data("page"), undefined);
+                equal(ul.find(".k-state-selected").data("page"), undefined);
                 equal(links.eq(0).attr("data-kendo-page"), "2");
                 equal(links.eq(1).attr("data-kendo-page"), "3");
                 equal(links.eq(2).attr("data-kendo-page"), "4");
@@ -113,7 +113,7 @@
                 dataSource.read();
                 dataSource.read();
 
-                var links = ul.find("a").add(ul.find(".k-state-active"));
+                var links = ul.find("a").add(ul.find(".k-state-selected"));
                 equal(links.length, 5);
                 equal(links[0].innerHTML, "1");
                 equal(links[1].innerHTML, "2");
@@ -134,7 +134,7 @@
                 var ul = setup();
 
                 dataSource.read();
-                ok(ul.find("span").hasClass("k-state-active"));
+                ok(ul.find("span").hasClass("k-state-selected"));
             });
 
             test("changing page raises change event passing the new index", function() {
@@ -188,7 +188,7 @@
                 var ul = setup({},{ buttonCount: 3});
 
                 dataSource.read();
-                equal(ul.find("a").add(ul.find(".k-state-active")).length, 4);
+                equal(ul.find("a").add(ul.find(".k-state-selected")).length, 4);
                 equal(ul.find("a:last").attr("data-kendo-page"), "4");
             });
 
@@ -196,7 +196,7 @@
                 var ul = setup({ page: 4 },{ buttonCount: 3});
 
                 dataSource.read();
-                equal(ul.find("a").add(ul.find(".k-state-active")).length, 3);
+                equal(ul.find("a").add(ul.find(".k-state-selected")).length, 3);
                 equal(ul.find("a:first").attr("data-kendo-page"), "3");
             });
 
@@ -247,7 +247,7 @@
                     ul = $("<ul/>").kendoPager({ dataSource: data });
 
                 data.read();
-                equal(ul.find(".k-state-active").length, 1);
+                equal(ul.find(".k-state-selected").length, 1);
             });
 
             test("pager displays info", function(){
