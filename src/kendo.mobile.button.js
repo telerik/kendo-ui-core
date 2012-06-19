@@ -253,7 +253,7 @@
             var that = this;
             Button.fn.init.call(that, element, options);
 
-            if (!that.element.attr("href")) {
+            if (typeof that.element.attr("href") === "undefined") {
                 that.element.attr("href", "#:back");
             }
         }

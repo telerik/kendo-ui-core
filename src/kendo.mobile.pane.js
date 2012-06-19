@@ -226,7 +226,7 @@
                 pane = this,
                 href = link.attr(HREF);
 
-            if (rel === EXTERNAL || !href || href === DUMMY_HREF) {
+            if (rel === EXTERNAL || (typeof href === "undefined") || href === DUMMY_HREF) {
                 return;
             }
 
