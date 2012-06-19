@@ -6,25 +6,25 @@ namespace Kendo.Mvc.UI
 
     public class PageableMessages : JsonObject
     { 
-        public const string DefaultDisplay = "{0} - {1} of {2} items";
+        private const string DefaultDisplay = "{0} - {1} of {2} items";
 
-        public const string DefaultEmpty = "No items to display";
+        private const string DefaultEmpty = "No items to display";
 
-        public const string DefaultPage = "Page";
+        private const string DefaultPage = "Page";
 
-        public const string DefaultOf = "of {0}";
+        private const string DefaultOf = "of {0}";
 
-        public const string DefaultItemsPerPage = "items per page";
+        private const string DefaultItemsPerPage = "items per page";
 
-        public const string DefaultFirst = "Go to the first page";
+        private const string DefaultFirst = "Go to the first page";
 
-        public const string DefaultPrevious = "Go to the previous page";
+        private const string DefaultPrevious = "Go to the previous page";
 
-        public const string DefaultNext = "Go to the next page";
+        private const string DefaultNext = "Go to the next page";
 
-        public const string DefaultLast = "Go to the last page";
+        private const string DefaultLast = "Go to the last page";
 
-        public const string DefaultRefresh = "Refresh";
+        private const string DefaultRefresh = "Refresh";
 
         public PageableMessages()
         {

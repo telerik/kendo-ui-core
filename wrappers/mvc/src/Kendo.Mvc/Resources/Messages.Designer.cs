@@ -61,6 +61,69 @@ namespace Kendo.Mvc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to And.
+        /// </summary>
+        public static string Filter_And {
+            get {
+                return ResourceManager.GetString("Filter_And", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear.
+        /// </summary>
+        public static string Filter_Clear {
+            get {
+                return ResourceManager.GetString("Filter_Clear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter.
+        /// </summary>
+        public static string Filter_Filter {
+            get {
+                return ResourceManager.GetString("Filter_Filter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show items with value that:.
+        /// </summary>
+        public static string Filter_Info {
+            get {
+                return ResourceManager.GetString("Filter_Info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to is false.
+        /// </summary>
+        public static string Filter_IsFalse {
+            get {
+                return ResourceManager.GetString("Filter_IsFalse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to is true.
+        /// </summary>
+        public static string Filter_IsTrue {
+            get {
+                return ResourceManager.GetString("Filter_IsTrue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Or.
+        /// </summary>
+        public static string Filter_Or {
+            get {
+                return ResourceManager.GetString("Filter_Or", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string Grid_Cancel {

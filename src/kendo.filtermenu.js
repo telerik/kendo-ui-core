@@ -316,7 +316,7 @@
                 }
             },
             messages: {
-                info: "Show rows with value that:",
+                info: "Show items with value that:",
                 isTrue: "is true",
                 isFalse: "is false",
                 filter: "Filter",

@@ -618,12 +618,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public GridBuilder<T> Filterable(Action<GridFilteringSettingsBuilder<T>> configurator)
+        public GridBuilder<T> Filterable(Action<GridFilterableSettingsBuilder> configurator)
         {
-
             Component.Filterable.Enabled = true;
 
-            configurator(new GridFilteringSettingsBuilder<T>(Component.Filterable));
+            configurator(new GridFilterableSettingsBuilder(Component.Filterable));
 
             return this;
         }

@@ -1,12 +1,11 @@
 namespace Kendo.Mvc.UI.Fluent
 {
     using System;
-    using Infrastructure;
 
     /// <summary>
     /// Defines the fluent interface for configuring <see cref="Grid{T}.Filterable"/>.
     /// </summary>
-    public class GridFilteringSettingsBuilder<TModel>  : IHideObjectMembers where TModel : class
+    public class GridFilterableSettingsBuilder : IHideObjectMembers
     {
         private readonly GridFilterableSettings settings;
 
@@ -14,7 +13,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Initializes a new instance of the <see cref="GridFilterableSettings"/> class.
         /// </summary>
         /// <param name="settings">The settings.</param>
-        public GridFilteringSettingsBuilder(GridFilterableSettings settings)
+        public GridFilterableSettingsBuilder(GridFilterableSettings settings)
         {
             this.settings = settings;
         }
@@ -33,24 +32,33 @@ namespace Kendo.Mvc.UI.Fluent
         /// <remarks>
         /// The Enabled method is useful when you need to enable filtering based on certain conditions.
         /// </remarks>
-        public virtual GridFilteringSettingsBuilder<TModel> Enabled(bool value)
+        public GridFilterableSettingsBuilder Enabled(bool value)
         {
             settings.Enabled = value;
 
             return this;
-        }        
+        }
 
-        public virtual GridFilteringSettingsBuilder<TModel> ShowOrOption(bool value)
+        public GridFilterableSettingsBuilder Messages(Action<FilterableMessagesBuilder> configurator)
         {
-            settings.Extra = value;
-            settings.Enabled = true;
+            configurator(new FilterableMessagesBuilder(settings.Messages));
+
             return this;
         }
 
-        public virtual GridFilteringSettingsBuilder<TModel> ShowOrOption()
+        public GridFilterableSettingsBuilder Extra(bool value)
+        {
+            settings.Extra = value;
+            settings.Enabled = true;
+
+            return this;
+        }
+
+        public GridFilterableSettingsBuilder Extra()
         {
             settings.Extra = true;
             settings.Enabled = true;
+
             return this;
         }
     }

@@ -117,6 +117,27 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Filter_And" xml:space="preserve">
+    <value>And</value>
+  </data>
+  <data name="Filter_Clear" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="Filter_Filter" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="Filter_Info" xml:space="preserve">
+    <value>Show items with value that:</value>
+  </data>
+  <data name="Filter_IsFalse" xml:space="preserve">
+    <value>is false</value>
+  </data>
+  <data name="Filter_IsTrue" xml:space="preserve">
+    <value>is true</value>
+  </data>
+  <data name="Filter_Or" xml:space="preserve">
+    <value>Or</value>
+  </data>
   <data name="Grid_Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
