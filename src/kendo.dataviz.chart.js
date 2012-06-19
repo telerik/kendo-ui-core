@@ -2848,10 +2848,10 @@
     var BubbleChart = ScatterChart.extend({
         options: {
             tooltip: {
-                format: "{3}: {2}"
+                format: "{3}"
             },
             labels: {
-                format: "{3}: {2}"
+                format: "{3}"
             }
         },
 
