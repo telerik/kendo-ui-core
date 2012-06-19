@@ -1,0 +1,302 @@
+[
+    {
+        "state": "Alabama",
+        "murder": 8.2,
+        "burglary": 953.8,
+        "population": 4627851
+    },
+    {
+        "state": "Alaska",
+        "murder": 4.8,
+        "burglary": 622.5,
+        "population": 686293
+    },
+    {
+        "state": "Arizona",
+        "murder": 7.5,
+        "burglary": 948.4,
+        "population": 6500180
+    },
+    {
+        "state": "Arkansas",
+        "murder": 6.7,
+        "burglary": 1084.6,
+        "population": 2855390
+    },
+    {
+        "state": "California",
+        "murder": 6.9,
+        "burglary": 693.3,
+        "population": 36756666
+    },
+    {
+        "state": "Colorado",
+        "murder": 3.7,
+        "burglary": 744.8,
+        "population": 4861515
+    },
+    {
+        "state": "Connecticut",
+        "murder": 2.9,
+        "burglary": 437.1,
+        "population": 3501252
+    },
+    {
+        "state": "Delaware",
+        "murder": 4.4,
+        "burglary": 688.9,
+        "population": 873092
+    },
+    {
+        "state": "Florida",
+        "murder": 5,
+        "burglary": 926.3,
+        "population": 18328340
+    },
+    {
+        "state": "Georgia",
+        "murder": 6.2,
+        "burglary": 931,
+        "population": 9685744
+    },
+    {
+        "state": "Hawaii",
+        "murder": 1.9,
+        "burglary": 767.9,
+        "population": 1288198
+    },
+    {
+        "state": "Idaho",
+        "murder": 2.4,
+        "burglary": 564.4,
+        "population": 1523816
+    },
+    {
+        "state": "Illinois",
+        "murder": 6,
+        "burglary": 606.9,
+        "population": 12901563
+    },
+    {
+        "state": "Indiana",
+        "murder": 5.7,
+        "burglary": 697.6,
+        "population": 6376792
+    },
+    {
+        "state": "Iowa",
+        "murder": 1.3,
+        "burglary": 606.4,
+        "population": 3002555
+    },
+    {
+        "state": "Kansas",
+        "murder": 3.7,
+        "burglary": 689.2,
+        "population": 2802134
+    },
+    {
+        "state": "Kentucky",
+        "murder": 4.6,
+        "burglary": 634,
+        "population": 4269245
+    },
+    {
+        "state": "Louisiana",
+        "murder": 9.9,
+        "burglary": 870.6,
+        "population": 4410796
+    },
+    {
+        "state": "Maine",
+        "murder": 1.4,
+        "burglary": 478.5,
+        "population": 1316456
+    },
+    {
+        "state": "Maryland",
+        "murder": 9.9,
+        "burglary": 641.4,
+        "population": 5633597
+    },
+    {
+        "state": "Massachusetts",
+        "murder": 2.7,
+        "burglary": 541.1,
+        "population": 6497967
+    },
+    {
+        "state": "Michigan",
+        "murder": 6.1,
+        "burglary": 696.8,
+        "population": 10003422
+    },
+    {
+        "state": "Minnesota",
+        "murder": 2.2,
+        "burglary": 578.9,
+        "population": 5220393
+    },
+    {
+        "state": "Mississippi",
+        "murder": 7.3,
+        "burglary": 919.7,
+        "population": 2938618
+    },
+    {
+        "state": "Missouri",
+        "murder": 6.9,
+        "burglary": 738.3,
+        "population": 5911605
+    },
+    {
+        "state": "Montana",
+        "murder": 1.9,
+        "burglary": 389.2,
+        "population": 967440
+    },
+    {
+        "state": "Nebraska",
+        "murder": 2.5,
+        "burglary": 532.4,
+        "population": 1783432
+    },
+    {
+        "state": "Nevada",
+        "murder": 8.5,
+        "burglary": 972.4,
+        "population": 2600167
+    },
+    {
+        "state": "New Hampshire",
+        "murder": 1.4,
+        "burglary": 317,
+        "population": 1315809
+    },
+    {
+        "state": "New Jersey",
+        "murder": 4.8,
+        "burglary": 447.1,
+        "population": 8682661
+    },
+    {
+        "state": "New Mexico",
+        "murder": 7.4,
+        "burglary": 1093.9,
+        "population": 1984356
+    },
+    {
+        "state": "New York",
+        "murder": 4.5,
+        "burglary": 353.3,
+        "population": 19490297
+    },
+    {
+        "state": "North Carolina",
+        "murder": 6.7,
+        "burglary": 1201.1,
+        "population": 9222414
+    },
+    {
+        "state": "North Dakota",
+        "murder": 1.1,
+        "burglary": 311.9,
+        "population": 641481
+    },
+    {
+        "state": "Ohio",
+        "murder": 5.1,
+        "burglary": 872.8,
+        "population": 11485910
+    },
+    {
+        "state": "Oklahoma",
+        "murder": 5.3,
+        "burglary": 1006,
+        "population": 3642361
+    },
+    {
+        "state": "Oregon",
+        "murder": 2.2,
+        "burglary": 758.6,
+        "population": 3790060
+    },
+    {
+        "state": "Pennsylvania",
+        "murder": 6.1,
+        "burglary": 451.6,
+        "population": 12448279
+    },
+    {
+        "state": "Rhode Island",
+        "murder": 3.2,
+        "burglary": 494.2,
+        "population": 1050788
+    },
+    {
+        "state": "South Carolina",
+        "murder": 7.4,
+        "burglary": 1000.9,
+        "population": 4479800
+    },
+    {
+        "state": "South Dakota",
+        "murder": 2.3,
+        "burglary": 324.4,
+        "population": 804194
+    },
+    {
+        "state": "Tennessee",
+        "murder": 7.2,
+        "burglary": 1026.9,
+        "population": 6214888
+    },
+    {
+        "state": "Texas",
+        "murder": 6.2,
+        "burglary": 961.6,
+        "population": 24326974
+    },
+    {
+        "state": "Utah",
+        "murder": 2.3,
+        "burglary": 606.2,
+        "population": 2736424
+    },
+    {
+        "state": "Vermont",
+        "murder": 1.3,
+        "burglary": 491.8,
+        "population": 621270
+    },
+    {
+        "state": "Virginia",
+        "murder": 6.1,
+        "burglary": 392.1,
+        "population": 7769089
+    },
+    {
+        "state": "Washington",
+        "murder": 3.3,
+        "burglary": 959.7,
+        "population": 6549224
+    },
+    {
+        "state": "West Virginia",
+        "murder": 4.4,
+        "burglary": 621.2,
+        "population": 1814468
+    },
+    {
+        "state": "Wisconsin",
+        "murder": 3.5,
+        "burglary": 440.8,
+        "population": 5627967
+    },
+    {
+        "state": "Wyoming",
+        "murder": 2.7,
+        "burglary": 476.3,
+        "population": 532668
+    }
+]
