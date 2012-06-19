@@ -602,6 +602,34 @@
                 equal(result[1].field, "bcd");
             });
 
+            test("filter filters with doesnotcontain on string", function() {
+                var data = [ {field: "abc"} , {field: "bcd"} , {field: "cde"} ];
+
+                var result = new Query(data).filter( {
+                    field: "field",
+                    operator: "doesnotcontain",
+                    value: "a"
+                }).toArray();
+
+                equal(result.length, 2);
+                equal(result[0].field, "bcd");
+                equal(result[1].field, "cde");
+            });
+
+            test("filter filters with notsubstringof on string", function() {
+                var data = [ {field: "abc"} , {field: "bcd"} , {field: "cde"} ];
+
+                var result = new Query(data).filter( {
+                    field: "field",
+                    operator: "notsubstringof",
+                    value: "a"
+                }).toArray();
+
+                equal(result.length, 2);
+                equal(result[0].field, "bcd");
+                equal(result[1].field, "cde");
+            });
+
             test("filter filters with eq on string case sensitive", function() {
                 var data = [ {field: "a"} , {field: "b"} , {field: "c"}, {field: "A"} ];
 

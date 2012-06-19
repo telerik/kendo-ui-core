@@ -296,6 +296,7 @@
                     neq: NEQ,
                     startswith: "Starts with",
                     contains: "Contains",
+                    doesnotcontain: "Does not contain",
                     endswith: "Ends with"
                 },
                 number: {

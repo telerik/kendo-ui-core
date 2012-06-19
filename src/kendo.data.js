@@ -729,7 +729,7 @@
             },
             contains: function(a, b, ignore) {
                 if (ignore) {
-                    a = a + ".toLowerCase()";
+                    a = "(" + a + " || '').toLowerCase()";
                     if (b) {
                         b = b.toLowerCase();
                     }
@@ -740,6 +740,20 @@
                 }
 
                 return a + ".indexOf('" + b + "') >= 0";
+            },
+            doesnotcontain: function(a, b, ignore) {
+                if (ignore) {
+                    a = "(" + a + " || '').toLowerCase()";
+                    if (b) {
+                        b = b.toLowerCase();
+                    }
+                }
+
+                if (b) {
+                    b = quote(b);
+                }
+
+                return a + ".indexOf('" + b + "') == -1";
             }
         };
     })();
@@ -839,7 +853,8 @@
         ">=": "gte",
         isgreaterthanorequalto: "gte",
         greaterthanequal: "gte",
-        ge: "gte"
+        ge: "gte",
+        notsubstringof: "doesnotcontain"
     };
 
     function normalizeOperator(expression) {
