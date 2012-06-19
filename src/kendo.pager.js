@@ -189,7 +189,7 @@
 
         options: {
             name: "Pager",
-            selectTemplate: '<li><span class="k-state-active">#=text#</span></li>',
+            selectTemplate: '<li><span class="k-state-selected">#=text#</span></li>',
             linkTemplate: '<li><a href="\\#" class="k-link" data-#=ns#page="#=idx#">#=text#</a></li>',
             buttonCount: 10,
             autoBind: true,
