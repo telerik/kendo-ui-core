@@ -51,6 +51,7 @@
 
 .k-block,
 .k-widget,
+.k-inline-block,
 .k-textbox > input,
 .k-input[type="text"],
 .k-input[type="number"],
@@ -283,6 +284,8 @@ html body .k-button-bare
     border: 0;
 }
 
+/* Colors */
+
 html .k-success-colored
 {
     color: #507f50;
@@ -302,6 +305,11 @@ html .k-error-colored
     color: #7f5050;
     border-color: #dfd0d0;
     background-color: #fff0f0;
+}
+
+.k-inline-block
+{
+    padding: 0 2px;
 }
 
 /* loading */
