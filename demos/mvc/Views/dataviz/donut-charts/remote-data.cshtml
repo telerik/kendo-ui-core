@@ -1,13 +1,43 @@
 
-        <div id="example" class="k-content absConf">
-            <div style="width: 450px; margin: 0 auto;">
-                <div id="chart" style="width: 400px; height: 300px;"></div>
-                <div>
-                    <div id="chart2006" style="float:left; width: 150px; height: 150px;"></div>
-                    <div id="chart2008" style="float:left; width: 150px; height: 150px;"></div>
-                    <div id="chart2010" style="float:left; width: 150px; height: 150px;"></div>
+        <div id="example" class="k-content">
+            <div class="chart-wrapper">
+                <div id="chart" class="combined-donuts"></div>
+                <div class="single-donuts">
+                    <div id="chart2006" class="donut"></div>
+                    <div id="chart2008" class="donut"></div>
+                    <div id="chart2010" class="donut"></div>
                 </div>
+                
+                
             </div>
+            <style scoped>
+                .chart-wrapper 
+                {
+                	text-align: center;
+                	padding-top: 20px;
+                	background-repeat: no-repeat;
+                }
+                .single-donuts
+                {
+                	width: 390px;
+                	height: 150px;
+                	margin: 0 auto;
+                }
+                .chart-wrapper .donut 
+                {
+                	float: left;
+                	width: 130px;
+                	height: 130px;
+                	padding: 0;
+                }
+                .chart-wrapper .combined-donuts 
+                {
+                	width: 500px;
+                	height: 280px;
+                	margin: 0 auto;
+                	padding: 0;
+                }
+            </style>
             <script>
                 function createChart() {
                     $("#chart").kendoChart({
@@ -27,8 +57,11 @@
                                 field: "year"
                             }
                         },
+                        legend: {
+                            position: "top"
+                        },
                         title: {
-                            text: "Combine View"
+                            text: "Screen resolution trends"
                         },
                         seriesDefaults: {
                             type: "donut"
@@ -37,11 +70,11 @@
                             field: "share",
                             categoryField: "resolution",
                             visibleInLegendField: "visibleInLegend",
-                            padding: 20
+                            padding: 10
                         }],
                         tooltip: {
                             visible: true,
-                            template: "#= dataItem.resolution #: #= value # (#= dataItem.year #)"
+                            template: "#= dataItem.resolution #: #= value #% (#= dataItem.year #)"
                         }
                     });
 
@@ -74,7 +107,11 @@
                             type: "donut",
                             field: "share",
                             padding: 0
-                        }]
+                        }],
+                        tooltip: {
+                            visible: true,
+                            template: "#= dataItem.resolution #: #= value #%"
+                        }
                     });
 
                     $("#chart2008").kendoChart({
@@ -106,7 +143,11 @@
                             type: "donut",
                             field: "share",
                             padding: 0
-                        }]
+                        }],
+                        tooltip: {
+                            visible: true,
+                            template: "#= dataItem.resolution #: #= value #%"
+                        }
                     });
 
 
@@ -139,7 +180,11 @@
                             type: "donut",
                             field: "share",
                             padding: 0
-                        }]
+                        }],
+                        tooltip: {
+                            visible: true,
+                            template: "#= dataItem.resolution #: #= value #%"
+                        }
                     });
                 }
 

@@ -33,7 +33,7 @@
 
 <script>
     function bindSwipeEvents(e) {
-        e.view.element.find("#swipeListView li").kendoMobileSwipe(function(e) {
+        e.view.element.find("#swipeListView li li").kendoMobileSwipe(function(e) {
             e.target.html("You swiped "  + e.direction);
         }, { surface: e.view.element.find("#swipeListView") });
     }
