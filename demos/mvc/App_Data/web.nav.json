@@ -437,7 +437,6 @@
             "name": "listview",
             "documentation": "ui-widgets/listview",
             "spriteCssClass": "listViewIcon",
-            "packages": ["!mvc"],
             "items": [
                 {
                     "text": "Basic usage",
@@ -445,7 +444,8 @@
                 },
                 {
                     "text": "Binding to remote data",
-                    "url": "listview/remote-data.html"
+                    "url": "listview/remote-data.html",
+                    "packages": ["!mvc"]
                 },
                 {
                     "text": "Editing",

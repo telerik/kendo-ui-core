@@ -8,6 +8,7 @@
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.selectable.js"></script>
+        <script src="../../src/kendo.pager.js"></script>
         <script src="../../src/kendo.listview.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
     </head>
@@ -21,6 +22,7 @@
         <ul id="log"></ul>
 
         <script>
+            kendo.ns = "kendo-";
             var DataSource = kendo.data.DataSource,
                 dataSource;
 
@@ -36,6 +38,15 @@
                 }, options);
                 return $("<ul/>").kendoListView(options);
             }
+
+            module("listview initialization", {
+                setup: function() {
+                    $("<div id=\"pager\"></div>").appendTo(document.body);
+                },
+                teardown: function() {
+                    $("#pager").remove();
+                }
+            });
 
             test("kendoListView attaches listView to element", function() {
                 var ul = setup();
@@ -303,6 +314,46 @@
 
                 equal(listView.element.find("li").length, 2);
             });
+
+            test("pageable option initialize pager", function() {
+                var listView = setup({ pageable: { pagerId: "pager" } });
+
+                ok($("#pager").data("kendoPager") instanceof kendo.ui.Pager);
+            });
+
+            test("listview DataSource is applied on the pager", function() {
+                var listView = setup({ pageable: { pagerId: "pager" } }).data("kendoListView");
+                var pager = $("#pager").data("kendoPager");
+
+                ok(pager.dataSource === listView.dataSource);
+            });
+
+            test("listview pageable settings are applied on the pager", function() {
+                var listView = setup({
+                    pageable: {
+                        pagerId: "pager",
+                        selectTemplate: "<li>foo</li>"
+                    }
+                })
+                .data("kendoListView");
+                var pager = $("#pager").data("kendoPager");
+
+                equal(pager.options.selectTemplate, "<li>foo</li>");
+            });
+
+            test("uid is set to item wrapper", function() {
+                var listView =  setup({
+                        dataSource: {
+                            data: [{ foo: 1 }, { foo: 2 }]
+                        }
+                    }).data("kendoListView"),
+                    view = listView.dataSource.view(),
+                    items = listView.items();
+
+                equal(items.eq(0).attr(kendo.attr("uid")), view[0].uid);
+                equal(items.eq(1).attr(kendo.attr("uid")), view[1].uid);
+            });
+
         </script>
     </body>
 </html>

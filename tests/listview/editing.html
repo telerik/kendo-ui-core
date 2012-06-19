@@ -399,6 +399,32 @@
                equal(ul.children().eq(0).html(), "foo 0");
             });
 
+            test("save event is triggered", function() {
+                var called = false,
+                    listView = setup({
+                        editTemplate: "<li></li>",
+                        save: function() {
+                            called = true;
+                        }
+                    });
+
+                listView.edit(listView.element.children().first());
+                listView.save();
+                ok(called);
+            });
+
+            test("save event can be prevented", function() {
+                var listView = setup({
+                    editTemplate: "<li></li>",
+                    save: function(e) {
+                        e.preventDefault();
+                    }
+                });
+
+                listView.edit(listView.element.children().first());
+                listView.save();
+                ok(listView.element.children().first().hasClass("k-edit-item"));
+            });
         </script>
     </body>
 </html>
