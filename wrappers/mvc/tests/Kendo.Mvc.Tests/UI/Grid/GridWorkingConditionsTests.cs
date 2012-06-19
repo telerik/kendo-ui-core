@@ -248,6 +248,19 @@ namespace Kendo.Mvc.UI.Tests.Grid
         }
 
         [Fact]
+        public void Should_throw_if_custom_command_rounting_and_ajax_binding_is_set()
+        {
+            var grid = GridTestHelper.CreateGrid<Customer>();            
+            grid.DataSource.Type = DataSourceType.Ajax;
+            var column = new GridActionColumn<Customer>(grid);
+            var command = new GridCustomActionCommand<Customer>();
+            command.RouteName = "foo";
+            column.Commands.Add(command);
+            grid.Columns.Add(column);
+            Assert.Throws<NotSupportedException>(() => grid.VerifySettings());
+        }
+
+        [Fact]
         public void Should_throw_if_submitChanges_button_is_present_and_edit_mode_is_not_in_cell()
         {
             ConfigureEditing(g =>

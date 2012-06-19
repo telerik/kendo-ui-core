@@ -16,9 +16,9 @@ namespace Kendo.Mvc.UI
         public GridCustomActionCommandTests()
         {
             command = new GridCustomActionCommand<Customer>();
-            //TODO: Implement custom command routing
-            //command.ControllerName = "Home";
-            //command.ActionName = "Index";
+            
+            command.ControllerName = "Home";
+            command.ActionName = "Index";
 
             urlBuilder = new Mock<IGridUrlBuilder>();
             urlBuilder.Setup(u => u.GetDataKeys()).Returns(new IDataKey[0]).Verifiable();
@@ -39,83 +39,88 @@ namespace Kendo.Mvc.UI
             Serialize().ContainsKey("click").ShouldBeFalse();
         }
 
-        //[Fact]
-        //public void Should_set_use_url_of_the_button_builder()
-        //{
-        //    command.Text = "Custom";
+        [Fact]
+        public void Should_set_use_url_of_the_button_builder()
+        {
+            command.Text = "Custom";
 
-        //    var button = Button();
+            var button = Button();
 
-        //    button.Url.ShouldNotBeNull();
-        //}
+            button.Url.ShouldNotBeNull();
+        }
 
-        //[Fact]
-        //public void Should_use_navigatable_and_url_builder_to_build_url()
-        //{
-        //    urlBuilder.Setup(u => u.Url(It.IsAny<INavigatable>(), true)).Verifiable();
- 
-        //    var button = Button();
+        [Fact]
+        public void Should_use_navigatable_and_url_builder_to_build_url()
+        {
+            urlBuilder.Setup(u => u.Url(It.IsAny<INavigatable>(), true)).Verifiable();
 
-        //    button.Create(null);
+            var button = Button();
 
-        //    urlBuilder.Verify();
-        //}
+            button.Create(null);
 
-        //[Fact]
-        //public void Should_not_copy_route_values_if_send_state_is_false()
-        //{
-        //    command.SendState = false;
+            urlBuilder.Verify();
+        }
 
-        //    urlBuilder.Setup(u => u.Url(It.IsAny<INavigatable>(), false)).Verifiable();
- 
-        //    var button = Button();
+        [Fact]
+        public void Should_not_copy_route_values_if_send_state_is_false()
+        {
+            command.SendState = false;
 
-        //    button.Create(null);
+            urlBuilder.Setup(u => u.Url(It.IsAny<INavigatable>(), false)).Verifiable();
 
-        //    urlBuilder.Verify();
-        //}
-        //[Fact]
-        //public void Should_use_route_keys_to_build_the_url()
-        //{
-        //    var key = new Mock<IGridDataKey<Customer>>();
+            var button = Button();
 
-        //    key.Setup(k => k.GetValue(It.IsAny<object>())).Verifiable();
-        //    key.SetupGet(k => k.RouteKey).Returns("foo");
+            button.Create(null);
 
-        //    command.DataRouteValues.Add(key.Object);
+            urlBuilder.Verify();
+        }
+        [Fact]
+        public void Should_use_route_keys_to_build_the_url()
+        {
+            var key = new Mock<IGridDataKey<Customer>>();
 
-        //    var button = Button();
+            key.Setup(k => k.GetValue(It.IsAny<object>())).Verifiable();
+            key.SetupGet(k => k.RouteKey).Returns("foo");
 
-        //    button.Create(null);
+            command.DataRouteValues.Add(key.Object);
 
-        //    key.Verify();
-        //}
+            var button = Button();
 
-        //[Fact]
-        //public void Should_use_data_keys_to_build_the_url()
-        //{
-        //    var button = Button();
+            button.Create(null);
 
-        //    button.Create(null);
+            key.Verify();
+        }
 
-        //    urlBuilder.Verify();
-        //}
+        [Fact]
+        public void Should_use_data_keys_to_build_the_url()
+        {
+            var button = Button();
 
-        //[Fact]
-        //public void Should_not_use_data_keys_to_build_the_url_if_send_data_keys_is_false()
-        //{
-        //    command.SendDataKeys = false;
+            button.Create(null);
 
-        //    var button = Button();
+            urlBuilder.Verify();
+        }
 
-        //    button.Create(null);
+        [Fact]
+        public void Should_not_use_data_keys_to_build_the_url_if_send_data_keys_is_false()
+        {
+            command.SendDataKeys = false;
 
-        //    urlBuilder.Verify(u => u.GetDataKeys(), Times.Never());
-        //}
+            var button = Button();
+
+            button.Create(null);
+
+            urlBuilder.Verify(u => u.GetDataKeys(), Times.Never());
+        }
 
         private IDictionary<string, object> Serialize()
         {
             return command.Serialize(urlBuilder.Object);
+        }
+
+        private IGridButtonBuilder Button()
+        {
+           return command.CreateDisplayButtons(urlBuilder.Object, htmlHelper.Object).First();
         }
     }
 }

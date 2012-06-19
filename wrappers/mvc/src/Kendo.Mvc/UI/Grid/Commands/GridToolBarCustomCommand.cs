@@ -8,10 +8,9 @@ namespace Kendo.Mvc.UI
         public override IEnumerable<IGridButtonBuilder> CreateDisplayButtons(IGridUrlBuilder urlBuilder, IGridHtmlHelper htmlHelper)
         {
             var button = CreateButton<GridLinkButtonBuilder>(Text, CssClass());
-
-            //TODO: Implement custom command routing
-            //button.Url = delegate { return urlBuilder.Url(this); };
-            button.Url = delegate { return ""; };
+            
+            button.Url = delegate { return urlBuilder.Url(this); };
+            
             return new[] { button };
         }
     }

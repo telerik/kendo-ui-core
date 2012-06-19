@@ -218,6 +218,15 @@ namespace Kendo.Mvc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Custom command routes is available only for server binding..
+        /// </summary>
+        internal static string CustomCommandRoutesWithAjaxBinding {
+            get {
+                return ResourceManager.GetString("CustomCommandRoutesWithAjaxBinding", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There is no DataSource Model Id property specified..
         /// </summary>
         internal static string DataKeysEmpty {

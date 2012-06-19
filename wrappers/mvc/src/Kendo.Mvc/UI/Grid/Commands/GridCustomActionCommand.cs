@@ -5,35 +5,34 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI.Html;
 
-    public class GridCustomActionCommand<T> : GridCustomCommandBase/*, INavigatable*/
+    public class GridCustomActionCommand<T> : GridCustomCommandBase, INavigatable
         where T: class
     {
         public GridCustomActionCommand()
         {
-            //DataRouteValues = new List<IGridDataKey<T>>();
-            //SendDataKeys = true;
-            //SendState = true;
+            DataRouteValues = new List<IGridDataKey<T>>();
+            SendDataKeys = true;
+            SendState = true;
             Click = new ClientEvent();
-        }
+        }        
         
-        //TODO: Implement custom command routing
-        //public IList<IGridDataKey<T>> DataRouteValues 
-        //{ 
-        //    get; 
-        //    private set; 
-        //}
+        public IList<IGridDataKey<T>> DataRouteValues 
+        { 
+            get; 
+            private set; 
+        }
 
-        //public bool SendDataKeys
-        //{ 
-        //    get;
-        //    set;
-        //}
+        public bool SendDataKeys
+        {
+            get;
+            set;
+        }
 
-        //public bool SendState 
-        //{ 
-        //    get;
-        //    set;
-        //}
+        public bool SendState
+        {
+            get;
+            set;
+        }
 
         public ClientEvent Click
         {
@@ -54,19 +53,18 @@ namespace Kendo.Mvc.UI
             {
                 state["click"] = Click;
             }
-
-            //TODO: Implement custom command routing
-            //if (SendState && !Ajax)
+            
+            //if (SendState /*&& !Ajax*/)
             //{
             //    RouteValues.AddRange(urlBuilder.GetState());
             //}
 
             //var dataRouteValues = DataRouteValues.Cast<IDataKey>();
 
-            //if (Ajax)
-            //{
-            //    state["ajax"] = true;
-            //}
+            ////if (Ajax)
+            ////{
+            ////    state["ajax"] = true;
+            ////}
 
             //if (SendDataKeys)
             //{
@@ -78,7 +76,7 @@ namespace Kendo.Mvc.UI
             //    RouteValues[route.RouteKey] = "<#=" + route.Name + "#>";
             //}
 
-           // state["url"] = urlBuilder.Url(this);
+            //state["url"] = urlBuilder.Url(this);
 
             return state;
         }
@@ -87,32 +85,30 @@ namespace Kendo.Mvc.UI
         {
             var button = CreateButton<GridLinkButtonBuilder>(Text, CssClass());
 
-            button.Url = dataItem => "";
-            //TODO: Implement custom command routing
-            //button.Url = (dataItem) =>
-            //    {
-            //        var navigatable = new RequestSettings
-            //        {
-            //            ActionName = ActionName,
-            //            ControllerName = ControllerName,
-            //        };
+            button.Url = (dataItem) =>
+                {
+                    var navigatable = new RequestSettings
+                    {
+                        ActionName = ActionName,
+                        ControllerName = ControllerName,
+                    };
 
-            //        navigatable.RouteValues.AddRange(RouteValues);
+                    navigatable.RouteValues.AddRange(RouteValues);
 
-            //        var dataRouteValues = DataRouteValues.Cast<IDataKey>();
+                    var dataRouteValues = DataRouteValues.Cast<IDataKey>();
 
-            //        if (SendDataKeys)
-            //        {
-            //            dataRouteValues = dataRouteValues.Concat(urlBuilder.GetDataKeys());
-            //        }
+                    if (SendDataKeys)
+                    {
+                        dataRouteValues = dataRouteValues.Concat(urlBuilder.GetDataKeys());
+                    }
 
-            //        foreach (var key in dataRouteValues)
-            //        {
-            //            navigatable.RouteValues.Add(key.RouteKey, key.GetValue(dataItem));
-            //        }
+                    foreach (var key in dataRouteValues)
+                    {
+                        navigatable.RouteValues.Add(key.RouteKey, key.GetValue(dataItem));
+                    }
 
-            //        return urlBuilder.Url(navigatable, SendState);
-            //    };
+                    return urlBuilder.Url(navigatable, SendState);
+                };
 
             return new [] { button };
         }

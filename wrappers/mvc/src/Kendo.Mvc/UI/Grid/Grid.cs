@@ -183,12 +183,12 @@ namespace Kendo.Mvc.UI
         private object CustomButton<TButton>(
                    string name,
                    string text,
-                    //TODO: Implement custom command routing
-                   //string url,
-                   //string actionName,
-                   //string controllerName,
-                   //string routeName,
-                   //object routeValues,
+                    
+                   string url,
+                   string actionName,
+                   string controllerName,
+                   string routeName,
+                   object routeValues,
                    //bool ajax,
                  //TODO: Implement command button types
                  //  GridButtonType buttonType,
@@ -205,28 +205,27 @@ namespace Kendo.Mvc.UI
             //TODO: Implement command button html attributes
             //command.HtmlAttributes = htmlAttributes.ToDictionary();
             //command.ImageHtmlAttributes = imageHtmlAttributes.ToDictionary();
-            command.Text = text;
-            //TODO: Implement custom command routing
+            command.Text = text;            
             //command.Ajax = ajax;
             command.Name = name;
 
-            //TODO: Implement custom command routing
-            //if (url.HasValue())
-            //{
-            //    command.Url(url);
-            //}
 
-            //if (actionName.HasValue())
-            //{
-            //    command.Action(actionName, controllerName, routeValues);
-            //    text = actionName;
-            //}
+            if (url.HasValue())
+            {
+                command.Url(url);
+            }
 
-            //if (routeName.HasValue())
-            //{
-            //    command.Route(routeName, routeValues);
-            //    text = routeName;
-            //}
+            if (actionName.HasValue())
+            {
+                command.Action(actionName, controllerName, routeValues);
+                text = actionName;
+            }
+
+            if (routeName.HasValue())
+            {
+                command.Route(routeName, routeValues);
+                text = routeName;
+            }
 
             if (string.IsNullOrEmpty(command.Text))
             {
@@ -242,61 +241,54 @@ namespace Kendo.Mvc.UI
 
         private object CustomCommandToolBarButton(
             string name,
-            string text,
-            //TODO: Implement custom command routing
-            //string url,
-            //string actionName,
-            //string controllerName,
-            //string routeName,
-            //object routeValues,
+            string text,            
+            string url,
+            string actionName,
+            string controllerName,
+            string routeName,
+            object routeValues,
             //bool ajax,
           //TODO: Implement command button types
           //  GridButtonType buttonType,
             object htmlAttributes,
             object imageHtmlAttributes)
         {
-            return CustomButton<GridToolBarCustomCommand<T>>(name, text/*, url, actionName, controllerName, routeName, routeValues, ajax, buttonType*/, htmlAttributes, imageHtmlAttributes);
+            return CustomButton<GridToolBarCustomCommand<T>>(name, text, url, actionName, controllerName, routeName, routeValues/*, ajax, buttonType*/, htmlAttributes, imageHtmlAttributes);
         }
 
-        //public object CustomCommandToolBarButton(
-        //    string name,
-        //    string text,
-        //    //TODO: Implement custom command routing
-        //    //string actionName,
-        //    //string controllerName,
-        //    //object routeValues,
-        //    //bool ajax,
-        //    //TODO: Implement command button types
-        //    //GridButtonType buttonType,
-        //    object htmlAttributes,
-        //    object imageHtmlAttributes)
-        //{
-        //    return CustomCommandToolBarButton(name, text/*, null, actionName, controllerName, null, routeValues, ajax, buttonType*/, htmlAttributes, imageHtmlAttributes);
-        //}
+        public object CustomCommandToolBarButton(
+            string name,
+            string text,
+            string actionName,
+            string controllerName,
+            object routeValues,
+            //bool ajax,
+            //TODO: Implement command button types
+            //GridButtonType buttonType,
+            object htmlAttributes,
+            object imageHtmlAttributes)
+        {
+            return CustomCommandToolBarButton(name, text, null, actionName, controllerName, null, routeValues/*, ajax, buttonType*/, htmlAttributes, imageHtmlAttributes);
+        }
 
-        //TODO: Implement custom command routing
+        
         ////TODO: Implement command button types
-        //public object CustomCommandToolBarButton(string name, string text, string actionName, string controllerName, bool ajax/*, GridButtonType buttonType*/, object htmlAttributes, object imageHtmlAttributes)
-        //{
-        //    return CustomCommandToolBarButton(name, text, actionName, controllerName, null, ajax/*, buttonType*/, htmlAttributes, imageHtmlAttributes);
-        //}
+        public object CustomCommandToolBarButton(string name, string text, string actionName, string controllerName/*, bool ajax, GridButtonType buttonType*/, object htmlAttributes, object imageHtmlAttributes)
+        {
+            return CustomCommandToolBarButton(name, text, actionName, controllerName, null/*, ajax, buttonType*/, htmlAttributes, imageHtmlAttributes);
+        }
 
-        ////TODO: Implement command button types
-        //public object CustomCommandToolBarButton(string name, string text, string actionName, string controllerName, object routeValues, bool ajax/*, GridButtonType buttonType*/)
-        //{
-        //    return CustomCommandToolBarButton(name, text, null, actionName, controllerName, null, routeValues, ajax/*, buttonType*/, null, null);
-        //}
-
-        //public object CustomCommandToolBarButton(string name, string text, string actionName, string controllerName, object routeValues)
-        //{
-        //    return CustomCommandToolBarButton(name, text, actionName, controllerName, routeValues, false);
-        //}
+        //TODO: Implement command button types
+        public object CustomCommandToolBarButton(string name, string text, string actionName, string controllerName, object routeValues/*, bool ajax, GridButtonType buttonType*/)
+        {
+            return CustomCommandToolBarButton(name, text, null, actionName, controllerName, null, routeValues/*, ajax, buttonType*/, null, null);
+        }
 
         ////TODO: Implement command button types
-        //public object CustomCommandToolBarButton(string name, string text, string routeName, RouteValueDictionary routeValues, bool ajax/*, GridButtonType buttonType*/, object htmlAttributes, object imageHtmlAttributes)
-        //{
-        //    return CustomCommandToolBarButton(name, text, null, null, null, routeName, routeValues, ajax/*, buttonType*/, htmlAttributes, imageHtmlAttributes);
-        //}
+        public object CustomCommandToolBarButton(string name, string text, string routeName, RouteValueDictionary routeValues/*, bool ajax, GridButtonType buttonType*/, object htmlAttributes, object imageHtmlAttributes)
+        {
+            return CustomCommandToolBarButton(name, text, null, null, null, routeName, routeValues/*, ajax, buttonType*/, htmlAttributes, imageHtmlAttributes);
+        }
 
         ////TODO: Implement command button types
         //public object CustomCommandToolBarButton(string name, string text, string routeName, RouteValueDictionary routeValues, bool ajax/*, GridButtonType buttonType*/)
@@ -308,18 +300,18 @@ namespace Kendo.Mvc.UI
         //{
         //    return CustomCommandToolBarButton(name, text, routeName, routeValues, false/*, GridButtonType.ImageAndText*/, null, null);
         //}
-
-        //TODO: Implement custom command routing
+        
         //public object CustomCommandToolBarButton(string name, string text/*, string url, GridButtonType buttonType*/, object htmlAttributes, object imageHtmlAttributes)
         //{
         //    return CustomCommandToolBarButton(name, text, url/*, null, null, null, null, false, buttonType*/, htmlAttributes, imageHtmlAttributes);
         //}
 
         //TODO: Implement command button types
-        //public object CustomCommandToolBarButton(string name, string text, string url, GridButtonType buttonType)
-        //{
-        //    return CustomCommandToolBarButton(name, text, url, buttonType, null, null);
-        //}
+        public object CustomCommandToolBarButton(string name, string text, string url/*, GridButtonType buttonType*/)
+        {
+            return CustomCommandToolBarButton(name, text, url, null, null, null, null, null, null);
+            //return CustomCommandToolBarButton(name, text, url, buttonType, null, null);
+        }
 
         //public object CustomCommandToolBarButton(string name, string text, string url)
         //{
@@ -329,7 +321,7 @@ namespace Kendo.Mvc.UI
         //TODO: Implement custom commands
         internal object CustomCommandToolBarButton(string name, string text)
         {
-            return CustomCommandToolBarButton(name, text, null, null);
+            return CustomCommandToolBarButton(name, text, null);
         }
 
         //TODO: Implement command button types
@@ -1160,6 +1152,11 @@ namespace Kendo.Mvc.UI
                 if (DetailTemplate != null && DetailTemplate.HasValue() && string.IsNullOrEmpty(ClientDetailTemplateId))
                 {
                     throw new NotSupportedException(TextResource.CannotUseTemplatesInAjaxOrWebService);
+                }
+
+                if (Columns.OfType<IGridActionColumn>().Any(c => c.Commands.OfType<GridCustomActionCommand<T>>().Any(command => command.HasValue())))
+                {
+                    throw new NotSupportedException(TextResource.CustomCommandRoutesWithAjaxBinding);
                 }
             }
 
