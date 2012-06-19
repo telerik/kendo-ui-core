@@ -40,12 +40,14 @@
                     id: "Negative",
                     lifeExpectancy: 100,
                     fertilityRate: 5,
-                    population: -100000000
+                    population: -100000000,
+                    legend: false
                 }];
 
                 $("#chart").kendoChart({
                     legend: {
-                        visible: true
+                        visible: true,
+                        position: "right"
                     },
                     dataSource: {
                         data: data
@@ -55,6 +57,7 @@
                         labels: {
                             visible: true
                         },
+                        //color: "red",
                         //border: {},
                         //minSize: 0,
                         //maxSize: 120,
@@ -66,7 +69,8 @@
                         yField: "fertilityRate",
                         zField: "population",
                         categoryField: "id",
-                        colorField: "color"
+                        colorField: "color",
+                        visibleInLegendField: "legend"
                     }]
                 });
             });

@@ -2906,7 +2906,9 @@
                             format: chart.options.labels.format,
                             animation: animationOptions
                         }
-                    }, series)
+                    }, series, {
+                        color: color
+                    })
                 );
 
                 chart.append(point);
@@ -2936,7 +2938,7 @@
 
         bindableFields: function() {
             return ScatterChart.fn.bindableFields.call(this)
-                   .concat(["z", "color", "category"]);
+                   .concat(["z", "color", "category", "visibleInLegend"]);
         },
 
         getViewElements: function(view) {
@@ -3842,7 +3844,24 @@
             for (i = 0; i < count; i++) {
                 currentSeries = series[i];
                 if (currentSeries.visibleInLegend !== false) {
-                    data.push({ name: currentSeries.name || "", color: currentSeries.color });
+                    // TODO: Move legend item generation to each individual series
+                    if (currentSeries.type === BUBBLE) {
+                        var points = chart.points,
+                        pointsLength = points.length,
+                        currentPoint;
+
+                        for (i = 0; i < pointsLength; i++) {
+                            currentPoint = points[i];
+                            if (currentPoint.value.visibleInLegend !== false) {
+                                data.push({
+                                    name: currentPoint.value.category,
+                                    color: currentPoint.options.color
+                                });
+                            }
+                        }
+                    } else {
+                        data.push({ name: currentSeries.name || "", color: currentSeries.color });
+                    }
                 }
             }
 
