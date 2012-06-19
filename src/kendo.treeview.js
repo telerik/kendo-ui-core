@@ -1259,42 +1259,37 @@
 
         _dataSourceMove: function(nodeData, group, parentNode, callback) {
             var that = this,
-                dataSource = that.dataSource,
-                treeview, destinationTreeview,
-                referenceDataItem, i, dataItem;
+                srcDataSource,
+                dataItem,
+                referenceDataItem, i,
+                destTreeview = treeviewFromNode(parentNode || group),
+                destDataSource = destTreeview.dataSource;
 
             if (parentNode) {
-                destinationTreeview = treeviewFromNode(parentNode);
-                referenceDataItem = destinationTreeview.dataItem(parentNode);
+                referenceDataItem = destTreeview.dataItem(parentNode);
 
                 if (parentNode != that.root) {
-                    dataSource = referenceDataItem.children;
-                }
-            } else {
-                destinationTreeview = treeviewFromNode(group);
-
-                if (destinationTreeview != that) {
-                    dataSource = destinationTreeview.dataSource;
+                    destDataSource = referenceDataItem.children;
                 }
             }
 
             if (nodeData instanceof $ || isDomElement(nodeData)) {
-                // move node
+                // move node within or between treeviews
                 nodeData = $(nodeData);
-                treeview = treeviewFromNode(nodeData);
-                dataItem = treeview.dataSource.getByUid(nodeData.attr(kendo.attr("uid")));
+                srcDataSource = treeviewFromNode(nodeData).dataSource;
+                dataItem = srcDataSource.getByUid(nodeData.attr(kendo.attr("uid")));
 
-                treeview.dataSource.remove(dataItem);
+                srcDataSource.remove(dataItem);
 
-                dataItem = callback(dataSource, dataItem);
+                dataItem = callback(destDataSource, dataItem);
             } else if (isArray(nodeData) || nodeData instanceof data.ObservableArray){
                 // insert array of nodes
                 for (i = 0; i < nodeData.length; i++) {
-                    dataItem = callback(dataSource, nodeData[i]);
+                    dataItem = callback(destDataSource, nodeData[i]);
                 }
             } else {
                 // insert single node from data
-                dataItem = callback(dataSource, nodeData);
+                dataItem = callback(destDataSource, nodeData);
             }
 
             return that.findByUid(dataItem.uid);
