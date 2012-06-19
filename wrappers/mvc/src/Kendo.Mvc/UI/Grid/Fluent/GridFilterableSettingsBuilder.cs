@@ -39,6 +39,13 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        public GridFilterableSettingsBuilder Operators(Action<FilterableOperatorsBuilder> configurator)
+        {
+            configurator(new FilterableOperatorsBuilder(settings.Operators));
+
+            return this;
+        }
+
         public GridFilterableSettingsBuilder Messages(Action<FilterableMessagesBuilder> configurator)
         {
             configurator(new FilterableMessagesBuilder(settings.Messages));

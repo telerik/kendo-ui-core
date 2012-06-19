@@ -138,6 +138,21 @@
   <data name="Filter_Or" xml:space="preserve">
     <value>Or</value>
   </data>
+  <data name="Filter_StringContains" xml:space="preserve">
+    <value>Contains</value>
+  </data>
+  <data name="Filter_StringEndsWith" xml:space="preserve">
+    <value>Ends with</value>
+  </data>
+  <data name="Filter_StringIsEqualTo" xml:space="preserve">
+    <value>Is equal to</value>
+  </data>
+  <data name="Filter_StringIsNotEqualTo" xml:space="preserve">
+    <value>Is not equal to</value>
+  </data>
+  <data name="Filter_StringStartsWith" xml:space="preserve">
+    <value>Starts with</value>
+  </data>
   <data name="Grid_Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>

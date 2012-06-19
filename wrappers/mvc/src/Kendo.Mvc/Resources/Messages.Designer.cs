@@ -124,6 +124,51 @@ namespace Kendo.Mvc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Contains.
+        /// </summary>
+        public static string Filter_StringContains {
+            get {
+                return ResourceManager.GetString("Filter_StringContains", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ends with.
+        /// </summary>
+        public static string Filter_StringEndsWith {
+            get {
+                return ResourceManager.GetString("Filter_StringEndsWith", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is equal to.
+        /// </summary>
+        public static string Filter_StringIsEqualTo {
+            get {
+                return ResourceManager.GetString("Filter_StringIsEqualTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is not equal to.
+        /// </summary>
+        public static string Filter_StringIsNotEqualTo {
+            get {
+                return ResourceManager.GetString("Filter_StringIsNotEqualTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Starts with.
+        /// </summary>
+        public static string Filter_StringStartsWith {
+            get {
+                return ResourceManager.GetString("Filter_StringStartsWith", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string Grid_Cancel {

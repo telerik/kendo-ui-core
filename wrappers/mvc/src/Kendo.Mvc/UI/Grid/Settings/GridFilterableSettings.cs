@@ -8,6 +8,7 @@ namespace Kendo.Mvc.UI
         {
             Extra = true;
             Messages = new FilterableMessages();
+            Operators = new FilterableOperators();
         }
 
         public bool Enabled { get; set; }
@@ -15,6 +16,8 @@ namespace Kendo.Mvc.UI
         public bool Extra { get; set; }
 
         public FilterableMessages Messages { get; private set; }
+
+        public FilterableOperators Operators { get; set; }
 
         protected override void Serialize(System.Collections.Generic.IDictionary<string, object> json)
         {
@@ -28,6 +31,13 @@ namespace Kendo.Mvc.UI
             if (messages.Any())
             {
                 json["messages"] = messages;
+            }
+
+            var operators = Operators.ToJson();
+
+            if (operators.Any())
+            {
+                json["operators"] = operators;
             }
         }
     }

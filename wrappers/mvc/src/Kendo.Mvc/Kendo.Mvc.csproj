@@ -446,6 +446,9 @@
     <Compile Include="UI\Grid\Commands\GridCustomActionCommand.cs" />
     <Compile Include="UI\Grid\Commands\GridCustomCommandBase.cs" />
     <Compile Include="UI\Grid\Fluent\FilterableMessagesBuilder.cs" />
+    <Compile Include="UI\Grid\Fluent\FilterableOperatorsBuilder.cs" />
+    <Compile Include="UI\Grid\Fluent\StringOperatorsBuilder.cs" />
+    <Compile Include="UI\Grid\Settings\FilterableOperators.cs" />
     <Compile Include="UI\Grid\Fluent\GridNavigatableSettingsBuilder.cs" />
     <Compile Include="UI\Grid\Fluent\GridToolBarSubmitChangesCommandBuilder.cs" />
     <Compile Include="UI\Grid\Fluent\GridColumnContextMenuSettingsBuilder.cs" />
@@ -469,6 +472,7 @@
     <Compile Include="UI\Grid\Html\IGridPagerPagingSectionsBuilder.cs" />
     <Compile Include="UI\Grid\Settings\FilterableMessages.cs" />
     <Compile Include="UI\Grid\Settings\GroupableMessages.cs" />
+    <Compile Include="UI\Grid\Settings\StringOperators.cs" />
     <Compile Include="UI\Pageable\Fluent\PageableMessagesBuilder.cs" />
     <Compile Include="UI\Pageable\PageableMessages.cs" />
     <Compile Include="UI\Grid\Settings\GridColumnContextMenuSettings.cs" />

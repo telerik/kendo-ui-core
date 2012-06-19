@@ -12,10 +12,10 @@
     .Groupable()
     .Pageable()
     .Sortable()
-    .Scrollable() 
-    .Filterable()             
+    .Scrollable()
+    .Filterable()
     .DataSource(dataSource => dataSource
         .Ajax()
-        .Read(read => read.Action("Products_Read", "Grid"))        
+        .Read(read => read.Action("Products_Read", "Grid"))
     )
 )
