@@ -283,6 +283,27 @@ html body .k-button-bare
     border: 0;
 }
 
+html .k-success
+{
+    color: #507f50;
+    border-color: #d0dfd0;
+    background-color: #f0fff0;
+}
+
+html .k-info
+{
+    color: #50607f;
+    border-color: #d0d9df;
+    background-color: #f0f9ff;
+}
+
+html .k-error
+{
+    color: #7f5050;
+    border-color: #dfd0d0;
+    background-color: #fff0f0;
+}
+
 /* loading */
 
 .k-loading,
