@@ -2251,10 +2251,6 @@
                     strokeWidth: 2,
                     strokeOpacity: 1
                 });
-        },
-
-        formatValue: function(format) {
-            return this.value.category;
         }
     });
 
@@ -2850,6 +2846,15 @@
     deepExtend(ScatterLineChart.fn, LineChartMixin);
 
     var BubbleChart = ScatterChart.extend({
+        options: {
+            tooltip: {
+                format: "{3}: {2}"
+            },
+            labels: {
+                format: "{3}: {2}"
+            }
+        },
+
         addValue: function(value, fields) {
             var chart = this,
                 colors = chart.plotArea.options.seriesColors || [];
@@ -2945,6 +2950,10 @@
             var chart = this;
 
             return ChartElement.fn.getViewElements.call(chart, view);
+        },
+
+        formatPointValue: function(value, format) {
+            return autoFormat(format, value.x, value.y, value.z, value.category);
         }
     });
 

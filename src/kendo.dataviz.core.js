@@ -34,6 +34,7 @@
         DEGREE = math.PI / 180,
         DONUT = "donut",
         FADEIN = "fadeIn",
+        FORMAT_REGEX = /{\d+:?/,
         HEIGHT = "height",
         ID_PREFIX = "k",
         INITIAL_ANIMATION_DURATION = 600,
@@ -2430,7 +2431,7 @@
     }
 
     function autoFormat(format, value) {
-        if (format.indexOf("{0:") !== -1 || format.indexOf("{0}") !== -1) {
+        if (format.match(FORMAT_REGEX).length > 0) {
             return kendo.format.apply(this, arguments);
         }
 
