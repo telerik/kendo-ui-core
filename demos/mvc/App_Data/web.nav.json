@@ -924,6 +924,10 @@
                 {
                     "text": "Panels",
                     "url": "styling/panels.html"
+                },
+                {
+                    "text": "Icons",
+                    "url": "styling/icons.html"
                 }
             ]
         },
