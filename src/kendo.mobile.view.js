@@ -362,7 +362,7 @@
                 transition = that.transition || viewTransition || that.defaultTransition,
                 animationData = transition.split(' '),
                 animationType = animationData[0],
-                parallax = animationType === "slide",
+                parallax = /^slide/.test(animationType),
                 reverse = animationData[1] === "reverse";
 
             if (that.back() && !that.transition) {
