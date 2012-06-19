@@ -17,6 +17,8 @@ namespace Kendo.Mvc.UI.Tests
 
         public bool Explode { get; set; }
 
+        public bool VisibleInLegend { get; set; }
+
         public string Color { get; set; }
     }
 
@@ -34,6 +36,7 @@ namespace Kendo.Mvc.UI.Tests
                     TotalSales = 15458,
                     RepSales = 2015,
                     Explode = true,
+                    VisibleInLegend = true,
                     Color = "red"
                 },
 
@@ -46,7 +49,8 @@ namespace Kendo.Mvc.UI.Tests
                     DateString = "Sept 2010",
                     TotalSales = 26598,
                     RepSales = 6003,
-                    Explode = false
+                    Explode = false,
+                    VisibleInLegend = true
                 }
             };
         }

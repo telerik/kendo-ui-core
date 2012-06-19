@@ -24,6 +24,7 @@ namespace Kendo.Mvc.UI
                 .Add("categoryField", series.CategoryMember, () => { return series.Data == null && series.CategoryMember != null; })
                 .Add("explodeField", series.ExplodeMember, () => { return series.Data == null && series.ExplodeMember != null; })
                 .Add("colorField", series.ColorMember, () => { return series.Data == null && series.ColorMember != null; })
+                .Add("visibleInLegendField", series.VisibleInLegendMember, () => { return series.Data == null && series.VisibleInLegendMember != null; })
                 .Add("data", series.Data, () => { return series.Data != null; })
                 .Add("padding", series.Padding, () => series.Padding.HasValue)
                 .Add("border", series.Border.CreateSerializer().Serialize(), ShouldSerializeBorder)

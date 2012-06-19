@@ -15,9 +15,18 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
-        /// Gets the data expand member of the series.
+        /// Gets the data explode member of the series.
         /// </summary>
         string ExplodeMember
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets the data visibleInLegend member of the series.
+        /// </summary>
+        string VisibleInLegendMember
         {
             get;
             set;

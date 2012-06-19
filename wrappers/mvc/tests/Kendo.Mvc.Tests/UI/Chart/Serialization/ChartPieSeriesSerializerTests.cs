@@ -13,7 +13,7 @@ namespace Kendo.Mvc.UI.Tests
         {
             var chart = ChartTestHelper.CreateChart<SalesData>();
             chart.Data = SalesDataBuilder.GetCollection();
-            series = new ChartPieSeries<SalesData, decimal>(chart, s => s.RepSales, s => s.RepName, s => s.Color, s => s.Explode);
+            series = new ChartPieSeries<SalesData, decimal>(chart, s => s.RepSales, s => s.RepName, s => s.Color, s => s.Explode, s => s.VisibleInLegend);
         }
 
         [Fact]
@@ -88,6 +88,20 @@ namespace Kendo.Mvc.UI.Tests
         {
             series.CategoryMember = null;
             GetJson(series).ContainsKey("categoryField").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void Should_serialize_visibleInLegendField_if_visibleInLegend_member_is_set()
+        {
+            series.VisibleInLegendMember = "ViisibleInLegendFieldName";
+            GetJson(series)["visibleInLegendField"].ShouldEqual("ViisibleInLegendFieldName");
+        }
+
+        [Fact]
+        public void Should_not_serialize_visibleInLegendField_if_visibleInLegend_member_is_not_set()
+        {
+            series.VisibleInLegendMember = null;
+            GetJson(series).ContainsKey("visibleInLegendField").ShouldBeFalse();
         }
 
         [Fact]

@@ -221,7 +221,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
         [Fact]
         public void Pie_should_create_bound_pie_series_from_type_and_value_member_name_and_category_member_name_and_explode_member_name()
         {
-            var builder = factory.Pie(typeof(decimal), "RepSales", "RepName", "Color", "Explode");
+            var builder = factory.Pie(typeof(decimal), "RepSales", "RepName", "Color", "Explode", "VisibleInLegend");
             builder.Series.ShouldBeType<ChartPieSeries<SalesData, decimal>>();
         }
 

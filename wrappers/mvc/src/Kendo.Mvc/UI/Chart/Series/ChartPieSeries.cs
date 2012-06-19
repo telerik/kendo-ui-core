@@ -22,7 +22,14 @@ namespace Kendo.Mvc.UI
         /// <param name="expressionCategory">The category expression.</param>
         /// <param name="expressionColor">The color expression.</param>
         /// <param name="expressionExplode">The explode expression.</param>
-        public ChartPieSeries(Chart<TModel> chart, Expression<Func<TModel, TValue>> expressionValue, Expression<Func<TModel, string>> expressionCategory, Expression<Func<TModel, string>> expressionColor, Expression<Func<TModel, bool>> expressionExplode)
+        /// <param name="expressionVisibleInLegend">The visibleInLegend expression.</param>
+        public ChartPieSeries(
+            Chart<TModel> chart,
+            Expression<Func<TModel, TValue>> expressionValue,
+            Expression<Func<TModel, string>> expressionCategory,
+            Expression<Func<TModel,string>> expressionColor,
+            Expression<Func<TModel, bool>> expressionExplode,
+            Expression<Func<TModel, bool>> expressionVisibleInLegend)
             : base(chart)
         {
 
@@ -43,6 +50,12 @@ namespace Kendo.Mvc.UI
             {
                 Explode = expressionExplode.Compile();
                 ExplodeMember = expressionExplode.MemberWithoutInstance();
+            }
+
+            if (expressionVisibleInLegend != null)
+            {
+                Explode = expressionVisibleInLegend.Compile();
+                ExplodeMember = expressionVisibleInLegend.MemberWithoutInstance();
             }
 
             if (expressionColor != null)
@@ -123,6 +136,16 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// Gets the model data visibleInLegend member name.
+        /// </summary>
+        /// <value>The model data visibleInLegend member name.</value>
+        public string VisibleInLegendMember
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Gets a function which returns the category of the property to which the column is bound to.
         /// </summary>
         public Func<TModel, string> Category
@@ -135,6 +158,15 @@ namespace Kendo.Mvc.UI
         /// Gets a function which returns the explode of the property to which the column is bound to.
         /// </summary>
         public Func<TModel, bool> Explode
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets a function which returns the visibleInLegend of the property to which the column is bound to.
+        /// </summary>
+        public Func<TModel, bool> VisibleInLegend
         {
             get;
             private set;

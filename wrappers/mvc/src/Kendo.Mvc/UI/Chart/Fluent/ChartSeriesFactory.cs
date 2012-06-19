@@ -6,7 +6,6 @@ namespace Kendo.Mvc.UI.Fluent
     using System.Linq;
     using System.Linq.Expressions;
     using Kendo.Mvc.Extensions;
-    using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.UI;
 
     /// <summary>
@@ -43,7 +42,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartBarSeriesBuilder<TModel> Bar<TValue>(Expression<Func<TModel, TValue>> expression)
         {
-
             ChartBarSeries<TModel, TValue> barSeries = new ChartBarSeries<TModel, TValue>(Container, expression);
 
             Container.Series.Add(barSeries);
@@ -97,7 +95,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartBarSeriesBuilder<TModel> Bar(IEnumerable data)
         {
-
             ChartBarSeries<TModel, object> barSeries = new ChartBarSeries<TModel, object>(Container, data);
 
             Container.Series.Add(barSeries);
@@ -169,7 +166,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartLineSeriesBuilder<TModel> Line<TValue>(Expression<Func<TModel, TValue>> expression)
         {
-
             ChartLineSeries<TModel, TValue> LineSeries = new ChartLineSeries<TModel, TValue>(Container, expression);
 
             Container.Series.Add(LineSeries);
@@ -223,7 +219,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartLineSeriesBuilder<TModel> Line(IEnumerable data)
         {
-
             ChartLineSeries<TModel, object> lineSeries = new ChartLineSeries<TModel, object>(Container, data);
 
             Container.Series.Add(lineSeries);
@@ -298,7 +293,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartAreaSeriesBuilder<TModel> Area<TValue>(Expression<Func<TModel, TValue>> expression)
         {
-
             ChartAreaSeries<TModel, TValue> areaSeries = new ChartAreaSeries<TModel, TValue>(Container, expression);
 
             Container.Series.Add(areaSeries);
@@ -352,7 +346,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartAreaSeriesBuilder<TModel> Area(IEnumerable data)
         {
-
             ChartAreaSeries<TModel, object> areaSeries = new ChartAreaSeries<TModel, object>(Container, data);
 
             Container.Series.Add(areaSeries);
@@ -430,7 +423,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartScatterSeriesBuilder<TModel> Scatter<TXValue, TYValue>(Expression<Func<TModel, TXValue>> xValueExpression, Expression<Func<TModel, TYValue>> yValueExpression)
         {
-
             var scatterSeries = new ChartScatterSeries<TModel, TXValue, TYValue>(Container, xValueExpression, yValueExpression);
 
             Container.Series.Add(scatterSeries);
@@ -493,7 +485,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartScatterSeriesBuilder<TModel> Scatter(IEnumerable data)
         {
-
             ChartScatterSeries<TModel, object, object> scatterSeries = new ChartScatterSeries<TModel, object, object>(Container, data);
 
             Container.Series.Add(scatterSeries);
@@ -512,7 +503,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartScatterLineSeriesBuilder<TModel> ScatterLine<TXValue, TYValue>(Expression<Func<TModel, TXValue>> xValueExpression, Expression<Func<TModel, TYValue>> yValueExpression)
         {
-
             var scatterLineSeries = new ChartScatterLineSeries<TModel, TXValue, TYValue>(Container, xValueExpression, yValueExpression);
 
             Container.Series.Add(scatterLineSeries);
@@ -575,7 +565,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartScatterLineSeriesBuilder<TModel> ScatterLine(IEnumerable data)
         {
-
             ChartScatterLineSeries<TModel, object, object> scatterLineSeries = new ChartScatterLineSeries<TModel, object, object>(Container, data);
 
             Container.Series.Add(scatterLineSeries);
@@ -591,8 +580,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartPieSeriesBuilder<TModel> Pie<TValue>(Expression<Func<TModel, TValue>> expressionValue, Expression<Func<TModel, string>> expressionCategory)
         {
-
-            ChartPieSeries<TModel, TValue> pieSeries = new ChartPieSeries<TModel, TValue>(Container, expressionValue, expressionCategory, null, null);
+            ChartPieSeries<TModel, TValue> pieSeries = new ChartPieSeries<TModel, TValue>(Container, expressionValue, expressionCategory, null, null, null);
 
             Container.Series.Add(pieSeries);
 
@@ -607,8 +595,22 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartPieSeriesBuilder<TModel> Pie<TValue>(Expression<Func<TModel, TValue>> expressionValue, Expression<Func<TModel, string>> expressionCategory, Expression<Func<TModel, string>> expressionColor, Expression<Func<TModel, bool>> expressionExplode)
         {
+            ChartPieSeries<TModel, TValue> pieSeries = new ChartPieSeries<TModel, TValue>(Container, expressionValue, expressionCategory, expressionColor, expressionExplode, null);
 
-            ChartPieSeries<TModel, TValue> pieSeries = new ChartPieSeries<TModel, TValue>(Container, expressionValue, expressionCategory, expressionColor, expressionExplode);
+            Container.Series.Add(pieSeries);
+
+            return new ChartPieSeriesBuilder<TModel>(pieSeries);
+        }
+
+        /// <summary>
+        /// Defines bound pie series.
+        /// </summary>
+        /// <param name="expressionValue">
+        /// The expression used to extract the series value from the chart model
+        /// </param>
+        public virtual ChartPieSeriesBuilder<TModel> Pie<TValue>(Expression<Func<TModel, TValue>> expressionValue, Expression<Func<TModel, string>> expressionCategory, Expression<Func<TModel, string>> expressionColor, Expression<Func<TModel, bool>> expressionExplode, Expression<Func<TModel, bool>> expressionVisibleInLegend)
+        {
+            ChartPieSeries<TModel, TValue> pieSeries = new ChartPieSeries<TModel, TValue>(Container, expressionValue, expressionCategory, expressionColor, expressionExplode, expressionVisibleInLegend);
 
             Container.Series.Add(pieSeries);
 
@@ -623,7 +625,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartPieSeriesBuilder<TModel> Pie(string valueMemberName, string categoryMemberName)
         {
-            return Pie(null, valueMemberName, categoryMemberName, "", "");
+            return Pie(null, valueMemberName, categoryMemberName, "", "", "");
         }
 
         /// <summary>
@@ -638,9 +640,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="explodeMemberName">
         /// The name of the explode member.
         /// </param>
-        public virtual ChartPieSeriesBuilder<TModel> Pie(string valueMemberName, string categoryMemberName, string colorMemberName, string explodeMemberName)
+        public virtual ChartPieSeriesBuilder<TModel> Pie(string valueMemberName, string categoryMemberName, string colorMemberName, string explodeMemberName, string visibleInLegendMemberName)
         {
-            return Pie(null, valueMemberName, categoryMemberName, colorMemberName, explodeMemberName);
+            return Pie(null, valueMemberName, categoryMemberName, colorMemberName, explodeMemberName, visibleInLegendMemberName);
         }
 
         /// <summary>
@@ -658,15 +660,16 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="explodeMemberName">
         /// The name of the explode member.
         /// </param>
-        public virtual ChartPieSeriesBuilder<TModel> Pie(Type memberType, string valueMemberName, string categoryMemberName, string colorMemberName, string explodeMemberName)
+        public virtual ChartPieSeriesBuilder<TModel> Pie(Type memberType, string valueMemberName, string categoryMemberName, string colorMemberName, string explodeMemberName, string visibleInLegendMemberName)
         {
             var valueExpr = BuildMemberExpression(memberType, valueMemberName);
             var categoryExpr = BuildMemberExpression(typeof(string), categoryMemberName);
             var colorExpr = colorMemberName.HasValue() ? BuildMemberExpression(typeof(string), colorMemberName) : null;
             var explodeExpr = explodeMemberName.HasValue() ? BuildMemberExpression(typeof(bool), explodeMemberName) : null;
+            var visibleInlegendExpr = visibleInLegendMemberName.HasValue() ? BuildMemberExpression(typeof(bool), visibleInLegendMemberName) : null;
 
             var seriesType = typeof(ChartPieSeries<,>).MakeGenericType(typeof(TModel), valueExpr.Body.Type);
-            var series = (IChartPieSeries)BuildSeries(seriesType, valueExpr, categoryExpr, colorExpr, explodeExpr);
+            var series = (IChartPieSeries)BuildSeries(seriesType, valueExpr, categoryExpr, colorExpr, explodeExpr, visibleInlegendExpr);
 
             if (!series.Name.HasValue())
             {
@@ -693,6 +696,11 @@ namespace Kendo.Mvc.UI.Fluent
                 series.ExplodeMember = explodeMemberName.AsTitle();
             }
 
+            if (!series.VisibleInLegendMember.HasValue())
+            {
+                series.VisibleInLegendMember = visibleInLegendMemberName.AsTitle();
+            }
+
             Container.Series.Add((ChartSeriesBase<TModel>)series);
 
             return new ChartPieSeriesBuilder<TModel>(series);
@@ -706,7 +714,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartPieSeriesBuilder<TModel> Pie(IEnumerable data)
         {
-
             ChartPieSeries<TModel, object> pieSeries = new ChartPieSeries<TModel, object>(Container, data);
 
             Container.Series.Add(pieSeries);
