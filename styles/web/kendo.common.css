@@ -283,21 +283,21 @@ html body .k-button-bare
     border: 0;
 }
 
-html .k-success
+html .k-success-colored
 {
     color: #507f50;
     border-color: #d0dfd0;
     background-color: #f0fff0;
 }
 
-html .k-info
+html .k-info-colored
 {
     color: #50607f;
     border-color: #d0d9df;
     background-color: #f0f9ff;
 }
 
-html .k-error
+html .k-error-colored
 {
     color: #7f5050;
     border-color: #dfd0d0;
