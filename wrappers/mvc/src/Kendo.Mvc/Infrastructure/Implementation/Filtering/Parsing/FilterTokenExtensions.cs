@@ -16,7 +16,8 @@ namespace Kendo.Mvc.Extensions
             { "startswith", FilterOperator.StartsWith },
             { "contains", FilterOperator.Contains },
             { "notsubstringof", FilterOperator.DoesNotContain },
-            { "endswith", FilterOperator.EndsWith }
+            { "endswith", FilterOperator.EndsWith },
+            { "doesnotcontain", FilterOperator.DoesNotContain }
         };
 
         private static readonly IDictionary<FilterOperator, string> operatorToToken = new Dictionary<FilterOperator, string>

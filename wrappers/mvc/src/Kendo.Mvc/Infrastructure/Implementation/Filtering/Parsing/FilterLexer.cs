@@ -11,7 +11,7 @@ namespace Kendo.Mvc.Infrastructure.Implementation
         private static readonly string[] ComparisonOperators = new[] { "eq", "neq", "lt", "lte", "gt", "gte" };
         private static readonly string[] LogicalOperators = new[] { "and", "or", "not" };
         private static readonly string[] Booleans = new[] { "true", "false" };
-        private static readonly string[] Functions = new[] { "contains", "endswith", "startswith", "notsubstringof" };
+        private static readonly string[] Functions = new[] { "contains", "endswith", "startswith", "notsubstringof", "doesnotcontain" };
 
         private int currentCharacterIndex;
         private readonly string input;
