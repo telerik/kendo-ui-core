@@ -5,7 +5,27 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Resources;
 
     public class PagerMessages : JsonObject
-    {
+    { 
+        public const string DefaultDisplay = "{0} - {1} of {2} items";
+
+        public const string DefaultEmpty = "No items to display";
+
+        public const string DefaultPage = "Page";
+
+        public const string DefaultOf = "of {0}";
+
+        public const string DefaultItemsPerPage = "items per page";
+
+        public const string DefaultFirst = "Go to the first page";
+
+        public const string DefaultPrevious = "Go to the previous page";
+
+        public const string DefaultNext = "Go to the next page";
+
+        public const string DefaultLast = "Go to the last page";
+
+        public const string DefaultRefresh = "Refresh";
+
         public PagerMessages()
         {
             Display = Messages.Pager_Display;
@@ -42,52 +62,52 @@ namespace Kendo.Mvc.UI
 
         protected override void Serialize(IDictionary<string, object> json)
         {
-            if (Display != DefaultPagerMessages.Display)
+            if (Display != DefaultDisplay)
             {
                 json["display"] = Display;
             }
 
-            if (Empty != DefaultPagerMessages.Empty)
+            if (Empty != DefaultEmpty)
             {
                 json["empty"] = Empty;
             }
 
-            if (Page != DefaultPagerMessages.Page)
+            if (Page != DefaultPage)
             {
                 json["page"] = Page;
             }
 
-            if (Of != DefaultPagerMessages.Of)
+            if (Of != DefaultOf)
             {
                 json["of"] = Of;
             }
 
-            if (ItemsPerPage != DefaultPagerMessages.ItemsPerPage)
+            if (ItemsPerPage != DefaultItemsPerPage)
             {
                 json["itemsPerPage"] = ItemsPerPage;
             }
 
-            if (First != DefaultPagerMessages.First)
+            if (First != DefaultFirst)
             {
                 json["first"] = First;
             }
 
-            if (Previous != DefaultPagerMessages.Previous)
+            if (Previous != DefaultPrevious)
             {
                 json["previous"] = Previous;
             }
 
-            if (Next != DefaultPagerMessages.Next)
+            if (Next != DefaultNext)
             {
                 json["next"] = Next;
             }
 
-            if (Last != DefaultPagerMessages.Last)
+            if (Last != DefaultLast)
             {
                 json["last"] = Last;
             }
 
-            if (Refresh != DefaultPagerMessages.Refresh)
+            if (Refresh != DefaultRefresh)
             {
                 json["refresh"] = Refresh;
             }
