@@ -85,13 +85,11 @@ namespace Kendo.Mvc.UI.Fluent.Tests
 
         public override IEnumerable<IGridButtonBuilder> CreateDisplayButtons(IGridUrlBuilder urlBuilder, IGridHtmlHelper htmlHelper)
         {
-            // TODO: Implement this method
             throw new NotImplementedException();
         }
 
         public override IEnumerable<IGridButtonBuilder> CreateEditButtons(IGridUrlBuilder urlBuilder, IGridHtmlHelper htmlHelper)
         {
-            // TODO: Implement this method
             throw new NotImplementedException();
         }
     }

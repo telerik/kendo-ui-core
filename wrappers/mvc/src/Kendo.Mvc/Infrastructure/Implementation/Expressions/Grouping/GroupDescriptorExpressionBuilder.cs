@@ -56,7 +56,6 @@ namespace Kendo.Mvc.Infrastructure.Implementation.Expressions
             {
                 if (this.groupingParameterExpression == null)
                 {
-                    //todo refactor
                     LambdaExpression groupByExpression = this.CreateGroupByExpression();
                     Type groupingType = typeof(IGrouping<,>).MakeGenericType(groupByExpression.Body.Type, this.ItemType);
 

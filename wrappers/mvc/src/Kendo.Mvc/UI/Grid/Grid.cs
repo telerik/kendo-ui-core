@@ -723,9 +723,6 @@ namespace Kendo.Mvc.UI
             {
                 options["navigatable"] = true;
             }
-            //TODO: Serialize editing
-            //TODO: Localization
-            //TODO: No records template
 
             writer.Write(Initializer.Initialize(Selector, "Grid", options));
 
@@ -761,36 +758,6 @@ namespace Kendo.Mvc.UI
                 return currentItemMode.ToEnum(GridItemMode.Default);
             }
         }
-
-        /*TODO : Serialize data source
-        public void SerializeDataSource(IClientSideObjectWriter writer)
-        {
-            IEnumerable dataSource = DataSource.Data;
-            var dataTableEnumerable = dataSource as GridDataTableWrapper;
-
-            var serverOperationMode = !DataSource.IsClientOperationMode;
-
-            if (serverOperationMode)
-            {
-                dataSource = DataSource.Data;
-            }
-
-            if (dataTableEnumerable != null && dataTableEnumerable.Table != null)
-            {
-                dataSource = dataSource.SerializeToDictionary(dataTableEnumerable.Table);
-            }
-            else if (DataSource.Data is IQueryable<AggregateFunctionsGroup>)
-            {
-                var grouppedDataSource = DataSource.Data.Cast<IGroup>();
-
-                if (serverOperationMode) {
-                    dataSource = grouppedDataSource.Leaves();
-                }
-            }
-
-            writer.AppendCollection("data", dataSource);
-        }
-        */
 
         protected override void WriteHtml(HtmlTextWriter writer)
         {

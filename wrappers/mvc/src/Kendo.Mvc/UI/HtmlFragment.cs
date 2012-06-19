@@ -20,7 +20,6 @@ namespace Kendo.Mvc.UI
         {
             get
             {
-                // TODO: Implement this property getter
                 throw new NotImplementedException();
             }
         }
@@ -57,48 +56,42 @@ namespace Kendo.Mvc.UI
         {
             get
             {
-                // TODO: Implement this property getter
                 throw new NotImplementedException();
             }
         }
 
         public IDictionary<string, string> Attributes()
         {
-            // TODO: Implement this method
             throw new NotImplementedException();
         }
 
         public string Attribute(string key)
         {
-            // TODO: Implement this method
             throw new NotImplementedException();
         }
 
         public IHtmlNode Attribute(string key, string value)
         {
-            // TODO: Implement this method
             throw new NotImplementedException();
         }
 
         public IHtmlNode Attribute(string key, string value, bool replaceExisting)
         {
-            // TODO: Implement this method
             throw new NotImplementedException();
         }
 
         public IHtmlNode Attributes<TKey, TValue>(IDictionary<TKey, TValue> attributes)
         {
-            // TODO: Implement this method
             throw new NotImplementedException();
         }
+
         public IHtmlNode Attributes(object attributes)
         {
-            // TODO: Implement this method
             throw new NotImplementedException();
         }
+
         public IHtmlNode Attributes<TKey, TValue>(IDictionary<TKey, TValue> attributes, bool replaceExisting)
         {
-            // TODO: Implement this method
             throw new NotImplementedException();
         }
         
@@ -109,22 +102,20 @@ namespace Kendo.Mvc.UI
 
         public IHtmlNode PrependClass(string[] classes)
         {
-            // TODO: Implement this method
             throw new NotImplementedException();
         }
+
         public IHtmlNode ToggleClass(string @class, bool condition)
         {
-            // TODO: Implement this method
             throw new NotImplementedException();
         }
+
         public IHtmlNode ToggleAttribute(string key, string value, bool condition)
         {
-            // TODO: Implement this method
             throw new NotImplementedException();
         }
         public IHtmlNode ToggleCss(string key, string value, bool condition)
         {
-            // TODO: Implement this method
             throw new NotImplementedException();
         }
         public IHtmlNode Template(Action<TextWriter> value)
@@ -138,7 +129,6 @@ namespace Kendo.Mvc.UI
 
         public IHtmlNode Css(string key, string value)
         {
-            // TODO: Implement this method
             throw new NotImplementedException();
         }
 
@@ -157,7 +147,6 @@ namespace Kendo.Mvc.UI
 
         public IHtmlNode Text(string value)
         {
-            // TODO: Implement this method
             throw new NotImplementedException();
         }
 

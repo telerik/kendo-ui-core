@@ -196,31 +196,6 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Sets the localization culture of the grid.
-        /// </summary>
-        /// <param name="culture">The culture.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().Grid&lt;Order&gt;()
-        ///             .Name("Orders")
-        ///             .Localizable("de-DE")
-        /// %&gt;
-        /// </code>
-        /// </example>
-        //TODO: Localization
-        /*
-        public GridBuilder<T> Localizable(string culture)
-        {
-            var localizationServiceFactory = DI.Current.Resolve<ILocalizationServiceFactory>();
-            var cultureInfo = new CultureInfo(culture);
-
-            Component.Localization = new GridLocalization(localizationServiceFactory.Create("GridLocalization", cultureInfo), cultureInfo);
-
-            return this;
-        }
-        */
-
-        /// <summary>
         /// Configures the grid editing settings.
         /// </summary>
         /// <param name="configurator">Configurator for the edit settings.</param>
@@ -906,71 +881,5 @@ namespace Kendo.Mvc.UI.Fluent
         {
             return Groupable(delegate { });
         }
-
-        /// <summary>
-        /// Sets the HTML content which the grid should display.
-        /// </summary>
-        /// <param name="value">The action which renders the message when grid has no data.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;% Html.Kendo().Grid()
-        ///            .Name("Grid")
-        ///            .NoRecordsTemplate(() => 
-        ///            { 
-        ///               %&gt;
-        ///                     &lt;strong&gt; Hello World!!!;/strong&gt;
-        ///               &lt;% 
-        ///            })
-        /// %&gt;
-        /// </code>
-        /// </example>
-        //TODO: No records template
-        /*
-        public GridBuilder<T> NoRecordsTemplate(Action value)
-        {
-
-            Component.NoRecordsTemplate.Content = value;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the empty message template which will be display if the grid has no data.
-        /// </summary>
-        /// <param name="value">The Razor inline message.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  @(Html.Kendo().Grid()
-        ///            .Name("Grid")
-        ///            .NoRecordsTemplate(@&lt;strong&gt; Hello World!!!&lt;/strong&gt;))
-        /// </code>        
-        /// </example>
-        /// <returns></returns>
-        public GridBuilder<T> NoRecordsTemplate(Func<object, object> value)
-        {
-
-            Component.NoRecordsTemplate.InlineTemplate = value;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the empty message template which will be display if the grid has no data.
-        /// </summary>
-        /// <param name="value">The action which renders the message when grid has no data.</param>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().Grid()
-        ///             .Name("Grid")
-        ///             .NoRecordsTemplate("&lt;strong&gt; Hello World!!!&lt;/strong&gt;")
-        /// %&gt;
-        /// </code>        
-        public GridBuilder<T> NoRecordsTemplate(string value)
-        {
-
-            Component.NoRecordsTemplate.Html = value;
-
-            return this;
-        }
-        */
     }
 }
