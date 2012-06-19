@@ -2259,6 +2259,10 @@
                     strokeWidth: 2,
                     strokeOpacity: 1
                 });
+        },
+
+        formatValue: function(format) {
+            return this.value.category;
         }
     });
 
