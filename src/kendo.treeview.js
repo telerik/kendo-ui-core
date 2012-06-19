@@ -385,6 +385,59 @@
          *         "]' value='true' />"
          *     )
          * });
+         *
+         * @option {Boolean} [loadOnDemand] <true> Indicates whether the child datasources should be fetched
+         * lazily, when parent groups get expanded. Setting this to false causes all child dataSources to
+         * be loaded at initialization time. Note: when initializing a TreeView from array (rather than from a
+         * HierarchicalDataSource instance), the default value of this option is false.
+         *
+         * @option {String} [dataTextField] <null> Sets the field of the data item that provides
+         * the text content of the treeview nodes.
+         * _example
+         * var items = [ { id: 1, ProductName: "Tea" }, { id: 2, ProductName: "Coffee"} ];
+         * $("#treeview").kendoTreeView({
+         *     dataSource: items,
+         *     dataTextField: "ProductName"
+         * });
+         *
+         * @option {String} [dataUrlField] <null> Sets the field of the data item that provides
+         * the link URL of the treeview nodes.
+         * _example
+         * var items = [
+         *     { id: 1, text: "Tea", LinksTo: "http://tea.example.com" },
+         *     { id: 2, text: "Coffee", LinksTo: "http://coffee.example.com" }
+         * ];
+         *
+         * $("#treeview").kendoTreeView({
+         *     dataSource: items,
+         *     dataUrlField: "LinksTo"
+         * });
+         *
+         * @option {String} [dataSpriteCssClassField] <null> Sets the field of the data item that provides
+         * the sprite CSS class of the treeview nodes.
+         * _example
+         * var items = [
+         *     { id: 1, text: "Tea", sprite: "icon-tea" },
+         *     { id: 2, text: "Coffee", sprite: "icon-coffee" }
+         * ];
+         *
+         * $("#treeview").kendoTreeView({
+         *     dataSource: items,
+         *     dataSpriteCssClassField: "sprite"
+         * });
+         *
+         * @option {String} [dataImageUrlField] <null> Sets the field of the data item that provides
+         * the image URL of the treeview nodes.
+         * _example
+         * var items = [
+         *     { id: 1, text: "Tea", image: "tea.png" },
+         *     { id: 2, text: "Coffee", image: "coffee.png" }
+         * ];
+         *
+         * $("#treeview").kendoTreeView({
+         *     dataSource: items,
+         *     dataImageUrlField: "image"
+         * });
          */
         init: function (element, options) {
             var that = this,
