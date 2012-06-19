@@ -593,7 +593,6 @@
 
         refresh: function(domElement) {
             var element = this,
-                options = element.options,
                 center = element.center,
                 radius = element.radius,
                 size = radius * 2;

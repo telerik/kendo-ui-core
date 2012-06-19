@@ -597,8 +597,6 @@
         },
 
         refresh: function(domElement) {
-            var options = this.options;
-
             $(domElement).attr({
                 "r": this.radius
             });

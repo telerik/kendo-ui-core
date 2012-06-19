@@ -2041,7 +2041,7 @@
                     round(box.y1 + box.height() / 2, COORD_PRECISION)
                 ], halfWidth, elementOptions);
             } else {
-                element = view.createRect(box, elementOptions)
+                element = view.createRect(box, elementOptions);
             }
 
             return [ element ];
@@ -2248,8 +2248,7 @@
         },
 
         getOutlineElement: function(view, options) {
-            var element = this,
-                marker = element.marker;
+            var element = this;
 
             // TODO: Gradiented stroke (shadow filter?)
             return view.createCircle(
@@ -2802,7 +2801,7 @@
 
             if (isArray(data)) {
                 value = {};
-                for (i = 0; i < fields.length; i++) {
+                for (i = 0; i < fieldsLength; i++) {
                     fieldValue = data[i];
                     if (defined(fieldValue)) {
                         value[fields[i]] = fieldValue;
@@ -2811,7 +2810,7 @@
             }
 
             if (!defined(data) && series.dataItems) {
-                for (i = 0; i < fields.length; i++) {
+                for (i = 0; i < fieldsLength; i++) {
                     fieldName = fields[i];
                     sourceField = series[fieldName + "Field"];
 
@@ -2924,7 +2923,8 @@
                 value;
 
             for(i = 0; i < length; i++) {
-                max = math.max(max, math.abs(chart.pointValue(series, i).z));
+                value = chart.pointValue(series, i).z;
+                max = math.max(max, math.abs(value));
             }
 
             return max;
