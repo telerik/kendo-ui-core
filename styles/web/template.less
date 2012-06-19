@@ -530,7 +530,6 @@ textarea.k-textbox:hover,
 
 /* Shadows */
 
-.k-shadow,
 .k-popup,
 .k-menu .k-group,
 .k-grid .k-filter-options,
@@ -556,6 +555,16 @@ textarea.k-textbox:hover,
 .k-picker-wrap .k-input
 {
     .box-shadow(inset 0 0 1px 1px @shadow-inset-color);
+}
+
+.k-shadow
+{
+    .box-shadow(0 1px 2px 0 @shadow-color);
+}
+
+.k-inset
+{
+    .box-shadow(inset 0 1px 1px @shadow-color);
 }
 
 /* Border radius */
