@@ -1158,7 +1158,8 @@ div.k-grid-header .k-header
     overflow: auto;
     border-style: solid;
     border-width: 1px;
-    line-height: 34px;
+    line-height: 24px;
+    padding:4px 0 4px 3px;
 }
 
 .k-grid-pager
@@ -1168,13 +1169,18 @@ div.k-grid-header .k-header
 
 .k-grid .k-pager-numbers,
 .k-pager-numbers .k-link,
-.k-pager-numbers .k-state-active
+.k-pager-numbers .k-state-selected
 {
     display: inline-block;
     vertical-align: top;
 }
 
-.k-pager-numbers .k-state-active
+.k-pager-numbers
+{
+    margin:0 2px;
+}
+
+.k-pager-numbers .k-state-selected
 {
     vertical-align:top;
 }
@@ -1193,7 +1199,7 @@ div.k-grid-header .k-header
 .k-grid .k-pager-info
 {
     float: right;
-    padding:0 22px;
+    padding:0 16px;
 }
 
 .k-pager-numbers .k-link
@@ -1204,9 +1210,12 @@ div.k-grid-header .k-header
 .k-pager-wrap>.k-link
 {
     float:left;
-    padding: 0 8px;
-    height: 34px;/*IE7*/
-    line-height: 34px;/*IE7*/
+    margin:0 1px;
+    padding: 0 3px;
+    height: 22px;/*IE7*/
+    line-height: 22px;/*IE7*/
+    border-radius:13px;
+    cursor:pointer;
 }
 
 .k-pager-wrap>.k-link .k-icon
@@ -1219,31 +1228,32 @@ div.k-grid-header .k-header
     margin-top:9px;
 }
 
-.k-pager-numbers .k-link,
-.k-pager-numbers .k-state-active
-{
-    padding: 0 13px;
-}
-
-.k-pager-wrap>.k-link,
 .k-pager-numbers .k-link
 {
+    padding: 0 6px;
+}
+
+.k-pager-wrap>.k-link
+{
     border-style:solid;
-    border-width:0 1px 0 0;
+    border-width:1px;
 }
 
 .k-pager-wrap .k-pager-refresh
 {
     float:right;
-    border-width:0 0 0 1px;
+    margin-right:6px;
+    border-width:0;
+    border-radius:0;
 }
 
-.k-pager-numbers .k-state-active
+.k-pager-numbers .k-state-selected
 {
     border-style:solid;
     border-width:1px;
-    line-height:32px;
-    padding-left:12px;
+    line-height:22px;
+    padding:0 7px;
+    border-radius:13px;
 }
 
 .k-pager-wrap .k-textbox
