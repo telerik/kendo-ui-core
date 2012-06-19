@@ -142,6 +142,15 @@ namespace Kendo.Mvc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Drag a column header and drop it here to group by that column.
+        /// </summary>
+        public static string Group_Empty {
+            get {
+                return ResourceManager.GetString("Group_Empty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} - {1} of {2} items.
         /// </summary>
         public static string Pager_Display {

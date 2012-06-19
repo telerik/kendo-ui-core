@@ -1257,13 +1257,13 @@
                     that.groupable.destroy();
                 }
 
-                that.groupable = new Groupable(wrapper, {
+                that.groupable = new Groupable(wrapper, extend({}, groupable, {
                     draggable: that._draggableInstance,
                     groupContainer: ">div.k-grouping-header",
                     dataSource: that.dataSource,
                     filter: ".k-header:not(.k-group-cell,.k-hierarchy-cell)[" + kendo.attr("field") + "]",
                     allowDrag: that.options.reorderable
-                });
+                }));
             }
         },
 

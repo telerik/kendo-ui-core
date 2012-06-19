@@ -451,6 +451,7 @@
     <Compile Include="UI\Grid\Fluent\GridCustomActionCommandBuilder.cs" />
     <Compile Include="UI\Grid\AggregateDescriptor.cs" />
     <Compile Include="UI\Grid\Fluent\GridToolBarCommandBuilder.cs" />
+    <Compile Include="UI\Grid\Fluent\GroupingMessagesBuilder.cs" />
     <Compile Include="UI\Grid\GridAggregateResult.cs" />
     <Compile Include="UI\DataSource\Fluent\DataSourceAggregatesFactory.cs" />
     <Compile Include="UI\Grid\GridColumnExtensions.cs" />
@@ -465,6 +466,7 @@
     <Compile Include="UI\Grid\Html\IGridFormatableCellBuilder.cs" />
     <Compile Include="UI\Grid\Html\IGridPagerPageSizeSection.cs" />
     <Compile Include="UI\Grid\Html\IGridPagerPagingSectionsBuilder.cs" />
+    <Compile Include="UI\Grid\Settings\GroupingMessages.cs" />
     <Compile Include="UI\Pager\DefaultPagerMessages.cs" />
     <Compile Include="UI\Pager\Fluent\PagerMessagesBuilder.cs" />
     <Compile Include="UI\Pager\PagerMessages.cs" />

@@ -42,30 +42,6 @@ namespace Kendo.Mvc.UI.Html.Tests
         }
 
         [Fact]
-        public void Should_create_ascending_sort_icon()
-        {
-            var builder = CreateSortableHeaderCellBuilder(ListSortDirection.Ascending);
-
-            var cell = builder.CreateCell();
-
-            var arrow = GetArrow(cell);
-
-            arrow.Attribute("class").ShouldEqual("k-icon k-arrow-up");
-            arrow.InnerHtml.ShouldEqual("(" + expectedSortedAscText + ")");
-        }
-
-        [Fact]
-        public void Should_create_descending_sort_icon()
-        {
-            var builder = CreateSortableHeaderCellBuilder(ListSortDirection.Descending);
-
-            var cell = builder.CreateCell();
-            var arrow = GetArrow(cell);
-            arrow.Attribute("class").ShouldEqual("k-icon k-arrow-down");
-            arrow.InnerHtml.ShouldEqual("(" + expectedSortedDescText + ")");
-        }
-
-        [Fact]
         public void Should_place_sort_icon_after_text()
         {
             var text = new HtmlElement("b");
@@ -107,7 +83,7 @@ namespace Kendo.Mvc.UI.Html.Tests
         private GridSortableHeaderCellBuilder CreateSortableHeaderCellBuilder(ListSortDirection? sortDirection, Action<IHtmlNode> appendContent)
         {
             var htmlAttributes = new Dictionary<string, object>();
-            return new GridSortableHeaderCellBuilder(htmlAttributes, expectedUrl, sortDirection, expectedSortedAscText, expectedSortedDescText, appendContent);
+            return new GridSortableHeaderCellBuilder(htmlAttributes, expectedUrl, sortDirection, appendContent);
         }
     }
 }

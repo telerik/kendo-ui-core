@@ -58,7 +58,7 @@ namespace Kendo.Mvc.UI
                 }                
             };
 
-            Grouping = new GridGroupingSettings(this);
+            Grouping = new GridGroupingSettings();
             Resizing = new GridResizingSettings();
             Reordering = new GridReorderingSettings();
 
@@ -642,7 +642,7 @@ namespace Kendo.Mvc.UI
             
             if (Grouping.Enabled)
             {
-                options["groupable"] = true;
+                options["groupable"] = Grouping.ToJson();
             }
 
             if (Paging.Enabled)
@@ -854,13 +854,8 @@ namespace Kendo.Mvc.UI
             {
                 GetTitle = VisibleColumns.Cast<IGridColumn>().GroupTitleForMember,
                 GroupDescriptors = DataSource.Groups,
-                //todo: group hint localization
-                Hint = "Drag a column header and drop it here to group by that column",
-                UrlBuilder = UrlBuilder,
-                SortedAscText = "asc",
-                SortedDescText = "desc",
-                //todo: group hint localization
-                UnGroupText = "ungroup"
+                Messages = Grouping.Messages,
+                UrlBuilder = UrlBuilder
             };
         }
 

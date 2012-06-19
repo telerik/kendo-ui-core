@@ -848,11 +848,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public GridBuilder<T> Groupable(Action<GridGroupingSettingsBuilder<T>> configurator)
+        public GridBuilder<T> Groupable(Action<GridGroupingSettingsBuilder> configurator)
         {
 
             Component.Grouping.Enabled = true;
-            configurator(new GridGroupingSettingsBuilder<T>(Component.Grouping));
+            configurator(new GridGroupingSettingsBuilder(Component.Grouping));
 
             return this;
         }

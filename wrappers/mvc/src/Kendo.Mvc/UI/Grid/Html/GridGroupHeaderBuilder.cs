@@ -4,7 +4,6 @@ namespace Kendo.Mvc.UI.Html
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
-    using Kendo.Mvc.Infrastructure;
 
     public class GridGroupHeaderBuilder : IGridGroupHeaderBuilder
     {
@@ -26,7 +25,7 @@ namespace Kendo.Mvc.UI.Html
 
         private void AppendHint(IHtmlNode div, GridGroupingData groupingData)
         {
-            div.Html(groupingData.Hint);
+            div.Html(groupingData.Messages.Empty);
         }
 
         private void AppendGroupIndicators(IHtmlNode div, GridGroupingData groupingData)
@@ -51,12 +50,12 @@ namespace Kendo.Mvc.UI.Html
 
             indicator.AppendTo(div);
 
-            AppendSortLink(indicator, group, groups, groupingData.UrlBuilder, groupingData.GetTitle, groupingData.SortedAscText, groupingData.SortedDescText);
+            AppendSortLink(indicator, group, groups, groupingData.UrlBuilder, groupingData.GetTitle);
 
-            AppendUngroupButton(indicator, groupingData.UrlBuilder, groups, groupingData.UnGroupText);
+            AppendUngroupButton(indicator, groupingData.UrlBuilder, groups);
         }
         
-        private void AppendUngroupButton(IHtmlNode indicator, IGridUrlBuilder urlBuilder, List<GroupDescriptor> groups, string ungroupText)
+        private void AppendUngroupButton(IHtmlNode indicator, IGridUrlBuilder urlBuilder, List<GroupDescriptor> groups)
         {
             var button = new HtmlElement("a")
                             .Attribute("href", urlBuilder.SelectUrl(GridUrlParameters.Group,
@@ -66,11 +65,10 @@ namespace Kendo.Mvc.UI.Html
 
             new HtmlElement("span")
                 .AddClass(UIPrimitives.Icon, UIPrimitives.Icons.GroupDelete)
-                .Text(ungroupText)
                 .AppendTo(button);
         }
 
-        private void AppendSortLink(IHtmlNode indicator, GroupDescriptor group, List<GroupDescriptor> groups, IGridUrlBuilder urlBuilder, Func<string, string> title, string sortedAscText, string sortedDescText)
+        private void AppendSortLink(IHtmlNode indicator, GroupDescriptor group, List<GroupDescriptor> groups, IGridUrlBuilder urlBuilder, Func<string, string> title)
         {
             group.CycleSortDirection();
 
@@ -85,7 +83,6 @@ namespace Kendo.Mvc.UI.Html
                 .AddClass(UIPrimitives.Icon)
                 .ToggleClass("k-arrow-up-small", group.SortDirection == ListSortDirection.Ascending)
                 .ToggleClass("k-arrow-down-small", group.SortDirection == ListSortDirection.Descending)
-                .Text(String.Format("({0})", group.SortDirection == ListSortDirection.Ascending ? sortedAscText : sortedDescText))
                 .AppendTo(a);
 
             groups.Remove(group);

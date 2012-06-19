@@ -144,6 +144,9 @@
   <data name="Grid_Update" xml:space="preserve">
     <value>Update</value>
   </data>
+  <data name="Group_Empty" xml:space="preserve">
+    <value>Drag a column header and drop it here to group by that column</value>
+  </data>
   <data name="Pager_Display" xml:space="preserve">
     <value>{0} - {1} of {2} items</value>
   </data>

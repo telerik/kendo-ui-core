@@ -1,63 +1,34 @@
 namespace Kendo.Mvc.UI
 {
+    using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.Linq;
-    using Kendo.Mvc.Extensions;
-    using Kendo.Mvc.Infrastructure;
 
-    public class GridGroupingSettings
+    public class GridGroupingSettings : JsonObject
     {
-        private readonly IGrid grid;
-
-        public GridGroupingSettings(IGrid grid)
+        public GridGroupingSettings()
         {
-            this.grid = grid;
-
             Groups = new List<GroupDescriptor>();
             Visible = true;
+            Messages = new GroupingMessages();
         }
 
-        public bool Enabled
-        {
-            get;
-            set;
-        }
+        public bool Enabled { get; set; }
 
-        public bool Visible
-        {
-            get;
-            set;
-        }
+        public bool Visible { get; set; }
 
-        public IList<GroupDescriptor> Groups
-        {
-            get;
-            private set;
-        }
+        public IList<GroupDescriptor> Groups { get; private set; }
         
-        public IEnumerable<IDictionary<string, object>> SerializeDescriptors()
-        {
-            var result = new List<IDictionary<string, object>>();
+        public GroupingMessages Messages { get; private set; }
 
-            grid.DataSource.Groups.Each(groupDescriptor =>
+        protected override void Serialize(IDictionary<string, object> json)
+        {
+            var messages = Messages.ToJson();
+
+            if (messages.Keys.Any())
             {
-                var group = new Dictionary<string, object>();
-
-                FluentDictionary.For(group)
-                    .Add("member", groupDescriptor.Member)
-                    .Add("order", groupDescriptor.SortDirection == ListSortDirection.Ascending ? "asc" : "desc")
-                    .Add("title", grid.Columns.GroupTitleForMember(groupDescriptor.Member));
-
-                result.Add(group);
-            });
-
-            return result;
-        }
-
-        public string SerializeExpression()
-        {
-            return GridDescriptorSerializer.Serialize(grid.DataSource.Groups);
+                json["messages"] = messages;
+            }
         }
     }
 }

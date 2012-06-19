@@ -23,25 +23,7 @@ namespace Kendo.Mvc.UI.Html
             set;
         }
 
-        public string Hint
-        {
-            get;
-            set;
-        }
-
-        public string SortedAscText
-        {
-            get;
-            set;
-        }
-
-        public string SortedDescText
-        {
-            get;
-            set;
-        }
-
-        public string UnGroupText
+        public GroupingMessages Messages
         {
             get;
             set;

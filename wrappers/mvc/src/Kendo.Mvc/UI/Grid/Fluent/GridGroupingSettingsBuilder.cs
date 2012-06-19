@@ -2,10 +2,7 @@ namespace Kendo.Mvc.UI.Fluent
 {
     using System;
     
-    using Infrastructure;
-
-    public class GridGroupingSettingsBuilder<T> : IHideObjectMembers
-        where T : class
+    public class GridGroupingSettingsBuilder : IHideObjectMembers
     {
         private readonly GridGroupingSettings settings;
         
@@ -14,19 +11,29 @@ namespace Kendo.Mvc.UI.Fluent
             this.settings = settings;
         }
 
-        public GridGroupingSettingsBuilder<T> Enabled(bool value)
+        public GridGroupingSettingsBuilder Messages(Action<GroupingMessagesBuilder> configurator)
         {
-            settings.Enabled = value;
+            configurator(new GroupingMessagesBuilder(settings.Messages));
+
             return this;
         }
 
+        public GridGroupingSettingsBuilder Enabled(bool value)
+        {
+            settings.Enabled = value;
+
+            return this;
+        }
+
+        //TODO: invisible group panel
         /// <summary>
         /// Determines if group header should be shown.
         /// </summary>
         /// <param name="value">true if visible, otherwise false.</param>
-        public GridGroupingSettingsBuilder<T> Visible(bool value)
+        public GridGroupingSettingsBuilder Visible(bool value)
         {
             settings.Visible = value;
+
             return this;
         }
     }
