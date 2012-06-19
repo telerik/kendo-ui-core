@@ -245,8 +245,11 @@
                     width: 1
                 },
                 bubble: {
-                    markers: {
-                        maxSize: 50
+                    minSize: 5,
+                    maxSize: 50,
+                    negativeValues: {
+                        color: WHITE,
+                        visible: false
                     }
                 },
                 labels: {}
@@ -2231,19 +2234,8 @@
 
     var Bubble = LinePoint.extend({
         options: {
-            markers: {
-                border: {
-                    width: 1,
-                    color: WHITE
-                },
-                opacity: 0.6,
-                animation: {
-                    type: BUBBLE
-                }
-            },
             labels: {
-                position: CENTER,
-                background: "transparent"
+                position: CENTER
             }
         },
 
@@ -2873,47 +2865,55 @@
                 point,
                 color = value.color || series.color,
                 maxValue = chart.seriesMax(series),
-                maxR = series.markers.maxSize / 2,
+                minR = series.minSize / 2,
+                maxR = series.maxSize / 2,
+                minArea = math.PI * minR * minR,
                 maxArea = math.PI * maxR * maxR,
-                area = math.abs(value.z) * (maxArea / maxValue),
-                r = math.sqrt(area / math.PI),
+                areaRange = maxArea - minArea,
+                area = math.abs(value.z) * (areaRange / maxValue),
+                r = math.sqrt((minArea + area) / math.PI),
                 pointsCount = series.data.length,
                 delay = pointIx * (INITIAL_ANIMATION_DURATION / pointsCount),
                 animationOptions = {
                     delay: delay,
-                    duration: INITIAL_ANIMATION_DURATION - delay
-                };
+                    duration: INITIAL_ANIMATION_DURATION - delay,
+                    type: BUBBLE
+                },
+                visible = true;
 
-            point = new Bubble(value,
-                deepExtend({
-                    markers: {
-                        background: color,
-                        animation: animationOptions
-                    },
-                    tooltip: {
-                        format: chart.options.tooltip.format
-                    },
-                    labels: {
-                        format: chart.options.labels.format,
-                        animation: animationOptions
-                    }
-                }, series, {
-                    markers: {
-                        background: value.z < 0 ? WHITE : undefined,
-                        size: r * 2,
-                        type: CIRCLE,
-                        zIndex: maxR - r
-                    },
-                    labels: { position: CENTER, zIndex: maxR - r + 1, background: "" }
-                })
-            );
+            if (value.z < 0) {
+                color = series.negativeValues.color;
+                visible = series.negativeValues.visible;
+            }
 
-            chart.append(point);
+            if (visible) {
+                point = new Bubble(value,
+                    deepExtend({
+                            markers: {
+                            size: r * 2,
+                            type: CIRCLE,
+                            background: color,
+                            border: series.border,
+                            opacity: series.opacity,
+                            animation: animationOptions,
+                            zIndex: maxR - r
+                        },
+                        tooltip: {
+                            format: chart.options.tooltip.format
+                        },
+                        labels: {
+                            zIndex: maxR - r + 1,
+                            format: chart.options.labels.format,
+                            animation: animationOptions
+                        }
+                    }, series)
+                );
+
+                chart.append(point);
+            }
 
             return point;
 
-            // TODO: Render point category as label
-            // TODO: Negative values - color, visibility
             // TODO: Hover that updates rendered element
             // TODO: Clip to axis line box
         },

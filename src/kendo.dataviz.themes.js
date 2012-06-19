@@ -29,6 +29,15 @@
                 },
                 donut: {
                     margin: 1
+                },
+                bubble: {
+                    opacity: 0.6,
+                    border: {
+                        width: 0
+                    },
+                    labels: {
+                        background: "transparent"
+                    }
                 }
             },
             axisDefaults: {

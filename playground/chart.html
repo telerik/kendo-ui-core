@@ -45,7 +45,7 @@
 
                 $("#chart").kendoChart({
                     legend: {
-                        visible: false
+                        visible: true
                     },
                     dataSource: {
                         data: data
@@ -55,8 +55,11 @@
                         labels: {
                             visible: true
                         },
-                        markers: {
-                            maxSize: 120
+                        maxSize: 120,
+                        border: {},
+                        negativeValues: {
+                            color: "#f00",
+                            visible: true
                         },
                         xField: "lifeExpectancy",
                         yField: "fertilityRate",
