@@ -394,12 +394,12 @@
                 var data = [{
                         xValue: 1,
                         yValue: 10,
-                        zValue: 100,
+                        sizeValue: 100,
                         pointColor: "red"
                     }, {
                         xValue: 2,
                         yValue: 20,
-                        zValue: 200,
+                        sizeValue: 200,
                         pointColor: "blue"
                     }],
                     points;
@@ -430,24 +430,24 @@
                         data: [[1, 10, 100], [2, 20, 200]]
                     });
 
-                    same(points[1].value, { x: 2, y: 20, z: 200 });
+                    same(points[1].value, { x: 2, y: 20, size: 200 });
                 });
 
-                test("binds x, y and z field", function() {
+                test("binds x, y and size field", function() {
                     createBubbleChart({
                         xField: "xValue",
                         yField: "yValue",
-                        zField: "zValue"
+                        sizeField: "sizeValue"
                     });
 
-                    same(points[1].value, { x: 2, y: 20, z: 200 });
+                    same(points[1].value, { x: 2, y: 20, size: 200 });
                 });
 
                 test("binds color field", function() {
                     createBubbleChart({
                         xField: "xValue",
                         yField: "yValue",
-                        zField: "zValue",
+                        sizeField: "sizeValue",
                         colorField: "pointColor"
                     });
 
@@ -458,24 +458,24 @@
                     createBubbleChart({
                         xField: "xValue",
                         yField: "yValue",
-                        zField: "zValue",
+                        sizeField: "sizeValue",
                         categoryField: "pointColor"
                     });
 
                     same(points[1].value.category, "blue");
                 });
 
-                test("binds to object with x, y and z fields", function() {
+                test("binds to object with x, y and size fields", function() {
                     createBubbleChart({
-                        data: [{x: 1, y: 10, z: 100}, {x: 2, y: 20, z: 200}]
+                        data: [{x: 1, y: 10, size: 100}, {x: 2, y: 20, size: 200}]
                     });
 
-                    same(points[1].value, { x: 2, y: 20, z: 200 });
+                    same(points[1].value, { x: 2, y: 20, size: 200 });
                 });
 
                 test("binds color to object field", function() {
                     createBubbleChart({
-                        data: [{ x: 1, y: 10, z: 100, color: "red" }]
+                        data: [{ x: 1, y: 10, size: 100, color: "red" }]
                     });
 
                     same(points[0].value.color, "red");
@@ -483,7 +483,7 @@
 
                 test("binds category to object field", function() {
                     createBubbleChart({
-                        data: [{ x: 1, y: 10, z: 100, category: "UK" }]
+                        data: [{ x: 1, y: 10, size: 100, category: "UK" }]
                     });
 
                     same(points[0].value.category, "UK");

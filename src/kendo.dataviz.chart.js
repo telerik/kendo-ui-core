@@ -2875,7 +2875,7 @@
                 minArea = math.PI * minR * minR,
                 maxArea = math.PI * maxR * maxR,
                 areaRange = maxArea - minArea,
-                area = math.abs(value.z) * (areaRange / maxValue),
+                area = math.abs(value.size) * (areaRange / maxValue),
                 r = math.sqrt((minArea + area) / math.PI),
                 pointsCount = series.data.length,
                 delay = pointIx * (INITIAL_ANIMATION_DURATION / pointsCount),
@@ -2886,7 +2886,7 @@
                 },
                 visible = true;
 
-            if (value.z < 0) {
+            if (value.size < 0) {
                 color = series.negativeValues.color || color;
                 visible = series.negativeValues.visible;
             }
@@ -2934,7 +2934,7 @@
                 value;
 
             for(i = 0; i < length; i++) {
-                value = chart.pointValue(series, i).z;
+                value = chart.pointValue(series, i).size;
                 max = math.max(max, math.abs(value));
             }
 
@@ -2943,7 +2943,7 @@
 
         bindableFields: function() {
             return ScatterChart.fn.bindableFields.call(this)
-                   .concat(["z", "color", "category", "visibleInLegend"]);
+                   .concat(["size", "color", "category", "visibleInLegend"]);
         },
 
         getViewElements: function(view) {
@@ -2953,7 +2953,7 @@
         },
 
         formatPointValue: function(value, format) {
-            return autoFormat(format, value.x, value.y, value.z, value.category);
+            return autoFormat(format, value.x, value.y, value.size, value.category);
         }
     });
 
