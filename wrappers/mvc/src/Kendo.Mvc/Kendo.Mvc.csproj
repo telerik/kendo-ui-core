@@ -718,7 +718,6 @@
     <Compile Include="UI\ListView\Fluent\ListViewEventBuilder.cs" />
     <Compile Include="UI\ListView\ListViewSettingsSerializer.cs" />
     <Compile Include="UI\ListView\Fluent\ListViewSelectionSettingsBuilder.cs" />
-    <Compile Include="UI\ListView\Fluent\ListViewPagerSettingsBuilder.cs" />
     <Compile Include="UI\ListView\Fluent\ListViewBuilder.cs" />
     <Compile Include="UI\ListView\ListViewSelectionMode.cs" />
     <Compile Include="UI\ListView\Html\ListViewHtmlBuilder.cs" />
@@ -727,7 +726,6 @@
     <Compile Include="UI\ListView\ListViewViewDataContainer.cs" />
     <Compile Include="UI\ListView\Settings\ListViewEditingSettings.cs" />
     <Compile Include="UI\ListView\Settings\ListViewSelectionSettings.cs" />
-    <Compile Include="UI\ListView\Settings\ListViewPagingSettings.cs" />
     <Compile Include="UI\LiteralNode.cs" />
     <Compile Include="Infrastructure\Implementation\PredicateFilterDescription.cs" />
     <Compile Include="Infrastructure\Implementation\Grouping\AggregateFunctionsGroup.cs" />

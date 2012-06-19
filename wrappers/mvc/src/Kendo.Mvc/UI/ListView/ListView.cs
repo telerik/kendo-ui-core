@@ -19,7 +19,7 @@
         {
             UrlGenerator = urlGenerator;
 
-            Paging = new ListViewPagingSettings();
+            Paging = new PagerSettings();
 
             Selection = new ListViewSelectionSettings();
 
@@ -64,7 +64,7 @@
             set;
         }
         
-        public ListViewPagingSettings Paging
+        public PagerSettings Paging
         {
             get;
             private set;

@@ -29,7 +29,7 @@
             get;            
         }
 
-        ListViewPagingSettings Paging
+        PagerSettings Paging
         {
             get;        
         }

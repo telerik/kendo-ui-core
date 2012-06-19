@@ -107,11 +107,11 @@
         /// %&gt;
         /// </code>
         /// </example>
-        public ListViewBuilder<T> Pageable(Action<ListViewPagerSettingsBuilder> pagerAction)
+        public ListViewBuilder<T> Pageable(Action<PagerBuilder> pagerAction)
         {
             Component.Paging.Enabled = true;
 
-            pagerAction(new ListViewPagerSettingsBuilder(Component.Paging));
+            pagerAction(new PagerBuilder(Component.Paging));
 
             return this;
         }

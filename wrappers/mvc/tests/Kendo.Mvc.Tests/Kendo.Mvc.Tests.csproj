@@ -152,7 +152,6 @@
     <Compile Include="UI\ListView\ListViewSettingsSerializerTests.cs" />
     <Compile Include="UI\ListView\ListViewSelectionSettingsBuilderTests.cs" />
     <Compile Include="UI\ListView\ListViewHtmlBuilderTests.cs" />
-    <Compile Include="UI\ListView\ListViewPagerSettingsBuilderTests.cs" />
     <Compile Include="UI\ListView\ListViewWorkingConditionsTests.cs" />
     <Compile Include="UI\ListView\ListViewTestHelper.cs" />
     <Compile Include="UI\ListView\ListViewBuilderTests.cs" />
