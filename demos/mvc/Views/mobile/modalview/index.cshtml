@@ -1,7 +1,6 @@
-<div data-role="view">
-    <h3>OctaGram</h3>
-    <p>Your life, captured.</p>
-    <a data-role="button" data-rel="modalview" href="#modalview-login">Login</a>
+<div data-role="view" id="modalview-camera" data-title="HTML5 Camera">
+    <img src="../../content/mobile/modalview/lens.png" class="camera-image" /><br />
+    <a data-role="button" data-rel="modalview" href="#modalview-login" id="modalview-open-button">Login</a>
 
     <div data-role="modalview" id="modalview-login" style="width: 95%; height: 80%;">
         <div data-role="header">
@@ -16,17 +15,61 @@
             <li><label for="password">Password:</label> <input type="password" id="password" /></li>
         </ul>
         <a data-click="closeModalViewLogin" id="modalview-login-button" type="button" data-role="button">Login</a>
+        <a data-click="closeModalViewLogin" id="modalview-reg-button" type="button" data-role="button">Register</a>
     </div>
 </div>
 
 <style scoped>
-    #modalview-login-button
-    {
+    #modalview-login-button, 
+    #modalview-reg-button, 
+    #modalview-open-button {
         display: block;
         text-align: center;
-        margin: 0 .8em;
+        margin: .6em .8em 0;
         font-size: 1.2em;
     }
+    
+    #modalview-open-button {
+        margin: 0 3em;
+        padding: .5em;
+    }
+    
+    #modalview-camera {
+    	text-align: center;
+    }
+    
+    #modalview-camera img {
+    	display: block;
+    	margin: 30px auto;
+    }
+    
+    #modalview-login {
+        height: 200px;
+    }
+    
+    #modalview-camera .km-content,
+    .km-ios #modalview-login .km-content {
+	    background: url(../../content/shared/images/patterns/pattern1.png) repeat 0 0;
+    }
+    
+    .km-ios #modalview-camera .km-button,
+    .km-ios #modalview-login .km-button,
+    .km-ios #modalview-camera .km-navbar,
+    .km-ios #modalview-login .km-header {
+	    background-color: #000;
+    }
+    
+    .km-ios #modalview-camera .km-button:active,
+    .km-ios #modalview-camera .km-state-active,
+    .km-ios #modalview-login .km-button:active,
+    .km-ios #modalview-login .km-state-active {
+        background-color: #2e2e2e;
+    }
+    
+    .km-ios #modalview-login #modalview-login-button {
+	    background-color: Green;
+    }
+
 </style>
 <script>
     function closeModalViewLogin() {
