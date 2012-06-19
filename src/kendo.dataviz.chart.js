@@ -246,7 +246,7 @@
                 },
                 bubble: {
                     minSize: 5,
-                    maxSize: 50,
+                    maxSize: 100,
                     negativeValues: {
                         color: WHITE,
                         visible: false
@@ -2882,14 +2882,14 @@
                 visible = true;
 
             if (value.z < 0) {
-                color = series.negativeValues.color;
+                color = series.negativeValues.color || color;
                 visible = series.negativeValues.visible;
             }
 
             if (visible) {
                 point = new Bubble(value,
                     deepExtend({
-                            markers: {
+                        markers: {
                             size: r * 2,
                             type: CIRCLE,
                             background: color,
