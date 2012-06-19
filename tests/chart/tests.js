@@ -88,6 +88,10 @@ tests.push(
         title: "chart scatter"
     },
     {
+        page: "chart/bubblechart.html",
+        title: "chart bubble"
+    },
+    {
         page: "chart/mvvm.html",
         title: "chart mvvm"
     },

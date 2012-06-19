@@ -59,6 +59,22 @@
             }],
             "name": "bar-charts"
         }, {
+            "text": "Bubble Charts",
+            "name": "bubble-charts",
+            "documentation": "dataviz/chart",
+            "spriteCssClass": "chartBubbleIcon",
+            "items": [{
+                    "text": "Basic usage",
+                    "url": "bubble-charts/index.html"
+                }, {
+                    "text": "Binding to remote data",
+                    "url": "bubble-charts/remote-data.html",
+                    "packages": [ "!offline" ]
+                }, {
+                    "text": "Binding to local data",
+                    "url": "bubble-charts/local-data.html"
+            }]
+        }, {
             "text": "Line Charts",
             "documentation": "dataviz/chart",
             "spriteCssClass": "chartLineIcon",

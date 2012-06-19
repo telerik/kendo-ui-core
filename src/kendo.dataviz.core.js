@@ -34,6 +34,7 @@
         DEGREE = math.PI / 180,
         DONUT = "donut",
         FADEIN = "fadeIn",
+        FORMAT_REGEX = /\{\d+:?/,
         HEIGHT = "height",
         ID_PREFIX = "k",
         INITIAL_ANIMATION_DURATION = 600,
@@ -153,14 +154,20 @@
             return box;
         },
 
-        alignTo: function(targetBox, edge) {
+        alignTo: function(targetBox, anchor) {
             var box = this,
                 height = box.height(),
                 width = box.width(),
-                axis = edge == TOP || edge == BOTTOM ? Y : X,
+                axis = anchor == TOP || anchor == BOTTOM ? Y : X,
                 offset = axis == Y ? height : width;
 
-            if (edge == TOP || edge == LEFT) {
+            if (anchor === CENTER) {
+                var targetCenter = targetBox.center();
+                var center = box.center();
+
+                box.x1 += targetCenter.x - center.x;
+                box.y1 += targetCenter.y - center.y;
+            } else if (anchor === TOP || anchor === LEFT) {
                 box[axis + 1] = targetBox[axis + 1] - offset;
             } else {
                 box[axis + 1] = targetBox[axis + 2];
@@ -609,35 +616,44 @@
 
         getViewElements: function(view, renderOptions) {
             var boxElement = this,
-                options = boxElement.options;
+                options = boxElement.options,
+                elements = [];
 
             if (!options.visible) {
                 return [];
             }
 
-            var border = options.border || {},
-                elements = [];
-
             if (boxElement.hasBox()) {
                 elements.push(
-                    view.createRect(boxElement.paddingBox, deepExtend({
-                        id: options.id,
-                        stroke: border.width ? border.color : "",
-                        strokeWidth: border.width,
-                        dashType: border.dashType,
-                        strokeOpacity: options.opacity,
-                        fill: options.background,
-                        fillOpacity: options.opacity,
-                        animation: options.animation,
-                        zIndex: options.zIndex,
-                        data: { modelId: options.modelId }
-                    }, renderOptions))
+                    view.createRect(
+                        boxElement.paddingBox,
+                        deepExtend(boxElement.elementStyle(), renderOptions)
+                    )
                 );
             }
 
             return elements.concat(
                 ChartElement.fn.getViewElements.call(boxElement, view)
             );
+        },
+
+        elementStyle: function() {
+            var boxElement = this,
+                options = boxElement.options,
+                border = options.border || {};
+
+            return {
+                id: options.id,
+                stroke: border.width ? border.color : "",
+                strokeWidth: border.width,
+                dashType: border.dashType,
+                strokeOpacity: options.opacity,
+                fill: options.background,
+                fillOpacity: options.opacity,
+                animation: options.animation,
+                zIndex: options.zIndex,
+                data: { modelId: options.modelId }
+            };
         }
     });
 
@@ -2415,7 +2431,7 @@
     }
 
     function autoFormat(format, value) {
-        if (format.indexOf("{0:") !== -1 || format.indexOf("{0}") !== -1) {
+        if (format.match(FORMAT_REGEX)) {
             return kendo.format.apply(this, arguments);
         }
 

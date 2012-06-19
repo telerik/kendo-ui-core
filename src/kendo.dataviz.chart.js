@@ -58,6 +58,7 @@
         BELOW = "below",
         BLACK = "#000",
         BOTTOM = "bottom",
+        BUBBLE = "bubble",
         CATEGORY = "Category",
         CENTER = "center",
         CHANGE = "change",
@@ -131,7 +132,7 @@
         ZERO = "zero";
 
     var CATEGORICAL_CHARTS = [BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA],
-        XY_CHARTS = [SCATTER, SCATTER_LINE];
+        XY_CHARTS = [SCATTER, SCATTER_LINE, BUBBLE];
 
     var DateLabelFormats = {
         hours: "HH:mm",
@@ -242,6 +243,14 @@
                 },
                 scatterLine: {
                     width: 1
+                },
+                bubble: {
+                    minSize: 5,
+                    maxSize: 100,
+                    negativeValues: {
+                        color: WHITE,
+                        visible: false
+                    }
                 },
                 labels: {}
             },
@@ -562,10 +571,8 @@
                     row = data[dataIx];
 
                     if (currentSeries.field) {
+                        // TODO: Replace with ScatterChart pointValue and make color bindable
                         value = getField(currentSeries.field, row);
-                    } else if (currentSeries.xField && currentSeries.yField) {
-                        value = [getField(currentSeries.xField, row),
-                                 getField(currentSeries.yField, row)];
                     } else {
                         value = undefined;
                     }
@@ -2015,24 +2022,29 @@
                 options = marker.options,
                 type = options.type,
                 box = marker.paddingBox,
-                element = BoxElement.fn.getViewElements.call(marker, view, renderOptions)[0],
+                element,
+                elementOptions,
                 halfWidth = box.width() / 2;
 
-            if (!element) {
+            if (!options.visible || !marker.hasBox()) {
                 return [];
             }
+
+            elementOptions = deepExtend(marker.elementStyle(), renderOptions);
 
             if (type === TRIANGLE) {
                 element = view.createPolyline([
                     new Point2D(box.x1 + halfWidth, box.y1),
                     new Point2D(box.x1, box.y2),
                     new Point2D(box.x2, box.y2)
-                ], true, element.options);
+                ], true, elementOptions);
             } else if (type === CIRCLE) {
                 element = view.createCircle([
                     round(box.x1 + halfWidth, COORD_PRECISION),
                     round(box.y1 + box.height() / 2, COORD_PRECISION)
-                ], halfWidth, element.options);
+                ], halfWidth, elementOptions);
+            } else {
+                element = view.createRect(box, elementOptions);
             }
 
             return [ element ];
@@ -2103,7 +2115,9 @@
                 height: markers.size,
                 background: markerBackground,
                 border: markerBorder,
-                opacity: markers.opacity
+                opacity: markers.opacity,
+                zIndex: markers.zIndex,
+                animation: markers.animation
             });
 
             point.append(point.marker);
@@ -2174,14 +2188,14 @@
                 options = point.options,
                 marker = point.marker,
                 label = point.label,
-                edge = options.labels.position;
+                anchor = options.labels.position;
 
             if (label) {
-                edge = edge === ABOVE ? TOP : edge;
-                edge = edge === BELOW ? BOTTOM : edge;
+                anchor = anchor === ABOVE ? TOP : anchor;
+                anchor = anchor === BELOW ? BOTTOM : anchor;
 
                 label.reflow(box);
-                label.box.alignTo(marker.box, edge);
+                label.box.alignTo(marker.box, anchor);
                 label.reflow(label.box);
             }
         },
@@ -2217,6 +2231,28 @@
         }
     });
     deepExtend(LinePoint.fn, PointEventsMixin);
+
+    var Bubble = LinePoint.extend({
+        options: {
+            labels: {
+                position: CENTER
+            }
+        },
+
+        getOutlineElement: function(view, options) {
+            var element = this;
+
+            // TODO: Gradiented stroke (shadow filter?)
+            return view.createCircle(
+                [element.box.center().x, element.box.center().y],
+                element.options.markers.size / 2 - 0.5, {
+                    data: { modelId: element.options.modelId },
+                    stroke: new Color(element.options.markers.background).brightness(0.75).toHex(),
+                    strokeWidth: 2,
+                    strokeOpacity: 1
+                });
+        }
+    });
 
     var LineSegment = ChartElement.extend({
         init: function(linePoints, series, seriesIx) {
@@ -2588,14 +2624,18 @@
         addValue: function(value, fields) {
             var chart = this,
                 point,
+                x = value.x,
+                y = value.y,
                 seriesIx = fields.seriesIx,
                 seriesPoints = chart.seriesPoints[seriesIx];
 
             chart.updateRange(value, fields.series);
 
-            point = chart.createPoint(value, fields.series, seriesIx);
-            if (point) {
-                extend(point, fields);
+            if (defined(x) && x !== null && defined(y) && y !== null) {
+                point = chart.createPoint(value, fields.series, seriesIx, fields.pointIx);
+                if (point) {
+                    extend(point, fields);
+                }
             }
 
             chart.points.push(point);
@@ -2630,13 +2670,7 @@
 
         createPoint: function(value, series, seriesIx) {
             var chart = this,
-                point,
-                x = value.x,
-                y = value.y;
-
-            if (!defined(x) || x === null || !defined(y) || y === null) {
-                return null;
-            }
+                point;
 
             point = new LinePoint(value,
                 deepExtend({
@@ -2717,11 +2751,11 @@
                 currentSeries,
                 currentSeriesPoints,
                 dataItems,
-                value,
-                pointData;
+                value;
 
             for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
                 currentSeries = series[seriesIx];
+                dataItems = currentSeries.dataItems;
 
                 currentSeriesPoints = seriesPoints[seriesIx];
                 if (!currentSeriesPoints) {
@@ -2729,9 +2763,7 @@
                 }
 
                 for (pointIx = 0; pointIx < currentSeries.data.length; pointIx++) {
-                    pointData = currentSeries.data[pointIx] || [];
-                    dataItems = currentSeries.dataItems;
-                    value = { x: pointData[0], y: pointData[1] };
+                    value = chart.pointValue(currentSeries, pointIx);
 
                     callback(value, {
                         pointIx: pointIx,
@@ -2742,6 +2774,45 @@
                     });
                 }
             }
+        },
+
+        bindableFields: function() {
+            return ["x", "y"];
+        },
+
+        pointValue: function(series, pointIx) {
+            var fields = this.bindableFields(),
+                data = series.data[pointIx],
+                dataItems = series.dataItems,
+                value = data || {},
+                i,
+                fieldsLength = fields.length,
+                fieldName,
+                sourceField,
+                fieldValue;
+
+            if (isArray(data)) {
+                value = {};
+                for (i = 0; i < fieldsLength; i++) {
+                    fieldValue = data[i];
+                    if (defined(fieldValue)) {
+                        value[fields[i]] = fieldValue;
+                    }
+                }
+            }
+
+            if (!defined(data) && series.dataItems) {
+                for (i = 0; i < fieldsLength; i++) {
+                    fieldName = fields[i];
+                    sourceField = series[fieldName + "Field"];
+
+                    if (sourceField) {
+                        value[fieldName] = getField(sourceField, dataItems[pointIx]);
+                    }
+                }
+            }
+
+            return value;
         },
 
         formatPointValue: function(value, format) {
@@ -2759,6 +2830,7 @@
         },
 
         getViewElements: function(view) {
+            // TODO: Remove. Same as base!?
             var chart = this,
                 elements = ScatterChart.fn.getViewElements.call(chart, view),
                 group = view.createGroup({
@@ -2772,6 +2844,118 @@
         }
     });
     deepExtend(ScatterLineChart.fn, LineChartMixin);
+
+    var BubbleChart = ScatterChart.extend({
+        options: {
+            tooltip: {
+                format: "{3}"
+            },
+            labels: {
+                format: "{3}"
+            }
+        },
+
+        addValue: function(value, fields) {
+            var chart = this,
+                colors = chart.plotArea.options.seriesColors || [];
+
+            fields.series.color = fields.series.color ||
+                colors[fields.pointIx % colors.length];
+
+            ScatterChart.fn.addValue.call(this, value, fields);
+        },
+
+        createPoint: function(value, series, seriesIx, pointIx) {
+            var chart = this,
+                point,
+                color = value.color || series.color,
+                maxValue = chart.seriesMax(series),
+                minR = series.minSize / 2,
+                maxR = series.maxSize / 2,
+                minArea = math.PI * minR * minR,
+                maxArea = math.PI * maxR * maxR,
+                areaRange = maxArea - minArea,
+                area = math.abs(value.size) * (areaRange / maxValue),
+                r = math.sqrt((minArea + area) / math.PI),
+                pointsCount = series.data.length,
+                delay = pointIx * (INITIAL_ANIMATION_DURATION / pointsCount),
+                animationOptions = {
+                    delay: delay,
+                    duration: INITIAL_ANIMATION_DURATION - delay,
+                    type: BUBBLE
+                },
+                visible = true;
+
+            if (value.size < 0) {
+                color = series.negativeValues.color || color;
+                visible = series.negativeValues.visible;
+            }
+
+            if (visible) {
+                point = new Bubble(value,
+                    deepExtend({
+                        markers: {
+                            size: r * 2,
+                            type: CIRCLE,
+                            background: color,
+                            border: series.border,
+                            opacity: series.opacity,
+                            animation: animationOptions,
+                            zIndex: maxR - r
+                        },
+                        tooltip: {
+                            format: chart.options.tooltip.format
+                        },
+                        labels: {
+                            zIndex: maxR - r + 1,
+                            format: chart.options.labels.format,
+                            animation: animationOptions
+                        }
+                    }, series, {
+                        color: color
+                    })
+                );
+
+                chart.append(point);
+            }
+
+            return point;
+
+            // TODO: Hover that updates rendered element
+            // TODO: Clip to axis line box
+        },
+
+        seriesMax: function(series) {
+            // TODO: Call once per series by overriding render
+            var chart = this,
+                length = series.data.length,
+                max = 0,
+                i,
+                value;
+
+            for(i = 0; i < length; i++) {
+                value = chart.pointValue(series, i).size;
+                max = math.max(max, math.abs(value));
+            }
+
+            return max;
+        },
+
+        bindableFields: function() {
+            return ScatterChart.fn.bindableFields.call(this)
+                   .concat(["size", "color", "category", "visibleInLegend"]);
+        },
+
+        getViewElements: function(view) {
+            var chart = this;
+
+            return ChartElement.fn.getViewElements.call(chart, view);
+        },
+
+        formatPointValue: function(value, format) {
+            return autoFormat(format, value.x, value.y, value.size, value.category);
+        }
+    });
 
     var PieSegment = ChartElement.extend({
         init: function(value, sector, options) {
@@ -3101,6 +3285,7 @@
             return defined(point.value) ? point.value : point;
         },
 
+        // TODO: Replace with ScatterChart pointValue
         pointData: function(series, index) {
             var chart = this,
                 data = series.data[index],
@@ -3668,7 +3853,24 @@
             for (i = 0; i < count; i++) {
                 currentSeries = series[i];
                 if (currentSeries.visibleInLegend !== false) {
-                    data.push({ name: currentSeries.name || "", color: currentSeries.color });
+                    // TODO: Move legend item generation to each individual series
+                    if (currentSeries.type === BUBBLE) {
+                        var points = chart.points,
+                        pointsLength = points.length,
+                        currentPoint;
+
+                        for (i = 0; i < pointsLength; i++) {
+                            currentPoint = points[i];
+                            if (currentPoint.value.visibleInLegend !== false) {
+                                data.push({
+                                    name: currentPoint.value.category,
+                                    color: currentPoint.options.color
+                                });
+                            }
+                        }
+                    } else {
+                        data.push({ name: currentSeries.name || "", color: currentSeries.color });
+                    }
                 }
             }
 
@@ -4351,6 +4553,10 @@
                 return s.type === SCATTER_LINE;
             }));
 
+            plotArea.createBubbleChart(grep(series, function(s) {
+                return s.type === BUBBLE;
+            }));
+
             plotArea.createAxes();
         },
 
@@ -4379,6 +4585,16 @@
             if (series.length > 0) {
                 plotArea.appendChart(
                     new ScatterLineChart(plotArea, { series: series })
+                );
+            }
+        },
+
+        createBubbleChart: function(series) {
+            var plotArea = this;
+
+            if (series.length > 0) {
+                plotArea.appendChart(
+                    new BubbleChart(plotArea, { series: series })
                 );
             }
         },
@@ -4525,8 +4741,30 @@
         }
     });
 
+    var BubbleAnimation = ElementAnimation.extend({
+        options: {
+            easing: "easeOutElastic",
+            duration: INITIAL_ANIMATION_DURATION
+        },
+
+        setup: function() {
+            var circle = this.element;
+
+            circle.endRadius = circle.radius;
+            circle.radius = 0;
+        },
+
+        step: function(pos) {
+            var circle = this.element,
+                endRadius = circle.endRadius;
+
+            circle.radius = interpolateValue(0, endRadius, pos);
+        }
+    });
+
     var BarAnimationDecorator = animationDecorator(BAR, BarAnimation),
-        PieAnimationDecorator = animationDecorator(PIE, PieAnimation);
+        PieAnimationDecorator = animationDecorator(PIE, PieAnimation),
+        BubbleAnimationDecorator = animationDecorator(BUBBLE, BubbleAnimation);
 
     var Highlight = Class.extend({
         init: function(view, viewElement, options) {
@@ -4815,6 +5053,7 @@
         delete seriesDefaults.verticalArea;
         delete seriesDefaults.scatter;
         delete seriesDefaults.scatterLine;
+        delete seriesDefaults.bubble;
     }
 
     function applySeriesColors(options) {
@@ -5013,6 +5252,7 @@
         BarAnimationDecorator: BarAnimationDecorator,
         BarChart: BarChart,
         BarLabel: BarLabel,
+        BubbleAnimationDecorator: BubbleAnimationDecorator,
         CategoricalPlotArea: CategoricalPlotArea,
         CategoryAxis: CategoryAxis,
         ClusterLayout: ClusterLayout,

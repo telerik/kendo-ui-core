@@ -49,7 +49,8 @@
             if (dataviz.ui.Chart) {
                 view.decorators.push(
                     new dataviz.BarAnimationDecorator(view),
-                    new dataviz.PieAnimationDecorator(view)
+                    new dataviz.PieAnimationDecorator(view),
+                    new dataviz.BubbleAnimationDecorator(view)
                 );
             }
 
@@ -588,6 +589,20 @@
 
         options: {
             fill: ""
+        },
+
+        refresh: function(domElement) {
+            var element = this,
+                center = element.center,
+                radius = math.max(0, element.radius),
+                size = radius * 2;
+
+            $(domElement).css({
+                "width": size,
+                "height": size,
+                "top": center[1] - radius,
+                "left": center[0] - radius
+            });
         }
     });
 

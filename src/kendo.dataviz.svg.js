@@ -59,7 +59,8 @@
             if (dataviz.ui.Chart) {
                 view.decorators.push(
                     new dataviz.BarAnimationDecorator(view),
-                    new dataviz.PieAnimationDecorator(view)
+                    new dataviz.PieAnimationDecorator(view),
+                    new dataviz.BubbleAnimationDecorator(view)
                 );
             }
 
@@ -593,6 +594,12 @@
             fill: "",
             fillOpacity: 1,
             strokeOpacity: 1
+        },
+
+        refresh: function(domElement) {
+            $(domElement).attr({
+                "r": math.max(0, this.radius)
+            });
         }
     });
 
