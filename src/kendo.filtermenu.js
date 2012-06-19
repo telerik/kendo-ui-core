@@ -33,8 +33,8 @@
                 '<input data-#=ns#bind="value:filters[0].value" class="k-textbox" type="text" data-#=ns#type="#=type#"/>'+
                 '#if(extra){#'+
                     '<select class="k-filter-and" data-#=ns#bind="value: logic" data-#=ns#role="dropdownlist">'+
-                        '<option value="and">And</option>'+
-                        '<option value="or">Or</option>'+
+                        '<option value="and">#=messages.and#</option>'+
+                        '<option value="or">#=messages.or#</option>'+
                     '</select>'+
                     '<select data-#=ns#bind="value: filters[1].operator" data-#=ns#role="dropdownlist">'+
                         '#for(var op in operators){#'+
@@ -320,7 +320,9 @@
                 isTrue: "is true",
                 isFalse: "is false",
                 filter: "Filter",
-                clear: "Clear"
+                clear: "Clear",
+                and: "And",
+                or: "Or"
             }
         }
     });

@@ -122,6 +122,19 @@
                 ok(filterMenu.form.find("div:contains(info)").length);
             });
 
+            test("can change the and and or messages", function(){
+                filterMenu = new FilterMenu(dom, {
+                    messages: {
+                        and: "foo",
+                        or: "bar"
+                    },
+                    dataSource: dataSource
+                });
+
+                ok(filterMenu.form.find("div:contains(foo)").length);
+                ok(filterMenu.form.find("div:contains(bar)").length);
+            });
+
             test("can change the operators", function(){
                 filterMenu = new FilterMenu(dom, {
                     operators: {
