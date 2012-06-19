@@ -13,6 +13,7 @@ namespace Kendo.Mvc.UI.Tests
         public RangeSliderBuilderTests()
         {
             component = SliderTestHelper.CreateRangeSlider<int>(null, null);
+            component.Name = "Test";
             builder = new RangeSliderBuilder<int>(component);
         }
 

@@ -67,33 +67,6 @@ namespace Kendo.Mvc.UI
 
         protected override void WriteHtml(HtmlTextWriter writer)
         {
-            Func<object, T?> converter = val =>
-            {
-                return ((T)Convert.ChangeType(val, typeof(T)));
-            };
-
-            string value = this.GetAttemptedValue();
-            if (value == null)
-            {
-                T? result = this.GetValue(converter);
-
-                if (!result.HasValue)
-                {
-                    result = Min;
-                }
-
-                value = "{0}".FormatWith(result);
-            }
-
-            if (!LargeStep.HasValue)
-            {
-                LargeStep = (T)Convert.ChangeType(5, typeof(T));
-                if (LargeStep.Value.CompareTo(SmallStep) < 0)
-                {
-                    LargeStep = SmallStep;
-                }
-            }
-
             var renderer = new SliderHtmlBuilder<T>(this);
 
             renderer.Build().WriteTo(writer);

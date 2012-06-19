@@ -59,25 +59,6 @@ namespace Kendo.Mvc.UI
 
         protected override void WriteHtml(HtmlTextWriter writer)
         {
-            if (!SelectionStart.HasValue)
-            {
-                SelectionStart = Min;
-            }
-
-            if (!SelectionEnd.HasValue)
-            {
-                SelectionEnd = Max;
-            }
-
-            if (!LargeStep.HasValue)
-            {
-                LargeStep = (T)Convert.ChangeType(5, typeof(T));
-                if (LargeStep.Value.CompareTo(SmallStep) < 0)
-                {
-                    LargeStep = SmallStep;
-                }
-            }
-
             var renderer = new RangeSliderHtmlBuilder<T>(this);
 
             renderer.Build().WriteTo(writer);

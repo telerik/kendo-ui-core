@@ -21,6 +21,25 @@ namespace Kendo.Mvc.UI.Html
 
         public IHtmlNode Build()
         {
+            if (!Component.SelectionStart.HasValue)
+            {
+                Component.SelectionStart = Component.Min;
+            }
+
+            if (!Component.SelectionEnd.HasValue)
+            {
+                Component.SelectionEnd = Component.Max;
+            }
+
+            if (!Component.LargeStep.HasValue)
+            {
+                Component.LargeStep = (T)Convert.ChangeType(5, typeof(T));
+                if (Component.LargeStep.Value.CompareTo(Component.SmallStep) < 0)
+                {
+                    Component.LargeStep = Component.SmallStep;
+                }
+            }
+
             var div = new HtmlElement("div")
                         .Attributes(new { id = Component.Id })
                         .Attributes(Component.HtmlAttributes)

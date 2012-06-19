@@ -11,6 +11,7 @@ namespace Kendo.Mvc.UI.Tests
         public SliderHtmlBuilderTests()
         {
             slider = SliderTestHelper.CreateSlider<double>(null, null);
+            slider.Name = "Test";
 
             builder = new SliderHtmlBuilder<double>(slider);
         }

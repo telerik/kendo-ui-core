@@ -19,7 +19,7 @@ namespace Kendo.Mvc.UI.Tests
 
             viewContext = viewContext ?? TestHelper.CreateViewContext();
 
-            var component = new Slider<T>(viewContext, new JavaScriptInitializer(), new ViewDataDictionary());           
+            var component = new Slider<T>(viewContext, new JavaScriptInitializer(), new ViewDataDictionary());        
 
             return component;
         }

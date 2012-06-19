@@ -1202,7 +1202,6 @@ namespace Kendo.Mvc.UI
         /// </example>
         public virtual RangeSliderBuilder<double> RangeSliderFor(Expression<Func<TModel, double[]>> expression)
         {
-
             IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
             double? minimum = GetRangeValidationParameter<double>(validators, minimumValidator);
