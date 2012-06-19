@@ -1,6 +1,7 @@
 namespace Kendo.Mvc.UI.Html
 {
     using Kendo.Mvc.Infrastructure;
+    using Kendo.Mvc.Extensions;
     
     public class GridButtonImageDecorator : IGridButtonBuilderDecorator
     {
@@ -15,7 +16,11 @@ namespace Kendo.Mvc.UI.Html
         {
             var span = new HtmlElement("span");
 
-            span.Attributes(button.ImageHtmlAttributes).AddClass(UIPrimitives.Icon, button.SpriteCssClass);
+            span.Attributes(button.ImageHtmlAttributes);
+            if (button.SpriteCssClass.HasValue())
+            {
+                span.AddClass(UIPrimitives.Icon, button.SpriteCssClass);
+            }                
 
             span.AppendTo(parent);
         }
