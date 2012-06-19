@@ -1,3 +1,5 @@
+using System.Globalization;
+
 namespace Kendo.Mvc.UI.Html
 {
     class GridPagerButtonFactory : IGridPagerButtonFactory
@@ -6,7 +8,7 @@ namespace Kendo.Mvc.UI.Html
         {
             if (buttonType == GridPagerButtonType.Icon)
             {
-                return GetIconButton(enabled, url, text);
+                return GetIconButton(enabled, url, text, page);
             }
 
             return GetNumericButton(enabled, url, text, page);
@@ -18,7 +20,7 @@ namespace Kendo.Mvc.UI.Html
                 .Text(text)
                 .ToggleClass(UIPrimitives.Link, enabled)
                 .ToggleAttribute("href", url, enabled)
-                .Attribute("data-page", page.ToString())
+                .Attribute("data-page", page.ToString(CultureInfo.InvariantCulture))
                 .ToggleClass(UIPrimitives.SelectedState, !enabled);
 
             var li = new HtmlElement("li");
@@ -28,12 +30,13 @@ namespace Kendo.Mvc.UI.Html
             return li;
         }
 
-        protected virtual IHtmlNode GetIconButton(bool enabled, string url, string text)
+        protected virtual IHtmlNode GetIconButton(bool enabled, string url, string text, int page)
         {
             var a = new HtmlElement("a")
                 .AddClass(UIPrimitives.Link)
                 .ToggleClass(UIPrimitives.DisabledState, !enabled)
                 .Attribute("href", url)
+                .Attribute("data-page", page.ToString(CultureInfo.InvariantCulture))
                 .ToggleAttribute("href", "#", !enabled);
 
             var span = new HtmlElement("span")
