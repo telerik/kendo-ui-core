@@ -594,7 +594,7 @@
         refresh: function(domElement) {
             var element = this,
                 center = element.center,
-                radius = element.radius,
+                radius = math.max(0, element.radius),
                 size = radius * 2;
 
             $(domElement).css({
