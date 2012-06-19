@@ -1135,7 +1135,9 @@
             }
 
             if (!that._trigger(isExpanding ? "expand" : "collapse", node)) {
-                dataItem.set("expanded", isExpanding);
+                if (dataItem) {
+                    dataItem.set("expanded", isExpanding);
+                }
 
                 if (contents.children().length > 0) {
                     updateNodeClasses(node, {}, { expanded: isExpanding });

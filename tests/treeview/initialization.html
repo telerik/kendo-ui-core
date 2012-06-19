@@ -50,6 +50,16 @@
                 ok(list.data("kendoTreeView") instanceof TreeView);
             });
 
+            test("toggle buttons work when initializing from ul", function() {
+                list.find("li").append("<ul><li>bar</li></ul>");
+
+                list.kendoTreeView();
+
+                list.find(".k-plus").trigger("click");
+
+                ok(list.find(".k-minus").length);
+            });
+
             test("kendoTreeView extends passed options", function() {
                list.kendoTreeView({ foo: "bar" });
 
