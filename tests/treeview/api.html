@@ -199,7 +199,7 @@
                 equals(appendedNode[0], root.find(".k-item")[0]);
                 equals(treeviewObject.text(appendedNode), "bar");
                 ok(appendedNode.find(">div").hasClass("k-bot"));
-                ok(appendedNode.hasClass("k-last"));
+                ok(appendedNode.hasClass("k-i-seek-e"));
                 equals(root.find(">div>.k-minus.k-icon").length, 1);
             });
 
@@ -219,7 +219,7 @@
                 equals(parentNode.find(".k-group").css("display"), "block");
                 equals(parentNode.find(".k-item").length, 2);
                 equals(appendedNode[0], parentNode.find(".k-item:last")[0]);
-                ok(!appendedNode.prev(".k-item").hasClass("k-last"));
+                ok(!appendedNode.prev(".k-item").hasClass("k-i-seek-e"));
                 equals(appendedNode.find(">div.k-bot").length, 1);
             });
 
@@ -236,7 +236,7 @@
                 equals(rootGroup.length, 1);
                 equals(treeview.find("div").length, 2);
                 equals(rootGroup.find("> .k-item").length, 2);
-                ok(rootGroup.find("> .k-item").hasClass("k-first"));
+                ok(rootGroup.find("> .k-item").hasClass("k-i-seek-w"));
             });
 
             test("append(nodeElement, parentNode) appends node to parent", function() {
@@ -453,9 +453,9 @@
 
                 var insertedNode = treeviewObject.insertBefore({ text: "bar" }, rootItem);
 
-                ok(insertedNode.hasClass("k-first"));
-                ok(!rootItem.hasClass("k-first"));
-                ok(rootItem.hasClass("k-last"));
+                ok(insertedNode.hasClass("k-i-seek-w"));
+                ok(!rootItem.hasClass("k-i-seek-w"));
+                ok(rootItem.hasClass("k-i-seek-e"));
                 ok(!rootItem.find(">div").hasClass("k-top"));
                 ok(rootItem.find(">div").hasClass("k-bot"));
                 equals(treeview.find("li").length, 2);

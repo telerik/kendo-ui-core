@@ -45,7 +45,7 @@
         colorPickerTemplate:
             '<li class="k-editor-colorpicker">' +
                 '<div class="k-widget k-colorpicker k-header #= cssClass #">' +
-                    '<span class="k-tool-icon"><span class="k-selected-color"></span></span><span class="k-icon k-arrow-down"></span>' +
+                    '<span class="k-tool-icon"><span class="k-selected-color"></span></span><span class="k-icon k-i-arrow-s"></span>' +
             '</div></li>',
 
         comboBoxTemplate:

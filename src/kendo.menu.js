@@ -220,9 +220,9 @@
                 var result = "k-icon";
 
                 if (group.horizontal) {
-                    result += " k-arrow-down";
+                    result += " k-i-arrow-s";
                 } else {
-                    result += " k-arrow-right";
+                    result += " k-i-arrow-e";
                 }
 
                 return result;
@@ -325,12 +325,12 @@
         item.find(".k-icon").remove();
 
         item.filter(":has(.k-group)")
-            .children(".k-link:not(:has([class*=k-arrow]))")
+            .children(".k-link:not(:has([class*=k-i-arrow]))")
             .each(function () {
                 var item = $(this),
                     parent = item.parent().parent();
 
-                item.append("<span class='k-icon " + (parent.hasClass(MENU + "-horizontal") ? "k-arrow-down" : "k-arrow-next") + "'/>");
+                item.append("<span class='k-icon " + (parent.hasClass(MENU + "-horizontal") ? "k-i-arrow-s" : "k-i-arrow-e") + "'/>");
             });
     }
 

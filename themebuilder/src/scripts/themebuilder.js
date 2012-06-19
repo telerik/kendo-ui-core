@@ -85,7 +85,7 @@
             },
 
             _updateColorPreview: function(value) {
-                return $(this.wrapper).find(".k-arrow-down").css("backgroundColor", value || this.value()).css("backgroundColor");
+                return $(this.wrapper).find(".k-i-arrow-s").css("backgroundColor", value || this.value()).css("backgroundColor");
             }
         }),
         hexValueRe = /^#([0-9a-f]{3}){1,2}$/i,

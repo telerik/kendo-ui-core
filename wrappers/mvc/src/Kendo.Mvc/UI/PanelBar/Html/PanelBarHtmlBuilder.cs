@@ -63,9 +63,9 @@ namespace Kendo.Mvc.UI
             {
                 new HtmlElement("span")
                     .AddClass(UIPrimitives.Icon)
-                    .ToggleClass("k-arrow-up", item.Expanded)
+                    .ToggleClass("k-i-arrow-n", item.Expanded)
                     .ToggleClass("k-panelbar-collapse", item.Expanded)
-                    .ToggleClass("k-arrow-down", !item.Expanded)
+                    .ToggleClass("k-i-arrow-s", !item.Expanded)
                     .ToggleClass("k-panelbar-expand", !item.Expanded)
                     .AppendTo(a);
             }

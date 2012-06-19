@@ -171,7 +171,7 @@ namespace Kendo.Mvc.UI.Tests
             IHtmlNode tag = renderer.ItemInnerContentTag(item, true /*there are children*/).Children[1];
 
             Assert.Equal("span", tag.TagName);
-            Assert.Equal("k-icon k-arrow-up k-panelbar-collapse", tag.Attribute("class"));
+            Assert.Equal("k-icon k-i-arrow-n k-panelbar-collapse", tag.Attribute("class"));
         }
 
         [Fact]
@@ -195,7 +195,7 @@ namespace Kendo.Mvc.UI.Tests
 
             IHtmlNode tag = renderer.ItemInnerContentTag(item, true).Children[1];
 
-            Assert.Equal("k-icon k-arrow-down k-panelbar-expand", tag.Attribute("class"));
+            Assert.Equal("k-icon k-i-arrow-s k-panelbar-expand", tag.Attribute("class"));
         }
 
         [Fact]
@@ -331,7 +331,7 @@ namespace Kendo.Mvc.UI.Tests
             item.ContentUrl = "#";
 
             IHtmlNode tag = renderer.ItemInnerContentTag(item, true).Children[1];
-            Assert.Equal("k-icon k-arrow-down k-panelbar-expand", tag.Attribute("class"));
+            Assert.Equal("k-icon k-i-arrow-s k-panelbar-expand", tag.Attribute("class"));
         }
     }
 }

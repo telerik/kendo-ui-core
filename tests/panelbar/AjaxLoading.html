@@ -78,7 +78,7 @@
             var item = getRootItem(1);
 
             panelbar.bind("contentLoad", function() {
-                ok($(arguments[0].item).find(".k-icon").hasClass("k-arrow-up"));
+                ok($(arguments[0].item).find(".k-icon").hasClass("k-i-arrow-n"));
                 panelbar.unbind("contentLoad");
                 start();
             });
@@ -91,7 +91,7 @@
 
             item.trigger("click");
 
-            ok(item.find(".k-icon").hasClass("k-arrow-down"));
+            ok(item.find(".k-icon").hasClass("k-i-arrow-s"));
         });
 
         test("clicking should make item active", function() {

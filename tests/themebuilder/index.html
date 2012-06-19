@@ -55,7 +55,7 @@
 
             test("changing input value changes preview bgcolor", function() {
                 var color = "#000000",
-                    colorIndicator = colorPicker.closest(".k-widget").find(".k-arrow-down"),
+                    colorIndicator = colorPicker.closest(".k-widget").find(".k-i-arrow-s"),
                     colorPickerControl = colorPicker.data("kendoColorPicker");
 
                 colorPickerControl.value(color);
@@ -92,7 +92,7 @@
             test("preview bgcolor is changed upon init", function() {
                 colorPicker = $("<input value='#ff0000' />").appendTo(document.body).kendoColorPicker();
 
-                equals(ColorEngine.css2hex(colorPicker.closest(".k-widget").find(".k-arrow-down").css("backgroundColor")), "#ff0000");
+                equals(ColorEngine.css2hex(colorPicker.closest(".k-widget").find(".k-i-arrow-s").css("backgroundColor")), "#ff0000");
             });
 
             test("change handler is called only once on change", function() {

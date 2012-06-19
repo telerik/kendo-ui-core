@@ -152,7 +152,7 @@ namespace Kendo.Mvc.Tests.Menu
             IHtmlNode tag = builder.ItemInnerContentTag(item, true);
 
             Assert.Equal("span", tag.Children[1].TagName);
-            Assert.Equal("k-icon k-arrow-down", tag.Children[1].Attribute("class"));
+            Assert.Equal("k-icon k-i-arrow-s", tag.Children[1].Attribute("class"));
 		}
 
         [Fact]
@@ -164,7 +164,7 @@ namespace Kendo.Mvc.Tests.Menu
             IHtmlNode tag = builder.ItemInnerContentTag(item, true);
 
             Assert.Equal("span", tag.Children[1].TagName);
-            Assert.Equal("k-icon k-arrow-down", tag.Children[1].Attribute("class"));
+            Assert.Equal("k-icon k-i-arrow-s", tag.Children[1].Attribute("class"));
         }
 
 		[Fact]
@@ -177,7 +177,7 @@ namespace Kendo.Mvc.Tests.Menu
             IHtmlNode tag = builder.ItemInnerContentTag(item, true);
 
             Assert.Equal("span", tag.Children[1].TagName);
-            Assert.Equal("k-icon k-arrow-next", tag.Children[1].Attribute("class"));
+            Assert.Equal("k-icon k-i-arrow-e", tag.Children[1].Attribute("class"));
 		}
 
         [Fact]

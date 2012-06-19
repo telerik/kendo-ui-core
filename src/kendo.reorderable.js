@@ -30,7 +30,7 @@
                 hint: options.hint
             });
 
-            that.reorderDropCue = $('<div class="k-reorder-cue"><div class="k-icon k-arrow-down"></div><div class="k-icon k-arrow-up"></div></div>');
+            that.reorderDropCue = $('<div class="k-reorder-cue"><div class="k-icon k-i-arrow-s"></div><div class="k-icon k-i-arrow-n"></div></div>');
 
             element.find(draggable.options.filter).kendoDropTarget({
                 group: draggable.options.group,

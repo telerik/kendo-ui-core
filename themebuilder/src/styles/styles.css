@@ -64,7 +64,7 @@ body {
 }
 
 #kendo-themebuilder .k-color-preview,
-#kendo-themebuilder .k-colorpicker .k-arrow-down {
+#kendo-themebuilder .k-colorpicker .k-i-arrow-s {
     border: 0;
     background-image: none;
     -webkit-border-radius: 8px;
@@ -121,7 +121,7 @@ body {
     padding: 3px;
 }
 
-.k-colorpicker .k-arrow-down {
+.k-colorpicker .k-i-arrow-s {
     margin-top: -1px;
 }
 

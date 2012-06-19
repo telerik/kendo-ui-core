@@ -49,8 +49,8 @@
                 ok(upArrow.parent().hasClass("k-select"));
                 ok(upArrow.hasClass("k-link"));
                 ok(downArrow.hasClass("k-link"));
-                ok(upArrow.children(":first").hasClass("k-icon k-arrow-up"));
-                ok(downArrow.children(":first").hasClass("k-icon k-arrow-down"));
+                ok(upArrow.children(":first").hasClass("k-icon k-i-arrow-n"));
+                ok(downArrow.children(":first").hasClass("k-icon k-i-arrow-s"));
                 equal(upArrow.children(":first").attr("title"), textbox.options.upArrowText);
                 equal(downArrow.children(":first").attr("title"), textbox.options.downArrowText);
                 equal(upArrow.children(":first").html(), textbox.options.upArrowText);

@@ -1776,8 +1776,8 @@ div.k-slider
 .k-slider .k-draghandle,
 .k-slider-vertical .k-slider-track,
 .k-slider-vertical .k-slider-selection,
-.k-slider .k-arrow-up,
-.k-slider .k-arrow-down
+.k-slider .k-i-arrow-n,
+.k-slider .k-i-arrow-s
 {
 	background-image:url('img/slider-sprite.png');
 }
@@ -1785,8 +1785,8 @@ div.k-slider
 .k-slider .k-draghandle { background-position: -60px 0; width: 20px; height: 20px; }
 .k-slider .k-slider-track { background-position: -90px 0; width: 5px; margin-left: -3px; }
 .k-slider .k-slider-selection { background-position: -120px 0; width: 5px; margin-left: -2px; }
-.k-slider .k-arrow-up { background-position: 8px 6px; width: 35px; height: 35px; }
-.k-slider .k-arrow-down { background-position: -22px 6px; width: 35px; height: 35px; }
+.k-slider .k-i-arrow-n { background-position: 8px 6px; width: 35px; height: 35px; }
+.k-slider .k-i-arrow-s { background-position: -22px 6px; width: 35px; height: 35px; }
 
 /* Slider - end */
 

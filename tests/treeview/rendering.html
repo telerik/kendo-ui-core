@@ -64,8 +64,8 @@
                     wrapper = element.find("div:first");
 
                 equals(wrapper.length, 1);
-                ok(outerWrapper.hasClass("k-first"));
-                ok(outerWrapper.hasClass("k-last"));
+                ok(outerWrapper.hasClass("k-i-seek-w"));
+                ok(outerWrapper.hasClass("k-i-seek-e"));
                 ok(wrapper.hasClass("k-top"));
                 equals(wrapper.find("span.k-in").length, 1);
                 equals(wrapper.find("span.k-in").text(), "item");
@@ -138,24 +138,24 @@
                 ok(li.hasClass("k-item"));
             });
 
-            test("renders k-first class for first item in first-level groups", function() {
+            test("renders k-i-seek-w class for first item in first-level groups", function() {
                 treeview.kendoTreeView([
                     { text: "foo" }
                 ]);
 
                 var li = treeview.find("li");
 
-                ok(li.hasClass("k-first"));
+                ok(li.hasClass("k-i-seek-w"));
             });
 
-            test("renders k-last class for last item", function() {
+            test("renders k-i-seek-e class for last item", function() {
                 treeview.kendoTreeView([
                     { text: "foo" }
                 ]);
 
                 var li = treeview.find("li");
 
-                ok(li.hasClass("k-last"));
+                ok(li.hasClass("k-i-seek-e"));
             });
 
             test("renders div wrapper for each item", function() {

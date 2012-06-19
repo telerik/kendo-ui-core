@@ -60,11 +60,11 @@ namespace Kendo.Mvc.UI
 
             if (hasAccessibleChildren || item.Template.HasValue())
             {
-                string iconClass = "k-arrow-next";
+                string iconClass = "k-i-arrow-e";
 
                 if (Component.Orientation == MenuOrientation.Horizontal && item.Parent == null)
                 {
-                    iconClass = "k-arrow-down";
+                    iconClass = "k-i-arrow-s";
                 }
 
                 new HtmlElement("span")

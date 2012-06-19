@@ -923,7 +923,7 @@
             arrow = element.next("span.k-select");
 
             if (!arrow[0]) {
-                arrow = $('<span unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-icon-clock">select</span></span>').insertAfter(element);
+                arrow = $('<span unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-clock">select</span></span>').insertAfter(element);
             }
 
             that._arrow = arrow;
