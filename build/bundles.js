@@ -450,7 +450,7 @@ function buildBundle(bundle, version, success, licenseBuilt) {
                 deployVsDoc(root, bundle);
             }
 
-            if (changelog.available) {
+            if (changelog.available !== false) {
                 console.log("Deploying changelog");
                 deployChangelog(root, bundle, version);
             }
