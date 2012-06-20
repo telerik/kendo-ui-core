@@ -239,6 +239,8 @@
     </Compile>
     <Compile Include="Helpers\KendoRazorViewEngine.cs" />
     <Compile Include="Helpers\KendoWebFormViewEngine.cs" />
+    <Compile Include="ModelBinders\CultureAwareDateTimeModelBinder.cs" />
+    <Compile Include="ModelBinders\CultureAwareDecimalModelBinder.cs" />
     <Compile Include="Models\Config.cs" />
     <Compile Include="Helpers\HyphenatedRouteHandler.cs" />
     <Compile Include="Models\ClientOrderViewModel.cs" />

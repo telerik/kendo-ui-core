@@ -117,151 +117,136 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AddNew" xml:space="preserve">
-    <value>Add new record</value>
+  <data name="Filter_And" xml:space="preserve">
+    <value>Und</value>
   </data>
-  <data name="Delete" xml:space="preserve">
-    <value>Delete</value>
+  <data name="Filter_Clear" xml:space="preserve">
+    <value>Löschen</value>
   </data>
-  <data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
+  <data name="Filter_DateIsEqualTo" xml:space="preserve">
+    <value>Ist gleich</value>
   </data>
-  <data name="Update" xml:space="preserve">
-    <value>Update</value>
+  <data name="Filter_DateIsGreaterThan" xml:space="preserve">
+    <value>Ist nach</value>
   </data>
-  <data name="Insert" xml:space="preserve">
-    <value>Insert</value>
+  <data name="Filter_DateIsGreaterThanOrEqualTo" xml:space="preserve">
+    <value>Ist nach oder gleich</value>
   </data>
-  <data name="Edit" xml:space="preserve">
-    <value>Edit</value>
+  <data name="Filter_DateIsLessThan" xml:space="preserve">
+    <value>Ist vor</value>
   </data>
-  <data name="Select" xml:space="preserve">
-    <value>Select</value>
+  <data name="Filter_DateIsLessThanOrEqualTo" xml:space="preserve">
+    <value>Ist vor oder gleich</value>
   </data>
-  <data name="Page" xml:space="preserve">
-    <value>Page </value>
+  <data name="Filter_DateIsNotEqualTo" xml:space="preserve">
+    <value>Ist nicht gleich</value>
   </data>
-  <data name="DisplayingItems" xml:space="preserve">
-    <value>Displaying items {0} - {1} of {2}</value>
-  </data>
-  <data name="PageOf" xml:space="preserve">
-    <value>of {0}</value>
-  </data>
-  <data name="Filter" xml:space="preserve">
+  <data name="Filter_Filter" xml:space="preserve">
     <value>Filter</value>
   </data>
-  <data name="FilterAnd" xml:space="preserve">
-    <value>And</value>
+  <data name="Filter_Info" xml:space="preserve">
+    <value>Zeigt Zeilen mit Werten, die</value>
   </data>
-  <data name="FilterClear" xml:space="preserve">
-    <value>Clear Filter</value>
+  <data name="Filter_IsFalse" xml:space="preserve">
+    <value>ist falsch</value>
   </data>
-  <data name="FilterDateEq" xml:space="preserve">
-    <value>Is equal to</value>
+  <data name="Filter_IsTrue" xml:space="preserve">
+    <value>ist richtig</value>
   </data>
-  <data name="FilterDateGe" xml:space="preserve">
-    <value>Is after or equal to</value>
+  <data name="Filter_NumberIsEqualTo" xml:space="preserve">
+    <value>Ist gleich</value>
   </data>
-  <data name="FilterDateGt" xml:space="preserve">
-    <value>Is after</value>
+  <data name="Filter_NumberIsGreaterThan" xml:space="preserve">
+    <value>Ist größer als</value>
   </data>
-  <data name="FilterDateLe" xml:space="preserve">
-    <value>Is before or equal to</value>
+  <data name="Filter_NumberIsGreaterThanOrEqualTo" xml:space="preserve">
+    <value>Ist größer als oder gleich</value>
   </data>
-  <data name="FilterDateLt" xml:space="preserve">
-    <value>Is before</value>
+  <data name="Filter_NumberIsLessThan" xml:space="preserve">
+    <value>Ist kleiner</value>
   </data>
-  <data name="FilterDateNe" xml:space="preserve">
-    <value>Is not equal to</value>
+  <data name="Filter_NumberIsLessThanOrEqualTo" xml:space="preserve">
+    <value>Ist kleiner als oder gleich</value>
   </data>
-  <data name="FilterNumberEq" xml:space="preserve">
-    <value>Is equal to</value>
+  <data name="Filter_NumberIsNotEqualTo" xml:space="preserve">
+    <value>Ist nicht gleich</value>
   </data>
-  <data name="FilterNumberGe" xml:space="preserve">
-    <value>Is greater than or equal to</value>
+  <data name="Filter_Or" xml:space="preserve">
+    <value>Oder</value>
   </data>
-  <data name="FilterNumberGt" xml:space="preserve">
-    <value>Is greater than</value>
+  <data name="Filter_StringContains" xml:space="preserve">
+    <value>Beinhaltet</value>
   </data>
-  <data name="FilterNumberLe" xml:space="preserve">
-    <value>Is less than or equal to</value>
+  <data name="Filter_StringEndsWith" xml:space="preserve">
+    <value>Endet mit</value>
   </data>
-  <data name="FilterNumberLt" xml:space="preserve">
-    <value>Is less than</value>
+  <data name="Filter_StringIsEqualTo" xml:space="preserve">
+    <value>Ist gleich</value>
   </data>
-  <data name="FilterNumberNe" xml:space="preserve">
-    <value>Is not equal to</value>
+  <data name="Filter_StringIsNotEqualTo" xml:space="preserve">
+    <value>Ist nicht gleich</value>
   </data>
-  <data name="FilterShowRows" xml:space="preserve">
-    <value>Show rows with value that</value>
+  <data name="Filter_StringStartsWith" xml:space="preserve">
+    <value>Beginnt mit</value>
   </data>
-  <data name="FilterStringEndsWith" xml:space="preserve">
-    <value>Ends with</value>
+  <data name="Grid_Cancel" xml:space="preserve">
+    <value>Abbrechen</value>
   </data>
-  <data name="FilterStringEq" xml:space="preserve">
-    <value>Is equal to</value>
+  <data name="Grid_CancelChanges" xml:space="preserve">
+    <value>Änderungen verwerfen</value>
   </data>
-  <data name="FilterStringNe" xml:space="preserve">
-    <value>Is not equal to</value>
+  <data name="Grid_Confirmation" xml:space="preserve">
+    <value>Sind Sie sicher, dass Sie diesen Datensatz löschen wollen?</value>
   </data>
-  <data name="FilterStringStartsWith" xml:space="preserve">
-    <value>Starts with</value>
+  <data name="Grid_Create" xml:space="preserve">
+    <value>Neuen Datensatz hinzufügen</value>
   </data>
-  <data name="FilterStringSubstringOf" xml:space="preserve">
-    <value>Contains</value>
+  <data name="Grid_Destroy" xml:space="preserve">
+    <value>Löschen</value>
   </data>
-  <data name="GroupHint" xml:space="preserve">
-    <value>Drag a column header and drop it here to group by that column</value>
+  <data name="Grid_Edit" xml:space="preserve">
+    <value>Bearbeiten</value>
   </data>
-  <data name="FilterEnumEq" xml:space="preserve">
-    <value>Is equal to</value>
+  <data name="Grid_SaveChanges" xml:space="preserve">
+    <value>Änderungen speichern</value>
   </data>
-  <data name="FilterEnumNe" xml:space="preserve">
-    <value>Is not equal to</value>
+  <data name="Grid_Select" xml:space="preserve">
+    <value>Wähle</value>
   </data>
-  <data name="DeleteConfirmation" xml:space="preserve">
-    <value>Are you sure you want to delete this record?</value>
+  <data name="Grid_Update" xml:space="preserve">
+    <value>Aktualisiere</value>
   </data>
-  <data name="FilterSelectValue" xml:space="preserve">
-    <value>-Select value-</value>
+  <data name="Group_Empty" xml:space="preserve">
+    <value>Ziehen Sie eine Spaltenüberschrift hierher, um nach dieser Spalte zu gruppieren</value>
   </data>
-  <data name="FilterBoolIsFalse" xml:space="preserve">
-    <value>is false</value>
+  <data name="Pager_Display" xml:space="preserve">
+    <value>Anzeigen der Elemente {0} - {1} von {2}</value>
   </data>
-  <data name="FilterBoolIsTrue" xml:space="preserve">
-    <value>is true</value>
+  <data name="Pager_Empty" xml:space="preserve">
+    <value>keine Daten</value>
   </data>
-  <data name="NoRecords" xml:space="preserve">
-    <value>No records to display.</value>
+  <data name="Pager_First" xml:space="preserve">
+    <value>Gehen Sie zur ersten Seite</value>
   </data>
-  <data name="CancelChanges" xml:space="preserve">
-    <value>Cancel changes</value>
+  <data name="Pager_ItemsPerPage" xml:space="preserve">
+    <value>Elemente pro Seite</value>
   </data>
-  <data name="SaveChanges" xml:space="preserve">
-    <value>Save changes</value>
+  <data name="Pager_Last" xml:space="preserve">
+    <value>Gehen Sie zur letzten Seite</value>
   </data>
-  <data name="Refresh" xml:space="preserve">
-    <value>Refresh</value>
+  <data name="Pager_Next" xml:space="preserve">
+    <value>Gehen Sie zur nächsten Seite</value>
   </data>
-  <data name="SortedAsc" xml:space="preserve">
-    <value>sorted ascending</value>
+  <data name="Pager_Of" xml:space="preserve">
+    <value>von {0}</value>
   </data>
-  <data name="SortedDesc" xml:space="preserve">
-    <value>sorted descending</value>
+  <data name="Pager_Page" xml:space="preserve">
+    <value>Seite</value>
   </data>
-  <data name="UnGroup" xml:space="preserve">
-    <value>ungroup</value>
+  <data name="Pager_Previous" xml:space="preserve">
+    <value>Gehen Sie zur vorherigen Seite</value>
   </data>
-  <data name="FilterForeignKeyEq" xml:space="preserve">
-    <value>Is equal to</value>
-  </data>
-  <data name="FilterForeignKeyNe" xml:space="preserve">
-    <value>Is not equal to</value>
-  </data>
-  <data name="FilterStringNotSubstringOf" xml:space="preserve">
-    <value>Does not contain</value>
-  </data>
-  <data name="FilterOr" xml:space="preserve">
-    <value>Or</value>
+  <data name="Pager_Refresh" xml:space="preserve">
+    <value>Aktualisieren</value>
   </data>
 </root>

@@ -155,10 +155,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EditorLocalization.resx</DependentUpon>
     </Compile>
-    <Compile Include="Resources\Messages.Designer.cs">
+    <Compile Include="Resources\Messages.de-DE.Designer.cs">
+      <DependentUpon>Messages.de-DE.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Messages.Designer.cs">
       <DependentUpon>Messages.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="UI\AutoComplete\AutoComplete.cs" />
     <Compile Include="UI\AutoComplete\Fluent\AutoCompleteBuilder.cs" />
@@ -999,6 +1004,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\Messages.de-DE.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.de-DE.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Messages.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Messages.Designer.cs</LastGenOutput>
@@ -1007,9 +1016,6 @@
     <EmbeddedResource Include="Resources\EditorLocalization.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>EditorLocalization.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\GridLocalization.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\TextResource.resx">

@@ -254,38 +254,29 @@
   </data>
   <data name="Upload_Cancel" xml:space="preserve">
     <value>Cancel</value>
-    <comment>Cancel button text</comment>
   </data>
   <data name="Upload_Retry" xml:space="preserve">
     <value>Retry</value>
-    <comment>Retry button text</comment>
   </data>
   <data name="Upload_Select" xml:space="preserve">
     <value>Select...</value>
-    <comment>Select button text</comment>
   </data>
   <data name="Upload_Remove" xml:space="preserve">
     <value>Remove</value>
-    <comment>Remove button text</comment>
   </data>
   <data name="Upload_UploadSelectedFiles" xml:space="preserve">
     <value>Upload files</value>
-    <comment>Upload button (visible when AutoUpload is set to false)</comment>
   </data>
   <data name="Upload_DropFilesHere" xml:space="preserve">
     <value>drop files here to upload</value>
-    <comment>Drag &amp; Drop hint text</comment>
   </data>
   <data name="Upload_StatusFailed" xml:space="preserve">
     <value>failed</value>
-    <comment>"failed" status text accessible by screen readers</comment>
   </data>
   <data name="Upload_StatusUploaded" xml:space="preserve">
     <value>uploaded</value>
-    <comment>"uploaded" status text accessible by screen readers</comment>
   </data>
   <data name="Upload_StatusUploading" xml:space="preserve">
     <value>uploading</value>
-    <comment>"uploading" status text accessible by screen readers</comment>
   </data>
 </root>

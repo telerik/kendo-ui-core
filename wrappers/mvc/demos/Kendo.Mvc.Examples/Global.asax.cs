@@ -35,6 +35,9 @@ namespace Kendo.Mvc.Examples
             ViewEngines.Engines.Clear();
             ViewEngines.Engines.Add(new KendoWebFormViewEngine());
             ViewEngines.Engines.Add(new KendoRazorViewEngine());
+
+            ModelBinders.Binders.Add(typeof(decimal), new CultureAwareDecimalModelBinder());
+            ModelBinders.Binders.Add(typeof(DateTime), new CultureAwareDateTimeModelBinder());
         }
     }
 }
