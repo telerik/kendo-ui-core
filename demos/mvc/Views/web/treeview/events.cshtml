@@ -1,48 +1,41 @@
 
         <div id="example" class="k-content">
-            <div id="treeview" class="demo-section"></div>
+            <div id="treeview" class="demo-section" style="width: 200px"></div>
 
             <script>
                 $(document).ready(function() {
-                    var treeview;
-
                     function onSelect(e) {
-                        kendoConsole.log("Selected: " + treeview.text(e.node));
-                    }
-
-                    function onError(e) {
-                        kendoConsole.error("Loading failed with " + e.xhr.statusText + " " + e.xhr.status);
+                        kendoConsole.log("Selected: " + this.text(e.node));
                     }
 
                     function onCollapse(e) {
-                        kendoConsole.log("Collapsing " + treeview.text(e.node));
+                        kendoConsole.log("Collapsing " + this.text(e.node));
                     }
 
                     function onExpand(e) {
-                        kendoConsole.log("Expanding " + treeview.text(e.node));
+                        kendoConsole.log("Expanding " + this.text(e.node));
                     }
 
                     function onDragStart(e) {
-                        kendoConsole.log("Started dragging " + treeview.text(e.sourceNode));
+                        kendoConsole.log("Started dragging " + this.text(e.sourceNode));
                     }
 
                     function onDrag(e) {
-                        // omitted event logging in order to prevent console flood
-                        // kendoConsole.log("Started dragging " + treeview.text(e.sourceNode));
+                        kendoConsole.log("Started dragging " + this.text(e.sourceNode));
                     }
 
                     function onDrop(e) {
                         kendoConsole.log(
-                        "Dropped " + treeview.text(e.sourceNode) +
+                        "Dropped " + this.text(e.sourceNode) +
                         " (" + (e.valid ? "valid" : "invalid") + ")"
                         );
                     }
 
                     function onDragEnd(e) {
-                        kendoConsole.log("Finished dragging " + treeview.text(e.sourceNode));
+                        kendoConsole.log("Finished dragging " + this.text(e.sourceNode));
                     }
 
-                    treeview = $("#treeview").kendoTreeView({
+                    $("#treeview").kendoTreeView({
                         dataSource: [
                             { text: "Furniture", expanded: true, items: [
                                 { text: "Tables & Chairs" },
@@ -57,7 +50,6 @@
                             { text: "Storage" }
                         ],
                         select: onSelect,
-                        error: onError,
                         collapse: onCollapse,
                         expand: onExpand,
                         dragAndDrop: true,
@@ -66,7 +58,7 @@
                         drag: onDrag,
                         drop: onDrop,
                         dragend: onDragEnd
-                    }).width(200).data("kendoTreeView");
+                    });
                 });
             </script>
         </div>
