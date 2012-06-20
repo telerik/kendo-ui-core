@@ -33,6 +33,8 @@ var SUITE_STYLES = {
     "winjs": "web"
 }
 
+var DEFAULT_EULA = "beta-eula";
+
 // Configuration ==============================================================
 var cdnBundle = {
     name: "kendoui.cdn",
@@ -42,7 +44,7 @@ var cdnBundle = {
     sourceLicense: "src-license-complete.txt",
     licenses: [commercialLicense],
     skipExamples: true,
-    eula: "eula"
+    eula: DEFAULT_EULA
 };
 
 var winjsBundle = {
@@ -53,7 +55,7 @@ var winjsBundle = {
     licenses: [commercialLicense],
     vsdoc: /(web|framework|dataviz).+md/,
     skipExamples: true,
-    eula: "eula"
+    eula: DEFAULT_EULA
 };
 
 var mvcWrappersBundle = {
@@ -66,7 +68,7 @@ var mvcWrappersBundle = {
     vsdoc: /.+md/,
     skipExamples: true,
     skipPackage: true,
-    eula: "mvc-beta-eula"
+    eula: DEFAULT_EULA
 };
 
 var bundles = [{
@@ -76,28 +78,28 @@ var bundles = [{
     sourceLicense: "src-license-complete.txt",
     vsdoc: /.+md/,
     licenses: productionLicenses,
-    eula: "eula",
+    eula: DEFAULT_EULA,
 }, {
     name: "kendoui.web",
     suites: ["web"],
     sourceLicense: "src-license-web.txt",
     vsdoc: /(framework|web).+md/,
     licenses: productionLicenses.concat(openSourceLicense),
-    eula: "eula",
+    eula: DEFAULT_EULA,
 }, {
     name: "kendoui.dataviz",
     suites: ["dataviz"],
     sourceLicense: "src-license-dataviz.txt",
     vsdoc: /(framework|dataviz).+md/,
     licenses: productionLicenses,
-    eula: "eula"
+    eula: DEFAULT_EULA
 }, {
     name: "kendoui.mobile",
     suites: ["mobile"],
     sourceLicense: "src-license-mobile.txt",
     vsdoc: /(framework|mobile).+md/,
     licenses: productionLicenses,
-    eula: "eula"
+    eula: DEFAULT_EULA
 }];
 
 var thirdPartyScripts = [
