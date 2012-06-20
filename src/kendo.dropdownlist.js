@@ -233,10 +233,19 @@
          * $("#dropdownlist").kendoDropDownList({
          *     height: 400
          * });
-         * @option {String} [optionLabel] Define the text of the default empty item.
+         * @option {String | Object} [optionLabel] <""> Define the text of the default empty item. If the value is an object, then the widget will use it directly.
          * _example
          * $("#dropdownlist").kendoDropDownList({
          *     optionLabel: "Select An Option"
+         * });
+         * _example
+         * $("#dropdownlist").kendoDropDownList({
+         *     dataTextField: "text",
+         *     dataValueField: "value",
+         *     optionLabel: {
+         *        text: "Select An Option",
+         *        value: ""
+         *     }
          * });
          * @option {String} [template] Template to be used for rendering the items in the list.
          * _example
@@ -322,10 +331,6 @@
                 that.wrapper.focus();
             });
 
-            if (options.value) {
-                //element.val(options.value);
-            }
-
             that._reset();
 
             that._word = "";
@@ -357,7 +362,7 @@
             } else {
                 text = options.text;
                 if (!text) {
-                    optionLabel = options.optionLabel;
+                    optionLabel = that._optionLabelText(options.optionLabel),
                     useOptionLabel = optionLabel && options.index === 0;
 
                     if (element.is(SELECT)) {
@@ -646,6 +651,7 @@
 
             if (that.element.is(SELECT)) {
                 if (optionLabel && length) {
+                    optionLabel = that._optionLabelText(optionLabel);
                     optionLabel = '<option value="">' + optionLabel + "</option>";
                 }
 
@@ -805,6 +811,18 @@
             this._focus(li);
         },
 
+        _optionLabelText: function() {
+            var options = this.options,
+                dataTextField = options.dataTextField,
+                optionLabel = options.optionLabel;
+
+            if (optionLabel && dataTextField && typeof optionLabel === "object") {
+                return this._text(optionLabel);
+            }
+
+            return optionLabel;
+        },
+
         _data: function() {
             var that = this,
                 options = that.options,
@@ -817,7 +835,9 @@
                 idx = 0;
 
             if (optionLabel && length) {
-                if (textField) {
+                if (typeof optionLabel === "object") {
+                    first = optionLabel;
+                } else if (textField) {
                     first = {};
 
                     textField = textField.split(".");

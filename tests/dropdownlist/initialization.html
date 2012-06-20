@@ -449,11 +449,45 @@
                 equal(first.Order1.Ship1.City1, "");
             });
 
+            test("Use optionLabel directly if object", function() {
+                var data = [{text: 1, value: 1}, {text:2, value:2}],
+                dropdownlist = new DropDownList(input, {
+                    dataTextField: "text",
+                    dataValueField: "value",
+                    dataSource: data,
+                    optionLabel: {
+                        text: "Select...",
+                        value: "",
+                        test: "test"
+                    }
+                });
+
+                equal(dropdownlist._data()[0].text, "Select...");
+                equal(dropdownlist._data()[0].value, "");
+                equal(dropdownlist._data()[0].test, "test");
+            });
+
             test("_options should render option with value if optionLabel", function() {
                 var select = $("<select/>"),
                     dropdownlist = new DropDownList(select, {
                         dataSource: ["item1", "item2"],
                         optionLabel: "Select..."
+                    });
+
+                    equal(select[0].children[0].innerHTML, "Select...");
+            });
+
+            test("_options uses optionLabel directly if object", function() {
+                var select = $("<select/>"),
+                    dropdownlist = new DropDownList(select, {
+                        dataTextField: "text",
+                        dataValueField: "value",
+                        dataSource: [
+                            { text: "text", value: "1" }
+                        ],
+                        optionLabel: {
+                            text: "Select..."
+                        }
                     });
 
                     equal(select[0].children[0].innerHTML, "Select...");
@@ -536,6 +570,20 @@
                 var dropdownlist = new DropDownList($("<select/>"), {
                     autoBind: false,
                     optionLabel: "Select..."
+                });
+
+                equal(dropdownlist.text(), "Select...");
+            });
+
+            test("get text from optionLabel on init", function() {
+                var dropdownlist = new DropDownList($("<select/>"), {
+                    autoBind: false,
+                    dataTextField: "text",
+                    dataValueField: "value",
+                    optionLabel: {
+                        text: "Select...",
+                        value: ""
+                    }
                 });
 
                 equal(dropdownlist.text(), "Select...");
