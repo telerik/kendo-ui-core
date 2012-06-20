@@ -33,7 +33,6 @@
        element.find(selector)
               .parent()
               .attr(kendo.attr("page"), page)
-              .attr(DISABLED, disabled)
               .toggleClass("k-state-disabled", disabled);
     }
 
@@ -326,10 +325,13 @@
         },
 
         _click: function(e) {
-            var page = $(e.currentTarget).attr(kendo.attr("page"));
+            var target = $(e.currentTarget);
+
             e.preventDefault();
 
-            this.page(page);
+            if (!target.is(".k-state-disabled")) {
+                this.page(target.attr(kendo.attr("page")));
+            }
         },
 
         totalPages: function() {
