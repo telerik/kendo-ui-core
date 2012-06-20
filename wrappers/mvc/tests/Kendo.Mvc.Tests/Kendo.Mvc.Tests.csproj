@@ -157,6 +157,7 @@
     <Compile Include="UI\ListView\ListViewWorkingConditionsTests.cs" />
     <Compile Include="UI\ListView\ListViewTestHelper.cs" />
     <Compile Include="UI\ListView\ListViewBuilderTests.cs" />
+    <Compile Include="UI\Upload\UploadMessagesBuilderTests.cs" />
     <Compile Include="UI\ViewComponentBaseExtensionsTests.cs" />
     <Compile Include="UI\DataSource\DataSourceTests.cs" />
     <Compile Include="UI\Gauge\GaugeLinearScaleBuilderTests.cs" />

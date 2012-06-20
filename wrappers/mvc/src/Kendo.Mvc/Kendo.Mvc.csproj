@@ -947,10 +947,13 @@
     </Compile>
     <Compile Include="UI\TabStrip\Html\TabStripHtmlBuilder.cs" />
     <Compile Include="UI\UiPrimitives.cs" />
+    <Compile Include="UI\Upload\IUploadMessages.cs" />
+    <Compile Include="UI\Upload\Fluent\UploadMessagesBuilder.cs" />
     <Compile Include="UI\Upload\Fluent\UploadAsyncSettingsBuilder.cs" />
     <Compile Include="UI\Upload\Fluent\UploadBuilder.cs" />
     <Compile Include="UI\Upload\Fluent\UploadEventBuilder.cs" />
     <Compile Include="UI\Upload\Html\UploadHtmlBuilder.cs" />
+    <Compile Include="UI\Upload\UploadMessages.cs" />
     <Compile Include="UI\Upload\Settings\IUploadAsyncSettings.cs" />
     <Compile Include="UI\Upload\Settings\UploadAsyncSettings.cs" />
     <Compile Include="UI\Upload\Upload.cs" />
@@ -999,8 +1002,6 @@
     <EmbeddedResource Include="Resources\Messages.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Messages.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\UploadLocalization.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\EditorLocalization.resx">
