@@ -701,6 +701,11 @@
                     "url": "treeview/local-data.html"
                 },
                 {
+                    "packages": [ "mvc" ],
+                    "text": "Binding to remote data",
+                    "url": "treeview/remote-data.html"
+                },
+                {
                     "packages": [ "!mvc" ],
                     "text": "Binding to OData service",
                     "url": "treeview/odata-binding.html"
