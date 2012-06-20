@@ -449,10 +449,12 @@
     <Compile Include="UI\Grid\Columns\IGridForeignKeyColumn.cs" />
     <Compile Include="UI\Grid\Commands\GridCustomActionCommand.cs" />
     <Compile Include="UI\Grid\Commands\GridCustomCommandBase.cs" />
+    <Compile Include="UI\Grid\Fluent\DateOperatorsBuilder.cs" />
     <Compile Include="UI\Grid\Fluent\NumberOperatorsBuilder.cs" />
     <Compile Include="UI\Grid\Fluent\FilterableMessagesBuilder.cs" />
     <Compile Include="UI\Grid\Fluent\FilterableOperatorsBuilder.cs" />
     <Compile Include="UI\Grid\Fluent\StringOperatorsBuilder.cs" />
+    <Compile Include="UI\Grid\Settings\DateOperators.cs" />
     <Compile Include="UI\Grid\Settings\FilterableOperators.cs" />
     <Compile Include="UI\Grid\Fluent\GridNavigatableSettingsBuilder.cs" />
     <Compile Include="UI\Grid\Fluent\GridToolBarSubmitChangesCommandBuilder.cs" />

@@ -25,5 +25,11 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+        public FilterableOperatorsBuilder ForDate(Action<DateOperatorsBuilder> configurator)
+        {
+            configurator(new DateOperatorsBuilder(operators.Dates));
+
+            return this;
+        }
     }
 }

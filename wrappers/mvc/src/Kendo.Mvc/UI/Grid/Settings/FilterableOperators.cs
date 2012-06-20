@@ -10,7 +10,7 @@ namespace Kendo.Mvc.UI
         {
             Strings = new StringOperators();
             Numbers = new NumberOperators();
-            DateOperators = new Dictionary<string, string>();
+            Dates = new DateOperators();
         }
 
         public StringOperators Strings
@@ -25,7 +25,7 @@ namespace Kendo.Mvc.UI
             private set;
         }
 
-        public IDictionary<string, string> DateOperators
+        public DateOperators Dates
         {
             get;
             private set;
@@ -47,7 +47,7 @@ namespace Kendo.Mvc.UI
                 json["number"] = numbers;
             }
 
-            var dates = DateOperators;
+            var dates = Dates.ToJson();
 
             if (dates.Any())
             {

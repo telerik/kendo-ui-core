@@ -23,8 +23,10 @@
           columns.Bound(o => o.OrderID);
           columns.Bound(o => o.ContactName);
           columns.Bound(o => o.ShipAddress);
+          columns.Bound(o => o.OrderDate);
           columns.Bound(o => o.ShipCountry);
       })
+      .Filterable(f => f.Operators(o => o.ForDate(d => d.Clear().IsEqualTo("равно на"))))
       .Pageable(pager => pager
         .Input(Model.Input)
         .Numeric(Model.Numeric)

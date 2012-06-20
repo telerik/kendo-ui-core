@@ -79,6 +79,60 @@ namespace Kendo.Mvc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Is equal to.
+        /// </summary>
+        public static string Filter_DateIsEqualTo {
+            get {
+                return ResourceManager.GetString("Filter_DateIsEqualTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is after.
+        /// </summary>
+        public static string Filter_DateIsGreaterThan {
+            get {
+                return ResourceManager.GetString("Filter_DateIsGreaterThan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is after or equal to.
+        /// </summary>
+        public static string Filter_DateIsGreaterThanOrEqualTo {
+            get {
+                return ResourceManager.GetString("Filter_DateIsGreaterThanOrEqualTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is before.
+        /// </summary>
+        public static string Filter_DateIsLessThan {
+            get {
+                return ResourceManager.GetString("Filter_DateIsLessThan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is before or equal to.
+        /// </summary>
+        public static string Filter_DateIsLessThanOrEqualTo {
+            get {
+                return ResourceManager.GetString("Filter_DateIsLessThanOrEqualTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is not equal to.
+        /// </summary>
+        public static string Filter_DateIsNotEqualTo {
+            get {
+                return ResourceManager.GetString("Filter_DateIsNotEqualTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Filter.
         /// </summary>
         public static string Filter_Filter {

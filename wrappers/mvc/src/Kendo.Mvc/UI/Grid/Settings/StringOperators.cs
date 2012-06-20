@@ -23,7 +23,7 @@ namespace Kendo.Mvc.UI
         private const string DefaultIsNotEqualTo = "Is not equal to";
         private const string DefaultStartsWith = "Starts with";
         private const string DefaultEndsWith = "Ends with";
-        private const string DefaultContains = "Ends with";
+        private const string DefaultContains = "Contains";
 
         private const int DefaultNumberOfFilters = 5;
 

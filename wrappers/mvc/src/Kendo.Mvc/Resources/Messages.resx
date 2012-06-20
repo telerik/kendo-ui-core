@@ -123,6 +123,24 @@
   <data name="Filter_Clear" xml:space="preserve">
     <value>Clear</value>
   </data>
+  <data name="Filter_DateIsEqualTo" xml:space="preserve">
+    <value>Is equal to</value>
+  </data>
+  <data name="Filter_DateIsGreaterThan" xml:space="preserve">
+    <value>Is after</value>
+  </data>
+  <data name="Filter_DateIsGreaterThanOrEqualTo" xml:space="preserve">
+    <value>Is after or equal to</value>
+  </data>
+  <data name="Filter_DateIsLessThan" xml:space="preserve">
+    <value>Is before</value>
+  </data>
+  <data name="Filter_DateIsLessThanOrEqualTo" xml:space="preserve">
+    <value>Is before or equal to</value>
+  </data>
+  <data name="Filter_DateIsNotEqualTo" xml:space="preserve">
+    <value>Is not equal to</value>
+  </data>
   <data name="Filter_Filter" xml:space="preserve">
     <value>Filter</value>
   </data>
