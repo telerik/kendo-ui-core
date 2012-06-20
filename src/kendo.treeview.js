@@ -477,7 +477,7 @@
                 loading: that._loadingTemplate()
             };
 
-            inferred = element.is("ul");
+            inferred = element.is("ul") || element.hasClass(KTREEVIEW);
 
             // render treeview if it's not already rendered
             if (!element.hasClass(KTREEVIEW)) {
