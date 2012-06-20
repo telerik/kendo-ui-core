@@ -50,5 +50,12 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        public StringOperatorsBuilder DoesNotContain(string message)
+        {
+            strings.Operators["doesnotcontain"] = message;
+
+            return this;
+        }
     }
 }

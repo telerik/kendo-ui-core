@@ -15,7 +15,8 @@ namespace Kendo.Mvc.UI
                 { "neq", Messages.Filter_StringIsNotEqualTo },
                 { "startswith", Messages.Filter_StringStartsWith },
                 { "endswith", Messages.Filter_StringEndsWith },
-                { "contains", Messages.Filter_StringContains }
+                { "contains", Messages.Filter_StringContains },
+                { "doesnotcontain", Messages.Filter_StringDoesNotContain }
             };
         }
 
@@ -24,8 +25,9 @@ namespace Kendo.Mvc.UI
         private const string DefaultStartsWith = "Starts with";
         private const string DefaultEndsWith = "Ends with";
         private const string DefaultContains = "Contains";
+        private const string DefaultDoesNotContain = "Contains";
 
-        private const int DefaultNumberOfFilters = 5;
+        private const int DefaultNumberOfFilters = 6;
 
         protected override void Serialize(IDictionary<string, object> json)
         {
@@ -57,6 +59,11 @@ namespace Kendo.Mvc.UI
             }
 
             if (Operators.ContainsKey("contains") && Operators["contains"] != DefaultContains)
+            {
+                dirty = true;
+            }
+
+            if (Operators.ContainsKey("doesnotcontain") && Operators["doesnotcontain"] != DefaultDoesNotContain)
             {
                 dirty = true;
             }

@@ -177,6 +177,9 @@
   <data name="Filter_StringContains" xml:space="preserve">
     <value>Contains</value>
   </data>
+  <data name="Filter_StringDoesNotContain" xml:space="preserve">
+    <value>Does not contain</value>
+  </data>
   <data name="Filter_StringEndsWith" xml:space="preserve">
     <value>Ends with</value>
   </data>

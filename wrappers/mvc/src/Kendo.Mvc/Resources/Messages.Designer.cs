@@ -241,6 +241,15 @@ namespace Kendo.Mvc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Does not contain.
+        /// </summary>
+        public static string Filter_StringDoesNotContain {
+            get {
+                return ResourceManager.GetString("Filter_StringDoesNotContain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ends with.
         /// </summary>
         public static string Filter_StringEndsWith {

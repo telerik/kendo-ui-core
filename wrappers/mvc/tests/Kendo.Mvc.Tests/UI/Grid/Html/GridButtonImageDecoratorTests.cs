@@ -27,8 +27,10 @@ namespace Kendo.Mvc.UI.Html
         }
         
         [Fact]
-        public void Should_add_icon_class()
+        public void Should_add_icon_class_if_sprite_class_is_not_empty()
         {
+            button.Setup(b => b.SpriteCssClass).Returns("foo");
+
             decorator.Apply(html);
 
             html.Children[0].Attribute("class").ShouldContain(UIPrimitives.Icon);
