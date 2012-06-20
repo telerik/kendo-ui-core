@@ -571,7 +571,6 @@
                     row = data[dataIx];
 
                     if (currentSeries.field) {
-                        // TODO: Replace with ScatterChart pointValue and make color bindable
                         value = getField(currentSeries.field, row);
                     } else {
                         value = undefined;
@@ -2781,38 +2780,7 @@
         },
 
         pointValue: function(series, pointIx) {
-            var fields = this.bindableFields(),
-                data = series.data[pointIx],
-                dataItems = series.dataItems,
-                value = data || {},
-                i,
-                fieldsLength = fields.length,
-                fieldName,
-                sourceField,
-                fieldValue;
-
-            if (isArray(data)) {
-                value = {};
-                for (i = 0; i < fieldsLength; i++) {
-                    fieldValue = data[i];
-                    if (defined(fieldValue)) {
-                        value[fields[i]] = fieldValue;
-                    }
-                }
-            }
-
-            if (!defined(data) && series.dataItems) {
-                for (i = 0; i < fieldsLength; i++) {
-                    fieldName = fields[i];
-                    sourceField = series[fieldName + "Field"];
-
-                    if (sourceField) {
-                        value[fieldName] = getField(sourceField, dataItems[pointIx]);
-                    }
-                }
-            }
-
-            return value;
+            return pointData(series, pointIx, this.bindableFields());
         },
 
         formatPointValue: function(value, format) {
@@ -4610,16 +4578,14 @@
                 seriesIx,
                 series = plotArea.series,
                 currentSeries,
-                firstPoint,
+                firstPointData,
                 dateData;
 
             for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
                 currentSeries = series[seriesIx];
                 if (currentSeries[vertical ? "yAxis" : "xAxis"] == axisOptions.name) {
-                    firstPoint = currentSeries.data[0];
-                    if (firstPoint) {
-                        dateData = firstPoint[vertical ? 1 : 0] instanceof Date;
-                    }
+                    firstPointData = pointData(currentSeries, 0, ["x", "y"]);
+                    dateData = firstPointData[vertical ? "y" : "x"] instanceof Date;
 
                     break;
                 }
@@ -5239,6 +5205,40 @@
         }
 
         return diff;
+    }
+
+    function pointData(series, pointIx, fields) {
+        var data = series.data[pointIx],
+            dataItems = series.dataItems,
+            value = data || {},
+            i,
+            fieldsLength = fields.length,
+            fieldName,
+            sourceField,
+            fieldValue;
+
+        if (isArray(data)) {
+            value = {};
+            for (i = 0; i < fieldsLength; i++) {
+                fieldValue = data[i];
+                if (defined(fieldValue)) {
+                    value[fields[i]] = fieldValue;
+                }
+            }
+        }
+
+        if (!defined(data) && series.dataItems) {
+            for (i = 0; i < fieldsLength; i++) {
+                fieldName = fields[i];
+                sourceField = series[fieldName + "Field"];
+
+                if (sourceField) {
+                    value[fieldName] = getField(sourceField, dataItems[pointIx]);
+                }
+            }
+        }
+
+        return value;
     }
 
     // Exports ================================================================

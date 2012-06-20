@@ -1262,6 +1262,19 @@
                     same(plotArea.axisX.options.type, "Date");
                 });
 
+                test("Automatically detects date X axis for bound series", function() {
+                    createPlotArea([{
+                        name: "Value A",
+                        type: "scatter",
+                        xField: "x",
+                        yField: "y",
+                        data: [undefined],
+                        dataItems: [{ x: new Date(2012, 02, 01), y: 100 }]
+                    }]);
+
+                    same(plotArea.axisX.options.type, "Date");
+                });
+
                 test("Automatic detection of X axis can be overriden", function() {
                     createPlotArea([{
                         name: "Value A",
@@ -1281,6 +1294,19 @@
                         name: "Value A",
                         type: "scatter",
                         data: [[100, new Date(2012, 02, 01)]]
+                    }]);
+
+                    same(plotArea.axisY.options.type, "Date");
+                });
+
+                test("Automatically detects date Y axis for bound series", function() {
+                    createPlotArea([{
+                        name: "Value A",
+                        type: "scatter",
+                        xField: "x",
+                        yField: "y",
+                        data: [undefined],
+                        dataItems: [{ x: 100, y: new Date(2012, 02, 01) }]
                     }]);
 
                     same(plotArea.axisY.options.type, "Date");
