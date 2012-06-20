@@ -61,7 +61,8 @@
                                 </li>
 
                                 idx++;
-                                if (idx > 0 && idx % 6 == 0)
+                                var divisor = ViewBag.suite == "web" ? 5 : 6;
+                                if (idx > 0 && idx % divisor == 0)
                                 {
                                     @Html.Raw("</ul><ul>")
                                 }

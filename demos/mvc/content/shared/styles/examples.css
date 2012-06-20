@@ -351,6 +351,7 @@ html
     color:#2e2e2e;
 }
 
+.suite-demos-nav .active:before,
 .suite-demos-nav .active:after
 {
     content:" ";
@@ -365,6 +366,18 @@ html
     width: 0;
     height:0;
 }
+
+.suite-demos-nav .active:last-child:after
+{
+    border-color: #fff transparent;
+}
+
+.suite-demos-nav .active:before
+{
+    border-color: #c9c9c9 transparent;
+    margin-top: -1px;
+}
+
 
 /*featured demos and demos-nav*/
 
@@ -1061,7 +1074,6 @@ p#copy
 {
     float:left;
     width:650px;
-    min-height:176px;
 }
 
 .widgetGrid .narrowCol
@@ -1076,13 +1088,20 @@ p#copy
 
 .widgetGrid .mobile-widgets
 {
-    width:300px;
+    width:340px;
 }
 
 .widgetGrid .mobile-framework
 {
-    width:176px;
+    width:240px;
     background:rgba(221, 221, 221, 0.2);
+}
+
+.widgetGrid .mobile-devices
+{
+    width:390px;
+    position: relative;
+    min-height: 176px;
 }
 
 .widgetGrid h2
@@ -1133,6 +1152,7 @@ p#copy
 .widgetGrid .gauges
 {
     width:180px;
+    min-height: 176px;
     background:rgba(221, 221, 221, 0.2);
 }
 
@@ -1175,12 +1195,6 @@ p#copy
 }
 
 /*mobile device selector*/
-
-.widgetGrid .mobile-devices
-{
-    width:470px;
-    position: relative;
-}
 
 #deviceList
 {
