@@ -33,9 +33,8 @@ namespace Kendo.Mvc.UI
             html.Children.Add(new HtmlElement(tagName).Attribute("id", listView.Id));
 
             if (listView.Pageable.Enabled)
-            {                
-                var pagerWrapper = new HtmlElement("div").AddClass("k-pager-wrap");
-                pagerWrapper.Children.Add(new HtmlElement("div").Attribute("id", listView.Id + "_pager"));
+            {
+                var pagerWrapper = new HtmlElement("div").Attribute("id", listView.Id + "_pager").AddClass("k-pager-wrap");
                 html.Children.Add(pagerWrapper);
             }
 

@@ -51,7 +51,7 @@ namespace Kendo.Mvc.UI.Html.Tests
             listView.Pageable.Enabled = true;
             var html = builder.Build();
 
-            html.Children[1].Children[0].Attribute("id").ShouldEqual("foo_pager");
+            html.Children[1].Attribute("id").ShouldEqual("foo_pager");
         }       
     }
 }
