@@ -44,8 +44,6 @@ namespace Kendo.Mvc.UI
                 options["panes"] = Panes.Select(pane => pane.Serialize());
             }
 
-            // TODO: add animation configuration and builder
-
             writer.Write(Initializer.Initialize(Selector, "Splitter", options));
 
             base.WriteInitializationScript(writer);

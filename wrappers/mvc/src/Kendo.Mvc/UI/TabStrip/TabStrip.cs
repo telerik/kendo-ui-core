@@ -12,25 +12,26 @@ namespace Kendo.Mvc.UI
 
     public class TabStrip : ViewComponentBase, INavigationItemComponent<TabStripItem>
     {
-        //private readonly IList<IEffect> defaultEffects = new List<IEffect>{ new SlideAnimation() };
-
-        private readonly ITabStripHtmlBuilderFactory builderFactory;
         internal bool isPathHighlighted;
 
-        public TabStrip(ViewContext viewContext, IJavaScriptInitializer initializer, 
-            IUrlGenerator urlGenerator, INavigationItemAuthorization authorization, ITabStripHtmlBuilderFactory rendererFactory) : base(viewContext, initializer)
+        public TabStrip(ViewContext viewContext, IJavaScriptInitializer initializer, IUrlGenerator urlGenerator, INavigationItemAuthorization authorization) 
+            : base(viewContext, initializer)
         {
-            this.builderFactory = rendererFactory;
-
             UrlGenerator = urlGenerator;
             Authorization = authorization;
 
-            //defaultEffects.Each(el => Effects.Container.Add(el));
+            Animation = new PopupAnimation();
 
             Items = new List<TabStripItem>();
             SelectedIndex = -1;
             HighlightPath = true;
             SecurityTrimming = true;
+        }
+
+        public PopupAnimation Animation
+        {
+            get;
+            private set;
         }
 
         public IUrlGenerator UrlGenerator
@@ -85,11 +86,12 @@ namespace Kendo.Mvc.UI
         {
             var options = new Dictionary<string, object>(Events);
 
-            // TODO: add animation configuration and builder
-            //if (!defaultEffects.SequenceEqual(Effects.Container))
-            //{
-            //    objectWriter.Serialize("effects", Effects);
-            //}
+            var animation = Animation.ToJson();
+
+            if (animation.Keys.Any())
+            {
+                options["animation"] = animation["animation"];
+            }
 
             var urls = Items.Where(item => item.Visible).Select(item =>
                 {
@@ -118,7 +120,7 @@ namespace Kendo.Mvc.UI
 
             if (Items.Any())
             {
-                ITabStripHtmlBuilder builder = builderFactory.Create(this);
+                TabStripHtmlBuilder builder = new TabStripHtmlBuilder(this);
 
                 int itemIndex = 0;
                 bool isPathHighlighted = false;
@@ -150,7 +152,7 @@ namespace Kendo.Mvc.UI
             base.WriteHtml(writer);
         }
 
-        private void WriteItem(TabStripItem item, IHtmlNode parentTag, ITabStripHtmlBuilder builder)
+        private void WriteItem(TabStripItem item, IHtmlNode parentTag, TabStripHtmlBuilder builder)
         {
             if (ItemAction != null)
             {

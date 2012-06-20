@@ -67,6 +67,42 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Configures the animation effects of the tabstrip.
+        /// </summary>
+        /// <param name="enable">Whether the component animation is enabled.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().TabStrip()
+        ///             .Name("PanelBar")
+        ///             .Animation(false)
+        /// </code>
+        /// </example>
+        public TabStripBuilder Animation(bool enable)
+        {
+            Component.Animation.Enabled = enable;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Configures the animation effects of the tabstrip.
+        /// </summary>
+        /// <param name="animationAction">The action that configures the animation.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().TabStrip()
+        ///             .Name("PanelBar")
+        ///             .Animation(animation => animation.Open(config => config.Fade(FadeDirection.In)))
+        /// </code>
+        /// </example>
+        public TabStripBuilder Animation(Action<PopupAnimationBuilder> animationAction)
+        {
+            animationAction(new PopupAnimationBuilder(Component.Animation));
+
+            return this;
+        }
+
+        /// <summary>
         /// Binds the tabstrip to a sitemap
         /// </summary>
         /// <param name="viewDataKey">The view data key.</param>
@@ -133,33 +169,6 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
-        ///// <summary>
-        ///// Configures the effects of the tabstrip.
-        ///// </summary>
-        ///// <param name="addEffects">The action which configures the effects.</param>
-        ///// <example>
-        ///// <code lang="CS">
-        ///// &lt;%= Html.Kendo().TabStrip()
-        /////	           .Name("TabStrip")
-        /////	           .Effects(fx =>
-        /////	           {
-        /////		            fx.Slide()
-        /////			          .Opacity()
-        /////					  .OpenDuration(AnimationDuration.Normal)
-        /////					  .CloseDuration(AnimationDuration.Normal);
-        /////	           })
-        ///// </code>
-        ///// </example>
-        //public TabStripBuilder Effects(Action<EffectsBuilder> addEffects)
-        //{
-
-        //    EffectsBuilderFactory factory = new EffectsBuilderFactory();
-
-        //    addEffects(factory.Create(Component.Effects));
-
-        //    return this;
-        //}
-
         /// <summary>
         /// Selects the item at the specified index.
         /// </summary>
@@ -179,7 +188,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TabStripBuilder SelectedIndex(int index)
         {
-
             Component.SelectedIndex = index;
 
             return this;
@@ -204,7 +212,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TabStripBuilder ItemAction(Action<TabStripItem> action)
         {
-
             Component.ItemAction = action;
 
             return this;
@@ -243,7 +250,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TabStripBuilder SecurityTrimming(bool value)
         {
-
             Component.SecurityTrimming = value;
 
             return this;

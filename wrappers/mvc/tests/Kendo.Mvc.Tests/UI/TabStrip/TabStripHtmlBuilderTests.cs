@@ -17,7 +17,7 @@ namespace Kendo.Mvc.UI.Tests
         {
             writer = new Mock<HtmlTextWriter>(TextWriter.Null);
 
-            tabStrip = TabStripTestHelper.CreateTabStrip(writer.Object, null);
+            tabStrip = TabStripTestHelper.CreateTabStrip(writer.Object);
             tabStrip.Name = "tabStrip1";
 
             item = new TabStripItem();

@@ -200,6 +200,7 @@
     <Compile Include="Controllers\Web\Splitter\IndexController.cs" />
     <Compile Include="Controllers\Web\TabStrip\AjaxController.cs" />
     <Compile Include="Controllers\Web\TabStrip\ApiController.cs" />
+    <Compile Include="Controllers\Web\TabStrip\AnimationController.cs" />
     <Compile Include="Controllers\Web\TabStrip\EventsController.cs" />
     <Compile Include="Controllers\Web\TabStrip\ImagesController.cs" />
     <Compile Include="Controllers\Web\TabStrip\IndexController.cs" />
@@ -684,6 +685,7 @@
     <Content Include="Areas\razor\Views\web\grid\editing_custom.cshtml" />
     <Content Include="Areas\razor\Views\web\grid\EditorTemplates\ClientEmployee.cshtml" />
     <Content Include="Areas\aspx\Views\web\grid\EditorTemplates\ClientEmployee.ascx" />
+    <Content Include="Areas\razor\Views\web\tabstrip\animation.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>

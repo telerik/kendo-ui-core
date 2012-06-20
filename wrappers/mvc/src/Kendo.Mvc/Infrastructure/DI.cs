@@ -5,7 +5,7 @@ namespace Kendo.Mvc.Infrastructure
     using Kendo.Mvc.Infrastructure.Implementation;
     using Kendo.Mvc.UI;
     using Kendo.Mvc.UI.Html;
-    
+
     public static class DI
     {
         public static IDependencyInjectionContainer Current
@@ -32,14 +32,12 @@ namespace Kendo.Mvc.Infrastructure
             }
 
             Current = new DependencyInjectionContainer();
-            
+
             RegisterCoreDependencies();
 
             RegisterAuthorizationDependencies();
 
             RegisterCacheDependencies();
-
-            RegisterComponentDependencies();
 
             GridDependencyBootstrapper.Setup();
         }
@@ -65,19 +63,13 @@ namespace Kendo.Mvc.Infrastructure
 
         private static void RegisterAuthorizationDependencies()
         {
-            Current.Register<IControllerAuthorization, IAuthorizeAttributeCache, IAuthorizationContextCache>((authorizeAttributeCache, authorizationContextFactory) => 
+            Current.Register<IControllerAuthorization, IAuthorizeAttributeCache, IAuthorizationContextCache>((authorizeAttributeCache, authorizationContextFactory) =>
                 new ControllerAuthorization(authorizeAttributeCache, authorizationContextFactory, RouteTable.Routes));
 
             Current.Register<INavigationItemAuthorization, IControllerAuthorization, IUrlAuthorization>((controllerAuthorization, urlAuthorization) =>
                 new NavigationItemAuthorization(controllerAuthorization, urlAuthorization));
         }
-        
-        private static void RegisterComponentDependencies()
-        {
-            Current.Register<ITabStripHtmlBuilderFactory, IActionMethodCache>((actionMethodCache) =>
-                new TabStripHtmlBuilderFactory(actionMethodCache));
-        }
-        
+
         static void RegisterCacheDependencies()
         {
             Current.Register<ICacheProvider>(() => new CacheProvider());
@@ -87,11 +79,11 @@ namespace Kendo.Mvc.Infrastructure
                 new ActionMethodCache(cacheFactory.Create("actionMethod"), controllerTypeCache));
             Current.Register<IAuthorizeAttributeCache, ICacheFactory, IControllerTypeCache, IActionMethodCache>((cacheFactory, controllerTypeCache, actionMethodCache) =>
                 new AuthorizeAttributeCache(cacheFactory.Create("authorizeAttribute"), controllerTypeCache, actionMethodCache));
-            Current.Register<IControllerContextCache, ICacheFactory, IControllerTypeCache>((cacheFactory, controllerTypeCache) => 
+            Current.Register<IControllerContextCache, ICacheFactory, IControllerTypeCache>((cacheFactory, controllerTypeCache) =>
                 new ControllerContextCache(cacheFactory.Create("controllerContext"), controllerTypeCache));
-            Current.Register<IControllerDescriptorCache, ICacheFactory, IControllerTypeCache>((cacheFactory, controllerTypeCache) => 
+            Current.Register<IControllerDescriptorCache, ICacheFactory, IControllerTypeCache>((cacheFactory, controllerTypeCache) =>
                 new ControllerDescriptorCache(cacheFactory.Create("controllerDescriptor"), controllerTypeCache));
-            Current.Register<IAuthorizationContextCache, ICacheFactory, IControllerContextCache, IControllerDescriptorCache>((cacheFactory, controllerContextCache, controllerDescriptorCache) => 
+            Current.Register<IAuthorizationContextCache, ICacheFactory, IControllerContextCache, IControllerDescriptorCache>((cacheFactory, controllerContextCache, controllerDescriptorCache) =>
                 new AuthorizationContextCache(cacheFactory.Create("authorizeContext"), controllerContextCache, controllerDescriptorCache));
         }
     }

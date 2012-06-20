@@ -188,7 +188,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         /// &lt;%= Html.Kendo().PanelBar()
         ///             .Name("PanelBar")
-        ///             .Animation(animation => animation.Expand)
+        ///             .Animation(animation => animation.Expand(config => config.Fade(FadeDirection.In)))
         /// </code>
         /// </example>
         public PanelBarBuilder Animation(Action<ExpandableAnimationBuilder> animationAction)

@@ -929,10 +929,7 @@
     <Compile Include="UI\PanelBar\Fluent\PanelBarItemFactory.cs" />
     <Compile Include="UI\PanelBar\Html\PanelBarHtmlBuilder.cs" />
     <Compile Include="Extensions\HtmlAttributesContainerExtensions.cs" />
-    <Compile Include="UI\TabStrip\Html\ITabStripHtmlBuilder.cs" />
-    <Compile Include="UI\TabStrip\Html\ITabStripHtmlBuilderFactory.cs" />
     <Compile Include="UI\TabStrip\Fluent\TabStripClientEventsBuilder.cs" />
-    <Compile Include="UI\TabStrip\Html\TabStripHtmlBuilderFactory.cs" />
     <Compile Include="UI\TabStrip\TabStrip.cs">
       <SubType>Code</SubType>
     </Compile>

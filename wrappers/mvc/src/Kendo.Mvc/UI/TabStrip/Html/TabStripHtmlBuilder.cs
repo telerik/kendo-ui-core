@@ -3,7 +3,7 @@ namespace Kendo.Mvc.UI
 
     using Infrastructure;
 
-    public class TabStripHtmlBuilder: NavigationHtmlBuilderBase<TabStrip, TabStripItem>, ITabStripHtmlBuilder
+    public class TabStripHtmlBuilder: NavigationHtmlBuilderBase<TabStrip, TabStripItem>
     {
         public TabStripHtmlBuilder(TabStrip tabStrip)
             : base(tabStrip)

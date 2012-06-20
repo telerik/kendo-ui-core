@@ -2,7 +2,7 @@
 
 namespace Kendo.Mvc.Examples.Controllers
 {
-    public partial class PanelBarController : Controller
+    public partial class TabStripController : Controller
     {
         public ActionResult Animation(string animation, bool? opacity)
         {

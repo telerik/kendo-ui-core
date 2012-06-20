@@ -14,7 +14,7 @@ namespace Kendo.Mvc.UI.Tests
 
         public static ViewContext viewContext;
 
-        public static TabStrip CreateTabStrip(HtmlTextWriter writer, ITabStripHtmlBuilder renderer)
+        public static TabStrip CreateTabStrip(HtmlTextWriter writer)
         {
             Mock<HttpContextBase> httpContext = TestHelper.CreateMockedHttpContext();
 
@@ -25,8 +25,6 @@ namespace Kendo.Mvc.UI.Tests
 
             urlGenerator = new Mock<IUrlGenerator>();
             authorization = new Mock<INavigationItemAuthorization>();
-
-            Mock<ITabStripHtmlBuilderFactory> tabStripRendererFactory = new Mock<ITabStripHtmlBuilderFactory>();
 
             Mock<IViewDataContainer> viewDataContainer = new Mock<IViewDataContainer>();
 
@@ -43,10 +41,7 @@ namespace Kendo.Mvc.UI.Tests
 
             var initializer = new Mock<IJavaScriptInitializer>();
 
-            TabStrip tabStrip = new TabStrip(viewContext, initializer.Object, urlGenerator.Object, authorization.Object, tabStripRendererFactory.Object);
-
-            renderer = renderer ?? new TabStripHtmlBuilder(tabStrip);
-            tabStripRendererFactory.Setup(f => f.Create(It.IsAny<TabStrip>())).Returns(renderer);
+            TabStrip tabStrip = new TabStrip(viewContext, initializer.Object, urlGenerator.Object, authorization.Object);
 
             return tabStrip;
         }
