@@ -473,7 +473,8 @@
             }
 
             that.templates = {
-                item: that._itemTemplate()
+                item: that._itemTemplate(),
+                loading: that._loadingTemplate()
             };
 
             inferred = element.is("ul");
@@ -505,6 +506,7 @@
             }
 
             if (!inferred) {
+                that._progress(true);
                 that.dataSource.read();
             }
         },
@@ -791,6 +793,10 @@
                     "# } #";
 
             return template(templateText);
+        },
+
+        _loadingTemplate: function() {
+            return template("<div class='k-icon k-loading' /> Loading...");
         },
 
         _itemTemplate: function() {
@@ -1217,7 +1223,19 @@
         },
 
         _progress: function(node, showProgress) {
-            node.find("> div > .k-icon").toggleClass("k-loading", showProgress);
+            var element = this.element;
+
+            if (arguments.length == 1) {
+                showProgress = node;
+
+                if (showProgress) {
+                    element.html(this.templates.loading);
+                } else {
+                    element.empty();
+                }
+            } else {
+                node.find("> div > .k-icon").toggleClass("k-loading", showProgress);
+            }
         },
 
         /**
