@@ -9,7 +9,7 @@ namespace Kendo.Mvc.UI
         public FilterableOperators()
         {
             Strings = new StringOperators();
-            NumberOperators = new Dictionary<string, string>();
+            Numbers = new NumberOperators();
             DateOperators = new Dictionary<string, string>();
         }
 
@@ -19,7 +19,7 @@ namespace Kendo.Mvc.UI
             private set;
         }
 
-        public IDictionary<string, string> NumberOperators
+        public NumberOperators Numbers
         {
             get;
             private set;
@@ -40,7 +40,7 @@ namespace Kendo.Mvc.UI
                 json["string"] = strings;
             }
 
-            var numbers = NumberOperators;
+            var numbers = Numbers.ToJson();
 
             if (numbers.Any())
             {

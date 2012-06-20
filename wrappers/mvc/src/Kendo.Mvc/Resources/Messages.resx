@@ -135,6 +135,24 @@
   <data name="Filter_IsTrue" xml:space="preserve">
     <value>is true</value>
   </data>
+  <data name="Filter_NumberIsEqualTo" xml:space="preserve">
+    <value>Is equal to</value>
+  </data>
+  <data name="Filter_NumberIsGreaterThan" xml:space="preserve">
+    <value>Is greater than</value>
+  </data>
+  <data name="Filter_NumberIsGreaterThanOrEqualTo" xml:space="preserve">
+    <value>Is greater than or equal to</value>
+  </data>
+  <data name="Filter_NumberIsLessThan" xml:space="preserve">
+    <value>Is less than</value>
+  </data>
+  <data name="Filter_NumberIsLessThanOrEqualTo" xml:space="preserve">
+    <value>Is less than or equal to</value>
+  </data>
+  <data name="Filter_NumberIsNotEqualTo" xml:space="preserve">
+    <value>Is not equal to</value>
+  </data>
   <data name="Filter_Or" xml:space="preserve">
     <value>Or</value>
   </data>

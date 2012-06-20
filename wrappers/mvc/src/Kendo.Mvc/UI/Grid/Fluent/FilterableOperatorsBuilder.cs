@@ -12,9 +12,16 @@ namespace Kendo.Mvc.UI.Fluent
             this.operators = operators;
         }
 
-        public FilterableOperatorsBuilder Strings(Action<StringOperatorsBuilder> configurator)
+        public FilterableOperatorsBuilder ForString(Action<StringOperatorsBuilder> configurator)
         {
             configurator(new StringOperatorsBuilder(operators.Strings));
+
+            return this;
+        }
+
+        public FilterableOperatorsBuilder ForNumber(Action<NumberOperatorsBuilder> configurator)
+        {
+            configurator(new NumberOperatorsBuilder(operators.Numbers));
 
             return this;
         }

@@ -115,6 +115,60 @@ namespace Kendo.Mvc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Is equal to.
+        /// </summary>
+        public static string Filter_NumberIsEqualTo {
+            get {
+                return ResourceManager.GetString("Filter_NumberIsEqualTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is greater than.
+        /// </summary>
+        public static string Filter_NumberIsGreaterThan {
+            get {
+                return ResourceManager.GetString("Filter_NumberIsGreaterThan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is greater than or equal to.
+        /// </summary>
+        public static string Filter_NumberIsGreaterThanOrEqualTo {
+            get {
+                return ResourceManager.GetString("Filter_NumberIsGreaterThanOrEqualTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is less than.
+        /// </summary>
+        public static string Filter_NumberIsLessThan {
+            get {
+                return ResourceManager.GetString("Filter_NumberIsLessThan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is less than or equal to.
+        /// </summary>
+        public static string Filter_NumberIsLessThanOrEqualTo {
+            get {
+                return ResourceManager.GetString("Filter_NumberIsLessThanOrEqualTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is not equal to.
+        /// </summary>
+        public static string Filter_NumberIsNotEqualTo {
+            get {
+                return ResourceManager.GetString("Filter_NumberIsNotEqualTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Or.
         /// </summary>
         public static string Filter_Or {
