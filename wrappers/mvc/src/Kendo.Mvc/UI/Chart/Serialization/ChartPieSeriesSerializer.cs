@@ -19,7 +19,7 @@ namespace Kendo.Mvc.UI
             var result = base.Serialize();
 
             FluentDictionary.For(result)
-                .Add("type", "pie")
+                .Add("type", series.Type)
                 .Add("field", series.Member, () => { return series.Data == null && series.Member != null; })
                 .Add("categoryField", series.CategoryMember, () => { return series.Data == null && series.CategoryMember != null; })
                 .Add("explodeField", series.ExplodeMember, () => { return series.Data == null && series.ExplodeMember != null; })

@@ -20,9 +20,8 @@ namespace Kendo.Mvc.UI
         /// <param name="chart">The chart.</param>
         /// <param name="expression">The expression.</param>
         protected ChartBoundSeries(Chart<TModel> chart, Expression<Func<TModel, TValue>> expression)
-        : base(chart)
+            : base(chart)
         {
-
             if (typeof(TModel).IsPlainType() && !expression.IsBindable())
             {
                 throw new InvalidOperationException(TextResource.MemberExpressionRequired);
@@ -44,7 +43,6 @@ namespace Kendo.Mvc.UI
         protected ChartBoundSeries(Chart<TModel> chart, IEnumerable data)
             : base(chart)
         {
-
             Data = data;
         }
 
@@ -55,7 +53,6 @@ namespace Kendo.Mvc.UI
         protected ChartBoundSeries(Chart<TModel> chart)
             : base(chart)
         {
-
         }
 
         /// <summary>

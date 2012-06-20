@@ -77,6 +77,10 @@
     <Compile Include="Areas\aspx\ASPXAreaRegistration.cs" />
     <Compile Include="Areas\razor\RazorAreaRegistration.cs" />
     <Compile Include="Controllers\DataViz\Bar_Charts\Date_AxisController.cs" />
+    <Compile Include="Controllers\DataViz\Donut_Charts\IndexController.cs" />
+    <Compile Include="Controllers\DataViz\Donut_Charts\Local_DataController.cs" />
+    <Compile Include="Controllers\DataViz\Donut_Charts\Donut_LabelsController.cs" />
+    <Compile Include="Controllers\DataViz\Donut_Charts\Remote_DataController.cs" />
     <Compile Include="Controllers\DataViz\Scatter_Charts\Date_AxisController.cs" />
     <Compile Include="Controllers\Web\AutoComplete\ApiController.cs" />
     <Compile Include="Controllers\Web\AutoComplete\ClientFilteringController.cs" />
@@ -278,6 +282,10 @@
     <Content Include="Areas\aspx\Views\dataviz\bar_charts\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\bar_charts\local_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\bar_charts\remote_data.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\donut_charts\index.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\donut_charts\local_data.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\donut_charts\donut_labels.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\donut_charts\remote_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\customization\plotbands.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\dashboards\car_dashboard.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\scatter_charts\date_axis.aspx" />
@@ -664,6 +672,10 @@
     <Content Include="Areas\razor\Views\web\listview\index.cshtml" />
     <Content Include="Areas\razor\Views\web\listview\editing.cshtml" />
     <Content Include="Areas\razor\Views\web\listview\selection.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\donut_charts\index.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\donut_charts\local_data.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\donut_charts\donut_labels.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\donut_charts\remote_data.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>

@@ -6,6 +6,15 @@ namespace Kendo.Mvc.UI
     public interface IChartPieSeries : IChartBoundSeries
     {
         /// <summary>
+        /// Gets the series type.
+        /// </summary>
+        string Type
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Gets the data category member of the series.
         /// </summary>
         string CategoryMember

@@ -721,6 +721,155 @@ namespace Kendo.Mvc.UI.Fluent
             return new ChartPieSeriesBuilder<TModel>(pieSeries);
         }
 
+        /// <summary>
+        /// Defines bound donut series.
+        /// </summary>
+        /// <param name="expressionValue">
+        /// The expression used to extract the series value from the chart model
+        /// </param>
+        public virtual ChartDonutSeriesBuilder<TModel> Donut<TValue>(Expression<Func<TModel, TValue>> expressionValue, Expression<Func<TModel, string>> expressionCategory)
+        {
+            ChartDonutSeries<TModel, TValue> donutSeries = new ChartDonutSeries<TModel, TValue>(Container, expressionValue, expressionCategory, null, null, null);
+
+            Container.Series.Add(donutSeries);
+
+            return new ChartDonutSeriesBuilder<TModel>(donutSeries);
+        }
+
+        /// <summary>
+        /// Defines bound donut series.
+        /// </summary>
+        /// <param name="expressionValue">
+        /// The expression used to extract the series value from the chart model
+        /// </param>
+        public virtual ChartDonutSeriesBuilder<TModel> Donut<TValue>(Expression<Func<TModel, TValue>> expressionValue, Expression<Func<TModel, string>> expressionCategory, Expression<Func<TModel, string>> expressionColor, Expression<Func<TModel, bool>> expressionExplode)
+        {
+            ChartDonutSeries<TModel, TValue> donutSeries = new ChartDonutSeries<TModel, TValue>(Container, expressionValue, expressionCategory, expressionColor, expressionExplode, null);
+
+            Container.Series.Add(donutSeries);
+
+            return new ChartDonutSeriesBuilder<TModel>(donutSeries);
+        }
+
+        /// <summary>
+        /// Defines bound pie series.
+        /// </summary>
+        /// <param name="expressionValue">
+        /// The expression used to extract the series value from the chart model
+        /// </param>
+        public virtual ChartDonutSeriesBuilder<TModel> Donut<TValue>(Expression<Func<TModel, TValue>> expressionValue, Expression<Func<TModel, string>> expressionCategory, Expression<Func<TModel, string>> expressionColor, Expression<Func<TModel, bool>> expressionExplode, Expression<Func<TModel, bool>> expressionVisibleInLegend)
+        {
+            ChartDonutSeries<TModel, TValue> donutSeries = new ChartDonutSeries<TModel, TValue>(Container, expressionValue, expressionCategory, expressionColor, expressionExplode, expressionVisibleInLegend);
+
+            Container.Series.Add(donutSeries);
+
+            return new ChartDonutSeriesBuilder<TModel>(donutSeries);
+        }
+
+        /// <summary>
+        /// Defines bound donut series.
+        /// </summary>
+        /// <param name="memberName">
+        /// The name of the value member.
+        /// </param>
+        public virtual ChartDonutSeriesBuilder<TModel> Donut(string valueMemberName, string categoryMemberName)
+        {
+            return Donut(null, valueMemberName, categoryMemberName, "", "", "");
+        }
+
+        /// <summary>
+        /// Defines bound donut series.
+        /// </summary>
+        /// <param name="valueMemberName">
+        /// The name of the value member.
+        /// </param>
+        /// <param name="categoryMemberName">
+        /// The name of the category member.
+        /// </param>
+        /// <param name="explodeMemberName">
+        /// The name of the explode member.
+        /// </param>
+        public virtual ChartDonutSeriesBuilder<TModel> Donut(string valueMemberName, string categoryMemberName, string colorMemberName, string explodeMemberName, string visibleInLegendMemberName)
+        {
+            return Donut(null, valueMemberName, categoryMemberName, colorMemberName, explodeMemberName, visibleInLegendMemberName);
+        }
+
+        /// <summary>
+        /// Defines bound pie series.
+        /// </summary>
+        /// <param name="memberType">
+        /// The type of the value member.
+        /// </param>
+        /// <param name="valueMemberName">
+        /// The name of the value member.
+        /// </param>
+        /// <param name="categoryMemberName">
+        /// The name of the category member.
+        /// </param>
+        /// <param name="explodeMemberName">
+        /// The name of the explode member.
+        /// </param>
+        public virtual ChartDonutSeriesBuilder<TModel> Donut(Type memberType, string valueMemberName, string categoryMemberName, string colorMemberName, string explodeMemberName, string visibleInLegendMemberName)
+        {
+            var valueExpr = BuildMemberExpression(memberType, valueMemberName);
+            var categoryExpr = BuildMemberExpression(typeof(string), categoryMemberName);
+            var colorExpr = colorMemberName.HasValue() ? BuildMemberExpression(typeof(string), colorMemberName) : null;
+            var explodeExpr = explodeMemberName.HasValue() ? BuildMemberExpression(typeof(bool), explodeMemberName) : null;
+            var visibleInlegendExpr = visibleInLegendMemberName.HasValue() ? BuildMemberExpression(typeof(bool), visibleInLegendMemberName) : null;
+
+            var seriesType = typeof(ChartDonutSeries<,>).MakeGenericType(typeof(TModel), valueExpr.Body.Type);
+            var series = (IChartDonutSeries)BuildSeries(seriesType, valueExpr, categoryExpr, colorExpr, explodeExpr, visibleInlegendExpr);
+
+            if (!series.Name.HasValue())
+            {
+                series.Name = valueMemberName.AsTitle();
+            }
+
+            if (!series.Member.HasValue())
+            {
+                series.Member = valueMemberName.AsTitle();
+            }
+
+            if (!series.CategoryMember.HasValue())
+            {
+                series.CategoryMember = categoryMemberName.AsTitle();
+            }
+
+            if (!series.ColorMember.HasValue())
+            {
+                series.ColorMember = colorMemberName.AsTitle();
+            }
+
+            if (!series.ExplodeMember.HasValue())
+            {
+                series.ExplodeMember = explodeMemberName.AsTitle();
+            }
+
+            if (!series.VisibleInLegendMember.HasValue())
+            {
+                series.VisibleInLegendMember = visibleInLegendMemberName.AsTitle();
+            }
+
+            Container.Series.Add((ChartSeriesBase<TModel>)series);
+
+            return new ChartDonutSeriesBuilder<TModel>(series);
+        }
+
+        /// <summary>
+        /// Defines donut series bound to inline data.
+        /// </summary>
+        /// <param name="data">
+        /// The data to bind to
+        /// </param>
+        public virtual ChartDonutSeriesBuilder<TModel> Donut(IEnumerable data)
+        {
+            ChartDonutSeries<TModel, object> donutSeries = new ChartDonutSeries<TModel, object>(Container, data);
+
+            Container.Series.Add(donutSeries);
+
+            return new ChartDonutSeriesBuilder<TModel>(donutSeries);
+        }
+
         private LambdaExpression BuildMemberExpression(Type memberType, string memberName)
         {
             const bool liftMemberAccess = false;

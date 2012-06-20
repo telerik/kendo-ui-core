@@ -3,7 +3,6 @@ namespace Kendo.Mvc.UI
     using System;
     using System.Linq.Expressions;
     using Kendo.Mvc.Extensions;
-    using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.Resources;
     using System.Collections;
 
@@ -32,7 +31,6 @@ namespace Kendo.Mvc.UI
             Expression<Func<TModel, bool>> expressionVisibleInLegend)
             : base(chart)
         {
-
             if (typeof(TModel).IsPlainType() && !expressionValue.IsBindable())
             {
                 throw new InvalidOperationException(TextResource.MemberExpressionRequired);
@@ -80,7 +78,6 @@ namespace Kendo.Mvc.UI
         public ChartPieSeries(Chart<TModel> chart, IEnumerable data)
             : base(chart)
         {
-
             Data = data;
             Initialize();
         }
@@ -93,6 +90,15 @@ namespace Kendo.Mvc.UI
             : base(chart)
         {
             Initialize();
+        }
+
+        /// <summary>
+        /// Gets the series type.
+        /// </summary>
+        public string Type
+        {
+            get;
+            set;
         }
 
         /// <summary>
@@ -249,6 +255,7 @@ namespace Kendo.Mvc.UI
             Labels = new ChartPieLabels();
             Connectors = new ChartPieConnectors();
             Border = new ChartElementBorder();
+            Type = "pie";
         }
 
         /// <summary>
