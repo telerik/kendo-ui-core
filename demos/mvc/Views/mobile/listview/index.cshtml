@@ -1,4 +1,4 @@
-<div data-role="view" data-title="Destinations">
+<div data-role="view" data-title="Destinations" id="listview-home">
     <ul data-role="listview" data-style="inset" data-type="group">
         <li>
             Africa
@@ -37,3 +37,18 @@
         </li>
     </ul>
 </div>
+
+<style>
+    .km-ios #listview-home .km-content {
+        background: url(../../content/shared/images/patterns/pattern2.png);
+        box-shadow: inset 0 0 30px #95764D;
+    }
+    .km-ios #listview-home .km-listview .km-list {
+        box-shadow: 0 1px 5px #95764D;
+        border: none;
+    }
+    .km-ios #listview-home .km-navbar,
+    .km-ios #listview-home .km-navbar .km-button {
+        background: url(../../content/shared/images/patterns/pattern9.png);
+    }
+</style>
