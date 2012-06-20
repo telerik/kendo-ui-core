@@ -278,12 +278,11 @@ html
     top: 49px;
 }
 
-/*banner*/
+/*orange bar*/
 
 #banner
 {
     background:50% 50% url(flowerWrap.png);
-    color:#fff;
     min-height:5px;
 }
 
@@ -296,29 +295,23 @@ html
 
 .overview #bannerInner
 {
-    height:212px;
+    padding: 30px 0 10px 0;
     background:50% 0 url(flowers.png);
 }
 
 #bannerInner>.centerWrap
 {
     height:100%;
-    background:0 100% no-repeat url(hand-ipad.png);
-}
-
-#banner h1,
-#banner p
-{
-    margin-left:470px;
-    font-size:14px;
-    line-height:1.4;
 }
 
 #banner h1
 {
-    font:bold 32px arial,helvetica,sans-serif;
-    margin-bottom:24px;
-    padding-top:42px;
+    font-size: 30px;
+    line-height: 32px;
+    margin-bottom: 20px;
+	color: white;
+	font-weight: normal;
+	text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
 }
 
 /*suite demos nav*/
@@ -451,6 +444,21 @@ html
 .box h3 a
 {
     color:#e26b1d;
+}
+
+.box p a
+{
+    display: block;
+    width: 100px;
+    padding: 5px 10px 6px 10px;
+    margin: 20px auto 0 auto;
+    text-decoration: none;
+    color: #fff;
+    text-align: center;
+}
+.centerAlign 
+{
+	text-align: center;
 }
 
 .imgPlate
