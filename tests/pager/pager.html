@@ -585,7 +585,7 @@
             test("displays refresh button", function() {
                 var pager = setup({}, { refresh: true });
 
-                equal(pager.find(".k-refresh").length, 1);
+                equal(pager.find(".k-i-refresh").length, 1);
             });
 
             test("clicking the refresh button reads from the data source", function() {
@@ -598,7 +598,7 @@
                     }
                 });
 
-                pager.find(".k-refresh").click();
+                pager.find(".k-i-refresh").click();
 
                 equal(dataSource.calls("read"), 1);
             });

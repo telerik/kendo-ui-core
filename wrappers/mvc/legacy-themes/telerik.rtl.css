@@ -68,8 +68,8 @@
     float: right;
 }
 
-.k-rtl .k-panelbar .k-arrow-up,
-.k-rtl .k-panelbar .k-arrow-down
+.k-rtl .k-panelbar .k-i-arrow-n,
+.k-rtl .k-panelbar .k-i-arrow-s
 {
     right: auto;
     left: 2px;
@@ -100,13 +100,13 @@
     margin: 0 -4px 0 4px;
 }
 
-.k-rtl .k-menu .k-arrow-down
+.k-rtl .k-menu .k-i-arrow-s
 {
     margin-left: -10px;
     margin-right: 2px;
 }
 
-.k-rtl .k-menu .k-arrow-next
+.k-rtl .k-menu .k-i-arrow-e
 {
     right: auto;
     left: 0;

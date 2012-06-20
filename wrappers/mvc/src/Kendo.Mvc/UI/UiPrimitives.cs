@@ -173,7 +173,7 @@ namespace Kendo.Mvc.UI
             /// <summary>
             /// "Refresh" icon
             /// </summary>
-            public const string Refresh = "k-refresh";
+            public const string Refresh = "k-i-refresh";
 
             /// <summary>
             /// "Maximize" icon

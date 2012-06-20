@@ -146,7 +146,7 @@
             if (options.refresh) {
                 if (!that.element.find(".k-pager-refresh").length) {
                     that.element.append('<a href="#" class="k-pager-refresh k-link"  title="' + options.messages.refresh +
-                        '"><span class="k-icon k-refresh">' + options.messages.refresh + "</span></a>");
+                        '"><span class="k-icon k-i-refresh">' + options.messages.refresh + "</span></a>");
                 }
 
                 that._reloadHandler = proxy(that._refreshClick, that);

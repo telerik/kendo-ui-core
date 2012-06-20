@@ -816,7 +816,7 @@
                 "k-maximize": that.maximize,
                 "k-minimize": that.minimize,
                 "k-restore": that.restore,
-                "k-refresh": that.refresh
+                "k-i-refresh": that.refresh
             }, function (commandName, handler) {
                 if (target.hasClass(commandName)) {
                     e.preventDefault();
@@ -1325,7 +1325,7 @@
         _ajaxRequest: function (options) {
             var that = this,
                 contentTemplate = options.template,
-                refreshIcon = that.wrapper.find(".k-window-titlebar .k-refresh"),
+                refreshIcon = that.wrapper.find(".k-window-titlebar .k-i-refresh"),
                 loadingIconTimeout = setTimeout(function () {
                     refreshIcon.addClass(LOADING);
                 }, 100);

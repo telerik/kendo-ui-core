@@ -211,40 +211,40 @@ html body .k-button-bare
 .k-rtl .k-plus, .k-rtl .k-plus-disabled { background-position: 0 -272px; }
 .k-rtl .k-minus, .k-rtl .k-minus-disabled { background-position: -16px -272px; }
 
-.k-arrow-up { background-position: -16px -160px; }
-.k-arrow-down { background-position: -16px -176px; }
+.k-i-arrow-n { background-position: -16px -160px; }
+.k-i-arrow-s { background-position: -16px -176px; }
 
-.k-state-disabled .k-arrow-up { background-position: -32px -160px; }
-.k-state-disabled .k-arrow-down { background-position: -32px -176px; }
+.k-state-disabled .k-i-arrow-n { background-position: -32px -160px; }
+.k-state-disabled .k-i-arrow-s { background-position: -32px -176px; }
 
-.k-state-hover .k-arrow-up { background-position: -48px -160px; }
-.k-state-hover .k-arrow-down { background-position: -48px -176px; }
+.k-state-hover .k-i-arrow-n { background-position: -48px -160px; }
+.k-state-hover .k-i-arrow-s { background-position: -48px -176px; }
 
-.k-numerictextbox .k-arrow-up { background-position: -16px -162px; }
-.k-numerictextbox .k-arrow-down { background-position: -16px -178px; }
+.k-numerictextbox .k-i-arrow-n { background-position: -16px -162px; }
+.k-numerictextbox .k-i-arrow-s { background-position: -16px -178px; }
 
-.k-arrow-up-small { background-position: 0 -304px; }
-.k-arrow-down-small { background-position: -16px -304px; }
+.k-i-arrow-n-small { background-position: 0 -304px; }
+.k-i-arrow-s-small { background-position: -16px -304px; }
 
-.k-arrow-first { background-position: 0 -192px; }
-.k-arrow-prev { background-position: -16px -192px; }
-.k-arrow-next { background-position: -32px -192px; }
-.k-arrow-last { background-position: -48px -192px; }
+.k-i-seek-w { background-position: 0 -192px; }
+.k-i-arrow-w { background-position: -16px -192px; }
+.k-i-arrow-e { background-position: -32px -192px; }
+.k-i-seek-e { background-position: -48px -192px; }
 
-.k-state-disabled .k-arrow-first { background-position: 0 -208px; }
-.k-state-disabled .k-arrow-prev { background-position: -16px -208px; }
-.k-state-disabled .k-arrow-next { background-position: -32px -208px; }
-.k-state-disabled .k-arrow-last { background-position: -48px -208px; }
+.k-state-disabled .k-i-seek-w { background-position: 0 -208px; }
+.k-state-disabled .k-i-arrow-w { background-position: -16px -208px; }
+.k-state-disabled .k-i-arrow-e { background-position: -32px -208px; }
+.k-state-disabled .k-i-seek-e { background-position: -48px -208px; }
 
-.k-state-hover .k-arrow-first { background-position: 0 -224px; }
-.k-state-hover .k-arrow-prev { background-position: -16px -224px; }
-.k-state-hover .k-arrow-next { background-position: -32px -224px; }
-.k-state-hover .k-arrow-last { background-position: -48px -224px; }
+.k-state-hover .k-i-seek-w { background-position: 0 -224px; }
+.k-state-hover .k-i-arrow-w { background-position: -16px -224px; }
+.k-state-hover .k-i-arrow-e { background-position: -32px -224px; }
+.k-state-hover .k-i-seek-e { background-position: -48px -224px; }
 
 .k-filter { background-position: 0 -240px; }
 .k-clear-filter { background-position: -16px -240px; }
 
-.k-refresh { background-position: -32px -240px; }
+.k-i-refresh { background-position: -32px -240px; }
 .k-icon-calendar { background-position: -48px -240px; }
 .k-icon-clock { background-position: -64px -336px; }
 
@@ -646,8 +646,8 @@ div.k-window-content
     font-size: .95em;
 }
 
-.k-panelbar .k-group .k-arrow-up,
-.k-panelbar .k-group .k-arrow-down
+.k-panelbar .k-group .k-i-arrow-n,
+.k-panelbar .k-group .k-i-arrow-s
 {
     top: 2px;
 }
@@ -744,14 +744,14 @@ div.k-window-content
     zoom: 1;
 }
 
-.k-menu .k-arrow-down
+.k-menu .k-i-arrow-s
 {
     margin-left: 2px;
     margin-right: -10px;
     vertical-align: top;
 }
 
-.k-menu .k-arrow-next
+.k-menu .k-i-arrow-e
 {
     position: absolute;
     right: 0;
@@ -1928,32 +1928,32 @@ span.k-numerictextbox
 }
 
 .k-numerictextbox .k-link:first-child,
-.k-numerictextbox .k-arrow-up
+.k-numerictextbox .k-i-arrow-n
 {
     vertical-align: top;
     height: 10px;
     line-height:10px;
 }
 
-.k-numerictextbox .k-arrow-up
+.k-numerictextbox .k-i-arrow-n
 {
     margin-top: 1px;
 }
 
 .k-numerictextbox .k-link+.k-link,
-.k-numerictextbox .k-arrow-down
+.k-numerictextbox .k-i-arrow-s
 {
     height: 11px;
     line-height:11px;
     vertical-align: bottom;
 }
 
-.k-numerictextbox .k-arrow-down
+.k-numerictextbox .k-i-arrow-s
 {
     margin-bottom: 2px;
 }
 
-*+html .k-numerictextbox .k-arrow-down
+*+html .k-numerictextbox .k-i-arrow-s
 {
     vertical-align:top;
 }
@@ -2347,8 +2347,8 @@ span.k-numerictextbox
     left: -4px;
 }
 
-.k-reorder-cue .k-arrow-down { top: -4px; background-position: -20px -182px; }
-.k-reorder-cue .k-arrow-up { bottom: -4px; background-position: -20px -166px; }
+.k-reorder-cue .k-i-arrow-s { top: -4px; background-position: -20px -182px; }
+.k-reorder-cue .k-i-arrow-n { bottom: -4px; background-position: -20px -166px; }
 
 /* Slider */
 
@@ -3303,7 +3303,7 @@ html input.k-breadcrumbs-input
     float:right;
 }
 
-.k-tiles-arrange .k-arrow-down
+.k-tiles-arrange .k-i-arrow-s
 {
     margin:0 2px 0 3px;
 }

@@ -14,7 +14,7 @@ namespace Kendo.Mvc.UI.Html
                 .AddClass("k-pager-refresh k-link");
 
             new HtmlElement("span")
-                .AddClass("k-icon", "k-refresh")
+                .AddClass("k-icon", "k-i-refresh")
                 .Text(refreshText)
                 .AppendTo(a);
 
