@@ -301,7 +301,6 @@
     <Compile Include="UI\HtmlTemplateTests.cs" />
     <Compile Include="UI\MockViewEngine.cs" />
     <Compile Include="UI\NavigationHtmlBuilderBaseTests.cs" />
-    <Compile Include="UI\TreeView\TreeViewRenderingTests.cs" />
     <Compile Include="UI\Upload\UploadAsyncSettingsBuilderTests.cs" />
     <Compile Include="UI\Upload\UploadBuilderTests.cs" />
     <Compile Include="UI\Upload\UploadClientEventsBuilderTests.cs" />

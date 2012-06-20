@@ -76,9 +76,6 @@ namespace Kendo.Mvc.Infrastructure
         {
             Current.Register<ITabStripHtmlBuilderFactory, IActionMethodCache>((actionMethodCache) =>
                 new TabStripHtmlBuilderFactory(actionMethodCache));
-
-            Current.Register<ITreeViewHtmlBuilderFactory, IActionMethodCache>((actionMethodCache) =>
-                new TreeViewHtmlBuilderFactory(actionMethodCache));
         }
         
         static void RegisterCacheDependencies()

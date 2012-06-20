@@ -14,7 +14,7 @@ namespace Kendo.Mvc.UI.Tests
 
         public static ViewContext viewContext;
 
-        public static TreeView CreateTreeView(HtmlTextWriter writer, ITreeViewHtmlBuilder renderer)
+        public static TreeView CreateTreeView(HtmlTextWriter writer)
         {
             Mock<HttpContextBase> httpContext = TestHelper.CreateMockedHttpContext();
 
@@ -25,8 +25,6 @@ namespace Kendo.Mvc.UI.Tests
 
             urlGenerator = new UrlGenerator();
             authorization = new Mock<INavigationItemAuthorization>();
-
-            Mock<ITreeViewHtmlBuilderFactory> TreeViewRendererFactory = new Mock<ITreeViewHtmlBuilderFactory>();
 
             Mock<IViewDataContainer> viewDataContainer = new Mock<IViewDataContainer>();
 
@@ -46,10 +44,7 @@ namespace Kendo.Mvc.UI.Tests
             authorization.Setup(a => a.IsAccessibleToUser(viewContext.RequestContext, It.IsAny<INavigatable>())).Returns(true);
             var initializer = new Mock<IJavaScriptInitializer>();
 
-            TreeView TreeView = new TreeView(viewContext, initializer.Object, urlGenerator, authorization.Object, TreeViewRendererFactory.Object);
-
-            renderer = renderer ?? new TreeViewHtmlBuilder(TreeView, new Mock<IActionMethodCache>().Object);
-            TreeViewRendererFactory.Setup(f => f.Create(It.IsAny<TreeView>())).Returns(renderer);
+            TreeView TreeView = new TreeView(viewContext, initializer.Object, urlGenerator, authorization.Object);
 
             return TreeView;
         }

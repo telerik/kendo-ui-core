@@ -3,11 +3,10 @@ namespace Kendo.Mvc.UI
     using System.Collections.Generic;
     using System.Web.Mvc;
     using Extensions;
-    using Infrastructure;
 
-    public class TreeViewHtmlBuilder : NavigationHtmlBuilderBase<TreeView, TreeViewItem>, ITreeViewHtmlBuilder
+    public class TreeViewHtmlBuilder : NavigationHtmlBuilderBase<TreeView, TreeViewItem>
     {
-        public TreeViewHtmlBuilder(TreeView treeView, IActionMethodCache actionMethodCache)
+        public TreeViewHtmlBuilder(TreeView treeView)
             : base(treeView)
         {
         }

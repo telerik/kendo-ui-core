@@ -12,16 +12,13 @@ namespace Kendo.Mvc.UI
 
     public class TreeView : ViewComponentBase, INavigationItemComponent<TreeViewItem>
     {
-        private readonly ITreeViewHtmlBuilderFactory builderFactory;
-
         internal bool isPathHighlighted;
 
-        public TreeView(ViewContext viewContext, IJavaScriptInitializer initializer, IUrlGenerator urlGenerator, INavigationItemAuthorization authorization, ITreeViewHtmlBuilderFactory factory)
+        public TreeView(ViewContext viewContext, IJavaScriptInitializer initializer, IUrlGenerator urlGenerator, INavigationItemAuthorization authorization)
             : base(viewContext, initializer)
         {
             UrlGenerator = urlGenerator;
             Authorization = authorization;
-            builderFactory = factory;
             
             Animation = new ExpandableAnimation();
 
@@ -150,7 +147,7 @@ namespace Kendo.Mvc.UI
         protected override void WriteHtml(HtmlTextWriter writer)
         {
 
-            ITreeViewHtmlBuilder builder = builderFactory.Create(this);
+            var builder = new TreeViewHtmlBuilder(this);
 
             IHtmlNode treeViewTag = builder.TreeViewTag();
 
@@ -216,7 +213,7 @@ namespace Kendo.Mvc.UI
             }
         }
 
-        private void WriteItem(TreeViewItem item, IHtmlNode parentTag, ITreeViewHtmlBuilder builder)
+        private void WriteItem(TreeViewItem item, IHtmlNode parentTag, TreeViewHtmlBuilder builder)
         {
             if (ItemAction != null)
             {

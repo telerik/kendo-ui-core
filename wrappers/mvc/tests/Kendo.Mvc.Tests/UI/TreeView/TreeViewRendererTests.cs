@@ -18,13 +18,13 @@ namespace Kendo.Mvc.UI.Tests
         {
             writer = new Mock<HtmlTextWriter>(TextWriter.Null);
 
-            treeView = TreeViewTestHelper.CreateTreeView(writer.Object, null);
+            treeView = TreeViewTestHelper.CreateTreeView(writer.Object);
             treeView.Name = "TreeView1";
 
             item = new TreeViewItem();
             item.Visible = true;
 
-            builder = new TreeViewHtmlBuilder(treeView, new Mock<IActionMethodCache>().Object);
+            builder = new TreeViewHtmlBuilder(treeView);
         }
 
         [Fact]
