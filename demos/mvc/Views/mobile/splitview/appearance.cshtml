@@ -1,5 +1,5 @@
 <div data-role="splitview" id="appearance" data-style="vertical">
-    <div id="top-pane" data-role="pane" data-layout="side-default">
+    <div id="top-panel" data-role="pane" data-layout="side-default">
         <div data-role="view" data-title="Photo Gallery" id="side-root">
             <div id="scrollview-container">
                 <div data-role="scrollview" data-page="0">
@@ -21,14 +21,14 @@
         <div data-role="layout" data-id="side-default" data-show="toggleBackButton">
             <div data-role="header">
                 <div data-role="navbar">
-                    <a data-role="backbutton" data-align="left" data-target="_top">Back</a>
+                    <a id="back-button" class="nav-button" data-align="left" data-role="backbutton" data-target="_top">Back</a>
                     <span data-role="view-title"></span>
                 </div>
             </div>
         </div>
     </div>
 
-    <div data-role="pane" id="main-pane">
+    <div data-role="pane" id="main-panel">
         <div data-role="view">
         </div>
     </div>
@@ -36,12 +36,12 @@
 
 <script type="text/javascript">
     $(document).on("click", ".photo", function () {
-        $("#main-pane").find(".km-content").css("background-image", $(this).css("background-image"));
+        $("#main-panel").find(".km-content").css("background-image", $(this).css("background-image"));
     });
 </script>
 
 <style scoped>
-    #top-pane {
+    #top-panel {
         height: 160px;
     }
 
@@ -67,7 +67,7 @@
     .photo9 {background-image: url("../../content/mobile/cities/220/melbourne.jpg");}
     .photo10 {background-image: url("../../content/mobile/cities/220/san-francisco.jpg");}
 
-    #main-pane .km-content
+    #main-panel .km-content
     {
         background-image: url("../../content/mobile/cities/220/sydney.jpg");
         background-position: 50% 50%;
@@ -76,7 +76,7 @@
         background-repeat: no-repeat;
     }
 
-    #main-pane {
+    #main-panel {
         -webkit-box-flex: 1000;
         -moz-box-flex: 1000;
     }
