@@ -1,44 +1,27 @@
 <div data-role="splitview">
     <div data-role="pane" data-layout="side-default" data-transition="slide">
         <div data-role="view" data-title="Mailboxes" id="side-root">
-            <ul data-role="listview" data-style="inset" data-type="group">
-                <li> Inboxes
-                    <ul>
-                        <li><a href="#side-inbox">All Inboxes</a></li>
-                        <li><a href="#side-inbox">GMail</a></li>
-                        <li><a href="#side-inbox">Hotmail</a></li>
-                        <li><a href="#side-inbox">Yahoo</a></li>
-                    </ul>
-                </li>
-                <li> Accounts
-                    <ul>
-                        <li><a href="#side-inbox">GMail</a></li>
-                        <li><a href="#side-inbox">Hotmail</a></li>
-                        <li><a href="#side-inbox">Yahoo</a></li>
-                    </ul>
-                </li>
+            <ul data-role="listview" data-style="inset" data-source="splitViewCategories" data-template="categoriesTemplate">
             </ul>
         </div>
 
-        <div data-role="view" id="side-inbox" data-title="Inbox">
-            <ul data-role="listview">
-                <li><a href="#message" data-target="main-pane">
-                        <span class="date">Yesterday</span>
-                        <h3>FiveSquare</h3>
-                        <span class="excerpt">Dear John, Jane wants to be your friend in FiveSquare...</span>
-                </a></li>
-                <li><a href="#message" data-target="main-pane">
-                        <span class="date">Yesterday</span>
-                        <h3>FiveSquare</h3>
-                        <span class="excerpt">Dear John, Jane wants to be your friend in FiveSquare...</span>
-                </a></li>
-                <li><a href="#message" data-target="main-pane">
-                        <span class="date">Yesterday</span>
-                        <h3>FiveSquare</h3>
-                        <span class="excerpt">Dear John, Jane wants to be your friend in FiveSquare...</span>
-                </a></li>
+        <script id="categoriesTemplate" type="text/x-kendo-template">
+            <a href="\#side-inbox?CategoryID=#: CategoryID#">#: CategoryName #</a>
+        </script>
+
+        <div data-role="view" id="side-inbox" data-title="Inbox" data-show="filterProducts">
+            <ul data-role="listview" data-auto-bind="false" data-source="splitViewProducts" data-template="productsTemplate">
+
             </ul>
         </div>
+
+        <script id="productsTemplate" type="text/x-kendo-template">
+            <a href="\#orders?ProductID=#: ProductID #" data-target="main-pane">
+                <span class="date">$#: UnitPrice#</span>
+                <h3>#: ProductName #</h3>
+                <span class="excerpt">#: QuantityPerUnit #</span>
+            </a>
+        </script>
 
         <div data-role="layout" data-id="side-default" data-show="toggleBackButton">
             <div data-role="header">
@@ -51,13 +34,23 @@
     </div>
 
     <div data-role="pane" data-layout="main-default" id="main-pane">
-        <div data-role="view" data-title="Messages">
-            No message selected
+        <div data-role="view" data-title="Orders">
+            No product selected
         </div>
 
-        <div data-role="view" data-title="Message" id="message">
-            <h3>FiveSquare</h3>
-            <p>Dear John, Jane wants to be your friend in FiveSquare</p>
+        <script type="text/x-kendo-template" id="ordersTemplate">
+            <dl>
+                <dt>Discount</dt>
+                <dd>#: Discount #</dd>
+                <dt>Quantity</dt>
+                <dd>#: Quantity #</dd>
+                <dt>UnitPrice</dt>
+                <dd>#: UnitPrice #</dd>
+            </dl>
+        </script>
+        <div data-role="view" data-title="Orders" id="orders" data-show="displayOrder">
+            <div id="product-details">
+            </div>
         </div>
 
         <div data-role="layout" data-id="main-default">
@@ -71,6 +64,62 @@
 </div>
 
 <script>
+    var categoryID = null;
+
+    var splitViewCategories = new kendo.data.DataSource({
+        type: "odata",
+        transport: {
+            read: "http://demos.kendoui.com/service/Northwind.svc/Categories"
+        }
+    });
+
+    var splitViewProducts = new kendo.data.DataSource({
+        type: "odata",
+        serverFiltering: true,
+
+        transport: {
+            read: {
+                url: "http://demos.kendoui.com/service/Northwind.svc/Products"
+            }
+        }
+    });
+
+
+    var splitViewOrderDetails = new kendo.data.DataSource({
+        type: "odata",
+        serverFiltering: true,
+        transport: {
+            read: {
+                url: "http://demos.kendoui.com/service/Northwind.svc/Order_Details?$expand=Order"
+            }
+        },
+
+        change: function() {
+            var template = kendo.template($("#ordersTemplate").text());
+            $("#product-details").html(kendo.render(template, this.data()));
+        }
+    });
+
+    function displayOrder(e) {
+        splitViewOrderDetails.filter({
+            field: "ProductID",
+            operator: "eq",
+            value: parseInt(e.view.params.ProductID)
+        });
+
+        splitViewOrderDetails.fetch();
+    }
+
+    function filterProducts(e) {
+        splitViewProducts.filter({
+            field: "CategoryID",
+            operator: "eq",
+            value: parseInt(e.view.params.CategoryID)
+        });
+
+        splitViewProducts.fetch();
+    }
+
     function toggleBackButton(e) {
         if (e.view.id === "#side-root") {
             e.view.element.find("[data-role=backbutton]").css("visibility", "hidden");
