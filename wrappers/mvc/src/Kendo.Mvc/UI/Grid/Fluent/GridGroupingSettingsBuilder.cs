@@ -24,17 +24,5 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
-
-        //TODO: invisible group panel
-        /// <summary>
-        /// Determines if group header should be shown.
-        /// </summary>
-        /// <param name="value">true if visible, otherwise false.</param>
-        public GridGroupingSettingsBuilder Visible(bool value)
-        {
-            settings.Visible = value;
-
-            return this;
-        }
     }
 }

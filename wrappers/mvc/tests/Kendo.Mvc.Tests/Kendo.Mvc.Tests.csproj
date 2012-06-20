@@ -192,7 +192,6 @@
     <Compile Include="UI\NavigationItemContainerExtensionsTests.cs" />
     <Compile Include="UI\Grid\GridDynamicDataKeyTests.cs" />
     <Compile Include="UI\Grid\GridEditingSettingsBuilderTests.cs" />
-    <Compile Include="UI\Grid\GridGroupingSettingsBuilderTests.cs" />
     <Compile Include="UI\Grid\GridRowViewDataKeyTests.cs" />
     <Compile Include="UI\Grid\Html\GridEditFormBuilderTests.cs" />
     <Compile Include="UI\Grid\Html\GridFooterCellBuilderTests.cs" />
