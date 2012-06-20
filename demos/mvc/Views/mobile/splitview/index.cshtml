@@ -107,7 +107,7 @@
             value: parseInt(e.view.params.ProductID)
         });
 
-        splitViewOrderDetails.fetch();
+        splitViewOrderDetails.read();
     }
 
     function filterProducts(e) {
@@ -117,7 +117,7 @@
             value: parseInt(e.view.params.CategoryID)
         });
 
-        splitViewProducts.fetch();
+        splitViewProducts.read();
     }
 
     function toggleBackButton(e) {
