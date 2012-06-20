@@ -40,7 +40,7 @@ namespace Kendo.Mvc.UI.Html
                 .ToggleAttribute("href", "#", !enabled);
 
             var span = new HtmlElement("span")
-                .AddClass(UIPrimitives.Icon, "k-" + text)
+                .AddClass(UIPrimitives.Icon, "k-i-" + text)
                 .Text(text);
 
             span.AppendTo(a);
