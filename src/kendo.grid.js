@@ -1018,7 +1018,7 @@
 
             var wnd = container.data("kendoWindow");
 
-            wnd.wrapper.delegate(".k-close", "click", function() {
+            wnd.wrapper.delegate(".k-i-close", "click", function() {
                     that.cancelRow();
                 });
 

@@ -1389,7 +1389,7 @@ div.k-window-content
     vertical-align: top;
 }
 
-.k-window-action .k-close
+.k-window-action .k-i-close
 {
     background: transparent url("img/icons.png") no-repeat 0 -545px;
 }
@@ -1424,14 +1424,14 @@ div.k-window-content
     height: 1.1em;
 }
 
-#exifWindowWrapper .k-close,
+#exifWindowWrapper .k-i-close,
 #exifWindowWrapper .k-window-action
 {
     width: 30px;
     height: 30px;
 }
 
-#exifWindowWrapper .k-close
+#exifWindowWrapper .k-i-close
 {
     background: transparent url('img/icons.png') no-repeat -12px -190px;
 }

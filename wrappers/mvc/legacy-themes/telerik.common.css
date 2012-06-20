@@ -223,8 +223,8 @@ html body .k-button-bare
 .k-numerictextbox .k-i-arrow-n { background-position: -16px -162px; }
 .k-numerictextbox .k-i-arrow-s { background-position: -16px -178px; }
 
-.k-i-arrow-n-small { background-position: 0 -304px; }
-.k-i-arrow-s-small { background-position: -16px -304px; }
+.k-si-arrow-n { background-position: 0 -304px; }
+.k-si-arrow-s { background-position: -16px -304px; }
 
 .k-i-seek-w { background-position: 0 -192px; }
 .k-i-arrow-w { background-position: -16px -192px; }
@@ -245,8 +245,8 @@ html body .k-button-bare
 .k-clear-filter { background-position: -16px -240px; }
 
 .k-i-refresh { background-position: -32px -240px; }
-.k-icon-calendar { background-position: -48px -240px; }
-.k-icon-clock { background-position: -64px -336px; }
+.k-i-calendar { background-position: -48px -240px; }
+.k-i-clock { background-position: -64px -336px; }
 
 .k-edit { background-position: 0 -336px; }
 .k-delete { background-position: -16px -336px; }
@@ -254,9 +254,9 @@ html body .k-button-bare
 .k-cancel { background-position: -48px -336px; }
 .k-group-delete { background-position: 0 -288px; }
 
-.k-maximize { background-position: -16px -288px; }
-.k-restore { background-position: -32px -288px; }
-.k-close { background-position: -64px -288px; }
+.k-i-maximize { background-position: -16px -288px; }
+.k-i-restore { background-position: -32px -288px; }
+.k-i-close { background-position: -64px -288px; }
 
 .k-insert-top { background-position: 0 -320px; }
 .k-insert-middle { background-position: -16px -320px; }
@@ -3188,7 +3188,7 @@ html .k-upload
     padding-right: 0;
 }
 
-.k-search
+.k-i-search
 {
     background-position: -64px -176px;
 }

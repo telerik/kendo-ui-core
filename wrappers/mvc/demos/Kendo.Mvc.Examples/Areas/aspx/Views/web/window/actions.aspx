@@ -36,7 +36,7 @@
 
         <p>
             In 1903, he founded with architects Koloman Moser and Joseph Maria Olbrich, the Wiener
-            Werkstätte for decorative arts.
+            Werkstï¿½tte for decorative arts.
         </p>
 
         <p>
@@ -69,7 +69,7 @@
             dialog.data("kendoWindow").open();
         });
 
-        dialog.data("kendoWindow").wrapper.find(".k-custom").click(function (e) {
+        dialog.data("kendoWindow").wrapper.find(".k-i-custom").click(function (e) {
             alert("Custom action button clicked");
             e.preventDefault();
         });

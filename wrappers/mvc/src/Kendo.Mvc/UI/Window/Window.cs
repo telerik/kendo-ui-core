@@ -15,7 +15,7 @@ namespace Kendo.Mvc.UI
 
     public class Window : ViewComponentBase, IContentContainer, IAsyncContentContainer
     {
-        private readonly IList<IWindowButton> defaultButtons = new List<IWindowButton> { new HeaderButton { Name = "Close", CssClass = "k-close" } };
+        private readonly IList<IWindowButton> defaultButtons = new List<IWindowButton> { new HeaderButton { Name = "Close", CssClass = "k-i-close" } };
 
         private string loadContentFromUrl;
 

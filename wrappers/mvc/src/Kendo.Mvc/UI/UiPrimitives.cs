@@ -178,22 +178,22 @@ namespace Kendo.Mvc.UI
             /// <summary>
             /// "Maximize" icon
             /// </summary>
-            public const string Maximize = "k-maximize";
+            public const string Maximize = "k-i-maximize";
 
             /// <summary>
             /// "Minimize" icon
             /// </summary>
-            public const string Minimize = "k-minimize";
+            public const string Minimize = "k-i-minimize";
 
             /// <summary>
             /// "Close" icon
             /// </summary>
-            public const string Close = "k-close";
+            public const string Close = "k-i-close";
 
             /// <summary>
             /// "Custom" icon
             /// </summary>
-            public const string Custom = "k-custom";
+            public const string Custom = "k-i-custom";
         }
 
         /// <summary>
@@ -296,7 +296,7 @@ namespace Kendo.Mvc.UI
             /// <summary>
             /// Editor custom tool
             /// </summary>
-            public const string Custom = "k-custom";
+            public const string Custom = "k-i-custom";
 
             /// <summary>
             /// Editor textarea element

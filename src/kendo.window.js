@@ -76,7 +76,7 @@
      *   $("#window").kendoWindow({
      *       actions: ["Custom", "Minimize", "Maximize", "Close"],
      *       title: "Window Title"
-     *   }).data("kendoWindow").wrapper.find(".k-custom").click(function(e) {
+     *   }).data("kendoWindow").wrapper.find(".k-i-custom").click(function(e) {
      *       alert("Custom action button clicked");
      *       e.preventDefault();
      *   });
@@ -181,7 +181,7 @@
         ERROR = "error",
         OVERFLOW = "overflow",
         ZINDEX = "zIndex",
-        MINIMIZE_MAXIMIZE = ".k-window-actions .k-minimize,.k-window-actions .k-maximize",
+        MINIMIZE_MAXIMIZE = ".k-window-actions .k-i-minimize,.k-window-actions .k-i-maximize",
         isLocalUrl = kendo.isLocalUrl;
 
     function constrain(value, low, high) {
@@ -812,10 +812,10 @@
                 that = this;
 
             each({
-                "k-close": that.close,
-                "k-maximize": that.maximize,
-                "k-minimize": that.minimize,
-                "k-restore": that.restore,
+                "k-i-close": that.close,
+                "k-i-maximize": that.maximize,
+                "k-i-minimize": that.minimize,
+                "k-i-restore": that.restore,
                 "k-i-refresh": that.refresh
             }, function (commandName, handler) {
                 if (target.hasClass(commandName)) {
@@ -1147,7 +1147,7 @@
                     height: restoreOptions.height
                 })
                 .find(".k-window-content,.k-resize-handle").show().end()
-                .find(".k-window-titlebar .k-restore").parent().remove().end().end()
+                .find(".k-window-titlebar .k-i-restore").parent().remove().end().end()
                 .find(MINIMIZE_MAXIMIZE).parent().show();
 
             $("html, body").css(OVERFLOW, "");
@@ -1422,7 +1422,7 @@
         wrapper: template("<div class='k-widget k-window' />"),
         action: template(
             "<a href='\\#' class='k-window-action k-link'>" +
-                "<span class='k-icon k-#= name.toLowerCase() #'>#= name #</span>" +
+                "<span class='k-icon k-i-#= name.toLowerCase() #'>#= name #</span>" +
             "</a>"
         ),
         titlebar: template(

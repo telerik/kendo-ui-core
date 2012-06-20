@@ -234,7 +234,7 @@
                 var range = createRangeFromText(editor, '|foo|');
                 execLinkCommandOnRange(range);
 
-                $('.k-window').css({width:200,height:300}).find('.k-close').click();
+                $('.k-window').css({width:200,height:300}).find('.k-i-close').click();
 
                 equal(editor.value(), 'foo')
                 equal($('.k-window').length, 0);

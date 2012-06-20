@@ -63,7 +63,7 @@
                 var range = createRangeFromText(editor, '|foo|');
                 execImageCommandOnRange(range);
 
-                $('.k-window-action .k-close').click();
+                $('.k-window-action .k-i-close').click();
                 equal($('.k-window').length, 0)
             });
 
@@ -255,7 +255,7 @@
                 var range = createRangeFromText(editor, '|foo|');
                 execImageCommandOnRange(range);
 
-                $('.k-window').css({width:200,height:300}).find('.k-close').click();
+                $('.k-window').css({width:200,height:300}).find('.k-i-close').click();
 
                 equal(editor.value(), 'foo')
                 equal($('.k-window').length, 0);
