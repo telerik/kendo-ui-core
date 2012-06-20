@@ -73,5 +73,18 @@ namespace Kendo.Mvc.UI.Tests.Upload
         {
             builder.Async(async => { }).ShouldBeSameAs(builder);
         }
+
+        [Fact]
+        public void Messages_should_set_messages()
+        {
+            builder.Messages(msgs => msgs.Select("select"));
+            upload.Messages.Select.ShouldEqual("select");
+        }
+
+        [Fact]
+        public void Messages_should_return_builder()
+        {
+            builder.Messages(msgs => { }).ShouldBeSameAs(builder);
+        }
     }
 }

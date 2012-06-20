@@ -34,7 +34,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public UploadBuilder Events(Action<UploadEventBuilder> configurator)
         {
-
             configurator(new UploadEventBuilder(Component.Events));
 
             return this;
@@ -106,8 +105,29 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public UploadBuilder Async(Action<UploadAsyncSettingsBuilder> configurator)
         {
-
             configurator(new UploadAsyncSettingsBuilder(Component.Async));
+
+            return this;
+        }
+
+        /// <summary>
+        /// Use it to configure asynchronous uploading.
+        /// </summary>
+        /// <param name="configurator">Use builder to set different asynchronous uploading options.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Upload()
+        ///             .Name("Upload")
+        ///             .Async(async => async
+        ///                 .Save("Save", "Compose")
+        ///                 .Remove("Remove", "Compose")
+        ///             );
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public UploadBuilder Messages(Action<UploadMessagesBuilder> configurator)
+        {
+            configurator(new UploadMessagesBuilder(Component.Messages));
 
             return this;
         }

@@ -22,6 +22,7 @@ namespace Kendo.Mvc.UI
             Multiple = true;
             ShowFileList = true;
             Async = new UploadAsyncSettings(this);
+            Messages = new UploadMessages();
 
             UrlGenerator = urlGenerator;
         }
@@ -82,6 +83,16 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// Gets or sets the Upload messages.
+        /// </summary>
+        /// <value>The Upload messages.</value>
+        public IUploadMessages Messages
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
         /// Writes the initialization script.
         /// </summary>
         /// <param name="writer">The writer object.</param>
@@ -102,6 +113,13 @@ namespace Kendo.Mvc.UI
             if (!ShowFileList)
             {
                 options.Add("showFileList", ShowFileList);
+            }
+
+            var messagesData = Messages.ToJson();
+
+            if (messagesData.Keys.Count > 0)
+            {
+                options.Add("localization", messagesData);
             }
 
             Async.SerializeTo("async", options);

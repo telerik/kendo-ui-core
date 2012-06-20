@@ -85,6 +85,15 @@ namespace Kendo.Mvc.UI.Tests.Upload
         }
 
         [Fact]
+        public void Messages_should_be_serialized_if_set()
+        {
+            upload.Messages.Select = "select";
+            upload.WriteInitializationScript(textWriter.Object);
+
+            output.ShouldContain("{localization:{select:\"select\"}}");
+        }
+
+        [Fact]
         public void Remove_action_should_be_serialized()
         {
             upload.Async.Save.ActionName = "Index";
