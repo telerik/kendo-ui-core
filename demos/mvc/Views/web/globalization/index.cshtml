@@ -101,26 +101,35 @@
                     function cultureChange() {
                         kendo.culture(this.value());
 
-                        var dateFormat = kendo.culture().calendar.patterns.d;
-                        var timeFormat = kendo.culture().calendar.patterns.t;
+                        var dateFormat = kendo.culture().calendar.patterns.d,
+                            timeFormat = kendo.culture().calendar.patterns.t,
+                            value;
 
                         //update format, re-render hours and set value again
                         startTime.options.format = startTime.timeView.options.format = timeFormat;
+                        startTime.timeView.options.parseFormats = [timeFormat];
                         startTime.timeView.refresh();
                         startTime.value(startTime.value());
 
                         //update format, re-render hours and set value again
                         endTime.options.format = endTime.timeView.options.format = timeFormat;
+                        endTime.timeView.options.parseFormats = [timeFormat];
                         endTime.timeView.refresh();
                         endTime.value(endTime.value());
 
                         //update format and set value again
                         startDate.options.format = startDate.dateView.options.format = dateFormat;
-                        startDate.value(startDate.value());
+                        startDate.options.parseFormats = [dateFormat];
+                        value = startDate.value();
+                        startDate.value(null);
+                        startDate.value(value);
 
                         //update format and set value again
                         endDate.options.format = endDate.dateView.options.format = dateFormat;
-                        endDate.value(endDate.value());
+                        endDate.options.parseFormats = [dateFormat];
+                        value = endDate.value();
+                        endDate.value(null);
+                        endDate.value(value);
 
                         // clear associated DateView in order to re-render calendar.
                         startDate.dateView.calendar.element.removeData("dateView");
