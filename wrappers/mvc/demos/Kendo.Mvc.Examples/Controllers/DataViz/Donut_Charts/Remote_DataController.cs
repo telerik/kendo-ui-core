@@ -12,9 +12,9 @@ namespace Kendo.Mvc.Examples.Controllers
             return View();
         }
 
-        public ActionResult _SpainElectricityProduction()
+        public ActionResult _WorldScreenResolution()
         {
-            return Json(ChartDataRepository.SpainElectricityProduction());
+            return Json(ChartDataRepository.WorldScreenResolution());
         }
     }
 }

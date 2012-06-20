@@ -57,12 +57,13 @@
             })
             .Labels(labels => labels
                 .Visible(true)
-                .Template("#= kendo.format('{0:P}', percentage)#")
+                .Position(ChartPieLabelsPosition.OutsideEnd)
+                .Template("#= category # - #= kendo.format('{0:P0}', percentage) #")
             );
         })
         .Tooltip(tooltip => tooltip
             .Visible(true)
-            .Template("#= kendo.format('{0:P}', percentage)#")
+            .Template("#= kendo.format('{0:P0}', percentage)#")
         )
     %>
 </div>

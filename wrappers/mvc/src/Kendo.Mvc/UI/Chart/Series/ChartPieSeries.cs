@@ -52,8 +52,8 @@ namespace Kendo.Mvc.UI
 
             if (expressionVisibleInLegend != null)
             {
-                Explode = expressionVisibleInLegend.Compile();
-                ExplodeMember = expressionVisibleInLegend.MemberWithoutInstance();
+                VisibleInLegend = expressionVisibleInLegend.Compile();
+                VisibleInLegendMember = expressionVisibleInLegend.MemberWithoutInstance();
             }
 
             if (expressionColor != null)

@@ -155,6 +155,27 @@ namespace Kendo.Mvc.Examples.Models
             };
         }
 
+        public static IEnumerable<ScreenResolution> WorldScreenResolution()
+        {
+            return new ScreenResolution[] {
+                new ScreenResolution() { Year = "2006", Resolution = "Higher", Share = 17, VisibleInLegend = true, OrderNumber = 1 },
+                new ScreenResolution() { Year = "2006", Resolution = "1024x768", Share = 57, VisibleInLegend = true, OrderNumber = 2 },
+                new ScreenResolution() { Year = "2006", Resolution = "800x600", Share = 20, VisibleInLegend = true, OrderNumber = 3 },
+                new ScreenResolution() { Year = "2006", Resolution = "640x480", Share = 0, VisibleInLegend = true, OrderNumber = 4 },
+                new ScreenResolution() { Year = "2006", Resolution = "Unknown", Share = 6, VisibleInLegend = true, OrderNumber = 5 },
+                new ScreenResolution() { Year = "2008", Resolution = "Higher", Share = 38, VisibleInLegend = false, OrderNumber = 1 },
+                new ScreenResolution() { Year = "2008", Resolution = "1024x768", Share = 48, VisibleInLegend = false, OrderNumber = 2 },
+                new ScreenResolution() { Year = "2008", Resolution = "800x600", Share = 8, VisibleInLegend = false, OrderNumber = 3 },
+                new ScreenResolution() { Year = "2008", Resolution = "640x480", Share = 0, VisibleInLegend = false, OrderNumber = 4 },
+                new ScreenResolution() { Year = "2008", Resolution = "Unknown", Share = 6, VisibleInLegend = false, OrderNumber = 5 },
+                new ScreenResolution() { Year = "2010", Resolution = "Higher", Share = 76, VisibleInLegend = false, OrderNumber = 1 },
+                new ScreenResolution() { Year = "2010", Resolution = "1024x768", Share = 20, VisibleInLegend = false, OrderNumber = 2 },
+                new ScreenResolution() { Year = "2010", Resolution = "800x600", Share = 3, VisibleInLegend = false, OrderNumber = 3 },
+                new ScreenResolution() { Year = "2010", Resolution = "640x480", Share = 0, VisibleInLegend = false, OrderNumber = 4 },
+                new ScreenResolution() { Year = "2010", Resolution = "Unknown", Share = 3, VisibleInLegend = false, OrderNumber = 5 }
+            };
+        }
+
         public static IEnumerable<ElectricitySource> SpainElectricityBreakdown()
         {
             return new ElectricitySource[] {

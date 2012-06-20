@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-
-namespace Kendo.Mvc.Examples.Models
+﻿namespace Kendo.Mvc.Examples.Models
 {
     public class ElectricityProduction
     {

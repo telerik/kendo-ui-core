@@ -23,7 +23,12 @@
                 new { category = "Solar", value = 2 },
                 new { category = "Nuclear", value = 49 }, 
                 new { category = "Wind", value = 27 }                
-            });
+            })
+            .Labels(labels => labels
+                .Visible(true)
+                .Position(ChartPieLabelsPosition.OutsideEnd)
+                .Template("#= kendo.format('{0:P0}', percentage)#")
+            );
         })
         .Tooltip(tooltip => tooltip
             .Visible(true)

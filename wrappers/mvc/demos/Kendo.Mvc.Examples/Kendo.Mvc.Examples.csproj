@@ -243,6 +243,7 @@
     <Compile Include="Helpers\HyphenatedRouteHandler.cs" />
     <Compile Include="Models\ClientOrderViewModel.cs" />
     <Compile Include="Models\ClientEmployeeViewModel.cs" />
+    <Compile Include="Models\ScreenResolution.cs" />
     <Compile Include="Models\CustomValidationProductViewModel.cs" />
     <Compile Include="Models\PagerViewModel.cs" />
     <Compile Include="Models\HeaderTemplateViewModel.cs" />
