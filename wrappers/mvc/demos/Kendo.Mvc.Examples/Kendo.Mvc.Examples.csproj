@@ -155,6 +155,7 @@
     <Compile Include="Controllers\Web\Grid\Column_ResizingController.cs" />
     <Compile Include="Controllers\Web\Grid\ApiController.cs" />
     <Compile Include="Controllers\Web\Grid\ColumnSettingsController.cs" />
+    <Compile Include="Controllers\Web\Grid\Editing_CustomController.cs" />
     <Compile Include="Controllers\Web\Grid\PagingController.cs" />
     <Compile Include="Controllers\Web\Grid\HeaderTemplateController.cs" />
     <Compile Include="Controllers\Web\Grid\Custom_CommandController.cs" />
@@ -239,9 +240,12 @@
     <Compile Include="Helpers\KendoWebFormViewEngine.cs" />
     <Compile Include="Models\Config.cs" />
     <Compile Include="Helpers\HyphenatedRouteHandler.cs" />
+    <Compile Include="Models\ClientOrderViewModel.cs" />
+    <Compile Include="Models\ClientEmployeeViewModel.cs" />
     <Compile Include="Models\CustomValidationProductViewModel.cs" />
     <Compile Include="Models\PagerViewModel.cs" />
     <Compile Include="Models\HeaderTemplateViewModel.cs" />
+    <Compile Include="Models\SessionClientOrderRepository.cs" />
     <Compile Include="Models\StockDataPoint.cs" />
     <Compile Include="Models\ElectricitySource.cs" />
     <Compile Include="Models\EmployeeViewModel.cs" />
@@ -319,6 +323,7 @@
     <Content Include="Areas\aspx\Views\web\grid\column_reordering.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\column_resizing.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\columnsettings.aspx" />
+    <Content Include="Areas\aspx\Views\web\grid\editing_custom.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\headertemplate.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\custom_command.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\globalization.aspx" />
@@ -676,6 +681,9 @@
     <Content Include="Areas\razor\Views\dataviz\donut_charts\local_data.cshtml" />
     <Content Include="Areas\razor\Views\dataviz\donut_charts\donut_labels.cshtml" />
     <Content Include="Areas\razor\Views\dataviz\donut_charts\remote_data.cshtml" />
+    <Content Include="Areas\razor\Views\web\grid\editing_custom.cshtml" />
+    <Content Include="Areas\razor\Views\web\grid\EditorTemplates\ClientEmployee.cshtml" />
+    <Content Include="Areas\aspx\Views\web\grid\EditorTemplates\ClientEmployee.ascx" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>

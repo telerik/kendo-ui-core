@@ -317,8 +317,7 @@
                 },
                 {
                     "text": "Editing Custom Editor",
-                    "url": "grid/editing-custom.html",
-                    "packages": ["!mvc"]
+                    "url": "grid/editing-custom.html"
                 },
                 {
                     "text": "Server Editing",

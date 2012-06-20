@@ -1,0 +1,6 @@
+﻿@(Html.Kendo().DropDownList()
+        .Name("Employee")
+        .DataValueField("EmployeeID")
+        .DataTextField("EmployeeName")
+        .BindTo((System.Collections.IEnumerable)ViewData["employees"])
+)
