@@ -201,9 +201,9 @@ html body .k-button-bare
 
 /* Icons */
 
-.k-expand { background-position: 0 -160px; }
-.k-collapse { background-position: 0 -176px; }
-.k-rtl .k-expand { background-position: -64px -160px; }
+.k-i-expand { background-position: 0 -160px; }
+.k-i-collapse { background-position: 0 -176px; }
+.k-rtl .k-i-expand { background-position: -64px -160px; }
 
 .k-plus, .k-plus-disabled { background-position: 0 -256px; }
 .k-minus, .k-minus-disabled { background-position: -16px -256px; }
@@ -241,27 +241,27 @@ html body .k-button-bare
 .k-state-hover .k-i-arrow-e { background-position: -32px -224px; }
 .k-state-hover .k-i-seek-e { background-position: -48px -224px; }
 
-.k-filter { background-position: 0 -240px; }
-.k-clear-filter { background-position: -16px -240px; }
+.k-i-funnel, .k-filter { background-position: 0 -240px; }
+.k-i-funnel-clear, .k-clear-filter { background-position: -16px -240px; }
 
 .k-i-refresh { background-position: -32px -240px; }
 .k-i-calendar { background-position: -48px -240px; }
 .k-i-clock { background-position: -64px -336px; }
 
-.k-edit { background-position: 0 -336px; }
+.k-i-pencil, .k-edit { background-position: 0 -336px; }
 .k-delete { background-position: -16px -336px; }
-.k-insert, .k-update { background-position: -32px -336px; }
-.k-cancel { background-position: -48px -336px; }
+.k-i-tick, .k-insert, .k-update { background-position: -32px -336px; }
+.k-i-cancel, .k-cancel { background-position: -48px -336px; }
 .k-group-delete { background-position: 0 -288px; }
 
 .k-i-maximize { background-position: -16px -288px; }
 .k-i-restore { background-position: -32px -288px; }
 .k-i-close { background-position: -64px -288px; }
 
-.k-insert-top { background-position: 0 -320px; }
-.k-insert-middle { background-position: -16px -320px; }
-.k-insert-bottom { background-position: -32px -320px; }
-.k-add { background-position: -48px -320px; }
+.k-i-insert-n, .k-insert-top { background-position: 0 -320px; }
+.k-i-insert-m, .k-insert-middle { background-position: -16px -320px; }
+.k-i-insert-s, .k-insert-bottom { background-position: -32px -320px; }
+.k-i-plus, .k-add { background-position: -48px -320px; }
 .k-denied { background-position: -64px -320px; }
 .k-resize-se { background-position: -64px -272px; }
 
@@ -3090,9 +3090,10 @@ html .k-upload
     background-position: -5px -292px;
 }
 
-.k-retry{ background-position: -66px -228px; width: 11px; }
-.k-success{ background-position: -64px -240px; }
-.k-fail{ background-position: -64px -256px; }
+.k-retry { background-position: -66px -228px; width: 11px; }
+.k-si-tick, .k-success { background-position: -64px -240px; }
+.k-si-cancel, .k-fail { background-position: -64px -256px; }
+.k-si-refresh { background-position: -64px -226px; }
 
 .k-filename
 {

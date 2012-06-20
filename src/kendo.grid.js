@@ -1234,11 +1234,11 @@
                 groupable = that.options.groupable;
 
             if (!that.groupable) {
-                that.table.delegate(".k-grouping-row .k-collapse, .k-grouping-row .k-expand", CLICK, function(e) {
+                that.table.delegate(".k-grouping-row .k-i-collapse, .k-grouping-row .k-i-expand", CLICK, function(e) {
                     var element = $(this),
                     group = element.closest("tr");
 
-                    if(element.hasClass('k-collapse')) {
+                    if(element.hasClass('k-i-collapse')) {
                         that.collapseGroup(group);
                     } else {
                         that.expandGroup(group);
@@ -2258,11 +2258,11 @@
         },
 
         expandRow: function(tr) {
-            $(tr).find('> td .k-plus, > td .k-expand').click();
+            $(tr).find('> td .k-plus, > td .k-i-expand').click();
         },
 
         collapseRow: function(tr) {
-            $(tr).find('> td .k-minus, > td .k-collapse').click();
+            $(tr).find('> td .k-minus, > td .k-i-collapse').click();
         },
 
         _thead: function() {
@@ -2444,7 +2444,7 @@
             html +=  '<tr class="k-grouping-row">' + groupCells(level) +
                       '<td colspan="' + colspan + '">' +
                         '<p class="k-reset">' +
-                         '<a class="k-icon k-collapse" href="#"></a>' + text +
+                         '<a class="k-icon k-i-collapse" href="#"></a>' + text +
                          '</p></td></tr>';
 
             if(group.hasSubgroups) {
@@ -2462,7 +2462,7 @@
         },
 
         collapseGroup: function(group) {
-            group = $(group).find(".k-icon").addClass("k-expand").removeClass("k-collapse").end();
+            group = $(group).find(".k-icon").addClass("k-i-expand").removeClass("k-i-collapse").end();
 
             var level = group.find(".k-group-cell").length,
                 footerCount = 1,
@@ -2470,7 +2470,7 @@
                 tr;
 
             group.nextAll("tr").each(function() {
-                tr = $(this),
+                tr = $(this);
                 offset = tr.find(".k-group-cell").length;
 
                 if (tr.hasClass("k-grouping-row")) {
@@ -2488,7 +2488,7 @@
         },
 
         expandGroup: function(group) {
-            group = $(group).find(".k-icon").addClass("k-collapse").removeClass("k-expand").end();
+            group = $(group).find(".k-icon").addClass("k-i-collapse").removeClass("k-i-expand").end();
             var that = this,
                 level = group.find(".k-group-cell").length,
                 tr,
@@ -2505,7 +2505,7 @@
                 if (offset == level + 1 && !tr.hasClass("k-detail-row")) {
                     tr.show();
 
-                    if (tr.hasClass("k-grouping-row") && tr.find(".k-icon").hasClass("k-collapse")) {
+                    if (tr.hasClass("k-grouping-row") && tr.find(".k-icon").hasClass("k-i-collapse")) {
                         that.expandGroup(tr);
                     }
 

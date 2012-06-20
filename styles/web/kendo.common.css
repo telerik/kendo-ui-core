@@ -224,35 +224,45 @@ html body .k-button-bare
 }
 *+html .k-icon, *+html .k-sprite { text-indent: 0; }
 
-.k-i-arrow-n { background-position: 0 0; }
 .k-numerictextbox .k-i-arrow-n  { background-position: 0 -2px; }
-.k-i-arrow-s { background-position: 0 -32px; }
 .k-numerictextbox .k-i-arrow-s { background-position: 0 -35px; }
 .k-state-selected .k-i-arrow-n { background-position: -16px 0; }
 .k-numerictextbox .k-state-selected .k-i-arrow-n  { background-position: -16px -2px; }
 .k-state-selected .k-i-arrow-s { background-position: -16px -32px; }
 .k-numerictextbox .k-state-selected .k-i-arrow-s { background-position: -16px -35px; }
 
-.k-i-seek-w { background-position: 0 -112px; }
-.k-i-arrow-w { background-position: 0 -48px; }
+.k-i-arrow-n { background-position: 0 0; }
 .k-i-arrow-e { background-position: 0 -16px; }
+.k-i-arrow-s { background-position: 0 -32px; }
+.k-i-arrow-w { background-position: 0 -48px; }
+
+.k-i-seek-n { background-position: 0 -64px; }
 .k-i-seek-e { background-position: 0 -80px; }
+.k-i-seek-s { background-position: 0 -96px; }
+.k-i-seek-w { background-position: 0 -112px; }
 
-.k-si-arrow-n { background-position: 0 -130px; }
-.k-si-arrow-s { background-position: 0 -160px; }
+.k-si-arrow-n { background-position: 0 -129px; }
+.k-si-arrow-e { background-position: 0 -144px; }
+.k-si-arrow-s { background-position: 0 -159px; }
+.k-si-arrow-w { background-position: 0 -176px; }
 
-.k-expand, .k-plus { background-position: 0 -192px; }
-.k-rtl .k-expand, .k-rtl .k-plus { background-position: 0 -208px; }
-.k-collapse, .k-minus { background-position: 0 -226px; }
-.k-rtl .k-collapse, .k-rtl .k-minus { background-position: 0 -240px; }
+.k-i-arrowhead-n { background-position: 0 -256px; }
+.k-i-arrowhead-e { background-position: 0 -272px; }
+.k-i-arrowhead-s { background-position: 0 -288px; }
+.k-i-arrowhead-w { background-position: 0 -304px; }
 
-.k-edit { background-position: -32px 0; }
-.k-delete, .k-group-delete, .k-i-close { background-position: -32px -16px; }
-.k-insert, .k-update { background-position: -32px -32px; }
-.k-cancel, .k-denied { background-position: -32px -48px; }
-.k-add { background-position: -32px -64px; }
-.k-filter { background-position: -32px -80px; }
-.k-clear-filter { background-position: -32px -96px; }
+.k-i-expand, .k-plus { background-position: 0 -192px; }
+.k-i-expand-w, .k-rtl .k-i-expand, .k-rtl .k-plus { background-position: 0 -208px; }
+.k-i-collapse, .k-minus { background-position: 0 -226px; }
+.k-i-collapse-w, .k-rtl .k-i-collapse, .k-rtl .k-minus { background-position: 0 -240px; }
+
+.k-i-pencil, .k-edit { background-position: -32px 0; }
+.k-i-close, .k-delete, .k-group-delete { background-position: -32px -16px; }
+.k-i-tick, .k-insert, .k-update { background-position: -32px -32px; }
+.k-i-cancel, .k-cancel, .k-denied { background-position: -32px -48px; }
+.k-i-plus, .k-add { background-position: -32px -64px; }
+.k-i-funnel, .k-filter { background-position: -32px -80px; }
+.k-i-funnel-clear, .k-clear-filter { background-position: -32px -96px; }
 
 .k-i-refresh { background-position: -32px -112px; }
 .k-i-restore { background-position: -32px -128px; }
@@ -262,18 +272,20 @@ html body .k-button-bare
 
 .k-i-calendar { background-position: -32px -176px; }
 .k-i-clock { background-position: -32px -192px; }
+.k-si-plus { background-position: -32px -208px; }
+.k-si-minus { background-position: -32px -224px; }
 
 .k-i-search { background-position: -32px -240px; }
 .k-i-custom { background-position: -115px -113px; }
 .k-editor .k-i-custom { background-position: -112px -110px; }
 .k-viewHtml { background-position: -112px -132px; }
 
-.k-insert-top { background-position: -160px -32px; }
-.k-insert-middle { background-position: -160px -48px; }
-.k-insert-bottom { background-position: -160px -64px; }
+.k-i-insert-n, .k-insert-top { background-position: -160px -32px; }
+.k-i-insert-m, .k-insert-middle { background-position: -160px -48px; }
+.k-i-insert-s, .k-insert-bottom { background-position: -160px -64px; }
 .k-drop-hint { background-position: 0 -326px; }
 
-.k-warning { background-position: -160px -240px; }
+.k-i-note, .k-warning { background-position: -160px -240px; }
 
 .k-image
 {
@@ -3292,7 +3304,7 @@ html .k-upload
 }
 
 .k-upload .k-delete,
-.k-upload .k-cancel
+.k-upload .k-i-cancel
 {
     background-position: -164px -116px;
 }
@@ -3303,7 +3315,9 @@ html .k-upload
 }
 
 .k-retry { background-position: -164px -132px; }
-.k-success { background-position: -160px -96px; }
+.k-si-refresh { background-position: -160px -128px; }
+.k-si-tick, .k-success { background-position: -160px -96px; }
+.k-si-cancel { background-position: -160px -112px; }
 
 .k-filename
 {
@@ -3474,12 +3488,12 @@ html input.k-breadcrumbs-input
 
 *+html .k-imagebrowser .k-toolbar .k-button-icon { vertical-align: middle; }
 
-.k-addfolder
+.k-i-folder-add, .k-addfolder
 {
     background-position: -32px -272px;
 }
 
-.k-goup
+.k-i-folder-up, .k-goup
 {
     background-position: -32px -288px;
 }
