@@ -1038,6 +1038,7 @@
             var that = this,
                 column,
                 cell,
+                command,
                 fields = [];
 
             row.children(":not(.k-group-cell,.k-hierarchy-cell)").each(function() {
@@ -1048,9 +1049,20 @@
                     fields.push({ field: column.field, format: column.format, editor: column.editor });
                     cell.attr("data-container-for", column.field);
                     cell.empty();
-                } else if (column.command && hasCommand(column.command, "edit")) {
-                    cell.empty();
-                    $(that._createButton("update") + that._createButton("canceledit")).appendTo(cell);
+                } else if (column.command) {
+                    command = getCommand(column.command, "edit");
+                    if (command) {
+                        cell.empty();
+
+                        var updateText,
+                            cancelText;
+
+                        if (isPlainObject(command) && command.text && isPlainObject(command.text)) {
+                            updateText = command.text.update;
+                            cancelText = command.text.cancel;
+                        }
+                        $(that._createButton({ name: "update", text: updateText }) + that._createButton({ name: "canceledit", text: cancelText })).appendTo(cell);
+                    }
                 }
             });
 
@@ -1218,6 +1230,11 @@
             if (isPlainObject(command)) {
                 if (command.className) {
                     command.className += " " + options.className;
+                }
+
+                if (commandName === "edit" && isPlainObject(command.text)) {
+                    command = extend(true, {}, command);
+                    command.text = command.text.edit;
                 }
 
                 options = extend(true, options, defaultCommands[commandName], command);
@@ -2636,11 +2653,15 @@
        }
    });
 
-   function hasCommand(commands, name) {
+   function getCommand(commands, name) {
        var idx, length, command;
 
-       if (typeof commands === STRING) {
-           return commands === name;
+       if (typeof commands === STRING && commands === name) {
+          return commands;
+       }
+
+       if (isPlainObject(commands) && commands.name === name) {
+           return commands;
        }
 
        if (isArray(commands)) {
@@ -2648,11 +2669,11 @@
                command = commands[idx];
 
                if ((typeof command === STRING && command === name) || (command.name === name)) {
-                   return true;
+                   return command;
                }
            }
        }
-       return false;
+       return null;
    }
 
    ui.plugin(Grid);

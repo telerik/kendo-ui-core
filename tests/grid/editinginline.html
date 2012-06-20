@@ -168,6 +168,18 @@
                 equal(commandCell.find("a.k-grid-cancel").length, 1);
             });
 
+            test("editRow custom text is applied to update and cancel commands", function() {
+                var grid = setup({ columns: ["foo", "name", { command: { name: "edit", text: { edit: "myEdit", update: "myUpdate", cancel: "myCancel"} } }], editable: "inline" }),
+                    tr = table.find("tr:first");
+
+                grid.editRow(tr);
+
+                var commandCell = tr.find("td:last");
+                equal(commandCell.find("a.k-button").length, 2);
+                equal(commandCell.find("a.k-grid-update").text(), "myUpdate");
+                equal(commandCell.find("a.k-grid-cancel").text(), "myCancel");
+            });
+
             test("editRow transforms the edit command column if column has multiple commands", function() {
                 var grid = setup({ columns: ["foo", "name", { command: ["edit", "destroy"] }], editable: "inline" }),
                     tr = table.find("tr:first");
