@@ -18,6 +18,13 @@
 
 @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
       .Name("Grid")
+      .Columns(columns =>
+      {
+          columns.Bound(o => o.OrderID);
+          columns.Bound(o => o.ContactName);
+          columns.Bound(o => o.ShipAddress);
+          columns.Bound(o => o.ShipCountry);
+      })
       .Pageable(pager => pager
         .Input(Model.Input)
         .Numeric(Model.Numeric)
