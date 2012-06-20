@@ -84,7 +84,7 @@ namespace Kendo.Mvc.UI
                 !item.RouteName.HasValue() && !item.Url.HasValue() &&
                 !item.ActionName.HasValue() && !item.ControllerName.HasValue())
             {
-                return "\\#" + component.GetItemContentId(item);
+                return (component.IsInClientTemplate ? "\\#" : "#") + component.GetItemContentId(item);
             }
 
             return defaultValue;

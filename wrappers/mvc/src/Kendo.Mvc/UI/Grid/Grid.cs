@@ -867,7 +867,8 @@ namespace Kendo.Mvc.UI
                 PreviousNext = Pageable.PreviousNext,
                 Refresh = Pageable.Refresh,
                 PageSizes = Pageable.PageSizes,
-                Messages = Pageable.Messages
+                Messages = Pageable.Messages,
+                IsInClientTemplate = IsInClientTemplate
             };
         }
 

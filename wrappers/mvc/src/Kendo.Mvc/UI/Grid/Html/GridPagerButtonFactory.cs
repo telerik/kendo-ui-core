@@ -3,12 +3,12 @@ using System.Globalization;
 namespace Kendo.Mvc.UI.Html
 {
     class GridPagerButtonFactory : IGridPagerButtonFactory
-    {
-        public IHtmlNode CreateButton(GridPagerButtonType buttonType, bool enabled, string url, string text, int page)
+    {       
+        public IHtmlNode CreateButton(GridPagerButtonType buttonType, bool enabled, string url, string text, int page, bool inClientTemplate)
         {
             if (buttonType == GridPagerButtonType.Icon)
             {
-                return GetIconButton(enabled, url, text, page);
+                return GetIconButton(enabled, url, text, page, inClientTemplate);
             }
 
             return GetNumericButton(enabled, url, text, page);
@@ -30,14 +30,16 @@ namespace Kendo.Mvc.UI.Html
             return li;
         }
 
-        protected virtual IHtmlNode GetIconButton(bool enabled, string url, string text, int page)
+        protected virtual IHtmlNode GetIconButton(bool enabled, string url, string text, int page, bool inClientTemplate)
         {
+            var disabledUrl = inClientTemplate ? "\\#" : "#";
+
             var a = new HtmlElement("a")
                 .AddClass(UIPrimitives.Link)
                 .ToggleClass(UIPrimitives.DisabledState, !enabled)
                 .Attribute("href", url)
                 .Attribute("data-page", page.ToString(CultureInfo.InvariantCulture))
-                .ToggleAttribute("href", "#", !enabled);
+                .ToggleAttribute("href", disabledUrl, !enabled);
 
             var span = new HtmlElement("span")
                 .AddClass(UIPrimitives.Icon, "k-i-" + text)

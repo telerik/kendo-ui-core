@@ -53,12 +53,12 @@ namespace Kendo.Mvc.UI.Html
             {
                 buttonFactory.CreateButton(GridPagerButtonType.Icon, section.Page < section.TotalPages,
                                            GetUrl(urlBuilder, section.Page + 1),
-                                           "arrow-e", section.Page + 1)
+                                           "arrow-e", section.Page + 1, section.IsInClientTemplate)
                              .Attribute("title", section.Messages.Next)
                              .AppendTo(container);
 
                 buttonFactory.CreateButton(GridPagerButtonType.Icon, section.Page < section.TotalPages,
-                                           GetUrl(urlBuilder, section.TotalPages), "seek-e", section.TotalPages)
+                                           GetUrl(urlBuilder, section.TotalPages), "seek-e", section.TotalPages, section.IsInClientTemplate)
                              .Attribute("title", section.Messages.Last)
                              .AppendTo(container);
             }
@@ -78,12 +78,12 @@ namespace Kendo.Mvc.UI.Html
             if (section.PreviousNext)
             {
                 buttonFactory.CreateButton(GridPagerButtonType.Icon, section.Page > 1,
-                                           GetUrl(urlBuilder, 1), "seek-w", 1)
+                                           GetUrl(urlBuilder, 1), "seek-w", 1, section.IsInClientTemplate)
                              .Attribute("title", section.Messages.First)
                              .AppendTo(container);
 
                 buttonFactory.CreateButton(GridPagerButtonType.Icon, section.Page > 1,
-                                           GetUrl(urlBuilder, section.Page - 1), "arrow-w", section.Page - 1)
+                                           GetUrl(urlBuilder, section.Page - 1), "arrow-w", section.Page - 1, section.IsInClientTemplate)
                              .Attribute("title", section.Messages.Previous)
                              .AppendTo(container);
             }
