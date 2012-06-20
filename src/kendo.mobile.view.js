@@ -190,6 +190,19 @@
             that.trigger(HIDE, {view: that});
         },
 
+        updateParams: function(params) {
+            var that = this;
+
+            if (that.trigger(BEFORE_SHOW, {view: that})) {
+                return;
+            }
+
+            that.lastParams = that.params;
+            that.params = params;
+
+            that.trigger(SHOW, {view: that});
+        },
+
         switchWith: function(view, transition, params, callback) {
             var that = this;
 
@@ -711,6 +724,9 @@
                     that._view = view;
                     that.trigger(VIEW_SHOW, {view: view});
                 });
+            } else {
+                that._view.updateParams(params);
+                that.trigger(VIEW_SHOW, {view: view});
             }
         },
 
