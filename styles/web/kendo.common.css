@@ -1193,7 +1193,8 @@ div.k-grid-header .k-header
     vertical-align:top;
 }
 
-.k-pager-numbers li
+.k-pager-numbers li,
+.k-pager-input
 {
     float:left;
 }
@@ -1226,19 +1227,30 @@ div.k-grid-header .k-header
     cursor:pointer;
 }
 
-.k-pager-wrap>.k-link .k-icon
+.k-pager-wrap>a.k-state-disabled:hover
 {
-    margin-top:-2px;
+    background:none;
+    cursor:default;
 }
 
-*+html .k-pager-wrap>.k-link .k-icon
+.k-pager-wrap>.k-link .k-icon
 {
-    margin-top:9px;
+    vertical-align:top;
+    margin-top:3px;
 }
 
 .k-pager-numbers .k-link
 {
-    padding: 0 6px;
+    padding: 0 8px;
+    border-radius:13px;
+}
+
+.k-pager-numbers .k-link:hover
+{
+    padding: 0 7px;
+    border-style:solid;
+    border-width:1px;
+    line-height:22px;
 }
 
 .k-pager-wrap>.k-link
@@ -1289,6 +1301,11 @@ div.k-grid-header .k-header
 .k-pager-sizes
 {
     padding:0 17px;
+}
+
+*+html .k-pager-sizes
+{
+    float:left;
 }
 
 .k-pager-wrap .k-textbox,
