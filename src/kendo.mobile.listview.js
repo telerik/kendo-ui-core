@@ -328,6 +328,7 @@
          * @param {Element} element DOM element.
          * @param {Object} options Configuration options.
          * @option {kendo.data.DataSource | Object} [dataSource] Instance of DataSource or the data that the mobile ListView will be bound to.
+         * @option {Boolean} [autoBind] <true> Indicates whether the listview will call read on the DataSource initially.
          * @option {String}  [type] The type of the control. Can be either <code>flat</code> (default) or group. Determined automatically in databound mode.
          * @option {String}  [style] The style of the control. Can be either empty string(""), or inset.
          * @option {String}  [template] <#:data#> The item template.
@@ -366,7 +367,7 @@
 
             that._fixHeaders();
 
-            if (options.dataSource) {
+            if (options.dataSource && that.options.autoBind) {
                 that.dataSource.fetch();
             } else {
                 that._style();
@@ -434,7 +435,8 @@
             releaseTemplate: "Release to refresh",
             refreshTemplate: "Refreshing",
             pullOffset: 140,
-            style: ""
+            style: "",
+            autoBind: true
         },
 
         setOptions: function(options) {
@@ -444,7 +446,9 @@
         setDataSource: function(dataSource) {
             this.options.dataSource = dataSource;
             this._dataSource();
-            dataSource.fetch();
+            if (this.options.autoBind) {
+                dataSource.fetch();
+            }
         },
 
         /**
