@@ -14,7 +14,7 @@
             <input name="animation" type="radio" <%= ViewBag.animation != "toggle" ? "checked=\"checked\"" : "" %> value="expand" /> <label for="expand">expand animation</label>
         </li>
         <li>
-            <input type="checkbox" checked="checked" value="opacity" /> <label for="opacity">animate opacity</label>
+            <%= Html.CheckBox("opacity", (bool)ViewBag.opacity) %> <label for="opacity">animate opacity</label>
         </li>
     </ul>
 
@@ -28,8 +28,8 @@
     .HtmlAttributes(new { style = "width:300px" })
     .Animation(animation =>
     {
-        animation.Enable(ViewBag.animation != "toggle");
-
+        animation.Enable(ViewBag.animation == "expand" || ViewBag.opacity);
+        
         animation.Expand(config =>
         {
             if (ViewBag.animation != "toggle")

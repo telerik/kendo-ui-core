@@ -687,6 +687,7 @@
     <Content Include="Areas\razor\Views\web\grid\EditorTemplates\ClientEmployee.cshtml" />
     <Content Include="Areas\aspx\Views\web\grid\EditorTemplates\ClientEmployee.ascx" />
     <Content Include="Areas\razor\Views\web\tabstrip\animation.cshtml" />
+    <Content Include="Areas\aspx\Views\web\tabstrip\animation.aspx" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
@@ -723,7 +724,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>19808</DevelopmentServerPort>
+          <DevelopmentServerPort>53702</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

@@ -625,7 +625,6 @@
                     "url": "tabstrip/ajax.html"
                 },
                 {
-                    "packages": [ "!mvc" ],
                     "text": "Animation effects",
                     "url": "tabstrip/animation.html"
                 },
