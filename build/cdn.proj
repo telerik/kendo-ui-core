@@ -6,8 +6,7 @@
         <!-- Required parameters: BundleRoot, Version -->
         <CDNAccessKeyId>AKIAJSDTTSFPVFUMHBGA</CDNAccessKeyId>
         <CDNSecretAccessKey>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</CDNSecretAccessKey>
-        <!-- <CDNBucketName>kendo-static</CDNBucketName> -->
-        <CDNBucketName>testtelerik</CDNBucketName>
+        <CDNBucketName>kendo-static</CDNBucketName>
     </PropertyGroup>
 
     <ItemGroup>
