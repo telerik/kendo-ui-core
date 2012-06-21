@@ -1060,11 +1060,7 @@
 
             if (!loadOnDemand) {
                 for (i = 0; i < items.length; i++) {
-                    if (items[i]._loaded) {
-                        items[i].children.read();
-                    } else {
-                        items[i].load();
-                    }
+                    items[i].load();
                 }
             }
         },
@@ -1391,7 +1387,7 @@
                 srcDataSource = treeviewFromNode(nodeData).dataSource;
                 dataItem = srcDataSource.getByUid(nodeData.attr(kendo.attr("uid")));
 
-                srcDataSource.remove(dataItem);
+                dataItem = srcDataSource.remove(dataItem);
 
                 dataItem = callback(destDataSource, dataItem);
             } else if (isArray(nodeData) || nodeData instanceof data.ObservableArray){

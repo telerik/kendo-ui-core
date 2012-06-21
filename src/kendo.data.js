@@ -152,7 +152,7 @@
 
         splice: function(index, howMany, item) {
             var items = this.wrapAll(slice.call(arguments, 2)),
-                result;
+                result, i, len;
 
             result = splice.apply(this, [index, howMany].concat(items));
 
@@ -163,7 +163,7 @@
                     items: result
                 });
 
-                for (var i = 0, len = result.length; i < len; i++) {
+                for (i = 0, len = result.length; i < len; i++) {
                     if (result[i].children) {
                         result[i].unbind(CHANGE);
                     }
@@ -2585,14 +2585,15 @@
         load: function() {
             var that = this, options = {};
 
-            if (!that._loaded) {
-                options[that.idField] = that.id;
+            options[that.idField] = that.id;
 
+            if (!that._loaded) {
                 that.children._data = undefined;
-                that.children.one(CHANGE, function() {
-                   that._loaded = true;
-                }).query(options);
             }
+
+            that.children.one(CHANGE, function() {
+                that._loaded = true;
+            }).query(options);
         },
 
         parentNode: function() {
@@ -2625,17 +2626,20 @@
 
         remove: function(node){
             var parentNode = node.parentNode(),
-                dataSource = this;
+                dataSource = this,
+                result;
 
             if (parentNode) {
                 dataSource = parentNode.children;
             }
 
-            DataSource.fn.remove.call(dataSource, node);
+            result = DataSource.fn.remove.call(dataSource, node);
 
             if (parentNode && !dataSource.data().length) {
                 parentNode.hasChildren = false;
             }
+
+            return result;
         },
 
         insert: function(index, model) {
