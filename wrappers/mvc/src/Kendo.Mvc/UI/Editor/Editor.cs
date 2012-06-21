@@ -87,9 +87,18 @@ namespace Kendo.Mvc.UI
         {
             var options = new Dictionary<string, object>(Events);
 
-            options["tools"] = DefaultToolGroup.Tools.Select(tool =>
+            options["tools"] = DefaultToolGroup.Tools.Select<IEditorTool, object>(tool =>
             {
-                return tool.Name;
+                var listTool = tool as EditorListTool;
+                if (listTool != null)
+                {
+                    var listToolItems = listTool.Items.Select(item => new { text = item.Text, value = item.Value });
+                    return new { name = listTool.Name, items = listToolItems };
+                }
+                else
+                {
+                    return tool.Name;
+                }
             });
 
             if (Encode.HasValue && !Encode.Value)

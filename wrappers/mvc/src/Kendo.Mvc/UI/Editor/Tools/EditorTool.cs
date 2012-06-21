@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Kendo.Mvc.UI
 {
     public class EditorTool : IEditorTool
