@@ -14,7 +14,7 @@
                 .Group(group => group.Add(item => item.Year))
                 .Sort(sort => sort.Add(item=> item.OrderNumber)))
             .Series(series => {
-                series.Donut("Share", "Resolution", "", "", "VisibleInLegend")
+                series.Donut("Share", "Resolution", visibleInLegendMemberName: "VisibleInLegend")
                       .Padding(10);
             })
             .Tooltip(tooltip => tooltip

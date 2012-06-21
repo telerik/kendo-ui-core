@@ -666,40 +666,13 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Defines bound pie series.
         /// </summary>
-        /// <param name="expressionValue">
-        /// The expression used to extract the series value from the chart model
-        /// </param>
-        public virtual ChartPieSeriesBuilder<TModel> Pie<TValue>(Expression<Func<TModel, TValue>> expressionValue, Expression<Func<TModel, string>> expressionCategory)
-        {
-            ChartPieSeries<TModel, TValue> pieSeries = new ChartPieSeries<TModel, TValue>(Container, expressionValue, expressionCategory, null, null, null);
-
-            Container.Series.Add(pieSeries);
-
-            return new ChartPieSeriesBuilder<TModel>(pieSeries);
-        }
-
-        /// <summary>
-        /// Defines bound pie series.
-        /// </summary>
-        /// <param name="expressionValue">
-        /// The expression used to extract the series value from the chart model
-        /// </param>
-        public virtual ChartPieSeriesBuilder<TModel> Pie<TValue>(Expression<Func<TModel, TValue>> expressionValue, Expression<Func<TModel, string>> expressionCategory, Expression<Func<TModel, string>> expressionColor, Expression<Func<TModel, bool>> expressionExplode)
-        {
-            ChartPieSeries<TModel, TValue> pieSeries = new ChartPieSeries<TModel, TValue>(Container, expressionValue, expressionCategory, expressionColor, expressionExplode, null);
-
-            Container.Series.Add(pieSeries);
-
-            return new ChartPieSeriesBuilder<TModel>(pieSeries);
-        }
-
-        /// <summary>
-        /// Defines bound pie series.
-        /// </summary>
-        /// <param name="expressionValue">
-        /// The expression used to extract the series value from the chart model
-        /// </param>
-        public virtual ChartPieSeriesBuilder<TModel> Pie<TValue>(Expression<Func<TModel, TValue>> expressionValue, Expression<Func<TModel, string>> expressionCategory, Expression<Func<TModel, string>> expressionColor, Expression<Func<TModel, bool>> expressionExplode, Expression<Func<TModel, bool>> expressionVisibleInLegend)
+        public virtual ChartPieSeriesBuilder<TModel> Pie<TValue>(
+            Expression<Func<TModel, TValue>> expressionValue,
+            Expression<Func<TModel, string>> expressionCategory,
+            Expression<Func<TModel, string>> expressionColor = null,
+            Expression<Func<TModel, bool>> expressionExplode = null,
+            Expression<Func<TModel, bool>> expressionVisibleInLegend = null
+            )
         {
             ChartPieSeries<TModel, TValue> pieSeries = new ChartPieSeries<TModel, TValue>(Container, expressionValue, expressionCategory, expressionColor, expressionExplode, expressionVisibleInLegend);
 
@@ -711,27 +684,13 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Defines bound pie series.
         /// </summary>
-        /// <param name="memberName">
-        /// The name of the value member.
-        /// </param>
-        public virtual ChartPieSeriesBuilder<TModel> Pie(string valueMemberName, string categoryMemberName)
-        {
-            return Pie(null, valueMemberName, categoryMemberName, "", "", "");
-        }
-
-        /// <summary>
-        /// Defines bound pie series.
-        /// </summary>
-        /// <param name="valueMemberName">
-        /// The name of the value member.
-        /// </param>
-        /// <param name="categoryMemberName">
-        /// The name of the category member.
-        /// </param>
-        /// <param name="explodeMemberName">
-        /// The name of the explode member.
-        /// </param>
-        public virtual ChartPieSeriesBuilder<TModel> Pie(string valueMemberName, string categoryMemberName, string colorMemberName, string explodeMemberName, string visibleInLegendMemberName)
+        public virtual ChartPieSeriesBuilder<TModel> Pie(
+            string valueMemberName,
+            string categoryMemberName,
+            string colorMemberName = null,
+            string explodeMemberName = null,
+            string visibleInLegendMemberName = null
+            )
         {
             return Pie(null, valueMemberName, categoryMemberName, colorMemberName, explodeMemberName, visibleInLegendMemberName);
         }
@@ -739,19 +698,14 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Defines bound pie series.
         /// </summary>
-        /// <param name="memberType">
-        /// The type of the value member.
-        /// </param>
-        /// <param name="valueMemberName">
-        /// The name of the value member.
-        /// </param>
-        /// <param name="categoryMemberName">
-        /// The name of the category member.
-        /// </param>
-        /// <param name="explodeMemberName">
-        /// The name of the explode member.
-        /// </param>
-        public virtual ChartPieSeriesBuilder<TModel> Pie(Type memberType, string valueMemberName, string categoryMemberName, string colorMemberName, string explodeMemberName, string visibleInLegendMemberName)
+        public virtual ChartPieSeriesBuilder<TModel> Pie(
+            Type memberType,
+            string valueMemberName,
+            string categoryMemberName,
+            string colorMemberName = null,
+            string explodeMemberName = null,
+            string visibleInLegendMemberName = null
+            )
         {
             var valueExpr = BuildMemberExpression(memberType, valueMemberName);
             var categoryExpr = BuildMemberExpression(typeof(string), categoryMemberName);
@@ -813,42 +767,15 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Defines bound donut series.
-        /// </summary>
-        /// <param name="expressionValue">
-        /// The expression used to extract the series value from the chart model
-        /// </param>
-        public virtual ChartDonutSeriesBuilder<TModel> Donut<TValue>(Expression<Func<TModel, TValue>> expressionValue, Expression<Func<TModel, string>> expressionCategory)
-        {
-            ChartDonutSeries<TModel, TValue> donutSeries = new ChartDonutSeries<TModel, TValue>(Container, expressionValue, expressionCategory, null, null, null);
-
-            Container.Series.Add(donutSeries);
-
-            return new ChartDonutSeriesBuilder<TModel>(donutSeries);
-        }
-
-        /// <summary>
-        /// Defines bound donut series.
-        /// </summary>
-        /// <param name="expressionValue">
-        /// The expression used to extract the series value from the chart model
-        /// </param>
-        public virtual ChartDonutSeriesBuilder<TModel> Donut<TValue>(Expression<Func<TModel, TValue>> expressionValue, Expression<Func<TModel, string>> expressionCategory, Expression<Func<TModel, string>> expressionColor, Expression<Func<TModel, bool>> expressionExplode)
-        {
-            ChartDonutSeries<TModel, TValue> donutSeries = new ChartDonutSeries<TModel, TValue>(Container, expressionValue, expressionCategory, expressionColor, expressionExplode, null);
-
-            Container.Series.Add(donutSeries);
-
-            return new ChartDonutSeriesBuilder<TModel>(donutSeries);
-        }
-
-        /// <summary>
         /// Defines bound pie series.
         /// </summary>
-        /// <param name="expressionValue">
-        /// The expression used to extract the series value from the chart model
-        /// </param>
-        public virtual ChartDonutSeriesBuilder<TModel> Donut<TValue>(Expression<Func<TModel, TValue>> expressionValue, Expression<Func<TModel, string>> expressionCategory, Expression<Func<TModel, string>> expressionColor, Expression<Func<TModel, bool>> expressionExplode, Expression<Func<TModel, bool>> expressionVisibleInLegend)
+        public virtual ChartDonutSeriesBuilder<TModel> Donut<TValue>(
+            Expression<Func<TModel, TValue>> expressionValue,
+            Expression<Func<TModel, string>> expressionCategory,
+            Expression<Func<TModel, string>> expressionColor = null,
+            Expression<Func<TModel, bool>> expressionExplode = null,
+            Expression<Func<TModel, bool>> expressionVisibleInLegend = null
+            )
         {
             ChartDonutSeries<TModel, TValue> donutSeries = new ChartDonutSeries<TModel, TValue>(Container, expressionValue, expressionCategory, expressionColor, expressionExplode, expressionVisibleInLegend);
 
@@ -860,47 +787,28 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Defines bound donut series.
         /// </summary>
-        /// <param name="memberName">
-        /// The name of the value member.
-        /// </param>
-        public virtual ChartDonutSeriesBuilder<TModel> Donut(string valueMemberName, string categoryMemberName)
-        {
-            return Donut(null, valueMemberName, categoryMemberName, "", "", "");
-        }
-
-        /// <summary>
-        /// Defines bound donut series.
-        /// </summary>
-        /// <param name="valueMemberName">
-        /// The name of the value member.
-        /// </param>
-        /// <param name="categoryMemberName">
-        /// The name of the category member.
-        /// </param>
-        /// <param name="explodeMemberName">
-        /// The name of the explode member.
-        /// </param>
-        public virtual ChartDonutSeriesBuilder<TModel> Donut(string valueMemberName, string categoryMemberName, string colorMemberName, string explodeMemberName, string visibleInLegendMemberName)
+        public virtual ChartDonutSeriesBuilder<TModel> Donut(
+            string valueMemberName,
+            string categoryMemberName,
+            string colorMemberName = null,
+            string explodeMemberName = null,
+            string visibleInLegendMemberName = null
+            )
         {
             return Donut(null, valueMemberName, categoryMemberName, colorMemberName, explodeMemberName, visibleInLegendMemberName);
         }
 
         /// <summary>
-        /// Defines bound pie series.
+        /// Defines bound donut series.
         /// </summary>
-        /// <param name="memberType">
-        /// The type of the value member.
-        /// </param>
-        /// <param name="valueMemberName">
-        /// The name of the value member.
-        /// </param>
-        /// <param name="categoryMemberName">
-        /// The name of the category member.
-        /// </param>
-        /// <param name="explodeMemberName">
-        /// The name of the explode member.
-        /// </param>
-        public virtual ChartDonutSeriesBuilder<TModel> Donut(Type memberType, string valueMemberName, string categoryMemberName, string colorMemberName, string explodeMemberName, string visibleInLegendMemberName)
+        public virtual ChartDonutSeriesBuilder<TModel> Donut(
+            Type memberType,
+            string valueMemberName,
+            string categoryMemberName,
+            string colorMemberName,
+            string explodeMemberName,
+            string visibleInLegendMemberName
+            )
         {
             var valueExpr = BuildMemberExpression(memberType, valueMemberName);
             var categoryExpr = BuildMemberExpression(typeof(string), categoryMemberName);
