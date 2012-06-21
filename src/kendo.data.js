@@ -2624,14 +2624,28 @@
         },
 
         remove: function(node){
-            var parent = node.parentNode(),
+            var parentNode = node.parentNode(),
                 dataSource = this;
 
-            if (parent) {
-                dataSource = parent.children;
+            if (parentNode) {
+                dataSource = parentNode.children;
             }
 
             DataSource.fn.remove.call(dataSource, node);
+
+            if (parentNode && !dataSource.data().length) {
+                parentNode.hasChildren = false;
+            }
+        },
+
+        insert: function(index, model) {
+            var parentNode = this._parent();
+
+            if (parentNode) {
+                parentNode.hasChildren = true;
+            }
+
+            return DataSource.fn.insert.call(this, index, model);
         },
 
         getByUid: function(uid) {

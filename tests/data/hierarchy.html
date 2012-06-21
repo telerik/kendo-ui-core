@@ -609,6 +609,42 @@
                 equal(counter, 3);
             });
 
+            test("adding items to child dataSource modifies hasChildren state", function() {
+                var dataSource = new HierarchicalDataSource({
+                    data: [
+                        { id: 1, text: "foo" }
+                    ]
+                });
+
+                dataSource.read();
+
+                var item = dataSource.get(1);
+
+                item.children.add({ id: 2 });
+
+                ok(item.hasChildren);
+            });
+
+            test("removing items from child dataSource modifies hasChildren state", function() {
+                var dataSource = new HierarchicalDataSource({
+                    data: [
+                        { id: 1, text: "foo", items: [
+                            { id: 2, text: "bar" }
+                        ] }
+                    ]
+                });
+
+                dataSource.read();
+
+                var root = dataSource.get(1);
+
+                root.children.read();
+
+                dataSource.remove(root.children.get(2));
+
+                ok(!root.hasChildren);
+            });
+
             test("infer from list", function() {
                 var list = $("<ul><li>foo</li><li>bar</li></ul>"),
                     dataSource = HierarchicalDataSource.create({
