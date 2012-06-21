@@ -460,11 +460,17 @@
             element = that.element;
             options = that.options;
 
+            inferred = element.is("ul") || element.hasClass(KTREEVIEW);
+
+            if (inferred) {
+                options.dataSource.list = element.is("ul") ? element : element.children("ul");
+            }
+
             that._animation();
 
             that._accessors();
 
-            that._dataSource();
+            that._dataSource(inferred);
 
             if (options.template && typeof options.template == "string") {
                 options.template = template(options.template);
@@ -476,8 +482,6 @@
                 item: that._itemTemplate(),
                 loading: that._loadingTemplate()
             };
-
-            inferred = element.is("ul") || element.hasClass(KTREEVIEW);
 
             // render treeview if it's not already rendered
             if (!element.hasClass(KTREEVIEW)) {
@@ -508,7 +512,25 @@
             if (!inferred) {
                 that._progress(true);
                 that.dataSource.read();
+            } else {
+                that._attachUids();
             }
+        },
+
+        _attachUids: function(root, dataSource) {
+            var that = this,
+                data,
+                uidAttr = kendo.attr("uid");
+
+            root = root || that.root;
+            dataSource = dataSource || that.dataSource;
+
+            data = dataSource.data();
+
+            root.children("li").each(function(index, item) {
+                item = $(item).attr(uidAttr, data[index].uid);
+                that._attachUids(item.children("ul"), data[index].children);
+            });
         },
 
         _animation: function() {
@@ -522,10 +544,18 @@
             }
         },
 
-        _dataSource: function() {
+        _dataSource: function(silentRead) {
             var that = this,
                 options = that.options,
                 dataSource = options.dataSource;
+
+            function recursiveRead(data) {
+                for (var i = 0; i < data.length; i++) {
+                    data[i].children.read();
+
+                    recursiveRead(data[i].children.data());
+                }
+            }
 
             dataSource = isArray(dataSource) ? { data: dataSource } : dataSource;
 
@@ -533,12 +563,18 @@
                 that.dataSource.unbind(CHANGE, that._refreshHandler);
             } else {
                 that._refreshHandler = proxy(that.refresh, that);
+            }
 
-                if ($.isPlainObject(dataSource)) {
-                    dataSource = new HierarchicalDataSource(dataSource);
-                }
+            if (!dataSource.fields) {
+                dataSource.fields = [ { field: "text" } ];
+            }
 
-                that.dataSource = dataSource;
+            that.dataSource = HierarchicalDataSource.create(dataSource);
+
+            if (silentRead) {
+                that.dataSource.read();
+
+                recursiveRead(that.dataSource.data());
             }
 
             that.dataSource.bind(CHANGE, that._refreshHandler);

@@ -655,6 +655,29 @@
                 equal(data[0].text, "bar");
                 equal(data[1].text, "foo");
             });
+
+            test("API methods work after initialization from rendered treeview", function() {
+                treeview = $('<div class="k-widget k-treeview k-reset" id="treeview">' +
+                    '<ul class="k-group">' +
+                        '<li class="k-item k-first">' +
+                            '<div class="k-top k-top"><span class="k-in">foo</span></div>' +
+                        '</li>' +
+                        '<li class="k-item k-last">' +
+                            '<div class="k-top k-bot"><span class="k-in">bar</span></div>' +
+                        '</li>' +
+                    '</ul>' +
+                '</div>').kendoTreeView();
+
+                treeviewObject = treeview.data("kendoTreeView");
+
+                treeviewObject.insertAfter(treeviewObject.findByText("foo"), treeviewObject.findByText("bar"));
+
+                var data = treeviewObject.dataSource.data();
+
+                equal(data.length, 2);
+                equal(data[0].text, "bar");
+                equal(data[1].text, "foo");
+            });
         </script>
 
         <div id="qunit-fixture"> </div>

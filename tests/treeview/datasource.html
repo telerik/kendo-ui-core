@@ -344,6 +344,36 @@
                 equal(subitems.eq(1).text(), "bar");
             });
 
+            function treeviewFromHtml(html) {
+                treeview = $(html).appendTo("body").kendoTreeView();
+
+                treeviewObject = treeview.data("kendoTreeView");
+            }
+
+            test("initializing from list attaches uids", function() {
+                treeviewFromHtml("<ul><li>foo</li></ul>");
+
+                equal(treeview.find(".k-item").attr(kendo.attr("uid")), treeviewObject.dataSource.data()[0].uid);
+            });
+
+            test("initializing from list reads all levels", function() {
+                treeviewFromHtml("<ul><li>foo<ul><li>bar</li></ul></li></ul>");
+
+                var children = treeviewObject.dataSource.data()[0].children;
+
+                equal(children.data().length, 1);
+            });
+
+            test("initializing from list attaches uids to subgroup nodes", function() {
+                treeviewFromHtml("<ul><li>foo<ul><li>bar</li></ul></li></ul>");
+
+                var children = treeviewObject.dataSource.data()[0].children;
+
+                var child = children.data()[0];
+
+                equal(treeview.find(".k-item:last").attr(kendo.attr("uid")), child.uid);
+            });
+
             test("Dragging to root level between treeviews", function() {
                 var tree1 = $("<div />").appendTo("body").kendoTreeView([
                         { text: "foo" }

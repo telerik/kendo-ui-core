@@ -2672,7 +2672,9 @@
             textChild = item[0].firstChild;
             children = item.children();
 
-            record[firstField.field] = textChild.nodeType == 3 ? textChild.nodeValue : children.eq(0).text();
+            if (textChild) {
+                record[firstField.field] = textChild.nodeType == 3 ? textChild.nodeValue : children.eq(0).text();
+            }
 
             list = children.filter("ul");
 
