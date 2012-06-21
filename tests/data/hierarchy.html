@@ -669,6 +669,33 @@
                 equal(children[0].text, "bar");
             });
 
+            test("infer of url / spriteCssClass / imageUrl fields", function() {
+                var list = $("<ul><li>" +
+                        "<span class='k-sprite spriteClass'></span>" +
+                        "<img class='k-image' src='image.png' />" +
+                        "<a href='http://kendoui.com/'>foo</a>" +
+                    "</li></ul>"),
+                    dataSource = HierarchicalDataSource.create({
+                        list: list,
+                        fields: [
+                            { field: "text" },
+                            { field: "url" },
+                            { field: "spriteCssClass" },
+                            { field: "imageUrl" }
+                        ]
+                    });
+
+                dataSource.read();
+
+                var data = dataSource.data();
+
+                equal(data.length, 1);
+                equal(data[0].text, "foo");
+                equal(data[0].url, "http://kendoui.com/");
+                equal(data[0].spriteCssClass, "spriteClass");
+                equal(data[0].imageUrl, "image.png");
+            });
+
             test("infer with custom fields", function() {
                 var list = $("<ul><li>foo</li></ul>"),
                     dataSource = HierarchicalDataSource.create({

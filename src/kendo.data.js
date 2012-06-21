@@ -2660,9 +2660,13 @@
             length,
             data = [],
             record,
-            firstField = fields[0],
+            textField = fields[0].field,
+            urlField = fields[1] && fields[1].field,
+            spriteCssClassField = fields[2] && fields[2].field,
+            imageUrlField = fields[3] && fields[3].field,
             item,
             textChild,
+            className,
             children;
 
         for (idx = 0, length = items.length; idx < length; idx++) {
@@ -2673,7 +2677,20 @@
             children = item.children();
 
             if (textChild) {
-                record[firstField.field] = textChild.nodeType == 3 ? textChild.nodeValue : children.eq(0).text();
+                record[textField] = textChild.nodeType == 3 ? textChild.nodeValue : children.filter(":not(ul)").text();
+            }
+
+            if (urlField) {
+                record[urlField] = children.filter("a").attr("href");
+            }
+
+            if (imageUrlField) {
+                record[imageUrlField] = children.filter("img").attr("src");
+            }
+
+            if (spriteCssClassField) {
+                className = children.filter(".k-sprite").prop("className");
+                record[spriteCssClassField] = className && $.trim(className.replace("k-sprite", ""));
             }
 
             list = children.filter("ul");

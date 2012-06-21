@@ -566,7 +566,12 @@
             }
 
             if (!dataSource.fields) {
-                dataSource.fields = [ { field: "text" } ];
+                dataSource.fields = [
+                    { field: "text" },
+                    { field: "url" },
+                    { field: "spriteCssClass" },
+                    { field: "imageUrl" }
+                ];
             }
 
             that.dataSource = HierarchicalDataSource.create(dataSource);
