@@ -3837,7 +3837,7 @@
 
                         for (i = 0; i < pointsLength; i++) {
                             currentPoint = points[i];
-                            if (currentPoint.value.visibleInLegend !== false) {
+                            if (currentPoint && currentPoint.value.visibleInLegend !== false) {
                                 data.push({
                                     name: currentPoint.value.category,
                                     color: currentPoint.options.color
