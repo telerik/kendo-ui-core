@@ -71,11 +71,14 @@
     .km-ios .km-list .album-set a {
     	background-color: #bbb;
     }
-    .km-ios #scrollview-home .km-navbar,
-    .km-ios #scrollview-home .km-navbar .km-button {
-        background: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(255, 255, 255, 0.5)), color-stop(0.06, rgba(255, 255, 255, 0.45)), color-stop(0.5, rgba(255, 255, 255, 0.2)), color-stop(0.5, rgba(255, 255, 255, 0.15)), color-stop(1, rgba(100, 100, 100, 0))), url(../../content/shared/images/patterns/pattern5.png);
-        background: -moz-linear-gradient(center top , rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.45) 6%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.15) 50%, rgba(100, 100, 100, 0)), url(../../content/shared/images/patterns/pattern5.png);
+    .km-ios #scrollview-home .km-navbar {
+        background: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(255,255,255,.5)), color-stop(.06, rgba(255,255,255,.45)), color-stop(.5, rgba(255,255,255,.2)), color-stop(.5, rgba(255,255,255,.15)), color-stop(1, rgba(100,100,100,0))), url(../../content/shared/images/patterns/pattern5.png);
+        background: -moz-linear-gradient(top, rgba(255,255,255,.5), rgba(255,255,255,.45) 6%, rgba(255,255,255,.2) 50%, rgba(255,255,255,.15) 50%, rgba(100,100,100,0)), url(../../content/shared/images/patterns/pattern5.png);
 	}
+    .km-ios #scrollview-home .km-navbar .km-button
+    {
+        background-color: #000;
+    }
 	.km-ios #scrollview-home .km-content {
         background: url(../../content/shared/images/patterns/pattern6.png);
         box-shadow: inset 0 0 30px #000;
@@ -83,9 +86,13 @@
 	
 	.km-ios #scrollview-container .km-pages .km-current-page {
 		background-color: #ff009c;
-		box-shadow: 0 -1px 1px rgba(0, 0, 0, .9);
 	}
 	.km-ios #scrollview-container .km-pages {
 		padding-top: 18px;
 	}
+    .km-ios #scrollview-home .km-view-title
+    {
+        color: #fff;
+        text-shadow: 0 -1px rgba(0,0,0,.5);
+    }
 </style>
