@@ -1,0 +1,162 @@
+namespace Kendo.Mvc.UI
+{
+    using System;
+    using System.Linq.Expressions;
+    using Kendo.Mvc.Extensions;
+    using Kendo.Mvc.Resources;
+    using System.Collections;
+
+    /// <summary>
+    /// Represents chart bubble series
+    /// </summary>
+    /// <typeparam name="TModel">The Chart model type</typeparam>
+    /// <typeparam name="TValue">The value type</typeparam>
+    public class ChartBubbleSeries<TModel, TXValue, TYValue, TSizeValue> : ChartScatterSeries<TModel, TXValue, TYValue>, IChartBubbleSeries where TModel : class
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ChartBubbleSeries{TModel, TValue}" /> class.
+        /// </summary>
+        /// <param name="chart">The chart.</param>
+        /// <param name="expressionXValue">The X expression.</param>
+        /// <param name="expressionYValue">The Y expression.</param>
+        public ChartBubbleSeries(
+            Chart<TModel> chart,
+            Expression<Func<TModel, TXValue>> xValueExpression,
+            Expression<Func<TModel, TYValue>> yValueExpression,
+            Expression<Func<TModel, TSizeValue>> sizeExpression,
+            Expression<Func<TModel, string>> categoryExpression,
+            Expression<Func<TModel, string>> colorExpression,
+            Expression<Func<TModel, bool>> visibleInLegendExpression)
+            : base(chart, xValueExpression, yValueExpression)
+        {
+            if (typeof(TModel).IsPlainType() && !sizeExpression.IsBindable())
+            {
+                throw new InvalidOperationException(TextResource.MemberExpressionRequired);
+            }
+
+            SizeMember = sizeExpression.MemberWithoutInstance();
+
+            if (categoryExpression != null)
+            {
+                CategoryMember = categoryExpression.MemberWithoutInstance();
+            }
+
+            if (colorExpression != null)
+            {
+                ColorMember = colorExpression.MemberWithoutInstance();
+            }
+
+            if (visibleInLegendExpression != null)
+            {
+                VisibleInLegendMember = visibleInLegendExpression.MemberWithoutInstance();
+            }
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ChartBubbleSeries{TModel, TValue}" /> class.
+        /// </summary>
+        /// <param name="chart">The chart.</param>
+        /// <param name="data">The data.</param>
+        public ChartBubbleSeries(Chart<TModel> chart, IEnumerable data)
+            : base(chart, data)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ChartBubbleSeries{TModel, TValue}" /> class.
+        /// </summary>
+        /// <param name="chart">The chart.</param>
+        public ChartBubbleSeries(Chart<TModel> chart)
+            : base(chart)
+        {
+        }
+
+        /// <summary>
+        /// Gets the Size data member of the series.
+        /// </summary>
+        public string SizeMember
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets the Category data member of the series.
+        /// </summary>
+        public string CategoryMember
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets the Color data member of the series.
+        /// </summary>
+        public string ColorMember
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets the VisibleInLegend data member of the series.
+        /// </summary>
+        public string VisibleInLegendMember
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets the minimum bubble size of the series.
+        /// </summary>
+        public int? MinSize
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets the maximum bubble size of the series.
+        /// </summary>
+        public int? MaxSize
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets the negative value bubbles options.
+        /// </summary>
+        public ChartNegativeValueSettings NegativeValues
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets or sets the bubble border.
+        /// </summary>
+        public ChartElementBorder Border
+        {
+            get;
+            set;
+        }
+
+        protected override void Initialize()
+        {
+            base.Initialize();
+
+            NegativeValues = new ChartNegativeValueSettings();
+            Border = new ChartElementBorder();
+        }
+
+        /// <summary>
+        /// Creates a serializer for the series
+        /// </summary>
+        public override IChartSerializer CreateSerializer()
+        {
+            return new ChartBubbleSeriesSerializer(this);
+        }
+    }
+}

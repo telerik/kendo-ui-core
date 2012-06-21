@@ -77,6 +77,9 @@
     <Compile Include="Areas\aspx\ASPXAreaRegistration.cs" />
     <Compile Include="Areas\razor\RazorAreaRegistration.cs" />
     <Compile Include="Controllers\DataViz\Bar_Charts\Date_AxisController.cs" />
+    <Compile Include="Controllers\DataViz\Bubble_Charts\IndexController.cs" />
+    <Compile Include="Controllers\DataViz\Bubble_Charts\Local_DataController.cs" />
+    <Compile Include="Controllers\DataViz\Bubble_Charts\Remote_DataController.cs" />
     <Compile Include="Controllers\DataViz\Donut_Charts\IndexController.cs" />
     <Compile Include="Controllers\DataViz\Donut_Charts\Local_DataController.cs" />
     <Compile Include="Controllers\DataViz\Donut_Charts\Donut_LabelsController.cs" />
@@ -246,6 +249,8 @@
     <Compile Include="Helpers\HyphenatedRouteHandler.cs" />
     <Compile Include="Models\ClientOrderViewModel.cs" />
     <Compile Include="Models\ClientEmployeeViewModel.cs" />
+    <Compile Include="Models\CrimeData.cs" />
+    <Compile Include="Models\JobGrowth.cs" />
     <Compile Include="Models\ScreenResolution.cs" />
     <Compile Include="Models\CustomValidationProductViewModel.cs" />
     <Compile Include="Models\PagerViewModel.cs" />
@@ -291,6 +296,9 @@
     <Content Include="Areas\aspx\Views\dataviz\bar_charts\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\bar_charts\local_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\bar_charts\remote_data.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\bubble_charts\index.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\bubble_charts\local_data.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\bubble_charts\remote_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\donut_charts\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\donut_charts\local_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\donut_charts\donut_labels.aspx" />
@@ -691,6 +699,9 @@
     <Content Include="Areas\aspx\Views\web\grid\EditorTemplates\ClientEmployee.ascx" />
     <Content Include="Areas\razor\Views\web\tabstrip\animation.cshtml" />
     <Content Include="Areas\aspx\Views\web\tabstrip\animation.aspx" />
+    <Content Include="Areas\razor\Views\dataviz\bubble_charts\index.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\bubble_charts\local_data.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\bubble_charts\remote_data.cshtml" />
     <Content Include="Areas\razor\Views\web\editor\globalization.cshtml" />
     <Content Include="Areas\aspx\Views\web\editor\globalization.aspx" />
     <None Include="Models\Northwind.dbml">

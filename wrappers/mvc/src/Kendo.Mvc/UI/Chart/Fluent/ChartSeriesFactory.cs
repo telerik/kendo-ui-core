@@ -573,6 +573,97 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Defines bound bubble series.
+        /// </summary>
+        public virtual ChartBubbleSeriesBuilder<TModel> Bubble<TXValue, TYValue, TSizeValue>(
+            Expression<Func<TModel, TXValue>> xValueExpression,
+            Expression<Func<TModel, TYValue>> yValueExpression,
+            Expression<Func<TModel, TSizeValue>> sizeExpression,
+            Expression<Func<TModel, string>> categoryExpression = null,
+            Expression<Func<TModel, string>> colorExpression = null,
+            Expression<Func<TModel, bool>> visibleInLegendExpression = null
+            )
+        {
+            var bubbleSeries = new ChartBubbleSeries<TModel, TXValue, TYValue, TSizeValue>(
+                Container, xValueExpression, yValueExpression, sizeExpression,
+                categoryExpression, colorExpression, visibleInLegendExpression
+            );
+
+            Container.Series.Add(bubbleSeries);
+
+            return new ChartBubbleSeriesBuilder<TModel>(bubbleSeries);
+        }
+
+        /// <summary>
+        /// Defines bound bubble series.
+        /// </summary>
+        public virtual ChartBubbleSeriesBuilder<TModel> Bubble(
+            string xMemberName,
+            string yMemberName,
+            string sizeMemberName,
+            string categoryMemberName = null,
+            string colorMemberName = null,
+            string visibleInLegendMemberName = null)
+        {
+            return Bubble(
+                null, xMemberName, yMemberName, sizeMemberName,
+                categoryMemberName, colorMemberName, visibleInLegendMemberName
+            );
+        }
+
+        /// <summary>
+        /// Defines bound bubble series.
+        /// </summary>
+        public virtual ChartBubbleSeriesBuilder<TModel> Bubble(
+            Type memberType,
+            string xMemberName,
+            string yMemberName,
+            string sizeMemberName,
+            string categoryMemberName = null,
+            string colorMemberName = null,
+            string visibleInLegendMemberName = null)
+        {
+            var expressionX = BuildMemberExpression(memberType, xMemberName);
+            var expressionY = BuildMemberExpression(memberType, yMemberName);
+            var expressionSize = BuildMemberExpression(memberType, sizeMemberName);
+            var expressionCategory = BuildMemberExpression(memberType, categoryMemberName);
+            var expressionColor = BuildMemberExpression(memberType, colorMemberName);
+            var expressionVisibleInLegend = BuildMemberExpression(memberType, visibleInLegendMemberName);
+
+            var seriesType = typeof(ChartBubbleSeries<,,,>).MakeGenericType(
+                typeof(TModel), expressionX.Body.Type, expressionY.Body.Type, expressionSize.Body.Type
+            );
+            var series = (IChartBubbleSeries) BuildSeries(
+                seriesType, expressionX, expressionY, expressionSize,
+                expressionCategory, expressionColor, expressionVisibleInLegend
+            );
+
+            if (!series.Name.HasValue())
+            {
+                series.Name = xMemberName.AsTitle() + ", " + yMemberName.AsTitle();
+            }
+
+            Container.Series.Add((ChartSeriesBase<TModel>)series);
+
+            return new ChartBubbleSeriesBuilder<TModel>(series);
+        }
+
+        /// <summary>
+        /// Defines bubble series bound to inline data.
+        /// </summary>
+        /// <param name="data">
+        /// The data to bind to
+        /// </param>
+        public virtual ChartBubbleSeriesBuilder<TModel> Bubble(IEnumerable data)
+        {
+            var bubbleSeries = new ChartBubbleSeries<TModel, object, object, object>(Container, data);
+
+            Container.Series.Add(bubbleSeries);
+
+            return new ChartBubbleSeriesBuilder<TModel>(bubbleSeries);
+        }
+
+        /// <summary>
         /// Defines bound pie series.
         /// </summary>
         /// <param name="expressionValue">

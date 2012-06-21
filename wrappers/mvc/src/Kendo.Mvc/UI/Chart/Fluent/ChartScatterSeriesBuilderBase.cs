@@ -2,7 +2,6 @@ namespace Kendo.Mvc.UI.Fluent
 {
     using System;
     using System.ComponentModel;
-    using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.UI;
 
     /// <summary>
@@ -42,7 +41,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TBuilder Labels(Action<ChartPointLabelsBuilder> configurator)
         {
-
             configurator(new ChartPointLabelsBuilder(Series.Labels));
 
             return this as TBuilder;
@@ -87,9 +85,8 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public TBuilder Markers(Action<ChartMarkersBuilder> configurator)
+        public virtual TBuilder Markers(Action<ChartMarkersBuilder> configurator)
         {
-
             configurator(new ChartMarkersBuilder(Series.Markers));
 
             return this as TBuilder;
@@ -110,7 +107,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public TBuilder Markers(bool visible)
+        public virtual TBuilder Markers(bool visible)
         {
             Series.Markers.Visible = visible;
 
