@@ -96,7 +96,7 @@
                             options = extend({ cssClass: "k-i-custom", type: "button", tooltip: "" }, currentTool);
 
                             if (options.name) {
-                                options.cssClass = "k-" + options.name;
+                                options.cssClass = "k-" + (options.name == "custom" ? "i-custom" : options.name);
                             }
 
                             if (!options.template) {
