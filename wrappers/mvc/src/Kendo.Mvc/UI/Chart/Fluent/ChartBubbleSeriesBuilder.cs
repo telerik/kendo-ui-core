@@ -12,7 +12,7 @@ namespace Kendo.Mvc.UI.Fluent
         where T : class
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ChartScatterSeriesBuilder{T}"/> class.
+        /// Initializes a new instance of the <see cref="ChartBubbleSeriesBuilder{T}"/> class.
         /// </summary>
         /// <param name="series">The series.</param>
         public ChartBubbleSeriesBuilder(IChartBubbleSeries series)
@@ -21,7 +21,8 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Configures the scatter chart labels.
+        /// Configures the bubble chart behavior for negative values.
+        /// By default negative values are not visible.
         /// </summary>
         /// <param name="configurator">The configuration action.</param>
         /// <example>
@@ -29,9 +30,8 @@ namespace Kendo.Mvc.UI.Fluent
         /// &lt;%= Html.Kendo().Chart()
         ///            .Name("Chart")
         ///            .Series(series => series
-        ///                .Scatter(s => s.x, s => s.y)
-        ///                .Labels(labels => labels
-        ///                    .Position(ChartBarLabelsPosition.Above)
+        ///                .Bubble(s => s.x, s => s.y, s => s.size)
+        ///                .NegativeValues(n => n
         ///                    .Visible(true)
         ///                );
         ///             )
@@ -46,17 +46,16 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Sets the markers border
+        /// Sets the bubble border
         /// </summary>
-        /// <param name="width">The markers border width.</param>
-        /// <param name="color">The markers border color (CSS syntax).</param>
-        /// <param name="dashType">The markers border dash type.</param>
+        /// <param name="width">The bubble border width.</param>
+        /// <param name="color">The bubble border color (CSS syntax).</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
         ///           .Series(series => series
-        ///                .Bubble(s => s.Sales)
+        ///                .Bubble(s => s.x, s => s.y, s => s.size)
         ///                .Border(1, "Red");
         ///           )
         ///           .Render();

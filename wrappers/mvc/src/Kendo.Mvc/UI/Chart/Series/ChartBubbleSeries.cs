@@ -10,15 +10,21 @@ namespace Kendo.Mvc.UI
     /// Represents chart bubble series
     /// </summary>
     /// <typeparam name="TModel">The Chart model type</typeparam>
-    /// <typeparam name="TValue">The value type</typeparam>
+    /// <typeparam name="TXValue">The X value type</typeparam>
+    /// <typeparam name="TYValue">The Y value type</typeparam>
+    /// <typeparam name="TSizeValue">The Size value type</typeparam>
     public class ChartBubbleSeries<TModel, TXValue, TYValue, TSizeValue> : ChartScatterSeries<TModel, TXValue, TYValue>, IChartBubbleSeries where TModel : class
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ChartBubbleSeries{TModel, TValue}" /> class.
+        /// Initializes a new instance of the <see cref="ChartBubbleSeries{TModel, TXValue, TYValue, TSizeValue}" /> class.
         /// </summary>
         /// <param name="chart">The chart.</param>
-        /// <param name="expressionXValue">The X expression.</param>
-        /// <param name="expressionYValue">The Y expression.</param>
+        /// <param name="xValueExpression">The X expression.</param>
+        /// <param name="yValueExpression">The Y expression.</param>
+        /// <param name="sizeExpression">The Size expression.</param>
+        /// <param name="categoryExpression">The Category expression.</param>
+        /// <param name="colorExpression">The Color expression.</param>
+        /// <param name="visibleInLegendExpression">The VisibleInLegend expression.</param>
         public ChartBubbleSeries(
             Chart<TModel> chart,
             Expression<Func<TModel, TXValue>> xValueExpression,
@@ -53,7 +59,7 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ChartBubbleSeries{TModel, TValue}" /> class.
+        /// Initializes a new instance of the <see cref="ChartBubbleSeries{TModel, TXValue, TYValue, TSizeValue}" /> class.
         /// </summary>
         /// <param name="chart">The chart.</param>
         /// <param name="data">The data.</param>
@@ -63,7 +69,7 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ChartBubbleSeries{TModel, TValue}" /> class.
+        /// Initializes a new instance of the <see cref="ChartBubbleSeries{TModel, TXValue, TYValue, TSizeValue}" /> class.
         /// </summary>
         /// <param name="chart">The chart.</param>
         public ChartBubbleSeries(Chart<TModel> chart)

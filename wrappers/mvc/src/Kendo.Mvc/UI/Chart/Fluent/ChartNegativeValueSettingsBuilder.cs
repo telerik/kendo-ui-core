@@ -8,24 +8,30 @@ namespace Kendo.Mvc.UI.Fluent
         private readonly ChartNegativeValueSettings negativeValues;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ChartLineBuilder" /> class.
+        /// Initializes a new instance of the <see cref="ChartNegativeValueSettingsBuilder" /> class.
         /// </summary>
-        /// <param name="chartLine">The chart line.</param>
+        /// <param name="negativeValues">The negative value settings.</param>
         public ChartNegativeValueSettingsBuilder(ChartNegativeValueSettings negativeValues)
         {
             this.negativeValues = negativeValues;
         }
 
         /// <summary>
-        /// Sets the line color
+        /// Sets the color for bubbles representing negative values
         /// </summary>
-        /// <param name="color">The line color (CSS format).</param>
+        /// <param name="color">The bubble color (CSS format).</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
-        ///           .CategoryAxis(axis => axis.MajorGridLines(lines => lines.Color("#f00")))
-        ///           .Render();
+        ///           .Series(series => series
+        ///               .Bubble(s => s.x, s => s.y, s => s.size)
+        ///               .NegativeValues(n => n
+        ///                   .Visible(true)
+        ///                   .Color("#ff0000")
+        ///               );
+        ///            )
+        ///            .Render();
         /// %&gt;
         /// </code>
         /// </example>
@@ -36,14 +42,19 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Sets the line color
+        /// Sets the visibility for bubbles representing negative values
         /// </summary>
-        /// <param name="color">The line color (CSS format).</param>
+        /// <param name="visible">The visibility for bubbles representing negative values.</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;% Html.Kendo().Chart()
         ///           .Name("Chart")
-        ///           .CategoryAxis(axis => axis.MajorGridLines(lines => lines.Color("#f00")))
+        ///           .Series(series => series
+        ///               .Bubble(s => s.x, s => s.y, s => s.size)
+        ///               .NegativeValues(n => n
+        ///                   .Visible(true)
+        ///               );
+        ///            )
         ///           .Render();
         /// %&gt;
         /// </code>

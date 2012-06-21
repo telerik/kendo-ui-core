@@ -1,12 +1,12 @@
 namespace Kendo.Mvc.UI
 {
     /// <summary>
-    /// Represents settings for bubblechart negative values
+    /// Represents settings for bubbles representing negative values
     /// </summary>
     public class ChartNegativeValueSettings
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="NegativeValues" /> class.
+        /// Initializes a new instance of the <see cref="ChartNegativeValueSettings" /> class.
         /// </summary>
         public ChartNegativeValueSettings()
         {
