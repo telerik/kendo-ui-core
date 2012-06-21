@@ -283,87 +283,121 @@ namespace("mvc", function() {
         deployFiles(cultures);
     });
 
+    desc("Build wrappers project");
+    task("build-wrappers-project", ["merge-scripts"], function() {
+        kendoBuild.msBuild(MVC_WRAPPERS_PROJECT, [ "/t:Clean;Build", "/p:Configuration=Release" ], complete);
+    }, true);
+
+    desc("Build wrappers demo project");
+    task("build-wrappers-demo-project", ["mvc:build-satellite-assemblies"], function() {
+        kendoBuild.msBuild(MVC_WRAPPERS_DEMO_PROJECT, [ "/t:Clean;Build", "/p:Configuration=Release" ], complete);
+    }, true);
+
+    desc("Build satellite assemblies");
+    task("build-satellite-assemblies", ["mvc:build-wrappers-project"], function() {
+        var numberOfCultures = 0;
+        var filesPath = path.join(MVC_WRAPPERS_PATH, "src", "Kendo.Mvc");
+
+        kendoBuild.processDirs(path.join(filesPath, "bin", "Release"), function(culture){
+            numberOfCultures ++;
+
+            kendoBuild.spawnSilent("al", [
+                "/t:lib",
+                "/embed:" + path.join("obj", "Release", "Kendo.Mvc.Resources.Messages." + culture + ".resources"),
+                "/culture:" + culture,
+                "/out:" + path.join("bin", "Release", culture, "Kendo.Mvc.resources.dll"),
+                "/template:" + path.join("bin", "Release", "Kendo.Mvc.dll"),
+                "/keyfile:" + path.join("..", "shared", "Telerik.Web.snk")
+            ], {
+                cwd: path.resolve(filesPath) ,
+            }, function() {
+                numberOfCultures --;
+                if (numberOfCultures <= 0) {
+                    complete();
+                }
+            });
+        });
+    }, true);
+
     desc("Build release version");
-    task("bundle", ["merge-scripts"], function() {
-        kendoBuild.msBuild(MVC_WRAPPERS_PROJECT, [ "/t:Clean;Build", "/p:Configuration=Release" ],
-            function() {
-                kendoBuild.msBuild(MVC_WRAPPERS_DEMO_PROJECT, [ "/t:Clean;Build", "/p:Configuration=Release" ],
-                    function() {
-                        var projectPath = path.join(MVC_WRAPPERS_PATH, "src", "Kendo.Mvc"),
-                            examplesPath = path.join(MVC_WRAPPERS_PATH, "demos", "Kendo.Mvc.Examples"),
-                            binariesPath = path.join(projectPath, "bin", "Release");
+    task("bundle", ["mvc:build-wrappers-demo-project"], function() {
+        var projectPath = path.join(MVC_WRAPPERS_PATH, "src", "Kendo.Mvc"),
+        examplesPath = path.join(MVC_WRAPPERS_PATH, "demos", "Kendo.Mvc.Examples"),
+        binariesPath = path.join(projectPath, "bin", "Release");
 
-                        bundles.buildBundle(bundles.mvcWrappersBundle, version(), complete, function(root, bundle, license) {
-                            var binariesDeployRoot = path.join(root, "Binaries"),
-                                mvc3binariesDeployRoot = path.join(binariesDeployRoot, "Mvc3"),
-                                stylesDeployRoot = path.join(root, "Content"),
-                                scriptsDeployRoot = path.join(root, "Scripts"),
-                                sourceDeployRoot = path.join(root, "Source"),
-                                projectDeployRoot = path.join(sourceDeployRoot, "Kendo.Mvc"),
-                                examplesDeployRoot = path.join(root, "Examples");
+        bundles.buildBundle(bundles.mvcWrappersBundle, version(), complete, function(root, bundle, license) {
+            var binariesDeployRoot = path.join(root, "Binaries"),
+            mvc3binariesDeployRoot = path.join(binariesDeployRoot, "Mvc3"),
+            stylesDeployRoot = path.join(root, "Content"),
+            scriptsDeployRoot = path.join(root, "Scripts"),
+            sourceDeployRoot = path.join(root, "Source"),
+            projectDeployRoot = path.join(sourceDeployRoot, "Kendo.Mvc"),
+            examplesDeployRoot = path.join(root, "Examples");
 
-                            // move resources
-                            fs.renameSync(path.join(root, "js"), scriptsDeployRoot);
-                            fs.renameSync(path.join(root, "styles"), stylesDeployRoot);
+            // move resources
+            fs.renameSync(path.join(root, "js"), scriptsDeployRoot);
+            fs.renameSync(path.join(root, "styles"), stylesDeployRoot);
 
-                            // copy binaries
-                            kendoBuild.mkdir(binariesDeployRoot);
-                            kendoBuild.mkdir(mvc3binariesDeployRoot);
+            // copy binaries
+            kendoBuild.mkdir(binariesDeployRoot);
+            kendoBuild.mkdir(mvc3binariesDeployRoot);
 
-                            kendoBuild.copyFileSync(
-                                path.join(binariesPath, "Kendo.Mvc.dll"),
-                                path.join(mvc3binariesDeployRoot, "Kendo.Mvc.dll")
-                            );
+            kendoBuild.processDirs(binariesPath, function(dir){
+                kendoBuild.copyDirSyncRecursive(path.join(binariesPath, dir), path.join(mvc3binariesDeployRoot, dir));
+            });
 
-                            // deploy demos
-                            kendoBuild.copyDirSyncRecursive(
-                                examplesPath,
-                                examplesDeployRoot
-                            );
+            kendoBuild.copyFileSync(
+                path.join(binariesPath, "Kendo.Mvc.dll"),
+                path.join(mvc3binariesDeployRoot, "Kendo.Mvc.dll")
+            );
 
-                            kendoBuild.rmdirSyncRecursive(path.join(examplesDeployRoot, "obj"));
+            // deploy demos
+            kendoBuild.copyDirSyncRecursive(
+                examplesPath,
+                examplesDeployRoot
+            );
 
-                            kendoBuild.processFilesRecursive(
-                                path.join(examplesDeployRoot, "bin"),
-                                /(system\..*)|(\.mdb$)/i,
-                                function(fileName) {
-                                    fs.unlinkSync(fileName);
-                                });
+            kendoBuild.rmdirSyncRecursive(path.join(examplesDeployRoot, "obj"));
 
-                            // process demos .csproj file
-                            var projectFileName = path.join(examplesDeployRoot, "Kendo.Mvc.Examples.csproj"),
-                                csproj = kendoBuild.readText(projectFileName);
-
-                            csproj = csproj
-                                // remove AfterBuild target
-                                .replace(/\s*<Target Name="AfterBuild"((.|\r|\n)*?)\/Target>/i, "")
-                                // remove project reference
-                                .replace(/\s*<ProjectReference((.|\r|\n)*?)\/ProjectReference>/i, "")
-                                // add reference to Kendo dll
-                                .replace(/(\s*)(<Reference.*?\/>)/i, '$1$2$1<Reference Include="Kendo.Mvc" />');
-
-                            kendoBuild.writeText(projectFileName, csproj);
-
-                            // copy legacy themes
-                            kendoBuild.copyDirSyncRecursive(
-                                path.join(MVC_WRAPPERS_PATH, "legacy-themes"),
-                                path.join(root, "LegacyThemes")
-                            );
-
-                            // copy source code
-                            if (license.source) {
-                                fs.renameSync(path.join(root, "source"), sourceDeployRoot);
-
-                                kendoBuild.copyDirSyncRecursive(
-                                    projectPath,
-                                    projectDeployRoot
-                                );
-
-                                kendoBuild.rmdirSyncRecursive(path.join(projectDeployRoot, "bin"));
-                                kendoBuild.rmdirSyncRecursive(path.join(projectDeployRoot, "obj"));
-                            }
-                        });
+            kendoBuild.processFilesRecursive(
+                path.join(examplesDeployRoot, "bin"),
+                /(system\..*)|(\.mdb$)/i,
+                function(fileName) {
+                    fs.unlinkSync(fileName);
                 });
+
+                // process demos .csproj file
+                var projectFileName = path.join(examplesDeployRoot, "Kendo.Mvc.Examples.csproj"),
+                csproj = kendoBuild.readText(projectFileName);
+
+                csproj = csproj
+                // remove AfterBuild target
+                .replace(/\s*<Target Name="AfterBuild"((.|\r|\n)*?)\/Target>/i, "")
+                // remove project reference
+                .replace(/\s*<ProjectReference((.|\r|\n)*?)\/ProjectReference>/i, "")
+                // add reference to Kendo dll
+                .replace(/(\s*)(<Reference.*?\/>)/i, '$1$2$1<Reference Include="Kendo.Mvc" />');
+
+                kendoBuild.writeText(projectFileName, csproj);
+
+                // copy legacy themes
+                kendoBuild.copyDirSyncRecursive(
+                    path.join(MVC_WRAPPERS_PATH, "legacy-themes"),
+                    path.join(root, "LegacyThemes")
+                );
+
+                // copy source code
+                if (license.source) {
+                    fs.renameSync(path.join(root, "source"), sourceDeployRoot);
+
+                    kendoBuild.copyDirSyncRecursive(
+                        projectPath,
+                        projectDeployRoot
+                    );
+
+                    kendoBuild.rmdirSyncRecursive(path.join(projectDeployRoot, "bin"));
+                    kendoBuild.rmdirSyncRecursive(path.join(projectDeployRoot, "obj"));
+                }
         });
     }, true);
 

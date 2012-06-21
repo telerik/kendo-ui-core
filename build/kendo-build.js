@@ -160,6 +160,18 @@ function template(template) {
     return new Function(paramName, functionBody);
 }
 
+function processDirs(path, callback) {
+    var entries = fs.readdirSync(path), dir;
+
+    for (var idx = 0; idx < entries.length; idx ++) {
+        dir = path + "/" + entries[idx];
+
+        if (fs.statSync(dir).isDirectory()) {
+           callback(entries[idx]);
+        }
+    }
+}
+
 function processFilesRecursive(dir, filterRegex, callback) {
     var files = fs.readdirSync(dir),
         fileName,
@@ -345,6 +357,7 @@ exports.mkdir = mkdir;
 exports.msBuild = msBuild;
 exports.spawnSilent = spawnSilent;
 exports.processFilesRecursive = processFilesRecursive;
+exports.processDirs = processDirs;
 exports.readText = readText;
 exports.rmdirSyncRecursive = rmdirSyncRecursive;
 exports.stripBOM = stripBOM;
