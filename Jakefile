@@ -1,6 +1,7 @@
 // Imports ====================================================================
 var path = require("path"),
     fs = require("fs"),
+    os = require("os"),
     jsdoctoolkit = require("build/node-jsdoc-toolkit/app/nodemodule").jsdoctoolkit,
     bundles = require("build/bundles"),
     themebuilder = require("build/themebuilder"),
@@ -296,27 +297,34 @@ namespace("mvc", function() {
     desc("Build satellite assemblies");
     task("build-satellite-assemblies", ["mvc:build-wrappers-project"], function() {
         var numberOfCultures = 0;
+        var osName = os.type();
         var filesPath = path.join(MVC_WRAPPERS_PATH, "src", "Kendo.Mvc");
 
-        kendoBuild.processDirs(path.join(filesPath, "bin", "Release"), function(culture){
-            numberOfCultures ++;
+        if (osName == "Linux" || osName == "Darwin") {
+            //xbuild can't properly set the version of satellite assemblies so we build them using `al`
+            kendoBuild.processDirs(path.join(filesPath, "bin", "Release"), function(culture){
+                numberOfCultures ++;
 
-            kendoBuild.spawnSilent("al", [
-                "/t:lib",
-                "/embed:" + path.join("obj", "Release", "Kendo.Mvc.Resources.Messages." + culture + ".resources"),
-                "/culture:" + culture,
-                "/out:" + path.join("bin", "Release", culture, "Kendo.Mvc.resources.dll"),
-                "/template:" + path.join("bin", "Release", "Kendo.Mvc.dll"),
-                "/keyfile:" + path.join("..", "shared", "Telerik.Web.snk")
-            ], {
-                cwd: path.resolve(filesPath) ,
-            }, function() {
-                numberOfCultures --;
-                if (numberOfCultures <= 0) {
-                    complete();
-                }
+                kendoBuild.spawnSilent("al", [
+                    "/t:lib",
+                    "/embed:" + path.join("obj", "Release", "Kendo.Mvc.Resources.Messages." + culture + ".resources"),
+                    "/culture:" + culture,
+                    "/out:" + path.join("bin", "Release", culture, "Kendo.Mvc.resources.dll"),
+                    "/template:" + path.join("bin", "Release", "Kendo.Mvc.dll"),
+                    "/keyfile:" + path.join("..", "shared", "Telerik.Web.snk")
+                ], {
+                    cwd: path.resolve(filesPath) ,
+                }, function() {
+                    numberOfCultures --;
+                    if (numberOfCultures <= 0) {
+                        complete();
+                    }
+                });
             });
-        });
+        } else {
+           complete();
+        }
+
     }, true);
 
     desc("Build release version");
