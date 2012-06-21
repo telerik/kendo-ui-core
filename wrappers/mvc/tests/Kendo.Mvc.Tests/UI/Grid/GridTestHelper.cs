@@ -1,6 +1,5 @@
 namespace Kendo.Mvc.UI.Tests
 {
-    using Moq;
     using System.Collections.Generic;
     using System.Globalization;
     using System.IO;
@@ -8,26 +7,14 @@ namespace Kendo.Mvc.UI.Tests
     using System.Web.Mvc;
     using System.Web.UI;
     using Kendo.Mvc.Infrastructure;
-    using Kendo.Mvc.Infrastructure.Implementation;
     using Kendo.Mvc.UI.Html;
-    
+    using Moq;
+
     public static class GridTestHelper
     {
         public static ControllerBase Controller(IDictionary<string, ValueProviderResult> valueProvider, ViewDataDictionary viewData)
         {
             return new ControllerTestDouble(valueProvider, viewData);
-        }
-
-        public static ILocalizationService CreateLocalizationService()
-        {
-            var localizationService = new Mock<ILocalizationService>();
-            
-            EmbeddedResource resource = new EmbeddedResource("GridLocalization", null);
-
-            localizationService.Setup(l => l.One(It.IsAny<string>())).Returns((string key) => resource.GetByKey(key));
-            localizationService.Setup(l => l.All()).Returns(() => new Dictionary<string, string>());
-
-            return localizationService.Object;
         }
 
         public static Grid<T> CreateGrid<T>(HtmlTextWriter writer) where T : class

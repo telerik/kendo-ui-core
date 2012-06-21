@@ -70,7 +70,7 @@ namespace Kendo.Mvc.UI.Fluent
             }
             else
             {
-                throw new ArgumentException(TextResource.StringNotCorrectDate);
+                throw new ArgumentException(Exceptions.StringNotCorrectDate);
             }
             return this;
         }
@@ -89,7 +89,7 @@ namespace Kendo.Mvc.UI.Fluent
             }
             else
             {
-                throw new ArgumentException(TextResource.StringNotCorrectDate);
+                throw new ArgumentException(Exceptions.StringNotCorrectDate);
             }
             return this;
         }

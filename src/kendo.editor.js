@@ -320,7 +320,7 @@
         renderTools = EditorUtils.renderTools,
         initializeContentElement = EditorUtils.initializeContentElement;
 
-    var localization = {
+    var messages = {
         bold: "Bold",
         italic: "Italic",
         underline: "Underline",
@@ -516,7 +516,7 @@
                         var toolName = toolFromClassName(this),
                             options = that.options,
                             tool = options.tools[toolName],
-                            description = options.localization[toolName],
+                            description = options.messages[toolName],
                             $this = $(this);
 
                         if (!tool) {
@@ -524,7 +524,7 @@
                         }
 
                         if (toolName == "fontSize" || toolName == "fontName") {
-                            var inheritText = options.localization[toolName + "Inherit"] || localization[toolName + "Inherit"];
+                            var inheritText = options.messages[toolName + "Inherit"] || messages[toolName + "Inherit"];
                             $this.find("input").val(inheritText).end()
                                  .find("span.k-input").text(inheritText).end();
                         }
@@ -591,7 +591,7 @@
 
         options: {
             name: "Editor",
-            localization: localization,
+            messages: messages,
             formats: {},
             encoded: true,
             stylesheets: [],
@@ -2757,7 +2757,7 @@ var InsertHtmlTool = Tool.extend({
             change: function (e) {
                 Tool.exec(editor, 'insertHtml', this.value());
             },
-            title: editor.options.localization.insertHtml,
+            title: editor.options.messages.insertHtml,
             highlightFirst: false
         });
     },
@@ -3679,8 +3679,15 @@ var FontTool = Tool.extend({
         var editor = initOptions.editor,
             options = this.options,
             toolName = options.name,
-            defaultValue = options.defaultValue ? options.defaultValue : [],
-            dataSource = defaultValue.concat(options.items ? options.items : editor.options[toolName]);
+            dataSource,
+            defaultValue = options.defaultValue ? options.defaultValue : [];
+
+
+        if (defaultValue[0].text) {
+            defaultValue[0].text = editor.options.messages[defaultValue[0].text];
+        }
+
+        dataSource = defaultValue.concat(options.items ? options.items : editor.options[toolName]);
 
         ui[this.type]({
             dataTextField: "text",
@@ -3768,7 +3775,7 @@ var StyleTool = Tool.extend({
 
         ui.kendoDropDownList({
             data: editor.style,
-            title: editor.options.localization.style,
+            title: editor.options.messages.style,
             itemCreate: function (e) {
                 var style = dom.inlineStyle(editor.document, "span", {className : e.dataItem.value});
 
@@ -3817,9 +3824,9 @@ registerTool("foreColor", new ColorTool({cssAttr:"color", domAttr:"color", name:
 
 registerTool("backColor", new ColorTool({cssAttr:"background-color", domAttr: "backgroundColor", name:"backColor", template: new ToolTemplate({template: EditorUtils.colorPickerTemplate, title: "Background Color"})}));
 
-registerTool("fontName", new FontTool({cssAttr:"font-family", domAttr: "fontFamily", name:"fontName", defaultValue: [{ text: kendo.ui.Editor.fn.options.localization.fontNameInherit,  value: "inherit" }], template: new ToolTemplate({template: EditorUtils.comboBoxTemplate, title: "Font Name"})}));
+registerTool("fontName", new FontTool({cssAttr:"font-family", domAttr: "fontFamily", name:"fontName", defaultValue: [{ text: "fontNameInherit",  value: "inherit" }], template: new ToolTemplate({template: EditorUtils.comboBoxTemplate, title: "Font Name"})}));
 
-registerTool("fontSize", new FontTool({cssAttr:"font-size", domAttr:"fontSize", name:"fontSize", defaultValue: [{ text: kendo.ui.Editor.fn.options.localization.fontSizeInherit,  value: "inherit" }], template: new ToolTemplate({template: EditorUtils.comboBoxTemplate, title: "Font Size"})}));
+registerTool("fontSize", new FontTool({cssAttr:"font-size", domAttr:"fontSize", name:"fontSize", defaultValue: [{ text: "fontSizeInherit",  value: "inherit" }], template: new ToolTemplate({template: EditorUtils.comboBoxTemplate, title: "Font Size"})}));
 
 })(jQuery);
 (function($) {
@@ -4120,7 +4127,7 @@ var FormatBlockTool = Tool.extend({
             dataTextField: "text",
             dataValueField: "value",
             dataSource: this.options.items ? this.options.items : editor.options.formatBlock,
-            title: editor.options.localization.formatBlock,
+            title: editor.options.messages.formatBlock,
             change: function (e) {
                 Tool.exec(editor, toolName, this.value());
             },
@@ -4154,7 +4161,8 @@ registerTool("justifyRight", new BlockFormatTool({format: formats.justifyRight, 
 registerFormat("justifyFull", [ { tags: dom.blockElements, attr: { style: { textAlign: "justify"}} } ]);
 registerTool("justifyFull", new BlockFormatTool({format: formats.justifyFull, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Justify Full"})}));
 
-})(jQuery);(function($) {
+})(jQuery);
+(function($) {
 
 // Imports ================================================================
 var kendo = window.kendo,
@@ -5109,7 +5117,7 @@ var ImageCommand = Command.extend({
                                 //extend(fileBrowser, {
                                     //apply: apply,
                                     //element: that.editor.element,
-                                    //localization: that.editor.options.localization
+                                    //messages: that.editor.options.messages
                                 //}));
                         //}
                     }

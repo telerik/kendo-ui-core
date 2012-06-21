@@ -46,7 +46,7 @@ namespace Kendo.Mvc.UI.Fluent
         {
             if (typeof(TModel).IsPlainType() && !expression.IsBindable())
             {
-                throw new InvalidOperationException(TextResource.MemberExpressionRequired);
+                throw new InvalidOperationException(Exceptions.MemberExpressionRequired);
             }
 
             var value = expression.Compile();

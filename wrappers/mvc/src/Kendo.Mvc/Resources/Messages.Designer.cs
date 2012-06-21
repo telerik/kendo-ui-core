@@ -61,6 +61,222 @@ namespace Kendo.Mvc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bold.
+        /// </summary>
+        public static string Editor_Bold {
+            get {
+                return ResourceManager.GetString("Editor_Bold", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Insert hyperlink.
+        /// </summary>
+        public static string Editor_CreateLink {
+            get {
+                return ResourceManager.GetString("Editor_CreateLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select font family.
+        /// </summary>
+        public static string Editor_FontName {
+            get {
+                return ResourceManager.GetString("Editor_FontName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (inherited font).
+        /// </summary>
+        public static string Editor_FontNameInherit {
+            get {
+                return ResourceManager.GetString("Editor_FontNameInherit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select font size.
+        /// </summary>
+        public static string Editor_FontSize {
+            get {
+                return ResourceManager.GetString("Editor_FontSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (inherited size).
+        /// </summary>
+        public static string Editor_FontSizeInherit {
+            get {
+                return ResourceManager.GetString("Editor_FontSizeInherit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Format.
+        /// </summary>
+        public static string Editor_FormatBlock {
+            get {
+                return ResourceManager.GetString("Editor_FormatBlock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Indent.
+        /// </summary>
+        public static string Editor_Indent {
+            get {
+                return ResourceManager.GetString("Editor_Indent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Insert HTML.
+        /// </summary>
+        public static string Editor_InsertHtml {
+            get {
+                return ResourceManager.GetString("Editor_InsertHtml", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Insert image.
+        /// </summary>
+        public static string Editor_InsertImage {
+            get {
+                return ResourceManager.GetString("Editor_InsertImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Insert ordered list.
+        /// </summary>
+        public static string Editor_InsertOrderedList {
+            get {
+                return ResourceManager.GetString("Editor_InsertOrderedList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Insert unordered list.
+        /// </summary>
+        public static string Editor_InsertUnorderedList {
+            get {
+                return ResourceManager.GetString("Editor_InsertUnorderedList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Italic.
+        /// </summary>
+        public static string Editor_Italic {
+            get {
+                return ResourceManager.GetString("Editor_Italic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Center text.
+        /// </summary>
+        public static string Editor_JustifyCenter {
+            get {
+                return ResourceManager.GetString("Editor_JustifyCenter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Justify.
+        /// </summary>
+        public static string Editor_JustifyFull {
+            get {
+                return ResourceManager.GetString("Editor_JustifyFull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Align text left.
+        /// </summary>
+        public static string Editor_JustifyLeft {
+            get {
+                return ResourceManager.GetString("Editor_JustifyLeft", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Align text right.
+        /// </summary>
+        public static string Editor_JustifyRight {
+            get {
+                return ResourceManager.GetString("Editor_JustifyRight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Outdent.
+        /// </summary>
+        public static string Editor_Outdent {
+            get {
+                return ResourceManager.GetString("Editor_Outdent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Strikethrough.
+        /// </summary>
+        public static string Editor_Strikethrough {
+            get {
+                return ResourceManager.GetString("Editor_Strikethrough", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Styles.
+        /// </summary>
+        public static string Editor_Styles {
+            get {
+                return ResourceManager.GetString("Editor_Styles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Subscript.
+        /// </summary>
+        public static string Editor_Subscript {
+            get {
+                return ResourceManager.GetString("Editor_Subscript", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Superscript.
+        /// </summary>
+        public static string Editor_Superscript {
+            get {
+                return ResourceManager.GetString("Editor_Superscript", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Underline.
+        /// </summary>
+        public static string Editor_Underline {
+            get {
+                return ResourceManager.GetString("Editor_Underline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove hyperlink.
+        /// </summary>
+        public static string Editor_Unlink {
+            get {
+                return ResourceManager.GetString("Editor_Unlink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to And.
         /// </summary>
         public static string Filter_And {

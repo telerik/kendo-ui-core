@@ -1,7 +1,6 @@
 namespace Kendo.Mvc.UI.Fluent
 {
     using System;
-    using Kendo.Mvc.Infrastructure;
 
     public class EditorBuilder : ViewComponentBuilderBase<Editor, EditorBuilder>, IHideObjectMembers
     {
@@ -87,8 +86,14 @@ namespace Kendo.Mvc.UI.Fluent
         /// </code>   
         public EditorBuilder Encode(bool value)
         {
-
             Component.Encode = value;
+
+            return this;
+        }
+
+        public EditorBuilder Messages(Action<EditorMessagesBuilder> configurator)
+        {
+            configurator(new EditorMessagesBuilder(Component.Messages));
 
             return this;
         }

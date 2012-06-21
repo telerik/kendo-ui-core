@@ -51,7 +51,7 @@ namespace Kendo.Mvc.Extensions
 
             if (firstSortableProperty == null)
             {
-                throw new NotSupportedException(TextResource.CannotFindPropertyToSortBy);
+                throw new NotSupportedException(Exceptions.CannotFindPropertyToSortBy);
             }
 
             return firstSortableProperty.Name;

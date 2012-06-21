@@ -253,6 +253,11 @@
                     "url": "editor/events.html"
                 },
                 {
+                    "packages" : [ "mvc" ],
+                    "text": "Globalization",
+                    "url": "editor/globalization.html"
+                },
+                {
                     "text": "API",
                     "url": "editor/api.html"
                 }

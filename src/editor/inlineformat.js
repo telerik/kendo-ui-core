@@ -364,8 +364,15 @@ var FontTool = Tool.extend({
         var editor = initOptions.editor,
             options = this.options,
             toolName = options.name,
-            defaultValue = options.defaultValue ? options.defaultValue : [],
-            dataSource = defaultValue.concat(options.items ? options.items : editor.options[toolName]);
+            dataSource,
+            defaultValue = options.defaultValue ? options.defaultValue : [];
+
+
+        if (defaultValue[0].text) {
+            defaultValue[0].text = editor.options.messages[defaultValue[0].text];
+        }
+
+        dataSource = defaultValue.concat(options.items ? options.items : editor.options[toolName]);
 
         ui[this.type]({
             dataTextField: "text",
@@ -453,7 +460,7 @@ var StyleTool = Tool.extend({
 
         ui.kendoDropDownList({
             data: editor.style,
-            title: editor.options.localization.style,
+            title: editor.options.messages.style,
             itemCreate: function (e) {
                 var style = dom.inlineStyle(editor.document, "span", {className : e.dataItem.value});
 
@@ -502,8 +509,8 @@ registerTool("foreColor", new ColorTool({cssAttr:"color", domAttr:"color", name:
 
 registerTool("backColor", new ColorTool({cssAttr:"background-color", domAttr: "backgroundColor", name:"backColor", template: new ToolTemplate({template: EditorUtils.colorPickerTemplate, title: "Background Color"})}));
 
-registerTool("fontName", new FontTool({cssAttr:"font-family", domAttr: "fontFamily", name:"fontName", defaultValue: [{ text: kendo.ui.Editor.fn.options.localization.fontNameInherit,  value: "inherit" }], template: new ToolTemplate({template: EditorUtils.comboBoxTemplate, title: "Font Name"})}));
+registerTool("fontName", new FontTool({cssAttr:"font-family", domAttr: "fontFamily", name:"fontName", defaultValue: [{ text: "fontNameInherit",  value: "inherit" }], template: new ToolTemplate({template: EditorUtils.comboBoxTemplate, title: "Font Name"})}));
 
-registerTool("fontSize", new FontTool({cssAttr:"font-size", domAttr:"fontSize", name:"fontSize", defaultValue: [{ text: kendo.ui.Editor.fn.options.localization.fontSizeInherit,  value: "inherit" }], template: new ToolTemplate({template: EditorUtils.comboBoxTemplate, title: "Font Size"})}));
+registerTool("fontSize", new FontTool({cssAttr:"font-size", domAttr:"fontSize", name:"fontSize", defaultValue: [{ text: "fontSizeInherit",  value: "inherit" }], template: new ToolTemplate({template: EditorUtils.comboBoxTemplate, title: "Font Size"})}));
 
 })(jQuery);

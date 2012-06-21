@@ -24,7 +24,7 @@ namespace Kendo.Mvc.UI
         {
             if (typeof(TModel).IsPlainType() && !expression.IsBindable())
             {
-                throw new InvalidOperationException(TextResource.MemberExpressionRequired);
+                throw new InvalidOperationException(Exceptions.MemberExpressionRequired);
             }
 
             Member = expression.MemberWithoutInstance();

@@ -104,7 +104,7 @@ var InsertHtmlTool = Tool.extend({
             change: function (e) {
                 Tool.exec(editor, 'insertHtml', this.value());
             },
-            title: editor.options.localization.insertHtml,
+            title: editor.options.messages.insertHtml,
             highlightFirst: false
         });
     },

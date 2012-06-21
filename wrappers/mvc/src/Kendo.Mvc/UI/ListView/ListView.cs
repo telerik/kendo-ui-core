@@ -143,17 +143,17 @@
             
             if (string.IsNullOrEmpty(ClientTemplateId))
             {               
-                throw new NotSupportedException(string.Format(TextResource.CannotBeNullOrEmpty, "ClientTemplateId"));
+                throw new NotSupportedException(string.Format(Exceptions.CannotBeNullOrEmpty, "ClientTemplateId"));
             }
 
             if (string.IsNullOrEmpty(TagName))
             {                
-                throw new NotSupportedException(string.Format(TextResource.CannotBeNullOrEmpty, "TagName"));
+                throw new NotSupportedException(string.Format(Exceptions.CannotBeNullOrEmpty, "TagName"));
             }
 
             if (Editable.Enabled && DataSource.Schema.Model.Id == null)
             {
-                throw new NotSupportedException(TextResource.DataKeysEmpty);
+                throw new NotSupportedException(Exceptions.DataKeysEmpty);
             }
         }
 

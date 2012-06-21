@@ -54,8 +54,6 @@ namespace Kendo.Mvc.Infrastructure
 
             Current.Register<IVirtualPathProvider>(() => new VirtualPathProviderWrapper());
 
-            Current.Register<ILocalizationServiceFactory>(() => new LocalizationServiceFactory());
-
             Current.Register<IUrlAuthorization>(() => new UrlAuthorization());
 
             Current.Register<IJavaScriptInitializer>(() => new JavaScriptInitializer());

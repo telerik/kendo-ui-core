@@ -40,7 +40,7 @@ namespace Kendo.Mvc.UI.Fluent
 
             if (!provider.FileExists(fileName))
             {
-                throw new FileNotFoundException(Resources.TextResource.SpecifiedFileDoesNotExist.FormatWith(fileName));
+                throw new FileNotFoundException(Resources.Exceptions.SpecifiedFileDoesNotExist.FormatWith(fileName));
             }
 
             return provider.ReadAllText(fileName);

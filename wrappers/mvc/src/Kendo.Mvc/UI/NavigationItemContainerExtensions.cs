@@ -113,7 +113,7 @@ namespace Kendo.Mvc.UI
 
             if (siteMap == null)
             {
-                throw new NotSupportedException(TextResource.SiteMapShouldBeDefinedInViewData.FormatWith(sitemapName));
+                throw new NotSupportedException(Exceptions.SiteMapShouldBeDefinedInViewData.FormatWith(sitemapName));
             }
 
             component.Items.Clear();

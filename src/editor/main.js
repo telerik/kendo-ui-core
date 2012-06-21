@@ -320,7 +320,7 @@
         renderTools = EditorUtils.renderTools,
         initializeContentElement = EditorUtils.initializeContentElement;
 
-    var localization = {
+    var messages = {
         bold: "Bold",
         italic: "Italic",
         underline: "Underline",
@@ -516,7 +516,7 @@
                         var toolName = toolFromClassName(this),
                             options = that.options,
                             tool = options.tools[toolName],
-                            description = options.localization[toolName],
+                            description = options.messages[toolName],
                             $this = $(this);
 
                         if (!tool) {
@@ -524,7 +524,7 @@
                         }
 
                         if (toolName == "fontSize" || toolName == "fontName") {
-                            var inheritText = options.localization[toolName + "Inherit"] || localization[toolName + "Inherit"];
+                            var inheritText = options.messages[toolName + "Inherit"] || messages[toolName + "Inherit"];
                             $this.find("input").val(inheritText).end()
                                  .find("span.k-input").text(inheritText).end();
                         }
@@ -591,7 +591,7 @@
 
         options: {
             name: "Editor",
-            localization: localization,
+            messages: messages,
             formats: {},
             encoded: true,
             stylesheets: [],

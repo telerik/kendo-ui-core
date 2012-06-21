@@ -135,7 +135,7 @@ namespace Kendo.Mvc.UI
         {
             base.VerifySettings();
 
-            this.ThrowIfClassIsPresent("t-menu-rtl", TextResource.Rtl);
+            this.ThrowIfClassIsPresent("t-menu-rtl", Exceptions.Rtl);
         }
 
         protected override void WriteHtml(HtmlTextWriter writer)

@@ -47,19 +47,19 @@ namespace Kendo.Mvc.UI.Fluent
 
             if (!controllerName.EndsWith("Controller", StringComparison.OrdinalIgnoreCase))
             {
-                throw new ArgumentException(TextResource.ControllerNameMustEndWithController, "controllerAction");
+                throw new ArgumentException(Exceptions.ControllerNameMustEndWithController, "controllerAction");
             }
 
             controllerName = controllerName.Substring(0, controllerName.Length - "Controller".Length);
 
             if (controllerName.Length == 0)
             {
-                throw new ArgumentException(TextResource.CannotRouteToClassNamedController, "controllerAction");
+                throw new ArgumentException(Exceptions.CannotRouteToClassNamedController, "controllerAction");
             }
 
             if (call.Method.IsDefined(typeof(NonActionAttribute), false))
             {
-                throw new ArgumentException(TextResource.TheSpecifiedMethodIsNotAnActionMethod, "controllerAction");
+                throw new ArgumentException(Exceptions.TheSpecifiedMethodIsNotAnActionMethod, "controllerAction");
             }
 
             string actionName = call.Method.GetCustomAttributes(typeof(ActionNameAttribute), false)

@@ -126,7 +126,7 @@ namespace Kendo.Mvc.UI
             {
                 if (SelectedIndex != -1 && Items.Count < SelectedIndex)
                 {
-                    throw new ArgumentOutOfRangeException(TextResource.IndexOutOfRange);
+                    throw new ArgumentOutOfRangeException(Exceptions.IndexOutOfRange);
                 }
 
                 int itemIndex = 0;

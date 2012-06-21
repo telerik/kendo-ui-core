@@ -129,7 +129,7 @@ namespace Kendo.Mvc.UI
 
             if (Min.HasValue && Max.HasValue && Nullable.Compare<T>(Min, Max) == 1)
             {
-                throw new ArgumentException(TextResource.MinPropertyMustBeLessThenMaxProperty.FormatWith("Min", "Max"));
+                throw new ArgumentException(Exceptions.MinPropertyMustBeLessThenMaxProperty.FormatWith("Min", "Max"));
             }
 
             base.VerifySettings();

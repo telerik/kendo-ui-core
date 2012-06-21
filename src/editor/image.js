@@ -125,7 +125,7 @@ var ImageCommand = Command.extend({
                                 //extend(fileBrowser, {
                                     //apply: apply,
                                     //element: that.editor.element,
-                                    //localization: that.editor.options.localization
+                                    //messages: that.editor.options.messages
                                 //}));
                         //}
                     }

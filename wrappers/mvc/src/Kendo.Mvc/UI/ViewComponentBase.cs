@@ -154,15 +154,15 @@ namespace Kendo.Mvc.UI
         {
             if (string.IsNullOrEmpty(Name))
             {
-                throw new InvalidOperationException(Resources.TextResource.NameCannotBeBlank);
+                throw new InvalidOperationException(Resources.Exceptions.NameCannotBeBlank);
             }
 
             if (!Name.Contains("<#=") && Name.IndexOf(" ") != -1)
             {
-                throw new InvalidOperationException(Resources.TextResource.NameCannotContainSpaces);
+                throw new InvalidOperationException(Resources.Exceptions.NameCannotContainSpaces);
             }
 
-            this.ThrowIfClassIsPresent("k-" + GetType().GetTypeName().ToLowerInvariant() + "-rtl", TextResource.Rtl);
+            this.ThrowIfClassIsPresent("k-" + GetType().GetTypeName().ToLowerInvariant() + "-rtl", Exceptions.Rtl);
         }
 
         public string ToHtmlString()

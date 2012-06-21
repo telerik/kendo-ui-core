@@ -26,7 +26,7 @@ namespace Kendo.Mvc.UI
 
             if (typeof(TModel).IsPlainType() && !(xValueExpression.IsBindable() || yValueExpression.IsBindable()))
             {
-                throw new InvalidOperationException(TextResource.MemberExpressionRequired);
+                throw new InvalidOperationException(Exceptions.MemberExpressionRequired);
             }
 
             XMember = xValueExpression.MemberWithoutInstance();

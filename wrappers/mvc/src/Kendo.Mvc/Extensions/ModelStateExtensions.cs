@@ -40,7 +40,7 @@
                     return error.ErrorMessage;
                 }
 
-                return TextResource.ValueNotValidForProperty.FormatWith(modelState.Value.AttemptedValue);
+                return Exceptions.ValueNotValidForProperty.FormatWith(modelState.Value.AttemptedValue);
             }
 
             return error.ErrorMessage;

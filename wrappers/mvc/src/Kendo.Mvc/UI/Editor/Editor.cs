@@ -17,6 +17,7 @@ namespace Kendo.Mvc.UI
             DefaultToolGroup = new EditorToolGroup(this);
 
             Template = new HtmlTemplate();
+            Messages = new EditorMessages();
 
             //TODO: Implement customization of the fonts names and sizes
 
@@ -31,6 +32,12 @@ namespace Kendo.Mvc.UI
                 .FormatBlock()
                 .CreateLink().Unlink()
                 .InsertImage();
+        }
+
+        public EditorMessages Messages
+        {
+            get;
+            private set;
         }
 
         public EditorToolGroup DefaultToolGroup
@@ -88,6 +95,13 @@ namespace Kendo.Mvc.UI
             if (Encode.HasValue && !Encode.Value)
             {
                 options["encoded"] = Encode.Value;
+            }
+
+            var messages = Messages.ToJson();
+
+            if (messages.Any())
+            {
+                options["messages"] = messages;
             }
 
             writer.Write(Initializer.Initialize(Selector, "Editor", options));

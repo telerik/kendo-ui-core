@@ -1,15 +1,13 @@
 namespace Kendo.Mvc.UI.Tests
 {
-    using System.Web.Routing;
-    using Moq;
-    using System.Collections.Generic;
     using System.IO;
     using System.Web;
     using System.Web.Mvc;
+    using System.Web.Routing;
     using System.Web.UI;
     using Kendo.Mvc;
     using Kendo.Mvc.Infrastructure;
-    using Kendo.Mvc.Infrastructure.Implementation;
+    using Moq;
 
     public static class EditorTestHelper
     {
@@ -41,18 +39,6 @@ namespace Kendo.Mvc.UI.Tests
             {
                 Name = "Editor"
             };
-        }
-
-        public static ILocalizationService CreateLocalizationService()
-        {
-            var localizationService = new Mock<ILocalizationService>();
-
-            EmbeddedResource resource = new EmbeddedResource("EditorLocalization", null);
-
-            localizationService.Setup(l => l.One(It.IsAny<string>())).Returns((string key) => resource.GetByKey(key));
-            localizationService.Setup(l => l.All()).Returns(() => new Dictionary<string, string>());
-
-            return localizationService.Object;
         }
     }
 }

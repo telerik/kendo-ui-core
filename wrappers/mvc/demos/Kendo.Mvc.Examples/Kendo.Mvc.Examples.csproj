@@ -145,6 +145,7 @@
     <Compile Include="Controllers\Web\DropDownList\TemplateController.cs" />
     <Compile Include="Controllers\Web\DropDownList\RemoteDataSourceController.cs" />
     <Compile Include="Controllers\Web\DropDownList\IndexController.cs" />
+    <Compile Include="Controllers\Web\Editor\GlobalizationController.cs" />
     <Compile Include="Controllers\Web\Editor\EventsController.cs" />
     <Compile Include="Controllers\Web\Editor\ApiController.cs" />
     <Compile Include="Controllers\Web\Editor\IndexController.cs" />
@@ -690,6 +691,8 @@
     <Content Include="Areas\aspx\Views\web\grid\EditorTemplates\ClientEmployee.ascx" />
     <Content Include="Areas\razor\Views\web\tabstrip\animation.cshtml" />
     <Content Include="Areas\aspx\Views\web\tabstrip\animation.aspx" />
+    <Content Include="Areas\razor\Views\web\editor\globalization.cshtml" />
+    <Content Include="Areas\aspx\Views\web\editor\globalization.aspx" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
