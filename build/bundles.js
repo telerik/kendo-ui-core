@@ -16,6 +16,10 @@ var fs = require("fs"),
     writeText = kendoBuild.writeText,
     zip = kendoBuild.zip;
 
+// Configuration ==============================================================
+
+var VERSION = JSON.parse(kendoBuild.readText("VERSION"));
+
 var commercialLicense = {name: "commercial", source: true};
 var openSourceLicense = {name: "open-source", source: true};
 var trialLicense = {name: "trial", source: false};
@@ -26,16 +30,6 @@ var productionLicenses = [
     trialLicense
 ];
 
-var SUITE_STYLES = {
-    "web": "web",
-    "dataviz": "dataviz",
-    "mobile": "mobile",
-    "winjs": "web"
-}
-
-var DEFAULT_EULA = "beta-eula";
-
-// Configuration ==============================================================
 var cdnBundle = {
     name: "kendoui.cdn",
     suites: ["web", "dataviz", "mobile", "aspnetmvc"],
@@ -44,7 +38,7 @@ var cdnBundle = {
     sourceLicense: "src-license-complete.txt",
     licenses: [commercialLicense],
     skipExamples: true,
-    eula: DEFAULT_EULA
+    eula: "eula"
 };
 
 var winjsBundle = {
@@ -55,7 +49,7 @@ var winjsBundle = {
     licenses: [commercialLicense],
     vsdoc: /(web|framework|dataviz).+md/,
     skipExamples: true,
-    eula: DEFAULT_EULA
+    eula: "eula"
 };
 
 var mvcWrappersBundle = {
@@ -68,7 +62,7 @@ var mvcWrappersBundle = {
     vsdoc: /.+md/,
     skipExamples: true,
     skipPackage: true,
-    eula: DEFAULT_EULA
+    eula: "eula"
 };
 
 var bundles = [{
@@ -78,29 +72,36 @@ var bundles = [{
     sourceLicense: "src-license-complete.txt",
     vsdoc: /.+md/,
     licenses: productionLicenses,
-    eula: DEFAULT_EULA,
+    eula: "eula",
 }, {
     name: "kendoui.web",
     suites: ["web"],
     sourceLicense: "src-license-web.txt",
     vsdoc: /(framework|web).+md/,
     licenses: productionLicenses.concat(openSourceLicense),
-    eula: DEFAULT_EULA,
+    eula: "eula",
 }, {
     name: "kendoui.dataviz",
     suites: ["dataviz"],
     sourceLicense: "src-license-dataviz.txt",
     vsdoc: /(framework|dataviz).+md/,
     licenses: productionLicenses,
-    eula: DEFAULT_EULA
+    eula: "eula"
 }, {
     name: "kendoui.mobile",
     suites: ["mobile"],
     sourceLicense: "src-license-mobile.txt",
     vsdoc: /(framework|mobile).+md/,
     licenses: productionLicenses,
-    eula: DEFAULT_EULA
+    eula: "eula"
 }];
+
+var SUITE_STYLES = {
+    "web": "web",
+    "dataviz": "dataviz",
+    "mobile": "mobile",
+    "winjs": "web"
+}
 
 var thirdPartyScripts = [
     "jquery.min.js"
@@ -117,7 +118,8 @@ var LATEST = "latest",
     CONTENT_ROOT = "content",
     VIEWS_ROOT = "Views",
     LEGAL_ROOT = path.join("resources", "legal"),
-    THIRD_PARTY_ROOT = "third-party",
+    RELEASE_LEGAL_ROOT = path.join(LEGAL_ROOT, VERSION.beta ? "beta" : "official"),
+    THIRD_PARTY_LEGAL_ROOT = path.join(LEGAL_ROOT, "third-party"),
     DROP_LOCATION = "release",
     DEPLOY_ROOT = "deploy",
     DEPLOY_SOURCE = "source",
@@ -213,12 +215,12 @@ function deployLicenses(root, bundle) {
     kendoBuild.mkdir(deployThirdPartyRoot);
 
     copyDir(
-        path.join(LEGAL_ROOT, bundle.eula),
+        path.join(RELEASE_LEGAL_ROOT, bundle.eula),
         deployLegalRoot
     );
 
     copyDir(
-        path.join(LEGAL_ROOT, THIRD_PARTY_ROOT),
+        THIRD_PARTY_LEGAL_ROOT,
         deployThirdPartyRoot
     );
 }
@@ -336,8 +338,6 @@ function fetchChangelog(callback) {
         token: "5dd646a3d9d8d5fb69fe59c163fc84b76fc67fcb"
     });
 
-    var ver = JSON.parse(kendoBuild.readText("VERSION"));
-
     github.issues.getAllMilestones({
         user: "telerik",
         repo: "kendo"
@@ -358,7 +358,7 @@ function fetchChangelog(callback) {
     });
 
     function processMilestones(results) {
-        var milestones = changelog.filterMilestones(results, ver);
+        var milestones = changelog.filterMilestones(results, VERSION);
 
         function processMilestone(callback) {
             if (milestones.length == 0) {
@@ -418,7 +418,7 @@ function buildBundle(bundle, version, success, licenseBuilt) {
     fetchChangelog(function() {
         var name = bundle.name,
             zips = 0,
-            licenseTemplate = template(readText(path.join(LEGAL_ROOT, bundle.sourceLicense)));
+            licenseTemplate = template(readText(path.join(RELEASE_LEGAL_ROOT, bundle.sourceLicense)));
 
         bundle.licenses.forEach(function(license) {
             var licenseName = license.name,

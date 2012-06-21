@@ -1,4 +1,5 @@
 {
     "year": 2012,
-    "release": 2
+    "release": 2,
+	"beta": true
 }
