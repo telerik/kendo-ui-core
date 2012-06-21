@@ -17,9 +17,12 @@ namespace Kendo.Mvc.Examples.Controllers
 
             var employees = from e in dataContext.Employees
                             where e.ReportsTo == null
-                            select e;
+                            select new {
+                                text = e.FirstName + " " + e.LastName,
+                                hasChildren = e.Employees.Any()
+                            };
 
-            return new JsonResult { Data = employees };
+            return Json(employees, JsonRequestBehavior.AllowGet);
         }
     }
 }
