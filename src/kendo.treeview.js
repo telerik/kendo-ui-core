@@ -998,7 +998,7 @@
 
         refresh: function(e) {
             var that = this,
-                parentNode = that.element,
+                parentNode = that.wrapper,
                 node = e.node,
                 action = e.action,
                 items = e.items,

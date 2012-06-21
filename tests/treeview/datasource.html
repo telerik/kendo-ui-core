@@ -344,11 +344,31 @@
                 equal(subitems.eq(1).text(), "bar");
             });
 
+            test("Moving root level nodes between treeviews", function() {
+                var tree1 = $("<div />").appendTo("body").kendoTreeView([
+                        { text: "foo" }
+                    ]),
+                    tree2 = $("<div />").appendTo("body").kendoTreeView([
+                        { text: "bar" }
+                    ]);
+
+                tree2.data("kendoTreeView").insertBefore(tree2.find(".k-item"), tree1.find(".k-item"));
+
+                equal(tree1.find(".k-item").length, 2);
+                equal(tree2.find(".k-item").length, 0);
+            });
+
             function treeviewFromHtml(html) {
                 treeview = $(html).appendTo("body").kendoTreeView();
 
                 treeviewObject = treeview.data("kendoTreeView");
             }
+
+            test("initializing from list infers text", function() {
+                treeviewFromHtml("<ul><li>foo</li></ul>");
+
+                equal(treeviewObject.dataSource.data()[0].text, "foo");
+            });
 
             test("initializing from list attaches uids", function() {
                 treeviewFromHtml("<ul><li>foo</li></ul>");
@@ -374,19 +394,15 @@
                 equal(treeview.find(".k-item:last").attr(kendo.attr("uid")), child.uid);
             });
 
-            test("Dragging to root level between treeviews", function() {
-                var tree1 = $("<div />").appendTo("body").kendoTreeView([
-                        { text: "foo" }
-                    ]),
-                    tree2 = $("<div />").appendTo("body").kendoTreeView([
-                        { text: "bar" }
-                    ]);
+            test("moving node after initializing from list", function() {
+                treeviewFromHtml("<ul><li>foo<ul><li>bar</li></ul></li></ul>");
 
-                tree2.data("kendoTreeView").insertBefore(tree2.find(".k-item"), tree1.find(".k-item"));
+                treeviewObject.insertAfter(treeviewObject.findByText("bar"), treeviewObject.findByText("foo"));
 
-                equal(tree1.find(".k-item").length, 2);
-                equal(tree2.find(".k-item").length, 0);
+                equal(treeview.closest(".k-treeview").find("ul").length, 1);
+                equal(treeview.find(".k-item:last").text(), "bar");
             });
+
         </script>
 
         <div id="qunit-fixture"> </div>
