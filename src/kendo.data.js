@@ -2683,7 +2683,7 @@
             }
 
             if (urlField) {
-                record[urlField] = children.add(item).find("a").attr("href");
+                record[urlField] = children.find("a").attr("href");
             }
 
             if (imageUrlField) {
