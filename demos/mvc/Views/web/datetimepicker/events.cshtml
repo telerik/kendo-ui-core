@@ -6,12 +6,12 @@
 
             <script>
                 $(document).ready(function() {
-                    function onOpen() {
-                        kendoConsole.log("Open");
+                    function onOpen(e) {
+                        kendoConsole.log("Open: " + e.view + " view");
                     }
 
-                    function onClose() {
-                        kendoConsole.log("Close");
+                    function onClose(e) {
+                        kendoConsole.log("Close: " + e.view + " view");
                     }
 
                     function onChange() {
