@@ -244,7 +244,7 @@
         }
 
         function showMenuView(e) {
-            e.view.content.find(".item-list").data("kendoMobileListView")._refresh();
+            e.view.content.find(".item-list").data("kendoMobileListView").refresh();
         }
 
         app = new kendo.mobile.Application($(document.body), { transition: "slide" });
