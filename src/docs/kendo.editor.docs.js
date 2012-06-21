@@ -76,6 +76,8 @@
          *      "strikethrough",
          *      "fontName",
          *      "fontSize",
+         *      "foreColor",
+         *      "backColor",
          *      "justifyLeft",
          *      "justifyCenter",
          *      "justifyRight",
