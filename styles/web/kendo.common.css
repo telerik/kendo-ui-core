@@ -1104,6 +1104,7 @@ div.k-grid-header .k-header
 {
     height: 100%;
     overflow-y: hidden;
+    position:relative;
 }
 
 .k-grid-header table,
