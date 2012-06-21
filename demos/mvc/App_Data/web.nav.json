@@ -288,7 +288,7 @@
                     "packages": ["mvc"]
                 },
                 {
-                    "text": "Custom remote binding",
+                    "text": "Custom ajax binding",
                     "url": "grid/customajaxbinding.html",
                     "packages": ["mvc"]
                 },
@@ -303,29 +303,29 @@
                     "packages": ["mvc"]
                 },
                 {
-                    "text": "Batch Editing",
+                    "text": "Batch editing",
                     "url": "grid/editing.html"
                 },
                 {
-                    "text": "Inline Editing",
+                    "text": "Inline editing",
                     "url": "grid/editing-inline.html"
                 },
                 {
-                    "text": "Popup Editing",
+                    "text": "Popup editing",
                     "url": "grid/editing-popup.html",
                     "packages": ["!mvc"]
                 },
                 {
-                    "text": "Editing Custom Editor",
+                    "text": "Editing custom editor",
                     "url": "grid/editing-custom.html"
                 },
                 {
-                    "text": "Server Editing",
+                    "text": "Server editing",
                     "url": "grid/serverediting.html",
                     "packages": ["mvc"]
                 },
                 {
-                    "text": "Custom Validator Editing",
+                    "text": "Custom validator editing",
                     "url": "grid/editingcustomvalidation.html",
                     "packages": ["mvc"]
                 },
@@ -348,7 +348,7 @@
                     "url": "grid/hierarchy.html"
                 },
                 {
-                    "text": "Server Hierarchy",
+                    "text": "Server hierarchy",
                     "url": "grid/serverhierarchy.html",
                     "packages": ["mvc"]
                 },
@@ -357,7 +357,7 @@
                     "url": "grid/detailtemplate.html"
                 },
                 {
-                    "text": "Server Detail template",
+                    "text": "Server detail template",
                     "url": "grid/serverdetails.html",
                     "packages": ["mvc"]
                 },
@@ -380,7 +380,7 @@
                     "url": "grid/aggregates.html"
                 },
                 {
-                    "text": "Server Aggregates",
+                    "text": "Server aggregates",
                     "url": "grid/serveraggregates.html",
                     "packages": ["mvc"]
                 },
