@@ -38,18 +38,6 @@ namespace Kendo.Mvc.UI.Fluent
             Command.CancelText = text;
 
             return this;
-        }
-
-        /// <summary>
-        /// Sets the text displayed by the "insert" button. If not set a default value is used.
-        /// </summary>
-        /// <param name="text">The text which should be displayed</param>
-        /// <returns></returns>
-        public GridEditActionCommandBuilder InsertText(string text)
-        {
-            Command.InsertText = text;
-
-            return this;
-        }
+        }        
     }
 }

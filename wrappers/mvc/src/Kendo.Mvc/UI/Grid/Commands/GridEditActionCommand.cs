@@ -5,22 +5,24 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.Resources;
     using Kendo.Mvc.UI.Html;
+    using System.Linq;
 
     public class GridEditActionCommand : GridActionCommandBase
     {
         public GridEditActionCommand()
-        {
-            InsertText = Messages.Grid_Update;
+        {            
             UpdateText = Messages.Grid_Update;
             Text = Messages.Grid_Edit;
             CancelText = Messages.Grid_Cancel;
         }
 
+        private const string DefaultUpdateText = "Update";
+        private const string DefaultEditText = "Edit";
+        private const string DefaultCancelText = "Cancel";
+
         public string UpdateText { get; set; }
 
-        public string CancelText { get; set; }
-
-        public string InsertText { get; set; }
+        public string CancelText { get; set; }        
 
         public override string Name
         {
@@ -45,11 +47,17 @@ namespace Kendo.Mvc.UI
         {
             var result = base.Serialize(urlBuilder);
 
-            FluentDictionary.For(result)
-                .Add("cancelText", CancelText, (System.Func<bool>)CancelText.HasValue)
-                .Add("updateText", UpdateText, (System.Func<bool>)UpdateText.HasValue)
-                .Add("insertText", InsertText, (System.Func<bool>)InsertText.HasValue);
+            var texts = new Dictionary<string, object>();
 
+            FluentDictionary.For(texts)
+                .Add("cancel", CancelText, () => CancelText.HasValue() && CancelText != DefaultCancelText)
+                .Add("update", UpdateText, () => UpdateText.HasValue() && UpdateText != DefaultUpdateText)
+                .Add("edit", Text, () => Text.HasValue() && Text != DefaultEditText);
+
+            if (texts.Any())
+	        {
+		        result["text"] = texts;
+            }
             return result;
         }
 
@@ -81,7 +89,7 @@ namespace Kendo.Mvc.UI
 
             cancelButton.SpriteCssClass = "k-cancel";
 
-            var insertButton = CreateButton<GridButtonBuilder>(InsertText, UIPrimitives.Grid.Insert);
+            var insertButton = CreateButton<GridButtonBuilder>(UpdateText, UIPrimitives.Grid.Insert);
             insertButton.SpriteCssClass = "k-insert";
             insertButton.HtmlHelper = htmlHelper;
 

@@ -34,7 +34,7 @@
         columns.Bound(p => p.ProductName);
         columns.Bound(p => p.UnitPrice).Width(140);
         columns.Bound(p => p.UnitsInStock).Width(120);
-        columns.Command(command => { command.Edit(); command.Destroy(); }).Width(200);
+        columns.Command(command => { command.Edit(); command.Destroy(); }).Width(220);
     })
     .ToolBar(toolbar => toolbar.Create())
     .Editable(editable => editable.Mode(GridEditMode.InLine))

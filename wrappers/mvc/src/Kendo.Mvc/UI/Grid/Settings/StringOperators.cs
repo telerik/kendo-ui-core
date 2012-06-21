@@ -25,7 +25,7 @@ namespace Kendo.Mvc.UI
         private const string DefaultStartsWith = "Starts with";
         private const string DefaultEndsWith = "Ends with";
         private const string DefaultContains = "Contains";
-        private const string DefaultDoesNotContain = "Contains";
+        private const string DefaultDoesNotContain = "Does not contain";
 
         private const int DefaultNumberOfFilters = 6;
 
