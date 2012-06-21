@@ -143,6 +143,10 @@
             else {
                 if (!(kendo.support.touch && single)) {
                     that._downTarget.addClass(ACTIVE);
+
+                    if (single && that._downTarget.hasClass(SELECTED)) {
+                        that._downTarget.removeClass(ACTIVE);
+                    }
                 }
             }
         },
