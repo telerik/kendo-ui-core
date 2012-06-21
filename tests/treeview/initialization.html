@@ -78,7 +78,15 @@
             });
 
             test("initialization from fully rendered treeview", function() {
-                list = $('<div class="k-widget k-treeview k-reset" id="treeview"><ul class="k-group"><li class="k-item k-first k-last"><div class="k-top k-bot"><span class="k-icon k-minus"></span><span class="k-in"><span class="k-sprite folder"></span>My Web Site</span></li></ul></div>');
+                list = $('<div class="k-widget k-treeview k-reset" id="treeview">' +
+                    '<ul class="k-group">' +
+                        '<li class="k-item k-first k-last">' +
+                            '<div class="k-top k-bot"><span class="k-icon k-minus"></span>' +
+                                '<span class="k-in">My Web Site</span>' +
+                                '</div>' +
+                        '</li>' +
+                    '</ul>' +
+                '</div>');
 
 
                 list.kendoTreeView();
