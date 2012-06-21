@@ -1938,7 +1938,7 @@
                             cell = $(this);
                             filterMenu = cell.data("kendoFilterMenu");
                             if (filterMenu) {
-                                cell.destroy();
+                                filterMenu.destroy();
                             }
                             cell.kendoFilterMenu(extend(true, {}, filterable, columns[index].filterable, { dataSource: that.dataSource }));
                         }
