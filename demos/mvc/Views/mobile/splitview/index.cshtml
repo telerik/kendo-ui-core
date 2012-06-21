@@ -1,6 +1,6 @@
 <div data-role="splitview">
     <div data-role="pane" data-layout="side-default" data-transition="slide">
-        <div data-role="view" data-title="Mailboxes" id="side-root">
+        <div data-role="view" data-title="Categories" id="side-root">
             <ul data-role="listview" data-style="inset" data-source="splitViewCategories" data-template="categoriesTemplate">
             </ul>
         </div>
@@ -9,7 +9,7 @@
             <a href="\#side-inbox?CategoryID=#: CategoryID#">#: CategoryName #</a>
         </script>
 
-        <div data-role="view" id="side-inbox" data-title="Inbox" data-show="filterProducts">
+        <div data-role="view" id="side-inbox" data-title="Products" data-show="filterProducts">
             <ul data-role="listview" data-auto-bind="false" data-source="splitViewProducts" data-template="productsTemplate">
 
             </ul>
@@ -148,4 +148,40 @@
        font-size: .7em;
        font-weight: normal;
     }
+    
+    #side-inbox .km-content h3 {
+       margin-left: 0;
+    }
+    #main-pane .km-content{
+    	padding: 30px;
+    }
+    
+    #main-pane dl {
+    	float: left;
+    	margin: 0;
+    	padding: 0 0 20px 0;
+    }
+    
+    #main-pane dl:after {
+        visibility: hidden;
+        display: block;
+        font-size: 0;
+        content: " ";
+        clear: both;
+        height: 0;
+    }
+    
+    #main-pane dt, #main-pane dd {
+    	display: block;
+    	float: left;
+    	margin: 0;
+    	padding: 0;
+    }
+    
+    #main-pane dt {
+    	clear: left;
+    	width: 60px;
+    	text-align: right;
+    	padding: 0 10px;
+    } 
 </style>

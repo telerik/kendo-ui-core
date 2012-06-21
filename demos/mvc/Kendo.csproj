@@ -112,6 +112,8 @@
     <Content Include="bin\System.Web.WebPages.xml" />
     <Content Include="content\dataviz\js\kendo.examples.nav.js" />
     <Content Include="content\dataviz\overview\bar.png" />
+    <Content Include="content\dataviz\overview\bubble.png" />
+    <Content Include="content\dataviz\overview\donut.png" />
     <Content Include="content\dataviz\overview\line.png" />
     <Content Include="content\dataviz\overview\overlay.png" />
     <Content Include="content\dataviz\overview\pie.png" />
@@ -251,9 +253,14 @@
     <Content Include="content\shared\images\foods\80.jpg" />
     <Content Include="content\shared\images\foods\9.jpg" />
     <Content Include="content\shared\images\patterns\pattern1.png" />
+    <Content Include="content\shared\images\patterns\pattern10.png" />
     <Content Include="content\shared\images\patterns\pattern2.png" />
     <Content Include="content\shared\images\patterns\pattern3.png" />
     <Content Include="content\shared\images\patterns\pattern4.png" />
+    <Content Include="content\shared\images\patterns\pattern5.png" />
+    <Content Include="content\shared\images\patterns\pattern6.png" />
+    <Content Include="content\shared\images\patterns\pattern7.png" />
+    <Content Include="content\shared\images\patterns\pattern9.png" />
     <Content Include="content\shared\images\people\1.jpg" />
     <Content Include="content\shared\js\console.js" />
     <Content Include="content\shared\js\examples.js" />
@@ -354,6 +361,7 @@
     <Content Include="content\web\datasource\xml-data\secrets-of-the-javascript-ninja.png" />
     <Content Include="content\web\datasource\xml-data\stunning-css3.png" />
     <Content Include="content\web\datepicker\mailSettings.png" />
+    <Content Include="content\web\datepicker\todo.png" />
     <Content Include="content\web\delete.png" />
     <Content Include="content\web\dragdrop\drag-clue.png" />
     <Content Include="content\web\dragdrop\draggable.png" />
