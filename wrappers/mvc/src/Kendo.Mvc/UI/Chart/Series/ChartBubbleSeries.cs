@@ -37,7 +37,7 @@ namespace Kendo.Mvc.UI
         {
             if (typeof(TModel).IsPlainType() && !sizeExpression.IsBindable())
             {
-                throw new InvalidOperationException(TextResource.MemberExpressionRequired);
+                throw new InvalidOperationException(Exceptions.MemberExpressionRequired);
             }
 
             SizeMember = sizeExpression.MemberWithoutInstance();
