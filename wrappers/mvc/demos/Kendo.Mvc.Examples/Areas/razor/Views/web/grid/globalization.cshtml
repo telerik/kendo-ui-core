@@ -28,7 +28,7 @@
 
 @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>(Model)
     .Name("Grid")
-    .HtmlAttributes(new { style = "width: 700px" })
+    .HtmlAttributes(new { style = "width: 700px; float: left;" })
     .Columns(columns =>
     {
         columns.Bound(p => p.ProductName);

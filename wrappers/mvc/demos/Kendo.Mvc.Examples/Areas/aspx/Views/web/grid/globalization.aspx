@@ -27,7 +27,7 @@
 
 <%: Html.Kendo().Grid(Model)
         .Name("Grid")
-        .HtmlAttributes(new { style = "width:700px" })
+        .HtmlAttributes(new { style = "width:700px; float: left;" })
         .Columns(columns =>
         {
             columns.Bound(p => p.ProductID).Width(100);
