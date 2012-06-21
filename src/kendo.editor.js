@@ -3643,7 +3643,6 @@ var FontTool = Tool.extend({
         Tool.fn.init.call(that, options);
 
         // IE has single selection hence we are using select box instead of combobox
-        that.options = options;
         that.type = ($.browser.msie || kendo.support.touch) ? "kendoDropDownList" : "kendoComboBox";
         that.format = [{ tags: ["span"] }],
         that.finder = new GreedyInlineFormatFinder(that.format, options.cssAttr);
@@ -3680,11 +3679,13 @@ var FontTool = Tool.extend({
             options = this.options,
             toolName = options.name,
             dataSource,
-            defaultValue = options.defaultValue ? options.defaultValue : [];
+            defaultValue = [];
 
-
-        if (defaultValue[0].text) {
-            defaultValue[0].text = editor.options.messages[defaultValue[0].text];
+        if (options.defaultValue) {
+           defaultValue = [{
+                text: editor.options.messages[options.defaultValue[0].text],
+                value: options.defaultValue[0].value
+           }];
         }
 
         dataSource = defaultValue.concat(options.items ? options.items : editor.options[toolName]);

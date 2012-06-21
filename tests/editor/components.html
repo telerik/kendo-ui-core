@@ -69,14 +69,14 @@
             });
 
             test('FontName combobox accepts custom item collections and preserves the default value item', function() {
-                
+
                 var fontNameCombo = editor2.wrapper.find("select.k-fontName").data("kendoComboBox");
 
                 var popupItems = fontNameCombo.popup.element.find("li");
                 equal(popupItems.length, 3);
 
                 var firstItemText = popupItems.first().text();
-                equal(firstItemText, kendo.ui.Editor.fn.options.localization.fontNameInherit);
+                equal(firstItemText, kendo.ui.Editor.fn.options.messages.fontNameInherit);
 
                 var lastItem = popupItems.last();
                 var lastItemText = lastItem.text();
@@ -93,14 +93,14 @@
             });
 
             test('FontSize combobox accepts custom item collections and preserves the default value item', function() {
-                
+
                 var fontSizeCombo = editor2.wrapper.find("select.k-fontSize").data("kendoComboBox");
 
                 var popupItems = fontSizeCombo.popup.element.find("li");
                 equal(popupItems.length, 3);
 
                 var firstItemText = popupItems.first().text();
-                equal(firstItemText, kendo.ui.Editor.fn.options.localization.fontSizeInherit);
+                equal(firstItemText, kendo.ui.Editor.fn.options.messages.fontSizeInherit);
 
                 var lastItem = popupItems.last();
                 var lastItemText = lastItem.text();
@@ -117,7 +117,7 @@
             });
 
             test('FormatBlock dropdown accepts custom item collections', function() {
-                
+
                 var formatBlockDropDown = editor2.wrapper.find("select.k-formatBlock").data("kendoSelectBox");
 
                 var popupItems = formatBlockDropDown.popup.element.find("li");
