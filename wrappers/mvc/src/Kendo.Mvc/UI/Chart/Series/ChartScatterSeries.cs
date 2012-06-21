@@ -23,7 +23,6 @@ namespace Kendo.Mvc.UI
         public ChartScatterSeries(Chart<TModel> chart, Expression<Func<TModel, TXValue>> xValueExpression, Expression<Func<TModel, TYValue>> yValueExpression)
             : base(chart)
         {
-
             if (typeof(TModel).IsPlainType() && !(xValueExpression.IsBindable() || yValueExpression.IsBindable()))
             {
                 throw new InvalidOperationException(Exceptions.MemberExpressionRequired);
@@ -43,7 +42,6 @@ namespace Kendo.Mvc.UI
         public ChartScatterSeries(Chart<TModel> chart, IEnumerable data)
             : base(chart)
         {
-
             Data = data;
             Initialize();
         }

@@ -576,6 +576,8 @@
     </Content>
     <Content Include="Views\MobileDevice\Index.cshtml" />
     <Content Include="Views\Shared\NoLayout.cshtml" />
+    <None Include="content\dataviz\js\crime-stats.json" />
+    <None Include="content\dataviz\js\screen_resolution.json" />
     <None Include="content\web\datasource\internet-users.json" />
     <None Include="content\web\datasource\top250movies.json" />
     <Content Include="Views\mobile\button\appearance.cshtml" />
@@ -628,6 +630,9 @@
     <Content Include="Views\dataviz\donut-charts\remote-data.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\dataviz\bubble-charts\index.cshtml" />
+    <Content Include="Views\dataviz\bubble-charts\local-data.cshtml" />
+    <Content Include="Views\dataviz\bubble-charts\remote-data.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />

@@ -516,5 +516,363 @@ namespace Kendo.Mvc.Examples.Models
                 }
             };
         }
+
+        public static IList<JobGrowth> JobGrowthData()
+        {
+            return new JobGrowth[] {
+                new JobGrowth {
+                    Growth = -2500,
+                    Jobs = 50000,
+                    Applications = 500000,
+                    Company = "Microsoft"
+                }, new JobGrowth {
+                    Growth = 500,
+                    Jobs = 110000,
+                    Applications = 7600000,
+                    Company = "Starbucks"
+                }, new JobGrowth {
+                    Growth = 7000,
+                    Jobs = 19000,
+                    Applications = 700000,
+                    Company = "Google"
+                }, new JobGrowth {
+                    Growth = 1400,
+                    Jobs = 150000,
+                    Applications = 700000,
+                    Company = "Publix Super Markets"
+                }, new JobGrowth {
+                    Growth = 2400,
+                    Jobs = 30000,
+                    Applications = 300000,
+                    Company = "PricewaterhouseCoopers"
+                }, new JobGrowth {
+                    Growth = 2450,
+                    Jobs = 34000,
+                    Applications = 90000,
+                    Company = "Cisco"
+                }, new JobGrowth {
+                    Growth = 2700,
+                    Jobs = 34000,
+                    Applications = 400000,
+                    Company = "Accenture"
+                }, new JobGrowth {
+                    Growth = 2900,
+                    Jobs = 40000,
+                    Applications = 450000,
+                    Company = "Deloitte"
+                }, new JobGrowth {
+                    Growth = 3000,
+                    Jobs = 55000,
+                    Applications = 900000,
+                    Company = "Whole Foods Market"
+                }
+            };
+        }
+
+        public static IList<CrimeData> CrimeStats()
+        {
+            return new CrimeData[] {
+                new CrimeData {
+                    State = "Alabama",
+                    Murder = 8.2,
+                    Burglary = 953.8,
+                    Population = 4627851
+                },
+                new CrimeData {
+                    State = "Alaska",
+                    Murder = 4.8,
+                    Burglary = 622.5,
+                    Population = 686293
+                },
+                new CrimeData {
+                    State = "Arizona",
+                    Murder = 7.5,
+                    Burglary = 948.4,
+                    Population = 6500180
+                },
+                new CrimeData {
+                    State = "Arkansas",
+                    Murder = 6.7,
+                    Burglary = 1084.6,
+                    Population = 2855390
+                },
+                new CrimeData {
+                    State = "California",
+                    Murder = 6.9,
+                    Burglary = 693.3,
+                    Population = 36756666
+                },
+                new CrimeData {
+                    State = "Colorado",
+                    Murder = 3.7,
+                    Burglary = 744.8,
+                    Population = 4861515
+                },
+                new CrimeData {
+                    State = "Connecticut",
+                    Murder = 2.9,
+                    Burglary = 437.1,
+                    Population = 3501252
+                },
+                new CrimeData {
+                    State = "Delaware",
+                    Murder = 4.4,
+                    Burglary = 688.9,
+                    Population = 873092
+                },
+                new CrimeData {
+                    State = "Florida",
+                    Murder = 5,
+                    Burglary = 926.3,
+                    Population = 18328340
+                },
+                new CrimeData {
+                    State = "Georgia",
+                    Murder = 6.2,
+                    Burglary = 931,
+                    Population = 9685744
+                },
+                new CrimeData {
+                    State = "Hawaii",
+                    Murder = 1.9,
+                    Burglary = 767.9,
+                    Population = 1288198
+                },
+                new CrimeData {
+                    State = "Idaho",
+                    Murder = 2.4,
+                    Burglary = 564.4,
+                    Population = 1523816
+                },
+                new CrimeData {
+                    State = "Illinois",
+                    Murder = 6,
+                    Burglary = 606.9,
+                    Population = 12901563
+                },
+                new CrimeData {
+                    State = "Indiana",
+                    Murder = 5.7,
+                    Burglary = 697.6,
+                    Population = 6376792
+                },
+                new CrimeData {
+                    State = "Iowa",
+                    Murder = 1.3,
+                    Burglary = 606.4,
+                    Population = 3002555
+                },
+                new CrimeData {
+                    State = "Kansas",
+                    Murder = 3.7,
+                    Burglary = 689.2,
+                    Population = 2802134
+                },
+                new CrimeData {
+                    State = "Kentucky",
+                    Murder = 4.6,
+                    Burglary = 634,
+                    Population = 4269245
+                },
+                new CrimeData {
+                    State = "Louisiana",
+                    Murder = 9.9,
+                    Burglary = 870.6,
+                    Population = 4410796
+                },
+                new CrimeData {
+                    State = "Maine",
+                    Murder = 1.4,
+                    Burglary = 478.5,
+                    Population = 1316456
+                },
+                new CrimeData {
+                    State = "Maryland",
+                    Murder = 9.9,
+                    Burglary = 641.4,
+                    Population = 5633597
+                },
+                new CrimeData {
+                    State = "Massachusetts",
+                    Murder = 2.7,
+                    Burglary = 541.1,
+                    Population = 6497967
+                },
+                new CrimeData {
+                    State = "Michigan",
+                    Murder = 6.1,
+                    Burglary = 696.8,
+                    Population = 10003422
+                },
+                new CrimeData {
+                    State = "Minnesota",
+                    Murder = 2.2,
+                    Burglary = 578.9,
+                    Population = 5220393
+                },
+                new CrimeData {
+                    State = "Mississippi",
+                    Murder = 7.3,
+                    Burglary = 919.7,
+                    Population = 2938618
+                },
+                new CrimeData {
+                    State = "Missouri",
+                    Murder = 6.9,
+                    Burglary = 738.3,
+                    Population = 5911605
+                },
+                new CrimeData {
+                    State = "Montana",
+                    Murder = 1.9,
+                    Burglary = 389.2,
+                    Population = 967440
+                },
+                new CrimeData {
+                    State = "Nebraska",
+                    Murder = 2.5,
+                    Burglary = 532.4,
+                    Population = 1783432
+                },
+                new CrimeData {
+                    State = "Nevada",
+                    Murder = 8.5,
+                    Burglary = 972.4,
+                    Population = 2600167
+                },
+                new CrimeData {
+                    State = "New Hampshire",
+                    Murder = 1.4,
+                    Burglary = 317,
+                    Population = 1315809
+                },
+                new CrimeData {
+                    State = "New Jersey",
+                    Murder = 4.8,
+                    Burglary = 447.1,
+                    Population = 8682661
+                },
+                new CrimeData {
+                    State = "New Mexico",
+                    Murder = 7.4,
+                    Burglary = 1093.9,
+                    Population = 1984356
+                },
+                new CrimeData {
+                    State = "New York",
+                    Murder = 4.5,
+                    Burglary = 353.3,
+                    Population = 19490297
+                },
+                new CrimeData {
+                    State = "North Carolina",
+                    Murder = 6.7,
+                    Burglary = 1201.1,
+                    Population = 9222414
+                },
+                new CrimeData {
+                    State = "North Dakota",
+                    Murder = 1.1,
+                    Burglary = 311.9,
+                    Population = 641481
+                },
+                new CrimeData {
+                    State = "Ohio",
+                    Murder = 5.1,
+                    Burglary = 872.8,
+                    Population = 11485910
+                },
+                new CrimeData {
+                    State = "Oklahoma",
+                    Murder = 5.3,
+                    Burglary = 1006,
+                    Population = 3642361
+                },
+                new CrimeData {
+                    State = "Oregon",
+                    Murder = 2.2,
+                    Burglary = 758.6,
+                    Population = 3790060
+                },
+                new CrimeData {
+                    State = "Pennsylvania",
+                    Murder = 6.1,
+                    Burglary = 451.6,
+                    Population = 12448279
+                },
+                new CrimeData {
+                    State = "Rhode Island",
+                    Murder = 3.2,
+                    Burglary = 494.2,
+                    Population = 1050788
+                },
+                new CrimeData {
+                    State = "South Carolina",
+                    Murder = 7.4,
+                    Burglary = 1000.9,
+                    Population = 4479800
+                },
+                new CrimeData {
+                    State = "South Dakota",
+                    Murder = 2.3,
+                    Burglary = 324.4,
+                    Population = 804194
+                },
+                new CrimeData {
+                    State = "Tennessee",
+                    Murder = 7.2,
+                    Burglary = 1026.9,
+                    Population = 6214888
+                },
+                new CrimeData {
+                    State = "Texas",
+                    Murder = 6.2,
+                    Burglary = 961.6,
+                    Population = 24326974
+                },
+                new CrimeData {
+                    State = "Utah",
+                    Murder = 2.3,
+                    Burglary = 606.2,
+                    Population = 2736424
+                },
+                new CrimeData {
+                    State = "Vermont",
+                    Murder = 1.3,
+                    Burglary = 491.8,
+                    Population = 621270
+                },
+                new CrimeData {
+                    State = "Virginia",
+                    Murder = 6.1,
+                    Burglary = 392.1,
+                    Population = 7769089
+                },
+                new CrimeData {
+                    State = "Washington",
+                    Murder = 3.3,
+                    Burglary = 959.7,
+                    Population = 6549224
+                },
+                new CrimeData {
+                    State = "West Virginia",
+                    Murder = 4.4,
+                    Burglary = 621.2,
+                    Population = 1814468
+                },
+                new CrimeData {
+                    State = "Wisconsin",
+                    Murder = 3.5,
+                    Burglary = 440.8,
+                    Population = 5627967
+                },
+                new CrimeData {
+                    State = "Wyoming",
+                    Murder = 2.7,
+                    Burglary = 476.3,
+                    Population = 532668
+                }
+            };
+        }
     }
 }
