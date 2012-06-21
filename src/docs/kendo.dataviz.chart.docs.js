@@ -4552,7 +4552,7 @@
          *      name: "Points"
          *  }]
          *  // ...
-         * @option {Number} [series.type="bubble".opacity] <1> The series opacity.
+         * @option {Number} [series.type="bubble".opacity] <0.6> The series opacity.
          * @option {String} [series.type="bubble".categoryField]
          * The data field containing the bubble category name.
          * @option {String} [series.type="bubble".colorField]
@@ -4567,9 +4567,9 @@
          * The data field containing the bubble size value.
          * @option {Number} [series.type="bubble".maxSize] <100> The max size of the bubble.
          * @option {Number} [series.type="bubble".minSize] <5> The min size of the bubble.
-         * @option {Object} [series.type="bubble".negativeValues] The series negative values.
-         * @option {Boolean} [series.type="bubble".negativeValues.visible] The visibility of the negative values.
-         * @option {String} [series.type="bubble".negativeValues.color] The color of the negative values.
+         * @option {Object} [series.type="bubble".negativeValues] The settings for negative values.
+         * @option {Boolean} [series.type="bubble".negativeValues.visible] <false> The visibility of the negative values.
+         * @option {String} [series.type="bubble".negativeValues.color] <"#ffffff"> The color of the negative values.
          * @option {Object} [series.type="bubble".labels] Configures the series data labels.
          * @option {String} [series.type="bubble".labels.color] The text color of the labels.
          * @option {String} [series.type="bubble".labels.background] The background color of the labels.
@@ -4724,6 +4724,13 @@
          * The text color of the tooltip. The default is the same as the series labels color.
          * @option {String} [series.type="bubble".tooltip.font] <"12px Arial,Helvetica,sans-serif"> The tooltip font.
          * @option {String} [series.type="bubble".tooltip.format] The tooltip format.
+         * Format variables:
+         * <ul>
+         *     <li><strong>0</strong> - the x value</li>
+         *     <li><strong>1</strong> - the y value</li>
+         *     <li><strong>2</strong> - the size value</li>
+         *     <li><strong>3</strong> - the category name</li>
+         * </ul>
          * _example
          * //sets format of the tooltip
          * format: "{0:C}--{1:C}"
