@@ -2232,6 +2232,14 @@
     deepExtend(LinePoint.fn, PointEventsMixin);
 
     var Bubble = LinePoint.extend({
+        init: function(value, options) {
+            var point = this;
+
+            LinePoint.fn.init.call(point, value, options);
+
+            point.category = value.category;
+        },
+
         options: {
             labels: {
                 position: CENTER
