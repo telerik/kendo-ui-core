@@ -470,8 +470,6 @@
 
             that._accessors();
 
-            that._dataSource(inferred);
-
             if (options.template && typeof options.template == "string") {
                 options.template = template(options.template);
             } else if (!options.template) {
@@ -496,6 +494,8 @@
                 that.wrapper = element;
                 that.root = element.children("ul").eq(0);
             }
+
+            that._dataSource(inferred);
 
             that.wrapper
                 .on(MOUSEENTER, ".k-in.k-state-selected", function(e) { e.preventDefault(); })
