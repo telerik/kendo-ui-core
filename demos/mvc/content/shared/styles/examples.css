@@ -1543,6 +1543,7 @@ pre.prettyprint
     color:#e26b1d;
 }
 
+#codeStrip li.k-state-active:before,
 #codeStrip li.k-state-active:after
 {
     content:" ";
@@ -1553,9 +1554,15 @@ pre.prettyprint
     left: 50%;
     margin: 0 0 0 -6px;
     position: absolute;
-    top: 32px;
+    bottom: 0;
     width: 0;
     height:0;
+}
+
+#codeStrip li.k-state-active:before
+{
+    border-color: #ccc transparent;
+    bottom: 1px;
 }
 
 #codeStrip .k-state-active .k-link,
