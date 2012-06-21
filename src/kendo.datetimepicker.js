@@ -141,6 +141,8 @@
         DATE = Date,
         MIN = new DATE(1900, 0, 1),
         MAX = new DATE(2099, 11, 31),
+        dateViewParams = { view: "date" },
+        timeViewParams = { view: "time" },
         extend = $.extend;
 
     var DateTimePicker = Widget.extend(/** @lends kendo.ui.DateTimePicker.prototype */{
@@ -461,6 +463,10 @@
         * @name kendo.ui.DateTimePicker#open
         * @event
         * @param {Event} e
+        *
+        * @param {String} e.view
+        * The view which is opened. Possible values are "date" and "time".
+        *
         * @example
         * $("#dateTimePicker").kendoDateTimePicker({
         *     open: function(e) {
@@ -481,6 +487,10 @@
         * @name kendo.ui.DateTimePicker#close
         * @event
         * @param {Event} e
+        *
+        * @param {String} e.view
+        * The view which is closed. Possible values are "date" and "time".
+        *
         * @example
         * $("#dateTimePicker").kendoDateTimePicker({
         *     close: function(e) {
@@ -891,9 +901,7 @@
 
         _views: function() {
             var that = this,
-                options = that.options,
-                dateViewParams = { view: "date" },
-                timeViewParams = { view: "time" };
+                options = that.options;
 
             that.dateView = new kendo.DateView(extend({}, options, {
                 anchor: that.wrapper,
