@@ -669,11 +669,12 @@
                 equal(children[0].text, "bar");
             });
 
-            test("infer of url / spriteCssClass / imageUrl fields", function() {
+            test("infer of nested url / spriteCssClass / imageUrl fields", function() {
                 var list = $("<ul><li>" +
+                        "<div><img class='k-image' src='image.png' />" +
+                        "<a href='http://kendoui.com/'>" +
                         "<span class='k-sprite spriteClass'></span>" +
-                        "<img class='k-image' src='image.png' />" +
-                        "<a href='http://kendoui.com/'>foo</a>" +
+                        "foo</a></div>"+
                     "</li></ul>"),
                     dataSource = HierarchicalDataSource.create({
                         list: list,

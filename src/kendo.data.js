@@ -2675,25 +2675,25 @@
 
             textChild = item[0].firstChild;
             children = item.children();
+            list = children.filter("ul");
+            children = children.filter(":not(ul)");
 
             if (textChild) {
-                record[textField] = textChild.nodeType == 3 ? textChild.nodeValue : children.filter(":not(ul)").text();
+                record[textField] = textChild.nodeType == 3 ? textChild.nodeValue : children.text();
             }
 
             if (urlField) {
-                record[urlField] = children.filter("a").attr("href");
+                record[urlField] = children.add(item).find("a").attr("href");
             }
 
             if (imageUrlField) {
-                record[imageUrlField] = children.filter("img").attr("src");
+                record[imageUrlField] = children.find("img").attr("src");
             }
 
             if (spriteCssClassField) {
-                className = children.filter(".k-sprite").prop("className");
+                className = children.find(".k-sprite").prop("className");
                 record[spriteCssClassField] = className && $.trim(className.replace("k-sprite", ""));
             }
-
-            list = children.filter("ul");
 
             if (list.length) {
                 record.items = inferList(list.eq(0), fields);
