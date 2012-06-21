@@ -27,8 +27,8 @@
         calendars: {
             standard: {
                 days: {
-                    names: ["nedelja","ponedeljak","utorak","sreda","četvrtak","petak","subota"],
-                    namesAbbr: ["ned","pon","uto","sre","čet","pet","sub"],
+                    names: ["neđelja","poneđeljak","utorak","srijeda","četvrtak","petak","subota"],
+                    namesAbbr: ["neđ","pon","uto","sri","čet","pet","sub"],
                     namesShort: ["ne","po","ut","sr","če","pe","su"]
                 },
                 months: {
