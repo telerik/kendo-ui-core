@@ -742,6 +742,8 @@ p#copy
 .chartLineIcon{background-position:0px -20px;}
 .chartPieIcon{background-position:-20px -20px;}
 .chartScatterIcon{background-position:-40px -20px;}
+.chartDonutIcon{background-position:-140px -99px;}
+.chartBubbleIcon{background-position:0 -120px;}
 .comboBoxIcon{background-position:-60px -20px;}
 .dataSourceIcon{background-position:-80px -20px;}
 .datePickerIcon{background-position:-100px -20px;}
@@ -764,7 +766,6 @@ p#copy
 .mobileScrollerIcon{background-position:-120px -60px;}
 .mobileScrollViewIcon{background-position:-140px -60px;}
 .mobileSwitchIcon{background-position:-120px -80px;}
-.mobileActionSheetIcon{background-position:-60px -100px;}
 .sliderIcon{background-position:0 -80px;}
 .splitterIcon{background-position:-20px -80px;}
 .mobileTabStripIcon{background-position:-40px -80px;}
@@ -776,6 +777,10 @@ p#copy
 .uploadIcon{background-position:0 -100px;}
 .validatorIcon{background-position:-20px -100px;}
 .windowIcon{background-position:-40px -100px;}
+.mobilePopOverIcon{background-position:-60px -100px;}
+.mobileSplitViewIcon{background-position:-80px -100px;}
+.mobileActionSheetIcon{background-position:-100px -100px;}
+.mobileModalViewIcon{background-position:-120px -100px;}
 
 #mainWrapInner
 {

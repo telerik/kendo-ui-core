@@ -105,7 +105,7 @@
             "text": "ModalView",
             "name": "modalview",
             "documentation": "mobile/modalview",
-            "spriteCssClass": "mobileNavBarIcon",
+            "spriteCssClass": "mobileModalViewIcon",
             "items": [
                 {
                     "text": "Basic usage",
@@ -134,7 +134,7 @@
             "name": "popover",
             "tablet": true,
             "documentation": "mobile/popover",
-            "spriteCssClass": "mobileNavBarIcon",
+            "spriteCssClass": "mobilePopOverIcon",
             "items": [
                 {
                     "text": "Basic usage",
@@ -270,7 +270,7 @@
             "text": "SplitView",
             "name": "SplitView",
             "documentation": "mobile/splitview",
-            "spriteCssClass": "mobileAppIcon",
+            "spriteCssClass": "mobileSplitViewIcon",
             "tablet": true,
             "items": [
                 {
