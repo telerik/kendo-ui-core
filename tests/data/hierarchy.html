@@ -608,6 +608,82 @@
 
                 equal(counter, 3);
             });
+
+            test("infer from list", function() {
+                var list = $("<ul><li>foo</li><li>bar</li></ul>"),
+                    dataSource = HierarchicalDataSource.create({
+                        list: list,
+                        fields: [ { field: "text" } ]
+                    });
+
+                ok(dataSource instanceof HierarchicalDataSource);
+
+                dataSource.read();
+
+                var data = dataSource.data();
+
+                equal(data.length, 2);
+                equal(data[0].text, "foo");
+                equal(data[1].text, "bar");
+            });
+
+            test("infer from nested list", function() {
+                var list = $("<ul><li>foo<ul><li>bar</li></ul></li></ul>"),
+                    dataSource = HierarchicalDataSource.create({
+                        list: list,
+                        fields: [ { field: "text" } ]
+                    });
+
+                dataSource.read();
+
+                var data = dataSource.data();
+
+                equal(data.length, 1);
+                equal(data[0].text, "foo");
+
+                data[0].children.read();
+                var children = data[0].children.data();
+
+                equal(children.length, 1);
+                equal(children[0].text, "bar");
+            });
+
+            test("infer from nested list with text wrapper elements", function() {
+                var list = $("<ul><li><div>foo</div><ul><li><div>bar</div></li></ul></li></ul>"),
+                    dataSource = HierarchicalDataSource.create({
+                        list: list,
+                        fields: [ { field: "text" } ]
+                    });
+
+                dataSource.read();
+
+                var data = dataSource.data();
+
+                equal(data.length, 1);
+                equal(data[0].text, "foo");
+
+                data[0].children.read();
+                var children = data[0].children.data();
+
+                equal(children.length, 1);
+                equal(children[0].text, "bar");
+            });
+
+            test("infer with custom fields", function() {
+                var list = $("<ul><li>foo</li></ul>"),
+                    dataSource = HierarchicalDataSource.create({
+                        list: list,
+                        fields: [ { field: "productName" } ]
+                    });
+
+                dataSource.read();
+
+                var data = dataSource.data();
+
+                equal(data.length, 1);
+                equal(data[0].productName, "foo");
+            });
+
         </script>
     </body>
 </html>

@@ -2654,6 +2654,57 @@
         }
     });
 
+    function inferList(list, fields) {
+        var items = $(list).children(),
+            idx,
+            length,
+            data = [],
+            record,
+            firstField = fields[0],
+            item,
+            textChild,
+            children;
+
+        for (idx = 0, length = items.length; idx < length; idx++) {
+            record = {};
+            item = items.eq(idx);
+
+            textChild = item[0].firstChild;
+            children = item.children();
+
+            record[firstField.field] = textChild.nodeType == 3 ? textChild.nodeValue : children.eq(0).text();
+
+            list = children.filter("ul");
+
+            if (list.length) {
+                record.items = inferList(list.eq(0), fields);
+            }
+
+            data.push(record);
+        }
+
+        return data;
+    }
+
+    HierarchicalDataSource.create = function(options) {
+        options = options && options.push ? { data: options } : options;
+
+        var dataSource = options || {},
+            data = dataSource.data,
+            fields = dataSource.fields,
+            list = dataSource.list;
+
+        if (!data && fields && !dataSource.transport) {
+            if (list) {
+                data = inferList(list, fields);
+            }
+        }
+
+        dataSource.data = data;
+
+        return dataSource instanceof HierarchicalDataSource ? dataSource : new HierarchicalDataSource(dataSource);
+    };
+
     extend(true, kendo.data, /** @lends kendo.data */ {
         readers: {
             json: DataReader
