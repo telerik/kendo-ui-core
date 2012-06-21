@@ -1926,6 +1926,8 @@
         _filterable: function() {
             var that = this,
                 columns = that.columns,
+                cell,
+                filterMenu,
                 filterable = that.options.filterable;
 
             if (filterable) {
@@ -1933,7 +1935,12 @@
                     .find("th:not(.k-hierarchy-cell,.k-group-cell)")
                     .each(function(index) {
                         if (columns[index].filterable !== false && !columns[index].command) {
-                            $(this).kendoFilterMenu(extend(true, {}, filterable, columns[index].filterable, { dataSource: that.dataSource }));
+                            cell = $(this);
+                            filterMenu = cell.data("kendoFilterMenu");
+                            if (filterMenu) {
+                                cell.destroy();
+                            }
+                            cell.kendoFilterMenu(extend(true, {}, filterable, columns[index].filterable, { dataSource: that.dataSource }));
                         }
                     });
             }

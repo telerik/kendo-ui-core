@@ -79,8 +79,8 @@
             if (!link[0]) {
                 link = element.prepend('<a class="k-grid-filter" href="#"><span class="k-icon k-filter"/></a>').find(".k-grid-filter");
             }
-
-            link.click(proxy(that._click, that));
+            that._clickHandler = proxy(that._click, that);
+            link.click(that._clickHandler);
 
             that.dataSource = options.dataSource.bind("change", proxy(that.refresh, that));
 
@@ -153,6 +153,16 @@
             } else {
                 that.link.removeClass("k-state-active");
             }
+        },
+
+        destroy: function() {
+            kendo.unbind(this.form);
+
+            this.form.remove();
+
+            this.form.removeData(POPUP);
+            this.link.unbind("click", this._clickHandler);
+            this.element.removeData("kendoFilterMenu");
         },
 
         _bind: function(expression) {

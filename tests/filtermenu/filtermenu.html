@@ -555,6 +555,24 @@
                 ok(!filterMenu1.popup.visible());
             });
 
+            test("destroy detaches click handle and removes objects from the element", function() {
+                var dom1 = $("<div data-kendo-field=foo />").appendTo(document.body);
+
+                var filterMenu = new FilterMenu(dom1, {
+                    dataSource: dataSource
+                });
+                var popup = filterMenu.popup;
+
+                filterMenu.destroy();
+
+                filterMenu.link.click();
+
+                ok(!popup.visible());
+                ok(!dom1.data("kendoFilterMenu"));
+                ok(!filterMenu.form.data("kendoPopup"));
+            });
+
+
             test("boolean filter template", function() {
                 var filterMenu = new FilterMenu(dom.attr("data-kendo-field", "boo"), {
                     dataSource: dataSource
