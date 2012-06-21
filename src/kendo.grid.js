@@ -968,10 +968,13 @@
             var that = this,
                 html = '<div ' + kendo.attr("uid") + '="' + model.uid + '"><div class="k-edit-form-container">',
                 column,
+                command,
                 fields = [],
                 idx,
                 length,
                 tmpl,
+                updateText,
+                cancelText,
                 editable = that.options.editable,
                 options = isPlainObject(editable) ? editable.window : {},
                 settings = extend({}, kendo.Template, that.options.templateSettings);
@@ -999,11 +1002,20 @@
 
                             html += '<div class="k-edit-field">' + tmpl(model) + '</div>';
                         }
+                    } else if (column.command) {
+                        command = getCommand(column.command, "edit");
                     }
                 }
             }
 
-            html += that._createButton("update") + that._createButton("canceledit");
+            if (command) {
+                if (isPlainObject(command) && command.text && isPlainObject(command.text)) {
+                    updateText = command.text.update;
+                    cancelText = command.text.cancel;
+                }
+            }
+
+            html += that._createButton({ name: "update", text: updateText }) + that._createButton({ name: "canceledit", text: cancelText });
             html += '</div></div>';
 
             var container = that._editContainer = $(html)
