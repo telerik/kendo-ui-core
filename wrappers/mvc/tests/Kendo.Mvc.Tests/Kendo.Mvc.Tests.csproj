@@ -114,6 +114,8 @@
     <Compile Include="UI\Chart\ChartDateCategoryAxisBuilderTests.cs" />
     <Compile Include="UI\Chart\ChartPlotBandsFactoryTests.cs" />
     <Compile Include="UI\Chart\ChartDonutSeriesBuilderTests.cs" />
+    <Compile Include="UI\Chart\ChartBubbleSeriesBuilderTests.cs" />
+    <Compile Include="UI\Chart\BubbleData.cs" />
     <Compile Include="UI\Chart\PlotAreaBuilderTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartSerializationTests.cs" />
     <Compile Include="UI\Chart\ChartHtmlBuilderTests.cs" />
@@ -183,11 +185,11 @@
     <Compile Include="UI\Gauge\GaugeLinearPointerBuilderTests.cs" />
     <Compile Include="UI\NavigationBindingTestDouble.cs" />
     <Compile Include="UI\TextBox\NumericTextBoxTestHelper.cs" />
-    <Compile Include="UI\XYData.cs" />
+    <Compile Include="UI\Chart\XYData.cs" />
     <Compile Include="UI\Grid\GridForeignKeyColumnTests.cs" />
     <Compile Include="UI\Grid\Html\GridForeignKeyDataCellBuilderTests.cs" />
     <Compile Include="UI\Grid\Html\GridCustomActionCommandTests.cs" />
-    <Compile Include="UI\SalesData.cs" />
+    <Compile Include="UI\Chart\SalesData.cs" />
     <Compile Include="UI\DateTimePicker\DateTimePickerTestHelper.cs" />
     <Compile Include="UI\InputComponentExtensionsTests.cs" />
     <Compile Include="UI\Grid\AggregateDescriptorTests.cs" />

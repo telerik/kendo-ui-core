@@ -626,9 +626,9 @@ namespace Kendo.Mvc.UI.Fluent
             var expressionX = BuildMemberExpression(memberType, xMemberName);
             var expressionY = BuildMemberExpression(memberType, yMemberName);
             var expressionSize = BuildMemberExpression(memberType, sizeMemberName);
-            var expressionCategory = BuildMemberExpression(memberType, categoryMemberName);
-            var expressionColor = BuildMemberExpression(memberType, colorMemberName);
-            var expressionVisibleInLegend = BuildMemberExpression(memberType, visibleInLegendMemberName);
+            var expressionCategory = categoryMemberName.HasValue() ? BuildMemberExpression(memberType, categoryMemberName) : null;
+            var expressionColor = colorMemberName.HasValue() ? BuildMemberExpression(memberType, colorMemberName) : null;
+            var expressionVisibleInLegend = visibleInLegendMemberName.HasValue() ? BuildMemberExpression(memberType, visibleInLegendMemberName) : null;
 
             var seriesType = typeof(ChartBubbleSeries<,,,>).MakeGenericType(
                 typeof(TModel), expressionX.Body.Type, expressionY.Body.Type, expressionSize.Body.Type

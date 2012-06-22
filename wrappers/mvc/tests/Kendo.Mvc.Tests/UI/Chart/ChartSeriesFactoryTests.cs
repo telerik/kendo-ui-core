@@ -212,6 +212,34 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
+        public void Bubble_should_create_bound_scatter_series_from_expression()
+        {
+            var builder = factory.Bubble(s => s.RepSales, s => s.TotalSales, s => s.RepSales);
+            builder.Series.ShouldBeType<ChartBubbleSeries<SalesData, decimal, decimal, decimal>>();
+        }
+
+        [Fact]
+        public void Bubble_should_create_bound_scatter_series_from_type_and_member_name()
+        {
+            var builder = factory.Bubble(typeof(decimal), "RepSales", "TotalSales", "RepSales");
+            builder.Series.ShouldBeType<ChartBubbleSeries<SalesData, decimal, decimal, decimal>>();
+        }
+
+        [Fact]
+        public void Bubble_should_create_bound_scatter_series_from_member_name()
+        {
+            var builder = factory.Bubble("RepSales", "TotalSales", "RepSales");
+            builder.Series.ShouldBeType<ChartBubbleSeries<SalesData, decimal, decimal, decimal>>();
+        }
+
+        [Fact]
+        public void Bubble_should_create_unbound_scatter_series_from_data()
+        {
+            var builder = factory.Bubble(new int[] { 1 });
+            builder.Series.ShouldBeType<ChartBubbleSeries<SalesData, object, object, object>>();
+        }
+
+        [Fact]
         public void Pie_should_create_bound_Pie_series_from_expression()
         {
             var builder = factory.Pie(s => s.RepSales, s => s.RepName);
