@@ -5,13 +5,16 @@ namespace Kendo.Mvc.Infrastructure.Implementation
 
     public class AuthorizationContextCache : IAuthorizationContextCache
     {
+        private UrlHelper urlHelper;
         private readonly ICache cache;
+        private readonly IRouteDataCache routeDataCache;
         private readonly IControllerContextCache controllerContextCache;
         private readonly IControllerDescriptorCache controllerDescriptorCache;
 
-        public AuthorizationContextCache(ICache cache, IControllerContextCache controllerContextCache, IControllerDescriptorCache controllerDescriptorCache)
+        public AuthorizationContextCache(ICache cache, IControllerContextCache controllerContextCache, IControllerDescriptorCache controllerDescriptorCache, IRouteDataCache routeDataCache)
         {
             this.cache = cache;
+            this.routeDataCache = routeDataCache;
             this.controllerContextCache = controllerContextCache;
             this.controllerDescriptorCache = controllerDescriptorCache;
         }
@@ -27,6 +30,13 @@ namespace Kendo.Mvc.Infrastructure.Implementation
                 areaName = area.ToString();
                 key = areaName + " " + key;
             }
+
+            if (urlHelper == null)
+            {
+                urlHelper = new UrlHelper(requestContext);
+            }
+
+            requestContext.RouteData = routeDataCache.GetRouteData(key, GenerateURL(actionName, controllerName, routeValues)) ?? requestContext.RouteData;
 
             AuthorizationContext authorizationContext = cache.Get(key, () => AuthorizationContextFactory(requestContext, controllerName, actionName, areaName));
 
@@ -60,6 +70,18 @@ namespace Kendo.Mvc.Infrastructure.Implementation
             }
 
             return new AuthorizationContext(controllerContext, actionDescriptor);
+        }
+
+        private string GenerateURL(string controllerName, string actionName, RouteValueDictionary routeValues)
+        {
+            var url = urlHelper.Action(actionName, controllerName, routeValues);
+
+            if (url == "/" && !string.IsNullOrEmpty(controllerName) && !string.IsNullOrEmpty(actionName))
+            {
+                url = string.Format("{0}{1}/{2}", url, controllerName, actionName);
+            }
+
+            return url;
         }
     }
 }

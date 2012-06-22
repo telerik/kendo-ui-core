@@ -73,6 +73,7 @@ namespace Kendo.Mvc.Infrastructure
             Current.Register<ICacheProvider>(() => new CacheProvider());
             Current.Register<ICacheFactory, ICacheProvider>((provider) => new CacheFactory(IsDebug, provider));
             Current.Register<IControllerTypeCache, ICacheFactory>((cacheFactory) => new ControllerTypeCache(cacheFactory.Create("controllerType")));
+            Current.Register<IRouteDataCache, ICacheFactory>((cacheFactory) => new RouteDataCache(cacheFactory.Create("routeData")));
             Current.Register<IActionMethodCache, ICacheFactory, IControllerTypeCache>((cacheFactory, controllerTypeCache) =>
                 new ActionMethodCache(cacheFactory.Create("actionMethod"), controllerTypeCache));
             Current.Register<IAuthorizeAttributeCache, ICacheFactory, IControllerTypeCache, IActionMethodCache>((cacheFactory, controllerTypeCache, actionMethodCache) =>
@@ -81,8 +82,9 @@ namespace Kendo.Mvc.Infrastructure
                 new ControllerContextCache(cacheFactory.Create("controllerContext"), controllerTypeCache));
             Current.Register<IControllerDescriptorCache, ICacheFactory, IControllerTypeCache>((cacheFactory, controllerTypeCache) =>
                 new ControllerDescriptorCache(cacheFactory.Create("controllerDescriptor"), controllerTypeCache));
-            Current.Register<IAuthorizationContextCache, ICacheFactory, IControllerContextCache, IControllerDescriptorCache>((cacheFactory, controllerContextCache, controllerDescriptorCache) =>
-                new AuthorizationContextCache(cacheFactory.Create("authorizeContext"), controllerContextCache, controllerDescriptorCache));
+            Current.Register<IAuthorizationContextCache, ICacheFactory, IControllerContextCache, IControllerDescriptorCache, IRouteDataCache>(
+                (cacheFactory, controllerContextCache, controllerDescriptorCache, routeDataCache) =>
+                new AuthorizationContextCache(cacheFactory.Create("authorizeContext"), controllerContextCache, controllerDescriptorCache, routeDataCache));
         }
     }
 }

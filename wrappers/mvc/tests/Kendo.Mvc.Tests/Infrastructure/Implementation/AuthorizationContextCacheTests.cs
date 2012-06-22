@@ -8,6 +8,7 @@ namespace Kendo.Mvc.Infrastructure.Implementation.Tests
 
     public class AuthorizationContextCacheTests
     {
+        private readonly IRouteDataCache routeDataCache;
         private readonly IControllerTypeCache controllerTypeCache;
         private readonly IControllerContextCache controllerContextCache;
         private readonly IControllerDescriptorCache controllerDescriptorCache;
@@ -22,9 +23,10 @@ namespace Kendo.Mvc.Infrastructure.Implementation.Tests
                 ReferencedAssemblies = (() => new List<Assembly> { GetType().Assembly })
             };
 
+            routeDataCache = new RouteDataCache(new NoCache());
             controllerContextCache = new ControllerContextCache(new NoCache(), controllerTypeCache);
             controllerDescriptorCache = new ControllerDescriptorCache(new NoCache(), controllerTypeCache);
-            authorizationContextCache = new AuthorizationContextCache(new NoCache(), controllerContextCache, controllerDescriptorCache);
+            authorizationContextCache = new AuthorizationContextCache(new NoCache(), controllerContextCache, controllerDescriptorCache, routeDataCache);
         }
 
         [Fact]
@@ -33,6 +35,16 @@ namespace Kendo.Mvc.Infrastructure.Implementation.Tests
             var context = authorizationContextCache.GetAuthorizationContext(requestContext, "fake", "", null);
 
             context.ShouldBeNull();
+        }
+
+        [Fact]
+        public void GetAuthorizationContext_should_not_change_requestContext_if_no_RouteData_found()
+        {
+            var routeData = requestContext.RouteData;
+
+            authorizationContextCache.GetAuthorizationContext(requestContext, "fake", "", new RouteValueDictionary(new { area = "Area1" }));
+
+            requestContext.RouteData.ShouldEqual(routeData);
         }
     }
 }

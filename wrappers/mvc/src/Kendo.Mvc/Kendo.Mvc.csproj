@@ -144,7 +144,9 @@
     <Compile Include="Infrastructure\Implementation\NoCache.cs" />
     <Compile Include="Infrastructure\Implementation\ResourceBase.cs" />
     <Compile Include="Infrastructure\Implementation\ResXResource.cs" />
+    <Compile Include="Infrastructure\Implementation\RouteDataCache.cs" />
     <Compile Include="Infrastructure\Implementation\Signature.cs" />
+    <Compile Include="Infrastructure\IRouteDataCache.cs" />
     <Compile Include="Resources\Messages.de-DE.Designer.cs">
       <DependentUpon>Messages.de-DE.resx</DependentUpon>
       <AutoGen>True</AutoGen>
