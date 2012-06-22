@@ -359,7 +359,7 @@
                 filter: "Filter",
                 clear: "Clear",
                 and: "And",
-                or: "Or"
+                or: "Or",
                 selectValue: "-Select value-"
             }
         }
