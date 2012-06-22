@@ -351,5 +351,12 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        public TreeViewBuilder DataSource(Action<ReadOnlyDataSourceBuilder> configurator)
+        {
+            configurator(new ReadOnlyDataSourceBuilder(Component.DataSource, this.Component.ViewContext, this.Component.UrlGenerator));
+
+            return this;
+        }
     }
 }

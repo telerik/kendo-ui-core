@@ -28,6 +28,14 @@ namespace Kendo.Mvc.UI
 
             SelectedIndex = -1;
             SecurityTrimming = true;
+
+            DataSource = new DataSource();
+        }
+
+        public DataSource DataSource
+        {
+            get;
+            private set;
         }
 
         public ExpandableAnimation Animation
@@ -130,6 +138,15 @@ namespace Kendo.Mvc.UI
                 objectWriter.Append("showCheckBox", ShowCheckBox);
             }
             */
+
+            if (!string.IsNullOrEmpty(DataSource.Transport.Read.Url))
+            {
+                options["dataSource"] = DataSource.ToJson();
+            }
+            else if (DataSource.Data != null)
+            {
+                options["dataSource"] = DataSource.Data;
+            }
 
             if (DragAndDrop)
             {

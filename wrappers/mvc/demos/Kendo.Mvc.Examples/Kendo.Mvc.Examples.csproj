@@ -225,6 +225,7 @@
     <Compile Include="Controllers\Web\Slider\IndexController.cs" />
     <Compile Include="Controllers\SuiteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Web\TreeView\Remote_DataController.cs" />
     <Compile Include="Controllers\Web\TreeView\EventsController.cs" />
     <Compile Include="Controllers\Web\TreeView\ImagesController.cs" />
     <Compile Include="Controllers\Web\TreeView\DragDropController.cs" />
@@ -704,6 +705,7 @@
     <Content Include="Areas\razor\Views\dataviz\bubble_charts\remote_data.cshtml" />
     <Content Include="Areas\razor\Views\web\editor\globalization.cshtml" />
     <Content Include="Areas\aspx\Views\web\editor\globalization.aspx" />
+    <Content Include="Areas\razor\Views\web\treeview\remote_data.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
