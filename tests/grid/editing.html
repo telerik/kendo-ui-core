@@ -718,6 +718,37 @@
 
                 equal(editable.options.fields.field, "name");
             });
+
+            test("addRow insert item at the end of the first page", function() {
+                var grid = setup({
+                    editable: { createAt : "bottom" }
+                });
+
+                grid.addRow();
+                var item = grid.element.find(".k-grid-edit-row");
+
+                equal(item.index(), 2);
+            });
+
+            test("addRow insert item at the end of the current page", function() {
+                var grid = setup({
+                    editable: { createAt : "bottom" },
+                    pageable: true,
+                    dataSource: new DataSource({
+                        schema: {
+                            model: { id: "foo" }
+                        },
+                        data: [{ foo: "bar", name: "tom" }, { foo: "baz", name: "jerry" }],
+                        pageSize: 2
+                    })
+                });
+
+                grid.addRow();
+                var item = grid.element.find(".k-grid-edit-row");
+
+                equal(item.index(), 1);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

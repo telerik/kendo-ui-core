@@ -914,7 +914,11 @@
                 editable = this.options.editable;
 
             if (editable !== true) {
-                mode = editable.mode || editable;
+                if (typeof editable == "string") {
+                    mode = editable;
+                } else {
+                    mode = editable.mode || mode;
+                }
             }
 
             return mode;
@@ -1172,10 +1176,22 @@
         addRow: function() {
             var that = this,
                 index,
-                dataSource = that.dataSource;
+                dataSource = that.dataSource,
+                createAt = that.options.editable.createAt || "",
+                pageSize = dataSource.pageSize(),
+                view = dataSource.view() || [];
 
             if ((that.editable && that.editable.end()) || !that.editable) {
-                index = dataSource.indexOf((dataSource.view() || [])[0]);
+                index = dataSource.indexOf(view[0]);
+
+                if (createAt.toLowerCase() == "bottom") {
+                    index += view.length;
+
+                    if (pageSize && pageSize <= view.length) {
+                        index -= 1;
+                    }
+                }
+
                 if (index < 0) {
                     index = 0;
                 }
