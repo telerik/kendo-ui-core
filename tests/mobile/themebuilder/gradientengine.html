@@ -80,6 +80,18 @@
                 ok(gradient.get("") == "linear-gradient(left,#0b47a2,#0b47a3 10%,#0b47a4);");
             });
 
+            test("gradient RGB colors get converted to HEX", 1, function () {
+                var gradient = new Gradient("-webkit-linear-gradient(left, rgb(0,0,0))");
+
+                ok(gradient.get("") == "linear-gradient(left,#000);");
+            });
+
+            test("gradient RGB colors get converted to HEX", 1, function () {
+                var gradient = new Gradient("-webkit-linear-gradient(left, rgb(0,0,0))");
+
+                ok(gradient.get("") == "linear-gradient(left,#000);");
+            });
+
         </script>
     </body>
 </html>

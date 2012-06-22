@@ -2,10 +2,19 @@
 
     var CssRgbaRegExp = /rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,?\s*([\.\d]+?)?\s*\)/i,
         CssHexRegExp = /^#(([0-9a-f]{3})|([0-9a-f]{6}))$/i,
-        zeroTrimRegExp = /^0+|\.?0+$/g;
+        zeroTrimRegExp = /^0+|\.?0+$/g,
+        min = Math.min,
+        max = Math.max;
 
     function trimZeroes(value) {
         return value.toPrecision(2).replace(zeroTrimRegExp, "");
+    }
+
+    function buildPercent(percent) {
+        percent = (percent || 10) / 100;
+        var color = Math.round(percent * 255);
+
+        return "rgba(" + color + "," + color + "," + color + "," + percent + ")";
     }
 
     window.Color = kendo.Observable.extend({
@@ -38,13 +47,23 @@
         },
 
         add: function (color) {
-            //var diff = this.difference(this.value, color);
-            //return this;
+            this.value = this.addition(this.toRgba(), color);
+            return this;
         },
 
         subtract: function (color) {
-            //var diff = this.difference(this.value, color);
-            //return this;
+            this.value = this.subtraction(this.toRgba(), color);
+            return this;
+        },
+
+        lighten: function (percent) {
+            this.value = this.addition(this.toRgba(), buildPercent(percent));
+            return this;
+        },
+
+        darken: function (percent) {
+            this.value = this.subtraction(this.toRgba(), buildPercent(percent));
+            return this;
         },
 
         isHex: function(testee) {
@@ -156,6 +175,34 @@
                      green: foreground.green - background.green,
                      blue: foreground.blue - background.blue,
                      alpha: foreground.alpha - background.alpha
+                   };
+        },
+
+        addition: function(foreground, background) {
+            var that = this;
+
+            foreground = that.css2rgba(foreground);
+            background = that.css2rgba(background);
+
+            return {
+                     red: min(foreground.red + background.red, 255),
+                     green: min(foreground.green + background.green, 255),
+                     blue: min(foreground.blue + background.blue, 255),
+                     alpha: min(foreground.alpha + background.alpha, 1)
+                   };
+        },
+
+        subtraction: function(foreground, background) {
+            var that = this;
+
+            foreground = that.css2rgba(foreground);
+            background = that.css2rgba(background);
+
+            return {
+                     red: max(0, foreground.red - background.red),
+                     green: max(0, foreground.green - background.green),
+                     blue: max(0, foreground.blue - background.blue),
+                     alpha: max(0, foreground.alpha - background.alpha)
                    };
         },
 

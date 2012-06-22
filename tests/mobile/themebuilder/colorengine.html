@@ -166,6 +166,66 @@
                 equals(hex, "#000");
             });
 
+            test("add method adds the color to the main one", 1, function () {
+                var color = new Color("#030405");
+
+                ok(color.add("#102030").toHex() == "#132435");
+            });
+
+            test("add method is capped to #FFF", 1, function () {
+                var color = new Color("#131415");
+
+                ok(color.add("#F0F0F0").toHex() == "#fff");
+            });
+
+            test("subtract method subtracts the color from the main one", 1, function () {
+                var color = new Color("#132435");
+
+                ok(color.subtract("#102030").toHex() == "#030405");
+            });
+
+            test("subtract method is capped to #000", 1, function () {
+                var color = new Color("#131415");
+
+                ok(color.subtract("#F0F0F0").toHex() == "#000");
+            });
+
+            test("lighten method adds gray percented color to the main one", 1, function () {
+                var color = new Color("#030405");
+
+                ok(color.lighten().toHex() == "#1d1e1f");
+            });
+
+            test("lighten method adds specified percented color to the main one", 1, function () {
+                var color = new Color("#030405");
+
+                ok(color.lighten(20).toHex() == "#363738");
+            });
+
+            test("lighten method is capped at #FFF", 1, function () {
+                var color = new Color("#030405");
+
+                ok(color.lighten(100).toHex() == "#fff");
+            });
+
+            test("darken method subtracts gray percented color from the main one", 1, function () {
+                var color = new Color("#334455");
+
+                ok(color.darken().toHex() == "#192a3b");
+            });
+
+            test("darken method subtracts specified percented color from the main one", 1, function () {
+                var color = new Color("#334455");
+
+                ok(color.darken(19).toHex() == "#031425");
+            });
+
+            test("darken method is capped at #000", 1, function () {
+                var color = new Color("#334455");
+
+                ok(color.darken(100).toHex() == "#000");
+            });
+
         </script>
     </body>
 </html>
