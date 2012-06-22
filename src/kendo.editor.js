@@ -167,6 +167,7 @@
                     "<style>" +
                         "html,body{padding:0;margin:0;font-family:Verdana,Geneva,sans-serif;background:#fff;}" +
                         "html{font-size:100%}body{font-size:.75em;line-height:1.5;padding-top:1px;margin-top:-1px;" +
+                        "word-wrap: break-word;-webkit-nbsp-mode: space;-webkit-line-break: after-white-space;" +
                         rtlStyle +
                         "}" +
                         "h1{font-size:2em;margin:.67em 0}h2{font-size:1.5em}h3{font-size:1.16em}h4{font-size:1em}h5{font-size:.83em}h6{font-size:.7em}" +
