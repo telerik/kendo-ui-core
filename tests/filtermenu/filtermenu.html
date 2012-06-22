@@ -698,6 +698,19 @@
                 equal(firstItem.value, 0);
             });
 
+            test("submitting the form sets DataSource filter if values are set ", function() {
+                filterMenu = new FilterMenu(dom, {dataSource: dataSource, values: [ { text: "foo", value: 0 }, { text:"bar", value: 1 } ]});
+
+                var select = filterMenu.form.find("select").eq(1).data("kendoDropDownList");
+                select.select(1); // first item skipping the optionLabel
+                select.trigger("change");
+
+                filterMenu.form.submit();
+
+                equal(dataSource.filter().filters[0].value, 0);
+                equal(dataSource.filter().filters[0].field, "foo");
+            });
+
             test("operators are constrained if values are set", function() {
                 filterMenu = new FilterMenu(dom, {dataSource: dataSource, values: [ { value: 0, text: "foo" } ]});
 

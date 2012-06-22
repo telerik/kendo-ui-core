@@ -31,11 +31,7 @@
                     '#}#'+
                 '</select>'+
                 '#if(values){#' +
-                    '<select data-#=ns#bind="value:filters[0].value" data-#=ns#role="dropdownlist" data-#=ns#option-label="#=messages.selectValue#">' +
-                        '#for(var idx=0, length=values.length; idx < length; idx++){#'+
-                            '#var value = values[idx].value != null ? values[idx].value : (values[idx].text || values[idx])#;'+
-                            '<option value="#=value#">#=values[idx].text || values[idx].value || values[idx]#</option>'+
-                        '#}#'+
+                    '<select data-#=ns#bind="value:filters[0].value" data-#=ns#text-field="text" data-#=ns#value-field="value" data-#=ns#source=\'#=kendo.stringify(values)#\' data-#=ns#role="dropdownlist" data-#=ns#option-label="#=messages.selectValue#">' +
                     '</select>' +
                 '#}else{#' +
                     '<input data-#=ns#bind="value:filters[0].value" class="k-textbox" type="text" data-#=ns#type="#=type#"/>'+
@@ -51,11 +47,8 @@
                         '#}#'+
                     '</select>'+
                     '#if(values){#' +
-                        '<select data-#=ns#bind="value:filters[1].value" data-#=ns#role="dropdownlist" data-#=ns#option-label="#=messages.selectValue#">' +
-                            '#for(var idx=0, length=values.length; idx < length; idx++){#'+
-                                '<option value="#=values[idx].value || values[idx].text || values[idx]#">#=values[idx].text || values[idx].value || values[idx]#</option>'+
-                            '#}#'+
-                        '</select>' +
+                        '<select data-#=ns#bind="value:filters[1].value" data-#=ns#text-field="text" data-#=ns#value-field="value" data-#=ns#source=\'#=kendo.stringify(values)#\' data-#=ns#role="dropdownlist" data-#=ns#option-label="#=messages.selectValue#">' +
+                        '</select>'+
                     '#}else{#' +
                         '<input data-#=ns#bind="value: filters[1].value" class="k-textbox" type="text" data-#=ns#type="#=type#"/>'+
                     '#}#' +
@@ -75,6 +68,27 @@
                 }
             });
         }
+    }
+
+    function convertItems(items) {
+        var idx,
+            length,
+            item,
+            value,
+            text,
+            result;
+
+        if (items && items.length) {
+            result = [];
+            for (idx = 0, length = items.length; idx < length; idx++) {
+                item = items[idx];
+                text = item.text || item.value || item;
+                value = item.value == null ? (item.text || item) : item.value;
+
+                result[idx] = { text: text, value: value };
+            }
+        }
+        return result;
     }
 
     var FilterMenu = Widget.extend({
@@ -125,6 +139,7 @@
             operators = operators[type] || options.operators[type];
 
             that.form = $('<form class="k-filter-menu k-group"/>');
+
             that.form.html(kendo.template(type === "boolean" ? booleanTemplate : defaultTemplate)({
                 field: that.field,
                 ns: kendo.ns,
@@ -132,7 +147,7 @@
                 extra: options.extra,
                 operators: operators,
                 type: type,
-                values: options.values
+                values: convertItems(options.values)
             }));
 
             that.popup = that.form[POPUP]({
