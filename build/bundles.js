@@ -78,21 +78,21 @@ var bundles = [{
     suites: ["web"],
     sourceLicense: "src-license-web.txt",
     vsdoc: /(framework|web).+md/,
-    licenses: productionLicenses.concat(openSourceLicense),
+    licenses: [commercialLicense, openSourceLicense],
     eula: "eula",
 }, {
     name: "kendoui.dataviz",
     suites: ["dataviz"],
     sourceLicense: "src-license-dataviz.txt",
     vsdoc: /(framework|dataviz).+md/,
-    licenses: productionLicenses,
+    licenses: [commercialLicense],
     eula: "eula"
 }, {
     name: "kendoui.mobile",
     suites: ["mobile"],
     sourceLicense: "src-license-mobile.txt",
     vsdoc: /(framework|mobile).+md/,
-    licenses: productionLicenses,
+    licenses: [commercialLicense],
     eula: "eula"
 }];
 
