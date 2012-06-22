@@ -30,7 +30,16 @@
                         '<option value="#=op#">#=operators[op]#</option>'+
                     '#}#'+
                 '</select>'+
-                '<input data-#=ns#bind="value:filters[0].value" class="k-textbox" type="text" data-#=ns#type="#=type#"/>'+
+                '#if(values){#' +
+                    '<select data-#=ns#bind="value:filters[0].value" data-#=ns#role="dropdownlist" data-#=ns#option-label="#=messages.selectValue#">' +
+                        '#for(var idx=0, length=values.length; idx < length; idx++){#'+
+                            '#var value = values[idx].value != null ? values[idx].value : (values[idx].text || values[idx])#;'+
+                            '<option value="#=value#">#=values[idx].text || values[idx].value || values[idx]#</option>'+
+                        '#}#'+
+                    '</select>' +
+                '#}else{#' +
+                    '<input data-#=ns#bind="value:filters[0].value" class="k-textbox" type="text" data-#=ns#type="#=type#"/>'+
+                '#}#' +
                 '#if(extra){#'+
                     '<select class="k-filter-and" data-#=ns#bind="value: logic" data-#=ns#role="dropdownlist">'+
                         '<option value="and">#=messages.and#</option>'+
@@ -41,7 +50,15 @@
                             '<option value="#=op#">#=operators[op]#</option>'+
                         '#}#'+
                     '</select>'+
-                    '<input data-#=ns#bind="value: filters[1].value" class="k-textbox" type="text" data-#=ns#type="#=type#"/>'+
+                    '#if(values){#' +
+                        '<select data-#=ns#bind="value:filters[1].value" data-#=ns#role="dropdownlist" data-#=ns#option-label="#=messages.selectValue#">' +
+                            '#for(var idx=0, length=values.length; idx < length; idx++){#'+
+                                '<option value="#=values[idx].value || values[idx].text || values[idx]#">#=values[idx].text || values[idx].value || values[idx]#</option>'+
+                            '#}#'+
+                        '</select>' +
+                    '#}else{#' +
+                        '<input data-#=ns#bind="value: filters[1].value" class="k-textbox" type="text" data-#=ns#type="#=type#"/>'+
+                    '#}#' +
                 '#}#'+
                 '<button type="submit" class="k-button">#=messages.filter#</button>'+
                 '<button type="reset" class="k-button">#=messages.clear#</button>'+
@@ -101,6 +118,10 @@
                 }
             }
 
+            if (options.values) {
+                type = "enums";
+            }
+
             operators = operators[type] || options.operators[type];
 
             that.form = $('<form class="k-filter-menu k-group"/>');
@@ -110,7 +131,8 @@
                 messages: options.messages,
                 extra: options.extra,
                 operators: operators,
-                type: type
+                type: type,
+                values: options.values
             }));
 
             that.popup = that.form[POPUP]({
@@ -324,6 +346,10 @@
                     gt: "Is after",
                     lte: "Is before or equal to",
                     lt: "Is before"
+                },
+                enums: {
+                    eq: EQ,
+                    neq: NEQ
                 }
             },
             messages: {
@@ -333,7 +359,8 @@
                 filter: "Filter",
                 clear: "Clear",
                 and: "And",
-                or: "Or"
+                or: "Or",
+                selectValue: "-Select value-"
             }
         }
     });
