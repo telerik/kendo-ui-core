@@ -2,7 +2,9 @@
     @(Html.Kendo().TreeView()
         .Name("treeview")
         .DataSource(dataSource => dataSource
-            .Read(read => read.Action("Employees", "TreeView"))
+            .Read(read => read
+                .Action("Employees", "TreeView")
+            )
         )
     )
 </div>

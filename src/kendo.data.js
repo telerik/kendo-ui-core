@@ -2585,7 +2585,7 @@
         load: function() {
             var that = this, options = {};
 
-            options[that.idField] = that.id;
+            options[that.idField || "id"] = that.id;
 
             if (!that._loaded) {
                 that.children._data = undefined;
