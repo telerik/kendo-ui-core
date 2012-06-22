@@ -31,11 +31,11 @@ function processClass(theClass) {
     }
 
     var description = theClass.properties.filter(function(x) { return x._name == "Description"; })[0];
-    var html = "---" +
+    var html = "---\n" +
                "title: "  + theClass.alias + "\n" +
                "tags: api,"  + suite + "\n" +
                "publish: true\n" +
-               "---\n";
+               "---\n\n";
 
     html += "# " + theClass.alias;
 
