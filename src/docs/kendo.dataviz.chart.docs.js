@@ -26,9 +26,8 @@
      * new Chart types and features.
      * </p>
      *
-     * <h3>
-     * Creating a Chart
-     * </h3>
+     * <h3>Creating a Chart</h3>
+     *
      * To create a chart, add an empty div in the HTML and give it an ID.
      * @example
      * <div id="chart"></div>
