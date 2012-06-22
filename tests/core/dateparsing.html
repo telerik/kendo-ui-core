@@ -599,6 +599,55 @@
                 equal(+parse("10/10/2000 10:00 a", "MM/dd/yyyy hh:mm t"), +new Date(2000, 9, 10, 10, 0, 0));
             });
 
+            test("parseExact method parses local iso8601", function() {
+                equal(+parse("2000-10-10T14:30", "yyyy-MM-ddTHH:mm"), +new Date(2000, 9, 10, 14, 30, 0));
+            });
+
+            test("parseExact method parses UTC iso8601", function() {
+                var utcDate = new Date(Date.UTC(2000, 9, 10, 14, 30, 0));
+                equal(+parse("2000-10-10T14:30Z", "yyyy-MM-ddTHH:mmZ"), +utcDate);
+            });
+
+            test("parseExact method parses UTC iso8601", function() {
+                var utcDate = new Date(Date.UTC(2000, 9, 10, 14, 30, 0));
+                equal(+parse("2000-10-10T14:30Z", "yyyy-MM-ddTHH:mmZ"), +utcDate);
+            });
+
+            test("parseExact method parses  iso8601 with timezone", function() {
+                equal(+parse("2000-10-10T14:30+03:30", "yyyy-MM-ddTHH:mmzzz"), Date.parse("2000-10-10T14:30+03:30"));
+            });
+
+            test("parseExact method parses datetime with timezone offset (hours)", function() {
+                equal(+parse("2000-10-10 14:30 +1", "yyyy-MM-dd HH:mm z"), Date.parse("2000-10-10T14:30+01:00"));
+            });
+
+            test("parseExact method parses datetime with timezone offset (hours and minutes)", function() {
+                equal(+parse("2000-10-10 14:30 +03:30", "yyyy-MM-dd HH:mm zzz"), Date.parse("2000-10-10T14:30+03:30"));
+            });
+
+            test("parseExact method returns null if short timezone is incorrect", function() {
+                equal(parse("2000-10-10 14:30 +14:30", "yyyy-MM-dd HH:mm zz"), null);
+            });
+
+            test("parseExact method returns null if long timezone is incorrect", function() {
+                equal(parse("2000-10-10 14:30 +3:60", "yyyy-MM-dd HH:mm zzz"), null);
+            });
+
+            test("parseExact method returns null if not valid timezone", function() {
+                equal(parse("2000-10-10 14:30", "yyyy-MM-dd HH:mm zzz"), null);
+            });
+
+            test("parseExact method honors DST start date", function() {
+                //DST in Bulgaria 2012-3-25
+                equal(+parse("2012-3-25 3:30 +2", "yyyy-MM-dd HH:mm zz"), +new Date("2012-03-25T03:30+02:00"));
+                equal(+parse("2012-3-25 3:30 +3", "yyyy-MM-dd HH:mm zz"), +new Date("2012-03-25T03:30+03:00"));
+            });
+
+            test("parseExact method honors DST end date", function() {
+                //DST in Bulgaria 2012-10-28
+                equal(+parse("2012-10-28 2:00 +2", "yyyy-MM-dd HH:mm zz"), +new Date("2012-10-28T02:00+02:00"));
+                equal(+parse("2012-10-28 3:00 +2", "yyyy-MM-dd HH:mm zz"), +new Date("2012-10-28T03:00+02:00"));
+            });
         </script>
     </body>
 </html>

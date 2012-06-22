@@ -1390,6 +1390,8 @@ function pad(number) {
 (function() {
     var nonBreakingSpaceRegExp = /\u00A0/g,
         exponentRegExp = /[eE][\-+]?[0-9]+/,
+        shortTimeZoneRegExp = /[+|\-]\d{1,2}/,
+        longTimeZoneRegExp = /[+|\-]\d{1,2}:\d{2}/,
         formatsSequence = ["G", "g", "d", "F", "D", "y", "m", "T", "t"];
 
     function outOfRange(value, start, end) {
@@ -1464,11 +1466,12 @@ function pad(number) {
             valueIdx = 0,
             literal = false,
             date = new Date(),
-            defaultYear = date.getFullYear(),
             shortYearCutOff = 30,
-            amDesignators, pmDesignators,
+            defaultYear = date.getFullYear(),
             ch, count, length, pattern,
-            pmHour;
+            pmHour, UTC, ISO8601, matches,
+            amDesignators, pmDesignators,
+            hoursOffset, minutesOffset;
 
         if (!format) {
             format = "d"; //shord date format
@@ -1564,9 +1567,44 @@ function pad(number) {
                     if (!pmHour && !getIndexByName(amDesignators)) {
                         return null;
                     }
-                } else if (ch === "'") {
+                }
+                else if (ch === "z") {
+                    UTC = true;
+                    count = lookAhead("z");
+
+                    matches = value.substr(valueIdx, 6)
+                                   .match(count > 2 ? longTimeZoneRegExp : shortTimeZoneRegExp);
+
+                    if (!matches) {
+                        return null;
+                    }
+
+                    matches = matches[0];
+                    valueIdx = matches.length;
+                    matches = matches.split(":");
+
+                    hoursOffset = parseInt(matches[0], 10);
+                    if (outOfRange(hoursOffset, -12, 13)) {
+                        return null;
+                    }
+
+                    if (count > 2) {
+                        minutesOffset = parseInt(matches[1], 10);
+                        if (isNaN(minutesOffset) || outOfRange(minutesOffset, 0, 59)) {
+                            return null;
+                        }
+                    }
+                } else if (ch === "T") {
+                    ISO8601 = true;
                     checkLiteral();
+                } else if (ch === "Z") {
+                    if (ISO8601) {
+                        UTC = true;
+                    }
+                    checkLiteral();
+                } else if (ch === "'") {
                     literal = true;
+                    checkLiteral();
                 } else {
                     checkLiteral();
                 }
@@ -1579,6 +1617,18 @@ function pad(number) {
 
         if (day === null) {
             day = 1;
+        }
+
+        if (UTC) {
+            if (hoursOffset) {
+                hours += -hoursOffset;
+            }
+
+            if (minutesOffset) {
+                minutes += -minutesOffset;
+            }
+
+            return new Date(Date.UTC(year, month, day, hours, minutes, seconds, milliseconds));
         }
 
         return new Date(year, month, day, hours, minutes, seconds, milliseconds);
