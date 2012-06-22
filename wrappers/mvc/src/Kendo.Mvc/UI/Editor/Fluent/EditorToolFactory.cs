@@ -107,7 +107,7 @@ namespace Kendo.Mvc.UI.Fluent
 
         public EditorToolFactory FontName()
         {
-            return ComboBox("fontName", null);
+            return ComboBox("fontName");
         }
 
         public EditorToolFactory FontName(Action<EditorDropDownItemBuilder> configurator)
@@ -122,7 +122,7 @@ namespace Kendo.Mvc.UI.Fluent
 
         public EditorToolFactory FontSize()
         {
-            return ComboBox("fontSize", null);
+            return ComboBox("fontSize");
         }
 
         public EditorToolFactory FontSize(Action<EditorDropDownItemBuilder> configurator)
@@ -137,7 +137,7 @@ namespace Kendo.Mvc.UI.Fluent
 
         public EditorToolFactory FormatBlock()
         {
-            return SelectBox("formatBlock", null);
+            return SelectBox("formatBlock");
         }
 
         public EditorToolFactory FormatBlock(Action<EditorDropDownItemBuilder> configurator)
@@ -200,9 +200,9 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
-        private EditorToolFactory DropDown(string identifier, IList<DropDownListItem> items)
+        private EditorToolFactory ComboBox(string identifier)
         {
-            group.Tools.Add(new EditorListTool(identifier, items));
+            group.Tools.Add(new EditorListTool(identifier));
 
             return this;
         }
@@ -214,6 +214,12 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        private EditorToolFactory SelectBox(string identifier)
+        {
+            group.Tools.Add(new EditorListTool(identifier));
+
+            return this;
+        }
         private EditorToolFactory ColorPicker(string identifier)
         {
             group.Tools.Add(new EditorTool(identifier));

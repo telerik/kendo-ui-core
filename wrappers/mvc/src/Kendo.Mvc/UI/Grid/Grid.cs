@@ -318,7 +318,6 @@ namespace Kendo.Mvc.UI
         //    return CustomCommandToolBarButton(name, text, url);
         //}
 
-        //TODO: Implement custom commands
         internal object CustomCommandToolBarButton(string name, string text)
         {
             return CustomCommandToolBarButton(name, text, null);
@@ -897,8 +896,7 @@ namespace Kendo.Mvc.UI
 
             if (!popup.Title.HasValue())
             {
-                //todo: grid popup localization
-                popup.Title = CurrentItemMode == GridItemMode.Edit ? "Edit" : "Add new record";
+                popup.Title = CurrentItemMode == GridItemMode.Edit ? Messages.Grid_Edit : Messages.Grid_Create;
             }
 
             new LiteralNode(popup.ToHtmlString()).AppendTo(container);

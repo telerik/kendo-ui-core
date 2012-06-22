@@ -142,7 +142,6 @@ namespace Kendo.Mvc.Infrastructure.Implementation.Expressions
                 return expr;
             }
             var ce = expr as ConstantExpression;
-            //TODO: check here
             if (((ce != null) && (ce == ExpressionConstants.NullLiteral)) && !(type.IsValueType && !type.IsNullableType()))
             {
                 return Expression.Constant(null, type);

@@ -90,9 +90,11 @@ namespace Kendo.Mvc.UI
             options["tools"] = DefaultToolGroup.Tools.Select<IEditorTool, object>(tool =>
             {
                 var listTool = tool as EditorListTool;
-                if (listTool != null && listTool.Items != null && listTool.Items.Count > 0)
+
+                if (listTool != null && listTool.Items.Any())
                 {
                     var listToolItems = listTool.Items.Select(item => new { text = item.Text, value = item.Value });
+
                     return new { name = listTool.Name, items = listToolItems };
                 }
                 else

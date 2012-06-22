@@ -7,11 +7,11 @@ namespace Kendo.Mvc.UI
     public class EditorListTool : IEditorTool
     {
         public string Name { get; set; }
-        public IList<DropDownListItem> Items { get; set; }
 
-        public EditorListTool(string name)
+        public IList<DropDownListItem> Items { get; private set; }
+
+        public EditorListTool(string name) : this (name, new List<DropDownListItem>())
         {
-            Name = name;
         }
 
         public EditorListTool(string name, IList<DropDownListItem> items)
