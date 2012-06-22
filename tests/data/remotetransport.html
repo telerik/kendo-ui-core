@@ -183,6 +183,30 @@
                 transport.read({ url: "foo", data: { baz: "moo" } });
             });
 
+            test("read original data is not contaminated when additional data is submitted", 1, function() {
+                var data,
+                    called = 0,
+                    transport = new RemoteTransport({
+                        read: {
+                            url: "foo",
+                            data: {
+                                foo: "bar"
+                            }
+                        }
+                    });
+
+                $.mockjax({
+                    url: "foo",
+                    response: function() {
+                        start();
+                    }
+                });
+                stop(1);
+                transport.read({ url: "foo", data: { baz: "moo" } });
+
+                ok(!("baz" in transport.options.read.data));
+            });
+
             test("update passes data options to parameterMap", function() {
                 var data, transport = new RemoteTransport({
                         update: {

@@ -1314,7 +1314,7 @@
                 data = isFunction(operation.data) ? operation.data() : operation.data;
 
             options = extend(true, {}, operation, options);
-            parameters = extend(data, options.data);
+            parameters = extend(true, {}, data, options.data);
 
             options.data = that.parameterMap(parameters, type);
 
