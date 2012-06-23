@@ -24,9 +24,11 @@ function vsdoc(directory, filter) {
             theClass.methods.push(parseMethod(child));
         });
 
-        configuration.children.forEach(function(child) {
-            theClass.configuration.push(parseConfiguration(child));
-        });
+        if (configuration) {
+            configuration.children.forEach(function(child) {
+                theClass.configuration.push(parseConfiguration(child));
+            });
+        }
 
         classes.push(theClass);
     });
@@ -122,7 +124,8 @@ function parseMethod(child) {
 }
 
 function parseConfiguration(child) {
-   var match = child.title.match(/(\S+) (`(.+)`)?(\*(.+)\*)?/);
+   var match = child.title.match(/(\S+)\s*(`(.+)`)?(\*(.+)\*)?/);
+   console.log(child.title, match);
 
    return {
        name: match[1],
