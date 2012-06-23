@@ -12,65 +12,33 @@
         <script src="../src/kendo.dataviz.svg.js"></script>
     </head>
     <body>
-        <div id="chart" style="width: 500px; height: 400px;"></div>
+        <div id="chart" style="width: 500px; height: 400px; float: right;"></div>
+        <div id="chart1" style="width: 500px; height: 400px; float: left;"></div>
         <script>
             $(function() {
-                var data = [{
-                    id: "CAN",
-                    lifeExpectancy: 80.66,
-                    fertilityRate: 1.67,
-                    population: 33739900
-                }, {
-                    id: "DEU",
-                    lifeExpectancy: 79.84,
-                    fertilityRate: 1.36,
-                    population: 81902307
-                }, {
-                    id: "DNK",
-                    lifeExpectancy: 78.6,
-                    fertilityRate: 1.84,
-                    population: 5523095
-                }, {
-                    id: "IRQ",
-                    lifeExpectancy: 68.09,
-                    fertilityRate: 4.77,
-                    population: 31090763,
-                    color: "red"
-                }, {
-                    id: "Negative",
-                    lifeExpectancy: 100,
-                    fertilityRate: 5,
-                    population: -100000000,
-                    legend: false
-                }];
-
                 $("#chart").kendoChart({
-                    legend: {
-                        visible: true,
-                        position: "right"
-                    },
-                    dataSource: {
-                        data: data
+                    seriesDefaults: {
+                        type: "pie"
                     },
                     series: [{
-                        type: "bubble",
-                        labels: {
-                            visible: true
-                        },
-                        //color: "red",
-                        //border: {},
-                        //minSize: 0,
-                        //maxSize: 120,
-                        negativeValues: {
-                            color: "#ff0",
-                            visible: true
-                        },
-                        xField: "lifeExpectancy",
-                        yField: "fertilityRate",
-                        sizeField: "population",
-                        categoryField: "id",
-                        colorField: "color",
-                        visibleInLegendField: "legend"
+                        data: [1,2,3]
+                    },{
+                        data: [1,2,3]
+                    },{
+                        data: [1,2,3]
+                    }]
+                });
+
+                $("#chart1").kendoChart({
+                    seriesDefaults: {
+                        type: "donut"
+                    },
+                    series: [{
+                        data: [1,2,3]
+                    },{
+                        data: [1,2,3]
+                    },{
+                        data: [1,2,3]
                     }]
                 });
             });

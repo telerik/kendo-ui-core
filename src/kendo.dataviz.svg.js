@@ -27,7 +27,6 @@
         DEFAULT_WIDTH = dataviz.DEFAULT_WIDTH,
         DEFAULT_HEIGHT = dataviz.DEFAULT_HEIGHT,
         DEFAULT_FONT = dataviz.DEFAULT_FONT,
-        DONUT = "donut",
         NONE = "none",
         RADIAL = "radial",
         SOLID = "solid",
@@ -189,9 +188,11 @@
 
         createGradient: function(options) {
             if (options.type === RADIAL) {
-                return new SVGRadialGradient(options);
-            } else if (options.type == DONUT) {
-                return new SVGDonutGradient(options);
+                if (defined(options.ir)){
+                    return new SVGDonutGradient(options);
+                } else {
+                    return new SVGRadialGradient(options);
+                }
             } else {
                 return new SVGLinearGradient(options);
             }
@@ -732,7 +733,7 @@
                 );
 
                 gradient.stopTemplate = SVGDonutGradient.stopTemplate = renderTemplate(
-                    "<stop offset='#= Math.round(d.offset) #%' " +
+                    "<stop offset='#= d.offset #%' " +
                     "style='stop-color:#= d.color #;stop-opacity:#= d.opacity #' />");
             }
         },

@@ -32,7 +32,6 @@
         DEFAULT_PRECISION = 6,
         DEFAULT_WIDTH = 600,
         DEGREE = math.PI / 180,
-        DONUT = "donut",
         FADEIN = "fadeIn",
         FORMAT_REGEX = /\{\d+:?/,
         HEIGHT = "height",
@@ -1670,7 +1669,7 @@
             }]
         },
         roundedGlass: {
-            type: DONUT,
+            type: RADIAL,
             stops: [{
                 offset: 0,
                 color: WHITE,
@@ -1686,7 +1685,7 @@
             }]
         },
         sharpGlass: {
-            type: DONUT,
+            type: RADIAL,
             stops: [{
                 offset: 0,
                 color: WHITE,
