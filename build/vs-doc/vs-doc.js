@@ -125,7 +125,6 @@ function parseMethod(child) {
 
 function parseConfiguration(child) {
    var match = child.title.match(/(\S+)\s*(`(.+)`)?(\*(.+)\*)?/);
-   console.log(child.title, match);
 
    return {
        name: match[1],
