@@ -1,10 +1,15 @@
 ﻿(function($, undefined) {
 
-    var CssRgbaRegExp = /rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,?\s*([\.\d]+?)?\s*\)/i,
+    var CssColorRegExp = /(rgb|hsl)a?\(\s*(\d+)\s*,\s*(\d+%?)\s*,\s*(\d+%?)\s*,?\s*([\.\d]+?)?\s*\)/i,
         CssHexRegExp = /^#(([0-9a-f]{3})|([0-9a-f]{6}))$/i,
         zeroTrimRegExp = /^0+|\.?0+$/g,
+        props = {
+            "rgb": [ "red", "green", "blue", "alpha" ],
+            "hsl": [ "h", "s", "l", "a" ]
+        },
         min = Math.min,
-        max = Math.max;
+        max = Math.max,
+        round = Math.round;
 
     function trimZeroes(value) {
         return value.toPrecision(2).replace(zeroTrimRegExp, "");
@@ -12,9 +17,27 @@
 
     function buildPercent(percent) {
         percent = (percent || 10) / 100;
-        var color = Math.round(percent * 255);
+        var color = round(percent * 255);
 
         return "rgba(" + color + "," + color + "," + color + "," + percent + ")";
+    }
+
+    function parseColor(color) {
+        var tmp = CssColorRegExp.exec(color),
+            type = tmp[1],
+            result = {};
+
+        for (var i = 0, len = props[type].length; i < len - 1; i++) {
+            result[props[type][i]] = parseInt(tmp[i+2], 10);
+        }
+
+        if (typeof tmp[5] != "undefined") {
+            result[props[type][3]] = parseFloat(tmp[5]);
+        } else {
+            result[props[type][3]] = 1;
+        }
+
+        return result;
     }
 
     window.Color = kendo.Observable.extend({
@@ -71,7 +94,13 @@
         },
 
         isRgba: function(testee) {
-            return (CssRgbaRegExp.test(testee));
+            var color = CssColorRegExp.exec(testee);
+            return (color ? color[1] == "rgb" : false);
+        },
+
+        isHsla: function(testee) {
+            var color = CssColorRegExp.exec(testee);
+            return (color ? color[1] == "hsl" : false);
         },
 
         hex2rgb: function(hex) {
@@ -128,29 +157,17 @@
         },
 
         css2rgba: function(cssColor) {
-            var that = this;
+            var that = this,
+                type = that.isHex(cssColor) ? "hex" : that.isRgba(cssColor) ? "rgba" : that.isHsla(cssColor) ? "hsla" : "named";
 
-            if (that.isHex(cssColor)) {
+            if (type == "hex") {
                 return that.hex2rgb(cssColor);
-            } else if (that.isRgba(cssColor)) {
-                var tmp = CssRgbaRegExp.exec(cssColor),
-                    result = {
-                        red: parseInt(tmp[1], 10),
-                        green: parseInt(tmp[2], 10),
-                        blue: parseInt(tmp[3], 10)
-                    };
-
-                if (typeof tmp[4] != "undefined") {
-                    result.alpha = parseFloat(tmp[4]);
-                } else {
-                    result.alpha = 1;
-                }
-
-                return result;
-            } else {
+            } else if (type == "named") {
                 if (cssColor == "transparent") {
                     return { red: 0, green: 0, blue: 0, alpha: 0 };
                 }
+            } else {
+                return type == "rgba" ? parseColor(cssColor) : that.hsl2rgb(parseColor(cssColor));
             }
         },
 
@@ -218,90 +235,61 @@
                    });
         },
 
-        // blatantly ported from ImageMagick
-        rgb2hsl: function(r, g, b) {
-            var max = Math.max(r, Math.max(g, b));
-            var min = Math.min(r, Math.min(g, b));
-            var delta = max - min;
+        rgb2hsl: function(color) {
+            var r = color.red / 255, g = color.green / 255, b = color.blue / 255, a = this.alpha,
+                max = Math.max(r, g, b), min = Math.min(r, g, b),
+                h, s, l = (max + min) / 2, d = max - min;
 
-            var result = {
-                l: ((min + max) / 2.0)
-            };
-
-            if (Math.abs(delta) < 0.001) {
-                result.h = 0.0;
-                result.s = 0.0;
-                return result;
-            }
-
-            if (result.l < 0.5) {
-                result.s = (delta / (min + max));
+            if (max === min) {
+                h = s = 0;
             } else {
-                result.s = (delta / (2.0 - max - min));
-            }
+                s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
 
-            if (r == max) {
-                result.h = ((((max - b) / 6.0) + (delta / 2.0)) - (((max - g) / 6.0) + (delta / 2.0))) / delta;
-            } else if (g == max) {
-                result.h = (1.0 / 3.0) + ((((max - r) / 6.0) + (delta / 2.0)) - (((max - b) / 6.0) + (delta / 2.0))) / delta;
-            } else if (b == max) {
-                result.h = (2.0 / 3.0) + ((((max - g) / 6.0) + (delta / 2.0)) - (((max - r) / 6.0) + (delta / 2.0))) / delta;
-            }
-
-            if (result.h < 0.0) {
-                result.h += 1.0;
-            }
-
-            if (result.h > 1.0) {
-                result.h -= 1.0;
-            }
-
-            return result;
-        },
-
-        hsl2rgb: function(h, s, l) {
-            var ConvertHueToRGB = function(m1, m2, hue) {
-                if (hue < 0.0) {
-                    hue += 1.0;
+                switch (max) {
+                    case r: h = (g - b) / d + (g < b ? 6 : 0);
+                         break;
+                    case g: h = (b - r) / d + 2;
+                         break;
+                    case b: h = (r - g) / d + 4;
+                         break;
                 }
-
-                if (hue > 1.0) {
-                    hue -= 1.0;
-                }
-
-                if ((6.0 * hue) < 1.0) {
-                    return (m1 + 6.0 * (m2 - m1) * hue);
-                }
-
-                if ((2.0 * hue) < 1.0) {
-                    return (m2);
-                }
-
-                if ((3.0 * hue) < 2.0) {
-                    return (m1 + 6.0 * (m2 - m1) * (2.0 / 3.0 - hue));
-                }
-
-                return (m1);
-            };
-
-            if (s === 0) {
-                return { r: l, g: l, b: l };
+                h /= 6;
             }
-
-            var m2;
-
-            if (l <= 0.5) {
-                m2 = l * (s + 1.0);
-            } else {
-                m2 = (l + s) - (l * s);
-            }
-
-            var m1 = 2.0 * l - m2;
 
             return {
-                red: ConvertHueToRGB(m1, m2, h + 1.0 / 3.0),
-                green: ConvertHueToRGB(m1, m2, h),
-                blue: ConvertHueToRGB(m1, m2, h - 1.0 / 3.0)
+                h: h * 360,
+                s: s,
+                l: l,
+                a: a
+            };
+        },
+
+        hsl2rgb: function(hsl) {
+            var h = parseInt(hsl.h, 10), s = hsl.s / 100, l = hsl.l / 100,
+                hue = function (h) {
+                    h = h < 0 ? h + 1 : (h > 1 ? h - 1 : h);
+
+                    if (h * 6 < 1) {
+                        return m1 + (m2 - m1) * h * 6;
+                    } else if (h * 2 < 1) {
+                        return m2;
+                    } else if (h * 3 < 2) {
+                        return m1 + (m2 - m1) * (2/3 - h) * 6;
+                    } else {
+                        return m1;
+                    }
+                };
+
+            h = (h % 360) / 360;
+
+            var m2 = l <= 0.5 ? l * (s + 1) : l + s - l * s;
+            var m1 = l * 2 - m2;
+
+            return {
+                red: round(hue(h + 1/3) * 255),
+                green: round(hue(h) * 255),
+                blue: round(hue(h - 1/3) * 255),
+                alpha: hsl.a
             };
         }
     });

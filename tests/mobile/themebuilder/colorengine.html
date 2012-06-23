@@ -72,6 +72,12 @@
                 ok(color.alpha === .5);
             });
 
+            test("css2rgba converts HSL to RGB color", 1, function() {
+                var color = new Color("hsl(33,66%,55%)");
+
+                ok(color.toHex() == "#d89441");
+            });
+
             test("Color object keeps internal value in RGBA", 4, function() {
                 var color = new Color("#345"),
                     color2 = colorEngine.css2rgba("rgba(33,44,55,1)");
