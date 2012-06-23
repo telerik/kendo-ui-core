@@ -70,7 +70,7 @@ $.fn.#= theClass.plugin # = function(options) {
     # if (theClass.configuration.length) { #
     /// &\#10;Accepts an object with the following configuration options:
     /// &\#10;
-    # theClass.configuration.forEach(function(option) { if (option.name.indexOf(".") > -1) { return; } #/// &\#10;#= option.name # — #= option.type.replace(/\*/g, '') #
+    # theClass.configuration.forEach(function(option) { if (option.name.indexOf(".") > -1) { return; } #/// &\#10;#= option.name # — #= option.type.replace(/\*/g, '') # #= option.default #
     ///&\#10;#= trim(option.description).replace(/\n/g, "\n/// &\\#10;").replace(/<(?:.|\n)*?>/gm, '') #
     ///&\#10;
     # }); } #/// </summary>

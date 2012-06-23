@@ -122,11 +122,12 @@ function parseMethod(child) {
 }
 
 function parseConfiguration(child) {
-   var match = child.title.match(/`(.+)`(\s*:\s*)?(.*)/);
+   var match = child.title.match(/(\S+) (`(.+)`)?(\*(.+)\*)?/);
 
    return {
        name: match[1],
        type: match[3],
+       default: match[5],
        description: child.contents
    };
 }
