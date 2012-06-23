@@ -304,8 +304,8 @@ function outputConfiguration(data) {
 
 
     var optionsTemplate = tmpl(
-            "\n\n### `<%= name %>`" +
-            " <%= type ? ': **' + type + '**'  : '' %> " +
+            "\n\n### <%= name %>" +
+            " <%= type ? '`' + type + '`'  : '' %>" +
             "<%= defaultValue ? '*(default: ' + defaultValue + ')*' : '' %>" +
             "\n\n<%= toMarkdown(desc) %>" +
             '<% for (var exampleIdx = 0; typeof example != "undefined" && exampleIdx < example.length; exampleIdx++) { %>' +
