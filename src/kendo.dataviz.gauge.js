@@ -143,7 +143,7 @@
                 animation.abort();
             }
 
-            if (animationOptions === false) {
+            if (animationOptions.transitions === false) {
                 needle.refresh(doc.getElementById(options.id));
             } else {
                 animation = needle._animation = new RotationAnimation(needle, deepExtend(animationOptions, {
@@ -662,6 +662,7 @@
             pointer.scale = scale;
             pointer.reflow();
             plotArea.box = scale.box.clone().wrap(pointer.box);
+
             return plotArea.getDiff(plotArea.box, box);
         },
 
@@ -676,7 +677,14 @@
 
             scale = plotArea.scale = new RadialScale(options.scale);
             plotArea.append(plotArea.scale);
-            plotArea.pointer = new RadialPointer(scale, options.pointer);
+            plotArea.pointer = new RadialPointer(
+                scale,
+                deepExtend({}, options.pointer, {
+                    animation: {
+                        transitions: options.transitions
+                    }
+                })
+            );
             plotArea.append(plotArea.pointer);
         }
     });
@@ -1218,7 +1226,6 @@
             var gauge = this,
                 options = gauge.options,
                 size = gauge._getSize();
-
 
             return new RootElement(deepExtend({
                 width: size.width,
