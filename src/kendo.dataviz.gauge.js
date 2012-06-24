@@ -427,7 +427,9 @@
                 pos += step;
             }
 
-            positions.push(pos);
+            if (round(pos) <= options.endAngle) {
+                positions.push(pos);
+            }
 
             return positions;
         },
