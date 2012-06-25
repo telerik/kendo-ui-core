@@ -71,7 +71,7 @@ var bundles = [{
     combinedScript: "all",
     sourceLicense: "src-license-complete.txt",
     vsdoc: /.+md/,
-    licenses: productionLicenses,
+    licenses: [commercialLicense],
     eula: "eula",
 }, {
     name: "kendoui.web",
@@ -94,7 +94,16 @@ var bundles = [{
     vsdoc: /(framework|mobile).+md/,
     licenses: [commercialLicense],
     eula: "eula"
-}];
+},{
+    name: "kendoui.complete",
+    suites: ["web", "dataviz", "mobile"],
+    combinedScript: "all",
+    sourceLicense: "src-license-complete.txt",
+    vsdoc: /.+md/,
+    licenses: [trialLicense],
+    wrappers: ["aspnetmvc"],
+    eula: "eula",
+},];
 
 var SUITE_STYLES = {
     "web": "web",
@@ -414,6 +423,13 @@ function deployVsDoc(root, bundle) {
         kendoBuild.writeText(path.join(root, "vsdoc", "kendo." + scriptName + "-vsdoc.js"), contents);
 }
 
+function deployWrappers(root, licenseName, bundle) {
+    bundle.wrappers.forEach(function(wrapper){
+        kendoBuild.copyDirSyncRecursive(path.join(DEPLOY_ROOT, "kendoui." + wrapper + "." + licenseName, wrapper), path.join(root, wrapper));
+        kendoBuild.copyDirSyncRecursive(path.join(DEPLOY_ROOT, "kendoui." + wrapper + "." + licenseName, "js"), path.join(root, "js"));
+    })
+}
+
 function buildBundle(bundle, version, success, licenseBuilt) {
     fetchChangelog(function() {
         var name = bundle.name,
@@ -445,6 +461,11 @@ function buildBundle(bundle, version, success, licenseBuilt) {
             if (!bundle.skipExamples) {
                 console.log("Deploying examples");
                 deployExamples(root, bundle);
+            }
+
+            if (bundle.wrappers) {
+                console.log("Deploying wrappers");
+                deployWrappers(root, licenseName, bundle);
             }
 
             if (bundle.vsdoc) {

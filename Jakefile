@@ -334,19 +334,20 @@ namespace("mvc", function() {
         binariesPath = path.join(projectPath, "bin", "Release");
 
         bundles.buildBundle(bundles.mvcWrappersBundle, version(), complete, function(root, bundle, license) {
-            var binariesDeployRoot = path.join(root, "Binaries"),
+            var binariesDeployRoot = path.join(root, "aspnetmvc", "Binaries"),
             mvc3binariesDeployRoot = path.join(binariesDeployRoot, "Mvc3"),
-            stylesDeployRoot = path.join(root, "Content"),
-            scriptsDeployRoot = path.join(root, "Scripts"),
-            sourceDeployRoot = path.join(root, "Source"),
+            stylesDeployRoot = path.join(root, "styles"),
+            scriptsDeployRoot = path.join(root, "js"),
+            sourceDeployRoot = path.join(root, "src"),
             projectDeployRoot = path.join(sourceDeployRoot, "Kendo.Mvc"),
-            examplesDeployRoot = path.join(root, "Examples");
+            examplesDeployRoot = path.join(root, "aspnetmvc", "Examples");
 
             // move resources
             fs.renameSync(path.join(root, "js"), scriptsDeployRoot);
             fs.renameSync(path.join(root, "styles"), stylesDeployRoot);
 
             // copy binaries
+            kendoBuild.mkdir(path.join(root, "aspnetmvc"));
             kendoBuild.mkdir(binariesDeployRoot);
             kendoBuild.mkdir(mvc3binariesDeployRoot);
 
@@ -361,7 +362,7 @@ namespace("mvc", function() {
 
             // copy editor templates
 
-            var templatesDeployRoot = path.join(root, "EditorTemplates");
+            var templatesDeployRoot = path.join(root, "aspnetmvc", "EditorTemplates");
             var templatesRoot = path.join(examplesPath, "Views", "Shared", "EditorTemplates");
 
             kendoBuild.mkdir(templatesDeployRoot);
@@ -390,6 +391,10 @@ namespace("mvc", function() {
 
             kendoBuild.rmdirSyncRecursive(path.join(examplesDeployRoot, "obj"));
 
+            fs.renameSync(path.join(examplesDeployRoot, "Scripts"), path.join(examplesDeployRoot, "Scripts"));
+            fs.renameSync(path.join(examplesDeployRoot, "Content"), path.join(examplesDeployRoot, "Content"));
+            kendoBuild.rmdirSyncRecursive(path.join(examplesDeployRoot, "Examples"));
+
             kendoBuild.processFilesRecursive(
                 path.join(examplesDeployRoot, "bin"),
                 /(system\..*)|(\.mdb$)/i,
@@ -414,7 +419,7 @@ namespace("mvc", function() {
                 // copy legacy themes
                 kendoBuild.copyDirSyncRecursive(
                     path.join(MVC_WRAPPERS_PATH, "legacy-themes"),
-                    path.join(root, "LegacyThemes")
+                    path.join(root, "aspnetmvc", "LegacyThemes")
                 );
 
                 // copy source code
