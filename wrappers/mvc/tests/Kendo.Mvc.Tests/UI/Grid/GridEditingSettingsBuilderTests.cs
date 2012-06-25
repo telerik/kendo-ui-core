@@ -27,6 +27,20 @@ namespace Kendo.Mvc.UI.Fluent.Tests
             settings.TemplateName.ShouldEqual(templateName);
         }
 
+        [Fact]
+        public void Insert_row_position_should_be_top()
+        {            
+            settings.CreateAt.ShouldEqual(GridInsertRowPosition.Top);
+        }
+
+        [Fact]
+        public void Should_set_insert_row_position()
+        {
+            builder.CreateAt(GridInsertRowPosition.Bottom);
+
+            settings.CreateAt.ShouldEqual(GridInsertRowPosition.Bottom);
+        }
+
         //TODO: Implement edit form attributes
         //[Fact]
         //public void FormHtmlAttributes_sets_the_html_attributes_of_the_editing_settings()

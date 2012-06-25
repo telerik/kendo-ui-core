@@ -749,6 +749,25 @@
                 equal(item.index(), 1);
             });
 
+            test("addRow insert item at the end of the current page when server paging", function() {
+                var grid = setup({
+                    editable: { createAt : "bottom" },
+                    pageable: true,
+                    dataSource: new DataSource({
+                        schema: {
+                            model: { id: "foo" }
+                        },
+                        serverPaging: true,
+                        data: [{ foo: "bar", name: "tom" }, { foo: "baz", name: "jerry" }],
+                        pageSize: 2
+                    })
+                });
+
+                grid.addRow();
+                var item = grid.element.find(".k-grid-edit-row");
+
+                equal(item.index(), 2);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

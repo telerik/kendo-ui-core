@@ -726,7 +726,7 @@ namespace Kendo.Mvc.UI
             {
                 int colspan = DataSource.Groups.Count + VisibleColumns.Count;
 
-                if (DetailTemplate != null)
+                if (HasDetailTemplate)
                 {
                     colspan++;
                 }
@@ -961,8 +961,7 @@ namespace Kendo.Mvc.UI
                 ShowGroupFooter = Aggregates.Any() && VisibleColumns.OfType<IGridBoundColumn>().Any(c => c.GroupFooterTemplate.HasValue()),
                 PopUpContainer = new HtmlFragment(),
                 CreateNewDataItem = () => Editable.DefaultDataItem(),
-                //TODO: Implement insert row position
-                //InsertRowPosition = Editing.InsertRowPosition,
+                InsertRowPosition = Editable.CreateAt,
                 EditTemplateName = Editable.TemplateName,
                 AdditionalViewData = Editable.AdditionalViewData,
                 FormId = ViewContext.FormContext.FormId,

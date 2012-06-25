@@ -153,5 +153,23 @@ namespace Kendo.Mvc.UI.Fluent
             target.Clear();
             target.Merge(attributes);
         }
+
+        /// <summary>
+        /// Sets insert row position.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Grid&lt;Order&gt;()
+        ///             .Name("Orders")
+        ///             .Editable(settings => settings.CreateAt(GridInsertRowPosition.Bottom))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public GridEditingSettingsBuilder<T> CreateAt(GridInsertRowPosition position)
+        {
+            settings.CreateAt = position;
+
+            return this;
+        }
     }
 }

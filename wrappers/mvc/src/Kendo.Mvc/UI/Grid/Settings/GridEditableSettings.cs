@@ -36,11 +36,11 @@ namespace Kendo.Mvc.UI
             //TODO: Implement edit form attributes
           //  FormHtmlAttributes = new RouteValueDictionary();
             //TODO: Implement GridBeginEditEvent option
-            //BeginEdit = GridBeginEditEvent.Auto;
-            //InsertRowPosition = GridInsertRowPosition.Top;
+            //BeginEdit = GridBeginEditEvent.Auto;            
 
             DefaultDataItem = CreateDefaultItem;
             Confirmation = Messages.Grid_Confirmation;
+            CreateAt = GridInsertRowPosition.Top;
         }
 
         //TODO: Implement GridBeginEditEvent option
@@ -49,14 +49,7 @@ namespace Kendo.Mvc.UI
         //    get; 
         //    set; 
         //}
-
-        //TODO: Implement insert row position
-        //public GridInsertRowPosition InsertRowPosition
-        //{
-        //    get;
-        //    set;
-        //}
-
+       
         public Window PopUp
         {
             get;
@@ -105,6 +98,11 @@ namespace Kendo.Mvc.UI
             set; 
         }
 
+        public GridInsertRowPosition CreateAt
+        {
+            get;
+            set;
+        }
         //TODO: Implement edit form attributes
         ///// <summary>
         ///// Gets the HTML attributes of the form rendered during editing
@@ -176,9 +174,8 @@ namespace Kendo.Mvc.UI
                 .Add("mode", Mode.ToString().ToLowerInvariant())
                 .Add("template", editorHtml, () => Mode != GridEditMode.InLine)
                 //TODO: Implement GridBeginEditEvent option                
-                //.Add("beginEdit", BeginEdit == GridBeginEditEvent.Click ? "click" : "dblclick", () => BeginEdit != GridBeginEditEvent.Auto)               
-                //TODO: Implement insert row position
-                //.Add("insertRowPosition", InsertRowPosition.ToString().ToLower(), () => InsertRowPosition != GridInsertRowPosition.Top)                
+                //.Add("beginEdit", BeginEdit == GridBeginEditEvent.Click ? "click" : "dblclick", () => BeginEdit != GridBeginEditEvent.Auto)                               
+                .Add("createAt", CreateAt.ToString().ToLower(), () => CreateAt != GridInsertRowPosition.Top)                
                 .Add("window", SerializePopUp(), () => Mode == GridEditMode.PopUp && grid.DataSource.Type == DataSourceType.Ajax);            
         }
     }

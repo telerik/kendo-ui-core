@@ -1187,7 +1187,7 @@
                 if (createAt.toLowerCase() == "bottom") {
                     index += view.length;
 
-                    if (pageSize && pageSize <= view.length) {
+                    if (pageSize && !dataSource.options.serverPaging && pageSize <= view.length) {
                         index -= 1;
                     }
                 }
