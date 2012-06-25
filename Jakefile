@@ -311,7 +311,7 @@ namespace("mvc", function() {
                     "/culture:" + culture,
                     "/out:" + path.join("bin", "Release", culture, "Kendo.Mvc.resources.dll"),
                     "/template:" + path.join("bin", "Release", "Kendo.Mvc.dll"),
-                    "/keyfile:" + path.join("..", "shared", "Telerik.Web.snk")
+                    "/keyfile:" + path.join("..", "shared", "Kendo.snk")
                 ], {
                     cwd: path.resolve(filesPath) ,
                 }, function() {

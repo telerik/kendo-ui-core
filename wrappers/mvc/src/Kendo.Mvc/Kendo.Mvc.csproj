@@ -21,7 +21,7 @@
     <SccProvider>
     </SccProvider>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>..\shared\Telerik.Web.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>..\shared\Kendo.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -1000,8 +1000,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\shared\Telerik.Web.snk">
-      <Link>Telerik.Web.snk</Link>
+    <None Include="..\shared\Kendo.snk">
+      <Link>Kendo.snk</Link>
     </None>
   </ItemGroup>
   <ItemGroup>
