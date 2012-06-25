@@ -768,6 +768,24 @@
 
                 equal(item.index(), 2);
             });
+
+            test("add row cancels previous inserted item", function() {
+                var grid = setup({
+                        editable: true,
+                        dataSource: new DataSource({
+                            schema: {
+                                model: { id: "foo" }
+                            },
+                            data: [{ foo: "bar", name: "tom" }],
+                        })
+                    });
+
+                grid.addRow();
+                grid.addRow();
+
+                equal(dataSource.data().length, 2);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

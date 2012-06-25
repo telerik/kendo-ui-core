@@ -1182,6 +1182,7 @@
                 view = dataSource.view() || [];
 
             if ((that.editable && that.editable.end()) || !that.editable) {
+                that.cancelRow();
                 index = dataSource.indexOf(view[0]);
 
                 if (createAt.toLowerCase() == "bottom") {
