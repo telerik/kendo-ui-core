@@ -76,7 +76,11 @@
         <div class="company-info" id="google"></div>
     </div>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
+            setTimeout(setup, 500);
+        });
+
+        function setup() {
             var selectedYear = 2011;
 
             var stocksDataSource = new kendo.data.DataSource({
@@ -366,7 +370,7 @@
                 }).end()
                 .data("kendoTabStrip").select(0);
 
-        });
+        }
     </script>
 
     <link href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700,300" rel="stylesheet">
