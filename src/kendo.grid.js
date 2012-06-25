@@ -2108,7 +2108,8 @@
                 idx,
                 length,
                 format = column.format,
-                type = typeof template;
+                type = typeof template,
+                columnValues = column.values;
 
             if (column.command) {
                 if (isArray(column.command)) {
@@ -2119,13 +2120,27 @@
                 }
                 return that._createButton(column.command).replace(templateHashRegExp, "\\#");
             }
-
             if (type === FUNCTION) {
                 state.storage["tmpl" + state.count] = template;
                 html += "#=this.tmpl" + state.count + "(" + paramName + ")#";
                 state.count ++;
             } else if (type === STRING) {
                 html += template;
+            } else if (columnValues && columnValues.length && isPlainObject(columnValues[0]) && "value" in columnValues[0]) {
+                html += "#var v =" + kendo.stringify(columnValues) + "#";
+                html += "#for (var idx=0,length=v.length;idx<length;idx++) {#";
+                html += "#if (v[idx].value == ";
+
+                if (!settings.useWithBlock) {
+                    html += paramName + ".";
+                }
+
+                html += column.field;
+                html += ") { #";
+                html += "${v[idx].text}";
+                html += "#break;#";
+                html += "#}#";
+                html += "#}#";
             } else {
                 html += column.encoded ? "${" : "#=";
 
