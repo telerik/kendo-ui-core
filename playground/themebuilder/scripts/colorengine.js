@@ -7,9 +7,14 @@
             "rgb": [ "red", "green", "blue", "alpha" ],
             "hsl": [ "h", "s", "l", "a" ]
         },
+        clamps = { "h": 360, "s": 100, "l": 100 },
         min = Math.min,
         max = Math.max,
         round = Math.round;
+
+    function clampValue(value, minValue, maxValue) {
+        return max(minValue, min(value, maxValue));
+    }
 
     function trimZeroes(value) {
         return value.toPrecision(2).replace(zeroTrimRegExp, "");
@@ -223,6 +228,18 @@
                    };
         },
 
+        hue: function (degree) {
+            return this._rotateColor(degree, "h");
+        },
+
+        saturation: function (percent) {
+            return this._rotateColor(percent, "s");
+        },
+
+        lightness: function (percent) {
+            return this._rotateColor(percent, "l");
+        },
+
         complementary: function(color) {
             var that = this;
 
@@ -236,7 +253,7 @@
         },
 
         rgb2hsl: function(color) {
-            var r = color.red / 255, g = color.green / 255, b = color.blue / 255, a = this.alpha,
+            var r = color.red / 255, g = color.green / 255, b = color.blue / 255, a = color.alpha,
                 max = Math.max(r, g, b), min = Math.min(r, g, b),
                 h, s, l = (max + min) / 2, d = max - min;
 
@@ -258,8 +275,8 @@
 
             return {
                 h: h * 360,
-                s: s,
-                l: l,
+                s: s * 100,
+                l: l * 100,
                 a: a
             };
         },
@@ -291,7 +308,21 @@
                 blue: round(hue(h - 1/3) * 255),
                 alpha: hsl.a
             };
+        },
+
+        _rotateColor: function (value, type) {
+            var that = this,
+                hsl = that.rgb2hsl(that.value);
+
+            if (isNaN(value)) {
+                return round(hsl[type]);
+            }
+
+            hsl[type] = clampValue(value, 0, clamps[type]);
+            that.value = that.hsl2rgb(hsl);
+            return that;
         }
+
     });
 
 })(jQuery);

@@ -232,6 +232,45 @@
                 ok(color.darken(100).toHex() == "#000");
             });
 
+            test("hue method returns the hue if without arguments", 1, function () {
+                var color = new Color("#334455");
+
+                ok(color.hue() == 210);
+            });
+
+            test("hue method changes the color hue", 2, function () {
+                var color = new Color("#334455");
+
+                ok(color.hue(0).toHex() == "#533");
+                ok(color.hue(180).toHex() == "#355");
+            });
+
+            test("saturation method returns the saturation if without arguments", 1, function () {
+                var color = new Color("#334455");
+
+                ok(color.saturation() == 25);
+            });
+
+            test("saturation method saturates/desaturates the color", 2, function () {
+                var color = new Color("#334455");
+
+                ok(color.saturation(100).toHex() == "#048");
+                ok(color.saturation(0).toHex() == "#444");
+            });
+
+            test("lightness method returns the lightness if without arguments", 1, function () {
+                var color = new Color("#334455");
+
+                ok(color.lightness() == 27);
+            });
+
+            test("lightness method lightens/darkens the color", 2, function () {
+                var color = new Color("#334455");
+
+                ok(color.lightness(0).toHex() == "#000");
+                ok(color.lightness(100).toHex() == "#fff");
+            });
+
         </script>
     </body>
 </html>
