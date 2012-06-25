@@ -22,6 +22,7 @@ namespace Kendo.Mvc.Examples.Models
                         ShipCountry = o.ShipCountry,
                         ShipName = o.ShipName,
                         ContactName = o.Customer.CompanyName,
+                        EmployeeID = o.EmployeeID ?? 0,
                         Employee = new ClientEmployeeViewModel { 
                             EmployeeName = o.Employee.FirstName + " " + o.Employee.LastName,
                             EmployeeID = o.EmployeeID ?? 0
@@ -49,6 +50,7 @@ namespace Kendo.Mvc.Examples.Models
                 editable.ShipName = order.ShipName;
                 editable.ContactName = order.ContactName;                
                 editable.Employee = order.Employee;
+                editable.EmployeeID = order.EmployeeID;
             }
         }
     }

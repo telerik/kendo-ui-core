@@ -5,8 +5,7 @@
     using System.ComponentModel;    
     
     public class ClientOrderViewModel
-    {
-        [ReadOnly(true)]
+    {        
         public int OrderID
         {
             get;
@@ -44,7 +43,7 @@
             set;
         }
 
-        public int? EmployeeID
+        public int EmployeeID
         {
             get;
             set;

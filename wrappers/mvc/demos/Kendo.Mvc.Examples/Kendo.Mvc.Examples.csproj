@@ -159,6 +159,7 @@
     <Compile Include="Controllers\Web\Grid\Column_ResizingController.cs" />
     <Compile Include="Controllers\Web\Grid\ApiController.cs" />
     <Compile Include="Controllers\Web\Grid\ColumnSettingsController.cs" />
+    <Compile Include="Controllers\Web\Grid\ForeignKeyColumnController.cs" />
     <Compile Include="Controllers\Web\Grid\Editing_CustomController.cs" />
     <Compile Include="Controllers\Web\Grid\PagingController.cs" />
     <Compile Include="Controllers\Web\Grid\HeaderTemplateController.cs" />
@@ -337,6 +338,7 @@
     <Content Include="Areas\aspx\Views\web\grid\column_reordering.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\column_resizing.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\columnsettings.aspx" />
+    <Content Include="Areas\aspx\Views\web\grid\foreignkeycolumn.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\editing_custom.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\headertemplate.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\custom_command.aspx" />
@@ -395,6 +397,7 @@
     <Content Include="Scripts\MicrosoftMvcAjax.js" />
     <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
     <Content Include="Scripts\MicrosoftMvcValidation.js" />
+    <Content Include="Views\Shared\EditorTemplates\GridForeignKey.ascx" />
     <Content Include="Views\The-views-are-in-the-Areas-folder.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -706,6 +709,7 @@
     <Content Include="Areas\razor\Views\web\editor\globalization.cshtml" />
     <Content Include="Areas\aspx\Views\web\editor\globalization.aspx" />
     <Content Include="Areas\razor\Views\web\treeview\remote_data.cshtml" />
+    <Content Include="Areas\razor\Views\web\grid\foreignkeycolumn.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
@@ -720,6 +724,7 @@
     <Content Include="Views\Shared\EditorTemplates\Integer.ascx" />
     <Content Include="Views\Shared\EditorTemplates\Number.ascx" />
     <Content Include="Views\Shared\EditorTemplates\Time.ascx" />
+    <Content Include="Views\Shared\EditorTemplates\GridForeignKey.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />

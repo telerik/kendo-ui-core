@@ -6,6 +6,8 @@ namespace Kendo.Mvc.UI.Fluent
     using System.Linq.Expressions;
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
+    using System.Collections;
+    using System.Web.Mvc;
     /// <summary>
     /// Creates columns for the <see cref="Grid{TModel}" />.
     /// </summary>
@@ -98,9 +100,7 @@ namespace Kendo.Mvc.UI.Fluent
 
             return new GridBoundColumnBuilder<TModel>(column);
         }
-
-        //TODO: ForeignKey column
-        /*
+                
         /// <summary>
         /// Defines a foreign key column.
         /// </summary>
@@ -119,10 +119,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="expression"></param>
         /// <returns></returns>
         public virtual GridBoundColumnBuilder<TModel> ForeignKey<TValue>(Expression<Func<TModel, TValue>> expression, SelectList data)
-        {
-            Guard.IsNotNull(expression, "expression");
-            Guard.IsNotNull(data, "data");
-
+        {            
             GridForeignKeyColumn<TModel, TValue> column = new GridForeignKeyColumn<TModel, TValue>(Container, expression, data);
 
             column.Data = data;
@@ -130,8 +127,7 @@ namespace Kendo.Mvc.UI.Fluent
             Container.Columns.Add(column);
 
             return new GridBoundColumnBuilder<TModel>(column);
-        }
-        */
+        }        
 
         protected virtual void AutoGenerate(bool shouldGenerate, Action<GridColumnBase<TModel>> columnAction)
         {

@@ -5,8 +5,7 @@
     using System.ComponentModel;    
     
     public class ClientEmployeeViewModel
-    {
-        [ReadOnly(true)]
+    {   
         public int EmployeeID
         {
             get;

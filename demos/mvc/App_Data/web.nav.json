@@ -399,6 +399,11 @@
                     "url": "grid/selection.html"
                 },
                 {
+                    "text": "ForeignKey column",
+                    "url": "grid/foreignkeycolumn.html",
+                    "packages": ["mvc"]
+                },
+                {
                     "text": "Column reordering",
                     "url": "grid/column-reordering.html"
                 },

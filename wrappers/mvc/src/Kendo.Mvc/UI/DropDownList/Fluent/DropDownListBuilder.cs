@@ -1,11 +1,10 @@
 namespace Kendo.Mvc.UI.Fluent
 {
-    using Kendo.Mvc.UI;
-    using Kendo.Mvc.UI.Fluent;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
+    using Kendo.Mvc.UI;    
 
     public class DropDownListBuilder : DropDownListBuilderBase<DropDownList, DropDownListBuilder>
     {
@@ -74,7 +73,14 @@ namespace Kendo.Mvc.UI.Fluent
         /// </code>
         /// </example>
         public DropDownListBuilder BindTo(IEnumerable<SelectListItem> dataSource)
-        {
+        {            
+            if (string.IsNullOrEmpty(Component.DataValueField)
+                && string.IsNullOrEmpty(Component.DataTextField))
+            {                
+                DataValueField("Value");
+                DataTextField("Text");                
+            }
+
             return BindTo(dataSource.Select(item => new DropDownListItem
             {
                 Text = item.Text,

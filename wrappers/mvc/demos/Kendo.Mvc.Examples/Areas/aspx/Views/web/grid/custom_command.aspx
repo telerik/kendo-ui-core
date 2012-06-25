@@ -40,7 +40,7 @@
 
         function showDetails(e) {
             e.preventDefault();
-            debugger;
+            
             var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
             var wnd = $("#Details").data("kendoWindow");
 

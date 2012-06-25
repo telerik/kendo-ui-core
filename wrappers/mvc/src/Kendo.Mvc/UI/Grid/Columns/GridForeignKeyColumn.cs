@@ -9,7 +9,7 @@ namespace Kendo.Mvc.UI
     using System.Collections.Generic;
     using Kendo.Mvc.Infrastructure.Implementation.Expressions;
 
-    internal class GridForeignKeyColumn<TModel, TValue> : GridBoundColumn<TModel, TValue>, IGridForeignKeyColumn where TModel : class
+    public class GridForeignKeyColumn<TModel, TValue> : GridBoundColumn<TModel, TValue>, IGridForeignKeyColumn where TModel : class
     {        
         public GridForeignKeyColumn(Grid<TModel> grid, Expression<Func<TModel, TValue>> expression, SelectList data)
             : base(grid, expression)         
@@ -26,15 +26,12 @@ namespace Kendo.Mvc.UI
 
         protected override void Serialize(IDictionary<string, object> json)
         {
-            base.Serialize(json);
-
-            //TODO: foreign key column implementation
-            /*
-            if (Grid.IsClientBinding || (!Grid.IsClientBinding && Grid.Filtering.Enabled))
+            base.Serialize(json);            
+            
+            if (Grid.IsClientBinding || (!Grid.IsClientBinding && Grid.Filterable.Enabled))
             {
-                json["data"] = Data.Select(i => new { Text = i.Text, Value = i.Value });
-            }            
-            */
+                json["values"] = Data.Select(i => new { text = i.Text, value = i.Value });
+            }                        
         }
 
         protected override IGridDataCellBuilder CreateEditBuilderCore(IGridHtmlHelper htmlHelper)
