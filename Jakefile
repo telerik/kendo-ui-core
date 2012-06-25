@@ -435,7 +435,6 @@ namespace("mvc", function() {
 
                     kendoBuild.copyFileSync(path.join(MVC_WRAPPERS_PATH, "src", "shared", "Source.snk"), path.join(projectDeployRoot, "Kendo.snk"));
                     kendoBuild.copyFileSync(path.join(MVC_WRAPPERS_PATH, "src", "shared", "CommonAssemblyInfo.cs"), path.join(projectDeployRoot, "CommonAssemblyInfo.cs"));
-                    fs.unlinkSync(path.join(projectDeployRoot, "Kendo.Mvc.resources.dll"));
 
                     projectFileName = path.join(root, "src", "Kendo.Mvc", "Kendo.Mvc.csproj");
                     csproj = kendoBuild.readText(projectFileName);
@@ -452,8 +451,8 @@ namespace("mvc", function() {
                     kendoBuild.rmdirSyncRecursive(path.join(projectDeployRoot, "bin"));
                     kendoBuild.rmdirSyncRecursive(path.join(projectDeployRoot, "obj"));
                 }
-    });
-}, true);
+		});
+	}, true);
 
 	function deployExamplesSharedFiles(debug) {
         mkdirClean(scriptsDest);
