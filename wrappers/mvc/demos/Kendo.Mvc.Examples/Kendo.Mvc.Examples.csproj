@@ -383,20 +383,6 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="Global.asax" />
-    <Content Include="Scripts\jquery-1.7.2.min.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
-    <Content Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\MicrosoftAjax.debug.js" />
-    <Content Include="Scripts\MicrosoftAjax.js" />
-    <Content Include="Scripts\MicrosoftMvcAjax.debug.js" />
-    <Content Include="Scripts\MicrosoftMvcAjax.js" />
-    <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
-    <Content Include="Scripts\MicrosoftMvcValidation.js" />
     <Content Include="Views\Shared\EditorTemplates\GridForeignKey.ascx" />
     <Content Include="Views\The-views-are-in-the-Areas-folder.txt" />
     <Content Include="Web.config">
@@ -410,7 +396,8 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Content\web\" />
+    <Folder Include="Content\" />
+    <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\aspx\Views\Web.config" />
@@ -740,7 +727,7 @@
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target> -->
-  <Target Name="AfterBuild">
+  <Target Name="AfterBuild" Condition="'$(Configuration)'!='Release'">
     <!-- Deploy Web suite scripts and styles to Content and Scripts -->
     <Exec Command="jake mvc:debug-examples" />
   </Target>

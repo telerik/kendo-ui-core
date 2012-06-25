@@ -242,12 +242,36 @@ namespace("download-builder", function() {
 });
 
 namespace("mvc", function() {
-    var projectRoot = path.join("wrappers", "mvc", "demos", "Kendo.Mvc.Examples"),
+    var examplesProjectPath = path.join("wrappers", "mvc", "demos", "Kendo.Mvc.Examples"),
         sharedStyles = path.join(DEMOS_SHARED, STYLES_PATH),
-        stylesDest = path.join(projectRoot, "Content"),
+        stylesDest = path.join(examplesProjectPath, "Content"),
         sharedStylesDest = path.join(stylesDest, "shared"),
         iconsDest = path.join(sharedStylesDest, "icons"),
-        scriptsDest = path.join(projectRoot, "Scripts");
+        scriptsDest = path.join(examplesProjectPath, "Scripts");
+
+    var sharedFiles = [{
+            name: "console.js",
+            src: path.join(DEMOS_SHARED, SCRIPTS_PATH),
+            dst: scriptsDest
+        }, {
+            name: "prettify.js",
+            src: path.join(DEMOS_SHARED, SCRIPTS_PATH),
+            dst: scriptsDest
+        }, {
+            src: path.join(DEMOS_SHARED, "styles"),
+            dst: sharedStylesDest
+        }, {
+            src: path.join(DEMOS_SHARED, "icons"),
+            dst: iconsDest
+        }, {
+			src: path.join(SOURCE_PATH, "cultures"),
+			dst: path.join(scriptsDest, "cultures")
+		}, {
+			name: "jquery.min.js",
+			src: path.join(SOURCE_PATH),
+			dst: scriptsDest
+		}
+    ];
 
     mkdir(stylesDest);
     mkdir(sharedStylesDest);
@@ -255,37 +279,16 @@ namespace("mvc", function() {
 
     desc("Copy debug scripts and styles to the MVC demo site");
     task("debug-examples", ["merge-scripts"], function() {
-        var sharedFiles = [{
-                name: "console.js",
-                src: path.join(DEMOS_SHARED, SCRIPTS_PATH),
-                dst: scriptsDest
-            }, {
-                name: "prettify.js",
-                src: path.join(DEMOS_SHARED, SCRIPTS_PATH),
-                dst: scriptsDest
-            }, {
-                src: path.join(DEMOS_SHARED, "styles"),
-                dst: sharedStylesDest
-            }, {
-                src: path.join(DEMOS_SHARED, "icons"),
-                dst: iconsDest
-            }
-        ];
-
-        var cultures = [{
-            src: path.join(SOURCE_PATH, "cultures"),
-            dst: path.join(scriptsDest, "cultures")
-        }];
-
-        deploySuiteFiles("web");
-        deploySuiteFiles("dataviz");
-        kendoScripts.buildSuiteScripts("aspnetmvc", scriptsDest, "", false);
-        deployFiles(sharedFiles);
-        deployFiles(cultures);
+        deployExamplesSharedFiles(true);
+    });
+	
+    desc("Copy debug scripts and styles to the MVC demo site");
+    task("examples-shared-files", ["merge-scripts"], function() {
+        deployExamplesSharedFiles(false);
     });
 
     desc("Build wrappers project");
-    task("build-wrappers-project", ["merge-scripts"], function() {
+    task("build-wrappers-project", ["examples-shared-files"], function() {
         kendoBuild.msBuild(MVC_WRAPPERS_PROJECT, [ "/t:Clean;Build", "/p:Configuration=Release" ], complete);
     }, true);
 
@@ -328,10 +331,9 @@ namespace("mvc", function() {
     }, true);
 
     desc("Build release version");
-    task("bundle", ["mvc:build-wrappers-demo-project"], function() {
+    task("bundle", ["clean", "mvc:build-wrappers-demo-project"], function() {
         var projectPath = path.join(MVC_WRAPPERS_PATH, "src", "Kendo.Mvc"),
-        examplesPath = path.join(MVC_WRAPPERS_PATH, "demos", "Kendo.Mvc.Examples"),
-        binariesPath = path.join(projectPath, "bin", "Release");
+			binariesPath = path.join(projectPath, "bin", "Release");
 
         bundles.buildBundle(bundles.mvcWrappersBundle, version(), complete, function(root, bundle, license) {
             var binariesDeployRoot = path.join(root, "aspnetmvc", "Binaries"),
@@ -363,7 +365,7 @@ namespace("mvc", function() {
             // copy editor templates
 
             var templatesDeployRoot = path.join(root, "aspnetmvc", "EditorTemplates");
-            var templatesRoot = path.join(examplesPath, "Views", "Shared", "EditorTemplates");
+            var templatesRoot = path.join(examplesProjectPath, "Views", "Shared", "EditorTemplates");
 
             kendoBuild.mkdir(templatesDeployRoot);
             kendoBuild.mkdir(path.join(templatesDeployRoot, "ascx"));
@@ -385,7 +387,7 @@ namespace("mvc", function() {
 
             // deploy demos
             kendoBuild.copyDirSyncRecursive(
-                examplesPath,
+                examplesProjectPath,
                 examplesDeployRoot
             );
 
@@ -453,25 +455,42 @@ namespace("mvc", function() {
     });
 }, true);
 
+	function deployExamplesSharedFiles(debug) {
+        mkdirClean(scriptsDest);
+        mkdirClean(stylesDest);
+        deploySuiteFiles("web", !debug);
+        deploySuiteFiles("dataviz", !debug);
+        kendoScripts.buildSuiteScripts("aspnetmvc", scriptsDest, "", !debug);
+        deployFiles(sharedFiles);
 
-function deploySuiteFiles(suite) {
-    var suiteStyles = path.join("styles", suite),
-        suiteStylesDest = path.join(stylesDest, suite),
-        suiteFiles = [{
-            name: suite + ".nav.json",
-            src: path.join(DEMOS_PATH, "App_Data"),
-            dst: path.join(projectRoot, "App_Data")
-        }, {
-            src: path.join(DEMOS_PATH, "content", suite),
-            dst: suiteStylesDest
-        }
-    ];
+        kendoBuild.processFilesRecursive(scriptsDest, /^(?!.*min\.js$).*\.js/, function(fileName) {
+            fs.renameSync(fileName, fileName.replace(".js", ".min.js"));
+        });
 
-    deployFiles(suiteFiles);
+        kendoBuild.processFilesRecursive(stylesDest, /^(?!.*min\.css$).*\.css/, function(fileName) {
+            fs.renameSync(fileName, fileName.replace(".css", ".min.css"));
+        });
+	}
 
-    kendoScripts.buildSuiteScripts(suite, scriptsDest, "", false);
-    kendoBuild.deployStyles(suiteStyles, suiteStylesDest, "", false);
-}
+    function deploySuiteFiles(suite, compress) {
+        var suiteStyles = path.join("styles", suite),
+            suiteStylesDest = path.join(stylesDest, suite),
+            suiteFiles = [{
+                name: suite + ".nav.json",
+                src: path.join(DEMOS_PATH, "App_Data"),
+                dst: path.join(examplesProjectPath, "App_Data")
+            }, {
+                src: path.join(DEMOS_PATH, "content", suite),
+                dst: suiteStylesDest
+            }
+        ];
+
+		kendoBuild.mkdir(suiteStylesDest);
+        deployFiles(suiteFiles);
+
+        kendoScripts.buildSuiteScripts(suite, scriptsDest, "", compress);
+        kendoBuild.deployStyles(suiteStyles, suiteStylesDest, "", compress);
+    }
 
     function deployFiles(filesToDeploy) {
         filesToDeploy.forEach(function(file) {
