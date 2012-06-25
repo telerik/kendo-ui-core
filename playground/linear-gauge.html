@@ -40,12 +40,13 @@
                     }]
                 },
                 pointer: {
-                    shape: "",
                     value: 10,
+                    shape: "arrow",
                     track: {
                         visible: true
                     }
-                }
+                },
+                transitions: false
             });
 
             $("#gauge1").kendoLinearGauge({
@@ -59,12 +60,13 @@
                     reverse: false
                 },
                 pointer: {
-                    shape: "barIndicator",
                     value: 10,
+                    shape: "arrow",
                     track: {
                         visible: true
                     }
-                }
+                },
+                transitions: false
             });
 
             $("#gauge2").kendoLinearGauge({
@@ -84,13 +86,15 @@
                 },
                 pointer: {
                     value: 10,
+                    shape: "arrow",
                     track: {
                         visible: false,
                         border: {
                             color: "red"
                         }
                     }
-                }
+                },
+                transitions: false
             });
 
             $("#gauge3").kendoLinearGauge({
@@ -110,10 +114,12 @@
                 },
                 pointer: {
                     value: 10,
+                    shape: "arrow",
                     track: {
                         visible: true
                     }
-                }
+                },
+                transitions: false
             });
 
         </script>

@@ -826,7 +826,10 @@
                 animation.abort();
             }
 
-            if (options.animation === false && element) {
+            if (options.animation.transitions === false) {
+                pointer.getViewElements(pointer._view);
+
+                element.points = pointer.element.points;
                 element.refresh(doc.getElementById(options.id));
             } else {
                 options.animation = deepExtend({}, options.animation, {
@@ -949,20 +952,24 @@
                 halfSize = size / 2,
                 shape,
                 sign = (scale.options.mirror ? -1 : 1),
+                reverse = scale.options.reverse,
+                pos,
                 trackBox;
 
             if (options.shape == ARROW) {
                 if (vertical) {
+                    pos = reverse ? "y2" : "y1";
                     shape = [
-                        new Point2D(pointerRangeBox.x1, slot.y1 - halfSize),
-                        new Point2D(pointerRangeBox.x1 - sign * size, slot.y1),
-                        new Point2D(pointerRangeBox.x1, slot.y1 + halfSize)
+                        new Point2D(pointerRangeBox.x1, slot[pos] - halfSize),
+                        new Point2D(pointerRangeBox.x1 - sign * size, slot[pos]),
+                        new Point2D(pointerRangeBox.x1, slot[pos] + halfSize)
                     ];
                 } else {
+                    pos = reverse ? "x1" : "x2";
                     shape = [
-                        new Point2D(slot.x2 - halfSize, pointerRangeBox.y2),
-                        new Point2D(slot.x2, pointerRangeBox.y2 + sign * size),
-                        new Point2D(slot.x2 + halfSize, pointerRangeBox.y2)
+                        new Point2D(slot[pos] - halfSize, pointerRangeBox.y2),
+                        new Point2D(slot[pos], pointerRangeBox.y2 + sign * size),
+                        new Point2D(slot[pos] + halfSize, pointerRangeBox.y2)
                     ];
                 }
             } else {
@@ -1025,6 +1032,8 @@
                 (options.shape === BAR_INDICATOR || options.shape === "")) {
                 elements.push(pointer.renderTrack(view));
             }
+
+            pointer._view = view;
 
             append(elements, Pointer.fn.getViewElements.call(pointer, view));
 
@@ -1137,7 +1146,14 @@
 
             scale = plotArea.scale = new LinearScale(options.scale);
             plotArea.append(plotArea.scale);
-            plotArea.pointer = new LinearPointer(scale, options.pointer);
+            plotArea.pointer = new LinearPointer(
+                scale,
+                deepExtend({}, options.pointer, {
+                    animation: {
+                        transitions: options.transitions
+                    }
+                })
+            );
             plotArea.append(plotArea.pointer);
         },
 
