@@ -1509,7 +1509,7 @@
                 transport.read = typeof transport.read === STRING ? { url: transport.read } : transport.read;
 
                 if (options.type) {
-                    if (!isPlainObject(kendo.data.transports[options.type])) {
+                    if (kendo.data.transports[options.type] && !isPlainObject(kendo.data.transports[options.type])) {
                        that.transport = new kendo.data.transports[options.type](extend(transport, { data: data }));
                     } else {
                         transport = extend(true, {}, kendo.data.transports[options.type], transport);
