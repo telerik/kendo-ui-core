@@ -431,31 +431,47 @@ namespace("mvc", function() {
                         projectDeployRoot
                     );
 
+                    kendoBuild.copyFileSync(path.join(MVC_WRAPPERS_PATH, "src", "shared", "Source.snk"), path.join(projectDeployRoot, "Kendo.snk"));
+                    kendoBuild.copyFileSync(path.join(MVC_WRAPPERS_PATH, "src", "shared", "CommonAssemblyInfo.cs"), path.join(projectDeployRoot, "CommonAssemblyInfo.cs"));
+                    fs.unlinkSync(path.join(projectDeployRoot, "Kendo.Mvc.resources.dll"));
+
+                    projectFileName = path.join(root, "src", "Kendo.Mvc", "Kendo.Mvc.csproj");
+                    csproj = kendoBuild.readText(projectFileName);
+
+                    csproj = csproj.replace(/\.\.\\shared\\Kendo.snk/g, "Kendo.snk")
+                                   .replace(/<Content Include=".*?data\.aspnetmvc\.js"(.|\r|\n)*?<\/Content>/ig, "")
+                                   .replace(/<Content Include=".*?validator\.aspnetmvc\.js"(.|\r|\n)*?<\/Content>/ig, '<Content Include="..\\js\\kendo.aspnetmvc.js"><Link>Scripts\\kendo.aspnetmvc.js</Link></Content>')
+                                   .replace("<Link>Kendo.snk</Link>", "")
+                                   .replace(/\.\.\\shared\\CommonAssemblyInfo.cs/g, "CommonAssemblyInfo.cs")
+                                   .replace("<Link>CommonAssemblyInfo.cs</Link>", "");
+
+                    kendoBuild.writeText(projectFileName, csproj);
+
                     kendoBuild.rmdirSyncRecursive(path.join(projectDeployRoot, "bin"));
                     kendoBuild.rmdirSyncRecursive(path.join(projectDeployRoot, "obj"));
                 }
-        });
-    }, true);
+    });
+}, true);
 
 
-    function deploySuiteFiles(suite) {
-        var suiteStyles = path.join("styles", suite),
-            suiteStylesDest = path.join(stylesDest, suite),
-            suiteFiles = [{
-                name: suite + ".nav.json",
-                src: path.join(DEMOS_PATH, "App_Data"),
-                dst: path.join(projectRoot, "App_Data")
-            }, {
-                src: path.join(DEMOS_PATH, "content", suite),
-                dst: suiteStylesDest
-            }
-        ];
+function deploySuiteFiles(suite) {
+    var suiteStyles = path.join("styles", suite),
+        suiteStylesDest = path.join(stylesDest, suite),
+        suiteFiles = [{
+            name: suite + ".nav.json",
+            src: path.join(DEMOS_PATH, "App_Data"),
+            dst: path.join(projectRoot, "App_Data")
+        }, {
+            src: path.join(DEMOS_PATH, "content", suite),
+            dst: suiteStylesDest
+        }
+    ];
 
-        deployFiles(suiteFiles);
+    deployFiles(suiteFiles);
 
-        kendoScripts.buildSuiteScripts(suite, scriptsDest, "", false);
-        kendoBuild.deployStyles(suiteStyles, suiteStylesDest, "", false);
-    }
+    kendoScripts.buildSuiteScripts(suite, scriptsDest, "", false);
+    kendoBuild.deployStyles(suiteStyles, suiteStylesDest, "", false);
+}
 
     function deployFiles(filesToDeploy) {
         filesToDeploy.forEach(function(file) {
