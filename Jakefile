@@ -359,6 +359,29 @@ namespace("mvc", function() {
                 path.join(mvc3binariesDeployRoot, "Kendo.Mvc.dll")
             );
 
+            // copy editor templates
+
+            var templatesDeployRoot = path.join(root, "EditorTemplates");
+            var templatesRoot = path.join(examplesPath, "Views", "Shared", "EditorTemplates");
+
+            kendoBuild.mkdir(templatesDeployRoot);
+            kendoBuild.mkdir(path.join(templatesDeployRoot, "ascx"));
+            kendoBuild.mkdir(path.join(templatesDeployRoot, "razor"));
+
+            fs.readdirSync(templatesRoot).forEach(function(fileName){
+                var fullPath = path.join(templatesRoot, fileName);
+
+                if (fs.statSync(fullPath).isFile()) {
+                    var viewEngine = "razor";
+
+                    if (/ascx$/.test(fileName)) {
+                        viewEngine = "ascx"
+                    }
+
+                    kendoBuild.copyFileSync(fullPath, path.join(templatesDeployRoot, viewEngine, fileName));
+                }
+            });
+
             // deploy demos
             kendoBuild.copyDirSyncRecursive(
                 examplesPath,
