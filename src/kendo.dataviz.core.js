@@ -1994,9 +1994,9 @@
                 vertical = options.vertical,
                 reverse = options.reverse,
                 axis = vertical ? "y" : "x",
-                start = axis + (reverse ? "1" : "2"),
-                end = axis + (reverse ? "2" : "1"),
-                startPosition = options.startPosition[vertical ? start : end],
+                startPos = axis + (reverse ? "1" : "2"),
+                endPos = axis + (reverse ? "2" : "1"),
+                startPosition = options.startPosition[vertical ? startPos : endPos],
                 halfSize = options.size / 2,
                 count = points.length,
                 initial = !defined(anim.options.endPosition),
@@ -2011,7 +2011,7 @@
 
             if (!initial) {
                 startPosition = points[1][axis];
-                end = anim.options.endPosition[vertical ? end : start];
+                end = anim.options.endPosition[vertical ? endPos : startPos];
                 if (options.speed) {
                     anim.options.duration = math.max((math.abs(startPosition - end) / options.speed) * 1000, 1);
                 }
