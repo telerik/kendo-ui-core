@@ -496,7 +496,7 @@
                 currentSeries = series[seriesIx];
 
                 if (currentSeries.field || (currentSeries.xField && currentSeries.yField)) {
-                    currentSeries.data = [];
+                    currentSeries.data = new Array(data.length);
                     currentSeries.dataItems = data;
 
                     [].push.apply(processedSeries, grouped ?
@@ -513,7 +513,6 @@
 
             applySeriesColors(chart.options);
 
-            chart._bindSeries();
             chart._bindCategories(grouped ? data[0].items : data);
 
             chart.trigger(DATABOUND);
@@ -538,6 +537,7 @@
                 groupSeries.push(seriesClone);
 
                 group = data[groupIx];
+                seriesClone.data = new Array(group.items.length);
                 seriesClone.dataItems = group.items;
 
                 if (nameTemplate) {
@@ -548,43 +548,6 @@
             }
 
             return groupSeries;
-        },
-
-        _bindSeries: function() {
-            var chart = this,
-                series = chart.options.series,
-                seriesLength = series.length,
-                seriesIx,
-                currentSeries,
-                data,
-                dataIx,
-                dataLength,
-                row,
-                value;
-
-            for (seriesIx = 0; seriesIx < seriesLength; seriesIx++) {
-                currentSeries = series[seriesIx];
-                data = currentSeries.dataItems || [];
-                dataLength = data.length;
-
-                for (dataIx = 0; dataIx < dataLength; dataIx++) {
-                    row = data[dataIx];
-
-                    if (currentSeries.field) {
-                        value = getField(currentSeries.field, row);
-                    } else {
-                        value = undefined;
-                    }
-
-                    if (dataIx === 0) {
-                        currentSeries.data = [value];
-                        currentSeries.dataItems = [row];
-                    } else {
-                        currentSeries.data.push(value);
-                        currentSeries.dataItems.push(row);
-                    }
-                }
-            }
         },
 
         _bindCategories: function(data) {
@@ -1654,8 +1617,9 @@
             chart.traverseDataPoints(proxy(chart.addValue, chart));
         },
 
-        addValue: function(value, category, categoryIx, series, seriesIx) {
+        addValue: function(data, category, categoryIx, series, seriesIx) {
             var chart = this,
+                value = data.value,
                 point,
                 categoryPoints = chart.categoryPoints[categoryIx],
                 seriesPoints = chart.seriesPoints[seriesIx];
@@ -1670,7 +1634,7 @@
 
             chart.updateRange(value, categoryIx, series);
 
-            point = chart.createPoint(value, category, categoryIx, series, seriesIx);
+            point = chart.createPoint(data, category, categoryIx, series, seriesIx);
             if (point) {
                 point.category = category;
                 point.series = series;
@@ -1716,7 +1680,9 @@
                 axisCrossingValue,
                 point;
 
-            chart.traverseDataPoints(function(value, category, categoryIx, currentSeries) {
+            chart.traverseDataPoints(function(data, category, categoryIx, currentSeries) {
+                var value = data.value;
+
                 valueAxis = chart.seriesValueAxis(currentSeries);
                 axisCrossingValue = valueAxis.options.axisCrossingValue;
                 point = chartPoints[pointIx++];
@@ -1763,6 +1729,7 @@
             series = options.series,
             categories = chart.plotArea.options.categoryAxis.categories || [],
             count = categoriesCount(series),
+            bindableFields = chart.bindableFields(),
             categoryIx,
             seriesIx,
             value,
@@ -1773,10 +1740,14 @@
                 for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
                     currentCategory = categories[categoryIx];
                     currentSeries = series[seriesIx];
-                    value = currentSeries.data[categoryIx];
+                    value = pointData(currentSeries, categoryIx, bindableFields);
                     callback(value, currentCategory, categoryIx, currentSeries, seriesIx);
                 }
             }
+        },
+
+        bindableFields: function() {
+            return ["value", "color"];
         },
 
         formatPointValue: function(value, format) {
@@ -1801,8 +1772,9 @@
             chart.computeAxisRanges();
         },
 
-        createPoint: function(value, category, categoryIx, series, seriesIx) {
+        createPoint: function(data, category, categoryIx, series, seriesIx) {
             var barChart = this,
+                value = data.value,
                 options = barChart.options,
                 children = barChart.children,
                 isStacked = barChart.options.isStacked,
@@ -1822,7 +1794,9 @@
                     overlay: series.overlay,
                     labels: labelOptions,
                     isStacked: isStacked
-                }, series));
+                }, series, {
+                    color: data.color
+                }));
 
             cluster = children[categoryIx];
             if (!cluster) {
@@ -2428,8 +2402,9 @@
             chart.renderSegments();
         },
 
-        createPoint: function(value, category, categoryIx, series, seriesIx) {
+        createPoint: function(data, category, categoryIx, series, seriesIx) {
             var chart = this,
+                value = data.value,
                 options = chart.options,
                 isStacked = options.isStacked,
                 categoryPoints = chart.categoryPoints[categoryIx],
@@ -3188,6 +3163,7 @@
                 series = options.series,
                 seriesCount = series.length,
                 overlayId = uniqueId(),
+                bindableFields = chart.bindableFields(),
                 dataItems,
                 currentSeries,
                 currentData,
@@ -3205,7 +3181,7 @@
                 currentSeries = series[seriesIx];
                 dataItems = currentSeries.dataItems;
                 data = currentSeries.data;
-                total = chart.pointsTotal(data);
+                total = chart.pointsTotal(currentSeries);
                 anglePerValue = 360 / total;
                 currentAngle = startAngle;
                 if (seriesIx != seriesCount - 1) {
@@ -3215,13 +3191,14 @@
                 }
 
                 for (i = 0; i < data.length; i++) {
-                    currentData = chart.pointData(currentSeries, i);
+                    currentData = pointData(currentSeries, i, bindableFields);
                     value = currentData.value;
                     angle = round(value * anglePerValue, DEFAULT_PRECISION);
                     explode = data.length != 1 && !!currentData.explode;
                     currentSeries.color = currentData.color ?
                         currentData.color : colors[i % colorsCount];
 
+                    // TODO: Pass currentData instead of setting series color
                     callback(value, new Ring(null, 0, 0, currentAngle, angle), {
                         owner: chart,
                         category: currentData.category || "",
@@ -3246,6 +3223,10 @@
             }
         },
 
+        bindableFields: function() {
+            return ["value", "category", "color", "explode", "visibleInLegend"];
+        },
+
         addValue: function(value, sector, fields) {
             var chart = this,
                 segment;
@@ -3255,33 +3236,6 @@
             extend(segment, fields);
             chart.append(segment);
             chart.segments.push(segment);
-        },
-
-        pointValue: function(point) {
-            return defined(point.value) ? point.value : point;
-        },
-
-        // TODO: Replace with ScatterChart pointValue
-        pointData: function(series, index) {
-            var chart = this,
-                data = series.data[index],
-                dataItems = [ "category", "color", "explode", "visibleInLegend" ],
-                count = dataItems.length,
-                dataItemValue,
-                dataItemText,
-                result = {},
-                i;
-
-            for (i = 0; i < count; i++) {
-                dataItemText = dataItems[i];
-                dataItemValue = chart.pointGetter(series, index, dataItemText);
-                if (dataItemValue !== "") {
-                    result[dataItemText] = dataItemValue;
-                }
-            }
-            result.value = chart.pointValue(data);
-
-            return result;
         },
 
         pointGetter: function(series, index, prop) {
@@ -3296,14 +3250,16 @@
             }
         },
 
-        pointsTotal: function(data) {
+        pointsTotal: function(series) {
             var chart = this,
+                bindableFields = chart.bindableFields(),
+                data = series.data,
                 length = data.length,
                 sum = 0,
                 i;
 
             for(i = 0; i < length; i++) {
-                sum += chart.pointValue(data[i]);
+                sum += pointData(series, i, bindableFields).value;
             }
 
             return sum;
@@ -5218,10 +5174,12 @@
     function pointData(series, pointIx, fields) {
         var data = series.data[pointIx],
             dataItems = series.dataItems,
+            currentDataItem,
             value = data || {},
             i,
             fieldsLength = fields.length,
             fieldName,
+            sourceFieldName,
             sourceField,
             fieldValue;
 
@@ -5233,15 +5191,19 @@
                     value[fields[i]] = fieldValue;
                 }
             }
+        } else if (defined(data) && typeof data !== "object") {
+            value = { value: data };
         }
 
         if (!defined(data) && series.dataItems) {
             for (i = 0; i < fieldsLength; i++) {
                 fieldName = fields[i];
-                sourceField = series[fieldName + "Field"];
+                sourceFieldName = fieldName === "value" ? "field" : fieldName + "Field";
+                sourceField = series[sourceFieldName];
 
-                if (sourceField) {
-                    value[fieldName] = getField(sourceField, dataItems[pointIx]);
+                currentDataItem = dataItems[pointIx];
+                if (sourceField && currentDataItem) {
+                    value[fieldName] = getField(sourceField, currentDataItem);
                 }
             }
         }

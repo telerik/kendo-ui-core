@@ -1969,36 +1969,44 @@
                 var data = [{
                         name: "Category A",
                         text: "Alpha",
-                        value: 10
+                        value: 10,
+                        color: "red"
                     }],
                     chart,
+                    points,
                     label;
+
+                function createChart(options) {
+                    $("#container").kendoChart({
+                        dataSource: {
+                            data: data
+                        },
+                        seriesDefaults: {
+                            labels: {
+                                visible: true,
+                                template: "${dataItem.text}"
+                            }
+                        },
+                        series: [{
+                            name: "Value",
+                            type: "bar",
+                            field: "value",
+                            colorField: "color"
+                        }],
+                        categoryAxis: {
+                            field: "name"
+                        }
+                    });
+
+                    chart = $("#container").data("kendoChart");
+                    points = chart._plotArea.charts[0].points;
+                    label = points[0].children[0];
+                }
 
                 // ------------------------------------------------------------
                 module("Bar Chart / Integration", {
                     setup: function() {
-                        $("#container").kendoChart({
-                            dataSource: {
-                                data: data
-                            },
-                            seriesDefaults: {
-                                labels: {
-                                    visible: true,
-                                    template: "${dataItem.text}"
-                                }
-                            },
-                            series: [{
-                                name: "Value",
-                                type: "bar",
-                                field: "value"
-                            }],
-                            categoryAxis: {
-                                field: "name"
-                            }
-                        });
-
-                        chart = $("#container").data("kendoChart");
-                        label = chart._plotArea.charts[0].points[0].children[0];
+                        createChart();
                     },
                     teardown: function() {
                         $("#container").empty();
@@ -2006,6 +2014,10 @@
                 });
 
                 test("dataItem sent to label template", function() {
+                    equal(points[0].options.color, "red");
+                });
+
+                test("point color bound to color field", function() {
                     equal(label.children[0].children[0].content, "Alpha");
                 });
 
