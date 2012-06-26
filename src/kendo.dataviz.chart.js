@@ -2728,6 +2728,7 @@
                 options = chart.options,
                 series = options.series,
                 seriesPoints = chart.seriesPoints,
+                bindableFields = chart.bindableFields(),
                 pointIx = 0,
                 seriesIx,
                 currentSeries,
@@ -2745,7 +2746,7 @@
                 }
 
                 for (pointIx = 0; pointIx < currentSeries.data.length; pointIx++) {
-                    value = chart.pointValue(currentSeries, pointIx);
+                    value = pointData(currentSeries, pointIx, bindableFields);
 
                     callback(value, {
                         pointIx: pointIx,
@@ -2760,10 +2761,6 @@
 
         bindableFields: function() {
             return ["x", "y"];
-        },
-
-        pointValue: function(series, pointIx) {
-            return pointData(series, pointIx, this.bindableFields());
         },
 
         formatPointValue: function(value, format) {
@@ -2880,12 +2877,13 @@
             // TODO: Call once per series by overriding render
             var chart = this,
                 length = series.data.length,
+                bindableFields = chart.bindableFields(),
                 max = 0,
                 i,
                 value;
 
-            for(i = 0; i < length; i++) {
-                value = chart.pointValue(series, i).size;
+            for (i = 0; i < length; i++) {
+                value = pointData(series, i, bindableFields).size;
                 max = math.max(max, math.abs(value));
             }
 

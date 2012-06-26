@@ -2004,7 +2004,7 @@
                 }
 
                 // ------------------------------------------------------------
-                module("Bar Chart / Integration", {
+                module("Bar Chart / Data Binding", {
                     setup: function() {
                         createChart();
                     },
@@ -2013,11 +2013,11 @@
                     }
                 });
 
-                test("dataItem sent to label template", function() {
+                test("point color bound to color field", function() {
                     equal(points[0].options.color, "red");
                 });
 
-                test("point color bound to color field", function() {
+                test("dataItem sent to label template", function() {
                     equal(label.children[0].children[0].content, "Alpha");
                 });
 
