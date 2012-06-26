@@ -1795,7 +1795,7 @@
                     labels: labelOptions,
                     isStacked: isStacked
                 }, series, {
-                    color: data.color
+                    color: data.color || undefined
                 }));
 
             cluster = children[categoryIx];

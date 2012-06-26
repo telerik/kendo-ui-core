@@ -1971,6 +1971,11 @@
                         text: "Alpha",
                         value: 10,
                         color: "red"
+                    }, {
+                        name: "Category B",
+                        text: "Alpha",
+                        value: 10,
+                        color: null
                     }],
                     chart,
                     points,
@@ -2015,6 +2020,10 @@
 
                 test("point color bound to color field", function() {
                     equal(points[0].options.color, "red");
+                });
+
+                test("point color not bound to null color field", function() {
+                    equal(points[1].options.color, "#ff6800");
                 });
 
                 test("dataItem sent to label template", function() {
