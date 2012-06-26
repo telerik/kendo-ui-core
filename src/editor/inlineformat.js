@@ -482,7 +482,7 @@ var StyleTool = Tool.extend({
                     text = item.text(),
                 
                     style = dom.inlineStyle(editor.document, "span", {className : classes[idx].value});
-                item.html('<span unselectable="on" style="display:block;' + style +'">' + text + '</span>')
+                item.html('<span unselectable="on" style="display:block;' + style +'">' + text + '</span>');
             });
         }, 500); // itemCreate event
     }
