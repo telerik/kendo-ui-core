@@ -251,6 +251,7 @@
     <Compile Include="Helpers\HyphenatedRouteHandler.cs" />
     <Compile Include="Models\ClientOrderViewModel.cs" />
     <Compile Include="Models\ClientEmployeeViewModel.cs" />
+    <Compile Include="Models\BarChartsLocalDataViewModel.cs" />
     <Compile Include="Models\CrimeData.cs" />
     <Compile Include="Models\JobGrowth.cs" />
     <Compile Include="Models\ScreenResolution.cs" />

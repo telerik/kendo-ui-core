@@ -11,7 +11,7 @@ namespace Kendo.Mvc.UI.Tests
         {
             var chart = ChartTestHelper.CreateChart<SalesData>();
             chart.Data = SalesDataBuilder.GetCollection();
-            series = new ChartBarSeries<SalesData, decimal>(chart, s => s.RepSales);
+            series = new ChartBarSeries<SalesData, decimal>(chart, s => s.RepSales, s => s.Color);
         }
 
         [Fact]
@@ -140,6 +140,20 @@ namespace Kendo.Mvc.UI.Tests
         public void Bar_should_not_serialize_default_overlay()
         {
             GetJson(series).ContainsKey("overlay").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void Should_serialize_color_field_if_color_member_is_set()
+        {
+            series.ColorMember = "Color";
+            GetJson(series)["colorField"].ShouldEqual("Color");
+        }
+
+        [Fact]
+        public void Should_not_serialize_color_field_if_color_member_is_not_set()
+        {
+            series.ColorMember = null;
+            GetJson(series).ContainsKey("colorField").ShouldBeFalse();
         }
     }
 }
