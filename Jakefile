@@ -264,13 +264,13 @@ namespace("mvc", function() {
             src: path.join(DEMOS_SHARED, "icons"),
             dst: iconsDest
         }, {
-			src: path.join(SOURCE_PATH, "cultures"),
-			dst: path.join(scriptsDest, "cultures")
-		}, {
-			name: "jquery.min.js",
-			src: path.join(SOURCE_PATH),
-			dst: scriptsDest
-		}
+            src: path.join(SOURCE_PATH, "cultures"),
+            dst: path.join(scriptsDest, "cultures")
+        }, {
+            name: "jquery.min.js",
+            src: path.join(SOURCE_PATH),
+            dst: scriptsDest
+        }
     ];
 
     mkdir(stylesDest);
@@ -281,14 +281,14 @@ namespace("mvc", function() {
     task("debug-examples", ["merge-scripts"], function() {
         deployExamplesSharedFiles(true);
     });
-	
-    desc("Copy debug scripts and styles to the MVC demo site");
+
+    desc("Copy release scripts and styles to the MVC demo site");
     task("examples-shared-files", ["merge-scripts"], function() {
         deployExamplesSharedFiles(false);
     });
 
     desc("Build wrappers project");
-    task("build-wrappers-project", ["examples-shared-files"], function() {
+    task("build-wrappers-project", ["mvc:examples-shared-files"], function() {
         kendoBuild.msBuild(MVC_WRAPPERS_PROJECT, [ "/t:Clean;Build", "/p:Configuration=Release" ], complete);
     }, true);
 
@@ -333,7 +333,7 @@ namespace("mvc", function() {
     desc("Build release version");
     task("bundle", ["clean", "mvc:build-wrappers-demo-project"], function() {
         var projectPath = path.join(MVC_WRAPPERS_PATH, "src", "Kendo.Mvc"),
-			binariesPath = path.join(projectPath, "bin", "Release");
+            binariesPath = path.join(projectPath, "bin", "Release");
 
         bundles.buildBundle(bundles.mvcWrappersBundle, version(), complete, function(root, bundle, license) {
             var binariesDeployRoot = path.join(root, "aspnetmvc", "Binaries"),
@@ -451,10 +451,10 @@ namespace("mvc", function() {
                     kendoBuild.rmdirSyncRecursive(path.join(projectDeployRoot, "bin"));
                     kendoBuild.rmdirSyncRecursive(path.join(projectDeployRoot, "obj"));
                 }
-		});
-	}, true);
+        });
+    }, true);
 
-	function deployExamplesSharedFiles(debug) {
+    function deployExamplesSharedFiles(debug) {
         mkdirClean(scriptsDest);
         mkdirClean(stylesDest);
         deploySuiteFiles("web", !debug);
@@ -469,7 +469,7 @@ namespace("mvc", function() {
         kendoBuild.processFilesRecursive(stylesDest, /^(?!.*min\.css$).*\.css/, function(fileName) {
             fs.renameSync(fileName, fileName.replace(".css", ".min.css"));
         });
-	}
+    }
 
     function deploySuiteFiles(suite, compress) {
         var suiteStyles = path.join("styles", suite),
@@ -484,7 +484,7 @@ namespace("mvc", function() {
             }
         ];
 
-		kendoBuild.mkdir(suiteStylesDest);
+        kendoBuild.mkdir(suiteStylesDest);
         deployFiles(suiteFiles);
 
         kendoScripts.buildSuiteScripts(suite, scriptsDest, "", compress);
