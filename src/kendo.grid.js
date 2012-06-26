@@ -803,7 +803,7 @@
 
                 that.editable = cell.addClass("k-edit-cell")
                     .kendoEditable({
-                        fields: { field: column.field, format: column.format, editor: column.editor },
+                        fields: { field: column.field, format: column.format, editor: column.editor, values: column.values },
                         model: model,
                         change: function(e) {
                             if (that.trigger(SAVE, { values: e.values, container: cell, model: model } )) {
@@ -1000,7 +1000,7 @@
                         html += '<div class="k-edit-label"><label for="' + column.field + '">' + (column.title || column.field || "") + '</label></div>';
 
                         if ((!model.editable || model.editable(column.field)) && column.field) {
-                            fields.push({ field: column.field, format: column.format, editor: column.editor });
+                            fields.push({ field: column.field, format: column.format, editor: column.editor, values: column.values });
                             html += '<div ' + kendo.attr("container-for") + '="' + column.field + '" class="k-edit-field"></div>';
                         } else {
                             var state = { storage: {}, count: 0 };
@@ -1069,7 +1069,7 @@
                 column = that.columns[that.cellIndex(cell)];
 
                 if (!column.command && column.field && (!model.editable || model.editable(column.field))) {
-                    fields.push({ field: column.field, format: column.format, editor: column.editor });
+                    fields.push({ field: column.field, format: column.format, editor: column.editor, values: column.values });
                     cell.attr("data-container-for", column.field);
                     cell.empty();
                 } else if (column.command) {

@@ -473,6 +473,17 @@
 
                 ok(!div.find("input").data("bind"));
             });
+
+            test("dropdown is displayed if field values are set", function() {
+                var editable = div.append($('<div></div>')).kendoEditable({
+                    fields: { field: "foo", values: [ { text: "bar", value: "foo" }] },
+                    model: defaultModel
+                });
+
+                ok(div.find("select").data("kendoDropDownList"));
+                equal(div.find("select").data("kendoDropDownList").value(), "foo");
+                equal(div.find("select").data("kendoDropDownList").text(), "bar");
+            });
         </script>
     </body>
 </html>

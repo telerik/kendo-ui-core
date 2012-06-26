@@ -1,0 +1,95 @@
+        <div id="example" class="k-content">
+            <div id="grid"></div>
+
+            <script>
+                var products = [ {
+                    "ProductID": 1,
+                        "ProductName": "Chai",
+                        "CategoryID": 1,
+                        "UnitPrice": "18.00"
+                }, {
+                    "ProductID": 2,
+                        "ProductName": "Chang",
+                        "CategoryID": 1,
+                        "UnitPrice": "19.00"
+                }, {
+                    "ProductID": 3,
+                        "ProductName": "Aniseed Syrup",
+                        "CategoryID": 2,
+                        "UnitPrice": "10.00"
+                }, {
+                    "ProductID": 4,
+                        "ProductName": "Chef Anton's Cajun Seasoning",
+                        "CategoryID": 2,
+                        "UnitPrice": "22.00"
+                }, {
+                    "ProductID": 5,
+                        "ProductName": "Chef Anton's Gumbo Mix",
+                        "CategoryID": 2,
+                        "UnitPrice": "21.35"
+                }, {
+                    "ProductID": 6,
+                        "ProductName": "Grandma's Boysenberry Spread",
+                        "CategoryID": 2,
+                        "UnitPrice": "25.00"
+                }];
+
+                var categories = [{
+                    "value": 1,
+                    "text": "Beverages"
+                },{
+                    "value": 2,
+                    "text": "Condiments"
+                },{
+                    "value": 3,
+                    "text": "Confections"
+                },{
+                    "value": 4,
+                    "text": "Dairy Products"
+                },{
+                    "value": 5,
+                    "text": "Grains/Cereals"
+                },{
+                    "value": 6,
+                    "text": "Meat/Poultry"
+                },{
+                    "value": 7,
+                    "text": "Produce"
+                },{
+                    "value": 8,
+                    "text": "Seafood"
+                }];
+
+                $(document).ready(function () {
+                    var dataSource = new kendo.data.DataSource({
+                       pageSize: 30,
+                       data: products,
+                       autoSync: true,
+                       schema: {
+                           model: {
+                             id: "ProductID",
+                             fields: {
+                                ProductID: { editable: false, nullable: true },
+                                ProductName: { validation: { required: true } },
+                                CategoryID: { field: "CategoryID" },
+                                UnitPrice: { type: "number", validation: { required: true, min: 1} }
+                             }
+                           }
+                       }
+                    });
+
+                    $("#grid").kendoGrid({
+                        dataSource: dataSource,
+                        filterable: true,
+                        scrollable: false,
+                        toolbar: ["create"],
+                        columns: [
+                            { field:"ProductName",title:"Product Name" },
+                            { field: "CategoryID", width: "150px", values: categories, title: "Category" },
+                            { field: "UnitPrice", title:"Unit Price", format: "{0:c}", width: "150px" },
+                            { command: "destroy", title: " ", width: "110px" }],
+                        editable: true
+                    });
+                });
+            </script>
+        </div>

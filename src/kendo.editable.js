@@ -64,6 +64,27 @@
         return attr;
     }
 
+    function convertItems(items) {
+        var idx,
+            length,
+            item,
+            value,
+            text,
+            result;
+
+        if (items && items.length) {
+            result = [];
+            for (idx = 0, length = items.length; idx < length; idx++) {
+                item = items[idx];
+                text = item.text || item.value || item;
+                value = item.value == null ? (item.text || item) : item.value;
+
+                result[idx] = { text: text, value: value };
+            }
+        }
+        return result;
+    }
+
     var editors = {
         "number": function(container, options) {
             var attr = createAttributes(options);
@@ -85,6 +106,13 @@
         "boolean": function(container, options) {
             var attr = createAttributes(options);
             $('<input type="checkbox" />').attr(attr).appendTo(container);
+        },
+        "values": function(container, options) {
+            var attr = createAttributes(options);
+            $('<select ' + kendo.attr("text-field") + '="text"' + kendo.attr("value-field") + '="value"' +
+                kendo.attr("source") + "=\'" + kendo.stringify(convertItems(options.values)) +
+                "\'" + kendo.attr("role") + '="dropdownlist"/>') .attr(attr).appendTo(container);
+            $('<span ' + kendo.attr("for") + '="' + options.field + '" class="k-invalid-msg"/>').hide().appendTo(container);
         }
     };
 
@@ -112,7 +140,8 @@
                 isObject = isPlainObject(field),
                 fieldName = isObject ? field.field : field,
                 model = that.options.model || {},
-                type = fieldType(modelField),
+                isValuesEditor = isObject && field.values,
+                type = isValuesEditor ? "values" : fieldType(modelField),
                 isCustomEditor = isObject && field.editor,
                 editor = isCustomEditor ? field.editor : editors[type],
                 container = that.element.find("[data-container-for=" + fieldName + "]");
