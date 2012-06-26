@@ -2775,20 +2775,6 @@
             ScatterChart.fn.render.call(chart);
 
             chart.renderSegments();
-        },
-
-        getViewElements: function(view) {
-            // TODO: Remove. Same as base!?
-            var chart = this,
-                elements = ScatterChart.fn.getViewElements.call(chart, view),
-                group = view.createGroup({
-                    animation: {
-                        type: CLIP
-                    }
-                });
-
-            group.children = elements;
-            return [group];
         }
     });
     deepExtend(ScatterLineChart.fn, LineChartMixin);
