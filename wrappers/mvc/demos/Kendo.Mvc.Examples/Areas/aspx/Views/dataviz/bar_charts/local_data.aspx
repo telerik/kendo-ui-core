@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/DataViz.Master"
-Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.InternetUsers>>" %>
+Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.BarChartsLocalDataViewModel>>" %>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 <div class="chart-wrapper">
@@ -10,7 +10,7 @@ Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.Internet
             .Position(ChartLegendPosition.Bottom)
         )
         .Series(series => {
-            series.Bar(model => model.Value)
+            series.Bar(model => model.Value, model => model.Color)
                 .Name("United States")
                 .Labels(labels => labels.Format("{0}%").Visible(true));
         })

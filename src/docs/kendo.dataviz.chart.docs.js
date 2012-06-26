@@ -2424,6 +2424,7 @@
          * @option {String} [series.type="bar".name] The series name.
          * @option {String} [series.type="bar".axis] <primary> The name of the value axis to use.
          * @option {String} [series.type="bar".color] The series base color.
+         * @option {String} [series.type="bar".colorField] The data field containing the bar color.
          * @option {Number} [series.type="bar".opacity] <1> The series opacity.
          * @option {Object} [series.type="bar".labels] Configures the series data labels.
          * @option {String} [series.type="bar".labels.color] The text color of the labels.

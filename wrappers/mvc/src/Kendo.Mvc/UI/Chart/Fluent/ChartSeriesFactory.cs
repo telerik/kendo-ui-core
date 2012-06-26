@@ -37,12 +37,15 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Defines bound bar series.
         /// </summary>
-        /// <param name="expression">
-        /// The expression used to extract the series value from the chart model
+        /// <param name="valueExpression">
+        /// The expression used to extract the point value from the chart model
         /// </param>
-        public virtual ChartBarSeriesBuilder<TModel> Bar<TValue>(Expression<Func<TModel, TValue>> expression)
+        /// <param name="colorExpression">
+        /// The expression used to extract the point color from the chart model
+        /// </param>
+        public virtual ChartBarSeriesBuilder<TModel> Bar<TValue>(Expression<Func<TModel, TValue>> valueExpression, Expression<Func<TModel, string>> colorExpression = null)
         {
-            ChartBarSeries<TModel, TValue> barSeries = new ChartBarSeries<TModel, TValue>(Container, expression);
+            ChartBarSeries<TModel, TValue> barSeries = new ChartBarSeries<TModel, TValue>(Container, valueExpression, colorExpression);
 
             Container.Series.Add(barSeries);
 
@@ -52,12 +55,15 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Defines bound bar series.
         /// </summary>
-        /// <param name="memberName">
+        /// <param name="valueMemberName">
         /// The name of the value member.
         /// </param>
-        public virtual ChartBarSeriesBuilder<TModel> Bar(string memberName)
+        /// <param name="colorMemberName">
+        /// The name of the color member.
+        /// </param>
+        public virtual ChartBarSeriesBuilder<TModel> Bar(string valueMemberName, string colorMemberName = null)
         {
-            return Bar(null, memberName);
+            return Bar(null, valueMemberName, colorMemberName);
         }
 
         /// <summary>
@@ -66,20 +72,25 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="memberType">
         /// The type of the value member.
         /// </param>
-        /// <param name="memberName">
+        /// <param name="valueMemberName">
         /// The name of the value member.
         /// </param>
-        public virtual ChartBarSeriesBuilder<TModel> Bar(Type memberType, string memberName)
+        /// <param name="colorMemberName">
+        /// The name of the color member.
+        /// </param>
+        public virtual ChartBarSeriesBuilder<TModel> Bar(Type memberType, string valueMemberName, string colorMemberName = null)
         {
-            var valueExpr = BuildMemberExpression(memberType, memberName);
+            var valueExpr = BuildMemberExpression(memberType, valueMemberName);
+            var colorExpr = colorMemberName.HasValue() ? BuildMemberExpression(typeof(string), colorMemberName) : null;
             var seriesType = typeof(ChartBarSeries<,>).MakeGenericType(typeof(TModel), valueExpr.Body.Type);
-            var series = (IChartBarSeries)BuildSeries(seriesType, valueExpr);
+            var series = (IChartBarSeries)BuildSeries(seriesType, valueExpr, colorExpr);
 
-            series.Member = memberName;
+            series.Member = valueMemberName;
+            series.ColorMember = colorMemberName;
 
             if (!series.Name.HasValue())
             {
-                series.Name = memberName.AsTitle();
+                series.Name = valueMemberName.AsTitle();
             }
 
             Container.Series.Add((ChartSeriesBase<TModel>)series);
@@ -105,12 +116,15 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Defines bound column series.
         /// </summary>
-        /// <param name="expression">
-        /// The expression used to extract the series value from the chart model
+        /// <param name="valueExpression">
+        /// The expression used to extract the point value from the chart model
         /// </param>
-        public virtual ChartBarSeriesBuilder<TModel> Column<TValue>(Expression<Func<TModel, TValue>> expression)
+        /// <param name="colorExpression">
+        /// The expression used to extract the point color from the chart model
+        /// </param>
+        public virtual ChartBarSeriesBuilder<TModel> Column<TValue>(Expression<Func<TModel, TValue>> valueExpression, Expression<Func<TModel, string>> colorExpression = null)
         {
-            var builder = Bar(expression);
+            var builder = Bar(valueExpression);
             builder.Series.Orientation = ChartSeriesOrientation.Vertical;
 
             return builder;
@@ -119,12 +133,15 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Defines bound bar series.
         /// </summary>
-        /// <param name="memberName">
+        /// <param name="valueMemberName">
         /// The name of the value member.
         /// </param>
-        public virtual ChartBarSeriesBuilder<TModel> Column(string memberName)
+        /// <param name="colorMemberName">
+        /// The name of the color member.
+        /// </param>
+        public virtual ChartBarSeriesBuilder<TModel> Column(string valueMemberName, string colorMemberName = null)
         {
-            return Column(null, memberName);
+            return Column(null, valueMemberName, colorMemberName);
         }
 
         /// <summary>
@@ -133,12 +150,15 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="memberType">
         /// The type of the value member.
         /// </param>
-        /// <param name="memberName">
+        /// <param name="valueMemberName">
         /// The name of the value member.
         /// </param>
-        public virtual ChartBarSeriesBuilder<TModel> Column(Type memberType, string memberName)
+        /// <param name="colorMemberName">
+        /// The name of the color member.
+        /// </param>
+        public virtual ChartBarSeriesBuilder<TModel> Column(Type memberType, string valueMemberName, string colorMemberName = null)
         {
-            var builder = Bar(memberType, memberName);
+            var builder = Bar(memberType, valueMemberName, colorMemberName);
             builder.Series.Orientation = ChartSeriesOrientation.Vertical;
 
             return builder;
@@ -166,11 +186,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         public virtual ChartLineSeriesBuilder<TModel> Line<TValue>(Expression<Func<TModel, TValue>> expression)
         {
-            ChartLineSeries<TModel, TValue> LineSeries = new ChartLineSeries<TModel, TValue>(Container, expression);
+            var lineSeries = new ChartLineSeries<TModel, TValue>(Container, expression);
 
-            Container.Series.Add(LineSeries);
+            Container.Series.Add(lineSeries);
 
-            return new ChartLineSeriesBuilder<TModel>(LineSeries);
+            return new ChartLineSeriesBuilder<TModel>(lineSeries);
         }
 
         /// <summary>

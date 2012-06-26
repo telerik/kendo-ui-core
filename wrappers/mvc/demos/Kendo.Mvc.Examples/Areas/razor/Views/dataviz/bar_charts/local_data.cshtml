@@ -1,4 +1,4 @@
-@model IEnumerable<Kendo.Mvc.Examples.Models.InternetUsers>
+@model IEnumerable<Kendo.Mvc.Examples.Models.BarChartsLocalDataViewModel>
 
 <div class="chart-wrapper">
     @(Html.Kendo().Chart(Model)
@@ -7,8 +7,9 @@
         .Legend(legend => legend
             .Position(ChartLegendPosition.Bottom)
         )
-        .Series(series => {
-            series.Bar(model => model.Value)
+        .Series(series =>
+        {
+            series.Bar(model => model.Value, model => model.Color)
                 .Name("United States")
                 .Labels(labels => labels.Format("{0}%").Visible(true));
         })

@@ -3,6 +3,8 @@ namespace Kendo.Mvc.UI
     using System;
     using System.Collections;
     using System.Linq.Expressions;
+    using Kendo.Mvc.Extensions;
+    using Kendo.Mvc.Resources;
 
     /// <summary>
     /// Represents chart bar or column series
@@ -15,10 +17,20 @@ namespace Kendo.Mvc.UI
         /// Initializes a new instance of the <see cref="ChartBarSeries{TModel, TValue}"/> class.
         /// </summary>
         /// <param name="chart">The parent chart</param>
-        /// <param name="expression">The expression used to extract the series value from the chart model.</param>
-        public ChartBarSeries(Chart<TModel> chart, Expression<Func<TModel, TValue>> expression)
-            : base(chart, expression)
+        /// <param name="valueExpression">The expression used to extract the point value from the chart model.</param>
+        /// <param name="colorExpression">The expression used to extract the point color from the chart model.</param>
+        public ChartBarSeries(Chart<TModel> chart, Expression<Func<TModel, TValue>> valueExpression, Expression<Func<TModel, string>> colorExpression)
+            : base(chart, valueExpression)
         {
+            if (colorExpression != null) {
+                if (typeof(TModel).IsPlainType() && !colorExpression.IsBindable())
+                {
+                    throw new InvalidOperationException(Exceptions.MemberExpressionRequired);
+                }
+
+                ColorMember = colorExpression.MemberWithoutInstance();
+            }
+
             Initialize();
         }
 
@@ -132,6 +144,16 @@ namespace Kendo.Mvc.UI
         /// Gets or sets the effects overlay
         /// </summary>
         public ChartBarSeriesOverlay Overlay
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets the model color member name.
+        /// </summary>
+        /// <value>The model color member name.</value>
+        public string ColorMember
         {
             get;
             set;

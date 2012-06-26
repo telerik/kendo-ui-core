@@ -188,6 +188,18 @@
                 });
 
                 test("sets segment angle based on value", function() {
+                        $("#container").kendoChart({
+                            dataSource: {
+                                data: data
+                            },
+                            series: [{
+                                type: "pie",
+                                field: "value",
+                                categoryField: "category",
+                                colorField: "color",
+                                explodeField: "explode"
+                            }]
+                        });
                     equal(firstSegment.sector.angle, 60);
                 });
 

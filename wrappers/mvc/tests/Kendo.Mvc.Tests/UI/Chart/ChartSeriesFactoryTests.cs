@@ -23,6 +23,13 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
+        public void Bar_should_create_bound_bar_series_from_value_and_color_expression()
+        {
+            var builder = factory.Bar(s => s.RepSales, s => s.Color);
+            builder.Series.ShouldBeType<ChartBarSeries<SalesData, decimal>>();
+        }
+
+        [Fact]
         public void Bar_should_create_bar_series_with_horizontal_orientation()
         {
             var builder = factory.Bar(s => s.RepSales);
@@ -37,9 +44,23 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
+        public void Bar_should_create_bound_bar_series_from_type_member_and_color_member_name()
+        {
+            var builder = factory.Bar(typeof(decimal), "RepSales", "Color");
+            builder.Series.ShouldBeType<ChartBarSeries<SalesData, decimal>>();
+        }
+
+        [Fact]
         public void Bar_should_create_bound_bar_series_from_member_name()
         {
             var builder = factory.Bar("RepSales");
+            builder.Series.ShouldBeType<ChartBarSeries<SalesData, decimal>>();
+        }
+
+        [Fact]
+        public void Bar_should_create_bound_bar_series_from_member_and_color_member_name()
+        {
+            var builder = factory.Bar("RepSales", "Color");
             builder.Series.ShouldBeType<ChartBarSeries<SalesData, decimal>>();
         }
 
@@ -58,6 +79,13 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
+        public void Column_should_create_bound_bar_series_from_value_and_color_expression()
+        {
+            var builder = factory.Column(s => s.RepSales, s => s.Color);
+            builder.Series.ShouldBeType<ChartBarSeries<SalesData, decimal>>();
+        }
+
+        [Fact]
         public void Column_should_create_bar_series_with_vertical_orientation()
         {
             var builder = factory.Column(s => s.RepSales);
@@ -72,9 +100,23 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
+        public void Column_should_create_bound_bar_series_from_type_member_and_color_member_name()
+        {
+            var builder = factory.Column(typeof(decimal), "RepSales", "Color");
+            builder.Series.ShouldBeType<ChartBarSeries<SalesData, decimal>>();
+        }
+
+        [Fact]
         public void Column_should_create_bound_bar_series_from_member_name()
         {
             var builder = factory.Column("RepSales");
+            builder.Series.ShouldBeType<ChartBarSeries<SalesData, decimal>>();
+        }
+
+        [Fact]
+        public void Column_should_create_bound_bar_series_from_member_and_color_member_name()
+        {
+            var builder = factory.Column("RepSales", "Color");
             builder.Series.ShouldBeType<ChartBarSeries<SalesData, decimal>>();
         }
 

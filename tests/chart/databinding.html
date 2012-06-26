@@ -324,7 +324,7 @@
                             field: "sales"
                         }],
                         dataBound: function() {
-                            equal(this.options.series[0].data[1], 100);
+                            equal(this.options.series[0].dataItems[1].sales, 100);
                             start();
                         }
                     });
@@ -363,8 +363,8 @@
                     });
                 }
 
-                function groupSales(group) {
-                    return $.map(group.items, function(item) { return item.sales });
+                function getSales(items) {
+                    return $.map(items, function(item) { return item.sales });
                 }
 
                 module("Binding to grouped DataSource", {
@@ -425,16 +425,16 @@
 
                 asyncTest("assigns grouped points to first series", 1, function() {
                     createGroupedChart(function() {
-                        same(this.options.series[0].data,
-                             groupSales(this.dataSource.view()[0]));
+                        same(getSales(this.options.series[0].dataItems),
+                             getSales(this.dataSource.view()[0].items));
                         start();
                     });
                 });
 
                 asyncTest("assigns grouped points to second series", 1, function() {
                     createGroupedChart(function() {
-                        same(this.options.series[1].data,
-                             groupSales(this.dataSource.view()[1]));
+                        same(getSales(this.options.series[1].dataItems),
+                             getSales(this.dataSource.view()[1].items));
                         start();
                     });
                 });
