@@ -443,34 +443,48 @@ var StyleTool = Tool.extend({
     },
 
     command: function (commandArguments) {
+        var format = this.format;
         return new Editor.FormatCommand(extend(commandArguments, {
             formatter: function () {
-                return new GreedyInlineFormatter(this.format, { className: commandArguments.value });
+                return new GreedyInlineFormatter(format, { className: commandArguments.value });
             }
         }));
     },
 
     update: function(ui, nodes) {
-        var list = ui.data("kendoDropDownList");
+        var list = ui.data("kendoSelectBox");
         list.close();
         list.value(this.finder.getFormat(nodes));
     },
 
-    initiliaze: function(ui, initOptions) {
+    initialize: function(ui, initOptions) {
         var editor = initOptions.editor;
 
-        ui.kendoDropDownList({
-            data: editor.style,
+        new Editor.SelectBox(ui, {
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: editor.options.style,
             title: editor.options.messages.style,
-            itemCreate: function (e) {
-                var style = dom.inlineStyle(editor.document, "span", {className : e.dataItem.value});
-
-                e.html = '<span unselectable="on" style="display:block;' + style +'">' + e.html + '</span>';
-            },
             change: function (e) {
-                Tool.exec(editor, "style", e.value);
-            }
+                Tool.exec(editor, "style", this.value());
+            },
+            highlightFirst: false
         });
+
+        ui.closest(".k-widget").removeClass("k-" + this.name).find("*").andSelf().attr("unselectable", "on");
+
+        var selectBox = ui.data("kendoSelectBox"),
+            classes = selectBox.dataSource.view();
+
+        window.setTimeout(function(){
+            selectBox.list.find(".k-item").each(function(idx, element){
+                var item = $(element),
+                    text = item.text(),
+                
+                    style = dom.inlineStyle(editor.document, "span", {className : classes[idx].value});
+                item.html('<span unselectable="on" style="display:block;' + style +'">' + text + '</span>')
+            });
+        }, 500); // itemCreate event
     }
 
 });
@@ -486,7 +500,7 @@ extend(Editor, {
     StyleTool: StyleTool
 });
 
-registerTool("style", new Editor.StyleTool({template: new ToolTemplate({template: EditorUtils.dropDownListTemplate, title: "Indent", initialValue: "Styles"})}));
+registerTool("style", new Editor.StyleTool({template: new ToolTemplate({template: EditorUtils.dropDownListTemplate, title: "Styles"})}));
 
 registerFormat("bold", [ { tags: ["strong"] }, { tags: ["span"], attr: { style: { fontWeight: "bold"}} } ]);
 registerTool("bold", new InlineFormatTool({ key: "B", ctrl: true, format: formats.bold, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Bold"}) }));

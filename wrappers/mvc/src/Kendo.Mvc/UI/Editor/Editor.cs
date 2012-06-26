@@ -18,6 +18,7 @@ namespace Kendo.Mvc.UI
 
             Template = new HtmlTemplate();
             Messages = new EditorMessages();
+            StyleSheets = new List<string>();
 
             //TODO: Implement customization of the fonts names and sizes
 
@@ -41,6 +42,12 @@ namespace Kendo.Mvc.UI
         }
 
         public EditorToolGroup DefaultToolGroup
+        {
+            get;
+            private set;
+        }
+
+        public IList<string> StyleSheets
         {
             get;
             private set;
@@ -85,13 +92,12 @@ namespace Kendo.Mvc.UI
 
         public override void WriteInitializationScript(TextWriter writer)
         {
-            var options = new Dictionary<string, object>(Events);
+            var options = new Dictionary<string, object>(Events);           
 
             options["tools"] = DefaultToolGroup.Tools.Select<IEditorTool, object>(tool =>
             {
                 var listTool = tool as EditorListTool;
-
-                if (listTool != null && listTool.Items.Any())
+                if (tool.Name != "insertHtml" && tool.Name != "style" && listTool != null && listTool.Items != null && listTool.Items.Count > 0)
                 {
                     var listToolItems = listTool.Items.Select(item => new { text = item.Text, value = item.Value });
 
@@ -102,6 +108,24 @@ namespace Kendo.Mvc.UI
                     return tool.Name;
                 }
             });
+
+            var snippetOptions = DefaultToolGroup.Tools.OfType<EditorListTool>()
+                .Where(t => t.Name == "insertHtml" && t.Items != null && t.Items.Any())
+                .SelectMany((t, index) => t.Items.Select(item => new { text = item.Text, value = item.Value }));
+
+            if (snippetOptions.Any())
+            {
+                options["insertHtml"] = snippetOptions;
+            }
+
+            var styleOptions = DefaultToolGroup.Tools.OfType<EditorListTool>()
+                .Where(t => t.Name == "style" && t.Items != null && t.Items.Any())
+                .SelectMany((t, index) => t.Items.Select(item => new { text = item.Text, value = item.Value }));
+
+            if (styleOptions.Any())
+            {
+                options["style"] = styleOptions;
+            }
 
             if (Encode.HasValue && !Encode.Value)
             {
@@ -115,11 +139,16 @@ namespace Kendo.Mvc.UI
                 options["messages"] = messages;
             }
 
+            if (StyleSheets.Count > 0)
+            {
+                options["stylesheets"] = StyleSheets;
+            }
+
             writer.Write(Initializer.Initialize(Selector, "Editor", options));
 
-            base.WriteInitializationScript(writer);
-        }
-
+            base.WriteInitializationScript(writer);         
+        }        
+        
         protected override void WriteHtml(HtmlTextWriter writer)
         {
             new EditorHtmlBuilder(this)

@@ -2,6 +2,7 @@ namespace Kendo.Mvc.UI.Fluent
 {
     using System;
     using System.Collections.Generic;
+    using Kendo.Mvc.Infrastructure;
 
     public class EditorToolFactory : IHideObjectMembers
     {
@@ -107,7 +108,7 @@ namespace Kendo.Mvc.UI.Fluent
 
         public EditorToolFactory FontName()
         {
-            return ComboBox("fontName");
+            return ComboBox("fontName", null);
         }
 
         public EditorToolFactory FontName(Action<EditorDropDownItemBuilder> configurator)
@@ -122,7 +123,7 @@ namespace Kendo.Mvc.UI.Fluent
 
         public EditorToolFactory FontSize()
         {
-            return ComboBox("fontSize");
+            return ComboBox("fontSize", null);
         }
 
         public EditorToolFactory FontSize(Action<EditorDropDownItemBuilder> configurator)
@@ -137,7 +138,7 @@ namespace Kendo.Mvc.UI.Fluent
 
         public EditorToolFactory FormatBlock()
         {
-            return SelectBox("formatBlock");
+            return SelectBox("formatBlock", null);
         }
 
         public EditorToolFactory FormatBlock(Action<EditorDropDownItemBuilder> configurator)
@@ -150,7 +151,6 @@ namespace Kendo.Mvc.UI.Fluent
             return SelectBox("formatBlock", items);
         }
 
-        /* TODO: snippets
         public EditorToolFactory Snippets(Action<EditorSnippetBuilder> configurator)
         {
             var items = new List<DropDownListItem>();
@@ -162,8 +162,6 @@ namespace Kendo.Mvc.UI.Fluent
             return SelectBox("insertHtml", items);
         }
        
-        */
-        /*TODO: STYLES
         public EditorToolFactory Styles(Action<EditorDropDownItemBuilder> configurator)
         {
             var items = new List<DropDownListItem>();
@@ -174,7 +172,6 @@ namespace Kendo.Mvc.UI.Fluent
 
             return SelectBox("style", items);
         }
-        */
 
         public EditorToolFactory FontColor()
         {
@@ -200,9 +197,9 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
-        private EditorToolFactory ComboBox(string identifier)
+        private EditorToolFactory DropDown(string identifier, IList<DropDownListItem> items)
         {
-            group.Tools.Add(new EditorListTool(identifier));
+            group.Tools.Add(new EditorListTool(identifier, items));
 
             return this;
         }
@@ -214,12 +211,6 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
-        private EditorToolFactory SelectBox(string identifier)
-        {
-            group.Tools.Add(new EditorListTool(identifier));
-
-            return this;
-        }
         private EditorToolFactory ColorPicker(string identifier)
         {
             group.Tools.Add(new EditorTool(identifier));
