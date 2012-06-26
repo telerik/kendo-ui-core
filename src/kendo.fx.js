@@ -733,10 +733,10 @@
             options.complete = browser.msie ? function() { setTimeout(complete, 0); } : complete;
 
             if ("slide" in options.effects) {
-              element.kendoAnimate(options);
-              destination.kendoAnimate(slideToSlideIn(options));
+                element.kendoAnimate(options);
+                destination.kendoAnimate(slideToSlideIn(options));
             } else {
-              (options.reverse ? element : destination).kendoAnimate(options);
+                (options.reverse ? element : destination).kendoAnimate(options);
             }
         },
 
