@@ -1354,7 +1354,7 @@
         },
 
         /**
-         * Destroys the window and its modal overlay, if necessary. Useful for removing modal windows.
+         * Destroys the window and its modal overlay, if necessary. Removes the Window HTML elements from the DOM.
          */
         destroy: function () {
             var that = this,
