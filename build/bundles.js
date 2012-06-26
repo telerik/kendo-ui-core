@@ -425,7 +425,7 @@ function deployVsDoc(root, bundle) {
 
 function deployWrappers(root, licenseName, bundle) {
     bundle.wrappers.forEach(function(wrapper){
-        kendoBuild.copyDirSyncRecursive(path.join(DEPLOY_ROOT, "kendoui." + wrapper + "." + licenseName, wrapper), path.join(root, wrapper));
+        kendoBuild.copyDirSyncRecursive(path.join(DEPLOY_ROOT, "kendoui." + wrapper + "." + licenseName, "wrappers", wrapper), path.join(root, "wrappers", wrapper));
         kendoBuild.copyDirSyncRecursive(path.join(DEPLOY_ROOT, "kendoui." + wrapper + "." + licenseName, "js"), path.join(root, "js"));
     })
 }
@@ -465,6 +465,7 @@ function buildBundle(bundle, version, success, licenseBuilt) {
 
             if (bundle.wrappers) {
                 console.log("Deploying wrappers");
+                mkdir(path.join(root, "wrappers"));
                 deployWrappers(root, licenseName, bundle);
             }
 

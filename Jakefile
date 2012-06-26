@@ -344,22 +344,26 @@ namespace("mvc", function() {
             binariesPath = path.join(projectPath, "bin", "Release");
 
         bundles.buildBundle(bundles.mvcWrappersBundle, version(), complete, function(root, bundle, license) {
-            var binariesDeployRoot = path.join(root, "aspnetmvc", "Binaries"),
-            mvc3binariesDeployRoot = path.join(binariesDeployRoot, "Mvc3"),
-            stylesDeployRoot = path.join(root, "styles"),
-            scriptsDeployRoot = path.join(root, "js"),
-            sourceDeployRoot = path.join(root, "src"),
-            projectDeployRoot = path.join(sourceDeployRoot, "Kendo.Mvc"),
-            examplesDeployRoot = path.join(root, "aspnetmvc", "Examples");
+            var wrappersDeployRoot = path.join(root, "wrappers"),
+                mvcDeployRoot = path.join(wrappersDeployRoot, "aspnetmvc")
+                binariesDeployRoot = path.join(mvcDeployRoot, "Binaries"),
+                mvc3binariesDeployRoot = path.join(binariesDeployRoot, "Mvc3"),
+                stylesDeployRoot = path.join(root, "styles"),
+                scriptsDeployRoot = path.join(root, "js"),
+                sourceDeployRoot = path.join(root, "src"),
+                projectDeployRoot = path.join(sourceDeployRoot, "Kendo.Mvc"),
+                examplesDeployRoot = path.join(mvcDeployRoot, "Examples");
 
             // move resources
             fs.renameSync(path.join(root, "js"), scriptsDeployRoot);
             fs.renameSync(path.join(root, "styles"), stylesDeployRoot);
 
-            // copy binaries
-            kendoBuild.mkdir(path.join(root, "aspnetmvc"));
+            kendoBuild.mkdir(wrappersDeployRoot);
+            kendoBuild.mkdir(mvcDeployRoot);
             kendoBuild.mkdir(binariesDeployRoot);
             kendoBuild.mkdir(mvc3binariesDeployRoot);
+
+            // copy binaries
 
             kendoBuild.processDirs(binariesPath, function(dir){
                 kendoBuild.copyDirSyncRecursive(path.join(binariesPath, dir), path.join(mvc3binariesDeployRoot, dir));
@@ -372,7 +376,7 @@ namespace("mvc", function() {
 
             // copy editor templates
 
-            var templatesDeployRoot = path.join(root, "aspnetmvc", "EditorTemplates");
+            var templatesDeployRoot = path.join(mvcDeployRoot, "EditorTemplates");
             var templatesRoot = path.join(examplesProjectPath, "Views", "Shared", "EditorTemplates");
 
             kendoBuild.mkdir(templatesDeployRoot);
@@ -429,7 +433,7 @@ namespace("mvc", function() {
                 // copy legacy themes
                 kendoBuild.copyDirSyncRecursive(
                     path.join(MVC_WRAPPERS_PATH, "legacy-themes"),
-                    path.join(root, "aspnetmvc", "LegacyThemes")
+                    path.join(mvcDeployRoot, "LegacyThemes")
                 );
 
                 // copy source code
