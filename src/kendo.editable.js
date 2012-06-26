@@ -13,6 +13,7 @@
     var specialRules = ["url", "email", "number", "date", "boolean"];
 
     function fieldType(field) {
+        field = field || "";
         return field.type || $.type(field) || "string";
     }
 

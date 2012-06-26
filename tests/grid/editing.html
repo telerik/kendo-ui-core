@@ -771,7 +771,7 @@
 
             test("add row cancels previous inserted item", function() {
                 var grid = setup({
-                        editable: true,
+                        editable: { mode: "inline" },
                         dataSource: new DataSource({
                             schema: {
                                 model: { id: "foo" }

@@ -1177,12 +1177,16 @@
             var that = this,
                 index,
                 dataSource = that.dataSource,
+                mode = that._editMode(),
                 createAt = that.options.editable.createAt || "",
                 pageSize = dataSource.pageSize(),
                 view = dataSource.view() || [];
 
             if ((that.editable && that.editable.end()) || !that.editable) {
-                that.cancelRow();
+                if (mode != "incell") {
+                    that.cancelRow();
+                }
+
                 index = dataSource.indexOf(view[0]);
 
                 if (createAt.toLowerCase() == "bottom") {
@@ -1199,7 +1203,6 @@
 
                 var model = dataSource.insert(index, {}),
                     id = model.uid,
-                    mode = that._editMode(),
                     row = that.table.find("tr[" + kendo.attr("uid") + "=" + id + "]"),
                     cell = row.children("td:not(.k-group-cell,.k-hierarchy-cell)").first();
 
