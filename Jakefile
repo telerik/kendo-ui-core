@@ -289,6 +289,14 @@ namespace("mvc", function() {
 
     desc("Build wrappers project");
     task("build-wrappers-project", ["mvc:examples-shared-files"], function() {
+        var assemblyInfoFileName = path.join(MVC_WRAPPERS_PATH, "src", "shared", "CommonAssemblyInfo.cs");
+        var assemblyInfo = kendoBuild.readText(assemblyInfoFileName);
+
+        assemblyInfo = assemblyInfo.replace(/AssemblyVersion\([^\)]*\)/, 'AssemblyVersion("' + version() + '.340")') // ".340" means ASP.NET MVC 3 .NET 4.0
+                                   .replace(/AssemblyFileVersion\([^\)]*\)/, 'AssemblyFileVersion("' + version() + '.340")');
+
+        kendoBuild.writeText(assemblyInfoFileName, assemblyInfo);
+
         kendoBuild.msBuild(MVC_WRAPPERS_PROJECT, [ "/t:Clean;Build", "/p:Configuration=Release" ], complete);
     }, true);
 
