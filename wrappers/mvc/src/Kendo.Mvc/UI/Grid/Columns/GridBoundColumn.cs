@@ -242,7 +242,7 @@ namespace Kendo.Mvc.UI
             }
 
             //TODO: Serialize values
-            // SerializeValues(json);
+             SerializeValues(json);
         }
 
         private void SerializeValues(IDictionary<string, object> result)
@@ -250,11 +250,12 @@ namespace Kendo.Mvc.UI
             if (MemberType != null && MemberType.GetNonNullableType().IsEnum)
             {
                 var type = MemberType.GetNonNullableType();
+                var values = new List<IDictionary<string, object>>();
 
-                var values = new Dictionary<string, object>();
-                
-                foreach (var value in Enum.GetValues(type))
+                foreach (int value in Enum.GetValues(type))
                 {
+                    var obj = new Dictionary<string, object>();
+
                     var name = Enum.GetName(type, value);
                     var member = type.GetMember(name).FirstOrDefault();
 
@@ -269,7 +270,11 @@ namespace Kendo.Mvc.UI
                             name = displayAttribute.GetName();
                         }
                     }
-                    values[name] = value;
+
+                    obj["value"] = value;
+                    obj["text"] = name;
+
+                    values.Add(obj);
                 }
 
                 result["values"] = values;

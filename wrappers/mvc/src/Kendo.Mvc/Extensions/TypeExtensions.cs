@@ -418,7 +418,7 @@ namespace Kendo.Mvc.Extensions
 
             if (type.GetNonNullableType().IsEnum)
             {
-                return "Enum";
+                return "Number";
             }
 
             return "Object";
