@@ -2884,6 +2884,7 @@
         legendItems: function() {
             var points = this.points,
                 pointsLength = points.length,
+                i,
                 currentPoint,
                 items = [];
 
@@ -3239,16 +3240,24 @@
             chart.segments.push(segment);
         },
 
-        pointGetter: function(series, index, prop) {
-            var valueField = series[prop + "Field"],
-                data = series.data[index],
-                value = data[prop];
+        legendItems: function() {
+            var segments = this.segments,
+                segmentsLength = segments.length,
+                i,
+                currentPoint,
+                items = [];
 
-            if (valueField && series.dataItems) {
-                return getField(valueField, series.dataItems[index]);
-            } else {
-                return defined(value) ? value : "";
+            for (i = 0; i < segmentsLength; i++) {
+                currentPoint = segments[i];
+                if (currentPoint && currentPoint.visibleInLegend !== false) {
+                    items.push({
+                        name: currentPoint.category,
+                        color: currentPoint.options.color
+                    });
+                }
             }
+
+            return items;
         },
 
         pointsTotal: function(series) {
