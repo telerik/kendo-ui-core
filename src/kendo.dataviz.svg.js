@@ -102,7 +102,7 @@
             view.setupAnimations();
 
             dataviz.renderSVG(container, view.render());
-            viewElement = container.firstChild.nextSibling;
+            viewElement = container.firstElementChild;
             view.alignToScreen(viewElement);
 
             view.playAnimations();
@@ -128,7 +128,7 @@
                 "</svg>"
             );
 
-            domElement = container.firstChild.nextSibling.firstChild;
+            domElement = container.firstElementChild.firstChild;
 
             return domElement;
         },

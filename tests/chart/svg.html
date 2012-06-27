@@ -283,7 +283,7 @@
                     }
 
                     var container = $("<div />").appendTo(document.body);
-                    equals(view.renderTo(container[0]), container[0].firstChild.nextSibling);
+                    equals(view.renderTo(container[0]), container[0].firstElementChild);
                     container.remove();
                 });
 
