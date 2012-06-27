@@ -80,6 +80,10 @@ tests.push(
         title: "grid column reorder"
     },
     {
+        page: "grid/columnhiding.html",
+        title: "grid column hiding"
+    },
+    {
         page: "grid/lint.html",
         title: "grid lint"
     }

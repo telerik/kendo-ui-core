@@ -894,6 +894,86 @@
                 equal(grid.items().first().find("td:first").text(), "1");
             });
 
+            test("hidden column does not render cols", function() {
+                var grid = new Grid($("<table/>"), {
+                    dataSource: [{ foo: 1, bar: "bar"}],
+                    columns: [
+                        { field: "foo", hidden: true },
+                        { field: "bar" }
+                    ]
+                });
+
+                equal(grid.thead.prev().find("col").length, 1);
+                equal(grid.tbody.prev().find("col").length, 1);
+            });
+
+            test("hidden column set hidden attribute for header cell", function() {
+                var grid = new Grid($("<table/>"), {
+                    dataSource: [{ foo: 1, bar: "bar"}],
+                    columns: [
+                        { field: "foo", hidden: true },
+                        { field: "bar" }
+                    ]
+                });
+
+                equal(grid.columns[0].headerAttributes.style, "display:none");
+            });
+
+            test("hidden column set hidden attribute for footer cell", function() {
+                var grid = new Grid($("<table/>"), {
+                    dataSource: [{ foo: 1, bar: "bar"}],
+                    columns: [
+                        { field: "foo", hidden: true, footerTemplate: "foo" },
+                        { field: "bar" }
+                    ]
+                });
+
+                equal(grid.columns[0].footerAttributes.style, "display:none");
+            });
+
+            test("hidden columns set hidden attribute for data cell", function() {
+                var grid = new Grid($("<table/>"), {
+                    dataSource: [{ foo: 1, bar: "bar"}],
+                    columns: [
+                        { field: "foo", hidden: true },
+                        { field: "bar" }
+                    ]
+                });
+
+                equal(grid.columns[0].attributes.style, "display:none");
+            });
+
+            test("detail cell colspan depends on visible columns", function() {
+                var grid = new Grid($("<table/>"), {
+                    dataSource: [{ foo: 1, bar: "bar"}],
+                    detailTemplate: "foo",
+                    columns: [
+                        { field: "foo", hidden: true },
+                        { field: "bar" }
+                    ]
+                });
+
+                grid.expandRow(grid.items()[0]);
+
+                equal(grid.tbody.find(".k-detail-row>.k-detail-cell").attr("colspan"), "1");
+            });
+
+            test("group cell colspan depends on visible columns", function() {
+                var grid = new Grid($("<table/>"), {
+                    dataSource: {
+                        data: [{ foo: 1, bar: "bar"}],
+                        group: { field: "foo" }
+                    },
+                    columns: [
+                        { field: "foo", hidden: true },
+                        { field: "bar" }
+                    ]
+                });
+
+                grid.expandRow(grid.items()[0]);
+
+                equal(grid.tbody.find(".k-grouping-row>td").attr("colspan"), "2");
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

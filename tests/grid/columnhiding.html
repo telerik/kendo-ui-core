@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Grid Column Hiding</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.pager.js"></script>
+        <script src="../../src/kendo.sortable.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.reorderable.js"></script>
+        <script src="../../src/kendo.grid.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+        <link rel="stylesheet" href="../../styles/web/kendo.common.css" />
+        <link rel="stylesheet" href="../../styles/web/kendo.default.css" />
+    </head>
+    <body>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+        <h1 id="qunit-header">Grid Column Hiding</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var Grid = kendo.ui.Grid,
+                div,
+                data = [{ foo: "foo", bar: "bar", baz: "baz" }],
+                DataSource = kendo.data.DataSource;
+
+            module("grid column hiding", {
+                setup: function() {
+                    div = $("<div></div>").appendTo(document.body);
+                },
+                teardown: function() {
+                    div.closest(".k-grid").remove();
+                }
+            });
+
+            function setup(options) {
+                options = $.extend(true, {}, {
+                    dataSource: {
+                        data: data
+                    },
+                    columns: [
+                        { field: "foo", width: 10 },
+                        { field: "bar", width: 20 },
+                        { field: "baz", width: 30 }
+                    ]
+                },
+                options);
+
+                return new Grid(div, options);
+            }
+
+            test("hide cols for column in not scrollable grid", function() {
+                var grid = setup({ scrollable: false });
+
+                grid.hideColumn(0);
+
+                var cols = grid.thead.prev().find("col");
+                equal(cols.length, 2);
+                equal(cols.eq(0).width(), 20);
+                equal(cols.eq(1).width(), 30);
+            });
+
+            test("hide cols for column in scrollable grid", function() {
+                var grid = setup();
+
+                grid.hideColumn(0);
+
+                var cols = grid.thead.prev().find("col");
+                var tableCols = grid.table.find(">colgroup col");
+                equal(cols.length, 2);
+                equal(cols.eq(0).width(), 20);
+                equal(cols.eq(1).width(), 30);
+                equal(tableCols.length, 2);
+                equal(tableCols.eq(0).width(), 20);
+                equal(tableCols.eq(1).width(), 30);
+            });
+
+            test("hide column by field name", function() {
+                var grid = setup({ scrollable: false });
+
+                grid.hideColumn("foo");
+
+                var cols = grid.thead.prev().find("col");
+                equal(cols.length, 2);
+                equal(cols.eq(0).width(), 20);
+                equal(cols.eq(1).width(), 30);
+            });
+
+            test("hide column header cells", function() {
+                var grid = setup();
+
+                grid.hideColumn(0);
+
+                var ths = grid.thead.find("th");
+                ok(!ths.eq(0).is(":visible"));
+                ok(ths.eq(1).is(":visible"));
+            });
+
+            test("hide two column header cells", function() {
+                var grid = setup();
+
+                grid.hideColumn(0);
+                grid.hideColumn(2);
+
+                var ths = grid.thead.find("th");
+                ok(!ths.eq(0).is(":visible"));
+                ok(ths.eq(1).is(":visible"));
+                ok(!ths.eq(2).is(":visible"));
+            });
+
+            test("hide column header cells in grid with details", function() {
+                var grid = setup({ detailTemplate: "foo" });
+
+                grid.hideColumn(0);
+
+                var ths = grid.thead.find("th");
+                ok(ths.eq(0).is(":visible"));
+                ok(!ths.eq(1).is(":visible"));
+                ok(ths.eq(2).is(":visible"));
+                ok(ths.eq(3).is(":visible"));
+            });
+
+            test("hide column header cells in grouped grid", function() {
+                var grid = setup({ dataSource: {
+                        group: { field: "foo" }
+                    }
+                });
+
+                grid.hideColumn(0);
+
+                var ths = grid.thead.find("th");
+                ok(ths.eq(0).is(":visible"));
+                ok(!ths.eq(1).is(":visible"));
+                ok(ths.eq(2).is(":visible"));
+                ok(ths.eq(3).is(":visible"));
+            });
+
+            test("hide column cells", function() {
+                var grid = setup();
+
+                grid.hideColumn(0);
+
+                var tds = grid.table.find("td");
+                ok(!tds.eq(0).is(":visible"));
+                ok(tds.eq(1).is(":visible"));
+                ok(tds.eq(2).is(":visible"));
+            });
+
+            test("hiding already hidden column", function() {
+                var grid = setup();
+
+                grid.hideColumn(0);
+                grid.hideColumn(0);
+
+                var tds = grid.table.find("td");
+                ok(!tds.eq(0).is(":visible"));
+                ok(tds.eq(1).is(":visible"));
+                ok(tds.eq(2).is(":visible"));
+            });
+
+            test("hidden columns remains hidden on refresh", function() {
+                var grid = setup({ scrollable: false });
+
+                grid.hideColumn(0);
+                grid.refresh();
+
+                var tds = grid.table.find("td");
+                var ths = grid.thead.find("th");
+                var cols = grid.thead.prev().find("col");
+                ok(!tds.eq(0).is(":visible"));
+                ok(tds.eq(1).is(":visible"));
+                ok(tds.eq(2).is(":visible"));
+                ok(!ths.eq(0).is(":visible"));
+                ok(ths.eq(1).is(":visible"));
+                ok(ths.eq(2).is(":visible"));
+                equal(cols.length, 2);
+                ok(grid.columns[0].hidden);
+            });
+
+            test("hide column cells in grid with details", function() {
+                var grid = setup({ detailTemplate: "foo" });
+
+                grid.hideColumn(0);
+
+                var tds = grid.table.find("td");
+                ok(tds.eq(0).is(":visible"));
+                ok(!tds.eq(1).is(":visible"));
+            });
+
+            test("hiding column changes detail row colspan", function() {
+                var grid = setup({ detailTemplate: "foo" });
+
+                grid.expandRow(grid.items()[0]);
+                grid.hideColumn(0);
+
+                var tds = grid.table.find(".k-detail-row>td");
+                ok(tds.eq(0).is(":visible"));
+                ok(tds.eq(1).is(":visible"));
+                equal(tds.eq(1).attr("colspan"), "2");
+            });
+
+            test("hide column cells in groupable grid", function() {
+                var grid = setup({
+                    dataSource: {
+                        group: { field: "foo" }
+                    }
+                });
+
+                grid.hideColumn(0);
+
+                var tds = grid.table.find("tr:nth(1)>td");
+                ok(tds.eq(0).is(":visible"));
+                ok(!tds.eq(1).is(":visible"));
+            });
+
+            test("hiding column changes grouping row cell colspan", function() {
+                var grid = setup({
+                    dataSource: {
+                        group: { field: "foo" }
+                    }
+                });
+
+                grid.hideColumn(0);
+
+                var td = grid.table.find("tr>td:first");
+                ok(td.is(":visible"));
+                equal(td.attr("colspan"), "3");
+            });
+
+            test("hide footer cells", function() {
+                var grid = setup({
+                    columns: [{
+                        field: "foo",
+                        footerTemplate: "foo"
+                    }]
+                });
+
+                grid.hideColumn(0);
+
+                var footer = grid.footer.find("td");
+                ok(!footer.eq(0).is(":visible"));
+                ok(footer.eq(1).is(":visible"));
+                ok(footer.eq(2).is(":visible"));
+            });
+
+            test("hide footer cells in grid with groups and details", function() {
+                var grid = setup({
+                    columns: [{
+                        field: "foo",
+                        footerTemplate: "foo template"
+                    }],
+                    detailTemplate: "detail template",
+                    dataSource: {
+                        group: {
+                            field: "foo"
+                        }
+                    }
+                });
+
+                grid.hideColumn(0);
+
+                var footer = grid.footer.find("td");
+                ok(footer.eq(0).is(":visible"));
+                ok(footer.eq(1).is(":visible"));
+                ok(!footer.eq(2).is(":visible"));
+                ok(footer.eq(3).is(":visible"));
+                ok(footer.eq(4).is(":visible"));
+            });
+
+            test("hide footer cols in scrollable grid", function() {
+                var grid = setup({
+                    columns: [{
+                        field: "foo",
+                        footerTemplate: "foo"
+                    }]
+                });
+
+                grid.hideColumn(0);
+
+                var cols = grid.footer.find("col");
+                equal(cols.length, 2);
+                equal(cols.eq(0).width(), 20);
+                equal(cols.eq(1).width(), 30);
+            });
+
+            test("hide footer cols in scrollable grid with details and grouping", function() {
+                var grid = setup({
+                    columns: [{
+                        field: "foo",
+                        footerTemplate: "foo"
+                    }],
+                    detailTemplate: "detail template",
+                    dataSource: {
+                        group: {
+                            field: "foo"
+                        }
+                    }
+                });
+
+                grid.hideColumn(0);
+
+                var cols = grid.footer.find("col");
+                equal(cols.length, 4);
+                ok(cols.eq(0).hasClass("k-group-col"));
+                ok(cols.eq(1).hasClass("k-hierarchy-col"));
+                equal(cols.eq(2).width(), 20);
+                equal(cols.eq(3).width(), 30);
+            });
+
+            test("hidden columns footer remains hidden on refresh", function() {
+                var grid = setup({
+                    scrollable: false,
+                    columns: [{
+                        field: "foo",
+                        footerTemplate: "foo"
+                    }]
+                });
+
+                grid.hideColumn(0);
+                grid.refresh();
+
+                var footer = grid.footer.find("td");
+                ok(!footer.eq(0).is(":visible"));
+                ok(footer.eq(1).is(":visible"));
+                ok(footer.eq(2).is(":visible"));
+            });
+
+            test("hiding column recalculates table width", function() {
+                var grid = setup();
+
+                grid.hideColumn(0);
+
+                equal(grid.table.width(), 50);
+            });
+
+            test("hiding column does not change table width if column without width exist", function() {
+                var grid = setup({
+                    columns: ["foo", { field: "bar" }, "baz"]
+                }),
+                width = grid.table.width();
+
+                grid.hideColumn(0);
+
+                equal(grid.table.width(), width);
+            });
+        </script>
+    </body>
+</html>
