@@ -189,8 +189,6 @@
             element = $(element);
             Observable.fn.init.call(that);
 
-            eventMap = {};
-
             eventMap[addNS(MOVE_EVENTS, ns)] = proxy(that._move, that);
             eventMap[addNS(END_EVENTS, ns)] = proxy(that._end, that);
 
@@ -208,6 +206,10 @@
             element
                 .on(START_EVENTS, filter, proxy(that._start, that))
                 .on("dragstart", filter, kendo.preventDefault);
+
+            if (pointers) {
+                element.css("-ms-touch-action", "none");
+            }
 
             if (!options.allowSelection) {
                 var args = ["mousedown selectstart", filter, preventTrigger];
@@ -348,7 +350,7 @@
             that.currentTarget = e.currentTarget;
 
             if (that.stopPropagation) {
-              e.stopPropagation();
+                e.stopPropagation();
             }
 
             that.pressed = true;

@@ -96,6 +96,19 @@
             </ul>
         </li>
     </ul>
+    <style type="text/css">
+        #menu2 > .k-item > .k-animation-container
+        {
+            left: auto !important;
+            right: -3px;
+        }
+
+        #menu2 > .k-item
+        {
+            float: right;
+            border-width: 0 0 0 1px;
+        }
+    </style>
     <script>
         $(function () {
             $("#menu")
@@ -106,7 +119,9 @@
                 .kendoMenu({
                     orientation: "vertical"
                 });
-            $("#menu2").kendoMenu();
+            $("#menu2").kendoMenu({
+                direction: "bottom left"
+            });
             $("#menu3")
                 .css({
                     width: 200,

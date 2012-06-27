@@ -2269,10 +2269,11 @@ function pad(number) {
     }
 
     var touchLocation = function(e) {
+        var originalEvent = typeof e.pageX == UNDEFINED ? e.originalEvent : e;
         return {
-            idx: 0,
-            x: e.pageX,
-            y: e.pageY
+            idx: support.pointers ? originalEvent.pointerId : 0,
+            x: originalEvent.pageX,
+            y: originalEvent.pageY
         };
     };
 
@@ -2325,6 +2326,12 @@ function pad(number) {
         support.mousemove = "touchmove";
         support.mousecancel = "touchcancel";
         support.resize = "orientationchange";
+    } else if (support.pointers) {
+        support.mousemove = "MSPointerMove";
+        support.mousedown = "MSPointerDown";
+        support.mouseup = "MSPointerUp";
+        support.mousecancel = "MSPointerCancel";
+        support.resize = "orientationchange resize";
     } else {
         support.mousemove = "mousemove";
         support.mousedown = "mousedown";
@@ -2333,9 +2340,6 @@ function pad(number) {
         support.resize = "resize";
     }
 
-    if (support.pointers) {
-        support.resize = "orientationchange resize";
-    }
 
     var wrapExpression = function(members) {
         var result = "d",
