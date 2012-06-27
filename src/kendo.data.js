@@ -1473,6 +1473,22 @@
         }
         return result;
     }
+    function wrapGroupItems(data, model) {
+        var idx, length, group, items;
+        if (model) {
+            for (idx = 0, length = data.length; idx < length; idx++) {
+                group = data[idx];
+                items = group.items;
+
+                if (group.hasSubgroups) {
+                    wrapGroupItems(items, model);
+                } else if (items.length && !(items[0] instanceof model)) {
+                    items.type = model;
+                    items.wrapAll(items, items);
+                }
+            }
+        }
+    }
 
     function mapGroupItems(data, func) {
         var idx, length;
@@ -1496,6 +1512,55 @@
                 return model;
             }
         }
+    }
+
+    function wrapInEmptyGroup(groups, model) {
+        var parent,
+            group,
+            idx,
+            length;
+
+        for (idx = groups.length-1, length = 0; idx >= length; idx--) {
+            group = groups[idx];
+            parent = {
+                value: model.get(group.field),
+                field: group.field,
+                items: parent ? [parent] : [model],
+                hasSubgroups: !!parent
+            };
+        }
+
+        return parent;
+    }
+
+    function indexOfPristineModel(data, model) {
+        if (model) {
+            return indexOf(data, function(item) {
+                return item[model.idField] === model.id;
+            });
+        }
+        return -1;
+    }
+
+    function indexOfModel(data, model) {
+        if (model) {
+            return indexOf(data, function(item) {
+                return item.uid == model.uid;
+            });
+        }
+        return -1;
+    }
+
+    function indexOf(data, comparer) {
+        var idx, length;
+
+        for (idx = 0, length = data.length; idx < length; idx++) {
+            if (comparer(data[idx])) {
+                return idx;
+            }
+        }
+
+        return -1;
     }
 
     var DataSource = Observable.extend({
@@ -1684,9 +1749,9 @@
 
         _pristineIndex: function(model) {
             var that = this,
-            idx,
-            length,
-            pristine = that.reader.data(that._pristine);
+                idx,
+                length,
+                pristine = that.reader.data(that._pristine);
 
             for (idx = 0, length = pristine.length; idx < length; idx++) {
                 if (pristine[idx][model.idField] === model.id) {
@@ -1755,7 +1820,11 @@
                 }
             }
 
-            this._data.splice(index, 0, model);
+            if (this.options.serverGrouping && this.group() && this.group().length) {
+                this._data.splice(index, 0, wrapInEmptyGroup(this.group(), model));
+            } else {
+                this._data.splice(index, 0, model);
+            }
 
             return model;
         },
@@ -1763,17 +1832,23 @@
         cancelChanges: function(model) {
             var that = this,
                 pristineIndex,
-                pristine = that.reader.data(that._pristine),
+                serverGroup = that.options.serverGrouping && that.group() && that.group().length,
+                read = !serverGroup ? that.reader.data : that.reader.groups,
+                pristine = read(that._pristine),
                 index;
 
             if (model instanceof kendo.data.Model) {
-                index = that.indexOf(model);
-                pristineIndex = that._pristineIndex(model);
-                if (index != -1) {
-                    if (pristineIndex != -1 && !model.isNew()) {
-                        extend(true, that._data[index], pristine[pristineIndex]);
-                    } else {
-                        that._data.splice(index, 1);
+                if (serverGroup) {
+                    that._cancelGroupModel(model);
+                } else {
+                    index = that.indexOf(model);
+                    pristineIndex = that._pristineIndex(model);
+                    if (index != -1) {
+                        if (pristineIndex != -1 && !model.isNew()) {
+                            extend(true, that._data[index], pristine[pristineIndex]);
+                        } else {
+                            that._data.splice(index, 1);
+                        }
                     }
                 }
             } else {
@@ -1797,17 +1872,33 @@
             });
         },
 
-        indexOf: function(model) {
-            var idx, length, data = this._data;
-
-            if (model) {
-                for (idx = 0, length = data.length; idx < length; idx++) {
-                    if (data[idx].uid == model.uid) {
+        _cancelGroupModel: function(model) {
+            var pristineData = this.reader.groups(this._pristine),
+                pristine,
+                idx,
+                index = mapGroupItems(pristineData,
+                    function(items, group) {
+                        idx = indexOfPristineModel(items, model);
+                        pristine = items[idx];
                         return idx;
+                    });
+
+            if (index !== -1) {
+                mapGroupItems(this._data, function(items, group) {
+                    idx = indexOfModel(items, model);
+                    if (idx !== -1) {
+                        if (!model.isNew()) {
+                            extend(true, items[idx], pristine);
+                        } else {
+                            items.splice(idx, 1);
+                        }
                     }
-                }
+                });
             }
-            return -1;
+        },
+
+        indexOf: function(model) {
+            return indexOfModel(this._data, model);
         },
 
         _params: function(data) {
@@ -1941,6 +2032,7 @@
             }
 
             if (that.group() && that.group().length && that.options.serverGrouping) {
+                wrapGroupItems(data, model);
                 mapGroupItems(data, function(items) {
                     if (model && items.length && !(items[0] instanceof model)) {
                         items.type = model;

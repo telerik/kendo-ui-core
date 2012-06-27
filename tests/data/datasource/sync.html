@@ -415,6 +415,37 @@
                 equal(models[0].foo, 2);
             });
 
+            test("the created data records are send to the if server grouping is enabled", function() {
+                var dataSource = new DataSource({
+                        schema: {
+                            model: { id: "id" },
+                            groups: function(data) {
+                                return [{
+                                    items: [{ foo: 1, id: 0}],
+                                    field: "foo",
+                                    value: "bar"
+                                }];
+                            },
+                            total: function() {
+                                return 1;
+                            }
+                        },
+                        batch: true,
+                        serverGrouping: true,
+                        group: { field: "foo" }
+                    });
+
+                stub(dataSource.transport, "create");
+                dataSource.read();
+
+                dataSource.add({ foo: 1 });
+                dataSource.sync();
+
+                var models = dataSource.transport.args("create")[0].data.models;
+                equal(models[0].foo, 1);
+                equal(models.length, 1);
+            });
+
             test("the destroyed data records are send to the if server grouping is enabled", function() {
                 var dataSource = new DataSource({
                         schema: {
