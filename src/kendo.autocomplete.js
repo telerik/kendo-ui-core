@@ -275,7 +275,6 @@
         *      $("#autocomplete").kendoAutoComplete({
         *          dataSource: dataSource,
         *          dataTextField: "Name",
-        *          dataValueField: "Id",
         *          template: kendo.template($("#template").html())
         *      });
         *  </script>
