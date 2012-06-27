@@ -296,7 +296,7 @@
 
                 element.css("position", "relative");
                 chart._viewElement = view.renderTo(element[0]);
-                chart._tooltip = new Tooltip(element, options.tooltip);
+                chart._tooltip = new dataviz.Tooltip(element, options.tooltip);
                 chart._highlight = new Highlight(view, chart._viewElement);
             }
         },
