@@ -7,6 +7,33 @@ function publish(symbolSet) {
     classes.forEach(processClass);
 }
 
+var detailListRegExp = /<div class="details-list">((.|\n|\r)*?)<\/div>/g;
+
+function processDefinitionLists(content) {
+    return content.replace(detailListRegExp, function($0, $1) {
+        var definitionTitleAndDefinitionDataRegExp = /<dt>((.|\n|\r)*?)<\/dt>\s*<dd>((.|\n|\r)*?)<\/dd>/g;
+        var definition;
+        var result = "";
+
+        while(definition = definitionTitleAndDefinitionDataRegExp.exec($1)) {
+            var title = definition[1].trim();
+
+            title = title.replace(/^\*+/, "")
+                         .replace(/\*+$/, "")
+                         .replace(/^`/, "")
+                         .replace(/`$/, "");
+
+            title = "*" + title + "*";
+
+            var data = definition[3].trim();
+
+            result += "\n\n##### " + title + "\n\n" + data;
+        }
+
+        return result;
+    });
+}
+
 function processClass(theClass) {
     theClass.events = theClass.getEvents();   // 1 order matters
     theClass.methods = theClass.getMethods(); // 2
@@ -44,12 +71,21 @@ function processClass(theClass) {
         "\n\n" + outputDescription(description.comment).replace(/\r/g, "\n");
     }
 
-    html += "\n\n## Configuration" +
-        outputConfiguration(theClass).replace(/\r/g, "\n") +
-        "\n\n## Methods" +
-        outputMethods(theClass).replace(/\r/g, "\n") +
-        '\n\n## Events' +
-        outputEvents(theClass).replace(/\r/g, "\n");
+    var configuration = processDefinitionLists(outputConfiguration(theClass).replace(/\r/g, "\n"));
+    var methods = processDefinitionLists(outputMethods(theClass).replace(/\r/g, "\n"));
+    var events = processDefinitionLists(outputEvents(theClass).replace(/\r/g, "\n"));
+
+    if (configuration.trim().length > 0) {
+        html += "\n\n## Configuration" + configuration;
+    }
+
+    if (methods.trim().length > 0) {
+        html += "\n\n## Methods" + methods;
+    }
+
+    if (events.trim().length > 0) {
+        html += "\n\n## Events" + events;
+    }
 
     if (html) {
         IO.mkPath("docs/api/" + suite);

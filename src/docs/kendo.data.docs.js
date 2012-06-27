@@ -8,15 +8,12 @@
     * @name kendo.data.DataSource.Description
     *
     * @section
-    *  <p>
-    *      The DataSource component is an abstraction for using local (arrays of JavaScript objects) or
-    *      remote (XML, JSON, JSONP) data. It fully supports CRUD (Create, Read, Update, Destroy) data
-    *      operations and provides both local and server-side support for Sorting, Paging, Filtering, Grouping, and Aggregates.
-    *  </p>
-    *  <p>
-    *      It is a powerful piece of the Kendo UI Framework, dramatically simplifying data binding and data operations.
-    *  </p>
-    *  <h3>Getting Started</h3>
+    * <p>
+    *The DataSource component is an abstraction for using local (arrays of JavaScript objects) or
+    *remote (XML, JSON, JSONP) data. It fully supports CRUD (Create, Read, Update, Destroy) data
+    *operations and provides both local and server-side support for Sorting, Paging, Filtering, Grouping, and Aggregates.
+    * </p>
+    * <h3>Getting Started</h3>
     *
     * @exampleTitle Creating a DataSource bound to local data
     * @example
@@ -57,12 +54,12 @@
     * });
     * @section
     *  <h3>Binding UI widgets to DataSource</h3>
-    *  <p>
-    *      Many Kendo UI widgets support data binding, and the Kendo UI DataSource is an ideal
-    *      binding source for both local and remote data. A DataSource can be created in-line
-    *      with other UI widget configuration settings, or a shared DataSource can be created
-    *      to enable multiple UI widgets to bind to the same, observable data collection.
-    *  </p>
+    *<p>
+    *Many Kendo UI widgets support data binding, and the Kendo UI DataSource is an ideal
+    *binding source for both local and remote data. A DataSource can be created in-line
+    *with other UI widget configuration settings, or a shared DataSource can be created
+    *to enable multiple UI widgets to bind to the same, observable data collection.
+    *</p>
     * @exampleTitle Creating a local DataSource in-line with UI widget configuration
     * @example
     * $("#chart").kendoChart({
