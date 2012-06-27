@@ -4601,25 +4601,6 @@
                 });
 
             plotArea.appendChart(pieChart);
-        },
-
-        addToLegend: function(chart) {
-            var plotArea = this,
-                options = plotArea.options,
-                segments = chart.segments,
-                count = segments.length,
-                i,
-                currentSegment;
-
-            for (i = 0; i < count; i++) {
-                currentSegment = segments[i];
-                if (currentSegment.visibleInLegend !== false) {
-                    options.legend.items.push({
-                        name: currentSegment.category,
-                        color: currentSegment.options.color
-                    });
-                }
-            }
         }
     });
 
