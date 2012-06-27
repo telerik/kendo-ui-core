@@ -3179,10 +3179,8 @@
                     value = currentData.value;
                     angle = round(value * anglePerValue, DEFAULT_PRECISION);
                     explode = data.length != 1 && !!currentData.explode;
-                    currentSeries.color = currentData.color ?
-                        currentData.color : colors[i % colorsCount];
+                    currentSeries.color = currentData.color || colors[i % colorsCount];
 
-                    // TODO: Pass currentData instead of setting series color
                     callback(value, new Ring(null, 0, 0, currentAngle, angle), {
                         owner: chart,
                         category: currentData.category || "",
