@@ -202,6 +202,70 @@
             test("indexOf returns -1 if model does is not contained in the data source", function() {
                 equal(dataSource.indexOf(new kendo.data.Model()), -1);
             });
+
+            test("removes model from grouped data", function() {
+                var dataSource = new kendo.data.DataSource({
+                    schema: {
+                        model: { id: "id" },
+                        groups: function(data) {
+                            return [{
+                                items: [{ foo: 1, id: 0}, { foo: 1, id: 1}],
+                                field: "foo",
+                                value: 1
+                            }];
+                        },
+                        total: function() {
+                            return 1;
+                        }
+                    },
+                    serverGrouping: true,
+                    group: { field: "foo" }
+                });
+
+                dataSource.read();
+                var model = dataSource.get(0);
+                var removedModel = dataSource.remove(model);
+
+                same(removedModel, model);
+                equal(removedModel.foo, 1);
+                equal(removedModel.id, 0);
+                equal(dataSource.data()[0].items.length, 1);
+            });
+
+            test("removes model from nested grouped data", function() {
+                var dataSource = new kendo.data.DataSource({
+                    schema: {
+                        model: { id: "id" },
+                        groups: function(data) {
+                            return [{
+                                items: [{
+                                    items: [{ bar: "bar", foo: 1, id: 0}, { bar: "bar", foo: 1, id: 1}],
+                                    field: "bar",
+                                    value: "bar"
+                                }],
+                                field: "foo",
+                                value: 1,
+                                hasSubgroups: true
+                            }];
+                        },
+                        total: function() {
+                            return 1;
+                        }
+                    },
+                    serverGrouping: true,
+                    group: [{ field: "foo" }, { field: "bar" }]
+                });
+
+                dataSource.read();
+                var model = dataSource.get(0);
+                var removedModel = dataSource.remove(model);
+
+                same(removedModel, model);
+                equal(removedModel.foo, 1);
+                equal(removedModel.id, 0);
+                debugger;
+                equal(dataSource.data()[0].items[0].items.length, 1);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

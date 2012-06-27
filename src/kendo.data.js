@@ -1474,21 +1474,26 @@
         return result;
     }
 
-    function wrapGroupItems(data, model) {
-        var idx,
-            length,
-            records,
-            item;
+    function mapGroupItems(data, func) {
+        var idx, length;
 
         for (idx = 0, length = data.length; idx < length; idx++) {
-            item = data[idx];
-            records = item.items;
+            if (data[idx].hasSubgroups) {
+                return mapGroupItems(data[idx].items, func);
+            } else {
+                return func(data[idx].items, data[idx]);
+            }
+        }
+    }
 
-            if (item.hasSubgroups) {
-                wrapGroupItems(records);
-            } else if (model && records.length && !(records[0] instanceof model)) {
-                records.type = model;
-                records.wrapAll(records, records);
+    function removeModel(data, model) {
+        var idx, length;
+
+        for (idx = 0, length = data.length; idx < length; idx++) {
+            if (data[idx].uid == model.uid) {
+                model = data[idx];
+                data.splice(idx, 1);
+                return model;
             }
         }
     }
@@ -1847,15 +1852,18 @@
         },
 
         remove: function(model) {
-            var idx, length, data = this._data;
+            var data = this._data;
 
-            for (idx = 0, length = data.length; idx < length; idx++) {
-                if (data[idx].uid == model.uid) {
-                    model = data[idx];
-                    data.splice(idx, 1);
-                    return model;
-                }
+            if (this.options.serverGrouping && this.group() && this.group().length) {
+                return this._removeGroupItem(data, model);
             }
+            return removeModel(data, model);
+        },
+
+        _removeGroupItem: function(data, model) {
+            return mapGroupItems(data, function(items, group) {
+               return removeModel(items, model);
+            });
         },
 
         error: function(xhr, status, errorThrown) {
@@ -1933,7 +1941,12 @@
             }
 
             if (that.group() && that.group().length && that.options.serverGrouping) {
-                wrapGroupItems(data, that.reader.model);
+                mapGroupItems(data, function(items) {
+                    if (model && items.length && !(items[0] instanceof model)) {
+                        items.type = model;
+                        items.wrapAll(items, items);
+                    }
+                });
             }
 
             return data.bind(CHANGE, proxy(that._change, that));
