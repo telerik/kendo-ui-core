@@ -304,6 +304,30 @@
                 ok(dataSource.data() instanceof kendo.data.ObservableArray);
             });
 
+            test("Group items are converted to the model type when server grouping is enabled", function() {
+                var MyModel = Model.define({}),
+                    dataSource = new DataSource({
+                        schema: {
+                            model: MyModel,
+                            groups: function(data) {
+                                return [{
+                                    items: [{ foo: 1 }],
+                                    field: "foo",
+                                    value: "bar"
+                                }];
+                            },
+                            total: function() {
+                                return 1;
+                            }
+                        },
+                        serverGrouping: true,
+                        group: { field: "foo" }
+                    });
+
+                dataSource.read();
+
+                ok(dataSource.data()[0].items[0] instanceof MyModel);
+            });
             </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

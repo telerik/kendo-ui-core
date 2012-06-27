@@ -1474,6 +1474,25 @@
         return result;
     }
 
+    function wrapGroupItems(data, model) {
+        var idx,
+            length,
+            records,
+            item;
+
+        for (idx = 0, length = data.length; idx < length; idx++) {
+            item = data[idx];
+            records = item.items;
+
+            if (item.hasSubgroups) {
+                wrapGroupItems(records);
+            } else if (model && records.length && !(records[0] instanceof model)) {
+                records.type = model;
+                records.wrapAll(records, records);
+            }
+        }
+    }
+
     var DataSource = Observable.extend({
         init: function(options) {
             var that = this, model, transport, data;
@@ -1577,12 +1596,12 @@
 
         sync: function() {
             var that = this,
-            idx,
-            length,
-            created = [],
-            updated = [],
-            destroyed = that._destroyed,
-            data = that._data;
+                idx,
+                length,
+                created = [],
+                updated = [],
+                destroyed = that._destroyed,
+                data = that._flatData(that._data);
 
             if (!that.reader.model) {
                 return;
@@ -1602,17 +1621,16 @@
             promises.push.apply(promises ,that._send("destroy", destroyed));
 
             $.when.apply(null, promises)
-            .then(function() {
-                var idx,
-                length;
+                .then(function() {
+                    var idx,
+                    length;
 
-                for (idx = 0, length = arguments.length; idx < length; idx++){
-                    that._accept(arguments[idx]);
-                }
+                    for (idx = 0, length = arguments.length; idx < length; idx++){
+                        that._accept(arguments[idx]);
+                    }
 
-                that._change();
-            });
-
+                    that._change();
+                });
         },
 
         _accept: function(result) {
@@ -1912,6 +1930,10 @@
             } else {
                 data = new ObservableArray(data, that.reader.model);
                 data.parent = function() { return that._parent(); };
+            }
+
+            if (that.group() && that.group().length && that.options.serverGrouping) {
+                wrapGroupItems(data, that.reader.model);
             }
 
             return data.bind(CHANGE, proxy(that._change, that));

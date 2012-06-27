@@ -384,6 +384,37 @@
 
                 equal(models[0].uid, undefined);
             });
+
+            test("data records are send to the if server grouping is enabled", function() {
+                var dataSource = new DataSource({
+                        schema: {
+                            model: { id: "id" },
+                            groups: function(data) {
+                                return [{
+                                    items: [{ foo: 1, id: 0}],
+                                    field: "foo",
+                                    value: "bar"
+                                }];
+                            },
+                            total: function() {
+                                return 1;
+                            }
+                        },
+                        batch: true,
+                        serverGrouping: true,
+                        group: { field: "foo" }
+                    });
+
+                stub(dataSource.transport, "update");
+                dataSource.read();
+
+                dataSource.get(0).set("foo", 2);
+                dataSource.sync();
+
+                var models = dataSource.transport.args("update")[0].data.models;
+                equal(models[0].foo, 2);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
