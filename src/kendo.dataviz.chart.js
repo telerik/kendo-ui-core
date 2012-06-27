@@ -2881,6 +2881,25 @@
                    .concat(["size", "color", "category", "visibleInLegend"]);
         },
 
+        legendItems: function() {
+            var points = this.points,
+                pointsLength = points.length,
+                currentPoint,
+                items = [];
+
+            for (i = 0; i < pointsLength; i++) {
+                currentPoint = points[i];
+                if (currentPoint && currentPoint.value.visibleInLegend !== false) {
+                    items.push({
+                        name: currentPoint.value.category,
+                        color: currentPoint.options.color
+                    });
+                }
+            }
+
+            return items;
+        },
+
         getViewElements: function(view) {
             var chart = this;
 
@@ -5203,6 +5222,7 @@
         BarChart: BarChart,
         BarLabel: BarLabel,
         BubbleAnimationDecorator: BubbleAnimationDecorator,
+        BubbleChart: BubbleChart,
         CategoricalPlotArea: CategoricalPlotArea,
         CategoryAxis: CategoryAxis,
         ClusterLayout: ClusterLayout,

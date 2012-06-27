@@ -22,30 +22,30 @@
                 Box2D = dataviz.Box2D,
                 chartBox = new Box2D(0, 0, 800, 600),
                 plotArea,
-                scatterChart,
+                bubbleChart,
                 root,
                 view,
                 TOLERANCE = 1;
 
-            function setupScatterChart(plotArea, options) {
+            function setupBubbleChart(plotArea, options) {
                 view = new ViewStub();
 
-                scatterChart = new dataviz.ScatterChart(plotArea, options);
+                bubbleChart = new dataviz.BubbleChart(plotArea, options);
 
                 root = new dataviz.RootElement();
-                root.append(scatterChart);
+                root.append(bubbleChart);
 
-                scatterChart.reflow();
-                scatterChart.getViewElements(view);
+                bubbleChart.reflow();
+                bubbleChart.getViewElements(view);
             }
 
             (function() {
-                var series = { data: [[1, 1], [2, 2]], labels: {} },
-                    sparseSeries = { data: [
-                                        [1, 1], [2, 2], undefined, [2, 2], [null, 1], [1, null]
-                                    ], labels: {} },
-                    VALUE_AXIS_MAX = 2,
-                    CATEGORY_AXIS_Y = 2;
+            var series = { data: [{
+                    x: 1, y: 1, size: 1, category: "a",
+                    color: "red"
+                }, {
+                    x: 2, y: 2, size: 20, category: "b"
+                }] };
 
                 function PlotAreaStub() { }
 
@@ -53,339 +53,44 @@
                     namedXAxes: {
                         primary: {
                             getSlot: function(categoryIndex) {
-                                return new Box2D(categoryIndex, CATEGORY_AXIS_Y,
-                                categoryIndex + 1, CATEGORY_AXIS_Y);
+                                return new Box2D(0, 0, categoryIndex + 1, 0);
                             }
                         }
                     },
                     namedYAxes: {
                         primary: {
                             getSlot: function(value) {
-                                var value = typeof value === "undefined" ? 0 : value,
-                                    valueY = VALUE_AXIS_MAX - value,
-                                    slotTop = Math.min(CATEGORY_AXIS_Y, valueY),
-                                    slotBottom = Math.max(CATEGORY_AXIS_Y, valueY);
-
-                                return new Box2D(0, slotTop, 0, slotBottom);
+                                return new Box2D(0, 1, 0, value);
                             },
                             options: {}
                         }
-                    }
-                });
-
-                // ------------------------------------------------------------
-                module("Scatter Chart / Series", {
-                    setup: function() {
-                        plotArea = new PlotAreaStub();
-                        setupScatterChart(plotArea, { series: [ series ] });
-                    }
-                });
-
-                test("Creates points for scatterChart data points", function() {
-                    equal(scatterChart.points.length, series.data.length);
-                });
-
-                test("Reports minimum value for primary X axis", function() {
-                    same(scatterChart.xAxisRanges.primary.min, series.data[0][0]);
-                });
-
-                test("Reports minimum value for primary Y axis", function() {
-                    same(scatterChart.yAxisRanges.primary.min, series.data[0][1]);
-                });
-
-                test("Reports maximum value for primary X axis", function() {
-                    same(scatterChart.xAxisRanges.primary.max, series.data[1][0]);
-                });
-
-                test("Reports maximum value for primary Y axis", function() {
-                    same(scatterChart.yAxisRanges.primary.max, series.data[1][1]);
-                });
-
-                test("points have set width", function() {
-                    $.each(scatterChart.points, function() {
-                        equal(this.box.width(), 1);
-                    });
-                });
-
-                test("points have set height according to value", function() {
-                    var pointHeights = $.map(scatterChart.points, function(point) {
-                        return point.box.height();
-                    });
-
-                    same(pointHeights, [1, 2]);
-                });
-
-                test("sets point owner", function() {
-                    ok(scatterChart.points[0].owner === scatterChart);
-                });
-
-                test("sets point series", function() {
-                    ok(scatterChart.points[0].series === series);
-                });
-
-                test("sets point series index", function() {
-                    ok(scatterChart.points[0].seriesIx === 0);
-                });
-
-                test("sets point dataItem", function() {
-                    equal(typeof scatterChart.points[0].dataItem, "object");
-                });
-
-                test("renders empty scatter line series", function() {
-                    setupScatterChart(plotArea, { series: [ { data: [] } ] });
-                });
-
-                test("renders empty and non-empty scatter line series", function() {
-                    setupScatterChart(plotArea, { series: [ { data: [] }, series ] });
-                });
-
-                // ------------------------------------------------------------
-                module("Scatter Chart / Multiple Axes", {
-                    setup: function() {
-                        plotArea = new PlotAreaStub();
-                        plotArea.namedXAxes.secondary = plotArea.namedXAxes.primary;
-                        plotArea.namedYAxes.secondary = plotArea.namedYAxes.primary;
-
-                        setupScatterChart(plotArea, {
-                            series: [
-                                { xAxis: "primary", yAxis: "primary", data: [[1, 10], [2, 20]] },
-                                { xAxis: "secondary", yAxis: "secondary", data: [[3, 30], [4, 40]] }
-                            ]
-                        });
-                    }
-                });
-
-                test("Reports minimum value for primary X axis", function() {
-                    same(scatterChart.xAxisRanges.primary.min, 1);
-                });
-
-                test("Reports minimum value for primary Y axis", function() {
-                    same(scatterChart.yAxisRanges.primary.min, 10);
-                });
-
-                test("Reports maximum value for primary X axis", function() {
-                    same(scatterChart.xAxisRanges.primary.max, 2);
-                });
-
-                test("Reports maximum value for primary Y axis", function() {
-                    same(scatterChart.yAxisRanges.primary.max, 20);
-                });
-
-                test("Reports minimum value for secondary X axis", function() {
-                    same(scatterChart.xAxisRanges.secondary.min, 3);
-                });
-
-                test("Reports minimum value for secondary Y axis", function() {
-                    same(scatterChart.yAxisRanges.secondary.min, 30);
-                });
-
-                test("Reports maximum value for secondary X axis", function() {
-                    same(scatterChart.xAxisRanges.secondary.max, 4);
-                });
-
-                test("Reports maximum value for secondary Y axis", function() {
-                    same(scatterChart.yAxisRanges.secondary.max, 40);
-                });
-
-                // ------------------------------------------------------------
-                module("Scatter Chart / Missing values", {
-                    setup: function() {
-                        plotArea = new PlotAreaStub();
-                        setupScatterChart(plotArea, {
-                            series: [ sparseSeries ]
-                        });
-                    }
-                });
-
-                test("Reports minimum value for primary X axis", function() {
-                    same(scatterChart.xAxisRanges.primary.min, 1);
-                });
-
-                test("Reports minimum value for primary Y axis", function() {
-                    same(scatterChart.yAxisRanges.primary.min, 1);
-                });
-
-                test("Reports maximum value for primary X axis", function() {
-                    same(scatterChart.xAxisRanges.primary.max, 2);
-                });
-
-                test("Reports maximum value for primary Y axis", function() {
-                    same(scatterChart.yAxisRanges.primary.max, 2);
-                });
-
-                test("omits null points by default", function() {
-                    equals(scatterChart.points[2], null);
-                });
-
-                test("omits null points when interpolating", function() {
-                    setupScatterChart(plotArea, {
-                        series: [
-                            $.extend({ missingValues: "interpolate" }, sparseSeries)
-                        ]
-                    });
-
-                    equals(scatterChart.points[2], null);
-                });
-
-                test("point with missing X value is omitted", function() {
-                    equals(scatterChart.points[5], null);
-                });
-
-                test("point with missing Y value is omitted", function() {
-                    equals(scatterChart.points[6], null);
-                });
-
-                // ------------------------------------------------------------
-                module("Scatter Chart / Rendering", {
-                    setup: function() {
-                        plotArea = new PlotAreaStub();
-                        setupScatterChart(plotArea, { series: [ series ] });
-                    }
-                });
-
-                test("sets group animation", function() {
-                    equals(view.log.group[0].options.animation.type, "clip");
-                });
-
-                // ------------------------------------------------------------
-                module("Scatter Chart / Labels", {
-                    setup: function() {
-                        plotArea = new PlotAreaStub();
-                    }
-                });
-
-                test("applies full label format", function() {
-                    setupScatterChart(plotArea, {
-                        series: [{
-                            data: [[1, 10], [2, 20]],
-                            labels: { visible: true, format: "{0:C} {1:C}" }
-                        }]
-                    });
-
-                    equals(view.log.text[0].content, "$1.00 $10.00");
-                });
-
-            })();
-
-            (function() {
-                var scatterChart,
-                    MARGIN = PADDING = BORDER = 5,
-                    linePoint,
-                    scatterPoint;
-
-                function PlotAreaStub() { }
-
-                $.extend(PlotAreaStub.prototype, {
-                    axisX: {
-                        getSlot: function(value) {
-                            return new Box2D();
-                        }
                     },
-                    axisY: {
-                        getSlot: function(categoryIndex) {
-                            return new Box2D();
-                        }
-                    }
+                    options: {}
                 });
-
-                function createScatterChart(options) {
-                    plotArea = new PlotAreaStub();
-                    scatterChart = new dataviz.ScatterChart(plotArea, {
-                        series: [$.extend({
-                            data: [[0, 0], [1, 1]],
-                            color: "#f00",
-                            markers: {
-                                visible: false,
-                                size: 10,
-                                type: "triangle",
-                                border: {
-                                    width: BORDER
-                                }
-                            },
-                            labels: {
-                                visible: false,
-                                color: "labels-color",
-                                background: "labels-background",
-                                border: {
-                                    color: "labels-border",
-                                    width: BORDER
-                                },
-                                margin: MARGIN,
-                                padding: PADDING
-                            },
-                            opacity: 0.5,
-                            dashType: "dot"
-                        }, options)]
-                    });
-                    scatterPoint = scatterChart.points[0];
-                }
 
                 // ------------------------------------------------------------
-                module("Scatter Chart / Configuration", {
+                module("Bubble Chart / Legend items", {
                     setup: function() {
-                        createScatterChart();
+                        plotArea = new PlotAreaStub();
+                        setupBubbleChart(plotArea, { series: [ series ] });
                     }
                 });
 
-                test("applies visible to point markers", function() {
-                    equal(scatterPoint.options.markers.visible, false);
+                test("returns legend item for each point", function() {
+                    equals(bubbleChart.legendItems().length, 2);
                 });
 
-                test("applies series color to point markers border", function() {
-                    equal(scatterPoint.options.markers.border.color, "#f00");
+                test("sets legend item name to category", function() {
+                    equals(bubbleChart.legendItems()[0].name, "a");
                 });
 
-                test("applies series opacity color to point markers", function() {
-                    equal(scatterPoint.options.markers.opacity, 0.5);
+                test("sets legend item color", function() {
+                    equals(bubbleChart.legendItems()[0].color, "red");
                 });
 
-                test("applies size to point markers", function() {
-                    equal(scatterPoint.options.markers.size, 10);
-                });
-
-                test("applies type to point markers", function() {
-                    equal(scatterPoint.options.markers.type, "triangle");
-                });
-
-                test("applies border color to point markers", function() {
-                    createScatterChart({ markers: { border: { color: "marker-border" } } });
-                    equal(scatterPoint.options.markers.border.color, "marker-border");
-                });
-
-                test("applies border width to point markers.", function() {
-                    equal(scatterPoint.options.markers.border.width, BORDER);
-                });
-
-                test("applies visible to point labels", function() {
-                    equal(scatterPoint.options.labels.visible, false);
-                });
-
-                test("applies color to point labels", function() {
-                    equal(scatterPoint.options.labels.color, "labels-color");
-                });
-
-                test("applies background to point labels", function() {
-                    equal(scatterPoint.options.labels.background, "labels-background");
-                });
-
-                test("applies border color to point labels", function() {
-                    equal(scatterPoint.options.labels.border.color, "labels-border");
-                });
-
-                test("applies border width to point labels", function() {
-                    equal(scatterPoint.options.labels.border.width, BORDER);
-                });
-
-                test("applies padding to point labels", function() {
-                    equal(scatterPoint.options.labels.padding, PADDING);
-                });
-
-                test("applies margin to point labels", function() {
-                    equal(scatterPoint.options.labels.margin, MARGIN);
-                });
-
-                test("applies margin to point labels", function() {
-                    equal(scatterPoint.options.dashType, "dot");
+                test("skips points with visibleInLegend set to false", function() {
+                    bubbleChart.points[1].value.visibleInLegend = false;
+                    equals(bubbleChart.legendItems().length, 1);
                 });
 
             })();
@@ -419,7 +124,7 @@
                 }
 
                 // ------------------------------------------------------------
-                module("Scatter Chart / Data Binding / Data Source", {
+                module("Bubble Chart / Data Binding / Data Source", {
                     teardown: function() {
                         $("#container").empty();
                     }
