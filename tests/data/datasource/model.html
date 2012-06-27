@@ -257,12 +257,12 @@
                 });
 
                 dataSource.read();
-                var model = dataSource.get(0);
+                var model = dataSource.get(1);
                 var removedModel = dataSource.remove(model);
 
                 same(removedModel, model);
                 equal(removedModel.foo, 1);
-                equal(removedModel.id, 0);
+                equal(removedModel.id, 1);
                 equal(dataSource.data()[0].items[0].items.length, 1);
             });
 
@@ -292,13 +292,13 @@
 
                 dataSource.read();
 
-                var model = dataSource.get(0);
+                var model = dataSource.get(1);
 
                 dataSource.remove(model);
 
                 dataSource.cancelChanges();
 
-                ok(dataSource.get(0));
+                ok(dataSource.get(1));
                 equal(dataSource.data()[0].items[0].items.length, 2);
             });
 
@@ -328,13 +328,13 @@
 
                 dataSource.read();
 
-                var model = dataSource.get(0);
+                var model = dataSource.get(1);
 
                 model.set("bar", "boo");
 
                 dataSource.cancelChanges(model);
 
-                equal(dataSource.get(0).get("bar"), "bar");
+                equal(dataSource.get(1).get("bar"), "bar");
                 equal(dataSource.data()[0].items[0].items.length, 2);
             });
         </script>

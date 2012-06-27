@@ -152,11 +152,11 @@
 
     function translateGroup(group) {
        return {
-           value: group.Key,
-           field: group.Member,
-           hasSubgroups: group.HasSubgroups,
-           aggregates: translateAggregate(group.Aggregates),
-           items: group.HasSubgroups ? $.map(group.Items, translateGroup) : group.Items
+           value: group.Key || group.value,
+           field: group.Member || group.field,
+           hasSubgroups: group.HasSubgroups || group.hasSubgroups,
+           aggregates: translateAggregate(group.Aggregates || group.aggregates),
+           items: group.HasSubgroups ? $.map(group.Items || group.items, translateGroup) : (group.Items || group.items)
        };
     }
 

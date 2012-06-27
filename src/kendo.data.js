@@ -1490,14 +1490,18 @@
         }
     }
 
-    function mapGroupItems(data, func) {
+    function eachGroupItems(data, func) {
         var idx, length;
 
         for (idx = 0, length = data.length; idx < length; idx++) {
             if (data[idx].hasSubgroups) {
-                return mapGroupItems(data[idx].items, func);
+                if (eachGroupItems(data[idx].items, func)) {
+                    return true;
+                }
             } else {
-                return func(data[idx].items, data[idx]);
+                if (func(data[idx].items, data[idx])) {
+                    return true;
+                }
             }
         }
     }
@@ -1526,7 +1530,8 @@
                 value: model.get(group.field),
                 field: group.field,
                 items: parent ? [parent] : [model],
-                hasSubgroups: !!parent
+                hasSubgroups: !!parent,
+                aggregates: {}
             };
         }
 
@@ -1708,6 +1713,7 @@
                 models = result.models,
                 response = result.response,
                 idx = 0,
+                serverGroup = that.options.serverGrouping && that.group() && that.group().length,
                 pristine = that.reader.data(that._pristine),
                 type = result.type,
                 length;
@@ -1737,12 +1743,20 @@
                     models[idx].accept(response[idx]);
 
                     if (type === "create") {
-                        pristine.push(models[idx]);
+                        pristine.push(serverGroup ? wrapInEmptyGroup(that.group(), models[idx]) : models[idx]);
                     } else if (type === "update") {
-                        extend(pristine[that._pristineIndex(models[idx])], response[idx]);
+                        if (serverGroup) {
+                            that._updatePristineGroupModel(models[idx], response[idx]);
+                        } else {
+                            extend(pristine[that._pristineIndex(models[idx])], response[idx]);
+                        }
                     }
                 } else {
-                    pristine.splice(that._pristineIndex(models[idx]), 1);
+                    if (serverGroup) {
+                        that._removePristineGroupModel(models[idx]);
+                    } else {
+                        pristine.splice(that._pristineIndex(models[idx]), 1);
+                    }
                 }
             }
         },
@@ -1761,6 +1775,33 @@
             return -1;
         },
 
+        _updatePristineGroupModel: function(model, values) {
+            var pristineData = this.reader.groups(this._pristine),
+                index;
+
+            eachGroupItems(pristineData,
+                function(items, group) {
+                    index = indexOfPristineModel(items, model);
+                    if (index > -1) {
+                        extend(true, items[index], values);
+                        return true;
+                    }
+                });
+        },
+
+        _removePristineGroupModel: function(model) {
+            var pristineData = this.reader.groups(this._pristine),
+                index;
+
+            eachGroupItems(pristineData,
+                function(items, group) {
+                    index = indexOfPristineModel(items, model);
+                    if (index > -1) {
+                        items.splice(index, 1);
+                        return true;
+                    }
+                });
+        },
         _promise: function(data, models, type) {
             var that = this,
             transport = that.transport;
@@ -1875,18 +1916,21 @@
         _cancelGroupModel: function(model) {
             var pristineData = this.reader.groups(this._pristine),
                 pristine,
-                idx,
-                index = mapGroupItems(pristineData,
-                    function(items, group) {
-                        idx = indexOfPristineModel(items, model);
-                        pristine = items[idx];
-                        return idx;
-                    });
+                idx;
 
-            if (index !== -1) {
-                mapGroupItems(this._data, function(items, group) {
+            eachGroupItems(pristineData,
+                function(items, group) {
+                    idx = indexOfPristineModel(items, model);
+                    if (idx > -1) {
+                        pristine = items[idx];
+                        return true;
+                    }
+                });
+
+            if (idx > -1) {
+                eachGroupItems(this._data, function(items, group) {
                     idx = indexOfModel(items, model);
-                    if (idx !== -1) {
+                    if (idx > -1) {
                         if (!model.isNew()) {
                             extend(true, items[idx], pristine);
                         } else {
@@ -1952,9 +1996,15 @@
         },
 
         _removeGroupItem: function(data, model) {
-            return mapGroupItems(data, function(items, group) {
-               return removeModel(items, model);
+            var result;
+
+            eachGroupItems(data, function(items, group) {
+                result = removeModel(items, model);
+                if (result) {
+                    return true;
+                }
             });
+            return model;
         },
 
         error: function(xhr, status, errorThrown) {
@@ -2033,12 +2083,6 @@
 
             if (that.group() && that.group().length && that.options.serverGrouping) {
                 wrapGroupItems(data, model);
-                mapGroupItems(data, function(items) {
-                    if (model && items.length && !(items[0] instanceof model)) {
-                        items.type = model;
-                        items.wrapAll(items, items);
-                    }
-                });
             }
 
             return data.bind(CHANGE, proxy(that._change, that));

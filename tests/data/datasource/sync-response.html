@@ -543,6 +543,65 @@
 
                 dataSource.sync();
             });
+
+            test("sync updates the pristine data with server grouping", 4, function() {
+                dataSource = new DataSource({
+                    schema: {
+                        model: { id: "id" },
+                        total: function() {
+                            return 1;
+                        }
+                    },
+                    batch: true,
+                    serverGrouping: true,
+                    group: { field: "foo" }
+                });
+
+                stubTransport("update", [{ foo: "moo" }]);
+                stubTransport("read", [{ items: [{ foo: 1, id: 0}, { foo: 2, id: 1}], field: "foo", value: "bar" },
+                    { items: [{ foo: 3, id: 2}, { foo: 4, id: 3}], field: "foo", value: "baz" }]);
+
+                dataSource.read();
+
+                dataSource.get(0).set("foo", "moo");
+
+                dataSource.sync();
+                equal(dataSource._pristine[0].items[0].foo, "moo");
+                equal(dataSource._pristine[0].items[1].foo, 2);
+                equal(dataSource._pristine[1].items[0].foo, 3);
+                equal(dataSource._pristine[1].items[1].foo, 4);
+            });
+
+            test("sync update the pristine data with created items if server grouping", 6, function() {
+                dataSource = new DataSource({
+                    schema: {
+                        model: { id: "id" },
+                        total: function() {
+                            return 1;
+                        }
+                    },
+                    batch: true,
+                    serverGrouping: true,
+                    group: { field: "foo" }
+                });
+
+                stubTransport("create", [{ foo: "moo" }]);
+                stubTransport("read", [{ items: [{ foo: 1, id: 0}, { foo: 2, id: 1}], field: "foo", value: "bar" },
+                    { items: [{ foo: 3, id: 2}, { foo: 4, id: 3}], field: "foo", value: "baz" }]);
+
+                dataSource.read();
+
+                dataSource.add({});
+
+                dataSource.sync();
+                equal(dataSource.data().length, 3);
+
+                equal(dataSource._pristine[0].items[0].foo, 1);
+                equal(dataSource._pristine[0].items[1].foo, 2);
+                equal(dataSource._pristine[1].items[0].foo, 3);
+                equal(dataSource._pristine[1].items[1].foo, 4);
+                equal(dataSource._pristine[2].items[0].foo, "moo");
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

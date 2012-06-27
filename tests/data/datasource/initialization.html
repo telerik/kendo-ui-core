@@ -311,7 +311,7 @@
                             model: MyModel,
                             groups: function(data) {
                                 return [{
-                                    items: [{ foo: 1 }],
+                                    items: [{ foo: 1 },{ foo: 2 }],
                                     field: "foo",
                                     value: "bar"
                                 }];
@@ -327,6 +327,7 @@
                 dataSource.read();
 
                 ok(dataSource.data()[0].items[0] instanceof MyModel);
+                ok(dataSource.data()[0].items[1] instanceof MyModel);
             });
 
             test("Nested group items are converted to the model type when server grouping is enabled", function() {
