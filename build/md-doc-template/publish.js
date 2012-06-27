@@ -27,7 +27,7 @@ function processDefinitionLists(content) {
 
             var data = definition[3].trim();
 
-            result += "\n\n##### " + title + "\n\n" + data;
+            result += "\n\n#### " + title + "\n\n" + data;
         }
 
         return result;
