@@ -3792,25 +3792,12 @@
                 i,
                 currentSeries;
 
-            for (i = 0; i < count; i++) {
-                currentSeries = series[i];
-                if (currentSeries.visibleInLegend !== false) {
-                    // TODO: Move legend item generation to each individual series
-                    if (currentSeries.type === BUBBLE) {
-                        var points = chart.points,
-                        pointsLength = points.length,
-                        currentPoint;
-
-                        for (i = 0; i < pointsLength; i++) {
-                            currentPoint = points[i];
-                            if (currentPoint && currentPoint.value.visibleInLegend !== false) {
-                                data.push({
-                                    name: currentPoint.value.category,
-                                    color: currentPoint.options.color
-                                });
-                            }
-                        }
-                    } else {
+            if (chart.legendItems) {
+                data = chart.legendItems();
+            } else {
+                for (i = 0; i < count; i++) {
+                    currentSeries = series[i];
+                    if (currentSeries.visibleInLegend !== false) {
                         data.push({ name: currentSeries.name || "", color: currentSeries.color });
                     }
                 }
