@@ -5164,33 +5164,31 @@
             fieldsLength = fields.length,
             fieldName,
             sourceFieldName,
-            sourceField,
-            fieldValue;
+            sourceField;
 
-        if (isArray(data)) {
-            value = {};
-            for (i = 0; i < fieldsLength; i++) {
-                fieldValue = data[i];
-                if (defined(fieldValue)) {
-                    value[fields[i]] = fieldValue;
+            if (defined(data))
+            {
+                if (isArray(data)) {
+                    value = {};
+                    fieldsLength = math.min(fieldsLength, data.length);
+                    for (i = 0; i < fieldsLength; i++) {
+                        value[fields[i]] = data[i];
+                    }
+                } else if (typeof data !== "object") {
+                    value = { value: data };
+                }
+            } else if (series.dataItems) {
+                for (i = 0; i < fieldsLength; i++) {
+                    fieldName = fields[i];
+                    sourceFieldName = fieldName === "value" ? "field" : fieldName + "Field";
+                    sourceField = series[sourceFieldName];
+
+                    currentDataItem = dataItems[pointIx];
+                    if (sourceField && currentDataItem) {
+                        value[fieldName] = getField(sourceField, currentDataItem);
+                    }
                 }
             }
-        } else if (defined(data) && typeof data !== "object") {
-            value = { value: data };
-        }
-
-        if (!defined(data) && series.dataItems) {
-            for (i = 0; i < fieldsLength; i++) {
-                fieldName = fields[i];
-                sourceFieldName = fieldName === "value" ? "field" : fieldName + "Field";
-                sourceField = series[sourceFieldName];
-
-                currentDataItem = dataItems[pointIx];
-                if (sourceField && currentDataItem) {
-                    value[fieldName] = getField(sourceField, currentDataItem);
-                }
-            }
-        }
 
         return value;
     }
@@ -5236,6 +5234,7 @@
         ceilDate: ceilDate,
         duration: duration,
         floorDate: floorDate,
+        pointData: pointData,
         toDate: toDate
     });
 

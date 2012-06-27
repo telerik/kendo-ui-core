@@ -527,6 +527,66 @@
                 });
 
             })();
+
+            (function() {
+                var pointData = kendo.dataviz.pointData;
+                var series;
+
+                // ------------------------------------------------------------
+                module("Data Binding / Helpers / pointData", {
+                    setup: function() {
+                        series = {};
+                    }
+                });
+
+                test("sets value field from string", function() {
+                    series.data = ["abc"];
+                    same(pointData(series, 0, ["value"]), { value: "abc" });
+                });
+
+                test("sets value field from number", function() {
+                    series.data = [1];
+                    same(pointData(series, 0, ["value"]), { value: 1 });
+                });
+
+                test("returns empty object when value is undefined", function() {
+                    series.data = [undefined];
+                    same(pointData(series, 0, ["value"]), {});
+                });
+
+                test("returns empty object when value is null", function() {
+                    series.data = [null];
+                    same(pointData(series, 0, ["value"]), {});
+                });
+
+                test("maps array elements to fields", function() {
+                    series.data = [[1, "red"]];
+                    same(pointData(series, 0, ["value", "color"]),
+                        { value: 1, color: "red"});
+                });
+
+                test("extra fields are ignored", function() {
+                    series.data = [[1, "red"]];
+                    same(pointData(series, 0, ["value", "color", "category"]),
+                        { value: 1, color: "red"});
+                });
+
+                test("binds specified field to dataItem", function() {
+                    series.aField = "aValue";
+                    series.data = [undefined];
+                    series.dataItems = [{ aValue: 1 }];
+
+                    same(pointData(series, 0, ["a"]), { a: 1 });
+                });
+
+                test("binds value to dataItem using field name", function() {
+                    series.field = "aValue";
+                    series.data = [undefined];
+                    series.dataItems = [{ aValue: 1 }];
+
+                    same(pointData(series, 0, ["value"]), { value: 1 });
+                });
+            })();
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>
