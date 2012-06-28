@@ -147,7 +147,7 @@ function outputDescription(description) {
             break;
 
             case "section":
-                output += "\n\n" + toMarkdown(tag.desc);
+                output += "\n\n" + toMarkdown(tag.desc).replace(/^ +/mg, "");
             break;
 
             default:
