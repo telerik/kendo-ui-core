@@ -1581,7 +1581,7 @@
         formatValue: function(format) {
             var point = this;
 
-            return point.owner.formatPointValue(point.value, format);
+            return point.owner.formatPointValue(point, format);
         }
     });
     deepExtend(Bar.fn, PointEventsMixin);
@@ -1755,8 +1755,8 @@
             return [];
         },
 
-        formatPointValue: function(value, format) {
-            return autoFormat(format, value);
+        formatPointValue: function(point, format) {
+            return autoFormat(format, point.value);
         }
     });
 
@@ -2209,7 +2209,7 @@
         formatValue: function(format) {
             var point = this;
 
-            return point.owner.formatPointValue(point.value, format);
+            return point.owner.formatPointValue(point, format);
         }
     });
     deepExtend(LinePoint.fn, PointEventsMixin);
@@ -2781,7 +2781,8 @@
             return [];
         },
 
-        formatPointValue: function(value, format) {
+        formatPointValue: function(point, format) {
+            var value = point.value;
             return autoFormat(format, value.x, value.y);
         }
     });
@@ -2930,8 +2931,9 @@
             return ChartElement.fn.getViewElements.call(chart, view);
         },
 
-        formatPointValue: function(value, format) {
-            return autoFormat(format, value.x, value.y, value.size, value.category);
+        formatPointValue: function(point, format) {
+            var value = point.value;
+            return autoFormat(format, value.x, value.y, value.size, point.category);
         }
     });
 
@@ -3149,7 +3151,7 @@
         formatValue: function(format) {
             var point = this;
 
-            return point.owner.formatPointValue(point.value, format);
+            return point.owner.formatPointValue(point, format);
         }
     });
     deepExtend(PieSegment.fn, PointEventsMixin);
@@ -3636,8 +3638,8 @@
             return sqr(c.x - point.x) + sqr(c.y - point.y) < sqr(r);
         },
 
-        formatPointValue: function(value, format) {
-            return autoFormat(format, value);
+        formatPointValue: function(point, format) {
+            return autoFormat(format, point.value);
         },
 
         animationDelay: function(categoryIndex, seriesIndex, seriesCount) {

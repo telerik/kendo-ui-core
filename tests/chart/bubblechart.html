@@ -41,7 +41,7 @@
 
             (function() {
                 var series = { data: [{
-                    x: 1, y: 1, size: 1, category: "a",
+                    x: 1, y: 10, size: 100, category: "a",
                     color: "red"
                 }, {
                     x: 2, y: 2, size: 20, category: "b"
@@ -72,6 +72,7 @@
                 module("Bubble Chart / Points", {
                     setup: function() {
                         plotArea = new PlotAreaStub();
+                        setupBubbleChart(plotArea, { series: [ series ] });
                     }
                 });
 
@@ -93,6 +94,22 @@
                     });
 
                     equals(bubbleChart.points[0].color, "red");
+                });
+
+                test("format variable {0} returns x", function() {
+                    equals(bubbleChart.points[0].formatValue("{0}"), 1);
+                });
+
+                test("format variable {1} returns y", function() {
+                    equals(bubbleChart.points[0].formatValue("{1}"), 10);
+                });
+
+                test("format variable {2} returns size", function() {
+                    equals(bubbleChart.points[0].formatValue("{2}"), 100);
+                });
+
+                test("format variable {3} returns category", function() {
+                    equals(bubbleChart.points[0].formatValue("{3}"), "a");
                 });
 
                 // ------------------------------------------------------------
