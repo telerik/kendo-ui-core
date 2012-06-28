@@ -323,12 +323,11 @@
                 color = that.rgb2hsl(that.colorValue);
 
             hsl.h = color.h;
-            console.log(hsl.h, hsl.s, hsl.l);
             if (isNaN(value)) {
                 return round(hsl[type]);
             }
 
-            hsl[type] = clampValue(value, 1, clamps[type]-1);
+            hsl[type] = clampValue(value, 0, clamps[type]);
             that.value = that.hsl2rgb(hsl);
 
             if (type == "h") {

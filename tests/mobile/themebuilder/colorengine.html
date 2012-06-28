@@ -241,8 +241,8 @@
             test("hue method changes the color hue", 2, function () {
                 var color = new Color("#334455");
 
-                ok(color.hue(0).toHex() == "#533");
-                ok(color.hue(180).toHex() == "#355");
+                ok(color.hue(0).toHex() == "#563434");
+                ok(color.hue(180).toHex() == "#345656");
             });
 
             test("saturation method returns the saturation if without arguments", 1, function () {
@@ -254,8 +254,8 @@
             test("saturation method saturates/desaturates the color", 2, function () {
                 var color = new Color("#334455");
 
-                ok(color.saturation(100).toHex() == "#048");
-                ok(color.saturation(0).toHex() == "#444");
+                ok(color.saturation(100).toHex() == "#00458a");
+                ok(color.saturation(0).toHex() == "#454545");
             });
 
             test("lightness method returns the lightness if without arguments", 1, function () {
