@@ -67,23 +67,25 @@ function processClass(theClass) {
     html += "# " + theClass.alias;
 
     if (description) {
-        html += "\n\n## Description" +
-        "\n\n" + outputDescription(description.comment).replace(/\r/g, "\n");
+        description = outputDescription(description.comment).replace(/\r/g, "\n");
+        if (description.trim().length) {
+            html += "\n\n## Description" + "\n\n" + description;
+        }
     }
 
     var configuration = processDefinitionLists(outputConfiguration(theClass).replace(/\r/g, "\n"));
     var methods = processDefinitionLists(outputMethods(theClass).replace(/\r/g, "\n"));
     var events = processDefinitionLists(outputEvents(theClass).replace(/\r/g, "\n"));
 
-    if (configuration.trim().length > 0) {
+    if (configuration.trim().length) {
         html += "\n\n## Configuration" + configuration;
     }
 
-    if (methods.trim().length > 0) {
+    if (methods.trim().length) {
         html += "\n\n## Methods" + methods;
     }
 
-    if (events.trim().length > 0) {
+    if (events.trim().length) {
         html += "\n\n## Events" + events;
     }
 
