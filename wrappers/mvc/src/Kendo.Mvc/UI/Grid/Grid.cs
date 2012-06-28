@@ -159,7 +159,7 @@ namespace Kendo.Mvc.UI
         }
 
         //TODO: Implement command button types
-        private object Button<TButton>(T dataItem/*, GridButtonType buttonType*/, object htmlAttributes, object imageHtmlAttributes)
+        private object Button<TButton>(T dataItem/*, GridButtonType buttonType*/, object htmlAttributes, object imageHtmlAttributes, string text)
             where TButton : GridActionCommandBase, new()
         {
             var command = new TButton();
@@ -167,9 +167,39 @@ namespace Kendo.Mvc.UI
             //command.ButtonType = buttonType;
             command.ButtonType = GridButtonType.ImageAndText;
 
+            if (text.HasValue())
+            {
+                command.Text = text;
+            }
+            
             //TODO: Implement command button html attributes
             //command.HtmlAttributes = htmlAttributes.ToDictionary();
             //command.ImageHtmlAttributes = imageHtmlAttributes.ToDictionary();
+
+            var buttons = command.CreateDisplayButtons(UrlBuilder, new GridHtmlHelper<T>(ViewContext, DataKeyStore));
+
+            var fragment = new HtmlFragment();
+
+            buttons.Each(button => button.Create(dataItem).AppendTo(fragment));
+
+            return MvcHtmlString.Create(fragment.ToString());
+        }
+
+        private object SaveButton(T dataItem/*, object htmlAttributes, object imageHtmlAttributes*/, string saveText, string cancelText)
+        {
+            var command = new GridToolBarSaveCommand<T>();
+            
+            command.ButtonType = GridButtonType.ImageAndText;
+
+            if (saveText.HasValue())
+            {
+                command.SaveText = saveText;
+            }
+
+            if (cancelText.HasValue())
+            {
+                command.CancelText = cancelText;
+            }            
 
             var buttons = command.CreateDisplayButtons(UrlBuilder, new GridHtmlHelper<T>(ViewContext, DataKeyStore));
 
@@ -323,16 +353,21 @@ namespace Kendo.Mvc.UI
             return CustomCommandToolBarButton(name, text, null);
         }
 
-        //TODO: Implement command button types
-        public object EditButton(T dataItem/*, GridButtonType buttonType*/, object htmlAttributes, object imageHtmlAttributes)
+        private object EditButton(T dataItem/*, GridButtonType buttonType*/, object htmlAttributes, object imageHtmlAttributes)
         {
-            Editable.Enabled = true;
-
-            return Button<GridEditActionCommand>(dataItem/*, buttonType*/, htmlAttributes, imageHtmlAttributes);
+            return EditButton(dataItem, htmlAttributes, imageHtmlAttributes);
         }
 
         //TODO: Implement command button types
-        public object EditButton(T dataItem/*, GridButtonType buttonType*/, object htmlAttributes)
+        private object EditButton(T dataItem/*, GridButtonType buttonType*/, object htmlAttributes, object imageHtmlAttributes, string text)
+        {
+            Editable.Enabled = true;
+
+            return Button<GridEditActionCommand>(dataItem/*, buttonType*/, htmlAttributes, imageHtmlAttributes, text);
+        }
+
+        //TODO: Implement command button types
+        private object EditButton(T dataItem/*, GridButtonType buttonType*/, object htmlAttributes)
         {
             return EditButton(dataItem/*, buttonType*/, htmlAttributes, null);
         }
@@ -343,20 +378,30 @@ namespace Kendo.Mvc.UI
             return EditButton(dataItem/*, buttonType*/, null);
         }
 
+        public object EditButton(T dataItem, string text)
+        {
+            return EditButton(dataItem/*, buttonType*/, null, null, text);
+        }
+
         //TODO: Implement command button types
         //public object EditButton(T dataItem)
         //{
         //    return EditButton(dataItem, GridButtonType.ImageAndText);
         //}
 
-        //TODO: Implement command button types
-        public object DestroyButton(T dataItem/*, GridButtonType buttonType*/, object htmlAttributes, object imageHtmlAttributes)
+        private object DestroyButton(T dataItem/*, GridButtonType buttonType*/, object htmlAttributes, object imageHtmlAttributes)
         {
-            Editable.Enabled = true;
-            return Button<GridDestroyActionCommand>(dataItem/*, buttonType*/, htmlAttributes, imageHtmlAttributes);
+            return DestroyButton(dataItem, htmlAttributes, imageHtmlAttributes, null);
         }
 
-        public object DestroyButton(T dataItem/*, GridButtonType buttonType*/, object htmlAttributes)
+        //TODO: Implement command button types
+        private object DestroyButton(T dataItem/*, GridButtonType buttonType*/, object htmlAttributes, object imageHtmlAttributes, string text)
+        {
+            Editable.Enabled = true;
+            return Button<GridDestroyActionCommand>(dataItem/*, buttonType*/, htmlAttributes, imageHtmlAttributes, text);
+        }
+
+        private object DestroyButton(T dataItem/*, GridButtonType buttonType*/, object htmlAttributes)
         {
             return DestroyButton(dataItem/*, buttonType*/, htmlAttributes, null);
         }
@@ -366,20 +411,30 @@ namespace Kendo.Mvc.UI
             return DestroyButton(dataItem/*, buttonType*/, null);
         }
 
+        public object DestroyButton(T dataItem, string text)
+        {
+            return DestroyButton(dataItem, null, null, text);
+        }
+
         //TODO: Implement command button types
         //public object DeleteButton(T dataItem)
         //{
         //    return DeleteButton(dataItem, GridButtonType.ImageAndText);
         //}
 
-        public object CreateButton(/*GridButtonType buttonType,*/ object htmlAttributes, object imageHtmlAttributes)
+        private object CreateButton(object htmlAttributes, object imageHtmlAttributes)
+        {
+            return CreateButton(htmlAttributes, imageHtmlAttributes, null);
+        }
+
+        private object CreateButton(/*GridButtonType buttonType,*/ object htmlAttributes, object imageHtmlAttributes, string text)
         {
             Editable.Enabled = true;
             InitializeEditors();
-            return Button<GridToolBarCreateCommand<T>>(null/*, buttonType*/, htmlAttributes, imageHtmlAttributes);
+            return Button<GridToolBarCreateCommand<T>>(null/*, buttonType*/, htmlAttributes, imageHtmlAttributes, text);
         }
 
-        public object CreateButton(/*GridButtonType buttonType,*/ object htmlAttributes)
+        private object CreateButton(/*GridButtonType buttonType,*/ object htmlAttributes)
         {
             return CreateButton(/*buttonType,*/ htmlAttributes, null);
         }
@@ -389,26 +444,41 @@ namespace Kendo.Mvc.UI
             return CreateButton(/*buttonType,*/ null);
         }
 
+        public object CreateButton(string text)
+        {
+            return CreateButton(null, null, text);
+        }
+
         //public object InsertButton()
         //{
         //    return InsertButton(GridButtonType.ImageAndText);
         //}
 
-        public object SaveButton(/*GridButtonType buttonType,*/ object htmlAttributes, object imageHtmlAttributes)
+        private object SaveButton(/*GridButtonType buttonType,*/ object htmlAttributes, object imageHtmlAttributes)
+        {
+            return SaveButton(htmlAttributes, imageHtmlAttributes, null, null);
+        }
+
+        private object SaveButton(/*GridButtonType buttonType,*/ object htmlAttributes, object imageHtmlAttributes, string saveText, string cancelText)
         {
             Editable.Enabled = true;
             InitializeEditors();
-            return Button<GridToolBarSaveCommand<T>>(null/*, buttonType*/, htmlAttributes, imageHtmlAttributes);
+            return SaveButton(null/*, buttonType*//*, htmlAttributes, imageHtmlAttributes*/, saveText, cancelText);
         }
 
-        public object SaveButton(/*GridButtonType buttonType,*/ object htmlAttributes)
+        private object SaveButton(/*GridButtonType buttonType,*/ object htmlAttributes)
         {
             return SaveButton(/*buttonType,*/ htmlAttributes, null);
         }
 
+        public object SaveButton(string saveText, string cancelText)
+        {
+            return SaveButton(null, null, saveText, cancelText);
+        }
+
         public object SaveButton(/*GridButtonType buttonType*/)
         {
-            return SaveButton(/*buttonType,*/ null);
+            return SaveButton(/*buttonType,*/ null, null);
         }
 
         //public object SubmitChangesButton()
