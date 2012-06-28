@@ -209,7 +209,7 @@
 
     kendo.data.transports["aspnetmvc-ajax"] = kendo.data.RemoteTransport.extend({
         init: function(options) {
-            kendo.data.RemoteTransport.fn.init.call(this, $.extend(true, {}, options, this.options));
+            kendo.data.RemoteTransport.fn.init.call(this, $.extend(true, {}, this.options, options));
         },
         read: function(options) {
             var data = this.options.data,

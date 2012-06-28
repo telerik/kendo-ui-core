@@ -9,7 +9,7 @@ namespace Kendo.Mvc
     /// </summary>
     public class SortDescriptor : JsonObject, IDescriptor
     {
-        public SortDescriptor() : this(string.Empty, ListSortDirection.Ascending)
+        public SortDescriptor() : this(null, ListSortDirection.Ascending)
         {
 
         }

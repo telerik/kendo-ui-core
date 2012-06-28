@@ -112,6 +112,12 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        public CrudOperationBuilder Type(HttpVerbs verb)
+        {
+            operation.Type = verb.ToString().ToUpperInvariant();
+            return this;
+        }
+
         private void SetUrl()
         {
             operation.Url = operation.GenerateUrl(viewContext, urlGenerator);

@@ -300,7 +300,11 @@ namespace Kendo.Mvc.UI
         {
             if (!string.IsNullOrEmpty(DataSource.Transport.Read.Url))
             {
-                DataSource.Transport.Read.Type = "POST";
+                if (!DataSource.Transport.Read.Type.HasValue())
+                {
+                    DataSource.Transport.Read.Type = "POST";
+                }                
+
                 options.Add("dataSource", DataSource.ToJson());
             }
             else if (Data != null)
