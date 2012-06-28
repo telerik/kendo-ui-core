@@ -94,18 +94,40 @@ namespace Kendo.Mvc.UI
         {
             var options = new Dictionary<string, object>(Events);           
 
-            options["tools"] = DefaultToolGroup.Tools.Select<IEditorTool, object>(tool =>
+            options["tools"] = DefaultToolGroup.Tools.Select(tool =>
             {
+                var customButtonTool = tool as EditorCustomButtonTool;
+                var customTemplateTool = tool as EditorCustomTemplateTool;
                 var listTool = tool as EditorListTool;
-                if (tool.Name != "insertHtml" && tool.Name != "style" && listTool != null && listTool.Items != null && listTool.Items.Count > 0)
+
+                if (customButtonTool != null)
+                {
+                    return new Dictionary<string, object>() {
+                        { "name", customButtonTool.Name},
+                        { "tooltip", (!string.IsNullOrEmpty(customButtonTool.ToolTip) ? customButtonTool.ToolTip : customButtonTool.Name) },
+                        { "exec", customButtonTool.Exec }
+                    };                    
+                }
+                else if (customTemplateTool != null)
+                {
+                    return new Dictionary<string, object>() {
+                        { "template", customTemplateTool.Template }
+                    };
+                }
+                else if (tool.Name != "insertHtml" && tool.Name != "style" && listTool != null && listTool.Items != null && listTool.Items.Count > 0)
                 {
                     var listToolItems = listTool.Items.Select(item => new { text = item.Text, value = item.Value });
 
-                    return new { name = listTool.Name, items = listToolItems };
+                    return new Dictionary<string, object>() {
+                        { "name", listTool.Name}, 
+                        { "items", listToolItems }
+                    };                    
                 }
                 else
                 {
-                    return tool.Name;
+                    return new Dictionary<string, object>() {
+                        { "name", tool.Name }
+                    };                    
                 }
             });
 

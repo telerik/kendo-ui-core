@@ -104,6 +104,10 @@
                                     options.template = EditorUtils.buttonTemplate;
                                 }
                             }
+
+                            //if (options.exec && typeof(options.exec) == "string") {
+                            //    options.exec = $.parseJSON('{"exec":' + '"' + options.exec + '"}').exec;
+                            //}
                         }
                     } else if (editor.tools[currentTool]) {
                         editorTools[currentTool] = editor.tools[currentTool];
@@ -419,7 +423,7 @@
                 var tool = $.grep(element.className.split(" "), function (x) {
                     return !/^k-(widget|tool-icon|state-hover|header|combobox|dropdown|selectbox|colorpicker)$/i.test(x);
                 });
-                return tool[0] ? tool[0].substring(2) : "custom";
+                return tool[0] ? tool[0].substring(tool[0].lastIndexOf("-") + 1) : "custom";
             }
 
             function appendShortcutSequence(localizedText, tool) {
@@ -3798,7 +3802,7 @@ var StyleTool = Tool.extend({
                     text = item.text(),
                 
                     style = dom.inlineStyle(editor.document, "span", {className : classes[idx].value});
-                item.html('<span unselectable="on" style="display:block;' + style +'">' + text + '</span>')
+                item.html('<span unselectable="on" style="display:block;' + style +'">' + text + '</span>');
             });
         }, 500); // itemCreate event
     }

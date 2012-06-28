@@ -13,16 +13,23 @@ namespace Kendo.Mvc.UI.Fluent
             this.group = group;
         }
 
-        /*TODO :Custom tools
-        public EditorToolFactory Custom(Action<EditorCustomToolBuilder> configurator)
+        public EditorToolFactory CustomTemplate(Action<EditorCustomTemplateToolBuilder> configurator)
         {
-            var tool = new EditorCustomTool();
-            configurator(new EditorCustomToolBuilder(tool));
+            var tool = new EditorCustomTemplateTool();
+            configurator(new EditorCustomTemplateToolBuilder(tool));
             group.Tools.Add(tool);
             
             return this;
         }
-        */
+
+        public EditorToolFactory CustomButton(Action<EditorCustomButtonToolBuilder> configurator)
+        {
+            var tool = new EditorCustomButtonTool();
+            configurator(new EditorCustomButtonToolBuilder(tool));
+            group.Tools.Add(tool);
+
+            return this;
+        }
 
         public EditorToolFactory Clear()
         {

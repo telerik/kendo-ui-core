@@ -2,26 +2,32 @@ namespace Kendo.Mvc.UI
 {
     using System.Collections.Generic;
 
-    public class EditorCustomTool : IEditorTool
+    public class EditorCustomTemplateTool : IEditorTool
     {
-        public EditorCustomTool()
+        public EditorCustomTemplateTool()
         {
-            HtmlAttributes = new Dictionary<string, object>();
-            Template = new HtmlTemplate();
-        }
-
-        public HtmlTemplate Template
-        {
-            get;
-            private set;
-        }
-
-        public IDictionary<string, object> HtmlAttributes
-        {
-            get;
-            private set;
         }
 
         public string Name { get; set; }
+        public string Template { get; set; }
+    }
+
+    public class EditorCustomButtonTool : IEditorTool
+    {
+        public EditorCustomButtonTool()
+        {
+            Exec = new ClientEvent();
+            //HtmlAttributes = new Dictionary<string, object>();
+        }
+
+        //public IDictionary<string, object> HtmlAttributes
+        //{
+        //    get;
+        //    private set;
+        //}
+
+        public string Name { get; set; }
+        public string ToolTip { get; set; }
+        public ClientEvent Exec { get; set; }
     }
 }

@@ -4,42 +4,67 @@ namespace Kendo.Mvc.UI.Fluent
     using System.Collections.Generic;
     using Kendo.Mvc.Extensions;
     
-    public class EditorCustomToolBuilder : IHideObjectMembers
+    public class EditorCustomTemplateToolBuilder : IHideObjectMembers
     {
-        private readonly EditorCustomTool tool;
+        private readonly EditorCustomTemplateTool tool;
 
-        public EditorCustomToolBuilder(EditorCustomTool tool)
+        public EditorCustomTemplateToolBuilder(EditorCustomTemplateTool tool)
         {
             this.tool = tool;
         }
 
-        public EditorCustomToolBuilder HtmlAttributes(object attributes)
+        public EditorCustomTemplateToolBuilder Template(string value)
         {
-            return HtmlAttributes(attributes.ToDictionary());
-        }
-
-        public EditorCustomToolBuilder HtmlAttributes(IDictionary<string, object> attributes)
-        {
-            tool.HtmlAttributes.Merge(attributes);
-            return this;
-        }
-
-        public EditorCustomToolBuilder Template(Action template)
-        {
-            tool.Template.Content = template;
-            return this;
-        }
-
-        public EditorCustomToolBuilder Template(Func<object, object> template)
-        {
-            tool.Template.InlineTemplate = template;
-            return this;
-        }
-
-        public EditorCustomToolBuilder Html(string value)
-        {
-            tool.Template.Html = value;
+            tool.Template = "<li class='k-editor-template'>" + value + "</li>";
             return this;
         }
     }
+
+    public class EditorCustomButtonToolBuilder : IHideObjectMembers
+    {
+        private readonly EditorCustomButtonTool tool;
+
+        public EditorCustomButtonToolBuilder(EditorCustomButtonTool tool)
+        {
+            this.tool = tool;
+        }
+
+        //public EditorCustomButtonToolBuilder HtmlAttributes(object attributes)
+        //{
+        //    return HtmlAttributes(attributes.ToDictionary());
+        //}
+
+        //public EditorCustomButtonToolBuilder HtmlAttributes(IDictionary<string, object> attributes)
+        //{
+        //    tool.HtmlAttributes.Merge(attributes);
+        //    return this;
+        //}
+
+        public EditorCustomButtonToolBuilder Name(string value)
+        {
+            tool.Name = value;
+            return this;
+        }
+
+        public EditorCustomButtonToolBuilder Exec(Func<object, object> handler)
+        {
+            tool.Exec.InlineCodeBlock = handler;
+
+            return this;
+        }
+
+        public EditorCustomButtonToolBuilder Exec(string handler)
+        {
+            tool.Exec.HandlerName = handler;
+
+            return this;
+        }
+
+        public EditorCustomButtonToolBuilder ToolTip(string value)
+        {
+            tool.ToolTip = value;
+            return this;
+        }
+    }
+
 }
