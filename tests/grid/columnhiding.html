@@ -13,9 +13,10 @@
         <script src="../../src/kendo.draganddrop.js"></script>
         <script src="../../src/kendo.reorderable.js"></script>
         <script src="../../src/kendo.grid.js"></script>
+        <script src="../../demos/mvc/content/shared/js/less.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
         <link rel="stylesheet" href="../../styles/web/kendo.common.css" />
-        <link rel="stylesheet" href="../../styles/web/kendo.default.css" />
+        <link rel="stylesheet" href="../../styles/web/kendo.default.less" />
     </head>
     <body>
         <div id="qunit-fixture">test markup, will be hidden</div>
@@ -349,6 +350,249 @@
                 grid.hideColumn(0);
 
                 equal(grid.table.width(), width);
+            });
+
+            test("showing column adds col element", function() {
+                var grid = setup({
+                    scrollable: false,
+                    columns: [{ field: "foo", hidden: true }]
+                });
+
+                grid.showColumn(0);
+
+                var cols = grid.thead.prev().find("col");
+                equal(cols.length, 3);
+                equal(cols[0].style.width, "10px");
+                equal(cols[1].style.width, "20px");
+                equal(cols[2].style.width, "30px");
+            });
+
+            test("showing column adds col element in scrollable grid", function() {
+                var grid = setup({
+                    columns: [{ field: "foo", hidden: true }]
+                });
+
+                grid.showColumn(0);
+
+                var headerCols = grid.thead.prev().find("col");
+                var cols = grid.tbody.prev().find("col");
+                equal(headerCols .length, 3);
+                equal(cols .length, 3);
+                equal(cols[0].style.width, "10px");
+                equal(cols[1].style.width, "20px");
+                equal(cols[2].style.width, "30px");
+            });
+
+            test("showing column adds col element in grid with details", function() {
+                var grid = setup({
+                    scrollable: false,
+                    detailTemplate: "foo",
+                    columns: [{ field: "foo", hidden: true }]
+                });
+
+                grid.showColumn(0);
+
+                var cols = grid.thead.prev().find("col");
+                equal(cols.length, 4);
+                ok(cols.eq(0).hasClass("k-hierarchy-col"));
+                equal(cols[1].style.width, "10px");
+                equal(cols[2].style.width, "20px");
+                equal(cols[3].style.width, "30px");
+            });
+
+            test("showing column adds col element in grid with grouping", function() {
+                var grid = setup({
+                    scrollable: false,
+                    dataSource: {
+                        group: { field: "foo" }
+                    },
+                    columns: [{ field: "foo", hidden: true }]
+                });
+
+                grid.showColumn(0);
+
+                var cols = grid.thead.prev().find("col");
+                equal(cols.length, 4);
+                ok(cols.eq(0).hasClass("k-group-col"));
+                equal(cols[1].style.width, "10px");
+                equal(cols[2].style.width, "20px");
+                equal(cols[3].style.width, "30px");
+            });
+
+            test("showing column that doesn't exist", function() {
+                var grid = setup({
+                    scrollable: false,
+                    columns: [{ field: "foo", hidden: true }]
+                });
+
+                grid.showColumn(-1);
+
+                var cols = grid.thead.prev().find("col");
+                equal(cols.length, 2);
+            });
+
+            test("showing column by field name", function() {
+                var grid = setup({
+                    columns: [{ field: "foo", hidden: true }]
+                });
+
+                grid.showColumn("foo");
+
+                var cols = grid.thead.prev().find("col");
+                equal(cols.length, 3);
+            });
+
+            test("showing column displays header cells", function() {
+                var grid = setup({
+                    columns: [{ field: "foo", hidden: true }]
+                });
+
+                grid.showColumn("foo");
+                var ths = grid.thead.find("th:visible");
+                equal(ths.length, 3);
+            });
+
+            test("showing column displays header cells in grid with details", function() {
+                var grid = setup({
+                    columns: [{ field: "foo", hidden: true }],
+                    detailTemplate: "foo"
+                });
+
+                grid.showColumn("foo");
+                var ths = grid.thead.find("th:visible");
+                equal(ths.length, 4);
+                ok(ths.eq(0).hasClass("k-hierarchy-cell"));
+            });
+
+            test("showing column displays header cells in grid with grouping", function() {
+                var grid = setup({
+                    columns: [{ field: "foo", hidden: true }],
+                    dataSource: {
+                        group: { field: "foo" }
+                    }
+                });
+
+                grid.showColumn("foo");
+                var ths = grid.thead.find("th:visible");
+                equal(ths.length, 4);
+                ok(ths.eq(0).hasClass("k-group-cell"));
+            });
+
+            test("showing column displays footer cells", function() {
+                var grid = setup({
+                    columns: [{ field: "foo", hidden: true, footerTemplate: "foo" }]
+                });
+
+                grid.showColumn("foo");
+
+                var tds = grid.footer.find("td:visible");
+                equal(tds.length, 3);
+            });
+
+            test("showing column displays footer cells in grid with details and grouping", function() {
+                var grid = setup({
+                    columns: [{ field: "foo", hidden: true, footerTemplate: "foo" }],
+                    detailTemplate: "details",
+                    dataSource: {
+                        group: { field: "foo" }
+                    }
+                });
+
+                grid.showColumn("foo");
+
+                var tds = grid.footer.find("td:visible");
+                equal(tds.length, 5);
+                ok(tds.eq(0).hasClass("k-group-cell"));
+                ok(tds.eq(1).hasClass("k-hierarchy-cell"));
+            });
+
+            test("showing column displays footer cols", function() {
+                var grid = setup({
+                    columns: [{ field: "foo", hidden: true, footerTemplate: "foo" }]
+                });
+
+                grid.showColumn("foo");
+
+                var cols = grid.footer.find("col");
+                equal(cols.length, 3);
+                equal(cols[0].style.width, "10px");
+            });
+
+            test("showing column displays data cells", function() {
+                var grid = setup({
+                    columns: [{ field: "foo", hidden: true }]
+                });
+
+                grid.showColumn("foo");
+
+                var tds = grid.tbody.find("td:visible");
+                equal(tds.length, 3);
+                equal(tds.eq(0).text(), "foo");
+            });
+
+            test("showing column displays data cells in grid with details", function() {
+                var grid = setup({
+                    columns: [{ field: "foo", hidden: true }],
+                    detailTemplate: "foo"
+                });
+
+                grid.showColumn("foo");
+
+                var tds = grid.tbody.find("tr:first>td:visible");
+                equal(tds.length, 4);
+                ok(tds.eq(0).hasClass("k-hierarchy-cell"));
+                equal(tds.eq(1).text(), "foo");
+            });
+
+            test("showing column changes detail row colspan", function() {
+                var grid = setup({
+                    columns: [{ field: "foo", hidden: true }],
+                    detailTemplate: "foo"
+                });
+
+                grid.expandRow(grid.tbody.children()[0]);
+                grid.showColumn("foo");
+
+                var td = grid.tbody.find(".k-detail-row .k-detail-cell");
+                equal(td.attr("colspan"), "3");
+            });
+
+            test("showing column in grid with grouping", function() {
+                var grid = setup({
+                    columns: [{ field: "foo", hidden: true }],
+                    dataSource: {
+                        group: { field: "foo" }
+                    }
+                });
+
+                grid.showColumn("foo");
+
+                equal(grid.table.find(".k-grouping-row>td").attr("colspan"), "4");
+                equal(grid.tbody.children().eq(1).find("td:visible").length, 4);
+            });
+
+            test("showing column without specified width removes table width", function() {
+                var grid = setup({
+                    columns: ["foo"]
+                });
+                var width = grid.table.css("width");
+
+                grid.hideColumn("foo");
+                grid.showColumn("foo");
+
+                equal(grid.table.css("width"), width);
+            });
+
+            test("showing column with specified width changes table width", function() {
+                var grid = setup({
+                    columns: ["foo"]
+                });
+                var width = grid.table.css("width");
+
+                grid.hideColumn("bar");
+                grid.showColumn("bar");
+
+                equal(grid.table.css("width"), width);
             });
         </script>
     </body>

@@ -2691,6 +2691,8 @@
                 row,
                 cell,
                 idx,
+                cols,
+                colWidth,
                 width = 0,
                 length,
                 columns = that.columns,
@@ -2734,8 +2736,7 @@
                 }
             }
 
-            var cols = that.thead.prev().find("col");
-            var colWidth;
+            cols = that.thead.prev().find("col");
             for (idx = 0, length = cols.length; idx < length; idx += 1) {
                 colWidth = cols[idx].style.width;
                 if (colWidth && colWidth.indexOf("%") == -1) {
@@ -2747,7 +2748,58 @@
             }
 
             if (width) {
-                that.table.width(width);
+                $(">.k-grid-header table:first,>.k-grid-footer table:first",that.wrapper).add(that.table).width(width);
+            }
+        },
+
+        showColumn: function(column) {
+            var that = this,
+                rows,
+                idx,
+                length,
+                row,
+                cell,
+                tables,
+                columns = that.columns,
+                columnIndex;
+
+            if (typeof column == "number") {
+                column = columns[column];
+            } else {
+                column = grep(columns, function(item) {
+                    return item.field === column;
+                })[0];
+            }
+
+            if (!column || !column.hidden) {
+                return;
+            }
+
+            columnIndex = $.inArray(column, columns);
+            column.hidden = false;
+
+            that._updateCols();
+            that.thead.find(">tr>th:not(.k-hierarchy-cell,.k-group-cell)").eq(columnIndex).show();
+            if (that.footer) {
+                that._appendCols(that.footer.find("table:first"));
+                that.footer.find(".k-footer-template>td:not(.k-hierarchy-cell,.k-group-cell)").eq(columnIndex).show();
+            }
+
+            rows = that.tbody.children();
+            for (idx = 0, length = rows.length; idx < length; idx += 1) {
+                row = rows.eq(idx);
+                if (row.is(".k-grouping-row,.k-detail-row")) {
+                    cell = row.children(":not(.k-group-cell):first,.k-detail-cell").last();
+                    cell.attr("colspan", parseInt(cell.attr("colspan"), 10) + 1);
+
+                } else {
+                    row.children(":not(.k-group-cell,.k-hierarchy-cell)").eq(columnIndex).show();
+                }
+            }
+
+            tables = $(">.k-grid-header table:first,>.k-grid-footer table:first",that.wrapper).add(that.table);
+            if (!column.width) {
+                tables.width("");
             }
         },
 
