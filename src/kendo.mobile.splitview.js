@@ -110,11 +110,14 @@
             var that = this;
 
             Widget.fn.init.call(that, element, options);
+            element = that.element;
+
             $.extend(that, options);
             that._layout();
             that._style();
-            that.panes = [];
+            kendo.mobile.init(element.children(kendo.roleSelector("modalview")));
 
+            that.panes = [];
             that.element.children(kendo.roleSelector("pane")).each(function() {
                 that.panes.push(kendo.initWidget(this, {}, ui.roles));
             });

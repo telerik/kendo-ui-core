@@ -2795,7 +2795,8 @@ function pad(number) {
         viewShow: $.noop,
 
         view: function() {
-            return this.element.closest(kendo.roleSelector("view")).data("kendoMobileView");
+            var viewElement = this.element.closest(kendo.roleSelector("view") + "," + kendo.roleSelector("splitview"));
+            return viewElement.data("kendoMobileView") || viewElement.data("kendoMobileSplitView");
         }
     });
 
