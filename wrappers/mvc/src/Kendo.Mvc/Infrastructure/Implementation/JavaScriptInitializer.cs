@@ -125,7 +125,14 @@ namespace Kendo.Mvc.Infrastructure
                     output.Append(((float)value).ToString("r", CultureInfo.InvariantCulture));                    
 
                     continue;
-                }                
+                }
+
+                if (value is Guid)
+                {
+                    output.AppendFormat("\"{0}\"", value.ToString());
+
+                    continue;
+                } 
 
                 if (value == null)
                 {
