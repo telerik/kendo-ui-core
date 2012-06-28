@@ -63,8 +63,8 @@
 
                 var cols = grid.thead.prev().find("col");
                 equal(cols.length, 2);
-                equal(cols.eq(0).width(), 20);
-                equal(cols.eq(1).width(), 30);
+                equal(cols[0].style.width, "20px");
+                equal(cols[1].style.width, "30px");
             });
 
             test("hide cols for column in scrollable grid", function() {
@@ -75,11 +75,11 @@
                 var cols = grid.thead.prev().find("col");
                 var tableCols = grid.table.find(">colgroup col");
                 equal(cols.length, 2);
-                equal(cols.eq(0).width(), 20);
-                equal(cols.eq(1).width(), 30);
+                equal(cols[0].style.width, "20px");
+                equal(cols[1].style.width, "30px");
                 equal(tableCols.length, 2);
-                equal(tableCols.eq(0).width(), 20);
-                equal(tableCols.eq(1).width(), 30);
+                equal(tableCols[0].style.width, "20px");
+                equal(tableCols[1].style.width, "30px");
             });
 
             test("hide column by field name", function() {
@@ -89,8 +89,8 @@
 
                 var cols = grid.thead.prev().find("col");
                 equal(cols.length, 2);
-                equal(cols.eq(0).width(), 20);
-                equal(cols.eq(1).width(), 30);
+                equal(cols[0].style.width, "20px");
+                equal(cols[1].style.width, "30px");
             });
 
             test("hide column header cells", function() {
@@ -286,8 +286,8 @@
 
                 var cols = grid.footer.find("col");
                 equal(cols.length, 2);
-                equal(cols.eq(0).width(), 20);
-                equal(cols.eq(1).width(), 30);
+                equal(cols[0].style.width, "20px");
+                equal(cols[1].style.width, "30px");
             });
 
             test("hide footer cols in scrollable grid with details and grouping", function() {
@@ -310,8 +310,8 @@
                 equal(cols.length, 4);
                 ok(cols.eq(0).hasClass("k-group-col"));
                 ok(cols.eq(1).hasClass("k-hierarchy-col"));
-                equal(cols.eq(2).width(), 20);
-                equal(cols.eq(3).width(), 30);
+                equal(cols[2].style.width, "20px");
+                equal(cols[3].style.width, "30px");
             });
 
             test("hidden columns footer remains hidden on refresh", function() {

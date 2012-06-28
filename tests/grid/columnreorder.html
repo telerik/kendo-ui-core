@@ -348,6 +348,31 @@
                 equal(td.eq(1).text(), "foo");
             });
 
+            test("reorder when hidden column", function() {
+                var grid = new Grid(table, {
+                    columns: [
+                        { field: "foo", width: 10 },
+                        { field: "bar", hidden: true, width: 20 },
+                        { field: "baz", width: 30 }
+                    ],
+                    dataSource: [{ foo: "foo", bar: "bar", baz: "baz" }]
+                });
+
+                grid.reorderColumn(0, grid.columns[2]);
+
+                var td = grid.tbody.find("td");
+                var col = grid.thead.prev().find("col");
+
+                equal(grid.columns[0].field, "baz");
+                equal(grid.columns[1].field, "foo");
+                equal(grid.columns[2].field, "bar");
+                equal(td.eq(0).text(), "baz");
+                equal(td.eq(1).text(), "foo");
+                equal(td.eq(2).text(), "bar");
+                equal(col[0].style.width, "30px");
+                equal(col[1].style.width, "10px");
+            });
+
             function moveOverDropTarget(draggable, dropTarget) {
                 var position = dropTarget.position();
 

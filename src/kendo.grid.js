@@ -670,7 +670,7 @@
             if (that.options.reorderable) {
                 that._draggableInstance = that.thead.kendoDraggable({
                     group: kendo.guid(),
-                    filter: ".k-header:not(.k-group-cell,.k-hierarchy-cell)[" + kendo.attr("field") + "]",
+                    filter: ".k-header:not(.k-group-cell,.k-hierarchy-cell):visible[" + kendo.attr("field") + "]",
                     hint: function(target) {
                         return $('<div class="k-header k-drag-clue" />')
                             .css({
@@ -694,7 +694,7 @@
                 that.thead.kendoReorderable({
                     draggable: that._draggableInstance,
                     change: function(e) {
-                        var column = that.columns[e.oldIndex];
+                        var column = visibleColumns(that.columns)[e.oldIndex];
                         that.trigger(COLUMNREORDER, {
                             newIndex: e.newIndex,
                             oldIndex: e.oldIndex,
@@ -709,6 +709,7 @@
         reorderColumn: function(destIndex, column) {
             var that = this,
                 sourceIndex = $.inArray(column, that.columns),
+                colSourceIndex = $.inArray(column, visibleColumns(that.columns)),
                 rows,
                 idx,
                 length;
@@ -721,15 +722,15 @@
             that.columns.splice(destIndex, 0, column);
             that._templates();
 
-            reorder(that.thead.prev().find("col:not(.k-group-col,.k-hierarchy-col)"), sourceIndex, destIndex);
+            reorder(that.thead.prev().find("col:not(.k-group-col,.k-hierarchy-col)"), colSourceIndex, destIndex);
             if (that.options.scrollable) {
-                reorder(that.tbody.prev().find("col:not(.k-group-col,.k-hierarchy-col)"), sourceIndex, destIndex);
+                reorder(that.tbody.prev().find("col:not(.k-group-col,.k-hierarchy-col)"), colSourceIndex, destIndex);
             }
 
             reorder(that.thead.find(".k-header:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex);
 
             if (that.footer) {
-                reorder(that.footer.find(".k-grid-footer-wrap>table>colgroup>col:not(.k-group-col,.k-hierarchy-col)"), sourceIndex, destIndex);
+                reorder(that.footer.find(".k-grid-footer-wrap>table>colgroup>col:not(.k-group-col,.k-hierarchy-col)"), colSourceIndex, destIndex);
                 reorder(that.footer.find(".k-footer-template>td:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex);
             }
 
@@ -1364,7 +1365,7 @@
                     draggable: that._draggableInstance,
                     groupContainer: ">div.k-grouping-header",
                     dataSource: that.dataSource,
-                    filter: ".k-header:not(.k-group-cell,.k-hierarchy-cell)[" + kendo.attr("field") + "]",
+                    filter: ".k-header:not(.k-group-cell,.k-hierarchy-cell):visible[" + kendo.attr("field") + "]",
                     allowDrag: that.options.reorderable
                 }));
             }
