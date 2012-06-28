@@ -208,7 +208,7 @@
                 .on("dragstart", filter, kendo.preventDefault);
 
             if (pointers) {
-                element.css("-ms-touch-action", "none");
+                element.css("-ms-touch-action", "pinch-zoom double-tap-zoom");
             }
 
             if (!options.allowSelection) {
