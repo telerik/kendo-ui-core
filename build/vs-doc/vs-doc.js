@@ -20,9 +20,11 @@ function vsdoc(directory, filter) {
             methods = sections.filter(function(child) { return /Methods/.test(child.title) })[0],
             configuration = sections.filter(function(child) { return /Configuration/.test(child.title) })[0];
 
-        methods.children.forEach(function(child) {
-            theClass.methods.push(parseMethod(child));
-        });
+        if (methods) {
+            methods.children.forEach(function(child) {
+                theClass.methods.push(parseMethod(child));
+            });
+        }
 
         if (configuration) {
             configuration.children.forEach(function(child) {
