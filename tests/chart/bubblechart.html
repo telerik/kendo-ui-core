@@ -69,6 +69,33 @@
                 });
 
                 // ------------------------------------------------------------
+                module("Bubble Chart / Points", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                    }
+                });
+
+                test("Bubbles with negative size are hidden", function() {
+                    setupBubbleChart(plotArea, { series: [{
+                            data: [{x: 1, y: 1, size: -100}],
+                            negativeValues: { visible: false }
+                        }]
+                    });
+
+                    equals(bubbleChart.points.length, 0);
+                });
+
+                test("Color is set for bubbles with negative size", function() {
+                    setupBubbleChart(plotArea, { series: [{
+                            data: [{x: 1, y: 1, size: -100}],
+                            negativeValues: { visible: true, color: "red" }
+                        }]
+                    });
+
+                    equals(bubbleChart.points[0].color, "red");
+                });
+
+                // ------------------------------------------------------------
                 module("Bubble Chart / Legend items", {
                     setup: function() {
                         plotArea = new PlotAreaStub();
@@ -89,7 +116,7 @@
                 });
 
                 test("skips points with visibleInLegend set to false", function() {
-                    bubbleChart.points[1].value.visibleInLegend = false;
+                    bubbleChart.points[1].visibleInLegend = false;
                     equals(bubbleChart.legendItems().length, 1);
                 });
 
@@ -156,7 +183,7 @@
                         colorField: "pointColor"
                     });
 
-                    same(points[1].value.color, "blue");
+                    same(points[1].color, "blue");
                 });
 
                 test("binds category field", function() {
@@ -167,7 +194,7 @@
                         categoryField: "pointColor"
                     });
 
-                    same(points[1].value.category, "blue");
+                    same(points[1].category, "blue");
                 });
 
                 test("binds to object with x, y and size fields", function() {
@@ -183,7 +210,7 @@
                         data: [{ x: 1, y: 10, size: 100, color: "red" }]
                     });
 
-                    same(points[0].value.color, "red");
+                    same(points[0].color, "red");
                 });
 
                 test("binds category to object field", function() {
@@ -191,7 +218,7 @@
                         data: [{ x: 1, y: 10, size: 100, category: "UK" }]
                     });
 
-                    same(points[0].value.category, "UK");
+                    same(points[0].category, "UK");
                 });
 
             })();

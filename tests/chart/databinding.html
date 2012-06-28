@@ -529,11 +529,11 @@
             })();
 
             (function() {
-                var pointData = kendo.dataviz.pointData;
+                var bindPoint = kendo.dataviz.bindPoint;
                 var series;
 
                 // ------------------------------------------------------------
-                module("Data Binding / Helpers / pointData", {
+                module("Data Binding / Helpers / bindPoint", {
                     setup: function() {
                         series = {};
                     }
@@ -541,42 +541,72 @@
 
                 test("sets value field from string", function() {
                     series.data = ["abc"];
-                    same(pointData(series, 0, ["value"]), { value: "abc" });
+                    same(bindPoint(series, 0, ["value"]),
+                        { value: "abc", fields: {} }
+                    );
                 });
 
                 test("sets value field from number", function() {
                     series.data = [1];
-                    same(pointData(series, 0, ["value"]), { value: 1 });
+                    same(bindPoint(series, 0, ["value"]),
+                        { value: 1, fields: {} }
+                    );
                 });
 
-                test("returns empty object when value is undefined", function() {
+                test("sets value field from undefined", function() {
                     series.data = [undefined];
-                    same(pointData(series, 0, ["value"]), {});
+                    same(bindPoint(series, 0, ["value"]),
+                        { value: undefined, fields: {} }
+                    );
                 });
 
-                test("returns empty object when value is null", function() {
+                test("sets value field from null", function() {
                     series.data = [null];
-                    same(pointData(series, 0, ["value"]), {});
+                    same(bindPoint(series, 0, ["value"]),
+                        { value: null, fields: {} }
+                    );
                 });
 
-                test("maps array elements to fields", function() {
+                test("sets value from custom object", function() {
+                    series.data = [{ a: 1 }];
+                    same(bindPoint(series, 0, ["a"]),
+                        { value: 1, fields: {} }
+                    );
+                });
+
+                test("sets multiple values from custom object", function() {
+                    series.data = [{ a: 1, b: 2 }];
+                    same(bindPoint(series, 0, ["a", "b"]),
+                        { value: { a: 1, b: 2}, fields: {} }
+                    );
+                });
+
+                test("sets fields from custom object", function() {
+                    series.data = [{ a: 1, b: 2 }];
+                    same(bindPoint(series, 0, ["a"], ["b"]),
+                        { value: 1, fields: { b: 2 } }
+                    );
+                });
+
+                test("binds array to value and point fields", function() {
                     series.data = [[1, "red"]];
-                    same(pointData(series, 0, ["value", "color"]),
-                        { value: 1, color: "red"});
+                    same(bindPoint(series, 0, ["value"], ["color"]),
+                        { value: 1, fields: { color: "red"} }
+                    );
+                });
+
+                test("binds array to multiple values", function() {
+                    series.data = [[1, 2]];
+                    same(bindPoint(series, 0, ["x", "y"]),
+                        { value: { x: 1, y: 2 }, fields: {} }
+                    );
                 });
 
                 test("extra fields are ignored", function() {
                     series.data = [[1, "red"]];
-                    same(pointData(series, 0, ["value", "color", "category"]),
-                        { value: 1, color: "red"});
-                });
-
-                test("binds specified field to dataItem", function() {
-                    series.aField = "aValue";
-                    series.data = [undefined];
-                    series.dataItems = [{ aValue: 1 }];
-
-                    same(pointData(series, 0, ["a"]), { a: 1 });
+                    same(bindPoint(series, 0, ["value"], ["color", "category"]),
+                        { value: 1, fields: { color: "red"}}
+                    );
                 });
 
                 test("binds value to dataItem using field name", function() {
@@ -584,7 +614,32 @@
                     series.data = [undefined];
                     series.dataItems = [{ aValue: 1 }];
 
-                    same(pointData(series, 0, ["value"]), { value: 1 });
+                    same(bindPoint(series, 0, ["value"]),
+                        { value: 1, fields: {} }
+                    );
+                });
+
+                test("binds multiple values to dataItem", function() {
+                    series.aField = "aValue";
+                    series.bField = "bValue";
+                    series.data = [undefined];
+                    series.dataItems = [{ aValue: 1, bValue: 2 }];
+
+                    same(bindPoint(series, 0, ["a", "b"]),
+                        { value: { a: 1, b: 2 }, fields: {} }
+                    );
+                });
+
+                test("binds multiple value and point fields to dataItem", function() {
+                    series.aField = "aValue";
+                    series.bField = "bValue";
+                    series.colorField = "color";
+                    series.data = [undefined];
+                    series.dataItems = [{ aValue: 1, bValue: 2, color: "red" }];
+
+                    same(bindPoint(series, 0, ["a", "b"], ["color"]),
+                        { value: { a: 1, b: 2} , fields: { color: "red" } }
+                    );
                 });
             })();
         </script>

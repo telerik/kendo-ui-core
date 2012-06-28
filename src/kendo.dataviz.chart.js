@@ -1725,29 +1725,34 @@
 
         traverseDataPoints: function(callback) {
             var chart = this,
-            options = chart.options,
-            series = options.series,
-            categories = chart.plotArea.options.categoryAxis.categories || [],
-            count = categoriesCount(series),
-            bindableFields = chart.bindableFields(),
-            categoryIx,
-            seriesIx,
-            value,
-            currentCategory,
-            currentSeries;
+                options = chart.options,
+                series = options.series,
+                categories = chart.plotArea.options.categoryAxis.categories || [],
+                count = categoriesCount(series),
+                valueFields = chart.valueFields(),
+                bindableFields = chart.bindableFields(),
+                categoryIx,
+                seriesIx,
+                pointData,
+                currentCategory,
+                currentSeries;
 
             for (categoryIx = 0; categoryIx < count; categoryIx++) {
                 for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
                     currentCategory = categories[categoryIx];
                     currentSeries = series[seriesIx];
-                    value = pointData(currentSeries, categoryIx, bindableFields);
-                    callback(value, currentCategory, categoryIx, currentSeries, seriesIx);
+                    pointData = bindPoint(currentSeries, categoryIx, valueFields, bindableFields);
+                    callback(pointData, currentCategory, categoryIx, currentSeries, seriesIx);
                 }
             }
         },
 
+        valueFields: function() {
+            return ["value"];
+        },
+
         bindableFields: function() {
-            return ["value", "color"];
+            return [];
         },
 
         formatPointValue: function(value, format) {
@@ -1795,7 +1800,7 @@
                     labels: labelOptions,
                     isStacked: isStacked
                 }, series, {
-                    color: data.color || undefined
+                    color: data.fields.color || undefined
                 }));
 
             cluster = children[categoryIx];
@@ -1974,6 +1979,10 @@
             }
 
             return categoryTotals;
+        },
+
+        bindableFields: function() {
+            return ["color"];
         }
     });
 
@@ -2614,7 +2623,7 @@
             chart.updateRange(value, fields.series);
 
             if (defined(x) && x !== null && defined(y) && y !== null) {
-                point = chart.createPoint(value, fields.series, seriesIx, fields.pointIx);
+                point = chart.createPoint(value, fields.series, seriesIx, fields);
                 if (point) {
                     extend(point, fields);
                 }
@@ -2728,13 +2737,16 @@
                 options = chart.options,
                 series = options.series,
                 seriesPoints = chart.seriesPoints,
+                valueFields = chart.valueFields(),
                 bindableFields = chart.bindableFields(),
                 pointIx = 0,
                 seriesIx,
                 currentSeries,
                 currentSeriesPoints,
                 dataItems,
-                value;
+                pointData,
+                value,
+                fields;
 
             for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
                 currentSeries = series[seriesIx];
@@ -2746,21 +2758,27 @@
                 }
 
                 for (pointIx = 0; pointIx < currentSeries.data.length; pointIx++) {
-                    value = pointData(currentSeries, pointIx, bindableFields);
+                    pointData = bindPoint(currentSeries, pointIx, valueFields, bindableFields);
+                    value = pointData.value;
+                    fields = pointData.fields;
 
-                    callback(value, {
+                    callback(value, deepExtend({
                         pointIx: pointIx,
                         series: currentSeries,
                         seriesIx: seriesIx,
                         dataItem: dataItems ? dataItems[pointIx] : value,
                         owner: chart
-                    });
+                    }, fields));
                 }
             }
         },
 
-        bindableFields: function() {
+        valueFields: function() {
             return ["x", "y"];
+        },
+
+        bindableFields: function() {
+            return [];
         },
 
         formatPointValue: function(value, format) {
@@ -2791,19 +2809,31 @@
 
         addValue: function(value, fields) {
             var chart = this,
-                colors = chart.plotArea.options.seriesColors || [];
+                color,
+                series = fields.series,
+                negativeValues = series.negativeValues,
+                seriesColors = chart.plotArea.options.seriesColors || [],
+                visible = true;
 
-            fields.series.color = fields.series.color ||
-                colors[fields.pointIx % colors.length];
+            color = fields.color || series.color ||
+                seriesColors[fields.pointIx % seriesColors.length];
 
-            ScatterChart.fn.addValue.call(this, value, fields);
+            if (value.size < 0) {
+                color = negativeValues.color || color;
+                visible = negativeValues.visible;
+            }
+
+            fields.color = color;
+
+            if (visible) {
+                ScatterChart.fn.addValue.call(this, value, fields);
+            }
         },
 
-        createPoint: function(value, series, seriesIx, pointIx) {
+        createPoint: function(value, series, seriesIx, fields) {
             var chart = this,
                 point,
-                color = value.color || series.color,
-                maxValue = chart.seriesMax(series),
+                maxValue = chart.maxSize(series),
                 minR = series.minSize / 2,
                 maxR = series.maxSize / 2,
                 minArea = math.PI * minR * minR,
@@ -2812,46 +2842,36 @@
                 area = math.abs(value.size) * (areaRange / maxValue),
                 r = math.sqrt((minArea + area) / math.PI),
                 pointsCount = series.data.length,
-                delay = pointIx * (INITIAL_ANIMATION_DURATION / pointsCount),
+                delay = fields.pointIx * (INITIAL_ANIMATION_DURATION / pointsCount),
                 animationOptions = {
                     delay: delay,
                     duration: INITIAL_ANIMATION_DURATION - delay,
                     type: BUBBLE
-                },
-                visible = true;
+                };
 
-            if (value.size < 0) {
-                color = series.negativeValues.color || color;
-                visible = series.negativeValues.visible;
-            }
+            point = new Bubble(value,
+                deepExtend({
+                    markers: {
+                        size: r * 2,
+                        type: CIRCLE,
+                        background: fields.color,
+                        border: series.border,
+                        opacity: series.opacity,
+                        animation: animationOptions,
+                        zIndex: maxR - r
+                    },
+                    tooltip: {
+                        format: chart.options.tooltip.format
+                    },
+                    labels: {
+                        zIndex: maxR - r + 1,
+                        format: chart.options.labels.format,
+                        animation: animationOptions
+                    }
+                })
+            );
 
-            if (visible) {
-                point = new Bubble(value,
-                    deepExtend({
-                        markers: {
-                            size: r * 2,
-                            type: CIRCLE,
-                            background: color,
-                            border: series.border,
-                            opacity: series.opacity,
-                            animation: animationOptions,
-                            zIndex: maxR - r
-                        },
-                        tooltip: {
-                            format: chart.options.tooltip.format
-                        },
-                        labels: {
-                            zIndex: maxR - r + 1,
-                            format: chart.options.labels.format,
-                            animation: animationOptions
-                        }
-                    }, series, {
-                        color: color
-                    })
-                );
-
-                chart.append(point);
-            }
+            chart.append(point);
 
             return point;
 
@@ -2859,26 +2879,29 @@
             // TODO: Clip to axis line box
         },
 
-        seriesMax: function(series) {
+        maxSize: function(series) {
             // TODO: Call once per series by overriding render
             var chart = this,
                 length = series.data.length,
-                bindableFields = chart.bindableFields(),
+                valueFields = chart.valueFields(),
                 max = 0,
                 i,
-                value;
+                size;
 
             for (i = 0; i < length; i++) {
-                value = pointData(series, i, bindableFields).size;
-                max = math.max(max, math.abs(value));
+                size = bindPoint(series, i, valueFields).value.size;
+                max = math.max(max, math.abs(size));
             }
 
             return max;
         },
 
+        valueFields: function() {
+            return ["x", "y", "size"];
+        },
+
         bindableFields: function() {
-            return ScatterChart.fn.bindableFields.call(this)
-                   .concat(["size", "color", "category", "visibleInLegend"]);
+            return ["color", "category", "visibleInLegend"];
         },
 
         legendItems: function() {
@@ -2890,10 +2913,10 @@
 
             for (i = 0; i < pointsLength; i++) {
                 currentPoint = points[i];
-                if (currentPoint && currentPoint.value.visibleInLegend !== false) {
+                if (currentPoint && currentPoint.visibleInLegend !== false) {
                     items.push({
-                        name: currentPoint.value.category,
-                        color: currentPoint.options.color
+                        name: currentPoint.category,
+                        color: currentPoint.color
                     });
                 }
             }
@@ -3167,10 +3190,12 @@
                 series = options.series,
                 seriesCount = series.length,
                 overlayId = uniqueId(),
+                valueFields = chart.valueFields(),
                 bindableFields = chart.bindableFields(),
                 dataItems,
                 currentSeries,
-                currentData,
+                pointData,
+                fields,
                 seriesIx,
                 angle,
                 data,
@@ -3195,24 +3220,23 @@
                 }
 
                 for (i = 0; i < data.length; i++) {
-                    currentData = pointData(currentSeries, i, bindableFields);
-                    value = currentData.value;
+                    pointData = bindPoint(currentSeries, i, valueFields, bindableFields);
+                    value = pointData.value;
+                    fields = pointData.fields;
                     angle = round(value * anglePerValue, DEFAULT_PRECISION);
-                    explode = data.length != 1 && !!currentData.explode;
-                    currentSeries.color = currentData.color || colors[i % colorsCount];
+                    explode = data.length != 1 && !!fields.explode;
+                    currentSeries.color = fields.color || colors[i % colorsCount];
 
                     callback(value, new Ring(null, 0, 0, currentAngle, angle), {
                         owner: chart,
-                        category: currentData.category || "",
+                        category: fields.category || "",
                         categoryIx: i,
                         series: currentSeries,
                         seriesIx: seriesIx,
-                        dataItem: dataItems ? dataItems[i] : currentData,
+                        dataItem: dataItems ? dataItems[i] : { value: value },
                         percentage: value / total,
                         explode: explode,
-                        visibleInLegend: currentData.visibleInLegend,
-                        margin: currentData.margin,
-                        size: currentData.size,
+                        visibleInLegend: fields.visibleInLegend,
                         overlay: {
                             id: overlayId + seriesIx
                         },
@@ -3225,8 +3249,12 @@
             }
         },
 
+        valueFields: function() {
+            return ["value"];
+        },
+
         bindableFields: function() {
-            return ["value", "category", "color", "explode", "visibleInLegend"];
+            return ["category", "color", "explode", "visibleInLegend"];
         },
 
         addValue: function(value, sector, fields) {
@@ -3262,14 +3290,14 @@
 
         pointsTotal: function(series) {
             var chart = this,
-                bindableFields = chart.bindableFields(),
+                valueFields = chart.valueFields(),
                 data = series.data,
                 length = data.length,
                 sum = 0,
                 i;
 
             for(i = 0; i < length; i++) {
-                sum += pointData(series, i, bindableFields).value;
+                sum += bindPoint(series, i, valueFields).value;
             }
 
             return sum;
@@ -4539,14 +4567,14 @@
                 seriesIx,
                 series = plotArea.series,
                 currentSeries,
-                firstPointData,
+                firstPointValue,
                 dateData;
 
             for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
                 currentSeries = series[seriesIx];
                 if (currentSeries[vertical ? "yAxis" : "xAxis"] == axisOptions.name) {
-                    firstPointData = pointData(currentSeries, 0, ["x", "y"]);
-                    dateData = firstPointData[vertical ? "y" : "x"] instanceof Date;
+                    firstPointValue = bindPoint(currentSeries, 0, ["x", "y"]).value;
+                    dateData = firstPointValue[vertical ? "y" : "x"] instanceof Date;
 
                     break;
                 }
@@ -5149,40 +5177,101 @@
         return diff;
     }
 
-    function pointData(series, pointIx, fields) {
-        var data = series.data[pointIx],
-            dataItems = series.dataItems,
-            currentDataItem,
-            value = data || {},
+    function bindPoint(series, pointIx, valueFields, pointFields) {
+        var pointData = series.data[pointIx],
+            fieldData,
+            fields = {},
+            value,
+            result = { value: pointData };
+
+        if (defined(pointData))
+        {
+            if (isArray(pointData)) {
+                fieldData = pointData.slice(valueFields.length);
+                value = bindFromArray(pointData, valueFields);
+                fields = bindFromArray(fieldData, pointFields);
+            } else if (typeof pointData === "object") {
+                value = bindFromObject(pointData, valueFields);
+                fields = bindFromObject(pointData, pointFields);
+            }
+        } else if (series.dataItems) {
+            value = bindFromDataItem(series, valueFields, pointIx);
+            fields = bindFromDataItem(series, pointFields, pointIx);
+        } else {
+            value = bindFromObject({}, valueFields);
+        }
+
+        if (defined(value)) {
+            if (valueFields.length === 1) {
+                value = value[valueFields[0]];
+            }
+
+            result.value = value;
+        }
+
+        result.fields = fields;
+
+        return result;
+    }
+
+    function bindFromArray(array, fields) {
+        var value = {},
             i,
-            fieldsLength = fields.length,
+            length;
+
+        if (fields) {
+            length = math.min(fields.length, array.length);
+
+            for (i = 0; i < length; i++) {
+                value[fields[i]] = array[i];
+            }
+        }
+
+        return value;
+    }
+
+    function bindFromObject(object, fields) {
+        var value = {},
+            i,
+            length,
+            fieldName;
+
+        if (fields) {
+            length = fields.length;
+
+            for (i = 0; i < length; i++) {
+                fieldName = fields[i];
+                value[fieldName] = getField(fieldName, object);
+            }
+        }
+
+        return value;
+    }
+
+    function bindFromDataItem(series, fields, pointIx) {
+        var value = {},
+            dataItems = series.dataItems,
+            i,
+            length,
             fieldName,
             sourceFieldName,
-            sourceField;
+            sourceField,
+            currentDataItem;
 
-            if (defined(data))
-            {
-                if (isArray(data)) {
-                    value = {};
-                    fieldsLength = math.min(fieldsLength, data.length);
-                    for (i = 0; i < fieldsLength; i++) {
-                        value[fields[i]] = data[i];
-                    }
-                } else if (typeof data !== "object") {
-                    value = { value: data };
-                }
-            } else if (series.dataItems) {
-                for (i = 0; i < fieldsLength; i++) {
-                    fieldName = fields[i];
-                    sourceFieldName = fieldName === "value" ? "field" : fieldName + "Field";
-                    sourceField = series[sourceFieldName];
+        if (fields) {
+            length = fields.length;
 
-                    currentDataItem = dataItems[pointIx];
-                    if (sourceField && currentDataItem) {
-                        value[fieldName] = getField(sourceField, currentDataItem);
-                    }
+            for (i = 0; i < length; i++) {
+                fieldName = fields[i];
+                sourceFieldName = fieldName === "value" ? "field" : fieldName + "Field";
+                sourceField = series[sourceFieldName];
+
+                currentDataItem = dataItems[pointIx];
+                if (sourceField && currentDataItem) {
+                    value[fieldName] = getField(sourceField, currentDataItem);
                 }
             }
+        }
 
         return value;
     }
@@ -5229,7 +5318,7 @@
         ceilDate: ceilDate,
         duration: duration,
         floorDate: floorDate,
-        pointData: pointData,
+        bindPoint: bindPoint,
         toDate: toDate
     });
 
