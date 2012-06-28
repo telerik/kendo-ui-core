@@ -270,14 +270,16 @@
                 size: 15,
                 align: INSIDE,
                 color: BLACK,
-                width: DEFAULT_LINE_WIDTH
+                width: DEFAULT_LINE_WIDTH,
+                visible: true
             },
 
             minorTicks: {
                 size: 10,
                 align: INSIDE,
                 color: BLACK,
-                width: DEFAULT_LINE_WIDTH
+                width: DEFAULT_LINE_WIDTH,
+                visible: true
             },
 
             startAngle: -30,
@@ -329,33 +331,35 @@
                 options = scale.options,
                 minorTickSize = options.minorTicks.size;
 
-            function renderTickRing(ring, unit, tickOptions, skipUnit) {
+            function renderTickRing(ring, unit, tickOptions, visible, skipUnit) {
                 var tickAngles = scale.tickAngles(ring, unit),
                     i, innerPoint, outerPoint,
                     skip = skipUnit / unit,
                     count = tickAngles.length;
 
-                for (i = 0; i < count; i++) {
-                    if (i % skip === 0) {
-                        continue;
-                    }
-
-                    outerPoint = ring.point(tickAngles[i]);
-                    innerPoint = ring.point(tickAngles[i], true);
-
-                    ticks.push(view.createLine(
-                        innerPoint.x, innerPoint.y,
-                        outerPoint.x, outerPoint.y,
-                        {
-                            align: false,
-                            stroke: tickOptions.color,
-                            strokeWidth: tickOptions.width
+                if (visible) {
+                    for (i = 0; i < count; i++) {
+                        if (i % skip === 0) {
+                            continue;
                         }
-                    ));
+
+                        outerPoint = ring.point(tickAngles[i]);
+                        innerPoint = ring.point(tickAngles[i], true);
+
+                        ticks.push(view.createLine(
+                            innerPoint.x, innerPoint.y,
+                            outerPoint.x, outerPoint.y,
+                            {
+                                align: false,
+                                stroke: tickOptions.color,
+                                strokeWidth: tickOptions.width
+                            }
+                        ));
+                    }
                 }
             }
 
-            renderTickRing(majorTickRing, options.majorUnit, options.majorTicks);
+            renderTickRing(majorTickRing, options.majorUnit, options.majorTicks, options.majorTicks.visible);
 
             if (options.labels.position == INSIDE) {
                 minorTickRing.radius(minorTickRing.r - minorTickSize, true);
@@ -363,7 +367,7 @@
                 minorTickRing.radius(minorTickRing.ir + minorTickSize);
             }
 
-            renderTickRing(minorTickRing, options.minorUnit, options.minorTicks, options.majorUnit);
+            renderTickRing(minorTickRing, options.minorUnit, options.minorTicks, options.minorTicks.visible, options.majorUnit);
 
             return ticks;
         },
