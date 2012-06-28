@@ -33,6 +33,20 @@ namespace Kendo.Mvc.UI.Fluent
             return (TDataSourceBuilder)this;
         }
 
+        public TDataSourceBuilder Read(string actionName, string controllerName, object routeValues)
+        {
+            SetOperationUrl(dataSource.Transport.Read, actionName, controllerName, routeValues);
+
+            return (TDataSourceBuilder)this;
+        }
+
+        public TDataSourceBuilder Read(string actionName, string controllerName)
+        {
+            SetOperationUrl(dataSource.Transport.Read, actionName, controllerName, null);
+
+            return (TDataSourceBuilder)this;
+        }
+
         public TDataSourceBuilder Total(int total)
         {
             dataSource.Total = total;
@@ -87,6 +101,12 @@ namespace Kendo.Mvc.UI.Fluent
             configurator(new DataSourceFilterDescriptorFactory<TModel>(dataSource.Filters));
 
             return (TDataSourceBuilder)this;
+        }
+
+        protected virtual void SetOperationUrl(CrudOperation operation, string actionName, string controllerName, object routeValues)
+        {
+            operation.Action(actionName, controllerName, routeValues);
+            operation.Url = operation.GenerateUrl(viewContext, urlGenerator);
         }
     }
 }

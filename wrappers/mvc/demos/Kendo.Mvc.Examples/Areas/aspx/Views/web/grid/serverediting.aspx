@@ -18,10 +18,16 @@
         .DataSource(dataSource => dataSource
             .Server()
             .Model(model => model.Id(p => p.ProductID))
-            .Read(read => read.Action("ServerEditing", "Grid"))
-            .Update(update => update.Action("Update", "Grid"))
-            .Create(update => update.Action("Create", "Grid"))
-            .Destroy(update => update.Action("Destroy", "Grid"))
+            .Read("ServerEditing", "Grid")
+            .Update("Update", "Grid")
+            .Create("Create", "Grid")
+            .Destroy("Destroy", "Grid")
         )
     %>
+
+    <script type="text/javascript">
+        $(document).ready(function() {        
+            $("form.k-edit-form").kendoValidator();
+        });
+    </script>
 </asp:Content>

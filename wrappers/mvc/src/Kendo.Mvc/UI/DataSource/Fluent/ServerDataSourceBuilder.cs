@@ -25,6 +25,20 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        public ServerDataSourceBuilder<TModel> Read(string actionName, string controllerName, object routeValues)
+        {
+            SetOperationUrl(dataSource.Transport.Read, actionName, controllerName, routeValues);
+
+            return this;
+        }
+
+        public ServerDataSourceBuilder<TModel> Read(string actionName, string controllerName)
+        {
+            SetOperationUrl(dataSource.Transport.Read, actionName, controllerName, null);
+
+            return this;
+        }
+
         public ServerDataSourceBuilder<TModel> Total(int total)
         {
             dataSource.Total = total;
@@ -39,6 +53,20 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        public ServerDataSourceBuilder<TModel> Update(string actionName, string controllerName, object routeValues)
+        {
+            SetOperationUrl(dataSource.Transport.Update, actionName, controllerName, routeValues);
+
+            return this;
+        }
+
+        public ServerDataSourceBuilder<TModel> Update(string actionName, string controllerName)
+        {
+            SetOperationUrl(dataSource.Transport.Update, actionName, controllerName, null);
+
+            return this;
+        }
+
         public ServerDataSourceBuilder<TModel> Create(Action<ServerCrudOperationBuilder> configurator)
         {
             configurator(new ServerCrudOperationBuilder(dataSource.Transport.Create, viewContext, urlGenerator));
@@ -46,9 +74,37 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        public ServerDataSourceBuilder<TModel> Create(string actionName, string controllerName, object routeValues)
+        {
+            SetOperationUrl(dataSource.Transport.Create, actionName, controllerName, routeValues);
+
+            return this;
+        }
+
+        public ServerDataSourceBuilder<TModel> Create(string actionName, string controllerName)
+        {
+            SetOperationUrl(dataSource.Transport.Create, actionName, controllerName, null);
+
+            return this;
+        }
+
         public ServerDataSourceBuilder<TModel> Destroy(Action<ServerCrudOperationBuilder> configurator)
         {
             configurator(new ServerCrudOperationBuilder(dataSource.Transport.Destroy, viewContext, urlGenerator));
+
+            return this;
+        }
+
+        public ServerDataSourceBuilder<TModel> Destroy(string actionName, string controllerName, object routeValues)
+        {
+            SetOperationUrl(dataSource.Transport.Destroy, actionName, controllerName, routeValues);
+
+            return this;
+        }
+
+        public ServerDataSourceBuilder<TModel> Destroy(string actionName, string controllerName)
+        {
+            SetOperationUrl(dataSource.Transport.Destroy, actionName, controllerName, null);
 
             return this;
         }
@@ -92,6 +148,12 @@ namespace Kendo.Mvc.UI.Fluent
             configurator(new DataSourceModelDescriptorFactory<TModel>(dataSource.Schema.Model));
 
             return this;
+        }
+
+        protected virtual void SetOperationUrl(CrudOperation operation, string actionName, string controllerName, object routeValues)
+        {
+            operation.Action(actionName, controllerName, routeValues);
+            operation.Url = operation.GenerateUrl(viewContext, urlGenerator);
         }
     }
 }

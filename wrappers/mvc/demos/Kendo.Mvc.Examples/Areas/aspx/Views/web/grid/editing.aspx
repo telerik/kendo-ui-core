@@ -26,10 +26,10 @@
                 .ServerOperation(false)
                 .Events(events => events.Error("error_handler"))
                 .Model(model => model.Id(p => p.ProductID))
-                .Create(update => update.Action("Editing_Create", "Grid"))
-                .Read(read => read.Action("Editing_Read", "Grid"))
-                .Update(update => update.Action("Editing_Update", "Grid"))
-                .Destroy(update => update.Action("Editing_Destroy", "Grid"))
+                .Create("Editing_Create", "Grid")
+                .Read("Editing_Read", "Grid")
+                .Update("Editing_Update", "Grid")
+                .Destroy("Editing_Destroy", "Grid")
             )
     %>
     <script type="text/javascript">
