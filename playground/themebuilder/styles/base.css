@@ -1,0 +1,73 @@
+.ktb-colorpicker
+{
+    margin-bottom: 5px;
+    width: 90px;
+}
+
+.k-color-preview,
+.k-colorpicker .k-i-arrow-s
+{
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    margin: 1px 0 0 1px;
+}
+
+.k-color-preview,
+.k-colorpicker .k-i-arrow-s
+{
+    margin: 0;
+    border: 0;
+    background-image: none;
+}
+
+.k-color-preview
+{
+    background-image: none;
+}
+
+.k-list
+{
+    text-align: center;
+}
+
+.k-list .k-item
+{
+    width: 19px;
+    height: 19px;
+    line-height: 19px;
+    overflow: hidden;
+    display: inline-block;
+    text-align: center;
+    padding: 1px;
+    vertical-align: middle;
+}
+
+.k-list .k-state-hover,
+.k-list .k-state-focused,
+.k-list .k-state-selected
+{
+    padding: 0;
+}
+
+.k-colorpicker .k-select
+{
+    padding: 3px;
+}
+
+.k-list .k-icon
+{
+    background-image: none;
+    margin: 0;
+}
+
+.k-colorpicker .k-i-arrow-s
+{
+    margin-top: 0;
+}
+
+.k-colorpicker .k-input
+{
+    font: 12px Consolas, Courier, monospace;
+}
+

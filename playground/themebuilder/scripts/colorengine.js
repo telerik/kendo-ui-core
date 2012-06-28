@@ -47,7 +47,7 @@
 
     window.Color = kendo.Observable.extend({
         init: function(color) {
-            this.value = this.css2rgba(color);
+            this.set(this.css2rgba(color || "#000"));
         },
 
         toHex: function () {
@@ -74,23 +74,30 @@
             }
         },
 
+        set: function (value) {
+            var that = this;
+
+            that.value = value;
+            that.colorValue = value;
+        },
+
         add: function (color) {
-            this.value = this.addition(this.toRgba(), color);
+            this.set(this.addition(this.toRgba(), color));
             return this;
         },
 
         subtract: function (color) {
-            this.value = this.subtraction(this.toRgba(), color);
+            this.set(this.subtraction(this.toRgba(), color));
             return this;
         },
 
         lighten: function (percent) {
-            this.value = this.addition(this.toRgba(), buildPercent(percent));
+            this.set(this.addition(this.toRgba(), buildPercent(percent)));
             return this;
         },
 
         darken: function (percent) {
-            this.value = this.subtraction(this.toRgba(), buildPercent(percent));
+            this.set(this.subtraction(this.toRgba(), buildPercent(percent)));
             return this;
         },
 
@@ -274,9 +281,9 @@
             }
 
             return {
-                h: h * 360,
-                s: s * 100,
-                l: l * 100,
+                h: round(h * 360),
+                s: round(s * 100),
+                l: round(l * 100),
                 a: a
             };
         },
@@ -312,14 +319,22 @@
 
         _rotateColor: function (value, type) {
             var that = this,
-                hsl = that.rgb2hsl(that.value);
+                hsl = that.rgb2hsl(that.value),
+                color = that.rgb2hsl(that.colorValue);
 
+            hsl.h = color.h;
+            console.log(hsl.h, hsl.s, hsl.l);
             if (isNaN(value)) {
                 return round(hsl[type]);
             }
 
-            hsl[type] = clampValue(value, 0, clamps[type]);
+            hsl[type] = clampValue(value, 1, clamps[type]-1);
             that.value = that.hsl2rgb(hsl);
+
+            if (type == "h") {
+                that.colorValue = that.value;
+            }
+
             return that;
         }
 
