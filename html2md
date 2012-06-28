@@ -14,6 +14,10 @@ function download(address, callback) {
     http.get(options, function(request) {
         var html = "";
 
+        if (request.statusCode != 200) {
+            console.log(address, " returned ", request.statusCode);
+        }
+
         request.setEncoding("utf8")
 
         request.on("data", function(data) {
@@ -195,22 +199,50 @@ var toMarkdown = function(string) {
 };
 
 function content(html) {
-    return /<article class="content-main">(([\n\r]|.)*)?<\/article>/.exec(html)[1];
+    return /<article class="content-main">(([\n\r]|.)*?)<\/article>/.exec(html)[1];
 }
 
-function html2md(url) {
+function html2md(url, callback) {
+    callback = callback || function(md) {
+        console.log(md);
+    };
+
     download(url, function(html) {
-       console.log(toMarkdown(content(html)));
+       callback(markdown(content(html)));
     });
 }
 
-var args = process.argv.slice(2);
+function convertCode(html) {
+    return html.replace(/<pre\s*class=".*?prettyprint[^"]*">(([\n\r]|.)*?)<\/pre>/g, function($0, $1) {
+        var code = "\n    " + $1.replace(/\n/g, "\n    ").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"');
 
-if (args.length <= 0) {
-    console.log("Usage:");
-    console.log("node html2md <url>");
-} else {
-    html2md(args[0]);
+        return code;
+    }).replace(/<div\s*class="code-sample">(([\n\r]|.)*?)<\/div>/g, "$1");
+}
+
+function markdown(html) {
+    html = html.replace(/^ {4}/mg, "");
+
+    var md = toMarkdown(html);
+
+    md = md.replace(/^ +#/mg, "#");
+
+    return convertCode(md);
+}
+
+if (require.main !== module) {
+   exports.download = download;
+   exports.content = content;
+   exports.toMarkdown = markdown;
+   } else {
+    var args = process.argv.slice(2);
+
+    if (args.length <= 0) {
+        console.log("Usage:");
+        console.log("node html2md <url>");
+    } else {
+        html2md(args[0]);
+    }
 }
 
 // vim: ft=javascript

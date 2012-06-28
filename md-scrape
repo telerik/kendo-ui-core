@@ -1,0 +1,113 @@
+#!/usr/bin/env node
+
+var IO = require("build/node-jsdoc-toolkit/app/nodemodule").jsdoctoolkit.IO,
+    fs = require("fs"),
+    path = require("path");
+    convertor = require("html2md"),
+    url = require("url"),
+    path = require("path");
+
+
+function makePath(/**Array*/ path) {
+     path = path.split(/[\\\/]/);
+    var make = "";
+
+    for (var i = 0, l = path.length; i < l; i++) {
+        make += path[i] + "/";
+        if (!exists(make)) {
+            makeDir(make);
+        }
+    }
+}
+
+function saveFile(/**string*/ outDir, /**string*/ fileName, /**string*/ content) {
+    fs.writeFileSync(outDir + "/" + fileName, content, "utf8");
+}
+
+function exists(/**string*/ path) {
+    try {
+        fs.statSync(path);
+        return true;
+    } catch(e) {
+        return false;
+    }
+}
+
+function makeDir(/**string*/ path) {
+    fs.mkdirSync(path, 0777);
+}
+
+var root = "http://www.kendoui.com/documentation/";
+
+console.log("Fetching root document from:", root);
+
+convertor.download(root + "introduction.aspx", function(html){
+    console.log("Parsing navigation");
+
+    var pages = [];
+
+    var navigationRegExp = /<a class="rtIn[^"]*" href="([^"]*)">([^<]*)<\/a>/g;
+    var match;
+
+    while (match = navigationRegExp.exec(html)) {
+        pages.push({
+            url: match[1].toLowerCase(),
+            title: match[2]
+        });
+    }
+
+    pages = pages.filter(function(page) {
+        var url = page.url;
+
+        return /aspx$/.test(url) &&
+               !/datasource\.aspx$/.test(url) &&
+               !/chart\.aspx$/.test(url) &&
+               !/application\.aspx$/.test(url) &&
+               !/autocomplete\.aspx$/.test(url) &&
+               !(/ui-widgets|framework|mobile|dataviz/.test(url) && /configuration|overview|methods|events/.test(url));
+    });
+
+    var uniquePages = {};
+
+    pages.forEach(function(page) {
+        uniquePages[page.url] = page;
+    })
+
+    pages = [];
+
+    for (var page in uniquePages) {
+        pages.push(uniquePages[page]);
+    }
+
+    pages.forEach(function(page) {
+        var documentationRoot = "docs/converted/";
+
+        var folder = path.dirname(page.url);
+        var fileName = page.url.replace(folder + "/", "").replace("aspx", "md");
+
+        (function(url, title, folder, fileName) {
+            url = root + url;
+
+            console.log("Fetching: ", url);
+
+            convertor.download(url, function(html) {
+                var content = convertor.content(html);
+                var md = convertor.toMarkdown(content);
+                folder = path.join(documentationRoot, folder.toLowerCase());
+
+                makePath(folder);
+
+                md = "---\n" +
+                     "title: "  + title + "\n" +
+                     "publish: true\n" +
+                     "---\n\n" + md;
+
+                saveFile(folder, fileName, md);
+
+                console.log("Converted: ", path.join(folder, fileName));
+            });
+
+        })(page.url, page.title, folder, fileName);
+    });
+})
+// vim: ft=javascript
