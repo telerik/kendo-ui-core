@@ -276,7 +276,7 @@
         _wrapper: function() {
             var that = this,
                 element = that.element,
-                wrapper = element.parent("span.km-swith");
+                wrapper = element.parent("span.km-switch");
 
             if (!wrapper[0]) {
                 wrapper = element.wrap('<span class="km-switch"/>').parent();
