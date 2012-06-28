@@ -49,6 +49,7 @@
                            {
                                value: 1,
                                category: "A",
+                               color: "red",
                                explode: true
                            }, {
                                value: 2,
@@ -145,6 +146,31 @@
 
                 test("sets segment different center if segment have explode sets to true", function() {
                     ok(firstSegment.sector.c != pieChart.segments[1].sector.c);
+                });
+
+                // ------------------------------------------------------------
+                module("Pie Chart / Legend items", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                        setupPieChart(plotArea, { series: [ dataValues ] });
+                    }
+                });
+
+                test("returns legend item for each segment", function() {
+                    equals(pieChart.legendItems().length, 2);
+                });
+
+                test("sets legend item name to category", function() {
+                    equals(pieChart.legendItems()[0].name, "A");
+                });
+
+                test("sets legend item color", function() {
+                    equals(pieChart.legendItems()[0].color, "red");
+                });
+
+                test("skips points with visibleInLegend set to false", function() {
+                    pieChart.segments[1].visibleInLegend = false;
+                    equals(pieChart.legendItems().length, 1);
                 });
             })();
 

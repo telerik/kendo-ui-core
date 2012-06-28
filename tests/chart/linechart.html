@@ -707,8 +707,8 @@
                     point.series = { name: SERIES_NAME };
 
                     point.owner = {
-                        formatPointValue: function(value, tooltipFormat) {
-                            return kendo.dataviz.autoFormat(tooltipFormat, value);
+                        formatPointValue: function(point, tooltipFormat) {
+                            return kendo.dataviz.autoFormat(tooltipFormat, point.value);
                         }
                     }
 
