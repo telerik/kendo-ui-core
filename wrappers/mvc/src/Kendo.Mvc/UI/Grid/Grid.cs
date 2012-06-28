@@ -682,12 +682,14 @@ namespace Kendo.Mvc.UI
             }
         }
 
+        public bool? AutoBind { get; set; }
+
         public override void WriteInitializationScript(TextWriter writer)
         {
             var options = new Dictionary<string, object>(Events);
 
-            var autoBind = DataSource.Type != DataSourceType.Server;
-
+            var autoBind = DataSource.Type != DataSourceType.Server && AutoBind.GetValueOrDefault(true);
+                        
             var columns = VisibleColumns.Select(c => c.ToJson());
 
             var idPrefix = "#";
@@ -1208,6 +1210,14 @@ namespace Kendo.Mvc.UI
             if (!IsClientBinding && Scrollable.Enabled && Scrollable.Virtual)
             {
                 throw new NotSupportedException(Exceptions.CannotUseVirtualScrollWithServerBinding);
+            }
+
+            if (AutoBind.HasValue)
+            {
+                if (!IsClientBinding || (IsClientBinding && DataSource.Data != null))
+                {
+                    throw new NotSupportedException(Exceptions.CannotSetAutoBindIfBoundDuringInitialization);
+                }
             }
 
             if (IsClientBinding)

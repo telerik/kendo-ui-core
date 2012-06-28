@@ -298,5 +298,34 @@ namespace Kendo.Mvc.UI.Tests.Grid
 
             Assert.DoesNotThrow(() => grid.VerifySettings());
         }
+
+        [Fact]
+        public void Should_throw_if_autobind_is_set_with_server_binding()
+        {
+            var grid = GridTestHelper.CreateGrid<Customer>();
+            grid.DataSource.Type = DataSourceType.Server;
+            grid.AutoBind = true;
+            Assert.Throws<NotSupportedException>(() => grid.VerifySettings());
+        }
+
+        [Fact]
+        public void Should_throw_if_autobind_is_set_with_initial_ajax_binding()
+        {
+            var grid = GridTestHelper.CreateGrid<Customer>();
+            grid.DataSource.Data = new Customer[] { new Customer() };
+            grid.DataSource.Type = DataSourceType.Ajax;
+            grid.AutoBind = false;
+            Assert.Throws<NotSupportedException>(() => grid.VerifySettings());
+        }
+
+        [Fact]
+        public void Should_not_throw_if_autobind_is_set_and_no_data_is_supplied_ajax_binding()
+        {
+            var grid = GridTestHelper.CreateGrid<Customer>();
+            grid.DataSource.Data = new Customer[] { new Customer() };
+            grid.DataSource.Type = DataSourceType.Ajax;
+            grid.AutoBind = false;
+            Assert.Throws<NotSupportedException>(() => grid.VerifySettings());
+        }        
     }
 }

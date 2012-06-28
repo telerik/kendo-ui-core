@@ -88,6 +88,7 @@ namespace Kendo.Mvc.UI.Fluent
             
             return this;
         }
+       
         /// <summary>
         /// Sets the row template of the grid
         /// </summary>
@@ -153,6 +154,12 @@ namespace Kendo.Mvc.UI.Fluent
         {
             Component.ClientRowTemplate = template(Component);
 
+            return this;
+        }
+
+        public GridBuilder<T> AutoBind(bool value)
+        {
+            Component.AutoBind = value;
             return this;
         }
 

@@ -151,6 +151,15 @@ namespace Kendo.Mvc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot set AutoBind if grid is populated during initialization.
+        /// </summary>
+        internal static string CannotSetAutoBindIfBoundDuringInitialization {
+            get {
+                return ResourceManager.GetString("CannotSetAutoBindIfBoundDuringInitialization", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot use Ajax and WebService binding at the same time..
         /// </summary>
         internal static string CannotUseAjaxAndWebServiceAtTheSameTime {

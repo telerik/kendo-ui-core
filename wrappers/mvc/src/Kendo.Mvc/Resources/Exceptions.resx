@@ -319,4 +319,7 @@ The request for '{0}' has found the following matching controllers:{2}</value>
   <data name="CustomCommandRoutesWithAjaxBinding" xml:space="preserve">
     <value>Custom command routes is available only for server binding.</value>
   </data>
+  <data name="CannotSetAutoBindIfBoundDuringInitialization" xml:space="preserve">
+    <value>Cannot set AutoBind if grid is populated during initialization</value>
+  </data>
 </root>
