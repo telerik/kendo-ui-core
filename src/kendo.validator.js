@@ -49,6 +49,14 @@
         return rules;
     }
 
+    function decode(value) {
+        return value.replace(/&amp/g, '&amp;')
+            .replace(/&quot;/g, '"')
+            .replace(/&#39;/g, "'")
+            .replace(/&lt;/g, '<')
+            .replace(/&gt;/g, '>');
+    }
+
     /**
      *  @name kendo.ui.Validator.Description
      *
@@ -380,7 +388,7 @@
             if (!valid) {
                 messageText = that._extractMessage(input, result.key);
                 that._errors[fieldName] = messageText;
-                var messageLabel = $(template({ message: messageText }));
+                var messageLabel = $(template({ message: decode(messageText) }));
 
                 that._decorateMessageContainer(messageLabel, fieldName);
 
