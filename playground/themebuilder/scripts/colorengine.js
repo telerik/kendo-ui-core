@@ -323,6 +323,7 @@
                 color = that.rgb2hsl(that.colorValue);
 
             hsl.h = color.h;
+            hsl.s = color.s;
             if (isNaN(value)) {
                 return round(hsl[type]);
             }
@@ -330,9 +331,8 @@
             hsl[type] = clampValue(value, 0, clamps[type]);
             that.value = that.hsl2rgb(hsl);
 
-            if (type == "h") {
-                that.colorValue = that.value;
-            }
+            hsl.l = 50;
+            that.colorValue = that.hsl2rgb(hsl);
 
             return that;
         }
