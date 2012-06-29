@@ -111,7 +111,7 @@ a.k-button
 }
 
 /* Override the important default line-height in Firefox 4+ */
-.k-button:-moz-any(input[type="submit"], input[type="button"], input[type="reset"]) {
+.k-button:-moz-any(input) {
     padding-bottom: 0.37em;
     padding-top: 0.37em;
 }
