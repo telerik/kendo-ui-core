@@ -584,15 +584,55 @@
             });
 
             test("showing column with specified width changes table width", function() {
-                var grid = setup({
-                    columns: ["foo"]
-                });
-                var width = grid.table.css("width");
+                var grid = setup();
 
                 grid.hideColumn("bar");
                 grid.showColumn("bar");
 
-                equal(grid.table.css("width"), width);
+                equal(grid.table[0].style.width, "60px");
+            });
+
+            test("showing column with specified width in grid which has column width in percents", function() {
+                var grid = setup({
+                    columns: [{ field: "foo", width: "10%" }]
+                });
+
+                grid.hideColumn("bar");
+                var width = grid.table[0].style.width;
+                grid.showColumn("bar");
+
+                equal(grid.table[0].style.width, width);
+            });
+
+            test("showing column remains visible on refresh", function() {
+                var grid = setup({
+                    columns: [{ field: "foo", hidden: true, footerTemplate: "template" }]
+                });
+
+                grid.showColumn("foo");
+                grid.refresh();
+
+                equal(grid.thead.prev().find("col").length, 3);
+                equal(grid.thead.find("th:visible").length, 3);
+                equal(grid.tbody.find("td:visible").length, 3);
+                equal(grid.footer.find("td:visible").length, 3);
+                equal(grid.columns[0].attributes.style, "");
+            });
+
+            test("showing column remove display style from attributes", function() {
+                var grid = setup({
+                    columns: [{
+                        field: "foo",
+                        hidden: true,
+                        attributes: { style: "foo: bar" }
+                    }]
+                });
+
+                grid.showColumn("foo");
+                var attr = grid.columns[0].attributes;
+
+                ok(attr.style);
+                equal(attr.style, "foo: bar");
             });
         </script>
     </body>

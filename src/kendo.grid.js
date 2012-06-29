@@ -387,6 +387,17 @@
         return extend({}, attr, { style: style });
     }
 
+    function removeHiddenStyle(attr) {
+        attr = attr || {};
+        var style = attr.style;
+
+        if(style) {
+            attr.style = style.replace(/((.*)?)(display\s*:\s*none)\s*;?/i, "$1");
+        }
+
+        return attr;
+    }
+
     var Grid = Widget.extend({
         init: function(element, options) {
             var that = this;
@@ -2712,7 +2723,6 @@
 
             columnIndex = $.inArray(column, visibleColumns(columns));
             column.hidden = true;
-            //column.width = that.thead.prev().find("col")[columnIndex].style.width;
             column.attributes = addHiddenStyle(column.attributes);
             column.footerAttributes = addHiddenStyle(column.footerAttributes);
             column.headerAttributes = addHiddenStyle(column.headerAttributes);
@@ -2760,6 +2770,9 @@
                 row,
                 cell,
                 tables,
+                width,
+                colWidth,
+                cols,
                 columns = that.columns,
                 columnIndex;
 
@@ -2777,6 +2790,10 @@
 
             columnIndex = $.inArray(column, columns);
             column.hidden = false;
+            column.attributes = removeHiddenStyle(column.attributes);
+            column.footerAttributes = removeHiddenStyle(column.footerAttributes);
+            column.headerAttributes = removeHiddenStyle(column.headerAttributes);
+            that._templates();
 
             that._updateCols();
             that.thead.find(">tr>th:not(.k-hierarchy-cell,.k-group-cell)").eq(columnIndex).show();
@@ -2800,6 +2817,21 @@
             tables = $(">.k-grid-header table:first,>.k-grid-footer table:first",that.wrapper).add(that.table);
             if (!column.width) {
                 tables.width("");
+            } else {
+                width = 0;
+                cols = that.thead.prev().find("col");
+                for (idx = 0, length = cols.length; idx < length; idx += 1) {
+                    colWidth = cols[idx].style.width;
+                    if (colWidth.indexOf("%") > -1) {
+                        width = 0;
+                        break;
+                    }
+                    width += parseInt(colWidth, 10);
+                }
+
+                if (width) {
+                    tables.width(width);
+                }
             }
         },
 
