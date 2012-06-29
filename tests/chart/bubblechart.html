@@ -40,12 +40,19 @@
             }
 
             (function() {
+                var TOLERANCE = 1;
+
                 var series = { data: [{
-                    x: 1, y: 10, size: 100, category: "a",
-                    color: "red"
-                }, {
-                    x: 2, y: 2, size: 20, category: "b"
-                }] };
+                        x: 1, y: 10, size: 100, category: "a",
+                        color: "red"
+                    }, {
+                        x: 2, y: 2, size: 0, category: "b"
+                    }, {
+                        x: 3, y: 3, size: 20, category: "b"
+                    }],
+                    minSize: 10,
+                    maxSize: 110
+                };
 
                 function PlotAreaStub() { }
 
@@ -86,6 +93,23 @@
                     equals(bubbleChart.points.length, 0);
                 });
 
+                test("Maximum bubble diameter is set to maxSize", function() {
+                    equals(bubbleChart.points[0].options.markers.size, 110, TOLERANCE);
+                });
+
+                test("Minimum bubble diameter is set to minSize", function() {
+                    equals(bubbleChart.points[1].options.markers.size, 10, TOLERANCE);
+                });
+
+                test("Bubble diameter is proportional to size value", function() {
+                    equals(bubbleChart.points[2].options.markers.size, 50, TOLERANCE);
+                });
+
+                test("zIndex is higher for smaller bubbles", function() {
+                    ok(bubbleChart.points[1].options.markers.zIndex >
+                       bubbleChart.points[0].options.markers.zIndex);
+                });
+
                 test("Color is set for bubbles with negative size", function() {
                     setupBubbleChart(plotArea, { series: [{
                             data: [{x: 1, y: 1, size: -100}],
@@ -121,7 +145,7 @@
                 });
 
                 test("returns legend item for each point", function() {
-                    equals(bubbleChart.legendItems().length, 2);
+                    equals(bubbleChart.legendItems().length, 3);
                 });
 
                 test("sets legend item name to category", function() {
@@ -134,7 +158,7 @@
 
                 test("skips points with visibleInLegend set to false", function() {
                     bubbleChart.points[1].visibleInLegend = false;
-                    equals(bubbleChart.legendItems().length, 1);
+                    equals(bubbleChart.legendItems().length, 2);
                 });
 
             })();

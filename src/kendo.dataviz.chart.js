@@ -2229,7 +2229,6 @@
         getOutlineElement: function(view, options) {
             var element = this;
 
-            // TODO: Gradiented stroke (shadow filter?)
             return view.createCircle(
                 [element.box.center().x, element.box.center().y],
                 element.options.markers.size / 2 - 0.5, {
@@ -2736,7 +2735,7 @@
                 seriesPoints = chart.seriesPoints,
                 valueFields = chart.valueFields(),
                 bindableFields = chart.bindableFields(),
-                pointIx = 0,
+                pointIx,
                 seriesIx,
                 currentSeries,
                 currentSeriesPoints,
@@ -2826,17 +2825,16 @@
             }
         },
 
+        reflow: function(box) {
+            var chart = this;
+
+            chart.updateBubblesSize();
+            ScatterChart.fn.reflow.call(chart, box);
+        },
+
         createPoint: function(value, series, seriesIx, fields) {
             var chart = this,
                 point,
-                maxValue = chart.maxSize(series),
-                minR = series.minSize / 2,
-                maxR = series.maxSize / 2,
-                minArea = math.PI * minR * minR,
-                maxArea = math.PI * maxR * maxR,
-                areaRange = maxArea - minArea,
-                area = math.abs(value.size) * (areaRange / maxValue),
-                r = math.sqrt((minArea + area) / math.PI),
                 pointsCount = series.data.length,
                 delay = fields.pointIx * (INITIAL_ANIMATION_DURATION / pointsCount),
                 animationOptions = {
@@ -2848,19 +2846,16 @@
             point = new Bubble(value,
                 deepExtend({
                     markers: {
-                        size: r * 2,
                         type: CIRCLE,
                         background: fields.color,
                         border: series.border,
                         opacity: series.opacity,
-                        animation: animationOptions,
-                        zIndex: maxR - r
+                        animation: animationOptions
                     },
                     tooltip: {
                         format: chart.options.tooltip.format
                     },
                     labels: {
-                        zIndex: maxR - r + 1,
                         format: chart.options.labels.format,
                         animation: animationOptions
                     }
@@ -2875,17 +2870,50 @@
             // TODO: Clip to axis line box
         },
 
-        maxSize: function(series) {
-            // TODO: Call once per series by overriding render
+        updateBubblesSize: function() {
             var chart = this,
-                length = series.data.length,
-                valueFields = chart.valueFields(),
+                options = chart.options,
+                series = options.series,
+                seriesIx,
+                pointIx;
+
+            for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
+                var currentSeries = series[seriesIx],
+                    seriesPoints = chart.seriesPoints[seriesIx],
+                    seriesMaxSize = chart.maxSize(seriesPoints),
+                    minR = currentSeries.minSize / 2,
+                    maxR = currentSeries.maxSize / 2,
+                    minArea = math.PI * minR * minR,
+                    maxArea = math.PI * maxR * maxR,
+                    areaRange = maxArea - minArea,
+                    areaRatio = areaRange / seriesMaxSize;
+
+                for (pointIx = 0; pointIx < seriesPoints.length; pointIx++) {
+                    var point = seriesPoints[pointIx],
+                        area = math.abs(point.value.size) * areaRatio,
+                        r = math.sqrt((minArea + area) / math.PI);
+
+                    deepExtend(point.options, {
+                        markers: {
+                            size: r * 2,
+                            zIndex: maxR - r
+                        },
+                        labels: {
+                            zIndex: maxR - r + 1
+                        }
+                    });
+                }
+            }
+        },
+
+        maxSize: function(seriesPoints) {
+            var length = seriesPoints.length,
                 max = 0,
                 i,
                 size;
 
             for (i = 0; i < length; i++) {
-                size = bindPoint(series, i, valueFields).value.size;
+                size = seriesPoints[i].value.size;
                 max = math.max(max, math.abs(size));
             }
 
