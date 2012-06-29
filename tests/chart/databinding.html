@@ -198,7 +198,7 @@
                     }, 50);
                 });
 
-                asyncTest("series data is cleaned when data source returns empty view", 2, function() {
+                asyncTest("series data is cleaned when data source returns empty view", 1, function() {
                     var dataSource = new kendo.data.DataSource({
                         data: [{
                             period: "Jan",
@@ -219,7 +219,6 @@
                     chart.bind("dataBound", function() {
                             var series = this.options.series[0];
                             equal(series.data.length, 0);
-                            equal(series.dataItems.length, 0);
                             start();
                         }
                     );
@@ -324,7 +323,7 @@
                             field: "sales"
                         }],
                         dataBound: function() {
-                            equal(this.options.series[0].dataItems[1].sales, 100);
+                            equal(this.options.series[0].data[1].sales, 100);
                             start();
                         }
                     });
@@ -425,7 +424,7 @@
 
                 asyncTest("assigns grouped points to first series", 1, function() {
                     createGroupedChart(function() {
-                        same(getSales(this.options.series[0].dataItems),
+                        same(getSales(this.options.series[0].data),
                              getSales(this.dataSource.view()[0].items));
                         start();
                     });
@@ -433,7 +432,7 @@
 
                 asyncTest("assigns grouped points to second series", 1, function() {
                     createGroupedChart(function() {
-                        same(getSales(this.options.series[1].dataItems),
+                        same(getSales(this.options.series[1].data),
                              getSales(this.dataSource.view()[1].items));
                         start();
                     });
@@ -611,8 +610,7 @@
 
                 test("binds value to dataItem using field name", function() {
                     series.field = "aValue";
-                    series.data = [undefined];
-                    series.dataItems = [{ aValue: 1 }];
+                    series.data = [{ aValue: 1 }];
 
                     same(bindPoint(series, 0, ["value"]),
                         { value: 1, fields: {} }
@@ -622,8 +620,7 @@
                 test("binds multiple values to dataItem", function() {
                     series.aField = "aValue";
                     series.bField = "bValue";
-                    series.data = [undefined];
-                    series.dataItems = [{ aValue: 1, bValue: 2 }];
+                    series.data = [{ aValue: 1, bValue: 2 }];
 
                     same(bindPoint(series, 0, ["a", "b"]),
                         { value: { a: 1, b: 2 }, fields: {} }
@@ -634,8 +631,7 @@
                     series.aField = "aValue";
                     series.bField = "bValue";
                     series.colorField = "color";
-                    series.data = [undefined];
-                    series.dataItems = [{ aValue: 1, bValue: 2, color: "red" }];
+                    series.data = [{ aValue: 1, bValue: 2, color: "red" }];
 
                     same(bindPoint(series, 0, ["a", "b"], ["color"]),
                         { value: { a: 1, b: 2} , fields: { color: "red" } }

@@ -496,8 +496,7 @@
                 currentSeries = series[seriesIx];
 
                 if (currentSeries.field || (currentSeries.xField && currentSeries.yField)) {
-                    currentSeries.data = new Array(data.length);
-                    currentSeries.dataItems = data;
+                    currentSeries.data = data;
 
                     [].push.apply(processedSeries, grouped ?
                         chart._createGroupedSeries(currentSeries, data) :
@@ -537,8 +536,7 @@
                 groupSeries.push(seriesClone);
 
                 group = data[groupIx];
-                seriesClone.data = new Array(group.items.length);
-                seriesClone.dataItems = group.items;
+                seriesClone.data = group.items;
 
                 if (nameTemplate) {
                     seriesClone.name = nameTemplate({
@@ -1640,8 +1638,7 @@
                 point.series = series;
                 point.seriesIx = seriesIx;
                 point.owner = chart;
-                point.dataItem = series.dataItems ?
-                    series.dataItems[categoryIx] : { value: value };
+                point.dataItem = series.data[categoryIx];
             }
 
             chart.points.push(point);
@@ -2743,14 +2740,12 @@
                 seriesIx,
                 currentSeries,
                 currentSeriesPoints,
-                dataItems,
                 pointData,
                 value,
                 fields;
 
             for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
                 currentSeries = series[seriesIx];
-                dataItems = currentSeries.dataItems;
 
                 currentSeriesPoints = seriesPoints[seriesIx];
                 if (!currentSeriesPoints) {
@@ -2766,7 +2761,7 @@
                         pointIx: pointIx,
                         series: currentSeries,
                         seriesIx: seriesIx,
-                        dataItem: dataItems ? dataItems[pointIx] : value,
+                        dataItem: currentSeries.data[pointIx],
                         owner: chart
                     }, fields));
                 }
@@ -3194,7 +3189,6 @@
                 overlayId = uniqueId(),
                 valueFields = chart.valueFields(),
                 bindableFields = chart.bindableFields(),
-                dataItems,
                 currentSeries,
                 pointData,
                 fields,
@@ -3210,7 +3204,6 @@
 
             for (seriesIx = 0; seriesIx < seriesCount; seriesIx++) {
                 currentSeries = series[seriesIx];
-                dataItems = currentSeries.dataItems;
                 data = currentSeries.data;
                 total = chart.pointsTotal(currentSeries);
                 anglePerValue = 360 / total;
@@ -3235,7 +3228,7 @@
                         categoryIx: i,
                         series: currentSeries,
                         seriesIx: seriesIx,
-                        dataItem: dataItems ? dataItems[i] : { value: value },
+                        dataItem: data[i],
                         percentage: value / total,
                         explode: explode,
                         visibleInLegend: fields.visibleInLegend,
@@ -4242,8 +4235,6 @@
                 seriesClone,
                 srcData,
                 data,
-                srcDataItems,
-                dataItems,
                 aggregate,
                 srcValues,
                 i,
@@ -4256,10 +4247,8 @@
                 aggregate = plotArea.seriesAggregate(seriesClone);
 
                 srcData = seriesClone.data;
-                srcDataItems = seriesClone.dataItems || [];
 
                 seriesClone.data = data = [];
-                seriesClone.dataItems = dataItems = [];
 
                 for (groupIx = 0; groupIx < categories.length; groupIx++) {
                     categoryIndicies = categoryMap[groupIx];
@@ -4274,12 +4263,11 @@
                         }
                     }
 
-                    if (srcValues.length > 0) {
+                    if (srcValues.length > 1) {
                         data[groupIx] = aggregate(srcValues, currentSeries);
+                    } else {
+                        data[groupIx] = srcData[categoryIndicies[0]];
                     }
-
-                    dataItems[groupIx] = srcValues.length > 1 ?
-                        undefined : srcDataItems[categoryIndicies[0]];
                 }
 
                 processedSeries.push(seriesClone);
@@ -5183,6 +5171,8 @@
         var pointData = series.data[pointIx],
             fieldData,
             fields = {},
+            srcValueFields,
+            srcPointFields,
             value,
             result = { value: pointData };
 
@@ -5193,12 +5183,12 @@
                 value = bindFromArray(pointData, valueFields);
                 fields = bindFromArray(fieldData, pointFields);
             } else if (typeof pointData === "object") {
-                value = bindFromObject(pointData, valueFields);
-                fields = bindFromObject(pointData, pointFields);
+                srcValueFields = mapSeriesFields(series, valueFields);
+                srcPointFields = mapSeriesFields(series, pointFields);
+
+                value = bindFromObject(pointData, valueFields, srcValueFields);
+                fields = bindFromObject(pointData, pointFields, srcPointFields);
             }
-        } else if (series.dataItems) {
-            value = bindFromDataItem(series, valueFields, pointIx);
-            fields = bindFromDataItem(series, pointFields, pointIx);
         } else {
             value = bindFromObject({}, valueFields);
         }
@@ -5232,50 +5222,47 @@
         return value;
     }
 
-    function bindFromObject(object, fields) {
+    function bindFromObject(object, fields, srcFields) {
         var value = {},
             i,
             length,
-            fieldName;
+            fieldName,
+            srcFieldName;
 
         if (fields) {
             length = fields.length;
+            srcFields = srcFields || fields;
 
             for (i = 0; i < length; i++) {
                 fieldName = fields[i];
-                value[fieldName] = getField(fieldName, object);
+                srcFieldName = srcFields[i];
+                value[fieldName] = getField(srcFieldName, object);
             }
         }
 
         return value;
     }
 
-    function bindFromDataItem(series, fields, pointIx) {
-        var value = {},
-            dataItems = series.dataItems,
-            i,
+    function mapSeriesFields(series, fields) {
+        var i,
             length,
             fieldName,
-            sourceFieldName,
-            sourceField,
-            currentDataItem;
+            sourceFields,
+            sourceFieldName;
 
         if (fields) {
             length = fields.length;
+            sourceFields = [];
 
             for (i = 0; i < length; i++) {
                 fieldName = fields[i];
                 sourceFieldName = fieldName === "value" ? "field" : fieldName + "Field";
-                sourceField = series[sourceFieldName];
 
-                currentDataItem = dataItems[pointIx];
-                if (sourceField && currentDataItem) {
-                    value[fieldName] = getField(sourceField, currentDataItem);
-                }
+                sourceFields.push(series[sourceFieldName] || fieldName);
             }
         }
 
-        return value;
+        return sourceFields;
     }
 
     // Exports ================================================================

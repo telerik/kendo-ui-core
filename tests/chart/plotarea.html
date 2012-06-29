@@ -764,13 +764,12 @@
 
                 test("Does not alter data items when no grouping is done", function() {
                     createPlotArea([{
-                        data: [100, 200, 300],
-                        dataItems: ["a", "b", "c"]
+                        data: ["a", "b", "c"]
                     }], {
                         categoryAxis: dateCategoryAxis
                     });
 
-                    same(plotArea.series[0].dataItems, ["a", "b", undefined, "c"]);
+                    same(plotArea.series[0].data, ["a", "b", undefined, "c"]);
                 });
 
                 test("Does not alter original series data", function() {
@@ -839,19 +838,6 @@
                             baseUnit: "months"
                         }, dateCategoryAxis)
                     });
-                });
-
-                test("Aggregated points don't have data items", function() {
-                    createPlotArea([{
-                        data: [100, 200, 300],
-                        dataItems: ["a", "b", "c"]
-                    }], {
-                        categoryAxis: kendo.deepExtend({
-                            baseUnit: "months"
-                        }, dateCategoryAxis)
-                    });
-
-                    same(plotArea.series[0].dataItems, [undefined]);
                 });
 
             })();
@@ -1268,8 +1254,7 @@
                         type: "scatter",
                         xField: "x",
                         yField: "y",
-                        data: [undefined],
-                        dataItems: [{ x: new Date(2012, 02, 01), y: 100 }]
+                        data: [{ x: new Date(2012, 02, 01), y: 100 }]
                     }]);
 
                     same(plotArea.axisX.options.type, "Date");
@@ -1305,8 +1290,7 @@
                         type: "scatter",
                         xField: "x",
                         yField: "y",
-                        data: [undefined],
-                        dataItems: [{ x: 100, y: new Date(2012, 02, 01) }]
+                        data: [{ x: 100, y: new Date(2012, 02, 01) }]
                     }]);
 
                     same(plotArea.axisY.options.type, "Date");
