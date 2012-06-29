@@ -902,6 +902,7 @@
             // TODO: Move to line or labels options
             margin: 5,
             visible: true,
+            reverse: false,
 
             _alignLines: true,
             _labelsOnTicks: true

@@ -1713,7 +1713,8 @@
                 categoryAxis = plotArea.categoryAxis,
                 valueAxis,
                 axisCrossingValue,
-                point;
+                point,
+                stacks;
 
             chart.traverseDataPoints(function(data, category, categoryIx, currentSeries) {
                 var value = data.value;
@@ -1721,6 +1722,13 @@
                 valueAxis = chart.seriesValueAxis(currentSeries);
                 axisCrossingValue = valueAxis.options.axisCrossingValue;
                 point = chartPoints[pointIx++];
+
+                stacks = (chart._stacks || [])[categoryIx];
+                if (stacks) {
+                    stacks[0].options.isReversed = valueAxis.options.reverse;
+                    stacks[1].options.isReversed = !valueAxis.options.reverse;
+                }
+
                 if (point && point.plotValue) {
                     value = point.plotValue;
                 }
@@ -1770,13 +1778,15 @@
                 seriesIx,
                 pointData,
                 currentCategory,
-                currentSeries;
+                currentSeries,
+                seriesCount = series.length;
 
             for (categoryIx = 0; categoryIx < count; categoryIx++) {
-                for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
+                for (seriesIx = 0; seriesIx < seriesCount; seriesIx++) {
                     currentCategory = categories[categoryIx];
                     currentSeries = series[seriesIx];
                     pointData = bindPoint(currentSeries, categoryIx, valueFields, bindableFields);
+
                     callback(pointData, currentCategory, categoryIx, currentSeries, seriesIx);
                 }
             }
@@ -1801,6 +1811,7 @@
 
             chart._groupTotals = {};
             chart._groups = [];
+            chart._stacks = [];
 
             CategoricalChart.fn.init.call(chart, plotArea, options);
         },
@@ -1858,9 +1869,10 @@
                         vertical: !options.invertAxes
                     });
                     negativeStack = new StackLayout({
-                        vertical: !options.invertAxes,
-                        isReversed: true
+                        vertical: !options.invertAxes
                     });
+
+                    barChart._stacks.push([ positiveStack, negativeStack ]);
                     stackWrap.append(positiveStack, negativeStack);
                 } else {
                     positiveStack = stackWrap.children[0];
