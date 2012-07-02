@@ -1984,6 +1984,7 @@ function pad(number) {
                     omini: /Opera\sMini/i,
                     omobile: /Opera\sMobi/i,
                     firefox: /Firefox|Fennec/i,
+                    mobilesafari: /version\/.*safari/i,
                     webkit: /webkit/i,
                     ie: /MSIE|Windows\sPhone/i
                 },

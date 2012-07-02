@@ -26,7 +26,7 @@
 
         iconMeta = kendo.template('<link rel="apple-touch-icon' + (support.mobileOS.android ? '-precomposed' : '') + '" # if(data.size) { # sizes="#=data.size#" #}# href="#=data.icon#" />', {usedWithBlock: false}),
 
-        HIDEBAR = OS.device == "iphone" || OS.device == "ipod",
+        HIDEBAR = (OS.device == "iphone" || OS.device == "ipod") && OS.browser == "mobilesafari",
         BARCOMPENSATION = 60,
 
         WINDOW = $(window),
