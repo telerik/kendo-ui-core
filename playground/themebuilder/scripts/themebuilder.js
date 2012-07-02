@@ -200,10 +200,6 @@ var oldColor, devices = [ "ios", "android", "blackberry", "meego" ],
 
     kendo.ui.plugin(ColorPicker);
 
-    $(".ktb-colorpicker").kendoColorPicker({
-//        change: changeHandler
-    });
-
     for (var idx in widgetList) {
         var children = widgetList[idx].children;
         if (children) {
@@ -376,7 +372,7 @@ var oldColor, devices = [ "ios", "android", "blackberry", "meego" ],
         for(var idx in widgetList) {
             widget = widgetList[idx];
             if (widget.whitelist && widget.whitelist.indexOf(property) != -1 && widget.selector[0] != ">") {
-                output += widget.selector + ":visible,";
+                output += widget.selector + ",";
             }
         }
         return output.substring(0, output.length-1);
@@ -434,6 +430,8 @@ var oldColor, devices = [ "ios", "android", "blackberry", "meego" ],
             .insertAfter("#iosDevice");
     });
 
+    $("#" + clones[0] + "Device [data-role=view]").attr("data-init", "initTargets");
+
     $.each(devices, function () {
         var that = this.toString(),
             deviceId = "#" + that + "Device";
@@ -453,31 +451,46 @@ var oldColor, devices = [ "ios", "android", "blackberry", "meego" ],
 })(jQuery);
 
 function initTargets() {
-    var property = "background-color",
-        color = "transparent",
-        defaultCSS = { cursor: "default" };
+    setTimeout(function () {
+        var property = "background-color",
+            color = "transparent",
+            defaultCSS = { cursor: "default" };
 
-    defaultCSS[property] = "";
+        defaultCSS[property] = "";
 
-    $(getPropertySelector(property)).kendoDropTarget({
-        dragenter: function (e) {
-            color = new Color(e.draggable.element.css(property)).get();
+        $(getPropertySelector(property)).kendoDropTarget({
+            dragenter: function (e) {
+                color = new Color(e.draggable.element.css(property)).get();
 
-            var css = { cursor: cursorSvg.replace("%23f984ef", color) };
+                var css = { cursor: cursorSvg.replace("%23f984ef", color) };
 
-            css[property] = color;
-            this.element.css(css);
+                css[property] = color;
+                this.element.css(css);
+            },
+            dragleave: function () {
+                this.element.css(defaultCSS);
+            },
+            drop: function (e) {
+                this.element.css(defaultCSS);
+                this.element.parents(".device").data("kendoStyleEngine").update(this.element, { "background-color": color });
+            }
+        });
+        $("#picky").kendoCustomPicker();
+        $(".km-navbar").kendoCustomPicker();
+    }, 200);
+}
+
+function mobileAccountViewInit() {
+    var listviews = this.element.find("ul.km-listview");
+
+    this.element.find("[id^=settings-view]").kendoMobileButtonGroup({
+        select: function() {
+            listviews.hide()
+                     .eq(this.selectedIndex)
+                     .show();
         },
-        dragleave: function () {
-            this.element.css(defaultCSS);
-        },
-        drop: function (e) {
-            this.element.css(defaultCSS);
-            this.element.parents(".device").data("kendoStyleEngine").update(this.element, { "background-color": color });
-        }
+        index: 0
     });
-    $("#picky").kendoCustomPicker();
-    $(".km-navbar").kendoCustomPicker();
 }
 
 $("#getStyles").click(function () {

@@ -113,7 +113,7 @@
             background: none;
         }
 
-        .k-colorpick {
+        .body .k-colorpick {
             font: inherit !important;
             width: 190px;
             padding: .8em;
@@ -121,7 +121,7 @@
 
     </style>
 </head>
-<body>
+<body class="body">
     <div class="box">
         <div class="drop" style="background: #dc143c;">&nbsp;</div>
         <div class="drop" style="background: #0066cc;">&nbsp;</div>
@@ -136,7 +136,7 @@
         <br /><br />
         <div>
             <div id="iosDevice" class="device">
-                <div data-role="view" data-layout="overview-layout" id="overview-cities" data-title="Favourite Cities" data-show="initTargets">
+                <div data-role="view" data-layout="overview-layout" id="overview-cities" data-title="Favourite Cities">
                     <ul data-role="listview" data-style="inset" data-type="group">
                         <li>
                             Africa
@@ -176,7 +176,7 @@
                     </ul>
                 </div>
 
-                <div data-role="view" data-layout="overview-layout" id="overview-gallery" data-title="Photo Gallery" data-show="initTargets">
+                <div data-role="view" data-layout="overview-layout" id="overview-gallery" data-title="Photo Gallery">
                     <div id="scrollview-container">
                         <div data-role="scrollview">
                             <div class="photo photo1"></div><div class="photo photo2"></div><div class="photo photo3"></div><div class="photo photo4"></div><div class="photo photo5"></div><div class="photo photo6"></div><div class="photo photo7"></div><div class="photo photo8"></div><div class="photo photo9"></div><div class="photo photo10"></div>
@@ -184,7 +184,7 @@
                     </div>
                 </div>
 
-                <div data-role="view" data-layout="overview-layout" id="overview-contacts" data-title="My Contacts" data-show="initTargets">
+                <div data-role="view" data-layout="overview-layout" id="overview-contacts" data-title="My Contacts">
                     <ul data-role="listview" data-type="group">
                         <li>
                             A
@@ -226,7 +226,7 @@
                     </ul>
                 </div>
 
-                <div data-role="view" data-layout="overview-layout" data-init="mobileAccountViewInit" id="overview-account" data-title="Account Settings" data-show="initTargets">
+                <div data-role="view" data-layout="overview-layout" data-init="mobileAccountViewInit" id="overview-account" data-title="Account Settings">
                     <ul id="settings-view" data-index="0">
                         <li>
                             Profile
@@ -384,21 +384,6 @@
                 </style>
             </div>
         </div>
-        <script>
-            function mobileAccountViewInit() {
-                var listviews = this.element.find("ul.km-listview");
-
-                this.element.find("[id^=settings-view]").kendoMobileButtonGroup({
-                    select: function() {
-                        listviews.hide()
-                                 .eq(this.selectedIndex)
-                                 .show();
-                    },
-                    index: 0
-                });
-            }
-
-        </script>
         <br/><br/>
         <style scoped="scoped">
             /* Test input styling */
@@ -456,7 +441,7 @@
         <input id="meegobox" type="checkbox" class="k-checkbox" />
         <label for="meegobox" class="k-checkbox">MeeGo</label>
         <button class="k-button" id="getStyles">Get Styles</button>
-        <script type="text/javascript" src="scripts/themebuilder.js"></script>
     </div>
+    <script type="text/javascript" src="scripts/themebuilder.js"></script>
 </body>
 </html>
