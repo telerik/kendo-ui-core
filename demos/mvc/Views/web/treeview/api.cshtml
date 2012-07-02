@@ -20,8 +20,18 @@
                         <button class="k-button" id="collapseAllNodes">Collapse all nodes</button>
                     </li>
                     <li>
-                        <input name="text" id="text" value="Node" class="k-textbox"/>
+                        <input id="appendNodeText" value="Node" class="k-textbox"/>
                         <button class="k-button" id="appendNodeToSelected">Append node</button>
+                    </li>
+                </ul>
+                <span class="configHead" style="margin-top: 1.5em">DataSource interaction</span>
+                <ul class="options">
+                    <li>
+                        <button class="k-button" id="sortDataSource">Sort</button>
+                    </li>
+                    <li>
+                        <input id="filterText" value="Item 1" class="k-textbox"/>
+                        <button class="k-button" id="filterDataSource">Filter by text</button>
                     </li>
                 </ul>
             </div>
@@ -45,20 +55,13 @@
                                 { text: "Item 3" }
                             ]
                         }).data("kendoTreeView"),
-                        append = function(e) {
-                            if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode) {
-                                var selectedNode = treeview.select();
 
-                                // passing a falsy value as the second append() parameter
-                                // will append the new node to the root group
-                                if (selectedNode.length == 0) {
-                                    selectedNode = null;
+                        handleTextBox = function(callback) {
+                            return function(e) {
+                                if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode) {
+                                    callback(e);
                                 }
-
-                                treeview.append({
-                                    text: $("#text").val()
-                                }, selectedNode);
-                            }
+                            };
                         };
 
 
@@ -88,8 +91,56 @@
                         treeview.collapse(".k-item");
                     });
 
+                    var append = handleTextBox(function(e) {
+                            var selectedNode = treeview.select();
+
+                            // passing a falsy value as the second append() parameter
+                            // will append the new node to the root group
+                            if (selectedNode.length == 0) {
+                                selectedNode = null;
+                            }
+
+                            treeview.append({
+                                text: $("#appendNodeText").val()
+                            }, selectedNode);
+                        });
+
                     $("#appendNodeToSelected").click(append);
-                    $("#text").keypress(append);
+                    $("#appendNodeText").keypress(append);
+
+                    // datasource actions
+
+                    var ascending = false;
+
+                    $("#sortDataSource")
+                        .text(ascending ? "Sort ascending" : "Sort descending")
+                        .click(function() {
+                            treeview.dataSource.sort({
+                                field: "text",
+                                dir: ascending ? "asc" : "desc"
+                            });
+
+                            ascending = !ascending;
+
+                            $(this).text(ascending ? "Sort ascending" : "Sort descending")
+                        });
+
+                    var filter = handleTextBox(function(e) {
+                        var filterText = $("#filterText").val();
+
+                        if (filterText !== "") {
+                            treeview.dataSource.filter({
+                                field: "text",
+                                operator: "contains",
+                                value: filterText
+                            });
+                        } else {
+                            treeview.dataSource.filter({});
+                        }
+                    });
+
+                    $("#filterDataSource").click(filter);
+                    $("#filterText").keypress(filter);
                 });
             </script>
             <style scoped>
