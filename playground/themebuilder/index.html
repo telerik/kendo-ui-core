@@ -1,5 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-        "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
     <title>Theme Builder</title>
@@ -134,14 +133,6 @@
         <div class="drop" style="background: rgba(200,150,100,.5);">&nbsp;</div>
         <div class="drop" style="background: -webkit-linear-gradient(left top, #0b47a2, #04b7a2 5%, #0b4a72 98%, #20b47a);">&nbsp;</div>
         <div class="adddrop">+</div>
-        <br /><br />
-        <input class="ktb-colorpicker">
-        <!--<div class="k-colorpick km-ios">-->
-            <!--<div class="color-value">#</div>-->
-            <!--<label class="label">H<input type="progress" id="hue" /></label><div class="h-value">0</div><br />-->
-            <!--<label class="label">S<input type="progress" id="saturation" /></label><div class="s-value">0</div><br />-->
-            <!--<label class="label">L<input type="progress" id="lightness" /></label><div class="l-value">0</div><br />-->
-        <!--</div>-->
         <br /><br />
         <div>
             <div id="iosDevice" class="device">
@@ -314,7 +305,7 @@
                 </div>
 
 
-                <style scoped>
+                <style scoped="scoped">
                     [id^="overview-contacts"] h2,
                     [id^="overview-cities"] h2 {
                         display: inline-block;
@@ -407,32 +398,6 @@
                 });
             }
 
-//            function onHueSlide(e) {
-//                var c = color.hue(e.value).get().toUpperCase();
-//                $(".color-value").text(c);
-//                $(".color-value").css("background-color", c);
-//                hue.handle.css("background-color", c);
-//                $(".h-value").text(e.value);
-//            }
-//
-//            function onSatSlide(e) {
-//                var c = color.saturation(e.value).get().toUpperCase();
-//                $(".color-value").text(c);
-//                $(".color-value").css("background-color", c);
-//                $(".s-value").text(e.value);
-//            }
-//
-//            function onLightSlide(e) {
-//                var c = color.lightness(e.value).get().toUpperCase();
-//                $(".color-value").text(c);
-//                $(".color-value").css("background-color", c);
-//                $(".l-value").text(e.value);
-//            }
-//
-//            var hue = $("#hue").kendoColorSlider({ max: 360, slide: onHueSlide, change: onHueSlide }).data("kendoColorSlider"),
-//                saturation = $("#saturation").kendoColorSlider({ slide: onSatSlide, change: onSatSlide }).data("kendoColorSlider"),
-//                lightness = $("#lightness").kendoColorSlider({ slide: onLightSlide, change: onLightSlide }).data("kendoColorSlider"),
-//                color = new Color("#09F");
         </script>
         <br/><br/>
         <style scoped="scoped">
