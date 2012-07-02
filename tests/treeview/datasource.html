@@ -403,6 +403,19 @@
                 equal(treeview.find(".k-item:last").text(), "bar");
             });
 
+            test("the current datasource view is used when refreshing the datasource", function() {
+                createTreeView([
+                    { text: "alpha" },
+                    { text: "bravo" }
+                ]);
+
+                treeviewObject.dataSource.filter({ field: "text", operator: "eq", value: "alpha" });
+
+                treeviewObject.dataSource.read();
+
+                equal(treeview.find(".k-item").length, 1);
+            });
+
             test("setting autoBind to false does not fetch the dataSource", function() {
                 var changeTriggered = false,
                     dataSource = new HierarchicalDataSource({

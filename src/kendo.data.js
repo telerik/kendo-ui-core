@@ -2158,7 +2158,7 @@
 
             e = e || {};
 
-            e.items = e.items || data;
+            e.items = e.items || that._view;
 
             that.trigger(CHANGE, e);
         },

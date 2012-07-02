@@ -527,7 +527,7 @@
             root = root || that.root;
             dataSource = dataSource || that.dataSource;
 
-            data = dataSource.data();
+            data = dataSource.view();
 
             root.children("li").each(function(index, item) {
                 item = $(item).attr(uidAttr, data[index].uid);
@@ -555,7 +555,7 @@
                 for (var i = 0; i < data.length; i++) {
                     data[i].children.read();
 
-                    recursiveRead(data[i].children.data());
+                    recursiveRead(data[i].children.view());
                 }
             }
 
@@ -581,7 +581,7 @@
             if (silentRead) {
                 that.dataSource.read();
 
-                recursiveRead(that.dataSource.data());
+                recursiveRead(that.dataSource.view());
             }
 
             that.dataSource.bind(CHANGE, that._refreshHandler);
