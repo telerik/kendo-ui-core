@@ -254,7 +254,7 @@
                     return !(hasAttribute(input, "required") && (value === "" || !value  || checkbox));
                 },
                 pattern: function(input) {
-                    if (input.filter("[type=text],[type=email],[type=url],[type=tel],[type=search]").filter("[pattern]").length && input.val() !== "") {
+                    if (input.filter("[type=text],[type=email],[type=url],[type=tel],[type=search],[type=password]").filter("[pattern]").length && input.val() !== "") {
                         return patternMatcher(input.val(), input.attr("pattern"));
                     }
                     return true;
