@@ -272,6 +272,14 @@
                 equal(result[2].name, "foo");
             });
 
+            test("filter on null string", function() {
+                var data = [{ name: null }, { name: "bar" }, { name: "foo"}];
+
+                var result = new Query(data).filter({ field: "name", op: "eq", value: "foo" }).toArray();
+
+                equal(result.length, 1);
+            });
+
             test("filter with empty expression", function() {
                 var data = [{ name: "foo" }, { name: "bar" }, { name: "foo"}];
 

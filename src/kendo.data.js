@@ -664,7 +664,7 @@
                         b = new Date(+date[1]);
                     } else if (ignore) {
                         b = "'" + b.toLowerCase() + "'";
-                        a = a + ".toLowerCase()";
+                        a = "(" + a + " || '').toLowerCase()";
                     } else {
                         b = "'" + b + "'";
                     }
