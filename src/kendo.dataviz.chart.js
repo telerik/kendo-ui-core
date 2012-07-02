@@ -97,6 +97,7 @@
         OUTLINE_SUFFIX = "_outline",
         PIE = "pie",
         PIE_SECTOR_ANIM_DELAY = 70,
+        PLOT_AREA_CLICK = "plotAreaClick",
         PRIMARY = "primary",
         RIGHT = "right",
         ROUNDED_BEVEL = "roundedBevel",
@@ -205,7 +206,8 @@
             DATABOUND,
             SERIES_CLICK,
             SERIES_HOVER,
-            AXIS_LABEL_CLICK
+            AXIS_LABEL_CLICK,
+            PLOT_AREA_CLICK
         ],
 
         items: function() {
@@ -3838,6 +3840,7 @@
             plotArea.options.legend.items = [];
             plotArea.axes = [];
 
+            plotArea.makeDiscoverable();
             plotArea.render();
         },
 
@@ -4213,15 +4216,25 @@
                         zIndex: -1
                     }),
                     view.createRect(plotArea.box, {
+                        data: { modelId: plotArea.options.modelId },
                         stroke: border.width ? border.color : "",
                         strokeWidth: border.width,
-                        fill: "",
+                        fill: WHITE,
+                        fillOpacity: 0.001,
                         zIndex: 0,
                         dashType: border.dashType
                     })
                 ];
 
             return [].concat(gridLinesY, gridLinesX, childElements, elements);
+        },
+
+        click: function(chart, e) {
+            var point = this;
+
+            chart.trigger(PLOT_AREA_CLICK, {
+                element: $(e.target)
+            });
         }
     });
 
