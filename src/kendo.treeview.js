@@ -1383,6 +1383,7 @@
                 referenceDataItem = destTreeview.dataItem(parentNode);
 
                 referenceDataItem.load();
+                referenceDataItem.set("expanded", true);
 
                 if (parentNode != that.root) {
                     destDataSource = referenceDataItem.children;

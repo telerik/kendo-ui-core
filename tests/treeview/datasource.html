@@ -467,6 +467,20 @@
                 ok(called);
             });
 
+            test("appending nodes sets their expanded state", function() {
+                var called = false;
+
+                createTreeView([
+                    { text: "foo" }
+                ]);
+
+                var foo = treeview.find(".k-item:first");
+
+                treeviewObject.append({ text: "bar" }, foo);
+
+                ok(treeviewObject.dataItem(foo).expanded);
+            });
+
         </script>
 
         <div id="qunit-fixture"> </div>
