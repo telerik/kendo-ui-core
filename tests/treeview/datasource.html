@@ -436,6 +436,21 @@
                 ok(!changeTriggered);
             });
 
+            test("sorting subnodes behaves correctly", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "alpha", items: [
+                            { text: "charlie" },
+                            { text: "bravo" }
+                        ] }
+                    ]
+                });
+
+                treeviewObject.dataItem(".k-item:first").children.sort({ field: "text", dir: "asc" })
+
+                equal(treeview.find(".k-item:first .k-item").length, 2);
+            });
+
         </script>
 
         <div id="qunit-fixture"> </div>

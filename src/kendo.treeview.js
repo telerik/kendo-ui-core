@@ -1045,6 +1045,8 @@
                 that._remove(that.findByUid(items[0].uid), false);
             } else {
                 if (node) {
+                    subGroup(parentNode).empty();
+
                     append(items, parentNode, true);
 
                     if (node.expanded) {
