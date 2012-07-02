@@ -148,6 +148,11 @@
     <Compile Include="Infrastructure\Implementation\RouteDataCache.cs" />
     <Compile Include="Infrastructure\Implementation\Signature.cs" />
     <Compile Include="Infrastructure\IRouteDataCache.cs" />
+    <Compile Include="Resources\Messages.bg-BG.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.bg-BG.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Messages.de-DE.Designer.cs">
       <DependentUpon>Messages.de-DE.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -1008,6 +1013,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\Messages.bg-BG.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.bg-BG.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Messages.de-DE.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Messages.de-DE.Designer.cs</LastGenOutput>
