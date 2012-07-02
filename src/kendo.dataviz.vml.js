@@ -327,6 +327,14 @@
         isEnabled: function() {
             var fill = this.options.fill;
             return !!fill && fill.toLowerCase() !== TRANSPARENT;
+        },
+
+        refresh: function(domElement) {
+            try {
+              domElement.opacity = this.options.fillOpacity;
+            } catch(e) {
+              // Random exceptions in IE 8 Compatibility View
+            }
         }
     });
 
@@ -592,17 +600,21 @@
         },
 
         refresh: function(domElement) {
-            var element = this,
-                center = element.center,
-                radius = math.max(0, element.radius),
-                size = radius * 2;
+            var circle = this,
+                center = circle.center,
+                radius = math.max(0, circle.radius),
+                size = radius * 2,
+                element = $(domElement);
 
-            $(domElement).css({
+            element.css({
                 "width": size,
                 "height": size,
                 "top": center[1] - radius,
                 "left": center[0] - radius
             });
+
+            circle.fill.options = circle.options;
+            circle.fill.refresh(element.find("fill")[0]);
         }
     });
 

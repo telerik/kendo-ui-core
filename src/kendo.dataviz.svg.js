@@ -601,7 +601,8 @@
 
         refresh: function(domElement) {
             $(domElement).attr({
-                "r": math.max(0, this.radius)
+                "r": math.max(0, this.radius),
+                "fill-opacity": this.options.fillOpacity
             });
         }
     });

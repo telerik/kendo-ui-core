@@ -806,6 +806,20 @@
                     ok(circle.render().indexOf("data-test-id='1'") > -1);
                 });
 
+                test("refresh updates r attribute", function() {
+                    var domElement = $("<div />");
+                    circle.radius = 4;
+                    circle.refresh(domElement);
+                    equals(domElement.attr("r"), "4");
+                });
+
+                test("refresh updates fill-opacity attribute", function() {
+                    var domElement = $("<div />");
+                    circle.options.fillOpacity = 0.4;
+                    circle.refresh(domElement);
+                    equals(domElement.attr("fill-opacity"), "0.4");
+                });
+
             })();
 
             (function() {
