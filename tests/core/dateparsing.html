@@ -605,12 +605,17 @@
 
             test("parseExact method parses UTC iso8601", function() {
                 var utcDate = new Date(Date.UTC(2000, 9, 10, 14, 30, 0));
-                equal(+parse("2000-10-10T14:30Z", "yyyy-MM-ddTHH:mmZ"), +utcDate);
+                equal(+parse("2000-10-10T14:30Z", "yyyy-MM-ddTHH:mmzz"), +utcDate);
+            });
+
+            test("parseExact method returns if string is not valid ISO8601", function() {
+                var utcDate = new Date(Date.UTC(2000, 9, 10, 14, 30, 0));
+                equal(parse("2000-10-1014:30Z", "yyyy-MM-ddTHH:mmzz"), null);
             });
 
             test("parseExact method parses UTC iso8601", function() {
                 var utcDate = new Date(Date.UTC(2000, 9, 10, 14, 30, 0));
-                equal(+parse("2000-10-10T14:30Z", "yyyy-MM-ddTHH:mmZ"), +utcDate);
+                equal(+parse("2000-10-10T14:30Z", "yyyy-MM-ddTHH:mmzz"), +utcDate);
             });
 
             test("parseExact method parses  iso8601 with timezone", function() {
@@ -647,6 +652,13 @@
                 //DST in Bulgaria 2012-10-28
                 equal(+parse("2012-10-28 2:00 +2", "yyyy-MM-dd HH:mm zz"), +new Date("2012-10-28T02:00+02:00"));
                 equal(+parse("2012-10-28 3:00 +2", "yyyy-MM-dd HH:mm zz"), +new Date("2012-10-28T03:00+02:00"));
+            });
+
+            test("parseDate parses result from kendo.stringify", function() {
+                var date = kendo.stringify(new Date(2000, 10, 10, 14, 15, 30, 333));
+                date = date.substr(1, date.length - 2);
+
+                equal(+kendo.parseDate(date, "yyyy-MM-ddTHH:mm:ss.fffzz"), Date.parse(date));
             });
         </script>
     </body>

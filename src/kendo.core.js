@@ -1450,9 +1450,12 @@ function pad(number) {
                 return null;
             },
             checkLiteral = function() {
-                if (value.charAt(valueIdx) == format[idx]) {
+                var result = false;
+                if (value.charAt(valueIdx) === format[idx]) {
                     valueIdx++;
+                    result = true;
                 }
+                return result;
             },
             calendar = culture.calendars.standard,
             year = null,
@@ -1572,6 +1575,15 @@ function pad(number) {
                     UTC = true;
                     count = lookAhead("z");
 
+                    if (value.substr(valueIdx, 1) === "Z") {
+                        if (!ISO8601) {
+                            return null;
+                        }
+
+                        checkLiteral();
+                        continue;
+                    }
+
                     matches = value.substr(valueIdx, 6)
                                    .match(count > 2 ? longTimeZoneRegExp : shortTimeZoneRegExp);
 
@@ -1595,13 +1607,7 @@ function pad(number) {
                         }
                     }
                 } else if (ch === "T") {
-                    ISO8601 = true;
-                    checkLiteral();
-                } else if (ch === "Z") {
-                    if (ISO8601) {
-                        UTC = true;
-                    }
-                    checkLiteral();
+                    ISO8601 = checkLiteral();
                 } else if (ch === "'") {
                     literal = true;
                     checkLiteral();
