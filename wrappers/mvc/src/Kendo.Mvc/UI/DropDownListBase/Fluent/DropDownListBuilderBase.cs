@@ -105,6 +105,13 @@ namespace Kendo.Mvc.UI.Fluent
             return this as TDropDownBuilder;
         }
 
+        public TDropDownBuilder TemplateId(string templateId)
+        {
+            Component.TemplateId = templateId;
+
+            return this as TDropDownBuilder;
+        }
+
         public TDropDownBuilder Value(string value)
         {
             Component.Value = value;

@@ -65,6 +65,12 @@
             set;
         }
 
+        public string TemplateId
+        {
+            get;
+            set;
+        }
+
         public IUrlGenerator UrlGenerator
         {
             get;
@@ -80,6 +86,12 @@
         public IDictionary<string, object> SeriailzeBaseOptions()
         {
             var options = new Dictionary<string, object>(Events);
+            
+            var idPrefix = "#";
+            if (IsInClientTemplate)
+            {
+                idPrefix = "\\" + idPrefix;
+            }
 
             if (!string.IsNullOrEmpty(DataSource.Transport.Read.Url))
             {
@@ -117,7 +129,11 @@
                 options["height"] = Height;
             }
 
-            if (!string.IsNullOrEmpty(Template))
+            if (!string.IsNullOrEmpty(TemplateId))
+            {
+                options["template"] = new ClientEvent { HandlerName = string.Format("$('{0}{1}').html()", idPrefix, TemplateId) };
+            }
+            else if (!string.IsNullOrEmpty(Template))
             {
                 options["template"] = Template;
             }
