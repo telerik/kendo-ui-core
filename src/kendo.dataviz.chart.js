@@ -1528,7 +1528,7 @@
             return elements;
         },
 
-        getOutlineElement: function(view, options){
+        highlightOverlay: function(view, options){
             var bar = this,
                 box = bar.box;
 
@@ -2179,7 +2179,7 @@
             }
         },
 
-        getOutlineElement: function(view, options) {
+        highlightOverlay: function(view, options) {
             var element = this,
                 marker = element.marker;
 
@@ -2223,20 +2223,48 @@
         options: {
             labels: {
                 position: CENTER
+            },
+            highlight: {
+                opacity: 1,
+                border: {
+                    width: 1
+                }
             }
         },
 
-        getOutlineElement: function(view, options) {
-            var element = this;
+        highlightOverlay: function(view) {
+            var element = this,
+                options = element.options,
+                highlight = options.highlight,
+                borderWidth = highlight.border.width,
+                markers = options.markers,
+                center = element.box.center(),
+                radius = markers.size / 2 - borderWidth / 2,
+                borderColor =
+                    new Color(markers.background)
+                    .brightness(BAR_BORDER_BRIGHTNESS)
+                    .toHex();
 
-            return view.createCircle(
-                [element.box.center().x, element.box.center().y],
-                element.options.markers.size / 2 - 0.5, {
-                    data: { modelId: element.options.modelId },
-                    stroke: new Color(element.options.markers.background).brightness(0.75).toHex(),
-                    strokeWidth: 2,
-                    strokeOpacity: 1
-                });
+            return view.createCircle([center.x, center.y], radius, {
+                data: { modelId: element.options.modelId },
+                stroke: borderColor,
+                strokeWidth: borderWidth
+            });
+        },
+
+        toggleHighlight: function(view, on) {
+            var element = this,
+                opacity = element.options.highlight.opacity,
+                options = {};
+
+            element.highlighted = !element.highlighted;
+
+            var marker = element.marker.getViewElements(view, {
+                fillOpacity: element.highlighted ? opacity : undefined
+            })[0];
+
+            marker.refresh(doc.getElementById(this.options.id));
+
         }
     });
 
@@ -2843,8 +2871,8 @@
                     type: BUBBLE
                 };
 
-            point = new Bubble(value,
-                deepExtend({
+            point = new Bubble(value, {
+                    color: fields.color,
                     markers: {
                         type: CIRCLE,
                         background: fields.color,
@@ -2859,14 +2887,13 @@
                         format: chart.options.labels.format,
                         animation: animationOptions
                     }
-                })
+                }
             );
 
             chart.append(point);
 
             return point;
 
-            // TODO: Hover that updates rendered element
             // TODO: Clip to axis line box
         },
 
@@ -3138,7 +3165,7 @@
             return view.createSector(sector, options);
         },
 
-        getOutlineElement: function(view, options) {
+        highlightOverlay: function(view, options) {
             var segment = this,
                 highlight = segment.options.highlight || {},
                 border = highlight.border || {},
@@ -4741,36 +4768,48 @@
             var highlight = this,
                 view = highlight.view,
                 viewElement = highlight.viewElement,
-                outline,
-                element;
+                overlay,
+                overlayElement;
 
             highlight.hide();
 
-            if (point.getOutlineElement) {
-                outline = point.getOutlineElement(view, highlight.options);
+            if (point.highlightOverlay) {
+                overlay = point.highlightOverlay(view, highlight.options);
 
-                if (outline) {
-                    element = view.renderElement(outline);
-                    viewElement.appendChild(element);
+                if (overlay) {
+                    overlayElement = view.renderElement(overlay);
+                    viewElement.appendChild(overlayElement);
 
-                    highlight.element = element;
+                    highlight.overlayElement = overlayElement;
                     highlight.visible = true;
                 }
+            }
+
+            if (point.toggleHighlight) {
+                point.toggleHighlight(view);
+                highlight.point = point;
+                highlight.visible = true;
             }
         },
 
         hide: function() {
             var highlight = this,
-                element = highlight.element;
+                overlayElement = highlight.overlayElement;
 
-            if (element) {
-                if (element.parentNode) {
-                    element.parentNode.removeChild(element);
+            if (overlayElement) {
+                if (overlayElement.parentNode) {
+                    overlayElement.parentNode.removeChild(overlayElement);
                 }
 
-                delete highlight.element;
-                highlight.visible = false;
+                delete highlight.overlayElement;
             }
+
+            if (highlight.point) {
+                highlight.point.toggleHighlight(highlight.view);
+                delete highlight.point;
+            }
+
+            highlight.visible = false;
         }
     });
 

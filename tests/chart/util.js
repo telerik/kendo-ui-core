@@ -64,7 +64,11 @@ ViewStub.prototype = {
         this.log.circle.push({
             center: center, radius: radius, style: style });
 
-        return new kendo.dataviz.ViewElement(style);
+        var element = new kendo.dataviz.ViewElement(style);
+        element.center = center;
+        element.radius = radius;
+
+        return element;
     },
 
     createSector: function(sector, style) {

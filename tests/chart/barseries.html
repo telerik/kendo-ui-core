@@ -1860,17 +1860,17 @@
                     ok(rect.style.id.length > 0);
                 });
 
-                test("getOutlineElement returns rect", function() {
+                test("highlightOverlay returns rect", function() {
                     view = new ViewStub();
 
-                    bar.getOutlineElement(view);
+                    bar.highlightOverlay(view);
                     equals(view.log.rect.length, 1);
                 });
 
                 test("outline element has same model id", function() {
                     view = new ViewStub();
 
-                    bar.getOutlineElement(view);
+                    bar.highlightOverlay(view);
                     equals(view.log.rect[0].style.data.modelId, bar.options.modelId);
                 });
 

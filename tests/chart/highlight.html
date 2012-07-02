@@ -26,81 +26,132 @@
             function createHighlight(options) {
                 viewMock = {
                     renderElement: function() {
-                        return $("<div class='outline'></div>")[0];
+                        return $("<div class='overlay'></div>")[0];
                     }
                 };
 
                 highlight = new dataviz.Highlight(viewMock, $("#viewElement")[0], options);
             }
 
-            var ElementStub = {
-                getOutlineElement: function() {
-                    return new dataviz.ViewElement();
+            (function() {
+                var ElementStub = {
+                    highlightOverlay: function() {
+                        return new dataviz.ViewElement();
+                    }
                 }
-            }
 
-            // ------------------------------------------------------------
-            module("Highlight", {
-                setup: function() {
-                    createHighlight({
-                        fill: "#cf0",
-                        fillOpacity: 0.5
+                // ------------------------------------------------------------
+                module("Highlight / Overlay", {
+                    setup: function() {
+                        createHighlight({
+                            fill: "#cf0",
+                            fillOpacity: 0.5
+                        });
+                    },
+                    teardown: function() {
+                        $("#viewElement").empty();
+                    }
+                });
+
+                test("Retrieves overlay element", 1, function() {
+                    highlight.show({
+                        highlightOverlay: function() {
+                            ok(true);
+                        }
                     });
-                },
-                teardown: function() {
-                    $("#viewElement").empty();
+                });
+
+                test("Sets fill on overlay element", 1, function() {
+                    highlight.show({
+                        highlightOverlay: function(definition, options) {
+                            equals(options.fill, "#cf0");
+                        }
+                    });
+                });
+
+                test("Sets fill opacity on overlay element", 1, function() {
+                    highlight.show({
+                        highlightOverlay: function(definition, options) {
+                            equals(options.fillOpacity, 0.5);
+                        }
+                    });
+                });
+
+                test("Renders overlay element", function() {
+                    highlight.show(ElementStub);
+                    equals($(".overlay").length, 1);
+                });
+
+                test("Does not render overlay if no overlay element exists", function() {
+                    highlight.show({ highlightOverlay: function() { } });
+                    equals($(".overlay").length, 0);
+                });
+
+                test("Removes overlay element", function() {
+                    highlight.show(ElementStub);
+                    highlight.hide();
+                    equals($(".overlay").length, 0);
+                });
+
+                test("Sets visible property on show", function() {
+                    highlight.show(ElementStub);
+                    ok(highlight.visible);
+                });
+
+                test("Sets visible property on hide", function() {
+                    highlight.hide();
+                    ok(!highlight.visible);
+                });
+
+            })();
+
+            (function() {
+                var ElementStub = {
+                    toggleHighlight: function() {
+                    }
                 }
-            });
 
-            test("Retrieves outline element", 1, function() {
-                highlight.show({
-                    getOutlineElement: function() {
-                        ok(true);
+                // ------------------------------------------------------------
+                module("Highlight / In place", {
+                    setup: function() {
+                        createHighlight({
+                            fill: "#cf0",
+                            fillOpacity: 0.5
+                        });
+                    },
+                    teardown: function() {
+                        $("#viewElement").empty();
                     }
                 });
-            });
 
-            test("Sets fill on outline element", 1, function() {
-                highlight.show({
-                    getOutlineElement: function(definition, options) {
-                        equals(options.fill, "#cf0");
-                    }
+                test("Calls toggleHighlight on show", 1, function() {
+                    highlight.show({
+                        toggleHighlight: function(view) {
+                            ok(true);
+                        }
+                    });
                 });
-            });
 
-            test("Sets fill opacity on outline element", 1, function() {
-                highlight.show({
-                    getOutlineElement: function(definition, options) {
-                        equals(options.fillOpacity, 0.5);
-                    }
+                test("Calls toggleHighlight on hide", 2, function() {
+                    highlight.show({
+                        toggleHighlight: function(view) {
+                            ok(true);
+                        }
+                    });
+                    highlight.hide();
                 });
-            });
 
-            test("Renders outline element", function() {
-                highlight.show(ElementStub);
-                equals($(".outline").length, 1);
-            });
+                test("Sets visible property on show", function() {
+                    highlight.show(ElementStub);
+                    ok(highlight.visible);
+                });
 
-            test("Does not render outline if no outline element exists", function() {
-                highlight.show({ getOutlineElement: function() { } });
-                equals($(".outline").length, 0);
-            });
+                test("Sets visible property on hide", function() {
+                    highlight.hide();
+                    ok(!highlight.visible);
+                });
 
-            test("Removes outline element", function() {
-                highlight.show(ElementStub);
-                highlight.hide();
-                equals($(".outline").length, 0);
-            });
-
-            test("Sets visible property on show", function() {
-                highlight.show(ElementStub);
-                ok(highlight.visible);
-            });
-
-            test("Sets visible property on hide", function() {
-                highlight.hide();
-                ok(!highlight.visible);
-            });
+            })();
 
         </script>
 

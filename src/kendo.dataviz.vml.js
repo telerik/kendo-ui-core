@@ -403,7 +403,6 @@
             }
 
             var path = this,
-                options = path.options,
                 element = $(domElement),
                 parentNode = element[0].parentNode,
                 fill = path.fill,
