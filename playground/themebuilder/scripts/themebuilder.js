@@ -221,11 +221,7 @@ var oldColor, devices = [ "ios", "android", "blackberry", "meego" ],
             that.popup = new ui.Popup("<div class='k-colorpick'></div>", {
                 anchor: element,
                 origin: "bottom center",
-                position: "top center",
-                open: function(e) {
-                },
-                close: function(e) {
-                }
+                position: "top center"
             });
 
             element
@@ -258,8 +254,22 @@ var oldColor, devices = [ "ios", "android", "blackberry", "meego" ],
         },
 
         _toggle: function(open) {
-            var that = this;
+            var that = this, color;
             open = open !== undefined? open : !that.popup.visible();
+
+            if (open) {
+                color = that.color.set(that.element.css("background-color")).get();
+                that.colorElement.text(color);
+                that.colorElement.css("background-color", color);
+
+                that.hueSlider.value(that.color.hue());
+                that.saturationSlider.value(that.color.saturation());
+                that.lightnessSlider.value(that.color.lightness());
+
+                that.hueSlider.valueElement.text(that.color.hue());
+                that.saturationSlider.valueElement.text(that.color.saturation());
+                that.lightnessSlider.valueElement.text(that.color.lightness());
+            }
 
             that.popup[open ? "open" : "close"]();
         },

@@ -47,7 +47,7 @@
 
     window.Color = kendo.Observable.extend({
         init: function(color) {
-            this.set(this.css2rgba(color || "#000"));
+            this.set(color);
         },
 
         toHex: function () {
@@ -75,30 +75,32 @@
         },
 
         set: function (value) {
+            return this._set(this.css2rgba(value || "#000"));
+        },
+
+        _set: function (value) {
             var that = this;
 
             that.value = value;
             that.colorValue = value;
+
+            return this;
         },
 
         add: function (color) {
-            this.set(this.addition(this.toRgba(), color));
-            return this;
+            return this._set(this.addition(this.toRgba(), color));
         },
 
         subtract: function (color) {
-            this.set(this.subtraction(this.toRgba(), color));
-            return this;
+            return this._set(this.subtraction(this.toRgba(), color));
         },
 
         lighten: function (percent) {
-            this.set(this.addition(this.toRgba(), buildPercent(percent)));
-            return this;
+            return this._set(this.addition(this.toRgba(), buildPercent(percent)));
         },
 
         darken: function (percent) {
-            this.set(this.subtraction(this.toRgba(), buildPercent(percent)));
-            return this;
+            return this._set(this.subtraction(this.toRgba(), buildPercent(percent)));
         },
 
         isHex: function(testee) {

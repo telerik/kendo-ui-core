@@ -26,13 +26,13 @@
             that._handle();
 
             width = that.wrapper.width();
-            that.value = 0;
+            that.point = that.options.value;
 
             that.constrain = width;
             that.handleWidth = that.handle.outerWidth(true);
             that.snapPoint = that.constrain / (that.options.max - 1);
 
-            that._position(0); // zero init for now.
+            that.value(that.point);
             that.bind([ CHANGE, SLIDE ], that.options);
         },
 
@@ -43,8 +43,20 @@
 
         options: {
             name: "ColorSlider",
+            value: 0,
             max: 101,
             animateBackground: true
+        },
+
+        value: function (value) {
+            var that = this;
+
+            if (isNaN(value)) {
+                return that.point;
+            }
+
+            that.point = value;
+            that._position(value * that.snapPoint);
         },
 
         _move: function(e) {
@@ -52,9 +64,9 @@
             e.preventDefault();
 
             value = that._position(limitValue((e.event.clientX - that.targetOffsetX) - (that.handleWidth / 2), 0, that.constrain));
-            if (value != that.value)
+            if (value != that.point)
                 that.trigger(SLIDE, { value: value });
-            that.value = value;
+            that.point = value;
         },
 
         _position: function(position) {
@@ -81,9 +93,9 @@
         _stop: function(e) {
             var that = this;
 
-            that.value = that._position(limitValue((e.event.clientX - e.target.offset().left) - (that.handleWidth / 2), 0, that.constrain));
+            that.point = that._position(limitValue((e.event.clientX - e.target.offset().left) - (that.handleWidth / 2), 0, that.constrain));
             that.handle.removeClass(ACTIVE_STATE);
-            that.trigger(CHANGE, { value: that.value });
+            that.trigger(CHANGE, { value: that.point });
         },
 
         _background: function() {
@@ -134,8 +146,8 @@
                 that.drag = new kendo.Drag(that.wrapper, {
                     global: true,
                     tap: function(e) {
-                        that.value = that._position(limitValue((e.event.clientX - e.target.offset().left) - (that.handleWidth / 2), 0, that.constrain));
-                        that.trigger(CHANGE, { value: that.value });
+                        that.point = that._position(limitValue((e.event.clientX - e.target.offset().left) - (that.handleWidth / 2), 0, that.constrain));
+                        that.trigger(CHANGE, { value: that.point });
                     },
                     start: proxy(that._start, that),
                     move: proxy(that._move, that),
