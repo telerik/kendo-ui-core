@@ -133,14 +133,13 @@ namespace Kendo.Mvc.UI
 
         private object SerializeDataSource(IEnumerable data)
         {
-            var dataTableEnumerable = data as GridDataTableWrapper;
+            var dataTableEnumerable = data as DataTableWrapper;
 
             if (dataTableEnumerable != null && dataTableEnumerable.Table != null)
             {
                 return data.SerializeToDictionary(dataTableEnumerable.Table);
             }
-            else if (data is IEnumerable<AggregateFunctionsGroup> || 
-                data is IQueryable<AggregateFunctionsGroup>)
+            else if (data is IEnumerable<AggregateFunctionsGroup>)
             {
                 if (!ServerGrouping)
                 {

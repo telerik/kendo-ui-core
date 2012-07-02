@@ -6,8 +6,9 @@ namespace Kendo.Mvc.UI
     using System.Linq;
     using System.Linq.Expressions;
     using System.Reflection;
-    using Extensions;
-    using System.Web.Mvc;    
+    using System.Web.Mvc;
+    using Kendo.Mvc.Extensions;
+    using Kendo.Mvc.Infrastructure;
 
     public class GridColumnGenerator<T> where T : class
     {
@@ -20,9 +21,9 @@ namespace Kendo.Mvc.UI
 
         public IEnumerable<GridColumnBase<T>> GetColumns()
         {
-            if (typeof(T) == typeof(DataRowView) && grid.DataSource.Data is GridDataTableWrapper)
+            if (typeof(T) == typeof(DataRowView) && grid.DataSource.Data is DataTableWrapper)
             {
-                return GetColumnsForDataTable(grid.DataSource.Data as GridDataTableWrapper);
+                return GetColumnsForDataTable(grid.DataSource.Data as DataTableWrapper);
             }
 
             var properties = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance)
@@ -38,7 +39,7 @@ namespace Kendo.Mvc.UI
             return properties.Select(property => CreateBoundColumn(property));
         }
 
-        private IEnumerable<GridColumnBase<T>> GetColumnsForDataTable(GridDataTableWrapper dataTableWrapper)
+        private IEnumerable<GridColumnBase<T>> GetColumnsForDataTable(DataTableWrapper dataTableWrapper)
         {            
             var dataTable = dataTableWrapper.Table;
             if (dataTable == null)

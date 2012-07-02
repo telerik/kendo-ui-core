@@ -4,6 +4,7 @@ namespace Kendo.Mvc.UI.Tests
     using System.ComponentModel.DataAnnotations;
     using System.Data;
     using System.Linq;
+    using Kendo.Mvc.Extensions;
     using Xunit;
 
     public class GridColumnGeneratorTests

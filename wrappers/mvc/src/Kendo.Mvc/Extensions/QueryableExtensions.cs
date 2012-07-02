@@ -4,19 +4,19 @@ namespace Kendo.Mvc.Extensions
     using System.Collections;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Data;
     using System.Linq;
     using System.Linq.Expressions;
+    using System.Web.Mvc;
     using Kendo.Mvc;
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.Infrastructure.Implementation;
     using Infrastructure.Implementation.Expressions;
     using Kendo.Mvc.UI;
-    using System.Web.Mvc;
-    using System.Data;
 
     public static class QueryableExtensions
     {
-        private static DataSourceResult ToDataSourceResult(this GridDataTableWrapper enumerable, DataSourceRequest request)
+        private static DataSourceResult ToDataSourceResult(this DataTableWrapper enumerable, DataSourceRequest request)
         {
             var filters = new List<IFilterDescriptor>();
 
@@ -51,7 +51,7 @@ namespace Kendo.Mvc.Extensions
             return result;
         }
 
-        private static Type GetFieldByTypeFromDataColumn(System.Data.DataTable dataTable, string memberName)
+        private static Type GetFieldByTypeFromDataColumn(DataTable dataTable, string memberName)
         {
             return dataTable.Columns.Contains(memberName) ? dataTable.Columns[memberName].DataType : null;
         }
@@ -103,11 +103,11 @@ namespace Kendo.Mvc.Extensions
 
             var temporarySortDescriptors = new List<SortDescriptor>();
 
-            IList<GroupDescriptor> group = new List<GroupDescriptor>();
+            IList<GroupDescriptor> groups = new List<GroupDescriptor>();
 
             if (request.Groups != null)
             {
-                group.AddRange(request.Groups);
+                groups.AddRange(request.Groups);
             }
 
             var aggregates = new List<AggregateDescriptor>();
@@ -129,9 +129,9 @@ namespace Kendo.Mvc.Extensions
 
                 result.AggregateResults = source.Aggregate(aggregates.SelectMany(a => a.Aggregates));
 
-                if (group.Any() && aggregates.Any())
+                if (groups.Any() && aggregates.Any())
                 {
-                    group.Each(g => g.AggregateFunctions.AddRange(aggregates.SelectMany(a => a.Aggregates)));
+                    groups.Each(g => g.AggregateFunctions.AddRange(aggregates.SelectMany(a => a.Aggregates)));
                 }
             }
 
@@ -148,9 +148,9 @@ namespace Kendo.Mvc.Extensions
                 temporarySortDescriptors.Add(sortDescriptor);
             }
 
-            if (group.Any())
+            if (groups.Any())
             {                
-                group.Reverse().Each(groupDescriptor =>
+                groups.Reverse().Each(groupDescriptor =>
                 {
                     var sortDescriptor = new SortDescriptor
                     {
@@ -172,12 +172,12 @@ namespace Kendo.Mvc.Extensions
 
             data = data.Page(request.Page - 1, request.PageSize);
 
-            if (group.Any())
+            if (groups.Any())
             {
-                data = data.GroupBy(notPagedData, group);
+                data = data.GroupBy(notPagedData, groups);
             }           
 
-            result.Data = data;
+            result.Data = data.Execute();
 
             if (modelState != null && !modelState.IsValid)
             {
@@ -189,85 +189,6 @@ namespace Kendo.Mvc.Extensions
             return result;
         }
 
-        private static GridModel ToGridModel(this IQueryable queryable, int page, int pageSize, IList<SortDescriptor> sortDescriptors, IEnumerable<IFilterDescriptor> filterDescriptors,
-            IEnumerable<GroupDescriptor> groupDescriptors)
-        {
-            IQueryable data = queryable;
-
-            if (queryable.ElementType.IsDynamicObject())
-            {
-                var firstItem = queryable.Cast<object>().FirstOrDefault();
-                if (firstItem != null)
-                {
-                    if (filterDescriptors.Any())
-                    {
-                        filterDescriptors.SetMemberTypeFrom(firstItem);
-                    }
-
-                    if (groupDescriptors.Any())
-                    {
-                        groupDescriptors.SetMemberTypeFrom(firstItem);
-                    }
-                }
-            }
-
-            if (filterDescriptors.Any())
-            {
-                data = data.Where(filterDescriptors);
-            }
-
-            GridModel result = new GridModel();
-
-            result.Total = data.Count();
-            IList<SortDescriptor> temporarySortDescriptors = new List<SortDescriptor>();
-
-            if (!sortDescriptors.Any() && queryable.Provider.IsEntityFrameworkProvider())
-            {
-                // The Entity Framework provider demands OrderBy before calling Skip.
-                SortDescriptor sortDescriptor = new SortDescriptor
-                {
-                    Member = queryable.ElementType.FirstSortableProperty()
-                };
-                sortDescriptors.Add(sortDescriptor);
-                temporarySortDescriptors.Add(sortDescriptor);
-            }
-
-            if (groupDescriptors.Any())
-            {
-                groupDescriptors.Reverse().Each(groupDescriptor =>
-                {
-                    SortDescriptor sortDescriptor = new SortDescriptor
-                    {
-                        Member = groupDescriptor.Member,
-                        SortDirection = groupDescriptor.SortDirection
-                    };
-                    
-                    sortDescriptors.Insert(0, sortDescriptor);
-                    temporarySortDescriptors.Add(sortDescriptor);
-                });
-            }
-            
-            if (sortDescriptors.Any())
-            {
-                data = data.Sort(sortDescriptors);
-            }
-
-            var notPagedData = data;
-
-            data = data.Page(page - 1, pageSize);
-
-            if (groupDescriptors.Any())
-            {
-                data = data.GroupBy(notPagedData, groupDescriptors);
-            }
-            
-            result.Data = data;
-
-            temporarySortDescriptors.Each(sortDescriptor => sortDescriptors.Remove(sortDescriptor));
-
-            return result;
-        }
-        
         private static IQueryable CallQueryableMethod(this IQueryable source, string methodName, LambdaExpression selector)
         {
             IQueryable query = source.Provider.CreateQuery(
@@ -606,10 +527,15 @@ namespace Kendo.Mvc.Extensions
                     Expression.Constant(index)));
         }
 
-        internal static IList ToList(this IQueryable source)
+        internal static IEnumerable Execute(this IQueryable source)
         {
             if (source == null) throw new ArgumentNullException("source");
 
+            if (source is DataTableWrapper)
+            {
+                return source;
+            }
+            
             var list = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(source.ElementType));
 
             foreach (var item in source)

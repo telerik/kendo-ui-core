@@ -4,8 +4,9 @@ namespace Kendo.Mvc.UI.Tests.Grid
     using System.Collections.ObjectModel;
     using System.Data;
     using System.Linq;
-    using Moq;
+    using Kendo.Mvc.Extensions;
     using Kendo.Mvc.Infrastructure;
+    using Moq;
     using Xunit;
 
     public class GridDataTableWrapperExtensionsTests

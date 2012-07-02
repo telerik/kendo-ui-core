@@ -115,6 +115,7 @@
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="Extensions\ExpressionExtensions.cs" />
     <Compile Include="Extensions\HtmlTextWriterExtensions.cs" />
+    <Compile Include="Extensions\DataTableWrapperExtensions.cs" />
     <Compile Include="Infrastructure\IControllerDescriptorCache.cs" />
     <Compile Include="Infrastructure\IControllerContextCache.cs" />
     <Compile Include="Infrastructure\IAuthorizationContextCache.cs" />
@@ -551,7 +552,7 @@
     <Compile Include="UI\Grid\GridButtonType.cs" />
     <Compile Include="UI\Grid\GridDynamicDataKey.cs" />
     <Compile Include="UI\Grid\GridRowViewDataKey.cs" />
-    <Compile Include="UI\Grid\GridDataTableWrapperEnumerable.cs" />
+    <Compile Include="Infrastructure\DataTableWrapper.cs" />
     <Compile Include="UI\Grid\GridDetailRow.cs" />
     <Compile Include="UI\Grid\GridDetailTemplate.cs" />
     <Compile Include="UI\Grid\Columns\IGridActionColumn.cs" />
@@ -713,7 +714,7 @@
     <Compile Include="UI\Grid\CompositeFilterDescriptor.cs" />
     <Compile Include="Infrastructure\FilterCompositionLogicalOperator.cs" />
     <Compile Include="Infrastructure\Implementation\Filtering\FilterDescription.cs" />
-    <Compile Include="UI\Grid\FilterDescriptor.cs" />
+    <Compile Include="Infrastructure\FilterDescriptor.cs" />
     <Compile Include="Infrastructure\FilterDescriptorBase.cs" />
     <Compile Include="Infrastructure\FilterDescriptorCollection.cs" />
     <Compile Include="Infrastructure\Implementation\Filtering\FilterDescriptorExtensions.cs" />
@@ -885,7 +886,6 @@
     <Compile Include="UI\Grid\Fluent\GridSortSettingsBuilder.cs" />
     <Compile Include="UI\Grid\Columns\GridTemplateColumn.cs" />
     <Compile Include="UI\Grid\GridUrlParameters.cs" />
-    <Compile Include="UI\Grid\GridModel.cs" />
     <Compile Include="UI\Grid\Settings\GridWebServiceSettings.cs" />
     <Compile Include="UI\Effects\AnimationDuration.cs" />
     <Compile Include="UI\IAsyncContentContainer.cs" />
