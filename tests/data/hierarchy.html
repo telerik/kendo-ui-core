@@ -669,6 +669,7 @@
 
                 equal(data.length, 1);
                 equal(data[0].text, "foo");
+                ok(data[0].loaded(), "inferred nodes are considered as loaded");
 
                 data[0].children.read();
                 var children = data[0].children.data();

@@ -2736,7 +2736,7 @@
                 that.trigger(CHANGE, e);
             });
 
-            that._loaded = false;
+            that._loaded = !!(value && value[data]);
         },
 
         hasChildren: false,
