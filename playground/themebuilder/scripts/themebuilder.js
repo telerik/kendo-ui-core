@@ -8,6 +8,7 @@ var oldColor, devices = [ "ios", "android", "blackberry", "meego" ],
         applications = {},
         counter = 1,
         proxy = $.proxy,
+        extend = $.extend,
         clones = $.extend([], devices),
         widgetList = {
             icon: {
@@ -246,18 +247,11 @@ var oldColor, devices = [ "ios", "android", "blackberry", "meego" ],
                 saturationValue = $('<div class="s-value">0</div>').appendTo(popupElement),
                 lightnessElement = $('<label class="label">L<input type="progress" id="lightness" /></label>').appendTo(popupElement).find("input"),
                 lightnessValue = $('<div class="s-value">0</div>').appendTo(popupElement),
-                hueSlideProxy = proxy(that._onHueSlide, that),
-                satSlideProxy = proxy(that._onSatSlide, that),
-                lightSlideProxy = proxy(that._onLightSlide, that);
+                slideProxy = proxy(that._onSlide, that);
 
-            that.hueSlider = hueElement.kendoColorSlider({ max: 360, slide: hueSlideProxy, change: hueSlideProxy }).data("kendoColorSlider");
-            that.saturationSlider = saturationElement.kendoColorSlider({ slide: satSlideProxy, change: satSlideProxy }).data("kendoColorSlider");
-            that.lightnessSlider = lightnessElement.kendoColorSlider({ slide: lightSlideProxy, change: lightSlideProxy }).data("kendoColorSlider");
-
-            that.hueValueElement = hueValue;
-            that.satValueElement = saturationValue;
-            that.lightValueElement = lightnessValue;
-
+            that.hueSlider = extend(hueElement.kendoColorSlider({ max: 360, slide: slideProxy, change: slideProxy }).data("kendoColorSlider"), { type: "hue", valueElement: hueValue });
+            that.saturationSlider = extend(saturationElement.kendoColorSlider({ slide: slideProxy, change: slideProxy }).data("kendoColorSlider"), { type: "saturation", valueElement: saturationValue });
+            that.lightnessSlider = extend(lightnessElement.kendoColorSlider({ slide: slideProxy, change: slideProxy }).data("kendoColorSlider"), { type: "lightness", valueElement: lightnessValue });
         },
         options: {
             name: "CustomPicker"
@@ -270,35 +264,14 @@ var oldColor, devices = [ "ios", "android", "blackberry", "meego" ],
             that.popup[open ? "open" : "close"]();
         },
 
-        _onHueSlide: function(e) {
+        _onSlide: function(e) {
             var that = this,
-                c = that.color.hue(e.value).get().toUpperCase();
+                c = that.color[e.sender.type](e.value).get().toUpperCase();
 
-            that.colorElement.text(c);
             that.element.css("background-color", c);
-            that.colorElement.css("background-color", c);
-            that.hueSlider.handle.css("background-color", c);
-            that.hueValueElement.text(e.value);
-        },
-
-        _onSatSlide: function(e) {
-            var that = this,
-                c = that.color.saturation(e.value).get().toUpperCase();
-
             that.colorElement.text(c);
-            that.element.css("background-color", c);
             that.colorElement.css("background-color", c);
-            that.satValueElement.text(e.value);
-        },
-
-        _onLightSlide: function(e) {
-            var that = this,
-                c = that.color.lightness(e.value).get().toUpperCase();
-
-            that.colorElement.text(c);
-            that.element.css("background-color", c);
-            that.colorElement.css("background-color", c);
-            that.lightValueElement.text(e.value);
+            e.sender.valueElement.text(e.value);
         }
     });
 
