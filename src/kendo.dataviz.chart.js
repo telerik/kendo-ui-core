@@ -2254,8 +2254,7 @@
 
         toggleHighlight: function(view, on) {
             var element = this,
-                opacity = element.options.highlight.opacity,
-                options = {};
+                opacity = element.options.highlight.opacity;
 
             element.highlighted = !element.highlighted;
 
