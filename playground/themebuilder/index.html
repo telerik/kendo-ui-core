@@ -75,27 +75,34 @@
             vertical-align: middle;
         }
 
-        .lightnessValue,
-        .saturationValue,
-        .hueValue
+        .color-value,
+        .l-value,
+        .s-value,
+        .h-value
         {
-            float: right;
-            width: 10rem;
-            height: 40px;
+            display: inline-block;
+            width: 2.6em;
+            height: 1.4em;
             border-radius: 5px;
-            font-size: 20px;
-            line-height: 40px;
             text-align: center;
             color: #000;
             background: #fff;
-            border: 1px solid #999;
-            margin: .2em .4em 0 .2em;
+            border: 1px solid rgba(0,0,0,.3);
+            box-shadow: 0 0 1px rgba(0,0,0,.2);
+            margin-bottom: 5px;
         }
 
-        label {
+        .color-value
+        {
             display: block;
-            width: 200px;
+            width: auto;
+        }
+
+        .label {
+            display: inline-block;
+            width: 150px;
             vertical-align: middle;
+            margin-right: 2px;
         }
 
         .km-slider {
@@ -107,6 +114,12 @@
             background: none;
         }
 
+        .k-colorpick {
+            font: inherit !important;
+            width: 190px;
+            padding: .8em;
+        }
+
     </style>
 </head>
 <body>
@@ -116,21 +129,19 @@
         <div class="drop" style="background: #adff2f;">&nbsp;</div>
         <div class="drop" style="background: #87ceeb;">&nbsp;</div>
         <div class="drop" style="background: #b8860b;">&nbsp;</div>
-        <div class="drop" style="background: #ba55d3;">&nbsp;</div>
+        <div id="picky" class="drop" style="background: #ba55d3;">&nbsp;</div>
         <div class="drop" style="background: rgba(100,150,200,.5);">&nbsp;</div>
         <div class="drop" style="background: rgba(200,150,100,.5);">&nbsp;</div>
         <div class="drop" style="background: -webkit-linear-gradient(left top, #0b47a2, #04b7a2 5%, #0b4a72 98%, #20b47a);">&nbsp;</div>
         <div class="adddrop">+</div>
         <br /><br />
         <input class="ktb-colorpicker">
-        <div class="hueValue">#</div>
-        <div class="saturationValue">0</div>
-        <div class="lightnessValue">0</div>
-        <div class="km-ios">
-            <label class="label">Hue <input type="progress" id="hue" /></label><br />
-            <label class="label">Saturation <input type="progress" id="saturation" /></label><br />
-            <label class="label">Lightness <input type="progress" id="lightness" /></label><br />
-        </div>
+        <!--<div class="k-colorpick km-ios">-->
+            <!--<div class="color-value">#</div>-->
+            <!--<label class="label">H<input type="progress" id="hue" /></label><div class="h-value">0</div><br />-->
+            <!--<label class="label">S<input type="progress" id="saturation" /></label><div class="s-value">0</div><br />-->
+            <!--<label class="label">L<input type="progress" id="lightness" /></label><div class="l-value">0</div><br />-->
+        <!--</div>-->
         <br /><br />
         <div>
             <div id="iosDevice" class="device">
@@ -396,37 +407,89 @@
                 });
             }
 
-            function onHueSlide(e) {
-                var c = color.hue(e.value).get().toUpperCase();
-                $(".hueValue").text(c);
-                $(".hueValue").css("background-color", c);
-                hue.handle.css("background-color", c);
-            }
-
-            function onSatSlide(e) {
-                var c = color.saturation(e.value).get().toUpperCase();
-                $(".hueValue").text(c);
-                $(".hueValue").css("background-color", c);
-                $(".saturationValue").text(e.value);
-            }
-
-            function onLightSlide(e) {
-                var c = color.lightness(e.value).get().toUpperCase();
-                $(".hueValue").text(c);
-                $(".hueValue").css("background-color", c);
-                $(".lightnessValue").text(e.value);
-            }
-
-            var hue = $("#hue").kendoColorSlider({ max: 359, slide: onHueSlide, change: onHueSlide }).data("kendoColorSlider"),
-                saturation = $("#saturation").kendoColorSlider({ slide: onSatSlide, change: onSatSlide }).data("kendoColorSlider"),
-                lightness = $("#lightness").kendoColorSlider({ slide: onLightSlide, change: onLightSlide }).data("kendoColorSlider"),
-                color = new Color("#09F");
+//            function onHueSlide(e) {
+//                var c = color.hue(e.value).get().toUpperCase();
+//                $(".color-value").text(c);
+//                $(".color-value").css("background-color", c);
+//                hue.handle.css("background-color", c);
+//                $(".h-value").text(e.value);
+//            }
+//
+//            function onSatSlide(e) {
+//                var c = color.saturation(e.value).get().toUpperCase();
+//                $(".color-value").text(c);
+//                $(".color-value").css("background-color", c);
+//                $(".s-value").text(e.value);
+//            }
+//
+//            function onLightSlide(e) {
+//                var c = color.lightness(e.value).get().toUpperCase();
+//                $(".color-value").text(c);
+//                $(".color-value").css("background-color", c);
+//                $(".l-value").text(e.value);
+//            }
+//
+//            var hue = $("#hue").kendoColorSlider({ max: 360, slide: onHueSlide, change: onHueSlide }).data("kendoColorSlider"),
+//                saturation = $("#saturation").kendoColorSlider({ slide: onSatSlide, change: onSatSlide }).data("kendoColorSlider"),
+//                lightness = $("#lightness").kendoColorSlider({ slide: onLightSlide, change: onLightSlide }).data("kendoColorSlider"),
+//                color = new Color("#09F");
         </script>
         <br/><br/>
-        <label><input id="iosbox" type="checkbox" checked="checked" />iOS</label>
-        <label><input id="androidbox" type="checkbox" checked="checked" />Android</label>
-        <label><input id="blackberrybox" type="checkbox" />BlackBerry</label>
-        <label><input id="meegobox" type="checkbox" />MeeGo</label>
+        <style scoped="scoped">
+            /* Test input styling */
+            input.k-checkbox {
+                padding: 0;
+            }
+            :root input.k-checkbox {
+                position: absolute;
+                margin: 4px 0 0 0;
+                opacity: 0;
+            }
+            :root label.k-checkbox {
+                position: relative;
+                padding-left: 1.6em;
+                display: inline-block;
+            }
+            :root input.k-checkbox + label.k-checkbox:before,
+            :root input.k-checkbox + label.k-checkbox:after {
+                content: "\a0";
+                display: inline-block;
+                position: absolute;
+                left: 0;
+                top: 50%;
+                width: 1.2em;
+                height: 1.2em;
+                margin: -.6em 2px 0 0;
+                padding: 0 1px 2px;
+                font-family: "Courier New", Courier, monospace;
+                border-radius: 2px;
+                border: 1px solid rgba(0,0,0,.2);
+                text-align: center;
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                box-sizing: border-box;
+                box-shadow: inset 0 0 2px rgba(0,0,0,.2);
+            }
+            :root input.k-checkbox + label.k-checkbox:after {
+                display: none;
+                width: .7em;
+                height: .7em;
+                margin: -.34em 2px 0 .25em;
+                background: #369;
+            }
+            :root input.k-checkbox:checked + label.k-checkbox:after {
+                display: inline-block;
+
+            }
+        </style>
+        <input id="iosbox" type="checkbox" checked="checked" class="k-checkbox"/>
+        <label for="iosbox" class="k-checkbox">iOS</label>
+        <input id="androidbox" type="checkbox" checked="checked" class="k-checkbox" />
+        <label for="androidbox" class="k-checkbox">Android</label>
+        <input id="blackberrybox" type="checkbox" class="k-checkbox" />
+        <label for="blackberrybox" class="k-checkbox">BlackBerry</label>
+        <input id="meegobox" type="checkbox" class="k-checkbox" />
+        <label for="meegobox" class="k-checkbox">MeeGo</label>
         <button class="k-button" id="getStyles">Get Styles</button>
         <script type="text/javascript" src="scripts/themebuilder.js"></script>
     </div>
