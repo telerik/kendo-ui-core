@@ -510,8 +510,10 @@
             }
 
             if (!inferred) {
-                that._progress(true);
-                that.dataSource.read();
+                if (options.autoBind) {
+                    that._progress(true);
+                    that.dataSource.read();
+                }
             } else {
                 that._attachUids();
             }
@@ -776,6 +778,7 @@
                 }
             },
             dragAndDrop: false,
+            autoBind: true,
             loadOnDemand: true
         },
 

@@ -403,6 +403,26 @@
                 equal(treeview.find(".k-item:last").text(), "bar");
             });
 
+            test("setting autoBind to false does not fetch the dataSource", function() {
+                var changeTriggered = false,
+                    dataSource = new HierarchicalDataSource({
+                        items: [
+                            { text: "alpha" },
+                            { text: "bravo" }
+                        ],
+                        change: function() {
+                            changeTriggered = true;
+                        }
+                    });
+
+                createTreeView({
+                    autoBind: false,
+                    dataSource: dataSource
+                });
+
+                ok(!changeTriggered);
+            });
+
         </script>
 
         <div id="qunit-fixture"> </div>
