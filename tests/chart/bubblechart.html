@@ -23,6 +23,7 @@
                 chartBox = new Box2D(0, 0, 800, 600),
                 plotArea,
                 bubbleChart,
+                firstPoint,
                 root,
                 view,
                 TOLERANCE = 1;
@@ -37,15 +38,23 @@
 
                 bubbleChart.reflow();
                 bubbleChart.getViewElements(view);
+
+                firstPoint = bubbleChart.points[0];
             }
 
             (function() {
+                var TOLERANCE = 1;
                 var series = { data: [{
-                    x: 1, y: 10, size: 100, category: "a",
-                    color: "red"
-                }, {
-                    x: 2, y: 2, size: 20, category: "b"
-                }] };
+                        x: 1, y: 10, size: 100, category: "a",
+                        color: "red"
+                    }, {
+                        x: 2, y: 2, size: 0, category: "b"
+                    }, {
+                        x: 3, y: 3, size: 20, category: "b"
+                    }],
+                    minSize: 10,
+                    maxSize: 110
+                };
 
                 function PlotAreaStub() { }
 
@@ -86,6 +95,23 @@
                     equals(bubbleChart.points.length, 0);
                 });
 
+                test("Maximum bubble diameter is set to maxSize", function() {
+                    equals(firstPoint.options.markers.size, 110, TOLERANCE);
+                });
+
+                test("Minimum bubble diameter is set to minSize", function() {
+                    equals(bubbleChart.points[1].options.markers.size, 10, TOLERANCE);
+                });
+
+                test("Bubble diameter is proportional to size value", function() {
+                    equals(bubbleChart.points[2].options.markers.size, 50, TOLERANCE);
+                });
+
+                test("zIndex is higher for smaller bubbles", function() {
+                    ok(bubbleChart.points[1].options.markers.zIndex >
+                       firstPoint.options.markers.zIndex);
+                });
+
                 test("Color is set for bubbles with negative size", function() {
                     setupBubbleChart(plotArea, { series: [{
                             data: [{x: 1, y: 1, size: -100}],
@@ -93,23 +119,55 @@
                         }]
                     });
 
-                    equals(bubbleChart.points[0].color, "red");
+                    equals(firstPoint.color, "red");
+                });
+
+                test("Color is set in options", function() {
+                    equals(firstPoint.options.color, "red");
                 });
 
                 test("format variable {0} returns x", function() {
-                    equals(bubbleChart.points[0].formatValue("{0}"), 1);
+                    equals(firstPoint.formatValue("{0}"), 1);
                 });
 
                 test("format variable {1} returns y", function() {
-                    equals(bubbleChart.points[0].formatValue("{1}"), 10);
+                    equals(firstPoint.formatValue("{1}"), 10);
                 });
 
                 test("format variable {2} returns size", function() {
-                    equals(bubbleChart.points[0].formatValue("{2}"), 100);
+                    equals(firstPoint.formatValue("{2}"), 100);
                 });
 
                 test("format variable {3} returns category", function() {
-                    equals(bubbleChart.points[0].formatValue("{3}"), "a");
+                    equals(firstPoint.formatValue("{3}"), "a");
+                });
+
+                // ------------------------------------------------------------
+                module("Bubble Chart / Points / Rendering", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                        setupBubbleChart(plotArea, { series: [ series ] });
+                    }
+                });
+
+                test("highlightOverlay returns a circle", function() {
+                    ok(firstPoint.highlightOverlay(view).center);
+                });
+
+                test("highlightOverlay returns a transparent circle", function() {
+                    equals(firstPoint.highlightOverlay(view).options.fill, undefined);
+                });
+
+                test("highlightOverlay returns a circle with 1px border", function() {
+                    var outline = firstPoint.highlightOverlay(view);
+
+                    equals(outline.options.strokeWidth, 1);
+                });
+
+                test("highlightOverlay returns a circle with 1px smaller diameter", function() {
+                    var outline = firstPoint.highlightOverlay(view);
+
+                    equals(outline.radius, firstPoint.options.markers.size / 2 - 0.5);
                 });
 
                 // ------------------------------------------------------------
@@ -121,7 +179,7 @@
                 });
 
                 test("returns legend item for each point", function() {
-                    equals(bubbleChart.legendItems().length, 2);
+                    equals(bubbleChart.legendItems().length, 3);
                 });
 
                 test("sets legend item name to category", function() {
@@ -134,7 +192,7 @@
 
                 test("skips points with visibleInLegend set to false", function() {
                     bubbleChart.points[1].visibleInLegend = false;
-                    equals(bubbleChart.legendItems().length, 1);
+                    equals(bubbleChart.legendItems().length, 2);
                 });
 
             })();

@@ -1528,7 +1528,7 @@
             return elements;
         },
 
-        getOutlineElement: function(view, options){
+        highlightOverlay: function(view, options){
             var bar = this,
                 box = bar.box;
 
@@ -2179,7 +2179,7 @@
             }
         },
 
-        getOutlineElement: function(view, options) {
+        highlightOverlay: function(view, options) {
             var element = this,
                 marker = element.marker;
 
@@ -2223,21 +2223,48 @@
         options: {
             labels: {
                 position: CENTER
+            },
+            highlight: {
+                opacity: 1,
+                border: {
+                    width: 1
+                }
             }
         },
 
-        getOutlineElement: function(view, options) {
-            var element = this;
+        highlightOverlay: function(view) {
+            var element = this,
+                options = element.options,
+                highlight = options.highlight,
+                borderWidth = highlight.border.width,
+                markers = options.markers,
+                center = element.box.center(),
+                radius = markers.size / 2 - borderWidth / 2,
+                borderColor =
+                    new Color(markers.background)
+                    .brightness(BAR_BORDER_BRIGHTNESS)
+                    .toHex();
 
-            // TODO: Gradiented stroke (shadow filter?)
-            return view.createCircle(
-                [element.box.center().x, element.box.center().y],
-                element.options.markers.size / 2 - 0.5, {
-                    data: { modelId: element.options.modelId },
-                    stroke: new Color(element.options.markers.background).brightness(0.75).toHex(),
-                    strokeWidth: 2,
-                    strokeOpacity: 1
-                });
+            return view.createCircle([center.x, center.y], radius, {
+                data: { modelId: element.options.modelId },
+                stroke: borderColor,
+                strokeWidth: borderWidth
+            });
+        },
+
+        toggleHighlight: function(view, on) {
+            var element = this,
+                opacity = element.options.highlight.opacity,
+                options = {};
+
+            element.highlighted = !element.highlighted;
+
+            var marker = element.marker.getViewElements(view, {
+                fillOpacity: element.highlighted ? opacity : undefined
+            })[0];
+
+            marker.refresh(doc.getElementById(this.options.id));
+
         }
     });
 
@@ -2736,7 +2763,7 @@
                 seriesPoints = chart.seriesPoints,
                 valueFields = chart.valueFields(),
                 bindableFields = chart.bindableFields(),
-                pointIx = 0,
+                pointIx,
                 seriesIx,
                 currentSeries,
                 currentSeriesPoints,
@@ -2826,17 +2853,16 @@
             }
         },
 
+        reflow: function(box) {
+            var chart = this;
+
+            chart.updateBubblesSize();
+            ScatterChart.fn.reflow.call(chart, box);
+        },
+
         createPoint: function(value, series, seriesIx, fields) {
             var chart = this,
                 point,
-                maxValue = chart.maxSize(series),
-                minR = series.minSize / 2,
-                maxR = series.maxSize / 2,
-                minArea = math.PI * minR * minR,
-                maxArea = math.PI * maxR * maxR,
-                areaRange = maxArea - minArea,
-                area = math.abs(value.size) * (areaRange / maxValue),
-                r = math.sqrt((minArea + area) / math.PI),
                 pointsCount = series.data.length,
                 delay = fields.pointIx * (INITIAL_ANIMATION_DURATION / pointsCount),
                 animationOptions = {
@@ -2845,47 +2871,76 @@
                     type: BUBBLE
                 };
 
-            point = new Bubble(value,
-                deepExtend({
+            point = new Bubble(value, {
+                    color: fields.color,
                     markers: {
-                        size: r * 2,
                         type: CIRCLE,
                         background: fields.color,
                         border: series.border,
                         opacity: series.opacity,
-                        animation: animationOptions,
-                        zIndex: maxR - r
+                        animation: animationOptions
                     },
                     tooltip: {
                         format: chart.options.tooltip.format
                     },
                     labels: {
-                        zIndex: maxR - r + 1,
                         format: chart.options.labels.format,
                         animation: animationOptions
                     }
-                })
+                }
             );
 
             chart.append(point);
 
             return point;
 
-            // TODO: Hover that updates rendered element
             // TODO: Clip to axis line box
         },
 
-        maxSize: function(series) {
-            // TODO: Call once per series by overriding render
+        updateBubblesSize: function() {
             var chart = this,
-                length = series.data.length,
-                valueFields = chart.valueFields(),
+                options = chart.options,
+                series = options.series,
+                seriesIx,
+                pointIx;
+
+            for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
+                var currentSeries = series[seriesIx],
+                    seriesPoints = chart.seriesPoints[seriesIx],
+                    seriesMaxSize = chart.maxSize(seriesPoints),
+                    minR = currentSeries.minSize / 2,
+                    maxR = currentSeries.maxSize / 2,
+                    minArea = math.PI * minR * minR,
+                    maxArea = math.PI * maxR * maxR,
+                    areaRange = maxArea - minArea,
+                    areaRatio = areaRange / seriesMaxSize;
+
+                for (pointIx = 0; pointIx < seriesPoints.length; pointIx++) {
+                    var point = seriesPoints[pointIx],
+                        area = math.abs(point.value.size) * areaRatio,
+                        r = math.sqrt((minArea + area) / math.PI);
+
+                    deepExtend(point.options, {
+                        markers: {
+                            size: r * 2,
+                            zIndex: maxR - r
+                        },
+                        labels: {
+                            zIndex: maxR - r + 1
+                        }
+                    });
+                }
+            }
+        },
+
+        maxSize: function(seriesPoints) {
+            var length = seriesPoints.length,
                 max = 0,
                 i,
                 size;
 
             for (i = 0; i < length; i++) {
-                size = bindPoint(series, i, valueFields).value.size;
+                size = seriesPoints[i].value.size;
                 max = math.max(max, math.abs(size));
             }
 
@@ -3110,7 +3165,7 @@
             return view.createSector(sector, options);
         },
 
-        getOutlineElement: function(view, options) {
+        highlightOverlay: function(view, options) {
             var segment = this,
                 highlight = segment.options.highlight || {},
                 border = highlight.border || {},
@@ -4713,36 +4768,48 @@
             var highlight = this,
                 view = highlight.view,
                 viewElement = highlight.viewElement,
-                outline,
-                element;
+                overlay,
+                overlayElement;
 
             highlight.hide();
 
-            if (point.getOutlineElement) {
-                outline = point.getOutlineElement(view, highlight.options);
+            if (point.highlightOverlay) {
+                overlay = point.highlightOverlay(view, highlight.options);
 
-                if (outline) {
-                    element = view.renderElement(outline);
-                    viewElement.appendChild(element);
+                if (overlay) {
+                    overlayElement = view.renderElement(overlay);
+                    viewElement.appendChild(overlayElement);
 
-                    highlight.element = element;
+                    highlight.overlayElement = overlayElement;
                     highlight.visible = true;
                 }
+            }
+
+            if (point.toggleHighlight) {
+                point.toggleHighlight(view);
+                highlight.point = point;
+                highlight.visible = true;
             }
         },
 
         hide: function() {
             var highlight = this,
-                element = highlight.element;
+                overlayElement = highlight.overlayElement;
 
-            if (element) {
-                if (element.parentNode) {
-                    element.parentNode.removeChild(element);
+            if (overlayElement) {
+                if (overlayElement.parentNode) {
+                    overlayElement.parentNode.removeChild(overlayElement);
                 }
 
-                delete highlight.element;
-                highlight.visible = false;
+                delete highlight.overlayElement;
             }
+
+            if (highlight.point) {
+                highlight.point.toggleHighlight(highlight.view);
+                delete highlight.point;
+            }
+
+            highlight.visible = false;
         }
     });
 

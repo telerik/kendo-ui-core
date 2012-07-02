@@ -305,6 +305,14 @@
                     "#= d.renderAttr(\"opacity\", d.options.strokeOpacity) # />"
                 );
             }
+        },
+
+        refresh: function(domElement) {
+            try {
+              domElement.opacity = this.options.strokeOpacity;
+            } catch(e) {
+              // Random exceptions in IE 8 Compatibility View
+            }
         }
     });
 
@@ -327,6 +335,14 @@
         isEnabled: function() {
             var fill = this.options.fill;
             return !!fill && fill.toLowerCase() !== TRANSPARENT;
+        },
+
+        refresh: function(domElement) {
+            try {
+              domElement.opacity = this.options.fillOpacity;
+            } catch(e) {
+              // Random exceptions in IE 8 Compatibility View
+            }
         }
     });
 
@@ -387,18 +403,17 @@
             }
 
             var path = this,
-                options = path.options,
                 element = $(domElement),
-                parentNode = element[0].parentNode;
+                parentNode = element[0].parentNode,
+                fill = path.fill,
+                stroke = path.stroke;
 
             if (parentNode) {
                 element.find("path")[0].v = this.renderPoints();
-                try {
-                    element.find("fill")[0].opacity = options.fillOpacity;
-                    element.find("stroke")[0].opacity = options.strokeOpacity;
-                } catch(e) {
-                    // Random exceptions in IE 8 Compatibility View
-                }
+
+                fill.options = stroke.options = path.options;
+                fill.refresh(element.find("fill")[0]);
+                stroke.refresh(element.find("stroke")[0]);
 
                 // Force redraw in order to remove artifacts in IE < 7
                 parentNode.style.cssText = parentNode.style.cssText;
@@ -592,17 +607,21 @@
         },
 
         refresh: function(domElement) {
-            var element = this,
-                center = element.center,
-                radius = math.max(0, element.radius),
-                size = radius * 2;
+            var circle = this,
+                center = circle.center,
+                radius = math.max(0, circle.radius),
+                size = radius * 2,
+                element = $(domElement);
 
-            $(domElement).css({
+            element.css({
                 "width": size,
                 "height": size,
                 "top": center[1] - radius,
                 "left": center[0] - radius
             });
+
+            circle.fill.options = circle.options;
+            circle.fill.refresh(element.find("fill")[0]);
         }
     });
 

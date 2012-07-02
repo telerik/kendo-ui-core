@@ -862,11 +862,11 @@
                     equals(marker.options.modelId, point.options.modelId);
                 });
 
-                test("getOutlineElement returns marker outline", function() {
+                test("highlightOverlay returns marker outline", function() {
                     createPoint({ markers: { type: "circle" }});
                     view = new ViewStub();
 
-                    point.getOutlineElement(view);
+                    point.highlightOverlay(view);
                     equals(view.log.circle.length, 1);
                 });
 
@@ -874,31 +874,31 @@
                     createPoint({ markers: { type: "circle" }});
                     view = new ViewStub();
 
-                    point.getOutlineElement(view);
+                    point.highlightOverlay(view);
                     equals(view.log.circle[0].style.data.modelId, point.options.modelId);
                 });
 
-                test("getOutlineElement applies render options for square markers", function() {
+                test("highlightOverlay applies render options for square markers", function() {
                     createPoint({ markers: { type: "square" }});
                     view = new ViewStub();
 
-                    point.getOutlineElement(view, { flag: true });
+                    point.highlightOverlay(view, { flag: true });
                     ok(view.log.rect[0].style.flag);
                 });
 
-                test("getOutlineElement applies render options for circle markers", function() {
+                test("highlightOverlay applies render options for circle markers", function() {
                     createPoint({ markers: { type: "circle" }});
                     view = new ViewStub();
 
-                    point.getOutlineElement(view, { flag: true });
+                    point.highlightOverlay(view, { flag: true });
                     ok(view.log.circle[0].style.flag);
                 });
 
-                test("getOutlineElement applies render options for triangle markers", function() {
+                test("highlightOverlay applies render options for triangle markers", function() {
                     createPoint({ markers: { type: "triangle" }});
                     view = new ViewStub();
 
-                    point.getOutlineElement(view, { flag: true });
+                    point.highlightOverlay(view, { flag: true });
                     ok(view.log.path[0].style.flag);
                 });
 

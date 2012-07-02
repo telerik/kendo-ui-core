@@ -287,17 +287,17 @@
                     ok(!ring.style.overlay);
                 });
 
-                test("getOutlineElement returns segment outline", function() {
+                test("highlightOverlay returns segment outline", function() {
                     view = new ViewStub();
 
-                    segment.getOutlineElement(view);
+                    segment.highlightOverlay(view);
                     equals(view.log.ring.length, 1);
                 });
 
                 test("outline element has same model id", function() {
                     view = new ViewStub();
 
-                    segment.getOutlineElement(view);
+                    segment.highlightOverlay(view);
                     equals(view.log.ring[0].style.data.modelId, segment.options.modelId);
                 });
 
