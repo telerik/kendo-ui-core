@@ -48,6 +48,10 @@ tests.push(
         title: "data lint"
     },
     {
+        page: "data/aspnetmvc-transport.html",
+        title: "data aspnetmvc transport"
+    },
+    {
         page: "data/remotetransport.html",
         title: "data remote transport"
     },

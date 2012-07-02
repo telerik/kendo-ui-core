@@ -1,6 +1,7 @@
 (function ($, undefined) {
     var kendo = window.kendo,
-       escapeQuoteRegExp = /'/ig;
+        escapeQuoteRegExp = /'/ig,
+        extend = $.extend;
 
     function parameterMap(options, operation) {
        var result = {};
@@ -72,7 +73,7 @@
        delete options.take;
        delete options.skip;
 
-       return $.extend(result, options);
+       return extend(result, options);
     }
 
     function serializeItem(result, item, prefix) {
@@ -187,93 +188,105 @@
         return aggregates;
     }
 
-    kendo.data.schemas["aspnetmvc-ajax"] = {
-        groups: function(data) {
-            return $.map(this.data(data), translateGroup);
-        },
-        aggregates: function(data) {
-            data = data.d || data;
-            var result = {},
-                aggregates = data.AggregateResults || [],
-                aggregate,
-                idx,
-                length;
+    extend(true, kendo.data, {
+        schemas: {
+            "aspnetmvc-ajax": {
+                groups: function(data) {
+                    return $.map(this.data(data), translateGroup);
+                },
+                aggregates: function(data) {
+                    data = data.d || data;
+                    var result = {},
+                        aggregates = data.AggregateResults || [],
+                        aggregate,
+                        idx,
+                        length;
 
-            for (idx = 0, length = aggregates.length; idx < length; idx++) {
-                aggregate = aggregates[idx];
-                result[aggregate.Member] = $.extend(true, result[aggregate.Member], translateAggregateResults(aggregate));
-            }
-            return result;
-        }
-    };
-
-    kendo.data.transports["aspnetmvc-ajax"] = kendo.data.RemoteTransport.extend({
-        init: function(options) {
-            kendo.data.RemoteTransport.fn.init.call(this, $.extend(true, {}, this.options, options));
-        },
-        read: function(options) {
-            var data = this.options.data,
-                url = this.options.read.url;
-            if (data) {
-                if (url) {
-                    this.options.data = null;
+                    for (idx = 0, length = aggregates.length; idx < length; idx++) {
+                        aggregate = aggregates[idx];
+                        result[aggregate.Member] = extend(true, result[aggregate.Member], translateAggregateResults(aggregate));
+                    }
+                    return result;
                 }
-
-                if (!data.length && url) {
-                    kendo.data.RemoteTransport.fn.read.call(this, options);
-                } else {
-                    options.success(data);
-                }
-            } else {
-                kendo.data.RemoteTransport.fn.read.call(this, options);
             }
-        },
-        options: {
-            read: {
-                type: "POST"
-            },
-            update: {
-                type: "POST"
-            },
-            create: {
-                type: "POST"
-            },
-            destroy: {
-                type: "POST"
-            },
-            parameterMap: parameterMap,
-            prefix: ""
         }
     });
 
-    kendo.data.transports["aspnetmvc-server"] = kendo.data.RemoteTransport.extend({
-        init: function(options) {
-            kendo.data.RemoteTransport.fn.init.call(this, $.extend(options, { parameterMap: $.proxy(parameterMap, this) } ));
-        },
-        read: function(options) {
-            var url,
-                regExp = new RegExp(this.options.prefix + "[^&]*&?", "g"),
-                query;
+    extend(true, kendo.data, {
+        transports: {
+            "aspnetmvc-ajax": kendo.data.RemoteTransport.extend({
+                init: function(options) {
+                    kendo.data.RemoteTransport.fn.init.call(this, $.extend(true, {}, this.options, options));
+                },
+                read: function(options) {
+                    var data = this.options.data,
+                        url = this.options.read.url;
+                    if (data) {
+                        if (url) {
+                            this.options.data = null;
+                        }
 
-            query = location.search.replace(regExp, "").replace("?", "");
-            if (query.length && !(/&$/.test(query))) {
-                query += "&";
-            }
+                        if (!data.Data.length && url) {
+                            kendo.data.RemoteTransport.fn.read.call(this, options);
+                        } else {
+                            options.success(data);
+                        }
+                    } else {
+                        kendo.data.RemoteTransport.fn.read.call(this, options);
+                    }
+                },
+                options: {
+                    read: {
+                        type: "POST"
+                    },
+                    update: {
+                        type: "POST"
+                    },
+                    create: {
+                        type: "POST"
+                    },
+                    destroy: {
+                        type: "POST"
+                    },
+                    parameterMap: parameterMap,
+                    prefix: ""
+                }
+            })
+        }
+    });
 
-            options = this.setup(options, "read");
-            url = options.url;
+    extend(true, kendo.data, {
+        transports: {
+            "aspnetmvc-server": kendo.data.RemoteTransport.extend({
+                init: function(options) {
+                    kendo.data.RemoteTransport.fn.init.call(this, extend(options, { parameterMap: $.proxy(parameterMap, this) } ));
+                },
+                read: function(options) {
+                    var url,
+                        regExp = new RegExp(this.options.prefix + "[^&]*&?", "g"),
+                        query;
 
-            if (url.indexOf("?") >= 0) {
-                url += "&" + query;
-            } else {
-                url += "?" + query;
-            }
+                    query = location.search.replace(regExp, "").replace("?", "");
+                    if (query.length && !(/&$/.test(query))) {
+                        query += "&";
+                    }
 
-            url += $.map(options.data, function(value, key) {
-                return key + "=" + value;
-            }).join("&");
+                    options = this.setup(options, "read");
+                    url = options.url;
 
-            location.href = url;
+                    if (url.indexOf("?") >= 0) {
+                        url += "&" + query;
+                    } else {
+                        url += "?" + query;
+                    }
+
+                    url += $.map(options.data, function(value, key) {
+                        return key + "=" + value;
+                    }).join("&");
+
+                    location.href = url;
+                }
+            })
         }
     });
 })(jQuery);
