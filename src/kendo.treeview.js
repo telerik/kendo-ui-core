@@ -171,7 +171,7 @@
     }
 
     function treeviewFromNode(node) {
-        return node.closest("[data-role=treeview]").data("kendoTreeView");
+        return $(node).closest("[data-role=treeview]").data("kendoTreeView");
     }
 
     subGroup = contentChild(".k-group");
@@ -1372,6 +1372,7 @@
 
         _dataSourceMove: function(nodeData, group, parentNode, callback) {
             var that = this,
+                srcTreeView = treeviewFromNode(nodeData),
                 srcDataSource,
                 dataItem,
                 referenceDataItem, i,
@@ -1381,6 +1382,8 @@
             if (parentNode) {
                 referenceDataItem = destTreeview.dataItem(parentNode);
 
+                referenceDataItem.load();
+
                 if (parentNode != that.root) {
                     destDataSource = referenceDataItem.children;
                 }
@@ -1389,7 +1392,7 @@
             if (nodeData instanceof $ || isDomElement(nodeData)) {
                 // move node within or between treeviews
                 nodeData = $(nodeData);
-                srcDataSource = treeviewFromNode(nodeData).dataSource;
+                srcDataSource = srcTreeView.dataSource;
                 dataItem = srcDataSource.getByUid(nodeData.attr(kendo.attr("uid")));
 
                 dataItem = srcDataSource.remove(dataItem);

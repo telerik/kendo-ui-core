@@ -451,6 +451,22 @@
                 equal(treeview.find(".k-item:first .k-item").length, 2);
             });
 
+            test("appending nodes loads their parent nodes", function() {
+                var called = false;
+
+                createTreeView([
+                    { text: "foo" }
+                ]);
+
+                treeviewObject.dataItem(".k-item:first").load = function() {
+                    called = true;
+                };
+
+                treeviewObject.append({ text: "bar" }, treeview.find(".k-item:first"));
+
+                ok(called);
+            });
+
         </script>
 
         <div id="qunit-fixture"> </div>
