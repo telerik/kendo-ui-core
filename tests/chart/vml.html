@@ -733,6 +733,13 @@
                     ok(stroke.render().indexOf("dashstyle='dot'") > -1);
                 });
 
+                test("refresh updates stroke opacity", function() {
+                    var domElement = $("<div />");
+                    stroke.options.strokeOpacity = 0.4;
+                    stroke.refresh(domElement[0]);
+                    equals(domElement[0].opacity, "0.4");
+                });
+
             })();
 
             (function() {
@@ -780,7 +787,7 @@
                 });
 
                 test("refresh updates fill opacity", function() {
-                    var domElement = $("<fill />");
+                    var domElement = $("<div />");
                     fill.options.fillOpacity = 0.4;
                     fill.refresh(domElement[0]);
                     equals(domElement[0].opacity, "0.4");

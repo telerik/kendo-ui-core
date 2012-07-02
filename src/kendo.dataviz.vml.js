@@ -305,6 +305,14 @@
                     "#= d.renderAttr(\"opacity\", d.options.strokeOpacity) # />"
                 );
             }
+        },
+
+        refresh: function(domElement) {
+            try {
+              domElement.opacity = this.options.strokeOpacity;
+            } catch(e) {
+              // Random exceptions in IE 8 Compatibility View
+            }
         }
     });
 
@@ -397,16 +405,16 @@
             var path = this,
                 options = path.options,
                 element = $(domElement),
-                parentNode = element[0].parentNode;
+                parentNode = element[0].parentNode,
+                fill = path.fill,
+                stroke = path.stroke;
 
             if (parentNode) {
                 element.find("path")[0].v = this.renderPoints();
-                try {
-                    element.find("fill")[0].opacity = options.fillOpacity;
-                    element.find("stroke")[0].opacity = options.strokeOpacity;
-                } catch(e) {
-                    // Random exceptions in IE 8 Compatibility View
-                }
+
+                fill.options = stroke.options = path.options;
+                fill.refresh(element.find("fill")[0]);
+                stroke.refresh(element.find("stroke")[0]);
 
                 // Force redraw in order to remove artifacts in IE < 7
                 parentNode.style.cssText = parentNode.style.cssText;
