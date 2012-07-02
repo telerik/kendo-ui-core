@@ -349,6 +349,24 @@ namespace Kendo.Mvc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Is equal to.
+        /// </summary>
+        public static string Filter_EnumIsEqualTo {
+            get {
+                return ResourceManager.GetString("Filter_EnumIsEqualTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is not equal to.
+        /// </summary>
+        public static string Filter_EnumIsNotEqualTo {
+            get {
+                return ResourceManager.GetString("Filter_EnumIsNotEqualTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Filter.
         /// </summary>
         public static string Filter_Filter {
@@ -444,6 +462,15 @@ namespace Kendo.Mvc.Resources {
         public static string Filter_Or {
             get {
                 return ResourceManager.GetString("Filter_Or", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to -Select value-.
+        /// </summary>
+        public static string Filter_SelectValue {
+            get {
+                return ResourceManager.GetString("Filter_SelectValue", resourceCulture);
             }
         }
         

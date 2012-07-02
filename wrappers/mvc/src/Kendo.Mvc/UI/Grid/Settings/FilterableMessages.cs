@@ -16,6 +16,7 @@ namespace Kendo.Mvc.UI
             Clear = Messages.Filter_Clear;
             And = Messages.Filter_And;
             Or = Messages.Filter_Or;
+            SelectValue = Messages.Filter_SelectValue;
         }
 
         public string Info { get; set; }
@@ -25,6 +26,7 @@ namespace Kendo.Mvc.UI
         public string Clear { get; set; }
         public string And { get; set; }
         public string Or { get; set; }
+        public string SelectValue { get; set; }
 
         private const string DefaultInfo = "Show items with value that:";
         private const string DefaultIsTrue = "is true";
@@ -33,6 +35,7 @@ namespace Kendo.Mvc.UI
         private const string DefaultClear = "Clear";
         private const string DefaultAnd = "And";
         private const string DefaultOr = "Or";
+        private const string DefaultSelectValue = "-Select value-";
 
         protected override void Serialize(IDictionary<string, object> json)
         {
@@ -69,6 +72,11 @@ namespace Kendo.Mvc.UI
             if (Or != DefaultOr)
             {
                 json["or"] = Or;
+            }
+
+            if (SelectValue != DefaultSelectValue)
+            {
+                json["selectValue"] = SelectValue;
             }
         }
     }

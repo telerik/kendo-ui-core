@@ -53,7 +53,14 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
-        
+
+        public FilterableMessagesBuilder SelectValue(string message)
+        {
+            messages.SelectValue = message;
+
+            return this;
+        }
+
         public FilterableMessagesBuilder Clear(string message)
         {
             messages.Clear = message;

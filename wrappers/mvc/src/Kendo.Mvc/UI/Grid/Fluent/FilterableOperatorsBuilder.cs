@@ -31,5 +31,12 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        public FilterableOperatorsBuilder ForEnums(Action<EnumOperatorsBuilder> configurator)
+        {
+            configurator(new EnumOperatorsBuilder(operators.Enums));
+
+            return this;
+        }   
     }
 }

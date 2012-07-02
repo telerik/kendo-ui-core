@@ -351,4 +351,13 @@
   <data name="Editor_Unlink" xml:space="preserve">
     <value>Remove hyperlink</value>
   </data>
+  <data name="Filter_EnumIsEqualTo" xml:space="preserve">
+    <value>Is equal to</value>
+  </data>
+  <data name="Filter_EnumIsNotEqualTo" xml:space="preserve">
+    <value>Is not equal to</value>
+  </data>
+  <data name="Filter_SelectValue" xml:space="preserve">
+    <value>-Select value-</value>
+  </data>
 </root>

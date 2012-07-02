@@ -213,6 +213,12 @@
   <data name="Filter_DateIsNotEqualTo" xml:space="preserve">
     <value>Ist nicht gleich</value>
   </data>
+  <data name="Filter_EnumIsEqualTo" xml:space="preserve">
+    <value>Ist gleich</value>
+  </data>
+  <data name="Filter_EnumIsNotEqualTo" xml:space="preserve">
+    <value>Ist nicht gleich</value>
+  </data>
   <data name="Filter_Filter" xml:space="preserve">
     <value>Filter</value>
   </data>
@@ -245,6 +251,9 @@
   </data>
   <data name="Filter_Or" xml:space="preserve">
     <value>Oder</value>
+  </data>
+  <data name="Filter_SelectValue" xml:space="preserve">
+    <value>-Wählen Sie-</value>
   </data>
   <data name="Filter_StringContains" xml:space="preserve">
     <value>Beinhaltet</value>

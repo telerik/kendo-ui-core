@@ -11,6 +11,7 @@ namespace Kendo.Mvc.UI
             Strings = new StringOperators();
             Numbers = new NumberOperators();
             Dates = new DateOperators();
+            Enums = new EnumOperators();
         }
 
         public StringOperators Strings
@@ -26,6 +27,12 @@ namespace Kendo.Mvc.UI
         }
 
         public DateOperators Dates
+        {
+            get;
+            private set;
+        }
+
+        public EnumOperators Enums
         {
             get;
             private set;
@@ -52,6 +59,13 @@ namespace Kendo.Mvc.UI
             if (dates.Any())
             {
                 json["date"] = dates;
+            }
+
+            var enums = Enums.ToJson();
+
+            if (enums.Any())
+            {
+                json["enums"] = enums;
             }
         }
     }
