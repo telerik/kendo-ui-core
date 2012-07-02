@@ -90,7 +90,7 @@
 
     function preventTrigger(e) {
         e.preventDefault();
-        $(document.body).trigger(e.type);
+        $(e.target.parentNode).trigger(e.type);
     }
 
     /**
@@ -170,7 +170,7 @@
          * @option {Boolean} [global] <false> If set to true, the drag event will be tracked beyond the element boundaries.
          * @option {Element} [surface]  If set, the drag event will be tracked for the surface boundaries. By default, leaving the element boundaries will end the drag.
          * @option {Boolean} [allowSelection] <false> If set to true, the mousedown and selectstart events will not be prevented.
-         * @option {Boolean} [stopPropagation] <false> If set to true, the mousedown event propagation will stopped, disabling
+         * @option {Boolean} [stopPropagation] <false> If set to true, the mousedown event propagation will be stopped, disabling
          * drag capturing at parent elements.
          * If set to false, dragging outside of the element boundaries will trigger the <code>end</code> event.
          * @option {Selector} [filter] If passed, the filter limits the child elements that will trigger the event sequence.
