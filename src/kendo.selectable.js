@@ -101,7 +101,7 @@
                 y: event.pageY
             };
 
-            if(!single && $(event.target).is(":not(:input)")) {
+            if(!single && $(event.target).is(":not(:input, a)")) {
                 DOCUMENT
                     .unbind(MOUSEMOVE, that._moveDelegate)
                     .bind(MOUSEMOVE, that._moveDelegate)
