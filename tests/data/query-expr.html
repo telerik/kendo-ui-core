@@ -508,26 +508,24 @@
                 }), "((d?d.getTime():d) <= " + date.getTime() + ")");
             });
 
-            test("string neq", function() {
+            est("string neq", function() {
                 equal(compile({
                     logic: "and",
                     filters: [ { operator: "neq", value: "foo"} ]
-                }), "(d.toLowerCase() != 'foo')");
+                }), "((d || '').toLowerCase() != 'foo')");
             });
-
             test("string filtering is case insensitive by default", function() {
                 equal(compile({
                     logic: "and",
                     filters: [ { operator: "neq", value: "Foo"} ]
-                }), "(d.toLowerCase() != 'foo')");
+                }), "((d || '').toLowerCase() != 'foo')");
             });
 
-            test("apostrophe in strings is escaped", function() {
+            est("apostrophe in strings is escaped", function() {
                 equal(compile({
                     filters: [ { operator: "eq", value: "f'oo"} ]
-                }), "(d.toLowerCase() == 'f\\'oo')");
+                }), "((d || '').toLowerCase() == 'f\\'oo')");
             });
-
             test("string filtering is case sensitive", function() {
                 equal(compile({
                     logic: "and",
