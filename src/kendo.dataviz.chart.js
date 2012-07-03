@@ -427,7 +427,7 @@
                 tooltipOptions,
                 point;
 
-            if (!highlight || highlight.element === e.target) {
+            if (!highlight || highlight.overlayElement === e.target) {
                 return;
             }
 
