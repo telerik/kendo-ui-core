@@ -1189,6 +1189,7 @@
                     same([slot.y1, slot.y2], [9, 591], TOLERANCE);
                 });
 
+                // ------------------------------------------------------------
                 module("Slots / Vertical / Negative Values", {
                     setup: function() {
                         moduleSetup();
@@ -1283,6 +1284,7 @@
                     same([slot.x1, slot.x2], [5, 787], TOLERANCE);
                 });
 
+                // ------------------------------------------------------------
                 module("Slots / Horizontal / Negative Values", {
                     setup: function() {
                         moduleSetup();
@@ -1320,6 +1322,124 @@
 
             })();
 
+            (function() {
+                var TOLERANCE = 0.01;
+                var Point2D = kendo.dataviz.Point2D;
+                var numericAxis;
+
+                // ------------------------------------------------------------
+                module("Numeric Axis / getValue / Horizontal", {
+                    setup: function() {
+                        numericAxis = new dataviz.NumericAxis(0, 1, {
+                            vertical: false,
+                            labels: { visible: false }
+                        });
+                        numericAxis.reflow(chartBox);
+                    }
+                });
+
+                test("returns null for coordinates left of axis", function() {
+                    same(numericAxis.getValue(new Point2D(-1, 0)), null);
+                });
+
+                test("returns null for coordinates right of axis", function() {
+                    same(numericAxis.getValue(new Point2D(1000, 0)), null);
+                });
+
+                test("returns minimum value for leftmost point", function() {
+                    equals(numericAxis.getValue(new Point2D(0, 0)), 0);
+                });
+
+                test("returns maximum value for righttmost point", function() {
+                    equals(numericAxis.getValue(new Point2D(800, 0)), 1.2);
+                });
+
+                test("returns value for middle point", function() {
+                    equals(numericAxis.getValue(new Point2D(335, 0)), 0.5, TOLERANCE);
+                });
+
+                // ------------------------------------------------------------
+                module("Numeric Axis / getValue / Horizontal / Reverse", {
+                    setup: function() {
+                        numericAxis = new dataviz.NumericAxis(0, 1, {
+                            vertical: false,
+                            reverse: true,
+                            labels: { visible: false }
+                        });
+
+                        numericAxis.reflow(chartBox);
+                    }
+                });
+
+                test("returns minimum value for righttmost point", function() {
+                    equals(numericAxis.getValue(new Point2D(800, 0)), 0);
+                });
+
+                test("returns maximum value for leftmost point", function() {
+                    equals(numericAxis.getValue(new Point2D(0, 0)), 1.2);
+                });
+
+                test("returns value for middle point", function() {
+                    equals(numericAxis.getValue(new Point2D(465, 0)), 0.5, TOLERANCE);
+                });
+
+                // ------------------------------------------------------------
+                module("Numeric Axis / getValue / Vertical", {
+                    setup: function() {
+                        numericAxis = new dataviz.NumericAxis(0, 1, {
+                            vertical: true,
+                            labels: { visible: false }
+                        });
+                        numericAxis.reflow(chartBox);
+                    }
+                });
+
+                test("returns null for coordinates above the axis", function() {
+                    same(numericAxis.getValue(new Point2D(0, -1)), null);
+                });
+
+                test("returns null for coordinates below the axis", function() {
+                    same(numericAxis.getValue(new Point2D(0, 1000)), null);
+                });
+
+                test("returns minimum value for bottommost point", function() {
+                    equals(numericAxis.getValue(new Point2D(0, 600)), 0);
+                });
+
+                test("returns maximum value for topmost point", function() {
+                    equals(numericAxis.getValue(new Point2D(0, 0)), 1.2);
+                });
+
+                test("returns value for middle point", function() {
+                    equals(numericAxis.getValue(new Point2D(0, 350)), 0.5, TOLERANCE);
+                });
+
+                // ------------------------------------------------------------
+                module("Numeric Axis / getValue / Vertical / Reverse", {
+                    setup: function() {
+                        numericAxis = new dataviz.NumericAxis(0, 1, {
+                            vertical: true,
+                            reverse: true,
+                            labels: { visible: false }
+                        });
+
+                        numericAxis.reflow(chartBox);
+                    }
+                });
+
+                test("returns minimum value for topmost  point", function() {
+                    equals(numericAxis.getValue(new Point2D(0, 0)), 0);
+                });
+
+                test("returns maximum value for bottommost point", function() {
+                    equals(numericAxis.getValue(new Point2D(0, 600)), 1.2);
+                });
+
+                test("returns value for middle point", function() {
+                    equals(numericAxis.getValue(new Point2D(0, 250)), 0.5, TOLERANCE);
+                });
+
+            })();
 
             (function() {
                 var plotArea,

@@ -1438,6 +1438,31 @@
             return slotBox;
         },
 
+        getValue: function(point) {
+            var axis = this,
+                options = axis.options,
+                reverse = options.reverse,
+                vertical = options.vertical,
+                valueAxis = vertical ? Y : X,
+                lineBox = axis.lineBox(),
+                lineStart = lineBox[valueAxis + (reverse ? 2 : 1)],
+                lineSize = vertical ? lineBox.height() : lineBox.width(),
+                dir = reverse ? -1 : 1,
+                offset = dir * (point[valueAxis] - lineStart),
+                step = (options.max - options.min) / lineSize,
+                value;
+
+            if (offset < 0 || offset > lineSize) {
+                return null;
+            }
+
+            value = vertical ?
+                    options.max - offset * step :
+                    options.min + offset * step;
+
+            return round(value, DEFAULT_PRECISION);
+        },
+
         labelsCount: function() {
             return this.getDivisions(this.options.majorUnit);
         },
