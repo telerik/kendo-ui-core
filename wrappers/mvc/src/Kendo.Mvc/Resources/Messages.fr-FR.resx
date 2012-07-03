@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Grid_Create" xml:space="preserve">
+    <value>Insérer</value>
+  </data>
+  <data name="Grid_Destroy" xml:space="preserve">
+    <value>Effacer</value>
+  </data>
+  <data name="Grid_Cancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="Grid_Update" xml:space="preserve">
+    <value>Mettre à jour</value>
+  </data>
+  <data name="Grid_Edit" xml:space="preserve">
+    <value>Éditer</value>
+  </data>
+  <data name="Grid_Select" xml:space="preserve">
+    <value>Sélectionner</value>
+  </data>
+  <data name="Pager_Page" xml:space="preserve">
+    <value>Page</value>
+  </data>
+  <data name="Pager_Display" xml:space="preserve">
+    <value>Afficher les items {0} - {1} de {2}</value>
+  </data>
+  <data name="Pager_Of" xml:space="preserve">
+    <value>de {0}</value>
+  </data>
+  <data name="Filter_Filter" xml:space="preserve">
+    <value>Filtrer</value>
+  </data>
+  <data name="Filter_And" xml:space="preserve">
+    <value>Et</value>
+  </data>
+  <data name="Filter_Clear" xml:space="preserve">
+    <value>Effacer Filtrer</value>
+  </data>
+  <data name="Filter_DateIsEqualTo" xml:space="preserve">
+    <value>Est égal à</value>
+  </data>
+  <data name="Filter_DateIsGreaterThanOrEqualTo" xml:space="preserve">
+    <value>est postérieur ou égal à</value>
+  </data>
+  <data name="Filter_DateIsGreaterThan" xml:space="preserve">
+    <value>est postérieur</value>
+  </data>
+  <data name="Filter_DateIsLessThanOrEqualTo" xml:space="preserve">
+    <value>est antérieur ou égal à</value>
+  </data>
+  <data name="Filter_DateIsLessThan" xml:space="preserve">
+    <value>est antérieur</value>
+  </data>
+  <data name="Filter_DateIsNotEqualTo" xml:space="preserve">
+    <value>n’est pas égal à</value>
+  </data>
+  <data name="Filter_NumberIsEqualTo" xml:space="preserve">
+    <value>Est égal à</value>
+  </data>
+  <data name="Filter_NumberIsGreaterThanOrEqualTo" xml:space="preserve">
+    <value>est supérieur ou égal à</value>
+  </data>
+  <data name="Filter_NumberIsGreaterThan" xml:space="preserve">
+    <value>est supérieur à</value>
+  </data>
+  <data name="Filter_NumberIsLessThanOrEqualTo" xml:space="preserve">
+    <value>est inférieur ou égal à</value>
+  </data>
+  <data name="Filter_NumberIsLessThan" xml:space="preserve">
+    <value>est inférieur à</value>
+  </data>
+  <data name="Filter_NumberIsNotEqualTo" xml:space="preserve">
+    <value>n’est pas égal à</value>
+  </data>
+  <data name="Filter_Info" xml:space="preserve">
+    <value>Afficher les lignes avec la valeur qui</value>
+  </data>
+  <data name="Filter_StringEndsWith" xml:space="preserve">
+    <value>Se termine par</value>
+  </data>
+  <data name="Filter_StringIsEqualTo" xml:space="preserve">
+    <value>Est égal à</value>
+  </data>
+  <data name="Filter_StringIsNotEqualTo" xml:space="preserve">
+    <value>n’est pas égal à</value>
+  </data>
+  <data name="Filter_StringStartsWith" xml:space="preserve">
+    <value>Commence par</value>
+  </data>
+  <data name="Filter_StringContains" xml:space="preserve">
+    <value>contient</value>
+  </data>
+  <data name="Group_Empty" xml:space="preserve">
+    <value>Faites glisser un en-tête de colonne et déposer ici pour grouper par cette colonne.</value>
+  </data>
+  <data name="Filter_EnumIsEqualTo" xml:space="preserve">
+    <value>Est égal à</value>
+  </data>
+  <data name="Filter_EnumIsNotEqualTo" xml:space="preserve">
+    <value>n’est pas égal à</value>
+  </data>
+  <data name="Filter_SelectValue" xml:space="preserve">
+    <value>-Sélectionner-</value>
+  </data>
+  <data name="Grid_Confirmation" xml:space="preserve">
+    <value>Êtes-vous sûr de vouloir supprimer cet enregistrement?</value>
+  </data>
+  <data name="Filter_IsFalse" xml:space="preserve">
+    <value>est fausse</value>
+  </data>
+  <data name="Filter_IsTrue" xml:space="preserve">
+    <value>est vrai</value>
+  </data>
+  <data name="Pager_Empty" xml:space="preserve">
+    <value>Aucun enregistrement à afficher.</value>
+  </data>
+  <data name="Grid_CancelChanges" xml:space="preserve">
+    <value>Annuler les modifications</value>
+  </data>
+  <data name="Grid_SaveChanges" xml:space="preserve">
+    <value>Entregistrer les modifications</value>
+  </data>
+  <data name="Pager_Refresh" xml:space="preserve">
+    <value>Actualiser</value>
+  </data>
+  <data name="Filter_StringDoesNotContain" xml:space="preserve">
+    <value>Does not contain</value>
+  </data>
+  <data name="Filter_Or" xml:space="preserve">
+    <value>Or</value>
+  </data>
+  <data name="Editor_Bold" xml:space="preserve">
+    <value>Gras</value>
+  </data>
+  <data name="Editor_CreateLink" xml:space="preserve">
+    <value>Insérer un lien hypertexte</value>
+  </data>
+  <data name="Editor_FontName" xml:space="preserve">
+    <value>Police</value>
+  </data>
+  <data name="Editor_FontNameInherit" xml:space="preserve">
+    <value>(police héritée)</value>
+  </data>
+  <data name="Editor_FontSize" xml:space="preserve">
+    <value>Taille de police</value>
+  </data>
+  <data name="Editor_FontSizeInherit" xml:space="preserve">
+    <value>(taille héritée)</value>
+  </data>
+  <data name="Editor_FormatBlock" xml:space="preserve">
+    <value>Style du paragraphe</value>
+  </data>
+  <data name="Editor_Indent" xml:space="preserve">
+    <value>Augmenter le retrait</value>
+  </data>
+  <data name="Editor_InsertHtml" xml:space="preserve">
+    <value>Insérer HTML</value>
+  </data>
+  <data name="Editor_InsertImage" xml:space="preserve">
+    <value>Insérer image</value>
+  </data>
+  <data name="Editor_InsertOrderedList" xml:space="preserve">
+    <value>Liste numérotée</value>
+  </data>
+  <data name="Editor_InsertUnorderedList" xml:space="preserve">
+    <value>Liste à puces</value>
+  </data>
+  <data name="Editor_Italic" xml:space="preserve">
+    <value>Italique</value>
+  </data>
+  <data name="Editor_JustifyCenter" xml:space="preserve">
+    <value>Centrer</value>
+  </data>
+  <data name="Editor_JustifyFull" xml:space="preserve">
+    <value>Justifier</value>
+  </data>
+  <data name="Editor_JustifyLeft" xml:space="preserve">
+    <value>Aligner le texte à gauche</value>
+  </data>
+  <data name="Editor_JustifyRight" xml:space="preserve">
+    <value>Aligner le texte à droite</value>
+  </data>
+  <data name="Editor_Outdent" xml:space="preserve">
+    <value>Diminuer le retrait</value>
+  </data>
+  <data name="Editor_Strikethrough" xml:space="preserve">
+    <value>Barré</value>
+  </data>
+  <data name="Editor_Styles" xml:space="preserve">
+    <value>Styles</value>
+  </data>
+  <data name="Editor_Subscript" xml:space="preserve">
+    <value>Subscript</value>
+  </data>
+  <data name="Editor_Superscript" xml:space="preserve">
+    <value>Superscript</value>
+  </data>
+  <data name="Editor_Underline" xml:space="preserve">
+    <value>Souligné</value>
+  </data>
+  <data name="Editor_Unlink" xml:space="preserve">
+    <value>Supprimer le lien hypertexte</value>
+  </data>
+  <data name="Pager_First" xml:space="preserve">
+    <value>Aller à la première page</value>
+  </data>
+  <data name="Pager_ItemsPerPage" xml:space="preserve">
+    <value>articles par page</value>
+  </data>
+  <data name="Pager_Last" xml:space="preserve">
+    <value>Aller à la dernière page</value>
+  </data>
+  <data name="Pager_Next" xml:space="preserve">
+    <value>Aller à la page suivante</value>
+  </data>
+  <data name="Pager_Previous" xml:space="preserve">
+    <value>Aller à la page précédente</value>
+  </data>
+  <data name="Upload_Cancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="Upload_DropFilesHere" xml:space="preserve">
+    <value>déposer les fichiers à télécharger ici</value>
+  </data>
+  <data name="Upload_Remove" xml:space="preserve">
+    <value>Retirer</value>
+  </data>
+  <data name="Upload_Retry" xml:space="preserve">
+    <value>Réessayer</value>
+  </data>
+  <data name="Upload_Select" xml:space="preserve">
+    <value>Sélectionner...</value>
+  </data>
+  <data name="Upload_StatusFailed" xml:space="preserve">
+    <value>échoué</value>
+  </data>
+  <data name="Upload_StatusUploaded" xml:space="preserve">
+    <value>téléchargé</value>
+  </data>
+  <data name="Upload_StatusUploading" xml:space="preserve">
+    <value>téléchargement</value>
+  </data>
+  <data name="Upload_UploadSelectedFiles" xml:space="preserve">
+    <value>Télécharger des fichiers</value>
+  </data>
+</root>

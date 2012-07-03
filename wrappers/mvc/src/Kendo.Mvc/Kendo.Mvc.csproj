@@ -148,6 +148,16 @@
     <Compile Include="Infrastructure\Implementation\RouteDataCache.cs" />
     <Compile Include="Infrastructure\Implementation\Signature.cs" />
     <Compile Include="Infrastructure\IRouteDataCache.cs" />
+    <Compile Include="Resources\Messages.bg-BG.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.bg-BG.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Messages.da-DK.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.da-DK.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Messages.de-DE.Designer.cs">
       <DependentUpon>Messages.de-DE.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -157,6 +167,51 @@
       <DependentUpon>Messages.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Messages.es-ES.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.es-ES.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Messages.fr-FR.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.fr-FR.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Messages.nl-NL.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.nl-NL.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Messages.pl-PL.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.pl-PL.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Messages.pt-BR.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.pt-BR.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Messages.pt-PT.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.pt-PT.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Messages.ru-RU.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.ru-RU.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Messages.uk-UA.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.uk-UA.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Messages.zh-CN.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.zh-CN.resx</DependentUpon>
     </Compile>
     <Compile Include="UI\AutoComplete\AutoComplete.cs" />
     <Compile Include="UI\AutoComplete\Fluent\AutoCompleteBuilder.cs" />
@@ -1008,9 +1063,41 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\Messages.bg-BG.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.bg-BG.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Messages.da-DK.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.da-DK.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Messages.de-DE.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Messages.de-DE.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Messages.es-ES.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.es-ES.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Messages.fr-FR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.fr-FR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Messages.nl-NL.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.nl-NL.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Messages.pl-PL.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.pl-PL.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Messages.pt-BR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.pt-BR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Messages.pt-PT.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.pt-PT.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Messages.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -1021,6 +1108,18 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Exceptions.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Messages.ru-RU.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.ru-RU.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Messages.uk-UA.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.uk-UA.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Messages.zh-CN.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.zh-CN.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

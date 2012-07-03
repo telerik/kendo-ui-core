@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Grid_Create" xml:space="preserve">
+    <value>插入</value>
+  </data>
+  <data name="Grid_Destroy" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="Grid_Cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="Grid_Update" xml:space="preserve">
+    <value>更新</value>
+  </data>
+  <data name="Grid_Edit" xml:space="preserve">
+    <value>编辑</value>
+  </data>
+  <data name="Grid_Select" xml:space="preserve">
+    <value>选择</value>
+  </data>
+  <data name="Pager_Page" xml:space="preserve">
+    <value>页</value>
+  </data>
+  <data name="Pager_Display" xml:space="preserve">
+    <value>显示条目 {0} - {1} 共 {2}</value>
+  </data>
+  <data name="Pager_Of" xml:space="preserve">
+    <value>共 {0}</value>
+  </data>
+  <data name="Filter_Filter" xml:space="preserve">
+    <value>过滤</value>
+  </data>
+  <data name="Filter_And" xml:space="preserve">
+    <value>并且</value>
+  </data>
+  <data name="Filter_Clear" xml:space="preserve">
+    <value>清除过滤</value>
+  </data>
+  <data name="Filter_DateIsEqualTo" xml:space="preserve">
+    <value>等于</value>
+  </data>
+  <data name="Filter_DateIsGreaterThanOrEqualTo" xml:space="preserve">
+    <value>大于或等于</value>
+  </data>
+  <data name="Filter_DateIsGreaterThan" xml:space="preserve">
+    <value>大于</value>
+  </data>
+  <data name="Filter_DateIsLessThanOrEqualTo" xml:space="preserve">
+    <value>小于或等于</value>
+  </data>
+  <data name="Filter_DateIsLessThan" xml:space="preserve">
+    <value>小于</value>
+  </data>
+  <data name="Filter_DateIsNotEqualTo" xml:space="preserve">
+    <value>不等于</value>
+  </data>
+  <data name="Filter_NumberIsEqualTo" xml:space="preserve">
+    <value>等于</value>
+  </data>
+  <data name="Filter_NumberIsGreaterThanOrEqualTo" xml:space="preserve">
+    <value>大于或等于</value>
+  </data>
+  <data name="Filter_NumberIsGreaterThan" xml:space="preserve">
+    <value>大于</value>
+  </data>
+  <data name="Filter_NumberIsLessThanOrEqualTo" xml:space="preserve">
+    <value>小于或等于</value>
+  </data>
+  <data name="Filter_NumberIsLessThan" xml:space="preserve">
+    <value>小于</value>
+  </data>
+  <data name="Filter_NumberIsNotEqualTo" xml:space="preserve">
+    <value>不等于</value>
+  </data>
+  <data name="Filter_Info" xml:space="preserve">
+    <value>显示符合以下条件的行</value>
+  </data>
+  <data name="Filter_StringEndsWith" xml:space="preserve">
+    <value>结束于</value>
+  </data>
+  <data name="Filter_StringIsEqualTo" xml:space="preserve">
+    <value>等于</value>
+  </data>
+  <data name="Filter_StringIsNotEqualTo" xml:space="preserve">
+    <value>不等于</value>
+  </data>
+  <data name="Filter_StringStartsWith" xml:space="preserve">
+    <value>开始于</value>
+  </data>
+  <data name="Filter_StringContains" xml:space="preserve">
+    <value>包含</value>
+  </data>
+  <data name="Group_Empty" xml:space="preserve">
+    <value>托拽列标题到此处按列组合显示</value>
+  </data>
+  <data name="Filter_EnumIsEqualTo" xml:space="preserve">
+    <value>等于</value>
+  </data>
+  <data name="Filter_EnumIsNotEqualTo" xml:space="preserve">
+    <value>不等于</value>
+  </data>
+  <data name="Grid_Confirmation" xml:space="preserve">
+    <value>确定要删除吗？</value>
+  </data>
+  <data name="Filter_SelectValue" xml:space="preserve">
+    <value>-选择值-</value>
+  </data>
+  <data name="Filter_IsFalse" xml:space="preserve">
+    <value>为假</value>
+  </data>
+  <data name="Filter_IsTrue" xml:space="preserve">
+    <value>为真</value>
+  </data>
+  <data name="Pager_Empty" xml:space="preserve">
+    <value>没有可显示的记录。</value>
+  </data>
+  <data name="Grid_CancelChanges" xml:space="preserve">
+    <value>取消修改</value>
+  </data>
+  <data name="Grid_SaveChanges" xml:space="preserve">
+    <value>保存修改</value>
+  </data>
+  <data name="Pager_Refresh" xml:space="preserve">
+    <value>刷新</value>
+  </data>
+  <data name="Filter_StringDoesNotContain" xml:space="preserve">
+    <value>Does not contain</value>
+  </data>
+  <data name="Filter_Or" xml:space="preserve">
+    <value>Or</value>
+  </data>
+  <data name="Editor_Bold" xml:space="preserve">
+    <value>粗体</value>
+  </data>
+  <data name="Editor_CreateLink" xml:space="preserve">
+    <value>插入链接</value>
+  </data>
+  <data name="Editor_FontName" xml:space="preserve">
+    <value>选择字体</value>
+  </data>
+  <data name="Editor_FontNameInherit" xml:space="preserve">
+    <value>（继承的字体）</value>
+  </data>
+  <data name="Editor_FontSize" xml:space="preserve">
+    <value>选择字号</value>
+  </data>
+  <data name="Editor_FontSizeInherit" xml:space="preserve">
+    <value>（继承的字号）</value>
+  </data>
+  <data name="Editor_FormatBlock" xml:space="preserve">
+    <value>选择块类型</value>
+  </data>
+  <data name="Editor_Indent" xml:space="preserve">
+    <value>增加缩进</value>
+  </data>
+  <data name="Editor_InsertHtml" xml:space="preserve">
+    <value>插入 HTML</value>
+  </data>
+  <data name="Editor_InsertImage" xml:space="preserve">
+    <value>插入图片</value>
+  </data>
+  <data name="Editor_InsertOrderedList" xml:space="preserve">
+    <value>插入有序列表</value>
+  </data>
+  <data name="Editor_InsertUnorderedList" xml:space="preserve">
+    <value>插入无序列表</value>
+  </data>
+  <data name="Editor_Italic" xml:space="preserve">
+    <value>斜体</value>
+  </data>
+  <data name="Editor_JustifyCenter" xml:space="preserve">
+    <value>居中</value>
+  </data>
+  <data name="Editor_JustifyFull" xml:space="preserve">
+    <value>两端对齐</value>
+  </data>
+  <data name="Editor_JustifyLeft" xml:space="preserve">
+    <value>左对齐</value>
+  </data>
+  <data name="Editor_JustifyRight" xml:space="preserve">
+    <value>右对齐</value>
+  </data>
+  <data name="Editor_Outdent" xml:space="preserve">
+    <value>减少缩进</value>
+  </data>
+  <data name="Editor_Strikethrough" xml:space="preserve">
+    <value>删除线</value>
+  </data>
+  <data name="Editor_Styles" xml:space="preserve">
+    <value>风格</value>
+  </data>
+  <data name="Editor_Subscript" xml:space="preserve">
+    <value>Subscript</value>
+  </data>
+  <data name="Editor_Superscript" xml:space="preserve">
+    <value>Superscript</value>
+  </data>
+  <data name="Editor_Underline" xml:space="preserve">
+    <value>下划线</value>
+  </data>
+  <data name="Editor_Unlink" xml:space="preserve">
+    <value>移除链接</value>
+  </data>
+  <data name="Pager_First" xml:space="preserve">
+    <value>Go to the first page</value>
+  </data>
+  <data name="Pager_ItemsPerPage" xml:space="preserve">
+    <value>items per page</value>
+  </data>
+  <data name="Pager_Last" xml:space="preserve">
+    <value>Go to the last page</value>
+  </data>
+  <data name="Pager_Next" xml:space="preserve">
+    <value>Go to the next page</value>
+  </data>
+  <data name="Pager_Previous" xml:space="preserve">
+    <value>Go to the previous page</value>
+  </data>
+  <data name="Upload_Cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="Upload_DropFilesHere" xml:space="preserve">
+    <value>拖拽要上传文件到此处</value>
+  </data>
+  <data name="Upload_Remove" xml:space="preserve">
+    <value>移除</value>
+  </data>
+  <data name="Upload_Retry" xml:space="preserve">
+    <value>重试</value>
+  </data>
+  <data name="Upload_Select" xml:space="preserve">
+    <value>选择...</value>
+  </data>
+  <data name="Upload_StatusFailed" xml:space="preserve">
+    <value>失败</value>
+  </data>
+  <data name="Upload_StatusUploaded" xml:space="preserve">
+    <value>已上传</value>
+  </data>
+  <data name="Upload_StatusUploading" xml:space="preserve">
+    <value>上传中</value>
+  </data>
+  <data name="Upload_UploadSelectedFiles" xml:space="preserve">
+    <value>上传文件</value>
+  </data>
+</root>
