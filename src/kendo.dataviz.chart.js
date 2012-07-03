@@ -419,6 +419,12 @@
 
             if (element && element.click) {
                 element.click(this, e);
+
+                while (element = element.parent) {
+                    if (element.click) {
+                        element.click(this, e);
+                    }
+                }
             }
         },
 
@@ -3840,6 +3846,7 @@
             plotArea.options.legend.items = [];
             plotArea.axes = [];
 
+            plotArea.options.id = uniqueId();
             plotArea.makeDiscoverable();
             plotArea.render();
         },
@@ -4203,25 +4210,27 @@
 
         getViewElements: function(view) {
             var plotArea = this,
-                options = plotArea.options.plotArea,
+                options = plotArea.options,
+                userOptions = options.plotArea,
                 axisY = plotArea.axisY,
                 axisX = plotArea.axisX,
                 gridLinesY = axisY ? plotArea.renderGridLines(view, axisY, axisX) : [],
                 gridLinesX = axisX ? plotArea.renderGridLines(view, axisX, axisY) : [],
                 childElements = ChartElement.fn.getViewElements.call(plotArea, view),
-                border = options.border || {},
+                border = userOptions.border || {},
                 elements = [
                     view.createRect(plotArea.box, {
-                        fill: options.background,
-                        zIndex: -1
+                        fill: userOptions.background,
+                        zIndex: -2
                     }),
                     view.createRect(plotArea.box, {
-                        data: { modelId: plotArea.options.modelId },
+                        id: options.id,
+                        data: { modelId: options.modelId },
                         stroke: border.width ? border.color : "",
                         strokeWidth: border.width,
                         fill: WHITE,
-                        fillOpacity: 0.001,
-                        zIndex: 0,
+                        fillOpacity: 0,
+                        zIndex: -1,
                         dashType: border.dashType
                     })
                 ];

@@ -9,6 +9,7 @@
     </head>
     <body>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.dataviz.core.js"></script>
         <script src="../../src/kendo.dataviz.chart.js"></script>
         <script src="../../src/kendo.dataviz.themes.js"></script>
@@ -1121,6 +1122,51 @@
             })();
 
             (function() {
+                var chart,
+                    bar,
+                    barElement,
+                    plotArea;
+
+                function createBarChart(options) {
+                    chart = createChart($.extend({
+                        series: [{
+                            type: "bar",
+                            data: [1]
+                        }],
+                        categoryAxis: {
+                            categories: ["A"]
+                        }
+                    }, options));
+
+                    plotArea = chart._model.children[1];
+                    bar = plotArea.charts[0].points[0];
+                    barElement = $("#" + bar.options.id);
+                }
+
+                // ------------------------------------------------------------
+                module("Categorical Plot Area / Events / plotAreaClick", {
+                    teardown: destroyChart
+                });
+
+                test("point click bubbles to plot area", 1, function() {
+                    createBarChart({
+                        plotAreaClick: function() { ok(true); }
+                    });
+
+                    barElement.click();
+                });
+
+                test("fires when clicking plot area directly", 1, function() {
+                    createBarChart({
+                        plotAreaClick: function() { ok(true); }
+                    });
+
+                    $("#" + plotArea.options.id).click();
+                });
+
+            })();
+
+            (function() {
                 var plotArea,
                     categoryAxis,
                     namedXAxes,
@@ -1589,6 +1635,9 @@
         <ol id="qunit-tests"></ol>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
+
+        <div id="container">
+        </div>
 
     </body>
 </html>
