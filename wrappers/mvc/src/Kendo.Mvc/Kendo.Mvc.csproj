@@ -153,6 +153,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Messages.bg-BG.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\Messages.da-DK.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.da-DK.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Messages.de-DE.Designer.cs">
       <DependentUpon>Messages.de-DE.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -1016,6 +1021,10 @@
     <EmbeddedResource Include="Resources\Messages.bg-BG.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Messages.bg-BG.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Messages.da-DK.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.da-DK.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Messages.de-DE.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
