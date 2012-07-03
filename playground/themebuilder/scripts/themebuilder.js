@@ -226,7 +226,7 @@ var oldColor, devices = [ "ios", "android", "blackberry", "meego" ],
 
             element
                 .bind({
-                    mousedown: function(e) {
+                    click: function(e) {
                         e.preventDefault();
                         that._toggle();
                     }
