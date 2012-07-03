@@ -1626,6 +1626,49 @@
                 });
 
             })();
+
+            (function() {
+                var chart,
+                    point,
+                    pointElement,
+                    plotArea;
+
+                function createScatterChart(options) {
+                    chart = createChart($.extend({
+                        series: [{
+                            name: "Value A",
+                            type: "scatter",
+                            data: [[100, 100]]
+                        }]
+                    }, options));
+
+                    plotArea = chart._model.children[1];
+                    point = plotArea.charts[0].points[0];
+                    pointElement = $("#" + point.options.id);
+                }
+
+                // ------------------------------------------------------------
+                module("Categorical Plot Area / Events / plotAreaClick", {
+                    teardown: destroyChart
+                });
+
+                test("point click bubbles to plot area", 1, function() {
+                    createScatterChart({
+                        plotAreaClick: function() { ok(true); }
+                    });
+
+                    pointElement.click();
+                });
+
+                test("fires when clicking plot area directly", 1, function() {
+                    createScatterChart({
+                        plotAreaClick: function() { ok(true); }
+                    });
+
+                    $("#" + plotArea.options.id).click();
+                });
+
+            })();
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>
