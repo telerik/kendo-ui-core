@@ -472,19 +472,6 @@ var StyleTool = Tool.extend({
         });
 
         ui.closest(".k-widget").removeClass("k-" + this.name).find("*").andSelf().attr("unselectable", "on");
-
-        var selectBox = ui.data("kendoSelectBox"),
-            classes = selectBox.dataSource.view();
-
-        window.setTimeout(function(){
-            selectBox.list.find(".k-item").each(function(idx, element){
-                var item = $(element),
-                    text = item.text(),
-                
-                    style = dom.inlineStyle(editor.document, "span", {className : classes[idx].value});
-                item.html('<span unselectable="on" style="display:block;' + style +'">' + text + '</span>');
-            });
-        }, 500); // itemCreate event
     }
 
 });

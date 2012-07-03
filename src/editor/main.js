@@ -150,6 +150,24 @@
             editor.options.tools = editorTools;
         },
 
+        decorateStyleToolItems: function(textarea) {
+            var selectBox = textarea.data.closest(".k-editor").find(".k-style").data("kendoSelectBox");
+
+            if (!selectBox) {
+                return;
+            }
+
+            var classes = selectBox.dataSource.view();
+
+            selectBox.list.find(".k-item").each(function(idx, element){
+                var item = $(element),
+                    text = item.text(),
+                
+                    style = kendo.ui.editor.Dom.inlineStyle(textarea.data.data("kendoEditor").document, "span", {className : classes[idx].value});
+                item.html('<span unselectable="on" style="display:block;' + style +'">' + text + '</span>');
+            });
+        },
+
         createContentElement: function(textarea, stylesheets) {
             var iframe, wnd, doc,
                 rtlStyle = textarea.closest(".k-rtl").length ? "direction:rtl;" : "";
@@ -161,6 +179,9 @@
                             .insertBefore(textarea)[0];
 
             wnd = iframe.contentWindow || iframe;
+            if (stylesheets.length > 0) {
+                $(iframe).one("load", textarea, EditorUtils.decorateStyleToolItems);
+            }
             doc = wnd.document || iframe.contentDocument;
 
             doc.designMode = "On";
@@ -655,7 +676,7 @@
                 "createLink",
                 "unlink",
                 "insertImage"/*,
-                "style",
+                "style", // declare explicitly
                 "subscript", // declare explicitly
                 "superscript" // declare explicitly */
             ]

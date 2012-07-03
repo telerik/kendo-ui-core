@@ -1,0 +1,10 @@
+﻿.bar 
+{
+    background: #f1f1f1 none fixed bottom no-repeat;
+    padding: 42px;
+    border: 1px solid #a0b0c0;
+    color: #a0b0c0;
+    margin: 42px;
+    font:italic small-caps 800 42px/69px Arial;
+    white-space:nowrap;
+}

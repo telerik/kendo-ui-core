@@ -199,10 +199,10 @@ tests.push(
         page: "editor/shortcuts.html",
         title: "editor shortcuts"
     },
-   /* {
+    {
         page: "editor/style.html",
         title: "editor style"
-    },*/
+    },
     {
         page: "editor/systemhandler.html",
         title: "editor system handler"

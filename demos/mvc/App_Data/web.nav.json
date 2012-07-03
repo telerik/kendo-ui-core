@@ -249,6 +249,11 @@
                     "url": "editor/snippets.html"
                 },
                 {
+                    "packages": [ "!mvc" ],
+                    "text": "Styles",
+                    "url": "editor/styles.html"
+                },
+                {
                     "text": "Events",
                     "url": "editor/events.html"
                 },

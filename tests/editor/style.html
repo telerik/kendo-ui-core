@@ -29,24 +29,27 @@
 
 <script>
 
-var StyleCommand;
+var StyleCommand,
+    Dom;
 
 $("#Editor1").kendoEditor({
     tools: [
-        {"styles" : {
-            "Foo": "foo"
-        }}
+        "style"
+    ],
+    style: [
+        { text: "foo", value: "bar" }
     ],
     stylesheets: [
-        "styles.css"
+        "editorStyles.css"
     ]
 });
 
 module("Style", {
     setup: function() {
         editor = getEditor();
-        $('#Editor1 .k-style .k-input').click();
+        $('.k-style').closest('.k-widget').find('.k-input').click();
         StyleCommand = kendo.ui.editor.StyleCommand;
+        Dom = kendo.ui.editor.Dom;
     }
 });
 
@@ -58,59 +61,59 @@ test('exec applies css class to inline element', function() {
 });
 
 test('styles applied to list item', function() {
-    var span = $('.k-animation-container .k-item span')[0];
+        var span = $('.k-animation-container .k-item span')[0];
 
-    if (!span) return; //does not currently work in IE!
+        if (!span) return; //does not currently work in IE!
 
-    equal($.telerik.editor.Dom.toHex(span.style.color), '#a0b0c0');
+        equal(Dom.toHex(span.style.color), '#a0b0c0');
 
-    equal(span.style.paddingLeft, "42px");
-    equal(span.style.paddingRight, "42px");
-    equal(span.style.paddingTop, "42px");
-    equal(span.style.paddingBottom, "42px");
+        equal(span.style.paddingLeft, "42px");
+        equal(span.style.paddingRight, "42px");
+        equal(span.style.paddingTop, "42px");
+        equal(span.style.paddingBottom, "42px");
 
-    equal($.telerik.editor.Dom.toHex(span.style.backgroundColor), '#f1f1f1');
-    equal(span.style.backgroundAttachment, "fixed");
-    equal(span.style.backgroundImage, "none");
-    equal(span.style.backgroundRepeat, "no-repeat");
+        equal(Dom.toHex(span.style.backgroundColor), '#f1f1f1');
+        equal(span.style.backgroundAttachment, "fixed");
+        equal(span.style.backgroundImage, "none");
+        equal(span.style.backgroundRepeat, "no-repeat");
 
-    equal(span.style.borderTopStyle, "solid");
-    equal(span.style.borderTopWidth, "1px");
-    equal($.telerik.editor.Dom.toHex(span.style.borderTopColor), "#a0b0c0");
+        equal(span.style.borderTopStyle, "solid");
+        equal(span.style.borderTopWidth, "1px");
+        equal(Dom.toHex(span.style.borderTopColor), "#a0b0c0");
 
-    equal(span.style.borderRightStyle, "solid");
-    equal(span.style.borderRightWidth, "1px");
-    equal($.telerik.editor.Dom.toHex(span.style.borderRightColor), "#a0b0c0");
+        equal(span.style.borderRightStyle, "solid");
+        equal(span.style.borderRightWidth, "1px");
+        equal(Dom.toHex(span.style.borderRightColor), "#a0b0c0");
 
-    equal(span.style.borderLeftStyle, "solid");
-    equal(span.style.borderLeftWidth, "1px");
-    equal($.telerik.editor.Dom.toHex(span.style.borderLeftColor), "#a0b0c0");
+        equal(span.style.borderLeftStyle, "solid");
+        equal(span.style.borderLeftWidth, "1px");
+        equal(Dom.toHex(span.style.borderLeftColor), "#a0b0c0");
 
-    equal(span.style.borderLeftStyle, "solid");
-    equal(span.style.borderLeftWidth, "1px");
-    equal($.telerik.editor.Dom.toHex(span.style.borderLeftColor), "#a0b0c0");
+        equal(span.style.borderLeftStyle, "solid");
+        equal(span.style.borderLeftWidth, "1px");
+        equal(Dom.toHex(span.style.borderLeftColor), "#a0b0c0");
 
-    equal(span.style.fontFamily, "Arial");
-    equal($.telerik.editor.Dom.toHex(span.style.fontSize), "42px");
-    equal(span.style.fontStyle, "italic");
-    equal(span.style.fontVariant, "small-caps");
-    equal(span.style.fontWeight, "800");
-    equal(span.style.lineHeight, "69px");
+        equal(span.style.fontFamily, "Arial");
+        equal(Dom.toHex(span.style.fontSize), "42px");
+        equal(span.style.fontStyle, "italic");
+        equal(span.style.fontVariant, "small-caps");
+        equal(span.style.fontWeight, "800");
+        equal(span.style.lineHeight, "69px");
 });
 
 test('tool displays styles initially', function() {
     editor.focus();
     editor.value('');
-    $(editor.element).trigger('selectionChange');
-    equal($('.k-style .k-input').text(), 'Styles')
+    editor.trigger('select');
+    equal($('.k-style').closest('.k-widget').find('.k-input').text(), 'Styles');
 });
 
 test('tool displays known values', function() {
     editor.focus();
-    var range = createRangeFromText(editor, '<span class="foo">|foo|</span>');
+    var range = createRangeFromText(editor, '<span class="bar">|foo|</span>');
     editor.selectRange(range);
-    $(editor.element).trigger('selectionChange');
-    equal($('.k-style .k-input').text(), 'Foo')
+    editor.trigger('select');
+    equal($('.k-style').closest('.k-widget').find('.k-input').text(), 'foo');
 });
 
 </script>

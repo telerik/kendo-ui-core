@@ -1,0 +1,16 @@
+﻿.hlError
+{
+    background-color:#fea;
+    color:#f33;
+}
+
+.hlOK
+{
+    background-color:#aef;
+    color:#060;
+}
+
+.inlineCode
+{
+    font:bold 12px monospace;
+}
