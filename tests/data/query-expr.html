@@ -508,7 +508,7 @@
                 }), "((d?d.getTime():d) <= " + date.getTime() + ")");
             });
 
-            est("string neq", function() {
+            test("string neq", function() {
                 equal(compile({
                     logic: "and",
                     filters: [ { operator: "neq", value: "foo"} ]
@@ -521,7 +521,7 @@
                 }), "((d || '').toLowerCase() != 'foo')");
             });
 
-            est("apostrophe in strings is escaped", function() {
+            test("apostrophe in strings is escaped", function() {
                 equal(compile({
                     filters: [ { operator: "eq", value: "f'oo"} ]
                 }), "((d || '').toLowerCase() == 'f\\'oo')");
