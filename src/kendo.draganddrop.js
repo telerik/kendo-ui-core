@@ -90,7 +90,15 @@
 
     function preventTrigger(e) {
         e.preventDefault();
-        $(e.target.parentNode).trigger(e.type);
+
+        var target = $(e.target),   // Determine the correct parent to receive the event and bubble.
+            parent = target.closest(".k-widget").parent();
+
+        if (!parent[0]) {
+            parent = target.parent();
+        }
+
+        parent.trigger(e.type);
     }
 
     /**
