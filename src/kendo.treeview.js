@@ -1004,6 +1004,64 @@
             return this.dataSource.getByUid(uid);
         },
 
+        _insertNode: function(nodeData, index, parentNode, insertCallback, collapsed) {
+            var that = this,
+                group = subGroup(parentNode),
+                updatedGroupLength = group.children().length + 1,
+                groupData = {
+                    firstLevel: parentNode.hasClass(KTREEVIEW),
+                    expanded: !collapsed,
+                    length: updatedGroupLength
+                }, node, i, item, nodeHtml = "";
+
+            for (i = 0; i < nodeData.length; i++) {
+                item = nodeData[i];
+
+                item.index = index + i;
+
+                nodeHtml += that._renderItem({
+                    group: groupData,
+                    item: item
+                });
+            }
+
+            node = $(nodeHtml);
+
+            if (!node.length) {
+                return;
+            }
+
+            if (!group.length) {
+                group = $(that._renderGroup({
+                    group: groupData
+                })).appendTo(parentNode);
+            }
+
+            insertCallback(node, group);
+
+            if (parentNode.hasClass("k-item")) {
+                updateNodeHtml(parentNode);
+                updateNodeClasses(parentNode);
+            }
+
+            updateNodeClasses(node.prev());
+            updateNodeClasses(node.next());
+
+
+            // render sub-nodes
+            for (i = 0; i < nodeData.length; i++) {
+                item = nodeData[i];
+
+                if (item.children.data().length) {
+                    that._insertNode(item.children.data(), item.index, node.eq(i), function(item, group) {
+                        item.appendTo(group);
+                    }, item.expanded);
+                }
+            }
+
+            return node;
+        },
+
         refresh: function(e) {
             var that = this,
                 parentNode = that.wrapper,
@@ -1022,18 +1080,12 @@
                     index = children.length;
                 }
 
-                that._insertNode(items, index, parentNode, group, function(item, group, nodeData) {
+                that._insertNode(items, index, parentNode, function(item, group) {
                     // insert node into DOM
                     if (index == children.length) {
                         item.appendTo(group);
                     } else {
                         item.insertBefore(children.eq(index));
-                    }
-
-                    // render sub-nodes
-                    if (nodeData && nodeData[0] && nodeData[0].children && nodeData[0].children.data().length) {
-                        index = undefined;
-                        append(nodeData[0].children.data(), item, item.expanded);
                     }
                 }, collapsed);
             }
@@ -1306,76 +1358,6 @@
          */
         text: function (node) {
             return $(node).closest(NODE).find(">div>.k-in").text();
-        },
-
-        _insertNode: function(nodeData, index, parentNode, group, insertCallback, collapsed) {
-            var that = this,
-                updatedGroupLength = group.children().length + 1,
-                isArrayData, fromNodeData,
-                groupData = {
-                    firstLevel: parentNode.hasClass(KTREEVIEW),
-                    expanded: !collapsed,
-                    length: updatedGroupLength
-                }, node, i, nodeHtml = "";
-
-            function toNodeHtml(nodeData, index) {
-                return that._renderItem({
-                    group: groupData,
-                    item: extend(nodeData, { index: index })
-                });
-            }
-
-            isArrayData = nodeData instanceof data.ObservableArray || isArray(nodeData);
-            fromNodeData = isArrayData || nodeData instanceof data.ObservableObject || $.isPlainObject(nodeData);
-
-            if (fromNodeData) {
-                if (isArrayData) {
-                    for (i = 0; i < nodeData.length; i++) {
-                        nodeHtml += toNodeHtml(nodeData[i], index + i);
-                    }
-
-                } else {
-                    nodeHtml = toNodeHtml(nodeData, index);
-                }
-
-                node = $(nodeHtml);
-            } else {
-                node = $(nodeData);
-
-                if (group.children()[index - 1] == node[0]) {
-                    return node;
-                }
-
-                if (node.closest(".k-treeview")[0] == that.wrapper[0]) {
-                    that.detach(node);
-                }
-            }
-
-            if (!node.length) {
-                return;
-            }
-
-            if (!group.length) {
-                group = $(that._renderGroup({
-                    group: groupData
-                })).appendTo(parentNode);
-            }
-
-            insertCallback(node, group, nodeData);
-
-            if (parentNode.hasClass("k-item")) {
-                updateNodeHtml(parentNode);
-                updateNodeClasses(parentNode);
-            }
-
-            if (!fromNodeData) {
-                updateNodeClasses(node);
-            }
-
-            updateNodeClasses(node.prev());
-            updateNodeClasses(node.next());
-
-            return node;
         },
 
         _dataSourceMove: function(nodeData, group, parentNode, callback) {
