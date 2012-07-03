@@ -146,7 +146,6 @@
                 equal(treeviewObject.text(item), "foo");
             });
 
-            /*
             test("Removing items from the datasource removes them from the treeview at the proper level", function() {
                 createTreeView({
                     dataSource: [
@@ -163,7 +162,6 @@
                 equal(treeview.find(".k-item").length, 1);
 
             });
-            */
 
             test("Loading root nodes from remote datasource inserts them in the TreeView", function() {
                 createTreeView({
@@ -454,9 +452,7 @@
             test("appending nodes loads their parent nodes", function() {
                 var called = false;
 
-                createTreeView([
-                    { text: "foo" }
-                ]);
+                treeviewFromHtml("<ul><li>foo</li></ul>");
 
                 treeviewObject.dataItem(".k-item:first").load = function() {
                     called = true;
@@ -468,17 +464,42 @@
             });
 
             test("appending nodes sets their expanded state", function() {
-                var called = false;
-
-                createTreeView([
-                    { text: "foo" }
-                ]);
+                treeviewFromHtml("<ul><li>foo</li></ul>");
 
                 var foo = treeview.find(".k-item:first");
 
                 treeviewObject.append({ text: "bar" }, foo);
 
                 ok(treeviewObject.dataItem(foo).expanded);
+            });
+
+            test("appending nodes with subitems", function() {
+                treeviewFromHtml("<ul><li>foo</li><li>bar<ul><li>baz</li></ul></li></ul>");
+
+                var foo = treeviewObject.findByText("foo"),
+                    bar = treeviewObject.findByText("bar");
+
+                bar = treeviewObject.append(bar, foo);
+
+                equal(treeview.find(".k-item").length, 3);
+                equal(bar.find(".k-group").length, 1);
+                equal(bar.find(".k-group .k-in").text(), "baz");
+            });
+
+            test("appending nodes with subitems to parents with subnodes", function() {
+                treeviewFromHtml("<ul>" +
+                    "<li>foo<ul><li>qux</li></ul></li>" +
+                    "<li>bar<ul><li>baz</li></ul></li>" +
+                "</ul>");
+
+                var foo = treeviewObject.findByText("foo"),
+                    bar = treeviewObject.findByText("bar");
+
+                bar = treeviewObject.append(bar, foo);
+
+                equal(treeview.find(".k-item").length, 4);
+                equal(bar.find(".k-group").length, 1);
+                equal(bar.find(".k-group .k-in").text(), "baz");
             });
 
         </script>

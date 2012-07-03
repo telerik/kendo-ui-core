@@ -1010,6 +1010,7 @@
                 node = e.node,
                 action = e.action,
                 items = e.items,
+                index = e.index,
                 loadOnDemand = that.options.loadOnDemand,
                 i;
 
@@ -1017,15 +1018,22 @@
                 var group = subGroup(parentNode),
                     children = group.children();
 
-                if (typeof e.index == "undefined") {
-                    e.index = children.length;
+                if (typeof index == "undefined") {
+                    index = children.length;
                 }
 
-                that._insertNode(items, e.index, parentNode, group, function(item, group) {
-                    if (e.index == children.length) {
+                that._insertNode(items, index, parentNode, group, function(item, group, nodeData) {
+                    // insert node into DOM
+                    if (index == children.length) {
                         item.appendTo(group);
                     } else {
-                        item.insertBefore(children.eq(e.index));
+                        item.insertBefore(children.eq(index));
+                    }
+
+                    // render sub-nodes
+                    if (nodeData && nodeData[0] && nodeData[0].children && nodeData[0].children.data().length) {
+                        index = undefined;
+                        append(nodeData[0].children.data(), item, item.expanded);
                     }
                 }, collapsed);
             }
@@ -1353,7 +1361,7 @@
                 })).appendTo(parentNode);
             }
 
-            insertCallback(node, group);
+            insertCallback(node, group, nodeData);
 
             if (parentNode.hasClass("k-item")) {
                 updateNodeHtml(parentNode);
@@ -1382,8 +1390,10 @@
             if (parentNode) {
                 referenceDataItem = destTreeview.dataItem(parentNode);
 
-                referenceDataItem.load();
-                referenceDataItem.set("expanded", true);
+                if (!referenceDataItem.loaded()) {
+                    referenceDataItem.load();
+                    referenceDataItem.set("expanded", true);
+                }
 
                 if (parentNode != that.root) {
                     destDataSource = referenceDataItem.children;
