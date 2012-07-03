@@ -168,6 +168,11 @@ namespace("demos", function() {
         copyDir(path.join("resources", "live", "bin"), path.join(DEMOS_LIVE_PATH, "bin"), true);
         zip(DEMOS_LIVE_PACKAGE, DEMOS_LIVE_PATH, complete);
     }, true);
+
+    desc("Copy Areas folder from wrappers")
+    task("copy-areas", function() {
+        copyDir(path.join("wrappers", "mvc", "demos", "Kendo.Mvc.Examples", "Areas"), path.join("demos", "mvc", "Areas"));
+    });
 });
 
 desc("Build WinJS bundle");
