@@ -148,6 +148,10 @@
     <Compile Include="Controllers\Web\DropDownList\TemplateController.cs" />
     <Compile Include="Controllers\Web\DropDownList\RemoteDataSourceController.cs" />
     <Compile Include="Controllers\Web\DropDownList\IndexController.cs" />
+    <Compile Include="Controllers\Web\Editor\Custom_ToolsController.cs" />
+    <Compile Include="Controllers\Web\Editor\StylesController.cs" />
+    <Compile Include="Controllers\Web\Editor\SnippetsController.cs" />
+    <Compile Include="Controllers\Web\Editor\All_ToolsController.cs" />
     <Compile Include="Controllers\Web\Editor\GlobalizationController.cs" />
     <Compile Include="Controllers\Web\Editor\EventsController.cs" />
     <Compile Include="Controllers\Web\Editor\ApiController.cs" />
@@ -698,6 +702,10 @@
     <Content Include="Areas\aspx\Views\web\editor\globalization.aspx" />
     <Content Include="Areas\razor\Views\web\treeview\remote_data.cshtml" />
     <Content Include="Areas\razor\Views\web\grid\foreignkeycolumn.cshtml" />
+    <Content Include="Areas\razor\Views\web\editor\custom_tools.cshtml" />
+    <Content Include="Areas\razor\Views\web\editor\all_tools.cshtml" />
+    <Content Include="Areas\razor\Views\web\editor\snippets.cshtml" />
+    <Content Include="Areas\razor\Views\web\editor\styles.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>

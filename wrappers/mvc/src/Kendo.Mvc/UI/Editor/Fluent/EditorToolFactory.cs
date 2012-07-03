@@ -113,6 +113,16 @@ namespace Kendo.Mvc.UI.Fluent
             return Button("unlink");
         }
 
+        public EditorToolFactory SubScript()
+        {
+            return Button("subscript");
+        }
+
+        public EditorToolFactory SuperScript()
+        {
+            return Button("superscript");
+        }
+
         public EditorToolFactory FontName()
         {
             return ComboBox("fontName", null);

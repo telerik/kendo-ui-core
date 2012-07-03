@@ -1,0 +1,62 @@
+﻿@(Html.Kendo().Editor()
+      .Name("Editor")
+      .HtmlAttributes(new { style = "width: 740px;height:440px" })
+      .Tools(tools => tools
+        .Clear()
+        .FontName(items => items
+            .Add("Garamond", "garamond")
+            .Add("Verdana", "Verdana")
+        )
+        .FontSize(items => items
+            .Add("12px", "12px")
+            .Add("16px", "16px")
+        )
+        .FormatBlock(items => items
+            .Add("Paragraph", "p")
+            .Add("Fieldset", "fieldset")
+        )
+        .CustomTemplate(ct => ct.Template("<label for='templateTool' style='vertical-align:middle;'>Background:</label> <select id='templateTool'><option value=''>none</option><option value='\\#ff9'>yellow</option><option value='\\#dfd'>green</option></select>"))
+        .CustomButton(cb => cb.Name("custom").ToolTip("horizontal rule").Exec(@<text>
+            function(e) {
+                var editor = $(this).data("kendoEditor");
+                editor.exec("inserthtml", { value: "<hr />" });
+            }
+        </text>))
+      )
+      .Value(@<text>
+            <p>
+               <img src="http://www.kendoui.com/Image/kendo-logo.png" alt="Editor for ASP.NET MVC logo" style="display:block;margin-left:auto;margin-right:auto;" />
+            </p>
+            <p>
+                Kendo UI Editor allows your users to edit HTML in a familiar, user-friendly way.<br />
+                In this version, the Editor provides the core HTML editing engine, which includes basic text formatting, hyperlinks, lists,
+                and image handling. The widget <strong>outputs identical HTML</strong> across all major browsers, follows
+                accessibility standards and provides API for content manipulation.
+            </p>
+            <p>Features include:</p>
+            <ul>
+                <li>Text formatting &amp; alignment</li>
+                <li>Bulleted and numbered lists</li>
+                <li>Hyperlink and image dialogs</li>
+                <li>Cross-browser support</li>
+                <li>Identical HTML output across browsers</li>
+                <li>Gracefully degrades to a <code>textarea</code> when JavaScript is turned off</li>
+            </ul>
+            <p>
+                Read <a href="http://www.kendoui.com/documentation/introduction.aspx">more details</a> or send us your
+                <a href="http://www.kendoui.com/forums.aspx">feedback</a>!
+            </p>
+      </text>)
+)
+
+<script>
+
+$(document).ready(function(){
+    $("#templateTool").kendoDropDownList({
+        change: function(e) {
+            $("#Editor").data("kendoEditor").body.style.backgroundColor = e.sender.value();
+        }
+    });
+});
+
+</script>

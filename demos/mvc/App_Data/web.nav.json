@@ -234,22 +234,18 @@
                     "url": "editor/index.html"
                 },
                 {
-                    "packages": [ "!mvc" ],
                     "text": "Custom tools",
                     "url": "editor/custom-tools.html"
                 },
                 {
-                    "packages": [ "!mvc" ],
                     "text": "All tools",
                     "url": "editor/all-tools.html"
                 },
                 {
-                    "packages": [ "!mvc" ],
                     "text": "Snippets",
                     "url": "editor/snippets.html"
                 },
                 {
-                    "packages": [ "!mvc" ],
                     "text": "Styles",
                     "url": "editor/styles.html"
                 },
