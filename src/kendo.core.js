@@ -1660,6 +1660,10 @@ function pad(number) {
                 formats[idx] = patterns[formatsSequence[idx]];
             }
             formats[idx] = "ddd MMM dd yyyy HH:mm:ss";
+            formats[++idx] = "yyyy-MM-ddTHH:mm:ss.fffzzz";
+            formats[++idx] = "yyyy-MM-ddTHH:mm:sszzz";
+            formats[++idx] = "yyyy-MM-ddTHH:mmzzz";
+            formats[++idx] = "yyyy-MM-ddTHH:mmzz";
 
             idx = 0;
         }

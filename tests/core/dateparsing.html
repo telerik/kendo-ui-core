@@ -658,7 +658,19 @@
                 var date = kendo.stringify(new Date(2000, 10, 10, 14, 15, 30, 333));
                 date = date.substr(1, date.length - 2);
 
-                equal(+kendo.parseDate(date, "yyyy-MM-ddTHH:mm:ss.fffzz"), Date.parse(date));
+                equal(+parse(date, "yyyy-MM-ddTHH:mm:ss.fffzz"), Date.parse(date));
+            });
+
+            test("parseDate parses result from kendo.stringify 'Z'", function() {
+                var date = kendo.stringify(new Date(2000, 10, 10, 14, 15, 30, 333));
+                date = date.substr(1, date.length - 2);
+
+                equal(+parse(date), Date.parse(date));
+            });
+
+            test("parseDate parses ISO format without need of format", function() {
+                equal(+parse("2012-3-25T3:30+2"), +new Date("2012-03-25T03:30+02:00"));
+                equal(+parse("2012-3-25T3:30+3:30"), +new Date("2012-03-25T03:30+03:30"));
             });
         </script>
     </body>
