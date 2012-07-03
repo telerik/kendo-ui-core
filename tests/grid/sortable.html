@@ -101,6 +101,7 @@
                 ok(ths.eq(0).attr("data-kendo-field") === "foo");
                 ok(ths.eq(1).attr("data-kendo-field") === "bar");
             });
+
             test("resetting DataSource instantiate new Sortable", 1, function() {
                 var grid = new Grid("<table />", { sortable: true, columns: ["text", "value"] });
 
@@ -111,6 +112,12 @@
                 }));
 
                 notStrictEqual(grid.thead.find("th:first").data("kendoSortable"), sortable);
+            });
+
+            test("sortable is not attached if column does not have field", 1, function() {
+                var grid = new Grid("<table />", { sortable: true, columns: [ { title: "foo" } ] });
+
+               ok(!grid.thead.find("th:first").data("kendoSortable"));
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

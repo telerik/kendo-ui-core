@@ -1954,8 +1954,8 @@
                 that.thead
                     .find("th:not(.k-hierarchy-cell,.k-group-cell)")
                     .each(function(index) {
-                        if (columns[index].filterable !== false && !columns[index].command) {
-                            cell = $(this);
+                        cell = $(this);
+                        if (columns[index].filterable !== false && !columns[index].command && (columns[index].field || cell.attr("data-" + kendo.ns + "field"))) {
                             filterMenu = cell.data("kendoFilterMenu");
                             if (filterMenu) {
                                 filterMenu.destroy();
@@ -1977,7 +1977,7 @@
                     .find("th:not(.k-hierarchy-cell,.k-group-cell)")
                     .each(function(index) {
                         column = columns[index];
-                        if (column.sortable !== false && !column.command) {
+                        if (column.sortable !== false && !column.command && column.field) {
                             $(this).attr("data-" + kendo.ns +"field", column.field).kendoSortable(extend({}, sortable, { dataSource: that.dataSource }));
                         }
                     });
@@ -2378,7 +2378,7 @@
                     text = that._headerCellText(th);
 
                     if (!th.command) {
-                        html += "<th " + kendo.attr("field") + "='" + th.field + "' ";
+                        html += "<th " + kendo.attr("field") + "='" + (th.field || "") + "' ";
                         if (th.title) {
                             html += kendo.attr("title") + '="' + th.title.replace(/'/g, "\'") + '" ';
                         }

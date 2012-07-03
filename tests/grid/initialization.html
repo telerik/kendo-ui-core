@@ -520,6 +520,24 @@
                 ok(grid.thead.find("th").data("kendoFilterMenu"));
             });
 
+            test("column without field is not filterable", function() {
+                var grid = new Grid(table, {
+                    filterable: true,
+                    columns: [{ title: "foo"}],
+                    dataSource: {
+                        schema: {
+                            model: {
+                                fields: {
+                                    col1: {}
+                                }
+                            }
+                        }
+                    },
+                });
+
+                equal(grid.thead.find("th").data("kendoFilterMenu"), undefined, "Column is not filterable");
+            });
+
             test("unfilterable column from column settings", function() {
                 $(table).html("<thead><tr><th data-kendo-field='col1'>col1</th></tr></thead><tbody><tr><td>&nbsp;</td></tr></tbody>");
                 var grid = new Grid(table, {
