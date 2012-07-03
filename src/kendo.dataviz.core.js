@@ -1450,6 +1450,7 @@
                 dir = reverse ? -1 : 1,
                 offset = dir * (point[valueAxis] - lineStart),
                 step = (options.max - options.min) / lineSize,
+                valueOffset = offset * step,
                 value;
 
             if (offset < 0 || offset > lineSize) {
@@ -1457,8 +1458,8 @@
             }
 
             value = vertical ?
-                    options.max - offset * step :
-                    options.min + offset * step;
+                    options.max - valueOffset :
+                    options.min + valueOffset;
 
             return round(value, DEFAULT_PRECISION);
         },

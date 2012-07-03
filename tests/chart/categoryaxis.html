@@ -730,6 +730,130 @@
             })();
 
             (function() {
+                var Point2D = kendo.dataviz.Point2D;
+                var categoryAxis;
+
+                // ------------------------------------------------------------
+                module("CategoryAxis / getCategory / Horizontal ", {
+                    setup: function() {
+                        categoryAxis = new dataviz.CategoryAxis({
+                            categories: ["Foo", "Bar", "Baz"],
+                            vertical: false,
+                            labels: { visible: false }
+                        });
+
+                        categoryAxis.reflow(chartBox);
+                    }
+                });
+
+                test("returns null for coordinates left of axis", function() {
+                    same(categoryAxis.getCategory(new Point2D(-1, 0)), null);
+                });
+
+                test("returns null for coordinates right of axis", function() {
+                    same(categoryAxis.getCategory(new Point2D(1000, 0)), null);
+                });
+
+                test("returns first category for leftmost point", function() {
+                    equals(categoryAxis.getCategory(new Point2D(0, 0)), "Foo");
+                });
+
+                test("returns last category for righttmost point", function() {
+                    equals(categoryAxis.getCategory(new Point2D(800, 0)), "Baz");
+                });
+
+                test("returns category for middle point", function() {
+                    equals(categoryAxis.getCategory(new Point2D(335, 0)), "Bar");
+                });
+
+                // ------------------------------------------------------------
+                module("CategoryAxis / getCategory / Horizontal / Reverse", {
+                    setup: function() {
+                        categoryAxis = new dataviz.CategoryAxis({
+                            categories: ["Foo", "Bar", "Baz"],
+                            vertical: false,
+                            reverse: true,
+                            labels: { visible: false }
+                        });
+
+                        categoryAxis.reflow(chartBox);
+                    }
+                });
+
+                test("returns first category for righttmost point", function() {
+                    equals(categoryAxis.getCategory(new Point2D(800, 0)), "Foo");
+                });
+
+                test("returns last category for leftmost point", function() {
+                    equals(categoryAxis.getCategory(new Point2D(0, 0)), "Baz");
+                });
+
+                test("returns category for middle point", function() {
+                    equals(categoryAxis.getCategory(new Point2D(465, 0)), "Bar");
+                });
+
+                // ------------------------------------------------------------
+                module("CategoryAxis / getCategory / Vertical ", {
+                    setup: function() {
+                        categoryAxis = new dataviz.CategoryAxis({
+                            categories: ["Foo", "Bar", "Baz"],
+                            vertical: true,
+                            labels: { visible: false }
+                        });
+
+                        categoryAxis.reflow(chartBox);
+                    }
+                });
+
+                test("returns null for coordinates above the axis", function() {
+                    same(categoryAxis.getCategory(new Point2D(0, -1)), null);
+                });
+
+                test("returns null for coordinates below the axis", function() {
+                    same(categoryAxis.getCategory(new Point2D(0, 1000)), null);
+                });
+
+                test("returns first category for bottommost point", function() {
+                    equals(categoryAxis.getCategory(new Point2D(0, 600)), "Foo");
+                });
+
+                test("returns last category for topmost point", function() {
+                    equals(categoryAxis.getCategory(new Point2D(0, 0)), "Baz");
+                });
+
+                test("returns category for middle point", function() {
+                    equals(categoryAxis.getCategory(new Point2D(0, 350)), "Bar");
+                });
+
+                // ------------------------------------------------------------
+                module("CategoryAxis / getCategory / Vertical / Reverse", {
+                    setup: function() {
+                        categoryAxis = new dataviz.CategoryAxis({
+                            categories: ["Foo", "Bar", "Baz"],
+                            vertical: true,
+                            reverse: true,
+                            labels: { visible: false }
+                        });
+
+                        categoryAxis.reflow(chartBox);
+                    }
+                });
+
+                test("returns first category for topmost point", function() {
+                    equals(categoryAxis.getCategory(new Point2D(0, 0)), "Foo");
+                });
+
+                test("returns last category for bottommost point", function() {
+                    equals(categoryAxis.getCategory(new Point2D(0, 600)), "Baz");
+                });
+
+                test("returns category for middle point", function() {
+                    equals(categoryAxis.getCategory(new Point2D(0, 250)), "Bar");
+                });
+
+            })();
+
+            (function() {
                 var plotArea,
                     plotBands,
                     lineSeriesData = [{

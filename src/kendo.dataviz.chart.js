@@ -1016,6 +1016,32 @@
             return slotBox;
         },
 
+        getCategory: function(point) {
+            var axis = this,
+                options = axis.options,
+                reverse = options.reverse,
+                vertical = options.vertical,
+                valueAxis = vertical ? Y : X,
+                lineBox = axis.lineBox(),
+                lineStart = lineBox[valueAxis + (reverse ? 2 : 1)],
+                lineSize = vertical ? lineBox.height() : lineBox.width(),
+                intervals = math.max(1, options.categories.length - 1),
+                offset = (reverse ? -1 : 1) * (point[valueAxis] - lineStart),
+                step = intervals / lineSize,
+                categoriesOffset = round(offset * step),
+                categoryIx;
+
+            if (offset < 0 || offset > lineSize) {
+                return null;
+            }
+
+            categoryIx = vertical ?
+                intervals - categoriesOffset:
+                categoriesOffset;
+
+            return options.categories[categoryIx];
+        },
+
         labelsCount: function() {
             return this.options.categories.length;
         },
@@ -4236,14 +4262,6 @@
                 ];
 
             return [].concat(gridLinesY, gridLinesX, childElements, elements);
-        },
-
-        click: function(chart, e) {
-            var point = this;
-
-            chart.trigger(PLOT_AREA_CLICK, {
-                element: $(e.target)
-            });
         }
     });
 
@@ -4496,6 +4514,38 @@
             } else {
                 plotArea.axisY = primaryValueAxis;
             }
+        },
+
+        click: function(chart, e) {
+            var plotArea = this,
+                coords = chart._eventCoordinates(e),
+                point = new Point2D(coords.x, coords.y),
+                categoryAxis = plotArea.categoryAxis,
+                allAxes = plotArea.axes,
+                i,
+                length = allAxes.length,
+                axis,
+                currentValue,
+                category = categoryAxis.getCategory(point),
+                values = [];
+
+            for (i = 0; i < length; i++) {
+                axis = allAxes[i];
+                if (axis != categoryAxis) {
+                    currentValue = axis.getValue(point);
+                    if (currentValue !== null) {
+                        values.push(currentValue);
+                    }
+                }
+            }
+
+            if (defined(category) && values.length > 0) {
+                chart.trigger(PLOT_AREA_CLICK, {
+                    element: $(e.target),
+                    category: category,
+                    value: singleItemOrArray(values)
+                });
+            }
         }
     });
 
@@ -4673,6 +4723,37 @@
             // TODO: Remove axisX and axisY aliases
             plotArea.axisX = plotArea.namedXAxes.primary || plotArea.namedXAxes[xAxesOptions[0].name];
             plotArea.axisY = plotArea.namedYAxes.primary || plotArea.namedYAxes[yAxesOptions[0].name];
+        },
+
+        click: function(chart, e) {
+            var plotArea = this,
+                coords = chart._eventCoordinates(e),
+                point = new Point2D(coords.x, coords.y),
+                allAxes = plotArea.axes,
+                i,
+                length = allAxes.length,
+                axis,
+                xValues = [],
+                yValues = [],
+                currentValue,
+                values;
+
+            for (i = 0; i < length; i++) {
+                axis = allAxes[i];
+                values = axis.options.vertical ? yValues : xValues;
+                currentValue = axis.getValue(point);
+                if (currentValue !== null) {
+                    values.push(currentValue);
+                }
+            }
+
+            if (xValues.length > 0 && yValues.length > 0) {
+                chart.trigger(PLOT_AREA_CLICK, {
+                    element: $(e.target),
+                    x: singleItemOrArray(xValues),
+                    y: singleItemOrArray(yValues)
+                });
+            }
         }
     });
 
@@ -5351,6 +5432,10 @@
         }
 
         return sourceFields;
+    }
+
+    function singleItemOrArray(array) {
+        return array.length === 1 ? array[0] : array;
     }
 
     // Exports ================================================================
