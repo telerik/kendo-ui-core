@@ -6,6 +6,8 @@ namespace Kendo.Mvc.Infrastructure.Implementation
     public class AuthorizationContextCache : IAuthorizationContextCache
     {
         private UrlHelper urlHelper;
+        private RequestContext requestContext;
+
         private readonly ICache cache;
         private readonly IRouteDataCache routeDataCache;
         private readonly IControllerContextCache controllerContextCache;
@@ -19,7 +21,7 @@ namespace Kendo.Mvc.Infrastructure.Implementation
             this.controllerDescriptorCache = controllerDescriptorCache;
         }
 
-        public AuthorizationContext GetAuthorizationContext(RequestContext requestContext, string controllerName, string actionName, RouteValueDictionary routeValues)
+        public AuthorizationContext GetAuthorizationContext(RequestContext request, string controllerName, string actionName, RouteValueDictionary routeValues)
         {
             object area;
             string areaName = string.Empty;
@@ -29,6 +31,16 @@ namespace Kendo.Mvc.Infrastructure.Implementation
             {
                 areaName = area.ToString();
                 key = areaName + " " + key;
+            }
+
+            if (requestContext == null)
+            {
+                requestContext = new RequestContext(request.HttpContext, request.RouteData);
+            }
+            else
+            {
+                requestContext.HttpContext = request.HttpContext;
+                request.RouteData = request.RouteData;
             }
 
             if (urlHelper == null)
@@ -72,7 +84,7 @@ namespace Kendo.Mvc.Infrastructure.Implementation
             return new AuthorizationContext(controllerContext, actionDescriptor);
         }
 
-        private string GenerateURL(string controllerName, string actionName, RouteValueDictionary routeValues)
+        private string GenerateURL(string actionName, string controllerName, RouteValueDictionary routeValues)
         {
             var url = urlHelper.Action(actionName, controllerName, routeValues);
 
