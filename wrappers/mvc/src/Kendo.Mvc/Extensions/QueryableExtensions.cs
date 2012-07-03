@@ -73,10 +73,35 @@ namespace Kendo.Mvc.Extensions
 
         public static DataSourceResult ToDataSourceResult(this IQueryable enumerable, DataSourceRequest request)
         {
-            return enumerable.AsQueryable().ToDataSourceResult(request, null);
+            return enumerable.ToDataSourceResult(request, null);
+        }
+
+        public static DataSourceResult ToDataSourceResult<TModel, TResult>(this IEnumerable<TModel> enumerable, DataSourceRequest request, Func<TModel, TResult> selector)
+        {
+            return enumerable.AsQueryable().CreateDataSourceResult(request, null, (o) => selector((TModel)o));
+        }
+
+        public static DataSourceResult ToDataSourceResult<TModel, TResult>(this IEnumerable<TModel> enumerable, DataSourceRequest request, ModelStateDictionary modelState, Func<TModel, TResult> selector)
+        {
+            return enumerable.AsQueryable().CreateDataSourceResult(request, modelState, (o) => selector((TModel)o));
+        }
+
+        public static DataSourceResult ToDataSourceResult<TModel, TResult>(this IQueryable<TModel> enumerable, DataSourceRequest request, Func<TModel, TResult> selector)
+        {
+            return enumerable.CreateDataSourceResult(request, null, (o) => selector((TModel)o));
+        }
+
+        public static DataSourceResult ToDataSourceResult<TModel, TResult>(this IQueryable<TModel> enumerable, DataSourceRequest request, ModelStateDictionary modelState, Func<TModel, TResult> selector)
+        {
+            return enumerable.CreateDataSourceResult(request, modelState, (o) => selector((TModel)o));
         }
 
         public static DataSourceResult ToDataSourceResult(this IQueryable queryable, DataSourceRequest request, ModelStateDictionary modelState)
+        {
+            return queryable.CreateDataSourceResult(request, modelState, null);
+        }
+
+        private static DataSourceResult CreateDataSourceResult(this IQueryable queryable, DataSourceRequest request, ModelStateDictionary modelState, Func<object, object> selector)
         {
             var result = new DataSourceResult();
 
@@ -177,7 +202,7 @@ namespace Kendo.Mvc.Extensions
                 data = data.GroupBy(notPagedData, groups);
             }           
 
-            result.Data = data.Execute();
+            result.Data = data.Execute(selector);
 
             if (modelState != null && !modelState.IsValid)
             {
@@ -421,32 +446,6 @@ namespace Kendo.Mvc.Extensions
             return source;
         }
 
-        internal static IQueryable SelectDistinct(this IQueryable source, Type propertyType, string propertyName)
-        {
-            var builder = ExpressionBuilderFactory.MemberAccess(source, propertyType, propertyName);
-
-            LambdaExpression lambda = builder.CreateLambdaExpression();
-
-            var queryable = source.Select(lambda);
-
-            queryable = queryable.Provider.CreateQuery(
-                Expression.Call(
-                    typeof(Queryable),
-                    "Distinct",
-                    new[] { lambda.Body.Type },
-                    queryable.Expression));
-
-            return queryable;
-        }
-
-        internal static IQueryable Ordered(this IQueryable source)
-        {
-            var builder = new IdentityExpressionBuilder(source.ElementType);
-            var lambda = builder.CreateLambdaExpression();
-
-            return source.OrderBy(lambda);
-        }
-
         /// <summary>
         /// Returns a specified number of contiguous elements from the start of a sequence.
         /// </summary>
@@ -527,7 +526,7 @@ namespace Kendo.Mvc.Extensions
                     Expression.Constant(index)));
         }
 
-        internal static IEnumerable Execute(this IQueryable source)
+        private static IEnumerable Execute(this IQueryable source, Func<object, object> selector)
         {
             if (source == null) throw new ArgumentNullException("source");
 
@@ -535,34 +534,38 @@ namespace Kendo.Mvc.Extensions
             {
                 return source;
             }
-            
-            var list = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(source.ElementType));
+            var type = source.ElementType;
 
-            foreach (var item in source)
+            var list = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(type));
+
+            if (selector != null)
             {
-                list.Add(item);
+                if (type == typeof(AggregateFunctionsGroup))
+                {
+                    foreach (IGroup group in source)
+                    {
+                        group.Items = group.Items.AsQueryable().Execute(selector);
+                        list.Add(group);
+                    }
+                }
+                else
+                {
+                    foreach (var item in source)
+                    {
+                        list.Add(selector(item));
+                    }
+                }
+            }
+            else
+            {
+                foreach (var item in source)
+                {
+                    list.Add(item);
+                }
             }
 
             return list;
         }
 
-        internal static bool IsBindableType(Type type)
-        {
-            if ((!type.IsPrimitive &&
-                (type != typeof(string))) &&
-                (type != typeof(DateTime)) &&
-                (type != typeof(TimeSpan)) &&
-                (type != typeof(decimal)) &&
-                (type != typeof(Guid)) &&
-                (!type.IsEnum))
-            {
-                return type.IsValueType &&
-                    type.IsGenericType &&
-                    type.GetGenericArguments().Length == 1 &&
-                        IsBindableType(type.GetGenericArguments()[0]);
-            }
-
-            return true;
-        }
     }
 }

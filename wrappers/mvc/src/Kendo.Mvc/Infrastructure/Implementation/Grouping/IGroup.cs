@@ -15,7 +15,7 @@ namespace Kendo.Mvc.Infrastructure
         /// Gets the items in this groups.
         /// </summary>
         /// <value>The items in this group.</value>
-        IEnumerable Items { get; }
+        IEnumerable Items { get; set; }
 
         /// <summary>
         /// Gets a value indicating whether this instance has sub groups.
