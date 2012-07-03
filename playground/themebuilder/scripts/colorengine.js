@@ -7,7 +7,7 @@
             "rgb": [ "red", "green", "blue", "alpha" ],
             "hsl": [ "h", "s", "l", "a" ]
         },
-        clamps = { "h": 360, "s": 100, "l": 100 },
+        clamps = { h: 360, s: 100, l: 100, a: 1 },
         min = Math.min,
         max = Math.max,
         round = Math.round;
@@ -17,7 +17,7 @@
     }
 
     function trimZeroes(value) {
-        return value.toPrecision(2).replace(zeroTrimRegExp, "");
+        return value.toFixed(2).replace(zeroTrimRegExp, "");
     }
 
     function buildPercent(percent) {
@@ -37,7 +37,7 @@
         }
 
         if (typeof tmp[5] != "undefined") {
-            result[props[type][3]] = parseFloat(tmp[5]);
+            result[props[type][3]] = +(parseFloat(tmp[5]).toFixed(2));
         } else {
             result[props[type][3]] = 1;
         }
@@ -247,6 +247,17 @@
 
         lightness: function (percent) {
             return this._rotateColor(percent, "l");
+        },
+
+        alpha: function (value) {
+            var that = this;
+
+            if (isNaN(value)) {
+                return that.value.alpha;
+            }
+
+            that.value.alpha = clampValue(value, 0, 1);
+            return that;
         },
 
         complementary: function(color) {

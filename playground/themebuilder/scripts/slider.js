@@ -4,11 +4,17 @@
         Widget = ui.Widget,
         support = kendo.support,
         proxy = $.proxy,
+        pow = Math.pow,
         SLIDE = "slide",
         CHANGE = "change",
         ACTIVE_STATE = "km-state-active",
         MARGINLEFT = "margin-left",
         TRANSFORMSTYLE = support.transitions.css + "transform";
+
+    function round(value, precision) {
+        var power = pow(10, precision || 0);
+        return Math.round(value * power) / power;
+    }
 
     function limitValue(value, minLimit, maxLimit) {
         return Math.max( minLimit, Math.min( maxLimit, value));
@@ -30,7 +36,8 @@
 
             that.constrain = width;
             that.handleWidth = that.handle.outerWidth(true);
-            that.snapPoint = that.constrain / (that.options.max - 1);
+            that.precisionFactor = pow(10, that.options.precision);
+            that.snapPoint = that.constrain / (that.options.max * that.precisionFactor);
 
             that.value(that.point);
             that.bind([ CHANGE, SLIDE ], that.options);
@@ -44,7 +51,8 @@
         options: {
             name: "ColorSlider",
             value: 0,
-            max: 101,
+            max: 100,
+            precision: 0, // number of floating point digits
             animateBackground: true
         },
 
@@ -55,8 +63,8 @@
                 return that.point;
             }
 
-            that.point = value;
-            that._position(value * that.snapPoint);
+            that.point = round(value, that.options.precision);
+            that._position(value * that.snapPoint * that.precisionFactor);
         },
 
         _move: function(e) {
@@ -70,7 +78,8 @@
         },
 
         _position: function(position) {
-            var that = this;
+            var that = this,
+                precision = that.options.precision;
 
             that.position = position;
             that.handle.css(TRANSFORMSTYLE, "translatex(" + position + "px)");
@@ -79,7 +88,7 @@
                 that.background.css(MARGINLEFT, that.origin + position);
             }
 
-            return Math.round(that.position / that.snapPoint);
+            return round(that.position / (that.snapPoint * that.precisionFactor), precision);
         },
 
         _start: function(e) {

@@ -238,16 +238,19 @@ var oldColor, devices = [ "ios", "android", "blackberry", "meego" ],
 
             var popupElement = that.popup.element.addClass("k-list-container"),
                 hueElement = $('<label class="label">H<input type="progress" /></label>').appendTo(popupElement).find("input"),
-                hueValue = $('<div class="h-value">0</div>').appendTo(popupElement),
-                saturationElement = $('<label class="label">S<input type="progress" id="saturation" /></label>').appendTo(popupElement).find("input"),
-                saturationValue = $('<div class="s-value">0</div>').appendTo(popupElement),
-                lightnessElement = $('<label class="label">L<input type="progress" id="lightness" /></label>').appendTo(popupElement).find("input"),
-                lightnessValue = $('<div class="s-value">0</div>').appendTo(popupElement),
+                hueValue = $('<div class="slider-value">0</div>').appendTo(popupElement),
+                saturationElement = $('<label class="label">S<input type="progress" /></label>').appendTo(popupElement).find("input"),
+                saturationValue = $('<div class="slider-value">0</div>').appendTo(popupElement),
+                lightnessElement = $('<label class="label">L<input type="progress" /></label>').appendTo(popupElement).find("input"),
+                lightnessValue = $('<div class="slider-value">0</div>').appendTo(popupElement),
+                alphaElement = $('<label class="label">A<input type="progress" /></label>').appendTo(popupElement).find("input"),
+                alphaValue = $('<div class="slider-value">0</div>').appendTo(popupElement),
                 slideProxy = proxy(that._onSlide, that);
 
-            that.hueSlider = extend(hueElement.kendoColorSlider({ max: 360, slide: slideProxy, change: slideProxy }).data("kendoColorSlider"), { type: "hue", valueElement: hueValue });
+            that.hueSlider = extend(hueElement.kendoColorSlider({ max: 359, slide: slideProxy, change: slideProxy }).data("kendoColorSlider"), { type: "hue", valueElement: hueValue });
             that.saturationSlider = extend(saturationElement.kendoColorSlider({ slide: slideProxy, change: slideProxy }).data("kendoColorSlider"), { type: "saturation", valueElement: saturationValue });
             that.lightnessSlider = extend(lightnessElement.kendoColorSlider({ slide: slideProxy, change: slideProxy }).data("kendoColorSlider"), { type: "lightness", valueElement: lightnessValue });
+            that.alphaSlider = extend(alphaElement.kendoColorSlider({ max: 1, precision: 2, slide: slideProxy, change: slideProxy }).data("kendoColorSlider"), { type: "alpha", valueElement: alphaValue });
         },
         options: {
             name: "CustomPicker"
@@ -265,10 +268,12 @@ var oldColor, devices = [ "ios", "android", "blackberry", "meego" ],
                 that.hueSlider.value(that.color.hue());
                 that.saturationSlider.value(that.color.saturation());
                 that.lightnessSlider.value(that.color.lightness());
+                that.alphaSlider.value(that.color.alpha());
 
                 that.hueSlider.valueElement.text(that.color.hue());
                 that.saturationSlider.valueElement.text(that.color.saturation());
                 that.lightnessSlider.valueElement.text(that.color.lightness());
+                that.alphaSlider.valueElement.text(that.color.alpha());
             }
 
             that.popup[open ? "open" : "close"]();
@@ -276,7 +281,7 @@ var oldColor, devices = [ "ios", "android", "blackberry", "meego" ],
 
         _onSlide: function(e) {
             var that = this,
-                c = that.color[e.sender.type](e.value).get().toUpperCase();
+                c = that.color[e.sender.type](e.value).get();
 
             that.element.css("background-color", c);
             that.colorElement.text(c);
