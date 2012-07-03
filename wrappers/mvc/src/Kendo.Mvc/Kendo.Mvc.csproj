@@ -193,6 +193,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Messages.pt-BR.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\Messages.pt-PT.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.pt-PT.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Messages.ru-RU.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.ru-RU.resx</DependentUpon>
+    </Compile>
     <Compile Include="UI\AutoComplete\AutoComplete.cs" />
     <Compile Include="UI\AutoComplete\Fluent\AutoCompleteBuilder.cs" />
     <Compile Include="UI\Calendar\CalendarSelectionSettings.cs" />
@@ -1075,7 +1085,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Messages.pt-BR.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Messages.pt-PT.resx" />
+    <EmbeddedResource Include="Resources\Messages.pt-PT.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.pt-PT.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Messages.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Messages.Designer.cs</LastGenOutput>
@@ -1085,6 +1098,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Exceptions.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Messages.ru-RU.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.ru-RU.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
