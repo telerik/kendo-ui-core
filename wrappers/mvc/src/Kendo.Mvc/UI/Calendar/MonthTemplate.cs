@@ -6,17 +6,30 @@ namespace Kendo.Mvc.UI
 {
     public class MonthTemplate : JsonObject
     {
+        public string IdPrefix { get; set; }
+
         public string Content { get; set; }
         public string Empty { get; set; }
 
+        public string ContentId { get; set; }
+        public string EmptyId { get; set; }
+
         protected override void Serialize(IDictionary<string, object> json)
-        {
-            if (Content.HasValue())
+        {         
+            if (ContentId.HasValue())
+            {
+                json["content"] = new ClientEvent { HandlerName = string.Format("$('{0}{1}').html()", IdPrefix, ContentId) };
+            }
+            else if (Content.HasValue())
             {
                 json["content"] = Content;
             }
 
-            if (Empty.HasValue())
+            if (EmptyId.HasValue())
+            {
+                json["empty"] = new ClientEvent { HandlerName = string.Format("$('{0}{1}').html()", IdPrefix, EmptyId) };
+            }
+            else if (Empty.HasValue())
             {
                 json["empty"] = Empty;
             }

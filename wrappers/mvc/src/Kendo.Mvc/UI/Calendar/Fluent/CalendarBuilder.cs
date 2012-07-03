@@ -49,6 +49,13 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        public CalendarBuilder FooterId(string id)
+        {
+            Component.FooterId = id;
+
+            return this;
+        }
         
         public CalendarBuilder Footer(string footer)
         {
@@ -67,6 +74,13 @@ namespace Kendo.Mvc.UI.Fluent
         public CalendarBuilder Start(CalendarView start)
         {
             Component.Start = start.ToString().ToLower();
+
+            return this;
+        }
+
+        public CalendarBuilder MonthTemplateId(string id)
+        {
+            Component.MonthTemplate.ContentId = id;
 
             return this;
         }

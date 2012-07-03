@@ -17,7 +17,14 @@ namespace Kendo.Mvc.UI.Fluent
             : base(component)
         {
         }
-        
+
+        public DatePickerBuilder FooterId(string id)
+        {
+            Component.FooterId = id;
+
+            return this;
+        }
+
         public DatePickerBuilder Footer(string footer)
         {
             Component.Footer = footer;
@@ -37,6 +44,13 @@ namespace Kendo.Mvc.UI.Fluent
         {
 
             Component.Start = start.ToString().ToLower();
+
+            return this;
+        }
+
+        public DatePickerBuilder MonthTemplateId(string id)
+        {
+            Component.MonthTemplate.ContentId = id;
 
             return this;
         }

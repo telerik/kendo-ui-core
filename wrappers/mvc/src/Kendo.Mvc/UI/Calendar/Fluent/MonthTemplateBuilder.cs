@@ -13,6 +13,20 @@ namespace Kendo.Mvc.UI.Fluent
             private set; 
         }
 
+        public MonthTemplateBuilder ContentId(string id)
+        {
+            MonthTemplate.ContentId = id;
+
+            return this;
+        }
+
+        public MonthTemplateBuilder EmptyId(string id)
+        {
+            MonthTemplate.EmptyId = id;
+
+            return this;
+        }
+
         public MonthTemplateBuilder Content(string content)
         {
             MonthTemplate.Content = content;

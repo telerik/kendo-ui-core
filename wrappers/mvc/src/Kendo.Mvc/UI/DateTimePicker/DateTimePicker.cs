@@ -44,6 +44,12 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        public string FooterId
+        {
+            get;
+            set;
+        }
+
         public string Start
         {
             get;
@@ -72,6 +78,12 @@ namespace Kendo.Mvc.UI
         {
             var options = new Dictionary<string, object>(Events);
 
+            var idPrefix = "#";
+            if (IsInClientTemplate)
+            {
+                idPrefix = "\\" + idPrefix;
+            }
+
             var animation = Animation.ToJson();
 
             if (animation.Keys.Any())
@@ -89,7 +101,11 @@ namespace Kendo.Mvc.UI
             options["min"] = Min;
             options["max"] = Max;
 
-            if (Footer.HasValue())
+            if (FooterId.HasValue())
+            {
+                options["footer"] = new ClientEvent { HandlerName = string.Format("$('{0}{1}').html()", idPrefix, FooterId) };
+            }
+            else if (Footer.HasValue())
             {
                 options["footer"] = Footer;
             }
@@ -103,6 +119,8 @@ namespace Kendo.Mvc.UI
             {
                 options["start"] = Start;
             }
+
+            MonthTemplate.IdPrefix = idPrefix;
 
             var month = MonthTemplate.ToJson();
 

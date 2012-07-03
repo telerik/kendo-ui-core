@@ -60,6 +60,13 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        public DateTimePickerBuilder FooterId(string id)
+        {
+            Component.FooterId = id;
+
+            return this;
+        }
+
         public DateTimePickerBuilder Depth(CalendarView depth)
         {
 
@@ -76,6 +83,13 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        public DateTimePickerBuilder MonthTemplateId(string id)
+        {
+            Component.MonthTemplate.ContentId = id;
+
+            return this;
+        }
+
         public DateTimePickerBuilder MonthTemplate(string content)
         {
             Component.MonthTemplate.Content = content;
@@ -85,7 +99,6 @@ namespace Kendo.Mvc.UI.Fluent
 
         public DateTimePickerBuilder MonthTemplate(Action<MonthTemplateBuilder> monthTemplateAction)
         {
-
             monthTemplateAction(new MonthTemplateBuilder(Component.MonthTemplate));
 
             return this;
