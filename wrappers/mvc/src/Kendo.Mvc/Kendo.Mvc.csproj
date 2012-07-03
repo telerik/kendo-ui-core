@@ -183,6 +183,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Messages.nl-NL.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\Messages.pl-PL.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.pl-PL.resx</DependentUpon>
+    </Compile>
     <Compile Include="UI\AutoComplete\AutoComplete.cs" />
     <Compile Include="UI\AutoComplete\Fluent\AutoCompleteBuilder.cs" />
     <Compile Include="UI\Calendar\CalendarSelectionSettings.cs" />
@@ -1056,6 +1061,10 @@
     <EmbeddedResource Include="Resources\Messages.nl-NL.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Messages.nl-NL.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Messages.pl-PL.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.pl-PL.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Messages.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
