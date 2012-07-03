@@ -1127,7 +1127,7 @@
                     barElement,
                     plotArea;
 
-                var TOLERANCE = 0.1;
+                var TOLERANCE = 5;
 
                 function createBarChart(options) {
                     chart = createChart($.extend({
@@ -1193,7 +1193,7 @@
                 test("event arguments contain multiple values", 1, function() {
                     createBarChart({
                         valueAxis: [{}, { name: "b", min: 100, max: 1000 }],
-                        plotAreaClick: function(e) { same(e.value, [0.4, 253.7], TOLERANCE); }
+                        plotAreaClick: function(e) { same(e.value, [1, 255], TOLERANCE); }
                     });
 
                     $("#" + plotArea.options.id).trigger({

@@ -4174,7 +4174,8 @@
         },
 
         renderGridLines: function(view, axis, secondaryAxis) {
-            var options = axis.options,
+            var plotArea = this,
+                options = axis.options,
                 vertical = options.vertical,
                 crossingSlot = axis.getSlot(options.axisCrossingValue),
                 secAxisPos = round(crossingSlot[vertical ? "y1" : "x1"]),
@@ -4212,6 +4213,7 @@
 
             return map(gridLines, function(line) {
                 var gridLineOptions = {
+                        data: { modelId: plotArea.options.modelId },
                         strokeWidth: line.options.width,
                         stroke: line.options.color,
                         dashType: line.options.dashType
