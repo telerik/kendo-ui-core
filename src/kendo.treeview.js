@@ -1012,7 +1012,10 @@
                     firstLevel: parentNode.hasClass(KTREEVIEW),
                     expanded: !collapsed,
                     length: updatedGroupLength
-                }, node, i, item, nodeHtml = "";
+                }, node, i, item, nodeHtml = "",
+                append = function(item, group) {
+                    item.appendTo(group);
+                };
 
             for (i = 0; i < nodeData.length; i++) {
                 item = nodeData[i];
@@ -1053,9 +1056,7 @@
                 item = nodeData[i];
 
                 if (item.children.data().length) {
-                    that._insertNode(item.children.data(), item.index, node.eq(i), function(item, group) {
-                        item.appendTo(group);
-                    }, item.expanded);
+                    that._insertNode(item.children.data(), item.index, node.eq(i), append, item.expanded);
                 }
             }
 
@@ -1296,9 +1297,7 @@
             }
 
             if (!that._trigger(isExpanding ? "expand" : "collapse", node)) {
-                if (dataItem) {
-                    dataItem.set("expanded", isExpanding);
-                }
+                dataItem.set("expanded", isExpanding);
 
                 if (contents.children().length > 0) {
                     updateNodeClasses(node, {}, { expanded: isExpanding });
