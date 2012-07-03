@@ -321,6 +321,16 @@ namespace Kendo.Mvc.Tests.Data
         }
 
         [Fact]
+        public void Should_change_the_type_of_the_collection()
+        {
+            var people = CreateTestData() as IQueryable<Person>;
+
+            var result = people.ToDataSourceResult(new UI.DataSourceRequest(), (person) => new PersonViewModel { Name = person.ID.ToString() });
+
+            result.Data.Cast<PersonViewModel>();
+        }
+
+        [Fact]
         public void Should_execute_the_selector_over_group_items()
         {
             var people = CreateTestData() as IQueryable<Person>;
@@ -341,6 +351,12 @@ namespace Kendo.Mvc.Tests.Data
 
             result.Data.Cast<AggregateFunctionsGroup>().First().Items.Cast<AggregateFunctionsGroup>()
                        .First().Items.Cast<Person>().First().Name.ShouldEqual(people.First().ID.ToString());
+        }
+
+        private class PersonViewModel
+        {
+            public int ID { get; set; }
+            public string Name { get; set; }
         }
 
         private IQueryable CreateTestData()

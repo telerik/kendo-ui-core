@@ -76,24 +76,24 @@ namespace Kendo.Mvc.Extensions
             return enumerable.ToDataSourceResult(request, null);
         }
 
-        public static DataSourceResult ToDataSourceResult<TModel, TResult>(this IEnumerable<TModel> enumerable, DataSourceRequest request, Func<TModel, TResult> selector)
+        public static DataSourceResult ToDataSourceResult<TModel, TResult>(this IEnumerable<TModel> enumerable, DataSourceRequest request, Expression<Func<TModel, TResult>> selector)
         {
-            return enumerable.AsQueryable().CreateDataSourceResult(request, null, (o) => selector((TModel)o));
+            return enumerable.AsQueryable().CreateDataSourceResult(request, null, selector);
         }
 
-        public static DataSourceResult ToDataSourceResult<TModel, TResult>(this IEnumerable<TModel> enumerable, DataSourceRequest request, ModelStateDictionary modelState, Func<TModel, TResult> selector)
+        public static DataSourceResult ToDataSourceResult<TModel, TResult>(this IEnumerable<TModel> enumerable, DataSourceRequest request, ModelStateDictionary modelState, Expression<Func<TModel, TResult>> selector)
         {
-            return enumerable.AsQueryable().CreateDataSourceResult(request, modelState, (o) => selector((TModel)o));
+            return enumerable.AsQueryable().CreateDataSourceResult(request, modelState, selector);
         }
 
-        public static DataSourceResult ToDataSourceResult<TModel, TResult>(this IQueryable<TModel> enumerable, DataSourceRequest request, Func<TModel, TResult> selector)
+        public static DataSourceResult ToDataSourceResult<TModel, TResult>(this IQueryable<TModel> enumerable, DataSourceRequest request, Expression<Func<TModel, TResult>> selector)
         {
-            return enumerable.CreateDataSourceResult(request, null, (o) => selector((TModel)o));
+            return enumerable.CreateDataSourceResult(request, null, selector);
         }
 
-        public static DataSourceResult ToDataSourceResult<TModel, TResult>(this IQueryable<TModel> enumerable, DataSourceRequest request, ModelStateDictionary modelState, Func<TModel, TResult> selector)
+        public static DataSourceResult ToDataSourceResult<TModel, TResult>(this IQueryable<TModel> enumerable, DataSourceRequest request, ModelStateDictionary modelState, Expression<Func<TModel, TResult>> selector)
         {
-            return enumerable.CreateDataSourceResult(request, modelState, (o) => selector((TModel)o));
+            return enumerable.CreateDataSourceResult(request, modelState, selector);
         }
 
         public static DataSourceResult ToDataSourceResult(this IQueryable queryable, DataSourceRequest request, ModelStateDictionary modelState)
@@ -101,7 +101,7 @@ namespace Kendo.Mvc.Extensions
             return queryable.CreateDataSourceResult(request, modelState, null);
         }
 
-        private static DataSourceResult CreateDataSourceResult(this IQueryable queryable, DataSourceRequest request, ModelStateDictionary modelState, Func<object, object> selector)
+        private static DataSourceResult CreateDataSourceResult(this IQueryable queryable, DataSourceRequest request, ModelStateDictionary modelState, LambdaExpression selector)
         {
             var result = new DataSourceResult();
 
@@ -526,7 +526,7 @@ namespace Kendo.Mvc.Extensions
                     Expression.Constant(index)));
         }
 
-        private static IEnumerable Execute(this IQueryable source, Func<object, object> selector)
+        private static IEnumerable Execute(this IQueryable source, LambdaExpression selector)
         {
             if (source == null) throw new ArgumentNullException("source");
 
@@ -534,38 +534,40 @@ namespace Kendo.Mvc.Extensions
             {
                 return source;
             }
+
             var type = source.ElementType;
 
-            var list = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(type));
 
             if (selector != null)
             {
+                var groups = new List<AggregateFunctionsGroup>();
+
                 if (type == typeof(AggregateFunctionsGroup))
                 {
-                    foreach (IGroup group in source)
+                    foreach (AggregateFunctionsGroup group in source)
                     {
                         group.Items = group.Items.AsQueryable().Execute(selector);
-                        list.Add(group);
+                        groups.Add(group);
                     }
+
+                    return groups;
                 }
                 else
                 {
-                    foreach (var item in source)
-                    {
-                        list.Add(selector(item));
-                    }
+                    return source.CallQueryableMethod("Select", selector).Execute(null);
                 }
             }
             else
             {
+                var list = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(type));
+
                 foreach (var item in source)
                 {
                     list.Add(item);
                 }
+
+                return list;
             }
-
-            return list;
         }
-
     }
 }
