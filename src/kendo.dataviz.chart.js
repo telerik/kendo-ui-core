@@ -417,14 +417,12 @@
             var chart = this,
                 element = chart._getChartElement(e);
 
-            if (element && element.click) {
-                element.click(this, e);
-
-                while (element = element.parent) {
-                    if (element.click) {
-                        element.click(this, e);
-                    }
+            while (element) {
+                if (element.click) {
+                    element.click(chart, e);
                 }
+
+                element = element.parent;
             }
         },
 
