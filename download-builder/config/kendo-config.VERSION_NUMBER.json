@@ -15,9 +15,23 @@
         "mobile": {
             "name": "Mobile",
             "description": "Framework and Widgets for Mobile Applications"
+        },
+        "wrappers": {
+            "name": "Server Wrappers",
+            "description": "Supplementary scripts for integration with server-side technologies"
         }
     },
     "components": [
+        {
+            "id": "aspnetmvc",
+            "name": "ASP.NET MVC",
+            "category": "server wrappers",
+            "description": "Scripts required by Kendo UI for ASP.NET MVC",
+            "source": "kendo.aspnetmvc.min.js",
+            "depends": [
+                "core"
+            ]
+        },
         {
             "id": "core",
             "name": "Core",
