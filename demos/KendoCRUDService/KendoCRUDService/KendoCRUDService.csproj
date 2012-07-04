@@ -95,11 +95,14 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Common\JsonpResult.cs" />
+    <Compile Include="Models\EmployeeModel.cs" />
+    <Compile Include="Models\EmployeeRepository.cs" />
     <Compile Include="Models\EF\NorthwindEf.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
