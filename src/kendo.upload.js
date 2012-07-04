@@ -1212,16 +1212,16 @@
             return fileEntries;
         },
 
-        enqueueFiles: function(arrFileInfo) {
+        enqueueFiles: function(files) {
             var upload = this.upload
                 fileEntries = [];
 
-            for (var i = 0; i < arrFileInfo.length; i++) {
-                var currentFile = arrFileInfo[i],
+            for (var i = 0; i < files.length; i++) {
+                var currentFile = files[i],
                     name = currentFile.name;
 
                 var fileEntry = upload._enqueueFile(name, { "fileNames": [ currentFile ] });
-                fileEntry.data("formData", this.createFormData(arrFileInfo[i]));
+                fileEntry.data("file", currentFile);
 
                 fileEntries.push(fileEntry);
             }
@@ -1235,20 +1235,16 @@
 
         performUpload: function(fileEntry) {
             var upload = this.upload,
-                formData = fileEntry.data("formData"),
+                formData = this.createFormData(fileEntry.data("file")),
                 e = { files: fileEntry.data("fileNames") };
 
             if (!upload.trigger(UPLOAD, e)) {
                 upload._fileAction(fileEntry, CANCEL);
                 upload._hideUploadButton();
 
-                if (!fileEntry.data("dataAppended")) {
-                    e.data = $.extend({ }, e.data, getAntiForgeryTokens());
-                    for (var key in e.data) {
-                        formData.append(key, e.data[key]);
-                    }
-
-                    fileEntry.data("dataAppended", true);
+                e.data = $.extend({ }, e.data, getAntiForgeryTokens());
+                for (var key in e.data) {
+                    formData.append(key, e.data[key]);
                 }
 
                 upload._fileState(fileEntry, "uploading");
@@ -1361,8 +1357,6 @@
                     relatedInput.remove();
                 }
             }
-
-            fileEntry.data("formData", null);
         },
 
         removeFileEntry: function(fileEntry) {
