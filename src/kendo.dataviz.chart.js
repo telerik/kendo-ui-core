@@ -1286,6 +1286,12 @@
             );
         },
 
+        getValue: function(point) {
+            var value = NumericAxis.fn.getValue.call(this, point);
+
+            return value !== null ? toDate(value) : null;
+        },
+
         labelsCount: function() {
             return this.getDivisions(this.options.majorUnit);
         },

@@ -424,6 +424,28 @@
             })();
 
             (function() {
+                var Point2D = kendo.dataviz.Point2D;
+                var categoryAxis;
+
+                // ------------------------------------------------------------
+                module("Date CategoryAxis / getCategory", {
+                    setup: function() {
+                        categoryAxis = new dataviz.DateCategoryAxis({
+                            categories: [new Date("2012/01/01")],
+                            labels: { visible: false }
+                        });
+
+                        categoryAxis.reflow(chartBox);
+                    }
+                });
+
+                test("returns date", function() {
+                    same(categoryAxis.getCategory(new Point2D(0, 0)), new Date("2012/01/01"));
+                });
+
+            })();
+
+            (function() {
                 function createDateValueAxis(min, max, options) {
                     dateAxis = new dataviz.DateValueAxis(
                         min, max, options
@@ -800,6 +822,127 @@
                          ["1/1 14:00", "1/1 15:00", "1/1 16:00", "1/1 17:00"]);
                 });
 
+            })();
+
+            (function() {
+                var Point2D = kendo.dataviz.Point2D;
+                var dateAxis;
+
+                // ------------------------------------------------------------
+                module("Date ValueAxis / getValue / Horizontal", {
+                    setup: function() {
+                        dateAxis = new dataviz.DateValueAxis(
+                            new Date("2012/02/01"), new Date("2012/02/10"), {
+                            vertical: false,
+                            labels: { visible: false }
+                        });
+                        dateAxis.reflow(chartBox);
+                    }
+                });
+
+                test("returns null for coordinates left of axis", function() {
+                    same(dateAxis.getValue(new Point2D(-1, 0)), null);
+                });
+
+                test("returns null for coordinates right of axis", function() {
+                    same(dateAxis.getValue(new Point2D(1000, 0)), null);
+                });
+
+                test("returns minimum value for leftmost point", function() {
+                    same(dateAxis.getValue(new Point2D(0, 0)), new Date("2012/01/31"));
+                });
+
+                test("returns maximum value for righttmost point", function() {
+                    same(dateAxis.getValue(new Point2D(800, 0)), new Date("2012/02/12"));
+                });
+
+                test("returns value for middle point", function() {
+                    same(dateAxis.getValue(new Point2D(335, 0)), new Date("2012/02/05 00:36:00"));
+                });
+
+                // ------------------------------------------------------------
+                module("Date ValueAxis / getValue / Horizontal / Reverse", {
+                    setup: function() {
+                        dateAxis = new dataviz.DateValueAxis(
+                            new Date("2012/02/01"), new Date("2012/02/10"), {
+                            vertical: false,
+                            reverse: true,
+                            labels: { visible: false }
+                        });
+
+                        dateAxis.reflow(chartBox);
+                    }
+                });
+
+                test("returns minimum value for righttmost point", function() {
+                    same(dateAxis.getValue(new Point2D(800, 0)), new Date("2012/01/31"));
+                });
+
+                test("returns maximum value for leftmost point", function() {
+                    same(dateAxis.getValue(new Point2D(0, 0)), new Date("2012/02/12"));
+                });
+
+                test("returns value for middle point", function() {
+                    same(dateAxis.getValue(new Point2D(465, 0)), new Date("2012/02/05 00:36:00"));
+                });
+
+                // ------------------------------------------------------------
+                module("Date ValueAxis / getValue / Vertical", {
+                    setup: function() {
+                        dateAxis = new dataviz.DateValueAxis(
+                            new Date("2012/02/01"), new Date("2012/02/10"), {
+                            vertical: true,
+                            labels: { visible: false }
+                        });
+                        dateAxis.reflow(chartBox);
+                    }
+                });
+
+                test("returns null for coordinates above the axis", function() {
+                    same(dateAxis.getValue(new Point2D(0, -1)), null);
+                });
+
+                test("returns null for coordinates below the axis", function() {
+                    same(dateAxis.getValue(new Point2D(0, 1000)), null);
+                });
+
+                test("returns minimum value for bottommost point", function() {
+                    same(dateAxis.getValue(new Point2D(0, 600)), new Date("2012/01/31"));
+                });
+
+                test("returns maximum value for topmost point", function() {
+                    same(dateAxis.getValue(new Point2D(0, 0)), new Date("2012/02/12"));
+                });
+
+                test("returns value for middle point", function() {
+                    same(dateAxis.getValue(new Point2D(0, 350)), new Date("2012/02/05"));
+                });
+
+                // ------------------------------------------------------------
+                module("Date ValueAxis / getValue / Vertical / Reverse", {
+                    setup: function() {
+                        dateAxis = new dataviz.DateValueAxis(
+                            new Date("2012/02/01"), new Date("2012/02/10"), {
+                            vertical: true,
+                            reverse: true,
+                            labels: { visible: false }
+                        });
+
+                        dateAxis.reflow(chartBox);
+                    }
+                });
+
+                test("returns minimum value for topmost  point", function() {
+                    same(dateAxis.getValue(new Point2D(0, 0)), new Date("2012/01/31"));
+                });
+
+                test("returns maximum value for bottommost point", function() {
+                    same(dateAxis.getValue(new Point2D(0, 600)), new Date("2012/02/12"));
+                });
+
+                test("returns value for middle point", function() {
+                    same(dateAxis.getValue(new Point2D(0, 250)), new Date("2012/02/05"));
+                });
             })();
 
         </script>

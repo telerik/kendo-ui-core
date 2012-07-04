@@ -1443,13 +1443,15 @@
                 options = axis.options,
                 reverse = options.reverse,
                 vertical = options.vertical,
+                max = options.max * 1,
+                min = options.min * 1,
                 valueAxis = vertical ? Y : X,
                 lineBox = axis.lineBox(),
                 lineStart = lineBox[valueAxis + (reverse ? 2 : 1)],
                 lineSize = vertical ? lineBox.height() : lineBox.width(),
                 dir = reverse ? -1 : 1,
                 offset = dir * (point[valueAxis] - lineStart),
-                step = (options.max - options.min) / lineSize,
+                step = (max - min) / lineSize,
                 valueOffset = offset * step,
                 value;
 
@@ -1458,8 +1460,8 @@
             }
 
             value = vertical ?
-                    options.max - valueOffset :
-                    options.min + valueOffset;
+                    max - valueOffset :
+                    min + valueOffset;
 
             return round(value, DEFAULT_PRECISION);
         },
