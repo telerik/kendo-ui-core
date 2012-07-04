@@ -1115,7 +1115,8 @@
                     append(items, parentNode, true);
 
                     if (that._expanded(parentNode)) {
-                        that.expand(parentNode);
+                        updateNodeClasses(parentNode, {}, { expanded: true });
+                        subGroup(parentNode).css("display", "block");
                     }
                 } else {
                     that.root = that.wrapper.html(that._renderGroup({

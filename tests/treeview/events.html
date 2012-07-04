@@ -241,6 +241,22 @@
                 equals(treeviewObject.findByText("foo").find(".k-group").length, 1);
                 equals(treeviewObject.findByText("baz").find(".k-group").length, 0);
            });
+
+           test("initialization of expanded nodes does not trigger expand events", function() {
+               var triggered = false,
+                   treeview = createTreeView({
+                        dataSource: [
+                            { text: "foo", expanded: true, items: [
+                                { text: "bar" }
+                            ] }
+                        ],
+                        expand: function() {
+                            triggered = true;
+                        }
+                    });
+
+                ok(!triggered);
+           });
         </script>
 
         <div id="qunit-fixture"> </div>
