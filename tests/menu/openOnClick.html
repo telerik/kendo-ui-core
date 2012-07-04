@@ -6,7 +6,6 @@
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
-        <script src="../../src/kendo.fx.js"></script>
         <script src="../../src/kendo.popup.js"></script>
         <script src="../../src/kendo.menu.js"></script>
         <script type="text/javascript" src="../jquery.mockjax.js"></script>
@@ -218,11 +217,9 @@
         });
 
         test('clicking the document closes the open item', function() {
-            var closd = false;
             menu.clicked = true;
-            menu.close = function() { closd = true };
             menu._documentClick({ target: document.body }, document );
-            ok(closd);
+            ok(menu.clicked === false);
         });
 
 </script>

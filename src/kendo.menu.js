@@ -293,6 +293,9 @@
             .children(IMG)
             .addClass(IMAGE);
         item
+            .children("div")
+            .addClass("k-content");
+        item
             .filter(":not([disabled])")
             .addClass(DEFAULTSTATE);
         item
@@ -438,8 +441,10 @@
                 element.delegate(linkSelector, "touchstart touchend", that._toggleHover);
             }
 
-            $(document).click(proxy( that._documentClick, that ));
-            that.clicked = false;
+            if (options.openOnClick) {
+                that.clicked = false;
+                $(document).click(proxy( that._documentClick, that ));
+            }
 
             kendo.notify(that);
         },
@@ -918,6 +923,16 @@
                                 animation: {
                                     open: extend(true, { effects: openEffects }, options.animation.open),
                                     close: options.animation.close
+                                },
+                                close: function (e) {
+                                    var li = e.sender.wrapper.parent();
+
+                                    if (that.trigger(CLOSE, { item: li[0] }) === false) {
+                                        li.css(ZINDEX, li.data(ZINDEX));
+                                        li.removeData(ZINDEX);
+                                    } else {
+                                        e.preventDefault();
+                                    }
                                 }
                             }).data(KENDOPOPUP);
                         } else {
@@ -963,10 +978,7 @@
 
                 li.data(TIMER, setTimeout(function () {
                     var ul = li.find(".k-group:first:visible"), popup;
-                    if (ul[0] && that.trigger(CLOSE, { item: li[0] }) === false) {
-                        li.css(ZINDEX, li.data(ZINDEX));
-                        li.removeData(ZINDEX);
-
+                    if (ul[0]) {
                         popup = ul.data(KENDOPOPUP);
                         popup.close();
                     }
@@ -1045,6 +1057,10 @@
                 element = target.closest(allItemsSelector),
                 isLink = (!!href && href.charAt(href.length - 1) != "#");
 
+            if (element.children(".k-content")[0]) {
+                return;
+            }
+
             if (element.hasClass(DISABLEDSTATE)) {
                 e.preventDefault();
                 return;
@@ -1086,10 +1102,7 @@
                 return;
             }
 
-            if (that.clicked) {
-                that.clicked = false;
-                that.close(that.element.find(".k-item>.k-animation-container:visible").parent());
-            }
+            that.clicked = false;
         }
     });
 
