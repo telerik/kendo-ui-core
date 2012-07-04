@@ -18,7 +18,7 @@
         <li>Choose culture: 
             @(Html.Kendo().DropDownList()
                 .Name("CulturesSelector")
-                .BindTo(new[] { "en-US", "de-DE" })
+                .BindTo(new[] { "en-US", "de-DE", "bg-BG", "fr-FR", "pl-PL", "ru-RU", "uk-UA" })
                 .Value(culture)
                 .Events(events => events.Change("cultureChange"))
             )
@@ -44,6 +44,7 @@
     .DataSource(dataSource => dataSource
         .Ajax()
         .Events(events => events.Error("error"))
+        .ServerOperation(false)
         .Model(model => model.Id(p => p.ProductID))
         .Create(update => update.Action("Globalization_Create", "Grid").Data("sendCulture"))
         .Read(read => read.Action("Globalization_Read", "Grid").Data("sendCulture"))

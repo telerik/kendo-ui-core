@@ -330,4 +330,31 @@
   <data name="Pager_Refresh" xml:space="preserve">
     <value>Aktualisieren</value>
   </data>
+  <data name="Upload_Cancel" xml:space="preserve">
+    <value>Beenden</value>
+  </data>
+  <data name="Upload_DropFilesHere" xml:space="preserve">
+    <value>Droppen Sie Feile hier zum hochladen</value>
+  </data>
+  <data name="Upload_Remove" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="Upload_Retry" xml:space="preserve">
+    <value>Wiederholen</value>
+  </data>
+  <data name="Upload_Select" xml:space="preserve">
+    <value>Wählen Sie...</value>
+  </data>
+  <data name="Upload_StatusFailed" xml:space="preserve">
+    <value>nicht erfolgreich</value>
+  </data>
+  <data name="Upload_StatusUploaded" xml:space="preserve">
+    <value>hochgeladet</value>
+  </data>
+  <data name="Upload_StatusUploading" xml:space="preserve">
+    <value>hochladen</value>
+  </data>
+  <data name="Upload_UploadSelectedFiles" xml:space="preserve">
+    <value>Feile hochladen</value>
+  </data>
 </root>
