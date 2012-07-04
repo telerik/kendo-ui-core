@@ -44,10 +44,10 @@ namespace Kendo.Controllers
             return Content(source, "text/plain");
         }
 
-        public PartialViewResult SourcesView(string suite, string section, string example)
+        public PartialViewResult SourceView(string suite, string section, string example)
         {
             ViewBag.Sources = GenerateSourceItems(suite, section, example);
-            return PartialView("SourcesView");
+            return PartialView("SourceView");
         }
 
         private string RenderView(string suite, string viewName, string template)

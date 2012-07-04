@@ -107,9 +107,9 @@ namespace Kendo
             );
 
             routes.MapRoute(
-                "SourcesView",
-                "Source/SourcesView",
-                new { controller = "Source", action = "SourcesView" }
+                "SourceView",
+                "Source/SourceView",
+                new { controller = "Source", action = "SourceView" }
             );
         }
 
