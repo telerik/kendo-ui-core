@@ -1753,7 +1753,7 @@
 
                 test("event arguments contain y axis value", 1, function() {
                     createScatterChart({
-                        plotAreaClick: function(e) { equals(e.y, 16, TOLERANCE); }
+                        plotAreaClick: function(e) { equals(e.y, 24, TOLERANCE); }
                     });
 
                     $("#" + plotArea.options.id).trigger({
@@ -1764,7 +1764,7 @@
                 test("event arguments contain multiple y axis values", 1, function() {
                     createScatterChart({
                         yAxis: [{}, { name: "b", min: 100, max: 1000 }],
-                        plotAreaClick: function(e) { same(e.y, [16, 223], TOLERANCE); }
+                        plotAreaClick: function(e) { same(e.y, [24, 278], TOLERANCE); }
                     });
 
                     $("#" + plotArea.options.id).trigger({
@@ -1783,7 +1783,9 @@
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
 
-        <div id="container" style="width: 1664px; height: 400px;">
+        <div style="position: absolute; top: 200px; left: 8px;">
+            <div id="container" style="width: 1664px; height: 400px;">
+            </div>
         </div>
 
     </body>
