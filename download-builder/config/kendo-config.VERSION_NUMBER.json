@@ -23,16 +23,6 @@
     },
     "components": [
         {
-            "id": "aspnetmvc",
-            "name": "ASP.NET MVC",
-            "category": "server wrappers",
-            "description": "Scripts required by Kendo UI for ASP.NET MVC",
-            "source": "kendo.aspnetmvc.min.js",
-            "depends": [
-                "core"
-            ]
-        },
-        {
             "id": "core",
             "name": "Core",
             "category": "framework",
@@ -718,6 +708,16 @@
             "source": "kendo.mobile.tabstrip.min.js",
             "depends": [
                 "mobile.application"
+            ]
+        },
+        {
+            "id": "aspnetmvc",
+            "name": "ASP.NET MVC",
+            "category": "server wrappers",
+            "description": "Scripts required by Kendo UI for ASP.NET MVC",
+            "source": "kendo.aspnetmvc.min.js",
+            "depends": [
+                "data"
             ]
         }
     ]
