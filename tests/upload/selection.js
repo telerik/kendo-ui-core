@@ -40,11 +40,6 @@
         equal($(".k-upload-files .k-file .k-filename", uploadInstance.wrapper).text(), "first.txt");
     });
 
-    test("status icon is rendered", function() {
-        simulateFileSelect();
-        equal($(".k-upload-files .k-file > span.k-icon", uploadInstance.wrapper).length, 1);
-    });
-
     test("progress bar is not rendered", function() {
         simulateFileSelect();
         equal($(".k-upload-files li.k-file .k-progress", uploadInstance.wrapper).length, 0);

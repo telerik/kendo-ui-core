@@ -177,6 +177,7 @@
                 that._module = that._supportsFormData() ?
                 new formDataUploadModule(that) :
                 new iframeUploadModule(that);
+                that._async = true;
             } else {
                 that._module = new syncUploadModule(that);
             }
@@ -606,9 +607,13 @@
 
             existingFileEntries = $(".k-file", fileList);
             fileEntry =
-                $("<li class='k-file'><span class='k-icon'></span><span class='k-filename' title='" + name + "'>" + name + "</span></li>")
+                $("<li class='k-file'><span class='k-filename' title='" + name + "'>" + name + "</span></li>")
                 .appendTo(fileList)
                 .data(data);
+
+            if (that._async) {
+                fileEntry.prepend("<span class='k-icon'></span>");
+            }
 
             if (!that.multiple) {
                 existingFileEntries.trigger("t:remove");

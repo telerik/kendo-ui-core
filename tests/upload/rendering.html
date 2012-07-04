@@ -107,12 +107,12 @@
 
             test("file name is rendered", function() {
                 simulateFileSelect();
-                equal($(".k-filename", uploadInstance.wrapper).text(), "first.txt");                    
+                equal($(".k-filename", uploadInstance.wrapper).text(), "first.txt");
             });
 
             test("file name is rendered as tooltip", function() {
                 simulateFileSelect();
-                equal($(".k-filename", uploadInstance.wrapper).attr("title"), "first.txt");                    
+                equal($(".k-filename", uploadInstance.wrapper).attr("title"), "first.txt");
             });
 
             // -----------------------------------------------------------------------------------

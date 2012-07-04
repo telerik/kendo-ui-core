@@ -6,6 +6,11 @@
         equal($(".k-delete", uploadInstance.wrapper).length, 0);
     });
 
+    test("status icon is rendered", function() {
+        simulateFileSelect();
+        equal($(".k-upload-files .k-file > span.k-icon", uploadInstance.wrapper).length, 1);
+    });
+
     test("remove icon is rendered upon success", function() {
         simulateUpload();
 
