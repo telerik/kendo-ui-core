@@ -32,6 +32,30 @@ namespace Kendo.Mvc.UI
             DataSource = new DataSource();
         }
 
+        public string DataTextField
+        {
+            get;
+            set;
+        }
+
+        public string DataUrlField
+        {
+            get;
+            set;
+        }
+
+        public string DataSpriteCssClassField
+        {
+            get;
+            set;
+        }
+
+        public string DataImageUrlField
+        {
+            get;
+            set;
+        }
+
         public DataSource DataSource
         {
             get;
@@ -151,6 +175,26 @@ namespace Kendo.Mvc.UI
             if (DragAndDrop)
             {
                 options["dragAndDrop"] = true;
+            }
+
+            if (!string.IsNullOrEmpty(DataTextField))
+            {
+                options["dataTextField"] = DataTextField;
+            }
+
+            if (!string.IsNullOrEmpty(DataUrlField))
+            {
+                options["dataUrlField"] = DataUrlField;
+            }
+
+            if (!string.IsNullOrEmpty(DataSpriteCssClassField))
+            {
+                options["dataSpriteCssClassField"] = DataSpriteCssClassField;
+            }
+
+            if (!string.IsNullOrEmpty(DataImageUrlField))
+            {
+                options["dataImageUrlField"] = DataImageUrlField;
             }
 
             //TODO: Use new Init writer to output animation dictionary

@@ -19,7 +19,7 @@ namespace Kendo.Mvc.Examples.Controllers
                             where (id.HasValue ? e.ReportsTo == id : e.ReportsTo == null)
                             select new {
                                 id = e.EmployeeID,
-                                text = e.FirstName + " " + e.LastName,
+                                Name = e.FirstName + " " + e.LastName,
                                 hasChildren = e.Employees.Any()
                             };
 

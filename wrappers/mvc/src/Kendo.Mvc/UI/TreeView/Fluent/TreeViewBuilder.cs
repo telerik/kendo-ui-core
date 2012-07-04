@@ -353,6 +353,82 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Sets the name of the field that will supply the item text.
+        /// </summary>
+        /// <param name="field">The field name.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().TreeView()
+        ///             .Name("TreeView")
+        ///             .DataTextField("Name")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TreeViewBuilder DataTextField(string field)
+        {
+            Component.DataTextField = field;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the name of the field that will supply the item URL.
+        /// </summary>
+        /// <param name="field">The field name.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().TreeView()
+        ///             .Name("TreeView")
+        ///             .DataUrlField("LinksTo")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TreeViewBuilder DataUrlField(string field)
+        {
+            Component.DataUrlField = field;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the name of the field that will supply the CSS class for the item sprite image.
+        /// </summary>
+        /// <param name="field">The field name.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().TreeView()
+        ///             .Name("TreeView")
+        ///             .DataSpriteCssClassField("IconSprite")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TreeViewBuilder DataSpriteCssClassField(string field)
+        {
+            Component.DataSpriteCssClassField = field;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the name of the field that will supply the URL for the item image.
+        /// </summary>
+        /// <param name="field">The field name.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().TreeView()
+        ///             .Name("TreeView")
+        ///             .DataImageUrlField("ImageURL")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TreeViewBuilder DataImageUrlField(string field)
+        {
+            Component.DataImageUrlField = field;
+
+            return this;
+        }
+
+        /// <summary>
         /// Configure the DataSource of the component
         /// </summary>
         /// <param name="configurator">The action that configures the <see cref="ReadOnlyDataSource"/>.</param>
