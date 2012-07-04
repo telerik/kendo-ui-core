@@ -10,9 +10,8 @@ namespace Kendo.Controllers
 {
     public class SourceController : BaseController
     {
-
-        private static readonly string fileName = "{0}.{1}";
-        private static readonly string sourceUrl = "~/Areas/{0}/Views/{1}/{2}/{3}";
+        private static readonly string fileNamePattern = "{0}.{1}";
+        private static readonly string sourceUrlPattern = "~/sources/{0}/{1}/{2}/{3}";
         private static readonly IDictionary<String, String> availableSources =
             new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
                 { "aspx", "aspx" },
@@ -21,6 +20,7 @@ namespace Kendo.Controllers
 
         //
         // GET: /suite/section/example.src.html
+        // GET: /sources/{aspx|razor}/suite/section/example
 
         public ActionResult Index(string suite, string section, string example, string area)
         {
@@ -34,15 +34,10 @@ namespace Kendo.Controllers
             }
             else if (availableSources.ContainsKey(area))
             {
-                var extension = availableSources[area];
-                var name = string.Format(fileName, example.Replace("-", "_"), extension);
-                var url = string.Format(sourceUrl, area, suite, section.Replace("-", "_"), name);
-
+                var url = GenerateUrl(area, suite, section, example, availableSources[area]);
                 if (IOFile.Exists(Server.MapPath(url)))
                 {
-                    var content = IOFile.ReadAllText(Server.MapPath(url));
-                    source = "<pre id='code' class='codeContainer prettyprint'>" + HttpUtility.HtmlEncode(content) + "</pre>";
-
+                    source = DecodeContent(IOFile.ReadAllText(Server.MapPath(url)));
                 }
             }
 
@@ -64,8 +59,13 @@ namespace Kendo.Controllers
                 var viewContext = new ViewContext(ControllerContext, viewResult.View, ViewData, TempData, writer);
                 viewResult.View.Render(viewContext, writer);
 
-                return "<pre id='code' class='codeContainer prettyprint'>" + HttpUtility.HtmlEncode(writer.GetStringBuilder().ToString()) + "</pre>";
+                return DecodeContent(writer.GetStringBuilder().ToString());
             }
+        }
+
+        private string DecodeContent(string source)
+        {
+            return "<pre id='code' class='codeContainer prettyprint'>" + HttpUtility.HtmlEncode(source) + "</pre>";
         }
 
         private List<SelectListItem> GenerateSourceItems(string suite, string section, string example)
@@ -81,20 +81,24 @@ namespace Kendo.Controllers
 
             foreach (var pair in availableSources)
             {
-                var name = string.Format(fileName, example.Replace("-", "_"), pair.Value);
-                var url = string.Format(sourceUrl, pair.Key, suite, section.Replace("-", "_"), name);
+                var url = GenerateUrl(pair.Key, suite, section, example, pair.Value);
                 if (IOFile.Exists(Server.MapPath(url)))
                 {
                     list.Add(new SelectListItem
                     {
-                        Text = name,
-                        //what routeURl should I use ???
+                        Text = string.Format(fileNamePattern, example, pair.Value),
                         Value = Url.RouteUrl("Source", new { suite = suite, section = section, example = example, area = pair.Key })
                     });
                 }
             }
 
             return list;
+        }
+
+        private string GenerateUrl(string area, string suite, string section, string example, string extension)
+        {
+            var name = string.Format(fileNamePattern, example.Replace("-", "_"), extension);
+            return string.Format(sourceUrlPattern, area, suite, section.Replace("-", "_"), name);
         }
     }
 }

@@ -5,21 +5,17 @@
 <div id="sourceView"></div>
 <script>
     $(function() {
-        var sources = $("#sources").kendoDropDownList({
-                change: function() {
-                    $.get(sources.val(), function(data) {
-                        sourceView.html(data);
-                        $("pre").addClass("prettyprint");
-                        prettyPrint();
-                    });
-                }
-            }),
+        var sources = $("#sources").kendoDropDownList({ change: load }),
             sourceView = $("#sourceView");
 
-        $.get(sources.val(), function(data) {
-            sourceView.html(data);
-            $("pre").addClass("prettyprint");
-            prettyPrint();
-        });
+        function load() {
+            $.get(sources.val(), function(data) {
+                sourceView.html(data);
+                $("pre").addClass("prettyprint");
+                prettyPrint();
+            });
+        };
+
+        load();
     });
 </script>
