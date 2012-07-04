@@ -32,7 +32,15 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>Sets the value of the range slider.</summary>
         public RangeSliderBuilder<T> Values(T[] range)
         {
-            if (range != null && range.Count() >= 1)
+            if (range == null)
+            {
+                Component.SelectionStart = null;
+                Component.SelectionEnd = null;
+
+                return this;
+            }
+ 
+            if (range.Count() >= 1)
             {
                 Component.SelectionStart = range.First();
             }
