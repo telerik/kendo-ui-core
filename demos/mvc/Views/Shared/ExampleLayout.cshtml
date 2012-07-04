@@ -123,7 +123,7 @@
                     //add demo source code
                     codestrip.insertAfter({
                         text: "Demo source code",
-                        contentUrl: "@Url.RouteUrl("Source", new { suite = ViewBag.suite, section = ViewBag.Section, example = ViewBag.Example })"
+                        contentUrl: "@Url.RouteUrl(ViewBag.suite == "mobile" ? "Source" : "SourceView", new { suite = ViewBag.suite, section = ViewBag.Section, example = ViewBag.Example })"
                     }, codestrip.select());
 
                     //prettify pre tags

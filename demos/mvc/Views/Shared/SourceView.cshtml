@@ -1,0 +1,21 @@
+<div>
+    <span>Sources: </span>
+    @(Html.DropDownList("sources", ViewBag.Sources as IEnumerable<SelectListItem>))
+</div>
+<div id="sourceView"></div>
+<script>
+    $(function() {
+        var sources = $("#sources").kendoDropDownList({ change: load }),
+            sourceView = $("#sourceView");
+
+        function load() {
+            $.get(sources.val(), function(data) {
+                sourceView.html(data);
+                $("pre").addClass("prettyprint");
+                prettyPrint();
+            });
+        };
+
+        load();
+    });
+</script>

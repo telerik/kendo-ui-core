@@ -105,6 +105,12 @@ namespace Kendo
                 "{controller}/{action}",
                 new { controller = "Home", action = "Index" }
             );
+
+            routes.MapRoute(
+                "SourceView",
+                "Source/SourceView",
+                new { controller = "Source", action = "SourceView" }
+            );
         }
 
         protected void Application_Start()
