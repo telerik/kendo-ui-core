@@ -464,6 +464,7 @@
             "description": "The TreeView widget displays hierarchical data in a traditional tree structure,with support for interactive drag-and-drop operations.",
             "source": "kendo.treeview.min.js",
             "depends": [
+                "data",
                 "draganddrop"
             ]
         },
