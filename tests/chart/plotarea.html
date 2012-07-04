@@ -9,6 +9,7 @@
     </head>
     <body>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.dataviz.core.js"></script>
         <script src="../../src/kendo.dataviz.chart.js"></script>
         <script src="../../src/kendo.dataviz.themes.js"></script>
@@ -1121,6 +1122,98 @@
             })();
 
             (function() {
+                var chart,
+                    bar,
+                    barElement,
+                    plotArea;
+
+                var TOLERANCE = 5;
+
+                function createBarChart(options) {
+                    chart = createChart($.extend({
+                        series: [{
+                            type: "bar",
+                            data: [1, 2]
+                        }],
+                        categoryAxis: {
+                            categories: ["A", "B"]
+                        }
+                    }, options));
+
+                    plotArea = chart._model.children[1];
+                    bar = plotArea.charts[0].points[0];
+                    barElement = $("#" + bar.options.id);
+                }
+
+                // ------------------------------------------------------------
+                module("Categorical Plot Area / Events / plotAreaClick", {
+                    teardown: destroyChart
+                });
+
+                test("point click bubbles to plot area", 1, function() {
+                    createBarChart({
+                        plotAreaClick: function() { ok(true); }
+                    });
+
+                    barElement.trigger({
+                        type: "click", clientX: 300, clientY: 300
+                    });
+                });
+
+                test("fires when clicking plot area directly", 1, function() {
+                    createBarChart({
+                        plotAreaClick: function() { ok(true); }
+                    });
+
+                    $("#" + plotArea.options.id).trigger({
+                        type: "click", clientX: 300, clientY: 300
+                    });
+                });
+
+                test("does not fire when clicking outside of axis range", 0, function() {
+                    createBarChart({
+                        plotAreaClick: function() { ok(false); }
+                    });
+
+                    $("#" + plotArea.options.id).trigger({
+                        type: "click", clientX: 3000, clientY: 0
+                    });
+                });
+
+                test("event arguments contain value", 1, function() {
+                    createBarChart({
+                        plotAreaClick: function(e) { equals(e.value, 0.4, TOLERANCE); }
+                    });
+
+                    $("#" + plotArea.options.id).trigger({
+                        type: "click", clientX: 300, clientY: 0
+                    });
+                });
+
+                test("event arguments contain multiple values", 1, function() {
+                    createBarChart({
+                        valueAxis: [{}, { name: "b", min: 100, max: 1000 }],
+                        plotAreaClick: function(e) { same(e.value, [1, 255], TOLERANCE); }
+                    });
+
+                    $("#" + plotArea.options.id).trigger({
+                        type: "click", clientX: 300, clientY: 300
+                    });
+                });
+
+                test("event arguments contain category", 1, function() {
+                    createBarChart({
+                        plotAreaClick: function(e) { equals(e.category, "B"); }
+                    });
+
+                    $("#" + plotArea.options.id).trigger({
+                        type: "click", clientX: 300, clientY: 300
+                    });
+                });
+
+            })();
+
+            (function() {
                 var plotArea,
                     categoryAxis,
                     namedXAxes,
@@ -1580,6 +1673,106 @@
                 });
 
             })();
+
+            (function() {
+                var chart,
+                    point,
+                    pointElement,
+                    plotArea,
+                    TOLERANCE = 1;
+
+                function createScatterChart(options) {
+                    chart = createChart($.extend({
+                        series: [{
+                            name: "Value A",
+                            type: "scatter",
+                            data: [[100, 100]]
+                        }]
+                    }, options));
+
+                    plotArea = chart._model.children[1];
+                    point = plotArea.charts[0].points[0];
+                    pointElement = $("#" + point.options.id);
+                }
+
+                // ------------------------------------------------------------
+                module("XY Plot Area / Events / plotAreaClick", {
+                    teardown: destroyChart
+                });
+
+                test("point click bubbles to plot area", 1, function() {
+                    createScatterChart({
+                        plotAreaClick: function() { ok(true); }
+                    });
+
+                    pointElement.trigger({
+                        type: "click", clientX: 300, clientY: 300
+                    });
+                });
+
+                test("fires when clicking plot area directly", 1, function() {
+                    createScatterChart({
+                        plotAreaClick: function() { ok(true); }
+                    });
+
+                    $("#" + plotArea.options.id).trigger({
+                        type: "click", clientX: 300, clientY: 300
+                    });
+                });
+
+                test("does not fire when clicking outside of axis range", 0, function() {
+                    createScatterChart({
+                        plotAreaClick: function() { ok(false); }
+                    });
+
+                    $("#" + plotArea.options.id).trigger({
+                        type: "click", clientX: 3000, clientY: 0
+                    });
+                });
+
+                test("event arguments contain x axis value", 1, function() {
+                    createScatterChart({
+                        plotAreaClick: function(e) { equals(e.x, 12, TOLERANCE); }
+                    });
+
+                    $("#" + plotArea.options.id).trigger({
+                        type: "click", clientX: 200, clientY: 500
+                    });
+                });
+
+                test("event arguments contain multiple x axis values", 1, function() {
+                    createScatterChart({
+                        xAxis: [{}, { name: "b", min: 100, max: 1000 }],
+                        plotAreaClick: function(e) { same(e.x, [12, 193], TOLERANCE); }
+                    });
+
+                    $("#" + plotArea.options.id).trigger({
+                        type: "click", clientX: 200, clientY: 500
+                    });
+                });
+
+                test("event arguments contain y axis value", 1, function() {
+                    createScatterChart({
+                        plotAreaClick: function(e) { equals(e.y, 16, TOLERANCE); }
+                    });
+
+                    $("#" + plotArea.options.id).trigger({
+                        type: "click", clientX: 200, clientY: 500
+                    });
+                });
+
+                test("event arguments contain multiple y axis values", 1, function() {
+                    createScatterChart({
+                        yAxis: [{}, { name: "b", min: 100, max: 1000 }],
+                        plotAreaClick: function(e) { same(e.y, [16, 223], TOLERANCE); }
+                    });
+
+                    $("#" + plotArea.options.id).trigger({
+                        type: "click", clientX: 200, clientY: 500
+                    });
+                });
+
+            })();
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>
@@ -1589,6 +1782,9 @@
         <ol id="qunit-tests"></ol>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
+
+        <div id="container">
+        </div>
 
     </body>
 </html>

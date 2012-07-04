@@ -97,6 +97,7 @@
         OUTLINE_SUFFIX = "_outline",
         PIE = "pie",
         PIE_SECTOR_ANIM_DELAY = 70,
+        PLOT_AREA_CLICK = "plotAreaClick",
         PRIMARY = "primary",
         RIGHT = "right",
         ROUNDED_BEVEL = "roundedBevel",
@@ -205,7 +206,8 @@
             DATABOUND,
             SERIES_CLICK,
             SERIES_HOVER,
-            AXIS_LABEL_CLICK
+            AXIS_LABEL_CLICK,
+            PLOT_AREA_CLICK
         ],
 
         items: function() {
@@ -415,8 +417,12 @@
             var chart = this,
                 element = chart._getChartElement(e);
 
-            if (element && element.click) {
-                element.click(this, e);
+            while (element) {
+                if (element.click) {
+                    element.click(chart, e);
+                }
+
+                element = element.parent;
             }
         },
 
@@ -1008,6 +1014,32 @@
             return slotBox;
         },
 
+        getCategory: function(point) {
+            var axis = this,
+                options = axis.options,
+                reverse = options.reverse,
+                vertical = options.vertical,
+                valueAxis = vertical ? Y : X,
+                lineBox = axis.lineBox(),
+                lineStart = lineBox[valueAxis + (reverse ? 2 : 1)],
+                lineSize = vertical ? lineBox.height() : lineBox.width(),
+                intervals = math.max(1, options.categories.length - 1),
+                offset = (reverse ? -1 : 1) * (point[valueAxis] - lineStart),
+                step = intervals / lineSize,
+                categoriesOffset = round(offset * step),
+                categoryIx;
+
+            if (offset < 0 || offset > lineSize) {
+                return null;
+            }
+
+            categoryIx = vertical ?
+                intervals - categoriesOffset:
+                categoriesOffset;
+
+            return options.categories[categoryIx];
+        },
+
         labelsCount: function() {
             return this.options.categories.length;
         },
@@ -1252,6 +1284,12 @@
             return NumericAxis.fn.getSlot.call(
                 this, toDate(a), toDate(b)
             );
+        },
+
+        getValue: function(point) {
+            var value = NumericAxis.fn.getValue.call(this, point);
+
+            return value !== null ? toDate(value) : null;
         },
 
         labelsCount: function() {
@@ -3838,6 +3876,8 @@
             plotArea.options.legend.items = [];
             plotArea.axes = [];
 
+            plotArea.options.id = uniqueId();
+            plotArea.makeDiscoverable();
             plotArea.render();
         },
 
@@ -4138,7 +4178,8 @@
         },
 
         renderGridLines: function(view, axis, secondaryAxis) {
-            var options = axis.options,
+            var plotArea = this,
+                options = axis.options,
                 vertical = options.vertical,
                 crossingSlot = axis.getSlot(options.axisCrossingValue),
                 secAxisPos = round(crossingSlot[vertical ? "y1" : "x1"]),
@@ -4176,6 +4217,7 @@
 
             return map(gridLines, function(line) {
                 var gridLineOptions = {
+                        data: { modelId: plotArea.options.modelId },
                         strokeWidth: line.options.width,
                         stroke: line.options.color,
                         dashType: line.options.dashType
@@ -4200,23 +4242,27 @@
 
         getViewElements: function(view) {
             var plotArea = this,
-                options = plotArea.options.plotArea,
+                options = plotArea.options,
+                userOptions = options.plotArea,
                 axisY = plotArea.axisY,
                 axisX = plotArea.axisX,
                 gridLinesY = axisY ? plotArea.renderGridLines(view, axisY, axisX) : [],
                 gridLinesX = axisX ? plotArea.renderGridLines(view, axisX, axisY) : [],
                 childElements = ChartElement.fn.getViewElements.call(plotArea, view),
-                border = options.border || {},
+                border = userOptions.border || {},
                 elements = [
                     view.createRect(plotArea.box, {
-                        fill: options.background,
-                        zIndex: -1
+                        fill: userOptions.background,
+                        zIndex: -2
                     }),
                     view.createRect(plotArea.box, {
+                        id: options.id,
+                        data: { modelId: options.modelId },
                         stroke: border.width ? border.color : "",
                         strokeWidth: border.width,
-                        fill: "",
-                        zIndex: 0,
+                        fill: WHITE,
+                        fillOpacity: 0,
+                        zIndex: -1,
                         dashType: border.dashType
                     })
                 ];
@@ -4474,6 +4520,38 @@
             } else {
                 plotArea.axisY = primaryValueAxis;
             }
+        },
+
+        click: function(chart, e) {
+            var plotArea = this,
+                coords = chart._eventCoordinates(e),
+                point = new Point2D(coords.x, coords.y),
+                categoryAxis = plotArea.categoryAxis,
+                allAxes = plotArea.axes,
+                i,
+                length = allAxes.length,
+                axis,
+                currentValue,
+                category = categoryAxis.getCategory(point),
+                values = [];
+
+            for (i = 0; i < length; i++) {
+                axis = allAxes[i];
+                if (axis != categoryAxis) {
+                    currentValue = axis.getValue(point);
+                    if (currentValue !== null) {
+                        values.push(currentValue);
+                    }
+                }
+            }
+
+            if (defined(category) && values.length > 0) {
+                chart.trigger(PLOT_AREA_CLICK, {
+                    element: $(e.target),
+                    category: category,
+                    value: singleItemOrArray(values)
+                });
+            }
         }
     });
 
@@ -4651,6 +4729,37 @@
             // TODO: Remove axisX and axisY aliases
             plotArea.axisX = plotArea.namedXAxes.primary || plotArea.namedXAxes[xAxesOptions[0].name];
             plotArea.axisY = plotArea.namedYAxes.primary || plotArea.namedYAxes[yAxesOptions[0].name];
+        },
+
+        click: function(chart, e) {
+            var plotArea = this,
+                coords = chart._eventCoordinates(e),
+                point = new Point2D(coords.x, coords.y),
+                allAxes = plotArea.axes,
+                i,
+                length = allAxes.length,
+                axis,
+                xValues = [],
+                yValues = [],
+                currentValue,
+                values;
+
+            for (i = 0; i < length; i++) {
+                axis = allAxes[i];
+                values = axis.options.vertical ? yValues : xValues;
+                currentValue = axis.getValue(point);
+                if (currentValue !== null) {
+                    values.push(currentValue);
+                }
+            }
+
+            if (xValues.length > 0 && yValues.length > 0) {
+                chart.trigger(PLOT_AREA_CLICK, {
+                    element: $(e.target),
+                    x: singleItemOrArray(xValues),
+                    y: singleItemOrArray(yValues)
+                });
+            }
         }
     });
 
@@ -5329,6 +5438,10 @@
         }
 
         return sourceFields;
+    }
+
+    function singleItemOrArray(array) {
+        return array.length === 1 ? array[0] : array;
     }
 
     // Exports ================================================================
