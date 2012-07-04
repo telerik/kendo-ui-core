@@ -733,7 +733,7 @@
             var progressBar = $(".k-progress-status", e.target);
             if (progressBar.length == 0) {
                 progressBar =
-                    $("<span class='k-progress'><span class='k-progress-status' style='width: 0;'></span></span>")
+                    $("<span class='k-progress'><span class='k-state-selected k-progress-status' style='width: 0;'></span></span>")
                         .appendTo($(".k-filename", e.target))
                         .find(".k-progress-status");
             }
