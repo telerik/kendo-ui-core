@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.ui.ColumnMenu Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.calendar.js"></script>
+        <script src="../../src/kendo.datepicker.js"></script>
+        <script src="../../src/kendo.numerictextbox.js"></script>
+        <script src="../../src/kendo.dropdownlist.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.filtermenu.js"></script>
+        <script src="../../src/kendo.menu.js"></script>
+        <script src="../../src/kendo.columnmenu.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.model.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.ui.ColumnMenu Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            kendo.ns = "kendo-";
+            var DataSource = kendo.data.DataSource,
+                ColumnMenu = kendo.ui.ColumnMenu,
+                dom,
+                dataSource;
+
+
+            module("kendo.ui.ColumnMenu", {
+                setup: function() {
+                    dataSource = new DataSource({
+                        schema: {
+                            model: {
+                                fields: {
+                                    foo: {
+                                        type: "string"
+                                    },
+                                    bar: {
+                                        type: "number"
+                                    },
+                                    baz: {
+                                        type: "date"
+                                    },
+                                    boo: {
+                                        type: "boolean"
+                                    }
+                                }
+                            }
+                        }
+                    });
+
+                    dom = $("<div data-kendo-field=foo ></div>");
+                    dom.appendTo(document.body);
+                },
+                teardown: function() {
+                    $(".k-filter-menu").remove();
+                    dom.remove();
+                }
+            });
+
+            function setup(options) {
+                options = $.extend(true, {}, {
+                    dataSource: dataSource,
+                    fields: $.noop
+                }, options);
+
+                var menu = new ColumnMenu(dom, options);
+                menu.menu.options.hoverDelay = 1;
+
+                return menu;
+            }
+
+            test("column menu is initialized", function() {
+                setup();
+                var menu = dom.data("kendoColumnMenu");
+
+                ok(menu instanceof ColumnMenu);
+                equal(menu.field, "foo");
+            });
+
+            test("popup is initialized over the wrapper", function() {
+                var menu = setup();
+
+                ok(menu.wrapper.data("kendoPopup"));
+            });
+
+            test("clicking the link toggles popup visibility", function() {
+                var menu = setup();
+
+                menu.wrapper.data("kendoPopup").toggle();
+                menu.link.click();
+
+                ok(!menu.wrapper.is(":visible"));
+            });
+
+            test("sort option as true boolean", function() {
+                var menu = setup({
+                    sort: true
+                });
+
+                equal(menu.options.sort.asc, "Sort Ascending");
+                equal(menu.options.sort.desc, "Sort Descending");
+            });
+
+            test("sort option as false boolean", function() {
+                var menu = setup({
+                    sort: false
+                });
+
+                equal(menu.options.sort, false);
+            });
+
+            test("changing default sort options", function() {
+                var menu = setup({
+                    sort: { asc: "foo" }
+                });
+
+                equal(menu.options.sort.asc, "foo");
+                equal(menu.options.sort.desc, "Sort Descending");
+            });
+
+            test("filter option as true boolean", function() {
+                var menu = setup({ filter: true });
+
+                equal(menu.options.filter, "Filter");
+            });
+
+            test("changing default filter option", function() {
+                var menu = setup({ filter: "foo" });
+
+                equal(menu.options.filter, "foo");
+            });
+
+            test("columns option as true boolean", function() {
+                var menu = setup({ columns: true });
+
+                equal(menu.options.columns, "Columns");
+            });
+
+            test("changing default columns option", function() {
+                var menu = setup({ columns: "foo" });
+
+                equal(menu.options.columns, "foo");
+            });
+
+            asyncTest("opening menu refresh columns checkboxes", function() {
+                var columnMenu = setup({
+                    fields: function() {
+                        return [{ field: "foo" }, { field: "bar", hidden: true }];
+                    }
+                });
+
+                columnMenu.menu.open(columnMenu.wrapper.find(".k-columns-item"));
+
+                setTimeout(function() {
+                    var checkboxes = columnMenu.wrapper.find("[type=checkbox]");
+                    equal(checkboxes.length, 2);
+                    ok(checkboxes.eq(0).attr("checked"));
+                    ok(!checkboxes.eq(1).attr("checked"));
+                    start();
+                }, 1);
+            });
+
+            asyncTest("columns checkbox is disabled when only one visible column left", function() {
+                var columnMenu = setup({
+                    fields: function() {
+                        return [{ field: "foo" }, { field: "bar", hidden: true }];
+                    }
+                });
+
+                columnMenu.menu.open(columnMenu.wrapper.find(".k-columns-item"));
+
+                setTimeout(function() {
+                    var checkboxes = columnMenu.wrapper.find("[type=checkbox]");
+                    ok(checkboxes.eq(0).attr("disabled"));
+                    ok(!checkboxes.eq(1).attr("disabled"));
+                    start();
+                }, 1);
+            });
+        </script>
+    </body>
+</html>

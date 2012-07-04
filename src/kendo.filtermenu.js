@@ -4,6 +4,7 @@
         NUMERICTEXTBOX = "kendoNumericTextBox",
         DATEPICKER = "kendoDatePicker",
         proxy = $.proxy,
+        noop = $.noop,
         POPUP = "kendoPopup",
         EQ = "Is equal to",
         NEQ = "Is not equal to",
@@ -105,17 +106,21 @@
             element = that.element;
             options = that.options;
 
-            link = element.addClass("k-filterable").find(".k-grid-filter");
+            if (!options.appendToElement) {
+                link = element.addClass("k-filterable").find(".k-grid-filter");
 
-            if (!link[0]) {
-                link = element.prepend('<a class="k-grid-filter" href="#"><span class="k-icon k-filter"/></a>').find(".k-grid-filter");
+                if (!link[0]) {
+                    link = element.prepend('<a class="k-grid-filter" href="#"><span class="k-icon k-filter"/></a>').find(".k-grid-filter");
+                }
+                that._clickHandler = proxy(that._click, that);
+                link.click(that._clickHandler);
+            } else {
+                that.link = $();
             }
-            that._clickHandler = proxy(that._click, that);
-            link.click(that._clickHandler);
 
             that.dataSource = options.dataSource.bind("change", proxy(that.refresh, that));
 
-            that.field = element.attr(kendo.attr("field"));
+            that.field = options.field || element.attr(kendo.attr("field"));
 
             that.model = that.dataSource.reader.model;
 
@@ -138,7 +143,7 @@
 
             operators = operators[type] || options.operators[type];
 
-            that.form = $('<form class="k-filter-menu k-group"/>');
+            that.form = $('<form class="k-filter-menu"/>');
 
             that.form.html(kendo.template(type === "boolean" ? booleanTemplate : defaultTemplate)({
                 field: that.field,
@@ -150,12 +155,20 @@
                 values: convertItems(options.values)
             }));
 
-            that.popup = that.form[POPUP]({
-                anchor: link,
-                open: proxy(that._open, that)
-            }).data(POPUP);
+            if (!options.appendToElement) {
+                that.popup = that.form[POPUP]({
+                    anchor: link,
+                    open: proxy(that._open, that)
+                }).data(POPUP);
 
-            that.link = link;
+                that.link = link;
+            } else {
+                element.append(that.form);
+                that.popup = {
+                    toggle: noop,
+                    close: noop
+                };
+            }
 
             that.form
                 .bind({
@@ -336,6 +349,7 @@
         options: {
             name: "FilterMenu",
             extra: true,
+            appendToElement: false,
             type: "string",
             operators: {
                 string: {
