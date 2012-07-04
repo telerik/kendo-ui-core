@@ -713,7 +713,7 @@
         {
             "id": "aspnetmvc",
             "name": "ASP.NET MVC",
-            "category": "server wrappers",
+            "category": "wrappers",
             "description": "Scripts required by Kendo UI for ASP.NET MVC",
             "source": "kendo.aspnetmvc.min.js",
             "depends": [
