@@ -1329,16 +1329,23 @@
         onRequestSuccess: function(e, fileEntry) {
             var xhr = e.target,
                 module = this;
-            tryParseJSON(xhr.responseText,
-                function(jsonResult) {
-                    fileEntry.trigger("t:upload-success", [ jsonResult, xhr ]);
-                    fileEntry.trigger("t:progress", [ 100 ]);
-                    module.cleanupFileEntry(fileEntry);
-                },
-                function() {
-                    fileEntry.trigger("t:upload-error", [ xhr ]);
-                }
-            );
+
+            function raiseError() {
+                fileEntry.trigger("t:upload-error", [ xhr ]);
+            }
+
+            if (xhr.status >= 200 && xhr.status <= 299) {
+                tryParseJSON(xhr.responseText,
+                    function(jsonResult) {
+                        fileEntry.trigger("t:upload-success", [ jsonResult, xhr ]);
+                        fileEntry.trigger("t:progress", [ 100 ]);
+                        module.cleanupFileEntry(fileEntry);
+                    },
+                    raiseError
+                );
+            } else {
+                raiseError();
+            }
         },
 
         onRequestError: function(e, fileEntry) {

@@ -48,14 +48,14 @@
 
             function simulateRequestSuccess(fileIndex, response) {
                 uploadInstance._module.onRequestSuccess(
-                    { target: { responseText: response || "", statusText: "OK", status: "200" } },
+                    { target: { responseText: response || "", statusText: "OK", status: 200 } },
                     $(".k-file", uploadInstance.wrapper).eq(fileIndex)
                 );
             }
 
             function simulateRequestError(fileIndex, response) {
                 uploadInstance._module.onRequestError(
-                    { target: { responseText: response || "", statusText: "error", status: "500" } },
+                    { target: { responseText: response || "", statusText: "error", status: 500 } },
                     $(".k-file", uploadInstance.wrapper).eq(fileIndex)
                 );
             }
@@ -210,7 +210,7 @@
 
                 var fileEntry = $(".k-file:first", uploadInstance.wrapper);
 
-                uploadInstance._module.onRequestSuccess({ target: { responseText: "" } }, fileEntry);
+                uploadInstance._module.onRequestSuccess({ target: { responseText: "", status: 200 } }, fileEntry);
 
                 equal($(".marker", uploadInstance.wrapper).length, 0);
             });
@@ -223,12 +223,12 @@
                 uploadInstance.element.removeClass("marker");
 
                 var fileEntry = $(".k-file:nth-child(1)", uploadInstance.wrapper);
-                uploadInstance._module.onRequestSuccess({ target: { responseText: "" } }, fileEntry);
+                uploadInstance._module.onRequestSuccess({ target: { responseText: "", status: 200 } }, fileEntry);
 
                 equal($(".marker", uploadInstance.wrapper).length, 1);
 
                 fileEntry = $(".k-file:nth-child(2)", uploadInstance.wrapper);
-                uploadInstance._module.onRequestSuccess({ target: { responseText: "" } }, fileEntry);
+                uploadInstance._module.onRequestSuccess({ target: { responseText: "", status: 200 } }, fileEntry);
 
                 equal($(".marker", uploadInstance.wrapper).length, 0);
             });
@@ -269,6 +269,23 @@
                 $(".k-retry", uploadInstance.wrapper).trigger("click");
 
                 ok(postFormDataCalled);
+            });
+
+            test("Error event is raised when response code is above 299", function() {
+                var errorFired = false;
+                uploadInstance = createUpload({ error:
+                    function() {
+                        errorFired = true;
+                    }
+                });
+
+                simulateFileSelect();
+                uploadInstance._module.onRequestSuccess(
+                    { target: { responseText: "", statusText: "ERROR", status: 500 } },
+                    $(".k-file", uploadInstance.wrapper).eq(0)
+                );
+
+                ok(errorFired);
             });
         </script>
 
@@ -381,7 +398,7 @@
 
                 simulateFileSelect();
                 $(".k-upload-selected", uploadInstance.wrapper).trigger("click");
-                uploadInstance._module.onRequestSuccess({ target: { responseText: "" } }, $(".k-file", uploadInstance.wrapper));
+                uploadInstance._module.onRequestSuccess({ target: { responseText: "", status: 200 } }, $(".k-file", uploadInstance.wrapper));
 
                 $(".k-delete", uploadInstance.wrapper).trigger("click");
                 ok(removeCalled);
