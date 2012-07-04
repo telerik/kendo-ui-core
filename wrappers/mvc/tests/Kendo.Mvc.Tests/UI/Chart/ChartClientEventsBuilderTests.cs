@@ -127,5 +127,31 @@ namespace Kendo.Mvc.UI.Tests.Chart
         {
             builder.AxisLabelClick(handlerName).ShouldBeType<ChartEventBuilder>();
         }
+
+        [Fact]
+        public void PlotAreaClick_with_Func_should_set_InlineCodeBlock()
+        {
+            builder.PlotAreaClick(nullFunc);
+            clientEvents["plotAreaClick"].ShouldNotBeNull();
+        }
+
+        [Fact]
+        public void PlotAreaClick_with_Func_should_return_builder()
+        {
+            builder.PlotAreaClick(nullFunc).ShouldBeType<ChartEventBuilder>();
+        }
+
+        [Fact]
+        public void PlotAreaClick_with_string_should_set_HandlerName()
+        {
+            builder.PlotAreaClick(handlerName);
+            ((ClientEvent)clientEvents["plotAreaClick"]).HandlerName.ShouldEqual(handlerName);
+        }
+
+        [Fact]
+        public void PlotAreaClick_with_string_should_return_builder()
+        {
+            builder.PlotAreaClick(handlerName).ShouldBeType<ChartEventBuilder>();
+        }
     }
 }

@@ -180,7 +180,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         ///  Defines the name of the JavaScript function that will handle the the SeriesHover client-side event.
         /// </summary>
-        /// <param name="onSeriesClickHandlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <param name="onSeriesHoverHandlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;%= Html.Kendo().Chart()
@@ -225,7 +225,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         ///  Defines the name of the JavaScript function that will handle the the AxisLabelClick client-side event.
         /// </summary>
-        /// <param name="onSeriesClickHandlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <param name="onAxisLabelClickHandlerName">The name of the JavaScript function that will handle the event.</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;%= Html.Kendo().Chart()
@@ -237,6 +237,51 @@ namespace Kendo.Mvc.UI.Fluent
         public ChartEventBuilder AxisLabelClick(string onAxisLabelClickHandlerName)
         {
             Handler("axisLabelClick", onAxisLabelClickHandlerName);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the inline handler of the PlotAreaClick client-side event
+        /// </summary>
+        /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .Events(events => events.PlotAreaClick(
+        ///                @&lt;text&gt;
+        ///                function(e) {
+        ///                    //event handling code
+        ///                }
+        ///                &lt;/text&gt;
+        ///           ))
+        ///           .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartEventBuilder PlotAreaClick(Func<object, object> inlineCodeBlock)
+        {
+            Handler("plotAreaClick", inlineCodeBlock);
+
+            return this;
+        }
+
+        /// <summary>
+        ///  Defines the name of the JavaScript function that will handle the the PlotAreaClick client-side event.
+        /// </summary>
+        /// <param name="onPlotAreaClickHandlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Events(events => events.PlotAreaClick("onPlotAreaClick"))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartEventBuilder PlotAreaClick(string onPlotAreaClickHandlerName)
+        {
+            Handler("plotAreaClick", onPlotAreaClickHandlerName);
 
             return this;
         }

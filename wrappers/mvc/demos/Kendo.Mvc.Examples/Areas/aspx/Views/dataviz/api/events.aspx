@@ -36,6 +36,7 @@
             .SeriesHover("onSeriesHover")
             .DataBound("onDataBound")
             .AxisLabelClick("onAxisLabelClick")
+            .PlotAreaClick("onPlotAreaClick")
         )
     %>
 </div>
@@ -59,6 +60,11 @@
         kendoConsole.log(kendo.format("Axis label click :: {0} axis : {1}",
             e.axis.type, e.text));
     }
+
+    function onPlotAreaClick(e) {
+        kendoConsole.log(kendo.format("Plot area click :: {0} : {1:N0}",
+            e.category, e.value
+    ));
 </script>
 
 <div class="console"></div>
