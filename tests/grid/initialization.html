@@ -115,6 +115,13 @@
                 equal(grid.table.find("tr:nth(1)>td").text(), "bar bar");
             });
 
+            test("column format with sharps is applied", function() {
+                var grid = new Grid(table, { dataSource: [ {foo: 123}, {foo: 423 }], columns: [{ field: "foo", format: "{0:###.0}" }] });
+
+                equal(grid.table.find("tr:first>td").text(), "123.0");
+                equal(grid.table.find("tr:nth(1)>td").text(), "423.0");
+            });
+
             test("column initialization - groupable", function() {
                 var grid = new Grid(table, { dataSource: [], columns: [{ field: "foo", groupable: true }] });
 

@@ -41,7 +41,7 @@
         FUNCTION = "function",
         STRING = "string",
         DELETECONFIRM = "Are you sure you want to delete this record?",
-        formatRegExp = /\}/ig,
+        formatRegExp = /(\}|\#)/ig,
         indicatorWidth = 3,
         templateHashRegExp = /#/ig,
         COMMANDBUTTONTMPL = '<a class="k-button k-button-icontext #=className#" #=attr# href="\\#"><span class="#=iconClass# #=imageClass#"></span>#=text#</a>';
@@ -2149,7 +2149,7 @@
                 html += column.encoded ? "${" : "#=";
 
                 if (format) {
-                    html += 'kendo.format(\"' + format.replace(formatRegExp,"\\}") + '\",';
+                    html += 'kendo.format(\"' + format.replace(formatRegExp,"\\$1") + '\",';
                 }
 
                 if (!settings.useWithBlock) {
