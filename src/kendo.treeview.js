@@ -954,7 +954,7 @@
                 firstLevel = item.hasClass(KTREEVIEW),
                 group = {
                     firstLevel: firstLevel,
-                    expanded: firstLevel || item.attr(kendo.attr("expanded")) === "true"
+                    expanded: firstLevel || that._expanded(item)
                 },
                 groupElement = item.children("ul");
 
@@ -975,7 +975,7 @@
             nodes.each(function(i, node) {
                 node = $(node);
 
-                nodeData = { index: i, expanded: node.attr(kendo.attr("expanded")) === "true" };
+                nodeData = { index: i, expanded: that._expanded(node) };
 
                 updateNodeHtml(node);
 
@@ -999,15 +999,17 @@
          *
          */
         dataItem: function(node) {
-            var uid = $(node).closest(NODE).attr(kendo.attr("uid"));
+            var uid = $(node).closest(NODE).attr(kendo.attr("uid")),
+                dataSource = this.dataSource;
 
-            return this.dataSource.getByUid(uid);
+            return dataSource && dataSource.getByUid(uid);
         },
 
         _insertNode: function(nodeData, index, parentNode, insertCallback, collapsed) {
             var that = this,
                 group = subGroup(parentNode),
                 updatedGroupLength = group.children().length + 1,
+                childrenData,
                 groupData = {
                     firstLevel: parentNode.hasClass(KTREEVIEW),
                     expanded: !collapsed,
@@ -1055,8 +1057,10 @@
             for (i = 0; i < nodeData.length; i++) {
                 item = nodeData[i];
 
-                if (item.children.data().length) {
-                    that._insertNode(item.children.data(), item.index, node.eq(i), append, item.expanded);
+                childrenData = item.children.data();
+
+                if (childrenData.length) {
+                    that._insertNode(childrenData, item.index, node.eq(i), append, !that._expanded(node.eq(i)));
                 }
             }
 
@@ -1110,7 +1114,7 @@
 
                     append(items, parentNode, true);
 
-                    if (node.expanded) {
+                    if (that._expanded(parentNode)) {
                         that.expand(parentNode);
                     }
                 } else {
@@ -1297,7 +1301,7 @@
             }
 
             if (!that._trigger(isExpanding ? "expand" : "collapse", node)) {
-                dataItem.set("expanded", isExpanding);
+                that._expanded(node, isExpanding);
 
                 if (contents.children().length > 0) {
                     updateNodeClasses(node, {}, { expanded: isExpanding });
@@ -1320,6 +1324,25 @@
 
                     dataItem.load();
                 }
+            }
+        },
+
+        _expanded: function(node, value) {
+            var expandedAttr = kendo.attr("expanded"),
+                dataItem = this.dataItem(node);
+
+            if (arguments.length == 1) {
+                return node.attr(expandedAttr) === "true" || (dataItem && dataItem.expanded);
+            }
+
+            if (dataItem) {
+                dataItem.set("expanded", value);
+            }
+
+            if (value) {
+                node.attr(expandedAttr, "true");
+            } else {
+                node.removeAttr(expandedAttr);
             }
         },
 
@@ -1373,7 +1396,7 @@
 
                 if (!referenceDataItem.loaded()) {
                     referenceDataItem.load();
-                    referenceDataItem.set("expanded", true);
+                    that._expanded(parentNode, true);
                 }
 
                 if (parentNode != that.root) {
@@ -1497,13 +1520,18 @@
          *
          */
         append: function (nodeData, parentNode) {
-            var group = this.root;
+            var that = this,
+                group = that.root;
 
             if (parentNode) {
                 group = subGroup(parentNode);
             }
 
-            return this._dataSourceMove(nodeData, group, parentNode, function (dataSource, model) {
+            return that._dataSourceMove(nodeData, group, parentNode, function (dataSource, model) {
+                if (parentNode) {
+                    that._expanded(parentNode, true);
+                }
+
                 return dataSource.add(model);
             });
         },

@@ -434,6 +434,18 @@
                 ok(!changeTriggered);
             });
 
+            test("appending items to leaf nodes sets the expanded state of the leaf node", function() {
+                createTreeView([
+                    { text: "foo" }
+                ]);
+
+                var foo = treeviewObject.findByText("foo");
+
+                treeviewObject.append({ text: "bar" }, foo);
+
+                ok(treeviewObject.dataItem(foo).expanded);
+            });
+
             test("sorting subnodes behaves correctly", function() {
                 createTreeView({
                     dataSource: [
