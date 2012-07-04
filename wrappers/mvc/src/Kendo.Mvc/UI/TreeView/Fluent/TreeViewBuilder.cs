@@ -352,6 +352,22 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Configure the DataSource of the component
+        /// </summary>
+        /// <param name="configurator">The action that configures the <see cref="ReadOnlyDataSource"/>.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().TreeView()
+        ///     .Name("TreeView")
+        ///     .DataSource(dataSource => dataSource
+        ///         .Read(read => read
+        ///             .Action("Employees", "TreeView")
+        ///         )
+        ///     )
+        ///  %&gt;
+        /// </code>
+        /// </example>
         public TreeViewBuilder DataSource(Action<ReadOnlyDataSourceBuilder> configurator)
         {
             configurator(new ReadOnlyDataSourceBuilder(Component.DataSource, this.Component.ViewContext, this.Component.UrlGenerator));
