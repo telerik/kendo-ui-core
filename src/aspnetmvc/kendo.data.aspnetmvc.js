@@ -128,8 +128,12 @@
 
     function serializeFilter(filter) {
        if (filter.filters) {
-           return  $.map(filter.filters, function(f) {
-               return serializeFilter(f);
+           return $.map(filter.filters, function(f) {
+               var hasChildren = f.filters && f.filters.length > 1,
+                   result = hasChildren ? "(" : "";
+
+               result += serializeFilter(f);
+               return result + (hasChildren ? ")" : "");
            }).join("~" + filter.logic + "~");
        }
        return filter.field + "~" + filter.operator + "~" + encodeFilterValue(filter.value);
