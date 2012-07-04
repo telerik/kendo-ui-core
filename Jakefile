@@ -29,6 +29,9 @@ var CDN_ROOT = "http://cdn.kendostatic.com/",
     DEMOS_SHARED = path.join(DEMOS_PATH, "content", "shared"),
     DEMOS_STAGING_PATH = path.join(DEPLOY_PATH, "staging"),
     DEMOS_STAGING_CONTENT_PATH = path.join(DEMOS_STAGING_PATH, "content", "cdn"),
+    DEMOS_WRAPPERS_SOURCES = path.join(DEMOS_PATH, "sources"),
+    DEMOS_WRAPPERS_SOURCES_ASPX = path.join(DEMOS_WRAPPERS_SOURCES, "aspx"),
+    DEMOS_WRAPPERS_SOURCES_RAZOR = path.join(DEMOS_WRAPPERS_SOURCES, "razor"),
     DOCS_DEPLOY_PATH = path.join(DEMOS_PATH, "content", "docs"),
     BUILDER_PATH = "download-builder",
     BUILDER_STAGING_PATH = path.join(DEPLOY_PATH, "download-builder-staging"),
@@ -39,6 +42,9 @@ var CDN_ROOT = "http://cdn.kendostatic.com/",
     MVC_WRAPPERS_PATH = path.join("wrappers", "mvc"),
     MVC_WRAPPERS_PROJECT = path.join(MVC_WRAPPERS_PATH, "src", "Kendo.Mvc", "Kendo.Mvc.csproj"),
     MVC_WRAPPERS_DEMO_PROJECT = path.join(MVC_WRAPPERS_PATH, "demos", "Kendo.Mvc.Examples", "Kendo.Mvc.Examples.csproj"),
+    MVC_WRAPPERS_DEMO_AREAS_PATH = path.join("wrappers", "mvc", "demos", "Kendo.Mvc.Examples", "Areas"),
+    MVC_WRAPPERS_DEMO_AREAS_ASPX_PATH = path.join(MVC_WRAPPERS_DEMO_AREAS_PATH, "aspx", "Views"),
+    MVC_WRAPPERS_DEMO_AREAS_RAZOR_PATH = path.join(MVC_WRAPPERS_DEMO_AREAS_PATH, "razor", "Views"),
     THEMEBUILDER_LIVE_PATH = path.join(DEPLOY_PATH, "themebuilder.telerik.com"),
     THEMEBUILDER_LIVE_PACKAGE = path.join(DEPLOY_PATH, "themebuilder.zip"),
     RELEASE_PATH = "release",
@@ -113,7 +119,7 @@ namespace("demos", function() {
     }, true);
 
     desc("Build debug demos site");
-    task("debug", ["demos:less-js", "merge-scripts", "docs"], function () {
+    task("debug", ["demos:less-js", "demos:copy-wrappers-sources", "merge-scripts", "docs"], function () {
         kendoBuild.msBuild(
             path.join(DEMOS_PATH, DEMOS_PROJECT),
             [ "/t:Clean;Build", "/p:Configuration=Debug" ],
@@ -169,9 +175,23 @@ namespace("demos", function() {
         zip(DEMOS_LIVE_PACKAGE, DEMOS_LIVE_PATH, complete);
     }, true);
 
-    desc("Copy Areas folder from wrappers")
-    task("copy-areas", function() {
-        copyDir(path.join("wrappers", "mvc", "demos", "Kendo.Mvc.Examples", "Areas"), path.join("demos", "mvc", "Areas"));
+    desc("Copy server demo files from ASP.NET MVC wrappers")
+    task("copy-wrappers-sources", function() {
+        mkdir(DEMOS_WRAPPERS_SOURCES);
+        mkdir(DEMOS_WRAPPERS_SOURCES_ASPX);
+        mkdir(DEMOS_WRAPPERS_SOURCES_RAZOR);
+
+        console.log("Copy demo sources from wrappers");
+        ["web", "dataviz"].forEach(function(suite) {
+            var aspx_path = path.join(DEMOS_WRAPPERS_SOURCES_ASPX, suite);
+            var razor_path = path.join(DEMOS_WRAPPERS_SOURCES_RAZOR, suite);
+
+            mkdir(aspx_path);
+            mkdir(razor_path);
+
+            copyDir(path.join(MVC_WRAPPERS_DEMO_AREAS_ASPX_PATH, suite), aspx_path);
+            copyDir(path.join(MVC_WRAPPERS_DEMO_AREAS_RAZOR_PATH, suite), razor_path);
+        });
     });
 });
 
