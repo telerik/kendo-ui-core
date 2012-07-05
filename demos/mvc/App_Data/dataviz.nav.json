@@ -38,16 +38,16 @@
                     "text": "Column chart",
                     "url": "bar-charts/column.html"
                 }, {
-                    "text": "Stacked bar chart",
+                    "text": "Stacked bars",
                     "url": "bar-charts/stacked-bar.html"
                 }, {
-                    "text": "Stacked and grouped bar chart",
+                    "text": "Stacked and grouped bars",
                     "url": "bar-charts/grouped-stacked-bar.html"
                 }, {
                     "text": "Date axis",
                     "url": "bar-charts/date-axis.html"
                 }, {
-                    "text": "Multiple axes",
+                    "text": "Multi-axis",
                     "url": "bar-charts/multiple-axes.html"
                 }, {
                     "text": "Binding to remote data",
