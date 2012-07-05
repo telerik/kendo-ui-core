@@ -149,7 +149,7 @@
                     "text": "Date axis",
                     "url": "scatter-charts/date-axis.html"
                 }, {
-                    "text": "Multiple axes",
+                    "text": "Multi-axis",
                     "url": "scatter-charts/multiple-axes.html"
                 }, {
                     "text": "Binding to remote data",
@@ -158,6 +158,9 @@
                 }, {
                     "text": "Binding to local data",
                     "url": "scatter-charts/local-data.html"
+				}, {
+                    "text": "Binding to grouped data",
+                    "url": "scatter-charts/grouped-data.html"
             }],
             "name": "scatter-charts"
         }, {
