@@ -18,6 +18,7 @@ demos/examples/shared/js/kendo.examples.js
 demos/mvc/content/docs/
 demos/mvc/sources
 !src/docs
+src/kendo.aspnetmvc.js
 live/
 node_modules
 release/
