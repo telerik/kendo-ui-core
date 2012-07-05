@@ -852,7 +852,7 @@
                 validator.validate();
                 equal(calledCount, 0);
             });
-
+/* //Chrome type=date does not return value if it is not valid date
             test("validate returns false if input type=date value is not valid date", function() {
                 var input = $('<input type="date" value="foo"/>'),
                     validator = setup(input);
@@ -866,7 +866,7 @@
 
                 ok(validator.validate());
             });
-
+*/
             test("validate returns false if input type=text and data-kendo-type=date value is not valid date", function() {
                 var input = $('<input type="text" data-kendo-type="date" value="foo"/>'),
                     validator = setup(input);
