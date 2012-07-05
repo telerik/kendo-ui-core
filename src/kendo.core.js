@@ -1689,7 +1689,7 @@ function pad(number) {
         return result;
     };
 
-    kendo.parseFloat = function(value, culture) {
+    kendo.parseFloat = function(value, culture, format) {
         if (!value && value !== 0) {
            return null;
         }
@@ -1718,7 +1718,7 @@ function pad(number) {
             return value;
         }
 
-        if (value.indexOf(symbol) > -1) {
+        if (value.indexOf(symbol) > -1 || (format && format.toLowerCase().indexOf("c") > -1)) {
             number = currency;
             parts = number.pattern[0].replace("$", symbol).split("n");
             if (value.indexOf(parts[0]) > -1 && value.indexOf(parts[1]) > -1) {

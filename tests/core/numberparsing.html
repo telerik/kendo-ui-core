@@ -7,6 +7,7 @@
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/cultures/kendo.culture.bg-BG.js"></script>
+        <script src="../../src/cultures/kendo.culture.en-ZA.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
     </head>
     <body>
@@ -184,6 +185,14 @@
             test("parse exponential number", function() {
                 equal(kendo.parseFloat("1e-7"), 0.0000001);
                 equal(kendo.parseFloat("1E-7"), 0.0000001);
+            });
+
+            test("parse en-ZA currency number", function() {
+                kendo.culture("en-ZA");
+
+                equal(kendo.parseFloat("12,345", kendo.culture(), "c"), 12.345);
+
+                kendo.culture("en-US");
             });
         </script>
     </body>
