@@ -1664,6 +1664,7 @@ function pad(number) {
             formats[++idx] = "yyyy-MM-ddTHH:mm:sszzz";
             formats[++idx] = "yyyy-MM-ddTHH:mmzzz";
             formats[++idx] = "yyyy-MM-ddTHH:mmzz";
+            formats[++idx] = "yyyy-MM-dd";
 
             idx = 0;
         }
