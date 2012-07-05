@@ -23,6 +23,20 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
+        public void Serializes_groupNameTemplate()
+        {
+            series.GroupNameTemplate = "#= series.name #";
+            GetJson(series)["groupNameTemplate"].ShouldEqual("#= series.name #");
+        }
+
+        [Fact]
+        public void Should_not_serialize_empty_groupNameTemplate()
+        {
+            series.GroupNameTemplate = string.Empty;
+            GetJson(series).ContainsKey("groupNameTemplate").ShouldBeFalse();
+        }
+
+        [Fact]
         public void Serializes_opacity()
         {
             series.Opacity = 0.5;

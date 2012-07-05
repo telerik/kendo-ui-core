@@ -75,6 +75,15 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// Name template for auto-generated series when binding to grouped data.
+        /// </summary>
+        public string GroupNameTemplate
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Creates a serializer for the series
         /// </summary>
         public abstract IChartSerializer CreateSerializer();

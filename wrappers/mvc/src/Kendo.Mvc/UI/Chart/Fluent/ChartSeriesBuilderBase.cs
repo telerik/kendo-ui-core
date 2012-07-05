@@ -52,6 +52,35 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Sets the name template for auto-generated series when binding to grouped data.
+        /// </summary>
+        /// <param name="groupNameTemplate">
+        /// The name template for auto-generated series when binding to grouped data.
+        /// </param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .DataSource(dataSource => dataSource
+        ///                .Read(read => read.Action("_StockData", "Scatter_Charts"))
+        ///                .Group(group => group.Add(model => model.Symbol)))
+        ///            )
+        ///            .Series(series => series.Bar(s => s.Sales)
+        ///                 .Name("Sales")
+        ///                 .GroupNameTemplate("#= series.name # for #= group.field # #= group.value #")
+        ///            )
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public TSeriesBuilder GroupNameTemplate(string groupNameTemplate)
+        {
+            Series.GroupNameTemplate = groupNameTemplate;
+
+            return this as TSeriesBuilder;
+        }
+
+        /// <summary>
         /// Sets the series opacity.
         /// </summary>
         /// <param name="opacity">
