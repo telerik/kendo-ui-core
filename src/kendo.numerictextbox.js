@@ -761,7 +761,7 @@
         },
 
         _parse: function(value, culture) {
-            return parse(value, this._culture(culture));
+            return parse(value, this._culture(culture), this.options.format);
         },
 
         _update: function(value) {

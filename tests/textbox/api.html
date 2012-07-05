@@ -8,6 +8,7 @@
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.numerictextbox.js"></script>
         <script src="../../src/cultures/kendo.culture.bg-BG.js"></script>
+        <script src="../../src/cultures/kendo.culture.en-ZA.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
     </head>
     <body>
@@ -379,6 +380,16 @@
                 ok(textbox._text.is(":visible"));
 
                 window.setTimeout = origin;
+            });
+
+            test("value method uses correct number info when parse en-ZA currency number", function() {
+                var textbox = new NumericTextBox(input, {
+                    culture: "en-ZA",
+                    format: "c",
+                    value: "12,44"
+                });
+
+                equal(textbox.value(), 12.44);
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
