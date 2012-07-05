@@ -676,6 +676,24 @@
                 equal(grid.tbody.find("tr:first > td:last").attr("moo"), "moo1");
             });
 
+            test("render command button attributes as string", function() {
+                var grid = new Grid($("<table/>"), {
+                    dataSource: [{ foo: 1, bar: "bar"}],
+                    columns: [ { command: { name: "foo", attr: "baz=baz1"  } } ]
+                });
+
+                equal(grid.tbody.find("tr:first > td:first a").attr("baz"), "baz1");
+            });
+
+            test("render command button attributes as object", function() {
+                var grid = new Grid($("<table/>"), {
+                    dataSource: [{ foo: 1, bar: "bar"}],
+                    columns: [ { command: { name: "foo", attr: { baz: "baz1" }  } } ]
+                });
+
+                equal(grid.tbody.find("tr:first > td:first a").attr("baz"), "baz1");
+            });
+
             test("render column header attribute", function() {
                 var grid = new Grid($("<table/>"), {
                     dataSource: [{ foo: 1, bar: "bar"}],

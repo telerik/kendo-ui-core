@@ -214,6 +214,19 @@
                 equal(container.find("a.k-grid-cancel").length, 1);
             });
 
+            test("Update and cancel button gets edit button attributes", function() {
+                var grid = setup({
+                    editable: { mode: "popup", template:"<div>#=foo#</div>" },
+                    columns: [ { command: { name: "edit", attr: { bar: "baz" } } } ]
+                });
+
+                grid.editRow(table.find("tr:first"));
+
+                var container = grid._editContainer.children("div.k-edit-form-container");
+                equal(container.find("a.k-grid-update").attr("bar"), "baz");
+                equal(container.find("a.k-grid-cancel").attr("bar"), "baz");
+            });
+
             test("Update and cancel button custom text", function() {
                 var grid = setup({
                     editable: { mode: "popup", template:"<div>#=foo#</div>" },

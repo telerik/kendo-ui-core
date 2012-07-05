@@ -26,14 +26,15 @@ namespace Kendo.Mvc.UI
             get;
             set;
         }
-        //TODO: Implement command button html attributes
-        /*
+        
         public IDictionary<string, object> HtmlAttributes
         {
             get;
             set;
         }
 
+        //TODO: Implement command button image html attributes
+        /*
         public IDictionary<string, object> ImageHtmlAttributes
         {
             get;
@@ -43,7 +44,7 @@ namespace Kendo.Mvc.UI
         public GridActionCommandBase()
         {
             ButtonType = GridButtonType.ImageAndText;
-          //  HtmlAttributes = new RouteValueDictionary();
+            HtmlAttributes = new RouteValueDictionary();
           //  ImageHtmlAttributes = new RouteValueDictionary();
         }
 
@@ -52,12 +53,11 @@ namespace Kendo.Mvc.UI
             var command = new Dictionary<string, object>();
 
             FluentDictionary.For(command)
-                .Add("name", Name)
-                //TODO: Implement command button html attributes
-                //.Add("attr", HtmlAttributes.ToAttributeString(), HtmlAttributes.Any)
+                .Add("name", Name)                
+                .Add("attr", HtmlAttributes.ToAttributeString(), HtmlAttributes.Any)
                 .Add("buttonType", ButtonType.ToString())
                 .Add("text", Text, (System.Func<bool>)Text.HasValue);
-                //TODO: Implement command button html attributes
+                //TODO: Implement command button image html attributes
                 //.Add("imageAttr", ImageHtmlAttributes.ToAttributeString(), ImageHtmlAttributes.Any);
 
             return command;
@@ -68,9 +68,9 @@ namespace Kendo.Mvc.UI
             var factory = new GridButtonFactory();
             var button = factory.CreateButton<T>(ButtonType);
 
-            button.Text = text;
-            //TODO: Implement command button html attributes
-            //button.HtmlAttributes = HtmlAttributes;
+            button.Text = text;           
+            button.HtmlAttributes = HtmlAttributes;
+            //TODO: Implement command button image html attributes
             //button.ImageHtmlAttributes = ImageHtmlAttributes;
             button.CssClass += " " + @class;
 

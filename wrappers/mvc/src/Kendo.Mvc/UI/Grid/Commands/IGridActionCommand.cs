@@ -14,12 +14,13 @@ using System.Web.Mvc;
         {
             get;
         }
-        //TODO: Implement command button html attributes
-        //IDictionary<string, object> HtmlAttributes
-        //{
-        //    get;
-        //}
 
+        IDictionary<string, object> HtmlAttributes
+        {
+            get;
+        }
+
+        //TODO: Implement command button image html attributes
         //IDictionary<string, object> ImageHtmlAttributes
         //{
         //    get;

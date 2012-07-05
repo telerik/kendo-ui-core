@@ -32,9 +32,10 @@ namespace Kendo.Mvc.UI
 
             save.CssClass += " " + UIPrimitives.Grid.SaveChanges;
             save.SpriteCssClass = "k-update";
-            save.Text = SaveText;
-            //TODO: Implement command button html attributes
-            //save.HtmlAttributes = HtmlAttributes;
+            save.Text = SaveText;           
+            save.HtmlAttributes = HtmlAttributes;
+
+            //TODO: Implement command button image html attributes
             //save.ImageHtmlAttributes = ImageHtmlAttributes;
             save.Url = delegate { return "#"; };
 
@@ -42,9 +43,10 @@ namespace Kendo.Mvc.UI
 
             cancel.CssClass += " " + UIPrimitives.Grid.CancelChanges;
             cancel.SpriteCssClass = "k-cancel";
-            cancel.Text = CancelText;
-            //TODO: Implement command button html attributes
-            //cancel.HtmlAttributes = HtmlAttributes;
+            cancel.Text = CancelText;            
+            cancel.HtmlAttributes = HtmlAttributes;
+
+            //TODO: Implement command button image html attributes
             //cancel.ImageHtmlAttributes = ImageHtmlAttributes;
             cancel.Url = delegate { return "#"; };
 

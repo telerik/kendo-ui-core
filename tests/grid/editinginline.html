@@ -180,6 +180,18 @@
                 equal(commandCell.find("a.k-grid-cancel").text(), "myCancel");
             });
 
+            test("editRow edit command attributes are applied to update and cancel commands", function() {
+                var grid = setup({ columns: ["foo", "name", { command: { name: "edit", attr: { bar: "baz" } } }], editable: "inline" }),
+                    tr = table.find("tr:first");
+
+                grid.editRow(tr);
+
+                var commandCell = tr.find("td:last");
+                equal(commandCell.find("a.k-button").length, 2);
+                equal(commandCell.find("a.k-grid-update").attr("bar"), "baz");
+                equal(commandCell.find("a.k-grid-cancel").attr("bar"), "baz");
+            });
+
             test("editRow transforms the edit command column if column has multiple commands", function() {
                 var grid = setup({ columns: ["foo", "name", { command: ["edit", "destroy"] }], editable: "inline" }),
                     tr = table.find("tr:first");

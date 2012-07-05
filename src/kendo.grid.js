@@ -249,6 +249,10 @@
             result = " ";
 
         if (attributes) {
+            if (typeof attributes === STRING) {
+                return attributes;
+            }
+
             for (attr in attributes) {
                 result += attr + '="' + attributes[attr] + '"';
             }
@@ -979,6 +983,7 @@
                 tmpl,
                 updateText,
                 cancelText,
+                attr,
                 editable = that.options.editable,
                 options = isPlainObject(editable) ? editable.window : {},
                 settings = extend({}, kendo.Template, that.options.templateSettings);
@@ -1020,13 +1025,19 @@
             }
 
             if (command) {
-                if (isPlainObject(command) && command.text && isPlainObject(command.text)) {
-                    updateText = command.text.update;
-                    cancelText = command.text.cancel;
+                if (isPlainObject(command)) {
+                   if (command.text && isPlainObject(command.text)) {
+                       updateText = command.text.update;
+                       cancelText = command.text.cancel;
+                   }
+
+                   if (command.attr) {
+                       attr = command.attr;
+                   }
                 }
             }
 
-            html += that._createButton({ name: "update", text: updateText }) + that._createButton({ name: "canceledit", text: cancelText });
+            html += that._createButton({ name: "update", text: updateText, attr: attr }) + that._createButton({ name: "canceledit", text: cancelText, attr: attr });
             html += '</div></div>';
 
             var container = that._editContainer = $(html)
@@ -1078,13 +1089,22 @@
                         cell.empty();
 
                         var updateText,
-                            cancelText;
+                            cancelText,
+                            attr;
 
-                        if (isPlainObject(command) && command.text && isPlainObject(command.text)) {
-                            updateText = command.text.update;
-                            cancelText = command.text.cancel;
+                        if (isPlainObject(command)) {
+                            if (command.text && isPlainObject(command.text)) {
+                                updateText = command.text.update;
+                                cancelText = command.text.cancel;
+                            }
+
+                            if (command.attr) {
+                                attr = command.attr;
+                            }
                         }
-                        $(that._createButton({ name: "update", text: updateText }) + that._createButton({ name: "canceledit", text: cancelText })).appendTo(cell);
+
+                        $(that._createButton({ name: "update", text: updateText, attr: attr }) +
+                            that._createButton({ name: "canceledit", text: cancelText, attr: attr})).appendTo(cell);
                     }
                 }
             });
@@ -1274,6 +1294,10 @@
                 if (commandName === "edit" && isPlainObject(command.text)) {
                     command = extend(true, {}, command);
                     command.text = command.text.edit;
+                }
+
+                if (command.attr && isPlainObject(command.attr)) {
+                    command.attr = stringifyAttributes(command.attr);
                 }
 
                 options = extend(true, options, defaultCommands[commandName], command);

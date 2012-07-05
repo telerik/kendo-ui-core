@@ -240,9 +240,8 @@ namespace Kendo.Mvc.UI
             {
                 json["groupFooterTemplate"] = ClientGroupFooterTemplate;
             }
-
-            //TODO: Serialize values
-             SerializeValues(json);
+            
+            SerializeValues(json);
         }
 
         private void SerializeValues(IDictionary<string, object> result)
