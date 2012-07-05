@@ -633,6 +633,7 @@
     <Content Include="Views\dataviz\bubble-charts\index.cshtml" />
     <Content Include="Views\dataviz\bubble-charts\local-data.cshtml" />
     <Content Include="Views\dataviz\bubble-charts\remote-data.cshtml" />
+    <Content Include="Views\dataviz\bar-charts\grouped-data.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />
