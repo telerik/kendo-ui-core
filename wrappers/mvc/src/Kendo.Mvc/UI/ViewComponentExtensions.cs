@@ -1,12 +1,12 @@
 namespace Kendo.Mvc.UI
 {
+    using Kendo.Mvc.Extensions;
+    
     using System;
+    using System.Linq;
+    using System.Text;
     using System.Web.Mvc;
     using System.Collections.Generic;
-    
-    using Kendo.Mvc.Extensions;
-    using System.Text;
-    using System.Text.RegularExpressions;
 
     internal static class ViewComponentExtensions
     {
@@ -66,21 +66,19 @@ namespace Kendo.Mvc.UI
 
         public static IDictionary<string, object> GetUnobtrusiveValidationAttributes(this IViewComponent instance)
         {
-            if (instance.ViewContext.UnobtrusiveJavaScriptEnabled)
+            if (instance.ViewContext.UnobtrusiveJavaScriptEnabled && instance.ViewData.ModelMetadata != null)
             {
                 var htmlHelper = new HtmlHelper(instance.ViewContext, new ViewComponentViewDataContainer { ViewData = instance.ViewData });
+                var metadata = instance.ViewData.ModelMetadata;
+                var name = instance.Name.Split('.').Last();
 
-                var name = instance.ViewData.TemplateInfo.GetFullHtmlFieldName(string.Empty);
-
-                ModelMetadata metadata = null;
-
-                if (name.HasValue())
+                if (metadata.PropertyName == name)
                 {
-                    metadata = instance.ViewData.ModelMetadata;
+                    name = string.Empty;
                 }
                 else
                 {
-                    name = instance.Name;
+                    metadata = ModelMetadata.FromStringExpression(name, instance.ViewData);
                 }
 
                 return htmlHelper.GetUnobtrusiveValidationAttributes(name, metadata);
