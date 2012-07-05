@@ -51,35 +51,6 @@
         assertSelectedFile(files);
     });
 
-    test("unhandled upload error is alerted to the user", function() {
-        var alertFired = false;
-        uploadInstance = createUpload();
-        uploadInstance._alert = function() {
-            alertFired = true;
-        }
-
-        simulateUploadWithResponse(errorResponse);
-
-        ok(alertFired);
-    });
-
-    test("handled upload error is not alerted to the user", function() {
-        var alertFired = false;
-        uploadInstance = createUpload({ error:
-            function(e) {
-                e.preventDefault();
-            }
-        });
-
-        uploadInstance._alert = function() {
-            alertFired = true;
-        }
-
-        simulateUploadWithResponse(errorResponse);
-
-        ok(!alertFired);
-    });
-
     test("error event arguments contain original XHR", function() {
         var xhr = null;
         uploadInstance = createUpload({ error:
@@ -194,42 +165,6 @@
 
         simulateUpload();
         simulateRemoveError();
-    });
-
-    test("unhandled remove error is alerted to the user", function() {
-        stop(1);
-
-        uploadInstance = createUpload();
-        uploadInstance._alert = function() {
-            ok(true);
-            start();
-        }
-
-        simulateUpload();
-        simulateRemoveError();
-    });
-
-    test("handled remove error is not alerted to the user", function() {
-        stop();
-
-        var alertFired = false;
-        uploadInstance = createUpload({ error:
-            function(e) {
-                e.preventDefault();
-            }
-        });
-
-        uploadInstance._alert = function() {
-            alertFired = true;
-        }
-
-        simulateUpload();
-        simulateRemoveError();
-
-        setTimeout(function() {
-            ok(!alertFired);
-            start();
-        }, 100);
     });
 
     test("error event arguments contains original XHR for remove action", function() {
