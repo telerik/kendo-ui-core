@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Grid Column Menu</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.pager.js"></script>
+        <script src="../../src/kendo.sortable.js"></script>
+        <script src="../../src/kendo.numerictextbox.js"></script>
+        <script src="../../src/kendo.calendar.js"></script>
+        <script src="../../src/kendo.datepicker.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.menu.js"></script>
+        <script src="../../src/kendo.filtermenu.js"></script>
+        <script src="../../src/kendo.columnmenu.js"></script>
+        <script src="../../src/kendo.grid.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+        <style>
+            .k-widget table {
+                border-collapse: collapse;
+                table-layout: fixed;
+                width: 30px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+        <h1 id="qunit-header">Grid Column Menu</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var Grid = kendo.ui.Grid,
+                table,
+                data = [{ foo: "foo", bar: "bar" }],
+                DataSource = kendo.data.DataSource;
+
+            kendo.ns = "";
+
+            module("grid column menu", {
+                setup: function() {
+                    table = $("<table></table>").appendTo(document.body);
+                },
+                teardown: function() {
+                    table.closest(".k-grid").remove();
+                }
+            });
+
+            function setup(options) {
+                return new Grid(table, $.extend(true, {}, {
+                    columnMenu: true,
+                    dataSource: data
+                },
+                options));
+            }
+
+            test("column menu in config options", function() {
+                strictEqual(Grid.fn.options.columnMenu, false);
+            });
+
+            test("column menu initialized in Grid header", function() {
+                var grid = setup({
+                    columns: ["foo", "bar"]
+                });
+
+                var th = grid.thead.find("th");
+                ok(th.eq(0).data("kendoColumnMenu") instanceof kendo.ui.ColumnMenu);
+                ok(th.eq(1).data("kendoColumnMenu") instanceof kendo.ui.ColumnMenu);
+            });
+
+            test("column menu initialized in Grid header when auto columns", function() {
+                var grid = setup();
+
+                var th = grid.thead.find("th");
+                ok(th.eq(0).data("kendoColumnMenu") instanceof kendo.ui.ColumnMenu);
+                ok(th.eq(1).data("kendoColumnMenu") instanceof kendo.ui.ColumnMenu);
+            });
+
+            test("columnMenu as true boolean", function() {
+                var grid = setup();
+
+                var menu = grid.thead.find("th:first").data("kendoColumnMenu");
+
+                equal(menu.options.messages.sort, false);
+                equal(menu.options.messages.columns, "Columns");
+                equal(menu.options.messages.filter, false);
+            });
+
+            test("columnMenu columns message changed", function() {
+                var grid = setup({
+                    columnMenu: {
+                        messages: {
+                            columns: "foo"
+                        }
+                    }
+                });
+
+                var menu = grid.thead.find("th:first").data("kendoColumnMenu");
+
+                equal(menu.options.messages.sort, false);
+                equal(menu.options.messages.columns, "foo");
+                equal(menu.options.messages.filter, false);
+            });
+
+            test("columnMenu columns set to false", function() {
+                var grid = setup({
+                    columnMenu: {
+                        messages: {
+                            columns: false
+                        }
+                    }
+                });
+
+                var menu = grid.thead.find("th:first").data("kendoColumnMenu");
+
+                equal(menu.options.messages.sort, false);
+                equal(menu.options.messages.columns, false);
+                equal(menu.options.messages.filter, false);
+            });
+
+            test("columnMenu as true boolean and sortable grid", function() {
+                var grid = setup({ sortable: true });
+
+                var menu = grid.thead.find("th:first").data("kendoColumnMenu");
+
+                ok($.isPlainObject(menu.options.messages.sort));
+                equal(menu.options.messages.columns, "Columns");
+                equal(menu.options.messages.filter, false);
+            });
+
+            test("columnMenu as true boolean and sortable grid not sortable column", function() {
+                var grid = setup({
+                    sortable: true,
+                    columns: [{ field: "foo", sortable: false }]
+                });
+
+                var menu = grid.thead.find("th:first").data("kendoColumnMenu");
+
+                equal(menu.options.messages.sort, false);
+                equal(menu.options.messages.columns, "Columns");
+                equal(menu.options.messages.filter, false);
+            });
+
+            test("columnMenu in sortable grid changed text", function() {
+                var grid = setup({
+                    sortable: true,
+                    columnMenu: {
+                        messages: {
+                            sort: { asc: "foo" }
+                        }
+                    }
+                });
+
+                var menu = grid.thead.find("th:first").data("kendoColumnMenu");
+
+                equal(menu.options.messages.sort.asc, "foo");
+                equal(menu.options.messages.sort.desc, "Sort Descending");
+            });
+
+            test("columnMenu as true boolean and filterable grid", function() {
+                var grid = setup({ filterable : true });
+
+                var menu = grid.thead.find("th:first").data("kendoColumnMenu");
+
+                equal(menu.options.messages.filter, "Filter");
+            });
+
+            test("columnMenu as true boolean and filterable grid not filterable column", function() {
+                var grid = setup({
+                    filterable: true,
+                    columns: [{ field: "foo", filterable: false }]
+                });
+
+                var menu = grid.thead.find("th:first").data("kendoColumnMenu");
+
+                equal(menu.options.messages.filter, false);
+            });
+
+            test("columnMenu in filterable grid changed text", function() {
+                var grid = setup({
+                    filterable: true,
+                    columnMenu: {
+                        messages: {
+                            filter: "foo"
+                        }
+                    }
+                });
+
+                var menu = grid.thead.find("th:first").data("kendoColumnMenu");
+
+                equal(menu.options.messages.filter, "foo");
+            });
+
+            test("filterable grid does not render header filter link", function() {
+                var grid = setup({ filterable: true });
+
+                equal(grid.thead.find(".k-grid-filter").length, 0);
+            });
+
+        </script>
+    </body>
+</html>

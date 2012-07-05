@@ -500,7 +500,8 @@
             dataSource: {},
             height: null,
             resizable: false,
-            reorderable: false
+            reorderable: false,
+            columnMenu: false
         },
 
         setOptions: function(options) {
@@ -2002,6 +2003,74 @@
             return '<tfoot class="k-grid-footer">' + footerRow + '</tfoot>';
         },
 
+        _columnMenu: function() {
+            var that = this,
+                menu,
+                columns = that.columns,
+                column,
+                options = that.options,
+                menuOptions,
+                sortable,
+                filterable,
+                messages,
+                cell;
+
+            if (options.columnMenu) {
+                that.thead
+                    .find("th:not(.k-hierarchy-cell,.k-group-cell)")
+                    .each(function (index) {
+                        column = columns[index];
+                        cell = $(this);
+
+                        if (!column.command && (column.field || cell.attr("data-" + kendo.ns + "field"))) {
+                            menu = cell.data("kendoColumnMenu");
+                            if (menu) {
+                                menu.destroy();
+                            }
+
+                            sortable = column.sortable !== false ? options.sortable : false;
+                            filterable = options.filterable && column.filterable !== false ? extend({}, column.filterable, options.filterable) : false;
+                            menuOptions = {
+                                columns: proxy(that._menuColumns, that),
+                                dataSource: that.dataSource,
+                                values: column.values,
+                                sortable: sortable,
+                                filterable: filterable,
+                                change: proxy(that._columnMenuChange, that)
+                            };
+
+                            messages = options.columnMenu.messages || {};
+                            if (sortable === false) {
+                                messages.sort = false;
+                            }
+                            if (filterable === false) {
+                                messages.filter = false;
+                            }
+
+                            cell.kendoColumnMenu(extend({}, menuOptions, { messages: messages }));
+                        }
+                    });
+            }
+        },
+
+        _menuColumns: function() {
+            return map(this.columns, function(col) {
+                return {
+                    field: col.field,
+                    title: col.title || col.field,
+                    hidden: col.hidden
+                };
+            });
+        },
+
+        _columnMenuChange: function(e) {
+            if (e.hidden) {
+                this.hideColumn(e.field);
+            } else {
+                this.showColumn(e.field);
+            }
+        },
+
         _filterable: function() {
             var that = this,
                 columns = that.columns,
@@ -2009,7 +2078,7 @@
                 filterMenu,
                 filterable = that.options.filterable;
 
-            if (filterable) {
+            if (filterable && !that.options.columnMenu) {
                 that.thead
                     .find("th:not(.k-hierarchy-cell,.k-group-cell)")
                     .each(function(index) {
@@ -2494,6 +2563,8 @@
             that._draggable();
 
             that._reorderable();
+
+            that._columnMenu();
         },
 
         _updateCols: function() {

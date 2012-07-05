@@ -11,21 +11,30 @@
         CLICK = "click",
         CHANGE = "change",
         POPUP = "kendoPopup",
+        FILTERMENU = "kendoFilterMenu",
         MENU = "kendoMenu",
         Widget = ui.Widget;
+
+    var messages = {
+        sort: {
+            asc: "Sort Ascending",
+            desc: "Sort Descending"
+        },
+        filter: "Filter",
+        columns: "Columns"
+    };
 
     var ColumnMenu = Widget.extend({
         init: function(element, options) {
             var that = this,
-                defaults = that.options,
                 link;
 
             Widget.fn.init.call(that, element, options);
 
             element = that.element;
             options = that.options;
-            that.fields = options.fields;
-            that._mergeOptions(defaults);
+            that.columns = options.columns;
+            that._mergeOptions(messages);
 
             that.field = element.attr(kendo.attr("field"));
             link = element.find(".k-header-column-menu");
@@ -34,11 +43,14 @@
             }
             that._clickHandler = proxy(that._click, that);
             link.click(that._clickHandler);
+            that.link = link;
 
             that.wrapper = $('<div class="k-column-menu"/>');
-            that.wrapper.html(kendo.template(template)(options));
-
-            that.link = link;
+            that.wrapper.html(kendo.template(template)({
+                ns: kendo.ns,
+                messages: options.messages,
+                columns: that.columns()
+            }));
 
             that.popup = that.wrapper[POPUP]({
                 anchor: link,
@@ -56,21 +68,15 @@
 
         options: {
             name: "ColumnMenu",
-            sort: {
-                asc: "Sort Ascending",
-                desc: "Sort Descending"
-            },
-            filter: "Filter",
-            columns: "Columns",
-            sortable: true
+            messages: messages,
+            sortable: true,
+            filterable: true
         },
 
         events: [ CHANGE ],
 
         _mergeOptions: function(defaults) {
-            var options =  this.options;
-            options.ns = kendo.ns;
-            options.fields = options.fields();
+            var options =  this.options.messages;
 
             if (options.sort === true) {
                 options.sort = defaults.sort;
@@ -84,16 +90,22 @@
                 options.columns = defaults.columns;
             }
 
-            this.options = options;
+            this.options.messages = options;
         },
 
         destroy: function() {
-            /*
-            this.wrapper.remove();
-            this.wrapper.removeData(POPUP);
-            this.link.unbind("click", this._clickHandler);
-            this.element.removeData("kendoColumnMenu");
-            */
+            var that = this;
+
+            if (that.filterMenu) {
+                that.filterMenu.destroy();
+                that.filterMenu = null;
+            }
+
+            that.wrapper.children().removeData(MENU);
+            that.wrapper.removeData(POPUP).remove();
+            that.link.unbind(CLICK, that._clickHandler);
+            that.element.removeData("kendoColumnMenu");
+            that.columns = null;
         },
 
         _click: function(e) {
@@ -174,8 +186,7 @@
             var that = this;
 
             that.menu.bind("open", function() {
-                var fields = that.fields(),
-                    visible = grep(fields, function(field) {
+                var visible = grep(that.columns(), function(field) {
                         return !field.hidden;
                     });
 
@@ -205,18 +216,19 @@
         },
 
         _filter: function() {
-            var options = this.options;
+            var that = this,
+                options = that.options;
 
-            if (options.filter !== false) {
-                this.wrapper.find(".k-filterable").kendoFilterMenu(
+            if (options.filterable !== false) {
+                that.filterMenu = that.wrapper.find(".k-filterable")[FILTERMENU](
                     extend(true, {}, {
                         appendToElement: true,
                         dataSource: options.dataSource,
                         values: options.values,
-                        field: this.field
+                        field: that.field
                     },
                     options.filterable)
-                );
+                ).data(FILTERMENU);
             }
         },
 
@@ -241,25 +253,25 @@
     });
 
     var template = '<ul>'+
-                    '#if(sort){#'+
-                        '<li class="k-item k-sort-asc"><span class="k-link"><span class="k-sprite historyIcon"></span>${sort.asc}</span></li>'+
-                        '<li class="k-item k-sort-desc"><span class="k-link"><span class="k-sprite historyIcon"></span>${sort.desc}</span></li>'+
-                        '#if(columns || filter){#'+
+                    '#if(messages.sort){#'+
+                        '<li class="k-item k-sort-asc"><span class="k-link"><span class="k-sprite historyIcon"></span>${messages.sort.asc}</span></li>'+
+                        '<li class="k-item k-sort-desc"><span class="k-link"><span class="k-sprite historyIcon"></span>${messages.sort.desc}</span></li>'+
+                        '#if(messages.columns || messages.filter){#'+
                             '<li class="k-separator"></li>'+
                         '#}#'+
                     '#}#'+
-                    '#if(columns){#'+
-                        '<li class="k-item k-columns-item"><span class="k-link"><span class="k-sprite historyIcon"></span>${columns}</span><ul>'+
-                        '#for (var col in fields) {#'+
-                            '<li><label><input type="checkbox" data-#=ns#field="#=fields[col].field#"/>#=fields[col].title#</label></li>'+
+                    '#if(messages.columns){#'+
+                        '<li class="k-item k-columns-item"><span class="k-link"><span class="k-sprite historyIcon"></span>${messages.columns}</span><ul>'+
+                        '#for (var col in columns) {#'+
+                            '<li><label><input type="checkbox" data-#=ns#field="#=columns[col].field#"/>#=columns[col].title#</label></li>'+
                         '#}#'+
                         '</ul></li>'+
-                        '#if(columns){#'+
+                        '#if(messages.filter){#'+
                             '<li class="k-separator"></li>'+
                         '#}#'+
                     '#}#'+
-                    '#if(filter){#'+
-                        '<li class="k-item k-filter-item"><span class="k-link"><span class="k-sprite historyIcon"></span>${filter}</span><ul>'+
+                    '#if(messages.filter){#'+
+                        '<li class="k-item k-filter-item"><span class="k-link"><span class="k-sprite historyIcon"></span>${messages.filter}</span><ul>'+
                             '<li><div class="k-filterable"></div></li>'+
                         '</ul></li>'+
                     '#}#'+

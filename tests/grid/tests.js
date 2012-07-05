@@ -84,6 +84,10 @@ tests.push(
         title: "grid column hiding"
     },
     {
+        page: "grid/columnmenu.html",
+        title: "grid column menu"
+    },
+    {
         page: "grid/lint.html",
         title: "grid lint"
     }

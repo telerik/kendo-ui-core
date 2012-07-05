@@ -73,7 +73,7 @@
             function setup(options) {
                 options = $.extend(true, {}, {
                     dataSource: dataSource,
-                    fields: function() {
+                    columns: function() {
                         return [{ field: "foo" }, { field: "bar", hidden: true }];
                     }
                 }, options);
@@ -109,11 +109,11 @@
 
             test("sort option as true boolean", function() {
                 var menu = setup({
-                    sort: true
+                    messages: { sort: true }
                 });
 
-                equal(menu.options.sort.asc, "Sort Ascending");
-                equal(menu.options.sort.desc, "Sort Descending");
+                equal(menu.options.messages.sort.asc, "Sort Ascending");
+                equal(menu.options.messages.sort.desc, "Sort Descending");
             });
 
             test("sort option as false boolean", function() {
@@ -126,17 +126,21 @@
 
             test("changing default sort options", function() {
                 var menu = setup({
-                    sort: { asc: "foo" }
+                    messages: { sort: { asc: "foo" } }
                 });
 
-                equal(menu.options.sort.asc, "foo");
-                equal(menu.options.sort.desc, "Sort Descending");
+                equal(menu.options.messages.sort.asc, "foo");
+                equal(menu.options.messages.sort.desc, "Sort Descending");
             });
 
             test("filter option as true boolean", function() {
-                var menu = setup({ filter: true });
+                var menu = setup({
+                    messages: {
+                        filter: true
+                    }
+                });
 
-                equal(menu.options.filter, "Filter");
+                equal(menu.options.messages.filter, "Filter");
             });
 
             test("changing default filter option", function() {
@@ -146,15 +150,23 @@
             });
 
             test("columns option as true boolean", function() {
-                var menu = setup({ columns: true });
+                var menu = setup({
+                    messages: {
+                        columns: true
+                    }
+                });
 
-                equal(menu.options.columns, "Columns");
+                equal(menu.options.messages.columns, "Columns");
             });
 
             test("changing default columns option", function() {
-                var menu = setup({ columns: "foo" });
+                var menu = setup({
+                    messages: {
+                        columns: "foo"
+                    }
+                });
 
-                equal(menu.options.columns, "foo");
+                equal(menu.options.messages.columns, "foo");
             });
 
             asyncTest("opening menu refresh columns checkboxes", function() {
@@ -346,6 +358,21 @@
                 dataSource.sort({ field: "foo" });
 
                 ok(!descItem.hasClass("k-state-active"));
+            });
+
+            test("destroy calls filter menu destroy", function() {
+                var menu = setup();
+                var called = false;
+
+                menu.filterMenu = {
+                    destroy: function() {
+                        called = true;
+                    }
+                };
+
+                menu.destroy();
+
+                ok(called, "Filter menu is not destroyed");
             });
         </script>
     </body>
