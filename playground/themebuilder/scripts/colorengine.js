@@ -54,7 +54,7 @@
     }
 
     function constructRgb(color, withAlpha) {
-        return "rgb" + (withAlpha ? "a" : "") + "(" + color.red + "," + color.green + "," + color.blue + (withAlpha ? "," + trimZeroes(color.alpha) : "") + ")";
+        return "rgb" + (withAlpha ? "a" : "") + "(" + color.red + "," + color.green + "," + color.blue + (withAlpha ? "," + (trimZeroes(color.alpha) || "0") : "") + ")";
     }
 
     window.Color = kendo.Observable.extend({

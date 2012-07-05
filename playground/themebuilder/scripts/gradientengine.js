@@ -128,9 +128,8 @@
                         output += that._getStandardGradient(gradient, value);
                     }
                 });
-                output = output.substring(0, output.length-1) + ";\n"
+                output = output.substring(0, output.length-1);
             });
-            output = output.substring(0, output.length-1);
 
             return output;
         },
@@ -155,7 +154,7 @@
             output += "-webkit-gradient(linear," + gradient.start.normalized + "," + gradient.end.normalized + ",";
 
             gradient.stops.forEach(function(stop) {
-                output += "color-stop(" + trimZeroes(parseFloat(stop.position) / 100) + " " + stop.color.get() + "),";
+                output += "color-stop(" + (trimZeroes(parseFloat(stop.position) / 100) || "0") + ", " + stop.color.get() + "),";
             });
 
             return output.substring(0, output.length - 1) + "),";

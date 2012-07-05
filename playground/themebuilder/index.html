@@ -118,6 +118,37 @@
             padding: .8em;
         }
 
+        .gradient
+        {
+            position: relative;
+            width: 200px;
+            height: 20px;
+            background: -webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.5)),
+                        -webkit-linear-gradient(left, #0b47a2, #04b7a2 5%, #0b4a72 98%, #20b47a);
+        }
+
+        .stop
+        {
+            position: absolute;
+            bottom: -15px;
+            width: 11px;
+            height: 11px;
+            border-radius: 11px;
+            box-shadow: inset 0 0 1px rgba(0,0,0,.8);
+            margin-left: -6px;
+        }
+
+        .stop:before
+        {
+            position: absolute;
+            content: "\a0";
+            width: 1px;
+            height: 5px;
+            top: -5px;
+            left: 5px;
+            background: rgba(0,0,0,.3);
+        }
+
     </style>
 </head>
 <body class="body">
@@ -130,8 +161,27 @@
         <div id="picky" class="drop" style="background: #ba55d3;">&nbsp;</div>
         <div class="drop" style="background: rgba(100,150,200,.5);">&nbsp;</div>
         <div class="drop" style="background: rgba(200,150,100,.5);">&nbsp;</div>
-        <div class="drop" style="background: -webkit-linear-gradient(left top, #0b47a2, #04b7a2 5%, #0b4a72 98%, #20b47a);">&nbsp;</div>
+        <div class="drop" style="background: -webkit-linear-gradient(top, #0b47a2, #04b7a2 5%, #0b4a72 98%, #20b47a);">&nbsp;</div>
         <div class="adddrop">+</div>
+        <br /><br />
+        <div class="gradient"></div>
+        <script>
+            var gradient = new Gradient($(".gradient").css("background"));
+
+            for (var i = 0, len = gradient.value[1].stops.length; i < len; i++) {
+                var step = gradient.value[1].stops[i];
+
+                $("<div class='stop' />").css({
+                    backgroundColor: step.color.get(),
+                    left: step.position || "1px"
+                }).appendTo(".gradient").data("idx", i)
+                .kendoHSLPicker({ pick: function (e) {
+                    gradient.value[1].stops[this.element.data("idx")].color = e.color;
+                    $(".gradient").css("background", gradient.get());
+                }});
+            }
+
+        </script>
         <br /><br />
         <div>
             <div id="iosDevice" class="device">

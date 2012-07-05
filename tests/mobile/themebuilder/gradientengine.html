@@ -47,49 +47,49 @@
             test("get method returns WebKit style gradient in WebKit browsers", 1, function () {
                 var gradient = new Gradient("-webkit-linear-gradient(left, #0b47a2 5%)");
 
-                ok(gradient.get("-webkit-") == "-webkit-gradient(linear,0 50%,100% 50%,color-stop(.05 #0b47a2));");
+                ok(gradient.get("-webkit-") == "-webkit-gradient(linear,0 50%,100% 50%,color-stop(.05, #0b47a2))");
             });
 
             test("multiple get method returns multiple WebKit style gradient in WebKit browsers", 1, function () {
                 var gradient = new Gradient("-webkit-linear-gradient(left, #0b47a2 5%), -webkit-linear-gradient(left, #0b47a2 5%)");
 
-                ok(gradient.get("-webkit-") == "-webkit-gradient(linear,0 50%,100% 50%,color-stop(.05 #0b47a2)),-webkit-gradient(linear,0 50%,100% 50%,color-stop(.05 #0b47a2));");
+                ok(gradient.get("-webkit-") == "-webkit-gradient(linear,0 50%,100% 50%,color-stop(.05, #0b47a2)),-webkit-gradient(linear,0 50%,100% 50%,color-stop(.05, #0b47a2))");
             });
 
             test("get method returns W3C style gradients in the rest of the browsers", 4, function () {
                 var gradient = new Gradient("-webkit-linear-gradient(left, #0b47a2 5%)");
 
-                ok(gradient.get("-moz-") == "-moz-linear-gradient(left,#0b47a2 5%);");
-                ok(gradient.get("-ms-") == "-ms-linear-gradient(left,#0b47a2 5%);");
-                ok(gradient.get("-o-") == "-o-linear-gradient(left,#0b47a2 5%);");
-                ok(gradient.get("") == "linear-gradient(left,#0b47a2 5%);");
+                ok(gradient.get("-moz-") == "-moz-linear-gradient(left,#0b47a2 5%)");
+                ok(gradient.get("-ms-") == "-ms-linear-gradient(left,#0b47a2 5%)");
+                ok(gradient.get("-o-") == "-o-linear-gradient(left,#0b47a2 5%)");
+                ok(gradient.get("") == "linear-gradient(left,#0b47a2 5%)");
             });
 
             test("multiple get method returns multiple W3C style gradients in the rest of the browsers", 4, function () {
                 var gradient = new Gradient("-webkit-linear-gradient(left, #0b47a2 5%), -webkit-linear-gradient(left, #0b47a2 5%)");
 
-                ok(gradient.get("-moz-") == "-moz-linear-gradient(left,#0b47a2 5%),-moz-linear-gradient(left,#0b47a2 5%);");
-                ok(gradient.get("-ms-") == "-ms-linear-gradient(left,#0b47a2 5%),-ms-linear-gradient(left,#0b47a2 5%);");
-                ok(gradient.get("-o-") == "-o-linear-gradient(left,#0b47a2 5%),-o-linear-gradient(left,#0b47a2 5%);");
-                ok(gradient.get("") == "linear-gradient(left,#0b47a2 5%),linear-gradient(left,#0b47a2 5%);");
+                ok(gradient.get("-moz-") == "-moz-linear-gradient(left,#0b47a2 5%),-moz-linear-gradient(left,#0b47a2 5%)");
+                ok(gradient.get("-ms-") == "-ms-linear-gradient(left,#0b47a2 5%),-ms-linear-gradient(left,#0b47a2 5%)");
+                ok(gradient.get("-o-") == "-o-linear-gradient(left,#0b47a2 5%),-o-linear-gradient(left,#0b47a2 5%)");
+                ok(gradient.get("") == "linear-gradient(left,#0b47a2 5%),linear-gradient(left,#0b47a2 5%)");
             });
 
             test("0 and 100% are stripped in W3C style gradients", 1, function () {
                 var gradient = new Gradient("-webkit-linear-gradient(left, #0b47a2 0%, #0b47a3 10%, #0b47a4 100%)");
 
-                ok(gradient.get("") == "linear-gradient(left,#0b47a2,#0b47a3 10%,#0b47a4);");
+                ok(gradient.get("") == "linear-gradient(left,#0b47a2,#0b47a3 10%,#0b47a4)");
             });
 
             test("gradient RGB colors get converted to HEX", 1, function () {
                 var gradient = new Gradient("-webkit-linear-gradient(left, rgb(0,0,0))");
 
-                ok(gradient.get("") == "linear-gradient(left,#000);");
+                ok(gradient.get("") == "linear-gradient(left,#000)");
             });
 
             test("gradient RGB colors get converted to HEX", 1, function () {
                 var gradient = new Gradient("-webkit-linear-gradient(left, rgb(0,0,0))");
 
-                ok(gradient.get("") == "linear-gradient(left,#000);");
+                ok(gradient.get("") == "linear-gradient(left,#000)");
             });
 
         </script>
