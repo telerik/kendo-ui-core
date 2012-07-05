@@ -358,10 +358,6 @@
 
             logToConsole("Server response: " + xhr.responseText);
 
-            if (!prevented) {
-                this._alert("Error! Upload failed. Unexpected server response - see console.");
-            }
-
             this._checkAllComplete();
         },
 
@@ -465,10 +461,6 @@
                   success: onSuccess,
                   error: onError
             });
-        },
-
-        _alert: function(message) {
-            alert(message);
         },
 
         _wrapInput: function(input) {
@@ -1041,10 +1033,6 @@
                     XMLHttpRequest: xhr });
 
                 logToConsole("Server response: " + xhr.responseText);
-
-                if (!prevented) {
-                    upload._alert("Error! Remove operation failed. Unexpected response - see console.");
-                }
             }
         );
     }
