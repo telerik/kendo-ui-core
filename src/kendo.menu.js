@@ -293,9 +293,6 @@
             .children(IMG)
             .addClass(IMAGE);
         item
-            .children("div")
-            .addClass("k-content");
-        item
             .filter(":not([disabled])")
             .addClass(DEFAULTSTATE);
         item
@@ -971,6 +968,10 @@
             var that = this;
             element = that.element.find(element);
 
+            if (!element[0]) {
+                element = that.element.find(">.k-item");
+            }
+
             element.each(function () {
                 var li = $(this);
 
@@ -1057,7 +1058,7 @@
                 element = target.closest(allItemsSelector),
                 isLink = (!!href && href.charAt(href.length - 1) != "#");
 
-            if (element.children(".k-content")[0]) {
+            if (element.children("div:not(.k-animation-container)")[0]) {
                 return;
             }
 
