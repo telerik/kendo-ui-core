@@ -44,6 +44,61 @@ function parseNamespace(namespace) {
     return types;
 }
 
+function typeToMarkdown(type) {
+    var markdown = "";
+
+    markdown += "---";
+    markdown += "\ntitle:" + type.name;
+    markdown += "\nslug:aspnetmvc-" + type.name.toLowerCase();
+    markdown += "\npublish:true";
+    markdown += "\n---";
+
+    markdown += "\n\n# " + type.name;
+
+    if (type.methods.length) {
+        markdown += "\n\n## Methods";
+
+        type.methods.forEach(function(method){
+            markdown += emitMethod(method);
+        });
+    }
+
+    return markdown;
+}
+
+function emitMethod(method) {
+    var markdown = "";
+
+    markdown += "\n\n### " + method.name;
+
+    if (method.summary) {
+        markdown += "\n" + method.summary;
+    }
+
+    if (method.params) {
+        var paramTypes = /\(([^\)]*)\)$/.exec(method.name)[1].split(",");
+
+        markdown += "\n\n#### Parameters";
+
+        method.params.forEach(function(param, index) {
+            markdown += emitParam(param, paramTypes[index]);
+        })
+    }
+
+    return markdown;
+}
+
+function emitParam(param, type) {
+    var markdown = "";
+
+    markdown += "\n\n##### " + param.name + " `" + type + "`";
+
+    if (param.summary) {
+        markdown += "\n" + param.summary;
+    }
+
+    return markdown;
+}
 
 function memberName(typeName, name) {
     return name.replace(/\w:/, "").substring(typeName.length + 1);
@@ -57,6 +112,17 @@ function parseMethod(element) {
         result.summary = summary.text().trim();
     }
 
+    var params = element.find("param");
+
+    if (params.length) {
+        result.params = params.map(function(param){
+            return {
+               name: param.attr("name").value(),
+               summary: param.text()
+            }
+        });
+    }
+
     return result;
 }
 
@@ -68,9 +134,42 @@ function isEmpty(object) {
     return true;
 }
 
+function makePath(/**Array*/ path) {
+     path = path.split(/[\\\/]/);
+    var make = "";
+
+    for (var i = 0, l = path.length; i < l; i++) {
+        make += path[i] + "/";
+        if (!exists(make)) {
+            makeDir(make);
+        }
+    }
+}
+
+function saveFile(/**string*/ outDir, /**string*/ fileName, /**string*/ content) {
+    fs.writeFileSync(outDir + "/" + fileName, content, "utf8");
+}
+
+function exists(/**string*/ path) {
+    try {
+        fs.statSync(path);
+        return true;
+    } catch(e) {
+        return false;
+    }
+}
+
+function makeDir(/**string*/ path) {
+    fs.mkdirSync(path, 0777);
+}
 
 var types = parseNamespace("Kendo.Mvc.UI.Fluent");
+var path = "docs/api/wrappers/asp-net-mvc/reference/";
 
-console.log(types["Kendo.Mvc.UI.Fluent.WindowBuilder"].methods);
+makePath(path);
+
+for (var type in types) {
+    saveFile(path, type + ".md", typeToMarkdown(types[type]));
+}
 
 // vim: ft=javascript
