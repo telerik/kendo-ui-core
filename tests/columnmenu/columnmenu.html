@@ -73,7 +73,9 @@
             function setup(options) {
                 options = $.extend(true, {}, {
                     dataSource: dataSource,
-                    fields: $.noop
+                    fields: function() {
+                        return [{ field: "foo" }, { field: "bar", hidden: true }];
+                    }
                 }, options);
 
                 var menu = new ColumnMenu(dom, options);
@@ -156,11 +158,7 @@
             });
 
             asyncTest("opening menu refresh columns checkboxes", function() {
-                var columnMenu = setup({
-                    fields: function() {
-                        return [{ field: "foo" }, { field: "bar", hidden: true }];
-                    }
-                });
+                var columnMenu = setup();
 
                 columnMenu.menu.open(columnMenu.wrapper.find(".k-columns-item"));
 
@@ -174,11 +172,7 @@
             });
 
             asyncTest("columns checkbox is disabled when only one visible column left", function() {
-                var columnMenu = setup({
-                    fields: function() {
-                        return [{ field: "foo" }, { field: "bar", hidden: true }];
-                    }
-                });
+                var columnMenu = setup();
 
                 columnMenu.menu.open(columnMenu.wrapper.find(".k-columns-item"));
 
@@ -188,6 +182,170 @@
                     ok(!checkboxes.eq(1).attr("disabled"));
                     start();
                 }, 1);
+            });
+
+            test("unchecking checkbox triggeres change event", function() {
+                var called = false;
+                var menu = setup({
+                    change: function() {
+                        called = true;
+                    }
+                });
+
+                menu.wrapper.find("[type=checkbox]").eq(0).attr("checked", true).click();
+
+                ok(called);
+            });
+
+            test("unchecking checkbox send field settings as change argument", function() {
+                var args;
+                var menu = setup({
+                    change: function() {
+                        args = arguments[0];
+                    }
+                });
+
+                menu.wrapper.find("[type=checkbox]").eq(0).attr("checked", true).click();
+
+                equal(args.field, "foo");
+                equal(args.hidden, true, "Column foo must be hidden");
+            });
+
+            test("checking checkbox triggeres change event", function() {
+                var called = false;
+                var menu = setup({
+                    change: function() {
+                        called = true;
+                    }
+                });
+
+                menu.wrapper.find("[type=checkbox]").eq(0).click();
+
+                ok(called);
+            });
+
+            test("checking checkbox send field settings as change argument", function() {
+                var args;
+                var menu = setup({
+                    change: function() {
+                        args = arguments[0];
+                    }
+                });
+
+                menu.wrapper.find("[type=checkbox]").eq(0).click();
+
+                equal(args.field, "foo");
+                equal(args.hidden, false, "Column foo must be shown");
+            });
+
+            test("selecting sort asc item sorts the dataSource", function() {
+                var menu = setup({ field: "foo" });
+
+                menu.wrapper.find(".k-sort-asc").click();
+                var sort = dataSource.sort();
+
+                equal(sort.length, 1);
+                equal(sort[0].field, "foo");
+                equal(sort[0].dir, "asc");
+            });
+
+            test("selecting sort asc item twice remove sort expression for the field", function() {
+                var menu = setup({ field: "foo" });
+
+                menu.wrapper.find(".k-sort-asc").click();
+                menu.wrapper.find(".k-sort-asc").click();
+                var sort = dataSource.sort();
+
+                equal(sort.length, 0, "Sort expression for the field is removed");
+            });
+
+            test("selecting sort asc item when sortable mode is multiple", function() {
+                var menu = setup({
+                    field: "foo",
+                    sortable: {
+                        mode: "multiple"
+                    }
+                });
+
+                dataSource.sort({ field: "bar", dir: "desc" });
+                menu.wrapper.find(".k-sort-asc").click();
+                var sort = dataSource.sort();
+
+                equal(sort.length, 2);
+                equal(sort[0].field, "bar");
+                equal(sort[0].dir, "desc");
+                equal(sort[1].field, "foo");
+                equal(sort[1].dir, "asc");
+            });
+
+            test("unselecting sort asc item when allowUnsort is false", function() {
+                var menu = setup({
+                    field: "foo",
+                    sortable: {
+                        allowUnsort: false
+                    }
+                });
+
+                menu.wrapper.find(".k-sort-asc").click();
+                var sort = dataSource.sort();
+
+                equal(sort.length, 1);
+                equal(sort[0].field, "foo");
+                equal(sort[0].dir, "asc");
+            });
+
+            test("clicking asc item highlight it", function() {
+                var menu = setup({ field: "foo" });
+
+                var item = menu.wrapper.find(".k-sort-asc").click();
+
+                ok(item.hasClass("k-state-active"));
+            });
+
+            test("clicking desc item highlight it", function() {
+                var menu = setup({ field: "foo" });
+
+                var ascItem = menu.wrapper.find(".k-sort-asc").click();
+                var descItem = menu.wrapper.find(".k-sort-desc").click();
+
+                ok(descItem.hasClass("k-state-active"));
+                ok(!ascItem.hasClass("k-state-active"));
+            });
+
+            test("sort asc item is highlighted on dataSource sort", function() {
+                var menu = setup({ field: "foo" });
+
+                dataSource.sort({ field: "foo", dir: "asc" });
+
+                var ascItem = menu.wrapper.find(".k-sort-asc");
+                ok(ascItem.hasClass("k-state-active"));
+            });
+
+            test("sort asc item is unhighlighted on dataSource sort", function() {
+                var menu = setup({ field: "foo" });
+
+                var ascItem = menu.wrapper.find(".k-sort-asc").click();
+                dataSource.sort({ field: "foo" });
+
+                ok(!ascItem.hasClass("k-state-active"));
+            });
+
+            test("sort desc item is highlighted on dataSource sort", function() {
+                var menu = setup({ field: "foo" });
+
+                dataSource.sort({ field: "foo", dir: "desc" });
+
+                var descItem = menu.wrapper.find(".k-sort-desc");
+                ok(descItem.hasClass("k-state-active"));
+            });
+
+            test("sort desc item is unhighlighted on dataSource sort", function() {
+                var menu = setup({ field: "foo" });
+
+                var descItem = menu.wrapper.find(".k-sort-desc").click();
+                dataSource.sort({ field: "foo" });
+
+                ok(!descItem.hasClass("k-state-active"));
             });
         </script>
     </body>

@@ -5,6 +5,11 @@
         extend = $.extend,
         grep = $.grep,
         map = $.map,
+        ACTIVE = "k-state-active",
+        ASC = "asc",
+        DESC = "desc",
+        CLICK = "click",
+        CHANGE = "change",
         POPUP = "kendoPopup",
         MENU = "kendoMenu",
         Widget = ui.Widget;
@@ -42,6 +47,8 @@
 
             that._menu();
 
+            that._sort();
+
             that._columns();
 
             that._filter();
@@ -54,8 +61,11 @@
                 desc: "Sort Descending"
             },
             filter: "Filter",
-            columns: "Columns"
+            columns: "Columns",
+            sortable: true
         },
+
+        events: [ CHANGE ],
 
         _mergeOptions: function(defaults) {
             var options =  this.options;
@@ -115,9 +125,53 @@
             }).data(MENU);
         },
 
-        _columns: function() {
+        _sort: function() {
+            var that = this;
+
+            that.options.dataSource.bind(CHANGE, proxy(that.refresh, that));
+
+            that.menu.element.delegate(".k-sort-asc, .k-sort-desc", CLICK, function() {
+                var item = $(this),
+                    dir = item.hasClass("k-sort-asc") ? ASC : DESC;
+
+                item.parent().find(".k-sort-" + (dir == ASC ? DESC : ASC)).removeClass(ACTIVE);
+
+                that._sortDataSource(item, dir);
+            });
+        },
+
+        _sortDataSource: function(item, dir) {
             var that = this,
-                grid = that.element.closest(".k-grid").data("kendoGrid");
+                sortable = that.options.sortable,
+                dataSource = that.options.dataSource,
+                idx,
+                length,
+                sort = dataSource.sort() || [];
+
+            if (item.hasClass(ACTIVE) && sortable && sortable.allowUnsort !== false) {
+                item.removeClass(ACTIVE);
+                dir = undefined;
+            } else {
+                item.addClass(ACTIVE);
+            }
+
+            if (sortable === true || sortable.mode === "single") {
+                sort = [ { field: that.field, dir: dir } ];
+            } else {
+                for (idx = 0, length = sort.length; idx < length; idx++) {
+                    if (sort[idx].field === that.field) {
+                        sort.splice(idx, 1);
+                        break;
+                    }
+                }
+                sort.push({ field: that.field, dir: dir });
+            }
+
+            dataSource.sort(sort);
+        },
+
+        _columns: function() {
+            var that = this;
 
             that.menu.bind("open", function() {
                 var fields = that.fields(),
@@ -132,15 +186,18 @@
                 that.wrapper.find(selector).attr("checked", true).attr("disabled", visible.length == 1);
             });
 
-            that.wrapper.delegate("[type=checkbox]", "change", function(e) {
+            that.wrapper.delegate("[type=checkbox]", CHANGE , function(e) {
                 var input = $(this),
-                    field = input.attr(kendo.attr("field"));
+                    args = {
+                        field: input.attr(kendo.attr("field")),
+                        hidden: true
+                    };
 
                 if (input.is(":checked")) {
-                    grid.showColumn(field);
-                } else {
-                    grid.hideColumn(field);
+                    args.hidden = false;
                 }
+
+                that.trigger(CHANGE, args);
 
                 //that.menu.close(that.menu.element);
                 //that.popup.close();
@@ -161,13 +218,32 @@
                     options.filterable)
                 );
             }
+        },
+
+        refresh: function() {
+            var that = this,
+                sort = that.options.dataSource.sort() || [],
+                descriptor,
+                field = that.field,
+                idx,
+                length;
+
+            that.wrapper.find(".k-sort-asc, .k-sort-desc").removeClass(ACTIVE);
+
+            for (idx = 0, length = sort.length; idx < length; idx++) {
+               descriptor = sort[idx];
+
+               if (field == descriptor.field) {
+                   that.wrapper.find(".k-sort-" + descriptor.dir).addClass(ACTIVE);
+               }
+            }
         }
     });
 
     var template = '<ul>'+
                     '#if(sort){#'+
-                        '<li class="k-item"><span class="k-link"><span class="k-sprite historyIcon"></span>${sort.asc}</span></li>'+
-                        '<li class="k-item"><span class="k-link"><span class="k-sprite historyIcon"></span>${sort.desc}</span></li>'+
+                        '<li class="k-item k-sort-asc"><span class="k-link"><span class="k-sprite historyIcon"></span>${sort.asc}</span></li>'+
+                        '<li class="k-item k-sort-desc"><span class="k-link"><span class="k-sprite historyIcon"></span>${sort.desc}</span></li>'+
                         '#if(columns || filter){#'+
                             '<li class="k-separator"></li>'+
                         '#}#'+
