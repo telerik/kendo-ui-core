@@ -15,8 +15,7 @@ Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.StockDat
         {
             series.ScatterLine(model => model.Date, model => model.Close)
                 .Name("close")
-                //.GroupNameTemplate("#= group.value # (#= series.name #)"
-                ;
+                .GroupNameTemplate("#= group.value # (#= series.name #)");
         })
         .Legend(legend => legend
             .Position(ChartLegendPosition.Bottom)
