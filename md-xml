@@ -1,0 +1,69 @@
+#!/usr/bin/env node
+
+var xml = require("libxmljs"),
+    fs = require("fs"),
+    path = require("path");
+
+var rawApi = fs.readFileSync("wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.xml", "utf8");
+var xmlDoc = xml.parseXmlString(rawApi);
+var members = xmlDoc.find("//member")
+
+var fluent = /(\w):Kendo\.Mvc\.UI\.Fluent\.([^\.]+)\./;
+
+var types = {};
+
+members.forEach(function(member) {
+    var name = member.attr("name").value();
+    var type;
+    var kind;
+    var fullName;
+
+    if (fluent.test(name)) {
+        kind = RegExp.$1;
+        fullName = "Kendo.Mvc.UI.Fluent." + RegExp.$2;
+        type = types[fullName];
+
+        if (!type) {
+            types [fullName] = type = {};
+            type.name = fullName;
+            type.methods = [];
+            type.properties = [];
+        }
+
+        if (kind == "M") {
+            var method = parseMethod(member);
+
+            if (!isEmpty(method)) {
+                method.name = memberName(fullName, name)
+                type.methods.push(method);
+            }
+        }
+    }
+});
+
+console.log(types["Kendo.Mvc.UI.Fluent.WindowBuilder"].methods);
+
+function memberName(typeName, name) {
+    return name.replace(/\w:/, "").substring(typeName.length + 1);
+}
+
+function parseMethod(element) {
+    var result = {};
+    var summary = element.get("summary");
+
+    if (summary) {
+        result.summary = summary.text();
+    }
+
+    return result;
+}
+
+function isEmpty(object) {
+    for (var member in object) {
+        return false;
+    }
+
+    return true;
+}
+
+// vim: ft=javascript
