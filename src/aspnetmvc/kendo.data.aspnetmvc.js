@@ -77,9 +77,10 @@
     }
 
     function serializeItem(result, item, prefix) {
-        var item = convert(item),
-            value,
+        var value,
             key;
+
+        item = convert(item);
 
         for (var member in item) {
             key = prefix + member;
@@ -106,9 +107,10 @@
                 value = value.toString();
             }
 
-            if (value == undefined) {
+            if (value === undefined) {
                 delete values[key];
             }
+
             if ($.isPlainObject(value)) {
                 convert(value);
             }
@@ -142,7 +144,7 @@
     function encodeFilterValue(value) {
        if (typeof value === "string") {
            if (value.indexOf('Date(') > -1) {
-               value = new Date(parseInt(value.replace(/^\/Date\((.*?)\)\/$/, '$1')));
+               value = new Date(parseInt(value.replace(/^\/Date\((.*?)\)\/$/, '$1'), 10));
            } else {
                return "'" + value.replace(escapeQuoteRegExp, "''") + "'";
            }
