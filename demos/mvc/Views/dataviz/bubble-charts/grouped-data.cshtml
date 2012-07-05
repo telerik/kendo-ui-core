@@ -1,0 +1,131 @@
+
+        <div id="example" class="k-content">
+            <div class="chart-wrapper">
+                <div id="chart"></div>
+                <ul class="k-content">
+                    <li>Circle size shows number of job applicants</li>
+                    <li>Vertical position shows number of employees</li>
+                    <li>Horizontal position shows job growth</li>
+                </ul>
+            </div>
+            <script>
+                var jobGrowth = [{
+                    growth: -2500,
+                    jobs: 50000,
+                    applications: 500000,
+                    company: "Microsoft",
+                    year: 2011
+                }, {
+                    growth: 500,
+                    jobs: 110000,
+                    applications: 7600000,
+                    company: "Starbucks",
+                    year: 2011
+                }, {
+                    growth: 7000,
+                    jobs: 19000,
+                    applications: 700000,
+                    company: "Google",
+                    year: 2011
+                }, {
+                    growth: -2000,
+                    jobs: 60000,
+                    applications: 900000,
+                    company: "Microsoft",
+                    year: 2012
+                }, {
+                    growth: 4000,
+                    jobs: 130000,
+                    applications: 8600000,
+                    company: "Starbucks",
+                    year: 2012
+                }, {
+                    growth: 9000,
+                    jobs: 29000,
+                    applications: 2200000,
+                    company: "Google",
+                    year: 2012
+                }];
+
+                function createChart() {
+                    $("#chart").kendoChart({
+                        theme: $(document).data("kendoSkin") || "default",
+                        title: {
+                            text: "Job Growth"
+                        },
+                        legend: {
+                            visible: false
+                        },
+                        dataSource: {
+                            data: jobGrowth,
+                            group: {
+                                field: "year"
+                            }
+                        },
+                        series: [{
+                            type: "bubble",
+                            xField: "growth",
+                            yField: "jobs",
+                            sizeField: "applications",
+                            categoryField: "company"
+                        }],
+                        xAxis: {
+                            labels: {
+                                format: "{0:N0}",
+                                skip: 1
+                            },
+                            axisCrossingValue: -10000,
+                            majorUnit: 2000,
+                            plotBands: [{
+                                from: -5000,
+                                to: 0,
+                                color: "#00f",
+                                opacity: 0.05
+                            }]
+                        },
+                        yAxis: {
+                            labels: {
+                                format: "{0:N0}"
+                            },
+                            line: {
+                                width: 0
+                            }
+                        },
+                        tooltip: {
+                            visible: true,
+                            opacity: 1,
+                            template: "#= category # (#= dataItem.year #): #= kendo.toString(value.size, 'N0') # applications"
+                        }
+                    });
+                }
+
+                $(document).ready(function() {
+                    setTimeout(function() {
+                        // Initialize the chart with a delay to make sure
+                        // the initial animation is visible
+                        createChart();
+
+                        $("#example").bind("kendo:skinChange", function(e) {
+                            createChart();
+                        });
+                    }, 400);
+                });
+            </script>
+            <style scoped>
+                .chart-wrapper {
+                    position: relative;
+                }
+
+                .chart-wrapper ul {
+                    font-size: 11px;
+                    margin: 62px 16px 0 0;
+                    padding: 30px;
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                    text-transform: uppercase;
+                    width: 150px;
+                    height: 105px;
+                }
+            </style>
+        </div>

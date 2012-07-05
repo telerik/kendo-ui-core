@@ -76,6 +76,9 @@
                 }, {
                     "text": "Binding to local data",
                     "url": "bubble-charts/local-data.html"
+				}, {
+                    "text": "Binding to grouped data",
+                    "url": "bubble-charts/grouped-data.html"
             }]
         }, {
             "text": "Line Charts",

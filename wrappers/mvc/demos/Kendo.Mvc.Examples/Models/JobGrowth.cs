@@ -9,5 +9,6 @@ namespace Kendo.Mvc.Examples.Models
         public int Jobs;
         public int Applications;
         public string Company;
+        public int Year;
     }
 }
