@@ -58,6 +58,15 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// The interval between minor divisions.
+        /// It defaults to MajorUnit / 5.
+        /// </summary>
+        public double? MinorUnit
+        {
+            get;
+            set;
+        }
+        /// <summary>
         /// Gets the axis serializer.
         /// </summary>
         public override IChartSerializer CreateSerializer()

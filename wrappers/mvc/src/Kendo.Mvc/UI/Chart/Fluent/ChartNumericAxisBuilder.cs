@@ -73,6 +73,30 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Sets the interval between minor divisions.
+        /// It defaults to MajorUnit / 5.
+        /// </summary>
+        /// <param name="minorUnit">The interval between minor divisions.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().Chart(Model)
+        ///            .Name("Chart")
+        ///            .ValueAxis(a => a.Numeric()
+        ///                 .MajorUnit(4)
+        ///                 .MinorUnit(2)
+        ///                 .MinorTicks(mt => mt.Visible(true))
+        ///            )
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartNumericAxisBuilder MinorUnit(double minorUnit)
+        {
+            Axis.MinorUnit = minorUnit;
+
+            return this;
+        }
+
+        /// <summary>
         /// Sets value at which the first perpendicular axis crosses this axis.
         /// </summary>
         /// <param name="axisCrossingValue">The value at which the first perpendicular axis crosses this axis.</param>

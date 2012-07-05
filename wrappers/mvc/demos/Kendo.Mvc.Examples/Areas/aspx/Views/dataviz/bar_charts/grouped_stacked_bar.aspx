@@ -60,6 +60,9 @@
             .Numeric().Labels(labels => 
                 labels.Template("#= kendo.format('{0:N0}', value / 1000) # M")
             )
+            .MajorUnit(500000)
+            .MinorUnit(200000)
+            .MinorTicks(mt => mt.Visible(true))
         )
         .Tooltip(tooltip => tooltip
             .Visible(true)

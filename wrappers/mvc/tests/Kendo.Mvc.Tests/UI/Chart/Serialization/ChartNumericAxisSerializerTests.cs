@@ -67,6 +67,20 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
+        public void Should_serialize_MinorUnit()
+        {
+            axisMock.SetupGet(a => a.MinorUnit).Returns(10);
+            serializer.Serialize()["minorUnit"].ShouldEqual(10.0);
+        }
+
+        [Fact]
+        public void Should_not_serialize_MinorUnit_if_not_set()
+        {
+            axisMock.SetupGet(a => a.MinorUnit).Returns((double?)null);
+            serializer.Serialize().ContainsKey("minorUnit").ShouldBeFalse();
+        }
+
+        [Fact]
         public void Should_serialize_AxisCrossingValues()
         {
             axisMock.SetupGet(a => a.AxisCrossingValues).Returns(new double [10]);

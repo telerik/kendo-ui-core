@@ -54,6 +54,19 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
+        public void MinorUnit_should_set_MinorUnit()
+        {
+            builder.MinorUnit(10);
+            axis.MinorUnit.ShouldEqual(10);
+        }
+
+        [Fact]
+        public void MinorUnit_should_return_builder()
+        {
+            builder.MinorUnit(10).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
         public void AxisCrossingValue_should_set_single_value()
         {
             builder.AxisCrossingValue(42);

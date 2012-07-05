@@ -25,5 +25,14 @@ namespace Kendo.Mvc.UI
         /// The interval between major divisions
         /// </summary>
         double? MajorUnit { get; set; }
+
+        /// <summary>
+        /// The interval between minor divisions.
+        /// </summary>
+        double? MinorUnit
+        {
+            get;
+            set;
+        }
     }
 }
