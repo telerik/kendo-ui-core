@@ -1,4 +1,4 @@
-var oldColor, devices = [ "ios", "android", "blackberry", "meego" ],
+var devices = [ "ios", "android", "blackberry", "meego" ],
     cursorSvg = 'url(\'data:image/svg+xml;utf-8,<svg xmlns="http:%2F%2Fwww.w3.org%2F2000%2Fsvg" width="32" height="32"><path d="M 0.89285714%2C31.196429 C 10.357143%2C5.080357 17.406299%2C-5.6022602 27.946429%2C3.8749999 43.883929%2C18.205357 0.89285714%2C31.196429 0.89285714%2C31.196429 z" style="fill:%23f984ef;stroke:%23000000;stroke-width:1px;" %2F><%2Fsvg>\') 0 32, auto';
 
 (function ($, undefined) {
@@ -7,8 +7,6 @@ var oldColor, devices = [ "ios", "android", "blackberry", "meego" ],
         Widget = ui.Widget,
         applications = {},
         counter = 1,
-        proxy = $.proxy,
-        extend = $.extend,
         clones = $.extend([], devices),
         widgetList = {
             icon: {
@@ -211,87 +209,6 @@ var oldColor, devices = [ "ios", "android", "blackberry", "meego" ],
         }
     }
 
-    var CustomPicker = Widget.extend({
-        init: function (element, options) {
-            var that = this;
-
-            Widget.fn.init.call(that, element, options);
-            element = that.element;
-
-            that.popup = new ui.Popup("<div class='k-colorpick'></div>", {
-                anchor: element,
-                origin: "bottom center",
-                position: "top center"
-            });
-
-            element
-                .bind({
-                    click: function(e) {
-                        e.preventDefault();
-                        that._toggle();
-                    }
-                });
-
-            that.color = new Color(element.css("background-color"));
-
-            that.colorElement = $('<div class="color-value">#</div>').appendTo(that.popup.element);
-
-            var popupElement = that.popup.element.addClass("k-list-container"),
-                hueElement = $('<label class="label">H<input type="progress" /></label>').appendTo(popupElement).find("input"),
-                hueValue = $('<div class="slider-value">0</div>').appendTo(popupElement),
-                saturationElement = $('<label class="label">S<input type="progress" /></label>').appendTo(popupElement).find("input"),
-                saturationValue = $('<div class="slider-value">0</div>').appendTo(popupElement),
-                lightnessElement = $('<label class="label">L<input type="progress" /></label>').appendTo(popupElement).find("input"),
-                lightnessValue = $('<div class="slider-value">0</div>').appendTo(popupElement),
-                alphaElement = $('<label class="label">A<input type="progress" /></label>').appendTo(popupElement).find("input"),
-                alphaValue = $('<div class="slider-value">0</div>').appendTo(popupElement),
-                slideProxy = proxy(that._onSlide, that);
-
-            that.hueSlider = extend(hueElement.kendoColorSlider({ max: 359, slide: slideProxy, change: slideProxy }).data("kendoColorSlider"), { type: "hue", valueElement: hueValue });
-            that.saturationSlider = extend(saturationElement.kendoColorSlider({ slide: slideProxy, change: slideProxy }).data("kendoColorSlider"), { type: "saturation", valueElement: saturationValue });
-            that.lightnessSlider = extend(lightnessElement.kendoColorSlider({ slide: slideProxy, change: slideProxy }).data("kendoColorSlider"), { type: "lightness", valueElement: lightnessValue });
-            that.alphaSlider = extend(alphaElement.kendoColorSlider({ max: 1, precision: 2, slide: slideProxy, change: slideProxy }).data("kendoColorSlider"), { type: "alpha", valueElement: alphaValue });
-        },
-        options: {
-            name: "CustomPicker"
-        },
-
-        _toggle: function(open) {
-            var that = this, color;
-            open = open !== undefined? open : !that.popup.visible();
-
-            if (open) {
-                color = that.color.set(that.element.css("background-color")).get();
-                that.colorElement.text(color);
-                that.colorElement.css("background-color", color);
-
-                that.hueSlider.value(that.color.hue());
-                that.saturationSlider.value(that.color.saturation());
-                that.lightnessSlider.value(that.color.lightness());
-                that.alphaSlider.value(that.color.alpha());
-
-                that.hueSlider.valueElement.text(that.color.hue());
-                that.saturationSlider.valueElement.text(that.color.saturation());
-                that.lightnessSlider.valueElement.text(that.color.lightness());
-                that.alphaSlider.valueElement.text(that.color.alpha());
-            }
-
-            that.popup[open ? "open" : "close"]();
-        },
-
-        _onSlide: function(e) {
-            var that = this,
-                c = that.color[e.sender.type](e.value).get();
-
-            that.element.css("background-color", c);
-            that.colorElement.text(c);
-            that.colorElement.css("background-color", c);
-            e.sender.valueElement.text(e.value);
-        }
-    });
-
-    kendo.ui.plugin(CustomPicker);
-
     var StyleEngine = Widget.extend({
         init: function (element, options) {
             var that = this;
@@ -463,8 +380,8 @@ function initTargets() {
                 this.element.parents(".device").data("kendoStyleEngine").update(this.element, { "background-color": color });
             }
         });
-        $("#picky").kendoCustomPicker();
-        $(".km-navbar").kendoCustomPicker();
+        $("#picky").kendoHSLPicker();
+        $(".km-navbar").kendoHSLPicker();
     }, 200);
 }
 

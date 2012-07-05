@@ -7,6 +7,14 @@
             "rgb": [ "red", "green", "blue", "alpha" ],
             "hsl": [ "h", "s", "l", "a" ]
         },
+        colorwheel = {
+            complementary: [ 180 ],
+            analogous: [ 30, -30 ],
+            split: [ 150, -150 ],
+            triad: [ 120, -120 ],
+            tetradic: [ 60, 180, -150 ],
+            square: [ 90, 180, -90 ]
+        },
         clamps = { h: 360, s: 100, l: 100, a: 1 },
         min = Math.min,
         max = Math.max,
@@ -45,6 +53,10 @@
         return result;
     }
 
+    function constructRgb(color, withAlpha) {
+        return "rgb" + (withAlpha ? "a" : "") + "(" + color.red + "," + color.green + "," + color.blue + (withAlpha ? "," + trimZeroes(color.alpha) : "") + ")";
+    }
+
     window.Color = kendo.Observable.extend({
         init: function(color) {
             this.set(color);
@@ -55,23 +67,15 @@
         },
 
         toRgb: function () {
-            var value = this.value;
-            return "rgb(" + value.red + "," + value.green + "," + value.blue + ")";
+            return constructRgb(this.value);
         },
 
         toRgba: function () {
-            var value = this.value;
-            return "rgba(" + value.red + "," + value.green + "," + value.blue + "," + trimZeroes(value.alpha) + ")";
+            return constructRgb(this.value, true);
         },
 
         get: function() {
-            var that = this;
-
-            if (that.value.alpha === 1) {
-                return that.toHex();
-            } else {
-                return that.toRgba();
-            }
+            return this.color2css(this.value);
         },
 
         set: function (value) {
@@ -103,6 +107,18 @@
             return this._set(this.subtraction(this.toRgba(), buildPercent(percent)));
         },
 
+        tint: function () {
+            return this._set(this.addition(this.toRgba(), "#FFF"));
+        },
+
+        shade: function () {
+            return this._set(this.addition(this.toRgba(), "#000"));
+        },
+
+        tone: function () {
+            return this._set(this.addition(this.toRgba(), "#999"));
+        },
+
         isHex: function(testee) {
             return (CssHexRegExp.test(testee));
         },
@@ -115,6 +131,14 @@
         isHsla: function(testee) {
             var color = CssColorRegExp.exec(testee);
             return (color ? color[1] == "hsl" : false);
+        },
+
+        color2css: function(color) {
+            if (color.alpha === 1) {
+                return this.rgb2hex(color);
+            } else {
+                return constructRgb(color, true);
+            }
         },
 
         hex2rgb: function(hex) {
@@ -270,6 +294,12 @@
                        green: 255 - color.green,
                        blue: 255 - color.blue
                    });
+        },
+
+        complement: function (color, type) {
+            var hsl = this.rgb2hsl(this.css2rgba(color));
+
+
         },
 
         rgb2hsl: function(color) {
