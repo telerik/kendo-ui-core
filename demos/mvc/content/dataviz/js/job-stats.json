@@ -1,0 +1,44 @@
+[
+    {
+        "growth": -2500,
+        "jobs": 50000,
+        "applications": 500000,
+        "company": "Microsoft",
+        "year": 2011
+    },
+    {
+        "growth": 500,
+        "jobs": 110000,
+        "applications": 7600000,
+        "company": "Starbucks",
+        "year": 2011
+    },
+    {
+        "growth": 7000,
+        "jobs": 19000,
+        "applications": 700000,
+        "company": "Google",
+        "year": 2011
+    },
+    {
+        "growth": -2000,
+        "jobs": 60000,
+        "applications": 900000,
+        "company": "Microsoft",
+        "year": 2012
+    },
+    {
+        "growth": 4000,
+        "jobs": 130000,
+        "applications": 8600000,
+        "company": "Starbucks",
+        "year": 2012
+    },
+    {
+        "growth": 9000,
+        "jobs": 29000,
+        "applications": 2200000,
+        "company": "Google",
+        "year": 2012
+    }
+]

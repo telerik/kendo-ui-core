@@ -58,7 +58,8 @@
                     "url": "bar-charts/local-data.html"
 				}, {
                     "text": "Binding to grouped data",
-                    "url": "bar-charts/grouped-data.html"
+                    "url": "bar-charts/grouped-data.html",
+                    "packages": [ "!offline" ]
             }],
             "name": "bar-charts"
         }, {
@@ -78,7 +79,8 @@
                     "url": "bubble-charts/local-data.html"
 				}, {
                     "text": "Binding to grouped data",
-                    "url": "bubble-charts/grouped-data.html"
+                    "url": "bubble-charts/grouped-data.html",
+                    "packages": [ "!offline" ]
             }]
         }, {
             "text": "Line Charts",
@@ -163,7 +165,8 @@
                     "url": "scatter-charts/local-data.html"
 				}, {
                     "text": "Binding to grouped data",
-                    "url": "scatter-charts/grouped-data.html"
+                    "url": "scatter-charts/grouped-data.html",
+                    "packages": [ "!offline" ]
             }],
             "name": "scatter-charts"
         }, {

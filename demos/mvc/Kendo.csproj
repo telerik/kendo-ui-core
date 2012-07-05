@@ -576,6 +576,7 @@
     </Content>
     <Content Include="Views\MobileDevice\Index.cshtml" />
     <Content Include="Views\Shared\NoLayout.cshtml" />
+    <None Include="content\dataviz\js\job-stats.json" />
     <None Include="content\dataviz\js\crime-stats.json" />
     <None Include="content\dataviz\js\screen_resolution.json" />
     <None Include="content\web\datasource\internet-users.json" />
