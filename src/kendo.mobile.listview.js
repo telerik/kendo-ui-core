@@ -509,6 +509,7 @@
 
             if (loading) {
                 that.loading = false;
+                that._calcTreshold();
 
                 if (options.loadMore) {
                     that._toggleButton(true);
