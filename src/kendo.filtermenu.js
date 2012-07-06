@@ -4,7 +4,6 @@
         NUMERICTEXTBOX = "kendoNumericTextBox",
         DATEPICKER = "kendoDatePicker",
         proxy = $.proxy,
-        noop = $.noop,
         POPUP = "kendoPopup",
         EQ = "Is equal to",
         NEQ = "Is not equal to",
