@@ -99,21 +99,30 @@
             "text": "Line Charts",
             "documentation": "dataviz/chart",
             "spriteCssClass": "chartLineIcon",
-            "items": [
-                {
+            "items": [{
                     "text": "Basic usage",
                     "url": "line-charts/index.html"
-                },
-                {
+                }, {
+                    "text": "Stacked line",
+                    "url": "line-charts/stacked-line.html"
+                }, {
+                    "text": "Date axis",
+                    "url": "line-charts/date-axis.html"
+                }, {
+                    "text": "Multi-axis",
+                    "url": "line-charts/multiple-axes.html"
+                }, {
                     "text": "Binding to remote data",
                     "url": "line-charts/remote-data.html",
                     "packages": [ "!offline" ]
-                },
-                {
+                }, {
                     "text": "Binding to local data",
                     "url": "line-charts/local-data.html"
-                }
-            ],
+                }, {
+                    "text": "Binding to grouped data",
+                    "url": "line-charts/grouped-data.html",
+                    "packages": [ "!offline" ]
+            }],
             "name": "line-charts"
         }, {
             "text": "Donut Charts",
