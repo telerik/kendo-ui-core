@@ -295,8 +295,7 @@
             that._footer(that.footer);
 
             element
-                .delegate(CELLSELECTOR, MOUSEENTER, mouseenter)
-                .delegate(CELLSELECTOR, MOUSELEAVE, mouseleave)
+                .delegate(CELLSELECTOR, MOUSEENTER + " " + MOUSELEAVE, mousetoggle)
                 .delegate(CELLSELECTOR, CLICK, proxy(that._click, that));
 
             value = options.value;
@@ -793,8 +792,7 @@
             }
 
             links = element.find(".k-link")
-                           .bind(MOUSEENTER, mouseenter)
-                           .bind(MOUSELEAVE, mouseleave)
+                           .bind(MOUSEENTER + " " + MOUSELEAVE, mousetoggle)
                            .click(false);
 
             that._title = links.eq(1).bind(CLICK, proxy(that.navigateUp, that));
@@ -1305,12 +1303,9 @@
         date.setFullYear(value);
     }
 
-    function mouseenter() {
-        $(this).addClass(HOVER);
-    }
-
-    function mouseleave() {
-        $(this).removeClass(HOVER);
+    function mousetoggle(e) {
+        e.stopImmediatePropagation();
+        $(this).toggleClass(HOVER, e.type == "mouseenter");
     }
 
     function prevent (e) {

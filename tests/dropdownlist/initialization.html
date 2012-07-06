@@ -646,14 +646,14 @@
             });
 
             test("extend popup options if dropdownlist.options.popup", function() {
-                var appendTo = "fake",
+                var appendTo = "body",
                     dropdownlist = new DropDownList($("<input/>"), {
                     popup: {
                         appendTo: appendTo
                     }
                 });
 
-                equal(dropdownlist.popup.options.appendTo, appendTo);
+                equal(dropdownlist.popup.options.appendTo[0], $(appendTo)[0]);
             });
 
             test("dropdownlist initializes a touch scroller when in mobile", function() {

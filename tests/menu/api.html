@@ -180,7 +180,7 @@
         asyncTest('hovering root item opens it and raises open event', function() {
             var item = getRootItem(1);
 
-            menu._mouseenter({ currentTarget: item[0] });
+            menu._mouseenter({ currentTarget: item[0], delegateTarget: menu.element[0] });
 
             setTimeout(function () {
                 ok(isOpenRaised);

@@ -146,14 +146,14 @@
             });
 
             test("extend popup options if datetimepicker.options.popup", function() {
-                var appendTo = "fake",
+                var appendTo = "body",
                     datetimepicker = new kendo.ui.DateTimePicker(input, {
                         popup: {
                             appendTo: appendTo
                         }
                     });
 
-                equal(datetimepicker.dateView.popup.options.appendTo, appendTo);
+                equal(datetimepicker.dateView.popup.options.appendTo[0], $(appendTo)[0]);
             });
 
             test("DateTimePicker strips the format from {0:format}", function() {

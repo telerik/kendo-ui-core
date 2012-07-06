@@ -7,10 +7,20 @@
     <script type="text/javascript" src="../src/kendo.fx.js"></script>
     <script type="text/javascript" src="../src/kendo.popup.js"></script>
     <script type="text/javascript" src="../src/kendo.menu.js"></script>
+    <script type="text/javascript" src="../src/kendo.data.js"></script>
+    <script type="text/javascript" src="../src/kendo.list.js"></script>
+    <script type="text/javascript" src="../src/kendo.autocomplete.js"></script>
+    <script type="text/javascript" src="../src/kendo.dropdownlist.js"></script>
+    <script type="text/javascript" src="../src/kendo.combobox.js"></script>
+    <script type="text/javascript" src="../src/kendo.calendar.js"></script>
+    <script type="text/javascript" src="../src/kendo.timepicker.js"></script>
+    <script type="text/javascript" src="../src/kendo.datepicker.js"></script>
+    <script type="text/javascript" src="../src/kendo.datetimepicker.js"></script>
+    <script type="text/javascript" src="../src/kendo.numerictextbox.js"></script>
     <style type="text/css">
         html
         {
-            font: 11px Arial, Helvetica, sans-serif;
+            font: 12px Arial, Helvetica, sans-serif;
         }
         #Menu-4
         {
@@ -56,6 +66,53 @@
             $("#Menu").kendoMenu({ openOnClick: true });
             $("#Menu1").kendoMenu({ animation: false });
             $("#Menu2").kendoMenu({ orientation: 'vertical' }).css({ width: '200px' });
+
+            var data = [
+                { text: "Black", value: "1" },
+                { text: "Orange", value: "2" },
+                { text: "Grey", value: "3" }
+            ];
+
+            // create DropDownList from input HTML element
+            $("#drop").kendoDropDownList({
+                dataTextField: "text",
+                dataValueField: "value",
+                dataSource: data
+            });
+
+            $("#combo").kendoComboBox();
+            $("#autocomplete").kendoAutoComplete({
+                dataSource: [
+                    "Albania",
+                    "Andorra",
+                    "Armenia",
+                    "Austria",
+                    "Azerbaijan",
+                    "Belarus",
+                    "Belgium",
+                    "Bosnia & Herzegovina",
+                    "Bulgaria",
+                    "Croatia",
+                    "Cyprus",
+                    "Czech Republic",
+                    "Denmark",
+                    "Estonia",
+                    "Finland",
+                    "France",
+                    "Georgia",
+                    "Germany",
+                    "Greece",
+                    "Hungary",
+                    "Iceland"
+                ]
+            });
+
+            $("#timepicker").kendoTimePicker();
+            $("#datepicker").kendoDatePicker();
+            $("#datetimepicker").kendoDateTimePicker();
+            $("#numeric").kendoNumericTextBox();
+            $("#insideMenu").kendoMenu();
+
             $("#Menu3").kendoMenu({ popupCollision: false });
             $("#Menu4").kendoMenu({
                 dataSource: [
@@ -357,8 +414,29 @@
         <ul>
             <li>
                 <div id="Menu2-4">
-                    <img alt="Telerik OpenAccess" src="Icons/orm-comparison.png">
-                    <input type="text" />
+                    <input id="autocomplete" type="text" />
+                    <input id="drop" type="text" />
+                    <select id="combo">
+                        <option>Test</option>
+                        <option>Test</option>
+                        <option>Test</option>
+                    </select>
+                    <input id="timepicker" value="19:30" style="width:150px;" />
+                    <input id="datepicker" value="10/10/2011" style="width:150px;" /><br />
+                    <input id="datetimepicker" value="10/10/2011" style="width:150px;" />
+                    <input id="numeric" type="number" />
+
+                    <ul id="insideMenu">
+                        <li>Test
+                            <ul>
+                                <li>Shmest</li>
+                                <li>Shmest</li>
+                                <li>Shmest</li>
+                            </ul>
+                        </li>
+                        <li>Test</li>
+                        <li>Test</li>
+                    </ul>
                 </div>
             </li>
         </ul>
@@ -438,5 +516,6 @@
     </li>
 </ul>
 <ul id="Menu4"></ul>
+
 </body>
 </html>

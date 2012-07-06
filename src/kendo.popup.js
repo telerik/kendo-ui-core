@@ -47,7 +47,7 @@
 
     var Popup = Widget.extend({
         init: function(element, options) {
-            var that = this;
+            var that = this, parentPopup;
 
             Widget.fn.init.call(that, element, options);
 
@@ -60,10 +60,13 @@
                 that.collisions.push(that.collisions[0]);
             }
 
+            parentPopup = $(that.options.anchor).closest(".k-popup,.k-group"); // When popup is in another popup, make it relative.
+            options.appendTo = $($(options.appendTo)[0] || parentPopup[0] || BODY);
+
             that.element.hide()
                 .addClass("k-popup k-group k-reset")
                 .css({ position : ABSOLUTE })
-                .appendTo($(options.appendTo))
+                .appendTo(options.appendTo)
                 .bind("mouseenter mouseleave", function(e) {
                     that._hovered = e.type === "mouseenter";
                 });
@@ -139,7 +142,6 @@
             origin: BOTTOM + " " + LEFT,
             position: TOP + " " + LEFT,
             anchor: BODY,
-            appendTo: BODY,
             collision: "flip fit",
             viewport: window,
             animation: {
@@ -241,11 +243,20 @@
                 options = that.options,
                 animation, openEffects, closeEffects;
 
-
             if (that.visible()) {
                 if (that._closing || that.trigger(CLOSE)) {
                     return;
                 }
+
+                // Close all inclusive popups.
+                that.element.find(".k-popup").each(function () {
+                    var that = $(this),
+                        popup = that.data("kendoPopup");
+
+                    if (popup) {
+                        popup.close();
+                    }
+                });
 
                 DOCUMENT_ELEMENT.unbind(MOUSEDOWN, that._mousedownProxy);
                 WINDOW.unbind(RESIZE_SCROLL, that._resizeProxy);

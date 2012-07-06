@@ -153,7 +153,7 @@
 
         that.calendar = sharedCalendar;
         that.options = options = options || {};
-        that.popup = new ui.Popup($(DIV).addClass("k-calendar-container").appendTo(body), extend(options.popup, options));
+        that.popup = new ui.Popup($(DIV).addClass("k-calendar-container").appendTo(body), extend(options.popup, options, { name: "Popup" }));
 
         that._templates();
 

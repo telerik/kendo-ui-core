@@ -151,10 +151,11 @@
         DEFAULTSTATE = "k-state-default",
         DISABLEDSTATE = "k-state-disabled",
         groupSelector = ".k-group",
-        allItemsSelector = ".k-item",
+        allItemsSelector = ":not(.k-list) > .k-item",
         disabledSelector = ".k-item.k-state-disabled",
         itemSelector = ".k-item:not(.k-state-disabled)",
         linkSelector = ".k-item:not(.k-state-disabled) > .k-link",
+        templateSelector = "div:not(.k-animation-container,.k-list-container)",
 
         templates = {
             content: template(
@@ -891,6 +892,16 @@
                 direction = horizontal ? (direction + " right").replace("default", "bottom") : "right";
             }
 
+            element.siblings()
+                   .find(">.k-popup:visible,>.k-animation-container>.k-popup:visible")
+                   .each(function () {
+                       var popup = $(this).data("kendoPopup");
+
+                       if (popup) {
+                           popup.close();
+                       }
+                   });
+
             element.each(function () {
                 var li = $(this);
 
@@ -1027,6 +1038,10 @@
                 element = $(e.currentTarget),
                 hasChildren = (element.children(".k-animation-container").length || element.children(groupSelector).length);
 
+            if (e.delegateTarget != element.parents(".k-menu")[0]) {
+                return;
+            }
+
             if (!that.options.openOnClick || that.clicked) {
                 if (!contains(e.currentTarget, e.relatedTarget) && hasChildren) {
                     that.open(element);
@@ -1045,6 +1060,11 @@
                 element = $(e.currentTarget),
                 hasChildren = (element.children(".k-animation-container").length || element.children(groupSelector).length);
 
+            if (element.parentsUntil(".k-animation-container", ".k-list-container,.k-calendar-container")[0]) {
+                e.stopImmediatePropagation();
+                return;
+            }
+
             if (!that.options.openOnClick && !contains(e.currentTarget, e.relatedTarget) && hasChildren) {
                 that.close(element);
             }
@@ -1058,7 +1078,7 @@
                 element = target.closest(allItemsSelector),
                 isLink = (!!href && href.charAt(href.length - 1) != "#");
 
-            if (element.children("div:not(.k-animation-container)")[0]) {
+            if (element.children(templateSelector)[0]) {
                 return;
             }
 

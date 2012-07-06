@@ -262,14 +262,14 @@
             });
 
             test("extend popup options if datepicker.options.popup", function() {
-                var appendTo = "fake",
+                var appendTo = "body",
                     datepicker = new kendo.ui.DatePicker(input, {
                         popup: {
                             appendTo: appendTo
                         }
                     });
 
-                equal(datepicker.dateView.popup.options.appendTo, appendTo);
+                equal(datepicker.dateView.popup.options.appendTo[0], $(appendTo)[0]);
             });
 
             test("DatePicker adds format to parseFormats array", function() {
