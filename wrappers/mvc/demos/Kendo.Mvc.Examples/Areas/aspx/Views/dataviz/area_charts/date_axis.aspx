@@ -79,7 +79,7 @@
         .Series(series =>
         {
             series
-                .Column(new int[] { 20, 40, 45, 30, 50 })
+                .Area(new int[] { 20, 40, 45, 30, 50 })
                 .Aggregate(ChartSeriesAggregate.Sum);
         })
         .CategoryAxis(axis => axis

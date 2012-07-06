@@ -576,6 +576,7 @@
     </Content>
     <Content Include="Views\MobileDevice\Index.cshtml" />
     <Content Include="Views\Shared\NoLayout.cshtml" />
+    <None Include="content\dataviz\js\job-stats.json" />
     <None Include="content\dataviz\js\crime-stats.json" />
     <None Include="content\dataviz\js\screen_resolution.json" />
     <None Include="content\web\datasource\internet-users.json" />
@@ -633,6 +634,17 @@
     <Content Include="Views\dataviz\bubble-charts\index.cshtml" />
     <Content Include="Views\dataviz\bubble-charts\local-data.cshtml" />
     <Content Include="Views\dataviz\bubble-charts\remote-data.cshtml" />
+    <Content Include="Views\dataviz\bar-charts\grouped-data.cshtml" />
+    <Content Include="Views\dataviz\scatter-charts\grouped-data.cshtml" />
+    <Content Include="Views\dataviz\bubble-charts\grouped-data.cshtml" />
+    <Content Include="Views\dataviz\area-charts\stacked-area.cshtml" />
+    <Content Include="Views\dataviz\area-charts\date-axis.cshtml" />
+    <Content Include="Views\dataviz\area-charts\multiple-axes.cshtml" />
+    <Content Include="Views\dataviz\area-charts\grouped-data.cshtml" />
+    <Content Include="Views\dataviz\line-charts\date-axis.cshtml" />
+    <Content Include="Views\dataviz\line-charts\grouped-data.cshtml" />
+    <Content Include="Views\dataviz\line-charts\multiple-axes.cshtml" />
+    <Content Include="Views\dataviz\line-charts\stacked-line.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />

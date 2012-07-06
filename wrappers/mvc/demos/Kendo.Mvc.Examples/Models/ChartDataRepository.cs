@@ -569,6 +569,50 @@ namespace Kendo.Mvc.Examples.Models
             };
         }
 
+        public static IList<JobGrowth> JobGrowthDataComparative()
+        {
+            return new JobGrowth[] {
+                new JobGrowth {
+                    Growth = -2500,
+                    Jobs = 50000,
+                    Applications = 500000,
+                    Company = "Microsoft",
+                    Year = 2011
+                }, new JobGrowth {
+                    Growth = 500,
+                    Jobs = 110000,
+                    Applications = 7600000,
+                    Company = "Starbucks",
+                    Year = 2011
+                }, new JobGrowth {
+                    Growth = 7000,
+                    Jobs = 19000,
+                    Applications = 700000,
+                    Company = "Google",
+                    Year = 2011
+                }, 
+                new JobGrowth {
+                    Growth = -2000,
+                    Jobs = 60000,
+                    Applications = 900000,
+                    Company = "Microsoft",
+                    Year = 2012
+                }, new JobGrowth {
+                    Growth = 4000,
+                    Jobs = 130000,
+                    Applications = 8600000,
+                    Company = "Starbucks",
+                    Year = 2012
+                }, new JobGrowth {
+                    Growth = 9000,
+                    Jobs = 29000,
+                    Applications = 2200000,
+                    Company = "Google",
+                    Year = 2012
+                }
+            };
+        }
+
         public static IList<CrimeData> CrimeStats()
         {
             return new CrimeData[] {

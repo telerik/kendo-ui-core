@@ -44,7 +44,6 @@
 
     function onError(e) {
         kendoConsole.log("Error (" + e.operation + ") :: " + getFileInfo(e));
-        e.preventDefault(); // Suppress error message
     }
 
     function onComplete(e) {
