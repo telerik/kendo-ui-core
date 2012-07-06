@@ -6,7 +6,7 @@
         grep = $.grep,
         map = $.map,
         inArray = $.inArray,
-        ACTIVE = "k-state-active",
+        ACTIVE = "k-state-selected",
         ASC = "asc",
         DESC = "desc",
         CLICK = "click",

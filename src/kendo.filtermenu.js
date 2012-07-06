@@ -12,11 +12,13 @@
     var booleanTemplate =
             '<div>' +
                 '<div class="k-filter-help-text">#=messages.info#</div>'+
-                '<label>#=messages.isTrue#'+
+                '<label>'+
                     '<input type="radio" data-#=ns#bind="checked: filters[0].value" value="true" name="filters[0].value"/>' +
+                    '#=messages.isTrue#' +
                 '</label>' +
-                '<label>#=messages.isFalse#'+
+                '<label>'+
                     '<input type="radio" data-#=ns#bind="checked: filters[0].value" value="false" name="filters[0].value"/>' +
+                    '#=messages.isFalse#' +
                 '</label>' +
                 '<button type="submit" class="k-button">#=messages.filter#</button>'+
                 '<button type="reset" class="k-button">#=messages.clear#</button>'+

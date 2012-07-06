@@ -269,7 +269,7 @@
 
                 var item = menu.wrapper.find(".k-sort-asc").click();
 
-                ok(item.hasClass("k-state-active"));
+                ok(item.hasClass("k-state-selected"));
             });
 
             test("clicking desc item highlight it", function() {
@@ -278,8 +278,8 @@
                 var ascItem = menu.wrapper.find(".k-sort-asc").click();
                 var descItem = menu.wrapper.find(".k-sort-desc").click();
 
-                ok(descItem.hasClass("k-state-active"));
-                ok(!ascItem.hasClass("k-state-active"));
+                ok(descItem.hasClass("k-state-selected"));
+                ok(!ascItem.hasClass("k-state-selected"));
             });
 
             test("sort asc item is highlighted on dataSource sort", function() {
@@ -288,7 +288,7 @@
                 dataSource.sort({ field: "foo", dir: "asc" });
 
                 var ascItem = menu.wrapper.find(".k-sort-asc");
-                ok(ascItem.hasClass("k-state-active"));
+                ok(ascItem.hasClass("k-state-selected"));
             });
 
             test("sort asc item is unhighlighted on dataSource sort", function() {
@@ -297,7 +297,7 @@
                 var ascItem = menu.wrapper.find(".k-sort-asc").click();
                 dataSource.sort({ field: "foo" });
 
-                ok(!ascItem.hasClass("k-state-active"));
+                ok(!ascItem.hasClass("k-state-selected"));
             });
 
             test("sort desc item is highlighted on dataSource sort", function() {
@@ -306,7 +306,7 @@
                 dataSource.sort({ field: "foo", dir: "desc" });
 
                 var descItem = menu.wrapper.find(".k-sort-desc");
-                ok(descItem.hasClass("k-state-active"));
+                ok(descItem.hasClass("k-state-selected"));
             });
 
             test("sort desc item is unhighlighted on dataSource sort", function() {
@@ -315,7 +315,7 @@
                 var descItem = menu.wrapper.find(".k-sort-desc").click();
                 dataSource.sort({ field: "foo" });
 
-                ok(!descItem.hasClass("k-state-active"));
+                ok(!descItem.hasClass("k-state-selected"));
             });
 
             test("destroy calls filter menu destroy", function() {
