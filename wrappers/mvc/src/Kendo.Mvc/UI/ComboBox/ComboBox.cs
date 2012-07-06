@@ -1,7 +1,9 @@
 namespace Kendo.Mvc.UI
 {
     using Kendo.Mvc.Infrastructure;
+    using Kendo.Mvc.UI;
     using Kendo.Mvc.UI.Html;
+    using System.Globalization;
     using System.IO;
     using System.Web.Mvc;
 
@@ -64,10 +66,30 @@ namespace Kendo.Mvc.UI
         {
             get;
             set;
-        }     
+        }
+
+        public string Text
+        {
+            get;
+            set;
+        }
 
         public override void WriteInitializationScript(TextWriter writer)
         {
+            if (DataSource.ServerFiltering && !DataSource.Transport.Read.Data.HasValue())
+            {
+                var name = "#" + Name;
+                if (IsInClientTemplate)
+                {
+                    name = "\\" + name;
+                }
+
+                DataSource.Transport.Read.Data = new ClientEvent
+                {
+                    HandlerName = "function() { var selector = \"" + name + "\"; return kendo.ui.ComboBox.requestData(selector); }"
+                };
+            }
+
             var options = this.SeriailzeBaseOptions();
 
             if (AutoBind != null)
@@ -115,6 +137,12 @@ namespace Kendo.Mvc.UI
                 options["cascadeFrom"] = CascadeFrom;
             }
 
+            var text = this.GetInputValue();
+            if (!string.IsNullOrEmpty(text))
+            {
+                options["text"] = text;
+            }
+
             writer.Write(Initializer.Initialize(Selector, "ComboBox", options));
 
             base.WriteInitializationScript(writer);
@@ -125,6 +153,26 @@ namespace Kendo.Mvc.UI
             new DropDownListHtmlBuilderBase(this).Build().WriteTo(writer);
 
             base.WriteHtml(writer);
+        }
+
+        protected string GetInputValue()
+        {
+            var inputName = Name + "_input";
+            var text = this.GetValue<string>(inputName, null);
+
+            if (string.IsNullOrEmpty(text)) {
+                var result = this.ViewContext.Controller.ValueProvider.GetValue(inputName);
+
+                var found = result != null;
+                if (found)
+                {
+                    return (string)result.ConvertTo(typeof(string), CultureInfo.CurrentCulture);
+                }
+
+                text = Text;
+            }
+
+            return text;
         }
     }
 }

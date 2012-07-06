@@ -28,6 +28,7 @@ var multipartScripts = [{
       }, {
       output:   "kendo.aspnetmvc.js",
       inputs: [ path.join("aspnetmvc", "kendo.data.aspnetmvc.js"),
+                path.join("aspnetmvc", "kendo.combobox.aspnetmvc.js"),
                 path.join("aspnetmvc", "kendo.validator.aspnetmvc.js") ]
 }];
 

@@ -153,5 +153,12 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        public DropDownListBuilder Text(string text)
+        {
+            Component.Text = text;
+
+            return this;
+        }
     }
 }

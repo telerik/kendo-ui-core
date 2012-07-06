@@ -12,7 +12,7 @@ namespace Kendo.Mvc.Examples.Controllers
             return View();
         }
 
-        public JsonResult GetProducts(string filterText)
+        public JsonResult GetProducts(string text)
         {
             var northwind = new NorthwindDataContext();
 
@@ -27,9 +27,9 @@ namespace Kendo.Mvc.Examples.Controllers
                 Discontinued = product.Discontinued
             });
 
-            if (!string.IsNullOrEmpty(filterText))
+            if (!string.IsNullOrEmpty(text))
             {
-                products = products.Where(p => p.ProductName.Contains(filterText));
+                products = products.Where(p => p.ProductName.Contains(text));
             }
 
             return Json(products, JsonRequestBehavior.AllowGet);

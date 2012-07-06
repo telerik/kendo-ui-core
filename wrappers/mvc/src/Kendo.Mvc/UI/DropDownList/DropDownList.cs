@@ -42,6 +42,12 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        public string Text
+        {
+            get;
+            set;
+        }
+
         public override void WriteInitializationScript(TextWriter writer)
         {
             var options = this.SeriailzeBaseOptions();
@@ -69,6 +75,11 @@ namespace Kendo.Mvc.UI
             if (!string.IsNullOrEmpty(CascadeFrom))
             {
                 options["cascadeFrom"] = CascadeFrom;
+            }
+
+            if (!string.IsNullOrEmpty(Text))
+            {
+                options["text"] = Text;
             }
 
             writer.Write(Initializer.Initialize(Selector, "DropDownList", options));

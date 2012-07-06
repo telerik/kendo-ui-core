@@ -24,7 +24,7 @@
 <script>
     function onAdditionalData() {
         return {
-            filterText: $("#products").val() 
+            text: $("#products").val() 
         };
     }
 </script>

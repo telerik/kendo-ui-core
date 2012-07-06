@@ -15,20 +15,10 @@
           .DataSource(source => {
               source.Read(read =>
               {
-                  read.Action("GetProducts", "Home")
-                      .Data("onAdditionalData");
+                  read.Action("GetProducts", "Home");
               })
               .ServerFiltering(true);
           })
     %>
 </div>
-<script>
-    function onAdditionalData() {
-        var combobox = $("#products").data("kendoComboBox");
-
-        return {
-            filterText: combobox.input.val() 
-        };
-    }
-</script>
 </asp:Content>

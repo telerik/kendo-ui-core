@@ -478,6 +478,7 @@ namespace("mvc", function() {
 
                     csproj = csproj.replace(/\.\.\\shared\\Kendo.snk/g, "Kendo.snk")
                                    .replace(/<Content Include=".*?data\.aspnetmvc\.js"(.|\r|\n)*?<\/Content>/ig, "")
+                                   .replace(/<Content Include=".*?combobox\.aspnetmvc\.js"(.|\r|\n)*?<\/Content>/ig, "")
                                    .replace(/<Content Include=".*?validator\.aspnetmvc\.js"(.|\r|\n)*?<\/Content>/ig, '<Content Include="..\\js\\kendo.aspnetmvc.js"><Link>Scripts\\kendo.aspnetmvc.js</Link></Content>')
                                    .replace("<Link>Kendo.snk</Link>", "")
                                    .replace(/\.\.\\shared\\CommonAssemblyInfo.cs/g, "CommonAssemblyInfo.cs")

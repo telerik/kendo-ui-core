@@ -43,18 +43,6 @@ namespace Kendo.Mvc.UI
             return formattedValue;
         }
 
-        public static string GetValueFromViewDataByName(this IViewComponent instance)
-        {
-            string result = instance.ViewContext.Controller.ValueOf<string>(instance.Name);
-            if (result.HasValue())
-            {
-                return result;
-            }
-
-            object value = instance.ViewContext.ViewData.Eval(instance.Name);
-            return value != null && value.GetType().IsPredefinedType() ? Convert.ToString(value) : string.Empty;
-        }
-
         public static bool IsValid(this IViewComponent instance)
         {
             if (instance.ViewContext != null)

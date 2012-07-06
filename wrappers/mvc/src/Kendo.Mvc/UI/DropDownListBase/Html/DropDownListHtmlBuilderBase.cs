@@ -19,11 +19,13 @@ namespace Kendo.Mvc.UI.Html
 
         public IHtmlNode Build()
         {
+            var value = Component.GetValue(Component.Value);
+
             return new HtmlElement("input", TagRenderMode.SelfClosing)
                    .Attributes(new { name = Component.Name, id = Component.Id, type = "text" })
                    .Attributes(Component.HtmlAttributes)
                    .Attributes(Component.GetUnobtrusiveValidationAttributes())
-                   .ToggleAttribute("value", Component.Value, Component.Value.HasValue())
+                   .ToggleAttribute("value", value, value.HasValue())
                    .ToggleAttribute("disabled", "disabled", Component.Enabled == false)
                    .ToggleClass("input-validation-error", !Component.IsValid());
         }

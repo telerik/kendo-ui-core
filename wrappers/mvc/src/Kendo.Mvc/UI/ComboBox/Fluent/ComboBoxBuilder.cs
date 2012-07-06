@@ -227,5 +227,12 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        public ComboBoxBuilder Text(string text)
+        {
+            Component.Text = text;
+
+            return this;
+        }
     }
 }
