@@ -228,6 +228,30 @@
                 });
 
                 // ------------------------------------------------------------
+                module("Date CategoryAxis / Base unit / Hours");
+
+                test("Base unit is determined by series delta", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/05 11:00:00"), new Date("2012/02/05 11:05:00")
+                        ]
+                    });
+
+                    equals(dateAxis.options.baseUnit, "minutes");
+                });
+
+                test("creates labels with default format", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 10:00:00"), new Date("2012/02/01 10:02:00")
+                        ]
+                    });
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["10:00", "10:01", "10:02"]);
+                });
+
+                // ------------------------------------------------------------
                 module("Date CategoryAxis / Base unit / Days");
 
                 test("Base unit is determined by series delta", function() {

@@ -136,6 +136,7 @@
         XY_CHARTS = [SCATTER, SCATTER_LINE, BUBBLE];
 
     var DateLabelFormats = {
+        minutes: "HH:mm",
         hours: "HH:mm",
         days: "M/d",
         months: "MMM 'yy",
@@ -1104,8 +1105,10 @@
                         unit = MONTHS;
                     } else if (cat.getDay() - lastCat.getDay() > 0) {
                         unit = DAYS;
-                    } else {
+                    } else if (cat.getHours() - lastCat.getHours() > 0) {
                         unit = HOURS;
+                    } else {
+                        unit = MINUTES;
                     }
 
                     baseUnit = baseUnit || unit;
