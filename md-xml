@@ -9,33 +9,41 @@ var xmlDoc = xml.parseXmlString(rawApi);
 var members = xmlDoc.find("//member")
 
 function parseNamespace(namespace) {
-    var namespaceRegExp = new RegExp("(\\w):" + namespace.replace(/\./g, "\\.") + "\\.([^\\.]+)\\.");
+    var namespaceRegExp = new RegExp("(\\w):" + namespace.replace(/\./g, "\\.") + "\\.([^\\.]+)\\.?");
     var types = {};
 
     members.forEach(function(member) {
-        var name = member.attr("name").value();
+        var name = member.attr("name").value().replace(/`\d/, "");
         var type;
         var kind;
         var fullName;
+        var shortName;
 
         if (namespaceRegExp.test(name)) {
             kind = RegExp.$1;
-            fullName = namespace + "." + RegExp.$2;
-            type = types[fullName];
+            shortName = RegExp.$2;
+            fullName = namespace + "." + shortName;
+            type = types[shortName];
 
             if (!type) {
-                types [fullName] = type = {};
+                types [shortName] = type = {};
                 type.name = fullName;
                 type.methods = [];
                 type.properties = [];
             }
 
-            if (kind == "M") {
+            if (kind == "M" && name.indexOf("#ctor") < 0) {
                 var method = parseMethod(member);
 
-                if (!isEmpty(method)) {
-                    method.name = memberName(fullName, name)
-                    type.methods.push(method);
+                method.name = memberName(fullName, name)
+                type.methods.push(method);
+            }
+
+            if (kind == "T") {
+                var summary = member.get("summary");
+
+                if (summary && summary.text().trim()) {
+                    type.summary = summary.text().trim();
                 }
             }
         }
@@ -55,6 +63,10 @@ function typeToMarkdown(type) {
 
     markdown += "\n\n# " + type.name;
 
+    if (type.summary) {
+        markdown += "\n\n" + type.summary;
+    }
+
     if (type.methods.length) {
         markdown += "\n\n## Methods";
 
@@ -63,7 +75,7 @@ function typeToMarkdown(type) {
         });
     }
 
-    return markdown;
+    return markdown.trim();
 }
 
 function emitMethod(method) {
@@ -75,6 +87,14 @@ function emitMethod(method) {
         markdown += "\n" + method.summary;
     }
 
+    if (method.examples) {
+        markdown += "\n\n#### Example";
+
+        method.examples.forEach(function(example) {
+            markdown += emitExample(example);
+        })
+    }
+
     if (method.params) {
         var paramTypes = /\(([^\)]*)\)$/.exec(method.name)[1].split(",");
 
@@ -83,6 +103,11 @@ function emitMethod(method) {
         method.params.forEach(function(param, index) {
             markdown += emitParam(param, paramTypes[index]);
         })
+    }
+
+    if (method.returns) {
+        markdown += "\n\n#### Returns";
+        markdown += "\n" + method.returns;
     }
 
     return markdown;
@@ -100,6 +125,10 @@ function emitParam(param, type) {
     return markdown;
 }
 
+function emitExample(example) {
+    return "\n    " + example.code.replace(/^ {4}/gm, "").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"');
+}
+
 function memberName(typeName, name) {
     return name.replace(/\w:/, "").substring(typeName.length + 1);
 }
@@ -115,15 +144,37 @@ function parseMethod(element) {
     var params = element.find("param");
 
     if (params.length) {
-        result.params = params.map(function(param){
-            return {
-               name: param.attr("name").value(),
-               summary: param.text()
-            }
-        });
+        result.params = params.map(parseParam);
+    }
+
+    var examples = element.find("example");
+
+    if (examples.length) {
+        result.examples = examples.map(parseExample);
+    }
+
+    var returns = element.get("returns");
+
+    if (returns && returns.text().trim()) {
+        result.returns = returns.text().trim();
     }
 
     return result;
+}
+
+function parseParam(param) {
+    return {
+       name: param.attr("name").value(),
+       summary: param.text()
+    }
+}
+
+function parseExample(example) {
+    var code = example.get("code");
+
+    return {
+       code: code.text().trim()
+    }
 }
 
 function isEmpty(object) {
@@ -164,7 +215,7 @@ function makeDir(/**string*/ path) {
 }
 
 var types = parseNamespace("Kendo.Mvc.UI.Fluent");
-var path = "docs/api/wrappers/asp-net-mvc/reference/";
+var path = "docs/api/wrappers/aspnet-mvc/Kendo.Mvc.UI.Fluent";
 
 makePath(path);
 
