@@ -34,6 +34,10 @@
                 }, {
                     "text": "Binding to local data",
                     "url": "area-charts/local-data.html"
+				}, {
+                    "text": "Binding to grouped data",
+                    "url": "area-charts/grouped-data.html",
+                    "packages": [ "!offline" ]
             }],
             "name": "area-charts"
         }, {

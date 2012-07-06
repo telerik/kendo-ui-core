@@ -640,6 +640,7 @@
     <Content Include="Views\dataviz\area-charts\stacked-area.cshtml" />
     <Content Include="Views\dataviz\area-charts\date-axis.cshtml" />
     <Content Include="Views\dataviz\area-charts\multiple-axes.cshtml" />
+    <Content Include="Views\dataviz\area-charts\grouped-data.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />
