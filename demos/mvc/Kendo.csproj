@@ -638,6 +638,7 @@
     <Content Include="Views\dataviz\scatter-charts\grouped-data.cshtml" />
     <Content Include="Views\dataviz\bubble-charts\grouped-data.cshtml" />
     <Content Include="Views\dataviz\area-charts\stacked-area.cshtml" />
+    <Content Include="Views\dataviz\area-charts\date-axis.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />

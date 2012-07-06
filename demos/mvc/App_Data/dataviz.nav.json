@@ -22,6 +22,9 @@
                     "text": "Stacked area",
                     "url": "area-charts/stacked-area.html"
                 }, {
+                    "text": "Date axis",
+                    "url": "area-charts/date-axis.html"
+                }, {
                     "text": "Binding to remote data",
                     "url": "area-charts/remote-data.html",
                     "packages": [ "!offline" ]

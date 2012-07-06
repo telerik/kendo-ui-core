@@ -76,6 +76,7 @@
   <ItemGroup>
     <Compile Include="Areas\aspx\ASPXAreaRegistration.cs" />
     <Compile Include="Areas\razor\RazorAreaRegistration.cs" />
+    <Compile Include="Controllers\DataViz\Area_Charts\Date_AxisController.cs" />
     <Compile Include="Controllers\DataViz\Area_Charts\Stacked_BarController.cs" />
     <Compile Include="Controllers\DataViz\Bar_Charts\Grouped_DataController.cs" />
     <Compile Include="Controllers\DataViz\Bar_Charts\Date_AxisController.cs" />
@@ -297,6 +298,7 @@
     </Content>
     <Content Include="Areas\aspx\Views\dataviz\api\events.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\api\index.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\area_charts\date_axis.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\area_charts\local_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\area_charts\remote_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\area_charts\stacked_area.aspx" />
@@ -718,6 +720,7 @@
     <Content Include="Areas\razor\Views\dataviz\scatter_charts\grouped_data.cshtml" />
     <Content Include="Areas\razor\Views\dataviz\bubble_charts\grouped_data.cshtml" />
     <Content Include="Areas\razor\Views\dataviz\area_charts\stacked_area.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\area_charts\date_axis.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
