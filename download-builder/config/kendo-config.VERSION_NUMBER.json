@@ -134,6 +134,18 @@
             "advanced": true
         },
         {
+            "id": "columnmenu",
+            "name": "Column Menu",
+            "category": "framework",
+            "source": "kendo.columnmenu.min.js",
+            "depends": [
+                "popup",
+                "filtermenu",
+                "menu"
+            ],
+            "advanced": true
+        },
+        {
             "id": "groupable",
             "name": "Groupable",
             "category": "framework",
@@ -305,6 +317,14 @@
                     "description": "Support for record filtering",
                     "depends": [
                         "filtermenu"
+                    ]
+                },
+                {
+                    "id": "grid-columnmenu",
+                    "name": "Column menu",
+                    "description": "Support for header column menu",
+                    "depends": [
+                        "columnmenu"
                     ]
                 },
                 {

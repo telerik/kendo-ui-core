@@ -164,10 +164,7 @@
                 that.link = link;
             } else {
                 element.append(that.form);
-                that.popup = {
-                    toggle: noop,
-                    close: noop
-                };
+                that.popup = that.element.closest(".k-popup").data(POPUP);
             }
 
             that.form

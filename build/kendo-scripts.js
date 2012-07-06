@@ -56,6 +56,7 @@ var suiteScripts = {
         "kendo.autocomplete.js",
         "kendo.dropdownlist.js",
         "kendo.combobox.js",
+        "kendo.columnmenu.js",
         "kendo.grid.js",
         "kendo.listview.js",
         "kendo.editor.js",

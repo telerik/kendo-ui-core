@@ -121,6 +121,11 @@
             that.columns = null;
         },
 
+        close: function() {
+            this.menu.close();
+            this.popup.close();
+        },
+
         _click: function(e) {
             e.preventDefault();
             e.stopPropagation();
@@ -163,6 +168,7 @@
             this.menu = this.wrapper.children()[MENU]({
                 orientation: "vertical",
                 openOnClick: true,
+                closeOnClick: false,
                 close: function(e) {
                     var item = $(e.item);
                     if (item.hasClass("k-filter-item")) {
@@ -186,6 +192,8 @@
                     item.parent().find(".k-sort-" + (dir == ASC ? DESC : ASC)).removeClass(ACTIVE);
 
                     that._sortDataSource(item, dir);
+
+                    that.close();
                 });
             }
         },
@@ -227,7 +235,7 @@
 
                 that._updateColumnsMenu();
 
-                that.owner.bind("columnHide columnShow", function() {
+                that.owner.bind(["columnHide", "columnShow"], function() {
                     that._updateColumnsMenu();
                 });
 
