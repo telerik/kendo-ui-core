@@ -1065,7 +1065,7 @@
                 wrapper = that.wrapper,
                 SELECTOR = ".k-input",
                 input, DOMInput,
-                name = element.name;
+                name = element.name || "";
 
             if (name) {
                 name = 'name="' + name + '_input" ';
