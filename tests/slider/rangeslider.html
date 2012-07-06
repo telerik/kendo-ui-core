@@ -304,6 +304,14 @@
                 equal(inputs.eq(1).val(), 10);
             });
 
+            test("rangeSlider should not have default values", function () {
+                var rangeSlider = newRangeSlider({ min: -2, max: 40 }, $("<div><input /><input /></div>")),
+                    inputs = rangeSlider.element.find("input");
+
+                equal(inputs.eq(0).val(), -2);
+                equal(inputs.eq(1).val(), 40);
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.ui.RangeSlider Tests</h1>

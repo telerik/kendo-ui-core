@@ -705,8 +705,11 @@
 
             SliderBase.fn.init.call(that, element, options);
             options = that.options;
+            if (!options.value) {
+                options.value = options.min;
+                element.val(options.min);
+            }
 
-            that._setValueInRange(options.value);
             dragHandle = that.wrapper.find(DRAG_HANDLE);
 
             new Slider.Selection(dragHandle, that, options);
@@ -715,7 +718,6 @@
 
         options: {
             name: "Slider",
-            value: 0,
             showButtons: true,
             increaseButtonTitle: "Increase",
             decreaseButtonTitle: "Decrease",
@@ -1332,7 +1334,15 @@
 
             SliderBase.fn.init.call(that, element, options);
             options = that.options;
-            that._setValueInRange(options.selectionStart, options.selectionEnd);
+            if (!options.selectionStart) {
+                options.selectionStart = options.min;
+                inputs.eq(0).val(options.min);
+            }
+
+            if (!options.selectionEnd) {
+                options.selectionEnd = options.max;
+                inputs.eq(1).val(options.max);
+            }
 
             var dragHandles = that.wrapper.find(DRAG_HANDLE);
 
@@ -1343,8 +1353,6 @@
 
         options: {
             name: "RangeSlider",
-            selectionStart: 0,
-            selectionEnd: 10,
             tooltip: { format: "{0}" }
         },
 
