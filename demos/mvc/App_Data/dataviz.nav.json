@@ -25,6 +25,9 @@
                     "text": "Date axis",
                     "url": "area-charts/date-axis.html"
                 }, {
+                    "text": "Multi-axis",
+                    "url": "area-charts/multiple-axes.html"
+                }, {
                     "text": "Binding to remote data",
                     "url": "area-charts/remote-data.html",
                     "packages": [ "!offline" ]
