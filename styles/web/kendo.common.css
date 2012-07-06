@@ -819,8 +819,7 @@ ul.k-menu-vertical > .k-item
     border-width: 0;
 }
 
-*+html .k-menu .k-item .k-item,
-*+html .k-menu-vertical > .k-item
+*+html .k-menu .k-item .k-item
 {
     zoom: normal;
 
@@ -940,15 +939,17 @@ ul.k-menu-vertical > .k-item
     margin-left: -1px;
 }
 
-.k-menu .k-separator
+ul.k-menu .k-separator
 {
     padding: 0.25em 0;
     height: 100%;
     width: 1px;
+    font-size: 0;
+    line-height: 0;
     border-width: 0 1px 0 0;
 }
 
-.k-menu-vertical .k-separator,
+ul.k-menu-vertical .k-separator,
 .k-menu .k-group .k-separator
 {
     padding: 0;
