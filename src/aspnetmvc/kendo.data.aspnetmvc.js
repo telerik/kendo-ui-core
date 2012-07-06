@@ -107,7 +107,7 @@
                 value = value.toString();
             }
 
-            if (value === undefined) {
+            if (value == null) {
                 delete values[key];
             }
 
