@@ -19,6 +19,9 @@
                     "text": "Basic usage",
                     "url": "area-charts/index.html"
                 }, {
+                    "text": "Stacked area",
+                    "url": "area-charts/stacked-area.html"
+                }, {
                     "text": "Binding to remote data",
                     "url": "area-charts/remote-data.html",
                     "packages": [ "!offline" ]
