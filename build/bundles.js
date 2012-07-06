@@ -37,8 +37,7 @@ var cdnBundle = {
     combinedScript: "all",
     sourceLicense: "src-license-complete.txt",
     licenses: [commercialLicense],
-    skipExamples: true,
-    eula: "eula"
+    skipExamples: true
 };
 
 var winjsBundle = {
@@ -48,8 +47,7 @@ var winjsBundle = {
     sourceLicense: "src-license-none.txt",
     licenses: [commercialLicense],
     vsdoc: /(web|framework|dataviz).+md/,
-    skipExamples: true,
-    eula: "eula"
+    skipExamples: true
 };
 
 var mvcWrappersBundle = {
@@ -62,7 +60,7 @@ var mvcWrappersBundle = {
     vsdoc: /.+md/,
     skipExamples: true,
     skipPackage: true,
-    eula: "eula"
+    eula: "aspnetmvc-eula"
 };
 
 var bundles = [{
@@ -72,28 +70,28 @@ var bundles = [{
     sourceLicense: "src-license-complete.txt",
     vsdoc: /.+md/,
     licenses: [commercialLicense],
-    eula: "eula",
+    eula: "complete-eula",
 }, {
     name: "kendoui.web",
     suites: ["web"],
     sourceLicense: "src-license-web.txt",
     vsdoc: /(framework|web).+md/,
     licenses: [commercialLicense, openSourceLicense],
-    eula: "eula",
+    eula: "complete-eula",
 }, {
     name: "kendoui.dataviz",
     suites: ["dataviz"],
     sourceLicense: "src-license-dataviz.txt",
     vsdoc: /(framework|dataviz).+md/,
     licenses: [commercialLicense],
-    eula: "eula"
+    eula: "dataviz-eula"
 }, {
     name: "kendoui.mobile",
     suites: ["mobile"],
     sourceLicense: "src-license-mobile.txt",
     vsdoc: /(framework|mobile).+md/,
     licenses: [commercialLicense],
-    eula: "eula"
+    eula: "mobile-eula"
 },{
     name: "kendoui.complete",
     suites: ["web", "dataviz", "mobile"],
@@ -102,7 +100,7 @@ var bundles = [{
     vsdoc: /.+md/,
     licenses: [trialLicense],
     wrappers: ["aspnetmvc"],
-    eula: "eula",
+    eula: "trial-eula",
 },];
 
 var SUITE_STYLES = {
@@ -220,18 +218,20 @@ function deployLicenses(root, bundle) {
     var deployLegalRoot = path.join(root, DEPLOY_LEGAL_ROOT),
         deployThirdPartyRoot = path.join(root, DEPLOY_LEGAL_ROOT, DEPLOY_THIRD_PARTY_ROOT);
 
-    kendoBuild.mkdir(deployLegalRoot);
-    kendoBuild.mkdir(deployThirdPartyRoot);
+    if (bundle.eula) {
+        kendoBuild.mkdir(deployLegalRoot);
+        kendoBuild.mkdir(deployThirdPartyRoot);
 
-    copyDir(
-        path.join(RELEASE_LEGAL_ROOT, bundle.eula),
-        deployLegalRoot
-    );
+        copyDir(
+            path.join(RELEASE_LEGAL_ROOT, bundle.eula),
+            deployLegalRoot
+        );
 
-    copyDir(
-        THIRD_PARTY_LEGAL_ROOT,
-        deployThirdPartyRoot
-    );
+        copyDir(
+            THIRD_PARTY_LEGAL_ROOT,
+            deployThirdPartyRoot
+        );
+    }
 }
 
 function deployExamples(root, bundle) {

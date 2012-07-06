@@ -1,0 +1,166 @@
+
+Kendo UI Telerik Trial End User License Agreement 
+(Last Updated July 11, 2012)
+
+This Kendo UI Trial License is for a suite of products containing Kendo UI Web, 
+Kendo UI DataViz, Kendo UI Mobile, and server wrappers for Microsoft's ASP.NET 
+MVC framework and is offered pursuant to the terms and conditions contained 
+below. 
+
+IMPORTANT - PLEASE READ THIS END USER LICENSE AGREEMENT (THE "AGREEMENT") 
+CAREFULLY BEFORE ATTEMPTING TO DOWNLOAD OR USE ANY SOFTWARE, DOCUMENTATION, OR 
+OTHER MATERIALS MADE AVAILABLE THROUGH THIS WEB SITE.  THIS AGREEMENT 
+CONSTITUTES A LEGALLY BINDING AGREEMENT BETWEEN YOU OR THE COMPANY WHICH YOU 
+REPRESENT AND ARE AUTHORIZED TO BIND (the "Licensee" or "You"), AND TELERIK AD 
+("Telerik" or "Licensor").  PLEASE CHECK THE "I HAVE READ AND AGREE TO THE 
+LICENSE AGREEMENT" BOX AT THE BOTTOM OF THIS AGREEMENT IF YOU AGREE TO BE BOUND 
+BY THE TERMS AND CONDITIONS OF THIS AGREEMENT.  BY CHECKING THE "I HAVE READ 
+AND AGREE TO THE LICENSE AGREEMENT" BOX AND/OR BY PURCHASING, DOWNLOADING, 
+INSTALLING OR OTHERWISE USING THE SOFTWARE MADE AVAILABLE BY TELERIK THROUGH 
+THIS WEB SITE, YOU ACKNOWLEDGE (1) THAT YOU HAVE READ THIS AGREEMENT, (2) THAT 
+YOU UNDERSTAND IT, (3) THAT YOU AGREE TO BE BOUND BY ITS TERMS AND CONDITIONS, 
+AND (4) TO THE EXTENT YOU ARE ENTERING INTO THIS AGREEMENT ON BEHALF OF A 
+COMPANY, YOU HAVE THE POWER AND AUTHORITY TO BIND THAT COMPANY.  
+
+1.  Licensed Use of the Software. This is a license agreement and not an 
+agreement for sale. Subject to the terms of this Agreement, Telerik hereby 
+grants to You the following limited, non-exclusive, non-transferable licenses 
+(the "License") to use the Telerik computer software identified as Kendo UI 
+Web, Kendo UI DataViz, Kendo UI Mobile and server wrappers for Microsoft's 
+ASP.NET MVC framework and any updates, upgrades, modifications and error 
+corrections thereto provided to You by Telerik (the "Programs") and any 
+accompanying documentation (the "Documentation and, together with the Programs, 
+the "Software") as set forth below.  Except as expressly granted in this 
+Agreement, You are not licensed to use, copy, modify, or distribute copies of 
+all or any portion of the Software.
+1.1 Trial License Grant.  You are authorized to install and use the Software 
+for the sole purpose of evaluating its functionality and performance.  You may 
+not integrate the Software into end products or use it for any commercial, 
+productive or training purpose.  You may not redistribute the Software.  The 
+term of the Trial License shall be 30 days.
+1.2 Support.  As part of Your Trial License You are entitled to enter five (5) 
+support requests via Telerik's ticketing system with a 72 hour response time 
+(excluding Saturdays, Sundays and holidays). 
+1.3 Updates.  You are not eligible to receive any updates for the Software 
+during the trial period.  
+2. No Warranty.  
+THE TRIAL VERSION OF THE SOFTWARE IS LICENSED 'AS IS'.  YOU BEAR THE RISK OF 
+USING IT. TELERIK GIVES NO EXPRESS WARRANTIES, GUARANTEES OR CONDITIONS.  YOU 
+MAY HAVE ADDITONAL RIGHTS UNDER YOUR LOCAL LAWS WHICH THIS AGREEMENT CANNOT 
+CHANGE.  TO THE EXTENT PERMITTED UNDER YOUR LOCAL LAWS, TELERIK EXCLUDES THE 
+IMPLIED WARRANTIES OF TITLE, MERCHANTABILITY, FITNESS FOR A PARTICLUAR PURPOSE 
+AND NON-INFRINGMENT
+3.  Delivery.
+
+Telerik shall make a master copy of the Software available for download by 
+Licensee in electronic files only.  
+
+4. Term and Termination.
+
+This Agreement and the License granted hereunder shall terminate 30 days from 
+the date you download the Software.  Unless otherwise prohibited by law, and 
+without prejudice to Telerik's other rights or remedies, Telerik shall have the 
+right to terminate this Agreement and the License granted hereunder immediately 
+if You breach any of the material terms of this Agreement.  Upon termination of 
+this Agreement, the License granted to You hereunder shall terminate 
+automatically and You shall immediately cease use of the Software.  You must 
+also destroy all copies of the Software upon such termination.
+
+5. Product Discontinuance
+
+Telerik reserves the right to discontinue the Software or any component of the 
+Software, whether offered as a standalone product or solely as a component, at 
+any time. 
+
+6. Intellectual Property
+
+All title and ownership rights in and to the Software (including but not 
+limited to any images, photographs, animations, video, audio, music, text 
+embedded in the Software), the intellectual property embodied in the Software, 
+and any trademarks or service marks of Telerik that are used in connection with 
+the Software are and shall at all times remain exclusively owned by Telerik and 
+its licensors.  All title and intellectual property rights in and to the 
+content that may be accessed through use of the Software is the property of the 
+respective content owner and may be protected by applicable copyright or other 
+intellectual property laws and treaties.  This Agreement grants you no rights 
+to use such content.
+
+7. Limitation of Liability.
+
+To the maximum extent permitted by applicable law, in no event will Telerik be 
+liable for any indirect, special, incidental, or consequential damages arising 
+out of the use of or inability to use the Software, including, without 
+limitation, damages for loss of goodwill, work stoppage, computer failure or 
+malfunction, or any and all other commercial damages or losses, even if advised 
+of the possibility thereof, and regardless of the legal or equitable theory 
+(contract, tort or otherwise) upon which the claim is based.  In any case, 
+Telerik's entire liability under any provision of this agreement shall not 
+exceed $5, notwithstanding any failure of essential purpose of any limited 
+remedy.  Some jurisdictions do not allow the exclusion or limitation of 
+incidental or consequential damages, so this exclusion and limitation may not 
+be applicable.  Telerik is not responsible for any liability arising out of 
+content provided by Licensee or a third party that is accessed through the 
+Software and/or any material linked through such content.  Any data included in 
+the Software upon shipment from Telerik is for testing use only and Telerik 
+hereby disclaims any and all liability arising therefrom.  
+
+8. Indemnity.
+
+You agree to indemnify, hold harmless, and defend Telerik and its resellers 
+from and against any and all claims, lawsuits and proceedings (collectively 
+"Claims"), and all expenses, costs (including attorney's fees), judgments, 
+damages and other liabilities resulting from such Claims, that arise or result 
+from Your use of the Software in in violation of this Agreement 
+
+9. Governing Law.
+
+This Agreement will be governed by the law of the Commonwealth of 
+Massachusetts, U.S.A., without regard to the conflict of laws principles 
+thereof.  If any dispute, controversy, or claim cannot be resolved by a good 
+faith discussion between the parties, then it shall be submitted for resolution 
+to a state or Federal court or competent jurisdiction in Boston, Massachusetts, 
+USA, and the parties hereby agree to submit to the jurisdiction and venue of 
+such court.  Neither the Uniform Computer Information Transactions Act and the 
+United Nations Convention nor the International Sale of Goods shall not apply 
+to this Agreement.  If any provision of this Agreement is to be held 
+unenforceable, such holding will not affect the validity of the other 
+provisions hereof.  Failure of a party to enforce any provision of this 
+Agreement shall not constitute or be construed as a waiver of such provision or 
+of the right to enforce such provision.
+
+10. Entire Agreement.
+
+This Agreement sets forth our entire agreement with respect to the Software and 
+supersedes any prior or contemporaneous communications regarding the Software.  
+You agree that You are not relying on any representation or obligation other 
+than those set forth in this Agreement.  Use of any purchase order or other 
+Licensee document in connection herewith shall be for administrative 
+convenience only and all terms and conditions stated therein shall be void and 
+of no effect unless otherwise agreed to in writing by both parties.
+
+11. No Assignment.
+
+You may not assign, sublicense, sub-contract, or otherwise transfer this 
+Agreement, or any rights or obligations under it, without Telerik's prior 
+written consent.
+
+12. Survival.
+
+Sections 2, 6, 7, 8, 9, 10, 11, 12 and 13 shall survive the expiration or 
+termination of this Agreement.
+
+13. Severability.
+
+If a particular provision of this Agreement is terminated or held by a court of 
+competent jurisdiction to be invalid, illegal, or unenforceable, this Agreement 
+shall remain in full force and effect as to the remaining provisions.
+
+YOU ACKNOWLEDGE THAT YOU HAVE READ THIS AGREEMENT, THAT YOU UNDERSTAND THIS 
+AGREEMENT, AND UNDERSTAND THAT BY CONTINUING THE INSTALLATION OF THE SOFTWARE 
+PRODUCT, BY LOADING OR RUNNING THE SOFTWARE PRODUCT, OR BY PLACING OR COPYING 
+THE SOFTWARE ONTO YOUR COMPUTER HARD DRIVE, YOU AGREE TO BE BOUND BY THIS 
+AGREEMENT'S TERMS AND CONDITIONS.  YOU FURTHER AGREE THAT, EXCEPT FOR WRITTEN 
+SEPARATE AGREEMENTS BETWEEN TELERIK AND YOU, THIS AGREEMENT IS A COMPLETE AND 
+EXCLUSIVE STATEMENT OF THE RIGHTS AND LIABILITIES OF THE PARTIES.
+
+
