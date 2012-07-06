@@ -298,6 +298,56 @@
 
             })();
 
+            (function() {
+                var data = [{
+                        xValue: 1,
+                        yValue: 10,
+                        sizeValue: 100
+                    }, {
+                        xValue: 2,
+                        yValue: 20,
+                        sizeValue: 200
+                    }],
+                    points;
+
+                function createBubbleChart(options) {
+                    $("#container").kendoChart(
+                        kendo.deepExtend({
+                            dataSource: {
+                                data: data
+                            },
+                            series: [{
+                                type: "bubble",
+                                xField: "xValue",
+                                yField: "yValue",
+                                sizeField: "sizeValue"
+                            }]
+                        }, options)
+                    );
+
+                    var chart = $("#container").data("kendoChart");
+                    points = chart._plotArea.charts[0].points;
+                }
+
+                // ------------------------------------------------------------
+                module("Bubble Chart / Configuration", {
+                    teardown: function() {
+                        $("#container").empty();
+                    }
+                });
+
+                test("tooltip options are applied to points", function() {
+                    createBubbleChart({
+                        tooltip: {
+                            format: "a"
+                        }
+                    });
+
+                    same(points[0].options.tooltip.format, "a");
+                });
+
+            })();
+
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>

@@ -2920,15 +2920,7 @@
                     type: BUBBLE
                 };
 
-            point = new Bubble(value, {
-                    color: fields.color,
-                    markers: {
-                        type: CIRCLE,
-                        background: fields.color,
-                        border: series.border,
-                        opacity: series.opacity,
-                        animation: animationOptions
-                    },
+            point = new Bubble(value, deepExtend({
                     tooltip: {
                         format: chart.options.tooltip.format
                     },
@@ -2936,7 +2928,18 @@
                         format: chart.options.labels.format,
                         animation: animationOptions
                     }
-                }
+                },
+                series,
+                {
+                    color: fields.color,
+                    markers: {
+                        type: CIRCLE,
+                        background: fields.color,
+                        border: series.border,
+                        opacity: series.opacity,
+                        animation: animationOptions
+                    }
+                })
             );
 
             chart.append(point);
