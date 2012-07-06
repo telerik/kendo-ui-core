@@ -13,6 +13,18 @@ namespace Kendo.Mvc.UI.Fluent
         {
         }
 
+        /// <summary>
+        /// Use to enable or disable animation of the popup element.
+        /// </summary>
+        /// <param name="enable">The boolean value.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().DropDownList()
+        ///	           .Name("DropDownList")
+        ///	           .Animation(false) //toggle effect
+        ///	%&gt;
+        /// </code>
+        /// </example>
         public TDropDownBuilder Animation(bool enable)
         {
             Component.Animation.Enabled = enable;
@@ -20,6 +32,24 @@ namespace Kendo.Mvc.UI.Fluent
             return this as TDropDownBuilder;
         }
 
+        /// <summary>
+        /// Configures the animation effects of the widget.
+        /// </summary>
+        /// <param name="animationAction">The action which configures the animation effects.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().DropDownList()
+        ///	           .Name("DropDownList")
+        ///	           .Animation(animation =>
+        ///	           {
+        ///		            animation.Open(open =>
+        ///		            {
+        ///		                open.SlideIn(SlideDirection.Down);
+        ///		            }
+        ///	           })
+        ///	%&gt;
+        /// </code>
+        /// </example>
         public TDropDownBuilder Animation(Action<PopupAnimationBuilder> animationAction)
         {
 
@@ -28,6 +58,30 @@ namespace Kendo.Mvc.UI.Fluent
             return this as TDropDownBuilder;
         }
 
+        /// <summary>
+        /// Binds the widget to an IEnumerable list.
+        /// </summary>
+        /// <param name="dataSource">The data source.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().DropDownList()
+        ///             .Name("DropDownList")
+        ///             .DataTextField("CompanyName")
+        ///             .DataValueField("CompanyID")
+        ///             .BindTo(new List<Company>
+        ///             {
+        ///                 new Company {
+        ///                     CompanyName = "Text1",
+        ///                     CompanyID = "Value1"
+        ///                 },
+        ///                 new Company {
+        ///                     CompanyName = "Text2",
+        ///                     CompanyID = "Value2"
+        ///                 }
+        ///             })
+        /// %&gt;
+        /// </code>
+        /// </example>
         public TDropDownBuilder BindTo(IEnumerable data)
         {
             Component.DataSource.Data = data;
@@ -35,6 +89,20 @@ namespace Kendo.Mvc.UI.Fluent
             return this as TDropDownBuilder;
         }
 
+        /// <summary>
+        /// Configures the client-side events.
+        /// </summary>
+        /// <param name="clientEventsAction">The client events action.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().DropDownList()
+        ///             .Name("DropDownList")
+        ///             .Events(events =>
+        ///                 events.Change("change")
+        ///             )
+        /// %&gt;
+        /// </code>
+        /// </example>
         public TDropDownBuilder Events(Action<DropDownListEventBuilderBase> clientEventsAction)
         {
             clientEventsAction(new DropDownListEventBuilderBase(Component.Events));
@@ -42,6 +110,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this as TDropDownBuilder;
         }
 
+        /// <summary>
+        /// Sets the field of the data item that provides the text content of the list items.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().DropDownList()
+        ///             .Name("DropDownList")
+        ///             .DataTextField("Text")
+        /// %&gt;
+        /// </code>
+        /// </example>
         public TDropDownBuilder DataTextField(string field)
         {
             Component.DataTextField = field;
@@ -49,6 +128,24 @@ namespace Kendo.Mvc.UI.Fluent
             return this as TDropDownBuilder;
         }
 
+        /// <summary>
+        /// Configures the DataSource options.
+        /// </summary>
+        /// <param name="configurator">The DataSource configurator action.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().DropDownList()
+        ///             .Name("DropDownList")
+        ///             .DataSource(source =>
+        ///             {
+        ///                 source.Read(read =>
+        ///                 {
+        ///                     read.Action("GetProducts", "Home");
+        ///                 }
+        ///             })
+        /// %&gt;
+        /// </code>
+        /// </example>
         public TDropDownBuilder DataSource(Action<ReadOnlyDataSourceBuilder> configurator)
         {
             configurator(new ReadOnlyDataSourceBuilder(Component.DataSource, this.Component.ViewContext, this.Component.UrlGenerator));
@@ -56,6 +153,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this as TDropDownBuilder;
         }
 
+        /// <summary>
+        /// Specifies the delay in ms after which the widget will start filtering the dataSource.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().DropDownList()
+        ///             .Name("DropDownList")
+        ///             .Delay(300)
+        /// %&gt;
+        /// </code>
+        /// </example>
         public TDropDownBuilder Delay(int delay)
         {
             Component.Delay = delay;
@@ -91,6 +199,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this as TDropDownBuilder;
         }
 
+        /// <summary>
+        /// Sets the height of the drop-down list in pixels.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().DropDownList()
+        ///             .Name("DropDownList")
+        ///             .Height(300)
+        /// %&gt;
+        /// </code>
+        /// </example>
         public TDropDownBuilder Height(int height)
         {
             Component.Height = height;
@@ -98,6 +217,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this as TDropDownBuilder;
         }
 
+        /// <summary>
+        /// Template to be used for rendering the items in the list.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().DropDownList()
+        ///             .Name("DropDownList")
+        ///             .Template("#= data #")
+        /// %&gt;
+        /// </code>
+        /// </example>
         public TDropDownBuilder Template(string template)
         {
             Component.Template = template;
@@ -105,6 +235,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this as TDropDownBuilder;
         }
 
+        /// <summary>
+        /// TemplateId to be used for rendering the items in the list.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().DropDownList()
+        ///             .Name("DropDownList")
+        ///             .TemplateId("widgetTemplateId")
+        /// %&gt;
+        /// </code>
+        /// </example>
         public TDropDownBuilder TemplateId(string templateId)
         {
             Component.TemplateId = templateId;
@@ -112,6 +253,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this as TDropDownBuilder;
         }
 
+        /// <summary>
+        /// Sets the value of the widget.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().DropDownList()
+        ///             .Name("DropDownList")
+        ///             .Value("1")
+        /// %&gt;
+        /// </code>
+        /// </example>
         public TDropDownBuilder Value(string value)
         {
             Component.Value = value;

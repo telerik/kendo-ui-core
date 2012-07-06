@@ -68,6 +68,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Specifies the minimum number of characters that should be typed before the widget queries the dataSource.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().AutoComplete()
+        ///             .Name("AutoComplete")
+        ///             .MinLength(3)
+        /// %&gt;
+        /// </code>
+        /// </example>
         public AutoCompleteBuilder MinLength(int length)
         {
 
@@ -76,6 +87,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// A string that appears in the textbox when it has no value.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().AutoComplete()
+        ///             .Name("AutoComplete")
+        ///             .MinLength(3)
+        /// %&gt;
+        /// </code>
+        /// </example>
         public AutoCompleteBuilder Placeholder(string placeholder)
         {
             Component.Placeholder = placeholder;
@@ -83,6 +105,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Sets the separator for completion. Empty by default, allowing for only one completion.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().AutoComplete()
+        ///             .Name("AutoComplete")
+        ///             .Separator(", ")
+        /// %&gt;
+        /// </code>
+        /// </example>
         public AutoCompleteBuilder Separator(string separator)
         {
 
@@ -91,6 +124,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Controls whether the AutoComplete should automatically auto-type the rest of text.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().AutoComplete()
+        ///             .Name("AutoComplete")
+        ///             .Suggest(true)
+        /// %&gt;
+        /// </code>
+        /// </example>
         public AutoCompleteBuilder Suggest(bool suggest)
         {
             Component.Suggest = suggest;

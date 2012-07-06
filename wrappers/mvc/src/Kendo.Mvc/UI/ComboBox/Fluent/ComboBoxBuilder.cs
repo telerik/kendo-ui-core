@@ -21,6 +21,17 @@ namespace Kendo.Mvc.UI.Fluent
         {
         }
 
+        /// <summary>
+        /// Controls whether to bind the widget to the DataSource on initialization.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ComboBox()
+        ///             .Name("ComboBox")
+        ///             .AutoBind(false)
+        /// %&gt;
+        /// </code>
+        /// </example>
         public ComboBoxBuilder AutoBind(bool autoBind)
         {
             Component.AutoBind = autoBind;
@@ -29,7 +40,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Binds the DropDownList to a list of DropDownListItem.
+        /// Binds the ComboBox to a list of DropDownListItem.
         /// </summary>
         /// <param name="dataSource">The data source.</param>
         /// <example>
@@ -59,7 +70,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Binds the DropDownList to a list of SelectListItem.
+        /// Binds the ComboBox to a list of SelectListItem.
         /// </summary>
         /// <param name="dataSource">The data source.</param>
         /// <example>
@@ -90,6 +101,18 @@ namespace Kendo.Mvc.UI.Fluent
             }));
         }
 
+        /// <summary>
+        /// Sets the field of the data item that provides the value content of the list items.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().DropDownList()
+        ///             .Name("DropDownList")
+        ///             .DataTextField("Text")
+        ///             .DataValueField("Value")
+        /// %&gt;
+        /// </code>
+        /// </example>
         public ComboBoxBuilder DataValueField(string field)
         {
             Component.DataValueField = field;
@@ -176,6 +199,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Specifies the minimum number of characters that should be typed before the widget queries the dataSource.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ComboBox()
+        ///             .Name("ComboBox")
+        ///             .MinLength(3)
+        /// %&gt;
+        /// </code>
+        /// </example>
         public ComboBoxBuilder MinLength(int length)
         {
 
@@ -207,6 +241,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Controls whether the ComboBox should automatically auto-type the rest of text.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ComboBox()
+        ///             .Name("ComboBox")
+        ///             .Suggest(true)
+        /// %&gt;
+        /// </code>
+        /// </example>
         public ComboBoxBuilder Suggest(bool suggest)
         {
             Component.Suggest = suggest;
@@ -214,6 +259,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// A string that appears in the textbox when it has no value.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ComboBox()
+        ///             .Name("ComboBox")
+        ///             .Placeholder("Select country...")
+        /// %&gt;
+        /// </code>
+        /// </example>
         public ComboBoxBuilder Placeholder(string placeholder)
         {
             Component.Placeholder = placeholder;
@@ -221,6 +277,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Use it to set the Id of the parent ComboBox.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Telerik().ComboBox()
+        ///             .Name("ComboBox2")
+        ///             .CascadeFrom("ComboBox1")
+        /// %&gt;
+        /// </code>
+        /// </example>
         public ComboBoxBuilder CascadeFrom(string cascadeFrom)
         {
             Component.CascadeFrom = cascadeFrom;
@@ -228,6 +295,18 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Define the text of the widget, when the autoBind is set to false.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Telerik().ComboBox()
+        ///             .Name("ComboBox")
+        ///             .Text("Chai")
+        ///             .AutoBind(false)
+        /// %&gt;
+        /// </code>
+        /// </example>
         public ComboBoxBuilder Text(string text)
         {
             Component.Text = text;

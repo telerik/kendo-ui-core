@@ -89,6 +89,18 @@ namespace Kendo.Mvc.UI.Fluent
             }));
         }
 
+        /// <summary>
+        /// Sets the field of the data item that provides the value content of the list items.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().DropDownList()
+        ///             .Name("DropDownList")
+        ///             .DataTextField("Text")
+        ///             .DataValueField("Value")
+        /// %&gt;
+        /// </code>
+        /// </example>
         public DropDownListBuilder DataValueField(string field)
         {
             Component.DataValueField = field;
@@ -121,6 +133,17 @@ namespace Kendo.Mvc.UI.Fluent
             return BindTo(items);
         }
 
+        /// <summary>
+        /// Define the text of the default empty item. If the value is an object, then the widget will use it directly.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().DropDownList()
+        ///             .Name("DropDownList")
+        ///             .OptionLabel("Select country...")
+        /// %&gt;
+        /// </code>
+        /// </example>
         public DropDownListBuilder OptionLabel(string optionLabel)
         {
             Component.OptionLabel = optionLabel;
@@ -147,6 +170,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Use it to set the Id of the parent DropDownList.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Telerik().DropDownList()
+        ///             .Name("DropDownList2")
+        ///             .CascadeFrom("DropDownList1")
+        /// %&gt;
+        /// </code>
+        /// </example>
         public DropDownListBuilder CascadeFrom(string cascadeFrom)
         {
             Component.CascadeFrom = cascadeFrom;
@@ -154,6 +188,18 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Define the text of the widget, when the autoBind is set to false.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Telerik().DropDownList()
+        ///             .Name("DropDownList")
+        ///             .Text("Chai")
+        ///             .AutoBind(false)
+        /// %&gt;
+        /// </code>
+        /// </example>
         public DropDownListBuilder Text(string text)
         {
             Component.Text = text;
