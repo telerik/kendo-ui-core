@@ -162,20 +162,9 @@
         },
 
         _menu: function() {
-            var dropdown = "[" + kendo.attr("role") + "=dropdownlist]",
-                datepicker = "[" + kendo.attr("role") + "=datepicker]";
-
             this.menu = this.wrapper.children()[MENU]({
                 orientation: "vertical",
-                openOnClick: true,
-                closeOnClick: false,
-                close: function(e) {
-                    var item = $(e.item);
-                    if (item.hasClass("k-filter-item")) {
-                        item.find(dropdown).kendoDropDownList("close");
-                        item.find(datepicker).kendoDatePicker("close");
-                    }
-                }
+                closeOnClick: false
             }).data(MENU);
         },
 
