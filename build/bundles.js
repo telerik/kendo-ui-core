@@ -77,7 +77,7 @@ var bundles = [{
     sourceLicense: "src-license-web.txt",
     vsdoc: /(framework|web).+md/,
     licenses: [commercialLicense, openSourceLicense],
-    eula: "complete-eula",
+    eula: "web-eula",
 }, {
     name: "kendoui.dataviz",
     suites: ["dataviz"],
