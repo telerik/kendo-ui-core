@@ -729,7 +729,8 @@
                 colSourceIndex = $.inArray(column, visibleColumns(that.columns)),
                 rows,
                 idx,
-                length;
+                length,
+                footer = that.footer || that.wrapper.find(".k-grid-footer");
 
             if (sourceIndex === destIndex) {
                 return;
@@ -746,9 +747,9 @@
 
             reorder(that.thead.find(".k-header:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex);
 
-            if (that.footer) {
-                reorder(that.footer.find(".k-grid-footer-wrap>table>colgroup>col:not(.k-group-col,.k-hierarchy-col)"), colSourceIndex, destIndex);
-                reorder(that.footer.find(".k-footer-template>td:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex);
+            if (footer && footer.length) {
+                reorder(footer.find(".k-grid-footer-wrap>table>colgroup>col:not(.k-group-col,.k-hierarchy-col)"), colSourceIndex, destIndex);
+                reorder(footer.find(".k-footer-template>td:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex);
             }
 
             rows = that.tbody.children(":not(.k-grouping-row,.k-detail-row)");
