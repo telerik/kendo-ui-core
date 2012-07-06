@@ -40,11 +40,7 @@ function parseNamespace(namespace) {
             }
 
             if (kind == "T") {
-                var summary = member.get("summary");
-
-                if (summary && summary.text().trim()) {
-                    type.summary = summary.text().trim();
-                }
+                type.summary = parseSummary(member);
             }
         }
     });
@@ -135,11 +131,8 @@ function memberName(typeName, name) {
 
 function parseMethod(element) {
     var result = {};
-    var summary = element.get("summary");
 
-    if (summary) {
-        result.summary = summary.text().trim();
-    }
+    result.summary = parseSummary(element);
 
     var params = element.find("param");
 
@@ -155,8 +148,8 @@ function parseMethod(element) {
 
     var returns = element.get("returns");
 
-    if (returns && returns.text().trim()) {
-        result.returns = returns.text().trim();
+    if (returns) {
+        result.returns = text(returns);
     }
 
     return result;
@@ -165,8 +158,12 @@ function parseMethod(element) {
 function parseParam(param) {
     return {
        name: param.attr("name").value(),
-       summary: param.text()
-    }
+       summary: text(param)
+    };
+}
+
+function text(element) {
+    return element.text().trim();
 }
 
 function parseExample(example) {
@@ -175,6 +172,20 @@ function parseExample(example) {
     return {
        code: code.text().trim()
     }
+}
+
+function parseSummary(element) {
+   var summary = element.get("summary");
+
+   if (summary) {
+        summary = text(summary);
+
+        if (summary) {
+           return summary;
+        }
+   }
+
+   return "";
 }
 
 function isEmpty(object) {
