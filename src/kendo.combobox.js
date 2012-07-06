@@ -1064,12 +1064,17 @@
                 tabIndex = element.tabIndex,
                 wrapper = that.wrapper,
                 SELECTOR = ".k-input",
-                input, DOMInput;
+                input, DOMInput,
+                name = element.name;
+
+            if (name) {
+                name = 'name="' + name + '_input" ';
+            }
 
             input = wrapper.find(SELECTOR);
 
             if (!input[0]) {
-                wrapper.append('<span unselectable="on" class="k-dropdown-wrap k-state-default"><input class="k-input" type="text" autocomplete="off"/><span unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-arrow-s">select</span></span></span>')
+                wrapper.append('<span unselectable="on" class="k-dropdown-wrap k-state-default"><input ' + name + 'class="k-input" type="text" autocomplete="off"/><span unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-arrow-s">select</span></span></span>')
                        .append(that.element);
 
                 input = wrapper.find(SELECTOR);
