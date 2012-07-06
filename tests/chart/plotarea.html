@@ -814,6 +814,18 @@
                     same(plotArea.series[0].data, [300]);
                 });
 
+                test("Aggregates bound series data", function() {
+                    createPlotArea([{
+                        data: [{ value: 100 }, { value: 200 }, { value: 300 }]
+                    }], {
+                        categoryAxis: kendo.deepExtend({
+                            baseUnit: "months"
+                        }, dateCategoryAxis)
+                    });
+
+                    same(plotArea.series[0].data, [300]);
+                });
+
                 test("Aggregates series data with predefined function", function() {
                     createPlotArea([{
                         data: [100, 200, 300],

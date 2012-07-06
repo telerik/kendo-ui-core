@@ -4354,6 +4354,7 @@
                 srcValues,
                 i,
                 categoryIx,
+                pointData,
                 value;
 
             for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
@@ -4371,10 +4372,11 @@
 
                     for (i = 0; i < categoryIndicies.length; i++) {
                         categoryIx = categoryIndicies[i];
-                        value = srcData[categoryIx];
+                        pointData = bindPoint(currentSeries, categoryIx, ["value"]);
+                        value = pointData.value;
 
                         if (defined(value)) {
-                            srcValues.push(value);
+                            srcValues.push(pointData.value);
                         }
                     }
 
