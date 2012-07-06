@@ -134,5 +134,33 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        public GridEventBuilder ColumnResize(Func<object, object> handler)
+        {
+            Handler("columnResize", handler);
+
+            return this;
+        }
+
+        public GridEventBuilder ColumnResize(string handler)
+        {
+            Handler("columnResize", handler);
+
+            return this;
+        }
+
+        public GridEventBuilder ColumnReorder(Func<object, object> handler)
+        {
+            Handler("columnReorder", handler);
+
+            return this;
+        }
+
+        public GridEventBuilder ColumnReorder(string handler)
+        {
+            Handler("columnReorder", handler);
+
+            return this;
+        }
     }
 }
