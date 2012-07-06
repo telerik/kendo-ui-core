@@ -11,6 +11,7 @@
         map = $.map,
         grep = $.grep,
         isArray = $.isArray,
+        inArray = $.inArray,
         proxy = $.proxy,
         isFunction = $.isFunction,
         isEmptyObject = $.isEmptyObject,
@@ -27,6 +28,8 @@
         REMOVE = "remove",
         DETAILINIT = "detailInit",
         CHANGE = "change",
+        COLUMNHIDE = "columnHide",
+        COLUMNSHOW = "columnShow",
         SAVECHANGES = "saveChanges",
         DATABOUND = "dataBound",
         DETAILEXPAND = "detailExpand",
@@ -455,7 +458,9 @@
            REMOVE,
            SAVECHANGES,
            COLUMNRESIZE,
-           COLUMNREORDER
+           COLUMNREORDER,
+           COLUMNSHOW,
+           COLUMNHIDE
         ],
 
         setDataSource: function(dataSource) {
@@ -2009,13 +2014,17 @@
                 columns = that.columns,
                 column,
                 options = that.options,
+                columnMenu = options.columnMenu,
                 menuOptions,
                 sortable,
                 filterable,
-                messages,
                 cell;
 
-            if (options.columnMenu) {
+            if (columnMenu) {
+                if (typeof columnMenu == "boolean") {
+                    columnMenu = {};
+                }
+
                 that.thead
                     .find("th:not(.k-hierarchy-cell,.k-group-cell)")
                     .each(function (index) {
@@ -2027,47 +2036,21 @@
                             if (menu) {
                                 menu.destroy();
                             }
-
-                            sortable = column.sortable !== false ? options.sortable : false;
-                            filterable = options.filterable && column.filterable !== false ? extend({}, column.filterable, options.filterable) : false;
+                            sortable = column.sortable !== false && columnMenu.sortable !== false ? options.sortable : false;
+                            filterable = options.filterable && column.filterable !== false && columnMenu.filterable !== false ? extend({}, column.filterable, options.filterable) : false;
                             menuOptions = {
-                                columns: proxy(that._menuColumns, that),
                                 dataSource: that.dataSource,
                                 values: column.values,
+                                columns: columnMenu.columns,
                                 sortable: sortable,
                                 filterable: filterable,
-                                change: proxy(that._columnMenuChange, that)
+                                messages: columnMenu.messages,
+                                owner: that
                             };
 
-                            messages = options.columnMenu.messages || {};
-                            if (sortable === false) {
-                                messages.sort = false;
-                            }
-                            if (filterable === false) {
-                                messages.filter = false;
-                            }
-
-                            cell.kendoColumnMenu(extend({}, menuOptions, { messages: messages }));
+                            cell.kendoColumnMenu(menuOptions);
                         }
                     });
-            }
-        },
-
-        _menuColumns: function() {
-            return map(this.columns, function(col) {
-                return {
-                    field: col.field,
-                    title: col.title || col.field,
-                    hidden: col.hidden
-                };
-            });
-        },
-
-        _columnMenuChange: function(e) {
-            if (e.hidden) {
-                this.hideColumn(e.field);
-            } else {
-                this.showColumn(e.field);
             }
         },
 
@@ -2126,7 +2109,8 @@
                     filterable = th.attr(kendo.attr("filterable")),
                     type = th.attr(kendo.attr("type")),
                     groupable = th.attr(kendo.attr("groupable")),
-                    field = th.attr(kendo.attr("field"));
+                    field = th.attr(kendo.attr("field")),
+                    menu = th.attr(kendo.attr("menu"));
 
                 if (!field) {
                    field = th.text().replace(/\s|[^A-z0-9]/g, "");
@@ -2138,6 +2122,7 @@
                     sortable: sortable !== "false",
                     filterable: filterable !== "false",
                     groupable: groupable !== "false",
+                    menu: menu,
                     template: th.attr(kendo.attr("template")),
                     width: cols.eq(idx).css("width")
                 };
@@ -2792,7 +2777,7 @@
                 return;
             }
 
-            columnIndex = $.inArray(column, visibleColumns(columns));
+            columnIndex = inArray(column, visibleColumns(columns));
             column.hidden = true;
             column.attributes = addHiddenStyle(column.attributes);
             column.footerAttributes = addHiddenStyle(column.footerAttributes);
@@ -2824,13 +2809,15 @@
                     width += parseInt(colWidth, 10);
                 } else {
                     width = 0;
-                    return;
+                    break;
                 }
             }
 
             if (width) {
                 $(">.k-grid-header table:first,>.k-grid-footer table:first",that.wrapper).add(that.table).width(width);
             }
+
+            that.trigger(COLUMNHIDE, { column: column });
         },
 
         showColumn: function(column) {
@@ -2859,7 +2846,7 @@
                 return;
             }
 
-            columnIndex = $.inArray(column, columns);
+            columnIndex = inArray(column, columns);
             column.hidden = false;
             column.attributes = removeHiddenStyle(column.attributes);
             column.footerAttributes = removeHiddenStyle(column.footerAttributes);
@@ -2904,6 +2891,8 @@
                     tables.width(width);
                 }
             }
+
+            that.trigger(COLUMNSHOW, { column: column });
         },
 
         _progress: function(toggle) {

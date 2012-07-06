@@ -634,6 +634,38 @@
                 ok(attr.style);
                 equal(attr.style, "foo: bar");
             });
+
+            test("hiding column triggers event", function() {
+                var args,
+                    grid = setup({
+                        columnHide: function() {
+                            args = arguments[0];
+                        }
+                    });
+
+                grid.hideColumn("foo");
+
+                ok(args);
+                equal(args.column.field, "foo");
+            });
+
+            test("showing column triggers event", function() {
+                var args,
+                    grid = setup({
+                        columns: [{
+                            field: "foo",
+                            hidden: true
+                        }],
+                        columnShow: function() {
+                            args = arguments[0];
+                        }
+                    });
+
+                grid.showColumn("foo");
+
+                ok(args);
+                equal(args.column.field, "foo");
+            });
         </script>
     </body>
 </html>

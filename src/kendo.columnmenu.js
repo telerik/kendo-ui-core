@@ -5,6 +5,7 @@
         extend = $.extend,
         grep = $.grep,
         map = $.map,
+        inArray = $.inArray,
         ACTIVE = "k-state-active",
         ASC = "asc",
         DESC = "desc",
@@ -24,6 +25,16 @@
         columns: "Columns"
     };
 
+    function trim(text) {
+        if (!String.prototype.trim) {
+            text = text.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+        } else {
+            text = text.trim();
+        }
+
+        return text.replace(/&nbsp;/gi, "");
+    }
+
     var ColumnMenu = Widget.extend({
         init: function(element, options) {
             var that = this,
@@ -33,7 +44,7 @@
 
             element = that.element;
             options = that.options;
-            that.columns = options.columns;
+            that.owner = options.owner;
             that._mergeOptions(messages);
 
             that.field = element.attr(kendo.attr("field"));
@@ -49,7 +60,10 @@
             that.wrapper.html(kendo.template(template)({
                 ns: kendo.ns,
                 messages: options.messages,
-                columns: that.columns()
+                sortable: options.sortable,
+                filterable: options.filterable,
+                columns: that._ownerColumns(),
+                showColumns: options.columns
             }));
 
             that.popup = that.wrapper[POPUP]({
@@ -69,11 +83,10 @@
         options: {
             name: "ColumnMenu",
             messages: messages,
+            columns: true,
             sortable: true,
             filterable: true
         },
-
-        events: [ CHANGE ],
 
         _mergeOptions: function(defaults) {
             var options =  this.options.messages;
@@ -120,6 +133,29 @@
             });
         },
 
+        _ownerColumns: function() {
+            var columns = this.owner.columns,
+                menuColumns = grep(columns, function(col) {
+                    var result = true,
+                        title = trim(col.title || "");
+
+                    if (col.menu === false || (!col.field && !title.length)) {
+                        result = false;
+                    }
+
+                    return result;
+                });
+
+            return map(menuColumns, function(col) {
+                return {
+                    field: col.field,
+                    title: col.title || col.field,
+                    hidden: col.hidden,
+                    index: inArray(col, columns)
+                };
+            });
+        },
+
         _menu: function() {
             var dropdown = "[" + kendo.attr("role") + "=dropdownlist]",
                 datepicker = "[" + kendo.attr("role") + "=datepicker]";
@@ -140,16 +176,18 @@
         _sort: function() {
             var that = this;
 
-            that.options.dataSource.bind(CHANGE, proxy(that.refresh, that));
+            if (that.options.sortable) {
+                that.options.dataSource.bind(CHANGE, proxy(that.refresh, that));
 
-            that.menu.element.delegate(".k-sort-asc, .k-sort-desc", CLICK, function() {
-                var item = $(this),
-                    dir = item.hasClass("k-sort-asc") ? ASC : DESC;
+                that.menu.element.delegate(".k-sort-asc, .k-sort-desc", CLICK, function() {
+                    var item = $(this),
+                        dir = item.hasClass("k-sort-asc") ? ASC : DESC;
 
-                item.parent().find(".k-sort-" + (dir == ASC ? DESC : ASC)).removeClass(ACTIVE);
+                    item.parent().find(".k-sort-" + (dir == ASC ? DESC : ASC)).removeClass(ACTIVE);
 
-                that._sortDataSource(item, dir);
-            });
+                    that._sortDataSource(item, dir);
+                });
+            }
         },
 
         _sortDataSource: function(item, dir) {
@@ -185,34 +223,41 @@
         _columns: function() {
             var that = this;
 
-            that.menu.bind("open", function() {
-                var visible = grep(that.columns(), function(field) {
-                        return !field.hidden;
-                    });
+            if (that.options.columns) {
 
-                var selector = map(visible, function(field) {
-                    return "[" + kendo.attr("field") + "=" + field.field + "]";
+                that._updateColumnsMenu();
+
+                that.owner.bind("columnHide columnShow", function() {
+                    that._updateColumnsMenu();
+                });
+
+                that.wrapper.delegate("[type=checkbox]", CHANGE , function(e) {
+                    var input = $(this),
+                        index = parseInt(input.attr(kendo.attr("index")), 10);
+
+                    if (input.is(":checked")) {
+                        that.owner.showColumn(index);
+                    } else {
+                        that.owner.hideColumn(index);
+                    }
+                });
+            }
+        },
+
+        _updateColumnsMenu: function() {
+            var columns = this._ownerColumns(),
+                allselector = map(columns, function(field) {
+                    return "[" + kendo.attr("index") + "=" + field.index+ "]";
+                }).join(","),
+                visible = grep(columns, function(field) {
+                    return !field.hidden;
+                }),
+                selector = map(visible, function(field) {
+                    return "[" + kendo.attr("index") + "=" + field.index+ "]";
                 }).join(",");
 
-                that.wrapper.find(selector).attr("checked", true).attr("disabled", visible.length == 1);
-            });
-
-            that.wrapper.delegate("[type=checkbox]", CHANGE , function(e) {
-                var input = $(this),
-                    args = {
-                        field: input.attr(kendo.attr("field")),
-                        hidden: true
-                    };
-
-                if (input.is(":checked")) {
-                    args.hidden = false;
-                }
-
-                that.trigger(CHANGE, args);
-
-                //that.menu.close(that.menu.element);
-                //that.popup.close();
-            });
+            this.wrapper.find(allselector).attr("checked", false);
+            this.wrapper.find(selector).attr("checked", true).attr("disabled", visible.length == 1);
         },
 
         _filter: function() {
@@ -253,24 +298,24 @@
     });
 
     var template = '<ul>'+
-                    '#if(messages.sort){#'+
+                    '#if(sortable){#'+
                         '<li class="k-item k-sort-asc"><span class="k-link"><span class="k-sprite historyIcon"></span>${messages.sort.asc}</span></li>'+
                         '<li class="k-item k-sort-desc"><span class="k-link"><span class="k-sprite historyIcon"></span>${messages.sort.desc}</span></li>'+
-                        '#if(messages.columns || messages.filter){#'+
+                        '#if(showColumns || filterable){#'+
                             '<li class="k-separator"></li>'+
                         '#}#'+
                     '#}#'+
-                    '#if(messages.columns){#'+
+                    '#if(showColumns){#'+
                         '<li class="k-item k-columns-item"><span class="k-link"><span class="k-sprite historyIcon"></span>${messages.columns}</span><ul>'+
                         '#for (var col in columns) {#'+
-                            '<li><label><input type="checkbox" data-#=ns#field="#=columns[col].field#"/>#=columns[col].title#</label></li>'+
+                            '<li><label><input type="checkbox" data-#=ns#field="#=columns[col].field#" data-#=ns#index="#=columns[col].index#"/>#=columns[col].title#</label></li>'+
                         '#}#'+
                         '</ul></li>'+
-                        '#if(messages.filter){#'+
+                        '#if(filterable){#'+
                             '<li class="k-separator"></li>'+
                         '#}#'+
                     '#}#'+
-                    '#if(messages.filter){#'+
+                    '#if(filterable){#'+
                         '<li class="k-item k-filter-item"><span class="k-link"><span class="k-sprite historyIcon"></span>${messages.filter}</span><ul>'+
                             '<li><div class="k-filterable"></div></li>'+
                         '</ul></li>'+

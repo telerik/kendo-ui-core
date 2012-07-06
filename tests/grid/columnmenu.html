@@ -87,9 +87,9 @@
 
                 var menu = grid.thead.find("th:first").data("kendoColumnMenu");
 
-                equal(menu.options.messages.sort, false);
-                equal(menu.options.messages.columns, "Columns");
-                equal(menu.options.messages.filter, false);
+                equal(menu.options.sortable, false);
+                equal(menu.options.columns, true);
+                equal(menu.options.filterable, false);
             });
 
             test("columnMenu columns message changed", function() {
@@ -103,25 +103,19 @@
 
                 var menu = grid.thead.find("th:first").data("kendoColumnMenu");
 
-                equal(menu.options.messages.sort, false);
                 equal(menu.options.messages.columns, "foo");
-                equal(menu.options.messages.filter, false);
             });
 
             test("columnMenu columns set to false", function() {
                 var grid = setup({
                     columnMenu: {
-                        messages: {
-                            columns: false
-                        }
+                        columns: false
                     }
                 });
 
                 var menu = grid.thead.find("th:first").data("kendoColumnMenu");
 
-                equal(menu.options.messages.sort, false);
-                equal(menu.options.messages.columns, false);
-                equal(menu.options.messages.filter, false);
+                equal(menu.options.columns, false);
             });
 
             test("columnMenu as true boolean and sortable grid", function() {
@@ -129,9 +123,8 @@
 
                 var menu = grid.thead.find("th:first").data("kendoColumnMenu");
 
-                ok($.isPlainObject(menu.options.messages.sort));
-                equal(menu.options.messages.columns, "Columns");
-                equal(menu.options.messages.filter, false);
+                equal(menu.options.sortable, true);
+                equal(menu.options.filterable, false);
             });
 
             test("columnMenu as true boolean and sortable grid not sortable column", function() {
@@ -142,9 +135,7 @@
 
                 var menu = grid.thead.find("th:first").data("kendoColumnMenu");
 
-                equal(menu.options.messages.sort, false);
-                equal(menu.options.messages.columns, "Columns");
-                equal(menu.options.messages.filter, false);
+                equal(menu.options.sortable, false);
             });
 
             test("columnMenu in sortable grid changed text", function() {
@@ -159,6 +150,7 @@
 
                 var menu = grid.thead.find("th:first").data("kendoColumnMenu");
 
+                equal(menu.options.sortable, true);
                 equal(menu.options.messages.sort.asc, "foo");
                 equal(menu.options.messages.sort.desc, "Sort Descending");
             });
@@ -168,7 +160,7 @@
 
                 var menu = grid.thead.find("th:first").data("kendoColumnMenu");
 
-                equal(menu.options.messages.filter, "Filter");
+                ok(menu.options.filterable);
             });
 
             test("columnMenu as true boolean and filterable grid not filterable column", function() {
@@ -179,7 +171,7 @@
 
                 var menu = grid.thead.find("th:first").data("kendoColumnMenu");
 
-                equal(menu.options.messages.filter, false);
+                equal(menu.options.filterable, false);
             });
 
             test("columnMenu in filterable grid changed text", function() {
@@ -194,6 +186,7 @@
 
                 var menu = grid.thead.find("th:first").data("kendoColumnMenu");
 
+                ok(menu.options.filterable);
                 equal(menu.options.messages.filter, "foo");
             });
 

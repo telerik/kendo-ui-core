@@ -73,8 +73,9 @@
             function setup(options) {
                 options = $.extend(true, {}, {
                     dataSource: dataSource,
-                    columns: function() {
-                        return [{ field: "foo" }, { field: "bar", hidden: true }];
+                    owner: {
+                        columns: [{ field: "foo" }, { field: "bar", hidden: true}],
+                        bind: $.noop
                     }
                 }, options);
 
@@ -107,21 +108,22 @@
                 ok(!menu.wrapper.is(":visible"));
             });
 
-            test("sort option as true boolean", function() {
+            test("sortable true shows sort links", function() {
                 var menu = setup({
-                    messages: { sort: true }
+                    sortable: true
                 });
 
-                equal(menu.options.messages.sort.asc, "Sort Ascending");
-                equal(menu.options.messages.sort.desc, "Sort Descending");
+                equal(menu.wrapper.find(".k-sort-asc").length, 1);
+                equal(menu.wrapper.find(".k-sort-desc").length, 1);
             });
 
-            test("sort option as false boolean", function() {
+            test("sortble false does not render sort links", function() {
                 var menu = setup({
-                    sort: false
+                    sortable: false
                 });
 
-                equal(menu.options.sort, false);
+                equal(menu.wrapper.find(".k-sort-asc").length, 0);
+                equal(menu.wrapper.find(".k-sort-desc").length, 0);
             });
 
             test("changing default sort options", function() {
@@ -133,14 +135,13 @@
                 equal(menu.options.messages.sort.desc, "Sort Descending");
             });
 
-            test("filter option as true boolean", function() {
+            test("filterable enabled", function() {
                 var menu = setup({
-                    messages: {
-                        filter: true
-                    }
+                    filterable: true
                 });
 
                 equal(menu.options.messages.filter, "Filter");
+                equal(menu.wrapper.find(".k-filterable").length, 1);
             });
 
             test("changing default filter option", function() {
@@ -151,9 +152,7 @@
 
             test("columns option as true boolean", function() {
                 var menu = setup({
-                    messages: {
-                        columns: true
-                    }
+                    columns: true
                 });
 
                 equal(menu.options.messages.columns, "Columns");
@@ -169,85 +168,44 @@
                 equal(menu.options.messages.columns, "foo");
             });
 
-            asyncTest("opening menu refresh columns checkboxes", function() {
+            test("columns checkboxes are initialized", function() {
                 var columnMenu = setup();
 
-                columnMenu.menu.open(columnMenu.wrapper.find(".k-columns-item"));
-
-                setTimeout(function() {
-                    var checkboxes = columnMenu.wrapper.find("[type=checkbox]");
-                    equal(checkboxes.length, 2);
-                    ok(checkboxes.eq(0).attr("checked"));
-                    ok(!checkboxes.eq(1).attr("checked"));
-                    start();
-                }, 1);
+                var checkboxes = columnMenu.wrapper.find("[type=checkbox]");
+                equal(checkboxes.length, 2);
+                ok(checkboxes.eq(0).attr("checked"));
+                ok(!checkboxes.eq(1).attr("checked"));
             });
 
-            asyncTest("columns checkbox is disabled when only one visible column left", function() {
-                var columnMenu = setup();
-
-                columnMenu.menu.open(columnMenu.wrapper.find(".k-columns-item"));
-
-                setTimeout(function() {
-                    var checkboxes = columnMenu.wrapper.find("[type=checkbox]");
-                    ok(checkboxes.eq(0).attr("disabled"));
-                    ok(!checkboxes.eq(1).attr("disabled"));
-                    start();
-                }, 1);
-            });
-
-            test("unchecking checkbox triggeres change event", function() {
+            test("unchecking checkbox calls hideColumn method", function() {
                 var called = false;
                 var menu = setup({
-                    change: function() {
-                        called = true;
+                    owner: {
+                        columns: [{ field: "foo" }, { field: "bar", hidden: false }],
+                        hideColumn: function() {
+                            called = true;
+                        }
                     }
                 });
-
                 menu.wrapper.find("[type=checkbox]").eq(0).attr("checked", true).click();
 
                 ok(called);
             });
 
-            test("unchecking checkbox send field settings as change argument", function() {
-                var args;
-                var menu = setup({
-                    change: function() {
-                        args = arguments[0];
-                    }
-                });
-
-                menu.wrapper.find("[type=checkbox]").eq(0).attr("checked", true).click();
-
-                equal(args.field, "foo");
-                equal(args.hidden, true, "Column foo must be hidden");
-            });
-
-            test("checking checkbox triggeres change event", function() {
+            test("checking checkbox calls showColumn method", function() {
                 var called = false;
                 var menu = setup({
-                    change: function() {
-                        called = true;
+                    owner: {
+                        columns: [{ field: "foo", hidden: true }, { field: "bar", hidden: false }],
+                        showColumn: function() {
+                            called = true;
+                        }
                     }
                 });
 
                 menu.wrapper.find("[type=checkbox]").eq(0).click();
 
                 ok(called);
-            });
-
-            test("checking checkbox send field settings as change argument", function() {
-                var args;
-                var menu = setup({
-                    change: function() {
-                        args = arguments[0];
-                    }
-                });
-
-                menu.wrapper.find("[type=checkbox]").eq(0).click();
-
-                equal(args.field, "foo");
-                equal(args.hidden, false, "Column foo must be shown");
             });
 
             test("selecting sort asc item sorts the dataSource", function() {
