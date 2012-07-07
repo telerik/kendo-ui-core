@@ -401,6 +401,31 @@
         return attr;
     }
 
+    function normalizeCols(table, visibleColumns, hasDetails, groups) {
+        var colgroup = table.find(">colgroup"),
+            width,
+            cols = map(visibleColumns, function(column) {
+                    width = column.width;
+                    if (width && parseInt(width, 10) !== 0) {
+                        return kendo.format('<col style="width:{0}"/>', typeof width === STRING? width : width + "px");
+                    }
+
+                    return "<col />";
+                });
+
+        if (hasDetails || colgroup.find(".k-hierarchy-col").length) {
+            cols.splice(0, 0, '<col class="k-hierarchy-col" />');
+        }
+
+        if (colgroup.length) {
+            colgroup.remove();
+        }
+
+        colgroup = $("<colgroup/>").append($(new Array(groups + 1).join('<col class="k-group-col">') + cols.join("")));
+
+        table.prepend(colgroup);
+    }
+
     var Grid = Widget.extend({
         init: function(element, options) {
             var that = this;
@@ -2560,31 +2585,9 @@
         },
 
         _appendCols: function(table) {
-            var that = this,
-                colgroup = table.find(">colgroup"),
-                width,
-                columns = visibleColumns(that.columns),
-                cols = map(columns, function(column) {
-                    width = column.width;
-                    if (width && parseInt(width, 10) !== 0) {
-                        return kendo.format('<col style="width:{0}"/>', typeof width === STRING? width : width + "px");
-                    }
+            var that = this;
 
-                    return "<col />";
-                }),
-                groups = that.dataSource.group().length;
-
-            if (that._hasDetails() || colgroup.find(".k-hierarchy-col").length) {
-                cols.splice(0, 0, '<col class="k-hierarchy-col" />');
-            }
-
-            if (colgroup.length) {
-                colgroup.remove();
-            }
-
-            colgroup = $("<colgroup/>").append($(new Array(groups + 1).join('<col class="k-group-col">') + cols.join("")));
-
-            table.prepend(colgroup);
+            normalizeCols(table, visibleColumns(that.columns), that._hasDetails(),  that.dataSource.group().length);
         },
 
         _autoColumns: function(schema) {
@@ -2800,6 +2803,13 @@
                     cell = row.children(":not(.k-group-cell):first,.k-detail-cell").last();
                     cell.attr("colspan", parseInt(cell.attr("colspan"), 10) - 1);
                 } else {
+                    if (row.hasClass("k-grid-edit-row") && (cell = row.children(".k-edit-container")[0])) {
+                        cell = $(cell);
+                        cell.attr("colspan", parseInt(cell.attr("colspan"), 10) - 1);
+                        cell.find("col").eq(columnIndex).remove();
+                        row = cell.find("tr:first");
+                    }
+
                     row.children(":not(.k-group-cell,.k-hierarchy-cell):visible").eq(columnIndex).hide();
                 }
             }
@@ -2869,8 +2879,14 @@
                 if (row.is(".k-grouping-row,.k-detail-row")) {
                     cell = row.children(":not(.k-group-cell):first,.k-detail-cell").last();
                     cell.attr("colspan", parseInt(cell.attr("colspan"), 10) + 1);
-
                 } else {
+                    if (row.hasClass("k-grid-edit-row") && (cell = row.children(".k-edit-container")[0])) {
+                        cell = $(cell);
+                        cell.attr("colspan", parseInt(cell.attr("colspan"), 10) + 1);
+                        normalizeCols(cell.find(">form>table"), visibleColumns(columns), false,  0);
+                        row = cell.find("tr:first");
+                    }
+
                     row.children(":not(.k-group-cell,.k-hierarchy-cell)").eq(columnIndex).show();
                 }
             }
