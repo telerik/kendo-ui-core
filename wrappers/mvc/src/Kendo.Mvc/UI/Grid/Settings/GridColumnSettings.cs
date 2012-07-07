@@ -29,8 +29,7 @@ namespace Kendo.Mvc.UI
             Filterable = true;
             Groupable = true;
             Visible = true;
-            //TODO: Implement HeaderContextMenu
-            //IncludeInContextMenu = true;
+            IncludeInMenu = true;
             HeaderHtmlAttributes = new RouteValueDictionary();            
             HtmlAttributes = new RouteValueDictionary();            
             FooterHtmlAttributes = new RouteValueDictionary();
@@ -137,14 +136,12 @@ namespace Kendo.Mvc.UI
             }
         }
         */
-        //TODO: Implement HeaderContextMenu
-        /*
-        public bool IncludeInContextMenu
+       
+        public bool IncludeInMenu
         {
             get;
             set;
-        }
-        */        
+        }       
         
         public IDictionary<string, object> HtmlAttributes
         {

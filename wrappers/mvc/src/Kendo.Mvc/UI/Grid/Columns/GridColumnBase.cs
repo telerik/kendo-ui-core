@@ -100,9 +100,11 @@ namespace Kendo.Mvc.UI
             //TODO: Implement hidden columns
             //.Add("hidden", column.Hidden, false)
             //.Add("width", column.Width, () => /*column.Hidden &&*/ !string.IsNullOrEmpty(column.Width));
-
-            //TODO: Implement HeaderContextMenu
-            // .Add("includeInContextMenu", column.IncludeInContextMenu, () => !column.IncludeInContextMenu)
+                       
+            if (!IncludeInMenu)
+            {
+                json["menu"] = false;
+            }
 
             if (Width.HasValue())
             {
@@ -215,20 +217,19 @@ namespace Kendo.Mvc.UI
             }
         }
         */
-        //TODO: Implement HeaderContextMenu
-/*
-        public virtual bool IncludeInContextMenu
+  
+        public virtual bool IncludeInMenu
         {
             get
             {
-                return Settings.IncludeInContextMenu;
+                return Settings.IncludeInMenu;
             }
             set
             {
-                Settings.IncludeInContextMenu = value;
+                Settings.IncludeInMenu = value;
             }
         }
-        */
+  
         public virtual bool Encoded
         {
             get

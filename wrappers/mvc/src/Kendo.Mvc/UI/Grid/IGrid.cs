@@ -52,6 +52,11 @@ namespace Kendo.Mvc.UI
             get;
         }
 
+        GridColumnMenuSettings ColumnMenu
+        {
+            get;
+        }
+
         GridGroupableSettings Grouping
         {
             get;

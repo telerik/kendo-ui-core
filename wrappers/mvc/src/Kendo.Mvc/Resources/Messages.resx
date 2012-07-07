@@ -360,4 +360,13 @@
   <data name="Filter_SelectValue" xml:space="preserve">
     <value>-Select value-</value>
   </data>
+  <data name="Grid_Columns" xml:space="preserve">
+    <value>Columns</value>
+  </data>
+  <data name="Grid_SortAscending" xml:space="preserve">
+    <value>Sort Ascending</value>
+  </data>
+  <data name="Grid_SortDescending" xml:space="preserve">
+    <value>Sort Descending</value>
+  </data>
 </root>

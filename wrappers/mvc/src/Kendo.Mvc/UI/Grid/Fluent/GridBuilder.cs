@@ -635,6 +635,62 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Enables/disables header column menu.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Grid()
+        ///             .Name("Grid")
+        ///             .Ajax(ajax => ajax.Action("_RelatedGrids_Orders", "Grid", new { customerID = "ALFKI" }))
+        ///             .Columns(columns=>
+        ///             {
+        ///                 columns.Add(c => c.OrderID).Width(100);
+        ///                 columns.Add(c => c.OrderDate).Width(200).Format("{0:dd/MM/yyyy}");
+        ///                 columns.Add(c => c.ShipAddress);
+        ///                 columns.Add(c => c.ShipCity).Width(200);
+        ///             })
+        ///             .BindTo((IEnumerable&lt;Order&gt;)ViewData["Orders"])
+        ///             .ColumnMenu();
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public GridBuilder<T> ColumnMenu()
+        {
+            Component.ColumnMenu.Enabled = true;
+            return this;
+        }
+
+        /// <summary>
+        /// Enables/disables header column menu.
+        /// </summary>
+        /// <param name="configurator">Use builder to define column menu settings.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Grid()
+        ///             .Name("Grid")
+        ///             .Ajax(ajax => ajax.Action("_RelatedGrids_Orders", "Grid", new { customerID = "ALFKI" }))
+        ///             .Columns(columns=>
+        ///             {
+        ///                 columns.Add(c => c.OrderID).Width(100);
+        ///                 columns.Add(c => c.OrderDate).Width(200).Format("{0:dd/MM/yyyy}");
+        ///                 columns.Add(c => c.ShipAddress);
+        ///                 columns.Add(c => c.ShipCity).Width(200);
+        ///             })
+        ///             .BindTo((IEnumerable&lt;Order&gt;)ViewData["Orders"])
+        ///             .ColumnMenu(menu => menu.Enabled(true);
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public GridBuilder<T> ColumnMenu(Action<GridColumnMenuSettingsBuilder> configurator)
+        {
+            Component.ColumnMenu.Enabled = true;
+
+            configurator(new GridColumnMenuSettingsBuilder(Component.ColumnMenu));
+
+            return this;
+        }
+
+        /// <summary>
         /// Show scrollbar if there are many items.
         /// </summary>
         /// <example>

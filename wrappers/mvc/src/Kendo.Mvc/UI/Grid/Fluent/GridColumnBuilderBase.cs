@@ -265,27 +265,25 @@ namespace Kendo.Mvc.UI.Fluent
             return this as TColumnBuilder;
         }
         */
-        //TODO: Implement HeaderContextMenu
-        /*
+       
         /// <summary>
-        /// Specifys whether the columns should be included in column context menu. By default all columns are included. 
-        /// The column also need a Title to be set in order to be include in the context menu.
+        /// Specifys whether the columns should be included in column header menu. By default all columns are included. 
+        /// The column also need to have a Title set in order to be included in the menu.
         /// </summary>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Grid(Model)
         ///             .Name("Grid")
-        ///             .Columns(columns => columns.Bound(o => o.OrderID).IncludeInContextMenu((bool)ViewData["hidden"]))
+        ///             .Columns(columns => columns.Bound(o => o.OrderID).IncludeInMenu((bool)ViewData["hidden"]))
         /// %&gt;
         /// </code>
         /// </example>
-        public TColumnBuilder IncludeInContextMenu(bool value)
+        public TColumnBuilder IncludeInMenu(bool value)
         {
-            Column.IncludeInContextMenu = value;
+            Column.IncludeInMenu = value;
 
             return this as TColumnBuilder;
-        }
-        */        
+        }           
         
         /// <summary>
         /// Sets the header template for the column.

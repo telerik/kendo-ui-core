@@ -45,9 +45,9 @@ namespace Kendo.Mvc.UI
             Pageable = new PageableSettings();
             Sortable = new GridSortableSettings();
             Scrollable = new GridScrollableSettings();
-            Navigatable = new GridNavigatableSettings(this);
-            ColumnContextMenu = new GridColumnContextMenuSettings(this);
+            Navigatable = new GridNavigatableSettings(this);            
             Filterable = new GridFilterableSettings();
+            ColumnMenu = new GridColumnMenuSettings();
 
             Editable = new GridEditableSettings<T>(this)
             { 
@@ -512,7 +512,16 @@ namespace Kendo.Mvc.UI
         {
             get;
             private set;
-        }        
+        }
+
+        /// <summary>
+        /// Gets the column menu configuration.
+        /// </summary>
+        public GridColumnMenuSettings ColumnMenu
+        {
+            get;
+            private set;
+        } 
 
         /// <summary>
         /// Gets the scrolling configuration.
@@ -530,16 +539,7 @@ namespace Kendo.Mvc.UI
         {
             get;
             private set;
-        }
-
-        /// <summary>
-        /// Gets the column context menu configuration.
-        /// </summary>
-        public GridColumnContextMenuSettings ColumnContextMenu
-        {
-            get;
-            private set;
-        }    
+        }        
 
         public IUrlGenerator UrlGenerator
         {
@@ -720,6 +720,12 @@ namespace Kendo.Mvc.UI
             {
                 var filtering = Filterable.ToJson();
                 options["filterable"] = filtering.Any() ? (object)filtering : true;
+            }
+
+            if (ColumnMenu.Enabled)
+            {
+                var menu = ColumnMenu.ToJson();
+                options["columnMenu"] = menu.Any() ? (object)menu : true;
             }
 
             if (Resizable.Enabled)
