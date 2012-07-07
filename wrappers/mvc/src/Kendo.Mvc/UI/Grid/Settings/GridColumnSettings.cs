@@ -95,47 +95,12 @@ namespace Kendo.Mvc.UI
             get;
             private set;
         }
-        
-        private string PrepareStyle(string style)
-        {
-            if (string.IsNullOrEmpty(style))
-            {
-                return "display:none;";
-            }
-            else
-            {
-                var newStyle = Regex.Replace(style, "((.*)?display):([^;]*)", "$1:none", RegexOptions.IgnoreCase);
-                if (newStyle == style)
-                {
-                    return "display:none;" + style;
-                }
 
-                return newStyle;
-            }
-        }
-        //TODO: Implement hidden columns
-        /*
-        private bool hidden;
         public bool Hidden
         {
-            get
-            {
-                return hidden;
-            }
-            set 
-            {
-                if (value)
-                {                    
-                    HtmlAttributes["style"] = PrepareStyle(Convert.ToString(HtmlAttributes["style"]));                   
-                }
-                else if (HtmlAttributes.ContainsKey("style"))
-                {
-                    HtmlAttributes["style"] = ((string)HtmlAttributes["style"]).Replace("display:none;", "");
-                }
-                hidden = value;
-            }
-        }
-        */
+            get;
+            set;
+        }        
        
         public bool IncludeInMenu
         {

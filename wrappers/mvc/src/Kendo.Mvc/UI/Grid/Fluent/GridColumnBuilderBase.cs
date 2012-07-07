@@ -226,9 +226,7 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this as TColumnBuilder;
         }
-        
-        //TODO: Implement hidden columns
-        /*
+                
         /// <summary>
         /// Makes the column hidden or not. By default all columns are not hidden. Hidden columns are rendered in the output HTML but are hidden.
         /// </summary>
@@ -263,8 +261,7 @@ namespace Kendo.Mvc.UI.Fluent
             Column.Hidden = true;
 
             return this as TColumnBuilder;
-        }
-        */
+        }        
        
         /// <summary>
         /// Specifys whether the columns should be included in column header menu. By default all columns are included. 

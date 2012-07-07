@@ -1015,9 +1015,8 @@ namespace Kendo.Mvc.UI
                 GroupMembers = DataSource.Groups.Select(g => g.Member),
                 Mode = CurrentItemMode,
                 EditMode = Editable.Mode,
-                HasDetailTemplate = HasDetailTemplate,
-                //TODO: Implement hidden columns
-                Colspan = Colspan /*- Columns.Count(column => column.Hidden)*/,
+                HasDetailTemplate = HasDetailTemplate,                
+                Colspan = Colspan - Columns.Count(column => column.Hidden),
                 DetailTemplate = MapDetailTemplate(HasDetailTemplate ? DetailTemplate : null),
                 NoRecordsTemplate = FormatNoRecordsTemplate(),
                 ScrollingHeight = Scrollable.Height,

@@ -51,14 +51,12 @@ namespace Kendo.Mvc.UI
         {
             get;
         }         
-
-        //TODO: Implement hidden columns
-        /*
+        
         bool Hidden 
         { 
             get; 
             set; 
-        }*/
+        }
        
         bool IncludeInMenu
         {

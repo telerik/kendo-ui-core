@@ -105,9 +105,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
             var headerBuilder = column.CreateHeaderBuilder();
             headerBuilder.Decorators.OfType<GridFilterCellDecorator>().Any().ShouldBeFalse();
         }
-
-        //TODO: Implement hidden columns
-        /*
+        
         [Fact]
         public void Should_return_decorated_header_builder_if_hidden()
         {
@@ -118,7 +116,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
             var headerBuilder = column.CreateHeaderBuilder();
             headerBuilder.Decorators.OfType<GridHiddenCellBuilderDecorator>().Any().ShouldBeTrue();
         }
-        */
+        
         [Fact]
         public void HeaderText_should_be_extracted_from_expression()
         {
@@ -223,39 +221,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
         public void Should_support_parameter_expression()
         {
             new GridBoundColumn<User, User>(GridTestHelper.CreateGrid<User>(), u => u);
-        }
-
-        //TODO: Implement hidden columns
-        /*
-        [Fact]
-        public void Should_add_attributes_if_hidden()
-        {
-            var grid = GridTestHelper.CreateGrid<Customer>();
-            var column = new GridBoundColumn<Customer, int>(grid, c => c.Id);
-            column.Hidden = true;
-
-            ((string)column.HtmlAttributes["style"]).ShouldContain("display:none;");
-        }
-        
-        [Fact]
-        public void Should_remove_attributes_if_hidden_is_set_to_false()
-        {
-            var grid = GridTestHelper.CreateGrid<Customer>();
-            var column = new GridBoundColumn<Customer, int>(grid, c => c.Id);
-            column.Hidden = true;
-            column.Hidden = false;
-            ((string)column.HtmlAttributes["style"]).ShouldNotContain("display:none;width:0;");
-        }
-
-        [Fact]
-        public void Should_not_add_attributes_if_hidden_is_set_to_false()
-        {
-            var grid = GridTestHelper.CreateGrid<Customer>();
-            var column = new GridBoundColumn<Customer, int>(grid, c => c.Id);         
-            column.Hidden = false;
-            column.HtmlAttributes.ContainsKey("style").ShouldBeFalse();
-        }
-        */     
+        }       
 
         [Fact]
         public void Should_create_displayfor_builder()

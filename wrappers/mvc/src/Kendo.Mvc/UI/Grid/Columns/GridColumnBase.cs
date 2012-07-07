@@ -97,10 +97,11 @@ namespace Kendo.Mvc.UI
                 json["attributes"] = attributes;
             }
 
-            //TODO: Implement hidden columns
-            //.Add("hidden", column.Hidden, false)
-            //.Add("width", column.Width, () => /*column.Hidden &&*/ !string.IsNullOrEmpty(column.Width));
-                       
+            if (Hidden)
+            {
+                json["hidden"] = true;
+            }
+
             if (!IncludeInMenu)
             {
                 json["menu"] = false;
@@ -195,9 +196,7 @@ namespace Kendo.Mvc.UI
             get;
             set;
         }
-
-        //TODO: Implement hidden columns
-        /*
+        
         /// <summary>
         /// Gets or sets a value indicating whether this column is hidden.
         /// </summary>
@@ -215,8 +214,7 @@ namespace Kendo.Mvc.UI
             {                
                 Settings.Hidden = value;
             }
-        }
-        */
+        }        
   
         public virtual bool IncludeInMenu
         {
@@ -308,9 +306,8 @@ namespace Kendo.Mvc.UI
         public bool IsLast
         {
             get
-            {
-                //TODO: Implement hidden columns
-                return Grid.VisibleColumns/*.Where(c => !c.Hidden)*/.LastOrDefault() == this;
+            {                
+                return Grid.VisibleColumns.Where(c => !c.Hidden).LastOrDefault() == this;
             }
         }
 
@@ -321,12 +318,11 @@ namespace Kendo.Mvc.UI
         }
 
         protected void Decorate(IGridDecoratableCellBuilder cellBuilder)
-        {
-            //TODO: Implement hidden columns
-            //if (Hidden)
-            //{
-            //    cellBuilder.Decorators.Add(new GridHiddenCellBuilderDecorator());
-            //}
+        {            
+            if (Hidden)
+            {
+                cellBuilder.Decorators.Add(new GridHiddenCellBuilderDecorator());
+            }
         }
 
         private Action<object> CreateCallback(IGridDataCellBuilder builder, bool insert, bool edit)

@@ -40,10 +40,8 @@ namespace Kendo.Mvc.UI.Tests
                 Filterable = false,
                 Format = "{0}",
                 Groupable = false,
-                HeaderHtmlAttributes = { },
-                //TODO: Implement hidden Columns
-                //Hidden = true,
-                
+                HeaderHtmlAttributes = { },                
+                Hidden = true,                
                 HtmlAttributes = { },
                 ReadOnly = true,
                 Title = "foo",
@@ -58,10 +56,8 @@ namespace Kendo.Mvc.UI.Tests
             Assert.Equal(column.Filterable, settings.Filterable);
             Assert.Equal(column.Format, settings.Format);
             Assert.Equal(column.Groupable, settings.Groupable);            
-            Assert.Equal(column.HeaderHtmlAttributes, settings.HeaderHtmlAttributes);
-
-            //TODO: Implement hidden columns
-            //Assert.Equal(column.Hidden, settings.Hidden);
+            Assert.Equal(column.HeaderHtmlAttributes, settings.HeaderHtmlAttributes);            
+            Assert.Equal(column.Hidden, settings.Hidden);
             
             Assert.Equal(column.HtmlAttributes, settings.HtmlAttributes);
            // Assert.Equal(column.ReadOnly, settings.ReadOnly);
