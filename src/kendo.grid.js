@@ -2763,6 +2763,7 @@
                 colWidth,
                 width = 0,
                 length,
+                footer = that.footer || that.wrapper.find(".k-grid-footer"),
                 columns = that.columns,
                 columnIndex;
 
@@ -2787,9 +2788,9 @@
 
             that._updateCols();
             that.thead.find(">tr>th:not(.k-hierarchy-cell,.k-group-cell):visible").eq(columnIndex).hide();
-            if (that.footer) {
-                that._appendCols(that.footer.find("table:first"));
-                that.footer.find(".k-footer-template>td:not(.k-hierarchy-cell,.k-group-cell):visible").eq(columnIndex).hide();
+            if (footer) {
+                that._appendCols(footer.find("table:first"));
+                footer.find(".k-footer-template>td:not(.k-hierarchy-cell,.k-group-cell):visible").eq(columnIndex).hide();
             }
 
             rows = that.tbody.children();
@@ -2833,6 +2834,7 @@
                 colWidth,
                 cols,
                 columns = that.columns,
+                footer = that.footer || that.wrapper.find(".k-grid-footer"),
                 columnIndex;
 
             if (typeof column == "number") {
@@ -2856,9 +2858,9 @@
 
             that._updateCols();
             that.thead.find(">tr>th:not(.k-hierarchy-cell,.k-group-cell)").eq(columnIndex).show();
-            if (that.footer) {
-                that._appendCols(that.footer.find("table:first"));
-                that.footer.find(".k-footer-template>td:not(.k-hierarchy-cell,.k-group-cell)").eq(columnIndex).show();
+            if (footer) {
+                that._appendCols(footer.find("table:first"));
+                footer.find(".k-footer-template>td:not(.k-hierarchy-cell,.k-group-cell)").eq(columnIndex).show();
             }
 
             rows = that.tbody.children();
