@@ -318,6 +318,24 @@
                 ok(!descItem.hasClass("k-state-selected"));
             });
 
+            test("sort asc item is highlighted on menu initialization", function() {
+                dataSource.sort({ field: "foo", dir: "asc" });
+
+                var menu = setup({ field: "foo" });
+
+                var ascItem = menu.wrapper.find(".k-sort-asc");
+                ok(ascItem.hasClass("k-state-selected"));
+            });
+
+            test("sort desc item is highlighted on menu initialization", function() {
+                dataSource.sort({ field: "foo", dir: "desc" });
+
+                var menu = setup({ field: "foo" });
+
+                var descItem = menu.wrapper.find(".k-sort-desc");
+                ok(descItem.hasClass("k-state-selected"));
+            });
+
             test("destroy calls filter menu destroy", function() {
                 var menu = setup();
                 var called = false;

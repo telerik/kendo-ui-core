@@ -172,6 +172,9 @@
             var that = this;
 
             if (that.options.sortable) {
+
+                that.refresh();
+
                 that.options.dataSource.bind(CHANGE, proxy(that.refresh, that));
 
                 that.menu.element.delegate(".k-sort-asc, .k-sort-desc", CLICK, function() {
