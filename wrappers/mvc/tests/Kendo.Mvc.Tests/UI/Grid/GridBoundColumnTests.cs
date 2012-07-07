@@ -92,6 +92,20 @@ namespace Kendo.Mvc.UI.Tests.Grid
             var headerBuilder = column.CreateHeaderBuilder();
             headerBuilder.Decorators.OfType<GridFilterCellDecorator>().Any().ShouldBeTrue();
         }
+
+        [Fact]
+        public void Should_not_return_decorated_header_builder_if_filtarable_and_column_menu()
+        {
+            var grid = GridTestHelper.CreateGrid<Customer>();
+            grid.Filterable.Enabled = true;
+            grid.ColumnMenu.Enabled = true;
+            var column = new GridBoundColumn<Customer, int>(grid, c => c.Id);
+            column.Settings.Filterable = true;
+
+            var headerBuilder = column.CreateHeaderBuilder();
+            headerBuilder.Decorators.OfType<GridFilterCellDecorator>().Any().ShouldBeFalse();
+        }
+
         //TODO: Implement hidden columns
         /*
         [Fact]

@@ -428,7 +428,7 @@ namespace Kendo.Mvc.UI
                 builder = base.CreateHeaderBuilderCore();
             }
 
-            if (Filterable && Grid.Filterable.Enabled)
+            if (Filterable && Grid.Filterable.Enabled && !Grid.ColumnMenu.Enabled)
             {
                 var filtered = Grid.DataSource.Filters
                                    .SelectMemberDescriptors()
