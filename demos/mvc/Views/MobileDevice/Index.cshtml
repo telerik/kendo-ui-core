@@ -56,7 +56,7 @@
 
         function triggerIndexButton(e) {
             var viewID = e.view.element.attr("id");
-            e.layout.header.find(".nav-button").css({visibility: viewID != "index" ? "visible" : "hidden"});
+            e.layout.header.find(".nav-button").css({display: viewID != "index" ? "" : "none"});
         }
 
         window.kendoMobileApplication = new kendo.mobile.Application($(document.body), {
