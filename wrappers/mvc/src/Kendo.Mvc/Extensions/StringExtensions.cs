@@ -3,9 +3,7 @@ namespace Kendo.Mvc.Extensions
     using System;
     using System.Globalization;
     using System.Text.RegularExpressions;
-    /// <summary>
-    /// Contains the extension methods of <see cref="string"/>.
-    /// </summary>
+
     public static class StringExtensions
     {
         private static readonly Regex NameExpression = new Regex("([A-Z]+(?=$|[A-Z][a-z])|[A-Z]?[a-z]+)", RegexOptions.Compiled);

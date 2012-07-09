@@ -6,9 +6,7 @@ namespace Kendo.Mvc.Extensions
     using System.Text;
     using System.Web;
     using System.Web.Routing;
-    /// <summary>
-    /// Contains extension methods of IDictionary&lt;string, objectT&gt;.
-    /// </summary>
+
     public static class DictionaryExtensions
     {
         /// <summary>

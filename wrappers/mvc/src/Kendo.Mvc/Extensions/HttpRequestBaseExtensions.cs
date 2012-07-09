@@ -3,9 +3,6 @@ namespace Kendo.Mvc.Extensions
     using System;
     using System.Web;
 
-    /// <summary>
-    /// Contains extension methods of <see cref="HttpRequestBase"/>.
-    /// </summary>
     public static class HttpRequestBaseExtensions
     {
         /// <summary>

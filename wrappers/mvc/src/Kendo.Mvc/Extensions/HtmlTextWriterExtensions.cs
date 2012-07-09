@@ -3,7 +3,6 @@ namespace Kendo.Mvc.Extensions
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.UI;
-    using Kendo.Mvc.Infrastructure;
 
     public static class HtmlTextWriterExtensions
     {

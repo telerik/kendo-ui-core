@@ -4,9 +4,6 @@ namespace Kendo.Mvc.Extensions
     using System.Web;
     using System.Web.Routing;
 
-    /// <summary>
-    /// Contains extension methods of <see cref="HttpContextBase"/>.
-    /// </summary>
     public static class HttpContextBaseExtensions
     {
         /// <summary>

@@ -14,6 +14,9 @@ namespace Kendo.Mvc.Extensions
     using Infrastructure.Implementation.Expressions;
     using Kendo.Mvc.UI;
 
+    /// <summary>
+    /// Provides extension methods to process DataSourceRequest.
+    /// </summary>
     public static class QueryableExtensions
     {
         private static DataSourceResult ToDataSourceResult(this DataTableWrapper enumerable, DataSourceRequest request)
