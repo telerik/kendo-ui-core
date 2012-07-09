@@ -294,7 +294,7 @@
         element.css(currentTransition.CSS).css(TRANSFORM);
 
         if (browser.mozilla) {
-            element.one("transitionend", function () { stopTransition(element, currentTransition); } );
+            element.one(transitions.event, function () { stopTransition(element, currentTransition); } );
             delay = 50;
         }
         element.data(ABORT_ID, setTimeout(stopTransition, currentTransition.duration + delay, element, currentTransition));
@@ -712,10 +712,13 @@
         animateTo: function(element, destination, options) {
             var direction,
                 commonParent = element.parents().filter(destination.parents()).first(),
-                originalOverflow = commonParent.css(OVERFLOW);
+                originalOverflow;
 
             options = parseTransitionEffects(options);
-            commonParent.css(OVERFLOW, "hidden");
+            if (!support.mobileOS.android) {
+                originalOverflow = commonParent.css(OVERFLOW);
+                commonParent.css(OVERFLOW, "hidden");
+            }
 
             $.each(options.effects, function(name, definition) {
                 direction = direction || definition.direction;
@@ -724,7 +727,9 @@
             function complete(animatedElement) {
                 destination[0].style.cssText = "";
                 element[0].style.cssText = ""; // Removing the whole style attribute breaks Android.
-                commonParent.css(OVERFLOW, originalOverflow);
+                if (!support.mobileOS.android) {
+                    commonParent.css(OVERFLOW, originalOverflow);
+                }
                 if (options.completeCallback) {
                     options.completeCallback.call(element, animatedElement);
                 }
