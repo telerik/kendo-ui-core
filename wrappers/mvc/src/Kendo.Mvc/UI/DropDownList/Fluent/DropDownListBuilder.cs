@@ -4,8 +4,11 @@ namespace Kendo.Mvc.UI.Fluent
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
-    using Kendo.Mvc.UI;    
+    using Kendo.Mvc.UI;
 
+    /// <summary>
+    /// Defines the fluent interface for configuring the <see cref="DropDownList"/> component.
+    /// </summary>
     public class DropDownListBuilder : DropDownListBuilderBase<DropDownList, DropDownListBuilder>
     {
         public DropDownListBuilder(DropDownList component)
