@@ -4,8 +4,16 @@ var xml = require("libxmljs"),
     fs = require("fs"),
     path = require("path");
 
-var rawApi = fs.readFileSync("wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.xml", "utf8");
-var xmlDoc = xml.parseXmlString(rawApi);
+var rawXml = fs.readFileSync("wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.xml", "utf8");
+
+// Replace <see /> tags with their "cref" attribute value
+//
+rawXml = rawXml.replace(/<see cref="([^"]*)"\s*\/>/g, function($0, $1){
+    // return only the last word of the cref attribute
+    return $1.replace(/^.*?(\w+)$/, "$1");
+});
+
+var xmlDoc = xml.parseXmlString(rawXml);
 var members = xmlDoc.find("//member")
 
 function parseNamespace(namespace) {
