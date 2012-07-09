@@ -159,7 +159,7 @@
 
     function translateGroup(group) {
        return {
-           value: group.Key || group.value,
+           value: typeof group.Key !== "undefined" ? group.Key : group.value,
            field: group.Member || group.field,
            hasSubgroups: group.HasSubgroups || group.hasSubgroups,
            aggregates: translateAggregate(group.Aggregates || group.aggregates),
