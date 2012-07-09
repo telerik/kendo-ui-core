@@ -21,19 +21,20 @@ function parseNamespace(namespace) {
     var types = {};
 
     members.forEach(function(member) {
-        var name = member.attr("name").value().replace(/`\d/, "");
+        var name = member.attr("name").value();
         var type;
-        var fullName;
         var shortName;
 
         if (namespaceRegExp.test(name)) {
-            shortName = RegExp.$1;
-            fullName = namespace + "." + shortName;
+            shortName = RegExp.$1.replace(/`\d/, "");
 
             types[shortName] = type = {};
-            type.name = fullName;
+            type.name = name.substring(2);
+            type.shortName = shortName;
+            type.namespace = namespace;
             type.methods = [];
             type.properties = [];
+            type.fields = [];
             type.summary = parseSummary(member);
 
             parseMembers(type);
@@ -44,25 +45,30 @@ function parseNamespace(namespace) {
 }
 
 function parseMembers(type) {
-    var namespaceRegExp = new RegExp("^(\w):" + type.name.replace(/\./g, "\\.") + "\\.([^\\.]+)");
+    var namespaceRegExp = new RegExp("^([MF]):" + type.name.replace(/\./g, "\\.") + "\\.(.*)");
 
     members.forEach(function(member) {
-        var name = member.attr("name").value().replace(/`\d/, "");
-        var type;
+        var name = member.attr("name").value();
         var kind;
         var fullName;
         var shortName;
 
         if (namespaceRegExp.test(name)) {
             kind = RegExp.$1;
-            shortName = RegExp.$2;
-            fullName = namespace + "." + shortName;
+            shortName = RegExp.$2.replace(/`\d/, "");
 
             if (kind == "M" && name.indexOf("#ctor") < 0) {
                 var method = parseMethod(member);
 
-                method.name = memberName(fullName, name)
+                method.name = shortName;
+
                 type.methods.push(method);
+            } else if (kind == "F") {
+                var field = parseField(member);
+
+                field.name = shortName;
+
+                type.fields.push(field);
             }
         }
     });
@@ -71,13 +77,15 @@ function parseMembers(type) {
 function typeToMarkdown(type) {
     var markdown = "";
 
+    var name = type.namespace + "." + type.shortName;
+
     markdown += "---";
-    markdown += "\ntitle:" + type.name;
-    markdown += "\nslug:aspnetmvc-" + type.name.toLowerCase();
+    markdown += "\ntitle:" + name;
+    markdown += "\nslug:aspnetmvc-" + name.toLowerCase();
     markdown += "\npublish:true";
     markdown += "\n---";
 
-    markdown += "\n\n# " + type.name;
+    markdown += "\n\n# " + name;
 
     if (type.summary) {
         markdown += "\n\n" + type.summary;
@@ -91,7 +99,27 @@ function typeToMarkdown(type) {
         });
     }
 
+    if (type.fields.length) {
+        markdown += "\n\n## Members";
+
+        type.fields.forEach(function(field){
+            markdown += emitField(field);
+        });
+    }
+
     return markdown.trim();
+}
+
+function emitField(field) {
+    var markdown = "";
+
+    markdown += "\n\n### " + field.name;
+
+    if (field.summary) {
+        markdown += "\n" + field.summary;
+    }
+
+    return markdown;
 }
 
 function emitMethod(method) {
@@ -145,8 +173,12 @@ function emitExample(example) {
     return "\n    " + example.code.replace(/^ {4}/gm, "").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"');
 }
 
-function memberName(typeName, name) {
-    return name.replace(/\w:/, "").substring(typeName.length + 1);
+function parseField(element) {
+    var result = {};
+
+    result.summary = parseSummary(element);
+
+    return result;
 }
 
 function parseMethod(element) {
@@ -255,7 +287,7 @@ function exportNamespace(namespace) {
 
     for (typeName in types) {
         type = types[typeName];
-        if (type.methods.length || type.summary) {
+        if (type.fields.length || type.methods.length || type.summary) {
             saveFile(path, typeName + ".md", typeToMarkdown(type));
         }
     }
