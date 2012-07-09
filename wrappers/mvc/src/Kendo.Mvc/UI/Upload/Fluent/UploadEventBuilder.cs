@@ -330,5 +330,50 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        /// <summary>
+        /// Defines the inline handler of the Progress client-side event
+        /// </summary>
+        /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Upload()
+        ///            .Name("Upload")
+        ///            .Events(events => events.Progress(
+        ///                 @&lt;text&gt;
+        ///                 function(e) {
+        ///                     //event handling code
+        ///                 }
+        ///                 &lt;/text&gt;
+        ///            ))
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public UploadEventBuilder Progress(Func<object, object> inlineCodeBlock)
+        {
+            Handler("progress", inlineCodeBlock);
+
+            return this;
+        }
+
+        /// <summary>
+        ///  Defines the name of the JavaScript function that will handle the the Progress client-side event.
+        /// </summary>
+        /// <param name="onProgressHandlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().Upload()
+        ///             .Name("Upload")
+        ///             .Events(events => events.Progress("onProgress"))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public UploadEventBuilder Progress(string onProgressHandlerName)
+        {
+            Handler("progress", onProgressHandlerName);
+
+            return this;
+        }
     }
 }

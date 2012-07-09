@@ -10,6 +10,7 @@
         COMPLETE = "complete",
         CANCEL = "cancel",
         LOAD = "load",
+        PROGRESS = "progress",
         REMOVE = "remove";
 
     var Upload = Widget.extend({
@@ -64,6 +65,7 @@
             ERROR,
             COMPLETE,
             CANCEL,
+            PROGRESS,
             REMOVE
         ],
 
@@ -321,6 +323,11 @@
             }
 
             progressBar.width(percentComplete + "%");
+
+            this.trigger(PROGRESS, {
+                files: getFileEntry(e).data("fileNames"),
+                percentComplete: percentComplete
+            });
         },
 
         _onUploadSuccess: function(e, response, xhr) {
@@ -642,6 +649,7 @@
             tryParseJSON(responseText,
                 function(jsonResult) {
                     $.extend(fakeXHR, { statusText: "OK", status: "200" });
+                    fileEntry.trigger("t:progress", [ 100 ]);
                     fileEntry.trigger("t:upload-success", [ jsonResult, fakeXHR ]);
                     module.cleanupFrame(iframe);
                     module.unregisterFrame(iframe);
@@ -911,8 +919,8 @@
             if (xhr.status >= 200 && xhr.status <= 299) {
                 tryParseJSON(xhr.responseText,
                     function(jsonResult) {
-                        fileEntry.trigger("t:upload-success", [ jsonResult, xhr ]);
                         fileEntry.trigger("t:progress", [ 100 ]);
+                        fileEntry.trigger("t:upload-success", [ jsonResult, xhr ]);
                         module.cleanupFileEntry(fileEntry);
                     },
                     raiseError
