@@ -141,9 +141,6 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        /// <summary>
-        /// Creates a serializer
-        /// </summary>
         public abstract IChartSerializer CreateSerializer();
     }
 }

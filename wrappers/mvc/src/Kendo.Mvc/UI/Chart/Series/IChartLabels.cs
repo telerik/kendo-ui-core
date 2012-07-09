@@ -60,9 +60,6 @@ namespace Kendo.Mvc.UI
         /// </summary>
         double? Rotation { get; set; }
 
-        /// <summary>
-        /// Gets the axis serializer.
-        /// </summary>
         IChartSerializer CreateSerializer();
     }
 }

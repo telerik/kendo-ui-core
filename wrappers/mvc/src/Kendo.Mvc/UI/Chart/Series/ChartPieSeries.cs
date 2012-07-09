@@ -253,9 +253,6 @@ namespace Kendo.Mvc.UI
             Type = "pie";
         }
 
-        /// <summary>
-        /// Creates a serializer for the series
-        /// </summary>
         public override IChartSerializer CreateSerializer()
         {
             return new ChartPieSeriesSerializer(this);

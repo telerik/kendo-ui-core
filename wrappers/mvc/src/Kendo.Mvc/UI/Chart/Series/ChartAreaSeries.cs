@@ -106,9 +106,6 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        /// <summary>
-        /// Creates a serializer for the series
-        /// </summary>
         public override IChartSerializer CreateSerializer()
         {
             return new ChartAreaSeriesSerializer(this);

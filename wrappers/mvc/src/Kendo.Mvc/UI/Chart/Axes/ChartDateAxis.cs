@@ -73,9 +73,6 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        /// <summary>
-        /// Gets the axis serializer.
-        /// </summary>
         public override IChartSerializer CreateSerializer()
         {
             return new ChartDateAxisSerializer(this);

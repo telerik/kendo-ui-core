@@ -86,9 +86,6 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        /// <summary>
-        /// Gets the scale serializer.
-        /// </summary>
         public abstract IChartSerializer CreateSerializer();
     }
 }

@@ -38,10 +38,6 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        /// <summary>
-        /// Writes the initialization script.
-        /// </summary>
-        /// <param name="writer">The writer object.</param>
         public override void WriteInitializationScript(TextWriter writer)
         {
             var options = new Dictionary<string, object>();

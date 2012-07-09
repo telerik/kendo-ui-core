@@ -9,9 +9,6 @@ namespace Kendo.Mvc.UI
         {
         }
 
-        /// <summary>
-        /// Creates a serializer
-        /// </summary>
         public override IChartSerializer CreateSerializer()
         {
             return new GaugeScaleLabelsSerializerBase(this);

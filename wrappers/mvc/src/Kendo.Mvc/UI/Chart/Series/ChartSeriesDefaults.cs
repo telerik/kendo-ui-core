@@ -101,9 +101,6 @@ namespace Kendo.Mvc.UI
             private set;
         }
 
-        /// <summary>
-        /// Creates a serializer for the series defaults
-        /// </summary>
         public override IChartSerializer CreateSerializer()
         {
             return new ChartSeriesDefaultsSerializer(this);

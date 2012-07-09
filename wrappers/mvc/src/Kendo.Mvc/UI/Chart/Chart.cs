@@ -216,10 +216,6 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        /// <summary>
-        /// Writes the initialization script.
-        /// </summary>
-        /// <param name="writer">The writer object.</param>
         public override void WriteInitializationScript(TextWriter writer)
         {
             var options = new Dictionary<string, object>(Events);
@@ -351,10 +347,6 @@ namespace Kendo.Mvc.UI
             }
         }
 
-        /// <summary>
-        /// Writes the Chart HTML.
-        /// </summary>
-        /// <param name="writer">The writer object.</param>
         protected override void WriteHtml(HtmlTextWriter writer)
         {
             if (!HtmlAttributes.ContainsKey("id"))

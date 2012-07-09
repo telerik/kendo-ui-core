@@ -93,10 +93,6 @@ namespace Kendo.Mvc.UI
             }
         }
 
-        /// <summary>
-        /// Writes the Gauge HTML.
-        /// </summary>
-        /// <param name="writer">The writer object.</param>
         protected override void WriteHtml(HtmlTextWriter writer)
         {
             if (!HtmlAttributes.ContainsKey("id"))

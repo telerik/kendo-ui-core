@@ -16,9 +16,6 @@ namespace Kendo.Mvc.UI
             Title = new ChartAxisTitle();
         }
 
-        /// <summary>
-        /// Gets the axis serializer.
-        /// </summary>
         public override IChartSerializer CreateSerializer()
         {
             return new ChartAxisSerializerBase<double>(this);

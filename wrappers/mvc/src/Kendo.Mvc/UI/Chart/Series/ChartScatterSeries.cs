@@ -121,9 +121,6 @@ namespace Kendo.Mvc.UI
             Markers = new ChartMarkers();
         }
 
-        /// <summary>
-        /// Creates a serializer for the series
-        /// </summary>
         public override IChartSerializer CreateSerializer()
         {
             return new ChartScatterSeriesSerializer(this);

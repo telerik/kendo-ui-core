@@ -56,9 +56,6 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        /// <summary>
-        /// Creates a serializer
-        /// </summary>
         public override IChartSerializer CreateSerializer()
         {
             return new ChartAxisLabelsSerializer(this);
