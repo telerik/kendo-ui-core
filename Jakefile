@@ -433,6 +433,11 @@ namespace("mvc", function() {
                 path.join(mvc3binariesDeployRoot, "Kendo.Mvc.dll")
             );
 
+            kendoBuild.copyFileSync(
+                path.join(binariesPath, "Kendo.Mvc.xml"),
+                path.join(mvc3binariesDeployRoot, "Kendo.Mvc.xml")
+            );
+
             // copy editor templates
 
             var templatesDeployRoot = path.join(mvcDeployRoot, "EditorTemplates");
