@@ -949,6 +949,7 @@
                     that.current(NULL);
                     that._custom(value);
                     that.text(value);
+                    that._placeholder();
                 }
 
                 that._old = that._accessor();

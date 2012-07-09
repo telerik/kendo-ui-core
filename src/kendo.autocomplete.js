@@ -784,6 +784,7 @@
 
             if (value !== undefined) {
                 element.value = value;
+                that._placeholder();
             } else {
                 value = element.value;
 

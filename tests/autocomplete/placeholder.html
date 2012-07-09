@@ -93,6 +93,16 @@
                     }, 100);
                 });
 
+                test("set placeholder when clear value using API", 1, function() {
+                    var autocomplete = input.val("1").kendoAutoComplete({
+                        placeholder: "Select..."
+                    }).data("kendoAutoComplete");
+
+                    autocomplete.value("");
+
+                    equal(autocomplete.element.val(), "Select...");
+                });
+
             } else {
                 test("add placeholder attr to the input", function() {
                     var autocomplete = input.attr("placeholder", "test").kendoAutoComplete({

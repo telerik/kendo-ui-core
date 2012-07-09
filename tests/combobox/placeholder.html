@@ -86,6 +86,19 @@
                     }, 300);
                 });
 
+                test("set placeholder when clear value with API", 1, function() {
+                    var combo = input.kendoComboBox({
+                        dataTextField: "text",
+                        dataValueField: "value",
+                        dataSource: [{text: 1, value: 1}],
+                        placeholder: "Select...",
+                        index: 0
+                    }).data("kendoComboBox");
+
+                    combo.value("");
+                    equal(combo.input.val(), "Select...");
+                });
+
             } else {
                 test("add placeholder attr to the visible input", function() {
                     var combobox = input.attr("placeholder", "test").kendoComboBox({
