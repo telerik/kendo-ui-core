@@ -2,9 +2,6 @@ namespace Kendo.Mvc.UI
 {    
     using System.Web.Script.Serialization;
 
-    /// <summary>
-    /// Represent item in the DropDownList/ComboBox items.
-    /// </summary>
     public class DropDownListItem
     {
         public string Text { get; set; }
