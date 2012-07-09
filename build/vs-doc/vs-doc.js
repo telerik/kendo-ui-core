@@ -6,6 +6,9 @@ function vsdoc(directory, filter) {
     var classes = [];
 
     processFilesRecursive(directory, filter, function(fileName) {
+        if (fileName.indexOf("wrappers") > -1){
+            return;
+        }
         var tree = toHeadingTree(fs.readFileSync(fileName).toString()),
             name = tree.children[0].title,
             plugin = name.replace(".ui", "").replace(/\.(.)/g, function() { return arguments[1].toUpperCase() }),
