@@ -10,6 +10,7 @@
         COMPLETE = "complete",
         CANCEL = "cancel",
         LOAD = "load",
+        PROGRESS = "progress",
         REMOVE = "remove";
 
     var Upload = Widget.extend({
@@ -64,6 +65,7 @@
             ERROR,
             COMPLETE,
             CANCEL,
+            PROGRESS,
             REMOVE
         ],
 
@@ -321,6 +323,11 @@
             }
 
             progressBar.width(percentComplete + "%");
+
+            this.trigger(PROGRESS, {
+                files: getFileEntry(e).data("fileNames"),
+                percentComplete: percentComplete
+            });
         },
 
         _onUploadSuccess: function(e, response, xhr) {

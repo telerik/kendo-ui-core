@@ -260,6 +260,36 @@
                 equal($(".k-state-selected.k-progress-status", uploadInstance.wrapper)[0].style.width, "10%");
             });
 
+            test("Progress event is raised", 1, function() {
+                uploadInstance = createUpload({ progress:
+                    function() {
+                        ok(true);
+                    }
+                });
+
+                simulateUpload();
+            });
+
+            test("Progress event arguments contains percentComplete", 1, function() {
+                uploadInstance = createUpload({ progress:
+                    function(e) {
+                        ok(e.percentComplete > 0);
+                    }
+                });
+
+                simulateUpload();
+            });
+
+            test("Progress event arguments contains files", 1, function() {
+                uploadInstance = createUpload({ progress:
+                    function(e) {
+                        ok(e.files.length == 1);
+                    }
+                });
+
+                simulateUpload();
+            });
+
             test("postFormData is issued when clicking retry", function() {
                 simulateUploadWithResponse(errorResponse);
 
