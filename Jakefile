@@ -121,7 +121,7 @@ namespace("demos", function() {
     }, true);
 
     desc("Build debug demos site");
-    task("debug", ["demos:less-js", "demos:copy-wrappers-sources", "merge-scripts", "docs"], function () {
+    task("debug", ["demos:less-js", "merge-scripts", "docs"], function () {
         kendoBuild.msBuild(
             path.join(DEMOS_PATH, DEMOS_PROJECT),
             [ "/t:Clean;Build", "/p:Configuration=Debug" ],
