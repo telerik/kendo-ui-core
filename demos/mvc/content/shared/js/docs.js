@@ -2,9 +2,14 @@
     var kendo = window.kendo,
         markdown = window.markdown,
         sectionRegExp = /^##\s/m,
-        appName = location.pathname.split("/")[1] || "kendo-demos",
-        url = "/" + appName + "/docs/{0}/{1}",
+        splits = location.pathname.split("/"),
+        appName = splits[splits.length - 4],
+        url = "/docs/{0}/{1}",
         base64Decode;
+
+    if (appName) {
+        url = "/" + appName + url;
+    }
 
     //code snippet from http://www.nczonline.net/blog/2009/12/08/computer-science-in-javascript-base64-encoding/
     base64Decode = function base64Decode(text){
