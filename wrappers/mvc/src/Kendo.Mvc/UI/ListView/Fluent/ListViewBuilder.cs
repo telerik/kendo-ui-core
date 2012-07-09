@@ -7,7 +7,7 @@
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="ListView{T}"/>.
     /// </summary>
-    public class ListViewBuilder<T> : ViewComponentBuilderBase<ListView<T>, ListViewBuilder<T>>, IHideObjectMembers where T : class
+    public class ListViewBuilder<T> : WidgetBuilderBase<ListView<T>, ListViewBuilder<T>>, IHideObjectMembers where T : class
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ListView{T}"/> class.

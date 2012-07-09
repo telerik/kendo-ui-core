@@ -7,7 +7,7 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.UI.Html;
     using Kendo.Mvc.Infrastructure;
 
-    public class Gauge : ViewComponentBase, IGauge
+    public class Gauge : WidgetBase, IGauge
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Gauge" /> class.

@@ -5,7 +5,7 @@ namespace Kendo.Mvc.UI
     using System.Collections.Generic;
     using System.Web.Mvc;
 
-    public class DatePickerBase : ViewComponentBase, IPicker
+    public class DatePickerBase : WidgetBase, IPicker
     {
         public DatePickerBase(ViewContext viewContext, IJavaScriptInitializer initializer, ViewDataDictionary viewData)
             : base(viewContext, initializer, viewData)

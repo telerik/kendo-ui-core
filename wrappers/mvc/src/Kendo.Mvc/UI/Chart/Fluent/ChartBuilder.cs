@@ -7,7 +7,7 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="Chart{T}"/> component.
     /// </summary>
-    public class ChartBuilder<T> : ViewComponentBuilderBase<Chart<T>, ChartBuilder<T>>, IHideObjectMembers where T : class
+    public class ChartBuilder<T> : WidgetBuilderBase<Chart<T>, ChartBuilder<T>>, IHideObjectMembers where T : class
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartBuilder{T}"/> class.

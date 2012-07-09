@@ -2,7 +2,7 @@ namespace Kendo.Mvc.UI.Fluent
 {
     using System;
 
-    public class EditorBuilder : ViewComponentBuilderBase<Editor, EditorBuilder>, IHideObjectMembers
+    public class EditorBuilder : WidgetBuilderBase<Editor, EditorBuilder>, IHideObjectMembers
     {
         public EditorBuilder(Editor component)
             : base(component)

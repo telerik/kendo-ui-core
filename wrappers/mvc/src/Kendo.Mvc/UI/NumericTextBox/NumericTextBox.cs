@@ -9,7 +9,7 @@ namespace Kendo.Mvc.UI
     using System.IO;
     using System.Web.Mvc; 
 
-    public class NumericTextBox<T> : ViewComponentBase, IInputComponent<T> where T : struct
+    public class NumericTextBox<T> : WidgetBase, IInputComponent<T> where T : struct
     {
         public NumericTextBox(ViewContext viewContext, IJavaScriptInitializer javaScriptInitializer, ViewDataDictionary viewData)
             : base(viewContext, javaScriptInitializer, viewData)

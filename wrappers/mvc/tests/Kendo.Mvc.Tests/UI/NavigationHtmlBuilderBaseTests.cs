@@ -57,7 +57,7 @@ namespace Kendo.Mvc.UI.Tests.UITests
         }
     }
 
-    public class TComponentTestDouble : ViewComponentBase, INavigationItemComponent<NavigationItemTestDouble>
+    public class TComponentTestDouble : WidgetBase, INavigationItemComponent<NavigationItemTestDouble>
     {
         public IList<TComponentTestDouble> Items
         {

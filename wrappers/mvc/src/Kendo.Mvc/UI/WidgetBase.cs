@@ -14,16 +14,16 @@ namespace Kendo.Mvc.UI
     /// <summary>
     /// View component base class.
     /// </summary>
-    public abstract class ViewComponentBase : IViewComponent, IScriptableComponent
+    public abstract class WidgetBase : IWidget, IScriptableComponent
     {
         private string name;        
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ViewComponentBase"/> class.
+        /// Initializes a new instance of the <see cref="WidgetBase"/> class.
         /// </summary>
         /// <param name="viewContext">The view context.</param>
         /// <param name="clientSideObjectWriterFactory">The client side object writer factory.</param>
-        protected ViewComponentBase(ViewContext viewContext, ViewDataDictionary viewData = null)
+        protected WidgetBase(ViewContext viewContext, ViewDataDictionary viewData = null)
         {
             ViewContext = viewContext;
             ViewData = viewData ?? viewContext.ViewData;
@@ -41,7 +41,7 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        protected ViewComponentBase(ViewContext viewContext, IJavaScriptInitializer initializer, ViewDataDictionary viewData = null)
+        protected WidgetBase(ViewContext viewContext, IJavaScriptInitializer initializer, ViewDataDictionary viewData = null)
             : this(viewContext, viewData)
         {
             Initializer = initializer;

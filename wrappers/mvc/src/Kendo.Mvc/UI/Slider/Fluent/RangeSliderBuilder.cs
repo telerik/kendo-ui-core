@@ -5,7 +5,7 @@ namespace Kendo.Mvc.UI.Fluent
     using Kendo.Mvc.Infrastructure;
 
     /// <summary>Defines the fluent interface for configuring the <see cref="RangeSlider{T}"/>component.</summary>
-    public class RangeSliderBuilder<T> : ViewComponentBuilderBase<RangeSlider<T>, RangeSliderBuilder<T>>, IHideObjectMembers where T : struct, IComparable
+    public class RangeSliderBuilder<T> : WidgetBuilderBase<RangeSlider<T>, RangeSliderBuilder<T>>, IHideObjectMembers where T : struct, IComparable
     {
         /// <summary>Initializes a new instance of the <see cref="RangeSliderBuilder{T}"/>class.</summary>
         /// <param name="component">The component.</param>

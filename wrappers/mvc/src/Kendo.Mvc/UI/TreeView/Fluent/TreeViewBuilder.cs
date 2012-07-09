@@ -8,7 +8,7 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="TreeView"/> component.
     /// </summary>
-    public class TreeViewBuilder : ViewComponentBuilderBase<TreeView, TreeViewBuilder>, IHideObjectMembers
+    public class TreeViewBuilder : WidgetBuilderBase<TreeView, TreeViewBuilder>, IHideObjectMembers
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TreeViewBuilder"/> class.

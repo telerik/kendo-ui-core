@@ -17,7 +17,7 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.UI.Fluent;
     using Kendo.Mvc.UI.Html;
 
-    public class Grid<T> : ViewComponentBase, IGridColumnContainer<T>, IGrid where T : class
+    public class Grid<T> : WidgetBase, IGridColumnContainer<T>, IGrid where T : class
     {
         private readonly IGridHtmlBuilderFactory htmlBuilderFactory;
 

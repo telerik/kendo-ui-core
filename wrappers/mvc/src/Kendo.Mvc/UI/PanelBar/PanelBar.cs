@@ -11,7 +11,7 @@ namespace Kendo.Mvc.UI
     using Infrastructure;
     using Resources;
 
-    public class PanelBar : ViewComponentBase, INavigationItemComponent<PanelBarItem>
+    public class PanelBar : WidgetBase, INavigationItemComponent<PanelBarItem>
     {
         internal bool isPathHighlighted;
         internal bool isExpanded;

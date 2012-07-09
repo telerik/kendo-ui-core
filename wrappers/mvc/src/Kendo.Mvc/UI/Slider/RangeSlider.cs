@@ -7,7 +7,7 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Infrastructure;
     using System.Collections.Generic;
 
-    public class RangeSlider<T> : ViewComponentBase where T : struct, IComparable
+    public class RangeSlider<T> : WidgetBase where T : struct, IComparable
     {
         public RangeSlider(ViewContext viewContext, IJavaScriptInitializer initializer, ViewDataDictionary viewData)
             : base(viewContext, initializer, viewData)

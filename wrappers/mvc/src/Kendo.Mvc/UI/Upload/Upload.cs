@@ -7,7 +7,7 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.UI.Html;
 
-    public class Upload : ViewComponentBase
+    public class Upload : WidgetBase
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Upload" /> class.

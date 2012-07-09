@@ -2,13 +2,12 @@ namespace Kendo.Mvc.UI.Fluent
 {
     using System;
     using System.Collections.Generic;
-    using Kendo.Mvc.Infrastructure;
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="DatePickerBase"/> component.
     /// </summary>
-    public class DatePickerBuilderBase<TPicker, TPickerBuilder> : ViewComponentBuilderBase<TPicker, TPickerBuilder>, IHideObjectMembers
+    public class DatePickerBuilderBase<TPicker, TPickerBuilder> : WidgetBuilderBase<TPicker, TPickerBuilder>, IHideObjectMembers
         where TPicker : DatePickerBase
-        where TPickerBuilder : ViewComponentBuilderBase<TPicker, TPickerBuilder>
+        where TPickerBuilder : WidgetBuilderBase<TPicker, TPickerBuilder>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DatePickerBaseBuilder"/> class.

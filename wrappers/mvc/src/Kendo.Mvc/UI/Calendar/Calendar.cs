@@ -9,7 +9,7 @@ namespace Kendo.Mvc.UI
     using System.Linq;
     using System.Web.Mvc;
     
-    public class Calendar : ViewComponentBase
+    public class Calendar : WidgetBase
     {
         private readonly IUrlGenerator urlGenerator;
 

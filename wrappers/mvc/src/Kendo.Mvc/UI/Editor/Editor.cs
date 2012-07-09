@@ -10,7 +10,7 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.UI.Fluent;
     using Kendo.Mvc.UI.Html;
 
-    public class Editor : ViewComponentBase
+    public class Editor : WidgetBase
     {
         public Editor(ViewContext viewContext, IJavaScriptInitializer initializer) : base(viewContext, initializer)
         {

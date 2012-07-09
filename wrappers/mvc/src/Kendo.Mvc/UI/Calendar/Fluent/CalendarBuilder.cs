@@ -7,7 +7,7 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="Calendar"/>.
     /// </summary>
-    public class CalendarBuilder : ViewComponentBuilderBase<Calendar, CalendarBuilder>, IHideObjectMembers
+    public class CalendarBuilder : WidgetBuilderBase<Calendar, CalendarBuilder>, IHideObjectMembers
     {
 
         /// <summary>

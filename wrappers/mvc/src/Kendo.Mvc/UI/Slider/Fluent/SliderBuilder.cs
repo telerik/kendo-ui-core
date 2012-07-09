@@ -4,7 +4,7 @@ namespace Kendo.Mvc.UI.Fluent
     using Kendo.Mvc.Infrastructure;
 
     /// <summary>Defines the fluent interface for configuring the <see cref="Slider{T}"/>component.</summary>
-    public class SliderBuilder<T> : ViewComponentBuilderBase<Slider<T>, SliderBuilder<T>>, IHideObjectMembers where T : struct, IComparable
+    public class SliderBuilder<T> : WidgetBuilderBase<Slider<T>, SliderBuilder<T>>, IHideObjectMembers where T : struct, IComparable
     {
         /// <summary>Initializes a new instance of the <see cref="SliderBuilder{T}"/>class.</summary>
         /// <param name="component">The component.</param>

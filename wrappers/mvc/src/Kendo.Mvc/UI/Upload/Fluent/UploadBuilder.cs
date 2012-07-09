@@ -6,7 +6,7 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="Upload"/> component.
     /// </summary>
-    public class UploadBuilder : ViewComponentBuilderBase<Upload, UploadBuilder>, IHideObjectMembers
+    public class UploadBuilder : WidgetBuilderBase<Upload, UploadBuilder>, IHideObjectMembers
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="UploadBuilder"/> class.

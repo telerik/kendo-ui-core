@@ -5,7 +5,7 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="RadialGauge{T}"/> component.
     /// </summary>
-    public class RadialGaugeBuilder : ViewComponentBuilderBase<RadialGauge, RadialGaugeBuilder>, IHideObjectMembers
+    public class RadialGaugeBuilder : WidgetBuilderBase<RadialGauge, RadialGaugeBuilder>, IHideObjectMembers
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="RadialGaugeBuilder{T}"/> class.

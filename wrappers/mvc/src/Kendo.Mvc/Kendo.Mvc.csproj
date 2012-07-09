@@ -794,7 +794,7 @@
     <Compile Include="UI\IInputComponent.cs" />
     <Compile Include="UI\INavigationComponentHtmlBuilder.cs" />
     <Compile Include="UI\InputComponentExtensions.cs" />
-    <Compile Include="UI\IViewComponent.cs" />
+    <Compile Include="UI\IWidget.cs" />
     <Compile Include="Infrastructure\JsonObjectExtensions.cs" />
     <Compile Include="UI\ListView\Fluent\ListViewEditingSettingsBuilder.cs" />
     <Compile Include="UI\ListView\Fluent\ListViewEventBuilder.cs" />
@@ -1023,8 +1023,8 @@
     <Compile Include="UI\Upload\Settings\IUploadAsyncSettings.cs" />
     <Compile Include="UI\Upload\Settings\UploadAsyncSettings.cs" />
     <Compile Include="UI\Upload\Upload.cs" />
-    <Compile Include="UI\ViewComponentExtensions.cs" />
-    <Compile Include="UI\ViewComponentFactory.cs" />
+    <Compile Include="UI\WidgetExtensions.cs" />
+    <Compile Include="UI\WidgetFactory.cs" />
     <Compile Include="UI\Window\WindowButtons.cs" />
     <Compile Include="UI\Window\Fluent\WindowActionsBuilder.cs" />
     <Compile Include="UI\Window\Fluent\WindowResizingSettingsBuilder.cs" />
@@ -1054,8 +1054,8 @@
     <Compile Include="UI\HtmlHelperExtension.cs" />
     <Compile Include="UI\IScriptableComponent.cs" />
     <Compile Include="UI\IScriptableComponentContainer.cs" />
-    <Compile Include="UI\ViewComponentBuilderBase.cs" />
-    <Compile Include="UI\ViewComponentBase.cs" />
+    <Compile Include="UI\WidgetBuilderBase.cs" />
+    <Compile Include="UI\WidgetBase.cs" />
     <Compile Include="Infrastructure\Implementation\UrlResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -11,7 +11,7 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="Grid{T}"/> component.
     /// </summary>
-    public class GridBuilder<T> : ViewComponentBuilderBase<Grid<T>, GridBuilder<T>> where T : class
+    public class GridBuilder<T> : WidgetBuilderBase<Grid<T>, GridBuilder<T>> where T : class
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GridBuilder{T}"/> class.

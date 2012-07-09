@@ -6,7 +6,7 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="Menu"/> component.
     /// </summary>
-    public class MenuBuilder : ViewComponentBuilderBase<Menu, MenuBuilder>, IHideObjectMembers
+    public class MenuBuilder : WidgetBuilderBase<Menu, MenuBuilder>, IHideObjectMembers
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="MenuBuilder"/> class.

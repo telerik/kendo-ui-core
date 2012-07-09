@@ -163,7 +163,7 @@
     <Compile Include="UI\ListView\ListViewTestHelper.cs" />
     <Compile Include="UI\ListView\ListViewBuilderTests.cs" />
     <Compile Include="UI\Upload\UploadMessagesBuilderTests.cs" />
-    <Compile Include="UI\ViewComponentBaseExtensionsTests.cs" />
+    <Compile Include="UI\WidgetBaseExtensionsTests.cs" />
     <Compile Include="UI\DataSource\DataSourceTests.cs" />
     <Compile Include="UI\Gauge\GaugeLinearScaleBuilderTests.cs" />
     <Compile Include="UI\Gauge\GaugeTestHelper.cs" />
@@ -314,7 +314,7 @@
     <Compile Include="UI\Upload\UploadSerializationTests.cs" />
     <Compile Include="UI\Upload\UploadStubController.cs" />
     <Compile Include="UI\Upload\UploadTestHelper.cs" />
-    <Compile Include="UI\ViewComponentModelFactoryTests.cs" />
+    <Compile Include="UI\WidgetFactoryModelTests.cs" />
     <Compile Include="UI\Customer.cs" />
     <Compile Include="UI\DatePicker\DatePickerBuilderTests.cs" />
     <Compile Include="UI\DatePicker\DatePickerHtmlBuilderTests.cs" />
@@ -369,9 +369,9 @@
     <Compile Include="Extensions\EnumerableExtensionsTests.cs" />
     <Compile Include="Extensions\ReaderWriterLockSlimExtensionsTests.cs" />
     <Compile Include="Extensions\StringExtensionsTests.cs" />
-    <Compile Include="UI\ViewComponentFactoryTests.cs" />
-    <Compile Include="UI\ViewComponentBaseTestDouble.cs" />
-    <Compile Include="UI\ViewComponentBaseTests.cs">
+    <Compile Include="UI\WidgetFactoryTests.cs" />
+    <Compile Include="UI\WidgetBaseTestDouble.cs" />
+    <Compile Include="UI\WidgetBaseTests.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Infrastructure\Implementation\UrlResolverTests.cs">

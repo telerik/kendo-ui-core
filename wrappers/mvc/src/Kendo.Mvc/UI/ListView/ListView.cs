@@ -10,7 +10,7 @@
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.Resources;    
 
-    public class ListView<T> : ViewComponentBase, IListView where T : class
+    public class ListView<T> : WidgetBase, IListView where T : class
     {
         private readonly ListViewSettingsSerializer<T> settingsSerializer;
 

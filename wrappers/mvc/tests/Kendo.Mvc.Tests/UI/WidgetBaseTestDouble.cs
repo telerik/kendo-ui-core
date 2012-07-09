@@ -5,12 +5,12 @@ namespace Kendo.Mvc.UI.Tests
     using System.Web.UI;
     using Kendo.Mvc.Infrastructure;
     
-    public class ViewComponentBaseTestDouble : ViewComponentBase
+    public class WidgetBaseTestDouble : WidgetBase
     {
         public bool HasEnsuredRequired;
         public bool HasWrittenHtml;
 
-        public ViewComponentBaseTestDouble(ViewContext viewContext, IJavaScriptInitializer javaScriptInitializer)
+        public WidgetBaseTestDouble(ViewContext viewContext, IJavaScriptInitializer javaScriptInitializer)
             : base(viewContext, javaScriptInitializer)
         {
         }

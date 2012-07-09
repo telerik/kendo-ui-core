@@ -3,12 +3,12 @@ namespace Kendo.Mvc.UI.Tests
     using System.Web.Mvc;
     using Xunit;
 
-    public class ViewComponentFactoryTests
+    public class WidgetFactoryTests
     {
-        private readonly ViewComponentFactory _factory;
+        private readonly WidgetFactory _factory;
         private readonly HtmlHelper htmlHelper;
 
-        public ViewComponentFactoryTests()
+        public WidgetFactoryTests()
         {
             ViewContext viewContext = new ViewContext
                                           {
@@ -17,7 +17,7 @@ namespace Kendo.Mvc.UI.Tests
                                           };
 
             htmlHelper = TestHelper.CreateHtmlHelper();
-            _factory = new ViewComponentFactory(htmlHelper);
+            _factory = new WidgetFactory(htmlHelper);
         }
 
         [Fact]

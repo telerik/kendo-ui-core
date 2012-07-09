@@ -6,7 +6,7 @@ namespace Kendo.Mvc.UI
     using Infrastructure;
 
     public abstract class NavigationHtmlBuilderBase<TComponent, TItem> : INavigationHtmlBuilder<TComponent, TItem>
-        where TComponent : ViewComponentBase, INavigationItemComponent<TItem>
+        where TComponent : WidgetBase, INavigationItemComponent<TItem>
         where TItem : NavigationItem<TItem>
     {
         public NavigationHtmlBuilderBase(TComponent component)
@@ -39,7 +39,7 @@ namespace Kendo.Mvc.UI
                     .Attribute("alt", "image", false)
                     .Attributes(item.ImageHtmlAttributes)
                     .PrependClass(UIPrimitives.Image)
-                    .Attribute("src", item.GetImageUrl(((ViewComponentBase)Component).ViewContext));
+                    .Attribute("src", item.GetImageUrl(((WidgetBase)Component).ViewContext));
         }
 
         public IHtmlNode Text(TItem item)

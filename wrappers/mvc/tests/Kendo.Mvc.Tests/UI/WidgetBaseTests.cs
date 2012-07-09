@@ -5,36 +5,27 @@ namespace Kendo.Mvc.UI.Tests
     using System.Web;
     using System.Web.Mvc;
 
-    using Kendo.Mvc.Infrastructure;
     using Moq;
     using Xunit;
 
-    public class ViewComponentBaseTests
+    public class WidgetBaseTests
     {
         private readonly ViewContext _viewContext;
         private readonly Mock<HttpContextBase> _httpContext;
 
-        private readonly Mock<ViewComponentBase> _baseComponent;
+        private readonly Mock<WidgetBase> _baseComponent;
 
-        public ViewComponentBaseTests()
+        public WidgetBaseTests()
         {
             _httpContext = TestHelper.CreateMockedHttpContext();
             _viewContext = new ViewContext { HttpContext = _httpContext.Object, Writer = TextWriter.Null };
-            _baseComponent = new Mock<ViewComponentBase>(_viewContext, null);
+            _baseComponent = new Mock<WidgetBase>(_viewContext, null);
         }
 
         [Fact]
         public void HtmlAttributes_should_be_empty_when_new_instance_is_created()
         {
             Assert.Empty(_baseComponent.Object.HtmlAttributes);
-        }
-
-        [Fact]
-        public void Should_be_able_to_set_name()
-        {
-            _baseComponent.Object.Name = "component";
-
-            Assert.Equal("component", _baseComponent.Object.Name);
         }
 
         [Fact]
@@ -48,7 +39,7 @@ namespace Kendo.Mvc.UI.Tests
         [Fact]
         public void EnsureRequired_should_throw_exception_when_internal_name_is_blank()
         {
-            ViewComponentBaseTestDouble component = new ViewComponentBaseTestDouble(_viewContext, null);
+            WidgetBaseTestDouble component = new WidgetBaseTestDouble(_viewContext, null);
 
             Assert.Throws<InvalidOperationException>(() => component.CheckRequired());
         }
@@ -56,7 +47,7 @@ namespace Kendo.Mvc.UI.Tests
         [Fact]
         public void EnsureRequired_should_not_throw_exception_when_internal_name_is_not_blank()
         {
-            ViewComponentBaseTestDouble component = new ViewComponentBaseTestDouble(_viewContext, null) { Name = "dummyComponent" };
+            WidgetBaseTestDouble component = new WidgetBaseTestDouble(_viewContext, null) { Name = "dummyComponent" };
 
             Assert.DoesNotThrow(component.CheckRequired);
         }
@@ -64,7 +55,7 @@ namespace Kendo.Mvc.UI.Tests
         [Fact]
         public void Render_should_ensure_required()
         {
-            ViewComponentBaseTestDouble component = new ViewComponentBaseTestDouble(_viewContext, null) { Name = "dummyComponent" };
+            WidgetBaseTestDouble component = new WidgetBaseTestDouble(_viewContext, null) { Name = "dummyComponent" };
 
             component.Render();
 
@@ -74,7 +65,7 @@ namespace Kendo.Mvc.UI.Tests
         [Fact]
         public void Render_should_write_html()
         {
-            ViewComponentBaseTestDouble component = new ViewComponentBaseTestDouble(_viewContext, null) { Name = "dummyComponent" };
+            WidgetBaseTestDouble component = new WidgetBaseTestDouble(_viewContext, null) { Name = "dummyComponent" };
 
             component.Render();
 

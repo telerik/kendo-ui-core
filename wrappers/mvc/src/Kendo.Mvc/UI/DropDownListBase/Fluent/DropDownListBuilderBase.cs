@@ -3,12 +3,10 @@ namespace Kendo.Mvc.UI.Fluent
     using System;
     using System.Collections;
 
-    /// <summary>
-    /// Defines the fluent interface for configuring the <see cref="DropDownList"/> component.
-    /// </summary>
-    public class DropDownListBuilderBase<TDropDown, TDropDownBuilder> : ViewComponentBuilderBase<TDropDown, TDropDownBuilder>, IHideObjectMembers
+
+    public class DropDownListBuilderBase<TDropDown, TDropDownBuilder> : WidgetBuilderBase<TDropDown, TDropDownBuilder>, IHideObjectMembers
         where TDropDown : DropDownListBase
-        where TDropDownBuilder : ViewComponentBuilderBase<TDropDown, TDropDownBuilder>
+        where TDropDownBuilder : WidgetBuilderBase<TDropDown, TDropDownBuilder>
     {
         public DropDownListBuilderBase(TDropDown component)
             : base(component)

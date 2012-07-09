@@ -9,21 +9,21 @@ namespace Kendo.Mvc.UI.Tests
     using Xunit;
     using Kendo.Mvc.Infrastructure;
 
-    public class ViewComponentBaseExtensionsTests
+    public class WidgetBaseExtensionsTests
     {
         private readonly ViewContext viewContext;
         private readonly Mock<HttpContextBase> httpContext;
         private readonly Mock<IJavaScriptInitializer> javaScriptInitializer;
 
-        private readonly ViewComponentBaseTestDouble baseComponent;
+        private readonly WidgetBaseTestDouble baseComponent;
 
-        public ViewComponentBaseExtensionsTests()
+        public WidgetBaseExtensionsTests()
         {
             httpContext = TestHelper.CreateMockedHttpContext();
             viewContext = new ViewContext { HttpContext = httpContext.Object, Writer = TextWriter.Null };
             javaScriptInitializer = new Mock<IJavaScriptInitializer>();
 
-            baseComponent = new ViewComponentBaseTestDouble(viewContext, javaScriptInitializer.Object);
+            baseComponent = new WidgetBaseTestDouble(viewContext, javaScriptInitializer.Object);
         }
 
         [Fact]

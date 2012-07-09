@@ -10,7 +10,7 @@ namespace Kendo.Mvc.UI
     using Infrastructure;
     using Kendo.Mvc.Resources;
 
-    public class TreeView : ViewComponentBase, INavigationItemComponent<TreeViewItem>
+    public class TreeView : WidgetBase, INavigationItemComponent<TreeViewItem>
     {
         internal bool isPathHighlighted;
 

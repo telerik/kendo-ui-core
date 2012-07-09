@@ -5,7 +5,7 @@
     using System.Linq;
     using System.Web.Mvc;
 
-    public class DropDownListBase : ViewComponentBase
+    public class DropDownListBase : WidgetBase
     {
         public DropDownListBase(ViewContext viewContext, IJavaScriptInitializer initializer, ViewDataDictionary viewData, IUrlGenerator urlGenerator)
             : base(viewContext, initializer, viewData)

@@ -16,12 +16,12 @@ namespace Kendo.Mvc.UI
     {
         public static void WriteItem<TComponent, TItem>(this TItem item, TComponent component, IHtmlNode parentTag, INavigationComponentHtmlBuilder<TItem> builder)
             where TItem : NavigationItem<TItem>, IContentContainer, INavigationItemContainer<TItem>
-            where TComponent : ViewComponentBase, INavigationItemComponent<TItem>
+            where TComponent : WidgetBase, INavigationItemComponent<TItem>
         {
             var accessible = true;
             if (component.SecurityTrimming)
             {
-                accessible = item.IsAccessible(component.Authorization, ((ViewComponentBase)component).ViewContext);
+                accessible = item.IsAccessible(component.Authorization, ((WidgetBase)component).ViewContext);
             }
 
             if (component.ItemAction != null)
@@ -34,7 +34,7 @@ namespace Kendo.Mvc.UI
                 var hasAccessibleChildren = item.Items.Any() && item.Items.Any(i => i.Visible);
                 if (component.SecurityTrimming && hasAccessibleChildren)
                 {
-                    hasAccessibleChildren = item.Items.IsAccessible(component.Authorization, ((ViewComponentBase)component).ViewContext);
+                    hasAccessibleChildren = item.Items.IsAccessible(component.Authorization, ((WidgetBase)component).ViewContext);
                 }
 
                 IHtmlNode itemTag = builder.ItemTag(item).AppendTo(parentTag);
@@ -56,17 +56,17 @@ namespace Kendo.Mvc.UI
         }
 
         public static string GetItemUrl<TComponent, TItem>(this TComponent component, TItem item)
-            where TComponent : ViewComponentBase, INavigationItemComponent<TItem>
+            where TComponent : WidgetBase, INavigationItemComponent<TItem>
             where TItem : NavigationItem<TItem>, IContentContainer
         {
             return component.GetItemUrl(item, "#");
         }
 
         public static string GetItemUrl<TComponent, TItem>(this TComponent component, TItem item, string defaultValue)
-            where TComponent : ViewComponentBase, INavigationItemComponent<TItem>
+            where TComponent : WidgetBase, INavigationItemComponent<TItem>
             where TItem : NavigationItem<TItem>, IContentContainer
         {
-            string url = item.GenerateUrl(((ViewComponentBase)component).ViewContext, component.UrlGenerator);
+            string url = item.GenerateUrl(((WidgetBase)component).ViewContext, component.UrlGenerator);
 
             if (url != null)
             {
@@ -98,7 +98,7 @@ namespace Kendo.Mvc.UI
         }
 
         public static string GetItemContentId<TComponent, TItem>(this TComponent component, TItem item)
-            where TComponent : ViewComponentBase, INavigationItemContainer<TItem>
+            where TComponent : WidgetBase, INavigationItemContainer<TItem>
             where TItem : NavigationItem<TItem>, IContentContainer
         {
             return item.ContentHtmlAttributes.ContainsKey("id") ?

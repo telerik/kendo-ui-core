@@ -66,7 +66,7 @@ namespace Kendo.Mvc.UI.Tests
         }
     }
 
-    public class ContentNavigationItemComponentTestDouble : ViewComponentBase, INavigationItemComponent<ContentNavigationItemTestDouble>
+    public class ContentNavigationItemComponentTestDouble : WidgetBase, INavigationItemComponent<ContentNavigationItemTestDouble>
     {
 
         public IUrlGenerator UrlGenerator

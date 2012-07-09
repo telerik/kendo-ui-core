@@ -4,7 +4,6 @@ namespace Kendo.Mvc.UI
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Data;
-    using System.Globalization;
     using System.Linq;
     using System.Linq.Expressions;
     using System.Web.Mvc;
@@ -14,9 +13,12 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.UI.Fluent;
     using Kendo.Mvc.UI.Html;
 
-    public class ViewComponentFactory : IHideObjectMembers
+    /// <summary>
+    /// Creates the fluent API builders of the Kendo UI widgets
+    /// </summary>
+    public class WidgetFactory : IHideObjectMembers
     {
-        public ViewComponentFactory(HtmlHelper htmlHelper)
+        public WidgetFactory(HtmlHelper htmlHelper)
         {
 
             HtmlHelper = htmlHelper;
@@ -717,12 +719,12 @@ namespace Kendo.Mvc.UI
         }
 
     }
-    public class ViewComponentFactory<TModel> : ViewComponentFactory
+    public class WidgetFactory<TModel> : WidgetFactory
     {
-        private string minimumValidator;
-        private string maximumValidator;
+        private readonly string minimumValidator;
+        private readonly string maximumValidator;
 
-        public ViewComponentFactory(HtmlHelper<TModel> htmlHelper)
+        public WidgetFactory(HtmlHelper<TModel> htmlHelper)
             : base(htmlHelper)
         {
             this.HtmlHelper = htmlHelper;
@@ -976,8 +978,6 @@ namespace Kendo.Mvc.UI
         public virtual TimePickerBuilder TimePickerFor(Expression<Func<TModel, DateTime>> expression)
         {
             IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
-
-            var value = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
 
             return TimePicker()
                     .Name(GetName(expression))

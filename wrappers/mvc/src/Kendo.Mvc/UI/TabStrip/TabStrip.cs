@@ -10,7 +10,7 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Extensions;
     using Infrastructure;
 
-    public class TabStrip : ViewComponentBase, INavigationItemComponent<TabStripItem>
+    public class TabStrip : WidgetBase, INavigationItemComponent<TabStripItem>
     {
         internal bool isPathHighlighted;
 

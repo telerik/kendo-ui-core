@@ -7,7 +7,7 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="PanelBar"/> component.
     /// </summary>
-    public class PanelBarBuilder : ViewComponentBuilderBase<PanelBar, PanelBarBuilder>, IHideObjectMembers
+    public class PanelBarBuilder : WidgetBuilderBase<PanelBar, PanelBarBuilder>, IHideObjectMembers
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PanelBarBuilder"/> class.

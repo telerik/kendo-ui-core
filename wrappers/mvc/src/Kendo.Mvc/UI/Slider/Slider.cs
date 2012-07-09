@@ -8,7 +8,7 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Infrastructure;
     using System.Collections.Generic;
 
-    public class Slider<T> : ViewComponentBase, IInputComponent<T> where T : struct, IComparable
+    public class Slider<T> : WidgetBase, IInputComponent<T> where T : struct, IComparable
     {
         public Slider(ViewContext viewContext, IJavaScriptInitializer initializer, ViewDataDictionary viewData)
             : base(viewContext, initializer, viewData)

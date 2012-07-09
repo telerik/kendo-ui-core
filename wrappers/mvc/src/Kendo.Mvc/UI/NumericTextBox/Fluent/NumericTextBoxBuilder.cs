@@ -1,12 +1,10 @@
 namespace Kendo.Mvc.UI.Fluent
 {
     using System;
-    using Kendo.Mvc.Infrastructure;
-
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="NumericTextBox"/> component.
     /// </summary>
-    public class NumericTextBoxBuilder<T> : ViewComponentBuilderBase<NumericTextBox<T>, NumericTextBoxBuilder<T>> where T : struct
+    public class NumericTextBoxBuilder<T> : WidgetBuilderBase<NumericTextBox<T>, NumericTextBoxBuilder<T>> where T : struct
     {
         /// Initializes a new instance of the <see cref="NumericTextBoxBuilder"/> class.
         /// </summary>

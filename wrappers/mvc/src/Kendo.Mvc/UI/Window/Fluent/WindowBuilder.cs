@@ -1,16 +1,13 @@
 namespace Kendo.Mvc.UI.Fluent
 {
     using System;
-    using System.Collections.Generic;
     using System.Web.Mvc;
     using System.Web.Routing;
     using Kendo.Mvc.Extensions;
-    using Kendo.Mvc.Infrastructure;
-
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="Window"/> component.
     /// </summary>
-    public class WindowBuilder : ViewComponentBuilderBase<Window, WindowBuilder>, IHideObjectMembers
+    public class WindowBuilder : WidgetBuilderBase<Window, WindowBuilder>, IHideObjectMembers
     {
         public WindowBuilder(Window component)
             : base(component)

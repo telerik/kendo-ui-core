@@ -4,14 +4,14 @@ namespace Kendo.Mvc.UI
 
     public static class HtmlHelperExtension
     {
-        public static ViewComponentFactory Kendo(this HtmlHelper helper)
+        public static WidgetFactory Kendo(this HtmlHelper helper)
         {
-            return new ViewComponentFactory(helper);
+            return new WidgetFactory(helper);
         }
 
-        public static ViewComponentFactory<TModel> Kendo<TModel>(this HtmlHelper<TModel> helper)
+        public static WidgetFactory<TModel> Kendo<TModel>(this HtmlHelper<TModel> helper)
         {
-            return new ViewComponentFactory<TModel>(helper);
+            return new WidgetFactory<TModel>(helper);
         }
     }
 }

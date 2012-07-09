@@ -3,21 +3,20 @@ namespace Kendo.Mvc.UI.Tests
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
-    using Moq;
     using Xunit;
 
-    public class ViewComponentModelFactoryTests
+    public class WidgetFactoryModelTests
     {
-        private readonly ViewComponentFactory<TestModel> factory;
+        private readonly WidgetFactory<TestModel> factory;
         private readonly HtmlHelper<TestModel> htmlHelper;
 
-        public ViewComponentModelFactoryTests()
+        public WidgetFactoryModelTests()
         {
             htmlHelper = TestHelper.CreateHtmlHelper<TestModel>();
 
             htmlHelper.ViewData.Model = new TestModel { ID = 1, DoubleProperty = 1.0, DecimalProperty = 1.0m, DateTimeProperty = DateTime.Today, TimeProperty = DateTime.Now.TimeOfDay, ComplexModel = new TestModel() };
 
-            factory = new ViewComponentFactory<TestModel>(htmlHelper);
+            factory = new WidgetFactory<TestModel>(htmlHelper);
         }
 
         [Fact]

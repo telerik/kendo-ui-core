@@ -4,22 +4,20 @@ namespace Kendo.Mvc.UI
     using System.Web;
     using System.Web.Mvc;
     using Kendo.Mvc.Extensions;
-    using Kendo.Mvc.Infrastructure;    
-
     /// <summary>
     /// View component Builder base class.
     /// </summary>
-    public abstract class ViewComponentBuilderBase<TViewComponent, TBuilder> : IHtmlString, IHideObjectMembers
-        where TViewComponent : ViewComponentBase
-        where TBuilder : ViewComponentBuilderBase<TViewComponent, TBuilder>
+    public abstract class WidgetBuilderBase<TViewComponent, TBuilder> : IHtmlString, IHideObjectMembers
+        where TViewComponent : WidgetBase
+        where TBuilder : WidgetBuilderBase<TViewComponent, TBuilder>
     {
         private TViewComponent component;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ViewComponentBuilderBase&lt;TViewComponent, TBuilder&gt;"/> class.
+        /// Initializes a new instance of the <see cref="WidgetBuilderBase&lt;TViewComponent, TBuilder&gt;"/> class.
         /// </summary>
         /// <param name="component">The component.</param>
-        public ViewComponentBuilderBase(TViewComponent component)
+        public WidgetBuilderBase(TViewComponent component)
         {
             this.component = component;
         }
@@ -41,11 +39,11 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="Kendo.Mvc.UI.ViewComponentBuilderBase&lt;TViewComponent,TBuilder&gt;"/> to TViewComponent.
+        /// Performs an implicit conversion from <see cref="Kendo.Mvc.UI.WidgetBuilderBase&lt;TViewComponent,TBuilder&gt;"/> to TViewComponent.
         /// </summary>
         /// <param name="builder">The builder.</param>
         /// <returns>The result of the conversion.</returns>
-        public static implicit operator TViewComponent(ViewComponentBuilderBase<TViewComponent, TBuilder> builder)
+        public static implicit operator TViewComponent(WidgetBuilderBase<TViewComponent, TBuilder> builder)
         {
 
             return builder.ToComponent();

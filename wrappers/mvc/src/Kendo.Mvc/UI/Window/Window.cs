@@ -13,7 +13,7 @@ namespace Kendo.Mvc.UI
     using Infrastructure;
     using Kendo.Mvc.Resources;
 
-    public class Window : ViewComponentBase, IContentContainer, IAsyncContentContainer
+    public class Window : WidgetBase, IContentContainer, IAsyncContentContainer
     {
         private readonly IList<IWindowButton> defaultButtons = new List<IWindowButton> { new HeaderButton { Name = "Close", CssClass = "k-i-close" } };
 

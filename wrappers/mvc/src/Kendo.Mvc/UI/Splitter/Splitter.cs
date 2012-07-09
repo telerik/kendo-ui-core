@@ -8,7 +8,7 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.UI.Html;
 
-    public class Splitter : ViewComponentBase
+    public class Splitter : WidgetBase
     {
         public Splitter(ViewContext viewContext, IJavaScriptInitializer initializer)
             : base(viewContext, initializer)

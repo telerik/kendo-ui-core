@@ -8,7 +8,7 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="TabStrip"/> component.
     /// </summary>
-    public class TabStripBuilder : ViewComponentBuilderBase<TabStrip, TabStripBuilder>, IHideObjectMembers
+    public class TabStripBuilder : WidgetBuilderBase<TabStrip, TabStripBuilder>, IHideObjectMembers
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TabStripBuilder"/> class.
