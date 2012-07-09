@@ -1,9 +1,10 @@
-namespace Kendo.Mvc.UI
+namespace Kendo.Mvc.UI.Fluent
 {
     using System;
     using System.Web.Mvc;
     using System.Web.Routing;
 
+    using Kendo.Mvc;
     using Extensions;
 
     public class ContentNavigationItemBuilder<TItem, TBuilder> : NavigationItemBuilder<TItem, TBuilder>

@@ -1,8 +1,5 @@
 namespace Kendo.Mvc.UI
 {
-    /// <summary>
-    /// Represents chart line markers styling
-    /// </summary>
     public class ChartMarkers
     {
         /// <summary>

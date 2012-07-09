@@ -1,8 +1,5 @@
 namespace Kendo.Mvc.UI
 {
-    /// <summary>
-    /// Represents the gauge cap
-    /// </summary>
     public class GaugeRadialCap
     {
         /// <summary>

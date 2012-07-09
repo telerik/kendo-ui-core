@@ -1,10 +1,9 @@
 namespace Kendo.Mvc.UI.Tests
 {
-    using System.Web.Mvc;
-    using System.Web.Routing;
-    using Kendo.Mvc.UI;
-    using Xunit;
     using System;
+    using System.Web.Mvc;
+    using Kendo.Mvc.UI.Fluent;
+    using Xunit;
 
     public class ContentNavigationItemBuilderTests
     {

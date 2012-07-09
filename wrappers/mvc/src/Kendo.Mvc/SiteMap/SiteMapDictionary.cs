@@ -3,11 +3,7 @@ namespace Kendo.Mvc
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using Kendo.Mvc.Infrastructure;
 
-    /// <summary>
-    /// Defines a class that is used to store <see cref="SiteMapBase"/> against a key.
-    /// </summary>
     public class SiteMapDictionary : IDictionary<string, SiteMapBase>
     {
         private readonly IDictionary<string, SiteMapBase> innerDictionary = new Dictionary<string, SiteMapBase>(StringComparer.OrdinalIgnoreCase);

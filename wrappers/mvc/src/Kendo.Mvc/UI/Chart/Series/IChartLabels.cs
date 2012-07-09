@@ -1,13 +1,8 @@
 namespace Kendo.Mvc.UI
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
 
-    /// <summary>
-    /// Defines a generic Chart labels
-    /// </summary>
     public interface IChartLabels
     {
         /// <summary>

@@ -3,12 +3,6 @@ namespace Kendo.Mvc
     using System;
     using System.Web.Mvc;
 
-    using Infrastructure;
-
-    /// <summary>
-    /// Represents an attribute that is used to populate <see cref="SiteMapBase"/> in view data.
-    /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "Sealed in public class is a design smell, we can ignore the little performace benefit of sealed.")]
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = true)]
     public class PopulateSiteMapAttribute : FilterAttribute, IResultFilter
     {

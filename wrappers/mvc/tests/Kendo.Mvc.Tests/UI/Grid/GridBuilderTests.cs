@@ -45,7 +45,7 @@ namespace Kendo.Mvc.UI.Fluent.Tests
         {
             builder.BindTo(new object[0]);
 
-            Assert.IsType<GridCustomGroupingWrapper<Customer>>(grid.DataSource.Data);
+            Assert.IsType<CustomGroupingWrapper<Customer>>(grid.DataSource.Data);
         }
 
         [Fact]

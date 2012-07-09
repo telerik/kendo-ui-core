@@ -1,8 +1,5 @@
 namespace Kendo.Mvc.UI
 {
-    /// <summary>
-    /// Contains constants for CSS class names
-    /// </summary>
     public static class UIPrimitives
     {
         /// <summary>

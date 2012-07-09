@@ -1,10 +1,5 @@
 namespace Kendo.Mvc.UI
 {
-    using System.Collections;
-
-    /// <summary>
-    /// Represents chart bubble series
-    /// </summary>
     public interface IChartBubbleSeries : IChartScatterSeries
     {
         /// <summary>

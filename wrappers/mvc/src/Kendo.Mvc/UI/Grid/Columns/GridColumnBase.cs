@@ -8,10 +8,6 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.UI.Html;
     using System.Web;
 
-    /// <summary>
-    /// Represents a column in the <see cref="Grid{T}"/> component
-    /// </summary>
-    /// <typeparam name="T">The type of the data item</typeparam>
     public abstract class GridColumnBase<T> : JsonObject, IGridColumn where T : class
     {
         public string Format

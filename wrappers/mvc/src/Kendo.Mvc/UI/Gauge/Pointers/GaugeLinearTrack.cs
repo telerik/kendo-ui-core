@@ -1,8 +1,5 @@
 namespace Kendo.Mvc.UI
 {
-    /// <summary>
-    /// Represents the gauge track
-    /// </summary>
     public class GaugeLinearTrack
     {
         /// <summary>

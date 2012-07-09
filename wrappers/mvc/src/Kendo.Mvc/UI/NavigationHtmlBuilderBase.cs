@@ -2,8 +2,6 @@ namespace Kendo.Mvc.UI
 {
     using System;
     using System.Web.Mvc;
-    using Extensions;
-    using Infrastructure;
 
     public abstract class NavigationHtmlBuilderBase<TComponent, TItem> : INavigationHtmlBuilder<TComponent, TItem>
         where TComponent : WidgetBase, INavigationItemComponent<TItem>

@@ -1,8 +1,5 @@
 namespace Kendo.Mvc.UI
 {
-    /// <summary>
-    /// Defines an interface for asynchronous upload settings
-    /// </summary>
     public interface IUploadAsyncSettings
     {
         /// <summary>

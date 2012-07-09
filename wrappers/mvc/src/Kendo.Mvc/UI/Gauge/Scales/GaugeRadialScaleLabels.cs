@@ -1,8 +1,5 @@
 namespace Kendo.Mvc.UI
 {
-    /// <summary>
-    /// Represents the options of the linear scale labels
-    /// </summary>
     public class GaugeRadialScaleLabels : GaugeScaleLabelsBase
     {
         /// <summary>

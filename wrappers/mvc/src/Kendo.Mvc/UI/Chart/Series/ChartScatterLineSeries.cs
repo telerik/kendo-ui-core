@@ -4,11 +4,6 @@ namespace Kendo.Mvc.UI
     using System.Linq.Expressions;
     using System.Collections;
 
-    /// <summary>
-    /// Represents chart scatter line series
-    /// </summary>
-    /// <typeparam name="TModel">The Chart model type</typeparam>
-    /// <typeparam name="TValue">The value type</typeparam>
     public class ChartScatterLineSeries<TModel, TXValue, TYValue>
         : ChartScatterSeries<TModel, TXValue, TYValue>, IChartScatterLineSeries
         where TModel : class

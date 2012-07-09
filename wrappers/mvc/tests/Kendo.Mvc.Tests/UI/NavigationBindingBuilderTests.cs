@@ -1,5 +1,6 @@
 namespace Kendo.Mvc.UI.Tests
 {
+    using Kendo.Mvc.UI.Fluent;
     using Xunit;
 
     public class NavigationBindingBuilderTests

@@ -10,12 +10,6 @@ namespace Kendo.Mvc.UI
 
     public class Chart<T> : WidgetBase, IChart where T : class
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Chart{T}" /> class.
-        /// </summary>
-        /// <param name="viewContext">The view context.</param>
-        /// <param name="IJavaScriptInitializer">The javascript initializer.</param>
-        /// <param name="urlGenerator">The URL Generator.</param>
         public Chart(ViewContext viewContext, IJavaScriptInitializer initializer, IUrlGenerator urlGenerator)
             : base(viewContext, initializer)
         {

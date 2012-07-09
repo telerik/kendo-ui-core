@@ -2,9 +2,6 @@ namespace Kendo.Mvc
 {
     using System.Web.Routing;
 
-    /// <summary>
-    /// Defines an interface that supports navigation.
-    /// </summary>
     public interface INavigatable
     {
         /// <summary>

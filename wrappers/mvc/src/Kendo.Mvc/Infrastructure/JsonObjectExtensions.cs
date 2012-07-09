@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    public static class JsonObjectExtension
+    public static class JsonObjectExtensions
     {
         public static IEnumerable<IDictionary<string, object>> ToJson(this IEnumerable<JsonObject> items)
         {            

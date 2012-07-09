@@ -2,9 +2,6 @@ namespace Kendo.Mvc.UI
 {
     using System.Collections.Generic;
 
-    /// <summary>
-    /// Represents a gauge scale base.
-    /// </summary>
     public abstract class GaugeScaleBase : IGaugeScale
     {
         /// <summary>

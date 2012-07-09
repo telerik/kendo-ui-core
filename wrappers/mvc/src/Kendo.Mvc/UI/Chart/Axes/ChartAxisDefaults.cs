@@ -1,9 +1,5 @@
 namespace Kendo.Mvc.UI
 {
-    /// <summary>
-    /// Represents a category axis in the <see cref="Chart{T}"/> component
-    /// </summary>
-    /// <typeparam name="T">The type of the data item</typeparam>
     public class ChartAxisDefaults<T> : ChartAxisBase<T, double>, IChartAxisDefaults
         where T : class
     {

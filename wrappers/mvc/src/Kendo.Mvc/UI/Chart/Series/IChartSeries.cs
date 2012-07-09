@@ -1,8 +1,5 @@
 namespace Kendo.Mvc.UI
 {
-    /// <summary>
-    /// Represents chart series
-    /// </summary>
     public interface IChartSeries
     {
         /// <summary>

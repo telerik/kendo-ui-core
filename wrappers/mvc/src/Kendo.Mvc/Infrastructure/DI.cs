@@ -3,7 +3,6 @@ namespace Kendo.Mvc.Infrastructure
     using System.Web;
     using System.Web.Routing;
     using Kendo.Mvc.Infrastructure.Implementation;
-    using Kendo.Mvc.UI;
     using Kendo.Mvc.UI.Html;
 
     public static class DI

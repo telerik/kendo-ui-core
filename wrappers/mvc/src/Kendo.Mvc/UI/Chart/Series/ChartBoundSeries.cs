@@ -4,14 +4,8 @@ namespace Kendo.Mvc.UI
     using System.Collections;
     using System.Linq.Expressions;
     using Kendo.Mvc.Extensions;
-    using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.Resources;
 
-    /// <summary>
-    /// Represents Chart series bound to data.
-    /// </summary>
-    /// <typeparam name="TModel">The Chart model type</typeparam>
-    /// <typeparam name="TValue">The value type</typeparam>
     public abstract class ChartBoundSeries<TModel, TValue> : ChartSeriesBase<TModel>, IChartBoundSeries where TModel : class
     {
         /// <summary>

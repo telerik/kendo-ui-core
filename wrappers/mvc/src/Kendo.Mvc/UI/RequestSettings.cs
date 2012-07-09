@@ -1,8 +1,7 @@
 namespace Kendo.Mvc.UI
 {
     using System.Web.Routing;
-    using Kendo.Mvc.Infrastructure;
-    
+
     public class RequestSettings : INavigatable
     {
         private string routeName;

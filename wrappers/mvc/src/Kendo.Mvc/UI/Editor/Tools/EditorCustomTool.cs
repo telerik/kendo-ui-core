@@ -1,7 +1,5 @@
 namespace Kendo.Mvc.UI
 {
-    using System.Collections.Generic;
-
     public class EditorCustomTemplateTool : IEditorTool
     {
         public EditorCustomTemplateTool()
@@ -17,14 +15,7 @@ namespace Kendo.Mvc.UI
         public EditorCustomButtonTool()
         {
             Exec = new ClientEvent();
-            //HtmlAttributes = new Dictionary<string, object>();
         }
-
-        //public IDictionary<string, object> HtmlAttributes
-        //{
-        //    get;
-        //    private set;
-        //}
 
         public string Name { get; set; }
         public string ToolTip { get; set; }

@@ -5,11 +5,6 @@ namespace Kendo.Mvc
     using Kendo.Mvc.Infrastructure.Implementation;
     using Kendo.Mvc.Infrastructure.Implementation.Expressions;
 
-    /// <summary>
-    /// Represents an <see cref="AggregateFunction"/> that uses aggregate extension 
-    /// methods provided in <see cref="Enumerable"/> using <see cref="SourceField"/>
-    /// as a member selector.
-    /// </summary>
     public abstract class EnumerableSelectorAggregateFunction : EnumerableAggregateFunctionBase
     {
         /// <summary>

@@ -3,9 +3,6 @@ namespace Kendo.Mvc.UI
     using System;
     using System.Collections.Generic;
 
-    /// <summary>
-    /// Represents a numeric axis
-    /// </summary>
     public interface IChartDateAxis : IChartValueAxis, IChartAxis<DateTime>
     {
         /// <summary>

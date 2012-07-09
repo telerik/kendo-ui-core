@@ -1,8 +1,5 @@
 namespace Kendo.Mvc.UI
 {
-    /// <summary>
-    /// Represents chart element border
-    /// </summary>
     public class ChartElementBorder
     {
         /// <summary>

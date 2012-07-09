@@ -1,8 +1,5 @@
 namespace Kendo.Mvc.UI.Html
 {
-    /// <summary>
-    /// An HTML Builder for the Chart component
-    /// </summary>
     public class GaugeHtmlBuilder : HtmlBuilderBase
     {
         private readonly Gauge gauge;

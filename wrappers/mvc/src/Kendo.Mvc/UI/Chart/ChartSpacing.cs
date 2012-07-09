@@ -1,8 +1,5 @@
 namespace Kendo.Mvc.UI
 {
-    /// <summary>
-    /// Represents chart element spacing
-    /// </summary>
     public class ChartSpacing
     {
         /// <summary>

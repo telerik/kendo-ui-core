@@ -2,10 +2,6 @@ namespace Kendo.Mvc.UI
 {
     using System.Collections.Generic;
 
-    /// <summary>
-    /// Represents a numeric axis in the <see cref="Chart{T}"/> component
-    /// </summary>
-    /// <typeparam name="T">The type of the data item</typeparam>
     public class ChartNumericAxis<T> : ChartAxisBase<T, double>, IChartNumericAxis where T : class
     {
         /// <summary>

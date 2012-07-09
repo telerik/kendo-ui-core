@@ -3,9 +3,6 @@ namespace Kendo.Mvc.UI
     using System;
     using System.Collections.Generic;
 
-    /// <summary>
-    /// Defines whether one navigation item can have content output immediately
-    /// </summary>
     public interface IContentContainer
     {
         /// <summary>

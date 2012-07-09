@@ -5,9 +5,6 @@ namespace Kendo.Mvc.Infrastructure.Implementation.Expressions
     using System.Globalization;
     using System.Xml;
 
-    /// <summary>
-    /// Holds extension methods for <see cref="XmlNode"/>.
-    /// </summary>
     public static class XmlNodeExtensions
     {
         /// <exception cref="ArgumentException">

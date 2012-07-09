@@ -305,7 +305,7 @@ namespace Kendo.Mvc.UI.Fluent
 
         public GridBuilder<T> BindTo(IEnumerable dataSource)
         {           
-            Component.DataSource.Data = new GridCustomGroupingWrapper<T>(dataSource);
+            Component.DataSource.Data = new CustomGroupingWrapper<T>(dataSource);
             return this;
         }        
 

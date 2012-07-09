@@ -3,9 +3,6 @@ using System.Collections.Generic;
 
 namespace Kendo.Mvc.UI.Html
 {
-    /// <summary>
-    /// An HTML Builder for the Upload component
-    /// </summary>
     public class UploadHtmlBuilder : HtmlBuilderBase
     {
         private readonly Upload upload;

@@ -1,9 +1,5 @@
 namespace Kendo.Mvc.UI
 {
-    /// <summary>
-    /// Represents a series in the <see cref="Kendo.Mvc.UI.Chart{T}"/> component
-    /// </summary>
-    /// <typeparam name="T">The type of the data item</typeparam>
     public abstract class ChartSeriesBase<T> : IChartSeries where T : class
     {
         /// <summary>

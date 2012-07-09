@@ -11,9 +11,6 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.Resources;
 
-    /// <summary>
-    /// View component base class.
-    /// </summary>
     public abstract class WidgetBase : IWidget, IScriptableComponent
     {
         private string name;        

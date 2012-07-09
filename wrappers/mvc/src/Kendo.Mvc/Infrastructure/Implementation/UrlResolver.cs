@@ -6,9 +6,6 @@ namespace Kendo.Mvc.Infrastructure.Implementation
 
     using Extensions;
 
-    /// <summary>
-    /// Class used to resolve relative path for virtual path.
-    /// </summary>
     public class UrlResolver : IUrlResolver
     {
         /// <summary>

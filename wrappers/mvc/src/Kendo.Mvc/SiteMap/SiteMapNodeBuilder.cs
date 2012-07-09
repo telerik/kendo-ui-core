@@ -12,11 +12,7 @@ namespace Kendo.Mvc
     using UI;
     using Resources;
     using Extensions;
-    using Infrastructure;
 
-    /// <summary>
-    /// Builder class for fluently configuring <see cref="SiteMapNode"/>.
-    /// </summary>
     public class SiteMapNodeBuilder : IHideObjectMembers
     {
         private readonly SiteMapNode siteMapNode;
@@ -256,30 +252,6 @@ namespace Kendo.Mvc
         public virtual SiteMapNodeBuilder Url(string value)
         {
             siteMapNode.Url = value;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the change frequency.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <returns></returns>
-        public virtual SiteMapNodeBuilder ChangeFrequency(SiteMapChangeFrequency value)
-        {
-            siteMapNode.ChangeFrequency = value;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the update priority.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <returns></returns>
-        public virtual SiteMapNodeBuilder UpdatePriority(SiteMapUpdatePriority value)
-        {
-            siteMapNode.UpdatePriority = value;
 
             return this;
         }

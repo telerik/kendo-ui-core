@@ -1,11 +1,7 @@
 namespace Kendo.Mvc
 {
     using System.ComponentModel;
-    using Infrastructure;
 
-    /// <summary>
-    /// Defines a base class that represents site map.
-    /// </summary>
     public abstract class SiteMapBase
     {
         private static float defaultCacheDurationInMinutes = 0;

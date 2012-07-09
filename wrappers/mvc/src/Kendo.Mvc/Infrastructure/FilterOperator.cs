@@ -1,7 +1,7 @@
 namespace Kendo.Mvc
 {
     /// <summary>
-    /// Operator used in <see cref="FilterDescription"/>
+    /// Operator used in <see cref="FilterDescriptor"/>
     /// </summary>
     public enum FilterOperator
     {

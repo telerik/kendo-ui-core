@@ -1,7 +1,6 @@
 namespace Kendo.Mvc.UI
 {
     using System;
-    using Extensions;
 
     public class CalendarHtmlBuilder
     {

@@ -1,10 +1,10 @@
 namespace Kendo.Mvc.UI.Tests
 {
+    using System;
     using System.Web.Mvc;
     using System.Web.Routing;
-    using Kendo.Mvc.UI;
+    using Kendo.Mvc.UI.Fluent;
     using Xunit;
-    using System;
 
     public class NavigationItemBuilderTests
     {

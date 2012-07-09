@@ -6,7 +6,6 @@
     using System.Linq;
     using System.Web.Mvc;
     using Extensions;
-    using Kendo.Mvc.Infrastructure;
 
     public class ModelDescriptor : JsonObject
     {

@@ -1,4 +1,4 @@
-namespace Kendo.Mvc.UI
+namespace Kendo.Mvc.UI.Fluent
 {
     using System;
     using System.Collections.Generic;
@@ -6,8 +6,6 @@ namespace Kendo.Mvc.UI
     using System.Web.Mvc;
     using System.Web.Routing;
     using Kendo.Mvc.Extensions;
-    using Kendo.Mvc.Infrastructure;
-    using Kendo.Mvc.UI;
 
     /// <summary>
     /// Defines the fluent interface for configuring navigation items

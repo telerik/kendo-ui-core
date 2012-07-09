@@ -1,8 +1,5 @@
 namespace Kendo.Mvc.UI
 {
-    /// <summary>
-    /// Represents the chart axis title
-    /// </summary>
     public class ChartAxisTitle
     {
         /// <summary>

@@ -1,8 +1,5 @@
 namespace Kendo.Mvc.UI
 {
-    /// <summary>
-    /// Represents the options of the chart labels
-    /// </summary>
     public abstract class ChartLabels : IChartLabels
     {
         /// <summary>

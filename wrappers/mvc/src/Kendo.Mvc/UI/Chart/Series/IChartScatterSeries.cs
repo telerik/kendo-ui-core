@@ -2,9 +2,6 @@ namespace Kendo.Mvc.UI
 {
     using System.Collections;
 
-    /// <summary>
-    /// Represents chart scatter series
-    /// </summary>
     public interface IChartScatterSeries : IChartSeries
     {
         /// <summary>

@@ -2,9 +2,6 @@ namespace Kendo.Mvc.UI
 {
     using System.Collections;
 
-    /// <summary>
-    /// Represents Chart series bound to data.
-    /// </summary>
     public interface IChartBoundSeries : IChartSeries
     {
         /// <summary>

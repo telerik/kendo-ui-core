@@ -1,5 +1,8 @@
 ﻿namespace Kendo.Mvc.UI
 {
+    /// <summary>
+    /// Represents available types of calendar views.
+    /// </summary>
     public enum CalendarView
     {
         /// <summary>

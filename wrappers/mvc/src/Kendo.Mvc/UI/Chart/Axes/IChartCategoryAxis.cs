@@ -4,9 +4,6 @@ namespace Kendo.Mvc.UI
     using System.Collections;
     using System.Collections.Generic;
 
-    /// <summary>
-    /// Represents a category axis
-    /// </summary>
     public interface IChartCategoryAxis : IChartAxis<int>
     {
         /// <summary>

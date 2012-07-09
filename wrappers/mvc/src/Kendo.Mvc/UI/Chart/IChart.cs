@@ -1,10 +1,6 @@
 namespace Kendo.Mvc.UI
 {
     using System.Web.Mvc;
-
-    /// <summary>
-    /// For internal use
-    /// </summary>
     public interface IChart
     {
         /// <summary>

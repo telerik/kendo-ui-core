@@ -1,8 +1,5 @@
 namespace Kendo.Mvc.UI
 {
-    /// <summary>
-    /// Represents the chart legend
-    /// </summary>
     public class ChartLegend
     {
         /// <summary>

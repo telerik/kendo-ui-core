@@ -1,8 +1,5 @@
 namespace Kendo.Mvc.UI
 {
-    /// <summary>
-    /// Represents the plot area options
-    /// </summary>
     public class PlotArea
     {
         /// <summary>

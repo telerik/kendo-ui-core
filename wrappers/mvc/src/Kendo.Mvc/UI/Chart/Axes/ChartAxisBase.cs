@@ -2,9 +2,6 @@ namespace Kendo.Mvc.UI
 {
     using System.Collections.Generic;
 
-    /// <summary>
-    /// Represents a chart axis base.
-    /// </summary>
     public abstract class ChartAxisBase<T, TValue> : IChartAxis<TValue>
         where T : class
         where TValue : struct

@@ -2,9 +2,7 @@ namespace Kendo.Mvc.Infrastructure.Implementation
 {
     using System.Collections.ObjectModel;
     using System.Linq;
-    /// <summary>
-    /// Represents a collection of <see cref="AggregateFunction"/> items.
-    /// </summary>
+
     public class AggregateFunctionCollection : Collection<AggregateFunction>
     {
         /// <summary>

@@ -1,11 +1,7 @@
 namespace Kendo.Mvc
 {
     using System.ComponentModel;
-    using Infrastructure;
 
-    /// <summary>
-    /// The builder to fluently configuring <see cref="SiteMapBase"/>.
-    /// </summary>
     public class SiteMapBuilder : IHideObjectMembers
     {
         private readonly SiteMapBase siteMap;

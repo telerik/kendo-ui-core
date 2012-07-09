@@ -1,8 +1,5 @@
 namespace Kendo.Mvc.UI
 {
-    /// <summary>
-    /// Represents default chart series settings
-    /// </summary>
     public interface IChartSeriesDefaults : IChartSeries
     {
         /// <summary>

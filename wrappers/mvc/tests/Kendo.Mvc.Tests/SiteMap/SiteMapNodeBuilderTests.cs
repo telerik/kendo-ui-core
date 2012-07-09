@@ -170,22 +170,6 @@ namespace Kendo.Mvc.Tests
         }
 
         [Fact]
-        public void Should_be_able_to_set_change_frequency()
-        {
-            _builder.ChangeFrequency(SiteMapChangeFrequency.Weekly);
-
-            Assert.Equal(SiteMapChangeFrequency.Weekly, _node.ChangeFrequency);
-        }
-
-        [Fact]
-        public void Should_be_able_to_set_update_priority()
-        {
-            _builder.UpdatePriority(SiteMapUpdatePriority.High);
-
-            Assert.Equal(SiteMapUpdatePriority.High, _node.UpdatePriority);
-        }
-
-        [Fact]
         public void Should_be_able_to_set_include_in_search_engine_index()
         {
             _builder.IncludeInSearchEngineIndex(false);

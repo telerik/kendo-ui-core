@@ -1,9 +1,6 @@
 using System.Collections.Generic;
 namespace Kendo.Mvc.UI
 {
-    /// <summary>
-    /// Represents a numeric axis
-    /// </summary>
     public interface IChartNumericAxis : IChartValueAxis, IChartAxis<double>
     {
         /// <summary>

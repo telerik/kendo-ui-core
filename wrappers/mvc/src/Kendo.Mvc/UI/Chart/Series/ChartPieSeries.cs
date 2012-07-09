@@ -6,11 +6,6 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Resources;
     using System.Collections;
 
-    /// <summary>
-    /// Represents chart pie series
-    /// </summary>
-    /// <typeparam name="TModel">The Chart model type</typeparam>
-    /// <typeparam name="TValue">The value type</typeparam>
     public class ChartPieSeries<TModel, TValue> : ChartSeriesBase<TModel>, IChartPieSeries where TModel : class
     {
         /// <summary>

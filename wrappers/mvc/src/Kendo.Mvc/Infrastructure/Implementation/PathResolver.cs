@@ -2,9 +2,6 @@ namespace Kendo.Mvc.Infrastructure.Implementation
 {
     using System.Web.Hosting;
 
-    /// <summary>
-    /// Class use to resolve physical path for virtual path.
-    /// </summary>
     public class PathResolver : IPathResolver
     {
         /// <summary>

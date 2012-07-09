@@ -1,8 +1,5 @@
 namespace Kendo.Mvc.UI
 {
-    /// <summary>
-    /// Represents settings for bubbles representing negative values
-    /// </summary>
     public class ChartNegativeValueSettings
     {
         /// <summary>

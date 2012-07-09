@@ -1,8 +1,5 @@
 namespace Kendo.Mvc.UI
 {
-    /// <summary>
-    /// Defines a generic IRadialScale.
-    /// </summary>
     public interface IRadialScale : IGaugeScale
     {
         /// <summary>

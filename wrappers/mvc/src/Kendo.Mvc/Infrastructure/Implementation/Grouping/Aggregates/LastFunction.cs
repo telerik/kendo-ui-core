@@ -1,8 +1,5 @@
 namespace Kendo.Mvc
 {
-    /// <summary>
-    /// Represents a function that returns the last item from a set of items.
-    /// </summary>
     public class LastFunction : EnumerableAggregateFunction
     {
         /// <summary>

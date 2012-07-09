@@ -11,9 +11,6 @@ namespace Kendo.Mvc.UI
     using Infrastructure;
     using Kendo.Mvc.Resources;
 
-    /// <summary>
-    /// INavigatable extension for providing access to <see cref="INavigatable"/>.
-    /// </summary>
     public static class NavigatableExtensions
     {
         /// <summary>

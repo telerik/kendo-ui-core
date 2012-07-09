@@ -1,8 +1,5 @@
 namespace Kendo.Mvc.UI
 {
-    /// <summary>
-    /// Represents pie chart series
-    /// </summary>
     public interface IChartPieSeries : IChartBoundSeries
     {
         /// <summary>

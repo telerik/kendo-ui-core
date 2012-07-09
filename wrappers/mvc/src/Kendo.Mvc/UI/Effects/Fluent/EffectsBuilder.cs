@@ -1,8 +1,7 @@
 namespace Kendo.Mvc.UI
 {
-    using Extensions;
-    using Infrastructure;
     using System.Collections.Generic;
+    using Extensions;
 
     public class EffectsBuilder : IHideObjectMembers
     {

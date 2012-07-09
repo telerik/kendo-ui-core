@@ -10,9 +10,6 @@ namespace Kendo.Mvc
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.Infrastructure.Implementation;
 
-    /// <summary>
-    /// Xml file based sitemap.
-    /// </summary>
     public class XmlSiteMap : SiteMapBase
     {
         private const string SiteMapNodeName = "siteMapNode";
@@ -213,8 +210,6 @@ namespace Kendo.Mvc
                 siteMapNode.LastModifiedAt = lastModified.Value;
             }
 
-            siteMapNode.ChangeFrequency = GetChangeFrequencyFromAttribute(xmlNode);
-            siteMapNode.UpdatePriority = GetUpdatePriorityFromAttribute(xmlNode);
             siteMapNode.IncludeInSearchEngineIndex = GetBooleanValueFromAttribute(xmlNode, IncludeInSearchEngineIndexAttributeName, true);
 
             foreach (XmlAttribute attribute in xmlNode.Attributes)
@@ -303,34 +298,6 @@ namespace Kendo.Mvc
             return value;
         }
 
-        private static SiteMapChangeFrequency GetChangeFrequencyFromAttribute(XmlNode node)
-        {
-            SiteMapChangeFrequency frequency = SiteMapChangeFrequency.Automatic;
-
-            string stringValue = GetStringValueFromAttribute(node, ChangeFrequencyAttributeName);
-
-            if (!string.IsNullOrEmpty(stringValue))
-            {
-                frequency = ToEnum(stringValue, SiteMapChangeFrequency.Automatic);
-            }
-
-            return frequency;
-        }
-
-        private static SiteMapUpdatePriority GetUpdatePriorityFromAttribute(XmlNode node)
-        {
-            SiteMapUpdatePriority priority = SiteMapUpdatePriority.Automatic;
-
-            string stringValue = GetStringValueFromAttribute(node, UpdatePriorityAttributeName);
-
-            if (!string.IsNullOrEmpty(stringValue))
-            {
-                priority = ToEnum(stringValue, SiteMapUpdatePriority.Automatic);
-            }
-
-            return priority;
-        }
-
         private static string[] CreateKnownAttributes()
         {
             List<string> attributes = new List<string>(new[] { TitleAttributeName, VisibleAttributeName, RouteAttributeName, ControllerAttributeName, ActionAttributeName, UrlAttributeName, LastModifiedAttributeName, ChangeFrequencyAttributeName, UpdatePriorityAttributeName, IncludeInSearchEngineIndexAttributeName });
@@ -338,13 +305,6 @@ namespace Kendo.Mvc
             attributes.Sort(StringComparer.OrdinalIgnoreCase);
 
             return attributes.ToArray();
-        }
-
-        private static T ToEnum<T>(string value, T defaultValue) where T : IComparable, IFormattable
-        {
-            Type enumType = typeof(T);
-
-            return Enum.IsDefined(enumType, value) ? (T) Enum.Parse(enumType, value, true) : defaultValue;
         }
     }
 }

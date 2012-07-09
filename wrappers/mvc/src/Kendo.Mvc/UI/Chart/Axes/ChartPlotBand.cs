@@ -1,8 +1,5 @@
 namespace Kendo.Mvc.UI
 {
-    /// <summary>
-    /// Represents the options of the axis plot band
-    /// </summary>
     public class ChartPlotBand<T>
         where T : struct
     {

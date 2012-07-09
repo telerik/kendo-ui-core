@@ -1,8 +1,5 @@
 namespace Kendo.Mvc
 {
-    /// <summary>
-    /// Represents a function that returns the number of items in a set of items, including nested sets.
-    /// </summary>
     public class CountFunction : EnumerableAggregateFunction
     {
         /// <summary>

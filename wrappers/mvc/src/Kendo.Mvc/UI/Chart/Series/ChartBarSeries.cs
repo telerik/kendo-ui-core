@@ -6,11 +6,6 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.Resources;
 
-    /// <summary>
-    /// Represents chart bar or column series
-    /// </summary>
-    /// <typeparam name="TModel">The Chart model type</typeparam>
-    /// <typeparam name="TValue">The value type</typeparam>
     public class ChartBarSeries<TModel, TValue> : ChartBoundSeries<TModel, TValue>, IChartBarSeries where TModel : class
     {
         /// <summary>

@@ -2,16 +2,12 @@ namespace Kendo.Mvc
 {
     using System;
     using Kendo.Mvc.Extensions;
+    
     /// <summary>
-    /// Represents a client-side event of a view component
+    /// Represents a client-side method of a Kendo UI widget
     /// </summary>
     public class ClientEvent
     {
-        /// <summary>
-        /// An action that renders the code of the client-side handler upon execution.
-        /// </summary>
-        public Action CodeBlock { get; set; }
-
         /// <summary>
         /// A function that returns the code of the client-side handler.
         /// </summary>

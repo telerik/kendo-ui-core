@@ -1,8 +1,5 @@
 namespace Kendo.Mvc.UI
 {
-    /// <summary>
-    /// Represents chart scatter line series
-    /// </summary>
     public interface IChartScatterLineSeries : IChartScatterSeries
     {
         /// <summary>

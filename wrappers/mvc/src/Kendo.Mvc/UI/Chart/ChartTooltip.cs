@@ -1,8 +1,5 @@
 namespace Kendo.Mvc.UI
 {
-    /// <summary>
-    /// Represents the chart data point tootlip
-    /// </summary>
     public class ChartTooltip
     {
         /// <summary>

@@ -1,9 +1,10 @@
-namespace Kendo.Mvc.UI
+namespace Kendo.Mvc.UI.Fluent
 {
     using System.Collections.Generic;
     using System.Web;
     using System.Web.Mvc;
     using Kendo.Mvc.Extensions;
+
     /// <summary>
     /// View component Builder base class.
     /// </summary>
@@ -38,11 +39,6 @@ namespace Kendo.Mvc.UI
             }
         }
 
-        /// <summary>
-        /// Performs an implicit conversion from <see cref="Kendo.Mvc.UI.WidgetBuilderBase&lt;TViewComponent,TBuilder&gt;"/> to TViewComponent.
-        /// </summary>
-        /// <param name="builder">The builder.</param>
-        /// <returns>The result of the conversion.</returns>
         public static implicit operator TViewComponent(WidgetBuilderBase<TViewComponent, TBuilder> builder)
         {
 

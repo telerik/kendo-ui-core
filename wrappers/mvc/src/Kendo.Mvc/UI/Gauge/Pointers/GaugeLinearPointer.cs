@@ -1,8 +1,5 @@
 namespace Kendo.Mvc.UI
 {
-    /// <summary>
-    /// Represents the gauge pointer
-    /// </summary>
     public class GaugeLinearPointer
     {
         /// <summary>

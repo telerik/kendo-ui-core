@@ -5,11 +5,6 @@ namespace Kendo.Mvc
     using System.ComponentModel;
     using System.Web.Routing;
 
-    using Infrastructure;
-
-    /// <summary>
-    /// Defines a class that is used to store single url.
-    /// </summary>
     public class SiteMapNode : LinkedObjectBase<SiteMapNode>, INavigatable
     {
         private string title;
@@ -157,26 +152,6 @@ namespace Kendo.Mvc
                 routeName = controllerName = actionName = null;
                 RouteValues.Clear();
             }
-        }
-
-        /// <summary>
-        /// Gets or sets the change frequency.
-        /// </summary>
-        /// <value>The change frequency.</value>
-        public SiteMapChangeFrequency ChangeFrequency
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Gets or sets the update priority.
-        /// </summary>
-        /// <value>The update priority.</value>
-        public SiteMapUpdatePriority UpdatePriority
-        {
-            get;
-            set;
         }
 
         /// <summary>

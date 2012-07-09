@@ -528,7 +528,7 @@
     <Compile Include="UI\Grid\Fluent\GridNavigatableSettingsBuilder.cs" />
     <Compile Include="UI\Grid\Fluent\GridToolBarSubmitChangesCommandBuilder.cs" />
     <Compile Include="UI\Grid\Fluent\GridCustomActionCommandBuilder.cs" />
-    <Compile Include="UI\Grid\AggregateDescriptor.cs" />
+    <Compile Include="Infrastructure\AggregateDescriptor.cs" />
     <Compile Include="UI\Grid\Fluent\GridToolBarCommandBuilder.cs" />
     <Compile Include="UI\Grid\Fluent\GroupingMessagesBuilder.cs" />
     <Compile Include="UI\Grid\GridAggregateResult.cs" />
@@ -606,7 +606,7 @@
     <Compile Include="UI\Grid\Html\IGridButtonBuilder.cs" />
     <Compile Include="UI\Grid\Commands\IGridActionCommand.cs" />
     <Compile Include="UI\Grid\Html\GridButtonTextDecorator.cs" />
-    <Compile Include="UI\Grid\CustomGroupingWrapper.cs" />
+    <Compile Include="Infrastructure\CustomGroupingWrapper.cs" />
     <Compile Include="UI\Grid\Fluent\GridReorderingSettingsBuilder.cs" />
     <Compile Include="UI\Grid\GridButtonType.cs" />
     <Compile Include="UI\Grid\GridDynamicDataKey.cs" />
@@ -633,7 +633,6 @@
     <Compile Include="UI\Grid\Fluent\GridTemplateColumnBuilder.cs" />
     <Compile Include="UI\Grid\Fluent\GridSortDescriptorBuilder.cs" />
     <Compile Include="UI\Grid\Fluent\GridSortDescriptorFactory.cs" />
-    <Compile Include="UI\Grid\GridDetailTemplateExtensions.cs" />
     <Compile Include="UI\Grid\GridEditMode.cs" />
     <Compile Include="UI\Grid\GroupDescriptorExtensions.cs" />
     <Compile Include="UI\Grid\Html\GridActionCellBuilder.cs" />
@@ -770,7 +769,7 @@
     <Compile Include="Infrastructure\Implementation\Expressions\MemberAccess\XmlNodeChildElementAccessExpressionBuilder.cs" />
     <Compile Include="Infrastructure\Implementation\Expressions\MemberAccess\XmlNodeExtensions.cs" />
     <Compile Include="Infrastructure\IActionMethodCache.cs" />
-    <Compile Include="UI\Grid\CompositeFilterDescriptor.cs" />
+    <Compile Include="Infrastructure\CompositeFilterDescriptor.cs" />
     <Compile Include="Infrastructure\FilterCompositionLogicalOperator.cs" />
     <Compile Include="Infrastructure\Implementation\Filtering\FilterDescription.cs" />
     <Compile Include="Infrastructure\FilterDescriptor.cs" />
@@ -780,8 +779,8 @@
     <Compile Include="Infrastructure\FilterOperator.cs" />
     <Compile Include="Infrastructure\Implementation\Filtering\Parsing\FilterLexer.cs" />
     <Compile Include="Infrastructure\Implementation\Filtering\FilterOperatorExtensions.cs" />
-    <Compile Include="UI\Grid\IDescriptor.cs" />
-    <Compile Include="UI\Grid\IFilterDescriptor.cs" />
+    <Compile Include="Infrastructure\IDescriptor.cs" />
+    <Compile Include="Infrastructure\IFilterDescriptor.cs" />
     <Compile Include="Infrastructure\Implementation\Filtering\Parsing\FunctionNode.cs" />
     <Compile Include="Infrastructure\Implementation\Filtering\Parsing\ILogicalNode.cs" />
     <Compile Include="Infrastructure\Implementation\Filtering\Parsing\IOperatorNode.cs" />
@@ -826,7 +825,7 @@
     <Compile Include="Infrastructure\Implementation\Grouping\Aggregates\MinFunction.cs" />
     <Compile Include="Infrastructure\Implementation\Grouping\Aggregates\SumFunction.cs" />
     <Compile Include="Infrastructure\Implementation\Grouping\Group.cs" />
-    <Compile Include="UI\Grid\GroupDescriptor.cs" />
+    <Compile Include="Infrastructure\GroupDescriptor.cs" />
     <Compile Include="Infrastructure\Implementation\Grouping\GroupExtensions.cs" />
     <Compile Include="Infrastructure\Implementation\Grouping\IGroup.cs" />
     <Compile Include="Infrastructure\Implementation\ControllerAuthorization.cs" />
@@ -858,10 +857,10 @@
     <Compile Include="UI\Splitter\SplitterPane.cs" />
     <Compile Include="UI\NumericTextBox\Html\NumericTextBoxHtmlBuilder.cs" />
     <Compile Include="UI\TextNode.cs" />
-    <Compile Include="IUrlGenerator.cs" />
+    <Compile Include="Infrastructure\IUrlGenerator.cs" />
     <Compile Include="UI\Grid\Settings\GridGroupableSettings.cs" />
     <Compile Include="UI\Grid\ToolBar\GridToolBarSettings.cs" />
-    <Compile Include="UI\Grid\SortDescriptor.cs" />
+    <Compile Include="Infrastructure\SortDescriptor.cs" />
     <Compile Include="Infrastructure\Implementation\Sorting\SortDescriptorCollectionExpressionBuilder.cs" />
     <Compile Include="Infrastructure\Implementation\NavigationItemAuthorization.cs">
       <SubType>Code</SubType>
@@ -876,13 +875,11 @@
     <Compile Include="SiteMap\PopulateSiteMapAttribute.cs" />
     <Compile Include="SiteMap\SiteMapBase.cs" />
     <Compile Include="SiteMap\SiteMapBuilder.cs" />
-    <Compile Include="SiteMap\SiteMapChangeFrequency.cs" />
     <Compile Include="SiteMap\SiteMapDictionary.cs" />
     <Compile Include="SiteMap\SiteMapManager.cs" />
     <Compile Include="SiteMap\SiteMapNode.cs" />
     <Compile Include="SiteMap\SiteMapNodeBuilder.cs" />
     <Compile Include="SiteMap\SiteMapNodeFactory.cs" />
-    <Compile Include="SiteMap\SiteMapUpdatePriority.cs" />
     <Compile Include="SiteMap\XmlSiteMap.cs" />
     <Compile Include="UI\Calendar\Calendar.cs" />
     <Compile Include="UI\Calendar\Fluent\CalendarBuilder.cs" />
@@ -898,7 +895,6 @@
     <Compile Include="UI\Grid\Fluent\GridSelectActionCommandBuilder.cs" />
     <Compile Include="UI\Grid\GridDataKey.cs" />
     <Compile Include="UI\Grid\Fluent\GridDataKeyBuilder.cs" />
-    <Compile Include="UI\Grid\GridState.cs" />
     <Compile Include="UI\Grid\Settings\GridEditableSettings.cs" />
     <Compile Include="UI\Grid\Fluent\GridDataKeyFactory.cs" />
     <Compile Include="UI\Grid\GridViewDataContainer.cs" />
@@ -966,8 +962,8 @@
     <Compile Include="UI\Grid\IGridColumnContainer.cs" />
     <Compile Include="UI\IHtmlAttributesContainer.cs" />
     <Compile Include="UI\INavigatable.cs" />
-    <Compile Include="LinkedObjectBase.cs" />
-    <Compile Include="LinkedObjectCollection.cs" />
+    <Compile Include="Infrastructure\LinkedObjectBase.cs" />
+    <Compile Include="Infrastructure\LinkedObjectCollection.cs" />
     <Compile Include="UI\INavigationItemContainer.cs" />
     <Compile Include="UI\INavigationComponentHtmlBuilderFactory.cs" />
     <Compile Include="UI\Menu\Html\MenuHtmlBuilder.cs" />
@@ -1036,12 +1032,12 @@
     <Compile Include="UI\Window\Window.cs" />
     <Compile Include="UI\Window\Fluent\WindowBuilder.cs" />
     <Compile Include="UI\Window\Html\WindowHtmlBuilder.cs" />
-    <Compile Include="UrlGenerator.cs" />
+    <Compile Include="Infrastructure\UrlGenerator.cs" />
     <Compile Include="Infrastructure\IPathResolver.cs" />
     <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="Extensions\DictionaryExtensions.cs" />
     <Compile Include="Extensions\HttpContextBaseExtensions.cs" />
-    <Compile Include="IHideObjectMembers.cs" />
+    <Compile Include="Infrastructure\IHideObjectMembers.cs" />
     <Compile Include="Infrastructure\Implementation\PathResolver.cs" />
     <Compile Include="Extensions\ReaderWriterLockSlimExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
@@ -1053,7 +1049,6 @@
     <Compile Include="Infrastructure\IUrlResolver.cs" />
     <Compile Include="UI\HtmlHelperExtension.cs" />
     <Compile Include="UI\IScriptableComponent.cs" />
-    <Compile Include="UI\IScriptableComponentContainer.cs" />
     <Compile Include="UI\WidgetBuilderBase.cs" />
     <Compile Include="UI\WidgetBase.cs" />
     <Compile Include="Infrastructure\Implementation\UrlResolver.cs" />

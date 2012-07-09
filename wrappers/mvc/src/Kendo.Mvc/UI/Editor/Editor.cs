@@ -20,8 +20,6 @@ namespace Kendo.Mvc.UI
             Messages = new EditorMessages();
             StyleSheets = new List<string>();
 
-            //TODO: Implement customization of the fonts names and sizes
-
             new EditorToolFactory(DefaultToolGroup)
                 .Bold().Italic().Underline().Strikethrough()
                 .FontName()

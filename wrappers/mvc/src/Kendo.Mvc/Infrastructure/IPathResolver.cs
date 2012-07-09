@@ -1,8 +1,5 @@
 namespace Kendo.Mvc.Infrastructure
 {
-    /// <summary>
-    /// Defines members that a class must implement in order to provide helper methods for resolving virtual path.
-    /// </summary>
     public interface IPathResolver
     {
         /// <summary>

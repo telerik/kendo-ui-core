@@ -1,11 +1,10 @@
 namespace Kendo.Mvc.UI
 {
-    using Kendo.Mvc.Infrastructure;
-    using Kendo.Mvc.UI;
-    using Kendo.Mvc.UI.Html;
     using System.Globalization;
     using System.IO;
     using System.Web.Mvc;
+    using Kendo.Mvc.Infrastructure;
+    using Kendo.Mvc.UI.Html;
 
     public class ComboBox : DropDownListBase
     {

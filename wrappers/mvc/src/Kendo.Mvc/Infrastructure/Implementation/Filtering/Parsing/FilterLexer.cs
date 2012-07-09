@@ -4,7 +4,6 @@ namespace Kendo.Mvc.Infrastructure.Implementation
     using System.Collections.Generic;
     using System.Text;
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Lexer")]
     public class FilterLexer
     {
         private const char Separator = '~';

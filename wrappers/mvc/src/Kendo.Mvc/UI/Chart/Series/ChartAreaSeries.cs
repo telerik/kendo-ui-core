@@ -4,11 +4,6 @@ namespace Kendo.Mvc.UI
     using System.Collections;
     using System.Linq.Expressions;
 
-    /// <summary>
-    /// Represents chart area series
-    /// </summary>
-    /// <typeparam name="TModel">The Chart model type</typeparam>
-    /// <typeparam name="TValue">The value type</typeparam>
     public class ChartAreaSeries<TModel, TValue> : ChartBoundSeries<TModel, TValue>, IChartAreaSeries where TModel : class
     {
         /// <summary>

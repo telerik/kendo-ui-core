@@ -1,8 +1,5 @@
 namespace Kendo.Mvc.UI
 {
-    /// <summary>
-    /// Represents chart line styling
-    /// </summary>
     public class ChartLine
     {
         /// <summary>

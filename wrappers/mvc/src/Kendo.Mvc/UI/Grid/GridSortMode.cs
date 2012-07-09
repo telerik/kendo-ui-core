@@ -1,7 +1,7 @@
 namespace Kendo.Mvc.UI
 {
     /// <summary>
-    /// Defines the sort modes supported by <see cref="Grid{T}"/>
+    /// Defines the sort modes supported by Kendo UI Grid for ASP.NET MVC
     /// </summary>
     public enum GridSortMode
     {

@@ -1,8 +1,5 @@
 namespace Kendo.Mvc.UI
 {
-    /// <summary>
-    /// Represents the chart title
-    /// </summary>
     public class ChartTitle
     {
         /// <summary>

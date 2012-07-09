@@ -1,6 +1,5 @@
 namespace Kendo.Mvc.UI
 {
-    using Kendo.Mvc.Infrastructure;
     using System.Collections.Generic;
     using System.Linq;
 

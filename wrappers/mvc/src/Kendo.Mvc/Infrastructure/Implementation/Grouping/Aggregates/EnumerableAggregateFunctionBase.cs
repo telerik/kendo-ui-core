@@ -5,10 +5,6 @@ namespace Kendo.Mvc.Infrastructure.Implementation
     using System.Linq;
     using Extensions;
 
-    /// <summary>
-    /// Base class for all aggregate functions that will use extension 
-    /// methods in <see cref="Enumerable"/> for aggregation.
-    /// </summary>
     public abstract class EnumerableAggregateFunctionBase : AggregateFunction
     {
         /// <summary>

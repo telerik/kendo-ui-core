@@ -1,9 +1,5 @@
 namespace Kendo.Mvc.UI
 {
-    /// <summary>
-    /// Represents the default settings for all series in the <see cref="Kendo.Mvc.UI.Chart{T}"/> component
-    /// </summary>
-    /// <typeparam name="T">The type of the data item</typeparam>
     public class ChartSeriesDefaults<T> : ChartSeriesBase<T>, IChartSeriesDefaults where T : class
     {
         /// <summary>

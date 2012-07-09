@@ -1,8 +1,5 @@
 namespace Kendo.Mvc.UI
 {
-    /// <summary>
-    /// Represents the options of the chart axis ticks.
-    /// </summary>
     public class ChartAxisTicks
     {
         /// <summary>

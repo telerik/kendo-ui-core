@@ -1,8 +1,5 @@
 namespace Kendo.Mvc.UI
 {    
-    /// <summary>
-    /// An HTML Builder for the ListView component
-    /// </summary>
     public class ListViewHtmlBuilder<T> where T : class
     {
         private readonly ListView<T> listView;

@@ -1,8 +1,5 @@
 namespace Kendo.Mvc
 {
-    /// <summary>
-    /// Represents a function that returns the sum of all items from a set of items.
-    /// </summary>
     public class SumFunction : EnumerableSelectorAggregateFunction
     {
         /// <summary>

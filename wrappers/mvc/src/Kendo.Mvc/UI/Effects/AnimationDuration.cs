@@ -3,7 +3,6 @@ namespace Kendo.Mvc.UI
     /// <summary>
     /// Specifies the animation duration of item.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1008:EnumsShouldHaveZeroValue", Justification = "Need to align with the numeric value of the named animation.")]
     public enum AnimationDuration
     {
         /// <summary>

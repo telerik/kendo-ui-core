@@ -5,9 +5,6 @@ namespace Kendo.Mvc.UI
     using System.Web;
     using Kendo.Mvc.Extensions;
     
-    /// <summary>
-    /// Defines the asynchronous uploading settings
-    /// </summary>
     public class UploadAsyncSettings : IUploadAsyncSettings
     {
         private readonly Upload upload;

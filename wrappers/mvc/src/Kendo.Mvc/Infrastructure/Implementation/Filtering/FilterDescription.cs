@@ -2,9 +2,7 @@ namespace Kendo.Mvc.Infrastructure.Implementation
 {
     using System.Linq.Expressions;
     using Kendo.Mvc.Infrastructure.Implementation.Expressions;
-    /// <summary>
-	/// The class enables implementation of custom filtering logic.
-	/// </summary>
+
     public abstract class FilterDescription : FilterDescriptorBase
 	{
 		/// <summary>
@@ -34,7 +32,5 @@ namespace Kendo.Mvc.Infrastructure.Implementation
 
             return expressionBuilder.CreateBodyExpression();
         }
-
-	    
 	}
 }

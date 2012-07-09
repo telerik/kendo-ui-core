@@ -3,6 +3,7 @@ namespace Kendo.Mvc.UI.Tests
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
+    using Kendo.Mvc.UI.Fluent;
     using Xunit;
 
     public class WidgetFactoryModelTests

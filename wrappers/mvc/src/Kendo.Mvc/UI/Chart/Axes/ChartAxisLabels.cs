@@ -1,9 +1,6 @@
 using System.Globalization;
 namespace Kendo.Mvc.UI
 {
-    /// <summary>
-    /// Represents the options of the axis labels
-    /// </summary>
     public class ChartAxisLabels : ChartLabels
     {
         /// <summary>

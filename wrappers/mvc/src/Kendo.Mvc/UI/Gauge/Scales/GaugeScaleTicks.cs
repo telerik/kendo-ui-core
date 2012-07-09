@@ -1,8 +1,5 @@
 namespace Kendo.Mvc.UI
 {
-    /// <summary>
-    /// Represents the options of the gauge scale ticks.
-    /// </summary>
     public class GaugeScaleTicks
     {
         /// <summary>

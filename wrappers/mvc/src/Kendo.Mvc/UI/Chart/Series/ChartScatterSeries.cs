@@ -3,15 +3,9 @@ namespace Kendo.Mvc.UI
     using System;
     using System.Linq.Expressions;
     using Kendo.Mvc.Extensions;
-    using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.Resources;
     using System.Collections;
 
-    /// <summary>
-    /// Represents chart scatter (XY) series
-    /// </summary>
-    /// <typeparam name="TModel">The Chart model type</typeparam>
-    /// <typeparam name="TValue">The value type</typeparam>
     public class ChartScatterSeries<TModel, TXValue, TYValue> : ChartSeriesBase<TModel>, IChartScatterSeries where TModel : class
     {
         /// <summary>

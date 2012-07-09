@@ -24,7 +24,6 @@ namespace Kendo.Mvc
         /// <param name="member">The member.</param>
         /// <param name="filterOperator">The filter operator.</param>
         /// <param name="filterValue">The filter value.</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public FilterDescriptor(string member, FilterOperator filterOperator, object filterValue)
         {
             this.Member = member;

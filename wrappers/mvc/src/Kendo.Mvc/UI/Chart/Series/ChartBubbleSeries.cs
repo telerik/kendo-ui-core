@@ -6,13 +6,6 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Resources;
     using System.Collections;
 
-    /// <summary>
-    /// Represents chart bubble series
-    /// </summary>
-    /// <typeparam name="TModel">The Chart model type</typeparam>
-    /// <typeparam name="TXValue">The X value type</typeparam>
-    /// <typeparam name="TYValue">The Y value type</typeparam>
-    /// <typeparam name="TSizeValue">The Size value type</typeparam>
     public class ChartBubbleSeries<TModel, TXValue, TYValue, TSizeValue> : ChartScatterSeries<TModel, TXValue, TYValue>, IChartBubbleSeries where TModel : class
     {
         /// <summary>

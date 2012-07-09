@@ -2,6 +2,7 @@ namespace Kendo.Mvc.UI.Tests
 {
     using System;
     using System.Collections;
+    using Kendo.Mvc.UI.Fluent;
     using Xunit;
 
     public class NavigationBindingFactoryTests

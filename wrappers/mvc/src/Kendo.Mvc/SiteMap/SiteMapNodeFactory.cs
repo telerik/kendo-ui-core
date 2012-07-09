@@ -1,10 +1,5 @@
 namespace Kendo.Mvc
 {
-    using Infrastructure;
-
-    /// <summary>
-    /// Defines a factory that is used to create <see cref="SiteMapNode"/>.
-    /// </summary>
     public class SiteMapNodeFactory : IHideObjectMembers
     {
         private readonly SiteMapNode parent;

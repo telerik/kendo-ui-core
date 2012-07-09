@@ -2,9 +2,6 @@ namespace Kendo.Mvc.UI
 {
     using System.Collections.Generic;
 
-    /// <summary>
-    /// Defines a generic IGaugeScale.
-    /// </summary>
     public interface IGaugeScale
     {
         /// <summary>

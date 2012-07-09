@@ -1,8 +1,5 @@
 namespace Kendo.Mvc
 {
-    /// <summary>
-    /// Defines a class that is used to store global sitemaps.
-    /// </summary>
     public static class SiteMapManager
     {
         private static readonly SiteMapDictionary siteMaps = new SiteMapDictionary();

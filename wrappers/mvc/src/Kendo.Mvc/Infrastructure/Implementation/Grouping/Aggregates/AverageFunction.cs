@@ -1,8 +1,5 @@
 namespace Kendo.Mvc
 {
-    /// <summary>
-    /// Represents a function that returns the arithmetic mean of a set of arguments.
-    /// </summary>
     public class AverageFunction : EnumerableSelectorAggregateFunction
     {
         /// <summary>

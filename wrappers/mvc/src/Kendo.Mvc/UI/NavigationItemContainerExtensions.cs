@@ -5,12 +5,10 @@ namespace Kendo.Mvc.UI
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
-    using System.Reflection;
     using System.Web.Mvc;
     using Kendo.Mvc.Extensions;
-    using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.Resources;
-    using Kendo.Mvc.UI;
+    using Kendo.Mvc.UI.Fluent;
 
     public static class NavigationItemContainerExtensions
     {
