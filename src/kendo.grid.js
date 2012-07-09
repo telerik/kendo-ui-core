@@ -531,7 +531,7 @@
             height: null,
             resizable: false,
             reorderable: false,
-            columnMenu: true
+            columnMenu: false
         },
 
         setOptions: function(options) {
