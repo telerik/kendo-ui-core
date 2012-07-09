@@ -7,6 +7,3 @@
 [submodule "tests/jshint"]
 	path = tests/jshint
 	url = https://github.com/jshint/jshint.git
-[submodule "docs"]
-	path = docs
-	url = git@github.com:telerik/kendo-docs.git
