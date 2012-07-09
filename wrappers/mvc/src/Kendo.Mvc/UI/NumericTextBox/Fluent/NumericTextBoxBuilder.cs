@@ -1,8 +1,8 @@
 namespace Kendo.Mvc.UI.Fluent
 {
-
     using System;
     using Kendo.Mvc.Infrastructure;
+
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="NumericTextBox"/> component.
     /// </summary>
@@ -115,8 +115,14 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Stes the format of the NumericTextBox.
         /// </summary>
-        /// <param name="allowSpinner"></param>
-        /// <returns></returns>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().NumericTextBox()
+        ///             .Name("NumericTextBox")
+        ///             .Format("c3")
+        /// %&gt;
+        /// </code>
+        /// </example>
         public NumericTextBoxBuilder<T> Format(string format)
         {
 
@@ -125,6 +131,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Specifies the culture info used by the NumericTextBox widget.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().NumericTextBox()
+        ///             .Name("NumericTextBox")
+        ///             .Culture("de-DE")
+        /// %&gt;
+        /// </code>
+        /// </example>
         public NumericTextBoxBuilder<T> Culture(string culture)
         {
             Component.Culture = culture;
@@ -132,6 +149,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Specifies the number precision. If not set precision defined by current culture is used.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().NumericTextBox()
+        ///             .Name("NumericTextBox")
+        ///             .Decimals(3)
+        /// %&gt;
+        /// </code>
+        /// </example>
         public NumericTextBoxBuilder<T> Decimals(int decimals)
         {
 
