@@ -132,7 +132,7 @@
                             template = template(options);
                         }
 
-                        if (template.indexOf('<li') != 0) {
+                        if (template.indexOf('<li') !== 0) {
                             template = "<li class='k-editor-template'>" + template + "</li>";
                         }
 
