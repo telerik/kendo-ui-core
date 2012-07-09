@@ -136,3 +136,33 @@
 
         equal($(".k-cancel", uploadInstance.wrapper).length, 0);
     });
+
+    test("Progress event is raised", 1, function() {
+        uploadInstance = createUpload({ progress:
+            function() {
+                ok(true);
+            }
+        });
+
+        simulateUpload();
+    });
+
+    test("Progress event arguments contains percentComplete", 1, function() {
+        uploadInstance = createUpload({ progress:
+            function(e) {
+                ok(e.percentComplete > 0);
+            }
+        });
+
+        simulateUpload();
+    });
+
+    test("Progress event arguments contains files", 1, function() {
+        uploadInstance = createUpload({ progress:
+            function(e) {
+                ok(e.files.length == 1);
+            }
+        });
+
+        simulateUpload();
+    });
