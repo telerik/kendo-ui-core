@@ -63,8 +63,7 @@ namespace Kendo.Mvc.UI
             Reorderable = new GridReorderableSettings();
 
             TableHtmlAttributes = new RouteValueDictionary();
-
-            Footer = true;
+            
             IsEmpty = true;
 
             Selectable = new GridSelectableSettings();
@@ -117,13 +116,7 @@ namespace Kendo.Mvc.UI
         {
             get;
             private set;
-        }
-
-        public bool Footer
-        {
-            get;
-            set;
-        }
+        }       
 
         public GridToolBarSettings<T> ToolBar
         {
@@ -1021,7 +1014,7 @@ namespace Kendo.Mvc.UI
                 NoRecordsTemplate = FormatNoRecordsTemplate(),
                 ScrollingHeight = Scrollable.Height,
                 //EditFormHtmlAttributes = Editing.FormHtmlAttributes,
-                ShowFooter = Footer && VisibleColumns.Any(c => c.FooterTemplate.HasValue() || c.ClientFooterTemplate.HasValue()),
+                ShowFooter = VisibleColumns.Any(c => c.FooterTemplate.HasValue() || c.ClientFooterTemplate.HasValue()),
                 AggregateResults = DataSource.AggregateResults ?? new List<AggregateResult>(),
                 Aggregates = Aggregates.SelectMany(aggregate => aggregate.Aggregates),
                 GroupsCount = DataSource.Groups.Count,

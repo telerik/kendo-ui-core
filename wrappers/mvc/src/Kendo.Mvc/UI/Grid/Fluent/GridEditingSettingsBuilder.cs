@@ -43,14 +43,7 @@ namespace Kendo.Mvc.UI.Fluent
             
             return this;
         }
-        //TODO: Implement insert row position
-        //public GridEditingSettingsBuilder<T> InsertRowPosition(GridInsertRowPosition position)
-        //{
-        //    settings.InsertRowPosition = position;
-
-        //    return this;
-        //}
-
+    
         public GridEditingSettingsBuilder<T> Mode(GridEditMode mode)
         {
             settings.Mode = mode;

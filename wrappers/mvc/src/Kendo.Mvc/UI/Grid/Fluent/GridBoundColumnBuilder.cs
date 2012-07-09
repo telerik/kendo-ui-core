@@ -176,6 +176,11 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Sets the template for the column.
+        /// </summary>
+        /// <param name="templateAction">The action defining the template.</param>
+        /// <returns></returns>
         public GridBoundColumnBuilder<T> Template(Func<T, object> inlineTemplate)
         {
             (Column as GridColumnBase<T>).InlineTemplate = inlineTemplate;
@@ -183,6 +188,11 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Sets the client template for the column.
+        /// </summary>
+        /// <param name="value">The template</param>
+        /// <returns></returns>
         public GridBoundColumnBuilder<T> ClientTemplate(string value)
         {
             Column.ClientTemplate = value;
@@ -190,21 +200,30 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Sets the client group template for the column.
+        /// </summary>
+        /// <param name="value">The template</param>
+        /// <returns></returns>
         public GridBoundColumnBuilder<T> ClientGroupHeaderTemplate(string value)
         {
             Column.ClientGroupHeaderTemplate = value;
 
             return this;
-        }        
-        
+        }
+
+        /// <summary>
+        /// Sets the client group footer template for the column.
+        /// </summary>
+        /// <param name="value">The template</param>
+        /// <returns></returns>
         public GridBoundColumnBuilder<T> ClientGroupFooterTemplate(string value)
         {
             Column.ClientGroupFooterTemplate = value;
 
             return this;
         }
-
-        
+                
         /// <summary>
         /// Sets the footer template for the column.
         /// </summary>

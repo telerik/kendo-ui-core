@@ -44,8 +44,12 @@ namespace Kendo.Mvc.UI.Fluent
             configurator(new DataSourceBuilder<T>(Component.DataSource, this.Component.ViewContext, this.Component.UrlGenerator));
 
             return this;
-        }        
+        }
 
+        /// <summary>
+        /// Sets the detail template of the grid
+        /// </summary>
+        /// <param name="codeBlockTemplate">The template</param>
         public GridBuilder<T> DetailTemplate(Action<T> codeBlockTemplate)
         {
             Component.DetailTemplate.CodeBlockTemplate = codeBlockTemplate;
@@ -53,6 +57,10 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Sets the detail template of the grid using Razor syntax
+        /// </summary>
+        /// <param name="inlineTemplate">The template</param>        
         public GridBuilder<T> DetailTemplate(Func<T, object> inlineTemplate)
         {
             Component.DetailTemplate.InlineTemplate = inlineTemplate;
@@ -147,12 +155,20 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Sets the client row template
+        /// </summary>
+        /// <param name="template">The template</param>        
         public GridBuilder<T> ClientRowTemplate(string template)
         {
             Component.ClientRowTemplate = template;
             return this;
         }
 
+        /// <summary>
+        /// Sets the client row template
+        /// </summary>
+        /// <param name="template">The template</param>
         public GridBuilder<T> ClientRowTemplate(Func<Grid<T>, string> template)
         {
             Component.ClientRowTemplate = template(Component);
@@ -160,6 +176,11 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Specifies if the Grid should be automatically bound on initial load. 
+        /// This is only possible if AJAX binding is used, and widget is not initialy populated on the server.
+        /// </summary>
+        /// <param name="value">If true Grid will be automatically data bound, otherwise false</param>        
         public GridBuilder<T> AutoBind(bool value)
         {
             Component.AutoBind = value;
@@ -200,7 +221,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public GridBuilder<T> Reorderable(Action<GridReorderingSettingsBuilder> configurator)
         {
-
             configurator(new GridReorderingSettingsBuilder(Component.Reorderable));
 
             return this;
@@ -220,7 +240,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public GridBuilder<T> Editable(Action<GridEditingSettingsBuilder<T>> configurator)
         {
-
             configurator(new GridEditingSettingsBuilder<T>(Component.Editable));
 
             return this;
@@ -240,44 +259,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public GridBuilder<T> ToolBar(Action<GridToolBarCommandFactory<T>> configurator)
         {
-
             configurator(new GridToolBarCommandFactory<T>(Component.ToolBar));
 
             return this;
-        }
-
-        ///// <summary>
-        ///// Defines a list of the private keys.
-        ///// </summary>
-        ///// <param name="configurator">DataKeys configurator.</param>
-        ///// <example>
-        ///// <code lang="CS">
-        /////  &lt;%= Html.Kendo().Grid&lt;Order&gt;()
-        /////             .Name("Orders")
-        /////             .DataKeys(keys =>
-        /////             {
-        /////                 keys.Add(c => c.CustomerID);
-        /////             })
-        ///// %&gt;
-        ///// </code>
-        ///// </example>
-        //public GridBuilder<T> DataKeys(Action<GridDataKeyFactory<T>> configurator)
-        //{
-
-        //    configurator(new GridDataKeyFactory<T>(Component.DataKeys, false));
-
-        //    return this;
-        //}
-
-        /// <summary>
-        /// Configure when to show footer of the grid.
-        /// </summary>
-        /// <param name="visible">If it is true, the feature is visible.</param>
-        public GridBuilder<T> Footer(bool visible)
-        {
-            Component.Footer = visible;
-            return this;
-        }
+        }       
 
         /// <summary>
         /// Binds the grid to a list of objects
@@ -288,7 +273,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Grid&lt;Order&gt;()
         ///             .Name("Orders")
-        ///             .Ajax(ajax => ajax.Action("_RelatedGrids_Orders", "Grid", new { customerID = "ALFKI" }))
         ///             .Columns(columns=>
         ///             {
         ///                 columns.Add(c => c.OrderID).Width(100);
@@ -392,8 +376,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Grid()
-        ///             .Name("Grid")
-        ///             .Ajax(ajax => ajax.Action("_RelatedGrids_Orders", "Grid", new { customerID = "ALFKI" }))
+        ///             .Name("Grid")        
         ///             .Columns(columns=>
         ///             {
         ///                 columns.Add(c => c.OrderID).Width(100);
@@ -421,8 +404,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Grid()
-        ///             .Name("Grid")
-        ///             .Ajax(ajax => ajax.Action("_RelatedGrids_Orders", "Grid", new { customerID = "ALFKI" }))
+        ///             .Name("Grid")        
         ///             .Columns(columns=>
         ///             {
         ///                 columns.Add(c => c.OrderID).Width(100);
@@ -449,8 +431,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Grid()
-        ///             .Name("Grid")
-        ///             .Ajax(ajax => ajax.Action("_RelatedGrids_Orders", "Grid", new { customerID = "ALFKI" }))
+        ///             .Name("Grid")        
         ///             .Columns(columns=>
         ///             {
         ///                 columns.Add(c => c.OrderID).Width(100);
@@ -529,8 +510,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Grid()
-        ///             .Name("Grid")
-        ///             .Ajax(ajax => ajax.Action("_RelatedGrids_Orders", "Grid", new { customerID = "ALFKI" }))
+        ///             .Name("Grid")        
         ///             .Columns(columns=>
         ///             {
         ///                 columns.Add(c => c.OrderID).Width(100);
@@ -555,8 +535,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Grid()
-        ///             .Name("Grid")
-        ///             .Ajax(ajax => ajax.Action("_RelatedGrids_Orders", "Grid", new { customerID = "ALFKI" }))
+        ///             .Name("Grid")        
         ///             .Columns(columns=>
         ///             {
         ///                 columns.Add(c => c.OrderID).Width(100);
@@ -566,9 +545,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///             })
         ///             .BindTo((IEnumerable&lt;Order&gt;)ViewData["Orders"])
         ///             .Pageable(paging =>
-        ///                        paging.PageSize(20)
-        ///                              .Style(GridPagerStyles.NextPreviousAndNumeric)
-        ///                              .Position(GridPagerPosition.Bottom)
+        ///                        paging.Refresh(true)        
         ///             )
         /// %&gt;
         /// </code>
@@ -588,8 +565,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Grid()
-        ///             .Name("Grid")
-        ///             .Ajax(ajax => ajax.Action("_RelatedGrids_Orders", "Grid", new { customerID = "ALFKI" }))
+        ///             .Name("Grid")        
         ///             .Columns(columns=>
         ///             {
         ///                 columns.Add(c => c.OrderID).Width(100);
@@ -615,8 +591,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Grid()
-        ///             .Name("Grid")
-        ///             .Ajax(ajax => ajax.Action("_RelatedGrids_Orders", "Grid", new { customerID = "ALFKI" }))
+        ///             .Name("Grid")        
         ///             .Columns(columns=>
         ///             {
         ///                 columns.Add(c => c.OrderID).Width(100);
@@ -644,8 +619,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Grid()
-        ///             .Name("Grid")
-        ///             .Ajax(ajax => ajax.Action("_RelatedGrids_Orders", "Grid", new { customerID = "ALFKI" }))
+        ///             .Name("Grid")        
         ///             .Columns(columns=>
         ///             {
         ///                 columns.Add(c => c.OrderID).Width(100);
@@ -671,8 +645,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Grid()
-        ///             .Name("Grid")
-        ///             .Ajax(ajax => ajax.Action("_RelatedGrids_Orders", "Grid", new { customerID = "ALFKI" }))
+        ///             .Name("Grid")        
         ///             .Columns(columns=>
         ///             {
         ///                 columns.Add(c => c.OrderID).Width(100);
@@ -700,8 +673,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Grid()
-        ///             .Name("Grid")
-        ///             .Ajax(ajax => ajax.Action("_RelatedGrids_Orders", "Grid", new { customerID = "ALFKI" }))
+        ///             .Name("Grid")        
         ///             .Columns(columns=>
         ///             {
         ///                 columns.Add(c => c.OrderID).Width(100);
@@ -728,8 +700,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Grid()
-        ///             .Name("Grid")
-        ///             .Ajax(ajax => ajax.Action("_RelatedGrids_Orders", "Grid", new { customerID = "ALFKI" }))
+        ///             .Name("Grid")        
         ///             .Columns(columns=>
         ///             {
         ///                 columns.Add(c => c.OrderID).Width(100);
@@ -758,8 +729,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Grid()
-        ///             .Name("Grid")
-        ///             .Ajax(ajax => ajax.Action("_RelatedGrids_Orders", "Grid", new { customerID = "ALFKI" }))
+        ///             .Name("Grid")        
         ///             .Columns(columns=>
         ///             {
         ///                 columns.Add(c => c.OrderID).Width(100);
@@ -786,8 +756,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Grid()
-        ///             .Name("Grid")
-        ///             .Ajax(ajax => ajax.Action("_RelatedGrids_Orders", "Grid", new { customerID = "ALFKI" }))
+        ///             .Name("Grid")        
         ///             .Columns(columns=>
         ///             {
         ///                 columns.Add(c => c.OrderID).Width(100);
@@ -809,69 +778,7 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
-
-        /// <summary>
-        /// Enables column context menu.
-        /// </summary>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().Grid()
-        ///             .Name("Grid")
-        ///             .Ajax(ajax => ajax.Action("_RelatedGrids_Orders", "Grid", new { customerID = "ALFKI" }))
-        ///             .Columns(columns=>
-        ///             {
-        ///                 columns.Add(c => c.OrderID).Width(100);
-        ///                 columns.Add(c => c.OrderDate).Width(200).Format("{0:dd/MM/yyyy}");
-        ///                 columns.Add(c => c.ShipAddress);
-        ///                 columns.Add(c => c.ShipCity).Width(200);
-        ///             })
-        ///             .BindTo((IEnumerable&lt;Order&gt;)ViewData["Orders"])
-        ///             .ColumnContextMenu();
-        /// %&gt;
-        /// </code>
-        /// </example>
-
-        //TODO: Column context menu
-        /*
-        public GridBuilder<T> ColumnContextMenu()
-        {
-            Component.ColumnContextMenu.Enabled = true;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Enables column context menu.
-        /// </summary>
-        /// <param name="configurator">Use builder to column context menu settings.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().Grid()
-        ///             .Name("Grid")
-        ///             .Ajax(ajax => ajax.Action("_RelatedGrids_Orders", "Grid", new { customerID = "ALFKI" }))
-        ///             .Columns(columns=>
-        ///             {
-        ///                 columns.Add(c => c.OrderID).Width(100);
-        ///                 columns.Add(c => c.OrderDate).Width(200).Format("{0:dd/MM/yyyy}");
-        ///                 columns.Add(c => c.ShipAddress);
-        ///                 columns.Add(c => c.ShipCity).Width(200);
-        ///             })
-        ///             .BindTo((IEnumerable&lt;Order&gt;)ViewData["Orders"])
-        ///             .ColumnContextMenu(navigation => navigation.Enabled(true));
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public GridBuilder<T> ColumnContextMenu(Action<GridColumnContextMenuSettingsBuilder> configurator)
-        {
-
-            ColumnContextMenu();
-
-            configurator(new GridColumnContextMenuSettingsBuilder(Component.ColumnContextMenu));
-
-            return this;
-        }
-
-        */
+      
         /// <summary>
         /// Configures the client-side events.
         /// </summary>
@@ -900,8 +807,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Grid()
-        ///             .Name("Grid")
-        ///             .Ajax(ajax => ajax.Action("_RelatedGrids_Orders", "Grid", new { customerID = "ALFKI" }))
+        ///             .Name("Grid")        
         ///             .Columns(columns=>
         ///             {
         ///                 columns.Add(c => c.OrderID).Width(100);
@@ -929,8 +835,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Grid()
-        ///             .Name("Grid")
-        ///             .Ajax(ajax => ajax.Action("_RelatedGrids_Orders", "Grid", new { customerID = "ALFKI" }))
+        ///             .Name("Grid")        
         ///             .Columns(columns=>
         ///             {
         ///                 columns.Add(c => c.OrderID).Width(100);

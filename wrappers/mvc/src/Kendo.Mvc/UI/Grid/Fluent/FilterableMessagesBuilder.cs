@@ -3,6 +3,9 @@ using System.Linq;
 
 namespace Kendo.Mvc.UI.Fluent
 {
+    /// <summary>
+    /// Defines the fluent interface for configuring the Filter menu options.
+    /// </summary>
     public class FilterableMessagesBuilder : IHideObjectMembers
     {
         private readonly FilterableMessages messages;
@@ -12,6 +15,10 @@ namespace Kendo.Mvc.UI.Fluent
             this.messages = messages;
         }
 
+        /// <summary>
+        /// Sets the info part of the filter menu
+        /// </summary>
+        /// <param name="message">The message</param>        
         public FilterableMessagesBuilder Info(string message)
         {
             messages.Info = message;
@@ -19,6 +26,10 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Sets the text for And option.
+        /// </summary>
+        /// <param name="message">The text</param>
         public FilterableMessagesBuilder And(string message)
         {
             messages.And = message;
@@ -26,6 +37,10 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Sets the text for Or option.
+        /// </summary>
+        /// <param name="message">The text</param>
         public FilterableMessagesBuilder Or(string message)
         {
             messages.Or = message;
@@ -33,6 +48,10 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Sets the text for Boolean IsTrue option value.
+        /// </summary>
+        /// <param name="message">The message</param>        
         public FilterableMessagesBuilder IsTrue(string message)
         {
             messages.IsTrue = message;
@@ -40,6 +59,10 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Sets the text for Boolean IsFalse option value.
+        /// </summary>
+        /// <param name="message">The message</param>        
         public FilterableMessagesBuilder IsFalse(string message)
         {
             messages.IsFalse = message;
@@ -47,6 +70,10 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Sets the text for Filter button.
+        /// </summary>
+        /// <param name="message">The message</param>        
         public FilterableMessagesBuilder Filter(string message)
         {
             messages.Filter = message;
@@ -54,6 +81,10 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Sets the text for SelectValue option.
+        /// </summary>
+        /// <param name="message">The message</param>        
         public FilterableMessagesBuilder SelectValue(string message)
         {
             messages.SelectValue = message;

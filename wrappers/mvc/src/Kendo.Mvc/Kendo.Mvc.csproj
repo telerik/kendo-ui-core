@@ -631,8 +631,8 @@
     <Compile Include="UI\Grid\Fluent\GridEditingSettingsBuilder.cs" />
     <Compile Include="UI\Grid\Fluent\GridResizingSettingsBuilder.cs" />
     <Compile Include="UI\Grid\Fluent\GridTemplateColumnBuilder.cs" />
-    <Compile Include="UI\Grid\Fluent\GridSortDescriptorBuilder.cs" />
-    <Compile Include="UI\Grid\Fluent\GridSortDescriptorFactory.cs" />
+    <Compile Include="UI\DataSource\Fluent\DataSourceSortDescriptorBuilder.cs" />
+    <Compile Include="UI\DataSource\Fluent\DataSourceGridSortDescriptorFactory.cs" />
     <Compile Include="UI\Grid\GridEditMode.cs" />
     <Compile Include="UI\Grid\GroupDescriptorExtensions.cs" />
     <Compile Include="UI\Grid\Html\GridActionCellBuilder.cs" />

@@ -3,7 +3,7 @@ namespace Kendo.Mvc.UI.Fluent
     using Infrastructure;
 
     /// <summary>
-    /// Defines the fluent interface for configuring <see cref="Grid{T}.KeyboardNavigation"/>
+    /// Defines the fluent interface for configuring <see cref="Grid{T}.Navigatable"/>
     /// </summary>
     public class GridNavigatableSettingsBuilder : IHideObjectMembers
     {

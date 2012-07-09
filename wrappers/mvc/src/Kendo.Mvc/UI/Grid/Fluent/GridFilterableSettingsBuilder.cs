@@ -39,6 +39,10 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Configures the Filter menu operators.
+        /// </summary>        
+        /// <returns></returns>
         public GridFilterableSettingsBuilder Operators(Action<FilterableOperatorsBuilder> configurator)
         {
             configurator(new FilterableOperatorsBuilder(settings.Operators));
@@ -46,6 +50,11 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Configures Filter menu messages.
+        /// </summary>
+        /// <param name="configurator"></param>
+        /// <returns></returns>
         public GridFilterableSettingsBuilder Messages(Action<FilterableMessagesBuilder> configurator)
         {
             configurator(new FilterableMessagesBuilder(settings.Messages));
@@ -53,20 +62,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Specify if the extra input fields should be visible within the filter menu. Default is true.
+        /// </summary>
+        /// <param name="value">True to show the extra inputs, otherwise false</param>
+        /// <returns></returns>
         public GridFilterableSettingsBuilder Extra(bool value)
         {
             settings.Extra = value;
             settings.Enabled = true;
 
             return this;
-        }
-
-        public GridFilterableSettingsBuilder Extra()
-        {
-            settings.Extra = true;
-            settings.Enabled = true;
-
-            return this;
-        }
+        }        
     }
 }

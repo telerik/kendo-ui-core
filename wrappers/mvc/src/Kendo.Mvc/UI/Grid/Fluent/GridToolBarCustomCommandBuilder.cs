@@ -10,17 +10,32 @@ namespace Kendo.Mvc.UI.Fluent
     using Resources;
     using Extensions;
 
+    /// <summary>
+    /// Defines the fluent interface for configuring toolbar custom command.
+    /// </summary>
+    /// <typeparam name="T">The type of the model</typeparam>
     public class GridToolBarCustomCommandBuilder<T> : GridToolBarCommandBuilderBase<T, GridToolBarCustomCommand<T>, GridToolBarCustomCommandBuilder<T>> where T : class
     {
         public GridToolBarCustomCommandBuilder(GridToolBarCustomCommand<T> command) : base(command)
         {
         }
         
+        /// <summary>
+        /// Sets command route.
+        /// </summary>
+        /// <param name="routeName">The route name</param>
+        /// <returns></returns>
         public GridToolBarCustomCommandBuilder<T> Route(string routeName)
         {
             return Route(routeName, (object)null);
         }
 
+        /// <summary>
+        /// Sets command route and route values.
+        /// </summary>
+        /// <param name="routeName">The route name</param>
+        /// <param name="routeValues">The route values</param>
+        /// <returns></returns>
         public GridToolBarCustomCommandBuilder<T> Route(string routeName, object routeValues)
         {
             Command.Route(routeName, routeValues);
@@ -30,6 +45,12 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Sets command route and route values.
+        /// </summary>
+        /// <param name="routeName">The route name</param>
+        /// <param name="routeValues">The route values</param>
+        /// <returns></returns>
         public GridToolBarCustomCommandBuilder<T> Route(string routeName, RouteValueDictionary routeValues)
         {
             Command.Route(routeName, routeValues);
@@ -95,6 +116,11 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Sets command action.
+        /// </summary>        
+        /// <param name="routeValues">The route values</param>
+        /// <returns></returns>
         public GridToolBarCustomCommandBuilder<T> Action(RouteValueDictionary routeValues)
         {
             Command.Action(routeValues);
@@ -107,11 +133,24 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Sets command action and controller.
+        /// </summary>        
+        /// <param name="actionName">The action name</param>
+        /// <param name="conrollerName">The controller name</param>
+        /// <returns></returns>
         public GridToolBarCustomCommandBuilder<T> Action(string actionName, string controllerName)
         {
             return Action(actionName, controllerName, (object)null);
         }
 
+        /// <summary>
+        /// Sets command action and controller.
+        /// </summary>        
+        /// <param name="actionName">The action name</param>
+        /// <param name="conrollerName">The controller name</param>
+        /// <param name="routeValues">The route values</param>
+        /// <returns></returns>
         public GridToolBarCustomCommandBuilder<T> Action(string actionName, string controllerName, object routeValues)
         {
             Command.Action(actionName, controllerName, routeValues);
@@ -121,6 +160,13 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Sets command action and controller.
+        /// </summary>        
+        /// <param name="actionName">The action name</param>
+        /// <param name="conrollerName">The controller name</param>
+        /// <param name="routeValues">The route values</param>
+        /// <returns></returns>
         public GridToolBarCustomCommandBuilder<T> Action(string actionName, string controllerName, RouteValueDictionary routeValues)
         {
             Command.Action(actionName, controllerName, routeValues);
@@ -130,6 +176,11 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Sets command absolute URL.
+        /// </summary>        
+        /// <param name="value">The URL</param>        
+        /// <returns></returns>
         public GridToolBarCustomCommandBuilder<T> Url(string value)
         {
             Command.Url(value);
@@ -144,6 +195,11 @@ namespace Kendo.Mvc.UI.Fluent
         //    return this;
         //}
 
+        /// <summary>
+        /// Sets the command name.
+        /// </summary>
+        /// <param name="name">The name of the command</param>
+        /// <returns></returns>
         public GridToolBarCustomCommandBuilder<T> Name(string name)
         {
             Command.Name = name;
