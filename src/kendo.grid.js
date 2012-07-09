@@ -788,6 +788,8 @@
         },
 
         _modelForContainer: function(container) {
+            container = $(container);
+
             if (!container.is("tr") && this._editMode() !== "popup") {
                 container = container.closest("tr");
             }
