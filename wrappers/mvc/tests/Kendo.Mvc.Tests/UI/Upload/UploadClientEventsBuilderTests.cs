@@ -205,5 +205,31 @@ namespace Kendo.Mvc.UI.Tests.Upload
         {
             builder.Remove(handlerName).ShouldBeType<UploadEventBuilder>();
         }
+
+        [Fact]
+        public void Progress_with_Func_should_set_InlineCodeBlock()
+        {
+            builder.Progress(nullFunc);
+            clientEvents["progress"].ShouldNotBeNull();
+        }
+
+        [Fact]
+        public void Progress_with_Func_should_return_builder()
+        {
+            builder.Progress(nullFunc).ShouldBeType<UploadEventBuilder>();
+        }
+
+        [Fact]
+        public void Progress_with_string_should_set_HandlerName()
+        {
+            builder.Progress(handlerName);
+            ((ClientEvent)clientEvents["progress"]).HandlerName.ShouldEqual(handlerName);
+        }
+
+        [Fact]
+        public void Progress_with_string_should_return_builder()
+        {
+            builder.Progress(handlerName).ShouldBeType<UploadEventBuilder>();
+        }
     }
 }
