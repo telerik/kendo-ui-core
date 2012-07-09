@@ -50,13 +50,35 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// FooterId to be used for rendering the footer of the Calendar.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Calendar()
+        ///             .Name("Calendar")
+        ///             .FooterId("widgetFooterId")
+        /// %&gt;
+        /// </code>
+        /// </example>
         public CalendarBuilder FooterId(string id)
         {
             Component.FooterId = id;
 
             return this;
         }
-        
+
+        /// <summary>
+        /// Footer template to be used for rendering the footer of the Calendar.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Calendar()
+        ///             .Name("Calendar")
+        ///             .Footer("#= kendo.toString(data, "G") #")
+        /// %&gt;
+        /// </code>
+        /// </example>
         public CalendarBuilder Footer(string footer)
         {
             Component.Footer = footer;
@@ -64,6 +86,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Specifies the navigation depth.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Calendar()
+        ///             .Name("Calendar")
+        ///             .Depth(CalendarView.Month)
+        /// %&gt;
+        /// </code>
+        /// </example>
         public CalendarBuilder Depth(CalendarView depth)
         {
             Component.Depth = depth.ToString().ToLower();
@@ -71,6 +104,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Specifies the start view.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Calendar()
+        ///             .Name("Calendar")
+        ///             .Start(CalendarView.Month)
+        /// %&gt;
+        /// </code>
+        /// </example>
         public CalendarBuilder Start(CalendarView start)
         {
             Component.Start = start.ToString().ToLower();
@@ -78,6 +122,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// MonthTemplateId to be used for rendering the cells of the Calendar.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Calendar()
+        ///             .Name("Calendar")
+        ///             .MonthTemplateId("widgetMonthTemplateId")
+        /// %&gt;
+        /// </code>
+        /// </example>
         public CalendarBuilder MonthTemplateId(string id)
         {
             Component.MonthTemplate.ContentId = id;
@@ -85,6 +140,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Templates for the cells rendered in the "month" view.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Calendar()
+        ///             .Name("Calendar")
+        ///             .MonthTemplate("#= data.value #")
+        /// %&gt;
+        /// </code>
+        /// </example>
         public CalendarBuilder MonthTemplate(string content)
         {
             Component.MonthTemplate.Content = content;
@@ -92,6 +158,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Configures the content of cells of the Calendar.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Calendar()
+        ///             .Name("Calendar")
+        ///             .MonthTemplate(month => month.Content("#= data.value #"))
+        /// %&gt;
+        /// </code>
+        /// </example>
         public CalendarBuilder MonthTemplate(Action<MonthTemplateBuilder> monthTemplateAction)
         {
 

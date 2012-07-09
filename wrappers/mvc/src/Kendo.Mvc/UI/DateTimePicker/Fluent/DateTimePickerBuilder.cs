@@ -53,6 +53,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Footer template to be used for rendering the footer of the Calendar.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().DateTimePicker()
+        ///             .Name("DateTimePicker")
+        ///             .Footer("#= kendo.toString(data, "G") #")
+        /// %&gt;
+        /// </code>
+        /// </example>
         public DateTimePickerBuilder Footer(string footer)
         {
             Component.Footer = footer;
@@ -60,6 +71,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// FooterId to be used for rendering the footer of the Calendar.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().DateTimePicker()
+        ///             .Name("DateTimePicker")
+        ///             .FooterId("widgetFooterId")
+        /// %&gt;
+        /// </code>
+        /// </example>
         public DateTimePickerBuilder FooterId(string id)
         {
             Component.FooterId = id;
@@ -67,6 +89,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Specifies the navigation depth.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().DateTimePicker()
+        ///             .Name("DateTimePicker")
+        ///             .Depth(CalendarView.Month)
+        /// %&gt;
+        /// </code>
+        /// </example>
         public DateTimePickerBuilder Depth(CalendarView depth)
         {
 
@@ -75,6 +108,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Specifies the start view.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().DateTimePicker()
+        ///             .Name("DateTimePicker")
+        ///             .Start(CalendarView.Month)
+        /// %&gt;
+        /// </code>
+        /// </example>
         public DateTimePickerBuilder Start(CalendarView start)
         {
 
@@ -83,6 +127,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// MonthTemplateId to be used for rendering the cells of the Calendar.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().DateTimePicker()
+        ///             .Name("DateTimePicker")
+        ///             .MonthTemplateId("widgetMonthTemplateId")
+        /// %&gt;
+        /// </code>
+        /// </example>
         public DateTimePickerBuilder MonthTemplateId(string id)
         {
             Component.MonthTemplate.ContentId = id;
@@ -90,6 +145,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Templates for the cells rendered in the "month" view.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().DateTimePicker()
+        ///             .Name("DateTimePicker")
+        ///             .MonthTemplate("#= data.value #")
+        /// %&gt;
+        /// </code>
+        /// </example>
         public DateTimePickerBuilder MonthTemplate(string content)
         {
             Component.MonthTemplate.Content = content;
@@ -97,6 +163,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Configures the content of cells of the Calendar.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().DateTimePicker()
+        ///             .Name("DateTimePicker")
+        ///             .MonthTemplate(month => month.Content("#= data.value #"))
+        /// %&gt;
+        /// </code>
+        /// </example>
         public DateTimePickerBuilder MonthTemplate(Action<MonthTemplateBuilder> monthTemplateAction)
         {
             monthTemplateAction(new MonthTemplateBuilder(Component.MonthTemplate));

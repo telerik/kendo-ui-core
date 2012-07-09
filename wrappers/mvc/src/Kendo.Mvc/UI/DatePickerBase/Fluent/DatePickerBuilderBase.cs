@@ -19,6 +19,18 @@ namespace Kendo.Mvc.UI.Fluent
         {
         }
 
+        /// <summary>
+        /// Use to enable or disable animation of the popup element.
+        /// </summary>
+        /// <param name="enable">The boolean value.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().DatePicker()
+        ///	           .Name("DatePicker")
+        ///	           .Animation(false) //toggle effect
+        ///	%&gt;
+        /// </code>
+        /// </example>
         public TPickerBuilder Animation(bool enable)
         {
             Component.Animation.Enabled = enable;
@@ -26,6 +38,24 @@ namespace Kendo.Mvc.UI.Fluent
             return this as TPickerBuilder;
         }
 
+        /// <summary>
+        /// Configures the animation effects of the widget.
+        /// </summary>
+        /// <param name="animationAction">The action which configures the animation effects.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().DatePicker()
+        ///	           .Name("DatePicker")
+        ///	           .Animation(animation =>
+        ///	           {
+        ///		            animation.Open(open =>
+        ///		            {
+        ///		                open.SlideIn(SlideDirection.Down);
+        ///		            }
+        ///	           })
+        ///	%&gt;
+        /// </code>
+        /// </example>
         public TPickerBuilder Animation(Action<PopupAnimationBuilder> animationAction)
         {
 
@@ -67,6 +97,9 @@ namespace Kendo.Mvc.UI.Fluent
             return this as TPickerBuilder;
         }
 
+        /// <summary>
+        /// Specifies the formats, which are used to parse the value set with value() method or by direct input.
+        /// </summary>
         public TPickerBuilder ParseFormats(IEnumerable<string> formats)
         {
             Component.ParseFormats.Clear();

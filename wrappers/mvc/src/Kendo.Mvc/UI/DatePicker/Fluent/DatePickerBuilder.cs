@@ -18,6 +18,17 @@ namespace Kendo.Mvc.UI.Fluent
         {
         }
 
+        /// <summary>
+        /// FooterId to be used for rendering the footer of the Calendar.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().DatePicker()
+        ///             .Name("DatePicker")
+        ///             .FooterId("widgetFooterId")
+        /// %&gt;
+        /// </code>
+        /// </example>
         public DatePickerBuilder FooterId(string id)
         {
             Component.FooterId = id;
@@ -25,6 +36,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Footer template to be used for rendering the footer of the Calendar.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().DatePicker()
+        ///             .Name("DatePicker")
+        ///             .Footer("#= kendo.toString(data, "G") #")
+        /// %&gt;
+        /// </code>
+        /// </example>
         public DatePickerBuilder Footer(string footer)
         {
             Component.Footer = footer;
@@ -32,6 +54,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Specifies the navigation depth.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().DatePicker()
+        ///             .Name("DatePicker")
+        ///             .Depth(CalendarView.Month)
+        /// %&gt;
+        /// </code>
+        /// </example>
         public DatePickerBuilder Depth(CalendarView depth)
         {
 
@@ -40,6 +73,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Specifies the start view.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().DatePicker()
+        ///             .Name("DatePicker")
+        ///             .Start(CalendarView.Month)
+        /// %&gt;
+        /// </code>
+        /// </example>
         public DatePickerBuilder Start(CalendarView start)
         {
 
@@ -48,6 +92,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// MonthTemplateId to be used for rendering the cells of the Calendar.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().DatePicker()
+        ///             .Name("DatePicker")
+        ///             .MonthTemplateId("widgetMonthTemplateId")
+        /// %&gt;
+        /// </code>
+        /// </example>
         public DatePickerBuilder MonthTemplateId(string id)
         {
             Component.MonthTemplate.ContentId = id;
@@ -55,6 +110,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Templates for the cells rendered in the "month" view.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().DatePicker()
+        ///             .Name("DatePicker")
+        ///             .MonthTemplate("#= data.value #")
+        /// %&gt;
+        /// </code>
+        /// </example>
         public DatePickerBuilder MonthTemplate(string content)
         {
             Component.MonthTemplate.Content = content;
@@ -62,6 +128,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Configures the content of cells of the Calendar.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().DatePicker()
+        ///             .Name("DatePicker")
+        ///             .MonthTemplate(month => month.Content("#= data.value #"))
+        /// %&gt;
+        /// </code>
+        /// </example>
         public DatePickerBuilder MonthTemplate(Action<MonthTemplateBuilder> monthTemplateAction)
         {
 
