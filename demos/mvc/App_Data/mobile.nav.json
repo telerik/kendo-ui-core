@@ -95,6 +95,10 @@
                     "url": "listview/endless-scrolling.html"
                 },
                 {
+                    "text": "Fixed Headers",
+                    "url": "listview/fixedheaders.html"
+                },
+                {
                     "text": "Custom templates",
                     "url": "listview/templates.html"
                 }
