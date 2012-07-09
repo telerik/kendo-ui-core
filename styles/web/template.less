@@ -284,7 +284,8 @@ textarea.k-textbox:hover,
 
 /* icons */
 
-.k-icon
+.k-icon,
+.k-column-menu .k-sprite
 {
     opacity:.8;
 }
@@ -292,7 +293,9 @@ textarea.k-textbox:hover,
 .k-icon:hover,
 .k-state-hover .k-icon,
 .k-state-selected .k-icon,
-.k-state-focused .k-icon
+.k-state-focused .k-icon,
+.k-column-menu .k-state-hover .k-sprite,
+.k-column-menu .k-state-active .k-sprite
 {
     opacity:1;
 }
@@ -303,7 +306,8 @@ textarea.k-textbox:hover,
 .k-drop-hint,
 .k-callout,
 .k-progress,
-.k-progress-status
+.k-progress-status,
+.k-column-menu .k-sprite
 {
     background-image: url('@{image-folder}/sprite.png');
 }

@@ -287,6 +287,12 @@ html body .k-button-bare
 
 .k-i-note, .k-warning { background-position: -160px -240px; }
 
+.k-i-sort-asc { background-position: -112px -240px; }
+.k-i-sort-desc { background-position: -112px -256px; }
+.k-i-group { background-position: -112px -272px; }
+.k-i-ungroup { background-position: -112px -288px; }
+.k-i-columns { background-position: -112px -304px; }
+
 .k-image
 {
     border: 0;
@@ -1325,16 +1331,12 @@ div.k-grid-header .k-header
 
 /* Grid :: filtering */
 
-.k-grid-filter
+.k-grid-filter,
+.k-header-column-menu
 {
     float: right;
     margin: -.5em -.6em -.4em;
-    padding: 0.54em 0.2em;
-}
-
-.k-grid-filter .k-icon
-{
-    vertical-align: top;
+    padding: .5em .2em .4em;
 }
 
 .k-grid .k-animation-container
@@ -1666,6 +1668,11 @@ html .k-grid-edit-row .k-tooltip
     position: absolute;
     filter: alpha(opacity=30);
     opacity: .3;
+}
+
+.k-column-menu .k-sprite
+{
+    margin-right:10px;
 }
 
 /* ComboBox & DropDownList */
@@ -3688,6 +3695,7 @@ html input.k-breadcrumbs-input
 *+html .k-button,
 
 *+html .k-grid-filter,
+*+html .k-header-column-menu,
 *+html .k-grid .k-pager-numbers,
 *+html .k-grid .k-status-text,
 *+html .k-pager-numbers .k-link,

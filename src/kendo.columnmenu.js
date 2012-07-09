@@ -40,7 +40,7 @@
             that.field = element.attr(kendo.attr("field"));
             link = element.find(".k-header-column-menu");
             if (!link[0]) {
-                link = element.prepend('<a class="k-header-column-menu" href="#"><span class="k-icon k-menu"/></a>').find(".k-header-column-menu");
+                link = element.prepend('<a class="k-header-column-menu" href="#"><span class="k-icon k-i-arrowhead-s"/></a>').find(".k-header-column-menu");
             }
             that._clickHandler = proxy(that._click, that);
             link.click(that._clickHandler);
@@ -276,14 +276,14 @@
 
     var template = '<ul>'+
                     '#if(sortable){#'+
-                        '<li class="k-item k-sort-asc"><span class="k-link"><span class="k-sprite historyIcon"></span>${messages.sortAscending}</span></li>'+
-                        '<li class="k-item k-sort-desc"><span class="k-link"><span class="k-sprite historyIcon"></span>${messages.sortDescending}</span></li>'+
+                        '<li class="k-item k-sort-asc"><span class="k-link"><span class="k-sprite k-i-sort-asc"></span>${messages.sortAscending}</span></li>'+
+                        '<li class="k-item k-sort-desc"><span class="k-link"><span class="k-sprite k-i-sort-desc"></span>${messages.sortDescending}</span></li>'+
                         '#if(showColumns || filterable){#'+
                             '<li class="k-separator"></li>'+
                         '#}#'+
                     '#}#'+
                     '#if(showColumns){#'+
-                        '<li class="k-item k-columns-item"><span class="k-link"><span class="k-sprite historyIcon"></span>${messages.columns}</span><ul>'+
+                        '<li class="k-item k-columns-item"><span class="k-link"><span class="k-sprite k-i-columns"></span>${messages.columns}</span><ul>'+
                         '#for (var col in columns) {#'+
                             '<li><label><input type="checkbox" data-#=ns#field="#=columns[col].field#" data-#=ns#index="#=columns[col].index#"/>#=columns[col].title#</label></li>'+
                         '#}#'+
@@ -293,7 +293,7 @@
                         '#}#'+
                     '#}#'+
                     '#if(filterable){#'+
-                        '<li class="k-item k-filter-item"><span class="k-link"><span class="k-sprite historyIcon"></span>${messages.filter}</span><ul>'+
+                        '<li class="k-item k-filter-item"><span class="k-link"><span class="k-sprite k-i-filter"></span>${messages.filter}</span><ul>'+
                             '<li><div class="k-filterable"></div></li>'+
                         '</ul></li>'+
                     '#}#'+
