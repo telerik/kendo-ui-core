@@ -17,8 +17,34 @@ var xmlDoc = xml.parseXmlString(rawXml);
 var members = xmlDoc.find("//member")
 
 function parseNamespace(namespace) {
-    var namespaceRegExp = new RegExp("(\\w):" + namespace.replace(/\./g, "\\.") + "\\.([^\\.]+)\\.?");
+    var namespaceRegExp = new RegExp("^T:" + namespace.replace(/\./g, "\\.") + "\\.([^\\.]+)$");
     var types = {};
+
+    members.forEach(function(member) {
+        var name = member.attr("name").value().replace(/`\d/, "");
+        var type;
+        var fullName;
+        var shortName;
+
+        if (namespaceRegExp.test(name)) {
+            shortName = RegExp.$1;
+            fullName = namespace + "." + shortName;
+
+            types[shortName] = type = {};
+            type.name = fullName;
+            type.methods = [];
+            type.properties = [];
+            type.summary = parseSummary(member);
+
+            parseMembers(type);
+        }
+    });
+
+    return types;
+}
+
+function parseMembers(type) {
+    var namespaceRegExp = new RegExp("^(\w):" + type.name.replace(/\./g, "\\.") + "\\.([^\\.]+)");
 
     members.forEach(function(member) {
         var name = member.attr("name").value().replace(/`\d/, "");
@@ -31,14 +57,6 @@ function parseNamespace(namespace) {
             kind = RegExp.$1;
             shortName = RegExp.$2;
             fullName = namespace + "." + shortName;
-            type = types[shortName];
-
-            if (!type) {
-                types [shortName] = type = {};
-                type.name = fullName;
-                type.methods = [];
-                type.properties = [];
-            }
 
             if (kind == "M" && name.indexOf("#ctor") < 0) {
                 var method = parseMethod(member);
@@ -46,14 +64,8 @@ function parseNamespace(namespace) {
                 method.name = memberName(fullName, name)
                 type.methods.push(method);
             }
-
-            if (kind == "T") {
-                type.summary = parseSummary(member);
-            }
         }
     });
-
-    return types;
 }
 
 function typeToMarkdown(type) {
@@ -233,13 +245,23 @@ function makeDir(/**string*/ path) {
     fs.mkdirSync(path, 0777);
 }
 
-var types = parseNamespace("Kendo.Mvc.UI.Fluent");
-var path = "docs/api/wrappers/aspnet-mvc/Kendo.Mvc.UI.Fluent";
+function exportNamespace(namespace) {
+    var types = parseNamespace(namespace);
+    var path = "docs/api/wrappers/aspnet-mvc/" + namespace;
+    var typeName;
+    var type;
 
-makePath(path);
+    makePath(path);
 
-for (var type in types) {
-    saveFile(path, type + ".md", typeToMarkdown(types[type]));
+    for (typeName in types) {
+        type = types[typeName];
+        if (type.methods.length || type.summary) {
+            saveFile(path, typeName + ".md", typeToMarkdown(type));
+        }
+    }
 }
+
+exportNamespace("Kendo.Mvc.UI");
+exportNamespace("Kendo.Mvc.UI.Fluent");
 
 // vim: ft=javascript
