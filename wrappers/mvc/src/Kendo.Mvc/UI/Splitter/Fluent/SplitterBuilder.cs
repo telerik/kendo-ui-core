@@ -3,6 +3,9 @@ namespace Kendo.Mvc.UI.Fluent
     using System;
     using Kendo.Mvc.Infrastructure;
 
+    /// <summary>
+    /// Defines the fluent interface for configuring the <see cref="Splitter"/> component.
+    /// </summary>
     public class SplitterBuilder : ViewComponentBuilderBase<Splitter, SplitterBuilder>, IHideObjectMembers
     {
         public SplitterBuilder(Splitter component)

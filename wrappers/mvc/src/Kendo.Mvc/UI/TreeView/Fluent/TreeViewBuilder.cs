@@ -255,6 +255,18 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Use to enable or disable animation of the TreeView.
+        /// </summary>
+        /// <param name="enable">The boolean value.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().TreeView()
+        ///	           .Name("TreeView")
+        ///	           .Animation(false) //toggle effect
+        ///	%&gt;
+        /// </code>
+        /// </example>
         public TreeViewBuilder Animation(bool enable)
         {
             Component.Animation.Enabled = enable;
@@ -262,6 +274,24 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Configures the animation effects of the widget.
+        /// </summary>
+        /// <param name="animationAction">The action which configures the animation effects.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().TreeView()
+        ///	           .Name("TreeView")
+        ///	           .Animation(animation =>
+        ///	           {
+        ///		            animation.Expand(open =>
+        ///		            {
+        ///		                open.SlideIn(SlideDirection.Down);
+        ///		            }
+        ///	           })
+        ///	%&gt;
+        /// </code>
+        /// </example>
         public TreeViewBuilder Animation(Action<ExpandableAnimationBuilder> animationAction)
         {
 
