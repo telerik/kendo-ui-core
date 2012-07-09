@@ -44,6 +44,10 @@
                     kendoConsole.log("Remove :: " + getFileInfo(e));
                 }
 
+                function onProgress(e) {
+                    kendoConsole.log("Upload progress :: " + e.percentComplete + "% :: " + getFileInfo(e));
+                }
+
                 function getFileInfo(e) {
                     return $.map(e.files, function(file) {
                         var info = file.name;
@@ -63,13 +67,14 @@
                             removeUrl: "remove",
                             autoUpload: true
                         },
-                        select: onSelect,
-                        upload: onUpload,
-                        success: onSuccess,
-                        error: onError,
-                        complete: onComplete,
                         cancel: onCancel,
-                        remove: onRemove
+                        complete: onComplete,
+                        error: onError,
+                        progress: onProgress,
+                        remove: onRemove,
+                        select: onSelect,
+                        success: onSuccess,
+                        upload: onUpload
                     });
                 });
             </script>
