@@ -263,7 +263,7 @@
           *  <script>
           *      $("#calendar").kendoCalendar({
           *          month: {
-          *             content:  kendo.template($("#cellTemplate").html()),
+          *             content:  $("#cellTemplate").html(),
           *          }
           *      });
           *  </script>
