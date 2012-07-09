@@ -83,16 +83,16 @@ and to such modifications and all rights associated therewith to Telerik.
 developed by You under the terms of this Agreement and Telerik hereby grants 
 You a license to use such modifications pursuant to Section 1.1.  
 
-1.1.5.2 U You acknowledge that the Software's source code is confidential and 
+1.1.5.3 U You acknowledge that the Software's source code is confidential and 
 contains valuable and proprietary trade secrets of Telerik.  nder no 
 circumstances may any portion of the Software's source code or any modified 
 version of the source code be distributed, disclosed or otherwise made 
 available to any third party.
 
-1.1.5.3 Telerik DOES NOT provide technical support for any source code that has 
+1.1.5.4 Telerik DOES NOT provide technical support for any source code that has 
 been modified by any party other than Telerik.
 
-1.1.5.4 The Software's source code is provided "as is", without warranty of any 
+1.1.5.5 The Software's source code is provided "as is", without warranty of any 
 kind. Refunds are not available for any licenses that include a right to 
 receive source code.
 
@@ -272,7 +272,7 @@ written consent.
 
 15. Survival.
 
-Sections 1.1.5.4, 6, 8, 9, 10, 11, 12, 13, 14, 15 and 16 shall survive the 
+Sections 1.1.5.5, 6, 8, 9, 10, 11, 12, 13, 14, 15 and 16 shall survive the 
 expiration or termination of this Agreement.
 
 16. Severability.
