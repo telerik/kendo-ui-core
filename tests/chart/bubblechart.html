@@ -198,31 +198,6 @@
                     equals(outline.radius, firstPoint.options.markers.size / 2 - 0.5);
                 });
 
-                // ------------------------------------------------------------
-                module("Bubble Chart / Legend items", {
-                    setup: function() {
-                        plotArea = new PlotAreaStub();
-                        setupBubbleChart(plotArea, { series: [ series ] });
-                    }
-                });
-
-                test("returns legend item for each point", function() {
-                    equals(bubbleChart.legendItems().length, 3);
-                });
-
-                test("sets legend item name to category", function() {
-                    equals(bubbleChart.legendItems()[0].name, "a");
-                });
-
-                test("sets legend item color", function() {
-                    equals(bubbleChart.legendItems()[0].color, "red");
-                });
-
-                test("skips points with visibleInLegend set to false", function() {
-                    bubbleChart.points[1].visibleInLegend = false;
-                    equals(bubbleChart.legendItems().length, 2);
-                });
-
             })();
 
             (function() {
@@ -336,11 +311,13 @@
                         yValue: 20,
                         sizeValue: 200
                     }],
-                    points;
+                    points,
+                    bubbleChart,
+                    legend;
 
                 function createBubbleChart(options) {
                     $("#container").kendoChart(
-                        kendo.deepExtend({
+                        kendo.deepExtend({}, {
                             dataSource: {
                                 data: data
                             },
@@ -348,13 +325,17 @@
                                 type: "bubble",
                                 xField: "xValue",
                                 yField: "yValue",
-                                sizeField: "sizeValue"
+                                sizeField: "sizeValue",
+                                name: "A",
+                                test: "test"
                             }]
                         }, options)
                     );
 
                     var chart = $("#container").data("kendoChart");
                     points = chart._plotArea.charts[0].points;
+                    bubbleChart = chart._plotArea.charts[0];
+                    legend = chart._model.children[0];
                 }
 
                 // ------------------------------------------------------------
@@ -372,6 +353,18 @@
                     });
 
                     same(points[0].options.tooltip.format, "a");
+                });
+
+                test("sets legend item name from dataItem", function() {
+                    createBubbleChart({
+                        legend: {
+                            labels: {
+                                template: "#= text #-#= series.test #"
+                            }
+                        }
+                    });
+
+                    equals(legend.options.items[0].name, "A-test");
                 });
 
             })();

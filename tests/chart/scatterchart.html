@@ -401,7 +401,8 @@
                         xValue: 2,
                         yValue: 2
                     }],
-                    points;
+                    points,
+                    legend;
 
                 // ------------------------------------------------------------
                 module("Scatter Chart / Integration", {
@@ -411,14 +412,22 @@
                                 data: data
                             },
                             series: [{
+                                name: "A",
                                 type: "scatter",
                                 xField: "xValue",
-                                yField: "yValue"
-                            }]
+                                yField: "yValue",
+                                test: "test"
+                            }],
+                            legend: {
+                                labels: {
+                                    template: "#= text #-#= series.test #"
+                                }
+                            }
                         });
 
                         var chart = $("#container").data("kendoChart");
                         points = chart._plotArea.charts[0].points;
+                        legend = chart._model.children[0];
                     },
                     teardown: function() {
                         $("#container").empty();
@@ -427,6 +436,10 @@
 
                 test("gets data from x and y field", function() {
                     equal(points.length, 3);
+                });
+
+                test("legend labels template", function() {
+                    equal(legend.options.items[0].name, "A-test");
                 });
 
             })();

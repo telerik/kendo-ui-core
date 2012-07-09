@@ -152,26 +152,32 @@
                 module("Pie Chart / Legend items", {
                     setup: function() {
                         plotArea = new PlotAreaStub();
-                        setupPieChart(plotArea, { series: [ dataValues ] });
+                        setupPieChart(plotArea, { series: [ { data: dataValues.data, test: "test" } ] });
                     }
                 });
 
-                test("returns legend item for each segment", function() {
+                test("return legend item for each segment", function() {
                     equals(pieChart.legendItems().length, 2);
                 });
 
-                test("sets legend item name to category", function() {
+                test("set legend item name to category", function() {
                     equals(pieChart.legendItems()[0].name, "A");
                 });
 
-                test("sets legend item color", function() {
+                test("set legend item color", function() {
                     equals(pieChart.legendItems()[0].color, "red");
                 });
 
-                test("skips points with visibleInLegend set to false", function() {
+                test("skip points with visibleInLegend set to false", function() {
                     pieChart.segments[1].visibleInLegend = false;
                     equals(pieChart.legendItems().length, 1);
                 });
+
+                test("set legend item name with template", function() {
+                    equals(pieChart.legendItems({ template: "#= series.test #" })[0].name, "test");
+                    equals(pieChart.legendItems({ template: "#= text #" })[0].name, "A");
+                });
+
             })();
 
 
@@ -180,7 +186,8 @@
                         value: 10,
                         explode: true,
                         color: "red",
-                        category: "A"
+                        category: "A",
+                        test: "test"
                     }, {
                         value: 50,
                         explode: false,
@@ -214,18 +221,18 @@
                 });
 
                 test("sets segment angle based on value", function() {
-                        $("#container").kendoChart({
-                            dataSource: {
-                                data: data
-                            },
-                            series: [{
-                                type: "pie",
-                                field: "value",
-                                categoryField: "category",
-                                colorField: "color",
-                                explodeField: "explode"
-                            }]
-                        });
+                    $("#container").kendoChart({
+                        dataSource: {
+                            data: data
+                        },
+                        series: [{
+                            type: "pie",
+                            field: "value",
+                            categoryField: "category",
+                            colorField: "color",
+                            explodeField: "explode"
+                        }]
+                    });
                     equal(firstSegment.sector.angle, 60);
                 });
 
@@ -239,6 +246,10 @@
 
                 test("sets segment explode from dataItem", function() {
                     ok(firstSegment.explode == true);
+                });
+
+                test("sets legend item name from dataItem", function() {
+                    equals(pieChart.legendItems({ template: "#= dataItem.test #" })[0].name, "test");
                 });
 
             })();

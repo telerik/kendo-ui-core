@@ -27,8 +27,8 @@
                     plotArea
                     MARGIN = 10;
 
-                function createChart(series) {
-                    $("#container").kendoChart({
+                function createChart(series, options) {
+                    $("#container").kendoChart($.extend({}, {
                         title: {
                             text: "Chart Title"
                         },
@@ -39,7 +39,7 @@
                         chartArea: {
                             margin: 0
                         }
-                    });
+                    }, options ));
 
                     chart = $("#container").data("kendoChart");
                     model = chart._model;
@@ -94,6 +94,23 @@
                     }]);
 
                     equal(legend.options.items.length, 0);
+                });
+
+                test("legend labels template", function() {
+                    createChart([{
+                        name: "Value",
+                        type: "bar",
+                        data: [100, 200, 300],
+                        test: "test"
+                    }], {
+                        legend: {
+                            labels: {
+                                template: "#= text #-#= series.test #"
+                            }
+                        }
+                    });
+
+                    equal(legend.options.items[0].name, "Value-test");
                 });
 
                 test("legend is positioned at right", function() {

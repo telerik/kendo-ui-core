@@ -223,7 +223,8 @@
                 visible: true
             },
             legend: {
-                visible: true
+                visible: true,
+                labels: {}
             },
             categoryAxis: {
                 categories: []
@@ -3009,26 +3010,6 @@
             return ["color", "category", "visibleInLegend"];
         },
 
-        legendItems: function() {
-            var points = this.points,
-                pointsLength = points.length,
-                i,
-                currentPoint,
-                items = [];
-
-            for (i = 0; i < pointsLength; i++) {
-                currentPoint = points[i];
-                if (currentPoint && currentPoint.visibleInLegend !== false) {
-                    items.push({
-                        name: currentPoint.category,
-                        color: currentPoint.color
-                    });
-                }
-            }
-
-            return items;
-        },
-
         getViewElements: function(view) {
             var chart = this;
 
@@ -3372,18 +3353,29 @@
             chart.segments.push(segment);
         },
 
-        legendItems: function() {
+        legendItems: function(options) {
             var segments = this.segments,
                 segmentsLength = segments.length,
                 i,
                 currentPoint,
-                items = [];
+                items = [],
+                text, labelTemplate;
 
             for (i = 0; i < segmentsLength; i++) {
                 currentPoint = segments[i];
                 if (currentPoint && currentPoint.visibleInLegend !== false) {
+                    text = currentPoint.category || "";
+                    if ((options || {}).template) {
+                        labelTemplate = template(options.template);
+                        text = labelTemplate({
+                            text: text,
+                            series: currentPoint.series,
+                            dataItem: currentPoint.dataItem,
+                            value: currentPoint.value
+                        });
+                    }
                     items.push({
-                        name: currentPoint.category,
+                        name: text,
                         color: currentPoint.options.color
                     });
                 }
@@ -3923,16 +3915,24 @@
             var series = chart.options.series,
                 count = series.length,
                 data = [],
-                i,
-                currentSeries;
+                i, currentSeries, text, labelTemplate,
+                labels = this.options.legend.labels || {};
 
             if (chart.legendItems) {
-                data = chart.legendItems();
+                data = chart.legendItems(labels);
             } else {
                 for (i = 0; i < count; i++) {
                     currentSeries = series[i];
                     if (currentSeries.visibleInLegend !== false) {
-                        data.push({ name: currentSeries.name || "", color: currentSeries.color });
+                        text = currentSeries.name || "";
+                        if (labels.template) {
+                            labelTemplate = template(labels.template);
+                            text = labelTemplate({
+                                text: text,
+                                series: currentSeries
+                            });
+                        }
+                        data.push({ name: text, color: currentSeries.color });
                     }
                 }
             }
