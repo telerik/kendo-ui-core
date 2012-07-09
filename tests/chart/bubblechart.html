@@ -36,7 +36,7 @@
                 root = new dataviz.RootElement();
                 root.append(bubbleChart);
 
-                bubbleChart.reflow();
+                bubbleChart.reflow(chartBox);
                 bubbleChart.getViewElements(view);
 
                 firstPoint = bubbleChart.points[0];
@@ -101,6 +101,34 @@
 
                 test("Minimum bubble diameter is set to minSize", function() {
                     equals(bubbleChart.points[1].options.markers.size, 10, TOLERANCE);
+                });
+
+                test("Default maximum bubble diameter is proportional to box size", function() {
+                    setupBubbleChart(plotArea, { series: [{
+                            data: [{x: 1, y: 1, size: 100}]
+                        }]
+                    });
+
+                    equals(firstPoint.options.markers.size, 120, TOLERANCE);
+                });
+
+                test("Default minimum bubble diameter is proportional to box size", function() {
+                    setupBubbleChart(plotArea, { series: [{
+                            data: [{x: 1, y: 1, size: 10}, {x: 1, y: 1, size: 100}]
+                        }]
+                    });
+
+                    equals(firstPoint.options.markers.size, 40, TOLERANCE);
+                });
+
+                test("Default minimum bubble diameter is floored to 10", function() {
+                    setupBubbleChart(plotArea, { series: [{
+                            data: [{x: 1, y: 1, size: 10}, {x: 1, y: 1, size: 100}]
+                        }]
+                    });
+
+                    bubbleChart.reflow(new Box2D());
+                    equals(firstPoint.options.markers.size, 10, TOLERANCE);
                 });
 
                 test("Bubble diameter is proportional to size value", function() {

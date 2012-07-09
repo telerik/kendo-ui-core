@@ -248,8 +248,6 @@
                     width: 1
                 },
                 bubble: {
-                    minSize: 5,
-                    maxSize: 100,
                     negativeValues: {
                         color: WHITE,
                         visible: false
@@ -2908,7 +2906,7 @@
         reflow: function(box) {
             var chart = this;
 
-            chart.updateBubblesSize();
+            chart.updateBubblesSize(box);
             ScatterChart.fn.reflow.call(chart, box);
         },
 
@@ -2948,14 +2946,13 @@
             chart.append(point);
 
             return point;
-
-            // TODO: Clip to axis line box
         },
 
-        updateBubblesSize: function() {
+        updateBubblesSize: function(box) {
             var chart = this,
                 options = chart.options,
                 series = options.series,
+                boxSize = math.min(box.width(), box.height()),
                 seriesIx,
                 pointIx;
 
@@ -2963,8 +2960,10 @@
                 var currentSeries = series[seriesIx],
                     seriesPoints = chart.seriesPoints[seriesIx],
                     seriesMaxSize = chart.maxSize(seriesPoints),
-                    minR = currentSeries.minSize / 2,
-                    maxR = currentSeries.maxSize / 2,
+                    minSize = currentSeries.minSize || math.max(boxSize * 0.02, 10),
+                    maxSize = currentSeries.maxSize || boxSize * 0.2,
+                    minR = minSize / 2,
+                    maxR = maxSize / 2,
                     minArea = math.PI * minR * minR,
                     maxArea = math.PI * maxR * maxR,
                     areaRange = maxArea - minArea,
