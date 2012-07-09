@@ -15,7 +15,7 @@ namespace Kendo.Mvc.UI.Fluent
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GridBuilder{T}"/> class.
-        /// </summary>
+        /// </summary> 
         /// <param name="component">The component.</param>
         public GridBuilder(Grid<T> component)
             : base(component)
@@ -36,6 +36,9 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Configures the grid DataSource
+        /// </summary>        
         public GridBuilder<T> DataSource(Action<DataSourceBuilder<T>> configurator)
         {            
             configurator(new DataSourceBuilder<T>(Component.DataSource, this.Component.ViewContext, this.Component.UrlGenerator));
@@ -182,6 +185,7 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
         /// <summary>
         /// Configures the grid reordering settings
         /// </summary>

@@ -6,6 +6,10 @@ namespace Kendo.Mvc.UI.Fluent
     using Extensions;
     using Kendo.Mvc.Infrastructure;
 
+    /// <summary>
+    /// Defines the fluent interface for configuring the <see cref="DataSource{T}"/> Model definition.
+    /// </summary>
+    /// <typeparam name="TModel">Type of the model</typeparam>
     public class DataSourceModelDescriptorFactory<TModel> : IHideObjectMembers
         where TModel : class
     {
@@ -16,6 +20,11 @@ namespace Kendo.Mvc.UI.Fluent
             this.model = model;
         }
 
+        /// <summary>
+        /// Specify the member used to identify an unique Model instance.
+        /// </summary>
+        /// <typeparam name="TValue">Type of the field</typeparam>
+        /// <param name="expression">Member access expression which describes the member</param>
         public virtual void Id<TValue>(Expression<Func<TModel, TValue>> expression)
         {
             var dataKey = new GridDataKey<TModel, TValue>(expression);            
@@ -24,6 +33,10 @@ namespace Kendo.Mvc.UI.Fluent
             model.Id = dataKey;
         }
 
+        /// <summary>
+        /// Specify the member used to identify an unique Model instance.
+        /// </summary>
+        /// <param name="fieldName">The member name.</param>
         public virtual void Id(string fieldName)
         {
             IGridDataKey<TModel> dataKey;
@@ -55,16 +68,31 @@ namespace Kendo.Mvc.UI.Fluent
             return (IGridDataKey<TModel>)constructor.Invoke(new object[] { lambdaExpression });
         }
 
+        /// <summary>
+        /// Describes a Model field
+        /// </summary>
+        /// <typeparam name="TValue">Field type</typeparam>
+        /// <param name="expression">Member access expression which describes the field</param>        
         public virtual DataSourceModelFieldDescriptorBuilder<TValue> Field<TValue>(Expression<Func<TModel, TValue>> expression)
         {
             return AddFieldDescriptor<TValue>(expression.MemberWithoutInstance(), typeof(TValue));
         }
 
+        /// <summary>
+        /// Describes a Model field
+        /// </summary>
+        /// <param name="memberName">Field name</param>
+        /// <param name="memberType">Field type</param>        
         public virtual DataSourceModelFieldDescriptorBuilder<object> Field(string memberName, Type memberType)
         {
             return AddFieldDescriptor<object>(memberName, memberType);
         }
 
+        /// <summary>
+        /// Describes a Model field
+        /// </summary>
+        /// <typeparam name="TValue">Field type</typeparam>
+        /// <param name="memberName">Member name</param>        
         public virtual DataSourceModelFieldDescriptorBuilder<TValue> Field<TValue>(string memberName)
         {
             return AddFieldDescriptor<TValue>(memberName, typeof(TValue));

@@ -4,6 +4,9 @@ using System.Web.Mvc;
 
 namespace Kendo.Mvc.UI.Fluent
 {
+    /// <summary>
+    /// Defines the fluent interface for configuring the <see cref="DataSource"/> component.
+    /// </summary>
     public class DataSourceBuilder<TModel> : IHideObjectMembers
         where TModel : class
     {
@@ -18,6 +21,9 @@ namespace Kendo.Mvc.UI.Fluent
             this.dataSource = dataSource;
         }
 
+        /// <summary>
+        /// Use it to configure Ajax binding.
+        /// </summary>        
         public AjaxDataSourceBuilder<TModel> Ajax()
         {
             dataSource.Type = DataSourceType.Ajax;
@@ -25,6 +31,9 @@ namespace Kendo.Mvc.UI.Fluent
             return new AjaxDataSourceBuilder<TModel>(dataSource, viewContext, urlGenerator);
         }
 
+        /// <summary>
+        /// Use it to configure Server binding.
+        /// </summary>        
         public ServerDataSourceBuilder<TModel> Server()
         {
             dataSource.Type = DataSourceType.Server;

@@ -6,6 +6,9 @@ using System.Linq.Expressions;
 
 namespace Kendo.Mvc.UI.Fluent
 {
+    /// <summary>
+    /// Defines the fluent interface for configuring the <see cref="CrudOperation"/> options.
+    /// </summary>
     public class CrudOperationBuilder: IHideObjectMembers
     {
         private readonly CrudOperation operation;
@@ -19,6 +22,10 @@ namespace Kendo.Mvc.UI.Fluent
             this.operation = operation;
         }
 
+        /// <summary>
+        /// Sets the route values for the operation.
+        /// </summary>
+        /// <param name="routeValues">Route values</param>        
         public CrudOperationBuilder Route(RouteValueDictionary routeValues)
         {
             operation.Action(routeValues);
@@ -28,6 +35,12 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Sets the action, contoller and route values for the operation.
+        /// </summary>
+        /// <param name="actionName">Action name</param>
+        /// <param name="controllerName">Controller name</param>
+        /// <param name="routeValues">Route values</param>        
         public CrudOperationBuilder Action(string actionName, string controllerName, object routeValues)
         {
             operation.Action(actionName, controllerName, routeValues);
@@ -37,6 +50,12 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Sets the action, contoller and route values for the operation.
+        /// </summary>
+        /// <param name="actionName">Action name</param>
+        /// <param name="controllerName">Controller name</param>
+        /// <param name="routeValues">Route values</param>        
         public CrudOperationBuilder Action(string actionName, string controllerName, RouteValueDictionary routeValues)
         {
             operation.Action(actionName, controllerName, routeValues);
@@ -46,11 +65,21 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Sets the action and contoller values for the operation.
+        /// </summary>
+        /// <param name="actionName">Action name</param>
+        /// <param name="controllerName">Controller name</param>        
         public CrudOperationBuilder Action(string actionName, string controllerName)
         {
             return Action(actionName, controllerName, (object)null);
         }
 
+        /// <summary>
+        /// Sets the route name and values for the operation.
+        /// </summary>
+        /// <param name="routeName">Route name</param>
+        /// <param name="routeValues">Route values</param>        
         public CrudOperationBuilder Route(string routeName, RouteValueDictionary routeValues)
         {
             operation.Route(routeName, routeValues);
@@ -60,6 +89,11 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Sets the route name and values for the operation.
+        /// </summary>
+        /// <param name="routeName">Route name</param>
+        /// <param name="routeValues">Route values</param>
         public CrudOperationBuilder Route(string routeName, object routeValues)
         {
             operation.Route(routeName, routeValues);
@@ -69,6 +103,10 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Sets the route name for the operation.
+        /// </summary>
+        /// <param name="routeName"></param>        
         public CrudOperationBuilder Route(string routeName)
         {
             operation.Route(routeName, (object)null);
@@ -87,6 +125,9 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Sets JavaScript function which to return additional parameters which to be sent the server.
+        /// </summary>                
         public CrudOperationBuilder Data(Func<object, object> handler)
         {
             operation.Data.InlineCodeBlock = handler;
@@ -94,6 +135,10 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Sets JavaScript function which to return additional parameters which to be sent the server.
+        /// </summary>
+        /// <param name="handler">JavaScript function name</param>        
         public CrudOperationBuilder Data(string handler)
         {
             operation.Data.HandlerName = handler;
@@ -112,6 +157,10 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Specifies the HTTP verb of the request. 
+        /// </summary>
+        /// <param name="verb">The HTTP verb</param>        
         public CrudOperationBuilder Type(HttpVerbs verb)
         {
             operation.Type = verb.ToString().ToUpperInvariant();

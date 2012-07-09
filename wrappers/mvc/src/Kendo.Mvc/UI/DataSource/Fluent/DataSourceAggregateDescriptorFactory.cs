@@ -7,6 +7,9 @@ namespace Kendo.Mvc.UI.Fluent
     using Extensions;
     using Kendo.Mvc.Infrastructure;
 
+    /// <summary>
+    /// Defines the fluent interface for configuring the <see cref="AggregateDescriptor"/>.
+    /// </summary>    
     public class DataSourceAggregateDescriptorFactory<TModel> : IHideObjectMembers
         where TModel : class
     {
@@ -17,6 +20,9 @@ namespace Kendo.Mvc.UI.Fluent
             this.descriptors = descriptors;
         }
 
+        /// <summary>
+        /// Specifies member on which aggregates to be calculated.
+        /// </summary>
         public DataSourceAggregatesFactory Add<TValue>(Expression<Func<TModel, TValue>> expression)
         {            
             return AddDescriptor(expression.MemberWithoutInstance(), typeof(TValue));
