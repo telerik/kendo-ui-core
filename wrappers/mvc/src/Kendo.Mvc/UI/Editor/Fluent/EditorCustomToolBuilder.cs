@@ -15,7 +15,7 @@ namespace Kendo.Mvc.UI.Fluent
 
         public EditorCustomTemplateToolBuilder Template(string value)
         {
-            tool.Template = "<li class='k-editor-template'>" + value + "</li>";
+            tool.Template = value;
             return this;
         }
     }

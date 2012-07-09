@@ -132,6 +132,10 @@
                             template = template(options);
                         }
 
+                        if (template.indexOf('<li') != 0) {
+                            template = "<li class='k-editor-template'>" + template + "</li>";
+                        }
+
                         tool = $(template).appendTo(toolsArea);
 
                         if (options.type == "button" && options.exec) {

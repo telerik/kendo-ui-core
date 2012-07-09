@@ -40,6 +40,11 @@
         </div>
     </script>
 
+    <script type="text/x-kendo-template" id="backgroundColor-template">
+        <label for='templateTool' style='vertical-align:middle;'>Background:</label>
+        <select id='templateTool' style='width:90px'><option value=''>none</option><option value='\#ff9'>yellow</option><option value='\#dfd'>green</option></select>
+    </script>
+
     <script>
         $("#editor").kendoEditor({
             tools: [
@@ -92,18 +97,25 @@
                         var editor = $(this).data("kendoEditor");
                         editor.exec("inserthtml", { value: "<hr />" });
                     }
+                },
+                {
+                    name: "customTemplate",
+                    template: $("#backgroundColor-template").html()
                 }
             ]
         });
+
+        $("#templateTool").kendoDropDownList({
+            change: function(e) {
+                $("#editor").data("kendoEditor").body.style.backgroundColor = e.sender.value();
+            }
+        });
+
     </script>
 
     <style scoped>
         .k-viewHtml {
             background: transparent url(../../content/web/editor/insert-html-icon.png) no-repeat 50% 50%;
         }
-        
-        /*.k-editor .k-insertHtml {
-            display:none;
-        }*/
     </style>
 </div>
