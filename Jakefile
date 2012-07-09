@@ -36,6 +36,8 @@ var CDN_ROOT = "http://cdn.kendostatic.com/",
     BUILDER_PATH = "download-builder",
     BUILDER_STAGING_PATH = path.join(DEPLOY_PATH, "download-builder-staging"),
     BUILDER_STAGING_SERVICE = STAGING_ROOT + "/download-builder-service",
+    BUILDER_DEPLOY_PATH = path.join(DEPLOY_PATH, "download-builder"),
+    BUILDER_DEPLOY_SERVICE = "http://www.kendoui.com/services/kendo-download",
     BUILDER_SERVICE_PATH = "service",
     BUILDER_PROJECT = path.join(BUILDER_SERVICE_PATH, "Download.csproj"),
     BUILDER_CONFIG_NAME = path.join("config", "kendo-config.VERSION_NUMBER.json"),
@@ -220,38 +222,39 @@ task("vsdoc", function() {
 });
 
 desc("Build bundles");
-task("bundles", ["clean", "merge-scripts", "mvc:bundle"], function() {
+task("bundles", ["clean", "merge-scripts", "mvc:bundle", "download-builder:bundle"], function() {
     bundles.buildAllBundles(version(), complete);
 }, true);
 
-desc("Deploy scripts to CDN");
-task("cdn", ["clean", "merge-scripts"], function() {
-    bundles.buildBundle(CDN_BUNDLE, version(), function() {
-        kendoBuild.msBuild(CDN_PROJECT, ["/p:Version=" + version(), "/p:BundleRoot=" + path.join("..", CDN_BUNDLE_PATH)]);
-    });
-}, true);
+namespace("cdn", function() {
+    desc("Build CDN scripts bundle");
+    task("bundle", ["clean", "merge-scripts"], function() {
+        bundles.buildBundle(CDN_BUNDLE, version(), complete);
+    }, true);
+
+    desc("Deploy CDN scripts to CloudFront");
+    task("deploy", ["cdn:bundle"], function() {
+        kendoBuild.msBuild(
+            CDN_PROJECT,
+            ["/p:Version=" + version(), "/p:BundleRoot=" + path.join("..", CDN_BUNDLE_PATH)],
+            complete
+        );
+    }, true);
+});
 
 namespace("download-builder", function() {
     desc("Build staging download builder site");
-    task("staging", ["merge-scripts"], function() {
+    task("staging", ["cdn:bundle"], function() {
         var indexPath = path.join(BUILDER_STAGING_PATH, "index.html"),
             appDataPath = path.join(BUILDER_STAGING_PATH, BUILDER_SERVICE_PATH, "App_Data"),
             sourcePath = path.join(appDataPath, version());
 
         copyDir(BUILDER_PATH, BUILDER_STAGING_PATH);
+        mkdir(appDataPath);
+        mkdir(sourcePath);
+        copyDir(CDN_BUNDLE_PATH, sourcePath);
 
-        kendoBuild.rmdirSyncRecursive(CDN_BUNDLE_PATH);
-        bundles.buildBundle(CDN_BUNDLE, version(), function() {
-            mkdir(appDataPath);
-            mkdir(sourcePath);
-            copyDir(CDN_BUNDLE_PATH, sourcePath);
-        });
-
-        kendoBuild.writeText(indexPath,
-            kendoBuild.readText(indexPath)
-                .replace(/SERVICE_ROOT/g, BUILDER_STAGING_SERVICE)
-                .replace(/VERSION_NUMBER/g, version())
-        );
+        updateIndex(indexPath, BUILDER_STAGING_SERVICE);
 
         fs.renameSync(path.join(BUILDER_STAGING_PATH, BUILDER_CONFIG_NAME),
                       path.join(BUILDER_STAGING_PATH,
@@ -264,6 +267,37 @@ namespace("download-builder", function() {
             [ "/t:Clean;Build", "/p:Configuration=Release" ]
         );
     });
+
+    desc("Build download builder deploy bundle");
+    task("bundle", ["cdn:bundle"], function() {
+        var indexPath = path.join(BUILDER_DEPLOY_PATH, "index.html"),
+            appDataPath = path.join(BUILDER_DEPLOY_PATH, BUILDER_SERVICE_PATH, "App_Data"),
+            sourcePath = path.join(appDataPath, version()),
+            packageName = path.join(RELEASE_PATH, "download-builder." + version() + ".zip");
+
+        copyDir(BUILDER_PATH, BUILDER_DEPLOY_PATH);
+        mkdir(appDataPath);
+        mkdir(sourcePath);
+        copyDir(CDN_BUNDLE_PATH, sourcePath);
+
+        updateIndex(indexPath, BUILDER_DEPLOY_SERVICE);
+
+        fs.renameSync(path.join(BUILDER_DEPLOY_PATH, BUILDER_CONFIG_NAME),
+                      path.join(BUILDER_DEPLOY_PATH,
+                                BUILDER_CONFIG_NAME.replace("VERSION_NUMBER", version)
+                      )
+        );
+
+        zip(packageName, BUILDER_DEPLOY_PATH, complete);
+    }, true);
+
+    function updateIndex(indexPath, service) {
+        kendoBuild.writeText(indexPath,
+            kendoBuild.readText(indexPath)
+                .replace(/SERVICE_ROOT/g, service)
+                .replace(/VERSION_NUMBER/g, version())
+        );
+    }
 });
 
 namespace("mvc", function() {
