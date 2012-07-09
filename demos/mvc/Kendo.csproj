@@ -645,6 +645,7 @@
     <Content Include="Views\dataviz\line-charts\grouped-data.cshtml" />
     <Content Include="Views\dataviz\line-charts\multiple-axes.cshtml" />
     <Content Include="Views\dataviz\line-charts\stacked-line.cshtml" />
+    <Content Include="Views\web\grid\column-menu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />

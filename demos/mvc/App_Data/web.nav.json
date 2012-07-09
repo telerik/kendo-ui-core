@@ -412,6 +412,10 @@
                     "url": "grid/column-resizing.html"
                 },
                 {
+                    "text": "Column menu",
+                    "url": "grid/column-menu.html"
+                },
+                {
                     "text": "Column Settings",
                     "url": "grid/columnsettings.html",
                     "packages": ["mvc"]
