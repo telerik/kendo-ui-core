@@ -16,15 +16,6 @@
         MENU = "kendoMenu",
         Widget = ui.Widget;
 
-    var messages = {
-        sort: {
-            asc: "Sort Ascending",
-            desc: "Sort Descending"
-        },
-        filter: "Filter",
-        columns: "Columns"
-    };
-
     function trim(text) {
         if (!String.prototype.trim) {
             text = text.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
@@ -45,7 +36,6 @@
             element = that.element;
             options = that.options;
             that.owner = options.owner;
-            that._mergeOptions(messages);
 
             that.field = element.attr(kendo.attr("field"));
             link = element.find(".k-header-column-menu");
@@ -82,28 +72,15 @@
 
         options: {
             name: "ColumnMenu",
-            messages: messages,
+            messages: {
+                sortAscending: "Sort Ascending",
+                sortDescending: "Sort Descending",
+                filter: "Filter",
+                columns: "Columns"
+            },
             columns: true,
             sortable: true,
             filterable: true
-        },
-
-        _mergeOptions: function(defaults) {
-            var options =  this.options.messages;
-
-            if (options.sort === true) {
-                options.sort = defaults.sort;
-            }
-
-            if (options.filter === true) {
-                options.filter = defaults.filter;
-            }
-
-            if (options.columns === true) {
-                options.columns = defaults.columns;
-            }
-
-            this.options.messages = options;
         },
 
         destroy: function() {
@@ -299,8 +276,8 @@
 
     var template = '<ul>'+
                     '#if(sortable){#'+
-                        '<li class="k-item k-sort-asc"><span class="k-link"><span class="k-sprite historyIcon"></span>${messages.sort.asc}</span></li>'+
-                        '<li class="k-item k-sort-desc"><span class="k-link"><span class="k-sprite historyIcon"></span>${messages.sort.desc}</span></li>'+
+                        '<li class="k-item k-sort-asc"><span class="k-link"><span class="k-sprite historyIcon"></span>${messages.sortAscending}</span></li>'+
+                        '<li class="k-item k-sort-desc"><span class="k-link"><span class="k-sprite historyIcon"></span>${messages.sortDescending}</span></li>'+
                         '#if(showColumns || filterable){#'+
                             '<li class="k-separator"></li>'+
                         '#}#'+

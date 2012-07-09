@@ -276,6 +276,9 @@
   <data name="Grid_CancelChanges" xml:space="preserve">
     <value>Änderungen verwerfen</value>
   </data>
+  <data name="Grid_Columns" xml:space="preserve">
+    <value>Spalten</value>
+  </data>
   <data name="Grid_Confirmation" xml:space="preserve">
     <value>Sind Sie sicher, dass Sie diesen Datensatz löschen wollen?</value>
   </data>
@@ -293,6 +296,12 @@
   </data>
   <data name="Grid_Select" xml:space="preserve">
     <value>Wähle</value>
+  </data>
+  <data name="Grid_SortAscending" xml:space="preserve">
+    <value>Aufsteigend sortieren</value>
+  </data>
+  <data name="Grid_SortDescending" xml:space="preserve">
+    <value>Absteigend sortieren</value>
   </data>
   <data name="Grid_Update" xml:space="preserve">
     <value>Aktualisiere</value>

@@ -333,4 +333,13 @@
   <data name="Pager_Previous" xml:space="preserve">
     <value>Перейти на попередню сторінку</value>
   </data>
+  <data name="Grid_Columns" xml:space="preserve">
+    <value>Kолони</value>
+  </data>
+  <data name="Grid_SortAscending" xml:space="preserve">
+    <value>Сортування за зростанням</value>
+  </data>
+  <data name="Grid_SortDescending" xml:space="preserve">
+    <value>Сортування за спаданням</value>
+  </data>
 </root>

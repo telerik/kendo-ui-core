@@ -360,4 +360,13 @@
   <data name="Upload_UploadSelectedFiles" xml:space="preserve">
     <value>上传文件</value>
   </data>
+  <data name="Grid_Columns" xml:space="preserve">
+    <value>列</value>
+  </data>
+  <data name="Grid_SortAscending" xml:space="preserve">
+    <value>升序排序</value>
+  </data>
+  <data name="Grid_SortDescending" xml:space="preserve">
+    <value>降序排序</value>
+  </data>
 </root>

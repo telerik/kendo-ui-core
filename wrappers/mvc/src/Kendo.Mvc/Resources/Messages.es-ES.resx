@@ -258,4 +258,13 @@
   <data name="Pager_Previous" xml:space="preserve">
     <value>Ir a la página anterior</value>
   </data>
+  <data name="Grid_Columns" xml:space="preserve">
+    <value>Columnas</value>
+  </data>
+  <data name="Grid_SortAscending" xml:space="preserve">
+    <value>Orden ascendente</value>
+  </data>
+  <data name="Grid_SortDescending" xml:space="preserve">
+    <value>Orden descendiente</value>
+  </data>
 </root>

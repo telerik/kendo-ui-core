@@ -128,11 +128,11 @@
 
             test("changing default sort options", function() {
                 var menu = setup({
-                    messages: { sort: { asc: "foo" } }
+                    messages: {  sortAscending: "foo" }
                 });
 
-                equal(menu.options.messages.sort.asc, "foo");
-                equal(menu.options.messages.sort.desc, "Sort Descending");
+                equal(menu.options.messages.sortAscending, "foo");
+                equal(menu.options.messages.sortDescending, "Sort Descending");
             });
 
             test("filterable enabled", function() {

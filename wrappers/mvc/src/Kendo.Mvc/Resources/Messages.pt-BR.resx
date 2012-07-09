@@ -357,4 +357,13 @@
   <data name="Upload_UploadSelectedFiles" xml:space="preserve">
     <value>Enviar arquivos</value>
   </data>
+  <data name="Grid_Columns" xml:space="preserve">
+    <value>Colunas</value>
+  </data>
+  <data name="Grid_SortAscending" xml:space="preserve">
+    <value>Ordenar Ascendente</value>
+  </data>
+  <data name="Grid_SortDescending" xml:space="preserve">
+    <value>Ordenar Descendente</value>
+  </data>
 </root>

@@ -36,22 +36,16 @@ namespace Kendo.Mvc.UI
             {
                 json["columns"] = Columns;
             }
-
-            var sort = new Dictionary<string, object>();
+            
             if (SortAscending != DefaultSortAscending)
             {
-                sort["asc"] = SortAscending;
+                json["sortAscending"] = SortAscending;
             }
 
             if (SortDescending != DefaultSortDescending)
             {
-                sort["desc"] = SortDescending;
-            }
-
-            if (sort.Any())
-            {
-                json["sort"] = sort;
-            }
+                json["sortDescending"] = SortDescending;
+            }           
         }
     }
 }

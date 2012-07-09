@@ -143,7 +143,7 @@
                     sortable: true,
                     columnMenu: {
                         messages: {
-                            sort: { asc: "foo" }
+                            sortAscending: "foo"
                         }
                     }
                 });
@@ -151,8 +151,7 @@
                 var menu = grid.thead.find("th:first").data("kendoColumnMenu");
 
                 equal(menu.options.sortable, true);
-                equal(menu.options.messages.sort.asc, "foo");
-                equal(menu.options.messages.sort.desc, "Sort Descending");
+                equal(menu.options.messages.sortAscending, "foo");
             });
 
             test("columnMenu as true boolean and filterable grid", function() {

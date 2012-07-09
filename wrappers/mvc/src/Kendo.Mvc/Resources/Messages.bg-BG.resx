@@ -360,4 +360,13 @@
   <data name="Upload_UploadSelectedFiles" xml:space="preserve">
     <value>Качи файловете</value>
   </data>
+  <data name="Grid_Columns" xml:space="preserve">
+    <value>Колони</value>
+  </data>
+  <data name="Grid_SortAscending" xml:space="preserve">
+    <value>Сортирай възходящо</value>
+  </data>
+  <data name="Grid_SortDescending" xml:space="preserve">
+    <value>Сортирай низходящо</value>
+  </data>
 </root>
