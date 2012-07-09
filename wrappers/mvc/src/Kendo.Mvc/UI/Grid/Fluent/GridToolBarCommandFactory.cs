@@ -6,9 +6,7 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent interface for configuring toolbar command.
     /// </summary>
-    /// <typeparam name="TModel">The type of the model</typeparam>
-    /// <typeparam name="TCommand">The type of the command.</typeparam>
-    /// <typeparam name="TBuilder">The type of the builder.</typeparam>
+    /// <typeparam name="T">The type of the model</typeparam>    
     public class GridToolBarCommandFactory<T> : IHideObjectMembers where T : class
     {
         private readonly GridToolBarSettings<T> settings;
@@ -70,7 +68,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Sets toolbar template.
         /// </summary>
-        /// <param name="templateAction">The action defining the template.</param>
+        /// <param name="template">The action defining the template.</param>
         public void Template(Action template)
         {
 

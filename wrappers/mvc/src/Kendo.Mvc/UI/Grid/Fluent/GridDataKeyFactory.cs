@@ -19,7 +19,8 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Initializes a new instance of the <see cref="GridDataKeyFactory&lt;TModel&gt;"/> class.
         /// </summary>
-        /// <param name="grid">The grid.</param>
+        /// <param name="dataKeys">dataKeys</param>
+        /// <param name="nameAsRouteKey"></param>
         public GridDataKeyFactory(IList<IGridDataKey<TModel>> dataKeys, bool nameAsRouteKey)
         {
             this.nameAsRouteKey = nameAsRouteKey;

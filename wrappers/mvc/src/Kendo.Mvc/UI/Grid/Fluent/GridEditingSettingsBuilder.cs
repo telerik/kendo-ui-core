@@ -14,7 +14,7 @@ namespace Kendo.Mvc.UI.Fluent
         private readonly GridEditableSettings<T> settings;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GridEditingSettingsBuilder"/> class.
+        /// Initializes a new instance of the <see cref="GridEditingSettingsBuilder&lt;T&gt;"/> class.
         /// </summary>
         /// <param name="settings">The settings.</param>
         public GridEditingSettingsBuilder(GridEditableSettings<T> settings)
@@ -70,8 +70,8 @@ namespace Kendo.Mvc.UI.Fluent
         /// Specify an editor template which to be used for InForm or PopUp modes
         /// </summary>
         /// <param name="templateName">name of the editor template</param>
-        /// <remarks>This settings is applicable only when Mode is <see cref="GridEditMode.InForm"/> 
-        /// or <see cref="GridEditMode.PopUp"/></remarks>
+        /// <remarks>This settings is applicable only when Mode is
+        /// <see cref="GridEditMode.PopUp"/></remarks>
         public GridEditingSettingsBuilder<T> TemplateName(string templateName)
         {
 

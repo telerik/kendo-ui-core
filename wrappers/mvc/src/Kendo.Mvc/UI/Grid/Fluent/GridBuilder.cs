@@ -262,12 +262,11 @@ namespace Kendo.Mvc.UI.Fluent
             configurator(new GridToolBarCommandFactory<T>(Component.ToolBar));
 
             return this;
-        }       
+        }
 
         /// <summary>
         /// Binds the grid to a list of objects
-        /// </summary>
-        /// <typeparam name="T">The type of the data item</typeparam>
+        /// </summary>        
         /// <param name="dataSource">The data source.</param>
         /// <example>
         /// <code lang="CS">

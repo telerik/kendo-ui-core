@@ -19,10 +19,12 @@ namespace Kendo.Mvc.UI
     {
         private static readonly IDictionary<string, Func<TModel, TValue>> expressionCache = new Dictionary<string, Func<TModel, TValue>>();
         private static readonly ReaderWriterLockSlim syncLock = new ReaderWriterLockSlim();
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="GridBoundColumn{T}"/> class.
         /// </summary>
-        /// <param name="value">The property to which the column is bound to.</param>
+        /// <param name="grid"></param>
+        /// <param name="expression"></param>
         public GridBoundColumn(Grid<TModel> grid, Expression<Func<TModel, TValue>> expression)
             : base(grid)
         {
@@ -52,7 +54,7 @@ namespace Kendo.Mvc.UI
                 }
             }
 
-            Value = value;            
+            Value = value;
             GroupFooterTemplate = new HtmlTemplate<GridAggregateResult>();
             GroupHeaderTemplate = new HtmlTemplate<GridGroupAggregateResult>();
 
@@ -61,8 +63,8 @@ namespace Kendo.Mvc.UI
                 Metadata = ModelMetadata.FromLambdaExpression(expression, new ViewDataDictionary<TModel>());
                 MemberType = Metadata.ModelType;
                 Title = Metadata.DisplayName;
-                Format = Metadata.DisplayFormatString;                
-                Visible = Metadata.ShowForDisplay;              
+                Format = Metadata.DisplayFormatString;
+                Visible = Metadata.ShowForDisplay;
             }
 
             if (string.IsNullOrEmpty(Title))
@@ -100,7 +102,7 @@ namespace Kendo.Mvc.UI
         {
             get;
             set;
-        }       
+        }
 
         public ModelMetadata Metadata
         {
@@ -223,9 +225,9 @@ namespace Kendo.Mvc.UI
                 editorHtml = editorHtml.Trim()
                                 .Replace("\r\n", string.Empty)
                                 .Replace("</script>", "<\\/script>")
-                                .Replace("jQuery(\"#", "jQuery(\"\\#");                                               
-            }           
-            
+                                .Replace("jQuery(\"#", "jQuery(\"\\#");
+            }
+
             if (!Grid.DataSource.IsReadOnly(Member) && Grid.Editable.Enabled && Grid.IsClientBinding)
             {
                 json["editor"] = editorHtml;
@@ -240,7 +242,7 @@ namespace Kendo.Mvc.UI
             {
                 json["groupFooterTemplate"] = ClientGroupFooterTemplate;
             }
-            
+
             SerializeValues(json);
         }
 
@@ -364,9 +366,9 @@ namespace Kendo.Mvc.UI
                     Expression = Expression,
                     ViewContext = Grid.ViewContext
                 };
-                
+
                 builder.HtmlAttributes.Merge(HtmlAttributes);
-                
+
                 return builder;
             }
 
@@ -376,9 +378,9 @@ namespace Kendo.Mvc.UI
                 Format = Format,
                 Value = Value,
 
-            };            
+            };
             builder.HtmlAttributes.Merge(HtmlAttributes);
-            
+
             return builder;
         }
 
@@ -393,7 +395,7 @@ namespace Kendo.Mvc.UI
                     ViewContext = Grid.ViewContext,
                     TemplateName = EditorTemplateName,
                     Member = Member
-                };                
+                };
                 builder.HtmlAttributes.Merge(HtmlAttributes);
 
                 return builder;
@@ -405,11 +407,11 @@ namespace Kendo.Mvc.UI
         {
             return CreateEditBuilderCore(htmlHelper);
         }
-        
+
         protected override IGridCellBuilder CreateHeaderBuilderCore()
         {
             IGridCellBuilder builder = null;
-            
+
             HeaderHtmlAttributes.Add("data-field", Member);
             HeaderHtmlAttributes.Add("data-title", Title);
             if (!Groupable)
@@ -441,7 +443,7 @@ namespace Kendo.Mvc.UI
         }
 
         protected override IGridCellBuilder CreateFooterBuilderCore(IEnumerable<AggregateResult> aggregateResults)
-        {            
+        {
             return new GridFooterCellBuilder(FooterHtmlAttributes, FooterTemplate)
             {
                 AggregateResults = CalculateAggregates(aggregateResults)
@@ -449,7 +451,7 @@ namespace Kendo.Mvc.UI
         }
 
         protected override IGridCellBuilder CreateGroupFooterBuilderCore(IEnumerable<AggregateResult> aggregateResults)
-        {            
+        {
             return new GridFooterCellBuilder(FooterHtmlAttributes, GroupFooterTemplate)
             {
                 AggregateResults = CalculateAggregates(aggregateResults)
@@ -460,7 +462,7 @@ namespace Kendo.Mvc.UI
         {
             var aggregates = Grid.DataSource.Aggregates.Where(agg => agg.Member == Member).SelectMany(agg => agg.Aggregates);
 
-            return new GridAggregateResult(aggregateResults.Where(r => aggregates.Any(f => f.FunctionName == r.FunctionName)));            
+            return new GridAggregateResult(aggregateResults.Where(r => aggregates.Any(f => f.FunctionName == r.FunctionName)));
         }
 
         private void AppendAggregateAttributes()
@@ -470,7 +472,8 @@ namespace Kendo.Mvc.UI
                     .SelectMany(agg => agg.Aggregates)
                     .Select(agg => agg.AggregateMethodName.ToLowerInvariant());
 
-            if (aggregates.Any()) {
+            if (aggregates.Any())
+            {
                 HeaderHtmlAttributes.Add("data-aggregates", "[" + String.Join(",", aggregates.ToArray()) + "]");
             }
         }

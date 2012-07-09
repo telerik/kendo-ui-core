@@ -4,7 +4,7 @@ using System.Linq;
 namespace Kendo.Mvc.UI.Fluent
 {
     /// <summary>
-    /// Defines the fluent interface for configuring <see cref="Grid{T}.Groupable"/> messages.
+    /// Defines the fluent interface for configuring <see cref="GridGroupableSettings"/> messages.
     /// </summary>
     public class GroupingMessagesBuilder : IHideObjectMembers
     {

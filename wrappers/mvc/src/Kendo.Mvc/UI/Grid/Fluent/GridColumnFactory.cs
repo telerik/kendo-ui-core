@@ -104,10 +104,14 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Defines a foreign key column.
         /// </summary>
-        /// <typeparam name="TValue"></typeparam>
-        /// <param name="expression"></param>
+        /// <typeparam name="TValue">Member type</typeparam>
+        /// <param name="expression">The member which matches the selected item</param>
+        /// <param name="data">The foreign data</param>
+        /// <param name="dataFieldValue">The data value field</param>
+        /// <param name="dataFieldText">The data text field</param>
         /// <returns></returns>
-        public virtual GridBoundColumnBuilder<TModel> ForeignKey<TValue>(Expression<Func<TModel, TValue>> expression, IEnumerable data, string dataFieldValue, string dataFieldText)
+        public virtual GridBoundColumnBuilder<TModel> ForeignKey<TValue>(Expression<Func<TModel, TValue>> expression, IEnumerable data, 
+            string dataFieldValue, string dataFieldText)
         {
             return ForeignKey(expression, new SelectList(data, dataFieldValue, dataFieldText));
         }
@@ -115,8 +119,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Defines a foreign key column.
         /// </summary>
-        /// <typeparam name="TValue"></typeparam>
-        /// <param name="expression"></param>
+        /// <typeparam name="TValue">Member type</typeparam>
+        /// <param name="expression">The member which matches the selected item</param>
+        /// <param name="data">The foreign data</param>
         /// <returns></returns>
         public virtual GridBoundColumnBuilder<TModel> ForeignKey<TValue>(Expression<Func<TModel, TValue>> expression, SelectList data)
         {            

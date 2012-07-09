@@ -33,6 +33,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <param name="actionName">Action name</param>
         /// <param name="controllerName">Controller Name</param>    
+        /// <param name="routeValues">Route values</param>
         public ServerDataSourceBuilder<TModel> Read(string actionName, string controllerName, object routeValues)
         {
             SetOperationUrl(dataSource.Transport.Read, actionName, controllerName, routeValues);
@@ -44,8 +45,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Sets controller, action and routeValues for Read operation.
         /// </summary>
         /// <param name="actionName">Action name</param>
-        /// <param name="controllerName">Controller Name</param>        
-        /// <param name="routeValues">Route values</param>
+        /// <param name="controllerName">Controller Name</param>                
         public ServerDataSourceBuilder<TModel> Read(string actionName, string controllerName)
         {
             SetOperationUrl(dataSource.Transport.Read, actionName, controllerName, null);
@@ -79,6 +79,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <param name="actionName">Action name</param>
         /// <param name="controllerName">Controller Name</param>        
+        /// <param name="routeValues">Route values</param>
         public ServerDataSourceBuilder<TModel> Update(string actionName, string controllerName, object routeValues)
         {
             SetOperationUrl(dataSource.Transport.Update, actionName, controllerName, routeValues);
@@ -90,8 +91,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Sets controller, action and routeValues for Update operation.
         /// </summary>
         /// <param name="actionName">Action name</param>
-        /// <param name="controllerName">Controller Name</param>        
-        /// <param name="routeValues">Route values</param>
+        /// <param name="controllerName">Controller Name</param>                
         public ServerDataSourceBuilder<TModel> Update(string actionName, string controllerName)
         {
             SetOperationUrl(dataSource.Transport.Update, actionName, controllerName, null);
@@ -114,6 +114,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <param name="actionName">Action name</param>
         /// <param name="controllerName">Controller Name</param>
+        /// <param name="routeValues">Route values</param>
         public ServerDataSourceBuilder<TModel> Create(string actionName, string controllerName, object routeValues)
         {
             SetOperationUrl(dataSource.Transport.Create, actionName, controllerName, routeValues);
@@ -125,8 +126,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Sets controller, action and routeValues for Create operation.
         /// </summary>
         /// <param name="actionName">Action name</param>
-        /// <param name="controllerName">Controller Name</param>        
-        /// <param name="routeValues">Route values</param>
+        /// <param name="controllerName">Controller Name</param>                
         public ServerDataSourceBuilder<TModel> Create(string actionName, string controllerName)
         {
             SetOperationUrl(dataSource.Transport.Create, actionName, controllerName, null);
@@ -149,6 +149,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <param name="actionName">Action name</param>
         /// <param name="controllerName">Controller Name</param>    
+        /// <param name="routeValues">Route values</param>
         public ServerDataSourceBuilder<TModel> Destroy(string actionName, string controllerName, object routeValues)
         {
             SetOperationUrl(dataSource.Transport.Destroy, actionName, controllerName, routeValues);
@@ -160,8 +161,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Sets controller, action and routeValues for Destroy operation.
         /// </summary>
         /// <param name="actionName">Action name</param>
-        /// <param name="controllerName">Controller Name</param>        
-        /// <param name="routeValues">Route values</param>
+        /// <param name="controllerName">Controller Name</param>                
         public ServerDataSourceBuilder<TModel> Destroy(string actionName, string controllerName)
         {
             SetOperationUrl(dataSource.Transport.Destroy, actionName, controllerName, null);

@@ -53,8 +53,7 @@ namespace Kendo.Mvc
         /// Gets or sets the type of the member that is used for filtering.
         /// Set this property if the member type cannot be resolved automatically.
         /// Such cases are: items with ICustomTypeDescriptor, XmlNode or DataRow.
-        /// Changing this property did not raise 
-        /// <see cref="FilterDescriptorBase.PropertyChanged"/> event.
+        /// Changing this property did not raise         
         /// </summary>
         /// <value>The type of the member used for filtering.</value>
         public Type MemberType { get; set; }

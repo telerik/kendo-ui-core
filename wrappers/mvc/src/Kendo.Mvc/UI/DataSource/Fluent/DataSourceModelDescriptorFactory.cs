@@ -7,7 +7,7 @@ namespace Kendo.Mvc.UI.Fluent
     using Kendo.Mvc.Infrastructure;
 
     /// <summary>
-    /// Defines the fluent interface for configuring the <see cref="DataSource{T}"/> Model definition.
+    /// Defines the fluent interface for configuring the <see cref="DataSource"/> Model definition.
     /// </summary>
     /// <typeparam name="TModel">Type of the model</typeparam>
     public class DataSourceModelDescriptorFactory<TModel> : IHideObjectMembers

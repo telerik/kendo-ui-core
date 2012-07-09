@@ -179,7 +179,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Sets the template for the column.
         /// </summary>
-        /// <param name="templateAction">The action defining the template.</param>
+        /// <param name="inlineTemplate">The action defining the template.</param>
         /// <returns></returns>
         public GridBoundColumnBuilder<T> Template(Func<T, object> inlineTemplate)
         {

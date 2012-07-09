@@ -3,7 +3,7 @@ namespace Kendo.Mvc.UI.Fluent
     using System;
     
     /// <summary>
-    /// Defines the fluent interface for configuring <see cref="Grid{T}.Groupable"/>.
+    /// Defines the fluent interface for configuring <see cref="GridGroupableSettings"/>.
     /// </summary>
     public class GridGroupingSettingsBuilder : IHideObjectMembers
     {

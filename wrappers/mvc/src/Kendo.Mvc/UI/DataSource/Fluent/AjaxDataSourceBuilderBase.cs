@@ -47,6 +47,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <param name="actionName">Action name</param>
         /// <param name="controllerName">Controller Name</param>        
+        /// <param name="routeValues">Route values</param>
         public TDataSourceBuilder Read(string actionName, string controllerName, object routeValues)
         {
             SetOperationUrl(dataSource.Transport.Read, actionName, controllerName, routeValues);
@@ -58,8 +59,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Sets controller, action and routeValues for Read operation.
         /// </summary>
         /// <param name="actionName">Action name</param>
-        /// <param name="controllerName">Controller Name</param>        
-        /// <param name="routeValues">Route values</param>
+        /// <param name="controllerName">Controller Name</param>                
         public TDataSourceBuilder Read(string actionName, string controllerName)
         {
             SetOperationUrl(dataSource.Transport.Read, actionName, controllerName, null);
