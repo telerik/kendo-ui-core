@@ -28,9 +28,6 @@ namespace Kendo.Mvc.UI
             Gradient = gradient;
         }
 
-        /// <summary>
-        /// Creates a serializer
-        /// </summary>
         public IChartSerializer CreateSerializer()
         {
             return new ChartBarSeriesOverlaySerializer(this);

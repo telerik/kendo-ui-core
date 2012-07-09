@@ -132,9 +132,6 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        /// <summary>
-        /// Gets the axis serializer.
-        /// </summary>
         public abstract IChartSerializer CreateSerializer();
     }
 }

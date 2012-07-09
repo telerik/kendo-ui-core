@@ -52,9 +52,6 @@ namespace Kendo.Mvc.UI
         /// </summary>
         bool? Reverse { get; set; }
 
-        /// <summary>
-        /// Gets the axis serializer.
-        /// </summary>
         IChartSerializer CreateSerializer();
     }
 }

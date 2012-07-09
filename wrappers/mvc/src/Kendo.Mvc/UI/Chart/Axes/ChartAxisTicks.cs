@@ -27,9 +27,6 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        /// <summary>
-        /// Creates a serializer
-        /// </summary>
         public IChartSerializer CreateSerializer()
         {
             return new ChartAxisTicksSerializer(this);
