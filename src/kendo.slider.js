@@ -116,8 +116,6 @@
         SLIDE = "slide",
         MOUSE_DOWN = touch ? "touchstart" : "mousedown",
         TRACK_MOUSE_DOWN = touch ? "touchstart" : pointers ? "MSPointerDown" : "mousedown",
-
-
         MOUSE_UP = touch ? "touchend" : "mouseup",
         MOVE_SELECTION = "moveSelection",
         KEY_DOWN = "keydown",
@@ -130,7 +128,8 @@
         STATE_DEFAULT = "k-state-default",
         STATE_DISABLED = "k-state-disabled",
         PRECISION = 3,
-        DISABLED = "disabled";
+        DISABLED = "disabled",
+        UNDEFINED = "undefined";
 
     var SliderBase = Widget.extend({
         init: function(element, options) {
@@ -597,6 +596,10 @@
         };
     }
 
+    function defined(value) {
+        return typeof value !== UNDEFINED;
+    }
+
     var Slider = SliderBase.extend(/** @lends kendo.ui.Slider.prototype */{
         /**
          *
@@ -705,7 +708,7 @@
 
             SliderBase.fn.init.call(that, element, options);
             options = that.options;
-            if (!options.value) {
+            if (!defined(options.value)) {
                 options.value = options.min;
                 element.val(options.min);
             }
@@ -1334,12 +1337,12 @@
 
             SliderBase.fn.init.call(that, element, options);
             options = that.options;
-            if (!options.selectionStart) {
+            if (!defined(options.selectionStart)) {
                 options.selectionStart = options.min;
                 inputs.eq(0).val(options.min);
             }
 
-            if (!options.selectionEnd) {
+            if (!defined(options.selectionEnd)) {
                 options.selectionEnd = options.max;
                 inputs.eq(1).val(options.max);
             }
