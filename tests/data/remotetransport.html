@@ -183,6 +183,30 @@
                 transport.read({ url: "foo", data: { baz: "moo" } });
             });
 
+            test("read constructor data has access to the data to be passed to parameterMap", function() {
+                var data,
+                    called = 0,
+                    transport = new RemoteTransport({
+                        read: {
+                            url: "foo",
+                            data: function(data){
+                                ok(data);
+                                equal(data.baz, "moo");
+                            }
+                        }
+                    });
+
+                $.mockjax({
+                    url: "foo",
+                    response: function() {
+                        start();
+                    }
+                });
+                stop(1);
+                transport.read({ url: "foo", data: { baz: "moo" } });
+                $.mockjaxClear();
+            });
+
             test("read original data is not contaminated when additional data is submitted", 1, function() {
                 var data,
                     called = 0,

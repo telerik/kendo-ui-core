@@ -1311,7 +1311,7 @@
             var that = this,
                 parameters,
                 operation = that.options[type],
-                data = isFunction(operation.data) ? operation.data() : operation.data;
+                data = isFunction(operation.data) ? operation.data(options.data) : operation.data;
 
             options = extend(true, {}, operation, options);
             parameters = extend(true, {}, data, options.data);
