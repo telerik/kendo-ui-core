@@ -185,6 +185,7 @@
             that.element.find("[data-role=page]").width(width);
             dimension.update(true);
 
+            that.page = Math.floor((-that.movable.x) / width);
             that.scrollTo(that.page);
 
             pages = that.pages = ceil(dimension.getTotal() / width);
