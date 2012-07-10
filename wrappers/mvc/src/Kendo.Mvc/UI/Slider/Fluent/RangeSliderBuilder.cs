@@ -34,9 +34,6 @@ namespace Kendo.Mvc.UI.Fluent
         {
             if (range == null)
             {
-                Component.SelectionStart = null;
-                Component.SelectionEnd = null;
-
                 return this;
             }
  
