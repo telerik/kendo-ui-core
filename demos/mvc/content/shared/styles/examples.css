@@ -374,7 +374,8 @@ html
 
 /*featured demos and demos-nav*/
 
-.demos-nav
+.demos-nav,
+.sourceChooser
 {
     border-bottom:1px solid #b2b2b2;
 
@@ -1579,9 +1580,14 @@ pre.prettyprint
 #codeStrip .k-content
 {
     margin: -1px 0 0;
-    padding: 20px 0 0;
+    padding:0;
     overflow: hidden;
     color:#2e2e2e;
+}
+
+#codeStrip h3
+{
+    margin:1.4em 0 0;
 }
 
 #codeStrip .description
@@ -1590,14 +1596,48 @@ pre.prettyprint
     line-height: 1.6;
 }
 
-#codeStrip p
+#codeStrip .description h4
 {
-    line-height: 1.8;
+    background:#dedede;
+    margin-bottom:0;
+    font-weight:normal;
+    padding:.6em 12px .4em;
+    
+    -webkit-border-radius: 5px 5px 0 0;
+    -moz-border-radius: 5px 5px 0 0;
+    border-radius: 5px 5px 0 0;
+}
+
+#codeStrip .description h4+.code-sample
+{
+    margin-top:0;
+    -webkit-border-radius: 0 0 5px 5px;
+    -moz-border-radius: 0 0 5px 5px;
+    border-radius: 0 0 5px 5px;
 }
 
 #codeStrip .codeContainer
 {
     padding: 20px;
+}
+
+.sourceChooser
+{
+    padding:14px 14px 10px;
+    text-align:right;
+}
+
+.sourceChooser>label
+{
+    text-transform:uppercase;
+    display:inline-block;
+    line-height:26px;
+    vertical-align:middle;
+}
+
+.sourceChooser>.k-widget
+{
+    text-align:left;
 }
 
 /* documentation */

@@ -1,7 +1,9 @@
-<div>
-    <span>Sources: </span>
-    @(Html.DropDownList("sources", ViewBag.Sources as IEnumerable<SelectListItem>))
+
+<div class="sourceChooser">
+    <label for="sources">Select source file: </label>
+    @(Html.DropDownList("sources", ViewBag.Sources as IEnumerable<SelectListItem>, new { style = "width:200px" }))
 </div>
+
 <div id="sourceView"></div>
 <script>
     $(function() {
