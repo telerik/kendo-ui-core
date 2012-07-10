@@ -547,7 +547,11 @@
     }
 
     function parseAttr(element, name) {
-        return parse(element.getAttribute(name)) || undefined;
+        var value = parse(element.getAttribute(name));
+        if (value === null) {
+            value = undefined;
+        }
+        return value;
     }
 
     var touchLocation = function(e) {
@@ -692,15 +696,14 @@
                 dragHandle;
 
             element.type = "text";
+            options = extend({}, {
+                value: parseAttr(element, "value"),
+                min: parseAttr(element, "min"),
+                max: parseAttr(element, "max"),
+                smallStep: parseAttr(element, "step")
+            }, options);
 
             element = $(element);
-
-            options = extend({}, {
-                value: parseAttr(element[0], "value"),
-                min: parseAttr(element[0], "min"),
-                max: parseAttr(element[0], "max"),
-                smallStep: parseAttr(element[0], "step")
-            }, options);
 
             if (options && options.enabled === undefined) {
                 options.enabled = !element.is("[disabled]");

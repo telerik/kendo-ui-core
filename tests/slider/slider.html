@@ -283,6 +283,12 @@
                 equal(slider.element.val(), -20);
             });
 
+            test("slider should have get value from the input", function () {
+                var slider = newSlider({ min: -20 }, $("<input value='0' />"));
+
+                equal(slider.element.val(), 0);
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.ui.Slider Tests</h1>

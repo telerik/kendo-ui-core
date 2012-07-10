@@ -312,6 +312,14 @@
                 equal(inputs.eq(1).val(), 40);
             });
 
+            test("rangeSlider should get values from the inputs", function () {
+                var rangeSlider = newRangeSlider({ min: -2, max: 40 }, $("<div><input value='0' /><input value='0' /></div>")),
+                    inputs = rangeSlider.element.find("input");
+
+                equal(inputs.eq(0).val(), 0);
+                equal(inputs.eq(1).val(), 0);
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.ui.RangeSlider Tests</h1>
