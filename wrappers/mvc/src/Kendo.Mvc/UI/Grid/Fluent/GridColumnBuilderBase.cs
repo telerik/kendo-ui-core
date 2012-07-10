@@ -9,7 +9,7 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent interface for configuring columns.
     /// </summary>
-    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="TColumn"></typeparam>
     /// <typeparam name="TColumnBuilder">The type of the column builder.</typeparam>
     public abstract class GridColumnBuilderBase<TColumn, TColumnBuilder> : IHideObjectMembers
         where TColumnBuilder : GridColumnBuilderBase<TColumn, TColumnBuilder>

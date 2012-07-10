@@ -96,7 +96,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Creates a new <see cref="Grid&lt;T&gt;"/> bound to the specified data item type.
+        /// Creates a new <see cref="Kendo.Mvc.UI.Grid&lt;T&gt;"/> bound to the specified data item type.
         /// </summary>
         /// <example>
         /// <typeparam name="T">The type of the data item</typeparam>
@@ -106,10 +106,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///             .BindTo(Model)
         /// %&gt;
         /// </code>
-        /// </example>
-        /// <remarks>
-        /// Do not forget to bind the grid using the <see cref="GridBuilder{T}.BindTo(System.String)" /> method when using this overload.
-        /// </remarks>
+        /// </example>      
         public virtual GridBuilder<T> Grid<T>() where T : class
         {
             return new GridBuilder<T>(new Grid<T>(ViewContext,
@@ -119,7 +116,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Creates a new <see cref="Kendo.Web.UI.Grid&lt;T&gt;"/> bound to the specified data source.
+        /// Creates a new <see cref="Kendo.Mvc.UI.Grid&lt;T&gt;"/> bound to the specified data source.
         /// </summary>
         /// <typeparam name="T">The type of the data item</typeparam>
         /// <param name="dataSource">The data source.</param>
@@ -140,7 +137,7 @@ namespace Kendo.Mvc.UI.Fluent
         }        
 
         /// <summary>
-        /// Creates a new <see cref="Kendo.Web.UI.Grid&lt;T&gt;"/> bound to a DataTable.
+        /// Creates a new <see cref="Kendo.Mvc.UI.Grid&lt;T&gt;"/> bound to a DataTable.
         /// </summary>
         /// <param name="dataSource">DataTable from which the grid instance will be bound</param>
         public virtual GridBuilder<DataRowView> Grid(DataTable dataSource)
@@ -153,7 +150,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Creates a new <see cref="Kendo.Web.UI.Grid&lt;T&gt;"/> bound to a DataView.
+        /// Creates a new <see cref="Kendo.Mvc.UI.Grid&lt;T&gt;"/> bound to a DataView.
         /// </summary>
         /// <param name="dataSource">DataView from which the grid instance will be bound</param>
         public virtual GridBuilder<DataRowView> Grid(DataView dataSource)
@@ -166,7 +163,7 @@ namespace Kendo.Mvc.UI.Fluent
         }   
 
         /// <summary>
-        /// Creates a new <see cref="Kendo.Web.UI.Grid&lt;T&gt;"/> bound an item in ViewData.
+        /// Creates a new <see cref="Kendo.Mvc.UI.Grid&lt;T&gt;"/> bound an item in ViewData.
         /// </summary>
         /// <typeparam name="T">Type of the data item</typeparam>
         /// <param name="dataSourceViewDataKey">The data source view data key.</param>

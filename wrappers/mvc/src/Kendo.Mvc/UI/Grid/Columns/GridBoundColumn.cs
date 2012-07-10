@@ -21,7 +21,7 @@ namespace Kendo.Mvc.UI
         private static readonly ReaderWriterLockSlim syncLock = new ReaderWriterLockSlim();
         
         /// <summary>
-        /// Initializes a new instance of the <see cref="GridBoundColumn{T}"/> class.
+        /// Initializes a new instance of the <see cref="GridBoundColumn{TModel, TValue}"/> class.
         /// </summary>
         /// <param name="grid"></param>
         /// <param name="expression"></param>

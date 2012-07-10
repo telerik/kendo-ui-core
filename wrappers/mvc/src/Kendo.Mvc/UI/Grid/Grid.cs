@@ -619,7 +619,7 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether to add the <see cref="Name"/> property of the grid as a prefix in url parameters.
+        /// Gets or sets a value indicating whether to add the <see cref="WidgetBase.Name"/> property of the grid as a prefix in url parameters.
         /// </summary>
         /// <value><c>true</c> if prefixing is enabled; otherwise, <c>false</c>. The default value is <c>true</c></value>
         public bool PrefixUrlParameters

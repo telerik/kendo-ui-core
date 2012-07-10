@@ -137,7 +137,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Sets command action and controller.
         /// </summary>        
         /// <param name="actionName">The action name</param>
-        /// <param name="conrollerName">The controller name</param>
+        /// <param name="controllerName">The controller name</param>
         /// <returns></returns>
         public GridToolBarCustomCommandBuilder<T> Action(string actionName, string controllerName)
         {
@@ -148,7 +148,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Sets command action and controller.
         /// </summary>        
         /// <param name="actionName">The action name</param>
-        /// <param name="conrollerName">The controller name</param>
+        /// <param name="controllerName">The controller name</param>
         /// <param name="routeValues">The route values</param>
         /// <returns></returns>
         public GridToolBarCustomCommandBuilder<T> Action(string actionName, string controllerName, object routeValues)
@@ -164,7 +164,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Sets command action and controller.
         /// </summary>        
         /// <param name="actionName">The action name</param>
-        /// <param name="conrollerName">The controller name</param>
+        /// <param name="controllerName">The controller name</param>
         /// <param name="routeValues">The route values</param>
         /// <returns></returns>
         public GridToolBarCustomCommandBuilder<T> Action(string actionName, string controllerName, RouteValueDictionary routeValues)

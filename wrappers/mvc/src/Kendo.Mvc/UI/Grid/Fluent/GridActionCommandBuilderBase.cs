@@ -7,8 +7,7 @@ namespace Kendo.Mvc.UI.Fluent
 
     /// <summary>
     /// Defines the fluent interface for configuring command.
-    /// </summary>
-    /// <typeparam name="TModel">The type of the model</typeparam>
+    /// </summary>    
     /// <typeparam name="TCommand">The type of the command.</typeparam>
     /// <typeparam name="TBuilder">The type of the builder.</typeparam>
     public abstract class GridActionCommandBuilderBase<TCommand, TBuilder>  : IHideObjectMembers
@@ -16,9 +15,9 @@ namespace Kendo.Mvc.UI.Fluent
         where TBuilder : GridActionCommandBuilderBase<TCommand, TBuilder>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="GridActionCommandBuilderBase&lt;TModel, TColumn, TBuilder&gt;"/> class.
+        /// Initializes a new instance of the <see cref="GridActionCommandBuilderBase&lt; TColumn, TBuilder&gt;"/> class.
         /// </summary>
-        /// <param name="column">The column.</param>
+        /// <param name="command">The command.</param>
         public GridActionCommandBuilderBase(TCommand command)
         {
             Command = command;
