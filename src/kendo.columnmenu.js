@@ -293,7 +293,7 @@
                         '#}#'+
                     '#}#'+
                     '#if(filterable){#'+
-                        '<li class="k-item k-filter-item"><span class="k-link"><span class="k-sprite k-i-filter"></span>${messages.filter}</span><ul>'+
+                        '<li class="k-item k-filter-item"><span class="k-link"><span class="k-sprite k-filter"></span>${messages.filter}</span><ul>'+
                             '<li><div class="k-filterable"></div></li>'+
                         '</ul></li>'+
                     '#}#'+
