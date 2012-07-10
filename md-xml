@@ -44,6 +44,61 @@ function getTypesByNamespace(namespace) {
     return types;
 }
 
+function sanitizeGenerics(name) {
+    var result = "";
+    var idx = 0;
+    var length = name.length;
+    var open = 0;
+    var close = 0;
+
+    while (idx < length) {
+        var ch = name.charAt(idx);
+        idx ++;
+
+        if (ch == "{") {
+            open ++;
+            result += "<";
+            continue;
+        }
+
+        if (ch == "}") {
+            close ++;
+            result += ">";
+            continue;
+        }
+
+        if (ch == ",") {
+           if (close != open) {
+               result += ",";
+           } else {
+               result += "|";
+           }
+
+           continue;
+        }
+
+        if (ch == "`") {
+            var ticks = 0;
+
+            while (ch = name.charAt(idx++) == "`") {
+                ticks ++;
+            }
+
+            if (open) {
+                result += "T" + (ticks > 0 ? ticks : "");
+            } else {
+                result += "<T" + (ticks > 0 ? ticks : "") + ">";
+            }
+
+            continue;
+        }
+
+        result += ch;
+    }
+
+    return result;
+}
+
 function populateMemebers(type) {
     var namespaceRegExp = new RegExp("^([MFP]):" + type.name.replace(/\./g, "\\.") + "\\.(.*)");
 
@@ -55,17 +110,7 @@ function populateMemebers(type) {
 
         if (namespaceRegExp.test(name)) {
             kind = RegExp.$1;
-            shortName = RegExp.$2;
-
-            // Convert generics to human readable format
-            shortName = shortName.replace(/(`+)\d/g, function($0, $1) {
-                    return "<T" + ($1.length > 1 ? $1.length - 1 : "") + ">";
-                })
-                .replace(/{/g, "<")
-                .replace(/}/g, ">")
-                .replace(/>>/g, ">")
-                .replace(/<</g, "<")
-                .replace(/>,</g, "|"); // use "|" in order to be able to split by "," when determining the type of the parameters in emitMethod
+            shortName = sanitizeGenerics(RegExp.$2);
 
             if (kind == "M" && name.indexOf("#ctor") < 0) {
                 var method = parseMethod(member);
@@ -155,7 +200,7 @@ function emitMethod(method) {
 
     // replace any "|" with "," (coming from generics)
 
-    markdown += "\n\n### " + method.name.replace(/\|/g, ",");
+    markdown += "\n\n### " + method.name.replace(/\|/g, ",").replace(/([<>])/g, "\\$1");
 
     if (method.summary) {
         markdown += "\n" + method.summary;
@@ -170,7 +215,7 @@ function emitMethod(method) {
     }
 
     if (method.params) {
-        var paramTypes = /\(([^\)]*)\)$/.exec(method.name)[1].split(",");
+        var paramTypes = /\(([^\)]*)\)$/.exec(method.name)[1].split("|");
 
         markdown += "\n\n#### Parameters";
 
