@@ -13,7 +13,7 @@
     var specialRules = ["url", "email", "number", "date", "boolean"];
 
     function fieldType(field) {
-        field = field || "";
+        field = field != null ? field : "";
         return field.type || $.type(field) || "string";
     }
 
@@ -35,7 +35,7 @@
     function createAttributes(options) {
         var field = (options.model.fields || options.model)[options.field],
             type = fieldType(field),
-            validation = field.validation,
+            validation = field ? field.validation : {},
             ruleName,
             DATATYPE = kendo.attr("type"),
             BINDING = kendo.attr("bind"),
@@ -149,17 +149,14 @@
 
             editor = editor ? editor : editors["string"];
 
-            if (modelField) {
+            if (isCustomEditor && typeof field.editor === "string") {
+                editor = function(container) {
+                    container.append(field.editor);
+                };
+            }
 
-                if (isCustomEditor && typeof field.editor === "string") {
-                    editor = function(container) {
-                        container.append(field.editor);
-                    };
-                }
-
-                container = container.length ? container : that.element;
-                editor(container, extend(true, {}, isObject ? field : { field: fieldName }, { model: model }));
-           }
+            container = container.length ? container : that.element;
+            editor(container, extend(true, {}, isObject ? field : { field: fieldName }, { model: model }));
         },
 
         _validate: function(e) {
