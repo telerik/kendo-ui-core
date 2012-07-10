@@ -519,12 +519,6 @@
     margin: 0 1em;
 }
 
-.km-android .km-listinset > li,
-.km-android .km-listgroupinset > li
-{
-    margin-top: 0;
-}
-
 .km-android .km-listview .km-list
 {
     border-top: 1px solid #333;
@@ -546,13 +540,20 @@
     color: #fff;
 }
 
-.km-android .km-listgroup > li,
-.km-android .km-listgroupinset > li
+.km-android .km-group-title
 {
+    margin-top: 0;
     color: #bebebe;
     background: transparent;
     padding-top: .2em;
     line-height: inherit;
+}
+
+.km-android .km-scroll-header .km-group-title
+{
+    margin: 0 1em;
+    border-bottom: 1px solid #333;
+    background: #000;
 }
 
 .km-android .km-list

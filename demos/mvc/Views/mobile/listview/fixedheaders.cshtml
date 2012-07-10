@@ -1,5 +1,5 @@
 <div data-role="view" id="listview-headers" data-init="mobileListViewHeadersInit" data-title="Fixed Headers">
-    <ul id="custom-listview"></ul>
+    <ul id="fixed-listview"></ul>
 </div>
 
 <script type="text/x-kendo-template" id="listviewHeadersTemplate">
@@ -20,7 +20,7 @@
     ];
 
     function mobileListViewHeadersInit() {
-        $("#custom-listview").kendoMobileListView({
+        $("#fixed-listview").kendoMobileListView({
             dataSource: kendo.data.DataSource.create({data: groupedData, group: "letter" }),
             template: $("#listviewHeadersTemplate").html(),
             headerTemplate: "${value}",

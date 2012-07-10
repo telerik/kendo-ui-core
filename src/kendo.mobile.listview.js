@@ -13,8 +13,8 @@
         data = kendo.data,
         GROUP_CLASS = "km-group-title",
         ACTIVE_CLASS = "km-state-active",
-        GROUP_WRAPPER = '<div class="' + GROUP_CLASS + '"><span class="km-text"></span></div>',
-        GROUP_TEMPLATE = kendo.template('<li><div class="' + GROUP_CLASS + '">#= this.headerTemplate(data) #</div><ul>#= kendo.render(this.template, data.items)#</ul></li>'),
+        GROUP_WRAPPER = '<div class="' + GROUP_CLASS + '"><div class="km-text"></div></div>',
+        GROUP_TEMPLATE = kendo.template('<li><div class="' + GROUP_CLASS + '"><div class="km-text">#= this.headerTemplate(data) #</div></div><ul>#= kendo.render(this.template, data.items)#</ul></li>'),
         WRAPPER = '<div class="km-listview-wrapper" />',
 
         MOUSEDOWN = support.mousedown,
