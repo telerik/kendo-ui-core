@@ -700,8 +700,8 @@
             });
 
             test("infer of id field", function() {
-                var list = $("<ul><li>" +
-                        "<div><span data-id='42'>foo</span></div>"+
+                var list = $("<ul><li data-id='42'>" +
+                        "<div><span>foo</span></div>"+
                     "</li></ul>"),
                     dataSource = HierarchicalDataSource.create({
                         list: list,
@@ -717,9 +717,9 @@
             });
 
             test("infer of nested url / spriteCssClass / imageUrl fields", function() {
-                var list = $("<ul><li>" +
+                var list = $("<ul><li data-id='7'>" +
                         "<div><img class='k-image' src='image.png' />" +
-                        "<a href='http://kendoui.com/' data-id='7'>" +
+                        "<a href='http://kendoui.com/'>" +
                         "<span class='k-sprite spriteClass'></span>" +
                         "foo</a></div>"+
                     "</li></ul>"),

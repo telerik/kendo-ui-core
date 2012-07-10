@@ -2867,7 +2867,7 @@
             list = children.filter("ul");
             children = children.filter(":not(ul)");
 
-            record.id = children.find("span,a").attr("data-id");
+            record.id = item.attr("data-id");
 
             if (textChild) {
                 record[textField] = textChild.nodeType == 3 ? textChild.nodeValue : children.text();
