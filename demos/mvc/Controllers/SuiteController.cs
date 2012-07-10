@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Kendo.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text.RegularExpressions;
 using System.Web.Mvc;
-using Kendo.Models;
 using IOFile = System.IO.File;
 
 namespace Kendo.Controllers
@@ -11,7 +12,7 @@ namespace Kendo.Controllers
     public class SuiteController : BaseController
     {
         private List<string> examplesUrl = new List<string>();
-        protected static readonly docsURL = "http://docs.kendoui.com/api/{0}/{1}";
+        protected static readonly string docsURL = "http://docs.kendoui.com/api/{0}/{1}";
 
         //
         // GET: /Web/
@@ -22,9 +23,6 @@ namespace Kendo.Controllers
             ViewBag.Section = section;
             ViewBag.Example = example;
             ViewBag.Description = LoadDescription(suite, section);
-            ViewBag.ConfigurationDocPath = DocPath(suite, section, "configuration");
-            ViewBag.MethodsDocPath = DocPath(suite, section, "methods");
-            ViewBag.EventsDocPath = DocPath(suite, section, "events");
 #if DEBUG
             ViewBag.Debug = true;
 #else
@@ -150,24 +148,19 @@ namespace Kendo.Controllers
         }
 
         private string GetTopic(string html, string topic) {
-            var splits = html.Split(new string[] { "<h2 class=\"toc\"" }, System.StringSplitOptions.None).ToList();
+            var splits = html.Split(new string[] { "<h2" }, System.StringSplitOptions.None).ToList();
             var content = string.Empty;
 
             if (splits.Count > 0)
             {
-                if (splits[0].IndexOf("doctype", StringComparison.OrdinalIgnoreCase) > -1)
-                {
-                    splits.RemoveAt(0);
-                }
+                content = splits.Where(split => split.IndexOf(topic, StringComparison.OrdinalIgnoreCase) > -1).FirstOrDefault();
 
-                if (splits[0].IndexOf("contents", StringComparison.OrdinalIgnoreCase) > -1)
+                if (!string.IsNullOrEmpty(content))
                 {
+                    splits = content.Split('\n').ToList();
                     splits.RemoveAt(0);
-                }
 
-                if (splits[0].IndexOf(topic, StringComparison.OrdinalIgnoreCase) > -1)
-                {
-                    content = splits[0].Split('\n');
+                    content = string.Join("", splits);
                 }
             }
 
