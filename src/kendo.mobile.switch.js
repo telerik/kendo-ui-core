@@ -231,7 +231,7 @@
             if (that._animateBackground) {
                 that.background
                     .kendoStop(true, true)
-                    .kendoAnimate({ effects: "slideMargin", offset: distance, reverse: !checked, axis: "left", duration: duration, ease: "linear" });
+                    .kendoAnimate({ effects: "slideMargin", offset: distance, reset: true, reverse: !checked, axis: "left", duration: duration, ease: "linear" });
             }
 
             handle
@@ -240,6 +240,7 @@
                     effects: "slideTo",
                     duration: duration,
                     offset: distance + "px,0",
+                    reset: true,
                     complete: function () {
                         if (value !== checked) {
                             element.checked = checked;

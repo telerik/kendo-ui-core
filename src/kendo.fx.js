@@ -828,7 +828,8 @@
                     extender = {}, reverse = options.reverse;
 
                 if (transforms && options.transition !== false) {
-                    extender.translate = !reverse ? offset + PX : 0;
+                    extender.translatex = !reverse ? offset[0] : 0;
+                    extender.translatey = !reverse ? offset[1] : 0;
                 } else {
                     extender.left = !reverse ? offset[0] : 0;
                     extender.top = !reverse ? offset[1] : 0;
