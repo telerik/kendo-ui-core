@@ -38,6 +38,78 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Template to be used for rendering the item checkboxes in the treeview.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().TreeView()
+        ///             .Name("TreeView")
+        ///             .CheckboxTemplate("#= data #")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TreeViewBuilder CheckboxTemplate(string template)
+        {
+            Component.CheckboxTemplate = template;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Id of the template element to be used for rendering the item checkboxes in the treeview.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().TreeView()
+        ///             .Name("TreeView")
+        ///             .CheckboxTemplateId("widgetTemplateId")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TreeViewBuilder CheckboxTemplateId(string checkboxTemplateId)
+        {
+            Component.CheckboxTemplateId = checkboxTemplateId;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Template to be used for rendering the items in the treeview.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().TreeView()
+        ///             .Name("TreeView")
+        ///             .Template("#= data #")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TreeViewBuilder Template(string template)
+        {
+            Component.Template = template;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Id of the template element to be used for rendering the items in the treeview.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().TreeView()
+        ///             .Name("TreeView")
+        ///             .TemplateId("widgetTemplateId")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TreeViewBuilder TemplateId(string templateId)
+        {
+            Component.TemplateId = templateId;
+
+            return this;
+        }
+
+        /// <summary>
         /// Defines the items in the TreeView
         /// </summary>
         /// <param name="addAction">The add action.</param>
@@ -103,7 +175,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TreeViewBuilder BindTo(string viewDataKey, Action<TreeViewItem, SiteMapNode> siteMapAction)
         {
-
             Component.BindTo(viewDataKey, siteMapAction);
 
             return this;

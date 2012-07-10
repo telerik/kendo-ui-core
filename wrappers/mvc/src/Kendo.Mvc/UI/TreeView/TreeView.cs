@@ -147,6 +147,30 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        public string Template
+        {
+            get;
+            set;
+        }
+
+        public string TemplateId
+        {
+            get;
+            set;
+        }
+
+        public string CheckboxTemplate
+        {
+            get;
+            set;
+        }
+
+        public string CheckboxTemplateId
+        {
+            get;
+            set;
+        }
+
         public override void WriteInitializationScript(TextWriter writer)
         {
             var options = new Dictionary<string, object>(Events);
@@ -188,6 +212,30 @@ namespace Kendo.Mvc.UI
             if (!string.IsNullOrEmpty(DataImageUrlField))
             {
                 options["dataImageUrlField"] = DataImageUrlField;
+            }
+
+            var idPrefix = "#";
+            if (IsInClientTemplate)
+            {
+                idPrefix = "\\" + idPrefix;
+            }
+
+            if (!string.IsNullOrEmpty(TemplateId))
+            {
+                options["template"] = new ClientHandlerDescriptor { HandlerName = string.Format("$('{0}{1}').html()", idPrefix, TemplateId) };
+            }
+            else if (!string.IsNullOrEmpty(Template))
+            {
+                options["template"] = Template;
+            }
+
+            if (!string.IsNullOrEmpty(CheckboxTemplateId))
+            {
+                options["checkboxTemplate"] = new ClientHandlerDescriptor { HandlerName = string.Format("$('{0}{1}').html()", idPrefix, CheckboxTemplateId) };
+            }
+            else if (!string.IsNullOrEmpty(CheckboxTemplate))
+            {
+                options["checkboxTemplate"] = CheckboxTemplate;
             }
 
             //TODO: Use new Init writer to output animation dictionary
