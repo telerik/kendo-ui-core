@@ -736,6 +736,7 @@
             }
 
             options.complete = browser.msie ? function() { setTimeout(complete, 0); } : complete;
+            options.reset = true; // Reset transforms if there are any.
 
             if ("slide" in options.effects) {
                 element.kendoAnimate(options);
