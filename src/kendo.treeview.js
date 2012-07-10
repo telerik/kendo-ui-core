@@ -476,6 +476,10 @@
                 options.template = that._textTemplate();
             }
 
+            if (options.checkboxTemplate && typeof options.checkboxTemplate == "string") {
+                options.checkboxTemplate = template(options.checkboxTemplate);
+            }
+
             that.templates = {
                 item: that._itemTemplate(),
                 loading: that._loadingTemplate()

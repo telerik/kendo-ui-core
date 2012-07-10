@@ -90,6 +90,19 @@
                 equal(items.length, 1);
                 equal(items.eq(0).find(":checkbox").length, 1);
             });
+
+            test("checkboxTemplate as string", function() {
+                var treeview = createTreeView({
+                    dataSource: [
+                        { text: "bar" }
+                    ],
+                    checkboxTemplate: "<input type='checkbox' value='#= item.text #' />"
+                });
+
+                var checkboxes = treeview.find(":checkbox");
+
+                equal(checkboxes.length, 1);
+            });
         </script>
 
         <div id="qunit-fixture"> </div>
