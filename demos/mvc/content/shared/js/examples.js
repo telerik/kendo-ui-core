@@ -204,9 +204,13 @@
 
                     animated.kendoStop().kendoAnimate(extend({}, animation.hide, { complete: function(element) {
                         if (element[0] == exampleElement[0]) {
+                            animated.css("visibility", "hidden"); // Hide the element with restored opacity.
                             replaceTheme();
                             setTimeout(function() {
-                                animated.kendoStop().kendoAnimate(animation.show);
+                                animated
+                                    .css("visibility", "visible")
+                                    .kendoStop()
+                                    .kendoAnimate(animation.show);
                             }, 100);
                         }
                     }}));
