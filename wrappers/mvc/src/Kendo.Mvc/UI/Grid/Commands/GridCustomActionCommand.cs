@@ -13,7 +13,7 @@ namespace Kendo.Mvc.UI
             DataRouteValues = new List<IGridDataKey<T>>();
             SendDataKeys = true;
             SendState = true;
-            Click = new ClientEvent();
+            Click = new ClientHandlerDescriptor();
         }        
         
         public IList<IGridDataKey<T>> DataRouteValues 
@@ -34,7 +34,7 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        public ClientEvent Click
+        public ClientHandlerDescriptor Click
         {
             get;
             set;

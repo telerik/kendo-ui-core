@@ -22,7 +22,7 @@ namespace Kendo.Mvc.UI.Tests
         {
             builder.Change("change");
 
-            var @event = clientEvents["change"] as ClientEvent;
+            var @event = clientEvents["change"] as ClientHandlerDescriptor;
 
             Assert.NotNull(@event);
 
@@ -36,9 +36,9 @@ namespace Kendo.Mvc.UI.Tests
 
             builder.Change(codeBlock);
 
-            var @event = clientEvents["change"] as ClientEvent;
+            var @event = clientEvents["change"] as ClientHandlerDescriptor;
 
-            @event.InlineCodeBlock.ShouldBeSameAs(codeBlock);
+            @event.TemplateDelegate.ShouldBeSameAs(codeBlock);
         }
 
         [Fact]
@@ -46,7 +46,7 @@ namespace Kendo.Mvc.UI.Tests
         {
             builder.Open("open");
 
-            var @event = clientEvents["open"] as ClientEvent;
+            var @event = clientEvents["open"] as ClientHandlerDescriptor;
 
             Assert.NotNull(@event);
 
@@ -60,9 +60,9 @@ namespace Kendo.Mvc.UI.Tests
 
             builder.Open(codeBlock);
 
-            var @event = clientEvents["open"] as ClientEvent;
+            var @event = clientEvents["open"] as ClientHandlerDescriptor;
 
-            @event.InlineCodeBlock.ShouldBeSameAs(codeBlock);
+            @event.TemplateDelegate.ShouldBeSameAs(codeBlock);
         }
 
         [Fact]
@@ -70,7 +70,7 @@ namespace Kendo.Mvc.UI.Tests
         {
             builder.Close("close");
 
-            var @event = clientEvents["close"] as ClientEvent;
+            var @event = clientEvents["close"] as ClientHandlerDescriptor;
 
             Assert.NotNull(@event);
 
@@ -84,9 +84,9 @@ namespace Kendo.Mvc.UI.Tests
 
             builder.Close(codeBlock);
 
-            var @event = clientEvents["close"] as ClientEvent;
+            var @event = clientEvents["close"] as ClientHandlerDescriptor;
 
-            @event.InlineCodeBlock.ShouldBeSameAs(codeBlock);
+            @event.TemplateDelegate.ShouldBeSameAs(codeBlock);
         }
     }
 }

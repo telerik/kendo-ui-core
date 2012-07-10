@@ -30,7 +30,7 @@ namespace Kendo.Mvc.UI
         {
             command.Click.HandlerName = "myCustomClickHandler";
 
-            ((ClientEvent)Serialize()["click"]).HandlerName.ShouldEqual("myCustomClickHandler");
+            ((ClientHandlerDescriptor)Serialize()["click"]).HandlerName.ShouldEqual("myCustomClickHandler");
         }
 
         [Fact]

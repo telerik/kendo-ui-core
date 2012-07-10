@@ -14,7 +14,7 @@ namespace Kendo.Mvc.UI
         public CrudOperation()
         {            
             RouteValues = new RouteValueDictionary();
-            Data = new ClientEvent();
+            Data = new ClientHandlerDescriptor();
         }
 
         private string Encode(string value)
@@ -82,7 +82,7 @@ namespace Kendo.Mvc.UI
             }
         }
 
-        public ClientEvent Data { get; set; }
+        public ClientHandlerDescriptor Data { get; set; }
 
         public RouteValueDictionary RouteValues
         {

@@ -58,7 +58,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
         [Fact]
         public void OnDataBound_client_side_event_serialized()
         {
-            chart.Events["dataBound"] = new ClientEvent() { HandlerName = "dataBoundHandler" };
+            chart.Events["dataBound"] = new ClientHandlerDescriptor() { HandlerName = "dataBoundHandler" };
             chart.WriteInitializationScript(textWriter.Object);
 
             output.ShouldContain("{dataBound:dataBoundHandler}");
@@ -67,7 +67,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
         [Fact]
         public void OnSeriesClick_client_side_event_serialized()
         {
-            chart.Events["seriesClick"] = new ClientEvent() { HandlerName = "seriesClickHandler" };
+            chart.Events["seriesClick"] = new ClientHandlerDescriptor() { HandlerName = "seriesClickHandler" };
             chart.WriteInitializationScript(textWriter.Object);
 
             output.ShouldContain("{seriesClick:seriesClickHandler}");

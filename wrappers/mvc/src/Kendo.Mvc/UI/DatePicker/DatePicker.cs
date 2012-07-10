@@ -86,7 +86,7 @@ namespace Kendo.Mvc.UI
 
             if (FooterId.HasValue())
             {
-                options["footer"] = new ClientEvent { HandlerName = string.Format("$('{0}{1}').html()", idPrefix, FooterId) };
+                options["footer"] = new ClientHandlerDescriptor { HandlerName = string.Format("$('{0}{1}').html()", idPrefix, FooterId) };
             }
             else if (Footer.HasValue())
             {

@@ -763,7 +763,7 @@ namespace Kendo.Mvc.UI
 
             if (!String.IsNullOrEmpty(ClientDetailTemplateId))
             {
-                options["detailTemplate"] = new ClientEvent { HandlerName = String.Format("kendo.template($('{0}{1}').html())", idPrefix, ClientDetailTemplateId) };                                
+                options["detailTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template($('{0}{1}').html())", idPrefix, ClientDetailTemplateId) };                                
             }
 
             if (!String.IsNullOrEmpty(ClientRowTemplate))
@@ -947,7 +947,7 @@ namespace Kendo.Mvc.UI
 
             if (!IsClientBinding)
             {
-                popup.Events["close"] = new ClientEvent { InlineCodeBlock = obj => "function(e) { e.preventDefault();" + string.Format("window.location.href = \"{0}\";", cancelUrl) + "}" };
+                popup.Events["close"] = new ClientHandlerDescriptor { TemplateDelegate = obj => "function(e) { e.preventDefault();" + string.Format("window.location.href = \"{0}\";", cancelUrl) + "}" };
             }
             
             if (!popup.Name.HasValue())

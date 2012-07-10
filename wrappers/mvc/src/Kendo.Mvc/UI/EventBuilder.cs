@@ -15,12 +15,12 @@ namespace Kendo.Mvc.UI.Fluent
 
         protected void Handler(string name, string handler)
         {
-            Events[name] = new ClientEvent { HandlerName = handler };
+            Events[name] = new ClientHandlerDescriptor { HandlerName = handler };
         }
 
         protected void Handler(string name, Func<object, object> handler)
         {
-            Events[name] = new ClientEvent { InlineCodeBlock = handler };
+            Events[name] = new ClientHandlerDescriptor { TemplateDelegate = handler };
         }
     }
 }

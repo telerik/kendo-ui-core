@@ -14,7 +14,7 @@ namespace Kendo.Mvc.UI.Fluent
 
         public GridCustomActionCommandBuilder<T> Click(Func<object, object> handler)
         {            
-            Command.Click.InlineCodeBlock = handler;
+            Command.Click.TemplateDelegate = handler;
 
             return this;
         }

@@ -41,7 +41,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
         public void DataBound_with_string_should_set_HandlerName()
         {
             builder.DataBound(handlerName);
-            ((ClientEvent) clientEvents["dataBound"]).HandlerName.ShouldEqual(handlerName);
+            ((ClientHandlerDescriptor) clientEvents["dataBound"]).HandlerName.ShouldEqual(handlerName);
         }
 
         [Fact]
@@ -67,7 +67,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
         public void SeriesClick_with_string_should_set_HandlerName()
         {
             builder.SeriesClick(handlerName);
-            ((ClientEvent) clientEvents["seriesClick"]).HandlerName.ShouldEqual(handlerName);
+            ((ClientHandlerDescriptor) clientEvents["seriesClick"]).HandlerName.ShouldEqual(handlerName);
         }
 
         [Fact]
@@ -93,7 +93,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
         public void SeriesHover_with_string_should_set_HandlerName()
         {
             builder.SeriesHover(handlerName);
-            ((ClientEvent) clientEvents["seriesHover"]).HandlerName.ShouldEqual(handlerName);
+            ((ClientHandlerDescriptor) clientEvents["seriesHover"]).HandlerName.ShouldEqual(handlerName);
         }
 
         [Fact]
@@ -119,7 +119,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
         public void AxisLabelClick_with_string_should_set_HandlerName()
         {
             builder.AxisLabelClick(handlerName);
-            ((ClientEvent)clientEvents["axisLabelClick"]).HandlerName.ShouldEqual(handlerName);
+            ((ClientHandlerDescriptor)clientEvents["axisLabelClick"]).HandlerName.ShouldEqual(handlerName);
         }
 
         [Fact]
@@ -145,7 +145,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
         public void PlotAreaClick_with_string_should_set_HandlerName()
         {
             builder.PlotAreaClick(handlerName);
-            ((ClientEvent)clientEvents["plotAreaClick"]).HandlerName.ShouldEqual(handlerName);
+            ((ClientHandlerDescriptor)clientEvents["plotAreaClick"]).HandlerName.ShouldEqual(handlerName);
         }
 
         [Fact]

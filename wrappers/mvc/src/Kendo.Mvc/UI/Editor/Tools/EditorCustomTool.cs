@@ -14,11 +14,11 @@ namespace Kendo.Mvc.UI
     {
         public EditorCustomButtonTool()
         {
-            Exec = new ClientEvent();
+            Exec = new ClientHandlerDescriptor();
         }
 
         public string Name { get; set; }
         public string ToolTip { get; set; }
-        public ClientEvent Exec { get; set; }
+        public ClientHandlerDescriptor Exec { get; set; }
     }
 }

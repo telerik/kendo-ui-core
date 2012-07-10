@@ -130,7 +130,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>                
         public CrudOperationBuilder Data(Func<object, object> handler)
         {
-            operation.Data.InlineCodeBlock = handler;
+            operation.Data.TemplateDelegate = handler;
 
             return this;
         }

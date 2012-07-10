@@ -41,7 +41,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
         public void Select_with_string_should_set_HandlerName()
         {
             builder.Select(handlerName);
-            ((ClientEvent) clientEvents["select"]).HandlerName.ShouldEqual(handlerName);
+            ((ClientHandlerDescriptor) clientEvents["select"]).HandlerName.ShouldEqual(handlerName);
         }
 
         [Fact]
@@ -67,7 +67,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
         public void Upload_with_string_should_set_HandlerName()
         {
             builder.Upload(handlerName);
-            ((ClientEvent)clientEvents["upload"]).HandlerName.ShouldEqual(handlerName);
+            ((ClientHandlerDescriptor)clientEvents["upload"]).HandlerName.ShouldEqual(handlerName);
         }
 
         [Fact]
@@ -93,7 +93,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
         public void Success_with_string_should_set_HandlerName()
         {
             builder.Success(handlerName);
-            ((ClientEvent)clientEvents["success"]).HandlerName.ShouldEqual(handlerName);
+            ((ClientHandlerDescriptor)clientEvents["success"]).HandlerName.ShouldEqual(handlerName);
         }
 
         [Fact]
@@ -119,7 +119,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
         public void Error_with_string_should_set_HandlerName()
         {
             builder.Error(handlerName);
-            ((ClientEvent)clientEvents["error"]).HandlerName.ShouldEqual(handlerName);
+            ((ClientHandlerDescriptor)clientEvents["error"]).HandlerName.ShouldEqual(handlerName);
         }
 
         [Fact]
@@ -145,7 +145,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
         public void Complete_with_string_should_set_HandlerName()
         {
             builder.Complete(handlerName);
-            ((ClientEvent)clientEvents["complete"]).HandlerName.ShouldEqual(handlerName);
+            ((ClientHandlerDescriptor)clientEvents["complete"]).HandlerName.ShouldEqual(handlerName);
         }
 
         [Fact]
@@ -171,7 +171,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
         public void Cancel_with_string_should_set_HandlerName()
         {
             builder.Cancel(handlerName);
-            ((ClientEvent)clientEvents["cancel"]).HandlerName.ShouldEqual(handlerName);
+            ((ClientHandlerDescriptor)clientEvents["cancel"]).HandlerName.ShouldEqual(handlerName);
         }
 
         [Fact]
@@ -197,7 +197,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
         public void Remove_with_string_should_set_HandlerName()
         {
             builder.Remove(handlerName);
-            ((ClientEvent)clientEvents["remove"]).HandlerName.ShouldEqual(handlerName);
+            ((ClientHandlerDescriptor)clientEvents["remove"]).HandlerName.ShouldEqual(handlerName);
         }
 
         [Fact]
@@ -223,7 +223,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
         public void Progress_with_string_should_set_HandlerName()
         {
             builder.Progress(handlerName);
-            ((ClientEvent)clientEvents["progress"]).HandlerName.ShouldEqual(handlerName);
+            ((ClientHandlerDescriptor)clientEvents["progress"]).HandlerName.ShouldEqual(handlerName);
         }
 
         [Fact]

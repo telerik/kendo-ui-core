@@ -83,7 +83,7 @@ namespace Kendo.Mvc.UI
                     name = "\\" + name;
                 }
 
-                DataSource.Transport.Read.Data = new ClientEvent
+                DataSource.Transport.Read.Data = new ClientHandlerDescriptor
                 {
                     HandlerName = "function() { var selector = \"" + name + "\"; return kendo.ui.ComboBox.requestData(selector); }"
                 };

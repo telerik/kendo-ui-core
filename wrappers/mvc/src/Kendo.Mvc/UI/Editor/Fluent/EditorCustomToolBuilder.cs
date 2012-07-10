@@ -48,7 +48,7 @@ namespace Kendo.Mvc.UI.Fluent
 
         public EditorCustomButtonToolBuilder Exec(Func<object, object> handler)
         {
-            tool.Exec.InlineCodeBlock = handler;
+            tool.Exec.TemplateDelegate = handler;
 
             return this;
         }

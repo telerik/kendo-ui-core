@@ -175,7 +175,7 @@ namespace Kendo.Mvc.Infrastructure.Implementation.Tests
         [Fact]
         public void Should_serialize_client_event_handler_name()
         {
-            data["foo"] = new ClientEvent
+            data["foo"] = new ClientHandlerDescriptor
                 {
                     HandlerName = "bar"
                 };
@@ -188,7 +188,7 @@ namespace Kendo.Mvc.Infrastructure.Implementation.Tests
         {
             var nested = new Dictionary<string, object>() 
             {
-                { "bar", new ClientEvent { HandlerName = "baz" } }
+                { "bar", new ClientHandlerDescriptor { HandlerName = "baz" } }
             };
 
             data["foo"] = new[] { nested };
@@ -208,9 +208,9 @@ namespace Kendo.Mvc.Infrastructure.Implementation.Tests
         [Fact]
         public void Should_serialize_client_event_inline_handler()
         {
-            data["foo"] = new ClientEvent
+            data["foo"] = new ClientHandlerDescriptor
                 {
-                    InlineCodeBlock = delegate (object x) {
+                    TemplateDelegate = delegate (object x) {
                         return "function(){}";
                     }
                 };

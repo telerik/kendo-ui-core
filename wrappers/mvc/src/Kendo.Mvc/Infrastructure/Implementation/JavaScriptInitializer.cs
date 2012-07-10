@@ -147,7 +147,7 @@ namespace Kendo.Mvc.Infrastructure
                     continue;
                 }
 
-                var @event = value as ClientEvent;
+                var @event = value as ClientHandlerDescriptor;
 
                 if (@event != null)
                 {
@@ -188,15 +188,15 @@ namespace Kendo.Mvc.Infrastructure
             }
         }
 
-        private void AppendEvent(StringBuilder output, ClientEvent value)
+        private void AppendEvent(StringBuilder output, ClientHandlerDescriptor value)
         {
             if (value.HandlerName.HasValue())
             {
                 output.Append(value.HandlerName);
             }
-            else if (value.InlineCodeBlock != null)
+            else if (value.TemplateDelegate != null)
             {
-                output.Append(value.InlineCodeBlock(value));
+                output.Append(value.TemplateDelegate(value));
             }
         }
 

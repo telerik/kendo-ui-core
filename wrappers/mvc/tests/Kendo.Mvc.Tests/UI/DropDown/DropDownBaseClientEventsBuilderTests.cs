@@ -25,7 +25,7 @@ namespace Kendo.Mvc.UI.Tests
 
             builder.Change(param);
 
-            Assert.NotNull((clientEvents["change"] as ClientEvent).InlineCodeBlock);
+            Assert.NotNull((clientEvents["change"] as ClientHandlerDescriptor).TemplateDelegate);
         }
 
         [Fact]
@@ -35,7 +35,7 @@ namespace Kendo.Mvc.UI.Tests
 
             builder.Change(param);
 
-            Assert.NotNull((clientEvents["change"] as ClientEvent).HandlerName);
+            Assert.NotNull((clientEvents["change"] as ClientHandlerDescriptor).HandlerName);
         }
 
         [Fact]
@@ -65,7 +65,7 @@ namespace Kendo.Mvc.UI.Tests
 
             builder.Open(param);
 
-            Assert.NotNull((clientEvents["open"] as ClientEvent).HandlerName);
+            Assert.NotNull((clientEvents["open"] as ClientHandlerDescriptor).HandlerName);
         }
 
         [Fact]
@@ -85,7 +85,7 @@ namespace Kendo.Mvc.UI.Tests
 
             builder.Open(param);
 
-            Assert.NotNull((clientEvents["open"] as ClientEvent).InlineCodeBlock);
+            Assert.NotNull((clientEvents["open"] as ClientHandlerDescriptor).TemplateDelegate);
         }
 
         [Fact]
@@ -95,7 +95,7 @@ namespace Kendo.Mvc.UI.Tests
 
             builder.Close(param);
 
-            Assert.NotNull((clientEvents["close"] as ClientEvent).InlineCodeBlock);
+            Assert.NotNull((clientEvents["close"] as ClientHandlerDescriptor).TemplateDelegate);
         }
 
         [Fact]
@@ -105,7 +105,7 @@ namespace Kendo.Mvc.UI.Tests
 
             builder.Close(param);
 
-            Assert.NotNull((clientEvents["close"] as ClientEvent).HandlerName);
+            Assert.NotNull((clientEvents["close"] as ClientHandlerDescriptor).HandlerName);
         }
 
         [Fact]
@@ -135,7 +135,7 @@ namespace Kendo.Mvc.UI.Tests
 
             builder.Select(param);
 
-            Assert.NotNull((clientEvents["select"] as ClientEvent).InlineCodeBlock);
+            Assert.NotNull((clientEvents["select"] as ClientHandlerDescriptor).TemplateDelegate);
         }
 
         [Fact]
@@ -145,7 +145,7 @@ namespace Kendo.Mvc.UI.Tests
 
             builder.Select(param);
 
-            Assert.NotNull((clientEvents["select"] as ClientEvent).HandlerName);
+            Assert.NotNull((clientEvents["select"] as ClientHandlerDescriptor).HandlerName);
         }
 
         [Fact]

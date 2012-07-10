@@ -380,7 +380,7 @@
     <Compile Include="UI\Chart\Series\IChartSeries.cs" />
     <Compile Include="UI\ComboBox\ComboBox.cs" />
     <Compile Include="UI\ComboBox\Fluent\ComboBoxBuilder.cs" />
-    <Compile Include="UI\ClientEvent.cs" />
+    <Compile Include="UI\ClientHandlerDescriptor.cs" />
     <Compile Include="UI\DataSource\CrudOperation.cs" />
     <Compile Include="UI\DataSource\DataSource.cs" />
     <Compile Include="UI\DataSource\DataSourceRequest.cs" />

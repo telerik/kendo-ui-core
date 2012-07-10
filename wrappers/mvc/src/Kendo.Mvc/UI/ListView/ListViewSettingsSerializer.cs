@@ -38,7 +38,7 @@
 
             if (!string.IsNullOrEmpty(listView.ClientTemplateId))
             {
-                options["template"] = new ClientEvent { HandlerName = string.Format("kendo.template($('{0}{1}').html())", idPrefix, listView.ClientTemplateId) };
+                options["template"] = new ClientHandlerDescriptor { HandlerName = string.Format("kendo.template($('{0}{1}').html())", idPrefix, listView.ClientTemplateId) };
             }
         }
 
