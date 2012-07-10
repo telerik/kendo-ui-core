@@ -14,6 +14,15 @@ namespace Kendo.Controllers
         private List<string> examplesUrl = new List<string>();
         protected static readonly string docsURL = "http://docs.kendoui.com/api/{0}/{1}";
 
+        protected static readonly IDictionary<String, String> Docs =
+            new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
+                { "datasource", "framework" },
+                { "templates", "framework" },
+                { "mvvm", "framework" },
+                { "drag", "framework" },
+                { "validator", "framework" }
+            };
+
         //
         // GET: /Web/
         public ActionResult Index(string suite, string section, string example, bool? nav)
@@ -143,6 +152,23 @@ namespace Kendo.Controllers
 
         private string LoadDocPage(string suite, string section)
         {
+            section = section.Replace("-", "").ToLower();
+
+            if (section.IndexOf("chart") > -1)
+            {
+                section = "chart";
+            }
+
+            if (section.IndexOf("drag") > -1)
+            {
+                section = "drag";
+            }
+
+            if (Docs.ContainsKey(section))
+            {
+                suite = Docs[section];
+            }
+
             WebClient client = new WebClient();
             return client.DownloadString(string.Format(docsURL, suite, section));
         }
