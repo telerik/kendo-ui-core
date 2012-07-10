@@ -357,9 +357,13 @@
     <Content Include="Areas\aspx\Views\web\datepicker\rangeselection.aspx" />
     <Content Include="Areas\aspx\Views\web\datepicker\template.aspx" />
     <Content Include="Areas\aspx\Views\web\datetimepicker\globalization.aspx" />
+    <Content Include="Areas\aspx\Views\web\editor\all_tools.aspx" />
     <Content Include="Areas\aspx\Views\web\editor\api.aspx" />
+    <Content Include="Areas\aspx\Views\web\editor\custom_tools.aspx" />
     <Content Include="Areas\aspx\Views\web\editor\events.aspx" />
     <Content Include="Areas\aspx\Views\web\editor\index.aspx" />
+    <Content Include="Areas\aspx\Views\web\editor\snippets.aspx" />
+    <Content Include="Areas\aspx\Views\web\editor\styles.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\aggregates.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\ajaxbinding.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\api.aspx" />

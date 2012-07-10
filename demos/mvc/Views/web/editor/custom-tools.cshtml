@@ -2,8 +2,8 @@
     <div class="configuration k-widget k-header" style="float:none;max-width:none;margin:0 0 2em;">
         <span class="infoHead">Information</span>
         <p>
-            The following demo shows how to customize some of the native Editor tools (font size, font name and block format), as well as how to create a completely
-    custom tools that can provide random functionality.
+            The following demo shows how to customize some of the native Editor tools (font size, font name and block format) by modifying the tools' item
+            collections, as well as how to create completely custom tools.
         </p>
     </div>
 
@@ -50,7 +50,7 @@
             tools: [
                 {
                     name: "fontName",
-                    items: /*Array.concat(kendo.ui.Editor.prototype.options.fontName[0],*/ [{ text: "Garamond", value: "Garamond, serif" }]/*)*/
+                    items: [].concat(kendo.ui.Editor.prototype.options.fontName[8], [{ text: "Garamond", value: "Garamond, serif" }])
                 },
                 {
                     name: "fontSize",
@@ -59,6 +59,10 @@
                 {
                     name: "formatBlock",
                     items: [].concat(kendo.ui.Editor.prototype.options.formatBlock[0], [{ text: "Fieldset", value: "fieldset" }])
+                },
+                {
+                    name: "customTemplate",
+                    template: $("#backgroundColor-template").html()
                 },
                 {
                     name: "viewHtml",
@@ -97,10 +101,6 @@
                         var editor = $(this).data("kendoEditor");
                         editor.exec("inserthtml", { value: "<hr />" });
                     }
-                },
-                {
-                    name: "customTemplate",
-                    template: $("#backgroundColor-template").html()
                 }
             ]
         });
