@@ -130,7 +130,7 @@ namespace("demos", function() {
     }, true);
 
     desc("Build staging demos site");
-    task("staging", ["merge-scripts", "docs", "themebuilder:source"], function () {
+    task("staging", ["merge-scripts", "docs", "themebuilder:source", "demos:copy-wrappers-sources"], function () {
         var scriptsDest = path.join(DEMOS_STAGING_CONTENT_PATH, "js"),
             stylesDest = path.join(DEMOS_STAGING_CONTENT_PATH, "styles");
 
@@ -162,7 +162,7 @@ namespace("demos", function() {
     });
 
     desc("Build demos site for live deployment");
-    task("production", ["merge-scripts", "docs"], function () {
+    task("production", ["merge-scripts", "docs", "demos:copy-wrappers-sources"], function () {
         deployDemos({
             outputPath: DEMOS_LIVE_PATH,
             cdnRoot: CDN_ROOT + version(),
