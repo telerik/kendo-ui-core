@@ -1699,6 +1699,7 @@
         },
         roundedGlass: {
             type: RADIAL,
+            supportVML: false,
             stops: [{
                 offset: 0,
                 color: WHITE,
@@ -1715,6 +1716,7 @@
         },
         sharpGlass: {
             type: RADIAL,
+            supportVML: false,
             stops: [{
                 offset: 0,
                 color: WHITE,

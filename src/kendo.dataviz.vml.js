@@ -825,7 +825,7 @@
                 options = element.options,
                 fill = options.fill;
 
-            if (fill) {
+            if (fill && fill.supportVML !== false) {
                 if (fill.gradient) {
                     fill = view.buildGradient(fill);
                 }
