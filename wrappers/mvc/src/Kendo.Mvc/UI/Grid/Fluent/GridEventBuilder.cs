@@ -162,5 +162,33 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        public GridEventBuilder ColumnHide(Func<object, object> handler)
+        {
+            Handler("columnHide", handler);
+
+            return this;
+        }
+
+        public GridEventBuilder ColumnHide(string handler)
+        {
+            Handler("columnHide", handler);
+
+            return this;
+        }
+
+        public GridEventBuilder ColumnShow(Func<object, object> handler)
+        {
+            Handler("columnShow", handler);
+
+            return this;
+        }
+
+        public GridEventBuilder ColumnShow(string handler)
+        {
+            Handler("columnShow", handler);
+
+            return this;
+        }
     }
 }
