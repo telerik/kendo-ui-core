@@ -1,22 +1,66 @@
-<div data-role="view" data-title="Index" id="transitions">
-    <h1 sytle="text-align:center">My music</h1>
-    <a href="#login" data-role="button">Login/Sign-up</a>
+<div data-role="view" data-title="Camera App" id="view-transitions">
+    <img src="../../content/mobile/shared/color-lens.png" class="camera-image" /><br />
+    <a href="#view-transitions-login" data-role="button" class="transitions-button">Login/Sign-up</a>
 </div>
 
-<div data-role="view" id="login" data-transition="overlay:up">
+<div data-role="view" data-title="Login/Sign-up" id="view-transitions-login" data-transition="overlay:up">
     <ul data-role="listview" data-style="inset">
         <li><label for="username">Username:</label> <input type="text" id="username" /></li>
         <li><label for="password">Password:</label> <input type="password" id="password" /></li>
-        <li>
-            <button type="button" href="#welcome" data-transition="overlay:down reverse" data-role="button">Login</button><br >
-            <button type="button" href="#transitions" data-transition="overlay:up reverse" data-role="backbutton" style="background-color: black;">Cancel</button>
-        </li>
     </ul>
+            <a href="#view-transitions-welcome" data-transition="overlay:down reverse" data-role="button" class="transitions-button">Login</a><br >
+            <a href="#view-transitions" data-transition="overlay:up reverse" data-role="button" class="transitions-cancel">Cancel</a>
 </div>
 
-<div data-role="view" data-title="Index" id="welcome">
-    <h1 sytle="text-align:center">My music</h1>
-    <p>Welcome!<br />
-    <a data-role="button" href="#transitions" data-transition="slide:left reverse" style="background-color: black;">Sign out</a>
-    </p>
+<div data-role="view" data-title="Welcome" id="view-transitions-welcome">
+    <img src="../../content/mobile/modalview/lens.png" class="camera-image" /><br />
+    <a data-role="button" href="#view-transitions" data-transition="slide:left reverse" class="transitions-button">Sign out</a>
 </div>
+
+
+<style scoped>
+    .transitions-button,
+    .transitions-cancel {
+        display: block;
+        text-align: center;
+        margin: .6em .8em 0;
+        font-size: 1.2em;
+    }
+
+    #view-transitions,
+    #view-transitions-welcome p {
+    	color: #fff;
+        text-align: center;
+    }
+
+    #view-transitions img,
+    #view-transitions-welcome img {
+        display: block;
+        margin: 30px auto;
+    }
+    
+    #view-transitions .km-content,
+    #view-transitions-login .km-content,
+    #view-transitions-welcome .km-content {
+        background: url(../../content/shared/images/patterns/pattern1.png) repeat 0 0;
+    }
+
+    .km-ios #view-transitions-welcome .km-button {
+        background-color: DarkRed;
+    }
+    
+    .km-ios #view-transitions-login .km-button {
+        background-color: Green;
+    }
+    
+    .km-ios #view-transitions .km-button,
+    .km-ios #view-transitions-login .transitions-cancel {
+        background-color: #000;
+    }
+    
+    .km-ios #view-transitions .km-navbar,
+    .km-ios #view-transitions-login .km-navbar,
+    .km-ios #view-transitions-welcome .km-navbar {
+        background-color: #000;
+    }
+</style>
