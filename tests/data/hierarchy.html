@@ -761,6 +761,20 @@
                 equal(data[0].productName, "foo");
             });
 
+            test("infer of hasChildren property", function() {
+                var list = $("<ul><li data-hasChildren='true'>foo</li></ul>"),
+                    dataSource = HierarchicalDataSource.create({
+                        list: list,
+                        fields: [ { field: "text" } ]
+                    });
+
+                dataSource.read();
+
+                var data = dataSource.data();
+
+                equal(data.length, 1);
+                equal(data[0].hasChildren, true);
+            });
         </script>
     </body>
 </html>

@@ -2695,7 +2695,7 @@
     var Node = Model.define({
         init: function(value) {
             var that = this,
-                hasChildren = that.hasChildren,
+                hasChildren = that.hasChildren || value.hasChildren,
                 data = "items",
                 children = {};
 
@@ -2854,6 +2854,7 @@
             spriteCssClassField = fields[2] && fields[2].field,
             imageUrlField = fields[3] && fields[3].field,
             item,
+            id,
             textChild,
             className,
             children;
@@ -2867,7 +2868,11 @@
             list = children.filter("ul");
             children = children.filter(":not(ul)");
 
-            record.id = item.attr("data-id");
+            id = item.attr("data-id");
+
+            if (id) {
+                record.id = id;
+            }
 
             if (textChild) {
                 record[textField] = textChild.nodeType == 3 ? textChild.nodeValue : children.text();
@@ -2888,6 +2893,10 @@
 
             if (list.length) {
                 record.items = inferList(list.eq(0), fields);
+            }
+
+            if (item.attr("data-hasChildren") == "true") {
+                record.hasChildren = true;
             }
 
             data.push(record);
