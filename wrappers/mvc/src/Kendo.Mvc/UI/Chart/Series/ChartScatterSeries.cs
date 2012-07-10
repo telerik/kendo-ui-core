@@ -8,8 +8,8 @@ namespace Kendo.Mvc.UI
 
     public class ChartScatterSeries<TModel, TXValue, TYValue> : ChartSeriesBase<TModel>, IChartScatterSeries where TModel : class
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ChartScatterSeries{TModel, TValue}" /> class.
+        /// <summary >
+        /// Initializes a new instance of the <see cref="ChartScatterSeries{TModel, TXValue, TYValue}" /> class.
         /// </summary>
         /// <param name="chart">The chart.</param>
         /// <param name="expressionXValue">The X expression.</param>
@@ -29,7 +29,7 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ChartScatterSeries{TModel, TValue}" /> class.
+        /// Initializes a new instance of the <see cref="ChartScatterSeries{TModel, TXValue, TYValue}" /> class.
         /// </summary>
         /// <param name="chart">The chart.</param>
         /// <param name="data">The data.</param>
@@ -41,7 +41,7 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ChartScatterSeries{TModel, TValue}" /> class.
+        /// Initializes a new instance of the <see cref="ChartScatterSeries{TModel, TXValue, TYValue}" /> class.
         /// </summary>
         /// <param name="chart">The chart.</param>
         public ChartScatterSeries(Chart<TModel> chart)

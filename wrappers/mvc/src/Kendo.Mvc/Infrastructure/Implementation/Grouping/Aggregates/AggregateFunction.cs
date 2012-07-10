@@ -81,7 +81,7 @@ namespace Kendo.Mvc
         /// </summary>
         /// <returns>
         /// Function name generated with the following pattern: 
-        /// {<see cref="object.GetType()"/>.<see cref="MemberInfo.Name"/>}_{<see cref="object.GetHashCode"/>}
+        /// {<see cref="object.GetType()"/>.<see cref="System.Reflection.MemberInfo.Name"/>}_{<see cref="object.GetHashCode"/>}
         /// </returns>
         protected virtual string GenerateFunctionName()
         {

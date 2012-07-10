@@ -35,15 +35,8 @@ namespace Kendo.Mvc.Infrastructure.Implementation
             {
             }
 
-            /// ReSharper disable UnusedParameter.Local
-            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "httpContext", Justification = "To align with the HttpContextbase design.")]
             public bool IsAccessibleToUser(HttpContextBase httpContext)
-            /// ReSharper restore UnusedParameter.Local
             {
-                /// The New HttpContextBase/HttpContextWrapper does not expose the inner HttpContext
-                /// which is a design smell of the ASP.NET Team, so we need have to use the
-                /// untestable HttpContext.Current.
-
                 string url = Url;
 
                 if (url.StartsWith("~/", StringComparison.Ordinal) || url.StartsWith("/", StringComparison.Ordinal))

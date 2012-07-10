@@ -524,7 +524,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Configure the DataSource of the component
         /// </summary>
-        /// <param name="configurator">The action that configures the <see cref="ReadOnlyDataSource"/>.</param>
+        /// <param name="configurator">The action that configures the <see cref="DataSource"/>.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().TreeView()

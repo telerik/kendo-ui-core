@@ -1,15 +1,13 @@
 ﻿namespace Kendo.Mvc.UI.Fluent
 {
     //Mono build requires this line
-    using Kendo.Mvc.UI;
-
     using System;
     using System.Collections.Generic;
-    using System.Web.Mvc.Html;
     using System.Web.Routing;
+    using Kendo.Mvc.UI;
 
     /// <summary>
-    /// Defines the fluent interface for configuring the <see cref="Calendar.CalendarSelectionSettings"/>.
+    /// Defines the fluent interface for configuring the <see cref="Calendar.SelectionSettings"/>.
     /// </summary>
     public class CalendarSelectionSettingsBuilder : IHideObjectMembers
     {

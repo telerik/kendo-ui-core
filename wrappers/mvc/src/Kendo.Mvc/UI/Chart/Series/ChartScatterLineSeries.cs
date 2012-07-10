@@ -9,7 +9,7 @@ namespace Kendo.Mvc.UI
         where TModel : class
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ChartScatterLineSeries{TModel, TValue}" /> class.
+        /// Initializes a new instance of the <see cref="ChartScatterLineSeries{TModel, TXValue, TYValue}" /> class.
         /// </summary>
         /// <param name="chart">The chart.</param>
         /// <param name="expressionXValue">The X expression.</param>
@@ -20,7 +20,7 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ChartScatterLineSeries{TModel, TValue}" /> class.
+        /// Initializes a new instance of the <see cref="ChartScatterLineSeries{TModel, TXValue, TYValue}" /> class.
         /// </summary>
         /// <param name="chart">The chart.</param>
         /// <param name="data">The data.</param>
@@ -30,7 +30,7 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ChartScatterLineSeries{TModel, TValue}" /> class.
+        /// Initializes a new instance of the <see cref="ChartScatterLineSeries{TModel, TXValue, TYValue}" /> class.
         /// </summary>
         /// <param name="chart">The chart.</param>
         public ChartScatterLineSeries(Chart<TModel> chart)

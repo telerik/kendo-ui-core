@@ -1,7 +1,7 @@
 namespace Kendo.Mvc.UI.Fluent
 {
     /// <summary>
-    /// Defines the fluent interface for configuring the <see cref="RadialGaugeCap"/>.
+    /// Defines the fluent interface for configuring the <see cref="GaugeRadialCap"/>.
     /// </summary>
     public class GaugeRadialCapBuilder : IHideObjectMembers
     {

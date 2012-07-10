@@ -1,7 +1,7 @@
 namespace Kendo.Mvc.UI.Fluent
 {
     /// <summary>
-    ///  Defines the fluent interface for configuring <see cref="ListView{T}.Selection"/>
+    ///  Defines the fluent interface for configuring <see cref="ListView{T}.Selectable"/>
     /// </summary>
     public class ListViewSelectionSettingsBuilder : IHideObjectMembers
     {

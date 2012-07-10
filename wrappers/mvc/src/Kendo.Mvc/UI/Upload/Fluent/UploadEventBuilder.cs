@@ -4,7 +4,7 @@ namespace Kendo.Mvc.UI.Fluent
     using System.Collections.Generic;
 
     /// <summary>
-    /// Defines the fluent interface for configuring the <see cref="Upload.Events"/>.
+    /// Defines the fluent interface for configuring the Upload events.
     /// </summary>
     public class UploadEventBuilder : EventBuilder
     {

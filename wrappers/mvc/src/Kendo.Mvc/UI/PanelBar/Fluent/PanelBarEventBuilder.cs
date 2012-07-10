@@ -3,7 +3,7 @@ namespace Kendo.Mvc.UI.Fluent
     using System;
     using System.Collections.Generic;
     /// <summary>
-    /// Defines the fluent interface for configuring the <see cref="PanelBar.Events"/>.
+    /// Defines the fluent interface for configuring the PanelBar events.
     /// </summary>
     public class PanelBarEventBuilder : EventBuilder
     {

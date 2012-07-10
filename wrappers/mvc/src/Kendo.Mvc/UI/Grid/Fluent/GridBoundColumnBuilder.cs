@@ -12,7 +12,7 @@ namespace Kendo.Mvc.UI.Fluent
         where T : class
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="GridBoundColumnBuilder&lt;T&gt;"/> class.
+        /// Initializes a new instance of the <see cref="GridBoundColumnBuilder{T}"/> class.
         /// </summary>
         /// <param name="column">The column.</param>
         public GridBoundColumnBuilder(IGridBoundColumn column)

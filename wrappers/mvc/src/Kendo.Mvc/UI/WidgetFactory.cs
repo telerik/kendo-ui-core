@@ -96,7 +96,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Creates a new <see cref="Kendo.Mvc.UI.Grid&lt;T&gt;"/> bound to the specified data item type.
+        /// Creates a new <see cref="Kendo.Mvc.UI.Grid{T}"/> bound to the specified data item type.
         /// </summary>
         /// <example>
         /// <typeparam name="T">The type of the data item</typeparam>
@@ -116,7 +116,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Creates a new <see cref="Kendo.Mvc.UI.Grid&lt;T&gt;"/> bound to the specified data source.
+        /// Creates a new <see cref="Kendo.Mvc.UI.Grid{T}"/> bound to the specified data source.
         /// </summary>
         /// <typeparam name="T">The type of the data item</typeparam>
         /// <param name="dataSource">The data source.</param>
@@ -137,7 +137,7 @@ namespace Kendo.Mvc.UI.Fluent
         }        
 
         /// <summary>
-        /// Creates a new <see cref="Kendo.Mvc.UI.Grid&lt;T&gt;"/> bound to a DataTable.
+        /// Creates a new <see cref="Kendo.Mvc.UI.Grid{T}"/> bound to a DataTable.
         /// </summary>
         /// <param name="dataSource">DataTable from which the grid instance will be bound</param>
         public virtual GridBuilder<DataRowView> Grid(DataTable dataSource)
@@ -150,7 +150,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Creates a new <see cref="Kendo.Mvc.UI.Grid&lt;T&gt;"/> bound to a DataView.
+        /// Creates a new <see cref="Kendo.Mvc.UI.Grid{T}"/> bound to a DataView.
         /// </summary>
         /// <param name="dataSource">DataView from which the grid instance will be bound</param>
         public virtual GridBuilder<DataRowView> Grid(DataView dataSource)
@@ -163,7 +163,7 @@ namespace Kendo.Mvc.UI.Fluent
         }   
 
         /// <summary>
-        /// Creates a new <see cref="Kendo.Mvc.UI.Grid&lt;T&gt;"/> bound an item in ViewData.
+        /// Creates a new <see cref="Kendo.Mvc.UI.Grid{T}"/> bound an item in ViewData.
         /// </summary>
         /// <typeparam name="T">Type of the data item</typeparam>
         /// <param name="dataSourceViewDataKey">The data source view data key.</param>
@@ -184,7 +184,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Creates a new <see cref="ListView&lt;T&gt;"/> bound to the specified data item type.
+        /// Creates a new <see cref="UI.ListView{T}"/> bound to the specified data item type.
         /// </summary>
         /// <example>
         /// <typeparam name="T">The type of the data item</typeparam>
@@ -201,7 +201,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Creates a new <see cref="Kendo.Web.UI.ListView&lt;T&gt;"/> bound to the specified data source.
+        /// Creates a new <see cref="ListView{T}"/> bound to the specified data source.
         /// </summary>
         /// <typeparam name="T">The type of the data item</typeparam>
         /// <param name="dataSource">The data source.</param>
@@ -222,7 +222,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Creates a new <see cref="Kendo.Web.UI.ListView&lt;T&gt;"/> bound an item in ViewData.
+        /// Creates a new <see cref="ListView{T}"/> bound an item in ViewData.
         /// </summary>
         /// <typeparam name="T">Type of the data item</typeparam>
         /// <param name="dataSourceViewDataKey">The data source view data key.</param>
@@ -375,7 +375,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Creates a new <see cref="NumericTextBox{double}"/>.
+        /// Creates a new <see cref="NumericTextBox"/>.
         /// </summary>
         /// <example>
         /// <code lang="CS">
@@ -384,7 +384,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        /// <returns>Returns <see cref="NumericTextBoxBuilder{double}"/>.</returns>
         public virtual NumericTextBoxBuilder<double> NumericTextBox()
         {
             return new NumericTextBoxBuilder<double>(new NumericTextBox<double>(ViewContext, Initializer, ViewData));
@@ -395,7 +394,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().NumericTextBox<double>()
+        ///  &lt;%= Html.Kendo().NumericTextBox&lt;double&gt;()
         ///             .Name("NumericTextBox")
         /// %&gt;
         /// </code>
@@ -415,7 +414,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        /// <returns>Returns <see cref="NumericTextBoxBuilder{decimal}"/>.</returns>
         public virtual NumericTextBoxBuilder<decimal> CurrencyTextBox()
         {
             return NumericTextBox<decimal>().Format("c");
@@ -431,7 +429,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        /// <returns>Returns <see cref="NumericTextBoxBuilder{double}"/>.</returns>
         public virtual NumericTextBoxBuilder<double> PercentTextBox()
         {
             return NumericTextBox().Format("p");
@@ -447,7 +444,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        /// <returns>Returns <see cref="NumericTextBoxBuilder{int}"/>.</returns>
         public virtual NumericTextBoxBuilder<int> IntegerTextBox()
         {
             return NumericTextBox<int>().Format("n0").Decimals(0);
@@ -769,7 +765,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Creates a new <see cref="NumericTextBox{Nullable{TValue}}"/>.
+        /// Creates a new <see cref="NumericTextBox{T}"/>.
         /// </summary>
         /// <example>
         /// <code lang="CS">
@@ -789,7 +785,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Creates a new <see cref="NumericTextBox{Nullable{int}}"/>.
+        /// Creates a new <see cref="NumericTextBox{T}"/>.
         /// </summary>
         /// <example>
         /// <code lang="CS">
@@ -802,7 +798,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Creates a new <see cref="NumericTextBox{int}"/>.
+        /// Creates a new <see cref="NumericTextBox{T}"/>.
         /// </summary>
         /// <example>
         /// <code lang="CS">
@@ -815,7 +811,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Creates a new <see cref="NumericTextBox{Nullable{decimal}}"/>.
+        /// Creates a new <see cref="NumericTextBox{T}"/>.
         /// </summary>
         /// <example>
         /// <code lang="CS">
@@ -828,7 +824,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Creates a new <see cref="NumericTextBox{decimal}"/>.
+        /// Creates a new <see cref="NumericTextBox{T}"/>.
         /// </summary>
         /// <example>
         /// <code lang="CS">
@@ -841,7 +837,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Creates a new <see cref="NumericTextBox{Nullable{double}}"/>.
+        /// Creates a new <see cref="NumericTextBox{T}"/>.
         /// </summary>
         /// <example>
         /// <code lang="CS">
@@ -854,7 +850,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Creates a new <see cref="NumericTextBox{double}"/>.
+        /// Creates a new <see cref="NumericTextBox{T}"/>.
         /// </summary>
         /// <example>
         /// <code lang="CS">
@@ -867,7 +863,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Creates a new <see cref="DateTimePicker{Nullable{DateTime}}"/>.
+        /// Creates a new <see cref="DateTimePicker"/>.
         /// </summary>
         /// <example>
         /// <code lang="CS">
@@ -887,7 +883,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Creates a new <see cref="DateTimePicker{DateTime}"/>.
+        /// Creates a new <see cref="DateTimePicker"/>.
         /// </summary>
         /// <example>
         /// <code lang="CS">
@@ -906,7 +902,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Creates a new <see cref="DatePicker{Nullable{DateTime}}"/>.
+        /// Creates a new <see cref="DatePicker"/>.
         /// </summary>
         /// <example>
         /// <code lang="CS">
@@ -926,7 +922,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Creates a new <see cref="DatePicker{DateTime}"/>.
+        /// Creates a new <see cref="DatePicker"/>.
         /// </summary>
         /// <example>
         /// <code lang="CS">
@@ -945,7 +941,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Creates a new <see cref="TimePicker{Nullable{DateTime}}"/>.
+        /// Creates a new <see cref="TimePicker"/>.
         /// </summary>
         /// <example>
         /// <code lang="CS">
@@ -965,7 +961,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Creates a new <see cref="TimePicker{DateTime}"/>.
+        /// Creates a new <see cref="TimePicker"/>.
         /// </summary>
         /// <example>
         /// <code lang="CS">
@@ -984,7 +980,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Creates a new <see cref="TimePicker{Nullable{TimeSpan}}"/>.
+        /// Creates a new <see cref="UI.TimePicker"/>.
         /// </summary>
         /// <example>
         /// <code lang="CS">
@@ -1007,7 +1003,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Creates a new <see cref="TimePicker{TimeSpan}"/>.
+        /// Creates a new <see cref="UI.TimePicker"/>.
         /// </summary>
         /// <example>
         /// <code lang="CS">
@@ -1074,7 +1070,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Creates a new <see cref="SliderFor{TValue}"/>.
+        /// Creates a new <see cref="UI.Slider{T}"/>.
         /// </summary>
         /// <example>
         /// <code lang="CS">
@@ -1110,7 +1106,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Creates a new <see cref="SliderFor{Nullable{TValue}}"/>.
+        /// Creates a new <see cref="SliderFor"/>.
         /// </summary>
         /// <example>
         /// <code lang="CS">
@@ -1146,7 +1142,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Creates a new <see cref="SliderFor"/>.
+        /// Creates a new <see cref="SliderFor{T}"/>.
         /// </summary>
         /// <example>
         /// <code lang="CS">
@@ -1180,7 +1176,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Creates a new <see cref="SliderFor"/>.
+        /// Creates a new <see cref="SliderFor{T}"/>.
         /// </summary>
         /// <example>
         /// <code lang="CS">

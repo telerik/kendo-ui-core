@@ -9,7 +9,7 @@ namespace Kendo.Mvc
         private readonly IList<T> innerList = new List<T>();
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="LinkedObjectCollection&lt;T&gt;"/> class.
+        /// Initializes a new instance of the <see cref="LinkedObjectCollection{T}"/> class.
         /// </summary>
         /// <param name="parent">The parent.</param>
         public LinkedObjectCollection(T parent)
@@ -27,11 +27,6 @@ namespace Kendo.Mvc
             protected set;
         }
 
-        /// <summary>
-        /// Gets the number of elements contained in the <see cref="T:System.Collections.Generic.ICollection`1"/>.
-        /// </summary>
-        /// <value></value>
-        /// <returns>The number of elements contained in the <see cref="T:System.Collections.Generic.ICollection`1"/>.</returns>
         public int Count
         {
             get
@@ -40,11 +35,6 @@ namespace Kendo.Mvc
             }
         }
 
-        /// <summary>
-        /// Gets a value indicating whether the <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
-        /// </summary>
-        /// <value></value>
-        /// <returns>true if the <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only; otherwise, false.</returns>
         public bool IsReadOnly
         {
             get
@@ -53,10 +43,6 @@ namespace Kendo.Mvc
             }
         }
 
-        /// <summary>
-        /// Gets or sets the <see cref="T"/> at the specified index.
-        /// </summary>
-        /// <value></value>
         public T this[int index]
         {
             get

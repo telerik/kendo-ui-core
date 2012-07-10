@@ -477,7 +477,7 @@
     <Compile Include="UI\Gauge\Enums\GaugeLinearPointerShape.cs" />
     <Compile Include="UI\Gauge\Fluent\GaugeScaleRangesFactory.cs" />
     <Compile Include="UI\Gauge\Fluent\GaugeScaleRangesBuilder.cs" />
-    <Compile Include="UI\Gauge\Fluent\GaugeScaleLabelsBaseBuilder.cs" />
+    <Compile Include="UI\Gauge\Fluent\GaugeLabelsBuilder.cs" />
     <Compile Include="UI\Gauge\Fluent\GaugeScaleBuilderBase.cs" />
     <Compile Include="UI\Gauge\Fluent\GaugeAreaBuilder.cs" />
     <Compile Include="UI\Gauge\Fluent\GaugeLinearTrackBuilder.cs" />
@@ -902,7 +902,7 @@
     <Compile Include="UI\INavigationItemComponent.cs" />
     <Compile Include="UI\NumericTextBox\Fluent\NumericTextBoxBuilder.cs" />
     <Compile Include="UI\NumericTextBox\NumericTextBox.cs" />
-    <Compile Include="UI\NumericTextBox\Fluent\NumericTextBoxClientEventsBuilder.cs" />
+    <Compile Include="UI\NumericTextBox\Fluent\NumericTextBoxEventBuilder.cs" />
     <Compile Include="UI\NavigationHtmlBuilderBase.cs" />
     <Compile Include="UI\NavigationItemContainerExtensions.cs" />
     <Compile Include="UI\TimePicker\Fluent\TimePickerBuilder.cs" />
@@ -1028,7 +1028,7 @@
     <Compile Include="UI\Window\IWindowButtonsContainer.cs" />
     <Compile Include="UI\Window\Settings\WindowResizingSettings.cs" />
     <Compile Include="UI\Window\HeaderButton.cs" />
-    <Compile Include="UI\Window\Fluent\WindowClientEventsBuilder.cs" />
+    <Compile Include="UI\Window\Fluent\WindowEventBuilder.cs" />
     <Compile Include="UI\Window\Window.cs" />
     <Compile Include="UI\Window\Fluent\WindowBuilder.cs" />
     <Compile Include="UI\Window\Html\WindowHtmlBuilder.cs" />

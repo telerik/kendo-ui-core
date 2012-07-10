@@ -11,7 +11,7 @@ namespace Kendo.Mvc.UI.Fluent
         private readonly ChartPlotBand<T> item;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ChartPlotBandsBuilder"/> class.
+        /// Initializes a new instance of the <see cref="ChartPlotBandsBuilder{T}"/> class.
         /// </summary>
         /// <param name="item">The plot band.</param>
         public ChartPlotBandsBuilder(ChartPlotBand<T> item)

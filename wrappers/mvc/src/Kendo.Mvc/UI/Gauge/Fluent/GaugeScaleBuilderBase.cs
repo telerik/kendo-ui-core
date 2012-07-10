@@ -1,20 +1,17 @@
 namespace Kendo.Mvc.UI.Fluent
 {
     using System;
-    using Kendo.Mvc.Infrastructure;
-
     /// <summary>
     /// Defines the fluent interface for configuring scale.
     /// </summary>
     /// <typeparam name="TScale"></typeparam>
     /// <typeparam name="TScaleBuilder">The type of the series builder.</typeparam>
-    /// <typeparam name="T"></typeparam>
     public abstract class GaugeScaleBuilderBase<TScale, TScaleBuilder> : IHideObjectMembers
         where TScaleBuilder : GaugeScaleBuilderBase<TScale, TScaleBuilder>
         where TScale : IGaugeScale
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="GaugeScaleBuilderBase{TScale, TScaleBuilder, T}"/> class.
+        /// Initializes a new instance of the <see cref="GaugeScaleBuilderBase{TScale, TScaleBuilder}"/> class.
         /// </summary>
         /// <param name="scale">The scale.</param>
         protected GaugeScaleBuilderBase(TScale scale)

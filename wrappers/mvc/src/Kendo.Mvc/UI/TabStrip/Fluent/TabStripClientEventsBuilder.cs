@@ -3,7 +3,7 @@ namespace Kendo.Mvc.UI.Fluent
     using System;
     using System.Collections.Generic;
     /// <summary>
-    /// Defines the fluent interface for configuring the <see cref="TabStrip.Events"/>.
+    /// Defines the fluent interface for configuring the TabStrip events.
     /// </summary>
     public class TabStripEventBuilder : EventBuilder
     {

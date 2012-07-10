@@ -3,14 +3,14 @@ using Kendo.Mvc.Infrastructure;
 namespace Kendo.Mvc.UI.Fluent
 {
     /// <summary>
-    /// Defines the fluent interface for configuring the <see cref="GaugeRadialPointer{T}"/>.
+    /// Defines the fluent interface for configuring the <see cref="GaugeRadialPointer"/>.
     /// </summary>
     public class GaugeRadialPointerBuilder : IHideObjectMembers
     {
         private readonly GaugeRadialPointer pointer;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GaugeRadialPointerBuilder{T}" /> class.
+        /// Initializes a new instance of the <see cref="GaugeRadialPointerBuilder" /> class.
         /// </summary>
         /// <param name="pointer">The gauge pointer.</param>
         public GaugeRadialPointerBuilder(GaugeRadialPointer pointer)

@@ -144,7 +144,7 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="GridColumnBase&lt;T&gt;"/> is sortable.
+        /// Gets or sets a value indicating whether this <see cref="GridColumnBase{T}"/> is sortable.
         /// </summary>
         /// <value><c>true</c> if sortable; otherwise, <c>false</c>. The default value is <c>true</c>.</value>
         public bool Sortable
@@ -160,7 +160,7 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="GridColumnBase&lt;T&gt;"/> is filterable.
+        /// Gets or sets a value indicating whether this <see cref="GridColumnBase{T}"/> is filterable.
         /// </summary>
         /// <value><c>true</c> if filterable; otherwise, <c>false</c>. The default value is <c>true</c>.</value>
         public bool Filterable

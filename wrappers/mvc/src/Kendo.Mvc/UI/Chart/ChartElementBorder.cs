@@ -5,7 +5,6 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartElementBorder" /> class.
         /// </summary>
-        /// <param name="margin">The spacing to be applied in all directions.</param>
         public ChartElementBorder(int? width, string color, ChartDashType? dashType)
         {
             Width = width;

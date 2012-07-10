@@ -8,7 +8,7 @@ namespace Kendo.Mvc.UI.Fluent
         private readonly ChartPieConnectors pieConnectors;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ChartPieConnectosBuilder" /> class.
+        /// Initializes a new instance of the <see cref="ChartPieConnectorsBuilder" /> class.
         /// </summary>
         /// <param name="chartBarLabels">The connectors configuration.</param>
         public ChartPieConnectorsBuilder(ChartPieConnectors pieConnectors)

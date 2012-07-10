@@ -4,7 +4,7 @@ namespace Kendo.Mvc.UI
         where T : struct
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ChartPlotBand" /> class.
+        /// Initializes a new instance of the <see cref="ChartPlotBand{T}" /> class.
         /// </summary>
         public ChartPlotBand()
         {

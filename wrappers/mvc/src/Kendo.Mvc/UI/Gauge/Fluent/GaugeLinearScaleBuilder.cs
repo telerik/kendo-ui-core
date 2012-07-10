@@ -8,7 +8,7 @@ namespace Kendo.Mvc.UI.Fluent
     public class GaugeLinearScaleBuilder : GaugeScaleBuilderBase<ILinearScale, GaugeLinearScaleBuilder>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="GaugeLinearScaleBuilder{T}" /> class.
+        /// Initializes a new instance of the <see cref="GaugeLinearScaleBuilder" /> class.
         /// </summary>
         /// <param name="gauge">The gauge component.</param>
         public GaugeLinearScaleBuilder(LinearGauge gauge)

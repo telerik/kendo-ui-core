@@ -13,7 +13,7 @@ namespace Kendo.Mvc.UI.Fluent
         where TAxis : IChartAxis<TValue>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ChartAxisBuilderBase{TAxis, TAxisBuilder}"/> class.
+        /// Initializes a new instance of the <see cref="ChartAxisBuilderBase{TAxis, TValue, TAxisBuilder}"/> class.
         /// </summary>
         /// <param name="axis">The axis.</param>
         protected ChartAxisBuilderBase(TAxis axis)

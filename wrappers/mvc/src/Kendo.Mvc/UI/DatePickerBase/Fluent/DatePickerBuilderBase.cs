@@ -10,7 +10,7 @@ namespace Kendo.Mvc.UI.Fluent
         where TPickerBuilder : WidgetBuilderBase<TPicker, TPickerBuilder>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="DatePickerBaseBuilder"/> class.
+        /// Initializes a new instance of the <see cref="DatePickerBuilderBase{TPicker, TPickerBuilder}"/> class.
         /// </summary>
         /// <param name="component">The component.</param>
         public DatePickerBuilderBase(TPicker component)

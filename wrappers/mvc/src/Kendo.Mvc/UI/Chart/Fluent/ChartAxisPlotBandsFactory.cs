@@ -3,14 +3,14 @@ namespace Kendo.Mvc.UI.Fluent
     using Kendo.Mvc.UI;
 
     /// <summary>
-    /// Creates plot bands for the <see cref="ChartAxisPlotBandsFactory{TAxis}" />.
+    /// Creates plot bands for the <see cref="ChartAxisPlotBandsFactory{TAxis, TValue}" />.
     /// </summary>
     public class ChartAxisPlotBandsFactory<TAxis, TValue> : IHideObjectMembers
         where TAxis : IChartAxis<TValue>
         where TValue : struct
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ChartAxisPlotBandsFactory{TAxis}"/> class.
+        /// Initializes a new instance of the <see cref="ChartAxisPlotBandsFactory{TAxis, TValue}"/> class.
         /// </summary>
         /// <param name="axis">The axis.</param>
         public ChartAxisPlotBandsFactory(TAxis axis)

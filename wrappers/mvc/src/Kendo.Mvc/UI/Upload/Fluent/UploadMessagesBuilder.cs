@@ -53,9 +53,9 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Sets the Drag & Drop hint text
+        /// Sets the Drag and Drop hint text
         /// </summary>
-        /// <param name="dropFilesHereMessage">New Drag & Drop hint text.</param>
+        /// <param name="dropFilesHereMessage">New Drag and Drop hint text.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Upload()

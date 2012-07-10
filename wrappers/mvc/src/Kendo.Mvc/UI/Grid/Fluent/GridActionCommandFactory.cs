@@ -9,7 +9,7 @@ namespace Kendo.Mvc.UI.Fluent
     public class GridActionCommandFactory<T> : IHideObjectMembers where T : class
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="GridActionCommandFactory&lt;T&gt;"/> class.
+        /// Initializes a new instance of the <see cref="GridActionCommandFactory{T}"/> class.
         /// </summary>
         /// <param name="column">The column.</param>
         public GridActionCommandFactory(GridActionColumn<T> column)

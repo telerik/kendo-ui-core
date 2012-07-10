@@ -3,7 +3,7 @@ namespace Kendo.Mvc.UI
     public class GaugeRadialScale : GaugeScaleBase, IRadialScale
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="GaugeRadialScale{T}" /> class.
+        /// Initializes a new instance of the <see cref="GaugeRadialScale" /> class.
         /// </summary>
         /// <value>The radial gauge.</value>
         public GaugeRadialScale(RadialGauge gauge)

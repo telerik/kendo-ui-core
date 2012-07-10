@@ -9,7 +9,7 @@ namespace Kendo.Mvc.UI.Fluent
         private readonly ListViewEditingSettings<T> settings;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ListViewEditingSettingsBuilder"/> class.
+        /// Initializes a new instance of the <see cref="ListViewEditingSettingsBuilder{T}"/> class.
         /// </summary>
         /// <param name="settings">The settings.</param>
         public ListViewEditingSettingsBuilder(ListViewEditingSettings<T> settings)

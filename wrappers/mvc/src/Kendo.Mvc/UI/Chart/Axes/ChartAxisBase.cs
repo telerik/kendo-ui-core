@@ -7,7 +7,7 @@ namespace Kendo.Mvc.UI
         where TValue : struct
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ChartAxisBase{T}" /> class.
+        /// Initializes a new instance of the <see cref="ChartAxisBase{T, TValue}" /> class.
         /// </summary>
         /// <param name="chart">The chart.</param>
         public ChartAxisBase(Chart<T> chart)

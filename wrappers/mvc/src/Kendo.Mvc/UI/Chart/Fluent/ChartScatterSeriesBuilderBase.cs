@@ -13,7 +13,7 @@ namespace Kendo.Mvc.UI.Fluent
         where TBuilder : ChartScatterSeriesBuilderBase<TSeries, TBuilder>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ChartScatterSeriesBuilderBase{T}"/> class.
+        /// Initializes a new instance of the <see cref="ChartScatterSeriesBuilderBase{TSeries, TBuilder}"/> class.
         /// </summary>
         /// <param name="series">The series.</param>
         public ChartScatterSeriesBuilderBase(TSeries series)
