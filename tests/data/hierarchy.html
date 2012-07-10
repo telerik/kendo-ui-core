@@ -699,10 +699,27 @@
                 equal(children[0].text, "bar");
             });
 
+            test("infer of id field", function() {
+                var list = $("<ul><li>" +
+                        "<div><span data-id='42'>foo</span></div>"+
+                    "</li></ul>"),
+                    dataSource = HierarchicalDataSource.create({
+                        list: list,
+                        fields: [ { field: "text" } ]
+                    });
+
+                dataSource.read();
+
+                var data = dataSource.data();
+
+                equal(data.length, 1);
+                equal(data[0].id, "42");
+            });
+
             test("infer of nested url / spriteCssClass / imageUrl fields", function() {
                 var list = $("<ul><li>" +
                         "<div><img class='k-image' src='image.png' />" +
-                        "<a href='http://kendoui.com/'>" +
+                        "<a href='http://kendoui.com/' data-id='7'>" +
                         "<span class='k-sprite spriteClass'></span>" +
                         "foo</a></div>"+
                     "</li></ul>"),
@@ -721,6 +738,8 @@
                 var data = dataSource.data();
 
                 equal(data.length, 1);
+
+                equal(data[0].id, "7");
                 equal(data[0].text, "foo");
                 equal(data[0].url, "http://kendoui.com/");
                 equal(data[0].spriteCssClass, "spriteClass");
