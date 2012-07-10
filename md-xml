@@ -7,7 +7,7 @@ var xml = require("libxmljs"),
 var rawXml = fs.readFileSync("wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.xml", "utf8");
 
 // Replace <see /> tags with their "cref" attribute value
-//
+
 rawXml = rawXml.replace(/<see cref="([^"]*)"\s*\/>/g, function($0, $1){
     // return only the last word of the cref attribute
     return $1.replace(/^.*?(\w+)$/, "$1");
@@ -45,7 +45,7 @@ function getTypesByNamespace(namespace) {
 }
 
 function populateMemebers(type) {
-    var namespaceRegExp = new RegExp("^([MF]):" + type.name.replace(/\./g, "\\.") + "\\.(.*)");
+    var namespaceRegExp = new RegExp("^([MFP]):" + type.name.replace(/\./g, "\\.") + "\\.(.*)");
 
     members.forEach(function(member) {
         var name = member.attr("name").value();
@@ -69,6 +69,12 @@ function populateMemebers(type) {
                 field.name = shortName;
 
                 type.fields.push(field);
+            } else if (kind == "P") {
+                var property = parseProperty(member);
+
+                property.name = shortName;
+
+                type.properties.push(property);
             }
         }
     });
@@ -91,19 +97,27 @@ function typeToMarkdown(type) {
         markdown += "\n\n" + type.summary;
     }
 
+    if (type.fields.length) {
+        markdown += "\n\n## Fields";
+
+        type.fields.forEach(function(field){
+            markdown += emitField(field);
+        });
+    }
+
+    if (type.properties.length) {
+        markdown += "\n\n## Properties";
+
+        type.properties.forEach(function(field){
+            markdown += emitProperty(field);
+        });
+    }
+
     if (type.methods.length) {
         markdown += "\n\n## Methods";
 
         type.methods.forEach(function(method){
             markdown += emitMethod(method);
-        });
-    }
-
-    if (type.fields.length) {
-        markdown += "\n\n## Members";
-
-        type.fields.forEach(function(field){
-            markdown += emitField(field);
         });
     }
 
@@ -120,6 +134,10 @@ function emitField(field) {
     }
 
     return markdown;
+}
+
+function emitProperty(property) {
+    return emitField(property);
 }
 
 function emitMethod(method) {
@@ -179,6 +197,10 @@ function parseField(element) {
     result.summary = parseSummary(element);
 
     return result;
+}
+
+function parseProperty(element) {
+    return parseField(element);
 }
 
 function parseMethod(element) {
