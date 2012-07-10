@@ -174,7 +174,8 @@
                     "url": "scatter-charts/scatter-line.html"
                 }, {
                     "text": "Date axis",
-                    "url": "scatter-charts/date-axis.html"
+                    "url": "scatter-charts/date-axis.html",
+                    "packages": [ "!offline" ]
                 }, {
                     "text": "Multi-axis",
                     "url": "scatter-charts/multiple-axes.html"
@@ -197,7 +198,8 @@
             "spriteCssClass": "chartIcon",
             "items": [{
                     "text": "PlotBands",
-                    "url": "customization/plotbands.html"
+                    "url": "customization/plotbands.html",
+                    "packages": [ "!offline" ]
                 }],
             "name": "customization"
         }, {
@@ -209,7 +211,8 @@
                     "url": "api/index.html"
                 }, {
                     "text": "Events",
-                    "url": "api/events.html"
+                    "url": "api/events.html",
+                    "packages": [ "!offline" ]
             }],
             "name": "api"
         }
