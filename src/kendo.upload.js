@@ -801,16 +801,31 @@
 
         enqueueFiles: function(files) {
             var upload = this.upload,
+                name,
+                i,
+                filesLength = files.length,
+                currentFile,
+                fileEntry,
                 fileEntries = [];
 
-            for (var i = 0; i < files.length; i++) {
-                var currentFile = files[i],
-                    name = currentFile.name;
+            if (upload.options.async.batch === true) {
+                name = $.map(files, function(file) { return file.name; })
+                       .join(", ");
 
-                var fileEntry = upload._enqueueFile(name, { "fileNames": [ currentFile ] });
-                fileEntry.data("file", currentFile);
+                fileEntry = upload._enqueueFile(name, { fileNames: files });
+                fileEntry.data("files", files);
 
                 fileEntries.push(fileEntry);
+            } else {
+                for (i = 0; i < filesLength; i++) {
+                    currentFile = files[i];
+                    name = currentFile.name;
+
+                    fileEntry = upload._enqueueFile(name, { fileNames: [ currentFile ] });
+                    fileEntry.data("files", [ currentFile ]);
+
+                    fileEntries.push(fileEntry);
+                }
             }
 
             return fileEntries;
@@ -822,7 +837,7 @@
 
         performUpload: function(fileEntry) {
             var upload = this.upload,
-                formData = this.createFormData(fileEntry.data("file")),
+                formData = this.createFormData(fileEntry.data("files")),
                 e = { files: fileEntry.data("fileNames") };
 
             if (!upload.trigger(UPLOAD, e)) {
@@ -899,11 +914,14 @@
             xhr.send(data);
         },
 
-        createFormData: function(fileInfo) {
+        createFormData: function(files) {
             var formData = new FormData(),
-            upload = this.upload;
+                upload = this.upload;
 
-            formData.append(upload.options.async.saveField || upload.name, fileInfo.rawFile);
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+                formData.append(upload.options.async.saveField || upload.name, files[i].rawFile);
+            }
 
             return formData;
         },
