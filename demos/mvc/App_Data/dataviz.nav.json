@@ -34,7 +34,7 @@
                 }, {
                     "text": "Binding to local data",
                     "url": "area-charts/local-data.html"
-				}, {
+                }, {
                     "text": "Binding to grouped data",
                     "url": "area-charts/grouped-data.html",
                     "packages": [ "!offline" ]
@@ -69,7 +69,7 @@
                 }, {
                     "text": "Binding to local data",
                     "url": "bar-charts/local-data.html"
-				}, {
+                }, {
                     "text": "Binding to grouped data",
                     "url": "bar-charts/grouped-data.html",
                     "packages": [ "!offline" ]
@@ -90,7 +90,7 @@
                 }, {
                     "text": "Binding to local data",
                     "url": "bubble-charts/local-data.html"
-				}, {
+                }, {
                     "text": "Binding to grouped data",
                     "url": "bubble-charts/grouped-data.html",
                     "packages": [ "!offline" ]
@@ -186,7 +186,7 @@
                 }, {
                     "text": "Binding to local data",
                     "url": "scatter-charts/local-data.html"
-				}, {
+                }, {
                     "text": "Binding to grouped data",
                     "url": "scatter-charts/grouped-data.html",
                     "packages": [ "!offline" ]
@@ -221,7 +221,7 @@
         {
             "text": "Radial Gauge",
             "spriteCssClass": "gaugeRadialIcon",
-            "documentation": "dataviz/radial-gauge/",
+            "documentation": "dataviz/radialgauge",
             "items": [{
                 "text": "Basic usage",
                 "url": "radial-gauge/index.html"
@@ -233,7 +233,7 @@
         }, {
             "text": "Linear Gauge",
             "spriteCssClass": "gaugeLinearIcon",
-            "documentation": "dataviz/linear-gauge/",
+            "documentation": "dataviz/lineargauge",
             "items": [{
                 "text": "Basic usage",
                 "url": "linear-gauge/index.html"
