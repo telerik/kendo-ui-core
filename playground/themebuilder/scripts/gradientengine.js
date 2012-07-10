@@ -1,8 +1,8 @@
 (function($, undefined) {
 
     // Removing the G flag will cause infinite loop.
-    var gradientRegExp = /(?:-\w+?-)?(?:linear|webkit)-gradient\s*?\((?:linear\s*,\s*)?[\s,]*?(.+?,)([^#\(]+?,)?\s*((?:(?:(?:rgba?|color-stop)\(.+?\)|#[\d\w]+)[\s\d\w%]*?[,\s\)]*)+)\)/ig,
-        detailRegExp = /(rgba?\([^\)]+?\)|#[\d\w]+)\s*([\d\.\w%]*)|color-stop\(([\d.]*)[\s,]*(rgba?\([^\)]+?\)|#[\d\w]+)\s*\)/ig,
+    var gradientRegExp = /(?:-\w+?-)?(?:linear|webkit)-gradient\s*?\((?:linear\s*,\s*)?[\s,]*?(.+?,)([^#t\(]+?,)?\s*((?:(?:(?:rgba?|color-stop|from|to)\(.+?\)|#[\d\w]+|transparent)[\s\d\w%]*?[,\s\)]*)+)\)/ig,
+        detailRegExp = /(rgba?\([^\)]+?\)|#[\d\w]+|transparent)\s*([\d\.\w%]*)|color-stop\(([\d.]*)[\s,]*(rgba?\([^\)]+?\)|#[\d\w]+)\s*\)/ig,
         stripRegExp = /^\s*|\s*$|,/g,
         splitRegExp = /\s*,\s*/,
         numberRegExp = /\d/,
@@ -60,6 +60,7 @@
 
     window.Gradient = kendo.Observable.extend({
         init: function(cssValue) {
+            cssValue = cssValue.indexOf("gradient") != -1 ? cssValue : "linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0))";
             this.value = this.parseGradient(cssValue);
         },
 
@@ -99,20 +100,21 @@
 
                     output[counter].stops[i++] = {
                         color: new Color(color),
-                        position: position
+                        position: parseFloat(position)
                     };
                 }
 
                 if (output[counter].stops[i-1].position === 0 && lastPosition == "") {
-                    output[counter].stops[i-1].position = "100%";
+                    output[counter].stops[i-1].position = 100;
                 }
             }
 
             return output;
         },
 
-        get: function ( prefixes ) {
-            var output = "", that = this;
+        get: function ( prefixes, index ) {
+            var output = "", that = this,
+                target = !isNaN(index) ? [ that.value[index]] : that.value;
 
             if (typeof prefixes == "undefined") {
                 prefixes = [ kendo.support.transforms.css ];
@@ -121,7 +123,7 @@
             }
 
             $.each (prefixes, function (idx, value) {
-                that.value.forEach(function(gradient) {
+                target.forEach(function(gradient) {
                     if (value == "-webkit-") {
                         output += that._getWebKitGradient(gradient);
                     } else {
@@ -142,7 +144,7 @@
             gradient.stops.forEach(function(stop) {
                 parsed = parseInt(stop.position, 10);
 
-                output += stop.color.get() + (parsed != 0 && stop.position != "100%" ? " " + stop.position : "") + ",";
+                output += stop.color.get() + (parsed != 0 && stop.position != "100" ? " " + stop.position + "%" : "") + ",";
             });
 
             return output.substring(0, output.length - 1) + "),";
@@ -154,7 +156,7 @@
             output += "-webkit-gradient(linear," + gradient.start.normalized + "," + gradient.end.normalized + ",";
 
             gradient.stops.forEach(function(stop) {
-                output += "color-stop(" + (trimZeroes(parseFloat(stop.position) / 100) || "0") + ", " + stop.color.get() + "),";
+                output += "color-stop(" + (trimZeroes(stop.position / 100) || "0") + ", " + stop.color.get() + "),";
             });
 
             return output.substring(0, output.length - 1) + "),";

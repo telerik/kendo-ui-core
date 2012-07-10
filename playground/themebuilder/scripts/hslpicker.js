@@ -19,11 +19,9 @@
                 });
 
             element
-                .bind({
-                    click: function(e) {
+                .on("click", function(e) {
                     e.preventDefault();
                     that._toggle();
-                    }
                 });
 
                 that.color = new Color(element.css("background-color"));
@@ -39,18 +37,20 @@
                     lightnessValue = $('<div class="slider-value">0</div>').appendTo(popupElement),
                     alphaElement = $('<label class="label">A<input type="progress" /></label>').appendTo(popupElement).find("input"),
                     alphaValue = $('<div class="slider-value">0</div>').appendTo(popupElement),
+                    changeProxy = proxy(that._onChange, that),
                     slideProxy = proxy(that._onSlide, that);
 
-                that.hueSlider = extend(hueElement.kendoColorSlider({ max: 359, slide: slideProxy, change: slideProxy }).data("kendoColorSlider"), { type: "hue", valueElement: hueValue });
-                that.saturationSlider = extend(saturationElement.kendoColorSlider({ slide: slideProxy, change: slideProxy }).data("kendoColorSlider"), { type: "saturation", valueElement: saturationValue });
-                that.lightnessSlider = extend(lightnessElement.kendoColorSlider({ slide: slideProxy, change: slideProxy }).data("kendoColorSlider"), { type: "lightness", valueElement: lightnessValue });
-                that.alphaSlider = extend(alphaElement.kendoColorSlider({ max: 1, precision: 2, slide: slideProxy, change: slideProxy }).data("kendoColorSlider"), { type: "alpha", valueElement: alphaValue });
+                that.hueSlider = extend(hueElement.kendoColorSlider({ max: 359, slide: slideProxy, change: changeProxy }).data("kendoColorSlider"), { type: "hue", valueElement: hueValue });
+                that.saturationSlider = extend(saturationElement.kendoColorSlider({ slide: slideProxy, change: changeProxy }).data("kendoColorSlider"), { type: "saturation", valueElement: saturationValue });
+                that.lightnessSlider = extend(lightnessElement.kendoColorSlider({ slide: slideProxy, change: changeProxy }).data("kendoColorSlider"), { type: "lightness", valueElement: lightnessValue });
+                that.alphaSlider = extend(alphaElement.kendoColorSlider({ max: 1, precision: 2, slide: slideProxy, change: changeProxy }).data("kendoColorSlider"), { type: "alpha", valueElement: alphaValue });
 
                 kendo.notify(that);
             },
 
             events: [
-                "pick"
+                "pick",
+                "change"
             ],
 
             options: {
@@ -80,6 +80,12 @@
                 that.popup[open ? "open" : "close"]();
             },
 
+            _onChange: function(e) {
+                var color = this._onSlide(e);
+
+                this.trigger("change", { color: color });
+            },
+
             _onSlide: function(e) {
                 var that = this,
                     color = that.color[e.sender.type](e.value),
@@ -91,6 +97,8 @@
                 e.sender.valueElement.text(e.value);
 
                 that.trigger("pick", { color: color });
+
+                return color;
             }
         });
 

@@ -381,7 +381,11 @@ function initTargets() {
             }
         });
         $("#picky").kendoHSLPicker();
-        $(".km-navbar").kendoHSLPicker();
+        $(".km-tabstrip").kendoHSLPicker({ change: function (e) {
+            this.element.parents(".device").data("kendoStyleEngine").update(this.element, { "background-color": e.color.get() });
+        } });
+        $(".gradient").kendoGradientPicker();
+        $(".km-navbar").kendoGradientPicker();
     }, 200);
 }
 
