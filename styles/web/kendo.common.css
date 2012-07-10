@@ -2952,12 +2952,12 @@ div.k-slider
     line-height: 1;
 }
 
-.k-slider-horizontal .k-i-seek-w .k-label
+.k-slider-horizontal .k-first .k-label
 {
     left: -50%;
 }
 
-.k-slider-horizontal .k-i-seek-e .k-label
+.k-slider-horizontal .k-last .k-label
 {
     left: auto;
     right: -50%;
@@ -2980,12 +2980,12 @@ div.k-slider
     text-align: left;
 }
 
-.k-slider-vertical .k-i-seek-e .k-label
+.k-slider-vertical .k-last .k-label
 {
     top: -0.5em;
 }
 
-.k-slider-vertical .k-i-seek-w .k-label
+.k-slider-vertical .k-first .k-label
 {
     bottom: -0.5em;
 }
