@@ -20,6 +20,24 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Controls whether to bind the widget to the DataSource on initialization.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().TreeView()
+        ///             .Name("TreeView")
+        ///             .AutoBind(false)
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TreeViewBuilder AutoBind(bool autoBind)
+        {
+            Component.AutoBind = autoBind;
+
+            return this;
+        }
+
+        /// <summary>
         /// Defines the items in the TreeView
         /// </summary>
         /// <param name="addAction">The add action.</param>

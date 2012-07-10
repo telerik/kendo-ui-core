@@ -276,5 +276,14 @@ namespace Kendo.Mvc.UI.Tests
             IHtmlNode tag = renderer.ItemTag(item, false);
             Assert.Equal(id, tag.Attribute("data-id"));
         }
+
+        [Fact]
+        public void Should_output_data_attribute_for_hasChildren()
+        {
+            item.HasChildren = true;
+
+            IHtmlNode tag = renderer.ItemTag(item, false);
+            Assert.Equal("true", tag.Attribute("data-hasChildren"));
+        }
     }
 }

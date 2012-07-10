@@ -141,6 +141,12 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        public bool AutoBind
+        {
+            get;
+            set;
+        }
+
         public override void WriteInitializationScript(TextWriter writer)
         {
             var options = new Dictionary<string, object>(Events);
@@ -157,6 +163,11 @@ namespace Kendo.Mvc.UI
             if (DragAndDrop)
             {
                 options["dragAndDrop"] = true;
+            }
+
+            if (AutoBind)
+            {
+                options["autoBind"] = true;
             }
 
             if (!string.IsNullOrEmpty(DataTextField))
