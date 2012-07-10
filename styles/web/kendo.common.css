@@ -1516,20 +1516,24 @@ div.k-grid-header .k-header
 }
 
 .k-edit-label,
-.k-edit-field
+.k-edit-field,
+.editor-label,
+.editor-field
 {
     display: inline-block;
     padding-bottom: 1em;
 }
 
-.k-edit-label
+.k-edit-label,
+.editor-label
 {
     width: 30%;
     text-align: right;
     padding-right: 3%;
 }
 
-.k-edit-field
+.k-edit-field,
+.editor-field
 {
     width: 60%;
 }
@@ -1559,7 +1563,7 @@ div.k-grid-header .k-header
 *+html .k-grid-actions{ vertical-align: bottom; }
 
 .k-grid .k-button,
-.k-edit-form .k-button
+.k-edit-form-container .k-button
 {
     margin: 0 .2em;
 }
