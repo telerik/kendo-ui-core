@@ -238,8 +238,12 @@ namespace Kendo.Mvc.UI
                 options["checkboxTemplate"] = CheckboxTemplate;
             }
 
-            //TODO: Use new Init writer to output animation dictionary
-            // Animation.SerializeTo(objectWriter);
+            var animation = Animation.ToJson();
+
+            if (animation.Keys.Any())
+            {
+                options["animation"] = animation["animation"];
+            }
 
             writer.Write(Initializer.Initialize(Selector, "TreeView", options));
 
