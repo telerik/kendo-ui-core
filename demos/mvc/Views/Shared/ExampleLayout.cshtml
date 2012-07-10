@@ -63,20 +63,22 @@
                 <a class="documentation-link k-link" href="http://docs.kendoui.com/api/@ViewBag.Documentation"><span class="documentation-icon"></span>Documentation</a>
             }
 
-            @if (ViewBag.UseStaticDescription == true) {
-                <ul>
-                    <li class="k-state-active">Getting started</li>
-                </ul>
+            <ul>
+                <li class="k-state-active">Getting started</li>
+                <li>Demo source code</li>
+            </ul>
 
-                <div class="description">
-                    @Html.Raw(ViewBag.Description)
-                    @RenderSection("Description", false)
-                </div>
-            }
+            <div class="description">
+                @Html.Raw(ViewBag.Description)
+                @RenderSection("Description", false)
+            </div>
         </div>
 
         <script>
             var codestrip = $("#codeStrip").kendoTabStrip({
+                contentUrls: [null,
+                    "@Url.RouteUrl(ViewBag.suite == "mobile" ? "Source" : "SourceView", new { suite = ViewBag.suite, section = ViewBag.Section, example = ViewBag.Example })"
+                ],
                 contentLoad: function() {
                     prettyPrint();
                 },
@@ -85,64 +87,7 @@
                         effects: "fadeIn"
                     }
                 }
-            }).data("kendoTabStrip"),
-            docURL = "@ViewBag.Documentation",
-            docs = window.docs,
-            suite, section;
-
-            @if (ViewBag.Debug == false) {
-                <text>
-                    //http://developer.github.com/v3/repos/contents/
-                    docs.url = "https://api.github.com/repos/telerik/kendo-docs/contents/api/{0}/{1}.md"
-                </text>
-            }
-
-            if (docURL) {
-                docURL = docURL.split("/");
-                suite = docURL[0];
-                section = docURL[1];
-
-                if (suite === "ui-widgets") {
-                    suite = "web";
-                }
-
-                if (section) {
-                    section = section.replace("-", "");
-                }
-
-                docs.load(suite, section, function(sections) {
-                    for (var section in sections) {
-                        codestrip.append({
-                            text: section,
-                            content: sections[section]
-                        });
-                    }
-
-                    codestrip.select(0);
-
-                    //add demo source code
-                    codestrip.insertAfter({
-                        text: "Demo source code",
-                        contentUrl: "@Url.RouteUrl(ViewBag.suite == "mobile" ? "Source" : "SourceView", new { suite = ViewBag.suite, section = ViewBag.Section, example = ViewBag.Example })"
-                    }, codestrip.select());
-
-                    //prettify pre tags
-                    $("pre").addClass("prettyprint");
-                    prettyPrint();
-                });
-            }
-
-            @if (ViewBag.UseStaticDescription == true) {
-                <text>
-                codestrip.select(0);
-
-                //add demo source code
-                codestrip.insertAfter({
-                    text: "Demo source code",
-                    contentUrl: "@Url.RouteUrl("Source", new { suite = ViewBag.suite, section = ViewBag.Section, example = ViewBag.Example })"
-                }, codestrip.select());
-                </text>
-            }
+            }).data("kendoTabStrip");
         </script>
     }
 </div>

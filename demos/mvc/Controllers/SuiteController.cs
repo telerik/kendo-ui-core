@@ -10,14 +10,8 @@ namespace Kendo.Controllers
 {
     public class SuiteController : BaseController
     {
-        protected static readonly IDictionary<String, String> Docs =
-            new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
-                { "mobile.application", "mobile.application" },
-                { "web.datasource", "data.datasource" },
-                { "web.templates", "template" }
-            };
-
         private List<string> examplesUrl = new List<string>();
+        protected static readonly docsURL = "http://docs.kendoui.com/api/{0}/{1}";
 
         //
         // GET: /Web/
@@ -139,58 +133,45 @@ namespace Kendo.Controllers
         }
 
         protected string LoadDescription(string suite, string section) {
-            var path = DocPath(suite, section, "description");
-            var description = "";
+            var content = LoadDocPage(suite, section);
+            var description = string.Empty;
 
-            if (path != null) {
-                description = IOFile.ReadAllText(Server.MapPath(path));
+            if (!string.IsNullOrEmpty(content)) {
+                description = GetTopic(content, "description");
             }
 
             return description;
         }
 
-        private string DocPath(string suite, string section, string topic)
+        private string LoadDocPage(string suite, string section)
         {
-            var component = section;
-            var docKey = String.Format("{0}.{1}", suite, section);
+            WebClient client = new WebClient();
+            return client.DownloadString(string.Format(docsURL, suite, section));
+        }
 
-            if(Docs.ContainsKey(docKey)) {
-               component = Docs[docKey];
-            } else {
-                switch(suite) {
-                    case "dataviz":
-                        if (section.Contains("gauge"))
-                        {
-                            section = section.Replace("-", "");
-                        }
-                        else
-                        {
-                            section = "chart";
-                        }
+        private string GetTopic(string html, string topic) {
+            var splits = html.Split(new string[] { "<h2 class=\"toc\"" }, System.StringSplitOptions.None).ToList();
+            var content = string.Empty;
 
-                        component = "dataviz.ui." + section;
-                        break;
-                    case "mobile":
-                        component = "mobile.ui." + component;
-                        break;
-                    case "web":
-                        component = "ui." + component;
-                        break;
+            if (splits.Count > 0)
+            {
+                if (splits[0].IndexOf("doctype", StringComparison.OrdinalIgnoreCase) > -1)
+                {
+                    splits.RemoveAt(0);
+                }
+
+                if (splits[0].IndexOf("contents", StringComparison.OrdinalIgnoreCase) > -1)
+                {
+                    splits.RemoveAt(0);
+                }
+
+                if (splits[0].IndexOf(topic, StringComparison.OrdinalIgnoreCase) > -1)
+                {
+                    content = splits[0].Split('\n');
                 }
             }
 
-            var path = string.Format(
-                "~/content/docs/kendo.{0}.{1}.html", component, topic
-            );
-
-            if (IOFile.Exists(Server.MapPath(path)))
-            {
-                return path;
-            }
-            else
-            {
-                return null;
-            }
+            return content;
         }
     }
 }
