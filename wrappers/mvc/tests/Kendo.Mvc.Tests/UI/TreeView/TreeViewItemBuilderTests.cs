@@ -25,27 +25,6 @@ namespace Kendo.Mvc.Tests.Menu
         }
 
         [Fact]
-        public void Builder_should_set_value_property()
-        {
-            builder.Value("test");
-            Assert.Equal("test", item.Value);
-        }
-
-        [Fact]
-        public void Builder_should_set_checked_property()
-        {
-            builder.Checked(true);
-            Assert.Equal(true, item.Checked);
-        }
-
-        [Fact]
-        public void Builder_should_set_load_on_demand_property()
-        {
-            builder.LoadOnDemand(true);
-            Assert.Equal(true, item.LoadOnDemand);
-        }
-
-        [Fact]
         public void Expanded_should_return_TreeViewItemBuilder_object()
         {
             var returnedBuilder = builder.Expanded(true);

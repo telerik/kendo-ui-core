@@ -35,6 +35,16 @@ namespace Kendo.Mvc.UI
             IHtmlNode li = new HtmlElement("li")
                 .Attributes(item.HtmlAttributes);
 
+            if (item.Id.HasValue())
+            {
+                li.Attribute("data-id", item.Id);
+            }
+
+            if (item.HasChildren)
+            {
+                li.Attribute("data-hasChildren", "true");
+            }
+
             if (item.NextSibling == null)
             {
                 li.PrependClass(UIPrimitives.Last);
@@ -53,7 +63,7 @@ namespace Kendo.Mvc.UI
                 .ToggleClass(UIPrimitives.Middle, item.PreviousSibling != null && item.NextSibling != null)
                 .AppendTo(li);
 
-            if (item.LoadOnDemand || hasAccessibleChildren || item.Template.HasValue())
+            if (item.HasChildren || hasAccessibleChildren || item.Template.HasValue())
             {
                 new HtmlElement("span")
                         .AddClass(UIPrimitives.Icon)
@@ -63,62 +73,14 @@ namespace Kendo.Mvc.UI
                         .ToggleClass("k-minus-disabled", !item.Enabled && item.Expanded)
                         .AppendTo(div);
             }
-
-            if (Component.ShowCheckBox && item.Checkable)
-            {
-                string checkedItemNamePrefix = Component.Name + "_checkedNodes[{0}].";
-
-                IHtmlNode chkBoxWrapperTag = new HtmlElement("span")
-                    .ToggleClass(UIPrimitives.DisabledState, !item.Enabled)
-                    .AddClass(UIPrimitives.CheckBox)
-                    .AppendTo(div);
-
-                List<string> indexes = new List<string>();
-
-                TreeViewItem currentItem = item;
-
-                while (currentItem != null)
-                {
-                    indexes.Insert(0, currentItem.Parent == null ? Component.Items.IndexOf(currentItem).ToString() : currentItem.Parent.Items.IndexOf(currentItem).ToString());
-                    currentItem = currentItem.Parent;
-                }
-
-                checkedItemNamePrefix = checkedItemNamePrefix.FormatWith(string.Join(":", indexes.ToArray()));
-
-                new HtmlElement("input", TagRenderMode.SelfClosing)
-                    .AddClass(UIPrimitives.Input)
-                    .Attributes(new { type = "hidden", name = Component.Name + "_checkedNodes.Index", value = string.Join(":", indexes.ToArray()) })
-                    .AppendTo(chkBoxWrapperTag);
-
-                IHtmlNode chkBoxTag = new HtmlElement("input", TagRenderMode.SelfClosing)
-                    .AddClass(UIPrimitives.Input)
-                    .Attributes(new { name = checkedItemNamePrefix + "Checked", type = "checkbox", value = item.Checked })
-                    .ToggleAttribute("disabled", "disabled", !item.Enabled)
-                    .AppendTo(chkBoxWrapperTag);
-
-                if (item.Checked)
-                {
-                    chkBoxTag.Attribute("checked", "checked");
-
-                    new HtmlElement("input", TagRenderMode.SelfClosing)
-                        .AddClass(UIPrimitives.Input)
-                        .Attributes(new { type = "hidden", name = checkedItemNamePrefix + "Text", value = item.Text })
-                        .AppendTo(chkBoxWrapperTag);
-
-                    new HtmlElement("input", TagRenderMode.SelfClosing)
-                        .AddClass(UIPrimitives.Input)
-                        .Attributes(new { type = "hidden", name = checkedItemNamePrefix + "Value", value = item.Value })
-                        .AppendTo(chkBoxWrapperTag);
-                }
-            }
-
+            
             return li;
         }
 
         public IHtmlNode ItemInnerContent(TreeViewItem item)
         {
             string url = Component.GetItemUrl(item, string.Empty);
-            bool isNavigatable = !string.IsNullOrEmpty(url);
+            bool isNavigatable = url.HasValue();
 
             IHtmlNode tag = new HtmlElement(isNavigatable ? "a" : "span");
 
@@ -140,12 +102,12 @@ namespace Kendo.Mvc.UI
                 tag.PrependClass(UIPrimitives.Link);
             }
 
-            if (!string.IsNullOrEmpty(item.ImageUrl))
+            if (item.ImageUrl.HasValue())
             {
                 ImageTag(item).AppendTo(tag);
             }
 
-            if (!string.IsNullOrEmpty(item.SpriteCssClasses))
+            if (item.SpriteCssClasses.HasValue())
             {
                 SpriteTag(item).AppendTo(tag);
             }
@@ -159,7 +121,7 @@ namespace Kendo.Mvc.UI
         {
             return new HtmlElement("input", TagRenderMode.SelfClosing)
                  .AddClass(UIPrimitives.Input)
-                 .Attributes(new { type = "hidden", value = item.Value, name = "itemValue" });
+                 .Attributes(new { type = "hidden", value = item.Id, name = "itemValue" });
         }
 
         public IHtmlNode ItemContentTag(TreeViewItem item)

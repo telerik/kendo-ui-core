@@ -117,16 +117,6 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        /// <summary>
-        /// Gets or sets a value indicating whether all the item is expanded.
-        /// </summary>
-        /// <value><c>true</c> if checkboxes are visible; otherwise, <c>false</c>. The default value is <c>false</c></value>
-        public bool ShowCheckBox
-        {
-            get;
-            set;
-        }
-
         public int SelectedIndex
         {
             get;
@@ -154,15 +144,7 @@ namespace Kendo.Mvc.UI
         public override void WriteInitializationScript(TextWriter writer)
         {
             var options = new Dictionary<string, object>(Events);
-
-            /*TODO: ShowCheckBox
-
-            if (ShowCheckBox)
-            {
-                objectWriter.Append("showCheckBox", ShowCheckBox);
-            }
-            */
-
+            
             if (!string.IsNullOrEmpty(DataSource.Transport.Read.Url))
             {
                 options["dataSource"] = DataSource.ToJson();
@@ -240,7 +222,7 @@ namespace Kendo.Mvc.UI
                         }
                     }
 
-                    if (item.LoadOnDemand)
+                    if (item.HasChildren)
                     {
                         item.Expanded = false;
                     }
@@ -250,9 +232,9 @@ namespace Kendo.Mvc.UI
                         ExpandAllChildrens(item);
                     }
 
-                    if (string.IsNullOrEmpty(item.Value))
+                    if (string.IsNullOrEmpty(item.Id))
                     {
-                        item.Value = item.Text;
+                        item.Id = item.Text;
                     }
 
                     WriteItem(item, treeViewTag.Children[0], builder);
@@ -301,11 +283,6 @@ namespace Kendo.Mvc.UI
                     IHtmlNode itemTag = builder.ItemTag(item, hasAccessibleChildren).AppendTo(parentTag);
 
                     builder.ItemInnerContent(item).AppendTo(itemTag.Children[0]);
-
-                    if (item.LoadOnDemand || ShowCheckBox || item.Value.HasValue())
-                    {
-                        builder.ItemHiddenInputValue(item).AppendTo(itemTag.Children[0]);
-                    }
 
                     if (item.Template.HasValue())
                     {

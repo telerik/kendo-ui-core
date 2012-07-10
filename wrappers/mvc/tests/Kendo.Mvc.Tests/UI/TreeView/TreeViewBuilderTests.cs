@@ -141,17 +141,14 @@ namespace Kendo.Mvc.UI.Tests
             var model = new List<TreeViewItemModel> {
                 new TreeViewItemModel() {
                     Text = "foo",
-                    Value = "5",
+                    Id = "5",
                     Enabled = false,
                     Expanded = true,
-                    Checkable = true,
-                    Checked = true,
                     Encoded = true,
-                    NavigateUrl = "http://telerik.com/",
+                    Url = "http://telerik.com/",
                     ImageUrl = "pic.jpg",
                     Items = new List<TreeViewItemModel>() {
                         new TreeViewItemModel() { 
-                            LoadOnDemand = true,
                             Text = "bar"
                         },
                         new TreeViewItemModel() { Text = "baz" }
@@ -161,18 +158,17 @@ namespace Kendo.Mvc.UI.Tests
 
             builder.BindTo(model);
 
+            var item = treeView.Items[0];
+
             Assert.Equal(1, treeView.Items.Count);
-            Assert.Equal(2, treeView.Items[0].Items.Count);
-            Assert.Equal("foo", treeView.Items[0].Text);
-            Assert.Equal(false, treeView.Items[0].Enabled);
-            Assert.Equal(true, treeView.Items[0].Expanded);
-            Assert.Equal(true, treeView.Items[0].Items[0].LoadOnDemand);
-            Assert.Equal(true, treeView.Items[0].Checkable);
-            Assert.Equal(true, treeView.Items[0].Checked);
-            Assert.Equal(true, treeView.Items[0].Encoded);
-            Assert.Equal("5", treeView.Items[0].Value);
-            Assert.Equal("http://telerik.com/", treeView.Items[0].Url);
-            Assert.Equal("pic.jpg", treeView.Items[0].ImageUrl);
+            Assert.Equal(2, item.Items.Count);
+            Assert.Equal("foo", item.Text);
+            Assert.Equal(false, item.Enabled);
+            Assert.Equal(true, item.Expanded);
+            Assert.Equal(true, item.Encoded);
+            Assert.Equal("5", item.Id);
+            Assert.Equal("http://telerik.com/", item.Url);
+            Assert.Equal("pic.jpg", item.ImageUrl);
         }
 
         [Fact]

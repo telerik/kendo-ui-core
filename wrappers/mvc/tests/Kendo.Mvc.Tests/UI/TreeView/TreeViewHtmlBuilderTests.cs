@@ -268,30 +268,13 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
-        public void Should_output_hidden_field_with_value()
+        public void Should_output_data_attribute_with_value()
         {
-            const string value = "fakeValue";
-            item.Value = value;
+            const string id = "fakeId";
+            item.Id = id;
 
-            IHtmlNode tag = renderer.ItemHiddenInputValue(item);
-            Assert.Equal("input", tag.TagName);
-            Assert.Equal("hidden", tag.Attribute("type"));
-            Assert.Equal("itemValue", tag.Attribute("name"));
-            Assert.Equal(value, tag.Attribute("value"));
-        }
-
-        public void ItemTag_should_render_disabled_checkbox_if_item_is_disabled() 
-        {
-            treeView.ShowCheckBox = true;
-            item.Checkable = true;
-            item.Enabled = false;
-            
             IHtmlNode tag = renderer.ItemTag(item, false);
-            IHtmlNode checkbox = tag.Children[0].Children[0].Children[1];
-
-            Assert.Equal("input", checkbox.TagName);
-            Assert.Equal("checkbox", checkbox.Attribute("type"));
-            Assert.Equal("disabled", checkbox.Attribute("disabled"));
+            Assert.Equal(id, tag.Attribute("data-id"));
         }
     }
 }

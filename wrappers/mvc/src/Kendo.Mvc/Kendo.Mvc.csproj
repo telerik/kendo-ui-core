@@ -910,7 +910,7 @@
     <Compile Include="UI\TreeView\Fluent\TreeViewBindingSettingsBuilder.cs" />
     <Compile Include="UI\TreeView\Fluent\TreeViewBuilder.cs" />
     <Compile Include="UI\TreeView\Fluent\TreeViewEventBuilder.cs" />
-    <Compile Include="UI\TreeView\ITreeViewItem.cs" />
+    <Compile Include="UI\TreeView\IHierarchicalItem.cs" />
     <Compile Include="UI\TreeView\Html\TreeViewHtmlBuilder.cs" />
     <Compile Include="UI\TreeView\Fluent\TreeViewItemBuilder.cs" />
     <Compile Include="UI\TreeView\Fluent\TreeViewItemFactory.cs" />

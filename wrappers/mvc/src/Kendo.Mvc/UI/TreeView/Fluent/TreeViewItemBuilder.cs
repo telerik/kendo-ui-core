@@ -55,20 +55,20 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Sets the value for the item.
+        /// Sets the id of the item.
         /// </summary>
-        /// <param name="value">The value.</param>
+        /// <param name="value">The id.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Telerik().TreeView()
         ///             .Name("TreeView")
-        ///             .Items(items => items.Add().Value("1"))
+        ///             .Items(items => items.Add().Id("42"))
         /// %&gt;
         /// </code>
         /// </example>
-        public TreeViewItemBuilder Value(string value)
+        public TreeViewItemBuilder Id(string id)
         {
-            item.Value = value;
+            item.Id = id;
 
             return this;
         }
@@ -101,63 +101,9 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Define when the item will be checked on intial render.
-        /// </summary>
-        /// <param name="value">If true the item will be checked.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().TreeView()
-        ///             .Name("TreeView")
-        ///             .Items(items =>
-        ///             {
-        ///                 items.Add().Text("First Item").Items(firstItemChildren => 
-        ///                 {
-        ///                     firstItemChildren.Add().Text("Child Item 1");
-        ///                     firstItemChildren.Add().Text("Child Item 2");
-        ///                 })
-        ///                 .Checked(true);
-        ///             })
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public TreeViewItemBuilder Checked(bool value)
-        {
-            item.Checked = value;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Enables/disables the rendering of a checkbox for this item.
-        /// </summary>
-        /// <param name="value">If false, no checkbox will be rendered.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Telerik().TreeView()
-        ///             .Name("TreeView")
-        ///             .Items(items =>
-        ///             {
-        ///                 items.Add().Text("First Item").Items(firstItemChildren => 
-        ///                 {
-        ///                     firstItemChildren.Add().Text("Child Item 1");
-        ///                     firstItemChildren.Add().Text("Child Item 2");
-        ///                 })
-        ///                 .Checkable(false);
-        ///             })
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public TreeViewItemBuilder Checkable(bool value)
-        {
-            item.Checkable = value;
-
-            return this;
-        }
-
-        /// <summary>
         /// Sets the expand mode of the treeview item.
         /// </summary>
-        /// <param name="value">If true then item will be load on demand from client side.</param>
+        /// <param name="value">If true then item will be loaded on demand from client side, if the treeview DataSource is properly configured.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Telerik().TreeView()
@@ -169,14 +115,14 @@ namespace Kendo.Mvc.UI.Fluent
         ///                     firstItemChildren.Add().Text("Child Item 1");
         ///                     firstItemChildren.Add().Text("Child Item 2");
         ///                 })
-        ///                 .LoadOnDemand(true);
+        ///                 .HasChildren(true);
         ///             })
         /// %&gt;
         /// </code>
         /// </example>
-        public TreeViewItemBuilder LoadOnDemand(bool value)
+        public TreeViewItemBuilder HasChildren(bool value)
         {
-            item.LoadOnDemand = value;
+            item.HasChildren = value;
 
             return this;
         }

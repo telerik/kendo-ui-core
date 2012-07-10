@@ -134,17 +134,10 @@ namespace Kendo.Mvc.UI.Fluent
                         item.Text = node.Text;
                         item.Enabled = node.Enabled;
                         item.Expanded = node.Expanded;
-                        item.LoadOnDemand = node.LoadOnDemand;
-                        item.Checked = node.Checked;
-                        item.Checkable = node.Checkable;
                         item.Encoded = node.Encoded;
-                        item.Value = node.Value;
-                        
-                        if (!String.IsNullOrEmpty(node.NavigateUrl))
-                        {
-                            item.Url = node.NavigateUrl;
-                        }
+                        item.Id = node.Id;
 
+                        item.Url = node.Url;
                         item.ImageUrl = node.ImageUrl;
                     })
                     .Children(item => item.Items)
@@ -315,25 +308,6 @@ namespace Kendo.Mvc.UI.Fluent
         public TreeViewBuilder ExpandAll(bool value)
         {
             Component.ExpandAll = value;
-
-            return this;
-        }
-
-        /// <summary>
-        /// ShowCheckBox indicates if checkbox displayed before node.
-        /// </summary>
-        /// <param name="value">If true checkbox will be displayed for every node.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().TreeView()
-        ///             .Name("TreeView")
-        ///             .ShowCheckBox(true)
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public TreeViewBuilder ShowCheckBox(bool value)
-        {
-            Component.ShowCheckBox = value;
 
             return this;
         }
