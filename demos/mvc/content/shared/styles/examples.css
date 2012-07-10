@@ -1288,6 +1288,7 @@ pre.prettyprint
 {
     overflow: auto;
     font-family:courier,monospace;
+    max-height:600px;
 }
 
 /*console*/
