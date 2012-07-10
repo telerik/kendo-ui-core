@@ -13,6 +13,7 @@
             .Max(10)
             .SmallStep(2)
             .LargeStep(5)
+            .Value(0)
             .HtmlAttributes(new { @class = "balSlider" })
     %>
     <div id="equalizer">
@@ -94,7 +95,7 @@
     .balSlider {
         width: 240px;
     }
-    #slider .k-slider-selection {
+    .balSlider .k-slider-selection {
         display: none;
     }
     .eqSlider {
