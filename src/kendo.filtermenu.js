@@ -339,8 +339,13 @@
         },
 
         _open: function() {
+            var popup;
+
             $(".k-filter-menu").not(this.form).each(function() {
-                $(this).data(POPUP).close();
+                var popup = $(this).data(POPUP);
+                if (popup) {
+                    popup.close();
+                }
             });
         },
 
