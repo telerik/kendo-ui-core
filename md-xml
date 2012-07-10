@@ -55,7 +55,17 @@ function populateMemebers(type) {
 
         if (namespaceRegExp.test(name)) {
             kind = RegExp.$1;
-            shortName = RegExp.$2.replace(/`\d/, "");
+            shortName = RegExp.$2;
+
+            // Convert generics to human readable format
+            shortName = shortName.replace(/(`+)\d/g, function($0, $1) {
+                    return "<T" + ($1.length > 1 ? $1.length - 1 : "") + ">";
+                })
+                .replace(/{/g, "<")
+                .replace(/}/g, ">")
+                .replace(/>>/g, ">")
+                .replace(/<</g, "<")
+                .replace(/>,</g, "|"); // use "|" in order to be able to split by "," when determining the type of the parameters in emitMethod
 
             if (kind == "M" && name.indexOf("#ctor") < 0) {
                 var method = parseMethod(member);
@@ -143,7 +153,9 @@ function emitProperty(property) {
 function emitMethod(method) {
     var markdown = "";
 
-    markdown += "\n\n### " + method.name;
+    // replace any "|" with "," (coming from generics)
+
+    markdown += "\n\n### " + method.name.replace(/\|/g, ",");
 
     if (method.summary) {
         markdown += "\n" + method.summary;
@@ -163,7 +175,7 @@ function emitMethod(method) {
         markdown += "\n\n#### Parameters";
 
         method.params.forEach(function(param, index) {
-            markdown += emitParam(param, paramTypes[index]);
+            markdown += emitParam(param, paramTypes[index].replace(/\|/g, ","));
         })
     }
 
