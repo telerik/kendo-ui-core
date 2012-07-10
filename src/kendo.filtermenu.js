@@ -342,7 +342,7 @@
             var popup;
 
             $(".k-filter-menu").not(this.form).each(function() {
-                var popup = $(this).data(POPUP);
+                popup = $(this).data(POPUP);
                 if (popup) {
                     popup.close();
                 }
