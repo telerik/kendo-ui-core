@@ -27,6 +27,11 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Gets or sets a value indicating whether to start the upload immediately after selecting a file
         /// </summary>
-        bool AutoUpload { get; set; }
+        bool? AutoUpload { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether to upload selected files in one batch (request)
+        /// </summary>
+        bool? Batch { get; set; }
     }
 }

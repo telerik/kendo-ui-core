@@ -46,6 +46,19 @@ namespace Kendo.Mvc.UI.Tests.Upload
         }
 
         [Fact]
+        public void Batch_should_set_Batch()
+        {
+            builder.Batch(false);
+            settingsMock.VerifySet(s => s.Batch = false);
+        }
+
+        [Fact]
+        public void Batch_should_return_builder()
+        {
+            builder.Batch(false).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
         public void Save_with_action_controller_and_routeValues_should_set_saveRequestSettings()
         {
             builder.Save("action", "controller", new RouteValueDictionary { { "id", 1 } });
