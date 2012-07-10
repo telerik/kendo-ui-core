@@ -235,7 +235,29 @@ function emitMethod(method) {
 function emitParam(param, type) {
     var markdown = "";
 
-    markdown += "\n\n##### " + param.name + " `" + type + "`";
+    function linkNamespace(namespace) {
+        var known = false;
+        var regExp = new RegExp(namespace.replace(/\./g, "\\.") + "\\.([\\w]+)", "g");
+
+        type = type.replace(regExp, function($0, $1) {
+            known = true;
+
+            var result = "[" + namespace + "." + $1 + "](/api/wrappers/aspnet-mvc/" + namespace + "/" + $1.replace(/<[^>]*>/g, "") + ")";
+
+            return result;
+        });
+
+        return known;
+    }
+
+    var link = linkNamespace("Kendo.Mvc.UI.Fluent") || linkNamespace("Kendo.Mvc.UI") || linkNamespace("Kendo.Mvc");
+
+    markdown += "\n\n##### " + param.name + " ";
+    if (link) {
+        markdown += type.replace(/>/g, "\\>").replace(/</g, "\\<");
+    } else {
+        markdown += "`" + type + "`";
+    }
 
     if (param.summary) {
         markdown += "\n" + param.summary;
