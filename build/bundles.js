@@ -93,7 +93,7 @@ var bundles = [{
     licenses: [commercialLicense],
     eula: "mobile-eula"
 },{
-    name: "kendoui.complete",
+    name: "kendoui",
     suites: ["web", "dataviz", "mobile"],
     combinedScript: "all",
     sourceLicense: "src-license-complete.txt",
