@@ -30,7 +30,10 @@ Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.JobGrowt
             .Read("_JobGrowthDataComparative", "Bubble_Charts")
             .Group(group => group.Add(model => model.Year))
         )
-        .Legend(false)
+        .Legend(legend => legend
+            .Visible(true)
+            .Position(ChartLegendPosition.Bottom)
+        )
         .Series(series =>
         {
             series.Bubble(

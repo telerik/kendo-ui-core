@@ -26,7 +26,10 @@
             .Read("_JobGrowthDataComparative", "Bubble_Charts")
             .Group(group => group.Add(model => model.Year))
         )
-        .Legend(false)
+        .Legend(legend => legend
+            .Visible(true)
+            .Position(ChartLegendPosition.Bottom)
+        )
         .Series(series => {
             series.Bubble(
                 model => model.Growth,
