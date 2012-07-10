@@ -11,7 +11,10 @@
                             text: "Break-up of Spain Electricity Production for 2008"
                         },
                         legend: {
-                            position: "bottom"
+                            position: "bottom",
+                            labels: {
+                                template: "#= text # (#= value #%)"
+                            }
                         },
                         seriesDefaults: {
                             labels: {
