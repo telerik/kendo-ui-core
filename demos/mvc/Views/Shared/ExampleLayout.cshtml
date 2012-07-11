@@ -64,19 +64,13 @@
             }
 
             <ul>
-                <li class="k-state-active">Getting started</li>
                 <li>Demo source code</li>
             </ul>
-
-            <div class="description">
-                @Html.Raw(ViewBag.Description)
-                @RenderSection("Description", false)
-            </div>
         </div>
 
         <script>
             var codestrip = $("#codeStrip").kendoTabStrip({
-                contentUrls: [null,
+                contentUrls: [
                     "@Html.Raw(Url.RouteUrl(ViewBag.suite == "mobile" ? "Source" : "SourceView", new { suite = ViewBag.suite, section = ViewBag.Section, example = ViewBag.Example }))"
                 ],
                 contentLoad: function() {
