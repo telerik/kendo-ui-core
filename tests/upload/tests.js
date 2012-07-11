@@ -22,6 +22,9 @@ tests.push(
     {
         page: "upload/mvvm.html",
         title: "upload mvvm"
+    },
+    {
+        page: "upload/lint.html",
+        title: "upload lint"
     }
-
 );

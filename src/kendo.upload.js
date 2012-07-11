@@ -9,7 +9,6 @@
         ERROR = "error",
         COMPLETE = "complete",
         CANCEL = "cancel",
-        LOAD = "load",
         PROGRESS = "progress",
         REMOVE = "remove";
 
@@ -25,7 +24,7 @@
 
             var activeInput = that.element;
             that.wrapper = activeInput.closest(".k-upload");
-            if (that.wrapper.length == 0) {
+            if (that.wrapper.length === 0) {
                 that.wrapper = that._wrapInput(activeInput);
             }
 
@@ -37,7 +36,7 @@
                 "reset": $.proxy(that._onParentFormReset, that)
             });
 
-            if (that.options.async.saveUrl != undefined) {
+            if (that.options.async.saveUrl) {
                 that._module = that._supportsFormData() ?
                 new formDataUploadModule(that) :
                 new iframeUploadModule(that);
@@ -99,7 +98,7 @@
 
             that.multiple = that.options.multiple;
 
-            activeInput.attr("multiple", that._supportsMultiple() ? that.multiple : false)
+            activeInput.attr("multiple", that._supportsMultiple() ? that.multiple : false);
             that.toggle(that.options.enabled);
         },
 
@@ -182,7 +181,7 @@
                 fileEntry,
                 fileList =  $(".k-upload-files", that.wrapper);
 
-            if (fileList.length == 0) {
+            if (fileList.length === 0) {
                 fileList = $("<ul class='k-upload-files k-reset'></ul>").appendTo(that.wrapper);
                 if (!that.options.showFileList) {
                     fileList.hide();
@@ -217,7 +216,7 @@
                 this._hideUploadButton();
             }
 
-            if (allFiles.length == 0) {
+            if (allFiles.length === 0) {
                 fileList.remove();
             }
         },
@@ -261,20 +260,20 @@
         },
 
         _renderAction: function (actionClass, actionText) {
-            if (actionClass != "") {
+            if (actionClass !== "") {
                 return $(
                 "<button type='button' class='k-button k-button-icontext'>" +
                     "<span class='k-icon " + actionClass + "'></span>" +
                     actionText +
                 "</button>"
-                )
+                );
             }
             else {
                 return $(
                 "<button type='button' class='k-button'>" +
                     actionText +
                 "</button>"
-                )
+                );
             }
         },
 
@@ -315,7 +314,7 @@
 
         _onFileProgress: function(e, percentComplete) {
             var progressBar = $(".k-progress-status", e.target);
-            if (progressBar.length == 0) {
+            if (progressBar.length === 0) {
                 progressBar =
                     $("<span class='k-progress'><span class='k-state-selected k-progress-status' style='width: 0;'></span></span>")
                         .appendTo($(".k-filename", e.target))
@@ -357,7 +356,7 @@
             this._fileState(fileEntry, "failed");
             this._fileAction(fileEntry, "retry");
 
-            var prevented = this.trigger(ERROR, {
+            this.trigger(ERROR, {
                 operation: "upload",
                 files: fileEntry.data("fileNames"),
                 XMLHttpRequest: xhr
@@ -370,9 +369,9 @@
 
         _showUploadButton: function() {
             var uploadButton = $(".k-upload-selected", this.wrapper);
-            if (uploadButton.length == 0) {
+            if (uploadButton.length === 0) {
                 uploadButton =
-                    this._renderAction("", this.localization["uploadSelectedFiles"])
+                    this._renderAction("", this.localization.uploadSelectedFiles)
                     .addClass("k-upload-selected");
             }
 
@@ -420,7 +419,7 @@
                 isSafari = !isChrome && /safari/.test(userAgent),
                 isWindowsSafari = isSafari && /windows/.test(userAgent);
 
-            return !isWindowsSafari && this._supportsFormData() && (this.options.async.saveUrl != undefined);
+            return !isWindowsSafari && this._supportsFormData() && (this.options.async.saveUrl);
         },
 
         _userAgent: function() {
@@ -432,7 +431,7 @@
                 .wrap("<div class='k-dropzone'></div>");
 
             var dropZone = $(".k-dropzone", this.wrapper)
-                .append($("<em>" + this.localization["dropFilesHere"] + "</em>"))
+                .append($("<em>" + this.localization.dropFilesHere + "</em>"))
                 .bind({
                     "dragenter": stopEvent,
                     "dragover": function(e) { e.preventDefault(); },
@@ -449,7 +448,7 @@
         },
 
         _supportsRemove: function() {
-            return this.options.async.removeUrl != undefined;
+            return !!this.options.async.removeUrl;
         },
 
         _submitRemove: function(fileNames, data, onSuccess, onError) {
@@ -479,7 +478,7 @@
         },
 
         _checkAllComplete: function() {
-            if ($(".k-file .k-icon.k-loading", this.wrapper).length == 0) {
+            if ($(".k-file .k-icon.k-loading", this.wrapper).length === 0) {
                 this.trigger(COMPLETE);
             }
         }
@@ -593,7 +592,7 @@
                 e.data = $.extend({ }, e.data, getAntiForgeryTokens());
                 for (var key in e.data) {
                     var dataInput = form.find("input[name='" + key + "']");
-                    if (dataInput.length == 0) {
+                    if (dataInput.length === 0) {
                         dataInput = $("<input>", { type: "hidden", name: key })
                             .appendTo(form);
                     }
@@ -628,10 +627,11 @@
         },
 
         onIframeLoad: function(e) {
-            var iframe = $(e.target);
+            var iframe = $(e.target),
+                responseText;
 
             try {
-                var responseText = iframe.contents().text();
+                responseText = iframe.contents().text();
             } catch (e) {
                 responseText = "Error trying to get server response: " + e;
             }
@@ -800,7 +800,7 @@
         },
 
         enqueueFiles: function(files) {
-            var upload = this.upload
+            var upload = this.upload,
                 fileEntries = [];
 
             for (var i = 0; i < files.length; i++) {
@@ -1021,7 +1021,7 @@
         }
 
         var files = fileEntry.data("fileNames");
-        var fileNames = $.map(files, function(file) { return file.name });
+        var fileNames = $.map(files, function(file) { return file.name; });
 
         upload._submitRemove(fileNames, data,
             function onSuccess(data, textStatus, xhr) {
@@ -1034,8 +1034,8 @@
                     XMLHttpRequest: xhr });
             },
 
-            function onError(xhr, textStatus, textStatus) {
-                var prevented = upload.trigger(ERROR, {
+            function onError(xhr, textStatus) {
+                upload.trigger(ERROR, {
                     operation: "remove",
                     files: files,
                     XMLHttpRequest: xhr });
