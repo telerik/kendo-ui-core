@@ -125,7 +125,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Sets the date category axis maximum (end) date.
         /// </summary>
-        /// <param name="min">
+        /// <param name="max">
         /// The date category axis maximum (end) date
         /// </param>
         public ChartDateCategoryAxisBuilder<TModel> Max(DateTime max)

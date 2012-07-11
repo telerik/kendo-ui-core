@@ -8,9 +8,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Initializes a new instance of the <see cref="GaugeLinearScaleLabelsBuilder" /> class.
         /// </summary>
-        /// <param name="GaugeLinearScaleLabels">The labels configuration.</param>
-        public GaugeLinearScaleLabelsBuilder(GaugeLinearScaleLabels ScaleLabels)
-            : base(ScaleLabels)
+        /// <param name="scaleLabels">The labels configuration.</param>
+        public GaugeLinearScaleLabelsBuilder(GaugeLinearScaleLabels scaleLabels)
+            : base(scaleLabels)
         {
         }
     }

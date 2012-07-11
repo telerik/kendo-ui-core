@@ -41,7 +41,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Sets the name of the stack that this series belongs to. Each unique name creates a new stack.
         /// </summary>
-        /// <param name="stacked">The name of the stack.</param>
+        /// <param name="stackName">The name of the stack.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Chart(Model)

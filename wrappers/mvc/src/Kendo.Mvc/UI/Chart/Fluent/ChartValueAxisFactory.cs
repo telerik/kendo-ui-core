@@ -15,6 +15,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Initializes a new instance of the <see cref="ChartValueAxisFactory{TModel}"/> class.
         /// </summary>
         /// <param name="container">The container.</param>
+        /// <param name="axes">The chart axes.</param>
         public ChartValueAxisFactory(Chart<TModel> container, IList<IChartValueAxis> axes)
         {
 

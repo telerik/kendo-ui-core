@@ -92,7 +92,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Sets the interval between minor divisions in base units.
         /// It defaults to 1/5th of the majorUnit
         /// </summary>
-        /// <param name="majorUnit">The interval between minor divisions in base units.</param>
+        /// <param name="minorUnit">The interval between minor divisions in base units.</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;%= Html.Kendo().Chart(Model)

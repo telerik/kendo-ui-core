@@ -110,7 +110,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Configures the area chart line.
         /// </summary>
-        /// <param name="configurator">The configuration action.</param>
+        /// <param name="width">The line width.</param>
+        /// <param name="color">The line color.</param>
+        /// <param name="dashType">The line dashType.</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;% Html.Kendo().Chart()

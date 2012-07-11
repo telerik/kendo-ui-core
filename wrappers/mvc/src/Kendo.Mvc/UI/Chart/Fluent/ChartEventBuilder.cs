@@ -4,7 +4,7 @@ namespace Kendo.Mvc.UI.Fluent
     using System.Collections.Generic;
 
     /// <summary>
-    /// Defines the fluent interface for configuring the Chart events.
+    /// Defines the fluent interface for configuring the <see cref="ChartEventBuilder"/>.
     /// </summary>
     public class ChartEventBuilder : EventBuilder
     {

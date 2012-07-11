@@ -10,7 +10,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartPieLabelsBuilder" /> class.
         /// </summary>
-        /// <param name="chartBarLabels">The data labels configuration.</param>
+        /// <param name="chartPieLabels">The data labels configuration.</param>
         public ChartPieLabelsBuilder(ChartPieLabels chartPieLabels)
             : base(chartPieLabels)
         {

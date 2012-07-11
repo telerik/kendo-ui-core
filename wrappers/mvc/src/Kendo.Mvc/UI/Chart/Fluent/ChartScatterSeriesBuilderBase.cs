@@ -7,7 +7,8 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent interface for configuring scatter series.
     /// </summary>
-    /// <typeparam name="T">The type of the data item</typeparam>
+    /// <typeparam name="TSeries">The type of the data item</typeparam>
+    /// <typeparam name="TBuilder">The type of the builder</typeparam>
     public abstract class ChartScatterSeriesBuilderBase<TSeries, TBuilder> : ChartSeriesBuilderBase<TSeries, TBuilder>
         where TSeries : IChartScatterSeries
         where TBuilder : ChartScatterSeriesBuilderBase<TSeries, TBuilder>

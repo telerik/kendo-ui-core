@@ -3,7 +3,7 @@ namespace Kendo.Mvc.UI.Fluent
     using System;
     using System.Collections.Generic;
 
-    /// <summary>Defines the fluent interface for configuring the RangeSlider events.</summary>
+    /// <summary>Defines the fluent interface for configuring the <see cref="Events"/>.</summary>
     public class RangeSliderEventBuilder : EventBuilder
     {
         public RangeSliderEventBuilder(IDictionary<string, object> events)

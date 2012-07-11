@@ -1,6 +1,7 @@
 namespace Kendo.Mvc.UI.Fluent
 {
     using System;
+
     /// <summary>
     /// Defines the fluent interface for configuring scale.
     /// </summary>
@@ -16,7 +17,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="scale">The scale.</param>
         protected GaugeScaleBuilderBase(TScale scale)
         {
-
             Scale = scale;
         }
 
@@ -48,7 +48,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TScaleBuilder MinorTicks(Action<GaugeScaleTicksBuilder> configurator)
         {
-
             configurator(new GaugeScaleTicksBuilder(Scale.MinorTicks));
         
             return this as TScaleBuilder;
@@ -72,7 +71,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TScaleBuilder MajorTicks(Action<GaugeScaleTicksBuilder> configurator)
         {
-
             configurator(new GaugeScaleTicksBuilder(Scale.MajorTicks));
 
             return this as TScaleBuilder;
@@ -81,7 +79,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Defines the ranges items.
         /// </summary>
-        /// <param name="addAction">The add action.</param>
+        /// <param name="configurator">The add action.</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;%= Html.Kendo().LinearGauge()
@@ -96,7 +94,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TScaleBuilder Ranges(Action<GaugeScaleRangesFactory<TScale>> configurator)
         {
-
             GaugeScaleRangesFactory<TScale> factory = new GaugeScaleRangesFactory<TScale>(Scale);
 
             configurator(factory);

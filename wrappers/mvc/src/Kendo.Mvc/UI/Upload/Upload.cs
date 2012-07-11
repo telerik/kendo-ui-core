@@ -13,10 +13,10 @@ namespace Kendo.Mvc.UI
         /// Initializes a new instance of the <see cref="Upload" /> class.
         /// </summary>
         /// <param name="viewContext">The view context.</param>
-        /// <param name="clientSideObjectWriterFactory">The client side object writer factory.</param>
-        public Upload(ViewContext viewContext, IJavaScriptInitializer initializer,
-                        IUrlGenerator urlGenerator)
-        : base(viewContext, initializer)
+        /// <param name="initializer">The javascript initializer.</param>
+        /// <param name="urlGenerator">The URL Generator.</param>
+        public Upload(ViewContext viewContext, IJavaScriptInitializer initializer, IUrlGenerator urlGenerator)
+            : base(viewContext, initializer)
         {
             Enabled = true;
             Multiple = true;

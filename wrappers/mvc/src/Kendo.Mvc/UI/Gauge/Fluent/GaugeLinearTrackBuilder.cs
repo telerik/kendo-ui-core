@@ -10,7 +10,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Initializes a new instance of the <see cref="GaugeLinearTrackBuilder" /> class.
         /// </summary>
-        /// <param name="linearGaugeTrack">The linear gauge track.</param>
+        /// <param name="linearTrack">The linear gauge track.</param>
         public GaugeLinearTrackBuilder(GaugeLinearTrack linearTrack)
         {
             track = linearTrack;

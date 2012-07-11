@@ -6,6 +6,7 @@ namespace Kendo.Mvc.UI.Fluent
     /// Defines the fluent interface for configuring axes.
     /// </summary>
     /// <typeparam name="TAxis"></typeparam>
+    /// <typeparam name="TValue"></typeparam>
     /// <typeparam name="TAxisBuilder">The type of the series builder.</typeparam>
     public abstract class ChartAxisBuilderBase<TAxis, TValue, TAxisBuilder> : IHideObjectMembers
         where TAxisBuilder : ChartAxisBuilderBase<TAxis, TValue, TAxisBuilder>
@@ -108,6 +109,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <param name="color">The major gridlines width</param>
         /// <param name="width">The major gridlines color (CSS syntax)</param>
+        /// <param name="dashType">The major gridlines line dashType.</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;%= Html.Kendo().Chart()
@@ -206,6 +208,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <param name="color">The axis line width</param>
         /// <param name="width">The axis line color (CSS syntax)</param>
+        /// <param name="dashType">The axis line dashType.</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;%= Html.Kendo().Chart()
@@ -274,7 +277,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Defines the plot bands items.
         /// </summary>
-        /// <param name="addAction">The add action.</param>
+        /// <param name="configurator">The add action.</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;%= Html.Kendo().Chart()

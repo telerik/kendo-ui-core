@@ -13,7 +13,7 @@ namespace Kendo.Mvc.UI
         /// Initializes a new instance of the <see cref="Gauge" /> class.
         /// </summary>
         /// <param name="viewContext">The view context.</param>
-        /// <param name="IJavaScriptInitializer">The javascript initializer.</param>
+        /// <param name="initializer">The javascript initializer.</param>
         /// <param name="urlGenerator">The URL Generator.</param>
         public Gauge(ViewContext viewContext, IJavaScriptInitializer initializer, IUrlGenerator urlGenerator)
             : base(viewContext, initializer)

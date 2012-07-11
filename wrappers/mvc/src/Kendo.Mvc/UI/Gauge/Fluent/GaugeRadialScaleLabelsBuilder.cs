@@ -10,11 +10,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Initializes a new instance of the <see cref="GaugeRadialScaleLabelsBuilder" /> class.
         /// </summary>
-        /// <param name="GaugeRadialScaleLabels">The labels configuration.</param>
-        public GaugeRadialScaleLabelsBuilder(GaugeRadialScaleLabels ScaleLabels)
-            : base(ScaleLabels)
+        /// <param name="scaleLabels">The labels configuration.</param>
+        public GaugeRadialScaleLabelsBuilder(GaugeRadialScaleLabels scaleLabels)
+            : base(scaleLabels)
         {
-            labels = ScaleLabels;
+            labels = scaleLabels;
         }
 
         /// <summary>
@@ -33,9 +33,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>        
-        public GaugeRadialScaleLabelsBuilder Position(GaugeRadialScaleLabelsPosition Position)
+        public GaugeRadialScaleLabelsBuilder Position(GaugeRadialScaleLabelsPosition position)
         {
-            labels.Position = Position;
+            labels.Position = position;
             return this;
         }
     }

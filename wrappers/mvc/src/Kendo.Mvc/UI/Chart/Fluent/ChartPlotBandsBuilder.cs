@@ -68,7 +68,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Sets the plot band background color
         /// </summary>
-        /// <param name="background">The plot band background color.</param>
+        /// <param name="color">The plot band background color.</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;% Html.Kendo().Chart()

@@ -2,7 +2,7 @@ namespace Kendo.Mvc.UI.Fluent
 {
     using System;
     /// <summary>
-    /// Defines the fluent interface for configuring the <see cref="GaugeLinearPointer"/>.
+    /// Defines the fluent interface for configuring the <see cref="GaugeLinearPointerBuilder"/>.
     /// </summary>
     public class GaugeLinearPointerBuilder : IHideObjectMembers
     {

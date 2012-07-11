@@ -3,7 +3,7 @@ using Kendo.Mvc.Infrastructure;
 namespace Kendo.Mvc.UI.Fluent
 {
     /// <summary>
-    /// Defines the fluent interface for configuring the <see cref="GaugeRadialPointer"/>.
+    /// Defines the fluent interface for configuring the <see cref="GaugeRadialPointerBuilder"/>.
     /// </summary>
     public class GaugeRadialPointerBuilder : IHideObjectMembers
     {

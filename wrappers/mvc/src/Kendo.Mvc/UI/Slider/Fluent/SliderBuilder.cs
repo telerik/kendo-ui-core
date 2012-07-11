@@ -108,7 +108,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Use it to configure tooltip.
         /// </summary>
-        /// <param name="configurator">Use builder to set different tooltip options.</param>
+        /// <param name="action">Use builder to set different tooltip options.</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;%= Html.Kendo().Slider()

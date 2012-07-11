@@ -12,8 +12,8 @@ namespace Kendo.Mvc.UI
         /// Initializes a new instance of the <see cref="ChartScatterLineSeries{TModel, TXValue, TYValue}" /> class.
         /// </summary>
         /// <param name="chart">The chart.</param>
-        /// <param name="expressionXValue">The X expression.</param>
-        /// <param name="expressionYValue">The Y expression.</param>
+        /// <param name="xValueExpression">The X expression.</param>
+        /// <param name="yValueExpression">The Y expression.</param>
         public ChartScatterLineSeries(Chart<TModel> chart, Expression<Func<TModel, TXValue>> xValueExpression, Expression<Func<TModel, TYValue>> yValueExpression)
             : base(chart, xValueExpression, yValueExpression)
         {

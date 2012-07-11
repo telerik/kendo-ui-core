@@ -48,7 +48,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// See <a href="http://www.kendoui.com/documentation/framework/globalization/overview.aspx">Globalization</a>
         /// for more information.
         /// </summary>
-        /// <param name="culture">Culture to use for formatting the dates.</param>
+        /// <param name="configurator">Culture to use for formatting the dates.</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;%= Html.Kendo().Chart()

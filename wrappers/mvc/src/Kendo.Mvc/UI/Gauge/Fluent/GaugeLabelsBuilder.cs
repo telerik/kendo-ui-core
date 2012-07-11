@@ -9,12 +9,12 @@ namespace Kendo.Mvc.UI.Fluent
         private readonly GaugeScaleLabelsBase labels;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GaugeLabelsBuilder{T}" /> class.
+        /// Initializes a new instance of the <see cref="GaugeLabelsBuilder{TBuilder}" /> class.
         /// </summary>
-        /// <param name="chartBarLabels">The labels configuration.</param>
-        public GaugeLabelsBuilder(GaugeScaleLabelsBase ScaleLabels)
+        /// <param name="scaleLabels">The labels configuration.</param>
+        public GaugeLabelsBuilder(GaugeScaleLabelsBase scaleLabels)
         {
-            labels = ScaleLabels;
+            labels = scaleLabels;
         }
 
         /// <summary>

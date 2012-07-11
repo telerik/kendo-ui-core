@@ -56,7 +56,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Slider()
         ///             .Name("Slider")
-        ///             .Tooltip(tooltip => tooltip.template("<#= value #>"))
+        ///             .Tooltip(tooltip => tooltip.template("${value}"))
         /// %&gt;
         /// </code>
         /// </example>

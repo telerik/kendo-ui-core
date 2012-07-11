@@ -473,7 +473,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="xMemberName">
         /// The name of the X value member.
         /// </param>
-        /// <param name="memberNameY>
+        /// <param name="yMemberName">
         /// The name of the Y value member.
         /// </param>
         public virtual ChartScatterSeriesBuilder<TModel> Scatter(Type memberType, string xMemberName, string yMemberName)
@@ -553,7 +553,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="xMemberName">
         /// The name of the X value member.
         /// </param>
-        /// <param name="memberNameY>
+        /// <param name="yMemberName">
         /// The name of the Y value member.
         /// </param>
         public virtual ChartScatterLineSeriesBuilder<TModel> ScatterLine(Type memberType, string xMemberName, string yMemberName)

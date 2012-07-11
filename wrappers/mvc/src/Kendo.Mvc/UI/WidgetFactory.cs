@@ -1185,7 +1185,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public virtual SliderBuilder<double> SliderFor(Expression<Func<TModel, Nullable<double>>> expression)
         {
-
             IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
             double? minimum = GetRangeValidationParameter<double>(validators, minimumValidator);
