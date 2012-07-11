@@ -1946,7 +1946,7 @@ function pad(number) {
                 transforms = {
                     css: "-" + lowPrefix + "-",
                     prefix: prefix,
-                    event: (lowPrefix === "o" || lowPrefix === "webkit") ? lowPrefix : ""
+                    event: (lowPrefix === "o" || lowPrefix === "webkit") ? lowPrefix : lowPrefix === "ms" ? "MS" : ""
                 };
 
                 if (hasTransitions) {
