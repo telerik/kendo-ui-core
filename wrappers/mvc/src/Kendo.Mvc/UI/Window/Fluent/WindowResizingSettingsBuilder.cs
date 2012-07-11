@@ -1,7 +1,8 @@
 namespace Kendo.Mvc.UI.Fluent
 {
-    using Infrastructure;
-
+    /// <summary>
+    /// Defines the fluent API for configuring the Kendo Window resizing settings
+    /// </summary>
     public class WindowResizingSettingsBuilder
     {
         private readonly WindowResizingSettings settings;

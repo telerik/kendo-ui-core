@@ -2,8 +2,9 @@ namespace Kendo.Mvc.UI.Fluent
 {
     using System.Web.Mvc;
 
-    using Infrastructure;
-
+    /// <summary>
+    /// Defines the fluent API for adding items to Kendo Menu for ASP.NET MVC
+    /// </summary>
     public class MenuItemFactory : IHideObjectMembers
     {
         private readonly INavigationItemContainer<MenuItem> container;

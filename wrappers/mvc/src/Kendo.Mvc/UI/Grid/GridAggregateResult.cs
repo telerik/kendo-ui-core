@@ -3,7 +3,10 @@ namespace Kendo.Mvc.UI
     using System.Collections.Generic;
     using System.Linq;
     using Infrastructure;
-    
+   
+    /// <summary>
+    /// Represents an aggregate result.
+    /// </summary>
     public class GridAggregateResult
     {
         private readonly IEnumerable<AggregateResult> aggregateResults;

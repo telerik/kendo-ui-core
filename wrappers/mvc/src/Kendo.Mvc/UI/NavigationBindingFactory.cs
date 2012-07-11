@@ -3,6 +3,10 @@ namespace Kendo.Mvc.UI.Fluent
     using System;
     using System.Collections.Generic;
 
+    /// <summary>
+    /// Defines the fluent API for creating bindings for Kendo Menu, TreeView and PanelBar
+    /// </summary>
+    /// <typeparam name="TNavigationItem"></typeparam>
     public class NavigationBindingFactory<TNavigationItem> 
         where TNavigationItem : NavigationItem<TNavigationItem>
     {

@@ -2,6 +2,9 @@ namespace Kendo.Mvc.UI
 {
     using System.Collections.Generic;
 
+    /// <summary>
+    /// Used for serializing <see cref="TreeViewItem"/> objects.
+    /// </summary>
     public class TreeViewItemModel : IHierarchicalItem
     {
         public TreeViewItemModel()

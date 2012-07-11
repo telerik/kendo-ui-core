@@ -2,6 +2,9 @@ namespace Kendo.Mvc.UI
 {
     using System.Collections.Generic;
 
+    /// <summary>
+    /// Represents an item from Kendo TreeView for ASP.NET MVC
+    /// </summary>
     public class TreeViewItem : NavigationItem<TreeViewItem>, INavigationItemContainer<TreeViewItem>, IHierarchicalItem
     {
         public TreeViewItem()

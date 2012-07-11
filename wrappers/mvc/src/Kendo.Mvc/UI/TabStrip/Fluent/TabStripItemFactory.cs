@@ -1,8 +1,10 @@
 namespace Kendo.Mvc.UI.Fluent
 {
     using System.Web.Mvc;
-    using Infrastructure;
 
+    /// <summary>
+    /// Defines the fluent API for adding items to Kendo TabStrip for ASP.NET MVC
+    /// </summary>
     public class TabStripItemFactory : IHideObjectMembers
     {
         private readonly INavigationItemContainer<TabStripItem> container;

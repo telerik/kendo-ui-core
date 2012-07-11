@@ -3,6 +3,10 @@ namespace Kendo.Mvc.UI
     using System;
     using System.Collections.Generic;
 
+    /// <summary>
+    /// Represents a row from Kendo Grid for ASP.NET MVC
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class GridRow<T>
         where T : class
     {

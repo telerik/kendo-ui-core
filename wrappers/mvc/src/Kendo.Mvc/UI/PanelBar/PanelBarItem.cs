@@ -2,8 +2,9 @@ namespace Kendo.Mvc.UI
 {
     using System.Collections.Generic;
 
-    using Infrastructure;
-
+    /// <summary>
+    /// Represents an item from Kendo PanelBar for ASP.NET MVC
+    /// </summary>
     public class PanelBarItem : NavigationItem<PanelBarItem>, INavigationItemContainer<PanelBarItem>, IAsyncContentContainer
     {
         private string loadContentFromUrl;
@@ -27,7 +28,6 @@ namespace Kendo.Mvc.UI
             }
             set
             {
-
                 loadContentFromUrl = value;
                 ContentHtmlAttributes.Clear();
                 Content = null;

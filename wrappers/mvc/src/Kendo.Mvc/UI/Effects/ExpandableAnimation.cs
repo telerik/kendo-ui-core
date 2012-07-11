@@ -1,10 +1,9 @@
 ﻿namespace Kendo.Mvc.UI
 {
-    using Kendo.Mvc;
-    using Kendo.Mvc.Extensions;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Web.Query.Dynamic;
+    using Kendo.Mvc;
+    using Kendo.Mvc.Extensions;
 
     public class ExpandableAnimation : JsonObject
     {

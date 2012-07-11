@@ -1,15 +1,16 @@
 namespace Kendo.Mvc.UI.Fluent
 {
-    using Kendo.Mvc.Infrastructure;
-
+    /// <summary>
+    /// Defines the fluent API for configuring the chart series defaults.
+    /// </summary>
+    /// <typeparam name="TModel"></typeparam>
     public class ChartSeriesDefaultsBuilder<TModel> : IHideObjectMembers where TModel : class
     {
-        private Chart<TModel> Chart;
+        private readonly Chart<TModel> chart;
 
         public ChartSeriesDefaultsBuilder(Chart<TModel> chart)
         {
-
-            Chart = chart;
+            this.chart = chart;
         }
 
         /// <summary>
@@ -17,7 +18,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         public virtual ChartBarSeriesBuilder<TModel> Bar()
         {
-            return new ChartBarSeriesBuilder<TModel>(Chart.SeriesDefaults.Bar);
+            return new ChartBarSeriesBuilder<TModel>(chart.SeriesDefaults.Bar);
         }
 
         /// <summary>
@@ -25,7 +26,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         public virtual ChartBarSeriesBuilder<TModel> Column()
         {
-            return new ChartBarSeriesBuilder<TModel>(Chart.SeriesDefaults.Column);
+            return new ChartBarSeriesBuilder<TModel>(chart.SeriesDefaults.Column);
         }
 
         /// <summary>
@@ -33,7 +34,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         public virtual ChartLineSeriesBuilder<TModel> Line()
         {
-            return new ChartLineSeriesBuilder<TModel>(Chart.SeriesDefaults.Line);
+            return new ChartLineSeriesBuilder<TModel>(chart.SeriesDefaults.Line);
         }
 
         /// <summary>
@@ -41,7 +42,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         public virtual ChartLineSeriesBuilder<TModel> VerticalLine()
         {
-            return new ChartLineSeriesBuilder<TModel>(Chart.SeriesDefaults.VerticalLine);
+            return new ChartLineSeriesBuilder<TModel>(chart.SeriesDefaults.VerticalLine);
         }
 
         /// <summary>
@@ -49,7 +50,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         public virtual ChartAreaSeriesBuilder<TModel> Area()
         {
-            return new ChartAreaSeriesBuilder<TModel>(Chart.SeriesDefaults.Area);
+            return new ChartAreaSeriesBuilder<TModel>(chart.SeriesDefaults.Area);
         }
 
         /// <summary>
@@ -57,7 +58,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         public virtual ChartAreaSeriesBuilder<TModel> VerticalArea()
         {
-            return new ChartAreaSeriesBuilder<TModel>(Chart.SeriesDefaults.VerticalArea);
+            return new ChartAreaSeriesBuilder<TModel>(chart.SeriesDefaults.VerticalArea);
         }
 
         /// <summary>
@@ -65,7 +66,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         public virtual ChartPieSeriesBuilder<TModel> Pie()
         {
-            return new ChartPieSeriesBuilder<TModel>(Chart.SeriesDefaults.Pie);
+            return new ChartPieSeriesBuilder<TModel>(chart.SeriesDefaults.Pie);
         }
 
         /// <summary>
@@ -73,7 +74,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         public virtual ChartScatterSeriesBuilder<TModel> Scatter()
         {
-            return new ChartScatterSeriesBuilder<TModel>(Chart.SeriesDefaults.Scatter);
+            return new ChartScatterSeriesBuilder<TModel>(chart.SeriesDefaults.Scatter);
         }
 
         /// <summary>
@@ -81,7 +82,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         public virtual ChartScatterLineSeriesBuilder<TModel> ScatterLine()
         {
-            return new ChartScatterLineSeriesBuilder<TModel>(Chart.SeriesDefaults.ScatterLine);
+            return new ChartScatterLineSeriesBuilder<TModel>(chart.SeriesDefaults.ScatterLine);
         }
     }
 }
