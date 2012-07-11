@@ -31,7 +31,6 @@ namespace Kendo.Controllers
             ViewBag.Suite = suite;
             ViewBag.Section = section;
             ViewBag.Example = example;
-            ViewBag.Description = LoadDescription(suite, section);
 #if DEBUG
             ViewBag.Debug = true;
 #else
