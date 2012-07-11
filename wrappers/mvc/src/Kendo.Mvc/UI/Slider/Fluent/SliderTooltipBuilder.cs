@@ -1,8 +1,10 @@
 namespace Kendo.Mvc.UI.Fluent
 {
-    using Kendo.Mvc.Infrastructure;
     using System.Web;
 
+    /// <summary>
+    /// Defines the fluent API for configuring the Kendo Slider for ASP.NET MVC tooltip
+    /// </summary>
     public class SliderTooltipBuilder : IHideObjectMembers
     {
         private readonly SliderTooltipSettings settings;

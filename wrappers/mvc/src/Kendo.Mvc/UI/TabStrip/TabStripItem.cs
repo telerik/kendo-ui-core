@@ -1,7 +1,8 @@
 namespace Kendo.Mvc.UI
 {
-    using Infrastructure;
-
+    /// <summary>
+    /// Represents an item from Kendo TabStrip for ASP.NET MVC
+    /// </summary>
     public class TabStripItem : NavigationItem<TabStripItem>, IAsyncContentContainer
     {
         private string loadContentFromUrl;
@@ -19,7 +20,6 @@ namespace Kendo.Mvc.UI
 
             set
             {
-
                 loadContentFromUrl = value;
                 ContentHtmlAttributes.Clear();
                 Content = null;

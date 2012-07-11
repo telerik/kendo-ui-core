@@ -4,6 +4,10 @@ namespace Kendo.Mvc.UI
     using System.Collections.Generic;
     using Kendo.Mvc.Extensions;
 
+    /// <summary>
+    /// Represents a cell from Kendo Grid for ASP.NET MVC
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class GridCell<T> where T : class
     {
         public GridCell(GridColumnBase<T> column, T dataItem)

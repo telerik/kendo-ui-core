@@ -17,6 +17,10 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.UI.Fluent;
     using Kendo.Mvc.UI.Html;
 
+    /// <summary>
+    /// The server side wrapper for Kendo UI Grid
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class Grid<T> : WidgetBase, IGridColumnContainer<T>, IGrid where T : class
     {
         private readonly IGridHtmlBuilderFactory htmlBuilderFactory;

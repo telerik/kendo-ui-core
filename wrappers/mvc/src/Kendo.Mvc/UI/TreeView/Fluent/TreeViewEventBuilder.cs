@@ -3,6 +3,9 @@ namespace Kendo.Mvc.UI.Fluent
     using System;
     using System.Collections.Generic;
 
+    /// <summary>
+    /// Defines the fluent API for configuring the Kendo TreeView for ASP.NET MVC events
+    /// </summary>
     public class TreeViewEventBuilder : EventBuilder
     {
         public TreeViewEventBuilder(IDictionary<string, object> events) : base(events)

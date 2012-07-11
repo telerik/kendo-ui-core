@@ -2,6 +2,9 @@
 {
     using System;
 
+    /// <summary>
+    /// Defines the fluent API for configuring the <see cref="PopupAnimation"/> object.
+    /// </summary>
     public class PopupAnimationBuilder
     {
         public PopupAnimationBuilder(PopupAnimation animation)

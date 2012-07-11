@@ -2,6 +2,9 @@
 {
     using System;
 
+    /// <summary>
+    /// Defines the fluent API for configuring the <see cref="ExpandableAnimation"/> object.
+    /// </summary>
     public class ExpandableAnimationBuilder
     {
         public ExpandableAnimationBuilder(ExpandableAnimation animation)

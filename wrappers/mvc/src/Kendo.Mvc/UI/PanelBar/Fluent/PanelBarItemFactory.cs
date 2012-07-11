@@ -2,8 +2,9 @@ namespace Kendo.Mvc.UI.Fluent
 {
     using System.Web.Mvc;
 
-    using Infrastructure;
-
+    /// <summary>
+    /// Defines the fluent API for adding items to Kendo PanelBar for ASP.NET MVC
+    /// </summary>
     public class PanelBarItemFactory : IHideObjectMembers
     {
         private readonly INavigationItemContainer<PanelBarItem> container;

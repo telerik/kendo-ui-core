@@ -8,6 +8,10 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.UI.Html;
     using System.Web;
 
+    /// <summary>
+    /// The base class for all columns in Kendo Grid for ASP.NET MVC.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public abstract class GridColumnBase<T> : JsonObject, IGridColumn where T : class
     {
         public string Format
@@ -33,8 +37,6 @@ namespace Kendo.Mvc.UI
             Grid = grid;
             Settings = new GridColumnSettings();            
             Visible = true;
-            //TODO: Implement HeaderContextMenu
-            //IncludeInContextMenu = true;            
             HeaderTemplate = new HtmlTemplate();
             FooterTemplate = new HtmlTemplate<GridAggregateResult>();
         }

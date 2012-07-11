@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace Kendo.Mvc.UI.Fluent
 {
+    /// <summary>
+    /// Defines the fluent API for configuring the Kendo Grid for ASP.NET MVC events.
+    /// </summary>
     public class GridEventBuilder : EventBuilder
     {
         public GridEventBuilder(IDictionary<string, object> events) : base(events)
