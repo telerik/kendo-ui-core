@@ -916,11 +916,15 @@
 
         createFormData: function(files) {
             var formData = new FormData(),
-                upload = this.upload;
+                upload = this.upload,
+                i,
+                length = files.length;
 
-            for (var i = 0; i < files.length; i++) {
-                var file = files[i];
-                formData.append(upload.options.async.saveField || upload.name, files[i].rawFile);
+            for (i = 0; i < length; i++) {
+                formData.append(
+                    upload.options.async.saveField || upload.name,
+                    files[i].rawFile
+                );
             }
 
             return formData;
