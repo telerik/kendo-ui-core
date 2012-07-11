@@ -4,6 +4,7 @@ namespace Kendo.Mvc.UI
     using System.Collections.Generic;
     using System.Web;
     using Kendo.Mvc.Extensions;
+    using Kendo.Mvc.Infrastructure;
     
     public class UploadAsyncSettings : IUploadAsyncSettings
     {
@@ -17,7 +18,6 @@ namespace Kendo.Mvc.UI
             upload = uploadComponent;
             Save = new RequestSettings();
             Remove = new RequestSettings();
-            AutoUpload = true;
         }
         
         /// <summary>
@@ -48,7 +48,12 @@ namespace Kendo.Mvc.UI
         /// <value>
         /// true if the upload should start immediately after selecting a file, false otherwise; true by default
         /// </value>
-        public bool AutoUpload { get; set; }
+        public bool? AutoUpload { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether to upload selected files in one batch (request)
+        /// </summary>
+        public bool? Batch { get; set; }
 
         /// <summary>
         /// Serializes the asynchronous uploading settings to the writer.
@@ -63,22 +68,16 @@ namespace Kendo.Mvc.UI
 
                 config["saveUrl"] = encoder(Save.GenerateUrl(upload.ViewContext, upload.UrlGenerator));
 
-                if (SaveField.HasValue())
-                {
-                    config["saveField"] = SaveField;
-                }
+                FluentDictionary.For(config)
+                    .Add("saveField", SaveField, () => SaveField.HasValue())
+                    .Add("removeField", RemoveField, () => RemoveField.HasValue())
+                    .Add("autoUpload", AutoUpload, () => AutoUpload.HasValue)
+                    .Add("batch", Batch, () => Batch.HasValue);
 
                 if (Remove.HasValue())
                 {
                     config["removeUrl"] = encoder(Remove.GenerateUrl(upload.ViewContext, upload.UrlGenerator));
                 }
-
-                if (RemoveField.HasValue())
-                {
-                    config["removeField"] = RemoveField;
-                }
-
-                config["autoUpload"] = AutoUpload;
 
                 options.Add(key, config);
             }

@@ -28,7 +28,13 @@
             function createUpload(options) {
                 copyUploadPrototype();
 
-                $('#uploadInstance').kendoUpload($.extend({ async:{"saveUrl":"javascript:;","removeUrl":"/removeAction",autoUpload:true} }, options));
+                $('#uploadInstance').kendoUpload($.extend({
+                    async: {
+                            saveUrl:"javascript:;",
+                            removeUrl:"/removeAction",
+                            autoUpload:true
+                    }
+                }, options));
 
                 var uploadInstance = $('#uploadInstance').data("kendoUpload");
                 uploadInstance._module.createFormData = function() {
@@ -180,7 +186,9 @@
 
             test("file is passed to createFormData", function() {
                 var file = null;
-                uploadInstance._module.createFormData = function(sourceFile) { file = sourceFile; }
+                uploadInstance._module.createFormData = function(sourceFiles) {
+                    file = sourceFiles[0];
+                };
 
                 simulateFileSelect();
                 equal(file.name, "first.txt");
@@ -287,6 +295,7 @@
 
                 ok(errorFired);
             });
+
         </script>
 
         <script src="async.js"></script>
@@ -677,6 +686,49 @@
         <script src="error.js"></script>
         <script src="cancel.js"></script>
         <script src="remove.js"></script>
+        <script>
+            // ------------------------------------------------------------
+            module("Upload / FormDataUpload / batch = true", {
+                setup: function() {
+                    moduleSetup();
+                    uploadInstance = createUpload({ async: {
+                            batch: true,
+                            saveUrl:"javascript:;",
+                            removeUrl:"/removeAction",
+                            autoUpload:true
+                        }
+                    });
+                },
+                teardown: moduleTeardown
+            });
+
+            test("list element is created for all selected file", function() {
+                uploadInstance._module.inputFiles = function () { return getFileListMock() };
+                simulateFileSelect();
+                equal($(".k-upload-files li.k-file", uploadInstance.wrapper).length, 1);
+            });
+
+            test("file names are rendered for multiple files", function() {
+                uploadInstance._module.inputFiles = function () { return getFileListMock() };
+                simulateFileSelect();
+
+                var fileNames = $(".k-filename", uploadInstance.wrapper).map(
+                    function() { return $(this).text(); }
+                );
+
+                equal(fileNames[0], "first.txt, second.txt");
+            });
+
+            test("files are passed to createFormData", 2, function() {
+                uploadInstance._module.createFormData = function(sourceFiles) {
+                    equals(sourceFiles[0].name, "first.txt");
+                    equals(sourceFiles[1].name, "second.txt");
+                };
+
+                uploadInstance._module.inputFiles = function () { return getFileListMock() };
+                simulateFileSelect();
+            });
+        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
     </body>

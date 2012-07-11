@@ -70,7 +70,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
             upload.Async.Save.ControllerName = "Home";
             upload.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{async:{saveUrl:\"Home/Index\",autoUpload:true}}");
+            output.ShouldContain("{async:{saveUrl:\"Home/Index\"}}");
         }
 
         [Fact]
@@ -81,7 +81,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
             upload.Async.SaveField = "attachments";
             upload.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{async:{saveUrl:\"Home/Index\",saveField:\"attachments\",autoUpload:true}}");
+            output.ShouldContain("{async:{saveUrl:\"Home/Index\",saveField:\"attachments\"}}");
         }
 
         [Fact]
@@ -102,7 +102,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
             upload.Async.Remove.ControllerName = "Home";
             upload.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{async:{saveUrl:\"Home/Index\",removeUrl:\"Home/Remove\",autoUpload:true}}");
+            output.ShouldContain("{async:{saveUrl:\"Home/Index\",removeUrl:\"Home/Remove\"}}");
         }
 
         [Fact]
@@ -129,7 +129,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
         }
 
         [Fact]
-        public void AutoUpload_should_be_serialized_when_false()
+        public void AutoUpload_should_be_serialized_when_set()
         {
             upload.Async.Save.ActionName = "Index";
             upload.Async.Save.ControllerName = "Home";
@@ -140,12 +140,34 @@ namespace Kendo.Mvc.UI.Tests.Upload
         }
 
         [Fact]
-        public void AutoUpload_should_not_be_serialized_when_Save_is_not_set()
+        public void AutoUpload_should_not_be_serialized_when_not_set()
         {
-            upload.Async.AutoUpload = false;
+            upload.Async.Save.ActionName = "Index";
+            upload.Async.Save.ControllerName = "Home";
             upload.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("jQuery(\"#Upload\").kendoUpload({});");
+            output.ShouldContain("jQuery(\"#Upload\").kendoUpload({async:{saveUrl:\"Home/Index\"}});");
+        }
+
+        [Fact]
+        public void Batch_should_be_serialized_when_set()
+        {
+            upload.Async.Save.ActionName = "Index";
+            upload.Async.Save.ControllerName = "Home";
+            upload.Async.Batch = true;
+            upload.WriteInitializationScript(textWriter.Object);
+
+            output.ShouldContain("{async:{saveUrl:\"Home/Index\",batch:true}}");
+        }
+
+        [Fact]
+        public void Batch_should_not_be_serialized_when_not_set()
+        {
+            upload.Async.Save.ActionName = "Index";
+            upload.Async.Save.ControllerName = "Home";
+            upload.WriteInitializationScript(textWriter.Object);
+
+            output.ShouldContain("jQuery(\"#Upload\").kendoUpload({async:{saveUrl:\"Home/Index\"}});");
         }
 
         [Fact]

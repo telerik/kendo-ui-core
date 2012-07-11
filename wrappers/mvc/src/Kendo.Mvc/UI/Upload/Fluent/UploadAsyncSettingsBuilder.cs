@@ -46,6 +46,20 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Sets a value indicating whether to upload selected files in one batch (request)
+        /// </summary>
+        /// <param name="value">true if the files should be uploaded in a single request, false otherwise; false by default</param>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        public UploadAsyncSettingsBuilder Batch(bool value)
+        {
+            settings.Batch = value;
+
+            return this;
+        }
+
+        /// <summary>
         /// Sets the action, controller and route values for the save operation
         /// </summary>
         /// <param name="actionName">Name of the action.</param>
