@@ -955,24 +955,12 @@ div.k-grid-header .k-header
 
 *+html .k-grid-pager input { vertical-align: middle; }
 
-.k-grid .k-pager,
-.k-grid .k-numeric>li,
-.k-grid .k-numeric .k-link,
-.k-grid .k-numeric .k-state-active,
-.k-grouping-row p
+.k-grid .k-pager-numbers,
+.k-grid .k-pager-numbers>li,
+.k-grid .k-pager-wrap>.k-link,
+.k-grid .k-pager-numbers .k-state-selected
 {
-    display: inline-block;
-    vertical-align: middle;
-}
-
-*+html .k-grid .k-pager,
-*+html .k-grid .k-numeric>li,
-*+html .k-grid .k-numeric .k-link,
-*+html .k-grid .k-numeric .k-state-active,
-*+html .k-grouping-row p
-{
-    display: inline;
-    zoom: 1;
+    float:left;
 }
 
 .k-footer-template td
@@ -998,13 +986,12 @@ div.k-grid-header .k-header
     border-top-width: 0;
 }
 
-.k-grid .k-pager
+.k-grid .k-pager-wrap
 {
-    float: left;
     cursor: default;
 }
 
-.k-pager .k-link
+.k-pager-wrap .k-link
 {
     text-decoration: none;
     padding: 1px;
@@ -1013,8 +1000,8 @@ div.k-grid-header .k-header
     line-height: 16px;
 }
 
-.k-pager .k-state-active,
-.k-pager .k-state-hover
+.k-pager-wrap .k-state-selected,
+.k-pager-wrap .k-state-hover
 {
     padding: 0;
     border-width: 1px;
@@ -1025,51 +1012,71 @@ div.k-grid-header .k-header
     border-radius: 5px;
 }
 
-.k-pager span,
-.k-pager .k-link
+.k-pager-wrap span,
+.k-pager-wrap .k-link
 {
-    vertical-align: top;
+    vertical-align: middle;
 }
 
-.k-pager .k-numeric
+.k-pager-wrap .k-pager-numbers
 {
     margin: 0 7px;
-    vertical-align: top;
+    vertical-align: middle;
 }
 
-.k-numeric .k-link,
-.k-numeric .k-state-active
+.k-pager-numbers .k-link,
+.k-pager-numbers .k-state-selected
 {
     margin-top: 0;
     padding: 0 5px;
     line-height: 22px;
-    vertical-align: top;
+    vertical-align: middle;
 }
 
-.k-numeric .k-state-active,
-.k-numeric .k-state-hover
+.k-pager-numbers .k-state-selected,
+.k-pager-numbers .k-state-hover
 {
     padding: 0 4px;
     line-height: 20px;
 }
 
-/* Grid :: filtering */
-
-.k-grid-filter
+.k-pager-info
 {
     float: right;
-    height: 18px;
-    padding: .3em .2em;
-    position: relative;
-    display: inline-block;
-    
-    margin: -1.8em -.6em -.3em 3px;
+    padding: 0 16px;
+}
+
+/* Grid :: filtering */
+
+.k-grid-filter,
+.k-header-column-menu
+{
+    float: right;
+    margin: -.5em -.6em -.4em;
+    padding: .5em .2em .4em;
 }
 
 *+html .k-grid-filter
 {
     display: inline;
     zoom: 1;
+}
+
+.k-filter-menu
+{
+    padding: 0.5em;
+}
+
+.k-filter-menu .k-widget,
+.k-filter-menu .k-textbox
+{
+    display: block;
+    margin-bottom: 4px;
+}
+
+.k-filter-menu .k-textbox
+{
+    width:147px;
 }
 
 .k-grid-filter .k-icon
@@ -1095,16 +1102,6 @@ div.k-grid-header .k-header
 	border-radius: 3px;
 }
 
-.k-filter-options .k-filter-help-text,
-.k-filter-options select,
-.k-filter-options input,
-.k-filter-options .k-button,
-.k-filter-options .k-datepicker
-{
-    display: block;
-    margin-bottom: 4px;
-}
-
 .k-filter-options select { width: 148px; }
 .k-filter-options input { width: 142px; }
 .k-filter-options .k-datepicker { width: 100%; }
@@ -1112,6 +1109,12 @@ div.k-grid-header .k-header
 .k-filter-options .k-filter-button
 {
     margin-bottom: 0;
+}
+
+.k-filter-menu .k-button
+{
+    margin: 0.6em 4% 0 0;
+    width: 46%;
 }
 
 /* Grid :: grouping */
@@ -1123,6 +1126,8 @@ div.k-grid-header .k-header
 
 .k-grouping-row p
 {
+    display: inline-block;
+    vertical-align: middle;
     padding: 0 .6em;
     margin-left: -.6em;
 }
