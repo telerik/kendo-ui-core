@@ -26,7 +26,10 @@
                         scrollable: true,
                         sortable: true,
                         filterable: true,
-                        pageable: true,
+                        pageable: {
+                            input: true,
+                            numeric: false
+                        },
                         columns: [
                             {
                                 field: "FirstName",
