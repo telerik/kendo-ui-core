@@ -209,7 +209,8 @@ task("winjs", ["clean"], function() {
         kendoBuild.writeText(WINJS_CSS_PATH, cssContents);
         kendoBuild.copyFileSync(path.join(WINJS_BUNDLE_PATH, SCRIPTS_PATH, 'kendo.winjs.min.js'), path.join(RELEASE_PATH, WINJS_PATH, 'kendo.winjs.min.js'));
         kendoBuild.copyFileSync(path.join(WINJS_BUNDLE_PATH, "source", SCRIPTS_PATH, 'kendo.winjs.js'), path.join(RELEASE_PATH, WINJS_PATH, 'kendo.winjs.js'));
-        copyDir(path.join(WINJS_BUNDLE_PATH, "source"), path.join(RELEASE_PATH, WINJS_PATH, "source"));
+        kendoBuild.copyFileSync(path.join(WINJS_BUNDLE_PATH, "source", "styles", 'kendo.common.css'), path.join(RELEASE_PATH, WINJS_PATH, 'kendo.common.css'));
+        kendoBuild.copyFileSync(path.join(WINJS_BUNDLE_PATH, "source", "styles", 'kendo.dataviz.css'), path.join(RELEASE_PATH, WINJS_PATH, 'kendo.dataviz.css'));
     });
 });
 
