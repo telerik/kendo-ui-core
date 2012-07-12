@@ -194,7 +194,8 @@
                 filters: [{ field: that.field, operator: "eq", value: "" }, { field: that.field, operator: "eq", value: "" }]
             });
 
-            kendo.bind(that.form, that.filterModel);
+            //NOTE: binding the form element directly cause error in IE when grid is bound through MVVM and column is sorted
+            kendo.bind(that.form.children().first(), that.filterModel);
 
             if (that._bind(expression)) {
                 that.link.addClass("k-state-active");
