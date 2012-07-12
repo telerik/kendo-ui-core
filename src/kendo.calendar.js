@@ -1304,8 +1304,11 @@
     }
 
     function mousetoggle(e) {
-        e.stopImmediatePropagation();
-        $(this).toggleClass(HOVER, e.type == "mouseenter");
+        if (!touch) {
+            e.stopImmediatePropagation();
+        }
+
+        $(this).toggleClass(HOVER, e.type == MOUSEENTER);
     }
 
     function prevent (e) {
