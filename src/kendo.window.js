@@ -963,7 +963,7 @@
 
                     if (showOptions.duration) {
                         overlay.kendoStop().kendoAnimate({
-                            effects: { fade: { direction: "in", properties: { opacity: .5 } } },
+                            effects: { fade: { direction: "in", properties: { opacity: 0.5 } } },
                             duration: showOptions.duration,
                             show: true
                         });
