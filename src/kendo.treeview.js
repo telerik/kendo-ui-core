@@ -1071,6 +1071,17 @@
             return node;
         },
 
+        _updateNode: function(field, items) {
+            var that = this, i, node;
+
+            if ($.inArray(field, that.options.dataTextField) >= 0) {
+                for (i = 0; i < items.length; i++) {
+                    node = that.findByUid(items[i].uid);
+                    that.text(node, items[i][field]);
+                }
+            }
+        },
+
         refresh: function(e) {
             var that = this,
                 parentNode = that.wrapper,
@@ -1100,7 +1111,7 @@
             }
 
             if (e.field) {
-                return;
+                return that._updateNode(e.field, items);
             }
 
             if (node) {
