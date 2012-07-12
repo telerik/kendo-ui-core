@@ -2,7 +2,6 @@
 var path = require("path"),
     fs = require("fs"),
     os = require("os"),
-    jsdoctoolkit = require("build/node-jsdoc-toolkit/app/nodemodule").jsdoctoolkit,
     bundles = require("build/bundles"),
     themebuilder = require("build/themebuilder"),
     kendoBuild = require("build/kendo-build"),
@@ -16,11 +15,9 @@ var path = require("path"),
 var CDN_ROOT = "http://cdn.kendostatic.com/",
     STAGING_ROOT = "http://mvc-kendobuild/staging",
     SOURCE_PATH = "src",
-    DOCS_PATH = path.join(SOURCE_PATH, "docs"),
     STYLES_PATH = "styles",
     SCRIPTS_PATH = "js",
     DEPLOY_PATH = "deploy",
-    SITEFINITY_HELP_PATH = "sitefinity-docs",
     DEMOS_PATH = path.join("demos", "mvc"),
     DEMOS_PROJECT = "Kendo.csproj",
     DEMOS_LIVE_PATH = path.join(DEPLOY_PATH, "live"),
@@ -76,16 +73,6 @@ task("merge-scripts", function() {
     kendoScripts.mergeScripts(SOURCE_PATH);
 });
 
-desc("Build documentation");
-task("docs", function() {
-    buildDocs();
-});
-
-desc("Build sitefinity documentation");
-task("sitefinity-docs", function() {
-    buildDocs(SITEFINITY_HELP_PATH);
-});
-
 namespace("themebuilder", function() {
     desc("Builds the generated themebuilder sources");
     task("source", function() {
@@ -121,7 +108,7 @@ namespace("demos", function() {
     }, true);
 
     desc("Build debug demos site");
-    task("debug", ["demos:less-js", "merge-scripts", "docs"], function () {
+    task("debug", ["demos:less-js", "merge-scripts"], function () {
         kendoBuild.msBuild(
             path.join(DEMOS_PATH, DEMOS_PROJECT),
             [ "/t:Clean;Build", "/p:Configuration=Debug" ],
@@ -130,7 +117,7 @@ namespace("demos", function() {
     }, true);
 
     desc("Build staging demos site");
-    task("staging", ["merge-scripts", "docs", "themebuilder:source", "demos:copy-wrappers-sources"], function () {
+    task("staging", ["merge-scripts", "themebuilder:source", "demos:copy-wrappers-sources"], function () {
         var scriptsDest = path.join(DEMOS_STAGING_CONTENT_PATH, "js"),
             stylesDest = path.join(DEMOS_STAGING_CONTENT_PATH, "styles");
 
@@ -162,7 +149,7 @@ namespace("demos", function() {
     });
 
     desc("Build demos site for live deployment");
-    task("production", ["merge-scripts", "docs", "demos:copy-wrappers-sources"], function () {
+    task("production", ["merge-scripts", "demos:copy-wrappers-sources"], function () {
         deployDemos({
             outputPath: DEMOS_LIVE_PATH,
             cdnRoot: CDN_ROOT + version(),
@@ -585,105 +572,6 @@ namespace("mvc", function() {
         });
     }
 });
-
-// Helpers ====================================================================
-function buildDocs(sitefinity_path) {
-    var mappings = {
-            "ui.slider": ["ui.slider", "ui.rangeslider"],
-            "mobile.ui.button": ["mobile.ui.button", "mobile.ui.backbutton", "mobile.ui.detailbutton"],
-            "ui.dragdrop": ["ui.draggable", "ui.droptarget", "drag", "dragaxis"],
-            "mobile.ui.splitview": ["mobile.ui.splitview", "mobile.ui.pane"],
-            "mobile.ui.popover": ["mobile.ui.popover", "mobile.ui.pane"]
-        },
-        sections = ["description", "configuration", "methods", "events"];
-
-    function combine() {
-        var files = fs.readdirSync(outputPath),
-            filesToMerge;
-
-        for (var key in mappings) {
-            var mapping = mappings[key];
-            filesToMerge = [];
-
-            sections.forEach(function(section) {
-                mapping.forEach(function(source) {
-                    var fileName = "kendo." + source + "." + section + ".html";
-                    if (files.indexOf(fileName) > -1) {
-                        filesToMerge.push(fileName);
-                    }
-                });
-            });
-
-            sections.forEach(function(sectionName) {
-                var cache = "";
-                kendoBuild.grep(filesToMerge, function(fileName) {
-                    return fileName.indexOf(sectionName) > -1;
-                }).forEach(function(fileToMerge) {
-                    var text = kendoBuild.readText(outputPath + "/" + fileToMerge);
-
-                    if (sectionName != "description" && hasValue(text)) {
-                        text = wrap(text, fileToMerge);
-                    }
-                    cache += text;
-                });
-
-                if (hasValue(cache)) {
-                    kendoBuild.writeText(path.join(outputPath, "kendo." + key + "." + sectionName + ".html"), cache);
-                }
-            });
-        }
-    }
-
-    function hasValue(text) {
-        return text.replace(/^\s*|\s*$/g, '').replace("<!-- help-data -->", "").length > 0;
-    }
-
-    function wrap(text, fileToMerge) {
-        fileToMerge = fileToMerge.split(".");
-        fileToMerge = fileToMerge[fileToMerge.length - 3];
-
-        return '<div class="detailHandle detailHandleExpanded"> <div class="detailExpanded"></div>' + fileToMerge + '</div><div style="display: block;" class="detailBody">' + text + "</div>";
-    }
-
-    // output directory
-    var outputPath = DOCS_DEPLOY_PATH;
-
-    sitefinity = false; //create global variable
-    if (sitefinity_path) {
-        outputPath = sitefinity_path;
-        sitefinity = true;
-    }
-
-    var params = [
-        "-d=" + outputPath,
-        // template
-        "-t=build/node-jsdoc-toolkit/template",
-        // constants
-        "-D=\"copyright:" + new Date().getFullYear() + "\"",
-        "-D=\"title:Kendo UI Documentation\""
-    ];
-
-    kendoBuild.rmdirSyncRecursive(outputPath);
-
-    function enumerateSourceFiles(sourcePath) {
-        var files = fs.readdirSync(sourcePath).filter(function(file) { return file.indexOf(".js") > -1 && file.indexOf("jquery") === -1 } ),
-            paths = [];
-
-        for (var i = 0; i < files.length; i++) {
-            paths.push(path.join(sourcePath, files[i]));
-        }
-
-        return paths;
-    }
-
-    params = params
-                .concat(enumerateSourceFiles(SOURCE_PATH))
-                .concat(enumerateSourceFiles(DOCS_PATH));
-
-    jsdoctoolkit.run(params);
-
-    combine();
-}
 
 function deployDemos(options) {
     var outputPath = options.outputPath,
