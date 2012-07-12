@@ -25,7 +25,10 @@
                         },
                         groupable: true,
                         sortable: true,
-                        pageable: true,
+                        pageable: {
+                            refresh: true,
+                            pageSizes: true
+                        },
                         columns: [ {
                                 field: "FirstName",
                                 width: 90,
