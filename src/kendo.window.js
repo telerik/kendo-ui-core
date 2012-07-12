@@ -963,7 +963,7 @@
 
                     if (showOptions.duration) {
                         overlay.kendoStop().kendoAnimate({
-                            effects: { fade: { direction: "out", properties: { opacity: 0.5 } } },
+                            effects: { fade: { direction: "in", properties: { opacity: .5 } } },
                             duration: showOptions.duration,
                             show: true
                         });
@@ -1026,7 +1026,7 @@
                 if (shouldHideOverlay) {
                     if (hideOptions.duration) {
                         overlay.kendoStop().kendoAnimate({
-                             effects: { fadeOut: { properties: { opacity: 0 } } },
+                             effects: "fade:out",
                              duration: hideOptions.duration,
                              hide: true
                          });
