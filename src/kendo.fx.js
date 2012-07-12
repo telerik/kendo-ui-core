@@ -750,8 +750,8 @@
             keep: [ "opacity" ],
             css: {
                 opacity: function(element, options) {
-                    var opacity = element[0].style.opacity;
-                    return options.effects.fade.direction == "in" && (!opacity || opacity == 1) ? 0 : 1;
+                    var opacity = element.data("opacity"), direction = options.effects.fade.direction;
+                    return direction == "out" && isNaN(opacity) || direction == "in" ? 0 : opacity;
                 }
             },
             restore: [ "opacity" ],
