@@ -1,55 +1,4 @@
 (function($, undefined) {
-    /**
-    * @name kendo.mobile.ui.Switch.Description
-    *
-    * @section
-    * <p>The mobile Switch widget is used to display two exclusive choices.</p>
-    * <p>When initialized, it shows the currently selected value. User slides the control to reveal the second value.
-    * The mobile Switch can be created from <code>input</code> element of type <code>checkbox</code>.</p>
-    *
-    * <h3>Getting Started</h3>
-    *
-    * <p> The Kendo Mobile Application will automatically initialize a mobile Switch for every element with <code>role</code> data attribute set to <code>swtich</code> present in the views/layouts markup.
-    * Alternatively, it can be initialized using jQuery plugin syntax in the containing mobile View <strong>init event handler</strong>.
-    *
-    * @exampleTitle Initialize mobile Switch based on role data attribute
-    * @example
-    * <input type="checkbox" data-role="switch" />
-    *
-    * @exampleTitle Initialize mobile Switch using jQuery plugin syntax
-    * @example
-    * <input type="checkbox" id="switch" />
-    * <script>
-    * var switchWidget = $("#switch").kendoMobileSwitch();
-    * </script>
-    * @section <h3>Checking/Unchecking the Mobile Switch</h3>
-    *
-    * <p>The checked state of the mobile Switch depends on the <code>checked</code> property of the widget's constructor options
-    * or the <code>checked</code> attribute of the widget's element.</p>
-    *
-    * @exampleTitle Initialize Kendo mobile Switch from checked <code>input</code>
-    * @example
-    * <input type="checkbox" id="switch" checked="checked" />
-    * <script>
-    * var switchWidget = $("#switch").kendoMobileSwitch();
-    * </script>
-    *
-    * @exampleTitle Initialize checked mobile Switch using jQuery plugin syntax
-    * @example
-    * <input type="checkbox" id="switch" />
-    * <script>
-    * var switchWidget = $("#switch").kendoMobileSwitch({ checked: true });
-    * </script>
-    *
-    * @section <h3>Specifying the Text of the Labels</h3>
-    *
-    * @exampleTitle Customize Kendo mobile Switch on/off labels
-    * @example
-    * <input type="checkbox" id="switch" />
-    * <script>
-    * var switchWidget = $("#switch").kendoMobileSwitch({ onLabel: "YES", offLabel: "NO" });
-    * </script>
-    */
     var kendo = window.kendo,
         ui = kendo.mobile.ui,
         Widget = ui.Widget,
@@ -66,16 +15,7 @@
         return Math.max(minLimit, Math.min(maxLimit, value));
     }
 
-    var Switch = Widget.extend(/** @lends kendo.mobile.ui.Switch.prototype */{
-        /**
-        * @constructs
-        * @extends kendo.mobile.ui.Widget
-        * @param {Element} element DOM element.
-        * @param {Object} options Configuration options.
-        * @option {Boolean} [checked] <false> The checked state of the widget.
-        * @option {String} [onLabel] <ON> The ON label.
-        * @option {String} [offLabel] <OFF> The OFF label.
-        */
+    var Switch = Widget.extend({
         init: function(element, options) {
             var that = this, width, checked, handleWidth;
 
@@ -106,23 +46,6 @@
         },
 
         events: [
-            /**
-            * Fires when the state of the widget changes
-            * @name kendo.mobile.ui.Switch#change
-            * @event
-            * @param {Event} e
-            * @param {Object} e.checked The checked state of the widget.
-            *
-            * @exampleTitle Handle mobile Switch change event
-            * @example
-            * <input type="checkbox" id="switch" data-role="switch" />
-            *
-            * <script>
-            *  $("#switch").data("kendoMobileSwitch").bind("change", function(e) {
-            *      console.log(e.checked); // true or false
-            *  }
-            * </script>
-            */
             CHANGE
         ],
 
@@ -133,24 +56,6 @@
             checked: null
         },
 
-        /**
-        * Get/Set the checked state of the widget.
-        * @param {Boolean} check Whether to turn the widget on or off.
-        * @returns {Boolean} The checked state of the widget.
-        * @example
-        * <input data-role="switch" id="foo" />;
-        *
-        * <script>
-        *   // get a reference to the switch widget
-        *   var switch = $("#foo").data("kendoMobileSwitch");
-        *
-        *   // get the checked state of the switch.
-        *   var checked = switch.check();
-        *
-        *   // set the checked state of the switch.
-        *   switch.check(true);
-        * </script>
-        */
         check: function(check) {
             var that = this,
                 element = that.element[0];
@@ -166,19 +71,6 @@
                 .toggleClass(SWITCHOFF, !check);
         },
 
-        /**
-        * Toggle the checked state of the widget.
-        * @example
-        * <input data-role="switch" id="foo" />;
-        *
-        * <script>
-        *   // get a reference to the switch
-        *   var switch = $("#foo").data("kendoMobileSwitch");
-        *
-        *   // toggle the checked state of the switch.
-        *   switch.toggle();
-        * </script>
-        */
         toggle: function() {
             var that = this;
 

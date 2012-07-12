@@ -19,58 +19,7 @@
         CHANGE = "change",
         CURRENT_PAGE_CLASS = "km-current-page";
 
-    /**
-    * @name kendo.mobile.ui.ScrollView.Description
-    * @section
-    * <p>The Kendo Mobile ScrollView widget is used to scroll content wider than the device screen.</p>
-    *
-    * <h3>Getting Started</h3>
-    * <p>The Kendo Mobile Application automatically initializes the Mobile ScrollView for every element with <code>role</code> data attribute set to <code>scrollview</code> present in the views' markup.
-    * Alternatively, it can be initialized using jQuery plugin syntax in the containing mobile View <strong>init event handler</strong>.
-    *
-    * @exampleTitle Initialize mobile ScrollView using a role data attribute.
-    * @example
-    * <div data-role="scrollview">
-    *   Foo
-    * </div>
-    *
-    * @exampleTitle Initialize mobile ScrollView using jQuery plugin syntax.
-    * @example
-    * <div data-role="view" data-init="initScrollView">
-    *   <div id="scrollView">
-    *     <div data-role="page">Foo</div>
-    *     <div data-role="page">Bar</div>
-    *   </div>
-    * </div>
-    * <script>
-    * function initScrollView(e) {
-    *   e.view.element.find("#scrollView").kendoMobileScrollView();
-    * }
-    * </script>
-    *
-    * @section
-    * <h3>Pages</h3>
-    * Content pages may be defined in order to display exactly one item per page. Pages are automatically resized
-    * when the device is rotated. To define a page, wrap the content in a div with <code>data-role="page"</code> attribute set.
-    *
-    * @exampleTitle ScrollView with pages
-    * @example
-    * <div data-role="scrollView">
-    *    <div data-role="page">Foo</div>
-    *    <div data-role="page">Bar</div>
-    * </div>
-    */
-    var ScrollView = Widget.extend(/** @lends kendo.mobile.ui.ScrollView.prototype */{
-        /**
-        * @constructs
-        * @extends kendo.mobile.ui.Widget
-        * @param {Element} element DOM element
-        * @param {Object} options
-        * @option {Number} [page] <0> The initial page to display.
-        * @option {Number} [duration] <300> The milliseconds that take the ScrollView to snap to the current page after released.
-        * @option {Number} [velocityThreshold] <0.8> The velocity threshold after which a swipe will navigate to the next page (as opposed to snapping back to the current page).
-        * @option {Number} [bounceVelocityThreshold] <1.6> The velocity threshold after which a swipe will result in a bounce effect.
-        */
+    var ScrollView = Widget.extend({
         init: function(element, options) {
             var that = this;
 
@@ -151,13 +100,6 @@
         },
 
         events: [
-            /**
-             * Fires when the widget page is changed.
-             * @name kendo.mobile.ui.ScrollView#change
-             * @event
-             * @param {Event} e
-             * @param {jQuery} e.page The current page (zero based index)
-             */
             CHANGE
         ],
 
@@ -165,16 +107,6 @@
             this.dimensions.refresh();
         },
 
-        /**
-         * Redraw the mobile ScrollView pager. Called automatically on device orientation change event.
-         *
-         * @example
-         * <div data-role="scrollview" id="scrollview"></div>
-         *
-         * <script>
-         *    $("#scrollview").data("kendoMobileScrollView").refresh();
-         * </script>
-         */
         refresh: function() {
             var that = this,
                 pageHTML = "",
@@ -201,33 +133,11 @@
             that._updatePager();
         },
 
-        /**
-         * Update the scrollview HTML content
-         * @param {String | jQuery} content the new scrollView content.
-         *
-         * @example
-         * <div data-role="scrollview" id="scrollview"></div>
-         *
-         * <script>
-         *    $("#scrollview").data("kendoMobileScrollView").content("<span>Foo</span>");
-         * </script>
-         */
         content: function(html) {
            this.element.children().first().html(html);
            this.dimensions.refresh();
         },
 
-        /**
-         * Scroll to the given page. Pages are zero-based indexed.
-         * @param {Number} page The page to scroll to.
-         * @example
-         * <div data-role="scrollview" id="scrollview"></div>
-         *
-         * <script>
-         *    // Scroll to the second page of the scrollView
-         *    $("#scrollview").data("kendoMobileScrollView").scrollTo(1);
-         * </script>
-         */
         scrollTo: function(page) {
             this.page = page;
             this._moveTo(- page * this.dimension.getSize(), Transition.easeOutExpo);

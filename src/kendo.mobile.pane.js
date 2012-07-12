@@ -29,62 +29,7 @@
         }
     }
 
-    /**
-     * @name kendo.mobile.ui.Pane.Description
-     * @section
-     * <h3>Mobile Pane</h3>
-     * <p>The mobile Pane widget groups one or more <strong>mobile views</strong> within the main view application. The mobile
-     * SplitView widget allows a side by-side display of several panes. The mobile PopOver automatically instantiates a mobile Pane widget for its
-     * contents.</p>
-     *
-     * @section
-     * <p>The mobile Pane widget acts like an embedded mobile application, with most of the application
-     * features available: support for local/remote views, default layout and transition, lading, etc. with one
-     * exception being the browser history support. Navigating within the pane will not update the history state, so
-     * deep linking to a pane state is not supported.</p>
-     *
-     * @section
-     * <h3>Navigating across panes</h3>
-     *
-     * <p>By default, navigational widgets will change views in the containing pane. To target another pane, use
-     * <code>target</code> data attribute set to the <strong>id</strong> of the pane. To change views in the mobile
-     * application, use <code>data-target="_top"</code>.</p>
-     *
-     * @exampleTitle Navigating across panes
-     * @example
-     * <div data-role="splitview" id="main">
-     *    <div data-role="pane" id="side-pane">
-     *      <div data-role="view">
-     *         <a data-role="button" href="#bar" data-target="main-pane">Bar (main pane)</a>
-     *         <a data-role="button" href="#baz" data-target="_top">Baz (application)</a>
-     *      </div>
-     *    </div>
-     *
-     *    <div data-role="pane" id="main-pane">
-     *      <div data-role="view" id="foo">
-     *         Foo
-     *      </div>
-     *      <div data-role="view" id="bar">
-     *         Bar
-     *      </div>
-     *    </div>
-     *  </div>
-     *
-     *  <div data-role="view" id="baz">
-     *     <a data-role="button" href="#main">Go back to splitview</a>
-     *  </div>
-     */
-    var Pane = Widget.extend(/** @lends kendo.mobile.ui.Pane.prototype */{
-        /**
-         * @constructs
-         * @extends kendo.mobile.ui.Widget
-         * @param {Element} element DOM element
-         * @param {Object} options Configuration options.
-         * @option {String} [layout] <> The id of the default Pane Layout.
-         * @option {String} [initial] <> The id of the initial mobilie View to display.
-         * @option {String} [loading] <Loading...> The text displayed in the loading popup. Setting this value to false will disable the loading popup.
-         * @option {String} [transition] <> The default View transition.
-         */
+    var Pane = Widget.extend({
         init: function(element, options) {
             var that = this;
 
@@ -121,51 +66,10 @@
         },
 
         events: [
-            /**
-             * Fires when pane navigates to a view.
-             * @name kendo.mobile.ui.Pane#navigate
-             * @event
-             * @param {Event} e
-             * @param {jQuery} e.url The url of the view
-             */
             NAVIGATE,
-            /**
-             * Fires after the pane displays a view.
-             * @name kendo.mobile.ui.Pane#viewShow
-             * @event
-             * @param {Event} e
-             * @param {View} e.view The displayed view
-             */
             VIEW_SHOW
         ],
 
-        /**
-         * Navigate the local or remote view.
-         * @param {String} url The id or url of the view.
-         * @param {String} transition The transition to apply when navigating. See View Transitions section for more
-         * information.
-         *
-         * @exampleTitle Navigate to a remote view
-         * @example
-         * <div data-role="pane" id="main-pane">
-         * </div>
-         *
-         * <script>
-         * var pane = $("#main-pane").data("kendoMobilePane");
-         * pane.navigate("settings.html");
-         * </script>
-         *
-         * @exampleTitle Navigate to a local view
-         * @example
-         * <div data-role="pane" id="main-pane">
-         *   <div data-role="view" id="foo"> ... </div>
-         * </div>
-         *
-         * <script>
-         * var pane = $("#main-pane").data("kendoMobilePane");
-         * pane.navigate("#foo");
-         * </script>
-         */
         navigate: function(url, transition) {
             var that = this,
                 history = that.history;
@@ -182,24 +86,14 @@
             that.viewEngine.showView(url, transition);
         },
 
-        /**
-         * Hide the loading animation.
-         */
         hideLoading: function() {
             this.loader.hide();
         },
 
-        /**
-         * Show the loading animation.
-         */
         showLoading: function() {
             this.loader.show();
         },
 
-        /**
-         * Get a reference to the current view.
-         * @returns {View} the view instance.
-         */
         view: function() {
             return this.viewEngine.view();
         },

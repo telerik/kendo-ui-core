@@ -1,8 +1,4 @@
 ;(function($, undefined) {
-    /**
-     * @name kendo
-     * @namespace This object contains all code introduced by the Kendo project, plus helper functions that are used across all widgets.
-     */
     var kendo = window.kendo = window.kendo || {},
         extend = $.extend,
         each = $.each,
@@ -58,12 +54,7 @@
         return subclass;
     };
 
-    var Observable = Class.extend(/** @lends kendo.Observable.prototype */{
-        /**
-         * Creates an observable instance.
-         * @constructs
-         * @class Represents a class that can trigger events, along with methods that subscribe handlers to these events.
-         */
+    var Observable = Class.extend({
         init: function() {
             this._events = {};
         },
@@ -179,55 +170,6 @@
         }
     });
 
-    /**
-     * @name kendo.Template.Description
-     *
-     * @section
-     * <p>
-     *  Templates offer way of creating HTML chunks. Options such as HTML encoding and compilation for optimal
-     *  performance are available.
-     * </p>
-     *
-     * @exampleTitle Basic template
-     * @example
-     * var inlineTemplate = kendo.template("Hello, #= firstName # #= lastName #");
-     * var inlineData = { firstName: "John", lastName: "Doe" };
-     * $("#inline").html(inlineTemplate(inlineData));
-     *
-     * @exampleTitle Output:
-     * @example
-     * Hello, John Doe!
-     *
-     * @exampleTitle Encode HTML
-     * @example
-     * var encodingTemplate = kendo.template("HTML tags are encoded as follows: #:html#");
-     * var encodingData = { html: "<strong>lorem ipsum</strong>" };
-     * $("#encoding").html(encodingTemplate(encodingData));
-     *
-     * @exampleTitle Output:
-     * @example
-     * HTML tags are encoded as follows: <strong>lorem ipsum</strong>
-     *
-     * @exampleTitle Use javascript in templates
-     * @example
-     * var encodingTemplate = kendo.template("#if (foo) {# bar #}#");
-     * var data = { foo: true};
-     * $("#encoding").html(encodingTemplate(data)); // outputs bar
-     *
-     * @exampleTitle Escape sharp symbols in JavaScript strings
-     * @example
-     * var encodingTemplate = kendo.template("<a href='\\#'>Link</a>");
-     *
-     * @exampleTitle Escape sharp symbols in script templates
-     * @example
-     * <script type="text/x-kendo-template" id="template">
-     *  <a href="\#">Link</a>
-     * </script>
-     *
-     * <script>
-     * var encodingTemplate = kendo.template($("#template").html());
-     * </script>
-     */
 
      function compilePart(part, stringPart) {
          if (stringPart) {
@@ -258,23 +200,9 @@
         escapedSharpRegExp = /\\#/g,
         sharpRegExp = /__SHARP__/g;
 
-    /**
-     * @name kendo.Template
-     * @namespace
-     */
-    Template = /** @lends kendo.Template */ {
+    Template = {
         paramName: "data", // name of the parameter of the generated template
         useWithBlock: true, // whether to wrap the template in a with() block
-        /**
-         * Renders a template for each item of the data.
-         * @ignore
-         * @name kendo.Template.render
-         * @static
-         * @function
-         * @param {String} [template] The template that will be rendered
-         * @param {Array} [data] Data items
-         * @returns {String} The rendered template
-         */
         render: function(template, data) {
             var idx,
                 length,
@@ -286,16 +214,6 @@
 
             return html;
         },
-        /**
-         * Compiles a template to a function that builds HTML. Useful when a template will be used several times.
-         * @ignore
-         * @name kendo.Template.compile
-         * @static
-         * @function
-         * @param {String} [template] The template that will be compiled
-         * @param {Object} [options] Compilation options
-         * @returns {Function} The compiled template
-         */
         compile: function(template, options) {
             var settings = extend({}, this, options),
                 paramName = settings.paramName,
@@ -367,7 +285,7 @@ function pad(number) {
 
     if (typeof Date.prototype.toJSON !== FUNCTION) {
 
-        /** @ignore */
+        
         Date.prototype.toJSON = function (key) {
             var that = this;
 
@@ -380,7 +298,7 @@ function pad(number) {
                 pad(that.getUTCSeconds())   + "Z" : null;
         };
 
-        String.prototype.toJSON = Number.prototype.toJSON = /** @ignore */ Boolean.prototype.toJSON = function (key) {
+        String.prototype.toJSON = Number.prototype.toJSON = Boolean.prototype.toJSON = function (key) {
             return this.valueOf();
         };
     }
@@ -566,355 +484,6 @@ function pad(number) {
         }
     }};
 
-    /**
-     * @name kendo.Globalization
-     * @namespace
-     */
-     /**
-     * @name kendo.Globalization.Description
-     *
-     * @section Globalization is the process of designing and developing an
-     * application that works in multiple cultures. The culture defines specific information
-     * for the number formats, week and month names, date and time formats and etc.
-     *
-     * @section Kendo exposes <strong><em>culture(cultureName)</em></strong> method which allows to select the culture
-     * script corresponding to the "culture name". kendo.culture() method uses the passed culture name
-     * to select a culture from the culture scripts that you have included and then sets the current culture. If there is no
-     * corresponding culture then the method will try to find culture which is equal to the country part of the culture name.
-     * If no culture is found the default one is used.
-     *
-     * <h3>Define current culture settings</h3>
-     *
-     * @exampleTitle Include culture scripts and select culture
-     * @example
-     *
-     * <script src="jquery.js" ></script>
-     * <script src="kendo.all.min.js"></script>
-     * <script src="kendo.culture.en-GB.js"></script>
-     * <script type="text/javascript">
-     *    //set current culture to the "en-GB" culture script.
-     *    kendo.culture("en-GB");
-     * </script>
-     *
-     * @exampleTitle Select closest culture
-     * @example
-     *
-     * <script src="jquery.js" ></script>
-     * <script src="kendo.all.min.js"></script>
-     * <script src="kendo.culture.fr.js"></script>
-     * <script type="text/javascript">
-     *    //set current culture to the "fr" culture script.
-     *    kendo.culture("fr-FR");
-     * </script>
-     *
-     * @exampleTitle Get current culture
-     * @example
-     * var cultureInfo = kendo.culture();
-     *
-     * <h3>Find culture object</h3>
-     *
-     * @section Kendo also exposes <strong><em>findCulture(cultureName)</em></strong> method which returns a culture object which corresponds to
-     * the passed culture name. If there is no such culture in the registered culture scripts, the method will try to find a culture object
-     * which corresponds to the country part of the culture name. If no culture is found, the result will be <strong>null</strong>.
-     *
-     * @exampleTitle Find a culture object
-     * @example
-     *
-     * <script src="jquery.js" ></script>
-     * <script src="kendo.all.min.js"></script>
-     * <script src="kendo.culture.fr.js"></script>
-     * <script type="text/javascript">
-     *    //finds the "fr-FR" culture object.
-     *    var culture = kendo.findCulture("fr-FR");
-     * </script>
-     *
-     * @section
-     * <h3>Format number or date object</h3>
-     *
-     * Kendo exposes methods which can format number or date object using specific format string and the current specified culture:
-     * @section
-     * <h4><code>kendo.toString(object, format)</code> - returns a string representation of the current object using specific format.</h4>
-     * @exampleTitle Formats number and date objects
-     * @example
-     * //format number using standard number format
-     * kendo.toString(10.12, "n"); //10.12
-     * kendo.toString(10.12, "n0"); //10
-     * kendo.toString(10.12, "n5"); //10.12000
-     * kendo.toString(10.12, "c"); //$10.12
-     * kendo.toString(0.12, "p"); //12.00 %
-     * //format number using custom number format
-     * kendo.toString(19.12, "00##"); //0019
-     * //format date
-     * kendo.toString(new Date(2010, 9, 5), "yyyy/MM/dd" ); // "2010/10/05"
-     * kendo.toString(new Date(2010, 9, 5), "dddd MMMM d, yyyy" ); // "Tuesday October 5, 2010"
-     * kendo.toString(new Date(2010, 10, 10, 22, 12), "hh:mm tt" ); // "10:12 PM"
-     *
-     * @section
-     * <h4>kendo.format - replaces each format item in a specified string with the text equivalent of a corresponding object's value.</h4>
-     *  @exampleTitle String format
-     *  @example
-     *  kendo.format("{0} - {1}", 12, 24); //12 - 24
-     *  kendo.format("{0:c} - {1:c}", 12, 24); //$12.00 - $24.00
-     *
-     * @section
-     * <h3>Parsing a string</h3>
-     *
-     * Kendo exposes methods which converts the specified string to date or number object:
-     * <ol>
-     *    <li>
-     *       <code>kendo.parseInt(string, [culture])</code> - converts a string to a whole number using the specified culture (current culture by default).
-     *        @exampleTitle Parse string to integer
-     *        @example
-     *
-     *        //assumes that current culture defines decimal separator as "."
-     *        kendo.parseInt("12.22"); //12
-     *
-     *        //assumes that current culture defines decimal separator as ",", group separator as "." and currency symbol as "€"
-     *        kendo.parseInt("1.212,22 €"); //1212
-     *    </li>
-     *    <li>
-     *       <code>kendo.parseFloat(string, [culture])</code> - converts a string to a number with floating point using the specified culture (current culture by default).
-     *        @exampleTitle Parse string to float
-     *        @example
-     *
-     *        //assumes that current culture defines decimal separator as "."
-     *        kendo.parseFloat("12.22"); //12.22
-     *
-     *        //assumes that current culture defines decimal separator as ",", group separator as "." and currency symbol as "€"
-     *        kendo.parseFloat("1.212,22 €"); //1212.22
-     *    </li>
-     *    <li>
-     *       <code>kendo.parseDate(string, [formats], [culture])</code> - converts a string to a JavaScript Date object, taking into account the given format/formats (or the given culture's set of default formats).
-     *       Current culture is used if one is not specified.
-     *        @exampleTitle Parse string to float
-     *        @example
-     *
-     *        //current culture is "en-US"
-     *        kendo.parseDate("12/22/2000"); //Fri Dec 22 2000
-     *        kendo.parseDate("2000/12/22", "yyyy/MM/dd"); //Fri Dec 22 2000
-     *    </li>
-     * </ol>
-     *
-     * @section
-     * <h3>Number formatting</h3>
-     * The purpose of number formatting is to convert Number object to a human readable string using culture's specific settings. <code>kendo.format</code> and <code>kendo.toString</code>
-     * methods support standard and custom numeric formats:
-     * <h4>Standard numeric formats</h4>
-     *<strong>n</strong> for number
-     *       @exampleTitle Formatting using "n" format
-     *       @example
-     *       kendo.culture("en-US");
-     *       kendo.toString(1234.567, "n"); //1,234.57
-     *
-     *       kendo.culture("de-DE");
-     *       kendo.toString(1234.567, "n3"); //1.234,567
-     *@section
-     *<strong>c</strong> for currency
-     *       @exampleTitle Formatting using "c" format
-     *       @example
-     *       kendo.culture("en-US");
-     *       kendo.toString(1234.567, "c"); //$1,234.57
-     *
-     *       kendo.culture("de-DE");
-     *       kendo.toString(1234.567, "c3"); //1.234,567 €
-     *@section
-     *<strong>p</strong> for percentage (number is multiplied by 100)
-     *       @exampleTitle Formatting using "p" format
-     *       @example
-     *       kendo.culture("en-US");
-     *       kendo.toString(0.222, "p"); //22.20 %
-     *
-     *       kendo.culture("de-DE");
-     *       kendo.toString(0.22, "p3"); //22.000 %
-     *@section
-     *<strong>e</strong> for exponential
-     *       @exampleTitle Formatting using "e" format
-     *       @example
-     *       kendo.toString(0.122, "e"); //1.22e-1
-     *       kendo.toString(0.122, "e4"); //1.2200e-1
-     *
-     * @section
-     * <h4>Custom numeric formats</h4>
-     * You can create custom numeric format string using one or more custom numeric specifiers. Custom numeric format string is any tha is not a standard numeric format.
-     * <div class="details-list">
-     *   <h4 class="details-title">Format specifiers</h4>
-     *   <dl>
-     *     <dt>
-     *       "0" - zero placeholder
-     *     </dt>
-     *     <dd>Replaces the zero with the corresponding digit if one is present; otherwise, zero appears in the result string - <code>kendo.toString(1234.5678, "00000") -> 01235</code></dd>
-     *     <dt>
-     *       "#" - digit placeholder
-     *     </dt>
-     *     <dd>Replaces the pound sign with the corresponding digit if one is present; otherwise, no digit appears in the result string - <code>kendo.toString(1234.5678, "#####") -> 1235</code></dd>
-     *     <dt>
-     *       "." - Decimal placeholder
-     *     </dt>
-     *     <dd>Determines the location of the decimal separator in the result string - <code>kendo.tostring(0.45678, "0.00") -> 0.46 </code>(en-us)</dd>
-     *     <dt>
-     *       "," - group separator placeholder
-     *     </dt>
-     *     <dd>Insert localized group separator between each group - <code>kendo.tostring(12345678, "##,#") -> 12,345,678</code>(en-us)</dd>
-     *     <dt>
-     *       "%" - percentage placeholder
-     *     </dt>
-     *     <dd>Multiplies a number by 100 and inserts a localized percentage symbol in the result string</dd>
-     *     <dt>
-     *       "e" - exponential notation
-     *     </dt>
-     *     <dd><code>kendo.toString(0.45678, "e0") -> 5e-1</code></dd>
-     *     <dt>
-     *       ";" - section separator
-     *     </dt>
-     *     <dd>Defines sections wih separate format strings for positive, negative, and zero numbers</dd>
-     *     <dt>
-     *       "string"/'string' - Literal string delimiter
-     *     </dt>
-     *     <dd>Indicates that the enclosed characters should be copied to the result string</dd>
-     *   </dl>
-     * </div>
-     *
-     * @section
-     * <h3>Date formatting</h3>
-     * The purpose of date formatting is to convert Date object to a human readable string using culture's specific settings. <code>kendo.format</code> and <code>kendo.toString</code>
-     * methods support standard and custom date formats:
-     * <h4>Standard date formats</h4>
-     * <div class="details-list">
-     *   <h4 class="details-title">Format specifiers</h4>
-     *   <dl>
-     *     <dt>
-     *       "d" - short date pattern
-     *     </dt>
-     *     <dd><code>kendo.toString(new Date(2000, 10, 6), "d") -> 11/6/2000</code></dd>
-     *     <dt>
-     *       "D" - long date pattern
-     *     </dt>
-     *     <dd><code>kendo.toString(new Date(2000, 10, 6), "D") -> Monday, November 06, 2000</code></dd>
-     *     <dt>
-     *       "F" - Full date/time pattern
-     *     </dt>
-     *     <dd><code>kendo.toString(new Date(2000, 10, 6), "D") -> Monday, November 06, 2000 12:00:00 AM</code></dd>
-     *     <dt>
-     *       "g" - General date/time pattern (short time)
-     *     </dt>
-     *     <dd><code>kendo.toString(new Date(2000, 10, 6), "g") -> 11/6/2000 12:00 AM</code></dd>
-     *     <dt>
-     *       "G" - General date/time pattern (long time)
-     *     </dt>
-     *     <dd><code>kendo.toString(new Date(2000, 10, 6), "G") -> 11/6/2000 12:00:00 AM</code></dd>
-     *     <dt>
-     *       "M/m" - Month/day pattern
-     *     </dt>
-     *     <dd><code>kendo.toString(new Date(2000, 10, 6), "m") -> November 06</code></dd>
-     *     <dt>
-     *       "u" - Universal sortable date/time pattern
-     *     </dt>
-     *     <dd><code>kendo.toString(new Date(2000, 10, 6), "u") -> 2000-11-06 00:00:00Z</code></dd>
-     *     <dt>
-     *       "Y/y" - Year/month pattern
-     *     </dt>
-     *     <dd><code>kendo.toString(new Date(2000, 10, 6), "y") -> November, 2000</code></dd>
-     *   </dl>
-     * </div>
-     *
-     *@section
-     * <h4>Custom date formats</h4>
-     * <div class="details-list">
-     *   <h4 class="details-title">Format specifiers</h4>
-     *   <dl>
-     *     <dt>
-     *       "d"
-     *     </dt>
-     *     <dd>The day of the month, from 1 through 31</dd>
-     *     <dt>
-     *       "dd"
-     *     </dt>
-     *     <dd>The day of the month, from 01 through 31.</dd>
-     *     <dt>
-     *       "ddd"
-     *     </dt>
-     *     <dd>iThe abbreviated name of the day of the week</dd>
-     *     <dt>
-     *       "dddd"
-     *     </dt>
-     *     <dd>The full name of the day of the week</dd>
-     *     <dt>
-     *       "f"
-     *     </dt>
-     *     <dd>The tenths of a second in a date and time value</dd>
-     *     <dt>
-     *       "ff"
-     *     </dt>
-     *     <dd>The hundredths of a second in a date and time value</dd>
-     *     <dt>
-     *       "fff"
-     *     </dt>
-     *     <dd>The milliseconds in a date and time value</dd>
-     *     <dt>
-     *       "M"
-     *     </dt>
-     *     <dd>The month, from 1 through 12</dd>
-     *     <dt>
-     *       "MM"
-     *     </dt>
-     *     <dd>The month, from 01 through 12</dd>
-     *     <dt>
-     *       "MMM"
-     *     </dt>
-     *     <dd>The abbreviated name of the month</dd>
-     *     <dt>
-     *       "MMMM"
-     *     </dt>
-     *     <dd>The full name of the month</dd>
-     *     <dt>
-     *       "h"
-     *     </dt>
-     *     <dd>The hour, using a 12-hour clock from 1 to 12</dd>
-     *     <dt>
-     *       "hh"
-     *     </dt>
-     *     <dd>The hour, using a 12-hour clock from 01 to 12</dd>
-     *     <dt>
-     *       "H"
-     *     </dt>
-     *     <dd>The hour, using a 24-hour clock from 1 to 23</dd>
-     *     <dt>
-     *       "HH"
-     *     </dt>
-     *     <dd>The hour, using a 24-hour clock from 01 to 23</dd>
-     *     <dt>
-     *       "m"
-     *     </dt>
-     *     <dd>The minute, from 0 through 59</dd>
-     *     <dt>
-     *       "mm"
-     *     </dt>
-     *     <dd>The minute, from 00 through 59</dd>
-     *     <dt>
-     *       "s"
-     *     </dt>
-     *     <dd>The second, from 0 through 59</dd>
-     *     <dt>
-     *       "ss"
-     *     </dt>
-     *     <dd>The second, from 00 through 59</dd>
-     *     <dt>
-     *       "tt"
-     *     </dt>
-     *     <dd>The AM/PM designator</dd>
-     *   </dl>
-     * </div>
-     *
-     * @section
-     * <p><h3>Widgets that depend on current culture are:</h3>
-     *    <ul>
-     *        <li> Calendar </li>
-     *        <li> DatePicker </li>
-     *        <li> TimePicker </li>
-     *        <li> NumericTextBox </li>
-     *    </ul>
-     * </p>
-     */
 
      function findCulture(culture) {
         if (culture) {
@@ -1071,7 +640,7 @@ function pad(number) {
 
         formatAndPrecision = standardFormatRegExp.exec(format);
 
-        /* standard formatting */
+        // standard formatting
         if (formatAndPrecision) {
             format = formatAndPrecision[1].toLowerCase();
 
@@ -1871,17 +1440,7 @@ function pad(number) {
         return destination;
     }
 
-    /**
-     * Contains results from feature detection.
-     * @name kendo.support
-     * @namespace Contains results from feature detection.
-     */
     (function() {
-        /**
-         * Indicates the width of the browser scrollbar. A value of zero means that the browser does not show a visual representation of a scrollbar (i.e. mobile browsers).
-         * @name kendo.support.scrollbar
-         * @property {Boolean}
-         */
         support.scrollbar = function() {
             var div = document.createElement("div"),
                 result;
@@ -1902,37 +1461,17 @@ function pad(number) {
         try {
             table.innerHTML = "<tr><td></td></tr>";
 
-            /**
-             * Indicates whether the browser supports setting of the <tbody> innerHtml.
-             * @name kendo.support.tbodyInnerHtml
-             * @property {Boolean}
-             */
             support.tbodyInnerHtml = true;
         } catch (e) {
             support.tbodyInnerHtml = false;
         }
 
-        /**
-         * Indicates whether the browser supports touch events.
-         * @name kendo.support.touch
-         * @property {Boolean}
-         */
         support.touch = "ontouchstart" in window;
         support.pointers = navigator.msPointerEnabled;
 
-        /**
-         * Indicates whether the browser supports CSS transitions.
-         * @name kendo.support.transitions
-         * @property {Boolean}
-         */
         var transitions = support.transitions = false;
         var transforms = support.transforms = false;
 
-        /**
-         * Indicates whether the browser supports hardware 3d transitions.
-         * @name kendo.support.hasHW3D
-         * @property {Boolean}
-         */
         support.hasHW3D = ("WebKitCSSMatrix" in window && "m11" in new window.WebKitCSSMatrix()) || "MozPerspective" in document.documentElement.style || "msPerspective" in document.documentElement.style;
         support.hasNativeScrolling = typeof document.documentElement.style.webkitOverflowScrolling == "string";
 
@@ -1961,11 +1500,6 @@ function pad(number) {
         support.transforms = transforms;
         support.transitions = transitions;
 
-        /**
-         * Indicates the browser device pixel ratio.
-         * @name kendo.support.devicePixelRatio
-         * @property {Float}
-         */
         support.devicePixelRatio = window.devicePixelRatio === undefined ? 1 : window.devicePixelRatio;
 
         support.detectOS = function (ua) {
@@ -2037,28 +1571,14 @@ function pad(number) {
             return os;
         };
 
-        /**
-         * Parses the mobile OS type and version from the browser user agent.
-         * @name kendo.support.mobileOS
-         */
         support.mobileOS = support.detectOS(navigator.userAgent);
 
         support.zoomLevel = function() {
             return support.touch ? (document.documentElement.clientWidth / window.innerWidth) : 1;
         };
 
-        /**
-         * Indicates the browser support for event capturing
-         * @name kendo.support.eventCapture
-         * @property {Boolean}
-         */
         support.eventCapture = document.documentElement.addEventListener;
 
-        /**
-         * Indicates whether the browser supports input placeholder.
-         * @name kendo.support.placeholder
-         * @property {Boolean}
-         */
         support.placeholder = "placeholder" in document.createElement("input");
         support.stableSort = (function() {
             var sorted = [0,1,2,3,4,5,6,7,8,9,10,11,12].sort(function() { return 0; } );
@@ -2069,12 +1589,6 @@ function pad(number) {
 
     })();
 
-    /**
-     * Exposed by jQuery.
-     * @ignore
-     * @name jQuery.fn
-     * @namespace Handy jQuery plug-ins that are used by all Kendo widgets.
-     */
 
     function size(obj) {
         var result = 0, key;
@@ -2228,7 +1742,7 @@ function pad(number) {
         return fx.transitionPromise(element, destination, prepareAnimationOptions(options, duration, reverse, complete));
     }
 
-    extend($.fn, /** @lends jQuery.fn */{
+    extend($.fn, {
         kendoStop: function(clearQueue, gotoEnd) {
             return this.stop(clearQueue, gotoEnd);
         },
@@ -2254,7 +1768,7 @@ function pad(number) {
         return element;
     }
 
-    extend($.fn, /** @lends jQuery.fn */{
+    extend($.fn, {
         kendoAddClass: function(classes, options){
             return toggleClass(this, classes, options, true);
         },
@@ -2269,13 +1783,6 @@ function pad(number) {
     var ampRegExp = /&/g,
         ltRegExp = /</g,
         gtRegExp = />/g;
-    /**
-     * Encodes HTML characters to entities.
-     * @name kendo.htmlEncode
-     * @function
-     * @param {String} value The string that needs to be HTML encoded.
-     * @returns {String} The encoded string.
-     */
     function htmlEncode(value) {
         return ("" + value).replace(ampRegExp, "&amp;").replace(ltRegExp, "&lt;").replace(gtRegExp, "&gt;");
     }
@@ -2294,7 +1801,7 @@ function pad(number) {
     };
 
     if (support.touch) {
-        /** @ignore */
+        
         touchLocation = function(e, id) {
             var changedTouches = e.changedTouches || e.originalEvent.changedTouches;
 
@@ -2383,11 +1890,7 @@ function pad(number) {
     },
     localUrlRe = /^([a-z]+:)?\/\//i;
 
-    extend(kendo, /** @lends kendo */ {
-        /**
-         * @name kendo.ui
-         * @namespace Contains all classes for the Kendo UI widgets.
-         */
+    extend(kendo, {
         ui: kendo.ui || {},
         fx: kendo.fx || fx,
         data: kendo.data || {},
@@ -2430,17 +1933,7 @@ function pad(number) {
         Observable: Observable,
         Class: Class,
         Template: Template,
-        /**
-         * Shorthand for {@link kendo.Template.compile}.
-         * @name kendo.template
-         * @function
-         */
         template: proxy(Template.compile, Template),
-        /**
-         * Shorthand for {@link kendo.Template.render}.
-         * @name kendo.render
-         * @function
-         */
         render: proxy(Template.render, Template),
         stringify: proxy(JSON.stringify, JSON),
         touchLocation: touchLocation,
@@ -2449,7 +1942,7 @@ function pad(number) {
         isLocalUrl: function(url) {
             return url && !localUrlRe.test(url);
         },
-        /** @ignore */
+        
         expr: function(expression, safe) {
             expression = expression || "";
 
@@ -2465,22 +1958,22 @@ function pad(number) {
 
             return expression;
         },
-        /** @ignore */
+        
         getter: function(expression, safe) {
             return getterCache[expression] = getterCache[expression] || new Function("d", "return " + kendo.expr(expression, safe));
         },
-        /** @ignore */
+        
         setter: function(expression) {
             return setterCache[expression] = setterCache[expression] || new Function("d,value", "d." + expression + "=value");
         },
-        /** @ignore */
+        
         accessor: function(expression) {
             return {
                 get: kendo.getter(expression),
                 set: kendo.setter(expression)
             };
         },
-        /** @ignore */
+        
         guid: function() {
             var id = "", i, random;
 
@@ -2500,7 +1993,7 @@ function pad(number) {
             return role.replace(/(\S+)/g, "[" + kendo.attr("role") + "=$1],").slice(0, -1);
         },
 
-        /** @ignore */
+        
         logToConsole: function(message) {
             var console = window.console;
 
@@ -2510,13 +2003,7 @@ function pad(number) {
         }
     });
 
-    var Widget = Observable.extend( /** @lends kendo.ui.Widget.prototype */ {
-        /**
-         * Initializes widget. Sets `element` and `options` properties.
-         * @constructs
-         * @class Represents a UI widget. Base class for all Kendo widgets
-         * @extends kendo.Observable
-         */
+    var Widget = Observable.extend( {
         init: function(element, options) {
             var that = this;
 
@@ -2687,16 +2174,9 @@ function pad(number) {
 
     kendo.parseOptions = parseOptions;
 
-    extend(kendo.ui, /** @lends kendo.ui */{
+    extend(kendo.ui, {
         Widget: Widget,
         roles: {},
-        /**
-         * Shows an overlay with a loading message, indicating that an action is in progress.
-         * @name kendo.ui.progress
-         * @function
-         * @param {jQuery} container The container that will hold the overlay
-         * @param {Boolean} toggle Whether the overlay should be shown or hidden
-         */
         progress: function(container, toggle) {
             var mask = container.find(".k-loading-mask");
 
@@ -2711,23 +2191,6 @@ function pad(number) {
                 mask.remove();
             }
         },
-        /**
-         * Helper method for writing new widgets.
-         * Exposes a jQuery plug-in that will handle the widget creation and attach its client-side object in the appropriate data-* attribute.
-         * @name kendo.ui.plugin
-         * @function
-         * @param {kendo.ui.Widget} widget The widget function.
-         * @param {Object} register <kendo.ui> The object where the reference to the widget is recorded.
-         * @param {Object} prefix <""> The plugin function prefix, e.g. "Mobile" will register "kendoMobileFoo".
-         * @example
-         * function TextBox(element, options);
-         * kendo.ui.plugin(TextBox);
-         *
-         * // initialize a new TextBox for each input, with the given options object.
-         * $("input").kendoTextBox({ });
-         * // get the TextBox object and call the value API method
-         * $("input").data("kendoTextBox").value();
-         */
         plugin: function(widget, register, prefix) {
             var name = widget.fn.options.name,
                 getter;
@@ -2786,13 +2249,7 @@ function pad(number) {
         }
     });
 
-    var MobileWidget = Widget.extend(/** @lends kendo.mobile.ui.Widget.prototype */{
-        /**
-         * Initializes mobile widget. Sets `element` and `options` properties.
-         * @constructs
-         * @class Represents a mobile UI widget. Base class for all Kendo mobile widgets.
-         * @extends kendo.ui.Widget
-         */
+    var MobileWidget = Widget.extend({
         init: function(element, options) {
             Widget.fn.init.call(this, element, options);
             this.wrapper = this.element;
@@ -2812,19 +2269,11 @@ function pad(number) {
         }
     });
 
-    /**
-     * @name kendo.mobile
-     * @namespace This object contains all code introduced by the Kendo mobile suite, plus helper functions that are used across all mobile widgets.
-     */
     extend(kendo.mobile, {
         init: function(element) {
             kendo.init(element, kendo.mobile.ui, kendo.ui, kendo.dataviz.ui);
         },
 
-        /**
-         * @name kendo.mobile.ui
-         * @namespace Contains all classes for the Kendo Mobile UI widgets.
-         */
         ui: {
             Widget: MobileWidget,
             roles: {},
@@ -2834,12 +2283,6 @@ function pad(number) {
         }
     });
 
-    /**
-     * Enables kinetic scrolling on touch devices
-     * @name kendo.touchScroller
-     * @function
-     * @param {Selector} element The container element to enable scrolling for.
-     */
     kendo.touchScroller = function(element, options) {
         if (support.touch && kendo.mobile.ui.Scroller && !element.data("kendoMobileScroller")) {
             element.kendoMobileScroller(options);
@@ -2849,18 +2292,10 @@ function pad(number) {
         }
     };
 
-    /**
-     * Prevents the default event action. Should be supplied as an event callback
-     * @name kendo.preventDefault
-     * @function
-     */
     kendo.preventDefault = function(e) {
         e.preventDefault();
     };
 
-    /**
-     * Retrieves the widget for a given element (if any)
-     */
     kendo.widgetInstance = function(element, suite) {
         var widget = suite.roles[element.data(kendo.ns + "role")];
 
@@ -2869,12 +2304,6 @@ function pad(number) {
         }
     };
 
-    /**
-     * Binds to orientation change or resize (depending on the platform)
-     * Abstracts problem with android triggering event before the dimensions have changed.
-     * @function
-     * @param {Function} callback The callback to be executed
-     */
     kendo.onResize = function(callback) {
         var handler = callback;
         if (support.mobileOS.android) {

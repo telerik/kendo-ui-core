@@ -497,7 +497,7 @@
                 .attr("encoding", "multipart/form-data");
     };
 
-    syncUploadModule.prototype = /** @ignore */  {
+    syncUploadModule.prototype = {
         onSelect: function(e) {
             var upload = this.upload;
             var sourceInput = $(e.target);
@@ -534,7 +534,7 @@
 
     Upload._frameId = 0;
 
-    iframeUploadModule.prototype = /** @ignore */ {
+    iframeUploadModule.prototype = {
         onSelect: function(e) {
             var upload = this.upload,
                 sourceInput = $(e.target);
@@ -765,7 +765,7 @@
             .bind("t:abort", $.proxy(this.onAbort, this));
     };
 
-    formDataUploadModule.prototype = /** @ignore */ {
+    formDataUploadModule.prototype = {
         onSelect: function(e, rawFiles) {
             var upload = this.upload,
                 module = this,
