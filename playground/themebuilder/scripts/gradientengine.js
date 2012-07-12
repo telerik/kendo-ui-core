@@ -112,7 +112,7 @@
             return output;
         },
 
-        get: function ( prefixes, index ) {
+        get: function ( prefixes, index, direction ) {
             var output = "", that = this,
                 target = !isNaN(index) ? [ that.value[index]] : that.value;
 
@@ -125,9 +125,9 @@
             $.each (prefixes, function (idx, value) {
                 target.forEach(function(gradient) {
                     if (value == "-webkit-") {
-                        output += that._getWebKitGradient(gradient);
+                        output += that._getWebKitGradient(gradient, direction);
                     } else {
-                        output += that._getStandardGradient(gradient, value);
+                        output += that._getStandardGradient(gradient, value, direction);
                     }
                 });
                 output = output.substring(0, output.length-1);
@@ -136,10 +136,10 @@
             return output;
         },
 
-        _getStandardGradient: function (gradient, prefix) {
+        _getStandardGradient: function (gradient, prefix, direction) {
             var output = "", parsed;
 
-            output += prefix + "linear-gradient(" + gradient.start.original + "," + ( gradient.end.original ? gradient.end.original + "," : "" );
+            output += prefix + "linear-gradient(" + (direction ? direction : gradient.start.original + "," + ( gradient.end.original ? gradient.end.original + "," : "" ));
 
             gradient.stops.forEach(function(stop) {
                 parsed = parseInt(stop.position, 10);
@@ -150,10 +150,12 @@
             return output.substring(0, output.length - 1) + "),";
         },
 
-        _getWebKitGradient: function (gradient) {
-            var output = "";
+        _getWebKitGradient: function (gradient, direction) {
+            var output = "",
+                normalizedStart = direction ? normalizePosition(direction) : null,
+                normalizedEnd = direction ? normalizePosition(direction, true) : null;
 
-            output += "-webkit-gradient(linear," + gradient.start.normalized + "," + gradient.end.normalized + ",";
+            output += "-webkit-gradient(linear," + (direction ? normalizedStart : gradient.start.normalized) + "," + (direction ? normalizedEnd : gradient.end.normalized) + ",";
 
             gradient.stops.forEach(function(stop) {
                 output += "color-stop(" + (trimZeroes(stop.position / 100) || "0") + ", " + stop.color.get() + "),";

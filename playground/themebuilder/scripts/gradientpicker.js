@@ -27,7 +27,7 @@
                     backgroundColor: stop.color.get(),
                     left: stop.position + "%" || "1px"
                 })
-                .appendTo(element);
+                .prependTo(element);
 
                 that.picker = that.point.on("click", function (e) {
                     if (that.stopped) {
@@ -52,7 +52,7 @@
             _updateConnected: function () {
                 var that = this;
 
-                that.element.css("background-image", that.parent.gradients.get(support.transforms.css, that.index));
+                that.element.children(".gradient").css("background-image", that.parent.gradients.get(support.transforms.css, that.index, "left"));
                 that.parent.element.css("background-image", that.parent.gradients.get(support.transforms.css));
             },
 
@@ -102,10 +102,11 @@
 
         GradientPicker = Widget.extend({
             init: function (element, options) {
-                var that = this;
+                var that = this, bgcolor;
 
                 Widget.fn.init.call(that, element, options);
                 element = that.element;
+                bgcolor = new Color(element.css("background-color"));
 
                 that.styleengine = that.element.parents(".device").data("kendoStyleEngine");
 
@@ -124,11 +125,11 @@
                 var value = that.gradients.value;
 
                 for (var j = 0, valueLen = value.length; j < valueLen; j++) {
-                    var sample = value[j].gradientElement = $("<div class='sample' />");
+                    var sample = value[j].gradientElement = $("<div class='sample'><div class='gradient'></div></div>");
 
-                    sample.css({
-                        backgroundColor: element.css("background-color"),
-                        backgroundImage: that.gradients.get(support.transforms.css, j)
+                    sample.children(".gradient").css({
+                        backgroundColor: bgcolor.alpha() ? bgcolor.get() : "#fff",
+                        backgroundImage: that.gradients.get(support.transforms.css, j, "left")
                     });
                     sample.appendTo(that.popup.element);
 
@@ -147,7 +148,9 @@
                         }
                     });
 
-                that.popup.element.on("click", function (e) {
+                that.popup.element
+                    .addClass("k-list-container")
+                    .on("click", function (e) {
                     if (!$(e.target).closest(".k-popup").hasClass("k-gradientpick")) { return; }
 
                     for (var j = 0, valueLen = value.length; j < valueLen; j++) {
