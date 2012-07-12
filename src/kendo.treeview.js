@@ -1383,8 +1383,8 @@
          * var nodeText = treeView.text($("#firstItem"));
          *
          */
-        text: function (node) {
-            return $(node).closest(NODE).find(">div>.k-in").text();
+        text: function (node, text) {
+            return $(node).closest(NODE).find(">div>.k-in").text(text);
         },
 
         _dataSourceMove: function(nodeData, group, parentNode, callback) {

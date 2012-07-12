@@ -125,13 +125,11 @@
             });
 
             test("text(node) returns node text", function() {
-                createTreeView({
-                        dataSource: [
-                            { text: "foo", items: [
-                                { text: "bar" }
-                            ] }
-                        ]
-                    });
+                createTreeView([
+                        { text: "foo", items: [
+                            { text: "bar" }
+                        ] }
+                    ]);
 
                 var node = treeview.find(".k-item:first");
 
@@ -140,17 +138,27 @@
             });
 
             test("text(node) returns node text if inner element is passed", function() {
-                createTreeView({
-                        dataSource: [
-                            { text: "foo", items: [
-                                { text: "bar" }
-                            ] }
-                        ]
-                    });
+                createTreeView([
+                        { text: "foo", items: [
+                            { text: "bar" }
+                        ] }
+                    ]);
 
                 var node = treeview.find(".k-item .k-in:first");
 
                 equals(treeviewObject.text(node), "foo");
+            });
+
+            test("text(node, 'text') sets node text", function() {
+                createTreeView([
+                        { text: "foo" }
+                    ]);
+
+                var node = treeview.find(".k-item .k-in");
+
+                treeviewObject.text(node, "bar");
+
+                equals(treeviewObject.text(node), "bar");
             });
 
             test("findByText(text) returns single node", function() {
