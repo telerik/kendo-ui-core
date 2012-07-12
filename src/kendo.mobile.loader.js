@@ -4,16 +4,7 @@
         Widget = ui.Widget,
         CAPTURE_EVENTS = ["touchstart", "touchend", "touchmove", "mousedown", "mousemove", "mouseup"];
 
-    /**
-     * @name kendo.mobile.ui.Loader.Description
-     *
-     */
-    var Loader = Widget.extend(/** @lends kendo.mobile.ui.Loader.prototype */{
-        /**
-        * @constructs
-        * @extends kendo.mobile.ui.Widget
-        * @param {Element} element DOM element
-        */
+    var Loader = Widget.extend({
         init: function(container, options) {
             var that = this,
                 element = $('<div class="km-loader"><span class="km-loading km-spin"></span></div>');
@@ -33,10 +24,6 @@
             timeout: 100
         },
 
-        /**
-         * Show the loading animation.
-         * @example
-         */
         show: function() {
             var that = this;
 
@@ -51,10 +38,6 @@
             }, that.options.timeout);
         },
 
-        /**
-         * Hide the loading animation.
-         * @example
-         */
         hide: function() {
             var that = this;
             clearTimeout(that._loading);

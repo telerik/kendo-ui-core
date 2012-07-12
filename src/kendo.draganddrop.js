@@ -101,35 +101,7 @@
         parent.trigger(e.type);
     }
 
-    /**
-     * @name kendo.DragAxis.Description
-     *
-     * @section <h4>DragAxis</h4>
-     * The DragAxis is used internally by the kendo.Drag component to store and calculate event data.
-     * The Drag component contains two DragAxis instances: <code>x</code> for the horizontal coordinates, and <code>y</code> for the vertical.
-     * The two DragAxis instances are available in each Drag event parameter.
-     * @exampleTitle Access DragAxis information in Drag start event
-     * @example
-     * new kendo.Drag($("#foo"), {
-     *  start: function(e) {
-     *      console.log(x); // Horizontal axis
-     *      console.log(y); // Vertical axis
-     *  }
-     * });
-     *
-     * @section Each axis instance contains the following fields:
-     * <ul>
-     *   <li><b>location</b> - the offset of the mouse/touch relative to the entire document (pageX/Y);</li>
-     *   <li><b>startLocation</b> - the offset of the mouse/touch relative to the document when the drag started;</li>
-     *   <li><b>client</b> - the offset of the mouse/touch relative to the viewport (clientX/Y);</li>
-     *   <li><b>delta</b> - the change from the previous event location</li>
-     *   <li><b>velocity</b> - the pixels per millisecond speed of the current move.</li>
-     * </ul>
-     */
-    var DragAxis = Class.extend(/** @lends kendo.DragAxis.prototype */{
-        /**
-         * @constructs
-         */
+    var DragAxis = Class.extend({
         init: function(axis) {
             this.axis = axis;
         },
@@ -161,28 +133,7 @@
         }
     });
 
-    /**
-     * @name kendo.Drag.Description
-     * @section <h4>Drag</h4> The kendo Drag component provides a cross-browser, touch-friendly way to handle mouse and touch drag events.
-     * @exampleTitle <b>Drag</b> initialization
-     * @example
-     * var drag = new kendo.Drag($("#draggable"));
-     */
-    var Drag = Observable.extend(/** @lends kendo.Drag.prototype */{
-        /**
-         * @constructs
-         * @extends kendo.Observable
-         * @param {Element} element the DOM element from which the drag event starts.
-         * @param {Object} options Configuration options.
-         * @option {Number} [threshold] <0> The minimum distance the mouse/touch should move before the event is triggered.
-         * @option {Boolean} [global] <false> If set to true, the drag event will be tracked beyond the element boundaries.
-         * @option {Element} [surface]  If set, the drag event will be tracked for the surface boundaries. By default, leaving the element boundaries will end the drag.
-         * @option {Boolean} [allowSelection] <false> If set to true, the mousedown and selectstart events will not be prevented.
-         * @option {Boolean} [stopPropagation] <false> If set to true, the mousedown event propagation will be stopped, disabling
-         * drag capturing at parent elements.
-         * If set to false, dragging outside of the element boundaries will trigger the <code>end</code> event.
-         * @option {Selector} [filter] If passed, the filter limits the child elements that will trigger the event sequence.
-         */
+    var Drag = Observable.extend({
         init: function(element, options) {
             var that = this,
                 eventMap = {},
@@ -240,87 +191,17 @@
             }
 
             that.bind([
-            /**
-             * Fires when the user presses and releases the element without any movement or with a movement below the <code>threshold</code> specified.
-             * @name kendo.Drag#tap
-             * @event
-             * @param {Event} e
-             * @param {DragAxis} e.x Reference to the horizontal drag axis instance.
-             * @param {DragAxis} e.y Reference to the vertical drag axis instance.
-             * @param {jQueryEvent} e.event Reference to the jQuery event object.
-             * @param {Element} e.target Reference to the DOM element from which the Drag started.
-             * It is different from the element only if <code>filter</code> option is specified.
-             */
             TAP,
-            /**
-             * Fires when the user starts dragging the element.
-             * @name kendo.Drag#start
-             * @event
-             * @param {Event} e
-             * @param {DragAxis} e.x Reference to the horizontal drag axis instance.
-             * @param {DragAxis} e.y Reference to the vertical drag axis instance.
-             * @param {jQueryEvent} e.event Reference to the jQuery event object.
-             * @param {Element} e.target Reference to the DOM element from which the Drag started.
-             * It is different from the element only if <code>filter</code> option is specified.
-             */
             START,
-            /**
-             * Fires while dragging.
-             * @name kendo.Drag#move
-             * @event
-             * @param {Event} e
-             * @param {DragAxis} e.x Reference to the horizontal drag axis instance.
-             * @param {DragAxis} e.y Reference to the vertical drag axis instance.
-             * @param {jQueryEvent} e.event Reference to the jQuery event object.
-             * @param {Element} e.target Reference to the DOM element from which the Drag started.
-             * It is different from the element only if <code>filter</code> option is specified.
-             */
             MOVE,
-            /**
-             * Fires when the drag ends.
-             * @name kendo.Drag#end
-             * @event
-             * @param {Event} e
-             * @param {DragAxis} e.x Reference to the horizontal drag axis instance.
-             * @param {DragAxis} e.y Reference to the vertical drag axis instance.
-             * @param {jQueryEvent} e.event Reference to the jQuery event object.
-             * @param {Element} e.target Reference to the DOM element from which the Drag started.
-             * It is different from the element only if <code>filter</code> option is specified.
-             */
             END,
-            /**
-             * Fires when the drag is canceled. This  when the <code>cancel</code> method is called.
-             * @name kendo.Drag#cancel
-             * @event
-             * @param {Event} e
-             * @param {DragAxis} e.x Reference to the horizontal drag axis instance.
-             * @param {DragAxis} e.y Reference to the vertical drag axis instance.
-             * @param {jQueryEvent} e.event Reference to the jQuery event object.
-             * @param {Element} e.target Reference to the DOM element from which the Drag started.
-             * It is different from the element only if <code>filter</code> option is specified.
-             */
             CANCEL], options);
         },
 
-        /**
-         * Capture the current drag, so that Drag listeners bound to parent elements will not trigger.
-         * This method will not have any effect if the current drag instance is instantiated with the <code>global</code> option set to true.
-         */
         capture: function() {
             Drag.captured = true;
         },
 
-        /**
-         * Discard the current drag. Calling the <code>cancel</code> method will trigger the <code>cancel</code> event.
-         * The correct moment to call this method would be in the <code>start</code> event handler.
-         * @exampleTitle Cancel the drag event sequence
-         * @example
-         * new kendo.Drag($("#foo"), {
-         *  start: function(e) {
-         *      e.cancel();
-         *  }
-         * });
-         */
         cancel: function() {
             this._cancel();
             this.trigger(CANCEL);
@@ -733,14 +614,7 @@
         }
     });
 
-    var DropTarget = Widget.extend(/** @lends kendo.ui.DropTarget.prototype */ {
-        /**
-         * @constructs
-         * @extends kendo.ui.Widget
-         * @param {Element} element DOM element
-         * @param {Object} options Configuration options.
-         * @option {String} [group] <"default"> Used to group sets of draggable and drop targets. A draggable with the same group value as a drop target will be accepted by the drop target.
-         */
+    var DropTarget = Widget.extend({
         init: function(element, options) {
             var that = this;
 
@@ -756,30 +630,8 @@
         },
 
         events: [
-            /**
-             * Fires when draggable moves over the drop target.
-             * @name kendo.ui.DropTarget#dragenter
-             * @event
-             * @param {Event} e
-             * @param {jQuery} e.draggable Reference to the draggable that enters the drop target.
-             */
             DRAGENTER,
-            /**
-             * Fires when draggable moves out of the drop target.
-             * @name kendo.ui.DropTarget#dragleave
-             * @event
-             * @param {Event} e
-             * @param {jQuery} e.draggable Reference to the draggable that leaves the drop target.
-             */
             DRAGLEAVE,
-            /**
-             * Fires when draggable is dropped over the drop target.
-             * @name kendo.ui.DropTarget#drop
-             * @event
-             * @param {Event} e
-             * @param {jQuery} e.draggable Reference to the draggable that is dropped over the drop target.
-             * @param {jQuery} e.draggable.currentTarget The element that the drag and drop operation started from.
-             */
             DROP
         ],
 
@@ -817,57 +669,7 @@
         }
     });
 
-    /**
-     * @name kendo.ui.Draggable.Description
-     *
-     * @section <h4>Draggable</h4>
-     * Enable draggable functionality on any DOM element.
-     *
-     * @exampleTitle <b>Draggable</b> initialization
-     * @example
-     * var draggable = $("#draggable").kendoDraggable();
-     *
-     * @name kendo.ui.DropTarget.Description
-     *
-     * @section <h4>DropTarget</h4>
-     * Enable any DOM element to be a target for draggable elements.
-     *
-     * @exampleTitle <b>DropTarget</b> initialization
-     * @example
-     * var dropTarget = $("#dropTarget").kendoDropTarget();
-     */
-    var Draggable = Widget.extend(/** @lends kendo.ui.Draggable.prototype */{
-        /**
-         * @constructs
-         * @extends kendo.ui.Widget
-         * @param {Element} element DOM element
-         * @param {Object} options Configuration options.
-         * @option {Number} [distance] <5> The required distance that the mouse should travel in order to initiate a drag.
-         * @option {Selector} [filter] Selects child elements that are draggable if a widget is attached to a container.
-         * @option {String} [group] <"default"> Used to group sets of draggable and drop targets. A draggable with the same group value as a drop target will be accepted by the drop target.
-         * @option {String} [axis] <null> Constrains the hint movement to either the horizontal (x) or vertical (y) axis. Can be set to either "x" or "y".
-         * @option {jQuery} [container] If set, the hint movement is constrained to the container boundaries.
-         * @option {Object} [cursorOffset] <null> If set, specifies the offset of the hint relative to the mouse cursor/finger.
-         * By default, the hint is initially positioned on top of the draggable source offset. The option accepts an object with two keys: <code>top</code> and <code>left</code>.
-         * _exampleTitle Initialize Draggable with cursorOffset
-         * _example
-         * $("#draggable").kendoDraggable({cursorOffset: {top: 10, left: 10}});
-         * @option {Function | jQuery} [hint] Provides a way for customization of the drag indicator. If a function is supplied, it receives one argument - the draggable element's jQuery object.
-         * _example
-         *  //hint as a function
-         *  $("#draggable").kendoDraggable({
-         *      hint: function(element) {
-         *          return $("#draggable").clone();
-         *          // same as
-         *          //  return element.clone();
-         *      }
-         *  });
-         *
-         * //hint as jQuery object
-         *  $("#draggable").kendoDraggable({
-         *      hint: $("#draggableHint");
-         *  });
-         */
+    var Draggable = Widget.extend({
         init: function (element, options) {
             var that = this;
 
@@ -894,33 +696,9 @@
         },
 
         events: [
-            /**
-             * Fires when item drag starts.
-             * @name kendo.ui.Draggable#dragstart
-             * @event
-             * @param {Event} e
-             */
             DRAGSTART,
-             /**
-             * Fires while dragging.
-             * @name kendo.ui.Draggable#drag
-             * @event
-             * @param {Event} e
-             */
             DRAG,
-             /**
-             * Fires when item drag ends.
-             * @name kendo.ui.Draggable#dragend
-             * @event
-             * @param {Event} e
-             */
             DRAGEND,
-             /**
-             * Fires when item drag is canceled by pressing the Escape key.
-             * @name kendo.ui.Draggable#dragcancel
-             * @event
-             * @param {Event} e
-             */
             DRAGCANCEL
         ],
 

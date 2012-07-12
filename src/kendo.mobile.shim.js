@@ -6,12 +6,7 @@
         SHIM = '<div class="km-shim"/>',
         Widget = ui.Widget;
 
-    var Shim = Widget.extend(/** @lends kendo.mobile.ui.Shim.prototype */{
-        /**
-        * @constructs
-        * @extends kendo.mobile.ui.Widget
-        * @param {Element} element DOM element
-        */
+    var Shim = Widget.extend({
         init: function(element, options) {
             var that = this,
                 ios = kendo.mobile.application.os === "ios",

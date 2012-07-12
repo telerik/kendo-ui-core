@@ -1,9 +1,4 @@
 (function($, undefined) {
-    /**
-    * @name kendo.ui.List.Description
-    *
-    * @section Common class for ComboBox, DropDownList and AutoComplete widgets.
-    */
     var kendo = window.kendo,
         ui = kendo.ui,
         Widget = ui.Widget,
@@ -26,12 +21,7 @@
         isIE8 = $.browser.msie && parseInt($.browser.version, 10) < 9,
         quotRegExp = /"/g;
 
-    var List = Widget.extend(/** @lends kendo.ui.List */{
-        /**
-         * Creates a List instance.
-         * @constructs
-         * @extends kendo.ui.Widget
-         */
+    var List = Widget.extend({
         init: function(element, options) {
             var that = this, id, list;
 
@@ -365,16 +355,7 @@
 
     kendo.ui.List = List;
 
-    /**
-    * @name kendo.ui.Select.Description
-    *
-    * @section Common class for ComboBox and DropDownList widgets.
-    */
-    ui.Select = List.extend(/** @lends kendo.ui.Select */{
-        /**
-         * @extends kendo.ui.List
-         * @constructs
-         */
+    ui.Select = List.extend({
         init: function(element, options) {
             List.fn.init.call(this, element, options);
         },
@@ -389,14 +370,6 @@
             }
         },
 
-        /**
-        * Closes the drop-down list.
-        * @example
-        * dropdownlist.close();
-        *
-        * @example
-        * combobox.close();
-        */
         close: function() {
             this.popup.close();
         },

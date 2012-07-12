@@ -57,161 +57,7 @@
             .replace(/&gt;/g, '>');
     }
 
-    /**
-     *  @name kendo.Validator.Description
-     *
-     *  @section
-     *  <p>
-     *     Validator offers an easy way to do client-side form validation.
-     *     Built around the HTML5 form validation attributes it supports variety of built-in validation rules, but also provides a convenient way for setting custom rules handling.
-     *  </p>
-     *  @exampleTitle <b>Validator</b> initialization to validate input elements inside a container
-     *  @example
-     *  <div id="myform">
-     *   <input type="text" name="firstName" required />
-     *   <input type="text" name="lastName" required />
-     *   <button id="save" type="button">Save</button>
-     *  </div>
-     *
-     *  <script>
-     *   $(document).ready(function(){
-     *       var validatable = $("#myform").kendoValidator().data("kendoValidator");
-     *       $("#save").click(function() {
-     *          if (validatable.validate()) {
-     *              save();
-     *          }
-     *       });
-     *   });
-     *   </script>
-     *  @section <h4>Validation Rules</h4>
-     *
-     *  @exampleTitle <strong>required</strong>- element should have a value
-     *  @example
-     *  <input type="text" name="firstName" required />
-     *
-     *  @exampleTitle <strong>pattern</strong>- constrains the value to match a specific regular expression
-     *  @example
-     *  <input type="text" name="twitter" pattern="https?://(?:www\.)?twitter\.com/.+i" />
-     *
-     *  @exampleTitle <strong>max/min</strong>- constrain the minimum and/or maximum numeric values that can be entered
-     *  @example
-     *  <input type="number" name="age" min="1" max="42" />
-     *
-     *  @exampleTitle <strong>step</strong>- when used in combination with the min and max attributes, constrains the granularity of values that can be entered
-     *  @example
-     *  <input type="number" name="age" min="1" max="100" step="2" />
-     *
-     *  @exampleTitle <strong>url</strong>- constrain the value to being a valid URL
-     *  @example
-     *  <input type="url" name="url" />
-     *
-     *  @exampleTitle <strong>email</strong>- constrain the value to being a valid email
-     *  @example
-     *  <input type="email" name="email" />
-     *
-     *  @section
-     *  <p>Beside the built-in validation rules, KendoUI Validator also provides a convenient way for setting custom rules through its rules configuration option. </p>
-     *
-     *  @exampleTitle
-     *  @example
-     *  $("#myform").kendoValidator({
-     *      rules: {
-     *        custom: function(input) {
-     *          // Only Tom will be a valid value for FirstName input
-     *          return input.is("[name=firstname]") && input.val() === "Tom";
-     *        }
-     *      }
-     * });
-     *
-     *  @section <h4>Validation Messages</h4>
-     *  <p>There are several ways to control the messages which appears if validation fails:</p>
-     *
-     *  @exampleTitle Set the validation messages for all input elements, through configuration options
-     *  @example
-     *   $("#myform").kendoValidator({
-     *      rules: {
-     *          custom: function(input) {
-     *                  //...
-     *          }
-     *      },
-     *      messages: {
-     *        // defines message for the 'custom' validation rule
-     *        custom: "Please enter valid value for my custom rule",
-     *        // overrides the built-in message for required rule
-     *        required: "My custom required message",
-     *        // overrides the built-in email rule message with a custom function which return the actual message
-     *        email: function(input) {
-     *          return getMessage(input);
-     *        }
-     *     }
-     *  });
-     *  @exampleTitle Use the title and validationMessage attributes to set per input element messages
-     *  @example
-     *     <input type="tel" pattern="\d{10}" validationMessage="Plase enter a ten digit phone number" />
-     *
-     *  @section <h4>Triggering validation</h4>
-     *  <p>In order to trigger the element(s) validation, <strong>validate</strong> method should be used. It will return either <em>true</em> if validation succeeded or <em>false</em> in case of a failure. </p>
-     *  <p>
-     *  Note that if a HTML form element is set as validation container, the form submits will be automatically prevented if validation fails.
-     *  </p>
-     *  @section <h4>Initialize Kendo Validator with specific tooltip position</h4>
-     *
-     *  <p>
-     *      Ideally Kendo Validator places its tooltips besides the validated input. However, if the input is later enhanced to a ComboBox, AutoComplete or other Kendo Widget, placing the
-     *      tooltip beside the input may cover important information or break the widget rendering. In this case, you can specify where exactly do you want the tooltip to be placed by
-     *      adding a span with data-for attribute set to the validated input name and a class .k-invalid-msg. Check the example below:
-     *  </p>
-     *
-     *  @exampleTitle <b>Validator</b> initialization with specific tooltip placement (the tooltip will remain outside of the AutoComplete widget after enhancement)
-     *  @example
-     *  <div id="myform">
-     *      <input type="text" id="name" name="name" required />
-     *      <span class="k-invalid-msg" data-for="name"></span>
-     *  </div>
-     *
-     *  <script>
-     *      $("#name").kendoAutoComplete({
-     *                     dataSource: data,
-     *                     separator: ", "
-     *                 });
-     *
-     *      $("#myform").kendoValidator();
-     *  </script>
-     */
-    var Validator = Widget.extend(/** @lends kendo.Validator.prototype */{ /**
-         * @constructs
-         * @extends kendo.Widget
-         * @param {Element} element DOM element
-         * @param {Object} options Configuration options.
-         * @option {Object} [rules] Set of validation rules. Those rules will extend the built-in ones.
-         * _example
-         * $("#myform").kendoValidator({
-         *      rules: {
-         *          custom: function(input) {
-         *              return input.is("[name=firstname]") && input.val() === "Tom"; // Only Tom will be a valid value for FirstName input
-         *          }
-         *      }
-         * });
-         * @option {Object} [messages] Set of messages (either strings or functions) which will be shown when given validation rule fails.
-         *  By setting already existing key the appropriate built-in message will be overridden.
-         * _example
-         * $("#myform").kendoValidator({
-         *      rules: {
-         *          custom: function(input) {
-         *             //...
-         *          }
-         *      },
-         *      messages: {
-         *          custom: "Please enter valid value for my custom rule",// defines message for the 'custom' validation rule
-         *          required: "My custom required message", // overrides the built-in message for required rule
-         *          email: function(input) { // overrides the built-in email rule message with a custom function which return the actual message
-         *              return getMessage(input);
-         *          }
-         *      }
-         * });
-         * @option {Boolean} [validateOnBlur] Determines if validation will be triggered when element loses focus. Default value is true.
-         */
-        init: function(element, options) {
+    var Validator = Widget.extend({        init: function(element, options) {
             var that = this,
                 resolved = resolveRules(element);
 
@@ -333,19 +179,6 @@
             }
         },
 
-        /**
-         * Validates the input element(s) against the declared validation rules.
-         * @returns {Boolean} If all rules are passed successfully.
-         * @example
-         * // get a reference to the validatable form
-         * var validatable = $("#myform").kendoValidator().data("kendoValidator");
-         * // check validation on save button click
-         * $("#save").click(function() {
-         *     if (validatable.validate()) {
-         *         save();
-         *     }
-         * });
-         */
         validate: function() {
             var that = this,
                 inputs,
@@ -368,11 +201,6 @@
             return that.validateInput(that.element);
         },
 
-        /**
-         * Validates the input element against the declared validation rules.
-         * @param {Element} input Input element to be validated.
-         * @returns {Boolean} If all rules are passed successfully.
-         */
         validateInput: function(input) {
             input = $(input);
 
@@ -449,22 +277,6 @@
             return { valid: true };
         },
 
-        /**
-         * Get the error messages if any.
-         * @returns {Array} Messages for the failed validation rules.
-         * @example
-         * // get a reference to the validatable form
-         * var validatable = $("#myform").kendoValidator().data("kendoValidator");
-         * $("#save").click(function() {
-         *     if (validatable.validate() === false) {
-         *         // get the errors and write them out to the "errors" html container
-         *         var errors = validatable.errors();
-         *         $(errors).each(function() {
-         *             $("#errors").html(this);
-         *         });
-         *     }
-         * });
-         */
         errors: function() {
             var results = [],
                 errors = this._errors,

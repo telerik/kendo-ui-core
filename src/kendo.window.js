@@ -1,151 +1,5 @@
-/**
- * @fileOverview Provides a Window implementation which can be used to display content in a modal or non-modal HTML
- * window.
- */
 
 (function($, undefined) {
-    /**
-     * @name kendo.ui.Window.Description
-     *
-     * @section
-     * <p>
-     *  A <strong>Window</strong> displays content in a modal or non-modal HTML window. By default, a
-     *  <strong>Window</strong> can be moved, resized, and closed. Its content can also be defined with either as
-     *  static HTML or loaded dynamically via AJAX.
-     * </p>
-     * <p>
-     *  A <strong>Window</strong> can be initialized from virtually any DOM element. During initialization, the
-     *  targeted content will automatically be wrapped in the div element of the <strong>Window</strong>.
-     * </p>
-     * <h3>Getting Started</h3>
-     *
-     * @exampleTitle Create a simple HTML element with the Window content
-     * @example
-     * <div id="window">
-     *     Content of the Window
-     * </div>
-     *
-     * @exampleTitle Initialize the Window using a selector
-     * @example
-     * $(document).ready(function() {
-     *     $("#window").kendoWindow();
-     * });
-     *
-     * @section
-     * <p>
-     *  When a <strong>Window</strong> is initialized, it will automatically be displayed open near the location of the
-     *  DOM element that was used to initialize the content.
-     * </p>
-     * <h3>Configuring Window Behaviors</h3>
-     * <p>
-     *  A <strong>Window</strong> provides many configuration options that can be easily set during initialization.
-     *  Among the properties that can be controlled:
-     * </p>
-     * <ul>
-     *  <li>Minimum height/width</li>
-     *  <li>Available user actions (close/refresh/maximize/minimize) and ability to define custom ones</li>
-     *  <li>Title</li>
-     *  <li>Draggable and resizable behaviors</li>
-     * </ul>
-     *
-     * @exampleTitle Create a modal Window with all user actions enabled
-     * @example
-     * $("#window").kendoWindow({
-     *     actions: ["Custom", "Refresh", "Maximize", "Minimize", "Close"],
-     *     draggable: false,
-     *     height: "300px",
-     *     modal: true,
-     *     resizable: false,
-     *     title: "Modal Window",
-     *     width: "500px"
-     * });
-     *
-     * @section
-     * <p>
-     *  The order of the values in the actions array determines the order in which the action buttons will be rendered
-     *  in the title of a <strong>Window</strong>. The maximize action serves both as a button for expanding a
-     *  <strong>Window</strong> to fill the screen and as a button to restore a <strong>Window</strong> to its previous
-     *  size. The minimize action collapses a <strong>Window</strong> to its title.
-     * </p>
-     * <p>If a non-recognized action name is supplied, it is treated as a custom action - <strong>k-icon</strong> and <strong>k-actionname</strong>
-     * CSS classes are rendered for it and no click event handler is attached automatically. The Kendo stylesheets have a supplied icon for
-     * actions with the name "Custom", but any name can be used. Click events can be captured and handled in a standard way:</p>
-     *
-     * @exampleTitle Custom actions
-     * @example
-     *   $("#window").kendoWindow({
-     *       actions: ["Custom", "Minimize", "Maximize", "Close"],
-     *       title: "Window Title"
-     *   }).data("kendoWindow").wrapper.find(".k-i-custom").click(function(e) {
-     *       alert("Custom action button clicked");
-     *       e.preventDefault();
-     *   });
-     *
-     * <h3>Positioning and Opening a Window</h3>
-     * <p>
-     *  In some scenarios, it is preferable to center a <strong>Window</strong> rather than open it near the HTML
-     *  element used to define the content. It is also common to open a <strong>Window</strong> as the result of the
-     *  action of a user rather than on the load event of a page. The <strong>Window</strong> API provides methods for
-     *  handling these scenarios.
-     * </p>
-     *
-     * @exampleTitle Centering a Window and opening on button click
-     * @example
-     * <div id="window">
-     *     Content of the Window
-     * </div>
-     * <button id="openButton">Open Window</button>
-     *
-     * @exampleTitle Initialize Window, center, and configure button click action
-     * @example
-     * $(document).ready(function(){
-     *     var win = $("#window").kendoWindow({
-     *         height: "200px",
-     *         title: "Centered Window",
-     *         visible: false,
-     *         width: "200px"
-     *     }).data("kendoWindow");
-     * });
-     *
-     * $("#openButton").click(function(){
-     *     var win = $("#window").data("kendoWindow");
-     *     win.center();
-     *     win.open();
-     * });
-     *
-     * @section
-     * <h3>Loading Window content via AJAX</h3>
-     * <p>
-     *  A <strong>Window</strong> provides built-in support for asynchronously loading content from a URL. This URL
-     *  should return a HTML fragment that can be loaded in a Window content area.
-     * </p>
-     *
-     * @exampleTitle Load Window content asynchronously
-     * @example
-     * <div id="window"></div>
-     *
-     * @exampleTitle Initialize window and configure content loading
-     * @example
-     * $(document).ready(function(){
-     *     $("#window").kendoWindow({
-     *         content: "html-content-snippet.html",
-     *         title: "Async Window Content"
-     *     });
-     * });
-     *
-     * @section
-     * <h3>Accessing an Existing Window</h3>
-     * <p>
-     *  You can reference an existing <b>Window</b> instance via
-     *  <a href="http://api.jquery.com/jQuery.data/">jQuery.data()</a>. Once a reference has been established, you can
-     *  use the API to control its behavior.
-     * </p>
-     *
-     * @exampleTitle Accessing an existing Window instance
-     * @example
-     * var win = $("#window").data("kendoWindow");
-     *
-     */
     var kendo = window.kendo,
         Widget = kendo.ui.Widget,
         Draggable = kendo.ui.Draggable,
@@ -228,75 +82,7 @@
         };
     }
 
-    var Window = Widget.extend(/** @lends kendo.ui.Window.prototype */ {
-        /**
-         *
-         * @constructs
-         * @extends kendo.ui.Widget
-         *
-         * @param {Element} element
-         * DOM element
-         *
-         * @param {Object} options
-         * Configuration options.
-         *
-         * @option {Boolean} [modal] <false>
-         * Specifies whether the window should show a modal overlay over the page.
-         *
-         * @option {Boolean} [visible] <true>
-         * Specifies whether the window will be initially visible.
-         *
-         * @option {Boolean} [draggable] <true>
-         * Enables (<strong>true</strong>) or disables (<strong>false</strong>) the ability for users to move/drag a
-         * <strong>Window</strong>.
-         *
-         * @option {Boolean} [resizable] <true>
-         * Enables (<strong>true</strong>) or disables (<strong>false</strong>) the ability for users to resize a
-         * <strong>Window</strong>.
-         *
-         * @option {Number} [minWidth] <50>
-         * The minimum width (in pixels) that may be achieved by resizing the window.
-         *
-         * @option {Number} [minHeight] <50>
-         * The minimum height (in pixels) that may be achieved by resizing the window.
-         *
-         * @option {Number} [maxWidth] <Infinity>
-         * The maximum width (in pixels) that may be achieved by resizing the window.
-         *
-         * @option {Number} [maxHeight] <Infinity>
-         * The maximum height (in pixels) that may be achieved by resizing the window.
-         *
-         * @option {Object|String} [content]
-         * Specifies a URL or request options that the window should load its content from. For remote URLs, a
-         * container iframe element is automatically created.
-         *
-         * @option {String} [content.template]
-         * Template for the content of a <strong>Window</strong>.
-         *
-         * @option {Boolean} [iframe]
-         * Explicitly states whether content iframe should be created.
-         *
-         * @option {Array} [actions] <["Close"]>
-         * The buttons for interacting with the window. Predefined array values are "Close", "Refresh", "Minimize",
-         * and "Maximize".
-         *
-         * @option {String} [title]
-         * The text in the window title bar.
-         *
-         * @option {Object} [appendTo] <document.body>
-         * The element that the Window will be appended to.
-         *
-         * @option {Object} [animation]
-         * A collection of {Animation} objects, used to change default animations. A value of <strong>false</strong>
-         * will disable all animations in the widget.
-         *
-         * @option {Animation} [animation.open]
-         * The animation that will be used when a Window opens.
-         *
-         * @option {Animation} [animation.close]
-         * The animation that will be used when a Window closes.
-         *
-         */
+    var Window = Widget.extend({
         init: function(element, options) {
             var that = this,
                 wrapper,
@@ -440,329 +226,17 @@
         },
 
         events:[
-            /**
-             *
-             * Triggered when a Window is opened (i.e. the open() method is called).
-             *
-             * @name kendo.ui.Window#open
-             * @event
-             * @cancellable
-             *
-             * @param {Event} e
-             *
-             * @exampleTitle Attach open event handler during initialization; detach via unbind()
-             * @example
-             * // event handler for expand
-             * var onOpen = function(e) {
-             *     // ...
-             * };
-             *
-             * // attach open event handler during initialization
-             * var kendoWindow = $("#window").kendoWindow({
-             *     open: onOpen
-             * });
-             *
-             * // detach expand event handler via unbind()
-             * kendoWindow.data("kendoWindow").unbind("open", onOpen);
-             *
-             * @exampleTitle Attach open event handler via bind(); detach via unbind()
-             * @example
-             * // event handler for open
-             * var onOpen = function(e) {
-             *     // ...
-             * };
-             *
-             * // attach open event handler via bind()
-             * $("#window").data("kendoWindow").bind("open", onOpen);
-             *
-             * // detach open event handler via unbind()
-             * $("#window").data("kendoWindow").unbind("open", onOpen);
-             *
-             */
             OPEN,
-            /**
-             *
-             * Triggered when a Window has finished its opening animation.
-             *
-             * @name kendo.ui.Window#activate
-             * @event
-             *
-             * @param {Event} e
-             *
-             * @exampleTitle Attach activate event handler during initialization; detach via unbind()
-             * @example
-             * // event handler for activate
-             * var onActivate = function(e) {
-             *     // ...
-             * };
-             *
-             * // attach activate event handler during initialization
-             * var kendoWindow = $("#window").kendoWindow({
-             *     activate: onActivate
-             * });
-             *
-             * // detach activate event handler via unbind()
-             * kendoWindow.data("kendoWindow").unbind("activate", onActivate);
-             *
-             * @exampleTitle Attach activate event handler via bind(); detach via unbind()
-             * @example
-             * // event handler for activate
-             * var onActivate = function(e) {
-             *     // ...
-             * };
-             *
-             * // attach activate event handler via bind()
-             * $("#window").data("kendoWindow").bind("activate", onActivate);
-             *
-             * // detach activate event handler via unbind()
-             * $("#window").data("kendoWindow").unbind("activate", onActivate);
-             *
-             */
             ACTIVATE,
-            /**
-             *
-             * Triggered when a Window has finished its closing animation.
-             *
-             * @name kendo.ui.Window#deactivate
-             * @event
-             *
-             * @param {Event} e
-             *
-             * @exampleTitle Attach deactivate event handler during initialization; detach via unbind()
-             * @example
-             * // event handler for deactivate
-             * var onDeactivate = function(e) {
-             *     // ...
-             * };
-             *
-             * // attach deactivate event handler during initialization
-             * var kendoWindow = $("#window").kendoWindow({
-             *     deactivate: onDeactivate
-             * });
-             *
-             * // detach deactivate event handler via unbind()
-             * kendoWindow.data("kendoWindow").unbind("deactivate", onDeactivate);
-             *
-             * @exampleTitle Attach deactivate event handler via bind(); detach via unbind()
-             * @example
-             * // event handler for deactivate
-             * var onDeactivate = function(e) {
-             *     // ...
-             * };
-             *
-             * // attach deactivate event handler via bind()
-             * $("#window").data("kendoWindow").bind("deactivate", onDeactivate);
-             *
-             * // detach deactivate event handler via unbind()
-             * $("#window").data("kendoWindow").unbind("deactivate", onDeactivate);
-             *
-             */
             DEACTIVATE,
-            /**
-             *
-             * Triggered when a Window is closed (by a user or through the close() method).
-             *
-             * @name kendo.ui.Window#close
-             * @event
-             * @cancellable
-             *
-             * @param {Event} e
-             *
-             * @exampleTitle Attach close event handler during initialization; detach via unbind()
-             * @example
-             * // event handler for close
-             * var onClose = function(e) {
-             *     // ...
-             * };
-             *
-             * // attach close event handler during initialization
-             * var kendoWindow = $("#window").kendoWindow({
-             *     close: onClose
-             * });
-             *
-             * // detach close event handler via unbind()
-             * kendoWindow.data("kendoWindow").unbind("close", onClose);
-             *
-             * @exampleTitle Attach close event handler via bind(); detach via unbind()
-             * @example
-             * // event handler for close
-             * var onClose = function(e) {
-             *     // ...
-             * };
-             *
-             * // attach close event handler via bind()
-             * $("#window").data("kendoWindow").bind("close", onClose);
-             *
-             * // detach close event handler via unbind()
-             * $("#window").data("kendoWindow").unbind("close", onClose);
-             *
-             */
             CLOSE,
-            /**
-             *
-             * Triggered when the content of a Window have been refreshed via AJAX.
-             *
-             * @name kendo.ui.Window#refresh
-             * @event
-             *
-             * @param {Event} e
-             *
-             * @exampleTitle Attach refresh event handler during initialization; detach via unbind()
-             * @example
-             * // event handler for refresh
-             * var onRefresh = function(e) {
-             *     // ...
-             * };
-             *
-             * // attach refresh event handler during initialization
-             * var kendoWindow = $("#window").kendoWindow({
-             *     refresh: onRefresh
-             * });
-             *
-             * // detach refresh event handler via unbind()
-             * kendoWindow.data("kendoWindow").unbind("refresh", onRefresh);
-             *
-             * @exampleTitle Attach refresh event handler via bind(); detach via unbind()
-             * @example
-             * // event handler for refresh
-             * var onRefresh = function(e) {
-             *     // ...
-             * };
-             *
-             * // attach refresh event handler via bind()
-             * $("#window").data("kendoWindow").bind("refresh", onRefresh);
-             *
-             * // detach refresh event handler via unbind()
-             * $("#window").data("kendoWindow").unbind("refresh", onRefresh);
-             *
-             */
             REFRESH,
-            /**
-             *
-             * Triggered when a Window has been resized by a user.
-             *
-             * @name kendo.ui.Window#resize
-             * @event
-             *
-             * @param {Event} e
-             *
-             * @exampleTitle Attach resize event handler during initialization; detach via unbind()
-             * @example
-             * // event handler for resize
-             * var onResize = function(e) {
-             *     // ...
-             * };
-             *
-             * // attach resize event handler during initialization
-             * var kendoWindow = $("#window").kendoWindow({
-             *     resize: onResize
-             * });
-             *
-             * // detach resize event handler via unbind()
-             * kendoWindow.data("kendoWindow").unbind("resize", onResize);
-             *
-             * @exampleTitle Attach resize event handler via bind(); detach via unbind()
-             * @example
-             * // event handler for resize
-             * var onResize = function(e) {
-             *     // ...
-             * };
-             *
-             * // attach resize event handler via bind()
-             * $("#window").data("kendoWindow").bind("resize", onResize);
-             *
-             * // detach resize event handler via unbind()
-             * $("#window").data("kendoWindow").unbind("resize", onResize);
-             *
-             */
             RESIZE,
 
-            /**
-             * Triggered when the user starts to move the window.
-             * @name kendo.ui.Window#dragstart
-             * @event
-             * @param {Event} e
-             */
             DRAGSTART,
 
-            /**
-             *
-             * Triggered when a Window has been moved by a user.
-             *
-             * @name kendo.ui.Window#dragend
-             * @event
-             *
-             * @param {Event} e
-             *
-             * @exampleTitle Attach dragEnd event handler during initialization; detach via unbind()
-             * @example
-             * // event handler for dragEnd
-             * var onDragEnd = function(e) {
-             *     // ...
-             * };
-             *
-             * // attach dragEnd event handler during initialization
-             * var kendoWindow = $("#window").kendoWindow({
-             *     dragend: onDragEnd
-             * });
-             *
-             * // detach dragEnd event handler via unbind()
-             * kendoWindow.data("kendoWindow").unbind("dragend", onDragEnd);
-             *
-             * @exampleTitle Attach dragEnd event handler via bind(); detach via unbind()
-             * @example
-             * // event handler for dragEnd
-             * var onDragEnd = function(e) {
-             *     // ...
-             * };
-             *
-             * // attach dragEnd event handler via bind()
-             * $("#window").data("kendoWindow").bind("dragend", onDragEnd);
-             *
-             * // detach dragEnd event handler via unbind()
-             * $("#window").data("kendoWindow").unbind("dragend", onDragEnd);
-             *
-             */
             DRAGEND,
 
-            /**
-             *
-             * Triggered when an AJAX request for content fails.
-             *
-             * @name kendo.ui.Window#error
-             * @event
-             *
-             * @param {Event} e
-             *
-             * @exampleTitle Attach error event handler during initialization; detach via unbind()
-             * @example
-             * // event handler for error
-             * var onError = function(e) {
-             *     // ...
-             * };
-             *
-             * // attach dragEnd event handler during initialization
-             * var kendoWindow = $("#window").kendoWindow({
-             *     error: onError
-             * });
-             *
-             * // detach error event handler via unbind()
-             * kendoWindow.data("kendoWindow").unbind("error", onError);
-             *
-             * @exampleTitle Attach error event handler via bind(); detach via unbind()
-             * @example
-             * // event handler for error
-             * var onError = function(e) {
-             *     // ...
-             * };
-             *
-             * // attach error event handler via bind()
-             * $("#window").data("kendoWindow").bind("error", onError);
-             *
-             * // detach error event handler via unbind()
-             * $("#window").data("kendoWindow").unbind("error", onError);
-             *
-             */
             ERROR
         ],
 
@@ -826,18 +300,6 @@
             });
         },
 
-        /**
-         *
-         * Centers a <strong>Window</strong> within the viewport.
-         *
-         * @returns {Window}
-         * Returns the (Kendo UI) Window object to support chaining.
-         *
-         * @example
-         * var kendoWindow = $("#window").data("kendoWindow");
-         * kendoWindow.center();
-         *
-         */
         center: function () {
             var wrapper = this.wrapper,
                 documentWindow = $(window);
@@ -850,27 +312,6 @@
             return this;
         },
 
-        /**
-         *
-         * Gets or set the title of a <strong>Window</strong>.
-         *
-         * @param {String} [text]
-         * The title of the Window.
-         *
-         * @returns {Window}
-         * If a title is provided, this method will return the (Kendo UI) Window object to support chaining. Otherwise,
-         * it will return the current title of the (Kendo UI) Window.
-         *
-         * @exampleTitle Get the existing title of the Window
-         * @example
-         * var kendoWindow = $("#window").data("kendoWindow");
-         * var windowTitle = kendoWindow.title();
-         *
-         * @exampleTitle Set the title of a Window; utilize chaining (if necessary)
-         * @example
-         * var kendoWindow = $("#window").data("kendoWindow").title("Do a barrel roll!");
-         *
-         */
         title: function (text) {
             var that = this,
                 wrapper = that.wrapper,
@@ -900,27 +341,6 @@
             return that;
         },
 
-        /**
-         *
-         * Gets or set the content of a <strong>Window</strong>.
-         *
-         * @param {String} [content]
-         * The content of the Window.
-         *
-         * @returns {Window}
-         * If content is provided, this method will return the (Kendo UI) Window object to support chaining. Otherwise,
-         * it will return the current content of the (Kendo UI) Window.
-         *
-         * @exampleTitle Get the existing content of the Window
-         * @example
-         * var kendoWindow = $("#window").data("kendoWindow");
-         * var windowContent = kendoWindow.content();
-         *
-         * @exampleTitle Set the title of a Window; utilize chaining (if necessary)
-         * @example
-         * var kendoWindow = $("#window").data("kendoWindow").content("Kendo UI for all the things!");
-         *
-         */
         content: function (html) {
             var content = this.wrapper.children(KWINDOWCONTENT);
 
@@ -932,18 +352,6 @@
             return this;
         },
 
-        /**
-         *
-         * Opens a Window.
-         *
-         * @returns {Window}
-         * Returns the (Kendo UI) Window object to support chaining.
-         *
-         * @exampleTitle Open a Window; utilize chaining (if necessary)
-         * @example
-         * var kendoWindow = $("#window").data("kendoWindow").open();
-         *
-         */
         open: function () {
             var that = this,
                 wrapper = that.wrapper,
@@ -993,18 +401,6 @@
             return that;
         },
 
-        /**
-         *
-         * Closes a Window.
-         *
-         * @returns {Window}
-         * Returns the (Kendo UI) Window object to support chaining.
-         *
-         * @exampleTitle Close a Window; utilize chaining (if necessary)
-         * @example
-         * var kendoWindow = $("#window").data("kendoWindow").close();
-         *
-         */
         close: function () {
             var that = this,
                 wrapper = that.wrapper,
@@ -1058,18 +454,6 @@
             return that;
         },
 
-        /**
-         *
-         * Brings forward a Window to the top of the z-index.
-         *
-         * @returns {Window}
-         * Returns the (Kendo UI) Window object to support chaining.
-         *
-         * @exampleTitle Bring forward a Window; utilize chaining (if necessary)
-         * @example
-         * var kendoWindow = $("#window").data("kendoWindow").toFront();
-         *
-         */
         toFront: function () {
             var that = this,
                 wrapper = that.wrapper,
@@ -1101,34 +485,10 @@
             return that;
         },
 
-        /**
-         *
-         * Toggles a Window between a maximized and restored state. Triggers the resize event.
-         *
-         * @returns {Window}
-         * Returns the (Kendo UI) Window object to support chaining.
-         *
-         * @exampleTitle Toggle the state of a Window; utilize chaining (if necessary)
-         * @example
-         * var kendoWindow = $("#window").data("kendoWindow").toggleMaximization();
-         *
-         */
         toggleMaximization: function () {
             return this[this.options.isMaximized ? "restore" : "maximize"]();
         },
 
-        /**
-         *
-         * Restores a maximized or minimized Window to its previous state. Triggers the resize event.
-         *
-         * @returns {Window}
-         * Returns the (Kendo UI) Window object to support chaining.
-         *
-         * @exampleTitle Restore the state of a Window; utilize chaining (if necessary)
-         * @example
-         * var kendoWindow = $("#window").data("kendoWindow").restore();
-         *
-         */
         restore: function () {
             var that = this,
                 options = that.options,
@@ -1162,19 +522,6 @@
             return that;
         },
 
-        /**
-         *
-         * Maximizes a Window to the entire viewing area of the user agent. Triggers the resize event.
-         *
-         * @function
-         * @returns {Window}
-         * Returns the (Kendo UI) Window object to support chaining.
-         *
-         * @exampleTitle Maximize a Window
-         * @example
-         * $("#window").data("kendoWindow").maximize();
-         *
-         */
         maximize: sizingAction("maximize", function() {
             var that = this,
                 wrapper = that.wrapper,
@@ -1199,19 +546,6 @@
             that._onDocumentResize();
         }),
 
-        /**
-         *
-         * Maximizes a Window to its title bar.
-         *
-         * @function
-         * @returns {Window}
-         * Returns the (Kendo UI) Window object to support chaining.
-         *
-         * @exampleTitle Minimize a Window
-         * @example
-         * $("#window").data("kendoWindow").minimize();
-         *
-         */
         minimize: sizingAction("minimize", function() {
             var that = this;
 
@@ -1238,47 +572,6 @@
             that.trigger(RESIZE);
         },
 
-        /**
-         *
-         * Refreshes the content of a Window from a remote URL.
-         *
-         * @param {Object|String} options
-         * Options for requesting data from the server.
-         * If omitted, the window uses the <code>content</code> property
-         * that was supplied when the window was created.
-         * Any options specified here are passed to jQuery.ajax().
-         *
-         * @param {String} options.url
-         * The server URL that will be requested.
-         *
-         * @param {Object} options.data
-         * A JSON object containing the data that will be passed to the server.
-         *
-         * @param {String} options.type
-         * The HTTP request method ("GET", "POST").
-         *
-         * @param {String} options.template
-         * A template to be used for displaying the requested data.
-         *
-         * @returns {Window}
-         * Returns the (Kendo UI) Window object to support chaining.
-         *
-         * @example
-         * var windowObject = $("#window").data("kendoWindow");
-         * windowObject.refresh("/feedbackForm");
-         *
-         * windowObject.refresh({
-         *     url: "/feedbackForm",
-         *     data: { userId: 42 }
-         * });
-         *
-         * windowObject.refresh({
-         *     url: "/userInfo",
-         *     data: { userId: 42 },
-         *     template: "Hello, #= firstName # #= lastName #"
-         * });
-         *
-         */
         refresh: function (options) {
             var that = this,
                 initOptions = that.options,
@@ -1353,9 +646,6 @@
             }, options));
         },
 
-        /**
-         * Destroys the window and its modal overlay, if necessary. Removes the Window HTML elements from the DOM.
-         */
         destroy: function () {
             var that = this,
                 modalWindows,
@@ -1459,7 +749,7 @@
         });
     }
 
-    WindowResizing.prototype = /** @ignore */ {
+    WindowResizing.prototype = {
         dragstart: function (e) {
             var that = this,
                 wnd = that.owner,
@@ -1564,7 +854,7 @@
         });
     }
 
-    WindowDragging.prototype = /** @ignore */{
+    WindowDragging.prototype = {
         dragstart: function (e) {
             var wnd = this.owner,
                 element = wnd.element,

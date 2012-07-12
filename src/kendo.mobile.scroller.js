@@ -169,69 +169,7 @@
         }
     });
 
-    /**
-     * @name kendo.mobile.ui.Scroller.Description
-     * @section
-     * <p>The Kendo Mobile Scroller widget enables touch friendly kinetic scrolling for the contents of a given DOM element.  </p>
-     *
-     * <h3>Getting Started</h3>
-     * <p>Each mobile View initializes a scroller for its content element. In addition to that, a scroller will be initialized for every element with a
-     * <code>role</code> data attribute set to <code>scroller</code>.
-     * Alternatively, it can be initialized using jQuery plugin syntax in the containing mobile View <strong>init event handler</strong>.
-     * </p>
-     * <p>For the scroller to work, its element should have fixed dimensions (width and/or height) set.</p>
-     *
-     * @exampleTitle Initialize mobile Scroller using a role data attribute.
-     * @example
-     * <div data-role="scroller">
-     *   Foo
-     * </div>
-     *
-     * @exampleTitle Initialize mobile Scroller using jQuery plugin syntax
-     * @example
-     * <div id="scroller"></div>
-     * <script>
-     * var scroller = $("#scroller").kendoMobileScroller();
-     * </script>
-     *
-     * @exampleTitle Obtain the current mobile view scroller
-     * @example
-     * <div data-role="view" data-init="getScroller">
-     *   Foo
-     * </div>
-     * <script>
-     *  function getScroller(e) {
-     *     var scroller = e.view.scroller;
-     *  }
-     * </script>
-     *
-     * @section
-     * <p>The mobile Scroller widget exposes the following fields:</p>
-     * <ul>
-     * <li><strong>scrollTop</strong> - the number of pixels that are hidden from view above the scrollable area.</li>
-     * <li><strong>scrollLeft</strong> - the number of pixels that are hidden from view to the left of the scrollable area.</li>
-     * </ul>
-     *
-     */
-    var Scroller = Widget.extend(/** @lends kendo.mobile.ui.Scroller.prototype */{
-        /**
-         * @constructs
-         * @extends kendo.mobile.ui.Widget
-         * @param {Element} element DOM element
-         * @param {Object} options
-         * @option {Boolean} [elastic] <true> Weather or not to allow out of bounds dragging and easing.
-         * @option {Number} [pullOffset] <140> The threshold below which a releasing the scroller will trigger the pull event.
-         * Has effect only when the pullToRefresh option is set to true.
-         * @option {String} [pullTemplate] <Pull to refresh> The message template displayed when the user pulls the scroller.
-         * Has effect only when the pullToRefresh option is set to true.
-         * @option {Boolean} [pullToRefresh] <false> If set to true, the scroller will display a hint when the user pulls the container beyond its top limit.
-         * If a pull beyond the specified pullOffset occurs, a pull event will be triggered.
-         * @option {String} [releaseTemplate] <Release to refresh> The message template displayed when the user pulls the scroller below the
-         * pullOffset, indicating that pullToRefresh will occur.
-         * Has effect only when the pullToRefresh option is set to true.
-         * @option {String} [refreshTemplate] <Refreshing> The message template displayed during the refresh.
-         * Has effect only when the pullToRefresh option is set to true.
-         */
+    var Scroller = Widget.extend({
         init: function(element, options) {
             var that = this;
             Widget.fn.init.call(that, element, options);
@@ -311,16 +249,10 @@
             kendo.onResize($.proxy(that.reset, that));
         },
 
-        /**
-         * Returns the height in pixels of the scroller content.
-         */
         scrollHeight: function() {
             return this.scrollElement[0].scrollHeight;
         },
 
-        /**
-         * Returns the width in pixels of the scroller content.
-         */
         scrollWidth: function() {
             return this.scrollElement[0].scrollWidth;
         },
@@ -335,40 +267,8 @@
         },
 
         events: [
-            /**
-             * Fires when the pull option is set to true, and the user pulls the scrolling container beyond the specified pullThreshold.
-             * @name kendo.mobile.ui.Scroller#pull
-             * @event
-             * @param {Event} e
-             */
             PULL,
-            /**
-             * Fires when the user scrolls through the content.
-             * @name kendo.mobile.ui.Scroller#scroll
-             * @event
-             * @param {Event} e
-             * @param {Number} e.scrollTop The number of pixels that are hidden from view above the scrollable area.
-             * @param {Number} e.scrollLeft The number of pixels that are hidden from view to the left of the scrollable area.
-             * @exampleTitle Bind to scroller scroll event in view init
-             * @example
-             * <div data-role="view" data-init="attachToScroller"> ... </div>
-             *  <script>
-             *     function attachToScroller(e) {
-             *       var scroller = e.view.scroller;
-             *       scroller.bind("scroll", function(e) {
-             *          console.log(e.scrollTop);
-             *          console.log(e.scrollLeft);
-             *       });
-             *     }
-             *  </script>
-             */
             SCROLL,
-            /**
-             * Fires when the scroller dimensions change (e.g. orientation change or resize)
-             * @name kendo.mobile.ui.Scroller#resize
-             * @event
-             * @param {Event} e
-             */
             RESIZE
         ],
 
@@ -380,49 +280,14 @@
             }
         },
 
-        /**
-         * Scrolls the container to the top.
-         */
         reset: function() {
             this.movable.moveTo({x: 0, y: 0});
         },
 
-        /**
-         * Scrolls the container to the specified location
-         * @param {Number} x The horizontal offset in pixels to scroll to.
-         * @param {Number} y The vertical offset in pixels to scroll to.
-         */
         scrollTo: function(x, y) {
             this.movable.moveTo({x: x, y: y});
         },
 
-        /**
-         * Indicate that the pull event is handled (i.e. data from the server has been retrieved).
-         * @exampleTitle Custom pull to refresh view scroll handling
-         * @example
-         *  <div data-role="view" data-init="initPullToRefreshScroller">
-         *      <h2 id="pull-to-refresh-clock"></h2>
-         *  </div>
-         * <script>
-         *
-         *  function updateClock() {
-         *      pullTime = kendo.toString(new Date(), "hh:mm:ss tt" );
-         *      $("#pull-to-refresh-clock").html("Last update at " + pullTime + ". <br /> Pull to refresh.");
-         *  }
-         *
-         *  function initPullToRefreshScroller(e) {
-         *      var scroller = e.view.scroller;
-         *
-         *      scroller.setOptions({
-         *          pullToRefresh: true,
-         *          pull: function() {
-         *              updateClock();
-         *              setTimeout(function() { scroller.pullHandled(); }, 400);
-         *          }
-         *      })
-         *  }
-         * </script>
-         */
         pullHandled: function() {
             var that = this;
             that.refreshHint.removeClass(REFRESHCLASS);

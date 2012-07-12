@@ -2470,7 +2470,7 @@
                     for (takeIdx = skipIdx; takeIdx < length; takeIdx++) {
                         range = ranges[takeIdx];
 
-                        if (range.data.length && start + count >= range.start /*&& count + count <= range.end*/) {
+                        if (range.data.length && start + count >= range.start) {
                             rangeData = range.data;
                             rangeEnd = range.end;
 
@@ -2924,7 +2924,7 @@
         return dataSource instanceof HierarchicalDataSource ? dataSource : new HierarchicalDataSource(dataSource);
     };
 
-    extend(true, kendo.data, /** @lends kendo.data */ {
+    extend(true, kendo.data, {
         readers: {
             json: DataReader
         },
