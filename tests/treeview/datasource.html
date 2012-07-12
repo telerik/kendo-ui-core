@@ -514,6 +514,31 @@
                 equal(bar.find(".k-group .k-in").text(), "baz");
             });
 
+            test("updating dataItem text updates the treeview", function() {
+                createTreeView([
+                    { id: 1, text: "foo" }
+                ]);
+
+                var foo = treeviewObject.findByText("foo");
+                treeviewObject.dataItem(foo).set("text", "bar");
+
+                equal(treeviewObject.text(foo), "bar");
+            });
+
+            test("updating dataItem text updates the treeview and regards dataTextField", function() {
+                createTreeView({
+                    dataTextField: "foo",
+                    dataSource: [
+                        { id: 1, text: "unused", foo: "bar" }
+                    ]
+                });
+
+                var bar = treeviewObject.findByText("bar");
+                treeviewObject.dataItem(bar).set("foo", "baz");
+
+                equal(treeviewObject.text(bar), "baz");
+            });
+
         </script>
 
         <div id="qunit-fixture"> </div>
