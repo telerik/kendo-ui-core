@@ -291,6 +291,14 @@
                 ok(footer.find(".km-load")[0]);
                 equal(footer.find(".km-load").text(), "Press to load more");
             });
+
+            test("Nested ListView does not remove inset style of the content", function() {
+                setup("<div data-role='view'><ul data-role='listview' data-style='inset'><ul data-role='listview'></ul></ul></div>");
+
+                var content = application.pane.view().content;
+
+                ok(content.hasClass("km-insetcontent"));
+            });
         </script>
     </body>
 </html>
