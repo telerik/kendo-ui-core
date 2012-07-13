@@ -48,6 +48,18 @@
                 ok(footer.length);
             });
 
+            test("footer row is added to the grid if autoBind is false and footerTemplate is set", function() {
+                var grid = new Grid(table(), {
+                    autoBind: false,
+                    columns: [ { field: "foo", footerTemplate: "bar" }],
+                    dataSource: {
+                        data: []
+                    }
+                });
+
+                ok(grid.wrapper.children("div.k-grid-footer").length);
+            });
+
             test("footer row is not added to the grid if data source aggregates are not set", function() {
                 var grid = new Grid(table(), {
                     dataSource: {

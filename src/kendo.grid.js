@@ -466,6 +466,8 @@
 
             if (that.options.autoBind) {
                 that.dataSource.fetch();
+            } else {
+                that._footer();
             }
 
             kendo.notify(that);
