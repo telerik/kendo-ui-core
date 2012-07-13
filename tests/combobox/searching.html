@@ -535,7 +535,7 @@
                 });
 
                 combobox.search("foo1");
-                combobox._selectItem();
+                combobox.open();
 
                 ok(combobox.dataSource.filter());
                 equal(combobox.dataSource.filter().filters.length, 1);
