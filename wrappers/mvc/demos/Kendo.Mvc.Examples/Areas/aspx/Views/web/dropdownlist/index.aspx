@@ -58,7 +58,6 @@
         width: 500px;
         margin: 30px auto;
         padding: 20px 20px 0 20px;
-        background-position: 0 -255px;
     }
     #cap {
         float: left;
