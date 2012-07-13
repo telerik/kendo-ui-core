@@ -267,6 +267,12 @@ html body .k-button-bare
 
 /* Inputs */
 
+.k-autocomplete
+{
+    display: inline-block;
+    width: 12em;
+}
+
 .k-input[type="text"],
 .k-input[type="password"]
 {
@@ -588,7 +594,6 @@ div.k-window-content
     vertical-align: middle;
     margin-right: 5px;
     margin-top: 4px;
-    float:left;
 }
 
 .k-panelbar .k-group .k-image,
@@ -606,13 +611,6 @@ div.k-window-content
     position: relative;
     text-decoration: none;
     zoom: 1;
-}
-
-.k-panelbar .k-link:after
-{
-    content:"";
-    display:block;
-    clear:both;
 }
 
 .k-panelbar .k-state-hover
@@ -955,10 +953,10 @@ div.k-grid-header .k-header
 
 *+html .k-grid-pager input { vertical-align: middle; }
 
-.k-grid .k-pager-numbers,
-.k-grid .k-pager-numbers>li,
-.k-grid .k-pager-wrap>.k-link,
-.k-grid .k-pager-numbers .k-state-selected
+.k-pager-numbers,
+.k-pager-numbers>li,
+.k-pager-wrap>.k-link,
+.k-pager-numbers .k-state-selected
 {
     float:left;
 }
@@ -986,9 +984,10 @@ div.k-grid-header .k-header
     border-top-width: 0;
 }
 
-.k-grid .k-pager-wrap
+.k-pager-wrap
 {
     cursor: default;
+    overflow:hidden;
 }
 
 .k-pager-wrap .k-link
@@ -1077,6 +1076,11 @@ div.k-grid-header .k-header
 .k-filter-menu .k-textbox
 {
     width:147px;
+}
+
+.k-filter-menu .k-numerictextbox .k-input
+{
+    width:146px;
 }
 
 .k-grid-filter .k-icon
@@ -1285,6 +1289,26 @@ div.k-grid-header .k-header
     position: relative;
 }
 
+.k-edit-form-container .editor-label,
+.k-edit-form-container .editor-field
+{
+    padding-bottom: 1em;
+    float: left;
+}
+    
+.k-edit-form-container .editor-label
+{
+    width: 30%;
+    text-align: right;
+    padding-right: 3%;
+    clear: left;
+}
+    
+.k-edit-form-container .editor-field
+{
+    width: 60%;
+}
+
 .k-grid .field-validation-error
 {
     display: block;
@@ -1359,6 +1383,74 @@ html body div.k-grid tbody .k-button-icon
     cursor: col-resize;
     position: absolute;
     height: 25px;
+}
+
+/* loading */
+
+.k-loading,
+.k-loading-image
+{
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.k-loading-mask,
+.k-loading-image,
+.k-loading-text
+{
+    position: absolute;
+}
+
+.k-loading-text
+{
+    top: -4000px;
+    left: -4000px;
+}
+
+.k-loading-image,
+.k-loading-color
+{
+    width: 100%;
+    height: 100%;
+}
+
+.k-loading-image
+{
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+
+.k-loading-color
+{
+    background-color:#fff;
+    filter: alpha(opacity=50);
+    opacity: .5;
+}
+
+/* Grid virtual scrolling */
+
+.k-virtual-scrollable-wrap
+{
+    height: 100%;
+    overflow-y: hidden;
+    position: relative;
+}
+
+.k-scrollbar
+{
+    overflow: scroll;
+    position: absolute;
+}
+
+.k-scrollbar-vertical
+{
+    height: 100%;
+    overflow-x: hidden;
+    right: 0;
+    top: 0;
+    width: 17px;
 }
 
 /* ComboBox & Drop-down*/
@@ -1594,6 +1686,7 @@ html body div.k-grid tbody .k-button-icon
     height: 169px;
     table-layout: fixed;
     border-style: none;
+    float:left;
     margin: 0;
     padding: 0;
 }
@@ -1689,7 +1782,7 @@ span.k-datepicker
     padding-right: 44px;
 }
 
-.k-datetimepicker .k-icon-calendar
+.k-datetimepicker .k-i-calendar
 {
     margin-right: 3px;
 }
