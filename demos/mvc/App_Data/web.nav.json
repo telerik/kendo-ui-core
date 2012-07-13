@@ -831,7 +831,7 @@
             "packages": ["!mvc"],
             "text": "Templates",
             "name": "templates",
-            "documentation": "framework/template",
+            "documentation": "framework/kendo",
             "spriteCssClass": "templatesIcon",
             "items": [
                 {
@@ -848,7 +848,7 @@
             "packages": ["!mvc"],
             "text": "MVVM",
             "name": "mvvm",
-            "documentation": "framework/mvvm",
+            "documentation": "framework/kendo",
             "spriteCssClass": "mvvmIcon",
             "items": [
                 {
@@ -927,7 +927,7 @@
             "packages": ["!mvc"],
             "text": "Globalization",
             "name": "globalization",
-            "documentation": "framework/globalization",
+            "documentation": "framework/kendo",
             "spriteCssClass": "globalizationIcon",
             "items": [
                 {
