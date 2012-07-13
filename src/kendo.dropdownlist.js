@@ -57,7 +57,7 @@
             }
 
             if (options.autoBind) {
-                that._selectItem();
+                that.dataSource.fetch();
             } else {
                 text = options.text;
                 if (!text) {
@@ -160,7 +160,7 @@
 
             if (!that.ul[0].firstChild) {
                 that._open = true;
-                that._selectItem();
+                that.dataSource.fetch();
             } else {
                 that.popup.open();
                 that._scroll(that._current);
@@ -201,6 +201,11 @@
 
             that._hideBusy();
             that._makeUnselectable();
+
+            if (!that._valueCalled) {
+                that._selectItem();
+                that._valueCalled = false;
+            }
 
             that.trigger("dataBound");
         },
@@ -262,6 +267,8 @@
                     value = value.toString();
                 }
 
+                that._valueCalled = true;
+
                 if (value && that._valueOnFetch(value)) {
                     return;
                 }
@@ -275,18 +282,16 @@
         },
 
         _selectItem: function() {
-            var that = this;
+            var that = this,
+                value = that.options.value || that.value();
 
-            that.dataSource.one(CHANGE, function() {
-                var value = that.options.value || that.value();
-                if (value) {
-                    that.value(value);
-                } else {
-                    that.select(that.options.index);
-                }
+            if (value) {
+                that.value(value);
+            } else {
+                that.select(that.options.index);
+            }
 
-                that.trigger("selected");
-            }).fetch();
+            that.trigger("selected");
         },
 
         _accept: function(li) {

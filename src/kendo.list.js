@@ -366,7 +366,7 @@
             this._dataSource();
 
             if (this.options.autoBind) {
-                this._selectItem();
+                this.dataSource.fetch();
             }
         },
 
