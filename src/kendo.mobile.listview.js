@@ -465,7 +465,9 @@
 
             that._enhanceItems();
 
-            element.closest(".km-content").toggleClass("km-insetcontent", inset); // iOS has white background when the list is not inset.
+            if (!element.parents(".km-listview")[0]) {
+                element.closest(".km-content").toggleClass("km-insetcontent", inset); // iOS has white background when the list is not inset.
+            }
 
             that._cacheHeaders();
         },
