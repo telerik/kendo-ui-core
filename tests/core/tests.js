@@ -12,6 +12,10 @@ tests.push(
         title: "core dispatch"
     },
     {
+        page: "core/destroy.html",
+        title: "core destroy"
+    },
+    {
         page: "core/observable.html",
         title: "core observable"
     },

@@ -154,7 +154,9 @@
                 idx,
                 length;
 
-            if (events) {
+            if (eventName === undefined) {
+                that._events = {};
+            } else if (events) {
                 if (handler) {
                     for (idx = 0, length = events.length; idx < length; idx++) {
                         if (events[idx] === handler) {
@@ -1894,7 +1896,7 @@ function pad(number) {
         ui: kendo.ui || {},
         fx: kendo.fx || fx,
         mobile: kendo.mobile || {},
-        dataviz: kendo.dataviz || {ui: {}},
+        dataviz: kendo.dataviz || {ui: { roles: {}}},
         keys: {
             INSERT: 45,
             DELETE: 46,
@@ -2176,6 +2178,19 @@ function pad(number) {
 
         $(element).find("[data-" + kendo.ns + "role]").andSelf().each(function(){
             kendo.initWidget(this, {}, roles);
+        });
+    };
+
+    kendo.destroy = function(element) {
+        $(element).find("[data-" + kendo.ns + "role]").andSelf().each(function(){
+            var element = $(this),
+                widget = kendo.widgetInstance(element, kendo.ui) ||
+                         kendo.widgetInstance(element, kendo.mobile.ui) ||
+                         kendo.widgetInstance(element, kendo.dataviz.ui);
+
+            if (widget) {
+                widget.destroy();
+            }
         });
     };
 
