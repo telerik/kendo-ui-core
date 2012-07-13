@@ -1517,15 +1517,15 @@ div.k-grid-header .k-header
 
 .k-edit-label,
 .k-edit-field,
-.editor-label,
-.editor-field
+.k-edit-form-container .editor-label,
+.k-edit-form-container .editor-field
 {
     display: inline-block;
     padding-bottom: 1em;
 }
 
 .k-edit-label,
-.editor-label
+.k-edit-form-container .editor-label
 {
     width: 30%;
     text-align: right;
@@ -1533,7 +1533,7 @@ div.k-grid-header .k-header
 }
 
 .k-edit-field,
-.editor-field
+.k-edit-form-container .editor-field
 {
     width: 60%;
 }
