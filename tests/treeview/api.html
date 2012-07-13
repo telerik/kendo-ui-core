@@ -686,6 +686,24 @@
                 equal(data[0].text, "bar");
                 equal(data[1].text, "foo");
             });
+
+            test("removing all items from an item does not re-initialize it after move", function() {
+                createTreeView([
+                    { text: "foo", items: [
+                        { text: "bar" }
+                    ] }
+                ]);
+
+                var bar = treeviewObject.findByText("bar");
+
+                bar = treeviewObject.append(bar);
+
+                var foo = treeviewObject.findByText("foo");
+
+                foo = treeviewObject.append(foo, bar);
+
+                equal(foo.find(".k-item").length, 0);
+            });
         </script>
 
         <div id="qunit-fixture"> </div>
