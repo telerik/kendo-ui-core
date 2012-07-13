@@ -96,6 +96,49 @@
                 ok(el.getKendoBar());
                 equal(el.getKendoBar(), el.data("kendoBar"));
             });
+
+            test("destroy removes the instance of the widget", function() {
+                var Foo = Widget.extend({
+                        options: {
+                            name: "Foo",
+                            prefix: ""
+                        }
+                    }),
+                    el = $("<div />");
+
+                kendo.ui.plugin(Foo);
+
+                el.kendoFoo();
+
+                el.data("kendoFoo").destroy();
+
+                ok(!el.data("kendoFoo"));
+            });
+
+
+            test("destroy removes any event handlers", function() {
+                var Foo = Widget.extend({
+                        options: {
+                            name: "Foo",
+                            prefix: ""
+                        },
+                        events: [ "foo" ]
+                    }),
+                    el = $("<div />");
+
+                kendo.ui.plugin(Foo);
+
+                var options = stub({}, "foo");
+
+                var foo = el.kendoFoo(options).data("kendoFoo");
+
+                foo.destroy();
+
+                foo.trigger("foo");
+
+                equal(options.calls("foo"), 0);
+            });
+
        </script>
     </body>
 </html>
