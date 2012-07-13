@@ -285,7 +285,7 @@ function pad(number) {
 
     if (typeof Date.prototype.toJSON !== FUNCTION) {
 
-        
+
         Date.prototype.toJSON = function (key) {
             var that = this;
 
@@ -1801,7 +1801,7 @@ function pad(number) {
     };
 
     if (support.touch) {
-        
+
         touchLocation = function(e, id) {
             var changedTouches = e.changedTouches || e.originalEvent.changedTouches;
 
@@ -1893,7 +1893,6 @@ function pad(number) {
     extend(kendo, {
         ui: kendo.ui || {},
         fx: kendo.fx || fx,
-        data: kendo.data || {},
         mobile: kendo.mobile || {},
         dataviz: kendo.dataviz || {ui: {}},
         keys: {
@@ -1942,7 +1941,7 @@ function pad(number) {
         isLocalUrl: function(url) {
             return url && !localUrlRe.test(url);
         },
-        
+
         expr: function(expression, safe) {
             expression = expression || "";
 
@@ -1958,22 +1957,22 @@ function pad(number) {
 
             return expression;
         },
-        
+
         getter: function(expression, safe) {
             return getterCache[expression] = getterCache[expression] || new Function("d", "return " + kendo.expr(expression, safe));
         },
-        
+
         setter: function(expression) {
             return setterCache[expression] = setterCache[expression] || new Function("d,value", "d." + expression + "=value");
         },
-        
+
         accessor: function(expression) {
             return {
                 get: kendo.getter(expression),
                 set: kendo.setter(expression)
             };
         },
-        
+
         guid: function() {
             var id = "", i, random;
 
@@ -1993,7 +1992,7 @@ function pad(number) {
             return role.replace(/(\S+)/g, "[" + kendo.attr("role") + "=$1],").slice(0, -1);
         },
 
-        
+
         logToConsole: function(message) {
             var console = window.console;
 
@@ -2313,7 +2312,9 @@ function pad(number) {
         $(window).on(support.resize, handler);
     };
 
-    kendo.data = function(element, key) {
-        return element.data(kendo.ns + key);
-    };
+    if (!kendo.data) {
+        kendo.data = function(element, key) {
+            return element.data(kendo.ns + key);
+        };
+    }
 })(jQuery);
