@@ -649,6 +649,7 @@
 
             if (that.options.closeOnClick && !(href && href.length > 0) && !element.children(groupSelector + ",.k-animation-container").length) {
                 that.close(link.parentsUntil(that.element, allItemsSelector));
+                that.clicked = false;
             }
 
             if ((!element.parent().hasClass(MENU) || !that.options.openOnClick) && !touch) {
