@@ -1102,7 +1102,7 @@
                         unit = YEARS;
                     } else if (cat.getMonth() - lastCat.getMonth() > 0) {
                         unit = MONTHS;
-                    } else if (cat.getDay() - lastCat.getDay() > 0) {
+                    } else if (cat.getDate() - lastCat.getDate() > 0) {
                         unit = DAYS;
                     } else if (cat.getHours() - lastCat.getHours() > 0) {
                         unit = HOURS;
