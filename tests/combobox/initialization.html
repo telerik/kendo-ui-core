@@ -312,18 +312,13 @@
                    dataSource: [{text: "Foo", value: 0}, {text: 0, value:5}]
                });
 
-               setTimeout(function() {
-                   var children = select.children();
+               var children = select.children();
 
-                   equal(children.length, 2);
-                   equal(children.eq(0).text(), "Foo");
-                   equal(children.eq(0).val(), "0");
-                   equal(children.eq(1).text(), "0");
-                   equal(children.eq(1).val(), "5");
-                   start();
-               }, 100);
-
-               stop(1);
+               equal(children.length, 2);
+               equal(children.eq(0).text(), "Foo");
+               equal(children.eq(0).val(), "0");
+               equal(children.eq(1).text(), "0");
+               equal(children.eq(1).val(), "5");
            });
 
            test("value with space should be added to option", function() {
@@ -514,6 +509,15 @@
                 var combo = new kendo.ui.ComboBox(input);
 
                 equal(combo.input.attr("maxLength"), 10);
+            });
+
+            test("ComboBox set value on refresh", function() {
+                input.val("Foo");
+                var combo = new kendo.ui.ComboBox(input);
+
+                combo.dataSource.data(["Boo", "Foo"]);
+
+                equal(combo.selectedIndex, 1);
             });
 
             asyncTest("form reset support", 2, function() {

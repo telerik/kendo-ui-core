@@ -75,7 +75,7 @@
             that._old = that.value();
 
             if (options.autoBind) {
-                that._selectItem();
+                that._filterSource();
             } else {
                 text = options.text;
 
@@ -182,7 +182,7 @@
             if (!that.ul[0].firstChild || (that._state === STATE_ACCEPT && !serverFiltering)) {
                 that._open = true;
                 that._state = STATE_REBIND;
-                that._selectItem();
+                that._filterSource();
             } else {
                 that.popup.open();
                 that._scroll(that._current);
@@ -193,7 +193,8 @@
             var that = this,
                 ul = that.ul[0],
                 options = that.options,
-                value = that.value(),
+                state = that._state,
+                value,
                 data = that._data(),
                 length = data.length;
 
@@ -203,12 +204,12 @@
             that._height(length);
 
             if (that.element.is(SELECT)) {
-                that._options(data);
-
-                if (value && that._state === STATE_REBIND) {
+                if (state === STATE_REBIND) {
+                    value = that.value();
                     that._state = "";
-                    that.value(value);
                 }
+
+                that._options(data);
             }
 
             if (length) {
@@ -231,6 +232,11 @@
             }
 
             that._makeUnselectable();
+
+            if (!that._setValue && state !== STATE_FILTER) {
+                that._selectItem(value);
+                that._setValue = false;
+            }
 
             that._hideBusy();
             that.trigger("dataBound");
@@ -255,8 +261,7 @@
                 options = that.options,
                 ignoreCase = options.ignoreCase,
                 filter = options.filter,
-                field = options.dataTextField,
-                filters, expression;
+                field = options.dataTextField;
 
             clearTimeout(that._typing);
 
@@ -267,18 +272,12 @@
                     that._open = true;
                     that._state = STATE_FILTER;
 
-                    expression = that.dataSource.filter() || {};
-                    removeFiltersForField(expression, field);
-
-                    filters = expression.filters || [];
-                    filters.push({
+                    that._filterSource({
                         value: ignoreCase ? word.toLowerCase() : word,
                         field: field,
                         operator: filter,
                         ignoreCase: ignoreCase
                     });
-
-                    that.dataSource.filter(filters);
                 }
             }
         },
@@ -382,6 +381,8 @@
                 if (value !== null) {
                     value = value.toString();
                 }
+
+                that._setValue = true;
 
                 if (value && that._valueOnFetch(value)) {
                     return;
@@ -637,23 +638,20 @@
             }
         },
 
-        _selectItem: function() {
+        _filterSource: function(filter) {
             var that = this,
                 options = that.options,
                 dataSource = that.dataSource,
                 expression = dataSource.filter() || {};
 
-            removeFiltersForField(expression, that.options.dataTextField);
+            removeFiltersForField(expression, options.dataTextField);
 
-            that.dataSource.one(CHANGE, function() {
-                var value = options.value || that.value();
-                if (value) {
-                    that.value(value);
-                } else {
-                    that.select(options.index);
-                }
-                that.trigger("selected");
-            }).filter(expression);
+            if (filter) {
+                expression = expression.filters || [];
+                expression.push(filter);
+            }
+
+            dataSource.filter(expression);
         },
 
         _wrapper: function() {

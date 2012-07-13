@@ -366,7 +366,7 @@
             this._dataSource();
 
             if (this.options.autoBind) {
-                this._selectItem();
+                this.dataSource.fetch();
             }
         },
 
@@ -541,6 +541,21 @@
             }
 
             return pressed;
+        },
+
+        _selectItem: function(value) {
+            var that = this,
+                options = that.options;
+
+            value = value || options.value || that.value();
+
+            if (value) {
+                that.value(value);
+            } else {
+                that.select(options.index);
+            }
+
+            that.trigger("selected");
         },
 
         _valueOnFetch: function(value) {
