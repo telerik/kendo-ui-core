@@ -2756,15 +2756,17 @@
         load: function() {
             var that = this, options = {};
 
-            options[that.idField || "id"] = that.id;
+            if (!that._loaded || that.hasChildren) {
+                options[that.idField || "id"] = that.id;
 
-            if (!that._loaded) {
-                that.children._data = undefined;
+                if (!that._loaded) {
+                    that.children._data = undefined;
+                }
+
+                that.children.one(CHANGE, function() {
+                    that._loaded = true;
+                }).query(options);
             }
-
-            that.children.one(CHANGE, function() {
-                that._loaded = true;
-            }).query(options);
         },
 
         parentNode: function() {

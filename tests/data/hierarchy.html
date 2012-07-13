@@ -775,6 +775,26 @@
                 equal(data.length, 1);
                 equal(data[0].hasChildren, true);
             });
+
+            test("loading items without children does not repopulate their datasource", function() {
+                var dataSource = new HierarchicalDataSource({
+                    data: [
+                        { text: "foo", items: [
+                            { text: "bar" }
+                        ] }
+                    ]
+                });
+
+                dataSource.read();
+
+                var children = dataSource.view()[0].children;
+                children.read();
+                dataSource.remove(children.view()[0]);
+
+                dataSource.view()[0].load();
+
+                equal(dataSource.view()[0].children.view().length, 0);
+            });
         </script>
     </body>
 </html>
