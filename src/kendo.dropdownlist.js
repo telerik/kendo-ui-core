@@ -281,19 +281,6 @@
             }
         },
 
-        _selectItem: function() {
-            var that = this,
-                value = that.options.value || that.value();
-
-            if (value) {
-                that.value(value);
-            } else {
-                that.select(that.options.index);
-            }
-
-            that.trigger("selected");
-        },
-
         _accept: function(li) {
             this._focus(li);
         },

@@ -127,7 +127,7 @@
                 var combobox = new ComboBox(input, {autoBind: false} );
 
                 input.val("foo");
-                combobox._selectItem();
+                combobox._filterSource();
                 equal(combobox._old, "foo");
             });
 
