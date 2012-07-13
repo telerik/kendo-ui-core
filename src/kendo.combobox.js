@@ -194,7 +194,7 @@
                 ul = that.ul[0],
                 options = that.options,
                 state = that._state,
-                value = that.value(),
+                value,
                 data = that._data(),
                 length = data.length;
 
@@ -204,6 +204,11 @@
             that._height(length);
 
             if (that.element.is(SELECT)) {
+                if (state === STATE_REBIND) {
+                    value = that.value();
+                    that._state = "";
+                }
+
                 that._options(data);
             }
 
@@ -229,12 +234,6 @@
             that._makeUnselectable();
 
             if (!that._setValue && state !== STATE_FILTER) {
-                if (state !== STATE_REBIND) {
-                    value = "";
-                } else {
-                    that._state = "";
-                }
-
                 that._selectItem(value);
                 that._setValue = false;
             }
