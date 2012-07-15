@@ -13,10 +13,11 @@
                 align = options.align || (ios ?  "bottom center" : "center center"),
                 position = options.position || (ios ? "bottom center" : "center center"),
                 effect = options.effect || (ios ? "slideIn:up" : "fade:in"),
-                shim = $(SHIM).hide(), view;
+                shim = $(SHIM).hide(), container, view;
 
             Widget.fn.init.call(that, element, options);
             view = that.view();
+            container = view ? view.container : element.closest(".km-pane");
 
             that.shim = shim;
             that.element = element;
@@ -25,7 +26,7 @@
                 that.shim.on(kendo.support.mouseup, $.proxy(that.hide, that));
             }
 
-            view.container.append(shim);
+            container.append(shim);
 
             that.popup = new Popup(that.element, {
                 anchor: shim,
