@@ -52,7 +52,7 @@
             _updateConnected: function () {
                 var that = this;
 
-                that.element.children(".gradient").css("background-image", that.parent.gradients.get(support.transforms.css, that.index, "left"));
+                that.element.children(".gradient-view").css("background-image", that.parent.gradients.get(support.transforms.css, that.index, "left"));
                 that.parent.element.css("background-image", that.parent.gradients.get(support.transforms.css));
             },
 
@@ -116,7 +116,7 @@
                     position: "top center",
                     close: function () {
                         if (that.styleengine) {
-                            that.styleengine.update(that.element, { "background-image": that.gradients.get("-webkit-") });
+                            that.styleengine.update(that.element, { "background-image": that.gradients.get(support.transforms.css) });
                         }
                     }
                 });
@@ -125,13 +125,17 @@
                 var value = that.gradients.value;
 
                 for (var j = 0, valueLen = value.length; j < valueLen; j++) {
-                    var sample = value[j].gradientElement = $("<div class='sample'><div class='gradient'></div></div>");
+                    var sample = value[j].gradientElement = $("<div class='sample'><div class='gradient-view'></div></div>");
 
-                    sample.children(".gradient").css({
+                    sample.children(".gradient-view").css({
                         backgroundColor: bgcolor.alpha() ? bgcolor.get() : "#fff",
                         backgroundImage: that.gradients.get(support.transforms.css, j, "left")
                     });
-                    sample.appendTo(that.popup.element);
+                    sample
+                        .on("click", ".gradient-view", function() {
+                            //console.log("clicky");
+                        })
+                        .appendTo(that.popup.element);
 
                     for (var i = 0, stopsLen = value[j].stops.length; i < stopsLen; i++) {
                         value[j].stops[i].dragStop = new DragStop(sample, value[j].stops[i], that, j);

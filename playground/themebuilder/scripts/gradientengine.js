@@ -139,7 +139,7 @@
         _getStandardGradient: function (gradient, prefix, direction) {
             var output = "", parsed;
 
-            output += prefix + "linear-gradient(" + (direction ? direction : gradient.start.original + "," + ( gradient.end.original ? gradient.end.original + "," : "" ));
+            output += prefix + "linear-gradient(" + (direction ? direction : gradient.start.original) + "," + (gradient.end.original ? gradient.end.original + "," : "" );
 
             gradient.stops.forEach(function(stop) {
                 parsed = parseInt(stop.position, 10);
