@@ -17,7 +17,7 @@
 
             Widget.fn.init.call(that, element, options);
             view = that.view();
-            container = view ? view.container : element.closest(".km-pane");
+            container = view ? view.container : kendo.mobile.application.element;
 
             that.shim = shim;
             that.element = element;
