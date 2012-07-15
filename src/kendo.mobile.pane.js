@@ -105,7 +105,8 @@
             this.element
                 .on(support.mousedown, roleSelector(linkRoles), mouseup)
                 .on(support.mouseup, roleSelector(buttonRoles), mouseup)
-                .on("click", roleSelector(linkRoles + " " + buttonRoles), appLinkClick);
+                .on("click", roleSelector(linkRoles + " " + buttonRoles), appLinkClick)
+                .on("touchstart", roleSelector(buttonRoles), false); // Bust the ghost click
         },
 
         _mouseup: function(e) {
