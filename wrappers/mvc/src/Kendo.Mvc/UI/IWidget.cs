@@ -8,6 +8,8 @@ namespace Kendo.Mvc.UI
 
         string Name { get; }
 
+        string PropertyFieldName { get; }
+
         ViewContext ViewContext { get; }
 
         ViewDataDictionary ViewData { get; }

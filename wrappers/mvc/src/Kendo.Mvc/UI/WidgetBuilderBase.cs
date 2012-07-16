@@ -66,6 +66,13 @@ namespace Kendo.Mvc.UI.Fluent
             return this as TBuilder;
         }
 
+        internal TBuilder PropertyFieldName(string componentName)
+        {
+            Component.PropertyFieldName = componentName;
+
+            return this as TBuilder;
+        }
+
         /// <summary>
         /// Sets the HTML attributes.
         /// </summary>

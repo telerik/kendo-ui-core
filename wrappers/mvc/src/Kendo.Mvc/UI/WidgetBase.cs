@@ -81,6 +81,12 @@ namespace Kendo.Mvc.UI
             }
         }
 
+        public string PropertyFieldName
+        {
+            get;
+            set;
+        }
+
         /// <summary>
         /// Gets the HTML attributes.
         /// </summary>
