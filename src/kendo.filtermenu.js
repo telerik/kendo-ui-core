@@ -5,6 +5,7 @@
         DATEPICKER = "kendoDatePicker",
         proxy = $.proxy,
         POPUP = "kendoPopup",
+        NS = ".kendoFilterMenu",
         EQ = "Is equal to",
         NEQ = "Is not equal to",
         Widget = ui.Widget;
@@ -113,13 +114,16 @@
                 if (!link[0]) {
                     link = element.prepend('<a class="k-grid-filter" href="#"><span class="k-icon k-filter"/></a>').find(".k-grid-filter");
                 }
-                that._clickHandler = proxy(that._click, that);
-                link.click(that._clickHandler);
+
+                link.on("click" + NS, proxy(that._click, that));
+
             } else {
                 that.link = $();
             }
 
-            that.dataSource = options.dataSource.bind("change", proxy(that.refresh, that));
+            that._refreshHandler = proxy(that.refresh, that);
+
+            that.dataSource = options.dataSource.bind("change", that._refreshHandler);
 
             that.field = options.field || element.attr(kendo.attr("field"));
 
@@ -144,17 +148,25 @@
 
             operators = operators[type] || options.operators[type];
 
-            that.form = $('<form class="k-filter-menu"/>');
-
-            that.form.html(kendo.template(type === "boolean" ? booleanTemplate : defaultTemplate)({
-                field: that.field,
-                ns: kendo.ns,
-                messages: options.messages,
-                extra: options.extra,
-                operators: operators,
-                type: type,
-                values: convertItems(options.values)
-            }));
+            that.form = $('<form class="k-filter-menu"/>')
+                            .html(kendo.template(type === "boolean" ? booleanTemplate : defaultTemplate)({
+                                field: that.field,
+                                ns: kendo.ns,
+                                messages: options.messages,
+                                extra: options.extra,
+                                operators: operators,
+                                type: type,
+                                values: convertItems(options.values)
+                            }))
+                            .on("submit" + NS, proxy(that._submit, that))
+                            .on("reset" + NS, proxy(that._reset, that))
+                            .find("[" + kendo.attr("type") + "=number]")
+                            .removeClass("k-textbox")
+                            [NUMERICTEXTBOX]()
+                            .end()
+                            .find("[" + kendo.attr("type") + "=date]")
+                            .removeClass("k-textbox")
+                            [DATEPICKER]();
 
             if (!options.appendToElement) {
                 that.popup = that.form[POPUP]({
@@ -168,20 +180,6 @@
                 that.popup = that.element.closest(".k-popup").data(POPUP);
             }
 
-            that.form
-                .bind({
-                    submit: proxy(that._submit, that),
-                    reset: proxy(that._reset, that)
-                })
-                .find("[" + kendo.attr("type") + "=number]")
-                .removeClass("k-textbox")
-                [NUMERICTEXTBOX]()
-                .end()
-                .find("[" + kendo.attr("type") + "=date]")
-                .removeClass("k-textbox")
-                [DATEPICKER]();
-
-
             that.refresh();
         },
 
@@ -194,7 +192,7 @@
                 filters: [{ field: that.field, operator: "eq", value: "" }, { field: that.field, operator: "eq", value: "" }]
             });
 
-            //NOTE: binding the form element directly cause error in IE when grid is bound through MVVM and column is sorted
+            //NOTE: binding the form element directly causes weird error in IE when grid is bound through MVVM and column is sorted
             kendo.bind(that.form.children().first(), that.filterModel);
 
             if (that._bind(expression)) {
@@ -205,13 +203,19 @@
         },
 
         destroy: function() {
-            kendo.unbind(this.form);
+            var that = this;
 
-            this.form.remove();
+            Widget.fn.destroy.call(that);
 
-            this.form.removeData(POPUP);
-            this.link.unbind("click", this._clickHandler);
-            this.element.removeData("kendoFilterMenu");
+            kendo.unbind(that.form);
+            kendo.destroy(that.form);
+            that.form.unbind(NS);
+
+            that.popup.destroy();
+
+            that.link.unbind(NS);
+
+            that.dataSource.unbind("change", that._refreshHandler);
         },
 
         _bind: function(expression) {
