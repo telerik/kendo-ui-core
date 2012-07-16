@@ -57,8 +57,8 @@ namespace Kendo.Mvc.UI
             if (instance.ViewContext.UnobtrusiveJavaScriptEnabled && instance.ViewData.ModelMetadata != null)
             {
                 var htmlHelper = new HtmlHelper(instance.ViewContext, new WidgetViewDataContainer { ViewData = instance.ViewData });
+                var name = instance.PropertyFieldName ?? instance.Name;
                 var metadata = instance.ViewData.ModelMetadata;
-                var name = instance.Name.Split('.').Last();
 
                 if (metadata.PropertyName == name)
                 {
