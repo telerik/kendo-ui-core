@@ -1174,12 +1174,12 @@
 
             // perform reorder / move
             if (dropPosition == "over") {
-                treeview.append(sourceNode, destinationNode);
+                sourceNode = treeview.append(sourceNode, destinationNode);
                 treeview.expand(destinationNode);
             } else if (dropPosition == "before") {
-                treeview.insertBefore(sourceNode, destinationNode);
+                sourceNode = treeview.insertBefore(sourceNode, destinationNode);
             } else if (dropPosition == "after") {
-                treeview.insertAfter(sourceNode, destinationNode);
+                sourceNode = treeview.insertAfter(sourceNode, destinationNode);
             }
 
             treeview.trigger(DRAGEND, {

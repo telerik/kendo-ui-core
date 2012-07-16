@@ -218,6 +218,7 @@
                 equals(treeviewObject.text(dragEndTriggered.sourceNode), "bar");
                 equals(dragEndTriggered.destinationNode, treeviewObject.findByText("baz")[0]);
                 equals(dragEndTriggered.dropPosition, "over");
+                equals(dragEndTriggered.sourceNode, treeviewObject.findByText("bar")[0]);
             });
 
             test("drop event can be cancelled", function() {
