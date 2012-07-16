@@ -2012,17 +2012,15 @@ function pad(number) {
 
             Observable.fn.init.call(that);
 
-            that.options = extend(true, {}, that.options, options);
+            options = that.options = extend(true, {}, that.options, options);
 
             if (!that.element.attr(kendo.attr("role"))) {
-                that.element.attr(kendo.attr("role"), (that.options.name || "").toLowerCase());
+                that.element.attr(kendo.attr("role"), (options.name || "").toLowerCase());
             }
 
-            that.key = "kendo" + that.options.prefix + that.options.name;
+            that.element.data("kendo" + options.prefix + options.name, that);
 
-            that.element.data(that.key, that);
-
-            that.bind(that.events, that.options);
+            that.bind(that.events, options);
         },
 
         events: [],
@@ -2040,7 +2038,7 @@ function pad(number) {
         destroy: function() {
             var that = this;
 
-            that.element.removeData(that.key);
+            that.element.removeData("kendo" + that.options.prefix + that.options.name);
 
             that.unbind();
         }
