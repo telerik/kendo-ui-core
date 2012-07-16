@@ -171,14 +171,9 @@
         destroy: function() {
             var that = this;
 
-            that.element.off(CLICK, "a", that._clickHandler);
+            Widget.fn.destroy.call(that);
 
-            that.element.off(KEYDOWN, ".k-pager-input input", that._keydownHandler);
-
-            that.element.off(CHANGE, ".k-pager-sizes select", that._changeHandler);
-
-            that.element.off(CLICK, ".k-pager-refresh", that._reloadHandler);
-
+            that.element.off(NS);
             that.dataSource.unbind(CHANGE, that._refreshHandler);
         },
 
