@@ -6,6 +6,7 @@
         SINGLE = "single",
         FIELD = "data-field",
         DESC = "desc",
+        NS = ".kendoSortable",
         TLINK = ".k-link",
         Widget = kendo.ui.Widget;
 

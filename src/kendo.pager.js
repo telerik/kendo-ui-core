@@ -165,6 +165,8 @@
         destroy: function() {
             var that = this;
 
+            Widget.fn.destroy.call(that);
+
             that.element.off(NS);
             that.dataSource.unbind(CHANGE, that._refreshHandler);
         },
