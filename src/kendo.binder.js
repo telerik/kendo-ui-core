@@ -231,6 +231,16 @@
         }
     });
 
+    binders.readonly = Binder.extend({
+       refresh: function() {
+            if (this.bindings.readonly.get()) {
+                this.element.setAttribute("readonly", "readonly");
+            } else {
+                this.element.removeAttribute("readonly");
+            }
+       }
+    });
+
     binders.disabled = Binder.extend({
         refresh: function() {
             if (this.bindings.disabled.get()) {

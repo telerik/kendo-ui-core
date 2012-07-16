@@ -1146,6 +1146,20 @@
 
                 ok(dom.css("display") != "none");
             });
+
+            test("readonly binding to true-ish value sets the readonly attribute", function() {
+                var dom = $('<input data-bind="readonly: readonly" />');
+                kendo.bind(dom, {readonly: true});
+
+                equal(dom.attr("readonly"), "readonly");
+            });
+
+            test("readonly binding to false-ish value removes the readonly attribute", function() {
+                var dom = $('<input readonly data-bind="readonly: readonly" />');
+                kendo.bind(dom, {readonly: false});
+
+                equal(dom[0].hasAttribute("readonly"), false);
+            });
         </script>
 
         <script id="select-template" type="text/x-kendo-template">
