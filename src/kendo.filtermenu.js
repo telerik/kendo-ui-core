@@ -159,14 +159,16 @@
                                 values: convertItems(options.values)
                             }))
                             .on("submit" + NS, proxy(that._submit, that))
-                            .on("reset" + NS, proxy(that._reset, that))
-                            .find("[" + kendo.attr("type") + "=number]")
-                            .removeClass("k-textbox")
-                            [NUMERICTEXTBOX]()
-                            .end()
-                            .find("[" + kendo.attr("type") + "=date]")
-                            .removeClass("k-textbox")
-                            [DATEPICKER]();
+                            .on("reset" + NS, proxy(that._reset, that));
+
+           that.form
+                .find("[" + kendo.attr("type") + "=number]")
+                .removeClass("k-textbox")
+                [NUMERICTEXTBOX]()
+                .end()
+                .find("[" + kendo.attr("type") + "=date]")
+                .removeClass("k-textbox")
+                [DATEPICKER]();
 
             if (!options.appendToElement) {
                 that.popup = that.form[POPUP]({
