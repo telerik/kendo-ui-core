@@ -6,6 +6,7 @@
         isFunction = $.isFunction,
         isPlainObject = $.isPlainObject,
         inArray = $.inArray,
+        nameSpecialCharRegExp = /(\[|\]|\$|\.|\:|\+)/g,
         ERRORTEMPLATE = '<div class="k-widget k-tooltip k-tooltip-validation" style="margin:0.5em"><span class="k-icon k-warning"> </span>' +
                     '${message}<div class="k-callout k-callout-n"></div></div>',
         CHANGE = "change";
@@ -145,7 +146,7 @@
                 type = isValuesEditor ? "values" : fieldType(modelField),
                 isCustomEditor = isObject && field.editor,
                 editor = isCustomEditor ? field.editor : editors[type],
-                container = that.element.find("[data-container-for=" + fieldName + "]");
+                container = that.element.find("[data-container-for=" + fieldName.replace(nameSpecialCharRegExp, "\\$1")+ "]");
 
             editor = editor ? editor : editors["string"];
 

@@ -76,6 +76,15 @@
                 equal(editable.find("div > :input").length, 1);
             });
 
+            test("renders input element within the child element container if specified for complex fields", function() {
+                var editable = div.append($('<div data-container-for="foo.bar"/>')).kendoEditable({
+                    fields: "foo.bar",
+                    model: defaultModel,
+                    clearContainer: false
+                });
+                equal(editable.find("div > :input").length, 1);
+            });
+
             test("input name is same as field", function() {
                 var editable = setup({ fields: "foo", model: defaultModel });
 
