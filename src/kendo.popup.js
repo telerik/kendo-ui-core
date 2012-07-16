@@ -34,6 +34,7 @@
         cssPrefix = support.transitions.css,
         TRANSFORM = cssPrefix + "transform",
         extend = $.extend,
+        NS = ".kendoPopup",
         styles = ["font-family",
                    "font-size",
                    "font-stretch",
@@ -67,8 +68,11 @@
                 .addClass("k-popup k-group k-reset")
                 .css({ position : ABSOLUTE })
                 .appendTo(options.appendTo)
-                .bind("mouseenter mouseleave", function(e) {
-                    that._hovered = e.type === "mouseenter";
+                .on("mouseenter" + NS, function() {
+                    that._hovered = true;
+                })
+                .on("mouseleave" + NS, function() {
+                    that._hovered = false;
                 });
 
             that.wrapper = $();
@@ -125,7 +129,7 @@
             };
 
             if (options.toggleTarget) {
-                $(options.toggleTarget).bind(options.toggleEvent, $.proxy(that.toggle, that));
+                $(options.toggleTarget).on(options.toggleEvent + NS, $.proxy(that.toggle, that));
             }
         },
 
@@ -157,6 +161,27 @@
                     hide: true
                 }
             }
+        },
+
+        destroy: function() {
+            var that = this, options = that.options;
+
+            Widget.fn.destroy.call(that);
+
+            that.element.off(NS);
+
+            if (options.toggleTarget) {
+                $(options.toggleTarget).off(NS);
+            }
+
+            DOCUMENT_ELEMENT.unbind(MOUSEDOWN, that._mousedownProxy);
+            WINDOW.unbind(RESIZE_SCROLL, that._resizeProxy);
+
+            if (options.appendTo[0] === document.body) {
+                that.element.remove();
+            }
+
+            kendo.destroy(that.element);
         },
 
         open: function(x, y) {
