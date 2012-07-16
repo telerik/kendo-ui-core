@@ -394,6 +394,20 @@
                 ok(dom.find("option").last().is(":selected"));
             });
 
+            test("order of source and value does not matter", function() {
+                var dom = $('<select data-value-field="name" data-bind="value:selectedItem, source:items"/>');
+
+                var viewModel = kendo.observable({
+                    items: [  { name: "foo" }, { name: "bar" } ],
+                    selectedItem: {}
+                });
+
+                viewModel.set("selectedItem", viewModel.items[1]);
+
+                kendo.bind(dom, viewModel);
+                ok(dom.find("option").last().is(":selected"));
+            });
+
             test("binding select to array of objects", function() {
                 var dom = $('<select data-value-field="name" data-bind="source:items, value:selectedItem"/>');
 
