@@ -55,48 +55,22 @@
         </style>
     </head>
     <body>
-<div id="view">
-<label>First Name: </label>
-<input type="text" data-bind="value: Data.Primary.FirstName" />
-<br />
-<label>Last Name: </label>
-<input type="text" data-bind="value: Data.Primary.LastName" />
-<br />
-<button data-bind="click: Actions.postToServer">Save</button>
-</div>
 
-<script>
-var viewModel = kendo.observable({
-    Data: {
-        Primary: {
-            FirstName: "Ken",
-            LastName: "Griffey"
-        },
-        SomethingElse: {
-            Color: "Blue",
-            Age: 74
-        }
-    },
-    Actions: {
-        postToServer: function() {
-            $.ajax({
-                type: "POST",
-                url: "http://this/doesnt/matter",
-                success: function(msg) {
-                    alert(msg);
-                },
-                data: viewModel.Data.toJSON()
+        <select data-role="dropdownlist" data-value-field="id" data-text-field="value" data-bind="value: selectedValue, source: options"></select>
+
+        <script>
+            var viewModel = new kendo.observable({
+                selectedValue: 2,
+                options: [
+                { id: 1, value: "red" },
+                { id: 2, value: "blue" },
+                { id: 3, value: "green" },
+                ]
             });
-        }
-    }
-});
 
 
+            kendo.bind(document.body, viewModel); //Doesn't work here
 
-$(document).ready(function() {
-    kendo.bind($("#view"), viewModel);
-    console.log(viewModel.Data.toJSON());
-});
-</script>
+        </script>
     </body>
 </html>

@@ -9,6 +9,7 @@
         innerText,
         proxy = $.proxy,
         VALUE = "value",
+        SOURCE = "source",
         CHECKED = "checked",
         CHANGE = "change";
 
@@ -910,10 +911,26 @@
         bind: function(bindings) {
             var nodeName = this.target.nodeName.toLowerCase(),
                 key,
+                hasValue,
+                hasSource,
                 specificBinders = binders[nodeName] || {};
 
             for (key in bindings) {
-                this.applyBinding(key, bindings, specificBinders);
+                if (key == VALUE) {
+                    hasValue = true;
+                } else if (key == SOURCE) {
+                    hasSource = true;
+                } else {
+                    this.applyBinding(key, bindings, specificBinders);
+                }
+            }
+
+            if (hasSource) {
+                this.applyBinding(SOURCE, bindings, specificBinders);
+            }
+
+            if (hasValue) {
+                this.applyBinding(VALUE, bindings, specificBinders);
             }
         },
 
@@ -963,7 +980,7 @@
             for (binding in bindings) {
                 if (binding == VALUE) {
                     hasValue = true;
-                } else if (binding == "source") {
+                } else if (binding == SOURCE) {
                     hasSource = true;
                 } else {
                     that.applyBinding(binding, bindings);
@@ -971,7 +988,7 @@
             }
 
             if (hasSource) {
-                that.applyBinding("source", bindings);
+                that.applyBinding(SOURCE, bindings);
             }
 
             if (hasValue) {
