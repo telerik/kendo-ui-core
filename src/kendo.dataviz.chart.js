@@ -450,7 +450,7 @@
 
                 highlight.show(point);
 
-                $(doc.body).bind(MOUSEMOVE_TRACKING, proxy(chart._mouseMove, chart));
+                $(doc.body).on(MOUSEMOVE_TRACKING, proxy(chart._mouseMove, chart));
             }
         },
 
@@ -480,7 +480,7 @@
                     }
                 }
             } else {
-                $(doc.body).unbind(MOUSEMOVE_TRACKING);
+                $(doc.body).off(MOUSEMOVE_TRACKING);
 
                 delete chart._activePoint;
                 tooltip.hide();
