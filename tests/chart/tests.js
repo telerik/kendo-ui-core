@@ -96,6 +96,10 @@ tests.push(
         title: "chart mvvm"
     },
     {
+        page: "chart/api.html",
+        title: "chart api"
+    },
+    {
         page: "chart/lint.html",
         title: "chart lint"
     }
