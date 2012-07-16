@@ -8,6 +8,7 @@
         PREV = ".k-i-arrow-w",
         NEXT = ".k-i-arrow-e",
         CHANGE = "change",
+        NS = ".kendoPager",
         CLICK = "click",
         KEYDOWN = "keydown",
         DISABLED = "disabled",
@@ -101,8 +102,7 @@
                        '</span>');
                 }
 
-                that._keydownHandler = proxy(that._keydown, that);
-                that.element.on(KEYDOWN, ".k-pager-input input", that._keydownHandler);
+                that.element.on(KEYDOWN + NS, ".k-pager-input input", proxy(that._keydown, that));
             }
 
             if (options.previousNext) {
@@ -137,9 +137,7 @@
                    that.element.find(".k-pager-sizes select").kendoDropDownList();
                 }
 
-                that._changeHandler = proxy(that._change, that);
-
-                that.element.on(CHANGE, ".k-pager-sizes select", that._changeHandler);
+                that.element.on(CHANGE + NS, ".k-pager-sizes select", proxy(that._change, that));
             }
 
             if (options.refresh) {
@@ -148,9 +146,7 @@
                         '"><span class="k-icon k-i-refresh">' + options.messages.refresh + "</span></a>");
                 }
 
-                that._reloadHandler = proxy(that._refreshClick, that);
-
-                that.element.on(CLICK, ".k-pager-refresh", that._reloadHandler);
+                that.element.on(CLICK + NS, ".k-pager-refresh", proxy(that._refreshClick, that));
             }
 
             if (options.info) {
@@ -159,9 +155,7 @@
                 }
             }
 
-            that._clickHandler = proxy(that._click, that);
-
-            that.element.on(CLICK, "a", that._clickHandler);
+            that.element.on(CLICK + NS , "a", proxy(that._click, that));
 
             if (options.autoBind) {
                 that.refresh();
@@ -172,7 +166,6 @@
             var that = this;
 
             Widget.fn.destroy.call(that);
-
             that.element.off(NS);
             that.dataSource.unbind(CHANGE, that._refreshHandler);
         },
