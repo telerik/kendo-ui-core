@@ -75,7 +75,8 @@
                     dataSource: dataSource,
                     owner: {
                         columns: [{ field: "foo" }, { field: "bar", hidden: true}],
-                        bind: $.noop
+                        bind: $.noop,
+                        unbind: $.noop
                     }
                 }, options);
 

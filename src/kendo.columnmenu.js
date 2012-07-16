@@ -9,21 +9,15 @@
         ACTIVE = "k-state-selected",
         ASC = "asc",
         DESC = "desc",
-        CLICK = "click",
         CHANGE = "change",
         POPUP = "kendoPopup",
         FILTERMENU = "kendoFilterMenu",
         MENU = "kendoMenu",
+        NS = ".kendoColumnMenu",
         Widget = ui.Widget;
 
     function trim(text) {
-        if (!String.prototype.trim) {
-            text = text.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
-        } else {
-            text = text.trim();
-        }
-
-        return text.replace(/&nbsp;/gi, "");
+        return $.trim(text).replace(/&nbsp;/gi, "");
     }
 
     var ColumnMenu = Widget.extend({
@@ -36,17 +30,20 @@
             element = that.element;
             options = that.options;
             that.owner = options.owner;
+            that.dataSource = options.dataSource;
 
             that.field = element.attr(kendo.attr("field"));
+
             link = element.find(".k-header-column-menu");
+
             if (!link[0]) {
                 link = element.prepend('<a class="k-header-column-menu" href="#"><span class="k-icon k-i-arrowhead-s"/></a>').find(".k-header-column-menu");
             }
-            that._clickHandler = proxy(that._click, that);
-            link.click(that._clickHandler);
-            that.link = link;
+
+            that.link = link.on("click" + NS, proxy(that._click, that));
 
             that.wrapper = $('<div class="k-column-menu"/>');
+
             that.wrapper.html(kendo.template(template)({
                 ns: kendo.ns,
                 messages: options.messages,
@@ -86,16 +83,27 @@
         destroy: function() {
             var that = this;
 
+            Widget.fn.destroy.call(that);
+
             if (that.filterMenu) {
                 that.filterMenu.destroy();
-                that.filterMenu = null;
             }
 
-            that.wrapper.children().removeData(MENU);
-            that.wrapper.removeData(POPUP).remove();
-            that.link.unbind(CLICK, that._clickHandler);
-            that.element.removeData("kendoColumnMenu");
-            that.columns = null;
+            that.dataSource.unbind("refresh", that._refreshHandler);
+
+            if (that.options.columns) {
+                that.owner.unbind("columnShow", that._updateColumnsMenuHandler);
+                that.owner.unbind("columnHide", that._updateColumnsMenuHandler);
+            }
+
+            that.menu.element.off(NS);
+            that.menu.destroy();
+
+            that.wrapper.off(NS);
+
+            that.popup.destroy();
+
+            that.link.off(NS);
         },
 
         close: function() {
@@ -149,12 +157,13 @@
             var that = this;
 
             if (that.options.sortable) {
-
                 that.refresh();
 
-                that.options.dataSource.bind(CHANGE, proxy(that.refresh, that));
+                that._refreshHandler = proxy(that.refresh, that);
 
-                that.menu.element.delegate(".k-sort-asc, .k-sort-desc", CLICK, function() {
+                that.dataSource.bind(CHANGE, that._refreshHandler);
+
+                that.menu.element.on("click" + NS, ".k-sort-asc, .k-sort-desc", function() {
                     var item = $(this),
                         dir = item.hasClass("k-sort-asc") ? ASC : DESC;
 
@@ -170,7 +179,7 @@
         _sortDataSource: function(item, dir) {
             var that = this,
                 sortable = that.options.sortable,
-                dataSource = that.options.dataSource,
+                dataSource = that.dataSource,
                 idx,
                 length,
                 sort = dataSource.sort() || [];
@@ -204,11 +213,11 @@
 
                 that._updateColumnsMenu();
 
-                that.owner.bind(["columnHide", "columnShow"], function() {
-                    that._updateColumnsMenu();
-                });
+                that._updateColumnsMenuHandler = proxy(that._updateColumnsMenu, that);
 
-                that.wrapper.delegate("[type=checkbox]", CHANGE , function(e) {
+                that.owner.bind(["columnHide", "columnShow"], that._updateColumnsMenuHandler);
+
+                that.wrapper.on(CHANGE + NS, "[type=checkbox]", function(e) {
                     var input = $(this),
                         index,
                         column,
