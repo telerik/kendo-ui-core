@@ -190,10 +190,7 @@
         setDataSource: function(dataSource) {
             var chart = this;
 
-            if (chart.dataSource) {
-                chart.dataSource.unbind(CHANGE, chart._dataChangeHandler);
-            }
-
+            chart.dataSource.unbind(CHANGE, chart._dataChangeHandler);
             chart.dataSource = dataSource;
 
             dataSource.bind(CHANGE, chart._dataChangeHandler);
@@ -267,12 +264,7 @@
             var chart = this;
 
             applyDefaults(chart.options);
-
-            if (chart.dataSource) {
-                chart._onDataChanged();
-            } else {
-                chart._redraw();
-            }
+            chart._onDataChanged();
         },
 
         redraw: function() {
@@ -584,10 +576,7 @@
                 dataSource = chart.dataSource;
 
             chart.wrapper.off(ns);
-
-            if (dataSource) {
-                dataSource.unbind(CHANGE, chart._dataChangeHandler);
-            }
+            dataSource.unbind(CHANGE, chart._dataChangeHandler);
 
             Widget.fn.destroy.call(chart);
         }
