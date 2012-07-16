@@ -125,7 +125,17 @@
                 var value = that.gradients.value;
 
                 value.forEach(function (currentValue, index) {
-                    var sample = currentValue.gradientElement = $("<div class='sample'><div class='gradient-view'></div></div>");
+                    var rotation = currentValue.rotationElement = $("<div class='rotation-view'></div>")
+                                                                    .appendTo(that.popup.element),
+                        sample = currentValue.gradientElement = $("<div class='sample'><div class='gradient-view'></div></div><br />");
+
+                    rotation
+                        .css(support.transforms.css + "transform", "rotate(" + -currentValue.angle + "deg)")
+                        .bind("click", function (e) {
+                            that.gradients.setAngle(index, currentValue.angle + 45);
+                            rotation.css(support.transforms.css + "transform", "rotate(" + -currentValue.angle + "deg)");
+                            currentValue.stops[0].dragStop._updateConnected();
+                        });
 
                     sample.children(".gradient-view").css({
                         backgroundColor: bgcolor.alpha() ? bgcolor.get() : "#fff",
