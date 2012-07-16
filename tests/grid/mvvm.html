@@ -277,9 +277,18 @@
                 equal(observable.calls("rootHandler"), 1);
             });
 
+            test("binds detail template from the options", function() {
+                var dom = $('<div data-role="grid" data-detail-template="detail-template" />');
+
+                kendo.bind(dom, {});
+                ok(dom.data("kendoGrid").options.detailTemplate);
+            });
 
         </script>
 
+        <script id="detail-template" type="text/x-kendo-template">
+            <strong>#:text#</strong>
+        </script>
         <script id="template" type="text/x-kendo-template">
             <tr><td><strong>#:text#</strong></td></tr>
         </script>
