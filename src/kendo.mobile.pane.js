@@ -74,8 +74,6 @@
             var that = this,
                 history = that.history;
 
-            that.trigger(NAVIGATE, {url: url});
-
             if (url === BACK) {
                 history.pop();
                 url = history[history.length - 1];
@@ -83,6 +81,7 @@
                 that.history.push(url);
             }
 
+            that.trigger(NAVIGATE, {url: url});
             that.viewEngine.showView(url, transition);
         },
 
