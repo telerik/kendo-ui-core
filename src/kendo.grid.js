@@ -1057,11 +1057,16 @@
                 cancelText,
                 attr,
                 editable = that.options.editable,
+                template = editable.template,
                 options = isPlainObject(editable) ? editable.window : {},
                 settings = extend({}, kendo.Template, that.options.templateSettings);
 
-            if (editable.template) {
-                html += (kendo.template(window.unescape(editable.template), settings))(model);
+            if (template) {
+                if (typeof template === STRING) {
+                    template = window.unescape(template);
+                }
+
+                html += (kendo.template(template, settings))(model);
 
                 for (idx = 0, length = that.columns.length; idx < length; idx++) {
                     column = that.columns[idx];

@@ -193,6 +193,16 @@
                 equal(container.find("div:first").text(), "bar");
             });
 
+            test("custom template as function", function() {
+                var grid = setup({ editable: { mode: "popup",
+                        template: kendo.template("foo") } });
+
+                grid.editRow(table.find("tr:first"));
+
+                var container = grid._editContainer.children("div.k-edit-form-container");
+                equal(container.text(), "fooUpdateCancel"); // includes the text of the buttons
+            });
+
             test("update and cancel buttons are added if template is set", function() {
                 var grid = setup({ editable: { mode: "popup", template:"<div>#=foo#</div>" } });
 
