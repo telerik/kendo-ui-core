@@ -350,6 +350,49 @@
 
                 ok(called, "Filter menu is not destroyed");
             });
+
+            test("hiding column after reorder", function() {
+                var colIndex;
+                var menu = setup({
+                    owner: {
+                        columns: [{ field: "foo", hidden: false }, { field: "bar", hidden: false }],
+                        hideColumn: function() {
+                            colIndex = arguments[0];
+                        }
+                    }
+                });
+                var owner = menu.owner;
+
+                var tmp = owner.columns[0];
+                owner.columns[0] = owner.columns[1];
+                owner.columns[1] = tmp;
+
+                menu.wrapper.find("[type=checkbox]:first").click();
+
+                strictEqual(colIndex, 1);
+            });
+
+            test("hiding column by title after reorder", function() {
+                var colIndex;
+                var menu = setup({
+                    owner: {
+                        columns: [{ field: "foo", hidden: false }, { field: "bar", hidden: false }, { title: "baz" }],
+                        hideColumn: function() {
+                            colIndex = arguments[0];
+                        }
+                    }
+                });
+                var owner = menu.owner;
+
+                var tmp = owner.columns[0];
+                owner.columns[0] = owner.columns[2];
+                owner.columns[2] = tmp;
+
+                menu.wrapper.find("[type=checkbox]:last").click();
+
+                strictEqual(colIndex, 0);
+            });
+
         </script>
     </body>
 </html>

@@ -752,8 +752,8 @@
 
         reorderColumn: function(destIndex, column) {
             var that = this,
-                sourceIndex = $.inArray(column, that.columns),
-                colSourceIndex = $.inArray(column, visibleColumns(that.columns)),
+                sourceIndex = inArray(column, that.columns),
+                colSourceIndex = inArray(column, visibleColumns(that.columns)),
                 rows,
                 idx,
                 length,
