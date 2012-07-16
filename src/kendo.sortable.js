@@ -15,7 +15,10 @@
 
             Widget.fn.init.call(that, element, options);
 
-            that.dataSource = that.options.dataSource.bind("change", proxy(that.refresh, that));
+            that._refreshHandler = proxy(that.refresh, that);
+
+            that.dataSource = that.options.dataSource.bind("change", that._refreshHandler);
+
             link = that.element.find(TLINK);
 
             if (!link[0]) {
@@ -23,13 +26,24 @@
             }
 
             that.link = link;
-            that.element.click(proxy(that._click, that));
+
+            that.element.on("click" + NS, proxy(that._click, that));
         },
 
         options: {
             name: "Sortable",
             mode: SINGLE,
             allowUnsort: true
+        },
+
+        destroy: function() {
+            var that = this;
+
+            Widget.fn.destroy.call(that);
+
+            that.element.off(NS);
+
+            that.dataSource.unbind("change", that._refreshHandler);
         },
 
         refresh: function() {
