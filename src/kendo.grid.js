@@ -533,7 +533,8 @@
             height: null,
             resizable: false,
             reorderable: false,
-            columnMenu: false
+            columnMenu: false,
+            detailTemplate: null
         },
 
         setOptions: function(options) {
@@ -2443,7 +2444,7 @@
         _hasDetails: function() {
             var that = this;
 
-            return that.options.detailTemplate !== undefined  || (that._events[DETAILINIT] || []).length;
+            return that.options.detailTemplate !== null  || (that._events[DETAILINIT] || []).length;
         },
 
         _details: function() {
