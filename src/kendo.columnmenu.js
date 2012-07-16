@@ -130,7 +130,7 @@
 
             return map(menuColumns, function(col) {
                 return {
-                    field: col.field,
+                    field: col.field || col.title,
                     title: col.title || col.field,
                     hidden: col.hidden,
                     index: inArray(col, columns)
@@ -210,7 +210,15 @@
 
                 that.wrapper.delegate("[type=checkbox]", CHANGE , function(e) {
                     var input = $(this),
-                        index = parseInt(input.attr(kendo.attr("index")), 10);
+                        index,
+                        column,
+                        columns = that.owner.columns,
+                        field = input.attr(kendo.attr("field"));
+
+                     column = grep(columns, function(column) {
+                        return column.field == field || column.title == field;
+                    })[0];
+                    index = inArray(column, columns);
 
                     if (input.is(":checked")) {
                         that.owner.showColumn(index);
@@ -222,15 +230,16 @@
         },
 
         _updateColumnsMenu: function() {
-            var columns = this._ownerColumns(),
-                allselector = map(columns, function(field) {
-                    return "[" + kendo.attr("index") + "=" + field.index+ "]";
+            var attr = "[" + kendo.attr("field") + "=",
+                columns = this._ownerColumns(),
+                allselector = map(columns, function(col) {
+                    return attr + col.field + "]";
                 }).join(","),
                 visible = grep(columns, function(field) {
                     return !field.hidden;
                 }),
-                selector = map(visible, function(field) {
-                    return "[" + kendo.attr("index") + "=" + field.index+ "]";
+                selector = map(visible, function(col) {
+                    return attr + col.field + "]";
                 }).join(",");
 
             this.wrapper.find(allselector).attr("checked", false);
