@@ -715,7 +715,7 @@
             if (that.options.reorderable) {
                 that._draggableInstance = that.thead.kendoDraggable({
                     group: kendo.guid(),
-                    filter: ".k-header:not(.k-group-cell,.k-hierarchy-cell):visible[" + kendo.attr("field") + "]",
+                    filter: ".k-header:not(.k-group-cell,.k-hierarchy-cell):visible",
                     hint: function(target) {
                         return $('<div class="k-header k-drag-clue" />')
                             .css({
@@ -726,7 +726,7 @@
                                 paddingTop: target.css("paddingTop"),
                                 paddingBottom: target.css("paddingBottom")
                             })
-                            .html(target.attr(kendo.attr("title")) || target.attr(kendo.attr("field")))
+                            .html(target.attr(kendo.attr("title")) || target.attr(kendo.attr("field")) || target.text())
                             .prepend('<span class="k-icon k-drag-status k-denied" />');
                     }
                 }).data("kendoDraggable");
@@ -739,13 +739,16 @@
                 that.thead.kendoReorderable({
                     draggable: that._draggableInstance,
                     change: function(e) {
-                        var column = visibleColumns(that.columns)[e.oldIndex];
+                        var reorderableColumns = visibleColumns(that.columns),
+                        newIndex = inArray(reorderableColumns[e.newIndex], that.columns),
+                        column = reorderableColumns[e.oldIndex];
+
                         that.trigger(COLUMNREORDER, {
-                            newIndex: e.newIndex,
-                            oldIndex: e.oldIndex,
+                            newIndex: newIndex,
+                            oldIndex: inArray(column, that.columns),
                             column: column
                         });
-                        that.reorderColumn(e.newIndex, column);
+                        that.reorderColumn(newIndex, column);
                     }
                 });
             }
