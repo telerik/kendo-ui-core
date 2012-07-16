@@ -32,7 +32,7 @@
                 }
 
                 // ------------------------------------------------------------
-                module("Refresh / Redraw", {
+                module("refresh / redraw", {
                     setup: function() {
                         createChart({series: [{}]});
                     }
@@ -99,6 +99,34 @@
 
                     ok(chart.element.children().length > 0);
                 });
+
+                // ------------------------------------------------------------
+                module("destroy", {
+                    setup: function() {
+                        createChart({series: [{}]});
+                    }
+                });
+
+                test("removes data", function() {
+                    chart.destroy();
+                    ok(!$("#container").data("kendoChart"));
+                });
+
+                test("unbinds click from DOM container", function() {
+                    chart.destroy();
+                    ok(!($("#container").data("events") || {}).click);
+                });
+
+                test("unbinds mouseOver from DOM container", function() {
+                    chart.destroy();
+                    ok(!($("#container").data("events") || {}).mouseover);
+                });
+
+                test("unbinds DataSource change handler", function() {
+                    chart.destroy();
+                    equals(chart.dataSource._events["change"].length, 0);
+                });
+
             })();
         </script>
 

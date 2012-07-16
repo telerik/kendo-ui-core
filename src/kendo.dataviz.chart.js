@@ -377,10 +377,11 @@
 
         _attachEvents: function() {
             var chart = this,
+                ns = "." + chart.key,
                 element = chart.element;
 
-            element.bind(CLICK, proxy(chart._click, chart));
-            element.bind(MOUSEOVER, proxy(chart._mouseOver, chart));
+            element.on(CLICK + ns, proxy(chart._click, chart));
+            element.on(MOUSEOVER + ns, proxy(chart._mouseOver, chart));
         },
 
         _getChartElement: function(e) {
@@ -575,6 +576,20 @@
                     }
                 }
             }
+        },
+
+        destroy: function() {
+            var chart = this,
+                ns = "." + chart.key,
+                dataSource = chart.dataSource;
+
+            chart.wrapper.off(ns);
+
+            if (dataSource) {
+                dataSource.unbind(CHANGE, chart._dataChangeHandler);
+            }
+
+            Widget.fn.destroy.call(chart);
         }
     });
 
