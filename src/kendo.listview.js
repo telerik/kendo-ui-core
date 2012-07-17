@@ -17,6 +17,7 @@
         REMOVE = "remove",
         SAVE = "save",
         CLICK = "click",
+        NS = ".kendoListView",
         proxy = $.proxy,
         progress = kendo.ui.progress,
         DataSource = kendo.data.DataSource;
@@ -88,13 +89,19 @@
             }
         },
 
+        _unbindDataSource: function() {
+            var that = this;
+
+            that.dataSource.unbind(CHANGE, that._refreshHandler)
+                            .unbind(REQUESTSTART, that._requestStartHandler)
+                            .unbind(ERROR, that._errorHandler);
+        },
+
         _dataSource: function() {
             var that = this;
 
             if (that.dataSource && that._refreshHandler) {
-                that.dataSource.unbind(CHANGE, that._refreshHandler)
-                                .unbind(REQUESTSTART, that._requestStartHandler)
-                                .unbind(ERROR, that._errorHandler);
+                that._unbindDataSource();
             } else {
                 that._refreshHandler = proxy(that.refresh, that);
                 that._requestStartHandler = proxy(that._requestStart, that);
@@ -185,7 +192,7 @@
                     pagerId: null
                 });
 
-                $("#" + pagerId).kendoPager(settings);
+                that.pager = new kendo.ui.Pager($("#" + pagerId), settings);
             }
         },
 
@@ -208,7 +215,7 @@
                 });
 
                 if (navigatable) {
-                    that.element.keydown(function(e) {
+                    that.element.on("keydown" + NS, function(e) {
                         if (e.keyCode === keys.SPACEBAR) {
                             current = that.current();
                             e.preventDefault();
@@ -263,21 +270,20 @@
 
             if (navigatable) {
                 element.attr("tabIndex", Math.max(element.attr("tabIndex") || 0, 0));
-                element.bind({
-                    focus: function() {
+                element.on("focus" + NS, function() {
                         var current = that._current;
                         if(current && current.is(":visible")) {
                             current.addClass(FOCUSED);
                         } else {
                             currentProxy(element.find(FOCUSSELECTOR).first());
                         }
-                    },
-                    focusout: function() {
+                    })
+                    .on("focusout" + NS, function() {
                         if (that._current) {
                             that._current.removeClass(FOCUSED);
                         }
-                    },
-                    keydown: function(e) {
+                    })
+                    .on("keydown" + NS, function(e) {
                         var key = e.keyCode,
                             current = that.current();
 
@@ -292,10 +298,9 @@
                             that._current = null;
                             that.dataSource.page(that.dataSource.page() + 1);
                         }
-                    }
-                });
+                    });
 
-                element.addClass(FOCUSABLE).delegate("." + FOCUSABLE + FOCUSSELECTOR, "mousedown", clickCallback);
+                element.addClass(FOCUSABLE).on("mousedown" + NS, "." + FOCUSABLE + FOCUSSELECTOR, clickCallback);
             }
        },
 
@@ -419,29 +424,52 @@
        },
 
        _crudHandlers: function() {
-           var that = this;
+           var that = this,
+               clickNS = CLICK + NS;
 
-           that.element.on(CLICK, ".k-edit-button", function(e) {
+           that.element.on(clickNS, ".k-edit-button", function(e) {
                var item = $(this).closest("[" + kendo.attr("uid") + "]");
                that.edit(item);
                e.preventDefault();
            });
 
-           that.element.on(CLICK, ".k-delete-button", function(e) {
+           that.element.on(clickNS, ".k-delete-button", function(e) {
                var item = $(this).closest("[" + kendo.attr("uid") + "]");
                that.remove(item);
                e.preventDefault();
            });
 
-           that.element.on(CLICK, ".k-update-button", function(e) {
+           that.element.on(clickNS, ".k-update-button", function(e) {
                that.save();
                e.preventDefault();
            });
 
-           that.element.on(CLICK, ".k-cancel-button", function(e) {
+           that.element.on(clickNS, ".k-cancel-button", function(e) {
                that.cancel();
                e.preventDefault();
            });
+       },
+
+       destroy: function() {
+           var that = this;
+
+           Widget.fn.destroy.call(that);
+
+           that._unbindDataSource();
+
+           that._destroyEditable();
+
+           that.element.off(NS);
+
+           if (that.pager) {
+               that.pager.destroy();
+           }
+
+           if (that.selectable) {
+               that.selectable.destroy();
+           }
+
+           kendo.destroy(that.element);
        }
     });
 
