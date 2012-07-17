@@ -1074,6 +1074,12 @@ p#copy
     border-radius: 8px;
 }
 
+.k-block
+{
+    width: 200px;
+    height: 100px;
+}
+
 /*widget grid*/
 
 .widgetGrid .wideCol:first-child,
