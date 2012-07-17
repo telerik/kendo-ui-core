@@ -24,6 +24,10 @@ tests.push(
         title: "upload mvvm"
     },
     {
+        page: "upload/api.html",
+        title: "upload api"
+    },
+    {
         page: "upload/lint.html",
         title: "upload lint"
     }
