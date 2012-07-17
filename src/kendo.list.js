@@ -81,6 +81,10 @@
 
             that.popup.destroy();
 
+            if (that._form) {
+                that._form.off("reset", that._resetHandler);
+            }
+
             Widget.fn.destroy.call(that);
         },
 
@@ -634,14 +638,18 @@
 
         _reset: function() {
             var that = this,
-                element = that.element;
+                element = that.element,
+                form = element.closest("form");
 
-            element.closest("form")
-                   .bind("reset", function() {
-                       setTimeout(function() {
-                            that.value(element[0].value);
-                       });
-                   });
+            if (form[0]) {
+                that._resetHandler = function() {
+                    setTimeout(function() {
+                        that.value(element[0].value);
+                    });
+                };
+
+                that._form = form.on("reset", that._resetHandler);
+            }
         },
 
         _cascade: function() {
