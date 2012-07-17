@@ -27,8 +27,12 @@
 
             Select.fn.init.call(that, element, options);
 
+            that._focusHandler = function() {
+                that.wrapper.focus();
+            };
+
             options = that.options;
-            element = that.element;
+            element = that.element.on("focus" + ns, that._focusHandler);
 
             that._reset();
 
@@ -116,6 +120,7 @@
             var that = this;
 
             that.wrapper.off(ns);
+            that.element.off(ns);
             that._inputWrapper.off(ns);
 
             Select.fn.destroy.call(that);

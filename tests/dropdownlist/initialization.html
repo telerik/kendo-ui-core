@@ -717,6 +717,17 @@
 
                 equal(dropdown.value(), "Item2");
             });
+
+            test("Hidden input focuses the wrapper", function() {
+                var data = [{text: 1, value: 1}, {text:2, value:2}],
+                    dropdownlist = new DropDownList(input, {
+                         dataSource: data
+                    });
+
+                input.focus();
+
+                equal(document.activeElement, dropdownlist.wrapper[0]);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
