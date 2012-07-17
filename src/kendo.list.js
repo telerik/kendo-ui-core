@@ -23,7 +23,9 @@
 
     var List = Widget.extend({
         init: function(element, options) {
-            var that = this, id, list;
+            var that = this,
+                ns = that.ns,
+                list, id;
 
             Widget.fn.init.call(that, element, options);
 
@@ -31,13 +33,13 @@
 
             that.ul = $('<ul unselectable="on" class="k-list k-reset"/>')
                         .css({ overflow: kendo.support.touch ? "": "auto" })
-                        .delegate(LI, "mouseenter", function() { $(this).addClass(HOVER); })
-                        .delegate(LI, "mouseleave", function() { $(this).removeClass(HOVER); })
-                        .delegate(LI, CLICK, proxy(that._click, that));
+                        .on("mouseenter" + ns, LI, function() { $(this).addClass(HOVER); })
+                        .on("mouseleave" + ns, LI, function() { $(this).removeClass(HOVER); })
+                        .on(CLICK + ns, LI, proxy(that._click, that));
 
             that.list = list = $("<div class='k-list-container'/>")
                         .append(that.ul)
-                        .mousedown(function(e) {
+                        .on("mousedown" + ns, function(e) {
                             e.preventDefault();
                         });
 
@@ -45,8 +47,6 @@
             if (id) {
                 list.attr(ID, id + "-list");
             }
-
-            $(document.documentElement).bind("mousedown", proxy(that._mousedown, that));
         },
 
         items: function() {
@@ -70,6 +70,18 @@
             } else {
                 return that._current;
             }
+        },
+
+        destroy: function() {
+            var that = this,
+                ns = that.ns;
+
+            that.ul.off(ns);
+            that.list.off(ns);
+
+            that.popup.destroy();
+
+            Widget.fn.destroy.call(that);
         },
 
         dataItem: function(index) {

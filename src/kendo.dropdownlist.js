@@ -22,6 +22,7 @@
                 index = options && options.index,
                 optionLabel, useOptionLabel, text;
 
+            that.ns = ns;
             options = $.isArray(options) ? { dataSource: options } : options;
 
             Select.fn.init.call(that, element, options);
@@ -113,8 +114,6 @@
 
         destroy: function() {
             var that = this;
-
-            that.popup.destroy();
 
             that.wrapper.off(ns);
             that._inputWrapper.off(ns);

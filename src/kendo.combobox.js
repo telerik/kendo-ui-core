@@ -28,6 +28,8 @@
         init: function(element, options) {
             var that = this, wrapper, text;
 
+            that.ns = ns;
+
             options = $.isArray(options) ? { dataSource: options } : options;
 
             Select.fn.init.call(that, element, options);
@@ -122,6 +124,7 @@
             "dataBinding",
             "dataBound"
         ],
+
         setOptions: function(options) {
             Select.fn.setOptions.call(this, options);
 
@@ -144,6 +147,14 @@
             Select.fn.current.call(that, li);
         },
 
+        destroy: function() {
+            var that = this;
+
+            that.input.off(ns);
+            that._inputWrapper.off(ns);
+
+            Select.fn.destroy.call(that);
+        },
 
         enable: function(enable) {
             var that = this,
