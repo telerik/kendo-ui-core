@@ -2,6 +2,7 @@
     var kendo = window.kendo,
         Widget = kendo.ui.Widget,
         proxy = $.proxy,
+        NS = ".kendoGroupable",
         indicatorTmpl = kendo.template('<div class="k-group-indicator" data-#=data.ns#field="${data.field}" data-#=data.ns#title="${data.title || ""}" data-#=data.ns#dir="${data.dir || "asc"}">' +
                 '<a href="\\#" class="k-link">' +
                     '<span class="k-icon k-si-arrow-${(data.dir || "asc") == "asc" ? "n" : "s"}">(sorted ${(data.dir || "asc") == "asc" ? "ascending": "descending"})</span>' +
@@ -109,11 +110,11 @@
                     },
                     drag: proxy(that._drag, that)
                 })
-                .delegate(".k-button", "click", function(e) {
+                .on("click" + NS, ".k-button", function(e) {
                     e.preventDefault();
                     that._removeIndicator($(this).parent());
                 })
-                .delegate(".k-link", "click", function(e) {
+                .on("click" + NS,".k-link", function(e) {
                     var current = $(this).parent(),
                         newIndicator = that.buildIndicator(current.attr(kendo.attr("field")), current.attr(kendo.attr("title")), current.attr(kendo.attr("dir")) == "asc" ? "desc" : "asc");
 
@@ -172,6 +173,13 @@
 
         destroy: function() {
             var that = this;
+
+            Widget.fn.destroy.call(that);
+
+            that.groupContainer
+                .off(NS)
+                .kendoDraggable("destroy");
+
             if (that.dataSource && that._refreshHandler) {
                 that.dataSource.unbind("change", that._refreshHandler);
             }
