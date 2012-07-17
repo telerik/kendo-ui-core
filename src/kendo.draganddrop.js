@@ -32,6 +32,9 @@
         DRAGLEAVE = "dragleave",
         DROP = "drop",
 
+        // Event namespace
+        NS = ".kendoDrag",
+
         // Drag events
         START = "start",
         MOVE = "move",
@@ -163,15 +166,15 @@
             });
 
             element
-                .on(START_EVENTS, filter, proxy(that._start, that))
-                .on("dragstart", filter, kendo.preventDefault);
+                .on(START_EVENTS + NS, filter, proxy(that._start, that))
+                .on("dragstart" + NS, filter, kendo.preventDefault);
 
             if (pointers) {
                 element.css("-ms-touch-action", "pinch-zoom double-tap-zoom");
             }
 
             if (!options.allowSelection) {
-                var args = ["mousedown selectstart", filter, preventTrigger];
+                var args = ["mousedown" + NS + " selectstart" + NS, filter, preventTrigger];
 
                 if (filter instanceof $) {
                     args.splice(2, 0, null);
@@ -196,6 +199,10 @@
             MOVE,
             END,
             CANCEL], options);
+        },
+
+        destroy: function() {
+            this.element.off(NS);
         },
 
         capture: function() {
@@ -686,7 +693,7 @@
                 cancel: proxy(that._cancel, that)
             });
 
-            that.destroy = proxy(that._destroy, that);
+            that._destroyHandler = proxy(that._destroy, that);
             that.captureEscape = function(e) {
                 if (e.keyCode === kendo.keys.ESC) {
                     that._trigger(DRAGCANCEL, {event: e});
@@ -746,7 +753,7 @@
 
             if (that._trigger(DRAGSTART, e)) {
                 that.drag.cancel();
-                that.destroy();
+                that._destroy();
             }
 
             $(document).on(KEYUP, that.captureEscape);
@@ -833,9 +840,9 @@
             var that = this;
 
             if (that.hint && !that.dropped) {
-                that.hint.animate(that.currentTargetOffset, "fast", that.destroy);
+                that.hint.animate(that.currentTargetOffset, "fast", that._destroyHandler);
             } else {
-                that.destroy();
+                that._destroy();
             }
         },
 
@@ -888,6 +895,16 @@
 
                 callback(result);
             }
+        },
+
+        destroy: function() {
+            var that = this;
+
+            Widget.fn.destroy.call(that);
+
+            that._destroy();
+
+            that.drag.destroy();
         },
 
         _destroy: function() {
