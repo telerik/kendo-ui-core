@@ -363,7 +363,7 @@
 
             if (isPlainObject(command) && command.click) {
                 commandName = command.name || command.text;
-                container.on(CLICK, "a.k-grid-" + commandName, { commandName: commandName }, proxy(command.click, context));
+                container.on(CLICK, "a.k-grid-" + (commandName || "").replace(/\s/g, ""), { commandName: commandName }, proxy(command.click, context));
             }
         }
     }
@@ -1359,7 +1359,7 @@
         _createButton: function(command) {
             var template = command.template || COMMANDBUTTONTMPL,
                 commandName = typeof command === STRING ? command : command.name || command.text,
-                options = { className: "k-grid-" + commandName, text: commandName, imageClass: "", attr: "", iconClass: "" };
+                options = { className: "k-grid-" + (commandName || "").replace(/\s/g, ""), text: commandName, imageClass: "", attr: "", iconClass: "" };
 
             if (!commandName && !(isPlainObject(command) && command.template))  {
                 throw new Error("Custom commands should have name specified");
