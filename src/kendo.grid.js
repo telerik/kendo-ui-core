@@ -2107,6 +2107,8 @@
             if (that.options.scrollable) {
                 html = $('<div class="k-grid-footer"><div class="k-grid-footer-wrap"><table cellspacing="0"><tbody>' + footerRow + '</tbody></table></div></div>');
                 that._appendCols(html.find("table"));
+                html.css("padding-right", kendo.support.scrollbar()); // Update inner fix.
+
                 return html;
             }
 
