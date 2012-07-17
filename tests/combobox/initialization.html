@@ -434,11 +434,22 @@
                          dataSource: data
                     });
 
-                input.focus();
+                combobox.input.focus();
                 combobox.open();
                 combobox.list.mousedown();
 
                 equal(document.activeElement.nodeName, "INPUT");
+            });
+
+            test("Hidden input focuses visible one", function() {
+                var data = [{text: 1, value: 1}, {text:2, value:2}],
+                    combobox = new ComboBox(input, {
+                         dataSource: data
+                    });
+
+                input.focus();
+
+                equal(document.activeElement, combobox.input[0]);
             });
 
             test("resetting dataSource detaches the previouse events", function() {

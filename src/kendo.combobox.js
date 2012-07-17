@@ -7,19 +7,20 @@
         placeholderSupported = support.placeholder,
         removeFiltersForField = Select.removeFiltersForField,
         keys = kendo.keys,
-        CLICK = support.touch ? "touchend" : "click",
+        ns = ".kendoComboBox",
+        CLICK = (support.touch ? "touchend" : "click") + ns,
         ATTRIBUTE = "disabled",
         CHANGE = "change",
         DEFAULT = "k-state-default",
         DISABLED = "k-state-disabled",
         FOCUSED = "k-state-focused",
-        MOUSEDOWN = "mousedown",
+        MOUSEDOWN = "mousedown" + ns,
         SELECT = "select",
         STATE_SELECTED = "k-state-selected",
         STATE_FILTER = "filter",
         STATE_ACCEPT = "accept",
         STATE_REBIND = "rebind",
-        HOVEREVENTS = "mouseenter mouseleave",
+        HOVEREVENTS = "mouseenter" + ns + " mouseleave" + ns,
         NULL = null,
         proxy = $.proxy;
 
@@ -27,14 +28,18 @@
         init: function(element, options) {
             var that = this, wrapper, text;
 
+            that.ns = ns;
+
             options = $.isArray(options) ? { dataSource: options } : options;
 
             Select.fn.init.call(that, element, options);
 
+            that._focusHandler = function() {
+                that.input.focus();
+            };
+
             options = that.options;
-            element = that.element.focus(function() {
-                        that.input.focus();
-                      });
+            element = that.element.on("focus" + ns, that._focusHandler);
 
             options.placeholder = options.placeholder || element.attr("placeholder");
 
@@ -56,20 +61,19 @@
 
             wrapper = that._inputWrapper;
 
-            that.input.bind({
-                keydown: proxy(that._keydown, that),
-                focus: function() {
+            that.input
+                .on("keydown" + ns, proxy(that._keydown, that))
+                .on("focus" + ns, function() {
                     wrapper.addClass(FOCUSED);
                     that._placeholder(false);
-                },
-                blur: function() {
+                })
+                .on("blur" + ns, function() {
                     wrapper.removeClass(FOCUSED);
                     clearTimeout(that._typing);
                     that.text(that.text());
                     that._placeholder();
                     that._blur();
-                }
-            });
+                });
 
             that._oldIndex = that.selectedIndex = -1;
             that._old = that.value();
@@ -124,6 +128,7 @@
             "dataBinding",
             "dataBound"
         ],
+
         setOptions: function(options) {
             Select.fn.setOptions.call(this, options);
 
@@ -146,12 +151,21 @@
             Select.fn.current.call(that, li);
         },
 
+        destroy: function() {
+            var that = this;
+
+            that.input.off(ns);
+            that.element.off(ns);
+            that._inputWrapper.off(ns);
+
+            Select.fn.destroy.call(that);
+        },
 
         enable: function(enable) {
             var that = this,
                 input = that.input.add(that.element),
-                wrapper = that._inputWrapper.unbind(HOVEREVENTS),
-                arrow = that._arrow.parent().unbind(CLICK + " " + MOUSEDOWN);
+                wrapper = that._inputWrapper.off(HOVEREVENTS),
+                arrow = that._arrow.parent().off(CLICK + " " + MOUSEDOWN);
 
             if (enable === false) {
                 wrapper
@@ -163,11 +177,11 @@
                 wrapper
                     .removeClass(DISABLED)
                     .addClass(DEFAULT)
-                    .bind(HOVEREVENTS, that._toggleHover);
+                    .on(HOVEREVENTS, that._toggleHover);
 
                 input.removeAttr(ATTRIBUTE);
-                arrow.bind(CLICK, function() { that.toggle(); })
-                     .bind(MOUSEDOWN, function(e) { e.preventDefault(); });
+                arrow.on(CLICK, function() { that.toggle(); })
+                     .on(MOUSEDOWN, function(e) { e.preventDefault(); });
             }
         },
 

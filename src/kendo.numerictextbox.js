@@ -11,13 +11,15 @@
         DISABLED = "disabled",
         INPUT = "k-input",
         SPIN = "spin",
+        ns = ".kendoNumericTextBox",
         TOUCHEND = "touchend",
-        MOUSEDOWN = touch ? "touchstart" : "mousedown",
-        MOUSEUP = touch ? "touchmove " + TOUCHEND : "mouseup mouseleave",
+        MOUSELEAVE = "mouseleave" + ns,
+        MOUSEDOWN = (touch ? "touchstart": "mousedown") + ns,
+        MOUSEUP = touch ? "touchmove" + ns + " " + TOUCHEND + ns : "mouseup" + ns + " " + MOUSELEAVE,
+        HOVEREVENTS = "mouseenter" + ns + " " + MOUSELEAVE,
         DEFAULT = "k-state-default",
         FOCUSED = "k-state-focused",
         HOVER = "k-state-hover",
-        HOVEREVENTS = "mouseenter mouseleave",
         POINT = ".",
         SELECTED = "k-state-selected",
         STATEDISABLED = "k-state-disabled",
@@ -39,26 +41,18 @@
 
              options = that.options;
              element = that.element.addClass(INPUT)
-                           .bind({
-                               keydown: proxy(that._keydown, that),
-                               paste: proxy(that._paste, that),
-                               blur: proxy(that._focusout, that)
-                           });
-
-             element.closest("form")
-                    .bind("reset", function() {
-                        setTimeout(function() {
-                            that.value(element[0].value);
-                        });
-                    });
+                           .on("keydown" + ns, proxy(that._keydown, that))
+                           .on("paste" + ns, proxy(that._paste, that))
+                           .on("blur" + ns, proxy(that._focusout, that));
 
              options.placeholder = options.placeholder || element.attr("placeholder");
 
+             that._reset();
              that._wrapper();
              that._arrows();
              that._input();
 
-             that._text.focus(proxy(that._click, that));
+             that._text.on("focus" + ns, proxy(that._click, that));
 
              min = that.min(element.attr("min"));
              max = that.max(element.attr("max"));
@@ -110,9 +104,9 @@
         enable: function(enable) {
             var that = this,
                 text = that._text.add(that.element),
-                wrapper = that._inputWrapper.unbind(HOVEREVENTS),
-                upArrow = that._upArrow.unbind(MOUSEDOWN),
-                downArrow = that._downArrow.unbind(MOUSEDOWN);
+                wrapper = that._inputWrapper.off(HOVEREVENTS),
+                upArrow = that._upArrow.off(MOUSEDOWN),
+                downArrow = that._downArrow.off(MOUSEDOWN);
 
             that._toggleText(true);
 
@@ -126,22 +120,39 @@
                 wrapper
                     .addClass(DEFAULT)
                     .removeClass(STATEDISABLED)
-                    .bind(HOVEREVENTS, that._toggleHover);
+                    .on(HOVEREVENTS, that._toggleHover);
 
                 text.removeAttr(DISABLED);
 
-                upArrow.bind(MOUSEDOWN, function(e) {
+                upArrow.on(MOUSEDOWN, function(e) {
                     e.preventDefault();
                     that._spin(1);
                     that._upArrow.addClass(SELECTED);
                 });
 
-                downArrow.bind(MOUSEDOWN, function(e) {
+                downArrow.on(MOUSEDOWN, function(e) {
                     e.preventDefault();
                     that._spin(-1);
                     that._downArrow.addClass(SELECTED);
                 });
             }
+        },
+
+        destroy: function() {
+            var that = this;
+
+            that.element
+                .add(that._text)
+                .add(that._upArrow)
+                .add(that._downArrow)
+                .add(that._inputWrapper)
+                .off(ns);
+
+            if (that._form) {
+                that._form.off("reset", that._resetHandler);
+            }
+
+            Widget.fn.destroy.call(that);
         },
 
         min: function(value) {
@@ -209,7 +220,7 @@
                 arrows.wrapAll('<span class="k-select"/>');
             }
 
-            arrows.bind(MOUSEUP, function(e) {
+            arrows.on(MOUSEUP, function(e) {
                 if (!touch || kendo.eventTarget(e) != e.currentTarget || e.type === TOUCHEND) {
                     clearTimeout( that._spinning );
                 }
@@ -516,6 +527,22 @@
             element[0].style.width = "";
             that.wrapper = wrapper.addClass("k-widget k-numerictextbox").show();
             that._inputWrapper = $(wrapper[0].firstChild);
+        },
+
+        _reset: function() {
+            var that = this,
+                element = that.element,
+                form = element.closest("form");
+
+            if (form[0]) {
+                that._resetHandler = function() {
+                    setTimeout(function() {
+                        that.value(element[0].value);
+                    });
+                };
+
+                that._form = form.on("reset", that._resetHandler);
+            }
         }
     });
 

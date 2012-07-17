@@ -4,6 +4,7 @@
         ui = kendo.ui,
         Select = ui.Select,
         os = kendo.support.mobileOS,
+        ns = ".kendoDropDownList",
         ATTRIBUTE = "disabled",
         CHANGE = "change",
         SELECT = "select",
@@ -12,7 +13,7 @@
         DISABLED = "k-state-disabled",
         SELECTED = "k-state-selected",
         TABINDEX = "tabIndex",
-        HOVEREVENTS = "mouseenter mouseleave",
+        HOVEREVENTS = "mouseenter" + ns + " mouseleave" + ns,
         proxy = $.proxy;
 
     var DropDownList = Select.extend( {
@@ -21,14 +22,17 @@
                 index = options && options.index,
                 optionLabel, useOptionLabel, text;
 
+            that.ns = ns;
             options = $.isArray(options) ? { dataSource: options } : options;
 
             Select.fn.init.call(that, element, options);
 
-            options = that.options;
-            element = that.element.focus(function() {
+            that._focusHandler = function() {
                 that.wrapper.focus();
-            });
+            };
+
+            options = that.options;
+            element = that.element.on("focus" + ns, that._focusHandler);
 
             that._reset();
 
@@ -98,9 +102,7 @@
         },
         events: [
             "open",
-
             "close",
-
             CHANGE,
             "select",
             "dataBinding",
@@ -114,13 +116,21 @@
             this._accessors();
         },
 
+        destroy: function() {
+            var that = this;
 
+            that.wrapper.off(ns);
+            that.element.off(ns);
+            that._inputWrapper.off(ns);
+
+            Select.fn.destroy.call(that);
+        },
 
         enable: function(enable) {
             var that = this,
                 element = that.element,
-                wrapper = that.wrapper.unbind(".dropdownlist"),
-                dropDownWrapper = that._inputWrapper.unbind(HOVEREVENTS);
+                wrapper = that.wrapper.off(ns),
+                dropDownWrapper = that._inputWrapper.off(HOVEREVENTS);
 
             if (enable === false) {
                 element.attr(ATTRIBUTE, ATTRIBUTE);
@@ -128,29 +138,26 @@
                 dropDownWrapper
                     .removeClass(DEFAULT)
                     .addClass(DISABLED);
+
             } else {
                 element.removeAttr(ATTRIBUTE, ATTRIBUTE);
 
                 dropDownWrapper
                     .addClass(DEFAULT)
                     .removeClass(DISABLED)
-                    .bind(HOVEREVENTS, that._toggleHover);
+                    .on(HOVEREVENTS, that._toggleHover);
 
                 wrapper
-                    .bind({
-                        "click.dropdownlist": function(e) {
+                    .on("click" + ns, function(e) {
                             e.preventDefault();
                             that.toggle();
-                        },
-                        "keydown.dropdownlist": proxy(that._keydown, that),
-                        "keypress.dropdownlist": proxy(that._keypress, that),
-                        "focusin.dropdownlist": function() {
-                            dropDownWrapper.addClass(FOCUSED);
-                        },
-                        "focusout.dropdownlist": function(e) {
-                            that._blur();
-                            dropDownWrapper.removeClass(FOCUSED);
-                        }
+                    })
+                    .on("keydown" + ns, proxy(that._keydown, that))
+                    .on("keypress" + ns, proxy(that._keypress, that))
+                    .on("focusin" + ns, function() { dropDownWrapper.addClass(FOCUSED); })
+                    .on("focusout" + ns, function() {
+                        that._blur();
+                        dropDownWrapper.removeClass(FOCUSED);
                     });
             }
         },

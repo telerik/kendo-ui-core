@@ -164,11 +164,12 @@
         },
 
         destroy: function() {
-            var that = this, options = that.options;
+            var that = this,
+                options = that.options,
+                element = that.element.off(NS),
+                parent;
 
             Widget.fn.destroy.call(that);
-
-            that.element.off(NS);
 
             if (options.toggleTarget) {
                 $(options.toggleTarget).off(NS);
@@ -178,7 +179,13 @@
             WINDOW.unbind(RESIZE_SCROLL, that._resizeProxy);
 
             if (options.appendTo[0] === document.body) {
-                that.element.remove();
+                parent = element.parent(".k-animation-container");
+
+                if (parent[0]) {
+                    parent.remove();
+                } else {
+                    element.remove();
+                }
             }
 
             kendo.destroy(that.element);
