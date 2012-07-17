@@ -123,7 +123,9 @@ function createChart(options) {
 }
 
 function destroyChart(element) {
-    (element || $("#container")).unbind().empty();
+    var element = element || $("#container");
+    kendo.destroy(element);
+    element.unbind().empty();
 }
 
 // Primed cache for measureText - used to avoid browser rendering differences
