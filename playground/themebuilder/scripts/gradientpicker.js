@@ -106,6 +106,8 @@
 
                 Widget.fn.init.call(that, element, options);
                 element = that.element;
+
+                element.addClass("k-sampler");
                 bgcolor = new Color(element.css("background-color"));
 
                 that.styleengine = that.element.parents(".device").data("kendoStyleEngine");
@@ -155,14 +157,15 @@
                     }
                 });
 
-                element
-                    .bind({
+                $(document.body)
+                    .on({
                         click: function(e) {
-                            e.stopImmediatePropagation();
-                            e.preventDefault();
-                            that._toggle();
+                            if (e.currentTarget == element[0]) {
+                                e.preventDefault();
+                                that._toggle();
+                            }
                         }
-                    });
+                    }, ".k-sampler");
 
                 that.popup.element
                     .addClass("k-list-container")
@@ -186,7 +189,7 @@
             },
 
             _toggle: function(open) {
-                var that = this, color;
+                var that = this;
                 open = open !== undefined? open : !that.popup.visible();
 
                 that.popup[open ? "open" : "close"]();

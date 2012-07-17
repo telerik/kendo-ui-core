@@ -31,12 +31,12 @@ var devices = [ "ios", "android", "blackberry", "meego" ],
             },
             listitem: {
                 name: "List Item",
-                selector: "> li",
+                selector: ".km-list > li",
                 whitelist: [ "background-color", "background-image", "border-radius" ]
             },
             scrollitem: {
                 name: "ScrollView Item",
-                selector: "> *",
+                selector: ".km-scrollview > div > *",
                 whitelist: [ "width", "height" ]
             },
             switchback: {
@@ -79,7 +79,7 @@ var devices = [ "ios", "android", "blackberry", "meego" ],
             button: {
                 name: "Button",
                 selector: ".km-button",
-                whitelist: [ "background-color", "border-color", "border-width" ],
+                whitelist: [ "background-color", "background-image"],
                 children: [ "icon", "text" ]
             },
             navbar: {
@@ -124,80 +124,7 @@ var devices = [ "ios", "android", "blackberry", "meego" ],
             meego: {
                 selector: ".km-meego"
             }
-        },
-        ColorPicker = ui.ComboBox.extend({
-            init: function(element, options) {
-                var that = this;
-
-                if (options && options.change) {
-                    options.colorPickerChange = options.change;
-                    delete options.change;
-                }
-
-                ui.ComboBox.fn.init.call(that, element, options);
-
-                that.list.width(210);
-                that.popup.options.origin = "bottom right";
-                that.popup.options.position = "top right";
-
-                that._updateColorPreview();
-
-                that.bind("change", $.proxy(that._colorChange, that));
-
-                that.colorValue = new Color();
-
-                that.wrapper.addClass("k-colorpicker")
-                    .find(".k-colorpicker").removeClass(".k-colorpicker");
-            },
-
-            options: {
-                name: "ColorPicker",
-                autoBind: false,
-                dataTextField: "text",
-                dataValueField: "value",
-                template: "<span style='background-color: ${ data.value }' "+
-                                "class='k-icon k-color-preview' " +
-                                "title='${ data.text }'></span> ",
-                dataSource: new kendo.data.DataSource({
-                    data: $.map("#c00000,#ff0000,#ffc000,#ffff00,#92d050,#00b050,#00b0f0,#0070c0,#002060,#7030a0,#ffffff,#e3e3e3,#c4c4c4,#a8a8a8,#8a8a8a,#6e6e6e,#525252,#363636,#1a1a1a,#000000".split(","), function(x) {
-                        return { text: x, value: x };
-                    })
-                })
-            },
-
-            _colorChange: function(e) {
-                var that = this,
-                    changeHandler = that.options.colorPickerChange,
-                    value = that._updateColorPreview();
-
-                that.colorValue.set(value);
-                that.value(that.colorValue.get());
-
-                if (changeHandler) {
-                    changeHandler.call(that, {
-                        name: that.element.attr("id"),
-                        value: that.element.val()
-                    });
-                }
-            },
-
-            value: function(value) {
-
-                var result = ui.ComboBox.fn.value.call(this, value);
-
-                if (value) {
-                    this._updateColorPreview(value);
-                }
-
-                return result;
-            },
-
-            _updateColorPreview: function(value) {
-                return $(this.wrapper).find(".k-i-arrow-s").css("backgroundColor", value || this.value()).css("backgroundColor");
-            }
-        });
-
-    kendo.ui.plugin(ColorPicker);
+        };
 
     for (var idx in widgetList) {
         var children = widgetList[idx].children;
@@ -276,7 +203,7 @@ var devices = [ "ios", "android", "blackberry", "meego" ],
 
         for(var idx in widgetList) {
             widget = widgetList[idx];
-            if (widget.whitelist && widget.whitelist.indexOf(property) != -1 && widget.selector[0] != ">") {
+            if (((widget.whitelist && widget.whitelist.indexOf(property) != -1) || !property) && widget.selector[0] != ">") {
                 output += widget.selector + ",";
             }
         }
@@ -375,11 +302,37 @@ function initTargets() {
             dragleave: function () {
                 this.element.css(defaultCSS);
             },
-            drop: function (e) {
+            drop: function () {
                 this.element.css(defaultCSS);
                 this.element.parents(".device").data("kendoStyleEngine").update(this.element, { "background-color": color });
             }
         });
+
+        var allProps = getPropertySelector();
+        $(document.body).on({
+            mouseover: function (e) {
+                $(".utility-active").removeClass("utility-active");
+                $(e.currentTarget).addClass("utility-active");
+                e.stopImmediatePropagation();
+            },
+            mouseout: function (e) {
+                $(".utility-active").removeClass("utility-active");
+                e.stopImmediatePropagation();
+            }
+        }, allProps);
+
+        $(".device").on({
+            click: function (e) {
+                var target = $(e.currentTarget),
+                    width = target.outerWidth();
+
+                if (width - 20 < e.offsetX && e.offsetX < width && e.offsetY > 0 && e.offsetY < 20) {
+                    e.stopImmediatePropagation();
+                    e.preventDefault();
+                }
+            }
+        }, ".utility-active");
+
         $("#picky").kendoHSLPicker();
         $(".km-tabstrip").kendoHSLPicker({ change: function (e) {
             this.element.parents(".device").data("kendoStyleEngine").update(this.element, { "background-color": e.color.get() });
