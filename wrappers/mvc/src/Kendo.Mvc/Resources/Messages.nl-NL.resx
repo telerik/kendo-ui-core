@@ -313,19 +313,19 @@
     <value>Hyperlink verwijderen</value>
   </data>
   <data name="Pager_First" xml:space="preserve">
-    <value>Gå til første side</value>
+    <value>Ga naar eerste pagina</value>
   </data>
   <data name="Pager_ItemsPerPage" xml:space="preserve">
-    <value>pr side</value>
+    <value>Items per pagina</value>
   </data>
   <data name="Pager_Last" xml:space="preserve">
-    <value>Gå til siste side</value>
+    <value>Ga naar laatste pagina</value>
   </data>
   <data name="Pager_Next" xml:space="preserve">
-    <value>Gå til neste side</value>
+    <value>Ga naar volgende pagina</value>
   </data>
   <data name="Pager_Previous" xml:space="preserve">
-    <value>Gå til forrige side</value>
+    <value>Ga naar vorige pagina</value>
   </data>
   <data name="Upload_Cancel" xml:space="preserve">
     <value>Annuleren</value>
