@@ -1148,6 +1148,127 @@
             })();
 
             (function() {
+                var plotArea;
+
+                function createPlotArea(options) {
+                    plotArea = new dataviz.CategoricalPlotArea([{
+                        name: "Value A",
+                        type: "bar",
+                        data: [100]
+                    }], kendo.deepExtend({
+                        categoryAxis: {
+                            categories: ["A"]
+                        },
+                        valueAxis: { },
+                    }, options));
+
+                    plotArea.reflow(chartBox);
+                }
+
+                // ------------------------------------------------------------
+                module("Categorical PlotArea / Panes", {
+                    setup: function() {
+                        moduleSetup();
+                    }
+                });
+
+                test("default pane is created", function() {
+                    createPlotArea();
+
+                    equals(plotArea.panes.length, 1);
+                });
+
+                test("default pane height is same as plot area height", function() {
+                    createPlotArea();
+
+                    equals(plotArea.panes[0].box.height(), plotArea.box.height());
+                });
+
+                test("default pane width is same as plot area width", function() {
+                    createPlotArea();
+
+                    equals(plotArea.panes[0].box.width(), plotArea.box.width());
+                });
+
+                test("panes are created", function() {
+                    createPlotArea({
+                        panes: [{ name: "a" }, { name: "b" }]
+                    });
+
+                    equals(plotArea.panes.length, 2);
+                });
+
+                test("two panes occupy 50% height each by default", function() {
+                    createPlotArea({
+                        panes: [{ name: "a" }, { name: "b" }]
+                    });
+
+                    var halfHeight = plotArea.box.height() / 2;
+                    equals(plotArea.panes[0].box.height(), halfHeight);
+                    equals(plotArea.panes[1].box.height(), halfHeight);
+                });
+
+                test("pane occupies set height in pixels", function() {
+                    createPlotArea({
+                        panes: [{ name: "a", height: 200 }, { name: "b" }]
+                    });
+
+                    equals(plotArea.panes[0].box.height(), 200);
+                });
+
+                test("pane occupies remaining height (in pixels)", function() {
+                    createPlotArea({
+                        panes: [{ name: "a", height: 200 }, { name: "b" }]
+                    });
+
+                    equals(plotArea.panes[1].box.height(), 400);
+                });
+
+                test("pane occupies set height in percents", function() {
+                    createPlotArea({
+                        panes: [{ name: "a", height: "30%" }, { name: "b" }]
+                    });
+
+                    equals(plotArea.panes[0].box.height(), 200);
+                });
+
+                test("pane occupies remaining height (in percents)", function() {
+                    createPlotArea({
+                        panes: [{ name: "a", height: "30%" }, { name: "b" }]
+                    });
+
+                    equals(plotArea.panes[1].box.height(), 400);
+                });
+
+                test("top margin is subtracted from total height", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a", height: 200, margin: { top: 10 }
+                        }, {
+                            name: "b"
+                        }]
+                    });
+
+                    equals(plotArea.panes[0].box.height(), 195);
+                    equals(plotArea.panes[0].box.height(), 395);
+                });
+
+                test("bottom margin is subtracted from total height", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a", height: 200, margin: { bottom: 10 }
+                        }, {
+                            name: "b"
+                        }]
+                    });
+
+                    equals(plotArea.panes[0].box.height(), 195);
+                    equals(plotArea.panes[0].box.height(), 395);
+                });
+
+            })();
+
+            (function() {
                 var chart,
                     bar,
                     barElement,
