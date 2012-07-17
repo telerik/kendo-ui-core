@@ -188,11 +188,16 @@
         },
 
         destroy: function() {
-            this.options.model.unbind("set", this._validateProxy);
-            kendo.unbind(this.element);
+            var that = this;
 
-            this.element.removeData("kendoValidator")
-                .removeData("kendoEditable");
+            Widget.fn.destroy.call(that);
+
+            that.options.model.unbind("set", that._validateProxy);
+
+            kendo.unbind(that.element);
+            kendo.destroy(that.element);
+
+            that.element.removeData("kendoValidator");
         },
 
         refresh: function() {
