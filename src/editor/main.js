@@ -7,6 +7,7 @@
         os = kendo.support.mobileOS,
         extend = $.extend,
         deepExtend = kendo.deepExtend,
+        NS = ".kendoEditor",
         keys = kendo.keys;
 
     // options can be: template (as string), cssClass, title, defaultValue
@@ -166,7 +167,7 @@
             selectBox.list.find(".k-item").each(function(idx, element){
                 var item = $(element),
                     text = item.text(),
-                
+
                     style = kendo.ui.editor.Dom.inlineStyle(textarea.data.data("kendoEditor").document, "span", {className : classes[idx].value});
                 item.html('<span unselectable="on" style="display:block;' + style +'">' + text + '</span>');
             });
@@ -224,74 +225,73 @@
             editor.body = editor.document.body;
 
             $(editor.document)
-                .bind({
-                    keydown: function (e) {
-                        if (e.keyCode === keys.F10) {
-                            // Handling with timeout to avoid the default IE menu
-                            setTimeout(function() {
-                                var TABINDEX = "tabIndex",
-                                    element = editor.wrapper,
-                                    tabIndex = element.attr(TABINDEX);
+                .on("keydown" + NS, function (e) {
+                    if (e.keyCode === keys.F10) {
+                        // Handling with timeout to avoid the default IE menu
+                        setTimeout(function() {
+                            var TABINDEX = "tabIndex",
+                                element = editor.wrapper,
+                                tabIndex = element.attr(TABINDEX);
 
-                                // Chrome can't focus something which has already been focused
-                                element.attr(TABINDEX, tabIndex || 0).focus().find("li:has(" + focusable + ")").first().focus();
+                            // Chrome can't focus something which has already been focused
+                            element.attr(TABINDEX, tabIndex || 0).focus().find("li:has(" + focusable + ")").first().focus();
 
-                                if (!tabIndex && tabIndex !== 0) {
-                                   element.removeAttr(TABINDEX);
-                                }
-
-                            }, 100);
-
-                            e.preventDefault();
-                            return;
-                        }
-
-                        var toolName = editor.keyboard.toolFromShortcut(editor.options.tools, e);
-
-                        if (toolName) {
-                            e.preventDefault();
-                            if (!/undo|redo/.test(toolName)) {
-                                editor.keyboard.endTyping(true);
+                            if (!tabIndex && tabIndex !== 0) {
+                               element.removeAttr(TABINDEX);
                             }
-                            editor.exec(toolName);
-                            return false;
+
+                        }, 100);
+
+                        e.preventDefault();
+                        return;
+                    }
+
+                    var toolName = editor.keyboard.toolFromShortcut(editor.options.tools, e);
+
+                    if (toolName) {
+                        e.preventDefault();
+                        if (!/undo|redo/.test(toolName)) {
+                            editor.keyboard.endTyping(true);
                         }
+                        editor.exec(toolName);
+                        return false;
+                    }
 
-                        if (editor.keyboard.isTypingKey(e) && editor.pendingFormats.hasPending()) {
-                            if (isFirstKeyDown) {
-                                isFirstKeyDown = false;
-                            } else {
-                                var range = editor.getRange();
-                                editor.pendingFormats.apply(range);
-                                editor.selectRange(range);
-                            }
-                        }
-
-                        editor.keyboard.clearTimeout();
-
-                        editor.keyboard.keydown(e);
-                    },
-                    keyup: function (e) {
-                        var selectionCodes = [8, 9, 33, 34, 35, 36, 37, 38, 39, 40, 40, 45, 46];
-
-                        if ($.inArray(e.keyCode, selectionCodes) > -1 || (e.keyCode == 65 && e.ctrlKey && !e.altKey && !e.shiftKey)) {
-                            editor.pendingFormats.clear();
-                            select(editor);
-                        }
-
-                        if (editor.keyboard.isTypingKey(e)) {
-                            if (editor.pendingFormats.hasPending()) {
-                                var range = editor.getRange();
-                                editor.pendingFormats.apply(range);
-                                editor.selectRange(range);
-                            }
+                    if (editor.keyboard.isTypingKey(e) && editor.pendingFormats.hasPending()) {
+                        if (isFirstKeyDown) {
+                            isFirstKeyDown = false;
                         } else {
-                            isFirstKeyDown = true;
+                            var range = editor.getRange();
+                            editor.pendingFormats.apply(range);
+                            editor.selectRange(range);
                         }
+                    }
 
-                        editor.keyboard.keyup(e);
-                    },
-                    mousedown: function(e) {
+                    editor.keyboard.clearTimeout();
+
+                    editor.keyboard.keydown(e);
+                })
+                .on("keyup" + NS, function (e) {
+                    var selectionCodes = [8, 9, 33, 34, 35, 36, 37, 38, 39, 40, 40, 45, 46];
+
+                    if ($.inArray(e.keyCode, selectionCodes) > -1 || (e.keyCode == 65 && e.ctrlKey && !e.altKey && !e.shiftKey)) {
+                        editor.pendingFormats.clear();
+                        select(editor);
+                    }
+
+                    if (editor.keyboard.isTypingKey(e)) {
+                        if (editor.pendingFormats.hasPending()) {
+                            var range = editor.getRange();
+                            editor.pendingFormats.apply(range);
+                            editor.selectRange(range);
+                        }
+                    } else {
+                        isFirstKeyDown = true;
+                    }
+
+                    editor.keyboard.keyup(e);
+                })
+                .on("mousedown" + NS, function(e) {
                         editor.pendingFormats.clear();
 
                         var target = $(e.target);
@@ -299,14 +299,13 @@
                         if (!$.browser.gecko && e.which == 2 && target.is("a[href]")) {
                             window.open(target.attr("href"), "_new");
                         }
-                    },
-                    mouseup: function () {
-                        select(editor);
-                    }
+                })
+                .on("mouseup" + NS, function(){
+                    select(editor);
                 });
 
             $(editor.window)
-                .bind("blur", function () {
+                .on("blur" + NS, function () {
                     var old = editor.textarea.value,
                         value = editor.encodedValue();
 
@@ -317,10 +316,9 @@
                     }
                 });
 
-            $(editor.body)
-                .bind("cut paste", function (e) {
-                      editor.clipboard["on" + e.type](e);
-                  });
+            $(editor.body).on("cut" + NS + " paste" + NS, function (e) {
+                  editor.clipboard["on" + e.type](e);
+            });
         },
 
         formatByName: function(name, format) {
@@ -408,7 +406,7 @@
 
             element = $(element);
 
-            element.closest("form").bind("submit", function () {
+            element.closest("form").on("submit" + NS, function () {
                 that.update();
             });
 
@@ -495,14 +493,14 @@
             });
 
             wrapper
-                .delegate(enabledButtons, "mouseenter", function() { $(this).addClass("k-state-hover"); })
-                .delegate(enabledButtons, "mouseleave", function() { $(this).removeClass("k-state-hover"); })
-                .delegate(buttons, "mousedown", false)
-                .delegate(focusable, "keydown", function(e) {
+                .on("mouseenter" + NS, enabledButtons, function() { $(this).addClass("k-state-hover"); })
+                .on("mouseleave" + NS, enabledButtons, function() { $(this).removeClass("k-state-hover"); })
+                .on("mousedown" + NS, buttons, false)
+                .on("keydown" + NS, focusable, function(e) {
                     var closestLi = $(this).closest("li"),
-                    focusableTool = "li:has(" + focusable + ")",
-                    focusElement,
-                    keyCode = e.keyCode;
+                        focusableTool = "li:has(" + focusable + ")",
+                        focusElement,
+                        keyCode = e.keyCode;
 
                     if (keyCode == keys.RIGHT) {
                         focusElement = closestLi.nextAll(focusableTool).first().find(focusable);
@@ -535,12 +533,12 @@
                         focusElement.focus();
                     }
                 })
-                .delegate(enabledButtons, "click", function (e) {
+                .on("click" + NS, enabledButtons, function(e) {
                     e.preventDefault();
                     e.stopPropagation();
                     that.exec(toolFromClassName(this));
                 })
-                .delegate(disabledButtons, "click", function(e) { e.preventDefault(); })
+                .on("click" + NS, disabledButtons, function(e) { e.preventDefault(); })
                 .find(toolbarItems)
                     .each(function () {
                         var toolName = toolFromClassName(this),
@@ -584,31 +582,45 @@
                         });
                 });
 
-            $(document)
-                .bind("DOMNodeInserted", function(e) {
-                    var wrapper = that.wrapper;
+            that._DOMNodeInsertedHandler = function(e) {
+                that._DOMNodeInserted(e);
+            };
 
-                    if ($.contains(e.target, wrapper[0]) || wrapper[0] == e.target) {
-                        // preserve updated value before re-initializing
-                        // don't use update() to prevent the editor from encoding the content too early
-                        that.textarea.value = that.value();
-                        wrapper.find("iframe").remove();
-                        initializeContentElement(that);
-                    }
-                })
-                .bind("mousedown", function(e) {
-                    try {
-                        if (that.keyboard.isTypingInProgress()) {
-                            that.keyboard.endTyping(true);
-                        }
+            that._endTypingHandler = function() {
+                that._endTyping();
+            };
 
-                        if (!that.selectionRestorePoint) {
-                            that.selectionRestorePoint = new editorNS.RestorePoint(that.getRange());
-                        }
-                    } catch (e) { }
-                });
+            $(document).on("DOMNodeInserted", that._DOMNodeInsertedHandler)
+                       .on("mousedown", that._endTypingHandler);
 
             kendo.notify(that);
+        },
+
+        _endTyping: function() {
+            var that = this;
+
+            try {
+                if (that.keyboard.isTypingInProgress()) {
+                    that.keyboard.endTyping(true);
+                }
+
+                if (!that.selectionRestorePoint) {
+                    that.selectionRestorePoint = new kendo.ui.editor.RestorePoint(that.getRange());
+                }
+            } catch (e) { }
+        },
+
+        _DOMNodeInserted: function(e) {
+            var that = this,
+                wrapper = that.wrapper;
+
+            if ($.contains(e.target, wrapper[0]) || wrapper[0] == e.target) {
+                // preserve updated value before re-initializing
+                // don't use update() to prevent the editor from encoding the content too early
+                that.textarea.value = that.value();
+                wrapper.find("iframe").remove();
+                initializeContentElement(that);
+            }
         },
 
         events: [
@@ -684,6 +696,22 @@
                 "subscript", // declare explicitly
                 "superscript" // declare explicitly */
             ]
+        },
+
+        destroy: function() {
+            var that = this;
+            Widget.fn.destroy.call(that);
+
+            $(that.window)
+                .add(that.document)
+                .add(that.wrapper)
+                .add(that.element.closest("form"))
+                .off(NS);
+
+            $(document).off("DOMNodeInserted", that._DOMNodeInsertedHandler)
+                       .off("mousedown", that._endTypingHandler);
+
+            kendo.destroy(that.wrapper);
         },
 
         _nativeTools: [
