@@ -97,9 +97,7 @@
         },
         events: [
             "open",
-
             "close",
-
             CHANGE,
             "select",
             "dataBinding",
@@ -113,21 +111,29 @@
             this._accessors();
         },
 
+        destroy: function() {
+            var that = this;
 
+            that.popup.destroy();
+
+            that.wrapper.off(ns);
+            that._inputWrapper.off(ns);
+
+            Select.fn.destroy.call(that);
+        },
 
         enable: function(enable) {
             var that = this,
                 element = that.element,
                 wrapper = that.wrapper.off(ns),
-                dropDownWrapper = that._inputWrapper;
+                dropDownWrapper = that._inputWrapper.off(HOVEREVENTS);
 
             if (enable === false) {
                 element.attr(ATTRIBUTE, ATTRIBUTE);
 
                 dropDownWrapper
                     .removeClass(DEFAULT)
-                    .addClass(DISABLED)
-                    .off(HOVEREVENTS);
+                    .addClass(DISABLED);
 
             } else {
                 element.removeAttr(ATTRIBUTE, ATTRIBUTE);

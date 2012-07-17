@@ -153,13 +153,12 @@
         enable: function(enable) {
             var that = this,
                 element = that.element,
-                wrapper = that.wrapper;
+                wrapper = that.wrapper.off(HOVEREVENTS);
 
             if (enable === false) {
                 wrapper
                     .removeClass(DEFAULT)
-                    .addClass(STATEDISABLED)
-                    .off(HOVEREVENTS);
+                    .addClass(STATEDISABLED);
 
                 element.attr(DISABLED, DISABLED);
             } else {
