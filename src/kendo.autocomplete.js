@@ -49,6 +49,7 @@
         init: function (element, options) {
             var that = this, wrapper;
 
+            that.ns = ns;
             options = $.isArray(options) ? { dataSource: options} : options;
 
             List.fn.init.call(that, element, options);
@@ -181,7 +182,6 @@
         destroy: function() {
             var that = this;
 
-            that.popup.destroy();
             that.element.off(ns);
             that.wrapper.off(ns);
 
