@@ -13,7 +13,8 @@
         SELECTED = "k-state-selected",
         STATEDISABLED = "k-state-disabled",
         HOVER = "k-state-hover",
-        HOVEREVENTS = "mouseenter mouseleave",
+        ns = ".kendoAutoComplete",
+        HOVEREVENTS = "mouseenter" + ns + " mouseleave" + ns,
         caretPosition = List.caret,
         selectText = List.selectText,
         proxy = $.proxy;
@@ -72,20 +73,18 @@
             element
                 .attr("autocomplete", "off")
                 .addClass("k-input")
-                .bind({
-                    keydown: proxy(that._keydown, that),
-                    paste: proxy(that._search, that),
-                    focus: function () {
-                        that._prev = that.value();
-                        that._placeholder(false);
-                        wrapper.addClass(FOCUSED);
-                        clearTimeout(that._bluring);
-                    },
-                    blur: function () {
-                        that._change();
-                        that._placeholder();
-                        wrapper.removeClass(FOCUSED);
-                    }
+                .on("keydown" + ns, proxy(that._keydown, that))
+                .on("paste" + ns, proxy(that._search, that))
+                .on("focus" + ns, function () {
+                    that._prev = that.value();
+                    that._placeholder(false);
+                    wrapper.addClass(FOCUSED);
+                    clearTimeout(that._bluring);
+                })
+                .on("blur" + ns, function () {
+                    that._change();
+                    that._placeholder();
+                    wrapper.removeClass(FOCUSED);
                 });
 
             that._enable();
@@ -135,13 +134,14 @@
         },
 
         events: [
-        "open",
-        "close",
-               CHANGE,
-               "select",
-               "dataBinding",
-               "dataBound"
-            ],
+            "open",
+            "close",
+            CHANGE,
+            "select",
+            "dataBinding",
+            "dataBound"
+        ],
+
         setOptions: function(options) {
             List.fn.setOptions.call(this, options);
 
@@ -159,14 +159,14 @@
                 wrapper
                     .removeClass(DEFAULT)
                     .addClass(STATEDISABLED)
-                    .unbind(HOVEREVENTS);
+                    .off(HOVEREVENTS);
 
                 element.attr(DISABLED, DISABLED);
             } else {
                 wrapper
                     .removeClass(STATEDISABLED)
                     .addClass(DEFAULT)
-                    .bind(HOVEREVENTS, that._toggleHover);
+                    .on(HOVEREVENTS, that._toggleHover);
 
                 element
                     .removeAttr(DISABLED);
@@ -177,6 +177,16 @@
             var that = this;
             that._current = null;
             that.popup.close();
+        },
+
+        destroy: function() {
+            var that = this;
+
+            that.popup.destroy();
+            that.element.off(ns);
+            that.wrapper.off(ns);
+
+            List.fn.destroy.call(that);
         },
 
         refresh: function () {
