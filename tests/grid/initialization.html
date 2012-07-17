@@ -775,6 +775,15 @@
                 ok(grid.tbody.find("tr:first > td:first a").hasClass("k-grid-bar"));
             });
 
+            test("spaces are removed from the text when used as class", function() {
+                var grid = new Grid($("<table/>"), {
+                    dataSource: [{ foo: 1, bar: "bar"}],
+                    columns: [ { command: { text: "bar baz"} }]
+                });
+
+                ok(grid.tbody.find("tr:first > td:first a").hasClass("k-grid-barbaz"));
+            });
+
             test("custom command without name throws error", function() {
                 raises(function() {
                     var grid = new Grid($("<table/>"), {
@@ -785,6 +794,22 @@
                 function(error) {
                     return error.message === "Custom commands should have name specified";
                 });
+            });
+
+            test("custom command click handler is called if only text with multiple spaces is set", 1, function() {
+                var grid = new Grid($("<table/>"), {
+                    dataSource: [{ foo: 1, bar: "bar"}],
+                    columns: [
+                    {
+                        command: {
+                            text: "bar baz boo",
+                            click: function() {
+                                ok(true);
+                            }
+                        }
+                    }]
+                });
+                grid.items().first().find("td:first a").click();
             });
 
             test("custom command click handler is called", 1, function() {
