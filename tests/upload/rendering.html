@@ -72,34 +72,6 @@
                 }
             });
 
-            test("disable renders k-state-disabled class", function () {
-                uploadInstance.disable();
-                ok(uploadInstance.wrapper.hasClass("k-state-disabled"));
-            });
-
-            test("enable removes k-state-disabled class", function () {
-                uploadInstance.disable();
-                uploadInstance.enable();
-                ok(!uploadInstance.wrapper.hasClass("k-state-disabled"));
-            });
-
-            test("enable does not disable the upload", function () {
-                uploadInstance.enable();
-                ok(!uploadInstance.wrapper.hasClass("k-state-disabled"));
-            });
-
-            test("initially disabled state is applied", function () {
-                uploadInstance = createUpload({ enabled: false });
-                ok(uploadInstance.wrapper.hasClass("k-state-disabled"));
-            });
-
-            test("toggle alternates between states", function() {
-                uploadInstance.toggle();
-                ok(uploadInstance.wrapper.hasClass("k-state-disabled"));
-                uploadInstance.toggle();
-                ok(!uploadInstance.wrapper.hasClass("k-state-disabled"));
-            });
-
             test("remove icon is rendered", function() {
                 simulateFileSelect();
                 equal($(".k-upload-files li.k-file button.k-upload-action span.k-delete", uploadInstance.wrapper).length, 1);

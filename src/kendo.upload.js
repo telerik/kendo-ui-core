@@ -32,10 +32,10 @@
             that._activeInput(activeInput);
             that.toggle(that.options.enabled);
 
-            activeInput.closest("form").bind({
-                "submit": $.proxy(that._onParentFormSubmit, that),
-                "reset": $.proxy(that._onParentFormReset, that)
-            });
+            var ns = that._ns = "." + that.key + "-" + kendo.guid();
+            activeInput.closest("form")
+                .on("submit" + ns, $.proxy(that._onParentFormSubmit, that))
+                .on("reset" + ns, $.proxy(that._onParentFormReset, that));
 
             if (that.options.async.saveUrl != undefined) {
                 that._module = that._supportsFormData() ?
@@ -115,6 +115,17 @@
         toggle: function(enable) {
             enable = typeof (enable) === "undefined" ? enable : !enable;
             this.wrapper.toggleClass("k-state-disabled", enable);
+        },
+
+        destroy: function() {
+            var that = this;
+
+            $(document)
+                .add($(".k-dropzone", that.wrapper))
+                .add(that.wrapper.closest("form"))
+                .off(that._ns);
+
+            Widget.fn.destroy.call(that);
         },
 
         _addInput: function(input) {
@@ -428,22 +439,23 @@
         },
 
         _setupDropZone: function() {
+            var that = this;
+
             $(".k-upload-button", this.wrapper)
                 .wrap("<div class='k-dropzone'></div>");
 
-            var dropZone = $(".k-dropzone", this.wrapper)
-                .append($("<em>" + this.localization["dropFilesHere"] + "</em>"))
-                .bind({
-                    "dragenter": stopEvent,
-                    "dragover": function(e) { e.preventDefault(); },
-                    "drop" : $.proxy(this._onDrop, this)
-                });
+            var ns = that._ns;
+            var dropZone = $(".k-dropzone", that.wrapper)
+                .append($("<em>" + that.localization.dropFilesHere + "</em>"))
+                .on("dragenter" + ns, stopEvent)
+                .on("dragover" + ns, function(e) { e.preventDefault(); })
+                .on("drop" + ns, $.proxy(this._onDrop, this));
 
-            bindDragEventWrappers(dropZone,
+            bindDragEventWrappers(dropZone, ns,
                 function() { dropZone.addClass("k-dropzone-hovered"); },
                 function() { dropZone.removeClass("k-dropzone-hovered"); });
 
-            bindDragEventWrappers($(document),
+            bindDragEventWrappers($(document), ns,
                 function() { dropZone.addClass("k-dropzone-active"); },
                 function() { dropZone.removeClass("k-dropzone-active"); });
         },
@@ -1065,11 +1077,11 @@
         e.stopPropagation(); e.preventDefault();
     }
 
-    function bindDragEventWrappers(element, onDragEnter, onDragLeave) {
+    function bindDragEventWrappers(element, namespace, onDragEnter, onDragLeave) {
         var hideInterval, lastDrag;
 
         element
-            .bind("dragenter", function(e) {
+            .on("dragenter" + namespace, function(e) {
                 onDragEnter();
                 lastDrag = new Date();
 
@@ -1085,7 +1097,7 @@
                     }, 100);
                 }
             })
-            .bind("dragover", function(e) {
+            .on("dragover" + namespace, function(e) {
                 lastDrag = new Date();
             });
     }
