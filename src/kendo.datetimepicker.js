@@ -15,15 +15,15 @@
         OPEN = "open",
         CLOSE = "close",
         CHANGE = "change",
-        CLICK = (touch ? "touchend" : "click"),
+        ns = ".kendoDateTimePicker",
+        CLICK = (touch ? "touchend" : "click") + ns,
         DISABLED = "disabled",
         DEFAULT = "k-state-default",
         FOCUSED = "k-state-focused",
         HOVER = "k-state-hover",
         STATEDISABLED = "k-state-disabled",
-        HOVEREVENTS = "mouseenter mouseleave",
-        MOUSEDOWN = (touch ? "touchstart" : "mousedown"),
-        ICONEVENTS = CLICK + " " + MOUSEDOWN,
+        HOVEREVENTS = "mouseenter" + ns + " mouseleave" + ns,
+        MOUSEDOWN = (touch ? "touchstart" : "mousedown") + ns,
         MONTH = "month",
         SPAN = "<span/>",
         DATE = Date,
@@ -50,27 +50,23 @@
 
             that._views();
 
+            that._reset();
+
             if (!touch) {
                 element[0].type = "text";
             }
 
             element.addClass("k-input")
-                    .bind({
-                        keydown: $.proxy(that._keydown, that),
-                        focus: function() {
+                   .on("keydown" + ns, $.proxy(that._keydown, that))
+                   .on("focus" + ns, function() {
                             that._inputWrapper.addClass(FOCUSED);
-                        },
-                        blur: function() {
-                            that._inputWrapper.removeClass(FOCUSED);
-                            that._change(element.val());
-                            that.close("date");
-                            that.close("time");
-                        }
-                    })
-                   .closest("form")
-                   .bind("reset", function() {
-                       that.value(element[0].defaultValue);
-                   });
+                   })
+                   .on("blur" + ns, function() {
+                        that._inputWrapper.removeClass(FOCUSED);
+                        that._change(element.val());
+                        that.close("date");
+                        that.close("time");
+                    });
 
             that._midnight = getMilliseconds(options.min) + getMilliseconds(options.max) === 0;
 
@@ -120,10 +116,10 @@
 
         enable: function(enable) {
             var that = this,
-                dateIcon = that._dateIcon.unbind(ICONEVENTS),
-                timeIcon = that._timeIcon.unbind(ICONEVENTS),
-                wrapper = that._inputWrapper.unbind(HOVEREVENTS),
-                element = that.element;
+                element = that.element,
+                dateIcon = that._dateIcon.off(ns),
+                timeIcon = that._timeIcon.off(ns),
+                wrapper = that._inputWrapper.off(HOVEREVENTS);
 
             if (enable === false) {
                 wrapper
@@ -135,32 +131,29 @@
                 wrapper
                     .addClass(DEFAULT)
                     .removeClass(STATEDISABLED)
-                    .bind(HOVEREVENTS, that._toggleHover);
+                    .on(HOVEREVENTS, that._toggleHover);
 
                 element
                     .removeAttr(DISABLED);
 
-                dateIcon.bind({
-                    click: function() {
-                        that.toggle("date");
+                dateIcon.on(MOUSEDOWN, preventDefault)
+                        .on(CLICK, function() {
+                            that.toggle("date");
 
-                        if (!touch && element[0] !== document.activeElement) {
-                            element.focus();
-                        }
-                    },
-                    mousedown: preventDefault
-                });
+                            if (!touch && element[0] !== document.activeElement) {
+                                element.focus();
+                            }
+                        });
 
-                timeIcon.bind({
-                    click: function() {
-                        that.toggle("time");
 
-                        if (!touch && element[0] !== document.activeElement) {
-                            element.focus();
-                        }
-                    },
-                    mousedown: preventDefault
-                });
+                timeIcon.on(MOUSEDOWN, preventDefault)
+                        .on(CLICK, function() {
+                            that.toggle("time");
+
+                            if (!touch && element[0] !== document.activeElement) {
+                                element.focus();
+                            }
+                        });
             }
         },
 
@@ -466,6 +459,20 @@
 
             that.wrapper = wrapper.addClass("k-widget k-datetimepicker k-header");
             that._inputWrapper = $(wrapper[0].firstChild);
+        },
+
+        _reset: function() {
+            var that = this,
+                element = that.element,
+                form = element.closest("form");
+
+            if (form[0]) {
+                that._resetHandler = function() {
+                    that.value(element[0].defaultValue);
+                };
+
+                that._form = form.on("reset", that._resetHandler);
+            }
         }
     });
 
