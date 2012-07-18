@@ -20,6 +20,10 @@
                         numerictextbox.enable(false);
                     });
 
+                    $("#focus").click(function() {
+                        numerictextbox.focus();
+                    });
+
                     $("#value").kendoNumericTextBox({
                         change: setValue
                     });
@@ -35,7 +39,7 @@
                 <span class="configHead">API Functions</span>
                 <ul class="options">
                     <li>
-                       <button id="get" class="k-button">Get value</button>
+                       <button id="get" class="k-button">Get value</button> or <button id="focus" class="k-button">Focus</button>
                    </li>
                    <li>
                        <input id="value" value="10" style="float:none" />

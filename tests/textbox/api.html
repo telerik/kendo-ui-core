@@ -366,6 +366,19 @@
                 window.setTimeout = origin;
             });
 
+            test("focus method should should place carret in editable input", function() {
+                var textbox = new NumericTextBox(input);
+
+                textbox.focus();
+
+                stop();
+
+                window.setTimeout(function(){
+                    start();
+                    equal(document.activeElement, input[0]);
+                }, 200);
+            });
+
             test("on blur should hide input text", 2, function() {
                 var textbox = new NumericTextBox(input);
 
