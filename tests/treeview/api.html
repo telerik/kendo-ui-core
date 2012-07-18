@@ -357,6 +357,20 @@
                 equal(treeview.find(".k-in").text(), "foo");
             });
 
+            test("append() of observable object to subnode", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "foo" }
+                    ]
+                });
+
+                var obj = kendo.observable({ text: "bar" });
+
+                treeviewObject.append(obj, treeviewObject.findByText("foo"));
+
+                equal(treeview.find(".k-item .k-item").text(), "bar");
+            });
+
             test("append() of observable array", function() {
                 createTreeView({});
 
