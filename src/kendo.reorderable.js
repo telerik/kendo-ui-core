@@ -24,7 +24,7 @@
 
             element = that.element.addClass(KREORDERABLE);
             options = that.options;
-            draggable = options.draggable || new kendo.ui.Draggable(element, {
+            that.draggable = draggable = options.draggable || new kendo.ui.Draggable(element, {
                 group: group,
                 filter: options.filter,
                 hint: options.hint
@@ -100,8 +100,19 @@
 
         events: [
             CHANGE
-        ]
+        ],
 
+       destroy: function() {
+           var that = this;
+
+           Widget.fn.destroy.call(that);
+
+           if (that.draggable) {
+               that.draggable.destroy();
+           }
+
+           kendo.destroy(that.element);
+       }
     });
 
     kendo.ui.plugin(Reorderable);
