@@ -1237,6 +1237,22 @@
 
                 title.reflow(axis.box);
             }
+        },
+
+        alignTo: function(secondAxis) {
+            var axis = this,
+                lineBox = secondAxis.lineBox(),
+                vertical = axis.options.vertical,
+                pos = vertical ? Y : X;
+
+            axis.box.snapTo(lineBox, pos);
+            if (vertical) {
+                axis.box.shrink(0, axis.lineBox().height() - lineBox.height());
+            } else {
+                axis.box.shrink(axis.lineBox().width() - lineBox.width(), 0);
+            }
+            axis.box[pos + 1] -= axis.lineBox()[pos + 1] - lineBox[pos + 1];
+            axis.box[pos + 2] -= axis.lineBox()[pos + 2] - lineBox[pos + 2];
         }
     });
 

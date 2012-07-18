@@ -4045,6 +4045,10 @@
 
                     rightAnchor = axis;
                 }
+
+                if (i !== 0) {
+                    axis.alignTo(yAnchor);
+                }
             }
 
             for (i = 0; i < xAxes.length; i++) {
@@ -4077,6 +4081,10 @@
                     }
 
                     bottomAnchor = axis;
+                }
+
+                if (i !== 0) {
+                    axis.alignTo(xAnchor);
                 }
             }
         },
