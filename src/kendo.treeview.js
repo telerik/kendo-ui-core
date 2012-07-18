@@ -98,47 +98,6 @@
         }
     }
 
-    function updateNodeClasses(node, groupData, nodeData) {
-        var wrapper = node.children("div"),
-            group = node.children("ul");
-
-        if (node.hasClass("k-treeview")) {
-            return;
-        }
-
-        nodeData = extend({
-            expanded: node.attr(kendo.attr("expanded")) === "true",
-            index: node.index(),
-            enabled: !wrapper.children(".k-in").hasClass("k-state-disabled")
-        }, nodeData);
-
-        groupData = extend({
-            firstLevel: node.parent().parent().hasClass(KTREEVIEW),
-            length: node.parent().children().length
-        }, groupData);
-
-        // li
-        node.removeClass("k-first k-last")
-            .addClass(rendering.wrapperCssClass(groupData, nodeData));
-
-        // div
-        wrapper.removeClass("k-top k-mid k-bot")
-               .addClass(rendering.cssClass(groupData, nodeData));
-
-        // span
-        wrapper.children(".k-in").removeClass("k-in k-state-default k-state-disabled")
-            .addClass(rendering.textClass(nodeData));
-
-        // toggle button
-        if (group.length || node.attr("data-hasChildren") == "true") {
-            wrapper.children(".k-icon").removeClass("k-plus k-minus k-plus-disabled k-minus-disabled")
-                .addClass(rendering.toggleButtonClass(nodeData));
-
-            group.addClass("k-group");
-        }
-    }
-
-
     templates = {
         dragClue: template("<div class='k-header k-drag-clue'><span class='k-icon k-drag-status'></span>#= text #</div>"),
         group: template(
@@ -537,12 +496,53 @@
 
                 updateNodeHtml(node);
 
-                updateNodeClasses(node, groupData, nodeData);
+                that._updateNodeClasses(node, groupData, nodeData);
 
                 // iterate over child nodes
                 that._group(node);
             });
         },
+
+        _updateNodeClasses: function (node, groupData, nodeData) {
+            var wrapper = node.children("div"),
+                group = node.children("ul");
+
+            if (node.hasClass("k-treeview")) {
+                return;
+            }
+
+            nodeData = extend({
+                expanded: this._expanded(node),
+                index: node.index(),
+                enabled: !wrapper.children(".k-in").hasClass("k-state-disabled")
+            }, nodeData);
+
+            groupData = extend({
+                firstLevel: node.parent().parent().hasClass(KTREEVIEW),
+                length: node.parent().children().length
+            }, groupData);
+
+            // li
+            node.removeClass("k-first k-last")
+                .addClass(rendering.wrapperCssClass(groupData, nodeData));
+
+            // div
+            wrapper.removeClass("k-top k-mid k-bot")
+                   .addClass(rendering.cssClass(groupData, nodeData));
+
+            // span
+            wrapper.children(".k-in").removeClass("k-in k-state-default k-state-disabled")
+                .addClass(rendering.textClass(nodeData));
+
+            // toggle button
+            if (group.length || node.attr("data-hasChildren") == "true") {
+                wrapper.children(".k-icon").removeClass("k-plus k-minus k-plus-disabled k-minus-disabled")
+                    .addClass(rendering.toggleButtonClass(nodeData));
+
+                group.addClass("k-group");
+            }
+        },
+
 
         _processNodes: function(nodes, callback) {
             var that = this;
@@ -599,11 +599,11 @@
 
             if (parentNode.hasClass("k-item")) {
                 updateNodeHtml(parentNode);
-                updateNodeClasses(parentNode);
+                that._updateNodeClasses(parentNode);
             }
 
-            updateNodeClasses(node.prev());
-            updateNodeClasses(node.next());
+            that._updateNodeClasses(node.prev());
+            that._updateNodeClasses(node.next());
 
 
             // render sub-nodes
@@ -679,7 +679,7 @@
                     append(items, parentNode, true);
 
                     if (that._expanded(parentNode)) {
-                        updateNodeClasses(parentNode, {}, { expanded: true });
+                        that._updateNodeClasses(parentNode);
                         subGroup(parentNode).css("display", "block");
                     }
                 } else {
@@ -723,7 +723,7 @@
                     isCollapsed = true;
                 }
 
-                updateNodeClasses(item, {}, { enabled: enable, expanded: !isCollapsed });
+                this._updateNodeClasses(item, {}, { enabled: enable, expanded: !isCollapsed });
             });
         },
 
@@ -762,11 +762,15 @@
                 return;
             }
 
+            if (isExpanding == that._expanded(node)) {
+                return;
+            }
+
             if (!that._trigger(direction, node)) {
                 that._expanded(node, isExpanding);
 
                 if (contents.children().length > 0) {
-                    updateNodeClasses(node, {}, { expanded: isExpanding });
+                    that._updateNodeClasses(node, {}, { expanded: isExpanding });
 
                     if (!isExpanding) {
                         contents.css("height", contents.height()).css("height");
@@ -916,10 +920,11 @@
         },
 
         _remove: function (node, keepData) {
-            var parentNode,
+            var that = this,
+                parentNode,
                 prevSibling, nextSibling;
 
-            node = $(node, this.element);
+            node = $(node, that.element);
 
             parentNode = node.parent().parent();
             prevSibling = node.prev();
@@ -929,11 +934,11 @@
 
             if (parentNode.hasClass("k-item")) {
                 updateNodeHtml(parentNode);
-                updateNodeClasses(parentNode);
+                that._updateNodeClasses(parentNode);
             }
 
-            updateNodeClasses(prevSibling);
-            updateNodeClasses(nextSibling);
+            that._updateNodeClasses(prevSibling);
+            that._updateNodeClasses(nextSibling);
 
             return node;
         },
