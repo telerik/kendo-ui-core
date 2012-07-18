@@ -351,26 +351,28 @@ function initTargets() {
 
         defaultCSS[property] = "";
 
-        $(getWidgets(colors).selector).kendoDropTarget({
+        $(".device").kendoDropFilter({
+            filter: getWidgets(colors).selector,
             dragenter: function (e) {
                 color = new Color(e.draggable.element.css(property)).get();
 
                 var css = { cursor: cursorSvg.replace("%23f984ef", color) };
 
                 css[property] = color;
-                this.element.css(css);
+                $(e.filterTarget).css(css);
             },
-            dragleave: function () {
-                this.element.css(defaultCSS);
+            dragleave: function (e) {
+                $(e.filterTarget).css(defaultCSS);
             },
             drop: function (e) {
-                var that = this;
+                var that = this,
+                    target = $(e.filterTarget);
 
-                that.element.css(defaultCSS);
+                target.css(defaultCSS);
 
                 if (CtrlDown) {
                     var offset = that.element.offset(),
-                        structure = buildMenu(that.element);
+                        structure = buildMenu(target);
 
                     contextMenu.element.empty();
                     contextMenu.append(structure);
@@ -378,11 +380,11 @@ function initTargets() {
                         var style = {}, dataItem = getMenuDataItem(e.item, structure);
                         style[dataItem.text] = color;
 
-                        that.element.parents(".device").data("kendoStyleEngine").update(that.element.closest(dataItem.value), style);
+                        target.parents(".device").data("kendoStyleEngine").update(target.closest(dataItem.value), style);
                     });
                     contextMenu.show(offset.left + e.offsetX, offset.top + e.offsetY);
                 } else {
-                    that.element.parents(".device").data("kendoStyleEngine").update(this.element, { "background-color": color });
+                    target.parents(".device").data("kendoStyleEngine").update(target, { "background-color": color });
                 }
             }
         });

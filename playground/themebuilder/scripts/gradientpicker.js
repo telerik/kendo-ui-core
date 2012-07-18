@@ -116,6 +116,9 @@
                     anchor: element,
                     origin: "bottom center",
                     position: "top center",
+                    open: function () {
+                        that.popup.element.find(".gradient-view").css("background-color", element.css("background-color"));
+                    },
                     close: function () {
                         if (that.styleengine) {
                             that.styleengine.update(that.element, { "background-image": that.gradients.get(support.transforms.css) });

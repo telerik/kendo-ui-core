@@ -13,6 +13,7 @@
         getOffset = kendo.getOffset,
         draggables = {},
         dropTargets = {},
+        dropFilters = {},
         lastDropTarget,
         invalidZeroEvents = support.mobileOS && support.mobileOS.android,
         START_EVENTS = "mousedown",
@@ -102,6 +103,50 @@
         }
 
         parent.trigger(e.type);
+    }
+
+    var elementProto = HTMLElement.prototype,
+        matchesSelector = elementProto.webkitMatchesSelector || elementProto.mozMatchesSelector || elementProto.msMatchesSelector ||
+                          elementProto.oMatchesSelector || elementProto.matchesSelector ||
+                          function( elem, selector ) {
+                              var nodeList = ( elem.parentNode || document ).querySelectorAll( selector ) || [],
+                                  i = nodeList.length;
+
+                              while ( i-- ) {
+                                  if ( nodeList[i] == elem ) {
+                                      return true;
+                                  }
+                              }
+
+                              return false;
+                          };
+
+    function checkTarget(target, targets, filters) {
+        var theTarget, theFilter, i = 0,
+            targetLen = targets && targets.length,
+            filterLen = filters && filters.length;
+
+        while (target && target.parentNode) {
+            for (i = 0; i < targetLen; i ++) {
+                theTarget = targets[i];
+                if (theTarget.element[0] === target) {
+                    return { target: theTarget, targetElement: target };
+                }
+            }
+
+            if (document.querySelectorAll) {
+                for (i = 0; i < filterLen; i ++) {
+                    theFilter = filters[i];
+                    if (matchesSelector.call(target, theFilter.options.filter)) {
+                        return { target: theFilter, targetElement: target };
+                    }
+                }
+            }
+
+            target = target.parentNode;
+        }
+
+        return undefined;
     }
 
     var DragAxis = Class.extend({
@@ -653,7 +698,8 @@
 
             if (draggable) {
                 return that.trigger(eventName, extend({}, e.event, {
-                           draggable: draggable
+                           draggable: draggable,
+                           filterTarget: e.filterTarget
                        }));
             }
         },
@@ -673,6 +719,28 @@
             if (draggable) {
                 draggable.dropped = !that._trigger(DROP, e);
             }
+        }
+    });
+
+    var DropFilter = DropTarget.extend({
+        init: function(element, options) {
+            var that = this;
+
+            Widget.fn.init.call(that, element, options);
+
+            var group = that.options.group;
+
+            if (!(group in dropFilters)) {
+                dropFilters[group] = [ that ];
+            } else {
+                dropFilters[group].push( that );
+            }
+        },
+
+        options: {
+            name: "DropFilter",
+            group: "default",
+            filter: null
         }
     });
 
@@ -794,25 +862,25 @@
 
             e.preventDefault();
 
-            that._withDropTarget(e, function(target) {
+            that._withDropTarget(e, function(target, targetElement) {
                 if (!target) {
                     if (lastDropTarget) {
-                        lastDropTarget._trigger(DRAGLEAVE, e);
+                        lastDropTarget._trigger(DRAGLEAVE, extend(e, { filterTarget: lastDropTarget.targetElement }));
                         lastDropTarget = null;
                     }
                     return;
                 }
 
                 if (lastDropTarget) {
-                    if (target.element[0] === lastDropTarget.element[0]) {
+                    if (targetElement === lastDropTarget.targetElement) {
                         return;
                     }
 
-                    lastDropTarget._trigger(DRAGLEAVE, e);
+                    lastDropTarget._trigger(DRAGLEAVE, extend(e, { filterTarget: lastDropTarget.targetElement }));
                 }
 
-                target._trigger(DRAGENTER, e);
-                lastDropTarget = target;
+                target._trigger(DRAGENTER, extend(e, { filterTarget: targetElement }));
+                lastDropTarget = extend(target, { targetElement: targetElement });
             });
 
             that._trigger(DRAG, e);
@@ -825,9 +893,9 @@
         _end: function(e) {
             var that = this;
 
-            that._withDropTarget(e, function(target) {
+            that._withDropTarget(e, function(target, targetElement) {
                 if (target) {
-                    target._drop(e);
+                    target._drop(extend({}, e, { filterTarget: targetElement }));
                     lastDropTarget = null;
                 }
             });
@@ -850,27 +918,26 @@
             var that = this;
 
             return that.trigger(
-            eventName, extend(
-            {},
-            e.event,
-            {
-                x: e.x,
-                y: e.y,
-                currentTarget: that.currentTarget
-            }));
+                eventName, extend(
+                {},
+                e.event,
+                {
+                    x: e.x,
+                    y: e.y,
+                    currentTarget: that.currentTarget,
+                    filterTarget: e.filterTarget
+                }
+            ));
         },
 
         _withDropTarget: function(e, callback) {
             var that = this,
-                target,
-                theTarget,
-                result,
+                target, result,
                 options = that.options,
                 targets = dropTargets[options.group],
-                i = 0,
-                length = targets && targets.length;
+                filters = dropFilters[options.group];
 
-            if (length) {
+            if (targets && targets.length || filters && filters.length) {
 
                 target = elementUnderCursor(e);
 
@@ -880,20 +947,13 @@
                     that.hint.show();
                 }
 
-                outer:
-                while (target) {
-                    for (i = 0; i < length; i ++) {
-                        theTarget = targets[i];
-                        if (theTarget.element[0] === target) {
-                            result = theTarget;
-                            break outer;
-                        }
-                    }
+                result = checkTarget(target, targets, filters);
 
-                    target = target.parentNode;
+                if (result) {
+                    callback(result.target, result.targetElement);
+                } else {
+                    callback();
                 }
-
-                callback(result);
             }
         },
 
@@ -922,6 +982,7 @@
     });
 
     kendo.ui.plugin(DropTarget);
+    kendo.ui.plugin(DropFilter);
     kendo.ui.plugin(Draggable);
     kendo.Drag = Drag;
     kendo.Tap = Tap;
