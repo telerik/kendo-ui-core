@@ -8,6 +8,7 @@
         template = kendo.template,
         Widget = ui.Widget,
         excludedNodesRegExp = /^(ul|a|div)$/i,
+        NS = ".kendoMenu",
         IMG = "img",
         OPEN = "open",
         MENU = "k-menu",
@@ -62,7 +63,7 @@
         },
 
         rendering = {
-            
+
             wrapperCssClass: function (group, item) {
                 var result = "k-item",
                     index = item.index;
@@ -83,15 +84,15 @@
 
                 return result;
             },
-            
+
             textClass: function(item) {
                 return LINK;
             },
-            
+
             textAttributes: function(item) {
                 return item.url ? " href='" + item.url + "'" : "";
             },
-            
+
             arrowClass: function(item, group) {
                 var result = "k-icon";
 
@@ -103,23 +104,23 @@
 
                 return result;
             },
-            
+
             text: function(item) {
                 return item.encoded === false ? item.text : kendo.htmlEncode(item.text);
             },
-            
+
             tag: function(item) {
                 return item.url ? "a" : "span";
             },
-            
+
             groupAttributes: function(group) {
                 return group.expanded !== true ? " style='display:none'" : "";
             },
-            
+
             groupCssClass: function(group) {
                 return "k-group";
             },
-            
+
             content: function(item) {
                 return item.content ? item.content : "&nbsp;";
             }
@@ -241,21 +242,22 @@
 
             that.nextItemZIndex = 100;
 
-            element.delegate(disabledSelector, CLICK, false)
-                   .delegate(itemSelector, CLICK, proxy(that._click , that));
+            element.on(CLICK + NS, disabledSelector, false)
+                   .on(CLICK + NS, itemSelector, proxy(that._click , that));
 
             if (!touch) {
-                element.delegate(itemSelector, MOUSEENTER, proxy(that._mouseenter, that))
-                       .delegate(itemSelector, MOUSELEAVE, proxy(that._mouseleave, that))
-                       .delegate(linkSelector, MOUSEENTER + " " + MOUSELEAVE, that._toggleHover);
+                element.on(MOUSEENTER + NS, itemSelector, proxy(that._mouseenter, that))
+                       .on(MOUSELEAVE + NS, itemSelector, proxy(that._mouseleave, that))
+                       .on(MOUSEENTER + NS + " " + MOUSELEAVE + NS, linkSelector, that._toggleHover);
             } else {
                 options.openOnClick = true;
-                element.delegate(linkSelector, "touchstart touchend", that._toggleHover);
+                element.on("touchstart" + NS + " touchend" + NS, linkSelector, that._toggleHover);
             }
 
             if (options.openOnClick) {
                 that.clicked = false;
-                $(document).click(proxy( that._documentClick, that ));
+                that._documentClickHandler = proxy(that._documentClick, that);
+                $(document).click(that._documentClickHandler);
             }
 
             kendo.notify(that);
@@ -283,6 +285,18 @@
             openOnClick: false,
             closeOnClick: true,
             hoverDelay: 100
+        },
+
+        destroy: function() {
+            var that = this;
+
+            Widget.fn.destroy.call(that);
+
+            that.element.off(NS);
+
+            if (that._documentClickHandler) {
+                $(document).unbind(that._documentClickHandler);
+            }
         },
 
         enable: function (element, enable) {
