@@ -116,6 +116,21 @@
             Widget.fn.setOptions.call(this, options);
         },
 
+        destroy: function() {
+            var that = this,
+                today = that._today.off(ns);
+
+            that.element.off(ns);
+            that._title.off(ns);
+            that[PREVARROW].off(ns);
+            that[NEXTARROW].off(ns);
+
+            kendo.destroy(today);
+            kendo.destroy(that._view);
+
+            Widget.fn.destroy.call(that);
+        },
+
         min: function(value) {
             return this._option(MIN, value);
         },
