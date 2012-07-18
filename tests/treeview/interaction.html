@@ -196,6 +196,24 @@
 
                 equal(treeview.text(), "barfoobaz");
             });
+
+            test("moving nodes updates toggle button correctly", function() {
+                var treeview = createTreeView({
+                        dragAndDrop: true,
+                        dataSource: [
+                            { text: "bar" },
+                            { text: "foo", expanded: true, items: [
+                                { text: "baz" },
+                                { text: "qux" }
+                            ] }
+                        ]
+                    }),
+                    treeviewObject = treeview.data("kendoTreeView");
+
+                moveNode(treeviewObject, "baz", "bar");
+
+                ok(treeviewObject.findByText("foo").find(".k-icon:first").hasClass("k-minus"));
+            });
         </script>
 
         <div id="qunit-fixture"> </div>
