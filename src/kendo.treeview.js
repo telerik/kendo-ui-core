@@ -1,4 +1,3 @@
-
 (function($, undefined){
     var kendo = window.kendo,
         ui = kendo.ui,
@@ -251,14 +250,21 @@
         },
 
         _animation: function() {
-            var options = this.options;
+            var options = this.options,
+                animationOptions = options.animation;
 
-            if (options.animation === false) {
-                options.animation = {
+            if (animationOptions === false) {
+                animationOptions = {
                     expand: { show: true, effects: {} },
                     collapse: { hide: true, effects: {} }
                 };
+            } else if (!animationOptions.collapse || !("effects" in animationOptions.collapse)) {
+                animationOptions.collapse = extend({ reverse: true }, animationOptions.expand);
             }
+
+            extend(animationOptions.collapse, { show: false, hide: true });
+
+            options.animation = animationOptions;
         },
 
         _dataSource: function(silentRead) {
@@ -696,21 +702,13 @@
 
         expand: function (nodes) {
             this._processNodes(nodes, function (index, item) {
-                var contents = nodeContents(item);
-
-                if (contents.length > 0 && !contents.is(VISIBLE)) {
-                    this.toggle(item);
-                }
+                this.toggle(item, true);
             });
         },
 
         collapse: function (nodes) {
             this._processNodes(nodes, function (index, item) {
-                var contents = nodeContents(item);
-
-                if (contents.length > 0 && contents.is(VISIBLE)) {
-                    this.toggle(item);
-                }
+                this.toggle(item, false);
             });
         },
 
@@ -745,7 +743,7 @@
             }
         },
 
-        toggle: function (node) {
+        toggle: function (node, expand) {
             node = $(node);
 
             if (!node.find(">div>.k-icon").is(".k-minus,.k-plus,.k-minus-disabled,.k-plus-disabled")) {
@@ -753,25 +751,18 @@
             }
 
             var that = this,
-                contents = nodeContents(node),
-                isExpanding = !contents.is(VISIBLE),
                 options = that.options,
-                animationSettings = options.animation || {},
-                animation = animationSettings.expand,
-                collapse = extend({}, animationSettings.collapse),
-                hasCollapseAnimation = collapse && "effects" in collapse,
+                contents = nodeContents(node),
+                isExpanding = arguments.length == 1 ? !contents.is(VISIBLE) : expand,
+                direction = isExpanding ? "expand" : "collapse",
+                animation = options.animation[direction],
                 dataItem = that.dataItem(node);
 
             if (contents.data("animating")) {
                 return;
             }
 
-            if (!isExpanding) {
-                animation = extend( hasCollapseAnimation ? collapse
-                                    : extend({ reverse: true }, animation), { show: false, hide: true });
-            }
-
-            if (!that._trigger(isExpanding ? "expand" : "collapse", node)) {
+            if (!that._trigger(direction, node)) {
                 that._expanded(node, isExpanding);
 
                 if (contents.children().length > 0) {
@@ -781,7 +772,7 @@
                         contents.css("height", contents.height()).css("height");
                     }
 
-                    contents.kendoStop(true, true).kendoAnimate(extend(animation, {
+                    contents.kendoStop(true, true).kendoAnimate(extend({}, animation, {
                         complete: function() {
                             if (isExpanding) {
                                 contents.css("height", "");

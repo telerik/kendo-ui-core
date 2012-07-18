@@ -555,7 +555,7 @@
 
                 treeviewObject.expand(".k-item");
 
-                equal(calls, 1);
+                equal(calls, 2);
             });
 
             test("expand() with DOM elements", function() {
@@ -575,6 +575,29 @@
                 treeviewObject.expand($(".k-item:first")[0]);
 
                 equal(calls, 1);
+            });
+
+            test("expand() on load-on-demand nodes", function() {
+                createTreeView({
+                    dataSource: {
+                        transport: {
+                            read: function(options) {
+                                options.success([ { text: "foo", hasChildren: true } ]);
+                            }
+                        },
+                        schema: {
+                            model: {
+                                hasChildren: "hasChildren"
+                            }
+                        }
+                    }
+                });
+
+                equal(treeview.find(".k-item").length, 1);
+
+                treeviewObject.expand(".k-item");
+
+                equal(treeview.find(".k-item .k-item").length, 1);
             });
 
             test("toggle() toggles disabled nodes", function() {
