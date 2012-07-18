@@ -18,8 +18,8 @@
             element.addClass("km-modalview").wrap(WRAP);
 
             that.wrapper = element.parent().css({
-                width: options.width || element[0].style.width || 300,
-                height: options.height || element[0].style.height || 300
+                width: options.width || element[0].style.width || 280,
+                height: options.height || element[0].style.height || 280
             });
             element.css({ width: "", height: "" });
 
@@ -40,7 +40,9 @@
 
         options: {
             name: "ModalView",
-            modal: true
+            modal: true,
+            width: null,
+            height: null
         },
 
         open: function(target) {
