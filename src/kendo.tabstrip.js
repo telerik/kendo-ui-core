@@ -1,4 +1,3 @@
-
 (function ($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
@@ -9,6 +8,7 @@
         template = kendo.template,
         Widget = ui.Widget,
         excludedNodesRegExp = /^(a|div)$/i,
+        NS = ".kendoTabStrip",
         IMG = "img",
         HREF = "href",
         LINK = "k-link",
@@ -155,9 +155,9 @@
             options = that.options;
 
             that.wrapper
-                .delegate(CLICKABLEITEMS, CLICK, $.proxy(that._click, that))
-                .delegate(HOVERABLEITEMS, MOUSEENTER + " " + MOUSELEAVE, that._toggleHover)
-                .delegate(DISABLEDLINKS, CLICK, false);
+                .on(CLICK + NS, CLICKABLEITEMS, $.proxy(that._click, that))
+                .on(MOUSEENTER + NS +" " + MOUSELEAVE + NS, HOVERABLEITEMS, that._toggleHover)
+                .on(CLICK + NS, DISABLEDLINKS, false);
 
             that._updateClasses();
 
@@ -342,6 +342,19 @@
                 }
             },
             collapsible: false
+        },
+
+        destroy: function() {
+            var that = this;
+
+            Widget.fn.destroy.call(that);
+
+            if (that._refreshHandler) {
+                that.dataSource.unbind("change", that._refreshHandler);
+            }
+
+            that.wrapper.off(NS);
+            kendo.destroy(that.wrapper);
         },
 
         select: function (element) {
