@@ -22,7 +22,7 @@
             that._position = that.orientation == HORIZONTAL ? "left" : "top";
             that._sizingDom = that.orientation == HORIZONTAL ? "outerWidth" : "outerHeight";
 
-            new ui.Draggable(element, {
+            that.draggable = new ui.Draggable(element, {
                 distance: 0,
                 filter: options.handle,
                 drag: proxy(that._resize, that),
@@ -106,6 +106,15 @@
 
             that.trigger(RESIZEEND, extend(e, { position: that.position }));
             $(document.body).css("cursor", "");
+        },
+        destroy: function() {
+            var that = this;
+
+            Widget.fn.destroy.call(that);
+
+            if (that.draggable) {
+                that.draggable.destroy();
+            }
         }
     });
 
