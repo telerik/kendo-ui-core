@@ -12,6 +12,7 @@
         SELECTSTART = "selectstart",
         DOCUMENT = $(document),
         CHANGE = "change",
+        NS = ".kendoSelectable",
         UNSELECTING = "k-state-unselecting";
 
     var Selectable = Widget.extend({
@@ -27,7 +28,7 @@
             that._upDelegate = proxy(that._up, that);
 
             that.element.addClass(SELECTABLE);
-            that.element.delegate("." + SELECTABLE + " " + that.options.filter, MOUSEDOWN, proxy(that._down, that));
+            that.element.on(MOUSEDOWN + NS, "." + SELECTABLE + " " + that.options.filter, proxy(that._down, that));
         },
 
         events: [CHANGE],
@@ -296,6 +297,13 @@
                 }
             });
             that.trigger(CHANGE, {});
+        },
+        destroy: function() {
+            var that = this;
+
+            Widget.fn.destroy.call(that);
+
+            that.element.off(NS);
         }
     });
 
