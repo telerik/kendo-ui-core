@@ -76,6 +76,15 @@
             this.popup.close();
         },
 
+        destroy: function() {
+            var that = this;
+
+            that.ul.off(ns);
+            that.list.off(ns);
+
+            that.popup.destroy();
+        },
+
         open: function() {
             var that = this;
 
@@ -510,6 +519,22 @@
 
                 arrow.on(CLICK, proxy(that._click, that))
                      .on(MOUSEDOWN, preventDefault);
+            }
+        },
+
+        destroy: function() {
+            var that = this;
+
+            Widget.fn.destroy.call(that);
+
+            that.timeView.destroy();
+
+            that.element.off(ns);
+            that._arrow.off(ns);
+            that._inputWrapper.off(ns);
+
+            if (that._form) {
+                that._form.off("reset", that._resetHandler);
             }
         },
 
