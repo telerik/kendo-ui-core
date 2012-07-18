@@ -1,4 +1,3 @@
-
 (function($, undefined) {
     var kendo = window.kendo,
         Widget = kendo.ui.Widget,
@@ -10,6 +9,7 @@
         template = kendo.template,
         BODY = "body",
         templates,
+        NS = ".kendoWindow",
         // classNames
         KWINDOW = ".k-window",
         KWINDOWTITLEBAR = ".k-window-titlebar",
@@ -148,14 +148,13 @@
                 that._overlay(wrapper.is(VISIBLE)).css({ opacity: 0.5 });
             }
 
-            wrapper.on({
-                mouseenter: function () { $(this).addClass(KHOVERSTATE); },
-                mouseleave: function () { $(this).removeClass(KHOVERSTATE); },
-                click: proxy(that._windowActionHandler, that)
-            }, ".k-window-titlebar .k-window-action");
+            wrapper
+                .on("mouseenter" + NS,  ".k-window-titlebar .k-window-action", function () { $(this).addClass(KHOVERSTATE); })
+                .on("mouseleave" + NS,  ".k-window-titlebar .k-window-action", function () { $(this).removeClass(KHOVERSTATE); })
+                .on("click" + NS, ".k-window-titlebar .k-window-action", proxy(that._windowActionHandler, that));
 
             if (options.resizable) {
-                wrapper.on("dblclick", KWINDOWTITLEBAR, proxy(that.toggleMaximization, that));
+                wrapper.on("dblclick" + NS, KWINDOWTITLEBAR, proxy(that.toggleMaximization, that));
 
                 each("n e s w se sw ne nw".split(" "), function(index, handler) {
                     wrapper.append(templates.resizeHandle(handler));
@@ -169,11 +168,15 @@
             }
 
             wrapper.add(wrapper.find(".k-resize-handle,.k-window-titlebar"))
-                .on("mousedown", proxy(that.toFront, that));
+                .on("mousedown" + NS, proxy(that.toFront, that));
 
             that.touchScroller = kendo.touchScroller(element);
 
-            $(window).resize(proxy(that._onDocumentResize, that));
+            that._resizeHandler = function(e) {
+                return that._onDocumentResize(e);
+            };
+
+            $(window).on("resize", that._resizeHandler);
 
             if (options.visible) {
                 that.trigger(OPEN);
@@ -651,7 +654,13 @@
                 modalWindows,
                 shouldHideOverlay;
 
-            that.wrapper.remove();
+            Widget.fn.destroy.call(that);
+
+            that.wrapper.remove().add(that.wrapper.find(".k-resize-handle,.k-window-titlebar")).off(NS);
+
+            $(window).off("resize", that._resizeHandler);
+
+            kendo.destroy(that.wrapper);
 
             modalWindows = openedModalWindows();
 
