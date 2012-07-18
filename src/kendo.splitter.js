@@ -1,4 +1,3 @@
-
 (function ($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
@@ -7,6 +6,7 @@
         Widget = ui.Widget,
         pxUnitsRegex = /^\d+(\.\d+)?px$/i,
         percentageUnitsRegex = /^\d+(\.\d+)?%$/i,
+        NS = ".kendoSplitter",
         EXPAND = "expand",
         COLLAPSE = "collapse",
         CONTENTLOAD = "contentLoad",
@@ -52,10 +52,7 @@
 
     var Splitter = Widget.extend({
         init: function(element, options) {
-            var that = this,
-                triggerResize = function() {
-                    that.trigger(RESIZE);
-                };
+            var that = this;
 
             Widget.fn.init.call(that, element, options);
 
@@ -67,9 +64,13 @@
 
             that._initPanes();
 
+            that._resizeHandler = function() {
+                that.trigger(RESIZE);
+            };
+
             that._attachEvents();
 
-            $(window).resize(triggerResize);
+            $(window).on("resize", that._resizeHandler);
 
             that.resizing = new PaneResizing(that);
 
@@ -91,31 +92,28 @@
             var that = this,
                 orientation = that.options.orientation,
                 splitbarSelector = ".k-splitbar-draggable-" + orientation,
-                expandCollapseSelector = ".k-splitbar .k-icon:not(.k-resize-handle)",
-                triggerResize = function() {
-                    that.trigger(RESIZE);
-                };
+                expandCollapseSelector = ".k-splitbar .k-icon:not(.k-resize-handle)";
 
             that.element
-                .delegate(splitbarSelector, MOUSEENTER, function() { $(this).addClass("k-splitbar-" + that.orientation + "-hover"); })
-                .delegate(splitbarSelector, MOUSELEAVE, function() { $(this).removeClass("k-splitbar-" + that.orientation + "-hover"); })
-                .delegate(splitbarSelector, "mousedown", function() { that._contentFrames(this).after("<div class='k-overlay' />"); })
-                .delegate(splitbarSelector, "mouseup", function() { that._contentFrames(this).next(".k-overlay").remove(); })
-                .delegate(expandCollapseSelector, MOUSEENTER, function() { $(this).addClass("k-state-hover"); })
-                .delegate(expandCollapseSelector, MOUSELEAVE, function() { $(this).removeClass('k-state-hover'); })
-                .delegate(".k-splitbar .k-collapse-next, .k-splitbar .k-collapse-prev", CLICK, that._arrowClick(COLLAPSE))
-                .delegate(".k-splitbar .k-expand-next, .k-splitbar .k-expand-prev", CLICK, that._arrowClick(EXPAND))
-                .delegate(".k-splitbar", "dblclick", proxy(that._dbclick, that))
+                .on(MOUSEENTER + NS, splitbarSelector, function() { $(this).addClass("k-splitbar-" + that.orientation + "-hover"); })
+                .on(MOUSELEAVE + NS, splitbarSelector, function() { $(this).removeClass("k-splitbar-" + that.orientation + "-hover"); })
+                .on("mousedown" + NS, splitbarSelector, function() { that._contentFrames(this).after("<div class='k-overlay' />"); })
+                .on("mouseup" + NS, splitbarSelector, function() { that._contentFrames(this).next(".k-overlay").remove(); })
+                .on(MOUSEENTER + NS, expandCollapseSelector, function() { $(this).addClass("k-state-hover"); })
+                .on(MOUSELEAVE + NS, expandCollapseSelector, function() { $(this).removeClass('k-state-hover'); })
+                .on(CLICK + NS, ".k-splitbar .k-collapse-next, .k-splitbar .k-collapse-prev", that._arrowClick(COLLAPSE))
+                .on(CLICK + NS, ".k-splitbar .k-expand-next, .k-splitbar .k-expand-prev", that._arrowClick(EXPAND))
+                .on("dblclick" + NS, ".k-splitbar", proxy(that._dbclick, that))
                 .parent().closest(".k-splitter").each(function() {
                     var parentSplitter = $(this),
                         splitter = parentSplitter.data("kendoSplitter");
 
                     if (splitter) {
-                        splitter.bind(RESIZE, triggerResize);
+                        splitter.bind(RESIZE, that._resizeHandler);
                     } else {
-                        parentSplitter.one("init.kendoSplitter", function() {
-                            $(this).data("kendoSplitter").bind(RESIZE, triggerResize);
-                            triggerResize();
+                        parentSplitter.one("init" + NS, function() {
+                            $(this).data("kendoSplitter").bind(RESIZE, that._resizeHandler);
+                            that._resizeHandler();
                         });
                     }
                 });
@@ -124,6 +122,19 @@
         options: {
             name: "Splitter",
             orientation: HORIZONTAL
+        },
+
+        destroy: function() {
+            var that = this;
+
+            Widget.fn.destroy.call(that);
+
+            that.element.off(NS);
+            that.resizing.destroy();
+
+            $(window).off("resize", that._resizeHandler);
+
+            kendo.destroy(that.element);
         },
 
         _initPanes: function() {
@@ -144,6 +155,7 @@
                         that.ajaxRequest(pane);
                     })
                 .end();
+
             that.trigger(RESIZE);
         },
 
@@ -435,6 +447,9 @@
     }
 
     PaneResizing.prototype = {
+        destroy: function() {
+            this._resizable.destroy();
+        },
         _createHint: function(handle) {
             var that = this;
             return $("<div class='k-ghost-splitbar k-ghost-splitbar-" + that.orientation + " k-state-default' />")
