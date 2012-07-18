@@ -539,6 +539,20 @@
                 equal(treeviewObject.text(bar), "baz");
             });
 
+            test("initially expanded items query the child datasources", function() {
+                createTreeView({
+                    dataSource: new HierarchicalDataSource({
+                        data: [
+                            { text: "foo", expanded: true, items: [
+                                { text: "bar" }
+                            ] }
+                        ]
+                    })
+                });
+
+                equal(treeview.find(".k-item").length, 2);
+            });
+
         </script>
 
         <div id="qunit-fixture"> </div>

@@ -693,8 +693,8 @@
                 }
             }
 
-            if (!loadOnDemand) {
-                for (i = 0; i < items.length; i++) {
+            for (i = 0; i < items.length; i++) {
+                if (!loadOnDemand || items[i].expanded) {
                     items[i].load();
                 }
             }
