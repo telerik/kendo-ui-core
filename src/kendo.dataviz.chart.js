@@ -3908,6 +3908,8 @@
             plotArea.options.id = uniqueId();
             plotArea.makeDiscoverable();
             plotArea.render();
+
+            plotArea.createPanes();
         },
 
         options: {
@@ -3921,6 +3923,34 @@
                 width: 0
             },
             legend: {}
+        },
+
+        createPanes: function() {
+            var plotArea = this,
+                axes = plotArea.axes,
+                panes = [],
+                paneOptions = plotArea.options.panes || [],
+                i,
+                panesLength = math.max(paneOptions.length, 1),
+                currentPane;
+
+            for (i = 0; i < panesLength; i++) {
+                currentPane = new BoxElement(paneOptions[i]);
+
+                currentPane.axes = grep(axes, function(axis) {
+                    var axisPane = axis.options.pane;
+
+                    if (axisPane) {
+                        return axisPane === currentPane.options.name;
+                    } else {
+                        return !axisPane && i === 0;
+                    }
+                });
+
+                panes.push(currentPane);
+            }
+
+            plotArea.panes = panes;
         },
 
         appendChart: function(chart) {
@@ -4229,20 +4259,13 @@
 
             for (i = 0; i < panesLength; i++) {
                 currentPane = panes[i];
-
-                paneAxes = grep(axes, (function(axis) {
-                    var paneName = axis.options.pane;
-
-                    return (paneName && paneName === currentPane.options.name) ||
-                           (!paneName && i === 0);
-                }));
-
-                plotArea.reflowPaneAxes(currentPane, paneAxes);
+                plotArea.reflowPaneAxes(panes[i]);
             }
         },
 
-        reflowPaneAxes: function(pane, axes) {
+        reflowPaneAxes: function(pane) {
             var plotArea = this,
+                axes = pane.axes,
                 xAxes = grep(axes, (function(axis) { return !axis.options.vertical; })),
                 yAxes = grep(axes, (function(axis) { return axis.options.vertical; })),
                 i,
@@ -4397,7 +4420,6 @@
             var plotArea = this,
                 series = plotArea.series;
 
-            plotArea.createPanes();
             plotArea.createCategoryAxis();
 
             if (plotArea.categoryAxis.options.type === DATE) {
@@ -4420,25 +4442,6 @@
             plotArea.createValueAxes();
         },
 
-        createPanes: function() {
-            var plotArea = this,
-                panesByName = {},
-                panes = [],
-                paneOptions = plotArea.options.panes || [],
-                i,
-                panesLength = math.max(paneOptions.length, 1),
-                currentPane;
-
-            for (i = 0; i < panesLength; i++) {
-                currentPane = new BoxElement(paneOptions[i]);
-                panesByName[paneOptions[i].name] = currentPane;
-                panes.push(currentPane);
-            }
-
-            plotArea.panes = panes;
-            plotArea.panesByName = panesByName;
-        },
-
         reflow: function(targetBox) {
             var plotArea = this,
                 panes = plotArea.panes,
@@ -4451,6 +4454,7 @@
                 height,
                 percents;
 
+            console.log(targetBox.height())
             for (i = 0; i < panesLength; i++) {
                 currentPane = panes[i];
                 height = currentPane.options.height;
@@ -4468,7 +4472,7 @@
                     currentPane.options.height = remainingHeight / remainingPanes;
                 }
 
-                currentPane.options.width = targetBox.height();
+                currentPane.options.width = targetBox.width();
 
                 paneBox = targetBox
                     .clone()
@@ -4648,29 +4652,6 @@
             plotArea.categoryAxis = categoryAxis;
             plotArea.axes.push(categoryAxis);
             plotArea.append(plotArea.categoryAxis);
-
-            // TODO: Support for multiple category axes, shadows?
-            var panes = plotArea.panes,
-                i,
-                panesLength = panes.length,
-                currentPane;
-
-            for (i = 0; i < panesLength; i++) {
-                currentPane = panes[i];
-
-                if (categoryAxis.options.pane !== currentPane.options.name) {
-                    plotArea.axes.push(new CategoryAxis(deepExtend({
-                                vertical: invertAxes,
-                                axisCrossingValue: invertAxes ? categoriesCount : 0
-                            },
-                            categoryAxisOptions, {
-                                pane: currentPane.options.name
-                            })
-                        )
-                    );
-                }
-            }
-
         },
 
         createValueAxes: function() {
@@ -4706,6 +4687,53 @@
                 plotArea.axisX = primaryValueAxis;
             } else {
                 plotArea.axisY = primaryValueAxis;
+            }
+        },
+
+        createPanes: function() {
+            var plotArea = this,
+                panes,
+                i,
+                panesLength,
+                currentPane;
+
+            PlotAreaBase.fn.createPanes.call(plotArea);
+
+            // createCategoryAxis
+            var options = plotArea.options,
+                invertAxes = plotArea.invertAxes,
+                categoryAxisOptions = options.categoryAxis,
+                categories = categoryAxisOptions.categories,
+                categoriesCount = categories.length,
+                axisType  = categoryAxisOptions.type,
+                dateCategory = categories[0] instanceof Date,
+                categoryAxis;
+
+            if (axisType === DATE || (!axisType && dateCategory)) {
+                categoryAxis = new DateCategoryAxis(deepExtend({
+                        vertical: invertAxes
+                    },
+                    categoryAxisOptions)
+                );
+            } else {
+                categoryAxis = new CategoryAxis(deepExtend({
+                        vertical: invertAxes,
+                        axisCrossingValue: invertAxes ? categoriesCount : 0
+                    },
+                    categoryAxisOptions)
+                );
+            }
+            // createCategoryAxis
+
+            panes = plotArea.panes;
+            panesLength = panes.length;
+
+            for (i = 0; i < panesLength; i++) {
+                currentPane = panes[i];
+
+                if (currentPane.axes.length < 2) {
+                    currentPane.axes.push(categoryAxis);
+                }
             }
         },
 
