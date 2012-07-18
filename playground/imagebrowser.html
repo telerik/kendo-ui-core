@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>imagebrowser</title>
+        <script src="../src/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.data.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.imagebrowser.js" type="text/javascript" charset="utf-8"></script>
+        <link href="../styles/kendo.common.css" rel="stylesheet"/>
+        <link href="../styles/kendo.blueopal.css" rel="stylesheet"/>
+        <style>
+            body {
+               font: 75% arial,helvetica,sans-serif;
+           }
+       </style>
+   </head>
+    <body>
+        <div id="container"></div>
+        <script>
+            $(document).ready(function() {
+                $("#container").kendoImageBrowser({});
+            });
+        </script>
+    </body>
+</html>
