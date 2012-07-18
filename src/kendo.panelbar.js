@@ -1,4 +1,3 @@
-
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
@@ -7,6 +6,7 @@
         template = kendo.template,
         Widget = ui.Widget,
         excludedNodesRegExp = /^(ul|a|div)$/i,
+        NS = ".kendoPanelBar",
         IMG = "img",
         HREF = "href",
         LAST = "k-last",
@@ -234,9 +234,9 @@
             }
 
             element
-                .delegate(clickableItems, CLICK, $.proxy(that._click, that))
-                .delegate(clickableItems, MOUSEENTER + " " + MOUSELEAVE, that._toggleHover)
-                .delegate(disabledItems, CLICK, false);
+                .on(CLICK + NS, clickableItems, $.proxy(that._click, that))
+                .on(MOUSEENTER  + NS + " " + MOUSELEAVE + NS, clickableItems, that._toggleHover)
+                .on(CLICK + NS, disabledItems, false);
 
             if (options.contentUrls) {
                 element.find("> .k-item")
@@ -255,17 +255,13 @@
         },
 
         events: [
-                EXPAND,
-
-                COLLAPSE,
-
-                SELECT,
-
-                ACTIVATE,
-
-                ERROR,
-                CONTENTLOAD
-            ],
+            EXPAND,
+            COLLAPSE,
+            SELECT,
+            ACTIVATE,
+            ERROR,
+            CONTENTLOAD
+        ],
         options: {
             name: "PanelBar",
             animation: {
@@ -281,6 +277,13 @@
             expandMode: "multiple"
         },
 
+        destroy: function() {
+            Widget.fn.destroy.call(this);
+
+            this.element.off(NS);
+
+            kendo.destroy(this.element);
+        },
         expand: function (element, useAnimation) {
             var that = this,
                 animBackup = {};
