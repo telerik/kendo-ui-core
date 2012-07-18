@@ -879,8 +879,11 @@
                     property = (direction ? direction == "vertical" : true) ? HEIGHT : WIDTH,
                     setLength = element[0].style[property],
                     oldLength = element.data(property),
-                    length = parseFloat(oldLength || setLength) || round(element.css(property, AUTO )[property]()),
+                    length = parseFloat(oldLength || setLength),
+                    realLength = round(element.css(property, AUTO)[property]()),
                     completion = {};
+
+                length = options.reset ? realLength || length : length || realLength;
 
                 completion[property] = (reverse ? 0 : length) + PX;
                 element.css(property, reverse ? length : 0).css(property);

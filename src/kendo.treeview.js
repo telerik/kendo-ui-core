@@ -772,7 +772,7 @@
                         contents.css("height", contents.height()).css("height");
                     }
 
-                    contents.kendoStop(true, true).kendoAnimate(extend({}, animation, {
+                    contents.kendoStop(true, true).kendoAnimate(extend({ reset: true }, animation, {
                         complete: function() {
                             if (isExpanding) {
                                 contents.css("height", "");
