@@ -659,7 +659,7 @@
                 resizeHandle = that.resizeHandle,
                 left;
 
-            that.thead.on("mousemove", "th:not(.k-group-cell,.k-hierarchy-cell)", function(e) {
+            that.thead.on("mousemove" + NS, "th:not(.k-group-cell,.k-hierarchy-cell)", function(e) {
                  var th = $(this),
                     position = th.offset().left + this.offsetWidth;
 
