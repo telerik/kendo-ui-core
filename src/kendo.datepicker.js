@@ -8,8 +8,8 @@
     template = kendo.template,
     DIV = "<div />",
     SPAN = "<span />",
-    CLICK = (touch ? "touchend" : "click"),
-    CLICK_DATEPICKER = CLICK + ".datepicker",
+    ns = ".kendoDatePicker",
+    CLICK = (touch ? "touchend" : "click") + ns,
     OPEN = "open",
     CLOSE = "close",
     CHANGE = "change",
@@ -21,8 +21,8 @@
     SELECTED = "k-state-selected",
     STATEDISABLED = "k-state-disabled",
     HOVER = "k-state-hover",
-    HOVEREVENTS = "mouseenter mouseleave",
-    MOUSEDOWN = (touch ? "touchstart" : "mousedown"),
+    HOVEREVENTS = "mouseenter" + ns + " mouseleave" + ns,
+    MOUSEDOWN = (touch ? "touchstart" : "mousedown") + ns,
     MIN = "min",
     MAX = "max",
     MONTH = "month",
@@ -81,10 +81,9 @@
 
                 element.appendTo(popup.element)
                        .data(DATEVIEW, that)
-                       .undelegate(CLICK_DATEPICKER)
-                       .delegate("td:has(.k-link)", CLICK_DATEPICKER, proxy(that._click, that))
-                       .unbind(MOUSEDOWN)
-                       .bind(MOUSEDOWN, preventDefault)
+                       .off(CLICK + " " + MOUSEDOWN)
+                       .on(CLICK, "td:has(.k-link)", proxy(that._click, that))
+                       .on(MOUSEDOWN, preventDefault)
                        .show();
 
                 calendar.unbind(CHANGE)
@@ -342,13 +341,15 @@
 
             element
                 .addClass("k-input")
-                .bind({
-                    keydown: proxy(that._keydown, that),
-                    focus: function(e) {
-                        that._inputWrapper.addClass(FOCUSED);
-                    },
-                    blur: proxy(that._blur, that)
-                })
+                .on("keydown" + ns, proxy(that._keydown, that))
+                .on("blur" + ns, proxy(that._blur, that))
+                .on("focus" + ns, function(e) {
+                    that._inputWrapper.addClass(FOCUSED);
+                });
+
+            //TODO: like the numerictextbox
+            //create _reset method
+            element
                 .closest("form")
                 .bind("reset", function() {
                     that.value(element[0].defaultValue);
@@ -390,8 +391,8 @@
 
         enable: function(enable) {
             var that = this,
-                icon = that._dateIcon.unbind(CLICK + " " + MOUSEDOWN),
-                wrapper = that._inputWrapper.unbind(HOVEREVENTS),
+                icon = that._dateIcon.off(CLICK + " " + MOUSEDOWN),
+                wrapper = that._inputWrapper.off(HOVEREVENTS),
                 element = that.element;
 
             if (enable === false) {
@@ -404,13 +405,13 @@
                 wrapper
                     .addClass(DEFAULT)
                     .removeClass(STATEDISABLED)
-                    .bind(HOVEREVENTS, that._toggleHover);
+                    .on(HOVEREVENTS, that._toggleHover);
 
                 element
                     .removeAttr(DISABLED);
 
-                icon.bind(CLICK, proxy(that._click, that))
-                    .bind(MOUSEDOWN, preventDefault);
+                icon.on(CLICK, proxy(that._click, that))
+                    .on(MOUSEDOWN, preventDefault);
             }
         },
 
