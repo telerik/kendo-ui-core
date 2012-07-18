@@ -51,7 +51,7 @@
         init: function(element, options) {
             var that = this;
 
-            Menu.fn.init.call(that, element, extend(options, { orientation: "vertical" }));
+            ui.Menu.fn.init.call(that, element, options);
 
             element = that.element;
             options = that.options;
@@ -73,10 +73,13 @@
                     e.preventDefault();
                 });
             }
+
+            $(document.body).click(function () { that.popup.close() });
         },
         options: {
             name: "ContextMenu",
             event: "contextmenu",
+            orientation: "vertical",
             closeOnClick: true,
             target: null
         },

@@ -1,4 +1,5 @@
-var devices = [ "ios", "android", "blackberry", "meego" ],
+var devices = [ "ios", "android", "blackberry", "meego" ], CtrlDown = false, contextMenu,
+    colors = [ "color", "background-color", "border-color" ],
     cursorSvg = 'url(\'data:image/svg+xml;utf-8,<svg xmlns="http:%2F%2Fwww.w3.org%2F2000%2Fsvg" width="32" height="32"><path d="M 0.89285714%2C31.196429 C 10.357143%2C5.080357 17.406299%2C-5.6022602 27.946429%2C3.8749999 43.883929%2C18.205357 0.89285714%2C31.196429 0.89285714%2C31.196429 z" style="fill:%23f984ef;stroke:%23000000;stroke-width:1px;" %2F><%2Fsvg>\') 0 32, auto';
 
 (function ($, undefined) {
@@ -210,6 +211,66 @@ var devices = [ "ios", "android", "blackberry", "meego" ],
         return output.substring(0, output.length-1);
     };
 
+    window.getWidgets = function (property) {
+        var widget, qualifiedWhiteList, widgets = { selector: "" };
+
+        if (typeof property == "string")
+            property = [ property ];
+
+        for(var idx in widgetList) {
+            widget = widgetList[idx];
+            qualifiedWhiteList = widget.whitelist ? widget.whitelist.filter(function (value) { return property.indexOf(value) != -1; }) : [];
+
+            if (((widget.whitelist && qualifiedWhiteList.length) || !property.length) && widget.selector[0] != ">") {
+                widgets[idx] = widget;
+                widgets[idx].whitelist = qualifiedWhiteList;
+                widgets.selector += widget.selector + ",";
+            }
+        }
+
+        widgets.selector = widgets.selector.substring(0, widgets.selector.length-1);
+
+        return widgets;
+    };
+
+    window.getMenuDataItem = function (item, source) {
+        item = $(item);
+        var menuElement = item.closest(".k-menu"),
+            dataItem = source,
+            index = item.parentsUntil(menuElement, ".k-item").map(function () {
+                return $(this).index();
+            }).get().reverse();
+
+        index.push(item.index());
+
+        for (var i = -1, len = index.length; ++i < len;) {
+            dataItem = dataItem[index[i]];
+            dataItem = i < len-1 ? dataItem.items : dataItem;
+        }
+
+        return dataItem;
+    };
+
+    window.buildMenu = function (element) {
+        var widgets = getWidgets(colors), menuStructure = [];
+
+        for (var i in widgets ) {
+            if (i != "selector") {
+                if (element.closest(widgets[i].selector)[0]) {
+                    var item = { text: widgets[i].name, items: [] };
+
+                    for (var j in widgets[i].whitelist) {
+                        item.items.push({ text: widgets[i].whitelist[j], value: widgets[i].selector });
+                    }
+
+                    menuStructure.push(item);
+                }
+            }
+        }
+
+        return menuStructure;
+    };
+
     // Override Kendo History to avoid URL breaks and bad refresh
     kendo.history.navigate = function(to, silent) {
         var that = this;
@@ -290,7 +351,7 @@ function initTargets() {
 
         defaultCSS[property] = "";
 
-        $(getPropertySelector(property)).kendoDropTarget({
+        $(getWidgets(colors).selector).kendoDropTarget({
             dragenter: function (e) {
                 color = new Color(e.draggable.element.css(property)).get();
 
@@ -302,10 +363,35 @@ function initTargets() {
             dragleave: function () {
                 this.element.css(defaultCSS);
             },
-            drop: function () {
-                this.element.css(defaultCSS);
-                this.element.parents(".device").data("kendoStyleEngine").update(this.element, { "background-color": color });
+            drop: function (e) {
+                var that = this;
+
+                that.element.css(defaultCSS);
+
+                if (CtrlDown) {
+                    var offset = that.element.offset(),
+                        structure = buildMenu(that.element);
+
+                    contextMenu.element.empty();
+                    contextMenu.append(structure);
+                    contextMenu.one("select", function (e) {
+                        var style = {}, dataItem = getMenuDataItem(e.item, structure);
+                        style[dataItem.text] = color;
+
+                        that.element.parents(".device").data("kendoStyleEngine").update(that.element.closest(dataItem.value), style);
+                    });
+                    contextMenu.show(offset.left + e.offsetX, offset.top + e.offsetY);
+                } else {
+                    that.element.parents(".device").data("kendoStyleEngine").update(this.element, { "background-color": color });
+                }
             }
+        });
+
+        contextMenu = $("<ul />").appendTo(document.body).kendoContextMenu().data("kendoContextMenu");
+
+        $(document).on({
+            keydown: function (e) { CtrlDown = e.which == 17; },
+            keyup: function (e) { CtrlDown = !(e.which == 17); }
         });
 
         var allProps = getPropertySelector();
