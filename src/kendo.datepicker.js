@@ -108,6 +108,26 @@
             }
         },
 
+        destroy: function() {
+            var that = this,
+                calendar = that.calendar,
+                element = calendar.element,
+                popups;
+
+            if (element.data(DATEVIEW) === that) {
+                popups = $(".k-calendar-container");
+
+                if (popups.length > 1) {
+                    element.appendTo(document.body);
+                } else {
+                    element.off(ns);
+                    calendar.destroy();
+                }
+            }
+
+            that.popup.destroy();
+        },
+
         open: function() {
             var that = this;
 
@@ -347,13 +367,7 @@
                     that._inputWrapper.addClass(FOCUSED);
                 });
 
-            //TODO: like the numerictextbox
-            //create _reset method
-            element
-                .closest("form")
-                .bind("reset", function() {
-                    that.value(element[0].defaultValue);
-                });
+            that._reset();
 
             that.enable(!element.is('[disabled]'));
             that.value(options.value || that.element.val());
@@ -391,8 +405,8 @@
 
         enable: function(enable) {
             var that = this,
-                icon = that._dateIcon.off(CLICK + " " + MOUSEDOWN),
-                wrapper = that._inputWrapper.off(HOVEREVENTS),
+                icon = that._dateIcon.off(ns),
+                wrapper = that._inputWrapper.off(ns),
                 element = that.element;
 
             if (enable === false) {
@@ -412,6 +426,22 @@
 
                 icon.on(CLICK, proxy(that._click, that))
                     .on(MOUSEDOWN, preventDefault);
+            }
+        },
+
+        destroy: function() {
+            var that = this;
+
+            Widget.fn.destroy.call(that);
+
+            that.dateView.destroy();
+
+            that.element.off(ns);
+            that._dateIcon.off(ns);
+            that._inputWrapper.off(ns);
+
+            if (that._form) {
+                that._form.off("reset", that._resetHandler);
             }
         },
 
@@ -567,6 +597,20 @@
 
             that.wrapper = wrapper.addClass("k-widget k-datepicker k-header");
             that._inputWrapper = $(wrapper[0].firstChild);
+        },
+
+        _reset: function() {
+            var that = this,
+                element = that.element,
+                form = element.closest("form");
+
+            if (form[0]) {
+                that._resetHandler = function() {
+                    that.value(element[0].defaultValue);
+                };
+
+                that._form = form.on("reset", that._resetHandler);
+            }
         }
     });
 
