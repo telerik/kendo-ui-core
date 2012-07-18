@@ -8,18 +8,21 @@
 
     var ModalView = ui.View.extend({
         init: function(element, options) {
-            var that = this;
+            var that = this, width, height;
 
             Widget.fn.init.call(that, element, options);
 
             element = that.element;
             options = that.options;
 
+            width = parseFloat(element.css("width"));
+            height = parseFloat(element.css("height"));
+
             element.addClass("km-modalview").wrap(WRAP);
 
             that.wrapper = element.parent().css({
-                width: options.width || element[0].style.width || 280,
-                height: options.height || element[0].style.height || 280
+                width: options.width || width || 300,
+                height: options.height || height || 300
             });
             element.css({ width: "", height: "" });
 
