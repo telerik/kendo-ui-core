@@ -157,6 +157,24 @@
             }
         },
 
+        destroy: function() {
+            var that = this;
+
+            Widget.fn.destroy.call(that);
+
+            that.dateView.destroy();
+            that.timeView.destroy();
+
+            that.element.off(ns);
+            that._dateIcon.off(ns);
+            that._timeIcon.off(ns);
+            that._inputWrapper.off(ns);
+
+            if (that._form) {
+                that._form.off("reset", that._resetHandler);
+            }
+        },
+
         close: function(view) {
             if (view !== "time") {
                 view = "date";
