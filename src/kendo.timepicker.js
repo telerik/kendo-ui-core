@@ -9,15 +9,16 @@
         OPEN = "open",
         CLOSE = "close",
         CHANGE = "change",
-        CLICK = (touch ? "touchend" : "click"),
+        ns = ".kendoTimePicker",
+        CLICK = (touch ? "touchend" : "click") + ns,
         DEFAULT = "k-state-default",
         DISABLED = "disabled",
         LI = "li",
         SPAN = "<span/>",
         FOCUSED = "k-state-focused",
         HOVER = "k-state-hover",
-        HOVEREVENTS = "mouseenter mouseleave",
-        MOUSEDOWN = "mousedown",
+        HOVEREVENTS = "mouseenter" + ns + " mouseleave" + ns,
+        MOUSEDOWN = "mousedown" + ns,
         MS_PER_MINUTE = 60000,
         MS_PER_DAY = 86400000,
         SELECTED = "k-state-selected",
@@ -37,13 +38,13 @@
 
         that.ul = $('<ul unselectable="on" class="k-list k-reset"/>')
                     .css({ overflow: kendo.support.touch ? "": "auto" })
-                    .delegate(LI, CLICK, proxy(that._click, that))
-                    .delegate(LI, "mouseenter", function() { $(this).addClass(HOVER); })
-                    .delegate(LI, "mouseleave", function() { $(this).removeClass(HOVER); });
+                    .on(CLICK, LI, proxy(that._click, that))
+                    .on("mouseenter" + ns, LI, function() { $(this).addClass(HOVER); })
+                    .on("mouseleave" + ns, LI, function() { $(this).removeClass(HOVER); });
 
         that.list = $("<div class='k-list-container'/>")
                     .append(that.ul)
-                    .mousedown(preventDefault);
+                    .on(MOUSEDOWN, preventDefault);
 
         that._popup();
 
@@ -73,6 +74,15 @@
 
         close: function() {
             this.popup.close();
+        },
+
+        destroy: function() {
+            var that = this;
+
+            that.ul.off(ns);
+            that.list.off(ns);
+
+            that.popup.destroy();
         },
 
         open: function() {
@@ -430,22 +440,17 @@
             }));
 
             that._icon();
+            that._reset();
 
             if (!touch) {
                 element[0].type = "text";
             }
 
             element.addClass("k-input")
-                .bind({
-                    keydown: proxy(that._keydown, that),
-                    focus: function(e) {
-                        that._inputWrapper.addClass(FOCUSED);
-                    },
-                    blur: proxy(that._blur, that)
-                })
-                .closest("form")
-                .bind("reset", function() {
-                    that.value(element[0].defaultValue);
+                .on("keydown" + ns, proxy(that._keydown, that))
+                .on("blur" + ns, proxy(that._blur, that))
+                .on("focus" + ns, function() {
+                    that._inputWrapper.addClass(FOCUSED);
                 });
 
             that.enable(!element.is('[disabled]'));
@@ -494,8 +499,8 @@
         enable: function(enable) {
             var that = this,
                 element = that.element,
-                arrow = that._arrow.unbind(CLICK + " " + MOUSEDOWN),
-                wrapper = that._inputWrapper.unbind(HOVEREVENTS);
+                arrow = that._arrow.off(ns),
+                wrapper = that._inputWrapper.off(HOVEREVENTS);
 
             if (enable === false) {
                 wrapper
@@ -507,13 +512,29 @@
                 wrapper
                     .removeClass(STATEDISABLED)
                     .addClass(DEFAULT)
-                    .bind(HOVEREVENTS, that._toggleHover);
+                    .on(HOVEREVENTS, that._toggleHover);
 
                 element
                     .removeAttr(DISABLED);
 
-                arrow.bind(CLICK, proxy(that._click, that))
-                     .bind(MOUSEDOWN, preventDefault);
+                arrow.on(CLICK, proxy(that._click, that))
+                     .on(MOUSEDOWN, preventDefault);
+            }
+        },
+
+        destroy: function() {
+            var that = this;
+
+            Widget.fn.destroy.call(that);
+
+            that.timeView.destroy();
+
+            that.element.off(ns);
+            that._arrow.off(ns);
+            that._inputWrapper.off(ns);
+
+            if (that._form) {
+                that._form.off("reset", that._resetHandler);
             }
         },
 
@@ -665,6 +686,20 @@
 
             that.wrapper = wrapper.addClass("k-widget k-timepicker k-header");
             that._inputWrapper = $(wrapper[0].firstChild);
+        },
+
+        _reset: function() {
+            var that = this,
+                element = that.element,
+                form = element.closest("form");
+
+            if (form[0]) {
+                that._resetHandler = function() {
+                    that.value(element[0].defaultValue);
+                };
+
+                that._form = form.on("reset", that._resetHandler);
+            }
         }
     });
 
