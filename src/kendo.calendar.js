@@ -12,7 +12,8 @@
         cellTemplate = template('<td#=data.cssClass#><a class="k-link" href="\\#" data-#=data.ns#value="#=data.dateString#">#=data.value#</a></td>', { useWithBlock: false }),
         emptyCellTemplate = template("<td>&nbsp;</td>", { useWithBlock: false }),
         isIE8 = $.browser.msie && parseInt($.browser.version, 10) < 9,
-        CLICK = touch ? "touchend" : "click",
+        ns = ".kendoCalendar",
+        CLICK = (touch ? "touchend" : "click") + ns,
         MIN = "min",
         LEFT = "left",
         SLIDE = "slide",
@@ -28,7 +29,8 @@
         TODAY = "k-nav-today",
         CELLSELECTOR = "td:has(.k-link)",
         MOUSEENTER = touch ? "touchstart" : "mouseenter",
-        MOUSELEAVE = touch ? "touchend" : "mouseleave",
+        MOUSEENTER_WITH_NS = MOUSEENTER + ns,
+        MOUSELEAVE = (touch ? "touchend" : "mouseleave") + ns,
         MS_PER_MINUTE = 60000,
         MS_PER_DAY = 86400000,
         PREVARROW = "_prevArrow",
@@ -63,8 +65,8 @@
             that._footer(that.footer);
 
             element
-                .delegate(CELLSELECTOR, MOUSEENTER + " " + MOUSELEAVE, mousetoggle)
-                .delegate(CELLSELECTOR, CLICK, proxy(that._click, that));
+                .on(MOUSEENTER_WITH_NS + " " + MOUSELEAVE, CELLSELECTOR, mousetoggle)
+                .on(CLICK, CELLSELECTOR, proxy(that._click, that));
 
             value = options.value;
             normalize(options);
@@ -112,6 +114,21 @@
             normalize(options);
 
             Widget.fn.setOptions.call(this, options);
+        },
+
+        destroy: function() {
+            var that = this,
+                today = that._today.off(ns);
+
+            that.element.off(ns);
+            that._title.off(ns);
+            that[PREVARROW].off(ns);
+            that[NEXTARROW].off(ns);
+
+            kendo.destroy(today);
+            kendo.destroy(that._view);
+
+            Widget.fn.destroy.call(that);
         },
 
         min: function(value) {
@@ -435,12 +452,12 @@
             }
 
             links = element.find(".k-link")
-                           .bind(MOUSEENTER + " " + MOUSELEAVE, mousetoggle)
+                           .on(MOUSEENTER_WITH_NS + " " + MOUSELEAVE, mousetoggle)
                            .click(false);
 
-            that._title = links.eq(1).bind(CLICK, proxy(that.navigateUp, that));
-            that[PREVARROW] = links.eq(0).bind(CLICK, proxy(that.navigateToPast, that));
-            that[NEXTARROW] = links.eq(2).bind(CLICK, proxy(that.navigateToFuture, that));
+            that._title = links.eq(1).on(CLICK, proxy(that.navigateUp, that));
+            that[PREVARROW] = links.eq(0).on(CLICK, proxy(that.navigateToPast, that));
+            that[NEXTARROW] = links.eq(2).on(CLICK, proxy(that.navigateToFuture, that));
         },
 
         _navigate: function(arrow, modifier) {
@@ -508,16 +525,16 @@
             }
 
             if (link) {
-                link.unbind(CLICK);
+                link.off(CLICK);
 
                 if (toggle) {
                     link.addClass(TODAY)
                         .removeClass(DISABLED)
-                        .bind(CLICK, proxy(that._todayClick, that));
+                        .on(CLICK, proxy(that._todayClick, that));
                 } else {
                     link.removeClass(TODAY)
                         .addClass(DISABLED)
-                        .bind(CLICK, prevent);
+                        .on(CLICK, prevent);
                 }
             }
         },

@@ -8,8 +8,8 @@
     template = kendo.template,
     DIV = "<div />",
     SPAN = "<span />",
-    CLICK = (touch ? "touchend" : "click"),
-    CLICK_DATEPICKER = CLICK + ".datepicker",
+    ns = ".kendoDatePicker",
+    CLICK = (touch ? "touchend" : "click") + ns,
     OPEN = "open",
     CLOSE = "close",
     CHANGE = "change",
@@ -21,8 +21,8 @@
     SELECTED = "k-state-selected",
     STATEDISABLED = "k-state-disabled",
     HOVER = "k-state-hover",
-    HOVEREVENTS = "mouseenter mouseleave",
-    MOUSEDOWN = (touch ? "touchstart" : "mousedown"),
+    HOVEREVENTS = "mouseenter" + ns + " mouseleave" + ns,
+    MOUSEDOWN = (touch ? "touchstart" : "mousedown") + ns,
     MIN = "min",
     MAX = "max",
     MONTH = "month",
@@ -81,10 +81,9 @@
 
                 element.appendTo(popup.element)
                        .data(DATEVIEW, that)
-                       .undelegate(CLICK_DATEPICKER)
-                       .delegate("td:has(.k-link)", CLICK_DATEPICKER, proxy(that._click, that))
-                       .unbind(MOUSEDOWN)
-                       .bind(MOUSEDOWN, preventDefault)
+                       .off(CLICK + " " + MOUSEDOWN)
+                       .on(CLICK, "td:has(.k-link)", proxy(that._click, that))
+                       .on(MOUSEDOWN, preventDefault)
                        .show();
 
                 calendar.unbind(CHANGE)
@@ -107,6 +106,26 @@
                 calendar.navigate(that._value, options.start);
                 that.value(that._value);
             }
+        },
+
+        destroy: function() {
+            var that = this,
+                calendar = that.calendar,
+                element = calendar.element,
+                popups;
+
+            if (element.data(DATEVIEW) === that) {
+                popups = $(".k-calendar-container");
+
+                if (popups.length > 1) {
+                    element.appendTo(document.body);
+                } else {
+                    element.off(ns);
+                    calendar.destroy();
+                }
+            }
+
+            that.popup.destroy();
         },
 
         open: function() {
@@ -342,17 +361,13 @@
 
             element
                 .addClass("k-input")
-                .bind({
-                    keydown: proxy(that._keydown, that),
-                    focus: function(e) {
-                        that._inputWrapper.addClass(FOCUSED);
-                    },
-                    blur: proxy(that._blur, that)
-                })
-                .closest("form")
-                .bind("reset", function() {
-                    that.value(element[0].defaultValue);
+                .on("keydown" + ns, proxy(that._keydown, that))
+                .on("blur" + ns, proxy(that._blur, that))
+                .on("focus" + ns, function(e) {
+                    that._inputWrapper.addClass(FOCUSED);
                 });
+
+            that._reset();
 
             that.enable(!element.is('[disabled]'));
             that.value(options.value || that.element.val());
@@ -390,8 +405,8 @@
 
         enable: function(enable) {
             var that = this,
-                icon = that._dateIcon.unbind(CLICK + " " + MOUSEDOWN),
-                wrapper = that._inputWrapper.unbind(HOVEREVENTS),
+                icon = that._dateIcon.off(ns),
+                wrapper = that._inputWrapper.off(ns),
                 element = that.element;
 
             if (enable === false) {
@@ -404,13 +419,29 @@
                 wrapper
                     .addClass(DEFAULT)
                     .removeClass(STATEDISABLED)
-                    .bind(HOVEREVENTS, that._toggleHover);
+                    .on(HOVEREVENTS, that._toggleHover);
 
                 element
                     .removeAttr(DISABLED);
 
-                icon.bind(CLICK, proxy(that._click, that))
-                    .bind(MOUSEDOWN, preventDefault);
+                icon.on(CLICK, proxy(that._click, that))
+                    .on(MOUSEDOWN, preventDefault);
+            }
+        },
+
+        destroy: function() {
+            var that = this;
+
+            Widget.fn.destroy.call(that);
+
+            that.dateView.destroy();
+
+            that.element.off(ns);
+            that._dateIcon.off(ns);
+            that._inputWrapper.off(ns);
+
+            if (that._form) {
+                that._form.off("reset", that._resetHandler);
             }
         },
 
@@ -566,6 +597,20 @@
 
             that.wrapper = wrapper.addClass("k-widget k-datepicker k-header");
             that._inputWrapper = $(wrapper[0].firstChild);
+        },
+
+        _reset: function() {
+            var that = this,
+                element = that.element,
+                form = element.closest("form");
+
+            if (form[0]) {
+                that._resetHandler = function() {
+                    that.value(element[0].defaultValue);
+                };
+
+                that._form = form.on("reset", that._resetHandler);
+            }
         }
     });
 
