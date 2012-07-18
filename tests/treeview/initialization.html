@@ -94,6 +94,19 @@
                 equal(list.find(".k-item").length, 1);
             });
 
+            test("toggle buttons are rendered correctly when initializing from html", function() {
+                list.remove();
+                list = $("<ul>" +
+                    "<li>foo<ul><li>baz</li></ul></li>" +
+                    "<li data-expanded='true'>bar<ul><li>qux</li></ul></li>" +
+                "</ul>").appendTo(document.body);
+
+                list.kendoTreeView();
+
+                equal(list.find(".k-icon.k-plus").length, 1);
+                equal(list.find(".k-icon.k-minus").length, 1);
+            });
+
             module("initialization from array");
 
             test("initializing from array", function() {
