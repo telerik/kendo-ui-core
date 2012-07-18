@@ -2036,7 +2036,7 @@
                 return;
             }
 
-            that._pristine = isPlainObject(data) ? $.extend(true, {}, data) : data.slice(0);
+            that._pristine = isPlainObject(data) ? $.extend(true, {}, data) : data.slice ? data.slice(0) : data;
 
             that._total = that.reader.total(data);
 
