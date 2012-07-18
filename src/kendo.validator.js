@@ -1,6 +1,7 @@
 ;(function($, undefined) {
     var kendo = window.kendo,
         Widget = kendo.ui.Widget,
+        NS = ".kendoValidator",
         INVALIDMSG = "k-invalid-msg",
         INVALIDINPUT = "k-invalid",
         emailRegExp = /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$/i,
@@ -149,6 +150,12 @@
             validateOnBlur: true
         },
 
+        destroy: function() {
+            Widget.fn.destroy.call(this);
+
+            this.element.off(NS);
+        },
+
         _submit: function(e) {
             if (!this.validate()) {
                 e.stopPropagation();
@@ -163,16 +170,16 @@
             var that = this;
 
             if (that.element.is(FORM)) {
-                that.element.submit(proxy(that._submit, that));
+                that.element.on("submit" + NS, proxy(that._submit, that));
             }
 
             if (that.options.validateOnBlur) {
                 if (!that.element.is(INPUTSELECTOR)) {
-                    that.element.delegate(INPUTSELECTOR, BLUR, function() {
+                    that.element.on(BLUR + NS, INPUTSELECTOR, function() {
                         that.validateInput($(this));
                     });
                 } else {
-                    that.element.bind(BLUR, function() {
+                    that.element.on(BLUR + NS, function() {
                         that.validateInput(that.element);
                     });
                 }
