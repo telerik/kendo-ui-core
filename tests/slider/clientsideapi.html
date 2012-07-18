@@ -23,7 +23,7 @@
             });
 
             function newSlider(options, sliderInput) {
-                var input = $(sliderInput || "<input />").appendTo(document.body)[0];
+                var input = $(sliderInput || "<input id='slider' />").appendTo(document.body)[0];
                 return new Slider(input, options);
             }
 
@@ -211,6 +211,32 @@
                 dragHandle.trigger({ type: "keydown", keyCode: leftArrow });
             });
 
+            // ------------------------------------------------------------
+            var slider = {};
+            module("slider/clientsideapi/destroy", {
+                setup: function() {
+                    slider = newSlider();
+                    slider.destroy();
+                },
+                teardown: function() {
+                    $(".k-slider").remove();
+                    slider = null;
+                }
+            });
+
+            test("removes data", function() {
+                ok(!$("#slider").data("kendoSlider"));
+            });
+
+            test("unbinds events", function() {
+                ok(!(slider._events || {}).slide);
+            });
+
+            test("unbinds mousedown", function() {
+                ok(!($(".k-slider").data("events") || {}).mousedown);
+            });
+
+            // ------------------------------------------------------------
             var RangeSlider = kendo.ui.RangeSlider;
 
             module("rangeslider/clientsideapi", {
@@ -220,7 +246,7 @@
             });
 
             function newRangeSlider(options, sliderDiv) {
-                var div = $(sliderDiv || "<div><input /><input /></div>").appendTo(document.body);
+                var div = $(sliderDiv || "<div id='rangeslider'><input /><input /></div>").appendTo(document.body);
                 return new RangeSlider(div, options);
             }
 
@@ -413,6 +439,32 @@
 
                 dragHandles.eq(0).trigger({ type: "keydown", keyCode: downArrow });
                 dragHandles.eq(0).trigger({ type: "keydown", keyCode: leftArrow });
+            });
+
+
+            // ------------------------------------------------------------
+            var rangeSider = {};
+            module("rangeslider/clientsideapi/destroy", {
+                setup: function() {
+                    rangeSider = newRangeSlider();
+                    rangeSider.destroy();
+                },
+                teardown: function() {
+                    $(".k-slider").remove();
+                    rangeSider = null;
+                }
+            });
+
+            test("removes data", function() {
+                ok(!$("#rangeslider").data("kendoRangeSlider"));
+            });
+
+            test("unbinds events", function() {
+                ok(!(rangeSider._events || {}).slide);
+            });
+
+            test("unbinds mousedown", function() {
+                ok(!($(".k-slider").data("events") || {}).mousedown);
             });
 
         </script>

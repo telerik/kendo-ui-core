@@ -29,7 +29,8 @@
         STATE_DISABLED = "k-state-disabled",
         PRECISION = 3,
         DISABLED = "disabled",
-        UNDEFINED = "undefined";
+        UNDEFINED = "undefined",
+        NS = ".slider";
 
     var SliderBase = Widget.extend({
         init: function(element, options) {
@@ -84,10 +85,7 @@
         },
 
         events: [
-
             CHANGE,
-
-
             SLIDE
         ],
 
@@ -435,7 +433,6 @@
     };
 
     if (support.pointers) {
-
         touchLocation = function(e) {
             return {
                 idx: 0,
@@ -446,7 +443,6 @@
     }
 
     if (support.touch) {
-
         touchLocation = function(e, id) {
             var changedTouches = e.changedTouches || e.originalEvent.changedTouches;
 
@@ -551,17 +547,18 @@
 
             that.wrapper
                 .find(TICK_SELECTOR + ", " + TRACK_SELECTOR)
-                    .on(TRACK_MOUSE_DOWN, clickHandler)
-                    .end().on(TRACK_MOUSE_DOWN, function() {
+                    .on(TRACK_MOUSE_DOWN + NS, clickHandler)
+                    .end()
+                    .on(TRACK_MOUSE_DOWN + NS, function() {
                         $(document.documentElement).one("selectstart", kendo.preventDefault);
                     });
 
             that.wrapper
                 .find(DRAG_HANDLE)
-                .on(MOUSE_UP, function (e) {
+                .on(MOUSE_UP + NS, function (e) {
                     $(e.target).removeClass(STATE_SELECTED);
                 })
-                .on(CLICK, function (e) {
+                .on(CLICK + NS, function (e) {
                     e.preventDefault();
                 });
 
@@ -583,31 +580,31 @@
                 }, that);
 
                 that.wrapper.find(".k-button")
-                    .on(MOUSE_UP, proxy(function (e) {
+                    .on(MOUSE_UP + NS, proxy(function (e) {
                         this._clearTimer();
                     }, that))
-                    .on(MOUSE_OVER, function (e) {
+                    .on(MOUSE_OVER + NS, function (e) {
                         $(e.currentTarget).addClass("k-state-hover");
                     })
-                    .on("mouseout", proxy(function (e) {
+                    .on("mouseout" + NS, proxy(function (e) {
                         $(e.currentTarget).removeClass("k-state-hover");
                         this._clearTimer();
                     }, that))
                     .eq(0)
-                    .on(MOUSE_DOWN, proxy(function (e) {
+                    .on(MOUSE_DOWN + NS, proxy(function (e) {
                         mouseDownHandler(e, 1);
                     }, that))
                     .click(false)
                     .end()
                     .eq(1)
-                    .on(MOUSE_DOWN, proxy(function (e) {
+                    .on(MOUSE_DOWN + NS, proxy(function (e) {
                         mouseDownHandler(e, -1);
                     }, that))
                     .click(false);
             }
 
             that.wrapper
-                .find(DRAG_HANDLE).on(KEY_DOWN, proxy(this._keydown, that));
+                .find(DRAG_HANDLE).on(KEY_DOWN + NS, proxy(this._keydown, that));
 
             options.enabled = true;
         },
@@ -623,24 +620,24 @@
 
             that.wrapper
                 .find(".k-button")
-                .off(MOUSE_DOWN)
-                .on(MOUSE_DOWN, kendo.preventDefault)
-                .off(MOUSE_UP)
-                .on(MOUSE_UP, kendo.preventDefault)
-                .off("mouseleave")
-                .on("mouseleave", kendo.preventDefault)
-                .off(MOUSE_OVER)
-                .on(MOUSE_OVER, kendo.preventDefault);
+                .off(MOUSE_DOWN + NS)
+                .on(MOUSE_DOWN + NS, kendo.preventDefault)
+                .off(MOUSE_UP + NS)
+                .on(MOUSE_UP + NS, kendo.preventDefault)
+                .off("mouseleave" + NS)
+                .on("mouseleave" + NS, kendo.preventDefault)
+                .off(MOUSE_OVER + NS)
+                .on(MOUSE_OVER + NS, kendo.preventDefault);
 
             that.wrapper
-                .find(TICK_SELECTOR + ", " + TRACK_SELECTOR).off(TRACK_MOUSE_DOWN);
+                .find(TICK_SELECTOR + ", " + TRACK_SELECTOR).off(TRACK_MOUSE_DOWN + NS);
 
             that.wrapper
                 .find(DRAG_HANDLE)
-                .off(MOUSE_UP)
-                .off(KEY_DOWN)
-                .off(CLICK)
-                .on(KEY_DOWN, false);
+                .off(MOUSE_UP + NS)
+                .off(KEY_DOWN + NS)
+                .off(CLICK + NS)
+                .on(KEY_DOWN + NS, false);
 
             that.options.enabled = false;
         },
@@ -709,6 +706,22 @@
         _nextValueByIndex: function (index) {
             var count = this._values.length;
             return this._values[math.max(0, math.min(index, count - 1))];
+        },
+
+        destroy: function() {
+            var that = this;
+
+            Widget.fn.destroy.call(that);
+
+            that.wrapper.off(NS)
+                .find(".k-button").off(NS)
+                .end()
+                .find(DRAG_HANDLE).off(NS)
+                .end()
+                .find(TICK_SELECTOR + ", " + TRACK_SELECTOR).off(NS)
+                .end();
+
+            that._drag.draggable.destroy();
         }
     });
 
@@ -771,7 +784,7 @@
                 return;
             }
 
-            owner.element.off(MOUSE_OVER);
+            owner.element.off(MOUSE_OVER + NS);
             that.dragHandle.addClass(STATE_SELECTED);
 
             that.dragableArea = owner._getDragableArea();
@@ -928,7 +941,7 @@
             }
 
             that.dragHandle.removeClass(STATE_SELECTED);
-            owner.element.on(MOUSE_OVER);
+            owner.element.on(MOUSE_OVER + NS);
 
             return false;
         },
@@ -1089,28 +1102,29 @@
 
             that.wrapper
                 .find(TICK_SELECTOR + ", " + TRACK_SELECTOR)
-                    .on(TRACK_MOUSE_DOWN, clickHandler)
-                    .end().on(TRACK_MOUSE_DOWN, function() {
+                    .on(TRACK_MOUSE_DOWN + NS, clickHandler)
+                    .end()
+                    .on(TRACK_MOUSE_DOWN + NS, function() {
                         $(document.documentElement).one("selectstart", kendo.preventDefault);
                     });
 
             that.wrapper
                 .find(DRAG_HANDLE)
-                .on(MOUSE_UP, function (e) {
+                .on(MOUSE_UP + NS, function (e) {
                     $(e.target).removeClass(STATE_SELECTED);
                 })
-                .on(CLICK, function (e) {
+                .on(CLICK + NS, function (e) {
                     e.preventDefault();
                 });
 
             that.wrapper.find(DRAG_HANDLE)
-                .eq(0).on(KEY_DOWN,
+                .eq(0).on(KEY_DOWN + NS,
                     proxy(function(e) {
                         this._keydown(e, "firstHandle");
                     }, that)
                 )
                 .end()
-                .eq(1).on(KEY_DOWN,
+                .eq(1).on(KEY_DOWN + NS,
                     proxy(function(e) {
                         this._keydown(e, "lastHandle");
                     }, that)
@@ -1129,14 +1143,14 @@
             that.wrapper.find("input").attr(DISABLED, DISABLED);
 
             that.wrapper
-                .find(TICK_SELECTOR + ", " + TRACK_SELECTOR).off(TRACK_MOUSE_DOWN);
+                .find(TICK_SELECTOR + ", " + TRACK_SELECTOR).off(TRACK_MOUSE_DOWN + NS);
 
             that.wrapper
                 .find(DRAG_HANDLE)
-                .off(MOUSE_UP)
-                .off(KEY_DOWN)
-                .off(CLICK)
-                .on(KEY_DOWN, kendo.preventDefault);
+                .off(MOUSE_UP + NS)
+                .off(KEY_DOWN + NS)
+                .off(CLICK + NS)
+                .on(KEY_DOWN + NS, kendo.preventDefault);
 
             that.options.enabled = false;
         },
@@ -1258,6 +1272,20 @@
             this.wrapper.find(DRAG_HANDLE).each(function (index) {
                 $(this).css("z-index", type == "firstHandle" ? 1 - index : index);
             });
+        },
+
+        destroy: function() {
+            var that = this;
+
+            Widget.fn.destroy.call(that);
+
+            that.wrapper.off(NS)
+                .find(TICK_SELECTOR + ", " + TRACK_SELECTOR).off(NS)
+                .end()
+                .find(DRAG_HANDLE).off(NS);
+
+            that._firstHandleDrag.draggable.destroy();
+            that._lastHandleDrag.draggable.destroy();
         }
     });
 
