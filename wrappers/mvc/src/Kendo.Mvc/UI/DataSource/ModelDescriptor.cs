@@ -11,7 +11,7 @@
     {
         public ModelDescriptor(Type modelType)
         {
-            var metadata = ModelMetadata.FromStringExpression("", new ViewDataDictionary(CreateDataItem(modelType)));
+            var metadata = ModelMetadataProviders.Current.GetMetadataForType(null, modelType);                
             Fields = Translate(metadata);
         }
 
