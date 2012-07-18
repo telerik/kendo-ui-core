@@ -3973,7 +3973,7 @@
 
             if (axesCount) {
                 plotArea.reflowAxes();
-                plotArea.box = plotArea.axisBox();
+                plotArea.box = plotArea.axisBox(plotArea.axes);
             }
 
             for (i = 0; i < axesCount; i++) {
@@ -4128,9 +4128,8 @@
             }
         },
 
-        axisBox: function() {
+        axisBox: function(axes) {
             var plotArea = this,
-                axes = plotArea.axes,
                 box = axes[0].box.clone(),
                 i,
                 length = axes.length;
@@ -4142,13 +4141,12 @@
             return box;
         },
 
-        shrinkAxes: function() {
+        shrinkAxes: function(pane, axes) {
             var plotArea = this,
-                box = plotArea.box,
-                axisBox = plotArea.axisBox(),
+                box = pane.box,
+                axisBox = plotArea.axisBox(axes),
                 overflowY = axisBox.height() - box.height(),
                 overflowX = axisBox.width() - box.width(),
-                axes = plotArea.axes,
                 currentAxis,
                 vertical,
                 i,
@@ -4168,9 +4166,8 @@
             }
         },
 
-        shrinkAdditionalAxes: function(xAxes, yAxes) {
+        shrinkAdditionalAxes: function(axes, xAxes, yAxes) {
             var plotArea = this,
-                axes = plotArea.axes,
                 xAnchor = xAxes[0],
                 yAnchor = yAxes[0],
                 anchorLineBox = xAnchor.lineBox().clone().wrap(yAnchor.lineBox()),
@@ -4202,11 +4199,10 @@
             }
         },
 
-        fitAxes: function() {
+        fitAxes: function(pane, axes) {
             var plotArea = this,
-                axes = plotArea.axes,
-                box = plotArea.box,
-                axisBox = plotArea.axisBox(),
+                box = pane.box,
+                axisBox = plotArea.axisBox(axes),
                 offsetX = box.x1 - axisBox.x1,
                 offsetY = box.y1 - axisBox.y1,
                 currentAxis,
@@ -4224,22 +4220,44 @@
 
         reflowAxes: function() {
             var plotArea = this,
+                panes = plotArea.panes,
+                i,
+                panesLength = panes.length,
+                currentPane,
                 axes = plotArea.axes,
+                paneAxes;
+
+            for (i = 0; i < panesLength; i++) {
+                currentPane = panes[i];
+
+                paneAxes = grep(axes, (function(axis) {
+                    var paneName = axis.options.pane;
+
+                    return (paneName && paneName === currentPane.options.name) ||
+                           (!paneName && i === 0);
+                }));
+
+                plotArea.reflowPaneAxes(currentPane, paneAxes);
+            }
+        },
+
+        reflowPaneAxes: function(pane, axes) {
+            var plotArea = this,
                 xAxes = grep(axes, (function(axis) { return !axis.options.vertical; })),
                 yAxes = grep(axes, (function(axis) { return axis.options.vertical; })),
                 i,
                 length = axes.length;
 
             for (i = 0; i < length; i++) {
-                axes[i].reflow(plotArea.box);
+                axes[i].reflow(pane.box);
             }
 
             plotArea.alignAxes(xAxes, yAxes);
-            plotArea.shrinkAdditionalAxes(xAxes, yAxes);
+            plotArea.shrinkAdditionalAxes(axes, xAxes, yAxes);
             plotArea.alignAxes(xAxes, yAxes);
-            plotArea.shrinkAxes();
+            plotArea.shrinkAxes(pane, axes);
             plotArea.alignAxes(xAxes, yAxes);
-            plotArea.fitAxes();
+            plotArea.fitAxes(pane, axes);
         },
 
         reflowCharts: function() {
@@ -4404,6 +4422,7 @@
 
         createPanes: function() {
             var plotArea = this,
+                panesByName = {},
                 panes = [],
                 paneOptions = plotArea.options.panes || [],
                 i,
@@ -4412,10 +4431,12 @@
 
             for (i = 0; i < panesLength; i++) {
                 currentPane = new BoxElement(paneOptions[i]);
+                panesByName[paneOptions[i].name] = currentPane;
                 panes.push(currentPane);
             }
 
             plotArea.panes = panes;
+            plotArea.panesByName = panesByName;
         },
 
         reflow: function(targetBox) {
@@ -4424,6 +4445,7 @@
                 i,
                 panesLength = panes.length,
                 currentPane,
+                paneBox,
                 remainingHeight = targetBox.height(),
                 remainingPanes = panesLength,
                 height,
@@ -4448,7 +4470,11 @@
 
                 currentPane.options.width = targetBox.height();
 
-                currentPane.reflow(targetBox);
+                paneBox = targetBox
+                    .clone()
+                    .translate(0, targetBox.height() - remainingHeight);
+
+                currentPane.reflow(paneBox);
 
                 remainingHeight -= currentPane.box.height();
                 remainingPanes--;
@@ -4622,6 +4648,29 @@
             plotArea.categoryAxis = categoryAxis;
             plotArea.axes.push(categoryAxis);
             plotArea.append(plotArea.categoryAxis);
+
+            // TODO: Support for multiple category axes, shadows?
+            var panes = plotArea.panes,
+                i,
+                panesLength = panes.length,
+                currentPane;
+
+            for (i = 0; i < panesLength; i++) {
+                currentPane = panes[i];
+
+                if (categoryAxis.options.pane !== currentPane.options.name) {
+                    plotArea.axes.push(new CategoryAxis(deepExtend({
+                                vertical: invertAxes,
+                                axisCrossingValue: invertAxes ? categoriesCount : 0
+                            },
+                            categoryAxisOptions, {
+                                pane: currentPane.options.name
+                            })
+                        )
+                    );
+                }
+            }
+
         },
 
         createValueAxes: function() {
