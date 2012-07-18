@@ -107,7 +107,7 @@
         }
 
         nodeData = extend({
-            expanded: group.css("display") != "none",
+            expanded: node.attr(kendo.attr("expanded")) === "true",
             index: node.index(),
             enabled: !wrapper.children(".k-in").hasClass("k-state-disabled")
         }, nodeData);
@@ -130,7 +130,7 @@
             .addClass(rendering.textClass(nodeData));
 
         // toggle button
-        if (group.length) {
+        if (group.length || node.attr("data-hasChildren") == "true") {
             wrapper.children(".k-icon").removeClass("k-plus k-minus k-plus-disabled k-minus-disabled")
                 .addClass(rendering.toggleButtonClass(nodeData));
 
