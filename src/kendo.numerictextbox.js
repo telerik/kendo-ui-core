@@ -185,6 +185,10 @@
             that._old = that._value;
         },
 
+        focus: function() {
+            this._focusin();
+        },
+
         _adjust: function(value) {
             var that = this,
             options = that.options,
