@@ -1221,7 +1221,7 @@
                         panes: [{ name: "a", height: 200 }, { name: "b" }]
                     });
 
-                    equals(plotArea.panes[1].box.height(), 400);
+                    equals(plotArea.panes[1].box.height(), 700);
                 });
 
                 test("pane occupies set height in percents", function() {
@@ -1229,7 +1229,7 @@
                         panes: [{ name: "a", height: "30%" }, { name: "b" }]
                     });
 
-                    equals(plotArea.panes[0].box.height(), 200);
+                    equals(plotArea.panes[0].box.height(), 270);
                 });
 
                 test("pane occupies remaining height (in percents)", function() {
@@ -1237,7 +1237,7 @@
                         panes: [{ name: "a", height: "30%" }, { name: "b" }]
                     });
 
-                    equals(plotArea.panes[1].box.height(), 400);
+                    equals(plotArea.panes[1].box.height(), 630);
                 });
 
                 test("top margin is subtracted from total height", function() {
@@ -1249,8 +1249,8 @@
                         }]
                     });
 
-                    equals(plotArea.panes[0].box.height(), 195);
-                    equals(plotArea.panes[0].box.height(), 395);
+                    equals(plotArea.panes[0].box.height(), 210);
+                    equals(plotArea.panes[1].box.height(), 690);
                 });
 
                 test("bottom margin is subtracted from total height", function() {
@@ -1262,8 +1262,8 @@
                         }]
                     });
 
-                    equals(plotArea.panes[0].box.height(), 195);
-                    equals(plotArea.panes[0].box.height(), 395);
+                    equals(plotArea.panes[0].box.height(), 210);
+                    equals(plotArea.panes[1].box.height(), 690);
                 });
 
             })();

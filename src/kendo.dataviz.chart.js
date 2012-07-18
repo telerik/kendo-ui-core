@@ -4379,6 +4379,7 @@
             var plotArea = this,
                 series = plotArea.series;
 
+            plotArea.createPanes();
             plotArea.createCategoryAxis();
 
             if (plotArea.categoryAxis.options.type === DATE) {
@@ -4399,6 +4400,61 @@
             }));
 
             plotArea.createValueAxes();
+        },
+
+        createPanes: function() {
+            var plotArea = this,
+                panes = [],
+                paneOptions = plotArea.options.panes || [],
+                i,
+                panesLength = math.max(paneOptions.length, 1),
+                currentPane;
+
+            for (i = 0; i < panesLength; i++) {
+                currentPane = new BoxElement(paneOptions[i]);
+                panes.push(currentPane);
+            }
+
+            plotArea.panes = panes;
+        },
+
+        reflow: function(targetBox) {
+            var plotArea = this,
+                panes = plotArea.panes,
+                i,
+                panesLength = panes.length,
+                currentPane,
+                remainingHeight = targetBox.height(),
+                remainingPanes = panesLength,
+                height,
+                percents;
+
+            for (i = 0; i < panesLength; i++) {
+                currentPane = panes[i];
+                height = currentPane.options.height;
+
+                if (height.indexOf && height.indexOf("%")) {
+                    percents = parseInt(height, 10) / 100;
+                    currentPane.options.height = percents * remainingHeight;
+                }
+            }
+
+            for (i = 0; i < panesLength; i++) {
+                currentPane = panes[i];
+
+                if (!currentPane.options.height) {
+                    currentPane.options.height = remainingHeight / remainingPanes;
+                }
+
+                currentPane.options.width = targetBox.height();
+
+                currentPane.reflow(targetBox);
+
+                remainingHeight -= currentPane.box.height();
+                remainingPanes--;
+            }
+
+            PlotAreaBase.fn.reflow.call(plotArea, targetBox);
         },
 
         aggregateDateSeries: function() {

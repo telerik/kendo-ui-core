@@ -402,7 +402,7 @@
                 box = box ? box.wrap(currentChild.box) : currentChild.box.clone();
             }
 
-            element.box = box;
+            element.box = box || targetBox;
         },
 
         getViewElements: function(view) {
