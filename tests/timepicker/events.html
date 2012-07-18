@@ -59,7 +59,7 @@
                                        })
                                       .data("kendoTimePicker");
 
-                timepicker._change("10:00");
+                timepicker._change("10:00 AM");
             });
 
             test("raise DOM change event", 1, function() {
@@ -69,7 +69,7 @@
                     ok(true);
                 });
 
-                timepicker._change("10:00");
+                timepicker._change("10:00 AM");
             });
 
             test("do not raise change event if no changes", 0, function() {
