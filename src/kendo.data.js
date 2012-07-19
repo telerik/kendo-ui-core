@@ -415,7 +415,7 @@
         },
 
         "string": function(value) {
-            return value + "";
+            return value != null ? (value + "") : value;
         },
 
         "default": function(value) {

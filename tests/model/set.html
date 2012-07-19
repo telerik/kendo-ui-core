@@ -364,6 +364,23 @@
                 model.set("foo", "foo");
             });
 
+            test("setting number to string field returns its string representation", function() {
+                var MyModel = kendo.data.Model.define({ fields: { foo: { type: "string" }}});
+                var model = new MyModel();
+
+                model.set("foo", 1);
+
+                equal(model.get("foo"), "1");
+            });
+
+            test("setting null to string field returns null", function() {
+                var MyModel = kendo.data.Model.define({ fields: { foo: { type: "string" }}});
+                var model = new MyModel();
+
+                model.set("foo", null);
+
+                equal(model.get("foo"), null);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
