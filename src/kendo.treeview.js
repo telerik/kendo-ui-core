@@ -18,6 +18,7 @@
         DRAGEND = "dragend",
         CLICK = "click",
         VISIBILITY = "visibility",
+        UNDEFINED = "undefined",
         KSTATEHOVER = "k-state-hover",
         KTREEVIEW = "k-treeview",
         VISIBLE = ":visible",
@@ -120,7 +121,7 @@
                 options = { dataSource: options };
             }
 
-            if (options && typeof options.loadOnDemand == "undefined" && isArray(options.dataSource)) {
+            if (options && typeof options.loadOnDemand == UNDEFINED && isArray(options.dataSource)) {
                 options.loadOnDemand = false;
             }
 
@@ -233,6 +234,8 @@
 
             function recursiveRead(data) {
                 for (var i = 0; i < data.length; i++) {
+                    data[i]._initChildren();
+
                     data[i].children.read();
 
                     recursiveRead(data[i].children.view());
@@ -511,16 +514,14 @@
                 return;
             }
 
-            nodeData = extend({
-                expanded: this._expanded(node),
-                index: node.index(),
-                enabled: !wrapper.children(".k-in").hasClass("k-state-disabled")
-            }, nodeData);
+            nodeData = nodeData || {};
+            nodeData.expanded = typeof nodeData.expanded != UNDEFINED ? nodeData.expanded : this._expanded(node);
+            nodeData.index = typeof nodeData.index != UNDEFINED ? nodeData.index : node.index();
+            nodeData.enabled = typeof nodeData.enabled != UNDEFINED ? nodeData.enabled : !wrapper.children(".k-in").hasClass("k-state-disabled");
 
-            groupData = extend({
-                firstLevel: node.parent().parent().hasClass(KTREEVIEW),
-                length: node.parent().children().length
-            }, groupData);
+            groupData = groupData || {};
+            groupData.firstLevel = typeof groupData.firstLevel != UNDEFINED ? groupData.firstLevel : node.parent().parent().hasClass(KTREEVIEW);
+            groupData.length = typeof groupData.length != UNDEFINED ? groupData.length : node.parent().children().length;
 
             // li
             node.removeClass("k-first k-last")
@@ -602,18 +603,19 @@
                 that._updateNodeClasses(parentNode);
             }
 
-            that._updateNodeClasses(node.prev());
-            that._updateNodeClasses(node.next());
-
+            that._updateNodeClasses(node.prev().first());
+            that._updateNodeClasses(node.next().last());
 
             // render sub-nodes
             for (i = 0; i < nodeData.length; i++) {
                 item = nodeData[i];
 
-                childrenData = item.children.data();
+                if (item.hasChildren) {
+                    childrenData = item.children.data();
 
-                if (childrenData.length) {
-                    that._insertNode(childrenData, item.index, node.eq(i), append, !that._expanded(node.eq(i)));
+                    if (childrenData.length) {
+                        that._insertNode(childrenData, item.index, node.eq(i), append, !that._expanded(node.eq(i)));
+                    }
                 }
             }
 
@@ -645,7 +647,7 @@
                 var group = subGroup(parentNode),
                     children = group.children();
 
-                if (typeof index == "undefined") {
+                if (typeof index == UNDEFINED) {
                     index = children.length;
                 }
 

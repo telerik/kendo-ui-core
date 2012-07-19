@@ -512,12 +512,16 @@
         }
 
         var model,
-            proto = extend({}, { defaults: {} }, options),
+            proto = options || {},
             name,
             field,
             type,
             value,
             id = proto.id;
+
+        if (!proto.defaults) {
+            proto.defaults = {};
+        }
 
         if (id) {
             proto.idField = id;
@@ -2712,7 +2716,9 @@
                         hasChildren: hasChildren
                     }
                 }
-            }, that.children, { data: value });
+            }, that.children);
+
+            children.data = value;
 
             if (!hasChildren) {
                 hasChildren = children.schema.data;
@@ -2726,17 +2732,34 @@
                 that.hasChildren = !!hasChildren.call(that, that);
             }
 
-            that.children = new HierarchicalDataSource(children);
-            that.children._parent = function(){
-                return that;
-            };
+            that._childrenOptions = children;
 
-            that.children.bind(CHANGE, function(e){
-                e.node = e.node || that;
-                that.trigger(CHANGE, e);
-            });
+            if (that.hasChildren) {
+                that._initChildren();
+            }
 
             that._loaded = !!(value && value[data]);
+        },
+
+        _initChildren: function() {
+            var that = this;
+
+            if (!(that.children instanceof HierarchicalDataSource)) {
+                that.children = new HierarchicalDataSource(that._childrenOptions);
+                that.children._parent = function(){
+                    return that;
+                };
+
+                that.children.bind(CHANGE, function(e){
+                    e.node = e.node || that;
+                    that.trigger(CHANGE, e);
+                });
+            }
+        },
+
+        append: function(model) {
+            this._initChildren();
+            this.children.add(model);
         },
 
         hasChildren: false,
@@ -2754,7 +2777,10 @@
         },
 
         load: function() {
-            var that = this, options = {};
+            var that = this,
+                options = {};
+
+            that._initChildren();
 
             if (!that._loaded || that.hasChildren) {
                 options[that.idField || "id"] = that.id;
@@ -2764,8 +2790,9 @@
                 }
 
                 that.children.one(CHANGE, function() {
-                    that._loaded = true;
-                }).query(options);
+                            that._loaded = true;
+                        })
+                        .query(options);
             }
         },
 
@@ -2820,13 +2847,14 @@
 
             if (parentNode) {
                 parentNode.hasChildren = true;
+                parentNode._initChildren();
             }
 
             return DataSource.fn.insert.call(this, index, model);
         },
 
         getByUid: function(uid) {
-            var idx, length, node, data;
+            var idx, length, node, data, children;
 
             node = DataSource.fn.getByUid.call(this, uid);
 
@@ -2837,7 +2865,14 @@
             data = this._flatData(this.data());
 
             for (idx = 0, length = data.length; idx < length; idx++) {
-                node = data[idx].children.getByUid(uid);
+                children = data[idx].children;
+
+                if (!(children instanceof HierarchicalDataSource)) {
+                    continue;
+                }
+
+                node = children.getByUid(uid);
+
                 if (node) {
                     return node;
                 }
