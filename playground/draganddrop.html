@@ -7,25 +7,25 @@
     </head>
     <body>
     <div id="draggable"></div>
-    <div id="droptarget">Start dragging.</div>
+    <div id="droptarget"><div class="test1">Start dragging.</div><div class="test2">Start dragging.</div></div>
 
     <script>
         function draggableOnDragStart(e) {
             $("#draggable").addClass("hollow");
 
-            $("#droptarget").text("(Drop here)");
+            $("#droptarget").html("<div class='test1'>(Drop here)</div><div class='test2'>(Drop here)</div>");
         }
 
         function droptargetOnDragEnter(e) {
-            $("#droptarget").text("Now you can drop it.");
+            $(e.filterTarget).text("Now you can drop it.");
         }
 
         function droptargetOnDragLeave(e) {
-            $("#droptarget").text("(Drop here)");
+            $(e.filterTarget).text("(Drop here)");
         }
 
         function droptargetOnDrop(e) {
-            $("#droptarget").text("You did great!");
+            $(e.filterTarget).text("You did great!");
             $("#draggable").removeClass("hollow");
         }
 
@@ -34,7 +34,7 @@
 
             if (!draggable.data("kendoDraggable").dropped) {
                 // drag ended outside of any droptarget
-                $("#droptarget").text("Try again!");
+                $("#droptarget").html("<div class='test1'>(Try again)</div><div class='test2'>(Try again)</div>");
             }
 
             draggable.removeClass("hollow");
@@ -49,7 +49,8 @@
                 dragend: draggableOnDragEnd
             });
 
-            $("#droptarget").kendoDropTarget({
+            $("#droptarget").kendoDropFilter({
+                filter: ".test1, .test2",
                 dragenter: droptargetOnDragEnter,
                 dragleave: droptargetOnDragLeave,
                 drop: droptargetOnDrop
@@ -85,7 +86,8 @@
             border-color: #cbcbcb;
         }
 
-        #droptarget
+        #droptarget,
+        .test1, .test2
         {
             border: 1px solid #959595;
             height: 198px;
@@ -97,6 +99,7 @@
             text-shadow: 0 1px 1px #fff;
             margin: 0 0 30px 250px;
             cursor: default;
+            vertical-align: middle;
 
             background: #dddddd;
             background: -moz-linear-gradient(top, #dddddd 0%, #c1c1c1 100%);
@@ -105,6 +108,24 @@
             background: -o-linear-gradient(top, #dddddd 0%,#c1c1c1 100%);
             background: -ms-linear-gradient(top, #dddddd 0%,#c1c1c1 100%);
             background: linear-gradient(top, #dddddd 0%,#c1c1c1 100%);
+        }
+
+        .test1, .test2
+        {
+            vertical-align: middle;
+            display: inline-block;
+            width: 350px;
+            height: 100px;
+            line-height: 100px;
+            margin: 0 0 30px 30px;
+        }
+
+        *+html .test1,
+        *+html .test2
+        {
+            margin-top: 50px;
+            display: inline;
+            zoom: 1;
         }
 
         #example

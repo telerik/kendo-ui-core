@@ -31,7 +31,7 @@
             module("kendo.ui.DropFilter", {
                 setup: function() {
                     targetElement = $("<div><div class='test1'>&nbsp;</div><div class='test2'>&nbsp;</div></div>").prependTo(document.body);
-                    span = $("<span/>").prependTo(document.body);
+                    span = $("<span>&nbsp;</span>").prependTo(document.body);
                 },
                 teardown: function() {
                     span.remove();

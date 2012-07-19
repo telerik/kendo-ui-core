@@ -105,15 +105,15 @@
         parent.trigger(e.type);
     }
 
-    var elementProto = HTMLElement.prototype,
+    var elementProto = "HTMLElement" in window ? HTMLElement.prototype : [],
         matchesSelector = elementProto.webkitMatchesSelector || elementProto.mozMatchesSelector || elementProto.msMatchesSelector ||
                           elementProto.oMatchesSelector || elementProto.matchesSelector ||
-                          function( elem, selector ) {
-                              var nodeList = ( elem.parentNode || document ).querySelectorAll( selector ) || [],
+                          function( selector ) {
+                              var nodeList = document.querySelectorAll ? ( this.parentNode || document ).querySelectorAll( selector ) || [] : $(selector),
                                   i = nodeList.length;
 
-                              while ( i-- ) {
-                                  if ( nodeList[i] == elem ) {
+                              while (i--) {
+                                  if (nodeList[i] == this) {
                                       return true;
                                   }
                               }
@@ -134,12 +134,10 @@
                 }
             }
 
-            if (document.querySelectorAll) {
-                for (i = 0; i < filterLen; i ++) {
-                    theFilter = filters[i];
-                    if (matchesSelector.call(target, theFilter.options.filter)) {
-                        return { target: theFilter, targetElement: target };
-                    }
+            for (i = 0; i < filterLen; i ++) {
+                theFilter = filters[i];
+                if (matchesSelector.call(target, theFilter.options.filter)) {
+                    return { target: theFilter, targetElement: target };
                 }
             }
 
