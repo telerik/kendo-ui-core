@@ -45,23 +45,7 @@
         body
         {
             margin: 0;
-            padding: 10px;
             box-sizing: border-box;
-        }
-
-        .drop,
-        .adddrop
-        {
-            width: 20px;
-            height: 20px;
-            display: inline-block;
-            border: 1px solid transparent;
-            text-align: center;
-        }
-
-        .adddrop:hover
-        {
-            border-color: #555;
         }
 
         .device
@@ -121,17 +105,6 @@
         {
             font: inherit !important;
             padding: .8em;
-        }
-
-        .gradient
-        {
-            position: relative;
-            width: 200px;
-            height: 20px;
-            background: -webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.5)),
-                        -webkit-linear-gradient(left, #77ADFE, #64D3FC 5%, #259EE9 98%, rgba(186,205,243,.8));
-            background: -moz-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.5)),
-                        -moz-linear-gradient(left, #77ADFE, #64D3FC 5%, #259EE9 98%, rgba(186,205,243,.8));
         }
 
         .stop
@@ -228,23 +201,107 @@
             min-width: 130px;
         }
 
+        .tools
+        {
+            background: #d9d9d9;
+            box-shadow: inset 0 1px 0 #c4c4c4, inset 0 -1px 0 #fff;
+            overflow: hidden;
+        }
+
+        .colorHolder {
+            font-size: 0;
+        }
+
+        .drop
+        {
+            width: 40px;
+            height: 40px;
+            display: inline-block;
+            text-align: center;
+            box-shadow: inset 1px 1px 0 rgba(0,0,0,.2), inset -1px -1px 0 rgba(255,255,255,.2);
+        }
+
+        .header
+        {
+            padding-left: 20px;
+            font-size: 24px;
+            background: -webkit-gradient(linear, 0 0, 0 100%, from(#fff), to(#eee));
+            background: -moz-linear-gradient(top, #fff, #eee);
+            height: 62px;
+            line-height: 62px;
+            color: #777;
+            white-space: nowrap;
+            vertical-align: middle;
+        }
+
+        .header span
+        {
+            color: #222;
+            position: relative;
+            display: inline-block;
+        }
+
+        .header .underTitle
+        {
+            position: absolute;
+            bottom: -14px;
+            right: 0;
+            font-size: 8px;
+            text-transform: uppercase;
+        }
+
+        .header .menu
+        {
+            margin-left: 100px;
+            font-size: 14px;
+            display: inline-block;
+            text-transform: uppercase;
+            border: 0;
+            background: none;
+            vertical-align: middle;
+        }
+
+        .header .menu .k-item
+        {
+            color: #666;
+            background: none;
+            border-width: 1px;
+            border-color: transparent;
+        }
+
+        .header .menu .k-state-active
+        {
+            color: #000;
+            border-color: #B5B5B5 #DFDFDF #E0E0E0;
+            background: -webkit-gradient(linear, 0 0, 0 100%, from(#e8e8e8), to(#e0e0e0));
+            background: -moz-linear-gradient(top, #e8e8e8, #e0e0e0);
+            border-radius: 10px;
+        }
+
+        .box
+        {
+            padding: 40px;
+            background: -webkit-gradient(linear, 0 0, 0 100%, from(#e0e0e0), to(#fff));
+            background: -moz-linear-gradient(top, #e0e0e0, #fff);
+        }
+
     </style>
 </head>
 <body class="body">
-    <div class="box" tabindex="0">
-        <div class="drop" style="background: #dc143c;">&nbsp;</div>
-        <div class="drop" style="background: #0066cc;">&nbsp;</div>
-        <div class="drop" style="background: #adff2f;">&nbsp;</div>
-        <div class="drop" style="background: #87ceeb;">&nbsp;</div>
-        <div class="drop" style="background: #b8860b;">&nbsp;</div>
-        <div id="picky" class="drop" style="background: #ba55d3;">&nbsp;</div>
-        <div class="drop" style="background: rgba(100,150,200,.5);">&nbsp;</div>
-        <div class="drop" style="background: rgba(200,150,100,.5);">&nbsp;</div>
-        <div class="drop" style="background: -webkit-linear-gradient(top, #0b47a2, #04b7a2 5%, #0b4a72 98%, #20b47a);">&nbsp;</div>
-        <div class="adddrop">+</div>
-        <br /><br />
-        <div class="gradient"></div>
-        <br /><br />
+        <div class="header">
+            theme<span>builder<span class="underTitle">Kendo UI Mobile</span></span>
+            <ul class="menu">
+                <li class="k-state-active">Colors</li>
+                <li>Gradients</li>
+                <li>Patterns</li>
+                <li>Styles</li>
+            </ul>
+        </div>
+        <div class="tools">
+            <div class="colorHolder">
+            </div>
+        </div>
+        <div class="box">
         <div>
             <div id="iosDevice" class="device">
                 <div data-role="view" data-layout="overview-layout" id="overview-cities" data-title="Favourite Cities">
