@@ -512,16 +512,12 @@
         }
 
         var model,
-            proto = options || {},
+            proto = extend({ defaults: {} }, options),
             name,
             field,
             type,
             value,
             id = proto.id;
-
-        if (!proto.defaults) {
-            proto.defaults = {};
-        }
 
         if (id) {
             proto.idField = id;
