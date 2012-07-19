@@ -20,8 +20,11 @@
         <ol id="qunit-tests"></ol>
 
         <script>
+            var treeview, treeviewObject;
+
             function createTreeView(options) {
-                return $("<div />").appendTo(document.body).kendoTreeView(options);
+                treeview = $("<div />").appendTo(document.body).kendoTreeView(options);
+                treeviewObject = treeview.data("kendoTreeView");
             }
 
             function removeTreeViews() {
@@ -33,11 +36,12 @@
             });
 
             test("selecting nodes triggers selected event and passes node as argument", function() {
-                var selectedArgs,
-                    treeview = createTreeView({
-                        select: function(e) { selectedArgs = e; },
-                        dataSource: [ { text: "foo" } ]
-                    });
+                var selectedArgs;
+
+                createTreeView({
+                    select: function(e) { selectedArgs = e; },
+                    dataSource: [ { text: "foo" } ]
+                });
 
                 var node = $(".k-item:first", treeview);
 
@@ -48,15 +52,16 @@
             });
 
             test("clicking expand button triggers expand event", function() {
-                var expandArgs,
-                    treeview = createTreeView({
-                        expand: function(e) { expandArgs = e; },
-                        dataSource: [
-                            { text: "foo", items: [
-                                { text: "food" }
-                            ] }
-                        ]
-                    });
+                var expandArgs;
+
+                createTreeView({
+                    expand: function(e) { expandArgs = e; },
+                    dataSource: [
+                        { text: "foo", items: [
+                            { text: "food" }
+                        ] }
+                    ]
+                });
 
                 $(".k-plus", treeview)
                     .trigger("click");
@@ -114,18 +119,18 @@
             }
 
             test("moving node triggers dragstart", function () {
-                var dragStartTriggered,
-                    treeview = createTreeView({
-                        dragAndDrop: true,
-                        dataSource: [
-                            { text: "foo", expanded: true, items: [
-                                { text: "bar" }
-                            ] },
-                            { text: "baz" }
-                        ],
-                        dragstart: function(e) { dragStartTriggered = e; }
-                    }),
-                    treeviewObject = treeview.data("kendoTreeView");
+                var dragStartTriggered;
+
+                createTreeView({
+                    dragAndDrop: true,
+                    dataSource: [
+                        { text: "foo", expanded: true, items: [
+                            { text: "bar" }
+                        ] },
+                        { text: "baz" }
+                    ],
+                    dragstart: function(e) { dragStartTriggered = e; }
+                });
 
                 moveNode(treeviewObject, "bar", "baz");
 
@@ -134,17 +139,16 @@
             });
 
             test("dragstart can be prevented", function () {
-                var treeview = createTreeView({
-                        dragAndDrop: true,
-                        dataSource: [
-                            { text: "foo", expanded: true, items: [
-                                { text: "bar" }
-                            ] },
-                            { text: "baz" }
-                        ],
-                        dragstart: function(e) { e.preventDefault(); }
-                    }),
-                    treeviewObject = treeview.data("kendoTreeView");
+                createTreeView({
+                    dragAndDrop: true,
+                    dataSource: [
+                        { text: "foo", expanded: true, items: [
+                            { text: "bar" }
+                        ] },
+                        { text: "baz" }
+                    ],
+                    dragstart: function(e) { e.preventDefault(); }
+                });
 
                 moveNode(treeviewObject, "bar", "baz");
 
@@ -152,18 +156,18 @@
             });
 
             test("moving node triggers drag", function () {
-                var dragTriggered,
-                    treeview = createTreeView({
-                        dragAndDrop: true,
-                        dataSource: [
-                            { text: "foo", expanded: true, items: [
-                                { text: "bar" }
-                            ] },
-                            { text: "baz" }
-                        ],
-                        drag: function(e) { dragTriggered = e; }
-                    }),
-                    treeviewObject = treeview.data("kendoTreeView");
+                var dragTriggered;
+
+                createTreeView({
+                    dragAndDrop: true,
+                    dataSource: [
+                        { text: "foo", expanded: true, items: [
+                            { text: "bar" }
+                        ] },
+                        { text: "baz" }
+                    ],
+                    drag: function(e) { dragTriggered = e; }
+                });
 
                 moveNode(treeviewObject, "bar", "baz");
 
@@ -176,18 +180,18 @@
             });
 
             test("moving node triggers drop", function () {
-                var dropTriggered,
-                    treeview = createTreeView({
-                        dragAndDrop: true,
-                        dataSource: [
-                            { text: "foo", expanded: true, items: [
-                                { text: "bar" }
-                            ] },
-                            { text: "baz" }
-                        ],
-                        drop: function(e) { dropTriggered = e; }
-                    }),
-                    treeviewObject = treeview.data("kendoTreeView");
+                var dropTriggered;
+
+                createTreeView({
+                    dragAndDrop: true,
+                    dataSource: [
+                        { text: "foo", expanded: true, items: [
+                            { text: "bar" }
+                        ] },
+                        { text: "baz" }
+                    ],
+                    drop: function(e) { dropTriggered = e; }
+                });
 
                 moveNode(treeviewObject, "bar", "baz");
 
@@ -199,18 +203,18 @@
             });
 
             test("moving node triggers dragstart/drag/drop/dragend", function () {
-                var dragEndTriggered,
-                    treeview = createTreeView({
-                        dragAndDrop: true,
-                        dataSource: [
-                            { text: "foo", expanded: true, items: [
-                                { text: "bar" }
-                            ] },
-                            { text: "baz" }
-                        ],
-                        dragend: function(e) { dragEndTriggered = e; }
-                    }),
-                    treeviewObject = treeview.data("kendoTreeView");
+                var dragEndTriggered;
+
+                createTreeView({
+                    dragAndDrop: true,
+                    dataSource: [
+                        { text: "foo", expanded: true, items: [
+                            { text: "bar" }
+                        ] },
+                        { text: "baz" }
+                    ],
+                    dragend: function(e) { dragEndTriggered = e; }
+                });
 
                 moveNode(treeviewObject, "bar", "baz");
 
@@ -222,20 +226,19 @@
             });
 
             test("drop event can be cancelled", function() {
-                var treeview = createTreeView({
-                        dragAndDrop: true,
-                        dataSource: [
-                            { text: "foo", expanded: true, items: [
-                                { text: "bar" }
-                            ] },
-                            { text: "baz" }
-                        ],
-                        drop: function(e) {
-                            ok(e.preventDefault);
-                            e.preventDefault();
-                        }
-                    }),
-                    treeviewObject = treeview.data("kendoTreeView");
+                createTreeView({
+                    dragAndDrop: true,
+                    dataSource: [
+                        { text: "foo", expanded: true, items: [
+                            { text: "bar" }
+                        ] },
+                        { text: "baz" }
+                    ],
+                    drop: function(e) {
+                        ok(e.preventDefault);
+                        e.preventDefault();
+                    }
+                });
 
                 moveNode(treeviewObject, "bar", "baz");
 
@@ -244,19 +247,54 @@
            });
 
            test("initialization of expanded nodes does not trigger expand events", function() {
-               var triggered = false,
-                   treeview = createTreeView({
-                        dataSource: [
-                            { text: "foo", expanded: true, items: [
-                                { text: "bar" }
-                            ] }
-                        ],
-                        expand: function() {
-                            triggered = true;
-                        }
-                    });
+               var triggered = false;
+
+               createTreeView({
+                    dataSource: [
+                        { text: "foo", expanded: true, items: [
+                            { text: "bar" }
+                        ] }
+                    ],
+                    expand: function() {
+                        triggered = true;
+                    }
+                });
 
                 ok(!triggered);
+           });
+
+           test("setting Node.loaded to false allows nodes to be refreshed", function() {
+               var calls = 0;
+
+               createTreeView({
+                   dataSource: {
+                       data: [
+                           { text: "foo" }
+                       ],
+                       schema: {
+                           model: {
+                               hasChildren: true,
+                               children: {
+                                   transport: {
+                                       read: function(options) {
+                                           calls++;
+                                           options.success([ { text: "bar" } ]);
+                                       }
+                                   }
+                               }
+                           }
+                       }
+                    },
+                    expand: function(e) {
+                        this.dataItem(e.node).loaded(false);
+                    }
+                });
+
+                treeviewObject.expand(".k-item:first");
+                treeviewObject.collapse(".k-item:first");
+                treeviewObject.expand(".k-item:first");
+
+                equal(calls, 2);
            });
         </script>
 
