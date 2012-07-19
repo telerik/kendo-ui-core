@@ -18,6 +18,7 @@
         DRAGEND = "dragend",
         CLICK = "click",
         VISIBILITY = "visibility",
+        UNDEFINED = "undefined",
         KSTATEHOVER = "k-state-hover",
         KTREEVIEW = "k-treeview",
         VISIBLE = ":visible",
@@ -120,7 +121,7 @@
                 options = { dataSource: options };
             }
 
-            if (options && typeof options.loadOnDemand == "undefined" && isArray(options.dataSource)) {
+            if (options && typeof options.loadOnDemand == UNDEFINED && isArray(options.dataSource)) {
                 options.loadOnDemand = false;
             }
 
@@ -513,16 +514,14 @@
                 return;
             }
 
-            nodeData = extend({
-                expanded: this._expanded(node),
-                index: node.index(),
-                enabled: !wrapper.children(".k-in").hasClass("k-state-disabled")
-            }, nodeData);
+            nodeData = nodeData || {};
+            nodeData.expanded = typeof nodeData.expanded != UNDEFINED ? nodeData.expanded : this._expanded(node);
+            nodeData.index = typeof nodeData.index != UNDEFINED ? nodeData.index : node.index();
+            nodeData.enabled = typeof nodeData.enabled != UNDEFINED ? nodeData.enabled : !wrapper.children(".k-in").hasClass("k-state-disabled");
 
-            groupData = extend({
-                firstLevel: node.parent().parent().hasClass(KTREEVIEW),
-                length: node.parent().children().length
-            }, groupData);
+            groupData = groupData || {};
+            groupData.firstLevel = typeof groupData.firstLevel != UNDEFINED ? groupData.firstLevel : node.parent().parent().hasClass(KTREEVIEW);
+            groupData.length = typeof groupData.length != UNDEFINED ? groupData.length : node.parent().children().length;
 
             // li
             node.removeClass("k-first k-last")
@@ -649,7 +648,7 @@
                 var group = subGroup(parentNode),
                     children = group.children();
 
-                if (typeof index == "undefined") {
+                if (typeof index == UNDEFINED) {
                     index = children.length;
                 }
 
