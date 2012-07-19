@@ -93,6 +93,7 @@
         MONTHS = "months",
         MOUSEMOVE_TRACKING = "mousemove.tracking",
         MOUSEOVER = "mouseover",
+        NS = ".kendoChart",
         OUTSIDE_END = "outsideEnd",
         OUTLINE_SUFFIX = "_outline",
         PIE = "pie",
@@ -369,11 +370,10 @@
 
         _attachEvents: function() {
             var chart = this,
-                ns = "." + chart.key,
                 element = chart.element;
 
-            element.on(CLICK + ns, proxy(chart._click, chart));
-            element.on(MOUSEOVER + ns, proxy(chart._mouseOver, chart));
+            element.on(CLICK + NS, proxy(chart._click, chart));
+            element.on(MOUSEOVER + NS, proxy(chart._mouseOver, chart));
         },
 
         _getChartElement: function(e) {
@@ -572,10 +572,9 @@
 
         destroy: function() {
             var chart = this,
-                ns = "." + chart.key,
                 dataSource = chart.dataSource;
 
-            chart.wrapper.off(ns);
+            chart.wrapper.off(NS);
             dataSource.unbind(CHANGE, chart._dataChangeHandler);
 
             Widget.fn.destroy.call(chart);
