@@ -3947,6 +3947,10 @@
                     }
                 });
 
+                $.each(currentPane.axes, function(i, axis) {
+                    axis.pane = currentPane;
+                });
+
                 panes.push(currentPane);
             }
 
@@ -4001,9 +4005,12 @@
 
             plotArea.box = targetBox.clone();
 
-            if (axesCount) {
+            plotArea.box.unpad(margin);
+
+            plotArea.reflowPanes();
+
+            if (axesCount > 0) {
                 plotArea.reflowAxes();
-                plotArea.box = plotArea.axisBox(plotArea.axes);
             }
 
             for (i = 0; i < axesCount; i++) {
@@ -4069,10 +4076,8 @@
             );
         },
 
-        alignAxes: function(xAxes, yAxes) {
+        alignAxes: function(xAxes, yAxes, xAnchor, yAnchor) {
             var plotArea = this,
-                xAnchor = xAxes[0],
-                yAnchor = yAxes[0],
                 xAnchorCrossings = plotArea.axisCrossingValues(xAnchor, yAxes),
                 yAnchorCrossings = plotArea.axisCrossingValues(yAnchor, xAxes),
                 leftAnchor,
@@ -4196,10 +4201,8 @@
             }
         },
 
-        shrinkAdditionalAxes: function(axes, xAxes, yAxes) {
+        shrinkAdditionalAxes: function(axes, xAxes, yAxes, xAnchor, yAnchor) {
             var plotArea = this,
-                xAnchor = xAxes[0],
-                yAnchor = yAxes[0],
                 anchorLineBox = xAnchor.lineBox().clone().wrap(yAnchor.lineBox()),
                 overflowX,
                 overflowY,
@@ -4255,32 +4258,43 @@
                 panesLength = panes.length,
                 currentPane,
                 axes = plotArea.axes,
+                xAxes = grep(axes, (function(axis) { return !axis.options.vertical; })),
+                yAxes = grep(axes, (function(axis) { return axis.options.vertical; })),
+                xAnchor = xAxes[0],
+                yAnchor = yAxes[0],
                 paneAxes;
+
+            xAnchor.reflow(xAnchor.pane.box);
+            yAnchor.reflow(yAnchor.pane.box);
 
             for (i = 0; i < panesLength; i++) {
                 currentPane = panes[i];
-                plotArea.reflowPaneAxes(panes[i]);
+                plotArea.reflowPaneAxes(panes[i], xAnchor, yAnchor);
             }
         },
 
-        reflowPaneAxes: function(pane) {
+        reflowPaneAxes: function(pane, defaultXAnchor, defaultYAnchor) {
             var plotArea = this,
                 axes = pane.axes,
                 xAxes = grep(axes, (function(axis) { return !axis.options.vertical; })),
                 yAxes = grep(axes, (function(axis) { return axis.options.vertical; })),
+                xAnchor = xAxes[0] || defaultXAnchor,
+                yAnchor = yAxes[0] || defaultYAnchor,
                 i,
                 length = axes.length;
 
-            for (i = 0; i < length; i++) {
-                axes[i].reflow(pane.box);
-            }
+            if (length > 0) {
+                for (i = 0; i < length; i++) {
+                    axes[i].reflow(pane.box);
+                }
 
-            plotArea.alignAxes(xAxes, yAxes);
-            plotArea.shrinkAdditionalAxes(axes, xAxes, yAxes);
-            plotArea.alignAxes(xAxes, yAxes);
-            plotArea.shrinkAxes(pane, axes);
-            plotArea.alignAxes(xAxes, yAxes);
-            plotArea.fitAxes(pane, axes);
+                plotArea.alignAxes(xAxes, yAxes, xAnchor, yAnchor);
+                plotArea.shrinkAdditionalAxes(axes, xAxes, yAxes, xAnchor, yAnchor);
+                plotArea.alignAxes(xAxes, yAxes, xAnchor, yAnchor);
+                plotArea.shrinkAxes(pane, axes);
+                plotArea.alignAxes(xAxes, yAxes, xAnchor, yAnchor);
+                plotArea.fitAxes(pane, axes);
+            }
         },
 
         reflowCharts: function() {
@@ -4295,6 +4309,68 @@
             }
 
             plotArea.box = box;
+        },
+
+        reflowPanes: function() {
+            var plotArea = this,
+                box = plotArea.box,
+                panes = plotArea.panes,
+                i,
+                panesLength = panes.length,
+                currentPane,
+                paneBox,
+                remainingHeight = box.height(),
+                remainingPanes = panesLength,
+                autoHeightPanes = 0,
+                top = box.y1,
+                height,
+                percents;
+
+            for (i = 0; i < panesLength; i++) {
+                currentPane = panes[i];
+                height = currentPane.options.height;
+
+                currentPane.options.width = box.width();
+
+                if (!currentPane.options.height) {
+                    autoHeightPanes++;
+                } else {
+                    if (height.indexOf && height.indexOf("%")) {
+                        percents = parseInt(height, 10) / 100;
+                        currentPane.options.height = percents * box.height();
+                    }
+
+                    currentPane.reflow(box.clone());
+
+                    // Include margins in total height to avoid overflowing panes
+                    currentPane.options.height -=
+                        currentPane.box.height() - currentPane.options.height;
+
+                    remainingHeight -= currentPane.options.height;
+                }
+            }
+
+            for (i = 0; i < panesLength; i++) {
+                currentPane = panes[i];
+
+                if (!currentPane.options.height) {
+                    currentPane.options.height = remainingHeight / autoHeightPanes;
+                }
+            }
+
+            for (i = 0; i < panesLength; i++) {
+                currentPane = panes[i];
+
+
+                paneBox = box
+                    .clone()
+                    .move(box.x1, top);
+
+                currentPane.reflow(paneBox);
+
+                remainingPanes--;
+                top += currentPane.options.height;
+            }
         },
 
         renderGridLines: function(view, axis, secondaryAxis) {
@@ -4440,51 +4516,6 @@
             }));
 
             plotArea.createValueAxes();
-        },
-
-        reflow: function(targetBox) {
-            var plotArea = this,
-                panes = plotArea.panes,
-                i,
-                panesLength = panes.length,
-                currentPane,
-                paneBox,
-                remainingHeight = targetBox.height(),
-                remainingPanes = panesLength,
-                height,
-                percents;
-
-            console.log(targetBox.height())
-            for (i = 0; i < panesLength; i++) {
-                currentPane = panes[i];
-                height = currentPane.options.height;
-
-                if (height.indexOf && height.indexOf("%")) {
-                    percents = parseInt(height, 10) / 100;
-                    currentPane.options.height = percents * remainingHeight;
-                }
-            }
-
-            for (i = 0; i < panesLength; i++) {
-                currentPane = panes[i];
-
-                if (!currentPane.options.height) {
-                    currentPane.options.height = remainingHeight / remainingPanes;
-                }
-
-                currentPane.options.width = targetBox.width();
-
-                paneBox = targetBox
-                    .clone()
-                    .translate(0, targetBox.height() - remainingHeight);
-
-                currentPane.reflow(paneBox);
-
-                remainingHeight -= currentPane.box.height();
-                remainingPanes--;
-            }
-
-            PlotAreaBase.fn.reflow.call(plotArea, targetBox);
         },
 
         aggregateDateSeries: function() {
@@ -4687,53 +4718,6 @@
                 plotArea.axisX = primaryValueAxis;
             } else {
                 plotArea.axisY = primaryValueAxis;
-            }
-        },
-
-        createPanes: function() {
-            var plotArea = this,
-                panes,
-                i,
-                panesLength,
-                currentPane;
-
-            PlotAreaBase.fn.createPanes.call(plotArea);
-
-            // createCategoryAxis
-            var options = plotArea.options,
-                invertAxes = plotArea.invertAxes,
-                categoryAxisOptions = options.categoryAxis,
-                categories = categoryAxisOptions.categories,
-                categoriesCount = categories.length,
-                axisType  = categoryAxisOptions.type,
-                dateCategory = categories[0] instanceof Date,
-                categoryAxis;
-
-            if (axisType === DATE || (!axisType && dateCategory)) {
-                categoryAxis = new DateCategoryAxis(deepExtend({
-                        vertical: invertAxes
-                    },
-                    categoryAxisOptions)
-                );
-            } else {
-                categoryAxis = new CategoryAxis(deepExtend({
-                        vertical: invertAxes,
-                        axisCrossingValue: invertAxes ? categoriesCount : 0
-                    },
-                    categoryAxisOptions)
-                );
-            }
-            // createCategoryAxis
-
-            panes = plotArea.panes;
-            panesLength = panes.length;
-
-            for (i = 0; i < panesLength; i++) {
-                currentPane = panes[i];
-
-                if (currentPane.axes.length < 2) {
-                    currentPane.axes.push(categoryAxis);
-                }
             }
         },
 
