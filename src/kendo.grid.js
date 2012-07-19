@@ -966,15 +966,16 @@
         _destroyEditable: function() {
             var that = this;
 
-            if (that.editable) {
-                that._detachModelChange();
-
-                var destroy = function() {
+            var destroy = function() {
+                if (that.editable) {
+                    that._detachModelChange();
                     that.editable.destroy();
                     that.editable = null;
                     that._editContainer = null;
-                };
+                }
+            };
 
+            if (that.editable) {
                 if (that._editMode() === "popup") {
                     that._editContainer.data("kendoWindow").bind("deactivate", destroy).close();
                 } else {
