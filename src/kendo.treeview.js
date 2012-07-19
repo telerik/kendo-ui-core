@@ -603,9 +603,8 @@
                 that._updateNodeClasses(parentNode);
             }
 
-            that._updateNodeClasses(node.prev());
-            that._updateNodeClasses(node.next());
-
+            that._updateNodeClasses(node.prev().first());
+            that._updateNodeClasses(node.next().last());
 
             // render sub-nodes
             for (i = 0; i < nodeData.length; i++) {
