@@ -5,7 +5,13 @@
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
+        <script type="text/javascript" src="../jquery.mockjax.js"></script>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.listview.js"></script>
+        <script src="../../src/kendo.upload.js"></script>
         <script src="../../src/kendo.imagebrowser.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
     </head>
@@ -19,11 +25,24 @@
         <ul id="log"></ul>
 
         <script>
-            module("kendo.ui.validation", {
+            var ImageBrowser = kendo.ui.ImageBrowser,
+                container;
+
+            QUnit.config.testTimeout = 100;
+
+            function setup(options) {
+                return new ImageBrowser(container, options);
+            }
+
+            module("kendo.ui.imagebrowser", {
                 setup: function() {
                     container = $("<div/>").appendTo($(document.body));
+
+                    $.mockjaxSettings.contentType = "text/json";
+                    $.mockjaxSettings.responseTime = 0;
                 },
                 teardown: function() {
+                    $.mockjaxClear();
                     container.remove();
                 }
             });
@@ -31,9 +50,92 @@
             test("kendoImageBrowser attaches a imagebrowser object to target", function() {
                 container.kendoImageBrowser();
 
-                ok(container.data("kendoImageBrowser") instanceof kendo.ui.ImageBrowser);
+                ok(container.data("kendoImageBrowser") instanceof ImageBrowser);
             });
 
+            test("constructor calls data", 1, function() {
+                $.mockjax({
+                    url: "browse",
+                    response: function() {
+                        this.responseText = "{ }";
+                        start();
+                        ok(true);
+                    }
+                });
+                setup({ transport: { read: "browse" } });
+                stop();
+            });
+
+            test("listView is attached", function() {
+                var browser = setup();
+
+                ok(browser.listView instanceof kendo.ui.ListView);
+            });
+
+            test("k-image-browser class is added to the container", function() {
+                setup();
+
+                ok(container.hasClass("k-image-browser"));
+            });
+
+            test("toolbar is rendered", function() {
+                setup();
+                ok(container.children("div.k-toolbar").length);
+            });
+
+            test("toolbar texts", function() {
+                var browser = setup();
+
+                equal(browser.toolbar.find("div.k-upload").text(), "Upload");
+                equal(browser.toolbar.find("div.k-tiles-arrange").text(), "Arrange by: Name");
+            });
+
+            test("toolbar texts are loaded from messages", function() {
+                var browser = setup({
+                    messages: {
+                        uploadFile: "foo",
+                        orderBy: "bar",
+                        orderByName: "baz"
+                    }
+                });
+
+                equal(browser.toolbar.find("div.k-upload").text(), "foo");
+                equal(browser.toolbar.find("div.k-tiles-arrange").text(), "bar: baz");
+            });
+
+            test("Upload widget is attached", function() {
+                var browser = setup();
+
+                ok(browser.toolbar.find("div.k-upload").data("kendoUpload"));
+            });
+
+            test("selecting item from arrangeby popup change the text", function() {
+                var browser = setup(),
+                    toolbar = browser.toolbar;
+
+                toolbar.find(".k-tiles-arrange a").click();
+                browser.arrangeByPopup.element.find("li:last").click();
+                equal(toolbar.find(".k-tiles-arrange a span:first").html(), "Size");
+            });
+
+            test("listview renders the files", 1, function() {
+                $.mockjax({
+                    url: "browse",
+                    responseText: kendo.stringify({
+                            items: [
+                                { name: "file1", type: "f", size: 42 },
+                                { name: "file2", type: "f", size: 142 }
+                            ]
+                        })
+                });
+
+                var browser = setup({ transport: { read: "browse" } });
+                stop();
+                browser.listView.bind("dataBound", function() {
+                    start();
+                    equal(this.items().length, 2);
+                });
+            });
         </script>
     </body>
 </html>
