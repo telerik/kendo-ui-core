@@ -2278,7 +2278,7 @@
                 }
 
                 if (length) { // data item is an object
-                    rowTemplate += ' ' + kendo.attr("uid") + '="#=uid#"';
+                    rowTemplate += ' ' + kendo.attr("uid") + '="#=' + settings.paramName + '.uid#"';
                 }
 
                 rowTemplate += ">";
@@ -2334,6 +2334,7 @@
                 settings = extend({}, kendo.Template, that.options.templateSettings),
                 template = column.template,
                 paramName = settings.paramName,
+                field = column.field,
                 html = "",
                 idx,
                 length,
@@ -2365,7 +2366,7 @@
                     html += paramName + ".";
                 }
 
-                html += column.field;
+                html += field;
                 html += ") { #";
                 html += "${v[idx].text}";
                 html += "#break;#";
@@ -2378,11 +2379,12 @@
                     html += 'kendo.format(\"' + format.replace(formatRegExp,"\\$1") + '\",';
                 }
 
-                if (!settings.useWithBlock) {
-                    html += paramName + ".";
+                if (field) {
+                    field = paramName + "." + field;
+                    html += field + "==null?'':" + field;
+                } else {
+                    html += "''";
                 }
-
-                html += column.field;
 
                 if (format) {
                     html += ")";

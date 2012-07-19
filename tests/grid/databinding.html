@@ -64,7 +64,6 @@
                 equal(grid.dataItem(rows.eq(1)).foo, 2);
             });
 
-
             test("grid row is refreshed on modelChange", function() {
                  var grid = new Grid($("<table><tbody/></table>")[0], {
                     dataSource: {
@@ -151,6 +150,18 @@
 
                 equal(grid.table.find("tr").length, 2);
                 equal(grid.columns.length, 2);
+            });
+
+            test("binding to null value does not display the string 'null'", function() {
+                var grid = new Grid($("<table><tbody/></table>"), { dataSource: [ { foo: null} ], columns: ["foo"] });
+
+                ok(grid.tbody.find("td").text() != "null");
+            });
+
+            test("binding to undefined value does not display the string 'undefined'", function() {
+                var grid = new Grid($("<table><tbody/></table>"), { dataSource: [ { foo : undefined } ], columns: ["foo"], templateSettings: { useWithBlock: false } });
+
+                ok(grid.tbody.find("td").text() != "undefined");
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
