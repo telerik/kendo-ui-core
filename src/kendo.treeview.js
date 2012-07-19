@@ -233,6 +233,8 @@
 
             function recursiveRead(data) {
                 for (var i = 0; i < data.length; i++) {
+                    data[i]._initChildren();
+
                     data[i].children.read();
 
                     recursiveRead(data[i].children.view());
@@ -610,10 +612,12 @@
             for (i = 0; i < nodeData.length; i++) {
                 item = nodeData[i];
 
-                childrenData = item.children.data();
+                if (item.hasChildren) {
+                    childrenData = item.children.data();
 
-                if (childrenData.length) {
-                    that._insertNode(childrenData, item.index, node.eq(i), append, !that._expanded(node.eq(i)));
+                    if (childrenData.length) {
+                        that._insertNode(childrenData, item.index, node.eq(i), append, !that._expanded(node.eq(i)));
+                    }
                 }
             }
 

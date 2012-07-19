@@ -58,7 +58,7 @@
 
             test("the children field of a node is a HierarchicalDataSource", function() {
                 var dataSource = new HierarchicalDataSource( {
-                    data: [{}]
+                    data: [{ hasChildren: true }]
                 });
 
                 dataSource.read();
@@ -119,7 +119,7 @@
                     strictEqual(e.node, child);
                 });
 
-                child.children.add({ productName: "Product 2" });
+                child.append({ productName: "Product 2" });
             });
 
             test("the event argument contains the index",1, function() {
@@ -136,7 +136,7 @@
                     strictEqual(e.index, 0);
                 });
 
-                child.children.add({ productName: "Product 2" });
+                child.append({ productName: "Product 2" });
             });
 
             test("adding a child node triggers the change event of the data source", 2, function() {
@@ -594,7 +594,7 @@
 
                 var item = dataSource.get(1);
 
-                item.children.add({ id: 2 });
+                item.append({ id: 2 });
 
                 dataSource.remove(item);
 
@@ -614,7 +614,7 @@
 
                 var item = dataSource.get(1);
 
-                item.children.add({ id: 2 });
+                item.append({ id: 2 });
 
                 ok(item.hasChildren);
             });
