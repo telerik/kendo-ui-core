@@ -756,7 +756,8 @@
                 isExpanding = arguments.length == 1 ? !contents.is(VISIBLE) : expand,
                 direction = isExpanding ? "expand" : "collapse",
                 animation = options.animation[direction],
-                dataItem = that.dataItem(node);
+                dataItem = that.dataItem(node),
+                loaded;
 
             if (contents.data("animating")) {
                 return;
@@ -769,7 +770,9 @@
             if (!that._trigger(direction, node)) {
                 that._expanded(node, isExpanding);
 
-                if (contents.children().length > 0) {
+                loaded = dataItem && dataItem.loaded();
+
+                if (loaded && contents.children().length > 0) {
                     that._updateNodeClasses(node, {}, { expanded: isExpanding });
 
                     if (!isExpanding) {
