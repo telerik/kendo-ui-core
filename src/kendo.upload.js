@@ -3,6 +3,7 @@
         Widget = kendo.ui.Widget,
         logToConsole = kendo.logToConsole,
         rFileExtension = /\.([^\.]+)$/,
+        NS = ".kendoUpload",
         SELECT = "select",
         UPLOAD = "upload",
         SUCCESS = "success",
@@ -31,7 +32,7 @@
             that._activeInput(activeInput);
             that.toggle(that.options.enabled);
 
-            var ns = that._ns = "." + that.key + "-" + kendo.guid();
+            var ns = that._ns = NS + "-" + kendo.guid();
             activeInput.closest("form")
                 .on("submit" + ns, $.proxy(that._onParentFormSubmit, that))
                 .on("reset" + ns, $.proxy(that._onParentFormReset, that));
