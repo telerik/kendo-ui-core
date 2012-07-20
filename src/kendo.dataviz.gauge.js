@@ -381,11 +381,17 @@
                 count = labels.length,
                 labelsOptions = options.labels,
                 padding = labelsOptions.padding,
-                rangeDistance = scale.options.rangeDistance = ring.r * 0.05,
+                rangeDistance = ring.r * 0.05,
                 rangeSize = options.rangeSize = options.rangeSize || ring.r * 0.1,
                 ranges = options.ranges || [],
                 halfWidth, halfHeight, labelAngle,
                 angle, label, lp, i, cx, cy, isInside;
+
+            if (typeof scale.options.rangeDistance != "undefined") {
+                rangeDistance = scale.options.rangeDistance;
+            } else {
+                scale.options.rangeDistance = rangeDistance;
+            }
 
             if (labelsOptions.position === INSIDE && ranges.length) {
                 ring.r -= rangeSize + rangeDistance;
