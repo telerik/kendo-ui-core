@@ -1471,8 +1471,9 @@ function pad(number) {
         support.touch = "ontouchstart" in window;
         support.pointers = navigator.msPointerEnabled;
 
-        var transitions = support.transitions = false;
-        var transforms = support.transforms = false;
+        var transitions = support.transitions = false,
+            transforms = support.transforms = false,
+            elementProto = "HTMLElement" in window ? HTMLElement.prototype : [];
 
         support.hasHW3D = ("WebKitCSSMatrix" in window && "m11" in new window.WebKitCSSMatrix()) || "MozPerspective" in document.documentElement.style || "msPerspective" in document.documentElement.style;
         support.hasNativeScrolling = typeof document.documentElement.style.webkitOverflowScrolling == "string";
@@ -1589,6 +1590,20 @@ function pad(number) {
                 sorted[9] === 9 && sorted[10] === 10 && sorted[11] === 11 && sorted[12] === 12;
         })();
 
+        support.matchesSelector = elementProto.webkitMatchesSelector || elementProto.mozMatchesSelector ||
+                                  elementProto.msMatchesSelector || elementProto.oMatchesSelector || elementProto.matchesSelector ||
+          function( selector ) {
+              var nodeList = document.querySelectorAll ? ( this.parentNode || document ).querySelectorAll( selector ) || [] : $(selector),
+                  i = nodeList.length;
+
+              while (i--) {
+                  if (nodeList[i] == this) {
+                      return true;
+                  }
+              }
+
+              return false;
+          };
     })();
 
 
