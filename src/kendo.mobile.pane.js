@@ -101,11 +101,13 @@
             var that = this,
                 mouseup = $.proxy(that._mouseup, that);
 
-            this.element
+            that.element
                 .on(support.mousedown, roleSelector(linkRoles), mouseup)
                 .on(support.mouseup, roleSelector(buttonRoles), mouseup)
                 .on("click", roleSelector(linkRoles + " " + buttonRoles), appLinkClick)
                 .on("touchstart", roleSelector(buttonRoles), false); // Bust the ghost click
+
+            that.element.on("touchstart", ".km-popup .k-item", false); // Prevent ghost clicks in DropDownList
         },
 
         _mouseup: function(e) {
