@@ -4181,7 +4181,7 @@
 
         shrinkAxes: function(pane, axes) {
             var plotArea = this,
-                box = pane.paddingBox,
+                box = pane.contentBox,
                 axisBox = plotArea.axisBox(axes),
                 overflowY = axisBox.height() - box.height(),
                 overflowX = axisBox.width() - box.width(),
@@ -4237,7 +4237,7 @@
 
         fitAxes: function(pane, axes) {
             var plotArea = this,
-                box = pane.paddingBox,
+                box = pane.contentBox,
                 axisBox = plotArea.axisBox(axes),
                 offsetX = box.x1 - axisBox.x1,
                 offsetY = box.y1 - axisBox.y1,
@@ -4272,8 +4272,8 @@
                 yAnchor = yAxes[0],
                 paneAxes;
 
-            xAnchor.reflow(xAnchor.pane.paddingBox);
-            yAnchor.reflow(yAnchor.pane.paddingBox);
+            xAnchor.reflow(xAnchor.pane.contentBox);
+            yAnchor.reflow(yAnchor.pane.contentBox);
 
             for (i = 0; i < panesLength; i++) {
                 currentPane = panes[i];
@@ -4300,7 +4300,7 @@
 
             if (length > 0) {
                 for (i = 0; i < length; i++) {
-                    axes[i].reflow(pane.paddingBox);
+                    axes[i].reflow(pane.contentBox);
                 }
 
                 plotArea.alignAxes(xAxes, yAxes, xAnchor, yAnchor);
