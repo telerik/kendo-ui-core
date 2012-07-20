@@ -74,6 +74,7 @@ namespace Kendo.Mvc.UI.Fluent
         {
             var command = new GridCustomActionCommand<T>();
             command.Name = name;
+            command.Text = name;
 
             Column.Commands.Add(command);
 

@@ -204,6 +204,11 @@ namespace Kendo.Mvc.UI.Fluent
         {
             Command.Name = name;
 
+            if (!Command.Text.HasValue())
+            {
+                Command.Text = name;
+            }
+
             return this;
         }
 
