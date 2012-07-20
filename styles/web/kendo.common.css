@@ -1622,7 +1622,7 @@ html body .k-grid tbody .k-button-icon
 *+html .k-grid-edit-row .k-textbox,
 *+html .k-grid-edit-row .k-widget
 {
-    display: inline;
+    display: block;
     width: 90%;
 }
 
@@ -3706,6 +3706,10 @@ html input.k-breadcrumbs-input
 *+html .k-grouping-header .k-link,
 *+html .k-grouping-header .k-button,
 *+html .k-grid-actions,
+*+html .k-edit-label,
+*+html .k-edit-field,
+*+html .k-edit-form-container .editor-label,
+*+html .k-edit-form-container .editor-field,
 
 *+html .k-combobox,
 *+html .k-dropdown,
