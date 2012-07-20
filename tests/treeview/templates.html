@@ -10,6 +10,7 @@
         <script src="../../src/kendo.treeview.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
         <link rel="stylesheet" href="../../styles/web/kendo.common.css" />
+        <script src="test-helper.js"></script>
     </head>
     <body>
         <h1 id="qunit-header">TreeView Templates</h1>
@@ -19,10 +20,6 @@
         <ol id="qunit-tests"></ol>
 
         <script>
-            function createTreeView(options) {
-                return $("<div />").appendTo(document.body).kendoTreeView(options);
-            }
-
             module("templates", {
                 teardown: function () {
                     $(".k-treeview,.k-item").remove();
@@ -30,7 +27,7 @@
             });
 
             test("compiled item template", function() {
-                var treeview = createTreeView({
+                createTreeView({
                     dataSource: [
                         { text: "bar" },
                         { text: "baz" }
@@ -45,7 +42,7 @@
             });
 
             test("plain-text item template", function() {
-                var treeview = createTreeView({
+                createTreeView({
                     dataSource: [
                         { text: "bar" },
                         { text: "baz" }
@@ -60,7 +57,7 @@
             });
 
             test("template applies to sub-items", function() {
-                var treeview = createTreeView({
+                createTreeView({
                     dataSource: [
                         { text: "bar",
                           items: [
@@ -78,7 +75,7 @@
             });
 
             test("checkboxTemplate renders k-checkbox wrappers around the template", function() {
-                var treeview = createTreeView({
+                createTreeView({
                     dataSource: [
                         { text: "bar" }
                     ],
@@ -92,7 +89,7 @@
             });
 
             test("checkboxTemplate as string", function() {
-                var treeview = createTreeView({
+                createTreeView({
                     dataSource: [
                         { text: "bar" }
                     ],

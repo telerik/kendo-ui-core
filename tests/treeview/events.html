@@ -11,6 +11,7 @@
         <script src="../../src/kendo.treeview.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
         <link rel="stylesheet" href="../../styles/web/kendo.common.css" />
+        <script src="test-helper.js"></script>
     </head>
     <body>
         <h1 id="qunit-header">TreeView events</h1>
@@ -20,13 +21,6 @@
         <ol id="qunit-tests"></ol>
 
         <script>
-            var treeview, treeviewObject;
-
-            function createTreeView(options) {
-                treeview = $("<div />").appendTo(document.body).kendoTreeView(options);
-                treeviewObject = treeview.data("kendoTreeView");
-            }
-
             function removeTreeViews() {
                 $(".k-treeview").remove();
             }
@@ -71,15 +65,16 @@
             });
 
             test("clicking collapse button triggers collapse event", function() {
-                var collapseArgs,
-                    treeview = createTreeView({
-                        collapse: function(e) { collapseArgs = e; },
-                        dataSource: [
-                            { text: "foo", expanded: true, items: [
-                                { text: "food" }
-                            ] }
-                        ]
-                    });
+                var collapseArgs;
+
+                createTreeView({
+                    collapse: function(e) { collapseArgs = e; },
+                    dataSource: [
+                        { text: "foo", expanded: true, items: [
+                            { text: "food" }
+                        ] }
+                    ]
+                });
 
                 $(".k-minus", treeview)
                     .trigger("click");

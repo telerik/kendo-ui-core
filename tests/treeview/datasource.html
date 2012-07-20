@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="../../styles/web/kendo.common.css" />
         <link rel="stylesheet/less" href="../../styles/web/kendo.default.less"/>
         <script src="../../demos/mvc/content/shared/js/less.js"></script>
+        <script src="test-helper.js"></script>
     </head>
     <body>
         <h1 id="qunit-header">TreeView DataSource binding</h1>
@@ -22,13 +23,6 @@
         <ol id="qunit-tests"></ol>
 
         <script>
-            var treeview, treeviewObject;
-
-            function createTreeView(options) {
-                treeview = $("<div />").appendTo(document.body).kendoTreeView(options);
-                treeviewObject = treeview.data("kendoTreeView");
-            }
-
             var HierarchicalDataSource = kendo.data.HierarchicalDataSource;
 
             module("DataSource binding", {
@@ -38,30 +32,24 @@
             });
 
             test("Initializing from JSON creates HierarchicalDataSource", function() {
-                createTreeView({
-                    dataSource: []
-                });
+                createTreeView([]);
 
                 ok(treeviewObject.dataSource instanceof HierarchicalDataSource);
             });
 
             test("Initializing from JSON populates dataSource", function() {
-                createTreeView({
-                    dataSource: [
-                        { text: "foo" },
-                        { text: "bar" }
-                    ]
-                });
+                createTreeView([
+                    { text: "foo" },
+                    { text: "bar" }
+                ]);
 
                 equal(treeviewObject.dataSource.view().length, 2);
             });
 
             test("Adding items to the datasource adds them to the treeview", function() {
-                createTreeView({
-                    dataSource: [
-                        { text: "foo" }
-                    ]
-                });
+                createTreeView([
+                    { text: "foo" }
+                ]);
 
                 treeviewObject.dataSource.add({ text: "bar" });
 
@@ -69,12 +57,10 @@
             });
 
             test("Adding items to the datasource adds them to the proper level", function() {
-                createTreeView({
-                    dataSource: [
-                        { id: 1, text: "foo" },
-                        { id: 2, text: "bar" }
-                    ]
-                });
+                createTreeView([
+                    { id: 1, text: "foo" },
+                    { id: 2, text: "bar" }
+                ]);
 
                 var foo = treeviewObject.dataSource.get(1);
 
@@ -85,11 +71,9 @@
             });
 
             test("Removing items from the datasource removes them from the treeview", function() {
-                createTreeView({
-                    dataSource: [
-                        { text: "foo" }
-                    ]
-                });
+                createTreeView([
+                    { text: "foo" }
+                ]);
 
                 var dataItem = treeviewObject.dataItem(treeview.find(".k-item"));
 
@@ -99,13 +83,11 @@
             });
 
             test("Removing subgroup items from the datasource removes them from the treeview", function() {
-                createTreeView({
-                    dataSource: [
-                        { text: "foo", items: [
-                            { text: "bar" }
-                        ] }
-                    ]
-                });
+                createTreeView([
+                    { text: "foo", items: [
+                        { text: "bar" }
+                    ] }
+                ]);
 
                 var dataItem = treeviewObject.dataItem(treeview.find(".k-item:last"));
 
@@ -147,13 +129,11 @@
             });
 
             test("Removing items from the datasource removes them from the treeview at the proper level", function() {
-                createTreeView({
-                    dataSource: [
-                        { id: 1, text: "foo", items: [
-                            { id: 2, text: "bar" }
-                        ] }
-                    ]
-                });
+                createTreeView([
+                    { id: 1, text: "foo", items: [
+                        { id: 2, text: "bar" }
+                    ] }
+                ]);
 
                 var dataItem = treeviewObject.dataItem(treeview.find(".k-item:last"));
 
@@ -235,12 +215,10 @@
             });
 
             test("Sorting the datasource sorts the treeview", function() {
-                createTreeView({
-                    dataSource: [
-                        { text: "bravo" },
-                        { text: "alpha" }
-                    ]
-                });
+                createTreeView([
+                    { text: "bravo" },
+                    { text: "alpha" }
+                ]);
 
                 treeviewObject.dataSource.sort({ field: "text", dir: "asc" });
 
@@ -275,14 +253,12 @@
             });
 
             test("Sorting dynamically expanded nodes persists their expanded state", function() {
-                createTreeView({
-                    dataSource: [
-                        { text: "alpha", items: [
-                            { text: "charlie" },
-                            { text: "bravo" }
-                        ] }
-                    ]
-                });
+                createTreeView([
+                    { text: "alpha", items: [
+                        { text: "charlie" },
+                        { text: "bravo" }
+                    ] }
+                ]);
 
                 treeviewObject.expand(".k-item:first");
 
