@@ -8,6 +8,7 @@
         Widget = ui.Widget,
         HierarchicalDataSource = data.HierarchicalDataSource,
         proxy = $.proxy,
+        keys = kendo.keys,
         NS = ".kendoTreeView",
         SELECT = "select",
         EXPAND = "expand",
@@ -196,6 +197,7 @@
                 .on(MOUSEENTER + NS, clickableItems, function () { $(this).addClass(KSTATEHOVER); })
                 .on("mouseleave" + NS, clickableItems, function () { $(this).removeClass(KSTATEHOVER); })
                 .on(CLICK + NS, clickableItems, proxy(that._nodeClick, that))
+                .on("keydown" + NS, proxy(that._keydown, that))
                 .on("dblclick" + NS, "div:not(.k-state-disabled) .k-in", proxy(that._toggleButtonClick, that))
                 .on(CLICK + NS, ".k-plus,.k-minus", proxy(that._toggleButtonClick, that));
 
@@ -435,6 +437,35 @@
 
         _toggleButtonClick: function (e) {
             this.toggle($(e.target).closest(NODE));
+        },
+
+        _keydown: function(e) {
+            var that = this,
+                key = e.keyCode,
+                selection = that.select(),
+                expanded = that._expanded(selection);
+
+            if (key === keys.RIGHT) {
+                if (expanded) {
+                    that.select(subGroup(selection).children().first());
+                } else {
+                    that.expand(selection);
+                }
+            } else if (key === keys.LEFT) {
+                if (expanded) {
+                    that.collapse(selection);
+                } else {
+                    that.select(selection.parent().closest(NODE));
+                }
+            } else if (key === keys.DOWN) {
+                e.preventDefault();
+
+                if (expanded) {
+                    that.select(subGroup(selection).children().first());
+                } else {
+                    that.select(selection.next());
+                }
+            }
         },
 
         _nodeClick: function (e) {

@@ -207,6 +207,94 @@
 
                 ok(treeviewObject.findByText("foo").find(".k-icon:first").hasClass("k-minus"));
             });
+
+            module("keyboard support", {
+                teardown: removeTreeViews
+            });
+
+            $.fn.press = function(key) {
+                return this.trigger({ type: "keydown", keyCode: key } );
+            };
+
+            test("right arrow expands node", 1, function() {
+                createTreeView({
+                    dataSource: [
+                        { selected: true, text: "foo", items: [
+                            { text: "bar" }
+                        ] }
+                    ],
+                    expand: function(e) {
+                        ok(true);
+                    }
+                });
+
+                treeview.press(kendo.keys.RIGHT);
+            });
+
+            test("right arrow at expanded node moves to first child", function() {
+                createTreeView([
+                    { selected: true, text: "foo", expanded: true, items: [
+                        { text: "bar" }
+                    ] }
+                ]);
+
+                treeview.press(kendo.keys.RIGHT);
+
+                equal(treeviewObject.select()[0], treeview.find(".k-item")[1]);
+            });
+
+            test("left arrow collapses expanded nodes", 1, function() {
+                createTreeView({
+                    dataSource: [
+                        { selected: true, expanded: true, text: "foo", items: [
+                            { text: "bar" }
+                        ] }
+                    ],
+                    collapse: function(e) {
+                        ok(true);
+                    }
+                });
+
+                treeview.press(kendo.keys.LEFT);
+            });
+
+            test("left arrow selects parent node of already collapsed nodes", function() {
+                createTreeView([
+                    { text: "foo", expanded: true, items: [
+                        { selected: true, text: "bar", items: [
+                            { text: "baz" }
+                        ] }
+                    ] }
+                ]);
+
+                treeview.press(kendo.keys.LEFT);
+
+                equal(treeviewObject.select()[0], treeview.find(".k-item")[0]);
+            });
+
+            test("down arrow moves selection to next sibling", function() {
+                createTreeView([
+                    { text: "foo", selected: true },
+                    { text: "baz" }
+                ]);
+
+                treeview.press(kendo.keys.DOWN);
+
+                equal(treeviewObject.select()[0], treeview.find(".k-item")[1]);
+            });
+
+            test("down arrow moves selection to first child, if expanded", function() {
+                createTreeView([
+                    { text: "foo", expanded: true, selected: true, items: [
+                        { text: "bar" }
+                    ] },
+                    { text: "baz" }
+                ]);
+
+                treeview.press(kendo.keys.DOWN);
+
+                equal(treeviewObject.select()[0], treeview.find(".k-item .k-item")[0]);
+            });
         </script>
 
         <div id="qunit-fixture"> </div>
