@@ -411,6 +411,79 @@
                 });
 
                 // ------------------------------------------------------------
+                module("BoxElement / Shrink to fit", {
+                    setup: function() {
+                        moduleSetup();
+
+                        boxElement = new dataviz.BoxElement({
+                            shrinkToFit: true,
+                            width: WIDTH,
+                            height: HEIGHT
+                        });
+                    }
+                });
+
+                test("padding is not added to outer box", function() {
+                    boxElement.options.padding = PADDING;
+                    boxElement.reflow(targetBox);
+
+                    equal(boxElement.box.width(), WIDTH);
+                    equal(boxElement.box.height(), HEIGHT);
+                });
+
+                test("padding is added to padding box", function() {
+                    boxElement.options.padding = PADDING;
+                    boxElement.reflow(targetBox);
+
+                    equal(boxElement.paddingBox.width(), WIDTH);
+                    equal(boxElement.paddingBox.height(), HEIGHT);
+                });
+
+                test("border is not added to outer box", function() {
+                    boxElement.options.border.width = BORDER;
+                    boxElement.reflow(targetBox);
+
+                    equal(boxElement.box.width(), WIDTH);
+                    equal(boxElement.box.height(), HEIGHT);
+                });
+
+                test("border is subtracted from padding box", function() {
+                    boxElement.options.border.width = BORDER;
+                    boxElement.reflow(targetBox);
+
+                    equal(boxElement.paddingBox.width(), WIDTH - 2 * BORDER);
+                    equal(boxElement.paddingBox.height(), HEIGHT - 2 * BORDER);
+                });
+
+                test("margin is not added to outer box", function() {
+                    boxElement.options.margin = MARGIN;
+                    boxElement.reflow(targetBox);
+
+                    equal(boxElement.box.width(), WIDTH);
+                    equal(boxElement.box.height(), HEIGHT);
+                });
+
+                test("margin is subtracted from padding box", function() {
+                    boxElement.options.margin = MARGIN;
+                    boxElement.reflow(targetBox);
+
+                    equal(boxElement.paddingBox.width(), WIDTH - 2 * MARGIN);
+                    equal(boxElement.paddingBox.height(), HEIGHT - 2 * MARGIN);
+                });
+
+                test("content box has padding, border and margin", function() {
+                    boxElement.options.padding = PADDING;
+                    boxElement.options.border.width = BORDER;
+                    boxElement.options.margin = MARGIN;
+                    boxElement.reflow(targetBox);
+
+                    var nonContent = 2 * PADDING + 2 * BORDER + 2 * MARGIN;
+
+                    equal(boxElement.contentBox.width(), WIDTH - nonContent);
+                    equal(boxElement.contentBox.height(), HEIGHT - nonContent);
+                });
+
+                // ------------------------------------------------------------
                 module("BoxElement / Alignment", {
                     setup: function() {
                         moduleSetup();

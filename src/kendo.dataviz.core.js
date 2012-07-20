@@ -550,6 +550,7 @@
                 width: 0
             },
             background: "",
+            shrinkToFit: false,
             width: 0,
             height: 0,
             visible: true
@@ -560,28 +561,33 @@
                 box,
                 contentBox,
                 options = element.options,
-                children = element.children,
                 margin = getSpacing(options.margin),
                 padding = getSpacing(options.padding),
                 border = options.border,
                 borderWidth = border.width;
 
+            function reflowPaddingBox() {
+                element.align(targetBox, X, options.align);
+                element.align(targetBox, Y, options.vAlign);
+                element.paddingBox = box.clone().unpad(margin).unpad(borderWidth);
+            }
+
             ChartElement.fn.reflow.call(element, targetBox);
 
-            if (children.length === 0) {
+            if (options.width && options.height) {
                 box = element.box = new Box2D(0, 0, options.width, options.height);
             } else {
                 box = element.box;
             }
 
-            contentBox = element.contentBox = box.clone();
-
-            box.pad(padding).pad(borderWidth).pad(margin);
-
-            element.align(targetBox, X, options.align);
-            element.align(targetBox, Y, options.vAlign);
-
-            element.paddingBox = box.clone().unpad(margin).unpad(borderWidth);
+            if (options.shrinkToFit) {
+                reflowPaddingBox();
+                contentBox = element.contentBox = element.paddingBox.clone().unpad(padding);
+            } else {
+                contentBox = element.contentBox = box.clone();
+                box.pad(padding).pad(borderWidth).pad(margin);
+                reflowPaddingBox();
+            }
 
             element.translateChildren(
                 box.x1 - contentBox.x1 + margin.left + borderWidth + padding.left,
@@ -621,6 +627,7 @@
             if (!options.visible) {
                 return [];
             }
+
 
             if (boxElement.hasBox()) {
                 elements.push(
