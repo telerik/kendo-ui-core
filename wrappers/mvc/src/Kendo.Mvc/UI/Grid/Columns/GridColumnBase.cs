@@ -124,7 +124,7 @@ namespace Kendo.Mvc.UI
 
             if (ClientTemplate.HasValue())                  
             {
-                json["template"] = ClientTemplate;
+                json["template"] = HttpUtility.UrlDecode(ClientTemplate);
             }
             
             if (ClientFooterTemplate.HasValue())
