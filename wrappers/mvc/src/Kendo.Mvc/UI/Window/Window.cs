@@ -98,6 +98,12 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        public bool Iframe
+        {
+            get;
+            set;
+        }
+
         public bool Draggable
         {
             get;
@@ -180,8 +186,9 @@ namespace Kendo.Mvc.UI
                 }
             }
 
-            //properties
+            // properties
             options.Add("modal", Modal);
+            options.Add("iframe", Iframe);
             options.Add("draggable", Draggable);
             options.Add("title", Title);
             options.Add("resizable", ResizingSettings.Enabled);

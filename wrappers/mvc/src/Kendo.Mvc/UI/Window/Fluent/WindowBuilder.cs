@@ -370,5 +370,15 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        /// <summary>
+        /// Explicitly specifies whether the loaded window content will be rendered as an iframe or in-line
+        /// </summary>
+        public WindowBuilder Iframe(bool value)
+        {
+            Component.Iframe = value;
+
+            return this;
+        }
     }
 }
