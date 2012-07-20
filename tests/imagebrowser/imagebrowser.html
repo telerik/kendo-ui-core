@@ -31,6 +31,15 @@
             QUnit.config.testTimeout = 100;
 
             function setup(options) {
+                options = $.extend(true, {
+                    transport: {
+                        read: function(options) {
+                            options.success({
+                                items: [{ name: "File1", size: 42, type: "f" }, { name: "Folder1", type: "d" }]
+                            });
+                        }
+                    }
+                }, options);
                 return new ImageBrowser(container, options);
             }
 
@@ -48,7 +57,15 @@
             });
 
             test("kendoImageBrowser attaches a imagebrowser object to target", function() {
-                container.kendoImageBrowser();
+                container.kendoImageBrowser({
+                    transport: {
+                        read: function(options) {
+                            options.success({
+                                items: [{ name: "File1", size: 42, type: "f" }, { name: "Folder1", type: "d" }]
+                            });
+                        }
+                    }
+                });
 
                 ok(container.data("kendoImageBrowser") instanceof ImageBrowser);
             });
@@ -118,6 +135,60 @@
                 equal(toolbar.find(".k-tiles-arrange a span:first").html(), "Size");
             });
 
+            test("items are sorted by type", function() {
+                var browser = setup();
+
+                var sortDescriptors = browser.dataSource.sort();
+
+                equal(sortDescriptors.length, 1);
+                equal(sortDescriptors[0].field, "type");
+                equal(sortDescriptors[0].dir, "asc");
+            });
+
+            test("items are sorted by with custom schema", function() {
+                var browser = setup({
+                    transport: {
+                        read: function(options) {
+                            options.success({
+                                items: [ { FileName: "foo", FileSize: 42, Kind: "f" } ]
+                            });
+                        }
+                    },
+                    schema: {
+                        model: {
+                            fields: {
+                                name: "FileName",
+                                size: "FileSize",
+                                type: "Kind"
+                            }
+                        }
+                    }
+                });
+
+                var sortDescriptors = browser.dataSource.sort();
+
+                equal(sortDescriptors.length, 1);
+                equal(sortDescriptors[0].field, "Kind");
+                equal(sortDescriptors[0].dir, "asc");
+            });
+
+            test("selecting item from arrangeby popup changes the sort order and persist default order", function() {
+                var browser = setup(),
+                    toolbar = browser.toolbar;
+
+                toolbar.find(".k-tiles-arrange a").click();
+                browser.arrangeByPopup.element.find("li:last").click();
+
+                var sortDescriptors = browser.dataSource.sort();
+
+                equal(sortDescriptors.length, 2);
+                equal(sortDescriptors[0].field, "type");
+                equal(sortDescriptors[0].dir, "asc");
+                equal(sortDescriptors[1].field, "size");
+                equal(sortDescriptors[1].dir, "asc");
+            });
+
+
             test("listview renders the files", 1, function() {
                 $.mockjax({
                     url: "browse",
@@ -130,12 +201,87 @@
                 });
 
                 var browser = setup({ transport: { read: "browse" } });
+
+                stop();
+
+                browser.listView.bind("dataBound", function() {
+                    start();
+                    equal(this.items().length, 2);
+                });
+            });
+
+            test("schema is used to described custom result", function() {
+                $.mockjax({
+                    url: "browse",
+                    responseText: kendo.stringify({
+                            MyData: [
+                                { name: "file1", type: "f", size: 42 },
+                                { name: "file2", type: "f", size: 142 }
+                            ]
+                        })
+                });
+
+                var browser = setup({
+                    transport: { read: "browse" },
+                    schema: {
+                        data: "MyData"
+                    }
+                });
                 stop();
                 browser.listView.bind("dataBound", function() {
                     start();
                     equal(this.items().length, 2);
                 });
             });
+
+            test("model field definition is used to generate item tempalte", function() {
+                var browser = setup({
+                    transport: {
+                        read: function(options) {
+                            options.success({
+                                items: [ { FileName: "foo", FileSize: 42, Kind: "f" } ]
+                            });
+                        }
+                    },
+                    schema: {
+                        model: {
+                            fields: {
+                                name: "FileName",
+                                size: "FileSize",
+                                type: "Kind"
+                            }
+                        }
+                    }
+                });
+                var item = browser.listView.items().first();
+                equal(item.find("strong").text(), "foo");
+                equal(item.find("span.k-filesize").text(), "42");
+            });
+
+            test("model field definition as object is used to generate item tempalte", function() {
+                var browser = setup({
+                    transport: {
+                        read: function(options) {
+                            options.success({
+                                items: [ { FileName: "foo", FileSize: 42, Kind: "f" } ]
+                            });
+                        }
+                    },
+                    schema: {
+                        model: {
+                            fields: {
+                                name: { field: "FileName" },
+                                size: { field: "FileSize" },
+                                type: "Kind"
+                            }
+                        }
+                    }
+                });
+                var item = browser.listView.items().first();
+                equal(item.find("strong").text(), "foo");
+                equal(item.find("span.k-filesize").text(), "42");
+            });
+
         </script>
     </body>
 </html>
