@@ -88,7 +88,7 @@
                 wrapper,
                 offset, visibility, display,
                 isVisible = false,
-                content;
+                content, iframe;
 
             Widget.fn.init.call(that, element, options);
             options = that.options;
@@ -140,6 +140,13 @@
 
             if (content) {
                 that.refresh(content);
+            }
+
+            iframe = element.find("." + KCONTENTFRAME);
+            if (iframe) {
+                iframe.on("load", function(){
+                    that.trigger(REFRESH);
+                });
             }
 
             that.toFront();
