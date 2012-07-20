@@ -3936,6 +3936,8 @@
 
             for (i = 0; i < panesLength; i++) {
                 currentPane = new BoxElement(paneOptions[i]);
+                currentPane.options.shrinkToFit = true;
+                currentPane.options.zIndex = -1;
 
                 currentPane.axes = grep(axes, function(axis) {
                     var axisPane = axis.options.pane;
@@ -3952,6 +3954,7 @@
                 });
 
                 panes.push(currentPane);
+                plotArea.append(currentPane)
             }
 
             plotArea.panes = panes;
@@ -4178,7 +4181,7 @@
 
         shrinkAxes: function(pane, axes) {
             var plotArea = this,
-                box = pane.box,
+                box = pane.paddingBox,
                 axisBox = plotArea.axisBox(axes),
                 overflowY = axisBox.height() - box.height(),
                 overflowX = axisBox.width() - box.width(),
@@ -4234,26 +4237,31 @@
 
         fitAxes: function(pane, axes) {
             var plotArea = this,
-                box = pane.box,
+                box = pane.paddingBox,
                 axisBox = plotArea.axisBox(axes),
                 offsetX = box.x1 - axisBox.x1,
                 offsetY = box.y1 - axisBox.y1,
                 currentAxis,
                 i,
-                length = axes.length;
+                length = axes.length,
+                vertical;
 
             for (i = 0; i < length; i++) {
                 currentAxis = axes[i];
+                vertical = currentAxis.options.vertical;
 
                 currentAxis.reflow(
-                    currentAxis.box.translate(offsetX, offsetY)
+                    currentAxis.box.translate(
+                        vertical ? math.max(0, offsetX) : offsetX,
+                        vertical ? offsetY : math.max(0, offsetY)
+                    )
                 );
             }
         },
 
         reflowAxes: function() {
             var plotArea = this,
-                panes = plotArea.panes,
+                panes = plotArea.panes.slice(0).sort(plotArea.paneComparer),
                 i,
                 panesLength = panes.length,
                 currentPane,
@@ -4264,13 +4272,20 @@
                 yAnchor = yAxes[0],
                 paneAxes;
 
-            xAnchor.reflow(xAnchor.pane.box);
-            yAnchor.reflow(yAnchor.pane.box);
+            xAnchor.reflow(xAnchor.pane.paddingBox);
+            yAnchor.reflow(yAnchor.pane.paddingBox);
 
             for (i = 0; i < panesLength; i++) {
                 currentPane = panes[i];
                 plotArea.reflowPaneAxes(panes[i], xAnchor, yAnchor);
             }
+        },
+
+        paneComparer: function(a, b) {
+            var aOrder = valueOrDefault(a.reflowOrder, MAX_VALUE),
+                bOrder = valueOrDefault(b.reflowOrder, MAX_VALUE);
+
+            return aOrder - bOrder;
         },
 
         reflowPaneAxes: function(pane, defaultXAnchor, defaultYAnchor) {
@@ -4285,7 +4300,7 @@
 
             if (length > 0) {
                 for (i = 0; i < length; i++) {
-                    axes[i].reflow(pane.box);
+                    axes[i].reflow(pane.paddingBox);
                 }
 
                 plotArea.alignAxes(xAxes, yAxes, xAnchor, yAnchor);
@@ -4342,10 +4357,6 @@
 
                     currentPane.reflow(box.clone());
 
-                    // Include margins in total height to avoid overflowing panes
-                    currentPane.options.height -=
-                        currentPane.box.height() - currentPane.options.height;
-
                     remainingHeight -= currentPane.options.height;
                 }
             }
@@ -4360,7 +4371,6 @@
 
             for (i = 0; i < panesLength; i++) {
                 currentPane = panes[i];
-
 
                 paneBox = box
                     .clone()
@@ -4516,6 +4526,14 @@
             }));
 
             plotArea.createValueAxes();
+        },
+
+        createPanes: function() {
+            var plotArea = this;
+
+            PlotAreaBase.fn.createPanes.call(this);
+
+            plotArea.categoryAxis.pane.reflowOrder = 0;
         },
 
         aggregateDateSeries: function() {
@@ -5673,6 +5691,10 @@
 
     function singleItemOrArray(array) {
         return array.length === 1 ? array[0] : array;
+    }
+
+    function valueOrDefault(value, defaultValue) {
+        return defined(value) ? value : defaultValue;
     }
 
     // Exports ================================================================
