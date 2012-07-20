@@ -1,10 +1,10 @@
 namespace Kendo.Mvc.UI.Tests
 {
-    using Moq;
     using System.Linq;
-    using Kendo.Mvc.UI.Html;
+    using System.Web;
+    using Moq;
     using Xunit;
-    
+
     public class GridColumnBaseTests
     {
         private readonly Grid<Customer> grid;
@@ -67,26 +67,16 @@ namespace Kendo.Mvc.UI.Tests
             span.InnerHtml.ShouldEqual("&nbsp;");
         }
 
-        /*
         [Fact]
-        public void Should_create_hidden_column_decorator_when_hidden()
+        public void ClientTemplate_should_decode_encoded_values()
         {
-            var grid = GridTestHelper.CreateGrid<Customer>();
+            column.Object.ClientTemplate = HttpUtility.UrlEncode("#=baz#");
 
-            var column = new Mock<GridColumnBase<Customer>>(grid)
-            {
-                CallBase = true
-            };
+            var json = column.Object.ToJson();
 
-            column.Object.Hidden = true;
-
-            grid.Columns.Add(column.Object);
-
-            var builder = column.Object.CreateDisplayBuilder(new Mock<IGridHtmlHelper>().Object);
-
-            builder.Decorators.OfType<GridHiddenCellBuilderDecorator>().Count().ShouldEqual(1);
+            json["template"].ShouldEqual("#=baz#");
         }
-        */
+
         private IHtmlNode GetSpan(IHtmlNode cell)
         {
             return cell.Children[0];
