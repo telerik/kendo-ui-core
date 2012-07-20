@@ -706,6 +706,11 @@
                 },
                 {
                     "packages": [ "!mvc" ],
+                    "text": "Keyboard support",
+                    "url": "treeview/keyboard-support.html"
+                },
+                {
+                    "packages": [ "!mvc" ],
                     "text": "Binding to local data",
                     "url": "treeview/local-data.html"
                 },
