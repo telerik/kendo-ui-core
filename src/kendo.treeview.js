@@ -8,6 +8,7 @@
         Widget = ui.Widget,
         HierarchicalDataSource = data.HierarchicalDataSource,
         proxy = $.proxy,
+        NS = ".kendoTreeView",
         SELECT = "select",
         EXPAND = "expand",
         CHANGE = "change",
@@ -111,8 +112,6 @@
     TreeView = Widget.extend({
         init: function (element, options) {
             var that = this,
-                clickableItems = ".k-in:not(.k-state-selected,.k-state-disabled)",
-                MOUSEENTER = "mouseenter",
                 dataInit,
                 inferred = false;
 
@@ -171,13 +170,7 @@
 
             that._dataSource(inferred);
 
-            that.wrapper
-                .on(MOUSEENTER, ".k-in.k-state-selected", function(e) { e.preventDefault(); })
-                .on(MOUSEENTER, clickableItems, function () { $(this).addClass(KSTATEHOVER); })
-                .on("mouseleave", clickableItems, function () { $(this).removeClass(KSTATEHOVER); })
-                .on(CLICK, clickableItems, proxy(that._nodeClick, that))
-                .on("dblclick", "div:not(.k-state-disabled) .k-in", proxy(that._toggleButtonClick, that))
-                .on(CLICK, ".k-plus,.k-minus", proxy(that._toggleButtonClick, that));
+            that._attachEvents();
 
             if (options.dragAndDrop) {
                 that.dragging = new TreeViewDragAndDrop(that);
@@ -191,6 +184,21 @@
             } else {
                 that._attachUids();
             }
+        },
+
+        _attachEvents: function() {
+            var that = this,
+                clickableItems = ".k-in:not(.k-state-selected,.k-state-disabled)",
+                MOUSEENTER = "mouseenter";
+
+            that.wrapper
+                .on(MOUSEENTER + NS, ".k-in.k-state-selected", function(e) { e.preventDefault(); })
+                .on(MOUSEENTER + NS, clickableItems, function () { $(this).addClass(KSTATEHOVER); })
+                .on("mouseleave" + NS, clickableItems, function () { $(this).removeClass(KSTATEHOVER); })
+                .on(CLICK + NS, clickableItems, proxy(that._nodeClick, that))
+                .on("dblclick" + NS, "div:not(.k-state-disabled) .k-in", proxy(that._toggleButtonClick, that))
+                .on(CLICK + NS, ".k-plus,.k-minus", proxy(that._toggleButtonClick, that));
+
         },
 
         _attachUids: function(root, dataSource) {
@@ -798,6 +806,20 @@
             }
         },
 
+        destroy: function() {
+            var that = this;
+
+            Widget.fn.destroy.call(that);
+
+            that.element.off(NS);
+
+            if (that.dragging) {
+                that.dragging.destroy();
+            }
+
+            kendo.destroy(that.element);
+        },
+
         _expanded: function(node, value) {
             var expandedAttr = kendo.attr("expanded"),
                 dataItem = this.dataItem(node);
@@ -1188,6 +1210,10 @@
                 destinationNode: destinationNode[0],
                 dropPosition: dropPosition
             });
+        },
+
+        destroy: function() {
+            this._draggable.destroy();
         }
     };
 
