@@ -56,18 +56,9 @@ namespace Kendo.Mvc.UI
         {
             if (instance.ViewContext.UnobtrusiveJavaScriptEnabled && instance.ViewData.ModelMetadata != null)
             {
+                var name = instance.Name;
                 var htmlHelper = new HtmlHelper(instance.ViewContext, new WidgetViewDataContainer { ViewData = instance.ViewData });
-                var name = instance.PropertyFieldName ?? instance.Name;
-                var metadata = instance.ViewData.ModelMetadata;
-
-                if (metadata.PropertyName == name)
-                {
-                    name = string.Empty;
-                }
-                else
-                {
-                    metadata = ModelMetadata.FromStringExpression(name, instance.ViewData);
-                }
+                var metadata = instance.ModelMetadata ?? ModelMetadata.FromStringExpression(name, instance.ViewData);
 
                 return htmlHelper.GetUnobtrusiveValidationAttributes(name, metadata);
             }
