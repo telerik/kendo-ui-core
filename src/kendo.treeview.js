@@ -446,6 +446,10 @@
                 expanded = that._expanded(selection),
                 target;
 
+            if (!that._oldSelection) {
+                that._oldSelection = selection[0];
+            }
+
             function parentOf(node) {
                 return node.parent().closest(NODE);
             }
@@ -492,6 +496,11 @@
                 target = that.root.children(NODE).eq(0);
             } else if (key == keys.END) {
                 target = that.root.children(NODE).last();
+            } else if (key == keys.ENTER) {
+                if (selection[0] != that._oldSelection) {
+                    delete that._oldSelection;
+                    that._trigger(SELECT, selection);
+                }
             }
 
             if (target) {

@@ -432,6 +432,60 @@
                 equal(treeviewObject.select()[0], treeview.find(".k-item:last")[0]);
             });
 
+            test("enter key triggers select event after changing selection", 1, function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "foo", selected: true },
+                        { text: "bar" }
+                    ],
+                    select: function(e) {
+                        equal(e.node, treeview.find(".k-item:last")[0]);
+                    }
+                });
+
+                treeview.press(kendo.keys.DOWN);
+                treeview.press(kendo.keys.ENTER);
+            });
+
+            test("enter key does not trigger select event if selection was not changed", function() {
+                var triggered = false;
+
+                createTreeView({
+                    dataSource: [
+                        { text: "foo", selected: true },
+                        { text: "bar" }
+                    ],
+                    select: function() {
+                        triggered = true;
+                    }
+                });
+
+                treeview.press(kendo.keys.ENTER);
+
+                ok(!triggered);
+            });
+
+            test("enter key triggers select event after a sequential selection has been made", function() {
+                var triggeredCount = 0;
+
+                createTreeView({
+                    dataSource: [
+                        { text: "foo", selected: true },
+                        { text: "bar" }
+                    ],
+                    select: function() {
+                        triggeredCount++;
+                    }
+                });
+
+                treeview.press(kendo.keys.DOWN);
+                treeview.press(kendo.keys.ENTER);
+                treeview.press(kendo.keys.UP);
+                treeview.press(kendo.keys.ENTER);
+
+                equal(triggeredCount, 2);
+            });
+
         </script>
 
         <div id="qunit-fixture"> </div>
