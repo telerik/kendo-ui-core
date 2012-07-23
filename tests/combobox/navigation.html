@@ -264,16 +264,6 @@
                 });
             });
 
-            test("press TAB should call text()", function() {
-                combobox.input.focus().val("item");
-
-                stub(combobox, {text: combobox.text});
-
-                combobox.input.press(keys.TAB);
-
-                ok(combobox.calls("text") > 0);
-            });
-
             test("press esc should close popup when no change in selection", function() {
                 combobox.popup.bind("close", function(){
                     ok(true);
@@ -327,6 +317,21 @@
                 equal(combobox.args("current")[0], null);
 
                 window.setTimeout = origin;
+            });
+
+            test("ComboBox does not set value if autoBind:false and text property", function() {
+                var combobox = input.kendoComboBox({
+                    autoBind: false,
+                    text: "Test",
+                    dataSource: ["foo"]
+                }).data("kendoComboBox");
+
+                combobox.input.focus().trigger({
+                    type: "keydown",
+                    keyCode: kendo.keys.TAB
+                });
+
+                equal(combobox.value(), "");
             });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
