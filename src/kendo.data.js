@@ -490,13 +490,18 @@
         },
 
         accept: function(data) {
-            var that = this;
+            var that = this,
+                parent = function() { return that; },
+                field;
 
-            extend(that, data);
+            for (field in data) {
+                that._set(field, that.wrap(data[field], field, parent));
+            }
 
             if (that.idField) {
                 that.id = that.get(that.idField);
             }
+
             that.dirty = false;
         },
 

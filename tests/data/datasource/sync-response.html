@@ -602,6 +602,21 @@
                 equal(dataSource._pristine[1].items[1].foo, 4);
                 equal(dataSource._pristine[2].items[0].foo, "moo");
             });
+
+            test("nested object are observable after sync", 2, function() {
+                setup({
+                    data: [ { id: 1, obj: { foo: "bar" } } ]
+                });
+
+                stubTransport("update", null);
+                var initial = dataSource.get(1);
+                initial.set("obj", { foo: "baz" });
+
+                dataSource.sync();
+
+                ok(dataSource.get(1).obj instanceof kendo.data.ObservableObject);
+                equal(dataSource.get(1).uid, initial.uid);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
