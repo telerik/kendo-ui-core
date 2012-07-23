@@ -2041,6 +2041,7 @@
             data = that.reader.parse(data);
 
             if (that._handleCustomErrors(data)) {
+                that._dequeueRequest();
                 return;
             }
 
