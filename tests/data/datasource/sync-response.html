@@ -355,6 +355,84 @@
                 dataSource.sync();
             });
 
+            test("sync raises sync event after delete attached through the constructor", 1, function() {
+                setup({
+                    sync: function() {
+                        ok(true);
+                    }
+                });
+
+                stubTransport("destroy");
+
+                dataSource.remove(dataSource.get(1));
+
+                dataSource.sync();
+            });
+
+            test("sync raises sync event after delete", 1, function() {
+                stubTransport("destroy");
+
+                dataSource.remove(dataSource.get(1));
+
+                dataSource.bind("sync", function() {
+                    ok(true);
+                });
+
+                dataSource.sync();
+            });
+
+            test("sync raises sync event after update attached through the constructor", 1, function() {
+                setup({
+                    sync: function() {
+                        ok(true);
+                    }
+                });
+
+                stubTransport("update");
+
+                dataSource.get(1).set("foo", "bar");
+
+                dataSource.sync();
+            });
+
+            test("sync raises sync event after update", 1, function() {
+
+                stubTransport("update");
+
+                dataSource.get(1).set("foo", "bar");
+
+                dataSource.bind("sync", function() {
+                    ok(true);
+                });
+
+                dataSource.sync();
+            });
+
+            test("sync raises sync event after create attached through the constructor", 1, function() {
+                setup({
+                    sync: function() {
+                        ok(true);
+                    }
+                });
+
+                stubTransport("create");
+
+                dataSource.add({});
+
+                dataSource.sync();
+            });
+
+            test("sync raises sync event after create", 1, function() {
+
+                stubTransport("create");
+                dataSource.add({});
+
+                dataSource.bind("sync", function() {
+                    ok(true);
+                });
+
+                dataSource.sync();
+            });
             test("sync raises change event after create", 1, function() {
                 stubTransport("create");
 

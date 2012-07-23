@@ -20,6 +20,7 @@
         UPDATE = "update",
         DESTROY = "destroy",
         CHANGE = "change",
+        SYNC = "sync",
         GET = "get",
         ERROR = "error",
         REQUESTSTART = "requestStart",
@@ -1630,7 +1631,7 @@
 
             that._data = that._observe(that._data);
 
-            that.bind([ERROR, CHANGE, REQUESTSTART], options);
+            that.bind([ERROR, CHANGE, REQUESTSTART, SYNC], options);
         },
 
         options: {
@@ -1710,6 +1711,8 @@
                     }
 
                     that._change();
+
+                    that.trigger(SYNC);
                 });
         },
 
