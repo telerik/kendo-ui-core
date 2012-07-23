@@ -55,6 +55,25 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Sets the title color
+        /// </summary>
+        /// <param name="color">The title color (CSS format).</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///           .Name("Chart")
+        ///           .Title(title => title.Color("#ff0000").Text("Title"))
+        ///           .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public ChartTitleBuilder Color(string color)
+        {
+            title.Color = color;
+            return this;
+        }
+
+        /// <summary>
         /// Sets the title background color
         /// </summary>
         /// <param name="background">The background color.</param>
