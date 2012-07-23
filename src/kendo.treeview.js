@@ -443,36 +443,47 @@
             var that = this,
                 key = e.keyCode,
                 selection = that.select(),
-                expanded = that._expanded(selection);
+                expanded = that._expanded(selection),
+                target;
 
-            if (key === keys.RIGHT) {
+            if (key == keys.RIGHT) {
                 if (expanded) {
-                    that.select(subGroup(selection).children().first());
+                    target = subGroup(selection).children().first();
                 } else {
                     that.expand(selection);
                 }
-            } else if (key === keys.LEFT) {
+            } else if (key == keys.LEFT) {
                 if (expanded) {
                     that.collapse(selection);
                 } else {
-                    that.select(selection.parent().closest(NODE));
+                    target = selection.parent().closest(NODE);
                 }
-            } else if (key === keys.DOWN) {
+            } else if (key == keys.DOWN) {
                 e.preventDefault();
 
                 if (expanded) {
-                    that.select(subGroup(selection).children().first());
+                    target = subGroup(selection).children().first();
                 } else if (!selection.length) {
-                    that.select(that.root.children(NODE).eq(0));
+                    target = that.root.children(NODE).eq(0);
                 } else {
                     while (selection.length && !selection.next().length) {
                         selection = selection.parent().closest(NODE);
                     }
 
                     if (selection.next().length) {
-                        that.select(selection.next());
+                        target = selection.next();
                     }
                 }
+            } else if (key == keys.UP) {
+                if (!selection.length) {
+                    target = that.root.children(NODE).last();
+                } else if (selection.prev().length) {
+                    target = selection.prev();
+                }
+            }
+
+            if (target) {
+                that.select(target);
             }
         },
 

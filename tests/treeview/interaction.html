@@ -345,6 +345,28 @@
 
                 equal(treeviewObject.select()[0], treeview.find(".k-item")[0]);
             });
+
+            test("up arrow in treeview without selection selects last node", function() {
+                createTreeView([
+                    { text: "foo" },
+                    { text: "bar" }
+                ]);
+
+                treeview.press(kendo.keys.UP);
+
+                equal(treeviewObject.select()[0], treeview.find(".k-item")[1]);
+            });
+
+            test("up arrow moves selection to previous node", function() {
+                createTreeView([
+                    { text: "foo" },
+                    { text: "bar", selected: true }
+                ]);
+
+                treeview.press(kendo.keys.UP);
+
+                equal(treeviewObject.select()[0], treeview.find(".k-item")[0]);
+            });
         </script>
 
         <div id="qunit-fixture"> </div>
