@@ -469,7 +469,7 @@
                 }
             } else if (key == keys.DOWN) {
                 if (!selection.length) {
-                    target = that.root.children(NODE).eq(0);
+                    target = that.root.children().eq(0);
                 } else if (expanded) {
                     target = subGroup(selection).children().first();
                 } else {
@@ -483,7 +483,7 @@
                 }
             } else if (key == keys.UP) {
                 if (!selection.length) {
-                    target = that.root.children(NODE).last();
+                    target = that.root.children().last();
                 } else if (selection.prev().length) {
                     target = selection.prev();
 
@@ -494,9 +494,13 @@
                     target = parentOf(selection);
                 }
             } else if (key == keys.HOME) {
-                target = that.root.children(NODE).eq(0);
+                target = that.root.children().eq(0);
             } else if (key == keys.END) {
-                target = that.root.children(NODE).last();
+                target = that.root.children().last();
+
+                while (that._expanded(target)) {
+                    target = subGroup(target).children().last();
+                }
             } else if (key == keys.ENTER) {
                 if (selection[0] != that._oldSelection) {
                     delete that._oldSelection;

@@ -432,6 +432,21 @@
                 equal(treeviewObject.select()[0], treeview.find(".k-item:last")[0]);
             });
 
+            test("end key moves to last child node", function() {
+                createTreeView([
+                    { text: "foo", expanded: true, items: [
+                        { text: "bar", expanded: true, items: [
+                            { text: "baz" }
+                        ] }
+                    ] }
+                ]);
+
+                treeview.press(kendo.keys.END);
+
+                equal(treeviewObject.select()[0], treeview.find(".k-item .k-item .k-item")[0]);
+
+            });
+
             test("enter key triggers select event after changing selection", 1, function() {
                 createTreeView({
                     dataSource: [
