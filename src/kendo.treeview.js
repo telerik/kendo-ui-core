@@ -463,8 +463,6 @@
                     target = parentOf(selection);
                 }
             } else if (key == keys.DOWN) {
-                e.preventDefault();
-
                 if (!selection.length) {
                     target = that.root.children(NODE).eq(0);
                 } else if (expanded) {
@@ -496,6 +494,10 @@
                 target = that.root.children(NODE).last();
             }
 
+            if (target) {
+                e.preventDefault();
+            }
+
             that.select(target);
         },
 
@@ -516,7 +518,7 @@
                 e.preventDefault();
             }
 
-            if (!node.hasClass(".k-state-selected") && !that._trigger("select", node)) {
+            if (!node.hasClass(".k-state-selected") && !that._trigger(SELECT, node)) {
                 that.select(node);
             }
         },
