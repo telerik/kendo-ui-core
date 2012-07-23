@@ -408,6 +408,30 @@
                 equal(treeviewObject.select()[0], treeview.find(".k-item")[0]);
             });
 
+            test("home key moves selection to first node", function() {
+                createTreeView([
+                    { text: "foo" },
+                    { text: "bar" },
+                    { text: "baz", selected: true }
+                ]);
+
+                treeview.press(kendo.keys.HOME);
+
+                equal(treeviewObject.select()[0], treeview.find(".k-item")[0]);
+            });
+
+            test("end key moves selection to last node", function() {
+                createTreeView([
+                    { text: "foo", selected: true },
+                    { text: "bar" },
+                    { text: "baz" }
+                ]);
+
+                treeview.press(kendo.keys.END);
+
+                equal(treeviewObject.select()[0], treeview.find(".k-item:last")[0]);
+            });
+
         </script>
 
         <div id="qunit-fixture"> </div>

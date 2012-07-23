@@ -446,6 +446,10 @@
                 expanded = that._expanded(selection),
                 target;
 
+            function parentOf(node) {
+                return node.parent().closest(NODE);
+            }
+
             if (key == keys.RIGHT) {
                 if (expanded) {
                     target = subGroup(selection).children().first();
@@ -456,18 +460,18 @@
                 if (expanded) {
                     that.collapse(selection);
                 } else {
-                    target = selection.parent().closest(NODE);
+                    target = parentOf(selection);
                 }
             } else if (key == keys.DOWN) {
                 e.preventDefault();
 
-                if (expanded) {
-                    target = subGroup(selection).children().first();
-                } else if (!selection.length) {
+                if (!selection.length) {
                     target = that.root.children(NODE).eq(0);
+                } else if (expanded) {
+                    target = subGroup(selection).children().first();
                 } else {
                     while (selection.length && !selection.next().length) {
-                        selection = selection.parent().closest(NODE);
+                        selection = parentOf(selection);
                     }
 
                     if (selection.next().length) {
@@ -484,13 +488,15 @@
                         target = subGroup(target).children().last();
                     }
                 } else {
-                    target = selection.parent().closest(NODE);
+                    target = parentOf(selection);
                 }
+            } else if (key == keys.HOME) {
+                target = that.root.children(NODE).eq(0);
+            } else if (key == keys.END) {
+                target = that.root.children(NODE).last();
             }
 
-            if (target) {
-                that.select(target);
-            }
+            that.select(target);
         },
 
         _nodeClick: function (e) {
