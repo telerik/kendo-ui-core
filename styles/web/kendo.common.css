@@ -2319,6 +2319,7 @@ input.k-textbox
 textarea.k-textbox
 {
     height: auto;
+    white-space: normal;
 }
 
 *+html .k-textbox
