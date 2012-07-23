@@ -132,7 +132,58 @@ namespace Kendo.Mvc.UI.Fluent
             Container.Columns.Add(column);
 
             return new GridBoundColumnBuilder<TModel>(column);
-        }        
+        }
+
+        public virtual GridBoundColumnBuilder<TModel> ForeignKey(string memberName, IEnumerable data,
+            string dataFieldValue, string dataFieldText)
+        {
+            return ForeignKey(null, memberName, new SelectList(data, dataFieldValue, dataFieldText));
+        }
+
+        public virtual GridBoundColumnBuilder<TModel> ForeignKey(string memberName, SelectList data)
+        {
+            return ForeignKey(null, memberName, data);
+        }
+
+        public virtual GridBoundColumnBuilder<TModel> ForeignKey(Type memberType, string memberName, IEnumerable data,
+            string dataFieldValue, string dataFieldText)
+        {
+            return ForeignKey(memberType, memberName, new SelectList(data, dataFieldValue, dataFieldText));
+        }
+
+        public virtual GridBoundColumnBuilder<TModel> ForeignKey(Type memberType, string memberName, SelectList data)
+        {
+            const bool liftMemberAccess = false;
+
+            var lambdaExpression = ExpressionBuilder.Lambda<TModel>(memberType, memberName, liftMemberAccess);
+
+            if (typeof(TModel).IsDynamicObject() && memberType != null && lambdaExpression.Body.Type.GetNonNullableType() != memberType.GetNonNullableType())
+            {
+                lambdaExpression = Expression.Lambda(Expression.Convert(lambdaExpression.Body, memberType), lambdaExpression.Parameters);
+            }
+
+            var columnType = typeof(GridForeignKeyColumn<,>).MakeGenericType(new[] { typeof(TModel), lambdaExpression.Body.Type });
+
+            var constructor = columnType.GetConstructor(new[] { Container.GetType(), lambdaExpression.GetType(), data.GetType() });
+
+            var column = (IGridBoundColumn)constructor.Invoke(new object[] { Container, lambdaExpression, data });
+
+            column.Member = memberName;
+
+            if (!column.Title.HasValue())
+            {
+                column.Title = memberName.AsTitle();
+            }
+
+            if (memberType != null)
+            {
+                column.MemberType = memberType;
+            }
+
+            Container.Columns.Add((GridColumnBase<TModel>)column);
+
+            return new GridBoundColumnBuilder<TModel>(column);
+        }
 
         protected virtual void AutoGenerate(bool shouldGenerate, Action<GridColumnBase<TModel>> columnAction)
         {
