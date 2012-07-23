@@ -1,5 +1,6 @@
 {
     "year": 2012,
     "release": 2,
+    "servicePack": "next",
     "beta": false
 }
