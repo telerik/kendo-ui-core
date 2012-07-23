@@ -77,15 +77,15 @@ namespace Kendo.Mvc.UI
         {
             if (DataSource.ServerFiltering && !DataSource.Transport.Read.Data.HasValue())
             {
-                var name = "#" + Name;
+                var id = "#" + Id;
                 if (IsInClientTemplate)
                 {
-                    name = "\\" + name;
+                    id = "\\" + id;
                 }
 
                 DataSource.Transport.Read.Data = new ClientHandlerDescriptor
                 {
-                    HandlerName = "function() { var selector = \"" + name + "\"; return kendo.ui.ComboBox.requestData(selector); }"
+                    HandlerName = "function() { return kendo.ui.ComboBox.requestData(\"" + id + "\"); }"
                 };
             }
 
