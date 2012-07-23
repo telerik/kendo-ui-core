@@ -20,6 +20,7 @@ namespace Kendo.Mvc.UI
             FluentDictionary.For(result)
                 .Add("text", title.Text, () => title.Text.HasValue())
                 .Add("font", title.Font, () => title.Font.HasValue())
+                .Add("color", title.Color, () => title.Color.HasValue())
                 .Add("position", title.Position.ToString().ToLowerInvariant(), () => title.Position.HasValue)
                 .Add("align", title.Align.ToString().ToLowerInvariant(), () => title.Align.HasValue)
                 .Add("margin", title.Margin.CreateSerializer().Serialize(), ShouldSerializeMargin)

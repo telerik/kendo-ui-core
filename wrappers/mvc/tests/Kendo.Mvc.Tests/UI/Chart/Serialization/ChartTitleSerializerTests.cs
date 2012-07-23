@@ -39,6 +39,19 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
+        public void Serializes_color()
+        {
+            title.Color = "#f00";
+            GetJson()["color"].ShouldEqual("#f00");
+        }
+
+        [Fact]
+        public void Does_not_serialize_default_color()
+        {
+            GetJson().ContainsKey("color").ShouldBeFalse();
+        }
+
+        [Fact]
         public void Serializes_background()
         {
             title.Background = "Background";

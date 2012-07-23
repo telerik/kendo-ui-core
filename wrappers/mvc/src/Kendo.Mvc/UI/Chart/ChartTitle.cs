@@ -34,6 +34,15 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// Gets or sets the title color
+        /// </summary>
+        public string Color
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Gets or sets the title position.
         /// </summary>
         /// <remarks>

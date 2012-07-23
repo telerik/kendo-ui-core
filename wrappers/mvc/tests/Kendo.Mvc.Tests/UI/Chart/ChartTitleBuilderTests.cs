@@ -37,6 +37,19 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
+        public void Color_sets_Color()
+        {
+            builder.Color("Color");
+            title.Color.ShouldEqual("Color");
+        }
+
+        [Fact]
+        public void Color_returns_builder()
+        {
+            builder.Color("Color").ShouldBeSameAs(builder);
+        }
+
+        [Fact]
         public void Position_sets_Position()
         {
             builder.Position(ChartTitlePosition.Bottom);
