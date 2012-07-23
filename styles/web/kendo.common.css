@@ -1702,8 +1702,19 @@ span.k-dropdown
     width: 12.4em;
     overflow: visible;
     border-width: 0;
-    white-space: nowrap;
     vertical-align: middle;
+}
+
+.k-autocomplete,
+.k-combobox,
+.k-datepicker,
+.k-timepicker,
+.k-datetimepicker,
+.k-numerictextbox,
+.k-dropdown,
+.k-selectbox
+{
+    white-space: nowrap;
 }
 
 .k-datetimepicker
@@ -2319,7 +2330,6 @@ input.k-textbox
 textarea.k-textbox
 {
     height: auto;
-    white-space: normal;
 }
 
 *+html .k-textbox
