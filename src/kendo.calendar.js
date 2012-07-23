@@ -11,7 +11,7 @@
         transitionOrigin = transitions ? transitions.css + "transform-origin" : "",
         cellTemplate = template('<td#=data.cssClass#><a class="k-link" href="\\#" data-#=data.ns#value="#=data.dateString#">#=data.value#</a></td>', { useWithBlock: false }),
         emptyCellTemplate = template("<td>&nbsp;</td>", { useWithBlock: false }),
-        isIE8 = $.browser.msie && parseInt($.browser.version, 10) < 9,
+        isIE8 = $.browser.msie && (parseInt($.browser.version, 10) < 9 || (document.documentMode && document.documentMode < 9)),
         ns = ".kendoCalendar",
         CLICK = (touch ? "touchend" : "click") + ns,
         MIN = "min",
