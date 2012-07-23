@@ -230,6 +230,14 @@ namespace Kendo.Mvc.Infrastructure.Implementation.Tests
 
             initializer.Serialize(data).ShouldEqual("{foo:\"bar\"}");
         }
+
+        [Fact]
+        public void Should_serialize_objects()
+        {
+            data["foo"] = new { bar = "baz" };
+
+            initializer.Serialize(data).ShouldEqual("{foo:{\"bar\":\"baz\"}}");
+        }
     }
 }
 
