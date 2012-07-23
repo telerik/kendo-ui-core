@@ -486,6 +486,23 @@
                 equal(triggeredCount, 2);
             });
 
+            test("space key toggles checkbox state", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "foo", selected: true },
+                    ],
+                    checkboxTemplate: "<input type='checkbox' />"
+                });
+
+                treeview.press(kendo.keys.SPACEBAR);
+
+                ok(treeview.find(":checkbox").is(":checked"));
+
+                treeview.press(kendo.keys.SPACEBAR);
+
+                ok(!treeview.find(":checkbox").is(":checked"));
+            });
+
         </script>
 
         <div id="qunit-fixture"> </div>

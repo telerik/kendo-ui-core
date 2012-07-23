@@ -442,9 +442,10 @@
         _keydown: function(e) {
             var that = this,
                 key = e.keyCode,
+                target,
                 selection = that.select(),
                 expanded = that._expanded(selection),
-                target;
+                checkbox = selection.find(":checkbox:first");
 
             if (!that._oldSelection) {
                 that._oldSelection = selection[0];
@@ -501,13 +502,14 @@
                     delete that._oldSelection;
                     that._trigger(SELECT, selection);
                 }
+            } else if (key == keys.SPACEBAR) {
+                target = checkbox.prop("checked", !checkbox.prop("checked"));
             }
 
             if (target) {
                 e.preventDefault();
+                that.select(target);
             }
-
-            that.select(target);
         },
 
         _nodeClick: function (e) {
