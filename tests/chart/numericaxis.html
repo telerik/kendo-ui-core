@@ -308,6 +308,11 @@
                     equals(numericAxis.options.min, 0);
                 });
 
+                test("Minimum is set to 1 when min is 0 max is 10 and majorUnit is 5", function() {
+                    numericAxis = new NumericAxis(0, 0, { min: 0, max: 10, majorUnit: 5 });
+                    equals(numericAxis.options.minorUnit, 1);
+                });
+
                 test("reports range minimum equal to options.min", function() {
                     equals(numericAxis.range().min, 0);
                 });

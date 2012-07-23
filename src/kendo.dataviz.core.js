@@ -1321,7 +1321,7 @@
                 }
             }
 
-            autoOptions.minorUnit = autoOptions.majorUnit / 5;
+            autoOptions.minorUnit = (options.majorUnit || autoOptions.majorUnit) / 5;
 
             return deepExtend(autoOptions, options);
         },
