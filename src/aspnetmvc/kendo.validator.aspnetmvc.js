@@ -127,7 +127,7 @@
             return !(value === "" || !value);
         },
         number: function (input) {
-            return kendo.parseFloat(input.val()) !== null;
+            return input.val() === "" || kendo.parseFloat(input.val()) !== null;
         },
         regex: function (input, params) {
             return patternMatcher(input.val(), params.pattern);
@@ -148,7 +148,7 @@
             return val <= max;
         },
         date: function(input) {
-            return kendo.parseDate(input.val()) !== null;
+            return input.val() === "" || kendo.parseDate(input.val()) !== null;
         },
         length: function(input, params) {
             var len = $.trim(input.val()).length;

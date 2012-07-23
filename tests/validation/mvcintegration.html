@@ -196,6 +196,20 @@
                 ok(!validator.validate());
             });
 
+            test("number is not validated if input is empty", function() {
+                var input = $('<input type="text" value="" data-val-number="message" />'),
+                    validator = setup(input);
+
+                ok(validator.validate());
+            });
+
+            test("date is not validated if input is empty", function() {
+                var input = $('<input type="text" value="" data-val-date="message" />'),
+                    validator = setup(input);
+
+                ok(validator.validate());
+            });
+
             test("validate returns true if input with type=text value is date", function() {
                 var input = $('<input type="text" value="1/2/2012" data-val-date="message" />'),
                     validator = setup(input);
