@@ -8,7 +8,7 @@ namespace Kendo.Mvc.UI
 
         string Name { get; }
 
-        string PropertyFieldName { get; }
+        ModelMetadata ModelMetadata { get; }
 
         ViewContext ViewContext { get; }
 

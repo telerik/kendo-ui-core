@@ -66,9 +66,9 @@ namespace Kendo.Mvc.UI.Fluent
             return this as TBuilder;
         }
 
-        internal TBuilder PropertyFieldName(string componentName)
+        internal TBuilder ModelMetadata(ModelMetadata modelMetadata)
         {
-            Component.PropertyFieldName = componentName;
+            Component.ModelMetadata = modelMetadata;
 
             return this as TBuilder;
         }

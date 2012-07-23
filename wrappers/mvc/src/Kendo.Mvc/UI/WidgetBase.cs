@@ -81,7 +81,7 @@ namespace Kendo.Mvc.UI
             }
         }
 
-        public string PropertyFieldName
+        public ModelMetadata ModelMetadata
         {
             get;
             set;

@@ -739,12 +739,12 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         public virtual EditorBuilder EditorFor(Expression<Func<TModel, string>> expression)
         {
-            var name = GetPropertyField(expression);
+            ModelMetadata metadata = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData);
 
             return Editor()
-                    .Name(GetName(name))
-                    .PropertyFieldName(name)
-                    .Value((string)ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model);
+                    .Name(GetName(expression))
+                    .ModelMetadata(metadata)
+                    .Value((string)metadata.Model);
         }
 
         /// <summary>
@@ -758,13 +758,13 @@ namespace Kendo.Mvc.UI.Fluent
         public virtual NumericTextBoxBuilder<TValue> NumericTextBoxFor<TValue>(Expression<Func<TModel, Nullable<TValue>>> expression)
             where TValue : struct
         {
-            var name = GetPropertyField(expression);
-            IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
+            ModelMetadata metadata = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData);
+            IEnumerable<ModelValidator> validators = metadata.GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
             return NumericTextBox<TValue>()
-                    .Name(GetName(name))
-                    .PropertyFieldName(name)
-                    .Value((Nullable<TValue>)ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model)
+                    .Name(GetName(expression))
+                    .ModelMetadata(metadata)
+                    .Value((Nullable<TValue>)metadata.Model)
                     .Min(GetRangeValidationParameter<TValue>(validators, minimumValidator))
                     .Max(GetRangeValidationParameter<TValue>(validators, maximumValidator));
         }
@@ -780,12 +780,12 @@ namespace Kendo.Mvc.UI.Fluent
         public virtual NumericTextBoxBuilder<TValue> NumericTextBoxFor<TValue>(Expression<Func<TModel, TValue>> expression)
             where TValue : struct
         {
-            var name = GetPropertyField(expression);
-            IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
+            ModelMetadata metadata = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData);
+            IEnumerable<ModelValidator> validators = metadata.GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
             return NumericTextBox<TValue>()
-                    .Name(GetName(name))
-                    .PropertyFieldName(name)
+                    .Name(GetName(expression))
+                    .ModelMetadata(metadata)
                     .Value((Nullable<TValue>)ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model)
                     .Min(GetRangeValidationParameter<TValue>(validators, minimumValidator))
                     .Max(GetRangeValidationParameter<TValue>(validators, maximumValidator));
@@ -879,13 +879,13 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public virtual DateTimePickerBuilder DateTimePickerFor(Expression<Func<TModel, Nullable<DateTime>>> expression)
         {
-            var name = GetPropertyField(expression);
-            IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
+            ModelMetadata metadata = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData);
+            IEnumerable<ModelValidator> validators = metadata.GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
             return DateTimePicker()
-                    .Name(GetName(name))
-                    .PropertyFieldName(name)
-                    .Value(ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model as DateTime?)
+                    .Name(GetName(expression))
+                    .ModelMetadata(metadata)
+                    .Value(metadata.Model as DateTime?)
                     .Min(GetRangeValidationParameter<DateTime>(validators, minimumValidator) ?? Kendo.Mvc.UI.DateTimePicker.defaultMinDate)
                     .Max(GetRangeValidationParameter<DateTime>(validators, maximumValidator) ?? Kendo.Mvc.UI.DateTimePicker.defaultMaxDate);
         }
@@ -900,13 +900,13 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public virtual DateTimePickerBuilder DateTimePickerFor(Expression<Func<TModel, DateTime>> expression)
         {
-            var name = GetPropertyField(expression);
-            IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
+            ModelMetadata metadata = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData);
+            IEnumerable<ModelValidator> validators = metadata.GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
             return DateTimePicker()
-                    .Name(GetName(name))
-                    .PropertyFieldName(name)
-                    .Value(ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model as DateTime?)
+                    .Name(GetName(expression))
+                    .ModelMetadata(metadata)
+                    .Value(metadata.Model as DateTime?)
                     .Min(GetRangeValidationParameter<DateTime>(validators, minimumValidator) ?? Kendo.Mvc.UI.DateTimePicker.defaultMinDate)
                     .Max(GetRangeValidationParameter<DateTime>(validators, maximumValidator) ?? Kendo.Mvc.UI.DateTimePicker.defaultMaxDate);
         }
@@ -921,13 +921,13 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public virtual DatePickerBuilder DatePickerFor(Expression<Func<TModel, Nullable<DateTime>>> expression)
         {
-            var name = GetPropertyField(expression);
-            IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
+            ModelMetadata metadata = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData);
+            IEnumerable<ModelValidator> validators = metadata.GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
             return DatePicker()
-                    .Name(GetName(name))
-                    .PropertyFieldName(name)
-                    .Value(ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model as DateTime?)
+                    .Name(GetName(expression))
+                    .ModelMetadata(metadata)
+                    .Value(metadata.Model as DateTime?)
                     .Min(GetRangeValidationParameter<DateTime>(validators, minimumValidator) ?? Kendo.Mvc.UI.DatePicker.defaultMinDate)
                     .Max(GetRangeValidationParameter<DateTime>(validators, maximumValidator) ?? Kendo.Mvc.UI.DatePicker.defaultMaxDate);
         }
@@ -942,13 +942,13 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public virtual DatePickerBuilder DatePickerFor(Expression<Func<TModel, DateTime>> expression)
         {
-            var name = GetPropertyField(expression);
-            IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
+            ModelMetadata metadata = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData);
+            IEnumerable<ModelValidator> validators = metadata.GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
             return DatePicker()
-                    .Name(GetName(name))
-                    .PropertyFieldName(name)
-                    .Value(ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model as DateTime?)
+                    .Name(GetName(expression))
+                    .ModelMetadata(metadata)
+                    .Value(metadata.Model as DateTime?)
                     .Min(GetRangeValidationParameter<DateTime>(validators, minimumValidator) ?? Kendo.Mvc.UI.DatePicker.defaultMinDate)
                     .Max(GetRangeValidationParameter<DateTime>(validators, maximumValidator) ?? Kendo.Mvc.UI.DatePicker.defaultMaxDate);
         }
@@ -963,13 +963,13 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public virtual TimePickerBuilder TimePickerFor(Expression<Func<TModel, Nullable<DateTime>>> expression)
         {
-            var name = GetPropertyField(expression);
-            IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
+            ModelMetadata metadata = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData);
+            IEnumerable<ModelValidator> validators = metadata.GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
             return TimePicker()
-                    .Name(GetName(name))
-                    .PropertyFieldName(name)
-                    .Value(ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model as DateTime?)
+                    .Name(GetName(expression))
+                    .ModelMetadata(metadata)
+                    .Value(metadata.Model as DateTime?)
                     .Min(GetRangeValidationParameter<DateTime>(validators, minimumValidator) ?? DateTime.Today)
                     .Max(GetRangeValidationParameter<DateTime>(validators, maximumValidator) ?? DateTime.Today);
         }
@@ -984,13 +984,13 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public virtual TimePickerBuilder TimePickerFor(Expression<Func<TModel, DateTime>> expression)
         {
-            var name = GetPropertyField(expression);
-            IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
+            ModelMetadata metadata = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData);
+            IEnumerable<ModelValidator> validators = metadata.GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
             return TimePicker()
-                    .Name(GetName(name))
-                    .PropertyFieldName(name)
-                    .Value(ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model as DateTime?)
+                    .Name(GetName(expression))
+                    .ModelMetadata(metadata)
+                    .Value(metadata.Model as DateTime?)
                     .Min(GetRangeValidationParameter<DateTime>(validators, minimumValidator) ?? DateTime.Today)
                     .Max(GetRangeValidationParameter<DateTime>(validators, maximumValidator) ?? DateTime.Today);
         }
@@ -1005,16 +1005,16 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public virtual TimePickerBuilder TimePickerFor(Expression<Func<TModel, Nullable<TimeSpan>>> expression)
         {
-            var name = GetPropertyField(expression);
-            IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
+            ModelMetadata metadata = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData);
+            IEnumerable<ModelValidator> validators = metadata.GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
             TimeSpan? minimum = GetRangeValidationParameter<TimeSpan>(validators, minimumValidator);
             TimeSpan? maximum = GetRangeValidationParameter<TimeSpan>(validators, maximumValidator);
 
             return TimePicker()
-                    .Name(GetName(name))
-                    .PropertyFieldName(name)
-                    .Value(ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model as TimeSpan?)
+                    .Name(GetName(expression))
+                    .ModelMetadata(metadata)
+                    .Value(metadata.Model as TimeSpan?)
                     .Min(minimum.HasValue ? new DateTime(minimum.Value.Ticks) : DateTime.Today)
                     .Max(maximum.HasValue ? new DateTime(maximum.Value.Ticks) : DateTime.Today);
         }
@@ -1029,16 +1029,16 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public virtual TimePickerBuilder TimePickerFor(Expression<Func<TModel, TimeSpan>> expression)
         {
-            var name = GetPropertyField(expression);
-            IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
+            ModelMetadata metadata = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData);
+            IEnumerable<ModelValidator> validators = metadata.GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
             TimeSpan? minimum = GetRangeValidationParameter<TimeSpan>(validators, minimumValidator);
             TimeSpan? maximum = GetRangeValidationParameter<TimeSpan>(validators, maximumValidator);
 
             return TimePicker()
-                    .Name(GetName(name))
-                    .PropertyFieldName(name)
-                    .Value(ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model as TimeSpan?)
+                    .Name(GetName(expression))
+                    .ModelMetadata(metadata)
+                    .Value(metadata.Model as TimeSpan?)
                     .Min(minimum.HasValue ? new DateTime(minimum.Value.Ticks) : DateTime.Today)
                     .Max(maximum.HasValue ? new DateTime(maximum.Value.Ticks) : DateTime.Today);
         }
@@ -1053,10 +1053,8 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public virtual DropDownListBuilder DropDownListFor<TProperty>(Expression<Func<TModel, TProperty>> expression)
         {
-            var name = GetPropertyField(expression);
-
-            return DropDownList().Name(GetName(name))
-                                 .PropertyFieldName(name)
+            return DropDownList().Name(GetName(expression))
+                                 .ModelMetadata(ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData))
                                  .Value(GetValue(expression));
         }
 
@@ -1070,10 +1068,8 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public virtual ComboBoxBuilder ComboBoxFor<TProperty>(Expression<Func<TModel, TProperty>> expression)
         {
-            var name = GetPropertyField(expression);
-
-            return ComboBox().Name(GetName(name))
-                             .PropertyFieldName(name)
+            return ComboBox().Name(GetName(expression))
+                             .ModelMetadata(ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData))
                              .Value(GetValue(expression));
         }
 
@@ -1087,10 +1083,8 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public virtual AutoCompleteBuilder AutoCompleteFor<TProperty>(Expression<Func<TModel, TProperty>> expression)
         {
-            var name = GetPropertyField(expression);
-
-            return AutoComplete().Name(GetName(name))
-                                 .PropertyFieldName(name)
+            return AutoComplete().Name(GetName(expression))
+                                 .ModelMetadata(ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData))
                                  .Value(GetValue(expression));
         }
 
@@ -1105,18 +1099,16 @@ namespace Kendo.Mvc.UI.Fluent
         public virtual SliderBuilder<TValue> SliderFor<TValue>(Expression<Func<TModel, TValue>> expression)
             where TValue : struct, IComparable
         {
-            var name = GetPropertyField(expression);
-            var value = (Nullable<TValue>)ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
-
-            IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
+            ModelMetadata metadata = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData);
+            IEnumerable<ModelValidator> validators = metadata.GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
             TValue? minimum = GetRangeValidationParameter<TValue>(validators, minimumValidator);
             TValue? maximum = GetRangeValidationParameter<TValue>(validators, maximumValidator);
 
             var slider = Slider<TValue>()
-                            .Name(GetName(name))
-                            .PropertyFieldName(name)
-                            .Value(value);
+                            .Name(GetName(expression))
+                            .ModelMetadata(metadata)
+                            .Value((Nullable<TValue>)metadata.Model);
 
             if (minimum.HasValue)
             {
@@ -1142,18 +1134,16 @@ namespace Kendo.Mvc.UI.Fluent
         public virtual SliderBuilder<TValue> SliderFor<TValue>(Expression<Func<TModel, Nullable<TValue>>> expression)
             where TValue : struct, IComparable
         {
-            var name = GetPropertyField(expression);
-            IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
+            ModelMetadata metadata = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData);
+            IEnumerable<ModelValidator> validators = metadata.GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
             TValue? minimum = GetRangeValidationParameter<TValue>(validators, minimumValidator);
             TValue? maximum = GetRangeValidationParameter<TValue>(validators, maximumValidator);
 
-            var value = (Nullable<TValue>)ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
-
             var slider = Slider<TValue>()
-                            .Name(GetName(name))
-                            .PropertyFieldName(name)
-                            .Value(value);
+                            .Name(GetName(expression))
+                            .ModelMetadata(metadata)
+                            .Value((Nullable<TValue>)metadata.Model);
 
             if (minimum.HasValue)
             {
@@ -1178,30 +1168,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public virtual SliderBuilder<double> SliderFor(Expression<Func<TModel, double>> expression)
         {
-            var name = GetPropertyField(expression);
-            IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
-
-            double? minimum = GetRangeValidationParameter<double>(validators, minimumValidator);
-            double? maximum = GetRangeValidationParameter<double>(validators, maximumValidator);
-
-            var value = (Nullable<double>)ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
-
-            var slider = Slider<double>()
-                            .Name(GetName(name))
-                            .PropertyFieldName(name)
-                            .Value(value);
-
-            if (minimum.HasValue)
-            {
-                slider.Min(minimum.Value);
-            }
-
-            if (maximum.HasValue)
-            {
-                slider.Max(maximum.Value);
-            }
-
-            return slider;
+            return SliderFor<double>(expression);
         }
 
         /// <summary>
@@ -1214,30 +1181,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public virtual SliderBuilder<double> SliderFor(Expression<Func<TModel, Nullable<double>>> expression)
         {
-            var name = GetPropertyField(expression);
-            IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
-
-            double? minimum = GetRangeValidationParameter<double>(validators, minimumValidator);
-            double? maximum = GetRangeValidationParameter<double>(validators, maximumValidator);
-
-            var value = (Nullable<double>)ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
-
-            var slider = Slider<double>()
-                            .Name(GetName(name))
-                            .PropertyFieldName(name)
-                            .Value(value);
-
-            if (minimum.HasValue)
-            {
-                slider.Min(minimum.Value);
-            }
-
-            if (maximum.HasValue)
-            {
-                slider.Max(maximum.Value);
-            }
-
-            return slider;
+            return SliderFor<double>(expression);
         }
 
         /// <summary>
@@ -1251,16 +1195,16 @@ namespace Kendo.Mvc.UI.Fluent
         public virtual RangeSliderBuilder<TValue> RangeSliderFor<TValue>(Expression<Func<TModel, TValue[]>> expression)
             where TValue : struct, IComparable
         {
-            var name = GetPropertyField(expression);
-            IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
+            ModelMetadata metadata = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData);
+            IEnumerable<ModelValidator> validators = metadata.GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
 
             TValue? minimum = GetRangeValidationParameter<TValue>(validators, minimumValidator);
             TValue? maximum = GetRangeValidationParameter<TValue>(validators, maximumValidator);
 
             var rangeSlider = RangeSlider<TValue>()
-                                .Name(GetName(name))
-                                .PropertyFieldName(name)
-                                .Values((TValue[])ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model);
+                                .Name(GetName(expression))
+                                .ModelMetadata(metadata)
+                                .Values((TValue[])metadata.Model);
 
             if (minimum.HasValue)
             {
@@ -1285,26 +1229,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public virtual RangeSliderBuilder<double> RangeSliderFor(Expression<Func<TModel, double[]>> expression)
         {
-            var name = GetPropertyField(expression);
-            IEnumerable<ModelValidator> validators = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).GetValidators(HtmlHelper.ViewContext.Controller.ControllerContext);
-
-            double? minimum = GetRangeValidationParameter<double>(validators, minimumValidator);
-            double? maximum = GetRangeValidationParameter<double>(validators, maximumValidator);
-
-            var rangeSlider = RangeSlider<double>()
-                                .Name(GetName(name))
-                                .PropertyFieldName(name)
-                                .Values((double[])ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model);
-
-            if (minimum.HasValue) {
-                rangeSlider.Min(minimum.Value);
-            }
-
-            if (maximum.HasValue) {
-                rangeSlider.Max(maximum.Value);
-            }
-
-            return rangeSlider;
+            return RangeSliderFor<double>(expression);
         }
 
         /// <summary>
@@ -1387,19 +1312,9 @@ namespace Kendo.Mvc.UI.Fluent
                     ));
         }
 
-        private string GetPropertyField(LambdaExpression expression)
-        {
-            return ExpressionHelper.GetExpressionText(expression);
-        }
-
-        private string GetName(string name)
-        {
-            return HtmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(name);
-        }
-
         private string GetName(LambdaExpression expression)
         {
-            return HtmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(GetPropertyField(expression));
+            return HtmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(ExpressionHelper.GetExpressionText(expression));
         }
 
         private string GetValue<TValue>(Expression<Func<TModel, TValue>> expression) 
