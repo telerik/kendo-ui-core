@@ -70,7 +70,11 @@
                 .on("blur" + ns, function() {
                     wrapper.removeClass(FOCUSED);
                     clearTimeout(that._typing);
-                    that.text(that.text());
+
+                    if (that.options.text !== that.input.val()) {
+                        that.text(that.text());
+                    }
+
                     that._placeholder();
                     that._blur();
                 });
@@ -569,20 +573,13 @@
 
         _keydown: function(e) {
             var that = this,
-                key = e.keyCode,
-                input = that.input;
+                key = e.keyCode;
 
             that._last = key;
 
             clearTimeout(that._typing);
 
-            if (key == keys.TAB) {
-                that.text(input.val());
-
-                if (that._state === STATE_FILTER && that.selectedIndex > -1) {
-                    that._state = STATE_ACCEPT;
-                }
-            } else if (!that._move(e)) {
+            if (key != keys.TAB && !that._move(e)) {
                that._search();
             }
         },
