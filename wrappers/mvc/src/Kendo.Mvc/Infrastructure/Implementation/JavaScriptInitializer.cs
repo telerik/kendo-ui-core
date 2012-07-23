@@ -81,12 +81,12 @@ namespace Kendo.Mvc.Infrastructure
                     continue;
                 }
 
+                var serializer = CreateSerializer();
+
                 var enumerable = value as IEnumerable;
 
                 if (enumerable != null)
                 {
-                    var serializer = CreateSerializer();
-
                     output.Append(serializer.Serialize(enumerable));
 
                     continue;
@@ -161,9 +161,9 @@ namespace Kendo.Mvc.Infrastructure
                     output.Append(HttpUtility.JavaScriptStringEncode(value.ToString().ToLower(), true));
 
                     continue;
-                }
+                }                
 
-                throw new NotSupportedException("Cannot serialize objects of type " + value.GetType());
+                output.Append(serializer.Serialize(value));                
             }
 
             if (output.Length >= 2)
