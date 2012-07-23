@@ -462,8 +462,16 @@
 
                 if (expanded) {
                     that.select(subGroup(selection).children().first());
+                } else if (!selection.length) {
+                    that.select(that.root.children(NODE).eq(0));
                 } else {
-                    that.select(selection.next());
+                    while (selection.length && !selection.next().length) {
+                        selection = selection.parent().closest(NODE);
+                    }
+
+                    if (selection.next().length) {
+                        that.select(selection.next());
+                    }
                 }
             }
         },

@@ -295,6 +295,56 @@
 
                 equal(treeviewObject.select()[0], treeview.find(".k-item .k-item")[0]);
             });
+
+            test("down arrow moves selection to next parent, if there are no more siblings left", function() {
+                createTreeView([
+                    { text: "foo", expanded: true, items: [
+                        { text: "bar", selected: true }
+                    ] },
+                    { text: "baz" }
+                ]);
+
+                treeview.press(kendo.keys.DOWN);
+
+                equal(treeviewObject.select()[0], treeview.find(".k-item:last")[0]);
+            });
+
+            test("down arrow moves selection to next grandparent, if there are no more siblings left", function() {
+                createTreeView([
+                    { text: "foo", expanded: true, items: [
+                        { text: "bar", expanded: true, items: [
+                            { text: "baz", selected: true }
+                        ] }
+                    ] },
+                    { text: "qux" }
+                ]);
+
+                treeview.press(kendo.keys.DOWN);
+
+                equal(treeviewObject.select()[0], treeview.find(".k-item:last")[0]);
+            });
+
+            test("down arrow does not change selection when hitting the last item", function() {
+                createTreeView([
+                    { text: "foo" },
+                    { text: "qux", selected: true }
+                ]);
+
+                treeview.press(kendo.keys.DOWN);
+
+                equal(treeviewObject.select()[0], treeview.find(".k-item:last")[0]);
+            });
+
+            test("down arrow in treeview without selection selects first node", function() {
+                createTreeView([
+                    { text: "foo" },
+                    { text: "bar" }
+                ]);
+
+                treeview.press(kendo.keys.DOWN);
+
+                equal(treeviewObject.select()[0], treeview.find(".k-item")[0]);
+            });
         </script>
 
         <div id="qunit-fixture"> </div>
