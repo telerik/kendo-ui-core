@@ -79,32 +79,32 @@ namespace Kendo.Mvc.Extensions
             return enumerable.ToDataSourceResult(request, null);
         }
 
-        public static DataSourceResult ToDataSourceResult<TModel, TResult>(this IEnumerable<TModel> enumerable, DataSourceRequest request, Expression<Func<TModel, TResult>> selector)
+        public static DataSourceResult ToDataSourceResult<TModel, TResult>(this IEnumerable<TModel> enumerable, DataSourceRequest request, Func<TModel, TResult> selector)
         {
             return enumerable.AsQueryable().CreateDataSourceResult(request, null, selector);
         }
 
-        public static DataSourceResult ToDataSourceResult<TModel, TResult>(this IEnumerable<TModel> enumerable, DataSourceRequest request, ModelStateDictionary modelState, Expression<Func<TModel, TResult>> selector)
+        public static DataSourceResult ToDataSourceResult<TModel, TResult>(this IEnumerable<TModel> enumerable, DataSourceRequest request, ModelStateDictionary modelState, Func<TModel, TResult> selector)
         {
             return enumerable.AsQueryable().CreateDataSourceResult(request, modelState, selector);
         }
 
-        public static DataSourceResult ToDataSourceResult<TModel, TResult>(this IQueryable<TModel> enumerable, DataSourceRequest request, Expression<Func<TModel, TResult>> selector)
+        public static DataSourceResult ToDataSourceResult<TModel, TResult>(this IQueryable<TModel> enumerable, DataSourceRequest request, Func<TModel, TResult> selector)
         {
             return enumerable.CreateDataSourceResult(request, null, selector);
         }
 
-        public static DataSourceResult ToDataSourceResult<TModel, TResult>(this IQueryable<TModel> enumerable, DataSourceRequest request, ModelStateDictionary modelState, Expression<Func<TModel, TResult>> selector)
+        public static DataSourceResult ToDataSourceResult<TModel, TResult>(this IQueryable<TModel> enumerable, DataSourceRequest request, ModelStateDictionary modelState, Func<TModel, TResult> selector)
         {
             return enumerable.CreateDataSourceResult(request, modelState, selector);
         }
 
         public static DataSourceResult ToDataSourceResult(this IQueryable queryable, DataSourceRequest request, ModelStateDictionary modelState)
         {
-            return queryable.CreateDataSourceResult(request, modelState, null);
+            return queryable.CreateDataSourceResult<object, object>(request, modelState, null);
         }
 
-        private static DataSourceResult CreateDataSourceResult(this IQueryable queryable, DataSourceRequest request, ModelStateDictionary modelState, LambdaExpression selector)
+        private static DataSourceResult CreateDataSourceResult<TModel, TResult>(this IQueryable queryable, DataSourceRequest request, ModelStateDictionary modelState, Func<TModel, TResult> selector)
         {
             var result = new DataSourceResult();
 
@@ -529,7 +529,7 @@ namespace Kendo.Mvc.Extensions
                     Expression.Constant(index)));
         }
 
-        private static IEnumerable Execute(this IQueryable source, LambdaExpression selector)
+        private static IEnumerable Execute<TModel, TResult>(this IQueryable source, Func<TModel, TResult> selector)
         {
             if (source == null) throw new ArgumentNullException("source");
 
@@ -557,7 +557,14 @@ namespace Kendo.Mvc.Extensions
                 }
                 else
                 {
-                    return source.CallQueryableMethod("Select", selector).Execute(null);
+                    var list = new List<TResult>();
+
+                    foreach (TModel item in source)
+                    {
+                        list.Add(selector(item));
+                    }
+
+                    return list;
                 }
             }
             else
