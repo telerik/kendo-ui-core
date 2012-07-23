@@ -367,6 +367,47 @@
 
                 equal(treeviewObject.select()[0], treeview.find(".k-item")[0]);
             });
+
+            test("up arrow moves selection to last expanded node of previous node", function() {
+                createTreeView([
+                    { text: "foo", expanded: true, items: [
+                        { text: "bar" }
+                    ] },
+                    { text: "baz", selected: true }
+                ]);
+
+                treeview.press(kendo.keys.UP);
+
+                equal(treeviewObject.select()[0], treeview.find(".k-item .k-item")[0]);
+            });
+
+            test("up arrow moves selection to previous grandparent, when parents are expanded", function() {
+                createTreeView([
+                    { text: "foo", expanded: true, items: [
+                        { text: "bar", expanded: true, items: [
+                            { text: "baz" }
+                        ] }
+                    ] },
+                    { text: "qux", selected: true }
+                ]);
+
+                treeview.press(kendo.keys.UP);
+
+                equal(treeviewObject.select()[0], treeview.find(".k-item .k-item .k-item")[0]);
+            });
+
+            test("up arrow moves selection to parent node when out of previous nodes", function() {
+                createTreeView([
+                    { text: "foo", expanded: true, items: [
+                        { text: "bar", selected: true }
+                    ] }
+                ]);
+
+                treeview.press(kendo.keys.UP);
+
+                equal(treeviewObject.select()[0], treeview.find(".k-item")[0]);
+            });
+
         </script>
 
         <div id="qunit-fixture"> </div>

@@ -479,6 +479,12 @@
                     target = that.root.children(NODE).last();
                 } else if (selection.prev().length) {
                     target = selection.prev();
+
+                    while (that._expanded(target)) {
+                        target = subGroup(target).children().last();
+                    }
+                } else {
+                    target = selection.parent().closest(NODE);
                 }
             }
 
