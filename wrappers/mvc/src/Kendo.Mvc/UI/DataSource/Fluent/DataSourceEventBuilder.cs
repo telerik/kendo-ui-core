@@ -36,7 +36,29 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Defines the name of the JavaScript function that will handle the the RequestStart client-side event.
+        /// Defines the name of the JavaScript function that will handle the Sync client-side event.
+        /// </summary>  
+        /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
+        public DataSourceEventBuilder Sync(string handler)
+        {
+            Handler("sync", handler);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the inline handler of the Sync client-side event.
+        /// </summary>                
+        /// <param name="handler">The handler code wrapped in a text tag (Razor syntax).</param>
+        public DataSourceEventBuilder Sync(Func<object, object> handler)
+        {
+            Handler("sync", handler);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the name of the JavaScript function that will handle the RequestStart client-side event.
         /// </summary> 
         /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
         public DataSourceEventBuilder RequestStart(string handler)
@@ -58,7 +80,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Defines the name of the JavaScript function that will handle the the Error client-side event.
+        /// Defines the name of the JavaScript function that will handle the Error client-side event.
         /// </summary>
         /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
         public DataSourceEventBuilder Error(string handler)
