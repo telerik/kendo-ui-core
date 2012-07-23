@@ -25,6 +25,16 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Sets the value which will be used to populate the field when new non-existing model is created.
+        /// </summary>
+        /// <param name="value">The value</param>
+        public virtual DataSourceModelFieldDescriptorBuilder<T> DefaultValue(object value)
+        {
+            descriptor.DefaultValue = value;
+            return this;
+        }
+
+        /// <summary>
         /// Specifies if the field should be editable.
         /// </summary>        
         public virtual DataSourceModelFieldDescriptorBuilder<T> Editable()
