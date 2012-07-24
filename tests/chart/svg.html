@@ -148,7 +148,7 @@
                 });
 
                 test("createPolyline sets dashType", function() {
-                    var path = view.createPolyline([], false, { dashType: "dot"});
+                    var path = view.createPolyline([], false, { dashType: "dot" });
 
                     equals(path.options.dashType, "dot");
                 });
@@ -159,29 +159,30 @@
                 });
 
                 test("createCircle sets center point", function() {
-                    var circle = view.createCircle([10, 10]);
-                    same(circle.center, [10, 10]);
+                    var circle = view.createCircle(new Point2D(10, 10));
+                    same(circle.c.x, 10);
+                    same(circle.c.y, 10);
                 });
 
                 test("createCircle sets radius", function() {
-                    var circle = view.createCircle([10, 10], 10);
-                    same(circle.radius, 10);
+                    var circle = view.createCircle(new Point2D(10, 10), 10);
+                    same(circle.r, 10);
                 });
 
                 test("createCircle sets fill color", function() {
-                    var circle = view.createCircle([], 10, { fill: "#cf0" });
+                    var circle = view.createCircle(new Point2D(), 10, { fill: "#cf0" });
 
                     equals(circle.options.fill, "#cf0");
                 });
 
                 test("createCircle sets stroke color", function() {
-                    var circle = view.createCircle([], 10, { stroke: "#cf0" });
+                    var circle = view.createCircle(new Point2D(), 10, { stroke: "#cf0" });
 
                     equals(circle.options.stroke, "#cf0");
                 });
 
                 test("createCircle sets stroke width", function() {
-                    var circle = view.createCircle([], 10, { strokeWidth: 2});
+                    var circle = view.createCircle(new Point2D(), 10, { strokeWidth: 2 });
 
                     equals(circle.options.strokeWidth, 2);
                 });
@@ -755,7 +756,7 @@
 
                 module("SVGCircle", {
                     setup: function() {
-                        circle = new dataviz.SVGCircle([10, 20], 30);
+                        circle = new dataviz.SVGCircle(new Point2D(10, 20), 30);
                     }
                 });
 
@@ -808,7 +809,7 @@
 
                 test("refresh updates r attribute", function() {
                     var domElement = $("<div />");
-                    circle.radius = 4;
+                    circle.r = 4;
                     circle.refresh(domElement);
                     equals(domElement.attr("r"), "4");
                 });

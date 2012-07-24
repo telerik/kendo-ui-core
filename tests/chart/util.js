@@ -60,13 +60,13 @@ ViewStub.prototype = {
         return element;
     },
 
-    createCircle: function(center, radius, style) {
+    createCircle: function(c, r, style) {
         this.log.circle.push({
-            center: center, radius: radius, style: style });
+            c: c, r: r, style: style });
 
         var element = new kendo.dataviz.ViewElement(style);
-        element.center = center;
-        element.radius = radius;
+        element.c = c;
+        element.r = r;
 
         return element;
     },

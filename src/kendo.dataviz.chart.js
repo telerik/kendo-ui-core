@@ -2073,10 +2073,10 @@
                     new Point2D(box.x2, box.y2)
                 ], true, elementOptions);
             } else if (type === CIRCLE) {
-                element = view.createCircle([
+                element = view.createCircle(new Point2D(
                     round(box.x1 + halfWidth, COORD_PRECISION),
                     round(box.y1 + box.height() / 2, COORD_PRECISION)
-                ], halfWidth, elementOptions);
+                ), halfWidth, elementOptions);
             } else {
                 element = view.createRect(box, elementOptions);
             }
@@ -2300,7 +2300,7 @@
                     .brightness(BAR_BORDER_BRIGHTNESS)
                     .toHex();
 
-            return view.createCircle([center.x, center.y], radius, {
+            return view.createCircle(center, radius, {
                 data: { modelId: element.options.modelId },
                 stroke: borderColor,
                 strokeWidth: borderWidth
@@ -3188,7 +3188,8 @@
                         delay: segment.animationDelay
                     }),
                     data: { modelId: options.modelId },
-                    zIndex: options.zIndex
+                    zIndex: options.zIndex,
+                    singleSegment: (segment.options.data || []).length === 1
                 }, border)));
             }
 
@@ -3200,7 +3201,11 @@
         },
 
         createSegment: function(view, sector, options) {
-            return view.createSector(sector, options);
+            if (options.singleSegment) {
+                return view.createCircle(sector.c, sector.r, options);
+            } else {
+                return view.createSector(sector, options);
+            }
         },
 
         highlightOverlay: function(view, options) {
@@ -4844,17 +4849,29 @@
         },
 
         setup: function() {
-            var sector = this.element.config,
+            var element = this.element,
+                sector = element.config,
                 startRadius;
+
+            if (element.options.singleSegment) {
+                sector = element;
+            }
+
             this.endRadius = sector.r;
             startRadius = this.startRadius = sector.ir || 0;
             sector.r = startRadius;
         },
 
         step: function(pos) {
-            var endRadius = this.endRadius,
-                sector = this.element.config,
-                startRadius = this.startRadius;
+            var animation = this,
+                element = animation.element,
+                endRadius = animation.endRadius,
+                sector = element.config,
+                startRadius = animation.startRadius;
+
+            if (element.options.singleSegment) {
+                sector = element;
+            }
 
             sector.r = interpolateValue(startRadius, endRadius, pos);
         }

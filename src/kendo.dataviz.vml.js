@@ -523,7 +523,7 @@
                 return new Point2D(round(point.x), round(point.y));
             }
 
-            endAngle = (endAngle - startAngle) > 359.9 ? endAngle - 0.22 : endAngle;
+            endAngle = (endAngle - startAngle) > 359.9 ? endAngle - 0.5 : endAngle;
             outerStartPoint = roundPointCoordinates(config.point(startAngle)),
             innerStartPoint = roundPointCoordinates(config.point(startAngle, true)),
             outerEndPoint = roundPointCoordinates(config.point(endAngle));
@@ -577,12 +577,12 @@
     });
 
     var VMLCircle = ViewElement.extend({
-        init: function(center, radius, options) {
+        init: function(c, r, options) {
             var circle = this;
             ViewElement.fn.init.call(circle, options);
 
-            circle.center = center;
-            circle.radius = radius;
+            circle.c = c;
+            circle.r = r;
 
             circle.template = VMLCircle.template;
             if (!circle.template) {
@@ -590,9 +590,9 @@
                     "<kvml:oval #= d.renderAttr(\"id\", d.options.id) # " +
                             "#= d.renderDataAttributes() #" +
                             "style='position:absolute; " +
-                            "width:#= d.radius * 2 #px; height:#= d.radius * 2 #px; " +
-                            "top:#= d.center[1] - d.radius #px; " +
-                            "left:#= d.center[0] - d.radius #px;'>" +
+                            "width:#= d.r * 2 #px; height:#= d.r * 2 #px; " +
+                            "top:#= d.c.y - d.r #px; " +
+                            "left:#= d.c.x - d.r #px;'>" +
                         "#= d.fill.render() + d.stroke.render() #" +
                     "</kvml:oval>"
                 );
@@ -608,20 +608,29 @@
 
         refresh: function(domElement) {
             var circle = this,
-                center = circle.center,
-                radius = math.max(0, circle.radius),
-                size = radius * 2,
+                c = circle.c,
+                r = math.max(0, circle.r),
+                size = r * 2,
                 element = $(domElement);
 
             element.css({
                 "width": size,
                 "height": size,
-                "top": center[1] - radius,
-                "left": center[0] - radius
+                "top": c.y - r,
+                "left": c.x - r
             });
 
             circle.fill.options = circle.options;
             circle.fill.refresh(element.find("fill")[0]);
+        },
+
+        clone: function() {
+            var circle = this;
+            return new VMLCircle(
+                deepExtend({}, circle.c),
+                circle.r,
+                deepExtend({}, circle.options)
+            );
         }
     });
 
