@@ -11,6 +11,7 @@
         MOUSEMOVE = support.mousemove + ns,
         MOUSEUP = support.mouseup + ns,
         MOUSEDOWN = support.mousedown,
+        MOUSEDOWN_NS = MOUSEDOWN + ns,
         CLICK = "click",
         removeActiveID = 0,
         proxy = $.proxy;
@@ -29,7 +30,7 @@
             that._removeProxy = proxy(that._removeActive, that);
 
             element.on(MOUSEUP, that._releaseProxy);
-            element.on(MOUSEDOWN + ns + " " + MOUSECANCEL + " " + MOUSEUP, that._removeProxy);
+            element.on(MOUSEDOWN_NS + " " + MOUSECANCEL + " " + MOUSEUP, that._removeProxy);
 
             if (ANDROID3UP) {
                 element.on(MOUSEMOVE, function (e) {
