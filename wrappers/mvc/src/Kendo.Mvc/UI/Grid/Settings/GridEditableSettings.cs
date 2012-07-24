@@ -7,6 +7,7 @@ namespace Kendo.Mvc.UI
     using Extensions;
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.Resources;
+    using System.Reflection;
     //TODO: Implement GridBeginEditEvent option
     //public enum GridBeginEditEvent
     //{
@@ -114,19 +115,19 @@ namespace Kendo.Mvc.UI
         //    private set; 
         //}        
 
-        private object SerializeDefaultDataItem()
-        {
-            T dataItem = DefaultDataItem();
-            if (!typeof(T).IsDataRow())
-                return dataItem;
+        //private object SerializeDefaultDataItem()
+        //{
+        //    T dataItem = DefaultDataItem();
+        //    if (!typeof(T).IsDataRow())
+        //        return dataItem;
 
-            if (typeof(T) == typeof(DataRow))
-            {
-                return (dataItem as DataRow).SerializeRow();
-            }
+        //    if (typeof(T) == typeof(DataRow))
+        //    {
+        //        return (dataItem as DataRow).SerializeRow();
+        //    }
 
-            return (dataItem as DataRowView).SerializeRow();
-        }
+        //    return (dataItem as DataRowView).SerializeRow();
+        //}
 
         private T CreateDefaultItem()
         {
@@ -140,7 +141,21 @@ namespace Kendo.Mvc.UI
                 return new DataTable().NewRow() as T;
             }
 
-            return Activator.CreateInstance<T>();
+            var instance = Activator.CreateInstance<T>();
+
+            if (grid.DataSource.Schema.Model != null && 
+                grid.DataSource.Schema.Model.Fields.Any())
+            {
+                grid.DataSource.Schema.Model.Fields.Each(f => {
+                    var property = typeof(T).GetProperty(f.Member, BindingFlags.Public | BindingFlags.Instance);
+                    if (property != null && property.CanWrite)
+	                {
+                        property.SetValue(instance, f.DefaultValue, null);
+	                }                     
+                });
+            }
+
+            return instance;
         }
 
         private IDictionary<string, object> SerializePopUp()
