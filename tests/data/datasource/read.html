@@ -81,6 +81,69 @@
                 equal(data.length, 2);
             });
 
+            test("Changes to the raw data in requestEnd event does take effect", 2, function() {
+                var dataSource = new DataSource({
+                    data: []
+                });
+
+                dataSource.bind("requestEnd", function(e) {
+                    $.extend(e.response, [ { foo: "bar" }]);
+                });
+
+                dataSource.bind("change", function() {
+                    equal(this.data().length, 1);
+                    equal(this.data()[0].foo, "bar");
+                });
+
+                dataSource.read();
+            });
+
+            test("read triggers the requestEnd event passing the raw data", 1, function() {
+                var dataSource = new DataSource({
+                    data: data
+                });
+
+                dataSource.bind("requestEnd", function(e) {
+                    same(e.response, data);
+                });
+
+                dataSource.read();
+            });
+
+            test("read triggers the requestEnd event if custom error is present", 1, function() {
+                var dataSource = new DataSource({
+                    transport: {
+                        read: function(options) {
+                            options.success({
+                                errors: "foo"
+                            });
+                        }
+                    }
+                });
+
+                dataSource.bind("requestEnd", function() {
+                    ok(true);
+                });
+
+                dataSource.read();
+            });
+
+            test("read triggers the requestEnd event if request errors", 1, function() {
+                var dataSource = new DataSource({
+                    transport: {
+                        read: function(options) {
+                            options.error({ });
+                        }
+                    }
+                });
+
+                dataSource.bind("requestEnd", function() {
+                    ok(true);
+                });
+
+                dataSource.read();
+            });
+
             test("read raises the change event", function() {
                 var dataSource = new DataSource({
                     data: data

@@ -24,6 +24,7 @@
         GET = "get",
         ERROR = "error",
         REQUESTSTART = "requestStart",
+        REQUESTEND = "requestEnd",
         crud = [CREATE, READ, UPDATE, DESTROY],
         identity = function(o) { return o; },
         getter = kendo.getter,
@@ -1635,7 +1636,7 @@
 
             that._data = that._observe(that._data);
 
-            that.bind([ERROR, CHANGE, REQUESTSTART, SYNC], options);
+            that.bind([ERROR, CHANGE, REQUESTSTART, SYNC, REQUESTEND], options);
         },
 
         options: {
@@ -1729,6 +1730,8 @@
                 pristine = that.reader.data(that._pristine),
                 type = result.type,
                 length;
+
+            that.trigger(REQUESTEND, { response: response });
 
             if (response) {
                 response = that.reader.parse(response);
@@ -2021,6 +2024,7 @@
 
         error: function(xhr, status, errorThrown) {
             this._dequeueRequest();
+            this.trigger(REQUESTEND, { });
             this.trigger(ERROR, { xhr: xhr, status: status, errorThrown: errorThrown });
         },
 
@@ -2041,6 +2045,8 @@
             var that = this,
                 options = that.options,
                 hasGroups = options.serverGrouping === true && that._group && that._group.length > 0;
+
+            that.trigger(REQUESTEND, { response: data });
 
             data = that.reader.parse(data);
 
