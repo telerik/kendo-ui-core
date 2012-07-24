@@ -122,6 +122,7 @@
                 } else {
                     element.off(ns);
                     calendar.destroy();
+                    DatePicker.sharedCalendar = null;
                 }
             }
 
