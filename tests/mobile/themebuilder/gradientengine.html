@@ -27,7 +27,6 @@
             module("gradient engine", {});
 
             test("parseGradient preserves start point", 1, function() {
-                //"-webkit-linear-gradient(left, right, #0b47a2, #04b7a2 5%, #0b4a72 98%, #20b47a), -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(0, 0, 0, 0.3)), color-stop(0.05, rgba(0, 0, 0, 0)), color-stop(0.98, rgba(0, 0, 0, 0)), color-stop(1, rgba(70, 70, 70, 0.5))), linear-gradient(top, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0)) #0b47a2;"
                 ok(gradientEngine.parseGradient("-webkit-linear-gradient(left, #0b47a2)")[0].start.original == "left");
             });
 
@@ -35,7 +34,7 @@
                 var gradientStop = gradientEngine.parseGradient("-webkit-linear-gradient(left, #0b47a2 5%)")[0].stops[0];
 
                 ok(gradientStop.color.get() == "#0b47a2");
-                ok(gradientStop.position == "5%");
+                ok(gradientStop.position == "5");
             });
 
             test("get method returns browser specific gradient", 1, function () {
