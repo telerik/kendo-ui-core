@@ -179,7 +179,7 @@
                 });
 
                 test("highlightOverlay returns a circle", function() {
-                    ok(firstPoint.highlightOverlay(view).center);
+                    ok(firstPoint.highlightOverlay(view).c);
                 });
 
                 test("highlightOverlay returns a transparent circle", function() {
@@ -195,7 +195,7 @@
                 test("highlightOverlay returns a circle with 1px smaller diameter", function() {
                     var outline = firstPoint.highlightOverlay(view);
 
-                    equals(outline.radius, firstPoint.options.markers.size / 2 - 0.5);
+                    equals(outline.r, firstPoint.options.markers.size / 2 - 0.5);
                 });
 
             })();

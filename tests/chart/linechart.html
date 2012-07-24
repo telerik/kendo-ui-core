@@ -1080,8 +1080,9 @@
                 test("renders circle", function() {
                     createShape({ type: "circle" });
                     var circle = view.log.circle[0];
-                    same(circle.center, [SIZE / 2, SIZE / 2]);
-                    same(circle.radius, SIZE / 2);
+                    same(circle.c.x, SIZE / 2);
+                    same(circle.c.y, SIZE / 2);
+                    same(circle.r, SIZE / 2);
                 });
 
                 test("renders id", function() {

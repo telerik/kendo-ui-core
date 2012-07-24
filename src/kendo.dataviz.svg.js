@@ -570,20 +570,20 @@
     });
 
     var SVGCircle = ViewElement.extend({
-        init: function(center, radius, options) {
+        init: function(c, r, options) {
             var circle = this;
             ViewElement.fn.init.call(circle, options);
 
-            circle.center = center;
-            circle.radius = radius;
+            circle.c = c;
+            circle.r = r;
 
             circle.template = SVGCircle.template;
             if (!circle.template) {
                 circle.template = SVGCircle.template = renderTemplate(
                     "<circle #= d.renderAttr(\"id\", d.options.id) # " +
                     "#= d.renderDataAttributes() #" +
-                    "cx='#= d.center[0] #' cy='#= d.center[1] #' " +
-                    "r='#= d.radius #' " +
+                    "cx='#= d.c.x #' cy='#= d.c.y #' " +
+                    "r='#= d.r #' " +
                     "#= d.renderAttr(\"stroke\", d.options.stroke) # " +
                     "#= d.renderAttr(\"stroke-width\", d.options.strokeWidth) #" +
                     "fill-opacity='#= d.options.fillOpacity #' " +
@@ -601,9 +601,18 @@
 
         refresh: function(domElement) {
             $(domElement).attr({
-                "r": math.max(0, this.radius),
+                "r": math.max(0, this.r),
                 "fill-opacity": this.options.fillOpacity
             });
+        },
+
+        clone: function() {
+            var circle = this;
+            return new SVGCircle(
+                deepExtend({}, circle.c),
+                circle.r,
+                deepExtend({}, circle.options)
+            );
         }
     });
 

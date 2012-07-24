@@ -164,29 +164,30 @@
                 });
 
                 test("createCircle sets center point", function() {
-                    var circle = view.createCircle([10, 10]);
-                    same(circle.center, [10, 10]);
+                    var circle = view.createCircle(new Point2D(10, 10));
+                    same(circle.c.x, 10);
+                    same(circle.c.y, 10);
                 });
 
                 test("createCircle sets radius", function() {
-                    var circle = view.createCircle([10, 10], 10);
-                    same(circle.radius, 10);
+                    var circle = view.createCircle(new Point2D(10, 10), 10);
+                    same(circle.r, 10);
                 });
 
                 test("createCircle sets fill color", function() {
-                    var circle = view.createCircle([], 10, { fill: "#cf0" });
+                    var circle = view.createCircle(new Point2D(), 10, { fill: "#cf0" });
 
                     equals(circle.options.fill, "#cf0");
                 });
 
                 test("createCircle sets stroke color", function() {
-                    var circle = view.createCircle([], 10, { stroke: "#cf0" });
+                    var circle = view.createCircle(new Point2D(), 10, { stroke: "#cf0" });
 
                     equals(circle.options.stroke, "#cf0");
                 });
 
                 test("createCircle sets stroke width", function() {
-                    var circle = view.createCircle([], 10, { strokeWidth: 2});
+                    var circle = view.createCircle(new Point2D(), 10, { strokeWidth: 2});
 
                     equals(circle.options.strokeWidth, 2);
                 });
@@ -831,7 +832,7 @@
                 var circle;
 
                 function createCircle(options) {
-                    circle = new dataviz.VMLCircle([10, 20], 10, options);
+                    circle = new dataviz.VMLCircle(new Point2D(10, 20), 10, options);
                 }
 
                 module("VMLCircle", {
@@ -920,8 +921,8 @@
 
                 test("refresh updates size", function() {
                     var domElement = $("<div />");
-                    circle.radius = 4;
-                    circle.center = [10, 20];
+                    circle.r = 4;
+                    circle.c = new Point2D(10, 20);
                     circle.refresh(domElement);
                     equals(domElement.css("width"), "8px");
                     equals(domElement.css("height"), "8px");
