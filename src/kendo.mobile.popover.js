@@ -123,6 +123,11 @@
             this.popup.close();
         },
 
+        destroy: function() {
+            Widget.fn.destroy.call(this);
+            this.popup.destroy();
+        },
+
         _activate: function() {
             var that = this,
                 direction = that.options.direction,
@@ -158,7 +163,8 @@
 
             that.popup = new Popup(that.element, popupOptions);
 
-            that.pane = new ui.Pane(that.element, this.options.pane).navigate("");
+            that.pane = new ui.Pane(that.element, this.options.pane);
+            that.pane.navigate("");
 
             kendo.notify(that, ui);
         },
@@ -180,6 +186,14 @@
 
         close: function() {
             this.popup.hide();
+        },
+
+        destroy: function() {
+            Widget.fn.destroy.call(this);
+            this.pane.destroy();
+            this.popup.destroy();
+
+            kendo.destroy(this.element);
         }
     });
 
