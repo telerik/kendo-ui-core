@@ -56,6 +56,37 @@
                 equal(datetimepicker.dateView.options.start, "decade");
             });
 
+            test("Preserve specific options of the views", function() {
+                var dom = $('<input data-role="datetimepicker" />'),
+                    change = function() { },
+                    close = function() { },
+                    open = function() { };
+
+                dom.kendoDateTimePicker({
+                    format: "dd/MM/yyyy H:mm",
+                    timeFormat: "H:mm",
+                    change: change,
+                    close: close,
+                    open: open
+                });
+
+                kendo.bind(dom);
+
+                var datetimepicker = dom.data("kendoDateTimePicker");
+
+                equal(datetimepicker.options.format, "dd/MM/yyyy H:mm");
+                equal(datetimepicker.options.timeFormat, "H:mm");
+
+                notEqual(datetimepicker.dateView.options.change, change);
+                notEqual(datetimepicker.dateView.options.close, close);
+                notEqual(datetimepicker.dateView.options.open, open);
+
+                equal(datetimepicker.timeView.options.format, "H:mm");
+                notEqual(datetimepicker.timeView.options.change, change);
+                notEqual(datetimepicker.timeView.options.close, close);
+                notEqual(datetimepicker.timeView.options.open, open);
+            });
+
             test("initializes a options from data attributes after init of the widget", function() {
                 var dom = $('<input data-role="datetimepicker" data-format="{0:MM yyyy hh:mm}" data-start="year" />');
                 dom.kendoDateTimePicker();

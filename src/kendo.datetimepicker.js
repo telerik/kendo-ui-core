@@ -100,16 +100,27 @@
         CLOSE,
         CHANGE
     ],
-
         setOptions: function(options) {
-            var that = this;
+            var that = this,
+            dateViewOptions = that.dateView.options,
+            timeViewOptions = that.timeView.options;
 
             Widget.fn.setOptions.call(that, options);
-
             normalize(that.options);
 
-            extend(that.dateView.options, that.options);
-            extend(that.timeView.options, that.options);
+            options = that.options;
+            extend(dateViewOptions, options, {
+                change: dateViewOptions.change,
+                close: dateViewOptions.close,
+                open: dateViewOptions.open
+            });
+
+            extend(timeViewOptions, options, {
+                format: options.timeFormat,
+                change: timeViewOptions.change,
+                close: timeViewOptions.close,
+                open: timeViewOptions.open
+            });
 
             that.timeView.ul[0].innerHTML = "";
         },
@@ -365,8 +376,7 @@
             that.dateView = new kendo.DateView(extend({}, options, {
                 anchor: that.wrapper,
                 change: function() {
-                    // calendar is the current scope
-                    var value = this.value(),
+                    var value = that.dateView.calendar.value(),
                         msValue = +value,
                         msMin = +options.min,
                         msMax = +options.max,
