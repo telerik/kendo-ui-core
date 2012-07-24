@@ -1052,8 +1052,9 @@
                     lineOptions));
 
                 append(childElements, axis.renderTicks(view));
-                append(childElements, axis.renderPlotBands(view));
             }
+
+            append(childElements, axis.renderPlotBands(view));
 
             return childElements;
         },
