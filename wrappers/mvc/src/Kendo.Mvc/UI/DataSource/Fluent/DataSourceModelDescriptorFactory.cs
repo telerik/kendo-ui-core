@@ -102,9 +102,7 @@ namespace Kendo.Mvc.UI.Fluent
         {
             var descriptor = model.AddDescriptor(memberName);
             
-            descriptor.MemberType = memberType;
-
-            model.Fields.Add(descriptor);
+            descriptor.MemberType = memberType;            
 
             return new DataSourceModelFieldDescriptorBuilder<TValue>(descriptor);            
         }

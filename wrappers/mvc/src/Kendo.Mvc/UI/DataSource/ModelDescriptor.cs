@@ -20,13 +20,17 @@
 
         public ModelFieldDescriptor AddDescriptor(string member)
         {
-            var existing = Fields.FirstOrDefault(f => f.Member == member);
-            if (existing != null)
+
+            var descriptor = Fields.FirstOrDefault(f => f.Member == member);
+            if (descriptor != null)
             {
-                return existing;
+                return descriptor;
             }
 
-            return new ModelFieldDescriptor { Member = member };
+            descriptor = new ModelFieldDescriptor { Member = member };
+            Fields.Add(descriptor);
+
+            return descriptor;
         }
 
         protected override void Serialize(IDictionary<string, object> json)
