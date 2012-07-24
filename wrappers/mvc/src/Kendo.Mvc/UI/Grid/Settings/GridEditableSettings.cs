@@ -34,7 +34,7 @@ namespace Kendo.Mvc.UI
 
             DisplayDeleteConfirmation = true;
             //TODO: Implement edit form attributes
-          //  FormHtmlAttributes = new RouteValueDictionary();
+            //  FormHtmlAttributes = new RouteValueDictionary();
             //TODO: Implement GridBeginEditEvent option
             //BeginEdit = GridBeginEditEvent.Auto;            
 
@@ -49,7 +49,7 @@ namespace Kendo.Mvc.UI
         //    get; 
         //    set; 
         //}
-       
+
         public Window PopUp
         {
             get;
@@ -68,10 +68,10 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        public bool Enabled 
-        { 
-            get; 
-            set; 
+        public bool Enabled
+        {
+            get;
+            set;
         }
 
         public bool DisplayDeleteConfirmation
@@ -88,14 +88,14 @@ namespace Kendo.Mvc.UI
 
         public string TemplateName
         {
-            get; 
+            get;
             set;
         }
 
-        public object AdditionalViewData 
-        { 
+        public object AdditionalViewData
+        {
             get;
-            set; 
+            set;
         }
 
         public GridInsertRowPosition CreateAt
@@ -153,20 +153,20 @@ namespace Kendo.Mvc.UI
                 .Add("resizable", PopUp.ResizingSettings.Enabled);
 
             return result;
-        }        
+        }
 
         protected override void Serialize(IDictionary<string, object> json)
-        {            
+        {
             var editorHtml = grid.EditorHtml;
 
-            if (editorHtml != null)
+            if (editorHtml != null && IsClientBinding)
             {
                 //editorHtml = editorHtml.Replace("%", "%25").Replace("<", "%3c").Replace(">", "%3e");                
                 editorHtml = editorHtml.Trim()
                                 .Replace("\r\n", string.Empty)
-                                .Replace("</script>", "<\\/script>")                                
+                                .Replace("</script>", "<\\/script>")
                                 .Replace("jQuery(\"#", "jQuery(\"\\\\#")
-                                .Replace("#", "\\#");                
+                                .Replace("#", "\\#");
             }
 
             FluentDictionary.For(json)
@@ -175,11 +175,22 @@ namespace Kendo.Mvc.UI
                 .Add("template", editorHtml, () => Mode != GridEditMode.InLine)
                 //TODO: Implement GridBeginEditEvent option                
                 //.Add("beginEdit", BeginEdit == GridBeginEditEvent.Click ? "click" : "dblclick", () => BeginEdit != GridBeginEditEvent.Auto)                               
-                .Add("createAt", CreateAt.ToString().ToLower(), () => CreateAt != GridInsertRowPosition.Top)                
-                .Add("window", SerializePopUp(), () => Mode == GridEditMode.PopUp && grid.DataSource.Type == DataSourceType.Ajax);            
+                .Add("createAt", CreateAt.ToString().ToLower(), () => CreateAt != GridInsertRowPosition.Top)
+                .Add("window", SerializePopUp(), () => Mode == GridEditMode.PopUp && grid.DataSource.Type == DataSourceType.Ajax)
+                .Add("create", IsClientBinding)
+                .Add("update", IsClientBinding)
+                .Add("destroy", IsClientBinding);
+        }
+
+        private bool IsClientBinding
+        {
+            get
+            {
+                return grid.DataSource.Type == DataSourceType.Ajax;
+            }
         }
     }
-    
+
     public enum GridInsertRowPosition
     {
         Top,

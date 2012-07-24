@@ -930,7 +930,14 @@
                         e.preventDefault();
                         that.removeRow($(this).closest("tr"));
                     });
-               }
+                } else {
+                    //Required for the MVC server wrapper delete button
+                    that.wrapper.on(CLICK + NS, "tbody>tr:not(.k-detail-row,.k-grouping-row):visible button.k-grid-delete", function(e) {
+                        if (!that._confirmation()) {
+                            e.preventDefault();
+                        }
+                    });
+                }
             }
         },
 

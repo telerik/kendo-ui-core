@@ -118,6 +118,14 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        public GridEditingSettingsBuilder<T> DisplayDeleteConfirmation(string message)
+        {
+            settings.Confirmation = message;
+            settings.DisplayDeleteConfirmation = true;
+
+            return this;
+        }
+
         //TODO: Implement edit form attributes
         ///// <summary>
         ///// Gets the HTML attributes of the form rendered during editing
