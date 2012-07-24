@@ -77,6 +77,16 @@ namespace Kendo.Mvc.UI.Tests
             json["template"].ShouldEqual("#=baz#");
         }
 
+        [Fact]
+        public void Should_serialize_encoded_false()
+        {
+            column.Object.Encoded = false;
+
+            var json = column.Object.ToJson();
+
+            json["encoded"].ShouldEqual(false);
+        }
+
         private IHtmlNode GetSpan(IHtmlNode cell)
         {
             return cell.Children[0];
