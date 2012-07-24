@@ -1,13 +1,18 @@
 namespace Kendo.Mvc.UI
 {
-    using System.Globalization;
-    using System.IO;
-    using System.Web.Mvc;
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.UI.Html;
 
+    using System.Globalization;
+    using System.IO;
+    using System.Text.RegularExpressions;
+    using System.Web.Mvc;
+
     public class ComboBox : DropDownListBase
     {
+        //Escape meta characters: http://api.jquery.com/category/selectors/
+        private static readonly Regex EscapeRegex = new Regex(@"([;&,\.\+\*~'\:\""\!\^\$\[\]\(\)\|\/])", RegexOptions.Compiled);
+
         public ComboBox(ViewContext viewContext,  IJavaScriptInitializer initializer, ViewDataDictionary viewData, IUrlGenerator urlGenerator)
             : base(viewContext, initializer, viewData, urlGenerator)
         {
@@ -77,15 +82,9 @@ namespace Kendo.Mvc.UI
         {
             if (DataSource.ServerFiltering && !DataSource.Transport.Read.Data.HasValue())
             {
-                var id = "#" + Id;
-                if (IsInClientTemplate)
-                {
-                    id = "\\" + id;
-                }
-
                 DataSource.Transport.Read.Data = new ClientHandlerDescriptor
                 {
-                    HandlerName = "function() { return kendo.ui.ComboBox.requestData(\"" + id + "\"); }"
+                    HandlerName = "function() { return kendo.ui.ComboBox.requestData(\"" + EscapeRegex.Replace(Selector, @"\\$1") + "\"); }"
                 };
             }
 
