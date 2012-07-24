@@ -6,10 +6,11 @@
         support = kendo.support,
         os = support.mobileOS,
         ANDROID3UP = os.android && os.flatVersion >= 300,
-        MOUSECANCEL = support.mousecancel,
-        MOUSEDOWN = support.mousedown,
-        MOUSEMOVE = support.mousemove,
-        MOUSEUP = support.mouseup,
+        ns = ".kendoMobileButton",
+        MOUSECANCEL = support.mousecancel + ns,
+        MOUSEDOWN = support.mousedown + ns,
+        MOUSEMOVE = support.mousemove + ns,
+        MOUSEUP = support.mouseup + ns,
         CLICK = "click",
         removeActiveID = 0,
         proxy = $.proxy;
@@ -26,11 +27,11 @@
             that._releaseProxy = proxy(that._release, that);
             that._removeProxy = proxy(that._removeActive, that);
 
-            that.element.bind(MOUSEUP, that._releaseProxy);
-            that.element.bind(MOUSEDOWN + " " + MOUSECANCEL + " " + MOUSEUP, that._removeProxy);
+            that.element.on(MOUSEUP, that._releaseProxy);
+            that.element.on(MOUSEDOWN + " " + MOUSECANCEL + " " + MOUSEUP, that._removeProxy);
 
             if (ANDROID3UP) {
-                that.element.bind(MOUSEMOVE, function (e) {
+                that.element.on(MOUSEMOVE, function (e) {
                     if (!removeActiveID) {
                         removeActiveID = setTimeout(that._removeProxy, 500 , e);
                     }
@@ -39,7 +40,7 @@
         },
 
         events: [
-        CLICK
+            CLICK
         ],
 
         options: {
