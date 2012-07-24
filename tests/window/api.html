@@ -454,6 +454,26 @@
 
                 equal(dialog.wrapper.find(".k-window-titlebar").length, 1);
             });
+
+            test("extending the window does not break the close method", function() {
+                var MyWindow = kendo.ui.Window.extend({
+                    options: {
+                        name: "MyWindow",
+                        animation: false
+                    },
+                    init: function(element, options) {
+                        kendo.ui.Window.prototype.init.apply(this, [element, options])
+                    }
+                });
+
+                kendo.ui.plugin(MyWindow);
+
+                var myWindow = $("<div />").kendoMyWindow().data("kendoMyWindow");
+
+                myWindow.open().close();
+
+                myWindow.destroy();
+            });
         </script>
 
         <h1 id="qunit-header">kendo.ui.Window Tests</h1>

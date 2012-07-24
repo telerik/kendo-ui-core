@@ -46,14 +46,16 @@
         return Math.max(Math.min(value, high), low);
     }
 
-    function windowObject(element) {
-        return element.children(KWINDOWCONTENT).data("kendoWindow");
+    function windowObject(element, name) {
+        var contentElement = element.children(KWINDOWCONTENT);
+
+        return contentElement.data("kendoWindow") || contentElement.data("kendo" + name);
     }
 
-    function openedModalWindows() {
+    function openedModalWindows(name) {
         return $(KWINDOW).filter(function() {
             var wnd = $(this);
-            return wnd.is(VISIBLE) && windowObject(wnd).options.modal;
+            return wnd.is(VISIBLE) && windowObject(wnd, name).options.modal;
         }).sort(function(a, b){
             return +$(a).css("zIndex") - +$(b).css("zIndex");
         });
@@ -427,7 +429,7 @@
             if (wrapper.is(VISIBLE) && !that.trigger(CLOSE)) {
                 options.visible = false;
 
-                modalWindows = openedModalWindows();
+                modalWindows = openedModalWindows(options.name);
 
                 shouldHideOverlay = options.modal && modalWindows.length == 1;
 
@@ -444,7 +446,7 @@
                         overlay.hide();
                     }
                 } else if (modalWindows.length) {
-                    windowObject(modalWindows.eq(modalWindows.length - 2))._overlay(true);
+                    windowObject(modalWindows.eq(modalWindows.length - 2), options.name)._overlay(true);
                 }
 
                 wrapper.kendoStop().kendoAnimate({
@@ -682,7 +684,7 @@
             if (shouldHideOverlay) {
                 that._overlay(false).remove();
             } else if (modalWindows.length > 0) {
-                windowObject(modalWindows.eq(modalWindows.length - 2))._overlay(true);
+                windowObject(modalWindows.eq(modalWindows.length - 2), that.options.name)._overlay(true);
             }
         },
 
