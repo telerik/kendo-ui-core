@@ -4071,16 +4071,30 @@
                 targetSlot = targetAxis.getSlot(targetCrossingValue, targetCrossingValue),
                 targetEdge = targetAxis.options.reverse ? 2 : 1;
 
-            axis.reflow(
-                axis.box.translate(
-                    targetSlot[X + targetEdge] - slot[X + slotEdge],
-                    targetSlot[Y + targetEdge] - slot[Y + slotEdge]
-                )
+            var axisBox = axis.box.translate(
+                targetSlot[X + targetEdge] - slot[X + slotEdge],
+                targetSlot[Y + targetEdge] - slot[Y + slotEdge]
             );
+
+            var paneBox = axis.pane.contentBox;
+
+            if (axisBox.y2 > paneBox.y2) {
+                axisBox.translate(0, paneBox.y2 - axisBox.y2);
+            }
+
+            if (axisBox.x2 > paneBox.x2) {
+                axisBox.translate(paneBox.x2 - axisBox.x2, 0);
+            }
+
+            axis.reflow(axisBox);
         },
 
-        alignAxes: function(xAxes, yAxes, xAnchor, yAnchor) {
+        alignAxes: function(xAnchor, yAnchor, pane) {
             var plotArea = this,
+                xAxes = grep(plotArea.axes, (function(axis) { return !axis.options.vertical; })),
+                yAxes = grep(plotArea.axes, (function(axis) { return axis.options.vertical; })),
+                xAnchor = xAxes[0],
+                yAnchor = yAxes[0],
                 xAnchorCrossings = plotArea.axisCrossingValues(xAnchor, yAxes),
                 yAnchorCrossings = plotArea.axisCrossingValues(yAnchor, xAxes),
                 leftAnchor,
@@ -4093,6 +4107,8 @@
             // TODO: Refactor almost-identical loops
             for (i = 0; i < yAxes.length; i++) {
                 axis = yAxes[i];
+                if (axis.pane !== pane) continue;
+
                 plotArea.alignAxisTo(axis, xAnchor, yAnchorCrossings[i], xAnchorCrossings[i]);
 
                 if (round(axis.lineBox().x1) === round(xAnchor.lineBox().x1)) {
@@ -4104,6 +4120,7 @@
                     }
 
                     leftAnchor = axis;
+                    axis._leftAnchor = true;
                 }
 
                 if (round(axis.lineBox().x2) === round(xAnchor.lineBox().x2)) {
@@ -4121,6 +4138,7 @@
                     }
 
                     rightAnchor = axis;
+                    axis._rightAnchor = true;
                 }
 
                 if (i !== 0) {
@@ -4130,6 +4148,8 @@
 
             for (i = 0; i < xAxes.length; i++) {
                 axis = xAxes[i];
+                if (axis.pane !== pane) continue;
+
                 plotArea.alignAxisTo(axis, yAnchor, xAnchorCrossings[i], yAnchorCrossings[i]);
 
                 if (round(axis.lineBox().y1) === round(yAnchor.lineBox().y1)) {
@@ -4167,13 +4187,28 @@
         },
 
         axisBox: function(axes) {
-            var plotArea = this,
-                box = axes[0].box.clone(),
+            var box = axes[0].box.clone(),
                 i,
                 length = axes.length;
 
             for (i = 1; i < length; i++) {
                 box.wrap(axes[i].box);
+            }
+
+            return box;
+        },
+
+        axisLineBox: function(axes) {
+            if (axes.length === 0) {
+                return new Box2D();
+            }
+
+            var box = axes[0].lineBox(),
+                i,
+                length = axes.length;
+
+            for (i = 1; i < length; i++) {
+                box.wrap(axes[i].lineBox());
             }
 
             return box;
@@ -4257,52 +4292,51 @@
         reflowAxes: function() {
             var plotArea = this,
                 panes = plotArea.panes.slice(0).sort(plotArea.paneComparer),
+                i,
+                panesLength = panes.length,
                 currentPane,
                 axes = plotArea.axes,
                 xAxes = grep(axes, (function(axis) { return !axis.options.vertical; })),
                 yAxes = grep(axes, (function(axis) { return axis.options.vertical; })),
                 xAnchor = xAxes[0],
                 yAnchor = yAxes[0],
-                paneAxes,
-                i,
-                length = axes.length;
+                paneAxes;
 
-            var anchorPane = panes[0];
+            xAnchor.reflow(xAnchor.pane.contentBox);
+            yAnchor.reflow(yAnchor.pane.contentBox);
 
-            for (i = 0; i < length; i++) {
-                axes[i].reflow(anchorPane.contentBox);
+            var anchorBox = plotArea.box.clone();
+
+            for (i = 0; i < panesLength; i++) {
+                currentPane = panes[i];
+                plotArea.reflowPaneAxes(panes[i], xAnchor, yAnchor);
+
+                for (var j = 0; j < currentPane.axes.length; j++) {
+                    // TODO: Top and bottom anchor
+                    var currentAxis = currentPane.axes[j];
+                    if (currentAxis._rightAnchor) {
+                        anchorBox.x2 = math.min(anchorBox.x2, currentAxis.lineBox().x2);
+                    }
+
+                    if (currentAxis._leftAnchor) {
+                        anchorBox.x1 = math.max(anchorBox.x1, currentAxis.lineBox().x1);
+                    }
+                }
             }
 
-            // TODO: Consider going back to per-pane alignment.
-            //       Currently we,re using aligning all axes
-            //       in a single pane only to set left/right
-            //       paddings.
-
-            plotArea.alignAxes(xAxes, yAxes, xAnchor, yAnchor);
-            plotArea.shrinkAdditionalAxes(axes, xAxes, yAxes, xAnchor, yAnchor);
-            plotArea.alignAxes(xAxes, yAxes, xAnchor, yAnchor);
-            plotArea.shrinkAxes(anchorPane, axes);
-            plotArea.alignAxes(xAxes, yAxes, xAnchor, yAnchor);
-            plotArea.fitAxes(anchorPane, axes);
-
-            for (i = 0; i < length; i++) {
-                var axis = axes[i];
-                if (axis.pane !== anchorPane) {
-                    axis.reflow(axis.box.snapTo(axis.pane.contentBox, Y));
+            var axisLineBox;
+            for (i = 0; i < panesLength; i++) {
+                currentPane = panes[i];
+                axisLineBox = plotArea.axisLineBox(currentPane.axes);
+                // TODO: Top and bottom anchor
+                if (axisLineBox.x2 > anchorBox.x2) {
+                    currentPane.options.padding.right = axisLineBox.x2 - anchorBox.x2;
                 }
-
-                    if (!axis.options.vertical) {
-                        var paneYAxes = grep(axis.pane.axes,
-                            (function(axis) { return axis.options.vertical; }));
-
-                        var yAnchor = paneYAxes[0];
-                        var xCrossingValues = plotArea.axisCrossingValues(axis, paneYAxes);
-                        var yCrossingValues = plotArea.axisCrossingValues(yAnchor, [axis]);
-                        // TODO: Align axes to pane anchors
-                        //plotArea.alignAxisTo(axis, yAnchor,
-                        //    xCrossingValues[1],
-                        //    yCrossingValues[0]);
-                    }
+                if (axisLineBox.x1 < anchorBox.x1) {
+                    currentPane.options.padding.left = anchorBox.x1 - axisLineBox.x1;
+                }
+                currentPane.reflow(currentPane.box);
+                plotArea.reflowPaneAxes(panes[i], xAnchor, yAnchor);
             }
         },
 
@@ -4311,6 +4345,33 @@
                 bOrder = valueOrDefault(b.reflowOrder, MAX_VALUE);
 
             return aOrder - bOrder;
+        },
+
+        reflowPaneAxes: function(pane, defaultXAnchor, defaultYAnchor) {
+            var plotArea = this,
+                axes = pane.axes,
+                xAxes = grep(axes, (function(axis) { return !axis.options.vertical; })),
+                yAxes = grep(axes, (function(axis) { return axis.options.vertical; })),
+                xAnchor = xAxes[0] || defaultXAnchor,
+                yAnchor = yAxes[0] || defaultYAnchor,
+                i,
+                length = axes.length;
+
+            if (length > 0) {
+                for (i = 0; i < length; i++) {
+                    axes[i].reflow(pane.contentBox);
+                }
+
+                //if (pane.options.name === "b") debugger;
+                // TODO: Axis crossing values should be treated as global
+
+                plotArea.alignAxes(xAnchor, yAnchor, pane);
+                plotArea.shrinkAdditionalAxes(axes, xAxes, yAxes, xAnchor, yAnchor);
+                plotArea.alignAxes(xAnchor, yAnchor, pane);
+                plotArea.shrinkAxes(pane, axes);
+                plotArea.alignAxes(xAnchor, yAnchor, pane);
+                plotArea.fitAxes(pane, axes);
+            }
         },
 
         reflowCharts: function() {
