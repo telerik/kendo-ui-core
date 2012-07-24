@@ -17,12 +17,16 @@
         GROUP_TEMPLATE = kendo.template('<li><div class="' + GROUP_CLASS + '"><div class="km-text">#= this.headerTemplate(data) #</div></div><ul>#= kendo.render(this.template, data.items)#</ul></li>'),
         WRAPPER = '<div class="km-listview-wrapper" />',
 
-        MOUSEDOWN = support.mousedown,
-        MOUSEMOVE = support.mousemove,
-        MOUSECANCEL = support.mousecancel,
+        ns = ".kendoMobileListView",
         MOUSEUP = support.mouseup,
-
+        MOUSEUP_NS = MOUSEUP + ns,
+        MOUSEDOWN = support.mousedown,
+        MOUSEDOWN_NS = MOUSEDOWN + ns,
+        MOUSEMOVE = support.mousemove + ns,
+        MOUSECANCEL = support.mousecancel + ns,
         CLICK = "click",
+        CLICK_NS = CLICK + ns,
+
         REQUEST_START = "requestStart",
         FUNCTION = "function",
 
@@ -109,9 +113,9 @@
             options = that.options;
 
             that.element
-                .on([MOUSEDOWN, MOUSEUP, MOUSEMOVE, MOUSECANCEL].join(" "), HIGHLIGHT_SELECTOR, toggleItemActiveClass)
-                .on("click", HANDLED_INPUTS_SELECTOR, function (e) { e.preventDefault(); })
-                .on(MOUSEUP, ITEM_SELECTOR, proxy(that._click, that));
+                .on([MOUSEDOWN_NS, MOUSEUP_NS, MOUSEMOVE, MOUSECANCEL].join(" "), HIGHLIGHT_SELECTOR, toggleItemActiveClass)
+                .on(CLICK_NS, HANDLED_INPUTS_SELECTOR, function (e) { e.preventDefault(); })
+                .on(MOUSEUP_NS, ITEM_SELECTOR, proxy(that._click, that));
 
             that.element.wrap(WRAPPER);
             that.wrapper = that.element.parent();
@@ -507,7 +511,7 @@
 
                 if (loadMore) {
                     that._loadButton = $('<button class="km-load km-button">' + options.loadMoreText + '</button>')
-                                        .click(function() {
+                                        .on(CLICK_NS, function() {
                                            that.loading = true;
                                            that._toggleButton(false);
                                            that.dataSource.next();
