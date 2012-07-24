@@ -8,11 +8,13 @@
             "hsl": [ "h", "s", "l", "a" ]
         },
         colorwheel = {
-            complementary: [ 180 ],
+            complement: [ 180 ],
+            diad: [ 60 ],
             analogous: [ 30, -30 ],
             split: [ 150, -150 ],
             triad: [ 120, -120 ],
-            tetradic: [ 60, 180, -150 ],
+            double: [ 30, 180, -150 ],
+            tetradic: [ 60, 180, -120 ],
             square: [ 90, 180, -90 ]
         },
         clamps = { h: 360, s: 100, l: 100, a: 1 },
@@ -297,9 +299,18 @@
         },
 
         complement: function (color, type) {
-            var hsl = this.rgb2hsl(this.css2rgba(color));
+            var that = this,
+                hsl = that.rgb2hsl(that.css2rgba(color)),
+                wheel = colorwheel[type],
+                colors;
 
+            colors = $.map(wheel, function (value) {
+                var temp = $.extend({}, hsl);
+                temp.h = (temp.h + value) % 360;
+                return that.rgb2hex(that.hsl2rgb(temp));
+            });
 
+            return colors;
         },
 
         rgb2hsl: function(color) {
