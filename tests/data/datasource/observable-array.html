@@ -82,6 +82,14 @@
                 strictEqual(dataSource.data(), data);
             });
 
+
+            test("field is not assigned if is undefined", function() {
+                var data = new kendo.data.ObservableObject({foo: 1, bar: undefined });
+
+                strictEqual(data.foo, 1);
+                strictEqual(data.bar, undefined);
+            });
+
             test("data parent field is assign if observable array is assign", function() {
                 var viewModel = kendo.observable({
                     data: [{foo: 1 }],

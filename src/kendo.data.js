@@ -327,7 +327,7 @@
                 type = toString.call(object),
                 isObservableArray = object instanceof ObservableArray;
 
-            if (object !== null && type === "[object Object]" && !(object instanceof DataSource) && !isObservableArray) {
+            if (object !== null && object !== undefined && type === "[object Object]" && !(object instanceof DataSource) && !isObservableArray) {
                 if (!(object instanceof ObservableObject)) {
                     object = new ObservableObject(object);
                 }
