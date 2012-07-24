@@ -38,6 +38,10 @@
         MINIMIZE_MAXIMIZE = ".k-window-actions .k-i-minimize,.k-window-actions .k-i-maximize",
         isLocalUrl = kendo.isLocalUrl;
 
+    function defined(x) {
+        return (typeof x != "undefined");
+    }
+
     function constrain(value, low, high) {
         return Math.max(Math.min(value, high), low);
     }
@@ -117,7 +121,7 @@
                 }
             }
 
-            if (typeof options.visible == "undefined") {
+            if (!defined(options.visible)) {
                 options.visible = element.is(VISIBLE);
             }
 
@@ -587,7 +591,7 @@
                 initOptions = that.options,
                 element = $(that.element),
                 iframe,
-                showIframe = initOptions.iframe,
+                showIframe,
                 url;
 
             if (!isPlainObject(options)) {
@@ -596,10 +600,12 @@
 
             options = extend({}, initOptions.content, options);
 
+            showIframe = defined(initOptions.iframe) ? initOptions.iframe : options.iframe;
+
             url = options.url;
 
             if (url) {
-                if (typeof showIframe == "undefined") {
+                if (!defined(showIframe)) {
                     showIframe = !isLocalUrl(url);
                 }
 

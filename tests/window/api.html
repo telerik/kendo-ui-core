@@ -291,6 +291,25 @@
                 equal(iframe.attr("src"), "foo");
             });
 
+            test("refresh() creates iframe if iframe:true", function() {
+                $.mockjax({
+                    url: "foo",
+                    responseText: "server foo"
+                });
+
+                var dialog = createWindow();
+
+                dialog.refresh({
+                    url: "foo",
+                    iframe: true
+                });
+
+                var iframe = dialog.wrapper.find("iframe");
+
+                equal(iframe.length, 1);
+                equal(iframe.attr("src"), "foo");
+            });
+
             function wrapper(windowObject) {
                 return windowObject.element.closest(".k-window");
             }
