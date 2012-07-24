@@ -8,9 +8,9 @@
         ANDROID3UP = os.android && os.flatVersion >= 300,
         ns = ".kendoMobileButton",
         MOUSECANCEL = support.mousecancel + ns,
-        MOUSEDOWN = support.mousedown + ns,
         MOUSEMOVE = support.mousemove + ns,
         MOUSEUP = support.mouseup + ns,
+        MOUSEDOWN = support.mousedown,
         CLICK = "click",
         removeActiveID = 0,
         proxy = $.proxy;
@@ -20,6 +20,7 @@
             var that = this;
 
             Widget.fn.init.call(that, element, options);
+            element = that.element;
 
             that._wrap();
             that._style();
@@ -27,13 +28,13 @@
             that._releaseProxy = proxy(that._release, that);
             that._removeProxy = proxy(that._removeActive, that);
 
-            that.element.on(MOUSEUP, that._releaseProxy);
-            that.element.on(MOUSEDOWN + " " + MOUSECANCEL + " " + MOUSEUP, that._removeProxy);
+            element.on(MOUSEUP, that._releaseProxy);
+            element.on(MOUSEDOWN + ns + " " + MOUSECANCEL + " " + MOUSEUP, that._removeProxy);
 
             if (ANDROID3UP) {
-                that.element.on(MOUSEMOVE, function (e) {
+                element.on(MOUSEMOVE, function (e) {
                     if (!removeActiveID) {
-                        removeActiveID = setTimeout(that._removeProxy, 500 , e);
+                        removeActiveID = setTimeout(that._removeProxy, 500, e);
                     }
                 });
             }
@@ -47,6 +48,11 @@
             name: "Button",
             icon: "",
             style: ""
+        },
+
+        destroy: function() {
+            Widget.fn.destroy.call(this);
+            this.element.off(ns);
         },
 
         _removeActive: function (e) {
