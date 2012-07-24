@@ -748,7 +748,7 @@ namespace Kendo.Mvc.UI
                 }
             }
 
-            if (Editable.Enabled && IsClientBinding)
+            if (Editable.Enabled)
             {
                 options["editable"] = Editable.ToJson();
             }
