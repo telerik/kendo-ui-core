@@ -17,16 +17,17 @@
         GROUP_TEMPLATE = kendo.template('<li><div class="' + GROUP_CLASS + '"><div class="km-text">#= this.headerTemplate(data) #</div></div><ul>#= kendo.render(this.template, data.items)#</ul></li>'),
         WRAPPER = '<div class="km-listview-wrapper" />',
 
-        ns = ".kendoMobileListView",
+        NS = ".kendoMobileListView",
         MOUSEUP = support.mouseup,
-        MOUSEUP_NS = MOUSEUP + ns,
+        MOUSEUP_NS = MOUSEUP + NS,
         MOUSEDOWN = support.mousedown,
-        MOUSEDOWN_NS = MOUSEDOWN + ns,
-        MOUSEMOVE = support.mousemove + ns,
-        MOUSECANCEL = support.mousecancel + ns,
+        MOUSEDOWN_NS = MOUSEDOWN + NS,
+        MOUSEMOVE = support.mousemove + NS,
+        MOUSECANCEL = support.mousecancel + NS,
         CLICK = "click",
-        CLICK_NS = CLICK + ns,
+        CLICK_NS = CLICK + NS,
 
+        CHANGE = "change",
         REQUEST_START = "requestStart",
         FUNCTION = "function",
 
@@ -173,6 +174,20 @@
             }
         },
 
+        destroy: function() {
+            var that = this;
+
+            Widget.fn.destroy.call(that);
+
+            that._unbindDataSource();
+
+            that.element
+                .add(that._loadButton)
+                .off(NS);
+
+            kendo.destroy(that.element);
+        },
+
         refresh: function(e) {
             e = e || {};
 
@@ -254,23 +269,29 @@
             }
         },
 
+        _unbindDataSource: function() {
+            var that = this;
+
+            that.dataSource.unbind(CHANGE, that._refreshHandler)
+                           .unbind(REQUEST_START, that._requestStartHandler);
+        },
+
         _dataSource: function() {
             var that = this,
-                options = that.options,
-                showLoading = $.proxy(that._showLoading, that);
+                options = that.options;
 
             if (that.dataSource && that._refreshHandler) {
-                that.dataSource.unbind("change", that._refreshHandler)
-                               .unbind(REQUEST_START, showLoading);
+                that._unbindDataSource();
             } else {
-                that._refreshHandler = proxy(that.refresh, that);
+                that._refreshHandler = $.proxy(that.refresh, that);
+                that._requestStartHandler = $.proxy(that._showLoading, that);
             }
 
             that.dataSource = DataSource.create(options.dataSource)
-                                        .bind("change", that._refreshHandler);
+                                        .bind(CHANGE, that._refreshHandler);
 
             if (!options.pullToRefresh && !options.loadMore && !options.endlessScroll) {
-                that.dataSource.bind(REQUEST_START, showLoading);
+                that.dataSource.bind(REQUEST_START, that._requestStartHandler);
             }
         },
 
