@@ -129,7 +129,12 @@ namespace Kendo.Mvc.UI
             
             if (ClientFooterTemplate.HasValue())
             {
-                json["footerTemplate"] = ClientFooterTemplate;
+                json["footerTemplate"] = HttpUtility.UrlDecode(ClientFooterTemplate);
+            }
+
+            if (!Encoded)
+            {
+                json["encoded"] = Encoded;
             }
         }       
         
