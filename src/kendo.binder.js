@@ -501,7 +501,9 @@
                     var index;
 
                     if (source instanceof ObservableArray) {
-                        if (value !== false && value !== true) {
+                        value = this.element.value;
+
+                        if (value !== "on" && value !== "off") {
                             index = source.indexOf(value);
                             if (index > -1) {
                                 source.splice(index, 1);
@@ -516,12 +518,14 @@
             },
 
             refresh: function() {
-                var value = this.bindings[CHECKED].get();
-                var element = this.element;
+                var value = this.bindings[CHECKED].get(),
+                    source = value,
+                    element = this.element;
 
                 if (element.type == "checkbox") {
-                    if (value instanceof ObservableArray) {
-                        if (value.indexOf(this.value(element)) >= 0) {
+                    if (source instanceof ObservableArray) {
+                        value = this.element.value;
+                        if (source.indexOf(value) >= 0) {
                             value = true;
                         }
                     }
@@ -539,9 +543,7 @@
                     value = element.value;
 
                 if (element.type == "checkbox") {
-                    if (value == "on" || value == "off" || value === "true") {
-                        value = element.checked;
-                    }
+                    value = element.checked;
                 }
 
                 return value;

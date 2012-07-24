@@ -526,7 +526,7 @@
                 ok(dom.is(":checked"));
             });
 
-            test("checked binding binds radiobutton too number value", function() {
+            test("checked binding binds radiobutton to number value", function() {
                 var dom = $('<input type="radio" value="1" data-bind="checked:selectedItem"/>');
 
                 var viewModel = kendo.observable({

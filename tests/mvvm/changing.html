@@ -393,6 +393,19 @@
                 equal(viewModel.foo, false);
             });
 
+            test("changing checkbox value updates the view model with the checked state", function() {
+                var dom = $('<input type="checkbox" value="foo" data-bind="checked:foo"/>');
+
+                var viewModel = kendo.observable( { foo: false });
+
+                kendo.bind(dom, viewModel);
+
+                dom.attr("checked", true);
+                dom.trigger("change");
+
+                equal(viewModel.foo, true);
+            });
+
             test("checking checkbox adds the value to the view model", function() {
                 var dom = $('<input type="checkbox" value="bar" data-bind="checked:foo"/>');
 
