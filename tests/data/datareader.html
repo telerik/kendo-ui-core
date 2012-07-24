@@ -123,6 +123,30 @@
                 strictEqual(result.value, 0);
             });
 
+            test("converts field values to the specifed type with external model definition", function() {
+                var Model = kendo.data.Model.define({
+                    fields: {
+                        bar: { type: "number" },
+                        baz: "baz"
+                    }
+                });
+
+                var reader = new DataReader({
+                    model: Model
+                });
+
+                var result = reader.parse([{ bar: "1", baz: "baz1"}, { bar: "", baz: "baz2"}, { bar: "0", baz: "baz3"}]);
+                result = reader.data(result);
+
+                equal(result.length, 3);
+                strictEqual(result[0].bar, 1);
+                strictEqual(result[0].baz, "baz1");
+                strictEqual(result[1].bar, null);
+                strictEqual(result[1].baz, "baz2");
+                strictEqual(result[2].bar, 0);
+                strictEqual(result[2].baz, "baz3");
+            });
+
             test("converts field values to the specifed type with multiple nested server groups", function() {
                 var reader = new DataReader({
                     model: {

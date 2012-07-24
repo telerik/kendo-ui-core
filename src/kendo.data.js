@@ -1431,10 +1431,14 @@
 
             if (isPlainObject(that.model)) {
                 that.model = model = base.define(that.model);
+            }
 
+            if (that.model) {
                 var dataFunction = proxy(that.data, that),
                     groupsFunction = proxy(that.groups, that),
                     getters = {};
+
+                model = that.model;
 
                 if (model.fields) {
                     each(model.fields, function(field, value) {
