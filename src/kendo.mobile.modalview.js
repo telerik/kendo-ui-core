@@ -48,6 +48,11 @@
             height: null
         },
 
+        destroy: function() {
+            Widget.fn.destroy.call(this);
+            this.shim.destroy();
+        },
+
         open: function(target) {
             var that = this;
             that.trigger(OPEN);

@@ -4,18 +4,20 @@
         Shim = ui.Shim,
         Popup = ui.Popup,
         Widget = ui.Widget,
+        ns = ".kendoMobileActionSheet",
         OPEN = "open",
         BUTTONS = "li>a",
         CONTEXT_DATA = "actionsheetContext",
         WRAP = '<div class="km-actionsheet-wrapper" />',
-        cancelTemplate = kendo.template('<li class="km-actionsheet-cancel"><a href="\\#">#:cancel#</a></li>');
+        cancelTemplate = kendo.template('<li class="km-actionsheet-cancel"><a href="\\#">#:cancel#</a></li>'),
+        MOUSEUP = kendo.support.mouseup + ns,
+        CLICK = "click" + ns;
 
     var ActionSheet = Widget.extend({
         init: function(element, options) {
             var that = this,
                 os = kendo.support.mobileOS,
-                ShimClass = os.tablet ? Popup : Shim,
-                wrapper;
+                ShimClass = os.tablet ? Popup : Shim;
 
             Widget.fn.init.call(that, element, options);
 
@@ -25,12 +27,10 @@
                 .addClass("km-actionsheet")
                 .append(cancelTemplate({cancel: that.options.cancel}))
                 .wrap(WRAP)
-                .on(kendo.support.mouseup, BUTTONS, $.proxy(that._click, that))
-                .on("click", BUTTONS, kendo.preventDefault);
+                .on(MOUSEUP, BUTTONS, $.proxy(that._click, that))
+                .on(CLICK, BUTTONS, kendo.preventDefault);
 
-            wrapper = element.parent();
-
-            that.wrapper = wrapper;
+            that.wrapper = element.parent();
             that.shim = new ShimClass(that.wrapper, $.extend({modal: !(os.android || os.meego)}, that.options.popup) );
 
             kendo.notify(that, ui);
@@ -59,13 +59,18 @@
             this.shim.hide();
         },
 
-        
         openFor: function(target) {
             var that = this;
             that.target = target;
             that.context = target.data(CONTEXT_DATA);
             that.trigger(OPEN, { target: that.target, context: that.context });
             that.shim.show(target);
+        },
+
+        destroy: function() {
+            Widget.fn.destroy.call(this);
+            this.element.off(ns);
+            this.shim.destroy();
         },
 
         _click: function(e) {
