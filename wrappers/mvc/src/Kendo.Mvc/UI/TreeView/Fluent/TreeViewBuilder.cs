@@ -543,5 +543,24 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        /// <summary>
+        /// Allows the treeview to fetch the entire datasource at initialization time.
+        /// </summary>
+        /// <param name="field">Whether the datasource should be loaded on demand.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().TreeView()
+        ///             .Name("TreeView")
+        ///             .LoadOnDemand(false)
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TreeViewBuilder LoadOnDemand(bool value)
+        {
+            Component.LoadOnDemand = value;
+
+            return this;
+        }
     }
 }
