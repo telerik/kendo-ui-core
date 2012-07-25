@@ -296,6 +296,14 @@
             that.xinertia.onEnd();
         },
 
+        destroy: function() {
+            var that = this;
+
+            Widget.fn.destroy.call(that);
+
+            that.drag.destroy();
+        },
+
         _initPullToRefresh: function() {
             var that = this;
 
