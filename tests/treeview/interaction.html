@@ -518,6 +518,66 @@
                 ok(!treeview.find(":checkbox").is(":checked"));
             });
 
+            test("blurring the treeview triggers select event", function() {
+                var triggeredCount = 0;
+
+                createTreeView({
+                    dataSource: [
+                        { text: "foo", selected: true },
+                        { text: "bar" }
+                    ],
+                    select: function() {
+                        triggeredCount++;
+                    }
+                });
+
+                treeview.focus();
+                treeview.press(kendo.keys.DOWN);
+                treeview.blur();
+
+                equal(triggeredCount, 1);
+
+            });
+
+            test("blurring the treeview does not trigger select event, if selection has not changed", function() {
+                var triggeredCount = 0;
+
+                createTreeView({
+                    dataSource: [
+                        { text: "foo", selected: true },
+                        { text: "bar" }
+                    ],
+                    select: function() {
+                        triggeredCount++;
+                    }
+                });
+
+                treeview.focus();
+                treeview.press(kendo.keys.DOWN);
+                treeview.press(kendo.keys.UP);
+                treeview.blur();
+
+                equal(triggeredCount, 0);
+            });
+
+            test("blurring without changing the selection does not trigger select event", function() {
+                var triggeredCount = 0;
+
+                createTreeView({
+                    dataSource: [
+                        { text: "foo", selected: true },
+                        { text: "bar" }
+                    ],
+                    select: function() {
+                        triggeredCount++;
+                    }
+                });
+
+                treeview.focus();
+                treeview.blur();
+
+                equal(triggeredCount, 0);
+            });
         </script>
 
         <div id="qunit-fixture"> </div>

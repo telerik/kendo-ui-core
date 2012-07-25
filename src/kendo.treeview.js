@@ -197,10 +197,11 @@
                 .on(MOUSEENTER + NS, clickableItems, function () { $(this).addClass(KSTATEHOVER); })
                 .on("mouseleave" + NS, clickableItems, function () { $(this).removeClass(KSTATEHOVER); })
                 .on(CLICK + NS, clickableItems, proxy(that._nodeClick, that))
-                .on("keydown" + NS, proxy(that._keydown, that))
                 .on("dblclick" + NS, "div:not(.k-state-disabled) .k-in", proxy(that._toggleButtonClick, that))
-                .on(CLICK + NS, ".k-plus,.k-minus", proxy(that._toggleButtonClick, that));
-
+                .on(CLICK + NS, ".k-plus,.k-minus", proxy(that._toggleButtonClick, that))
+                .on("keydown" + NS, proxy(that._keydown, that))
+                .on("focus" + NS, proxy(that._focus, that))
+                .on("blur" + NS, proxy(that._blur, that));
         },
 
         _attachUids: function(root, dataSource) {
@@ -437,6 +438,19 @@
 
         _toggleButtonClick: function (e) {
             this.toggle($(e.target).closest(NODE));
+        },
+
+        _focus: function(e) {
+            this._oldSelection = this.select()[0];
+        },
+
+        _blur: function(e) {
+            var that = this,
+                selection = that.select();
+
+            if (selection[0] != that._oldSelection) {
+                that._trigger(SELECT, selection);
+            }
         },
 
         _keydown: function(e) {
