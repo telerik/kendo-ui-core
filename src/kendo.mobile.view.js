@@ -46,6 +46,16 @@
             model: null
         },
 
+        destroy: function() {
+            Widget.fn.destroy.call(this);
+
+            if (this.scroller) {
+                this.scroller.destroy();
+            }
+
+            kendo.destroy(this.element);
+        },
+
         showStart: function() {
             var that = this;
             that.element.css("display", "");

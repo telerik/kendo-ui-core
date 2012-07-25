@@ -4,7 +4,8 @@
         ui = kendo.mobile.ui,
         Popup = kendo.ui.Popup,
         SHIM = '<div class="km-shim"/>',
-        Widget = ui.Widget;
+        Widget = ui.Widget,
+        MOUSEUP = kendo.support.mouseup + ".kendoMobileShim";
 
     var Shim = Widget.extend({
         init: function(element, options) {
@@ -23,7 +24,7 @@
             that.element = element;
 
             if (!that.options.modal) {
-                that.shim.on(kendo.support.mouseup, $.proxy(that.hide, that));
+                that.shim.on(MOUSEUP, $.proxy(that.hide, that));
             }
 
             container.append(shim);
@@ -68,6 +69,12 @@
 
         hide: function() {
             this.popup.close();
+        },
+
+        destroy: function() {
+            Widget.fn.destroy.call(this);
+            this.shim.off(MOUSEUP);
+            this.popup.destroy();
         }
     });
 

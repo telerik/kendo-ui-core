@@ -21,7 +21,12 @@
         data = kendo.data,
         // navigation element roles
         buttonRoles = "button backbutton detailbutton listview-link",
-        linkRoles = "tab";
+        linkRoles = "tab",
+        NS = ".kendoMobilePane",
+        MOUSEDOWN = support.mousedown + NS,
+        MOUSEUP = support.mouseup + NS,
+        CLICK = "click" + NS,
+        TOUCHSTART = "touchstart" + NS;
 
     function appLinkClick(e) {
         if(data($(e.currentTarget), "rel") != EXTERNAL) {
@@ -70,6 +75,14 @@
             VIEW_SHOW
         ],
 
+        destroy: function() {
+            Widget.fn.destroy.call(this);
+
+            this.element.off(NS);
+
+            kendo.destroy(this.element);
+        },
+
         navigate: function(url, transition) {
             var that = this,
                 history = that.history;
@@ -102,12 +115,11 @@
                 mouseup = $.proxy(that._mouseup, that);
 
             that.element
-                .on(support.mousedown, roleSelector(linkRoles), mouseup)
-                .on(support.mouseup, roleSelector(buttonRoles), mouseup)
-                .on("click", roleSelector(linkRoles + " " + buttonRoles), appLinkClick)
-                .on("touchstart", roleSelector(buttonRoles), false); // Bust the ghost click
-
-            that.element.on("touchstart", ".km-popup .k-item", false); // Prevent ghost clicks in DropDownList
+                .on(MOUSEDOWN, roleSelector(linkRoles), mouseup)
+                .on(MOUSEUP, roleSelector(buttonRoles), mouseup)
+                .on(CLICK, roleSelector(linkRoles + " " + buttonRoles), appLinkClick)
+                .on(TOUCHSTART, roleSelector(buttonRoles), false) // Bust the ghost click
+                .on(TOUCHSTART, ".km-popup .k-item", false); // Prevent ghost clicks in DropDownList
         },
 
         _mouseup: function(e) {

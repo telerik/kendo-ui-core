@@ -26,8 +26,8 @@
             that._background();
             that._handle();
 
-            element = that.element.data(kendo.attr("role"), "switch");
-            element[0].type = "checkbox";
+            element = that.element[0];
+            element.type = "checkbox";
 
             width = that.wrapper.width();
             handleWidth = that.handle.outerWidth(true);
@@ -38,7 +38,7 @@
 
             checked = that.options.checked;
             if (checked === null) {
-                checked = element[0].checked;
+                checked = element.checked;
             }
 
             that.check(checked);
@@ -69,6 +69,11 @@
             that.wrapper
                 .toggleClass(SWITCHON, check)
                 .toggleClass(SWITCHOFF, !check);
+        },
+
+        destroy: function() {
+            Widget.fn.destroy.call(this);
+            this.drag.destroy();
         },
 
         toggle: function() {

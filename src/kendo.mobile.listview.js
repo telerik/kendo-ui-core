@@ -17,12 +17,17 @@
         GROUP_TEMPLATE = kendo.template('<li><div class="' + GROUP_CLASS + '"><div class="km-text">#= this.headerTemplate(data) #</div></div><ul>#= kendo.render(this.template, data.items)#</ul></li>'),
         WRAPPER = '<div class="km-listview-wrapper" />',
 
-        MOUSEDOWN = support.mousedown,
-        MOUSEMOVE = support.mousemove,
-        MOUSECANCEL = support.mousecancel,
+        NS = ".kendoMobileListView",
         MOUSEUP = support.mouseup,
-
+        MOUSEUP_NS = MOUSEUP + NS,
+        MOUSEDOWN = support.mousedown,
+        MOUSEDOWN_NS = MOUSEDOWN + NS,
+        MOUSEMOVE = support.mousemove + NS,
+        MOUSECANCEL = support.mousecancel + NS,
         CLICK = "click",
+        CLICK_NS = CLICK + NS,
+
+        CHANGE = "change",
         REQUEST_START = "requestStart",
         FUNCTION = "function",
 
@@ -109,9 +114,9 @@
             options = that.options;
 
             that.element
-                .on([MOUSEDOWN, MOUSEUP, MOUSEMOVE, MOUSECANCEL].join(" "), HIGHLIGHT_SELECTOR, toggleItemActiveClass)
-                .on("click", HANDLED_INPUTS_SELECTOR, function (e) { e.preventDefault(); })
-                .on(MOUSEUP, ITEM_SELECTOR, proxy(that._click, that));
+                .on([MOUSEDOWN_NS, MOUSEUP_NS, MOUSEMOVE, MOUSECANCEL].join(" "), HIGHLIGHT_SELECTOR, toggleItemActiveClass)
+                .on(CLICK_NS, HANDLED_INPUTS_SELECTOR, function (e) { e.preventDefault(); })
+                .on(MOUSEUP_NS, ITEM_SELECTOR, proxy(that._click, that));
 
             that.element.wrap(WRAPPER);
             that.wrapper = that.element.parent();
@@ -167,6 +172,20 @@
             if (this.options.autoBind) {
                 dataSource.fetch();
             }
+        },
+
+        destroy: function() {
+            var that = this;
+
+            Widget.fn.destroy.call(that);
+
+            that._unbindDataSource();
+
+            that.element
+                .add(that._loadButton)
+                .off(NS);
+
+            kendo.destroy(that.element);
         },
 
         refresh: function(e) {
@@ -250,23 +269,29 @@
             }
         },
 
+        _unbindDataSource: function() {
+            var that = this;
+
+            that.dataSource.unbind(CHANGE, that._refreshHandler)
+                           .unbind(REQUEST_START, that._requestStartHandler);
+        },
+
         _dataSource: function() {
             var that = this,
-                options = that.options,
-                showLoading = $.proxy(that._showLoading, that);
+                options = that.options;
 
             if (that.dataSource && that._refreshHandler) {
-                that.dataSource.unbind("change", that._refreshHandler)
-                               .unbind(REQUEST_START, showLoading);
+                that._unbindDataSource();
             } else {
-                that._refreshHandler = proxy(that.refresh, that);
+                that._refreshHandler = $.proxy(that.refresh, that);
+                that._requestStartHandler = $.proxy(that._showLoading, that);
             }
 
             that.dataSource = DataSource.create(options.dataSource)
-                                        .bind("change", that._refreshHandler);
+                                        .bind(CHANGE, that._refreshHandler);
 
             if (!options.pullToRefresh && !options.loadMore && !options.endlessScroll) {
-                that.dataSource.bind(REQUEST_START, showLoading);
+                that.dataSource.bind(REQUEST_START, that._requestStartHandler);
             }
         },
 
@@ -507,7 +532,7 @@
 
                 if (loadMore) {
                     that._loadButton = $('<button class="km-load km-button">' + options.loadMoreText + '</button>')
-                                        .click(function() {
+                                        .on(CLICK_NS, function() {
                                            that.loading = true;
                                            that._toggleButton(false);
                                            that.dataSource.next();

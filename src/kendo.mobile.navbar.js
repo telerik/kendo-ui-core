@@ -36,6 +36,11 @@
 
         viewShow: function(view) {
             this.title(view.options.title);
+        },
+
+        destroy: function() {
+            Widget.fn.destroy.call(this);
+            kendo.destroy(this.element);
         }
     });
 
