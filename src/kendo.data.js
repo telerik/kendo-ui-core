@@ -2876,7 +2876,11 @@
         },
 
         shouldSerialize: function(field) {
-            return Model.fn.shouldSerialize.call(this, field) && field !== "children" && field !== "_loaded" && field !== "hasChildren";
+            return Model.fn.shouldSerialize.call(this, field) &&
+                    field !== "children" &&
+                    field !== "_loaded" &&
+                    field !== "hasChildren" &&
+                    field !== "_childrenOptions";
         }
     });
 
