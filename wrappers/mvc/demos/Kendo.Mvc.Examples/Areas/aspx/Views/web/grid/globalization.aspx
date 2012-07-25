@@ -2,7 +2,7 @@
     Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.ProductViewModel>>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <script src="<%= Url.Content("~/Scripts/cultures/kendo.culture." + System.Threading.Thread.CurrentThread.CurrentUICulture + ".js") %>"></script>
+    <script src="<%= Url.Content("~/Scripts/cultures/kendo.culture." + System.Threading.Thread.CurrentThread.CurrentUICulture + ".min.js") %>"></script>
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
