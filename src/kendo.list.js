@@ -16,6 +16,7 @@
         CLOSE = "close",
         SELECT = "select",
         SELECTED = "selected",
+        REQUESTSTART = "requestStart",
         extend = $.extend,
         proxy = $.proxy,
         isIE8 = $.browser.msie && parseInt($.browser.version, 10) < 9,
@@ -76,6 +77,10 @@
             var that = this,
                 ns = that.ns;
 
+            Widget.fn.destroy.call(that);
+
+            that._unbindDataSource();
+
             that.ul.off(ns);
             that.list.off(ns);
 
@@ -84,8 +89,6 @@
             if (that._form) {
                 that._form.off("reset", that._resetHandler);
             }
-
-            Widget.fn.destroy.call(that);
         },
 
         dataItem: function(index) {
@@ -461,8 +464,7 @@
             }
 
             if (that.dataSource && that._refreshHandler) {
-                that.dataSource.unbind(CHANGE, that._refreshHandler)
-                               .unbind("requestStart", that._requestStartHandler);
+                that._unbindDataSource();
             } else {
                 that._refreshHandler = proxy(that.refresh, that);
                 that._requestStartHandler = proxy(that._showBusy, that);
@@ -470,7 +472,14 @@
 
             that.dataSource = kendo.data.DataSource.create(dataSource)
                                    .bind(CHANGE, that._refreshHandler)
-                                   .bind("requestStart", that._requestStartHandler);
+                                   .bind(REQUESTSTART, that._requestStartHandler);
+        },
+
+        _unbindDataSource: function() {
+            var that = this;
+
+            that.dataSource.unbind(CHANGE, that._refreshHandler)
+                           .unbind(REQUESTSTART, that._requestStartHandler);
         },
 
         _index: function(value) {
