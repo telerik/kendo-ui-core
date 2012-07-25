@@ -4053,8 +4053,13 @@
 
         axisCrossingValues: function(axis, crossingAxes) {
             var options = axis.options,
-                crossingValues = [].concat(options.axisCrossingValue),
-                valuesToAdd = crossingAxes.length - crossingValues.length,
+                crossingValues = [].concat(options.axisCrossingValue);
+
+            var allCrossingAxes = grep(this.axes,
+                function(ca) { return ca.options.vertical != axis.options.vertical; }
+            );
+
+            var valuesToAdd = allCrossingAxes.length - crossingValues.length,
                 defaultValue = crossingValues[0] || 0,
                 i;
 
@@ -4062,7 +4067,17 @@
                 crossingValues.push(defaultValue);
             }
 
-            return crossingValues;
+            var result = [];
+            for (i = 0; i < allCrossingAxes.length; i++) {
+                for (var j = 0; j < crossingAxes.length; j++) {
+                    if (crossingAxes[j] === allCrossingAxes[i]) {
+                        result.push(crossingValues[i]);
+                        break;
+                    }
+                }
+            }
+
+            return result;
         },
 
         alignAxisTo: function(axis, targetAxis, crossingValue, targetCrossingValue) {
@@ -4089,12 +4104,8 @@
             axis.reflow(axisBox);
         },
 
-        alignAxes: function(xAnchor, yAnchor, pane) {
+        alignAxes: function(xAxes, yAxes, xAnchor, yAnchor) {
             var plotArea = this,
-                xAxes = grep(plotArea.axes, (function(axis) { return !axis.options.vertical; })),
-                yAxes = grep(plotArea.axes, (function(axis) { return axis.options.vertical; })),
-                xAnchor = xAxes[0],
-                yAnchor = yAxes[0],
                 xAnchorCrossings = plotArea.axisCrossingValues(xAnchor, yAxes),
                 yAnchorCrossings = plotArea.axisCrossingValues(yAnchor, xAxes),
                 leftAnchor,
@@ -4107,8 +4118,6 @@
             // TODO: Refactor almost-identical loops
             for (i = 0; i < yAxes.length; i++) {
                 axis = yAxes[i];
-                if (axis.pane !== pane) continue;
-
                 plotArea.alignAxisTo(axis, xAnchor, yAnchorCrossings[i], xAnchorCrossings[i]);
 
                 if (round(axis.lineBox().x1) === round(xAnchor.lineBox().x1)) {
@@ -4148,8 +4157,6 @@
 
             for (i = 0; i < xAxes.length; i++) {
                 axis = xAxes[i];
-                if (axis.pane !== pane) continue;
-
                 plotArea.alignAxisTo(axis, yAnchor, xAnchorCrossings[i], yAnchorCrossings[i]);
 
                 if (round(axis.lineBox().y1) === round(yAnchor.lineBox().y1)) {
@@ -4317,7 +4324,6 @@
                     if (currentAxis._rightAnchor) {
                         anchorBox.x2 = math.min(anchorBox.x2, currentAxis.lineBox().x2);
                     }
-
                     if (currentAxis._leftAnchor) {
                         anchorBox.x1 = math.max(anchorBox.x1, currentAxis.lineBox().x1);
                     }
@@ -4328,7 +4334,6 @@
             for (i = 0; i < panesLength; i++) {
                 currentPane = panes[i];
                 axisLineBox = plotArea.axisLineBox(currentPane.axes);
-                // TODO: Top and bottom anchor
                 if (axisLineBox.x2 > anchorBox.x2) {
                     currentPane.options.padding.right = axisLineBox.x2 - anchorBox.x2;
                 }
@@ -4365,11 +4370,11 @@
                 //if (pane.options.name === "b") debugger;
                 // TODO: Axis crossing values should be treated as global
 
-                plotArea.alignAxes(xAnchor, yAnchor, pane);
+                plotArea.alignAxes(xAxes, yAxes, xAnchor, yAnchor);
                 plotArea.shrinkAdditionalAxes(axes, xAxes, yAxes, xAnchor, yAnchor);
-                plotArea.alignAxes(xAnchor, yAnchor, pane);
+                plotArea.alignAxes(xAxes, yAxes, xAnchor, yAnchor);
                 plotArea.shrinkAxes(pane, axes);
-                plotArea.alignAxes(xAnchor, yAnchor, pane);
+                plotArea.alignAxes(xAxes, yAxes, xAnchor, yAnchor);
                 plotArea.fitAxes(pane, axes);
             }
         },
