@@ -2862,10 +2862,10 @@
             return DataSource.fn.insert.call(this, index, model);
         },
 
-        getByUid: function(uid) {
+        _find: function(method, value) {
             var idx, length, node, data, children;
 
-            node = DataSource.fn.getByUid.call(this, uid);
+            node = DataSource.fn[method].call(this, value);
 
             if (node) {
                 return node;
@@ -2880,12 +2880,20 @@
                     continue;
                 }
 
-                node = children.getByUid(uid);
+                node = children[method](value);
 
                 if (node) {
                     return node;
                 }
             }
+        },
+
+        get: function(id) {
+            return this._find("get", id);
+        },
+
+        getByUid: function(uid) {
+            return this._find("getByUid", uid);
         }
     });
 
