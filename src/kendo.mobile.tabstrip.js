@@ -5,6 +5,8 @@
         support = kendo.support,
         ACTIVE_STATE_CLASS = "km-state-active",
         SELECT = "select",
+        NS = ".kendoMobileTabStrip",
+        MOUSEDOWN = support.mousedown + NS,
         proxy = $.proxy;
 
     var TabStrip = Widget.extend({
@@ -19,7 +21,7 @@
 
             that.element.find("a")
                             .each(that._buildButton)
-                            .bind(support.mousedown, that._releaseProxy)
+                            .on(MOUSEDOWN, that._releaseProxy)
                             .eq(that.options.selectedIndex).addClass(ACTIVE_STATE_CLASS);
         },
 
@@ -87,6 +89,11 @@
         viewShow: function(view) {
             var that = this;
             that.switchTo(view.id);
+        },
+
+        destroy: function() {
+            Widget.fn.destroy.call(this);
+            this.element.find("a").off(NS);
         },
 
         options: {
