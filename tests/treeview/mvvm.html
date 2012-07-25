@@ -20,6 +20,11 @@
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
         <script>
+            module("MVVM", {
+                teardown: function() {
+                    $(".k-treeview").remove();
+                }
+            });
             test("initializes a treeview when data role is treeview", function() {
                 var dom = $('<ul data-role="treeview"></ul>');
 
@@ -152,6 +157,26 @@
                 kendo.bind(dom, viewModel);
 
                 equal(dom.text(), "bar foo");
+            });
+
+            test("binding to hierarchical observable", function() {
+                var Node = kendo.data.Node;
+                var viewModel = kendo.observable({
+                        products: [
+                            new Node({ text: "foo", expanded: true, items: [
+                                new Node({ text: "bar" })
+                            ] })
+                        ]
+                    });
+
+                var dom = $('<div />').appendTo("body")
+                    .kendoTreeView({
+                        dataSource: viewModel.products
+                    });
+
+                viewModel.get("products")[0].get("items")[0].set("text", "baz");
+
+                equal(dom.find(".k-item .k-item").text(), "baz");
             });
         </script>
 
