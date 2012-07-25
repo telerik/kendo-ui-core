@@ -78,6 +78,44 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Specifies Menu opening direction.
+        /// </summary>
+        /// <param name="value">The desired direction.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Menu()
+        ///             .Name("Menu")
+        ///             .Direction(MenuDirection.Left)
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public MenuBuilder Direction(MenuDirection value)
+        {
+            Component.Direction = value.ToString().ToLower();
+
+            return this;
+        }
+
+        /// <summary>
+        /// Specifies Menu opening direction.
+        /// </summary>
+        /// <param name="value">The desired direction.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Menu()
+        ///             .Name("Menu")
+        ///             .Direction("top")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public MenuBuilder Direction(string value)
+        {
+            Component.Direction = value;
+
+            return this;
+        }
+
+        /// <summary>
         /// Sets the menu orientation.
         /// </summary>
         /// <param name="value">The desired orientation.</param>

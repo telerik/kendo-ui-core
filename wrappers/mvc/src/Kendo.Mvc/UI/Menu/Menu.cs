@@ -65,6 +65,12 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        public string Direction
+        {
+            get;
+            set;
+        }
+
         public IList<MenuItem> Items
         {
             get;
@@ -104,6 +110,11 @@ namespace Kendo.Mvc.UI
             if (animation.Keys.Any())
             {
                 options["animation"] = animation["animation"];
+            }
+
+            if (Direction.HasValue())
+            {
+                options["direction"] = Direction;
             }
 
             if (Orientation != MenuOrientation.Horizontal)
