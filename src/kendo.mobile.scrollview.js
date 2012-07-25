@@ -70,7 +70,7 @@
             });
 
             dimension = dimensions.x;
-            dimension.bind("change", proxy(that.refresh, that));
+            dimension.bind(CHANGE, proxy(that.refresh, that));
 
             pane = new Pane({
                 dimensions: dimensions,
@@ -102,6 +102,14 @@
         events: [
             CHANGE
         ],
+
+        destroy: function() {
+            Widget.fn.destroy.call(this);
+
+            this.drag.destroy();
+
+            kendo.destroy(this.element);
+        },
 
         viewShow: function(view) {
             this.dimensions.refresh();

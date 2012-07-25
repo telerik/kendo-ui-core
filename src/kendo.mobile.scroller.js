@@ -297,11 +297,8 @@
         },
 
         destroy: function() {
-            var that = this;
-
-            Widget.fn.destroy.call(that);
-
-            that.drag.destroy();
+            Widget.fn.destroy.call(this);
+            this.drag.destroy();
         },
 
         _initPullToRefresh: function() {
