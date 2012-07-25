@@ -29,6 +29,8 @@ namespace Kendo.Mvc.UI
             SelectedIndex = -1;
             SecurityTrimming = true;
 
+            LoadOnDemand = true;
+
             DataSource = new DataSource();
         }
 
@@ -171,6 +173,12 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        public bool LoadOnDemand
+        {
+            get;
+            set;
+        }
+
         public override void WriteInitializationScript(TextWriter writer)
         {
             var options = new Dictionary<string, object>(Events);
@@ -192,6 +200,11 @@ namespace Kendo.Mvc.UI
             if (AutoBind)
             {
                 options["autoBind"] = true;
+            }
+
+            if (!LoadOnDemand)
+            {
+                options["loadOnDemand"] = false;
             }
 
             if (!string.IsNullOrEmpty(DataTextField))
