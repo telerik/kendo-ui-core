@@ -808,6 +808,24 @@
 
                 ok(true);
             });
+
+            test("get method works with subitems", function() {
+                var dataSource = new HierarchicalDataSource({
+                    data: [
+                        { id: 1, text: "foo", items: [
+                            { id: 2, text: "bar" }
+                        ] }
+                    ]
+                });
+
+                dataSource.read();
+
+                var children = dataSource.data()[0].children;
+                children.read();
+
+                ok(dataSource.get(2))
+                equal(dataSource.get(2).text, children.data()[0].text);
+            });
         </script>
     </body>
 </html>
