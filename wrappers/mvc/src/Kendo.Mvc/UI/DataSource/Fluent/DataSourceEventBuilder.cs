@@ -78,6 +78,28 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Defines the name of the JavaScript function that will handle the RequestEnd client-side event.
+        /// </summary> 
+        /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
+        public DataSourceEventBuilder RequestEnd(string handler)
+        {
+            Handler("requestEnd", handler);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the inline handler of the RequestEnd client-side event.
+        /// </summary>                
+        /// <param name="handler">The handler code wrapped in a text tag (Razor syntax).</param>
+        public DataSourceEventBuilder RequestEnd(Func<object, object> handler)
+        {
+            Handler("requestEnd", handler);
+
+            return this;
+        }
+
+        /// <summary>
         /// Defines the name of the JavaScript function that will handle the Error client-side event.
         /// </summary>
         /// <param name="handler">JavaScript function name</param>  
