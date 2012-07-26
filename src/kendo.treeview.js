@@ -667,6 +667,11 @@
                         item.insertBefore(children.eq(index));
                     }
                 }, collapsed);
+
+                if (that._expanded(parentNode)) {
+                    that._updateNodeClasses(parentNode);
+                    subGroup(parentNode).css("display", "block");
+                }
             }
 
             if (e.field) {
@@ -687,11 +692,6 @@
                     subGroup(parentNode).empty();
 
                     append(items, parentNode, true);
-
-                    if (that._expanded(parentNode)) {
-                        that._updateNodeClasses(parentNode);
-                        subGroup(parentNode).css("display", "block");
-                    }
                 } else {
                     that.root = that.wrapper.html(that._renderGroup({
                         items: items,

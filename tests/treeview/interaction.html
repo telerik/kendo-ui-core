@@ -191,7 +191,7 @@
                 equal(treeview.text(), "barfoobaz");
             });
 
-            test("moving nodes updates toggle button correctly", function() {
+            test("moving nodes updates toggle button and group visibility", function() {
                 createTreeView({
                     dragAndDrop: true,
                     dataSource: [
@@ -205,7 +205,28 @@
 
                 moveNode(treeviewObject, "baz", "bar");
 
-                ok(treeviewObject.findByText("foo").find(".k-icon:first").hasClass("k-minus"));
+                ok(treeviewObject.findByText("bar").find(".k-icon:first").hasClass("k-minus"));
+                ok(treeviewObject.findByText("bar").find(".k-group").is(":visible"));
+            });
+
+            test("moving nodes to last child", function() {
+                createTreeView({
+                    dragAndDrop: true,
+                    dataSource: [
+                        { text: "foo", expanded: true, items: [
+                            { text: "baz" },
+                            { text: "qux" }
+                        ] },
+                        { text: "bar", items: [
+                            { text: "cat" }
+                        ] }
+                    ]
+                });
+
+                moveNode(treeviewObject, "baz", "bar");
+
+                ok(treeviewObject.findByText("bar").find(".k-icon:first").hasClass("k-minus"));
+                ok(treeviewObject.findByText("bar").find(".k-group").is(":visible"));
             });
         </script>
 
