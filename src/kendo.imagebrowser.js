@@ -5,6 +5,7 @@
         proxy = $.proxy,
         extend = $.extend,
         NS = ".kendoImageBrowser",
+        BREADCRUBMSNS = ".kendoBreadcrumbs",
         NAMEFIELD = "name",
         SIZEFIELD = "size",
         TYPEFIELD = "type",
@@ -107,7 +108,7 @@
         events: [],
 
         destroy: function() {
-
+            Widget.fn.destroy.call(this);
         },
 
         _toolbar: function() {
@@ -199,8 +200,8 @@
             $('<div class="k-floatwrap"><input/></div>')
                 .appendTo(this.element)
                 .find("input")
-                .kendoBreadCrumbs({
-                    value: this.path()
+                .kendoBreadcrumbs({
+                    value: this.options.path
                 });
         },
 
@@ -290,7 +291,7 @@
         }
     });
 
-    var BreadCrumbs = Widget.extend({
+    var Breadcrumbs = Widget.extend({
         init: function(element, options) {
             var that = this;
 
@@ -299,17 +300,72 @@
             Widget.fn.init.call(that, element, options);
 
             that._wrapper();
+
+            that.wrapper
+                .on("focus" + BREADCRUBMSNS, "input", proxy(that._focus, that))
+                .on("blur" + BREADCRUBMSNS, "input", proxy(that._blur, that))
+                .on("keydown" + BREADCRUBMSNS, "input", proxy(that._keydown, that))
+                .on("click" + BREADCRUBMSNS, "a", proxy(that._click, that));
+
             that.value(that.options.value);
         },
 
         options: {
-            name: "BreadCrumbs",
-            value: ""
+            name: "Breadcrumbs"
         },
 
-        events: [],
+        events: [ "change" ],
 
         destroy: function() {
+            Widget.fn.destroy.call(this);
+
+            this.wrapper
+                .off("focus" + BREADCRUBMSNS, "input")
+                .off("keydown" + BREADCRUBMSNS, "input")
+                .off("blur" + BREADCRUBMSNS, "input")
+                .off("click" + BREADCRUBMSNS, "a");
+        },
+
+        _update: function(val) {
+            val = (val || "").charAt(0) === "/" ? val : ("/" + (val || ""));
+
+            if (val !== this.value()) {
+                this.value(val);
+                this.trigger("change");
+            }
+        },
+
+        _click: function(e) {
+            e.preventDefault();
+            this._update(this._path($(e.target).prevAll("a").andSelf()));
+        },
+
+        _focus: function() {
+            var that = this,
+                element = that.element;
+
+            that.overlay.hide();
+            that.element.val(that.value());
+
+            setTimeout(function() {
+               element.select();
+            });
+        },
+
+        _blur: function() {
+            var that = this,
+                element = that.element,
+                val = element.val().replace(/\/{2,}/g, "/");
+
+            that.overlay.show();
+            element.val("");
+            that._update(val);
+        },
+
+        _keydown: function(e) {
+            if (e.keyCode === 13) {
+                this._blur();
+            }
         },
 
         _wrapper: function() {
@@ -353,8 +409,7 @@
                     html += '<span class="k=icon k-arrow-next">&gt;</span>';
                 }
             }
-
-            $(html).appendTo(this.overlay);
+            this.overlay.empty().append($(html));
         },
 
         value: function(val) {
@@ -366,13 +421,13 @@
             return this._value;
         },
 
-        _path: function() {
-            return "/" + $.map(this.overlay.find("a"), function() {
-                return $(this).text();
+        _path: function(trail) {
+            return "/" + $.map(trail, function(b) {
+                return $(b).text();
             }).join("/");
         }
     });
 
     kendo.ui.plugin(ImageBrowser);
-    kendo.ui.plugin(BreadCrumbs);
+    kendo.ui.plugin(Breadcrumbs);
 })(jQuery);
