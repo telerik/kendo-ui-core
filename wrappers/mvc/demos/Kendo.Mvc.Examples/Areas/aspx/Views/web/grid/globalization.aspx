@@ -2,14 +2,14 @@
     Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.ProductViewModel>>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <script src="<%= Url.Content("~/Scripts/cultures/kendo.culture." + System.Threading.Thread.CurrentThread.CurrentUICulture + ".min.js") %>"></script>
+    <script src="<%= Url.Content("~/Scripts/cultures/kendo.culture." + System.Threading.Thread.CurrentThread.CurrentCulture + ".min.js") %>"></script>
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 
 <script type="text/javascript">
     //set culture of the Kendo UI
-    kendo.culture("<%: System.Threading.Thread.CurrentThread.CurrentUICulture  %>");
+    kendo.culture("<%: System.Threading.Thread.CurrentThread.CurrentCulture  %>");
 </script>
 
 <div class="configuration k-widget k-header" style="width: 190px">
@@ -18,7 +18,7 @@
             <%: Html.Kendo().DropDownList()
                 .Name("CulturesSelector")
                 .BindTo(new[] { "en-US", "de-DE", "bg-BG", "fr-FR", "pl-PL", "ru-RU", "uk-UA" })
-                .Value(System.Threading.Thread.CurrentThread.CurrentUICulture.ToString())
+                .Value(System.Threading.Thread.CurrentThread.CurrentCulture.ToString())
                 .Events(events => events.Change("cultureChange"))
             %>
         </li>
@@ -59,7 +59,7 @@
 
     function sendCulture() {
         return {
-            culture: "<%= System.Threading.Thread.CurrentThread.CurrentUICulture%>"
+            culture: "<%= System.Threading.Thread.CurrentThread.CurrentCulture%>"
         }
     }
 
