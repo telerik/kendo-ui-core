@@ -1121,6 +1121,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\..\..\..\src\aspnetmvc\kendo.combobox.aspnetmvc.js">
+      <Link>Scripts\kendo.combobox.aspnetmvc.js</Link>
+    </Content>
     <Content Include="..\..\..\..\src\aspnetmvc\kendo.data.aspnetmvc.js">
       <Link>Scripts\kendo.data.aspnetmvc.js</Link>
     </Content>

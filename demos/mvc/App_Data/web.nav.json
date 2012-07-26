@@ -485,7 +485,6 @@
                     "url": "menu/images.html"
                 },
                 {
-                    "packages": [ "!mvc" ],
                     "text": "Direction",
                     "url": "menu/direction.html"
                 },
