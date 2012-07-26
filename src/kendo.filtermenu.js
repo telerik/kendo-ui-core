@@ -237,6 +237,10 @@
                     filterModel.set("logic", expression.logic);
 
                     currentFilter = filterModel.filters[current];
+                    if (!currentFilter) {
+                        filterModel.filters.push({ field: that.field });
+                        currentFilter = filterModel.filters[current];
+                    }
                     currentFilter.set("value", that._parse(filter.value));
                     currentFilter.set("operator", filter.operator);
 

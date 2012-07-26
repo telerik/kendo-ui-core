@@ -226,6 +226,25 @@
                 equal(dataSource.filter().filters[1].value, "2");
             });
 
+            test("filtering by more then two expressions", function() {
+                filterMenu = new FilterMenu(dom, {
+                    dataSource: dataSource
+                });
+
+                filterMenu.filter({
+                    filters:[
+                        { value: "1", field: "foo"},
+                        { value: "2", field: "foo"},
+                        { value: "3", field: "foo"}
+                    ]
+                });
+
+                equal(dataSource.filter().filters.length, 3);
+                equal(dataSource.filter().filters[0].value, "1");
+                equal(dataSource.filter().filters[1].value, "2");
+                equal(dataSource.filter().filters[2].value, "3");
+            });
+
             test("or filtering", function() {
                 filterMenu = new FilterMenu(dom, {
                     dataSource: dataSource
