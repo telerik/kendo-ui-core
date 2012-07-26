@@ -207,6 +207,377 @@
 
                 ok(treeviewObject.findByText("foo").find(".k-icon:first").hasClass("k-minus"));
             });
+
+            module("keyboard support", {
+                teardown: removeTreeViews
+            });
+
+            $.fn.press = function(key) {
+                return this.trigger({ type: "keydown", keyCode: key } );
+            };
+
+            test("right arrow expands node", 1, function() {
+                createTreeView({
+                    dataSource: [
+                        { selected: true, text: "foo", items: [
+                            { text: "bar" }
+                        ] }
+                    ],
+                    expand: function(e) {
+                        ok(true);
+                    }
+                });
+
+                treeview.press(kendo.keys.RIGHT);
+            });
+
+            test("right arrow at expanded node moves to first child", function() {
+                createTreeView([
+                    { selected: true, text: "foo", expanded: true, items: [
+                        { text: "bar" }
+                    ] }
+                ]);
+
+                treeview.press(kendo.keys.RIGHT);
+
+                equal(treeviewObject.select()[0], treeview.find(".k-item")[1]);
+            });
+
+            test("left arrow collapses expanded nodes", 1, function() {
+                createTreeView({
+                    dataSource: [
+                        { selected: true, expanded: true, text: "foo", items: [
+                            { text: "bar" }
+                        ] }
+                    ],
+                    collapse: function(e) {
+                        ok(true);
+                    }
+                });
+
+                treeview.press(kendo.keys.LEFT);
+            });
+
+            test("left arrow selects parent node of already collapsed nodes", function() {
+                createTreeView([
+                    { text: "foo", expanded: true, items: [
+                        { selected: true, text: "bar", items: [
+                            { text: "baz" }
+                        ] }
+                    ] }
+                ]);
+
+                treeview.press(kendo.keys.LEFT);
+
+                equal(treeviewObject.select()[0], treeview.find(".k-item")[0]);
+            });
+
+            test("down arrow moves selection to next sibling", function() {
+                createTreeView([
+                    { text: "foo", selected: true },
+                    { text: "baz" }
+                ]);
+
+                treeview.press(kendo.keys.DOWN);
+
+                equal(treeviewObject.select()[0], treeview.find(".k-item")[1]);
+            });
+
+            test("down arrow moves selection to first child, if expanded", function() {
+                createTreeView([
+                    { text: "foo", expanded: true, selected: true, items: [
+                        { text: "bar" }
+                    ] },
+                    { text: "baz" }
+                ]);
+
+                treeview.press(kendo.keys.DOWN);
+
+                equal(treeviewObject.select()[0], treeview.find(".k-item .k-item")[0]);
+            });
+
+            test("down arrow moves selection to next parent, if there are no more siblings left", function() {
+                createTreeView([
+                    { text: "foo", expanded: true, items: [
+                        { text: "bar", selected: true }
+                    ] },
+                    { text: "baz" }
+                ]);
+
+                treeview.press(kendo.keys.DOWN);
+
+                equal(treeviewObject.select()[0], treeview.find(".k-item:last")[0]);
+            });
+
+            test("down arrow moves selection to next grandparent, if there are no more siblings left", function() {
+                createTreeView([
+                    { text: "foo", expanded: true, items: [
+                        { text: "bar", expanded: true, items: [
+                            { text: "baz", selected: true }
+                        ] }
+                    ] },
+                    { text: "qux" }
+                ]);
+
+                treeview.press(kendo.keys.DOWN);
+
+                equal(treeviewObject.select()[0], treeview.find(".k-item:last")[0]);
+            });
+
+            test("down arrow does not change selection when hitting the last item", function() {
+                createTreeView([
+                    { text: "foo" },
+                    { text: "qux", selected: true }
+                ]);
+
+                treeview.press(kendo.keys.DOWN);
+
+                equal(treeviewObject.select()[0], treeview.find(".k-item:last")[0]);
+            });
+
+            test("down arrow in treeview without selection selects first node", function() {
+                createTreeView([
+                    { text: "foo" },
+                    { text: "bar" }
+                ]);
+
+                treeview.press(kendo.keys.DOWN);
+
+                equal(treeviewObject.select()[0], treeview.find(".k-item")[0]);
+            });
+
+            test("up arrow in treeview without selection selects last node", function() {
+                createTreeView([
+                    { text: "foo" },
+                    { text: "bar" }
+                ]);
+
+                treeview.press(kendo.keys.UP);
+
+                equal(treeviewObject.select()[0], treeview.find(".k-item")[1]);
+            });
+
+            test("up arrow moves selection to previous node", function() {
+                createTreeView([
+                    { text: "foo" },
+                    { text: "bar", selected: true }
+                ]);
+
+                treeview.press(kendo.keys.UP);
+
+                equal(treeviewObject.select()[0], treeview.find(".k-item")[0]);
+            });
+
+            test("up arrow moves selection to last expanded node of previous node", function() {
+                createTreeView([
+                    { text: "foo", expanded: true, items: [
+                        { text: "bar" }
+                    ] },
+                    { text: "baz", selected: true }
+                ]);
+
+                treeview.press(kendo.keys.UP);
+
+                equal(treeviewObject.select()[0], treeview.find(".k-item .k-item")[0]);
+            });
+
+            test("up arrow moves selection to previous grandparent, when parents are expanded", function() {
+                createTreeView([
+                    { text: "foo", expanded: true, items: [
+                        { text: "bar", expanded: true, items: [
+                            { text: "baz" }
+                        ] }
+                    ] },
+                    { text: "qux", selected: true }
+                ]);
+
+                treeview.press(kendo.keys.UP);
+
+                equal(treeviewObject.select()[0], treeview.find(".k-item .k-item .k-item")[0]);
+            });
+
+            test("up arrow moves selection to parent node when out of previous nodes", function() {
+                createTreeView([
+                    { text: "foo", expanded: true, items: [
+                        { text: "bar", selected: true }
+                    ] }
+                ]);
+
+                treeview.press(kendo.keys.UP);
+
+                equal(treeviewObject.select()[0], treeview.find(".k-item")[0]);
+            });
+
+            test("home key moves selection to first node", function() {
+                createTreeView([
+                    { text: "foo" },
+                    { text: "bar" },
+                    { text: "baz", selected: true }
+                ]);
+
+                treeview.press(kendo.keys.HOME);
+
+                equal(treeviewObject.select()[0], treeview.find(".k-item")[0]);
+            });
+
+            test("end key moves selection to last node", function() {
+                createTreeView([
+                    { text: "foo", selected: true },
+                    { text: "bar" },
+                    { text: "baz" }
+                ]);
+
+                treeview.press(kendo.keys.END);
+
+                equal(treeviewObject.select()[0], treeview.find(".k-item:last")[0]);
+            });
+
+            test("end key moves to last child node", function() {
+                createTreeView([
+                    { text: "foo", expanded: true, items: [
+                        { text: "bar", expanded: true, items: [
+                            { text: "baz" }
+                        ] }
+                    ] }
+                ]);
+
+                treeview.press(kendo.keys.END);
+
+                equal(treeviewObject.select()[0], treeview.find(".k-item .k-item .k-item")[0]);
+
+            });
+
+            test("enter key triggers select event after changing selection", 1, function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "foo", selected: true },
+                        { text: "bar" }
+                    ],
+                    select: function(e) {
+                        equal(e.node, treeview.find(".k-item:last")[0]);
+                    }
+                });
+
+                treeview.press(kendo.keys.DOWN);
+                treeview.press(kendo.keys.ENTER);
+            });
+
+            test("enter key does not trigger select event if selection was not changed", function() {
+                var triggered = false;
+
+                createTreeView({
+                    dataSource: [
+                        { text: "foo", selected: true },
+                        { text: "bar" }
+                    ],
+                    select: function() {
+                        triggered = true;
+                    }
+                });
+
+                treeview.press(kendo.keys.ENTER);
+
+                ok(!triggered);
+            });
+
+            test("enter key triggers select event after a sequential selection has been made", function() {
+                var triggeredCount = 0;
+
+                createTreeView({
+                    dataSource: [
+                        { text: "foo", selected: true },
+                        { text: "bar" }
+                    ],
+                    select: function() {
+                        triggeredCount++;
+                    }
+                });
+
+                treeview.press(kendo.keys.DOWN);
+                treeview.press(kendo.keys.ENTER);
+                treeview.press(kendo.keys.UP);
+                treeview.press(kendo.keys.ENTER);
+
+                equal(triggeredCount, 2);
+            });
+
+            test("space key toggles checkbox state", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "foo", selected: true },
+                    ],
+                    checkboxTemplate: "<input type='checkbox' />"
+                });
+
+                treeview.press(kendo.keys.SPACEBAR);
+
+                ok(treeview.find(":checkbox").is(":checked"));
+
+                treeview.press(kendo.keys.SPACEBAR);
+
+                ok(!treeview.find(":checkbox").is(":checked"));
+            });
+
+            test("blurring the treeview triggers select event", function() {
+                var triggeredCount = 0;
+
+                createTreeView({
+                    dataSource: [
+                        { text: "foo", selected: true },
+                        { text: "bar" }
+                    ],
+                    select: function() {
+                        triggeredCount++;
+                    }
+                });
+
+                treeview.focus();
+                treeview.press(kendo.keys.DOWN);
+                treeview.blur();
+
+                equal(triggeredCount, 1);
+
+            });
+
+            test("blurring the treeview does not trigger select event, if selection has not changed", function() {
+                var triggeredCount = 0;
+
+                createTreeView({
+                    dataSource: [
+                        { text: "foo", selected: true },
+                        { text: "bar" }
+                    ],
+                    select: function() {
+                        triggeredCount++;
+                    }
+                });
+
+                treeview.focus();
+                treeview.press(kendo.keys.DOWN);
+                treeview.press(kendo.keys.UP);
+                treeview.blur();
+
+                equal(triggeredCount, 0);
+            });
+
+            test("blurring without changing the selection does not trigger select event", function() {
+                var triggeredCount = 0;
+
+                createTreeView({
+                    dataSource: [
+                        { text: "foo", selected: true },
+                        { text: "bar" }
+                    ],
+                    select: function() {
+                        triggeredCount++;
+                    }
+                });
+
+                treeview.focus();
+                treeview.blur();
+
+                equal(triggeredCount, 0);
+            });
         </script>
 
         <div id="qunit-fixture"> </div>

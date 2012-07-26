@@ -8,6 +8,7 @@
         Widget = ui.Widget,
         HierarchicalDataSource = data.HierarchicalDataSource,
         proxy = $.proxy,
+        keys = kendo.keys,
         NS = ".kendoTreeView",
         SELECT = "select",
         EXPAND = "expand",
@@ -197,8 +198,10 @@
                 .on("mouseleave" + NS, clickableItems, function () { $(this).removeClass(KSTATEHOVER); })
                 .on(CLICK + NS, clickableItems, proxy(that._nodeClick, that))
                 .on("dblclick" + NS, "div:not(.k-state-disabled) .k-in", proxy(that._toggleButtonClick, that))
-                .on(CLICK + NS, ".k-plus,.k-minus", proxy(that._toggleButtonClick, that));
-
+                .on(CLICK + NS, ".k-plus,.k-minus", proxy(that._toggleButtonClick, that))
+                .on("keydown" + NS, proxy(that._keydown, that))
+                .on("focus" + NS, proxy(that._focus, that))
+                .on("blur" + NS, proxy(that._blur, that));
         },
 
         _attachUids: function(root, dataSource) {
@@ -437,6 +440,96 @@
             this.toggle($(e.target).closest(NODE));
         },
 
+        _focus: function(e) {
+            this._oldSelection = this.select()[0];
+        },
+
+        _blur: function(e) {
+            var that = this,
+                selection = that.select();
+
+            if (selection[0] != that._oldSelection) {
+                that._trigger(SELECT, selection);
+            }
+        },
+
+        _keydown: function(e) {
+            var that = this,
+                key = e.keyCode,
+                target,
+                selection = that.select(),
+                expanded = that._expanded(selection),
+                checkbox = selection.find(":checkbox:first");
+
+            if (!that._oldSelection) {
+                that._oldSelection = selection[0];
+            }
+
+            function parentOf(node) {
+                return node.parent().closest(NODE);
+            }
+
+            if (key == keys.RIGHT) {
+                if (expanded) {
+                    target = subGroup(selection).children().first();
+                } else {
+                    that.expand(selection);
+                }
+            } else if (key == keys.LEFT) {
+                if (expanded) {
+                    that.collapse(selection);
+                } else {
+                    target = parentOf(selection);
+                }
+            } else if (key == keys.DOWN) {
+                if (!selection.length) {
+                    target = that.root.children().eq(0);
+                } else if (expanded) {
+                    target = subGroup(selection).children().first();
+                } else {
+                    while (selection.length && !selection.next().length) {
+                        selection = parentOf(selection);
+                    }
+
+                    if (selection.next().length) {
+                        target = selection.next();
+                    }
+                }
+            } else if (key == keys.UP) {
+                if (!selection.length) {
+                    target = that.root.children().last();
+                } else if (selection.prev().length) {
+                    target = selection.prev();
+
+                    while (that._expanded(target)) {
+                        target = subGroup(target).children().last();
+                    }
+                } else {
+                    target = parentOf(selection);
+                }
+            } else if (key == keys.HOME) {
+                target = that.root.children().eq(0);
+            } else if (key == keys.END) {
+                target = that.root.children().last();
+
+                while (that._expanded(target)) {
+                    target = subGroup(target).children().last();
+                }
+            } else if (key == keys.ENTER) {
+                if (selection[0] != that._oldSelection) {
+                    delete that._oldSelection;
+                    that._trigger(SELECT, selection);
+                }
+            } else if (key == keys.SPACEBAR) {
+                target = checkbox.prop("checked", !checkbox.prop("checked"));
+            }
+
+            if (target) {
+                e.preventDefault();
+                that.select(target);
+            }
+        },
+
         _nodeClick: function (e) {
             var that = this,
                 node = $(e.target),
@@ -454,7 +547,7 @@
                 e.preventDefault();
             }
 
-            if (!node.hasClass(".k-state-selected") && !that._trigger("select", node)) {
+            if (!node.hasClass(".k-state-selected") && !that._trigger(SELECT, node)) {
                 that.select(node);
             }
         },
