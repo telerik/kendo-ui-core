@@ -2,7 +2,7 @@
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 <% 
-    var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.ToString();
+    var culture = System.Threading.Thread.CurrentThread.CurrentCulture.ToString();
 %>
 
 <div class="configuration k-widget k-header" style="width: 190px">

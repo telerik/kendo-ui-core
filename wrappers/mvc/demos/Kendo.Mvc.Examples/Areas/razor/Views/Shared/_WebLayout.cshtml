@@ -12,6 +12,21 @@
     <script src="@Url.Content("~/Scripts/kendo.aspnetmvc.min.js")"></script>
     <script src="@Url.Content("~/Scripts/console.min.js")"></script>
     <script src="@Url.Content("~/Scripts/prettify.min.js")"></script>
+
+@* Include the JavaScript for the current culture *@
+
+@{
+    var culture = System.Threading.Thread.CurrentThread.CurrentCulture.ToString();
+}
+
+    <script src="@Url.Content("~/Scripts/cultures/kendo.culture." + culture + ".min.js")"></script>
+
+@* Set the current culture *@
+
+    <script>
+        kendo.culture("@culture");
+    </script>
+
     @RenderSection("HeadContent", false)
 </head>
 <body>
@@ -23,6 +38,7 @@
         </div>
 
         @Html.Partial("~/Views/Shared/_Source.cshtml")
+
     </div>
 </body>
 </html>
