@@ -20,9 +20,9 @@
         },
 
         viewportTemplate = kendo.template('<meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width#=data.height#" name="viewport" />', {usedWithBlock: false}),
-        meta = '<meta name="apple-mobile-web-app-capable" content="yes" /> ' +
-               '<meta name="apple-mobile-web-app-status-bar-style" content="black" /> ' +
-                viewportTemplate({ height: "" }),
+        systemMeta = '<meta name="apple-mobile-web-app-capable" content="yes" /> ' +
+                     '<meta name="apple-mobile-web-app-status-bar-style" content="black" /> ',
+        viewportMeta = viewportTemplate({ height: "" }),
 
         iconMeta = kendo.template('<link rel="apple-touch-icon' + (support.mobileOS.android ? '-precomposed' : '') + '" # if(data.size) { # sizes="#=data.size#" #}# href="#=data.icon#" />', {usedWithBlock: false}),
 
@@ -42,7 +42,14 @@
     }
 
     function applyViewportHeight() {
-        $("meta[name=viewport]").replaceWith(viewportTemplate({ height: isOrientationHorizontal() ? ", height=device-width" : ", height=device-height" }));
+        $("meta[name=viewport]").remove();
+        HEAD.append(viewportTemplate({
+            height: isOrientationHorizontal() ?
+                        ", height=" + window.innerHeight + "px"  :
+                        (OS.flatVersion >= 600 && OS.flatVersion < 700) ?
+                            ", height=" + window.innerWidth + "px" :
+                            ", height=device-height"
+        }));
     }
 
     var Application = kendo.Observable.extend({
@@ -175,7 +182,11 @@
         _attachMeta: function() {
             var icon = this.options.icon, size;
 
-            HEAD.prepend(meta);
+            if (!BERRYPHONEGAP) {
+                HEAD.prepend(viewportMeta);
+            }
+
+            HEAD.prepend(systemMeta);
 
             if (icon) {
                 if (typeof icon === "string") {
