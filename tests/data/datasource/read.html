@@ -110,6 +110,21 @@
                 dataSource.read();
             });
 
+            test("read triggers the requestEnd event passing operation type", 2, function() {
+                var data = [ { foo: "bar" } ],
+                    dataSource = new DataSource({
+                        data: data
+                    });
+
+                dataSource.bind("requestEnd", function(e) {
+                    console.log(e);
+                    same(e.response, data);
+                    same(e.type, "read");
+                });
+
+                dataSource.read();
+            });
+
             test("read triggers the requestEnd event if custom error is present", 1, function() {
                 var dataSource = new DataSource({
                     transport: {

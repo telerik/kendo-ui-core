@@ -1731,7 +1731,7 @@
                 type = result.type,
                 length;
 
-            that.trigger(REQUESTEND, { response: response });
+            that.trigger(REQUESTEND, { response: response, type: type });
 
             if (response) {
                 response = that.reader.parse(response);
@@ -2050,7 +2050,7 @@
                 options = that.options,
                 hasGroups = options.serverGrouping === true && that._group && that._group.length > 0;
 
-            that.trigger(REQUESTEND, { response: data });
+            that.trigger(REQUESTEND, { response: data, type: "read" });
 
             data = that.reader.parse(data);
 

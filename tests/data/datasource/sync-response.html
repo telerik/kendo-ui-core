@@ -343,13 +343,14 @@
                 equal(model.id, 1);
             });
 
-            test("sync raises requestEnd event", 1, function() {
+            test("sync raises requestEnd event", 2, function() {
                 stubTransport("destroy", { foo: "bar" });
 
                 dataSource.remove(dataSource.get(1));
 
                 dataSource.bind("requestEnd", function(e) {
                     same(e.response, { foo: "bar" });
+                    same(e.type, "destroy");
                 });
 
                 dataSource.sync();
