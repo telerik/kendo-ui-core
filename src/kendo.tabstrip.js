@@ -765,7 +765,7 @@
                 return;
             }
 
-            var contentElements = this.contentElements,
+            var contentElements = this.contentAnimators,
                 idTest = new RegExp("-" + (itemIndex + 1) + "$");
 
             for (var i = 0, len = contentElements.length; i < len; i++) {
