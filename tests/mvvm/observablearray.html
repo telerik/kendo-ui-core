@@ -312,6 +312,18 @@
             test("parent returns undefined for new observable array", function() {
                 strictEqual((new kendo.data.ObservableArray([])).parent(), undefined);
             });
+
+            test("adding item to nested array triggers change event of the parent",1, function() {
+                var viewModel = kendo.observable({ foo: [{
+                        bar: { items: [] }
+                    } ] });
+
+                viewModel.get("foo").bind("change", function(e) {
+                    equal(e.action, "itemchange");
+                });
+
+                viewModel.get("foo")[0].bar.items.push({ baz: "moo" });
+            });
         </script>
     </head>
 </html>

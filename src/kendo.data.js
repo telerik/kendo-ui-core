@@ -110,7 +110,7 @@
                         node: e.node,
                         index: e.index,
                         items: e.items || [this],
-                        action: e.action || "itemchange"
+                        action: e.node  ? (e.action || "itemchange") : "itemchange"
                     });
                 });
             }
@@ -2011,11 +2011,15 @@
         },
 
         _removeGroupItem: function(data, model) {
-            var result;
+            var result,
+                that = this;
 
             eachGroupItems(data, function(items, group) {
                 result = removeModel(items, model);
                 if (result) {
+                    if (!result.isNew || !result.isNew()) {
+                        that._destroyed.push(result);
+                    }
                     return true;
                 }
             });
