@@ -1901,7 +1901,7 @@
                     pristineIndex = that._pristineIndex(model);
                     if (index != -1) {
                         if (pristineIndex != -1 && !model.isNew()) {
-                            extend(true, that._data[index], pristine[pristineIndex]);
+                           that._data[index].accept(pristine[pristineIndex]);
                         } else {
                             that._data.splice(index, 1);
                         }

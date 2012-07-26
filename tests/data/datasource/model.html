@@ -150,6 +150,18 @@
                 ok(dataSource.get(1) instanceof kendo.data.ObservableObject);
             });
 
+            test("cancelChanges restores updated complex model to its original state", function() {
+                setup([ { id: 1, foo: { bar: "baz" } } ]);
+
+                var model = dataSource.get(1);
+                model.set("foo", { bar: "moo" });
+
+                dataSource.cancelChanges(model);
+
+                equal(dataSource.get(1).foo.bar, "baz");
+                ok(dataSource.get(1).foo instanceof kendo.data.ObservableObject);
+            });
+
             test("cancelChanges restores updated model to its original state only for povided model", function() {
                 var model1 = dataSource.get(1),
                     model2 = dataSource.get(2);
