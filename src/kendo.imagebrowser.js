@@ -195,9 +195,18 @@
             that.dataSource = kendo.data.DataSource.create(dataSource);
         },
 
+        _navigation: function() {
+            $('<div class="k-floatwrap"><input/></div>')
+                .appendTo(this.element)
+                .find("input")
+                .kendoBreadCrumbs({
+                    value: this.path()
+                });
+        },
+
         refresh: function() {
             var that = this;
-
+            that._navigation();
             that._toolbar();
             that._content();
         },
@@ -281,5 +290,89 @@
         }
     });
 
+    var BreadCrumbs = Widget.extend({
+        init: function(element, options) {
+            var that = this;
+
+            options = options || {};
+
+            Widget.fn.init.call(that, element, options);
+
+            that._wrapper();
+            that.value(that.options.value);
+        },
+
+        options: {
+            name: "BreadCrumbs",
+            value: ""
+        },
+
+        events: [],
+
+        destroy: function() {
+        },
+
+        _wrapper: function() {
+            var element = this.element,
+                wrapper = element.parents(".k-breadcrumbs"),
+                overlay;
+
+            element[0].style.width = "";
+            element.addClass("k-input");
+
+            if (!wrapper.length) {
+                wrapper = element.wrap($('<div class="k-widget k-breadcrumbs k-header k-state-default"/>')).parent();
+            }
+
+            overlay = wrapper.find(".k-breadcrumbs-wrap");
+            if (!overlay.length) {
+                overlay = $('<div class="k-breadcrumbs-wrap"/>').appendTo(wrapper);
+            }
+            this.wrapper = wrapper;
+            this.overlay = overlay;
+        },
+
+        refresh: function() {
+            var html = "",
+                value = this.value(),
+                segments,
+                segment,
+                idx,
+                length;
+
+            if (value === undefined || !value.match(/^\//)) {
+                value = "/" + (value || "");
+            }
+
+            segments = value.split("/");
+
+            for (idx = 0, length = segments.length; idx < length; idx++) {
+                segment = segments[idx];
+                if (segment) {
+                    html += '<a class="k-link" href="#">' + segments[idx] + '</a>';
+                    html += '<span class="k=icon k-arrow-next">&gt;</span>';
+                }
+            }
+
+            $(html).appendTo(this.overlay);
+        },
+
+        value: function(val) {
+            if (val !== undefined) {
+                this._value = val.replace(/\/{2,}/g, "/");
+                this.refresh();
+                return;
+            }
+            return this._value;
+        },
+
+        _path: function() {
+            return "/" + $.map(this.overlay.find("a"), function() {
+                return $(this).text();
+            }).join("/");
+        }
+    });
+
     kendo.ui.plugin(ImageBrowser);
+    kendo.ui.plugin(BreadCrumbs);
 })(jQuery);

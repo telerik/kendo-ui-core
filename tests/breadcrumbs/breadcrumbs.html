@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.breadcrumbs tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script type="text/javascript" src="../jquery.mockjax.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.listview.js"></script>
+        <script src="../../src/kendo.upload.js"></script>
+        <script src="../../src/kendo.imagebrowser.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.breadcrumbs Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var BreadCrumbs = kendo.ui.BreadCrumbs,
+                container;
+
+            module("kendo.ui.breadcrumbs", {
+                setup: function() {
+                    container = $("<input/>").appendTo($(document.body));
+                },
+                teardown: function() {
+                    container.parent().remove();
+                }
+            });
+
+            function setup(options) {
+                return new BreadCrumbs(container, options);
+            }
+
+            test("wraps the input", function() {
+                var breadcrumbs = setup();
+                ok(container.hasClass("k-input"));
+                ok(breadcrumbs.wrapper.is("div"));
+                ok(breadcrumbs.wrapper.hasClass("k-widget"));
+                ok(breadcrumbs.wrapper.hasClass("k-breadcrumbs"));
+            });
+
+            test("kendoBreadCrumbs attaches breadcrumbs object to the target", function() {
+                container.kendoBreadCrumbs({});
+
+                ok(container.data("kendoBreadCrumbs") instanceof BreadCrumbs);
+            });
+
+            test("add class to the input", function() {
+                var breadcrumbs = setup();
+                equal(breadcrumbs.wrapper.find("input.k-input").length, 1);
+            });
+
+            test("value returns the initial value", function() {
+                var breadcrumbs = setup({ value: "/foo/bar" });
+                equal(breadcrumbs.value(), "/foo/bar");
+            });
+
+            test("renders elements for the path", function() {
+                var breadcrumbs = setup({ value: "/foo/bar" });
+
+                equal(breadcrumbs.wrapper.find("a").length, 2);
+            });
+
+            test("value updates the breadcrumbs", function() {
+                var breadcrumbs = setup();
+                breadcrumbs.value("foo/bar");
+                equal(breadcrumbs.wrapper.find("a").length, 2);
+            });
+
+            test("should condense adjacent slashes", function() {
+                var breadcrumbs = setup({ value: "///foo///bar///baz" });
+                equal(breadcrumbs.wrapper.find("a").length, 3);
+                equal(breadcrumbs.value(), "/foo/bar/baz");
+            });
+
+        </script>
+    </body>
+</html>

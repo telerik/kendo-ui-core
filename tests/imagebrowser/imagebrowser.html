@@ -234,7 +234,7 @@
                 });
             });
 
-            test("model field definition is used to generate item tempalte", function() {
+            test("model field definition is used to generate item template", function() {
                 var browser = setup({
                     transport: {
                         read: function(options) {
@@ -258,7 +258,7 @@
                 equal(item.find("span.k-filesize").text(), "42");
             });
 
-            test("model field definition as object is used to generate item tempalte", function() {
+            test("model field definition as object is used to generate item template", function() {
                 var browser = setup({
                     transport: {
                         read: function(options) {
@@ -282,6 +282,11 @@
                 equal(item.find("span.k-filesize").text(), "42");
             });
 
+            test("path is displayed in the toolbar input", function() {
+                var browser = setup({ path: "foo" });
+
+                equal(container.find(".k-breadcrumbs > input").val(), "foo");
+            });
         </script>
     </body>
 </html>
