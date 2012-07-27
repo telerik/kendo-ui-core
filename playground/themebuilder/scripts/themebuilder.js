@@ -239,7 +239,7 @@ var devices = [ "ios", "android", "blackberry", "meego" ],
             });
             output = output.substr(0, output.length-1);
 
-            this.object[output] = styles;
+            this.object[output] = $.extend(this.object[output], styles);
 
             style = $("<style scoped>\n" + that.getCSS() + "</style>").insertAfter(that.styleElement);
             that.styleElement.remove();
