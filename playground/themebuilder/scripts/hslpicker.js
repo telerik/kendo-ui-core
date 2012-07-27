@@ -12,16 +12,20 @@
                 Widget.fn.init.call(that, element, options);
                 element = that.element;
 
+                element.addClass("k-color-sampler");
+
                 that.popup = new ui.Popup("<div class='k-colorpick'></div>", {
                     anchor: element,
                     origin: "bottom center",
                     position: "top center"
                 });
 
-            element
-                .on("click", function(e) {
-                    e.preventDefault();
-                    that._toggle();
+            $(document.body)
+                .on("click", ".k-color-sampler", function(e) {
+                    if (e.currentTarget == element[0]) {
+                        e.preventDefault();
+                        that._toggle();
+                    }
                 });
 
                 that.color = new Color(element.css("background-color"));
