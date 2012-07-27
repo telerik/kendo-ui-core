@@ -726,9 +726,14 @@
                       })
                       .one(SELECTED, function() {
                           select();
-                      });
+                      })
 
-                select();
+
+                if (parent._setValue !== undefined) {
+                    select();
+                } else {
+                    that.enable(false);
+                }
             }
         }
     });

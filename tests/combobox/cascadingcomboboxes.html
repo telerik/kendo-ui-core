@@ -114,7 +114,7 @@
                 childCB.select(0);
 
                 //clear parent
-                parentCB.select(-1);
+                parentCB.value("");
                 parentCB.trigger("change");
 
                 equal(childCB.selectedIndex, -1);
@@ -227,40 +227,6 @@
                 equal(childCB.selectedIndex, 0);
             });
 
-            test("Use index if no value", function() {
-                parent.kendoComboBox({
-                    dataTextField: "parentID",
-                    dataValueField: "parentID",
-                    dataSource: [
-                        { parentID: 1 },
-                        { parentID: 2 },
-                        { parentID: 3 }
-                    ]
-                });
-
-                child.kendoComboBox({
-                    cascadeFrom: "parent", //id of the parent
-                    index: 0,
-                    dataTextField: "childID",
-                    dataValueField: "childID",
-                    dataSource: [
-                        { parentID: 1, childID: "1" },
-                        { parentID: 2, childID: "2" },
-                        { parentID: 1, childID: "3" },
-                        { parentID: 2, childID: "4" }
-                    ]
-                });
-
-                var parentCB = parent.data("kendoComboBox"),
-                    childCB = child.data("kendoComboBox"),
-                    ds = childCB.dataSource;
-
-                parentCB.select(0);
-                parentCB.trigger("change");
-
-                equal(childCB.selectedIndex, 0);
-            });
-
             test("Parent selects element in child on load", function() {
                 parent.kendoComboBox({
                     dataTextField: "parentID",
@@ -292,6 +258,33 @@
                 equal(ds.view().length, 2);
                 equal(ds.view()[0].parentID, 1);
                 equal(ds.view()[1].parentID, 1);
+            });
+
+            test("When the parent is not bound do not clear value of child", function() {
+                parent.val("1").kendoComboBox({
+                    dataTextField: "parentID",
+                    dataValueField: "parentID",
+                    autoBind: false
+                });
+
+                child.val("3").kendoComboBox({
+                    cascadeFrom: "parent", //id of the parent
+                    dataTextField: "childID",
+                    dataValueField: "childID",
+                    dataSource: [
+                        { parentID: 1, childID: "1" },
+                        { parentID: 2, childID: "2" },
+                        { parentID: 1, childID: "3" },
+                        { parentID: 2, childID: "4" }
+                    ]
+                });
+
+                var parentCB = parent.data("kendoComboBox"),
+                    childCB = child.data("kendoComboBox"),
+                    ds = childCB.dataSource;
+
+                equal(childCB.value(), "3");
+                equal(child.attr("disabled"), "disabled");
             });
 
             test("Parent with autoBind:false selects element in the child combo", function() {
