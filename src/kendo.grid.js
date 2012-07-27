@@ -1856,7 +1856,13 @@
                     });
                 }
 
-                that.scrollables = header.children(".k-grid-header-wrap"); // the footer does not exists here yet!
+                that.scrollables = header.children(".k-grid-header-wrap");
+
+                // the footer may exists if rendered from the server
+                var footer = that.wrapper.find(".k-grid-footer");
+                if (footer.length) {
+                    that.scrollables = that.scrollables.add(footer.children(".k-grid-footer-wrap"));
+                }
 
                 if (scrollable.virtual) {
                     that.content.find(">.k-virtual-scrollable-wrap").bind("scroll" + NS, function () {
