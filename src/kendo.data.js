@@ -1979,6 +1979,20 @@
                 delete options.page;
                 delete options.pageSize;
             }
+            /*
+            if (!that.options.serverGrouping) {
+                delete options.group;
+            }
+            if (!that.options.serverFiltering) {
+                delete options.filter;
+            }
+            if (!that.options.serverSorting) {
+                delete options.sort;
+            }
+            if (!that.options.serverAggregates) {
+                delete options.aggregate;
+            }
+            */
             return options;
         },
 
