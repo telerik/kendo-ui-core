@@ -137,11 +137,13 @@
         },
 
         _getStandardGradient: function (gradient, prefix, direction) {
-            var output = "", parsed;
+            var output = "", parsed, clone = $.extend([], gradient.stops);
 
             output += prefix + "linear-gradient(" + (direction ? direction : gradient.start.original) + "," + (gradient.end.original ? gradient.end.original + "," : "" );
 
-            gradient.stops.forEach(function(stop) {
+            clone.sort(function(a,b) {
+                return a.position - b.position; // Always return sorted stops or W3C gradients get confused.
+            }).forEach(function(stop) {
                 parsed = parseInt(stop.position, 10);
 
                 output += stop.color.get() + (parsed != 0 && stop.position != "100" ? " " + stop.position + "%" : "") + ",";

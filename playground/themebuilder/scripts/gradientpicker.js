@@ -124,24 +124,26 @@
                 that.gradients = new Gradient(element.css("background-image"));
                 var value = that.gradients.value;
 
-                for (var j = 0, valueLen = value.length; j < valueLen; j++) {
-                    var sample = value[j].gradientElement = $("<div class='sample'><div class='gradient-view'></div></div>");
+                value.forEach(function (currentValue, index) {
+                    var sample = currentValue.gradientElement = $("<div class='sample'><div class='gradient-view'></div></div>");
 
                     sample.children(".gradient-view").css({
                         backgroundColor: bgcolor.alpha() ? bgcolor.get() : "#fff",
-                        backgroundImage: that.gradients.get(support.transforms.css, j, "left")
+                        backgroundImage: that.gradients.get(support.transforms.css, index, "left")
                     });
                     sample
-                        .on("click", ".gradient-view", function() {
-                            //console.log("clicky");
+                        .on("click", ".gradient-view", function(e) {
+                            var newStop = { color: new Color("#000"), position: (e.offsetX || e.originalEvent.layerX) / $(this).outerWidth() * 100 };
+                            currentValue.stops.push(newStop);
+                            newStop.dragStop = new DragStop(sample, newStop, that, index);
+                            newStop.dragStop._updateConnected();
                         })
                         .appendTo(that.popup.element);
 
-                    for (var i = 0, stopsLen = value[j].stops.length; i < stopsLen; i++) {
-                        value[j].stops[i].dragStop = new DragStop(sample, value[j].stops[i], that, j);
+                    for (var i = 0, stopsLen = currentValue.stops.length; i < stopsLen; i++) {
+                        currentValue.stops[i].dragStop = new DragStop(sample, currentValue.stops[i], that, index);
                     }
-
-                }
+                });
 
                 element
                     .bind({
