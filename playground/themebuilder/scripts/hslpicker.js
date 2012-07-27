@@ -1,7 +1,12 @@
 (function($, undefined) {
 
+    function contains(container, target) {
+        return container === target || $.contains(container, target);
+    }
+
     var ui = kendo.ui,
         Widget = ui.Widget,
+        support = kendo.support,
         proxy = $.proxy,
         extend = $.extend,
 
@@ -11,8 +16,11 @@
 
                 Widget.fn.init.call(that, element, options);
                 element = that.element;
+                options = that.options;
 
-                element.addClass("k-color-sampler");
+                if (!options.filter) {
+                    element.addClass("k-color-sampler");
+                }
 
                 that.popup = new ui.Popup("<div class='k-colorpick'></div>", {
                     anchor: element,
@@ -20,13 +28,42 @@
                     position: "top center"
                 });
 
-            $(document.body)
-                .on("click", ".k-color-sampler", function(e) {
-                    if (e.currentTarget == element[0]) {
-                        e.preventDefault();
-                        that._toggle();
-                    }
-                });
+                if (!options.filter) {
+                    $(document.body)
+                        .on("click", ".k-color-sampler", function(e) {
+                            if (e.currentTarget == element[0]) {
+                                e.preventDefault();
+                                that._toggle();
+                            }
+                        });
+                } else {
+//                    that.popup._mousedown = function(e) {
+//                        var container = that.popup.element[0],
+//                            options = that.popup.options,
+//                            anchor = $(options.anchor)[0],
+//                            toggleTarget = $(that.options.toggleTarget),
+//                            target = kendo.eventTarget(e),
+//                            popup = $(target).closest(".k-popup")[0];
+//
+//                        if (popup && popup !== that.popup.element[0] ){
+//                            return;
+//                        }
+//
+//                        if (!contains(container, target) && !contains(anchor, target) && !(contains(that.element[0], target)) && !(toggleTarget && contains(toggleTarget[0], target))) {
+//                            that.popup.close();
+//                        }
+//                    };
+
+                    $(element)
+                        .on("click", options.filter, function(e) {
+                            if (support.matchesSelector.call(e.currentTarget, options.filter)) {
+                                e.preventDefault();
+                                that.target = $(e.currentTarget);
+                                that.popup.options.anchor = that.target;
+                                that._toggle();
+                            }
+                        });
+                }
 
                 that.color = new Color(element.css("background-color"));
 
@@ -58,15 +95,35 @@
             ],
 
             options: {
-                name: "HSLPicker"
+                name: "HSLPicker",
+                filter: null,
+                toggleTarget: null
+            },
+
+            open: function (target) {
+                if (typeof target != "undefined") {
+                    this.target = target;
+                }
+
+                this._toggle(true);
+            },
+
+            close: function () {
+                this._toggle(false);
             },
 
             _toggle: function(open) {
-                var that = this, color;
-                open = open !== undefined? open : !that.popup.visible();
+                var that = this, color, target, options = that.options;
+
+                if (options.filter) {
+                    that.target = that.target || that.element.find(options.filter);
+                }
+                target = !options.filter ? that.element : that.target;
+
+                open = open !== undefined? open : that.options.filter ? true : !that.popup.visible();
 
                 if (open) {
-                    color = that.color.set(that.element.css("background-color")).get();
+                    color = that.color.set(target.css("background-color")).get();
                     that.colorElement.text(color);
                     that.colorElement.css("background-color", color);
 
@@ -85,22 +142,25 @@
             },
 
             _onChange: function(e) {
-                var color = this._onSlide(e);
+                var that = this,
+                    color = this._onSlide(e),
+                    target = !that.options.filter ? that.element : that.target;
 
-                this.trigger("change", { color: color });
+                that.trigger("change", { color: color, target: target });
             },
 
             _onSlide: function(e) {
                 var that = this,
                     color = that.color[e.sender.type](e.value),
-                    textColor = color.get();
+                    textColor = color.get(),
+                    target = !that.options.filter ? that.element : that.target;
 
-                that.element.css("background-color", textColor);
+                target.css("background-color", textColor);
                 that.colorElement.text(textColor);
                 that.colorElement.css("background-color", textColor);
                 e.sender.valueElement.text(e.value);
 
-                that.trigger("pick", { color: color });
+                that.trigger("pick", { color: color, target: target });
 
                 return color;
             }

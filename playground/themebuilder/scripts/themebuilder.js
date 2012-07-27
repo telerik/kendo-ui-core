@@ -448,24 +448,45 @@ function mobileAccountViewInit() {
 
 var defaultColors = [ "#c5007c", "#6300a5", "#0010a5", "#0064b5", "#00a3c7", "#0fad00", "#8cc700", "#ffff00", "#fec500", "#ff9400", "#ff6600", "#ff0000",
                       "transparent", "#fff", "#e5e5e5", "#ccc", "#b2b2b2", "#999", "#7f7f7f", "#666", "#4c4c4c", "#333", "#191919", "#000" ],
-    i = 0;
+    i = 0,
+    recentPicker = $(".recentColors").kendoHSLPicker({ filter: ".drop" }).data("kendoHSLPicker");
 
 while (defaultColors[i]) {
    $('<div class="drop" style="background-color:' + defaultColors[i] + '" />')
             .insertBefore(".recentColors")
             .toggleClass("transDrop", defaultColors[i++] == "transparent")
-            .click(function () {
-                var recent = $(this).clone().prependTo(".recentColors").kendoHSLPicker().data("kendoHSLPicker");
+            .click(function (e) {
+                var recent = $(this).clone().prependTo(".recentColors");
 
-                recent.element.kendoDraggable(draggableEvents);
-                recent._toggle();
-                recent.popup.wrapper.addClass("k-static-picker");
+                recent.kendoDraggable(draggableEvents);
+                recentPicker.popup.wrapper.addClass("k-static-shown");
+                recentPicker.open(recent);
+
+                recent.click(function (e) {
+                    if (e.button == 1) {
+                        var that = $(this), item;
+
+                        if (this == recentPicker.target[0]) {
+                            item = that.next();
+                            !item[0] && (item = that.prev());
+
+                            if (!item[0]) {
+                                recentPicker.popup.wrapper.removeClass("k-static-shown");
+                                recentPicker.close();
+                            } else {
+                                recentPicker.open(item);
+                            }
+                        }
+                        that.remove();
+                    }
+                });
             });
 
    if (!(i % 12)) {
        $("<br />").insertBefore(".recentColors");
    }
 }
+kendo.wrap(recentPicker.popup.element).addClass("k-static-picker");
 
 $(".menu").kendoMenu();
 
