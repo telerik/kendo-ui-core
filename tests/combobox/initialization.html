@@ -531,6 +531,24 @@
                 equal(combo.selectedIndex, 1);
             });
 
+            test("ComboBox does not suggest on load", function() {
+                var combo = new kendo.ui.ComboBox(input.val("Item2"), {
+                    suggest: true,
+                    value: "Item2",
+                    autoBind: false
+                });
+
+                stub(combo, {
+                    suggest: combo.suggest
+                });
+
+                input.focus();
+                combo.dataSource.data(["Boo", "Foo"]);
+
+                equal(combo.calls("suggest"), 0);
+                equal(combo.text(), "Item2");
+            });
+
             asyncTest("form reset support", 2, function() {
                 input.attr("value", "123");
 

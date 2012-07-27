@@ -729,7 +729,7 @@
                       });
 
 
-                if (parent._setValue !== undefined) {
+                if (parent._valueCalled !== undefined) {
                     select();
                 } else {
                     that.enable(false);
