@@ -212,9 +212,9 @@
                 ul = that.ul[0],
                 options = that.options,
                 state = that._state,
-                value,
                 data = that._data(),
-                length = data.length;
+                length = data.length,
+                value;
 
             that.trigger("dataBinding");
 
@@ -235,7 +235,7 @@
                     that.current($(ul.firstChild));
                 }
 
-                if (options.suggest && that.input.val()) {
+                if (options.suggest && that.input.val() && that._valueCalled !== undefined) {
                     that.suggest($(ul.firstChild));
                 }
             }
@@ -251,9 +251,9 @@
 
             that._makeUnselectable();
 
-            if (!that._setValue && state !== STATE_FILTER) {
+            if (!that._valueCalled && state !== STATE_FILTER) {
                 that._selectItem(value);
-                that._setValue = false;
+                that._valueCalled = false;
             }
 
             that._hideBusy();
@@ -400,7 +400,7 @@
                     value = value.toString();
                 }
 
-                that._setValue = true;
+                that._valueCalled = true;
 
                 if (value && that._valueOnFetch(value)) {
                     return;
