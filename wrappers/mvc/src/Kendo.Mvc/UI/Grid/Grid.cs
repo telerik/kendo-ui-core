@@ -422,7 +422,6 @@ namespace Kendo.Mvc.UI
         private object CreateButton(/*GridButtonType buttonType,*/ object htmlAttributes, object imageHtmlAttributes, string text)
         {
             Editable.Enabled = true;
-            InitializeEditors();
             return Button<GridToolBarCreateCommand<T>>(null/*, buttonType*/, htmlAttributes, imageHtmlAttributes, text);
         }
 
@@ -448,8 +447,7 @@ namespace Kendo.Mvc.UI
 
         private object SaveButton(object htmlAttributes, object imageHtmlAttributes, string saveText, string cancelText)
         {
-            Editable.Enabled = true;
-            InitializeEditors();
+            Editable.Enabled = true;  
             return SaveButton(null/*, buttonType*/, htmlAttributes/*, imageHtmlAttributes*/, saveText, cancelText);
         }
 
