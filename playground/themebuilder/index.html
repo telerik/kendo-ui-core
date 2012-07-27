@@ -117,7 +117,6 @@
         .body .k-gradientpick
         {
             font: inherit !important;
-            width: 190px;
             padding: .8em;
         }
 
@@ -157,9 +156,33 @@
         .sample
         {
             position: relative;
+            display: inline-block;
             width: 190px;
             height: 10px;
             margin: 5px 0 20px 0;
+        }
+
+        .rotation-view
+        {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            vertical-align: top;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .rotation-view:before
+        {
+            content: "\25ba";
+            font: 20px Arial, Helvetica, sans-serif;
+            display: block;
+            width: 20px;
+            height: 20px;
+            color: #333;
+            line-height: 18px;
+            text-align: center;
+            text-shadow: 0 -1px 1px rgba(0,0,0,.3);
         }
 
         .sample .gradient-view
