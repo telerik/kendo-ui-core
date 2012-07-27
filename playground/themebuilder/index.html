@@ -14,6 +14,7 @@
     <script src="../../src/kendo.data.js"></script>
     <script src="../../src/kendo.popup.js"></script>
     <script src="../../src/kendo.list.js"></script>
+    <script src="../../src/kendo.menu.js"></script>
     <script src="../../src/kendo.combobox.js"></script>
     <script src="../../src/kendo.history.js"></script>
     <script src="../../src/kendo.mobile.scroller.js"></script>
@@ -33,6 +34,7 @@
     <script src="scripts/gradientengine.js"></script>
     <script src="scripts/hslpicker.js"></script>
     <script src="scripts/gradientpicker.js"></script>
+    <script src="scripts/contextmenu.js"></script>
     <style type="text/css">
         html
         {
@@ -219,10 +221,16 @@
             text-shadow: 0 1px 1px #fff;
         }
 
+        .k-context-menu
+        {
+            border: 0;
+            min-width: 130px;
+        }
+
     </style>
 </head>
 <body class="body">
-    <div class="box">
+    <div class="box" tabindex="0">
         <div class="drop" style="background: #dc143c;">&nbsp;</div>
         <div class="drop" style="background: #0066cc;">&nbsp;</div>
         <div class="drop" style="background: #adff2f;">&nbsp;</div>
