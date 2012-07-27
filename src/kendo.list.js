@@ -726,7 +726,7 @@
                       })
                       .one(SELECTED, function() {
                           select();
-                      })
+                      });
 
 
                 if (parent._setValue !== undefined) {
