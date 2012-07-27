@@ -114,7 +114,9 @@
                     origin: "bottom center",
                     position: "top center",
                     close: function () {
-                        that.styleengine.update(that.element, { "background-image": that.gradients.get("-webkit-") });
+                        if (that.styleengine) {
+                            that.styleengine.update(that.element, { "background-image": that.gradients.get("-webkit-") });
+                        }
                     }
                 });
 
