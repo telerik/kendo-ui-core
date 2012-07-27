@@ -67,7 +67,8 @@
 
                 that.color = new Color(element.css("background-color"));
 
-                that.colorElement = $('<div class="color-value">#</div>').appendTo(that.popup.element);
+                that.colorElement = $('<div class="color-preview"></div>').appendTo(that.popup.element);
+                that.colorValue = $('<input class="color-value" />').appendTo(that.colorElement);
 
                 var popupElement = that.popup.element.addClass("k-list-container"),
                     hueElement = $('<label class="label">H<input type="progress" /></label>').appendTo(popupElement).find("input"),
@@ -113,7 +114,7 @@
             },
 
             _toggle: function(open) {
-                var that = this, color, target, options = that.options;
+                var that = this, color, target, options = that.options, readable;
 
                 if (options.filter) {
                     that.target = that.target || that.element.find(options.filter);
@@ -124,7 +125,13 @@
 
                 if (open) {
                     color = that.color.set(target.css("background-color")).get();
-                    that.colorElement.text(color);
+                    readable = that.color.readable();
+
+                    that.colorValue.attr("value", color);
+                    that.colorValue.css({
+                        color: readable,
+                        borderColor: readable
+                    });
                     that.colorElement.css("background-color", color);
 
                     that.hueSlider.value(that.color.hue());
@@ -153,10 +160,15 @@
                 var that = this,
                     color = that.color[e.sender.type](e.value),
                     textColor = color.get(),
+                    readable = color.readable(),
                     target = !that.options.filter ? that.element : that.target;
 
                 target.css("background-color", textColor);
-                that.colorElement.text(textColor);
+                that.colorValue.attr("value", textColor);
+                that.colorValue.css({
+                    color: readable,
+                    borderColor: readable
+                });
                 that.colorElement.css("background-color", textColor);
                 e.sender.valueElement.text(e.value);
 
