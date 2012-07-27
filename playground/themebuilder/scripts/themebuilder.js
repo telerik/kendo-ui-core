@@ -334,6 +334,15 @@ var devices = [ "ios", "android", "blackberry", "meego" ], CtrlDown = false, con
 
 })(jQuery);
 
+var draggableEvents = {
+    dragstart: function (e) {
+        $(document.documentElement).css("cursor", cursorSvg.replace("%23f984ef", this.element.css("background-color")));
+    },
+    dragend: function () {
+        $(document.documentElement).css("cursor", 'default');
+    }
+};
+
 function initTargets() {
     setTimeout(function () {
         var property = "background-color",
@@ -342,14 +351,7 @@ function initTargets() {
 
         defaultCSS[property] = "";
 
-        $(".drop").kendoDraggable({
-            dragstart: function (e) {
-                $(document.documentElement).css("cursor", cursorSvg.replace("%23f984ef", this.element.css("background-color")));
-            },
-            dragend: function () {
-                $(document.documentElement).css("cursor", 'default');
-            }
-        });
+        $(".drop").kendoDraggable(draggableEvents);
 
         $(".device").kendoDropFilter({
             filter: getWidgets(colors).selector,
@@ -421,10 +423,11 @@ function initTargets() {
             }
         }, ".utility-active");
 
-        $("#picky").kendoHSLPicker();
-        $(".km-tabstrip").kendoHSLPicker({ change: function (e) {
-            this.element.parents(".device").data("kendoStyleEngine").update(this.element, { "background-color": e.color.get() });
-        } });
+        $(".km-tabstrip").kendoHSLPicker({
+            change: function (e) {
+                this.element.parents(".device").data("kendoStyleEngine").update(this.element, { "background-color": e.color.get() });
+            }
+        });
         $(".gradient").kendoGradientPicker();
         $(".km-navbar").kendoGradientPicker();
     }, 200);
@@ -448,9 +451,19 @@ var defaultColors = [ "#c5007c", "#6300a5", "#0010a5", "#0064b5", "#00a3c7", "#0
     i = 0;
 
 while (defaultColors[i]) {
-   $('<div class="drop" style="background-color:' + defaultColors[i++] + '" />').appendTo(".colorHolder");
+   $('<div class="drop" style="background-color:' + defaultColors[i] + '" />')
+            .insertBefore(".recentColors")
+            .toggleClass("transDrop", defaultColors[i++] == "transparent")
+            .click(function () {
+                var recent = $(this).clone().prependTo(".recentColors").kendoHSLPicker().data("kendoHSLPicker");
+
+                recent.element.kendoDraggable(draggableEvents);
+                recent._toggle();
+                recent.popup.wrapper.addClass("k-static-picker");
+            });
+
    if (!(i % 12)) {
-       $("<br />").appendTo(".colorHolder");
+       $("<br />").insertBefore(".recentColors");
    }
 }
 

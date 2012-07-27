@@ -51,7 +51,7 @@
         .device
         {
             width: 250px;
-            height: 400px;
+            height: 360px;
             position: relative;
             display: inline-block;
             margin-right: 10px;
@@ -210,15 +210,25 @@
 
         .colorHolder {
             font-size: 0;
+            width: 540px;
         }
 
         .drop
         {
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             display: inline-block;
             text-align: center;
             box-shadow: inset 1px 1px 0 rgba(0,0,0,.2), inset -1px -1px 0 rgba(255,255,255,.2);
+        }
+
+        .transDrop
+        {
+            background-image: -webkit-gradient(linear, 0 0, 100% 100%, color-stop(.25, #ccc), color-stop(.25, transparent), to(transparent)), -webkit-gradient(linear, 0 100%, 100% 0, color-stop(.25, #ccc), color-stop(.25, transparent), to(transparent)),
+                              -webkit-gradient(linear, 0 0, 100% 100%, color-stop(.75, transparent), color-stop(.75, #ccc)), -webkit-gradient(linear, 0 100%, 100% 0, color-stop(.75, #fff), color-stop(.75, #ccc));
+            background-image: -moz-linear-gradient(45deg, #ccc 25%, transparent 25%, transparent), -moz-linear-gradient(-45deg, #ccc 25%, transparent 25%, transparent),
+                             -moz-linear-gradient(45deg, transparent 75%, #ccc 75%), -moz-linear-gradient(-45deg, #fff 75%, #ccc 75%);
+            background-size: 25% 25%;
         }
 
         .header
@@ -285,6 +295,45 @@
             background: -moz-linear-gradient(top, #e0e0e0, #fff);
         }
 
+        .recentColors
+        {
+            height: 45px;
+            width: 100%;
+            box-shadow: inset 1px 1px 0 rgba(0,0,0,.2), inset -1px -1px 0 rgba(255,255,255,.2);
+        }
+
+        .k-static-picker
+        {
+            top: 62px !important;
+            left: 540px !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        .k-static-picker > .k-popup
+        {
+            display: block !important;
+            -webkit-transition: none !important;
+            -moz-transition: none !important;
+            -webkit-transform: none !important;
+            -moz-transform: none !important;
+            padding: 0;
+            border-radius: 0;
+            box-shadow: none;
+            border: 0;
+            background: none;
+        }
+
+        .k-static-picker .color-value
+        {
+            width: 160px;
+            height: 132px;
+            line-height: 132px;
+            vertical-align: bottom;
+            text-align: right;
+            color: #fff;
+            border-radius: 0;
+        }
     </style>
 </head>
 <body class="body">
@@ -299,6 +348,7 @@
         </div>
         <div class="tools">
             <div class="colorHolder">
+                <div class="recentColors"></div>
             </div>
         </div>
         <div class="box">
