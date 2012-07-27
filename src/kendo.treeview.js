@@ -336,28 +336,33 @@
             }
         },
 
-        _fieldFor: function(fieldName) {
+        _fieldAccessor: function(fieldName) {
             var fieldBindings = this.options[bindings[fieldName]],
-                count = fieldBindings.length;
+                count = fieldBindings.length,
+                result = "(function(item) {";
 
             if (count === 0) {
-                return "'" + fieldName + "'";
-            } else if (count == 1) {
-                return "'" + fieldBindings[0] + "'";
+                result += "return item['" + fieldName + "'];";
             } else {
-                // generates ['foo', 'bar'][item.level() < 3 ? item.level() : 2]
-                return "['" + fieldBindings.join("','") + "']" +
-                       "[item.level() < " + count + " ? item.level() : " + (count-1) + "]";
+                result += "var level = item.level();" +
+                          "var levels = [" +
+                            $.map(fieldBindings, function(x) {
+                                return "function(d){ return " + kendo.expr(x) + "}";
+                            }).join(",") + "];";
+
+                // generates levels[level < 3 ? level : 2](item);
+                result += "return levels[level < " + count + " ? level : " + (count-1) + "](item)";
             }
+
+            result += "})";
+
+            return result;
         },
 
         _textTemplate: function() {
             var that = this,
-                field = function(fieldName) {
-                    return "item[" + that._fieldFor(fieldName) + "]";
-                },
                 templateText =
-                    "# var text = " + field("text") + "; #" +
+                    "# var text = " + that._fieldAccessor("text") + "(item); #" +
                     "# if (typeof item.encoded != 'undefined' && item.encoded === false) {#" +
                         "#= text #" +
                     "# } else { #" +
@@ -373,10 +378,10 @@
 
         _itemTemplate: function() {
             var that = this,
-                field = function(fieldName) {
-                    return "item[" + that._fieldFor(fieldName) + "]";
-                },
                 templateText =
+                    "# var url = " + that._fieldAccessor("url") + "(item); #" +
+                    "# var imageUrl = " + that._fieldAccessor("imageUrl") + "(item); #" +
+                    "# var spriteCssClass = " + that._fieldAccessor("spriteCssClass") + "(item); #" +
                     "<li class='#= r.wrapperCssClass(group, item) #'" +
                         " " + kendo.attr("uid") + "='#= item.uid #'" +
                     ">" +
@@ -391,18 +396,15 @@
                                 "</span>" +
                             "# } #" +
 
-                            "# var url = " + field("url") + "; #" +
                             "# var tag = url ? 'a' : 'span'; #" +
                             "# var textAttr = url ? ' href=\\'' + url + '\\'' : ''; #" +
 
                             "<#=tag# class='#= r.textClass(item) #'#= textAttr #>" +
 
-                                "# var imageUrl = " + field("imageUrl") + "; #" +
                                 "# if (imageUrl) { #" +
                                     "<img class='k-image' alt='' src='#= imageUrl #'>" +
                                 "# } #" +
 
-                                "# var spriteCssClass = " + field("spriteCssClass") + "; #" +
                                 "# if (spriteCssClass) { #" +
                                     "<span class='k-sprite #= spriteCssClass #'></span>" +
                                 "# } #" +

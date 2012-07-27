@@ -515,6 +515,17 @@
                 equal(treeviewObject.text(bar), "baz");
             });
 
+            test("complext dataTextField is evaluated with getter", function() {
+                createTreeView({
+                    dataTextField: "Product.Name",
+                    dataSource: [
+                        { id: 1, Product: { Name: "bar" } }
+                    ]
+                });
+
+                equal(treeview.text(), "bar");
+            });
+
             test("initially expanded items query the child datasources", function() {
                 createTreeView({
                     dataSource: new HierarchicalDataSource({
