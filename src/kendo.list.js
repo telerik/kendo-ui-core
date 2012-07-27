@@ -731,7 +731,7 @@
 
                 if (parent._valueCalled !== undefined) {
                     select();
-                } else {
+                } else if (!parent.value()) {
                     that.enable(false);
                 }
             }

@@ -284,7 +284,7 @@
                     ds = childCB.dataSource;
 
                 equal(childCB.value(), "3");
-                equal(child.attr("disabled"), "disabled");
+                equal(child.attr("disabled"), undefined);
             });
 
             test("Parent with autoBind:false selects element in the child combo", function() {
