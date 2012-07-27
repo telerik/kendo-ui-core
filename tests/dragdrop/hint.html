@@ -102,7 +102,7 @@
                 trigger("mousemove", { pageX: 21, pageY: 21 });
 
                 var result = kendo.getOffset(hint);
-                equal(result.top, offset.top);
+                equal(Math.floor(result.top), Math.floor(offset.top));
                 equal(result.left, offset.left + 20);
             });
 
@@ -115,7 +115,7 @@
                 trigger("mousemove", { pageX: 21, pageY: 21 });
 
                 var result = kendo.getOffset(hint);
-                equal(result.top, offset.top + 20);
+                equal(Math.floor(result.top), Math.floor(offset.top) + 20);
                 equal(result.left, offset.left);
             });
 
