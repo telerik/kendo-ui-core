@@ -34,7 +34,7 @@
         percent = (percent || 10) / 100;
         var color = round(percent * 255);
 
-        return "rgba(" + color + "," + color + "," + color + "," + percent + ")";
+        return "rgba(" + color + "," + color + "," + color + ",0)";
     }
 
     function parseColor(color) {
@@ -53,6 +53,16 @@
         }
 
         return result;
+    }
+
+    function colorBrightness(color) {
+        return ((color.red*299) + (color.green*587) + (color.blue*114)) / 1000;
+    }
+
+    function colorDifference(color1, color2) {
+        return (max(color1.red, color2.red) - min(color1.red, color2.red)) +
+               (max(color1.green, color2.green) - min(color1.green, color2.green)) +
+               (max(color1.blue, color2.blue) - min(color1.blue, color2.blue));
     }
 
     function constructRgb(color, withAlpha) {
@@ -121,6 +131,19 @@
             return this._set(this.addition(this.toRgba(), "#999"));
         },
 
+        readable: function () {
+            var color;
+
+            if (this.lighterThan("#999")) {
+                color = this.subtraction(this.toRgba(), buildPercent(100));
+            } else {
+                color = this.addition(this.toRgba(), buildPercent(100));
+            }
+            color.alpha = 1;
+
+            return this.color2css(color);
+        },
+
         isHex: function(testee) {
             return (CssHexRegExp.test(testee));
         },
@@ -141,6 +164,16 @@
             } else {
                 return constructRgb(color, true);
             }
+        },
+
+        lighterThan: function(color) {
+            color = this.css2rgba(color);
+            return colorBrightness(color) - colorBrightness(this.value) < 20;
+        },
+
+        darkerThan: function(color) {
+            color = this.css2rgba(color);
+            return colorBrightness(this.value) - colorBrightness(color) < -20;
         },
 
         hex2rgb: function(hex) {
