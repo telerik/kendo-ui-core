@@ -332,15 +332,6 @@ var devices = [ "ios", "android", "blackberry", "meego" ], CtrlDown = false, con
         $(deviceId).kendoStyleEngine();
     });
 
-    $(".drop").kendoDraggable({
-        dragstart: function (e) {
-            $(document.documentElement).css("cursor", cursorSvg.replace("%23f984ef", this.element.css("background-color")));
-        },
-        dragend: function () {
-            $(document.documentElement).css("cursor", 'default');
-        }
-    });
-
 })(jQuery);
 
 function initTargets() {
@@ -350,6 +341,15 @@ function initTargets() {
             defaultCSS = { cursor: "default" };
 
         defaultCSS[property] = "";
+
+        $(".drop").kendoDraggable({
+            dragstart: function (e) {
+                $(document.documentElement).css("cursor", cursorSvg.replace("%23f984ef", this.element.css("background-color")));
+            },
+            dragend: function () {
+                $(document.documentElement).css("cursor", 'default');
+            }
+        });
 
         $(".device").kendoDropFilter({
             filter: getWidgets(colors).selector,
@@ -371,7 +371,7 @@ function initTargets() {
                 target.css(defaultCSS);
 
                 if (CtrlDown) {
-                    var offset = that.element.offset(),
+                    var offset = target.offset(),
                         structure = buildMenu(target);
 
                     contextMenu.element.empty();
@@ -396,18 +396,18 @@ function initTargets() {
             keyup: function (e) { CtrlDown = !(e.which == 17); }
         });
 
-        var allProps = getPropertySelector();
-        $(document.body).on({
-            mouseover: function (e) {
-                $(".utility-active").removeClass("utility-active");
-                $(e.currentTarget).addClass("utility-active");
-                e.stopImmediatePropagation();
-            },
-            mouseout: function (e) {
-                $(".utility-active").removeClass("utility-active");
-                e.stopImmediatePropagation();
-            }
-        }, allProps);
+//        var allProps = getPropertySelector();
+//        $(document.body).on({
+//            mouseover: function (e) {
+//                $(".utility-active").removeClass("utility-active");
+//                $(e.currentTarget).addClass("utility-active");
+//                e.stopImmediatePropagation();
+//            },
+//            mouseout: function (e) {
+//                $(".utility-active").removeClass("utility-active");
+//                e.stopImmediatePropagation();
+//            }
+//        }, allProps);
 
         $(".device").on({
             click: function (e) {
@@ -442,6 +442,19 @@ function mobileAccountViewInit() {
         index: 0
     });
 }
+
+var defaultColors = [ "#c5007c", "#6300a5", "#0010a5", "#0064b5", "#00a3c7", "#0fad00", "#8cc700", "#ffff00", "#fec500", "#ff9400", "#ff6600", "#ff0000",
+                      "transparent", "#fff", "#e5e5e5", "#ccc", "#b2b2b2", "#999", "#7f7f7f", "#666", "#4c4c4c", "#333", "#191919", "#000" ],
+    i = 0;
+
+while (defaultColors[i]) {
+   $('<div class="drop" style="background-color:' + defaultColors[i++] + '" />').appendTo(".colorHolder");
+   if (!(i % 12)) {
+       $("<br />").appendTo(".colorHolder");
+   }
+}
+
+$(".menu").kendoMenu();
 
 $("#getStyles").click(function () {
     var output = "";
