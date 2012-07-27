@@ -316,6 +316,15 @@
             equals($('#TabStrip1 .k-content').css('opacity'), '1');
         });
 
+        test('remove method removes several tabs and their content elements', 2, function() {
+            var tabStrip = $("<ul><li>Tab 1</li><li>Tab 2</li></ul>").kendoTabStrip().data("kendoTabStrip");
+
+            tabStrip.remove("li");
+
+            ok(tabStrip.tabGroup.is(":empty"));
+            ok(!tabStrip.tabGroup.next()[0]);
+        });
+
     </script>
 
     <h1 id="qunit-header">kendo.ui.TabStrip Tests</h1>

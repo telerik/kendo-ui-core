@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Test Filtering Kendo Tabstrip - jsFiddle demo by clechner</title>
+  
+    <script type='text/javascript' src='http://code.jquery.com/jquery-1.7.1.js'></script>
+  
+    <script type='text/javascript' src="../src/kendo.core.js"></script>
+    <script type='text/javascript' src="../src/kendo.fx.js"></script>
+    <script type='text/javascript' src="../src/kendo.data.js"></script>
+    <script type='text/javascript' src="../src/kendo.tabstrip.js"></script>
+    <script type='text/javascript' src="../src/kendo.selectable.js"></script>
+    <script type='text/javascript' src="../src/kendo.listview.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://cdn.kendostatic.com/2012.2.710/styles/kendo.common.min.css">
+    <link rel="stylesheet" type="text/css" href="http://cdn.kendostatic.com/2012.2.710/styles/kendo.default.min.css">
+    <script type='text/javascript'>
+        $(window).load(function(){
+            var currentState = "California", selectState,
+                stateSource = [
+                    { state: "Minnesota" }, { state: "California" }, { state: "Florida" }
+                ],
+
+                citySource = [{
+                       state: "Minnesota",
+                       title: "Minneapolis",
+                       content: "some Minneapolis text"
+                   },
+                   {
+                       state: "Minnesota",
+                       title: "Duluth",
+                       content: "some Duluth text"
+                   },
+                   {
+                       state: "California",
+                       title: "San Diego",
+                       content: "some San Diego text"
+                   },
+                   {
+                       state: "California",
+                       title: "Los Angeles",
+                       content: "some LA text"
+                   },
+                          {
+                       state: "Florida",
+                       title: "Orlando",
+                       content: "some Orlando text"
+                   },
+                   {
+                       state: "Florida",
+                       title: "Miami",
+                       content: "some Miami text"
+                   }
+                ],
+
+                kendoDS = new kendo.data.DataSource({
+                    data: citySource,
+                    filter: { field: "state", operator: "eq", value: currentState }
+                });
+
+            $("#listView").kendoListView({
+                 template: "<button class='state'>${state}</button>",
+                 dataSource: stateSource,
+                 selectable: true
+             });
+
+            var tabs = $("#tabStrip").kendoTabStrip({
+                   dataTextField: "title",
+                   dataContentField: "content",
+                   dataSource: kendoDS
+            }),
+            tabStrip = tabs.data("kendoTabStrip");
+
+            $("#listView").on("click", ".state", function () {
+                selectState = $(this).text();
+                console.log(selectState);
+
+                kendoDS.filter({
+                    field: "state",
+                    value: selectState,
+                    operator: "eq"
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="listView"></div>
+    <div id="tabStrip"></div>
+</body>
+</html>
+
