@@ -102,22 +102,6 @@
         parent.trigger(e.type);
     }
 
-    var elementProto = "HTMLElement" in window ? HTMLElement.prototype : [],
-        matchesSelector = elementProto.webkitMatchesSelector || elementProto.mozMatchesSelector || elementProto.msMatchesSelector ||
-                          elementProto.oMatchesSelector || elementProto.matchesSelector ||
-                          function( selector ) {
-                              var nodeList = document.querySelectorAll ? ( this.parentNode || document ).querySelectorAll( selector ) || [] : $(selector),
-                                  i = nodeList.length;
-
-                              while (i--) {
-                                  if (nodeList[i] == this) {
-                                      return true;
-                                  }
-                              }
-
-                              return false;
-                          };
-
     function checkTarget(target, targets, filters) {
         var theTarget, theFilter, i = 0,
             targetLen = targets && targets.length,
@@ -133,7 +117,7 @@
 
             for (i = 0; i < filterLen; i ++) {
                 theFilter = filters[i];
-                if (matchesSelector.call(target, theFilter.options.filter)) {
+                if (support.matchesSelector.call(target, theFilter.options.filter)) {
                     return { target: theFilter, targetElement: target };
                 }
             }
