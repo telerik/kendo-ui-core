@@ -145,16 +145,19 @@
             dataSource.read();
         });
 
-        test("resetting DataSource rebinds the widget", function() {
+        test("resetting DataSource rebinds the widget and refreshes content elements", 2, function() {
             var dom = $("<ul/>");
 
-            var tabstrip = new kendo.ui.TabStrip(dom);
+            var tabstrip = new kendo.ui.TabStrip(dom, {
+                dataContentField: "content"
+            });
 
             tabstrip.setDataSource(new kendo.data.DataSource({
-                data:[{text: 1, value: 1}, {text:2, value:2}]
+                data:[{text: 1, value: 1, content: "1"}, {text:2, value:2, content: "2"}]
             }));
 
             equal(tabstrip.wrapper.find("li").length, 2);
+            equal(tabstrip.wrapper.children("div").length, 2);
         });
     </script>
 

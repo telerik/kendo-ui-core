@@ -278,6 +278,7 @@
                 }
             } else {
                 that.trigger("dataBinding");
+                that.remove("li");
                 that.append(tabs);
                 that.trigger("dataBound");
             }
@@ -454,21 +455,22 @@
             return that;
         },
 
-        remove: function (element) {
+        remove: function (elements) {
             var that = this,
-                type = typeof element,
-                content;
+                type = typeof elements,
+                contents = $();
 
             if (type === "string") {
-                element = that.tabGroup.find(element);
+                elements = that.tabGroup.find(elements);
             } else if (type === "number") {
-                element = that.tabGroup.children().eq(element);
+                elements = that.tabGroup.children().eq(elements);
             }
 
-            content = $(that.contentElement(element.index()));
-
-            content.remove();
-            element.remove();
+            elements.each(function () {
+                contents.push(that.contentElement($(this).index()));
+            });
+            elements.remove();
+            contents.remove();
 
             that._updateContentElements();
 
