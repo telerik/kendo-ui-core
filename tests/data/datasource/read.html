@@ -528,7 +528,8 @@
                             aggregates = options.data.aggregate;
                         }
                     },
-                    serverGrouping: true
+                    serverGrouping: true,
+                    serverAggregates: true
                 });
                 dataSource.read();
                 ok(aggregates);
