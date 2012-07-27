@@ -32,6 +32,7 @@
     <script src="scripts/colorengine.js"></script>
     <script src="scripts/gradientengine.js"></script>
     <script src="scripts/hslpicker.js"></script>
+    <script src="scripts/gradientpicker.js"></script>
     <style type="text/css">
         html
         {
@@ -112,7 +113,9 @@
             background: none;
         }
 
-        .body .k-colorpick {
+        .body .k-colorpick,
+        .body .k-gradientpick
+        {
             font: inherit !important;
             width: 190px;
             padding: .8em;
@@ -124,7 +127,9 @@
             width: 200px;
             height: 20px;
             background: -webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.5)),
-                        -webkit-linear-gradient(left, #0b47a2, #04b7a2 5%, #0b4a72 98%, #20b47a);
+                        -webkit-linear-gradient(left, #77ADFE, #64D3FC 5%, #259EE9 98%, rgba(186,205,243,.8));
+            background: -moz-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.5)),
+                        -moz-linear-gradient(left, #77ADFE, #64D3FC 5%, #259EE9 98%, rgba(186,205,243,.8));
         }
 
         .stop
@@ -143,10 +148,18 @@
             position: absolute;
             content: "\a0";
             width: 1px;
-            height: 5px;
-            top: -5px;
+            height: 10px;
+            top: -10px;
             left: 5px;
             background: rgba(0,0,0,.3);
+        }
+
+        .sample {
+            position: relative;
+            width: 190px;
+            height: 10px;
+            margin: 20px 0;
+            border-radius: 5px;
         }
 
     </style>
@@ -165,23 +178,6 @@
         <div class="adddrop">+</div>
         <br /><br />
         <div class="gradient"></div>
-        <script>
-            var gradient = new Gradient($(".gradient").css("background"));
-
-            for (var i = 0, len = gradient.value[1].stops.length; i < len; i++) {
-                var step = gradient.value[1].stops[i];
-
-                $("<div class='stop' />").css({
-                    backgroundColor: step.color.get(),
-                    left: step.position || "1px"
-                }).appendTo(".gradient").data("idx", i)
-                .kendoHSLPicker({ pick: function (e) {
-                    gradient.value[1].stops[this.element.data("idx")].color = e.color;
-                    $(".gradient").css("background", gradient.get());
-                }});
-            }
-
-        </script>
         <br /><br />
         <div>
             <div id="iosDevice" class="device">
