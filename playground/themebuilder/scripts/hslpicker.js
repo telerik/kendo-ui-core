@@ -70,6 +70,10 @@
                 that.colorElement = $('<div class="color-preview"></div>').appendTo(that.popup.element);
                 that.colorValue = $('<input class="color-value" />').appendTo(that.colorElement);
 
+                that.colorValue
+                    .bind("input", proxy(that._change, that))
+                    .keyup(proxy(that._keyUp, that));
+
                 var popupElement = that.popup.element.addClass("k-list-container"),
                     hueElement = $('<label class="label">H<input type="progress" /></label>').appendTo(popupElement).find("input"),
                     hueValue = $('<div class="slider-value">0</div><br />').appendTo(popupElement),
@@ -113,26 +117,29 @@
                 this._toggle(false);
             },
 
-            _toggle: function(open) {
-                var that = this, color, target, options = that.options, readable;
-
-                if (options.filter) {
-                    that.target = that.target || that.element.find(options.filter);
-                }
-                target = !options.filter ? that.element : that.target;
-
-                open = open !== undefined? open : that.options.filter ? true : !that.popup.visible();
-
-                if (open) {
-                    color = that.color.set(target.css("background-color")).get();
+            _updateValues: function (updateAttr) {
+                var that = this,
+                    color = that.color.get(),
                     readable = that.color.readable();
 
+                if (updateAttr) {
                     that.colorValue.attr("value", color);
-                    that.colorValue.css({
-                        color: readable,
-                        borderColor: readable
-                    });
-                    that.colorElement.css("background-color", color);
+                }
+
+                that.colorValue.css({
+                    color: readable,
+                    borderColor: readable
+                });
+                that.colorElement.css("background-color", color);
+
+            },
+
+            _update: function (updateAttr) {
+                var that = this,
+                    color = that.color.get();
+
+                if (color) {
+                    that._updateValues(color, updateAttr);
 
                     that.hueSlider.value(that.color.hue());
                     that.saturationSlider.value(that.color.saturation());
@@ -143,6 +150,39 @@
                     that.saturationSlider.valueElement.text(that.color.saturation());
                     that.lightnessSlider.valueElement.text(that.color.lightness());
                     that.alphaSlider.valueElement.text(that.color.alpha());
+                }
+            },
+
+            _change: function (e) {
+                this.color.set(e.target.value);
+                this._update();
+            },
+
+            _keyUp: function (e) {
+                var that = this;
+
+                if (e.which == 38) {
+                    that.color.tint();
+                    that._update(true);
+                } else if (e.which == 40) {
+                    that.color.shade();
+                    that._update(true);
+                }
+            },
+
+            _toggle: function(open) {
+                var that = this, color, target, options = that.options;
+
+                if (options.filter) {
+                    that.target = that.target || that.element.find(options.filter);
+                }
+                target = !options.filter ? that.element : that.target;
+
+                open = open !== undefined? open : that.options.filter ? true : !that.popup.visible();
+
+                if (open) {
+                    that.color.set(target.css("background-color"));
+                    that._update(true);
                 }
 
                 that.popup[open ? "open" : "close"]();
@@ -158,23 +198,17 @@
 
             _onSlide: function(e) {
                 var that = this,
-                    color = that.color[e.sender.type](e.value),
-                    textColor = color.get(),
-                    readable = color.readable(),
+                    textColor = that.color.set(that.color[e.sender.type](e.value).get()).get(),
                     target = !that.options.filter ? that.element : that.target;
 
                 target.css("background-color", textColor);
-                that.colorValue.attr("value", textColor);
-                that.colorValue.css({
-                    color: readable,
-                    borderColor: readable
-                });
-                that.colorElement.css("background-color", textColor);
+
+                that._updateValues(true);
                 e.sender.valueElement.text(e.value);
 
-                that.trigger("pick", { color: color, target: target });
+                that.trigger("pick", { color: that.color, target: target });
 
-                return color;
+                return that.color;
             }
         });
 
