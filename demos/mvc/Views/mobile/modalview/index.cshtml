@@ -1,22 +1,22 @@
 <div data-role="view" id="modalview-camera" data-title="HTML5 Camera">
     <img src="../../content/mobile/modalview/lens.png" class="camera-image" /><br />
     <a data-role="button" data-rel="modalview" href="#modalview-login" id="modalview-open-button">Login</a>
+</div>
 
-    <div data-role="modalview" id="modalview-login" style="width: 95%; height: 80%;">
-        <div data-role="header">
-            <div data-role="navbar">
-                <span>Login</span>
-                <a data-click="closeModalViewLogin" data-role="button" data-align="right">Cancel</a>
-            </div>
+<div data-role="modalview" id="modalview-login" style="width: 95%; height: 80%;">
+    <div data-role="header">
+        <div data-role="navbar">
+            <span>Login</span>
+            <a data-click="closeModalViewLogin" data-role="button" data-align="right">Cancel</a>
         </div>
-
-        <ul data-role="listview" data-style="inset">
-            <li><label for="username">Username:</label> <input type="text" id="username" /></li>
-            <li><label for="password">Password:</label> <input type="password" id="password" /></li>
-        </ul>
-        <a data-click="closeModalViewLogin" id="modalview-login-button" type="button" data-role="button">Login</a>
-        <a data-click="closeModalViewLogin" id="modalview-reg-button" type="button" data-role="button">Register</a>
     </div>
+
+    <ul data-role="listview" data-style="inset">
+        <li><label for="username">Username:</label> <input type="text" id="username" /></li>
+        <li><label for="password">Password:</label> <input type="password" id="password" /></li>
+    </ul>
+    <a data-click="closeModalViewLogin" id="modalview-login-button" type="button" data-role="button">Login</a>
+    <a data-click="closeModalViewLogin" id="modalview-reg-button" type="button" data-role="button">Register</a>
 </div>
 
 <style scoped>
@@ -69,7 +69,7 @@
     .km-ios #modalview-login #modalview-login-button {
         background-color: Green;
     }
-    
+
     .km-tablet .km-ios #modalview-camera .km-view-title, .km-tablet .km-ios #modalview-login .km-view-title {
         color: #fff;
         text-shadow: 0 -1px rgba(0,0,0,.5);

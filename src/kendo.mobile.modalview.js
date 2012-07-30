@@ -35,6 +35,7 @@
 
             that._layout();
             that._scroller();
+            that._model();
         },
 
         events: [

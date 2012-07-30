@@ -17,6 +17,7 @@
         <script src="../../src/kendo.mobile.application.js"></script>
         <script src="../../src/kendo.mobile.shim.js"></script>
         <script src="../../src/kendo.mobile.modalview.js"></script>
+        <script src="../jquery.mockjax.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
     </head>
     <body>
@@ -29,14 +30,15 @@
         <script type="text/x-kendo-template" id="fixture-contents">
             <div data-role="view">
                 <a id="source" data-role="button" href="#modalView" data-rel="modalview">Foo</a>
-                <div data-role="modalview" id="modalView">
-                    Hello world!
-                </div>
+            </div>
+            <div data-role="modalview" id="modalView">
+                Hello world!
             </div>
         </script>
         <ul id="log"></ul>
 
         <script>
+            QUnit.config.reorder = false;
 
             var markup = $("#fixture-contents").html(),
                 modalView,
@@ -46,6 +48,7 @@
 
             module("ModalView", {
                 setup: function() {
+                    location.hash = '';
                     kendo.mobile.ui.Shim.fn.options.duration = 0;
                     root.html(markup);
                     new kendo.mobile.Application(root);
@@ -78,9 +81,37 @@
                 isClosed();
             });
 
-            test("data-rel=modalview widget opens the action sheet", 1, function() {
+            test("data-rel=modalview widget opens the modalview", 1, function() {
                 root.find('[data-role=button]').trigger($.Event(kendo.support.mouseup));
                 isOpen();
+            });
+
+            module("ModalView", {
+                setup: function() {
+                    location.hash = "";
+                    kendo.mobile.ui.Shim.fn.options.duration = 0;
+                    root.html('<div data-role="view"><a data-role="button" href="/page2.html">page2</a></div>');
+                    new kendo.mobile.Application(root);
+                },
+
+                teardown: function() {
+                    $.mockjaxClear();
+                }
+            });
+
+            asyncTest("includes modal views from remote views", 1, function() {
+                $.mockjax({
+                    url: "/page2.html",
+                    responseText: '<div data-role="view" id="page2">Page 2</div><div data-role="modalview" id="modalView">Hello world!</div>',
+                    responseTime: 0
+                });
+
+                root.find("a").trigger($.Event(kendo.support.mouseup));
+
+                setTimeout(function() {
+                    start();
+                    equal(root.find("[data-role=modalview]").length, 1);
+                }, 100);
             });
         </script>
     </body>
