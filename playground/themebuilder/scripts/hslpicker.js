@@ -134,11 +134,14 @@
 
             },
 
-            _update: function (updateAttr) {
+            _update: function (updateAttr, trigger) {
                 var that = this,
+                    target = !that.options.filter ? that.element : that.target,
                     color = that.color.get();
 
                 if (color) {
+                    target.css("background-color", color);
+
                     that._updateValues(color, updateAttr);
 
                     that.hueSlider.value(that.color.hue());
@@ -150,12 +153,18 @@
                     that.saturationSlider.valueElement.text(that.color.saturation());
                     that.lightnessSlider.valueElement.text(that.color.lightness());
                     that.alphaSlider.valueElement.text(that.color.alpha());
+
+                    if (trigger) {
+                        that.trigger("pick", { color: that.color, target: target });
+                    }
                 }
             },
 
             _change: function (e) {
-                this.color.set(e.target.value);
-                this._update();
+                var that = this;
+
+                that.color.set(e.target.value);
+                that._update(false, true);
             },
 
             _keyUp: function (e) {
@@ -163,10 +172,10 @@
 
                 if (e.which == 38) {
                     that.color.tint();
-                    that._update(true);
+                    that._update(true, true);
                 } else if (e.which == 40) {
                     that.color.shade();
-                    that._update(true);
+                    that._update(true, true);
                 }
             },
 
