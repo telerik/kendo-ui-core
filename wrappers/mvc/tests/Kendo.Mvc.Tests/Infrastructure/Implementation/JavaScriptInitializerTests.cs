@@ -27,7 +27,7 @@ namespace Kendo.Mvc.Infrastructure.Implementation.Tests
         public void Should_serialize_string()
         {
             data["foo"] = "bar";
-            initializer.Serialize(data).ShouldEqual("{foo:\"bar\"}");
+            initializer.Serialize(data).ShouldEqual("{\"foo\":\"bar\"}");
         }
 
         [Fact]
@@ -35,7 +35,7 @@ namespace Kendo.Mvc.Infrastructure.Implementation.Tests
         {
             int foo = 1;
             data["foo"] = foo;
-            initializer.Serialize(data).ShouldEqual("{foo:1}");
+            initializer.Serialize(data).ShouldEqual("{\"foo\":1}");
         }
 
         [Fact]
@@ -43,14 +43,14 @@ namespace Kendo.Mvc.Infrastructure.Implementation.Tests
         {
             Guid foo = new Guid("76c360e8-c796-4906-a611-45401ee0df7c");
             data["foo"] = foo;
-            initializer.Serialize(data).ShouldEqual("{foo:\"76c360e8-c796-4906-a611-45401ee0df7c\"}");
+            initializer.Serialize(data).ShouldEqual("{\"foo\":\"76c360e8-c796-4906-a611-45401ee0df7c\"}");
         }
 
         [Fact]
         public void Should_escape_strings()
         {
             data["foo"] = "\nbar";
-            initializer.Serialize(data).ShouldEqual("{foo:\"\\nbar\"}");
+            initializer.Serialize(data).ShouldEqual("{\"foo\":\"\\nbar\"}");
         }
 
         [Fact]
@@ -58,21 +58,21 @@ namespace Kendo.Mvc.Infrastructure.Implementation.Tests
         {
             data["foo"] = new Dictionary<string, object> () { { "bar", "bar" } };
 
-            initializer.Serialize(data).ShouldEqual("{foo:{bar:\"bar\"}}");
+            initializer.Serialize(data).ShouldEqual("{\"foo\":{\"bar\":\"bar\"}}");
         }
 
         [Fact]
         public void Should_output_init_statement()
         {
             data["foo"] = "foo";
-            initializer.Initialize("#foo", "Foo", data).ShouldEqual("jQuery(function(){jQuery(\"#foo\").kendoFoo({foo:\"foo\"});});");
+            initializer.Initialize("#foo", "Foo", data).ShouldEqual("jQuery(function(){jQuery(\"#foo\").kendoFoo({\"foo\":\"foo\"});});");
         }
 
         [Fact]
         public void Should_escape_invalid_selector_characters_in_the_id()
         {
             data["foo"] = "foo";
-            initializer.Initialize("#foo.bar[0]", "Foo", data).ShouldEqual("jQuery(function(){jQuery(\"#foo\\\\.bar\\\\[0\\\\]\").kendoFoo({foo:\"foo\"});});");
+            initializer.Initialize("#foo.bar[0]", "Foo", data).ShouldEqual("jQuery(function(){jQuery(\"#foo\\\\.bar\\\\[0\\\\]\").kendoFoo({\"foo\":\"foo\"});});");
         }
 
         [Fact]
@@ -94,7 +94,7 @@ namespace Kendo.Mvc.Infrastructure.Implementation.Tests
         {
             data["foo"] = new [] { "foo" };
 
-            initializer.Serialize(data).ShouldEqual("{foo:[\"foo\"]}");
+            initializer.Serialize(data).ShouldEqual("{\"foo\":[\"foo\"]}");
         }
 
         [Fact]
@@ -102,7 +102,7 @@ namespace Kendo.Mvc.Infrastructure.Implementation.Tests
         {
             data["foo"] = true;
 
-            initializer.Serialize(data).ShouldEqual("{foo:true}");
+            initializer.Serialize(data).ShouldEqual("{\"foo\":true}");
         }
 
         [Fact]
@@ -111,7 +111,7 @@ namespace Kendo.Mvc.Infrastructure.Implementation.Tests
             decimal foo = 12.3M;
             data["foo"] = foo;
 
-            initializer.Serialize(data).ShouldEqual("{foo:12.3}");
+            initializer.Serialize(data).ShouldEqual("{\"foo\":12.3}");
         }
 
         [Fact]
@@ -120,7 +120,7 @@ namespace Kendo.Mvc.Infrastructure.Implementation.Tests
             double foo = 12.3;
             data["foo"] = foo;
 
-            initializer.Serialize(data).ShouldEqual("{foo:12.3}");
+            initializer.Serialize(data).ShouldEqual("{\"foo\":12.3}");
         }
 
         [Fact]
@@ -129,7 +129,7 @@ namespace Kendo.Mvc.Infrastructure.Implementation.Tests
             float foo = 12.3f;
             data["foo"] = foo;
 
-            initializer.Serialize(data).ShouldEqual("{foo:12.3}");
+            initializer.Serialize(data).ShouldEqual("{\"foo\":12.3}");
         }
 
         [Fact]
@@ -137,7 +137,7 @@ namespace Kendo.Mvc.Infrastructure.Implementation.Tests
         {
             data["foo"] = new DateTime(2000, 1, 1, 1, 1, 1, 1);
 
-            initializer.Serialize(data).ShouldEqual("{foo:new Date(2000,0,1,1,1,1,1)}");
+            initializer.Serialize(data).ShouldEqual("{\"foo\":new Date(2000,0,1,1,1,1,1)}");
         }
 
         [Fact]
@@ -145,7 +145,7 @@ namespace Kendo.Mvc.Infrastructure.Implementation.Tests
         {
             data["dates"] = new List<DateTime> { new DateTime(2000, 1, 1, 1, 1, 1, 1) };
 
-            initializer.Serialize(data).ShouldEqual("{dates:[new Date(2000,0,1,1,1,1,1)]}");
+            initializer.Serialize(data).ShouldEqual("{\"dates\":[new Date(2000,0,1,1,1,1,1)]}");
         }
 
         [Fact]
@@ -153,7 +153,7 @@ namespace Kendo.Mvc.Infrastructure.Implementation.Tests
         {
             data["dates"] = new List<DateTime> { new DateTime(2000, 1, 1, 1, 1, 1, 1), new DateTime(2010, 1, 1, 1, 1, 1, 1), new DateTime(2020, 1, 1, 1, 1, 1, 1) };
 
-            initializer.Serialize(data).ShouldEqual("{dates:[new Date(2000,0,1,1,1,1,1),new Date(2010,0,1,1,1,1,1),new Date(2020,0,1,1,1,1,1)]}");
+            initializer.Serialize(data).ShouldEqual("{\"dates\":[new Date(2000,0,1,1,1,1,1),new Date(2010,0,1,1,1,1,1),new Date(2020,0,1,1,1,1,1)]}");
         }
 
         [Fact]
@@ -161,7 +161,7 @@ namespace Kendo.Mvc.Infrastructure.Implementation.Tests
         {
             data["dates"] = new List<DateTime>();
 
-            initializer.Serialize(data).ShouldEqual("{dates:[]}");
+            initializer.Serialize(data).ShouldEqual("{\"dates\":[]}");
         }
 
         [Fact]
@@ -169,7 +169,7 @@ namespace Kendo.Mvc.Infrastructure.Implementation.Tests
         {
             data["foo"] = null;
 
-            initializer.Serialize(data).ShouldEqual("{foo:null}");
+            initializer.Serialize(data).ShouldEqual("{\"foo\":null}");
         }
 
         [Fact]
@@ -180,7 +180,7 @@ namespace Kendo.Mvc.Infrastructure.Implementation.Tests
                     HandlerName = "bar"
                 };
 
-            initializer.Serialize(data).ShouldEqual("{foo:bar}");
+            initializer.Serialize(data).ShouldEqual("{\"foo\":bar}");
         }
 
         [Fact]
@@ -193,7 +193,7 @@ namespace Kendo.Mvc.Infrastructure.Implementation.Tests
 
             data["foo"] = new[] { nested };
 
-            initializer.Serialize(data).ShouldEqual("{foo:[{bar:baz}]}");
+            initializer.Serialize(data).ShouldEqual("{\"foo\":[{\"bar\":baz}]}");
         }
 
         [Fact]
@@ -202,7 +202,7 @@ namespace Kendo.Mvc.Infrastructure.Implementation.Tests
             data["foo"] = null;
             data["bar"] = null;
 
-            initializer.Serialize(data).ShouldEqual("{foo:null,bar:null}");
+            initializer.Serialize(data).ShouldEqual("{\"foo\":null,\"bar\":null}");
         }
 
         [Fact]
@@ -215,7 +215,7 @@ namespace Kendo.Mvc.Infrastructure.Implementation.Tests
                     }
                 };
 
-            initializer.Serialize(data).ShouldEqual("{foo:function(){}}");
+            initializer.Serialize(data).ShouldEqual("{\"foo\":function(){}}");
         }
 
         private enum FooEnum
@@ -228,7 +228,7 @@ namespace Kendo.Mvc.Infrastructure.Implementation.Tests
         {
             data["foo"] = FooEnum.Bar;
 
-            initializer.Serialize(data).ShouldEqual("{foo:\"bar\"}");
+            initializer.Serialize(data).ShouldEqual("{\"foo\":\"bar\"}");
         }
 
         [Fact]
@@ -236,7 +236,7 @@ namespace Kendo.Mvc.Infrastructure.Implementation.Tests
         {
             data["foo"] = new { bar = "baz" };
 
-            initializer.Serialize(data).ShouldEqual("{foo:{\"bar\":\"baz\"}}");
+            initializer.Serialize(data).ShouldEqual("{\"foo\":{\"bar\":\"baz\"}}");
         }
     }
 }
