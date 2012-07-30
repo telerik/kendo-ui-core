@@ -14,11 +14,9 @@
                 align = options.align || (ios ?  "bottom center" : "center center"),
                 position = options.position || (ios ? "bottom center" : "center center"),
                 effect = options.effect || (ios ? "slideIn:up" : "fade:in"),
-                shim = $(SHIM).hide(), container, view;
+                shim = $(SHIM).hide();
 
             Widget.fn.init.call(that, element, options);
-            view = that.view();
-            container = view ? view.container : kendo.mobile.application.element;
 
             that.shim = shim;
             that.element = element;
@@ -27,7 +25,7 @@
                 that.shim.on(MOUSEUP, $.proxy(that.hide, that));
             }
 
-            container.append(shim);
+            kendo.mobile.application.element.append(shim);
 
             that.popup = new Popup(that.element, {
                 anchor: shim,

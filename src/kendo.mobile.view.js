@@ -383,20 +383,23 @@
     var ViewEngine = Observable.extend({
         init: function(options) {
             var that = this,
-                views;
+                views,
+                container;
 
             Observable.fn.init.call(that);
 
             $.extend(that, options);
             that.sandbox = $("<div />");
+            container = that.container;
 
-            views = that._hideViews(that.container);
+            views = that._hideViews(container);
             that.rootView = views.first();
             that._view = null;
 
             that.layouts = {};
 
-            that._setupLayouts(that.container);
+            that._setupLayouts(container);
+            that._setupModalViews(container);
 
             if (that.loader) {
                 that.bind(SHOW_START, function() { that.loader.transition(); });
@@ -511,7 +514,7 @@
 
             that._setupLayouts(sandbox);
 
-            container.append(sandbox.children(roleSelector("layout") + ", script, style"))
+            container.append(sandbox.children(roleSelector("layout modalview") + ", script, style"))
                 .append(views);
 
             return that._createView(view);
@@ -532,6 +535,12 @@
 
         _hideViews: function(container) {
             return container.children(roleSelector("view splitview")).hide();
+        },
+
+        _setupModalViews: function(element) {
+            element.children(roleSelector("modalview")).each(function() {
+                kendo.initWidget($(this), {}, ui.roles);
+            });
         },
 
         _setupLayouts: function(element) {
