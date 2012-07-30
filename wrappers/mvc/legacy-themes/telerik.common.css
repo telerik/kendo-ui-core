@@ -265,6 +265,8 @@ html body .k-button-bare
 .k-denied { background-position: -64px -320px; }
 .k-resize-se { background-position: -64px -272px; }
 
+.k-i-arrowhead-s { background-position: 0 -175px }
+
 /* Inputs */
 
 .k-autocomplete
@@ -687,6 +689,11 @@ div.k-window-content
     background:none;
 }
 
+.k-menu .k-group .k-numerictextbox .k-link
+{
+    padding-right: 0;
+}
+
 .k-menu .k-item
 {
     position: relative;
@@ -722,6 +729,11 @@ div.k-window-content
     display: block;
 }
 
+.k-menu .k-numerictextbox .k-link
+{
+    padding: 0;
+}
+
 .k-menu .k-group
 {
     display: none;
@@ -742,11 +754,36 @@ div.k-window-content
     zoom: 1;
 }
 
+ul.k-menu .k-separator
+{
+    border-width: 0 1px 0 0;
+    font-size: 0;
+    height: 100%;
+    line-height: 0;
+    padding: 0.25em 0;
+    width: 1px;
+}
+
+ul.k-menu-vertical .k-separator,
+.k-menu .k-group .k-separator
+{
+    border-width: 1px 0 0;
+    height: 1px;
+    padding: 0;
+    width: 100%;
+}
+
 .k-menu .k-i-arrow-s
 {
     margin-left: 2px;
     margin-right: -10px;
     vertical-align: top;
+}
+
+.k-menu .k-dropdown-wrap .k-i-arrow-s
+{
+    margin-left: 0;
+    margin-right: 0;
 }
 
 .k-menu .k-i-arrow-e
@@ -1118,7 +1155,20 @@ div.k-grid-header .k-header
 .k-filter-menu .k-button
 {
     margin: 0.6em 4% 0 0;
-    width: 46%;
+    width: 47%;
+}
+
+.k-filter-menu .k-button+.k-button
+{
+    margin-right: 0;
+}
+
+.k-column-menu .k-i-sort-asc,
+.k-column-menu .k-i-sort-desc,
+.k-column-menu .k-i-columns,
+.k-column-menu .k-filter
+{
+    display: none;
 }
 
 /* Grid :: grouping */
@@ -2010,6 +2060,13 @@ span.k-numerictextbox
     margin-left: -16px;
     border-style: none;
     display: inline-block;
+}
+
+.k-menu .k-numeric-wrap .k-i-arrow-n,
+.k-menu .k-numeric-wrap .k-i-arrow-s
+{
+    margin-left: 0;
+    margin-right: 0;
 }
 
 *+html .k-numerictextbox .k-link,
