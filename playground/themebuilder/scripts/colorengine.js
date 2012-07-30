@@ -120,11 +120,11 @@
         },
 
         tint: function () {
-            return this._set(this.addition(this.toRgba(), "#FFF"));
+            return this._set(this.addition(this.toRgba(), "#101010"));
         },
 
         shade: function () {
-            return this._set(this.addition(this.toRgba(), "#000"));
+            return this._set(this.subtraction(this.toRgba(), "rgba(16,16,16,0)"));
         },
 
         tone: function () {
@@ -159,6 +159,8 @@
         },
 
         color2css: function(color) {
+            if (!color) return undefined;
+
             if (color.alpha === 1) {
                 return this.rgb2hex(color);
             } else {
@@ -278,7 +280,7 @@
                      red: min(foreground.red + background.red, 255),
                      green: min(foreground.green + background.green, 255),
                      blue: min(foreground.blue + background.blue, 255),
-                     alpha: min(foreground.alpha + background.alpha, 1)
+                     alpha: foreground.alpha
                    };
         },
 
@@ -292,7 +294,7 @@
                      red: max(0, foreground.red - background.red),
                      green: max(0, foreground.green - background.green),
                      blue: max(0, foreground.blue - background.blue),
-                     alpha: max(0, foreground.alpha - background.alpha)
+                     alpha: foreground.alpha
                    };
         },
 

@@ -71,7 +71,7 @@
             var that = this, value;
             e.preventDefault();
 
-            value = that._position(limitValue((e.event.clientX - that.targetOffsetX) - (that.handleWidth / 2), 0, that.constrain));
+            value = that._position(limitValue((e.x.client - that.targetOffsetX) - (that.handleWidth / 2), 0, that.constrain));
             if (value != that.point)
                 that.trigger(SLIDE, { value: value });
             that.point = value;
@@ -102,7 +102,7 @@
         _stop: function(e) {
             var that = this;
 
-            that.point = that._position(limitValue((e.event.clientX - e.target.offset().left) - (that.handleWidth / 2), 0, that.constrain));
+            that.point = that._position(limitValue((e.x.client - e.target.offset().left) - (that.handleWidth / 2), 0, that.constrain));
             that.handle.removeClass(ACTIVE_STATE);
             that.trigger(CHANGE, { value: that.point });
         },
@@ -155,7 +155,7 @@
                 that.drag = new kendo.Drag(that.wrapper, {
                     global: true,
                     tap: function(e) {
-                        that.point = that._position(limitValue((e.event.clientX - e.target.offset().left) - (that.handleWidth / 2), 0, that.constrain));
+                        that.point = that._position(limitValue((e.x.client - e.target.offset().left) - (that.handleWidth / 2), 0, that.constrain));
                         that.trigger(CHANGE, { value: that.point });
                     },
                     start: proxy(that._start, that),
