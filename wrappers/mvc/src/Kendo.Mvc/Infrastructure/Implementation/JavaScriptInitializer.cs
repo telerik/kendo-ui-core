@@ -41,7 +41,7 @@ namespace Kendo.Mvc.Infrastructure
             foreach (var keyValuePair in @object)
             {
                 output.Append(",")
-                      .Append(keyValuePair.Key)
+                      .Append("\"" + keyValuePair.Key + "\"")
                       .Append(":");
 
                 var value = keyValuePair.Value;

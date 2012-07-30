@@ -42,7 +42,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
             upload.Enabled = false;
             upload.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{enabled:false}");
+            output.ShouldContain("{\"enabled\":false}");
         }
 
         [Fact]
@@ -51,7 +51,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
             upload.Multiple = false;
             upload.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{multiple:false}");
+            output.ShouldContain("{\"multiple\":false}");
         }
 
         [Fact]
@@ -60,7 +60,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
             upload.ShowFileList = false;
             upload.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{showFileList:false}");
+            output.ShouldContain("{\"showFileList\":false}");
         }
 
         [Fact]
@@ -70,7 +70,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
             upload.Async.Save.ControllerName = "Home";
             upload.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{async:{saveUrl:\"Home/Index\"}}");
+            output.ShouldContain("{\"async\":{\"saveUrl\":\"Home/Index\"}}");
         }
 
         [Fact]
@@ -81,7 +81,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
             upload.Async.SaveField = "attachments";
             upload.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{async:{saveUrl:\"Home/Index\",saveField:\"attachments\"}}");
+            output.ShouldContain("{\"async\":{\"saveUrl\":\"Home/Index\",\"saveField\":\"attachments\"}}");
         }
 
         [Fact]
@@ -90,7 +90,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
             upload.Messages.Select = "select";
             upload.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{localization:{select:\"select\"}}");
+            output.ShouldContain("{\"localization\":{\"select\":\"select\"}}");
         }
 
         [Fact]
@@ -102,7 +102,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
             upload.Async.Remove.ControllerName = "Home";
             upload.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{async:{saveUrl:\"Home/Index\",removeUrl:\"Home/Remove\"}}");
+            output.ShouldContain("{\"async\":{\"saveUrl\":\"Home/Index\",\"removeUrl\":\"Home/Remove\"}}");
         }
 
         [Fact]
@@ -125,7 +125,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
             upload.Async.RemoveField = "attachments";
             upload.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("removeField:\"attachments\"");
+            output.ShouldContain("\"removeField\":\"attachments\"");
         }
 
         [Fact]
@@ -136,7 +136,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
             upload.Async.AutoUpload = false;
             upload.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{async:{saveUrl:\"Home/Index\",autoUpload:false}}");
+            output.ShouldContain("{\"async\":{\"saveUrl\":\"Home/Index\",\"autoUpload\":false}}");
         }
 
         [Fact]
@@ -146,7 +146,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
             upload.Async.Save.ControllerName = "Home";
             upload.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("jQuery(\"#Upload\").kendoUpload({async:{saveUrl:\"Home/Index\"}});");
+            output.ShouldContain("jQuery(\"#Upload\").kendoUpload({\"async\":{\"saveUrl\":\"Home/Index\"}});");
         }
 
         [Fact]
@@ -157,7 +157,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
             upload.Async.Batch = true;
             upload.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{async:{saveUrl:\"Home/Index\",batch:true}}");
+            output.ShouldContain("{\"async\":{\"saveUrl\":\"Home/Index\",\"batch\":true}}");
         }
 
         [Fact]
@@ -167,7 +167,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
             upload.Async.Save.ControllerName = "Home";
             upload.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("jQuery(\"#Upload\").kendoUpload({async:{saveUrl:\"Home/Index\"}});");
+            output.ShouldContain("jQuery(\"#Upload\").kendoUpload({\"async\":{\"saveUrl\":\"Home/Index\"}});");
         }
 
         [Fact]
@@ -176,7 +176,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
             upload.Events["select"] = new ClientHandlerDescriptor() { HandlerName = "selectHandler" };
             upload.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{select:selectHandler}");
+            output.ShouldContain("{\"select\":selectHandler}");
         }
 
         [Fact]
@@ -185,7 +185,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
             upload.Events["upload"] = new ClientHandlerDescriptor() { HandlerName = "uploadHandler" };
             upload.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{upload:uploadHandler}");
+            output.ShouldContain("{\"upload\":uploadHandler}");
         }
 
         [Fact]
@@ -194,7 +194,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
             upload.Events["success"] = new ClientHandlerDescriptor() { HandlerName = "successHandler" };
             upload.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{success:successHandler}");
+            output.ShouldContain("{\"success\":successHandler}");
         }
 
         [Fact]
@@ -203,7 +203,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
             upload.Events["error"] = new ClientHandlerDescriptor() { HandlerName = "errorHandler" };
             upload.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{error:errorHandler}");
+            output.ShouldContain("{\"error\":errorHandler}");
         }
 
         [Fact]
@@ -212,7 +212,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
             upload.Events["complete"] = new ClientHandlerDescriptor() { HandlerName = "completeHandler" };
             upload.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{complete:completeHandler}");
+            output.ShouldContain("{\"complete\":completeHandler}");
         }
 
         [Fact]
@@ -221,7 +221,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
             upload.Events["cancel"] = new ClientHandlerDescriptor() { HandlerName = "cancelHandler" };
             upload.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{cancel:cancelHandler}");
+            output.ShouldContain("{\"cancel\":cancelHandler}");
         }
 
         [Fact]
@@ -230,7 +230,7 @@ namespace Kendo.Mvc.UI.Tests.Upload
             upload.Events["remove"] = new ClientHandlerDescriptor() { HandlerName = "removeHandler" };
             upload.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{remove:removeHandler}");
+            output.ShouldContain("{\"remove\":removeHandler}");
         }
     }
 }

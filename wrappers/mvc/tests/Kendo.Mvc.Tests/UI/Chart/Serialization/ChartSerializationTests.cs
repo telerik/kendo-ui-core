@@ -43,7 +43,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
             chart.Title.Text = "Title";
             chart.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{title:{text:\"Title\"}}");
+            output.ShouldContain("{\"title\":{\"text\":\"Title\"}}");
         }
 
         [Fact]
@@ -52,7 +52,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
             chart.Legend.Visible = false;
             chart.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{legend:{visible:false}}");
+            output.ShouldContain("{\"legend\":{\"visible\":false}}");
         }
 
         [Fact]
@@ -61,7 +61,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
             chart.Events["dataBound"] = new ClientHandlerDescriptor() { HandlerName = "dataBoundHandler" };
             chart.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{dataBound:dataBoundHandler}");
+            output.ShouldContain("{\"dataBound\":dataBoundHandler}");
         }
 
         [Fact]
@@ -70,7 +70,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
             chart.Events["seriesClick"] = new ClientHandlerDescriptor() { HandlerName = "seriesClickHandler" };
             chart.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{seriesClick:seriesClickHandler}");
+            output.ShouldContain("{\"seriesClick\":seriesClickHandler}");
         }
 
         [Fact]
@@ -79,7 +79,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
             chart.Series.Add(new ChartBarSeries<SalesData, decimal>(chart, s => s.RepSales, null));
             chart.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{series:[{name:\"Rep Sales\",type:\"bar\",field:\"RepSales\"}]}");
+            output.ShouldContain("{\"series\":[{\"name\":\"Rep Sales\",\"type\":\"bar\",\"field\":\"RepSales\"}]}");
         }
 
         [Fact]
@@ -88,7 +88,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
             chart.SeriesDefaults.Bar.Gap = 4;
             chart.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{seriesDefaults:{bar:{gap:4}}}");
+            output.ShouldContain("{\"seriesDefaults\":{\"bar\":{\"gap\":4}}}");
         }
 
         [Fact]
@@ -97,7 +97,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
             chart.CategoryAxis.Categories = new string[] { "A" };
             chart.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{categoryAxis:{categories:[\"A\"]}}");
+            output.ShouldContain("{\"categoryAxis\":{\"categories\":[\"A\"]}}");
         }
 
         [Fact]
@@ -106,7 +106,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
             chart.CategoryAxis.Member = "RepName";
             chart.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{categoryAxis:{field:\"RepName\"}}");
+            output.ShouldContain("{\"categoryAxis\":{\"field\":\"RepName\"}}");
         }
 
         [Fact]
@@ -117,7 +117,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
             chart.ValueAxes.Add(numericAxis);
             chart.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{valueAxis:[{min:1}]}");
+            output.ShouldContain("{\"valueAxis\":[{\"min\":1}]}");
         }
 
         [Fact]
@@ -127,7 +127,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
             chart.ValueAxes.Add(new ChartNumericAxis<SalesData>(chart) { Name = "tri" });
             chart.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{valueAxis:[{name:\"sec\"},{name:\"tri\"}]}");
+            output.ShouldContain("{\"valueAxis\":[{\"name\":\"sec\"},{\"name\":\"tri\"}]}");
         }
 
         [Fact]
@@ -138,7 +138,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
             chart.XAxes.Add(numericAxis);
             chart.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{xAxis:[{name:\"X Axis\"}]}");
+            output.ShouldContain("{\"xAxis\":[{\"name\":\"X Axis\"}]}");
         }
 
         [Fact]
@@ -148,7 +148,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
             chart.XAxes.Add(new ChartNumericAxis<SalesData>(chart) { Name = "tri" });
             chart.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{xAxis:[{name:\"sec\"},{name:\"tri\"}]}");
+            output.ShouldContain("{\"xAxis\":[{\"name\":\"sec\"},{\"name\":\"tri\"}]}");
         }
 
         [Fact]
@@ -159,7 +159,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
             chart.YAxes.Add(numericAxis);
             chart.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{yAxis:[{name:\"Y Axis\"}]}");
+            output.ShouldContain("{\"yAxis\":[{\"name\":\"Y Axis\"}]}");
         }
 
         [Fact]
@@ -169,7 +169,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
             chart.YAxes.Add(new ChartNumericAxis<SalesData>(chart) { Name = "tri" });
             chart.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{yAxis:[{name:\"sec\"},{name:\"tri\"}]}");
+            output.ShouldContain("{\"yAxis\":[{\"name\":\"sec\"},{\"name\":\"tri\"}]}");
         }
 
         [Fact]
@@ -178,7 +178,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
             chart.Data = new SalesData[] { new SalesData() };
             chart.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{dataSource:{data:[{\"RepName\":null,\"DateString\":null,\"Date\":\"\\/Date(-62135596800000)\\/\",\"TotalSales\":0,\"RepSales\":0,\"Explode\":false,\"VisibleInLegend\":false,\"Color\":null}]}}");
+            output.ShouldContain("{\"dataSource\":{\"data\":[{\"RepName\":null,\"DateString\":null,\"Date\":\"\\/Date(-62135596800000)\\/\",\"TotalSales\":0,\"RepSales\":0,\"Explode\":false,\"VisibleInLegend\":false,\"Color\":null}]}}");
         }
 
         [Fact]
@@ -187,7 +187,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
             chart.DataSource.Transport.Read.Url = "/Action";
             chart.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("dataSource:{transport:{read:{url:\"/Action\",type:\"POST\"}}");
+            output.ShouldContain("\"dataSource\":{\"transport\":{\"read\":{\"url\":\"/Action\",\"type\":\"POST\"}}");
         }
 
         [Fact]
@@ -196,7 +196,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
             chart.SeriesColors = new string[] { "red", "green", "blue" };
             chart.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{seriesColors:[\"red\",\"green\",\"blue\"]}");
+            output.ShouldContain("{\"seriesColors\":[\"red\",\"green\",\"blue\"]}");
         }
 
         [Fact]
@@ -205,7 +205,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
             chart.Tooltip.Visible = true;
             chart.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{tooltip:{visible:true}}");
+            output.ShouldContain("{\"tooltip\":{\"visible\":true}}");
         }
 
         [Fact]
@@ -214,7 +214,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
             chart.Transitions = false;
             chart.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{transitions:false}");
+            output.ShouldContain("{\"transitions\":false}");
         }
     }
 }
