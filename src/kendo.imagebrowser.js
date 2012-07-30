@@ -6,6 +6,7 @@
         extend = $.extend,
         NS = ".kendoImageBrowser",
         BREADCRUBMSNS = ".kendoBreadcrumbs",
+        SEARCHBOXNS = ".kendoSearchBox",
         NAMEFIELD = "name",
         SIZEFIELD = "size",
         TYPEFIELD = "type",
@@ -308,10 +309,17 @@
             options = options || {};
 
             Widget.fn.init.call(that, element, options);
+
+            that._wrapper();
+
+            that.element
+                .on("focus" + SEARCHBOXNS, proxy(that._focus, that))
+                .on("blur" + SEARCHBOXNS, proxy(that._blur, that));
         },
 
         options: {
-            name: "SearchBox"
+            name: "SearchBox",
+            label: "Search"
         },
 
         events: [ ],
@@ -319,7 +327,35 @@
         destroy: function() {
             var that = this;
 
+            that.wrapper
+                .add(that.label)
+                .off(SEARCHBOXNS);
+
             Widget.fn.destroy.call(that);
+        },
+
+        _blur: function() {
+            this.label.show();
+        },
+
+        _focus: function() {
+            this.label.hide();
+        },
+
+        _wrapper: function() {
+            var element = this.element,
+                wrapper = element.parents(".k-search-wrap");
+
+            element[0].style.width = "";
+            element.addClass("k-input");
+
+            if (!wrapper.length) {
+                wrapper = element.wrap($('<div class="k-widget k-search-wrap k-textbox"/>')).parent();
+                $('<label style="display:block">' + this.options.label + '</label>').insertBefore(element);
+                $('<a href="#" class="k-icon k-search"/>').appendTo(wrapper);
+            }
+            this.wrapper = wrapper;
+            this.label = wrapper.find(">label");
         }
     });
 

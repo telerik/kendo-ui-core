@@ -7,6 +7,7 @@
         <script src="../qunit-runner.js"></script>
         <script type="text/javascript" src="../jquery.mockjax.js"></script>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.imagebrowser.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
     </head>
@@ -32,6 +33,51 @@
                 }
             });
 
+            function setup() {
+                return new SearchBox(input);
+            }
+
+            test("element is wrapped", function() {
+                var searchBox = setup();
+
+                ok(searchBox.wrapper.is("div.k-search-wrap"));
+            });
+
+            test("renders a label", function() {
+                input.kendoSearchBox();
+
+                ok(input.prev().is("label"));
+                equal(input.prev().text(), "Search");
+            });
+
+            test("label with custom text", function() {
+                input.kendoSearchBox({ label: "foo" });
+
+                equal(input.prev().text(), "foo");
+            });
+
+            test("renders a search button", function() {
+                input.kendoSearchBox();
+
+                ok(input.next().is("a.k-search"));
+            });
+
+            test("bluring the input shows the label", function() {
+                input.kendoSearchBox();
+
+                input.trigger("focus");
+                input.trigger("blur");
+
+                ok(input.prev().is(":visible"));
+            });
+
+            test("focusing the input hides the label", function() {
+                input.kendoSearchBox();
+
+                input.trigger("focus");
+
+                ok(input.prev().is(":not(:visible)"));
+            });
         </script>
     </body>
 </html>
