@@ -212,6 +212,14 @@
                 ok($("#qunit-fixture").parent().hasClass("km-root"));
                 ok($("#qunit-fixture").parent().hasClass("km-" + (os && os.tablet ? "tablet" : "phone")));
             });
+
+            test("Raises meaningful error when the app can't find views", 1, function() {
+                try {
+                new kendo.mobile.Application($("<div />"));
+                } catch (e) {
+                    equal(e.message, "No root view found. Make sure that the kendo mobile application element directly contains one or more elements with data-role='view' attribute set.");
+                }
+            });
         </script>
     </body>
 </html>
