@@ -122,9 +122,18 @@ var Dom = {
     },
 
     splitDataNode: function(node, offset) {
-        var newNode = node.cloneNode(false);
+        var newNode = node.cloneNode(false),
+            denormalizedText = "",
+            iterator = node;
+
+        while (iterator.nextSibling && iterator.nextSibling.nodeType == 3 && iterator.nextSibling.nodeValue) {
+            denormalizedText += iterator.nextSibling.nodeValue;
+            iterator = iterator.nextSibling;
+        }
+
         node.deleteData(offset, node.length);
         newNode.deleteData(0, offset);
+        newNode.nodeValue += denormalizedText;
         Dom.insertAfter(newNode, node);
     },
 
