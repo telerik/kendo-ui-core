@@ -394,6 +394,10 @@
 
             views = that._hideViews(container);
             that.rootView = views.first();
+
+            if (!that.rootView[0]) {
+                throw new Error("No root view found. Make sure that the kendo mobile application element directly contains one or more elements with data-role='view' attribute set.");
+            }
             that._view = null;
 
             that.layouts = {};
