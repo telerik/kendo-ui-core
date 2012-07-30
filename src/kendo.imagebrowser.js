@@ -293,11 +293,33 @@
             var that = this;
 
             if (value !== undefined) {
-                that._path = value;
+                that._path = value.replace(/^\//,"") + "/";
                 that.dataSource.read({ path: that._path });
                 return;
             }
-            return (that._path === that.options.path ? "" : that._path) + "/";
+            return that._path === that.options.path ? "" : (that._path + "/");
+        }
+    });
+
+    var SearchBox = Widget.extend({
+        init: function(element, options) {
+            var that = this;
+
+            options = options || {};
+
+            Widget.fn.init.call(that, element, options);
+        },
+
+        options: {
+            name: "SearchBox"
+        },
+
+        events: [ ],
+
+        destroy: function() {
+            var that = this;
+
+            Widget.fn.destroy.call(that);
         }
     });
 
@@ -328,13 +350,14 @@
         events: [ "change" ],
 
         destroy: function() {
-            Widget.fn.destroy.call(this);
+            var that = this;
 
-            this.wrapper
-                .off("focus" + BREADCRUBMSNS, "input")
-                .off("keydown" + BREADCRUBMSNS, "input")
-                .off("blur" + BREADCRUBMSNS, "input")
-                .off("click" + BREADCRUBMSNS, "a");
+            Widget.fn.destroy.call(that);
+
+            that.wrapper
+                .add(that.wrapper.find("input"))
+                .add(that.wrapper.find("a"))
+                .off(BREADCRUBMSNS);
         },
 
         _update: function(val) {
@@ -472,4 +495,5 @@
 
     kendo.ui.plugin(ImageBrowser);
     kendo.ui.plugin(Breadcrumbs);
+    kendo.ui.plugin(SearchBox);
 })(jQuery);
