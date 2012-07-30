@@ -132,6 +132,16 @@
                 input.blur();
             });
 
+            test("bluring clears the input value", 1, function() {
+                var breadcrumbs = setup({
+                    value: "/foo",
+                });
+
+                input.focus();
+                input.blur();
+                equal(input.val(), "");
+            });
+
             test("change event is not trigger if same value is set", function() {
                 var breadcrumbs = setup({
                     value: "/foo",

@@ -90,7 +90,7 @@
 
             that.refresh();
 
-            that.dataSource.fetch();
+            that.path(that.options.path);
         },
 
         options: {
@@ -197,12 +197,16 @@
         },
 
         _navigation: function() {
-            $('<div class="k-floatwrap"><input/></div>')
-                .appendTo(this.element)
-                .find("input")
-                .kendoBreadcrumbs({
-                    value: this.options.path
-                });
+            var that = this;
+            that.breadcrumbs = $('<div class="k-floatwrap"><input/></div>')
+                    .appendTo(this.element)
+                    .find("input")
+                    .kendoBreadcrumbs({
+                        value: that.options.path,
+                        change: function() {
+                            that.path(this.value());
+                        }
+                    }).data("kendoBreadcrumbs");
         },
 
         refresh: function() {
@@ -285,9 +289,15 @@
             return fieldName(this.dataSource.reader.model.fields, name);
         },
 
-        path: function() {
-            var p = "/";
-            return p === this.options.path ? "" : p;
+        path: function(value) {
+            var that = this;
+
+            if (value !== undefined) {
+                that._path = value;
+                that.dataSource.read({ path: that._path });
+                return;
+            }
+            return (that._path === that.options.path ? "" : that._path) + "/";
         }
     });
 
@@ -311,7 +321,8 @@
         },
 
         options: {
-            name: "Breadcrumbs"
+            name: "Breadcrumbs",
+            gap: 50
         },
 
         events: [ "change" ],
@@ -353,6 +364,10 @@
         },
 
         _blur: function() {
+            if (this.overlay.is(":visible")) {
+                return;
+            }
+
             var that = this,
                 element = that.element,
                 val = element.val().replace(/\/{2,}/g, "/");
@@ -363,8 +378,13 @@
         },
 
         _keydown: function(e) {
+            var that = this;
             if (e.keyCode === 13) {
-                this._blur();
+                that._blur();
+
+                setTimeout(function() {
+                    that.overlay.find("a:first").focus();
+                });
             }
         },
 
@@ -410,6 +430,28 @@
                 }
             }
             this.overlay.empty().append($(html));
+
+            this._adjustSectionWidth();
+        },
+
+        _adjustSectionWidth: function() {
+            var that = this,
+                wrapper = that.wrapper,
+                width = wrapper.width() - that.options.gap,
+                links = that.overlay.find("a"),
+                a;
+
+            links.each(function(index) {
+                a = $(this);
+
+                if (a.parent().width() > width) {
+                    if (index == links.length - 1) {
+                        a.width(width);
+                    } else {
+                        a.prev().andSelf().hide();
+                    }
+                }
+            });
         },
 
         value: function(val) {

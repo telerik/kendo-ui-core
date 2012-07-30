@@ -285,7 +285,16 @@
             test("path is displayed in the toolbar input", function() {
                 var browser = setup({ path: "foo" });
 
-                equal(container.find(".k-breadcrumbs > input").val(), "foo");
+                equal(browser.breadcrumbs.value(), "foo");
+            });
+
+            test("setting path requests data", 1, function() {
+                var browser = setup({ });
+
+                browser.dataSource.bind("requestStart", function() {
+                    ok(true);
+                });
+                browser.path("/foo");
             });
         </script>
     </body>
