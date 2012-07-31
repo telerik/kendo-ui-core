@@ -2045,6 +2045,18 @@ function pad(number) {
             prefix: ""
         },
 
+        _tabindex: function(target) {
+            target = target || this.wrapper;
+
+            var element = this.element,
+                TABINDEX = "tabindex",
+                tabindex = target.attr(TABINDEX) || element.attr(TABINDEX);
+
+            element.removeAttr(TABINDEX);
+
+            target.attr(TABINDEX, !isNaN(tabindex) ? tabindex : 0);
+        },
+
         setOptions: function(options) {
             $.extend(this.options, options);
 

@@ -283,17 +283,6 @@
             that.dataSource.bind(CHANGE, that._refreshHandler);
         },
 
-        _tabindex: function() {
-            var wrapper = this.wrapper,
-                root = this.root,
-                TABINDEX = "tabindex",
-                tabindex = wrapper.attr(TABINDEX) || root.attr(TABINDEX);
-
-            root.removeAttr(TABINDEX);
-
-            wrapper.attr(TABINDEX, !isNaN(tabindex) ? tabindex : 0);
-        },
-
         events: [
             DRAGSTART,
 
