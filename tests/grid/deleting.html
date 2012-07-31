@@ -250,6 +250,15 @@
                 ok(removeMethod.calls("removeRow"));
             });
 
+            test("clicking on the delete column with a button calls removeRow", function() {
+                var grid = setup( { editable: true, columns: [ { template: '<button class="k-grid-delete"></button>' }]  }),
+                    removeMethod = stub(grid, "removeRow");
+
+                grid.table.find("tr:first > td:last").find("button.k-grid-delete").click();
+
+                ok(removeMethod.calls("removeRow"));
+            });
+
             test("no text is rendered in the header for delete command if no title is set", function() {
                 var grid = setup( { editable: true, columns: [ { command: "destroy" }] }),
                     cell = grid.thead.find("th:last") ;
