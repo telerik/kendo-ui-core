@@ -52,7 +52,6 @@
 
             test("popup is opened if there are results returned from the filter", function() {
                 var autocomplete = new AutoComplete(input, {
-
                     dataSource: ["foo", "bar"]
                 });
 
@@ -61,7 +60,7 @@
                     start();
                 });
 
-                input.val("f").press("f".charCodeAt(0));
+                input.focus().val("f").press("f".charCodeAt(0));
                 stop(1);
             });
 
@@ -121,6 +120,23 @@
 
                 equal(autocomplete.value(), "3text");
                 equal(autocomplete.current(), null);
+            });
+
+            asyncTest("AutoComplete does not open popup if not active element", 1, function() {
+                var autocomplete = new AutoComplete(input, {
+                    dataSource: ["baz", "bar"],
+                    suggest: true,
+                    delay: 0
+                });
+
+                input.focus();
+                autocomplete._search();
+                input.blur();
+
+                setTimeout(function() {
+                    start();
+                    ok(!autocomplete.popup.visible());
+                }, 100);
             });
 
         </script>
