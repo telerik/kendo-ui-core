@@ -25,7 +25,7 @@
             test("adds necessary classes to div", function() {
                 var element = $("<div />").kendoTreeView();
 
-                ok(element.is(".k-widget.k-treeview.k-reset"));
+                ok(element.is(".k-widget.k-treeview"));
             });
 
             test("attaches treeview object to div", function() {
@@ -78,7 +78,7 @@
             });
 
             test("initialization from fully rendered treeview", function() {
-                list = $('<div class="k-widget k-treeview k-reset" id="treeview">' +
+                list = $('<div class="k-widget k-treeview" id="treeview">' +
                     '<ul class="k-group">' +
                         '<li class="k-item k-first k-last">' +
                             '<div class="k-top k-bot"><span class="k-icon k-minus"></span>' +
@@ -107,12 +107,37 @@
                 equal(list.find(".k-icon.k-minus").length, 1);
             });
 
+            test("initialization sets tabindex=0 by default", function() {
+                list = $("<div />").kendoTreeView();
+
+                equal(list.attr("tabindex"), 0);
+            });
+
+            test("initialization leaves wrapper tabindex, if available", function() {
+                list = $("<div tabindex=3 />").kendoTreeView();
+
+                equal(list.attr("tabindex"), 3);
+            });
+
+            test("initialization leaves tabindex=-1", function() {
+                list = $("<div tabindex='-1' />").kendoTreeView();
+
+                equal(list.attr("tabindex"), -1);
+            });
+
+            test("initialization gets tabindex from list", function() {
+                list = $("<ul tabindex='42'></ul>").kendoTreeView();
+
+                equal(list.closest(".k-treeview").attr("tabindex"), 42);
+                ok(!list.attr("tabindex"))
+            });
+
             module("initialization from array");
 
             test("initializing from array", function() {
                 var element = $("<div />").appendTo(document.body).kendoTreeView([{ text: "foo" }]);
 
-                ok(element.is(".k-treeview.k-widget.k-reset"));
+                ok(element.is(".k-treeview.k-widget"));
                 equals(element.children("ul.k-treeview-lines.k-group").length, 1);
                 equals(element.find("li").length, 1);
                 ok(element.find("li").is(".k-item"));

@@ -169,6 +169,8 @@
                 that.root = element.children("ul").eq(0);
             }
 
+            that._tabindex();
+
             that._dataSource(inferred);
 
             that._attachEvents();
@@ -279,6 +281,17 @@
             }
 
             that.dataSource.bind(CHANGE, that._refreshHandler);
+        },
+
+        _tabindex: function() {
+            var wrapper = this.wrapper,
+                root = this.root,
+                TABINDEX = "tabindex",
+                tabindex = wrapper.attr(TABINDEX) || root.attr(TABINDEX);
+
+            root.removeAttr(TABINDEX);
+
+            wrapper.attr(TABINDEX, !isNaN(tabindex) ? tabindex : 0);
         },
 
         events: [
@@ -558,7 +571,7 @@
             var that = this,
                 element = that.element,
                 wrapper, root,
-                wrapperClasses = "k-widget k-treeview k-reset";
+                wrapperClasses = "k-widget k-treeview";
 
             if (element.is("div")) {
                 wrapper = element;
