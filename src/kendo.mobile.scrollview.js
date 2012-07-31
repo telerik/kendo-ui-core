@@ -61,6 +61,7 @@
 
                     transition.cancel();
                 },
+                allowSelection: true,
                 end: proxy(that._dragEnd, that)
             });
 
