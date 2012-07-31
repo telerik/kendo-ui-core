@@ -891,7 +891,7 @@
 
                 if (mode === "incell") {
                     if (editable.update !== false) {
-                        that.wrapper.on(CLICK + NS, "tr:not(.k-grouping-row) > td:not(.k-hierarchy-cell,.k-detail-cell,.k-group-cell,.k-edit-cell,:has(a.k-grid-delete))", function(e) {
+                        that.wrapper.on(CLICK + NS, "tr:not(.k-grouping-row) > td:not(.k-hierarchy-cell,.k-detail-cell,.k-group-cell,.k-edit-cell,:has(a.k-grid-delete),:has(button.k-grid-delete))", function(e) {
                             var td = $(this);
 
                             if (td.closest("tbody")[0] !== that.tbody[0] || $(e.target).is(":input")) {
@@ -926,7 +926,7 @@
                 }
 
                 if (editable.destroy !== false) {
-                    that.wrapper.on(CLICK + NS, "tbody>tr:not(.k-detail-row,.k-grouping-row):visible a.k-grid-delete", function(e) {
+                    that.wrapper.on(CLICK + NS, "tbody>tr:not(.k-detail-row,.k-grouping-row):visible .k-grid-delete", function(e) {
                         e.preventDefault();
                         that.removeRow($(this).closest("tr"));
                     });
