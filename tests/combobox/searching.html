@@ -612,6 +612,20 @@
 
                 ok(true);
             });
+
+            test("ComboBox does not open popup if not active element", 1, function() {
+                var combobox = $("<input/>").appendTo(document.body).kendoComboBox({
+                    delay: 0,
+                    autoBind: false,
+                    dataSource: ["bar", "baz"],
+                    filter: "startswith"
+                }).data("kendoComboBox");
+
+                combobox._typing = 2222;
+                combobox.search("b");
+
+                ok(!combobox.popup.visible());
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

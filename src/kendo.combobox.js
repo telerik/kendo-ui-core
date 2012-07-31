@@ -214,7 +214,7 @@
                 state = that._state,
                 data = that._data(),
                 length = data.length,
-                value;
+                value, open;
 
             that.trigger("dataBinding");
 
@@ -242,7 +242,14 @@
 
             if (that._open) {
                 that._open = false;
-                that.toggle(!!length);
+                open = !!length;
+
+                if (that._typing && that.element[0] !== document.activeElement) {
+                    open = false;
+                }
+
+                that.toggle(open);
+                that._typing = undefined;
             }
 
             if (that._touchScroller) {
