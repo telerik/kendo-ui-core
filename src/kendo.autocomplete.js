@@ -80,7 +80,6 @@
                     that._prev = that.value();
                     that._placeholder(false);
                     wrapper.addClass(FOCUSED);
-                    clearTimeout(that._bluring);
                 })
                 .on("blur" + ns, function () {
                     that._change();
@@ -194,7 +193,8 @@
             popup = that.popup,
             options = that.options,
             data = that._data(),
-            length = data.length;
+            length = data.length,
+            action;
 
             that.trigger("dataBinding");
 
@@ -214,7 +214,14 @@
 
             if (that._open) {
                 that._open = false;
-                popup[length ? "open" : "close"]();
+                action = length ? "open" : "close";
+
+                if (that._typing && that.element[0] !== document.activeElement) {
+                    action = "close";
+                }
+
+                popup[action]();
+                that._typing = undefined;
             }
 
             if (that._touchScroller) {
@@ -373,6 +380,7 @@
                 e.preventDefault();
             } else if (key === keys.ENTER || key === keys.TAB) {
 
+                //TODO: why we need this
                 if (that.popup.visible()) {
                     e.preventDefault();
                 }
