@@ -18,7 +18,7 @@
         WIDGET_RELS = /popover|actionsheet|modalview/,
         BACK = "#:back",
 
-        data = kendo.data,
+        attrValue = kendo.attrValue,
         // navigation element roles
         buttonRoles = "button backbutton detailbutton listview-link",
         linkRoles = "tab",
@@ -29,7 +29,7 @@
         TOUCHSTART = "touchstart" + NS;
 
     function appLinkClick(e) {
-        if(data($(e.currentTarget), "rel") != EXTERNAL) {
+        if(attrValue($(e.currentTarget), "rel") != EXTERNAL) {
             e.preventDefault();
         }
     }
@@ -128,9 +128,9 @@
             }
 
             var link = $(e.currentTarget),
-                transition = data(link, "transition"),
-                rel = data(link, "rel") || "",
-                target = data(link, "target"),
+                transition = attrValue(link, "transition"),
+                rel = attrValue(link, "rel") || "",
+                target = attrValue(link, "target"),
                 pane = this,
                 href = link.attr(HREF);
 

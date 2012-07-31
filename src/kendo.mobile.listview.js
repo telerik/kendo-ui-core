@@ -10,7 +10,7 @@
         HIGHLIGHT_SELECTOR = ".km-list > li > .km-listview-link, .km-list > li > .km-listview-label",
         HANDLED_INPUTS_SELECTOR = ".km-list > li > .km-listview-label > input",
         proxy = $.proxy,
-        data = kendo.data,
+        attrValue = kendo.attrValue,
         GROUP_CLASS = "km-group-title",
         ACTIVE_CLASS = "km-state-active",
         GROUP_WRAPPER = '<div class="' + GROUP_CLASS + '"><div class="km-text"></div></div>',
@@ -41,7 +41,7 @@
 
         var clicked = $(e.currentTarget),
             item = clicked.parent(),
-            role = data(clicked, "role") || "",
+            role = attrValue(clicked, "role") || "",
             plainItem = (!role.match(buttonRegExp)),
             prevented = e.isDefaultPrevented();
 
@@ -73,7 +73,7 @@
     }
 
     function enhanceItem(item) {
-        addIcon(item, data(item, "icon"));
+        addIcon(item, attrValue(item, "icon"));
     }
 
     function enhanceLinkItem(item) {
@@ -88,7 +88,7 @@
         item.addClass("km-listview-link")
             .attr(kendo.attr("role"), "listview-link");
 
-        addIcon(item, data(parent, "icon"));
+        addIcon(item, attrValue(parent, "icon"));
     }
 
     function enhanceCheckBoxItem(label) {

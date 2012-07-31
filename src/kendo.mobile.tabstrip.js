@@ -66,7 +66,7 @@
 
         _buildButton: function() {
             var button = $(this),
-                icon = kendo.data(button, "icon"),
+                icon = kendo.attrValue(button, "icon"),
                 image = button.find("img"),
                 iconSpan = $('<span class="km-icon"/>');
 

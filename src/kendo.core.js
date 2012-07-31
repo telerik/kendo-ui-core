@@ -2350,9 +2350,7 @@ function pad(number) {
         $(window).on(support.resize, handler);
     };
 
-    if (!kendo.data) {
-        kendo.data = function(element, key) {
-            return element.data(kendo.ns + key);
-        };
-    }
+    kendo.attrValue = function(element, key) {
+        return element.data(kendo.ns + key);
+    };
 })(jQuery);
