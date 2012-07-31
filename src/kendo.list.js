@@ -210,16 +210,14 @@
                 wrapper = this.wrapper,
                 computedStyle, computedWidth;
 
-            if (!width) {
-                computedStyle = window.getComputedStyle ? window.getComputedStyle(wrapper[0], null) : 0;
-                computedWidth = computedStyle ? parseFloat(computedStyle.width) : wrapper.outerWidth();
+            computedStyle = window.getComputedStyle ? window.getComputedStyle(wrapper[0], null) : 0;
+            computedWidth = computedStyle ? parseFloat(computedStyle.width) : wrapper.outerWidth();
 
-                if (computedStyle && ($.browser.mozilla || $.browser.msie)) { // getComputedStyle returns different box in FF and IE.
-                    computedWidth += parseFloat(computedStyle.paddingLeft) + parseFloat(computedStyle.paddingRight) + parseFloat(computedStyle.borderLeftWidth) + parseFloat(computedStyle.borderRightWidth);
-                }
-
-                width = computedWidth - (list.outerWidth() - list.width());
+            if (computedStyle && ($.browser.mozilla || $.browser.msie)) { // getComputedStyle returns different box in FF and IE.
+                computedWidth += parseFloat(computedStyle.paddingLeft) + parseFloat(computedStyle.paddingRight) + parseFloat(computedStyle.borderLeftWidth) + parseFloat(computedStyle.borderRightWidth);
             }
+
+            width = computedWidth - (list.outerWidth() - list.width());
 
             list.css({
                 fontFamily: wrapper.css("font-family"),
@@ -233,15 +231,12 @@
             var that = this,
                 list = that.list,
                 options = that.options,
-                wrapper = that.wrapper,
-                opened = false;
+                wrapper = that.wrapper;
 
             that.popup = new ui.Popup(list, extend({}, options.popup, {
                 anchor: wrapper,
                 open: function(e) {
-                    if (!opened) {
-                        opened = that._adjustListWidth();
-                    }
+                    that._adjustListWidth();
 
                     if (that.trigger(OPEN)) {
                         e.preventDefault();
