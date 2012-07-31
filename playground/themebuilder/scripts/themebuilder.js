@@ -20,9 +20,14 @@ var devices = [ "ios", "android", "blackberry", "meego" ], CtrlDown = false, con
                 selector: ".km-text",
                 whitelist: [ "color", "font-family", "font-style", "font-weight", "font-size" ]
             },
+            grouptitleinset: {
+                name: "Group Title Inset",
+                selector: ".km-listgroupinset .km-group-title",
+                whitelist: [ "color", "font-family", "font-style", "font-weight", "font-size" ]
+            },
             grouptitle: {
                 name: "Group Title",
-                selector: ".km-group-title",
+                selector: ".km-listgroup .km-group-title",
                 whitelist: [ "color", "font-family", "font-style", "font-weight", "font-size" ]
             },
             viewtitle: {
@@ -92,7 +97,7 @@ var devices = [ "ios", "android", "blackberry", "meego" ], CtrlDown = false, con
             listview: {
                 name: "ListView",
                 selector: ".km-list",
-                whitelist: [ "background-color" ],
+                whitelist: [],
                 children: [ "icon", "button", "switch", "listitem", "grouptitle" ]
             },
             content: {
@@ -159,10 +164,10 @@ var devices = [ "ios", "android", "blackberry", "meego" ], CtrlDown = false, con
             var that = this, style,
                 output = "", widget;
 
-            $(element.parentsUntil(".km-root").add(element).get()).each(function (idx, value) {
-                widget = that._findWidgetClass(value.className);
-                if (widget) {
-                    output += widget.selector + " ";
+            $(element.parentsUntil(".km-root").add(element).get().reverse()).each(function (idx, value) {
+                widget = that._findWidgetClass(value);
+                if (widget && !(new RegExp(widget.selector + "\\s").test(output))) {
+                    output = widget.selector + " " + output;
                 }
             });
             output = output.substr(0, output.length-1);
@@ -186,9 +191,9 @@ var devices = [ "ios", "android", "blackberry", "meego" ], CtrlDown = false, con
 
             return output;
         },
-        _findWidgetClass: function(className) {
+        _findWidgetClass: function(element) {
             for(var idx in widgetList) {
-                if (new RegExp(widgetList[idx].selector.substr(1).replace("*", "\\*")+"(\\s|$)").test(className)) {
+                if (kendo.support.matchesSelector.call(element, widgetList[idx].selector)) {
                     return $.extend( { widget: idx },  widgetList[idx] );
                 }
             }
