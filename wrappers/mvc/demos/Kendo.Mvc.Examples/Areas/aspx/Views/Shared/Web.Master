@@ -24,7 +24,7 @@
 <%-- Set the current culture --%>
 
     <script>
-        kendo.culture("@culture");
+        kendo.culture("<%= culture %>");
     </script>
     <asp:ContentPlaceHolder runat="server" ID="HeadContent" />
 </head>
