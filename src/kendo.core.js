@@ -1911,6 +1911,7 @@ function pad(number) {
         ui: kendo.ui || {},
         fx: kendo.fx || fx,
         mobile: kendo.mobile || {},
+        data: kendo.data || {},
         dataviz: kendo.dataviz || {ui: { roles: {}}},
         keys: {
             INSERT: 45,
