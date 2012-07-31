@@ -34,7 +34,7 @@
 
             element.data("kendoView", that).addClass("km-view km-splitview");
 
-            that.transition = kendo.data(element, "transition");
+            that.transition = kendo.attrValue(element, "transition");
             $.extend(that, { header: [], footer: [], content: element });
         },
 

@@ -5,7 +5,6 @@
         ACTIVE = "km-state-active",
         SELECT = "select",
         SELECTOR = "li:not(." + ACTIVE +")",
-        data = kendo.data,
         ns = ".kendoMobileButtonGroup",
         MOUSEDOWN = kendo.support.mousedown + ns;
 
@@ -64,7 +63,7 @@
 
         _button: function() {
             var button = $(this).addClass("km-button"),
-                icon = data(button, "icon"),
+                icon = kendo.attrValue(button, "icon"),
                 span = button.children("span"),
                 image = button.find("img").addClass("km-image");
 
