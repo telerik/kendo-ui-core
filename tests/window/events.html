@@ -36,6 +36,41 @@
 
                 equal(+firstWindow.wrapper.css("zIndex"), +secondWindow.wrapper.css("zIndex") + 2);
             });
+
+            asyncTest("loading of iframe triggers load event", 1, function() {
+                var triggered = false,
+                    dialog = createWindow({
+                        content: "blank.html",
+                        iframe: true,
+                        refresh: function() {
+                            ok(true);
+                        }
+                    });
+
+                setTimeout(function() {
+                    start();
+                }, 200);
+            });
+
+            asyncTest("multiple loading of iframe triggers one refresh per load", function() {
+                var triggers = 0,
+                    dialog = createWindow({
+                        content: "blank.html",
+                        iframe: true,
+                        refresh: function() {
+                            triggers++;
+                        }
+                    });
+
+                setTimeout(function() {
+                    dialog.refresh("blank.html?v2");
+
+                    setTimeout(function() {
+                        start();
+                        equal(triggers, 2);
+                    }, 200);
+                }, 200);
+            });
         </script>
 
         <h1 id="qunit-header">kendo.ui.Window Tests</h1>
