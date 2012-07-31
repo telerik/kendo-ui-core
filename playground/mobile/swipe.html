@@ -8,27 +8,65 @@
         <script src="../../demos/mvc/content/shared/js/less.js"></script>
         <script src="../../src/jquery.js"></script>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
         <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.history.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.mobile.swipe.js"></script>
+        <script src="../../src/kendo.mobile.loader.js"></script>
+        <script src="../../src/kendo.mobile.view.js"></script>
+        <script src="../../src/kendo.mobile.pane.js"></script>
+        <script src="../../src/kendo.mobile.scroller.js"></script>
+        <script src="../../src/kendo.mobile.navbar.js"></script>
+        <script src="../../src/kendo.mobile.button.js"></script>
+        <script src="../../src/kendo.mobile.application.js"></script>
+        <script src="../../src/kendo.mobile.listview.js"></script>
+        <script src="../../src/kendo.mobile.shim.js"></script>
+        <script src="../../src/kendo.mobile.modalview.js"></script>
 
-        <style>
-            #foo {
-                background: orange;
-                width: 200px;
-                height: 200px;
-                margin: 100px auto;
-            }
-        </style>
         <script>
             $(function() {
                 $("#foo").kendoMobileSwipe(function(e) {
                     $("p").html("You swiped " + e.direction);
                 });
+                new kendo.mobile.Application();
             });
         </script>
+
     </head>
     <body>
-        <div id="foo">Swipe me!</div>
-        <p></p>
+        <div data-role="view">
+            <p></p>
+            <div id="foo">
+                <ul data-role="listview">
+                    <li><label>Foo <input type="text" style="border: 1px solid red;"></label></li>
+                    <li><label>Foo <input type="text" style="border: 1px solid red;"></label></li>
+                    <li><label>Foo <input type="text" style="border: 1px solid red;"></label></li>
+                    <li><label>Foo <input type="text" style="border: 1px solid red;"></label></li>
+                    <li><label>Foo <input type="text" style="border: 1px solid red;"></label></li>
+                    <li><label>Foo <input type="text" style="border: 1px solid red;"></label></li>
+                    <li><label>Foo <input type="text" style="border: 1px solid red;"></label></li>
+                    <li><label>Foo <input type="text" style="border: 1px solid red;"></label></li>
+                    <li><label>Foo <input type="text" style="border: 1px solid red;"></label></li>
+                    <li><label>Foo <input type="text" style="border: 1px solid red;"></label></li>
+                    <li><label>Foo <input type="text" style="border: 1px solid red;"></label></li>
+                    <li><label>Foo <input type="text" style="border: 1px solid red;"></label></li>
+                    <li><label>Foo <input type="text" style="border: 1px solid red;"></label></li>
+                    <li><label>Foo <input type="text" style="border: 1px solid red;"></label></li>
+                    <li><label>Foo <input type="text" style="border: 1px solid red;"></label></li>
+                    <li><label>Foo <input type="text" style="border: 1px solid red;"></label></li>
+                    <li><label>Foo <input type="text" style="border: 1px solid red;"></label></li>
+                    <li><label>Foo <input type="text" style="border: 1px solid red;"></label></li>
+                    <li><label>Foo <input type="text" style="border: 1px solid red;"></label></li>
+                    <li><label>Foo <input type="text" style="border: 1px solid red;"></label></li>
+                    <li><label>Foo <input type="text" style="border: 1px solid red;"></label></li>
+                    <li><label>Foo <input type="text" style="border: 1px solid red;"></label></li>
+                    <li><label>Foo <input type="text" style="border: 1px solid red;"></label></li>
+                    <li><label>Foo <input type="text" style="border: 1px solid red;"></label></li>
+                    <li><label>Foo <input type="text" style="border: 1px solid red;"></label></li>
+                </ul>
+            </div>
+        </div>
     </body>
 </html>
