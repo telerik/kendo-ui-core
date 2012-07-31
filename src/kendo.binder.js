@@ -1268,4 +1268,22 @@
         return object;
     };
 
+    kendo.observableHierarchy = function(array) {
+        var dataSource = kendo.data.HierarchicalDataSource.create(array);
+
+        function recursiveRead(data) {
+            for (var i = 0; i < data.length; i++) {
+                data[i]._initChildren();
+
+                recursiveRead(data[i].children.view());
+            }
+        }
+
+        dataSource.read();
+
+        recursiveRead(dataSource.data());
+
+        return dataSource._data;
+    };
+
 })(jQuery);

@@ -2806,7 +2806,8 @@
         },
 
         _initChildren: function() {
-            var that = this;
+            var that = this,
+                childrenField = that._childrenOptions.schema.data;
 
             if (!(that.children instanceof HierarchicalDataSource)) {
                 that.children = new HierarchicalDataSource(that._childrenOptions);
@@ -2818,6 +2819,10 @@
                     e.node = e.node || that;
                     that.trigger(CHANGE, e);
                 });
+
+                if (childrenField) {
+                    that[childrenField] = that.children._data;
+                }
             }
         },
 
@@ -2833,7 +2838,7 @@
             var parentNode = this.parentNode(),
                 level = 0;
 
-            while (parentNode) {
+            while (parentNode && parentNode.parentNode) {
                 level++;
                 parentNode = parentNode.parentNode ? parentNode.parentNode() : null;
             }
