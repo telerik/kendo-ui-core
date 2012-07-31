@@ -319,7 +319,11 @@
             that._wrapper();
 
             that.element
+                .on("keydown" + SEARCHBOXNS, proxy(that._keydown, that))
                 .on("change" + SEARCHBOXNS, proxy(that._updateValue, that));
+
+            that.wrapper
+                .on("click" + SEARCHBOXNS, "a", proxy(that._updateValue, that));
 
             if (!placeholderSupported) {
                 that.element.on("focus" + SEARCHBOXNS, proxy(that._focus, that))
@@ -329,7 +333,8 @@
 
         options: {
             name: "SearchBox",
-            label: "Search"
+            label: "Search",
+            value: ""
         },
 
         events: [ CHANGE ],
@@ -343,6 +348,12 @@
                 .off(SEARCHBOXNS);
 
             Widget.fn.destroy.call(that);
+        },
+
+        _keydown: function(e) {
+            if (e.keyCode === 13) {
+                this._updateValue();
+            }
         },
 
         _updateValue: function() {
@@ -394,12 +405,12 @@
             var that = this;
 
             if (value !== undefined) {
-                that._value = value;
+                that.options.value = value;
                 that.element.val(value);
                 that._toggleLabel();
                 return;
             }
-            return that._value;
+            return that.options.value;
         }
     });
 

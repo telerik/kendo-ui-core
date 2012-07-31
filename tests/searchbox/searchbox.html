@@ -155,6 +155,42 @@
 
                 equal(searchBox.value(), "foo");
             });
+
+            test("clicking on the button triggers the change event", 1, function() {
+                input.kendoSearchBox({
+                    change: function() {
+                        ok(true);
+                    }
+                });
+
+                input.val("foo");
+
+                input.next().click();
+            });
+
+            test("clicking on the button without changing the value does not trigger the change event", function() {
+                input.kendoSearchBox({
+                    change: function() {
+                        ok(false);
+                    },
+                    value: "foo"
+                });
+
+                input.val("foo");
+
+                input.next().click();
+            });
+
+            test("pressing enter triggers the change event", 1, function() {
+                input.kendoSearchBox({
+                    change: function() {
+                        ok(true);
+                    }
+                });
+
+                input.val("foo");
+                input.trigger($.Event("keydown", { keyCode: 13 }));
+            });
         </script>
     </body>
 </html>
