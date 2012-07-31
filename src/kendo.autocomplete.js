@@ -380,8 +380,7 @@
                 e.preventDefault();
             } else if (key === keys.ENTER || key === keys.TAB) {
 
-                //TODO: why we need this
-                if (that.popup.visible()) {
+                if (key === keys.ENTER && that.popup.visible()) {
                     e.preventDefault();
                 }
 
