@@ -13,6 +13,7 @@
 
             new kendo.Drag(element, {
                 surface: options.surface,
+                allowSelection: true,
 
                 start: function(e) {
                     if (abs(e.x.velocity) * 2 >= abs(e.y.velocity)) {
