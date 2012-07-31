@@ -897,7 +897,7 @@
             "packages": ["!mvc"],
             "text": "Drag & Drop",
             "name": "dragdrop",
-            "documentation": "framework/drag",
+            "documentation": "framework/draggable",
             "spriteCssClass": "dragDropIcon",
             "items": [
                 {
