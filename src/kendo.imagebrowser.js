@@ -4,6 +4,8 @@
         isPlainObject = $.isPlainObject,
         proxy = $.proxy,
         extend = $.extend,
+        placeholderSupported = kendo.support.placeholder,
+        CHANGE = "change",
         NS = ".kendoImageBrowser",
         BREADCRUBMSNS = ".kendoBreadcrumbs",
         SEARCHBOXNS = ".kendoSearchBox",
@@ -310,11 +312,19 @@
 
             Widget.fn.init.call(that, element, options);
 
+            if (placeholderSupported) {
+                that.element.attr("placeholder", that.options.label);
+            }
+
             that._wrapper();
 
             that.element
-                .on("focus" + SEARCHBOXNS, proxy(that._focus, that))
-                .on("blur" + SEARCHBOXNS, proxy(that._blur, that));
+                .on("change" + SEARCHBOXNS, proxy(that._updateValue, that));
+
+            if (!placeholderSupported) {
+                that.element.on("focus" + SEARCHBOXNS, proxy(that._focus, that))
+                    .on("blur" + SEARCHBOXNS, proxy(that._blur, that));
+            }
         },
 
         options: {
@@ -322,20 +332,39 @@
             label: "Search"
         },
 
-        events: [ ],
+        events: [ CHANGE ],
 
         destroy: function() {
             var that = this;
 
             that.wrapper
+                .add(that.element)
                 .add(that.label)
                 .off(SEARCHBOXNS);
 
             Widget.fn.destroy.call(that);
         },
 
+        _updateValue: function() {
+            var that = this,
+                value = that.element.val();
+
+            if (value !== that.value()) {
+                that.value(value);
+
+                that.trigger(CHANGE);
+            }
+        },
+
         _blur: function() {
-            this.label.show();
+            this._updateValue();
+            this._toggleLabel();
+        },
+
+        _toggleLabel: function() {
+            if (!placeholderSupported) {
+                this.label.toggle(!this.element.val());
+            }
         },
 
         _focus: function() {
@@ -351,11 +380,26 @@
 
             if (!wrapper.length) {
                 wrapper = element.wrap($('<div class="k-widget k-search-wrap k-textbox"/>')).parent();
-                $('<label style="display:block">' + this.options.label + '</label>').insertBefore(element);
+                if (!placeholderSupported) {
+                    $('<label style="display:block">' + this.options.label + '</label>').insertBefore(element);
+                }
                 $('<a href="#" class="k-icon k-search"/>').appendTo(wrapper);
             }
+
             this.wrapper = wrapper;
             this.label = wrapper.find(">label");
+        },
+
+        value: function(value) {
+            var that = this;
+
+            if (value !== undefined) {
+                that._value = value;
+                that.element.val(value);
+                that._toggleLabel();
+                return;
+            }
+            return that._value;
         }
     });
 
@@ -383,7 +427,7 @@
             gap: 50
         },
 
-        events: [ "change" ],
+        events: [ CHANGE ],
 
         destroy: function() {
             var that = this;
@@ -401,7 +445,7 @@
 
             if (val !== this.value()) {
                 this.value(val);
-                this.trigger("change");
+                this.trigger(CHANGE);
             }
         },
 
