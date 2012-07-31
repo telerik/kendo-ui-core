@@ -224,6 +224,12 @@
         }
     }
 
+    function initWidgets(collection) {
+        collection.each(function() {
+            kendo.initWidget($(this), {}, ui.roles);
+        });
+    }
+
     var ViewTransition = Class.extend({
         init: function (options) {
             $.extend(this, options);
@@ -403,7 +409,7 @@
             that.layouts = {};
 
             that._setupLayouts(container);
-            that._setupModalViews(container);
+            initWidgets(container.children(roleSelector("modalview")));
 
             if (that.loader) {
                 that.bind(SHOW_START, function() { that.loader.transition(); });
@@ -503,6 +509,8 @@
                 sandbox = that.sandbox,
                 container = that.container,
                 views,
+                modalViews,
+                elementsToTransfer = roleSelector("layout modalview") + ", script, style",
                 view;
 
             if (BODY_REGEX.test(html)) {
@@ -517,9 +525,12 @@
             view.hide().attr(attr("url"), url);
 
             that._setupLayouts(sandbox);
+            modalViews = sandbox.children(roleSelector("modalview"));
 
-            container.append(sandbox.children(roleSelector("layout modalview") + ", script, style"))
-                .append(views);
+            container.append(sandbox.children(elementsToTransfer).add(views));
+
+            // Initialize the modalviews after they have been appended to the final container
+            initWidgets(modalViews);
 
             return that._createView(view);
         },
@@ -539,12 +550,6 @@
 
         _hideViews: function(container) {
             return container.children(roleSelector("view splitview")).hide();
-        },
-
-        _setupModalViews: function(element) {
-            element.children(roleSelector("modalview")).each(function() {
-                kendo.initWidget($(this), {}, ui.roles);
-            });
         },
 
         _setupLayouts: function(element) {
