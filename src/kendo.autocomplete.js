@@ -70,6 +70,19 @@
             element[0].type = "text";
             wrapper = that.wrapper;
 
+            that._enable();
+
+            that._popup();
+
+            //aria
+
+            element.attr("tabindex", 0)
+                   .attr("role", "textbox")
+                   .attr("aria-haspopup", true)
+                   .attr("aria-autocomplete", "both")
+                   .attr("aria-owns", that.popup.element[0].id) //element should have ID
+
+            //end
             element
                 .attr("autocomplete", "off")
                 .addClass("k-input")
@@ -508,6 +521,13 @@
             if (!wrapper.is("span.k-widget")) {
                 wrapper = element.wrap("<span />").parent();
             }
+
+            //aria
+
+            wrapper.attr("tabindex", -1);
+            wrapper.attr("role", "presentation");
+
+            //end
 
             wrapper[0].style.cssText = DOMelement.style.cssText;
             element.css({

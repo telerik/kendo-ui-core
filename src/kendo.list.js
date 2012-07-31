@@ -48,6 +48,15 @@
                             e.preventDefault();
                         });
 
+            //aria
+
+            //that.list.attr("role", "presentation");
+            that.ul.attr("role", "listbox")
+                .attr("aria-expanded", false)
+                .attr("tabindex", -1);
+
+            //end
+
             id = that.element.attr(ID);
             if (id) {
                 list.attr(ID, id + "-list");
