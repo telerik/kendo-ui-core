@@ -200,16 +200,23 @@
         },
 
         _navigation: function() {
-            var that = this;
-            that.breadcrumbs = $('<div class="k-floatwrap"><input/></div>')
-                    .appendTo(this.element)
-                    .find("input")
+            var that = this,
+                navigation = $('<div class="k-floatwrap"><input/></div><input class="k-search"/>').appendTo(this.element);
+
+            that.breadcrumbs = navigation.find("input")
                     .kendoBreadcrumbs({
                         value: that.options.path,
                         change: function() {
                             that.path(this.value());
                         }
                     }).data("kendoBreadcrumbs");
+
+            that.searchBox = navigation.parent().find("input.k-search")
+                    .kendoSearchBox({
+                        change: function() {
+                            that.dataSource.filter({ field: that._getFieldName(NAMEFIELD), operator: "startswith", value: this.value() });
+                        }
+                    }).data("kendoSearchBox");
         },
 
         refresh: function() {
