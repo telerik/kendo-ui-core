@@ -909,6 +909,10 @@
                     "url": "dragdrop/container.html"
                 },
                 {
+                    "text": "Area",
+                    "url": "dragdrop/area.html"
+                },
+                {
                     "text": "Events",
                     "url": "dragdrop/events.html"
                 }
