@@ -682,7 +682,7 @@
             if (draggable) {
                 return that.trigger(eventName, extend({}, e.event, {
                            draggable: draggable,
-                           filterTarget: e.filterTarget
+                           dropTarget: e.dropTarget
                        }));
             }
         },
@@ -848,7 +848,7 @@
             that._withDropTarget(e, function(target, targetElement) {
                 if (!target) {
                     if (lastDropTarget) {
-                        lastDropTarget._trigger(DRAGLEAVE, extend(e, { filterTarget: lastDropTarget.targetElement }));
+                        lastDropTarget._trigger(DRAGLEAVE, extend(e, { dropTarget: lastDropTarget.targetElement }));
                         lastDropTarget = null;
                     }
                     return;
@@ -859,10 +859,10 @@
                         return;
                     }
 
-                    lastDropTarget._trigger(DRAGLEAVE, extend(e, { filterTarget: lastDropTarget.targetElement }));
+                    lastDropTarget._trigger(DRAGLEAVE, extend(e, { dropTarget: lastDropTarget.targetElement }));
                 }
 
-                target._trigger(DRAGENTER, extend(e, { filterTarget: targetElement }));
+                target._trigger(DRAGENTER, extend(e, { dropTarget: targetElement }));
                 lastDropTarget = extend(target, { targetElement: targetElement });
             });
 
@@ -878,7 +878,7 @@
 
             that._withDropTarget(e, function(target, targetElement) {
                 if (target) {
-                    target._drop(extend({}, e, { filterTarget: targetElement }));
+                    target._drop(extend({}, e, { dropTarget: targetElement }));
                     lastDropTarget = null;
                 }
             });
@@ -908,7 +908,7 @@
                     x: e.x,
                     y: e.y,
                     currentTarget: that.currentTarget,
-                    filterTarget: e.filterTarget
+                    dropTarget: e.dropTarget
                 }
             ));
         },

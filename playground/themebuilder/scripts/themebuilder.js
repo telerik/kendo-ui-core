@@ -374,14 +374,14 @@ function initTargets() {
                 var css = { cursor: cursorSvg.replace("%23f984ef", color) };
 
                 css[property] = color;
-                $(e.filterTarget).css(css);
+                $(e.dropTarget).css(css);
             },
             dragleave: function (e) {
-                $(e.filterTarget).css(defaultCSS);
+                $(e.dropTarget).css(defaultCSS);
             },
             drop: function (e) {
                 var that = this,
-                    target = $(e.filterTarget);
+                    target = $(e.dropTarget);
 
                 target.css(defaultCSS);
 

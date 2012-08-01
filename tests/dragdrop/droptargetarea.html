@@ -61,34 +61,34 @@
                 startDrag();
             }
 
-            test("dragenter is raised, passing the draggable and the filterTarget", 2, function() {
+            test("dragenter is raised, passing the draggable and the dropTarget", 2, function() {
                 setup({
                         filter: ".test1",
                         dragenter: function(e) {
                             ok(e.draggable === draggable);
-                            ok(e.filterTarget.className == "test1");
+                            ok(e.dropTarget.className == "test1");
                         }
                     });
             });
 
-            test("dragleave is raised, passing the draggable and the filterTarget", 2, function() {
+            test("dragleave is raised, passing the draggable and the dropTarget", 2, function() {
                 setup( {
                         filter: ".test1",
                         dragleave: function(e) {
                             ok(e.draggable === draggable);
-                            ok(e.filterTarget.className == "test1");
+                            ok(e.dropTarget.className == "test1");
                         }
                     });
 
                 trigger("mousemove", { pageX: 0, pageY: 0 });
             });
 
-            test("drop is raised and the filterTarget", 2, function() {
+            test("drop is raised and the dropTarget", 2, function() {
                 setup({
                         filter: ".test1",
                         drop: function(e) {
                             ok(e.draggable === draggable);
-                            ok(e.filterTarget.className == "test1");
+                            ok(e.dropTarget.className == "test1");
                         }
                     });
 
