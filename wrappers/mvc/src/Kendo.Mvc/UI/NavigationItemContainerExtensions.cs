@@ -199,12 +199,12 @@ namespace Kendo.Mvc.UI
 
             item.RouteValues.AddRange(node.RouteValues);
 
+            parent.Items.Add(item);
+
             if (siteMapAction != null)
             {
                 siteMapAction(item, node);
             }
-
-            parent.Items.Add(item);
 
             if (item is INavigationItemContainer<T>)
             {
