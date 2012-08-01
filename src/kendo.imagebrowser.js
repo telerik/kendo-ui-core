@@ -110,13 +110,30 @@
             path: "/"
         },
 
-        events: [ERROR],
+        events: [ERROR, CHANGE],
 
         destroy: function() {
             Widget.fn.destroy.call(this);
 
             this.dataSource
                 .unbind(ERROR, this._errorHandler);
+        },
+
+        value: function() {
+            var selected = this._selectedItem();
+
+            if (selected && selected.get(this._getFieldName(TYPEFIELD)) === "f") {
+                return selected.get(this._getFieldName(NAMEFIELD));
+            }
+        },
+
+        _selectedItem: function() {
+            var listView = this.listView,
+                selected = listView.select();
+
+            if (selected.length) {
+                return this.dataSource.getByUid(selected.attr(kendo.attr("uid")));
+            }
         },
 
         _toolbar: function() {
@@ -181,12 +198,21 @@
             that.listView = new kendo.ui.ListView(that.list, {
                 dataSource: that.dataSource,
                 template: that._itemTmpl(),
+                selectable: true,
                 autoBind: false,
                 dataBound: function() {
                     that._tiles = this.items().filter("[" + kendo.attr("type") + "=f]");
                     that._scroll();
-                }
+                },
+                change: proxy(that._listViewChange, that)
             });
+        },
+
+        _listViewChange: function() {
+            var selected = this._selectedItem();
+            if (selected && selected.get(this._getFieldName(TYPEFIELD)) === "f") {
+                this.trigger(CHANGE);
+            }
         },
 
         _dataSource: function() {
