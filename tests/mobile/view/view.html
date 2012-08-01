@@ -9,6 +9,9 @@
         <script src="../../../src/kendo.fx.js"></script>
         <script src="../../../src/kendo.data.js"></script>
         <script src="../../../src/kendo.binder.js"></script>
+        <script src="../../../src/kendo.list.js"></script>
+        <script src="../../../src/kendo.popup.js"></script>
+        <script src="../../../src/kendo.dropdownlist.js"></script>
         <script src="../../../src/kendo.draganddrop.js"></script>
         <script src="../../../src/kendo.history.js"></script>
         <script src="../../../src/kendo.mobile.scroller.js"></script>
@@ -49,10 +52,20 @@
                 ok(root.find("#foo").data("kendoMobileButton"));
             });
 
+            test("initializes web widgets", 1, function() {
+                setup('<div data-role="view"><select data-role="dropdownlist" id="foo"><option></option></select></div>');
+                ok(root.find("#foo").data("kendoDropDownList"));
+            });
+
             var viewModel = {foo: "bar"};
             test("binds to model", 1, function() {
                 setup('<div data-model="viewModel" data-role="view"><i data-bind="text: foo"></i></div>');
                 equal(root.find("i").text(), "bar");
+            });
+
+            test("initializes web widgets when binding", 1, function() {
+                setup('<div data-model="viewModel" data-role="view"><select data-role="dropdownlist" id="foo"><option></option></select></div>');
+                ok(root.find("#foo").data("kendoDropDownList"));
             });
 
             test("View parses json data model", function() {
