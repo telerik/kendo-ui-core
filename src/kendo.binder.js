@@ -423,7 +423,7 @@
                 for (idx = 0, length = items.length; idx < length; idx++) {
                     child = clone.children[0];
                     element.insertBefore(child, reference || null);
-                    bindElement(child, items[idx]);
+                    bindElement(child, items[idx], kendo.ui.roles);
                 }
             }
         },
@@ -462,7 +462,7 @@
 
                 if (element.children.length) {
                     for (idx = 0, length = source.length; idx < length; idx++) {
-                        bindElement(element.children[idx], source[idx]);
+                        bindElement(element.children[idx], source[idx], kendo.ui.roles);
                     }
                 }
             }
@@ -768,7 +768,7 @@
             },
 
             itemChange: function(e) {
-                bindElement(e.item[0], e.data, e.ns || kendo.ui);
+                bindElement(e.item[0], e.data, (e.ns || kendo.ui).roles);
             },
 
             dataBinding: function() {
@@ -798,7 +798,7 @@
                     }
 
                     for (idx = 0, length = view.length; idx < length; idx++) {
-                        bindElement(items[idx], view[idx], ns);
+                        bindElement(items[idx], view[idx], ns.roles);
                     }
                 }
             },
@@ -1038,9 +1038,8 @@
         return result;
     }
 
-    function bindingTargetForRole(role, element, namespace) {
-        var roles = namespace.roles,
-            type = roles[role];
+    function bindingTargetForRole(role, element, roles) {
+        var type = roles[role];
 
         if (type) {
             return new WidgetBindingTarget(kendo.initWidget(element, type.options, roles));
@@ -1090,7 +1089,7 @@
         return result;
     }
 
-    function bindElement(element, source, namespace) {
+    function bindElement(element, source, roles) {
         var role = element.getAttribute("data-" + kendo.ns + "role"),
             idx,
             bind = element.getAttribute("data-" + kendo.ns + "bind"),
@@ -1100,16 +1099,12 @@
             options = {},
             target;
 
-        if (!namespace) {
-            namespace = kendo.ui;
-        }
-
         if (role || bind) {
             unbindElement(element);
         }
 
         if (role) {
-            target = bindingTargetForRole(role, element, namespace);
+            target = bindingTargetForRole(role, element, roles);
         }
 
         if (bind) {
@@ -1159,19 +1154,21 @@
 
         if (deep && children) {
             for (idx = 0; idx < children.length; idx++) {
-                bindElement(children[idx], source, namespace);
+                bindElement(children[idx], source, roles);
             }
         }
     }
 
-    function bind(dom, object, namespace) {
-        var idx, length;
+    function bind(dom, object) {
+        var idx,
+            length,
+            roles = kendo.rolesFromNamespaces([].slice.call(arguments, 2));
 
         object = kendo.observable(object);
         dom = $(dom);
 
         for (idx = 0, length = dom.length; idx < length; idx++ ) {
-            bindElement(dom[idx], object, namespace);
+            bindElement(dom[idx], object, roles);
         }
     }
 

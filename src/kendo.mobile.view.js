@@ -169,12 +169,13 @@
 
             that.model = model;
 
+            // PopOver widgets have to be initialized first, as they move their element out of the DOM.
             element.find(roleSelector("popover")).each(function(){
                 kendo.initWidget(this, {}, ui.roles);
             });
 
             if (model) {
-                kendo.bind(element.children(), model, ui);
+                kendo.bind(element.children(), model, ui, kendo.ui, kendo.dataviz.ui);
             } else {
                 mobile.init(element.children());
             }

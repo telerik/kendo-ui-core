@@ -2148,7 +2148,11 @@ function pad(number) {
             return;
         }
 
-        widget = roles[role];
+        if (role.indexOf(".") === -1) {
+            widget = roles[role];
+        } else { // full namespace path - like kendo.ui.Widget
+            widget = kendo.getter(role)(window);
+        }
 
         if (!widget) {
             return;
@@ -2187,9 +2191,8 @@ function pad(number) {
         return result;
     };
 
-    kendo.init = function(element) {
-        var namespaces = slice.call(arguments, 1),
-            roles;
+    kendo.rolesFromNamespaces = function(namespaces) {
+        var roles;
 
         if (!namespaces[0]) {
             namespaces = [kendo.ui, kendo.dataviz.ui];
@@ -2197,7 +2200,11 @@ function pad(number) {
 
         roles = $.map(namespaces, function(namespace) { return namespace.roles; }).reverse();
 
-        roles = extend.apply(null, [{}].concat(roles));
+        return extend.apply(null, [{}].concat(roles));
+    };
+
+    kendo.init = function(element) {
+        var roles = kendo.rolesFromNamespaces(slice.call(arguments, 1));
 
         $(element).find("[data-" + kendo.ns + "role]").andSelf().each(function(){
             kendo.initWidget(this, {}, roles);

@@ -63,7 +63,15 @@
                 ok(dom.data("kendoTestWidget") instanceof TestWidget, "TestWidget is initialized");
             });
 
-            test("initializes a multiple widgets based on their role", function() {
+            test("accepts a js reference as a role", function() {
+                var dom = $('<div data-role="kendo.ui.TestWidget" />');
+
+                kendo.init(dom);
+
+                ok(dom.data("kendoTestWidget") instanceof TestWidget, "TestWidget is initialized");
+            });
+
+            test("initializes multiple widgets based on their role", function() {
                 var dom = $('<div data-role="testwidget"/><div data-role="testwidget"/>');
 
                 kendo.init(dom);
