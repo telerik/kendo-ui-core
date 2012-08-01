@@ -141,7 +141,7 @@
             if (e && e.action === "itemchange") {
                 if (!that.editable) {
                     data = e.items[0];
-                    idx = view.indexOf(data);
+                    idx = $.inArray(data, view);
 
                     if (idx >= 0) {
                         item = $(template(data));
