@@ -39,6 +39,7 @@
         <ul id="log"></ul>
 
         <script>
+            QUnit.config.reorder = false;
             var ListView = kendo.mobile.ui.ListView;
 
             module("mobile listview", {
@@ -472,6 +473,26 @@
 
                 ds.bind("change", firstAssert);
 
+            });
+
+            asyncTest("stopEndlessScrolling method stops endlessScrolling functionality", function() {
+                window.initListView = function(e) {
+                    var listview = e.view.element.find("#listview");
+                    listview.kendoMobileListView({
+                        dataSource: [],
+                        endlessScroll: true
+                    });
+
+                    listview.data("kendoMobileListView").stopEndlessScrolling();
+
+                    var scroller = listview.data("kendoMobileListView")._scroller();
+
+                    start();
+                    equal(scroller._events["resize"][0], undefined);
+                    ok(scroller._events["scroll"].length < 2);
+                }
+
+                setup('<div data-role="view" data-init="initListView"><div id="listview" style="height:300px"></div></div>');
             });
         </script>
     </body>

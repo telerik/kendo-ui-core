@@ -269,6 +269,16 @@
             }
         },
 
+        stopEndlessScrolling: function() {
+            var that = this,
+                scroller = that._scroller();
+
+           scroller.unbind("resize", that._scrollerResize);
+           scroller.unbind("scroll", that._scrollerScroll);
+
+           that._loadIcon.parent().hide();
+        },
+
         _unbindDataSource: function() {
             var that = this;
 
@@ -384,19 +394,21 @@
 
             if (options.endlessScroll) {
                 that._scrollHeight = scroller.element.height();
+                that._scrollerResize = function() {
+                    that._scrollHeight = scroller.element.height();
+                    that._calcTreshold();
+                },
+                that._scrollerScroll = function(e) {
+                    if (!that.loading && e.scrollTop + that._scrollHeight > that._treshold) {
+                        that.loading = true;
+                        that._toggleIcon(true);
+                        dataSource.next();
+                    }
+                };
 
                 scroller.setOptions({
-                    resize: function() {
-                        that._scrollHeight = scroller.element.height();
-                        that._calcTreshold();
-                    },
-                    scroll: function(e) {
-                        if (!that.loading && e.scrollTop + that._scrollHeight > that._treshold) {
-                            that.loading = true;
-                            that._toggleIcon(true);
-                            dataSource.next();
-                        }
-                    }
+                    resize: that._scrollerResize,
+                    scroll: that._scrollerScroll
                 });
             }
         },
