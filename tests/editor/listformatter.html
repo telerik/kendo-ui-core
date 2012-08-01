@@ -135,7 +135,7 @@ test("apply on single paragraph which contains inline elements", function() {
     var formatter = new ListFormatter('ul');
 
     formatter.apply([editor.body.firstChild.childNodes[1], editor.body.firstChild.lastChild]);
-    equal(editor.value(), '<ul><li><span class="k-marker"></span>f<span class="k-marker"></span><span class="k-marker"></span>oo</li></ul>');
+    equal(editor.body.innerHTML.toLowerCase(), '<ul><li><span class="k-marker"></span>f<span class="k-marker"></span><span class="k-marker"></span>oo</li></ul>');
 });
 
 test("apply applies to selected block contents only", function() {

@@ -64,7 +64,7 @@ test('addMarker inserts markers', function() {
     var marker = new Marker();
     marker.add(range);
 
-    equal(editor.value(), 'f<span class="k-marker"></span>o<span class="k-marker"></span>o');
+    equal(editor.body.innerHTML.toLowerCase(), 'f<span class="k-marker"></span>o<span class="k-marker"></span>o');
 
 });
 test('addMarker normalizes', function() {
@@ -86,7 +86,7 @@ test('addMarker does not remove line breaks', function() {
     var marker = new Marker();
     marker.add(range);
 
-    equal(editor.value(), '<span class="k-marker"></span>foo<span class="k-marker"></span><br />bar');
+    equal(editor.value(), 'foo<br />bar');
 });
 
 test('addMarker on collapsed range', function() {
@@ -97,7 +97,7 @@ test('addMarker on collapsed range', function() {
     var marker = new Marker();
     marker.add(range);
 
-    equal(editor.value(), 'f<span class="k-marker"></span><span class="k-marker"></span>oo');
+    equal(editor.body.innerHTML.toLowerCase(), 'f<span class="k-marker"></span><span class="k-marker"></span>oo');
 });
 
 test('removeMarker removes markers', function() {
@@ -174,7 +174,7 @@ test('addCaretMarker inserts caret marker', function() {
     var marker = new Marker();
     marker.addCaret(range);
 
-    equal(editor.value(), 'fo<span class="k-marker"></span>o');
+    equal(editor.body.innerHTML.toLowerCase(), 'fo<span class="k-marker"></span>o');
 });
 
 test('addCaretMarker updates range to include caret marker', function() {
