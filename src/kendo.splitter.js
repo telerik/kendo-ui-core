@@ -97,8 +97,8 @@
             that.element
                 .on(MOUSEENTER + NS, splitbarSelector, function() { $(this).addClass("k-splitbar-" + that.orientation + "-hover"); })
                 .on(MOUSELEAVE + NS, splitbarSelector, function() { $(this).removeClass("k-splitbar-" + that.orientation + "-hover"); })
-                .on("mousedown" + NS, splitbarSelector, function() { that._contentFrames(this).after("<div class='k-overlay' />"); })
-                .on("mouseup" + NS, splitbarSelector, function() { that._contentFrames(this).next(".k-overlay").remove(); })
+                .on("mousedown" + NS, splitbarSelector, function() { that._panes().append("<div class='k-splitter-overlay k-overlay' />"); })
+                .on("mouseup" + NS, splitbarSelector, function() { that._panes().children(".k-splitter-overlay").remove(); })
                 .on(MOUSEENTER + NS, expandCollapseSelector, function() { $(this).addClass("k-state-hover"); })
                 .on(MOUSELEAVE + NS, expandCollapseSelector, function() { $(this).removeClass('k-state-hover'); })
                 .on(CLICK + NS, ".k-splitbar .k-collapse-next, .k-splitbar .k-collapse-prev", that._arrowClick(COLLAPSE))
@@ -279,8 +279,8 @@
                 that._updateSplitBar(splitbar, previousPane, nextPane);
             });
         },
-        _contentFrames: function(splitbar) {
-            return $(splitbar).siblings(PANECLASS).find("> .k-content-frame");
+        _panes: function() {
+            return this.element.children(PANECLASS);
         },
         _resize: function() {
             var that = this,
@@ -490,7 +490,7 @@
                 splitbar = $(e.currentTarget),
                 owner = that.owner;
 
-            owner._contentFrames(splitbar).next(".k-overlay").remove();
+            owner._panes().children(".k-splitter-overlay").remove();
 
             if (e.keyCode !== kendo.keys.ESC) {
                 var ghostPosition = e.position,
