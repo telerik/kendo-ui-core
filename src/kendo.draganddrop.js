@@ -15,7 +15,9 @@
         dropTargets = {},
         dropFilters = {},
         lastDropTarget,
-        invalidZeroEvents = support.mobileOS && support.mobileOS.android,
+        OS = support.mobileOS,
+        invalidZeroEvents = OS && OS.android,
+        mobileChrome = (invalidZeroEvents && OS.browser == "chrome"),
         START_EVENTS = "mousedown",
         MOVE_EVENTS = "mousemove",
         END_EVENTS = "mouseup mouseleave",
@@ -61,7 +63,11 @@
     }
 
     function elementUnderCursor(e) {
-        return document.elementFromPoint(e.x.client, e.y.client);
+        if (mobileChrome) {
+            return document.elementFromPoint(e.x.screen, e.y.screen);
+        } else {
+            return document.elementFromPoint(e.x.client, e.y.client);
+        }
     }
 
     function numericCssPropery(element, property) {
@@ -139,6 +145,7 @@
 
             that.startLocation = that.location = offset;
             that.client = location["client" + that.axis];
+            that.screen = location["screen" + that.axis];
             that.velocity = that.delta = 0;
             that.timeStamp = timeStamp;
         },
@@ -154,6 +161,7 @@
             that.delta = offset - that.location;
             that.location = offset;
             that.client = location["client" + that.axis];
+            that.screen = location["screen" + that.axis];
             that.initialDelta = offset - that.startLocation;
             that.velocity = that.delta / (timeStamp - that.timeStamp);
             that.timeStamp = timeStamp;
