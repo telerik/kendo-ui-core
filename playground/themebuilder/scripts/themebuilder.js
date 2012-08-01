@@ -1,6 +1,7 @@
 var devices = [ "ios", "android", "blackberry", "meego" ], CtrlDown = false, contextMenu,
     colors = [ "color", "background-color", "border-color" ],
-    cursorSvg = 'url(\'data:image/svg+xml;utf-8,<svg xmlns="http:%2F%2Fwww.w3.org%2F2000%2Fsvg" width="28" height="38"><path fill="rgba(0,0,0,.3)" d="M26.667,15.236c0-6.996-5.671-12.667-12.667-12.667c-6.995,0-12.667,5.672-12.667,12.667c0,4.78,2.651,8.938,6.562,11.097 C10.695,31.772,14,36.95,14,36.95s3.305-5.178,6.105-10.617C24.017,24.175,26.667,20.017,26.667,15.236z"%2F><path fill="%23FFF" d="M26.667,13.819c0-6.996-5.671-12.667-12.667-12.667c-6.995,0-12.667,5.672-12.667,12.667 c0,4.78,2.651,8.938,6.562,11.097C10.695,30.355,14,35.533,14,35.533s3.305-5.178,6.105-10.617 C24.017,22.758,26.667,18.6,26.667,13.819z"%2F><linearGradient id="ID" gradientUnits="userSpaceOnUse" x1="14" y1="25" x2="14" y2="0"><stop offset="0" style="stop-color:%23f984ef"%2F><%2FlinearGradient><circle fill="url(%23ID)" cx="14" cy="14" r="11"%2F><path fill="rgba(0,0,0,.3)" d="M14,4.403c5.616,0,10.189,4.413,10.473,9.958c0.009-0.18,0.027-0.359,0.027-0.542c0-5.799-4.701-10.5-10.5-10.5 S3.5,8.021,3.5,13.82c0,0.183,0.018,0.361,0.027,0.542C3.811,8.816,8.384,4.403,14,4.403z"%2F><%2Fsvg>\') 14 38, crosshair';
+    fillSvg = 'url(\'data:image/svg+xml;utf-8,<svg xmlns="http:%2F%2Fwww.w3.org%2F2000%2Fsvg" width="28" height="38"><path fill="rgba(255,255,255,.3)" d="M26.667,15.236c0-6.996-5.671-12.667-12.667-12.667c-6.995,0-12.667,5.672-12.667,12.667c0,4.78,2.651,8.938,6.562,11.097 C10.695,31.772,14,36.95,14,36.95s3.305-5.178,6.105-10.617C24.017,24.175,26.667,20.017,26.667,15.236z"%2F><path fill="%23FFF" d="M26.667,13.819c0-6.996-5.671-12.667-12.667-12.667c-6.995,0-12.667,5.672-12.667,12.667 c0,4.78,2.651,8.938,6.562,11.097C10.695,30.355,14,35.533,14,35.533s3.305-5.178,6.105-10.617 C24.017,22.758,26.667,18.6,26.667,13.819z"%2F><linearGradient id="ID" gradientUnits="userSpaceOnUse" x1="14" y1="25" x2="14" y2="0"><stop offset="0" style="stop-color:%23f984ef"%2F><%2FlinearGradient><circle fill="url(%23ID)" cx="14" cy="14" r="11"%2F><path fill="rgba(0,0,0,.3)" d="M14,4.403c5.616,0,10.189,4.413,10.473,9.958c0.009-0.18,0.027-0.359,0.027-0.542c0-5.799-4.701-10.5-10.5-10.5 S3.5,8.021,3.5,13.82c0,0.183,0.018,0.361,0.027,0.542C3.811,8.816,8.384,4.403,14,4.403z"%2F><%2Fsvg>\')',
+    cursorSvg = fillSvg + ' 14 38, crosshair';
 
 (function ($, undefined) {
 
@@ -38,7 +39,7 @@ var devices = [ "ios", "android", "blackberry", "meego" ], CtrlDown = false, con
             listitem: {
                 name: "List Item",
                 selector: ".km-list > li",
-                whitelist: [ "background-color", "background-image", "border-radius" ]
+                whitelist: [ "background-color", "background-image", "border-radius", "color" ]
             },
             scrollitem: {
                 name: "ScrollView Item",
@@ -65,7 +66,7 @@ var devices = [ "ios", "android", "blackberry", "meego" ], CtrlDown = false, con
                 selector: ".km-switch-label-off",
                 whitelist: [ "left", "width", "height", "color", "text-shadow", "font-family", "font-style", "font-weight", "font-size" ]
             },
-            switch: {
+            switcher: {
                 name: "Switch",
                 selector: ".km-switch",
                 whitelist: [ "width", "height" ],
@@ -340,6 +341,13 @@ var devices = [ "ios", "android", "blackberry", "meego" ], CtrlDown = false, con
 })(jQuery);
 
 var draggableEvents = {
+    cursorOffset: {
+        left: -50,
+        top: -38
+    },
+    hint: function (element) {
+        return kendo.support.touch ? $("<div style='width: 28px; height: 38px'/>").css("background-image", fillSvg.replace("%23f984ef", element.css("background-color"))) : undefined;
+    },
     dragstart: function (e) {
         $(document.documentElement).css("cursor", cursorSvg.replace("%23f984ef", this.element.css("background-color")));
     },
