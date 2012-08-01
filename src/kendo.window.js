@@ -150,6 +150,8 @@
 
             that.toFront();
 
+            that._tabindex();
+
             if (options.visible && options.modal) {
                 that._overlay(wrapper.is(VISIBLE)).css({ opacity: 0.5 });
             }
@@ -157,7 +159,8 @@
             wrapper
                 .on("mouseenter" + NS,  ".k-window-titlebar .k-window-action", function () { $(this).addClass(KHOVERSTATE); })
                 .on("mouseleave" + NS,  ".k-window-titlebar .k-window-action", function () { $(this).removeClass(KHOVERSTATE); })
-                .on("click" + NS, ".k-window-titlebar .k-window-action", proxy(that._windowActionHandler, that));
+                .on("click" + NS, ".k-window-titlebar .k-window-action", proxy(that._windowActionHandler, that))
+                .on("keydown" + NS, proxy(that._keydown, that));
 
             if (options.resizable) {
                 wrapper.on("dblclick" + NS, KWINDOWTITLEBAR, proxy(that.toggleMaximization, that));
@@ -269,6 +272,14 @@
             minHeight: 50,
             maxWidth: Infinity,
             maxHeight: Infinity
+        },
+
+        _keydown: function(e) {
+            var keys = kendo.keys;
+
+            if (e.keyCode == keys.ESC) {
+                this.close();
+            }
         },
 
         _overlay: function (visible) {

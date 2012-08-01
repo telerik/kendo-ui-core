@@ -130,6 +130,28 @@
 
                 equal(dialog.wrapper.find(".k-resize-handle").css("display"), "none");
             });
+
+            module("keyboard support", {
+                teardown: function() {
+                    $(".k-window,.k-overlay").remove();
+                    $.mockjaxClear();
+                }
+            });
+
+            var keys = kendo.keys;
+
+            test("escape key triggers close event", function() {
+                var triggers = 0,
+                    dialog = createWindow({
+                        close: function() {
+                            triggers++;
+                        }
+                    });
+
+                dialog.press(keys.ESC);
+
+                equal(triggers, 1);
+            });
         </script>
 
         <h1 id="qunit-header">kendo.ui.Window Tests</h1>
