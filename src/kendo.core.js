@@ -963,6 +963,7 @@ function pad(number) {
         exponentRegExp = /[eE][\-+]?[0-9]+/,
         shortTimeZoneRegExp = /[+|\-]\d{1,2}/,
         longTimeZoneRegExp = /[+|\-]\d{1,2}:\d{2}/,
+        dateRegExp = /^\/Date\((.*?)\)\/$/,
         formatsSequence = ["G", "g", "d", "F", "D", "y", "m", "T", "t"];
 
     function outOfRange(value, start, end) {
@@ -1219,6 +1220,13 @@ function pad(number) {
         var idx = 0,
             date = null,
             length, patterns;
+
+        if (value && value.indexOf("/D") === 0) {
+            date = dateRegExp.exec(value);
+            if (date) {
+                return new Date(parseInt(date[1], 10));
+            }
+        }
 
         culture = kendo.getCulture(culture);
 
