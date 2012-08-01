@@ -56,6 +56,10 @@
                 .attr("tabindex", -1);
 
             //end
+            //
+            if (that.input) {
+                that.input.attr("aria-expanded", false)
+            }
 
             id = that.element.attr(ID);
             if (id) {

@@ -81,6 +81,18 @@
                     element.blur();
                 });
 
+            //ARIA
+
+            that.input.attr("role", "combobox")
+                .attr("aria-haspopup", "true")
+                .attr("aria-owns", that.popup.element[0].id)
+                .attr("aria-autocomplete", "both")
+
+            that._arrow.attr("tabindex", -1)
+                .attr("role", "button")
+                .attr("aria-controls", that.popup.element[0].id)
+            //end
+
             that._oldIndex = that.selectedIndex = -1;
             that._old = that.value();
 
@@ -557,7 +569,7 @@
             input = wrapper.find(SELECTOR);
 
             if (!input[0]) {
-                wrapper.append('<span unselectable="on" class="k-dropdown-wrap k-state-default"><input ' + name + 'class="k-input" type="text" autocomplete="off"/><span unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-arrow-s">select</span></span></span>')
+                wrapper.append('<span tabindex="-1" unselectable="on" class="k-dropdown-wrap k-state-default"><input ' + name + 'class="k-input" type="text" autocomplete="off"/><span tabindex="-1" unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-arrow-s">select</span></span></span>')
                        .append(that.element);
 
                 input = wrapper.find(SELECTOR);
