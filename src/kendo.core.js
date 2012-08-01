@@ -2161,7 +2161,7 @@ function pad(number) {
         }
 
         if (role.indexOf(".") === -1) {
-            widget = roles[role]
+            widget = roles[role];
         } else { // full namespace path - like kendo.ui.Widget
             widget = kendo.getter(role)(window);
         }
