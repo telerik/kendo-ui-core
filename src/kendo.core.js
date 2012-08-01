@@ -2153,8 +2153,10 @@ function pad(number) {
             return;
         }
 
-        if (role.indexOf("-") === -1) { // skip invalid data-roles, may have to be extended.
-            widget = roles[role] || kendo.getter(role)(window);
+        if (role.indexOf(".") === -1) {
+            widget = roles[role]
+        } else { // full namespace path - like kendo.ui.Widget
+            widget = kendo.getter(role)(window);
         }
 
         if (!widget) {
