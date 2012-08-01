@@ -1533,6 +1533,7 @@ function pad(number) {
                     omobile: /Opera\sMobi/i,
                     firefox: /Firefox|Fennec/i,
                     mobilesafari: /version\/.*safari/i,
+                    chrome: /chrome/i,
                     webkit: /webkit/i,
                     ie: /MSIE|Windows\sPhone/i
                 },
@@ -1819,6 +1820,8 @@ function pad(number) {
 
     if (support.touch) {
 
+        var mobileChrome = (support.mobileOS.browser == "chrome" && !support.mobileOS.ios);
+
         touchLocation = function(e, id) {
             var changedTouches = e.changedTouches || e.originalEvent.changedTouches;
 
@@ -1846,7 +1849,11 @@ function pad(number) {
         eventTarget = function(e) {
             var touches = "originalEvent" in e ? e.originalEvent.changedTouches : "changedTouches" in e ? e.changedTouches : null;
 
-            return touches ? document.elementFromPoint(touches[0].clientX, touches[0].clientY) : null;
+            if (mobileChrome) {
+                return touches ? document.elementFromPoint(touches[0].screenX, touches[0].screenY) : null;
+            } else {
+                return touches ? document.elementFromPoint(touches[0].clientX, touches[0].clientY) : null;
+            }
         };
 
         each(["swipe", "swipeLeft", "swipeRight", "swipeUp", "swipeDown", "doubleTap", "tap"], function(m, value) {

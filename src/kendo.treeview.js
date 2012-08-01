@@ -1132,6 +1132,7 @@
         var that = this;
 
         that.treeview = treeview;
+        that.hovered = treeview.element;
 
         that._draggable = new ui.Draggable(treeview.element, {
            filter: "div:not(.k-state-disabled) .k-in",
@@ -1150,6 +1151,15 @@
     }
 
     TreeViewDragAndDrop.prototype = {
+        _removeTouchHover: function() {
+            var that = this;
+
+            if (kendo.support.touch && that.hovered) {
+                that.hovered.find("." + KSTATEHOVER).removeClass(KSTATEHOVER);
+                that.hovered = false;
+            }
+        },
+
         _hintStatus: function(newStatus) {
             var statusElement = this._draggable.hint.find(".k-drag-status")[0];
 
@@ -1179,13 +1189,14 @@
                 treeview = that.treeview,
                 sourceNode = that.sourceNode,
                 dropTarget = that.dropTarget = $(kendo.eventTarget(e)),
-                statusClass,
+                statusClass, closestTree = dropTarget.closest(".k-treeview"),
                 hoveredItem, hoveredItemPos, itemHeight, itemTop, itemContent, delta,
                 insertOnTop, insertOnBottom, addChild;
 
-            if (!dropTarget.closest(".k-treeview").length) {
+            if (!closestTree.length) {
                 // dragging node outside of treeview
                 statusClass = "k-denied";
+                that._removeTouchHover();
             } else if ($.contains(sourceNode[0], dropTarget[0])) {
                 // dragging node within itself
                 statusClass = "k-denied";
@@ -1193,22 +1204,22 @@
                 // moving or reordering node
                 statusClass = "k-insert-middle";
 
-                that.dropHint.css(VISIBILITY, "visible");
-
                 hoveredItem = dropTarget.closest(".k-top,.k-mid,.k-bot");
 
-                if (hoveredItem.length > 0) {
+                if (hoveredItem.length) {
                     itemHeight = hoveredItem.outerHeight();
                     itemTop = hoveredItem.offset().top;
                     itemContent = dropTarget.closest(".k-in");
                     delta = itemHeight / (itemContent.length > 0 ? 4 : 2);
 
-                    insertOnTop = e.pageY < (itemTop + delta);
-                    insertOnBottom = (itemTop + itemHeight - delta) < e.pageY;
-                    addChild = itemContent.length > 0 && !insertOnTop && !insertOnBottom;
+                    insertOnTop = e.y.location < (itemTop + delta);
+                    insertOnBottom = (itemTop + itemHeight - delta) < e.y.location;
+                    that._removeTouchHover();
+                    addChild = itemContent.length && !insertOnTop && !insertOnBottom;
+                    that.hovered = addChild ? closestTree : false;
 
-                    itemContent.toggleClass(KSTATEHOVER, addChild);
                     that.dropHint.css(VISIBILITY, addChild ? "hidden" : "visible");
+                    itemContent.toggleClass(KSTATEHOVER, addChild);
 
                     if (addChild) {
                         statusClass = "k-add";
@@ -1236,8 +1247,8 @@
             treeview.trigger(DRAG, {
                 sourceNode: sourceNode[0],
                 dropTarget: dropTarget[0],
-                pageY: e.pageY,
-                pageX: e.pageX,
+                pageY: e.y.location,
+                pageX: e.x.location,
                 statusClass: statusClass.substring(2),
                 setStatusClass: function (value) {
                     statusClass = value;
@@ -1284,6 +1295,7 @@
             });
 
             dropHint.remove();
+            that._removeTouchHover();
 
             if (!valid || dropPrevented) {
                 that._draggable.dropped = valid;
