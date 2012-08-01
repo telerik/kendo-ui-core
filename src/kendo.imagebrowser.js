@@ -6,6 +6,7 @@
         extend = $.extend,
         placeholderSupported = kendo.support.placeholder,
         CHANGE = "change",
+        ERROR = "error",
         NS = ".kendoImageBrowser",
         BREADCRUBMSNS = ".kendoBreadcrumbs",
         SEARCHBOXNS = ".kendoSearchBox",
@@ -102,16 +103,20 @@
                 uploadFile: "Upload",
                 orderBy: "Arrange by",
                 orderByName: "Name",
-                orderBySize: "Size"
+                orderBySize: "Size",
+                directoryNotFound: "A directory with this name was not found."
             },
             transport: {},
             path: "/"
         },
 
-        events: [],
+        events: [ERROR],
 
         destroy: function() {
             Widget.fn.destroy.call(this);
+
+            this.dataSource
+                .unbind(ERROR, this._errorHandler);
         },
 
         _toolbar: function() {
@@ -204,7 +209,13 @@
                     sortOrder.field = fieldName(options.schema.model.fields, TYPEFIELD);
                 }
             }
-            that.dataSource = kendo.data.DataSource.create(dataSource);
+            if (that.dataSource && that._errorHandler) {
+                that.dataSource.unbind(ERROR, that._errorHandler);
+            } else {
+                that._errorHandler = proxy(that._error, that);
+            }
+            that.dataSource = kendo.data.DataSource.create(dataSource)
+                .bind(ERROR, that._errorHandler);
         },
 
         _navigation: function() {
@@ -226,6 +237,29 @@
                             that.search(this.value());
                         }
                     }).data("kendoSearchBox");
+        },
+
+        _error: function(e) {
+            var that = this,
+                status;
+
+            if (!that.trigger(ERROR, e)) {
+                status = e.xhr.status;
+
+                if (e.status == 'error') {
+                    if (status == '404') {
+                        that._showMessage(that.options.messages.directoryNotFound);
+                    } else if (status != '0') {
+                        that._showMessage('Error! The requested URL returned ' + status + ' - ' + e.xhr.statusText);
+                    }
+                } else if (status == 'timeout') {
+                    that._showMessage('Error! Server timeout.');
+                }
+            }
+        },
+
+        _showMessage: function(message) {
+            window.alert(message);
         },
 
         refresh: function() {
