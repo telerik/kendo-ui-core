@@ -373,7 +373,7 @@ html .k-error-colored
     height: 100%;
 }
 
-.k-content-frame + .k-overlay {
+.k-pane > .k-splitter-overlay {
     filter: alpha(opacity=0);
     opacity: 0;
     position: absolute;
