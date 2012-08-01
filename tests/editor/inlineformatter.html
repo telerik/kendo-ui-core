@@ -107,7 +107,7 @@ test('consolidate skips marker', function() {
     editor.value('<span style="text-decoration:underline;">f</span><span class="k-marker"></span><span style="text-decoration:underline;">oo</span>');
     var formatter = new InlineFormatter(editor.options.formats.underline);
     formatter.consolidate([editor.body.firstChild, editor.body.lastChild]);
-    equal(editor.value(), '<span style="text-decoration:underline;">f<span class="k-marker"></span>oo</span>');
+    equal(editor.body.firstChild.childNodes[1].className, "k-marker");
 });
 
 test('consolidate does not merge nodes which are not siblings', function() {
@@ -168,7 +168,8 @@ test('split format keeps markers', function() {
     range = marker.add(range);
 
     formatter.split(range);
-    equal(editor.value(), '<strong><span class="k-marker"></span>fo<span class="k-marker"></span></strong><strong>o</strong>');
+    equal(editor.body.firstChild.firstChild.className, "k-marker");
+    equal(editor.body.firstChild.lastChild.className, "k-marker");
 });
 
 test('toggle applies format if format is not found', function() {
