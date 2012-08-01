@@ -16,8 +16,8 @@ tests.push(
         title: "droptarget"
     },
     {
-        page: "dragdrop/dropfilter.html",
-        title: "dropfilter"
+        page: "dragdrop/droptargetarea.html",
+        title: "droptargetarea"
     },
     {
         page: "dragdrop/lint.html",

@@ -366,7 +366,7 @@ function initTargets() {
 
         $(".drop").kendoDraggable(draggableEvents);
 
-        $(".device").kendoDropFilter({
+        $(".device").kendoDropTargetArea({
             filter: getWidgets(colors).selector,
             dragenter: function (e) {
                 color = new Color(e.draggable.element.css(property)).get();

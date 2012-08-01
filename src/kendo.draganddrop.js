@@ -13,7 +13,7 @@
         getOffset = kendo.getOffset,
         draggables = {},
         dropTargets = {},
-        dropFilters = {},
+        dropAreas = {},
         lastDropTarget,
         OS = support.mobileOS,
         invalidZeroEvents = OS && OS.android,
@@ -108,10 +108,10 @@
         parent.trigger(e.type);
     }
 
-    function checkTarget(target, targets, filters) {
+    function checkTarget(target, targets, areas) {
         var theTarget, theFilter, i = 0,
             targetLen = targets && targets.length,
-            filterLen = filters && filters.length;
+            areaLen = areas && areas.length;
 
         while (target && target.parentNode) {
             for (i = 0; i < targetLen; i ++) {
@@ -121,8 +121,8 @@
                 }
             }
 
-            for (i = 0; i < filterLen; i ++) {
-                theFilter = filters[i];
+            for (i = 0; i < areaLen; i ++) {
+                theFilter = areas[i];
                 if (support.matchesSelector.call(target, theFilter.options.filter)) {
                     return { target: theFilter, targetElement: target };
                 }
@@ -705,7 +705,7 @@
         }
     });
 
-    var DropFilter = DropTarget.extend({
+    var DropTargetArea = DropTarget.extend({
         init: function(element, options) {
             var that = this;
 
@@ -713,15 +713,15 @@
 
             var group = that.options.group;
 
-            if (!(group in dropFilters)) {
-                dropFilters[group] = [ that ];
+            if (!(group in dropAreas)) {
+                dropAreas[group] = [ that ];
             } else {
-                dropFilters[group].push( that );
+                dropAreas[group].push( that );
             }
         },
 
         options: {
-            name: "DropFilter",
+            name: "DropTargetArea",
             group: "default",
             filter: null
         }
@@ -918,9 +918,9 @@
                 target, result,
                 options = that.options,
                 targets = dropTargets[options.group],
-                filters = dropFilters[options.group];
+                areas = dropAreas[options.group];
 
-            if (targets && targets.length || filters && filters.length) {
+            if (targets && targets.length || areas && areas.length) {
 
                 target = elementUnderCursor(e);
 
@@ -930,7 +930,7 @@
                     that.hint.show();
                 }
 
-                result = checkTarget(target, targets, filters);
+                result = checkTarget(target, targets, areas);
 
                 if (result) {
                     callback(result.target, result.targetElement);
@@ -955,7 +955,7 @@
     });
 
     kendo.ui.plugin(DropTarget);
-    kendo.ui.plugin(DropFilter);
+    kendo.ui.plugin(DropTargetArea);
     kendo.ui.plugin(Draggable);
     kendo.Drag = Drag;
     kendo.Tap = Tap;
