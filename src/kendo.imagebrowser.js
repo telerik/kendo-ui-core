@@ -159,6 +159,14 @@
             ]);
         },
 
+        search: function(name) {
+            this.dataSource.filter({
+                field: this._getFieldName(NAMEFIELD),
+                operator: "contains",
+                value: name
+            });
+        },
+
         _content: function() {
             var that = this;
 
@@ -201,9 +209,10 @@
 
         _navigation: function() {
             var that = this,
-                navigation = $('<div class="k-floatwrap"><input/></div><input class="k-search"/>').appendTo(this.element);
+                navigation = $('<div class="k-floatwrap"><input/><input/></div>')
+                    .appendTo(this.element);
 
-            that.breadcrumbs = navigation.find("input")
+            that.breadcrumbs = navigation.find("input:first")
                     .kendoBreadcrumbs({
                         value: that.options.path,
                         change: function() {
@@ -211,10 +220,10 @@
                         }
                     }).data("kendoBreadcrumbs");
 
-            that.searchBox = navigation.parent().find("input.k-search")
+            that.searchBox = navigation.parent().find("input:last")
                     .kendoSearchBox({
                         change: function() {
-                            that.dataSource.filter({ field: that._getFieldName(NAMEFIELD), operator: "startswith", value: this.value() });
+                            that.search(this.value());
                         }
                     }).data("kendoSearchBox");
         },

@@ -302,6 +302,27 @@
 
                 equal(browser.path(), "");
             });
+
+            test("search adds a filter descriptor to the datasource", function() {
+                var browser = setup({ });
+
+                browser.search("foo");
+                var filters = browser.dataSource.filter().filters;
+                equal(filters.length, 1);
+                equal(filters[0].field, "name");
+                equal(filters[0].operator, "contains");
+                equal(filters[0].value, "foo");
+            });
+
+            test("changing the value of the search box calls search method", function() {
+                var browser = setup(),
+                    search = stub(browser, "search");
+
+                browser.searchBox.value("foo");
+                browser.searchBox.trigger("change");
+
+                equal(search.calls("search"), 1);
+            });
         </script>
     </body>
 </html>
