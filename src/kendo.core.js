@@ -2153,7 +2153,7 @@ function pad(number) {
             return;
         }
 
-        widget = roles[role];
+        widget = roles[role] || kendo.getter(role)(window);
 
         if (!widget) {
             return;
