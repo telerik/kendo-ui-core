@@ -2153,7 +2153,9 @@ function pad(number) {
             return;
         }
 
-        widget = roles[role] || kendo.getter(role)(window);
+        if (role.indexOf("-") === -1) { // skip invalid data-roles, may have to be extended.
+            widget = roles[role] || kendo.getter(role)(window);
+        }
 
         if (!widget) {
             return;
