@@ -672,6 +672,13 @@
                 equal(+parse("2012-3-25T3:30+2"), +new Date("2012-03-25T03:30+02:00"));
                 equal(+parse("2012-3-25T3:30+3:30"), +new Date("2012-03-25T03:30+03:30"));
             });
+
+            test("parseDate parses /Date(milliseconds)/ string", function() {
+                var date = new Date();
+                    dateString = "/Date(" + +date + ")/";
+
+                equal(+parse(dateString), +date);
+            });
         </script>
     </body>
 </html>
