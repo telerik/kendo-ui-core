@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>kendo.ui.DropFilter Tests</title>
+        <title>kendo.ui.DropTargetArea Tests</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
     </head>
     <body>
-        <h1 id="qunit-header">kendo.ui.DropFilter Tests</h1>
+        <h1 id="qunit-header">kendo.ui.DropTargetArea Tests</h1>
         <h2 id="qunit-banner"></h2>
         <div id="qunit-testrunner-toolbar"></div>
         <h2 id="qunit-userAgent"></h2>
@@ -21,14 +21,14 @@
         <script>
             QUnit.config.reorder = false;
 
-            var DropFilter = kendo.ui.DropFilter,
+            var DropTargetArea = kendo.ui.DropTargetArea,
                 Draggable = kendo.ui.Draggable,
                 span,
                 targetElement,
                 target,
                 draggable;
 
-            module("kendo.ui.DropFilter", {
+            module("kendo.ui.DropTargetArea", {
                 setup: function() {
                     targetElement = $("<div><div class='test1'>&nbsp;</div><div class='test2'>&nbsp;</div></div>").prependTo(document.body);
                     span = $("<span>&nbsp;</span>").prependTo(document.body);
@@ -56,7 +56,7 @@
             }
 
             function setup(options, draggableOptions) {
-                target = new DropFilter(targetElement, options);
+                target = new DropTargetArea(targetElement, options);
                 draggable = new Draggable(span, draggableOptions);
                 startDrag();
             }
@@ -119,8 +119,8 @@
                 trigger("mouseup", { pageX: offset.left, pageY: offset.top });
             });
 
-            test("dropfilter marks the draggable as dropped", function() {
-                var e, dropFilter = setup({ filter: ".test1" });
+            test("DropTargetArea marks the draggable as dropped", function() {
+                var e, dropArea = setup({ filter: ".test1" });
 
                 var offset = kendo.getOffset(targetElement);
                 trigger("mouseup", { pageX: offset.left, pageY: offset.top });
