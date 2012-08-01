@@ -400,12 +400,6 @@
         },
 
         "date": function(value) {
-            if (typeof value === STRING) {
-                var date = dateRegExp.exec(value);
-                if (date) {
-                    return new Date(parseInt(date[1], 10));
-                }
-            }
             return kendo.parseDate(value);
         },
 
