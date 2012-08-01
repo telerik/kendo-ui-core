@@ -67,6 +67,7 @@
 
             that.element.hide()
                 .addClass("k-popup k-group k-reset")
+                .toggleClass("k-rtl", options.isRtl)
                 .css({ position : ABSOLUTE })
                 .appendTo(options.appendTo)
                 .on("mouseenter" + NS, function() {

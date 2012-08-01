@@ -249,7 +249,8 @@
                         e.preventDefault();
                     }
                 },
-                animation: options.animation
+                animation: options.animation,
+                isRtl: wrapper.css("direction") == "rtl"
             }));
 
             that._touchScroller = kendo.touchScroller(that.popup.element);

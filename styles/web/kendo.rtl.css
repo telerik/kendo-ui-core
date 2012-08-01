@@ -4,3 +4,19 @@
 {
     direction: rtl;
 }
+
+.k-dropdown-wrap,
+.k-picker-wrap,
+.k-numeric-wrap
+{
+    padding-right: 2px;
+    padding-left: 22px;
+}
+
+.k-picker-wrap .k-select,
+.k-numeric-wrap .k-select,
+.k-dropdown-wrap .k-select
+{
+    right: auto;
+    left: 0;
+}
