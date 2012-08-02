@@ -222,7 +222,8 @@
             var that = this;
 
             that.list = $('<ul class="k-reset k-floats k-tiles" />')
-                .appendTo(that.element);
+                .appendTo(that.element)
+                .on("dblclick" + NS, "li[" + kendo.attr("type") + "=d]", proxy(that._dblClick, that));
 
             that.listView = new kendo.ui.ListView(that.list, {
                 dataSource: that.dataSource,
@@ -235,6 +236,15 @@
                 },
                 change: proxy(that._listViewChange, that)
             });
+        },
+
+        _dblClick: function(e) {
+            var folder = this.dataSource.getByUid($(e.currentTarget).attr(kendo.attr("uid")));
+
+            if (folder) {
+                this.path(concatPaths(this.path(), folder.get(this._getFieldName(NAMEFIELD))));
+                this.breadcrumbs.value(this.path());
+            }
         },
 
         _listViewChange: function() {

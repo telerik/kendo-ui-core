@@ -411,6 +411,15 @@
                 var browser = setup({ path: "foo" }, [{ name: "Image", type: "f" }]);
                 equal(browser.list.find("li:first .k-filesize").text(), "");
             });
+
+            test("double clicking a folder set the path", function() {
+                var browser = setup();
+
+                browser.list.find("li[data-type=d]")
+                    .trigger("dblclick");
+
+                equal(browser.path(), "Folder1/");
+            });
         </script>
     </body>
 </html>
