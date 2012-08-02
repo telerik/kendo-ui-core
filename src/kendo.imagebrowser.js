@@ -5,6 +5,7 @@
         proxy = $.proxy,
         extend = $.extend,
         placeholderSupported = kendo.support.placeholder,
+        trimSlashesRegExp = /(^\/|\/$)/g,
         CHANGE = "change",
         ERROR = "error",
         NS = ".kendoImageBrowser",
@@ -80,6 +81,13 @@
         return descriptor;
     }
 
+    function concatPaths(path, name) {
+        if(path === undefined || !path.match(/\/$/)) {
+            path = (path || "") + "/";
+        }
+        return path + encodeURIComponent(name);
+    }
+
     var ImageBrowser = Widget.extend({
         init: function(element, options) {
             var that = this;
@@ -123,7 +131,7 @@
             var selected = this._selectedItem();
 
             if (selected && selected.get(this._getFieldName(TYPEFIELD)) === "f") {
-                return selected.get(this._getFieldName(NAMEFIELD));
+                return concatPaths(this.path(), selected.get(this._getFieldName(NAMEFIELD)));
             }
         },
 
@@ -312,7 +320,7 @@
 
             // IE8 will trigger the load event immediately when the src is assign
             // if the image is loaded from the cache
-            img.attr("src", that.options.transport.thumbnailUrl + "?path=" + that.path() + encodeURIComponent(name));
+            img.attr("src", that.options.transport.thumbnailUrl + "?path=" + concatPaths(that.path(), encodeURIComponent(name)));
 
             li.loaded = true;
         },
@@ -369,14 +377,20 @@
         },
 
         path: function(value) {
-            var that = this;
+            var that = this,
+                path = that._path;
 
             if (value !== undefined) {
-                that._path = value.replace(/^\//,"") + "/";
+                that._path = value.replace(trimSlashesRegExp, "") + "/";
                 that.dataSource.read({ path: that._path });
                 return;
             }
-            return that._path === that.options.path ? "" : (that._path + "/");
+
+            if (path != null) {
+                path = path.replace(trimSlashesRegExp, "");
+            }
+
+            return path === (that.options.path || "").replace(trimSlashesRegExp, "") ? "" : (path + "/");
         }
     });
 

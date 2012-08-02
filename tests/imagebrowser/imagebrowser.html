@@ -304,6 +304,14 @@
                 equal(browser.path(), "");
             });
 
+            test("path adds slash at the end", function() {
+                var browser = setup();
+
+                browser.path("foo");
+
+                equal(browser.path(), "foo/");
+            });
+
             test("search adds a filter descriptor to the datasource", function() {
                 var browser = setup({ });
 
@@ -358,6 +366,7 @@
 
             test("clicking on file triggers the change events", 2, function() {
                 var browser = setup({
+                    path: "foo",
                     change: function() {
                         ok(true);
                     }
@@ -366,6 +375,29 @@
                 browser.list.find("li[data-type=f]").mousedown().mouseup();
 
                 equal(browser.value(), "File1");
+            });
+
+            test("clicking on file triggers the change events", 2, function() {
+                var browser = setup({
+                    path: "foo",
+                    change: function() {
+                        ok(true);
+                    }
+                });
+
+                browser.list.find("li[data-type=f]").mousedown().mouseup();
+
+                equal(browser.value(), "File1");
+            });
+
+            test("value contains the path diffrent then the base path", function() {
+                var browser = setup({ path: "foo" });
+
+                browser.path("bar");
+
+                browser.list.find("li[data-type=f]").mousedown().mouseup();
+
+                equal(browser.value(), "bar/File1");
             });
         </script>
     </body>
