@@ -341,20 +341,21 @@ var devices = [ "ios", "android", "blackberry", "meego" ], CtrlDown = false, con
 })(jQuery);
 
 var draggableEvents = {
-    cursorOffset: {
-        left: -50,
-        top: -38
+        cursorOffset: {
+            left: -50,
+            top: -38
+        },
+        hint: function (element) {
+            return kendo.support.touch ? $("<div style='width: 28px; height: 38px'/>").css("background-image", fillSvg.replace("%23f984ef", element.css("background-color"))) : undefined;
+        },
+        dragstart: function (e) {
+            $(document.documentElement).css("cursor", cursorSvg.replace("%23f984ef", this.element.css("background-color")));
+        },
+        dragend: function () {
+            $(document.documentElement).css("cursor", 'default');
+        }
     },
-    hint: function (element) {
-        return kendo.support.touch ? $("<div style='width: 28px; height: 38px'/>").css("background-image", fillSvg.replace("%23f984ef", element.css("background-color"))) : undefined;
-    },
-    dragstart: function (e) {
-        $(document.documentElement).css("cursor", cursorSvg.replace("%23f984ef", this.element.css("background-color")));
-    },
-    dragend: function () {
-        $(document.documentElement).css("cursor", 'default');
-    }
-};
+    widgetTarget = $("<div class='widgetTarget'><div><div /><div /></div><div></div></div>").appendTo(document.body);
 
 function initTargets() {
     setTimeout(function () {
@@ -369,21 +370,55 @@ function initTargets() {
         $(".device").kendoDropTargetArea({
             filter: getWidgets(colors).selector,
             dragenter: function (e) {
+                var target = e.dropTarget,
+                    offset = target.offset(),
+                    height = target.outerHeight(),
+                    widgetChildren = widgetTarget.children();
+
                 color = new Color(e.draggable.element.css(property)).get();
 
                 var css = { cursor: cursorSvg.replace("%23f984ef", color) };
 
                 css[property] = color;
-                $(e.dropTarget).css(css);
+                target.css(css);
+                widgetTarget
+                    .show()
+                    .css(kendo.support.transitions.css + "transition", "all 100ms")
+                    .css("display");
+
+                widgetTarget
+                    .css({
+                        top: offset.top,
+                        left: offset.left
+                    });
+
+                widgetChildren
+                    .width(target.outerWidth())
+                    .css(kendo.support.transitions.css + "transition", "all 100ms")
+                    .css("display");
+
+                widgetChildren
+                    .children()
+                    .height(height)
+                    .css(kendo.support.transitions.css + "transition", "all 100ms")
+                    .css("display");
+
+                widgetChildren
+                    .last()
+                    .css("top", height);
             },
             dragleave: function (e) {
                 $(e.dropTarget).css(defaultCSS);
+                widgetTarget.hide();
             },
             drop: function (e) {
                 var that = this,
                     target = $(e.dropTarget);
 
                 target.css(defaultCSS);
+                widgetTarget
+                    .css(kendo.support.transitions.css + "transition", "")
+                    .hide();
 
                 if (CtrlDown) {
                     var offset = target.offset(),
