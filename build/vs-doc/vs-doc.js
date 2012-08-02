@@ -9,6 +9,7 @@ function vsdoc(directory, filter) {
         if (fileName.indexOf("wrappers") > -1){
             return;
         }
+
         var tree = toHeadingTree(fs.readFileSync(fileName).toString()),
             name = tree.children[0].title,
             plugin = name.replace(".ui", "").replace(/\.(.)/g, function() { return arguments[1].toUpperCase() }),
@@ -25,13 +26,20 @@ function vsdoc(directory, filter) {
 
         if (methods) {
             methods.children.forEach(function(child) {
-                theClass.methods.push(parseMethod(child));
+                try {
+                    theClass.methods.push(parseMethod(child));
+                } catch(e) {
+                    throw new Error("Parsing of class " + theClass.name + " Failed - " + e.message);
+                }
             });
         }
 
         if (configuration) {
             configuration.children.forEach(function(child) {
-                theClass.configuration.push(parseConfiguration(child));
+                var config = parseConfiguration(child);
+                if (config.type) {
+                    theClass.configuration.push(config);
+                }
             });
         }
 
@@ -111,6 +119,10 @@ function parseMethod(child) {
                     return;
                 }
                 match = param.title.match(/(\w+).+`(.*)`/);
+
+                if (!match) {
+                    throw new Error("Invalid param statement - '" + param.title + "' - " + method.name);
+                }
                 method.parameters.push({
                     name: match[1],
                     type: match[2],
@@ -119,7 +131,10 @@ function parseMethod(child) {
             });
         }
         else if (/Returns/.test(member.title)) {
-            match = member.contents.match(/`(\w+)`(.*)/);
+            match = member.contents.match(/`?(.+)`(.*)/);
+            if (!match) {
+                throw new Error("Invalid returns statement - " + member.contents + " - " + method.name);
+            }
             method.returns = match[1];
             method.returnsDescription = match[2];
         }
