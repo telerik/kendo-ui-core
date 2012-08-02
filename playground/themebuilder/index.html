@@ -48,6 +48,11 @@
             box-sizing: border-box;
         }
 
+        .drop-override *
+        {
+            cursor: inherit !important;
+        }
+
         .device
         {
             width: 250px;
@@ -529,6 +534,31 @@
         {
             left: auto;
             right: -5px;
+        }
+
+        .widgetTarget > span,
+        .widgetTarget > div > span
+        {
+            top: 0;
+            left: 0;
+            height: 15px;
+            color: #519800;
+            padding: 0 3px;
+            font-size: 10px;
+            position: absolute;
+            background: #ffffe0;
+            display: inline-block;
+            border: 1px solid #fa0;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+        }
+
+        .widgetTarget > span
+        {
+            top: -15px;
+            color: #ff311d;
+            border: 1px solid #fa0;
         }
     </style>
 </head>
