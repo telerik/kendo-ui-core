@@ -245,6 +245,16 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+
+        /// <summary>
+        /// Enables the grid editing.
+        /// </summary>        
+        public GridBuilder<T> Editable()
+        {
+            Component.Editable.Enabled = true;            
+            return this;
+        }
+
         /// <summary>
         /// Configures the toolbar of the grid.
         /// </summary>
