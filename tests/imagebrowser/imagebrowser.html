@@ -374,7 +374,7 @@
 
                 browser.list.find("li[data-type=f]").mousedown().mouseup();
 
-                equal(browser.value(), "File1");
+                equal(browser.value(), "foo/File1");
             });
 
             test("clicking on file triggers the change events", 2, function() {
@@ -387,7 +387,7 @@
 
                 browser.list.find("li[data-type=f]").mousedown().mouseup();
 
-                equal(browser.value(), "File1");
+                equal(browser.value(), "foo/File1");
             });
 
             test("value contains the path diffrent then the base path", function() {

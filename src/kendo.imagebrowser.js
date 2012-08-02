@@ -320,7 +320,7 @@
 
             // IE8 will trigger the load event immediately when the src is assign
             // if the image is loaded from the cache
-            img.attr("src", that.options.transport.thumbnailUrl + "?path=" + concatPaths(that.path(), encodeURIComponent(name)));
+            img.attr("src", that.options.transport.thumbnailUrl + "?path=" + that.path() + encodeURIComponent(name));
 
             li.loaded = true;
         },
@@ -378,7 +378,7 @@
 
         path: function(value) {
             var that = this,
-                path = that._path;
+                path = that._path || "";
 
             if (value !== undefined) {
                 that._path = value.replace(trimSlashesRegExp, "") + "/";
@@ -386,11 +386,11 @@
                 return;
             }
 
-            if (path != null) {
+            if (path) {
                 path = path.replace(trimSlashesRegExp, "");
             }
 
-            return path === (that.options.path || "").replace(trimSlashesRegExp, "") ? "" : (path + "/");
+            return path === "/" || path === "" ? "" : (path + "/");
         }
     });
 
