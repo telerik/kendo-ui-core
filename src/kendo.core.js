@@ -2188,7 +2188,7 @@ function pad(number) {
             }
         }
 
-        result = $(element).data("kendo" + widget.fn.options.name);
+        result = $(element).data("kendo" + widget.fn.options.prefix + widget.fn.options.name);
 
         if (!result) {
             result = new widget(element, options);
