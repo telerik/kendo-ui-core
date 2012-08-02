@@ -1,11 +1,11 @@
-var devices = [ "ios", "android", "blackberry", "meego" ], CtrlDown = false, contextMenu,
-    colors = [ "color", "background-color", "border-color" ],
-    fillSvg = 'url(\'data:image/svg+xml;utf-8,<svg xmlns="http:%2F%2Fwww.w3.org%2F2000%2Fsvg" width="28" height="38"><path fill="rgba(255,255,255,.3)" d="M26.667,15.236c0-6.996-5.671-12.667-12.667-12.667c-6.995,0-12.667,5.672-12.667,12.667c0,4.78,2.651,8.938,6.562,11.097 C10.695,31.772,14,36.95,14,36.95s3.305-5.178,6.105-10.617C24.017,24.175,26.667,20.017,26.667,15.236z"%2F><path fill="%23FFF" d="M26.667,13.819c0-6.996-5.671-12.667-12.667-12.667c-6.995,0-12.667,5.672-12.667,12.667 c0,4.78,2.651,8.938,6.562,11.097C10.695,30.355,14,35.533,14,35.533s3.305-5.178,6.105-10.617 C24.017,22.758,26.667,18.6,26.667,13.819z"%2F><linearGradient id="ID" gradientUnits="userSpaceOnUse" x1="14" y1="25" x2="14" y2="0"><stop offset="0" style="stop-color:%23f984ef"%2F><%2FlinearGradient><circle fill="url(%23ID)" cx="14" cy="14" r="11"%2F><path fill="rgba(0,0,0,.3)" d="M14,4.403c5.616,0,10.189,4.413,10.473,9.958c0.009-0.18,0.027-0.359,0.027-0.542c0-5.799-4.701-10.5-10.5-10.5 S3.5,8.021,3.5,13.82c0,0.183,0.018,0.361,0.027,0.542C3.811,8.816,8.384,4.403,14,4.403z"%2F><%2Fsvg>\')',
-    cursorSvg = fillSvg + ' 14 38, crosshair';
-
 (function ($, undefined) {
 
-    var ui = kendo.ui,
+    var devices = [ "ios", "android", "blackberry", "meego" ], CtrlDown = false, contextMenu,
+        colors = [ "color", "background-color", "border-color" ],
+        TRANSITION = kendo.support.transitions.css + "transition",
+        fillSvg = 'url(\'data:image/svg+xml;utf-8,<svg xmlns="http:%2F%2Fwww.w3.org%2F2000%2Fsvg" width="28" height="38"><path fill="rgba(255,255,255,.3)" d="M26.667,15.236c0-6.996-5.671-12.667-12.667-12.667c-6.995,0-12.667,5.672-12.667,12.667c0,4.78,2.651,8.938,6.562,11.097 C10.695,31.772,14,36.95,14,36.95s3.305-5.178,6.105-10.617C24.017,24.175,26.667,20.017,26.667,15.236z"%2F><path fill="%23FFF" d="M26.667,13.819c0-6.996-5.671-12.667-12.667-12.667c-6.995,0-12.667,5.672-12.667,12.667 c0,4.78,2.651,8.938,6.562,11.097C10.695,30.355,14,35.533,14,35.533s3.305-5.178,6.105-10.617 C24.017,22.758,26.667,18.6,26.667,13.819z"%2F><linearGradient id="ID" gradientUnits="userSpaceOnUse" x1="14" y1="25" x2="14" y2="0"><stop offset="0" style="stop-color:%23f984ef"%2F><%2FlinearGradient><circle fill="url(%23ID)" cx="14" cy="14" r="11"%2F><path fill="rgba(0,0,0,.3)" d="M14,4.403c5.616,0,10.189,4.413,10.473,9.958c0.009-0.18,0.027-0.359,0.027-0.542c0-5.799-4.701-10.5-10.5-10.5 S3.5,8.021,3.5,13.82c0,0.183,0.018,0.361,0.027,0.542C3.811,8.816,8.384,4.403,14,4.403z"%2F><%2Fsvg>\')',
+        cursorSvg = fillSvg + ' 14 38, crosshair',
+        ui = kendo.ui,
         Widget = ui.Widget,
         applications = {},
         counter = 1,
@@ -131,7 +131,27 @@ var devices = [ "ios", "android", "blackberry", "meego" ], CtrlDown = false, con
             meego: {
                 selector: ".km-meego"
             }
-        };
+        },
+        defaultColors = [ "#c5007c", "#6300a5", "#0010a5", "#0064b5", "#00a3c7", "#0fad00", "#8cc700", "#ffff00", "#fec500", "#ff9400", "#ff6600", "#ff0000",
+                          "none", "#fff", "#e5e5e5", "#ccc", "#b2b2b2", "#999", "#7f7f7f", "#666", "#4c4c4c", "#333", "#191919", "#000" ],
+        i = 0,
+        recentPicker = $(".recent-colors").kendoHSLPicker({ filter: ".drop" }).data("kendoHSLPicker"),
+        draggableEvents = {
+            cursorOffset: {
+                left: -50,
+                top: -38
+            },
+            hint: function (element) {
+                return kendo.support.touch ? $("<div style='width: 28px; height: 38px'/>").css("background-image", fillSvg.replace("%23f984ef", element.css("background-color"))) : undefined;
+            },
+            dragstart: function (e) {
+                $(document.documentElement).css("cursor", cursorSvg.replace("%23f984ef", this.element.css("background-color")));
+            },
+            dragend: function () {
+                $(document.documentElement).css("cursor", 'default');
+            }
+        },
+        widgetTarget = $("<div class='widgetTarget'><div><div /><div /></div><div></div></div>").appendTo(document.body);
 
     for (var idx in widgetList) {
         var children = widgetList[idx].children;
@@ -205,7 +225,7 @@ var devices = [ "ios", "android", "blackberry", "meego" ], CtrlDown = false, con
 
     kendo.ui.plugin(StyleEngine);
 
-    window.getPropertySelector = function (property) {
+    function getPropertySelector(property) {
         var output = "", widget;
 
         for(var idx in widgetList) {
@@ -215,9 +235,9 @@ var devices = [ "ios", "android", "blackberry", "meego" ], CtrlDown = false, con
             }
         }
         return output.substring(0, output.length-1);
-    };
+    }
 
-    window.getWidgets = function (property) {
+    function getWidgets(property) {
         var widget, qualifiedWhiteList, widgets = { selector: "" };
 
         if (typeof property == "string")
@@ -237,9 +257,9 @@ var devices = [ "ios", "android", "blackberry", "meego" ], CtrlDown = false, con
         widgets.selector = widgets.selector.substring(0, widgets.selector.length-1);
 
         return widgets;
-    };
+    }
 
-    window.getMenuDataItem = function (item, source) {
+    function getMenuDataItem(item, source) {
         item = $(item);
         var menuElement = item.closest(".k-menu"),
             dataItem = source,
@@ -255,9 +275,9 @@ var devices = [ "ios", "android", "blackberry", "meego" ], CtrlDown = false, con
         }
 
         return dataItem;
-    };
+    }
 
-    window.buildMenu = function (element) {
+    function buildMenu(element) {
         var widgets = getWidgets(colors), menuStructure = [];
 
         for (var i in widgets ) {
@@ -275,7 +295,7 @@ var devices = [ "ios", "android", "blackberry", "meego" ], CtrlDown = false, con
         }
 
         return menuStructure;
-    };
+    }
 
     // Override Kendo History to avoid URL breaks and bad refresh
     kendo.history.navigate = function(to, silent) {
@@ -338,222 +358,197 @@ var devices = [ "ios", "android", "blackberry", "meego" ], CtrlDown = false, con
         $(deviceId).kendoStyleEngine();
     });
 
-})(jQuery);
+    window.initTargets = function() {
+        setTimeout(function () {
+            var property = "background-color",
+                color = "transparent",
+                defaultCSS = { cursor: "default" };
 
-var draggableEvents = {
-        cursorOffset: {
-            left: -50,
-            top: -38
-        },
-        hint: function (element) {
-            return kendo.support.touch ? $("<div style='width: 28px; height: 38px'/>").css("background-image", fillSvg.replace("%23f984ef", element.css("background-color"))) : undefined;
-        },
-        dragstart: function (e) {
-            $(document.documentElement).css("cursor", cursorSvg.replace("%23f984ef", this.element.css("background-color")));
-        },
-        dragend: function () {
-            $(document.documentElement).css("cursor", 'default');
-        }
-    },
-    widgetTarget = $("<div class='widgetTarget'><div><div /><div /></div><div></div></div>").appendTo(document.body);
+            defaultCSS[property] = "";
 
-function initTargets() {
-    setTimeout(function () {
-        var property = "background-color",
-            color = "transparent",
-            defaultCSS = { cursor: "default" };
+            $(".drop").kendoDraggable(draggableEvents);
 
-        defaultCSS[property] = "";
+            $(".device").kendoDropTargetArea({
+                filter: getWidgets(colors).selector,
+                dragenter: function (e) {
+                    var target = e.dropTarget,
+                        offset = target.offset(),
+                        height = target.outerHeight(),
+                        widgetChildren = widgetTarget.children();
 
-        $(".drop").kendoDraggable(draggableEvents);
+                    color = new Color(e.draggable.element.css(property)).get();
 
-        $(".device").kendoDropTargetArea({
-            filter: getWidgets(colors).selector,
-            dragenter: function (e) {
-                var target = e.dropTarget,
-                    offset = target.offset(),
-                    height = target.outerHeight(),
-                    widgetChildren = widgetTarget.children();
+                    var css = { cursor: cursorSvg.replace("%23f984ef", color) };
 
-                color = new Color(e.draggable.element.css(property)).get();
+                    css[property] = color;
+                    target.css(css);
+                    widgetTarget
+                        .show()
+                        .css(TRANSITION, "all 100ms")
+                        .css("display");
 
-                var css = { cursor: cursorSvg.replace("%23f984ef", color) };
+                    widgetTarget
+                        .css({
+                            top: offset.top,
+                            left: offset.left
+                        });
 
-                css[property] = color;
-                target.css(css);
-                widgetTarget
-                    .show()
-                    .css(kendo.support.transitions.css + "transition", "all 100ms")
-                    .css("display");
+                    widgetChildren
+                        .width(target.outerWidth())
+                        .css(TRANSITION, "all 100ms")
+                        .last()
+                        .css("top", height)
+                        .end()
+                        .css("display");
 
-                widgetTarget
-                    .css({
-                        top: offset.top,
-                        left: offset.left
-                    });
+                    widgetChildren
+                        .children()
+                        .height(height)
+                        .css(TRANSITION, "all 100ms")
+                        .css("display");
+                },
+                dragleave: function (e) {
+                    $(e.dropTarget).css(defaultCSS);
+                    widgetTarget.hide();
+                },
+                drop: function (e) {
+                    var that = this,
+                        target = $(e.dropTarget);
 
-                widgetChildren
-                    .width(target.outerWidth())
-                    .css(kendo.support.transitions.css + "transition", "all 100ms")
-                    .css("display");
+                    target.css(defaultCSS);
+                    widgetTarget.hide();
 
-                widgetChildren
-                    .children()
-                    .height(height)
-                    .css(kendo.support.transitions.css + "transition", "all 100ms")
-                    .css("display");
+                    if (CtrlDown) {
+                        var offset = target.offset(),
+                            structure = buildMenu(target);
 
-                widgetChildren
-                    .last()
-                    .css("top", height);
-            },
-            dragleave: function (e) {
-                $(e.dropTarget).css(defaultCSS);
-                widgetTarget.hide();
-            },
-            drop: function (e) {
-                var that = this,
-                    target = $(e.dropTarget);
+                        contextMenu.element.empty();
+                        contextMenu.append(structure);
+                        contextMenu.one("select", function (e) {
+                            var style = {}, dataItem = getMenuDataItem(e.item, structure);
+                            style[dataItem.text] = color;
 
-                target.css(defaultCSS);
-                widgetTarget
-                    .css(kendo.support.transitions.css + "transition", "")
-                    .hide();
-
-                if (CtrlDown) {
-                    var offset = target.offset(),
-                        structure = buildMenu(target);
-
-                    contextMenu.element.empty();
-                    contextMenu.append(structure);
-                    contextMenu.one("select", function (e) {
-                        var style = {}, dataItem = getMenuDataItem(e.item, structure);
-                        style[dataItem.text] = color;
-
-                        target.parents(".device").data("kendoStyleEngine").update(target.closest(dataItem.value), style);
-                    });
-                    contextMenu.show(offset.left + e.offsetX, offset.top + e.offsetY);
-                } else {
-                    target.parents(".device").data("kendoStyleEngine").update(target, { "background-color": color });
-                }
-            }
-        });
-
-        contextMenu = $("<ul />").appendTo(document.body).kendoContextMenu().data("kendoContextMenu");
-
-        $(document).on({
-            keydown: function (e) { CtrlDown = e.which == 17; },
-            keyup: function (e) { CtrlDown = !(e.which == 17); }
-        });
-
-//        var allProps = getPropertySelector();
-//        $(document.body).on({
-//            mouseover: function (e) {
-//                $(".utility-active").removeClass("utility-active");
-//                $(e.currentTarget).addClass("utility-active");
-//                e.stopImmediatePropagation();
-//            },
-//            mouseout: function (e) {
-//                $(".utility-active").removeClass("utility-active");
-//                e.stopImmediatePropagation();
-//            }
-//        }, allProps);
-
-        $(".device").on({
-            click: function (e) {
-                var target = $(e.currentTarget),
-                    width = target.outerWidth();
-
-                if (width - 20 < e.offsetX && e.offsetX < width && e.offsetY > 0 && e.offsetY < 20) {
-                    e.stopImmediatePropagation();
-                    e.preventDefault();
-                }
-            }
-        }, ".utility-active");
-
-        $(".km-tabstrip").kendoHSLPicker({
-            change: function (e) {
-                this.element.parents(".device").data("kendoStyleEngine").update(this.element, { "background-color": e.color.get() });
-            }
-        });
-        $(".gradient").kendoGradientPicker();
-        $(".km-navbar").kendoGradientPicker();
-    }, 200);
-}
-
-function mobileAccountViewInit() {
-    var listviews = this.element.find("ul.km-listview");
-
-    this.element.find("[id^=settings-view]").kendoMobileButtonGroup({
-        select: function() {
-            listviews.hide()
-                     .eq(this.selectedIndex)
-                     .show();
-        },
-        index: 0
-    });
-}
-
-var defaultColors = [ "#c5007c", "#6300a5", "#0010a5", "#0064b5", "#00a3c7", "#0fad00", "#8cc700", "#ffff00", "#fec500", "#ff9400", "#ff6600", "#ff0000",
-                      "none", "#fff", "#e5e5e5", "#ccc", "#b2b2b2", "#999", "#7f7f7f", "#666", "#4c4c4c", "#333", "#191919", "#000" ],
-    i = 0,
-    recentPicker = $(".recent-colors").kendoHSLPicker({ filter: ".drop" }).data("kendoHSLPicker");
-
-while (defaultColors[i]) {
-   $('<div class="drop" style="background-color:' + defaultColors[i] + '" data-color="' + defaultColors[i++] + '" />')
-            .insertBefore(".recent-colors")
-            .click(function (e) {
-                var recent = $(this).clone()
-                    .prependTo(".recent-colors")
-                    .addClass("k-state-active")
-                    .siblings(".k-state-active")
-                    .removeClass("k-state-active").end();
-
-                recent.kendoDraggable(draggableEvents);
-                recentPicker.popup.wrapper.addClass("k-static-shown");
-                recentPicker.open(recent);
-
-                recent.click(function (e) {
-                    var that = $(this), item;
-
-                    if (e.button == 0) {
-                        that.addClass("k-state-active")
-                            .siblings(".k-state-active")
-                            .removeClass("k-state-active");
-                    } else if (e.button == 1) {
-                        if (this == recentPicker.target[0]) {
-                            item = that.next();
-                            !item[0] && (item = that.prev());
-
-                            if (!item[0]) {
-                                recentPicker.popup.wrapper.removeClass("k-static-shown");
-                                recentPicker.close();
-                            } else {
-                                recentPicker.open(item);
-                            }
-                        }
-                        that.remove();
+                            target.parents(".device").data("kendoStyleEngine").update(target.closest(dataItem.value), style);
+                        });
+                        contextMenu.show(offset.left + e.offsetX, offset.top + e.offsetY);
+                    } else {
+                        target.parents(".device").data("kendoStyleEngine").update(target, { "background-color": color });
                     }
-                });
+                }
             });
 
-   if (!(i % 12)) {
-       $("<br />").insertBefore(".recent-colors");
-   }
-}
-kendo.wrap(recentPicker.popup.element).addClass("k-static-picker");
+            contextMenu = $("<ul />").appendTo(document.body).kendoContextMenu().data("kendoContextMenu");
 
-$(".menu").kendoMenu();
+            $(document).on({
+                keydown: function (e) { CtrlDown = e.which == 17; },
+                keyup: function (e) { CtrlDown = !(e.which == 17); }
+            });
 
-$("#getStyles").click(function () {
-    var output = "";
+    //        var allProps = getPropertySelector();
+    //        $(document.body).on({
+    //            mouseover: function (e) {
+    //                $(".utility-active").removeClass("utility-active");
+    //                $(e.currentTarget).addClass("utility-active");
+    //                e.stopImmediatePropagation();
+    //            },
+    //            mouseout: function (e) {
+    //                $(".utility-active").removeClass("utility-active");
+    //                e.stopImmediatePropagation();
+    //            }
+    //        }, allProps);
 
-    $.each(devices, function () {
-        var that = this.toString();
-        if ($("#" + that + "box")[0].checked) {
-            output += $("#" + that + "Device").data("kendoStyleEngine").getCSS();
-        }
+            $(".device").on({
+                click: function (e) {
+                    var target = $(e.currentTarget),
+                        width = target.outerWidth();
+
+                    if (width - 20 < e.offsetX && e.offsetX < width && e.offsetY > 0 && e.offsetY < 20) {
+                        e.stopImmediatePropagation();
+                        e.preventDefault();
+                    }
+                }
+            }, ".utility-active");
+
+            $(".km-tabstrip").kendoHSLPicker({
+                change: function (e) {
+                    this.element.parents(".device").data("kendoStyleEngine").update(this.element, { "background-color": e.color.get() });
+                }
+            });
+            $(".gradient").kendoGradientPicker();
+            $(".km-navbar").kendoGradientPicker();
+        }, 200);
+    };
+
+    window.mobileAccountViewInit = function () {
+        var listviews = this.element.find("ul.km-listview");
+
+        this.element.find("[id^=settings-view]").kendoMobileButtonGroup({
+            select: function() {
+                listviews.hide()
+                         .eq(this.selectedIndex)
+                         .show();
+            },
+            index: 0
+        });
+    };
+
+    while (defaultColors[i]) {
+       $('<div class="drop" style="background-color:' + defaultColors[i] + '" data-color="' + defaultColors[i++] + '" />')
+                .insertBefore(".recent-colors")
+                .click(function (e) {
+                    var recent = $(this).clone()
+                        .prependTo(".recent-colors")
+                        .addClass("k-state-active")
+                        .siblings(".k-state-active")
+                        .removeClass("k-state-active").end();
+
+                    recent.kendoDraggable(draggableEvents);
+                    recentPicker.popup.wrapper.addClass("k-static-shown");
+                    recentPicker.open(recent);
+
+                    recent.click(function (e) {
+                        var that = $(this), item;
+
+                        if (e.button == 0) {
+                            that.addClass("k-state-active")
+                                .siblings(".k-state-active")
+                                .removeClass("k-state-active");
+                        } else if (e.button == 1) {
+                            if (this == recentPicker.target[0]) {
+                                item = that.next();
+                                !item[0] && (item = that.prev());
+
+                                if (!item[0]) {
+                                    recentPicker.popup.wrapper.removeClass("k-static-shown");
+                                    recentPicker.close();
+                                } else {
+                                    recentPicker.open(item);
+                                }
+                            }
+                            that.remove();
+                        }
+                    });
+                });
+
+       if (!(i % 12)) {
+           $("<br />").insertBefore(".recent-colors");
+       }
+    }
+    kendo.wrap(recentPicker.popup.element).addClass("k-static-picker");
+
+    $(".menu").kendoMenu();
+
+    $("#getStyles").click(function () {
+        var output = "";
+
+        $.each(devices, function () {
+            var that = this.toString();
+            if ($("#" + that + "box")[0].checked) {
+                output += $("#" + that + "Device").data("kendoStyleEngine").getCSS();
+            }
+        });
+
+        alert(output);
     });
 
-    alert(output);
-});
+})(jQuery);
