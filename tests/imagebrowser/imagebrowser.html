@@ -391,6 +391,23 @@
                 equal(browser.value(), "foo/File1");
             });
 
+            test("clicking on file enables the delete button", 1, function() {
+                var browser = setup();
+
+                browser.list.find("li[data-type=f]").mousedown().mouseup();
+
+                ok(!browser.toolbar.find("button:has(span.k-delete)").hasClass("k-state-disabled"));
+            });
+
+            test("rebinding disables the delete button", function() {
+                var browser = setup();
+
+                browser.list.find("li[data-type=f]").mousedown().mouseup();
+                browser.dataSource.read();
+
+                ok(browser.toolbar.find("button:has(span.k-delete)").hasClass("k-state-disabled"))
+            });
+
             test("value contains the path diffrent then the base path", function() {
                 var browser = setup({ path: "foo" });
 

@@ -146,6 +146,9 @@
 
             this.dataSource
                 .unbind(ERROR, this._errorHandler);
+
+            this.list
+                .off(NS);
         },
 
         value: function() {
@@ -231,6 +234,8 @@
                 selectable: true,
                 autoBind: false,
                 dataBound: function() {
+                    that.toolbar.find(".k-delete").parent().addClass("k-state-disabled");
+
                     that._tiles = this.items().filter("[" + kendo.attr("type") + "=f]");
                     that._scroll();
                 },
@@ -250,6 +255,7 @@
         _listViewChange: function() {
             var selected = this._selectedItem();
             if (selected && selected.get(this._getFieldName(TYPEFIELD)) === "f") {
+                this.toolbar.find(".k-delete").parent().removeClass("k-state-disabled");
                 this.trigger(CHANGE);
             }
         },
@@ -444,7 +450,7 @@
                 .on("change" + SEARCHBOXNS, proxy(that._updateValue, that));
 
             that.wrapper
-                .on("click" + SEARCHBOXNS, "a", proxy(that._updateValue, that));
+                .on("click" + SEARCHBOXNS, "a", proxy(that._click, that));
 
             if (!placeholderSupported) {
                 that.element.on("focus" + SEARCHBOXNS, proxy(that._focus, that))
@@ -475,6 +481,11 @@
             if (e.keyCode === 13) {
                 this._updateValue();
             }
+        },
+
+        _click: function(e) {
+            e.preventDefault();
+            this._updateValue();
         },
 
         _updateValue: function() {
