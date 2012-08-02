@@ -466,6 +466,70 @@
             background: -moz-linear-gradient(top, #fff, #eee);
         }
 
+        .widgetTarget
+        {
+            position: absolute;
+            display: none;
+            z-index: 2;
+            width: 0;
+            height: 0;
+        }
+
+        .widgetTarget > :first-child,
+        .widgetTarget > :last-child
+        {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200px;
+            height: 0;
+            border-top: 1px dashed rgba(0,0,0,.4);
+        }
+
+        .widgetTarget > :first-child > :first-child,
+        .widgetTarget > :first-child > :last-child
+        {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100px;
+            border-left: 1px dashed rgba(0,0,0,.4);
+        }
+
+        .widgetTarget > :last-child
+        {
+            top: 100px;
+        }
+
+        .widgetTarget > :first-child > :last-child
+        {
+            left: auto;
+            right: 0;
+        }
+
+        .widgetTarget > :first-child:before,
+        .widgetTarget > :last-child:before,
+        .widgetTarget > :first-child:after,
+        .widgetTarget > :last-child:after
+        {
+            display: block;
+            content: "\a0";
+            position: absolute;
+            background: rgba(255,100,100,.5);
+            border: 1px solid #333;
+            width: 7px;
+            height: 7px;
+            left: -5px;
+            top: -5px;
+        }
+
+        .widgetTarget > :first-child:after,
+        .widgetTarget > :last-child:after
+        {
+            left: auto;
+            right: -5px;
+        }
     </style>
 </head>
 <body class="body">
