@@ -274,6 +274,20 @@
                 ok(dom.find("#bar").data("kendoMobileTestWidget2") instanceof TestWidget2, "TestWidget2 is initialized");
             });
 
+            test("Set options through setOptions", function() {
+                var dom = $('<div id="bar" data-role="testwidget2"></div>');
+
+                var widget = new TestWidget2(dom);
+
+                stub(widget, {
+                    setOptions: widget.setOptions
+                });
+
+                kendo.init(dom, kendo.ui, kendo.mobile.ui);
+
+                equal(widget.calls("setOptions"), 1);
+            });
+
         </script>
         <script id="multiple-widgets-template" type="text/x-kendo-template">
             <div>
