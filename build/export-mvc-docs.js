@@ -1,10 +1,8 @@
-#!/usr/bin/env node
-
 var xml = require("libxmljs"),
     fs = require("fs"),
     path = require("path");
 
-function exportNamespaces() {
+function exportDocs() {
     var rawXml = fs.readFileSync("wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.xml", "utf8");
 
     // Replace <see /> tags with their "cref" attribute value
@@ -401,5 +399,4 @@ function exportNamespaces() {
     exportNamespace("Kendo.Mvc.UI.Fluent");
 }
 
-exportNamespaces();
-// vim: ft=javascript
+exports.exportDocs = exportDocs;

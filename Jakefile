@@ -9,6 +9,7 @@ var path = require("path"),
     copyDir = kendoBuild.copyDirSyncRecursive,
     mkdir = kendoBuild.mkdir,
     zip = kendoBuild.zip,
+    exportMVCDocs = require("build/export-mvc-docs").exportDocs,
     kendoScripts = require("build/kendo-scripts");
 
 // Configuration ==============================================================
@@ -519,6 +520,11 @@ namespace("mvc", function() {
                 }
         });
     }, true);
+
+    desc("Export XML doc comments as markdown docs");
+    task("export-docs", function() {
+        exportMVCDocs();
+    })
 
     function deployExamplesSharedFiles(debug) {
         mkdirClean(scriptsDest);
