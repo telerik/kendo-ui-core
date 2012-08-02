@@ -88,6 +88,27 @@
         return path + encodeURIComponent(name);
     }
 
+    function sizeFormatter(value) {
+        if(!value) {
+            return "";
+        }
+
+        var suffix = " bytes";
+
+        if (value >= 1073741824) {
+            suffix = " GB";
+            value /= 1073741824;
+        } else if (value >= 1048576) {
+            suffix = " MB";
+            value /= 1048576;
+        } else  if (value >= 1024) {
+            suffix = " KB";
+            value /= 1024;
+        }
+
+        return Math.round(value * 100) / 100 + suffix;
+    }
+
     var ImageBrowser = Widget.extend({
         init: function(element, options) {
             var that = this;
@@ -359,17 +380,17 @@
             var that = this,
                 html = '<li class="k-tile" ' + kendo.attr("uid") + '="#=uid#" ';
 
-            html += kendo.attr("type") + '="#=' + that._getFieldName(TYPEFIELD) + '#">';
+            html += kendo.attr("type") + '="${' + that._getFieldName(TYPEFIELD) + '}">';
             html += '#if(' + that._getFieldName(TYPEFIELD) + ' == "d") { #';
             html += '<div class="k-thumb"><span class="k-icon k-folder"></span></div>';
             html += "#}else{#";
             html += '<div class="k-thumb"><span class="k-icon k-loading"></span></div>';
             html += "#}#";
-            html += '<strong>#=' + that._getFieldName(NAMEFIELD) + '#</strong>';
-            html += '#if(' + that._getFieldName(TYPEFIELD) + ' == "f") { # <span class="k-filesize">#=' + that._getFieldName(SIZEFIELD) + '#</span> #}#';
+            html += '<strong>${' + that._getFieldName(NAMEFIELD) + '}</strong>';
+            html += '#if(' + that._getFieldName(TYPEFIELD) + ' == "f") { # <span class="k-filesize">${this.sizeFormatter(' + that._getFieldName(SIZEFIELD) + ')}</span> #}#';
             html += '</li>';
 
-            return html;
+            return proxy(kendo.template(html), { sizeFormatter: sizeFormatter } );
         },
 
         _getFieldName: function(name) {

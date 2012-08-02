@@ -31,12 +31,13 @@
 
             QUnit.config.testTimeout = 100;
 
-            function setup(options) {
+            function setup(options, data) {
+                data = data || [{ name: "File1", size: 42, type: "f" }, { name: "Folder1", type: "d" }];
                 options = $.extend(true, {
                     transport: {
                         read: function(options) {
                             options.success({
-                                items: [{ name: "File1", size: 42, type: "f" }, { name: "Folder1", type: "d" }]
+                                items: data
                             });
                         }
                     }
@@ -256,7 +257,7 @@
                 });
                 var item = browser.listView.items().first();
                 equal(item.find("strong").text(), "foo");
-                equal(item.find("span.k-filesize").text(), "42");
+                equal(item.find("span.k-filesize").text(), "42 bytes");
             });
 
             test("model field definition as object is used to generate item template", function() {
@@ -280,7 +281,7 @@
                 });
                 var item = browser.listView.items().first();
                 equal(item.find("strong").text(), "foo");
-                equal(item.find("span.k-filesize").text(), "42");
+                equal(item.find("span.k-filesize").text(), "42 bytes");
             });
 
             test("path is displayed in the toolbar input", function() {
@@ -398,6 +399,17 @@
                 browser.list.find("li[data-type=f]").mousedown().mouseup();
 
                 equal(browser.value(), "bar/File1");
+            });
+
+            test("file size is formatted", function() {
+                var browser = setup({ path: "foo" }, [{ name: "Image", size: 7326629, type: "f" }, { name: "Image2", type: "f", size: 1073741824 }]);
+                equal(browser.list.find("li:first .k-filesize").text(), "6.99 MB");
+                equal(browser.list.find("li:last .k-filesize").text(), "1 GB");
+            });
+
+            test("file size is formatted if empty", function() {
+                var browser = setup({ path: "foo" }, [{ name: "Image", type: "f" }]);
+                equal(browser.list.find("li:first .k-filesize").text(), "");
             });
         </script>
     </body>
