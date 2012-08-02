@@ -11,6 +11,11 @@
         counter = 1,
         clones = $.extend([], devices),
         widgetList = {
+            activeicon: {
+                name: "Active Icon",
+                selector: ".km-state-active .km-icon",
+                whitelist: [ "background-color", "background-image", "width", "height" ]
+            },
             icon: {
                 name: "Icon",
                 selector: ".km-icon",
@@ -86,6 +91,7 @@
             button: {
                 name: "Button",
                 selector: ".km-button",
+                activeSelector: ".km-state-active",
                 whitelist: [ "background-color", "background-image"],
                 children: [ "icon", "text" ]
             },
@@ -145,13 +151,84 @@
                 return kendo.support.touch ? $("<div style='width: 28px; height: 38px'/>").css("background-image", fillSvg.replace("%23f984ef", element.css("background-color"))) : undefined;
             },
             dragstart: function (e) {
-                $(document.documentElement).css("cursor", cursorSvg.replace("%23f984ef", this.element.css("background-color")));
+                var color = this.element.css("background-color"),
+                    doc = document.documentElement;
+
+                this.element.data("color", new Color(color).get());
+                $(doc).addClass("drop-override");
+                doc.style.cssText = "cursor: " + cursorSvg.replace("%23f984ef", color) + " !important;";
             },
             dragend: function () {
-                $(document.documentElement).css("cursor", 'default');
+                var doc = document.documentElement;
+                widgetTarget.hide();
+
+                $(doc).removeClass("drop-override");
+                doc.style.cssText = "";
             }
         },
-        widgetTarget = $("<div class='widgetTarget'><div><div /><div /></div><div></div></div>").appendTo(document.body);
+        widgetTarget = $("<div class='widgetTarget'><div><div /><div /></div><span /><div><span /></div></div>").appendTo(document.body),
+
+        StyleEngine = Widget.extend({
+            init: function (element, options) {
+                var that = this;
+
+                Widget.fn.init.call(that, element, options);
+                element = that.element;
+
+                that.object = {};
+
+                that.styleElement = $("<style scoped></style>").insertBefore(element);
+            },
+            options: {
+                name: "StyleEngine"
+            },
+            populate: function() {
+
+            },
+            update: function(element, styles) {
+                element = $(element);
+                var that = this, style,
+                    output = "", widget;
+
+                $(element.parentsUntil(".km-root").add(element).get().reverse()).each(function (idx, value) {
+                    widget = that._findWidgetClass(value);
+                    if (widget && !(new RegExp(widget.selector + "\\s" + (widget.activeSelector ? "|" + widget.activeSelector + "\\s" : "")).test(output))) {
+                        output = widget.selector + " " + output;
+                    }
+                });
+                output = output.substr(0, output.length-1);
+
+                this.object[output] = $.extend(this.object[output], styles);
+
+                style = $("<style scoped>\n" + that.getCSS() + "</style>").insertAfter(that.styleElement);
+                that.styleElement.remove();
+                that.styleElement = style;
+            },
+            getCSS: function () {
+                var object = this.object, output = "";
+
+                for (var i in object) {
+                    output += i + " {\n";
+                    for (var j in object[i]) {
+                        output += "    " + j + ": " + object[i][j] + ";\n";
+                    }
+                    output += "}\n";
+                }
+
+                return output;
+            },
+            _findWidgetClass: function(element) {
+                for(var idx in widgetList) {
+                    if (kendo.support.matchesSelector.call(element, widgetList[idx].selector)) {
+                        return $.extend( { widget: idx },  widgetList[idx] );
+                    }
+                }
+
+                return false;
+            }
+        });
+
+    kendo.ui.plugin(StyleEngine);
 
     for (var idx in widgetList) {
         var children = widgetList[idx].children;
@@ -162,68 +239,6 @@
             });
         }
     }
-
-    var StyleEngine = Widget.extend({
-        init: function (element, options) {
-            var that = this;
-
-            Widget.fn.init.call(that, element, options);
-            element = that.element;
-
-            that.object = {};
-
-            that.styleElement = $("<style scoped></style>").insertBefore(element);
-        },
-        options: {
-            name: "StyleEngine"
-        },
-        populate: function() {
-
-        },
-        update: function(element, styles) {
-            element = $(element);
-            var that = this, style,
-                output = "", widget;
-
-            $(element.parentsUntil(".km-root").add(element).get().reverse()).each(function (idx, value) {
-                widget = that._findWidgetClass(value);
-                if (widget && !(new RegExp(widget.selector + "\\s").test(output))) {
-                    output = widget.selector + " " + output;
-                }
-            });
-            output = output.substr(0, output.length-1);
-
-            this.object[output] = $.extend(this.object[output], styles);
-
-            style = $("<style scoped>\n" + that.getCSS() + "</style>").insertAfter(that.styleElement);
-            that.styleElement.remove();
-            that.styleElement = style;
-        },
-        getCSS: function () {
-            var object = this.object, output = "";
-
-            for (var i in object) {
-                output += i + " {\n";
-                for (var j in object[i]) {
-                    output += "    " + j + ": " + object[i][j] + ";\n";
-                }
-                output += "}\n";
-            }
-
-            return output;
-        },
-        _findWidgetClass: function(element) {
-            for(var idx in widgetList) {
-                if (kendo.support.matchesSelector.call(element, widgetList[idx].selector)) {
-                    return $.extend( { widget: idx },  widgetList[idx] );
-                }
-            }
-
-            return false;
-        }
-    });
-
-    kendo.ui.plugin(StyleEngine);
 
     function getPropertySelector(property) {
         var output = "", widget;
@@ -374,13 +389,10 @@
                     var target = e.dropTarget,
                         offset = target.offset(),
                         height = target.outerHeight(),
-                        widgetChildren = widgetTarget.children();
+                        widgetChildren = widgetTarget.children("div"),
+                        css = {};
 
-                    color = new Color(e.draggable.element.css(property)).get();
-
-                    var css = { cursor: cursorSvg.replace("%23f984ef", color) };
-
-                    css[property] = color;
+                    css[property] = $(e.draggable.element).data("color");
                     target.css(css);
                     widgetTarget
                         .show()
@@ -391,18 +403,22 @@
                         .css({
                             top: offset.top,
                             left: offset.left
-                        });
+                        })
+                        .children("span")
+                        .text("Widget");
 
                     widgetChildren
                         .width(target.outerWidth())
                         .css(TRANSITION, "all 100ms")
                         .last()
                         .css("top", height)
-                        .end()
+                        .children()
+                        .text("background-color")
+                        .end().end()
                         .css("display");
 
                     widgetChildren
-                        .children()
+                        .children("div")
                         .height(height)
                         .css(TRANSITION, "all 100ms")
                         .css("display");
@@ -412,7 +428,7 @@
                     widgetTarget.hide();
                 },
                 drop: function (e) {
-                    var that = this,
+                    var color = $(e.draggable.element).data("color"),
                         target = $(e.dropTarget);
 
                     target.css(defaultCSS);
