@@ -275,10 +275,34 @@
         },
 
         _keydown: function(e) {
-            var keys = kendo.keys;
+            var that = this,
+                options = that.options,
+                keys = kendo.keys,
+                keyCode = e.keyCode,
+                wrapper = that.wrapper,
+                offset, handled,
+                distance = 10;
 
-            if (e.keyCode == keys.ESC) {
-                this.close();
+            if (keyCode == keys.ESC) {
+                that.close();
+            }
+
+            if (options.draggable) {
+                offset = wrapper.offset();
+
+                if (keyCode == keys.UP) {
+                    handled = wrapper.css("top", offset.top - distance);
+                } else if (keyCode == keys.DOWN) {
+                    handled = wrapper.css("top", offset.top + distance);
+                } else if (keyCode == keys.LEFT) {
+                    handled = wrapper.css("left", offset.left - distance);
+                } else if (keyCode == keys.RIGHT) {
+                    handled = wrapper.css("left", offset.left + distance);
+                }
+
+                if (handled) {
+                    e.preventDefault();
+                }
             }
         },
 
