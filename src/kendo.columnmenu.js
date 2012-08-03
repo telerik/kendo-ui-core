@@ -14,6 +14,7 @@
         FILTERMENU = "kendoFilterMenu",
         MENU = "kendoMenu",
         NS = ".kendoColumnMenu",
+        nameSpecialCharRegExp = /(\[|\]|\$|\.|\:|\+)/g,
         Widget = ui.Widget;
 
     function trim(text) {
@@ -242,13 +243,13 @@
             var attr = "[" + kendo.attr("field") + "=",
                 columns = this._ownerColumns(),
                 allselector = map(columns, function(col) {
-                    return attr + col.field + "]";
+                    return attr + col.field.replace(nameSpecialCharRegExp, "\\$1") + "]";
                 }).join(","),
                 visible = grep(columns, function(field) {
                     return !field.hidden;
                 }),
                 selector = map(visible, function(col) {
-                    return attr + col.field + "]";
+                    return attr + col.field.replace(nameSpecialCharRegExp, "\\$1") + "]";
                 }).join(",");
 
             this.wrapper.find(allselector).attr("checked", false);
