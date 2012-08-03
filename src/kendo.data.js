@@ -1853,9 +1853,9 @@
                             type: type
                         });
                     },
-                    error: function(response) {
+                    error: function(response, status, error) {
                         deferred.reject(response);
-                        that.trigger(ERROR, response);
+                        that.error(response, status, error);
                     }
                 }, data)
                 );

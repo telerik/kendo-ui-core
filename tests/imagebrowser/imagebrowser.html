@@ -391,6 +391,15 @@
                 equal(browser.value(), "foo/File1");
             });
 
+            test("clicking on folder enables the delete button", 1, function() {
+                var browser = setup();
+
+                browser.list.find("li[data-type=d]").mousedown().mouseup();
+
+                ok(!browser.toolbar.find("button:has(span.k-delete)").hasClass("k-state-disabled"));
+            });
+
+
             test("clicking on file enables the delete button", 1, function() {
                 var browser = setup();
 
@@ -443,6 +452,54 @@
 
                 equal(browser.list.find("li").length, 1);
                 ok(browser.list.find("li.k-tile-empty").length);
+            });
+
+            test("delete button triggers listView remove method", function() {
+                var browser = setup(),
+                    remove = stub(browser.list.data("kendoListView"), "remove");
+
+                browser._showMessage = function() { return true};// suppress the alert for poping
+
+                browser.list.find("li[data-type=f]").mousedown().mouseup();
+
+                browser.toolbar.find(".k-delete").click();
+
+                ok(remove.calls("remove"));
+            });
+
+            test("delete button does not trigger listView remove method if no item is selected", function() {
+                var browser = setup(),
+                    remove = stub(browser.list.data("kendoListView"), "remove"),
+                    showMessage = stub(browser, "_showMessage");// suppress the alert for poping
+
+                browser.toolbar.find(".k-delete").click();
+
+                ok(!remove.calls("remove"));
+            });
+
+            test("delete button shows confirmation", function() {
+                var browser = setup(),
+                    remove = stub(browser.list.data("kendoListView"), "remove"),
+                    showMessage = stub(browser, { _showMessage: function() { return true; } });
+
+                browser.list.find("li[data-type=f]").mousedown().mouseup();
+                browser.toolbar.find(".k-delete").click();
+
+                ok(remove.calls("remove"));
+                ok(showMessage.calls("_showMessage"));
+                ok(showMessage.args("_showMessage"));
+                equal(showMessage.args("_showMessage")[1], "confirm");
+            });
+
+            test("canceling the delete confirmation does not trigger the remove", function() {
+                var browser = setup(),
+                    remove = stub(browser.list.data("kendoListView"), "remove"),
+                    showMessage = stub(browser, { _showMessage: function() { return false; } });
+
+                browser.list.find("li[data-type=f]").mousedown().mouseup();
+                browser.toolbar.find(".k-delete").click();
+
+                ok(!remove.calls("remove"));
             });
         </script>
     </body>

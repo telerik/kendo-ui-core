@@ -8,6 +8,7 @@
         trimSlashesRegExp = /(^\/|\/$)/g,
         CHANGE = "change",
         ERROR = "error",
+        CLICK = "click",
         NS = ".kendoImageBrowser",
         BREADCRUBMSNS = ".kendoBreadcrumbs",
         SEARCHBOXNS = ".kendoSearchBox",
@@ -35,6 +36,7 @@
                     return data.items || [];
                 },
                 model: {
+                    id: "name",
                     fields: {
                         name: "name",
                         size: "size",
@@ -124,6 +126,8 @@
 
             that.refresh();
 
+            that.toolbar.on(CLICK + NS, "button:not(.k-state-disabled):has(.k-delete)", proxy(that._deleteClick, that));
+
             that.path(that.options.path);
         },
 
@@ -135,7 +139,8 @@
                 orderByName: "Name",
                 orderBySize: "Size",
                 directoryNotFound: "A directory with this name was not found.",
-                emptyFolder: "Empty Folder"
+                emptyFolder: "Empty Folder",
+                deleteFile: 'Are you sure you want to delete "{0}"?'
             },
             transport: {},
             path: "/"
@@ -150,6 +155,7 @@
                 .unbind(ERROR, this._errorHandler);
 
             this.list
+                .add(this.toolbar)
                 .off(NS);
         },
 
@@ -191,7 +197,7 @@
                 .kendoPopup({
                     anchor: link
                 })
-                .on("click" + NS, "li", function() {
+                .on(CLICK + NS, "li", function() {
                     var item = $(this),
                         field = item.attr(kendo.attr("value"));
 
@@ -202,10 +208,20 @@
 
                 }).data("kendoPopup");
 
-            link.on("click" + NS, function(e) {
+            link.on(CLICK + NS, function(e) {
                 e.preventDefault();
                 popup.toggle();
             });
+        },
+
+        _deleteClick: function() {
+            var that = this,
+                item = that.listView.select(),
+                message = kendo.format(that.options.messages.deleteFile, item.find("strong").text());
+
+            if (item.length && that._showMessage(message, "confirm")) {
+                that.listView.remove(item);
+            }
         },
 
         orderBy: function(field) {
@@ -260,8 +276,10 @@
 
         _listViewChange: function() {
             var selected = this._selectedItem();
+
+            this.toolbar.find(".k-delete").parent().removeClass("k-state-disabled");
+
             if (selected && selected.get(this._getFieldName(TYPEFIELD)) === "f") {
-                this.toolbar.find(".k-delete").parent().removeClass("k-state-disabled");
                 this.trigger(CHANGE);
             }
         },
@@ -335,8 +353,8 @@
             }
         },
 
-        _showMessage: function(message) {
-            window.alert(message);
+        _showMessage: function(message, type) {
+            return window[type || "alert"](message);
         },
 
         refresh: function() {
@@ -456,7 +474,7 @@
                 .on("change" + SEARCHBOXNS, proxy(that._updateValue, that));
 
             that.wrapper
-                .on("click" + SEARCHBOXNS, "a", proxy(that._click, that));
+                .on(CLICK + SEARCHBOXNS, "a", proxy(that._click, that));
 
             if (!placeholderSupported) {
                 that.element.on("focus" + SEARCHBOXNS, proxy(that._focus, that))
@@ -566,7 +584,7 @@
                 .on("focus" + BREADCRUBMSNS, "input", proxy(that._focus, that))
                 .on("blur" + BREADCRUBMSNS, "input", proxy(that._blur, that))
                 .on("keydown" + BREADCRUBMSNS, "input", proxy(that._keydown, that))
-                .on("click" + BREADCRUBMSNS, "a", proxy(that._click, that));
+                .on(CLICK + BREADCRUBMSNS, "a", proxy(that._click, that));
 
             that.value(that.options.value);
         },
