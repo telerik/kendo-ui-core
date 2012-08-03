@@ -84,7 +84,6 @@
             //ARIA
 
             that.input.attr("role", "combobox")
-                .attr("aria-haspopup", "true")
                 .attr("aria-owns", that.popup.element[0].id)
                 .attr("aria-autocomplete", "both")
 
@@ -409,7 +408,6 @@
                     that._custom(text);
                     input.value = text;
                 }
-
             } else {
                 return input.value;
             }
