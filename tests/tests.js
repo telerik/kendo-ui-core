@@ -75,7 +75,7 @@ var browserProcesses = [],
     browsers = [
         {
             exe: mac ? "/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome" : "google-chrome",
-            params: ["--user-data-dir=" + process.env["CHROME_USER_DATA_DIR"], testRunnerURL]
+            params: [testRunnerURL]
         },
         {
             exe: mac ? "/Applications/Firefox.app/Contents/MacOS/firefox" : "firefox",
