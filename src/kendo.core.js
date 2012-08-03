@@ -1768,20 +1768,6 @@ function pad(number) {
         return fx.transitionPromise(element, destination, prepareAnimationOptions(options, duration, reverse, complete));
     }
 
-    extend($.fn, {
-        kendoStop: function(clearQueue, gotoEnd) {
-            return this.stop(clearQueue, gotoEnd);
-        },
-
-        kendoAnimate: function(options, duration, reverse, complete) {
-            return animate(this, options, duration, reverse, complete);
-        },
-
-        kendoAnimateTo: function(destination, options, duration, reverse, complete) {
-            return animateTo(this, destination, options, duration, reverse, complete);
-        }
-    });
-
     function toggleClass(element, classes, options, add) {
         if (classes) {
             classes = classes.split(" ");
@@ -1794,17 +1780,31 @@ function pad(number) {
         return element;
     }
 
-    extend($.fn, {
-        kendoAddClass: function(classes, options){
-            return toggleClass(this, classes, options, true);
-        },
-        kendoRemoveClass: function(classes, options){
-            return toggleClass(this, classes, options, false);
-        },
-        kendoToggleClass: function(classes, options, toggle){
-            return toggleClass(this, classes, options, toggle);
-        }
-    });
+    if (!("kendoAnimate" in $.fn)) {
+        extend($.fn, {
+            kendoStop: function(clearQueue, gotoEnd) {
+                return this.stop(clearQueue, gotoEnd);
+            },
+
+            kendoAnimate: function(options, duration, reverse, complete) {
+                return animate(this, options, duration, reverse, complete);
+            },
+
+            kendoAnimateTo: function(destination, options, duration, reverse, complete) {
+                return animateTo(this, destination, options, duration, reverse, complete);
+            },
+
+            kendoAddClass: function(classes, options){
+                return toggleClass(this, classes, options, true);
+            },
+            kendoRemoveClass: function(classes, options){
+                return toggleClass(this, classes, options, false);
+            },
+            kendoToggleClass: function(classes, options, toggle){
+                return toggleClass(this, classes, options, toggle);
+            }
+        });
+    }
 
     var ampRegExp = /&/g,
         ltRegExp = /</g,
@@ -1948,8 +1948,8 @@ function pad(number) {
             F10: 121,
             F12: 123
         },
-        support: support,
-        animate: animate,
+        support: kendo.support || support,
+        animate: kendo.animate || animate,
         ns: "",
         attr: function(value) {
             return "data-" + kendo.ns + value;
@@ -1958,10 +1958,10 @@ function pad(number) {
         deepExtend: deepExtend,
         size: size,
         isNodeEmpty: isNodeEmpty,
-        getOffset: getOffset,
-        parseEffects: parseEffects,
-        toggleClass: toggleClass,
-        directions: directions,
+        getOffset: kendo.getOffset || getOffset,
+        parseEffects: kendo.parseEffects || parseEffects,
+        toggleClass: kendo.toggleClass || toggleClass,
+        directions: kendo.directions || directions,
         Observable: Observable,
         Class: Class,
         Template: Template,
