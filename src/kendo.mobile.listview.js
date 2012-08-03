@@ -24,6 +24,7 @@
         MOUSEDOWN_NS = MOUSEDOWN + NS,
         MOUSEMOVE = support.mousemove + NS,
         MOUSECANCEL = support.mousecancel + NS,
+        LAST_PAGE_REACHED = "lastPageReached",
         CLICK = "click",
         CLICK_NS = CLICK + NS,
 
@@ -139,7 +140,8 @@
         },
 
         events: [
-            CLICK
+            CLICK,
+            LAST_PAGE_REACHED
         ],
 
         options: {
@@ -180,10 +182,10 @@
             Widget.fn.destroy.call(that);
 
             that._unbindDataSource();
+            that.stopEndlessScrolling();
+            that.stopLoadMore();
 
-            that.element
-                .add(that._loadButton)
-                .off(NS);
+            that.element.off(NS);
 
             kendo.destroy(that.element);
         },
@@ -239,12 +241,7 @@
             if (loading) {
                 that.loading = false;
                 that._calcTreshold();
-
-                if (options.loadMore) {
-                    that._toggleButton(true);
-                } else {
-                    that._toggleIcon(false);
-                }
+                that._toggleLoader(false);
             }
 
             if (options.pullToRefresh) {
@@ -267,6 +264,34 @@
             } else {
                 return this.element.children();
             }
+        },
+
+        stopEndlessScrolling: function() {
+            var that = this,
+                scroller = that._scroller();
+
+           if (scroller && that._loadIcon) {
+               that.loading = false;
+               that._loadIcon.parent().hide();
+
+               scroller.unbind("resize", that._scrollerResize)
+                       .unbind("scroll", that._scrollerScroll);
+
+               that.trigger(LAST_PAGE_REACHED);
+           }
+        },
+
+        stopLoadMore: function() {
+           var that = this;
+
+           if (that._loadButton) {
+               that.loading = false;
+               that._loadButton
+                   .off(CLICK_NS)
+                   .parent().hide();
+
+               that.trigger(LAST_PAGE_REACHED);
+           }
         },
 
         _unbindDataSource: function() {
@@ -384,19 +409,19 @@
 
             if (options.endlessScroll) {
                 that._scrollHeight = scroller.element.height();
+                that._scrollerResize = function() {
+                    that._scrollHeight = scroller.element.height();
+                    that._calcTreshold();
+                },
+                that._scrollerScroll = function(e) {
+                    if (!that.loading && e.scrollTop + that._scrollHeight > that._treshold) {
+                        that._nextPage();
+                    }
+                };
 
                 scroller.setOptions({
-                    resize: function() {
-                        that._scrollHeight = scroller.element.height();
-                        that._calcTreshold();
-                    },
-                    scroll: function(e) {
-                        if (!that.loading && e.scrollTop + that._scrollHeight > that._treshold) {
-                            that.loading = true;
-                            that._toggleIcon(true);
-                            dataSource.next();
-                        }
-                    }
+                    resize: that._scrollerResize,
+                    scroll: that._scrollerScroll
                 });
             }
         },
@@ -407,6 +432,16 @@
 
             if (scroller) {
                 that._treshold = scroller.scrollHeight() - that.options.scrollTreshold;
+            }
+        },
+
+        _nextPage: function() {
+            var that = this;
+            that.loading = true;
+            that._toggleLoader(true);
+
+            if (!that.dataSource.next()) {
+                that.stopEndlessScrolling();
             }
         },
 
@@ -528,11 +563,7 @@
 
                 if (loadMore) {
                     that._loadButton = $('<button class="km-load km-button">' + options.loadMoreText + '</button>')
-                                        .on(CLICK_NS, function() {
-                                           that.loading = true;
-                                           that._toggleButton(false);
-                                           that.dataSource.next();
-                                        });
+                                        .on(CLICK_NS, proxy(that._nextPage, that));
 
                     loadWrapper.append(that._loadButton);
                 }
@@ -541,13 +572,14 @@
             }
         },
 
-        _toggleButton: function(toggle) {
-            this._loadButton.toggle(toggle);
-            this._toggleIcon(!toggle);
-        },
+        _toggleLoader: function(toggle) {
+            var that = this,
+                icon = that._loadIcon,
+                button = that._loadButton;
 
-        _toggleIcon: function(toggle) {
-            var icon = this._loadIcon;
+            if (button) {
+                button.toggle(!toggle);
+            }
 
             if (toggle) {
                 icon.css("display", "block");

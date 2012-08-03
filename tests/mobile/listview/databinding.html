@@ -39,6 +39,7 @@
         <ul id="log"></ul>
 
         <script>
+            QUnit.config.reorder = false;
             var ListView = kendo.mobile.ui.ListView;
 
             module("mobile listview", {
@@ -388,7 +389,7 @@
                 button.click();
 
                 ok(!button.is(":visible"));
-                ok(icon.is(":visible"));
+                equal(icon.css("display"), "block");
 
             });
 
@@ -473,6 +474,69 @@
                 ds.bind("change", firstAssert);
 
             });
+
+            asyncTest("stopEndlessScrolling method stops endlessScrolling functionality", function() {
+                window.initListView = function(e) {
+                    var listview = e.view.element.find("#listview");
+                    listview.kendoMobileListView({
+                        dataSource: [],
+                        endlessScroll: true
+                    });
+
+                    listview.data("kendoMobileListView").stopEndlessScrolling();
+
+                    var scroller = listview.data("kendoMobileListView")._scroller();
+
+                    start();
+                    equal(scroller._events["resize"][0], undefined);
+                    ok(scroller._events["scroll"].length < 2);
+                }
+
+                setup('<div data-role="view" data-init="initListView"><div id="listview" style="height:300px"></div></div>');
+            });
+
+            test("stopLoadMore method disables loadMore functionality", function() {
+                var listview = $("<div/>").kendoMobileListView({
+                    dataSource: [],
+                    loadMore: true
+                }).data("kendoMobileListView");
+
+                listview.stopLoadMore();
+
+                equal(listview._loadButton.data("events"), undefined);
+            });
+
+            test("stopLoadMore method raises event", 1, function() {
+                var listview = $("<div/>").kendoMobileListView({
+                    dataSource: [],
+                    loadMore: true,
+                    lastPageReached: function() {
+                        ok(true);
+                    }
+                }).data("kendoMobileListView");
+
+                listview.stopLoadMore();
+            });
+
+            asyncTest("stopEndlessScrolling method raises event", 1, function() {
+                window.initListView = function(e) {
+                    var listview = e.view.element.find("#listview");
+                    listview.kendoMobileListView({
+                        dataSource: [],
+                        endlessScroll: true,
+                        lastPageReached: function() {
+                            start();
+                            ok(true);
+                        }
+                    });
+
+                    listview.data("kendoMobileListView").stopEndlessScrolling();
+                }
+
+                setup('<div data-role="view" data-init="initListView"><div id="listview" style="height:300px"></div></div>');
+
+            });
+
         </script>
     </body>
 </html>
