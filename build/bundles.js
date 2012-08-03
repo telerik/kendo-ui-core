@@ -204,7 +204,7 @@ function deployStyles(root, bundle, license, copySource) {
 
     bundle.suites.forEach(function(suite) {
         var suiteStyles = path.join(STYLES_ROOT, SUITE_STYLES[suite] || suite);
-        if (path.existsSync(suiteStyles)) {
+        if (fs.existsSync(suiteStyles)) {
             kendoBuild.deployStyles(suiteStyles, stylesDest, license, true);
 
             if (copySource) {
