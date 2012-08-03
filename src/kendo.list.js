@@ -250,7 +250,7 @@
                     }
                 },
                 animation: options.animation,
-                isRtl: wrapper.css("direction") == "rtl"
+                isRtl: kendo.support.isRtl(wrapper)
             }));
 
             that._touchScroller = kendo.touchScroller(that.popup.element);

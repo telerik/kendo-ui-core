@@ -1514,6 +1514,10 @@ function pad(number) {
             return result;
         };
 
+        support.isRtl = function(element) {
+            return $(element).closest(".k-rtl").length > 0;
+        }
+
         var table = document.createElement("table");
 
         // Internet Explorer does not support setting the innerHTML of TBODY and TABLE elements

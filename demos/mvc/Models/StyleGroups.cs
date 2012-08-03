@@ -10,6 +10,7 @@ namespace Kendo.Models
         {
 #if DEBUG
             "web/kendo.common.css",
+            "web/kendo.rtl.css",
             "web/kendo.default.less",
             "dataviz/kendo.dataviz.css"
 #else
