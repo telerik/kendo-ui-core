@@ -125,6 +125,10 @@ namespace Kendo.Mvc.Infrastructure.Implementation.Expressions
                     {
                         value = Enum.Parse(nonNullableTargetType, value.ToString(), true);
                     }
+                    else if (nonNullableTargetType == typeof(Guid))
+                    {
+                        value = new Guid(value.ToString());
+                    }
                     else if (value is IConvertible)
                     {
                         value = Convert.ChangeType(value, nonNullableTargetType, culture);

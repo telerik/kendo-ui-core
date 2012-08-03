@@ -421,6 +421,11 @@ namespace Kendo.Mvc.Extensions
                 return "Number";
             }
 
+            if (type.GetNonNullableType() == typeof(Guid))
+            {
+                return "String";
+            }
+
             return "Object";
         }
 
