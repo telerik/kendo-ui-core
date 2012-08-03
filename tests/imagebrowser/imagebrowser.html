@@ -437,6 +437,13 @@
 
                 equal(browser.path(), "Folder1/");
             });
+
+            test("no data message is shown if there is no data", function() {
+                var browser = setup({}, []);
+
+                equal(browser.list.find("li").length, 1);
+                ok(browser.list.find("li.k-tile-empty").length);
+            });
         </script>
     </body>
 </html>

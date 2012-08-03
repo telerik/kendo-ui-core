@@ -15,7 +15,8 @@
         SIZEFIELD = "size",
         TYPEFIELD = "type",
         DEFAULTSORTORDER = { field: TYPEFIELD, dir: "asc" },
-        ARRANGEBYTMPL = '<li data-#=ns#value="#=value#" class="k-item">#=text#</li>',
+        ARRANGEBYTMPL = kendo.template('<li data-#=ns#value="#=value#" class="k-item">${text}</li>'),
+        EMPTYTILE = kendo.template('<li class="k-tile-empty"><strong>${text}</strong></li>'),
         TOOLBARTMPL = '<div class="k-widget k-toolbar k-floatwrap">' +
                             '<div class="k-toolbar-wrap">' +
                             '<div class="k-widget k-upload"><div class="k-button k-button-icontext k-button-bare k-upload-button">' +
@@ -133,7 +134,8 @@
                 orderBy: "Arrange by",
                 orderByName: "Name",
                 orderBySize: "Size",
-                directoryNotFound: "A directory with this name was not found."
+                directoryNotFound: "A directory with this name was not found.",
+                emptyFolder: "Empty Folder"
             },
             transport: {},
             path: "/"
@@ -185,7 +187,7 @@
 
             link = that.toolbar.find(".k-tiles-arrange a");
 
-            that.arrangeByPopup = popup = $("<ul>" + kendo.render(kendo.template(ARRANGEBYTMPL), arrangeBy) + "</ul>")
+            that.arrangeByPopup = popup = $("<ul>" + kendo.render(ARRANGEBYTMPL, arrangeBy) + "</ul>")
                 .kendoPopup({
                     anchor: link
                 })
@@ -236,8 +238,12 @@
                 dataBound: function() {
                     that.toolbar.find(".k-delete").parent().addClass("k-state-disabled");
 
-                    that._tiles = this.items().filter("[" + kendo.attr("type") + "=f]");
-                    that._scroll();
+                    if (that.dataSource.view().length) {
+                        that._tiles = this.items().filter("[" + kendo.attr("type") + "=f]");
+                        that._scroll();
+                    } else {
+                        this.wrapper.append(EMPTYTILE({ text: that.options.messages.emptyFolder }));
+                    }
                 },
                 change: proxy(that._listViewChange, that)
             });
