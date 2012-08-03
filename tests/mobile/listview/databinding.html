@@ -510,7 +510,7 @@
                 var listview = $("<div/>").kendoMobileListView({
                     dataSource: [],
                     loadMore: true,
-                    loadMoreStopped: function() {
+                    lastPageReached: function() {
                         ok(true);
                     }
                 }).data("kendoMobileListView");
@@ -524,7 +524,7 @@
                     listview.kendoMobileListView({
                         dataSource: [],
                         endlessScroll: true,
-                        endlessScrollStopped: function() {
+                        lastPageReached: function() {
                             start();
                             ok(true);
                         }
