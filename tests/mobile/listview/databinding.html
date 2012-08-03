@@ -389,7 +389,7 @@
                 button.click();
 
                 ok(!button.is(":visible"));
-                ok(icon.is(":visible"));
+                equal(icon.css("display"), "block");
 
             });
 

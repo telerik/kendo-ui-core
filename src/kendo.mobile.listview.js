@@ -243,12 +243,7 @@
             if (loading) {
                 that.loading = false;
                 that._calcTreshold();
-
-                if (options.loadMore) {
-                    that._toggleButton(true);
-                } else {
-                    that._toggleIcon(false);
-                }
+                that._toggleLoader(false);
             }
 
             if (options.pullToRefresh) {
@@ -423,7 +418,7 @@
                 that._scrollerScroll = function(e) {
                     if (!that.loading && e.scrollTop + that._scrollHeight > that._treshold) {
                         that.loading = true;
-                        that._toggleIcon(true);
+                        that._toggleLoader(true);
 
                         if (!that.dataSource.next()) {
                             that.stopEndlessScrolling();
@@ -567,8 +562,11 @@
                     that._loadButton = $('<button class="km-load km-button">' + options.loadMoreText + '</button>')
                                         .on(CLICK_NS, function() {
                                             that.loading = true;
-                                            that._toggleButton(false);
-                                            that.dataSource.next();
+                                            that._toggleLoader(true);
+
+                                            if (!that.dataSource.next()) {
+                                                that.stopLoadMore();
+                                            }
                                         });
 
                     loadWrapper.append(that._loadButton);
@@ -578,13 +576,14 @@
             }
         },
 
-        _toggleButton: function(toggle) {
-            this._loadButton.toggle(toggle);
-            this._toggleIcon(!toggle);
-        },
+        _toggleLoader: function(toggle) {
+            var that = this,
+                icon = that._loadIcon,
+                button = that._loadButton;
 
-        _toggleIcon: function(toggle) {
-            var icon = this._loadIcon;
+            if (button) {
+                button.toggle(!toggle);
+            }
 
             if (toggle) {
                 icon.css("display", "block");
