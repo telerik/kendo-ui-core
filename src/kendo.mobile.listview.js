@@ -273,10 +273,26 @@
             var that = this,
                 scroller = that._scroller();
 
+           that.loading = false;
+           that._loadIcon.parent().hide();
+
            scroller.unbind("resize", that._scrollerResize);
            scroller.unbind("scroll", that._scrollerScroll);
 
-           that._loadIcon.parent().hide();
+           //show template
+           //or
+           //trigger event
+        },
+
+        disableLoadMore: function() {
+           this.loading = false;
+           this._loadButton
+               .off(CLICK_NS)
+               .parent().hide();
+
+           //show template
+           //or
+           //trigger event
         },
 
         _unbindDataSource: function() {
@@ -402,7 +418,10 @@
                     if (!that.loading && e.scrollTop + that._scrollHeight > that._treshold) {
                         that.loading = true;
                         that._toggleIcon(true);
-                        dataSource.next();
+
+                        if (!that.dataSource.next()) {
+                            that.stopEndlessScrolling();
+                        }
                     }
                 };
 
@@ -541,9 +560,9 @@
                 if (loadMore) {
                     that._loadButton = $('<button class="km-load km-button">' + options.loadMoreText + '</button>')
                                         .on(CLICK_NS, function() {
-                                           that.loading = true;
-                                           that._toggleButton(false);
-                                           that.dataSource.next();
+                                            that.loading = true;
+                                            that._toggleButton(false);
+                                            that.dataSource.next();
                                         });
 
                     loadWrapper.append(that._loadButton);

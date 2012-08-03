@@ -494,6 +494,18 @@
 
                 setup('<div data-role="view" data-init="initListView"><div id="listview" style="height:300px"></div></div>');
             });
+
+            test("disable LoadMore", function() {
+                var listview = $("<div/>").kendoMobileListView({
+                    dataSource: [],
+                    loadMore: true
+                }).data("kendoMobileListView");
+
+                listview.disableLoadMore();
+
+                equal(listview._loadButton.data("events"), undefined);
+            });
+
         </script>
     </body>
 </html>
