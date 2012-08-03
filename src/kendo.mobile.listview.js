@@ -180,10 +180,10 @@
             Widget.fn.destroy.call(that);
 
             that._unbindDataSource();
+            that.stopEndlessScrolling();
+            that.disableLoadMore();
 
-            that.element
-                .add(that._loadButton)
-                .off(NS);
+            that.element.off(NS);
 
             kendo.destroy(that.element);
         },
@@ -273,26 +273,25 @@
             var that = this,
                 scroller = that._scroller();
 
-           that.loading = false;
-           that._loadIcon.parent().hide();
+           if (that._loadIcon) {
+               that.loading = false;
+               that._loadIcon.parent().hide();
 
-           scroller.unbind("resize", that._scrollerResize);
-           scroller.unbind("scroll", that._scrollerScroll);
-
-           //show template
-           //or
-           //trigger event
+               scroller.unbind("resize", that._scrollerResize)
+                       .unbind("scroll", that._scrollerScroll);
+               //trigger event
+           }
         },
 
         disableLoadMore: function() {
-           this.loading = false;
-           this._loadButton
-               .off(CLICK_NS)
-               .parent().hide();
+           if (this._loadButton) {
+               this.loading = false;
+               this._loadButton
+                   .off(CLICK_NS)
+                   .parent().hide();
 
-           //show template
-           //or
            //trigger event
+           }
         },
 
         _unbindDataSource: function() {
