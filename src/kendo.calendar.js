@@ -757,12 +757,17 @@
                 return compare(date1, date2);
             },
             setDate: function(date, value) {
+                var month;
                 if (value instanceof DATE) {
-                    date.setFullYear(value.getFullYear(),
-                    value.getMonth(),
-                    date.getDate());
+                    month = value.getMonth();
+
+                    date.setFullYear(value.getFullYear(), month, date.getDate());
+
+                    if (month !== date.getMonth()) {
+                        date.setDate(0);
+                    }
                 } else {
-                    var month = date.getMonth() + value;
+                    month = date.getMonth() + value;
 
                     date.setMonth(month);
 
