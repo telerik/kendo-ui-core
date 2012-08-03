@@ -417,12 +417,7 @@
                 },
                 that._scrollerScroll = function(e) {
                     if (!that.loading && e.scrollTop + that._scrollHeight > that._treshold) {
-                        that.loading = true;
-                        that._toggleLoader(true);
-
-                        if (!that.dataSource.next()) {
-                            that.stopEndlessScrolling();
-                        }
+                        that._nextPage();
                     }
                 };
 
@@ -439,6 +434,16 @@
 
             if (scroller) {
                 that._treshold = scroller.scrollHeight() - that.options.scrollTreshold;
+            }
+        },
+
+        _nextPage: function() {
+            var that = this;
+            that.loading = true;
+            that._toggleLoader(true);
+
+            if (!that.dataSource.next()) {
+                that.stopEndlessScrolling();
             }
         },
 
@@ -560,14 +565,7 @@
 
                 if (loadMore) {
                     that._loadButton = $('<button class="km-load km-button">' + options.loadMoreText + '</button>')
-                                        .on(CLICK_NS, function() {
-                                            that.loading = true;
-                                            that._toggleLoader(true);
-
-                                            if (!that.dataSource.next()) {
-                                                that.stopLoadMore();
-                                            }
-                                        });
+                                        .on(CLICK_NS, proxy(that._nextPage, that));
 
                     loadWrapper.append(that._loadButton);
                 }
