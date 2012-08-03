@@ -631,7 +631,7 @@
             });
 
             test("API methods work after initialization from rendered treeview", function() {
-                treeview = $('<div class="k-widget k-treeview k-reset" id="treeview">' +
+                treeview = $('<div class="k-widget k-treeview" id="treeview">' +
                     '<ul class="k-group">' +
                         '<li class="k-item k-first">' +
                             '<div class="k-top k-top"><span class="k-in">foo</span></div>' +
@@ -651,6 +651,19 @@
                 equal(data.length, 2);
                 equal(data[0].text, "bar");
                 equal(data[1].text, "foo");
+            });
+
+            test("API methods work after initialization from empty rendered treeview", function() {
+                treeview = $('<div class="k-widget k-treeview" id="treeview"></div>').kendoTreeView();
+
+                treeviewObject = treeview.data("kendoTreeView");
+
+                treeviewObject.append({ text: "foo" });
+
+                var data = treeviewObject.dataSource.data();
+
+                equal(data.length, 1);
+                equal(data[0].text, "foo");
             });
 
             test("removing all items from an item does not re-initialize it after move", function() {

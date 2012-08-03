@@ -53,10 +53,6 @@
         };
     }
 
-    function treeviewFromNode(node) {
-        return $(node).closest("[data-role=treeview]").data("kendoTreeView");
-    }
-
     subGroup = contentChild(".k-group");
     nodeContents = contentChild(".k-group,.k-content");
 
@@ -959,13 +955,17 @@
             return $(node).closest(NODE).find(">div>.k-in").text(text);
         },
 
+        _objectOrSelf: function (node) {
+            return $(node).closest("[data-role=treeview]").data("kendoTreeView") || this;
+        },
+
         _dataSourceMove: function(nodeData, group, parentNode, callback) {
             var that = this,
-                srcTreeView = treeviewFromNode(nodeData),
+                srcTreeView = that._objectOrSelf(nodeData),
                 srcDataSource,
                 dataItem,
                 referenceDataItem, i,
-                destTreeview = treeviewFromNode(parentNode || group),
+                destTreeview = that._objectOrSelf(parentNode || group),
                 destDataSource = destTreeview.dataSource;
 
             if (parentNode) {
