@@ -241,11 +241,8 @@
             CLOSE,
             REFRESH,
             RESIZE,
-
             DRAGSTART,
-
             DRAGEND,
-
             ERROR
         ],
 
@@ -624,9 +621,13 @@
                             that.trigger(REFRESH);
                         });
                 }
-            } else if (options.template) {
-                // refresh template
-                that.content(template(options.template)({}));
+            } else {
+                if (options.template) {
+                    // refresh template
+                    that.content(template(options.template)({}));
+                }
+
+                that.trigger(REFRESH);
             }
 
             return that;

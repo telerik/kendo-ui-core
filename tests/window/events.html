@@ -71,6 +71,19 @@
                     }, 200);
                 }, 200);
             });
+
+            test("clicking the refresh button on a static window triggers refresh event", function() {
+                var triggers = 0,
+                    dialog = createWindow({
+                        refresh: function() {
+                            triggers++;
+                        }
+                    });
+
+                dialog.wrapper.find(".k-i-refresh").trigger("clicK");
+
+                equal(triggers, 1);
+            });
         </script>
 
         <h1 id="qunit-header">kendo.ui.Window Tests</h1>
