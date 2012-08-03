@@ -495,15 +495,46 @@
                 setup('<div data-role="view" data-init="initListView"><div id="listview" style="height:300px"></div></div>');
             });
 
-            test("disable LoadMore", function() {
+            test("stopLoadMore method disables loadMore functionality", function() {
                 var listview = $("<div/>").kendoMobileListView({
                     dataSource: [],
                     loadMore: true
                 }).data("kendoMobileListView");
 
-                listview.disableLoadMore();
+                listview.stopLoadMore();
 
                 equal(listview._loadButton.data("events"), undefined);
+            });
+
+            test("stopLoadMore method raises event", 1, function() {
+                var listview = $("<div/>").kendoMobileListView({
+                    dataSource: [],
+                    loadMore: true,
+                    loadMoreStopped: function() {
+                        ok(true);
+                    }
+                }).data("kendoMobileListView");
+
+                listview.stopLoadMore();
+            });
+
+            asyncTest("stopEndlessScrolling method raises event", 1, function() {
+                window.initListView = function(e) {
+                    var listview = e.view.element.find("#listview");
+                    listview.kendoMobileListView({
+                        dataSource: [],
+                        endlessScroll: true,
+                        endlessScrollStopped: function() {
+                            start();
+                            ok(true);
+                        }
+                    });
+
+                    listview.data("kendoMobileListView").stopEndlessScrolling();
+                }
+
+                setup('<div data-role="view" data-init="initListView"><div id="listview" style="height:300px"></div></div>');
+
             });
 
         </script>

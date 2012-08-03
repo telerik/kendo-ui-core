@@ -139,7 +139,9 @@
         },
 
         events: [
-            CLICK
+            CLICK,
+            "endlessScrollStopped",
+            "loadMoreStopped"
         ],
 
         options: {
@@ -181,7 +183,7 @@
 
             that._unbindDataSource();
             that.stopEndlessScrolling();
-            that.disableLoadMore();
+            that.stopLoadMore();
 
             that.element.off(NS);
 
@@ -273,24 +275,27 @@
             var that = this,
                 scroller = that._scroller();
 
-           if (that._loadIcon) {
+           if (scroller && that._loadIcon) {
                that.loading = false;
                that._loadIcon.parent().hide();
 
                scroller.unbind("resize", that._scrollerResize)
                        .unbind("scroll", that._scrollerScroll);
-               //trigger event
+
+               that.trigger("endlessScrollStopped");
            }
         },
 
-        disableLoadMore: function() {
-           if (this._loadButton) {
-               this.loading = false;
-               this._loadButton
+        stopLoadMore: function() {
+           var that = this;
+
+           if (that._loadButton) {
+               that.loading = false;
+               that._loadButton
                    .off(CLICK_NS)
                    .parent().hide();
 
-           //trigger event
+               that.trigger("loadMoreStopped");
            }
         },
 
