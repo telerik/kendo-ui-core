@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+export FIREFOX_PROFILE="production"
+export CHROME_USER_DATA_DIR="/tmp/production"
+export NODE_PATH=.:/usr/lib/node_modules
+
+# clear Google Cache
+rm -rf ~/.cache/google-chrome/*
+
+jake merge-scripts
+
+xvfb-run -a sh -c 'tests/tests.js tests/ 8887 1>test-results.xml' || exit 1
+
+rm -f release/*zip
+
+jake demos:staging && rsync -avc deploy/staging/ /var/www/production/
+
+jake bundles && cp deploy/kendoui.aspnetmvc.commercial/changelog.html /var/www/changelog/index.html
+
+jake demos:pack-production
+
+cp -rf release/*zip deploy/online-examples.zip /kendo-builds/Production
+
+jake winjs && cp -R release/winjs/* /kendo-builds/WinJS/Production/
+
+find /kendo-builds/Production/* -mtime +7 -exec rm {} \; ; rm -rf release/*
