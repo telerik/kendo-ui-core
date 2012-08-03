@@ -414,13 +414,9 @@
             var that = this,
                 template = that.options.template,
                 headerTemplate = that.options.headerTemplate,
-                dataIDAttribute = "",
+                dataIDAttribute =  ' data-uid="#=data.uid || ""#"',
                 templateProxy = {},
                 groupTemplateProxy = {};
-
-            if (that.dataSource.group()[0] || that.dataSource.view()[0] instanceof kendo.data.ObservableObject) {
-                dataIDAttribute = ' data-uid="#=uid#"';
-            }
 
             if (typeof template === FUNCTION) {
                 templateProxy.template = template;
