@@ -684,7 +684,10 @@
                 height: element[0].style.height
             });
 
-            that.wrapper = wrapper.addClass("k-widget k-timepicker k-header");
+            that.wrapper = wrapper.addClass("k-widget k-timepicker k-header")
+                                  .addClass(element[0].className)
+                                  .show();
+
             that._inputWrapper = $(wrapper[0].firstChild);
         },
 

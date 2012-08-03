@@ -187,6 +187,12 @@
                 equal(datetimepicker.timeView.ul.children(":first").text(), "6:00 PM");
             });
 
+            test("DateTimePicker copies input's className to the wrapper", function() {
+                var datetimepicker = input.addClass("test").kendoDateTimePicker().data("kendoDateTimePicker");
+
+                ok(datetimepicker.wrapper.hasClass("test"));
+            });
+
             if (!kendo.support.touch) {
                 test("DateTimePicker changes the type of the input", function() {
                     var input = $("<input type='date'/>"),

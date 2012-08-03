@@ -281,6 +281,12 @@
                 equal(datepicker.options.parseFormats[1], "MM/dd/yy");
             });
 
+            test("DatePicker copies input's className to the wrapper", function() {
+                var datepicker = input.addClass("test").kendoDatePicker().data("kendoDatePicker");
+
+                ok(datepicker.wrapper.hasClass("test"));
+            });
+
             if (!kendo.support.touch) {
                 test("DatePickers changes the type of the input", function() {
                     var input = $("<input type='date'/>"),
