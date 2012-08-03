@@ -711,7 +711,7 @@
             }
 
             that.trigger(DATABOUND, {
-                node: node ? parentNode : that.root
+                node: node ? parentNode : undefined
             });
         },
 

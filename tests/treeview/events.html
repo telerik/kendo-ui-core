@@ -312,8 +312,7 @@
 
                equals(calls, 1);
                ok(args);
-               ok(args.node);
-               ok(args.node.is(treeviewObject.root));
+               ok(typeof args.node == "undefined");
            });
 
            test("dataBound event is triggered from sublevel", function() {
