@@ -24,6 +24,8 @@
         MOUSEDOWN_NS = MOUSEDOWN + NS,
         MOUSEMOVE = support.mousemove + NS,
         MOUSECANCEL = support.mousecancel + NS,
+        ENDLESS_SCROLL_STOPPED = "endlessScrollStopped",
+        LOAD_MORE_STOPPED = "loadMoreStopped"
         CLICK = "click",
         CLICK_NS = CLICK + NS,
 
@@ -140,8 +142,8 @@
 
         events: [
             CLICK,
-            "endlessScrollStopped",
-            "loadMoreStopped"
+            ENDLESS_SCROLL_STOPPED,
+            LOAD_MORE_STOPPED
         ],
 
         options: {
@@ -282,7 +284,7 @@
                scroller.unbind("resize", that._scrollerResize)
                        .unbind("scroll", that._scrollerScroll);
 
-               that.trigger("endlessScrollStopped");
+               that.trigger(ENDLESS_SCROLL_STOPPED);
            }
         },
 
@@ -295,7 +297,7 @@
                    .off(CLICK_NS)
                    .parent().hide();
 
-               that.trigger("loadMoreStopped");
+               that.trigger(LOAD_MORE_STOPPED);
            }
         },
 
