@@ -291,6 +291,54 @@
 
                 equal(calls, 2);
            });
+
+           test("dataBound event is triggered after dataSource changes", function() {
+               var calls = 0,
+                   args;
+
+               createTreeView({
+                   dataSource: {
+                       transport: {
+                           read: function(options) {
+                               options.success([ { text: "foo" } ]);
+                           }
+                       }
+                   },
+                   dataBound: function(e) {
+                       calls++;
+                       args = e;
+                   }
+               });
+
+               equals(calls, 1);
+               ok(args);
+               ok(args.node);
+               ok(args.node.is(treeviewObject.root));
+           });
+
+           test("dataBound event is triggered from sublevel", function() {
+               var calls = 0,
+                   args;
+
+               createTreeView({
+                   dataSource: {
+                       transport: {
+                           read: function(options) {
+                               options.success([ { text: "foo", hasChildren: true } ]);
+                           }
+                       }
+                   },
+                   dataBound: function(e) {
+                       calls++;
+                       args = e;
+                   }
+               });
+
+               treeviewObject.expand(".k-item");
+
+               equals(calls, 2);
+               ok(args.node.is(treeview.find(".k-item:first")));
+           });
         </script>
 
         <div id="qunit-fixture"> </div>

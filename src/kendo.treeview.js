@@ -18,6 +18,7 @@
         DRAG = "drag",
         DROP = "drop",
         DRAGEND = "dragend",
+        DATABOUND = "dataBound",
         CLICK = "click",
         VISIBILITY = "visibility",
         UNDEFINED = "undefined",
@@ -285,16 +286,14 @@
 
         events: [
             DRAGSTART,
-
             DRAG,
-
             DROP,
-
             DRAGEND,
+
+            DATABOUND,
+
             EXPAND,
-
             COLLAPSE,
-
             SELECT
         ],
 
@@ -805,6 +804,10 @@
                     items[i].load();
                 }
             }
+
+            that.trigger(DATABOUND, {
+                node: node ? parentNode : that.root
+            });
         },
 
         expand: function (nodes) {
