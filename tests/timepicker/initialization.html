@@ -218,6 +218,12 @@
                 equal(timepicker.element.val(), kendo.toString(value, "t", "bg-BG"));
             });
 
+            test("TimePicker copies input's className to the wrapper", function() {
+                var timepicker = input.addClass("test").kendoTimePicker().data("kendoTimePicker");
+
+                ok(timepicker.wrapper.hasClass("test"));
+            });
+
             if (!kendo.support.touch) {
                 test("TimePicker changes the type of the input", function() {
                     var input = $("<input type='date'/>"),
