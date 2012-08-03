@@ -306,6 +306,19 @@
                 equal(dataSource.view().length, 0);
             });
 
+            test("next method honors total size", 2, function() {
+                var dataSource = new DataSource( {
+                    data: [1, 2, 3],
+                    pageSize: 3
+                });
+
+                dataSource.read();
+                var page = dataSource.next();
+
+                equal(dataSource.total(), 3);
+                equal(page, undefined);
+            });
+
             test("prev method gets the previous page", function() {
                 var dataSource = new DataSource({
                     data: [1,2,3],
@@ -314,13 +327,14 @@
 
                 dataSource.read();
                 dataSource.page(3);
-                dataSource.prev();
+                var page = dataSource.prev();
 
                 var view = dataSource.view();
 
                 equal(view.length, 1);
                 equal(view[0], 2);
                 equal(dataSource.page(), 2);
+                equal(page, 2);
             });
 
             test("prev method does nothing if no previous page", function() {

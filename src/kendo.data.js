@@ -2302,33 +2302,32 @@
                 page = that.page(),
                 total = that.total();
 
-            if (!page) {
+            if (!page || (total && page + 1 > that.totalPages())) {
                 return;
             }
 
-            if (total) {
-                that.page(page + 1);
-            } else {
-                that._skip = page * that.take();
-                that._query({ page: page + 1 });
-            }
+            that._skip = page * that.take();
+
+            page += 1;
+            that._query({ page: page });
+
+            return page;
         },
 
         prev: function() {
             var that = this,
-                page = that.page(),
-                total = that.total();
+                page = that.page();
 
             if (!page || page === 1) {
                 return;
             }
 
-            if (total) {
-                that.page(page - 1);
-            } else {
-                that._skip = that._skip - that.take();
-                that._query({ page: page - 1});
-            }
+            that._skip = that._skip - that.take();
+
+            page -= 1;
+            that._query({ page: page });
+
+            return page;
         },
 
         page: function(val) {
