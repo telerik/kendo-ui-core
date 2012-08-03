@@ -12,8 +12,6 @@ var http       = require("http"),
     util       = require('util'),
     builder    = require('xmlbuilder');
 
-
-
 var WEBROOT    = path.join(path.dirname(__filename), ".."),
     PORT       = process.argv[3] || 8880,
     bayeux     = new faye.NodeAdapter({mount: "/faye", timeout: 100000});
@@ -66,46 +64,39 @@ client.subscribe('/done', function(message) {
     failures += message.failures;
     total += message.total;
 
-    browserProcess.kill();
+    if (!--runningAgents) {
+        outputResult();
+    }
 });
 
-var browsers, browserProcess;
+var browserProcesses = [],
+    testRunnerURL = 'http://localhost:' + PORT + '/tests/testrunner.html',
+    mac = os.type() === "Darwin",
+    browsers = [
+        {
+            exe: mac ? "/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome" : "google-chrome",
+            params: ["--user-data-dir=" + process.env["CHROME_USER_DATA_DIR"], testRunnerURL]
+        },
+        {
+            exe: mac ? "/Applications/Firefox.app/Contents/MacOS/firefox" : "firefox",
+            params: ['-private', '-no-remote', '-P', process.env["FIREFOX_PROFILE"], '-new-window', testRunnerURL]
+        }
+    ],
+    runningAgents = browsers.length;
 
-switch(os.type()) {
-    case "Darwin":
-        browsers = [
-            "/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome",
-            "/Applications/Firefox\ ESR.app/Contents/MacOS/firefox",
-            "/Applications/Firefox.app/Contents/MacOS/firefox"];
-        break;
-    case "Linux":
-        browsers = [
-            "google-chrome",
-            "firefox-esr",
-            "firefox"];
+browsers.forEach(function(browser) {
+    browserProcesses.push(spawn(browser.exe, browser.params));
+});
 
-        break;
+function outputResult() {
+    browserProcesses.forEach(function(process) {
+        process.kill();
+    })
+
+    root.att('tests', total)
+    .att('errors', 0)
+    .att('failures', failures);
+
+    process.stdout.write(doc.toString({pretty: true}));
+    process.exit(failures === 0 ? 0 : 1);
 }
-
-var testRunnerURL = 'http://localhost:' + PORT + '/tests/testrunner.html';
-
-function launchBrowser() {
-    var currentBrowser;
-
-    if (browsers.length) {
-        currentBrowser = browsers.pop();
-        setTimeout(function() {
-            browserProcess = spawn(currentBrowser, ['-private', '-no-remote', testRunnerURL]);
-            browserProcess.on('exit', launchBrowser);
-        }, 20);
-    } else {
-        root.att('tests', total)
-        .att('errors', 0)
-        .att('failures', failures);
-
-        process.stdout.write(doc.toString({pretty: true}));
-        process.exit(failures === 0 ? 0 : 1);
-    }
-}
-
-launchBrowser();
