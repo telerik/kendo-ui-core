@@ -15,8 +15,8 @@
         widgetList = {
             activeicon: {
                 name: "Active Icon",
-                selector: ".km-state-active .km-icon",
-                whitelist: [ "background-color", "background-image", "width", "height" ]
+                selector: ".km-state-active span.km-icon",
+                whitelist: [ "background-color", "background-image" ]
             },
             icon: {
                 name: "Icon",
@@ -90,11 +90,17 @@
                 whitelist: [ "background-color", "background-image", "box-shadow" ],
                 children: [ "scrollitem" ]
             },
+            activebutton: {
+                name: "Active Button",
+                selector: ".km-button.km-state-active",
+                activeSelector: ".km-state-active",
+                whitelist: [ "background-color", "background-image", "border-color" ]
+            },
             button: {
                 name: "Button",
                 selector: ".km-button",
                 activeSelector: ".km-state-active",
-                whitelist: [ "background-color", "background-image"],
+                whitelist: [ "background-color", "background-image", "border-color" ],
                 children: [ "icon", "text" ]
             },
             navbar: {
@@ -202,7 +208,7 @@
                     output = "", widget;
 
                 $(element.parentsUntil(".km-root").add(element).get().reverse()).each(function (idx, value) {
-                    widget = that._findWidgetClass(value);
+                    widget = matchWidget(value);
                     if (widget && !(new RegExp(widget.selector + "\\s" + (widget.activeSelector ? "|" + widget.activeSelector + "\\s" : "")).test(output))) {
                         output = widget.selector + " " + output;
                     }
@@ -225,15 +231,6 @@
                 }
 
                 return output;
-            },
-            _findWidgetClass: function(element) {
-                for(var idx in widgetList) {
-                    if (kendo.support.matchesSelector.call(element, widgetList[idx].selector)) {
-                        return extend( { widget: idx },  widgetList[idx] );
-                    }
-                }
-
-                return false;
             }
         });
 
@@ -247,6 +244,16 @@
                 if (item) { item.parents = [ idx ].concat(item.parents || []); }
             });
         }
+    }
+
+    function matchWidget(element) {
+        for(var idx in widgetList) {
+            if (kendo.support.matchesSelector.call(element, widgetList[idx].selector)) {
+                return extend( { widget: idx },  widgetList[idx] );
+            }
+        }
+
+        return false;
     }
 
     function getPropertySelector(property) {
@@ -384,11 +391,9 @@
 
     window.initTargets = function() {
         setTimeout(function () {
-            var property = "background-color",
+            var property = "",
                 color = "transparent",
-                defaultCSS = { cursor: "default" };
-
-            defaultCSS[property] = "";
+                css, defaultCSS;
 
             $(".drop").kendoDraggable(draggableEvents);
 
@@ -399,9 +404,16 @@
                         offset = target.offset(),
                         height = target.outerHeight(),
                         widgetChildren = widgetTarget.children("div"),
-                        css = {};
+                        widget = matchWidget(target[0]);
 
+                    property = widget.whitelist[0];
+
+                    defaultCSS = { cursor: "default" };
+                    defaultCSS[property] = "";
+
+                    css = {};
                     css[property] = $(e.draggable.element).data("color");
+
                     target.css(css);
                     widgetTarget
                         .show()
@@ -414,7 +426,7 @@
                             left: offset.left
                         })
                         .children("span")
-                        .text("Widget");
+                        .text(widget.name);
 
                     widgetChildren
                         .width(target.outerWidth())
@@ -422,7 +434,7 @@
                         .last()
                         .css("top", height)
                         .children()
-                        .text("background-color")
+                        .text(property)
                         .end().end()
                         .css("display");
 
@@ -457,7 +469,7 @@
                         });
                         contextMenu.show(offset.left + e.offsetX, offset.top + e.offsetY);
                     } else {
-                        target.parents(".device").data("kendoStyleEngine").update(target, { "background-color": color });
+                        target.parents(".device").data("kendoStyleEngine").update(target, css);
                     }
                 }
             });
@@ -567,24 +579,20 @@
 
     $(".menu").kendoMenu();
 
-    $("#getStyles").click(function () {
-        var output = "";
-
-        $.each(devices, function () {
-            var that = this.toString();
-            if ($("#" + that + "box")[0].checked) {
-                output += $("#" + that + "Device").data("kendoStyleEngine").getCSS();
-            }
-        });
-
-        alert(output);
-    });
-
     var importWindow = $("#importWindow").kendoWindow({
         width: "400px",
         height: "400px",
         maxHeight: "400px",
         title: "Import Styles",
+        visible: false,
+        modal: true
+    }).data("kendoWindow");
+
+    var exportWindow = $("#exportWindow").kendoWindow({
+        width: "400px",
+        height: "400px",
+        maxHeight: "400px",
+        title: "Export Styles",
         visible: false,
         modal: true
     }).data("kendoWindow");
@@ -597,6 +605,21 @@
         }
 
         importWindow.center().open();
+    });
+
+    $("#exportStyles").click(function () {
+        var output = "";
+
+        $.each(devices, function () {
+            var that = this.toString();
+            if ($("#" + that + "box")[0].checked) {
+                output += $("#" + that + "Device").data("kendoStyleEngine").getCSS();
+            }
+        });
+
+        exportWindow.element.find("textarea").text(output);
+
+        exportWindow.center().open();
     });
 
     $("#import").click(function () {
