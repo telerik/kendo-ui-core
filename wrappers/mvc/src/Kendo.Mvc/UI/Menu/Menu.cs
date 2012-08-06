@@ -177,7 +177,17 @@ namespace Kendo.Mvc.UI
                 isPathHighlighted = true;
 
                 item.Selected = item.Parent != null;
-                
+
+                do
+                {
+                    if (!item.Selected)
+                    {
+                        item.HtmlAttributes.AppendInValue("class", " ", "k-state-highlighted");
+                    }
+                    item = item.Parent;
+                }
+                while (item != null);
+
                 return;
             }
             item.Items.Each(HighlightSelectedItem);
