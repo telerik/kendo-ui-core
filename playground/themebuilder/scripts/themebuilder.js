@@ -1,6 +1,7 @@
 (function ($, undefined) {
 
     var devices = [ "ios", "android", "blackberry", "meego" ], CtrlDown = false, contextMenu,
+        deviceClasses = $.map(devices, function (value) { return ".km-" + value; }),
         colors = [ "color", "background-color", "border-color" ],
         TRANSITION = kendo.support.transitions.css + "transition",
         fillSvg = 'url(\'data:image/svg+xml;utf-8,<svg xmlns="http:%2F%2Fwww.w3.org%2F2000%2Fsvg" width="28" height="38"><path fill="rgba(255,255,255,.3)" d="M26.667,15.236c0-6.996-5.671-12.667-12.667-12.667c-6.995,0-12.667,5.672-12.667,12.667c0,4.78,2.651,8.938,6.562,11.097 C10.695,31.772,14,36.95,14,36.95s3.305-5.178,6.105-10.617C24.017,24.175,26.667,20.017,26.667,15.236z"%2F><path fill="%23FFF" d="M26.667,13.819c0-6.996-5.671-12.667-12.667-12.667c-6.995,0-12.667,5.672-12.667,12.667 c0,4.78,2.651,8.938,6.562,11.097C10.695,30.355,14,35.533,14,35.533s3.305-5.178,6.105-10.617 C24.017,22.758,26.667,18.6,26.667,13.819z"%2F><linearGradient id="ID" gradientUnits="userSpaceOnUse" x1="14" y1="25" x2="14" y2="0"><stop offset="0" style="stop-color:%23f984ef"%2F><%2FlinearGradient><circle fill="url(%23ID)" cx="14" cy="14" r="11"%2F><path fill="rgba(0,0,0,.3)" d="M14,4.403c5.616,0,10.189,4.413,10.473,9.958c0.009-0.18,0.027-0.359,0.027-0.542c0-5.799-4.701-10.5-10.5-10.5 S3.5,8.021,3.5,13.82c0,0.183,0.018,0.361,0.027,0.542C3.811,8.816,8.384,4.403,14,4.403z"%2F><%2Fsvg>\')',
@@ -9,7 +10,8 @@
         Widget = ui.Widget,
         applications = {},
         counter = 1,
-        clones = $.extend([], devices),
+        extend = $.extend,
+        clones = extend([], devices),
         widgetList = {
             activeicon: {
                 name: "Active Icon",
@@ -150,13 +152,16 @@
             hint: function (element) {
                 return kendo.support.touch ? $("<div style='width: 28px; height: 38px'/>").css("background-image", fillSvg.replace("%23f984ef", element.css("background-color"))) : undefined;
             },
-            dragstart: function (e) {
-                var color = this.element.css("background-color"),
+            dragstart: function () {
+                var element = this.element,
+                    color = element.css("background-color"),
                     doc = document.documentElement;
 
-                this.element.data("color", new Color(color).get());
+                element.data("color", new Color(color).get());
+
                 $(doc).addClass("drop-override");
                 doc.style.cssText = "cursor: " + cursorSvg.replace("%23f984ef", color) + " !important;";
+                addRecentcolor(element);
             },
             dragend: function () {
                 var doc = document.documentElement;
@@ -182,12 +187,18 @@
             options: {
                 name: "StyleEngine"
             },
-            populate: function() {
+            populate: function(styles) {
+                this.object = extend(true, this.object, styles);
 
+                var that = this,
+                    style = $("<style scoped>\n" + that.getCSS() + "</style>").insertAfter(that.styleElement);
+
+                that.styleElement.remove();
+                that.styleElement = style;
             },
             update: function(element, styles) {
                 element = $(element);
-                var that = this, style,
+                var that = this, style = {},
                     output = "", widget;
 
                 $(element.parentsUntil(".km-root").add(element).get().reverse()).each(function (idx, value) {
@@ -198,11 +209,9 @@
                 });
                 output = output.substr(0, output.length-1);
 
-                this.object[output] = $.extend(this.object[output], styles);
+                style[output] = extend(this.object[output], styles);
 
-                style = $("<style scoped>\n" + that.getCSS() + "</style>").insertAfter(that.styleElement);
-                that.styleElement.remove();
-                that.styleElement = style;
+                that.populate(style);
             },
             getCSS: function () {
                 var object = this.object, output = "";
@@ -220,7 +229,7 @@
             _findWidgetClass: function(element) {
                 for(var idx in widgetList) {
                     if (kendo.support.matchesSelector.call(element, widgetList[idx].selector)) {
-                        return $.extend( { widget: idx },  widgetList[idx] );
+                        return extend( { widget: idx },  widgetList[idx] );
                     }
                 }
 
@@ -508,42 +517,46 @@
         });
     };
 
+    function addRecentcolor(element) {
+        var recent = $(element).clone()
+            .prependTo(".recent-colors")
+            .addClass("k-state-active")
+            .siblings(".k-state-active")
+            .removeClass("k-state-active").end();
+
+        recent.kendoDraggable(draggableEvents);
+        recentPicker.popup.wrapper.addClass("k-static-shown");
+        recentPicker.open(recent);
+
+        recent.click(function (e) {
+            var that = $(this), item;
+
+            if (e.button == 0) {
+                that.addClass("k-state-active")
+                    .siblings(".k-state-active")
+                    .removeClass("k-state-active");
+            } else if (e.button == 1) {
+                if (this == recentPicker.target[0]) {
+                    item = that.next();
+                    !item[0] && (item = that.prev());
+
+                    if (!item[0]) {
+                        recentPicker.popup.wrapper.removeClass("k-static-shown");
+                        recentPicker.close();
+                    } else {
+                        recentPicker.open(item);
+                    }
+                }
+                that.remove();
+            }
+        });
+    }
+
     while (defaultColors[i]) {
        $('<div class="drop" style="background-color:' + defaultColors[i] + '" data-color="' + defaultColors[i++] + '" />')
                 .insertBefore(".recent-colors")
-                .click(function (e) {
-                    var recent = $(this).clone()
-                        .prependTo(".recent-colors")
-                        .addClass("k-state-active")
-                        .siblings(".k-state-active")
-                        .removeClass("k-state-active").end();
-
-                    recent.kendoDraggable(draggableEvents);
-                    recentPicker.popup.wrapper.addClass("k-static-shown");
-                    recentPicker.open(recent);
-
-                    recent.click(function (e) {
-                        var that = $(this), item;
-
-                        if (e.button == 0) {
-                            that.addClass("k-state-active")
-                                .siblings(".k-state-active")
-                                .removeClass("k-state-active");
-                        } else if (e.button == 1) {
-                            if (this == recentPicker.target[0]) {
-                                item = that.next();
-                                !item[0] && (item = that.prev());
-
-                                if (!item[0]) {
-                                    recentPicker.popup.wrapper.removeClass("k-static-shown");
-                                    recentPicker.close();
-                                } else {
-                                    recentPicker.open(item);
-                                }
-                            }
-                            that.remove();
-                        }
-                    });
+                .click(function () {
+                    addRecentcolor(this);
                 });
 
        if (!(i % 12)) {
@@ -567,4 +580,63 @@
         alert(output);
     });
 
+    var importWindow = $("#importWindow").kendoWindow({
+        width: "400px",
+        height: "400px",
+        maxHeight: "400px",
+        title: "Import Styles",
+        visible: false,
+        modal: true
+    }).data("kendoWindow");
+
+    $("#importStyles").click(function () {
+        if (sessionStorage && sessionStorage.length) {
+            try {
+                $("#importWindow .k-textbox")[0].value = sessionStorage.getItem("import");
+            } catch(err) {}
+        }
+
+        importWindow.center().open();
+    });
+
+    $("#import").click(function () {
+        var imports = $("#importWindow .k-textbox")[0].value.replace(/<\s*\/.*?>/gm, ""),
+            stylesheet = $("<style scoped>" + imports + "</style>").appendTo(document.body),
+            styles = {}, style;
+
+        if (stylesheet[0].sheet) {
+            $.each(stylesheet[0].sheet.rules, function () {
+                deviceClasses.forEach(function (value) {
+                    if (this.selectorText.indexOf(value) === 0) {
+
+                        style = {};
+                        for (var i = 0, len = this.style.length; i < len; i++) {
+                            style[this.selectorText] = {};
+                            style[this.selectorText][this.style[i]] = this.style[this.style[i]];
+                        }
+
+                        styles[value] = extend(styles[value], style);
+                    }
+                }, this);
+            });
+        }
+
+        for (var idx in styles) {
+            var engine = $(idx).data("kendoStyleEngine");
+
+            if (!$("#mixStyles")[0].checked) {
+                engine.object = {};
+            }
+
+            engine.populate(styles[idx]);
+        }
+
+        stylesheet.remove();
+
+        try {
+            sessionStorage.setItem("import", imports);
+        } catch(err) {}
+
+        importWindow.close();
+    });
 })(jQuery);
