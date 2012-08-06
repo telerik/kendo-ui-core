@@ -5,6 +5,7 @@
         proxy = $.proxy,
         extend = $.extend,
         placeholderSupported = kendo.support.placeholder,
+        isFunction = $.isFunction,
         trimSlashesRegExp = /(^\/|\/$)/g,
         CHANGE = "change",
         ERROR = "error",
@@ -54,10 +55,24 @@
                     kendo.data.RemoteTransport.fn.init.call(this, $.extend(true, {}, this.options, options));
                 },
                 read: function(options) {
-                    if ($.isFunction(this.options.read)) {
+                    if (isFunction(this.options.read)) {
                         this.options.read.call(this, options);
                     } else {
                         kendo.data.RemoteTransport.fn.read.call(this, options);
+                    }
+                },
+                create: function(options) {
+                    if (isFunction(this.options.create)) {
+                        this.options.create.call(this, options);
+                    } else {
+                        kendo.data.RemoteTransport.fn.create.call(this, options);
+                    }
+                },
+                destory: function(options) {
+                    if (isFunction(this.options.destory)) {
+                        this.options.destory.call(this, options);
+                    } else {
+                        kendo.data.RemoteTransport.fn.destory.call(this, options);
                     }
                 }
             })
@@ -120,13 +135,17 @@
 
             Widget.fn.init.call(that, element, options);
 
-            that.element.addClass("k-image-browser");
+            that.element.addClass("k-imagebrowser");
+
+            that.element
+                .on(CLICK + NS, ".k-toolbar button:not(.k-state-disabled):has(.k-delete)", proxy(that._deleteClick, that))
+                .on(CLICK + NS, ".k-toolbar button:not(.k-state-disabled):has(.k-addfolder)", proxy(that._addClick, that))
+                .on("keydown" + NS, "li.k-state-selected input", proxy(that._directoryKeyDown, that))
+                .on("blur" + NS, "li.k-state-selected input", proxy(that._directoryBlur, that));
 
             that._dataSource();
 
             that.refresh();
-
-            that.toolbar.on(CLICK + NS, "button:not(.k-state-disabled):has(.k-delete)", proxy(that._deleteClick, that));
 
             that.path(that.options.path);
         },
@@ -149,13 +168,16 @@
         events: [ERROR, CHANGE],
 
         destroy: function() {
-            Widget.fn.destroy.call(this);
+            var that = this;
 
-            this.dataSource
-                .unbind(ERROR, this._errorHandler);
+            Widget.fn.destroy.call(that);
 
-            this.list
-                .add(this.toolbar)
+            that.dataSource
+                .unbind(ERROR, that._errorHandler);
+
+            that.element
+                .add(that.list)
+                .add(that.toolbar)
                 .off(NS);
         },
 
@@ -182,7 +204,8 @@
                 messages = that.options.messages,
                 link,
                 popup,
-                arrangeBy = [{ text: messages.orderByName, value: "name", ns: kendo.ns }, { text: messages.orderBySize, value: "size", ns: kendo.ns }];
+                arrangeBy = [{ text: messages.orderByName, value: "name", ns: kendo.ns },
+                    { text: messages.orderBySize, value: "size", ns: kendo.ns }];
 
             that.toolbar = $(template(messages))
                 .appendTo(that.element)
@@ -222,6 +245,90 @@
             if (item.length && that._showMessage(message, "confirm")) {
                 that.listView.remove(item);
             }
+        },
+
+        _addClick: function() {
+            this.createDirectory();
+        },
+
+        createDirectory: function() {
+            var that = this,
+                idx,
+                length,
+                lastDirectoryIdx = 0,
+                typeField = that._getFieldName(TYPEFIELD),
+                view = that.dataSource.data(),
+                name = that._nameDirectory(),
+                model = {};
+
+            for (idx = 0, length = view.length; idx < length; idx++) {
+                if (view[idx].get(typeField) === "d") {
+                    lastDirectoryIdx = idx;
+                }
+            }
+
+            model[typeField] = "d";
+            model[that._getFieldName(NAMEFIELD)] = name;
+            model._defaultId = name; // mark it as new
+
+            that.listView.one("dataBound", function() {
+                var input = that.listView.select().find("input");
+
+                setTimeout(function() {
+                    input.select();
+                });
+            });
+
+            that.dataSource.insert(++lastDirectoryIdx, model);
+        },
+
+        _directoryKeyDown: function(e) {
+            if (e.keyCode == 13) {
+                e.currentTarget.blur();
+            }
+        },
+
+        _directoryBlur: function(e) {
+            var that = this,
+                tile = $(e.currentTarget).closest("li.k-state-selected"),
+                model;
+
+            if (tile.length) {
+                model = that.dataSource.getByUid(tile.attr(kendo.attr("uid")));
+
+                model.set(that._getFieldName(NAMEFIELD), e.currentTarget.value);
+                that.dataSource.sync();
+            }
+        },
+
+        _nameDirectory: function() {
+            var name = "New folder",
+                data = this.dataSource.data(),
+                directoryNames = [],
+                typeField = this._getFieldName(TYPEFIELD),
+                nameField = this._getFieldName(NAMEFIELD),
+                candidate,
+                idx,
+                length;
+
+            for (idx = 0, length = data.length; idx < length; idx++) {
+                if (data[idx].get(typeField) === "d" && data[idx].get(nameField).indexOf(name) > -1) {
+                    directoryNames.push(data[idx].get(nameField));
+                }
+            }
+
+            if ($.inArray(name, directoryNames) > -1) {
+                idx = 2;
+
+                do {
+                    candidate = name + " (" + idx + ")";
+                    idx++;
+                } while ($.inArray(candidate, directoryNames) > -1);
+
+                name = candidate;
+            }
+
+            return name;
         },
 
         orderBy: function(field) {
@@ -266,11 +373,12 @@
         },
 
         _dblClick: function(e) {
-            var folder = this.dataSource.getByUid($(e.currentTarget).attr(kendo.attr("uid")));
+            var that = this,
+                folder = that.dataSource.getByUid($(e.currentTarget).attr(kendo.attr("uid")));
 
             if (folder) {
-                this.path(concatPaths(this.path(), folder.get(this._getFieldName(NAMEFIELD))));
-                this.breadcrumbs.value(this.path());
+                that.path(concatPaths(that.path(), folder.get(that._getFieldName(NAMEFIELD))));
+                that.breadcrumbs.value(that.path());
             }
         },
 
@@ -418,7 +526,7 @@
 
         _itemTmpl: function() {
             var that = this,
-                html = '<li class="k-tile" ' + kendo.attr("uid") + '="#=uid#" ';
+                html = '<li class="k-tile #= isNew() ? \"k-state-selected\" : \"\" #" ' + kendo.attr("uid") + '="#=uid#" ';
 
             html += kendo.attr("type") + '="${' + that._getFieldName(TYPEFIELD) + '}">';
             html += '#if(' + that._getFieldName(TYPEFIELD) + ' == "d") { #';
@@ -426,8 +534,12 @@
             html += "#}else{#";
             html += '<div class="k-thumb"><span class="k-icon k-loading"></span></div>';
             html += "#}#";
+            html += '#if(' + that._getFieldName(TYPEFIELD) + ' == "d" && isNew()) { #';
+            html += '<input class="k-input" value="#=' + that._getFieldName(NAMEFIELD) + '#"/>';
+            html += "#} else {#";
             html += '<strong>${' + that._getFieldName(NAMEFIELD) + '}</strong>';
             html += '#if(' + that._getFieldName(TYPEFIELD) + ' == "f") { # <span class="k-filesize">${this.sizeFormatter(' + that._getFieldName(SIZEFIELD) + ')}</span> #}#';
+            html += "#}#";
             html += '</li>';
 
             return proxy(kendo.template(html), { sizeFormatter: sizeFormatter } );

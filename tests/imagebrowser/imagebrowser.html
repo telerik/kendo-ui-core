@@ -9,6 +9,8 @@
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.validator.js"></script>
+        <script src="../../src/kendo.editable.js"></script>
         <script src="../../src/kendo.popup.js"></script>
         <script src="../../src/kendo.selectable.js"></script>
         <script src="../../src/kendo.listview.js"></script>
@@ -500,6 +502,50 @@
                 browser.toolbar.find(".k-delete").click();
 
                 ok(!remove.calls("remove"));
+            });
+
+            test("create directory", function() {
+                var browser = setup({}, []);
+
+                browser.createDirectory();
+
+                ok(!browser.list.find("li.k-tile-empty").length);
+                equal(browser.list.find("li").length, 1);
+                ok(browser.list.find("li").hasClass("k-state-selected"));
+                equal(browser.dataSource.data().length, 1);
+            });
+
+            test("createDirectory generates unique name", function() {
+                var browser = setup({}, [{ name: "New folder", type: "d" }]);
+
+                browser.createDirectory();
+
+                equal(browser.list.find("li:last input").val(), "New folder (2)");
+            });
+
+            test("createDirectory generates first available unique name", function() {
+                var browser = setup({}, [{ name: "New folder (2)", type: "d" }]);
+
+                browser.createDirectory();
+
+                equal(browser.list.find("li:last input").val(), "New folder");
+            });
+
+            test("bluring the new directory input set the value", 2, function() {
+                var browser = setup({
+                    transport: {
+                        create:
+                            function() { ok(true); }
+                        }
+                }, []);
+
+                browser.createDirectory();
+
+                var tile =  browser.list.find("li:last");
+                var model = browser.dataSource.getByUid(tile.attr("data-uid"));
+
+                tile.find("input").val("foo").blur();
+                equal(model.get("name"), "foo");
             });
         </script>
     </body>
