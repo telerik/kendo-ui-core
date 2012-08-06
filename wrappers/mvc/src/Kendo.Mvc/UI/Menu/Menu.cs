@@ -182,7 +182,7 @@ namespace Kendo.Mvc.UI
                 {
                     if (!item.Selected)
                     {
-                        item.HtmlAttributes.AppendInValue("class", " ", "k-state-highlighted");
+                        item.HtmlAttributes.AppendInValue("class", " ", "k-state-highlight");
                     }
                     item = item.Parent;
                 }
