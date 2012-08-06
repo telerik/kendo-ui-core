@@ -29,6 +29,7 @@
     <script src="../../src/kendo.mobile.view.js"></script>
     <script src="../../src/kendo.mobile.pane.js"></script>
     <script src="../../src/kendo.mobile.application.js"></script>
+    <script src="../../src/kendo.window.js"></script>
     <script src="scripts/slider.js"></script>
     <script src="scripts/colorengine.js"></script>
     <script src="scripts/gradientengine.js"></script>
@@ -560,6 +561,14 @@
             color: #ff311d;
             border: 1px solid #fa0;
         }
+
+        #importWindow .k-textbox
+        {
+            width: 99.9%;
+            height: 340px;
+            box-sizing: border-box;
+            resize: none;
+        }
     </style>
 </head>
 <body class="body">
@@ -885,6 +894,14 @@
         <input id="meegobox" type="checkbox" class="k-checkbox" />
         <label for="meegobox" class="k-checkbox">MeeGo</label>
         <button class="k-button" id="getStyles">Get Styles</button>
+        <button class="k-button" id="importStyles">Import Styles</button>
+        <div id="importWindow">
+            <textarea class="k-textbox"></textarea>
+            <br /><br />
+            <input id="mixStyles" type="checkbox" checked="checked" class="k-checkbox"/>
+            <label for="mixStyles" class="k-checkbox">Mix with existing styles</label>
+            <button class="k-button" style="float: right;" id="import">Import</button>
+        </div>
     </div>
     <script type="text/javascript" src="scripts/themebuilder.js"></script>
 </body>
