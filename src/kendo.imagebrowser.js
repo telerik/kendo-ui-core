@@ -26,7 +26,7 @@
                                 '<button type="button" class="k-button k-button-icon k-button-bare"><span class="k-icon k-addfolder"></span></button>' +
                                 '<button type="button" class="k-button k-button-icon k-button-bare k-state-disabled"><span class="k-icon k-delete"></span></button>&nbsp;' +
                             '</div>' +
-                            '<div class="k-tiles-arrange">#=orderBy#: <a href="\\#" class="k-link"><span>#=orderByName#</span><span class="k-icon k-arrow-down"></span></a>' +
+                            '<div class="k-tiles-arrange">#=orderBy#: <a href="\\#" class="k-link"><span>#=orderByName#</span><span class="k-icon k-i-arrow-s"></span></a>' +
                             '</div>' +
                         '</div>';
 
@@ -279,7 +279,7 @@
                 });
             });
 
-            that.dataSource.insert(++lastDirectoryIdx, model);
+            model = that.dataSource.insert(++lastDirectoryIdx, model);
         },
 
         _directoryKeyDown: function(e) {
@@ -662,7 +662,7 @@
                 if (!placeholderSupported) {
                     $('<label style="display:block">' + this.options.label + '</label>').insertBefore(element);
                 }
-                $('<a href="#" class="k-icon k-search"/>').appendTo(wrapper);
+                $('<a href="#" class="k-icon k-i-search k-search"/>').appendTo(wrapper);
             }
 
             this.wrapper = wrapper;
@@ -808,7 +808,7 @@
                 segment = segments[idx];
                 if (segment) {
                     html += '<a class="k-link" href="#">' + segments[idx] + '</a>';
-                    html += '<span class="k=icon k-arrow-next">&gt;</span>';
+                    html += '<span class="k-icon k-i-arrow-e">&gt;</span>';
                 }
             }
             this.overlay.empty().append($(html));
