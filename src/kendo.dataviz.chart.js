@@ -4077,6 +4077,9 @@
                 }
             }
 
+            if (result.length === 0) {
+                result.push(defaultValue);
+            }
             return result;
         },
 
@@ -4099,6 +4102,10 @@
 
             if (axisBox.x2 > paneBox.x2) {
                 axisBox.translate(paneBox.x2 - axisBox.x2, 0);
+            }
+
+            if (axisBox.x1 < paneBox.x1) {
+                axisBox.translate(paneBox.x1 - axisBox.x1, 0);
             }
 
             axis.reflow(axisBox);
