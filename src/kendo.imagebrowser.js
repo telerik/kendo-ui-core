@@ -696,7 +696,8 @@
                 .on("focus" + BREADCRUBMSNS, "input", proxy(that._focus, that))
                 .on("blur" + BREADCRUBMSNS, "input", proxy(that._blur, that))
                 .on("keydown" + BREADCRUBMSNS, "input", proxy(that._keydown, that))
-                .on(CLICK + BREADCRUBMSNS, "a", proxy(that._click, that));
+                .on(CLICK + BREADCRUBMSNS, "a.k-i-arrow-n:first", proxy(that._rootClick, that))
+                .on(CLICK + BREADCRUBMSNS, "a:not(.k-i-arrow-n)", proxy(that._click, that));
 
             that.value(that.options.value);
         },
@@ -730,7 +731,12 @@
 
         _click: function(e) {
             e.preventDefault();
-            this._update(this._path($(e.target).prevAll("a").andSelf()));
+            this._update(this._path($(e.target).prevAll("a:not(.k-i-arrow-n)").andSelf()));
+        },
+
+        _rootClick: function(e) {
+            e.preventDefault();
+            this._update("");
         },
 
         _focus: function() {
@@ -807,6 +813,9 @@
             for (idx = 0, length = segments.length; idx < length; idx++) {
                 segment = segments[idx];
                 if (segment) {
+                    if (!html) {
+                        html += '<a href="#" class="k-icon k-i-arrow-n">root</a>';
+                    }
                     html += '<a class="k-link" href="#">' + segments[idx] + '</a>';
                     html += '<span class="k-icon k-i-arrow-e">&gt;</span>';
                 }

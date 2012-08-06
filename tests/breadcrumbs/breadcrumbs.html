@@ -68,25 +68,25 @@
             test("renders elements for the path", function() {
                 var breadcrumbs = setup({ value: "/foo/bar" });
 
-                equal(breadcrumbs.wrapper.find("a").length, 2);
+                equal(breadcrumbs.wrapper.find("a").length, 3); // plus one for the root
             });
 
             test("value updates the breadcrumbs", function() {
                 var breadcrumbs = setup();
                 breadcrumbs.value("foo/bar");
-                equal(breadcrumbs.wrapper.find("a").length, 2);
+                equal(breadcrumbs.wrapper.find("a").length, 3);// plus one for the root
             });
 
             test("previous breadcrumbs are cleared", function() {
                 var breadcrumbs = setup();
                 breadcrumbs.value("foo/bar");
                 breadcrumbs.value("foo/bar");
-                equal(breadcrumbs.wrapper.find("a").length, 2);
+                equal(breadcrumbs.wrapper.find("a").length, 3);// plus one for the root
             });
 
             test("should condense adjacent slashes", function() {
                 var breadcrumbs = setup({ value: "///foo///bar///baz" });
-                equal(breadcrumbs.wrapper.find("a").length, 3);
+                equal(breadcrumbs.wrapper.find("a").length, 4);// plus one for the root
                 equal(breadcrumbs.value(), "/foo/bar/baz");
             });
 
@@ -204,7 +204,7 @@
                 var breadcrumbs = setup({
                     value: "/foo/bar"
                 });
-                breadcrumbs.wrapper.find("a:first").click();
+                breadcrumbs.wrapper.find("a:not(.k-i-arrow-n)").first().click();
                 equal(breadcrumbs.value(), "/foo");
             });
         </script>
