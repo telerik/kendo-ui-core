@@ -152,7 +152,7 @@
         },
         length: function(input, params) {
             var len = $.trim(input.val()).length;
-            return len >= (params.min || 0) && len <= (params.max || 0);
+            return (!params.min || len >= (params.min || 0)) && (!params.max || len <= (params.max || 0));
         }
     };
 

@@ -224,6 +224,41 @@
                 ok(!validator.validate());
             });
 
+            test("validate returns false if input value length is greated than the specified value", function() {
+                var input = $('<input type="text" value="foo" data-val-length="message" data-val-length-max="2"/>'),
+                    validator = setup(input);
+
+                ok(!validator.validate());
+            });
+
+            test("validate returns true if input value length matches the specified value", function() {
+                var input = $('<input type="text" value="foo" data-val-length="message" data-val-length-max="3"/>'),
+                    validator = setup(input);
+
+                ok(validator.validate());
+            });
+
+            test("validate returns true if input max and min length attributes are missing", function() {
+                var input = $('<input type="text" value="foo" data-val-length="message" />'),
+                    validator = setup(input);
+
+                ok(validator.validate());
+            });
+
+            test("validate returns false if input max length attribute is missing but min is specified and not matched", function() {
+                var input = $('<input type="text" value="foo" data-val-length="message" data-val-length-min="4" />'),
+                    validator = setup(input);
+
+                ok(!validator.validate());
+            });
+
+            test("validate returns true if input max length attribute is missing but min is specified and is matched", function() {
+                var input = $('<input type="text" value="foo" data-val-length="message" data-val-length-min="3" />'),
+                    validator = setup(input);
+
+                ok(validator.validate());
+            });
+
             module("kendo.ui.validation.mvc metadata validation", {
                 setup: function() {
                     container = $('<div id="container"/>').appendTo("<form/>").appendTo($(document.body));
