@@ -264,6 +264,7 @@ textarea.k-textbox:hover,
 .k-state-hover,
 .k-state-selected,
 .k-state-focused,
+.k-state-highlight,
 .k-tabstrip-items .k-item
 {
     background-image: @texture-url;
@@ -352,6 +353,12 @@ textarea.k-textbox:hover,
     color: @active-text-color;
 }
 
+.k-state-highlight
+{
+    background-color: @active-background-color;
+    color: @active-text-color;
+}
+
 .k-state-focused
 {
     color: @hover-text-color;
@@ -362,6 +369,7 @@ textarea.k-textbox:hover,
 .k-state-selected,
 .k-list>.k-state-selected,
 .k-list>.k-state-focused,
+.k-list>.k-state-highlight,
 .k-panelbar > .k-state-selected,
 .k-panel > .k-state-selected,
 .k-button:active,
@@ -374,7 +382,8 @@ textarea.k-textbox:hover,
     border-color: @selected-border-color;
 }
 
-.k-state-selected.k-state-focused
+.k-state-selected.k-state-focused,
+.k-state-selected.k-state-highlight
 {
     background-color: darken(@selected-background-color, 8%);
 }
@@ -657,6 +666,7 @@ textarea.k-textbox:hover,
 
 .k-list .k-state-hover,
 .k-list .k-state-focused,
+.k-list .k-state-highlight,
 .k-list .k-state-selected,
 .k-dropzone,
 .k-upload-files

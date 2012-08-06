@@ -42,7 +42,8 @@
 .k-tooltip,
 .k-state-hover,
 .k-state-focused,
-.k-state-selected
+.k-state-selected,
+.k-state-highlight
 {
     background-position: 0 -258px;
 }
