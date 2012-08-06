@@ -624,12 +624,6 @@
     background: linear-gradient(top, rgba(0,0,0,.7), rgba(0,0,0,.9));
 }
 
-.km-android .km-button.km-state-active .km-icon
-{
-    position: relative;
-    z-index: 1;
-}
-
 .km-android .km-navbar .km-icon
 {
     margin-left: .5em;
@@ -640,10 +634,8 @@
 .km-android .km-tabstrip .km-icon
 {
     position: relative;
-    left: 50%;
-    margin-left: -2em;
-    margin-left: ~"-1.25rem";
     margin-bottom: .3em;
+    z-index: 2;
 }
 
 .km-android.km-horizontal .km-tabstrip .km-icon
@@ -653,12 +645,12 @@
 
 .km-android .km-tabstrip .km-button .km-icon
 {
-    background: #222 linear-gradient(top, rgba(255,255,255,.2), rgba(255,255,255,0));
+    background: #555 linear-gradient(top, rgba(255,255,255,.2), rgba(255,255,255,0));
 }
 
 .km-android .km-tabstrip .km-state-active .km-icon
 {
-    background: linear-gradient(top, #9CC4E9, #3F99D2, #53BFE5);
+    background: #3F99D2 linear-gradient(top, rgba(255,255,255,.6) 0, rgba(255,255,255,0) 50%, rgba(255,255,255,.3) 100%);
 }
 
 /* Pull To Refresh */
