@@ -57,6 +57,7 @@
         BLACK = "#000",
         BOTTOM = "bottom",
         BUBBLE = "bubble",
+        CANDLE_STICK = "candleStick",
         CATEGORY = "category",
         CENTER = "center",
         CHANGE = "change",
@@ -132,7 +133,7 @@
         YEARS = "years",
         ZERO = "zero";
 
-    var CATEGORICAL_CHARTS = [BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA],
+    var CATEGORICAL_CHARTS = [BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA, CANDLE_STICK],
         XY_CHARTS = [SCATTER, SCATTER_LINE, BUBBLE];
 
     var DateLabelFormats = {
@@ -2294,7 +2295,6 @@
             })[0];
 
             marker.refresh(doc.getElementById(this.options.id));
-
         }
     });
 
@@ -3006,6 +3006,192 @@
         formatPointValue: function(point, format) {
             var value = point.value;
             return autoFormat(format, value.x, value.y, value.size, point.category);
+        }
+    });
+
+    var CandleStick = ChartElement.extend({
+        init: function(value, options) {
+            var point = this;
+
+            ChartElement.fn.init.call(point, options);
+            point.value = value;
+            point.options.id = uniqueId();
+            point.makeDiscoverable();
+        },
+
+        options: {
+
+        },
+
+        render: function() {
+            var point = this,
+                options = point.options,
+                markers = options.markers,
+                labels = options.labels,
+                markerBackground = markers.background,
+                markerBorder = deepExtend({}, markers.border),
+                labelText = point.value,
+                labelTemplate;
+
+            if (point._rendered) {
+                return;
+            } else {
+                point._rendered = true;
+            }
+
+            if (labels.visible) {
+                if (labels.template) {
+                    var labelTemplate = template(labels.template);
+                    labelText = labelTemplate({
+                        dataItem: point.dataItem,
+                        category: point.category,
+                        value: point.value,
+                        series: point.series
+                    });
+                } else if (labels.format) {
+                    labelText = point.formatValue(labels.format);
+                }
+                point.label = new TextBox(labelText,
+                    deepExtend({
+                        id: uniqueId(),
+                        align: CENTER,
+                        vAlign: CENTER,
+                        margin: {
+                            left: 5,
+                            right: 5
+                        }
+                    }, labels)
+                );
+                point.append(point.label);
+            }
+        },
+
+        reflow: function(lhSlot, ocSlot) {
+            var point = this,
+                options = point.options,
+                pos;
+
+            point.realBody = ocSlot;
+            point.box = lhSlot;
+            point.points = [];
+
+            if (options.vertical) {
+                pos = lhSlot.center().x;
+                point.points.push(new Point2D(pos, lhSlot.y1));
+                point.points.push(new Point2D(pos, ocSlot.y1));
+                point.points.push(new Point2D(pos, ocSlot.y2));
+                point.points.push(new Point2D(pos, lhSlot.y2));
+            } else {
+                pos = lhSlot.center().y;
+                point.points.push(new Point2D(lhSlot.x1, pos));
+                point.points.push(new Point2D(ocSlot.x1, pos));
+                point.points.push(new Point2D(ocSlot.x2, pos));
+                point.points.push(new Point2D(lhSlot.x2, pos));
+            }
+        },
+
+        getViewElements: function(view) {
+            var point = this,
+                series = point.series,
+                elements = [],
+                rectStyle = {
+                    fill: "red"
+                },
+                lineStyle = {
+                    fill: "red",
+                    strokeWidth: 2,
+                    stroke: "red"
+                };
+                console.log(point.points);
+
+            elements.push(view.createRect(point.realBody, rectStyle));
+            elements.push(view.createPolyline(point.points, false, lineStyle));
+
+            append(elements,
+                ChartElement.fn.getViewElements.call(point, view)
+            );
+
+            return elements;
+        }
+    });
+
+    var CandleStickChart = LineChart.extend({
+        options: {},
+
+        valueFields: function() {
+            return ["open", "high", "low", "close"];
+        },
+
+        addValue: function(data, category, categoryIx, series, seriesIx) {
+            var chart = this,
+                options = chart.options,
+                point;
+
+            point = chart.createPoint(data.value,
+                deepExtend({
+                    vertical: !options.invertAxes
+                }, series)
+            );
+
+            if (point) {
+                point.category = category;
+                point.series = series;
+                point.seriesIx = seriesIx;
+                point.owner = chart;
+                point.dataItem = series.data[categoryIx];
+            }
+
+            chart.points.push(point);
+        },
+
+        createPoint: function(value, series) {
+            var chart = this,
+                point;
+
+            point = new CandleStick(value, series);
+
+            chart.append(point);
+
+            return point;
+        },
+
+        reflow: function(box) {
+            var chart = this,
+                options = chart.options,
+                invertAxes = options.invertAxes,
+                plotArea = chart.plotArea,
+                categoryAxis = plotArea.categoryAxis,
+                pointIx = 0,
+                point, value, valueAxis, categorySlot, ocSlot, lhSlot;
+
+            chart.traverseDataPoints(function(data, category, categoryIx, currentSeries) {
+                value = data.value;
+                valueAxis = chart.seriesValueAxis(currentSeries);
+                point = chart.points[pointIx++];
+
+                categorySlot = categoryAxis.getSlot(categoryIx);
+                ocSlot = valueAxis.getSlot(value.open, value.close);
+                lhSlot = valueAxis.getSlot(value.low, value.high);
+
+                if (invertAxes) {
+                    ocSlot.y1 = lhSlot.y1 = categorySlot.y1;
+                    ocSlot.y2 = lhSlot.y2 = categorySlot.y2;
+                } else {
+                    ocSlot.x1 = lhSlot.x1 = categorySlot.x1;
+                    ocSlot.x2 = lhSlot.x2 = categorySlot.x2;
+                }
+
+                if (point) {
+                    point.reflow(lhSlot, ocSlot);
+                }
+            });
+
+            chart.box = box;
+        },
+
+        formatPointValue: function(point, format) {
+            var value = point.value;
+            return autoFromat(format, value.open, value.high, value.low, value.close);
         }
     });
 
@@ -4597,6 +4783,10 @@
                 plotArea.createLineChart(
                     plotArea.filterSeriesByType(paneSeries, [LINE, VERTICAL_LINE])
                 );
+
+                plotArea.createCandleStickChart(
+                    plotArea.filterSeriesByType(paneSeries, [CANDLE_STICK]);
+                );
             }
         },
 
@@ -4754,6 +4944,21 @@
                 });
 
             plotArea.appendChart(areaChart);
+        },
+
+        createCandleStickChart: function(series) {
+            if (series.length === 0) {
+                return;
+            }
+
+            var plotArea = this,
+                firstSeries = series[0],
+                chart = new CandleStickChart(plotArea, {
+                    invertAxes: plotArea.invertAxes,
+                    series: series
+                });
+
+            plotArea.appendChart(chart);
         },
 
         createCategoryAxis: function() {

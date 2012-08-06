@@ -12,20 +12,28 @@
         <script src="../src/kendo.dataviz.svg.js"></script>
     </head>
     <body>
-        <div id="chart" style="width: 500px; height: 400px;"></div>
+        <div id="chart"></div>
         <script>
             $(function() {
-                $("#chart").kendoChart({
+                var data = [{value: 1}]
+
+
+                var chart = $("#chart").kendoChart({
                     seriesDefaults: {
-                        type: "pie"
+                        type: "column",
+                        kur: "nqma"
+                    },
+                    dataSource: {
+                        data: data
                     },
                     series: [{
-                        labels: {
-                            visible: true
-                        },
-                        data: [{value: 1000, category: "a"}, {value: 1, category: "kur" }]
+                        field: "value"
                     }]
-                });
+                }).data("kendoChart");
+
+
+                console.log(chart.options.seriesDefaults, chart.options.series[0]);
+
             });
         </script>
     </body>
