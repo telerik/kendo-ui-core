@@ -542,6 +542,7 @@
         {
             top: 0;
             left: 0;
+            white-space: nowrap;
             height: 15px;
             color: #519800;
             padding: 0 3px;
@@ -562,11 +563,18 @@
             border: 1px solid #fa0;
         }
 
-        #importWindow .k-textbox
+        #importWindow .k-textbox,
+        #exportWindow .k-textbox
         {
             width: 99.9%;
             height: 340px;
             box-sizing: border-box;
+            resize: none;
+        }
+
+        #exportWindow .k-textbox
+        {
+            height: 385px;
             resize: none;
         }
     </style>
@@ -893,8 +901,11 @@
         <label for="blackberrybox" class="k-checkbox">BlackBerry</label>
         <input id="meegobox" type="checkbox" class="k-checkbox" />
         <label for="meegobox" class="k-checkbox">MeeGo</label>
-        <button class="k-button" id="getStyles">Get Styles</button>
+        <button class="k-button" id="exportStyles">Export Styles</button>
         <button class="k-button" id="importStyles">Import Styles</button>
+        <div id="exportWindow">
+            <textarea class="k-textbox"></textarea>
+        </div>
         <div id="importWindow">
             <textarea class="k-textbox"></textarea>
             <br /><br />
