@@ -4096,16 +4096,17 @@
 
             var paneBox = axis.pane.contentBox;
 
-            if (axisBox.y2 > paneBox.y2) {
-                axisBox.translate(0, paneBox.y2 - axisBox.y2);
-            }
+            if (axis.pane !== targetAxis.pane) {
+                /*
+                if (axisBox.y1 < paneBox.y1) {
+                    axisBox.translate(0, paneBox.y1 - axisBox.y1);
+                }
 
-            if (axisBox.x2 > paneBox.x2) {
-                axisBox.translate(paneBox.x2 - axisBox.x2, 0);
-            }
-
-            if (axisBox.x1 < paneBox.x1) {
-                axisBox.translate(paneBox.x1 - axisBox.x1, 0);
+                if (axisBox.y2 > paneBox.y2) {
+                    axisBox.translate(0, paneBox.y2 - axisBox.y2);
+                }
+                */
+                axisBox.translate(0, axis.pane.box.y1 - targetAxis.pane.box.y1)
             }
 
             axis.reflow(axisBox);
@@ -4228,47 +4229,31 @@
             return box;
         },
 
-        shrinkAxes: function(pane, axes) {
+        shrinkAxes: function() {
             var plotArea = this,
-                box = pane.contentBox,
+                panes = plotArea.panes,
+                panesLength = panes.length,
+                box = panes[0].contentBox.clone(),
+                axes = plotArea.axes,
                 axisBox = plotArea.axisBox(axes),
-                overflowY = axisBox.height() - box.height(),
-                overflowX = axisBox.width() - box.width(),
+                overflowY,
+                overflowX,
                 currentAxis,
                 i,
-                length = axes.length;
+                length = axes.length,
+                vertical;
+
+            for (i = 1; i < panesLength; i++) {
+                box.wrap(panes[i].contentBox);
+            }
+
+            overflowY = math.max(0, axisBox.height() - box.height());
+            overflowX = math.max(0, axisBox.width() - box.width());
 
             // Shrink all axes so they don't overflow out of the bounding box
             for (i = 0; i < length; i++) {
                 currentAxis = axes[i];
-
-                currentAxis.reflow(
-                    currentAxis.box.shrink(overflowX, overflowY)
-                );
-            }
-        },
-
-        shrinkAdditionalAxes: function(axes, xAxes, yAxes, xAnchor, yAnchor) {
-            var plotArea = this,
-                anchorLineBox = xAnchor.lineBox().clone().wrap(yAnchor.lineBox()),
-                overflowX,
-                overflowY,
-                currentAxis,
-                vertical,
-                lineBox,
-                i,
-                length = axes.length;
-
-            for (i = 0; i < length; i++) {
-                currentAxis = axes[i];
                 vertical = currentAxis.options.vertical;
-                lineBox = currentAxis.lineBox();
-
-                overflowX = math.max(0, lineBox.x2 - anchorLineBox.x2) +
-                            math.max(0, anchorLineBox.x1 - lineBox.x1);
-
-                overflowY = math.max(0, lineBox.y2 - anchorLineBox.y2) +
-                            math.max(0, anchorLineBox.y1 - lineBox.y1);
 
                 currentAxis.reflow(
                     currentAxis.box.shrink(
@@ -4279,12 +4264,13 @@
             }
         },
 
-        fitAxes: function(pane, axes) {
+        shrinkPaneAxes: function(pane) {
             var plotArea = this,
                 box = pane.contentBox,
+                axes = pane.axes,
                 axisBox = plotArea.axisBox(axes),
-                offsetX = box.x1 - axisBox.x1,
-                offsetY = box.y1 - axisBox.y1,
+                overflowY = math.max(0, axisBox.height() - box.height()),
+                overflowX = math.max(0, axisBox.width() - box.width()),
                 currentAxis,
                 i,
                 length = axes.length,
@@ -4295,17 +4281,81 @@
                 vertical = currentAxis.options.vertical;
 
                 currentAxis.reflow(
-                    currentAxis.box.translate(
-                        vertical ? math.max(0, offsetX) : offsetX,
-                        vertical ? offsetY : math.max(0, offsetY)
+                    currentAxis.box.shrink(
+                        vertical ? 0 : overflowX,
+                        vertical ? overflowY : 0
                     )
+                );
+            }
+        },
+
+        fitAxes: function() {
+            var plotArea = this,
+                panes = plotArea.panes,
+                panesLength = panes.length,
+                axes = plotArea.axes,
+                box = plotArea.box,
+                axisBox,
+                offsetX = 0,
+                offsetY = 0,
+                currentPane,
+                currentAxis,
+                i,
+                length = axes.length;
+
+            for (i = 0; i < panesLength; i++) {
+                currentPane = panes[i];
+                box = currentPane.contentBox;
+                if (currentPane.axes.length) {
+                    axisBox = plotArea.axisBox(currentPane.axes);
+
+                    offsetX = math.max(offsetX, box.x1 - axisBox.x1);
+                    offsetY = math.max(offsetY, box.y1 - axisBox.y1);
+                }
+            }
+
+            for (i = 0; i < length; i++) {
+                currentAxis = axes[i];
+
+                currentAxis.reflow(
+                    currentAxis.box.translate(offsetX, offsetY)
+                );
+            }
+        },
+
+        fitPaneAxes: function(pane) {
+            var plotArea = this,
+                panes = plotArea.panes,
+                panesLength = panes.length,
+                axes = pane.axes,
+                box = pane.contentBox,
+                axisBox,
+                offsetX = 0,
+                offsetY = 0,
+                currentPane,
+                currentAxis,
+                i,
+                length = axes.length;
+
+            box = pane.contentBox;
+            if (pane.axes.length) {
+                axisBox = plotArea.axisBox(pane.axes);
+
+                offsetY = math.max(box.y1 - axisBox.y1, box.y2 - axisBox.y2);
+            }
+
+            for (i = 0; i < length; i++) {
+                currentAxis = axes[i];
+
+                currentAxis.reflow(
+                    currentAxis.box.translate(offsetX, offsetY)
                 );
             }
         },
 
         reflowAxes: function() {
             var plotArea = this,
-                panes = plotArea.panes.slice(0).sort(plotArea.paneComparer),
+                panes = plotArea.panes,
                 i,
                 panesLength = panes.length,
                 currentPane,
@@ -4316,47 +4366,31 @@
                 yAnchor = yAxes[0],
                 paneAxes;
 
-            xAnchor.reflow(xAnchor.pane.contentBox);
-            yAnchor.reflow(yAnchor.pane.contentBox);
-
-            var anchorBox = plotArea.box.clone();
-
             for (i = 0; i < panesLength; i++) {
                 currentPane = panes[i];
                 plotArea.reflowPaneAxes(panes[i], xAnchor, yAnchor);
-
-                for (var j = 0; j < currentPane.axes.length; j++) {
-                    // TODO: Top and bottom anchor
-                    var currentAxis = currentPane.axes[j];
-                    if (currentAxis._rightAnchor) {
-                        anchorBox.x2 = math.min(anchorBox.x2, currentAxis.lineBox().x2);
-                    }
-                    if (currentAxis._leftAnchor) {
-                        anchorBox.x1 = math.max(anchorBox.x1, currentAxis.lineBox().x1);
-                    }
-                }
             }
 
-            var axisLineBox;
+            plotArea.alignAxes(xAxes, yAxes, xAnchor, yAnchor);
+            plotArea.shrinkAxes();
+            plotArea.alignAxes(xAxes, yAxes, xAnchor, yAnchor);
+
             for (i = 0; i < panesLength; i++) {
                 currentPane = panes[i];
-                axisLineBox = plotArea.axisLineBox(currentPane.axes);
-                if (axisLineBox.x2 > anchorBox.x2) {
-                    currentPane.options.padding.right = axisLineBox.x2 - anchorBox.x2;
+                if (currentPane.axes.length) {
+                    plotArea.shrinkPaneAxes(currentPane);
                 }
-                if (axisLineBox.x1 < anchorBox.x1) {
-                    currentPane.options.padding.left = anchorBox.x1 - axisLineBox.x1;
-                }
-                currentPane.reflow(currentPane.box);
-                plotArea.reflowPaneAxes(panes[i], xAnchor, yAnchor);
             }
-        },
 
-        paneComparer: function(a, b) {
-            var aOrder = valueOrDefault(a.reflowOrder, MAX_VALUE),
-                bOrder = valueOrDefault(b.reflowOrder, MAX_VALUE);
+            plotArea.alignAxes(xAxes, yAxes, xAnchor, yAnchor);
+            plotArea.fitAxes();
 
-            return aOrder - bOrder;
+            for (i = 0; i < panesLength; i++) {
+                currentPane = panes[i];
+                if (currentPane.axes.length) {
+                    plotArea.fitPaneAxes(currentPane);
+                }
+            }
         },
 
         reflowPaneAxes: function(pane, defaultXAnchor, defaultYAnchor) {
@@ -4374,15 +4408,7 @@
                     axes[i].reflow(pane.contentBox);
                 }
 
-                //if (pane.options.name === "b") debugger;
                 // TODO: Axis crossing values should be treated as global
-
-                plotArea.alignAxes(xAxes, yAxes, xAnchor, yAnchor);
-                plotArea.shrinkAdditionalAxes(axes, xAxes, yAxes, xAnchor, yAnchor);
-                plotArea.alignAxes(xAxes, yAxes, xAnchor, yAnchor);
-                plotArea.shrinkAxes(pane, axes);
-                plotArea.alignAxes(xAxes, yAxes, xAnchor, yAnchor);
-                plotArea.fitAxes(pane, axes);
             }
         },
 
