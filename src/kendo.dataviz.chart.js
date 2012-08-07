@@ -4220,7 +4220,6 @@
                 box = panes[0].contentBox.clone(),
                 axes = plotArea.axes,
                 axisBox = plotArea.axisBox(axes),
-                overflowY,
                 overflowX,
                 currentAxis,
                 i,
@@ -4231,7 +4230,6 @@
                 box.wrap(panes[i].contentBox);
             }
 
-            overflowY = math.max(0, axisBox.height() - box.height());
             overflowX = math.max(0, axisBox.width() - box.width());
 
             // Shrink all axes so they don't overflow out of the bounding box
@@ -4242,7 +4240,7 @@
                 currentAxis.reflow(
                     currentAxis.box.shrink(
                         vertical ? 0 : overflowX,
-                        vertical ? overflowY : 0
+                        0
                     )
                 );
             }
@@ -4254,7 +4252,6 @@
                 axes = pane.axes,
                 axisBox = plotArea.axisBox(axes),
                 overflowY = math.max(0, axisBox.height() - box.height()),
-                overflowX = math.max(0, axisBox.width() - box.width()),
                 currentAxis,
                 i,
                 length = axes.length,
@@ -4266,7 +4263,7 @@
 
                 currentAxis.reflow(
                     currentAxis.box.shrink(
-                        vertical ? 0 : overflowX,
+                        0,
                         vertical ? overflowY : 0
                     )
                 );
@@ -4281,7 +4278,6 @@
                 box = plotArea.box,
                 axisBox,
                 offsetX = 0,
-                offsetY = 0,
                 currentPane,
                 currentAxis,
                 i,
@@ -4294,7 +4290,6 @@
                     axisBox = plotArea.axisBox(currentPane.axes);
 
                     offsetX = math.max(offsetX, box.x1 - axisBox.x1);
-                    offsetY = math.max(offsetY, box.y1 - axisBox.y1);
                 }
             }
 
@@ -4302,7 +4297,7 @@
                 currentAxis = axes[i];
 
                 currentAxis.reflow(
-                    currentAxis.box.translate(offsetX, offsetY)
+                    currentAxis.box.translate(offsetX, 0)
                 );
             }
         },

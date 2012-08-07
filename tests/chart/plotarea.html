@@ -1166,7 +1166,7 @@
                 }
 
                 // ------------------------------------------------------------
-                module("Categorical PlotArea / Panes / Horizontal", {
+                module("Categorical PlotArea / Panes / Vertical", {
                     setup: function() {
                         moduleSetup();
                     }
@@ -1354,6 +1354,25 @@
                     equals(plotArea.namedValueAxes["primary"].box.y1, 550);
                 });
 
+                test("value axis height matches the associated pane", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a",
+                        }, {
+                            name: "b"
+                        }],
+                        valueAxis: {
+                            pane: "b"
+                        }
+                    });
+
+                    var axisBox = plotArea.namedValueAxes["primary"].box;
+                    var paneBox = plotArea.panes[1].box;
+
+                    equals(axisBox.y1, paneBox.y1);
+                    equals(axisBox.y2, paneBox.y2);
+                });
+
                 test("category axis remains in the first pane", function() {
                     createPlotArea({
                         panes: [{
@@ -1367,6 +1386,36 @@
                     });
 
                     equals(plotArea.categoryAxis.box.y1, 526);
+                });
+
+                test("category axis fits in the first pane", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a",
+                        }, {
+                            name: "b"
+                        }],
+                        valueAxis: {
+                            pane: "b"
+                        }
+                    });
+
+                    equals(plotArea.categoryAxis.box.y2, plotArea.panes[0].box.y2);
+                });
+
+                test("category axis fits in the second pane", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a",
+                        }, {
+                            name: "b"
+                        }],
+                        categoryAxis: {
+                            pane: "b"
+                        }
+                    });
+
+                    equals(plotArea.categoryAxis.box.y2, plotArea.panes[1].box.y2);
                 });
 
                 test("right aligned value axis fits in the associated pane", function() {
@@ -1384,8 +1433,30 @@
                         }
                     });
 
-                    equals(plotArea.namedValueAxes["primary"].box.x2 -
-                           plotArea.panes[1].box.x2, 0);
+                    equals(plotArea.namedValueAxes["primary"].box.x2,
+                           plotArea.panes[1].box.x2);
+                });
+
+                test("right aligned value axis height matches the associated pane", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a",
+                        }, {
+                            name: "b"
+                        }],
+                        valueAxis: {
+                            pane: "b"
+                        },
+                        categoryAxis: {
+                            axisCrossingValue: 1
+                        }
+                    });
+
+                    var axisBox = plotArea.namedValueAxes["primary"].box;
+                    var paneBox = plotArea.panes[1].box;
+
+                    equals(axisBox.y1, paneBox.y1);
+                    equals(axisBox.y2, paneBox.y2);
                 });
 
                 test("secondary value axis is positioned in the designated pane", function() {
@@ -1466,6 +1537,45 @@
 
                     equals(plotArea.namedValueAxes["secondary"].box.x2 -
                            plotArea.panes[1].box.x2, 0);
+                });
+
+                test("left anchor axis is assigned per pane", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a",
+                        }, {
+                            name: "b"
+                        }],
+                        valueAxis: [{
+                        }, {
+                            name: "secondary",
+                            pane: "b"
+                        }]
+                    });
+
+                    equals(plotArea.namedValueAxes["secondary"].box.x2,
+                           plotArea.namedValueAxes["primary"].box.x2);
+                });
+
+                test("right anchor axis is assigned per pane", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a",
+                        }, {
+                            name: "b"
+                        }],
+                        valueAxis: [{
+                        }, {
+                            name: "secondary",
+                            pane: "b"
+                        }],
+                        categoryAxis: {
+                            axisCrossingValue: [1, 1]
+                        }
+                    });
+
+                    equals(plotArea.namedValueAxes["secondary"].box.x1,
+                           plotArea.namedValueAxes["primary"].box.x1);
                 });
 
             })();
