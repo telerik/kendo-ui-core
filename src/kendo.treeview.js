@@ -232,6 +232,14 @@
             options.animation = animationOptions;
         },
 
+        setDataSource: function(dataSource) {
+            this.options.dataSource = dataSource;
+
+            this._dataSource();
+
+            this.dataSource.read();
+        },
+
         _dataSource: function(silentRead) {
             var that = this,
                 options = that.options,

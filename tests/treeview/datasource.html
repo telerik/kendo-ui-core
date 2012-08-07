@@ -552,6 +552,20 @@
 
                 ok(treeviewObject.dataSource.data()[0].checked);
             });
+
+            test("setDataSource sets new datasource", function() {
+                createTreeView([
+                    { text: "foo" }
+                ]);
+
+                treeviewObject.setDataSource(new HierarchicalDataSource({
+                    data: [
+                        { text: "bar" }
+                    ]
+                }));
+
+                equals(treeview.find(".k-item").text(), "bar");
+            });
         </script>
 
         <div id="qunit-fixture"> </div>
