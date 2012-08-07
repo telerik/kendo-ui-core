@@ -4217,20 +4217,22 @@
             var plotArea = this,
                 panes = plotArea.panes,
                 panesLength = panes.length,
-                box = panes[0].contentBox.clone(),
+                box,
                 axes = plotArea.axes,
                 axisBox = plotArea.axisBox(axes),
-                overflowX,
+                overflowX = 0,
                 currentAxis,
                 i,
                 length = axes.length,
                 vertical;
 
-            for (i = 1; i < panesLength; i++) {
-                box.wrap(panes[i].contentBox);
+            for (i = 0; i < panesLength; i++) {
+                currentPane = panes[i];
+                box = currentPane.contentBox;
+                if (currentPane.axes.length) {
+                    overflowX = math.max(overflowX, axisBox.width() - box.width());
+                }
             }
-
-            overflowX = math.max(0, axisBox.width() - box.width());
 
             // Shrink all axes so they don't overflow out of the bounding box
             for (i = 0; i < length; i++) {

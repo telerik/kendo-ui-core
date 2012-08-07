@@ -1315,6 +1315,81 @@
                     equals(plotArea.panes[0].paddingBox.y2, 290);
                 });
 
+                test("left margin is included in pane width", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a", margin: { left: 10 }
+                        }, {
+                            name: "b"
+                        }]
+                    });
+
+                    equals(plotArea.panes[0].box.width(), plotArea.panes[1].box.width());
+                });
+
+                test("left margin is applied to pane", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a", margin: { left: 10 }
+                        }, {
+                            name: "b"
+                        }]
+                    });
+
+                    equals(plotArea.panes[0].paddingBox.x1, 110);
+                });
+
+                test("left margin offsets value axis", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a", margin: { left: 10 }
+                        }, {
+                            name: "b"
+                        }]
+                    });
+
+                    equals(plotArea.namedValueAxes["primary"].box.x1, 110);
+                });
+
+                test("right margin is included in pane width", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a", margin: { right: 10 }
+                        }, {
+                            name: "b"
+                        }]
+                    });
+
+                    equals(plotArea.panes[0].box.width(), plotArea.panes[1].box.width());
+                });
+
+                test("right margin is applied to pane", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a", margin: { right: 10 }
+                        }, {
+                            name: "b"
+                        }]
+                    });
+
+                    equals(plotArea.panes[0].paddingBox.x2, 990);
+                });
+
+                test("right margin offsets value axis", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a", margin: { right: 10 }
+                        }, {
+                            name: "b"
+                        }],
+                        categoryAxis: {
+                            axisCrossingValue: 1
+                        }
+                    });
+
+                    equals(plotArea.namedValueAxes["primary"].box.x2, 990);
+                });
+
                 test("value axis is rendered in the first pane by default", function() {
                     createPlotArea({
                         panes: [{
