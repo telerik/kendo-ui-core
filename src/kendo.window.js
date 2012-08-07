@@ -646,7 +646,10 @@
                 dataType: "html",
                 cache: false,
                 error: proxy(function (xhr, status) {
-                    that.trigger(ERROR);
+                    that.trigger(ERROR, {
+                        status: status,
+                        xhr: xhr
+                    });
                 }, that),
                 complete: function () {
                     clearTimeout(loadingIconTimeout);
