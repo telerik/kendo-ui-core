@@ -22,6 +22,7 @@ var VERSION = JSON.parse(kendoBuild.readText("VERSION"));
 
 var commercialLicense = {name: "commercial", source: true};
 var openSourceLicense = {name: "open-source", source: true};
+var hotFixLicense = {name: "commercial", source: false};
 var trialLicense = {name: "trial", source: false};
 var betaLicense = {name: "beta", source: true};
 
@@ -101,7 +102,17 @@ var bundles = [{
     licenses: [trialLicense],
     wrappers: ["aspnetmvc"],
     eula: "trial-eula",
-},];
+},{
+    name: "kendoui.aspnetmvc.hotfix",
+    suites: ["web", "dataviz", "mobile"],
+    combinedScript: "all",
+    sourceLicense: "src-license-complete.txt",
+    vsdoc: /.+md/,
+    licenses: [hotFixLicense],
+    wrappers: ["aspnetmvc"],
+    skipExamples: true,
+    eula: "aspnetmvc-eula",
+}];
 
 var SUITE_STYLES = {
     "web": "web",
@@ -427,6 +438,9 @@ function deployWrappers(root, licenseName, bundle) {
     bundle.wrappers.forEach(function(wrapper){
         kendoBuild.copyDirSyncRecursive(path.join(DEPLOY_ROOT, "kendoui." + wrapper + "." + licenseName, "wrappers", wrapper), path.join(root, "wrappers", wrapper));
         kendoBuild.copyDirSyncRecursive(path.join(DEPLOY_ROOT, "kendoui." + wrapper + "." + licenseName, "js"), path.join(root, "js"));
+        if (bundle.skipExamples) {
+            kendoBuild.rmdirSyncRecursive(path.join(root, "wrappers", wrapper, "Examples"));
+        }
     })
 }
 
