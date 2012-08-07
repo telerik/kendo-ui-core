@@ -540,6 +540,18 @@
                 equal(treeview.find(".k-item").length, 2);
             });
 
+            test("checking checkboxes sets dataItem checked state", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "foo" }
+                    ],
+                    checkboxTemplate: "<input type='checkbox' />"
+                });
+
+                treeview.find(":checkbox").attr("checked", "checked").trigger("change");
+
+                ok(treeviewObject.dataSource.data()[0].checked);
+            });
         </script>
 
         <div id="qunit-fixture"> </div>

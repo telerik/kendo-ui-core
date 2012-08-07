@@ -200,7 +200,8 @@
                 .on(CLICK + NS, ".k-plus,.k-minus", proxy(that._toggleButtonClick, that))
                 .on("keydown" + NS, proxy(that._keydown, that))
                 .on("focus" + NS, proxy(that._focus, that))
-                .on("blur" + NS, proxy(that._blur, that));
+                .on("blur" + NS, proxy(that._blur, that))
+                .on("change" + NS, ".k-checkbox :checkbox", proxy(that._checkboxChange, that));
         },
 
         _attachUids: function(root, dataSource) {
@@ -433,6 +434,13 @@
             return this.trigger(eventName, {
                 node: node.closest(NODE)[0]
             });
+        },
+
+        _checkboxChange: function(e) {
+            var checkbox = $(e.target),
+                isChecked = checkbox.is(":checked");
+
+            this.dataItem(checkbox.closest(".k-item")).set("checked", isChecked);
         },
 
         _toggleButtonClick: function (e) {
