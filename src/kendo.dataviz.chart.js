@@ -3936,6 +3936,7 @@
 
             for (i = 0; i < panesLength; i++) {
                 currentPane = new BoxElement(paneOptions[i]);
+                currentPane.options.id = uniqueId();
                 currentPane.options.shrinkToFit = true;
                 currentPane.options.zIndex = -1;
 
@@ -4116,28 +4117,29 @@
             var plotArea = this,
                 xAnchorCrossings = plotArea.axisCrossingValues(xAnchor, yAxes),
                 yAnchorCrossings = plotArea.axisCrossingValues(yAnchor, xAxes),
-                leftAnchor,
-                rightAnchor,
-                topAnchor,
-                bottomAnchor,
+                leftAnchors = {},
+                rightAnchors = {},
+                topAnchors = {},
+                bottomAnchors = {},
+                pane,
                 axis,
                 i;
 
             // TODO: Refactor almost-identical loops
             for (i = 0; i < yAxes.length; i++) {
                 axis = yAxes[i];
+                pane = axis.pane;
                 plotArea.alignAxisTo(axis, xAnchor, yAnchorCrossings[i], xAnchorCrossings[i]);
 
                 if (round(axis.lineBox().x1) === round(xAnchor.lineBox().x1)) {
-                    if (leftAnchor) {
+                    if (leftAnchors[pane.options.id]) {
                         axis.reflow(axis.box
-                            .alignTo(leftAnchor.box, LEFT)
+                            .alignTo(leftAnchors[pane.options.id].box, LEFT)
                             .translate(-axis.options.margin, 0)
                         );
                     }
 
-                    leftAnchor = axis;
-                    axis._leftAnchor = true;
+                    leftAnchors[pane.options.id] = axis;
                 }
 
                 if (round(axis.lineBox().x2) === round(xAnchor.lineBox().x2)) {
@@ -4147,24 +4149,24 @@
                     }
                     plotArea.alignAxisTo(axis, xAnchor, yAnchorCrossings[i], xAnchorCrossings[i]);
 
-                    if (rightAnchor) {
+                    if (rightAnchors[pane.options.id]) {
                         axis.reflow(axis.box
-                            .alignTo(rightAnchor.box, RIGHT)
+                            .alignTo(rightAnchors[pane.options.id].box, RIGHT)
                             .translate(axis.options.margin, 0)
                         );
                     }
 
-                    rightAnchor = axis;
-                    axis._rightAnchor = true;
+                    rightAnchors[pane.options.id] = axis;
                 }
 
-                if (i !== 0) {
+                if (i !== 0 && yAnchor.pane === axis.pane) {
                     axis.alignTo(yAnchor);
                 }
             }
 
             for (i = 0; i < xAxes.length; i++) {
                 axis = xAxes[i];
+                pane = axis.pane;
                 plotArea.alignAxisTo(axis, yAnchor, xAnchorCrossings[i], yAnchorCrossings[i]);
 
                 if (round(axis.lineBox().y1) === round(yAnchor.lineBox().y1)) {
@@ -4174,25 +4176,25 @@
                     }
                     plotArea.alignAxisTo(axis, yAnchor, xAnchorCrossings[i], yAnchorCrossings[i]);
 
-                    if (topAnchor) {
+                    if (topAnchors[pane.options.id]) {
                         axis.reflow(axis.box
-                            .alignTo(topAnchor.box, TOP)
+                            .alignTo(topAnchors[pane.options.id].box, TOP)
                             .translate(0, -axis.options.margin)
                         );
                     }
 
-                    topAnchor = axis;
+                    topAnchors[pane.options.id] = axis;
                 }
 
                 if (round(axis.lineBox().y2, COORD_PRECISION) === round(yAnchor.lineBox().y2, COORD_PRECISION)) {
-                    if (bottomAnchor) {
+                    if (bottomAnchors[pane.options.id]) {
                         axis.reflow(axis.box
-                            .alignTo(bottomAnchor.box, BOTTOM)
+                            .alignTo(bottomAnchors[pane.options.id].box, BOTTOM)
                             .translate(0, axis.options.margin)
                         );
                     }
 
-                    bottomAnchor = axis;
+                    bottomAnchors[pane.options.id] = axis;
                 }
 
                 if (i !== 0) {
