@@ -4054,13 +4054,8 @@
 
         axisCrossingValues: function(axis, crossingAxes) {
             var options = axis.options,
-                crossingValues = [].concat(options.axisCrossingValue);
-
-            var allCrossingAxes = grep(this.axes,
-                function(ca) { return ca.options.vertical != axis.options.vertical; }
-            );
-
-            var valuesToAdd = allCrossingAxes.length - crossingValues.length,
+                crossingValues = [].concat(options.axisCrossingValue),
+                valuesToAdd = crossingAxes.length - crossingValues.length,
                 defaultValue = crossingValues[0] || 0,
                 i;
 
@@ -4068,20 +4063,7 @@
                 crossingValues.push(defaultValue);
             }
 
-            var result = [];
-            for (i = 0; i < allCrossingAxes.length; i++) {
-                for (var j = 0; j < crossingAxes.length; j++) {
-                    if (crossingAxes[j] === allCrossingAxes[i]) {
-                        result.push(crossingValues[i]);
-                        break;
-                    }
-                }
-            }
-
-            if (result.length === 0) {
-                result.push(defaultValue);
-            }
-            return result;
+            return crossingValues;
         },
 
         alignAxisTo: function(axis, targetAxis, crossingValue, targetCrossingValue) {
