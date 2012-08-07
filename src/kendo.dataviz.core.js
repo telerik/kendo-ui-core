@@ -1094,9 +1094,9 @@
 
                     if (vertical) {
                         slotX = plotArea.axisX.lineBox();
-                        slotY = plotArea.axisY.getSlot(item.from, item.to);
+                        slotY = axis.getSlot(item.from, item.to);
                     } else {
-                        slotX = plotArea.axisX.getSlot(item.from, item.to);
+                        slotX = axis.getSlot(item.from, item.to);
                         slotY = plotArea.axisY.lineBox();
                     }
 

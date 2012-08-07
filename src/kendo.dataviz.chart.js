@@ -4570,7 +4570,7 @@
                 plotArea.append(axis);
             });
 
-            primaryValueAxis = namedValueAxes[PRIMARY] || plotArea.axes[0];
+            primaryValueAxis = plotArea.getPrimaryValueAxis();
 
             // TODO: Consider removing axisX and axisY aliases
             if (invertAxes) {
@@ -4610,6 +4610,25 @@
                     value: singleItemOrArray(values)
                 });
             }
+        },
+
+        getPrimaryValueAxis: function() {
+            var plotArea = this,
+                axes = plotArea.axes,
+                primaryValueAxis = plotArea.namedValueAxes[PRIMARY],
+                axesCount = axes.length,
+                axis, i;
+
+            for (i = 0; i < axesCount && !primaryValueAxis; i++) {
+                axis = axes[i];
+
+                if (axis.options.type !== CATEGORY) {
+                    primaryValueAxis = axis;
+                    break;
+                }
+            }
+
+            return primaryValueAxis;
         }
     });
 
