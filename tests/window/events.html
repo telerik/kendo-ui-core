@@ -84,6 +84,25 @@
 
                 equal(triggers, 1);
             });
+
+            asyncTest("error event gets triggered with proper information", function() {
+                var dialog = createWindow({
+                        error: function(e) {
+                            ok(e);
+                            equal(e.status, "error");
+                            equal(e.xhr.status, 404);
+                            start();
+                        }
+                    });
+
+                $.mockjax({
+                    url: "/foo",
+                    status: 404,
+                    responseText: "Foo not found"
+                });
+
+                dialog.refresh("/foo");
+            });
         </script>
 
         <h1 id="qunit-header">kendo.ui.Window Tests</h1>
