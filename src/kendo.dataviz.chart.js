@@ -75,6 +75,7 @@
         DEFAULT_HEIGHT = dataviz.DEFAULT_HEIGHT,
         DEFAULT_PRECISION = dataviz.DEFAULT_PRECISION,
         DEFAULT_WIDTH = dataviz.DEFAULT_WIDTH,
+        DEGREE = math.PI / 180,
         DONUT = "donut",
         DONUT_SECTOR_ANIM_DELAY = 50,
         FADEIN = "fadeIn",
@@ -3232,13 +3233,27 @@
         },
 
         tooltipAnchor: function(tooltipWidth, tooltipHeight) {
-            var w = tooltipWidth / 2,
+            var point = this,
+                sector = point.sector.clone().expand(15),
+                w = tooltipWidth / 2,
                 h = tooltipHeight / 2,
-                r = math.sqrt((w * w) + (h * h)),
-                sector = this.sector.clone().expand(r + TOOLTIP_OFFSET),
-                tooltipCenter = sector.point(sector.middle());
+                midAndle = sector.middle(),
+                pointAngle = midAndle * DEGREE,
+                lp = sector.point(midAndle),
+                cx = lp.x - w,
+                cy = lp.y - h,
+                sa = math.sin(pointAngle),
+                ca = math.cos(pointAngle);
 
-            return new Point2D(tooltipCenter.x - w, tooltipCenter.y - h);
+            if (math.abs(sa) < 0.9) {
+                cx += w * -ca / math.abs(ca);
+            }
+
+            if (math.abs(ca) < 0.9) {
+                cy += h * -sa / math.abs(sa);
+            }
+
+            return new Point2D(cx, cy);
         },
 
         formatValue: function(format) {
