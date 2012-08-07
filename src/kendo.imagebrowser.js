@@ -159,10 +159,12 @@
                 orderBySize: "Size",
                 directoryNotFound: "A directory with this name was not found.",
                 emptyFolder: "Empty Folder",
-                deleteFile: 'Are you sure you want to delete "{0}"?'
+                deleteFile: 'Are you sure you want to delete "{0}"?',
+                invalidFileType: "The selected file \"{0}\" is not valid. Supported file types are {1}."
             },
             transport: {},
-            path: "/"
+            path: "/",
+            fileTypes: "*.png,*.gif,*.jpg,*.jpeg"
         },
 
         events: [ERROR, CHANGE],
@@ -209,9 +211,14 @@
 
             that.toolbar = $(template(messages))
                 .appendTo(that.element)
-                .find(".k-upload")
+                .find(".k-upload input")
                 .kendoUpload({
-                    multiple: false
+                    multiple: false,
+                    async: {
+                        saveUrl: that.options.transport.uploadUrl,
+                        autoUpload: true
+                    },
+                    upload: proxy(that._fileUpload, that)
                 }).end();
 
             link = that.toolbar.find(".k-tiles-arrange a");
@@ -249,6 +256,23 @@
 
         _addClick: function() {
             this.createDirectory();
+        },
+
+        _fileUpload: function(e) {
+            var that = this,
+                options = that.options,
+                fileTypes = options.fileTypes,
+                filterRegExp = new RegExp(("(" + fileTypes.split(",").join(")|(") + ")").replace( /\*\./g , ".*\."), "i"),
+                fileName = e.files[0].name;
+
+            if (filterRegExp.test(fileName)) {
+                e.data = { path: that.path() };
+                alert(1);
+                //that._addFile(fieldName);
+            } else {
+                e.preventDefault();
+                that._showMessage(kendo.format(options.messages.invalidFileType, fileName, fileTypes));
+            }
         },
 
         createDirectory: function() {

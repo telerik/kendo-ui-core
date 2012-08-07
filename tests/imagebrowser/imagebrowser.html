@@ -125,9 +125,11 @@
             });
 
             test("Upload widget is attached", function() {
-                var browser = setup();
+                var browser = setup({ transport: { uploadUrl: "foo" } }),
+                    upload = browser.toolbar.find("div.k-upload input").data("kendoUpload");
 
-                ok(browser.toolbar.find("div.k-upload").data("kendoUpload"));
+                ok(upload);
+                equal(upload.options.async.saveUrl, "foo");
             });
 
             test("selecting item from arrangeby popup change the text", function() {
