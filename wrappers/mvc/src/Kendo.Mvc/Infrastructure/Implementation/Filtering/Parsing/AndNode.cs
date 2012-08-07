@@ -21,7 +21,6 @@ namespace Kendo.Mvc.Infrastructure.Implementation
                 return FilterCompositionLogicalOperator.And;
 			}
 		}
-
         
         public void Accept(IFilterNodeVisitor visitor)
         {
