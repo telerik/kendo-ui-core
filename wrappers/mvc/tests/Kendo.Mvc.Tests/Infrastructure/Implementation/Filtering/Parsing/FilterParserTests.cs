@@ -175,6 +175,30 @@ namespace Kendo.Mvc.Infrastructure.Tests
         }
 
         [Fact]
+        public void Should_parse_multiple_or_and_expressions()
+        {
+            OrNode or = (OrNode)Parse("ProductName~eq~'Chai'~or~UnitPrice~eq~'18'~or~(UnitPrice~eq~'19'~and~UnitsInStock~eq~'120')");
+
+            or.First.ShouldBeType<ComparisonNode>();
+            or.Second.ShouldBeType<OrNode>();
+
+            ((OrNode)or.Second).First.ShouldBeType<ComparisonNode>();
+            ((OrNode)or.Second).Second.ShouldBeType<AndNode>();
+        }
+
+        [Fact]
+        public void Should_parse_multiple_or_expressions()
+        {
+            OrNode or = (OrNode)Parse("ProductName~eq~'Chai'~or~UnitPrice~eq~'18'~or~UnitPrice~eq~'19'~or~UnitsInStock~eq~'120'");
+
+            or.First.ShouldBeType<ComparisonNode>();
+            or.Second.ShouldBeType<OrNode>();
+
+            ((OrNode)or.Second).First.ShouldBeType<ComparisonNode>();
+            ((OrNode)or.Second).Second.ShouldBeType<OrNode>();
+        }
+
+        [Fact]
         public void Should_throw_if_or_is_missing_second_argument()
         {
             Assert.Throws<FilterParserException>(() => Parse("1~or"));

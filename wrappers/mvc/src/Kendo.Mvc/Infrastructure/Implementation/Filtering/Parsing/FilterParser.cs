@@ -123,7 +123,7 @@ namespace Kendo.Mvc.Infrastructure.Implementation
         {
             Expect(FilterTokenType.Or);
 
-            IFilterNode secondArgument = AndExpression();
+            IFilterNode secondArgument = OrExpression();
 
             return new OrNode
                        {
