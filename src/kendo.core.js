@@ -1422,7 +1422,8 @@ function pad(number) {
     }
 
     function deepExtendOne(destination, source) {
-        var property,
+        var ObservableArray = kendo.data.ObservableArray,
+            property,
             propValue,
             propType,
             destProp;
@@ -1430,7 +1431,7 @@ function pad(number) {
         for (property in source) {
             propValue = source[property];
             propType = typeof propValue;
-            if (propType === OBJECT && propValue !== null && propValue.constructor !== Array) {
+            if (propType === OBJECT && propValue !== null && propValue.constructor !== Array && propValue.constructor !== ObservableArray) {
                 if (propValue instanceof Date) {
                     destination[property] = new Date(propValue.getTime());
                 } else {

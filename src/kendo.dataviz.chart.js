@@ -179,12 +179,12 @@
                 .create(dataSourceOptions)
                 .bind(CHANGE, chart._dataChangeHandler);
 
+            chart._redraw();
+            chart._attachEvents();
+
             if (dataSourceOptions && options.autoBind) {
                 chart.dataSource.fetch();
             }
-
-            chart._redraw();
-            chart._attachEvents();
 
             kendo.notify(chart, dataviz.ui);
         },
@@ -2847,13 +2847,13 @@
                     value = pointData.value;
                     fields = pointData.fields;
 
-                    callback(value, deepExtend({
-                        pointIx: pointIx,
-                        series: currentSeries,
-                        seriesIx: seriesIx,
-                        dataItem: currentSeries.data[pointIx],
-                        owner: chart
-                    }, fields));
+                   callback(value, deepExtend({
+                       pointIx: pointIx,
+                       series: currentSeries,
+                       seriesIx: seriesIx,
+                       dataItem: currentSeries.data[pointIx],
+                       owner: chart
+                   }, fields));
                 }
             }
         },
