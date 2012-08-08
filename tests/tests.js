@@ -89,6 +89,8 @@ if (os.type() === "Darwin") {
     browsers =  [{
             exe: "xvfb-run",
             params: [
+                "-e",
+                "xvfb-run.log",
                 "-a",
                 "google-chrome",
                 "--user-data-dir=" + process.env["BROWSER_TEMP"],
@@ -96,17 +98,46 @@ if (os.type() === "Darwin") {
                 "--homepage=about:blank",
                 "--no-first-run",
                 "--no-default-browser-check",
-                testRunnerURL]
+                testRunnerURL
+            ]
         },{
             exe: "xvfb-run",
-            params: ["-a", "firefox", '-private', '-no-remote', '-P', process.env["FIREFOX_PROFILE"], '-new-window', testRunnerURL]
+            params: [
+                "-e",
+                "xvfb-run.log",
+                "-a",
+                "firefox",
+                '-private',
+                '-no-remote',
+                '-P',
+                process.env["FIREFOX_PROFILE"],
+                '-new-window',
+                testRunnerURL
+            ]
     }];
 }
 
 var runningAgents = browsers.length;
 
-browsers.forEach(function(browser) {
-    browserProcesses.push(spawn(browser.exe, browser.params));
+browsers.forEach(function(browser, index) {
+    setTimeout(function() {
+        var child = spawn(browser.exe, browser.params);
+        process.stderr.write("Executing " + browser.exe + " " + browser.params.join(" ") + " PID: " + child.pid + "\n");
+
+        child.stderr.on("data", function(data) {
+            process.sdterr.write(data);
+        });
+
+        child.stdout.on("data", function(data) {
+            process.stderr.write(data);
+        });
+
+        child.on("exit", function(code, signal) {
+            process.stderr.write(child.pid + " Exited with " + code + " Signal :" + signal + "\n");
+        });
+
+        browserProcesses.push(child);
+    }, 100 * index);
 });
 
 function outputAndExit() {
