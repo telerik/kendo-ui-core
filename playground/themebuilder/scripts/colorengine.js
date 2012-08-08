@@ -94,6 +94,10 @@
             return this._set(this.css2rgba(value || "#000"));
         },
 
+        compress: function(cssColor) {
+            return this.color2css(this.css2rgba(cssColor));
+        },
+
         _set: function (value) {
             var that = this;
 

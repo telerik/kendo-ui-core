@@ -65,8 +65,40 @@
 
     window.Gradient = kendo.Observable.extend({
         init: function(cssValue) {
-            cssValue = cssValue.indexOf("gradient") != -1 ? cssValue : "linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0))";
+            this.set(cssValue);
+
+            return this;
+        },
+
+        set: function (cssValue) {
+            cssValue = cssValue && cssValue.indexOf("gradient") != -1 ? cssValue : "linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0))";
             this.value = this.parseGradient(cssValue);
+
+            return this;
+        },
+
+        get: function ( prefixes, index, direction ) {
+            var output = "", that = this,
+                target = !isNaN(index) ? [ that.value[index]] : that.value;
+
+            if (typeof prefixes == "undefined") {
+                prefixes = [ kendo.support.transforms.css ];
+            } else if (typeof prefixes == "string") {
+                prefixes = prefixes.split(splitRegExp);
+            }
+
+            $.each (prefixes, function (idx, value) {
+                target.forEach(function(gradient) {
+                    if (value == "-webkit-") {
+                        output += that._getWebKitGradient(gradient, direction);
+                    } else {
+                        output += that._getStandardGradient(gradient, value, direction);
+                    }
+                });
+                output = output.substring(0, output.length-1);
+            });
+
+            return output;
         },
 
         parseGradient: function (cssValue) {
@@ -119,30 +151,6 @@
             return output;
         },
 
-        get: function ( prefixes, index, direction ) {
-            var output = "", that = this,
-                target = !isNaN(index) ? [ that.value[index]] : that.value;
-
-            if (typeof prefixes == "undefined") {
-                prefixes = [ kendo.support.transforms.css ];
-            } else if (typeof prefixes == "string") {
-                prefixes = prefixes.split(splitRegExp);
-            }
-
-            $.each (prefixes, function (idx, value) {
-                target.forEach(function(gradient) {
-                    if (value == "-webkit-") {
-                        output += that._getWebKitGradient(gradient, direction);
-                    } else {
-                        output += that._getStandardGradient(gradient, value, direction);
-                    }
-                });
-                output = output.substring(0, output.length-1);
-            });
-
-            return output;
-        },
-
         setAngle: function (index, angle) {
             angle = angle % 360;
 
@@ -174,6 +182,20 @@
         },
 
         _getWebKitGradient: function (gradient, direction) {
+            var output = "",
+                normalizedStart = direction ? normalizePosition(direction) : null,
+                normalizedEnd = direction ? normalizePosition(direction, true) : null;
+
+            output += "-webkit-gradient(linear," + (direction ? normalizedStart : gradient.start.normalized) + "," + (direction ? normalizedEnd : gradient.end.normalized) + ",";
+
+            gradient.stops.forEach(function(stop) {
+                output += "color-stop(" + (trimZeroes(stop.position / 100) || "0") + ", " + stop.color.get() + "),";
+            });
+
+            return output.substring(0, output.length - 1) + "),";
+        },
+
+        _getSVGGradient: function (gradient, direction) {
             var output = "",
                 normalizedStart = direction ? normalizePosition(direction) : null,
                 normalizedEnd = direction ? normalizePosition(direction, true) : null;
