@@ -1,15 +1,13 @@
 #!/usr/bin/env bash
 
-export FIREFOX_PROFILE="production"
-export CHROME_USER_DATA_DIR="/tmp/production"
 export NODE_PATH=.:/usr/lib/node_modules
 
-# clear Google Cache
-rm -rf ~/.cache/google-chrome/*
 
 jake merge-scripts
 
-xvfb-run -a sh -c 'tests/tests.js tests/ 8887 1>test-results.xml' || exit 1
+source build/temp-browser-profiles.sh
+
+tests/tests.js tests/ 8887 1>test-results.xml || exit 1
 
 rm -f release/*zip
 
