@@ -118,7 +118,7 @@
                 popups = $(".k-calendar-container");
 
                 if (popups.length > 1) {
-                    element.appendTo(document.body);
+                    element.hide().appendTo(document.body);
                 } else {
                     element.off(ns);
                     calendar.destroy();
