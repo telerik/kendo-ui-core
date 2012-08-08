@@ -105,7 +105,7 @@
 
             that._animations();
 
-            if (!isPlainObject(content)) {
+            if (content && !isPlainObject(content)) {
                 content = options.content = { url: content };
             }
 
@@ -702,7 +702,7 @@
                 contentHtml.attr("style", "overflow:hidden;");
             }
 
-            if (options.iframe) {
+            if (options.iframe && options.content) {
                 contentHtml.html(templates.contentFrame(options));
             }
 
@@ -754,8 +754,8 @@
         ),
         overlay: "<div class='k-overlay' />",
         contentFrame: template(
-            "<iframe src='#= content.url #' title='#= title #' frameborder='0'" +
-                " class='" + KCONTENTFRAME + "'>" +
+            "<iframe frameborder='0' title='#= title #' class='" + KCONTENTFRAME + "' " +
+                "src='#= content.url #'>" +
                     "This page requires frames in order to show content" +
             "</iframe>"
         ),

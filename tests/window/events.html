@@ -75,12 +75,13 @@
             test("clicking the refresh button on a static window triggers refresh event", function() {
                 var triggers = 0,
                     dialog = createWindow({
+                        actions: ["Refresh"],
                         refresh: function() {
                             triggers++;
                         }
                     });
 
-                dialog.wrapper.find(".k-i-refresh").trigger("clicK");
+                dialog.wrapper.find(".k-i-refresh").trigger("click");
 
                 equal(triggers, 1);
             });
