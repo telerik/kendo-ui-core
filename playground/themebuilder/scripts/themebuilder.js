@@ -610,7 +610,16 @@
     }
     kendo.wrap(recentPicker.popup.element).addClass("k-static-picker");
 
-    $(".menu").kendoMenu();
+    $(".tools").kendoTabStrip({
+        animation: {
+            open: {
+                effects: "fade:in"
+            }
+        },
+        select: function (e) {
+
+        }
+    });
 
     var importWindow = $("#importWindow").kendoWindow({
         width: "400px",
