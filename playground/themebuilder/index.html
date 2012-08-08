@@ -223,6 +223,9 @@
             font-size: 0;
             z-index: 1;
             border: 0;
+            -webkit-box-shadow: none;
+            -moz-box-shadow: none;
+            box-shadow: none;
         }
 
         .holder .k-animation-container
@@ -252,9 +255,9 @@
             height: 100%;
             z-index: -1;
             background-image: -webkit-gradient(linear, 0 0, 100% 100%, color-stop(.25, #666), color-stop(.25, transparent), to(transparent)), -webkit-gradient(linear, 0 100%, 100% 0, color-stop(.25, #666), color-stop(.25, transparent), to(transparent)),
-                              -webkit-gradient(linear, 0 0, 100% 100%, color-stop(.75, transparent), color-stop(.75, #666)), -webkit-gradient(linear, 0 100%, 100% 0, color-stop(.75, #999), color-stop(.75, #666));
+                              -webkit-gradient(linear, 0 0, 100% 100%, color-stop(.75, transparent), color-stop(.75, #666)), -webkit-gradient(linear, 0 100%, 100% 0, color-stop(.75, #707070), color-stop(.75, #666));
             background-image: -moz-linear-gradient(45deg, #666 25%, transparent 25%, transparent), -moz-linear-gradient(-45deg, #666 25%, transparent 25%, transparent),
-                             -moz-linear-gradient(45deg, transparent 75%, #666 75%), -moz-linear-gradient(-45deg, #999 75%, #666 75%);
+                             -moz-linear-gradient(45deg, transparent 75%, #666 75%), -moz-linear-gradient(-45deg, #707070 75%, #666 75%);
             background-size: 11px 11px;
         }
 
@@ -630,17 +633,17 @@
                 <li>Gradients</li>
                 <li>Patterns</li>
             </ul>
-            <div>
+            <div data-kendo-mobile-scroller="true">
                 <div class="holder color-holder k-popup">
                     <div class="recents recent-colors"></div>
                 </div>
             </div>
-            <div>
+            <div data-kendo-mobile-scroller="true">
                 <div class="holder gradient-holder k-popup">
                     <div class="recents recent-gradients"></div>
                 </div>
             </div>
-            <div>
+            <div data-kendo-mobile-scroller="true">
                 <div class="holder pattern-holder k-popup">
                     <div class="recents recent-patterns"></div>
                 </div>

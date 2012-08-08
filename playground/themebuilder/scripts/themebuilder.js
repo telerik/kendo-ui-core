@@ -3,6 +3,11 @@
     var devices = [ "ios", "android", "blackberry", "meego" ], CtrlDown = false, contextMenu,
         deviceClasses = $.map(devices, function (value) { return ".km-" + value; }),
         colors = [ "color", "background-color", "border-color" ],
+        gradients = [ "background-image" ],
+        patterns = [ "background-image" ],
+        colorTool = new Color(),
+        gradientTool = new Gradient(),
+        properties = colors.concat(gradients, patterns),
         TRANSITION = kendo.support.transitions.css + "transition",
         fillSvg = 'url(\'data:image/svg+xml;utf-8,<svg xmlns="http:%2F%2Fwww.w3.org%2F2000%2Fsvg" width="28" height="38"><path fill="rgba(255,255,255,.3)" d="M26.667,15.236c0-6.996-5.671-12.667-12.667-12.667c-6.995,0-12.667,5.672-12.667,12.667c0,4.78,2.651,8.938,6.562,11.097 C10.695,31.772,14,36.95,14,36.95s3.305-5.178,6.105-10.617C24.017,24.175,26.667,20.017,26.667,15.236z"%2F><path fill="%23FFF" d="M26.667,13.819c0-6.996-5.671-12.667-12.667-12.667c-6.995,0-12.667,5.672-12.667,12.667 c0,4.78,2.651,8.938,6.562,11.097C10.695,30.355,14,35.533,14,35.533s3.305-5.178,6.105-10.617 C24.017,22.758,26.667,18.6,26.667,13.819z"%2F><linearGradient id="ID" gradientUnits="userSpaceOnUse" x1="14" y1="25" x2="14" y2="0"><stop offset="0" style="stop-color:%23f984ef"%2F><%2FlinearGradient><circle fill="url(%23ID)" cx="14" cy="14" r="11"%2F><path fill="rgba(0,0,0,.3)" d="M14,4.403c5.616,0,10.189,4.413,10.473,9.958c0.009-0.18,0.027-0.359,0.027-0.542c0-5.799-4.701-10.5-10.5-10.5 S3.5,8.021,3.5,13.82c0,0.183,0.018,0.361,0.027,0.542C3.811,8.816,8.384,4.403,14,4.403z"%2F><%2Fsvg>\')',
         cursorSvg = fillSvg + ' 14 38, crosshair',
@@ -31,12 +36,12 @@
             grouptitleinset: {
                 name: "Group Title Inset",
                 selector: ".km-listgroupinset .km-group-title",
-                whitelist: [ "color", "font-family", "font-style", "font-weight", "font-size" ]
+                whitelist: [ "color", "background-color", "background-image", "font-family", "font-style", "font-weight", "font-size" ]
             },
             grouptitle: {
                 name: "Group Title",
                 selector: ".km-listgroup .km-group-title",
-                whitelist: [ "color", "font-family", "font-style", "font-weight", "font-size" ]
+                whitelist: [ "color", "background-color", "background-image", "font-family", "font-style", "font-weight", "font-size" ]
             },
             viewtitle: {
                 name: "View Title",
@@ -124,7 +129,7 @@
             tabstrip: {
                 name: "TabStrip",
                 selector: ".km-tabstrip",
-                whitelist: [ "background-color", "border-color", "border-width", "border-style" ],
+                whitelist: [ "background-color", "background-image", "border-color", "border-width", "border-style" ],
                 children: [ "button" ]
             },
             view: {
@@ -148,9 +153,35 @@
         },
         defaultColors = [ "#c5007c", "#6300a5", "#0010a5", "#0064b5", "#00a3c7", "#0fad00", "#8cc700", "#ffff00", "#fec500", "#ff9400", "#ff6600", "#ff0000",
                           "none", "#fff", "#e5e5e5", "#ccc", "#b2b2b2", "#999", "#7f7f7f", "#666", "#4c4c4c", "#333", "#191919", "#000" ],
+
+        defaultGradients = [ "linear-gradient(top, #fff, rgba(255,255,255,.2) 50%, rgba(255,255,255,.3) 50%, rgba(255,255,255,.7))",
+                             "linear-gradient(top, rgba(255,255,255,.2), rgba(255,255,255,.4) 50%, rgba(255,255,255,.5) 50%, rgba(255,255,255,.8))",
+                             "linear-gradient(top, rgba(255,255,255,.2), rgba(255,255,255,.35) 50%, rgba(255,255,255,.45) 50%, rgba(255,255,255,.4))",
+                             "linear-gradient(top, rgba(255,255,255,.2), rgba(255,255,255,.4) 50%, rgba(255,255,255,.45) 50%, rgba(255,255,255,.4))",
+                             "linear-gradient(top, rgba(255,255,255,.6), rgba(255,255,255,.35) 50%, rgba(255,255,255,.4) 50%, rgba(255,255,255,.6))",
+                             "linear-gradient(top, rgba(255,255,255,.4), rgba(255,255,255,.6))",
+                             "linear-gradient(top, rgba(255,255,255,.2), rgba(255,255,255,.8))",
+                             "linear-gradient(top, rgba(255,255,255,.35), rgba(255,255,255,.65) 50%, rgba(255,255,255,.35))",
+                             "linear-gradient(top, rgba(255,255,255,.5), rgba(255,255,255,.2) 50%, rgba(255,255,255,.5))",
+                             "linear-gradient(top, rgba(255,255,255,.5), rgba(255,255,255,.2) 73%, rgba(255,255,255,.5))",
+                             "linear-gradient(top, rgba(255,255,255,.2), rgba(255,255,255,.5) 73%, rgba(255,255,255,.2))",
+                             "linear-gradient(top, rgba(255,255,255,.2), rgba(255,255,255,.35) 12%, rgba(255,255,255,.65) 40%, rgba(255,255,255,.4) 80%, rgba(255,255,255,.6))",
+
+                             "linear-gradient(top, #000, rgba(0,0,0,.2) 50%, rgba(0,0,0,.3) 50%, rgba(0,0,0,.7))",
+                             "linear-gradient(top, rgba(0,0,0,.2), rgba(0,0,0,.4) 50%, rgba(0,0,0,.5) 50%, rgba(0,0,0,.8))",
+                             "linear-gradient(top, rgba(0,0,0,.2), rgba(0,0,0,.35) 50%, rgba(0,0,0,.45) 50%, rgba(0,0,0,.4))",
+                             "linear-gradient(top, rgba(0,0,0,.2), rgba(0,0,0,.4) 50%, rgba(0,0,0,.45) 50%, rgba(0,0,0,.4))",
+                             "linear-gradient(top, rgba(0,0,0,.6), rgba(0,0,0,.35) 50%, rgba(0,0,0,.4) 50%, rgba(0,0,0,.6))",
+                             "linear-gradient(top, rgba(0,0,0,.4), rgba(0,0,0,.6))",
+                             "linear-gradient(top, rgba(0,0,0,.2), rgba(0,0,0,.8))",
+                             "linear-gradient(top, rgba(0,0,0,.35), rgba(0,0,0,.65) 50%, rgba(0,0,0,.35))",
+                             "linear-gradient(top, rgba(0,0,0,.5), rgba(0,0,0,.2) 50%, rgba(0,0,0,.5))",
+                             "linear-gradient(top, rgba(0,0,0,.5), rgba(0,0,0,.2) 73%, rgba(0,0,0,.5))",
+                             "linear-gradient(top, rgba(0,0,0,.2), rgba(0,0,0,.5) 73%, rgba(0,0,0,.2))",
+                             "linear-gradient(top, rgba(0,0,0,.2), rgba(0,0,0,.35) 12%, rgba(0,0,0,.65) 40%, rgba(0,0,0,.4) 80%, rgba(0,0,0,.6))" ],
         i = 0,
         recentPicker = $(".recent-colors").kendoHSLPicker({ filter: ".drop" }).data("kendoHSLPicker"),
-        draggableEvents = {
+        colorDragEvents = {
             cursorOffset: {
                 left: -50,
                 top: -38
@@ -163,11 +194,12 @@
                     color = element.css("background-color"),
                     doc = document.documentElement;
 
-                element.data("color", new Color(color).get());
+                element.data("property", "background-color");
+                element.data("background-color", colorTool.compress(color));
 
                 $(doc).addClass("drop-override");
-                doc.style.cssText = "cursor: " + cursorSvg.replace("%23f984ef", color) + " !important;";
-                addRecentcolor(element);
+                doc.style.cssText = "cursor: " + cursorSvg.replace("%23f984ef", color);
+                addRecentColor(element);
             },
             dragend: function () {
                 var doc = document.documentElement;
@@ -177,6 +209,23 @@
                 doc.style.cssText = "";
             }
         },
+        gradientDragEvents = extend({}, colorDragEvents, {
+            hint: function (element) {
+                return kendo.support.touch ? $("<div style='width: 28px; height: 38px'/>").css("background-image", fillSvg.replace("%23f984ef", element.css("background-color"))) : undefined;
+            },
+            dragstart: function () {
+                var element = this.element,
+                    gradient = element.css("background-image"),
+                    doc = document.documentElement;
+
+                element.data("property", "background-image");
+                element.data("background-image", gradientTool.set(gradient).get());
+
+                $(doc).addClass("drop-override");
+                doc.style.cssText = "cursor: " + cursorSvg.replace("%23f984ef", "black");
+                addRecentGradient(element);
+            }
+        }),
         widgetTarget = $("<div class='widgetTarget'><div><div /><div /></div><span /><div><span /></div></div>").appendTo(document.body),
 
         StyleEngine = Widget.extend({
@@ -391,11 +440,12 @@
 
     window.initTargets = function() {
         setTimeout(function () {
-            var property = "",
+            var property = "", whitelisted = false,
                 color = "transparent",
                 css, defaultCSS;
 
-            $(".drop").kendoDraggable(draggableEvents);
+            $(".color-holder .drop").kendoDraggable(colorDragEvents);
+            $(".gradient-holder .drop").kendoDraggable(gradientDragEvents);
 
             function applyHint(target, property, value) {
 
@@ -440,15 +490,22 @@
             });
 
             $(".device").kendoDropTargetArea({
-                filter: getWidgets(colors).selector,
+                filter: getWidgets(properties).selector,
                 dragenter: function (e) {
                     var target = e.dropTarget,
                         offset = target.offset(),
                         height = target.outerHeight(),
                         widgetChildren = widgetTarget.children("div"),
-                        widget = matchWidget(target[0]);
+                        widget = matchWidget(target[0]),
+                        property = $(e.draggable.element).data("property");
 
-                    property = applyHint(target, widget.whitelist[0], $(e.draggable.element).data("color"));
+                    whitelisted = widget.whitelist.indexOf(property) != -1 ? property : colors.indexOf(property) != -1 ? widget.whitelist[0] : false;
+
+                    if (!whitelisted) {
+                        return;
+                    }
+
+                    property = applyHint(target, whitelisted, $(e.draggable.element).data(property));
 
                     widgetTarget
                         .show()
@@ -482,7 +539,11 @@
                     widgetTarget.hide();
                 },
                 drop: function (e) {
-                    var color = $(e.draggable.element).data("color"),
+                    if (!whitelisted) {
+                        return;
+                    }
+
+                    var color = $(e.draggable.element).css($(e.draggable.element).data("property")),
                         target = $(e.dropTarget);
 
                     target.css(defaultCSS);
@@ -562,14 +623,14 @@
         });
     };
 
-    function addRecentcolor(element) {
+    function addRecentColor(element) {
         var recent = $(element).clone()
             .prependTo(".recent-colors")
             .addClass("k-state-active")
             .siblings(".k-state-active")
             .removeClass("k-state-active").end();
 
-        recent.kendoDraggable(draggableEvents);
+        recent.kendoDraggable(colorDragEvents);
         recentPicker.popup.wrapper.addClass("k-static-shown");
         recentPicker.open(recent);
 
@@ -597,11 +658,46 @@
         });
     }
 
+    function addRecentGradient(element) {
+        var recent = $(element).clone()
+            .prependTo(".recent-gradients")
+            .addClass("k-state-active")
+            .siblings(".k-state-active")
+            .removeClass("k-state-active").end();
+
+        recent.kendoDraggable(gradientDragEvents);
+//        recentPicker.popup.wrapper.addClass("k-static-shown");
+//        recentPicker.open(recent);
+
+        recent.click(function (e) {
+            var that = $(this), item;
+
+            if (e.button == 0) {
+                that.addClass("k-state-active")
+                    .siblings(".k-state-active")
+                    .removeClass("k-state-active");
+            } else if (e.button == 1) {
+//                if (this == recentPicker.target[0]) {
+//                    item = that.next();
+//                    !item[0] && (item = that.prev());
+//
+//                    if (!item[0]) {
+//                        recentPicker.popup.wrapper.removeClass("k-static-shown");
+//                        recentPicker.close();
+//                    } else {
+//                        recentPicker.open(item);
+//                    }
+//                }
+                that.remove();
+            }
+        });
+    }
+
     while (defaultColors[i]) {
        $('<div class="drop" style="background-color:' + defaultColors[i] + '" data-color="' + defaultColors[i++] + '" />')
                 .insertBefore(".recent-colors")
                 .click(function () {
-                    addRecentcolor(this);
+                    addRecentColor(this);
                 });
 
        if (!(i % 12)) {
@@ -609,6 +705,21 @@
        }
     }
     kendo.wrap(recentPicker.popup.element).addClass("k-static-picker");
+
+    i = 0;
+    while (defaultGradients[i]) {
+       var gradient = gradientTool.set(defaultGradients[i]).get();
+       $('<div class="drop" style="background-image:' + gradient + '" data-gradient="' + gradient + '" />')
+                .insertBefore(".recent-gradients")
+                .click(function () {
+                    addRecentGradient(this);
+                });
+       i++;
+
+       if (!(i % 12)) {
+           $("<br />").insertBefore(".recent-gradients");
+       }
+    }
 
     $(".tools").kendoTabStrip({
         animation: {
