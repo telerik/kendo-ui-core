@@ -305,6 +305,35 @@
                     equal(series.points[0].box.x2, series.points[1].box.x1);
                 });
 
+                test("bars in different panes are not clustered", function() {
+                    var chart = createChart({
+                        series: [{
+                            type: "column",
+                            data: [1]
+                        }, {
+                            type: "column",
+                            data: [2],
+                            axis: "b"
+                        }],
+                        panes: [{
+                            name: "top"
+                        }, {
+                            name: "bottom"
+                        }],
+                        valueAxis: [{
+                        }, {
+                            name: "b",
+                            pane: "bottom"
+                        }],
+                        categoryAxis: {
+                            categories: ["A"]
+                        }
+                    });
+
+                    var barCharts = chart._model._plotArea.charts;
+                    equal(barCharts[0].points[0].box.x1, barCharts[1].points[0].box.x1, TOLERANCE);
+                });
+
                 // ------------------------------------------------------------
                 var oldGetSlot;
                 module("Bar Chart / Stack / Positive Values", {
@@ -693,6 +722,39 @@
                 test("stack base is set to zero value slot", function() {
                     equals(series.points[0].options.stackBase, 2);
                     equals(series.points[2].options.stackBase, 2);
+                });
+
+                // ------------------------------------------------------------
+                module("Bar Chart / Stacked / Panes");
+
+                test("bars in different panes are not stacked", function() {
+                    var chart = createChart({
+                        series: [{
+                            stack: true,
+                            type: "column",
+                            data: [1]
+                        }, {
+                            type: "column",
+                            data: [2],
+                            axis: "b"
+                        }],
+                        panes: [{
+                            name: "top"
+                        }, {
+                            name: "bottom"
+                        }],
+                        valueAxis: [{
+                        }, {
+                            name: "b",
+                            pane: "bottom"
+                        }],
+                        categoryAxis: {
+                            categories: ["A"]
+                        }
+                    });
+
+                    var barCharts = chart._model._plotArea.charts;
+                    notEqual(barCharts[0].points[0].box.y1, barCharts[1].points[0].box.y2, TOLERANCE);
                 });
 
             })();

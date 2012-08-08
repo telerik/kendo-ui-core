@@ -4609,14 +4609,6 @@
             plotArea.createValueAxes();
         },
 
-        createPanes: function() {
-            var plotArea = this;
-
-            PlotAreaBase.fn.createPanes.call(this);
-
-            plotArea.categoryAxis.pane.reflowOrder = 0;
-        },
-
         aggregateDateSeries: function() {
             var plotArea = this,
                 series = plotArea.series,
@@ -4697,22 +4689,48 @@
             PlotAreaBase.fn.appendChart.call(plotArea, chart);
         },
 
+        seriesPaneName: function(series) {
+            var plotArea = this,
+                options = plotArea.options,
+                axisName = series.axis,
+                axisOptions = [].concat(options.valueAxis),
+                axis = $.grep(axisOptions, function(a) { return a.name === axisName })[0],
+                paneOptions = [].concat(options.panes),
+                paneName = axis.pane || "default";
+
+            return paneName;
+        },
+
         createBarChart: function(series) {
             if (series.length === 0) {
                 return;
             }
 
-            var plotArea = this,
-                firstSeries = series[0],
-                barChart = new BarChart(plotArea, {
-                    series: series,
-                    invertAxes: plotArea.invertAxes,
-                    isStacked: firstSeries.stack && series.length > 1,
-                    gap: firstSeries.gap,
-                    spacing: firstSeries.spacing
-                });
+            var seriesByPane = {};
+            for (var i = 0; i < series.length; i++) {
+                var paneName = this.seriesPaneName(series[i]);
+                if (seriesByPane[paneName]) {
+                    seriesByPane[paneName].push(series[i]);
+                } else {
+                    seriesByPane[paneName] = [series[i]];
+                }
+            }
 
-            plotArea.appendChart(barChart);
+            for (var paneName in seriesByPane) {
+                var paneSeries = seriesByPane[paneName];
+
+                var plotArea = this,
+                    firstSeries = paneSeries[0],
+                    barChart = new BarChart(plotArea, {
+                        series: paneSeries,
+                        invertAxes: plotArea.invertAxes,
+                        isStacked: firstSeries.stack && series.length > 1,
+                        gap: firstSeries.gap,
+                        spacing: firstSeries.spacing
+                    });
+
+                plotArea.appendChart(barChart);
+            }
         },
 
         createLineChart: function(series) {
