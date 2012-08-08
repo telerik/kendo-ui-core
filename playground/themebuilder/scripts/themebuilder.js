@@ -397,6 +397,48 @@
 
             $(".drop").kendoDraggable(draggableEvents);
 
+            function applyHint(target, property, value) {
+
+                defaultCSS = { cursor: "default" };
+                defaultCSS[property] = "";
+
+                css = {};
+                css[property] = value;
+
+                $(target).css(css);
+
+                widgetTarget
+                    .children("div")
+                    .last()
+                    .children()
+                    .text(property);
+
+                return property;
+            }
+
+            $(document.body).on("DOMMouseScroll mousewheel", "*", function (e) {
+                var widget = matchWidget(e.currentTarget);
+
+                if (widget) {
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+
+                    var index = widget.whitelist.indexOf(property),
+                        newIndex = 0, maxIndex = widget.whitelist.length - 1;
+
+                    if (index != -1) {
+                        newIndex = index + (e.originalEvent.wheelDelta / 120 || e.originalEvent.detail / 3);
+                        newIndex < 0 && (newIndex = maxIndex);
+                        newIndex > maxIndex && (newIndex = 0);
+
+                        $(e.currentTarget).css(defaultCSS);
+                        color = css[property];
+
+                        property = applyHint(e.currentTarget, widget.whitelist[newIndex], color);
+                    }
+                }
+            });
+
             $(".device").kendoDropTargetArea({
                 filter: getWidgets(colors).selector,
                 dragenter: function (e) {
@@ -406,15 +448,8 @@
                         widgetChildren = widgetTarget.children("div"),
                         widget = matchWidget(target[0]);
 
-                    property = widget.whitelist[0];
+                    property = applyHint(target, widget.whitelist[0], $(e.draggable.element).data("color"));
 
-                    defaultCSS = { cursor: "default" };
-                    defaultCSS[property] = "";
-
-                    css = {};
-                    css[property] = $(e.draggable.element).data("color");
-
-                    target.css(css);
                     widgetTarget
                         .show()
                         .css(TRANSITION, "all 100ms")
@@ -433,9 +468,7 @@
                         .css(TRANSITION, "all 100ms")
                         .last()
                         .css("top", height)
-                        .children()
-                        .text(property)
-                        .end().end()
+                        .end()
                         .css("display");
 
                     widgetChildren
