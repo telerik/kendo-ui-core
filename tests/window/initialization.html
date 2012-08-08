@@ -313,6 +313,25 @@
                 ok(clientObject.options.visible);
             });
 
+            test("visible: false creates hidden windows", function() {
+                var div = $("<div>foo</div>").appendTo(document.body),
+                    clientObject;
+
+                div.kendoWindow({
+                    visible: false,
+                    refresh: function() {
+                        this.center();
+                        this.open();
+                    }
+                });
+
+                clientObject = div.data("kendoWindow");
+
+                ok(!clientObject.wrapper.is(":visible"));
+                ok(!div.is(":visible"));
+                ok(!clientObject.options.visible);
+            });
+
             var form;
 
             module("appendTo option", {
