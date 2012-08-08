@@ -65,37 +65,58 @@ client.subscribe('/done', function(message) {
     total += message.total;
 
     if (!--runningAgents) {
-        outputResult();
+        outputAndExit();
     }
 });
 
 var browserProcesses = [],
     testRunnerURL = 'http://localhost:' + PORT + '/tests/testrunner.html',
-    mac = os.type() === "Darwin",
-    browsers = [
-        {
-            exe: mac ? "/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome" : "google-chrome",
+    browsers;
+
+if (os.type() === "Darwin") {
+    browsers =  [{
+            exe: "/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome",
             params: [testRunnerURL]
-        },
-        {
-            exe: mac ? "/Applications/Firefox.app/Contents/MacOS/firefox" : "firefox",
-            params: ['-private', '-no-remote', '-P', process.env["FIREFOX_PROFILE"], '-new-window', testRunnerURL]
-        }
-    ],
-    runningAgents = browsers.length;
+        },{
+            exe: "/Applications/Firefox.app/Contents/MacOS/firefox",
+            params: ['-private', '-no-remote', '-new-window', testRunnerURL]
+    }];
+} else {
+    /**
+     * Google Chrome parameters below are "seen" in the selenium python driver source code:
+     * http://code.google.com/searchframe#2tHw6m3DZzo/trunk/chrome/src/py/driver.py&q=data-dir%20package:selenium%5C.googlecode%5C.com&ct=rc&cd=1&sq=
+     */
+    browsers =  [{
+            exe: "xvfb-run",
+            params: [
+                "-a",
+                "google-chrome",
+                "--user-data-dir=" + process.env["BROWSER_TEMP"],
+                "--activate-on-launch",
+                "--homepage=about:blank",
+                "--no-first-run",
+                "--no-default-browser-check",
+                testRunnerURL]
+        },{
+            exe: "xvfb-run",
+            params: ["-a", "firefox", '-private', '-no-remote', '-P', process.env["FIREFOX_PROFILE"], '-new-window', testRunnerURL]
+    }];
+}
+
+var runningAgents = browsers.length;
 
 browsers.forEach(function(browser) {
     browserProcesses.push(spawn(browser.exe, browser.params));
 });
 
-function outputResult() {
-    browserProcesses.forEach(function(process) {
-        process.kill();
-    })
+function outputAndExit() {
+    browserProcesses.forEach(function(child) {
+        spawn("pkill", ["-P", child.pid]);
+    });
 
     root.att('tests', total)
-    .att('errors', 0)
-    .att('failures', failures);
+        .att('errors', 0)
+        .att('failures', failures);
 
     process.stdout.write(doc.toString({pretty: true}));
     process.exit(failures === 0 ? 0 : 1);
