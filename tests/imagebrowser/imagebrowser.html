@@ -596,6 +596,16 @@
 
                 ok(showMessage.calls("_showMessage"));
             });
+
+            test("createFile return existing model is found", function() {
+                var browser = setup({}, [{ name: "foo", type: "f" }]);
+
+                browser._showMessage = function() { return true; };
+
+                var model = browser.dataSource.get("foo");
+
+                same(browser._createFile("foo"), model);
+            });
         </script>
     </body>
 </html>

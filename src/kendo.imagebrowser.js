@@ -72,6 +72,9 @@
                 destroy: function(options) {
                     this._call("destroy", options);
                 },
+                update: function() {
+                    //updates are handled by the upload
+                },
                 options: {
                     read: {
                         type: "POST"
@@ -233,6 +236,10 @@
                     upload: proxy(that._fileUpload, that)
                 }).end();
 
+            that.upload = that.toolbar
+                .find(".k-upload input")
+                .data("kendoUpload");
+
             link = that.toolbar.find(".k-tiles-arrange a");
 
             that.arrangeByPopup = popup = $("<ul>" + kendo.render(ARRANGEBYTMPL, arrangeBy) + "</ul>")
@@ -275,13 +282,25 @@
                 options = that.options,
                 fileTypes = options.fileTypes,
                 filterRegExp = new RegExp(("(" + fileTypes.split(",").join(")|(") + ")").replace(/\*\./g , ".*."), "i"),
-                fileName = e.files[0].name;
+                fileName = e.files[0].name,
+                fileNameField = that._getFieldName(NAMEFIELD),
+                sizeField = that._getFieldName(SIZEFIELD),
+                model;
 
             if (filterRegExp.test(fileName)) {
                 e.data = { path: that.path() };
 
-                if (!that._createFile(fileName)) {
+                model = that._createFile(fileName);
+
+                if (!model) {
                     e.preventDefault();
+                } else {
+                    that.upload.one("success", function(e) {
+                        model.set(fileNameField, e.response[fileNameField]);
+                        model.set(sizeField, e.response[sizeField]);
+                        that._tiles = that.listView.items().filter("[" + kendo.attr("type") + "=f]");
+                        that._scroll();
+                    });
                 }
             } else {
                 e.preventDefault();
@@ -321,7 +340,11 @@
                 file = that._findFile(fileName);
 
             if (file && !that._showMessage(kendo.format(that.options.messages.overwriteFile, fileName), "confirm")) {
-                return false;
+                return null;
+            }
+
+            if (file) {
+                return file;
             }
 
             for (idx = 0, length = view.length; idx < length; idx++) {
