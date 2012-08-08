@@ -54,25 +54,36 @@
                 init: function(options) {
                     kendo.data.RemoteTransport.fn.init.call(this, $.extend(true, {}, this.options, options));
                 },
-                read: function(options) {
-                    if (isFunction(this.options.read)) {
-                        this.options.read.call(this, options);
+                _call: function(type, options) {
+                    options.data = $.extend({}, options.data, { path: this.options.path() });
+
+                    if (isFunction(this.options[type])) {
+                        this.options[type].call(this, options);
                     } else {
-                        kendo.data.RemoteTransport.fn.read.call(this, options);
+                        kendo.data.RemoteTransport.fn[type].call(this, options);
                     }
+                },
+                read: function(options) {
+                    this._call("read", options);
                 },
                 create: function(options) {
-                    if (isFunction(this.options.create)) {
-                        this.options.create.call(this, options);
-                    } else {
-                        kendo.data.RemoteTransport.fn.create.call(this, options);
-                    }
+                    this._call("create", options);
                 },
-                destory: function(options) {
-                    if (isFunction(this.options.destory)) {
-                        this.options.destory.call(this, options);
-                    } else {
-                        kendo.data.RemoteTransport.fn.destory.call(this, options);
+                destroy: function(options) {
+                    this._call("destroy", options);
+                },
+                options: {
+                    read: {
+                        type: "POST"
+                    },
+                    update: {
+                        type: "POST"
+                    },
+                    create: {
+                        type: "POST"
+                    },
+                    destroy: {
+                        type: "POST"
                     }
                 }
             })
@@ -160,7 +171,8 @@
                 directoryNotFound: "A directory with this name was not found.",
                 emptyFolder: "Empty Folder",
                 deleteFile: 'Are you sure you want to delete "{0}"?',
-                invalidFileType: "The selected file \"{0}\" is not valid. Supported file types are {1}."
+                invalidFileType: "The selected file \"{0}\" is not valid. Supported file types are {1}.",
+                overwriteFile: "A file with name \"{0}\" already exists in the current directory. Do you want to overwrite it?"
             },
             transport: {},
             path: "/",
@@ -262,17 +274,68 @@
             var that = this,
                 options = that.options,
                 fileTypes = options.fileTypes,
-                filterRegExp = new RegExp(("(" + fileTypes.split(",").join(")|(") + ")").replace( /\*\./g , ".*\."), "i"),
+                filterRegExp = new RegExp(("(" + fileTypes.split(",").join(")|(") + ")").replace(/\*\./g , ".*."), "i"),
                 fileName = e.files[0].name;
 
             if (filterRegExp.test(fileName)) {
                 e.data = { path: that.path() };
-                alert(1);
-                //that._addFile(fieldName);
+
+                if (!that._createFile(fileName)) {
+                    e.preventDefault();
+                }
             } else {
                 e.preventDefault();
                 that._showMessage(kendo.format(options.messages.invalidFileType, fileName, fileTypes));
             }
+        },
+
+        _findFile: function(name) {
+            var data = this.dataSource.data(),
+                idx,
+                result,
+                typeField = this._getFieldName(TYPEFIELD),
+                nameField = this._getFieldName(NAMEFIELD),
+                length;
+
+            name = name.toLowerCase();
+
+            for (idx = 0, length = data.length; idx < length; idx++) {
+                if (data[idx].get(typeField) === "f" &&
+                    data[idx].get(nameField).toLowerCase() === name) {
+
+                    result = data[idx];
+                    break;
+                }
+            }
+            return result;
+        },
+
+        _createFile: function(fileName) {
+            var that = this,
+                idx,
+                length,
+                index = 0,
+                model = {},
+                typeField = that._getFieldName(TYPEFIELD),
+                view = that.dataSource.view(),
+                file = that._findFile(fileName);
+
+            if (file && !that._showMessage(kendo.format(that.options.messages.overwriteFile, fileName), "confirm")) {
+                return false;
+            }
+
+            for (idx = 0, length = view.length; idx < length; idx++) {
+                if (view[idx].get(typeField) === "f") {
+                    index = idx;
+                    break;
+                }
+            }
+
+            model[typeField] = "f";
+            model[that._getFieldName(NAMEFIELD)] = fileName;
+            model[that._getFieldName(SIZEFIELD)] = 0;
+
+            return that.dataSource.insert(++index, model);
         },
 
         createDirectory: function() {
@@ -296,7 +359,10 @@
             model._defaultId = name; // mark it as new
 
             that.listView.one("dataBound", function() {
-                var input = that.listView.select().find("input");
+                var selected = that.listView.select(),
+                    input = selected.find("input");
+
+              //  that.element.scrollTop(selected.attr("offsetTop") - this.element[0].offsetHeight);
 
                 setTimeout(function() {
                     input.select();
@@ -427,6 +493,7 @@
                 };
 
             if (isPlainObject(transport)) {
+                transport.path = proxy(that.path, that);
                 dataSource.transport = transport;
             }
 
@@ -436,11 +503,13 @@
                     sortOrder.field = fieldName(options.schema.model.fields, TYPEFIELD);
                 }
             }
+
             if (that.dataSource && that._errorHandler) {
                 that.dataSource.unbind(ERROR, that._errorHandler);
             } else {
                 that._errorHandler = proxy(that._error, that);
             }
+
             that.dataSource = kendo.data.DataSource.create(dataSource)
                 .bind(ERROR, that._errorHandler);
         },
@@ -841,7 +910,9 @@
                         html += '<a href="#" class="k-icon k-i-arrow-n">root</a>';
                     }
                     html += '<a class="k-link" href="#">' + segments[idx] + '</a>';
-                    html += '<span class="k-icon k-i-arrow-e">&gt;</span>';
+                    if (idx === length - 1) {
+                        html += '<span class="k-icon k-i-arrow-e">&gt;</span>';
+                    }
                 }
             }
             this.overlay.empty().append($(html));

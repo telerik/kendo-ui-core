@@ -471,6 +471,24 @@
                 ok(remove.calls("remove"));
             });
 
+            test("delete button triggers datasource destory method passing the path", 1, function() {
+                var browser = setup({
+                    transport: {
+                        destroy: function(options) {
+                            equal(options.data.path, "foo/");
+                        }
+                    }
+                });
+
+                browser.path("foo");
+
+                browser._showMessage = function() { return true};// suppress the alert for poping
+
+                browser.list.find("li[data-type=f]").mousedown().mouseup();
+
+                browser.toolbar.find(".k-delete").click();
+            });
+
             test("delete button does not trigger listView remove method if no item is selected", function() {
                 var browser = setup(),
                     remove = stub(browser.list.data("kendoListView"), "remove"),
@@ -548,6 +566,35 @@
 
                 tile.find("input").val("foo").blur();
                 equal(model.get("name"), "foo");
+            });
+
+            test("saving the new directory calls the DataSource create passing the path", 2, function() {
+                var browser = setup({
+                    transport: {
+                        create: function(options) {
+                            equal(options.data.path, "foo/");
+                        }
+                    }
+                }, []);
+
+                browser.path("foo/");
+
+                browser.createDirectory();
+
+                var tile =  browser.list.find("li:last");
+                var model = browser.dataSource.getByUid(tile.attr("data-uid"));
+
+                tile.find("input").val("foo").blur();
+                equal(model.get("name"), "foo");
+            });
+
+            test("adding already existing file shows message", function() {
+                var browser = setup({}, [{ name: "foo", type: "f" }]),
+                    showMessage = stub(browser, "_showMessage");
+
+                browser._createFile("foo");
+
+                ok(showMessage.calls("_showMessage"));
             });
         </script>
     </body>
