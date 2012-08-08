@@ -910,9 +910,7 @@
                         html += '<a href="#" class="k-icon k-i-arrow-n">root</a>';
                     }
                     html += '<a class="k-link" href="#">' + segments[idx] + '</a>';
-                    if (idx === length - 1) {
-                        html += '<span class="k-icon k-i-arrow-e">&gt;</span>';
-                    }
+                    html += '<span class="k-icon k-i-arrow-e">&gt;</span>';
                 }
             }
             this.overlay.empty().append($(html));
