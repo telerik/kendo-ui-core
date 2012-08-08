@@ -30,6 +30,7 @@
     <script src="../../src/kendo.mobile.pane.js"></script>
     <script src="../../src/kendo.mobile.application.js"></script>
     <script src="../../src/kendo.window.js"></script>
+    <script src="../../src/kendo.tabstrip.js"></script>
     <script src="scripts/slider.js"></script>
     <script src="scripts/colorengine.js"></script>
     <script src="scripts/gradientengine.js"></script>
@@ -215,11 +216,19 @@
             overflow: hidden;
         }
 
-        .color-holder {
-            font-size: 0;
+        .holder
+        {
             width: 540px;
             position: relative;
+            font-size: 0;
             z-index: 1;
+            border: 0;
+        }
+
+        .holder .k-animation-container
+        {
+            font-size: 1em;
+            font-size: 1rem;
         }
 
         .drop,
@@ -266,7 +275,7 @@
             font-size: 12px;
         }
 
-        .color-holder > .drop:hover:after
+        .holder > .drop:hover:after
         {
             content: attr(data-color);
             display: block;
@@ -319,9 +328,16 @@
             text-transform: uppercase;
         }
 
-        .header .menu
+        .tools
         {
-            margin-left: 100px;
+            border: 0;
+        }
+
+        .tools .menu
+        {
+            position: absolute;
+            top: 10px;
+            left: 200px;
             font-size: 14px;
             display: inline-block;
             text-transform: uppercase;
@@ -330,7 +346,7 @@
             vertical-align: middle;
         }
 
-        .header .menu .k-item
+        .tools .menu .k-item
         {
             color: #666;
             background: none;
@@ -338,13 +354,26 @@
             border-color: transparent;
         }
 
-        .header .menu .k-state-active
+        .tools .menu .k-link:hover
+        {
+            color: #000;
+        }
+
+        .tools .menu .k-state-active
         {
             color: #000;
             border-color: #B5B5B5 #DFDFDF #E0E0E0;
             background: -webkit-gradient(linear, 0 0, 0 100%, from(#e8e8e8), to(#e0e0e0));
             background: -moz-linear-gradient(top, #e8e8e8, #e0e0e0);
             border-radius: 10px;
+        }
+
+        .tools .k-content
+        {
+            background: transparent;
+            border: 0;
+            margin: 0;
+            padding: 0;
         }
 
         .box
@@ -354,15 +383,17 @@
             background: -moz-linear-gradient(top, #e0e0e0, #fff);
         }
 
-        .recent-colors
+        .recents
         {
+            border: 0;
             height: 45px;
             width: 100%;
             position: relative;
             box-shadow: inset 1px 1px 0 rgba(0,0,0,.2), inset -1px -1px 0 rgba(255,255,255,.2);
         }
 
-        .recent-colors:before {
+        .recents:before
+        {
             content: "Recent Colors";
             display: block;
             position: absolute;
@@ -378,9 +409,19 @@
             z-index: -2;
         }
 
+        .recent-gradients:before
+        {
+            content: "Recent Gradients";
+        }
+
+        .recent-patterns:before
+        {
+            content: "Recent Patterns";
+        }
+
         .k-static-picker
         {
-            top: 62px !important;
+            top: 0 !important;
             left: 540px !important;
             padding: 0 !important;
             margin: 0 !important;
@@ -582,16 +623,27 @@
 <body class="body">
         <div class="header">
             theme<span>builder<span class="underTitle">Kendo UI Mobile</span></span>
+        </div>
+        <div class="tools">
             <ul class="menu">
                 <li class="k-state-active">Colors</li>
                 <li>Gradients</li>
                 <li>Patterns</li>
-                <li>Styles</li>
             </ul>
-        </div>
-        <div class="tools">
-            <div class="color-holder">
-                <div class="recent-colors"></div>
+            <div>
+                <div class="holder color-holder k-popup">
+                    <div class="recents recent-colors"></div>
+                </div>
+            </div>
+            <div>
+                <div class="holder gradient-holder k-popup">
+                    <div class="recents recent-gradients"></div>
+                </div>
+            </div>
+            <div>
+                <div class="holder pattern-holder k-popup">
+                    <div class="recents recent-patterns"></div>
+                </div>
             </div>
         </div>
         <div class="box">
