@@ -1209,7 +1209,7 @@
 
             var wnd = container.data("kendoWindow");
 
-            wnd.wrapper.on(CLICK + NS, ".k-i-close", function() {
+            wnd.wrapper.on(CLICK + NS, "a:has(.k-i-close)", function() {
                 that.cancelRow();
             });
 
