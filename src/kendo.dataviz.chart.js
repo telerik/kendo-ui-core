@@ -4518,9 +4518,10 @@
                         stroke: line.options.color,
                         dashType: line.options.dashType
                     },
-                    linePos = round(line.pos);
+                    linePos = round(line.pos),
+                    samePane = axis.pane === secondaryAxis.pane;
 
-                if (secAxisPos === linePos && secondaryAxis.options.line.visible) {
+                if (samePane && secAxisPos === linePos && secondaryAxis.options.line.visible) {
                     return null;
                 }
 

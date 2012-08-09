@@ -864,11 +864,10 @@
                     }];
 
                 function createPlotArea(categoryAxis, valueAxis, options) {
-                    plotArea = new dataviz.CategoricalPlotArea(barSeriesData, {
+                    plotArea = new dataviz.CategoricalPlotArea(barSeriesData, kendo.deepExtend({
                         categoryAxis: categoryAxis,
-                        valueAxis: valueAxis,
-                        plotArea: options
-                    });
+                        valueAxis: valueAxis
+                    }, options));
 
                     stubMethod(dataviz.NumericAxis.fn, "getViewElements", function() { return []; },
                         function() {
@@ -896,6 +895,21 @@
                     });
 
                     equal(view.log.line.length, 7);
+                });
+
+                test("renders gridlines over hidden value axis", function() {
+                    createPlotArea({
+                        categories: ["A"],
+                        majorGridLines: {
+                            visible: true
+                        }
+                    }, {
+                        line: {
+                            visible: false
+                        }
+                    });
+
+                    equal(view.log.line.length, 8);
                 });
 
                 test("should not render gridlines for numeric axis", function() {
@@ -962,6 +976,32 @@
 
                     createPlotArea(categoryAxis, valueAxis);
                     equals(view.log.line[0].x2, plotArea.namedValueAxes.primary.lineBox().x2);
+                });
+
+                // ------------------------------------------------------------
+                module("Categorical PlotArea / Major Gridlines / Panes", {
+                    setup: function() {
+                        moduleSetup();
+                    }
+                });
+
+                test("renders gridlines when value axis is in different pane", function() {
+                    createPlotArea({
+                            categories: ["A"],
+                            majorGridLines: {
+                                visible: true
+                            }
+                        }, {
+                            pane: "bottom"
+                        }, {
+                            panes: [{
+                                name: "top"
+                            }, {
+                                name: "bottom"
+                            }]
+                    });
+
+                    equal(view.log.line.length, 9);
                 });
 
                 // ------------------------------------------------------------
@@ -1119,10 +1159,12 @@
                         valueAxis = { };
 
                     createPlotArea(categoryAxis, valueAxis, {
-                        border: {
-                            color: "red",
-                            width: 2,
-                            dashType: "dot"
+                        plotArea: {
+                            border: {
+                                color: "red",
+                                width: 2,
+                                dashType: "dot"
+                            }
                         }
                     });
 
