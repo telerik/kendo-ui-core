@@ -3377,6 +3377,9 @@
             var chart = this,
                 segment;
 
+            if (!value) {
+                return;
+            }
             segment = new PieSegment(value, sector, fields.series);
             segment.options.id = uniqueId();
             extend(segment, fields);
@@ -3827,6 +3830,9 @@
             var chart = this,
                 segment;
 
+            if (!value) {
+                return;
+            }
             segment = new DonutSegment(value, sector, fields.series);
             segment.options.id = uniqueId();
             extend(segment, fields);
