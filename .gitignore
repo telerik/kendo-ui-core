@@ -50,3 +50,4 @@ wrappers/mvc/demos/**/Content
 wrappers/mvc/demos/**/App_Data
 Guardfile
 playground/chart-*
+wrappers/java/**/target

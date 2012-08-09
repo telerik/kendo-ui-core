@@ -1,0 +1,38 @@
+<project
+        xmlns="http://maven.apache.org/POM/4.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>spring-kendo</groupId>
+    <artifactId>spring-kendo</artifactId>
+    <packaging>war</packaging>
+    <version>1.0</version>
+    <name>Kendo Spring MVC Demos</name>
+
+    <properties>
+        <org.springframework.version>3.1.0.RELEASE</org.springframework.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${org.springframework.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>tomcat-maven-plugin</artifactId>
+
+                <configuration>
+                    <server>tomcat7</server>
+                    <url>http://localhost:8080/manager/text</url>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
