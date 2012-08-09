@@ -2591,12 +2591,21 @@
                 stack = chart.options.isStacked && segment.seriesIx > 0,
                 plotArea = chart.plotArea,
                 invertAxes = chart.options.invertAxes,
-                axisLineBox = plotArea.categoryAxis.lineBox(),
-                end = invertAxes ? axisLineBox.x1 : axisLineBox.y1,
+                valueAxis = chart.seriesValueAxis(segment.series),
+                valueAxisLineBox = valueAxis.lineBox(),
+                categoryAxisLineBox = plotArea.categoryAxis.lineBox(),
+                end = invertAxes ? categoryAxisLineBox.x1 : categoryAxisLineBox.y1,
                 stackPoints = segment.stackPoints,
                 points = LineSegment.fn.points.call(segment, stackPoints),
                 firstPoint,
                 lastPoint;
+
+            // TODO: Refactor to Box2D.clipPoint or sth.
+            if (invertAxes) {
+                end = math.max(math.min(end, valueAxisLineBox.x2), valueAxisLineBox.x1);
+            } else {
+                end = math.max(math.min(end, valueAxisLineBox.y2), valueAxisLineBox.y1);
+            }
 
             if (!stack && points.length > 1) {
                 firstPoint = points[0];
@@ -4768,15 +4777,29 @@
                 return;
             }
 
-            var plotArea = this,
-                firstSeries = series[0],
-                areaChart = new AreaChart(plotArea, {
-                    invertAxes: plotArea.invertAxes,
-                    isStacked: firstSeries.stack && series.length > 1,
-                    series: series
-                });
+            var seriesByPane = {};
+            for (var i = 0; i < series.length; i++) {
+                var paneName = this.seriesPaneName(series[i]);
+                if (seriesByPane[paneName]) {
+                    seriesByPane[paneName].push(series[i]);
+                } else {
+                    seriesByPane[paneName] = [series[i]];
+                }
+            }
 
-            plotArea.appendChart(areaChart);
+            for (var paneName in seriesByPane) {
+                var paneSeries = seriesByPane[paneName];
+
+                var plotArea = this,
+                    firstSeries = paneSeries[0],
+                    areaChart = new AreaChart(plotArea, {
+                        invertAxes: plotArea.invertAxes,
+                        isStacked: firstSeries.stack && paneSeries.length > 1,
+                        series: paneSeries
+                    });
+
+                plotArea.appendChart(areaChart);
+            }
         },
 
         createCategoryAxis: function() {
