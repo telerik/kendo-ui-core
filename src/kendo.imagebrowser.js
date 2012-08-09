@@ -429,7 +429,7 @@
                 if (data[idx].get(typeField) === "d" &&
                     data[idx].get(nameField).toLowerCase() === name.toLowerCase() &&
                     data[idx].uid !== uid) {
-                    return true
+                    return true;
                 }
             }
             return false;
