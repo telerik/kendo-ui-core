@@ -4,8 +4,8 @@
         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>spring-kendo</groupId>
-    <artifactId>spring-kendo</artifactId>
+    <groupId>spring-demos</groupId>
+    <artifactId>spring-demos</artifactId>
     <packaging>war</packaging>
     <version>1.0</version>
     <name>Kendo Spring MVC Demos</name>
