@@ -117,7 +117,7 @@
         if(path === undefined || !path.match(/\/$/)) {
             path = (path || "") + "/";
         }
-        return path + encodeURIComponent(name);
+        return path + name;
     }
 
     function sizeFormatter(value) {
@@ -369,7 +369,7 @@
                 typeField = that._getFieldName(TYPEFIELD),
                 view = that.dataSource.data(),
                 name = that._nameDirectory(),
-                model = {};
+                model = new that.dataSource.reader.model();
 
             for (idx = 0, length = view.length; idx < length; idx++) {
                 if (view[idx].get(typeField) === "d") {
@@ -377,22 +377,26 @@
                 }
             }
 
-            model[typeField] = "d";
-            model[that._getFieldName(NAMEFIELD)] = name;
-            model._defaultId = name; // mark it as new
+            model.set(typeField, "d");
+            model.set(that._getFieldName(NAMEFIELD), name);
 
             that.listView.one("dataBound", function() {
-                var selected = that.listView.select(),
+                var selected = that.listView.items()
+                    .filter("[" + kendo.attr("uid") + "=" + model.uid + "]"),
                     input = selected.find("input");
 
-              //  that.element.scrollTop(selected.attr("offsetTop") - this.element[0].offsetHeight);
+                if (selected.length) {
+                    this.edit(selected);
+                }
+
+                that.element.scrollTop(selected.attr("offsetTop") - this.element[0].offsetHeight);
 
                 setTimeout(function() {
                     input.select();
                 });
             });
 
-            model = that.dataSource.insert(++lastDirectoryIdx, model);
+            that.dataSource.insert(++lastDirectoryIdx, model);
         },
 
         _directoryKeyDown: function(e) {
@@ -402,16 +406,7 @@
         },
 
         _directoryBlur: function(e) {
-            var that = this,
-                tile = $(e.currentTarget).closest("li.k-state-selected"),
-                model;
-
-            if (tile.length) {
-                model = that.dataSource.getByUid(tile.attr(kendo.attr("uid")));
-
-                model.set(that._getFieldName(NAMEFIELD), e.currentTarget.value);
-                that.dataSource.sync();
-            }
+            this.listView.save();
         },
 
         _nameDirectory: function() {
@@ -469,6 +464,7 @@
             that.listView = new kendo.ui.ListView(that.list, {
                 dataSource: that.dataSource,
                 template: that._itemTmpl(),
+                editTemplate: that._editTmpl(),
                 selectable: true,
                 autoBind: false,
                 dataBound: function() {
@@ -640,9 +636,9 @@
             }, this), 250);
         },
 
-        _itemTmpl: function() {
+        _editTmpl: function() {
             var that = this,
-                html = '<li class="k-tile #= isNew() ? \"k-state-selected\" : \"\" #" ' + kendo.attr("uid") + '="#=uid#" ';
+                html = '<li class="k-tile k-state-selected" ' + kendo.attr("uid") + '="#=uid#" ';
 
             html += kendo.attr("type") + '="${' + that._getFieldName(TYPEFIELD) + '}">';
             html += '#if(' + that._getFieldName(TYPEFIELD) + ' == "d") { #';
@@ -650,12 +646,26 @@
             html += "#}else{#";
             html += '<div class="k-thumb"><span class="k-icon k-loading"></span></div>';
             html += "#}#";
-            html += '#if(' + that._getFieldName(TYPEFIELD) + ' == "d" && isNew()) { #';
-            html += '<input class="k-input" value="#=' + that._getFieldName(NAMEFIELD) + '#"/>';
-            html += "#} else {#";
+            html += '#if(' + that._getFieldName(TYPEFIELD) + ' == "d") { #';
+            html += '<input class="k-input" ' + kendo.attr("bind") + '="value:' + that._getFieldName(NAMEFIELD) + '"/>';
+            html += "#}#";
+            html += '</li>';
+
+            return proxy(kendo.template(html), { sizeFormatter: sizeFormatter } );
+        },
+
+        _itemTmpl: function() {
+            var that = this,
+                html = '<li class="k-tile" ' + kendo.attr("uid") + '="#=uid#" ';
+
+            html += kendo.attr("type") + '="${' + that._getFieldName(TYPEFIELD) + '}">';
+            html += '#if(' + that._getFieldName(TYPEFIELD) + ' == "d") { #';
+            html += '<div class="k-thumb"><span class="k-icon k-folder"></span></div>';
+            html += "#}else{#";
+            html += '<div class="k-thumb"><span class="k-icon k-loading"></span></div>';
+            html += "#}#";
             html += '<strong>${' + that._getFieldName(NAMEFIELD) + '}</strong>';
             html += '#if(' + that._getFieldName(TYPEFIELD) + ' == "f") { # <span class="k-filesize">${this.sizeFormatter(' + that._getFieldName(SIZEFIELD) + ')}</span> #}#';
-            html += "#}#";
             html += '</li>';
 
             return proxy(kendo.template(html), { sizeFormatter: sizeFormatter } );

@@ -564,7 +564,7 @@
                 var tile =  browser.list.find("li:last");
                 var model = browser.dataSource.getByUid(tile.attr("data-uid"));
 
-                tile.find("input").val("foo").blur();
+                tile.find("input").val("foo").change().blur();
                 equal(model.get("name"), "foo");
             });
 
@@ -584,7 +584,7 @@
                 var tile =  browser.list.find("li:last");
                 var model = browser.dataSource.getByUid(tile.attr("data-uid"));
 
-                tile.find("input").val("foo").blur();
+                tile.find("input").val("foo").change().blur();
                 equal(model.get("name"), "foo");
             });
 
