@@ -497,7 +497,6 @@
                     that.dataItem(this).set(CHECKED, isChecked);
                 });
 
-                // update indeterminate state of parents
                 that._updateIndeterminate(node);
             } else {
                 that.dataItem(node).set(CHECKED, isChecked);
@@ -589,7 +588,12 @@
                     that._trigger(SELECT, selection);
                 }
             } else if (key == keys.SPACEBAR) {
-                that.dataItem(selection).set(CHECKED, !checkbox.prop(CHECKED));
+                checkbox.prop(CHECKED, !checkbox.prop(CHECKED))
+                    .data("indeterminate", false)
+                    .prop("indeterminate", false);
+
+                that._checkboxChange({ target: checkbox });
+
                 target = selection;
             }
 
