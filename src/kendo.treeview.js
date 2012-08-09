@@ -198,7 +198,21 @@
                 .on(CLICK + NS, clickableItems, proxy(that._nodeClick, that))
                 .on("dblclick" + NS, "div:not(.k-state-disabled) .k-in", proxy(that._toggleButtonClick, that))
                 .on(CLICK + NS, ".k-plus,.k-minus", proxy(that._toggleButtonClick, that))
-                .on("change" + NS, ".k-checkbox :checkbox", proxy(that._checkboxChange, that));
+                .on("change" + NS, ".k-checkbox :checkbox", proxy(that._checkboxChange, that))
+                .on("click" + NS, ".k-checkbox :checkbox", proxy(that._checkboxClick, that));
+        },
+
+        _checkboxClick: function(e) {
+            var checkbox = $(e.target);
+
+            if (checkbox.data("indeterminate")) {
+                checkbox
+                    .data("indeterminate", false)
+                    .prop("indeterminate", false)
+                    .prop(CHECKED, true);
+
+                this._checkboxChange(e);
+            }
         },
 
         _attachUids: function(root, dataSource) {
@@ -457,15 +471,10 @@
                     }
                 }
 
-                if (all) {
-                    checkboxes(parentNode)
-                        .prop("indeterminate", false)
-                        .prop(CHECKED, siblingCheckboxes[0].checked);
-                } else {
-                    checkboxes(parentNode)
-                        .prop("indeterminate", true)
-                        .prop(CHECKED, false);
-                }
+                checkboxes(parentNode)
+                    .data("indeterminate", !all)
+                    .prop("indeterminate", !all)
+                    .prop(CHECKED, all && siblingCheckboxes[0].checked);
 
                 this._updateIndeterminate(parentNode);
             }
