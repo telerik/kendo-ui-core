@@ -81,6 +81,10 @@
             var output = "", that = this,
                 target = !isNaN(index) ? [ that.value[index]] : that.value;
 
+            if (prefixes == "svg") {
+                return that._getSVGGradient(target[0], direction);
+            }
+
             if (typeof prefixes == "undefined") {
                 prefixes = [ kendo.support.transforms.css ];
             } else if (typeof prefixes == "string") {
@@ -195,18 +199,18 @@
             return output.substring(0, output.length - 1) + "),";
         },
 
-        _getSVGGradient: function (gradient, direction) {
-            var output = "",
-                normalizedStart = direction ? normalizePosition(direction) : null,
-                normalizedEnd = direction ? normalizePosition(direction, true) : null;
-
-            output += "-webkit-gradient(linear," + (direction ? normalizedStart : gradient.start.normalized) + "," + (direction ? normalizedEnd : gradient.end.normalized) + ",";
+        _getSVGGradient: function (gradient) {
+            var output = "", color, alpha;
 
             gradient.stops.forEach(function(stop) {
-                output += "color-stop(" + (trimZeroes(stop.position / 100) || "0") + ", " + stop.color.get() + "),";
+                color = $.extend(stop.color.value);
+                alpha = color.alpha;
+                color.alpha = 1;
+
+                output += '<stop offset="' + (trimZeroes(stop.position / 100) || "0") + '" stop-color="' + stop.color.color2css(color) + '" stop-opacity="' + alpha + '" %2F>';
             });
 
-            return output.substring(0, output.length - 1) + "),";
+            return output.replace(/#/g, "%23");
         }
     });
 
