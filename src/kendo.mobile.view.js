@@ -511,7 +511,6 @@
                 container = that.container,
                 views,
                 modalViews,
-                elementsToTransfer = roleSelector("layout modalview") + ", script, style",
                 view;
 
             if (BODY_REGEX.test(html)) {
@@ -520,15 +519,17 @@
 
             sandbox[0].innerHTML = html;
 
+            container.append(sandbox.children("script, style"));
+
             views = that._hideViews(sandbox);
             view = views.first();
-
             view.hide().attr(attr("url"), url);
 
             that._setupLayouts(sandbox);
+
             modalViews = sandbox.children(roleSelector("modalview"));
 
-            container.append(sandbox.children(elementsToTransfer).add(views));
+            container.append(sandbox.children(roleSelector("layout modalview")).add(views));
 
             // Initialize the modalviews after they have been appended to the final container
             initWidgets(modalViews);

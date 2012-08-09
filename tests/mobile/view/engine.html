@@ -18,6 +18,7 @@
         <script src="../../../src/kendo.mobile.pane.js"></script>
         <script src="../../../src/kendo.mobile.loader.js"></script>
         <script src="../../../src/kendo.mobile.application.js"></script>
+        <script src="../../../src/kendo.mobile.button.js"></script>
         <script src="../../jquery.mockjax.js"></script>
         <link rel="stylesheet" href="../../qunit/qunit/qunit.css" />
     </head>
@@ -195,6 +196,24 @@
                     equal(root.find("#remoteStyle").length, 1, "Style is injected");
                     ok(viewEngine.layouts["remoteLayout"], "Layout is injected");
                     ok(window.scriptInjected,  "Script is injected");
+                });
+
+                viewEngine.showView("page2.html");
+            });
+
+            asyncTest("remote layout widgets bind to remote js event handlers", 1, function() {
+
+                $.mockjax({
+                    url: "page2.html",
+                    responseText: '<body><div data-role="view" id="page2" data-layout="remoteLayout">Page 2</div></body><style ' +
+                        'id="remoteStyle"></style><script id="remoteScript">function foo() { ok(true); }</scr' +
+                        'ipt><div data-role="layout" data-id="remoteLayout"><div data-role="header"><a data-role="button" data-click="foo" id="remoteButton">Foo</a></div></div></body>'
+                });
+
+                viewEngine.bind("viewShow", function(e) {
+                    start();
+                    root.find("#remoteButton").trigger(kendo.support.mouseup);
+                    console.log(root.find("#remoteButton"));
                 });
 
                 viewEngine.showView("page2.html");
