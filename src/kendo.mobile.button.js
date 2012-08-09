@@ -16,6 +16,10 @@
         removeActiveID = 0,
         proxy = $.proxy;
 
+    function hideDeviceKeyboard() {
+        document.activeElement.blur();
+    }
+
     var Button = Widget.extend({
         init: function(element, options) {
             var that = this;
@@ -31,6 +35,7 @@
 
             element.on(MOUSEUP, that._releaseProxy);
             element.on(MOUSEDOWN_NS + " " + MOUSECANCEL + " " + MOUSEUP, that._removeProxy);
+            element.on(MOUSEDOWN_NS, hideDeviceKeyboard);
 
             if (ANDROID3UP) {
                 element.on(MOUSEMOVE, function (e) {
@@ -70,6 +75,9 @@
             if (e.which > 1) {
                 return;
             }
+
+            // that.element[0].blur();
+
 
             if (that.trigger(CLICK, {target: $(e.target), button: that.element})) {
                 e.preventDefault();
