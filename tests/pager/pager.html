@@ -627,8 +627,8 @@
                     pageSizes: [10, 20]
                 });
 
-                equal(container.find("select").data("kendoDropDownList")
-                    .wrapper.css("display"), "");
+                ok(container.find("select").data("kendoDropDownList")
+                    .wrapper.css("display") !== "none");
             });
         </script>
     </body>
