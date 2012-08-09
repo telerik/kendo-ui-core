@@ -4738,15 +4738,29 @@
                 return;
             }
 
-            var plotArea = this,
-                firstSeries = series[0],
-                lineChart = new LineChart(plotArea, {
-                    invertAxes: plotArea.invertAxes,
-                    isStacked: firstSeries.stack && series.length > 1,
-                    series: series
-                });
+            var seriesByPane = {};
+            for (var i = 0; i < series.length; i++) {
+                var paneName = this.seriesPaneName(series[i]);
+                if (seriesByPane[paneName]) {
+                    seriesByPane[paneName].push(series[i]);
+                } else {
+                    seriesByPane[paneName] = [series[i]];
+                }
+            }
 
-            plotArea.appendChart(lineChart);
+            for (var paneName in seriesByPane) {
+                var paneSeries = seriesByPane[paneName];
+
+                var plotArea = this,
+                    firstSeries = paneSeries[0],
+                    lineChart = new LineChart(plotArea, {
+                        invertAxes: plotArea.invertAxes,
+                        isStacked: firstSeries.stack && paneSeries.length > 1,
+                        series: paneSeries
+                    });
+
+                plotArea.appendChart(lineChart);
+            }
         },
 
         createAreaChart: function(series) {
