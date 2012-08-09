@@ -102,6 +102,8 @@
     box-sizing: border-box;
 }
 
+*+html .k-button { line-height: normal; }
+
 a.k-button
 {
     -webkit-user-select: none;
@@ -2327,6 +2329,8 @@ input.k-textbox
     height: 2.12em;
     line-height: 1.6em;
 }
+
+*+html input.k-textbox { display: block; line-height: 1.72em; height: 1.72em; text-indent: .3em; }
 
 textarea.k-textbox
 {
