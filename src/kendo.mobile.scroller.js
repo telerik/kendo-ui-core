@@ -304,6 +304,7 @@
         _initPullToRefresh: function() {
             var that = this;
 
+            that.dimensions.y.forceEnabled();
             that.pullTemplate = kendo.template(that.options.pullTemplate);
             that.releaseTemplate = kendo.template(that.options.releaseTemplate);
             that.refreshTemplate = kendo.template(that.options.refreshTemplate);
