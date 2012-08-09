@@ -1,0 +1,20 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>kendo-taglib</groupId>
+    <artifactId>kendo-taglib</artifactId>
+    <packaging>jar</packaging>
+    <version>1.0</version>
+    <name>Kendo Tag Library</name>
+<build>
+	<plugins>
+		<plugin>
+	        <groupId>org.apache.maven.plugins</groupId>
+	        <artifactId>maven-compiler-plugin</artifactId>
+	        <configuration>
+	          <source>1.7</source>
+	          <target>1.7</target>
+	        </configuration>
+      	</plugin>
+	</plugins>
+</build>
+</project>

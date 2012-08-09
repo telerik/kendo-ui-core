@@ -51,3 +51,6 @@ wrappers/mvc/demos/**/App_Data
 Guardfile
 playground/chart-*
 wrappers/java/**/target
+wrappers/java/**/.classpath
+wrappers/java/**/.project
+wrappers/java/**/.settings
