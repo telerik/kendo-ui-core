@@ -104,6 +104,32 @@
 
                 dialog.refresh("/foo");
             });
+
+            test("moving minimized window does not show drag handles", function() {
+                var dialog = createWindow();
+
+                dialog.minimize();
+
+                dialog.dragging.dragend({
+                    currentTarget: dialog.wrapper
+                });
+
+                equal(dialog.wrapper.find(".k-resize-handle").css("display"), "none");
+            });
+
+            test("moving minimized window does not show drag handles", function() {
+                var dialog = createWindow();
+
+                dialog.minimize();
+
+                dialog.initialWindowPosition = { top: 0, left: 0 };
+
+                dialog.dragging.dragcancel({
+                    currentTarget: dialog.wrapper
+                });
+
+                equal(dialog.wrapper.find(".k-resize-handle").css("display"), "none");
+            });
         </script>
 
         <h1 id="qunit-header">kendo.ui.Window Tests</h1>
