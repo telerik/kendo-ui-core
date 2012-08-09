@@ -52,10 +52,7 @@
 
             that._reset();
 
-            if (!touch) {
-                element[0].type = "text";
-            }
-
+            element[0].type = "text";
             element.addClass("k-input")
                    .on("keydown" + ns, $.proxy(that._keydown, that))
                    .on("focus" + ns, function() {
