@@ -450,6 +450,7 @@
             $.extend(that, options);
 
             that.max = 0;
+            that._forceEnabled = false;
 
             if (that.horizontal) {
                 that.measure = "width";
@@ -467,7 +468,11 @@
         },
 
         present: function() {
-            return this.max - this.min;
+            return this._forceEnabled || (this.max - this.min);
+        },
+
+        forceEnabled: function() {
+            this._forceEnabled = true;
         },
 
         getSize: function() {
