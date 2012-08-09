@@ -923,28 +923,26 @@
             $(wnd.wrapper).css(coordinates);
         },
 
-        dragcancel: function (e) {
+        _finishDrag: function() {
             var wnd = this.owner;
 
             wnd.wrapper
-                .find(KWINDOWRESIZEHANDLES).show().end()
+                .find(KWINDOWRESIZEHANDLES).toggle(!wnd.options.isMinimized).end()
                 .find(KOVERLAY).remove();
 
             $(BODY).css(CURSOR, "");
+        },
 
-            e.currentTarget.closest(KWINDOW).css(wnd.initialWindowPosition);
+        dragcancel: function (e) {
+            this._finishDrag();
+
+            e.currentTarget.closest(KWINDOW).css(this.owner.initialWindowPosition);
         },
 
         dragend: function (e) {
-            var wnd = this.owner;
+            this._finishDrag();
 
-            wnd.wrapper
-                .find(KWINDOWRESIZEHANDLES).show().end()
-                .find(KOVERLAY).remove();
-
-            $(BODY).css(CURSOR, "");
-
-            wnd.trigger(DRAGEND);
+            this.owner.trigger(DRAGEND);
 
             return false;
         }
