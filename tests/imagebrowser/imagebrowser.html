@@ -568,6 +568,40 @@
                 equal(model.get("name"), "foo");
             });
 
+            test("name is generated if directory name is empty", 2, function() {
+                var browser = setup({
+                    transport: {
+                        create:
+                            function() { ok(true); }
+                        }
+                }, []);
+
+                browser.createDirectory();
+
+                var tile =  browser.list.find("li:last");
+                var model = browser.dataSource.getByUid(tile.attr("data-uid"));
+
+                tile.find("input").val("").change().blur();
+                equal(model.get("name"), "New folder");
+            });
+
+            test("name is generated if directory name is changed to already existing one", 2, function() {
+                var browser = setup({
+                    transport: {
+                        create:
+                            function() { ok(true); }
+                        }
+                }, [{ name: "New folder", type: "d" }]);
+
+                browser.createDirectory();
+
+                var tile =  browser.list.find("li:last");
+                var model = browser.dataSource.getByUid(tile.attr("data-uid"));
+
+                tile.find("input").val("new Folder").change().blur();
+                equal(model.get("name"), "New folder (2)");
+            });
+
             test("saving the new directory calls the DataSource create passing the path", 2, function() {
                 var browser = setup({
                     transport: {

@@ -366,6 +366,7 @@
                 length,
                 lastDirectoryIdx = 0,
                 typeField = that._getFieldName(TYPEFIELD),
+                nameField = that._getFieldName(NAMEFIELD),
                 view = that.dataSource.data(),
                 name = that._nameDirectory(),
                 model = new that.dataSource.reader.model();
@@ -377,7 +378,7 @@
             }
 
             model.set(typeField, "d");
-            model.set(that._getFieldName(NAMEFIELD), name);
+            model.set(nameField, name);
 
             that.listView.one("dataBound", function() {
                 var selected = that.listView.items()
@@ -393,6 +394,15 @@
                 setTimeout(function() {
                     input.select();
                 });
+            })
+            .one("save", function(e) {
+                var value = e.model.get(nameField);
+
+                if (!value) {
+                    e.model.set(nameField, name);
+                } else {
+                    e.model.set(nameField, that._nameExists(value, model.uid) ? that._nameDirectory() : value);
+                }
             });
 
             that.dataSource.insert(++lastDirectoryIdx, model);
@@ -408,6 +418,23 @@
             this.listView.save();
         },
 
+        _nameExists: function(name, uid) {
+            var data = this.dataSource.data(),
+                typeField = this._getFieldName(TYPEFIELD),
+                nameField = this._getFieldName(NAMEFIELD),
+                idx,
+                length;
+
+            for (idx = 0, length = data.length; idx < length; idx++) {
+                if (data[idx].get(typeField) === "d" &&
+                    data[idx].get(nameField).toLowerCase() === name.toLowerCase() &&
+                    data[idx].uid !== uid) {
+                    return true
+                }
+            }
+            return false;
+        },
+
         _nameDirectory: function() {
             var name = "New folder",
                 data = this.dataSource.data(),
@@ -419,7 +446,7 @@
                 length;
 
             for (idx = 0, length = data.length; idx < length; idx++) {
-                if (data[idx].get(typeField) === "d" && data[idx].get(nameField).indexOf(name) > -1) {
+                if (data[idx].get(typeField) === "d" && data[idx].get(nameField).toLowerCase().indexOf(name.toLowerCase()) > -1) {
                     directoryNames.push(data[idx].get(nameField));
                 }
             }
