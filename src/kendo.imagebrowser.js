@@ -299,7 +299,6 @@
                         model.set(fileNameField, e.response[fileNameField]);
                         model.set(sizeField, e.response[sizeField]);
                         that._tiles = that.listView.items().filter("[" + kendo.attr("type") + "=f]");
-                        that._scroll();
                     });
                 }
             } else {
@@ -389,7 +388,7 @@
                     this.edit(selected);
                 }
 
-                that.element.scrollTop(selected.attr("offsetTop") - this.element[0].offsetHeight);
+                this.element.scrollTop(selected.attr("offsetTop") - this.element[0].offsetHeight);
 
                 setTimeout(function() {
                     input.select();
@@ -459,6 +458,7 @@
 
             that.list = $('<ul class="k-reset k-floats k-tiles" />')
                 .appendTo(that.element)
+                .on("scroll" + NS, proxy(that._scroll, that))
                 .on("dblclick" + NS, "li[" + kendo.attr("type") + "=d]", proxy(that._dblClick, that));
 
             that.listView = new kendo.ui.ListView(that.list, {
@@ -611,9 +611,9 @@
 
             clearTimeout(that._timeout);
 
-            that._timeout = setTimeout(proxy(function() {
-                var height = that.element.outerHeight(),
-                    viewTop = that.element.scrollTop(),
+            that._timeout = setTimeout(function() {
+                var height = that.list.outerHeight(),
+                    viewTop = that.list.scrollTop(),
                     viewBottom = viewTop + height;
 
                 that._tiles.each(function() {
@@ -633,7 +633,7 @@
                     return !this.loaded;
                 });
 
-            }, this), 250);
+            }, 250);
         },
 
         _editTmpl: function() {
