@@ -134,7 +134,7 @@
                 that.element.find(".k-pager-sizes select").val(that.pageSize());
 
                 if (kendo.ui.DropDownList) {
-                   that.element.find(".k-pager-sizes select").kendoDropDownList();
+                   that.element.find(".k-pager-sizes select").show().kendoDropDownList();
                 }
 
                 that.element.on(CHANGE + NS, ".k-pager-sizes select", proxy(that._change, that));

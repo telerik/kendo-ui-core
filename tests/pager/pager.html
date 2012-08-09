@@ -610,6 +610,25 @@
 
                 equal(pager.find(".k-pager-numbers").length, 0);
             });
+
+            test("dropdown is visible when pager is created multiple times", function() {
+                setup();
+
+                container = $("<div/>").kendoPager({
+                    dataSource: dataSource,
+                    pageSizes: [10, 20]
+                });
+
+                container.data("kendoPager").destroy();
+
+                container.kendoPager({
+                    dataSource: dataSource,
+                    pageSizes: [10, 20]
+                });
+
+                equal(container.find("select").data("kendoDropDownList")
+                .wrapper.css("display"), "");
+            });
         </script>
     </body>
 </html>
