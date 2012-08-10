@@ -1698,7 +1698,7 @@
                 test("right anchor axis is assigned per pane", function() {
                     createPlotArea({
                         panes: [{
-                            name: "a",
+                            name: "a"
                         }, {
                             name: "b"
                         }],
@@ -1716,6 +1716,67 @@
                            plotArea.namedValueAxes["primary"].box.x1);
                 });
 
+                // ------------------------------------------------------------
+                module("Categorical PlotArea / Panes / Title", {
+                    setup: function() {
+                        moduleSetup();
+                    }
+                });
+
+                test("title is not visible by default", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a"
+                        }]
+                    });
+
+                    var textBox = plotArea.panes[0].title;
+                    equals(textBox, null);
+                });
+
+                test("title is aligned in pane center", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a",
+                            title: {
+                                text: "Title"
+                            }
+                        }]
+                    });
+
+                    var textBox = plotArea.panes[0].title.children[0];
+                    equals(textBox.box.x1, 528.5, TOLERANCE);
+                });
+
+                test("title is aligned left", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a",
+                            title: {
+                                text: "Title",
+                                align: "left"
+                            }
+                        }]
+                    });
+
+                    var textBox = plotArea.panes[0].title.children[0];
+                    equals(textBox.box.x1, 100);
+                });
+
+                test("title is aligned right", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a",
+                            title: {
+                                text: "Title",
+                                align: "right"
+                            }
+                        }]
+                    });
+
+                    var textBox = plotArea.panes[0].title.children[0];
+                    equals(textBox.box.x1, 957, TOLERANCE);
+                });
             })();
 
             (function() {

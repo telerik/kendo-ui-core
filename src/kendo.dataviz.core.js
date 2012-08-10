@@ -766,15 +766,16 @@
             var title = this;
             ChartElement.fn.init.call(title, options);
 
+            options = title.options;
             title.append(
-                new TextBox(title.options.text, deepExtend({}, title.options, {
-                    vAlign: title.options.position
+                new TextBox(options.text, deepExtend({}, options, {
+                    vAlign: options.position
                 }))
             );
         },
 
         options: {
-            text: "",
+            visible: true,
             color: BLACK,
             position: TOP,
             align: CENTER,
@@ -2581,6 +2582,7 @@
         append: append,
         autoFormat: autoFormat,
         autoMajorUnit: autoMajorUnit,
+        boxDiff: boxDiff,
         defined: defined,
         getSpacing: getSpacing,
         inArray: inArray,

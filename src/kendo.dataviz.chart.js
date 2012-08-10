@@ -3903,6 +3903,41 @@
         }
     });
 
+    var Pane = BoxElement.extend({
+        init: function(options) {
+            var pane = this;
+
+            BoxElement.fn.init.call(pane, options);
+
+            options = pane.options;
+            options.id = uniqueId();
+
+            if (options.title.text && options.title.visible) {
+                pane.title = new Title(options.title);
+                pane.append(pane.title);
+            }
+        },
+
+        options: {
+            zIndex: -1,
+            shrinkToFit: true,
+            title: {
+                visible: true,
+                zIndex: 0
+            }
+        },
+
+        reflow: function(targetBox) {
+            var pane = this;
+
+            BoxElement.fn.reflow.call(pane, targetBox);
+
+            if(pane.title) {
+                pane.contentBox = kendo.dataviz.boxDiff(pane.box, pane.title.box);
+            }
+        }
+    });
+
     var PlotAreaBase = ChartElement.extend({
         init: function(series, options) {
             var plotArea = this;
@@ -3944,10 +3979,7 @@
                 currentPane;
 
             for (i = 0; i < panesLength; i++) {
-                currentPane = new BoxElement(paneOptions[i]);
-                currentPane.options.id = uniqueId();
-                currentPane.options.shrinkToFit = true;
-                currentPane.options.zIndex = -1;
+                currentPane = new Pane(paneOptions[i]);
 
                 currentPane.axes = grep(axes, function(axis) {
                     var axisPane = axis.options.pane;
@@ -4523,7 +4555,6 @@
 
                 if (vertical) {
                     if (!secondaryAxis.options.line.visible || secondaryAxisBox.y1 !== linePos) {
-                    console.log(lineStart, linePos, lineEnd, linePos)
                         return view.createLine(
                             lineStart, linePos, lineEnd, linePos,
                             gridLineOptions);
