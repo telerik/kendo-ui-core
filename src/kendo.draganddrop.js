@@ -182,10 +182,30 @@
             return Math.sqrt(xDelta * xDelta + yDelta * yDelta) <= threshold;
         },
 
+        start: function(e) {
+           this.startTime = now;
+           this.trigger(START, e);
+        },
+
         move: function(location) {
             var timestamp = now();
             this.x.move(location, timestamp);
             this.y.move(location, timestamp);
+        },
+
+        trigger: function(name, e) {
+            var that = this,
+                data = {
+                    x: that.x,
+                    y: that.y,
+                    target: that.target,
+                    startTime: that.startTime,
+                    event: e
+                };
+
+            if(that.drag.trigger(name, data)) {
+                e.preventDefault();
+            }
         }
     });
 
@@ -325,7 +345,6 @@
 
             that.pressed = true;
             that.moved = false;
-            that.startTime = null;
 
             if (support.touch) {
                 touch = originalEvent.changedTouches[0];
@@ -358,8 +377,7 @@
                     }
 
                     if (!Drag.captured) {
-                        that.startTime = now();
-                        that._trigger(START, e);
+                        that.sequence.start(e);
                         that.moved = true;
                     } else {
                         return that._cancel();
@@ -368,7 +386,7 @@
 
                 // Event handlers may cancel the swipe in the START event handler, hence the double check for pressed.
                 if (that.pressed) {
-                    that._trigger(MOVE, e);
+                    that.sequence.trigger(MOVE, e);
                 }
             });
         },
@@ -381,28 +399,14 @@
             that._withEvent(e, function() {
                 if (that.moved) {
                     that.endTime = now();
-                    that._trigger(END, e);
+                    that.sequence.trigger(END, e);
                     that.moved = false;
                 } else {
-                    that._trigger(TAP, e);
+                    that.sequence.trigger(TAP, e);
                 }
 
                 that._cancel();
             });
-        },
-
-        _trigger: function(name, e) {
-            var sequence = this.sequence,
-                data = {
-                    x: sequence.x,
-                    y: sequence.y,
-                    target: sequence.target,
-                    event: e
-                };
-
-            if(this.trigger(name, data)) {
-                e.preventDefault();
-            }
         },
 
         _withEvent: function(e, callback) {

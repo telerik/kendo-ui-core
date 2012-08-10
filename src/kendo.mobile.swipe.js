@@ -23,7 +23,7 @@
 
                 move: function(e) {
                     var drag = e.sender,
-                    duration = e.event.timeStamp - drag.startTime,
+                    duration = e.event.timeStamp - e.startTime,
                     direction = e.x.initialDelta > 0 ? "right" : "left";
 
                     if (
