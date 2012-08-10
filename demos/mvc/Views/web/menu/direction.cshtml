@@ -187,7 +187,7 @@
                         initMenu();
                     });
                     var getDirection = function () {
-                        var checked = $("input:[type=radio]:checked")[0].id;
+                        var checked = $("input[type=radio]:checked")[0].id;
                         return /custom|customValue/.test(checked) ? $("#customValue").val() : checked;
                     };
 
