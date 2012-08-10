@@ -3972,16 +3972,50 @@
         reflow: function(targetBox) {
             var plotArea = this,
                 options = plotArea.options.plotArea,
-                margin = getSpacing(options.margin);
+                margin = getSpacing(options.margin),
+                axes = plotArea.axes,
+                axesCount = axes.length,
+                box, i, y, plotAreaBox, firstAxis, secondAxis,
+                firstLineBox, secondLineBox;
 
             plotArea.box = targetBox.clone();
 
-            plotArea.box.unpad(margin);
-
-            if (plotArea.axes.length > 0) {
+            if (axesCount) {
                 plotArea.reflowAxes();
                 plotArea.box = plotArea.axisBox();
             }
+
+            for (i = 0; i < axesCount; i++) {
+                firstAxis = axes[i];
+                for (y = 0; y < axesCount; y++) {
+                    secondAxis = axes[y];
+
+                    if (firstAxis.options.vertical == secondAxis.options.vertical) {
+                        continue;
+                    }
+
+                    if (firstAxis.options.vertical) {
+                        firstLineBox = secondAxis.lineBox();
+                        secondLineBox = firstAxis.lineBox();
+                    } else {
+                        firstLineBox = firstAxis.lineBox();
+                        secondLineBox = secondAxis.lineBox();
+                    }
+
+                    box = new Box2D(
+                        firstLineBox.x1, secondLineBox.y1,
+                        firstLineBox.x2, secondLineBox.y2
+                    );
+
+                    if (!plotAreaBox) {
+                        plotAreaBox = box;
+                    }
+
+                    plotAreaBox = plotAreaBox.wrap(box);
+                }
+            }
+
+            plotArea.box = (plotAreaBox || targetBox).unpad(margin);
 
             plotArea.reflowCharts();
         },
@@ -4307,7 +4341,8 @@
                 elements = [
                     view.createRect(plotArea.box, {
                         fill: userOptions.background,
-                        zIndex: -2
+                        zIndex: -2,
+                        strokeWidth: 0.1
                     }),
                     view.createRect(plotArea.box, {
                         id: options.id,
