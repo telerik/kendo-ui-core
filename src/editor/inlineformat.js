@@ -239,8 +239,6 @@ var GreedyInlineFormatFinder = InlineFormatFinder.extend({
                 }
             }
         }
-
-        return;
     },
 
     getFormatInner: function (node) {
@@ -328,8 +326,8 @@ var FontTool = Tool.extend({
         Tool.fn.init.call(that, options);
 
         // IE has single selection hence we are using select box instead of combobox
-        that.type = ($.browser.msie || kendo.support.touch) ? "kendoDropDownList" : "kendoComboBox";
-        that.format = [{ tags: ["span"] }],
+        that.type = (kendo.support.browser.msie || kendo.support.touch) ? "kendoDropDownList" : "kendoComboBox";
+        that.format = [{ tags: ["span"] }];
         that.finder = new GreedyInlineFormatFinder(that.format, options.cssAttr);
     },
 
@@ -379,7 +377,7 @@ var FontTool = Tool.extend({
             dataTextField: "text",
             dataValueField: "value",
             dataSource: dataSource,
-            change: function (e) {
+            change: function () {
                 Tool.exec(editor, toolName, this.value());
             },
             highlightFirst: false
@@ -465,7 +463,7 @@ var StyleTool = Tool.extend({
             dataValueField: "value",
             dataSource: editor.options.style,
             title: editor.options.messages.style,
-            change: function (e) {
+            change: function () {
                 Tool.exec(editor, "style", this.value());
             },
             highlightFirst: false

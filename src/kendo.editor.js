@@ -5,6 +5,7 @@
         Class = kendo.Class,
         Widget = kendo.ui.Widget,
         os = kendo.support.mobileOS,
+        browser = kendo.support.browser,
         extend = $.extend,
         deepExtend = kendo.deepExtend,
         NS = ".kendoEditor",
@@ -296,7 +297,7 @@
 
                         var target = $(e.target);
 
-                        if (!$.browser.gecko && e.which == 2 && target.is("a[href]")) {
+                        if (!browser.gecko && e.which == 2 && target.is("a[href]")) {
                             window.open(target.attr("href"), "_new");
                         }
                 })
@@ -748,12 +749,12 @@
                 // <img>\s+\w+ creates invalid nodes after cut in IE
                 .replace(/(<\/?img[^>]*>)[\r\n\v\f\t ]+/ig, "$1");
 
-            if (!$.browser.msie) {
+            if (!browser.msie) {
                 // Add <br/>s to empty paragraphs in mozilla/chrome, to make them focusable
                 html = html.replace(/<p([^>]*)>(\s*)?<\/p>/ig, '<p $1><br _moz_dirty="" /><\/p>');
             }
 
-            if ($.browser.msie && parseInt($.browser.version, 10) < 9) {
+            if (browser.msie && parseInt(browser.version, 10) < 9) {
                 // Internet Explorer removes comments from the beginning of the html
                 html = "<br/>" + html;
 
@@ -780,7 +781,7 @@
                 });
             } else {
                 body.innerHTML = html;
-                if ($.browser.msie) {
+                if (browser.msie) {
                     // having unicode characters creates denormalized DOM tree in IE9
                     dom.normalize(body);
                 }
@@ -964,6 +965,7 @@
 var kendo = window.kendo,
     map = $.map,
     extend = $.extend,
+    browser = kendo.support.browser,
     STYLE = "style",
     FLOAT = "float",
     CSSFLOAT = "cssFloat",
@@ -994,7 +996,7 @@ var normalize = function (node) {
     }
 };
 
-if ($.browser.msie && parseInt($.browser.version, 10) >= 8) {
+if (browser.msie && parseInt(browser.version, 10) >= 8) {
     normalize = function(parent) {
         if (parent.nodeType == 1 && parent.firstChild) {
             var prev = parent.firstChild,
@@ -1360,7 +1362,7 @@ var Dom = {
         document.body.appendChild(span[0]);
 
         style = map(cssAttributes, function(value) {
-            if ($.browser.msie && value == "line-height" && span.css(value) == "1px") {
+            if (browser.msie && value == "line-height" && span.css(value) == "1px") {
                 return "line-height:1.5";
             } else {
                 return value + ":" + span.css(value);
@@ -1687,6 +1689,7 @@ extend(Editor, {
         Class = kendo.Class,
         extend = $.extend,
         Editor = kendo.ui.editor,
+        browser = kendo.support.browser,
         dom = Editor.Dom,
         findNodeIndex = dom.findNodeIndex,
         isDataNode = dom.isDataNode,
@@ -1696,7 +1699,7 @@ extend(Editor, {
 
 var SelectionUtils = {
     selectionFromWindow: function(window) {
-        if ($.browser.msie && $.browser.version < 9) {
+        if (browser.msie && browser.version < 9) {
             return new W3CSelection(window.document);
         }
 
@@ -2401,7 +2404,7 @@ var Marker = Class.extend({
                 range[previous ? 'setStartAfter' : 'setStartBefore'](node);
             }
         } else {
-            if (!$.browser.msie && !container.innerHTML) {
+            if (!browser.msie && !container.innerHTML) {
                 container.innerHTML = '<br _moz_dirty="" />';
             }
 
@@ -2582,7 +2585,7 @@ var RangeUtils = {
     },
 
     createRange: function(document) {
-        if ($.browser.msie && $.browser.version < 9) {
+        if (browser.msie && browser.version < 9) {
             return new W3CRange(document);
         }
 
@@ -3621,8 +3624,6 @@ var GreedyInlineFormatFinder = InlineFormatFinder.extend({
                 }
             }
         }
-
-        return;
     },
 
     getFormatInner: function (node) {
@@ -3710,8 +3711,8 @@ var FontTool = Tool.extend({
         Tool.fn.init.call(that, options);
 
         // IE has single selection hence we are using select box instead of combobox
-        that.type = ($.browser.msie || kendo.support.touch) ? "kendoDropDownList" : "kendoComboBox";
-        that.format = [{ tags: ["span"] }],
+        that.type = (kendo.support.browser.msie || kendo.support.touch) ? "kendoDropDownList" : "kendoComboBox";
+        that.format = [{ tags: ["span"] }];
         that.finder = new GreedyInlineFormatFinder(that.format, options.cssAttr);
     },
 
@@ -3761,7 +3762,7 @@ var FontTool = Tool.extend({
             dataTextField: "text",
             dataValueField: "value",
             dataSource: dataSource,
-            change: function (e) {
+            change: function () {
                 Tool.exec(editor, toolName, this.value());
             },
             highlightFirst: false
@@ -3847,7 +3848,7 @@ var StyleTool = Tool.extend({
             dataValueField: "value",
             dataSource: editor.options.style,
             title: editor.options.messages.style,
-            change: function (e) {
+            change: function () {
                 Tool.exec(editor, "style", this.value());
             },
             highlightFirst: false
@@ -4256,7 +4257,7 @@ var ParagraphCommand = Command.extend({
             doc = RangeUtils.documentFromRange(range),
             parent, previous, next,
             container,
-            emptyParagraphContent = $.browser.msie ? '' : '<br _moz_dirty="" />',
+            emptyParagraphContent = kendo.support.browser.msie ? '' : '<br _moz_dirty="" />',
             paragraph, marker, li, heading, rng,
             // necessary while the emptyParagraphContent is empty under IE
             blocks = 'p,h1,h2,h3,h4,h5,h6'.split(','),
@@ -4395,7 +4396,7 @@ var NewLineCommand = Command.extend({
         range.insertNode(br);
         normalize(br.parentNode);
 
-        if (!$.browser.msie && (!br.nextSibling || dom.isWhitespace(br.nextSibling))) {
+        if (!kendo.support.browser.msie && (!br.nextSibling || dom.isWhitespace(br.nextSibling))) {
             //Gecko and WebKit cannot put the caret after only one br.
             var filler = br.cloneNode(true);
             filler.setAttribute('_moz_dirty', '');

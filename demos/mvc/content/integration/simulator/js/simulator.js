@@ -1,4 +1,4 @@
-if ($.browser.webkit || $.browser.mozilla) {
+if (kendo.support.browser.webkit || kendo.support.browser.mozilla) {
     (function($, undefined) {
         var mobiles = {
             ipad: {
@@ -68,7 +68,7 @@ if ($.browser.webkit || $.browser.mozilla) {
                 deviceLink = head.find("link[href*='devices/']"),
                 url = "../../content/integration/simulator/devices/" + devicename + "/styles.css", newLink, os, matches;
 
-            if (!$.browser.msie) {
+            if (!kendo.support.browser.msie) {
                 newLink = deviceLink
                     .eq(0)
                     .clone()

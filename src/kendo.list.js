@@ -19,7 +19,8 @@
         REQUESTSTART = "requestStart",
         extend = $.extend,
         proxy = $.proxy,
-        isIE8 = $.browser.msie && parseInt($.browser.version, 10) < 9,
+        browser = kendo.support.browser,
+        isIE8 = browser.msie && parseInt(browser.version, 10) < 9,
         quotRegExp = /"/g;
 
     var List = Widget.extend({
@@ -213,7 +214,7 @@
             computedStyle = window.getComputedStyle ? window.getComputedStyle(wrapper[0], null) : 0;
             computedWidth = computedStyle ? parseFloat(computedStyle.width) : wrapper.outerWidth();
 
-            if (computedStyle && ($.browser.mozilla || $.browser.msie)) { // getComputedStyle returns different box in FF and IE.
+            if (computedStyle && (browser.mozilla || browser.msie)) { // getComputedStyle returns different box in FF and IE.
                 computedWidth += parseFloat(computedStyle.paddingLeft) + parseFloat(computedStyle.paddingRight) + parseFloat(computedStyle.borderLeftWidth) + parseFloat(computedStyle.borderRightWidth);
             }
 

@@ -1,21 +1,23 @@
-if (jQuery.browser.msie && parseInt(jQuery.browser.version) < 9) {
+var browser = kendo.support.browser;
+
+if (browser.msie && parseInt(browser.version) < 9) {
     for(var e,l="header nav section time".split(" ");e=l.pop();document.createElement(e));
 }
 
 var isInferiorBrowser = false;
 
-if ((jQuery.browser.msie && parseInt(jQuery.browser.version) < 9) ||
-    (jQuery.browser.mozilla && parseFloat(jQuery.browser.version) < 1.9) ||
-    (jQuery.browser.opera && parseInt(jQuery.browser.version) < 10)) {
+if ((browser.msie && parseInt(browser.version) < 9) ||
+    (browser.mozilla && parseFloat(browser.version) < 1.9) ||
+    (browser.opera && parseInt(browser.version) < 10)) {
     isInferiorBrowser = true;
 }
 
 if (!isInferiorBrowser) {
     document.documentElement.className = "";
     $("#noHTML5Alert").hide();
-    if (jQuery.browser.opera) {
+    if (browser.opera) {
         document.documentElement.className += " isOpera";
-    } else if (jQuery.browser.msie) {
+    } else if (browser.msie) {
         document.documentElement.className += " isIE";
     }
 }
@@ -212,7 +214,7 @@ if (!isInferiorBrowser) {
         if (kendo.support.touch) {
             $('#uploadphotos').hide();
             $('#footer > .thumb-list').css('marginRight', '15px');
-            if (!$.browser.mozilla)
+            if (!browser.mozilla)
                 $('#photoWrap').css('overflow', 'hidden');
             $('#bigPhoto').kendoPincer();
             zoomFactor = 1;

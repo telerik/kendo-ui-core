@@ -1339,7 +1339,7 @@ function pad(number) {
 })();
 
     function wrap(element) {
-        var browser = $.browser, percentage;
+        var browser = support.browser, percentage;
 
         if (!element.parent().hasClass("k-animation-container")) {
             var shadow = element.css(kendo.support.transitions.css + "box-shadow") || element.css("box-shadow"),
@@ -1591,10 +1591,10 @@ function pad(number) {
             var browser = false, match = [],
                 browserRxs = {
                     webkit: /(chrome)[ \/]([\w.]+)/i,
-                	safari: /(webkit)[ \/]([\w.]+)/i,
-                	opera: /(opera)(?:.*version|)[ \/]([\w.]+)/i,
+                    safari: /(webkit)[ \/]([\w.]+)/i,
+                    opera: /(opera)(?:.*version|)[ \/]([\w.]+)/i,
                     msie: /(msie) ([\w.]+)/i,
-                	mozilla: /(mozilla)(?:.*? rv:([\w.]+)|)/i
+                    mozilla: /(mozilla)(?:.*? rv:([\w.]+)|)/i
                 };
 
             for (var agent in browserRxs) {

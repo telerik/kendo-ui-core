@@ -23,7 +23,7 @@ var ParagraphCommand = Command.extend({
             doc = RangeUtils.documentFromRange(range),
             parent, previous, next,
             container,
-            emptyParagraphContent = $.browser.msie ? '' : '<br _moz_dirty="" />',
+            emptyParagraphContent = kendo.support.browser.msie ? '' : '<br _moz_dirty="" />',
             paragraph, marker, li, heading, rng,
             // necessary while the emptyParagraphContent is empty under IE
             blocks = 'p,h1,h2,h3,h4,h5,h6'.split(','),
@@ -162,7 +162,7 @@ var NewLineCommand = Command.extend({
         range.insertNode(br);
         normalize(br.parentNode);
 
-        if (!$.browser.msie && (!br.nextSibling || dom.isWhitespace(br.nextSibling))) {
+        if (!kendo.support.browser.msie && (!br.nextSibling || dom.isWhitespace(br.nextSibling))) {
             //Gecko and WebKit cannot put the caret after only one br.
             var filler = br.cloneNode(true);
             filler.setAttribute('_moz_dirty', '');

@@ -3,6 +3,7 @@
 var kendo = window.kendo,
     map = $.map,
     extend = $.extend,
+    browser = kendo.support.browser,
     STYLE = "style",
     FLOAT = "float",
     CSSFLOAT = "cssFloat",
@@ -33,7 +34,7 @@ var normalize = function (node) {
     }
 };
 
-if ($.browser.msie && parseInt($.browser.version, 10) >= 8) {
+if (browser.msie && parseInt(browser.version, 10) >= 8) {
     normalize = function(parent) {
         if (parent.nodeType == 1 && parent.firstChild) {
             var prev = parent.firstChild,
@@ -399,7 +400,7 @@ var Dom = {
         document.body.appendChild(span[0]);
 
         style = map(cssAttributes, function(value) {
-            if ($.browser.msie && value == "line-height" && span.css(value) == "1px") {
+            if (browser.msie && value == "line-height" && span.css(value) == "1px") {
                 return "line-height:1.5";
             } else {
                 return value + ":" + span.css(value);

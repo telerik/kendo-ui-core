@@ -5,6 +5,7 @@
         Class = kendo.Class,
         Widget = kendo.ui.Widget,
         os = kendo.support.mobileOS,
+        browser = kendo.support.browser,
         extend = $.extend,
         deepExtend = kendo.deepExtend,
         NS = ".kendoEditor",
@@ -296,7 +297,7 @@
 
                         var target = $(e.target);
 
-                        if (!$.browser.gecko && e.which == 2 && target.is("a[href]")) {
+                        if (!browser.gecko && e.which == 2 && target.is("a[href]")) {
                             window.open(target.attr("href"), "_new");
                         }
                 })
@@ -748,12 +749,12 @@
                 // <img>\s+\w+ creates invalid nodes after cut in IE
                 .replace(/(<\/?img[^>]*>)[\r\n\v\f\t ]+/ig, "$1");
 
-            if (!$.browser.msie) {
+            if (!browser.msie) {
                 // Add <br/>s to empty paragraphs in mozilla/chrome, to make them focusable
                 html = html.replace(/<p([^>]*)>(\s*)?<\/p>/ig, '<p $1><br _moz_dirty="" /><\/p>');
             }
 
-            if ($.browser.msie && parseInt($.browser.version, 10) < 9) {
+            if (browser.msie && parseInt(browser.version, 10) < 9) {
                 // Internet Explorer removes comments from the beginning of the html
                 html = "<br/>" + html;
 
@@ -780,7 +781,7 @@
                 });
             } else {
                 body.innerHTML = html;
-                if ($.browser.msie) {
+                if (browser.msie) {
                     // having unicode characters creates denormalized DOM tree in IE9
                     dom.normalize(body);
                 }

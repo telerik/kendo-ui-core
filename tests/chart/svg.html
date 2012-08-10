@@ -18,6 +18,7 @@
         <script src="util.js"></script>
         <script type="text/javascript">
             var dataviz = kendo.dataviz,
+                browser = kendo.support.browser,
                 Box2D = dataviz.Box2D,
                 Point2D = dataviz.Point2D,
                 view = new ViewElementStub(),
@@ -234,7 +235,7 @@
                 });
 
                 test("renderElement returns element", function() {
-                    if ($.browser.msie && $.browser.version < 9) {
+                    if (browser.msie && browser.version < 9) {
                         return;
                     }
 
@@ -279,7 +280,7 @@
                 });
 
                 test("renderTo returns DOM element", function() {
-                    if ($.browser.msie && $.browser.version < 9) {
+                    if (browser.msie && browser.version < 9) {
                         return;
                     }
 
@@ -1114,8 +1115,8 @@
                 });
 
                 test("sets absolute url if the page has a base tag (non-IE)", function() {
-                    var msie = $.browser.msie;
-                    $.browser.msie = false;
+                    var msie = browser.msie;
+                    browser.msie = false;
 
                     $("head").append($("<base href='http://foo' />"));
 
@@ -1124,12 +1125,12 @@
                     equals(rect.options.fill, "url(" + hrefNoHash() + "#fillId)");
 
                     $("base").remove();
-                    $.browser.msie = msie;
+                    browser.msie = msie;
                 });
 
                 test("does not set absolute url if the page has a base tag in IE", function() {
-                    var msie = $.browser.msie;
-                    $.browser.msie = true;
+                    var msie = browser.msie;
+                    browser.msie = true;
 
                     $("head").append($("<base href='http://foo' />"));
 
@@ -1138,12 +1139,12 @@
                     equals(rect.options.fill, "url(#fillId)");
 
                     $("base").remove();
-                    $.browser.msie = msie;
+                    browser.msie = msie;
                 });
 
                 test("sets absolute url if the page has a base tag and hash (non-IE)", function() {
-                    var msie = $.browser.msie;
-                    $.browser.msie = false;
+                    var msie = browser.msie;
+                    browser.msie = false;
 
                     window.location.hash = "test";
                     $("head").append($("<base href='http://foo' />"));
@@ -1152,7 +1153,7 @@
                     equals(rect.options.fill, "url(" + hrefNoHash() + "#fillId)");
 
                     $("base").remove();
-                    $.browser.msie = msie;
+                    browser.msie = msie;
                 });
 
                 test("registers gradient definition", function() {
