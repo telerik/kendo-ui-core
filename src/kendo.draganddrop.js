@@ -134,17 +134,14 @@
     }
 
     var DragAxis = Class.extend({
-        init: function(axis) {
-            this.axis = axis;
-        },
-
-        start: function(location, timeStamp) {
+        init: function(axis, location, timeStamp) {
             var that = this,
-                offset = location["page" + that.axis];
+                offset = location["page" + axis];
 
+            that.axis = axis;
             that.startLocation = that.location = offset;
-            that.client = location["client" + that.axis];
-            that.screen = location["screen" + that.axis];
+            that.client = location["client" + axis];
+            that.screen = location["screen" + axis];
             that.velocity = that.delta = 0;
             that.timeStamp = timeStamp;
         },
@@ -164,6 +161,30 @@
             that.initialDelta = offset - that.startLocation;
             that.velocity = that.delta / (timeStamp - that.timeStamp);
             that.timeStamp = timeStamp;
+        }
+    });
+
+    var DragAxes = Class.extend({
+        init: function(drag, location) {
+            var that = this,
+                timestamp = now();
+
+            that.x = new DragAxis("X", location, timestamp);
+            that.y = new DragAxis("Y", location, timestamp);
+            that.drag = drag;
+        },
+
+        withinIgnoreThreshold: function(threshold) {
+            var xDelta = this.x.initialDelta,
+                yDelta = this.y.initialDelta;
+
+            return Math.sqrt(xDelta * xDelta + yDelta * yDelta) <= threshold;
+        },
+
+        move: function(location) {
+            var timestamp = now();
+            this.x.move(location, timestamp);
+            this.y.move(location, timestamp);
         }
     });
 
@@ -208,8 +229,6 @@
             Observable.fn.init.call(that);
 
             extend(that, {
-                x: new DragAxis("X"),
-                y: new DragAxis("Y"),
                 element: element,
                 surface: options.global ? SURFACE : options.surface || element,
                 stopPropagation: options.stopPropagation,
@@ -274,6 +293,7 @@
             that.moved = that.pressed = false;
             that.eventHandler.destroy();
             delete that.eventHandler;
+            delete that.axes;
         },
 
         _start: function(e) {
@@ -316,30 +336,22 @@
                 location = originalEvent;
             }
 
-            that._perAxis(START, location, now());
+            that.axes = new DragAxes(this, location);
             that.eventHandler = new DragEventHandler(that.surface, that);
             Drag.captured = false;
         },
 
         _move: function(e) {
-            var that = this,
-                xDelta,
-                yDelta,
-                delta;
+            var that = this;
 
             if (!that.pressed) { return; }
 
             that._withEvent(e, function(location) {
 
-                that._perAxis(MOVE, location, now());
+                that.axes.move(location);
 
                 if (!that.moved) {
-                    xDelta = that.x.initialDelta;
-                    yDelta = that.y.initialDelta;
-
-                    delta = Math.sqrt(xDelta * xDelta + yDelta * yDelta);
-
-                    if (delta <= that.threshold) {
+                    if (that.axes.withinIgnoreThreshold(that.threshold)) {
                         return;
                     }
 
@@ -377,15 +389,10 @@
             });
         },
 
-        _perAxis: function(method, location, timeStamp) {
-            this.x[method](location, timeStamp);
-            this.y[method](location, timeStamp);
-        },
-
         _trigger: function(name, e) {
             var data = {
-                x: this.x,
-                y: this.y,
+                x: this.axes.x,
+                y: this.axes.y,
                 target: this.target,
                 event: e
             };
