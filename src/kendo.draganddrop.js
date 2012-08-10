@@ -94,10 +94,6 @@
         };
     }
 
-    function addNS(events, ns) {
-        return events.replace(/ /g, ns + " ");
-    }
-
     function preventTrigger(e) {
         e.preventDefault();
 
@@ -171,13 +167,38 @@
         }
     });
 
+    function addNS(events, ns) {
+        return events.replace(/ /g, ns + " ");
+    }
+
+    var DragEventHandler = Class.extend({
+       init: function(surface, drag) {
+           var that = this,
+               map = {},
+               ns = "." + kendo.guid();
+
+            map[addNS(MOVE_EVENTS, ns)] = proxy(drag._move, drag);
+            map[addNS(END_EVENTS, ns)] = proxy(drag._end, drag);
+
+            surface.on(map);
+
+            extend(that, {
+                map: map,
+                ns: ns,
+                surface: surface
+            });
+       },
+
+       destroy: function() {
+           this.surface.off(this.ns);
+       }
+    });
+
     var Drag = Observable.extend({
         init: function(element, options) {
             var that = this,
-                eventMap = {},
                 filter,
-                preventIfMoving,
-                ns = "." + kendo.guid();
+                preventIfMoving;
 
             options = options || {};
             filter = that.filter = options.filter;
@@ -186,9 +207,6 @@
             element = $(element);
             Observable.fn.init.call(that);
 
-            eventMap[addNS(MOVE_EVENTS, ns)] = proxy(that._move, that);
-            eventMap[addNS(END_EVENTS, ns)] = proxy(that._end, that);
-
             extend(that, {
                 x: new DragAxis("X"),
                 y: new DragAxis("Y"),
@@ -196,8 +214,6 @@
                 surface: options.global ? SURFACE : options.surface || element,
                 stopPropagation: options.stopPropagation,
                 pressed: false,
-                eventMap: eventMap,
-                ns: ns
             });
 
             element
@@ -256,7 +272,8 @@
         _cancel: function() {
             var that = this;
             that.moved = that.pressed = false;
-            that.surface.off(that.ns);
+            that.eventHandler.destroy();
+            delete that.eventHandler;
         },
 
         _start: function(e) {
@@ -300,7 +317,7 @@
             }
 
             that._perAxis(START, location, now());
-            that.surface.off(that.eventMap).on(that.eventMap);
+            that.eventHandler = new DragEventHandler(that.surface, that);
             Drag.captured = false;
         },
 
