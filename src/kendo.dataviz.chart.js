@@ -4519,20 +4519,21 @@
                         dashType: line.options.dashType
                     },
                     linePos = round(line.pos),
-                    samePane = axis.pane === secondaryAxis.pane;
-
-                if (samePane && secAxisPos === linePos && secondaryAxis.options.line.visible) {
-                    return null;
-                }
+                    secondaryAxisBox = secondaryAxis.lineBox();
 
                 if (vertical) {
-                    return view.createLine(
-                        lineStart, linePos, lineEnd, linePos,
-                        gridLineOptions);
+                    if (!secondaryAxis.options.line.visible || secondaryAxisBox.y1 !== linePos) {
+                    console.log(lineStart, linePos, lineEnd, linePos)
+                        return view.createLine(
+                            lineStart, linePos, lineEnd, linePos,
+                            gridLineOptions);
+                    }
                 } else {
-                    return view.createLine(
-                        linePos, lineStart, linePos, lineEnd,
-                        gridLineOptions);
+                    if (!secondaryAxis.options.line.visible || secondaryAxisBox.x1 !== linePos) {
+                        return view.createLine(
+                            linePos, lineStart, linePos, lineEnd,
+                            gridLineOptions);
+                    }
                 }
             });
         },
@@ -4541,10 +4542,7 @@
             var plotArea = this,
                 options = plotArea.options,
                 userOptions = options.plotArea,
-                axisY = plotArea.axisY,
-                axisX = plotArea.axisX,
-                gridLinesY = axisY ? plotArea.renderGridLines(view, axisY, axisX) : [],
-                gridLinesX = axisX ? plotArea.renderGridLines(view, axisX, axisY) : [],
+                gridLines = [],
                 childElements = ChartElement.fn.getViewElements.call(plotArea, view),
                 border = userOptions.border || {},
                 elements = [
@@ -4565,7 +4563,43 @@
                     })
                 ];
 
-            return [].concat(gridLinesY, gridLinesX, childElements, elements);
+            for (var i = 0; i < plotArea.axes.length; i++) {
+                var axis = plotArea.axes[i];
+                for (var j = i; j < plotArea.axes.length; j++) {
+                    var altAxis = plotArea.axes[j];
+
+                    if (axis.options.vertical !== altAxis.options.vertical) {
+                        gridLines = gridLines.concat(
+                            plotArea.renderGridLines(view, axis, altAxis),
+                            plotArea.renderGridLines(view, altAxis, axis)
+                        );
+                    }
+                }
+            }
+
+            /*
+            var xAxes = grep(plotArea.axes, (function(axis) { return !axis.options.vertical; }));
+            var yAxes = grep(plotArea.axes, (function(axis) { return axis.options.vertical; }));
+            for (var i = 0; i < plotArea.panes.length; i++) {
+                var pane = plotArea.panes[i];
+                var paneXAxes = grep(pane.axes, (function(axis) { return !axis.options.vertical; }));
+                var paneYAxes = grep(pane.axes, (function(axis) { return axis.options.vertical; }));
+
+                if (paneXAxes.length) {
+                    gridLines = gridLines.concat(
+                        plotArea.renderGridLines(view, paneXAxes[0], paneYAxes[0] || yAxes[0]),
+                        plotArea.renderGridLines(view, paneYAxes[0] || yAxes[0], paneXAxes[0])
+                    );
+                } else if (paneYAxes.length) {
+                    gridLines = gridLines.concat(
+                        plotArea.renderGridLines(view, paneYAxes[0], paneXAxes[0] || xAxes[0]),
+                        plotArea.renderGridLines(view, paneXAxes[0] || xAxes[0], paneYAxes[0])
+                    );
+                }
+            }
+            */
+
+            return [].concat(gridLines, childElements, elements);
         }
     });
 

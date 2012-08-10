@@ -1001,7 +1001,28 @@
                             }]
                     });
 
-                    equal(view.log.line.length, 9);
+                    equal(view.log.line.length, 8);
+                });
+
+                test("renders grid lines in each pane", function() {
+                    createPlotArea({
+                            categories: ["A"],
+                            majorGridLines: {
+                                visible: true
+                            }
+                        }, [{
+                            pane: "top"
+                        },{
+                            pane: "bottom"
+                        }], {
+                            panes: [{
+                                name: "top"
+                            }, {
+                                name: "bottom"
+                            }]
+                    });
+
+                    equal(view.log.line.length, 15);
                 });
 
                 // ------------------------------------------------------------
