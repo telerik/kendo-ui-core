@@ -2723,7 +2723,7 @@
     var Node = Model.define({
         init: function(value) {
             var that = this,
-                hasChildren = that.hasChildren || value.hasChildren,
+                hasChildren = that.hasChildren || value && value.hasChildren,
                 data = "items",
                 children = {};
 
@@ -2783,6 +2783,7 @@
 
         append: function(model) {
             this._initChildren();
+            this.loaded(true);
             this.children.add(model);
         },
 
