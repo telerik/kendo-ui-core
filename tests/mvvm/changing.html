@@ -747,6 +747,31 @@
                 viewModel.set("root", "bar");
                 equal(dom.find("li").text(), viewModel.root);
             });
+
+            test("event handlers are detached when the binding is changed", function() {
+                var observable = kendo.observable({
+                    handler: {
+                    }
+                });
+
+                stub(observable.handler, "method");
+
+                var dom = $('<span data-bind="click: handler.method"></span>');
+
+                kendo.bind(dom, observable);
+
+                var handler = observable.handler;
+
+                var other = kendo.observable({
+                    method: function() { }
+                });
+
+                observable.set("handler", other);
+
+                dom.trigger("click");
+
+                equal(handler.calls("method"), 0);
+            });
         </script>
 
         <script id="array-template" type="text/x-kendo-template">
