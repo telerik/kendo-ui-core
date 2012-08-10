@@ -474,7 +474,7 @@ namespace Kendo.Mvc.UI
 
             if (aggregates.Any())
             {
-                HeaderHtmlAttributes.Add("data-aggregates", "[" + String.Join(",", aggregates.ToArray()) + "]");
+                HeaderHtmlAttributes.Add("data-aggregates", String.Join(",", aggregates.ToArray()));
             }
         }
 
