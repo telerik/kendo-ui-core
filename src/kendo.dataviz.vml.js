@@ -190,7 +190,7 @@
     };
 
     VMLView.available = function() {
-        return $.browser.msie;
+        return kendo.support.browser.msie;
     };
 
     VMLView.preference = 50;
@@ -881,7 +881,7 @@
 
     // Helpers ================================================================
     function isIE9CompatibilityView() {
-        return $.browser.msie && !supportsSVG() && typeof window.performance !== "undefined";
+        return kendo.support.browser.msie && !supportsSVG() && typeof window.performance !== "undefined";
     }
 
     function blendColors(base, overlay, alpha) {

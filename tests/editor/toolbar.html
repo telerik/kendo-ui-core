@@ -31,10 +31,10 @@
 
             $("#Editor1").kendoEditor();
 
-            var componentType = $.browser.msie ? 'kendoDropDownList' : 'kendoComboBox';
+            var componentType = kendo.support.browser.msie ? 'kendoDropDownList' : 'kendoComboBox';
 
             function value($ui) {
-                return $.browser.msie ? $.trim($ui.text()) : $ui.val();
+                return kendo.support.browser.msie ? $.trim($ui.text()) : $ui.val();
             }
 
             module("Editor / Toolbar", {

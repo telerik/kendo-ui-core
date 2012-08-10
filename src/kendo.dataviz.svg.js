@@ -859,7 +859,7 @@
                 href = doc.location.href,
                 hashIndex = href.indexOf("#");
 
-            if (base && !$.browser.msie) {
+            if (base && !kendo.support.browser.msie) {
                 if (hashIndex !== -1) {
                     href = href.substring(0, hashIndex);
                 }

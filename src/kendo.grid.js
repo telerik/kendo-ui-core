@@ -133,7 +133,7 @@
                 delta = originalEvent.wheelDelta;
             } else if (originalEvent.detail) {
                 delta = (-originalEvent.detail) * 10;
-            } else if ($.browser.opera) {
+            } else if (kendo.support.browser.opera) {
                 delta = -originalEvent.wheelDelta;
             }
             that.verticalScrollbar.scrollTop(scrollTop + (-delta));
@@ -1625,7 +1625,7 @@
                 table = that.table.addClass(FOCUSABLE),
                 currentProxy = proxy(that.current, that),
                 selector = "." + FOCUSABLE + " " + CELL_SELECTOR,
-                browser = $.browser,
+                browser = kendo.support.browser,
                 clickCallback = function(e) {
                     var currentTarget = $(e.currentTarget);
                     if (currentTarget.closest("tbody")[0] !== that.tbody[0]) {
