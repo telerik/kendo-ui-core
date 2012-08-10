@@ -27,9 +27,9 @@
                 GAP = 4,
                 chartSeries;
 
-                function moduleSetup() {
-                    view = new ViewStub();
-                }
+            function moduleSetup() {
+                view = new ViewStub();
+            }
 
             (function() {
                 var plotArea,
@@ -1102,13 +1102,14 @@
                             labels: { font: SANS12 }
                         },
                         plotArea: {
-                            margin: MARGIN
+                            margin: MARGIN,
+                            background: "red"
                         }
                     });
 
                     plotArea.reflow(chartBox);
 
-                    sameBox(plotArea.box, new Box2D(110, 110, 990, 990), TOLERANCE);
+                    sameBox(plotArea.box, new Box2D(136, 117.5, 990, 966), TOLERANCE);
                 });
 
                 test("should not render plot area with borders", function() {
@@ -1129,6 +1130,19 @@
                     equal(plotAreaRect.style.dashType, "dot");
                     equal(plotAreaRect.style.stroke, "red");
                     equal(plotAreaRect.style.strokeWidth, 2);
+                });
+
+                test("should render plot area background", function() {
+                    var categoryAxis = {
+                            categories: ["A"]
+                        },
+                        valueAxis = { };
+
+                    createPlotArea(categoryAxis, valueAxis, {
+                        background: "color"
+                    });
+                    var plotAreaRect = view.log.rect[1];
+                    equal(plotAreaRect.style.fill, "color");
                 });
 
             })();
