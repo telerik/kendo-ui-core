@@ -315,9 +315,7 @@
                     }, options.chartArea)),
                 plotArea;
 
-            if (options.title && options.title.visible && options.title.text) {
-                model.append(new Title(options.title));
-            }
+            Title.buildTitle(options.title, model);
 
             plotArea = model._plotArea = chart._createPlotArea();
             if (options.legend.visible) {
@@ -3912,18 +3910,14 @@
             options = pane.options;
             options.id = uniqueId();
 
-            if (options.title.text && options.title.visible) {
-                pane.title = new Title(options.title);
-                pane.append(pane.title);
-            }
+            pane.title = Title.buildTitle(options.title, pane);
         },
 
         options: {
             zIndex: -1,
             shrinkToFit: true,
             title: {
-                visible: true,
-                zIndex: 0
+                visible: true
             }
         },
 

@@ -1777,6 +1777,19 @@
                     var textBox = plotArea.panes[0].title.children[0];
                     equals(textBox.box.x1, 957, TOLERANCE);
                 });
+
+                test("title text can be set directly", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a",
+                            title: "Title"
+                        }]
+                    });
+
+                    var textBox = plotArea.panes[0].title.children[0];
+                    equals(textBox.children[0].content, "Title");
+                });
+
             })();
 
             (function() {

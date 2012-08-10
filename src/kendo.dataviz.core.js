@@ -775,7 +775,6 @@
         },
 
         options: {
-            visible: true,
             color: BLACK,
             position: TOP,
             align: CENTER,
@@ -790,6 +789,21 @@
             title.box.snapTo(targetBox, X);
         }
     });
+
+    Title.buildTitle = function(titleOptions, parent) {
+        var title;
+
+        if (typeof titleOptions === "string") {
+            titleOptions = { text: titleOptions, visible: true };
+        }
+
+        if (titleOptions && titleOptions.visible && titleOptions.text) {
+            title = new Title(titleOptions);
+            parent.append(title);
+        }
+
+        return title;
+    }
 
     var AxisLabel = TextBox.extend({
         init: function(value, index, dataItem, options) {

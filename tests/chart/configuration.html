@@ -925,6 +925,14 @@
                     equal(chart._model.children[0].options.text, "My Title");
                 });
 
+                test("text can be set directly", function() {
+                    createChart({
+                        title: "My Title"
+                    });
+
+                    equal(chart._model.children[0].options.text, "My Title");
+                });
+
                 test("default font", function() {
                     createChart({
                         title: {
