@@ -3091,7 +3091,7 @@
                 labelText = autoFormat(labels.format, labelText);
             }
 
-            if (labels.visible) {
+            if (labels.visible && labelText) {
                 segment.label = new TextBox(labelText, deepExtend({}, labels, {
                         id: uniqueId(),
                         align: CENTER,
@@ -3112,7 +3112,6 @@
             segment.render();
 
             segment.box = targetBox;
-            targetBox.clone();
 
             segment.reflowLabel();
         },
@@ -3178,7 +3177,7 @@
                 });
             }
 
-            if (segment.value !== 0) {
+            if (segment.value) {
                 elements.push(segment.createSegment(view, sector, deepExtend({
                     id: options.id,
                     fill: options.color,
@@ -3369,9 +3368,6 @@
             var chart = this,
                 segment;
 
-            if (!value) {
-                return;
-            }
             segment = new PieSegment(value, sector, fields.series);
             segment.options.id = uniqueId();
             extend(segment, fields);
@@ -3822,9 +3818,6 @@
             var chart = this,
                 segment;
 
-            if (!value) {
-                return;
-            }
             segment = new DonutSegment(value, sector, fields.series);
             segment.options.id = uniqueId();
             extend(segment, fields);
