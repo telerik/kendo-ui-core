@@ -252,10 +252,10 @@ html body .k-button-bare
 .k-i-arrowhead-s { background-position: 0 -288px; }
 .k-i-arrowhead-w { background-position: 0 -304px; }
 
-.k-i-expand, .k-plus { background-position: 0 -192px; }
-.k-i-expand-w, .k-rtl .k-i-expand, .k-rtl .k-plus { background-position: 0 -208px; }
-.k-i-collapse, .k-minus { background-position: 0 -226px; }
-.k-i-collapse-w, .k-rtl .k-i-collapse, .k-rtl .k-minus { background-position: 0 -240px; }
+.k-i-expand, .k-plus, .k-plus-disabled { background-position: 0 -192px; }
+.k-i-expand-w, .k-rtl .k-i-expand, .k-rtl .k-plus, .k-rtl .k-plus-disabled { background-position: 0 -208px; }
+.k-i-collapse, .k-minus, .k-minus-disabled { background-position: 0 -226px; }
+.k-i-collapse-w, .k-rtl .k-i-collapse, .k-rtl .k-minus, .k-rtl .k-minus-disabled { background-position: 0 -240px; }
 
 .k-i-pencil, .k-edit { background-position: -32px 0; }
 .k-i-close, .k-delete, .k-group-delete { background-position: -32px -16px; }
@@ -3547,7 +3547,8 @@ html input.k-breadcrumbs-input
     background-position: -32px -288px;
 }
 
-.k-toolbar .k-state-disabled
+.k-toolbar .k-state-disabled,
+.k-plus-disabled, .k-minus-disabled
 {
     filter: alpha(opacity=50);
     opacity: .5;
