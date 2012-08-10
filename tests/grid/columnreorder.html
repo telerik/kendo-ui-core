@@ -85,8 +85,8 @@
                 grid.reorderColumn(1, grid.columns[0]);
 
                 var cols = grid.thead.prev().find("col");
-                equal(cols.eq(0).css("width"), "20px");
-                equal(cols.eq(1).css("width"), "10px");
+                equal(cols[0].style.width, "20px");
+                equal(cols[1].style.width, "10px");
             });
 
             test("columnReorder reorders col elements in scrollable grid", function() {
@@ -105,10 +105,10 @@
                 grid.reorderColumn(1, grid.columns[0]);
 
                 var cols = grid.thead.prev().find("col").add(grid.tbody.prev().find("col"));
-                equal(cols.eq(0).css("width"), "20px");
-                equal(cols.eq(1).css("width"), "10px");
-                equal(cols.eq(2).css("width"), "20px");
-                equal(cols.eq(3).css("width"), "10px");
+                equal(cols[0].style.width, "20px");
+                equal(cols[1].style.width, "10px");
+                equal(cols[2].style.width, "20px");
+                equal(cols[3].style.width, "10px");
             });
 
             test("columnReorder reorders col elements in groupable grid", function() {
@@ -131,8 +131,8 @@
                 grid.reorderColumn(1, grid.columns[0]);
 
                 var cols = grid.thead.prev().find("col:not(.k-group-col)");
-                equal(cols.eq(0).css("width"), "20px");
-                equal(cols.eq(1).css("width"), "10px");
+                equal(cols[0].style.width, "20px");
+                equal(cols[1].style.width, "10px");
             });
 
             test("columnReorder reorders col elements in hierarchical grid", function() {
@@ -153,8 +153,8 @@
                 grid.reorderColumn(1, grid.columns[0]);
 
                 var cols = grid.thead.prev().find("col:not(.k-hierarchy-col)");
-                equal(cols.eq(0).css("width"), "20px");
-                equal(cols.eq(1).css("width"), "10px");
+                equal(cols[0].style.width, "20px");
+                equal(cols[1].style.width, "10px");
             });
 
             test("columnReorder moves col at first position", function() {
@@ -174,8 +174,8 @@
                 grid.reorderColumn(0, grid.columns[1]);
 
                 var cols = grid.thead.prev().find("col");
-                equal(cols.eq(0).css("width"), "20px");
-                equal(cols.eq(1).css("width"), "10px");
+                equal(cols[0].style.width, "20px");
+                equal(cols[1].style.width, "10px");
             });
 
             test("columnReorder does not move if destIndex same as column index", function() {
@@ -195,8 +195,8 @@
                 grid.reorderColumn(0, grid.columns[0]);
 
                 var cols = grid.thead.prev().find("col");
-                equal(cols.eq(0).css("width"), "10px");
-                equal(cols.eq(1).css("width"), "20px");
+                equal(cols[0].style.width, "10px");
+                equal(cols[1].style.width, "20px");
             });
 
             test("columnReorder reorder column headers", function() {
@@ -317,8 +317,8 @@
                 grid.reorderColumn(0, grid.columns[1]);
 
                 var cols = grid.footer.find(".k-grid-footer-wrap>table>colgroup>col");
-                equal(cols.eq(0).css("width"), "10px");
-                equal(cols.eq(1).css("width"), "20px");
+                equal(cols[0].style.width, "10px");
+                equal(cols[1].style.width, "20px");
             });
 
             test("columnReorder reorder grid columns collection", function() {
