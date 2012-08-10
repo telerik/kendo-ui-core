@@ -704,6 +704,10 @@
                     "url": "treeview/images.html"
                 },
                 {
+                    "text": "Checkboxes",
+                    "url": "treeview/checkboxes.html"
+                },
+                {
                     "packages": [ "!mvc" ],
                     "text": "Keyboard support",
                     "url": "treeview/keyboard-support.html"

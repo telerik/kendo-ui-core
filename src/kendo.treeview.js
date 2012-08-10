@@ -13,6 +13,7 @@
         SELECT = "select",
         EXPAND = "expand",
         CHANGE = "change",
+        CHECKED = "checked",
         COLLAPSE = "collapse",
         DRAGSTART = "dragstart",
         DRAG = "drag",
@@ -55,6 +56,10 @@
 
     subGroup = contentChild(".k-group");
     nodeContents = contentChild(".k-group,.k-content");
+
+    function checkboxes(node) {
+        return node.children("div").find(":checkbox:first");
+    }
 
     function updateNodeHtml(node) {
         var wrapper = node.children("div"),
@@ -143,9 +148,7 @@
                 options.template = that._textTemplate();
             }
 
-            if (options.checkboxTemplate && typeof options.checkboxTemplate == "string") {
-                options.checkboxTemplate = template(options.checkboxTemplate);
-            }
+            that._checkboxes();
 
             that.templates = {
                 item: that._itemTemplate(),
@@ -201,7 +204,21 @@
                 .on("keydown" + NS, proxy(that._keydown, that))
                 .on("focus" + NS, proxy(that._focus, that))
                 .on("blur" + NS, proxy(that._blur, that))
-                .on("change" + NS, ".k-checkbox :checkbox", proxy(that._checkboxChange, that));
+                .on("change" + NS, ".k-checkbox :checkbox", proxy(that._checkboxChange, that))
+                .on("click" + NS, ".k-checkbox :checkbox", proxy(that._checkboxClick, that));
+        },
+
+        _checkboxClick: function(e) {
+            var checkbox = $(e.target);
+
+            if (checkbox.data("indeterminate")) {
+                checkbox
+                    .data("indeterminate", false)
+                    .prop("indeterminate", false)
+                    .prop(CHECKED, true);
+
+                this._checkboxChange(e);
+            }
         },
 
         _attachUids: function(root, dataSource) {
@@ -399,9 +416,9 @@
                                 "<span class='#= r.toggleButtonClass(item) #'></span>" +
                             "# } #" +
 
-                            "# if (treeview.checkboxTemplate) { #" +
+                            "# if (treeview.checkboxes) { #" +
                                 "<span class='k-checkbox'>" +
-                                    "#= treeview.checkboxTemplate(data) #" +
+                                    "#= treeview.checkboxes.template(data) #" +
                                 "</span>" +
                             "# } #" +
 
@@ -444,11 +461,46 @@
             });
         },
 
+        _updateIndeterminate: function(node) {
+            var parentNode = node.parent().closest(NODE),
+                siblingCheckboxes, i,
+                all = true;
+
+            if (parentNode.length) {
+                siblingCheckboxes = checkboxes(node.siblings().andSelf());
+
+                for (i = 1; i < siblingCheckboxes.length; i++) {
+                    if (siblingCheckboxes[i].checked != siblingCheckboxes[i-1].checked ||
+                        siblingCheckboxes[i].indeterminate || siblingCheckboxes[i-1].indeterminate) {
+                        all = false;
+                        break;
+                    }
+                }
+
+                checkboxes(parentNode)
+                    .data("indeterminate", !all)
+                    .prop("indeterminate", !all)
+                    .prop(CHECKED, all && siblingCheckboxes[0].checked);
+
+                this._updateIndeterminate(parentNode);
+            }
+        },
+
         _checkboxChange: function(e) {
             var checkbox = $(e.target),
-                isChecked = checkbox.is(":checked");
+                isChecked = checkbox.prop(CHECKED),
+                node = checkbox.closest(NODE),
+                that = this;
 
-            this.dataItem(checkbox.closest(".k-item")).set("checked", isChecked);
+            if (that.options.checkboxes.checkChildren) {
+                node.find(":checkbox").each(function() {
+                    that.dataItem(this).set(CHECKED, isChecked);
+                });
+
+                that._updateIndeterminate(node);
+            } else {
+                that.dataItem(node).set(CHECKED, isChecked);
+            }
         },
 
         _toggleButtonClick: function (e) {
@@ -536,7 +588,13 @@
                     that._trigger(SELECT, selection);
                 }
             } else if (key == keys.SPACEBAR) {
-                target = checkbox.prop("checked", !checkbox.prop("checked"));
+                checkbox.prop(CHECKED, !checkbox.prop(CHECKED))
+                    .data("indeterminate", false)
+                    .prop("indeterminate", false);
+
+                that._checkboxChange({ target: checkbox });
+
+                target = selection;
             }
 
             if (target) {
@@ -620,6 +678,24 @@
                 // iterate over child nodes
                 that._group(node);
             });
+        },
+
+        _checkboxes: function() {
+            var that = this,
+                options = that.options,
+                checkboxOptions = options.checkboxes;
+
+            if (checkboxOptions || options.checkboxTemplate) {
+                checkboxOptions = extend({
+                    template: options.checkboxTemplate || "<input type='checkbox' />"
+                }, options.checkboxes);
+
+                if (typeof checkboxOptions.template == "string") {
+                    checkboxOptions.template = template(checkboxOptions.template);
+                }
+
+                options.checkboxes = checkboxOptions;
+            }
         },
 
         _updateNodeClasses: function (node, groupData, nodeData) {
@@ -745,6 +821,14 @@
                 for (i = 0; i < items.length; i++) {
                     node = that.findByUid(items[i].uid);
                     that.text(node, items[i][field]);
+                }
+            } else if (field == CHECKED) {
+                for (i = 0; i < items.length; i++) {
+                    node = that.findByUid(items[i].uid);
+                    node.children("div").find(":checkbox")
+                        .prop(CHECKED, items[i][field])
+                        .data("indeterminate", false)
+                        .prop("indeterminate", false);
                 }
             }
         },

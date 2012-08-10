@@ -599,6 +599,116 @@
 
                 equal(triggeredCount, 0);
             });
+
+            test("checking checkboxes sets indeterminate state of parents", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "foo", items: [
+                            { text: "bar", selected: true },
+                            { text: "baz" }
+                        ] },
+                    ],
+                    checkboxes: {
+                        checkChildren: true
+                    }
+                });
+
+                treeview.press(kendo.keys.SPACEBAR);
+
+                ok(treeview.find(":checkbox:first").prop("indeterminate"));
+            });
+
+            test("checking checkboxes sets checked state of parents", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "foo", items: [
+                            { text: "bar", selected: true }
+                        ] },
+                    ],
+                    checkboxes: {
+                        checkChildren: true
+                    }
+                });
+
+                treeview.press(kendo.keys.SPACEBAR);
+
+                ok(treeview.find(":checkbox:first").prop("checked"));
+            });
+
+            test("checking checkboxes sets checked state of children", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "foo", selected: true, items: [
+                            { text: "bar" },
+                            { text: "baz" }
+                        ] },
+                    ],
+                    checkboxes: {
+                        checkChildren: true
+                    }
+                });
+
+                treeview.press(kendo.keys.SPACEBAR);
+
+                var checkboxes = treeview.find(":checkbox");
+
+                ok(checkboxes.eq(1).prop("checked"));
+                ok(checkboxes.eq(2).prop("checked"));
+            });
+
+            test("checking checkboxes clears indeterminate flag", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "foo", items: [
+                            { text: "bar", selected: true },
+                            { text: "baz" }
+                        ] },
+                    ],
+                    checkboxes: {
+                        checkChildren: true
+                    }
+                });
+
+                // check selected item
+                treeview.press(kendo.keys.SPACEBAR);
+
+                // move to 'foo'
+                treeview.press(kendo.keys.UP);
+
+                // check 'foo'
+                treeview.press(kendo.keys.SPACEBAR);
+
+                ok(!treeview.find(":checkbox:first").prop("indeterminate"));
+            });
+
+            test("checking parent clears indeterminate state of children", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "foo", items: [
+                            { text: "bar", items: [
+                                { text: "baz", selected: true },
+                                { text: "cat" }
+                            ] }
+                        ] }
+                    ],
+                    checkboxes: {
+                        checkChildren: true
+                    }
+                });
+
+                // check selected item
+                treeview.press(kendo.keys.SPACEBAR);
+
+                // move to 'foo'
+                treeview.press(kendo.keys.UP);
+                treeview.press(kendo.keys.UP);
+
+                // check 'foo'
+                treeview.press(kendo.keys.SPACEBAR);
+
+                ok(!treeview.find(":checkbox").eq(1).prop("indeterminate"));
+                ok(!treeview.find(":checkbox").eq(1).data("indeterminate"));
+            });
         </script>
 
         <div id="qunit-fixture"> </div>

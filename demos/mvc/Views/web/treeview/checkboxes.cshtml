@@ -1,16 +1,11 @@
 <div id="example" class="k-content">
         <div id="treeview" class="demo-section"></div>
 
-        <script id="treeview-template" type="text/kendo-ui-template">
-            #: item.text #
-            # if (!item.items) { #
-                <a class='delete-link' href='\#'></a>
-            # } #
-        </script>
-
         <script>
             $("#treeview").kendoTreeView({
-                template: kendo.template($("#treeview-template").html()),
+                checkboxes: {
+                    checkChildren: true
+                },
 
                 dataSource: [{
                     id: 1, text: "My Documents", expanded: true, spriteCssClass: "rootfolder", items: [
@@ -37,12 +32,6 @@
                     ]
                 }]
             });
-
-            // Delete button behavior
-            $(document).on("click", ".delete-link", function() {
-                var treeview = $("#treeview").data("kendoTreeView");
-                treeview.remove($(this).closest(".k-item"));
-            });
         </script>
 
         <style scoped>
@@ -60,20 +49,5 @@
             .pdf        { background-position: 0 -32px; }
             .html       { background-position: 0 -48px; }
             .image      { background-position: 0 -64px; }
-
-            .delete-link {
-                width: 12px;
-                height: 12px;
-                background: transparent url("../../content/web/treeview/close.png") no-repeat 50% 50%;
-                overflow: hidden;
-                display: inline-block;
-                font-size: 0;
-                line-height: 0;
-                vertical-align: top;
-                margin: 2px 0 0 3px;
-                -webkit-border-radius: 5px;
-                -mox-border-radius: 5px;
-                border-radius: 5px;
-            }
         </style>
     </div>
