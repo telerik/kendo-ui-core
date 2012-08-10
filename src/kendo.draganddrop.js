@@ -164,14 +164,15 @@
         }
     });
 
-    var DragAxes = Class.extend({
-        init: function(drag, location) {
+    var DragSequence = Class.extend({
+        init: function(drag, target, location) {
             var that = this,
                 timestamp = now();
 
             that.x = new DragAxis("X", location, timestamp);
             that.y = new DragAxis("Y", location, timestamp);
             that.drag = drag;
+            that.target = target;
         },
 
         withinIgnoreThreshold: function(threshold) {
@@ -293,25 +294,26 @@
             that.moved = that.pressed = false;
             that.eventHandler.destroy();
             delete that.eventHandler;
-            delete that.axes;
+            delete that.sequence;
         },
 
         _start: function(e) {
             var that = this,
                 filter = that.filter,
                 originalEvent = e.originalEvent,
+                target,
                 touch,
                 location = e;
 
             if (that.pressed) { return; }
 
             if (filter) {
-                that.target = $(e.target).is(filter) ? $(e.target) : $(e.target).closest(filter);
+                target = $(e.target).is(filter) ? $(e.target) : $(e.target).closest(filter);
             } else {
-                that.target = that.element;
+                target = that.element;
             }
 
-            if (!that.target.length) {
+            if (!target.length) {
                 return;
             }
 
@@ -336,7 +338,7 @@
                 location = originalEvent;
             }
 
-            that.axes = new DragAxes(this, location);
+            that.sequence = new DragSequence(this, target, location);
             that.eventHandler = new DragEventHandler(that.surface, that);
             Drag.captured = false;
         },
@@ -348,10 +350,10 @@
 
             that._withEvent(e, function(location) {
 
-                that.axes.move(location);
+                that.sequence.move(location);
 
                 if (!that.moved) {
-                    if (that.axes.withinIgnoreThreshold(that.threshold)) {
+                    if (that.sequence.withinIgnoreThreshold(that.threshold)) {
                         return;
                     }
 
@@ -390,12 +392,13 @@
         },
 
         _trigger: function(name, e) {
-            var data = {
-                x: this.axes.x,
-                y: this.axes.y,
-                target: this.target,
-                event: e
-            };
+            var sequence = this.sequence,
+                data = {
+                    x: sequence.x,
+                    y: sequence.y,
+                    target: sequence.target,
+                    event: e
+                };
 
             if(this.trigger(name, data)) {
                 e.preventDefault();
