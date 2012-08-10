@@ -91,7 +91,7 @@
         var color;
 
         do {
-            color = jQuery.curCSS(elem, attr);
+            color = jQuery.css(elem, attr);
 
             // Keep going until we find an element that has color, or we hit the body
             if (color != "" && color != "transparent" || jQuery.nodeName(elem, "body"))
