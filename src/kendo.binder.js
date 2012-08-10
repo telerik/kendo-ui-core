@@ -656,7 +656,13 @@
 
             refresh: function(key) {
                 var binding = this.bindings.events[key],
-                    handler = binding.get();
+                    handler = this.handlers[key];
+
+                if (handler) {
+                    this.widget.unbind(key, handler);
+                }
+
+                handler = binding.get();
 
                 this.handlers[key] = function(e) {
                     e.data = binding.source;
