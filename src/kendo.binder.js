@@ -258,10 +258,17 @@
         },
 
         refresh: function(key) {
-            var binding = this.bindings.events[key],
-                handler = this.handlers[key] = binding.get();
+            var element = $(this.element),
+                binding = this.bindings.events[key],
+                handler = this.handlers[key];
 
-            $(this.element).bind(key, binding.source, handler);
+            if (handler) {
+                element.off(key, handler);
+            }
+
+            handler = this.handlers[key] = binding.get();
+
+            element.on(key, binding.source, handler);
         },
 
         destroy: function() {
@@ -269,7 +276,7 @@
                 handler;
 
             for (handler in this.handlers) {
-                element.unbind(handler, this.handlers[handler]);
+                element.off(handler, this.handlers[handler]);
             }
         }
     });
@@ -319,7 +326,7 @@
             this._change = proxy(this.change, this);
             this.eventName = options.valueUpdate || CHANGE;
 
-            $(this.element).bind(this.eventName, this._change);
+            $(this.element).on(this.eventName, this._change);
 
             this._initChange = false;
         },
@@ -345,7 +352,7 @@
         },
 
         destroy: function() {
-            $(this.element).unbind(this.eventName, this._change);
+            $(this.element).off(this.eventName, this._change);
         }
     });
 
@@ -549,7 +556,7 @@
                 return value;
             },
             destroy: function() {
-                $(this.element).unbind(CHANGE, this._change);
+                $(this.element).off(CHANGE, this._change);
             }
         })
     };
@@ -644,7 +651,7 @@
                 }
             },
             destroy: function() {
-                $(this.element).unbind(CHANGE, this._change);
+                $(this.element).off(CHANGE, this._change);
             }
         })
     };
