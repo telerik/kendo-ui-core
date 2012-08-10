@@ -244,7 +244,7 @@
                 that._open = false;
                 open = !!length;
 
-                if (that._typing && that.element[0] !== document.activeElement) {
+                if (that._typing && that.input[0] !== document.activeElement) {
                     open = false;
                 }
 

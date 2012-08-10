@@ -626,6 +626,30 @@
 
                 ok(!combobox.popup.visible());
             });
+
+            test("ComboBox opens popup on search", function() {
+                var combobox = new ComboBox(input, {
+                    dataTextField: "text",
+                    dataValueField: "value",
+                    dataSource: data,
+                    autoBind: true,
+                    index: 0
+                });
+
+                stub(combobox, {
+                    toggle: combobox.toggle
+                });
+
+                //simulate search
+                combobox._typing = 80;
+                combobox._open = true;
+                combobox.input.focus();
+
+                combobox.refresh();
+
+                equal(combobox.calls("toggle"), 1);
+                equal(combobox.args("toggle", 0)[0], true);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
