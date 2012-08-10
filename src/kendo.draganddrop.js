@@ -929,7 +929,7 @@
 
                 target = elementUnderCursor(e);
 
-                if (that.hint && contains(that.hint, target)) {
+                if (that.hint && contains(that.hint[0], target)) {
                     that.hint.hide();
                     target = elementUnderCursor(e);
                     that.hint.show();
