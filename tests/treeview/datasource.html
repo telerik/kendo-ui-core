@@ -566,6 +566,63 @@
 
                 equals(treeview.find(".k-item").text(), "bar");
             });
+
+            var Node = kendo.data.Node;
+
+            test("binding to derived nodes", function() {
+                var ExtendedNode = Node.define({
+                    extension: true
+                });
+
+                createTreeView({
+                    dataSource: {
+                        data: [
+                            new ExtendedNode({ text: "foo" })
+                        ]
+                    }
+                });
+
+                equals(treeview.find(".k-item").text(), "foo");
+            });
+
+            test("binding to hierarchy of derived nodes", function() {
+                var ExtendedNode = Node.define({
+                    extension: true
+                });
+
+                createTreeView({
+                    dataSource: {
+                        data: [
+                            new ExtendedNode({ text: "foo", items: [
+                                new ExtendedNode({ text: "bar" })
+                            ] })
+                        ]
+                    },
+
+                    loadOnDemand: false
+                });
+
+                equals(treeview.find(".k-item:last").text(), "bar");
+            });
+
+            test("populating hierarchical datasource before initialization", function() {
+                var root = new Node({ text: "foo", expanded: true });
+
+                var child = new Node({ text: "bar" });
+
+                root.append(child);
+
+                createTreeView({
+                    dataSource: {
+                        data: [root]
+                    },
+
+                    loadOnDemand: false
+                });
+
+                equals(treeview.find(".k-item").length, 2);
+            });
+
         </script>
 
         <div id="qunit-fixture"> </div>
