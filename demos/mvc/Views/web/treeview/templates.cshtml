@@ -39,7 +39,8 @@
             });
 
             // Delete button behavior
-            $(document).on("click", ".delete-link", function() {
+            $(document).on("click", ".delete-link", function(e) {
+                e.preventDefault();
                 var treeview = $("#treeview").data("kendoTreeView");
                 treeview.remove($(this).closest(".k-item"));
             });
