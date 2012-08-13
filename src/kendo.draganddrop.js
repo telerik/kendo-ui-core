@@ -209,30 +209,24 @@
         }
     });
 
-    function addNS(events, ns) {
-        return events.replace(/ /g, ns + " ");
-    }
-
     var DragEventHandler = Class.extend({
        init: function(surface, drag) {
            var that = this,
-               map = {},
-               ns = "." + kendo.guid();
+               map = {};
 
-            map[addNS(MOVE_EVENTS, ns)] = proxy(drag._move, drag);
-            map[addNS(END_EVENTS, ns)] = proxy(drag._end, drag);
+            map[MOVE_EVENTS] = proxy(drag._move, drag);
+            map[END_EVENTS] = proxy(drag._end, drag);
 
             surface.on(map);
 
             extend(that, {
                 map: map,
-                ns: ns,
                 surface: surface
             });
        },
 
        destroy: function() {
-           this.surface.off(this.ns);
+           this.surface.off(this.map);
        }
     });
 
