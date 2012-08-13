@@ -560,6 +560,8 @@
 
                     if (selection.next().length) {
                         target = selection.next();
+                    } else {
+                        target = selection;
                     }
                 }
             } else if (key == keys.UP) {
@@ -572,7 +574,7 @@
                         target = subGroup(target).children().last();
                     }
                 } else {
-                    target = parentOf(selection);
+                    target = parentOf(selection) || selection;
                 }
             } else if (key == keys.HOME) {
                 target = that.root.children().eq(0);
@@ -587,7 +589,7 @@
                     delete that._oldSelection;
                     that._trigger(SELECT, selection);
                 }
-            } else if (key == keys.SPACEBAR) {
+            } else if (key == keys.SPACEBAR && checkbox.length) {
                 checkbox.prop(CHECKED, !checkbox.prop(CHECKED))
                     .data("indeterminate", false)
                     .prop("indeterminate", false);

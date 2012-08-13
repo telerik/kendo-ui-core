@@ -539,6 +539,18 @@
                 ok(!treeview.find(":checkbox").is(":checked"));
             });
 
+            test("space on item without checkbox does nothing", function() {
+                createTreeView({
+                    dataSource: [
+                        { text: "foo", selected: true },
+                    ]
+                });
+
+                treeview.press(kendo.keys.SPACEBAR);
+
+                ok(true);
+            });
+
             test("blurring the treeview triggers select event", function() {
                 var triggeredCount = 0;
 
