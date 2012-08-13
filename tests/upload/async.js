@@ -19,13 +19,13 @@
 
     test("k-loading is rendered when upload starts", function() {
         simulateFileSelect();
-        equal($(".k-upload-files li.k-file. > span.k-icon.k-loading", uploadInstance.wrapper).length, 1);
+        equal($(".k-upload-files li.k-file > span.k-icon.k-loading", uploadInstance.wrapper).length, 1);
     });
 
     test("k-loading is cleared upon success", function() {
         simulateUpload();
 
-        equal($(".k-upload-files li.k-file. > span.k-icon.k-loading", uploadInstance.wrapper).length, 0);
+        equal($(".k-upload-files li.k-file > span.k-icon.k-loading", uploadInstance.wrapper).length, 0);
     });
 
     test("uploading status text is rendered when upload starts", function() {
