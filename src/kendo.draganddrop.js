@@ -169,6 +169,7 @@
             var that = this,
                 timestamp = now();
 
+            that.eventHandler = new DragEventHandler(drag.surface, drag);
             that.x = new DragAxis("X", location, timestamp);
             that.y = new DragAxis("Y", location, timestamp);
             that.drag = drag;
@@ -206,6 +207,10 @@
             if(that.drag.trigger(name, data)) {
                 e.preventDefault();
             }
+        },
+
+        destroy: function() {
+            this.eventHandler.destroy();
         }
     });
 
@@ -288,8 +293,8 @@
 
         destroy: function() {
             this.element.off(NS);
-            if (this.eventHandler) {
-                this.eventHandler.destroy();
+            if (this.sequence) {
+                this.sequence.destroy();
             }
         },
 
@@ -309,8 +314,7 @@
         _cancel: function() {
             var that = this;
             that.moved = that.pressed = false;
-            that.eventHandler.destroy();
-            delete that.eventHandler;
+            that.sequence.destroy();
             delete that.sequence;
         },
 
@@ -354,8 +358,7 @@
                 location = originalEvent;
             }
 
-            that.sequence = new DragSequence(this, target, location);
-            that.eventHandler = new DragEventHandler(that.surface, that);
+            that.sequence = new DragSequence(that, target, location);
             Drag.captured = false;
         },
 
