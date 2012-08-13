@@ -140,9 +140,11 @@
                     color = that.color.get();
 
                 if (color) {
-                    target.css("background-color", color);
+                    target
+                        .css("background-color", color)
+                        .attr("data-color", color);
 
-                    that._updateValues(color, updateAttr);
+                    that._updateValues(updateAttr);
 
                     that.hueSlider.value(that.color.hue());
                     that.saturationSlider.value(that.color.saturation());
@@ -210,7 +212,9 @@
                     textColor = that.color.set(that.color[e.sender.type](e.value).get()).get(),
                     target = !that.options.filter ? that.element : that.target;
 
-                target.css("background-color", textColor);
+                target
+                    .css("background-color", textColor)
+                    .attr("data-color", textColor);
 
                 that._updateValues(true);
                 e.sender.valueElement.text(e.value);
