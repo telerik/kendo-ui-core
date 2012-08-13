@@ -23,5 +23,7 @@ namespace Kendo.Mvc.UI
         public bool Expanded { get; set; }
 
         public bool HasChildren { get; set; }
+
+        public bool Checked { get; set; }
     }
 }

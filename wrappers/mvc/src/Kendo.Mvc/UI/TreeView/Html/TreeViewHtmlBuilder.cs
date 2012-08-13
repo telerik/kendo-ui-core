@@ -63,18 +63,40 @@ namespace Kendo.Mvc.UI
                 .ToggleClass(UIPrimitives.Middle, item.PreviousSibling != null && item.NextSibling != null)
                 .AppendTo(li);
 
+            if (Component.Checkboxes.Enabled)
+            {
+                CheckboxFor(item).AppendTo(div);
+            }
+
             if (item.HasChildren || hasAccessibleChildren || item.Template.HasValue())
             {
-                new HtmlElement("span")
-                        .AddClass(UIPrimitives.Icon)
-                        .ToggleClass("k-plus", item.Enabled && !item.Expanded)
-                        .ToggleClass("k-minus", item.Enabled && item.Expanded)
-                        .ToggleClass("k-plus-disabled", !item.Enabled && !item.Expanded)
-                        .ToggleClass("k-minus-disabled", !item.Enabled && item.Expanded)
-                        .AppendTo(div);
+                IconFor(item).AppendTo(div);
             }
             
             return li;
+        }
+
+        public IHtmlNode CheckboxFor(TreeViewItem item)
+        {
+            var checkboxWrapper = new HtmlElement("span").AddClass("k-checkbox");
+
+            new HtmlElement("input", TagRenderMode.SelfClosing)
+                .Attributes(new { type = "checkbox", name = "checkedNodes" })
+                .ToggleAttribute("value", item.Id, item.Id != null)
+                .ToggleAttribute("checked", "checked", item.Checked)
+                .AppendTo(checkboxWrapper);
+
+            return checkboxWrapper;
+        }
+
+        public IHtmlNode IconFor(TreeViewItem item)
+        {
+            return new HtmlElement("span")
+                .AddClass(UIPrimitives.Icon)
+                .ToggleClass("k-plus", item.Enabled && !item.Expanded)
+                .ToggleClass("k-minus", item.Enabled && item.Expanded)
+                .ToggleClass("k-plus-disabled", !item.Enabled && !item.Expanded)
+                .ToggleClass("k-minus-disabled", !item.Enabled && item.Expanded);
         }
 
         public IHtmlNode ItemInnerContent(TreeViewItem item)
@@ -115,13 +137,6 @@ namespace Kendo.Mvc.UI
             Text(item).AppendTo(tag);
 
             return tag;
-        }
-
-        public IHtmlNode ItemHiddenInputValue(TreeViewItem item)
-        {
-            return new HtmlElement("input", TagRenderMode.SelfClosing)
-                 .AddClass(UIPrimitives.Input)
-                 .Attributes(new { type = "hidden", value = item.Id, name = "itemValue" });
         }
 
         public IHtmlNode ItemContentTag(TreeViewItem item)

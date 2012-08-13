@@ -50,9 +50,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TreeViewBuilder CheckboxTemplate(string template)
         {
-            Component.CheckboxTemplate = template;
-
-            return this;
+            return Checkboxes(config => config.Template(template));
         }
 
         /// <summary>
@@ -66,11 +64,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public TreeViewBuilder CheckboxTemplateId(string checkboxTemplateId)
+        public TreeViewBuilder CheckboxTemplateId(string templateId)
         {
-            Component.CheckboxTemplateId = checkboxTemplateId;
-
-            return this;
+            return Checkboxes(config => config.TemplateId(templateId));
         }
 
         /// <summary>
@@ -105,6 +101,46 @@ namespace Kendo.Mvc.UI.Fluent
         public TreeViewBuilder TemplateId(string templateId)
         {
             Component.TemplateId = templateId;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Enable/disable rendering of checkboxes in the treeview.
+        /// </summary>
+        /// <param name="enabled">Whether checkboxes should be rendered.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().TreeView()
+        ///             .Name("TreeView")
+        ///             .Checkboxes(true)
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TreeViewBuilder Checkboxes(bool enabled)
+        {
+            return Checkboxes(config => config.Enabled(true));
+        }
+
+        /// <summary>
+        /// Configures rendering of checkboxes in the treeview.
+        /// </summary>
+        /// <param name="configure">Builder of the treeview checkboxes configuration.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().TreeView()
+        ///             .Name("TreeView")
+        ///             .Checkboxes(config => config
+        ///                 .CheckChildren(true)
+        ///             )
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TreeViewBuilder Checkboxes(Action<TreeViewCheckboxesBuilder> configure)
+        {
+            Component.Checkboxes.Enabled = true;
+
+            configure(new TreeViewCheckboxesBuilder(Component.Checkboxes));
 
             return this;
         }

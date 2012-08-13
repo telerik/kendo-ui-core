@@ -908,6 +908,7 @@
     <Compile Include="UI\NavigationItemContainerExtensions.cs" />
     <Compile Include="UI\TimePicker\Fluent\TimePickerBuilder.cs" />
     <Compile Include="UI\TimePicker\TimePicker.cs" />
+    <Compile Include="UI\TreeView\Fluent\TreeViewCheckboxesBuilder.cs" />
     <Compile Include="UI\TreeView\Fluent\TreeViewBindingSettingsBuilder.cs" />
     <Compile Include="UI\TreeView\Fluent\TreeViewBuilder.cs" />
     <Compile Include="UI\TreeView\Fluent\TreeViewEventBuilder.cs" />
@@ -916,6 +917,7 @@
     <Compile Include="UI\TreeView\Fluent\TreeViewItemBuilder.cs" />
     <Compile Include="UI\TreeView\Fluent\TreeViewItemFactory.cs" />
     <Compile Include="UI\TreeView\Settings\TreeViewBindingSettings.cs" />
+    <Compile Include="UI\TreeView\Settings\TreeViewCheckboxesSettings.cs" />
     <Compile Include="UI\TreeView\TreeViewDataBindingConfiguration.cs" />
     <Compile Include="UI\TreeView\TreeViewItemModel.cs" />
     <Compile Include="UI\TreeView\TreeView.cs" />
