@@ -164,73 +164,116 @@
         }
     });
 
+    function normalizeEvent(e) {
+        var location = e,
+            originalEvent = e.originalEvent,
+            touchEvent,
+            touchID;
+
+        if (support.touch) {
+            touchEvent = originalEvent.changedTouches[0];
+            touchID = touchEvent.identifier;
+            location = touchEvent;
+        }
+
+        if (pointers) {
+            touchID = originalEvent.pointerId;
+            location = originalEvent;
+        }
+
+        return {
+            location: location,
+            touchID: touchID
+        };
+    }
+
     var Touch = Class.extend({
-        init: function(drag, target, location) {
+        init: function(drag, target, event) {
             var that = this,
+                eventInfo = normalizeEvent(event),
+                location = eventInfo.location,
                 timestamp = now();
 
-            that.moved = false;
-            that.finished = false;
-            that.eventHandler = new DragEventHandler(drag.surface, drag);
-            that.x = new DragAxis("X", location, timestamp);
-            that.y = new DragAxis("Y", location, timestamp);
-            that.drag = drag;
-            that.target = target;
+            extend(that, {
+                x: new DragAxis("X", location, timestamp),
+                y: new DragAxis("Y", location, timestamp),
+                drag: drag,
+                target: target,
+                _touchID: eventInfo.touchID,
+                _moved: false,
+                _finished: false
+            });
+
+            that._attach();
         },
 
         dispose: function() {
-            this.eventHandler.destroy();
-            this.finished = true;
-            delete this.drag.touch;
+            var that = this;
+            that.drag.surface.off(that._eventMap);
+            that._finished = true;
+            delete that.drag.touch;
         },
 
         skip: function() {
             this.dispose();
         },
 
-        start: function(e) {
-           this.startTime = now;
-           this.moved = true;
-           this.trigger(START, e);
+        cancel: function() {
+            this.dispose();
         },
 
-        move: function(e, location) {
+        _start: function(e) {
+           this.startTime = now;
+           this._moved = true;
+           this._trigger(START, e);
+        },
+
+        _move: function(e) {
             var that = this,
                 timestamp = now();
 
-            that.x.move(location, timestamp);
-            that.y.move(location, timestamp);
+            if (that._finished) { return; }
 
-            if (!that.moved) {
-                if (that._withinIgnoreThreshold()) {
-                    return;
+            that._withEvent(e, function(location) {
+                that.x.move(location, timestamp);
+                that.y.move(location, timestamp);
+
+                if (!that._moved) {
+                    if (that._withinIgnoreThreshold()) {
+                        return;
+                    }
+
+                    if (!Drag.captured) {
+                        that._start(e);
+                    } else {
+                        return that.dispose();
+                    }
                 }
 
-                if (!Drag.captured) {
-                    that.start(e);
-                } else {
-                    return that.dispose();
+                // Event handlers may cancel the drag in the START event handler, hence the double check for pressed.
+                if (!that._finished) {
+                    that._trigger(MOVE, e);
                 }
-            }
-
-            // Event handlers may cancel the drag in the START event handler, hence the double check for pressed.
-            if (!that.finished) {
-                that.trigger(MOVE, e);
-            }
+            });
         },
 
-        end: function(e) {
+        _end: function(e) {
             var that = this;
-            if (that.moved) {
-                that.trigger(END, e);
-            } else {
-                that.trigger(TAP, e);
-            }
 
-            that.dispose();
+            if (that._finished) { return; }
+
+            that._withEvent(e, function() {
+                if (that._moved) {
+                    that._trigger(END, e);
+                } else {
+                    that._trigger(TAP, e);
+                }
+
+                that.dispose();
+            });
         },
 
-        trigger: function(name, e) {
+        _trigger: function(name, e) {
             var that = this,
                 data = {
                     touch: that,
@@ -246,6 +289,33 @@
             }
         },
 
+        _withEvent: function(e, callback) {
+            var that = this,
+                touchID = that._touchID,
+                originalEvent = e.originalEvent,
+                touches,
+                idx;
+
+            if (support.touch) {
+                touches = originalEvent.changedTouches;
+                idx = touches.length;
+
+                while (idx) {
+                    idx --;
+                    if (touches[idx].identifier === touchID) {
+                        return callback(touches[idx]);
+                    }
+                }
+            }
+            else if (pointers) {
+                if (touchID === originalEvent.pointerId) {
+                    return callback(originalEvent);
+                }
+            } else {
+                return callback(e);
+            }
+        },
+
         _withinIgnoreThreshold: function() {
             var xDelta = this.x.initialDelta,
                 yDelta = this.y.initialDelta;
@@ -253,27 +323,16 @@
             return Math.sqrt(xDelta * xDelta + yDelta * yDelta) <= this.drag.threshold;
         },
 
-    });
-
-    var DragEventHandler = Class.extend({
-       init: function(surface, drag) {
+        _attach: function() {
            var that = this,
                map = {};
 
-            map[MOVE_EVENTS] = proxy(drag._move, drag);
-            map[END_EVENTS] = proxy(drag._end, drag);
+            map[MOVE_EVENTS] = proxy(that._move, that);
+            map[END_EVENTS] = proxy(that._end, that);
 
-            surface.on(map);
-
-            extend(that, {
-                map: map,
-                surface: surface
-            });
-       },
-
-       destroy: function() {
-           this.surface.off(this.map);
-       }
+            that.drag.surface.on(map);
+            that._eventMap = map;
+        }
     });
 
     var Drag = Observable.extend({
@@ -359,10 +418,7 @@
         _start: function(e) {
             var that = this,
                 filter = that.filter,
-                originalEvent = e.originalEvent,
-                target,
-                touch,
-                location = e;
+                target;
 
             if (that._isPressed()) { return; }
 
@@ -382,66 +438,8 @@
                 e.stopPropagation();
             }
 
-            if (support.touch) {
-                touch = originalEvent.changedTouches[0];
-                that.touchID = touch.identifier;
-                location = touch;
-            }
-
-            if (pointers) {
-                that.touchID = originalEvent.pointerId;
-                location = originalEvent;
-            }
-
-            that.touch = new Touch(that, target, location);
+            that.touch = new Touch(that, target, e);
             Drag.captured = false;
-        },
-
-        _move: function(e) {
-            var that = this;
-
-            if (!that._isPressed()) { return; }
-
-            that._withEvent(e, function(location) {
-                that.touch.move(e, location);
-            });
-        },
-
-        _end: function(e) {
-            var that = this;
-
-            if (!that._isPressed()) { return; }
-
-            that._withEvent(e, function() {
-                that.touch.end(e);
-            });
-        },
-
-        _withEvent: function(e, callback) {
-            var that = this,
-                touchID = that.touchID,
-                originalEvent = e.originalEvent,
-                touches,
-                idx;
-
-            if (support.touch) {
-                touches = originalEvent.changedTouches;
-                idx = touches.length;
-
-                while (idx) {
-                    idx --;
-                    if (touches[idx].identifier === touchID) {
-                        return callback(touches[idx]);
-                    }
-                }
-            }
-            else if (pointers) {
-                if (touchID === originalEvent.pointerId) {
-                    return callback(originalEvent);
-                }
-            } else {
-                return callback(e);
-            }
         }
     });
 
