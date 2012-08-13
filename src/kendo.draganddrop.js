@@ -170,6 +170,7 @@
                 timestamp = now();
 
             that.moved = false;
+            that.finished = false;
             that.eventHandler = new DragEventHandler(drag.surface, drag);
             that.x = new DragAxis("X", location, timestamp);
             that.y = new DragAxis("Y", location, timestamp);
@@ -177,17 +178,48 @@
             that.target = target;
         },
 
-        withinIgnoreThreshold: function(threshold) {
+        dispose: function() {
+            this.eventHandler.destroy();
+            this.finished = true;
+            delete this.drag.sequence;
+        },
+
+        withinIgnoreThreshold: function() {
             var xDelta = this.x.initialDelta,
                 yDelta = this.y.initialDelta;
 
-            return Math.sqrt(xDelta * xDelta + yDelta * yDelta) <= threshold;
+            return Math.sqrt(xDelta * xDelta + yDelta * yDelta) <= this.drag.threshold;
         },
 
         start: function(e) {
            this.startTime = now;
            this.moved = true;
            this.trigger(START, e);
+        },
+
+        move: function(e, location) {
+            var that = this,
+                timestamp = now();
+
+            that.x.move(location, timestamp);
+            that.y.move(location, timestamp);
+
+            if (!that.moved) {
+                if (that.withinIgnoreThreshold()) {
+                    return;
+                }
+
+                if (!Drag.captured) {
+                    that.start(e);
+                } else {
+                    return that.dispose();
+                }
+            }
+
+            // Event handlers may cancel the drag in the START event handler, hence the double check for pressed.
+            if (!that.finished) {
+                that.trigger(MOVE, e);
+            }
         },
 
         end: function(e) {
@@ -197,12 +229,8 @@
             } else {
                 that.trigger(TAP, e);
             }
-        },
 
-        move: function(location) {
-            var timestamp = now();
-            this.x.move(location, timestamp);
-            this.y.move(location, timestamp);
+            that.dispose();
         },
 
         trigger: function(name, e) {
@@ -218,10 +246,6 @@
             if(that.drag.trigger(name, data)) {
                 e.preventDefault();
             }
-        },
-
-        destroy: function() {
-            this.eventHandler.destroy();
         }
     });
 
@@ -305,7 +329,7 @@
         destroy: function() {
             this.element.off(NS);
             if (this.sequence) {
-                this.sequence.destroy();
+                this.sequence.dispose();
             }
         },
 
@@ -314,18 +338,12 @@
         },
 
         cancel: function() {
-            this._cancel();
+            this.sequence.dispose();
             this.trigger(CANCEL);
         },
 
         skip: function() {
-            this._cancel();
-        },
-
-        _cancel: function() {
-            var that = this;
-            that.sequence.destroy();
-            delete that.sequence;
+            this.sequence.dispose();
         },
 
         _isMoved: function() {
@@ -383,25 +401,7 @@
             if (!that._isPressed()) { return; }
 
             that._withEvent(e, function(location) {
-
-                that.sequence.move(location);
-
-                if (!that._isMoved()) {
-                    if (that.sequence.withinIgnoreThreshold(that.threshold)) {
-                        return;
-                    }
-
-                    if (!Drag.captured) {
-                        that.sequence.start(e);
-                    } else {
-                        return that._cancel();
-                    }
-                }
-
-                // Event handlers may cancel the swipe in the START event handler, hence the double check for pressed.
-                if (that._isPressed()) {
-                    that.sequence.trigger(MOVE, e);
-                }
+                that.sequence.move(e, location);
             });
         },
 
@@ -412,7 +412,6 @@
 
             that._withEvent(e, function() {
                 that.sequence.end(e);
-                that._cancel();
             });
         },
 
