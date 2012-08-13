@@ -313,9 +313,13 @@
 
         _cancel: function() {
             var that = this;
-            that.moved = that.pressed = false;
+            that.moved = false;
             that.sequence.destroy();
             delete that.sequence;
+        },
+
+        _isPressed: function () {
+            return this.sequence;
         },
 
         _start: function(e) {
@@ -326,7 +330,7 @@
                 touch,
                 location = e;
 
-            if (that.pressed) { return; }
+            if (that._isPressed()) { return; }
 
             if (filter) {
                 target = $(e.target).is(filter) ? $(e.target) : $(e.target).closest(filter);
@@ -344,7 +348,6 @@
                 e.stopPropagation();
             }
 
-            that.pressed = true;
             that.moved = false;
 
             if (support.touch) {
@@ -365,7 +368,7 @@
         _move: function(e) {
             var that = this;
 
-            if (!that.pressed) { return; }
+            if (!that._isPressed()) { return; }
 
             that._withEvent(e, function(location) {
 
@@ -385,7 +388,7 @@
                 }
 
                 // Event handlers may cancel the swipe in the START event handler, hence the double check for pressed.
-                if (that.pressed) {
+                if (that._isPressed()) {
                     that.sequence.trigger(MOVE, e);
                 }
             });
@@ -394,7 +397,7 @@
         _end: function(e) {
             var that = this;
 
-            if (!that.pressed) { return; }
+            if (!that._isPressed()) { return; }
 
             that._withEvent(e, function() {
                 if (that.moved) {
