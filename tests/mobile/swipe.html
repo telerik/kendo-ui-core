@@ -28,10 +28,14 @@
         </script>
 
         <script>
-            var root = $('#qunit-fixture');
+            QUnit.config.reorder = false;
+
+            var root = $('#qunit-fixture'),
+                element;
 
             function setup(fixtureID) {
                 root.html($(fixtureID).text()).wrapInner("<div />");
+                element = root.children().first();
             }
 
             function teardown() {
@@ -39,7 +43,7 @@
             }
 
             function triggerEvent(type, e, el) {
-                el = el || root;
+                el = el || element;
                 el.trigger($.Event(type, e));
             }
 
@@ -52,7 +56,7 @@
             });
 
             test("triggers swipe event", 1, function() {
-                root.kendoMobileSwipe(function(e) {
+                element.kendoMobileSwipe(function(e) {
                     ok(true);
                 });
 
@@ -63,7 +67,7 @@
             });
 
             test("ignores shorter swipes", 0, function(){
-                root.kendoMobileSwipe(function(e) {
+                element.kendoMobileSwipe(function(e) {
                     ok();
                 });
 
@@ -73,7 +77,7 @@
             });
 
             test("ignores vertical swipes", 0, function() {
-                root.kendoMobileSwipe(function(e) {
+                element.kendoMobileSwipe(function(e) {
                     ok();
                 });
 
@@ -83,7 +87,7 @@
             });
 
             asyncTest("ignores slow swipe event", 0, function() {
-                root.kendoMobileSwipe(function(e) {
+                element.kendoMobileSwipe(function(e) {
                     ok();
                 });
 
@@ -97,7 +101,7 @@
             });
 
             test("detects right swipe", 1, function() {
-                root.kendoMobileSwipe(function(e) {
+                element.kendoMobileSwipe(function(e) {
                     equal(e.direction, "right");
                 });
 
@@ -107,7 +111,7 @@
             });
 
             test("detects left swipe", 1, function() {
-                root.kendoMobileSwipe(function(e) {
+                element.kendoMobileSwipe(function(e) {
                     equal(e.direction, "left");
                 });
 
@@ -117,8 +121,8 @@
             });
 
             test("passes the swiped element", 1, function() {
-                root.kendoMobileSwipe(function(e) {
-                    equal(e.target[0], root[0]);
+                element.kendoMobileSwipe(function(e) {
+                    equal(e.target[0], element[0]);
                 });
 
                 triggerEvent("mousedown", {pageX: 40, pageY: 1});

@@ -22,22 +22,22 @@
                 },
 
                 move: function(e) {
-                    var drag = e.sender,
-                    duration = e.event.timeStamp - e.startTime,
-                    direction = e.x.initialDelta > 0 ? "right" : "left";
+                    var touch = e.touch,
+                    duration = e.event.timeStamp - touch.startTime,
+                    direction = touch.x.initialDelta > 0 ? "right" : "left";
 
                     if (
-                        abs(e.x.initialDelta) >= options.minXDelta &&
-                        abs(e.y.initialDelta) < options.maxYDelta &&
+                        abs(touch.x.initialDelta) >= options.minXDelta &&
+                        abs(touch.y.initialDelta) < options.maxYDelta &&
                     duration < options.maxDuration)
                     {
                         callback({
                             direction: direction,
-                            drag: drag,
-                            target: $(drag.currentTarget)
+                            drag: e.drag,
+                            target: $(touch.currentTarget)
                         });
 
-                        drag.cancel();
+                        touch.cancel();
                     }
                 }
             });

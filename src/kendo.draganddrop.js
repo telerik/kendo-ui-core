@@ -199,6 +199,7 @@
                 y: new DragAxis("Y", location, timestamp),
                 drag: drag,
                 target: target,
+                currentTarget: event.currentTarget,
                 _touchID: eventInfo.touchID,
                 _moved: false,
                 _finished: false
@@ -223,7 +224,7 @@
         },
 
         _start: function(e) {
-           this.startTime = now;
+           this.startTime = now();
            this._moved = true;
            this._trigger(START, e);
         },
@@ -280,7 +281,6 @@
                     x: that.x,
                     y: that.y,
                     target: that.target,
-                    startTime: that.startTime,
                     event: e
                 };
 
