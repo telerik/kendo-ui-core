@@ -803,7 +803,7 @@
         }
 
         return title;
-    }
+    };
 
     var AxisLabel = TextBox.extend({
         init: function(value, index, dataItem, options) {

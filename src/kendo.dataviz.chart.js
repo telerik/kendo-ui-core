@@ -955,14 +955,11 @@
             var axis = this,
                 options = axis.options,
                 vertical = options.vertical,
-                lineWidth = options.line.width,
                 lineBox = axis.lineBox(),
                 size = vertical ? lineBox.height() : lineBox.width(),
                 step = size / itemsCount,
                 dim = vertical ? Y : X,
-                start = lineBox[dim + 1],
-                end = lineBox[dim + 2],
-                pos = start,
+                pos = lineBox[dim + 1],
                 positions = [],
                 i;
 
@@ -971,7 +968,7 @@
                 pos += step;
             }
 
-            positions.push(end);
+            positions.push(lineBox[dim + 2]);
 
             return options.reverse ? positions.reverse() : positions;
         },
@@ -4071,25 +4068,13 @@
             var slot = axis.getSlot(crossingValue, crossingValue),
                 slotEdge = axis.options.reverse ? 2 : 1,
                 targetSlot = targetAxis.getSlot(targetCrossingValue, targetCrossingValue),
-                targetEdge = targetAxis.options.reverse ? 2 : 1;
-
-            var axisBox = axis.box.translate(
-                targetSlot[X + targetEdge] - slot[X + slotEdge],
-                targetSlot[Y + targetEdge] - slot[Y + slotEdge]
-            );
-
-            var paneBox = axis.pane.contentBox;
+                targetEdge = targetAxis.options.reverse ? 2 : 1,
+                axisBox = axis.box.translate(
+                    targetSlot[X + targetEdge] - slot[X + slotEdge],
+                    targetSlot[Y + targetEdge] - slot[Y + slotEdge]
+                );
 
             if (axis.pane !== targetAxis.pane) {
-                /*
-                if (axisBox.y1 < paneBox.y1) {
-                    axisBox.translate(0, paneBox.y1 - axisBox.y1);
-                }
-
-                if (axisBox.y2 > paneBox.y2) {
-                    axisBox.translate(0, paneBox.y2 - axisBox.y2);
-                }
-                */
                 axisBox.translate(0, axis.pane.box.y1 - targetAxis.pane.box.y1)
             }
 
@@ -4105,6 +4090,7 @@
                 topAnchors = {},
                 bottomAnchors = {},
                 pane,
+                paneId,
                 axis,
                 i;
 
@@ -4112,17 +4098,18 @@
             for (i = 0; i < yAxes.length; i++) {
                 axis = yAxes[i];
                 pane = axis.pane;
+                paneId = pane.options.id;
                 plotArea.alignAxisTo(axis, xAnchor, yAnchorCrossings[i], xAnchorCrossings[i]);
 
                 if (round(axis.lineBox().x1) === round(xAnchor.lineBox().x1)) {
-                    if (leftAnchors[pane.options.id]) {
+                    if (leftAnchors[paneId]) {
                         axis.reflow(axis.box
-                            .alignTo(leftAnchors[pane.options.id].box, LEFT)
+                            .alignTo(leftAnchors[paneId].box, LEFT)
                             .translate(-axis.options.margin, 0)
                         );
                     }
 
-                    leftAnchors[pane.options.id] = axis;
+                    leftAnchors[paneId] = axis;
                 }
 
                 if (round(axis.lineBox().x2) === round(xAnchor.lineBox().x2)) {
@@ -4132,14 +4119,14 @@
                     }
                     plotArea.alignAxisTo(axis, xAnchor, yAnchorCrossings[i], xAnchorCrossings[i]);
 
-                    if (rightAnchors[pane.options.id]) {
+                    if (rightAnchors[paneId]) {
                         axis.reflow(axis.box
-                            .alignTo(rightAnchors[pane.options.id].box, RIGHT)
+                            .alignTo(rightAnchors[paneId].box, RIGHT)
                             .translate(axis.options.margin, 0)
                         );
                     }
 
-                    rightAnchors[pane.options.id] = axis;
+                    rightAnchors[paneId] = axis;
                 }
 
                 if (i !== 0 && yAnchor.pane === axis.pane) {
@@ -4150,6 +4137,7 @@
             for (i = 0; i < xAxes.length; i++) {
                 axis = xAxes[i];
                 pane = axis.pane;
+                paneId = pane.options.id;
                 plotArea.alignAxisTo(axis, yAnchor, xAnchorCrossings[i], yAnchorCrossings[i]);
 
                 if (round(axis.lineBox().y1) === round(yAnchor.lineBox().y1)) {
@@ -4159,25 +4147,25 @@
                     }
                     plotArea.alignAxisTo(axis, yAnchor, xAnchorCrossings[i], yAnchorCrossings[i]);
 
-                    if (topAnchors[pane.options.id]) {
+                    if (topAnchors[paneId]) {
                         axis.reflow(axis.box
-                            .alignTo(topAnchors[pane.options.id].box, TOP)
+                            .alignTo(topAnchors[paneId].box, TOP)
                             .translate(0, -axis.options.margin)
                         );
                     }
 
-                    topAnchors[pane.options.id] = axis;
+                    topAnchors[paneId] = axis;
                 }
 
                 if (round(axis.lineBox().y2, COORD_PRECISION) === round(yAnchor.lineBox().y2, COORD_PRECISION)) {
-                    if (bottomAnchors[pane.options.id]) {
+                    if (bottomAnchors[paneId]) {
                         axis.reflow(axis.box
-                            .alignTo(bottomAnchors[pane.options.id].box, BOTTOM)
+                            .alignTo(bottomAnchors[paneId].box, BOTTOM)
                             .translate(0, axis.options.margin)
                         );
                     }
 
-                    bottomAnchors[pane.options.id] = axis;
+                    bottomAnchors[paneId] = axis;
                 }
 
                 if (i !== 0) {
@@ -4307,14 +4295,11 @@
 
         fitPaneAxes: function(pane) {
             var plotArea = this,
-                panes = plotArea.panes,
-                panesLength = panes.length,
                 axes = pane.axes,
                 box = pane.contentBox,
                 axisBox,
                 offsetX = 0,
                 offsetY = 0,
-                currentPane,
                 currentAxis,
                 i,
                 length = axes.length;
@@ -4345,8 +4330,7 @@
                 xAxes = grep(axes, (function(axis) { return !axis.options.vertical; })),
                 yAxes = grep(axes, (function(axis) { return axis.options.vertical; })),
                 xAnchor = xAxes[0],
-                yAnchor = yAxes[0],
-                paneAxes;
+                yAnchor = yAxes[0];
 
             for (i = 0; i < panesLength; i++) {
                 currentPane = panes[i];
@@ -4376,12 +4360,7 @@
         },
 
         reflowPaneAxes: function(pane, defaultXAnchor, defaultYAnchor) {
-            var plotArea = this,
-                axes = pane.axes,
-                xAxes = grep(axes, (function(axis) { return !axis.options.vertical; })),
-                yAxes = grep(axes, (function(axis) { return axis.options.vertical; })),
-                xAnchor = xAxes[0] || defaultXAnchor,
-                yAnchor = yAxes[0] || defaultYAnchor,
+            var axes = pane.axes,
                 i,
                 length = axes.length;
 
@@ -4389,8 +4368,6 @@
                 for (i = 0; i < length; i++) {
                     axes[i].reflow(pane.contentBox);
                 }
-
-                // TODO: Axis crossing values should be treated as global
             }
         },
 
@@ -4469,8 +4446,6 @@
             var plotArea = this,
                 options = axis.options,
                 vertical = options.vertical,
-                crossingSlot = axis.getSlot(options.axisCrossingValue),
-                secAxisPos = round(crossingSlot[vertical ? "y1" : "x1"]),
                 lineBox = secondaryAxis.lineBox(),
                 lineStart = lineBox[vertical ? "x1" : "y1"],
                 lineEnd = lineBox[vertical ? "x2" : "y2" ],
@@ -4777,7 +4752,6 @@
                 axisName = series.axis,
                 axisOptions = [].concat(options.valueAxis),
                 axis = $.grep(axisOptions, function(a) { return a.name === axisName })[0],
-                paneOptions = [].concat(options.panes),
                 paneName = axis.pane || "default";
 
             return paneName;
@@ -5900,10 +5874,6 @@
 
     function singleItemOrArray(array) {
         return array.length === 1 ? array[0] : array;
-    }
-
-    function valueOrDefault(value, defaultValue) {
-        return defined(value) ? value : defaultValue;
     }
 
     // Exports ================================================================
