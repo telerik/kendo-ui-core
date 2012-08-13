@@ -253,7 +253,7 @@
                 element: element,
                 surface: options.global ? SURFACE : options.surface || element,
                 stopPropagation: options.stopPropagation,
-                pressed: false,
+                pressed: false
             });
 
             element
@@ -294,7 +294,9 @@
 
         destroy: function() {
             this.element.off(NS);
-            this.eventHandler && this.eventHandler.destroy();
+            if (this.eventHandler) {
+                this.eventHandler.destroy();
+            }
         },
 
         capture: function() {
