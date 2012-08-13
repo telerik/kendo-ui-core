@@ -877,11 +877,11 @@
                 });
 
                 test("returns maximum value for righttmost point", function() {
-                    same(dateAxis.getValue(new Point2D(800, 0)), new Date("2012/02/12"));
+                    same(dateAxis.getValue(new Point2D(799, 0)), new Date("2012/02/12"));
                 });
 
                 test("returns value for middle point", function() {
-                    same(dateAxis.getValue(new Point2D(335, 0)), new Date("2012/02/05 00:36:00"));
+                    same(dateAxis.getValue(new Point2D(399.5, 0)), new Date("2012/02/06 00:00:00"));
                 });
 
                 // ------------------------------------------------------------
@@ -899,7 +899,7 @@
                 });
 
                 test("returns minimum value for righttmost point", function() {
-                    same(dateAxis.getValue(new Point2D(800, 0)), new Date("2012/01/31"));
+                    same(dateAxis.getValue(new Point2D(799, 0)), new Date("2012/01/31"));
                 });
 
                 test("returns maximum value for leftmost point", function() {
@@ -907,7 +907,7 @@
                 });
 
                 test("returns value for middle point", function() {
-                    same(dateAxis.getValue(new Point2D(465, 0)), new Date("2012/02/05 00:36:00"));
+                    same(dateAxis.getValue(new Point2D(399.5, 0)), new Date("2012/02/06 00:00:00"));
                 });
 
                 // ------------------------------------------------------------
@@ -931,7 +931,7 @@
                 });
 
                 test("returns minimum value for bottommost point", function() {
-                    same(dateAxis.getValue(new Point2D(0, 600)), new Date("2012/01/31"));
+                    same(dateAxis.getValue(new Point2D(0, 599)), new Date("2012/01/31"));
                 });
 
                 test("returns maximum value for topmost point", function() {
@@ -939,7 +939,7 @@
                 });
 
                 test("returns value for middle point", function() {
-                    same(dateAxis.getValue(new Point2D(0, 350)), new Date("2012/02/05"));
+                    same(dateAxis.getValue(new Point2D(0, 299.5)), new Date("2012/02/06"));
                 });
 
                 // ------------------------------------------------------------
@@ -961,11 +961,11 @@
                 });
 
                 test("returns maximum value for bottommost point", function() {
-                    same(dateAxis.getValue(new Point2D(0, 600)), new Date("2012/02/12"));
+                    same(dateAxis.getValue(new Point2D(0, 599)), new Date("2012/02/12"));
                 });
 
                 test("returns value for middle point", function() {
-                    same(dateAxis.getValue(new Point2D(0, 250)), new Date("2012/02/05"));
+                    same(dateAxis.getValue(new Point2D(0, 299.5)), new Date("2012/02/06"));
                 });
             })();
 

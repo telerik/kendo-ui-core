@@ -955,9 +955,14 @@
             var axis = this,
                 options = axis.options,
                 vertical = options.vertical,
-                size = vertical ? axis.box.height() : axis.box.width(),
+                lineWidth = options.line.width,
+                lineBox = axis.lineBox(),
+                size = vertical ? lineBox.height() : lineBox.width(),
                 step = size / itemsCount,
-                pos = vertical ? axis.box.y1 : axis.box.x1,
+                dim = vertical ? Y : X,
+                start = lineBox[dim + 1],
+                end = lineBox[dim + 2],
+                pos = start,
                 positions = [],
                 i;
 
@@ -966,7 +971,7 @@
                 pos += step;
             }
 
-            positions.push(vertical ? axis.box.y2 : axis.box.x2);
+            positions.push(end);
 
             return options.reverse ? positions.reverse() : positions;
         },

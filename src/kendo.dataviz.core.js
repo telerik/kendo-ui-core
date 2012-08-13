@@ -970,7 +970,7 @@
                 axisX = mirror ? box.x1 : box.x2,
                 axisY = mirror ? box.y2 : box.y1,
                 startMargin = 0,
-                endMargin = 0;
+                endMargin = options.line.width;
 
             if (labelsOnTicks && labels.length > 1) {
                 startMargin = labels[0].box[labelSize]() / 2;
