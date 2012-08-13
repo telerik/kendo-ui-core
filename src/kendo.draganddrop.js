@@ -164,7 +164,7 @@
         }
     });
 
-    var DragSequence = Class.extend({
+    var Touch = Class.extend({
         init: function(drag, target, location) {
             var that = this,
                 timestamp = now();
@@ -181,14 +181,11 @@
         dispose: function() {
             this.eventHandler.destroy();
             this.finished = true;
-            delete this.drag.sequence;
+            delete this.drag.touch;
         },
 
-        withinIgnoreThreshold: function() {
-            var xDelta = this.x.initialDelta,
-                yDelta = this.y.initialDelta;
-
-            return Math.sqrt(xDelta * xDelta + yDelta * yDelta) <= this.drag.threshold;
+        skip: function() {
+            this.dispose();
         },
 
         start: function(e) {
@@ -205,7 +202,7 @@
             that.y.move(location, timestamp);
 
             if (!that.moved) {
-                if (that.withinIgnoreThreshold()) {
+                if (that._withinIgnoreThreshold()) {
                     return;
                 }
 
@@ -236,6 +233,7 @@
         trigger: function(name, e) {
             var that = this,
                 data = {
+                    touch: that,
                     x: that.x,
                     y: that.y,
                     target: that.target,
@@ -246,7 +244,15 @@
             if(that.drag.trigger(name, data)) {
                 e.preventDefault();
             }
-        }
+        },
+
+        _withinIgnoreThreshold: function() {
+            var xDelta = this.x.initialDelta,
+                yDelta = this.y.initialDelta;
+
+            return Math.sqrt(xDelta * xDelta + yDelta * yDelta) <= this.drag.threshold;
+        },
+
     });
 
     var DragEventHandler = Class.extend({
@@ -328,8 +334,8 @@
 
         destroy: function() {
             this.element.off(NS);
-            if (this.sequence) {
-                this.sequence.dispose();
+            if (this.touch) {
+                this.touch.dispose();
             }
         },
 
@@ -338,20 +344,16 @@
         },
 
         cancel: function() {
-            this.sequence.dispose();
+            this.touch.dispose();
             this.trigger(CANCEL);
         },
 
-        skip: function() {
-            this.sequence.dispose();
-        },
-
         _isMoved: function() {
-            return this.sequence.moved;
+            return this.touch.moved;
         },
 
         _isPressed: function() {
-            return this.sequence;
+            return this.touch;
         },
 
         _start: function(e) {
@@ -391,7 +393,7 @@
                 location = originalEvent;
             }
 
-            that.sequence = new DragSequence(that, target, location);
+            that.touch = new Touch(that, target, location);
             Drag.captured = false;
         },
 
@@ -401,7 +403,7 @@
             if (!that._isPressed()) { return; }
 
             that._withEvent(e, function(location) {
-                that.sequence.move(e, location);
+                that.touch.move(e, location);
             });
         },
 
@@ -411,7 +413,7 @@
             if (!that._isPressed()) { return; }
 
             that._withEvent(e, function() {
-                that.sequence.end(e);
+                that.touch.end(e);
             });
         },
 
@@ -624,7 +626,7 @@
                         y.dragMove(e.y.delta);
                         e.preventDefault();
                     } else {
-                        that.drag.skip();
+                        e.touch.skip();
                     }
                 },
 
