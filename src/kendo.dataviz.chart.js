@@ -4041,53 +4041,14 @@
         reflow: function(targetBox) {
             var plotArea = this,
                 options = plotArea.options.plotArea,
-                margin = getSpacing(options.margin),
-                axes = plotArea.axes,
-                axesCount = axes.length,
-                box, i, y, plotAreaBox, firstAxis, secondAxis,
-                firstLineBox, secondLineBox;
+                margin = getSpacing(options.margin);
 
-            plotArea.box = targetBox.clone();
-
-            plotArea.box.unpad(margin);
-
+            plotArea.box = targetBox.clone().unpad(margin);
             plotArea.reflowPanes();
 
-            if (axesCount > 0) {
+            if (plotArea.axes.length > 0) {
                 plotArea.reflowAxes();
             }
-
-            for (i = 0; i < axesCount; i++) {
-                firstAxis = axes[i];
-                for (y = 0; y < axesCount; y++) {
-                    secondAxis = axes[y];
-
-                    if (firstAxis.options.vertical == secondAxis.options.vertical) {
-                        continue;
-                    }
-
-                    if (firstAxis.options.vertical) {
-                        firstLineBox = secondAxis.lineBox();
-                        secondLineBox = firstAxis.lineBox();
-                    } else {
-                        firstLineBox = firstAxis.lineBox();
-                        secondLineBox = secondAxis.lineBox();
-                    }
-
-                    box = new Box2D(
-                        firstLineBox.x1, secondLineBox.y1,
-                        firstLineBox.x2, secondLineBox.y2
-                    );
-
-                    if (!plotAreaBox) {
-                        plotAreaBox = box;
-                    }
-
-                    plotAreaBox = plotAreaBox.wrap(box);
-                }
-            }
-
-            plotArea.box = (plotAreaBox || targetBox).unpad(margin);
 
             plotArea.reflowCharts();
         },
@@ -4568,16 +4529,63 @@
             });
         },
 
+        backgroundBox: function() {
+            var plotArea = this,
+                axes = plotArea.axes,
+                axesCount = axes.length,
+                box,
+                bgBox,
+                i,
+                j,
+                axisA,
+                axisB,
+                lineBoxH,
+                lineBoxV;
+
+            for (i = 0; i < axesCount; i++) {
+                axisA = axes[i];
+
+                for (j = 0; j < axesCount; j++) {
+                    axisB = axes[j];
+
+                    if (axisA.options.vertical !== axisB.options.vertical) {
+                        if (axisA.options.vertical) {
+                            lineBoxH = axisB.lineBox();
+                            lineBoxV = axisA.lineBox();
+                        } else {
+                            lineBoxH = axisA.lineBox();
+                            lineBoxV = axisB.lineBox();
+                        }
+
+                        box = new Box2D(
+                            lineBoxH.x1, lineBoxV.y1,
+                            lineBoxH.x2, lineBoxV.y2
+                        );
+
+                        if (!bgBox) {
+                            bgBox = box;
+                        } else {
+                            bgBox = bgBox.wrap(box);
+                        }
+                    }
+                }
+            }
+
+            return bgBox || plotArea.box;
+        },
+
         getViewElements: function(view) {
             var plotArea = this,
+                bgBox = plotArea.backgroundBox(),
                 options = plotArea.options,
                 userOptions = options.plotArea,
                 gridLines = [],
                 childElements = ChartElement.fn.getViewElements.call(plotArea, view),
                 border = userOptions.border || {},
                 elements = [
-                    view.createRect(plotArea.box, {
+                    view.createRect(bgBox, {
                         fill: userOptions.background,
+                        fillOpacity: userOptions.opacity,
                         zIndex: -2,
                         strokeWidth: 0.1
                     }),
