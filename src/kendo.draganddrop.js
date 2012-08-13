@@ -209,10 +209,14 @@
         },
 
         dispose: function() {
-            var that = this;
-            that.drag.surface.off(that._eventMap);
+            var that = this,
+                drag = that.drag;
+                activeTouches = drag.touches;
+
             that._finished = true;
-            delete that.drag.touch;
+            drag.surface.off(that._eventMap);
+
+            activeTouches.splice(activeTouches.indexOf(that), 0);
         },
 
         skip: function() {
@@ -284,7 +288,7 @@
                     event: e
                 };
 
-            if(that.drag.trigger(name, data)) {
+            if(that.drag.notify(name, data)) {
                 e.preventDefault();
             }
         },
@@ -344,6 +348,7 @@
             options = options || {};
             filter = that.filter = options.filter;
             that.threshold = options.threshold || 0;
+            that.touches = [];
 
             element = $(element);
             Observable.fn.init.call(that);
@@ -393,9 +398,7 @@
 
         destroy: function() {
             this.element.off(NS);
-            if (this.touch) {
-                this.touch.dispose();
-            }
+            this._disposeAll();
         },
 
         capture: function() {
@@ -403,24 +406,54 @@
         },
 
         cancel: function() {
-            this.touch.dispose();
+            this._disposeAll();
             this.trigger(CANCEL);
         },
 
+        notify: function(eventName, data) {
+            var that = this,
+                multiTouch = that.touches.length > 1;
+
+            if (multiTouch) {
+                switch(eventName) {
+                    case START:
+                        eventName = "gesturestart";
+                        break;
+                    case MOVE:
+                        eventName = "gesturechange";
+                        break;
+                    case END:
+                        eventName = "gestureend";
+                        break;
+                    case TAP:
+                        eventName = "gesturetap";
+                        break;
+                    default:
+                        break
+                }
+
+                data.touches = that.touches;
+            }
+
+            return this.trigger(eventName, data);
+        },
+
+        _disposeAll: function() {
+            $.each(this.touches, function(touch) { touch.dispose(); });
+        },
+
         _isMoved: function() {
-            return this.touch.moved;
+            return $.grep(this.touches, function(touch) { return touch.moved; }).length;
         },
 
         _isPressed: function() {
-            return this.touch;
+            return this.touches.length;
         },
 
         _start: function(e) {
             var that = this,
                 filter = that.filter,
                 target;
-
-            if (that._isPressed()) { return; }
 
             if (filter) {
                 target = $(e.target).is(filter) ? $(e.target) : $(e.target).closest(filter);
@@ -438,7 +471,7 @@
                 e.stopPropagation();
             }
 
-            that.touch = new Touch(that, target, e);
+            that.touches.push(new Touch(that, target, e));
             Drag.captured = false;
         }
     });
