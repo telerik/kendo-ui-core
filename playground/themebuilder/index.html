@@ -168,18 +168,6 @@
             text-shadow: 0 -1px 1px rgba(0,0,0,.3);
         }
 
-        .sample .gradient-view
-        {
-            position: absolute;
-            z-index: 1;
-            width: 100%;
-            height: 100%;
-            cursor: crosshair;
-            border-radius: 5px;
-            padding-left: 1px;
-            box-shadow: 0 1px 1px rgba(0,0,0,.3), inset 1px 1px 1px rgba(0,0,0,.2);
-        }
-
         .utility-active
         {
             position: relative;
@@ -235,7 +223,8 @@
         }
 
         .drop,
-        .k-static-picker .color-preview
+        .k-static-picker .color-preview,
+        .gradient-preview
         {
             width: 45px;
             height: 45px;
@@ -246,7 +235,9 @@
         }
 
         .drop:before,
-        .k-static-picker .color-preview:before
+        .k-static-picker .color-preview:before,
+        .gradient-preview:before,
+        .k-gradientpick .rotator:before
         {
             content: "\a0";
             display: block;
@@ -257,8 +248,16 @@
             background-image: -webkit-gradient(linear, 0 0, 100% 100%, color-stop(.25, #666), color-stop(.25, transparent), to(transparent)), -webkit-gradient(linear, 0 100%, 100% 0, color-stop(.25, #666), color-stop(.25, transparent), to(transparent)),
                               -webkit-gradient(linear, 0 0, 100% 100%, color-stop(.75, transparent), color-stop(.75, #666)), -webkit-gradient(linear, 0 100%, 100% 0, color-stop(.75, #707070), color-stop(.75, #666));
             background-image: -moz-linear-gradient(45deg, #666 25%, transparent 25%, transparent), -moz-linear-gradient(-45deg, #666 25%, transparent 25%, transparent),
-                             -moz-linear-gradient(45deg, transparent 75%, #666 75%), -moz-linear-gradient(-45deg, #707070 75%, #666 75%);
+                              -moz-linear-gradient(45deg, transparent 75%, #666 75%), -moz-linear-gradient(-45deg, #707070 75%, #666 75%);
             background-size: 11px 11px;
+        }
+
+        .sample .gradient-preview
+        {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            cursor: crosshair;
         }
 
         .color-value
@@ -429,6 +428,7 @@
             padding: 0 !important;
             margin: 0 !important;
             width: 400px !important;
+            height: 100% !important;
             display: none;
             position: absolute;
         }
@@ -441,6 +441,7 @@
         .k-static-picker > .k-popup
         {
             display: block !important;
+            height: 100%;
             -webkit-transition: none !important;
             -moz-transition: none !important;
             -webkit-transform: none !important;
@@ -451,6 +452,11 @@
             border: 0;
             background: none;
             width: 400px;
+        }
+
+        .k-popup .k-static-picker .k-gradientpick
+        {
+            margin-left: 10px;
         }
 
         .k-static-picker .color-preview
@@ -464,6 +470,28 @@
             border-radius: 0;
             float: left;
             border: 0;
+        }
+
+        .k-static-picker .rotator
+        {
+            width: 30px;
+            height: 30px;
+            display: inline-block;
+            margin-bottom: -3px;
+            position: relative;
+        }
+
+        .k-static-picker .sample
+        {
+            width: 240px;
+            height: 60px;
+            margin: 0;
+        }
+
+        .k-static-picker .gradient-preview
+        {
+            width: 100%;
+            height: 100%;
         }
 
         .k-colorpick

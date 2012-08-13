@@ -152,6 +152,9 @@
                 selector: ".km-meego"
             }
         },
+        colorPicker = $(".recent-colors").kendoHSLPicker({ filter: ".drop" }).data("kendoHSLPicker"),
+        gradientPicker = $(".recent-gradients").kendoGradientPicker({ filter: ".drop" }).data("kendoGradientPicker"),
+
         defaultColors = [ "#c5007c", "#6300a5", "#0010a5", "#0064b5", "#00a3c7", "#0fad00", "#8cc700", "#ff0", "#fec500", "#ff9400", "#f60", "#f00",
                           "none", "#fff", "#e5e5e5", "#ccc", "#b2b2b2", "#999", "#7f7f7f", "#666", "#4c4c4c", "#333", "#191919", "#000" ],
 
@@ -187,7 +190,10 @@
                 top: -38
             },
             hint: function (element) {
-                return kendo.support.touch ? $("<div style='width: 28px; height: 38px'/>").css("background-image", fillSvg.replace("%23f984ef", element.css("background-color"))) : undefined;
+                return kendo.support.touch ?
+                    $("<div style='width: 28px; height: 38px'/>")
+                        .css("background-image", fillSvg.replace("%23f984ef", element.css("background-color")))
+                    : undefined;
             },
             dragstart: function () {
                 var element = this.element,
@@ -632,8 +638,6 @@
         });
     };
 
-    window.recentPicker = $(".recent-colors").kendoHSLPicker({ filter: ".drop" }).data("kendoHSLPicker");
-
     function addRecentColor(element) {
         element = $(element);
 
@@ -652,8 +656,8 @@
                 .removeClass("k-state-active").end();
 
             recent.kendoDraggable(colorDragEvents);
-            recentPicker.open(recent);
-            recentPicker.popup.wrapper.addClass("k-static-shown");
+            colorPicker.open(recent);
+            colorPicker.popup.wrapper.addClass("k-static-shown");
 
             recent.click(function (e) {
                 var that = $(this), item;
@@ -663,15 +667,15 @@
                         .siblings(".k-state-active")
                         .removeClass("k-state-active");
                 } else if (e.button == 1) {
-                    if (this == recentPicker.target[0]) {
+                    if (this == colorPicker.target[0]) {
                         item = that.next();
                         !item[0] && (item = that.prev());
 
                         if (!item[0]) {
-                            recentPicker.popup.wrapper.removeClass("k-static-shown");
-                            recentPicker.close();
+                            colorPicker.popup.wrapper.removeClass("k-static-shown");
+                            colorPicker.close();
                         } else {
-                            recentPicker.open(item);
+                            colorPicker.open(item);
                         }
                     }
                     that.remove();
@@ -698,8 +702,8 @@
                 .removeClass("k-state-active").end();
 
             recent.kendoDraggable(gradientDragEvents);
-    //        recentPicker.popup.wrapper.addClass("k-static-shown");
-    //        recentPicker.open(recent);
+            gradientPicker.popup.wrapper.addClass("k-static-shown");
+            gradientPicker.open(recent);
 
             recent.click(function (e) {
                 var that = $(this), item;
@@ -709,17 +713,17 @@
                         .siblings(".k-state-active")
                         .removeClass("k-state-active");
                 } else if (e.button == 1) {
-    //                if (this == recentPicker.target[0]) {
-    //                    item = that.next();
-    //                    !item[0] && (item = that.prev());
-    //
-    //                    if (!item[0]) {
-    //                        recentPicker.popup.wrapper.removeClass("k-static-shown");
-    //                        recentPicker.close();
-    //                    } else {
-    //                        recentPicker.open(item);
-    //                    }
-    //                }
+                    if (this == colorPicker.target[0]) {
+                        item = that.next();
+                        !item[0] && (item = that.prev());
+
+                        if (!item[0]) {
+                            colorPicker.popup.wrapper.removeClass("k-static-shown");
+                            colorPicker.close();
+                        } else {
+                            colorPicker.open(item);
+                        }
+                    }
                     that.remove();
                 }
             });
@@ -737,7 +741,7 @@
            $("<br />").insertBefore(".recent-colors");
        }
     }
-    kendo.wrap(recentPicker.popup.element).addClass("k-static-picker");
+    kendo.wrap(colorPicker.popup.element).addClass("k-static-picker");
 
     i = 0;
     while (defaultGradients[i]) {
@@ -753,6 +757,7 @@
            $("<br />").insertBefore(".recent-gradients");
        }
     }
+    kendo.wrap(gradientPicker.popup.element).addClass("k-static-picker");
 
     $(".tools").kendoTabStrip({
         animation: {
