@@ -22,7 +22,7 @@
 
     var ColorSlider = Widget.extend({
         init: function(element, options) {
-            var that = this, width;
+            var that = this;
 
             Widget.fn.init.call(that, element, options);
 
@@ -30,14 +30,6 @@
             that._drag();
             that._background();
             that._handle();
-
-            width = that.wrapper.width();
-            that.point = that.options.value;
-
-            that.constrain = width;
-            that.handleWidth = that.handle.outerWidth(true);
-            that.precisionFactor = pow(10, that.options.precision);
-            that.snapPoint = that.constrain / (that.options.max * that.precisionFactor);
 
             that.value(that.point);
             that.bind([ CHANGE, SLIDE ], that.options);
@@ -63,8 +55,12 @@
                 return that.point;
             }
 
+            that._dimensions();
+
             that.point = round(value, that.options.precision);
             that._position(value * that.snapPoint * that.precisionFactor);
+
+            return that;
         },
 
         _move: function(e) {
@@ -120,6 +116,17 @@
             that.origin = parseInt(background.css(MARGINLEFT), 10);
             background.data("origin", that.origin);
             that.background = background;
+        },
+
+        _dimensions: function() {
+            var that = this;
+
+            that.point = that.options.value;
+            that.constrain = that.wrapper.width();
+            that.handleWidth = that.handle.outerWidth(true);
+            that.precisionFactor = pow(10, that.options.precision);
+
+            that.snapPoint = that.constrain / (that.options.max * that.precisionFactor);
         },
 
         _handle: function() {

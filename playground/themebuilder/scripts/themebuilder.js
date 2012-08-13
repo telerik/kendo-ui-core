@@ -52,7 +52,7 @@
             listitem: {
                 name: "List Item",
                 selector: ".km-list > li",
-                whitelist: [ "background-color", "background-image", "border-radius", "color" ]
+                whitelist: [ "background-color", "background-image", "border-radius", "color", "border-color" ]
             },
             scrollitem: {
                 name: "ScrollView Item",
@@ -118,13 +118,13 @@
             listview: {
                 name: "ListView",
                 selector: ".km-list",
-                whitelist: [],
+                whitelist: [ "border-color" ],
                 children: [ "icon", "button", "switch", "listitem", "grouptitle" ]
             },
             content: {
                 name: "View Content",
                 selector: ".km-content",
-                whitelist: [ "background-color", "background-image" ],
+                whitelist: [ "color", "background-color", "background-image" ],
                 children: [ "button", "listview", "scrollview", "switch", "buttongroup" ]
             },
             tabstrip: {
@@ -152,7 +152,7 @@
                 selector: ".km-meego"
             }
         },
-        defaultColors = [ "#c5007c", "#6300a5", "#0010a5", "#0064b5", "#00a3c7", "#0fad00", "#8cc700", "#ffff00", "#fec500", "#ff9400", "#ff6600", "#ff0000",
+        defaultColors = [ "#c5007c", "#6300a5", "#0010a5", "#0064b5", "#00a3c7", "#0fad00", "#8cc700", "#ff0", "#fec500", "#ff9400", "#f60", "#f00",
                           "none", "#fff", "#e5e5e5", "#ccc", "#b2b2b2", "#999", "#7f7f7f", "#666", "#4c4c4c", "#333", "#191919", "#000" ],
 
         defaultGradients = [ "linear-gradient(top, #fff, rgba(255,255,255,.2) 50%, rgba(255,255,255,.3) 50%, rgba(255,255,255,.7))",
@@ -181,7 +181,6 @@
                              "linear-gradient(top, rgba(0,0,0,.2), rgba(0,0,0,.5) 73%, rgba(0,0,0,.2))",
                              "linear-gradient(top, rgba(0,0,0,.2), rgba(0,0,0,.35) 12%, rgba(0,0,0,.65) 40%, rgba(0,0,0,.4) 80%, rgba(0,0,0,.6))" ],
         i = 0,
-        recentPicker = $(".recent-colors").kendoHSLPicker({ filter: ".drop" }).data("kendoHSLPicker"),
         colorDragEvents = {
             cursorOffset: {
                 left: -50,
@@ -447,6 +446,7 @@
     window.initTargets = function() {
         setTimeout(function () {
             var property = "", whitelisted = false,
+                draggedElement,
                 color = "transparent",
                 css, defaultCSS;
 
@@ -479,7 +479,8 @@
                     e.preventDefault();
                     e.stopImmediatePropagation();
 
-                    var index = widget.whitelist.indexOf(property),
+                    var property = $(draggedElement).data("property"),
+                        index = widget.whitelist.indexOf(property),
                         newIndex = 0, maxIndex = widget.whitelist.length - 1;
 
                     if (index != -1) {
@@ -498,12 +499,14 @@
             $(".device").kendoDropTargetArea({
                 filter: getWidgets(properties).selector,
                 dragenter: function (e) {
+                    draggedElement = $(e.draggable.element);
+
                     var target = e.dropTarget,
                         offset = target.offset(),
                         height = target.outerHeight(),
                         widgetChildren = widgetTarget.children("div"),
                         widget = matchWidget(target[0]),
-                        property = $(e.draggable.element).data("property");
+                        property = draggedElement.data("property");
 
                     whitelisted = widget.whitelist.indexOf(property) != -1 ? property : colors.indexOf(property) != -1 ? widget.whitelist[0] : false;
 
@@ -629,74 +632,98 @@
         });
     };
 
+    window.recentPicker = $(".recent-colors").kendoHSLPicker({ filter: ".drop" }).data("kendoHSLPicker");
+
     function addRecentColor(element) {
-        var recent = $(element).clone()
-            .prependTo(".recent-colors")
-            .addClass("k-state-active")
-            .siblings(".k-state-active")
-            .removeClass("k-state-active").end();
+        element = $(element);
 
-        recent.kendoDraggable(colorDragEvents);
-        recentPicker.popup.wrapper.addClass("k-static-shown");
-        recentPicker.open(recent);
+        var existing = $(".recent-colors [data-color='" + colorTool.set(element.css("background-color")).get() + "']");
 
-        recent.click(function (e) {
-            var that = $(this), item;
+        if (existing[0]) {
+            existing
+                .addClass("k-state-active")
+                .siblings(".k-state-active")
+                .removeClass("k-state-active");
+        } else {
+            var recent = element.clone()
+                .prependTo(".recent-colors")
+                .addClass("k-state-active")
+                .siblings(".k-state-active")
+                .removeClass("k-state-active").end();
 
-            if (e.button == 0) {
-                that.addClass("k-state-active")
-                    .siblings(".k-state-active")
-                    .removeClass("k-state-active");
-            } else if (e.button == 1) {
-                if (this == recentPicker.target[0]) {
-                    item = that.next();
-                    !item[0] && (item = that.prev());
+            recent.kendoDraggable(colorDragEvents);
+            recentPicker.open(recent);
+            recentPicker.popup.wrapper.addClass("k-static-shown");
 
-                    if (!item[0]) {
-                        recentPicker.popup.wrapper.removeClass("k-static-shown");
-                        recentPicker.close();
-                    } else {
-                        recentPicker.open(item);
+            recent.click(function (e) {
+                var that = $(this), item;
+
+                if (e.button == 0) {
+                    that.addClass("k-state-active")
+                        .siblings(".k-state-active")
+                        .removeClass("k-state-active");
+                } else if (e.button == 1) {
+                    if (this == recentPicker.target[0]) {
+                        item = that.next();
+                        !item[0] && (item = that.prev());
+
+                        if (!item[0]) {
+                            recentPicker.popup.wrapper.removeClass("k-static-shown");
+                            recentPicker.close();
+                        } else {
+                            recentPicker.open(item);
+                        }
                     }
+                    that.remove();
                 }
-                that.remove();
-            }
-        });
+            });
+        }
     }
 
     function addRecentGradient(element) {
-        var recent = $(element).clone()
-            .prependTo(".recent-gradients")
-            .addClass("k-state-active")
-            .siblings(".k-state-active")
-            .removeClass("k-state-active").end();
+        element = $(element);
 
-        recent.kendoDraggable(gradientDragEvents);
-//        recentPicker.popup.wrapper.addClass("k-static-shown");
-//        recentPicker.open(recent);
+        var existing = $(".recent-gradients [data-gradient='" + gradientTool.set(element.css("background-image")).get() + "']");
 
-        recent.click(function (e) {
-            var that = $(this), item;
+        if (existing[0]) {
+            existing
+                .addClass("k-state-active")
+                .siblings(".k-state-active")
+                .removeClass("k-state-active");
+        } else {
+            var recent = element.clone()
+                .prependTo(".recent-gradients")
+                .addClass("k-state-active")
+                .siblings(".k-state-active")
+                .removeClass("k-state-active").end();
 
-            if (e.button == 0) {
-                that.addClass("k-state-active")
-                    .siblings(".k-state-active")
-                    .removeClass("k-state-active");
-            } else if (e.button == 1) {
-//                if (this == recentPicker.target[0]) {
-//                    item = that.next();
-//                    !item[0] && (item = that.prev());
-//
-//                    if (!item[0]) {
-//                        recentPicker.popup.wrapper.removeClass("k-static-shown");
-//                        recentPicker.close();
-//                    } else {
-//                        recentPicker.open(item);
-//                    }
-//                }
-                that.remove();
-            }
-        });
+            recent.kendoDraggable(gradientDragEvents);
+    //        recentPicker.popup.wrapper.addClass("k-static-shown");
+    //        recentPicker.open(recent);
+
+            recent.click(function (e) {
+                var that = $(this), item;
+
+                if (e.button == 0) {
+                    that.addClass("k-state-active")
+                        .siblings(".k-state-active")
+                        .removeClass("k-state-active");
+                } else if (e.button == 1) {
+    //                if (this == recentPicker.target[0]) {
+    //                    item = that.next();
+    //                    !item[0] && (item = that.prev());
+    //
+    //                    if (!item[0]) {
+    //                        recentPicker.popup.wrapper.removeClass("k-static-shown");
+    //                        recentPicker.close();
+    //                    } else {
+    //                        recentPicker.open(item);
+    //                    }
+    //                }
+                    that.remove();
+                }
+            });
+        }
     }
 
     while (defaultColors[i]) {
