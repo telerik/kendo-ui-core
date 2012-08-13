@@ -793,7 +793,7 @@
                 cancel: proxy(that._cancel, that)
             });
 
-            that._destroyHandler = proxy(that._destroy, that);
+            that._afterEndHandler = proxy(that._afterEnd, that);
             that.captureEscape = function(e) {
                 if (e.keyCode === kendo.keys.ESC) {
                     that._trigger(DRAGCANCEL, {event: e});
@@ -817,6 +817,36 @@
             axis: null,
             container: null,
             dropped: false
+        },
+
+        _updateHint: function(e) {
+            var that = this,
+                coordinates,
+                options = that.options,
+                boundaries = that.boundaries,
+                axis = options.axis,
+                cursorOffset = that.options.cursorOffset;
+
+            if (cursorOffset) {
+               coordinates = { left: e.x.location + cursorOffset.left, top: e.y.location + cursorOffset.top };
+            } else {
+               that.hintOffset.left += e.x.delta;
+               that.hintOffset.top += e.y.delta;
+               coordinates = $.extend({}, that.hintOffset);
+            }
+
+            if (boundaries) {
+                coordinates.top = within(coordinates.top, boundaries.y);
+                coordinates.left = within(coordinates.left, boundaries.x);
+            }
+
+            if (axis === "x") {
+                delete coordinates.top;
+            } else if (axis === "y") {
+                delete coordinates.left;
+            }
+
+            that.hint.css(coordinates);
         },
 
         _start: function(e) {
@@ -853,40 +883,10 @@
 
             if (that._trigger(DRAGSTART, e)) {
                 that.drag.cancel();
-                that._destroy();
+                that._afterEnd();
             }
 
             $(document).on(KEYUP, that.captureEscape);
-        },
-
-        updateHint: function(e) {
-            var that = this,
-                coordinates,
-                options = that.options,
-                boundaries = that.boundaries,
-                axis = options.axis,
-                cursorOffset = that.options.cursorOffset;
-
-            if (cursorOffset) {
-               coordinates = { left: e.x.location + cursorOffset.left, top: e.y.location + cursorOffset.top };
-            } else {
-               that.hintOffset.left += e.x.delta;
-               that.hintOffset.top += e.y.delta;
-               coordinates = $.extend({}, that.hintOffset);
-            }
-
-            if (boundaries) {
-                coordinates.top = within(coordinates.top, boundaries.y);
-                coordinates.left = within(coordinates.left, boundaries.x);
-            }
-
-            if (axis === "x") {
-                delete coordinates.top;
-            } else if (axis === "y") {
-                delete coordinates.left;
-            }
-
-            that.hint.css(coordinates);
         },
 
         _drag: function(e) {
@@ -918,7 +918,7 @@
             that._trigger(DRAG, e);
 
             if (that.hint) {
-                that.updateHint(e);
+                that._updateHint(e);
             }
         },
 
@@ -940,9 +940,9 @@
             var that = this;
 
             if (that.hint && !that.dropped) {
-                that.hint.animate(that.currentTargetOffset, "fast", that._destroyHandler);
+                that.hint.animate(that.currentTargetOffset, "fast", that._afterEndHandler);
             } else {
-                that._destroy();
+                that._afterEnd();
             }
         },
 
@@ -994,12 +994,12 @@
 
             Widget.fn.destroy.call(that);
 
-            that._destroy();
+            that._afterEnd();
 
             that.drag.destroy();
         },
 
-        _destroy: function() {
+        _afterEnd: function() {
             var that = this;
 
             if (that.hint) {
