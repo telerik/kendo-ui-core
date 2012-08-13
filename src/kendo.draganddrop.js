@@ -169,6 +169,7 @@
             var that = this,
                 timestamp = now();
 
+            that.moved = false;
             that.eventHandler = new DragEventHandler(drag.surface, drag);
             that.x = new DragAxis("X", location, timestamp);
             that.y = new DragAxis("Y", location, timestamp);
@@ -185,7 +186,17 @@
 
         start: function(e) {
            this.startTime = now;
+           this.moved = true;
            this.trigger(START, e);
+        },
+
+        end: function(e) {
+            var that = this;
+            if (that.moved) {
+                that.trigger(END, e);
+            } else {
+                that.trigger(TAP, e);
+            }
         },
 
         move: function(location) {
@@ -275,7 +286,7 @@
 
             if (support.eventCapture) {
                 preventIfMoving = function(e) {
-                    if (that.moved) {
+                    if (that._isMoved()) {
                         e.preventDefault();
                     }
                 };
@@ -313,12 +324,15 @@
 
         _cancel: function() {
             var that = this;
-            that.moved = false;
             that.sequence.destroy();
             delete that.sequence;
         },
 
-        _isPressed: function () {
+        _isMoved: function() {
+            return this.sequence.moved;
+        },
+
+        _isPressed: function() {
             return this.sequence;
         },
 
@@ -348,8 +362,6 @@
                 e.stopPropagation();
             }
 
-            that.moved = false;
-
             if (support.touch) {
                 touch = originalEvent.changedTouches[0];
                 that.touchID = touch.identifier;
@@ -374,14 +386,13 @@
 
                 that.sequence.move(location);
 
-                if (!that.moved) {
+                if (!that._isMoved()) {
                     if (that.sequence.withinIgnoreThreshold(that.threshold)) {
                         return;
                     }
 
                     if (!Drag.captured) {
                         that.sequence.start(e);
-                        that.moved = true;
                     } else {
                         return that._cancel();
                     }
@@ -400,14 +411,7 @@
             if (!that._isPressed()) { return; }
 
             that._withEvent(e, function() {
-                if (that.moved) {
-                    that.endTime = now();
-                    that.sequence.trigger(END, e);
-                    that.moved = false;
-                } else {
-                    that.sequence.trigger(TAP, e);
-                }
-
+                that.sequence.end(e);
                 that._cancel();
             });
         },
