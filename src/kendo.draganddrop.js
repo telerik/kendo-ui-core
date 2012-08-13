@@ -294,6 +294,7 @@
 
         destroy: function() {
             this.element.off(NS);
+            this.eventHandler && this.eventHandler.destroy();
         },
 
         capture: function() {
@@ -819,7 +820,7 @@
                 container = options.container,
                 hint = options.hint;
 
-            that.currentTarget = that.drag.target;
+            that.currentTarget = e.target;
             that.currentTargetOffset = getOffset(that.currentTarget);
 
             if (hint) {
