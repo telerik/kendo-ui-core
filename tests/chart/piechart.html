@@ -152,30 +152,56 @@
                 module("Pie Chart / Legend items", {
                     setup: function() {
                         plotArea = new PlotAreaStub();
-                        setupPieChart(plotArea, { series: [ { data: dataValues.data, test: "test" } ] });
+                        setupPieChart(plotArea, { series: [ { data: dataValues.data } ] });
                     }
                 });
 
                 test("return legend item for each segment", function() {
-                    equals(pieChart.legendItems().length, 2);
+                    equals(pieChart.legendItems.length, 2);
                 });
 
                 test("set legend item name to category", function() {
-                    equals(pieChart.legendItems()[0].name, "A");
+                    equals(pieChart.legendItems[0].name, "A");
                 });
 
                 test("set legend item color", function() {
-                    equals(pieChart.legendItems()[0].color, "red");
+                    equals(pieChart.legendItems[0].color, "red");
                 });
 
                 test("skip points with visibleInLegend set to false", function() {
-                    pieChart.segments[1].visibleInLegend = false;
-                    equals(pieChart.legendItems().length, 1);
+                    var data = [{
+                            value: 1,
+                            category: "A"
+                        }, {
+                            value: 2,
+                            category: "B",
+                            visibleInLegend: false
+                        }];
+
+                    setupPieChart(plotArea, { series: [ { data: data } ] });
+                    equals(pieChart.legendItems.length, 1);
                 });
 
                 test("set legend item name with template", function() {
-                    equals(pieChart.legendItems({ template: "#= series.test #" })[0].name, "test");
-                    equals(pieChart.legendItems({ template: "#= text #" })[0].name, "A");
+                    setupPieChart(plotArea, {
+                        series: [ { data: dataValues.data, test: "test" } ],
+                        legend: {
+                            labels: {
+                                template: "#= series.test #"
+                            }
+                        }
+                    });
+
+                    equals(pieChart.legendItems[0].name, "test");
+                    setupPieChart(plotArea, { series: [ {
+                        data: dataValues.data,
+                        legend: {
+                            labels: {
+                                template: "#= text #"
+                            }
+                        }
+                    } ] });
+                    equals(pieChart.legendItems[0].name, "A");
                 });
 
             })();
@@ -249,7 +275,26 @@
                 });
 
                 test("sets legend item name from dataItem", function() {
-                    equals(pieChart.legendItems({ template: "#= dataItem.test #" })[0].name, "test");
+                    $("#container").kendoChart({
+                        dataSource: {
+                            data: [{
+                                value: 10,
+                                category: "A",
+                                test: "test"
+                            }]
+                        },
+                        series: [{
+                            type: "pie",
+                            field: "value",
+                            categoryField: "category"
+                        }],
+                        legend: {
+                            labels: {
+                                template: "#= dataItem.test #"
+                            }
+                        }
+                    });
+                    equals($("#container").data("kendoChart")._plotArea.charts[0].legendItems[0].name, "test");
                 });
 
             })();

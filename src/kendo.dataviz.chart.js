@@ -3271,7 +3271,7 @@
 
             chart.plotArea = plotArea;
             chart.segments = [];
-            chart.seriesPoints = [];
+            chart.legendItems = [];
             chart.render();
         },
 
@@ -3368,6 +3368,11 @@
             var chart = this,
                 segment;
 
+            chart.createLegendItem(fields);
+
+            if (!value) {
+                return;
+            }
             segment = new PieSegment(value, sector, fields.series);
             segment.options.id = uniqueId();
             extend(segment, fields);
@@ -3375,35 +3380,28 @@
             chart.segments.push(segment);
         },
 
-        legendItems: function(options) {
-            var segments = this.segments,
-                segmentsLength = segments.length,
-                i,
-                currentPoint,
-                items = [],
+        createLegendItem: function(point) {
+            var chart = this,
+                options = (chart.options.legend || {}).labels || {},
                 text, labelTemplate;
 
-            for (i = 0; i < segmentsLength; i++) {
-                currentPoint = segments[i];
-                if (currentPoint && currentPoint.visibleInLegend !== false) {
-                    text = currentPoint.category || "";
-                    if ((options || {}).template) {
-                        labelTemplate = template(options.template);
-                        text = labelTemplate({
-                            text: text,
-                            series: currentPoint.series,
-                            dataItem: currentPoint.dataItem,
-                            value: currentPoint.value
-                        });
-                    }
-                    items.push({
-                        name: text,
-                        color: currentPoint.options.color
+            if (point && point.visibleInLegend !== false) {
+                text = point.category || "";
+                if ((options || {}).template) {
+                    labelTemplate = template(options.template);
+                    text = labelTemplate({
+                        text: text,
+                        series: point.series,
+                        dataItem: point.dataItem,
+                        value: point.value
                     });
                 }
-            }
 
-            return items;
+                chart.legendItems.push({
+                    name: text,
+                    color: point.series.color
+                });
+            }
         },
 
         pointsTotal: function(series) {
@@ -3941,7 +3939,7 @@
                 labels = this.options.legend.labels || {};
 
             if (chart.legendItems) {
-                data = chart.legendItems(labels);
+                data = chart.legendItems;
             } else {
                 for (i = 0; i < count; i++) {
                     currentSeries = series[i];
@@ -4881,7 +4879,8 @@
                     series: series,
                     padding: firstSeries.padding,
                     startAngle: firstSeries.startAngle,
-                    connectors: firstSeries.connectors
+                    connectors: firstSeries.connectors,
+                    legend: plotArea.options.legend
                 });
 
             plotArea.appendChart(pieChart);
