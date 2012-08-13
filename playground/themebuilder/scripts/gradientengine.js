@@ -30,7 +30,8 @@
             }
         }, angles = { // hopefully temporary
             percent: { "0 50%": 0, "50% 100%": 90, "100% 50%": 180, "50% 0": 270, "0 100%": 45, "100% 100%": 135, "100% 0": 225, "0 0": 315 },
-            directions: { "0": "left", "90": "bottom", "180": "right", "270": "top", "45": "bottom left", "135": "bottom right", "225": "top right", "315": "top left" }
+            directions: { "0": "left", "90": "bottom", "180": "right", "270": "top", "45": "bottom left", "135": "bottom right", "225": "top right", "315": "top left" },
+            reverted: { "left": "0", "bottom": "90", "right": "180", "top": "270", "bottom left": "45", "bottom right": "135", "top right": "225", "top left": "315" }
         };
 
     function trimZeroes(value) {
@@ -156,6 +157,10 @@
         },
 
         setAngle: function (index, angle) {
+            if (typeof angle == "string") {
+                angle = angles.reverted[angle];
+            }
+
             angle = angle % 360;
 
             var that = this,
@@ -167,6 +172,8 @@
             that.value[index].start.normalized = normalizePosition(direction);
             that.value[index].end.original = false;
             that.value[index].end.normalized = normalizePosition(direction, true);
+
+            return that;
         },
 
         _getStandardGradient: function (gradient, prefix, direction) {
