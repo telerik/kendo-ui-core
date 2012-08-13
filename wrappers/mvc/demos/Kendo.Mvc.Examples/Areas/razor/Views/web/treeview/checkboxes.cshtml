@@ -1,0 +1,80 @@
+﻿@using (Html.BeginForm("Checkboxes", "TreeView", FormMethod.Post))
+{
+    <div class="treeview-back">
+            @(Html.Kendo().TreeView()
+                .Name("treeview")
+                .Checkboxes(checkboxes => checkboxes
+                    .CheckChildren(true)
+                )
+                .Items(treeview =>
+                {
+                    treeview.Add().Text("Furniture").Id("1")
+                        .Expanded(true)
+                        .Items(furniture =>
+                        {
+                            furniture.Add().Text("Tables & Chairs").Id("2");
+                            furniture.Add().Text("Sofas").Id("3");
+                            furniture.Add().Text("Occasional Furniture").Id("4");
+                        });
+
+                    treeview.Add().Text("Decor").Id("5")
+                        .Expanded(true)
+                        .Items(furniture =>
+                        {
+                            furniture.Add().Text("Bed Linen").Id("6");
+                            furniture.Add().Text("Curtains & Blinds").Id("7");
+                            furniture.Add().Text("Carpets").Id("8");
+                        });
+                })
+            )
+    </div>
+        
+    <button type="submit" class="k-button">Post checked nodes</button>
+}
+
+<div id="result">
+@if (Model != null)
+{
+    <text>Checked nodes: @(String.Join(", ", (int[])Model)) </text>
+}
+else
+{
+    <text>No nodes checked.</text>
+}
+</div>
+
+<style scoped="scoped">
+
+.treeview-back 
+{
+    float: left;
+    margin: 0 0 2em;
+    padding: 20px;
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.45), inset 0 0 30px rgba(0,0,0,0.07);
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.45), inset 0 0 30px rgba(0,0,0,0.07);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.45), inner 0 0 30px rgba(0,0,0,0.07);
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+}
+
+form
+{
+    margin: 0 30px;
+    float: left;
+    width: 220px;
+}
+
+#result 
+{
+    float: left;
+    padding: 10px;
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.45), inset 0 0 30px rgba(0,0,0,0.07);
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.45), inset 0 0 30px rgba(0,0,0,0.07);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.45), inner 0 0 30px rgba(0,0,0,0.07);
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+}
+
+</style>

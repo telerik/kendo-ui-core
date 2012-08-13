@@ -101,6 +101,29 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Specify whether the item should be initially checked.
+        /// </summary>
+        /// <param name="value">If true, the item will be checked.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Telerik().TreeView()
+        ///             .Name("TreeView")
+        ///             .Checkboxes(true)
+        ///             .Items(items =>
+        ///             {
+        ///                 items.Add().Text("Item").Checked(true);
+        ///             })
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TreeViewItemBuilder Checked(bool value)
+        {
+            item.Checked = value;
+
+            return this;
+        }
+
+        /// <summary>
         /// Sets the expand mode of the treeview item.
         /// </summary>
         /// <param name="value">If true then item will be loaded on demand from client side, if the treeview DataSource is properly configured.</param>

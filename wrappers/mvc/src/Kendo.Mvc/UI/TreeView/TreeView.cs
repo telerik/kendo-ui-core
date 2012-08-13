@@ -31,6 +31,8 @@ namespace Kendo.Mvc.UI
 
             LoadOnDemand = true;
 
+            Checkboxes = new TreeViewCheckboxesSettings();
+
             DataSource = new DataSource();
         }
 
@@ -109,6 +111,12 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        public TreeViewCheckboxesSettings Checkboxes
+        {
+            get;
+            set;
+        }
+
         /// <summary>
         /// Gets or sets a value indicating whether all the item is expanded.
         /// </summary>
@@ -156,18 +164,6 @@ namespace Kendo.Mvc.UI
         }
 
         public string TemplateId
-        {
-            get;
-            set;
-        }
-
-        public string CheckboxTemplate
-        {
-            get;
-            set;
-        }
-
-        public string CheckboxTemplateId
         {
             get;
             set;
@@ -242,13 +238,11 @@ namespace Kendo.Mvc.UI
                 options["template"] = Template;
             }
 
-            if (!string.IsNullOrEmpty(CheckboxTemplateId))
+            var checkboxes = Checkboxes.ToJson();
+
+            if (checkboxes.Keys.Any())
             {
-                options["checkboxTemplate"] = new ClientHandlerDescriptor { HandlerName = string.Format("$('{0}{1}').html()", idPrefix, CheckboxTemplateId) };
-            }
-            else if (!string.IsNullOrEmpty(CheckboxTemplate))
-            {
-                options["checkboxTemplate"] = CheckboxTemplate;
+                options["checkboxes"] = checkboxes["checkboxes"];
             }
 
             var animation = Animation.ToJson();

@@ -243,6 +243,7 @@
     <Compile Include="Controllers\Web\Slider\IndexController.cs" />
     <Compile Include="Controllers\SuiteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Web\TreeView\CheckboxesController.cs" />
     <Compile Include="Controllers\Web\TreeView\Remote_DataController.cs" />
     <Compile Include="Controllers\Web\TreeView\EventsController.cs" />
     <Compile Include="Controllers\Web\TreeView\ImagesController.cs" />
@@ -749,6 +750,7 @@
     <Content Include="Areas\razor\Views\web\grid\column_menu.cshtml" />
     <Content Include="Areas\razor\Views\web\menu\direction.cshtml" />
     <Content Include="Areas\aspx\Views\web\menu\direction.aspx" />
+    <Content Include="Areas\razor\Views\web\treeview\checkboxes.cshtml" />
     <None Include="Models\Northwind.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Northwind.Designer.cs</LastGenOutput>
