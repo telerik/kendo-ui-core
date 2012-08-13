@@ -1122,7 +1122,7 @@
 
                     plotArea.reflow(chartBox);
 
-                    sameBox(plotArea.box, new Box2D(136, 117.5, 990, 966), TOLERANCE);
+                    sameBox(plotArea.box, new Box2D(110, 110, 990, 990), TOLERANCE);
                 });
 
                 test("should not render plot area with borders", function() {
@@ -1154,8 +1154,22 @@
                     createPlotArea(categoryAxis, valueAxis, {
                         background: "color"
                     });
-                    var plotAreaRect = view.log.rect[1];
-                    equal(plotAreaRect.style.fill, "color");
+
+                    equal(view.log.rect[1].style.fill, "color");
+                });
+
+                test("should set plot area background opacity", function() {
+                    var categoryAxis = {
+                            categories: ["A"]
+                        },
+                        valueAxis = { };
+
+                    createPlotArea(categoryAxis, valueAxis, {
+                        background: "color",
+                        opacity: 0.5
+                    });
+
+                    equal(view.log.rect[1].style.fillOpacity, 0.5);
                 });
 
             })();
