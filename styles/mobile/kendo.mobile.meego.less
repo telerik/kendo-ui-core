@@ -7,6 +7,7 @@
 .km-meego,
 .km-meego .km-content
 {
+    color: #000;
     background: #f0f1f2;
 }
 
@@ -427,27 +428,72 @@
     -webkit-backface-visibility: hidden;
 }
 
-.km-meego .km-listinset,
-.km-meego .km-listgroupinset > li > .km-list
-{
-    background-image: linear-gradient(top, rgba(255,255,255,0), rgba(255,255,255,.1));
-    .border-radius(~".8rem");
 
-    border: 1px solid transparent;
-    border-color: rgba(0,0,0,.1) rgba(0,0,0,.2) rgba(0,0,0,.3);
-    background: #f5f5f5;
+.km-meego .km-listinset > li:first-child,
+.km-meego .km-listgroupinset .km-list > li:first-child
+{
+    border: 1px solid rgba(0,0,0,.2);
+    border-width: 1px 1px 0;
+    border-color: rgba(0,0,0,.2);
+    .border-radius(.8rem .8rem 0 0);
 }
 
 .km-meego .km-listinset > li,
 .km-meego .km-listgroupinset .km-list > li
 {
-    border-bottom: 1px solid rgba(0,0,0,.1);
+    border: 1px solid rgba(0,0,0,.2);
+    border-width: 0 1px;
+    .box-shadow(inset 0 -1px 0 rgba(0,0,0,.1));
 }
 
-.km-meego .km-list > li,
-.km-meego .km-list a:not(.km-button)
+.km-meego .km-listinset > li:last-child,
+.km-meego .km-listgroupinset .km-list > li:last-child
 {
-    color: #000;
+    border: 1ps solid rgba(0,0,0,.2);
+    border-bottom-color: rgba(0,0,0,.3);
+    border-width: 0 1px 1px 1px;
+    .border-radius(0 0 .8rem .8rem);
+    .box-shadow(0 1px 0 0 rgba(255,255,255,.4));
+}
+
+.km-meego .km-listinset > li:first-child:last-child,
+.km-meego .km-listgroupinset .km-list > li:first-child:last-child
+{
+    border-width: 1px;
+    .border-radius(.8rem);
+}
+
+.km-meego .km-listinset > li:first-child,
+.km-meego .km-listgroupinset .km-list > li:first-child,
+.km-meego .km-listinset li:first-child > .km-listview-link,
+.km-meego .km-listgroupinset li:first-child > .km-listview-link,
+.km-meego .km-listinset li:first-child > .km-listview-label,
+.km-meego .km-listgroupinset li:first-child > .km-listview-label
+{
+    .border-radius(.7rem .7rem 0 0);
+}
+
+.km-meego .km-listinset li:last-child > .km-listview-link,
+.km-meego .km-listgroupinset li:last-child > .km-listview-link,
+.km-meego .km-listinset li:last-child > .km-listview-label,
+.km-meego .km-listgroupinset li:last-child > .km-listview-label
+{
+    .border-radius(0 0 .7rem .7rem);
+}
+
+.km-meego .km-listinset li:first-child:last-child > .km-listview-link,
+.km-meego .km-listgroupinset li:first-child:last-child > .km-listview-link,
+.km-meego .km-listinset li:first-child:last-child > .km-listview-label,
+.km-meego .km-listgroupinset li:first-child:last-child > .km-listview-label
+{
+    .border-radius(.7rem);
+}
+
+
+.km-meego .km-listinset > li,
+.km-meego .km-listgroupinset .km-list > li
+{
+    background: #f5f5f5;
 }
 
 .km-meego li.km-state-active .km-listview-link,
@@ -467,28 +513,10 @@
     background-image: linear-gradient(top, rgba(255,255,255,0), rgba(255,255,255,.2));
 }
 
-.km-meego .km-listinset li:first-child > .km-listview-link,
-.km-meego .km-listgroupinset li:first-child > .km-listview-link,
-.km-meego .km-listinset li:first-child > .km-listview-label,
-.km-meego .km-listgroupinset li:first-child > .km-listview-label
+.km-meego .km-listinset .km-state-active .km-listview-link:after,
+.km-meego .km-listgroupinset .km-state-active .km-listview-link:after
 {
-    .border-radius(~".6rem .6rem 0 0");
-}
-
-.km-meego .km-listinset li:last-child > .km-listview-link,
-.km-meego .km-listgroupinset li:last-child > .km-listview-link,
-.km-meego .km-listinset li:last-child > .km-listview-label,
-.km-meego .km-listgroupinset li:last-child > .km-listview-label
-{
-    .border-radius(~"0 0 .6rem .6rem");
-}
-
-.km-meego .km-listinset li:first-child:last-child > .km-listview-link,
-.km-meego .km-listgroupinset li:first-child:last-child > .km-listview-link,
-.km-meego .km-listinset li:first-child:last-child > .km-listview-label,
-.km-meego .km-listgroupinset li:first-child:last-child > .km-listview-label
-{
-    .border-radius(~".6rem");
+    border-color: #fff;
 }
 
 .km-meego .km-listgroup div.km-group-title,
@@ -540,11 +568,6 @@
     vertical-align: middle;
     line-height: 1.6rem;
     overflow: hidden;
-}
-
-.km-meego .km-list
-{
-    color: #282828;
 }
 
 .km-listview-link:after
