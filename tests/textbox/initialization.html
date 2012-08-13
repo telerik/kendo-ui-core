@@ -55,8 +55,6 @@
                 equal(downArrow.children(":first").attr("title"), textbox.options.downArrowText);
                 equal(upArrow.children(":first").html(), textbox.options.upArrowText);
                 equal(downArrow.children(":first").html(), textbox.options.downArrowText);
-                ok(upArrow.data("events").mousedown);
-                ok(downArrow.data("events").mousedown);
             });
 
             test("Should render INPUT containing the formatted value", function() {
