@@ -19,9 +19,12 @@
         <ul id="log"></ul>
 
         <script>
+            QUnit.config.reorder = false;
+
             var Draggable = kendo.ui.Draggable,
                 draggable,
                 span;
+
             module("kendo.ui.Draggable", {
                 setup: function() {
                     span = $("<span/>").appendTo(document.body);
@@ -29,7 +32,7 @@
 
                 teardown: function() {
                     span.remove();
-                    draggable && draggable._destroy();
+                    draggable && draggable.destroy();
                 }
             });
 
@@ -39,7 +42,8 @@
             }
 
             function setup(options) {
-                return new Draggable(span, options);
+                draggable = new Draggable(span, options);
+                return draggable;
             }
 
             test("moving the mouse beyond the allowed distance triggers the dragstart event", 1, function() {
@@ -170,7 +174,9 @@
             });
 
             test("dom event argument is passed to the dragstart event", function() {
-                var e, draggable = setup({
+                var e;
+
+                setup({
                         dragstart: function() {
                             e = arguments[0];
                         }
@@ -183,7 +189,9 @@
             });
 
             test("dom event argument is passed to the dragend event", function() {
-                var e, draggable = setup({
+                var e;
+
+                setup({
                         dragend: function() {
                             e = arguments[0];
                         }
@@ -197,7 +205,9 @@
             });
 
             test("dom event argument is passed to the drag event", function() {
-                var e, draggable = setup({
+                var e;
+
+                setup({
                         drag: function() {
                             e = arguments[0];
                         }
