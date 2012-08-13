@@ -12,8 +12,7 @@
         <script src="../src/kendo.dataviz.svg.js"></script>
     </head>
     <body>
-        <div id="chart" style="width: 500px; height: 400px; float: right;"></div>
-        <div id="chart1" style="width: 500px; height: 400px; float: left;"></div>
+        <div id="chart" style="width: 500px; height: 400px;"></div>
         <script>
             $(function() {
                 $("#chart").kendoChart({
@@ -21,24 +20,10 @@
                         type: "pie"
                     },
                     series: [{
-                        data: [1,2,3]
-                    },{
-                        data: [1,2,3]
-                    },{
-                        data: [1,2,3]
-                    }]
-                });
-
-                $("#chart1").kendoChart({
-                    seriesDefaults: {
-                        type: "donut"
-                    },
-                    series: [{
-                        data: [1,2,3]
-                    },{
-                        data: [1,2,3]
-                    },{
-                        data: [1,2,3]
+                        labels: {
+                            visible: true
+                        },
+                        data: [{value: 1000, category: "a"}, {value: 1, category: "kur" }]
                     }]
                 });
             });
