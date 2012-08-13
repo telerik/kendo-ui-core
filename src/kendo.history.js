@@ -5,7 +5,7 @@
         _checkUrlInterval = 50,
         hashStrip = /^#*/,
         documentMode = window.document.documentMode,
-        oldIE = $.browser.msie && (!documentMode || documentMode <= 8),
+        oldIE = kendo.support.browser.msie && (!documentMode || documentMode <= 8),
         hashChangeSupported = ("onhashchange" in window) && !oldIE,
         document = window.document;
 

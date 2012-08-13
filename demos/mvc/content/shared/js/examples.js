@@ -174,7 +174,7 @@
                 var oldSkinName = $(doc).data("kendoSkin"),
                     newLink;
 
-                if ($.browser.msie) {
+                if (kendo.support.browser.msie) {
                     newLink = $(doc.createStyleSheet(url));
                 } else {
                     newLink = skinLink.eq(0).clone().attr("href", url);

@@ -40,7 +40,7 @@
 
             if (os) {
                 if (!os.ios && !os.blackberry)
-                    if (!$.browser.msie && !$.browser.opera)
+                    if (!kendo.support.browser.msie && !kendo.support.browser.opera)
                         $('.layout').css(transitions.css + 'box-direction', 'reverse');
                     else {
                         var layout = $('.layout');

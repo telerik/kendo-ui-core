@@ -434,6 +434,8 @@
                 view,
                 element;
 
+            url = url.split("?")[0];
+
             if (url === that.url) {
                 return;
             }

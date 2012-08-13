@@ -5,6 +5,7 @@
         Class = kendo.Class,
         extend = $.extend,
         Editor = kendo.ui.editor,
+        browser = kendo.support.browser,
         dom = Editor.Dom,
         findNodeIndex = dom.findNodeIndex,
         isDataNode = dom.isDataNode,
@@ -14,7 +15,7 @@
 
 var SelectionUtils = {
     selectionFromWindow: function(window) {
-        if ($.browser.msie && $.browser.version < 9) {
+        if (browser.msie && browser.version < 9) {
             return new W3CSelection(window.document);
         }
 
@@ -719,7 +720,7 @@ var Marker = Class.extend({
                 range[previous ? 'setStartAfter' : 'setStartBefore'](node);
             }
         } else {
-            if (!$.browser.msie && !container.innerHTML) {
+            if (!browser.msie && !container.innerHTML) {
                 container.innerHTML = '<br _moz_dirty="" />';
             }
 
@@ -900,7 +901,7 @@ var RangeUtils = {
     },
 
     createRange: function(document) {
-        if ($.browser.msie && $.browser.version < 9) {
+        if (browser.msie && browser.version < 9) {
             return new W3CRange(document);
         }
 

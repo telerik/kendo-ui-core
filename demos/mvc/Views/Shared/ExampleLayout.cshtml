@@ -43,7 +43,7 @@
             @RenderSection("ExampleFooter", false)
         </div>
         <script>
-            if (!($.browser.webkit || $.browser.mozilla)) {
+            if (!(kendo.support.browser.webkit || kendo.support.browser.mozilla)) {
                 $("#mobile-application-container")
                         .addClass("old-browser")
                         .empty()
@@ -103,7 +103,7 @@
             $(function() {
                 applyCurrentMobileOS("#mobile-application-container");
 
-                if (!$.browser.msie && !$.browser.opera) {
+                if (!kendo.support.browser.msie && !kendo.support.browser.opera) {
                     window.kendoMobileApplication = new kendo.mobile.Application($("#mobile-application-container"),
                     {
                         layout: "examples",

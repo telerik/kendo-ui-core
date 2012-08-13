@@ -234,7 +234,7 @@
                 ok(!called);
             });
 
-            if (!$.browser.mozilla) {
+            if (!kendo.support.browser.mozilla) {
                 asyncTest("animating height from 0 to 100 results in 100px high element", function() {
                     var height = -1;
 
@@ -299,7 +299,7 @@
                     });
                 });
 
-                if (!$.browser.msie) // TODO: Write the IE part of this test.
+                if (!kendo.support.browser.msie) // TODO: Write the IE part of this test.
                     asyncTest("zoomIn animates the scale from 0.01 to 1", function() {
                         span.css({ position: "absolute", display: "block" });
 

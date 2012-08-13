@@ -37,7 +37,7 @@
             }
 
             function simulateIframeResponse(iframeIndex, response) {
-                uploadInstance._module.processResponse($("iframe.#uploadInstance_" + iframeIndex), response || "");
+                uploadInstance._module.processResponse($("#uploadInstance_" + iframeIndex), response || "");
             }
 
             function simulateUpload() {
@@ -125,7 +125,7 @@
 
             test("iframe is created after choosing a file", function() {
                 simulateFileSelect();
-                equal($("iframe.#uploadInstance_0").length, 1);
+                ok($("#uploadInstance_0").is("iframe"));
             });
 
             test("form is created after choosing a file", function() {
@@ -158,7 +158,7 @@
                 simulateUpload();
 
                 window.setTimeout(function() {
-                    equal($("iframe.#uploadInstance_0").length, 0);
+                    equal($("#uploadInstance_0").length, 0);
                     start();
                 }, 10);
             });
@@ -188,7 +188,7 @@
                 $(".k-cancel", uploadInstance.wrapper).trigger("click");
 
                 window.setTimeout(function() {
-                    equal($("iframe.#uploadInstance_0").length, 0);
+                    equal($("#uploadInstance_0").length, 0);
                     start();
                 }, 10);
             });
@@ -258,20 +258,20 @@
             test("upload doesn't start before upload button click", function() {
                 simulateFileSelect();
 
-                equal($("iframe.#uploadInstance_0").length, 0);
+                equal($("#uploadInstance_0").length, 0);
             });
 
             test("upload starts on upload button click", function() {
                 simulateFileSelect();
                 $(".k-upload-selected", uploadInstance.wrapper).trigger("click");
 
-                equal($("iframe.#uploadInstance_0").length, 1);
+                equal($("#uploadInstance_0").length, 1);
             });
 
             test("upload button is rendered on subsequent select", function() {
                 simulateFileSelect();
                 $(".k-upload-selected", uploadInstance.wrapper).trigger("click");
-                $("iframe.#uploadInstance_0").trigger("load");
+                $("#uploadInstance_0").trigger("load");
                 simulateFileSelect();
 
                 equal($(".k-upload-selected", uploadInstance.wrapper).length, 1);
@@ -296,7 +296,7 @@
             asyncTest("upload button click does not start upload after completion", function() {
                 simulateFileSelect();
                 $(".k-upload-selected", uploadInstance.wrapper).trigger("click");
-                $("iframe.#uploadInstance_0").trigger("load");
+                $("#uploadInstance_0").trigger("load");
 
                 $(".k-file").addClass("complete");
 
@@ -323,7 +323,7 @@
 
                 simulateFileSelect();
                 $(".k-upload-selected", uploadInstance.wrapper).trigger("click");
-                $("iframe.#uploadInstance_0").trigger("load");
+                $("#uploadInstance_0").trigger("load");
 
                 window.setTimeout(function() {
                     simulateRemove();
@@ -433,7 +433,7 @@
 
                 simulateFileSelect();
 
-                equal($("iframe.#uploadInstance_0").length, 0);
+                equal($("#uploadInstance_0").length, 0);
             });
 
             test("error event arguments contain XHR object with status", function() {

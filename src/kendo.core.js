@@ -1339,7 +1339,7 @@ function pad(number) {
 })();
 
     function wrap(element) {
-        var browser = $.browser, percentage;
+        var browser = support.browser, percentage;
 
         if (!element.parent().hasClass("k-animation-container")) {
             var shadow = element.css(kendo.support.transitions.css + "box-shadow") || element.css("box-shadow"),
@@ -1451,6 +1451,15 @@ function pad(number) {
         return destination;
     }
 
+    function testRx(agent, rxs, dflt) {
+        for (var rx in rxs) {
+            if (rxs.hasOwnProperty(rx) && rxs[rx].test(agent)) {
+                return rx;
+            }
+        }
+        return dflt !== undefined ? dflt : agent;
+    }
+
     (function() {
         support.scrollbar = function() {
             var div = document.createElement("div"),
@@ -1545,14 +1554,6 @@ function pad(number) {
                     chrome: /chrome/i,
                     webkit: /webkit/i,
                     ie: /MSIE|Windows\sPhone/i
-                },
-                testRx = function (agent, rxs, dflt) {
-                    for (var rx in rxs) {
-                        if (rxs.hasOwnProperty(rx) && rxs[rx].test(agent)) {
-                            return rx;
-                        }
-                    }
-                    return dflt !== undefined ? dflt : agent;
                 };
 
             for (var agent in agentRxs) {
@@ -1585,6 +1586,34 @@ function pad(number) {
         };
 
         support.mobileOS = support.detectOS(navigator.userAgent);
+
+        function detectBrowser(ua) {
+            var browser = false, match = [],
+                browserRxs = {
+                    webkit: /(chrome)[ \/]([\w.]+)/i,
+                    safari: /(webkit)[ \/]([\w.]+)/i,
+                    opera: /(opera)(?:.*version|)[ \/]([\w.]+)/i,
+                    msie: /(msie) ([\w.]+)/i,
+                    mozilla: /(mozilla)(?:.*? rv:([\w.]+)|)/i
+                };
+
+            for (var agent in browserRxs) {
+                if (browserRxs.hasOwnProperty(agent)) {
+                    match = ua.match(browserRxs[agent]);
+                    if (match) {
+                        browser = {};
+                        browser[agent] = true;
+                        browser[match[1].toLowerCase()] = true;
+                        browser.version = match[2];
+
+                        break;
+                    }
+                }
+            }
+            return browser;
+        }
+
+        support.browser = detectBrowser(navigator.userAgent);
 
         support.zoomLevel = function() {
             return support.touch ? (document.documentElement.clientWidth / window.innerWidth) : 1;

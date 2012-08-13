@@ -1052,7 +1052,13 @@
         },
 
         text: function (node, text) {
-            return $(node).closest(NODE).find(">div>.k-in").text(text);
+            node = $(node).closest(NODE).find(">div>.k-in");
+
+            if (text) {
+                node.text(text);
+            } else {
+                return node.text();
+            }
         },
 
         _objectOrSelf: function (node) {

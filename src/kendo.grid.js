@@ -18,11 +18,11 @@
         math = Math,
         REQUESTSTART = "requestStart",
         ERROR = "error",
-        ROW_SELECTOR = "tbody>tr:not(.k-grouping-row,.k-detail-row,.k-group-footer):visible",
-        DATA_CELL = ":not(.k-group-cell,.k-hierarchy-cell):visible",
-        SELECTION_CELL_SELECTOR = "tbody>tr:not(.k-grouping-row,.k-detail-row,.k-group-footer) > td:not(.k-group-cell,.k-hierarchy-cell)",
+        ROW_SELECTOR = "tbody>tr:not(.k-grouping-row):not(.k-detail-row):not(.k-group-footer):visible",
+        DATA_CELL = ":not(.k-group-cell):not(.k-hierarchy-cell):visible",
+        SELECTION_CELL_SELECTOR = "tbody>tr:not(.k-grouping-row):not(.k-detail-row):not(.k-group-footer) > td:not(.k-group-cell):not(.k-hierarchy-cell)",
         CELL_SELECTOR =  ROW_SELECTOR + ">td" + DATA_CELL,
-        FIRST_CELL_SELECTOR = CELL_SELECTOR + ":first",
+        FIRST_CELL_SELECTOR = ROW_SELECTOR + ":first" + ">td" + DATA_CELL + ":first",
         NS = ".kendoGrid",
         EDIT = "edit",
         SAVE = "save",
@@ -133,7 +133,7 @@
                 delta = originalEvent.wheelDelta;
             } else if (originalEvent.detail) {
                 delta = (-originalEvent.detail) * 10;
-            } else if ($.browser.opera) {
+            } else if (kendo.support.browser.opera) {
                 delta = -originalEvent.wheelDelta;
             }
             that.verticalScrollbar.scrollTop(scrollTop + (-delta));
@@ -888,13 +888,18 @@
 
             if (editable) {
                 var mode = that._editMode();
-
                 if (mode === "incell") {
                     if (editable.update !== false) {
-                        that.wrapper.on(CLICK + NS, "tr:not(.k-grouping-row) > td:not(.k-hierarchy-cell,.k-detail-cell,.k-group-cell,.k-edit-cell,:has(a.k-grid-delete),:has(button.k-grid-delete))", function(e) {
+                        that.wrapper.on(CLICK + NS, "tr:not(.k-grouping-row) > td", function(e) {
                             var td = $(this);
 
-                            if (td.closest("tbody")[0] !== that.tbody[0] || $(e.target).is(":input")) {
+                            if (td.hasClass("k-hierarchy-cell") ||
+                                td.hasClass("k-detail-cell") ||
+                                td.hasClass("k-group-cell") ||
+                                td.hasClass("k-edit-cell") ||
+                                td.has("a.k-grid-delete").length ||
+                                td.has("button.k-grid-delete").length ||
+                                td.closest("tbody")[0] !== that.tbody[0] || $(e.target).is(":input")) {
                                 return;
                             }
 
@@ -1620,7 +1625,7 @@
                 table = that.table.addClass(FOCUSABLE),
                 currentProxy = proxy(that.current, that),
                 selector = "." + FOCUSABLE + " " + CELL_SELECTOR,
-                browser = $.browser,
+                browser = kendo.support.browser,
                 clickCallback = function(e) {
                     var currentTarget = $(e.currentTarget);
                     if (currentTarget.closest("tbody")[0] !== that.tbody[0]) {
@@ -1663,10 +1668,14 @@
                         handled = false;
 
                     if (canHandle && keys.UP === key) {
-                        currentProxy(current ? current.parent().prevAll(ROW_SELECTOR).last().children(":eq(" + current.index() + "),:eq(0)").last() : table.find(FIRST_CELL_SELECTOR));
+                        currentProxy(current ? current.parent().prevAll(ROW_SELECTOR).first().children()
+                            .eq(current.index() >= 0 ? current.index() : 0).last() : table.find(FIRST_CELL_SELECTOR));
+
                         handled = true;
                     } else if (canHandle && keys.DOWN === key) {
-                        currentProxy(current ? current.parent().nextAll(ROW_SELECTOR).first().children(":eq(" + current.index() + "),:eq(0)").last() : table.find(FIRST_CELL_SELECTOR));
+                        currentProxy(current ? current.parent().nextAll(ROW_SELECTOR).first().children()
+                            .eq(current.index() >= 0 ? current.index() : 0).last() : table.find(FIRST_CELL_SELECTOR));
+
                         handled = true;
                     } else if (canHandle && keys.LEFT === key) {
                         currentProxy(current ? current.prevAll(DATA_CELL + ":first") : table.find(FIRST_CELL_SELECTOR));

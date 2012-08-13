@@ -95,10 +95,10 @@
                 var splitter = $(getSplitterHtml()).height(307).appendTo(document.body).kendoSplitter({ orientation: "vertical" }),
                     panes = splitter.find(".k-pane");
 
-                equals(panes.eq(0).height(), 150);
-                equals(panes.eq(1).height(), 150);
-                equals(panes.eq(1).offset().top - panes.offset().top, 157);
-                equals(splitter.find(".k-splitbar").offset().top - panes.offset().top, 150);
+                equals(Math.round(panes.eq(0).height()), 150);
+                equals(Math.round(panes.eq(1).height()), 150);
+                equals(Math.round(panes.eq(1).offset().top - panes.offset().top), 157);
+                equals(Math.round(splitter.find(".k-splitbar").offset().top - panes.offset().top), 150);
             });
 
             test("fluid panes get their size after allocating space for fixed panes", function() {

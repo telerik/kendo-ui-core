@@ -173,7 +173,7 @@
                 });
 
                 $(this).data("kendoMobileButton").bind("click", function (e) {
-                    if ($.browser.mozilla)
+                    if (kendo.support.browser.mozilla)
                         color = this.element.css("background-color");
 
                     $(".km-navbar, .km-ios .km-switch-background, .km-ios .km-listgroup > li, .km-badge, .km-tabstrip").css("background-color", color);

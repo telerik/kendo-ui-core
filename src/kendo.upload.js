@@ -422,7 +422,7 @@
         },
 
         _supportsMultiple: function() {
-            return !$.browser.opera;
+            return !kendo.support.browser.opera;
         },
 
         _supportsDrop: function() {
