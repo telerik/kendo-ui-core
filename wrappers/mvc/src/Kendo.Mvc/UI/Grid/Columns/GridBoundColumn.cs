@@ -14,6 +14,7 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Infrastructure.Implementation;
     using Kendo.Mvc.Resources;
     using Kendo.Mvc.UI.Html;
+    using System.Text.RegularExpressions;
 
     public class GridBoundColumn<TModel, TValue> : GridColumnBase<TModel>, IGridBoundColumn, IGridTemplateColumn<TModel> where TModel : class
     {
@@ -220,11 +221,10 @@ namespace Kendo.Mvc.UI
             string editorHtml = EditorHtml;
 
             if (Grid.IsInClientTemplate && editorHtml != null)
-            {
-                //editorHtml = editorHtml.Replace("<", "%3c").Replace(">", "%3e");
-                editorHtml = editorHtml.Trim()
+            {                
+                editorHtml = Regex.Replace(editorHtml.Trim(), "(&amp;)#([0-9]+;)", "$1\\#$2")
                                 .Replace("\r\n", string.Empty)
-                                .Replace("</script>", "<\\/script>")
+                                .Replace("</script>", "<\\/script>")                                
                                 .Replace("jQuery(\"#", "jQuery(\"\\#");
             }
 

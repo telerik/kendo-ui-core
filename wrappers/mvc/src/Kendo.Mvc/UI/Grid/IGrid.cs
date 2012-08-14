@@ -81,5 +81,10 @@ namespace Kendo.Mvc.UI
         {
             get;
         }
+
+        bool IsInClientTemplate 
+        { 
+            get; 
+        }
     }
 }
