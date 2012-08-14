@@ -8,6 +8,7 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.Resources;
     using System.Reflection;
+    using System.Text.RegularExpressions;
     //TODO: Implement GridBeginEditEvent option
     //public enum GridBeginEditEvent
     //{
@@ -176,13 +177,17 @@ namespace Kendo.Mvc.UI
 
             if (editorHtml != null && IsClientBinding)
             {
-                //editorHtml = editorHtml.Replace("%", "%25").Replace("<", "%3c").Replace(">", "%3e");                
+                if (grid.IsInClientTemplate)
+                {
+                    editorHtml = Regex.Replace(editorHtml, "(&amp;)#([0-9]+;)", "$1\\\\#$2");
+                }
+
                 editorHtml = editorHtml.Trim()
                                 .Replace("\r\n", string.Empty)
                                 .Replace("</script>", "<\\/script>")
                                 .Replace("jQuery(\"#", "jQuery(\"\\\\#")
-                                .Replace("#", "\\#");
-            }
+                                .Replace("#", "\\#");                
+            }            
 
             FluentDictionary.For(json)
                 .Add("confirmation", Confirmation, () => DisplayDeleteConfirmation)
