@@ -210,7 +210,7 @@
 
         dispose: function() {
             var that = this,
-                drag = that.drag;
+                drag = that.drag,
                 activeTouches = drag.touches;
 
             that._finished = true;
@@ -428,8 +428,6 @@
                     case TAP:
                         eventName = "gesturetap";
                         break;
-                    default:
-                        break
                 }
 
                 data.touches = that.touches;
