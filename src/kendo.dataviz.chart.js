@@ -4087,7 +4087,7 @@
                 );
 
             if (axis.pane !== targetAxis.pane) {
-                axisBox.translate(0, axis.pane.box.y1 - targetAxis.pane.box.y1)
+                axisBox.translate(0, axis.pane.box.y1 - targetAxis.pane.box.y1);
             }
 
             axis.reflow(axisBox);
@@ -4106,7 +4106,6 @@
                 axis,
                 i;
 
-            // TODO: Refactor almost-identical loops
             for (i = 0; i < yAxes.length; i++) {
                 axis = yAxes[i];
                 pane = axis.pane;
@@ -4186,41 +4185,13 @@
             }
         },
 
-        axisBox: function(axes) {
-            var box = axes[0].box.clone(),
-                i,
-                length = axes.length;
-
-            for (i = 1; i < length; i++) {
-                box.wrap(axes[i].box);
-            }
-
-            return box;
-        },
-
-        axisLineBox: function(axes) {
-            if (axes.length === 0) {
-                return new Box2D();
-            }
-
-            var box = axes[0].lineBox(),
-                i,
-                length = axes.length;
-
-            for (i = 1; i < length; i++) {
-                box.wrap(axes[i].lineBox());
-            }
-
-            return box;
-        },
-
         shrinkAxes: function() {
             var plotArea = this,
                 panes = plotArea.panes,
                 panesLength = panes.length,
                 box,
                 axes = plotArea.axes,
-                axisBox = plotArea.axisBox(axes),
+                axisBox = axisGroupBox(axes),
                 overflowX = 0,
                 currentAxis,
                 i,
@@ -4250,10 +4221,9 @@
         },
 
         shrinkPaneAxes: function(pane) {
-            var plotArea = this,
-                box = pane.contentBox,
+            var box = pane.contentBox,
                 axes = pane.axes,
-                axisBox = plotArea.axisBox(axes),
+                axisBox = axisGroupBox(axes),
                 overflowY = math.max(0, axisBox.height() - box.height()),
                 currentAxis,
                 i,
@@ -4290,7 +4260,7 @@
                 currentPane = panes[i];
                 box = currentPane.contentBox;
                 if (currentPane.axes.length) {
-                    axisBox = plotArea.axisBox(currentPane.axes);
+                    axisBox = axisGroupBox(currentPane.axes);
 
                     offsetX = math.max(offsetX, box.x1 - axisBox.x1);
                 }
@@ -4306,8 +4276,7 @@
         },
 
         fitPaneAxes: function(pane) {
-            var plotArea = this,
-                axes = pane.axes,
+            var axes = pane.axes,
                 box = pane.contentBox,
                 axisBox,
                 offsetX = 0,
@@ -4318,7 +4287,7 @@
 
             box = pane.contentBox;
             if (pane.axes.length) {
-                axisBox = plotArea.axisBox(pane.axes);
+                axisBox = axisGroupBox(pane.axes);
 
                 offsetY = math.max(box.y1 - axisBox.y1, box.y2 - axisBox.y2);
             }
@@ -4536,6 +4505,7 @@
                     axisB = axes[j];
 
                     if (axisA.options.vertical !== axisB.options.vertical) {
+                        // TODO: Use wrap
                         if (axisA.options.vertical) {
                             lineBoxH = axisB.lineBox();
                             lineBoxV = axisA.lineBox();
@@ -5890,6 +5860,27 @@
 
     function clipValue(value, min, max) {
         return math.max(math.min(value, max), min);
+    }
+
+    function axisGroupBox(axes) {
+        var box = new Box2D(),
+            i,
+            length = axes.length,
+            currentAxis;
+
+        if (length > 0) {
+            for (i = 0; i < length; i++) {
+                currentAxis = axes[i];
+
+                if (i === 0) {
+                    box = currentAxis.box.clone();
+                } else {
+                    box.wrap(currentAxis.box);
+                }
+            }
+        }
+
+        return box;
     }
 
     // Exports ================================================================
