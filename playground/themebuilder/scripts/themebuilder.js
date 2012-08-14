@@ -64,10 +64,20 @@
                 selector: ".km-switch-background",
                 whitelist: [ "background-color", "background-image" ]
             },
+            switchcontainer: {
+                name: "Switch Container",
+                selector: ".km-switch-container",
+                whitelist: [ "background-color", "background-image" ]
+            },
+            switchhandleon: {
+                name: "Active Switch Handle",
+                selector: ".km-switch-on .km-switch-handle",
+                whitelist: [ "border-color" ]
+            },
             switchhandle: {
                 name: "Switch Handle",
                 selector: ".km-switch-handle",
-                whitelist: [ "width", "height" ]
+                whitelist: [ "width", "height","border-color" ]
             },
             switchon: {
                 name: "Switch On Label",
@@ -82,6 +92,7 @@
             switcher: {
                 name: "Switch",
                 selector: ".km-switch",
+                activeSelector: ".km-switch-on",
                 whitelist: [ "width", "height" ],
                 children: [ "switchback", "switchhandle", "switchon", "switchoff" ]
             },
@@ -825,7 +836,9 @@
 
                         style = {};
                         for (var i = 0, len = this.style.length; i < len; i++) {
-                            style[this.selectorText] = {};
+                            if (!style[this.selectorText]){
+                                style[this.selectorText] = {};
+                            }
                             style[this.selectorText][this.style[i]] = this.style[this.style[i]];
                         }
 
