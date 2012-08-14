@@ -4185,61 +4185,63 @@
             }
         },
 
-        shrinkAxes: function() {
+        shrinkAxisWidth: function() {
             var plotArea = this,
                 panes = plotArea.panes,
-                panesLength = panes.length,
-                box,
                 axes = plotArea.axes,
                 axisBox = axisGroupBox(axes),
                 overflowX = 0,
-                currentAxis,
                 i,
-                length = axes.length,
-                vertical;
+                currentPane,
+                currentAxis;
 
-            for (i = 0; i < panesLength; i++) {
+            for (i = 0; i < panes.length; i++) {
                 currentPane = panes[i];
-                box = currentPane.contentBox;
-                if (currentPane.axes.length) {
-                    overflowX = math.max(overflowX, axisBox.width() - box.width());
+
+                if (currentPane.axes.length > 0) {
+                    overflowX = math.max(
+                        overflowX,
+                        axisBox.width() - currentPane.contentBox.width()
+                    );
                 }
             }
 
-            // Shrink all axes so they don't overflow out of the bounding box
-            for (i = 0; i < length; i++) {
+            for (i = 0; i < axes.length; i++) {
                 currentAxis = axes[i];
-                vertical = currentAxis.options.vertical;
 
-                currentAxis.reflow(
-                    currentAxis.box.shrink(
-                        vertical ? 0 : overflowX,
-                        0
-                    )
-                );
+                if (!currentAxis.options.vertical) {
+                    currentAxis.reflow(currentAxis.box.shrink(overflowX, 0));
+                }
             }
         },
 
-        shrinkPaneAxes: function(pane) {
-            var box = pane.contentBox,
-                axes = pane.axes,
-                axisBox = axisGroupBox(axes),
-                overflowY = math.max(0, axisBox.height() - box.height()),
-                currentAxis,
+        shrinkAxisHeight: function() {
+            var plotArea = this,
+                panes = plotArea.panes,
                 i,
-                length = axes.length,
-                vertical;
+                currentPane,
+                axes,
+                overflowY,
+                j,
+                currentAxis;
 
-            for (i = 0; i < length; i++) {
-                currentAxis = axes[i];
-                vertical = currentAxis.options.vertical;
-
-                currentAxis.reflow(
-                    currentAxis.box.shrink(
-                        0,
-                        vertical ? overflowY : 0
-                    )
+            for (i = 0; i < panes.length; i++) {
+                currentPane = panes[i];
+                axes = currentPane.axes,
+                overflowY = math.max(
+                    0,
+                    axisGroupBox(axes).height() - currentPane.contentBox.height()
                 );
+
+                for (j = 0; j < axes.length; j++) {
+                    currentAxis = axes[j];
+
+                    if (currentAxis.options.vertical) {
+                        currentAxis.reflow(
+                            currentAxis.box.shrink(0, overflowY)
+                        );
+                    }
+                }
             }
         },
 
@@ -4319,16 +4321,9 @@
             }
 
             plotArea.alignAxes(xAxes, yAxes, xAnchor, yAnchor);
-            plotArea.shrinkAxes();
+            plotArea.shrinkAxisWidth();
             plotArea.alignAxes(xAxes, yAxes, xAnchor, yAnchor);
-
-            for (i = 0; i < panesLength; i++) {
-                currentPane = panes[i];
-                if (currentPane.axes.length) {
-                    plotArea.shrinkPaneAxes(currentPane);
-                }
-            }
-
+            plotArea.shrinkAxisHeight();
             plotArea.alignAxes(xAxes, yAxes, xAnchor, yAnchor);
             plotArea.fitAxes();
 
