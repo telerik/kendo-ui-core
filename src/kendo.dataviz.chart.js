@@ -3966,7 +3966,6 @@
 
         createPanes: function() {
             var plotArea = this,
-                axes = plotArea.axes,
                 panes = [],
                 paneOptions = plotArea.options.panes || [],
                 i,
@@ -3975,26 +3974,40 @@
 
             for (i = 0; i < panesLength; i++) {
                 currentPane = new Pane(paneOptions[i]);
-
-                currentPane.axes = grep(axes, function(axis) {
-                    var axisPane = axis.options.pane;
-
-                    if (axisPane) {
-                        return axisPane === currentPane.options.name;
-                    } else {
-                        return !axisPane && i === 0;
-                    }
-                });
-
-                $.each(currentPane.axes, function(i, axis) {
-                    axis.pane = currentPane;
-                });
+                plotArea.setPaneAxes(currentPane, i);
 
                 panes.push(currentPane);
-                plotArea.append(currentPane)
+                plotArea.append(currentPane);
             }
 
             plotArea.panes = panes;
+        },
+
+        setPaneAxes: function(pane, paneIndex) {
+            var plotArea = this,
+                axes = plotArea.axes,
+                currentAxis,
+                paneName = pane.options.name,
+                axisPane,
+                match,
+                paneAxes = pane.axes = [],
+                i;
+
+            for (i = 0; i < axes.length; i++) {
+                currentAxis = axes[i];
+                axisPane = currentAxis.options.pane;
+
+                if (axisPane) {
+                    match = axisPane === paneName;
+                } else {
+                    match = paneIndex === 0;
+                }
+
+                if (match) {
+                    paneAxes.push(currentAxis);
+                    currentAxis.pane = pane;
+                }
+            }
         },
 
         appendChart: function(chart) {
