@@ -143,7 +143,7 @@ html
 *+html .kendo-nav
 {
     /*otherwise items will wrap*/
-    min-width:596px;
+    min-width:648px;
 }
 
 #header li
@@ -392,6 +392,57 @@ html
     box-shadow:0 1px 3px 0 #b2b2b2;
 }
 
+.dojo-banner
+{
+    border-bottom:1px solid #d7d7d7;
+    min-height:245px;
+    margin: 0 85px 15px;
+    position:relative;
+
+    background: -moz-linear-gradient(top, #ffffff 1%, #ffffff 70%, #f3f3f3 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#ffffff), color-stop(70%,#ffffff), color-stop(100%,#f3f3f3)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #ffffff 1%,#ffffff 70%,#f3f3f3 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #ffffff 1%,#ffffff 70%,#f3f3f3 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #ffffff 1%,#ffffff 70%,#f3f3f3 100%); /* IE10+ */
+    background: linear-gradient(to bottom, #ffffff 1%,#ffffff 70%,#f3f3f3 100%); /* W3C */
+}
+
+* html .dojo-banner {display:none}
+*+html .dojo-banner {display:none}
+
+.dojo-banner:after
+{
+    content:"";
+    position:absolute;
+    bottom:0;
+    right:0;
+    width:410px;
+    height:245px;
+    background:url(dojo-banner.jpg);
+}
+
+.dojo-banner>h3
+{
+    font:2.6em "segoe ui light","segoe ui",sans-serif;
+}
+
+.dojo-banner>p
+{
+    width:320px;
+    font-size:1.1em;
+    line-height:1.8em;
+    color:#555;
+}
+
+.dojo-banner>.get-kendoui
+{
+    display:inline-block;
+    margin:.5em 0 0;
+    font-size: 1.2em;
+    line-height:2em;
+    color:#ededed;
+}
+
 /*boxes*/
 
 .box
@@ -414,6 +465,7 @@ html
 
 .overview .box:first-child,
 .overview h2+.box,
+.overview .dojo-banner+.box,
 .widebox
 {
     margin-left:0;
@@ -614,7 +666,7 @@ html
 {
     display:inline;
     font-size:.9em;
-    margin-right:14px;
+    margin-right:10px;
 }
 
 #footer p
