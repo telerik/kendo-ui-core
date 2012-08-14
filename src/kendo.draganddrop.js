@@ -216,7 +216,7 @@
             that._finished = true;
             drag.surface.off(that._eventMap);
 
-            activeTouches.splice(activeTouches.indexOf(that), 0);
+            activeTouches.splice(activeTouches.indexOf(that), 1);
         },
 
         skip: function() {
@@ -331,8 +331,8 @@
            var that = this,
                map = {};
 
-            map[MOVE_EVENTS] = proxy(that._move, that);
-            map[END_EVENTS] = proxy(that._end, that);
+            map[MOVE_EVENTS] = function(e) { that._move(e); };
+            map[END_EVENTS] = function(e) { that._end(e); };
 
             that.drag.surface.on(map);
             that._eventMap = map;
