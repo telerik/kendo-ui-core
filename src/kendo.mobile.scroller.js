@@ -65,7 +65,7 @@
             return Math.abs(this.velocity) < 1;
         },
 
-        start: function() {
+        start: function(e) {
             var that = this;
 
             if (!that.dimension.present()) { return; }
@@ -73,7 +73,7 @@
             if (that._outOfBounds()) {
                 that._snapBack();
             } else {
-                that.velocity = that.drag[that.axis].velocity * 16;
+                that.velocity = e.touch[that.axis].velocity * 16;
                 if (that.velocity) {
                     that.tap.captureNext();
                     Animation.fn.start.call(that);
