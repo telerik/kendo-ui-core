@@ -795,13 +795,14 @@
                 var title,
                     titleTextBox,
                     titleText,
+                    Title = dataviz.Title,
                     TITLE_TEXT_HEIGHT = 18,
                     TITLE_TEXT_WIDTH = 29,
                     MARGIN = 10,
                     PADDING = 5;
 
                 function createTitle(options) {
-                    title = new dataviz.Title($.extend({
+                    title = new Title($.extend({
                         text: "Title",
                         font: SANS16,
                         margin: MARGIN,
@@ -906,13 +907,13 @@
                 });
 
                 test("positions title at top with margin 20", function() {
-                    title = new dataviz.Title({
+                    title = new Title({
                         text: "Title",
                         margin: MARGIN * 2
                     });
                     title.reflow(chartBox);
 
-                    title1 = new dataviz.Title({
+                    title1 = new Title({
                         text: "Title"
                     });
 
@@ -923,7 +924,7 @@
                 });
 
                 test("positions title at bottom with margin 20", function() {
-                    title = new dataviz.Title({
+                    title = new Title({
                         text: "Title",
                         position: "bottom",
                         margin: MARGIN * 2
@@ -931,7 +932,7 @@
 
                     title.reflow(chartBox);
 
-                    title1 = new dataviz.Title({
+                    title1 = new Title({
                         text: "Title",
                         position: "bottom"
                     });
@@ -940,6 +941,24 @@
 
                     equal(title.box.height(),
                           title1.box.height() + MARGIN * 2 + PADDING * 2);
+                });
+
+                test("buildTitle creates a title from string", function() {
+                    var parent = new dataviz.ChartElement();
+                    title = Title.buildTitle("Title", parent);
+                    equals(title.options.text, "Title");
+                });
+
+                test("buildTitle does not create title when not visible", function() {
+                    var parent = new dataviz.ChartElement();
+                    title = Title.buildTitle({ text: "Title", visible: false }, parent);
+                    equals(title, undefined);
+                });
+
+                test("buildTitle does not create title without text", function() {
+                    var parent = new dataviz.ChartElement();
+                    title = Title.buildTitle({ text: "", visible: true }, parent);
+                    equals(title, undefined);
                 });
 
             })();
