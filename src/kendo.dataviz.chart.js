@@ -496,7 +496,7 @@
                 if (currentSeries.field || (currentSeries.xField && currentSeries.yField)) {
                     currentSeries.data = data;
 
-                    [].push.apply(processedSeries, grouped ?
+                    append(processedSeries, grouped ?
                         chart._createGroupedSeries(currentSeries, data) :
                         [ currentSeries ]
                     );
@@ -4395,6 +4395,7 @@
             }
         },
 
+        // TODO: Move to Axis class
         renderGridLines: function(view, axis, secondaryAxis) {
             var plotArea = this,
                 options = axis.options,
@@ -4457,6 +4458,30 @@
             });
         },
 
+        renderAllGridLines: function(view) {
+            var plotArea = this,
+                axes = plotArea.axes,
+                gridLines = [],
+                i,
+                j,
+                axis,
+                altAxis;
+
+            for (i = 0; i < axes.length; i++) {
+                axis = axes[i];
+                for (j = i; j < axes.length; j++) {
+                    altAxis = axes[j];
+
+                    if (axis.options.vertical !== altAxis.options.vertical) {
+                        append(gridLines, plotArea.renderGridLines(view, axis, altAxis));
+                        append(gridLines, plotArea.renderGridLines(view, altAxis, axis));
+                    }
+                }
+            }
+
+            return gridLines;
+        },
+
         backgroundBox: function() {
             var plotArea = this,
                 axes = plotArea.axes,
@@ -4494,65 +4519,30 @@
                 bgBox = plotArea.backgroundBox(),
                 options = plotArea.options,
                 userOptions = options.plotArea,
-                gridLines = [],
-                childElements = ChartElement.fn.getViewElements.call(plotArea, view),
                 border = userOptions.border || {},
-                elements = [
-                    view.createRect(bgBox, {
-                        fill: userOptions.background,
-                        fillOpacity: userOptions.opacity,
-                        zIndex: -2,
-                        strokeWidth: 0.1
-                    }),
-                    view.createRect(plotArea.box, {
-                        id: options.id,
-                        data: { modelId: options.modelId },
-                        stroke: border.width ? border.color : "",
-                        strokeWidth: border.width,
-                        fill: WHITE,
-                        fillOpacity: 0,
-                        zIndex: -1,
-                        dashType: border.dashType
-                    })
-                ];
+                elements = plotArea.renderAllGridLines(view);
 
-            for (var i = 0; i < plotArea.axes.length; i++) {
-                var axis = plotArea.axes[i];
-                for (var j = i; j < plotArea.axes.length; j++) {
-                    var altAxis = plotArea.axes[j];
+            append(elements, ChartElement.fn.getViewElements.call(plotArea, view));
+            append(elements, [
+                view.createRect(bgBox, {
+                    fill: userOptions.background,
+                    fillOpacity: userOptions.opacity,
+                    zIndex: -2,
+                    strokeWidth: 0.1
+                }),
+                view.createRect(plotArea.box, {
+                    id: options.id,
+                    data: { modelId: options.modelId },
+                    stroke: border.width ? border.color : "",
+                    strokeWidth: border.width,
+                    fill: WHITE,
+                    fillOpacity: 0,
+                    zIndex: -1,
+                    dashType: border.dashType
+                })
+            ]);
 
-                    if (axis.options.vertical !== altAxis.options.vertical) {
-                        gridLines = gridLines.concat(
-                            plotArea.renderGridLines(view, axis, altAxis),
-                            plotArea.renderGridLines(view, altAxis, axis)
-                        );
-                    }
-                }
-            }
-
-            /*
-            var xAxes = grep(plotArea.axes, (function(axis) { return !axis.options.vertical; }));
-            var yAxes = grep(plotArea.axes, (function(axis) { return axis.options.vertical; }));
-            for (var i = 0; i < plotArea.panes.length; i++) {
-                var pane = plotArea.panes[i];
-                var paneXAxes = grep(pane.axes, (function(axis) { return !axis.options.vertical; }));
-                var paneYAxes = grep(pane.axes, (function(axis) { return axis.options.vertical; }));
-
-                if (paneXAxes.length) {
-                    gridLines = gridLines.concat(
-                        plotArea.renderGridLines(view, paneXAxes[0], paneYAxes[0] || yAxes[0]),
-                        plotArea.renderGridLines(view, paneYAxes[0] || yAxes[0], paneXAxes[0])
-                    );
-                } else if (paneYAxes.length) {
-                    gridLines = gridLines.concat(
-                        plotArea.renderGridLines(view, paneYAxes[0], paneXAxes[0] || xAxes[0]),
-                        plotArea.renderGridLines(view, paneXAxes[0] || xAxes[0], paneYAxes[0])
-                    );
-                }
-            }
-            */
-
-            return [].concat(gridLines, childElements, elements);
+            return elements;
         }
     });
 
