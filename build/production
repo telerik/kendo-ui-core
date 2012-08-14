@@ -13,7 +13,7 @@ tests/tests.js tests/ 8887 1>test-results.xml || exit 1
 sh -c 'cd docs && git fetch && git reset --hard origin/production'
 
 # Check the generated VSDoc
-jake vsdoc > /tmp/vsdoc.js && /usr/lib/node_modules/jshint/bin/hint /tmp/vsdoc-production.js || exit 1
+jake vsdoc > /tmp/vsdoc-production.js && /usr/lib/node_modules/jshint/bin/hint /tmp/vsdoc-production.js || exit 1
 
 rm -f release/*zip
 
