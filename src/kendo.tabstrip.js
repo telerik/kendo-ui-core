@@ -398,10 +398,11 @@
 
             element.each(function () {
                 var item = $(this),
-                    contentUrl = item.find("." + LINK).data(CONTENTURL);
+                    contentUrl = item.find("." + LINK).data(CONTENTURL),
+                    content = $(that.contentElement(item.index()));
 
                 if (contentUrl) {
-                    that.ajaxRequest(item, $(that.contentElement(item.index())), null, contentUrl);
+                    that.ajaxRequest(item, content, null, contentUrl);
                 }
             });
 
@@ -695,10 +696,8 @@
                 return false;
             }
 
-            var visibleContents = contentAnimators.filter("." + ACTIVESTATE);
-
-            // find associated content element
-            var content = $(that.contentElement(itemIndex));
+            var visibleContents = contentAnimators.filter("." + ACTIVESTATE),
+                content = $(that.contentElement(itemIndex));
 
             if (content.length === 0) {
                 visibleContents
@@ -764,10 +763,10 @@
 
         contentElement: function (itemIndex) {
             if (isNaN(itemIndex - 0)) {
-                return;
+                return undefined;
             }
 
-            var contentElements = this.contentAnimators || this.contentElements,
+            var contentElements = this.contentElements || this.contentAnimators,
                 idTest = new RegExp("-" + (itemIndex + 1) + "$");
 
             for (var i = 0, len = contentElements.length; i < len; i++) {
@@ -775,6 +774,8 @@
                     return contentElements[i];
                 }
             }
+
+            return undefined;
         },
 
         ajaxRequest: function (element, content, complete, url) {
