@@ -563,8 +563,7 @@
                 options = element.options,
                 margin = getSpacing(options.margin),
                 padding = getSpacing(options.padding),
-                border = options.border,
-                borderWidth = border.width;
+                borderWidth = options.border.width;
 
             function reflowPaddingBox() {
                 element.align(targetBox, X, options.align);

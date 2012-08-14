@@ -1603,6 +1603,26 @@
                 });
 
             })();
+
+            (function() {
+                var Pane = dataviz.Pane,
+                    pane;
+
+                // ------------------------------------------------------------
+                module("Pane");
+
+                test("Sets unique id", function() {
+                    pane = new Pane();
+                    ok(pane.options.id);
+                });
+
+                test("Title shrinks content box", function() {
+                    pane = new Pane( { title: "Title", width: 600, height: 400 } );
+                    pane.reflow(chartBox);
+
+                    equals(pane.contentBox.height(), 365);
+                });
+            })();
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>

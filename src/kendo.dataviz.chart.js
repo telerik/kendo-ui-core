@@ -3929,7 +3929,7 @@
             BoxElement.fn.reflow.call(pane, targetBox);
 
             if(pane.title) {
-                pane.contentBox = kendo.dataviz.boxDiff(pane.box, pane.title.box);
+                pane.contentBox.y1 += pane.title.box.height();
             }
         }
     });
@@ -5901,6 +5901,7 @@
         Legend: Legend,
         LineChart: LineChart,
         LinePoint: LinePoint,
+        Pane: Pane,
         PieAnimation: PieAnimation,
         PieAnimationDecorator: PieAnimationDecorator,
         PieChart: PieChart,
