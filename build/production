@@ -21,4 +21,4 @@ cp -rf release/*zip deploy/online-examples.zip /kendo-builds/Production
 
 jake winjs && cp -R release/winjs/* /kendo-builds/WinJS/Production/
 
-find /kendo-builds/Production/* -mtime +7 -exec rm {} \; ; rm -rf release/*
+find /kendo-builds/Production/* -mtime +2 -exec rm {} \; ; rm -rf release/*
