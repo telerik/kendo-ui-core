@@ -9,6 +9,12 @@ source build/temp-browser-profiles.sh
 
 tests/tests.js tests/ 8887 1>test-results.xml || exit 1
 
+# Update docs submodule
+sh -c 'cd docs && git fetch && git reset --hard origin/production'
+
+# Check the generated VSDoc
+jake vsdoc > /tmp/vsdoc.js && /usr/lib/node_modules/jshint/bin/hint /tmp/vsdoc-production.js || exit 1
+
 rm -f release/*zip
 
 jake demos:staging && rsync -avc deploy/staging/ /var/www/production/
