@@ -4248,57 +4248,46 @@
         fitAxes: function() {
             var plotArea = this,
                 panes = plotArea.panes,
-                panesLength = panes.length,
                 axes = plotArea.axes,
-                box = plotArea.box,
+                paneAxes,
+                paneBox,
                 axisBox,
                 offsetX = 0,
+                offsetY,
                 currentPane,
                 currentAxis,
                 i,
-                length = axes.length;
+                j;
 
-            for (i = 0; i < panesLength; i++) {
+            for (i = 0; i < panes.length; i++) {
                 currentPane = panes[i];
-                box = currentPane.contentBox;
-                if (currentPane.axes.length) {
-                    axisBox = axisGroupBox(currentPane.axes);
+                paneAxes = currentPane.axes;
+                paneBox = currentPane.contentBox;
 
-                    offsetX = math.max(offsetX, box.x1 - axisBox.x1);
+                if (paneAxes.length > 0) {
+                    axisBox = axisGroupBox(paneAxes);
+
+                    // OffsetX is calculated and applied globally
+                    offsetX = math.max(offsetX, paneBox.x1 - axisBox.x1);
+
+                    // OffsetY is calculated and applied per pane
+                    offsetY = math.max(paneBox.y1 - axisBox.y1, paneBox.y2 - axisBox.y2);
+
+                    for (j = 0; j < paneAxes.length; j++) {
+                        currentAxis = paneAxes[j];
+
+                        currentAxis.reflow(
+                            currentAxis.box.translate(0, offsetY)
+                        );
+                    }
                 }
             }
 
-            for (i = 0; i < length; i++) {
+            for (i = 0; i < axes.length; i++) {
                 currentAxis = axes[i];
 
                 currentAxis.reflow(
                     currentAxis.box.translate(offsetX, 0)
-                );
-            }
-        },
-
-        fitPaneAxes: function(pane) {
-            var axes = pane.axes,
-                box = pane.contentBox,
-                axisBox,
-                offsetX = 0,
-                offsetY = 0,
-                currentAxis,
-                i,
-                length = axes.length;
-
-            box = pane.contentBox;
-            if (pane.axes.length) {
-                axisBox = axisGroupBox(pane.axes);
-
-                offsetY = math.max(box.y1 - axisBox.y1, box.y2 - axisBox.y2);
-            }
-
-            for (i = 0; i < length; i++) {
-                currentAxis = axes[i];
-
-                currentAxis.reflow(
-                    currentAxis.box.translate(offsetX, offsetY)
                 );
             }
         },
@@ -4326,13 +4315,6 @@
             plotArea.shrinkAxisHeight();
             plotArea.alignAxes(xAxes, yAxes, xAnchor, yAnchor);
             plotArea.fitAxes();
-
-            for (i = 0; i < panesLength; i++) {
-                currentPane = panes[i];
-                if (currentPane.axes.length) {
-                    plotArea.fitPaneAxes(currentPane);
-                }
-            }
         },
 
         reflowPaneAxes: function(pane, defaultXAnchor, defaultYAnchor) {
