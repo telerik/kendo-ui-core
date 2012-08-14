@@ -504,6 +504,7 @@
                 cy = round(config.c.y),
                 startAngle = config.startAngle,
                 endAngle = config.angle + startAngle,
+                angle = endAngle - startAngle,
                 outerBBox = {
                     l: cx - r,
                     t: cy - r,
@@ -523,7 +524,12 @@
                 return new Point2D(round(point.x), round(point.y));
             }
 
-            endAngle = (endAngle - startAngle) > 359.9 ? endAngle - 0.5 : endAngle;
+            if (angle <= 1) {
+                endAngle += 1 - angle;
+            } else if (angle > 359) {
+                endAngle -= 1 - angle;
+            }
+
             outerStartPoint = roundPointCoordinates(config.point(startAngle)),
             innerStartPoint = roundPointCoordinates(config.point(startAngle, true)),
             outerEndPoint = roundPointCoordinates(config.point(endAngle));
