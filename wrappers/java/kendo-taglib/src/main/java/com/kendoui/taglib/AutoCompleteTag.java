@@ -24,7 +24,7 @@ public class AutoCompleteTag implements BodyTag {
         JspWriter writer = pageContext.getOut();
         
         try {
-        writer.print("<input type=\"text\" />");
+        writer.print("<input type=\"text\" value=\"it is works!!!\" />");
         } catch (IOException ex) {
             throw new JspTagException(ex);
         }
@@ -34,14 +34,6 @@ public class AutoCompleteTag implements BodyTag {
 
     @Override
     public int doStartTag() throws JspException {
-        JspWriter writer = pageContext.getOut();
-        
-        try {
-        writer.print("<input type=\"text\" />");
-        } catch (IOException ex) {
-            throw new JspTagException(ex);
-        }
-        
         return EVAL_BODY_BUFFERED;
     }
 
