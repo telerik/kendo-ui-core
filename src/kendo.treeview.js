@@ -1049,7 +1049,7 @@
                     element.empty();
                 }
             } else {
-                node.find("> div > .k-icon").toggleClass("k-loading", showProgress);
+                node.find(">div>.k-icon").toggleClass("k-loading", showProgress);
             }
         },
 
@@ -1080,8 +1080,8 @@
                 referenceDataItem = destTreeview.dataItem(parentNode);
 
                 if (!referenceDataItem.loaded()) {
+                    destTreeview._progress(parentNode, true);
                     referenceDataItem.load();
-                    that._expanded(parentNode, true);
                 }
 
                 if (parentNode != that.root) {
@@ -1095,7 +1095,9 @@
                 srcDataSource = srcTreeView.dataSource;
                 dataItem = srcDataSource.getByUid(nodeData.attr(kendo.attr("uid")));
 
-                dataItem = srcDataSource.remove(dataItem);
+                if (dataItem) {
+                    dataItem = srcDataSource.remove(dataItem);
+                }
 
                 dataItem = callback(destDataSource, dataItem);
             } else if (isArray(nodeData) || nodeData instanceof data.ObservableArray){
@@ -1108,7 +1110,7 @@
                 dataItem = callback(destDataSource, nodeData);
             }
 
-            return that.findByUid(dataItem.uid);
+            return dataItem && that.findByUid(dataItem.uid);
         },
 
         insertAfter: function (nodeData, referenceNode) {
@@ -1150,7 +1152,15 @@
                     that._expanded(parentNode, true);
                 }
 
-                return dataSource.add(model);
+                if (dataSource.data()) {
+                    return dataSource.add(model);
+                } else {
+                    dataSource.one(CHANGE, function() {
+                        dataSource.add(model);
+                    });
+
+                    return null;
+                }
             });
         },
 
@@ -1418,7 +1428,6 @@
             // perform reorder / move
             if (dropPosition == "over") {
                 sourceNode = treeview.append(sourceNode, destinationNode);
-                treeview.expand(destinationNode);
             } else if (dropPosition == "before") {
                 sourceNode = treeview.insertBefore(sourceNode, destinationNode);
             } else if (dropPosition == "after") {
@@ -1426,7 +1435,7 @@
             }
 
             treeview.trigger(DRAGEND, {
-                sourceNode: sourceNode[0],
+                sourceNode: sourceNode && sourceNode[0],
                 destinationNode: destinationNode[0],
                 dropPosition: dropPosition
             });
