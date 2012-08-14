@@ -693,7 +693,7 @@ div.k-window-content
     position: static;
     border-style: solid;
     border-width: 1px;
-    margin: 0 .3em .3em;
+    margin: 0 .29em .3em;
     padding: .3em .92em;
     zoom: 1;
 }
@@ -701,6 +701,16 @@ div.k-window-content
 .k-tabstrip>.k-content
 {
     display: none;
+}
+
+.k-tabstrip .k-content.km-scroll-wrapper
+{
+    padding: 0;
+}
+
+.k-tabstrip .k-content > .km-scroll-container
+{
+    padding: .3em .92em;
 }
 
 /* PanelBar */
