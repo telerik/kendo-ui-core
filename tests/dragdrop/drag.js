@@ -198,12 +198,19 @@ test("Calculates correct dimensions for a given container", 4, function() {
     equal(boundaries.y.max, offset.top + 20 + 200 - 60);
 });
 
+function triggerTouchEvent(type, e) {
+    element.trigger($.Event(type, { originalEvent: { changedTouches: [e] }}));
+}
+
 module("drag gestures", {
     setup: function() {
         kendo.support.touch = true;
         element = $('<div />');
         $("#qunit-fixture").empty().append(element);
         drag = new Drag(element);
+
+        triggerTouchEvent("mousedown", {pageX: 10, pageY: 20, identifier: 1});
+        triggerTouchEvent("mousemove", {pageX: 15, pageY: 25, identifier: 1});
     },
 
     teardown: function() {
@@ -211,20 +218,55 @@ module("drag gestures", {
     }
 });
 
-function triggerTouchEvent(type, e) {
-    element.trigger($.Event(type, { originalEvent: { changedTouches: [e] }}));
-}
-
-test("raises gesturestart on second touch move", 1, function(){
+test("triggers gesturestart on second touch move", 1, function(){
     drag.bind("gesturestart", function(e) {
         ok(true);
     });
 
-    triggerTouchEvent("mousedown", {pageX: 10, pageY: 20, identifier: 1});
-    triggerTouchEvent("mousemove", {pageX: 15, pageY: 25, identifier: 1});
+    triggerTouchEvent("mousedown", {pageX: 10, pageY: 20, identifier: 2});
+    triggerTouchEvent("mousemove", {pageX: 15, pageY: 25, identifier: 2});
+});
+
+test("does not trigger move on second touch move", 0, function(){
+    drag.bind("move", function(e) {
+        ok(false);
+    });
 
     triggerTouchEvent("mousedown", {pageX: 10, pageY: 20, identifier: 2});
     triggerTouchEvent("mousemove", {pageX: 15, pageY: 25, identifier: 2});
 });
+
+test("triggers gesturechange", 1, function(){
+    drag.bind("gesturechange", function(e) {
+        ok(true);
+    });
+
+    triggerTouchEvent("mousedown", {pageX: 10, pageY: 20, identifier: 2});
+    triggerTouchEvent("mousemove", {pageX: 15, pageY: 25, identifier: 2});
+});
+
+test("triggers gestureend", 1, function(){
+    drag.bind("gestureend", function(e) {
+        ok(true);
+    });
+
+    triggerTouchEvent("mousedown", {pageX: 10, pageY: 20, identifier: 2});
+    triggerTouchEvent("mousemove", {pageX: 15, pageY: 25, identifier: 2});
+    triggerTouchEvent("mouseup", {pageX: 15, pageY: 25, identifier: 2});
+});
+
+test("triggers end after the first touch is over", 1, function(){
+    drag.bind("end", function(e) {
+        ok(true);
+    });
+
+    triggerTouchEvent("mousedown", {pageX: 10, pageY: 20, identifier: 2});
+    triggerTouchEvent("mousemove", {pageX: 15, pageY: 25, identifier: 2});
+    triggerTouchEvent("mouseup", {pageX: 15, pageY: 25, identifier: 2});
+    triggerTouchEvent("mouseup", {pageX: 15, pageY: 25, identifier: 1});
+});
+
+
+
 
 
