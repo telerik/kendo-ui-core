@@ -4093,8 +4093,10 @@
             axis.reflow(axisBox);
         },
 
-        alignAxes: function(xAxes, yAxes, xAnchor, yAnchor) {
+        alignAxes: function(xAxes, yAxes) {
             var plotArea = this,
+                xAnchor = xAxes[0],
+                yAnchor = yAxes[0],
                 xAnchorCrossings = plotArea.axisCrossingValues(xAnchor, yAxes),
                 yAnchorCrossings = plotArea.axisCrossingValues(yAnchor, xAxes),
                 leftAnchors = {},
@@ -4296,28 +4298,23 @@
             var plotArea = this,
                 panes = plotArea.panes,
                 i,
-                panesLength = panes.length,
-                currentPane,
                 axes = plotArea.axes,
                 xAxes = grep(axes, (function(axis) { return !axis.options.vertical; })),
-                yAxes = grep(axes, (function(axis) { return axis.options.vertical; })),
-                xAnchor = xAxes[0],
-                yAnchor = yAxes[0];
+                yAxes = grep(axes, (function(axis) { return axis.options.vertical; }));
 
-            for (i = 0; i < panesLength; i++) {
-                currentPane = panes[i];
-                plotArea.reflowPaneAxes(panes[i], xAnchor, yAnchor);
+            for (i = 0; i < panes.length; i++) {
+                plotArea.reflowPaneAxes(panes[i]);
             }
 
-            plotArea.alignAxes(xAxes, yAxes, xAnchor, yAnchor);
+            plotArea.alignAxes(xAxes, yAxes);
             plotArea.shrinkAxisWidth();
-            plotArea.alignAxes(xAxes, yAxes, xAnchor, yAnchor);
+            plotArea.alignAxes(xAxes, yAxes);
             plotArea.shrinkAxisHeight();
-            plotArea.alignAxes(xAxes, yAxes, xAnchor, yAnchor);
+            plotArea.alignAxes(xAxes, yAxes);
             plotArea.fitAxes();
         },
 
-        reflowPaneAxes: function(pane, defaultXAnchor, defaultYAnchor) {
+        reflowPaneAxes: function(pane) {
             var axes = pane.axes,
                 i,
                 length = axes.length;
@@ -4339,8 +4336,6 @@
             for (i = 0; i < count; i++) {
                 charts[i].reflow(box);
             }
-
-            plotArea.box = box;
         },
 
         reflowPanes: function() {
