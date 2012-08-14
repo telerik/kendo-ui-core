@@ -307,7 +307,8 @@
                 anchor: anchor,
                 open: options.open,
                 close: options.close,
-                animation: options.animation
+                animation: options.animation,
+                isRtl: kendo.support.isRtl(options.anchor)
             }));
 
             width = anchor.outerWidth() - (list.outerWidth() - list.width());

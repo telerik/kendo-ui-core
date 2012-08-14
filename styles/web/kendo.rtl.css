@@ -5,18 +5,80 @@
     direction: rtl;
 }
 
-.k-dropdown-wrap,
-.k-picker-wrap,
-.k-numeric-wrap
+/* TextBoxes, Pickers, Combos */
+
+.k-rtl .k-dropdown-wrap,
+.k-rtl .k-picker-wrap,
+.k-rtl .k-numeric-wrap
 {
     padding-right: 2px;
     padding-left: 22px;
 }
 
-.k-picker-wrap .k-select,
-.k-numeric-wrap .k-select,
-.k-dropdown-wrap .k-select
+.k-rtl .k-datetimepicker .k-picker-wrap {
+    padding-right: 2px;
+    padding-left: 42px;
+}
+
+.k-rtl span.k-picker-wrap .k-select,
+.k-rtl .k-numeric-wrap .k-select,
+.k-rtl .k-dropdown-wrap .k-select
 {
     right: auto;
-    left:0;
+    left: 0;
 }
+
+.k-rtl .k-datetimepicker .k-picker-wrap .k-icon
+{
+    margin: 0 3px 0 0;
+}
+
+/* Pager */
+
+/*.k-rtl .k-pager-info
+{
+    float: left;
+}
+
+.k-rtl .k-pager-wrap > .k-link,
+.k-rtl .k-pager-numbers
+{
+    float: right;
+}*/
+
+/* Menu */
+
+.k-rtl .k-menu .k-item,
+.k-rtl .k-widget.k-menu-horizontal > .k-item
+{
+    border-width: 0 0 0 1px;
+}
+
+.k-rtl .k-widget.k-menu-horizontal > .k-item
+{
+    float: right;
+}
+
+.k-rtl .k-menu .k-item > .k-link > .k-i-arrow-s
+{
+    margin-right: 0;
+    margin-left: -8px;
+}
+
+.k-rtl .k-menu .k-item > .k-link > .k-i-arrow-e
+{
+    right: auto;
+    left: 2px;
+}
+
+.k-rtl .k-menu .k-group .k-item > .k-link
+{
+    padding-left: 1.8em;
+    padding-right: .9em;
+}
+
+.k-rtl .k-menu .k-link > .k-i-arrow-e { background-position: 0 -48px; }
+.k-rtl .k-menu .k-link > .k-i-arrow-w { background-position: 0 -16px; }
+
+/* PanelBar */
+
