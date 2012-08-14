@@ -361,6 +361,63 @@
                 equal(data[0].text, "foo");
             });
 
+            test("append() to unfetched parent", function() {
+                createTreeView({
+                    dataSource: {
+                        data: [
+                            { text: "foo", hasChildren: true }
+                        ],
+                        schema: {
+                            model: {
+                                hasChildren: "hasChildren",
+                                children: {
+                                    transport: {
+                                        read: function(options) {
+                                            options.success([ { text: "bar" } ]);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+
+                treeviewObject.append({ text: "baz" }, treeview.find(".k-item"));
+
+                equal(treeview.find(".k-item .k-item").length, 2);
+            });
+
+            asyncTest("append() to unfetched async parent", function() {
+                createTreeView({
+                    dataSource: {
+                        data: [
+                            { text: "foo", hasChildren: true }
+                        ],
+                        schema: {
+                            model: {
+                                hasChildren: "hasChildren",
+                                children: {
+                                    transport: {
+                                        read: function(options) {
+                                            setTimeout(function() {
+                                                options.success([ { text: "bar" } ]);
+                                            }, 100);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+
+                treeviewObject.append({ text: "baz" }, treeview.find(".k-item"));
+
+                setTimeout(function() {
+                    start();
+                    equal(treeview.find(".k-item .k-item").length, 2);
+                }, 200);
+            });
+
             test("detach() removes node and persists data", function() {
                 createTreeView([
                     { text: "foo" },

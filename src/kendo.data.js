@@ -1667,6 +1667,10 @@
         getByUid: function(id) {
             var idx, length, data = this._flatData(this._data);
 
+            if (!data) {
+                return;
+            }
+
             for (idx = 0, length = data.length; idx < length; idx++) {
                 if (data[idx].uid == id) {
                     return data[idx];
@@ -2888,6 +2892,10 @@
             }
 
             data = this._flatData(this.data());
+
+            if (!data) {
+                return;
+            }
 
             for (idx = 0, length = data.length; idx < length; idx++) {
                 children = data[idx].children;
