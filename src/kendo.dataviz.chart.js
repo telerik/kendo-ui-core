@@ -1001,9 +1001,9 @@
                 p2,
                 slotSize;
 
-            from = math.min(math.max(0, from), categoriesLength);
+            from = clipValue(from, 0, categoriesLength);
             to = defined(to) ? to : from;
-            to = math.max(math.min(categoriesLength, to), from);
+            to = clipValue(to, from, categoriesLength);
             p1 = lineStart + (from * step);
             p2 = p1 + step;
             slotSize = to - from;
@@ -2600,11 +2600,10 @@
                 firstPoint,
                 lastPoint;
 
-            // TODO: Refactor to Box2D.clipPoint or sth.
             if (invertAxes) {
-                end = math.max(math.min(end, valueAxisLineBox.x2), valueAxisLineBox.x1);
+                end = clipValue(end, valueAxisLineBox.x1, valueAxisLineBox.x2);
             } else {
-                end = math.max(math.min(end, valueAxisLineBox.y2), valueAxisLineBox.y1);
+                end = clipValue(end, valueAxisLineBox.y1, valueAxisLineBox.y2);
             }
 
             if (!stack && points.length > 1) {
@@ -5874,6 +5873,10 @@
 
     function singleItemOrArray(array) {
         return array.length === 1 ? array[0] : array;
+    }
+
+    function clipValue(value, min, max) {
+        return math.max(math.min(value, max), min);
     }
 
     // Exports ================================================================
