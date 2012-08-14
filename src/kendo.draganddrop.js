@@ -439,7 +439,7 @@
         },
 
         _disposeAll: function() {
-            $.each(this.touches, function(touch) { touch.dispose(); });
+            $.each(this.touches, function() { this.dispose(); });
         },
 
         _isMoved: function() {
