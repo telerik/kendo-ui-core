@@ -54,4 +54,6 @@ wrappers/java/**/target
 wrappers/java/**/.classpath
 wrappers/java/**/.project
 wrappers/java/**/.settings
+wrappers/java/.project
+wrappers/java/.settings
 wrappers/java/target
