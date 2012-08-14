@@ -4273,14 +4273,12 @@
             var plotArea = this,
                 axes = plotArea.axes,
                 axesCount = axes.length,
+                lineBox,
                 box,
-                bgBox,
                 i,
                 j,
                 axisA,
-                axisB,
-                lineBoxH,
-                lineBoxV;
+                axisB;
 
             for (i = 0; i < axesCount; i++) {
                 axisA = axes[i];
@@ -4289,29 +4287,18 @@
                     axisB = axes[j];
 
                     if (axisA.options.vertical !== axisB.options.vertical) {
-                        if (axisA.options.vertical) {
-                            lineBoxH = axisB.lineBox();
-                            lineBoxV = axisA.lineBox();
-                        } else {
-                            lineBoxH = axisA.lineBox();
-                            lineBoxV = axisB.lineBox();
-                        }
+                        lineBox = axisA.lineBox().clone().wrap(axisB.lineBox());
 
-                        box = new Box2D(
-                            lineBoxH.x1, lineBoxV.y1,
-                            lineBoxH.x2, lineBoxV.y2
-                        );
-
-                        if (!bgBox) {
-                            bgBox = box;
+                        if (!box) {
+                            box = lineBox;
                         } else {
-                            bgBox = bgBox.wrap(box);
+                            box = box.wrap(lineBox);
                         }
                     }
                 }
             }
 
-            return bgBox || plotArea.box;
+            return box || plotArea.box;
         },
 
         getViewElements: function(view) {
