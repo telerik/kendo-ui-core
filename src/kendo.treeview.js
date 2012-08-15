@@ -896,6 +896,7 @@
                         that._progress(node, true);
                     }
 
+                    contents.remove();
                     dataItem.load();
                 }
             }
