@@ -644,14 +644,24 @@
         }
     });
 
-    function distance(p1, p2, member) {
-        var dx = p1.x[member] - p2.x[member],
-            dy = p1.y[member] - p2.y[member];
+    function distance(p1, p2) {
+        var dx = p1.x.location - p2.x.location,
+            dy = p1.y.location - p2.y.location;
 
         return Math.sqrt(dx*dx + dy*dy);
     }
 
     var Pane = Class.extend({
+        zoomPointOffset: function(scale) {
+            var that = this;
+            scale -= 1;
+
+            return {
+                x: (that.x.dimension.size / 2 - this.zoomPoint.x) * scale,
+                y: (that.y.dimension.size / 2 - this.zoomPoint.y) * scale
+            };
+        },
+
         init: function(options) {
             var that = this,
                 x,
@@ -682,20 +692,21 @@
                         finger2 = e.touches[1];
 
                     that.zoomPoint = {
-                        x: ( finger1.x.startLocation + finger2.x.startLocation) / 2,
-                        y: ( finger1.y.startLocation + finger2.y.startLocation) / 2
+                        x: (finger1.x.location + finger2.x.location) / 2,
+                        y: (finger1.y.location + finger2.y.location) / 2
                     };
 
-                    that.initialDistance = distance(finger1, finger2, "location");
+                    that.initialDistance = distance(finger1, finger2);
                     that.initialScale = that.movable.scale;
                 },
 
                 gesturechange: function(e) {
                     var finger1 = e.touches[0],
                         finger2 = e.touches[1],
-                        newDistance = distance(finger1, finger2, "location");
+                        newDistance = distance(finger1, finger2),
+                        newScale = that.initialScale * newDistance / that.initialDistance;
 
-                    that.movable.scaleTo(that.initialScale * newDistance / that.initialDistance);
+                    that.movable.moveAndScale(that.zoomPointOffset(newScale), newScale);
                 },
 
                 move: function(e) {
@@ -747,9 +758,9 @@
             this.refresh();
         },
 
-        scaleTo: function(scale) {
+        moveAndScale: function(coordinates, scale) {
             this.scale = scale;
-            this.refresh();
+            this.moveTo(coordinates);
         },
 
         translate: function(coordinates) {
