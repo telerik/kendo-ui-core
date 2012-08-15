@@ -218,9 +218,6 @@
             name: "Chart",
             theme: "default",
             chartArea: {},
-            title: {
-                visible: true
-            },
             legend: {
                 visible: true,
                 labels: {}
@@ -315,9 +312,7 @@
                     }, options.chartArea)),
                 plotArea;
 
-            if (options.title && options.title.visible && options.title.text) {
-                model.append(new Title(options.title));
-            }
+            Title.buildTitle(options.title, model);
 
             plotArea = model._plotArea = chart._createPlotArea();
             if (options.legend.visible) {
@@ -498,7 +493,7 @@
                 if (currentSeries.field || (currentSeries.xField && currentSeries.yField)) {
                     currentSeries.data = data;
 
-                    [].push.apply(processedSeries, grouped ?
+                    append(processedSeries, grouped ?
                         chart._createGroupedSeries(currentSeries, data) :
                         [ currentSeries ]
                     );
@@ -957,9 +952,11 @@
             var axis = this,
                 options = axis.options,
                 vertical = options.vertical,
-                size = vertical ? axis.box.height() : axis.box.width(),
+                lineBox = axis.lineBox(),
+                size = vertical ? lineBox.height() : lineBox.width(),
                 step = size / itemsCount,
-                pos = vertical ? axis.box.y1 : axis.box.x1,
+                dim = vertical ? Y : X,
+                pos = lineBox[dim + 1],
                 positions = [],
                 i;
 
@@ -968,7 +965,7 @@
                 pos += step;
             }
 
-            positions.push(vertical ? axis.box.y2 : axis.box.x2);
+            positions.push(lineBox[dim + 2]);
 
             return options.reverse ? positions.reverse() : positions;
         },
@@ -1001,9 +998,9 @@
                 p2,
                 slotSize;
 
-            from = math.min(math.max(0, from), categoriesLength);
+            from = clipValue(from, 0, categoriesLength);
             to = defined(to) ? to : from;
-            to = math.max(math.min(categoriesLength, to), from);
+            to = clipValue(to, from, categoriesLength);
             p1 = lineStart + (from * step);
             p2 = p1 + step;
             slotSize = to - from;
@@ -2591,12 +2588,20 @@
                 stack = chart.options.isStacked && segment.seriesIx > 0,
                 plotArea = chart.plotArea,
                 invertAxes = chart.options.invertAxes,
-                axisLineBox = plotArea.categoryAxis.lineBox(),
-                end = invertAxes ? axisLineBox.x1 : axisLineBox.y1,
+                valueAxis = chart.seriesValueAxis(segment.series),
+                valueAxisLineBox = valueAxis.lineBox(),
+                categoryAxisLineBox = plotArea.categoryAxis.lineBox(),
+                end = invertAxes ? categoryAxisLineBox.x1 : categoryAxisLineBox.y1,
                 stackPoints = segment.stackPoints,
                 points = LineSegment.fn.points.call(segment, stackPoints),
                 firstPoint,
                 lastPoint;
+
+            if (invertAxes) {
+                end = clipValue(end, valueAxisLineBox.x1, valueAxisLineBox.x2);
+            } else {
+                end = clipValue(end, valueAxisLineBox.y1, valueAxisLineBox.y2);
+            }
 
             if (!stack && points.length > 1) {
                 firstPoint = points[0];
@@ -3894,6 +3899,37 @@
         }
     });
 
+    var Pane = BoxElement.extend({
+        init: function(options) {
+            var pane = this;
+
+            BoxElement.fn.init.call(pane, options);
+
+            options = pane.options;
+            options.id = uniqueId();
+
+            pane.title = Title.buildTitle(options.title, pane, Pane.fn.options.title);
+        },
+
+        options: {
+            zIndex: -1,
+            shrinkToFit: true,
+            title: {
+                align: LEFT
+            }
+        },
+
+        reflow: function(targetBox) {
+            var pane = this;
+
+            BoxElement.fn.reflow.call(pane, targetBox);
+
+            if(pane.title) {
+                pane.contentBox.y1 += pane.title.box.height();
+            }
+        }
+    });
+
     var PlotAreaBase = ChartElement.extend({
         init: function(series, options) {
             var plotArea = this;
@@ -3908,6 +3944,8 @@
             plotArea.options.id = uniqueId();
             plotArea.makeDiscoverable();
             plotArea.render();
+
+            plotArea.createPanes();
         },
 
         options: {
@@ -3921,6 +3959,52 @@
                 width: 0
             },
             legend: {}
+        },
+
+        createPanes: function() {
+            var plotArea = this,
+                panes = [],
+                paneOptions = plotArea.options.panes || [],
+                i,
+                panesLength = math.max(paneOptions.length, 1),
+                currentPane;
+
+            for (i = 0; i < panesLength; i++) {
+                currentPane = new Pane(paneOptions[i]);
+                plotArea.setPaneAxes(currentPane, i);
+
+                panes.push(currentPane);
+                plotArea.append(currentPane);
+            }
+
+            plotArea.panes = panes;
+        },
+
+        setPaneAxes: function(pane, paneIndex) {
+            var plotArea = this,
+                axes = plotArea.axes,
+                currentAxis,
+                paneName = pane.options.name,
+                axisPane,
+                match,
+                paneAxes = pane.axes = [],
+                i;
+
+            for (i = 0; i < axes.length; i++) {
+                currentAxis = axes[i];
+                axisPane = currentAxis.options.pane;
+
+                if (axisPane) {
+                    match = axisPane === paneName;
+                } else {
+                    match = paneIndex === 0;
+                }
+
+                if (match) {
+                    paneAxes.push(currentAxis);
+                    currentAxis.pane = pane;
+                }
+            }
         },
 
         appendChart: function(chart) {
@@ -3963,50 +4047,14 @@
         reflow: function(targetBox) {
             var plotArea = this,
                 options = plotArea.options.plotArea,
-                margin = getSpacing(options.margin),
-                axes = plotArea.axes,
-                axesCount = axes.length,
-                box, i, y, plotAreaBox, firstAxis, secondAxis,
-                firstLineBox, secondLineBox;
+                margin = getSpacing(options.margin);
 
-            plotArea.box = targetBox.clone();
+            plotArea.box = targetBox.clone().unpad(margin);
+            plotArea.reflowPanes();
 
-            if (axesCount) {
+            if (plotArea.axes.length > 0) {
                 plotArea.reflowAxes();
-                plotArea.box = plotArea.axisBox();
             }
-
-            for (i = 0; i < axesCount; i++) {
-                firstAxis = axes[i];
-                for (y = 0; y < axesCount; y++) {
-                    secondAxis = axes[y];
-
-                    if (firstAxis.options.vertical == secondAxis.options.vertical) {
-                        continue;
-                    }
-
-                    if (firstAxis.options.vertical) {
-                        firstLineBox = secondAxis.lineBox();
-                        secondLineBox = firstAxis.lineBox();
-                    } else {
-                        firstLineBox = firstAxis.lineBox();
-                        secondLineBox = secondAxis.lineBox();
-                    }
-
-                    box = new Box2D(
-                        firstLineBox.x1, secondLineBox.y1,
-                        firstLineBox.x2, secondLineBox.y2
-                    );
-
-                    if (!plotAreaBox) {
-                        plotAreaBox = box;
-                    }
-
-                    plotAreaBox = plotAreaBox.wrap(box);
-                }
-            }
-
-            plotArea.box = (plotAreaBox || targetBox).unpad(margin);
 
             plotArea.reflowCharts();
         },
@@ -4029,14 +4077,17 @@
             var slot = axis.getSlot(crossingValue, crossingValue),
                 slotEdge = axis.options.reverse ? 2 : 1,
                 targetSlot = targetAxis.getSlot(targetCrossingValue, targetCrossingValue),
-                targetEdge = targetAxis.options.reverse ? 2 : 1;
-
-            axis.reflow(
-                axis.box.translate(
+                targetEdge = targetAxis.options.reverse ? 2 : 1,
+                axisBox = axis.box.translate(
                     targetSlot[X + targetEdge] - slot[X + slotEdge],
                     targetSlot[Y + targetEdge] - slot[Y + slotEdge]
-                )
-            );
+                );
+
+            if (axis.pane !== targetAxis.pane) {
+                axisBox.translate(0, axis.pane.box.y1 - targetAxis.pane.box.y1);
+            }
+
+            axis.reflow(axisBox);
         },
 
         alignAxes: function(xAxes, yAxes) {
@@ -4045,27 +4096,30 @@
                 yAnchor = yAxes[0],
                 xAnchorCrossings = plotArea.axisCrossingValues(xAnchor, yAxes),
                 yAnchorCrossings = plotArea.axisCrossingValues(yAnchor, xAxes),
-                leftAnchor,
-                rightAnchor,
-                topAnchor,
-                bottomAnchor,
+                leftAnchors = {},
+                rightAnchors = {},
+                topAnchors = {},
+                bottomAnchors = {},
+                pane,
+                paneId,
                 axis,
                 i;
 
-            // TODO: Refactor almost-identical loops
             for (i = 0; i < yAxes.length; i++) {
                 axis = yAxes[i];
+                pane = axis.pane;
+                paneId = pane.options.id;
                 plotArea.alignAxisTo(axis, xAnchor, yAnchorCrossings[i], xAnchorCrossings[i]);
 
                 if (round(axis.lineBox().x1) === round(xAnchor.lineBox().x1)) {
-                    if (leftAnchor) {
+                    if (leftAnchors[paneId]) {
                         axis.reflow(axis.box
-                            .alignTo(leftAnchor.box, LEFT)
+                            .alignTo(leftAnchors[paneId].box, LEFT)
                             .translate(-axis.options.margin, 0)
                         );
                     }
 
-                    leftAnchor = axis;
+                    leftAnchors[paneId] = axis;
                 }
 
                 if (round(axis.lineBox().x2) === round(xAnchor.lineBox().x2)) {
@@ -4075,23 +4129,25 @@
                     }
                     plotArea.alignAxisTo(axis, xAnchor, yAnchorCrossings[i], xAnchorCrossings[i]);
 
-                    if (rightAnchor) {
+                    if (rightAnchors[paneId]) {
                         axis.reflow(axis.box
-                            .alignTo(rightAnchor.box, RIGHT)
+                            .alignTo(rightAnchors[paneId].box, RIGHT)
                             .translate(axis.options.margin, 0)
                         );
                     }
 
-                    rightAnchor = axis;
+                    rightAnchors[paneId] = axis;
                 }
 
-                if (i !== 0) {
+                if (i !== 0 && yAnchor.pane === axis.pane) {
                     axis.alignTo(yAnchor);
                 }
             }
 
             for (i = 0; i < xAxes.length; i++) {
                 axis = xAxes[i];
+                pane = axis.pane;
+                paneId = pane.options.id;
                 plotArea.alignAxisTo(axis, yAnchor, xAnchorCrossings[i], yAnchorCrossings[i]);
 
                 if (round(axis.lineBox().y1) === round(yAnchor.lineBox().y1)) {
@@ -4101,25 +4157,25 @@
                     }
                     plotArea.alignAxisTo(axis, yAnchor, xAnchorCrossings[i], yAnchorCrossings[i]);
 
-                    if (topAnchor) {
+                    if (topAnchors[paneId]) {
                         axis.reflow(axis.box
-                            .alignTo(topAnchor.box, TOP)
+                            .alignTo(topAnchors[paneId].box, TOP)
                             .translate(0, -axis.options.margin)
                         );
                     }
 
-                    topAnchor = axis;
+                    topAnchors[paneId] = axis;
                 }
 
                 if (round(axis.lineBox().y2, COORD_PRECISION) === round(yAnchor.lineBox().y2, COORD_PRECISION)) {
-                    if (bottomAnchor) {
+                    if (bottomAnchors[paneId]) {
                         axis.reflow(axis.box
-                            .alignTo(bottomAnchor.box, BOTTOM)
+                            .alignTo(bottomAnchors[paneId].box, BOTTOM)
                             .translate(0, axis.options.margin)
                         );
                     }
 
-                    bottomAnchor = axis;
+                    bottomAnchors[paneId] = axis;
                 }
 
                 if (i !== 0) {
@@ -4128,118 +4184,143 @@
             }
         },
 
-        axisBox: function() {
+        shrinkAxisWidth: function() {
             var plotArea = this,
+                panes = plotArea.panes,
                 axes = plotArea.axes,
-                box = axes[0].box.clone(),
+                axisBox = axisGroupBox(axes),
+                overflowX = 0,
                 i,
-                length = axes.length;
+                currentPane,
+                currentAxis;
 
-            for (i = 1; i < length; i++) {
-                box.wrap(axes[i].box);
+            for (i = 0; i < panes.length; i++) {
+                currentPane = panes[i];
+
+                if (currentPane.axes.length > 0) {
+                    overflowX = math.max(
+                        overflowX,
+                        axisBox.width() - currentPane.contentBox.width()
+                    );
+                }
             }
 
-            return box;
-        },
-
-        shrinkAxes: function() {
-            var plotArea = this,
-                box = plotArea.box,
-                axisBox = plotArea.axisBox(),
-                overflowY = axisBox.height() - box.height(),
-                overflowX = axisBox.width() - box.width(),
-                axes = plotArea.axes,
-                currentAxis,
-                vertical,
-                i,
-                length = axes.length;
-
-            // Shrink all axes so they don't overflow out of the bounding box
-            for (i = 0; i < length; i++) {
+            for (i = 0; i < axes.length; i++) {
                 currentAxis = axes[i];
-                vertical = currentAxis.options.vertical;
 
-                currentAxis.reflow(
-                    currentAxis.box.shrink(
-                        vertical ? 0 : overflowX,
-                        vertical ? overflowY : 0
-                    )
-                );
+                if (!currentAxis.options.vertical) {
+                    currentAxis.reflow(currentAxis.box.shrink(overflowX, 0));
+                }
             }
         },
 
-        shrinkAdditionalAxes: function(xAxes, yAxes) {
+        shrinkAxisHeight: function() {
             var plotArea = this,
-                axes = plotArea.axes,
-                xAnchor = xAxes[0],
-                yAnchor = yAxes[0],
-                anchorLineBox = xAnchor.lineBox().clone().wrap(yAnchor.lineBox()),
-                overflowX,
+                panes = plotArea.panes,
+                i,
+                currentPane,
+                axes,
                 overflowY,
-                currentAxis,
-                vertical,
-                lineBox,
-                i,
-                length = axes.length;
+                j,
+                currentAxis;
 
-            for (i = 0; i < length; i++) {
-                currentAxis = axes[i];
-                vertical = currentAxis.options.vertical;
-                lineBox = currentAxis.lineBox();
-
-                overflowX = math.max(0, lineBox.x2 - anchorLineBox.x2) +
-                            math.max(0, anchorLineBox.x1 - lineBox.x1);
-
-                overflowY = math.max(0, lineBox.y2 - anchorLineBox.y2) +
-                            math.max(0, anchorLineBox.y1 - lineBox.y1);
-
-                currentAxis.reflow(
-                    currentAxis.box.shrink(
-                        vertical ? 0 : overflowX,
-                        vertical ? overflowY : 0
-                    )
+            for (i = 0; i < panes.length; i++) {
+                currentPane = panes[i];
+                axes = currentPane.axes,
+                overflowY = math.max(
+                    0,
+                    axisGroupBox(axes).height() - currentPane.contentBox.height()
                 );
+
+                for (j = 0; j < axes.length; j++) {
+                    currentAxis = axes[j];
+
+                    if (currentAxis.options.vertical) {
+                        currentAxis.reflow(
+                            currentAxis.box.shrink(0, overflowY)
+                        );
+                    }
+                }
             }
         },
 
         fitAxes: function() {
             var plotArea = this,
+                panes = plotArea.panes,
                 axes = plotArea.axes,
-                box = plotArea.box,
-                axisBox = plotArea.axisBox(),
-                offsetX = box.x1 - axisBox.x1,
-                offsetY = box.y1 - axisBox.y1,
+                paneAxes,
+                paneBox,
+                axisBox,
+                offsetX = 0,
+                offsetY,
+                currentPane,
                 currentAxis,
                 i,
-                length = axes.length;
+                j;
 
-            for (i = 0; i < length; i++) {
+            for (i = 0; i < panes.length; i++) {
+                currentPane = panes[i];
+                paneAxes = currentPane.axes;
+                paneBox = currentPane.contentBox;
+
+                if (paneAxes.length > 0) {
+                    axisBox = axisGroupBox(paneAxes);
+
+                    // OffsetX is calculated and applied globally
+                    offsetX = math.max(offsetX, paneBox.x1 - axisBox.x1);
+
+                    // OffsetY is calculated and applied per pane
+                    offsetY = math.max(paneBox.y1 - axisBox.y1, paneBox.y2 - axisBox.y2);
+
+                    for (j = 0; j < paneAxes.length; j++) {
+                        currentAxis = paneAxes[j];
+
+                        currentAxis.reflow(
+                            currentAxis.box.translate(0, offsetY)
+                        );
+                    }
+                }
+            }
+
+            for (i = 0; i < axes.length; i++) {
                 currentAxis = axes[i];
 
                 currentAxis.reflow(
-                    currentAxis.box.translate(offsetX, offsetY)
+                    currentAxis.box.translate(offsetX, 0)
                 );
             }
         },
 
         reflowAxes: function() {
             var plotArea = this,
+                panes = plotArea.panes,
+                i,
                 axes = plotArea.axes,
                 xAxes = grep(axes, (function(axis) { return !axis.options.vertical; })),
-                yAxes = grep(axes, (function(axis) { return axis.options.vertical; })),
-                i,
-                length = axes.length;
+                yAxes = grep(axes, (function(axis) { return axis.options.vertical; }));
 
-            for (i = 0; i < length; i++) {
-                axes[i].reflow(plotArea.box);
+            for (i = 0; i < panes.length; i++) {
+                plotArea.reflowPaneAxes(panes[i]);
             }
 
             plotArea.alignAxes(xAxes, yAxes);
-            plotArea.shrinkAdditionalAxes(xAxes, yAxes);
+            plotArea.shrinkAxisWidth();
             plotArea.alignAxes(xAxes, yAxes);
-            plotArea.shrinkAxes();
+            plotArea.shrinkAxisHeight();
             plotArea.alignAxes(xAxes, yAxes);
             plotArea.fitAxes();
+        },
+
+        reflowPaneAxes: function(pane) {
+            var axes = pane.axes,
+                i,
+                length = axes.length;
+
+            if (length > 0) {
+                for (i = 0; i < length; i++) {
+                    axes[i].reflow(pane.contentBox);
+                }
+            }
         },
 
         reflowCharts: function() {
@@ -4252,16 +4333,70 @@
             for (i = 0; i < count; i++) {
                 charts[i].reflow(box);
             }
-
-            plotArea.box = box;
         },
 
+        reflowPanes: function() {
+            var plotArea = this,
+                box = plotArea.box,
+                panes = plotArea.panes,
+                i,
+                panesLength = panes.length,
+                currentPane,
+                paneBox,
+                remainingHeight = box.height(),
+                remainingPanes = panesLength,
+                autoHeightPanes = 0,
+                top = box.y1,
+                height,
+                percents;
+
+            for (i = 0; i < panesLength; i++) {
+                currentPane = panes[i];
+                height = currentPane.options.height;
+
+                currentPane.options.width = box.width();
+
+                if (!currentPane.options.height) {
+                    autoHeightPanes++;
+                } else {
+                    if (height.indexOf && height.indexOf("%")) {
+                        percents = parseInt(height, 10) / 100;
+                        currentPane.options.height = percents * box.height();
+                    }
+
+                    currentPane.reflow(box.clone());
+
+                    remainingHeight -= currentPane.options.height;
+                }
+            }
+
+            for (i = 0; i < panesLength; i++) {
+                currentPane = panes[i];
+
+                if (!currentPane.options.height) {
+                    currentPane.options.height = remainingHeight / autoHeightPanes;
+                }
+            }
+
+            for (i = 0; i < panesLength; i++) {
+                currentPane = panes[i];
+
+                paneBox = box
+                    .clone()
+                    .move(box.x1, top);
+
+                currentPane.reflow(paneBox);
+
+                remainingPanes--;
+                top += currentPane.options.height;
+            }
+        },
+
+        // TODO: Move to Axis class
         renderGridLines: function(view, axis, secondaryAxis) {
             var plotArea = this,
                 options = axis.options,
                 vertical = options.vertical,
-                crossingSlot = axis.getSlot(options.axisCrossingValue),
-                secAxisPos = round(crossingSlot[vertical ? "y1" : "x1"]),
                 lineBox = secondaryAxis.lineBox(),
                 lineStart = lineBox[vertical ? "x1" : "y1"],
                 lineEnd = lineBox[vertical ? "x2" : "y2" ],
@@ -4301,53 +4436,110 @@
                         stroke: line.options.color,
                         dashType: line.options.dashType
                     },
-                    linePos = round(line.pos);
-
-                if (secAxisPos === linePos && secondaryAxis.options.line.visible) {
-                    return null;
-                }
+                    linePos = round(line.pos),
+                    secondaryAxisBox = secondaryAxis.lineBox();
 
                 if (vertical) {
-                    return view.createLine(
-                        lineStart, linePos, lineEnd, linePos,
-                        gridLineOptions);
+                    if (!secondaryAxis.options.line.visible || secondaryAxisBox.y1 !== linePos) {
+                        return view.createLine(
+                            lineStart, linePos, lineEnd, linePos,
+                            gridLineOptions);
+                    }
                 } else {
-                    return view.createLine(
-                        linePos, lineStart, linePos, lineEnd,
-                        gridLineOptions);
+                    if (!secondaryAxis.options.line.visible || secondaryAxisBox.x1 !== linePos) {
+                        return view.createLine(
+                            linePos, lineStart, linePos, lineEnd,
+                            gridLineOptions);
+                    }
                 }
             });
         },
 
+        renderAllGridLines: function(view) {
+            var plotArea = this,
+                axes = plotArea.axes,
+                gridLines = [],
+                i,
+                j,
+                axis,
+                altAxis;
+
+            for (i = 0; i < axes.length; i++) {
+                axis = axes[i];
+                for (j = i; j < axes.length; j++) {
+                    altAxis = axes[j];
+
+                    if (axis.options.vertical !== altAxis.options.vertical) {
+                        append(gridLines, plotArea.renderGridLines(view, axis, altAxis));
+                        append(gridLines, plotArea.renderGridLines(view, altAxis, axis));
+                    }
+                }
+            }
+
+            return gridLines;
+        },
+
+        backgroundBox: function() {
+            var plotArea = this,
+                axes = plotArea.axes,
+                axesCount = axes.length,
+                lineBox,
+                box,
+                i,
+                j,
+                axisA,
+                axisB;
+
+            for (i = 0; i < axesCount; i++) {
+                axisA = axes[i];
+
+                for (j = 0; j < axesCount; j++) {
+                    axisB = axes[j];
+
+                    if (axisA.options.vertical !== axisB.options.vertical) {
+                        lineBox = axisA.lineBox().clone().wrap(axisB.lineBox());
+
+                        if (!box) {
+                            box = lineBox;
+                        } else {
+                            box = box.wrap(lineBox);
+                        }
+                    }
+                }
+            }
+
+            return box || plotArea.box;
+        },
+
         getViewElements: function(view) {
             var plotArea = this,
+                bgBox = plotArea.backgroundBox(),
                 options = plotArea.options,
                 userOptions = options.plotArea,
-                axisY = plotArea.axisY,
-                axisX = plotArea.axisX,
-                gridLinesY = axisY ? plotArea.renderGridLines(view, axisY, axisX) : [],
-                gridLinesX = axisX ? plotArea.renderGridLines(view, axisX, axisY) : [],
-                childElements = ChartElement.fn.getViewElements.call(plotArea, view),
                 border = userOptions.border || {},
-                elements = [
-                    view.createRect(plotArea.box, {
-                        fill: userOptions.background,
-                        zIndex: -2,
-                        strokeWidth: 0.1
-                    }),
-                    view.createRect(plotArea.box, {
-                        id: options.id,
-                        data: { modelId: options.modelId },
-                        stroke: border.width ? border.color : "",
-                        strokeWidth: border.width,
-                        fill: WHITE,
-                        fillOpacity: 0,
-                        zIndex: -1,
-                        dashType: border.dashType
-                    })
-                ];
+                elements = plotArea.renderAllGridLines(view);
 
-            return [].concat(gridLinesY, gridLinesX, childElements, elements);
+            append(elements, ChartElement.fn.getViewElements.call(plotArea, view));
+            append(elements, [
+                view.createRect(bgBox, {
+                    fill: userOptions.background,
+                    fillOpacity: userOptions.opacity,
+                    zIndex: -2,
+                    strokeWidth: 0.1
+                }),
+                view.createRect(plotArea.box, {
+                    id: options.id,
+                    data: { modelId: options.modelId },
+                    stroke: border.width ? border.color : "",
+                    strokeWidth: border.width,
+                    fill: WHITE,
+                    fillOpacity: 0,
+                    zIndex: -1,
+                    dashType: border.dashType
+                })
+            ]);
+
+            return elements;
         }
     });
 
@@ -4359,6 +4551,8 @@
             plotArea.namedValueAxes = {};
             plotArea.valueAxisRangeTracker = new AxisGroupRangeTracker(axisOptions.valueAxis);
 
+            // TODO: Should be determined per-pane.
+            // Refactor when implementing multiple category axis support.
             if (series.length > 0) {
                 plotArea.invertAxes = inArray(
                     series[0].type, [BAR, VERTICAL_LINE, VERTICAL_AREA]
@@ -4376,8 +4570,7 @@
         },
 
         render: function() {
-            var plotArea = this,
-                series = plotArea.series;
+            var plotArea = this;
 
             plotArea.createCategoryAxis();
 
@@ -4385,20 +4578,63 @@
                 plotArea.aggregateDateSeries();
             }
 
-            series = plotArea.series;
-            plotArea.createAreaChart(grep(series, function(s) {
-                return inArray(s.type, [AREA, VERTICAL_AREA]);
-            }));
-
-            plotArea.createBarChart(grep(series, function(s) {
-                return inArray(s.type, [BAR, COLUMN]);
-            }));
-
-            plotArea.createLineChart(grep(series, function(s) {
-                return inArray(s.type, [LINE, VERTICAL_LINE]);
-            }));
+            plotArea.createCharts();
 
             plotArea.createValueAxes();
+        },
+
+        createCharts: function() {
+            var plotArea = this,
+                series = plotArea.series,
+                seriesByPane = {},
+                paneNames = [],
+                i,
+                pane,
+                currentSeries,
+                paneSeries;
+
+            for (i = 0; i < series.length; i++) {
+                currentSeries = series[i];
+                pane = plotArea.seriesPaneName(currentSeries);
+                paneNames.push(pane);
+
+                if (seriesByPane[pane]) {
+                    seriesByPane[pane].push(currentSeries);
+                } else {
+                    seriesByPane[pane] = [currentSeries];
+                }
+            }
+
+            for (i = 0; i < paneNames.length; i++) {
+                paneSeries = seriesByPane[paneNames[i]];
+
+                plotArea.createAreaChart(
+                    plotArea.filterSeriesByType(paneSeries, [AREA, VERTICAL_AREA])
+                );
+
+                plotArea.createBarChart(
+                    plotArea.filterSeriesByType(paneSeries, [COLUMN, BAR])
+                );
+
+                plotArea.createLineChart(
+                    plotArea.filterSeriesByType(paneSeries, [LINE, VERTICAL_LINE])
+                );
+            }
+        },
+
+        filterSeriesByType: function(series, types) {
+            var i,
+                currentSeries,
+                result = [];
+
+            for (i = 0; i < series.length; i++) {
+                currentSeries = series[i];
+                if (inArray(currentSeries.type, types)) {
+                    result.push(currentSeries);
+                }
+            }
+
+            return result;
         },
 
         aggregateDateSeries: function() {
@@ -4479,6 +4715,17 @@
             plotArea.valueAxisRangeTracker.update(chart.valueAxisRanges);
 
             PlotAreaBase.fn.appendChart.call(plotArea, chart);
+        },
+
+        seriesPaneName: function(series) {
+            var plotArea = this,
+                options = plotArea.options,
+                axisName = series.axis,
+                axisOptions = [].concat(options.valueAxis),
+                axis = $.grep(axisOptions, function(a) { return a.name === axisName; })[0],
+                paneName = axis.pane || "default";
+
+            return paneName;
         },
 
         createBarChart: function(series) {
@@ -5558,6 +5805,31 @@
         return array.length === 1 ? array[0] : array;
     }
 
+    function clipValue(value, min, max) {
+        return math.max(math.min(value, max), min);
+    }
+
+    function axisGroupBox(axes) {
+        var box = new Box2D(),
+            i,
+            length = axes.length,
+            currentAxis;
+
+        if (length > 0) {
+            for (i = 0; i < length; i++) {
+                currentAxis = axes[i];
+
+                if (i === 0) {
+                    box = currentAxis.box.clone();
+                } else {
+                    box.wrap(currentAxis.box);
+                }
+            }
+        }
+
+        return box;
+    }
+
     // Exports ================================================================
 
     dataviz.ui.plugin(Chart);
@@ -5583,6 +5855,7 @@
         Legend: Legend,
         LineChart: LineChart,
         LinePoint: LinePoint,
+        Pane: Pane,
         PieAnimation: PieAnimation,
         PieAnimationDecorator: PieAnimationDecorator,
         PieChart: PieChart,

@@ -864,11 +864,10 @@
                     }];
 
                 function createPlotArea(categoryAxis, valueAxis, options) {
-                    plotArea = new dataviz.CategoricalPlotArea(barSeriesData, {
+                    plotArea = new dataviz.CategoricalPlotArea(barSeriesData, kendo.deepExtend({
                         categoryAxis: categoryAxis,
-                        valueAxis: valueAxis,
-                        plotArea: options
-                    });
+                        valueAxis: valueAxis
+                    }, options));
 
                     stubMethod(dataviz.NumericAxis.fn, "getViewElements", function() { return []; },
                         function() {
@@ -896,6 +895,21 @@
                     });
 
                     equal(view.log.line.length, 7);
+                });
+
+                test("renders gridlines over hidden value axis", function() {
+                    createPlotArea({
+                        categories: ["A"],
+                        majorGridLines: {
+                            visible: true
+                        }
+                    }, {
+                        line: {
+                            visible: false
+                        }
+                    });
+
+                    equal(view.log.line.length, 8);
                 });
 
                 test("should not render gridlines for numeric axis", function() {
@@ -962,6 +976,53 @@
 
                     createPlotArea(categoryAxis, valueAxis);
                     equals(view.log.line[0].x2, plotArea.namedValueAxes.primary.lineBox().x2);
+                });
+
+                // ------------------------------------------------------------
+                module("Categorical PlotArea / Major Gridlines / Panes", {
+                    setup: function() {
+                        moduleSetup();
+                    }
+                });
+
+                test("renders gridlines when value axis is in different pane", function() {
+                    createPlotArea({
+                            categories: ["A"],
+                            majorGridLines: {
+                                visible: true
+                            }
+                        }, {
+                            pane: "bottom"
+                        }, {
+                            panes: [{
+                                name: "top"
+                            }, {
+                                name: "bottom"
+                            }]
+                    });
+
+                    equal(view.log.line.length, 8);
+                });
+
+                test("renders grid lines in each pane", function() {
+                    createPlotArea({
+                            categories: ["A"],
+                            majorGridLines: {
+                                visible: true
+                            }
+                        }, [{
+                            pane: "top"
+                        },{
+                            pane: "bottom"
+                        }], {
+                            panes: [{
+                                name: "top"
+                            }, {
+                                name: "bottom"
+                            }]
+                    });
+
+                    equal(view.log.line.length, 15);
                 });
 
                 // ------------------------------------------------------------
@@ -1109,7 +1170,7 @@
 
                     plotArea.reflow(chartBox);
 
-                    sameBox(plotArea.box, new Box2D(136, 117.5, 990, 966), TOLERANCE);
+                    sameBox(plotArea.box, new Box2D(110, 110, 990, 990), TOLERANCE);
                 });
 
                 test("should not render plot area with borders", function() {
@@ -1119,10 +1180,12 @@
                         valueAxis = { };
 
                     createPlotArea(categoryAxis, valueAxis, {
-                        border: {
-                            color: "red",
-                            width: 2,
-                            dashType: "dot"
+                        plotArea: {
+                            border: {
+                                color: "red",
+                                width: 2,
+                                dashType: "dot"
+                            }
                         }
                     });
 
@@ -1139,10 +1202,610 @@
                         valueAxis = { };
 
                     createPlotArea(categoryAxis, valueAxis, {
-                        background: "color"
+                        plotArea: {
+                            background: "color"
+                        }
                     });
-                    var plotAreaRect = view.log.rect[1];
-                    equal(plotAreaRect.style.fill, "color");
+
+                    equal(view.log.rect[1].style.fill, "color");
+                });
+
+                test("should set plot area background opacity", function() {
+                    var categoryAxis = {
+                            categories: ["A"]
+                        },
+                        valueAxis = { };
+
+                    createPlotArea(categoryAxis, valueAxis, {
+                        plotArea: {
+                            background: "color",
+                            opacity: 0.5
+                        }
+                    });
+
+                    equal(view.log.rect[1].style.fillOpacity, 0.5);
+                });
+
+            })();
+
+            (function() {
+                var plotArea;
+
+                function createPlotArea(options) {
+                    plotArea = new dataviz.CategoricalPlotArea([{
+                        name: "Value A",
+                        type: "column",
+                        data: [100]
+                    }], kendo.deepExtend({
+                        categoryAxis: {
+                            categories: ["A"]
+                        },
+                        valueAxis: { },
+                    }, options));
+
+                    plotArea.reflow(chartBox);
+                }
+
+                // ------------------------------------------------------------
+                module("Categorical PlotArea / Panes / Vertical", {
+                    setup: function() {
+                        moduleSetup();
+                    }
+                });
+
+                test("default pane is created", function() {
+                    createPlotArea();
+
+                    equals(plotArea.panes.length, 1);
+                });
+
+                test("default pane height is same as plot area height", function() {
+                    createPlotArea();
+
+                    equals(plotArea.panes[0].box.height(), plotArea.box.height());
+                });
+
+                test("default pane width is same as plot area width", function() {
+                    createPlotArea();
+
+                    equals(plotArea.panes[0].box.width(), plotArea.box.width());
+                });
+
+                test("panes are created", function() {
+                    createPlotArea({
+                        panes: [{ name: "a" }, { name: "b" }]
+                    });
+
+                    equals(plotArea.panes.length, 2);
+                });
+
+                test("two panes occupy 50% height each by default", function() {
+                    createPlotArea({
+                        panes: [{ name: "a" }, { name: "b" }]
+                    });
+
+                    var halfHeight = plotArea.box.height() / 2;
+                    equals(plotArea.panes[0].box.height(), halfHeight);
+                    equals(plotArea.panes[1].box.height(), halfHeight);
+                });
+
+                test("second pane is positioned below the first", function() {
+                    createPlotArea({
+                        panes: [{ name: "a" }, { name: "b" }]
+                    });
+
+                    equals(plotArea.panes[0].box.y1, 100);
+                    equals(plotArea.panes[1].box.y1, 550);
+                });
+
+                test("pane occupies set height in pixels", function() {
+                    createPlotArea({
+                        panes: [{ name: "a", height: 200 }, { name: "b" }]
+                    });
+
+                    equals(plotArea.panes[0].box.height(), 200);
+                });
+
+                test("pane occupies remaining height (in pixels)", function() {
+                    createPlotArea({
+                        panes: [{ name: "a", height: 200 }, { name: "b" }]
+                    });
+
+                    equals(plotArea.panes[1].box.height(), 700);
+                });
+
+                test("first pane occupies set height in percents", function() {
+                    createPlotArea({
+                        panes: [{ name: "a", height: "30%" }, { name: "b" }]
+                    });
+
+                    equals(plotArea.panes[0].box.height(), 270);
+                });
+
+                test("second pane occupies remaining height (in percents)", function() {
+                    createPlotArea({
+                        panes: [{ name: "a", height: "30%" }, { name: "b" }]
+                    });
+
+                    equals(plotArea.panes[1].box.height(), 630);
+                });
+
+                test("second pane occupies set height in percents", function() {
+                    createPlotArea({
+                        panes: [{ name: "a" }, { name: "b", height: "30%" }]
+                    });
+
+                    equals(plotArea.panes[1].box.height(), 270);
+                });
+
+                test("first pane occupies remaining height (in percents)", function() {
+                    createPlotArea({
+                        panes: [{ name: "a" }, { name: "b", height: "30%" }]
+                    });
+
+                    equals(plotArea.panes[0].box.height(), 630);
+                });
+
+                test("top margin is included in pane height", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a", height: 200, margin: { top: 10 }
+                        }, {
+                            name: "b"
+                        }]
+                    });
+
+                    equals(plotArea.panes[0].box.height(), 200);
+                    equals(plotArea.panes[1].box.height(), 700);
+                });
+
+                test("top margin is applied", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a", height: 200, margin: { top: 10 }
+                        }, {
+                            name: "b"
+                        }]
+                    });
+
+                    equals(plotArea.panes[0].paddingBox.y1, 110);
+                });
+
+                test("bottom margin is included in pane height", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a", height: 200, margin: { bottom: 10 }
+                        }, {
+                            name: "b"
+                        }]
+                    });
+
+                    equals(plotArea.panes[0].box.height(), 200);
+                    equals(plotArea.panes[1].box.height(), 700);
+                });
+
+                test("bottom margin is applied", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a", height: 200, margin: { bottom: 10 }
+                        }, {
+                            name: "b"
+                        }]
+                    });
+
+                    equals(plotArea.panes[0].paddingBox.y2, 290);
+                });
+
+                test("left margin is included in pane width", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a", margin: { left: 10 }
+                        }, {
+                            name: "b"
+                        }]
+                    });
+
+                    equals(plotArea.panes[0].box.width(), plotArea.panes[1].box.width());
+                });
+
+                test("left margin is applied to pane", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a", margin: { left: 10 }
+                        }, {
+                            name: "b"
+                        }]
+                    });
+
+                    equals(plotArea.panes[0].paddingBox.x1, 110);
+                });
+
+                test("left margin offsets value axis", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a", margin: { left: 10 }
+                        }, {
+                            name: "b"
+                        }]
+                    });
+
+                    equals(plotArea.namedValueAxes["primary"].box.x1, 110);
+                });
+
+                test("right margin is included in pane width", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a", margin: { right: 10 }
+                        }, {
+                            name: "b"
+                        }]
+                    });
+
+                    equals(plotArea.panes[0].box.width(), plotArea.panes[1].box.width());
+                });
+
+                test("right margin is applied to pane", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a", margin: { right: 10 }
+                        }, {
+                            name: "b"
+                        }]
+                    });
+
+                    equals(plotArea.panes[0].paddingBox.x2, 990);
+                });
+
+                test("right margin offsets value axis", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a", margin: { right: 10 }
+                        }, {
+                            name: "b"
+                        }],
+                        categoryAxis: {
+                            axisCrossingValue: 1
+                        }
+                    });
+
+                    equals(plotArea.namedValueAxes["primary"].box.x2, 990);
+                });
+
+                test("value axis is rendered in the first pane by default", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a",
+                        }, {
+                            name: "b"
+                        }]
+                    });
+
+                    equals(plotArea.namedValueAxes["primary"].box.y1, 100);
+                });
+
+                test("category axis is rendered in the first pane by default", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a",
+                        }, {
+                            name: "b"
+                        }]
+                    });
+
+                    equals(plotArea.categoryAxis.box.y1, 526);
+                });
+
+                test("value axis is moved to the associated pane", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a",
+                        }, {
+                            name: "b"
+                        }],
+                        valueAxis: {
+                            pane: "b"
+                        }
+                    });
+
+                    equals(plotArea.namedValueAxes["primary"].box.y1, 550);
+                });
+
+                test("value axis height matches the associated pane", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a",
+                        }, {
+                            name: "b"
+                        }],
+                        valueAxis: {
+                            pane: "b"
+                        }
+                    });
+
+                    var axisBox = plotArea.namedValueAxes["primary"].box;
+                    var paneBox = plotArea.panes[1].box;
+
+                    equals(axisBox.y1, paneBox.y1);
+                    equals(axisBox.y2, paneBox.y2);
+                });
+
+                test("category axis remains in the first pane", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a",
+                        }, {
+                            name: "b"
+                        }],
+                        valueAxis: {
+                            pane: "b"
+                        }
+                    });
+
+                    equals(plotArea.categoryAxis.box.y1, 526);
+                });
+
+                test("category axis fits in the first pane", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a",
+                        }, {
+                            name: "b"
+                        }],
+                        valueAxis: {
+                            pane: "b"
+                        }
+                    });
+
+                    equals(plotArea.categoryAxis.box.y2, plotArea.panes[0].box.y2);
+                });
+
+                test("category axis fits in the second pane", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a",
+                        }, {
+                            name: "b"
+                        }],
+                        categoryAxis: {
+                            pane: "b"
+                        }
+                    });
+
+                    equals(plotArea.categoryAxis.box.y2, plotArea.panes[1].box.y2);
+                });
+
+                test("right aligned value axis fits in the associated pane", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a",
+                        }, {
+                            name: "b"
+                        }],
+                        valueAxis: {
+                            pane: "b"
+                        },
+                        categoryAxis: {
+                            axisCrossingValue: 1
+                        }
+                    });
+
+                    equals(plotArea.namedValueAxes["primary"].box.x2,
+                           plotArea.panes[1].box.x2);
+                });
+
+                test("right aligned value axis height matches the associated pane", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a",
+                        }, {
+                            name: "b"
+                        }],
+                        valueAxis: {
+                            pane: "b"
+                        },
+                        categoryAxis: {
+                            axisCrossingValue: 1
+                        }
+                    });
+
+                    var axisBox = plotArea.namedValueAxes["primary"].box;
+                    var paneBox = plotArea.panes[1].box;
+
+                    equals(axisBox.y1, paneBox.y1);
+                    equals(axisBox.y2, paneBox.y2);
+                });
+
+                test("secondary value axis is positioned in the designated pane", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a",
+                        }, {
+                            name: "b"
+                        }],
+                        valueAxis: [{
+                        }, {
+                            name: "secondary",
+                            pane: "b"
+                        }]
+                    });
+
+                    equals(plotArea.namedValueAxes["secondary"].box.y1, 550);
+                });
+
+                test("secondary value axis is aligned to category axis", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a",
+                        }, {
+                            name: "b"
+                        }],
+                        valueAxis: [{
+                        }, {
+                            name: "secondary",
+                            pane: "b",
+                            labels: {
+                                template: "long text"
+                            }
+                        }]
+                    });
+
+                    equals(plotArea.namedValueAxes["secondary"].lineBox().x1,
+                           plotArea.categoryAxis.lineBox().x1);
+                });
+
+                test("secondary value axis is aligned to category axis end", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a",
+                        }, {
+                            name: "b"
+                        }],
+                        valueAxis: [{
+                        }, {
+                            name: "secondary",
+                            pane: "b"
+                        }],
+                        categoryAxis: {
+                            axisCrossingValue: [0, 1]
+                        }
+                    });
+
+                    equals(plotArea.namedValueAxes["secondary"].lineBox().x1,
+                           plotArea.categoryAxis.lineBox().x2);
+                });
+
+                test("right aligned secondary value axis fits in the associated pane", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a",
+                        }, {
+                            name: "b"
+                        }],
+                        valueAxis: [{
+                        }, {
+                            name: "secondary",
+                            pane: "b"
+                        }],
+                        categoryAxis: {
+                            axisCrossingValue: [0, 1]
+                        }
+                    });
+
+                    equals(plotArea.namedValueAxes["secondary"].box.x2 -
+                           plotArea.panes[1].box.x2, 0);
+                });
+
+                test("left anchor axis is assigned per pane", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a",
+                        }, {
+                            name: "b"
+                        }],
+                        valueAxis: [{
+                        }, {
+                            name: "secondary",
+                            pane: "b"
+                        }]
+                    });
+
+                    equals(plotArea.namedValueAxes["secondary"].box.x2,
+                           plotArea.namedValueAxes["primary"].box.x2);
+                });
+
+                test("right anchor axis is assigned per pane", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a"
+                        }, {
+                            name: "b"
+                        }],
+                        valueAxis: [{
+                        }, {
+                            name: "secondary",
+                            pane: "b"
+                        }],
+                        categoryAxis: {
+                            axisCrossingValue: [1, 1]
+                        }
+                    });
+
+                    equals(plotArea.namedValueAxes["secondary"].box.x1,
+                           plotArea.namedValueAxes["primary"].box.x1);
+                });
+
+                // ------------------------------------------------------------
+                module("Categorical PlotArea / Panes / Title", {
+                    setup: function() {
+                        moduleSetup();
+                    }
+                });
+
+                test("title is not visible by default", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a"
+                        }]
+                    });
+
+                    var textBox = plotArea.panes[0].title;
+                    equals(textBox, null);
+                });
+
+                test("title is aligned in pane center", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a",
+                            title: {
+                                text: "Title",
+                                align: "center"
+                            }
+                        }]
+                    });
+
+                    var textBox = plotArea.panes[0].title.children[0];
+                    equals(textBox.box.x1, 528.5, TOLERANCE);
+                });
+
+                test("title is aligned left by default", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a",
+                            title: {
+                                text: "Title"
+                            }
+                        }]
+                    });
+
+                    var textBox = plotArea.panes[0].title.children[0];
+                    equals(textBox.box.x1, 100);
+                });
+
+                test("title is aligned right", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a",
+                            title: {
+                                text: "Title",
+                                align: "right"
+                            }
+                        }]
+                    });
+
+                    var textBox = plotArea.panes[0].title.children[0];
+                    equals(textBox.box.x1, 957, TOLERANCE);
+                });
+
+                test("title text can be set directly", function() {
+                    createPlotArea({
+                        panes: [{
+                            name: "a",
+                            title: "Title"
+                        }]
+                    });
+
+                    var textBox = plotArea.panes[0].title.children[0];
+                    equals(textBox.children[0].content, "Title");
                 });
 
             })();

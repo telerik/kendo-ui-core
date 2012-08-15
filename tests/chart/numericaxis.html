@@ -1356,7 +1356,7 @@
                 });
 
                 test("returns maximum value for righttmost point", function() {
-                    equals(numericAxis.getValue(new Point2D(800, 0)), 1.2);
+                    equals(numericAxis.getValue(new Point2D(799, 0)), 1.2);
                 });
 
                 test("returns value for middle point", function() {
@@ -1377,7 +1377,7 @@
                 });
 
                 test("returns minimum value for righttmost point", function() {
-                    equals(numericAxis.getValue(new Point2D(800, 0)), 0);
+                    equals(numericAxis.getValue(new Point2D(799, 0)), 0);
                 });
 
                 test("returns maximum value for leftmost point", function() {
@@ -1408,7 +1408,7 @@
                 });
 
                 test("returns minimum value for bottommost point", function() {
-                    equals(numericAxis.getValue(new Point2D(0, 600)), 0);
+                    equals(numericAxis.getValue(new Point2D(0, 599)), 0);
                 });
 
                 test("returns maximum value for topmost point", function() {
@@ -1437,7 +1437,7 @@
                 });
 
                 test("returns maximum value for bottommost point", function() {
-                    equals(numericAxis.getValue(new Point2D(0, 600)), 1.2);
+                    equals(numericAxis.getValue(new Point2D(0, 599)), 1.2);
                 });
 
                 test("returns value for middle point", function() {

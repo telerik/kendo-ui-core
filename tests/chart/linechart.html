@@ -461,6 +461,40 @@
                 });
 
                 // ------------------------------------------------------------
+                module("Line Chart / Stack / Panes");
+
+                test("charts in different panes are not stacked", function() {
+                    var chart = createChart({
+                        series: [{
+                            stack: true,
+                            type: "line",
+                            data: [1]
+                        }, {
+                            type: "line",
+                            data: [2],
+                            axis: "b"
+                        }],
+                        panes: [{
+                            name: "top"
+                        }, {
+                            name: "bottom"
+                        }],
+                        valueAxis: [{
+                        }, {
+                            name: "b",
+                            pane: "bottom"
+                        }],
+                        categoryAxis: {
+                            categories: ["A"]
+                        }
+                    });
+
+                    var lineCharts = chart._model._plotArea.charts;
+                    equals(lineCharts[0].points[0].plotValue, undefined);
+                    equals(lineCharts[1].points[0].plotValue, undefined);
+                });
+
+                // ------------------------------------------------------------
                 module("Line Chart / Rendering", {
                     setup: function() {
                         setupLineChart(plotArea, {

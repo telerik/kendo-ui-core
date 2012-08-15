@@ -402,7 +402,7 @@
                 box = box ? box.wrap(currentChild.box) : currentChild.box.clone();
             }
 
-            element.box = box;
+            element.box = box || targetBox;
         },
 
         getViewElements: function(view) {
@@ -550,6 +550,7 @@
                 width: 0
             },
             background: "",
+            shrinkToFit: false,
             width: 0,
             height: 0,
             visible: true
@@ -560,28 +561,32 @@
                 box,
                 contentBox,
                 options = element.options,
-                children = element.children,
                 margin = getSpacing(options.margin),
                 padding = getSpacing(options.padding),
-                border = options.border,
-                borderWidth = border.width;
+                borderWidth = options.border.width;
+
+            function reflowPaddingBox() {
+                element.align(targetBox, X, options.align);
+                element.align(targetBox, Y, options.vAlign);
+                element.paddingBox = box.clone().unpad(margin).unpad(borderWidth);
+            }
 
             ChartElement.fn.reflow.call(element, targetBox);
 
-            if (children.length === 0) {
+            if (options.width && options.height) {
                 box = element.box = new Box2D(0, 0, options.width, options.height);
             } else {
                 box = element.box;
             }
 
-            contentBox = element.contentBox = box.clone();
-
-            box.pad(padding).pad(borderWidth).pad(margin);
-
-            element.align(targetBox, X, options.align);
-            element.align(targetBox, Y, options.vAlign);
-
-            element.paddingBox = box.clone().unpad(margin).unpad(borderWidth);
+            if (options.shrinkToFit) {
+                reflowPaddingBox();
+                contentBox = element.contentBox = element.paddingBox.clone().unpad(padding);
+            } else {
+                contentBox = element.contentBox = box.clone();
+                box.pad(padding).pad(borderWidth).pad(margin);
+                reflowPaddingBox();
+            }
 
             element.translateChildren(
                 box.x1 - contentBox.x1 + margin.left + borderWidth + padding.left,
@@ -621,6 +626,7 @@
             if (!options.visible) {
                 return [];
             }
+
 
             if (boxElement.hasBox()) {
                 elements.push(
@@ -759,15 +765,15 @@
             var title = this;
             ChartElement.fn.init.call(title, options);
 
+            options = title.options;
             title.append(
-                new TextBox(title.options.text, deepExtend({}, title.options, {
-                    vAlign: title.options.position
+                new TextBox(options.text, deepExtend({}, options, {
+                    vAlign: options.position
                 }))
             );
         },
 
         options: {
-            text: "",
             color: BLACK,
             position: TOP,
             align: CENTER,
@@ -782,6 +788,23 @@
             title.box.snapTo(targetBox, X);
         }
     });
+
+    Title.buildTitle = function(options, parent, defaultOptions) {
+        var title;
+
+        if (typeof options === "string") {
+            options = { text: options };
+        }
+
+        options = deepExtend({ visible: true }, defaultOptions, options);
+
+        if (options && options.visible && options.text) {
+            title = new Title(options);
+            parent.append(title);
+        }
+
+        return title;
+    };
 
     var AxisLabel = TextBox.extend({
         init: function(value, index, dataItem, options) {
@@ -948,7 +971,7 @@
                 axisX = mirror ? box.x1 : box.x2,
                 axisY = mirror ? box.y2 : box.y1,
                 startMargin = 0,
-                endMargin = 0;
+                endMargin = options.line.width;
 
             if (labelsOnTicks && labels.length > 1) {
                 startMargin = labels[0].box[labelSize]() / 2;
@@ -2574,6 +2597,7 @@
         append: append,
         autoFormat: autoFormat,
         autoMajorUnit: autoMajorUnit,
+        boxDiff: boxDiff,
         defined: defined,
         getSpacing: getSpacing,
         inArray: inArray,

@@ -32,6 +32,7 @@
 
             (function() {
                 var categoryAxis,
+                    lineBox,
                     MAX_LABEL_HEIGHT = 17,
                     MAJOR_TICK_HEIGHT = 4,
                     LINE_Y = chartBox.y1,
@@ -45,6 +46,7 @@
                         }, options)
                     );
                     categoryAxis.reflow(chartBox);
+                    lineBox = categoryAxis.lineBox();
                 }
 
                 // ------------------------------------------------------------
@@ -608,46 +610,49 @@
                 });
 
                 // ------------------------------------------------------------
+                var xMid;
+
                 module("Category Axis / Horizontal / Slots", {
                     setup: function() {
                         moduleSetup();
 
                         createCategoryAxis();
+                        xMid = lineBox.center().x;
                     }
                 });
 
                 test("positions slot for first category", function() {
                     var slot = categoryAxis.getSlot(0);
-                    same([slot.x1, slot.x2], [0, chartBox.width() / 2]);
+                    same([slot.x1, slot.x2], [lineBox.x1, xMid]);
                 });
 
                 test("positions slot for first category in reverse", function() {
                     createCategoryAxis({ reverse: true });
                     var slot = categoryAxis.getSlot(0);
-                    same([slot.x1, slot.x2], [chartBox.width() / 2, chartBox.width()]);
+                    same([slot.x1, slot.x2], [xMid, lineBox.x2]);
                 });
 
                 test("positions slot for first w/o labels", function() {
                     createCategoryAxis({ labels: { visible: false } });
                     var slot = categoryAxis.getSlot(0);
-                    same([slot.x1, slot.x2], [0, chartBox.width() / 2]);
+                    same([slot.x1, slot.x2], [lineBox.x1, xMid]);
                 });
 
                 test("positions slot for second category", function() {
                     var slot = categoryAxis.getSlot(1);
-                    same([slot.x1, slot.x2], [chartBox.width() / 2, chartBox.width()]);
+                    same([slot.x1, slot.x2], [xMid, lineBox.x2]);
                 });
 
                 test("positions slot for second category in reverse", function() {
                     createCategoryAxis({ reverse: true });
                     var slot = categoryAxis.getSlot(1);
-                    same([slot.x1, slot.x2], [0, chartBox.width() / 2]);
+                    same([slot.x1, slot.x2], [lineBox.x1, xMid]);
                 });
 
                 test("positions slot for second category w/o labels", function() {
                     createCategoryAxis({ labels: { visible: false } });
                     var slot = categoryAxis.getSlot(1);
-                    same([slot.x1, slot.x2], [chartBox.width() / 2, chartBox.width()]);
+                    same([slot.x1, slot.x2], [xMid, lineBox.x2]);
                 });
 
                 test("slot height is 0", function() {
@@ -660,7 +665,7 @@
                     categoryAxis.reflow(chartBox);
 
                     var slot = categoryAxis.getSlot(0);
-                    same([slot.x1, slot.x2], [0, chartBox.width()]);
+                    same([slot.x1, slot.x2], [lineBox.x1, lineBox.x2]);
                 });
 
                 test("reports range minimum of 0", function() {
@@ -678,48 +683,51 @@
 
                 test("caps from value to categories count", function() {
                     var slot = categoryAxis.getSlot(1000);
-                    equals(slot.x1, chartBox.width());
+                    equals(slot.x1, lineBox.x2);
                 });
 
                 test("to value equals from value when not set", function() {
                     var slot = categoryAxis.getSlot(1000);
-                    equals(slot.x2, chartBox.width());
+                    equals(slot.x2, lineBox.x2);
                 });
 
                 test("value equals from value when smaller", function() {
                     var slot = categoryAxis.getSlot(2, 1);
-                    equals(slot.x2, chartBox.width());
+                    equals(slot.x2, lineBox.x2);
                 });
 
                 // ------------------------------------------------------------
+                var yMid;
+
                 module("Category Axis / Vertical / Slots", {
                     setup: function() {
                         moduleSetup();
 
                         createCategoryAxis({ vertical: true });
+                        yMid = lineBox.center().y;
                     }
                 });
 
                 test("positions slot for first category", function() {
                     var slot = categoryAxis.getSlot(0);
-                    same([slot.y1, slot.y2], [0, chartBox.height() / 2]);
+                    same([slot.y1, slot.y2], [lineBox.y1, yMid]);
                 });
 
                 test("positions slot for first category in reverse", function() {
                     createCategoryAxis({ vertical: true, reverse: true });
                     var slot = categoryAxis.getSlot(0);
-                    same([slot.y1, slot.y2], [chartBox.height() / 2, chartBox.height()]);
+                    same([slot.y1, slot.y2], [yMid, lineBox.y2]);
                 });
 
                 test("positions slot for second category", function() {
                     var slot = categoryAxis.getSlot(1);
-                    same([slot.y1, slot.y2], [chartBox.height() / 2, chartBox.height()]);
+                    same([slot.y1, slot.y2], [yMid, lineBox.y2]);
                 });
 
                 test("positions slot for second category in reverse", function() {
                     createCategoryAxis({ vertical: true, reverse: true });
                     var slot = categoryAxis.getSlot(1);
-                    same([slot.y1, slot.y2], [0, chartBox.height() / 2]);
+                    same([slot.y1, slot.y2], [lineBox.y1, yMid]);
                 });
 
                 test("slot width is 0", function() {
@@ -755,15 +763,15 @@
                 });
 
                 test("returns first category for leftmost point", function() {
-                    equals(categoryAxis.getCategory(new Point2D(0, 0)), "Foo");
+                    equals(categoryAxis.getCategory(new Point2D(1, 0)), "Foo");
                 });
 
                 test("returns last category for righttmost point", function() {
-                    equals(categoryAxis.getCategory(new Point2D(800, 0)), "Baz");
+                    equals(categoryAxis.getCategory(new Point2D(799, 0)), "Baz");
                 });
 
                 test("returns category for middle point", function() {
-                    equals(categoryAxis.getCategory(new Point2D(335, 0)), "Bar");
+                    equals(categoryAxis.getCategory(new Point2D(334, 0)), "Bar");
                 });
 
                 // ------------------------------------------------------------
@@ -781,7 +789,7 @@
                 });
 
                 test("returns first category for righttmost point", function() {
-                    equals(categoryAxis.getCategory(new Point2D(800, 0)), "Foo");
+                    equals(categoryAxis.getCategory(new Point2D(799, 0)), "Foo");
                 });
 
                 test("returns last category for leftmost point", function() {
@@ -789,7 +797,7 @@
                 });
 
                 test("returns category for middle point", function() {
-                    equals(categoryAxis.getCategory(new Point2D(465, 0)), "Bar");
+                    equals(categoryAxis.getCategory(new Point2D(464, 0)), "Bar");
                 });
 
                 // ------------------------------------------------------------
@@ -814,7 +822,7 @@
                 });
 
                 test("returns first category for bottommost point", function() {
-                    equals(categoryAxis.getCategory(new Point2D(0, 600)), "Foo");
+                    equals(categoryAxis.getCategory(new Point2D(0, 599)), "Foo");
                 });
 
                 test("returns last category for topmost point", function() {
@@ -844,7 +852,7 @@
                 });
 
                 test("returns last category for bottommost point", function() {
-                    equals(categoryAxis.getCategory(new Point2D(0, 600)), "Baz");
+                    equals(categoryAxis.getCategory(new Point2D(0, 599)), "Baz");
                 });
 
                 test("returns category for middle point", function() {
