@@ -648,6 +648,39 @@
                 equal(treeview.find(".k-item").length, 2);
             });
 
+            test("re-fetching a node removes subgroup", function() {
+                var i = 1;
+
+                createTreeView({
+                    dataSource: {
+                        transport: {
+                            read: function(options) {
+                                options.success([ { id: i++, hasChildren: true, text: "foo" } ]);
+                            }
+                        },
+                        schema: {
+                            model: {
+                                hasChildren: "hasChildren"
+                            }
+                        }
+                    },
+                    expand: function(e) {
+                        var dataItem = this.dataItem(e.node);
+                        dataItem && dataItem.loaded(false);
+                    }
+                });
+
+                treeviewObject.expand(".k-item");
+
+                treeviewObject.collapse(".k-item:first");
+
+                treeview.find(".k-item .k-group").attr("marked", "marked");
+
+                treeviewObject.expand(".k-item");
+
+                ok(!treeview.find(".k-item .k-group").attr("marked"));
+            });
+
         </script>
 
         <div id="qunit-fixture"> </div>
