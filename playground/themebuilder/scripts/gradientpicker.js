@@ -8,7 +8,7 @@
         Widget = ui.Widget,
         support = kendo.support,
         Class = kendo.Class,
-        rotatorGradient = new Gradient("linear-gradient(top, #fff, rgba(255,255,255,0))"),
+        rotatorGradient = new Gradient("linear-gradient(top, rgba(255,255,255,.7), rgba(255,255,255,0))"),
         proxy = $.proxy,
         ACTIVE_STATE = "km-state-active",
 
@@ -168,9 +168,10 @@
 
                         for (var j = 0, valueLen = value.length; j < valueLen; j++) {
                             for (var i = 0, stopsLen = value[j].stops.length; i < stopsLen; i++) {
-                                var popup = value[j].stops[i].dragStop.picker.popup;
+                                var dragStop = value[j].stops[i].dragStop,
+                                    popup = dragStop ? dragStop.picker.popup : false;
 
-                                if (!popup.element.data("animating")) {
+                                if (popup && !popup.element.data("animating")) {
                                     value[j].stops[i].dragStop.picker.popup.close();
                                 }
                             }
@@ -198,21 +199,20 @@
 
             _addRotators: function () {
                 var that = this;
-//                rotation = currentValue.rotationElement = $("<div class='rotation-preview'></div>")
-//                                                               .appendTo(that.popup.element);
 
                 $.each( [ "top", "bottom", "right", "left", "top left", "bottom right", "bottom left", "top right" ], function (index, value) {
-                    $("<div class='rotator ' style='background-image: " + rotatorGradient.setAngle(0, value).get() + "' />").appendTo(that.popup.element);
+                    $("<div class='rotator' style='background-image: " + rotatorGradient.setAngle(0, value).get() + "' title='" + value + "' />").appendTo(that.popup.element);
                 });
 
-//                rotation
-//                    .css(support.transforms.css + "transform", "rotate(" + -currentValue.angle + "deg)")
-//                    .bind("click", function (e) {
-//                        that.gradients.setAngle(index, currentValue.angle + 45);
-//                        rotation.css(support.transforms.css + "transform", "rotate(" + -currentValue.angle + "deg)");
-//                        currentValue.stops[0].dragStop._updateConnected();
-//                    });
-//
+                that.popup.element.on("click", ".rotator", function (e) {
+                    that.gradients.setAngle(0, e.currentTarget.title);
+                    that.gradients.value[0].stops[0].dragStop._updateConnected();
+
+                    $(this)
+                        .siblings(".k-state-active")
+                        .removeClass("k-state-active").end()
+                        .addClass("k-state-active");
+                });
             },
 
             _update: function (updateAttr, trigger) {

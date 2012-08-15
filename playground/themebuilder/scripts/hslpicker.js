@@ -76,13 +76,13 @@
 
                 var popupElement = that.popup.element.addClass("k-list-container"),
                     hueElement = $('<label class="label">H<input type="progress" /></label>').appendTo(popupElement).find("input"),
-                    hueValue = $('<div class="slider-value">0</div><br />').appendTo(popupElement),
+                    hueValue = $('<input type="text" class="slider-value" /><br />').appendTo(popupElement),
                     saturationElement = $('<label class="label">S<input type="progress" /></label>').appendTo(popupElement).find("input"),
-                    saturationValue = $('<div class="slider-value">0</div><br />').appendTo(popupElement),
+                    saturationValue = $('<input type="text" class="slider-value" /><br />').appendTo(popupElement),
                     lightnessElement = $('<label class="label">L<input type="progress" /></label>').appendTo(popupElement).find("input"),
-                    lightnessValue = $('<div class="slider-value">0</div><br />').appendTo(popupElement),
+                    lightnessValue = $('<input type="text" class="slider-value" /><br />').appendTo(popupElement),
                     alphaElement = $('<label class="label">A<input type="progress" /></label>').appendTo(popupElement).find("input"),
-                    alphaValue = $('<div class="slider-value">0</div>').appendTo(popupElement),
+                    alphaValue = $('<input type="text" class="slider-value" />').appendTo(popupElement),
                     changeProxy = proxy(that._onChange, that),
                     slideProxy = proxy(that._onSlide, that);
 
@@ -151,10 +151,10 @@
                     that.lightnessSlider.value(that.color.lightness());
                     that.alphaSlider.value(that.color.alpha());
 
-                    that.hueSlider.valueElement.text(that.color.hue());
-                    that.saturationSlider.valueElement.text(that.color.saturation());
-                    that.lightnessSlider.valueElement.text(that.color.lightness());
-                    that.alphaSlider.valueElement.text(that.color.alpha());
+                    that.hueSlider.valueElement.val(that.color.hue());
+                    that.saturationSlider.valueElement.val(that.color.saturation());
+                    that.lightnessSlider.valueElement.val(that.color.lightness());
+                    that.alphaSlider.valueElement.val(that.color.alpha());
 
                     if (trigger) {
                         that.trigger("pick", { color: that.color, target: target });
@@ -217,7 +217,7 @@
                     .attr("data-color", textColor);
 
                 that._updateValues(true);
-                e.sender.valueElement.text(e.value);
+                e.sender.valueElement.val(e.value);
 
                 that.trigger("pick", { color: that.color, target: target });
 
