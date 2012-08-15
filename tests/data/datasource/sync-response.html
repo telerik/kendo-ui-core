@@ -709,6 +709,22 @@
                 ok(dataSource.get(1).obj instanceof kendo.data.ObservableObject);
                 equal(dataSource.get(1).uid, initial.uid);
             });
+
+            test("sync updates the pristine data with plain objects", function() {
+                dataSource = new DataSource({
+                    schema: {
+                        model: {
+                            id: "id"
+                        }
+                    }
+                });
+                dataSource.insert(0, {});
+
+                dataSource.sync();
+
+                equal(dataSource._pristine[0] instanceof kendo.data.ObservableObject, false);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
