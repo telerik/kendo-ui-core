@@ -2103,9 +2103,20 @@ function pad(number) {
         },
 
         setOptions: function(options) {
-            $.extend(this.options, options);
+            var that = this,
+                idx = 0,
+                length = that.events.length,
+                e;
 
-            this.bind(this.events, options);
+            for (; idx < length; idx ++) {
+                e = that.events[idx];
+                if (that.options[e] && options[e]) {
+                    that.unbind(e, that.options[e]);
+                }
+            }
+
+            $.extend(that.options, options);
+            that.bind(that.events, options);
         },
 
         destroy: function() {

@@ -35,7 +35,7 @@
                     dataBar:""
                 },
 
-                events: [ "click" ]
+                events: [ "click", "click2" ]
             });
 
             kendo.ui.plugin(TestWidget);
@@ -274,18 +274,27 @@
                 ok(dom.find("#bar").data("kendoMobileTestWidget2") instanceof TestWidget2, "TestWidget2 is initialized");
             });
 
-            test("Set options through setOptions", function() {
-                var dom = $('<div id="bar" data-role="testwidget2"></div>');
+            function clickHandler() {
+                ok(true);
+            }
 
-                var widget = new TestWidget2(dom);
+            test("multiple init calls bind unbind previous widget event handlers", 1, function() {
+                var dom = $('<a data-role="testwidget" data-click="clickHandler" />');
 
-                stub(widget, {
-                    setOptions: widget.setOptions
-                });
+                kendo.init(dom);
+                kendo.init(dom);
 
-                kendo.init(dom, kendo.ui, kendo.mobile.ui);
+                dom.data("kendoTestWidget").trigger("click");
+            });
 
-                equal(widget.calls("setOptions"), 1);
+            test("init unbinds events from options only ", 1, function() {
+                var dom = $('<a data-role="testwidget" data-click="clickHandler" />');
+
+                new TestWidget(dom, { click2: clickHandler });
+
+                kendo.init(dom);
+
+                dom.data("kendoTestWidget").trigger("click2");
             });
 
         </script>
