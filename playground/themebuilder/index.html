@@ -75,14 +75,13 @@
         {
             display: inline-block;
             width: 2.6em;
-            height: 1.4em;
+            height: 1.5em;
+            line-height: 1em;
             border-radius: 5px;
             text-align: center;
             color: #000;
-            background: #fff;
             border: 1px solid rgba(0,0,0,.3);
             box-shadow: 0 0 1px rgba(0,0,0,.2);
-            margin-bottom: 5px;
         }
 
         .color-preview
@@ -223,6 +222,7 @@
         }
 
         .drop,
+        .k-gradientpick .rotator,
         .k-static-picker .color-preview,
         .gradient-preview
         {
@@ -295,7 +295,9 @@
         }
 
         .drop:hover,
-        .drop.k-state-active
+        .drop.k-state-active,
+        .k-gradientpick .rotator:hover,
+        .k-gradientpick .rotator.k-state-active
         {
             background-color: transparent;
             box-shadow: inset 0 0 0 1px #fff, inset 0 0 6px rgba(255,255,255,.8);
@@ -421,7 +423,8 @@
             content: "Recent Patterns";
         }
 
-        .k-static-picker
+        .k-static-picker,
+        .k-static-gradient .k-animation-container
         {
             top: 0 !important;
             left: 540px !important;
@@ -433,12 +436,23 @@
             position: absolute;
         }
 
+        .k-static-gradient
+        {
+            width: 540px !important;
+        }
+
+        .k-static-gradient .k-animation-container
+        {
+            left: 252px !important;
+        }
+
         .k-static-shown
         {
             display: block !important;
         }
 
-        .k-static-picker > .k-popup
+        .k-static-picker > .k-popup,
+        .k-static-picker .k-animation-container > .k-popup
         {
             display: block !important;
             height: 100%;
@@ -451,7 +465,7 @@
             box-shadow: none;
             border: 0;
             background: none;
-            width: 400px;
+            width: 100%;
         }
 
         .k-popup .k-static-picker .k-gradientpick
@@ -472,6 +486,29 @@
             border: 0;
         }
 
+        .k-static-gradient .color-preview
+        {
+            width: 100px;
+            height: 90px;
+            line-height: 90px;
+        }
+
+        .k-static-gradient .color-value
+        {
+            padding-right: 5px;
+            margin-bottom: 5px;
+        }
+
+        .k-static-gradient .label
+        {
+            width: 100px;
+        }
+
+        .k-static-gradient .km-slider
+        {
+            width: 5.6em;
+        }
+
         .k-static-picker .rotator
         {
             width: 30px;
@@ -479,6 +516,7 @@
             display: inline-block;
             margin-bottom: -3px;
             position: relative;
+            cursor: pointer;
         }
 
         .k-static-picker .sample
@@ -503,12 +541,22 @@
         .k-colorpick .km-slider
         {
             height: 1.5em;
-            padding: 0 .8em 0;
+            padding: 0 .8em;
         }
 
         .k-colorpick .label
         {
-            padding: 10px 7px 3px;
+            padding: 8px 7px 3px;
+        }
+
+        .k-colorpick .slider-value
+        {
+            background: #d9d9d9;
+            margin: 9px 0 3px;
+            border: 0;
+            vertical-align: middle;
+            font-size: 1em;
+            outline: 0;
         }
 
         .k-colorpick .km-slider-wrapper
@@ -529,6 +577,7 @@
                         -moz-linear-gradient(top, #e4e4e4, #e4e4e4) 0 0 no-repeat;
         }
 
+        .k-colorpick .slider-value,
         .k-colorpick .km-slider-container
         {
             border-radius: 9px;

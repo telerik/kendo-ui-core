@@ -768,7 +768,7 @@
            $("<br />").insertBefore(".recent-gradients");
        }
     }
-    kendo.wrap(gradientPicker.popup.element).addClass("k-static-picker");
+    kendo.wrap(gradientPicker.popup.element).addClass("k-static-picker k-static-gradient");
 
     $(".tools").kendoTabStrip({
         animation: {
