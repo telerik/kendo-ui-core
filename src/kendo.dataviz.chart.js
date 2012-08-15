@@ -4571,8 +4571,7 @@
         },
 
         render: function() {
-            var plotArea = this,
-                series = plotArea.series;
+            var plotArea = this;
 
             plotArea.createCategoryAxis();
 
@@ -4580,20 +4579,63 @@
                 plotArea.aggregateDateSeries();
             }
 
-            series = plotArea.series;
-            plotArea.createAreaChart(grep(series, function(s) {
-                return inArray(s.type, [AREA, VERTICAL_AREA]);
-            }));
-
-            plotArea.createBarChart(grep(series, function(s) {
-                return inArray(s.type, [BAR, COLUMN]);
-            }));
-
-            plotArea.createLineChart(grep(series, function(s) {
-                return inArray(s.type, [LINE, VERTICAL_LINE]);
-            }));
+            plotArea.createCharts();
 
             plotArea.createValueAxes();
+        },
+
+        createCharts: function() {
+            var plotArea = this,
+                series = plotArea.series,
+                seriesByPane = {},
+                paneNames = [],
+                i,
+                pane,
+                currentSeries,
+                paneSeries;
+
+            for (i = 0; i < series.length; i++) {
+                currentSeries = series[i];
+                pane = plotArea.seriesPaneName(currentSeries);
+                paneNames.push(pane);
+
+                if (seriesByPane[pane]) {
+                    seriesByPane[pane].push(currentSeries);
+                } else {
+                    seriesByPane[pane] = [currentSeries];
+                }
+            }
+
+            for (i = 0; i < paneNames.length; i++) {
+                paneSeries = seriesByPane[paneNames[i]];
+
+                plotArea.createAreaChart(
+                    plotArea.filterSeriesByType(paneSeries, [AREA, VERTICAL_AREA])
+                );
+
+                plotArea.createBarChart(
+                    plotArea.filterSeriesByType(paneSeries, [BAR, COLUMN])
+                );
+
+                plotArea.createLineChart(
+                    plotArea.filterSeriesByType(paneSeries, [LINE, VERTICAL_LINE])
+                );
+            }
+        },
+
+        filterSeriesByType: function(series, types) {
+            var i,
+                currentSeries,
+                result = [];
+
+            for (i = 0; i < series.length; i++) {
+                currentSeries = series[i];
+                if (inArray(currentSeries.type, types)) {
+                    result.push(currentSeries);
+                }
+            }
+
+            return result;
         },
 
         aggregateDateSeries: function() {
@@ -4681,7 +4723,7 @@
                 options = plotArea.options,
                 axisName = series.axis,
                 axisOptions = [].concat(options.valueAxis),
-                axis = $.grep(axisOptions, function(a) { return a.name === axisName })[0],
+                axis = $.grep(axisOptions, function(a) { return a.name === axisName; })[0],
                 paneName = axis.pane || "default";
 
             return paneName;
@@ -4692,31 +4734,17 @@
                 return;
             }
 
-            var seriesByPane = {};
-            for (var i = 0; i < series.length; i++) {
-                var paneName = this.seriesPaneName(series[i]);
-                if (seriesByPane[paneName]) {
-                    seriesByPane[paneName].push(series[i]);
-                } else {
-                    seriesByPane[paneName] = [series[i]];
-                }
-            }
+            var plotArea = this,
+                firstSeries = series[0],
+                barChart = new BarChart(plotArea, {
+                    series: series,
+                    invertAxes: plotArea.invertAxes,
+                    isStacked: firstSeries.stack && series.length > 1,
+                    gap: firstSeries.gap,
+                    spacing: firstSeries.spacing
+                });
 
-            for (var paneName in seriesByPane) {
-                var paneSeries = seriesByPane[paneName];
-
-                var plotArea = this,
-                    firstSeries = paneSeries[0],
-                    barChart = new BarChart(plotArea, {
-                        series: paneSeries,
-                        invertAxes: plotArea.invertAxes,
-                        isStacked: firstSeries.stack && series.length > 1,
-                        gap: firstSeries.gap,
-                        spacing: firstSeries.spacing
-                    });
-
-                plotArea.appendChart(barChart);
-            }
+            plotArea.appendChart(barChart);
         },
 
         createLineChart: function(series) {
@@ -4724,29 +4752,15 @@
                 return;
             }
 
-            var seriesByPane = {};
-            for (var i = 0; i < series.length; i++) {
-                var paneName = this.seriesPaneName(series[i]);
-                if (seriesByPane[paneName]) {
-                    seriesByPane[paneName].push(series[i]);
-                } else {
-                    seriesByPane[paneName] = [series[i]];
-                }
-            }
+            var plotArea = this,
+                firstSeries = series[0],
+                lineChart = new LineChart(plotArea, {
+                    invertAxes: plotArea.invertAxes,
+                    isStacked: firstSeries.stack && series.length > 1,
+                    series: series
+                });
 
-            for (var paneName in seriesByPane) {
-                var paneSeries = seriesByPane[paneName];
-
-                var plotArea = this,
-                    firstSeries = paneSeries[0],
-                    lineChart = new LineChart(plotArea, {
-                        invertAxes: plotArea.invertAxes,
-                        isStacked: firstSeries.stack && paneSeries.length > 1,
-                        series: paneSeries
-                    });
-
-                plotArea.appendChart(lineChart);
-            }
+            plotArea.appendChart(lineChart);
         },
 
         createAreaChart: function(series) {
@@ -4754,29 +4768,15 @@
                 return;
             }
 
-            var seriesByPane = {};
-            for (var i = 0; i < series.length; i++) {
-                var paneName = this.seriesPaneName(series[i]);
-                if (seriesByPane[paneName]) {
-                    seriesByPane[paneName].push(series[i]);
-                } else {
-                    seriesByPane[paneName] = [series[i]];
-                }
-            }
+            var plotArea = this,
+                firstSeries = series[0],
+                areaChart = new AreaChart(plotArea, {
+                    invertAxes: plotArea.invertAxes,
+                    isStacked: firstSeries.stack && series.length > 1,
+                    series: series
+                });
 
-            for (var paneName in seriesByPane) {
-                var paneSeries = seriesByPane[paneName];
-
-                var plotArea = this,
-                    firstSeries = paneSeries[0],
-                    areaChart = new AreaChart(plotArea, {
-                        invertAxes: plotArea.invertAxes,
-                        isStacked: firstSeries.stack && paneSeries.length > 1,
-                        series: paneSeries
-                    });
-
-                plotArea.appendChart(areaChart);
-            }
+            plotArea.appendChart(areaChart);
         },
 
         createCategoryAxis: function() {
