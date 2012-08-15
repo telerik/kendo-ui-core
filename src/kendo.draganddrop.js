@@ -671,12 +671,12 @@
         translate;
 
     if (support.hasHW3D) {
-        translate = function(x, y) {
-            return "translate3d(" + round(x) + "px," + round(y) +"px,0)";
+        translate = function(x, y, scale) {
+            return "translate3d(" + round(x) + "px," + round(y) +"px,0) scale(" + scale + ")";
         };
     } else {
-        translate = function(x, y) {
-            return "translate(" + round(x) + "px," + round(y) +"px)";
+        translate = function(x, y, scale) {
+            return "translate(" + round(x) + "px," + round(y) +"px) scale(" + scale + ")";
         };
     }
 
@@ -689,11 +689,17 @@
             that.element = $(element);
             that.x = 0;
             that.y = 0;
-            that._saveCoordinates(translate(that.x, that.y));
+            that.scale = 1;
+            that._saveCoordinates(translate(that.x, that.y, that.scale));
         },
 
         translateAxis: function(axis, by) {
             this[axis] += by;
+            this.refresh();
+        },
+
+        scaleTo: function(scale) {
+            this.scale = scale;
             this.refresh();
         },
 
@@ -715,7 +721,7 @@
 
         refresh: function() {
             var that = this,
-                newCoordinates = translate(that.x, that.y);
+                newCoordinates = translate(that.x, that.y, that.scale);
 
             if (newCoordinates != that.coordinates) {
                 that.element[0].style[TRANSFORM_STYLE] = newCoordinates;
