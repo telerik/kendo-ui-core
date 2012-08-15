@@ -644,6 +644,13 @@
         }
     });
 
+    function distance(p1, p2, member) {
+        var dx = p1.x[member] - p2.x[member],
+            dy = p1.y[member] - p2.y[member];
+
+        return Math.sqrt(dx*dx + dy*dy);
+    }
+
     var Pane = Class.extend({
         init: function(options) {
             var that = this,
@@ -669,7 +676,28 @@
                 movable: that.movable
             });
 
-            that.drag.bind(["move", "end"], {
+            that.drag.bind(["move", "end", "gesturestart", "gesturechange", "gestureend"], {
+                gesturestart: function(e) {
+                    var finger1 = e.touches[0],
+                        finger2 = e.touches[1];
+
+                    that.zoomPoint = {
+                        x: ( finger1.x.startLocation + finger2.x.startLocation) / 2,
+                        y: ( finger1.y.startLocation + finger2.y.startLocation) / 2
+                    };
+
+                    that.initialDistance = distance(finger1, finger2, "location");
+                    that.initialScale = that.movable.scale;
+                },
+
+                gesturechange: function(e) {
+                    var finger1 = e.touches[0],
+                        finger2 = e.touches[1],
+                        newDistance = distance(finger1, finger2, "location");
+
+                    that.movable.scaleTo(that.initialScale * newDistance / that.initialDistance);
+                },
+
                 move: function(e) {
                     if (x.dimension.present() || y.dimension.present()) {
                         x.dragMove(e.x.delta);

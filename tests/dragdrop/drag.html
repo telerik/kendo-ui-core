@@ -18,7 +18,12 @@
             <ul id="log"></ul>
             <div id="qunit-fixture">test markup, will be hidden</div>
 
+        <script>
+            QUnit.config.reorder = false;
+        </script>
+
         <script src="drag.js"></script>
+        <script src="movable.js"></script>
 
         <script type="text/x-template" id="container-fixture">
             <div id="foo" style="margin: 10px; width: 200px; padding: 20px; height: 200px">Foo</div>

@@ -266,7 +266,16 @@ test("triggers end after the first touch is over", 1, function(){
     triggerTouchEvent("mouseup", {pageX: 15, pageY: 25, identifier: 1});
 });
 
+test("triggers gesturestart before first touch move", 1, function(){
+    var gestureStarted = false;
+    drag.bind("gesturestart", function(e) {
+        gestureStarted = true;
+    });
 
+    drag.bind("gesturechange", function() {
+        ok(gestureStarted);
+    });
 
-
-
+    triggerTouchEvent("mousedown", {pageX: 10, pageY: 20, identifier: 2});
+    triggerTouchEvent("mousemove", {pageX: 10, pageY: 20, identifier: 1});
+});
