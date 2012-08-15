@@ -943,22 +943,38 @@
                           title1.box.height() + MARGIN * 2 + PADDING * 2);
                 });
 
-                test("buildTitle creates a title from string", function() {
-                    var parent = new dataviz.ChartElement();
+                // ------------------------------------------------------------
+                var parent;
+
+                module("Title / buildTitle", {
+                    setup: function() {
+                        parent = new dataviz.ChartElement();
+                    }
+                });
+
+                test("creates a title from string", function() {
                     title = Title.buildTitle("Title", parent);
                     equals(title.options.text, "Title");
                 });
 
-                test("buildTitle does not create title when not visible", function() {
-                    var parent = new dataviz.ChartElement();
+                test("creates a title from options with text", function() {
+                    title = Title.buildTitle({ text: "Title" }, parent);
+                    equals(title.options.text, "Title");
+                });
+
+                test("does not create title when not visible", function() {
                     title = Title.buildTitle({ text: "Title", visible: false }, parent);
                     equals(title, undefined);
                 });
 
-                test("buildTitle does not create title without text", function() {
-                    var parent = new dataviz.ChartElement();
-                    title = Title.buildTitle({ text: "", visible: true }, parent);
+                test("does not create title without text", function() {
+                    title = Title.buildTitle({ text: "" }, parent);
                     equals(title, undefined);
+                });
+
+                test("applies default options", function() {
+                    title = Title.buildTitle("Title", parent, { flag: true });
+                    equals(title.options.flag, true);
                 });
 
             })();

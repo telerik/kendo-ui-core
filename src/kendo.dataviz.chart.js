@@ -218,9 +218,6 @@
             name: "Chart",
             theme: "default",
             chartArea: {},
-            title: {
-                visible: true
-            },
             legend: {
                 visible: true,
                 labels: {}
@@ -3911,14 +3908,14 @@
             options = pane.options;
             options.id = uniqueId();
 
-            pane.title = Title.buildTitle(options.title, pane);
+            pane.title = Title.buildTitle(options.title, pane, Pane.fn.options.title);
         },
 
         options: {
             zIndex: -1,
             shrinkToFit: true,
             title: {
-                visible: true
+                align: LEFT
             }
         },
 

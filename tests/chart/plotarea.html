@@ -1757,7 +1757,8 @@
                         panes: [{
                             name: "a",
                             title: {
-                                text: "Title"
+                                text: "Title",
+                                align: "center"
                             }
                         }]
                     });
@@ -1766,13 +1767,12 @@
                     equals(textBox.box.x1, 528.5, TOLERANCE);
                 });
 
-                test("title is aligned left", function() {
+                test("title is aligned left by default", function() {
                     createPlotArea({
                         panes: [{
                             name: "a",
                             title: {
-                                text: "Title",
-                                align: "left"
+                                text: "Title"
                             }
                         }]
                     });

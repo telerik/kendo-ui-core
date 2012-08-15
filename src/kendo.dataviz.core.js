@@ -789,15 +789,17 @@
         }
     });
 
-    Title.buildTitle = function(titleOptions, parent) {
+    Title.buildTitle = function(options, parent, defaultOptions) {
         var title;
 
-        if (typeof titleOptions === "string") {
-            titleOptions = { text: titleOptions, visible: true };
+        if (typeof options === "string") {
+            options = { text: options };
         }
 
-        if (titleOptions && titleOptions.visible && titleOptions.text) {
-            title = new Title(titleOptions);
+        options = deepExtend({ visible: true }, defaultOptions, options);
+
+        if (options && options.visible && options.text) {
+            title = new Title(options);
             parent.append(title);
         }
 
