@@ -4554,6 +4554,8 @@
             plotArea.namedValueAxes = {};
             plotArea.valueAxisRangeTracker = new AxisGroupRangeTracker(axisOptions.valueAxis);
 
+            // TODO: Should be determined per-pane.
+            // Refactor when implementing multiple category axis support.
             if (series.length > 0) {
                 plotArea.invertAxes = inArray(
                     series[0].type, [BAR, VERTICAL_LINE, VERTICAL_AREA]
@@ -4614,7 +4616,7 @@
                 );
 
                 plotArea.createBarChart(
-                    plotArea.filterSeriesByType(paneSeries, [BAR, COLUMN])
+                    plotArea.filterSeriesByType(paneSeries, [COLUMN, BAR])
                 );
 
                 plotArea.createLineChart(
