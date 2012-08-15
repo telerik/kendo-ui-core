@@ -666,24 +666,26 @@
             var that = this,
                 x,
                 y,
-                resistance;
+                resistance,
+                movable;
 
             extend(that, {elastic: true}, options);
 
             resistance = that.elastic ? 0.5 : 0;
+            movable = that.movable;
 
             that.x = x = new PaneAxis({
                 axis: "x",
                 dimension: that.dimensions.x,
                 resistance: resistance,
-                movable: that.movable
+                movable: movable
             });
 
             that.y = y = new PaneAxis({
                 axis: "y",
                 dimension: that.dimensions.y,
                 resistance: resistance,
-                movable: that.movable
+                movable: movable
             });
 
             that.drag.bind(["move", "end", "gesturestart", "gesturechange", "gestureend"], {
@@ -692,9 +694,11 @@
                         finger2 = e.touches[1];
 
                     that.zoomPoint = {
-                        x: (finger1.x.location + finger2.x.location) / 2,
-                        y: (finger1.y.location + finger2.y.location) / 2
+                        x: (finger1.x.location + finger2.x.location) / 2 - movable.x,
+                        y: (finger1.y.location + finger2.y.location) / 2 - movable.y
                     };
+
+                    console.log(that.zoomPoint.x + " " + that.zoomPoint.y);
 
                     that.initialDistance = distance(finger1, finger2);
                     that.initialScale = that.movable.scale;
@@ -704,9 +708,10 @@
                     var finger1 = e.touches[0],
                         finger2 = e.touches[1],
                         newDistance = distance(finger1, finger2),
-                        newScale = that.initialScale * newDistance / that.initialDistance;
+                        newScale = that.initialScale * newDistance / that.initialDistance,
+                        coordinates = that.zoomPointOffset(newScale);
 
-                    that.movable.moveAndScale(that.zoomPointOffset(newScale), newScale);
+                    that.movable.moveAndScale(coordinates, newScale);
                 },
 
                 move: function(e) {
