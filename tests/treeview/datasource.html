@@ -623,6 +623,31 @@
                 equals(treeview.find(".k-item").length, 2);
             });
 
+            test("binding to HDS in observable object", function() {
+                var viewModel = new kendo.observable({
+                    treeData: new kendo.data.HierarchicalDataSource({
+                        data: [
+                            { text: "Storage", items: [
+                                { text: "Wall Shelving" },
+                                { text: "Floor Shelving" },
+                                { text: "Kids Storage" }
+                            ] },
+                            { text: "Lights", items: [
+                                { text: "Ceiling" },
+                                { text: "Table" },
+                                { text: "Floor" }
+                            ] }
+                        ]
+                    })
+                });
+
+                createTreeView({
+                    dataSource: viewModel.treeData
+                });
+
+                equal(treeview.find(".k-item").length, 2);
+            });
+
         </script>
 
         <div id="qunit-fixture"> </div>

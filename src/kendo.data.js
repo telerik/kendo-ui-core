@@ -2799,7 +2799,7 @@
 
             while (parentNode) {
                 level++;
-                parentNode = parentNode.parentNode();
+                parentNode = parentNode.parentNode ? parentNode.parentNode() : null;
             }
 
             return level;
