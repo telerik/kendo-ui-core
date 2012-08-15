@@ -711,6 +711,9 @@ div.k-window-content
 .k-tabstrip .k-content > .km-scroll-container
 {
     padding: .3em .92em;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 /* PanelBar */
