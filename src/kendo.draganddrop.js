@@ -43,7 +43,11 @@
         MOVE = "move",
         END = "end",
         CANCEL = "cancel",
-        TAP = "tap";
+        TAP = "tap",
+        GESTURESTART = "gesturestart",
+        GESTURECHANGE = "gesturechange",
+        GESTUREEND = "gestureend",
+        GESTURETAP = "gesturetap";
 
     if (support.touch) {
         START_EVENTS = "touchstart";
@@ -171,9 +175,7 @@
             touchID;
 
         if (support.touch) {
-            touchEvent = originalEvent.changedTouches[0];
-            touchID = touchEvent.identifier;
-            location = touchEvent;
+            touchID = e.identifier;
         }
 
         if (pointers) {
@@ -248,7 +250,7 @@
                         return;
                     }
 
-                    if (!Drag.captured) {
+                    if (!Drag.current || Drag.current === that.drag) {
                         that._start(e);
                     } else {
                         return that.dispose();
@@ -393,7 +395,11 @@
             START,
             MOVE,
             END,
-            CANCEL], options);
+            CANCEL,
+            GESTURESTART,
+            GESTURECHANGE,
+            GESTUREEND,
+            GESTURETAP], options);
         },
 
         destroy: function() {
@@ -402,7 +408,7 @@
         },
 
         capture: function() {
-            Drag.captured = true;
+            Drag.current = this;
         },
 
         cancel: function() {
@@ -411,22 +417,18 @@
         },
 
         notify: function(eventName, data) {
-            var that = this,
-                multiTouch = that.touches.length > 1;
+            var that = this;
 
-            if (multiTouch) {
+            if (this._isMultiTouch()) {
                 switch(eventName) {
-                    case START:
-                        eventName = "gesturestart";
-                        break;
                     case MOVE:
-                        eventName = "gesturechange";
+                        eventName = GESTURECHANGE;
                         break;
                     case END:
-                        eventName = "gestureend";
+                        eventName = GESTUREEND;
                         break;
                     case TAP:
-                        eventName = "gesturetap";
+                        eventName = GESTURETAP;
                         break;
                 }
 
@@ -434,6 +436,10 @@
             }
 
             return this.trigger(eventName, data);
+        },
+
+        _isMultiTouch: function() {
+            return this.touches.length > 1;
         },
 
         _disposeAll: function() {
@@ -463,14 +469,29 @@
                 return;
             }
 
+            if (support.touch) {
+                var activeIdentifiers = $.map(that.touches, function(touch) { return touch.touchID; }),
+                    changedTouches = e.originalEvent.changedTouches;
+
+                $.each(changedTouches, function(_, touch) {
+                    that.touches.push(new Touch(that, touch.target, touch));
+                });
+
+            } else {
+                that.touches.push(new Touch(that, target, e));
+            }
+
+            if (that._isMultiTouch()) {
+                that.notify("gesturestart", {});
+            }
+
             that.currentTarget = e.currentTarget;
 
             if (that.stopPropagation) {
                 e.stopPropagation();
             }
 
-            that.touches.push(new Touch(that, target, e));
-            Drag.captured = false;
+            Drag.current = null;
         }
     });
 
