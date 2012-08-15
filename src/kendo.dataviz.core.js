@@ -522,6 +522,7 @@
                             strokeWidth: border.width,
                             dashType: border.dashType,
                             fill: options.background,
+                            fillOpacity: options.opacity,
                             zIndex: options.zIndex })
                     ];
 

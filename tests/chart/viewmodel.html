@@ -223,6 +223,15 @@
                     equals(rootRect.style.fill, "red");
                 });
 
+                test("sets background opacity to rootElement", function() {
+                    createRoot({
+                        opacity: 0.1
+                    });
+                    renderRoot();
+
+                    equals(rootRect.style.fillOpacity, 0.1);
+                });
+
                 test("applies top margin", function() {
                     createRoot({
                         margin: {
