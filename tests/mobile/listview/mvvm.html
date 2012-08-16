@@ -231,6 +231,27 @@
 
                 equal(observable.calls("rootHandler"), 1);
             });
+
+            test("checking a checkbox updates the view-model", function() {
+                var dom = $('<ul data-role="listview" ><li><label><input type="checkbox" data-bind="checked: foo"/>Foo</label></li></ul>');
+
+                var observable = kendo.observable({
+                    foo: true
+                });
+
+                kendo.bind(dom, observable, kendo.mobile.ui);
+
+                var touch = kendo.support.touch;
+                try {
+                    kendo.support.touch = true;
+                    dom.find("label").trigger("mouseup");
+                } finally {
+                    kendo.support.touch = touch;
+                }
+
+                equal(observable.foo, false);
+            });
+
         </script>
     </body>
 </html>

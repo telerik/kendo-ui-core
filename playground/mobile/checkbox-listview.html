@@ -6,6 +6,8 @@
         <script src="../../demos/mvc/content/shared/js/less.js"></script>
         <script src="../../src/jquery.min.js"></script>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
         <script src="../../src/kendo.history.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.fx.js"></script>
@@ -13,40 +15,33 @@
         <script src="../../src/kendo.mobile.scroller.js"></script>
         <script src="../../src/kendo.mobile.navbar.js"></script>
         <script src="../../src/kendo.mobile.view.js"></script>
+        <script src="../../src/kendo.mobile.loader.js"></script>
+        <script src="../../src/kendo.mobile.pane.js"></script>
         <script src="../../src/kendo.mobile.button.js"></script>
         <script src="../../src/kendo.mobile.application.js"></script>
         <script src="../../src/kendo.mobile.listview.js"></script>
-        <script>
-            $(function() {
-                new kendo.mobile.Application();
-            });
-        </script>
     </head>
     <body>
         <div data-role="view">
             <ul data-role="listview" data-style="inset">
-                <li><label>Monday <input type="checkbox"></label></li>
-                <li><label>Tuesday <input type="checkbox"></label></li>
-                <li><label>Wednesday <input type="checkbox"></label></li>
-                <li><label>Thursday <input type="checkbox"></label></li>
-                <li><label>Friday <input type="checkbox"></label></li>
-                <li><label>Saturday <input type="checkbox"></label></li>
-                <li><label>Sunday <input type="checkbox"></label></li>
+                <li><label>Monday <input type="checkbox" data-bind="checked: foo"></label></li>
             </ul>
 
-            <ul data-role="listview" data-style="inset">
-                <li><label>Monday <input type="radio" name="foo"></label></li>
-                <li><label>Tuesday <input type="radio" name="foo"></label></li>
-                <li><label>Wednesday <input type="radio" name="foo"></label></li>
-                <li><label>Thursday <input type="radio" name="foo"></label></li>
-                <li><label>Friday <input type="radio" name="foo"></label></li>
-                <li><label>Saturday <input type="radio" name="foo"></label></li>
-                <li><label>Sunday <input type="radio" name="foo"></label></li>
-            </ul>
+            Monday is checked: <span data-bind="text: foo"></span>
         </div>
 
         <div data-role="view" id="next">
             <a data-role="backbutton">Back</a>
         </div>
+
+        <script>
+            var vm = kendo.observable( {
+                foo: true
+            });
+
+            new kendo.mobile.Application();
+
+            kendo.bind(document.body, vm, kendo.mobile.ui);
+        </script>
     </body>
 </html>
