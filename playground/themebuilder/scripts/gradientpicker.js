@@ -30,12 +30,13 @@
                 })
                 .prependTo(element);
 
-                that.picker = that.point.on("click", function (e) {
+                that.point.on("click", function (e) {
                     if (that.stopped) {
                         e.stopImmediatePropagation();
                     }
-                })
-                .kendoHSLPicker({ pick: proxy(that._pick, that) }).data("kendoHSLPicker");
+                });
+
+                that.point.data("stop", that);
 
                 that.drag = new kendo.Drag(that.point, {
                     global: true,
@@ -47,21 +48,10 @@
                     move: proxy(that._move, that),
                     end: proxy(that._stop, that)
                 });
-
             },
 
-            _updateConnected: function () {
-                var that = this,
-                    filter = that.parent.options.filter,
-                    target = !filter ? that.parent.element : that.parent.target;
-
-                that.element.children(".gradient-preview").css("background-image", that.parent.gradients.get(support.transforms.css, that.index, "left"));
-                target.css("background-image", that.parent.gradients.get(support.transforms.css));
-            },
-
-            _pick: function (e) {
-                this.stop.color = e.color;
-                this._updateConnected();
+            updateColor: function(color) {
+                this.stop.color.set(color.get());
             },
 
             _move: function(e) {
@@ -71,7 +61,7 @@
                 value = that._position(limitValue((e.x.client - that.targetOffsetX), 0, that.constrain));
                 if (value != that.stop.position) {
                     that.stop.position = value;
-                    that._updateConnected();
+                    that.parent._updateConnected(this.element, this.index);
                 }
             },
 
@@ -99,7 +89,7 @@
                 that.stopped = true;
                 that.element.removeClass(ACTIVE_STATE);
                 that.stop.position = value;
-                that._updateConnected();
+                that.parent._updateConnected(this.element, this.index);
             }
         }),
 
@@ -133,7 +123,6 @@
                 });
 
                 that.gradients = new Gradient(element.css("background-image"));
-                var value = that.gradients.value;
 
                 that._addRotators();
                 that.gradientCollection = $("<div class='collection' />").appendTo(that.popup.element);
@@ -162,23 +151,22 @@
                 }
 
                 that.popup.element
-                    .addClass("k-list-container")
-                    .on("click", function (e) {
-                        if (!$(e.target).closest(".k-popup").hasClass("k-gradientpick")) { return; }
+                    .addClass("k-list-container");
+//                    .on("click", function (e) {
+//                        if (!$(e.target).closest(".k-popup").hasClass("k-gradientpick")) { return; }
+//
+//                        var popup = that.picker.popup;
+//
+//                        if (popup && !popup.element.data("animating")) {
+//                            popup.close();
+//                        }
+//                    });
 
-                        for (var j = 0, valueLen = value.length; j < valueLen; j++) {
-                            for (var i = 0, stopsLen = value[j].stops.length; i < stopsLen; i++) {
-                                var dragStop = value[j].stops[i].dragStop,
-                                    popup = dragStop ? dragStop.picker.popup : false;
-
-                                if (popup && !popup.element.data("animating")) {
-                                    value[j].stops[i].dragStop.picker.popup.close();
-                                }
-                            }
-                        }
-                    });
-
+                that.picker = that.popup.element
+                                .kendoHSLPicker({ filter: ".stop", pick: proxy(that._pick, that) })
+                                .data("kendoHSLPicker");
             },
+
             options: {
                 name: "GradientPicker",
                 filter: null,
@@ -197,6 +185,25 @@
                 this._toggle(false);
             },
 
+            _pick: function (e) {
+                var target = e.target,
+                    index = target.parent().index(".sample");
+
+                target.data("stop").updateColor(e.color);
+                this._updateConnected(target.parent(), index);
+            },
+
+            _updateConnected: function (element, index) {
+                var that = this,
+                    filter = that.options.filter,
+                    target = !filter ? that.element : that.target,
+                    gradient = that.gradients.get(support.transforms.css);
+
+                element.children(".gradient-preview").css("background-image", that.gradients.get(support.transforms.css, index, "left"));
+                target.css("background-image", gradient);
+                target.attr("data-gradient", gradient);
+            },
+
             _addRotators: function () {
                 var that = this;
 
@@ -205,8 +212,10 @@
                 });
 
                 that.popup.element.on("click", ".rotator", function (e) {
+                    var dragStop = that.gradients.value[0].stops[0].dragStop;
+
                     that.gradients.setAngle(0, e.currentTarget.title);
-                    that.gradients.value[0].stops[0].dragStop._updateConnected();
+                    that._updateConnected(dragStop.element, dragStop.index);
 
                     $(this)
                         .siblings(".k-state-active")
@@ -217,15 +226,15 @@
 
             _update: function (updateAttr, trigger) {
                 var that = this,
-                    target = !that.options.filter ? that.element : that.target,
-                    value = that.gradients.value;
+                    target = !that.options.filter ? that.element : that.target;
 
                 if (target) {
                     that.gradientCollection.empty(); // Do Destroy on Picker/s.
                     that.bgcolor.set(target.css("background-color"));
 
-                    value.forEach(function (currentValue, index) {
-                        var sample = currentValue.gradientElement = $("<div class='sample'><div class='gradient-preview'></div></div><br />");
+                    that.gradients.value.forEach(function (currentValue, index) {
+                        var sample = currentValue.gradientElement = $("<div class='sample'><div class='gradient-preview'></div></div>");
+                        $("<br />").insertAfter(sample);
 
                         sample
                             .children(".gradient-preview")
@@ -238,11 +247,11 @@
                                 var newStop = { color: new Color("#000"), position: (e.offsetX || e.originalEvent.layerX) / $(this).outerWidth() * 100 };
                                 currentValue.stops.push(newStop);
                                 newStop.dragStop = new DragStop(sample, newStop, that, index);
-                                newStop.dragStop._updateConnected();
+                                that._updateConnected(sample, index);
                             })
                             .appendTo(that.gradientCollection);
 
-                        for (var i = 0, stopsLen = currentValue.stops.length; i < stopsLen; i++) {
+                        for (var i = currentValue.stops.length-1; i >= 0; i--) {
                             currentValue.stops[i].dragStop = new DragStop(sample, currentValue.stops[i], that, index);
                         }
                     });

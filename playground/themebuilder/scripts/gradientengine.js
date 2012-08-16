@@ -206,8 +206,13 @@
             return output.substring(0, output.length - 1) + "),";
         },
 
-        _getSVGGradient: function (gradient) {
-            var output = "", color, alpha;
+        _getSVGGradient: function (gradient, id, units) {
+            var output = "", color, alpha,
+                startDirection = gradient.start.normalized.split(" "),
+                endDirection = gradient.end.normalized.split(" ");
+
+            output += '<linearGradient id="' + (id ? id : "ID") + '" gradientUnits="' + (units ? units : "objectBoundingBox") + '" x1="' + startDirection[0] + '" y1="' +
+                      startDirection[1] + '" x2="' + endDirection[0] + '" y2="' + endDirection[1] + '">';
 
             gradient.stops.forEach(function(stop) {
                 color = $.extend(stop.color.value);
@@ -217,7 +222,7 @@
                 output += '<stop offset="' + (trimZeroes(stop.position / 100) || "0") + '" stop-color="' + stop.color.color2css(color) + '" stop-opacity="' + alpha + '" %2F>';
             });
 
-            return output.replace(/#/g, "%23");
+            return output.replace(/#/g, "%23") + "<%2FlinearGradient>";
         }
     });
 
