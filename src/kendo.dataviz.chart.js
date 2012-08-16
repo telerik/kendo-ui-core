@@ -59,7 +59,7 @@
         BLACK = "#000",
         BOTTOM = "bottom",
         BUBBLE = "bubble",
-        CATEGORY = "Category",
+        CATEGORY = "category",
         CENTER = "center",
         CHANGE = "change",
         CIRCLE = "circle",
@@ -68,7 +68,7 @@
         COLUMN = "column",
         COORD_PRECISION = dataviz.COORD_PRECISION,
         DATABOUND = "dataBound",
-        DATE = "Date",
+        DATE = "date",
         DATE_REGEXP = /^\/Date\((.*?)\)\/$/,
         DAYS = "days",
         DEFAULT_FONT = dataviz.DEFAULT_FONT,
@@ -4389,7 +4389,7 @@
 
             plotArea.createCategoryAxis();
 
-            if (plotArea.categoryAxis.options.type === DATE) {
+            if (equalsIgnoreCase(plotArea.categoryAxis.options.type, DATE)) {
                 plotArea.aggregateDateSeries();
             }
 
@@ -4546,11 +4546,11 @@
                 categoryAxisOptions = options.categoryAxis,
                 categories = categoryAxisOptions.categories,
                 categoriesCount = categories.length,
-                axisType  = categoryAxisOptions.type,
+                axisType  = categoryAxisOptions.type || "",
                 dateCategory = categories[0] instanceof Date,
                 categoryAxis;
 
-            if (axisType === DATE || (!axisType && dateCategory)) {
+            if (equalsIgnoreCase(axisType, DATE) || (!axisType && dateCategory)) {
                 categoryAxis = new DateCategoryAxis(deepExtend({
                         vertical: invertAxes
                     },
@@ -4654,7 +4654,7 @@
             for (i = 0; i < axesCount && !primaryValueAxis; i++) {
                 axis = axes[i];
 
-                if (axis.options.type !== CATEGORY) {
+                if (!equalsIgnoreCase(axis.options.type, CATEGORY)) {
                     primaryValueAxis = axis;
                     break;
                 }
@@ -4811,7 +4811,7 @@
                 }
             }
 
-            if (axisOptions.type === DATE || (!axisOptions.type && dateData)) {
+            if (equalsIgnoreCase(axisOptions.type, DATE) || (!axisOptions.type && dateData)) {
                 axis = new DateValueAxis(range.min, range.max, axisOptions);
             } else {
                 axis = new NumericAxis(range.min, range.max, axisOptions);
@@ -5564,6 +5564,14 @@
 
     function singleItemOrArray(array) {
         return array.length === 1 ? array[0] : array;
+    }
+
+    function equalsIgnoreCase(a, b) {
+        if (a && b) {
+            return a.toLowerCase() === b.toLowerCase();
+        }
+
+        return a === b;
     }
 
     // Exports ================================================================
