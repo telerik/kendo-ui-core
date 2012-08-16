@@ -766,12 +766,14 @@
                 return undefined;
             }
 
-            var contentElements = this.contentElements[0] ? this.contentElements : this.contentAnimators,
+            var contentElements = this.contentElements && this.contentElements[0] ? this.contentElements : this.contentAnimators,
                 idTest = new RegExp("-" + (itemIndex + 1) + "$");
 
-            for (var i = 0, len = contentElements.length; i < len; i++) {
-                if (idTest.test(contentElements.closest(".k-content")[i].id)) {
-                    return contentElements[i];
+            if (contentElements) {
+                for (var i = 0, len = contentElements.length; i < len; i++) {
+                    if (idTest.test(contentElements.closest(".k-content")[i].id)) {
+                        return contentElements[i];
+                    }
                 }
             }
 
