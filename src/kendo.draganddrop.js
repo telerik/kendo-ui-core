@@ -171,7 +171,6 @@
     function normalizeEvent(e) {
         var location = e,
             originalEvent = e.originalEvent,
-            touchEvent,
             touchID;
 
         if (support.touch) {
@@ -470,9 +469,10 @@
             }
 
             if (support.touch) {
-                var activeIdentifiers = $.map(that.touches, function(touch) { return touch.touchID; }),
-                    changedTouches = e.originalEvent.changedTouches;
+                var changedTouches = e.originalEvent.changedTouches;
 
+                // activeIdentifiers = $.map(that.touches, function(touch) { return touch.touchID; }),
+                //
                 $.each(changedTouches, function(_, touch) {
                     that.touches.push(new Touch(that, touch.target, touch));
                 });
@@ -545,6 +545,7 @@
 
             $.extend(that, options);
 
+            that.scale = 1;
             that.max = 0;
             that._forceEnabled = false;
 
@@ -579,11 +580,15 @@
             return this.element[0][this.scrollSize];
         },
 
+        rescale: function(scale) {
+            this.scale = scale;
+        },
+
         update: function(silent) {
             var that = this;
 
             that.size = that.getSize();
-            that.total = that.getTotal();
+            that.total = that.getTotal() * that.scale;
             that.min = Math.min(that.max, that.size - that.total);
             if (!silent) {
                 that.trigger(CHANGE, that);
@@ -608,6 +613,12 @@
 
         present: function() {
             return this.x.present() || this.y.present();
+        },
+
+        rescale: function(newScale) {
+            this.x.rescale(newScale);
+            this.y.rescale(newScale);
+            this.refresh();
         },
 
         refresh: function() {
@@ -653,12 +664,12 @@
 
     var Pane = Class.extend({
         zoomPointOffset: function(scale) {
-            var that = this;
-            scale -= 1;
+            var that = this,
+                zoomPointScale = scale - 1;
 
             return {
-                x: (that.x.dimension.size / 2 - this.zoomPoint.x) * scale,
-                y: (that.y.dimension.size / 2 - this.zoomPoint.y) * scale
+                x: that.movable.x * scale - that.zoomPoint.x * zoomPointScale,
+                y: that.movable.y * scale - that.zoomPoint.y * zoomPointScale
             };
         },
 
@@ -666,7 +677,7 @@
             var that = this,
                 x,
                 y,
-                resistance,
+                    resistance,
                 movable;
 
             extend(that, {elastic: true}, options);
@@ -694,24 +705,27 @@
                         finger2 = e.touches[1];
 
                     that.zoomPoint = {
-                        x: (finger1.x.location + finger2.x.location) / 2 - movable.x,
-                        y: (finger1.y.location + finger2.y.location) / 2 - movable.y
+                        x: (finger1.x.location + finger2.x.location) / 2,
+                        y: (finger1.y.location + finger2.y.location) / 2
                     };
 
-                    console.log(that.zoomPoint.x + " " + that.zoomPoint.y);
 
-                    that.initialDistance = distance(finger1, finger2);
-                    that.initialScale = that.movable.scale;
+                    that.distance = distance(finger1, finger2);
+                    that.scale = that.movable.scale;
                 },
 
                 gesturechange: function(e) {
                     var finger1 = e.touches[0],
                         finger2 = e.touches[1],
                         newDistance = distance(finger1, finger2),
-                        newScale = that.initialScale * newDistance / that.initialDistance,
-                        coordinates = that.zoomPointOffset(newScale);
+                        scaleDelta = newDistance / that.distance,
+                        coordinates = that.zoomPointOffset(scaleDelta);
 
-                    that.movable.moveAndScale(coordinates, newScale);
+                    that.scale *= scaleDelta;
+                    that.distance = newDistance;
+
+                    that.dimensions.rescale(that.scale);
+                    that.movable.moveAndScale(coordinates, that.scale);
                 },
 
                 move: function(e) {
@@ -752,6 +766,7 @@
             Observable.fn.init.call(that);
 
             that.element = $(element);
+            that.element[0].style.webkitTransformOrigin = "left top";
             that.x = 0;
             that.y = 0;
             that.scale = 1;

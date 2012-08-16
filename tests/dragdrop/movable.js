@@ -32,8 +32,3 @@ test("moves given element", 1, function() {
     movable.moveAxis("x", 10);
     equal(elementLocation()["x"], 10);
 });
-
-test("scales given element", 1, function() {
-    movable.scaleTo(2);
-    equal(elementLocation()["scale"], 2);
-});
