@@ -1051,6 +1051,53 @@
                 dom.data("kendoTestWidget").trigger("foo");
             });
 
+            test("the view model is cleared after calling event handler", function() {
+                var TestWidget = kendo.ui.Widget.extend({
+                    options: {
+                        name: "TestWidget"
+                    }
+                });
+
+                kendo.ui.plugin(TestWidget);
+
+                var dom = $('<div data-role="testwidget" data-bind="events:{ foo: bar }"></div>');
+                var eventParams;
+                var viewModel = kendo.observable({
+                    bar: function(e) {
+                        eventParams = e;
+                    }
+                });
+
+                kendo.bind(dom, viewModel);
+
+                dom.data("kendoTestWidget").trigger("foo");
+                equals(eventParams.data, undefined);
+            });
+
+            test("user data is not cleared after calling event handler", function() {
+                var TestWidget = kendo.ui.Widget.extend({
+                    options: {
+                        name: "TestWidget"
+                    }
+                });
+
+                kendo.ui.plugin(TestWidget);
+
+                var dom = $('<div data-role="testwidget" data-bind="events:{ foo: bar }"></div>');
+                var eventParams;
+                var viewModel = kendo.observable({
+                    bar: function(e) {
+                        eventParams = e;
+                        e.data = { foo: "bar" };
+                    }
+                });
+
+                kendo.bind(dom, viewModel);
+
+                dom.data("kendoTestWidget").trigger("foo");
+                equals(eventParams.data.foo, "bar");
+            });
+
             test("nested template without source with event binding",1, function() {
                 var dom = $('<div data-template="nested-master-template" data-bind="source:items"/>');
 

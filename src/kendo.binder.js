@@ -678,6 +678,10 @@
                     e.data = binding.source;
 
                     handler(e);
+
+                    if (e.data === binding.source) {
+                        delete e.data;
+                    }
                 };
 
                 this.widget.bind(key, this.handlers[key]);
