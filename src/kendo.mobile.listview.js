@@ -8,7 +8,6 @@
         Widget = ui.Widget,
         ITEM_SELECTOR = ".km-list > li",
         HIGHLIGHT_SELECTOR = ".km-list > li > .km-listview-link, .km-list > li > .km-listview-label",
-        HANDLED_INPUTS_SELECTOR = ".km-list > li > .km-listview-label > input",
         proxy = $.proxy,
         attrValue = kendo.attrValue,
         GROUP_CLASS = "km-group-title",
@@ -48,18 +47,6 @@
 
         if (plainItem) {
             item.toggleClass(ACTIVE_CLASS, e.type === MOUSEDOWN && !prevented);
-        }
-
-        if (clicked.is("label") && e.type === MOUSEUP && !prevented) {
-            var input = clicked.find("input"),
-                type = input.attr("type"),
-                value = !input[0].checked;
-
-            if (type === "radio") {
-                value = true;
-            }
-
-            input[0].checked = value;
         }
     }
 
@@ -116,7 +103,20 @@
 
             that.element
                 .on([MOUSEDOWN_NS, MOUSEUP_NS, MOUSEMOVE, MOUSECANCEL].join(" "), HIGHLIGHT_SELECTOR, toggleItemActiveClass)
-                .on(CLICK_NS, HANDLED_INPUTS_SELECTOR, function (e) { e.preventDefault(); })
+                .on(MOUSEUP_NS, ".km-listview-label", function (e) {
+                    // on touch devices clicking a label will not check the inner input
+                    if (kendo.support.touch) {
+                        var input = $(e.target).find("input"),
+                            value = !input[0].checked;
+
+                        if (input.is(":radio")) {
+                            value = true;
+                        }
+
+                        input.attr("checked", value) // check the input
+                             .trigger("change"); // trigger the change event for any listeners (MVVM)
+                    }
+                })
                 .on(MOUSEUP_NS, ITEM_SELECTOR, proxy(that._click, that));
 
             that.element.wrap(WRAPPER);
