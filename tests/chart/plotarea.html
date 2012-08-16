@@ -708,7 +708,7 @@
 
                 // ------------------------------------------------------------
                 var dateCategoryAxis = {
-                    type: "Date",
+                    type: "date",
                     categories: ["2012-02-01", "2012-02-02", "2012-02-04"]
                 };
 
@@ -716,6 +716,19 @@
                     setup: function() {
                         moduleSetup();
                     }
+                });
+
+                test("Accepts capitalized type", function() {
+                    createPlotArea([{
+                            data: [100, 200, 300]
+                        }], {
+                        categoryAxis: {
+                            type: "Date",
+                            categories: ["2012-02-01", "2012-02-02", "2012-02-04"]
+                        }
+                    });
+
+                    same(plotArea.categoryAxis.options.categories[0].constructor, Date);
                 });
 
                 test("Automatically detects date category axis", function() {
@@ -731,7 +744,7 @@
                         }
                     });
 
-                    same(plotArea.categoryAxis.options.type, "Date");
+                    same(plotArea.categoryAxis.options.type, "date");
                     same(plotArea.series[0].data, [100, 200, undefined, 300]);
                 });
 
@@ -740,7 +753,7 @@
                             data: [100, 200, 300]
                         }], {
                         categoryAxis: {
-                            type: "Category",
+                            type: "category",
                             categories: [
                                 new Date(2012, 02, 01),
                                 new Date(2012, 02, 02),
@@ -749,7 +762,7 @@
                         }
                     });
 
-                    same(plotArea.categoryAxis.options.type, "Category");
+                    same(plotArea.categoryAxis.options.type, "category");
                     same(plotArea.series[0].data, [100, 200, 300]);
                 });
 
@@ -2009,6 +2022,20 @@
                 test("creates Date value axes", function() {
                     createPlotArea(scatterSeriesData, {
                         xAxis: {
+                            type: "date"
+                        },
+                        yAxis: {
+                            type: "date"
+                        }
+                    });
+
+                    ok(plotArea.axisX instanceof dataviz.DateValueAxis);
+                    ok(plotArea.axisY instanceof dataviz.DateValueAxis);
+                });
+
+                test("creates Date value axes with capitalized type", function() {
+                    createPlotArea(scatterSeriesData, {
+                        xAxis: {
                             type: "Date"
                         },
                         yAxis: {
@@ -2027,7 +2054,7 @@
                         data: [[new Date(2012, 02, 01), 100]]
                     }]);
 
-                    same(plotArea.axisX.options.type, "Date");
+                    same(plotArea.axisX.options.type, "date");
                 });
 
                 test("Automatically detects date X axis for bound series", function() {
@@ -2039,10 +2066,24 @@
                         data: [{ x: new Date(2012, 02, 01), y: 100 }]
                     }]);
 
-                    same(plotArea.axisX.options.type, "Date");
+                    same(plotArea.axisX.options.type, "date");
                 });
 
                 test("Automatic detection of X axis can be overriden", function() {
+                    createPlotArea([{
+                        name: "Value A",
+                        type: "scatter",
+                        data: [[new Date(2012, 02, 01), 100]]
+                    }], {
+                        xAxis: {
+                            type: "numeric"
+                        }
+                    });
+
+                    ok(plotArea.axisX instanceof kendo.dataviz.NumericAxis);
+                });
+
+                test("Automatic detection of X axis can be overriden (capitalized)", function() {
                     createPlotArea([{
                         name: "Value A",
                         type: "scatter",
@@ -2063,7 +2104,7 @@
                         data: [[100, new Date(2012, 02, 01)]]
                     }]);
 
-                    same(plotArea.axisY.options.type, "Date");
+                    same(plotArea.axisY.options.type, "date");
                 });
 
                 test("Automatically detects date Y axis for bound series", function() {
@@ -2075,10 +2116,24 @@
                         data: [{ x: 100, y: new Date(2012, 02, 01) }]
                     }]);
 
-                    same(plotArea.axisY.options.type, "Date");
+                    same(plotArea.axisY.options.type, "date");
                 });
 
                 test("Automatic detection of Y axis can be overriden", function() {
+                    createPlotArea([{
+                        name: "Value A",
+                        type: "scatter",
+                        data: [[100, new Date(2012, 02, 01)]]
+                    }], {
+                        yAxis: {
+                            type: "numeric"
+                        }
+                    });
+
+                    ok(plotArea.axisY instanceof kendo.dataviz.NumericAxis);
+                });
+
+                test("Automatic detection of Y axis can be overriden (capitalized)", function() {
                     createPlotArea([{
                         name: "Value A",
                         type: "scatter",
@@ -2089,7 +2144,7 @@
                         }
                     });
 
-                    same(plotArea.axisX.options.type, "Numeric");
+                    ok(plotArea.axisY instanceof kendo.dataviz.NumericAxis);
                 });
 
                 // ------------------------------------------------------------

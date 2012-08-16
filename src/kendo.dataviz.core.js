@@ -1290,7 +1290,7 @@
         },
 
         options: {
-            type: "Numeric",
+            type: "numeric",
             min: 0,
             max: 1,
             vertical: true,
