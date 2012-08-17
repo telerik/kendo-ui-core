@@ -82,7 +82,7 @@
         options: {
             name: "Validator",
             errorTemplate: '<span class="k-widget k-tooltip k-tooltip-validation">' +
-                '<span class="k-icon k-warning"> </span> ${message}</span>',
+                '<span class="k-icon k-warning"> </span> #=message#</span>',
             messages: {
                 required: "{0} is required",
                 pattern: "{0} is not valid",
