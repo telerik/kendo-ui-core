@@ -176,7 +176,7 @@
 
         createContentElement: function(textarea, stylesheets) {
             var iframe, wnd, doc,
-                rtlStyle = textarea.closest(".k-rtl").length ? "direction:rtl;" : "";
+                rtlStyle = kendo.support.isRtl(textarea) ? "direction:rtl;" : "";
 
             textarea.hide();
             iframe = $("<iframe />", { src: 'javascript:""', frameBorder: "0" })
@@ -339,6 +339,17 @@
 
         registerFormat: function(formatName, format) {
             kendo.ui.Editor.fn.options.formats[formatName] = format;
+        },
+
+        createDialog: function (windowContent, editor, initOptions) {
+            var isRtl = kendo.support.isRtl(editor.wrapper),
+                win = $(windowContent).appendTo(document.body).kendoWindow(initOptions);
+
+            if (isRtl) {
+                win.closest(".k-window").addClass("k-rtl");
+            }
+
+            return win;
         }
     };
 

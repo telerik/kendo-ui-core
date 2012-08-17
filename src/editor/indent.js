@@ -17,7 +17,9 @@ var kendo = window.kendo,
     BlockFormatter = Editor.BlockFormatter;
 
 function indent(node, value) {
-    var property = dom.name(node) != "td" ? "marginLeft" : "paddingLeft";
+    var isRtl = $(node).css("direction") == "rtl",
+        indentDirection = isRtl ? "Right" : "Left",
+        property = dom.name(node) != "td" ? "margin" + indentDirection : "padding" + indentDirection;
     if (value === undefined) {
         return node.style[property] || 0;
     } else {

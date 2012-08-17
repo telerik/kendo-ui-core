@@ -5,6 +5,13 @@
     direction: rtl;
 }
 
+/* Buttons */
+
+.k-rtl .k-button-icontext .k-icon
+{
+    margin: 0 -3px 0 3px;
+}
+
 /* TextBoxes, Pickers, Combos */
 
 .k-rtl .k-dropdown-wrap,
@@ -31,6 +38,59 @@
 .k-rtl .k-datetimepicker .k-picker-wrap .k-icon
 {
     margin: 0 3px 0 0;
+}
+
+/* Editor */
+
+.k-rtl .k-form-text-row input
+{
+    margin-right: 0;
+    margin-left: 1em;
+}
+
+.k-rtl .k-form-checkbox-row input
+{
+    margin-left: 0;
+    margin-right: 7.5em;
+}
+
+.k-rtl .k-form-checkbox-row label
+{
+    padding-left: 0;
+    padding-right: 0.3em;
+}
+
+/* Grid */
+
+.k-rtl div.k-grid-header,
+.k-rtl div.k-grid-footer
+{
+    padding-right: 0;
+    padding-left: 17px;
+}
+
+.k-rtl .k-grid-header-wrap,
+.k-rtl .k-grid-footer-wrap
+{
+    border-width: 0;
+}
+
+.k-rtl .k-grid-header .k-header:first-child,
+.k-rtl .k-grid tbody td:first-child,
+.k-rtl .k-grid tfoot td:first-child
+{
+    border-left-width: 1px;
+}
+
+.k-rtl div.k-grid td.k-hierarchy-cell
+{
+    border-left-width: 0;
+}
+
+.k-rtl .k-grid .k-group-cell + td,
+.k-rtl .k-grid .k-hierarchy-cell + td
+{
+    border-left-width: 1px;
 }
 
 /* Pager */
@@ -82,3 +142,65 @@
 
 /* PanelBar */
 
+.k-rtl .k-panelbar-expand,
+.k-rtl .k-panelbar-collapse
+{
+    right: auto;
+    left: 2px;
+}
+
+/* TabStrip */
+
+.k-rtl .k-tabstrip-items .k-item,
+.k-rtl .k-panelbar .k-tabstrip-items .k-item
+{
+    margin-left: -1px;
+    margin-right: 0;
+}
+
+/* TreeView */
+
+.k-rtl .k-treeview .k-item
+{
+    padding: 0 16px 0 0;
+}
+
+.k-rtl .k-treeview .k-plus,
+.k-rtl .k-treeview .k-minus,
+.k-rtl .k-treeview .k-plus-disabled,
+.k-rtl .k-treeview .k-minus-disabled
+{
+    float: right;
+    margin-left: 0;
+    margin-right: -16px;
+}
+
+.k-rtl .k-treeview .k-sprite,
+.k-rtl .k-treeview .k-image
+{
+    margin-right: 0;
+    margin-left: 3px;
+}
+
+/* Upload */
+
+.k-rtl .k-progress,
+.k-rtl .k-progress-status
+{
+    left: auto;
+    right: 0;
+}
+
+.k-rtl .k-upload-files .k-button
+{
+    margin-left: 0;
+    margin-right: 8px;
+}
+
+/* Window */
+
+.k-rtl .k-window-titlebar .k-window-actions
+{
+    right: auto;
+    left: .5em;
+}

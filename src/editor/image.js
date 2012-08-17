@@ -113,23 +113,21 @@ var ImageCommand = Command.extend({
                 '</div>' +
             '</div>';
 
-        dialog = $(windowContent)
-                .appendTo(document.body)
-                .kendoWindow(extend({}, that.editor.options.dialogOptions, {
-                    title: INSERTIMAGE,
-                    close: close,
-                    activate: function() {
-                        //if (showBrowser) {
-                            //new $t.imageBrowser(
-                                //$(this).find(".k-image-browser"),
-                                //extend(fileBrowser, {
-                                    //apply: apply,
-                                    //element: that.editor.element,
-                                    //messages: that.editor.options.messages
-                                //}));
-                        //}
-                    }
-                }))
+        dialog = EditorUtils.createDialog(windowContent, that.editor, extend({}, that.editor.options.dialogOptions, {
+            title: INSERTIMAGE,
+            close: close,
+            activate: function () {
+                //if (showBrowser) {
+                //new $t.imageBrowser(
+                //$(this).find(".k-image-browser"),
+                //extend(fileBrowser, {
+                //apply: apply,
+                //element: that.editor.element,
+                //messages: that.editor.options.messages
+                //}));
+                //}
+            }
+        }))
                 .hide()
                 .find(".k-dialog-insert").click(apply).end()
                 .find(".k-dialog-close").click(close).end()

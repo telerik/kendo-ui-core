@@ -49,7 +49,8 @@
         formatRegExp = /(\}|\#)/ig,
         indicatorWidth = 3,
         templateHashRegExp = /#/ig,
-        COMMANDBUTTONTMPL = '<a class="k-button k-button-icontext #=className#" #=attr# href="\\#"><span class="#=iconClass# #=imageClass#"></span>#=text#</a>';
+        COMMANDBUTTONTMPL = '<a class="k-button k-button-icontext #=className#" #=attr# href="\\#"><span class="#=iconClass# #=imageClass#"></span>#=text#</a>',
+        isRtl = false;
 
     var VirtualScrollable =  Widget.extend({
         init: function(element, options) {
@@ -96,9 +97,8 @@
 
             element.css( {
                 width: "auto",
-                paddingRight: scrollbar,
                 overflow: "hidden"
-            });
+            }).css((isRtl ? "padding-left" : "padding-right"), scrollbar);
             that.content = element.children().first();
             that.wrapper = that.content.wrap('<div class="k-virtual-scrollable-wrap"/>')
                                 .parent()
@@ -450,6 +450,8 @@
             options = isArray(options) ? { dataSource: options } : options;
 
             Widget.fn.init.call(that, element, options);
+
+            isRtl = kendo.support.isRtl(element);
 
             that._element();
 
@@ -1852,7 +1854,7 @@
                 }
 
                 // workaround for IE issue where scroll is not raised if container is same width as the scrollbar
-                header.css("padding-right", scrollable.virtual ? scrollbar + 1 : scrollbar);
+                header.css((isRtl ? "padding-left" : "padding-right"), scrollable.virtual ? scrollbar + 1 : scrollbar);
                 table = $('<table cellspacing="0" />');
                 table.append(that.thead);
                 header.empty().append($('<div class="k-grid-header-wrap" />').append(table));
@@ -2132,7 +2134,7 @@
             if (that.options.scrollable) {
                 html = $('<div class="k-grid-footer"><div class="k-grid-footer-wrap"><table cellspacing="0"><tbody>' + footerRow + '</tbody></table></div></div>');
                 that._appendCols(html.find("table"));
-                html.css("padding-right", kendo.support.scrollbar()); // Update inner fix.
+                html.css((isRtl ? "padding-left" : "padding-right"), kendo.support.scrollbar()); // Update inner fix.
 
                 return html;
             }

@@ -2564,8 +2564,8 @@ span.k-numerictextbox
 .k-justifyFull { background-position: -64px -198px; }
 .k-insertUnorderedList { background-position: -64px -242px; }
 .k-insertOrderedList { background-position: -64px -264px; }
-.k-indent { background-position: -112px 0; }
-.k-outdent { background-position: -112px -22px; }
+.k-indent, .k-rtl .k-outdent { background-position: -112px 0; }
+.k-outdent, .k-rtl .k-indent { background-position: -112px -22px; }
 .k-createLink { background-position: -112px -44px; }
 .k-unlink { background-position: -112px -66px; }
 .k-insertImage { background-position: -112px -88px; }
