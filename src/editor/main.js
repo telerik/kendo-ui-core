@@ -621,6 +621,7 @@
                 that.textarea.value = that.value();
                 wrapper.find("iframe").remove();
                 initializeContentElement(that);
+                that.value(that.textarea.value);
             }
         },
 
