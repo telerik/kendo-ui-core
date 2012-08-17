@@ -4280,7 +4280,7 @@ var ParagraphCommand = Command.extend({
                     node = node.firstChild;
                 }
 
-                if (!node.innerHTML) {
+                if (node.innerHTML == "") {
                     node.innerHTML = emptyParagraphContent;
                 }
             }
