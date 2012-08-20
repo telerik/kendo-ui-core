@@ -17,6 +17,7 @@
         SELECT = "select",
         SELECTED = "selected",
         REQUESTSTART = "requestStart",
+        REQUESTEND = "requestEnd",
         extend = $.extend,
         proxy = $.proxy,
         browser = kendo.support.browser,
@@ -430,6 +431,8 @@
         _showBusy: function () {
             var that = this;
 
+            that._request = true;
+
             if (that._busy) {
                 return;
             }
@@ -437,6 +440,10 @@
             that._busy = setTimeout(function () {
                 that._arrow.addClass(LOADING);
             }, 100);
+        },
+
+        _requestEnd: function() {
+            this._request = false;
         },
 
         _dataSource: function() {
@@ -464,18 +471,21 @@
             } else {
                 that._refreshHandler = proxy(that.refresh, that);
                 that._requestStartHandler = proxy(that._showBusy, that);
+                that._requestEndHandler = proxy(that._requestEnd, that);
             }
 
             that.dataSource = kendo.data.DataSource.create(dataSource)
                                    .bind(CHANGE, that._refreshHandler)
-                                   .bind(REQUESTSTART, that._requestStartHandler);
+                                   .bind(REQUESTSTART, that._requestStartHandler)
+                                   .bind(REQUESTEND, that._requestEndHandler);
         },
 
         _unbindDataSource: function() {
             var that = this;
 
             that.dataSource.unbind(CHANGE, that._refreshHandler)
-                           .unbind(REQUESTSTART, that._requestStartHandler);
+                           .unbind(REQUESTSTART, that._requestStartHandler)
+                           .unbind(REQUESTEND, that._requestEndHandler);
         },
 
         _index: function(value) {
@@ -586,7 +596,11 @@
                 that.dataSource.one(CHANGE, function() {
                     that._fetch = true;
                     that.value(value);
-                }).fetch();
+                });
+
+                if (!that._request) { // if request is started do not fetch again
+                    that.dataSource.fetch();
+                }
 
                 return true;
             }
