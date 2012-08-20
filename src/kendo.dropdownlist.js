@@ -435,7 +435,7 @@
             span = wrapper.find(SELECTOR);
 
             if (!span[0]) {
-                wrapper.append('<span unselectable="on" class="k-dropdown-wrap k-state-default"><span unselectable="on" class="k-input">&nbsp;</span><span class="k-select"><span class="k-icon k-i-arrow-s">select</span></span></span>')
+                wrapper.append('<span unselectable="on" class="k-dropdown-wrap k-state-default"><span unselectable="on" class="k-input">&nbsp;</span><span unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-arrow-s">select</span></span></span>')
                        .append(that.element);
 
                 span = wrapper.find(SELECTOR);
