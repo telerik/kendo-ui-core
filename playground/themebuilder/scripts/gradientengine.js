@@ -156,6 +156,14 @@
             return output;
         },
 
+        getAngle: function (index) {
+            return this.value[index].angle;
+        },
+
+        getDirection: function (index) {
+            return angles.directions[this.getAngle(index)];
+        },
+
         setAngle: function (index, angle) {
             if (typeof angle == "string") {
                 angle = angles.reverted[angle];

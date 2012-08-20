@@ -1,7 +1,8 @@
 (function($, undefined) {
 
-    function contains(container, target) {
-        return container === target || $.contains(container, target);
+    function round(value, precision) {
+        var power = Math.pow(10, precision || 0);
+        return Math.round(value * power) / power;
     }
 
     var ui = kendo.ui,
@@ -68,23 +69,25 @@
                 that.color = new Color(element.css("background-color"));
 
                 that.colorElement = $('<div class="color-preview"></div>').appendTo(that.popup.element);
-                that.colorValue = $('<input class="color-value" />').appendTo(that.colorElement);
+                that.colorValue = $('<input type="text" class="color-value" />').appendTo(that.colorElement);
 
                 that.colorValue
                     .bind("input", proxy(that._change, that))
-                    .keyup(proxy(that._keyUp, that));
+                    .keydown(proxy(that._keyDown, that));
 
                 var popupElement = that.popup.element.addClass("k-list-container"),
-                    hueElement = $('<label class="label">H<input type="progress" /></label>').appendTo(popupElement).find("input"),
-                    hueValue = $('<input type="text" class="slider-value" /><br />').appendTo(popupElement),
-                    saturationElement = $('<label class="label">S<input type="progress" /></label>').appendTo(popupElement).find("input"),
-                    saturationValue = $('<input type="text" class="slider-value" /><br />').appendTo(popupElement),
-                    lightnessElement = $('<label class="label">L<input type="progress" /></label>').appendTo(popupElement).find("input"),
-                    lightnessValue = $('<input type="text" class="slider-value" /><br />').appendTo(popupElement),
-                    alphaElement = $('<label class="label">A<input type="progress" /></label>').appendTo(popupElement).find("input"),
-                    alphaValue = $('<input type="text" class="slider-value" />').appendTo(popupElement),
+                    hueElement = $('<label class="label">H<input type="range" /></label>').appendTo(popupElement).find("input"),
+                    hueValue = $('<input type="text" class="slider-value" title="hue" />').appendTo(popupElement).after('<br />'),
+                    saturationElement = $('<label class="label">S<input type="range" /></label>').appendTo(popupElement).find("input"),
+                    saturationValue = $('<input type="text" class="slider-value" title="saturation" />').appendTo(popupElement).after('<br />'),
+                    lightnessElement = $('<label class="label">L<input type="range" /></label>').appendTo(popupElement).find("input"),
+                    lightnessValue = $('<input type="text" class="slider-value" title="lightness" />').appendTo(popupElement).after('<br />'),
+                    alphaElement = $('<label class="label">A<input type="range" /></label>').appendTo(popupElement).find("input"),
+                    alphaValue = $('<input type="text" class="slider-value" title="alpha" />').appendTo(popupElement),
                     changeProxy = proxy(that._onChange, that),
                     slideProxy = proxy(that._onSlide, that);
+
+                popupElement.children("[type=text]").keydown(proxy(that._keyDown, that));
 
                 that.hueSlider = extend(hueElement.kendoColorSlider({ max: 359, slide: slideProxy, change: changeProxy }).data("kendoColorSlider"), { type: "hue", valueElement: hueValue });
                 that.saturationSlider = extend(saturationElement.kendoColorSlider({ slide: slideProxy, change: changeProxy }).data("kendoColorSlider"), { type: "saturation", valueElement: saturationValue });
@@ -169,14 +172,19 @@
                 that._update(false, true);
             },
 
-            _keyUp: function (e) {
-                var that = this;
+            _keyDown: function (e) {
+                var that = this,
+                    target = e.target,
+                    title = $(target).attr("title"),
+                    slider = that[title + "Slider"];
 
-                if (e.which == 38) {
-                    that.color.tint();
-                    that._update(true, true);
-                } else if (e.which == 40) {
-                    that.color.shade();
+                if (e.which == 38 || e.which == 40) {
+                    if (title) {
+                        target.value = round(target.value*1 + (e.which == 38 ? 1 : -1) / slider.precisionFactor, 2);
+                        that.color[title](target.value);
+                    } else {
+                        that.color[e.which == 38 ? "tint" : "shade"]();
+                    }
                     that._update(true, true);
                 }
             },
