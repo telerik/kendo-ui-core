@@ -5,6 +5,7 @@
         <script src="../../src/jquery.js"></script>
         <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
         <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../jquery.mockjax.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.popup.js"></script>
@@ -292,6 +293,32 @@
                 dropdownlist.value(0);
 
                 equal(dropdownlist.dataSource.calls("fetch"), 1);
+            });
+
+            test("value(value) does not initiate second Ajax request", function() {
+                $.mockjaxSettings.responseTime = 1000;
+                $.mockjaxSettings.contentType = "text/html";
+                $.mockjax({ url: "fake.json", responseText: [] });
+
+                var ddl = new DropDownList($("<input />"), {
+                    autoBind: false,
+                    dataSource: {
+                        transport: {
+                            read: { url: "fake.json", type: "json" }
+                        }
+                    }
+                });
+
+                stub(ddl.dataSource, {
+                    fetch: ddl.dataSource.fetch
+                });
+
+                ddl.dataSource.fetch();
+                ddl.value("1");
+
+                equal(ddl.dataSource.calls("fetch"), 1);
+
+                $.mockjaxClear();
             });
 
             test("value('') clears selection and do not fetch", function() {
