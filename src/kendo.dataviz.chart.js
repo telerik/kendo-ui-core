@@ -53,8 +53,6 @@
         AXIS_LABEL_CLICK = dataviz.AXIS_LABEL_CLICK,
         BAR = "bar",
         BAR_BORDER_BRIGHTNESS = 0.8,
-        BAR_GAP = 1.5,
-        BAR_SPACING = 0.4,
         BELOW = "below",
         BLACK = "#000",
         BOTTOM = "bottom",
@@ -230,26 +228,6 @@
                 type: COLUMN,
                 data: [],
                 groupNameTemplate: "#= group.value + (kendo.dataviz.defined(series.name) ? ': ' + series.name : '') #",
-                bar: {
-                    gap: BAR_GAP,
-                    spacing: BAR_SPACING
-                },
-                column: {
-                    gap: BAR_GAP,
-                    spacing: BAR_SPACING
-                },
-                line: {
-                    width: 4
-                },
-                scatterLine: {
-                    width: 1
-                },
-                bubble: {
-                    negativeValues: {
-                        color: WHITE,
-                        visible: false
-                    }
-                },
                 labels: {}
             },
             series: [],
