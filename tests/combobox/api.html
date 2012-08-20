@@ -5,6 +5,7 @@
         <script src="../../src/jquery.js"></script>
         <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
         <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../jquery.mockjax.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.popup.js"></script>
@@ -62,6 +63,34 @@
 
                 ok(combobox.popup.visible());
             });
+
+            test("open() does not initiate second Ajax request", function() {
+                $.mockjaxSettings.responseTime = 1000;
+                $.mockjaxSettings.contentType = "text/html";
+                $.mockjax({ url: "fake.json", responseText: [] });
+
+                var cb = new ComboBox($("<input />"), {
+                    autoBind: false,
+                    dataSource: {
+                        transport: {
+                            read: { url: "fake.json", type: "json" }
+                        }
+                    }
+                });
+
+                stub(cb.dataSource, {
+                    fetch: cb.dataSource.fetch
+                });
+
+                cb.dataSource.fetch();
+                cb.open();
+
+                equal(cb.dataSource.calls("fetch"), 1);
+
+                $.mockjaxClear();
+            });
+
+
 
             test("value('2') set selectedIndex", function() {
                 combobox.value("2");
@@ -352,6 +381,32 @@
                 combobox.value(0);
 
                 equal(combobox.dataSource.calls("fetch"), 1);
+            });
+
+            test("value(value) does not initiate second Ajax request", function() {
+                $.mockjaxSettings.responseTime = 1000;
+                $.mockjaxSettings.contentType = "text/html";
+                $.mockjax({ url: "fake.json", responseText: [] });
+
+                var cb = new ComboBox($("<input />"), {
+                    autoBind: false,
+                    dataSource: {
+                        transport: {
+                            read: { url: "fake.json", type: "json" }
+                        }
+                    }
+                });
+
+                stub(cb.dataSource, {
+                    fetch: cb.dataSource.fetch
+                });
+
+                cb.dataSource.fetch();
+                cb.value("1");
+
+                equal(cb.dataSource.calls("fetch"), 1);
+
+                $.mockjaxClear();
             });
 
             test("value('') clears selection and do not fetch", function() {

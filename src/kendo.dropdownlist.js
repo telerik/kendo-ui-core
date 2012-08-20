@@ -167,7 +167,10 @@
 
             if (!that.ul[0].firstChild) {
                 that._open = true;
-                that.dataSource.fetch();
+
+                if (!that._request) {
+                    that.dataSource.fetch();
+                }
             } else {
                 that.popup.open();
                 that._scroll(that._current);
