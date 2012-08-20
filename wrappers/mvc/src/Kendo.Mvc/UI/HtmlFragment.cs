@@ -105,6 +105,11 @@ namespace Kendo.Mvc.UI
             throw new NotImplementedException();
         }
 
+        public IHtmlNode RemoveAttribute(string key)
+        {
+            throw new NotSupportedException();
+        }
+
         public IHtmlNode ToggleClass(string @class, bool condition)
         {
             throw new NotImplementedException();

@@ -39,7 +39,13 @@ namespace Kendo.Mvc.UI
 
         public IHtmlNode ItemInnerTag(TabStripItem item)
         {
-            return LinkTag(item, delegate { });
+            IHtmlNode link = LinkTag(item, delegate { });
+            if (!string.IsNullOrEmpty(item.ContentUrl))
+            {
+                link.RemoveAttribute("href");
+            }
+
+            return link;
         }
 
         public IHtmlNode ItemContentTag(TabStripItem item)

@@ -222,6 +222,13 @@ namespace Kendo.Mvc.UI
 
             return this;
         }
+
+        public IHtmlNode RemoveAttribute(string key)
+        {
+            tagBuilder.Attributes.Remove(key);
+
+            return this;
+        }
        
         public IHtmlNode Text(string value)
         {
