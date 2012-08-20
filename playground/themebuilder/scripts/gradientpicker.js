@@ -30,11 +30,15 @@
                 })
                 .prependTo(element);
 
-                that.point.on("click", function (e) {
-                    if (that.stopped) {
-                        e.stopImmediatePropagation();
-                    }
-                });
+                that.point
+                    .on(kendo.support.mousedown, function () {
+                        that.select(this);
+                        $(this).trigger("click");
+                    }).on("click", function (e) {
+                        if (that.stopped) {
+                            e.stopImmediatePropagation();
+                        }
+                    });
 
                 that.point.data("stop", that);
 
@@ -52,6 +56,16 @@
 
             updateColor: function(color) {
                 this.stop.color.set(color.get());
+            },
+
+            select: function(point) {
+                point = $(point);
+
+                point
+                    .siblings(".k-state-selected")
+                    .removeClass("k-state-selected")
+                    .end()
+                    .addClass("k-state-selected");
             },
 
             _move: function(e) {
@@ -229,6 +243,13 @@
                     target = !that.options.filter ? that.element : that.target;
 
                 if (target) {
+
+                    that.popup.element
+                        .find("[title=" + that.gradients.getDirection(0) + "]")
+                        .siblings(".k-state-active")
+                        .removeClass("k-state-active").end()
+                        .addClass("k-state-active");
+
                     that.gradientCollection.empty(); // Do Destroy on Picker/s.
                     that.bgcolor.set(target.css("background-color"));
 
@@ -248,6 +269,7 @@
                                 currentValue.stops.push(newStop);
                                 newStop.dragStop = new DragStop(sample, newStop, that, index);
                                 that._updateConnected(sample, index);
+                                newStop.dragStop.point.trigger("click");
                             })
                             .appendTo(that.gradientCollection);
 

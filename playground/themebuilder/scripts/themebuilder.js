@@ -598,7 +598,7 @@
 
             $(document).on({
                 keydown: function (e) { CtrlDown = e.which == 17; },
-                keyup: function (e) { CtrlDown = !(e.which == 17); }
+                keyup: function (e) { e.which == 17 && (CtrlDown = false); }
             });
 
     //        var allProps = getPropertySelector();

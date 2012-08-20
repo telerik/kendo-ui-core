@@ -116,10 +116,12 @@
         .stop
         {
             position: absolute;
+            z-index: 1;
             bottom: -25px;
             width: 21px;
             height: 21px;
             border-radius: 11px;
+            -webkit-box-shadow: inset -1px -1px 1px rgba(0,0,0,.3);
             box-shadow: inset -1px -1px 1px rgba(0,0,0,.3);
             margin-left: -10px;
         }
@@ -131,8 +133,23 @@
             width: 1px;
             height: 64px;
             top: -64px;
-            left: 10px;
+            left: 9px;
             background: rgba(0,0,0,.6);
+            background-clip: padding-box;
+            border: 1px solid transparent;
+            border-width: 0 1px;
+        }
+
+        .stop.k-state-selected
+        {
+            background-image: none;
+            -webkit-box-shadow: 0 0 0 1px #fff, inset -1px -1px 1px rgba(0,0,0,.3);
+            box-shadow: 0 0 0 1px #fff, inset -1px -1px 1px rgba(0,0,0,.3);
+        }
+
+        .stop.k-state-selected:before
+        {
+            border-color: #fff;
         }
 
         .sample
@@ -263,6 +280,7 @@
 
         .color-value
         {
+            outline: 0;
             -webkit-appearance: none;
             background: none;
             border: 0;
@@ -496,6 +514,7 @@
 
         .k-static-gradient .color-value
         {
+            font-size: 9px;
             padding-right: 5px;
             margin-bottom: 5px;
         }
