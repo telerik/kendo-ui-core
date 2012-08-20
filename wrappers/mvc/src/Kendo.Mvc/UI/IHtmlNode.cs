@@ -45,6 +45,8 @@ namespace Kendo.Mvc.UI
 
         IHtmlNode PrependClass(params string[] classes);
 
+        IHtmlNode RemoveAttribute(string key);
+
         IHtmlNode ToggleClass(string @class, bool condition);
 
         IHtmlNode ToggleAttribute(string key, string value, bool condition);

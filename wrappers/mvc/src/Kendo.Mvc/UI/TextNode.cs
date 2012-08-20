@@ -100,6 +100,11 @@ namespace Kendo.Mvc.UI
             throw new NotSupportedException();
         }
 
+        public IHtmlNode RemoveAttribute(string key)
+        {
+            throw new NotSupportedException();
+        }
+
         private string innerHtml;
 
         public string InnerHtml
