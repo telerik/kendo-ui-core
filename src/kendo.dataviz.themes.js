@@ -6,7 +6,9 @@
         deepExtend = kendo.deepExtend;
 
     // Constants ==============================================================
-    var BLACK = "#000",
+    var BAR_GAP = 1.5,
+        BAR_SPACING = 0.4,
+        BLACK = "#000",
         SANS = "Arial,Helvetica,sans-serif",
         SANS11 = "11px " + SANS,
         SANS12 = "12px " + SANS,
@@ -38,6 +40,14 @@
                     labels: {
                         background: "transparent"
                     }
+                },
+                bar: {
+                    gap: BAR_GAP,
+                    spacing: BAR_SPACING
+                },
+                column: {
+                    gap: BAR_GAP,
+                    spacing: BAR_SPACING
                 }
             },
             axisDefaults: {
