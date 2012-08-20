@@ -933,6 +933,7 @@
                 if (editable.destroy !== false) {
                     that.wrapper.on(CLICK + NS, "tbody>tr:not(.k-detail-row,.k-grouping-row):visible .k-grid-delete", function(e) {
                         e.preventDefault();
+                        e.stopPropagation();
                         that.removeRow($(this).closest("tr"));
                     });
                 } else {
@@ -1119,11 +1120,15 @@
 
                 container.on(CLICK + NS, "a.k-grid-cancel", function(e) {
                     e.preventDefault();
+                    e.stopPropagation();
+
                     that.cancelRow();
                 });
 
                 container.on(CLICK + NS, "a.k-grid-update", function(e) {
                     e.preventDefault();
+                    e.stopPropagation();
+
                     that.saveRow();
                 });
             }
