@@ -782,7 +782,7 @@
             if (that.options.reorderable) {
                 that._draggableInstance = that.thead.kendoDraggable({
                     group: kendo.guid(),
-                    filter: ".k-header:not(.k-group-cell,.k-hierarchy-cell):visible",
+                    filter: ".k-header:not(.k-group-cell,.k-hierarchy-cell)",
                     hint: function(target) {
                         return $('<div class="k-header k-drag-clue" />')
                             .css({
