@@ -15,25 +15,14 @@
         <div id="chart"></div>
         <script>
             $(function() {
-                var data = [{value: 1}]
-
-
                 var chart = $("#chart").kendoChart({
                     seriesDefaults: {
-                        type: "column",
-                        kur: "nqma"
-                    },
-                    dataSource: {
-                        data: data
+                        type: "candleStick"
                     },
                     series: [{
-                        field: "value"
+                        data: [[1,2,3,4]]
                     }]
                 }).data("kendoChart");
-
-
-                console.log(chart.options.seriesDefaults, chart.options.series[0]);
-
             });
         </script>
     </body>

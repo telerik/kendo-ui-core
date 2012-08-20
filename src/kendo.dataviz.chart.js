@@ -1670,6 +1670,7 @@
             var chart = this,
                 axisName = series.axis || PRIMARY,
                 axisRange = chart.valueAxisRanges[axisName];
+                console.log(value);
 
             if (defined(value)) {
                 axisRange = chart.valueAxisRanges[axisName] =
@@ -3020,16 +3021,13 @@
         },
 
         options: {
-
+            border: {}
         },
 
         render: function() {
             var point = this,
                 options = point.options,
-                markers = options.markers,
                 labels = options.labels,
-                markerBackground = markers.background,
-                markerBorder = deepExtend({}, markers.border),
                 labelText = point.value,
                 labelTemplate;
 
@@ -3041,7 +3039,7 @@
 
             if (labels.visible) {
                 if (labels.template) {
-                    var labelTemplate = template(labels.template);
+                    labelTemplate = template(labels.template);
                     labelText = labelTemplate({
                         dataItem: point.dataItem,
                         category: point.category,
@@ -3092,17 +3090,27 @@
 
         getViewElements: function(view) {
             var point = this,
+                options = point.options,
                 series = point.series,
                 elements = [],
-                rectStyle = {
-                    fill: "red"
-                },
+                border = options.border.width > 0 ? {
+                    stroke: bar.getBorderColor(),
+                    strokeWidth: options.border.width,
+                    dashType: options.border.dashType
+                } : {},
+                rectStyle = deepExtend({
+                    id: options.id,
+                    fill: options.color,
+                    fillOpacity: options.opacity,
+                    strokeOpacity: options.opacity,
+                    zIndex: 3
+                }, border),
                 lineStyle = {
-                    fill: "red",
+                    id: options.id,
                     strokeWidth: 2,
-                    stroke: "red"
+                    stroke: "red",
+                    zIndex: 2
                 };
-                console.log(point.points);
 
             elements.push(view.createRect(point.realBody, rectStyle));
             elements.push(view.createPolyline(point.points, false, lineStyle));
@@ -3119,15 +3127,16 @@
         options: {},
 
         valueFields: function() {
-            return ["open", "high", "low", "close"];
+            return ["low", "open", "close", "high"];
         },
 
         addValue: function(data, category, categoryIx, series, seriesIx) {
             var chart = this,
                 options = chart.options,
                 point;
+            chart.updateRange(data.value, categoryIx, series);
 
-            point = chart.createPoint(data.value,
+            point = chart.createPoint(data.value, categoryIx,
                 deepExtend({
                     vertical: !options.invertAxes
                 }, series)
@@ -3144,13 +3153,27 @@
             chart.points.push(point);
         },
 
-        createPoint: function(value, series) {
+        createPoint: function(value, categoryIx, series) {
             var chart = this,
-                point;
+                options = chart.options,
+                children = chart.children,
+                point,
+                cluster;
 
             point = new CandleStick(value, series);
 
-            chart.append(point);
+            cluster = children[categoryIx];
+
+            if (!cluster) {
+                cluster = new ClusterLayout({
+                    vertical: options.invertAxes,
+                    spacing: 0.4
+                });
+            }
+
+            chart.append(cluster);
+
+            cluster.append(point);
 
             return point;
         },
@@ -3189,9 +3212,23 @@
             chart.box = box;
         },
 
+        updateRange: function(value, categoryIx, series) {
+            var chart = this,
+                axisName = series.axis || PRIMARY,
+                axisRange = chart.valueAxisRanges[axisName];
+
+            if (defined(value)) {
+                axisRange = chart.valueAxisRanges[axisName] =
+                    axisRange || { min: MAX_VALUE, max: MIN_VALUE };
+
+                axisRange.min = math.min(axisRange.min, value.low, value.open, value.close, value.high);
+                axisRange.max = math.max(axisRange.max, value.low, value.open, value.close, value.high);
+            }
+        },
+
         formatPointValue: function(point, format) {
             var value = point.value;
-            return autoFromat(format, value.open, value.high, value.low, value.close);
+            return autoFormat(format, value.open, value.high, value.low, value.close);
         }
     });
 
@@ -4785,7 +4822,7 @@
                 );
 
                 plotArea.createCandleStickChart(
-                    plotArea.filterSeriesByType(paneSeries, [CANDLE_STICK]);
+                    plotArea.filterSeriesByType(paneSeries, [CANDLE_STICK])
                 );
             }
         },
