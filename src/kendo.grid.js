@@ -806,9 +806,8 @@
                 that.thead.kendoReorderable({
                     draggable: that._draggableInstance,
                     change: function(e) {
-                        var reorderableColumns = visibleColumns(that.columns),
-                        newIndex = inArray(reorderableColumns[e.newIndex], that.columns),
-                        column = reorderableColumns[e.oldIndex];
+                        var newIndex = inArray(that.columns[e.newIndex], that.columns),
+                            column = that.columns[e.oldIndex];
 
                         that.trigger(COLUMNREORDER, {
                             newIndex: newIndex,
