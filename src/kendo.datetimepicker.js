@@ -295,9 +295,15 @@
                 max = options.max,
                 timeView = that.timeView,
                 date = parse(value, options.parseFormats, options.culture),
-                rebind, timeViewOptions, old, skip;
+                rebind, timeViewOptions, old, skip, formattedValue;
 
             if (+date === +that._value) {
+                formattedValue = kendo.toString(date, options.format, options.culture);
+
+                if (formattedValue !== value) {
+                    that.element.val(formattedValue);
+                }
+
                 return date;
             }
 

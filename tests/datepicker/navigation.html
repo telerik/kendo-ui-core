@@ -33,6 +33,10 @@
                     input = $("<input />").appendTo(document.body);
                 },
                 teardown: function() {
+                    if (input.data("kendoDatePicker")) {
+                        input.data("kendoDatePicker").destroy();
+                    }
+
                     div.remove();
                     input.remove();
                 }
@@ -721,6 +725,22 @@
                 equal(datepicker.dateView.calls("close"), 1);
             });
 
+            test("DatePicker does not update the input if the entered value is the same but in diff format", function() {
+                var today = new Date(),
+                    datepicker = input.kendoDatePicker({
+                        format: "dd MMM yyyy",
+                        parseFormats: ["yyyy/MM/dd"],
+                        value: kendo.toString(today, "dd MMM yyyy")
+                    }).data("kendoDatePicker"),
+                    todayDiffFormat = kendo.toString(today, "yyyy/MM/dd");
+
+                input.val(todayDiffFormat);
+
+                //simulate change
+                datepicker._change(input.val());
+
+                equal(input.val(), kendo.toString(today, "dd MMM yyyy"));
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

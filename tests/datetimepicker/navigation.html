@@ -33,7 +33,7 @@
                     input = $("<input />").appendTo(document.body);
                 },
                 teardown: function() {
-                    input.data("kendoDateTimePicker").timeView.popup.element.remove();
+                    input.data("kendoDateTimePicker").destroy();
                     input.parents(".k-widget").andSelf().remove();
                 }
             });
@@ -408,6 +408,23 @@
 
                 equal(datetimepicker.timeView.ul.children().length, 1);
                 equal(datetimepicker.timeView.ul.children().text(), "12:10 PM");
+            });
+
+            test("DateTimePicker does not update the input if the entered value is the same but in diff format", function() {
+                var today = new Date(),
+                    datetimepicker = input.kendoDateTimePicker({
+                        format: "dd MMM yyyy",
+                        parseFormats: ["yyyy/MM/dd"],
+                        value: kendo.toString(today, "dd MMM yyyy")
+                    }).data("kendoDateTimePicker"),
+                    todayDiffFormat = kendo.toString(today, "yyyy/MM/dd");
+
+                input.val(todayDiffFormat);
+
+                //simulate change
+                datetimepicker._change(input.val());
+
+                equal(input.val(), kendo.toString(today, "dd MMM yyyy"));
             });
 
         </script>

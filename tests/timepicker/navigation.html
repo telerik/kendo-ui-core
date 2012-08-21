@@ -30,6 +30,10 @@
                     input = $("<input />").appendTo(document.body);
                 },
                 teardown: function() {
+                    if (input.data("kendoTimePicker")) {
+                        input.data("kendoTimePicker").destroy();
+                    }
+
                     input.parents(".k-widget").andSelf().remove();
                     $(document).find(".k-list-container").remove();
                 }
@@ -266,6 +270,21 @@
                 timepicker.open();
 
                 ok(timepicker.timeView.current().hasClass("k-state-selected"));
+            });
+
+            test("TimePicker does not update the input if the entered value is the same but in diff format", function() {
+                var timepicker = input.kendoTimePicker({
+                        format: "hh:mm tt",
+                        parseFormats: ["yyyy/MM/dd"],
+                        value: "12:00 AM"
+                    }).data("kendoTimePicker");
+
+                input.val("2000/10/10");
+
+                //simulate change
+                timepicker._change(input.val());
+
+                equal(input.val(), "12:00 AM");
             });
        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

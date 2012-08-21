@@ -556,9 +556,16 @@
                 options = that.options,
                 min = options.min,
                 max = options.max,
-                date = parse(value, options.parseFormats, options.culture);
+                date = parse(value, options.parseFormats, options.culture),
+                formattedValue;
 
             if (+date === +that._value) {
+                formattedValue = kendo.toString(date, options.format, options.culture);
+
+                if (formattedValue !== value) {
+                    that.element.val(formattedValue);
+                }
+
                 return date;
             }
 
