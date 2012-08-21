@@ -109,7 +109,7 @@
 
         GradientPicker = Widget.extend({
             init: function (element, options) {
-                var that = this, target;
+                var that = this;
 
                 Widget.fn.init.call(that, element, options);
                 element = that.element;
@@ -255,7 +255,6 @@
 
                     that.gradients.value.forEach(function (currentValue, index) {
                         var sample = currentValue.gradientElement = $("<div class='sample'><div class='gradient-preview'></div></div>");
-                        $("<br />").insertAfter(sample);
 
                         sample
                             .children(".gradient-preview")
