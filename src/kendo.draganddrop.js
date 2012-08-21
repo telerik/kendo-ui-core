@@ -655,29 +655,33 @@
         }
     });
 
-    function distance(p1, p2) {
-        var dx = p1.x.location - p2.x.location,
-            dy = p1.y.location - p2.y.location;
+    var TouchPair = Class.extend({
+        init: function(e) {
+            var finger1 = e.touches[0],
+                x1 = finger1.x.location,
+                y1 = finger1.y.location,
+                finger2 = e.touches[1],
+                x2 = finger2.x.location,
+                y2 = finger2.y.location,
+                dx = x1 - x2,
+                dy = y1 - y2;
 
-        return Math.sqrt(dx*dx + dy*dy);
-    }
+            this.center = {
+               x: (x1 + x2) / 2,
+               y: (y1 + y2) / 2
+            };
+
+            this.distance = Math.sqrt(dx*dx + dy*dy);
+        },
+    })
 
     var Pane = Class.extend({
-        zoomPointOffset: function(scale) {
-            var that = this,
-                zoomPointScale = scale - 1;
-
-            return {
-                x: that.movable.x * scale - that.zoomPoint.x * zoomPointScale,
-                y: that.movable.y * scale - that.zoomPoint.y * zoomPointScale
-            };
-        },
 
         init: function(options) {
             var that = this,
                 x,
                 y,
-                    resistance,
+                resistance,
                 movable;
 
             extend(that, {elastic: true}, options);
@@ -701,31 +705,27 @@
 
             that.drag.bind(["move", "end", "gesturestart", "gesturechange", "gestureend"], {
                 gesturestart: function(e) {
-                    var finger1 = e.touches[0],
-                        finger2 = e.touches[1];
-
-                    that.zoomPoint = {
-                        x: (finger1.x.location + finger2.x.location) / 2,
-                        y: (finger1.y.location + finger2.y.location) / 2
-                    };
-
-
-                    that.distance = distance(finger1, finger2);
-                    that.scale = that.movable.scale;
+                    that.touchPair = new TouchPair(e);
                 },
 
                 gesturechange: function(e) {
-                    var finger1 = e.touches[0],
-                        finger2 = e.touches[1],
-                        newDistance = distance(finger1, finger2),
-                        scaleDelta = newDistance / that.distance,
-                        coordinates = that.zoomPointOffset(scaleDelta);
+                    var previousTouchPair = that.touchPair,
+                        previousCenter = previousTouchPair.center,
 
-                    that.scale *= scaleDelta;
-                    that.distance = newDistance;
+                        touchPair = new TouchPair(e),
+                        center = touchPair.center,
 
-                    that.dimensions.rescale(that.scale);
-                    that.movable.moveAndScale(coordinates, that.scale);
+                        scaleDelta = touchPair.distance / previousTouchPair.distance,
+
+                        coordinates = {
+                            x: (movable.x - previousCenter.x) * scaleDelta + center.x,
+                            y: (movable.y - previousCenter.y) * scaleDelta + center.y
+                        };
+
+                    that.movable.moveAndScale(coordinates, scaleDelta);
+
+                    that.dimensions.rescale(movable.scale);
+                    that.touchPair = touchPair;
                 },
 
                 move: function(e) {
@@ -778,8 +778,8 @@
             this.refresh();
         },
 
-        moveAndScale: function(coordinates, scale) {
-            this.scale = scale;
+        moveAndScale: function(coordinates, scaleDelta) {
+            this.scale *= scaleDelta;
             this.moveTo(coordinates);
         },
 
