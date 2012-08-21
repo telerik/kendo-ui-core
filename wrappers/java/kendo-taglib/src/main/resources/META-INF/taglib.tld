@@ -1,0 +1,13 @@
+﻿<?xml version="1.0"?>
+<taglib version="2.0" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee web-jsptaglibrary_2_0.xsd">
+    <tlibversion>1.0</tlibversion>
+    <jspversion>1.2</jspversion>
+    <shortname>Kendo UI for JSP</shortname>
+    <info>Kendo UI Tag Library</info>
+    <uri>http://www.kendoui.com</uri>
+    <tag>
+        <name>autoComplete</name>
+        <tagclass>com.kendoui.taglib.AutoCompleteTag</tagclass>
+        <info>AutoComplete Widget</info>
+    </tag>
+</taglib>

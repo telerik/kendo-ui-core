@@ -2,5 +2,6 @@
     <wb-module deploy-name="kendo-taglib">
         <wb-resource deploy-path="/" source-path="/src/main/java"/>
         <wb-resource deploy-path="/" source-path="/src/test/java"/>
+        <wb-resource deploy-path="/" source-path="/src/main/resources"/>
     </wb-module>
 </project-modules>

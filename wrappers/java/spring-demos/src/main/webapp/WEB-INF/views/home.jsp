@@ -1,4 +1,4 @@
-<%@taglib prefix="kendo" uri="/WEB-INF/kendo.tld"%>
+<%@taglib prefix="kendo" uri="http://www.kendoui.com"%>
 <!DOCTYPE html>
 <html>
     <head>
