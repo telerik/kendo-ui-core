@@ -7,8 +7,8 @@
     <body>
         <h1>Hello world!</h1>
         <p>The time on the server is ${serverTime}.</p>
-        
-        <kendo:autoComplete></kendo:autoComplete>
+        <kendo:autoComplete name="myAutoComplete">
+        	<kendo:dataSource></kendo:dataSource>
+        </kendo:autoComplete>
     </body>
 </html>
-
