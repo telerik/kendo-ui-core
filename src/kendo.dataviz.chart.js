@@ -4791,6 +4791,7 @@
             var plotArea = this,
                 axisOptions = deepExtend({}, plotArea.options, options);
 
+            plotArea.namedCategoryAxes = {};
             plotArea.namedValueAxes = {};
             plotArea.valueAxisRangeTracker = new AxisGroupRangeTracker(axisOptions.valueAxis);
 
@@ -4815,7 +4816,7 @@
         render: function() {
             var plotArea = this;
 
-            plotArea.createCategoryAxis();
+            plotArea.createCategoryAxes();
 
             if (equalsIgnoreCase(plotArea.categoryAxis.options.type, DATE)) {
                 plotArea.aggregateDateSeries();
@@ -4946,7 +4947,7 @@
             var plotArea = this,
                 options = plotArea.options,
                 series = chart.options.series,
-                categories = options.categoryAxis.categories,
+                categories = plotArea.primaryCategoryAxis.options.categories,
                 categoriesToAdd = math.max(0, categoriesCount(series) - categories.length);
 
             append(categories, new Array(categoriesToAdd));
@@ -5049,41 +5050,65 @@
             plotArea.appendChart(chart);
         },
 
-        createCategoryAxis: function() {
+        createCategoryAxes: function() {
             var plotArea = this,
                 options = plotArea.options,
                 invertAxes = plotArea.invertAxes,
-                categoryAxisOptions = options.categoryAxis,
-                categories = categoryAxisOptions.categories,
-                categoriesCount = categories.length,
-                axisType  = categoryAxisOptions.type || "",
-                dateCategory = categories[0] instanceof Date,
-                categoryAxis;
+                categoryAxisOptions = [].concat(options.categoryAxis),
+                categories,
+                categoriesCount,
+                axisName,
+                axisType,
+                dateCategory,
+                categoryAxis,
+                axes = [],
+                primaryAxis;
 
-            if (equalsIgnoreCase(axisType, DATE) || (!axisType && dateCategory)) {
-                categoryAxis = new DateCategoryAxis(deepExtend({
-                        vertical: invertAxes
-                    },
-                    categoryAxisOptions)
-                );
-            } else {
-                categoryAxis = new CategoryAxis(deepExtend({
-                        vertical: invertAxes,
-                        axisCrossingValue: invertAxes ? categoriesCount : 0
-                    },
-                    categoryAxisOptions)
-                );
+            for (var i = 0; i < categoryAxisOptions.length; i++) {
+                var currentOptions = categoryAxisOptions[i];
+
+                axisName = currentOptions.name;
+                categories = currentOptions.categories || [];
+                categoriesCount = categories.length;
+                axisType  = currentOptions.type || "";
+                dateCategory = categories[0] instanceof Date;
+
+                if (equalsIgnoreCase(axisType, DATE) || (!axisType && dateCategory)) {
+                    categoryAxis = new DateCategoryAxis(deepExtend({
+                            vertical: invertAxes
+                        },
+                        currentOptions)
+                    );
+                } else {
+                    categoryAxis = new CategoryAxis(deepExtend({
+                            vertical: invertAxes,
+                            axisCrossingValue: invertAxes ? categoriesCount : 0
+                        },
+                        currentOptions)
+                    );
+                }
+
+                if (axisName) {
+                    plotArea.namedCategoryAxes[axisName] = categoryAxis;
+                }
+
+                axes.push(categoryAxis);
+                plotArea.axes.push(categoryAxis);
+                plotArea.append(categoryAxis);
             }
+
+            plotArea.primaryCategoryAxis = axes[0];
+
+            // TODO: Remove legacy aliases
+            primaryAxis = axes[0];
 
             if (invertAxes) {
-                plotArea.axisY = categoryAxis;
+                plotArea.axisY = primaryAxis;
             } else {
-                plotArea.axisX = categoryAxis;
+                plotArea.axisX = primaryAxis;
             }
 
-            plotArea.categoryAxis = categoryAxis;
-            plotArea.axes.push(categoryAxis);
-            plotArea.append(plotArea.categoryAxis);
+            plotArea.categoryAxis = primaryAxis;
         },
 
         createValueAxes: function() {

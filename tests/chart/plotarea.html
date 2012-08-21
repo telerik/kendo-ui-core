@@ -34,6 +34,9 @@
             (function() {
                 var plotArea,
                     categoryAxis,
+                    namedCategoryAxes,
+                    primaryCategoryAxis,
+                    secondaryCategoryAxis,
                     namedValueAxes,
                     primaryValueAxis,
                     secondaryValueAxis,
@@ -103,9 +106,12 @@
                     }, options));
 
                     categoryAxis = plotArea.categoryAxis;
+                    namedCategoryAxes = plotArea.namedCategoryAxes;
+                    primaryCategoryAxis = plotArea.primaryCategoryAxis;
+                    secondaryCategoryAxis = namedCategoryAxes.secondary;
                     namedValueAxes = plotArea.namedValueAxes;
-                    primaryValueAxis = plotArea.namedValueAxes.primary;
-                    secondaryValueAxis = plotArea.namedValueAxes.secondary;
+                    primaryValueAxis = namedValueAxes.primary;
+                    secondaryValueAxis = namedValueAxes.secondary;
 
                     chartSeries = plotArea.charts[0];
                 }
@@ -219,7 +225,7 @@
                 });
 
                 // ------------------------------------------------------------
-                module("Categorical PlotArea / Multiple Axes", {
+                module("Categorical PlotArea / Multiple Value Axes", {
                     setup: function() {
                         moduleSetup();
 
@@ -245,7 +251,7 @@
                 });
 
                 // ------------------------------------------------------------
-                module("Categorical PlotArea / Multiple Axes / Stacked Left", {
+                module("Categorical PlotArea / Multiple Value Axes / Stacked Left", {
                     setup: function() {
                         moduleSetup();
 
@@ -291,7 +297,7 @@
                 });
 
                 // ------------------------------------------------------------
-                module("Categorical PlotArea / Multiple Axes / Stacked Right", {
+                module("Categorical PlotArea / Multiple Value Axes / Stacked Right", {
                     setup: function() {
                         moduleSetup();
 
@@ -347,7 +353,7 @@
                 });
 
                 // ------------------------------------------------------------
-                module("Categorical PlotArea / Inverted / Multiple Axes / Stacked Top", {
+                module("Categorical PlotArea / Inverted / Multiple Value Axes / Stacked Top", {
                     setup: function() {
                         moduleSetup();
 
@@ -394,7 +400,7 @@
                 });
 
                 // ------------------------------------------------------------
-                module("Categorical PlotArea / Inverted / Multiple Axes / Stacked Bottom", {
+                module("Categorical PlotArea / Inverted / Multiple Value Axes / Stacked Bottom", {
                     setup: function() {
                         moduleSetup();
 
@@ -435,6 +441,49 @@
                     plotArea.reflow(chartBox);
 
                     ok(primaryValueAxis.options.labels.mirror);
+                });
+
+                // ------------------------------------------------------------
+                module("Categorical PlotArea / Multiple Category Axes", {
+                    setup: function() {
+                    }
+                });
+
+                test("axes are accessible by name", function() {
+                    createPlotArea(columnSeriesData, {
+                        categoryAxis: [{
+                                name: "a"
+                            }, {
+                                name: "b"
+                            }]
+                    });
+
+                    ok(plotArea.namedCategoryAxes["a"]);
+                    ok(plotArea.namedCategoryAxes["b"]);
+                });
+
+                test("first axis set as primary category axis", function() {
+                    createPlotArea(columnSeriesData, {
+                        categoryAxis: [{
+                                name: "a"
+                            }, {
+                                name: "b"
+                            }]
+                    });
+
+                    ok(plotArea.primaryCategoryAxis === plotArea.namedCategoryAxes["a"]);
+                });
+
+                test("secondary category axis is added to children collection", function() {
+                        moduleSetup();
+
+                        createPlotArea(columnSeriesData, {
+                            categoryAxis: [{}, {
+                                name: "secondary"
+                            }]
+                        });
+
+                    ok($.inArray(secondaryCategoryAxis, plotArea.children) >= 0);
                 });
 
                 // ------------------------------------------------------------
