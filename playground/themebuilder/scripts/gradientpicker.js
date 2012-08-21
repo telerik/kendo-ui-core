@@ -131,7 +131,10 @@
                     },
                     close: function () {
                         if (that.styleengine) {
-                            that.styleengine.update(that.element, { "background-image": that.gradients.get(support.transforms.css) });
+                            var gradient = that.gradients.get(support.transforms.css);
+                            gradient = that.styleengine.mixBackground(gradient, that.element);
+
+                            that.styleengine.update(that.element, { "background-image": gradient });
                         }
                     }
                 });

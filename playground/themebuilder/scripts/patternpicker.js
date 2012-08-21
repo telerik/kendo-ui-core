@@ -35,7 +35,10 @@
                     },
                     close: function () {
                         if (that.styleengine) {
-                            that.styleengine.update(that.element, { "background-image": that.bgimage });
+                            var bgimage = that.bgimage;
+                            bgimage = that.styleengine.mixBackground(bgimage, that.element);
+
+                            that.styleengine.update(that.element, { "background-image": bgimage });
                         }
                     }
                 });

@@ -5,9 +5,16 @@
         colors = [ "color", "background-color", "border-color" ],
         gradients = [ "background-image" ],
         patterns = [ "background-image" ],
-        colorTool = new Color(),
-        gradientTool = new Gradient(),
+        tools = {
+            color: new Color(),
+            gradient: new Gradient(),
+            pattern: {
+                get: function () { return this.result },
+                set: function (result) { this.result = result; return this; }
+            }
+        },
         engineTool = null,
+        backgroundSplitRegExp = /\s*,\s*(?=-|url)/i,
         properties = colors.concat(gradients, patterns),
         TRANSITION = kendo.support.transitions.css + "transition",
         fillSvg = 'url(\'data:image/svg+xml;utf-8,<svg xmlns="http:%2F%2Fwww.w3.org%2F2000%2Fsvg" width="28" height="38"><linearGradient id="shadow" gradientUnits="userSpaceOnUse" x1="14" y1="25" x2="14" y2="0"><stop offset="0" style="stop-color:rgba(0,0,0,.3)"%2F><%2FlinearGradient><path fill="url(%23shadow)" d="M26.667,15.236c0-6.996-5.671-12.667-12.667-12.667c-6.995,0-12.667,5.672-12.667,12.667c0,4.78,2.651,8.938,6.562,11.097 C10.695,31.772,14,36.95,14,36.95s3.305-5.178,6.105-10.617C24.017,24.175,26.667,20.017,26.667,15.236z"%2F><path fill="%23FFF" d="M26.667,13.819c0-6.996-5.671-12.667-12.667-12.667c-6.995,0-12.667,5.672-12.667,12.667 c0,4.78,2.651,8.938,6.562,11.097C10.695,30.355,14,35.533,14,35.533s3.305-5.178,6.105-10.617 C24.017,22.758,26.667,18.6,26.667,13.819z"%2F><linearGradient id="ID" gradientUnits="userSpaceOnUse" x1="50%" y1="0" x2="50%" y2="28"><stop offset="0" style="stop-color:%23f984ef"%2F><%2FlinearGradient><circle fill="url(%23sq)" cx="14" cy="14" r="11"%2F><pattern id="sq" patternUnits="userSpaceOnUse" x="0" y="0" width="14" height="14" patternTransform="rotate(45)"><rect fill="%23888" x="0" y="0" width="14" height="14"%2f><rect fill="%23666" x="0" y="0" width="7" height="7"%2f><rect fill="%23666" x="7" y="7" width="7" height="7"%2f></pattern><circle fill="url(%23ID)" cx="14" cy="14" r="11"%2F><path fill="rgba(0,0,0,.3)" d="M14,4.403c5.616,0,10.189,4.413,10.473,9.958c0.009-0.18,0.027-0.359,0.027-0.542c0-5.799-4.701-10.5-10.5-10.5 S3.5,8.021,3.5,13.82c0,0.183,0.018,0.361,0.027,0.542C3.811,8.816,8.384,4.403,14,4.403z"%2F><linearGradient id="gr1" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="100%" y2="100%"><stop offset=".25" stop-color="%23666"%2F><stop offset=".25" stop-opacity="0"%2F><%2FlinearGradient><linearGradient id="gr2" gradientUnits="userSpaceOnUse" x1="0" y1="100%" x2="0" y2="100%"><stop offset=".25" stop-color="%23666"%2F><stop offset=".25" stop-opacity="0"%2F><%2FlinearGradient><linearGradient id="gr3" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="100%" y2="100%"><stop offset=".75" stop-opacity="0"%2F><stop offset=".75" stop-color="%23666"%2F><%2FlinearGradient><linearGradient id="gr4" gradientUnits="userSpaceOnUse" x1="0" y1="100%" x2="0" y2="100%"><stop offset=".75" stop-opacity="0"%2F><stop offset=".75" stop-color="%23666"%2F><%2FlinearGradient><%2Fsvg>\')',
@@ -164,9 +171,11 @@
                 selector: ".km-meego"
             }
         },
-        colorPicker = $(".recent-colors").kendoHSLPicker({ filter: ".drop" }).data("kendoHSLPicker"),
-        gradientPicker = $(".recent-gradients").kendoGradientPicker({ filter: ".drop" }).data("kendoGradientPicker"),
-        patternPicker = $(".recent-patterns").kendoPatternPicker({ filter: ".drop" }).data("kendoPatternPicker"),
+        pickers = {
+            color: $(".recent-colors").kendoHSLPicker({ filter: ".drop" }).data("kendoHSLPicker"),
+            gradient: $(".recent-gradients").kendoGradientPicker({ filter: ".drop" }).data("kendoGradientPicker"),
+            pattern: $(".recent-patterns").kendoPatternPicker({ filter: ".drop" }).data("kendoPatternPicker")
+        },
 
         defaultColors = [ "#c5007c", "#6300a5", "#0010a5", "#0064b5", "#00a3c7", "#0fad00", "#8cc700", "#ff0", "#fec500", "#ff9400", "#f60", "#f00",
                           "none", "#fff", "#e5e5e5", "#ccc", "#b2b2b2", "#999", "#7f7f7f", "#666", "#4c4c4c", "#333", "#191919", "#000" ],
@@ -227,81 +236,39 @@
             "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAE8AAABPCAMAAACd6mi0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6Q0JDODBFQzVFQjVGMTFFMUJBMUNCQ0FDNzRDQUZBNjkiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6Q0JDODBFQzZFQjVGMTFFMUJBMUNCQ0FDNzRDQUZBNjkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpDQkM4MEVDM0VCNUYxMUUxQkExQ0JDQUM3NENBRkE2OSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpDQkM4MEVDNEVCNUYxMUUxQkExQ0JDQUM3NENBRkE2OSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PnclD6QAAAD5UExURePGkubKmOXJ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"
         ],
         i = 0,
-        colorDragEvents = {
-            cursorOffset: {
-                left: -50,
-                top: -38
-            },
-            hint: function (element) {
-                return kendo.support.touch ?
-                    $("<div style='width: 28px; height: 38px'/>")
-                        .css("background-image", fillSvg.replace("%23f984ef", element.css("background-color")))
-                    : undefined;
-            },
-            dragstart: function () {
-                var element = this.element,
-                    color = element.css("background-color"),
-                    doc = document.documentElement;
+        events = {
+            color: {
+                cursorOffset: {
+                    left: -50,
+                    top: -38
+                },
+                hint: function (element) {
+                    return kendo.support.touch ?
+                        $("<div style='width: 28px; height: 38px'/>")
+                            .css("background-image", fillSvg.replace("%23f984ef", element.css("background-color")))
+                        : undefined;
+                },
+                dragstart: function () {
+                    var element = this.element,
+                        color = element.css("background-color"),
+                        doc = document.documentElement;
 
-                element.data("property", "background-color");
-                element.data("background-color", colorTool.compress(color));
+                    element.data("property", "background-color");
+                    element.data("background-color", tools.color.compress(color));
 
-                $(doc).addClass("drop-override");
-                doc.style.cssText = "cursor: " + cursorSvg.replace("%23f984ef", color);
-                addRecentColor(element);
-            },
-            dragend: function () {
-                var doc = document.documentElement;
-                widgetTarget.hide();
+                    $(doc).addClass("drop-override");
+                    doc.style.cssText = "cursor: " + cursorSvg.replace("%23f984ef", color);
+                    addRecentItem(element, "color");
+                },
+                dragend: function () {
+                    var doc = document.documentElement;
+                    widgetTarget.hide();
 
-                $(doc).removeClass("drop-override");
-                doc.style.cssText = "";
+                    $(doc).removeClass("drop-override");
+                    doc.style.cssText = "";
+                }
             }
         },
-        gradientDragEvents = extend({}, colorDragEvents, {
-            hint: function (element) {
-                return kendo.support.touch ?
-                    $("<div style='width: 28px; height: 38px'/>")
-                        .css("background-image", fillSvg.replace(defaultStop, gradientTool.set(element.css("background-image")).get("svg"))) :
-                    undefined;
-            },
-            dragstart: function () {
-                var element = this.element,
-                    gradient = element.css("background-image"),
-                    doc = document.documentElement;
-
-                element.data("property", "background-image");
-                element.data("background-image", gradientTool.set(gradient).get());
-
-                $(doc).addClass("drop-override");
-                if (!kendo.support.touch) {
-                    doc.style.cssText = "cursor: " + cursorSvg.replace(defaultStop, gradientTool.get("svg"));
-                }
-                addRecentGradient(element);
-            }
-        }),
-        patternDragEvents = extend({}, colorDragEvents, {
-            hint: function (element) {
-                return kendo.support.touch ?
-                    $("<div style='width: 28px; height: 38px'/>")
-                        .css("background-image", fillSvg.replace(defaultStop, gradientTool.set(element.css("background-image")).get("svg"))) :
-                    undefined;
-            },
-            dragstart: function () {
-                var element = this.element,
-                    pattern = element.css("background-image"),
-                    doc = document.documentElement;
-
-                element.data("property", "background-image");
-                element.data("background-image", pattern);
-
-                $(doc).addClass("drop-override");
-                if (!kendo.support.touch) {
-                    doc.style.cssText = "cursor: " + cursorSvg.replace(defaultStop, gradientTool.get("svg"));
-                }
-                addRecentPattern(element);
-            }
-        }),
         widgetTarget = $("<div class='widgetTarget'><div><div /><div /></div><span /><div><span /></div></div>").appendTo(document.body),
 
         StyleEngine = Widget.extend({
@@ -357,19 +324,97 @@
 
                 return output;
             },
+            mixBackground: function (cssValue, element) {
+                var that = this,
+                    backgrounds = element.css("background-image").split(backgroundSplitRegExp),
+                    imageHash = that.createHash(cssValue),
+                    isUrl = cssValue[0].toLowerCase() == "u";
+
+                idx = -1;
+                $.each(backgrounds, function (index, value) {
+                    if ((value[0].toLowerCase() == "u" && isUrl) || that.createHash(value) == imageHash) {
+                        idx = index;
+                        return false;
+                    }
+                });
+
+                if (backgrounds[idx]) {
+                    backgrounds[idx] = cssValue;
+                } else if (backgrounds.length < 4) {
+                    if (isUrl) {
+                        backgrounds.push(cssValue);
+                    } else {
+                        backgrounds.splice(0, 0, cssValue);
+                    }
+                }
+
+                return backgrounds.join(",");
+            },
             createHash: function(str) {
-                var hash = 0, i, chr;
-                if (str.length == 0) return hash;
-                for (i = 0; i < str.length; i++) {
-                    chr = str.charCodeAt(i);
-                    hash = ((hash<<5)-hash)+chr;
+                var hash = 0, i, len = str.length;
+
+                if (!len) {
+                    return hash;
+                }
+
+                for (i = 0; i < len; i++) {
+                    hash = ((hash << 5) - hash) + str.charCodeAt(i);
                     hash = hash & hash;
                 }
+
                 return hash;
             }
         });
 
     kendo.ui.plugin(StyleEngine);
+
+    extend(events, {
+        gradient: extend({}, events.color, {
+            hint: function (element) {
+                return kendo.support.touch ?
+                    $("<div style='width: 28px; height: 38px'/>")
+                        .css("background-image", fillSvg.replace(defaultStop, tools.gradient.set(element.css("background-image")).get("svg"))) :
+                    undefined;
+            },
+            dragstart: function () {
+                var element = this.element,
+                    gradient = element.css("background-image"),
+                    doc = document.documentElement;
+
+                element.data("property", "background-image");
+                element.data("background-image", tools.gradient.set(gradient).get());
+
+                $(doc).addClass("drop-override");
+                if (!kendo.support.touch) {
+                    doc.style.cssText = "cursor: " + cursorSvg.replace(defaultStop, tools.gradient.get("svg"));
+                }
+                addRecentItem(element, "gradient");
+            }
+        }),
+        pattern: extend({}, events.color, {
+            hint: function (element) {
+                return kendo.support.touch ?
+                    $("<div style='width: 28px; height: 38px'/>")
+                        .css("background-image", fillSvg.replace(defaultStop, tools.pattern.set(element.css("background-image")).get())) :
+                    undefined;
+            },
+            dragstart: function () {
+                var element = this.element,
+                    pattern = element.css("background-image"),
+                    doc = document.documentElement;
+
+                element.data("property", "background-image");
+                element.data("background-image", pattern);
+
+                $(doc).addClass("drop-override");
+                if (!kendo.support.touch) {
+                    doc.style.cssText = "cursor: " + cursorSvg.replace(defaultStop, tools.pattern.get());
+                }
+                addRecentItem(element, "pattern");
+            }
+        })
+    });
+
 
     for (var idx in widgetList) {
         var children = widgetList[idx].children;
@@ -531,10 +576,12 @@
                 color = "transparent",
                 css, defaultCSS;
 
-            $(".color-holder .drop").kendoDraggable(colorDragEvents);
-            $(".gradient-holder .drop").kendoDraggable(gradientDragEvents);
+            $(".color-holder .drop").kendoDraggable(events.color);
+            $(".gradient-holder .drop").kendoDraggable(events.gradient);
+            $(".pattern-holder .drop").kendoDraggable(events.pattern);
 
             function applyHint(target, property, value) {
+                var engine = target.parents(".device").data("kendoStyleEngine");
 
                 defaultCSS = { cursor: "default" };
                 defaultCSS[property] = "";
@@ -542,7 +589,11 @@
                 css = {};
                 css[property] = value;
 
-                $(target).css(css);
+                if (css["background-image"]) {
+                    css["background-image"] = engine.mixBackground(css["background-image"], target);
+                }
+
+                target.css(css);
 
                 widgetTarget
                     .children("div")
@@ -562,6 +613,7 @@
 
                     var property = $(draggedElement).data("property"),
                         index = widget.whitelist.indexOf(property),
+                        target = $(e.currentTarget),
                         newIndex = 0, maxIndex = widget.whitelist.length - 1;
 
                     if (index != -1) {
@@ -569,10 +621,10 @@
                         newIndex < 0 && (newIndex = maxIndex);
                         newIndex > maxIndex && (newIndex = 0);
 
-                        $(e.currentTarget).css(defaultCSS);
+                        target.css(defaultCSS);
                         color = css[property];
 
-                        property = applyHint(e.currentTarget, widget.whitelist[newIndex], color);
+                        property = applyHint(target, widget.whitelist[newIndex], color);
                     }
                 }
             });
@@ -634,7 +686,8 @@
                     }
 
                     var color = $(e.draggable.element).css($(e.draggable.element).data("property")),
-                        target = $(e.dropTarget);
+                        target = $(e.dropTarget),
+                        engine = target.parents(".device").data("kendoStyleEngine");
 
                     target.css(defaultCSS);
                     widgetTarget.hide();
@@ -649,11 +702,15 @@
                             var style = {}, dataItem = getMenuDataItem(e.item, structure);
                             style[dataItem.text] = color;
 
-                            target.parents(".device").data("kendoStyleEngine").update(target.closest(dataItem.value), style);
+                            engine.update(target.closest(dataItem.value), style);
                         });
                         contextMenu.show(offset.left + e.offsetX, offset.top + e.offsetY);
                     } else {
-                        target.parents(".device").data("kendoStyleEngine").update(target, css);
+                        if (css["background-image"]) {
+                            css["background-image"] = engine.mixBackground(css["background-image"], target);
+                        }
+
+                        engine.update(target, css);
                     }
                 }
             });
@@ -690,13 +747,13 @@
                 }
             }, ".utility-active");
 
-            $(".km-tabstrip").kendoHSLPicker({
-                change: function (e) {
-                    this.element.parents(".device").data("kendoStyleEngine").update(this.element, { "background-color": e.color.get() });
-                }
-            });
-            $(".gradient").kendoGradientPicker();
-            $(".km-navbar").kendoGradientPicker();
+//            $(".km-tabstrip").kendoHSLPicker({
+//                change: function (e) {
+//                    this.element.parents(".device").data("kendoStyleEngine").update(this.element, { "background-color": e.color.get() });
+//                }
+//            });
+//            $(".gradient").kendoGradientPicker();
+//            $(".km-navbar").kendoGradientPicker();
         }, 200);
     };
 
@@ -713,10 +770,10 @@
         });
     };
 
-    function addRecentColor(element) {
+    function addRecentItem(element, type) {
         element = $(element);
 
-        var existing = $(".recent-colors [data-color='" + colorTool.set(element.attr("data-color")).get() + "']");
+        var existing = $('.recent-' + type + 's [data-' + type + '="' + tools[type].set(element.attr("data-" + type)).get() + '"]');
 
         if (existing[0]) {
             existing
@@ -725,14 +782,14 @@
                 .removeClass("k-state-active");
         } else {
             var recent = element.clone()
-                .prependTo(".recent-colors")
+                .prependTo(".recent-" + type + "s")
                 .addClass("k-state-active")
                 .siblings(".k-state-active")
                 .removeClass("k-state-active").end();
 
-            recent.kendoDraggable(colorDragEvents);
-            colorPicker.open(recent);
-            colorPicker.popup.wrapper.addClass("k-static-shown");
+            recent.kendoDraggable(events[type]);
+            pickers[type].popup.wrapper.addClass("k-static-shown");
+            pickers[type].open(recent);
 
             recent.click(function (e) {
                 var that = $(this), item;
@@ -742,107 +799,15 @@
                         .siblings(".k-state-active")
                         .removeClass("k-state-active");
                 } else if (e.button == 1) {
-                    if (this == colorPicker.target[0]) {
+                    if (this == pickers[type].target[0]) {
                         item = that.next();
                         !item[0] && (item = that.prev());
 
                         if (!item[0]) {
-                            colorPicker.popup.wrapper.removeClass("k-static-shown");
-                            colorPicker.close();
+                            pickers[type].popup.wrapper.removeClass("k-static-shown");
+                            pickers[type].close();
                         } else {
-                            colorPicker.open(item);
-                        }
-                    }
-                    that.remove();
-                }
-            });
-        }
-    }
-
-    function addRecentGradient(element) {
-        element = $(element);
-
-        var existing = $('.recent-gradients [data-gradient="' + gradientTool.set(element.attr("data-gradient")).get() + '"]');
-
-        if (existing[0]) {
-            existing
-                .addClass("k-state-active")
-                .siblings(".k-state-active")
-                .removeClass("k-state-active");
-        } else {
-            var recent = element.clone()
-                .prependTo(".recent-gradients")
-                .addClass("k-state-active")
-                .siblings(".k-state-active")
-                .removeClass("k-state-active").end();
-
-            recent.kendoDraggable(gradientDragEvents);
-            gradientPicker.popup.wrapper.addClass("k-static-shown");
-            gradientPicker.open(recent);
-
-            recent.click(function (e) {
-                var that = $(this), item;
-
-                if (e.button == 0) {
-                    that.addClass("k-state-active")
-                        .siblings(".k-state-active")
-                        .removeClass("k-state-active");
-                } else if (e.button == 1) {
-                    if (this == gradientPicker.target[0]) {
-                        item = that.next();
-                        !item[0] && (item = that.prev());
-
-                        if (!item[0]) {
-                            gradientPicker.popup.wrapper.removeClass("k-static-shown");
-                            gradientPicker.close();
-                        } else {
-                            gradientPicker.open(item);
-                        }
-                    }
-                    that.remove();
-                }
-            });
-        }
-    }
-
-    function addRecentPattern(element) {
-        element = $(element);
-
-        var existing = $('.recent-patterns [data-pattern="' + element.attr("data-pattern") + '"]');
-
-        if (existing[0]) {
-            existing
-                .addClass("k-state-active")
-                .siblings(".k-state-active")
-                .removeClass("k-state-active");
-        } else {
-            var recent = element.clone()
-                .prependTo(".recent-patterns")
-                .addClass("k-state-active")
-                .siblings(".k-state-active")
-                .removeClass("k-state-active").end();
-
-            recent.kendoDraggable(patternDragEvents);
-            patternPicker.popup.wrapper.addClass("k-static-shown");
-            patternPicker.open(recent);
-
-            recent.click(function (e) {
-                var that = $(this), item;
-
-                if (e.button == 0) {
-                    that.addClass("k-state-active")
-                        .siblings(".k-state-active")
-                        .removeClass("k-state-active");
-                } else if (e.button == 1) {
-                    if (this == patternPicker.target[0]) {
-                        item = that.next();
-                        !item[0] && (item = that.prev());
-
-                        if (!item[0]) {
-                            patternPicker.popup.wrapper.removeClass("k-static-shown");
-                            patternPicker.close();
-                        } else {
-                            patternPicker.open(item);
+                            pickers[type].open(item);
                         }
                     }
                     that.remove();
@@ -855,22 +820,22 @@
        $('<div class="drop" style="background-color:' + defaultColors[i] + '" data-color="' + defaultColors[i++] + '" />')
                 .insertBefore(".recent-colors")
                 .click(function () {
-                    addRecentColor(this);
+                    addRecentItem(this, "color");
                 });
 
        if (!(i % 12)) {
            $("<br />").insertBefore(".recent-colors");
        }
     }
-    kendo.wrap(colorPicker.popup.element).addClass("k-static-picker");
+    kendo.wrap(pickers.color.popup.element).addClass("k-static-picker");
 
     i = 0;
     while (defaultGradients[i]) {
-       var gradient = gradientTool.set(defaultGradients[i]).get();
+       var gradient = tools.gradient.set(defaultGradients[i]).get();
        $('<div class="drop" style="background-image:' + gradient + '" data-gradient="' + gradient + '" />')
                 .insertBefore(".recent-gradients")
                 .click(function () {
-                    addRecentGradient(this);
+                    addRecentItem(this, "gradient");
                 });
        i++;
 
@@ -878,7 +843,7 @@
            $("<br />").insertBefore(".recent-gradients");
        }
     }
-    kendo.wrap(gradientPicker.popup.element).addClass("k-static-picker k-static-gradient");
+    kendo.wrap(pickers.gradient.popup.element).addClass("k-static-picker k-static-gradient");
 
     i = 0;
     while (defaultPatterns[i]) {
@@ -886,7 +851,7 @@
        $('<div class="drop" style="background-image: url(' + pattern + ')" data-pattern="' + engineTool.createHash(pattern) + '" />')
                 .insertBefore(".recent-patterns")
                 .click(function () {
-                    addRecentPattern(this);
+                    addRecentItem(this, "pattern");
                 });
        i++;
 
@@ -894,7 +859,7 @@
            $("<br />").insertBefore(".recent-patterns");
        }
     }
-    kendo.wrap(patternPicker.popup.element).addClass("k-static-picker k-static-pattern");
+    kendo.wrap(pickers.pattern.popup.element).addClass("k-static-picker k-static-pattern");
 
     $(".tools").kendoTabStrip({
         animation: {
