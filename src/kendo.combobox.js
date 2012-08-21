@@ -227,6 +227,7 @@
                     that._state = "";
                 }
 
+                that._option = undefined;
                 that._options(data);
             }
 
