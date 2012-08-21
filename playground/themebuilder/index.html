@@ -36,6 +36,7 @@
     <script src="scripts/gradientengine.js"></script>
     <script src="scripts/hslpicker.js"></script>
     <script src="scripts/gradientpicker.js"></script>
+    <script src="scripts/patternpicker.js"></script>
     <script src="scripts/contextmenu.js"></script>
     <style type="text/css">
         html
@@ -107,7 +108,8 @@
         }
 
         .body .k-colorpick,
-        .body .k-gradientpick
+        .body .k-gradientpick,
+        .body .k-patternpick
         {
             font: inherit !important;
             padding: .8em;
@@ -241,7 +243,8 @@
         .drop,
         .rotator,
         .k-static-picker .color-preview,
-        .gradient-preview
+        .gradient-preview,
+        .pattern-preview
         {
             width: 45px;
             height: 45px;
@@ -254,6 +257,7 @@
         .drop:before,
         .k-static-picker .color-preview:before,
         .gradient-preview:before,
+        .pattern-preview:before,
         .rotator:before
         {
             content: "\a0";
@@ -492,7 +496,8 @@
             margin-left: 10px;
         }
 
-        .k-static-picker .color-preview
+        .k-static-picker .color-preview,
+        .k-static-picker .pattern-preview
         {
             width: 160px;
             height: 135px;
