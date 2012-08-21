@@ -431,6 +431,29 @@
                 equal($.trim(combobox.ul.children().eq(0).text()), "foo");
                 equal($.trim(combobox.ul.children().eq(1).text()), "bar");
             });
+
+            test("Enter custom value after re bind", function() {
+                var dom = $('<select data-text-field="text" data-value-field="text" data-bind="source:dataSource" data-role="combobox" />');
+                var dataSource = new kendo.data.DataSource({
+                    data: [{text:"foo"}, {text:"bar"}]
+                });
+
+                var observable = kendo.observable({
+                    dataSource: dataSource
+                });
+
+                kendo.bind(dom, observable);
+                var combobox = dom.data("kendoComboBox");
+
+                combobox.value("custom");
+
+                dataSource.add({ text: "custom"});
+
+                combobox.value("custom2");
+
+                equal(dataSource.data().length, 3);
+                equal(combobox.value(), "custom2");
+            });
         </script>
 
         <script id="template" type="text/x-kendo-template">
