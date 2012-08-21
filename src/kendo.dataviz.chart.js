@@ -127,13 +127,14 @@
         TRIANGLE = "triangle",
         VERTICAL_LINE = "verticalLine",
         VERTICAL_AREA = "verticalArea",
+        VERTICAL_CANDLE_STICK = "verticalCandleStick",
         WHITE = "#fff",
         X = "x",
         Y = "y",
         YEARS = "years",
         ZERO = "zero";
 
-    var CATEGORICAL_CHARTS = [BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA, CANDLE_STICK],
+    var CATEGORICAL_CHARTS = [BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA, CANDLE_STICK, VERTICAL_CANDLE_STICK],
         XY_CHARTS = [SCATTER, SCATTER_LINE, BUBBLE];
 
     var DateLabelFormats = {
@@ -1670,7 +1671,6 @@
             var chart = this,
                 axisName = series.axis || PRIMARY,
                 axisRange = chart.valueAxisRanges[axisName];
-                console.log(value);
 
             if (defined(value)) {
                 axisRange = chart.valueAxisRanges[axisName] =
@@ -3021,7 +3021,10 @@
         },
 
         options: {
-            border: {}
+            border: {},
+            line: {
+                width: 2
+            }
         },
 
         render: function() {
@@ -3064,37 +3067,51 @@
             }
         },
 
-        reflow: function(lhSlot, ocSlot) {
+        reflow: function(box) {
             var point = this,
                 options = point.options,
-                pos;
+                chart = point.owner,
+                value = point.value,
+                plotArea = chart.plotArea,
+                categoryAxis = plotArea.categoryAxis,
+                valueAxis = chart.seriesValueAxis(options),
+                w = options.vertical ? X : Y,
+                h = options.vertical ? Y : X,
+                points = [], ocSlot, lhSlot, mid;
+
+            ocSlot = valueAxis.getSlot(value.open, value.close);
+            lhSlot = valueAxis.getSlot(value.low, value.high);
 
             point.realBody = ocSlot;
-            point.box = lhSlot;
-            point.points = [];
+
+            ocSlot[w + 1] = lhSlot[w + 1] = box[w + 1];
+            ocSlot[w + 2] = lhSlot[w + 2] = box[w + 2];
+
+            mid = lhSlot.center()[w];
 
             if (options.vertical) {
-                pos = lhSlot.center().x;
-                point.points.push(new Point2D(pos, lhSlot.y1));
-                point.points.push(new Point2D(pos, ocSlot.y1));
-                point.points.push(new Point2D(pos, ocSlot.y2));
-                point.points.push(new Point2D(pos, lhSlot.y2));
+                points.push(new Point2D(mid, lhSlot[h + 1]));
+                points.push(new Point2D(mid, ocSlot[h + 1]));
+                points.push(new Point2D(mid, ocSlot[h + 2]));
+                points.push(new Point2D(mid, lhSlot[h + 2]));
             } else {
-                pos = lhSlot.center().y;
-                point.points.push(new Point2D(lhSlot.x1, pos));
-                point.points.push(new Point2D(ocSlot.x1, pos));
-                point.points.push(new Point2D(ocSlot.x2, pos));
-                point.points.push(new Point2D(lhSlot.x2, pos));
+                points.push(new Point2D(lhSlot[h + 1], mid));
+                points.push(new Point2D(ocSlot[h + 1], mid));
+                points.push(new Point2D(ocSlot[h + 2], mid));
+                points.push(new Point2D(lhSlot[h + 2], mid));
             }
+
+            point.linePoints = points;
+
+            point.box = box;
         },
 
         getViewElements: function(view) {
             var point = this,
                 options = point.options,
-                series = point.series,
                 elements = [],
                 border = options.border.width > 0 ? {
-                    stroke: bar.getBorderColor(),
+                    stroke: options.border.color || options.color,
                     strokeWidth: options.border.width,
                     dashType: options.border.dashType
                 } : {},
@@ -3107,13 +3124,15 @@
                 }, border),
                 lineStyle = {
                     id: options.id,
-                    strokeWidth: 2,
-                    stroke: "red",
-                    zIndex: 2
+                    strokeOpacity: options.opacity,
+                    zIndex: 2,
+                    strokeWidth: options.line.width,
+                    stroke: options.line.color || options.color,
+                    dashType: options.line.dashType
                 };
 
             elements.push(view.createRect(point.realBody, rectStyle));
-            elements.push(view.createPolyline(point.points, false, lineStyle));
+            elements.push(view.createPolyline(point.linePoints, false, lineStyle));
 
             append(elements,
                 ChartElement.fn.getViewElements.call(point, view)
@@ -3130,6 +3149,17 @@
             return ["low", "open", "close", "high"];
         },
 
+        reflowCategories: function(categorySlots) {
+            var chart = this,
+                children = chart.children,
+                childrenLength = children.length,
+                i;
+
+            for (i = 0; i < childrenLength; i++) {
+                children[i].reflow(categorySlots[i]);
+            }
+        },
+
         addValue: function(data, category, categoryIx, series, seriesIx) {
             var chart = this,
                 options = chart.options,
@@ -3143,6 +3173,7 @@
             );
 
             if (point) {
+                point.categoryIx = categoryIx;
                 point.category = category;
                 point.series = series;
                 point.seriesIx = seriesIx;
@@ -3167,49 +3198,13 @@
             if (!cluster) {
                 cluster = new ClusterLayout({
                     vertical: options.invertAxes,
-                    spacing: 0.4
+                    gap: options.gap
                 });
+                cluster.append(point);
+                chart.append(cluster);
             }
 
-            chart.append(cluster);
-
-            cluster.append(point);
-
             return point;
-        },
-
-        reflow: function(box) {
-            var chart = this,
-                options = chart.options,
-                invertAxes = options.invertAxes,
-                plotArea = chart.plotArea,
-                categoryAxis = plotArea.categoryAxis,
-                pointIx = 0,
-                point, value, valueAxis, categorySlot, ocSlot, lhSlot;
-
-            chart.traverseDataPoints(function(data, category, categoryIx, currentSeries) {
-                value = data.value;
-                valueAxis = chart.seriesValueAxis(currentSeries);
-                point = chart.points[pointIx++];
-
-                categorySlot = categoryAxis.getSlot(categoryIx);
-                ocSlot = valueAxis.getSlot(value.open, value.close);
-                lhSlot = valueAxis.getSlot(value.low, value.high);
-
-                if (invertAxes) {
-                    ocSlot.y1 = lhSlot.y1 = categorySlot.y1;
-                    ocSlot.y2 = lhSlot.y2 = categorySlot.y2;
-                } else {
-                    ocSlot.x1 = lhSlot.x1 = categorySlot.x1;
-                    ocSlot.x2 = lhSlot.x2 = categorySlot.x2;
-                }
-
-                if (point) {
-                    point.reflow(lhSlot, ocSlot);
-                }
-            });
-
-            chart.box = box;
         },
 
         updateRange: function(value, categoryIx, series) {
@@ -4756,7 +4751,7 @@
             // Refactor when implementing multiple category axis support.
             if (series.length > 0) {
                 plotArea.invertAxes = inArray(
-                    series[0].type, [BAR, VERTICAL_LINE, VERTICAL_AREA]
+                    series[0].type, [BAR, VERTICAL_LINE, VERTICAL_AREA, VERTICAL_CANDLE_STICK]
                 );
             }
 
@@ -4822,7 +4817,7 @@
                 );
 
                 plotArea.createCandleStickChart(
-                    plotArea.filterSeriesByType(paneSeries, [CANDLE_STICK])
+                    plotArea.filterSeriesByType(paneSeries, [CANDLE_STICK, VERTICAL_CANDLE_STICK])
                 );
             }
         },
@@ -4992,6 +4987,7 @@
                 firstSeries = series[0],
                 chart = new CandleStickChart(plotArea, {
                     invertAxes: plotArea.invertAxes,
+                    gap: firstSeries.gap,
                     series: series
                 });
 
@@ -5736,6 +5732,8 @@
         delete seriesDefaults.scatter;
         delete seriesDefaults.scatterLine;
         delete seriesDefaults.bubble;
+        delete seriesDefaults.candleStick;
+        delete seriesDefaults.verticalCandleStick;
     }
 
     function applySeriesColors(options) {

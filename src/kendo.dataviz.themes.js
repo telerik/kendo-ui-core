@@ -32,6 +32,18 @@
                 donut: {
                     margin: 1
                 },
+                candleStick: {
+                    line: {
+                        width: 2
+                    },
+                    gap: 1
+                },
+                verticalCandleStick: {
+                    line: {
+                        width: 2
+                    },
+                    gap: 1
+                },
                 bubble: {
                     opacity: 0.6,
                     border: {
