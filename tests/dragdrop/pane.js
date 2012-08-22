@@ -95,3 +95,12 @@ test("zooms to a given point after being offset", function() {
     equal(movable.y, -19.2, 0.1);
 })
 
+test("zooming out causes friction", function() {
+    press(9, 6);
+    press(14, 18, 2);
+    move(10, 10);
+    move(13, 14, 2);
+    equal(movable.scale, 0.92, 0.1);
+});
+
+

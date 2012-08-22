@@ -716,11 +716,16 @@
                         center = touchPair.center,
 
                         scaleDelta = touchPair.distance / previousTouchPair.distance,
+                        coordinates;
 
-                        coordinates = {
-                            x: (movable.x - previousCenter.x) * scaleDelta + center.x,
-                            y: (movable.y - previousCenter.y) * scaleDelta + center.y
-                        };
+                    if (movable.scale <= 1 && scaleDelta < 1) {
+                        scaleDelta += (1 - scaleDelta) * 0.9;
+                    }
+
+                    coordinates = {
+                        x: (movable.x - previousCenter.x) * scaleDelta + center.x,
+                        y: (movable.y - previousCenter.y) * scaleDelta + center.y
+                    };
 
                     that.movable.moveAndScale(coordinates, scaleDelta);
 
