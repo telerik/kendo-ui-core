@@ -62,7 +62,7 @@ function buildGeneratedSources() {
     var parser = new(less.Parser)({}),
         skinTemplate = kendoBuild.readText(path.join(KENDO_STYLES, "kendo.black.less"));
 
-    skinTemplate = skinTemplate.replace(/@require.*;/gm, "") + kendoBuild.readText(template);
+    skinTemplate = skinTemplate.replace(/@import.*;/gm, "") + kendoBuild.readText(template);
 
     parser.parse(skinTemplate, function (e, tree) {
         kendoBuild.writeText(path.join(SOURCE_STYLES, "kendo.black.css"), tree.toCSS());

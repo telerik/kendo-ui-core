@@ -310,7 +310,7 @@
                 var less = $(e.target).hasClass("ktb-action-get-less");
 
                 this._generateTheme(function(constants, css) {
-                    constants += '\n@require "template.less";';
+                    constants += '\n@import "template.less";';
                     $("#download-overlay").slideDown()
                         .find("textarea").val(less ? constants : css);
                 });
