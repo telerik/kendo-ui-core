@@ -3164,7 +3164,7 @@
         options: {},
 
         valueFields: function() {
-            return ["low", "open", "close", "high"];
+            return ["open", "high", "low", "close"];
         },
 
         reflowCategories: function(categorySlots) {
@@ -3193,7 +3193,7 @@
             );
 
             if (point) {
-                if (value.open > value.close) {
+                if (value.open < value.close) {
                     point.baseBodyColor = series.baseBodyColor;
                 }
                 point.categoryIx = categoryIx;
