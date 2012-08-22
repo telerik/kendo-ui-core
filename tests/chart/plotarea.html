@@ -518,6 +518,15 @@
                     equals(plotArea.namedCategoryAxes.b.options.categories.length, 2);
                 });
 
+                test("Throws error when unable to locate category axis", function() {
+                    raises(function() {
+                        createPlotArea([{
+                            data: [100, 200, 300],
+                            categoryAxis: "b"
+                        }])},
+                        /Unable to locate category axis with name b/);
+                });
+
                 // ------------------------------------------------------------
                 module("Categorical PlotArea / Column series", {
                     setup: function() {

@@ -4909,11 +4909,6 @@
                 seriesClone = deepExtend({}, currentSeries);
                 categoryAxis = plotArea.seriesCategoryAxis(currentSeries);
 
-                if (!categoryAxis) {
-                    throw new Error("Unable to locate category axis with name " +
-                                    currentSeries.categoryAxis);
-                }
-
                 if (equalsIgnoreCase(categoryAxis.options.type, DATE)) {
                     categories = categoryAxis.options.categories;
                     categoryMap = categoryAxis.categoryMap;
@@ -4976,11 +4971,17 @@
 
         seriesCategoryAxis: function(series) {
             var plotArea = this,
-                axisName = series.categoryAxis;
+                axisName = series.categoryAxis,
+                axis = axisName ?
+                    plotArea.namedCategoryAxes[axisName] :
+                    plotArea.primaryCategoryAxis;
 
-            return axisName ?
-                plotArea.namedCategoryAxes[axisName] :
-                plotArea.primaryCategoryAxis;
+            if (!axis) {
+                throw new Error("Unable to locate category axis with name " +
+                                axisName);
+            }
+
+            return axis;
         },
 
         createBarChart: function(series) {
