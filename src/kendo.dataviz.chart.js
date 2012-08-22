@@ -4795,8 +4795,6 @@
             plotArea.namedValueAxes = {};
             plotArea.valueAxisRangeTracker = new AxisGroupRangeTracker(axisOptions.valueAxis);
 
-            // TODO: Should be determined per-pane.
-            // Refactor when implementing multiple category axis support.
             if (series.length > 0) {
                 plotArea.invertAxes = inArray(
                     series[0].type, [BAR, VERTICAL_LINE, VERTICAL_AREA]
@@ -4977,8 +4975,7 @@
                     plotArea.primaryCategoryAxis;
 
             if (!axis) {
-                throw new Error("Unable to locate category axis with name " +
-                                axisName);
+                throw new Error("Unable to locate category axis with name " + axisName);
             }
 
             return axis;
