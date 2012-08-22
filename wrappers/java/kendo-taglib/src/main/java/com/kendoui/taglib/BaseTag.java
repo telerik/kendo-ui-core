@@ -1,10 +1,8 @@
 package com.kendoui.taglib;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
 @SuppressWarnings("serial")
