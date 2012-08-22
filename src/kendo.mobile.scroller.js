@@ -23,6 +23,43 @@
         RESIZE = "resize",
         SCROLL = "scroll";
 
+    var ZoomSnapBack = Animation.extend({
+        init: function(options) {
+            var that = this;
+            Animation.fn.init.call(that);
+            extend(that, options);
+
+            that.drag.bind("gestureend", proxy(that.start, that));
+            that.tap.bind("press", proxy(that.cancel, that));
+        },
+
+        start: function() {
+            var that = this;
+
+            if (that.movable.scale >= 1) {
+                return;
+            }
+
+            Animation.fn.start.call(that);
+        },
+
+        done: function() {
+            return this.movable.scale > 0.99;
+        },
+
+        tick: function() {
+            var movable = this.movable;
+            movable.scaleWith(1.1);
+            this.dimensions.rescale(movable.scale);
+        },
+
+        onEnd: function() {
+            var movable = this.movable;
+            movable.scaleTo(1);
+            this.dimensions.rescale(movable.scale);
+        }
+    });
+
     var DragInertia = Animation.extend({
         init: function(options) {
             var that = this;
@@ -39,6 +76,7 @@
 
             that.tap.bind("press", function() { that.cancel(); });
             that.drag.bind("end", proxy(that.start, that));
+            that.drag.bind("gestureend", proxy(that.start, that));
             that.drag.bind("tap", proxy(that.onEnd, that));
         },
 
@@ -68,7 +106,7 @@
         start: function(e) {
             var that = this;
 
-            if (!that.dimension.present()) { return; }
+            if (!that.dimension.enabled) { return; }
 
             if (that._outOfBounds()) {
                 that._snapBack();
@@ -201,7 +239,7 @@
                     start: function(e) {
                         dimensions.refresh();
 
-                        if (dimensions.present()) {
+                        if (dimensions.enabled) {
                             drag.capture();
                         } else {
                             drag.cancel();
@@ -214,6 +252,13 @@
                     dimensions: dimensions,
                     drag: drag,
                     elastic: that.options.elastic
+                }),
+
+                zoomSnapBack = new ZoomSnapBack({
+                    movable: movable,
+                    dimensions: dimensions,
+                    drag: drag,
+                    tap: tap
                 });
 
             movable.bind(CHANGE, function() {
@@ -229,6 +274,7 @@
             extend(that, {
                 movable: movable,
                 dimensions: dimensions,
+                zoomSnapBack: zoomSnapBack,
                 drag: drag,
                 pane: pane,
                 tap: tap,

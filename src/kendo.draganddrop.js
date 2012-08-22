@@ -228,6 +228,10 @@
             this.dispose();
         },
 
+        isMoved: function() {
+            return this._moved;
+        },
+
         _start: function(e) {
            this.startTime = now();
            this._moved = true;
@@ -446,7 +450,7 @@
         },
 
         _isMoved: function() {
-            return $.grep(this.touches, function(touch) { return touch.moved; }).length;
+            return $.grep(this.touches, function(touch) { return touch.isMoved(); }).length;
         },
 
         _isPressed: function() {
@@ -564,10 +568,6 @@
             return  offset > this.max || offset < this.min;
         },
 
-        present: function() {
-            return this._forceEnabled || (this.max - this.min);
-        },
-
         forceEnabled: function() {
             this._forceEnabled = true;
         },
@@ -585,11 +585,16 @@
         },
 
         update: function(silent) {
-            var that = this;
+            var that = this,
+                total = that.getTotal(),
+                size = that.getSize();
 
-            that.size = that.getSize();
-            that.total = that.getTotal() * that.scale;
+            that.size = size;
+            that.total = total * that.scale;
             that.min = Math.min(that.max, that.size - that.total);
+
+            that.enabled = that._forceEnabled || ( total != that.size);
+
             if (!silent) {
                 that.trigger(CHANGE, that);
             }
@@ -611,10 +616,6 @@
             kendo.onResize(refresh);
         },
 
-        present: function() {
-            return this.x.present() || this.y.present();
-        },
-
         rescale: function(newScale) {
             this.x.rescale(newScale);
             this.y.rescale(newScale);
@@ -622,9 +623,11 @@
         },
 
         refresh: function() {
-            this.x.update();
-            this.y.update();
-            this.trigger(CHANGE);
+            var that = this;
+            that.x.update();
+            that.y.update();
+            that.enabled = that.x.enabled || that.y.enabled;
+            that.trigger(CHANGE);
         }
     });
 
@@ -642,7 +645,7 @@
                 movable = that.movable,
                 position = movable[axis] + delta;
 
-            if (!dimension.present()) {
+            if (!dimension.enabled) {
                 return;
             }
 
@@ -719,22 +722,33 @@
                         coordinates;
 
                     if (movable.scale <= 1 && scaleDelta < 1) {
-                        scaleDelta += (1 - scaleDelta) * 0.9;
+                        scaleDelta += (1 - scaleDelta) * 0.8;
                     }
 
                     coordinates = {
-                        x: (movable.x - previousCenter.x) * scaleDelta + center.x,
-                        y: (movable.y - previousCenter.y) * scaleDelta + center.y
+                        x: (movable.x - previousCenter.x) * scaleDelta + center.x - movable.x,
+                        y: (movable.y - previousCenter.y) * scaleDelta + center.y - movable.y
                     };
 
-                    that.movable.moveAndScale(coordinates, scaleDelta);
+                    movable.scaleWith(scaleDelta);
+
+                    x.dragMove(coordinates.x);
+                    y.dragMove(coordinates.y);
 
                     that.dimensions.rescale(movable.scale);
                     that.touchPair = touchPair;
                 },
 
+                gestureend: function() {
+                    if (movable.scale < 1) {
+                        movable.scale = 1;
+                        movable.moveTo(0, 0);
+                    }
+                    that.dimensions.rescale(movable.scale);
+                },
+
                 move: function(e) {
-                    if (x.dimension.present() || y.dimension.present()) {
+                    if (x.dimension.enabled || y.dimension.enabled) {
                         x.dragMove(e.x.delta);
                         y.dragMove(e.y.delta);
                         e.preventDefault();
@@ -783,9 +797,14 @@
             this.refresh();
         },
 
-        moveAndScale: function(coordinates, scaleDelta) {
+        scaleTo: function(scale) {
+            this.scale = scale;
+            this.refresh();
+        },
+
+        scaleWith: function(scaleDelta) {
             this.scale *= scaleDelta;
-            this.moveTo(coordinates);
+            this.refresh();
         },
 
         translate: function(coordinates) {
