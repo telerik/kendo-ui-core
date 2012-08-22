@@ -1636,6 +1636,7 @@
             ChartElement.fn.init.call(chart, options);
 
             chart.plotArea = plotArea;
+            chart.categoryAxis = plotArea.seriesCategoryAxis(options.series[0]);
 
             // Value axis ranges grouped by axis name, e.g.:
             // primary: { min: 0, max: 1 }
@@ -1717,7 +1718,7 @@
                 pointIx = 0,
                 categorySlots = chart.categorySlots = [],
                 chartPoints = chart.points,
-                categoryAxis = plotArea.categoryAxis,
+                categoryAxis = chart.categoryAxis,
                 valueAxis,
                 axisCrossingValue,
                 point,
@@ -1777,7 +1778,7 @@
             var chart = this,
                 options = chart.options,
                 series = options.series,
-                categories = chart.plotArea.options.categoryAxis.categories || [],
+                categories = chart.categoryAxis.options.categories || [],
                 count = categoriesCount(series),
                 bindableFields = chart.bindableFields(),
                 categoryIx,
@@ -5077,6 +5078,7 @@
                 axes = [],
                 primaryAxis;
 
+            // TODO: Cleanup
             for (var i = 0; i < categoryAxisOptions.length; i++) {
                 var currentOptions = categoryAxisOptions[i];
 

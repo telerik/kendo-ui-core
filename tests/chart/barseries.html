@@ -44,10 +44,11 @@
 
             function stubPlotArea(getCategorySlot, getValueSlot, options) {
                 return new function() {
-                    this.categoryAxis = {
+                    this.categoryAxis = this.primaryCategoryAxis = {
                         getSlot: getCategorySlot,
                         options: {
-                            axisCrossingValue: 0
+                            axisCrossingValue: 0,
+                            categories: options.categoryAxis.categories
                         }
                     };
 
@@ -58,6 +59,13 @@
                                 axisCrossingValue: 0
                             }
                         }
+                    };
+
+                    this.namedCategoryAxes = { };
+
+                    this.seriesCategoryAxis = function(series) {
+                        return series.categoryAxis ?
+                            this.namedCategoryAxes[series.categoryAxis] : this.primaryCategoryAxis;
                     };
 
                     this.options = options;
@@ -255,6 +263,26 @@
 
                 test("Reports number of categories for two series", function() {
                     equal(categoriesCount(series.options.series), positiveSeries.data.length);
+                });
+
+                // ------------------------------------------------------------
+                module("Bar Chart / Multiple Category Axes", {
+                    setup: function() {
+                        plotArea.namedCategoryAxes.secondary = kendo.deepExtend({
+                            options: { name: "secondary" } },
+                            plotArea.primaryCategoryAxis
+                        );
+
+                        setupBarChart(plotArea, {
+                            series: [
+                                $.extend({ categoryAxis: "secondary" }, positiveSeries ),
+                                positiveSeries
+                            ]});
+                    }
+                });
+
+                test("sets category axis to first series category axis", function() {
+                    equals(series.categoryAxis.options.name, "secondary");
                 });
 
                 // ------------------------------------------------------------
@@ -578,7 +606,7 @@
 
                         setupBarChart(plotArea, {
                             series: [
-                                // Both axes should be on same axis.
+                                // Both series should be on the same axis.
                                 // This rule is intentionally broken for the tests.
                                 $.extend({ axis: "a" }, positiveSeries),
                                 $.extend({ axis: "b" }, negativeSeries)
