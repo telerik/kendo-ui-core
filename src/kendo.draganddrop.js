@@ -672,8 +672,8 @@
             };
 
             this.distance = Math.sqrt(dx*dx + dy*dy);
-        },
-    })
+        }
+    });
 
     var Pane = Class.extend({
 
