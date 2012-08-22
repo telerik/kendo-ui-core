@@ -11,7 +11,7 @@ import org.junit.Test;
 import com.kendoui.taglib.AutoCompleteTag;
 
 public class AutoCompleteTest {
-	private AutoCompleteTag tag;
+	private BaseTag tag;
 	
 	@Before
 	public void setUp() {

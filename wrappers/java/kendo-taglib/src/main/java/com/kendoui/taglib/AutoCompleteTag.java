@@ -5,12 +5,9 @@ import java.io.IOException;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.JspWriter;
-import javax.servlet.jsp.tagext.BodyTagSupport;
 
-public class AutoCompleteTag extends BodyTagSupport implements DataBoundWidget {
-    private static final long serialVersionUID = 7924820302914859197L;
-    private String name;
-    
+@SuppressWarnings("serial")
+public class AutoCompleteTag extends BaseTag implements DataBoundWidget {    
     @Override
     public int doEndTag() throws JspException {
         JspWriter writer = pageContext.getOut();
@@ -29,11 +26,8 @@ public class AutoCompleteTag extends BodyTagSupport implements DataBoundWidget {
 
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    @Override
+    public String getTagName() {
+        return "input";
     }
 }
