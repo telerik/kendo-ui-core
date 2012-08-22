@@ -135,7 +135,7 @@
             test('parse Bulgarian Language date format', function () { //
 
                 var dateFormat = "d.M.yyyy '?.'";
-                var result = parse("23.12.2000", dateFormat);
+                var result = parse("23.12.2000 '?.'", dateFormat);
                 ok(isValidDate(2000, 12, 23, result));
             });
 
@@ -315,7 +315,7 @@
 
             test('parse Croatian Language date format', function () {
                 var dateFormat = "d.M.yyyy.";
-                var result = parse("5.3.2008", dateFormat);
+                var result = parse("5.3.2008.", dateFormat);
                 ok(isValidDate(2008, 3, 5, result));
             });
             test('parse Invariant Language long date format', function () { // Also: Persian
@@ -520,31 +520,6 @@
                 ok(isValidDate(2000, 12, 23, result));
             });
 
-            test('parse date not exactly matching date format M dd yyyy should return correct date', function () {
-
-                var dateFormat = "M/dd/yyyy";
-
-                var result = parse("01012010", dateFormat);
-                ok(isValidDate(2010, 1, 1, result));
-            });
-
-            test('parse date not exactly matching date format d M yyyy should return correct date', function () {
-
-                var dateFormat = "d/M/yyyy";
-
-                var result = parse("29102010", dateFormat);
-                ok(isValidDate(2010, 10, 29, result));
-            });
-
-            test('parse day and month should produce date with current year', function () {
-
-                var dateFormat = "M/dd/yyyy";
-
-                var date = new Date();
-
-                var result = parse("10/01", dateFormat);
-                ok(isValidDate(date.getFullYear(), 10, 1, result));
-            });
             test('parse date time format', function () { // ISO format
                 var dateFormat = "dd/MMM/yyyy HH:mm:ss";
                 var result = parse("22/Aug/2006 06:30:07", dateFormat);
@@ -678,6 +653,12 @@
                     dateString = "/Date(" + +date + ")/";
 
                 equal(+parse(dateString), +date);
+            });
+
+            test("parseDate does not parse ISO8601 with format dd.MM.yyyy", function() {
+                var dateString = "2012-08-16T21:00:00Z";
+
+                equal(kendo.parseDate(dateString, "dd.MM.yyyy"), null);
             });
         </script>
     </body>

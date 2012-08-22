@@ -1183,8 +1183,8 @@ function pad(number) {
                 } else if (ch === "'") {
                     literal = true;
                     checkLiteral();
-                } else {
-                    checkLiteral();
+                } else if (!checkLiteral()) {
+                    return null;
                 }
             }
         }
