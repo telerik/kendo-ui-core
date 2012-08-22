@@ -3104,7 +3104,7 @@
 
             point.linePoints = points;
 
-            point.box = box;
+            point.box = lhSlot.clone().wrap(ocSlot);
         },
 
         getViewElements: function(view) {
@@ -3150,15 +3150,39 @@
             return elements;
         },
 
-        highlightOverlay: function(view, options){
+        highlightOverlay: function(view, options) {
             var point = this,
                 box = point.box;
 
             options = deepExtend({ data: { modelId: point.options.modelId } }, options);
 
             return view.createRect(box, options);
+        },
+
+        tooltipAnchor: function(tooltipWidth, tooltipHeight) {
+            var point = this,
+                options = point.options,
+                box = point.box,
+                vertical = options.vertical,
+                x, y;
+
+            if (vertical) {
+                x = box.x2 + TOOLTIP_OFFSET;
+                y = box.y1;
+            } else {
+                x = box.x2 + TOOLTIP_OFFSET;
+                y = box.y1;
+            }
+
+            return new Point2D(x, y);
+        },
+
+        formatValue: function(format) {
+            var point = this;
+            return point.owner.formatPointValue(point, format);
         }
     });
+    deepExtend(CandleStick.fn, PointEventsMixin);
 
     var CandleStickChart = LineChart.extend({
         options: {},
@@ -3188,7 +3212,10 @@
 
             point = chart.createPoint(value, categoryIx,
                 deepExtend({
-                    vertical: !options.invertAxes
+                    vertical: !options.invertAxes,
+                    tooltip: {
+                        format: (category ? "{4:d}<br/>" : "") + "open: {0}<br/>high: {1}<br/>low: {2}<br/>close: {3}"
+                    }
                 }, series)
             );
 
@@ -3245,7 +3272,7 @@
 
         formatPointValue: function(point, format) {
             var value = point.value;
-            return autoFormat(format, value.open, value.high, value.low, value.close);
+            return autoFormat(format, value.open, value.high, value.low, value.close, point.category);
         }
     });
 
