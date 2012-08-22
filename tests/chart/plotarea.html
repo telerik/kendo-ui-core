@@ -462,7 +462,7 @@
                     ok(plotArea.namedCategoryAxes["b"]);
                 });
 
-                test("first axis set as primary category axis", function() {
+                test("first axis is set as primary category axis", function() {
                     createPlotArea(columnSeriesData, {
                         categoryAxis: [{
                                 name: "a"
@@ -916,6 +916,43 @@
                             baseUnit: "months"
                         }, dateCategoryAxis)
                     });
+                });
+
+                // ------------------------------------------------------------
+                module("Categorical PlotArea / Date series / Multiple Category Axes", {
+                    setup: function() {
+                        moduleSetup();
+                    }
+                });
+
+                test("Aggregates series on secondary axis", function() {
+                    createPlotArea([{
+                        data: [100, 200, 300],
+                        categoryAxis: "b"
+                    }], {
+                        categoryAxis: [
+                            { },
+                            kendo.deepExtend({
+                                name: "b", baseUnit: "months"
+                            }, dateCategoryAxis)
+                        ]
+                    });
+
+                    same(plotArea.series[0].data, [300]);
+                });
+
+                test("Throws error when unable to locate category axis", function() {
+                    raises(function() {
+                        createPlotArea([{
+                            data: [100, 200, 300],
+                            categoryAxis: "b"
+                        }], {
+                            categoryAxis:
+                                kendo.deepExtend({
+                                    baseUnit: "months"
+                                }, dateCategoryAxis)
+                        })},
+                        /Unable to locate category axis with name b/);
                 });
 
                 // ------------------------------------------------------------

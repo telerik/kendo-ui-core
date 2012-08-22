@@ -4818,9 +4818,7 @@
 
             plotArea.createCategoryAxes();
 
-            if (equalsIgnoreCase(plotArea.categoryAxis.options.type, DATE)) {
-                plotArea.aggregateDateSeries();
-            }
+            plotArea.aggregateDateSeries();
 
             plotArea.createCharts();
 
@@ -4893,9 +4891,9 @@
             var plotArea = this,
                 series = plotArea.series,
                 processedSeries = [],
-                categoryAxis = plotArea.categoryAxis,
-                categories = categoryAxis.options.categories,
-                categoryMap = categoryAxis.categoryMap,
+                categoryAxis,
+                categories,
+                categoryMap,
                 groupIx,
                 categoryIndicies,
                 seriesIx,
@@ -4912,28 +4910,40 @@
             for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
                 currentSeries = series[seriesIx];
                 seriesClone = deepExtend({}, currentSeries);
+                categoryAxis = plotArea.seriesCategoryAxis(currentSeries);
 
-                srcData = seriesClone.data;
+                if (!categoryAxis) {
+                    throw new Error("Unable to locate category axis with name " +
+                                    currentSeries.categoryAxis);
+                }
 
-                seriesClone.data = data = [];
-                for (groupIx = 0; groupIx < categories.length; groupIx++) {
-                    categoryIndicies = categoryMap[groupIx];
-                    srcValues = [];
+                if (equalsIgnoreCase(categoryAxis.options.type, DATE)) {
+                    categories = categoryAxis.options.categories;
+                    categoryMap = categoryAxis.categoryMap;
 
-                    for (i = 0; i < categoryIndicies.length; i++) {
-                        categoryIx = categoryIndicies[i];
-                        pointData = bindPoint(currentSeries, categoryIx);
-                        value = pointData.value;
+                    srcData = seriesClone.data;
 
-                        if (defined(value)) {
-                            srcValues.push(pointData.value);
+                    seriesClone.data = data = [];
+
+                    for (groupIx = 0; groupIx < categories.length; groupIx++) {
+                        categoryIndicies = categoryMap[groupIx];
+                        srcValues = [];
+
+                        for (i = 0; i < categoryIndicies.length; i++) {
+                            categoryIx = categoryIndicies[i];
+                            pointData = bindPoint(currentSeries, categoryIx);
+                            value = pointData.value;
+
+                            if (defined(value)) {
+                                srcValues.push(pointData.value);
+                            }
                         }
-                    }
 
-                    if (srcValues.length > 1) {
-                        data[groupIx] = calculateAggregates(srcValues, currentSeries);
-                    } else {
-                        data[groupIx] = srcData[categoryIndicies[0]];
+                        if (srcValues.length > 1) {
+                            data[groupIx] = calculateAggregates(srcValues, currentSeries);
+                        } else {
+                            data[groupIx] = srcData[categoryIndicies[0]];
+                        }
                     }
                 }
 
@@ -4966,6 +4976,15 @@
                 paneName = axis.pane || "default";
 
             return paneName;
+        },
+
+        seriesCategoryAxis: function(series) {
+            var plotArea = this,
+                axisName = series.categoryAxis;
+
+            return axisName ?
+                plotArea.namedCategoryAxes[axisName] :
+                plotArea.primaryCategoryAxis;
         },
 
         createBarChart: function(series) {
