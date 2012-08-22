@@ -44,7 +44,7 @@
     box-pack: @pack;
 }
 
-.border-radius() {
+.border-radius(...) {
     -moz-border-radius: @arguments;
     -webkit-border-radius: @arguments;
     border-radius: @arguments;
@@ -58,7 +58,7 @@
     .border-radius(@value);
 }
 
-.box-shadow() {
+.box-shadow(...) {
     box-shadow: @arguments;
     -webkit-box-shadow: @arguments;
 }
@@ -84,7 +84,7 @@
     background-clip: @type;
 }
 
-.transform() {
+.transform(...) {
     -webkit-transform: @arguments;
     -moz-transform: @arguments;
     -ms-transform: @arguments;
