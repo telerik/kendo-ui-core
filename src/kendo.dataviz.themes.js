@@ -36,13 +36,21 @@
                     line: {
                         width: 2
                     },
-                    gap: 1
+                    border: {
+                        width: 1
+                    },
+                    gap: 1,
+                    baseBodyColor: WHITE
                 },
                 verticalCandleStick: {
                     line: {
                         width: 2
                     },
-                    gap: 1
+                    border: {
+                        width: 1
+                    },
+                    gap: 1,
+                    baseBodyColor: WHITE
                 },
                 bubble: {
                     opacity: 0.6,

@@ -3024,6 +3024,9 @@
             border: {},
             line: {
                 width: 2
+            },
+            overlay: {
+                gradient: GLASS
             }
         },
 
@@ -3072,8 +3075,6 @@
                 options = point.options,
                 chart = point.owner,
                 value = point.value,
-                plotArea = chart.plotArea,
-                categoryAxis = plotArea.categoryAxis,
                 valueAxis = chart.seriesValueAxis(options),
                 w = options.vertical ? X : Y,
                 h = options.vertical ? Y : X,
@@ -3117,28 +3118,45 @@
                 } : {},
                 rectStyle = deepExtend({
                     id: options.id,
-                    fill: options.color,
+                    fill: point.baseBodyColor || options.color,
                     fillOpacity: options.opacity,
                     strokeOpacity: options.opacity,
-                    zIndex: 3
+                    zIndex: 2,
+                    data: { modelId: options.modelId }
                 }, border),
                 lineStyle = {
                     id: options.id,
                     strokeOpacity: options.opacity,
-                    zIndex: 2,
+                    zIndex: -1,
                     strokeWidth: options.line.width,
                     stroke: options.line.color || options.color,
-                    dashType: options.line.dashType
+                    dashType: options.line.dashType,
+                    data: { modelId: options.modelId }
                 };
 
+            if (options.overlay) {
+                rectStyle.overlay = deepExtend({
+                    rotation: options.vertical ? 0 : 90
+                }, options.overlay);
+            }
+
             elements.push(view.createRect(point.realBody, rectStyle));
-            elements.push(view.createPolyline(point.linePoints, false, lineStyle));
+            elements.push(view.createPolyline(point.linePoints, true, lineStyle));
 
             append(elements,
                 ChartElement.fn.getViewElements.call(point, view)
             );
 
             return elements;
+        },
+
+        highlightOverlay: function(view, options){
+            var point = this,
+                box = point.box;
+
+            options = deepExtend({ data: { modelId: point.options.modelId } }, options);
+
+            return view.createRect(box, options);
         }
     });
 
@@ -3163,16 +3181,21 @@
         addValue: function(data, category, categoryIx, series, seriesIx) {
             var chart = this,
                 options = chart.options,
+                value = data.value,
                 point;
-            chart.updateRange(data.value, categoryIx, series);
 
-            point = chart.createPoint(data.value, categoryIx,
+            chart.updateRange(value, categoryIx, series);
+
+            point = chart.createPoint(value, categoryIx,
                 deepExtend({
                     vertical: !options.invertAxes
                 }, series)
             );
 
             if (point) {
+                if (value.open > value.close) {
+                    point.baseBodyColor = series.baseBodyColor;
+                }
                 point.categoryIx = categoryIx;
                 point.category = category;
                 point.series = series;
@@ -3188,8 +3211,7 @@
             var chart = this,
                 options = chart.options,
                 children = chart.children,
-                point,
-                cluster;
+                point, cluster;
 
             point = new CandleStick(value, series);
 
